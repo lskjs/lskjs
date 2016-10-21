@@ -1,0 +1,19 @@
+{
+  "name": "lsk-webpack",
+  "version": "0.0.1",
+  "description": "Lego Starter Kit webpack configurator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isuvorov/lsk-webpack.git"
+  },
+  "author": "isuvorov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isuvorov/lsk-webpack/issues"
+  },
+  "homepage": "https://github.com/isuvorov/lsk-webpack#readme"
+}
