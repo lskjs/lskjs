@@ -22,7 +22,7 @@ export default class WebpackConfig {
   }
 
   isVerbose() {
-    return this.debug || false
+    return this.verbose || false
   }
 
   getGlobals() {
@@ -63,8 +63,8 @@ export default class WebpackConfig {
             ...this.getDeps().map(dep => dep.path),
             this.resolvePath('node_modules'),
           ],
-          // trigger: '&',
-          // resolve: require('./resolve-id').default,
+          trigger: '&',
+          resolve: require('./tools/resolve-id'),
         }),
         // W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
         // https://github.com/postcss/postcss-custom-properties

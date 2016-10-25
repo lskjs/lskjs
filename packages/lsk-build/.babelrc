@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "es2015",
+    "node5",
+  ],
+  "plugins": [
+    "transform-decorators-legacy"
+  ]
+}
