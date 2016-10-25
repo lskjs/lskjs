@@ -64,7 +64,7 @@ export default class WebpackConfig {
             this.resolvePath('node_modules'),
           ],
           trigger: '&',
-          resolve: require('./tools/resolve-id'),
+          resolve: require('./utils/resolve-id'),
         }),
         // W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
         // https://github.com/postcss/postcss-custom-properties

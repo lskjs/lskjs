@@ -11,8 +11,8 @@ import webpackMiddleware from 'webpack-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import cp from 'child_process';
 
-import fetch2 from './tools/fetch';
-import fs from './tools/fs';
+import fetch2 from './utils/fetch';
+import fs from './utils/fs';
 const host = 'localhost';
 
 export default class Runner {
