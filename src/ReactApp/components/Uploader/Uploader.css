@@ -1,0 +1,145 @@
+/* Filepicker CSS */
+
+
+.filepicker {
+  font-family: sans-serif;
+
+}
+
+div.filepicker {
+  text-align: center;
+  background-color: #E1E1E1;
+  border-radius: 5px;
+  min-height: 60px;
+
+}
+
+
+.dz-message {
+  font-weight: bolder;
+  text-align: left;
+  padding: 10px 20px;
+  background-color: #fefefe;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-color: #333;
+  border-bottom-width: thin;
+}
+
+/* Icon */
+
+.filepicker-file-icon {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 2.5em 0;
+  padding-left: 45px;
+  color: black;
+}
+
+.filepicker-file-icon::before {
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 29px;
+  height: 34px;
+  content: '';
+  border: solid 2px #7F7F7F;
+  border-radius: 2px;
+}
+
+.filepicker-file-icon::after {
+  font-size: 11px;
+  line-height: 1.3;
+  position: absolute;
+  top: 9px;
+  left: -4px;
+  padding: 0 2px;
+  content: 'file';
+  content: attr(data-filetype);
+  text-align: right;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #000;
+}
+
+.filepicker-file-icon .fileCorner {
+  position: absolute;
+  top: -7px;
+  left: 22px;
+  width: 0;
+  height: 0;
+  border-width: 11px 0 0 11px;
+  border-style: solid;
+  border-color: white transparent transparent #920035;
+}
+
+
+
+/*After upload zone*/
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  border: 2px dashed #C7C7C7;
+  align-content: space-around;
+  min-height: 50px;
+}
+
+
+
+
+/*Uploaded Image preview*/
+
+.dz-preview {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content:stretch;
+  padding: 5px;
+}
+
+
+.dz-image {
+  border-radius: 5px;
+  margin: 0 5px;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+
+.dz-image img {
+  object-fit: cover;
+  max-height: 100%;
+  max-width: auto;
+}
+
+.dz-link {
+  display: flex;
+  flex-grow: 1;
+
+}
+
+.dz-image .dz-remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.dz-copy {
+  margin-bottom: 10px;
+}
+
+/* нажняя часть экрана */
+
+.dz-bottom {
+  padding: 10px 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+}

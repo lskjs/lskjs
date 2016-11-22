@@ -1,0 +1,4 @@
+{
+  "main": "ReactApp.server.js",
+  "browser": "ReactApp.client.js"
+}

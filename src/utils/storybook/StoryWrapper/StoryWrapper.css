@@ -1,0 +1,92 @@
+/*html{
+  height: 100%;
+}
+body{
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#root{
+  flex-grow: 1;
+  height:100%;
+}
+.Wrapper{
+  position: absolute;
+  height:100%;
+  width:100%;
+
+}*/
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+:global #root {
+  /*background: green;*/
+  display: table;
+  height: inherit;
+  width: 100%;
+}
+
+.Wrapper {
+  /*background: red;*/
+  display: table-cell;
+  padding-top: 40px;
+
+}
+
+
+.Wrapper_center .Wrapper__wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.Wrapper__content{
+  background: rgba(0,0,0,0.05);
+  border: 1px rgba(0,0,0,0.10) dashed;
+}
+
+/*.Wrapper_inner_center .Wrapper__wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.Wrapper_inner_center .Wrapper__content{
+
+}*/
+
+.Wrapper_inner_padding .Wrapper__content{
+  padding: 100px;
+}
+.Wrapper_inner_w100  .Wrapper__content{
+  width: 100px;
+  overflow: hidden;
+}
+.Wrapper_inner_w300  .Wrapper__content{
+  width: 300px;
+  overflow: hidden;
+}
+.Wrapper_inner_w600  .Wrapper__content{
+  width: 600px;
+  overflow: hidden;
+}
+.Wrapper_inner_w900  .Wrapper__content{
+  width: 900px;
+  overflow: hidden;
+}
+.Wrapper_inner_no  .Wrapper__content{
+}
+
+.ButtonGroup + .ButtonGroup{
+  padding-left: 10px;
+}
+.bsStyle_success, .success{
+  background: green;
+}
+.bsStyle_default, .default{
+  background: grey;
+}

@@ -1,0 +1,4 @@
+{
+  "browser": "MobxApp.client.js",
+  "main": "MobxApp.server.js"
+}
