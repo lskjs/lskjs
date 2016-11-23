@@ -88,8 +88,6 @@ export class StoryWrapper extends Component {
 
 
       return <div styleName={'Wrapper Wrapper_inner_' + inner[this.state.inner] + (this.state.center ? ' Wrapper_center' : '')} style={{ background: 'url("https://pp.vk.me/c629529/v629529020/1dd4a/JjiHPoWVrMM.jpg") no-repeat center center fixed', height:'100%', backgroundSize: 'cover', backgroundImage: 'url(' + bgs[this.state.bg] + ')' }}>
-        <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel="stylesheet" />
-        <link href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel="stylesheet" />
         <div style={{position:'absolute', right: 0, top: 0}}>
           <ButtonToolbar>
             <ButtonGroup>

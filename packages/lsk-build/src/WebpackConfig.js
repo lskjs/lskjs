@@ -18,11 +18,12 @@ export default class WebpackConfig {
   }
 
   isDebug() {
-    return this.debug || true
+    if (this.debug == null) return true
+    return !!this.debug
   }
 
   isVerbose() {
-    return this.verbose || false
+    return !!this.verbose
   }
 
   getGlobals() {
@@ -109,6 +110,23 @@ export default class WebpackConfig {
       ],
     };
   }
+
+  getBabelPresets() {
+    return [
+      'react',
+      'es2015',
+      'stage-0',
+    ]
+  }
+
+  getBabelPlugins() {
+    return [
+      'jsx-control-statements',
+      'react-require',
+      'transform-decorators-legacy',
+    ]
+  }
+
   getJsxLoader() {
     return {
       test: /\.(jsx|js)?$/,
@@ -124,16 +142,9 @@ export default class WebpackConfig {
 
         // https://babeljs.io/docs/usage/options/
         babelrc: false,
-        presets: [
-          'react',
-          'es2015',
-          'stage-0',
-        ],
+        presets: this.getBabelPresets(),
         plugins: [
-          'jsx-control-statements',
-          'react-require',
-          'transform-decorators-legacy',
-
+          ...this.getBabelPlugins(),
           'transform-runtime',
           ... (this.isDebug() ? [] : [
             'transform-react-remove-prop-types',
@@ -244,7 +255,7 @@ export default class WebpackConfig {
         loader: 'json-loader',
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?.+)?$/,
         loader: 'url-loader',
         query: {
           name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
@@ -252,7 +263,7 @@ export default class WebpackConfig {
         },
       },
       {
-        test: /\.(eot|ttf|wav|mp3)$/,
+        test: /\.(eot|ttf|wav|mp3)(\?.+)?$/,
         loader: 'file-loader',
         query: {
           name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
@@ -293,7 +304,9 @@ export default class WebpackConfig {
       '~': this.resolvePath('src'),
     }
     this.getDeps().forEach(dep => {
-      alias[dep.name] = dep.path
+      if (dep.alias) {
+        alias[dep.alias] = dep.path
+      }
     })
     return alias
   }

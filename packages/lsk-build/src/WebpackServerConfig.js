@@ -48,12 +48,11 @@ export default class WebpackServerConfig extends WebpackConfig {
       externals: [
         /^\.\/assets$/,
         (context, request, callback) => {
+          const depsStr = this.getDeps().map(dep => dep.name).join('|')
           const isExternal =
             request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
             !request.match(/\.(css|less|scss|sss)$/i) &&
-            // 0
-            !request.match(/^lego-starter-kit/)// &&
-            // !this.getDeps().filter(dep => request.match(new RegExp('^' + dep.name))).length
+            !request.match(new RegExp(`^(${depsStr})`)))
           callback(null, Boolean(isExternal));
         },
 

@@ -189,7 +189,6 @@ export default class Runner {
   }
 
   async start(ctx) {
-    console.log('start');
     await this.clean();
     await this.copy({ watch: true });
     await new Promise(resolve => {

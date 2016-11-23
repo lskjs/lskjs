@@ -7,16 +7,16 @@ try {
 catch (ex) {
   // pass
 }
+var debug = false
 
 var moduleDirectories = [
   "web_modules",
   "node_modules",
 ]
-
 function resolveModule(id, opts) {
   return new Promise(function(res, rej) {
     resolve(id, opts, function(err, path) {
-      console.log('resolve', id, path);
+      debug && console.log('resolve', id, path);
       if (err) {
         return rej(err)
       }
@@ -27,7 +27,7 @@ function resolveModule(id, opts) {
 
 module.exports = function(id, base, options) {
   var paths = options.path
-  console.log('paths', paths);
+  debug && console.log('paths', paths);
   var trigger = options.trigger || '&'
 
   var resolveOpts = {
@@ -45,10 +45,10 @@ module.exports = function(id, base, options) {
       return pkg
     },
   }
-  console.log({base, id});
+  debug && console.log({base, id});
   var triggered = false
   if (id[0] === trigger) {
-    console.log('triggered');
+    debug && console.log('triggered');
     id = id.substr(1)
     triggered = true
   }
@@ -57,18 +57,18 @@ module.exports = function(id, base, options) {
   return resolveModule((!triggered ? "./" : '') + id, resolveOpts)
   // return resolveModule("./" + id, resolveOpts)
   .catch(function() {
-    console.log('catch2');
+    debug && console.log('catch2');
     return resolveModule((triggered ? "./" : '') + id, resolveOpts)
   })
   .catch(function() {
-    console.log('catch3');
+    debug && console.log('catch3');
     return jspmResolve.default(id, {
       basedir: resolveOpts.basedir,
       extensions : resolveOpts.extensions,
     })
   })
   .catch(function() {
-    console.log('catch4');
+    debug && console.log('catch4');
     if (paths.indexOf(base) === -1) {
       paths.unshift(base)
     }
