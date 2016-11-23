@@ -11,4 +11,4 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 // Navigation manager, e.g. history.push('/home')
 // https://github.com/mjackson/history
-export default __BROWSER__ && createBrowserHistory();
+export default !__SERVER__ && createBrowserHistory();
