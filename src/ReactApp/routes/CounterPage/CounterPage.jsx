@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import importcss from 'importcss'
+import A from '../../components/A'
 
 @importcss(require('./CounterPage.css'))
 export default class CounterPage extends Component {
@@ -26,7 +27,8 @@ export default class CounterPage extends Component {
       <button onClick={this.handleChange(1)}>
         +1
       </button>
-      <a href="/">Go to HomePage</a>
+      <hr />
+      <A href="/">Go to HomePage</A>
     </div>
   }
 }
