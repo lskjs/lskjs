@@ -1,7 +1,7 @@
 import polyfill from 'lego-starter-kit/utils/polyfill'
 import logger from 'lego-starter-kit/utils/logger'
-import App from 'lego-starter-kit/MobxApp'
-// import App from 'lego-starter-kit/ReactApp'
+// import App from 'lego-starter-kit/MobxApp'
+import App from 'lego-starter-kit/ReactApp'
 import config from './config'
 polyfill()
 const ctx = {
