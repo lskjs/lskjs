@@ -3,7 +3,7 @@
 Вдохновлен:
 * [Express.js](): концепция средних слоев, способ их конфигурирования
 * [Sails.js & Grails.js]()
-* [Loopback]()
+* [Loopback](egoegoegoegoegoegoeg)
 * https://github.com/developit/express-es6-rest-api/
 * react-starter-kit: Фронт, Сборка на ES6 без Gulp, Grunt. Конфиг webpack'а
 
@@ -23,20 +23,38 @@ this.afterUseMiddlewares()
 
 
 # Auth
-`Authorization Bearer eyJhbG...cikkbQ`
-or
-`?token=eyJhbG...cikkbQ`
-or Cookie
-`?token=eyJhbG...cikkbQ`
+Токен можно прикладывать следующими методами
+
+* в Header `Authorization: Bearer %USER_TOKEN%`
+* в Header `X-Access-Token: %USER_TOKEN%`
+* в Cookie: `token=%USER_TOKEN%`
+* в GET параметр: `?token=%USER_TOKEN%`
 
 
-# Bunyan levels
+
+# Bunyan log levels
+
+LSKit принимает стоковый Bunyan логгер
+
+```javascript
+log.trace('Starting method');
+
+if (!req.user) {
+  log.fatal('Cannot get User');
+  throw new Error('Cannot get User')
+}
+
+log.info('Method success');
+```
+
+### Log levels
 * fatal
 * error
 * warn
 * info
 * debug
 * trace
+
 
 
 # Что еще нужно дописать
