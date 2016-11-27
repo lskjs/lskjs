@@ -2,18 +2,23 @@ import extend from 'extend';
 import path from 'path';
 import del from 'del';
 import fetch from 'node-fetch';
-import GitRepo from 'git-repository';
-import gaze from 'gaze';
 import Promise from 'bluebird';
 import Browsersync from 'browser-sync';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import cp from 'child_process';
-
-import fetch2 from './utils/fetch';
 import fs from './utils/fs';
-const host = 'localhost';
+
+const writeFile = (file, contents) => new Promise((resolve, reject) => {
+  fs.writeFile(file, contents, 'utf8', err => err ? reject(err) : resolve());
+});
+
+const makeDir = (name) => new Promise((resolve, reject) => {
+  mkdirp(name, err => err ? reject(err) : resolve());
+});
+
+
 
 export default class Runner {
 
@@ -52,20 +57,20 @@ export default class Runner {
        start: 'node server.js',
      },
    }, null, 2));
-
-   if (watch) {
-     const watcher = await new Promise((resolve, reject) => {
-       gaze('src/content/**/*.*', (err, val) => err ? reject(err) : resolve(val));
-     });
-
-     const cp = async (file) => {
-       const relPath = file.substr(this.resolvePath('src/content/').length);
-       await ncp(`src/content/${relPath}`, `build/content/${relPath}`);
-     };
-
-     watcher.on('changed', cp);
-     watcher.on('added', cp);
-   }
+   //
+  //  if (watch) {
+  //    const watcher = await new Promise((resolve, reject) => {
+  //      gaze('src/content/**/*.*', (err, val) => err ? reject(err) : resolve(val));
+  //    });
+   //
+  //    const cp = async (file) => {
+  //      const relPath = file.substr(this.resolvePath('src/content/').length);
+  //      await ncp(`src/content/${relPath}`, `build/content/${relPath}`);
+  //    };
+   //
+  //    watcher.on('changed', cp);
+  //    watcher.on('added', cp);
+  //  }
  }
 
 
@@ -139,35 +144,6 @@ export default class Runner {
   }
 
 
-  async render(routes) {
-    if (!routes) {
-      routes = [
-        '/',
-        '/contact',
-        '/login',
-        '/register',
-        '/about',
-        '/privacy',
-        '/404', // https://help.github.com/articles/creating-a-custom-404-page-for-your-github-pages-site/
-      ];
-    }
-    let server;
-    await new Promise(resolve => (server = this.runServer(resolve)));
-
-    await routes.reduce((promise, route) => promise.then(async () => {
-      const url = `http://${host}${route}`;
-      const dir = `build/public${route.replace(/[^\/]*$/, '')}`;
-      const name = route.endsWith('/') ? 'index.html' : `${route.match(/[^/]+$/)[0]}.html`;
-      const dist = `${dir}${name}`;
-      const res = await fetch(url);
-      const text = await res.text();
-      await fs.makeDir(dir);
-      await fs.writeFile(dist, text);
-      console.log(`${dist} => ${res.status} ${res.statusText}`);
-    }), Promise.resolve());
-
-    server.kill('SIGTERM');
-  }
 
   format(time) {
     return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
@@ -273,7 +249,51 @@ export default class Runner {
     return this.server;
   }
 
+
+
+
+  async buildStatic(routes) {
+    if (!routes) {
+      routes = [
+        '/'
+      ]
+    }
+
+    await this.clean();
+    await this.copy();
+    await this.bundle();
+    await this.render(routes);
+  }
+
+
+  async render(routes) {
+    if (!routes) {
+      routes = [
+        '/',
+      ];
+    }
+    let server;
+    await new Promise(resolve => (server = this.runServer(resolve)));
+
+    await routes.reduce((promise, route) => promise.then(async () => {
+      const url = `http://${this.host}${route}`;
+      const dir = `build/public${route.replace(/[^\/]*$/, '')}`;
+      const name = route.endsWith('/') ? 'index.html' : `${route.match(/[^/]+$/)[0]}.html`;
+      const dist = `${dir}${name}`;
+      const res = await fetch(url);
+      const text = await res.text();
+      await makeDir(dir);
+      await writeFile(dist, text);
+      console.log(`${dist} => ${res.status} ${res.statusText}`);
+    }), Promise.resolve());
+
+    server.kill('SIGTERM');
+  }
+
 }
+
+
+
 
 // process.on('exit', () => {
 //   if (server) {

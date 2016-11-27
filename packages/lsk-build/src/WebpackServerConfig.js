@@ -48,11 +48,18 @@ export default class WebpackServerConfig extends WebpackConfig {
       externals: [
         /^\.\/assets$/,
         (context, request, callback) => {
-          const depsStr = this.getDeps().map(dep => dep.name).join('|')
+          const depsStr = this.getDeps().map(dep => dep.name).filter(a => a).join('|')
           const isExternal =
             request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
             !request.match(/\.(css|less|scss|sss)$/i) &&
-            !request.match(new RegExp(`^(${depsStr})`)))
+            (!depsStr || !request.match(new RegExp(`^(${depsStr})`)))
+          // console.log('==================');
+          // console.log(depsStr);
+          // console.log(request.match(/^[@a-z][a-z\/\.\-0-9]*$/i), !!request.match(/^[@a-z][a-z\/\.\-0-9]*$/i));
+          // console.log(request.match(/\.(css|less|scss|sss)$/i), !request.match(/\.(css|less|scss|sss)$/i));
+          // console.log(request.match(new RegExp(`^(${depsStr})`)), !request.match(new RegExp(`^(${depsStr})`)));
+          // console.log('==================');
+          // Boolean(isExternal) && console.log('ext', request, !request.match(new RegExp(`^(${depsStr})`)), Boolean(isExternal));
           callback(null, Boolean(isExternal));
         },
 

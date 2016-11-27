@@ -1,2 +1,2 @@
-# lsk-webpack
+# lsk-build
 Lego Starter Kit webpack configurator
