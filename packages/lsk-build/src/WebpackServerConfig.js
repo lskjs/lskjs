@@ -58,8 +58,8 @@ export default class WebpackServerConfig extends WebpackConfig {
           // console.log(request.match(/^[@a-z][a-z\/\.\-0-9]*$/i), !!request.match(/^[@a-z][a-z\/\.\-0-9]*$/i));
           // console.log(request.match(/\.(css|less|scss|sss)$/i), !request.match(/\.(css|less|scss|sss)$/i));
           // console.log(request.match(new RegExp(`^(${depsStr})`)), !request.match(new RegExp(`^(${depsStr})`)));
+          // !Boolean(isExternal) && console.log('!!!!!!!!!!!!ext', request, !request.match(new RegExp(`^(${depsStr})`)), Boolean(isExternal));
           // console.log('==================');
-          // Boolean(isExternal) && console.log('ext', request, !request.match(new RegExp(`^(${depsStr})`)), Boolean(isExternal));
           callback(null, Boolean(isExternal));
         },
 
