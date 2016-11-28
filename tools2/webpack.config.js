@@ -12,7 +12,7 @@ import webpack from 'webpack';
 import extend from 'extend';
 import AssetsPlugin from 'assets-webpack-plugin';
 
-const DEBUG = !process.argv.includes('--release');
+const DEBUG = true//!process.argv.includes('--release');
 const VERBOSE = process.argv.includes('--verbose');
 const AUTOPREFIXER_BROWSERS = [
   'Android 2.3',
@@ -36,7 +36,7 @@ const GLOBALS = {
   '__DEBUG__'    : NODE_ENV === 'development' && !process.env.NODEBUG,
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
 };
-console.log(GLOBALS)
+// console.log(GLOBALS)
 
 //
 // Common configuration chunk to be used for both
@@ -57,11 +57,11 @@ const config = {
       {
         test: /\.(jsx|js)?$/,
         loader: 'babel-loader',
-        // include: [
-        //   path.resolve(__dirname, '../node_modules/react-routing/src'),
-        //   path.resolve(__dirname, '../src'),
-        // ],
-        // exclude: /node_modules/,
+        include: [
+          path.resolve(__dirname, '../node_modules/react-routing/src'),
+          path.resolve(__dirname, '../src'),
+        ],
+        exclude: /node_modules/,
         query: {
           // https://github.com/babel/babel-loader#options
           cacheDirectory: DEBUG,
@@ -128,22 +128,6 @@ const config = {
         ],
       },
       {
-        test: /\.styl$/,
-        loaders: [
-          'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: DEBUG,
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !DEBUG,
-          })}`,
-          'postcss-loader?pack=sass',
-          'stylus',
-        ],
-      },
-      {
         test: /\.json$/,
         loader: 'json-loader',
       },
@@ -166,14 +150,6 @@ const config = {
           name: DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
         },
       },
-      {
-        test: /\.jade$/,
-        loader: 'jade-loader',
-      },
-      {
-        test: /\.coffee$/,
-        loader: "coffee-loader"
-      },
     ],
   },
 
@@ -181,13 +157,13 @@ const config = {
     root: path.resolve(__dirname, '../src'),
     alias: {
       'lego-starter-kit': path.resolve(__dirname, '../src'),
-      // '$': path.resolve(__dirname, '../node_modules/lego-starter-kit/src'),
     },
     modulesDirectories: ['node_modules'],
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json', '.coffee'],
   },
 
-  cache: DEBUG,
+  // cache: DEBUG,
+  cache: false,
   debug: DEBUG,
 
   stats: {
@@ -279,7 +255,7 @@ const clientConfig = extend(true, {}, config, {
 
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true }),
+    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true, '__SERVER__': false }),
 
     // Emit a file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options
@@ -328,7 +304,7 @@ const serverConfig = extend(true, {}, config, {
   entry: getEntry('server.js'),//'./server.js',
 
   output: {
-    filename: './123123server.js',
+    filename: '../../server.js',
     libraryTarget: 'commonjs2',
   },
 
@@ -339,8 +315,11 @@ const serverConfig = extend(true, {}, config, {
     function filter(context, request, cb) {
       const isExternal =
         request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
+        !request.match(/^lego-starter-kit/) &&
         !request.match(/^react-routing/) &&
         !context.match(/[\\/]react-routing/);
+      // console.log(context, request, Boolean(isExternal));
+
       cb(null, Boolean(isExternal));
     },
   ],
@@ -349,7 +328,7 @@ const serverConfig = extend(true, {}, config, {
 
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': false }),
+    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': false, '__SERVER__': true }),
 
     // Adds a banner to the top of each generated chunk
     // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin

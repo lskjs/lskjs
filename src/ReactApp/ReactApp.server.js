@@ -8,6 +8,7 @@ import assets from './assets'; // eslint-disable-line import/no-unresolved
 import routes from './routes';
 import React, { Component, PropTypes } from 'react'
 import AppWrapper from './AppWrapper'
+import Html from './Html'
 import useragent from 'useragent'
 import _ from 'lodash'
 
@@ -32,35 +33,7 @@ export default class ReactApp extends CoreApp {
 
   renderHtml(props = {}) {
     // data-initial-state={props.state}
-    return `
-      <!doctype html>
-      <html className="${props.htmlClass || ''}" lang="${props.lang || ''}">
-        <head>
-          <title>${props.title}</title>
-          <meta charset="utf-8">
-          <meta http-equiv="x-ua-compatible" content="ie=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-          ${props.fontFamily && `<link rel="stylesheet" href="//fonts.googleapis.com/css?family=${props.fontFamily}" />` || ''}
-          <style id="css">${props.style || ''}</style>
-          ${props.headerHtml || ''}
-        </head>
-        <body>
-          <!-- ${JSON.stringify(props)} -->
-          <div id="app"/>
-            ${props.children || ''}
-          </div>
-          ${props.assets && props.assets.js && (
-            `<script
-              id="js"
-              src="${props.assets.js}"
-              data-initial-state="${JSON.stringify(props.initialState) || '{}'}"
-            ></script>`
-          ) || ''}
-          ${props.footerHtml || ''}
-        </body>
-      </html>
-    `
+    return new Html(props).render()
   }
 
   getUniversalRoutes() {
@@ -75,7 +48,7 @@ export default class ReactApp extends CoreApp {
     return <AppWrapper context={context} children={component} />
   }
 
-  applyUniversalRouter(routes, props) {
+  applyUniversalRouter(routes, params) {
     return async (req, res, next) => {
       // console.log('applyUniversalRouter');
       try {
@@ -94,7 +67,7 @@ export default class ReactApp extends CoreApp {
         // console.log('after UniversalRouter');
         // console.log('route', route);
         // const data = { ...route }
-        const htmlProps = Object.assign({}, props, routeProps)
+        const htmlProps = Object.assign({}, params, routeProps)
         const rootComponent = this.appComponent({...htmlProps, context, req})
         // console.log('before renderToStaticMarkup', htmlProps, rootComponent);
         try {
@@ -102,10 +75,12 @@ export default class ReactApp extends CoreApp {
           // console.log('rootComponentString', rootComponentString);
           htmlProps.children = rootComponentString
         } catch (err) {
-          console.log('catchcatchcatchcatchcatchcatchcatch');
+          console.log('ReactApp renderToStaticMarkup error');
           console.log(err);
+          htmlProps.children = JSON.stringify(err)
         }
 
+        htmlProps.style = css.join(' ')
         htmlProps.htmlClass = this.getRenderHtmlClass(req)
         res.status(htmlProps.status || 200).send(this.renderHtml(htmlProps))
       } catch (err) {

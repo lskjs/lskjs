@@ -21,6 +21,15 @@ export default {
       },
     },
     {
+      path: '/static',
+      async action() {
+        return {
+          title: 'StaticPage',
+          component: <div>static</div>,
+        };
+      },
+    },
+    {
       path: '/counter',
       async action() {
         return {

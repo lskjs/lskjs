@@ -6,7 +6,7 @@ import A from '../../components/A'
 export default class HomePage extends Component {
   render() {
     return <div styleName='root'>
-      Welcome to HomePage
+      Welcome to HomePageasdas
       <hr />
       <A href="/counter">Go to CounterPage</A>
     </div>

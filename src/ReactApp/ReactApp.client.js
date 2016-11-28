@@ -36,7 +36,7 @@ export default class ReactApp {
       if (elem) elem.parentNode.removeChild(elem);
       return;
     }
-    document.title = 'route.title';
+    // document.title = 'route.title';
     let scrollX = 0;
     let scrollY = 0;
     const pos = this.scrollPositionsHistory[location.key];

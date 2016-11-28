@@ -1,17 +1,13 @@
-/* eslint key-spacing:0 spaced-comment:0 */
-import _debug from 'debug'
-import path from 'path'
-import { argv } from 'yargs'
 const pkg = require('../../package.json')
 
 const config = {
   name: pkg.name,
   client: require('./index.client').default,
-  env : process.env.NODE_ENV || process.env.ENV || 'development',
-  port : process.env.PORT || 8080,
+  env: process.env.NODE_ENV || process.env.ENV || 'development',
+  port: process.env.PORT || 8080,
   host: 'localhost',
   db: {
-    uri: 'mongodb://publicdb.mgbeta.ru/chat',
+    uri: 'mongodb://publicdb.mgbeta.ru/lsk',
     options: {},
   },
   jwt: {
