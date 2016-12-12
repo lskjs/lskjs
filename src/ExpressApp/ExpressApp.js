@@ -1,8 +1,12 @@
 import bunyan from 'bunyan'
 import express from 'express'
 import { Server as httpServer} from 'http'
+import mixin from 'lego-starter-kit/utils/mixin'
+import AsyncRouter from 'lego-starter-kit/utils/AsyncRouter'
 
 export default class ExpressApp {
+  static mixin = mixin;
+  asyncRouter = AsyncRouter;
   constructor(params = {}) {
     Object.assign(this, params)
     // super(...arguments)
@@ -27,12 +31,14 @@ export default class ExpressApp {
     this.beforeUseMiddlewares()
     this.useMiddlewares()
     this.useRoutes()
+    this.useStatics()
     this.useDefaultRoute()
     this.afterUseMiddlewares()
   }
 
   beforeUseMiddlewares() {}
   useMiddlewares() {}
+  useStatics() {}
   useRoutes() {}
   useDefaultRoute() {
     this.app.use((req, res) => {

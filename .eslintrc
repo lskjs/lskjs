@@ -34,6 +34,7 @@
     ],
     "object-curly-spacing": 1,
     "func-names": 0,
+    "react/jsx-sort-props": 0,
     "jsx-quotes": [
       1,
       "prefer-single"

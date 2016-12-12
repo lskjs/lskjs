@@ -3,7 +3,7 @@ import bunyan from 'bunyan'
 const logger = (ctx) => {
   const logger = bunyan.createLogger({
     name: ctx.name,
-    src: ctx.__DEV__,
+    src: __DEV__,
     level: 'trace'
     // serializers: {
     //   req: (req) => {

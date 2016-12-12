@@ -2,7 +2,6 @@ import express from 'express'
 import path from 'path'
 import _ from 'lodash'
 
-import asyncRouter from 'lego-starter-kit/utils/AsyncRouter'
 import ExpressApp from 'lego-starter-kit/ExpressApp'
 
 import getMongoose from './getMongoose'
@@ -32,6 +31,8 @@ export default class CoreApp extends ExpressApp {
     this.log.trace('resourses', Object.keys(this.resourses))
     this.helpers = this.getHelpers()
     this.log.trace('helpers', Object.keys(this.helpers))
+    this.statics = this.getResolvedStatics()
+    this.log.trace('statics', this.statics)
 
     super.init(...arguments)
   }
@@ -59,6 +60,18 @@ export default class CoreApp extends ExpressApp {
   getHelpers() {
     return getHelpers(this)
   }
+  getStatics() {
+    return {}
+  }
+  getResolvedStatics() {
+    return _.mapValues(this.getStatics() || {}, p => path.resolve(p))
+  }
+  useStatics() {
+    _.forEach(this.getResolvedStatics(), (path, url) => {
+      this.app.use(url, express.static(path))
+    })
+  }
+
   useStaticPublic(publicPath, urlPath = null) {
     if (!publicPath) {
       publicPath = path.join(__dirname, 'public')
@@ -68,27 +81,23 @@ export default class CoreApp extends ExpressApp {
     if (urlPath == null) {
       urlPath = '/'
     }
+    // this.statics[urlPath] = publicPath
     this.log.trace(`Static attach ${urlPath} => ${publicPath}`)
     this.app.use(urlPath, express.static(publicPath))
   }
 
-  useWebSockets() {
-
-  }
-
-  useGraphql() {
-
-  }
-
-
   beforeUseMiddlewares() {
-    super.beforeUseMiddlewares()
-    this.app.use(this.middlewares.extendReqRes)
-    this.app.use(this.middlewares.reqLog)
-    this.app.use(this.middlewares.accessLogger)
-    this.app.use(this.middlewares.reqParser)
-    this.app.use(this.resourses.Auth.parseToken)
-    this.app.use(this.resourses.Auth.parseUser)
+    super.beforeUseMiddlewares();
+    [
+      this.middlewares.extendReqRes,
+      this.middlewares.reqLog,
+      this.middlewares.accessLogger,
+      this.middlewares.reqParser,
+      this.resourses.Auth.parseToken,
+      this.resourses.Auth.parseUser,
+    ].forEach(middleware => {
+      middleware && this.app.use(middleware);
+    });
   }
 
   acl() {
@@ -97,12 +106,8 @@ export default class CoreApp extends ExpressApp {
     }
   }
 
-  getAuthApi() {
-    return getAuthApi(this)
-  }
-
   getDocsRouter(getDocs, params) {
-    const api = asyncRouter()
+    const api = this.asyncRouter()
     const docsParams = Object.assign({}, params, {
       docs: `${params.path || '/api'}/docs`,
       docsJson: `${params.path || '/api'}/docs/json`,
@@ -114,9 +119,6 @@ export default class CoreApp extends ExpressApp {
   }
 
   useMiddlewares() {
-    this.useStaticPublic()
-    this.useWebSockets()
-    this.useGraphql()
   }
 
   useDefaultRoute() {
@@ -126,7 +128,7 @@ export default class CoreApp extends ExpressApp {
     })
   }
   afterUseMiddlewares() {
-    this.app.use(this.middlewares.catchError)
+    this.middlewares.catchError && this.app.use(this.middlewares.catchError);
   }
 
   run(...args) {

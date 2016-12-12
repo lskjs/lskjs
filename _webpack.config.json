@@ -1,0 +1,330 @@
+[
+  {
+    "context": "/Users/isuvorov/projects/lego-starter-kit/src",
+    "target": "web",
+    "entry": "./client.js",
+    "resolve": {
+      "root": "/Users/isuvorov/projects/lego-starter-kit/src",
+      "alias": {
+        "~": "/Users/isuvorov/projects/lego-starter-kit/src",
+        "lego-starter-kit": "/Users/isuvorov/projects/lego-starter-kit/src",
+        "react": "/Users/isuvorov/projects/lego-starter-kit/node_modules/react"
+      },
+      "modulesDirectories": [
+        "node_modules"
+      ],
+      "extensions": [
+        "",
+        ".webpack.js",
+        ".web.js",
+        ".js",
+        ".jsx",
+        ".json"
+      ]
+    },
+    "output": {
+      "path": "/Users/isuvorov/projects/lego-starter-kit/build/public/assets",
+      "publicPath": "/assets/",
+      "sourcePrefix": "  ",
+      "filename": "[name].js?[chunkhash]",
+      "chunkFilename": "[name].[id].js?[chunkhash]"
+    },
+    "module": {
+      "loaders": [
+        {
+          "test": {},
+          "loader": "babel-loader",
+          "include": [
+            "/Users/isuvorov/projects/lego-starter-kit/src",
+            "/Users/isuvorov/projects/lego-starter-kit/src"
+          ],
+          "query": {
+            "cacheDirectory": true,
+            "babelrc": false,
+            "presets": [
+              "react",
+              "es2015",
+              "stage-0"
+            ],
+            "plugins": [
+              "jsx-control-statements",
+              "react-require",
+              "transform-decorators-legacy",
+              "transform-runtime"
+            ]
+          }
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}"
+          ]
+        },
+        {
+          "test": {},
+          "exclude": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
+            "postcss-loader?pack=default"
+          ]
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}",
+            "postcss-loader?pack=default"
+          ]
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
+            "postcss-loader?pack=sass",
+            "sass-loader"
+          ]
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
+            "postcss-loader?pack=sass",
+            "stylus"
+          ]
+        },
+        {
+          "test": {},
+          "loader": "json-loader"
+        },
+        {
+          "test": {},
+          "loader": "url-loader",
+          "query": {
+            "name": "[path][name].[ext]?[hash]",
+            "limit": 10000
+          }
+        },
+        {
+          "test": {},
+          "loader": "file-loader",
+          "query": {
+            "name": "[path][name].[ext]?[hash]"
+          }
+        }
+      ]
+    },
+    "plugins": [
+      {
+        "definitions": {
+          "process.env.NODE_ENV": "\"development\"",
+          "__ENV__": "\"development\"",
+          "__DEV__": true,
+          "__PROD__": false,
+          "__SERVER__": false,
+          "__CLIENT__": true,
+          "__BROWSER__": true
+        }
+      },
+      {
+        "options": {
+          "path": "/Users/isuvorov/projects/lego-starter-kit/build",
+          "filename": "assets.js",
+          "prettyPrint": false,
+          "update": false,
+          "fullPath": true
+        }
+      },
+      {
+        "preferEntry": true
+      }
+    ],
+    "cache": true,
+    "debug": true,
+    "stats": {
+      "colors": true,
+      "reasons": true,
+      "hash": false,
+      "version": false,
+      "timings": true,
+      "chunks": false,
+      "chunkModules": false,
+      "cached": false,
+      "cachedAssets": false
+    },
+    "devtool": "cheap-module-eval-source-map"
+  },
+  {
+    "context": "/Users/isuvorov/projects/lego-starter-kit/src",
+    "target": "node",
+    "entry": "./server.js",
+    "resolve": {
+      "root": "/Users/isuvorov/projects/lego-starter-kit/src",
+      "alias": {
+        "~": "/Users/isuvorov/projects/lego-starter-kit/src",
+        "lego-starter-kit": "/Users/isuvorov/projects/lego-starter-kit/src",
+        "react": "/Users/isuvorov/projects/lego-starter-kit/node_modules/react"
+      },
+      "modulesDirectories": [
+        "node_modules"
+      ],
+      "extensions": [
+        "",
+        ".webpack.js",
+        ".web.js",
+        ".js",
+        ".jsx",
+        ".json"
+      ]
+    },
+    "output": {
+      "path": "/Users/isuvorov/projects/lego-starter-kit/build/public/assets",
+      "publicPath": "/assets/",
+      "sourcePrefix": "  ",
+      "filename": "../../server.js",
+      "libraryTarget": "commonjs2"
+    },
+    "module": {
+      "loaders": [
+        {
+          "test": {},
+          "loader": "babel-loader",
+          "include": [
+            "/Users/isuvorov/projects/lego-starter-kit/src",
+            "/Users/isuvorov/projects/lego-starter-kit/src"
+          ],
+          "query": {
+            "cacheDirectory": true,
+            "babelrc": false,
+            "presets": [
+              "react",
+              "es2015",
+              "stage-0"
+            ],
+            "plugins": [
+              "jsx-control-statements",
+              "react-require",
+              "transform-decorators-legacy",
+              "transform-runtime"
+            ]
+          }
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}"
+          ]
+        },
+        {
+          "test": {},
+          "exclude": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
+            "postcss-loader?pack=default"
+          ]
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}",
+            "postcss-loader?pack=default"
+          ]
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
+            "postcss-loader?pack=sass",
+            "sass-loader"
+          ]
+        },
+        {
+          "test": {},
+          "loaders": [
+            "isomorphic-style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
+            "postcss-loader?pack=sass",
+            "stylus"
+          ]
+        },
+        {
+          "test": {},
+          "loader": "json-loader"
+        },
+        {
+          "test": {},
+          "loader": "url-loader",
+          "query": {
+            "name": "[path][name].[ext]?[hash]",
+            "limit": 10000
+          }
+        },
+        {
+          "test": {},
+          "loader": "file-loader",
+          "query": {
+            "name": "[path][name].[ext]?[hash]"
+          }
+        }
+      ]
+    },
+    "plugins": [
+      {
+        "definitions": {
+          "process.env.NODE_ENV": "\"development\"",
+          "__ENV__": "\"development\"",
+          "__DEV__": true,
+          "__PROD__": false,
+          "__SERVER__": true,
+          "__CLIENT__": false,
+          "__BROWSER__": false
+        }
+      },
+      {
+        "options": {
+          "raw": true,
+          "entryOnly": false
+        },
+        "banner": "require(\"source-map-support\").install();"
+      },
+      {
+        "options": {
+          "maxChunks": 1
+        }
+      }
+    ],
+    "cache": true,
+    "debug": true,
+    "stats": {
+      "colors": true,
+      "reasons": true,
+      "hash": false,
+      "version": false,
+      "timings": true,
+      "chunks": false,
+      "chunkModules": false,
+      "cached": false,
+      "cachedAssets": false
+    },
+    "externals": [
+      {},
+      null
+    ],
+    "node": {
+      "console": false,
+      "global": false,
+      "process": false,
+      "Buffer": false,
+      "__filename": false,
+      "__dirname": false
+    },
+    "devtool": "source-map"
+  }
+]

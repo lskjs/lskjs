@@ -82,8 +82,9 @@ Object.keys(levelFromName).forEach(function (name) {
     var lvl = levelFromName[name];
     nameFromLevel[lvl] = name;
     upperNameFromLevel[lvl] = name.toUpperCase();
-    upperPaddedNameFromLevel[lvl] = (
-        name.length === 4 ? ' ' : '') + name.toUpperCase();
+    upperPaddedNameFromLevel[lvl] = '[' + name[0] + ']'
+    // upperPaddedNameFromLevel[lvl] = (
+    //     name.length === 4 ? ' ' : '') + name.toUpperCase();
 });
 
 
@@ -848,13 +849,17 @@ function emitRecord(rec, line, opts, stylize) {
             extras.push('req_id=' + rec.req_id);
         }
         delete rec.req_id;
+        if (rec.reqId) {
+            extras.push('reqId=' + rec.reqId);
+        }
+        delete rec.reqId;
 
         var onelineMsg;
         if (rec.msg.indexOf('\n') !== -1) {
             onelineMsg = '';
-            details.push(indent(stylize(rec.msg, 'cyan')));
+            details.push(indent(stylize(rec.msg)));
         } else {
-            onelineMsg = ' ' + stylize(rec.msg, 'cyan');
+            onelineMsg = ' ' + stylize(rec.msg);
         }
         delete rec.msg;
 
@@ -1061,12 +1066,15 @@ function emitRecord(rec, line, opts, stylize) {
                 level,
                 onelineMsg));
           } else if(nameStr.substr(0, 'app'.length) === 'app') {
-            emit(format('%s %s:%s%s\n%s',
-                level,
-                nameStr,
-                onelineMsg,
-                extras,
-                details));
+            if(nameStr.length == 3) {
+              emit(format('%s %s:%s%s\n%s',
+                  level,
+                  nameStr,
+                  onelineMsg,
+                  extras,
+                  details));
+            } else {}
+
           } else {
             emit(format('%s %s %s:%s%s\n%s',
                 time,
