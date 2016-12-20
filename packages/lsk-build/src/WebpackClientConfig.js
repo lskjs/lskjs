@@ -1,5 +1,7 @@
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
+const OptimizeJsPlugin = require("optimize-js-plugin");
+// var CompressionPlugin = require("compression-webpack-plugin");
 import WebpackConfig from './WebpackConfig'
 
 export default class WebpackClientConfig extends WebpackConfig {
@@ -25,7 +27,7 @@ export default class WebpackClientConfig extends WebpackConfig {
   getPreConfig() {
     return {
       ...super.getPreConfig(),
-      devtool: this.isDebug() ? 'cheap-module-eval-source-map' : false,
+      devtool: this.isDebug() ? 'cheap-module-source-map' : false,
     }
   }
 
@@ -66,8 +68,24 @@ export default class WebpackClientConfig extends WebpackConfig {
             screw_ie8: true, // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
             warnings: this.isVerbose(),
           },
+          mangle: {
+            screw_ie8: true,
+          },
+          output: {
+            comments: false,
+            screw_ie8: true,
+          },
         }),
-
+        new OptimizeJsPlugin({
+          sourceMap: false,
+        }),
+        // new CompressionPlugin({
+        //     asset: "[path].gz[query]",
+        //     algorithm: "gzip",
+        //     test: /\.js$|\.html$/,
+        //     threshold: 10240,
+        //     minRatio: 0.8
+        // })
         // A plugin for a more aggressive chunk merging strategy
         // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
         new webpack.optimize.AggressiveMergingPlugin(),

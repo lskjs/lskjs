@@ -1,6 +1,7 @@
 import extend from 'extend';
 import path from 'path';
 import webpack from 'webpack';
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 export default class WebpackConfig {
 
@@ -27,6 +28,7 @@ export default class WebpackConfig {
   }
 
   getGlobals() {
+    // console.log({'process.env.NODE_ENV': JSON.stringify(this.getEnv()),});
     return {
       'process.env.NODE_ENV': JSON.stringify(this.getEnv()),
       __ENV__: JSON.stringify(this.getEnv()),
@@ -52,43 +54,6 @@ export default class WebpackConfig {
     return this.deps || []
   }
 
-  getPostcssModule(bundler) {
-    return {
-      default: [
-        require('postcss-import')({
-          addDependencyTo: bundler,
-          path: [
-            this.resolvePath('src'),
-            ...this.getDeps().map(dep => dep.path),
-            this.resolvePath('node_modules'),
-          ],
-          trigger: '&',
-          resolve: require('./utils/resolve-id'),
-        }),
-        require('postcss-mixins')(),
-        require('postcss-custom-properties')(),
-        require('postcss-simple-vars')(), /// !
-        require('postcss-custom-media')(),
-        require('postcss-media-minmax')(),
-        require('postcss-custom-selectors')(),
-        require('postcss-calc')(),
-        // require('postcss-nesting')(),
-        require('postcss-color-function')(),
-        require('pleeease-filters')(),
-        require('pixrem')(),
-        require('postcss-selector-matches')(),
-        require('postcss-selector-not')(),
-        require('postcss-animation')(), /// !
-        require('rucksack-css')(), /// !
-        require('lost')(), /// !
-        require('postcss-nested')(), /// !
-        require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
-      ],
-      sass: [
-        require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
-      ],
-    };
-  }
 
   getBabelPresets() {
     return [
@@ -135,95 +100,211 @@ export default class WebpackConfig {
     }
   }
   getCssLoaders() {
+
+    const dimensions = [
+      [
+        {
+          preExt: 'i?',
+          loaders: [
+            'isomorphic-style-loader',
+          ]
+        },
+        {
+          preExt: 'f',
+          loaders: [
+            ExtractTextPlugin.extract(
+              'style-loader',
+            ),
+          ]
+        },
+      ],
+      [
+        {
+          preExt: 'm?',
+          loaders: [
+            `css-loader?${JSON.stringify({
+              sourceMap: this.isDebug(),
+              modules: true,
+              localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+              minimize: !this.isDebug(),
+            })}`,
+          ]
+        },
+        {
+          preExt: 'g',
+          loaders: [
+            `css-loader?${JSON.stringify({
+              sourceMap: this.isDebug(),
+              modules: false,
+              minimize: !this.isDebug(),
+            })}`,
+          ]
+        },
+      ],
+      [
+        {
+          ext: 'p?css',
+          // name: '\\.css',
+          loaders: [
+            'postcss-loader?pack=default',
+          ]
+        },
+        {
+          ext: 'sass',
+          loaders: [
+            'postcss-loader?pack=sass',
+            'sass-loader',
+          ]
+        },
+      ]
+    ]
+    function getVectors(dimensions) {
+      let results = []
+      for(var i = 0; i < dimensions[0]; i++) {
+        if (dimensions.length <= 1) {
+          results = [...results, [i]]
+        } else {
+          results = [...results, ...getVectors(dimensions.slice(1)).map(d => {
+            return [i,...d]
+          })]
+        }
+      }
+      return results
+    }
+    const vectors = getVectors(dimensions.map(d => d.length))
+    const testers = vectors.map(vector => {
+      const tester = {
+        loaders: [],
+      }
+      let ext = ''
+      let preExt = ''
+      vector.forEach((v, i) => {
+        const subtest = dimensions[i][v]
+        ext += subtest.ext || ''
+        preExt += subtest.preExt || ''
+        tester.loaders = [
+          ...tester.loaders,
+          ...subtest.loaders,
+        ]
+      })
+
+      let test = `${preExt ? '\.' + preExt : ''}${ext ? '\.' + ext : ''}`
+
+      tester.test = new RegExp(test)
+      return tester
+    })
+
+
     return [
+      // ...testers,
+      // {
+      //   test: /\.xcss$/,
+      //   loaders: [
+      //     ExtractTextPlugin.extract(
+      //       'style-loader',
+      //     ),
+      //     `css-loader?${JSON.stringify({
+      //       sourceMap: this.isDebug(),
+      //       modules: false,
+      //       minimize: !this.isDebug(),
+      //     })}`,
+      //     'postcss-loader?pack=default',
+      //   ],
+      // },
       {
-        test: /\.global\.css$/,
+        test: /\.g(lobal)?\.css$/,
         loaders: [
-          'isomorphic-style-loader',
+          ExtractTextPlugin.extract(
+            'style-loader',
+          ),
           `css-loader?${JSON.stringify({
             sourceMap: this.isDebug(),
-            // CSS Modules https://github.com/css-modules/css-modules
             modules: false,
-            // localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !this.isDebug(),
-          })}`,
-          // 'postcss-loader?pack=default',
-        ],
-      },
-      {
-        test: /\.css$/,
-        exclude: /(global.css)/,
-        loaders: [
-          'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: this.isDebug(),
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
             minimize: !this.isDebug(),
           })}`,
           'postcss-loader?pack=default',
         ],
       },
       {
-        test: /\.(_pcss)/,
+        test: /\.css$/,
+        exclude: /\.g(lobal)?\.css$/,
         loaders: [
           'isomorphic-style-loader',
           `css-loader?${JSON.stringify({
             sourceMap: this.isDebug(),
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: false,
-            // localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
+            modules: true,
+            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
             minimize: !this.isDebug(),
           })}`,
           'postcss-loader?pack=default',
         ],
       },
       // {
-      //   test: /\.scss$/,
+      //   test: /\.global\.scss$/,
       //   loaders: [
       //     'isomorphic-style-loader',
-      //     `css-loader?${JSON.stringify({ sourceMap: this.isDebug(), minimize: !this.isDebug() })}`,
+      //     `css-loader?${JSON.stringify({
+      //       sourceMap: this.isDebug(),
+      //       modules: false,
+      //       minimize: !this.isDebug(),
+      //     })}`,
       //     'postcss-loader?pack=sass',
       //     'sass-loader',
       //   ],
       // },
-      {
-        test: /\.scss$/,
-        loaders: [
-          'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: this.isDebug(),
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=sass',
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.styl$/,
-        loaders: [
-          'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: this.isDebug(),
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=sass',
-          'stylus',
-        ],
-      },
+      // {
+      //   test: /\.scss$/,
+      //   exclude: /(global.scss)/,
+      //   loaders: [
+      //     'isomorphic-style-loader',
+      //     `css-loader?${JSON.stringify({
+      //       sourceMap: this.isDebug(),
+      //       modules: true,
+      //       localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+      //       minimize: !this.isDebug(),
+      //     })}`,
+      //     'postcss-loader?pack=sass',
+      //     'sass-loader',
+      //   ],
+      // },
     ]
+  }
+  getPostcssModule(bundler) {
+    return {
+      default: [
+        require('postcss-import')({
+          addDependencyTo: bundler,
+          path: [
+            this.resolvePath('src'),
+            ...this.getDeps().map(dep => dep.path),
+            this.resolvePath('node_modules'),
+          ],
+          trigger: '&',
+          resolve: require('./utils/resolve-id'),
+        }),
+        require('postcss-mixins')(),
+        require('postcss-custom-properties')(),
+        require('postcss-simple-vars')(), /// !
+        require('postcss-custom-media')(),
+        require('postcss-media-minmax')(),
+        require('postcss-custom-selectors')(),
+        require('postcss-calc')(),
+        // require('postcss-nesting')(),
+        require('postcss-color-function')(),
+        require('pleeease-filters')(),
+        require('pixrem')(),
+        require('postcss-selector-matches')(),
+        require('postcss-selector-not')(),
+        require('postcss-animation')(), /// !
+        require('rucksack-css')(), /// !
+        require('lost')(), /// !
+        require('postcss-nested')(), /// !
+        require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
+      ],
+      sass: [
+        require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
+      ],
+    };
   }
   getLoaders() {
     return [
@@ -262,6 +343,7 @@ export default class WebpackConfig {
       // Define free variables
       // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
       new webpack.DefinePlugin(this.getGlobals()),
+      new ExtractTextPlugin(this.isDebug() ? '[name].css?[chunkhash]' : '[name].[chunkhash].css'),
     ]
   }
 
