@@ -165,7 +165,65 @@ export default class Runner {
     });
   }
 
-  async start(ctx) {
+  async start() {
+    // console.log('@@@@@@start');
+    const webpackConfig = this.webpackConfig
+    const [config] = webpackConfig
+    await this.clean();
+    await this.copy();
+    await new Promise(resolve => {
+      // Hot Module Replacement (HMR) + React Hot Reload
+      // console.log('config', config);
+      if (config.debug) {
+        // console.log('config.entry', config.entry);
+        config.entry= ['react-hot-loader/patch', 'webpack-hot-middleware/client']
+          .concat(config.entry);
+        config.output.filename = config.output.filename.replace('[chunkhash', '[hash');
+        config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash', '[hash');
+        config.module.loaders.find(x => x.loader === 'babel-loader')
+          .query.plugins.unshift('react-hot-loader/babel');
+        config.plugins.push(new webpack.HotModuleReplacementPlugin());
+        config.plugins.push(new webpack.NoErrorsPlugin());
+      }
+
+      const bundler = webpack(webpackConfig);
+      const wpMiddleware = webpackMiddleware(bundler, {
+        // IMPORTANT: webpack middleware can't access config,
+        // so we should provide publicPath by ourselves
+        publicPath: config.output.publicPath,
+
+        // Pretty colored output
+        stats: config.stats,
+
+        // For other settings see
+        // https://webpack.github.io/docs/webpack-dev-middleware
+      });
+      const hotMiddleware = webpackHotMiddleware(bundler.compilers[0]);
+
+      let handleBundleComplete = async () => {
+        handleBundleComplete = stats => !stats.stats[1].compilation.errors.length && this.runServer();
+
+        const server = await this.runServer();
+        const bs = Browsersync.create();
+        console.log('server.host,', server.host);
+        bs.init({
+          ...(config.debug ? {} : { notify: false, ui: false }),
+
+          proxy: {
+            target: server.host,
+            middleware: [wpMiddleware, hotMiddleware],
+            proxyOptions: {
+              xfwd: true,
+            },
+          },
+        }, resolve);
+      };
+
+      bundler.plugin('done', stats => handleBundleComplete(stats));
+    });
+  }
+
+  async start2(ctx) {
     await this.clean();
     await this.copy({ watch: true });
     await new Promise(resolve => {
@@ -195,6 +253,7 @@ export default class Runner {
         this.runServer((err, host) => {
           if (!err) {
             const bs = Browsersync.create();
+
             bs.init({
               ...(this.debug ? {} : { notify: false, ui: false }),
 
@@ -216,38 +275,59 @@ export default class Runner {
     });
   }
 
+ server = null
  runServer(cb) {
    const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//;
 
-    const onStdOut = (data) => {
-      const time = new Date().toTimeString();
-      const match = data.toString('utf8').match(RUNNING_REGEXP);
+   const { output } = this.webpackConfig.find(x => x.target === 'node');
+   const serverPath = path.join(output.path, output.filename);
 
-      // process.stdout.write(time.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] '));
-      // process.stdout.write(data);
-      process.stdout.write(data.toString('utf8'));
-      if (match) {
-        this.server.stdout.removeListener('data', onStdOut);
-        this.server.stdout.on('data', x => process.stdout.write(x));
-        if (cb) {
-          cb(null, match[1]);
-        }
-      }
-    }
+   process.on('exit', () => {
+     if (this.server) {
+       this.server.kill('SIGTERM');
+     }
+   });
+   return new Promise(resolve => {
+       let pending = true;
 
-    if (this.server) {
-      this.server.kill('SIGTERM');
-    }
+       const onStdOut = (data) => {
+         const time = new Date().toTimeString();
+         const match = data.toString('utf8').match(RUNNING_REGEXP);
 
-    const { output } = this.webpackConfig.find(x => x.target === 'node');
-    const serverPath = path.join(output.path, output.filename);
-    this.server = cp.spawn('node', [serverPath], {
-      env: Object.assign({ NODE_ENV: 'development' }, process.env),
-      silent: false,
-    });
-    this.server.stdout.on('data', onStdOut);
-    this.server.stderr.on('data', x => process.stderr.write(x));
-    return this.server;
+        //  process.stdout.write(time.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] '));
+         process.stdout.write(data);
+
+         if (match) {
+           this.server.host = match[1];
+           this.server.stdout.removeListener('data', onStdOut);
+           this.server.stdout.on('data', x => process.stdout.write(x));
+           pending = false;
+           resolve(this.server);
+         }
+       }
+
+       if (this.server) {
+         this.server.kill('SIGTERM');
+       }
+
+       this.server = cp.spawn('node', [serverPath], {
+         env: Object.assign({ NODE_ENV: 'development' }, process.env),
+         silent: false,
+       });
+
+       if (pending) {
+         this.server.once('exit', (code, signal) => {
+           if (pending) {
+             throw new Error(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
+           }
+         });
+       }
+
+       this.server.stdout.on('data', onStdOut);
+       this.server.stderr.on('data', x => process.stderr.write(x));
+
+       return this.server;
+     });
   }
 
 
