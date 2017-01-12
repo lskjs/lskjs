@@ -43,7 +43,7 @@ export default class CoreApp extends ExpressApp {
     return getModels(this)
   }
   getDatabase() {
-    return getMongoose(this, this.config.db)
+    return this.config.db && getMongoose(this, this.config.db)
   }
   getErrors() {
     return getErrors(this)
@@ -133,13 +133,22 @@ export default class CoreApp extends ExpressApp {
 
   run(...args) {
     this.log.trace('CoreApp run')
-    const promise = this.db.run()
-    return promise.then(() => {
-      return super.run(...args).then(() => {
-        // this.useWebSockets()
+
+    if (this.db) {
+      const promise = this.db.run()
+      return promise.then(() => {
+        return super.run(...args).then(() => {
+          this.afterRun()
+        })
+      }).catch(err => {
+        this.log.fatal(err)
       })
-    }).catch(err => {
-      this.log.fatal(err)
-    })
+    }
+
+    return super.run(...args)
+  }
+
+  afterRun() {
+
   }
 }

@@ -57,7 +57,12 @@ export default class UniversalSchema {
       schema.post(key, val)
     })
     _.forEach(this.virtuals, ([args1, method, args2]) => {
-      schema.virtual(args1)[method](args2)
+      console.log('virtuals', method, args1);
+      if (method == 'init') {
+        schema.virtual(...args1)
+      } else {
+        schema.virtual(...args1)[method](...args2)
+      }
     })
     _.forEach(this.indexes, (args) => {
       schema.index(...args)
@@ -74,6 +79,9 @@ export default class UniversalSchema {
   }
 
   virtual(...args1) {
+    if(args1.length > 1) {
+      this.virtuals.push([args1, 'init']);
+    }
     return {
       set: (...args2) => {
         this.virtuals.push([args1, 'set', args2]);

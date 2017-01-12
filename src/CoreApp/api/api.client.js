@@ -13,6 +13,14 @@ export function trim(initialStr, begin = true, end = true, symbol = '/') {
   return str
 }
 
+
+function queryParams(params) {
+    return Object.keys(params)
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+        .join('&');
+}
+
+
 export default class ApiClient {
   constructor(params) {
     this.base = trim(params.base, false)
@@ -22,29 +30,15 @@ export default class ApiClient {
     }
   }
 
-  createUrl(path, options = {}) {
-    // console.log('createUrl', path);
-    const prefix = options.prefix || this.prefix || ''
-    if (path.substr(0, 5) === 'http:' || path.substr(0, 6) === 'https:') {
-      return path
-    }
-    let url
-    if (path[0] === '/' && !prefix) {
-      url = [this.base, path.substr(1)]
-    } else if (prefix) {
-      url = [this.base, prefix, path]
-    } else {
-      url = [this.base, path]
-    }
-    // console.log('url', url);
-    return url.join('/')
-  }
 
   setAuthToken(authToken) {
     this.authToken = authToken
   }
   setAuth(authParams) {
-    this.setAuthToken(authParams.token)
+    this.authParams = authParams
+    if (this.authParams.token) {
+      this.authToken = this.authParams.token
+    }
   }
 
   authFetch(...args) {
@@ -89,37 +83,113 @@ export default class ApiClient {
     })
   }
 
-  onError(err) {
-    console.log('pack.err', err)
-    throw err
+  // onError(err) {
+  //   console.log('pack.err', err)
+  //   throw err
+  // }
+
+  async throwError({err}) {
+    console.log('throwError', err)
+    const message = err && err.message || err
+    throw new Error(_.isPlainObject(message) ? JSON.stringify(message) : message)
   }
 
-  fetch(path, params = {}) {
-    // console.log('fetch', path);
+  async afterFetch({json, res}) {
+    if (res.status >= 400) {
+      await this.throwError({
+        err: {
+          status: res.status,
+          statusText: res.statusText,
+          data: json,
+        },
+        res,
+      })
+    }
+    if (json.err) {
+      await this.throwError({
+        err: json.err,
+        json,
+        res,
+      })
+    }
+    return json
+  }
+  createUrl(path, options = {}) {
+    // console.log('createUrl', path);
+    const prefix = options.prefix || this.prefix || ''
+    if (path.substr(0, 5) === 'http:' || path.substr(0, 6) === 'https:') {
+      return path
+    }
+    let url
+    if (path[0] === '/' && !prefix) {
+      url = [this.base, path.substr(1)]
+    } else if (prefix) {
+      url = [this.base, prefix, path]
+    } else {
+      url = [this.base, path]
+    }
+    // console.log('url', url);
+    return url.join('/')
+  }
+
+
+  getFetch(url, params = {}) {
     const options = Object.assign({}, params)
-    const url = this.createUrl(path)
-    if (typeof options.body !== 'string') {
-      options.body = JSON.stringify(options.body)
+
+    if (options.data && !options.body) {
+      options.body = options.data;
+    }
+    if (_.isPlainObject(options.body)) {
+      options.body = JSON.stringify(options.body);
     }
     if (!options.headers) options.headers = {}
     if (!options.headers['Accept']) options.headers['Accept'] = 'application/json'
     if (!options.headers['Content-Type']) options.headers['Content-Type'] = 'application/json; charset=utf-8'
+    if (options.headers['Content-Type'] === '!') {
+      delete options.headers['Content-Type']
+    }
     if (!options.headers['Authorization'] && this.authToken)
       options.headers['Authorization'] = 'Bearer ' + this.authToken
 
+    // options = {
+    //     // your default options
+    //     credentials: 'same-origin',
+    //     redirect: 'error',
+    //     ...options,
+    // };
 
-    return fetch(url, options)
-      .then(res => {
-        return res.json()
-      })
-      .then(pack => {
-        if (pack.err) {
-          return this.onError(pack.err, pack)
+    if(options.queryParams || options.qs) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + queryParams(options.queryParams || options.qs);
+    }
+
+    // return options
+    return fetch(this.createUrl(url), options)
+  }
+
+  fetch(...args) {
+    return this.getFetch(...args)
+      .then(async res => {
+        let text
+        let json
+        try {
+          text = await res.text()
+          json = JSON.parse(text)
+        } catch(e) {
+          await this.throwError({
+            err: {
+              status: res.status,
+              statusText: res.statusText,
+              // text: text,
+              message: text,
+            },
+            res,
+          })
         }
-        if (pack.code !== 0) {
-          return this.onError(pack)
-        }
-        return pack
+        return this.afterFetch({
+          json,
+          text,
+          res,
+        })
       })
   }
 }

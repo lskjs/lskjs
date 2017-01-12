@@ -1,7 +1,7 @@
 import bunyan from 'bunyan'
 
 const logger = (ctx) => {
-  const logger = bunyan.createLogger({
+  return bunyan.createLogger({
     name: ctx.name,
     src: __DEV__,
     level: 'trace'
@@ -16,6 +16,5 @@ const logger = (ctx) => {
     //   }
     // }``
   })
-  return logger
 }
 export default logger

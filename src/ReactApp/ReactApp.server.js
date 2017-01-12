@@ -38,8 +38,7 @@ export default class ReactApp extends CoreApp {
     return routes
   }
 
-  /// Synonims
-  ///
+  // Synonims
 
   getReqRootState(req) {
     return {
@@ -48,8 +47,10 @@ export default class ReactApp extends CoreApp {
     }
   }
 
+  Provider = Provider
   createProvider(rootState, req) {
-    return new Provider(rootState, req)
+    return new this.Provider(rootState, req, this.config)
+    // return new this.Provider(rootState, req)
   }
 
   getReqCtx(req) {
@@ -58,6 +59,7 @@ export default class ReactApp extends CoreApp {
       req.provider = this.createProvider(rootState, req)
     }
     const ctx = {
+      config: this.config,
       rootState,
       provider: req.provider,
       history: createMemoryHistory({
@@ -73,11 +75,13 @@ export default class ReactApp extends CoreApp {
   }
 
   getReqProps(req) {
+    const reqCtx = this.getReqCtx(req)
     return {
       path: req.path,
       query: req.query,
       app: this,
-      ctx: this.getReqCtx(req),
+      ctx: reqCtx,
+      appStore: reqCtx && reqCtx.provider,
       assets: this.getAssets(),
       status: 200,
     }
@@ -93,7 +97,5 @@ export default class ReactApp extends CoreApp {
       children: route.component,
     }
   }
-
-
 
 }

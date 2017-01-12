@@ -176,6 +176,10 @@ export default (ctx) => {
     next()
   }
   resourse.parseUser = function (req, res, next) {
+    if (!ctx.config.jwt) {
+      // req.user = {}
+      return next()
+    }
     const options = {
       secret: ctx.config.jwt.secret,
       getToken: req => req.token,

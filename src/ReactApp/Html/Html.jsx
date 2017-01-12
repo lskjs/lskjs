@@ -1,12 +1,51 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes  } from 'react';
+import { Provider } from 'react-tunnel'
 // import useragent from 'useragent'
 import _ from 'lodash'
 import util from 'util'
 import ReactDOM from 'react-dom/server';
 
+export class Root extends Component {
+  static childContextTypes = {
+    history: PropTypes.object.isRequired,
+    insertCss: PropTypes.func.isRequired,
+    rootState: PropTypes.object.isRequired,
+    setRootState: PropTypes.func.isRequired,
+  };
+  constructor(props) {
+    super(props)
+    this.state = props.ctx.rootState || {}
+  }
+
+  componentDidMount() {
+    const html = document.getElementsByTagName("html")[0]
+    html.className = html.className.replace('ua_js_no', 'ua_js_yes')
+  }
+
+  getChildContext() {
+    return {
+      history: this.props.ctx && this.props.ctx.history || (() => {}),
+      insertCss: this.props.ctx && this.props.ctx.insertCss || (() => {}),
+      rootState: this.state,
+      setRootState: (...args) => {
+        this.setState(...args);
+      }
+    };
+  }
+  render() {
+    const provider = this.props.ctx.provider
+    return <Provider provide={provider.provide.bind(provider)}>
+      {() => this.props.component}
+    </Provider>
+  }
+}
+
+
+
 export default class Html {
 
-  static Root = require('./Root').default;
+  static Root = Root;
+  static Root = Root;
   constructor(props) {
     this.props = props || {}
   }
@@ -32,7 +71,7 @@ export default class Html {
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+${this.renderAssets('css')}
 ${this.renderStyle()}
 `
   }
@@ -44,11 +83,17 @@ ${this.renderStyle()}
     return ReactDOM.renderToStaticMarkup(component);
   }
 
-  renderAssets() {
+  renderAssets(type) {
     const props = this.props
-    return props.assets && props.assets.js && (
-      `<script id="js" src="${props.assets.js}"></script>`
-    ) || ''
+
+    if (type === 'css' && props.assets && props.assets.css) {
+      return `<link rel="stylesheet" href="${props.assets.css}">`
+    }
+    if (type === 'js' && props.assets && props.assets.js) {
+      return `<script id="js" src="${props.assets.js}"></script>`
+    }
+    return ''
+
   }
 
   renderFooter() {
@@ -74,7 +119,7 @@ ${debug}
     <script>
       window.__ROOT_STATE__ = ${JSON.stringify(this.getRootState())};
     </script>
-    ${this.renderAssets()}
+    ${this.renderAssets('js')}
     ${this.renderFooter()}
   </body>
 </html>

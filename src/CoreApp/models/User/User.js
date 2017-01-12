@@ -108,5 +108,5 @@ export function getSchema(ctx) {
 
 export default (ctx) => {
   const schema = getSchema(ctx);
-  return ctx.db.model(schema.generateMongooseName('User'), schema.getMongooseSchema())
+  return ctx.db && ctx.db.model(schema.generateMongooseName('User'), schema.getMongooseSchema())
 }

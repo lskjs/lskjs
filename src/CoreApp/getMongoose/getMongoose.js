@@ -14,15 +14,25 @@ export default (ctx, params) => {
     ctx.log.trace('mongoose run')
     return mongoose.connect(params.uri, options)
   }
+  mongoose.reconnect = () => {
+    ctx.log.trace('mongoose reconnect')
+    mongoose.disconnect()
+    mongoose.run()
+  }
+
+  let reconnectIteration = 0;
   mongoose.connection.on('connected', () =>  {
     ctx.log.info('mongoose connected')
+    reconnectIteration = 0;
   });
   mongoose.connection.on('error',  (err) => {
     ctx.log.error('mongoose error', err)
+    const interval = reconnectIteration++ * 2000 + 1000
+    ctx.log.trace(`mongoose reconnect after ${interval} ms`)
+    setTimeout(mongoose.reconnect, interval)
   });
   mongoose.connection.on('disconnected',  () =>  {
-    ctx.log.warn('mongoose disconnected')
-    mongoose.run()
+    ctx.log.trace('mongoose disconnected');
   });
 
   return mongoose

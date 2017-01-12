@@ -102,7 +102,7 @@ export default class ReactApp {
         history.replace(props.redirect);
         return;
       }
-
+      if (__CLIENT__ && window.__CSR__) return false
       this.appInstance = ReactDOM.render(
         <Root {...props} />,
         this.container,
@@ -124,7 +124,7 @@ export default class ReactApp {
       if (__DEV__) {
         this.appInstance = null;
         document.title = `Error: ${error.message}`;
-        ReactDOM.render(<ErrorReporter error={error} />, container);
+        ReactDOM.render(<ErrorReporter error={error} />, this.container);
         return;
       }
 
@@ -145,6 +145,7 @@ export default class ReactApp {
     this.currentLocation = history.location;
     history.listen(this.onLocationChange.bind(this));
     this.onLocationChange(this.currentLocation);
+    this.hmrInit()
     return Promise.resolve()
   }
 
@@ -158,35 +159,51 @@ export default class ReactApp {
     // }
   }
 
-  hmrInit() {
-    if (module.hot) {
-      module.hot.accept('./routes', () => {
-        // const routes = this.getUniversalRoutes();
-        if (this.appInstance) {
-          try {
-            deepForceUpdate(this.appInstance);
-          } catch (error) {
-            this.appInstance = null;
-            document.title = `Hot Update Error: ${error.message}`;
-            ReactDOM.render(<ErrorReporter error={error} />, this.container);
-            return;
-          }
-        }
-        this.onLocationChange(this.currentLocation);
-      });
+  hmrUpdate() {
+    if (this.appInstance) {
+      try {
+        deepForceUpdate(this.appInstance);
+      } catch (error) {
+        this.appInstance = null;
+        document.title = `Hot Update Error: ${error.message}`;
+        ReactDOM.render(<ErrorReporter error={error} />, this.container);
+        return;
+      }
     }
+    this.onLocationChange(this.currentLocation);
+  }
+  hmrInit() {
+    // if (module.hot) {
+    // module.hot.accept('./routes', () => {
+    //   // const routes = this.getUniversalRoutes();
+    //   if (this.appInstance) {
+    //     try {
+    //       deepForceUpdate(this.appInstance);
+    //     } catch (error) {
+    //       this.appInstance = null;
+    //       document.title = `Hot Update Error: ${error.message}`;
+    //       ReactDOM.render(<ErrorReporter error={error} />, this.container);
+    //       return;
+    //     }
+    //   }
+    //   this.onLocationChange(this.currentLocation);
+    // });
   }
 
   req = {
     rootState: window.__ROOT_STATE__ || {},
   }
+
+
+
   /// Synonims
   getReqRootState(req) {
     return req.rootState
   }
 
+  Provider = Provider
   createProvider(rootState, req) {
-    return new Provider(rootState, req)
+    return new this.Provider(rootState, req, this.config)
   }
 
   getReqCtx(req) {
@@ -195,6 +212,7 @@ export default class ReactApp {
       req.provider = this.createProvider(rootState, req)
     }
     const ctx = {
+      config: this.config,
       rootState,
       provider: req.provider,
       history,
@@ -207,11 +225,13 @@ export default class ReactApp {
     return ctx
   }
   getReqProps(req) {
+    const reqCtx = this.getReqCtx(req)
     return {
       path: location.pathname,
       query: queryString.parse(location.search),
       app: this,
-      ctx: this.getReqCtx(req),
+      ctx: reqCtx,
+      appStore: reqCtx && reqCtx.provider,
       status: 200,
     }
   }
