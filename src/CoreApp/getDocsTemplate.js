@@ -1,137 +1,238 @@
 export default (ctx, params) => {
   const url = params.docsJson
   return `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>${params.name} API docs</title>
-  <link rel="icon" type="image/png" href="//cdn.mgbeta.ru/swagger/images/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="//cdn.mgbeta.ru/swagger/images/favicon-16x16.png" sizes="16x16" />
-  <link href='//cdn.mgbeta.ru/swagger/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='//cdn.mgbeta.ru/swagger/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='//cdn.mgbeta.ru/swagger/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='//cdn.mgbeta.ru/swagger/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='//cdn.mgbeta.ru/swagger/css/print.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' media='print' rel='stylesheet' type='text/css'/>
-  <style>
-    .token{
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-    }
-    .token__input{
-      width: 100%;
-      margin-top: 5px;
-    }
-    .text-center{
-      text-align: center;
-    }
-  </style>
+  <html>
+  <head>
+      <title>${params.name} Explorer</title>
 
-  <script src='//cdn.mgbeta.ru/swagger/lib/object-assign-pollyfill.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/handlebars-4.0.5.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/lodash.min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/backbone-min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/swagger-ui.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/highlight.9.1.0.pack.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/highlight.9.1.0.pack_extended.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/jsoneditor.min.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/marked.js' type='text/javascript'></script>
-  <script src='//cdn.mgbeta.ru/swagger/lib/swagger-oauth.js' type='text/javascript'></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Some basic translations -->
-  <!-- <script src='//cdn.mgbeta.ru/swagger/lang/translator.js' type='text/javascript'></script> -->
-  <!-- <script src='//cdn.mgbeta.ru/swagger/lang/ru.js' type='text/javascript'></script> -->
-  <!-- <script src='//cdn.mgbeta.ru/swagger/lang/en.js' type='text/javascript'></script> -->
+      <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+      <!--style type="text/css"></style-->
 
-  <script type="text/javascript">
-    $(function () {
-      var url = window.location.search.match(/url=([^&]+)/);
-      if (url && url.length > 1) {
-        url = decodeURIComponent(url[1]);
-      } else {
-        // Путь
-        url = "${url}";
-      }
+      <link href="http://swaggerui.herokuapp.com/css/index.css" rel="stylesheet"/>
+      <link href='http://swaggerui.herokuapp.com/css/standalone.css' rel='stylesheet'/>
+      <link href='http://swaggerui.herokuapp.com/css/api-explorer.css' rel='stylesheet' type='text/css'/>
+      <link href='http://swaggerui.herokuapp.com/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
 
-      hljs.configure({
-        highlightSizeThreshold: 5000
-      });
+      <script src='http://swaggerui.herokuapp.com/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/jquery.slideto.min.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/jquery.wiggle.min.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/handlebars-2.0.0.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/underscore-min.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/backbone-min.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/swagger-ui.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/jsoneditor.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/highlight.7.3.pack.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/marked.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/swagger-oauth.js' type='text/javascript'></script>
+      <script src='http://swaggerui.herokuapp.com/lib/bootstrap.min.js' type='text/javascript'></script>
 
-      // Pre load translate...
-      if(window.SwaggerTranslator) {
-        window.SwaggerTranslator.translate();
-      }
-      window.swaggerUi = new SwaggerUi({
-        url: url,
-        dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-        onComplete: function(swaggerApi, swaggerUi){
-          if(typeof initOAuth == "function") {
-            initOAuth({
-              clientId: "your-client-id",
-              clientSecret: "your-client-secret-if-required",
-              realm: "your-realms",
-              appName: "your-app-name",
-              scopeSeparator: " ",
-              additionalQueryStringParams: {}
-            });
-          }
+      <script type="text/javascript">
+          jQuery.browser = jQuery.browser || {};
+          (function () {
+              jQuery.browser.msie = jQuery.browser.msie || false;
+              jQuery.browser.version = jQuery.browser.version || 0;
+              if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                  jQuery.browser.msie = true;
+                  jQuery.browser.version = RegExp.$1;
+              }
+          })();
+      </script>
 
-          if(window.SwaggerTranslator) {
-            window.SwaggerTranslator.translate();
-          }
-        },
-        onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
-        },
-        docExpansion: "none",
-        jsonEditor: false,
-        defaultModelRendering: 'schema',
-        showRequestHeaders: false
-      });
+      <script type="text/javascript">
+          $(function () {
+              var url = window.location.search.match(/url=([^&]+)/);
+              if (url && url.length > 1) {
+                  url = decodeURIComponent(url[1]);
+              } else {
+                  url = "${url}";
+              }
 
-      window.swaggerUi.load();
+              window.swaggerUi = new SwaggerUi({
+                  url: url,
+                  dom_id: "swagger-ui-container",
+                  supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                  onComplete: function (swaggerApi, swaggerUi) {
+                      if (typeof initOAuth == "function") {
 
-      function log() {
-        if ('console' in window) {
-          console.log.apply(console, arguments);
-        }
-      }
-  });
-  </script>
-</head>
+                          initOAuth({
+                              clientId: "ffe7748a-3a3f-4860-a02a-42ab08e4fde2",
+                              realm: "realm",
+                              appName: "Swagger"
+                          });
 
-<body class="swagger-section">
-<div id='header'>
-  <div class="swagger-ui-wrap">
-    <a id="logo" href="/"><img class="logo__img" alt="swagger" height="30" width="30" src="//cdn.mgbeta.ru/swagger/images/logo_small.png" /><span class="logo__title">${params.name}</span></a>
-    <form id='api_selector'>
-      <div class='input'><input placeholder="//example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-      <div id='auth_container'></div>
-      <div class='input'><a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a></div>
-    </form>
-  </div>
-</div>
-<div class = "token swagger-section swagger-ui-wrap">
-  <h2 class = "text-center">Token</h2>
-  <input type = "text" name = "token form-control" class = "token__input">
-</div>
-<div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
-<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
-<script type = "text/javascript">
-  $(document).ready(function(){
-    $('.token__input').change(function(){
-      var el = $(this)
-      var token = el.val()
-      swaggerUi.api.clientAuthorizations.add("x-access-token", new SwaggerClient.ApiKeyAuthorization("x-access-token", token, "header"));
-    })
-  })
-</script>
-</body>
-</html>`
+                      }
+
+                      $('pre code').each(function (i, e) {
+                          hljs.highlightBlock(e)
+                      });
+
+                      if (swaggerUi.options.url) {
+                          $('#input_baseUrl').val(swaggerUi.options.url);
+                      }
+                      if (swaggerUi.options.apiKey) {
+                          $('#input_apiKey').val(swaggerUi.options.apiKey);
+                      }
+
+                      $("[data-toggle='tooltip']").tooltip();
+
+                      addApiKeyAuthorization();
+                  },
+                  onFailure: function (data) {
+                      log("Unable to Load SwaggerUI");
+                  },
+                  docExpansion: "none",
+                  sorter: "alpha"
+              });
+
+              function addApiKeyAuthorization() {
+                  var key = encodeURIComponent($('#input_apiKey')[0].value);
+                  if (key && key.trim() != "") {
+                      var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", "Bearer " + key, "header");
+                      window.swaggerUi.api.clientAuthorizations.add("key", apiKeyAuth);
+                      log("added key " + key);
+                  }
+              }
+
+              $('#input_apiKey').change(addApiKeyAuthorization);
+              // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
+              /*
+               var apiKey = "myApiKeyXXXX123456789";
+               $('#input_apiKey').val(apiKey);
+               */
+
+              window.swaggerUi.load();
+
+              function log() {
+                  if ('console' in window) {
+                      console.log.apply(console, arguments);
+                  }
+              }
+          });
+      </script>
+
+      <script type="text/javascript">
+
+          $(function () {
+
+              $(window).scroll(function () {
+                  var sticky = $(".sticky-nav");
+
+                  i(sticky);
+                  r(sticky);
+
+                  function n() {
+                      return window.matchMedia("(min-width: 992px)").matches
+                  }
+
+                  function e() {
+                      n() ? sticky.parents(".sticky-nav-placeholder").removeAttr("style") : sticky.parents(".sticky-nav-placeholder").css("min-height", sticky.outerHeight())
+                  }
+
+                  function i(n) {
+                      n.hasClass("fixed") || (navOffset = n.offset().top);
+                      e();
+                      $(window).scrollTop() > navOffset ? $(".modal.in").length || n.addClass("fixed") : n.removeClass("fixed")
+                  }
+
+                  function r(e) {
+                      function i() {
+                          var i = $(window).scrollTop(), r = e.parents(".sticky-nav");
+                          return r.hasClass("fixed") && !n() && (i = i + r.outerHeight() + 40), i
+                      }
+
+                      function r(e) {
+                          var t = o.next("[data-endpoint]"), n = o.prev("[data-endpoint]");
+                          return "next" === e ? t.length ? t : o.parent().next().find("[data-endpoint]").first() : "prev" === e ? n.length ? n : o.parent().prev().find("[data-endpoint]").last() : []
+                      }
+
+                      var nav = e.find("[data-navigator]");
+                      if (nav.find("[data-endpoint][data-selected]").length) {
+                          var o = nav.find("[data-endpoint][data-selected]"),
+                              a = $("#" + o.attr("data-endpoint")),
+                              s = a.offset().top,
+                              l = (s + a.outerHeight(), r("next")),
+                              u = r("prev");
+                          if (l.length) {
+                              {
+                                  var d = $("#" + l.attr("data-endpoint")), f = d.offset().top;
+                                  f + d.outerHeight()
+                              }
+                              i() >= f && c(l)
+                          }
+                          if (u.length) {
+                              var p = $("#" + u.attr("data-endpoint")),
+                              g = u.offset().top;
+                              v = (g + p.outerHeight(), 100);
+                              i() < s - v && c(u)
+                          }
+                      }
+                  }
+
+                  function s() {
+                      var e = $(".sticky-nav [data-navigator]"),
+                          n = e.find("[data-endpoint]").first();
+                      n.attr("data-selected", "");
+                      u.find("[data-selected-value]").html(n.text())
+                  }
+
+                  function c(e) {
+                      {
+                          var n = $(".sticky-nav [data-navigator]");
+                          $("#" + e.attr("data-endpoint"))
+                      }
+                      n.find("[data-resource]").removeClass("active");
+                      n.find("[data-selected]").removeAttr("data-selected");
+                      e.closest("[data-resource]").addClass("active");
+                      e.attr("data-selected", "");
+                      sticky.find("[data-selected-value]").html(e.text())
+                  }
+              });
+
+          });
+      </script>
+
+      <script type="text/javascript">
+          $(function () {
+              $("[data-toggle='tooltip']").tooltip();
+          });
+      </script>
+
+  </head>
+
+  <body class="page-docs" style="zoom: 1;">
+  <header class="site-header">
+      <nav role="navigation" class="navbar navbar-default">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" data-toggle="collapse" data-target="#navbar-collapse" class="navbar-toggle"><span
+                          class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                          class="icon-bar"></span><span class="icon-bar"></span></button>
+                  <h1 class="navbar-brand"><a href="${params.docs}"><span>${params.name} Explorer</span></a></h1>
+              </div>
+              <div id="navbar-collapse" class="collapse navbar-collapse">
+                  <ul class="nav navbar-nav navbar-left">
+                      <li class="li-why"><a href="${params.docs}" style="font-size: 25px; padding-left: 0px">${params.name} Explorer</a></li>
+
+                  </ul>
+              </div>
+          </div>
+      </nav>
+  </header>
+
+  <section class="content">
+      <div id="api2-explorer">
+          <div class="swagger-section page-docs" style="zoom: 1">
+              <div class="main-section">
+                  <div id="swagger-ui-container" class="swagger-ui-wrap">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  </body>
+  </html>`
 }
