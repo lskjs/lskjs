@@ -8,17 +8,8 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import cp from 'child_process';
-import fs from './utils/fs';
+import { writeFile, makeDir } from './utils/fs';
 import mkdirp from 'mkdirp';
-
-const writeFile = (file, contents) => new Promise((resolve, reject) => {
-  fs.writeFile(file, contents, 'utf8', err => err ? reject(err) : resolve());
-});
-
-const makeDir = (name) => new Promise((resolve, reject) => {
-  mkdirp(name, err => err ? reject(err) : resolve());
-});
-
 
 
 export default class Runner {
@@ -38,7 +29,7 @@ export default class Runner {
 
   async clean() {
     await del(['.tmp', 'build/*', '!build/.git'], { dot: true });
-    await fs.makeDir('build/public');
+    await makeDir('build/public');
   }
 
 
@@ -50,7 +41,7 @@ export default class Runner {
      // ncp('src/content', 'build/content'),
    ]);
 
-   await fs.writeFile(this.resolvePath('build/package.json'), JSON.stringify({
+   await writeFile(this.resolvePath('build/package.json'), JSON.stringify({
      private: true,
      engines: this.pkg.engines,
      dependencies: this.pkg.dependencies,
@@ -277,6 +268,7 @@ export default class Runner {
 
  server = null
  runServer(cb) {
+   console.log('runServer');
    const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//;
 
    const { output } = this.webpackConfig.find(x => x.target === 'node');
@@ -334,6 +326,7 @@ export default class Runner {
 
 
   async buildStatic(routes) {
+    console.log('buildStatic', routes);
     if (!routes) {
       routes = [
         '/'
@@ -348,14 +341,49 @@ export default class Runner {
 
 
 
-
   async render(routes) {
+    console.log('render', routes);
+    if (!routes) {
+      routes = [
+        '/',
+      ];
+    }
+    const server = await this.runServer();
+
+    // add dynamic routes
+    // const products = await fetch(`http://${server.host}/api/products`).then(res => res.json());
+    // products.forEach(product => routes.push(
+    //   `/product/${product.uri}`,
+    //   `/product/${product.uri}/specs`
+    // ));
+
+    await Promise.all(routes.map(async (route, index) => {
+      const url = `http://${server.host}${route}`;
+      const fileName = route.endsWith('/') ? 'index.html' : `${path.basename(route, '.html')}.html`;
+      const dirName = path.join('build/public', route.endsWith('/') ? route : path.dirname(route));
+      const dist = `${dirName}${fileName}`;
+      const timeStart = new Date();
+      const response = await fetch(url);
+      const timeEnd = new Date();
+      const text = await response.text();
+      await makeDir(dirName);
+      await writeFile(dist, text);
+      const time = timeEnd.getTime() - timeStart.getTime();
+      console.log(`#${index + 1} ${dist} => ${response.status} ${response.statusText} (${time} ms)`);
+    }));
+
+    server.kill('SIGTERM');
+
+  }
+  async render2(routes) {
+    console.log('render', routes);
     if (!routes) {
       routes = [
         '/',
       ];
     }
     let server;
+
     await new Promise(resolve => (server = this.runServer(resolve)));
 
     await routes.reduce((promise, route) => promise.then(async () => {

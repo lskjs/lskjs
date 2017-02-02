@@ -2093,6 +2093,10 @@ glob-base@^0.3.0:
     glob-parent "^2.0.0"
     is-glob "^2.0.0"
 
+glob-loader@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/glob-loader/-/glob-loader-0.3.0.tgz#bc2ca16e611e2054492ee45cc0017d5ef1d53877"
+
 glob-parent@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-2.0.0.tgz#81383d72db054fcccf5336daa902f182f6edbb28"
