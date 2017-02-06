@@ -22,10 +22,10 @@ export default class Runner {
     if (this.dirname) return path.resolve(this.dirname, ...args)
     return path.resolve(...args)
   }
-
-  start() {
-    return require('tools/start').default(this)
-  }
+  //
+  // start() {
+  //   return require('tools/start').default(this)
+  // }
 
   async clean() {
     await del(['.tmp', 'build/*', '!build/.git'], { dot: true });
@@ -157,7 +157,7 @@ export default class Runner {
   }
 
   async start() {
-    // console.log('@@@@@@start');
+    console.log('Runner.start');
     const webpackConfig = this.webpackConfig
     const [config] = webpackConfig
     await this.clean();
@@ -194,27 +194,33 @@ export default class Runner {
       let handleBundleComplete = async () => {
         handleBundleComplete = stats => !stats.stats[1].compilation.errors.length && this.runServer();
 
-        const server = await this.runServer();
-        const bs = Browsersync.create();
-        console.log('server.host,', server.host);
-        bs.init({
-          ...(config.debug ? {} : { notify: false, ui: false }),
+        try {
+          // console.log('before AWAIT server');
+          const server = await this.runServer();
+          // console.log('AWAIT server');
+          const bs = Browsersync.create();
+          // console.log('server.host,', server.host);
+          bs.init({
+            ...(config.debug ? {} : { notify: false, ui: false }),
 
-          proxy: {
-            target: server.host,
-            middleware: [wpMiddleware, hotMiddleware],
-            proxyOptions: {
-              xfwd: true,
+            proxy: {
+              target: server.host,
+              middleware: [wpMiddleware, hotMiddleware],
+              proxyOptions: {
+                xfwd: true,
+              },
             },
-          },
-        }, resolve);
+          }, resolve);
+        } catch(err)  {
+          console.log('Runner.start server error', err);
+        }
       };
 
       bundler.plugin('done', stats => handleBundleComplete(stats));
     });
   }
 
-  async start2(ctx) {
+  async oldStart(ctx) {
     await this.clean();
     await this.copy({ watch: true });
     await new Promise(resolve => {
@@ -267,19 +273,20 @@ export default class Runner {
   }
 
  server = null
- runServer(cb) {
-   console.log('runServer');
+ runServer() {
+  //  console.log('Runner.runServer');
    const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//;
 
    const { output } = this.webpackConfig.find(x => x.target === 'node');
    const serverPath = path.join(output.path, output.filename);
 
    process.on('exit', () => {
+    //  console.log('process exit');
      if (this.server) {
        this.server.kill('SIGTERM');
      }
    });
-   return new Promise(resolve => {
+   return new Promise((resolve, reject) => {
        let pending = true;
 
        const onStdOut = (data) => {
@@ -310,7 +317,8 @@ export default class Runner {
        if (pending) {
          this.server.once('exit', (code, signal) => {
            if (pending) {
-             throw new Error(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
+             reject(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
+            //  throw new Error(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
            }
          });
        }

@@ -150,7 +150,7 @@ export default class WebpackConfig {
           ]
         },
         {
-          ext: 'sass',
+          ext: '(sass|scss)',
           loaders: [
             'postcss-loader?pack=sass',
             'sass-loader',
@@ -239,34 +239,36 @@ export default class WebpackConfig {
           'postcss-loader?pack=default',
         ],
       },
-      // {
-      //   test: /\.global\.scss$/,
-      //   loaders: [
-      //     'isomorphic-style-loader',
-      //     `css-loader?${JSON.stringify({
-      //       sourceMap: this.isDebug(),
-      //       modules: false,
-      //       minimize: !this.isDebug(),
-      //     })}`,
-      //     'postcss-loader?pack=sass',
-      //     'sass-loader',
-      //   ],
-      // },
-      // {
-      //   test: /\.scss$/,
-      //   exclude: /(global.scss)/,
-      //   loaders: [
-      //     'isomorphic-style-loader',
-      //     `css-loader?${JSON.stringify({
-      //       sourceMap: this.isDebug(),
-      //       modules: true,
-      //       localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-      //       minimize: !this.isDebug(),
-      //     })}`,
-      //     'postcss-loader?pack=sass',
-      //     'sass-loader',
-      //   ],
-      // },
+      {
+        test: /\.g(lobal)?\.scss$/,
+        loaders: [
+          ExtractTextPlugin.extract(
+            'style-loader',
+          ),
+          `css-loader?${JSON.stringify({
+            sourceMap: this.isDebug(),
+            modules: false,
+            minimize: !this.isDebug(),
+          })}`,
+          'postcss-loader?pack=sass',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /\.g(lobal)?\.scss$/,
+        loaders: [
+          'isomorphic-style-loader',
+          `css-loader?${JSON.stringify({
+            sourceMap: this.isDebug(),
+            modules: true,
+            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+            minimize: !this.isDebug(),
+          })}`,
+          'postcss-loader?pack=sass',
+          'sass-loader',
+        ],
+      },
     ]
   }
   getPostcssModule(bundler) {
