@@ -40,8 +40,6 @@ export class Root extends Component {
   }
 }
 
-
-
 export default class Html {
 
   static Root = Root;

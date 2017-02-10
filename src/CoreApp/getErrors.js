@@ -1,4 +1,4 @@
-import AppError from './AppError'
+import AppError from './AppError';
 
 export default (ctx) => {
   return {
@@ -8,5 +8,5 @@ export default (ctx) => {
     e403: message => (new AppError(403, message, 403)),
     e401: message => (new AppError(401, message, 401)), // unauth
     e400: message => (new AppError(400, message, 400)),
-  }
-}
+  };
+};

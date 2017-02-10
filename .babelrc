@@ -1,16 +1,10 @@
 {
   "presets": [
-    "react",
     "es2015",
-    "stage-0"
+    "react",
+    "node5",
+    "stage-2"
   ],
-  "env": {
-    "test": {
-      "plugins": [
-        "rewire"
-      ]
-    }
-  },
   "plugins": [
     "jsx-control-statements",
     "react-require",

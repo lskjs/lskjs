@@ -2,42 +2,34 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "globals": {
+    "__SERVER__": true,
+    "__CLIENT__": true,
+    "__PROD__": true,
+    "__STAGE__": true,
     "__DEV__": true,
-    "For": true,
-    "If": false
+    "document": true,
+    "window": true,
+    "screen": true,
+    "If": true
   },
-  "env": {
-    "browser": true
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
   },
   "rules": {
-    "global-require": 1,
-    "prefer-template": 1,
-    "no-underscore-dangle": 0,
-    "semi": 0,
-    "react/prop-types": 1,
-    "react/wrap-multilines": 0,
-    "react/react-in-jsx-scope": 0,
-    "react/jsx-boolean-value": 0,
-    "arrow-body-style": 0,
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
-    "import/no-unresolved": [
-      2,
-      {
-        commonjs: true,
-        amd: false
-      }
-    ],
-    "object-curly-spacing": 1,
-    "func-names": 0,
-    "react/jsx-sort-props": 0,
-    "jsx-quotes": [
-      1,
-      "prefer-single"
-    ]
+    "no-console": "warn",
+    "arrow-body-style": "off",
+    "func-names": "warn",
+    "no-param-reassign": "warn",
+    "react/react-in-jsx-scope": "warn",
+    "no-underscore-dangle": "warn",
+    "global-require": "warn",
+    "react/prop-types": "warn",
+    "react/jsx-first-prop-new-line": "warn",
+    "guard-for-in": "off",
+    "no-restricted-syntax": ["error", "WithStatement"],
+    "react/forbid-prop-types": "off"
   }
 }

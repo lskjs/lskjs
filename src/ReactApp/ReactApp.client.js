@@ -2,24 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import UniversalRouter from 'universal-router';
-import queryString from 'query-string';
+import qs from 'query-string';
 import { createPath } from 'history/PathUtils';
-import mixin from 'lego-starter-kit/utils/mixin'
+import mixin from 'lego-starter-kit/utils/mixin';
 import history from './core/history';
 import { ErrorReporter, deepForceUpdate } from './core/devUtils';
-import { autobind } from 'core-decorators'
-import routes from './routes'
-import Html from './Html'
-import Provider from './Provider'
+import { autobind } from 'core-decorators';
+import routes from './routes';
+import Html from './Html';
+import Provider from './Provider';
 
 
-const LOGGING = false
+const LOGGING = false;
 
 
 export default class ReactApp {
   static mixin = mixin;
   constructor(params = {}) {
-    Object.assign(this, params)
+    Object.assign(this, params);
   }
 
   static Html = Html;
@@ -64,9 +64,8 @@ export default class ReactApp {
   }
 
   getUniversalRoutes() {
-    return routes
+    return routes;
   }
-
 
 
   // appComponent({ component, ...props }) {
@@ -78,7 +77,7 @@ export default class ReactApp {
   currentLocation = null
   @autobind
   async onLocationChange(location) {
-    const Root = this.constructor.Html.Root
+    const Root = this.constructor.Html.Root;
     LOGGING && console.log('onLocationChange', location);
     this.scrollPositionsHistory[this.currentLocation.key] = {
       scrollX: window.pageXOffset,
@@ -91,7 +90,7 @@ export default class ReactApp {
 
 
     try {
-      const props = await this.getHtmlProps(this.req)
+      const props = await this.getHtmlProps(this.req);
 
       // console.log('??', this.currentLocation.key , location.key);
       if (this.currentLocation.key !== location.key) {
@@ -102,16 +101,15 @@ export default class ReactApp {
         history.replace(props.redirect);
         return;
       }
-      if (__CLIENT__ && window.__CSR__) return false
+      if (__CLIENT__ && window.__CSR__) return false;
       this.appInstance = ReactDOM.render(
         <Root {...props} />,
         this.container,
         () => {
           this.postRender();
           this.renderCount += 1;
-        }
+        },
       );
-
     } catch (error) {
       console.error('error!!@', error); // eslint-disable-line no-console
 
@@ -136,7 +134,7 @@ export default class ReactApp {
   @autobind
   init() {
     LOGGING && console.log('init');
-    this.rootState = window.__ROOT_STATE__ || {}
+    this.rootState = window.__ROOT_STATE__ || {};
     FastClick.attach(document.body);
     this.container = document.getElementById('root');
     if (window.history && 'scrollRestoration' in window.history) {
@@ -145,8 +143,8 @@ export default class ReactApp {
     this.currentLocation = history.location;
     history.listen(this.onLocationChange.bind(this));
     this.onLocationChange(this.currentLocation);
-    this.hmrInit()
-    return Promise.resolve()
+    this.hmrInit();
+    return Promise.resolve();
   }
 
   run() {
@@ -193,27 +191,37 @@ export default class ReactApp {
   req = {
     rootState: window.__ROOT_STATE__ || {},
   }
+  getReq() {
+    return {
+      ...this.req,
+      hostname: window.location.hostname,
+      path: window.location.pathname,
+      query: qs.parse(window.location.search),
+    };
+  }
 
 
-
-  /// Synonims
+  // / Synonims
   getReqRootState(req) {
-    return req.rootState
+    return req.rootState;
   }
 
   Provider = Provider
   createProvider(rootState, req) {
-    return new this.Provider(rootState, req, this.config)
+    // console.log('createProvider');
+    return new this.Provider(rootState, req, this.config);
   }
 
   getReqCtx(req) {
-    const rootState = this.getReqRootState(req)
+    const rootState = this.getReqRootState(req);
     if (req.provider == null) {
-      req.provider = this.createProvider(rootState, req)
+      req.provider = this.createProvider(rootState, req);
+      this.provider = req.provider;
     }
     const ctx = {
       config: this.config,
       rootState,
+      req,
       provider: req.provider,
       history,
       style: [],
@@ -221,29 +229,29 @@ export default class ReactApp {
         const removeCss = styles.map(x => x._insertCss());
         return () => { removeCss.forEach(f => f()); };
       },
-    }
-    return ctx
+    };
+    return ctx;
   }
   getReqProps(req) {
-    const reqCtx = this.getReqCtx(req)
+    const reqCtx = this.getReqCtx(req);
     return {
       path: location.pathname,
-      query: queryString.parse(location.search),
+      query: qs.parse(location.search),
       app: this,
       ctx: reqCtx,
       appStore: reqCtx && reqCtx.provider,
       status: 200,
-    }
+    };
   }
 
   async getHtmlProps(req) {
-    const reqProps = await this.getReqProps(req)
-    const route = await UniversalRouter.resolve(this.getUniversalRoutes(), reqProps)
+    const reqProps = await this.getReqProps(req);
+    const route = await UniversalRouter.resolve(this.getUniversalRoutes(), reqProps);
     return {
       ...reqProps,
       ...route,
-      route: route,
+      route,
       children: route.component,
-    }
+    };
   }
 }

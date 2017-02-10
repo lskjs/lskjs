@@ -1,5 +1,9 @@
-export default (ctx, params) => {
-  const url = params.docsJson
+export default (params) => {
+  if (typeof params === 'string') {
+    params = {
+      url: params,
+    };
+  }
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +59,7 @@ export default (ctx, params) => {
         url = decodeURIComponent(url[1]);
       } else {
         // Путь
-        url = "${url}";
+        url = "${params.url}";
       }
 
       hljs.configure({
@@ -119,19 +123,27 @@ export default (ctx, params) => {
 </div>
 <div class = "token swagger-section swagger-ui-wrap">
   <h2 class = "text-center">Token</h2>
-  <input type = "text" name = "token form-control" class = "token__input">
+  <input type = "text" name = "token form-control" class = "token__input" value = "${params.devToken || ''}">
 </div>
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 <script type = "text/javascript">
   $(document).ready(function(){
+    var localStorage = window.localStorage;
     $('.token__input').change(function(){
-      var el = $(this)
-      var token = el.val()
+      var el = $(this);
+      var token = el.val();
+      localStorage.setItem('token', token);
       swaggerUi.api.clientAuthorizations.add("x-access-token", new SwaggerClient.ApiKeyAuthorization("x-access-token", token, "header"));
     })
+    var _token = localStorage.getItem('token');
+    console.log(_token);
+    if(_token) {
+      $('.token__input').val(_token);
+    }
+    swaggerUi.api.clientAuthorizations.add("x-access-token", new SwaggerClient.ApiKeyAuthorization("x-access-token", $('.token__input').val(), "header"));
   })
 </script>
 </body>
-</html>`
-}
+</html>`;
+};

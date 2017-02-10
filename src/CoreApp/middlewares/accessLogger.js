@@ -1,4 +1,5 @@
-var cache = [
+import _ from 'lodash';
+const cache = [
   '',
   ' ',
   '  ',
@@ -8,30 +9,30 @@ var cache = [
   '      ',
   '       ',
   '        ',
-  '         '
+  '         ',
 ];
 
-function leftPad (str, len, ch) {
+function leftPad(str, len, ch) {
   // convert `str` to `string`
-  str = str + '';
+  str = `${str}`;
   // `len` is the `pad`'s length now
   //
-  let reverse = 0
+  let reverse = 0;
   if (len < 0) {
-    len *= -1
-    reverse = 1
+    len *= -1;
+    reverse = 1;
   }
-  len = len - str.length;
+  len -= str.length;
   // doesn't need to pad
   if (len <= 0) return str;
   // `ch` defaults to `' '`
   if (!ch && ch !== 0) ch = ' ';
   // convert `ch` to `string`
-  ch = ch + '';
+  ch = `${ch}`;
   // cache common use cases
   if (ch === ' ' && len < 10) return reverse ? str + cache[len] : cache[len] + str;
   // `pad` starts with an empty string
-  var pad = '';
+  let pad = '';
   // loop
   while (true) {
     // add `ch` to `pad` if `len` is odd
@@ -61,37 +62,38 @@ function levelFn(data) {
   return 'info';
 }
 
-let urlPad = -20
+const urlPad = -20;
 
 function logStart(data) {
-  return `${leftPad(data.method, 4)} ${leftPad(data.url, urlPad)} #${data.reqId}`// + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
+  return `${leftPad(data.method, 4)} ${leftPad(data.url, urlPad)} #${data.reqId}`;// + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
 }
 
 function logFinish(data) {
-  const time = (data.duration || 0).toFixed(3)
-  const method = leftPad(data.method, 4)
-  const length = data.length || 0
-  return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(data.status, 3)} ${leftPad(time, 7)}ms ${length}b `
+  const time = (data.duration || 0).toFixed(3);
+  const method = leftPad(data.method, 4);
+  const length = data.length || 0;
+  return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(data.status, 3)} ${leftPad(time, 7)}ms ${length}b `;
 }
 
-export default (ctx) => ([
-  (req, res, next) => {
-    const data = {}
+export default (ctx) => {
+  if (!_.has(ctx, 'config.middlewares.accessLogger')) return null;
+  return (req, res, next) => {
+    const data = {};
     const log = req.log.child({
       component: 'req',
     });
 
-    data.reqId = req.reqId
-    data.method = req.method
-    if (req.ws) data.method = 'WS'
-    data.host = req.headers.host
-    data.url = (req.baseUrl || '') + (req.url || '-')
-    data.referer = req.header('referer') || req.header('referrer')
-    data.ua = req.header('user-agent')
+    data.reqId = req.reqId;
+    data.method = req.method;
+    if (req.ws) data.method = 'WS';
+    data.host = req.headers.host;
+    data.url = (req.baseUrl || '') + (req.url || '-');
+    data.referer = req.header('referer') || req.header('referrer');
+    data.ua = req.header('user-agent');
     data.ip = req.ip || req.connection.remoteAddress ||
         (req.socket && req.socket.remoteAddress) ||
         (req.socket.socket && req.socket.socket.remoteAddress) ||
-        '127.0.0.1'
+        '127.0.0.1';
 
     if (__DEV__) {
       log.debug(data, logStart(data));
@@ -102,16 +104,16 @@ export default (ctx) => ([
 
     const hrtime = process.hrtime();
     function logging() {
-      data.status = res.statusCode
-      data.length = res.getHeader('Content-Length')
+      data.status = res.statusCode;
+      data.length = res.getHeader('Content-Length');
 
       const diff = process.hrtime(hrtime);
-      data.duration = diff[0] * 1e3 + diff[1] * 1e-6
+      data.duration = diff[0] * 1e3 + diff[1] * 1e-6;
 
       log[levelFn(data)](data, logFinish(data));
     }
     res.on('finish', logging);
     res.on('close', logging);
     next();
-  }
-])
+  };
+};

@@ -1,5 +1,5 @@
 export default function () {
   return {
-    Auth: require('./Auth').default(...arguments),
+    Auth: require('./Auth').default(...arguments)
   }
 }

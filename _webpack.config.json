@@ -57,8 +57,9 @@
         {
           "test": {},
           "loaders": [
-            "isomorphic-style-loader",
-            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}"
+            "/Users/isuvorov/projects/lego-starter-kit/node_modules/extract-text-webpack-plugin/loader.js?{\"remove\":true}!style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}",
+            "postcss-loader?pack=default"
           ]
         },
         {
@@ -73,27 +74,20 @@
         {
           "test": {},
           "loaders": [
-            "isomorphic-style-loader",
+            "/Users/isuvorov/projects/lego-starter-kit/node_modules/extract-text-webpack-plugin/loader.js?{\"remove\":true}!style-loader",
             "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}",
-            "postcss-loader?pack=default"
-          ]
-        },
-        {
-          "test": {},
-          "loaders": [
-            "isomorphic-style-loader",
-            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
             "postcss-loader?pack=sass",
             "sass-loader"
           ]
         },
         {
           "test": {},
+          "exclude": {},
           "loaders": [
             "isomorphic-style-loader",
             "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
             "postcss-loader?pack=sass",
-            "stylus"
+            "sass-loader"
           ]
         },
         {
@@ -130,6 +124,11 @@
         }
       },
       {
+        "filename": "[name].css?[chunkhash]",
+        "options": {},
+        "id": 1
+      },
+      {
         "options": {
           "path": "/Users/isuvorov/projects/lego-starter-kit/build",
           "filename": "assets.js",
@@ -155,7 +154,7 @@
       "cached": false,
       "cachedAssets": false
     },
-    "devtool": "cheap-module-eval-source-map"
+    "devtool": "cheap-module-source-map"
   },
   {
     "context": "/Users/isuvorov/projects/lego-starter-kit/src",
@@ -215,8 +214,9 @@
         {
           "test": {},
           "loaders": [
-            "isomorphic-style-loader",
-            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}"
+            "/Users/isuvorov/projects/lego-starter-kit/node_modules/extract-text-webpack-plugin/loader.js?{\"remove\":true}!style-loader",
+            "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}",
+            "postcss-loader?pack=default"
           ]
         },
         {
@@ -231,27 +231,20 @@
         {
           "test": {},
           "loaders": [
-            "isomorphic-style-loader",
+            "/Users/isuvorov/projects/lego-starter-kit/node_modules/extract-text-webpack-plugin/loader.js?{\"remove\":true}!style-loader",
             "css-loader?{\"sourceMap\":true,\"modules\":false,\"minimize\":false}",
-            "postcss-loader?pack=default"
-          ]
-        },
-        {
-          "test": {},
-          "loaders": [
-            "isomorphic-style-loader",
-            "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
             "postcss-loader?pack=sass",
             "sass-loader"
           ]
         },
         {
           "test": {},
+          "exclude": {},
           "loaders": [
             "isomorphic-style-loader",
             "css-loader?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}",
             "postcss-loader?pack=sass",
-            "stylus"
+            "sass-loader"
           ]
         },
         {
@@ -286,6 +279,11 @@
           "__CLIENT__": false,
           "__BROWSER__": false
         }
+      },
+      {
+        "filename": "[name].css?[chunkhash]",
+        "options": {},
+        "id": 2
       },
       {
         "options": {
