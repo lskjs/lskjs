@@ -75,7 +75,7 @@ export default class ReactApp extends CoreApp {
     };
     return ctx;
   }
-// ureq, ures
+
   getReqProps(req) {
     const reqCtx = this.getReqCtx(req);
     return {

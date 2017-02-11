@@ -5,12 +5,6 @@ import _ from 'lodash';
 import ExpressApp from 'lego-starter-kit/ExpressApp';
 
 import getMongoose from './getMongoose';
-import getErrors from './getErrors';
-import getHelpers from './helpers';
-import getMiddlewares from './middlewares';
-import getModels from './models';
-import getResourses from './resourses';
-import getResponses from './responses';
 import getDocsTemplate from './getDocsTemplate';
 
 export default class CoreApp extends ExpressApp {
@@ -38,28 +32,28 @@ export default class CoreApp extends ExpressApp {
     super.init(...arguments);
   }
   getMiddlewares() {
-    return getMiddlewares(this);
+    return require('./middlewares').default(this); // eslint-disable-line
   }
   getModels() {
-    return getModels(this);
+    return require('./models').default(this); // eslint-disable-line
   }
   getDatabase() {
     return this.config.db && getMongoose(this, this.config.db);
   }
   getErrors() {
-    return getErrors(this);
+    return require('./getErrors').default(this); // eslint-disable-line
   }
   getResourses() {
-    return getResourses(this);
+    return require('./resourses').default(this); // eslint-disable-line
   }
   getRequests() {
-    return require('./requests');
+    return require('./requests').default(this); // eslint-disable-line
   }
   getResponses() {
-    return getResponses(this);
+    return require('./responses').default(this); // eslint-disable-line
   }
   getHelpers() {
-    return getHelpers(this);
+    return require('./helpers').default(this); // eslint-disable-line
   }
   getStatics() {
     return {};

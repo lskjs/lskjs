@@ -8,14 +8,17 @@ export default (ctx) => {
     };
     if (data) {
       if (data.__pack) {
+        console.log('__pack! !!!');
+
         Object.assign(pck, _.omit(data, ['__pack']));
       } else {
-        pack.data = data;
+        pck.data = data;
       }
     }
     if (__DEV__ && info.err) {
-      pack.err = info.err;
+      pck.err = info.err;
     }
-    return this.json(pack);
+    console.log('json', data);
+    return this.json(pck);
   };
 };

@@ -4,14 +4,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 export default (ctx) => {
-  const defaultOptions = {
-    bodyParser: {
-      json: {},
-      urlencoded: { extended: true },
-    },
-    cookieParser: void 0,
-    cors: false,
-  };
   const middlewares = [];
   const preMiddlewares = [
     [
