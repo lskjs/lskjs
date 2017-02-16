@@ -5,4 +5,4 @@ module.exports = {
   WebpackClientConfig: require('./WebpackClientConfig').default,
   WebpackServerConfig: require('./WebpackServerConfig').default,
   getWebpackConfig: require('./getWebpackConfig').default,
-}
+};

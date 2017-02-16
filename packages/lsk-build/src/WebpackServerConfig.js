@@ -3,11 +3,11 @@ import WebpackConfig from './WebpackConfig';
 
 export default class WebpackServerConfig extends WebpackConfig {
   getTarget() {
-    return 'node'
+    return 'node';
   }
 
   getEntry() {
-    return './server.js'
+    return './server.js';
   }
 
   getGlobals() {
@@ -16,7 +16,7 @@ export default class WebpackServerConfig extends WebpackConfig {
       __SERVER__: true,
       __CLIENT__: false,
       __BROWSER__: false,
-    }
+    };
   }
 
   getPlugins() {
@@ -25,13 +25,15 @@ export default class WebpackServerConfig extends WebpackConfig {
 
       // Adds a banner to the top of each generated chunk
       // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
-      new webpack.BannerPlugin('require("source-map-support").install();',
-        { raw: true, entryOnly: false }),
+      ...!this.isSourcemap() ? [] : new webpack.BannerPlugin(
+        'require("source-map-support").install();',
+        { raw: true, entryOnly: false },
+      ),
 
       // Do not create separate chunks of the server bundle
       // https://webpack.github.io/docs/list-of-plugins.html#limitchunkcountplugin
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
-    ]
+    ];
   }
 
   getOutput() {
@@ -39,7 +41,7 @@ export default class WebpackServerConfig extends WebpackConfig {
       ...super.getOutput(),
       filename: '../../server.js',
       libraryTarget: 'commonjs2',
-    }
+    };
   }
 
   getPreConfig() {
@@ -48,11 +50,11 @@ export default class WebpackServerConfig extends WebpackConfig {
       externals: [
         /^\.\/assets$/,
         (context, request, callback) => {
-          const depsStr = this.getDeps().map(dep => dep.name).filter(a => a).join('|')
+          const depsStr = this.getDeps().map(dep => dep.name).filter(a => a).join('|');
           const isExternal =
             request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
             !request.match(/\.(css|less|scss|sss)$/i) &&
-            (!depsStr || !request.match(new RegExp(`^(${depsStr})`)))
+            (!depsStr || !request.match(new RegExp(`^(${depsStr})`)));
           // console.log('==================');
           // console.log(depsStr);
           // console.log(request.match(/^[@a-z][a-z\/\.\-0-9]*$/i), !!request.match(/^[@a-z][a-z\/\.\-0-9]*$/i));
@@ -73,6 +75,6 @@ export default class WebpackServerConfig extends WebpackConfig {
         __dirname: false,
       },
       devtool: 'source-map',
-    }
+    };
   }
 }

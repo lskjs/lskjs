@@ -1,18 +1,17 @@
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
-const OptimizeJsPlugin = require("optimize-js-plugin");
+const OptimizeJsPlugin = require('optimize-js-plugin');
 // var CompressionPlugin = require("compression-webpack-plugin");
-import WebpackConfig from './WebpackConfig'
+import WebpackConfig from './WebpackConfig';
 
 export default class WebpackClientConfig extends WebpackConfig {
   getTarget() {
-    return 'web'
+    return 'web';
   }
 
   getEntry() {
-    return './client.js'
+    return './client.js';
   }
-
 
 
   getGlobals() {
@@ -21,14 +20,14 @@ export default class WebpackClientConfig extends WebpackConfig {
       __SERVER__: false,
       __CLIENT__: true,
       __BROWSER__: true,
-    }
+    };
   }
 
   getPreConfig() {
     return {
       ...super.getPreConfig(),
-      devtool: this.isDebug() ? 'cheap-module-source-map' : false,
-    }
+      devtool: this.isSourcemap() ? 'cheap-module-source-map' : false,
+    };
   }
 
   getOutput() {
@@ -36,7 +35,7 @@ export default class WebpackClientConfig extends WebpackConfig {
       ...super.getOutput(),
       filename: this.isDebug() ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
       chunkFilename: this.isDebug() ? '[name].[id].js?[chunkhash]' : '[name].[id].[chunkhash].js',
-    }
+    };
   }
 
   getPlugins() {
@@ -90,6 +89,6 @@ export default class WebpackClientConfig extends WebpackConfig {
         // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
         new webpack.optimize.AggressiveMergingPlugin(),
       ],
-    ]
+    ];
   }
 }

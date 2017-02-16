@@ -8,19 +8,23 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import cp from 'child_process';
+import fs from 'fs';
 import { writeFile, makeDir } from './utils/fs';
 import mkdirp from 'mkdirp';
+
+// verbose webpack config
+// require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
 
 
 export default class Runner {
 
   constructor(ctx = {}) {
-    Object.assign(this, ctx)
+    Object.assign(this, ctx);
   }
 
   resolvePath(...args) {
-    if (this.dirname) return path.resolve(this.dirname, ...args)
-    return path.resolve(...args)
+    if (this.dirname) return path.resolve(this.dirname, ...args);
+    return path.resolve(...args);
   }
   //
   // start() {
@@ -33,22 +37,22 @@ export default class Runner {
   }
 
 
- async copy({ watch } = {}) {
-   const ncp = Promise.promisify(require('ncp'));
+  async copy({ watch } = {}) {
+    const ncp = Promise.promisify(require('ncp'));
 
-   await Promise.all([
+    await Promise.all([
      // ncp('src/public', 'build/public'),
      // ncp('src/content', 'build/content'),
-   ]);
+    ]);
 
-   await writeFile(this.resolvePath('build/package.json'), JSON.stringify({
-     private: true,
-     engines: this.pkg.engines,
-     dependencies: this.pkg.dependencies,
-     scripts: {
-       start: 'node server.js',
-     },
-   }, null, 2));
+    await writeFile(this.resolvePath('build/package.json'), JSON.stringify({
+      private: true,
+      engines: this.pkg.engines,
+      dependencies: this.pkg.dependencies,
+      scripts: {
+        start: 'node server.js',
+      },
+    }, null, 2));
    //
   //  if (watch) {
   //    const watcher = await new Promise((resolve, reject) => {
@@ -63,8 +67,7 @@ export default class Runner {
   //    watcher.on('changed', cp);
   //    watcher.on('added', cp);
   //  }
- }
-
+  }
 
 
   async build() {
@@ -91,16 +94,14 @@ export default class Runner {
   }
 
 
-
   /**
    * Deploy the contents of the `/build` folder to a remote
    * server via Git. Example: `npm run deploy -- production`
    */
-  async  deploy() {
-
+  async deploy() {
     // TODO: Update deployment URL
     // For more information visit http://gitolite.com/deploy.html
-    const getRemote = (slot) => ({
+    const getRemote = slot => ({
       name: slot || 'production',
       url: `https://example${slot ? `-${slot}` : ''}.scm.azurewebsites.net:443/example.git`,
       website: `http://example${slot ? `-${slot}` : ''}.azurewebsites.net`,
@@ -136,7 +137,6 @@ export default class Runner {
   }
 
 
-
   format(time) {
     return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
   }
@@ -145,29 +145,29 @@ export default class Runner {
     const task = typeof fn.default === 'undefined' ? fn : fn.default;
     const start = new Date();
     console.log(
-      `[${format(start)}] Starting '${task.name}${options ? `(${options})` : ''}'...`
+      `[${format(start)}] Starting '${task.name}${options ? `(${options})` : ''}'...`,
     );
     return task(options).then(() => {
       const end = new Date();
       const time = end.getTime() - start.getTime();
       console.log(
-        `[${format(end)}] Finished '${task.name}${options ? `(${options})` : ''}' after ${time} ms`
+        `[${format(end)}] Finished '${task.name}${options ? `(${options})` : ''}' after ${time} ms`,
       );
     });
   }
 
   async start() {
     console.log('Runner.start');
-    const webpackConfig = this.webpackConfig
-    const [config] = webpackConfig
+    const webpackConfig = this.webpackConfig;
+    const [config] = webpackConfig;
     await this.clean();
     await this.copy();
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       // Hot Module Replacement (HMR) + React Hot Reload
       // console.log('config', config);
       if (config.debug) {
         // console.log('config.entry', config.entry);
-        config.entry= ['react-hot-loader/patch', 'webpack-hot-middleware/client']
+        config.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client']
           .concat(config.entry);
         config.output.filename = config.output.filename.replace('[chunkhash', '[hash');
         config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash', '[hash');
@@ -176,8 +176,14 @@ export default class Runner {
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
         config.plugins.push(new webpack.NoErrorsPlugin());
       }
+      if (this.webpackConfigDist) {
+        try {
+          fs.writeFileSync(this.webpackConfigDist, JSON.stringify(this.webpackConfig, null, 2));
+        } catch (err) { }
+      }
 
       const bundler = webpack(webpackConfig);
+      // console.log('config.output.publicPath', config.output.publicPath, config.stats);
       const wpMiddleware = webpackMiddleware(bundler, {
         // IMPORTANT: webpack middleware can't access config,
         // so we should provide publicPath by ourselves
@@ -192,10 +198,7 @@ export default class Runner {
       const hotMiddleware = webpackHotMiddleware(bundler.compilers[0]);
 
       let handleBundleComplete = async () => {
-        handleBundleComplete = stats => !stats.stats[1].compilation.errors.length && this.runServer();
-
         try {
-          // console.log('before AWAIT server');
           const server = await this.runServer();
           // console.log('AWAIT server');
           const bs = Browsersync.create();
@@ -211,7 +214,8 @@ export default class Runner {
               },
             },
           }, resolve);
-        } catch(err)  {
+          handleBundleComplete = stats => !stats.stats[1].compilation.errors.length && this.runServer();
+        } catch (err) {
           console.log('Runner.start server error', err);
         }
       };
@@ -223,12 +227,12 @@ export default class Runner {
   async oldStart(ctx) {
     await this.clean();
     await this.copy({ watch: true });
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       // Patch the client-side bundle configurations
       // to enable Hot Module Replacement (HMR) and React Transform
 
 
-      const webpackConfig = this.webpackConfig
+      const webpackConfig = this.webpackConfig;
       const bundler = webpack(webpackConfig);
       const wpMiddleware = webpackMiddleware(bundler, {
         // IMPORTANT: webpack middleware can't access config,
@@ -272,73 +276,71 @@ export default class Runner {
     });
   }
 
- server = null
- runServer() {
-  //  console.log('Runner.runServer');
-   const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//;
+  server = null
+  runServer() {
+    console.log('Runner.runServer');
+    const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//;
 
-   const { output } = this.webpackConfig.find(x => x.target === 'node');
-   const serverPath = path.join(output.path, output.filename);
+    const { output } = this.webpackConfig.find(x => x.target === 'node');
+    const serverPath = path.join(output.path, output.filename);
 
-   process.on('exit', () => {
-    //  console.log('process exit');
-     if (this.server) {
-       this.server.kill('SIGTERM');
-     }
-   });
-   return new Promise((resolve, reject) => {
-       let pending = true;
+    process.on('exit', () => {
+      console.log('');
+      if (this.server) {
+        this.server.kill('SIGTERM');
+      }
+    });
+    return new Promise((resolve, reject) => {
+      let pending = true;
 
-       const onStdOut = (data) => {
-         const time = new Date().toTimeString();
-         const match = data.toString('utf8').match(RUNNING_REGEXP);
+      const onStdOut = (data) => {
+        const time = new Date().toTimeString();
+        const match = data.toString('utf8').match(RUNNING_REGEXP);
 
         //  process.stdout.write(time.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] '));
-         process.stdout.write(data);
+        process.stdout.write(data);
 
-         if (match) {
-           this.server.host = match[1];
-           this.server.stdout.removeListener('data', onStdOut);
-           this.server.stdout.on('data', x => process.stdout.write(x));
-           pending = false;
-           resolve(this.server);
-         }
-       }
+        if (match) {
+          this.server.host = match[1];
+          this.server.stdout.removeListener('data', onStdOut);
+          this.server.stdout.on('data', x => process.stdout.write(x));
+          pending = false;
+          resolve(this.server);
+        }
+      };
 
-       if (this.server) {
-         this.server.kill('SIGTERM');
-       }
+      if (this.server) {
+        this.server.kill('SIGTERM');
+      }
 
-       this.server = cp.spawn('node', [serverPath], {
-         env: Object.assign({ NODE_ENV: 'development' }, process.env),
-         silent: false,
-       });
+      this.server = cp.spawn('node', [serverPath], {
+        env: Object.assign({ NODE_ENV: 'development' }, process.env),
+        silent: false,
+      });
 
-       if (pending) {
-         this.server.once('exit', (code, signal) => {
-           if (pending) {
-             reject(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
+      if (pending) {
+        this.server.once('exit', (code, signal) => {
+          if (pending) {
+            reject(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
             //  throw new Error(`Server terminated unexpectedly with code: ${code} signal: ${signal}`);
-           }
-         });
-       }
+          }
+        });
+      }
 
-       this.server.stdout.on('data', onStdOut);
-       this.server.stderr.on('data', x => process.stderr.write(x));
+      this.server.stdout.on('data', onStdOut);
+      this.server.stderr.on('data', x => process.stderr.write(x));
 
-       return this.server;
-     });
+      return this.server;
+    });
   }
-
-
 
 
   async buildStatic(routes) {
     console.log('buildStatic', routes);
     if (!routes) {
       routes = [
-        '/'
-      ]
+        '/',
+      ];
     }
 
     await this.clean();
@@ -346,7 +348,6 @@ export default class Runner {
     await this.bundle();
     await this.render(routes);
   }
-
 
 
   async render(routes) {
@@ -381,7 +382,6 @@ export default class Runner {
     }));
 
     server.kill('SIGTERM');
-
   }
   async render2(routes) {
     console.log('render', routes);
@@ -410,8 +410,6 @@ export default class Runner {
   }
 
 }
-
-
 
 
 // process.on('exit', () => {
