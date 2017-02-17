@@ -10,5 +10,8 @@ export default config.server({
   jwt: {
     secret: 'replaceMyPlease',
   },
+  // sockets: {
+  //   transports: ['websocket'],
+  // },
   middlewares: require('./middlewares').default,
 });

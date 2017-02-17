@@ -7,6 +7,5 @@ ctx.webpackConfig = webpackConfig
 const app = new Runner(ctx)
 if (process.argv.length > 2) {
   const method = process.argv[2]
-  require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
   app[method]().catch(err => console.error(err.stack));
 }

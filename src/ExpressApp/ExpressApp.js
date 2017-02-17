@@ -10,9 +10,13 @@ export default class ExpressApp {
   constructor(params = {}) {
     Object.assign(this, params);
     if (!this.log) this.log = this.getLogger(); // because CoreApp.log() before init
-    this.init();
+    try {
+      this.init();
+    } catch (err) {
+      this.log.fatal('init err', err);
+    }
   }
-  getExpress() {
+  createExpressApp() {
     return express();
   }
   getLogger(params) {
@@ -25,8 +29,8 @@ export default class ExpressApp {
   }
   init() {
     this.log.trace('ExpressApp init');
-    this.app = this.getExpress();
-    this.appServer = httpServer(this.app);
+    this.app = this.createExpressApp();
+    this.httpServer = httpServer(this.app);
 
     this.beforeUseMiddlewares();
     this.useMiddlewares();
@@ -51,8 +55,8 @@ export default class ExpressApp {
     this.log.trace('ExpressApp run');
 
     return new Promise((resolve) => {
-      this.appInstance = this.appServer.listen(this.config.port, () => {
-        this.log.info(`App "${this.config.name}" running on port ${this.config.port}!`);
+      this.httpInstance = this.httpServer.listen(this.config.port, () => {
+        this.log.info(`App running on port ${this.config.port}!`);
         resolve(this);
       });
     });

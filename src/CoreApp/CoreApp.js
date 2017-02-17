@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import ExpressApp from 'lego-starter-kit/ExpressApp';
 
+import createSockets from './sockets';
 import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
 
@@ -28,6 +29,7 @@ export default class CoreApp extends ExpressApp {
     this.log.trace('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
     this.log.trace('statics', this.statics);
+
 
     super.init(...arguments);
   }
@@ -68,17 +70,18 @@ export default class CoreApp extends ExpressApp {
   }
 
   useStaticPublic(publicPath, urlPath = null) {
-    if (!publicPath) {
-      publicPath = path.join(__dirname, 'public');
-    } else {
-      publicPath = path.join(publicPath);
-    }
-    if (urlPath == null) {
-      urlPath = '/';
-    }
+    // if (!publicPath) {
+    //   publicPath = path.join(__dirname, 'public');
+    // } else {
+    //   publicPath = path.join(publicPath);
+    // }
+    // if (urlPath == null) {
+    //   urlPath = '/';
+    // }
     // this.statics[urlPath] = publicPath
-    this.log.trace(`Static attach ${urlPath} => ${publicPath}`);
-    this.app.use(urlPath, express.static(publicPath));
+    this.log.trace('DEPRECATED');
+    // this.log.trace(`Static attach ${urlPath} => ${publicPath}`);
+    // this.app.use(urlPath, express.static(publicPath));
   }
 
   getUsingMiddlewares() {
@@ -111,6 +114,41 @@ export default class CoreApp extends ExpressApp {
     return api;
   }
 
+  createExpressApp() {
+    const app = super.createExpressApp();
+
+    // asdasdsa();
+    this.config.sockets && this.useSockets(app);
+    return app;
+  }
+
+  async useSockets(app) {
+    // console.log('this.config.sockets', !!this.config.sockets);
+    if (!this.config.sockets) return;
+    this.log.trace('CoreApp.useSockets');
+    // console.log(55555);
+    this.io = createSockets(this);
+    // console.log(1111);
+    app.ws = (route, callback) => {
+      // console.log('app.ws this.io', this.io);
+      if (typeof callback !== 'function') throw '!ws callback(namespace)';
+      const namespace = this.io.of(route);
+      this.io.atachMiddlwares(namespace);
+      callback(namespace);
+    };
+    // console.log(4444);
+    // console.log('app', app, app.use, app.ws);
+  }
+
+  async runSockets() {
+    if (!this.config.sockets) return;
+    this.io.serveClient(false);
+    this.io.attach(this.httpServer);
+    const transports = this.config.sockets.transports || ['websocket'];
+    // console.log('transports', transports);
+    this.io.set('transports', transports);
+  }
+
   useMiddlewares() {
     this.beforeUseMiddlewares();
     const middlewares = _.flattenDeep(this.getUsingMiddlewares());
@@ -128,21 +166,25 @@ export default class CoreApp extends ExpressApp {
     this.middlewares.catchError && this.app.use(this.middlewares.catchError);
   }
 
+
+  async runDb() {
+    if (!this.db) return;
+    this.log.trace('CoreApp.runDb');
+    try {
+      return this.db.run();
+    } catch (err) {
+      this.log.fatal(err);
+      throw err;
+    }
+  }
+
+
   async run(...args) {
-    this.log.trace('CoreApp run');
-    if (this.db) {
-      try {
-        await this.db.run();
-        await super.run(...args);
-        this.afterRun();
-      } catch (err) {
-        this.log.fatal(err);
-        throw err;
-      }
-    }
-    if (!this.db) {
-      return super.run(...args);
-    }
+    this.log.trace('CoreApp.run');
+    await this.runDb();
+    await super.run(...args);
+    this.config.sockets && await this.runSockets();
+    await this.afterRun();
   }
 
   afterRun() {
