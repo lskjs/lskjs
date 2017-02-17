@@ -133,8 +133,8 @@ You can start by cloning the latest version of React Starter Kit (RSK) on your
 local machine by running:
 
 ```shell
-$ git clone -o react-starter-kit -b master --single-branch \
-      https://github.com/kriasoft/react-starter-kit.git MyApp
+$ git clone -o lego-starter-kit -b master --single-branch \
+      https://github.com/isuvorov/lego-starter-kit.git MyApp
 $ cd MyApp
 ```
 
@@ -241,7 +241,7 @@ back into your own project by running:
 
 ```shell
 $ git checkout master
-$ git fetch react-starter-kit
-$ git merge react-starter-kit/master
+$ git fetch lego-starter-kit
+$ git merge lego-starter-kit/master
 $ npm install
 ```
