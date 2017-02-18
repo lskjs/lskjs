@@ -1,0 +1,4 @@
+{
+  "browser": "App.client",
+  "main": "App.server"
+}

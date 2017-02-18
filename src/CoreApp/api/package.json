@@ -1,4 +1,0 @@
-{
-  "main": "api.server.js",
-  "browser": "api.client.js"
-}
