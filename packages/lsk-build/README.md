@@ -9,7 +9,7 @@ Lego Starter Kit builder & webpack configurator
 
 ## Пример конфига
 
-```
+```js
 import fs from 'fs';
 const dirname = `${__dirname}/..`;
 const ctx = {
