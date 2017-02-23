@@ -1,4 +1,3 @@
 {
-  "browser": "api.client.js",
-  "main": "api.server.js"
+  "browser": "api.client.js"
 }

@@ -1,4 +1,5 @@
-import ProfilePage from './ProfilePage'
+import ProfilePage from './ProfilePage';
+import SettingsPage from './SettingsPage';
 export default {
   // path: '/',
   children: [
@@ -8,6 +9,15 @@ export default {
         return {
           title: 'Cabinet',
           component: <ProfilePage />,
+        }
+      },
+    },
+    {
+      path: '/settings',
+      action() {
+        return {
+          title: 'Settings',
+          component: <SettingsPage />,
         }
       },
     },
