@@ -26,22 +26,6 @@ const ctx = {
       alias: 'lsk-admin',
     },
   ],
-  imports: [
-    {
-      libraryName: 'react-bootstrap',
-      camel2DashComponentName: false,
-    },
-    {
-      libraryName: 'mongoose',
-    },
-    {
-      libraryName: 'express',
-    },
-    {
-      libraryName: 'react-bootstrap-table',
-      camel2DashComponentName: false,
-    },
-  ],
   alias: {
     react: fs.realpathSync(`${dirname}/node_modules/react`),
     'react-dom': fs.realpathSync(`${dirname}/node_modules/react-dom`),

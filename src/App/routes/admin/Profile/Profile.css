@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  > img {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    margin-right: 30px;
+    border-radius: 50%;
+  }
+  .header-info {
+    display: flex;
+    flex-direction: column;
+    b:after {
+      content: ':';
+      margin-right: 5px;
+    }
+  }
+}

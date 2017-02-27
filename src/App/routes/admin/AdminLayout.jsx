@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { inject, observer } from 'mobx-react';
 
 import DashboardIcon from 'react-icons/lib/fa/dashboard';
 
@@ -16,63 +17,132 @@ import UserMenu from 'lsk-admin/Admin/lib/header/UserMenu';
 import SidebarWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarWrapper';
 import UserPanel from 'lsk-admin/Admin/lib/sidebar/UserPanel';
 import FooterWrapper from 'lsk-admin/Admin/lib/footer/FooterWrapper';
+import SidebarSearch from 'lsk-admin/Admin/lib/sidebar/SidebarSearch';
+import SidebarMenuWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarMenuWrapper';
+import SidebarMenuHeader from 'lsk-admin/Admin/lib/sidebar/SidebarMenuHeader';
+import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 
-// import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
+import Users from 'react-icons/lib/ti/group';
+import Zip from 'react-icons/lib/fa/file-archive-o';
 
+import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
+
+@inject('user') @observer
 export default class AdminLayout extends Component {
+  static contextTypes = {
+    history: PropTypes.object.isRequired,
+  }
+  static defaultProps = {
+    description: null,
+  }
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    siteTitle: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    description: PropTypes.string,
+  }
+  logout = ({ key }) => {
+    if (key === 1) {
+      this.context.history.push('/admin/profile');
+    } else {
+      this.context.history.replace('/auth/logout');
+    }
+  }
+  toDashboard = () => {
+    this.context.history.push('/');
+  }
+  onMenuClick = (item) => {
+    if (item.url) {
+      this.context.history.push(item.url);
+    }
+    return false;
+  }
   render() {
+    const { user, title, description, siteTitle, children } = this.props;
+    const breadItems = [
+      { key: 1, icon: <DashboardIcon />, title, url: '/admin' },
+    ];
+    const mainMenus = [
+      {
+        key: 1,
+        id: 1,
+        icon: <DashboardIcon />,
+        title: 'Главная',
+        url: '/admin',
+      },
+      {
+        key: 2,
+        id: 2,
+        icon: <Users />,
+        label: '6',
+        title: 'Пользователи',
+        url: '/admin/users',
+      },
+      {
+        key: 3,
+        id: 3,
+        icon: <Zip />,
+        title: 'Еще кнопка',
+        url: '#',
+      },
+    ];
     return (
       <LayoutWrapper color="black">
         <HeaderWrapper>
           <Logo>
-            <MiniLogo>
-              <b>S</b>b
+            <MiniLogo onClick={this.toDashboard}>
+              {siteTitle.substr(0, 2)}
             </MiniLogo>
-            <LargeLogo>
-              <b>Skill</b>Branch
+            <LargeLogo onClick={this.toDashboard}>
+              {siteTitle}
             </LargeLogo>
           </Logo>
           <Navbar controlbar={false}>
             <UserMenu
               // onLinkClick={action('onLinkClick')}
-              // onButtonClick={action('onButtonClick')}
+              onButtonClick={this.logout}
               image={'https://remont3.ru/templates/umedia/dleimages/noavatar.png'}
-              name="John Doe"
-              title="Mr. John Doe"
-              description="Javascript Full Stack Software Engineer"
+              name={user.name}
+              title={`Добро пожаловать, ${user.name}`}
               links={[
                 { key: 1, text: 'Link 1' },
                 { key: 2, text: 'Link 2' },
                 { key: 3, text: 'Link 3' },
               ]}
               buttons={[
-                { key: 1, text: 'Profile', align: 'left' },
-                { key: 2, text: 'Logout' },
+                { key: 1, text: 'Профиль', align: 'left' },
+                { key: 2, text: 'Выход' },
               ]}
             />
           </Navbar>
         </HeaderWrapper>
         <SidebarWrapper>
           <UserPanel
+            statusText="В сети"
             image={'https://remont3.ru/templates/umedia/dleimages/noavatar.png'}
-            name="John Doe"
+            name={user.name}
           />
+          <SidebarSearch
+            placeholder="Поиск..."
+            onSubmit={(e) => console.log(e)}
+          />
+          <SidebarMenuWrapper>
+            <SidebarMenuHeader title="НАВИГАЦИЯ" />
+            {mainMenus.map(menu => (
+              <TreeMenu
+                {...menu}
+                onClick={() => this.onMenuClick(menu)}
+              />
+            ))}
+          </SidebarMenuWrapper>
         </SidebarWrapper>
         <PageWrapper>
-          <PageHeader
-            title="Simple page"
-            description="description about the simple page"
-          >
-            <Breadcrumb
-              items={[
-                { key: 1, icon: <DashboardIcon />, title: 'Home', url: '/' },
-                { key: 2, title: 'Pages' },
-                { key: 3, title: 'Simple' },
-              ]}
-            />
+          <PageHeader title={title} description={description}>
+            <Breadcrumb items={breadItems} />
           </PageHeader>
           <PageContent>
-            {this.props.children}
+            {children}
           </PageContent>
         </PageWrapper>
         <FooterWrapper>
