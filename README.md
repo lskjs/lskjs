@@ -64,8 +64,6 @@ log.info('Method success');
 * Универсальная  модель?
 * Документация со swagger
 
-![Lego Starter Kit Black](http://i.imgur.com/r3Ubvlp.jpg)
-
 
 
 ## Getting Started
