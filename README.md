@@ -1,4 +1,4 @@
-![Lego Starter Kit](http://i.imgur.com/s97Nhw8.png)
+![Lego Starter Kit](http://i.imgur.com/RJ5WyRL.jpg)
 
 Вдохновлен:
 * [Express.js](): концепция средних слоев, способ их конфигурирования
