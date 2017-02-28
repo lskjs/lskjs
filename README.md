@@ -1,4 +1,4 @@
-![Lego Starter Kit](http://i.imgur.com/s97Nhw8.png)
+![Lego Starter Kit](http://i.imgur.com/RJ5WyRL.jpg)
 
 Вдохновлен:
 * [Express.js](): концепция средних слоев, способ их конфигурирования
@@ -61,8 +61,6 @@ log.info('Method success');
 * Что такое ресурс? Resource ENDPOINT
 * Универсальная  модель?
 * Документация со swagger
-
-![Lego Starter Kit Black](http://i.imgur.com/r3Ubvlp.jpg)
 
 
 
