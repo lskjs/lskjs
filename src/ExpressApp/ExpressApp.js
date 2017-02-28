@@ -12,6 +12,7 @@ export default class ExpressApp {
     if (!this.log) this.log = this.getLogger(); // because CoreApp.log() before init
     try {
       this.init();
+      this.initExpress();
     } catch (err) {
       this.log.fatal('init err', err);
     }
@@ -31,16 +32,16 @@ export default class ExpressApp {
     this.log.trace('ExpressApp init');
     this.app = this.createExpressApp();
     this.httpServer = httpServer(this.app);
+  }
 
-    this.beforeUseMiddlewares();
+  initExpress() {
+    this.log.trace('ExpressApp initExpress');
     this.useMiddlewares();
     this.useRoutes();
     this.useStatics();
     this.useDefaultRoute();
-    this.afterUseMiddlewares();
   }
 
-  beforeUseMiddlewares() {}
   useMiddlewares() {}
   useStatics() {}
   useRoutes() {}
@@ -49,7 +50,6 @@ export default class ExpressApp {
       return res.send(`Hello World from "${this.config.name}"`);
     });
   }
-  afterUseMiddlewares() {}
 
   async run() {
     this.log.trace('ExpressApp run');

@@ -8,11 +8,9 @@
 * react-starter-kit: Фронт, Сборка на ES6 без Gulp, Grunt. Конфиг webpack'а
 
 ```
-this.beforeUseMiddlewares()
 this.useMiddlewares()
 this.useRoutes()
 this.useDefaultRoute()
-this.afterUseMiddlewares()
 ```
 
 А также:

@@ -10,6 +10,7 @@ import getDocsTemplate from './getDocsTemplate';
 
 export default class CoreApp extends ExpressApp {
   init() {
+    super.init(...arguments);
     this.log.trace('CoreApp init');
 
     this.db = this.getDatabase();
@@ -29,9 +30,6 @@ export default class CoreApp extends ExpressApp {
     this.log.trace('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
     this.log.trace('statics', this.statics);
-
-
-    super.init(...arguments);
   }
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line
@@ -123,21 +121,15 @@ export default class CoreApp extends ExpressApp {
   }
 
   async useSockets(app) {
-    // console.log('this.config.sockets', !!this.config.sockets);
     if (!this.config.sockets) return;
     this.log.trace('CoreApp.useSockets');
-    // console.log(55555);
     this.io = createSockets(this);
-    // console.log(1111);
     app.ws = (route, callback) => {
-      // console.log('app.ws this.io', this.io);
       if (typeof callback !== 'function') throw '!ws callback(namespace)';
       const namespace = this.io.of(route);
       this.io.atachMiddlwares(namespace);
       callback(namespace);
     };
-    // console.log(4444);
-    // console.log('app', app, app.use, app.ws);
   }
 
   async runSockets() {
@@ -145,16 +137,15 @@ export default class CoreApp extends ExpressApp {
     this.io.serveClient(false);
     this.io.attach(this.httpServer);
     const transports = this.config.sockets.transports || ['websocket'];
-    // console.log('transports', transports);
     this.io.set('transports', transports);
   }
 
   useMiddlewares() {
-    this.beforeUseMiddlewares();
     const middlewares = _.flattenDeep(this.getUsingMiddlewares());
     middlewares.forEach((middleware) => {
       middleware && typeof middleware === 'function' && this.app.use(middleware);
     });
+    this.afterUseMiddlewares();
   }
   useDefaultRoute() {
     this.app.use((req, res, next) => {
@@ -181,7 +172,7 @@ export default class CoreApp extends ExpressApp {
 
   async run(...args) {
     this.log.trace('CoreApp.run');
-    await this.runDb();
+    this.config.db && this.db && await this.runDb();
     await super.run(...args);
     this.config.sockets && await this.runSockets();
     await this.afterRun();
