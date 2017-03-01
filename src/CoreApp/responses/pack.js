@@ -8,8 +8,6 @@ export default (ctx) => {
     };
     if (data) {
       if (data.__pack) {
-        console.log('__pack! !!!');
-
         Object.assign(pck, _.omit(data, ['__pack']));
       } else {
         pck.data = data;
@@ -18,7 +16,6 @@ export default (ctx) => {
     if (__DEV__ && info.err) {
       pck.err = info.err;
     }
-    console.log('json', data);
     return this.json(pck);
   };
 };
