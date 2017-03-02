@@ -42,9 +42,9 @@ export default class HomePage extends Component {
                     Это пример, как можно использовать lego-starter-kit
                   </CardBlock>
                   <CardFooter className="text-xs-center">
-                    <A href="https://github.com/isuvorov/lego-starter-kit">
+                    <a rel="noopener noreferrer" target="_blank" href="https://github.com/isuvorov/lego-starter-kit">
                       Подробнее
-                    </A>
+                    </a>
                   </CardFooter>
                 </Card>
               </Col>

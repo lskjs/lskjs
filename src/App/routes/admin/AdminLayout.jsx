@@ -125,7 +125,7 @@ export default class AdminLayout extends Component {
           />
           <SidebarSearch
             placeholder="Поиск..."
-            onSubmit={(e) => console.log(e)}
+            onSubmit={e => console.log(e)}
           />
           <SidebarMenuWrapper>
             <SidebarMenuHeader title="НАВИГАЦИЯ" />

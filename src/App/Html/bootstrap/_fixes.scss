@@ -9,7 +9,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
 
 .navbar {
   border-width: 0;
-
+  min-height: 51px;
 
   &-default {
 
@@ -30,6 +30,11 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
   &-brand {
     line-height: 1;
   }
+}
+
+.navbar-brand {
+  padding: 15px;
+  height: 51px;
 }
 
 // Buttons ====================================================================

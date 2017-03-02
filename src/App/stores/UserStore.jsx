@@ -16,7 +16,6 @@ export default class UserStore {
   constructor(store, user) {
     this.store = store;
     if (user) {
-      console.log(user);
       this.update(user);
       if (__CLIENT__) this.init(user);
     }

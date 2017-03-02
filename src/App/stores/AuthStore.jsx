@@ -1,6 +1,5 @@
-import { observable, computed, action, toJS } from 'mobx';
+import { computed, action } from 'mobx';
 import cookie from 'react-cookie';
-import isEmpty from 'lodash/isEmpty';
 
 export default class AuthStore {
 
@@ -82,7 +81,9 @@ export default class AuthStore {
 
   @action
   async updateUser(data = null) {
-    this.store.user.update(data);
+    if (this.store.user) {
+      this.store.user.update(data);
+    }
   }
 
   @computed get isAuth() {

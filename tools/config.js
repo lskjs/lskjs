@@ -4,7 +4,7 @@ const ctx = {
   env: process.env.NODE_ENV,
   debug: !process.argv.includes('--release'),
   verbose: process.argv.includes('--verbose'),
-  // sourcemap: false,
+  sourcemap: 'eval',
   // webpackConfigDist: `${dirname}/build/webpack.config.js`,
   // webpackStats: 'verbose',
   dirname,

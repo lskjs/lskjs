@@ -5112,9 +5112,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.3.0.tgz#645b0f6c4b5423cbc4eecc1df39f414a0862742a"
+lego-starter-kit@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.3.3.tgz#97bc5fc19cc65501b430e4a46a27881a111c685d"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -5141,6 +5141,7 @@ lego-starter-kit@^1.3.0:
     react-dom "15.4.2"
     react-tunnel "0.1.0"
     socket.io "1.7.2"
+    socket.io-as-promised "^1.0.0"
     universal-router "2.0.0"
     uuid "3.0.1"
     whatwg-fetch "2.0.2"
@@ -5511,9 +5512,9 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-lsk-admin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.0.tgz#d5e61873cd62023e748b396db75847155e90490e"
+lsk-admin@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.3.tgz#56c8f8e95c9e066712ba5a453798afb0724a98e9"
   dependencies:
     admin-lte "2.3.11"
     animate-sass "0.6.6"
@@ -5537,9 +5538,9 @@ lsk-admin@^1.0.0:
     sass-loader "5.0.0"
     validate.js "0.11.1"
 
-lsk-build@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.6.0.tgz#113e050bccadb8f66918a71eef2df81c4366702b"
+lsk-build@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.6.1.tgz#7e12e67c22b96c90eab911c9932b9bcaeccf11fd"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.2"
