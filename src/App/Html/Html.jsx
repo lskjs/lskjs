@@ -40,7 +40,7 @@ ${super.renderHead()}
   renderFooter() {
     return `\
 ${super.renderFooter()}
-${__DEV__ || require('raw!./footer.html')}
+${__PROD__ ? require('raw!./footer.html') : ''}
 `
   }
 
