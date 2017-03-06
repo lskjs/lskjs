@@ -3,7 +3,6 @@ import set from 'lodash/set';
 
 export default class UserStore {
 
-  @observable email;
   @observable username;
   @observable name;
   @observable surname;
