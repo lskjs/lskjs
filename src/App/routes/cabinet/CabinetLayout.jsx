@@ -47,8 +47,8 @@ export default class AdminLayout extends Component {
     breadcrumbs: PropTypes.array,
     additionalMenus: PropTypes.array,
   }
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedLinkId: null,
     }
@@ -78,30 +78,26 @@ export default class AdminLayout extends Component {
     ];
     const mainMenus = [
       {
-        id: 1,
         icon: <DashboardIcon />,
         title: 'Главная',
         url: '/cabinet',
       },
       {
-        id: 2,
         icon: <Users />,
         title: 'Друзья',
         label: 14,
         items: [
-          { key: 21, id: 21, title: 'Все друзья',  url: '/cabinet/friends' },
-          { key: 22, id: 22, title: 'Входящие заявки',  url: '/cabinet/friends/in' },
-          { key: 23, id: 23, title: 'Исходящие заявки', url: '/cabinet/friends/out' },
+          { title: 'Все друзья',  url: '/cabinet/friends' },
+          { title: 'Входящие заявки',  url: '/cabinet/friends/in' },
+          { title: 'Исходящие заявки', url: '/cabinet/friends/out' },
         ],
       },
       {
-        id: 3,
         icon: <Posts />,
         title: 'Посты',
         url: '/cabinet/posts',
       },
       {
-        id: 4,
         icon: <Mail />,
         label: 10,
         title: 'Сообщения',
@@ -110,20 +106,17 @@ export default class AdminLayout extends Component {
     ];
     const adminMenu = [
       {
-        id: 5,
         icon: <DashboardIcon />,
         title: 'Панель управления',
         url: '/admin',
       },
       {
-        id: 6,
         icon: <Users />,
         label: '6',
         title: 'Пользователи',
         url: '/admin/users',
       },
       {
-        id: 7,
         icon: <Zip />,
         title: 'Еще кнопка',
         url: '#',
@@ -164,6 +157,7 @@ export default class AdminLayout extends Component {
           <SidebarMenuWrapper>
             <SidebarMenuHeader title="НАВИГАЦИЯ" />
               {mainMenus.map((menu, i) => {
+                menu.id = i + 1;
                 const isSelected = menu.id === this.state.selectedLinkId;
                 return (
                   <TreeMenu
@@ -180,6 +174,7 @@ export default class AdminLayout extends Component {
             <SidebarMenuWrapper>
               <SidebarMenuHeader title="АДМИН МЕНЮ" />
               {adminMenu.map((menu, i) => {
+                menu.id = mainMenus.length + i + 1;
                 const isSelected = menu.id === this.state.selectedLinkId;
                 return (
                   <TreeMenu

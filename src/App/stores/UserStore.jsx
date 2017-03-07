@@ -7,6 +7,7 @@ export default class UserStore {
   @observable username;
   @observable name;
   @observable surname;
+  @observable role;
   @observable middlename;
   @observable info = {
     phone: '',

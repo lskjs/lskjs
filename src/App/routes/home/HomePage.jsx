@@ -1,15 +1,18 @@
 import React from 'react';
 import importcss from 'importcss';
+import { inject, observer } from 'mobx-react';
 import { Grid, Row, Col, Nav, NavItem } from 'react-bootstrap';
 import { Card, CardBlock, CardTitle } from 'reactstrap';
 import Component from 'lsk-general/General/Component';
-import Header from '../../containers/Header';
-
+import Header from '../../components/Header';
 import PostCard from '../../components/PostCard';
 
+@inject('user') @observer
 @importcss(require('./HomePage.css'))
 export default class HomePage extends Component {
   render() {
+    const { user } = this.props;
+    console.log(user.toJS)
     return (
       <div>
         <Header />
@@ -30,11 +33,11 @@ export default class HomePage extends Component {
             <Col xs={12} md={8}>
               <PostCard>
                 <PostCard.Head
-                  id={1}
-                  name="Андрей"
-                  surname="Кондалов"
+                  id={user._id}
+                  name={user.name}
+                  surname={user.surname}
                   date={new Date()}
-                  avatar="https://pp.userapi.com/c638020/v638020296/1a982/JmSvhUl4A4M.jpg"
+                  avatar={user.avatar}
                 />
               </PostCard>
             </Col>

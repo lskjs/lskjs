@@ -3,7 +3,7 @@ import { Card, CardBlock } from 'reactstrap';
 import css from 'importcss';
 import moment from 'moment';
 import Avatar from '../Avatar';
-import A from 'lsk-general/General/A';
+import Link from 'lsk-general/General/Link';
 
 function PostCard(props) {
   return (
@@ -29,16 +29,16 @@ class Head extends Component {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     name: PropTypes.string.isRequired,
     surname: PropTypes.string,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.date,
     avatar: PropTypes.string,
   }
   render() {
-    const { id, name, surname, date, avatar } = this.props;
+    const { _id, name, surname, date, avatar } = this.props;
     return (
       <div styleName="card-head">
         <Avatar alt={`${name} ${surname}`} src={avatar} />
         <div styleName="card-head-info">
-          <A href={`/user/${id}`}>{`${name} ${surname}`}</A>
+          <Link href={`/user/${_id}`}>{`${name} ${surname}`}</Link>
           <small>{moment(date, 'YYYYMMDD').locale('ru').fromNow()}</small>
         </div>
       </div>

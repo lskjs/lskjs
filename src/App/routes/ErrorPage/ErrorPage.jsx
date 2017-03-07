@@ -24,7 +24,7 @@ import Check from 'react-icons/lib/md/check';
 import Slide from 'lsk-general/General/Slide';
 import Link from 'lsk-general/General/Link';
 
-import Header from '../../containers/Header';
+import Header from '../../components/Header';
 
 // @inject('app')
 export default class ErrorPage extends Component {

@@ -1,12 +1,10 @@
+/* eslint react/jsx-filename-extension: 0 */
+import React from 'react';
 import CabientLayout from './CabinetLayout';
 import ProfilePage from './ProfilePage';
 import SettingsPage from './SettingsPage';
-import FriendsPage from './FriendsPage';
-import FriendsInRequestsPage from './FriendsPage/tabs/InRequests';
-import FriendsOutRequestsPage from './FriendsPage/tabs/OutRequests';
 import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
-
 
 export default {
   children: [
@@ -45,64 +43,7 @@ export default {
     },
     {
       path: '/friends',
-      children: [
-        {
-          path: '/',
-          async action({ ctx }) {
-            const props = {
-              title: 'Друзья',
-              description: 'Список ваших друзей',
-              siteTitle: ctx.config.siteTitle,
-              children: <FriendsPage />,
-            };
-            props.breadcrumbs = [
-              { key: 2, title: props.title, url: '/cabinet/friends' },
-            ];
-            return {
-              title: props.title,
-              component: <CabientLayout {...props} />,
-            };
-          },
-        },
-        {
-          path: '/in',
-          async action({ ctx }) {
-            const props = {
-              title: 'Входящие заявки',
-              description: 'Заявки в друзья',
-              siteTitle: ctx.config.siteTitle,
-              children: <FriendsInRequestsPage />,
-            };
-            props.breadcrumbs = [
-              { key: 2, title: 'Друзья', url: '/cabinet/friends' },
-              { key: 3, title: props.title, url: '/cabinet/friends/in' },
-            ];
-            return {
-              title: props.title,
-              component: <CabientLayout {...props} />,
-            };
-          },
-        },
-        {
-          path: '/out',
-          async action({ ctx }) {
-            const props = {
-              title: 'Исходящие заявки',
-              description: 'Заявки в друзья',
-              siteTitle: ctx.config.siteTitle,
-              children: <FriendsOutRequestsPage />,
-            };
-            props.breadcrumbs = [
-              { key: 2, title: 'Друзья', url: '/cabinet/friends' },
-              { key: 3, title: props.title, url: '/cabinet/friends/out' },
-            ];
-            return {
-              title: props.title,
-              component: <CabientLayout {...props} />,
-            };
-          },
-        },
-      ],
+      ...require('./FriendsPage/index').default,
     },
     {
       path: '/posts',
@@ -149,13 +90,6 @@ export default {
   ],
   async action({ next }) {
     const route = await next();
-
-    // route.component = <div>
-    //   Cabinet header
-    //   <hr />
-    //   {route.component}
-    // </div>
     return route;
   },
-
 };
