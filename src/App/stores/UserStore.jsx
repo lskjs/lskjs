@@ -3,6 +3,7 @@ import set from 'lodash/set';
 
 export default class UserStore {
 
+  @observable avatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
   @observable username;
   @observable name;
   @observable surname;
@@ -39,6 +40,10 @@ export default class UserStore {
   @action
   editUser() {
     this.store.api.userEdit(this.toJS);
+  }
+
+  @computed get fullName() {
+    return `${this.name} ${this.surname || ''}`;
   }
 
   @computed get toJS() {

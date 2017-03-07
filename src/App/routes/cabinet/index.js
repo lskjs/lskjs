@@ -5,10 +5,8 @@ import FriendsPage from './FriendsPage';
 import FriendsInRequestsPage from './FriendsPage/tabs/InRequests';
 import FriendsOutRequestsPage from './FriendsPage/tabs/OutRequests';
 import PostsPage from './PostsPage';
+import MessagesPage from './MessagesPage';
 
-import DashboardIcon from 'react-icons/lib/fa/dashboard';
-import Users from 'react-icons/lib/ti/group';
-import Zip from 'react-icons/lib/fa/file-archive-o';
 
 export default {
   children: [
@@ -125,40 +123,16 @@ export default {
       },
     },
     {
-      path: '/test',
+      path: '/im',
       async action({ ctx }) {
         const props = {
-          title: 'Тест',
-          description: 'Тестовая',
+          title: 'Сообщения',
+          description: 'Все сообщения',
           siteTitle: ctx.config.siteTitle,
-          children: <div>Тест страницы если ты админ.</div>,
-          additionalMenus: [
-            {
-              key: 1,
-              id: 1,
-              icon: <DashboardIcon />,
-              title: 'Главная',
-              url: '/admin',
-            },
-            {
-              key: 2,
-              id: 2,
-              icon: <Users />,
-              label: '6',
-              title: 'Пользователи',
-              url: '/admin/users',
-            },
-            {
-              key: 3,
-              id: 3,
-              icon: <Zip />,
-              title: 'Еще кнопка',
-              url: '#',
-            },
-          ],
+          children: <MessagesPage />,
         };
         props.breadcrumbs = [
-          { key: 2, title: props.title, url: '/cabinet/test' },
+          { key: 2, title: props.title, url: '/cabinet/im' },
         ];
         return {
           title: props.title,

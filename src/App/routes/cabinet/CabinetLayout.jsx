@@ -17,7 +17,6 @@ import UserMenu from 'lsk-admin/Admin/lib/header/UserMenu';
 import SidebarWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarWrapper';
 import UserPanel from 'lsk-admin/Admin/lib/sidebar/UserPanel';
 import FooterWrapper from 'lsk-admin/Admin/lib/footer/FooterWrapper';
-import SidebarSearch from 'lsk-admin/Admin/lib/sidebar/SidebarSearch';
 import SidebarMenuWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarMenuWrapper';
 import SidebarMenuHeader from 'lsk-admin/Admin/lib/sidebar/SidebarMenuHeader';
 import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
@@ -25,6 +24,7 @@ import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 import Users from 'react-icons/lib/fa/group';
 import Mail from 'react-icons/lib/fa/envelope';
 import Posts from 'react-icons/lib/fa/th-large';
+import Zip from 'react-icons/lib/fa/file-archive-o';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
@@ -47,7 +47,14 @@ export default class AdminLayout extends Component {
     breadcrumbs: PropTypes.array,
     additionalMenus: PropTypes.array,
   }
+  constructor() {
+    super();
+    this.state = {
+      selectedLinkId: null,
+    }
+  }
   onMenuClick = (item) => {
+    this.setState({ selectedLinkId: item.id });
     if (item.url) {
       this.context.history.push(item.url);
     }
@@ -64,21 +71,19 @@ export default class AdminLayout extends Component {
     this.context.history.push('/');
   }
   render() {
-    const { user, title, description, siteTitle, children, breadcrumbs, additionalMenus } = this.props;
+    const { user, title, description, siteTitle, children, breadcrumbs } = this.props;
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
       ...breadcrumbs,
     ];
     const mainMenus = [
       {
-        key: 1,
         id: 1,
         icon: <DashboardIcon />,
         title: 'Главная',
         url: '/cabinet',
       },
       {
-        key: 2,
         id: 2,
         icon: <Users />,
         title: 'Друзья',
@@ -90,25 +95,38 @@ export default class AdminLayout extends Component {
         ],
       },
       {
-        key: 3,
         id: 3,
         icon: <Posts />,
         title: 'Посты',
         url: '/cabinet/posts',
       },
       {
-        key: 4,
         id: 4,
         icon: <Mail />,
         label: 10,
         title: 'Сообщения',
         url: '/cabinet/im',
       },
+    ];
+    const adminMenu = [
       {
-        key: 5,
         id: 5,
-        title: 'Тест',
-        url: '/cabinet/test',
+        icon: <DashboardIcon />,
+        title: 'Панель управления',
+        url: '/admin',
+      },
+      {
+        id: 6,
+        icon: <Users />,
+        label: '6',
+        title: 'Пользователи',
+        url: '/admin/users',
+      },
+      {
+        id: 7,
+        icon: <Zip />,
+        title: 'Еще кнопка',
+        url: '#',
       },
     ];
     return (
@@ -126,8 +144,8 @@ export default class AdminLayout extends Component {
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
-              image={'https://remont3.ru/templates/umedia/dleimages/noavatar.png'}
-              name={user.name}
+              image={user.avatar}
+              name={user.fullName}
               title={`Добро пожаловать, ${user.name}`}
               description="Ваш статус"
               buttons={[
@@ -140,32 +158,39 @@ export default class AdminLayout extends Component {
         <SidebarWrapper>
           <UserPanel
             statusText="В сети"
-            image={'https://remont3.ru/templates/umedia/dleimages/noavatar.png'}
-            name={user.name}
-          />
-          <SidebarSearch
-            placeholder="Поиск..."
-            onSubmit={e => console.log(e)}
+            image={user.avatar}
+            name={user.fullName}
           />
           <SidebarMenuWrapper>
             <SidebarMenuHeader title="НАВИГАЦИЯ" />
-              {mainMenus.map(menu => (
-                <TreeMenu
-                  {...menu}
-                  onClick={() => this.onMenuClick(menu)}
-                  onItemClick={this.onMenuClick}
-                />
-              ))}
+              {mainMenus.map((menu, i) => {
+                const isSelected = menu.id === this.state.selectedLinkId;
+                return (
+                  <TreeMenu
+                    key={i}
+                    {...menu}
+                    isSelected={isSelected}
+                    onClick={() => this.onMenuClick(menu)}
+                    onItemClick={this.onMenuClick}
+                  />
+                )
+              })}
           </SidebarMenuWrapper>
-          <If condition={additionalMenus.length > 0}>
+          <If condition={user.role === 'admin'}>
             <SidebarMenuWrapper>
               <SidebarMenuHeader title="АДМИН МЕНЮ" />
-              {additionalMenus.map(menu => (
-                <TreeMenu
-                  {...menu}
-                  onClick={() => this.onMenuClick(menu)}
-                />
-              ))}
+              {adminMenu.map((menu, i) => {
+                const isSelected = menu.id === this.state.selectedLinkId;
+                return (
+                  <TreeMenu
+                    key={i}
+                    {...menu}
+                    isSelected={isSelected}
+                    onClick={() => this.onMenuClick(menu)}
+                    onItemClick={this.onMenuClick}
+                  />
+                )
+              })}
             </SidebarMenuWrapper>
           </If>
         </SidebarWrapper>

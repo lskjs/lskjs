@@ -33,7 +33,7 @@ export default class Header extends Component {
         </Nav>
         <Nav pullRight>
           <If condition={auth.isAuth}>
-            <NavDropdown eventKey={1} title={user.name} id="user-dropdown">
+            <NavDropdown eventKey={1} title={user.fullName} id="user-dropdown">
               <MenuItem eventKey={1.1} componentClass={Link} href="/cabinet">Профиль</MenuItem>
               <MenuItem eventKey={1.3} componentClass={Link} href="/cabinet/settings">Настройки</MenuItem>
               <MenuItem divider />

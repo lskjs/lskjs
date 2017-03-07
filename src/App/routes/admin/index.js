@@ -1,6 +1,6 @@
 /* eslint react/jsx-filename-extension: 0 */
 import React from 'react';
-import AdminLayout from './AdminLayout';
+import CabinetLayout from '../cabinet/CabinetLayout';
 
 import Dashboard from './Dashboard';
 import Profile from './Profile';
@@ -20,7 +20,7 @@ export default {
         };
         return {
           title: props.title,
-          component: <AdminLayout {...props} />,
+          component: <CabinetLayout {...props} />,
         };
       },
     },
@@ -34,7 +34,7 @@ export default {
         };
         return {
           title: props.title,
-          component: <AdminLayout {...props} />,
+          component: <CabinetLayout {...props} />,
         };
       },
     },
@@ -48,7 +48,7 @@ export default {
         };
         return {
           title: props.title,
-          component: <AdminLayout {...props} />,
+          component: <CabinetLayout {...props} />,
         };
       },
     },
