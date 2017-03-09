@@ -1,10 +1,15 @@
-import _ from 'lodash';
+import { defaultsDeep, reverse } from 'lodash';
 
 export default {
   server: function serverConfig(...configs) {
-    return _.defaultsDeep({}, ..._.reverse(configs));
+    if (__SERVER__) {
+      const env = require('./env').config();
+      // console.log(env);
+      configs.push(env);
+    }
+    return defaultsDeep({}, ...reverse(configs));
   },
   client: function clientConfig(...configs) {
-    return _.defaultsDeep({}, ..._.reverse(configs));
+    return defaultsDeep({}, ...reverse(configs));
   },
 };
