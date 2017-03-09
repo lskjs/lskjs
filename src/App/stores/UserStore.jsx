@@ -1,10 +1,12 @@
 import { observable, action, computed, toJS } from 'mobx';
 import { set, clone } from 'lodash';
 
+const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
+
 export default class UserStore {
 
   @observable _id;
-  @observable avatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
+  @observable avatar = defaultAvatar;
   @observable username;
   @observable name;
   @observable surname;
@@ -28,18 +30,20 @@ export default class UserStore {
     this.update(user);
   }
 
+  @action
   update(user) {
-    if (!user) this.clearUser();
+    if (!user) this.reset();
     for (const item in user) {
       set(this, item, user[item]);
     }
   }
 
-  clearUser() {
+  @action
+  reset() {
     for (const item in this.toJS) {
       set(this, item, undefined);
     }
-    this.avatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
+    this.avatar = defaultAvatar;
   }
 
   @action

@@ -7,17 +7,21 @@ import { toJS } from 'mobx';
 @inject('auth', 'user')
 @observer
 export default class Header extends Component {
+  static defaultProps = {
+    siteTitle: 'Example',
+  }
   static propTypes = {
     user: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    siteTitle: PropTypes.string,
   }
   render() {
-    const { auth, user } = this.props;
+    const { auth, user, siteTitle } = this.props;
     return (
       <Navbar fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link href="/">Example</Link>
+            <Link href="/">{siteTitle}</Link>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav>

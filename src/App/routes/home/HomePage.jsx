@@ -11,7 +11,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header siteTitle={this.props.siteTitle} />
         <Grid styleName="content">
           <Row>
             <Col xs={12} md={4}>

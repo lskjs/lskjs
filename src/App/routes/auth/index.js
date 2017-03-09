@@ -1,47 +1,49 @@
  import AuthPage from './AuthPage';
+
  export default {
    children: [
      {
        path: '/(login|)',
-       action({appStore}) {
-         console.log('appStore', appStore.auth);
+       action({ ctx }) {
          return {
            title: 'Cabinet',
-           component: <AuthPage type="login" />,
+           component: <AuthPage type="login" siteTitle={ctx.config.siteTitle} />,
          };
        },
      },
      {
        path: '/recovery',
-       action() {
+       action({ ctx }) {
          return {
            title: 'recovery',
-           component: <AuthPage type="recovery" />,
+           component: <AuthPage type="recovery" siteTitle={ctx.config.siteTitle} />,
          };
        },
      },
      {
        path: '/signup',
-       action() {
+       action({ ctx }) {
          return {
            title: 'signup',
-           component: <AuthPage type="signup" />,
+           component: <AuthPage type="signup" siteTitle={ctx.config.siteTitle} />,
          };
        },
      },
      {
        path: '/logout',
        action({ appStore }) {
-         if (__SERVER__) return {
-           component: <div>Loading</div>
+         if (__SERVER__) {
+           return {
+             component: <div>Loading</div>,
+           };
          }
          appStore.auth.logout();
          //  console.log('appStore', appStore);
          return { redirect: '/' };
-        //  return {
-        //    title: 'signup',
-        //    component: <AuthPage type="signup" />,
-        //  };
+         //  return {
+         //    title: 'signup',
+         //    component: <AuthPage type="signup" />,
+         //  };
        },
      },
     //  {

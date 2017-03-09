@@ -36,7 +36,7 @@ export default {
       console.log('err!!!!!!!!!!!!!!!!!!!!!!!!!!!!', err);
       route = {
         title: `!!!Error: ${err}`,
-        component: <ErrorPage>{`Error: ${err}`}</ErrorPage>,
+        component: <ErrorPage siteTitle={ctx.config.siteTitle}>{`Error: ${err}`}</ErrorPage>,
       };
     }
     if (!route) route = {};

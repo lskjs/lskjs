@@ -124,7 +124,7 @@ export default class AuthPage extends Component {
 
     return (
       <div>
-        <Header />
+        <Header siteTitle={this.props.siteTitle} />
         <Slide
           full
           video="http://skill-branch.ru/video-background.webm"

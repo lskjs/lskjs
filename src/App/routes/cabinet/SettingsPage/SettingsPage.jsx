@@ -11,10 +11,11 @@ import Check from 'react-icons/lib/md/check';
 import Component from 'lsk-general/General/Component';
 import Form from 'lsk-general/General/Form';
 
-@inject('user', 'ui') @observer
+@inject('user', 'auth', 'ui') @observer
 export default class ProfilePage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired,
   }
   @autobind
@@ -23,8 +24,9 @@ export default class ProfilePage extends Component {
     // this.redirect('/cabinet');
   }
   render() {
-    const { user, ui } = this.props;
+    const { user, auth, ui } = this.props;
     const status = ui.statusRequest;
+    if (!auth.isAuth) return false;
     return (
       <Row>
         <Col md={6} xs={12}>

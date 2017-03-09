@@ -1,9 +1,9 @@
 import HomePage from './HomePage';
 
 export default {
-  action: () => {
+  action: ({ ctx }) => {
     return {
-      component: <HomePage />,
+      component: <HomePage siteTitle={ctx.config.siteTitle} />,
     };
   },
 };
