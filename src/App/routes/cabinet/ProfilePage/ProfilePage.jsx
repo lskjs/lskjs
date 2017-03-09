@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Row, Col } from 'react-bootstrap';
 import { Card, CardBlock } from 'reactstrap';
 
-@inject('user')
+@inject('user', 'auth')
 @observer
 export default class ProfilePage extends Component {
   static defaultProps = {
@@ -13,7 +13,8 @@ export default class ProfilePage extends Component {
     user: PropTypes.object,
   }
   render() {
-    const user = this.props.user;
+    const { user, auth } = this.props;
+    if (!auth.isAuth) return false;
     return (
       <Row>
         <Col md={6} xs={12}>

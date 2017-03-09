@@ -3,6 +3,7 @@ import { set, clone } from 'lodash';
 
 export default class UserStore {
 
+  @observable _id;
   @observable avatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
   @observable username;
   @observable name;
@@ -28,9 +29,17 @@ export default class UserStore {
   }
 
   update(user) {
+    if (!user) this.clearUser();
     for (const item in user) {
       set(this, item, user[item]);
     }
+  }
+
+  clearUser() {
+    for (const item in this.toJS) {
+      set(this, item, undefined);
+    }
+    this.avatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
   }
 
   @action

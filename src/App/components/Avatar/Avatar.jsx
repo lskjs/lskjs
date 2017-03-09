@@ -5,7 +5,7 @@ import css from 'importcss';
 @css(require('./Avatar.scss'))
 class Avatar extends Component {
   static defaultProps = {
-    src: 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png',
+    src: null,
     size: 'default',
   };
   static propTypes = {
@@ -15,6 +15,7 @@ class Avatar extends Component {
   };
   render() {
     const { size, alt, src } = this.props;
+    const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
     return (
       <img
         styleName={cx({
@@ -24,7 +25,7 @@ class Avatar extends Component {
           w100: size === 'large',
         })}
         alt={alt}
-        src={src}
+        src={src || defaultAvatar}
       />
     );
   }

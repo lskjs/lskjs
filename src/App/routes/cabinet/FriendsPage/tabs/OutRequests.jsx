@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
 import { Row, Col } from 'react-bootstrap';
 import { Card, CardBlock } from 'reactstrap';
 
-@inject('user')
-@observer
 export default class OutRequests extends Component {
   render() {
     return (
