@@ -1,4 +1,4 @@
-import { observable, action, computed, toJS } from 'mobx';
+import { extendObservable, observable, action, computed, toJS } from 'mobx';
 import { set, clone } from 'lodash';
 
 const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
@@ -40,10 +40,19 @@ export default class UserStore {
 
   @action
   reset() {
-    for (const item in this.toJS) {
-      set(this, item, undefined);
-    }
-    this.avatar = defaultAvatar;
+    extendObservable(this, {
+      avatar: defaultAvatar,
+      _id: null,
+      name: null,
+      username: null,
+      surname: null,
+      middlename: null,
+      role: null,
+      info: {
+        phone: '',
+        company: '',
+      },
+    });
   }
 
   @action
