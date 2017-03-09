@@ -1,8 +1,8 @@
 import React from 'react';
 import importcss from 'importcss';
 import { autobind } from 'core-decorators';
-import { inject } from 'mobx-react';
-import sample from 'lodash/sample';
+import { inject, observer } from 'mobx-react';
+import cx from 'classnames';
 import {
   Card,
   CardBlock,
@@ -39,24 +39,24 @@ import Form from 'lsk-general/General/Form';
 
 import Header from '../../../components/Header';
 
-@inject('app')
+@inject('auth', 'ui') @observer
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
 
   @autobind
   async handleSubmit(data) {
-    const auth = this.props.app.auth;
+    const { auth } = this.props;
     // try {
     if (this.props.type === 'login') {
-      const res = await auth.login(data);
+      await auth.login(data);
       this.redirect('/');
     }
     if (this.props.type === 'signup') {
-      const res = await auth.signup(data);
+      await auth.signup(data);
       this.redirect('/');
     }
     if (this.props.type === 'recovery') {
-      const res = await auth.recovery(data);
+      await auth.recovery(data);
       global.toast({
         type: 'success',
         title: 'Письмо с восстановлением пароля отправлено на почту.',
@@ -70,7 +70,7 @@ export default class AuthPage extends Component {
   render() {
     let { type } = this.props;
     if (!type) type = 'login';
-    const status = null;
+    const status = this.props.ui.statusRequest;
     let fields = [
       {
         name: 'login',
@@ -194,8 +194,7 @@ export default class AuthPage extends Component {
                             position: 'relative',
                           }}
                         >
-                          {/* <If condition={!status}> */}
-                          <span style={{ visibility: !status ? 'visible' : 'hidden' }}>
+                          <span style={{ display: !status ? 'block' : 'none' }}>
                             <If condition={type === 'login'}>
                               Войти
                             </If>
@@ -206,9 +205,13 @@ export default class AuthPage extends Component {
                               Сбросить пароль
                             </If>
                           </span>
-                          {/* <div styleName="button-icon-status spin"><Loading /></div> */}
                           <If condition={status}>
-                            <div styleName="button-icon-status">
+                            <div
+                              className={cx({
+                                'button-icon-status': true,
+                                spin: status === 'wait',
+                              })}
+                            >
                               <If condition={status === 'wait'}>
                                 <Loading />
                               </If>

@@ -61,22 +61,25 @@ export default class AuthStore {
   }
 
   async signup(data) {
+    this.store.ui.status('wait');
     const res = await this.store.api.authSignup(data);
+    this.store.ui.status(res.message);
     await this.setToken(res.token);
     await this.updateUser(res.user);
-    return res;
   }
 
   async login(data) {
+    this.store.ui.status('wait');
     const res = await this.store.api.authLogin(data);
+    this.store.ui.status(res.message);
     await this.setToken(res.token);
     await this.updateUser(res.user);
-    return res;
   }
 
   async recovery(data) {
+    this.store.ui.status('wait');
     const res = await this.store.api.authRecovery(data);
-    return res;
+    this.store.ui.status(res.message);
   }
 
   @action

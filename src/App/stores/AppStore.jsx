@@ -1,5 +1,8 @@
+import clone from 'lodash/clone';
+
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
+import UIStore from './UIStore';
 import ApiClient from '../api/api.client';
 
 export default class AppStore {
@@ -10,6 +13,7 @@ export default class AppStore {
     this.api = new ApiClient({ base });
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, user);
+    this.ui = new UIStore(this);
   }
 
   provide() {
@@ -18,6 +22,7 @@ export default class AppStore {
       auth: this.auth,
       user: this.user,
       api: this.api,
+      ui: this.ui,
     };
   }
 

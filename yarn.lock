@@ -5512,9 +5512,9 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-lsk-admin@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.4.tgz#de6b3f2435315221e9b6c66540280fd2893c6ccb"
+lsk-admin@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.7.tgz#494470b5dee469240fa644af33a2ebeff75f56f9"
   dependencies:
     admin-lte "2.3.11"
     animate-sass "0.6.6"
@@ -5603,9 +5603,9 @@ lsk-build@^0.6.1:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.5.2.tgz#d73d2b37cfe98802d3bf61ce3b0c5555729f5739"
+lsk-general@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.2.tgz#01062a5d0839efecdc8195402643581ad93062c0"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"

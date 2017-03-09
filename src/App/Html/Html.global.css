@@ -16,3 +16,22 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
 }
+
+.button-icon-status {
+  font-size: 1.3em;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.button-icon-status.spin > svg {
+  animation-name: spin;
+  animation-duration: 600ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}

@@ -29,7 +29,7 @@ export default class ApiClient extends ApiClientBase {
       method: 'POST',
       body,
     });
-    return res.data;
+    return res;
   }
 
 }

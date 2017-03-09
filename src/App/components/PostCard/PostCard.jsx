@@ -26,10 +26,10 @@ class Head extends Component {
     avatar: '',
   }
   static propTypes = {
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
     surname: PropTypes.string,
-    date: PropTypes.date,
+    date: PropTypes.any,
     avatar: PropTypes.string,
   }
   render() {

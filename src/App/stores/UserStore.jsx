@@ -1,5 +1,5 @@
 import { observable, action, computed, toJS } from 'mobx';
-import set from 'lodash/set';
+import { set, clone } from 'lodash';
 
 export default class UserStore {
 
@@ -34,13 +34,15 @@ export default class UserStore {
   }
 
   @action
-  editField(field = null, text) {
-    if (field) set(this, field, text);
-  }
-
-  @action
-  editUser() {
-    this.store.api.userEdit(this.toJS);
+  async editUser(data) {
+    this.store.ui.status('wait');
+    const backup = clone(this.toJS);
+    this.update(data);
+    const res = await this.store.api.userEdit(data);
+    this.store.ui.status(res.message);
+    if (res.message !== 'ok') {
+      this.update(backup);
+    }
   }
 
   @computed get fullName() {

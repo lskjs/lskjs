@@ -1,8 +1,10 @@
-import getModules from '../v1.modules';
+import merge from 'lodash/merge';
+import Modules from '../v1.modules';
 
 export default (ctx) => {
   const { User } = ctx.models;
-  const modules = new getModules(ctx);
+  const modules = new Modules(ctx);
+  const { e500 } = ctx.errors;
   const resource = {
 
     get: async (req) => {
@@ -12,13 +14,17 @@ export default (ctx) => {
     },
 
     edit: async (req) => {
-      modules.isAuth(req);
-      const userId = req.user._id;
-      const params = req.allParams();
-      const user = await User.findById(userId);
-      console.log(user, params);
-      Object.assign(user, params);
-      return user.save();
+      try {
+        modules.isAuth(req);
+        const userId = req.user._id;
+        const params = req.allParams();
+        let user = await User.findById(userId);
+        user = merge(user, params);
+        user.save();
+        return user;
+      } catch (error) {
+        throw e500(error);
+      }
     },
 
   };
