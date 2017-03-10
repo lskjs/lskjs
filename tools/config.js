@@ -9,7 +9,7 @@ const ctx = {
   dirname,
   pkg: require('../package.json'),
   deps: [
-    {`
+    {
       name: 'lego-starter-kit',
       path: fs.realpathSync(`${dirname}/node_modules/lego-starter-kit/src`),
       alias: 'lego-starter-kit',
