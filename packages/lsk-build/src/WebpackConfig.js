@@ -410,7 +410,7 @@ export default class WebpackConfig {
   }
 
   getEntry() {
-    return 'index.js';
+    return ['babel-polyfill', 'index.js'];
   }
 
   getOutput() {
@@ -432,6 +432,7 @@ export default class WebpackConfig {
       plugins: this.getPlugins(),
       cache: this.isDebug(),
       debug: this.isDebug(),
+      bail: !this.isDebug(),
       stats: this.getStats(),
       postcss: (...args) => this.getPostcssModule(...args),
     };

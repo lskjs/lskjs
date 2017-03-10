@@ -26,7 +26,8 @@ export default class WebpackClientConfig extends WebpackConfig {
   getPreConfig() {
     return {
       ...super.getPreConfig(),
-      devtool: this.isSourcemap() ? 'cheap-module-source-map' : false,
+      // devtool: this.isSourcemap() ? 'cheap-module-source-map' : false,
+      devtool: this.isSourcemap() ? 'eval-source-map' : false,
     };
   }
 
@@ -64,8 +65,10 @@ export default class WebpackClientConfig extends WebpackConfig {
         // https://github.com/mishoo/UglifyJS2#compressor-options
         new webpack.optimize.UglifyJsPlugin({
           compress: {
-            screw_ie8: true, // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+            screw_ie8: true,
             warnings: this.isVerbose(),
+            unused: true,
+            dead_code: true,
           },
           mangle: {
             screw_ie8: true,

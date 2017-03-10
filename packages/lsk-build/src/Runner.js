@@ -11,6 +11,7 @@ import cp from 'child_process';
 import fs from 'fs';
 import { writeFile, makeDir } from './utils/fs';
 import mkdirp from 'mkdirp';
+import stringify from 'serialize-javascript';
 
 // verbose webpack config
 // require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
@@ -82,6 +83,12 @@ export default class Runner {
 
   bundle() {
     return new Promise((resolve, reject) => {
+      if (this.webpackConfigDist) {
+        try {
+          fs.writeFileSync(this.webpackConfigDist, stringify(this.webpackConfig, 2));
+          console.log('Compiling webpack.config.js => ', this.webpackConfigDist);
+        } catch (err) { }
+      }
       webpack(this.webpackConfig).run((err, stats) => {
         if (err) {
           return reject(err);
@@ -178,7 +185,8 @@ export default class Runner {
       }
       if (this.webpackConfigDist) {
         try {
-          fs.writeFileSync(this.webpackConfigDist, JSON.stringify(this.webpackConfig, null, 2));
+          fs.writeFileSync(this.webpackConfigDist, stringify(this.webpackConfig, 2));
+          console.log('Compiling webpack.config.js => ', this.webpackConfigDist);
         } catch (err) { }
       }
 
