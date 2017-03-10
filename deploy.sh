@@ -2,6 +2,6 @@ NODE_ENV=production yarn run build &&
 cd ./build &&
 NODE_ENV=production yarn &&
 cd .. &&
-rsync -avz ./build/* s3:/projects/lsk/app &&
-ssh s3 'cd /projects/lsk && docker-compose stop && docker-compose up' &&
+rsync -avz ./build/* root@s3.mgbeta.ru:/projects/lsk/app &&
+ssh root@s3.mgbeta.ru 'cd /projects/lsk && docker-compose stop && docker-compose up' &&
 echo 'ok'
