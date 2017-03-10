@@ -28,9 +28,9 @@
     "react-dom": "15.4.2",
     "react-tunnel": "0.1.0",
     "socket.io": "1.7.2",
+    "socket.io-as-promised": "^1.0.0",
     "universal-router": "2.0.0",
     "uuid": "3.0.1",
-    "socket.io-as-promised": "^1.0.0",
     "whatwg-fetch": "2.0.2"
   },
   "devDependencies": {
@@ -63,7 +63,7 @@
     "eslint-plugin-react": "6.9.0",
     "json-loader": "0.5.4",
     "jsx-control-statements": "3.1.2",
-    "lsk-build": "0.5.3",
+    "lsk-build": "0.6.1",
     "postcss-loader": "1.2.2",
     "react-deep-force-update": "2.0.1",
     "react-hot-loader": "3.0.0-beta.6",
