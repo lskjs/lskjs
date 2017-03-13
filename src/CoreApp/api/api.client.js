@@ -160,28 +160,34 @@ export default class ApiClient {
 
   fetch(...args) {
     return this.getFetch(...args)
-      .then(async (res) => {
-        let text;
-        let json;
-        try {
-          text = await res.text();
-          json = JSON.parse(text);
-        } catch (e) {
-          await this.throwError({
-            err: {
-              status: res.status,
-              statusText: res.statusText,
-              // text: text,
-              message: text,
-            },
-            res,
-          });
-        }
-        return this.afterFetch({
-          json,
-          text,
+    .then(async (res) => {
+      let text;
+      let json;
+      try {
+        text = await res.text();
+        json = JSON.parse(text);
+      } catch (e) {
+        await this.throwError({
+          err: {
+            status: res.status,
+            statusText: res.statusText,
+            // text: text,
+            message: text,
+          },
           res,
         });
-      });
+      }
+      const params = {
+        url: args[0],
+        params: args[1],
+        json,
+        text,
+        res,
+      };
+      if (args[1] && args[1].afterFetch) {
+        return args[1].afterFetch(params);
+      }
+      return this.afterFetch(params);
+    });
   }
 }
