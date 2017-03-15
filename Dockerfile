@@ -14,5 +14,7 @@ RUN yarn install
 
 RUN mkdir /app
 RUN cp -R /project/build/* /app
+RUN rm -rf /project
 
+RUN cd /app
 RUN yarn start
