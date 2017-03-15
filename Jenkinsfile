@@ -9,17 +9,19 @@ node('master') {
             checkout scm
         }
 
-        stage('Install Deps') {
-            env.NODE_ENV = "development"
-            print "Environment will be: ${env.NODE_ENV}"
-            sh 'yarn install'
-        }
+        nodejs(nodeJSInstallationName: 'node692') {
+            stage('Install Deps') {
+                env.NODE_ENV = "development"
+                print "Environment will be: ${env.NODE_ENV}"
+                sh 'yarn install'
+            }
 
-        stage('Build Project') {
-            env.NODE_ENV = 'production'
-            print "Environment will be: ${env.NODE_ENV}"
-            sh 'yarn run build'
-            sh 'cd ./build && yarn install'
+            stage('Build Project') {
+                env.NODE_ENV = 'production'
+                print "Environment will be: ${env.NODE_ENV}"
+                sh 'yarn run build'
+                sh 'cd ./build && yarn install'
+            }
         }
 
         stage('Build Image') {
