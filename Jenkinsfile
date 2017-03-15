@@ -1,4 +1,4 @@
-node {
+node('master') {
 
     currentBuild.result = "SUCCESS"
 
@@ -14,7 +14,7 @@ node {
             print "Environment will be : ${env.NODE_ENV}"
 
             sh 'node -v'
-            sh 'yarn prune'
+            sh 'yarn clean'
             sh 'yarn install'
 
        stage 'Build Project'
@@ -42,9 +42,9 @@ node {
 
        stage 'Cleanup'
 
-            echo 'prune and cleanup'
-            sh 'yarn prune'
-            sh 'rm node_modules -rf'
+            echo 'clean dir'
+            sh 'yarn clean'
+            sh 'rm -rf node_modules build'
 
             mail body: 'project build successful',
             from: 'ci@mgbeta.ru',
