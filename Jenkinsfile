@@ -41,7 +41,6 @@ node('master') {
         }
 
         stage 'Cleanup' {
-            echo 'clean dir'
             sh 'yarn clean'
             sh 'rm -rf node_modules build'
 
@@ -54,6 +53,7 @@ node('master') {
     } catch (err) {
 
         currentBuild.result = "FAILURE"
+        sh 'rm -rf node_modules build'
         mail body: "project build error is here: ${env.BUILD_URL}" ,
             from: 'ci@mgbeta.ru',
             subject: 'project build failed',
