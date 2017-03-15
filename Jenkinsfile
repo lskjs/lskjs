@@ -26,6 +26,7 @@ node('master') {
             def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
             docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
                 image.push()
+                image.push('latest')
             }
         }
 
