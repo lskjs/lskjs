@@ -18,7 +18,3 @@ WORKDIR /app
 RUN mkdir /app
 RUN mv /project/build/* /app
 RUN rm -rf /project
-
-
-RUN cd /app
-RUN yarn start
