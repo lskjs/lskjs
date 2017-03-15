@@ -10,26 +10,20 @@ node('master') {
 
         stage('Install Deps') {
             env.NODE_ENV = "development"
-            print 'Environment will be: ${env.NODE_ENV}'
-
-            sh 'node -v'
-            sh 'yarn clean'
+            print "Environment will be: ${env.NODE_ENV}"
             sh 'yarn install'
         }
 
         stage('Build Project') {
             env.NODE_ENV = 'production'
-            print 'Environment will be: ${env.NODE_ENV}'
-
-            sh 'yarn run build'
-            sh 'cd ./build'
-            sh 'yarn install'
-            sh 'cd ..'
+            print "Environment will be: ${env.NODE_ENV}"
+            sh 'yarn run build && cd ./build'
+            sh 'yarn install && cd ..'
         }
 
         docker.withRegistry('https://polygon.mgbeta.ru:5000/', 'docker-registry') {
             stage('Build Image') {
-                def image = docker.build('mgbeta/lsk-example:${env.BUILD_NUMBER}')
+                def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
                 image.push()
             }
 
@@ -42,10 +36,7 @@ node('master') {
             }
         }
 
-        stage 'Cleanup' {
-            sh 'yarn clean'
-            sh 'rm -rf node_modules build'
-
+        stage 'Finish' {
             mail body: 'project build successful',
                 from: 'ci@mgbeta.ru',
                 subject: 'project build successful',
