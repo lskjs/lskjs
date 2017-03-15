@@ -10,7 +10,7 @@ node('master') {
 
         stage('Install Deps') {
             env.NODE_ENV = "development"
-            print "Environment will be: ${env.NODE_ENV}"
+            print 'Environment will be: ${env.NODE_ENV}'
 
             sh 'node -v'
             sh 'yarn clean'
@@ -19,7 +19,7 @@ node('master') {
 
         stage('Build Project') {
             env.NODE_ENV = 'production'
-            print "Environment will be: ${env.NODE_ENV}"
+            print 'Environment will be: ${env.NODE_ENV}'
 
             sh 'yarn run build'
             sh 'cd ./build'
@@ -27,18 +27,18 @@ node('master') {
             sh 'cd ..'
         }
 
-        docker.withRegistry('https://polygon.mgbeta.ru:5000/', 'db670754-6b99-4a82-8b9c-67daa30e7c87') {
+        docker.withRegistry('https://polygon.mgbeta.ru:5000/', 'docker-registry') {
             stage('Build Image') {
-                def image = docker.build "mgbeta/lsk-example:${env.BUILD_NUMBER}"
+                def image = docker.build('mgbeta/lsk-example:${env.BUILD_NUMBER}')
                 image.push()
             }
 
             stage('Test Image') {
-                print "Here, testing the image"
+                print 'Here, testing the image'
             }
 
             stage('Approve Image') {
-                    image.push 'latest'
+                image.push('latest')
             }
         }
 
