@@ -22,21 +22,20 @@ node('master') {
             sh 'yarn install && cd ..'
         }
 
-            stage('Build Image') {
-                def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
-                docker.withRegistry(REGISTRY_URL, 'docker-registry') {
-                    image.push()
-                }
+        stage('Build Image') {
+            def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
+            docker.withRegistry(REGISTRY_URL, 'docker-registry') {
+                image.push()
             }
+        }
 
-            stage('Test Image') {
-                print 'Here, testing the image'
-            }
+        stage('Test Image') {
+            print 'Here, testing the image'
+        }
 
-            stage('Approve Image') {
-                docker.withRegistry(REGISTRY_URL, 'docker-registry') {
-                    image.push('latest')
-                }
+        stage('Approve Image') {
+            docker.withRegistry(REGISTRY_URL, 'docker-registry') {
+                image.push('latest')
             }
         }
 
