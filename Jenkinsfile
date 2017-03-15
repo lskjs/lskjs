@@ -1,6 +1,7 @@
 node('master') {
 
     currentBuild.result = "SUCCESS"
+    def REGISTRY_URL = 'https://polygon.mgbeta.ru:5000/';
 
     try {
 
@@ -21,10 +22,11 @@ node('master') {
             sh 'yarn install && cd ..'
         }
 
-        docker.withRegistry('https://polygon.mgbeta.ru:5000/', 'docker-registry') {
             stage('Build Image') {
                 def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
-                image.push()
+                docker.withRegistry(REGISTRY_URL, 'docker-registry') {
+                    image.push()
+                }
             }
 
             stage('Test Image') {
@@ -32,7 +34,9 @@ node('master') {
             }
 
             stage('Approve Image') {
-                image.push('latest')
+                docker.withRegistry(REGISTRY_URL, 'docker-registry') {
+                    image.push('latest')
+                }
             }
         }
 
