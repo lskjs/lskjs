@@ -27,7 +27,7 @@ node('master') {
             sh 'cd ..'
         }
 
-        docker.withRegistry('https://hq.mgbeta.ru:5000/', 'db670754-6b99-4a82-8b9c-67daa30e7c87') {
+        docker.withRegistry('https://polygon.mgbeta.ru:5000/', 'db670754-6b99-4a82-8b9c-67daa30e7c87') {
             stage('Build Image') {
                 def image = docker.build "mgbeta/lsk-example:${env.BUILD_NUMBER}"
                 image.push()
