@@ -5430,10 +5430,6 @@ mkdirp@0.3.0:
   dependencies:
     minimist "0.0.8"
 
-mobx-react-devtools@^4.2.11:
-  version "4.2.11"
-  resolved "https://registry.yarnpkg.com/mobx-react-devtools/-/mobx-react-devtools-4.2.11.tgz#18d89a32b7d28b48228d12ccde73cf733aacc395"
-
 mobx-react@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-4.1.2.tgz#d5404ab7471eec4b1b469a561029aa31befe2357"

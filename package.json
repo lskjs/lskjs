@@ -66,7 +66,6 @@
     "json-loader": "0.5.4",
     "jsx-control-statements": "3.1.2",
     "lsk-build": "0.6.2",
-    "mobx-react-devtools": "^4.2.11",
     "node-fetch": "^1.6.3",
     "node-sass": "^4.5.0",
     "postcss-loader": "1.2.2",
