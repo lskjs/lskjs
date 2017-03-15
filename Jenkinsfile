@@ -1,3 +1,4 @@
+#!groovy​
 node('master') {
 
     currentBuild.result = "SUCCESS"
@@ -17,25 +18,18 @@ node('master') {
         stage('Build Project') {
             env.NODE_ENV = 'production'
             print "Environment will be: ${env.NODE_ENV}"
-            sh 'yarn run build && cd ./build'
-            sh 'yarn install && cd ..'
+            sh 'yarn run build'
+            sh 'ls -al'
+            sh 'cd ./build && yarn install'
+            sh 'ls -al'
         }
 
-        docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
-            stage('Build Image') {
-                def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
+        stage('Build Image') {
+            sh 'cd ..'
+            sh 'ls -al'
+            def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
+            docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
                 image.push()
-            }
-
-            stage('Test Image') {
-                print 'Here, testing the image'
-                image.inside {
-                    sh 'ls -l -a /app'
-                }
-            }
-
-            stage('Approve Image') {
-                image.push('latest')
             }
         }
 
