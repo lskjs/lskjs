@@ -1,32 +1,69 @@
-node('lsk-example') {
-    stage('Pulling') {
-        sh 'node -v'
-        sh 'yarn prune'
-        sh 'yarn install'
+node('node') {
+
+    currentBuild.result = "SUCCESS"
+
+    try {
+
+       stage 'Checkout'
+
+            checkout scm
+
+       stage 'Install Deps'
+
+            env.NODE_ENV = "development"
+            print "Environment will be : ${env.NODE_ENV}"
+
+            sh 'node -v'
+            sh 'yarn prune'
+            sh 'yarn install'
+
+       stage 'Build Project'
+
+            env.NODE_ENV = 'production'
+            print "Environment will be : ${env.NODE_ENV}"
+
+            sh 'yarn run build'
+            sh 'cd ./build'
+            sh 'yarn install'
+            sh 'cd ..'
+
+       stage 'Build Image'
+
+            def image = docker.build "mgbeta/lsk-example:${env.BUILD_TAG}"
+            image.push()
+
+       stage 'Test Image'
+
+            print "Here, testing the image"
+
+       stage 'Approve Image'
+
+            image.push 'latest'
+
+       stage 'Cleanup'
+
+            echo 'prune and cleanup'
+            sh 'yarn prune'
+            sh 'rm node_modules -rf'
+
+            mail body: 'project build successful',
+            from: 'ci@mgbeta.ru',
+            subject: 'project build successful',
+            to: 'obt195@gmail.com'
+
+        }
+
+
+    catch (err) {
+
+        currentBuild.result = "FAILURE"
+
+            mail body: "project build error is here: ${env.BUILD_URL}" ,
+            from: 'ci@mgbeta.ru',
+            subject: 'project build failed',
+            to: 'obt195@gmail.com'
+
+        throw err
     }
 
-    stage('Build') {
-        sh 'yarn run build'
-    }
-
-    // stage('Docker build') {
-    //   dockerNode(image: 'node:7.1', sideContainers: ['']) {
-    //       withDockerContainer('node:7.1') {
-    //           sh 'yarn run build'
-    //           // ...
-    //           withDockerRegistry([
-    //             credentialsId: 'db670754-6b99-4a82-8b9c-67daa30e7c87',
-    //             url: 'https://hq.mgbeta.ru:5000/'
-    //           ]) {
-                  
-    //           }
-    //       }
-    //   }
-    // }
-
-    stage('Deploy') {
-        sh 'cd ./build && NODE_ENV=production yarn install'
-        sh 'cd .. && rsync -avz ./build/* s3:/projects/lsk/app'
-        sh "ssh s3 'cd /projects/lsk && docker-compose stop && docker-compose up'"
-    }
 }
