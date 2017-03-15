@@ -30,7 +30,8 @@ node('master') {
             }
         }
 
-        stage('Send Email') {
+        stage('Clean build') {
+            sh 'rm -rf build'
             mail body: 'project build successful',
                 from: 'ci@mgbeta.ru',
                 subject: 'project build successful',
