@@ -19,21 +19,17 @@ node('master') {
             env.NODE_ENV = 'production'
             print "Environment will be: ${env.NODE_ENV}"
             sh 'yarn run build'
-            sh 'ls -al'
             sh 'cd ./build && yarn install'
-            sh 'ls -al'
         }
 
         stage('Build Image') {
-            sh 'cd ..'
-            sh 'ls -al'
             def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
             docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
                 image.push()
             }
         }
 
-        stage 'Finish' {
+        stage('Send Email') {
             mail body: 'project build successful',
                 from: 'ci@mgbeta.ru',
                 subject: 'project build successful',
