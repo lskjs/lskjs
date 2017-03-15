@@ -1,7 +1,7 @@
 node('master') {
 
     currentBuild.result = "SUCCESS"
-    def REGISTRY_URL = 'https://polygon.mgbeta.ru:5000/';
+    def REGISTRY_URL = 'https://hq.mgbeta.ru:5000/';
 
     try {
 
