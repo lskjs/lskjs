@@ -1,7 +1,6 @@
 node('master') {
 
     currentBuild.result = "SUCCESS"
-    def REGISTRY_URL = 'https://hq.mgbeta.ru:5000/';
 
     try {
 
@@ -22,19 +21,20 @@ node('master') {
             sh 'yarn install && cd ..'
         }
 
-        stage('Build Image') {
-            def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
-            docker.withRegistry(REGISTRY_URL, 'docker-registry') {
+        docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
+            stage('Build Image') {
+                def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
                 image.push()
             }
-        }
 
-        stage('Test Image') {
-            print 'Here, testing the image'
-        }
+            stage('Test Image') {
+                print 'Here, testing the image'
+                image.inside {
+                    sh 'ls -l -a /app'
+                }
+            }
 
-        stage('Approve Image') {
-            docker.withRegistry(REGISTRY_URL, 'docker-registry') {
+            stage('Approve Image') {
                 image.push('latest')
             }
         }
@@ -47,9 +47,8 @@ node('master') {
         }
 
     } catch (err) {
-
         currentBuild.result = "FAILURE"
-        sh 'rm -rf node_modules build'
+
         mail body: "project build error is here: ${env.BUILD_URL}" ,
             from: 'ci@mgbeta.ru',
             subject: 'project build failed',
