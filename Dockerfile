@@ -18,3 +18,5 @@ WORKDIR /app
 RUN mkdir /app
 RUN mv /project/build/* /app
 RUN rm -rf /project
+
+CMD ["yarn", "start"]
