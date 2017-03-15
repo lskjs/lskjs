@@ -27,27 +27,18 @@ node('master') {
             sh 'cd ..'
         }
 
-        stage('Build Image') {
-            docker.withDockerRegistry([
-                credentialsId: 'db670754-6b99-4a82-8b9c-67daa30e7c87',
-                url: 'https://hq.mgbeta.ru:5000/'
-            ]) {
+        docker.withRegistry('https://hq.mgbeta.ru:5000/', 'db670754-6b99-4a82-8b9c-67daa30e7c87') {
+            stage('Build Image') {
                 def image = docker.build "mgbeta/lsk-example:${env.BUILD_NUMBER}"
                 image.push()
             }
-            
-        }
 
-        stage('Test Image') {
-            print "Here, testing the image"
-        }
+            stage('Test Image') {
+                print "Here, testing the image"
+            }
 
-        stage('Approve Image') {
-            docker.withDockerRegistry([
-                credentialsId: 'db670754-6b99-4a82-8b9c-67daa30e7c87',
-                url: 'https://hq.mgbeta.ru:5000/'
-            ]) {
-                image.push 'latest'
+            stage('Approve Image') {
+                    image.push 'latest'
             }
         }
 
