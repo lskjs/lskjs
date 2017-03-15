@@ -9,26 +9,20 @@ node('master') {
             checkout scm
         }
 
-        stage('Install Deps') {
-            env.NODE_ENV = "development"
-            print "Environment will be: ${env.NODE_ENV}"
-            nodejs(nodeJSInstallationName: 'node692') {
-                sh 'yarn install'
-            }
-        }
+        // stage('Install Deps') {
+        //     env.NODE_ENV = "development"
+        //     print "Environment will be: ${env.NODE_ENV}"
+        //     sh 'yarn install'
+        // }
 
-        stage('Build Project') {
-            env.NODE_ENV = 'production'
-            print "Environment will be: ${env.NODE_ENV}"
-            nodejs(nodeJSInstallationName: 'node692') {
-               sh 'yarn run build'
-            }
-            nodejs(nodeJSInstallationName: 'node692') {
-               sh 'cd ./build && yarn install'
-            }
-        }
+        // stage('Build Project') {
+        //     env.NODE_ENV = 'production'
+        //     print "Environment will be: ${env.NODE_ENV}"
+        //     sh 'yarn run build'
+        //     sh 'cd ./build && yarn install'
+        // }
 
-        stage('Build Image') {
+        stage('Creating Docker Image') {
             def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
             docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
                 image.push()
