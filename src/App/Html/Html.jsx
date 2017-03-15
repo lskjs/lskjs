@@ -1,7 +1,10 @@
 import HtmlBase from 'lego-starter-kit/ReactApp/Html'
 import { Provider } from 'mobx-react'
 import ToastContainer from '../components/ToastContainer'
-import DevTools from 'mobx-react-devtools';
+
+// if (__DEV__) {
+//   const DevTools = require('mobx-react-devtools');
+// }
 
 require('./bootstrap.g.scss')
 require('./Html.global.css')
@@ -13,7 +16,7 @@ export class Root extends HtmlBase.Root {
       <div>
         {this.props.component}
         <ToastContainer />
-        {__DEV__ && <DevTools />}
+        {/*{__DEV__ && <DevTools />}*/}
       </div>
     </Provider>
   }
