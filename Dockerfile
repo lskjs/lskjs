@@ -1,6 +1,6 @@
 FROM node:6.9.2
 RUN npm i -g yarn
-VOLUME ./ /project
+COPY . /project
 
 RUN cd /project
 ENV NODE_ENV=development
@@ -13,7 +13,6 @@ RUN cd /project/build
 RUN yarn install
 
 RUN mkdir /app
-
-COPY /project/build /app/
+RUN cp -R /project/build/* /app
 
 RUN yarn start
