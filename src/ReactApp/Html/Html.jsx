@@ -1,8 +1,8 @@
-import React, { Component, PropTypes  } from 'react';
-import { Provider } from 'react-tunnel'
+import React, { Component, PropTypes } from 'react';
+import { Provider } from 'react-tunnel';
 // import useragent from 'useragent'
-import _ from 'lodash'
-import util from 'util'
+import _ from 'lodash';
+import util from 'util';
 import ReactDOM from 'react-dom/server';
 
 export class Root extends Component {
@@ -13,13 +13,13 @@ export class Root extends Component {
     setRootState: PropTypes.func.isRequired,
   };
   constructor(props) {
-    super(props)
-    this.state = props.ctx.rootState || {}
+    super(props);
+    this.state = props.ctx.rootState || {};
   }
 
   componentDidMount() {
-    const html = document.getElementsByTagName("html")[0]
-    html.className = html.className.replace('ua_js_no', 'ua_js_yes')
+    const html = document.getElementsByTagName('html')[0];
+    html.className = html.className.replace('ua_js_no', 'ua_js_yes');
   }
 
   getChildContext() {
@@ -29,14 +29,26 @@ export class Root extends Component {
       rootState: this.state,
       setRootState: (...args) => {
         this.setState(...args);
-      }
+      },
     };
   }
+  renderChildren() {
+    const page = this.props.route;
+    // console.log({page},  this.props.route);
+    const component = page && page.render ? page.render() : page.component;
+
+    // console.log({page}, (page && page.render ? 1: 2), 'component', component, page.render());
+
+    return component
+
+    // console.log(this.props);
+    return () => component && component.render ? component.render() : component;
+  }
   render() {
-    const provider = this.props.ctx.provider
-    return <Provider provide={provider.provide.bind(provider)}>
-      {() => this.props.component}
-    </Provider>
+    const provider = this.props.ctx.provider;
+    return (<Provider provide={provider.provide.bind(provider)}>
+        {this.renderChildren()}
+    </Provider>);
   }
 }
 
@@ -45,23 +57,23 @@ export default class Html {
   static Root = Root;
   static Root = Root;
   constructor(props) {
-    this.props = props || {}
+    this.props = props || {};
   }
 
   getHtmlClass(req) {
-    const ua = {}//useragent.is(req.headers['user-agent'])
-    ua.js = false
-    return _.map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || ''
+    const ua = {};// useragent.is(req.headers['user-agent'])
+    ua.js = false;
+    return _.map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '';
   }
 
   getRootState() {
-    return this.props.ctx.rootState
+    return this.props.ctx.rootState;
   }
 
   renderStyle() {
     // console.log('this.props.ctx', this.props.ctx);
-    const styles = this.props.ctx.style || []
-    return `<style id="css">${(styles).join("\n")}</style>`
+    const styles = this.props.ctx.style || [];
+    return `<style id="css">${(styles).join('\n')}</style>`;
   }
   renderHead() {
     return `\
@@ -71,39 +83,38 @@ export default class Html {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 ${this.renderAssets('css')}
 ${this.renderStyle()}
-`
+`;
   }
   renderRoot() {
-    const Root = this.constructor.Root
-    const component = <Root {...this.props} rootState={this.getRootState()}>
+    const Root = this.constructor.Root;
+    const component = (<Root {...this.props} rootState={this.getRootState()}>
       {this.props.children}
-    </Root>
+    </Root>);
     return ReactDOM.renderToStaticMarkup(component);
   }
 
   renderAssets(type) {
-    const props = this.props
+    const props = this.props;
 
     if (type === 'css' && props.assets && props.assets.css) {
-      return `<link rel="stylesheet" href="${props.assets.css}">`
+      return `<link rel="stylesheet" href="${props.assets.css}">`;
     }
     if (type === 'js' && props.assets && props.assets.js) {
-      return `<script id="js" src="${props.assets.js}"></script>`
+      return `<script id="js" src="${props.assets.js}"></script>`;
     }
-    return ''
-
+    return '';
   }
 
   renderFooter() {
-    const debug = __DEV__ && __SERVER__ ? `<!-- ${util.inspect({...this.props,style:undefined, req: undefined, ctx: null})} -->` : ''
+    const debug = __DEV__ && __SERVER__ ? `<!-- ${util.inspect({ ...this.props, style: undefined, req: undefined, ctx: null })} -->` : '';
     return `\
 ${this.props.footerHtml || ''}
 ${debug}
-    `
+    `;
   }
 
   render() {
-    const root = this.renderRoot() // because async style render
+    const root = this.renderRoot(); // because async style render
     return `\
 <!doctype html>
 <html class="${this.getHtmlClass(this.props.req)}">
@@ -121,6 +132,6 @@ ${debug}
     ${this.renderFooter()}
   </body>
 </html>
-    `
+    `;
   }
 }

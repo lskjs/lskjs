@@ -241,6 +241,7 @@ export default class ReactApp {
       ctx: reqCtx,
       appStore: reqCtx && reqCtx.provider,
       status: 200,
+      ...require('./getReqPropsMigrationV2').default(this),
     };
   }
 

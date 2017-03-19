@@ -75,7 +75,8 @@ export default class ReactApp extends CoreApp {
     };
     return ctx;
   }
-// ureq, ures
+
+  // ureq, ures
   getReqProps(req) {
     const reqCtx = this.getReqCtx(req);
     return {
@@ -86,6 +87,7 @@ export default class ReactApp extends CoreApp {
       appStore: reqCtx && reqCtx.provider,
       assets: this.getAssets(),
       status: 200,
+      ...require('./getReqPropsMigrationV2').default(this),
     };
   }
 
