@@ -32,9 +32,8 @@ node('master') {
         }
 
         stage('Test connection') {
-            timeout(1) {
-                httpRequest('http://lsk.mgbeta.ru')
-            }
+            sh 'sleep 30'
+            httpRequest('http://lsk.mgbeta.ru')
         }
 
         stage('Clean build') {
