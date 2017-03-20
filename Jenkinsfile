@@ -9,21 +9,13 @@ node('master') {
             checkout scm
         }
 
-        // stage('Install Deps') {
-        //     env.NODE_ENV = "development"
-        //     print "Environment will be: ${env.NODE_ENV}"
-        //     sh 'yarn install'
-        // }
-
-        // stage('Build Project') {
-        //     env.NODE_ENV = 'production'
-        //     print "Environment will be: ${env.NODE_ENV}"
-        //     sh 'yarn run build'
-        //     sh 'cd ./build && yarn install'
-        // }
+        stage('Preparing data for creating an Docker image') {
+            sh 'docker build -f ./Dockerfile.build -t lsk-example-build .'
+            sh 'docker run -v `pwd`:/app lsk-example-build'
+        }
 
         stage('Creating Docker Image') {
-            def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
+            def image = docker.build("lsk-example:${env.BUILD_NUMBER}")
             docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
                 image.push()
                 image.push('latest')
@@ -32,18 +24,18 @@ node('master') {
 
         stage('Clean build') {
             sh 'rm -rf build'
-            mail body: 'project build successful',
+            mail body: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Check console output at $BUILD_URL to view the results.",
                 from: 'ci@mgbeta.ru',
-                subject: 'project build successful',
+                subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!",
                 to: 'obt195@gmail.com'
         }
 
     } catch (err) {
         currentBuild.result = "FAILURE"
 
-        mail body: "project build error is here: ${env.BUILD_URL}" ,
+        mail body: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Check console output at $BUILD_URL to view the results.",
             from: 'ci@mgbeta.ru',
-            subject: 'project build failed',
+            subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!",
             to: 'obt195@gmail.com'
 
         throw err
