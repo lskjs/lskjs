@@ -13,7 +13,7 @@ node('master') {
             sh 'rm -rf build'
             sh 'docker build -f ./Dockerfile.build -t lsk-example-build .'
             sh 'docker run -v `pwd`:/app lsk-example-build'
-            sh 'sudo chown -R jenkins:jenkins build'
+            sh 'sudo chown -R jenkins:jenkins build node_modules'
         }
 
         stage('Creating Docker Image') {
