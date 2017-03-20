@@ -32,8 +32,9 @@ node('master') {
         }
 
         stage('Test connection') {
-            timeout(5, 'SECONDS')
-            sh 'wget -q "http://lsk.mgbeta.ru" -O /dev/null'
+            timeout(time: 5, unit: 'SECONDS') {
+                sh 'wget -q "http://lsk.mgbeta.ru" -O /dev/null'
+            }
         }
 
         stage('Clean build') {
