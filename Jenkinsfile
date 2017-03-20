@@ -9,21 +9,14 @@ node('master') {
             checkout scm
         }
 
-        // stage('Install Deps') {
-        //     env.NODE_ENV = "development"
-        //     print "Environment will be: ${env.NODE_ENV}"
-        //     sh 'yarn install'
-        // }
-
-        // stage('Build Project') {
-        //     env.NODE_ENV = 'production'
-        //     print "Environment will be: ${env.NODE_ENV}"
-        //     sh 'yarn run build'
-        //     sh 'cd ./build && yarn install'
-        // }
+        stage('Preparing data for creating an Docker image') {
+            sh 'docker build -f ./Dockerfile.build -t lsk-example-build .'
+            sh 'docker run -v `pwd`:/app lsk-example-build'
+            sh 'sudo chown -R jenkins:jenkins build node_modules'
+        }
 
         stage('Creating Docker Image') {
-            def image = docker.build("mgbeta/lsk-example:${env.BUILD_NUMBER}")
+            def image = docker.build("lsk-example:${env.BUILD_NUMBER}")
             docker.withRegistry('https://hq.mgbeta.ru:5000/', 'docker-registry') {
                 image.push()
                 image.push('latest')
@@ -32,18 +25,18 @@ node('master') {
 
         stage('Clean build') {
             sh 'rm -rf build'
-            mail body: 'project build successful',
+            mail body: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}: \n Check console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
-                subject: 'project build successful',
+                subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}!",
                 to: 'obt195@gmail.com'
         }
 
     } catch (err) {
         currentBuild.result = "FAILURE"
 
-        mail body: "project build error is here: ${env.BUILD_URL}" ,
+        mail body: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}: \n Check console output at ${env.BUILD_URL} to view the results.",
             from: 'ci@mgbeta.ru',
-            subject: 'project build failed',
+            subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}!",
             to: 'obt195@gmail.com'
 
         throw err
