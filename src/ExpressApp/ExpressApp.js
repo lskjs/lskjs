@@ -61,4 +61,9 @@ export default class ExpressApp {
       });
     });
   }
+
+  async start() {
+    await this.run()
+    console.log(`🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing()}ms]`);
+  }
 }

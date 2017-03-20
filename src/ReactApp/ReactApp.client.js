@@ -255,4 +255,9 @@ export default class ReactApp {
       children: route.component,
     };
   }
+
+  async start() {
+    await this.run();
+    console.log(`🎃  The server is running at http://127.0.0.1/ [${global.timing()}ms]`);
+  }
 }

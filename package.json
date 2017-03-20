@@ -26,7 +26,6 @@
     "react": "15.4.2",
     "react-deep-force-update": "2.0.1",
     "react-dom": "15.4.2",
-    "react-tunnel": "0.1.0",
     "socket.io": "1.7.2",
     "socket.io-as-promised": "^1.0.0",
     "universal-router": "2.0.0",
@@ -75,6 +74,7 @@
   "scripts": {
     "build": "babel-node tools/run build --release",
     "start": "node build/server.js",
+    "publish": "npm publish",
     "dev": "babel-node tools/run start  | node ./src/utils/bunyan -o short -l trace",
     "storybook": "start-storybook -p 9001",
     "babel-build": "rimraf lib && babel src --out-dir lib --source-maps inline --copy-files && cp {package.json,README.md} lib/",

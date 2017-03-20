@@ -32,7 +32,6 @@ export function getSchema(ctx) {
       type: String,
     },
   }, {
-
     collection: 'user',
     timestamps: true,
   })

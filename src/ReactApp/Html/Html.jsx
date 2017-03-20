@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Provider } from 'react-tunnel';
 // import useragent from 'useragent'
 import _ from 'lodash';
 import util from 'util';
@@ -39,15 +38,16 @@ export class Root extends Component {
 
     // console.log({page}, (page && page.render ? 1: 2), 'component', component, page.render());
 
-    return component
+    return component;
 
     // console.log(this.props);
     return () => component && component.render ? component.render() : component;
   }
   render() {
+    return this.renderChildren();
     const provider = this.props.ctx.provider;
     return (<Provider provide={provider.provide.bind(provider)}>
-        {this.renderChildren()}
+      {this.renderChildren()}
     </Provider>);
   }
 }
