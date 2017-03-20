@@ -9,8 +9,11 @@ node('master') {
             checkout scm
         }
 
-        stage('Preparing data for creating an Docker image') {
-            sh 'rm -rf build'
+        stage('Clean previous data') {
+            sh 'rm -rf build node_modules'
+        }
+
+        stage('Build project') {
             sh 'docker build -f ./Dockerfile.build -t lsk-example-build .'
             sh 'docker run -v `pwd`:/app lsk-example-build'
             sh 'sudo chown -R jenkins:jenkins build node_modules'
@@ -24,13 +27,6 @@ node('master') {
             }
         }
 
-        stage('Clean build') {
-            mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
-                from: 'ci@mgbeta.ru',
-                subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
-                to: 'obt195@gmail.com'
-        }
-
         stage('Deploy') {
             sh 'ssh s3 "cd /projects/lsk && sh run.sh"'
         }
@@ -38,6 +34,13 @@ node('master') {
         stage('Test connection') {
             timeout(5, 'SECONDS')
             sh 'wget -q "http://lsk.mgbeta.ru" -O /dev/null'
+        }
+
+        stage('Clean build') {
+            mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
+                from: 'ci@mgbeta.ru',
+                subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
+                to: 'obt195@gmail.com'
         }
 
     } catch (err) {
