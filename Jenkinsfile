@@ -25,18 +25,18 @@ node('master') {
 
         stage('Clean build') {
             sh 'rm -rf build'
-            mail body: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}: \n Check console output at ${env.BUILD_URL} to view the results.",
+            mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
-                subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}!",
+                subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
                 to: 'obt195@gmail.com'
         }
 
     } catch (err) {
         currentBuild.result = "FAILURE"
 
-        mail body: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}: \n Check console output at ${env.BUILD_URL} to view the results.",
+        mail body: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE:\nCheck console output at ${env.BUILD_URL} to view the results.",
             from: 'ci@mgbeta.ru',
-            subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}!",
+            subject: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE!",
             to: 'obt195@gmail.com'
 
         throw err
