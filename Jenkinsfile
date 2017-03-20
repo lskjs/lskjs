@@ -9,7 +9,11 @@ node('master') {
             checkout scm
         }
 
-        stage('Preparing data for creating an Docker image') {
+        stage('Clean previous data') {
+            sh 'rm -rf build node_modules'
+        }
+
+        stage('Build project') {
             sh 'docker build -f ./Dockerfile.build -t lsk-example-build .'
             sh 'docker run -v `pwd`:/app lsk-example-build'
             sh 'sudo chown -R jenkins:jenkins build node_modules'
@@ -23,8 +27,16 @@ node('master') {
             }
         }
 
+        stage('Deploy') {
+            sh 'ssh s3 "cd /projects/lsk && sh run.sh"'
+        }
+
+        stage('Test connection') {
+            sh 'sleep 30'
+            httpRequest('http://lsk.mgbeta.ru')
+        }
+
         stage('Clean build') {
-            sh 'rm -rf build'
             mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
                 subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
