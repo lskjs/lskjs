@@ -32,7 +32,7 @@ node('master') {
         }
 
         stage('Test connection') {
-            timeout(time: 5, unit: 'SECONDS') {
+            timeout(time: 1, unit: 'MINUTES') {
                 def response = httpRequest('http://lsk.mgbeta.ru')
                 println("Status: "+response.status)
                 if (response.status != 200) {
