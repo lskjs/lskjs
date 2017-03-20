@@ -82,6 +82,29 @@ export default class AuthStore {
     this.store.ui.status(res.message);
   }
 
+  async authPassport(provider) {
+    // console.log('authPassport');
+    window.location = `/api/v1/auth/${provider}`;
+  }
+
+  async signupPassport(...args) {
+    console.log('signupPassport');
+    this.store.ui.status('wait');
+    const res = await this.store.api.authSignupPassport(...args);
+    this.store.ui.status(res.message);
+    await this.setToken(res.token);
+    await this.updateUser(res.user);
+  }
+
+  async loginPassport(...args) {
+    console.log('loginPassport');
+    this.store.ui.status('wait');
+    const res = await this.store.api.authLoginPassport(...args);
+    this.store.ui.status(res.message);
+    await this.setToken(res.token);
+    await this.updateUser(res.user);
+  }
+
   @action
   async updateUser(data = null) {
     if (this.store.user) {

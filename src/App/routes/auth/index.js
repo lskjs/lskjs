@@ -1,4 +1,5 @@
  import AuthPage from './AuthPage';
+ import getData from './getData';
 
  export default {
    children: [
@@ -7,16 +8,54 @@
        action({ ctx }) {
          return {
            title: 'Cabinet',
-           component: <AuthPage type="login" siteTitle={ctx.config.siteTitle} />,
+           component: <AuthPage type="login" />,
          };
        },
      },
+     {
+       path: '/passport',
+       async action(params) {
+         const { appStore, query } = params;
+        //  console.log({query});
+        // if (__SERVER__) {
+        //   return {
+        //     title: '',
+        //     component: <div>Loading</div>,
+        //   };
+        // }
+        // if (!__SERVER__) {
+        //  if (!query.p) {
+        //    return {
+        //      redirect: '/auth/login',
+        //    };
+        //  }
+         let passport;
+         try {
+           passport = (await getData(params)).passport;
+         } catch (err) {
+           console.log({ err });
+           return {
+             component: <div>err</div>,
+            //  redirect: '/auth/login',
+           };
+         }
+         if (passport.user) {
+           await appStore.auth.loginPassport(passport);
+         }
+         return {
+           title: 'vkontakte',
+           component: <AuthPage type="signupPassport" passport={passport} />,
+         };
+        // }
+       },
+     },
+
      {
        path: '/recovery',
        action({ ctx }) {
          return {
            title: 'recovery',
-           component: <AuthPage type="recovery" siteTitle={ctx.config.siteTitle} />,
+           component: <AuthPage type="recovery" />,
          };
        },
      },
@@ -25,7 +64,7 @@
        action({ ctx }) {
          return {
            title: 'signup',
-           component: <AuthPage type="signup" siteTitle={ctx.config.siteTitle} />,
+           component: <AuthPage type="signup" />,
          };
        },
      },

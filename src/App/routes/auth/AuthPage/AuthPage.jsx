@@ -15,7 +15,10 @@ import {
   Row,
   Col,
   Button,
+  ButtonGroup,
 } from 'react-bootstrap';
+import _ from 'lodash';
+
 import Email from 'react-icons/lib/fa/envelope';
 import Lock from 'react-icons/lib/fa/lock';
 
@@ -39,6 +42,71 @@ import Form from 'lsk-general/General/Form';
 
 import Header from '../../../components/Header';
 
+const infoFields = [
+  {
+    name: 'name',
+    title: 'Имя',
+    control: {
+      placeholder: 'Например, Василий',
+    },
+  },
+  {
+    name: 'firstName',
+    title: 'Имя',
+    control: {
+      placeholder: 'Например, Василий',
+    },
+  },
+  {
+    name: 'surname',
+    title: 'Фамилия',
+    control: {
+      placeholder: 'Например, Пушкин',
+    },
+  },
+  {
+    name: 'lastName',
+    title: 'Фамилия',
+    control: {
+      placeholder: 'Например, Пушкин',
+    },
+  },
+  {
+    name: 'middlename',
+    title: 'Отчество',
+    control: {
+      placeholder: 'Например, Александрович',
+    },
+  },
+];
+
+
+const passportButtons = {
+  vkontakte: {
+    icon: <VKontakte />,
+    color: '#fff000',
+  },
+  odnoklassniki: {
+    icon: <Odnoklassniki />,
+  },
+  facebook: {
+    icon: <Facebook />,
+  },
+  twitter: {
+    icon: <Twitter />,
+  },
+  twitch: {
+    icon: <Twitch />,
+  },
+  tumblr: {
+    icon: <Tumblr />,
+  },
+  instagram: {
+    icon: <Instagram />,
+  },
+};
+
+
 @inject('auth', 'ui') @observer
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
@@ -49,6 +117,10 @@ export default class AuthPage extends Component {
     // try {
     if (this.props.type === 'login') {
       await auth.login(data);
+      this.redirect('/');
+    }
+    if (this.props.type === 'signupPassport') {
+      await auth.signupPassport(data);
       this.redirect('/');
     }
     if (this.props.type === 'signup') {
@@ -67,64 +139,72 @@ export default class AuthPage extends Component {
     // global.toast('asdasda');
   }
 
-  render() {
-    let { type } = this.props;
-    if (!type) type = 'login';
-    const status = this.props.ui.statusRequest;
-    let fields = [
-      {
-        name: 'login',
-        title: 'Email',
-        control: {
-          placeholder: 'Например, utkin@mail.ru',
-        },
+  getFields(type) {
+    const login = {
+      name: 'login',
+      title: 'Email',
+      control: {
+        placeholder: 'Например, utkin@mail.ru',
       },
-      {
-        name: 'password',
-        title: 'Пароль',
-        control: {
-          type: 'password',
-        },
+    };
+    const password = {
+      name: 'password',
+      title: 'Пароль',
+      control: {
+        type: 'password',
       },
-      {
-        name: 'name',
-        title: 'Имя',
-        control: {
-          placeholder: 'Например, Василий',
-        },
-      },
-      {
-        name: 'surname',
-        title: 'Фамилия',
-        control: {
-          placeholder: 'Например, Пушкин',
-        },
-      },
-      {
-        name: 'middlename',
-        title: 'Отчество',
-        control: {
-          placeholder: 'Например, Александрович',
-        },
-      },
-    ];
-    if (type === 'login') {
-      fields = fields.slice(0, 2);
-      fields[1].help = (
-        <div style={{ textAlign: 'right' }}>
-          <A href="/auth/recovery">
-            Забыли пароль?
-          </A>
-        </div>
-      );
-    }
+    };
+
     if (type === 'recovery') {
-      fields = fields.slice(0, 1);
+      return [login];
     }
+
+    if (type === 'login') {
+      return [
+        login,
+        {
+          ...password,
+          help: (
+            <div style={{ textAlign: 'right' }}>
+              <A href="/auth/recovery">
+                Забыли пароль?
+              </A>
+            </div>
+          ),
+        },
+      ];
+    }
+
+    if (type === 'signupPassport') {
+      return [
+        login,
+        ...infoFields,
+      ].map((field) => {
+        return {
+          ...field,
+          value: this.props.passport.profile[field.name],
+        };
+      });
+    }
+
+    return [
+      login,
+      password,
+      ...infoFields,
+    ];
+  }
+
+  render() {
+    const { type = 'login', auth } = this.props;
+    const status = this.props.ui.statusRequest;
+    const fields = this.getFields(type);
 
     return (
       <div>
-        <Header siteTitle={this.props.siteTitle} />
+        <Header siteTitle={'asdasd'} />
+        <br />
+        <br />
+        <br />
         <Slide
           full
           video="http://skill-branch.ru/video-background.webm"
@@ -201,6 +281,9 @@ export default class AuthPage extends Component {
                             <If condition={type === 'signup'}>
                               Создать аккаунт
                             </If>
+                            <If condition={type === 'signupPassport'}>
+                              Создать аккаунт
+                            </If>
                             <If condition={type === 'recovery'}>
                               Сбросить пароль
                             </If>
@@ -228,17 +311,17 @@ export default class AuthPage extends Component {
                     />
                   </CardBlock>
 
-                  {/* <CardFooter className="text-xs-center">
+                  <CardFooter className="text-xs-center">
                     <ButtonGroup>
-                      <Button styleName='btn-social is-vkontakte'><VKontakte /></Button>
-                      <Button styleName='btn-social is-odnoklassniki'><Odnoklassniki /></Button>
-                      <Button styleName='btn-social is-facebook'><Facebook /></Button>
-                      <Button styleName='btn-social is-twitter'><Twitter /></Button>
-                      <Button styleName='btn-social is-twitch'><Twitch /></Button>
-                      <Button styleName='btn-social is-tumblr'><Tumblr /></Button>
-                      <Button styleName='btn-social is-instagram'><Instagram /></Button>
+                      {
+                        _.map(passportButtons, (value, name) => {
+                          return (<Button styleName={`btn-social is-${name}`} onClick={() => auth.authPassport(name)}>
+                            {value.icon}
+                          </Button>);
+                        })
+                      }
                     </ButtonGroup>
-                  </CardFooter> */}
+                  </CardFooter>
                 </Card>
 
 
