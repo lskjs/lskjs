@@ -64,8 +64,8 @@ export default class UserStore {
   async editUser(data) {
     this.store.ui.status('wait');
     const backup = clone(this.toJS);
-    this.update(data);
     const res = await this.store.api.userEdit(data);
+    this.update(res.data);
     this.store.ui.status(res.message);
     console.log(res);
     if (res.message !== 'ok') {
