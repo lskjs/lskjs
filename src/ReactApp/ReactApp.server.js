@@ -19,7 +19,7 @@ export default class ReactApp extends CoreApp {
   useDefaultRoute() {
     this.app.get('*', async (req, res, next) => {
       try {
-        const htmlProps = await this.getHtmlProps(req);
+        let htmlProps = await this.getHtmlProps(req);
         // console.log(htmlProps);
         if (htmlProps.redirect) {
           return res.redirect(htmlProps.redirect);
@@ -87,13 +87,16 @@ export default class ReactApp extends CoreApp {
       appStore: reqCtx && reqCtx.provider,
       assets: this.getAssets(),
       status: 200,
-      ...require('./getReqPropsMigrationV2').default(this),
+      ...require('./getReqPropsMigrationV2').default(this, { reqCtx, req }),
     };
   }
 
   async getHtmlProps(req) {
     const reqProps = await this.getReqProps(req);
-    const route = await UniversalRouter.resolve(this.getUniversalRoutes(), reqProps);
+    let route = await UniversalRouter.resolve(this.getUniversalRoutes(), reqProps);
+    if (route._page) {
+      route = route.getState()
+    }
     return {
       ...reqProps,
       ...route,
