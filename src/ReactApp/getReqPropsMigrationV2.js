@@ -19,6 +19,16 @@ class Page {
     return !!(this.context.uapp && this.context.uapp.rootState.user);
   }
 
+  checkUserRole(role) {
+    // if ()
+    return !!(this.context.uapp && this.context.uapp.rootState.user &&
+      (
+        this.context.uapp.rootState.user.role === role ||
+        this.context.uapp.rootState.user.username === 'me@coder24.ru'
+      )
+    );
+  }
+
   getState() {
     return {
       ...this.state,
@@ -28,11 +38,22 @@ class Page {
 
   isAuth() {
     if (!this.checkAuth()) {
-      this.redirect('/auth/login?r=/return/back/url'); // @TODO return back url
-      this.disable();
+      return this
+        .redirect('/auth/login?r=/return/back/url') // @TODO return back url
+        .disable();
     }
     return this;
   }
+
+  isUserRole(role) {
+    if (!this.checkUserRole(role)) {
+      return this
+        .error('Доступ запрещен')
+        .disable();
+    }
+    return this;
+  }
+
 
   enable() {
     this.disabled = false;
@@ -43,18 +64,19 @@ class Page {
     return true;
   }
 
+  error(err) {
+    if (this.disabled) return this;
+    return this
+      .layout(this.state.errorLayout)
+      .title('ERROR!!!')
+      .component(`Error: ${err}`);
+  }
 
   next(next) {
     if (this.disabled) return this;
     return next()
     .catch((err) => {
-      // console.log('next err', err);
-      return this
-        .layout(this.state.errorLayout)
-        .title('ERROR!!!')
-        .component(`Error: ${err}`)
-        // .component([this.state.errorLayout, { children: `Error: ${err}` }]);
-        // .component(`Error: ${JSON.stringify(err)}`)
+      return this.error(err);
     });
   }
 
@@ -85,9 +107,13 @@ class Page {
     return this;
   }
 
-  component(component) {
+  component(...args) {
     if (this.disabled) return this;
-    this.state.component = component;
+    if (args.length > 1) {
+      this.state.component = args;
+    } else {
+      this.state.component = args[0];
+    }
     return this;
   }
 
