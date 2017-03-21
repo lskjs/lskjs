@@ -18,7 +18,7 @@ export default class Header extends Component {
   render() {
     const { auth, user, siteTitle } = this.props;
     return (
-      <Navbar fixedTop>
+      <Navbar staticTop>
         <Navbar.Header>
           <Navbar.Brand>
             <Link href="/">{siteTitle}</Link>

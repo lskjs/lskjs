@@ -45,13 +45,12 @@ export default class AdminLayout extends Component {
     children: PropTypes.node.isRequired,
     description: PropTypes.string,
     breadcrumbs: PropTypes.array,
-    additionalMenus: PropTypes.array,
   }
   constructor(props) {
     super(props);
     this.state = {
       selectedLinkId: null,
-    }
+    };
   }
   onMenuClick = (item) => {
     this.setState({ selectedLinkId: item.id });
@@ -87,8 +86,8 @@ export default class AdminLayout extends Component {
         title: 'Друзья',
         label: 14,
         items: [
-          { title: 'Все друзья',  url: '/cabinet/friends' },
-          { title: 'Входящие заявки',  url: '/cabinet/friends/in' },
+          { title: 'Все друзья', url: '/cabinet/friends' },
+          { title: 'Входящие заявки', url: '/cabinet/friends/in' },
           { title: 'Исходящие заявки', url: '/cabinet/friends/out' },
         ],
       },
@@ -137,9 +136,9 @@ export default class AdminLayout extends Component {
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
-              image={user.avatar}
+              image={user.profile.avatar}
               name={user.fullName}
-              title={`Добро пожаловать, ${user.name}`}
+              title={`Добро пожаловать, ${user.firstName}`}
               description="Ваш статус"
               buttons={[
                 { key: 1, text: 'Изменить', align: 'left' },
@@ -151,24 +150,24 @@ export default class AdminLayout extends Component {
         <SidebarWrapper>
           <UserPanel
             statusText="В сети"
-            image={user.avatar}
+            image={user.profile.avatar}
             name={user.fullName}
           />
           <SidebarMenuWrapper>
             <SidebarMenuHeader title="НАВИГАЦИЯ" />
-              {mainMenus.map((menu, i) => {
-                menu.id = i + 1;
-                const isSelected = menu.id === this.state.selectedLinkId;
-                return (
-                  <TreeMenu
-                    key={i}
-                    {...menu}
-                    isSelected={isSelected}
-                    onClick={() => this.onMenuClick(menu)}
-                    onItemClick={this.onMenuClick}
-                  />
-                )
-              })}
+            {mainMenus.map((menu, i) => {
+              menu.id = i + 1;
+              const isSelected = menu.id === this.state.selectedLinkId;
+              return (
+                <TreeMenu
+                  key={i}
+                  {...menu}
+                  isSelected={isSelected}
+                  onClick={() => this.onMenuClick(menu)}
+                  onItemClick={this.onMenuClick}
+                />
+              );
+            })}
           </SidebarMenuWrapper>
           <If condition={user.role === 'admin'}>
             <SidebarMenuWrapper>
@@ -184,7 +183,7 @@ export default class AdminLayout extends Component {
                     onClick={() => this.onMenuClick(menu)}
                     onItemClick={this.onMenuClick}
                   />
-                )
+                );
               })}
             </SidebarMenuWrapper>
           </If>

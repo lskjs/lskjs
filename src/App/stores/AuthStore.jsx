@@ -50,16 +50,17 @@ export default class AuthStore {
 
   async unsetToken() {
     await this.store.api.setAuthToken(null);
-    cookie.remove('token');
+    cookie.remove('token', { path: '/' });
     this.token = null;
   }
 
   async setToken(token) {
     this.store.api.setAuthToken(token);
-    cookie.save('token', token);
+    cookie.save('token', token, { path: '/' });
     this.token = token;
   }
 
+  @action
   async signup(data) {
     this.store.ui.status('wait');
     const res = await this.store.api.authSignup(data);
@@ -68,6 +69,7 @@ export default class AuthStore {
     await this.updateUser(res.user);
   }
 
+  @action
   async login(data) {
     this.store.ui.status('wait');
     const res = await this.store.api.authLogin(data);
@@ -76,36 +78,42 @@ export default class AuthStore {
     await this.updateUser(res.user);
   }
 
+  @action
   async recovery(data) {
     this.store.ui.status('wait');
     const res = await this.store.api.authRecovery(data);
     this.store.ui.status(res.message);
   }
 
-  async authPassport(provider) {
-    // console.log('authPassport');
+  @action
+  authPassport(provider) {
     window.location = `/api/v1/auth/${provider}`;
   }
 
-  async signupPassport(...args) {
+  @action
+  async signupPassport(data, { p }) {
     console.log('signupPassport');
     this.store.ui.status('wait');
-    const res = await this.store.api.authSignupPassport(...args);
-    this.store.ui.status(res.message);
-    await this.setToken(res.token);
-    await this.updateUser(res.user);
-  }
-
-  async loginPassport(...args) {
-    console.log('loginPassport');
-    this.store.ui.status('wait');
-    const res = await this.store.api.authLoginPassport(...args);
+    const res = await this.store.api.authSignupPassport({ ...data, p });
     this.store.ui.status(res.message);
     await this.setToken(res.token);
     await this.updateUser(res.user);
   }
 
   @action
+  async loginPassport(data, { p }) {
+    if (__CLIENT__) {
+      console.log('loginPassport');
+      this.store.ui.status('wait');
+      const res = await this.store.api.authLoginPassport({ ...data, p });
+      console.log({ res })
+      this.store.ui.status(res.message);
+      await this.setToken(res.token);
+      await this.updateUser(res.user);
+      return true
+    }
+  }
+
   async updateUser(data = null) {
     if (this.store.user) {
       this.store.user.update(data);

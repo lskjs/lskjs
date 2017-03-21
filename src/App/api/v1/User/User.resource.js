@@ -18,9 +18,14 @@ export default (ctx) => {
         modules.isAuth(req);
         const userId = req.user._id;
         const params = req.allParams();
+        console.log(params, 'params')
         let user = await User.findById(userId);
-        user = merge(user, params);
-        user.save();
+        user.profile = merge({}, user.profile, params.profile);
+        // user.meta = merge({}, user.meta, params.meta);
+        // user = merge(user, params);
+        // user.profile.firstName = 'AAA'
+        await user.save();
+        console.log(user)
         return user;
       } catch (error) {
         throw e500(error);

@@ -6,15 +6,18 @@ const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/
 export default class UserStore {
 
   @observable _id;
-  @observable avatar = defaultAvatar;
-  @observable username;
-  @observable name;
-  @observable surname;
   @observable role;
-  @observable middlename;
-  @observable info = {
-    phone: '',
-    company: '',
+  @observable profile = {
+    avatar: defaultAvatar,
+    firstName: undefined,
+    lastName: undefined,
+    middleName: undefined,
+    city: undefined,
+    bdate: undefined,
+    sex: undefined,
+    about: undefined,
+    phone: undefined,
+    email: undefined,
   };
 
   constructor(store, user) {
@@ -30,27 +33,29 @@ export default class UserStore {
     this.update(user);
   }
 
-  @action
   update(user) {
-    if (!user) this.reset();
+    console.log('ingoing user', user);
+    if (!user) return this.reset();
     for (const item in user) {
       set(this, item, user[item]);
     }
   }
 
-  @action
   reset() {
     extendObservable(this, {
-      avatar: defaultAvatar,
-      _id: null,
-      name: null,
-      username: null,
-      surname: null,
-      middlename: null,
-      role: null,
-      info: {
-        phone: '',
-        company: '',
+      _id: undefined,
+      role: undefined,
+      profile: {
+        avatar: defaultAvatar,
+        firstName: undefined,
+        lastName: undefined,
+        middleName: undefined,
+        city: undefined,
+        bdate: undefined,
+        sex: undefined,
+        about: undefined,
+        phone: undefined,
+        email: undefined,
       },
     });
   }
@@ -62,13 +67,14 @@ export default class UserStore {
     this.update(data);
     const res = await this.store.api.userEdit(data);
     this.store.ui.status(res.message);
+    console.log(res);
     if (res.message !== 'ok') {
       this.update(backup);
     }
   }
 
   @computed get fullName() {
-    return `${this.name} ${this.surname || ''}`;
+    return `${this.profile.firstName || 'Нет данных'} ${this.profile.lastName || ''}`;
   }
 
   @computed get toJS() {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import importcss from 'importcss';
 import { autobind } from 'core-decorators';
 import { inject, observer } from 'mobx-react';
@@ -17,7 +17,7 @@ import {
   Button,
   ButtonGroup,
 } from 'react-bootstrap';
-import _ from 'lodash';
+import { map } from 'lodash';
 
 import Email from 'react-icons/lib/fa/envelope';
 import Lock from 'react-icons/lib/fa/lock';
@@ -44,24 +44,10 @@ import Header from '../../../components/Header';
 
 const infoFields = [
   {
-    name: 'name',
-    title: 'Имя',
-    control: {
-      placeholder: 'Например, Василий',
-    },
-  },
-  {
     name: 'firstName',
     title: 'Имя',
     control: {
       placeholder: 'Например, Василий',
-    },
-  },
-  {
-    name: 'surname',
-    title: 'Фамилия',
-    control: {
-      placeholder: 'Например, Пушкин',
     },
   },
   {
@@ -72,7 +58,7 @@ const infoFields = [
     },
   },
   {
-    name: 'middlename',
+    name: 'middleName',
     title: 'Отчество',
     control: {
       placeholder: 'Например, Александрович',
@@ -111,16 +97,24 @@ const passportButtons = {
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
 
+  static defaultProps = {
+    type: 'login',
+  }
+
+  static propTypes = {
+    type: PropTypes.string,
+  }
+
   @autobind
   async handleSubmit(data) {
-    const { auth } = this.props;
+    const { type, auth, query } = this.props;
     // try {
     if (this.props.type === 'login') {
       await auth.login(data);
       this.redirect('/');
     }
     if (this.props.type === 'signupPassport') {
-      await auth.signupPassport(data);
+      await auth.signupPassport(data, query);
       this.redirect('/');
     }
     if (this.props.type === 'signup') {
@@ -134,9 +128,6 @@ export default class AuthPage extends Component {
         title: 'Письмо с восстановлением пароля отправлено на почту.',
       });
     }
-    // }
-    // console.log('handleSubmit', data);
-    // global.toast('asdasda');
   }
 
   getFields(type) {
@@ -195,16 +186,12 @@ export default class AuthPage extends Component {
   }
 
   render() {
-    const { type = 'login', auth } = this.props;
+    const { type, auth } = this.props;
     const status = this.props.ui.statusRequest;
     const fields = this.getFields(type);
-
     return (
       <div>
-        <Header siteTitle={'asdasd'} />
-        <br />
-        <br />
-        <br />
+        <Header siteTitle={this.props.siteTitle} />
         <Slide
           full
           video="http://skill-branch.ru/video-background.webm"
@@ -310,21 +297,20 @@ export default class AuthPage extends Component {
                       )}
                     />
                   </CardBlock>
-
                   <CardFooter className="text-xs-center">
                     <ButtonGroup>
-                      {
-                        _.map(passportButtons, (value, name) => {
-                          return (<Button styleName={`btn-social is-${name}`} onClick={() => auth.authPassport(name)}>
-                            {value.icon}
-                          </Button>);
-                        })
-                      }
+                      {map(passportButtons, (value, name) => (
+                        <Button
+                          key={name}
+                          styleName={`btn-social is-${name}`}
+                          onClick={() => auth.authPassport(name)}
+                        >
+                          {value.icon}
+                        </Button>
+                      ))}
                     </ButtonGroup>
                   </CardFooter>
                 </Card>
-
-
                 <If condition={type === 'signup'}>
                   <Card>
                     <CardBlock className="text-xs-center" style={{ textAlign: 'center' }}>

@@ -44,43 +44,59 @@ export default class ProfilePage extends Component {
                     },
                   },
                   {
-                    name: 'name',
+                    name: 'profile.firstName',
                     title: 'Имя',
-                    value: user.name,
+                    value: user.profile.firstName,
                     control: {
                       placeholder: 'Например, Василий',
                     },
                   },
                   {
-                    name: 'surname',
+                    name: 'profile.lastName',
                     title: 'Фамилия',
-                    value: user.surname,
+                    value: user.profile.lastName,
                     control: {
                       placeholder: 'Например, Пушкин',
                     },
                   },
                   {
-                    name: 'middlename',
+                    name: 'profile.middleName',
                     title: 'Отчество',
-                    value: user.middlename,
+                    value: user.profile.middleName,
                     control: {
                       placeholder: 'Например, Александрович',
                     },
                   },
                   {
-                    name: 'info.phone',
+                    name: 'profile.phone',
                     title: 'Телефон',
-                    value: user.info.phone,
+                    value: user.profile.phone,
                     control: {
                       placeholder: 'Например, 927000000',
                     },
                   },
                   {
-                    name: 'info.company',
-                    title: 'Компания',
-                    value: user.info.company,
+                    name: 'profile.email',
+                    title: 'Электронная почта для связи',
+                    value: user.profile.email,
                     control: {
-                      placeholder: 'Например, Компания',
+                      placeholder: 'E-mail для связи',
+                    },
+                  },
+                  {
+                    name: 'profile.city',
+                    title: 'Город',
+                    value: user.profile.city,
+                    control: {
+                      placeholder: 'Откуда вы?',
+                    },
+                  },
+                  {
+                    name: 'profile.about',
+                    title: 'О себе',
+                    value: user.profile.about,
+                    control: {
+                      placeholder: 'Расскажите о себе',
                     },
                   },
                 ]}

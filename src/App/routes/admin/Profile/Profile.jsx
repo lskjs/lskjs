@@ -16,11 +16,11 @@ export default class Profile extends Component {
         <Col xs={12}>
           <div styleName="header">
             <img
-              alt={user.name}
+              alt={user.firstName}
               src={'https://remont3.ru/templates/umedia/dleimages/noavatar.png'}
             />
             <div styleName="header-info">
-              <h3>{user.name}</h3>
+              <h3>{user.firstName}</h3>
               <p><b>Email</b>{user.username}</p>
             </div>
           </div>

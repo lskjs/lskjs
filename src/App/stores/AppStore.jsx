@@ -1,19 +1,21 @@
-import clone from 'lodash/clone';
+import ApiClient from '../api/api.client';
 
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 import UIStore from './UIStore';
-import ApiClient from '../api/api.client';
 
 export default class AppStore {
+
+  ui = new UIStore();
 
   constructor(state, req, config) {
     const base = __SERVER__ ? config.client.api.base : config.api.base;
     const user = req.user || state.user;
+    console.log(base);
     this.api = new ApiClient({ base });
+
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, user);
-    this.ui = new UIStore(this);
   }
 
   provide() {

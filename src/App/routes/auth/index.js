@@ -40,11 +40,22 @@
            };
          }
          if (passport.user) {
-           await appStore.auth.loginPassport(passport);
+           if (__SERVER__) {
+             return {
+               title: 'Загрузка',
+               component: <h1>Загрузка...</h1>,
+             };
+           }
+           const res = await appStore.auth.loginPassport(passport, query);
+           if (res) {
+             return { redirect: '/' }
+           } else {
+             throw 'Непонятнаяошибка >_<'
+           }
          }
          return {
-           title: 'vkontakte',
-           component: <AuthPage type="signupPassport" passport={passport} />,
+           title: 'Авторизация через соц. сеть',
+           component: <AuthPage type="signupPassport" passport={passport} query={query} />,
          };
         // }
        },

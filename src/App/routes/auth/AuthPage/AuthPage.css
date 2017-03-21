@@ -38,8 +38,9 @@ $facebook: #4867aa;
 }
 
 .btn-social {
-  padding: .7rem .9rem;
-  font-size: 1.2rem;
+  padding: 1.2rem 1.48rem;
+  font-size: 18px;
+  color: #404040;
 }
 
 @define-mixin socialButtons $network {

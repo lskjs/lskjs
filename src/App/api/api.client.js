@@ -32,6 +32,23 @@ export default class ApiClient extends ApiClientBase {
     return res.data;
   }
 
+  async authSignupPassport(data) {
+    console.log('authSignupPassport', data);
+    const res = await this.fetch('/auth/social/signup', {
+      method: 'POST',
+      body: data,
+    });
+    return res.data;
+  }
+
+  async authLoginPassport(data) {
+    const res = await this.fetch('/auth/social/login', {
+      method: 'POST',
+      body: data,
+    })
+    return res.data
+  }
+
   async signupSocial(data) {
     let url = `/auth/${data.provider}/signup?`;
     if (data) {

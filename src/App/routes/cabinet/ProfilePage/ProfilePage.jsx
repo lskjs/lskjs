@@ -6,11 +6,9 @@ import { Card, CardBlock } from 'reactstrap';
 @inject('user', 'auth')
 @observer
 export default class ProfilePage extends Component {
-  static defaultProps = {
-    user: {},
-  }
   static propTypes = {
-    user: PropTypes.object,
+    user: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
   }
   render() {
     const { user, auth } = this.props;
@@ -21,12 +19,17 @@ export default class ProfilePage extends Component {
           <Card style={{ marginTop: 20 }}>
             <CardBlock>
               <h3>{user.username}</h3>
-              <p><b>Имя: </b>{user.name}</p>
-              <p><b>Фамилия: </b>{user.surname}</p>
-              <p><b>Отчество: </b>{user.middlename}</p>
+              <p><b>Имя: </b>{user.profile.firstName}</p>
+              <p><b>Фамилия: </b>{user.profile.lastName}</p>
+              <p><b>Отчество: </b>{user.profile.middleName}</p>
               <hr />
-              <p><b>Телефон: </b>{user.info.phone || 'Нет телефона'}</p>
-              <p><b>Компания: </b>{user.info.company || 'Нет компании'}</p>
+              {user.profile.phone &&<p><b>Телефон: </b>{user.profile.phone}</p>}
+              {user.profile.email && <p><b>Электронная почта: </b>{user.profile.email}</p>}
+              {user.profile.city && <p><b>Город: </b>{user.profile.city}</p>}
+              {user.profile.bdate && <p><b>Дата рождения: </b>{user.profile.bdate}</p>}
+              <hr />
+              <p><b>Пол: </b>{user.profile.sex || 'Не определился'}</p>
+              <p><b>О себе: </b>{user.profile.about || 'Не указано'}</p>
             </CardBlock>
           </Card>
         </Col>

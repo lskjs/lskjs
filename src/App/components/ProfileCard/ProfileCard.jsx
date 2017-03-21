@@ -44,7 +44,7 @@ export default class ProfileCard extends Component {
     // const { username, avatar, rating, code, projects, phone, email, vk, about, skills } = this.props;
     const user = this.props.user
     const userData = user.user2
-    const skills = user.info && user.info.skills  && user.info.skills.split(',').map( (skill, id) => {
+    const skills = user.profile && user.profile.skills  && user.profile.skills.split(',').map( (skill, id) => {
       return {
         id,
         name: skill,

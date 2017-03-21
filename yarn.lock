@@ -479,7 +479,7 @@ babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.22.0, ba
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-core@6.9.0, babel-core@^6.1.2, babel-core@^6.9.0:
+babel-core@6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.9.0.tgz#d38c221b0ed02e628a1b10daa920151821272d41"
   dependencies:
@@ -505,7 +505,7 @@ babel-core@6.9.0, babel-core@^6.1.2, babel-core@^6.9.0:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-core@^6.11.4, babel-core@^6.18.2, babel-core@^6.22.1, babel-core@^6.24.0:
+babel-core@^6.1.2, babel-core@^6.11.4, babel-core@^6.18.2, babel-core@^6.22.1, babel-core@^6.24.0, babel-core@^6.9.0:
   version "6.24.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.24.0.tgz#8f36a0a77f5c155aed6f920b844d23ba56742a02"
   dependencies:
@@ -679,7 +679,7 @@ babel-helpers@^6.23.0, babel-helpers@^6.8.0:
     babel-runtime "^6.22.0"
     babel-template "^6.23.0"
 
-babel-loader@6.2.4:
+babel-loader@6.2.4, babel-loader@^6.2.4:
   version "6.2.4"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-6.2.4.tgz#aa70aff8ddc223a5952e839a43a6c3a4c8bfa1e9"
   dependencies:
@@ -687,7 +687,7 @@ babel-loader@6.2.4:
     mkdirp "^0.5.1"
     object-assign "^4.0.1"
 
-babel-loader@^6.2.4, babel-loader@^6.2.8:
+babel-loader@^6.2.8:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-6.4.1.tgz#0b34112d5b0748a8dcdbf51acf6f9bd42d50b8ca"
   dependencies:
@@ -1503,7 +1503,7 @@ babel-runtime@6.22.0, babel-runtime@6.x.x, babel-runtime@^6.0.0, babel-runtime@^
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
-babel-template@6.9.0, babel-template@^6.3.0, babel-template@^6.9.0:
+babel-template@6.9.0, babel-template@^6.3.0, babel-template@^6.7.0, babel-template@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.9.0.tgz#97090fcf6bc15685b4f05be65c0a9438aa7e23e3"
   dependencies:
@@ -1513,7 +1513,7 @@ babel-template@6.9.0, babel-template@^6.3.0, babel-template@^6.9.0:
     babylon "^6.7.0"
     lodash "^4.2.0"
 
-babel-template@^6.16.0, babel-template@^6.22.0, babel-template@^6.23.0, babel-template@^6.7.0:
+babel-template@^6.16.0, babel-template@^6.22.0, babel-template@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.23.0.tgz#04d4f270adbb3aa704a8143ae26faa529238e638"
   dependencies:
@@ -1537,7 +1537,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.16.0, babel-traverse@^6.22.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0:
+babel-types@6.9.0, babel-types@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1547,7 +1547,7 @@ babel-types@6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.16.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0, babel-types@^6.9.0:
+babel-types@^6.15.0, babel-types@^6.16.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -3826,13 +3826,9 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-highlight.js@9.8.0:
+highlight.js@9.8.0, highlight.js@^9.8.0:
   version "9.8.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.8.0.tgz#38eeef40cd45eaddbec8c9e5238fb7a783a3b685"
-
-highlight.js@^9.8.0:
-  version "9.10.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
 
 history@4.5.1:
   version "4.5.1"
@@ -4612,9 +4608,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.3.5.tgz#31d08a0094ab763a34775687ed10ee054e51ef23"
+lego-starter-kit@1.3.6:
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.3.6.tgz#931191b3979aad964b6fbb12d4fe3ab2b30de02c"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -4639,7 +4635,6 @@ lego-starter-kit@1.3.5:
     react "15.4.2"
     react-deep-force-update "2.0.1"
     react-dom "15.4.2"
-    react-tunnel "0.1.0"
     socket.io "1.7.2"
     socket.io-as-promised "^1.0.0"
     universal-router "2.0.0"
@@ -5100,9 +5095,9 @@ lsk-build@0.6.3:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.6.3:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.3.tgz#5cc17a28afa51bc38117c2e7ca1d5ed1204118f4"
+lsk-general@0.6.7:
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.7.tgz#df744ed3ea93047ffc75735fe476def29a278efd"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"
@@ -5166,19 +5161,9 @@ markdown-it-emoji@1.3.0, markdown-it-emoji@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/markdown-it-emoji/-/markdown-it-emoji-1.3.0.tgz#903ae1a9968c3f17d4e142f115d4ec575e56d2cb"
 
-markdown-it@8.1.0:
+markdown-it@8.1.0, markdown-it@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.1.0.tgz#38902d4e7bac2260c073eb67be623211fbb2c2e3"
-  dependencies:
-    argparse "^1.0.7"
-    entities "~1.1.1"
-    linkify-it "^2.0.0"
-    mdurl "^1.0.1"
-    uc.micro "^1.0.3"
-
-markdown-it@^8.1.0:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.3.1.tgz#2f4b622948ccdc193d66f3ca2d43125ac4ac7323"
   dependencies:
     argparse "^1.0.7"
     entities "~1.1.1"
@@ -5410,13 +5395,9 @@ ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-ms@0.7.2:
+ms@0.7.2, ms@^0.7.1:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
-
-ms@^0.7.1:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
 
 muri@1.2.0:
   version "1.2.0"
@@ -6745,11 +6726,11 @@ qs@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
 
-qs@6.2.1, qs@^6.1.0:
+qs@6.2.1, qs@^6.1.0, qs@^6.2.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
-"qs@>= 0.4.0", qs@^6.2.0, qs@~6.4.0:
+"qs@>= 0.4.0", qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
@@ -7020,12 +7001,6 @@ react-toastr@2.8.2:
     lodash "^4.16.1"
     react-addons-update "^0.14.0 || ^15.0.0"
     react-dom "^0.14.0 || ^15.0.0"
-
-react-tunnel@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-tunnel/-/react-tunnel-0.1.0.tgz#5179c1cdef37020caea9eccd8169b65807890385"
-  dependencies:
-    invariant "2.x.x"
 
 react@15.4.2, react@^15.4.1, react@^15.4.2:
   version "15.4.2"
@@ -8018,17 +7993,11 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-style-loader@0.13.1:
+style-loader@0.13.1, style-loader@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.13.1.tgz#468280efbc0473023cd3a6cd56e33b5a1d7fc3a9"
   dependencies:
     loader-utils "^0.2.7"
-
-style-loader@^0.13.1:
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.13.2.tgz#74533384cf698c7104c7951150b49717adc2f3bb"
-  dependencies:
-    loader-utils "^1.0.2"
 
 sugarss@^0.2.0:
   version "0.2.0"
@@ -8494,7 +8463,7 @@ webpack-dev-middleware@^1.6.0:
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-webpack-hot-middleware@2.15.0:
+webpack-hot-middleware@2.15.0, webpack-hot-middleware@^2.13.2:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.15.0.tgz#71995af7c0025f109df482f86f1e10379526d026"
   dependencies:
@@ -8503,7 +8472,7 @@ webpack-hot-middleware@2.15.0:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-hot-middleware@^2.13.2, webpack-hot-middleware@^2.16.1:
+webpack-hot-middleware@^2.16.1:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.17.1.tgz#0c8fbf6f93ff29c095d684b07ab6d6c0f2f951d7"
   dependencies:

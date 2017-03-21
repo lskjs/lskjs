@@ -12,7 +12,7 @@ export default (ctx) => {
         'bdate',
         'city',
         'country',
-        'photo_max_orig',
+        'photo_max',
       ] } = ctx.config.auth.socials.vkontakte;
       console.log(fields);
       const res = await fetch(
@@ -32,13 +32,13 @@ export default (ctx) => {
           profile: {
             firstName: extraData.first_name,
             lastName: extraData.last_name,
-            gender: extraData.sex === 1 ? 'female' : 'male',
+            sex: extraData.sex === 1 ? 'female' : 'male',
             photos: [
               extraData.photo_50,
               extraData.photo_100,
               extraData.photo_200,
             ],
-            avatar: extraData.photo_max_orig,
+            avatar: extraData.photo_max,
             city: extraData.city,
             country: extraData.country,
           },

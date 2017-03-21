@@ -62,9 +62,12 @@ export function getSchema(ctx) {
   schema.methods.generateToken = function (params) {
     return jwt.sign(this.getIdentity(params), ctx.config.jwt.secret);
   };
+
   schema.statics.decodeToken = function (token) {
+    console.log(token, ctx.config.jwt);
     return jwt.verify(token, ctx.config.jwt.secret);
   };
+
   schema.statics.getByToken = async function (token) {
     const { _id } = this.decodeToken(token);
     return this.findById(_id);

@@ -4,11 +4,6 @@ export default class UIStore {
 
   @observable statusRequest = null;
 
-  constructor(store) {
-    this.store = store;
-  }
-
-  // value = 'ok'|'wait'|'error'
   @action
   status(value = null) {
     this.statusRequest = value;
