@@ -52,7 +52,8 @@ class Page {
       return this
         .layout(this.state.errorLayout)
         .title('ERROR!!!')
-        .component([this.state.errorLayout, { children: `Error: ${err}` }]);
+        .component(`Error: ${err}`)
+        // .component([this.state.errorLayout, { children: `Error: ${err}` }]);
         // .component(`Error: ${JSON.stringify(err)}`)
     });
   }
@@ -106,11 +107,27 @@ class Page {
 
   }
 
-  render() {
+  renderLayout(props = {}, layout = null) {
+    if (!this.state.layout) {
+      return props.children;
+    }
+    if (!layout) layout = this.state.layout;
+    const Layout = layout;
+
+    return <Layout {...props} />;
+  }
+
+  renderComponent() {
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
     return React.createElement(this.state.component[0], this.state.component[1]);
+  }
+
+  render() {
+    return this.renderLayout({
+      children: this.renderComponent(),
+    });
   }
 
 }
