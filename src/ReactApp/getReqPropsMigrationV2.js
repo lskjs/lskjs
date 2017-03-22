@@ -2,7 +2,7 @@ import React from 'react';
 
 class Page {
   constructor(props = {}, context = {}) {
-    console.log('Page.constructor', context);
+    // console.log('Page.constructor', context);
     this._page = true;
     this.state = {};
     Object.assign(this.state, props);
@@ -16,7 +16,7 @@ class Page {
   }
 
   checkAuth() {
-    console.log('checkAuth',!!(this.context.uapp && this.context.uapp.rootState.user),this.context.uapp);
+    // console.log('checkAuth',!!(this.context.uapp && this.context.uapp.rootState.user),this.context.uapp);
     return !!(this.context.uapp && this.context.uapp.rootState.user);
   }
 
@@ -160,7 +160,7 @@ class Page {
 }
 
 export default (app, { req, reqCtx, app: app2 }) => {
-  console.log('reqCtx.rootState', reqCtx.rootState);
+  // console.log('reqCtx.rootState', reqCtx.rootState);
   const uapp = {
     umodels: app.getUmodels && app.getUmodels() || {},
     rootState: reqCtx.rootState,

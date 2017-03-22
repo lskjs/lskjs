@@ -58,8 +58,8 @@ export default class UniversalSchema {
       schema.post(key, val);
     });
     _.forEach(this.virtuals, ([args1, method, args2]) => {
-      console.log('virtuals', method, args1);
-      if (method == 'init') {
+      // console.log('virtuals', method, args1);
+      if (method === 'init') {
         schema.virtual(...args1);
       } else {
         schema.virtual(...args1)[method](...args2);

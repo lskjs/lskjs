@@ -41,8 +41,8 @@ export default class ReactApp extends CoreApp {
   // Synonims
 
   getReqRootState(req) {
-    console.log('req.user, req.token', req.user, req.token, req.cookies);
-    console.log('___');
+    // console.log('req.user, req.token', req.user, req.token, req.cookies);
+    // console.log('___');
     return {
       token: req.token,
       user: req.user,
@@ -57,7 +57,7 @@ export default class ReactApp extends CoreApp {
 
   getReqCtx(req) {
     const rootState = this.getReqRootState(req);
-    console.log('getReqRootState', rootState );
+    // console.log('getReqRootState', rootState );
     if (req.provider == null) {
       req.provider = this.createProvider(rootState, req);
     }

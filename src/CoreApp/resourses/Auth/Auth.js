@@ -136,7 +136,7 @@ export default (ctx) => {
     const password = User.generatePassword();
     user.password = password;
     await user.save();
-    console.log('user', user);
+    // console.log('user', user);
     const emailOptions = {
       subject: 'Восстановление пароля на сайте',
       text: `Ваш пароль: ${password}`,
