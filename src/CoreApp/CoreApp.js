@@ -7,6 +7,8 @@ import ExpressApp from 'lego-starter-kit/ExpressApp';
 import createSockets from './sockets';
 import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
+import staticFileMiddleware from './connect-static-file';
+
 
 export default class CoreApp extends ExpressApp {
   init() {
@@ -56,30 +58,25 @@ export default class CoreApp extends ExpressApp {
     return require('./helpers').default(this); // eslint-disable-line
   }
   getStatics() {
-    return {};
+    const buildRoot = `${__dirname}/public`;
+    const root = __DEV__ ? `${__dirname}/../src/public` : buildRoot;
+    return {
+      '/': root,
+      '/favicon.ico': buildRoot + require('file!../public/favicon.ico'), // eslint-disable-line
+    };
   }
   getResolvedStatics() {
     return _.mapValues(this.getStatics() || {}, p => path.resolve(p));
   }
   useStatics() {
-    _.forEach(this.getResolvedStatics(), (path, url) => {
+    _.forEach(this.statics, (path, url) => {
       this.app.use(url, express.static(path));
+      this.app.use(url, staticFileMiddleware(path));
     });
   }
 
   useStaticPublic(publicPath, urlPath = null) {
-    // if (!publicPath) {
-    //   publicPath = path.join(__dirname, 'public');
-    // } else {
-    //   publicPath = path.join(publicPath);
-    // }
-    // if (urlPath == null) {
-    //   urlPath = '/';
-    // }
-    // this.statics[urlPath] = publicPath
     this.log.trace('DEPRECATED');
-    // this.log.trace(`Static attach ${urlPath} => ${publicPath}`);
-    // this.app.use(urlPath, express.static(publicPath));
   }
 
   getUsingMiddlewares() {
@@ -114,8 +111,6 @@ export default class CoreApp extends ExpressApp {
 
   createExpressApp() {
     const app = super.createExpressApp();
-
-    // asdasdsa();
     this.config.sockets && this.useSockets(app);
     return app;
   }
