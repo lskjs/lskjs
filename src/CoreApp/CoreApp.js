@@ -7,7 +7,7 @@ import ExpressApp from 'lego-starter-kit/ExpressApp';
 import createSockets from './sockets';
 import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
-import staticFileMiddleware from './connect-static-file';
+import staticFileMiddleware from 'connect-static-file';
 
 
 export default class CoreApp extends ExpressApp {
