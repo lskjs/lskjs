@@ -70,6 +70,7 @@ export default class AdminLayout extends Component {
     this.context.history.push('/');
   }
   render() {
+    const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
     const { user, title, description, siteTitle, children, breadcrumbs } = this.props;
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
@@ -136,7 +137,7 @@ export default class AdminLayout extends Component {
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
-              image={user.profile.avatar}
+              image={user.profile.avatar || defaultAvatar}
               name={user.fullName}
               title={`Добро пожаловать, ${user.firstName}`}
               description="Ваш статус"
@@ -150,7 +151,7 @@ export default class AdminLayout extends Component {
         <SidebarWrapper>
           <UserPanel
             statusText="В сети"
-            image={user.profile.avatar}
+            image={user.profile.avatar || defaultAvatar}
             name={user.fullName}
           />
           <SidebarMenuWrapper>

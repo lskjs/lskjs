@@ -7,7 +7,7 @@
        path: '/(login|)',
        action({ ctx }) {
          return {
-           title: 'Cabinet',
+           title: 'Авторизация',
            component: <AuthPage type="login" />,
          };
        },
@@ -50,11 +50,11 @@
            if (res) {
              return { redirect: '/' }
            } else {
-             throw 'Непонятнаяошибка >_<'
+             throw 'Непонятнаяошибка >__<'
            }
          }
          return {
-           title: 'Авторизация через соц. сеть',
+           title: 'Регистрация через соц.сеть',
            component: <AuthPage type="signupPassport" passport={passport} query={query} />,
          };
         // }
@@ -65,7 +65,7 @@
        path: '/recovery',
        action({ ctx }) {
          return {
-           title: 'recovery',
+           title: 'Восстановление пароля',
            component: <AuthPage type="recovery" />,
          };
        },
@@ -74,7 +74,7 @@
        path: '/signup',
        action({ ctx }) {
          return {
-           title: 'signup',
+           title: 'Регистрация',
            component: <AuthPage type="signup" />,
          };
        },
