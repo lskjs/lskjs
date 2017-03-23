@@ -93,6 +93,7 @@ export default class WebpackConfig {
 
         // https://babeljs.io/docs/usage/options/
         babelrc: false,
+        sourceMaps: this.isSourcemap(),
         presets: this.getBabelPresets(),
         plugins: [
           ...this.getBabelPlugins(),
