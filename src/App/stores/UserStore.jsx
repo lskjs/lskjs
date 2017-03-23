@@ -1,14 +1,12 @@
 import { extendObservable, observable, action, computed, toJS } from 'mobx';
 import { set, clone } from 'lodash';
 
-const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
-
 export default class UserStore {
 
   @observable _id;
   @observable role;
   @observable profile = {
-    avatar: defaultAvatar,
+    avatar: undefined,
     firstName: undefined,
     lastName: undefined,
     middleName: undefined,
@@ -46,7 +44,7 @@ export default class UserStore {
       _id: undefined,
       role: undefined,
       profile: {
-        avatar: defaultAvatar,
+        avatar: undefined,
         firstName: undefined,
         lastName: undefined,
         middleName: undefined,

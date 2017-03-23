@@ -15,10 +15,7 @@ import {
   Button,
   ButtonGroup,
 } from 'react-bootstrap';
-import { map } from 'lodash';
-
-import Email from 'react-icons/lib/fa/envelope';
-import Lock from 'react-icons/lib/fa/lock';
+import { map, get } from 'lodash';
 
 import VKontakte from 'react-icons/lib/fa/vk';
 import Odnoklassniki from 'react-icons/lib/fa/odnoklassniki';
@@ -42,28 +39,27 @@ import Header from '../../../components/Header';
 
 const infoFields = [
   {
-    name: 'firstName',
+    name: 'profile.firstName',
     title: 'Имя',
     control: {
       placeholder: 'Например, Василий',
     },
   },
   {
-    name: 'lastName',
+    name: 'profile.lastName',
     title: 'Фамилия',
     control: {
       placeholder: 'Например, Пушкин',
     },
   },
   {
-    name: 'middleName',
+    name: 'profile.middleName',
     title: 'Отчество',
     control: {
       placeholder: 'Например, Александрович',
     },
   },
 ];
-
 
 const passportButtons = {
   vkontakte: {
@@ -97,35 +93,16 @@ export default class AuthPage extends Component {
 
   static defaultProps = {
     type: 'login',
+    passport: {},
+    siteTitle: 'Site Titile',
   }
 
   static propTypes = {
     type: PropTypes.string,
-  }
-
-  @autobind
-  async handleSubmit(data) {
-    const { type, auth, query } = this.props;
-    // try {
-    if (this.props.type === 'login') {
-      await auth.login(data);
-      this.redirect('/');
-    }
-    if (this.props.type === 'signupPassport') {
-      await auth.signupPassport(data, query);
-      this.redirect('/');
-    }
-    if (this.props.type === 'signup') {
-      await auth.signup(data);
-      this.redirect('/');
-    }
-    if (this.props.type === 'recovery') {
-      await auth.recovery(data);
-      global.toast({
-        type: 'success',
-        title: 'Письмо с восстановлением пароля отправлено на почту.',
-      });
-    }
+    siteTitle: PropTypes.string,
+    passport: PropTypes.object,
+    ui: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
   }
 
   getFields(type) {
@@ -141,6 +118,7 @@ export default class AuthPage extends Component {
       title: 'Пароль',
       control: {
         type: 'password',
+        placeholder: 'Ваш пароль',
       },
     };
 
@@ -168,12 +146,10 @@ export default class AuthPage extends Component {
       return [
         login,
         ...infoFields,
-      ].map((field) => {
-        return {
-          ...field,
-          value: this.props.passport.profile[field.name],
-        };
-      });
+      ].map(field => ({
+        ...field,
+        value: get(this.props.passport || {}, field.name),
+      }));
     }
 
     return [
@@ -181,6 +157,30 @@ export default class AuthPage extends Component {
       password,
       ...infoFields,
     ];
+  }
+
+  @autobind
+  async handleSubmit(data) {
+    const { type, auth, query } = this.props;
+    if (type === 'login') {
+      await auth.login(data);
+      this.redirect('/');
+    }
+    if (type === 'signupPassport') {
+      await auth.signupPassport(data, query);
+      this.redirect('/');
+    }
+    if (type === 'signup') {
+      await auth.signup(data);
+      this.redirect('/');
+    }
+    if (type === 'recovery') {
+      await auth.recovery(data);
+      global.toast({
+        type: 'success',
+        title: 'Письмо с восстановлением пароля отправлено на почту.',
+      });
+    }
   }
 
   render() {
@@ -194,7 +194,6 @@ export default class AuthPage extends Component {
           full
           video="http://skill-branch.ru/video-background.webm"
           overlay
-          // overlay='rgba()'
         >
           <Grid>
             <Row>
@@ -205,8 +204,8 @@ export default class AuthPage extends Component {
                       <If condition={type === 'login'}>
                         Вход
                       </If>
-                      <If condition={type === 'signup'}>
-                        Регистрация
+                      <If condition={['signupPassport', 'signup'].includes(type)}>
+                        {`Регистрация${type === 'signupPassport' ? ' через соц.сеть' : ''}`}
                       </If>
                       <If condition={type === 'recovery'}>
                         Восстановить пароль
@@ -232,24 +231,23 @@ export default class AuthPage extends Component {
                             message: 'Пароль должен быть больше 6 символов.',
                           },
                         },
-                        name: {
+                        'profile.firstName': {
                           presence: {
                             message: 'Поле не должно быть пустым',
                           },
                         },
-                        surname: {
+                        'profile.lastName': {
                           presence: {
                             message: 'Поле не должно быть пустым',
                           },
                         },
-                        middlename: {
+                        'profile.middleName': {
                           presence: {
                             message: 'Поле не должно быть пустым',
                           },
                         },
                       }}
                       onSubmit={this.handleSubmit}
-                      // onError={this.handleSubmit}
                       submitButton={(
                         <Button
                           type="submit"
@@ -263,10 +261,7 @@ export default class AuthPage extends Component {
                             <If condition={type === 'login'}>
                               Войти
                             </If>
-                            <If condition={type === 'signup'}>
-                              Создать аккаунт
-                            </If>
-                            <If condition={type === 'signupPassport'}>
+                            <If condition={['signupPassport', 'signup'].includes(type)}>
                               Создать аккаунт
                             </If>
                             <If condition={type === 'recovery'}>
