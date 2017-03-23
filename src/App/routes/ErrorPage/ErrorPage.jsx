@@ -9,8 +9,6 @@ import {
   CardFooter,
   CardTitle,
   CardText,
-} from 'reactstrap';
-import {
   Grid,
   Row,
   Col,
