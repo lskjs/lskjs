@@ -123,6 +123,12 @@ export default class Page {
     return this;
   }
 
+  description(description) {
+    if (this.disabled) return this;
+    this.state.description = description;
+    return this;
+  }
+
   component(...args) {
     if (this.disabled) return this;
     if (args.length > 1) {
@@ -150,7 +156,7 @@ export default class Page {
   }
 
   getCurrent() {
-    return (this.state.titles || []).slice(-1)[0] || ['Site Title', '/'];
+    return (this.state.titles || []).slice(-1)[0] || ['Site Title ??', '/'];
   }
 
   getCurrentUrl() {
@@ -162,7 +168,7 @@ export default class Page {
   }
 
   getDescription() {
-    return 'getDescription';
+    return this.state.description || '';
   }
 
   renderOGMeta() {
