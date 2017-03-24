@@ -35,8 +35,6 @@ import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
-import Header from '../../../components/Header';
-
 const infoFields = [
   {
     name: 'profile.firstName',
@@ -189,7 +187,6 @@ export default class AuthPage extends Component {
     const fields = this.getFields(type);
     return (
       <div>
-        <Header siteTitle={this.props.siteTitle} />
         <Slide
           full
           video="http://skill-branch.ru/video-background.webm"
