@@ -1,4 +1,5 @@
 import DefaultResource from 'lego-starter-kit/CoreApp/resourses/Auth';
+import merge from 'lodash/merge';
 
 export default (ctx) => {
   const { e400, e404 } = ctx.errors;
@@ -14,7 +15,7 @@ export default (ctx) => {
       if (passport.user) {
         throw e400('passport already have user');
       }
-      const params = Object.assign({}, { profile: passport.profile }, req.data);
+      const params = merge({}, { profile: passport.profile }, req.data);
       const user = new User(params);
       await user.save();
       passport.user = user._id;

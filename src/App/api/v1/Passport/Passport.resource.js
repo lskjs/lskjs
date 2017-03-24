@@ -1,6 +1,5 @@
 export default (ctx) => {
-  const { User, Passport } = ctx.models;
-  const { e400 } = ctx.errors;
+  const { Passport } = ctx.models;
   const resource = {
 
     get: async (req) => {
