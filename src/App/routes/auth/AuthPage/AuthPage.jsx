@@ -35,6 +35,8 @@ import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
+import SocialButtons from './SocialButtons'
+
 const infoFields = [
   {
     name: 'profile.firstName',
@@ -59,33 +61,7 @@ const infoFields = [
   },
 ];
 
-const passportButtons = {
-  vkontakte: {
-    icon: <VKontakte />,
-    color: '#fff000',
-  },
-  odnoklassniki: {
-    icon: <Odnoklassniki />,
-  },
-  facebook: {
-    icon: <Facebook />,
-  },
-  twitter: {
-    icon: <Twitter />,
-  },
-  twitch: {
-    icon: <Twitch />,
-  },
-  youtube: {
-    icon: <Youtube />,
-  },
-  instagram: {
-    icon: <Instagram />,
-  },
-};
-
-
-@inject('auth', 'ui') @observer
+@inject('auth', 'ui', 'config') @observer
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
 
@@ -99,6 +75,7 @@ export default class AuthPage extends Component {
     passport: PropTypes.object,
     ui: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
   }
 
   getFields(type) {
@@ -285,17 +262,7 @@ export default class AuthPage extends Component {
                   />
                 </CardBlock>
                 <CardFooter className="text-xs-center">
-                  <ButtonGroup>
-                    {map(passportButtons, (value, name) => (
-                      <Button
-                        key={name}
-                        styleName={`btn-social is-${name}`}
-                        onClick={() => auth.authPassport(name)}
-                      >
-                        {value.icon}
-                      </Button>
-                    ))}
-                  </ButtonGroup>
+                  <SocialButtons />
                 </CardFooter>
               </Card>
               <If condition={type === 'signup'}>

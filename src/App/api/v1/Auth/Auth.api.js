@@ -1,16 +1,20 @@
-import getResource from './Auth.resource';
+import getController from './Auth.controller';
 
 export default (ctx, params) => {
   const api = ctx.asyncRouter();
-  const resource = new getResource(ctx);
-
-  api.all('/login', resource.login);
-  api.post('/signup', resource.signup);
-  api.all('/recovery', resource.recovery);
-  api.all('/social/signup', resource.socialSignup);
-  api.all('/social/login', resource.socialLogin);
-  api.get('/vkontakte', resource.authVkontakte);
-  api.get('/:provider/callback', resource.socialCallback);
+  const controller = getController(ctx);
+  // console.log(ctx.resourses.Auth, 'resource');
+  api.all('/login', ctx.resourses.Auth.login);
+  api.post('/signup', ctx.resourses.Auth.signup);
+  api.all('/recovery', ctx.resourses.Auth.recovery);
+  // Регистрация пользователя через соц сеть
+  api.all('/social/signup', controller.socialSign);
+  api.all('/social/login', controller.socialLogin);
+  // social auth init
+  api.get('/youtube', controller.youtubeAuth);
+  api.get('/vkontakte', controller.vkAuth);
+  // social auth callback
+  api.get('/:provider/callback', controller.socialCallback);
 
   return api;
 };

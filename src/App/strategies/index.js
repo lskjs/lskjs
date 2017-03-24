@@ -1,5 +1,6 @@
 export default (ctx) => {
   return {
-    Vkontakte: require('./vk').default(ctx),
+    vkontakte: require('./vkontakte').default(ctx),
+    youtube: require('./youtube').default(ctx),
   };
 };

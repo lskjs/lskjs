@@ -1,8 +1,8 @@
-import getResource from './User.resource';
+import getController from './User.controller';
 
 export default (ctx, params) => {
   const api = ctx.asyncRouter();
-  const resource = new getResource(ctx);
+  const resource = getController(ctx);
 
   api.all('/get', resource.get);
   api.all('/edit', resource.edit);

@@ -4,11 +4,6 @@ export function getSchema(ctx) {
   const { Types } = ctx.db.Schema;
   const DefaultSchema = getDefaultSchema(ctx);
   const schema = DefaultSchema.extend({
-    username: {
-      type: String,
-      tolowercase: true,
-      trim: true,
-    },
     meta: {
       type: Object,
       default: {},
@@ -85,5 +80,6 @@ export function getSchema(ctx) {
 
 export default (ctx) => {
   const schema = getSchema(ctx);
+  console.log(schema);
   return ctx.db.model('User', schema.getMongooseSchema(), 'user');
 };

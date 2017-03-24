@@ -1,6 +1,5 @@
 import config from 'lego-starter-kit/utils/config';
 import baseConfig from 'lego-starter-kit/config';
-
 export default config.server(baseConfig, {
   client: require('./client').default, // eslint-disable-line
 
@@ -18,13 +17,6 @@ export default config.server(baseConfig, {
     secret: 'REPLACE_ME_PLEASE',
   },
   auth: {
-    socials: {
-      vkontakte: {
-        config: {
-          clientID: '5717694',
-          clientSecret: 'o1quBEHhCa8OwCKdmdH5',
-        },
-      },
-    },
+    socials: require('./socials.js').default,
   },
 });
