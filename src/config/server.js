@@ -7,12 +7,12 @@ export default config.server(baseConfig, {
   env: process.env.NODE_ENV || process.env.ENV || 'development',
   port: process.env.PORT || 8080,
 
-  host: 'localhost',
-  externalPort: 3000,
-  protocol: 'http',
+  host: process.env.HOST || 'localhost',
+  externalPort: process.env.EXTERNAL_PORT || 3000,
+  protocol: process.env.PROTOCOL || 'http',
 
   db: {
-    uri: process.env.DB || 'mongodb://lsk-example1:lsk-example1-pass@publicdb.mgbeta.ru:27000/lsk-example1',
+    uri: process.env.DB || 'mongodb://s3.mgbeta.ru:10098/lsk-example-2',
   },
   jwt: {
     secret: 'REPLACE_ME_PLEASE',

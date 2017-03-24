@@ -146,7 +146,7 @@ export default class AuthPage extends Component {
         ...infoFields,
       ].map(field => ({
         ...field,
-        value: get(this.props.passport || {}, field.name),
+        value: get(this.props.passport, field.name),
       }));
     }
 
