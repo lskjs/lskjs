@@ -7,7 +7,7 @@ export default class UserStore {
 
   @observable _id;
   @observable role;
-  @observable profile = {
+  profile = observable.object({
     avatar: defaultAvatar,
     firstName: undefined,
     lastName: undefined,
@@ -18,7 +18,7 @@ export default class UserStore {
     about: undefined,
     phone: undefined,
     email: undefined,
-  };
+  });
 
   constructor(store, user) {
     this.store = store;
@@ -39,6 +39,7 @@ export default class UserStore {
     for (const item in user) {
       set(this, item, user[item]);
     }
+    return true;
   }
 
   reset() {

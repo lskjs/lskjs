@@ -68,12 +68,10 @@ export default class AuthPage extends Component {
   static defaultProps = {
     type: 'login',
     passport: {},
-    siteTitle: 'Site Titile',
   }
 
   static propTypes = {
     type: PropTypes.string,
-    siteTitle: PropTypes.string,
     passport: PropTypes.object,
     ui: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
