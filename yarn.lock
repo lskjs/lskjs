@@ -1245,7 +1245,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.22.0, babel-traverse@^6.23.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0:
+babel-types@6.9.0, babel-types@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1255,7 +1255,7 @@ babel-types@6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0, babel-types@^6.9.0:
+babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -3421,13 +3421,9 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-highlight.js@9.8.0:
+highlight.js@9.8.0, highlight.js@^9.8.0:
   version "9.8.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.8.0.tgz#38eeef40cd45eaddbec8c9e5238fb7a783a3b685"
-
-highlight.js@^9.8.0:
-  version "9.10.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
 
 history@4.5.1:
   version "4.5.1"
@@ -4159,9 +4155,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.2.tgz#045ac30f66bc105f54806e4ce1ed1409e3e9b0b7"
+lego-starter-kit@1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.3.tgz#df37063d71dcfd23599d33c0d49a34166a423b6e"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -4677,19 +4673,9 @@ markdown-it-emoji@1.3.0, markdown-it-emoji@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/markdown-it-emoji/-/markdown-it-emoji-1.3.0.tgz#903ae1a9968c3f17d4e142f115d4ec575e56d2cb"
 
-markdown-it@8.1.0:
+markdown-it@8.1.0, markdown-it@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.1.0.tgz#38902d4e7bac2260c073eb67be623211fbb2c2e3"
-  dependencies:
-    argparse "^1.0.7"
-    entities "~1.1.1"
-    linkify-it "^2.0.0"
-    mdurl "^1.0.1"
-    uc.micro "^1.0.3"
-
-markdown-it@^8.1.0:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.3.1.tgz#2f4b622948ccdc193d66f3ca2d43125ac4ac7323"
   dependencies:
     argparse "^1.0.7"
     entities "~1.1.1"
@@ -4901,13 +4887,9 @@ ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-ms@0.7.2:
+ms@0.7.2, ms@^0.7.1:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
-
-ms@^0.7.1:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
 
 muri@1.2.0:
   version "1.2.0"

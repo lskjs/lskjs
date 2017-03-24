@@ -28,7 +28,8 @@ import Zip from 'react-icons/lib/fa/file-archive-o';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
-@inject('user') @observer
+@inject('user', 'config')
+@observer
 export default class CabinetLayout extends Component {
   static contextTypes = {
     history: PropTypes.object.isRequired,
@@ -40,10 +41,9 @@ export default class CabinetLayout extends Component {
   }
   static propTypes = {
     user: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    siteTitle: PropTypes.string.isRequired,
+    config: PropTypes.object.isRequired,
+    page: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
-    description: PropTypes.string,
     breadcrumbs: PropTypes.array,
   }
   constructor(props) {
@@ -70,8 +70,8 @@ export default class CabinetLayout extends Component {
     this.context.history.push('/');
   }
   render() {
-    const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
-    const { user, title, description, siteTitle = 'Example', children, breadcrumbs, page } = this.props;
+    const { user, children, breadcrumbs, page, config } = this.props;
+    console.log(page);
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
       ...breadcrumbs,
@@ -127,17 +127,17 @@ export default class CabinetLayout extends Component {
         <HeaderWrapper>
           <Logo>
             <MiniLogo onClick={this.toDashboard}>
-              {siteTitle.substr(0, 2)}
+              {config.siteTitle.substr(0, 2)}
             </MiniLogo>
             <LargeLogo onClick={this.toDashboard}>
-              {siteTitle}
+              {config.siteTitle}
             </LargeLogo>
           </Logo>
           <Navbar controlbar={false}>
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
-              image={user.profile.avatar || defaultAvatar}
+              image={user.profile.avatar}
               name={user.fullName}
               title={`Добро пожаловать, ${user.firstName}`}
               description="Ваш статус"
@@ -151,7 +151,7 @@ export default class CabinetLayout extends Component {
         <SidebarWrapper>
           <UserPanel
             statusText="В сети"
-            image={user.profile.avatar || defaultAvatar}
+            image={user.profile.avatar}
             name={user.fullName}
           />
           <SidebarMenuWrapper>
@@ -190,9 +190,9 @@ export default class CabinetLayout extends Component {
           </If>
         </SidebarWrapper>
         <PageWrapper>
-          <PageHeader title={title} description={description}>
+          {/* <PageHeader title={title} description={description}>
             <Breadcrumb items={breadItems} />
-          </PageHeader>
+          </PageHeader> */}
           <PageContent>
             {children}
           </PageContent>

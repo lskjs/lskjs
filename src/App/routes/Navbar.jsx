@@ -2,29 +2,65 @@ import React, { Component, PropTypes } from 'react';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 import Link from 'lsk-general/General/Link';
-import { toJS } from 'mobx';
 
-@inject('auth', 'user')
+@inject('auth', 'user', 'config')
 @observer
 export default class Header extends Component {
-  static defaultProps = {
-    siteTitle: 'Example',
-  }
   static propTypes = {
     user: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    siteTitle: PropTypes.string,
+    config: PropTypes.object.isRequired,
   }
   render() {
-    const { auth, user, siteTitle } = this.props;
+    const { auth, user, config } = this.props;
+    const menu = [
+      {
+        componentClass: Link,
+        href: '/cabinet',
+        children: 'Кабинет',
+      },
+      {
+        componentClass: Link,
+        href: '/admin',
+        children: 'Администраторская',
+      },
+      {
+        divider: true,
+      },
+      {
+        componentClass: Link,
+        href: '/cabinet/settings',
+        children: 'Настройки',
+      },
+      {
+        componentClass: Link,
+        href: '/auth/logout',
+        children: 'Выход',
+      },
+    ];
+    if (user.role !== 'admin') {
+      menu.splice(1, 1);
+    }
+    const userTitle = (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        {user.fullName}
+        <img
+          src={user.profile.avatar}
+          alt={user.fullName}
+          name={user.fullName}
+          width={18}
+          style={{ marginRight: 10, borderRadius: '50%' }}
+        />
+      </div>
+    );
     return (
       <Navbar staticTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link href="/">{siteTitle}</Link>
+            <Link href="/">{config.siteTitle}</Link>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
+        {/* <Nav>
           <NavItem eventKey={1} componentClass={Link} href="/">Главная</NavItem>
           <NavItem eventKey={2} componentClass={Link} href="/admin">Админка</NavItem>
           <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
@@ -34,18 +70,18 @@ export default class Header extends Component {
             <MenuItem divider />
             <MenuItem eventKey={3.3}>Separated link</MenuItem>
           </NavDropdown>
-        </Nav>
+        </Nav> */}
         <Nav pullRight>
           <If condition={auth.isAuth}>
-            <NavDropdown eventKey={1} title={user.fullName} id="user-dropdown">
-              <MenuItem eventKey={1.1} componentClass={Link} href="/cabinet">Профиль</MenuItem>
-              <MenuItem eventKey={1.3} componentClass={Link} href="/cabinet/settings">Настройки</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={1.4} componentClass={Link} href="/auth/logout">Выход</MenuItem>
+            <NavDropdown eventKey={1} title={userTitle} id="user-dropdown">
+              {menu.map((item, index) => (
+                <MenuItem key={index} eventKey={`1.${index + 1}`} {...item} />
+              ))}
             </NavDropdown>
           </If>
           <If condition={!auth.isAuth}>
-            <NavItem eventKey={2} componentClass={Link} href="/auth">Войти</NavItem>
+            <NavItem eventKey={2} componentClass={Link} href="/auth/login">Вход</NavItem>
+            <NavItem eventKey={3} componentClass={Link} href="/auth/signup">Регистрация</NavItem>
           </If>
         </Nav>
       </Navbar>

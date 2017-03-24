@@ -27,7 +27,7 @@ export default {
           .component(AuthPage, { type: 'recovery' });
       },
     },
-  {
+    {
       path: '/signup',
       action({ page }) {
         return page
@@ -49,7 +49,7 @@ export default {
           if (__SERVER__) {
             return page
               .pushTitle('Вход через соц.сеть')
-              .component(<div>>Загрузка...</div>);
+              .component(<div>Загрузка...</div>);
           }
           const res = await appStore.auth.loginPassport(passport, query);
           if (res) {
@@ -68,7 +68,7 @@ export default {
         if (__SERVER__) {
           return page
              .pushTitle('Logout')
-             .component(<div>>Загрузка...</div>);
+             .component(<div>Загрузка...</div>);
         }
         appStore.auth.logout();
         return page.redirect('/');
