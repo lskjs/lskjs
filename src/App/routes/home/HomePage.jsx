@@ -1,7 +1,6 @@
 import React from 'react';
 import importcss from 'importcss';
-import { Grid, Row, Col, Nav, NavItem } from 'react-bootstrap';
-import { Card, CardBlock, CardTitle } from 'reactstrap';
+import { Grid, Row, Col, Nav, NavItem, Card, CardBlock, CardTitle } from 'react-bootstrap';
 import Component from 'lsk-general/General/Component';
 import Header from '../../components/Header';
 import PostCard from '../../components/PostCard';

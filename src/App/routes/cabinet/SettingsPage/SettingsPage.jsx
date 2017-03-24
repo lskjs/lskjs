@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
 import { autobind } from 'core-decorators';
-import { Row, Col, Button } from 'react-bootstrap';
-import { Card, CardBlock } from 'reactstrap';
+import { Row, Col, Button, Card, CardBlock } from 'react-bootstrap';
 import cx from 'classnames';
 
 import Loading from 'react-icons/lib/md/refresh';

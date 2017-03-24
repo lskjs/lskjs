@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Row, Col } from 'react-bootstrap';
-import { Card, CardBlock } from 'reactstrap';
+import { Row, Col, Card, CardBlock } from 'react-bootstrap';
 
 @inject('user', 'auth')
 @observer

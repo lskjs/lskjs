@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Card, CardBlock } from 'reactstrap';
+import { Row, Col, Card, CardBlock } from 'react-bootstrap';
 
 export default class InRequests extends Component {
   render() {

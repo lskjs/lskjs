@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardBlock } from 'reactstrap';
+import { Card, CardBlock } from 'react-bootstrap';
 import css from 'importcss';
 import moment from 'moment';
 import Avatar from '../Avatar';
