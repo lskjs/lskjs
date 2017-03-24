@@ -64,7 +64,6 @@ export function getSchema(ctx) {
   };
 
   schema.statics.decodeToken = function (token) {
-    console.log(token, ctx.config.jwt);
     return jwt.verify(token, ctx.config.jwt.secret);
   };
 

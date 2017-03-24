@@ -1,10 +1,11 @@
-import getResource from './Passport.resource';
+import asyncRouter from 'lego-starter-kit/utils/AsyncRouter';
+import getController from './passport.controller';
 
-export default (ctx, params) => {
-  const api = ctx.asyncRouter();
-  const resource = new getResource(ctx);
+export default(ctx, parent) => {
+  const { e404 } = ctx.errors;
+  const controller = getController(ctx, parent);
 
-  api.get('/', resource.get);
-
+  const api = asyncRouter();
+  api.get('/', controller.get);
   return api;
 };

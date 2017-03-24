@@ -12,7 +12,7 @@ export default config.server(baseConfig, {
   protocol: process.env.PROTOCOL || 'http',
 
   db: {
-    uri: process.env.DB || 'mongodb://s3.mgbeta.ru:10098/lsk-example-2',
+    uri: process.env.DB || 'mongodb://s3.mgbeta.ru:10098/youtubers-dev',
   },
   jwt: {
     secret: 'REPLACE_ME_PLEASE',
@@ -23,6 +23,20 @@ export default config.server(baseConfig, {
         config: {
           clientID: '5717694',
           clientSecret: 'o1quBEHhCa8OwCKdmdH5',
+        },
+      },
+      youtube: {
+        config: {
+          clientID: '201294679107-gln75259vurm2lkb366h9f6t3ekdm9v9.apps.googleusercontent.com',
+          clientSecret: 'hXnkFH2F_kIP5zIKe7DVVeLu',
+          scope: [
+            'https://www.googleapis.com/auth/youtube',
+            'https://www.googleapis.com/auth/youtube.force-ssl',
+            'https://www.googleapis.com/auth/youtube.readonly',
+            'https://www.googleapis.com/auth/youtube.upload',
+            'https://www.googleapis.com/auth/youtubepartner',
+            'https://www.googleapis.com/auth/youtubepartner-channel-audit',
+          ],
         },
       },
     },

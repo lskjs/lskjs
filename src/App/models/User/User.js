@@ -8,6 +8,8 @@ export function getSchema(ctx) {
       type: String,
       tolowercase: true,
       trim: true,
+      unique: false,
+      index: { unique: false },
     },
     meta: {
       type: Object,

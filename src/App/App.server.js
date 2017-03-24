@@ -1,6 +1,6 @@
 import ReactApp from 'lego-starter-kit/ReactApp'; // eslint-disable-line
 import passport from 'passport';
-import map from 'lodash/map';
+import _ from 'lodash';
 
 import getApi from './api/v1';
 import getDocs from './api/v1/v1.docs';
@@ -15,13 +15,17 @@ export default class App extends ReactApp {
 
   init() {
     super.init();
-    this.strategies = require('./strategies').default(this);
+    const strategies = require('./strategies').default(this) || {};
+    this.strategies = _.map(strategies, (Strategy) => {
+      return new Strategy();
+    });
     this.passport = passport;
   }
 
   run() {
     super.run();
-    map(this.strategies || [], (strategy) => {
+    console.log(this.strategies);
+    _.map(this.strategies || [], (strategy) => {
       this.passport.use(strategy.getStrategy(strategy));
     });
   }

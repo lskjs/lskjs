@@ -24,6 +24,7 @@ import Twitter from 'react-icons/lib/fa/twitter';
 import Twitch from 'react-icons/lib/fa/twitch';
 import Tumblr from 'react-icons/lib/fa/tumblr';
 import Instagram from 'react-icons/lib/fa/instagram';
+import Youtube from 'react-icons/lib/fa/youtube';
 
 import Loading from 'react-icons/lib/md/refresh';
 import Error from 'react-icons/lib/md/clear';
@@ -81,6 +82,9 @@ const passportButtons = {
   },
   instagram: {
     icon: <Instagram />,
+  },
+  youtube: {
+    icon: <Youtube />,
   },
 };
 
