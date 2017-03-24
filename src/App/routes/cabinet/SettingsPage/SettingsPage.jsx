@@ -10,7 +10,8 @@ import Check from 'react-icons/lib/md/check';
 import Component from 'lsk-general/General/Component';
 import Form from 'lsk-general/General/Form';
 
-@inject('user', 'auth', 'ui') @observer
+@inject('user', 'auth', 'ui')
+@observer
 export default class ProfilePage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
@@ -20,12 +21,78 @@ export default class ProfilePage extends Component {
   @autobind
   async handleSubmit(data) {
     await this.props.user.editUser(data);
-    // this.redirect('/cabinet');
+    this.redirect('/cabinet');
   }
   render() {
     const { user, auth, ui } = this.props;
     const status = ui.statusRequest;
     if (!auth.isAuth) return false;
+    const fields = [
+      {
+        name: 'username',
+        title: 'Почта',
+        value: user.username,
+        control: {
+          placeholder: 'Например, utkin@mail.ru',
+        },
+      },
+      {
+        name: 'profile.firstName',
+        title: 'Имя',
+        value: user.profile.firstName,
+        control: {
+          placeholder: 'Например, Василий',
+        },
+      },
+      {
+        name: 'profile.lastName',
+        title: 'Фамилия',
+        value: user.profile.lastName,
+        control: {
+          placeholder: 'Например, Пушкин',
+        },
+      },
+      {
+        name: 'profile.middleName',
+        title: 'Отчество',
+        value: user.profile.middleName,
+        control: {
+          placeholder: 'Например, Александрович',
+        },
+      },
+      {
+        name: 'profile.phone',
+        title: 'Телефон',
+        value: user.profile.phone,
+        control: {
+          placeholder: 'Например, 927000000',
+        },
+      },
+      {
+        name: 'profile.email',
+        title: 'Электронная почта для связи',
+        value: user.profile.email,
+        control: {
+          placeholder: 'E-mail для связи',
+        },
+      },
+      {
+        name: 'profile.city',
+        title: 'Город',
+        value: user.profile.city,
+        control: {
+          placeholder: 'Откуда вы?',
+        },
+      },
+      {
+        name: 'profile.about',
+        title: 'О себе',
+        value: user.profile.about,
+        control: {
+          placeholder: 'Расскажите о себе',
+        },
+      },
+    ];
     return (
       <Row>
         <Col md={6} xs={12}>
@@ -33,74 +100,8 @@ export default class ProfilePage extends Component {
             <CardBlock>
               <h4>Редактирование</h4>
               <Form
-                fields={[
-                  {
-                    name: 'username',
-                    title: 'Почта',
-                    value: user.username,
-                    control: {
-                      placeholder: 'Например, utkin@mail.ru',
-                    },
-                  },
-                  {
-                    name: 'profile.firstName',
-                    title: 'Имя',
-                    value: user.profile.firstName,
-                    control: {
-                      placeholder: 'Например, Василий',
-                    },
-                  },
-                  {
-                    name: 'profile.lastName',
-                    title: 'Фамилия',
-                    value: user.profile.lastName,
-                    control: {
-                      placeholder: 'Например, Пушкин',
-                    },
-                  },
-                  {
-                    name: 'profile.middleName',
-                    title: 'Отчество',
-                    value: user.profile.middleName,
-                    control: {
-                      placeholder: 'Например, Александрович',
-                    },
-                  },
-                  {
-                    name: 'profile.phone',
-                    title: 'Телефон',
-                    value: user.profile.phone,
-                    control: {
-                      placeholder: 'Например, 927000000',
-                    },
-                  },
-                  {
-                    name: 'profile.email',
-                    title: 'Электронная почта для связи',
-                    value: user.profile.email,
-                    control: {
-                      placeholder: 'E-mail для связи',
-                    },
-                  },
-                  {
-                    name: 'profile.city',
-                    title: 'Город',
-                    value: user.profile.city,
-                    control: {
-                      placeholder: 'Откуда вы?',
-                    },
-                  },
-                  {
-                    name: 'profile.about',
-                    title: 'О себе',
-                    value: user.profile.about,
-                    control: {
-                      placeholder: 'Расскажите о себе',
-                    },
-                  },
-                ]}
+                fields={fields}
                 onSubmit={this.handleSubmit}
-                // onError={this.handleSubmit}
                 submitButton={(
                   <Button
                     type="submit"
@@ -134,6 +135,22 @@ export default class ProfilePage extends Component {
                   </Button>
                 )}
               />
+            </CardBlock>
+          </Card>
+        </Col>
+        <Col md={6} xs={12}>
+          <Card style={{ margin: '20px 0' }}>
+            <CardBlock>
+              <h4>Изменить аватар</h4>
+              <p>Ваш текущий аватар</p>
+              <img
+                width={80} src={user.profile.avatar}
+                alt={user.fullName} title={user.fullName}
+                style={{ borderRadius: '50%' }}
+              />
+              <p>Выберите новый аватар</p>
+              <input type="file" ref={(e) => this.inputAvatar = e} />
+              <Button onClick={() => alert('Нажатие')}>Изменить</Button>
             </CardBlock>
           </Card>
         </Col>
