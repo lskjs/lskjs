@@ -49,7 +49,7 @@ export default class Header extends Component {
           alt={user.fullName}
           name={user.fullName}
           width={18}
-          style={{ marginLeft: 10, borderRadius: '50%' }}
+          style={{ marginLeft: 3, borderRadius: '50%' }}
         />
       </div>
     );
