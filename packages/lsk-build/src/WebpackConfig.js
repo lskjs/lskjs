@@ -66,7 +66,7 @@ export default class WebpackConfig {
     return [
       'react',
       'es2015',
-      'stage-0',
+      'stage-2',
     ];
   }
 

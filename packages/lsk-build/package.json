@@ -1,10 +1,10 @@
 {
   "name": "lsk-build",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Lego Starter Kit builder & webpack configurator",
   "main": "index.js",
   "scripts": {
-    "release": "DEBUG=0 npm run babel-build && npm publish dist",
+    "release": "npm run babel-build && npm publish dist",
     "babel-build": "rm -rf dist && mkdir dist && cp {package.json,yarn.lock,README.md} dist/ && babel src --out-dir dist --source-maps inline --copy-files",
     "dev": "DEBUG=1 npm run babel-build -- --watch"
   },
@@ -34,7 +34,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
-    "babel-types": "^6.22.0",
+    "babel-types": "^6.22.0"
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
