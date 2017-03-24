@@ -42,14 +42,14 @@ export default class Header extends Component {
       menu.splice(1, 1);
     }
     const userTitle = (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'inline-block', alignItems: 'center' }}>
         {user.fullName}
         <img
           src={user.profile.avatar}
           alt={user.fullName}
           name={user.fullName}
           width={18}
-          style={{ marginRight: 10, borderRadius: '50%' }}
+          style={{ marginLeft: 10, borderRadius: '50%' }}
         />
       </div>
     );
