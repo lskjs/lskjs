@@ -33,28 +33,16 @@ export class Root extends Component {
   }
   renderChildren() {
     const page = this.props.route;
-    // console.log({page},  this.props.route);
     const component = page && page.render ? page.render() : page.component;
-
-    // console.log({page}, (page && page.render ? 1: 2), 'component', component, page.render());
-
     return component;
-
-    // console.log(this.props);
-    return () => component && component.render ? component.render() : component;
   }
   render() {
     return this.renderChildren();
-    const provider = this.props.ctx.provider;
-    return (<Provider provide={provider.provide.bind(provider)}>
-      {this.renderChildren()}
-    </Provider>);
   }
 }
 
 export default class Html {
 
-  static Root = Root;
   static Root = Root;
   constructor(props) {
     this.props = props || {};
@@ -76,11 +64,9 @@ export default class Html {
     return `<style id="css">${(styles).join('\n')}</style>`;
   }
   renderHead() {
+    const { page } = this.props;
     return `\
-<title>${this.props.title}</title>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+${page.renderHead()}
 ${this.renderAssets('css')}
 ${this.renderStyle()}
 `;
@@ -106,10 +92,12 @@ ${this.renderStyle()}
   }
 
   renderFooter() {
+    const { page } = this.props;
     const debug = __DEV__ && __SERVER__ ? `<!-- ${util.inspect({ ...this.props, style: undefined, req: undefined, ctx: null })} -->` : '';
     return `\
 ${this.props.footerHtml || ''}
 ${debug}
+${page.renderFooter()}
     `;
   }
 
