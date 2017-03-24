@@ -1,12 +1,14 @@
 import { extendObservable, observable, action, computed, toJS } from 'mobx';
 import { set, clone } from 'lodash';
 
+const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
+
 export default class UserStore {
 
   @observable _id;
   @observable role;
   @observable profile = {
-    avatar: undefined,
+    avatar: defaultAvatar,
     firstName: undefined,
     lastName: undefined,
     middleName: undefined,
@@ -32,7 +34,7 @@ export default class UserStore {
   }
 
   update(user) {
-    console.log('ingoing user', user);
+    this.store.log.info('[Y] ingoing user', user);
     if (!user) return this.reset();
     for (const item in user) {
       set(this, item, user[item]);
@@ -44,7 +46,7 @@ export default class UserStore {
       _id: undefined,
       role: undefined,
       profile: {
-        avatar: undefined,
+        avatar: defaultAvatar,
         firstName: undefined,
         lastName: undefined,
         middleName: undefined,

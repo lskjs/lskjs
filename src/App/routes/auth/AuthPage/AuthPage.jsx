@@ -22,7 +22,7 @@ import Odnoklassniki from 'react-icons/lib/fa/odnoklassniki';
 import Facebook from 'react-icons/lib/fa/facebook';
 import Twitter from 'react-icons/lib/fa/twitter';
 import Twitch from 'react-icons/lib/fa/twitch';
-import Tumblr from 'react-icons/lib/fa/tumblr';
+import Youtube from 'react-icons/lib/fa/youtube-play';
 import Instagram from 'react-icons/lib/fa/instagram';
 
 import Loading from 'react-icons/lib/md/refresh';
@@ -76,8 +76,8 @@ const passportButtons = {
   twitch: {
     icon: <Twitch />,
   },
-  tumblr: {
-    icon: <Tumblr />,
+  youtube: {
+    icon: <Youtube />,
   },
   instagram: {
     icon: <Instagram />,
@@ -186,154 +186,152 @@ export default class AuthPage extends Component {
     const status = this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
-      <div>
-        <Slide
-          full
-          video="http://skill-branch.ru/video-background.webm"
-          overlay
-        >
-          <Grid>
-            <Row>
-              <Col md={4} mdOffset={4}>
-                <Card>
-                  <CardBlock>
-                    <CardTitle>
-                      <If condition={type === 'login'}>
-                        Вход
-                      </If>
-                      <If condition={['signupPassport', 'signup'].includes(type)}>
-                        {`Регистрация${type === 'signupPassport' ? ' через соц.сеть' : ''}`}
-                      </If>
-                      <If condition={type === 'recovery'}>
-                        Восстановить пароль
-                      </If>
-                    </CardTitle>
-                    <Form
-                      fields={fields}
-                      validators={{
-                        login: {
-                          presence: {
-                            message: 'Поле не должно быть пустым.',
-                          },
-                          email: {
-                            message: 'Введите корректный адрес почты.',
-                          },
+      <Slide
+        full
+        video="http://skill-branch.ru/video-background.webm"
+        overlay
+      >
+        <Grid>
+          <Row>
+            <Col md={4} mdOffset={4}>
+              <Card>
+                <CardBlock>
+                  <CardTitle>
+                    <If condition={type === 'login'}>
+                      Вход
+                    </If>
+                    <If condition={['signupPassport', 'signup'].includes(type)}>
+                      {`Регистрация${type === 'signupPassport' ? ' через соц.сеть' : ''}`}
+                    </If>
+                    <If condition={type === 'recovery'}>
+                      Восстановить пароль
+                    </If>
+                  </CardTitle>
+                  <Form
+                    fields={fields}
+                    validators={{
+                      login: {
+                        presence: {
+                          message: 'Поле не должно быть пустым.',
                         },
-                        password: {
-                          presence: {
-                            message: 'Поле не должно быть пустым',
-                          },
-                          length: {
-                            minimum: 6,
-                            message: 'Пароль должен быть больше 6 символов.',
-                          },
+                        email: {
+                          message: 'Введите корректный адрес почты.',
                         },
-                        'profile.firstName': {
-                          presence: {
-                            message: 'Поле не должно быть пустым',
-                          },
+                      },
+                      password: {
+                        presence: {
+                          message: 'Поле не должно быть пустым',
                         },
-                        'profile.lastName': {
-                          presence: {
-                            message: 'Поле не должно быть пустым',
-                          },
+                        length: {
+                          minimum: 6,
+                          message: 'Пароль должен быть больше 6 символов.',
                         },
-                        'profile.middleName': {
-                          presence: {
-                            message: 'Поле не должно быть пустым',
-                          },
+                      },
+                      'profile.firstName': {
+                        presence: {
+                          message: 'Поле не должно быть пустым',
                         },
-                      }}
-                      onSubmit={this.handleSubmit}
-                      submitButton={(
-                        <Button
-                          type="submit"
-                          bsStyle="primary"
-                          disabled={!!status}
-                          style={{
-                            position: 'relative',
-                          }}
-                        >
-                          <span style={{ display: !status ? 'block' : 'none' }}>
-                            <If condition={type === 'login'}>
-                              Войти
-                            </If>
-                            <If condition={['signupPassport', 'signup'].includes(type)}>
-                              Создать аккаунт
-                            </If>
-                            <If condition={type === 'recovery'}>
-                              Сбросить пароль
-                            </If>
-                          </span>
-                          <If condition={status}>
-                            <div
-                              className={cx({
-                                'button-icon-status': true,
-                                spin: status === 'wait',
-                              })}
-                            >
-                              <If condition={status === 'wait'}>
-                                <Loading />
-                              </If>
-                              <If condition={status === 'ok'}>
-                                <Check />
-                              </If>
-                              <If condition={status === 'error'}>
-                                <Error />
-                              </If>
-                            </div>
+                      },
+                      'profile.lastName': {
+                        presence: {
+                          message: 'Поле не должно быть пустым',
+                        },
+                      },
+                      'profile.middleName': {
+                        presence: {
+                          message: 'Поле не должно быть пустым',
+                        },
+                      },
+                    }}
+                    onSubmit={this.handleSubmit}
+                    submitButton={(
+                      <Button
+                        type="submit"
+                        bsStyle="primary"
+                        disabled={!!status}
+                        style={{
+                          position: 'relative',
+                        }}
+                      >
+                        <span style={{ display: !status ? 'block' : 'none' }}>
+                          <If condition={type === 'login'}>
+                            Войти
                           </If>
-                        </Button>
-                      )}
-                    />
+                          <If condition={['signupPassport', 'signup'].includes(type)}>
+                            Создать аккаунт
+                          </If>
+                          <If condition={type === 'recovery'}>
+                            Сбросить пароль
+                          </If>
+                        </span>
+                        <If condition={status}>
+                          <div
+                            className={cx({
+                              'button-icon-status': true,
+                              spin: status === 'wait',
+                            })}
+                          >
+                            <If condition={status === 'wait'}>
+                              <Loading />
+                            </If>
+                            <If condition={status === 'ok'}>
+                              <Check />
+                            </If>
+                            <If condition={status === 'error'}>
+                              <Error />
+                            </If>
+                          </div>
+                        </If>
+                      </Button>
+                    )}
+                  />
+                </CardBlock>
+                <CardFooter className="text-xs-center">
+                  <ButtonGroup>
+                    {map(passportButtons, (value, name) => (
+                      <Button
+                        key={name}
+                        styleName={`btn-social is-${name}`}
+                        onClick={() => auth.authPassport(name)}
+                      >
+                        {value.icon}
+                      </Button>
+                    ))}
+                  </ButtonGroup>
+                </CardFooter>
+              </Card>
+              <If condition={type === 'signup'}>
+                <Card>
+                  <CardBlock className="text-xs-center" style={{ textAlign: 'center' }}>
+                    <CardText>У вас уже есть аккаунт?</CardText>
+                    <Button
+                      componentClass={Link}
+                      href="/auth"
+                      block
+                    >
+                      Войти
+                    </Button>
                   </CardBlock>
-                  <CardFooter className="text-xs-center">
-                    <ButtonGroup>
-                      {map(passportButtons, (value, name) => (
-                        <Button
-                          key={name}
-                          styleName={`btn-social is-${name}`}
-                          onClick={() => auth.authPassport(name)}
-                        >
-                          {value.icon}
-                        </Button>
-                      ))}
-                    </ButtonGroup>
-                  </CardFooter>
                 </Card>
-                <If condition={type === 'signup'}>
-                  <Card>
-                    <CardBlock className="text-xs-center" style={{ textAlign: 'center' }}>
-                      <CardText>У вас уже есть аккаунт?</CardText>
-                      <Button
-                        componentClass={Link}
-                        href="/auth"
-                        block
-                      >
-                        Войти
-                      </Button>
-                    </CardBlock>
-                  </Card>
-                </If>
-                <If condition={type !== 'signup'}>
-                  <Card>
-                    <CardBlock className="text-xs-center" style={{ textAlign: 'center' }}>
-                      <CardText>Вы еше не зарегистрированы?</CardText>
-                      <Button
-                        componentClass={Link}
-                        href="/auth/signup"
-                        block
-                      >
-                        Создать аккаунт
-                      </Button>
-                    </CardBlock>
-                  </Card>
-                </If>
-              </Col>
-            </Row>
-          </Grid>
-        </Slide>
-      </div>
+              </If>
+              <If condition={type !== 'signup'}>
+                <Card>
+                  <CardBlock className="text-xs-center" style={{ textAlign: 'center' }}>
+                    <CardText>Вы еше не зарегистрированы?</CardText>
+                    <Button
+                      componentClass={Link}
+                      href="/auth/signup"
+                      block
+                    >
+                      Создать аккаунт
+                    </Button>
+                  </CardBlock>
+                </Card>
+              </If>
+            </Col>
+          </Row>
+        </Grid>
+      </Slide>
     );
   }
 }
