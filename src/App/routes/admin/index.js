@@ -8,48 +8,38 @@ import Users from './Users';
 
 
 export default {
+  action({ next, page }) {
+    return page
+      .pushTitle('Администраторская', '/admin')
+      .layout(CabinetLayout)
+      .next(next);
+  },
   children: [
     {
       path: '/',
-      async action({ ctx }) {
-        const props = {
-          title: 'Панель управления',
-          description: 'Управление приложением',
-          siteTitle: ctx.config.siteTitle,
-          children: <Dashboard />,
-        };
-        return {
-          title: props.title,
-          component: <CabinetLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Панель управления')
+          // .description('Ваш кабинет')
+          .component(Dashboard, { page });
       },
     },
     {
       path: '/profile',
-      async action({ ctx }) {
-        const props = {
-          title: 'Профиль',
-          siteTitle: ctx.config.siteTitle,
-          children: <Profile />,
-        };
-        return {
-          title: props.title,
-          component: <CabinetLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Профиль')
+          // .description('Ваш кабинет')
+          .component(Profile, { page });
       },
     },
     {
       path: '/users',
-      async action({ ctx }) {
-        const props = {
-          title: 'Список пользователей',
-          siteTitle: ctx.config.siteTitle,
-          children: <Users />,
-        };
-        return {
-          title: props.title,
-          component: <CabinetLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Список пользователей')
+          // .description('Ваш кабинет')
+          .component(Users, { page });
       },
     },
   ],

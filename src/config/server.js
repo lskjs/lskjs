@@ -12,7 +12,7 @@ export default config.server(baseConfig, {
   protocol: process.env.PROTOCOL || 'http',
 
   db: {
-    uri: process.env.DB || 'mongodb://s3.mgbeta.ru:10098/lsk-example-2',
+    uri: process.env.DB || 'mongodb://lsk-example1:lsk-example1-pass@publicdb.mgbeta.ru:27000/lsk-example1',
   },
   jwt: {
     secret: 'REPLACE_ME_PLEASE',

@@ -1091,7 +1091,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.22.0, babel-traverse@^6.23.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0:
+babel-types@6.9.0, babel-types@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1101,7 +1101,7 @@ babel-types@6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0, babel-types@^6.9.0:
+babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -3997,9 +3997,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.2.tgz#045ac30f66bc105f54806e4ce1ed1409e3e9b0b7"
+lego-starter-kit@1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.3.tgz#df37063d71dcfd23599d33c0d49a34166a423b6e"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"

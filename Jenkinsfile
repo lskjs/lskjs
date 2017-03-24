@@ -40,7 +40,7 @@ node('master') {
             mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
                 subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
-                to: 'obt195@gmail.com'
+                to: 'obt195@gmail.com, errors@coder24.ru, shitric2@gmail.com'
         }
 
     } catch (err) {
@@ -49,7 +49,7 @@ node('master') {
         mail body: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE:\nCheck console output at ${env.BUILD_URL} to view the results.",
             from: 'ci@mgbeta.ru',
             subject: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE!",
-            to: 'obt195@gmail.com'
+            to: 'obt195@gmail.com, errors@coder24.ru, shitric2@gmail.com'
 
         throw err
     }

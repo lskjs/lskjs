@@ -1,5 +1,3 @@
-/* eslint react/jsx-filename-extension: 0 */
-import React from 'react';
 import CabinetLayout from './CabinetLayout';
 
 import ProfilePage from './ProfilePage';

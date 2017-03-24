@@ -5,6 +5,7 @@ $tumblr: #36465d;
 $twitter: #41abe0;
 $instagram: #262626;
 $facebook: #4867aa;
+$youtube: #e62117;
 
 :global .input-group-addon svg {
     display: flex;
@@ -64,5 +65,6 @@ $facebook: #4867aa;
 @mixin socialButtons tumblr {}
 @mixin socialButtons instagram {}
 @mixin socialButtons facebook {}
+@mixin socialButtons youtube {}
 
 @keyframes spin { 100% { transform:rotate(360deg); } }
