@@ -50,6 +50,7 @@ export default (ctx) => {
           country: extraData.country,
         },
       };
+      console.log(data);
       const passport = new Passport(data);
       return passport.save();
     }

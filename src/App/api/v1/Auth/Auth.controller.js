@@ -1,3 +1,4 @@
+import _ from 'lodash'
 export default (ctx) => {
   const { e400, e404 } = ctx.errors;
   const { User, Passport } = ctx.models;
@@ -10,10 +11,10 @@ export default (ctx) => {
     if (passport.user) {
       return e400('passport already have user');
     }
-    const params = Object.assign(
-      { username: await passport.generateUsername() },
+    const params = _.merge(
       { profile: passport.profile },
       req.data,
+      { username: await passport.generateUsername() },
     );
     const user = new User(params);
     await user.save();

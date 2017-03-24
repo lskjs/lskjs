@@ -33,6 +33,7 @@ export default (ctx) => {
           avatar: _.get(profile, '_json.items[0].snippet.thumbnails.high.url'),
         },
       };
+      console.log(data);
       const passport = new Passport(data);
       return passport.save();
     }
