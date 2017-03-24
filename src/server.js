@@ -1,5 +1,5 @@
 import polyfill from 'lego-starter-kit/utils/polyfill';
-// import App from 'lego-starter-kit/MobxApp'
+// import App from 'lego-starter-kit/CoreApp'
 import App from 'lego-starter-kit/ReactApp';
 import config from './config';
 polyfill();

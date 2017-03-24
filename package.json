@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Lego Starter Kit — Node.js & React isomorphic app creator (Node.js, Express, React.js, Babel, PostCSS, Webpack)",
   "dependencies": {
     "babel-polyfill": "6.22.0",
@@ -75,7 +75,7 @@
   "scripts": {
     "build": "babel-node tools/run build --release",
     "start": "node build/server.js",
-    "babel-publish": "npm publish",
+    "release": "npm publish",
     "dev": "babel-node tools/run start  | node ./src/utils/bunyan -o short -l trace",
     "storybook": "start-storybook -p 9001",
     "babel-build": "rimraf lib && babel src --out-dir lib --source-maps inline --copy-files && cp {package.json,README.md} lib/",

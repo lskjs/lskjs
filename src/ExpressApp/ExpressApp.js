@@ -40,16 +40,18 @@ export default class ExpressApp {
     this.useRoutes();
     this.useStatics();
     this.useDefaultRoute();
+    this.useCatchErrors();
   }
 
   useMiddlewares() {}
-  useStatics() {}
   useRoutes() {}
+  useStatics() {}
   useDefaultRoute() {
     this.app.use((req, res) => {
       return res.send(`Hello World from "${this.config.name}"`);
     });
   }
+  useCatchErrors() {}
 
   async run() {
     this.log.trace('ExpressApp run');
@@ -63,7 +65,7 @@ export default class ExpressApp {
   }
 
   async start() {
-    await this.run()
+    await this.run();
     console.log(`🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing()}ms]`);
   }
 }

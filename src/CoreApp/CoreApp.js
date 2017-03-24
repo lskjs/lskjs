@@ -140,15 +140,22 @@ export default class CoreApp extends ExpressApp {
     middlewares.forEach((middleware) => {
       middleware && typeof middleware === 'function' && this.app.use(middleware);
     });
-    this.afterUseMiddlewares();
   }
   useDefaultRoute() {
+    this.app.use('/api/v1', (req, res, next) => {
+      return res.json({
+        ok: 1,
+      });
+    });
     this.app.use((req, res, next) => {
       const err = this.errors.e404('Route not found');
       next(err);
     });
   }
   afterUseMiddlewares() {
+    console.log('afterUseMiddlewares DEPRECATED');
+  }
+  useCatchErrors() {
     this.middlewares.catchError && this.app.use(this.middlewares.catchError);
   }
 
