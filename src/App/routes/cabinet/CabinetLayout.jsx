@@ -29,7 +29,7 @@ import Zip from 'react-icons/lib/fa/file-archive-o';
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
 @inject('user') @observer
-export default class AdminLayout extends Component {
+export default class CabinetLayout extends Component {
   static contextTypes = {
     history: PropTypes.object.isRequired,
   }
@@ -71,7 +71,7 @@ export default class AdminLayout extends Component {
   }
   render() {
     const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
-    const { user, title, description, siteTitle, children, breadcrumbs } = this.props;
+    const { user, title, description, siteTitle = 'Example', children, breadcrumbs, page } = this.props;
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
       ...breadcrumbs,

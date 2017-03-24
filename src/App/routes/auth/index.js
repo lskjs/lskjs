@@ -1,109 +1,78 @@
- import AuthPage from './AuthPage';
- import getData from './getData';
+import React, { Component } from 'react';
+import AuthPage from './AuthPage';
+import AuthLayout from '../MainLayout';
+import getData from './getData';
 
- export default {
-   children: [
-     {
-       path: '/(login|)',
-       action({ ctx }) {
-         return {
-           title: 'Авторизация',
-           component: <AuthPage type="login" />,
-         };
-       },
-     },
-     {
-       path: '/passport',
-       async action(params) {
-         const { appStore, query } = params;
-        //  console.log({query});
-        // if (__SERVER__) {
-        //   return {
-        //     title: '',
-        //     component: <div>Loading</div>,
-        //   };
-        // }
-        // if (!__SERVER__) {
-        //  if (!query.p) {
-        //    return {
-        //      redirect: '/auth/login',
-        //    };
-        //  }
-         let passport;
-         try {
-           passport = (await getData(params)).passport;
-         } catch (err) {
-           console.log({ err });
-           return {
-             component: <div>err</div>,
-            //  redirect: '/auth/login',
-           };
-         }
-         if (passport.user) {
-           if (__SERVER__) {
-             return {
-               title: 'Загрузка',
-               component: <h1>Загрузка...</h1>,
-             };
-           }
-           const res = await appStore.auth.loginPassport(passport, query);
-           if (res) {
-             return { redirect: '/' }
-           } else {
-             throw 'Непонятнаяошибка >__<'
-           }
-         }
-         return {
-           title: 'Регистрация через соц.сеть',
-           component: <AuthPage type="signupPassport" passport={passport} query={query} />,
-         };
-        // }
-       },
-     },
-
-     {
-       path: '/recovery',
-       action({ ctx }) {
-         return {
-           title: 'Восстановление пароля',
-           component: <AuthPage type="recovery" />,
-         };
-       },
-     },
-     {
-       path: '/signup',
-       action({ ctx }) {
-         return {
-           title: 'Регистрация',
-           component: <AuthPage type="signup" />,
-         };
-       },
-     },
-     {
-       path: '/logout',
-       action({ appStore }) {
-         if (__SERVER__) {
-           return {
-             component: <div>Loading</div>,
-           };
-         }
-         appStore.auth.logout();
-         //  console.log('appStore', appStore);
-         return { redirect: '/' };
-         //  return {
-         //    title: 'signup',
-         //    component: <AuthPage type="signup" />,
-         //  };
-       },
-     },
-    //  {
-    //    path: '/profile',
-    //    action() {
-    //     //  return {
-    //     //    title: 'signup',
-    //     //    component: <AuthPage type="signup" />,
-    //     //  };
-    //    },
-    //  },
-   ],
- };
+export default {
+  action({ next, page }) {
+    return page
+      .pushTitle('Авторизация')
+      .layout(AuthLayout)
+      .next(next);
+  },
+  children: [
+    {
+      path: '/(login|)',
+      action({ page }) {
+        return page
+          .pushTitle('Вход')
+          .component(AuthPage, { type: 'login' });
+      },
+    },
+    {
+      path: '/recovery',
+      action({ page }) {
+        return page
+          .pushTitle('Восстановление пароля')
+          .component(AuthPage, { type: 'recovery' });
+      },
+    },
+  {
+      path: '/signup',
+      action({ page }) {
+        return page
+          .pushTitle('Signup')
+          .component(AuthPage, { type: 'signup' });
+      },
+    },
+    {
+      path: '/passport',
+      async action(params) {
+        const { appStore, query, page } = params;
+        let passport;
+        try {
+          passport = (await getData(params)).passport;
+        } catch (err) {
+          throw err;
+        }
+        if (passport.user) {
+          if (__SERVER__) {
+            return page
+              .pushTitle('Вход через соц.сеть')
+              .component(<div>>Загрузка...</div>);
+          }
+          const res = await appStore.auth.loginPassport(passport, query);
+          if (res) {
+            return page.redirect('/');
+          }
+          throw 'Непонятная ошибка при входе в соцсеть';
+        }
+        return page
+           .pushTitle('Регистрация через соц.сеть')
+           .component(AuthPage, { type: 'signupPassport', passport, query });
+      },
+    },
+    {
+      path: '/logout',
+      action({ appStore, page }) {
+        if (__SERVER__) {
+          return page
+             .pushTitle('Logout')
+             .component(<div>>Загрузка...</div>);
+        }
+        appStore.auth.logout();
+        return page.redirect('/');
+      },
+    },
+  ],
+};

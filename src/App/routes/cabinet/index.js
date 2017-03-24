@@ -1,44 +1,36 @@
 /* eslint react/jsx-filename-extension: 0 */
 import React from 'react';
-import CabientLayout from './CabinetLayout';
+import CabinetLayout from './CabinetLayout';
+
 import ProfilePage from './ProfilePage';
 import SettingsPage from './SettingsPage';
 import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
 
 export default {
+  action({ next, page }) {
+    return page
+      .pushTitle('Кабинет', '/cabinet')
+      .layout(CabinetLayout)
+      .next(next);
+  },
   children: [
     {
       path: '/',
-      async action({ ctx }) {
-        const props = {
-          title: 'Личный кабинет',
-          description: 'Ваш профиль',
-          siteTitle: ctx.config.siteTitle,
-          children: <ProfilePage />,
-        };
-        return {
-          title: props.title,
-          component: <CabientLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Личный кабинет')
+          // .description('Ваш кабинет')
+          .component(ProfilePage, { page });
       },
     },
     {
       path: '/settings',
-      async action({ ctx }) {
-        const props = {
-          title: 'Редактирование профиля',
-          description: 'Старница настроек',
-          siteTitle: ctx.config.siteTitle,
-          children: <SettingsPage />,
-        };
-        props.breadcrumbs = [
-          { key: 2, title: props.title, url: '/cabinet/settings' },
-        ];
-        return {
-          title: props.title,
-          component: <CabientLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Редактирование профиля', '/cabinet/settings')
+          // .description('Старница настроек')
+          .component(SettingsPage, { page });
       },
     },
     {
@@ -47,49 +39,27 @@ export default {
     },
     {
       path: '/posts',
-      async action({ ctx }) {
-        const props = {
-          title: 'Публикации',
-          description: 'Посты созданные тобой',
-          siteTitle: ctx.config.siteTitle,
-          children: <PostsPage />,
-        };
-        props.breadcrumbs = [
-          { key: 2, title: props.title, url: '/cabinet/posts' },
-        ];
-        return {
-          title: props.title,
-          component: <CabientLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Публикации', '/cabinet/posts')
+          // .description('Посты созданные тобой')
+          .component(PostsPage, { page });
       },
     },
     {
       path: '/im',
-      async action({ ctx }) {
-        const props = {
-          title: 'Сообщения',
-          description: 'Все сообщения',
-          siteTitle: ctx.config.siteTitle,
-          children: <MessagesPage />,
-        };
-        props.breadcrumbs = [
-          { key: 2, title: props.title, url: '/cabinet/im' },
-        ];
-        return {
-          title: props.title,
-          component: <CabientLayout {...props} />,
-        };
+      async action({ page }) {
+        return page
+          .pushTitle('Сообщения', '/cabinet/im')
+          // .description('Все сообщения')
+          .component(MessagesPage, { page });
       },
     },
     {
       path: '*',
       action() {
-        throw 'Not found in cabinet'
+        throw 'Page not found in cabinet';
       },
     },
   ],
-  async action({ next }) {
-    const route = await next();
-    return route;
-  },
 };
