@@ -10,7 +10,11 @@ export default (ctx) => {
     if (passport.user) {
       return e400('passport already have user');
     }
-    const params = Object.assign(passport.profile, req.data);
+    const params = Object.assign(
+      { username: await passport.generateUsername() },
+      { profile: passport.profile },
+      req.data,
+    );
     const user = new User(params);
     await user.save();
     passport.user = user._id;

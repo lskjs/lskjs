@@ -10,7 +10,9 @@ import assets from './assets'; // eslint-disable-line
 export default class App extends ReactApp {
 
   getModels() {
-    return require('./models').default(this);
+    const superModels = super.getModels()
+    const models = require('./models').default(this);
+    return Object.assign(superModels, models)
   }
 
   init() {

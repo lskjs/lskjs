@@ -24,7 +24,7 @@ export function getSchema(ctx) {
       default: Date.now,
     },
 
-    ///////
+    // /////
 
     // название соцсети из passport
     provider: {
@@ -49,7 +49,18 @@ export function getSchema(ctx) {
   }, {
     timestamps: true,
   });
-
+  schema.methods.generateUsername = async function () {
+    const { User } = ctx.models;
+    let username = `${this.providerId}@${this.provider}.com`;
+    let user = await User.findOne({ username });
+    let count = 0;
+    while (user) {
+      count += 1;
+      username += `_${count}`;
+      user = await User.findOne({ username }); // eslint-disable-line
+    }
+    return username;
+  };
   schema.methods.getUser = async function () {
     return ctx.models.User.findById(this.user);
   };
