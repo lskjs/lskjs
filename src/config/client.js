@@ -3,6 +3,7 @@ import baseConfig from 'lego-starter-kit/config/client';
 
 export default config.client(baseConfig, {
   siteTitle: 'The Site Title',
+  siteDescription: 'The Description',
   api: {
     base: '/api/v1',
   },
