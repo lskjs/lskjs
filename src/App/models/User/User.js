@@ -80,6 +80,5 @@ export function getSchema(ctx) {
 
 export default (ctx) => {
   const schema = getSchema(ctx);
-  console.log(schema);
   return ctx.db.model('User', schema.getMongooseSchema(), 'user');
 };

@@ -71,7 +71,6 @@ export default class CabinetLayout extends Component {
   }
   render() {
     const { user, children, breadcrumbs, page, config } = this.props;
-    console.log(page);
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
       ...breadcrumbs,
@@ -199,12 +198,11 @@ export default class CabinetLayout extends Component {
         </PageWrapper>
         <FooterWrapper>
           <div className="pull-right hidden-xs">
-            <b>Version</b> 0.0.1
+            {config.siteCopyright}
+            {/* <b>Version</b> 0.0.1 */}
           </div>
-          <strong>
-            <span>Copyright &copy; 2016-2017 </span>
-            <a href="http://github.com/isuvorov/lego-starter-kit">Lego-starter-kit</a>.
-          </strong> All rights reserved.
+          {/* <strong>
+          </strong> */}
         </FooterWrapper>
       </LayoutWrapper>
     );
