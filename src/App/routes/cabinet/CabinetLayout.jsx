@@ -38,11 +38,12 @@ export default class CabinetLayout extends Component {
     description: null,
     breadcrumbs: [],
     additionalMenus: [],
+    page: null,
   }
   static propTypes = {
     user: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
-    page: PropTypes.node.isRequired,
+    page: PropTypes.node,
     children: PropTypes.node.isRequired,
     breadcrumbs: PropTypes.array,
   }
@@ -70,8 +71,7 @@ export default class CabinetLayout extends Component {
     this.context.history.push('/');
   }
   render() {
-    const { user, children, breadcrumbs, page, config } = this.props;
-    console.log(page);
+    const { user, children, breadcrumbs, config } = this.props;
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
       ...breadcrumbs,

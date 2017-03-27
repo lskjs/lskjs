@@ -18,9 +18,12 @@ export default (ctx) => {
       const userId = req.user._id;
       const params = req.allParams();
       const user = await User.findById(userId);
-      Object.assign(user, _.pick(params, ['profile', 'meta']));
+      ctx.log.info('params', params);
+      ctx.log.info('user', user);
+      Object.assign(user, _.pick(params, ['username', 'password', 'profile']));
+      user.username = params.username || user.username;
+      user.password = params.password || user.password;
       user.profile = _.merge({}, user.profile, params.profile);
-      user.meta = _.merge({}, user.meta || {}, params.meta || {});
       await user.save();
       return user;
     } catch (error) {

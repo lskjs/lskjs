@@ -6,8 +6,9 @@ export default class UIStore {
 
   @action
   status(value = null) {
-    this.statusRequest = value;
-    if (['ok', 'error'].includes(value)) {
+    const val = value === 0 && 'ok' || value > 0 && 'error' || value;
+    this.statusRequest = val;
+    if (['ok', 'error'].includes(val)) {
       setTimeout(() => {
         this.statusRequest = null;
       }, 1000);
