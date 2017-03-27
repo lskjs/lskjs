@@ -28,7 +28,7 @@ import Zip from 'react-icons/lib/fa/file-archive-o';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
-@inject('user', 'config')
+@inject('user', 'config', 'page')
 @observer
 export default class CabinetLayout extends Component {
   static contextTypes = {
@@ -72,10 +72,18 @@ export default class CabinetLayout extends Component {
   }
   render() {
     const { user, children, breadcrumbs, page, config } = this.props;
-    const breadItems = [
-      { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
-      ...breadcrumbs,
-    ];
+    const title = page.getMeta('title');
+    const description = page.getMeta('description');
+    const breadItems = (page.state.metas || []).map((meta, key) => ({
+      key,
+      title: meta.crumb && meta.crumb.title || meta.title || 'title',
+      url: meta.crumb && meta.crumb.url || meta.url || '/',
+      icon: meta.crumb && meta.crumb.icon || meta.icon// || <DashboardIcon />,
+    }));
+    // [
+    //   { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
+    //   ...breadcrumbs,
+    // ];
     const mainMenus = [
       {
         icon: <DashboardIcon />,
@@ -190,20 +198,15 @@ export default class CabinetLayout extends Component {
           </If>
         </SidebarWrapper>
         <PageWrapper>
-          {/* <PageHeader title={title} description={description}>
+          <PageHeader title={title} description={description}>
             <Breadcrumb items={breadItems} />
-          </PageHeader> */}
+          </PageHeader>
           <PageContent>
             {children}
           </PageContent>
         </PageWrapper>
         <FooterWrapper>
-          <div className="pull-right hidden-xs">
-            {config.siteCopyright}
-            {/* <b>Version</b> 0.0.1 */}
-          </div>
-          {/* <strong>
-          </strong> */}
+          <div className="pull-right hidden-xs" dangerouslySetInnerHTML={{ __html: config.siteCopyright }} />
         </FooterWrapper>
       </LayoutWrapper>
     );

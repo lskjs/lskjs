@@ -8,7 +8,11 @@ import MessagesPage from './MessagesPage';
 export default {
   action({ next, page }) {
     return page
-      .pushTitle('Кабинет', '/cabinet')
+      .meta({
+        title: 'Кабинет',
+        description: 'Личный кабинет',
+        url: '/cabinet',
+      })
       .layout(CabinetLayout)
       .next(next);
   },
@@ -17,18 +21,19 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .pushTitle('Личный кабинет')
-          // .description('Ваш кабинет')
-          .component(ProfilePage, { page });
+          .component(ProfilePage);
       },
     },
     {
       path: '/settings',
       async action({ page }) {
         return page
-          .pushTitle('Редактирование профиля', '/cabinet/settings')
-          // .description('Старница настроек')
-          .component(SettingsPage, { page });
+          .meta({
+            title: 'Редактирование профиля',
+            description: 'Старница настроек',
+            url: '/cabinet/settings',
+          })
+          .component(SettingsPage);
       },
     },
     {
@@ -39,18 +44,24 @@ export default {
       path: '/posts',
       async action({ page }) {
         return page
-          .pushTitle('Публикации', '/cabinet/posts')
-          // .description('Посты созданные тобой')
-          .component(PostsPage, { page });
+          .meta({
+            title: 'Публикации',
+            description: 'Посты созданные тобой',
+            url: '/cabinet/posts',
+          })
+          .component(PostsPage);
       },
     },
     {
-      path: '/im',
+      path: '/messages',
       async action({ page }) {
         return page
-          .pushTitle('Сообщения', '/cabinet/im')
-          // .description('Все сообщения')
-          .component(MessagesPage, { page });
+          .meta({
+            title: 'Сообщения',
+            description: 'Все сообщения',
+            url: '/cabinet/posts',
+          })
+          .component(MessagesPage);
       },
     },
     {
