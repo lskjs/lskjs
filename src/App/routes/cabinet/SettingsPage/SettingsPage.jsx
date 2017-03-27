@@ -10,6 +10,8 @@ import Check from 'react-icons/lib/md/check';
 import Component from 'lsk-general/General/Component';
 import Form from 'lsk-general/General/Form';
 
+import PasswordChange from './components/PasswordChange';
+
 @inject('user', 'auth', 'ui')
 @observer
 export default class ProfilePage extends Component {
@@ -96,7 +98,7 @@ export default class ProfilePage extends Component {
     return (
       <Row>
         <Col md={6} xs={12}>
-          <Card style={{ margin: '20px 0' }}>
+          <Card style={{ margin: '10px 0' }}>
             <CardBlock>
               <h4>Редактирование</h4>
               <Form
@@ -139,7 +141,7 @@ export default class ProfilePage extends Component {
           </Card>
         </Col>
         <Col md={6} xs={12}>
-          <Card style={{ margin: '20px 0' }}>
+          <Card style={{ margin: '10px 0' }}>
             <CardBlock>
               <h4>Изменить аватар</h4>
               <p>Ваш текущий аватар</p>
@@ -153,6 +155,7 @@ export default class ProfilePage extends Component {
               <Button onClick={() => alert('Нажатие')}>Изменить</Button>
             </CardBlock>
           </Card>
+          <PasswordChange />
         </Col>
       </Row>
     );

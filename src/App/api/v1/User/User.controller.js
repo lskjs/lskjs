@@ -18,7 +18,8 @@ export default (ctx) => {
       const userId = req.user._id;
       const params = req.allParams();
       const user = await User.findById(userId);
-      Object.assign(user, _.pick(params, ['profile', 'meta']));
+      Object.assign(user, _.pick(params, ['password', 'profile', 'meta']));
+      user.password = params.password || user.password;
       user.profile = _.merge({}, user.profile, params.profile);
       user.meta = _.merge({}, user.meta || {}, params.meta || {});
       await user.save();

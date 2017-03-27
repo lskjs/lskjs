@@ -71,8 +71,7 @@ export default class CabinetLayout extends Component {
     this.context.history.push('/');
   }
   render() {
-    const { user, children, breadcrumbs, page, config } = this.props;
-    console.log(page);
+    const { user, children, breadcrumbs, config } = this.props;
     const breadItems = [
       { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
       ...breadcrumbs,
