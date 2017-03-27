@@ -99,7 +99,7 @@ export default class Page {
   // }
 
   title(...args) {
-    this.pushTitle(...args);
+    return this.pushTitle(...args);
   }
 
   pushTitle(...args) {
