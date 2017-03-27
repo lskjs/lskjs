@@ -51,7 +51,7 @@ export function getSchema(ctx) {
   });
   schema.methods.generateUsername = async function () {
     const { User } = ctx.models;
-    let username = `${this.providerId}@${this.provider}.com`;
+    let username = `${this.providerId}_${this.provider}.com`;
     let user = await User.findOne({ username });
     let count = 0;
     while (user) {
