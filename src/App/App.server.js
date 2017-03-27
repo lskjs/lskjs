@@ -26,7 +26,6 @@ export default class App extends ReactApp {
 
   run() {
     super.run();
-    console.log(this.strategies);
     _.map(this.strategies || [], (strategy) => {
       this.passport.use(strategy.getStrategy(strategy));
     });
