@@ -64,7 +64,7 @@ export default class AuthStore {
   async signup(data) {
     this.store.ui.status('wait');
     const res = await this.store.api.authSignup(data);
-    this.store.ui.status(res.message);
+    this.store.ui.status(res.code);
     await this.setToken(res.token);
     await this.updateUser(res.user);
   }
@@ -73,7 +73,7 @@ export default class AuthStore {
   async login(data) {
     this.store.ui.status('wait');
     const res = await this.store.api.authLogin(data);
-    this.store.ui.status(res.message);
+    this.store.ui.status(res.code);
     await this.setToken(res.token);
     await this.updateUser(res.user);
     return res;
@@ -83,7 +83,7 @@ export default class AuthStore {
   async recovery(data) {
     this.store.ui.status('wait');
     const res = await this.store.api.authRecovery(data);
-    this.store.ui.status(res.message);
+    this.store.ui.status(res.code);
   }
 
   @action
@@ -96,7 +96,7 @@ export default class AuthStore {
     console.log('signupPassport');
     this.store.ui.status('wait');
     const res = await this.store.api.authSignupPassport({ ...data, p });
-    this.store.ui.status(res.message);
+    this.store.ui.status(res.code);
     await this.setToken(res.token);
     await this.updateUser(res.user);
   }
@@ -108,7 +108,7 @@ export default class AuthStore {
       this.store.ui.status('wait');
       const res = await this.store.api.authLoginPassport({ ...data, p });
       console.log({ res })
-      this.store.ui.status(res.message);
+      this.store.ui.status(res.code);
       await this.setToken(res.token);
       await this.updateUser(res.user);
       return true

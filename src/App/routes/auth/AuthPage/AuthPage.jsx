@@ -158,7 +158,7 @@ export default class AuthPage extends Component {
   }
 
   render() {
-    const { type, auth } = this.props;
+    const { type, auth, config } = this.props;
     const status = this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
@@ -263,7 +263,7 @@ export default class AuthPage extends Component {
                   />
                 </CardBlock>
                 <CardFooter className="text-xs-center">
-                  <SocialButtons />
+                  <SocialButtons auth={auth} config={config} />
                 </CardFooter>
               </Card>
               <If condition={type === 'signup'}>
