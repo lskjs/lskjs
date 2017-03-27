@@ -11,6 +11,7 @@ import { autobind } from 'core-decorators';
 import routes from './routes';
 import Html from './Html';
 import Provider from './Provider';
+import _ from 'lodash';
 
 
 const LOGGING = false;
@@ -90,7 +91,7 @@ export default class ReactApp {
 
 
     try {
-      const props = await this.getHtmlProps(this.req);
+      const props = await this.getHtmlProps({});
 
       // console.log('??', this.currentLocation.key , location.key);
       if (this.currentLocation.key !== location.key) {
@@ -133,8 +134,8 @@ export default class ReactApp {
 
   @autobind
   init() {
-    LOGGING && console.log('init');
     this.rootState = window.__ROOT_STATE__ || {};
+    this.config = _.merge({}, this.config, this.rootState.config || {}) || {};
     FastClick.attach(document.body);
     this.container = document.getElementById('root');
     if (window.history && 'scrollRestoration' in window.history) {
@@ -188,12 +189,9 @@ export default class ReactApp {
     // });
   }
 
-  req = {
-    rootState: window.__ROOT_STATE__ || {},
-  }
   getReq() {
     return {
-      ...this.req,
+      // ...this.req,
       hostname: window.location.hostname,
       path: window.location.pathname,
       query: qs.parse(window.location.search),
@@ -203,20 +201,21 @@ export default class ReactApp {
 
   // / Synonims
   getReqRootState(req) {
-    return req.rootState;
+    return this.rootState;
   }
 
   Provider = Provider
   createProvider(rootState, req) {
-    if (this.Provider.v === 2) {
-      return new this.Provider({
-        rootState,
-        req,
-        config: this.config,
-        app: this,
-      });
+    const params = {
+      rootState,
+      req,
+      config: this.config,
+      app: this,
     }
-    return new this.Provider(rootState, req, this.config);
+    if (this.Provider.v === 2) {
+      return new this.Provider(params);
+    }
+    return new this.Provider(params.rootState, params.req, params.config);
   }
 
   getReqCtx(req) {

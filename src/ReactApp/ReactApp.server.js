@@ -19,7 +19,7 @@ export default class ReactApp extends CoreApp {
   useDefaultRoute() {
     this.app.get('*', async (req, res, next) => {
       try {
-        let htmlProps = await this.getHtmlProps(req);
+        const htmlProps = await this.getHtmlProps(req);
         // console.log(htmlProps);
         if (htmlProps.redirect) {
           return res.redirect(htmlProps.redirect);
@@ -43,23 +43,26 @@ export default class ReactApp extends CoreApp {
   getReqRootState(req) {
     // console.log('req.user, req.token', req.user, req.token, req.cookies);
     // console.log('___');
+    const config = this.config.client;
     return {
       token: req.token,
       user: req.user,
+      config,
     };
   }
 
   Provider = Provider
   createProvider(rootState, req) {
-    if (this.Provider.v === 2) {
-      return new this.Provider({
-        rootState,
-        req,
-        config: this.config,
-        app: this,
-      });
+    const params = {
+      rootState,
+      req,
+      config: this.config,
+      app: this,
     }
-    return new this.Provider(rootState, req, this.config);
+    if (this.Provider.v === 2) {
+      return new this.Provider(params);
+    }
+    return new this.Provider(params.rootState, params.req, params.config);
     // return new this.Provider(rootState, req)
   }
 
@@ -98,7 +101,7 @@ export default class ReactApp extends CoreApp {
       appStore: reqCtx && reqCtx.provider,
       assets: this.getAssets(),
       status: 200,
-      ...require('./getReqPropsMigrationV2').default(this, { reqCtx, req, app: this, }),
+      ...require('./getReqPropsMigrationV2').default(this, { reqCtx, req, app: this }),
     };
   }
 
@@ -106,7 +109,7 @@ export default class ReactApp extends CoreApp {
     const reqProps = await this.getReqProps(req);
     let route = await UniversalRouter.resolve(this.getUniversalRoutes(), reqProps);
     if (route._page) {
-      route = route.getState()
+      route = route.getState();
     }
     return {
       ...reqProps,
