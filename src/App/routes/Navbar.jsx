@@ -55,11 +55,12 @@ export default class Header extends Component {
       </div>
     );
     return (
-      <Navbar staticTop collapseOnSelect>
+      <Navbar staticTop>
         <Navbar.Header>
           <Navbar.Brand>
             <Link href="/">{config.siteTitle}</Link>
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           {/* <Nav>
