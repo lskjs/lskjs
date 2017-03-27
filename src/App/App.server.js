@@ -24,6 +24,15 @@ export default class App extends ReactApp {
     this.passport = passport;
   }
 
+  getStatics() {
+    return {
+      ...super.getStatics(),
+      ...{
+        '/storage': `${__dirname}/../${this.config.upload.path || 'storage'}`,
+      },
+    };
+  }
+
   run() {
     super.run();
     _.map(this.strategies || [], (strategy) => {
