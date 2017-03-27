@@ -15,7 +15,6 @@ export default class AppStore {
     this.config = __SERVER__ ? config.client : config;
     const base = __SERVER__ ? config.client.api.base : config.api.base;
     const user = req.user || state.user;
-    console.log(base);
     this.api = new ApiClient({ base });
 
     this.auth = new AuthStore(this, { state, req });

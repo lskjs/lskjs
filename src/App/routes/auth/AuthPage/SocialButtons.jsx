@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import importcss from 'importcss';
-import { autobind } from 'core-decorators';
-import { inject } from 'mobx-react';
 import {
-  CardFooter,
   Button,
-  ButtonGroup,
 } from 'react-bootstrap';
 
 import VKontakte from 'react-icons/lib/fa/vk';
@@ -41,18 +37,18 @@ const passportButtons = {
   instagram: {
     icon: <Instagram />,
   },
-  youtube: {
-    icon: <Youtube />,
-  },
 };
-@inject('auth', 'config')
 @importcss(require('./AuthPage.css'))
 export default class SocialButtons extends Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
+  }
   render() {
     const { auth, config } = this.props;
     const socials = _.get(config, 'auth.socials', []);
     return (
-      <ButtonGroup>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         {_.map(passportButtons, (value, name) => (
           <If condition={socials.indexOf(name) >= 0}>
             <Button
@@ -64,11 +60,7 @@ export default class SocialButtons extends Component {
             </Button>
           </If>
         ))}
-      </ButtonGroup>
+      </div>
     );
   }
 }
-SocialButtons.propTypes = {
-  auth: PropTypes.object.isRequired,
-  config: PropTypes.object.isRequired,
-};

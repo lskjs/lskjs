@@ -7,7 +7,7 @@ export default class UserStore {
 
   @observable _id;
   @observable role;
-  profile = observable.object({
+  @observable profile = {
     avatar: defaultAvatar,
     firstName: undefined,
     lastName: undefined,
@@ -18,7 +18,7 @@ export default class UserStore {
     about: undefined,
     phone: undefined,
     email: undefined,
-  });
+  };
 
   constructor(store, user) {
     this.store = store;
@@ -63,15 +63,25 @@ export default class UserStore {
 
   @action
   async editUser(data) {
+    console.log(data);
     this.store.ui.status('wait');
     const backup = clone(this.toJS);
     const res = await this.store.api.userEdit(data);
     this.update(res.data);
-    this.store.ui.status(res.message);
+    this.store.ui.status(res.code);
     console.log(res);
     if (res.message !== 'ok') {
       this.update(backup);
     }
+  }
+
+  @action
+  async editPassword(password) {
+    console.log(password);
+    this.store.ui.status('wait');
+    const res = await this.store.api.userEdit({ password });
+    this.store.ui.status(res.code);
+    return res;
   }
 
   @computed get fullName() {

@@ -117,7 +117,6 @@ export default class AuthPage extends Component {
 
     if (type === 'signupPassport') {
       return [
-        login,
         ...infoFields,
       ].map(field => ({
         ...field,
@@ -136,8 +135,10 @@ export default class AuthPage extends Component {
   async handleSubmit(data) {
     const { type, auth, query } = this.props;
     if (type === 'login') {
-      await auth.login(data);
-      this.redirect('/');
+      const res = await auth.login(data);
+      if (res.message === 'ok') {
+        this.redirect('/');
+      }
     }
     if (type === 'signupPassport') {
       await auth.signupPassport(data, query);
@@ -157,7 +158,7 @@ export default class AuthPage extends Component {
   }
 
   render() {
-    const { type, auth } = this.props;
+    const { type, auth, config } = this.props;
     const status = this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
@@ -262,7 +263,7 @@ export default class AuthPage extends Component {
                   />
                 </CardBlock>
                 <CardFooter className="text-xs-center">
-                  <SocialButtons />
+                  <SocialButtons auth={auth} config={config} />
                 </CardFooter>
               </Card>
               <If condition={type === 'signup'}>
