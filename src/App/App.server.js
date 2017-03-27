@@ -28,7 +28,6 @@ export default class App extends ReactApp {
     return {
       ...super.getStatics(),
       ...{
-        '/': `${__dirname}/../build/public`,
         '/storage': `${__dirname}/../${this.config.upload.path || 'storage'}`,
       },
     };
