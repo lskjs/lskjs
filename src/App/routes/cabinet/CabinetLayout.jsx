@@ -38,13 +38,12 @@ export default class CabinetLayout extends Component {
     description: null,
     breadcrumbs: [],
     additionalMenus: [],
-    page: null,
   }
   static propTypes = {
     user: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
-    page: PropTypes.node,
-    children: PropTypes.node.isRequired,
+    page: PropTypes.any.isRequired,
+    children: PropTypes.any.isRequired,
     breadcrumbs: PropTypes.array,
   }
   constructor(props) {
@@ -72,6 +71,7 @@ export default class CabinetLayout extends Component {
   }
   render() {
     const { user, children, breadcrumbs, page, config } = this.props;
+    console.log(this.props, page);
     const title = page.getMeta('title');
     const description = page.getMeta('description');
     const breadItems = (page.state.metas || []).map((meta, key) => ({
