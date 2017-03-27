@@ -59,7 +59,7 @@ export function getSchema(ctx) {
       username += `_${count}`;
       user = await User.findOne({ username }); // eslint-disable-line
     }
-    return username;
+    return username.toLowerCase();
   };
   schema.methods.getUser = async function () {
     return ctx.models.User.findById(this.user);

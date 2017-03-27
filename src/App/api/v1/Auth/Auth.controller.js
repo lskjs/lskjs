@@ -14,7 +14,7 @@ export default (ctx) => {
     const params = _.merge(
       { profile: passport.profile },
       req.data,
-      { username: await passport.generateUsername().toLowerCase() },
+      { username: await passport.generateUsername() },
     );
     const user = new User(params);
     await user.save();
