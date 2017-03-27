@@ -7,9 +7,11 @@ export default (app, { req, reqCtx, app: app2 }) => {
     umodels: app.getUmodels && app.getUmodels() || {},
     rootState: reqCtx.rootState,
   };
-  return {
+  const data = {
     uapp,
     page: new Page({}, { uapp }),
     Page,
   };
+  reqCtx.provider && reqCtx.provider.setData && reqCtx.provider.setData(data);
+  return data;
 };

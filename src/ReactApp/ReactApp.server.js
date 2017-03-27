@@ -51,6 +51,14 @@ export default class ReactApp extends CoreApp {
 
   Provider = Provider
   createProvider(rootState, req) {
+    if (this.Provider.v === 2) {
+      return new this.Provider({
+        rootState,
+        req,
+        config: this.config,
+        app: this,
+      });
+    }
     return new this.Provider(rootState, req, this.config);
     // return new this.Provider(rootState, req)
   }

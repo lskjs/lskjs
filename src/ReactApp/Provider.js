@@ -5,6 +5,7 @@
 class Provider {
   // user = null;
   // api = null;
+  static v = 1;
   constructor(props = {}) {
     // const token = props.token || (props.user && props.user.token)
     // // console.log('AppStore constructor token', token);
@@ -27,7 +28,7 @@ class Provider {
   provide() {
     return {
       asd: 123,
-    }
+    };
   }
 
 }

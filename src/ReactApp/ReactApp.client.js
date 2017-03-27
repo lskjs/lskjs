@@ -208,7 +208,14 @@ export default class ReactApp {
 
   Provider = Provider
   createProvider(rootState, req) {
-    // console.log('createProvider');
+    if (this.Provider.v === 2) {
+      return new this.Provider({
+        rootState,
+        req,
+        config: this.config,
+        app: this,
+      });
+    }
     return new this.Provider(rootState, req, this.config);
   }
 

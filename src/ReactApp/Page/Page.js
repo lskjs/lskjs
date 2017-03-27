@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 const defaultState = {
   favicon: '/favicon.ico',
@@ -6,7 +7,6 @@ const defaultState = {
 
 export default class Page {
   constructor(props = {}, context = {}) {
-    // console.log('Page.constructor', context);
     this._page = true;
     this.state = Object.assign({}, defaultState);
     Object.assign(this.state, props);
@@ -92,22 +92,29 @@ export default class Page {
     });
   }
 
-  // title(title) {
-  //   if (this.disabled) return this;
-  //   this.state.titles = [title];
-  //   return this;
-  // }
-
   title(...args) {
     return this.pushTitle(...args);
   }
 
+
   pushTitle(...args) {
+    return this.meta({ title: args[0] });
+  }
+
+  composeMeta(metas = []) {
+    return _.merge({}, ...metas);
+  }
+
+  getMeta(name, def = null) {
+    if (name) return (this.state.meta || {})[name] || def;
+    return this.state.meta || {};
+  }
+
+  meta(meta) {
     if (this.disabled) return this;
-    if (!this.state.titles) {
-      this.state.titles = [];
-    }
-    this.state.titles.push([...args]);
+    if (!this.state.metas) this.state.metas = [];
+    this.state.metas.push(meta);
+    this.state.meta = this.composeMeta(this.state.metas);
     return this;
   }
 
@@ -124,8 +131,7 @@ export default class Page {
   }
 
   description(description) {
-    if (this.disabled) return this;
-    this.state.description = description;
+    console.log('Page.description() deprecated');
     return this;
   }
 
@@ -152,30 +158,14 @@ export default class Page {
   }
 
   renderTitle() {
-    return (this.state.titles || []).reverse().map(t => t[0]).join(' - ');
-  }
-
-  getCurrent() {
-    return (this.state.titles || []).slice(-1)[0] || ['Site Title ??', '/'];
-  }
-
-  getCurrentUrl() {
-    return this.getCurrent()[1];
-  }
-
-  getCurrentTitle() {
-    return this.getCurrent()[0];
-  }
-
-  getDescription() {
-    return this.state.description || '';
+    return (this.state.metas || []).reverse().map(t => t.title).join(' - ');
   }
 
   renderOGMeta() {
     return `
-<meta property="og:title" content="${this.getCurrentTitle()}" />
-<meta property="og:description" content="${this.getDescription()}" />
-<meta property="og:url" content="${this.getCurrentUrl()}" />
+<meta property="og:title" content="${this.getMeta('title')}" />
+<meta property="og:description" content="${this.getMeta('description')}" />
+<meta property="og:url" content="${this.getMeta('url')}" />
 <meta property="og:image" content="https://richpreview.com/richpreview.png" />
 `;
   }
@@ -186,7 +176,7 @@ export default class Page {
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="${this.getDescription()}"/>
+<meta name="description" content="${this.getMeta('description')}"/>
 <meta property="og:description" content="Also want these pretty website previews?" />
 ${!this.state.favicon ? '' : `<link rel="shortcut icon" href="${this.state.favicon}" type="image/x-icon" />`}
 ${this.renderOGMeta()}
