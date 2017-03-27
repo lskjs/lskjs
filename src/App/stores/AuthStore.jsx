@@ -76,6 +76,7 @@ export default class AuthStore {
     this.store.ui.status(res.message);
     await this.setToken(res.token);
     await this.updateUser(res.user);
+    return res;
   }
 
   @action

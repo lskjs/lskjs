@@ -52,7 +52,7 @@ export default class SocialButtons extends Component {
     const { auth, config } = this.props;
     const socials = _.get(config, 'auth.socials', []);
     return (
-      <ButtonGroup>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         {_.map(passportButtons, (value, name) => (
           <If condition={socials.indexOf(name) >= 0}>
             <Button
@@ -64,7 +64,7 @@ export default class SocialButtons extends Component {
             </Button>
           </If>
         ))}
-      </ButtonGroup>
+      </div>
     );
   }
 }

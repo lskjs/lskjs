@@ -42,6 +42,7 @@ $youtube: #e62117;
   padding: 1.2rem 1.48rem;
   font-size: 18px;
   color: #404040;
+  margin: 3px;
 }
 
 @define-mixin socialButtons $network {
