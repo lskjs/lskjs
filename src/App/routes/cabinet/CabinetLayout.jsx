@@ -38,13 +38,12 @@ export default class CabinetLayout extends Component {
     description: null,
     breadcrumbs: [],
     additionalMenus: [],
-    page: null,
   }
   static propTypes = {
     user: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
-    page: PropTypes.node,
-    children: PropTypes.node.isRequired,
+    page: PropTypes.any.isRequired,
+    children: PropTypes.any.isRequired,
     breadcrumbs: PropTypes.array,
   }
   constructor(props) {

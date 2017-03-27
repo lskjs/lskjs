@@ -10,32 +10,48 @@ export default config.client(baseConfig, {
   },
   host: __DEV__ ? 'http://localhost:3000' : 'http://localhost:3000',
   auth: {
-    profile: [
-      {
-        name: 'profile.firstName',
-        title: 'Имя',
-        control: {
-          placeholder: 'Например, Василий',
-        },
-      },
-      {
-        name: 'profile.lastName',
-        title: 'Фамилия',
-        control: {
+    signup: ['firstName', 'lastName', 'icq'],
+    profile: {
+      firstName: {
+        required: true,
+        input: {
+          title: 'Имя',
           placeholder: 'Например, Пушкин',
         },
+        validate: {
+          presence: {
+            message: 'Поле не должно быть пустым.',
+          },
+          email: {
+            message: 'Введите корректный адрес почты.',
+          },
+        },
       },
-      {
-        name: 'profile.middleName',
-        title: 'Отчество',
-        control: {
+      lastName: {
+        required: true,
+        input: {
+          title: 'Фамилия',
+          placeholder: 'Например, Иванов',
+        },
+        validate: {
+          presence: {
+            message: 'Поле не должно быть пустым',
+          },
+        },
+      },
+      middleName: {
+        input: {
+          title: 'Отчество',
           placeholder: 'Например, Александрович',
         },
       },
-    ],
-    required: [
-      'firstName', 'lastName',
-    ],
+      icq: {
+        input: {
+          title: 'ICQ',
+          placeholder: 'Например, Александрович',
+        },
+      },
+    },
     socials: ['vkontakte', 'youtube'],
   },
 });

@@ -43,14 +43,15 @@ export default class Header extends Component {
     }
     const userTitle = (
       <div style={{ display: 'inline-block', alignItems: 'center' }}>
-        {user.fullName}
         <img
           src={user.profile.avatar}
           alt={user.fullName}
           name={user.fullName}
           width={18}
-          style={{ marginLeft: 3, borderRadius: '50%' }}
+          height={18}
+          style={{ marginRight: 8, borderRadius: '50%' }}
         />
+        {user.fullName}
       </div>
     );
     return (
@@ -59,31 +60,34 @@ export default class Header extends Component {
           <Navbar.Brand>
             <Link href="/">{config.siteTitle}</Link>
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
-        {/* <Nav>
-          <NavItem eventKey={1} componentClass={Link} href="/">Главная</NavItem>
-          <NavItem eventKey={2} componentClass={Link} href="/admin">Админка</NavItem>
-          <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1}>Action</MenuItem>
-            <MenuItem eventKey={3.2}>Another action</MenuItem>
-            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-          </NavDropdown>
-        </Nav> */}
-        <Nav pullRight>
-          <If condition={auth.isAuth}>
-            <NavDropdown eventKey={1} title={userTitle} id="user-dropdown">
-              {menu.map((item, index) => (
-                <MenuItem key={index} eventKey={`1.${index + 1}`} {...item} />
-              ))}
+        <Navbar.Collapse>
+          {/* <Nav>
+            <NavItem eventKey={1} componentClass={Link} href="/">Главная</NavItem>
+            <NavItem eventKey={2} componentClass={Link} href="/admin">Админка</NavItem>
+            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+              <MenuItem eventKey={3.1}>Action</MenuItem>
+              <MenuItem eventKey={3.2}>Another action</MenuItem>
+              <MenuItem eventKey={3.3}>Something else here</MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey={3.3}>Separated link</MenuItem>
             </NavDropdown>
-          </If>
-          <If condition={!auth.isAuth}>
-            <NavItem eventKey={2} componentClass={Link} href="/auth/login">Вход</NavItem>
-            <NavItem eventKey={3} componentClass={Link} href="/auth/signup">Регистрация</NavItem>
-          </If>
-        </Nav>
+          </Nav> */}
+          <Nav pullRight>
+            <If condition={auth.isAuth}>
+              <NavDropdown eventKey={1} title={userTitle} id="user-dropdown">
+                {menu.map((item, index) => (
+                  <MenuItem key={index} eventKey={`1.${index + 1}`} {...item} />
+                ))}
+              </NavDropdown>
+            </If>
+            <If condition={!auth.isAuth}>
+              <NavItem eventKey={2} componentClass={Link} href="/auth/login">Вход</NavItem>
+              <NavItem eventKey={3} componentClass={Link} href="/auth/signup">Регистрация</NavItem>
+            </If>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
