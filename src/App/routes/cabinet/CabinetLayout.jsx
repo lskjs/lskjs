@@ -71,7 +71,6 @@ export default class CabinetLayout extends Component {
   }
   render() {
     const { user, children, breadcrumbs, page, config } = this.props;
-    console.log(this.props, page);
     const title = page.getMeta('title');
     const description = page.getMeta('description');
     const breadItems = (page.state.metas || []).map((meta, key) => ({
