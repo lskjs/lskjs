@@ -1,0 +1,44 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  &.top {
+    margin-top: 10px;
+  }
+  > b {
+    margin-bottom: 5px;
+  }
+  > img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.zone {
+  border: 2px dashed #dce4ec;
+  border-radius: 4px;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    border-color: #cad1d9;
+  }
+}
+
+.files {
+  display: flex;
+  align-items: center;
+  > img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 5px 20px 5px;
+    flex-shrink: 0;
+  }
+}

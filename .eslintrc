@@ -8,6 +8,7 @@
     "__STAGE__": true,
     "__DEV__": true,
     "document": true,
+    "FormData": true,
     "window": true,
     "screen": true,
     "If": true

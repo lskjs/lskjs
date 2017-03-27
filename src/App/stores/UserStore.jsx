@@ -63,13 +63,11 @@ export default class UserStore {
 
   @action
   async editUser(data) {
-    console.log(data);
     this.store.ui.status('wait');
     const backup = clone(this.toJS);
     const res = await this.store.api.userEdit(data);
     this.update(res.data);
     this.store.ui.status(res.code);
-    console.log(res);
     if (res.message !== 'ok') {
       this.update(backup);
     }
@@ -77,7 +75,6 @@ export default class UserStore {
 
   @action
   async editPassword(password) {
-    console.log(password);
     this.store.ui.status('wait');
     const res = await this.store.api.userEdit({ password });
     this.store.ui.status(res.code);

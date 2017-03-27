@@ -278,6 +278,10 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
+attr-accept@^1.0.3:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-1.1.0.tgz#b5cd35227f163935a8f1de10ed3eba16941f6be6"
+
 autoprefixer@^6.0.0, autoprefixer@^6.3.1, autoprefixer@^6.7.2:
   version "6.7.7"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-6.7.7.tgz#1dbd1c835658e35ce3f9984099db00585c782014"
@@ -3997,9 +4001,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.4.tgz#e03e0337cccdcab99bf9d1c68233abadc15db519"
+lego-starter-kit@1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.5.tgz#4dc8ce60d51865dd07c5518e219db67dae7ef9a0"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -6124,6 +6128,12 @@ react-drive-in@1.7.3, react-drive-in@^1.7.3:
   resolved "https://registry.yarnpkg.com/react-drive-in/-/react-drive-in-1.7.3.tgz#eb0991701f9899cbbcbbd50c7fa9bb6fb9b29292"
   dependencies:
     drive-in "^1.5.2"
+
+react-dropzone@^3.12.2:
+  version "3.12.2"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.12.2.tgz#7e66a37322a80cf26a205d749ecf8cad0d90aa6f"
+  dependencies:
+    attr-accept "^1.0.3"
 
 react-hot-loader@3.0.0-beta.6, react-hot-loader@^3.0.0-beta.6:
   version "3.0.0-beta.6"

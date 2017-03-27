@@ -39,10 +39,12 @@ $youtube: #e62117;
 }
 
 .btn-social {
-  padding: 1.2rem 1.48rem;
+  padding: 1.2rem;
   font-size: 18px;
   color: #404040;
   margin: 3px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 @define-mixin socialButtons $network {
@@ -50,12 +52,21 @@ $youtube: #e62117;
     background-color: transparent;
     border: none;
     transition: .2s ease-in-out;
-  }
-  .btn-social.is-$(network):hover {
-    background-color: $($network);
-    border: none;
-    color: white;
-    z-index: inherit;
+    outline: none;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    &:hover {
+      background-color: $($network);
+      border: none;
+      color: white;
+      z-index: inherit;
+    }
+    &:focus {
+      color: $($network);
+    }
   }
 }
 

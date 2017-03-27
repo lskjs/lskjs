@@ -63,6 +63,7 @@ export default class ApiClient extends ApiClientBase {
       method: 'GET',
     });
   }
+
   async loginSocial(data) {
     let url = `/auth/${data.provider}/login?`;
     if (data) {
@@ -77,11 +78,20 @@ export default class ApiClient extends ApiClientBase {
       method: 'GET',
     });
   }
+
   async getPassportByToken(token) {
     const url = `/passport?p=${token}`;
     return this.fetch(url, {
       method: 'GET',
     });
+  }
+
+  async uploadImage(body) {
+    const res = await this.fetch('/upload', {
+      method: 'POST',
+      body,
+    });
+    return res;
   }
 
 }
