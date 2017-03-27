@@ -13,7 +13,7 @@ export default class AppStore {
   }
   static v = 2;
   constructor(params) {
-    const { rootState: state, req, config } = params;
+    const { rootState: state, req = {}, config } = params;
     this.config = __SERVER__ ? config.client : config;
     const base = __SERVER__ ? config.client.api.base : config.api.base;
     const user = req.user || state.user;
