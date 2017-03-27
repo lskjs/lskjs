@@ -105,16 +105,6 @@ export default class App extends ReactApp {
     });
   }
 
-  getStatics() {
-    return {
-      ...super.getStatics(),
-      ...{
-        '/': `${__dirname}/../src/public`,
-      },
-    };
-  }
-
-
   getAssets() {
     return assets.main;
   }
