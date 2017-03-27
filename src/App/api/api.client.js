@@ -87,11 +87,15 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async uploadImage(body) {
+    console.log(body);
     const res = await this.fetch('/upload', {
       method: 'POST',
+      headers: {
+        'Content-Type': '!',
+      },
       body,
     });
-    return res;
+    return res.data;
   }
 
 }

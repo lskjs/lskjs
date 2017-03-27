@@ -37,12 +37,17 @@ export default class AvatarChange extends Component {
   @autobind
   async acceptSelect() {
     const { files } = this.state;
-    const { api } = this.props;
+    const { api, user } = this.props;
 
     const data = new FormData();
     data.append('file', files[0]);
-    const res = await api.uploadImage(data);
-    console.log(res);
+    const avatar = await api.uploadImage(data);
+    console.log(avatar);
+    await user.editUser({
+      profile: {
+        avatar: avatar.path,
+      },
+    });
   }
   @autobind
   cancelSelect() {
