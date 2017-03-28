@@ -13,7 +13,7 @@ export default (ctx) => {
     }
     const params = _.merge(
       { profile: passport.profile },
-      req.data,
+      req.data, // meta
       { username: await passport.generateUsername() },
     );
     const user = new User(params);
@@ -50,7 +50,7 @@ export default (ctx) => {
           }
           if (data.passport) {
             const { passport } = data;
-            return resolve(res.redirect(`${ctx.config.protocol}://${ctx.config.host}:${ctx.config.externalPort}/auth/passport?p=${passport.generateToken()}`));
+            return resolve(res.redirect(`${ctx.config.url}/auth/passport?p=${passport.generateToken()}`));
           }
         }))(req);
       });

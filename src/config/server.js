@@ -3,7 +3,7 @@ export default config.extend({
   client: require('./client').default, // eslint-disable-line
 
   port: process.env.PORT || 8080,
-  url: process.env.URL || 'http://localhost:3000/node',
+  url: process.env.URL || 'http://localhost:3000',
 
   db: {
     uri: process.env.DB || 'mongodb://lsk-example1:lsk-example1-pass@publicdb.mgbeta.ru:27000/lsk-example1',

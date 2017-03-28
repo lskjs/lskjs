@@ -27,7 +27,7 @@ import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
-import SocialButtons from './SocialButtons';
+import SocialButtons, { SocialButton, buttons } from './SocialButtons';
 // const infoFields = [
 //   {
 //     name: 'profile.firstName',
@@ -162,7 +162,7 @@ export default class AuthPage extends Component {
 
 
   render() {
-    const { type, auth, config } = this.props;
+    const { type, auth, config, passport } = this.props;
     const status = null;// this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
@@ -181,12 +181,18 @@ export default class AuthPage extends Component {
                       Вход
                     </If>
                     <If condition={['signupPassport', 'signup'].includes(type)}>
-                      {`Регистрация${type === 'signupPassport' ? ' через соц.сеть' : ''}`}
+                      {`Регистрация${type === 'signupPassport' ? ` через ${buttons[passport.provider].title}` : ''}`}
                     </If>
                     <If condition={type === 'recovery'}>
                       Восстановить пароль
                     </If>
                   </CardTitle>
+                  <If condition={type == 'signupPassport'}>
+                    <SocialButton name={passport.provider} />
+                    <div style={{ textAlign: 'center' }}>
+                      <img src={passport.profile.avatar} style={{ borderRadius: '50%' }} />
+                    </div>
+                  </If>
                   <Form
                     fields={fields}
                     validators={{

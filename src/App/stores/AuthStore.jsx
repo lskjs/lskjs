@@ -117,19 +117,19 @@ export default class AuthStore {
   }
 
   @action
-  async signupPassport(data, { p }) {
+  async signupPassport(params) {
     this.store.log.info('signupPassport');
     this.store.ui.status('wait');
-    this.promise = this.store.api.authSignupPassport({ ...data });
+    this.promise = this.store.api.authSignupPassport(params);
     await this.writeResponse();
   }
 
   @action
-  async loginPassport(data, { p }) {
+  async loginPassport(params) {
     if (__CLIENT__) {
       this.store.log.info('loginPassport');
       this.store.ui.status('wait');
-      this.promise = this.store.api.authLoginPassport({ ...data, p });
+      this.promise = this.store.api.authLoginPassport(params);
       await this.writeResponse();
       return true;
     }

@@ -51,7 +51,7 @@ export default {
               .pushTitle('Вход через соц.сеть')
               .component(<div>Загрузка...</div>);
           }
-          const res = await appStore.auth.loginPassport(passport, query);
+          const res = await appStore.auth.loginPassport({ p: query.p });
           if (res) {
             return page.redirect('/');
           }
