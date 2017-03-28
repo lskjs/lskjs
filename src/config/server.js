@@ -1,5 +1,4 @@
 import config from 'lego-starter-kit/config/server';
-console.log(config);
 export default config.extend({
   client: require('./client').default, // eslint-disable-line
 

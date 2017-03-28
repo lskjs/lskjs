@@ -1,7 +1,8 @@
 import { wrap } from 'react-bootstrap-card';
 import ready from 'lego-starter-kit/utils/polyfill';
 import App from './App';
-import config from './config';
+import config from './config/server';
+// console.log(config.client);
 wrap(require('react-bootstrap'));
 ready();
 const app = new App({ config });

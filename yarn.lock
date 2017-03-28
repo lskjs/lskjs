@@ -2072,6 +2072,10 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
 
+deepmerge@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.3.2.tgz#1663691629d4dbfe364fa12a2a4f0aa86aa3a050"
+
 define-properties@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
@@ -4005,9 +4009,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.4.8:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.8.tgz#97f5c6777dc6574a65ad13aad0da9659af980b69"
+lego-starter-kit@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.5.1.tgz#57b46856413506f2859c068043b84ebb9137b554"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -4019,6 +4023,7 @@ lego-starter-kit@1.4.8:
     cookie-parser "1.4.3"
     core-decorators "0.15.0"
     cors "2.8.1"
+    deepmerge "^1.3.2"
     express "4.14.1"
     express-jwt "5.1.0"
     fastclick "1.0.6"
@@ -4373,9 +4378,9 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-lsk-admin@1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.7.tgz#494470b5dee469240fa644af33a2ebeff75f56f9"
+lsk-admin@1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.8.tgz#41271accc73b412db8f8bc904d74d5e23c076f14"
   dependencies:
     admin-lte "2.3.11"
     animate-sass "0.6.6"
