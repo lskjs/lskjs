@@ -33,7 +33,6 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async authSignupPassport(data) {
-    console.log('authSignupPassport', data);
     const res = await this.fetch('/auth/social/signup', {
       method: 'POST',
       body: data,

@@ -32,7 +32,7 @@ export default class ErrorPage extends Component {
     console.log(this.props);
     return (
       <div>
-        <Header siteTitle={this.props.siteTitle} />
+        <Header />
         <Slide
           full
           video="http://skill-branch.ru/video-background.webm"

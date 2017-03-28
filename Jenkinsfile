@@ -28,7 +28,7 @@ node('master') {
         }
 
         stage('Deploy') {
-            sh 'ssh s3 "cd /projects/lsk && sh run.sh"'
+            sh 'ssh s3 "cd /projects/lsk && sh refresh.sh"'
         }
 
         stage('Test connection') {
@@ -37,6 +37,8 @@ node('master') {
         }
 
         stage('Clean build') {
+            sh 'sudo chown -R jenkins:jenkins build node_modules'
+            sh 'rm -rf node_modules build'
             mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
                 subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
@@ -45,7 +47,8 @@ node('master') {
 
     } catch (err) {
         currentBuild.result = "FAILURE"
-
+        sh 'sudo chown -R jenkins:jenkins build node_modules'
+        sh 'rm -rf node_modules build'
         mail body: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE:\nCheck console output at ${env.BUILD_URL} to view the results.",
             from: 'ci@mgbeta.ru',
             subject: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE!",

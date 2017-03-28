@@ -6,7 +6,8 @@ import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
 
 export default {
-  action({ next, page }) {
+  async action({ next, page, appStore }) {
+    if (!await appStore.auth.isAuthAsync()) return page.redirect('/auth/login');
     return page
       .meta({
         title: 'Кабинет',
@@ -21,7 +22,7 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .component(ProfilePage);
+          .component(ProfilePage, {});
       },
     },
     {
@@ -33,7 +34,7 @@ export default {
             description: 'Старница настроек',
             url: '/cabinet/settings',
           })
-          .component(SettingsPage);
+          .component(SettingsPage, {});
       },
     },
     {
@@ -49,7 +50,7 @@ export default {
             description: 'Посты созданные тобой',
             url: '/cabinet/posts',
           })
-          .component(PostsPage);
+          .component(PostsPage, {});
       },
     },
     {
@@ -61,7 +62,7 @@ export default {
             description: 'Все сообщения',
             url: '/cabinet/posts',
           })
-          .component(MessagesPage);
+          .component(MessagesPage, {});
       },
     },
     {

@@ -47,18 +47,23 @@ export default class SocialButtons extends Component {
   render() {
     const { auth, config } = this.props;
     const socials = _.get(config, 'auth.socials', []);
+    const buttons = _.map(passportButtons, (value, name) => {
+      if (socials.indexOf(name) === -1) return null;
+      return { name, ...value };
+    }).filter(a => a);
+
+    if (buttons.length == 0) return null;
+
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {_.map(passportButtons, (value, name) => (
-          <If condition={socials.indexOf(name) >= 0}>
-            <Button
-              key={name}
-              styleName={`btn-social is-${name}`}
-              onClick={() => auth.authPassport(name)}
-            >
-              {value.icon}
-            </Button>
-          </If>
+        {buttons.map(value => (
+          <Button
+            key={value.name}
+            styleName={`btn-social is-${value.name}`}
+            onClick={() => auth.authPassport(value.name)}
+          >
+            {value.icon}
+          </Button>
         ))}
       </div>
     );

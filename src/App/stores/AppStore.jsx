@@ -9,19 +9,16 @@ export default class AppStore {
 
   ui = new UIStore();
   log = {
-    info: (...args) => { console.log('LOGGER', ...args); },
-  }
+    info: (...args) => { console.log('[LOGGER]', ...args); },
+    error: (...args) => { console.error('[ERROR]', ...args); },
+  };
   static v = 2;
   constructor(params) {
-    const { rootState: state, req, config } = params;
-    this.config = __SERVER__ ? config.client : config;
-    const base = __SERVER__ ? config.client.api.base : config.api.base;
-    const user = req.user || state.user;
-    this.api = new ApiClient({ base });
-
+    const { rootState: state, req = {} } = params;
+    this.config = state.config;
+    this.api = new ApiClient({ base: state.config.api.base });
     this.auth = new AuthStore(this, { state, req });
-    this.user = new UserStore(this, user);
-    this.setData(params);
+    this.user = new UserStore(this, state.user);
   }
 
   setData({ page, uapp }) {

@@ -15,15 +15,7 @@ import {
   Button,
   ButtonGroup,
 } from 'react-bootstrap';
-import { map, get } from 'lodash';
-
-import VKontakte from 'react-icons/lib/fa/vk';
-import Odnoklassniki from 'react-icons/lib/fa/odnoklassniki';
-import Facebook from 'react-icons/lib/fa/facebook';
-import Twitter from 'react-icons/lib/fa/twitter';
-import Twitch from 'react-icons/lib/fa/twitch';
-import Youtube from 'react-icons/lib/fa/youtube-play';
-import Instagram from 'react-icons/lib/fa/instagram';
+import { get } from 'lodash';
 
 import Loading from 'react-icons/lib/md/refresh';
 import Error from 'react-icons/lib/md/clear';
@@ -36,30 +28,29 @@ import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
 import SocialButtons from './SocialButtons'
-
-const infoFields = [
-  {
-    name: 'profile.firstName',
-    title: 'Имя',
-    control: {
-      placeholder: 'Например, Василий',
-    },
-  },
-  {
-    name: 'profile.lastName',
-    title: 'Фамилия',
-    control: {
-      placeholder: 'Например, Пушкин',
-    },
-  },
-  {
-    name: 'profile.middleName',
-    title: 'Отчество',
-    control: {
-      placeholder: 'Например, Александрович',
-    },
-  },
-];
+// const infoFields = [
+//   {
+//     name: 'profile.firstName',
+//     title: 'Имя',
+//     control: {
+//       placeholder: 'Например, Василий',
+//     },
+//   },
+//   {
+//     name: 'profile.lastName',
+//     title: 'Фамилия',
+//     control: {
+//       placeholder: 'Например, Пушкин',
+//     },
+//   },
+//   {
+//     name: 'profile.middleName',
+//     title: 'Отчество',
+//     control: {
+//       placeholder: 'Например, Александрович',
+//     },
+//   },
+// ];
 
 @inject('auth', 'ui', 'config') @observer
 @importcss(require('./AuthPage.css'))
@@ -114,6 +105,16 @@ export default class AuthPage extends Component {
         },
       ];
     }
+
+    const config = this.props.config;
+    const infoFields = config.auth.signup
+    .map(name => ({ name, ...config.auth.profile[name] }))
+    .filter(f => f)
+    .map(field => ({
+      name: `profile.${field.name}`,
+      title: field.title,
+      control: field.control || {},
+    }))
 
     if (type === 'signupPassport') {
       return [

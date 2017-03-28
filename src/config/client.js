@@ -1,41 +1,55 @@
-import config from 'lego-starter-kit/utils/config';
-import baseConfig from 'lego-starter-kit/config/client';
-
-export default config.client(baseConfig, {
+import config from 'lego-starter-kit/config/client';
+export default config.extend({
   siteTitle: 'The Site Title',
   siteDescription: 'The Description',
   siteCopyright: '<span>Copyright &copy; 2016-2017 </span><a href="http://github.com/isuvorov/lego-starter-kit">Lego-starter-kit</a>.</strong> All rights reserved.',
   api: {
     base: '/api/v1',
   },
-  host: __DEV__ ? 'http://localhost:3000' : 'http://localhost:3000',
+  host: 'http://localhost:3000',
   auth: {
-    profile: [
-      {
-        name: 'profile.firstName',
+    signup: ['firstName', 'lastName'],
+    profile: {
+      firstName: {
+        required: true,
         title: 'Имя',
         control: {
-          placeholder: 'Например, Василий',
+          placeholder: 'Например, Александр',
+        },
+        validate: {
+          presence: {
+            message: 'Поле не должно быть пустым.',
+          },
+          email: {
+            message: 'Введите корректный адрес почты.',
+          },
         },
       },
-      {
-        name: 'profile.lastName',
+      lastName: {
+        required: true,
         title: 'Фамилия',
         control: {
           placeholder: 'Например, Пушкин',
         },
-      },
-      {
-        name: 'profile.middleName',
-        title: 'Отчество',
-        control: {
-          placeholder: 'Например, Александрович',
+        validate: {
+          presence: {
+            message: 'Поле не должно быть пустым',
+          },
         },
       },
-    ],
-    required: [
-      'firstName', 'lastName',
-    ],
+      middleName: {
+        title: 'Отчество',
+        control: {
+          placeholder: 'Например, Сергеевич',
+        },
+      },
+      icq: {
+        title: 'ICQ',
+        control: {
+          placeholder: 'Например, 336-844-366',
+        },
+      },
+    },
     socials: ['vkontakte', 'youtube'],
   },
 });

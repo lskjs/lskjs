@@ -38,13 +38,12 @@ export default class CabinetLayout extends Component {
     description: null,
     breadcrumbs: [],
     additionalMenus: [],
-    page: null,
   }
   static propTypes = {
     user: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
-    page: PropTypes.node,
-    children: PropTypes.node.isRequired,
+    page: PropTypes.any.isRequired,
+    children: PropTypes.any.isRequired,
     breadcrumbs: PropTypes.array,
   }
   constructor(props) {
@@ -109,7 +108,7 @@ export default class CabinetLayout extends Component {
         icon: <Mail />,
         label: 10,
         title: 'Сообщения',
-        url: '/cabinet/im',
+        url: '/cabinet/messages',
       },
     ];
     const adminMenu = [
@@ -145,7 +144,7 @@ export default class CabinetLayout extends Component {
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
-              image={user.profile.avatar}
+              image={user.avatar}
               name={user.fullName}
               title={`Добро пожаловать, ${user.firstName}`}
               description="Ваш статус"
@@ -159,14 +158,13 @@ export default class CabinetLayout extends Component {
         <SidebarWrapper>
           <UserPanel
             statusText="В сети"
-            image={user.profile.avatar}
+            image={user.avatar}
             name={user.fullName}
           />
           <SidebarMenuWrapper>
             <SidebarMenuHeader title="НАВИГАЦИЯ" />
             {mainMenus.map((menu, i) => {
-              menu.id = i + 1;
-              const isSelected = menu.id === this.state.selectedLinkId;
+              const isSelected = menu.url === page.getMeta('url');
               return (
                 <TreeMenu
                   key={i}
@@ -174,16 +172,16 @@ export default class CabinetLayout extends Component {
                   isSelected={isSelected}
                   onClick={() => this.onMenuClick(menu)}
                   onItemClick={this.onMenuClick}
+                  pageUrl={page.getMeta('url')}
                 />
               );
             })}
           </SidebarMenuWrapper>
           <If condition={user.role === 'admin'}>
             <SidebarMenuWrapper>
-              <SidebarMenuHeader title="АДМИН МЕНЮ" />
+              <SidebarMenuHeader title="АДМИН ПАНЕЛЬ" />
               {adminMenu.map((menu, i) => {
-                menu.id = mainMenus.length + i + 1;
-                const isSelected = menu.id === this.state.selectedLinkId;
+                const isSelected = menu.url === page.getMeta('url');
                 return (
                   <TreeMenu
                     key={i}
@@ -191,6 +189,7 @@ export default class CabinetLayout extends Component {
                     isSelected={isSelected}
                     onClick={() => this.onMenuClick(menu)}
                     onItemClick={this.onMenuClick}
+                    pageUrl={page.getMeta('url')}
                   />
                 );
               })}
