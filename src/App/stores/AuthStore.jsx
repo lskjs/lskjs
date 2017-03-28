@@ -4,6 +4,7 @@ import cookie from 'react-cookie';
 export default class AuthStore {
 
   token = null;
+  promise = null;
 
   constructor(store, data) {
     this.store = store;
@@ -19,8 +20,8 @@ export default class AuthStore {
 
   authOnServer() {
     if (!this.isErrorJWT && this.isToken && this.isUser) {
-      this.setToken(this.data.req.token);
-      this.updateUser(this.data.req.user);
+      this.setToken(this.data.state.token);
+      this.updateUser(this.data.state.user);
     } else {
       this.logout();
     }
@@ -33,6 +34,15 @@ export default class AuthStore {
     } else {
       this.logout();
     }
+  }
+
+  isAuthAsync() {
+    if (this.isToken) {
+      return this.promise
+        .then(() => !!this.isAuth)
+        .catch(() => !!this.isAuth) || false;
+    }
+    return false;
   }
 
   async checkAuthData() {
@@ -50,39 +60,54 @@ export default class AuthStore {
 
   async unsetToken() {
     await this.store.api.setAuthToken(null);
+    this.data.state.token = null;
     cookie.remove('token', { path: '/' });
     this.token = null;
   }
 
   async setToken(token) {
     this.store.api.setAuthToken(token);
+    this.data.state.token = token;
     cookie.save('token', token, { path: '/' });
     this.token = token;
   }
 
-  @action
-  async signup(data) {
-    this.store.ui.status('wait');
-    const res = await this.store.api.authSignup(data);
-    this.store.ui.status(res.code);
-    await this.setToken(res.token);
-    await this.updateUser(res.user);
-  }
-
-  @action
-  async login(data) {
-    this.store.ui.status('wait');
-    const res = await this.store.api.authLogin(data);
+  async writeResponse() {
+    this.store.log.info('[Y] promise', this.promise);
+    const res = await this.promise;
+    this.store.log.info('[Y] res', res);
     this.store.ui.status(res.code);
     await this.setToken(res.token);
     await this.updateUser(res.user);
     return res;
   }
 
+  async init(data) {
+    this.promise = this.store.api.getUser(data);
+    const user = await this.promise;
+    this.store.user.update(user);
+  }
+
+  @action
+  async signup(data) {
+    this.store.ui.status('wait');
+    this.promise = this.store.api.authSignup(data);
+    await this.writeResponse();
+  }
+
+  @action
+  async login(data) {
+    this.store.ui.status('wait');
+    this.promise = this.store.api.authLogin(data);
+    const res = await this.writeResponse();
+    return res;
+  }
+
   @action
   async recovery(data) {
     this.store.ui.status('wait');
-    const res = await this.store.api.authRecovery(data);
+    this.promise = this.store.api.authRecovery(data);
+    const res = await this.promise;
     this.store.ui.status(res.code);
   }
 
@@ -93,36 +118,32 @@ export default class AuthStore {
 
   @action
   async signupPassport(data, { p }) {
-    console.log('signupPassport');
+    this.store.log.info('signupPassport');
     this.store.ui.status('wait');
-    const res = await this.store.api.authSignupPassport({ ...data, p });
-    this.store.ui.status(res.code);
-    await this.setToken(res.token);
-    await this.updateUser(res.user);
+    this.promise = this.store.api.authSignupPassport({ ...data, p });
+    await this.writeResponse();
   }
 
   @action
   async loginPassport(data, { p }) {
     if (__CLIENT__) {
-      console.log('loginPassport');
+      this.store.log.info('loginPassport');
       this.store.ui.status('wait');
-      const res = await this.store.api.authLoginPassport({ ...data, p });
-      console.log({ res })
-      this.store.ui.status(res.code);
-      await this.setToken(res.token);
-      await this.updateUser(res.user);
-      return true
+      this.promise = this.store.api.authLoginPassport({ ...data, p });
+      await this.writeResponse();
+      return true;
     }
   }
 
   async updateUser(data = null) {
+    this.data.state.user = data;
     if (this.store.user) {
       this.store.user.update(data);
     }
   }
 
   @computed get isAuth() {
-    return this.store.user._id;
+    return !!this.store.user._id;
   }
 
   @computed get isErrorJWT() {
@@ -130,11 +151,11 @@ export default class AuthStore {
   }
 
   @computed get isToken() {
-    return this.data.req.token !== 'undefined' || !this.data.req.token || cookie.load('token');
+    return !!this.data.state.token || !!cookie.load('token');
   }
 
   @computed get isUser() {
-    return this.data.req.user && this.data.req.user._id || this.data.state.user && this.data.state.user._id;
+    return this.data.state.user && this.data.state.user._id;
   }
 
 }

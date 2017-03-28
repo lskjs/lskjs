@@ -6,9 +6,9 @@ import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
 
 export default {
-  action({ next, page }) {
+  async action({ next, page, appStore }) {
+    if (!await appStore.auth.isAuthAsync()) throw 'Не авторизован';
     return page
-      .isAuth()
       .meta({
         title: 'Кабинет',
         description: 'Личный кабинет',

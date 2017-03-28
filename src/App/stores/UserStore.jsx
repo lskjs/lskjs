@@ -27,13 +27,8 @@ export default class UserStore {
     this.store = store;
     if (user) {
       this.update(user);
-      if (__CLIENT__) this.init(user);
+      store.auth.init(user);
     }
-  }
-
-  async init(data) {
-    const user = await this.store.api.getUser(data);
-    this.update(user);
   }
 
   update(user) {
