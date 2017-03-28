@@ -8,17 +8,23 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .pushTitle('Друзья')
-          // .description('Список ваших друзей')
-          .component(FriendsPage, { page });
+          .meta({
+            title: 'Друзья',
+            description: 'Список ваших друзей',
+            url: '/cabinet/friends',
+          })
+          .component(FriendsPage, {});
       },
     },
     {
       path: '/in',
       async action({ page }) {
         return page
-          .pushTitle('Входящие заявки')
-          // .description('Заявки в друзья')
+          .meta({
+            title: 'Входящие заявки',
+            description: 'Заявки в друзья',
+            url: '/cabinet/friends/in',
+          })
           .component(FriendsInRequestsPage, { page });
       },
     },
@@ -26,9 +32,12 @@ export default {
       path: '/out',
       async action({ page }) {
         return page
-          .pushTitle('Исходящие заявки')
-          // .description('Заявки в друзья')
-          .component(FriendsOutRequestsPage, { page });
+          .meta({
+            title: 'Исходящие заявки',
+            description: 'Заявки в друзья',
+            url: '/cabinet/friends/in',
+          })
+          .component(FriendsOutRequestsPage, {});
       },
     },
   ],
@@ -36,4 +45,4 @@ export default {
     const route = await next();
     return route;
   },
-}
+};

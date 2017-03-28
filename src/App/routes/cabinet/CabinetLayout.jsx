@@ -164,8 +164,7 @@ export default class CabinetLayout extends Component {
           <SidebarMenuWrapper>
             <SidebarMenuHeader title="НАВИГАЦИЯ" />
             {mainMenus.map((menu, i) => {
-              menu.id = i + 1;
-              const isSelected = menu.id === this.state.selectedLinkId;
+              const isSelected = menu.url === page.getMeta('url');
               return (
                 <TreeMenu
                   key={i}
@@ -173,6 +172,7 @@ export default class CabinetLayout extends Component {
                   isSelected={isSelected}
                   onClick={() => this.onMenuClick(menu)}
                   onItemClick={this.onMenuClick}
+                  pageUrl={page.getMeta('url')}
                 />
               );
             })}
@@ -181,8 +181,7 @@ export default class CabinetLayout extends Component {
             <SidebarMenuWrapper>
               <SidebarMenuHeader title="АДМИН ПАНЕЛЬ" />
               {adminMenu.map((menu, i) => {
-                menu.id = mainMenus.length + i + 1;
-                const isSelected = menu.id === this.state.selectedLinkId;
+                const isSelected = menu.url === page.getMeta('url');
                 return (
                   <TreeMenu
                     key={i}
@@ -190,6 +189,7 @@ export default class CabinetLayout extends Component {
                     isSelected={isSelected}
                     onClick={() => this.onMenuClick(menu)}
                     onItemClick={this.onMenuClick}
+                    pageUrl={page.getMeta('url')}
                   />
                 );
               })}
