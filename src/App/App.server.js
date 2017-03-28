@@ -17,10 +17,6 @@ export default class App extends ReactApp {
 
   init() {
     super.init();
-    const strategies = require('./strategies').default(this) || {};
-    this.strategies = _.map(strategies, (Strategy) => {
-      return new Strategy();
-    });
     this.mailer = getMailer(this)
     this.passport = passport;
     const strategies = require('./strategies').default(this) || {};
