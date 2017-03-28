@@ -10,6 +10,7 @@ export default class AppStore {
   ui = new UIStore();
   log = {
     info: (...args) => { console.log('[LOGGER]', ...args); },
+    error: (...args) => { console.error('[ERROR]', ...args); },
   };
   static v = 2;
   constructor(params) {

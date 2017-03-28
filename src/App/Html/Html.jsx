@@ -13,7 +13,6 @@ export class Root extends HtmlBase.Root {
       <Provider {...stores}>
         <div>
           {component}
-          <ToastContainer />
         </div>
       </Provider>
     );
