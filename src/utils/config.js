@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import deepmerge from 'deepmerge';
 
 function getConfig(path) {
   if (__SERVER__) {
@@ -44,7 +45,13 @@ class Config {
 
   merge(c = {}) {
     const object = c.toObject && c.toObject() || c;
-    _.merge(this, object);
+
+    Object.assign(this, deepmerge(this, object, { arrayMerge: (d, s, o) => {
+      // console.log('arrayMerge', d, s, o);
+
+      return s
+
+    } }));
     return this;
   }
 
