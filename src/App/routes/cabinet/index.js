@@ -8,6 +8,7 @@ import MessagesPage from './MessagesPage';
 export default {
   action({ next, page }) {
     return page
+      .isAuth()
       .meta({
         title: 'Кабинет',
         description: 'Личный кабинет',
