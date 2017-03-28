@@ -27,7 +27,7 @@ import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
-import SocialButtons from './SocialButtons'
+import SocialButtons from './SocialButtons';
 // const infoFields = [
 //   {
 //     name: 'profile.firstName',
@@ -52,7 +52,7 @@ import SocialButtons from './SocialButtons'
 //   },
 // ];
 
-@inject('auth', 'ui', 'config') @observer
+@inject('auth', 'config') @observer
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
 
@@ -114,7 +114,7 @@ export default class AuthPage extends Component {
       name: `profile.${field.name}`,
       title: field.title,
       control: field.control || {},
-    }))
+    }));
 
     if (type === 'signupPassport') {
       return [
@@ -142,12 +142,14 @@ export default class AuthPage extends Component {
       }
     }
     if (type === 'signupPassport') {
-      await auth.signupPassport(data, query);
-      this.redirect('/');
+      await auth.signupPassport({ ...data, p: query.p }).then(() => {
+        this.redirect('/');
+      });
     }
     if (type === 'signup') {
-      await auth.signup(data);
-      this.redirect('/');
+      await auth.signup(data).then(() => {
+        this.redirect('/');
+      });
     }
     if (type === 'recovery') {
       await auth.recovery(data);
@@ -158,9 +160,10 @@ export default class AuthPage extends Component {
     }
   }
 
+
   render() {
     const { type, auth, config } = this.props;
-    const status = this.props.ui.statusRequest;
+    const status = null;// this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
       <Slide

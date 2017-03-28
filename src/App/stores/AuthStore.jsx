@@ -120,7 +120,7 @@ export default class AuthStore {
   async signupPassport(data, { p }) {
     this.store.log.info('signupPassport');
     this.store.ui.status('wait');
-    this.promise = this.store.api.authSignupPassport({ ...data, p });
+    this.promise = this.store.api.authSignupPassport({ ...data });
     await this.writeResponse();
   }
 
