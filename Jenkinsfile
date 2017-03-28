@@ -9,10 +9,6 @@ node('master') {
             checkout scm
         }
 
-        stage('Fix permissions') {
-            sh 'sudo chown -R jenkins:jenkins build node_modules'
-        }
-
         stage('Clean previous data') {
             sh 'rm -rf build node_modules'
         }
@@ -41,6 +37,7 @@ node('master') {
         }
 
         stage('Clean build') {
+            sh 'rm -rf node_modules build'
             mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
                 subject: "lsk-example - Build # ${env.BUILD_NUMBER} - SUCCESS!",
@@ -49,7 +46,7 @@ node('master') {
 
     } catch (err) {
         currentBuild.result = "FAILURE"
-
+        sh 'rm -rf node_modules build'
         mail body: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE:\nCheck console output at ${env.BUILD_URL} to view the results.",
             from: 'ci@mgbeta.ru',
             subject: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE!",
