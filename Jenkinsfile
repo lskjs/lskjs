@@ -9,6 +9,10 @@ node('master') {
             checkout scm
         }
 
+        stage('Fix permissions') {
+            sh 'sudo chown -R jenkins:jenkins build node_modules'
+        }
+
         stage('Clean previous data') {
             sh 'rm -rf build node_modules'
         }
