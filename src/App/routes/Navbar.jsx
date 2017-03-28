@@ -42,17 +42,17 @@ export default class Header extends Component {
       menu.splice(1, 1);
     }
     const userTitle = (
-      <div style={{ display: 'inline-block', alignItems: 'center' }}>
+      <span style={{ display: 'inline-block', height: 0 }}>
         <img
+          width={25}
+          height={25}
           src={user.avatar}
           alt={user.fullName}
           name={user.fullName}
-          width={18}
-          height={18}
           style={{ marginRight: 8, borderRadius: '50%' }}
         />
-        {user.fullName}
-      </div>
+        <span>{user.fullName}</span>
+      </span>
     );
     return (
       <Navbar staticTop>
@@ -76,7 +76,7 @@ export default class Header extends Component {
           </Nav> */}
           <Nav pullRight>
             <If condition={auth.isAuth}>
-              <NavDropdown eventKey={1} title={userTitle} id="user-dropdown">
+              <NavDropdown eventKey={1} title={userTitle} id="user-dropdown" className="menu-user-item">
                 {menu.map((item, index) => (
                   <MenuItem key={index} eventKey={`1.${index + 1}`} {...item} />
                 ))}
