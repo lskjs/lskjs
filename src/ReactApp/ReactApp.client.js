@@ -218,17 +218,18 @@ export default class ReactApp {
     return new this.Provider(params.rootState, params.req, params.config);
   }
 
+  provider = null
   getReqCtx(req) {
     const rootState = this.getReqRootState(req);
-    if (req.provider == null) {
-      req.provider = this.createProvider(rootState, req);
-      this.provider = req.provider;
+
+    if (this.provider == null) {
+      this.provider = this.createProvider(rootState, req);
     }
     const ctx = {
       config: this.config,
       rootState,
       req,
-      provider: req.provider,
+      provider: this.provider,
       history,
       style: [],
       insertCss: (...styles) => {

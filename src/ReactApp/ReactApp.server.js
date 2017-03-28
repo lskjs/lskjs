@@ -41,8 +41,6 @@ export default class ReactApp extends CoreApp {
   // Synonims
 
   getReqRootState(req) {
-    // console.log('req.user, req.token', req.user, req.token, req.cookies);
-    // console.log('___');
     const config = this.config.client;
     return {
       token: req.token,
