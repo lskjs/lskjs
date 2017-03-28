@@ -4449,9 +4449,9 @@ lsk-build@0.6.7:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.6.8:
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.8.tgz#711dd591a5dd9a7be872e915e6623a2fc5f85ead"
+lsk-general@0.6.9:
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.9.tgz#24325f71a49793498595793f2873868094931e00"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"

@@ -28,7 +28,7 @@ node('master') {
         }
 
         stage('Deploy') {
-            sh 'ssh s3 "cd /projects/lsk && sh run.sh"'
+            sh 'ssh s3 "cd /projects/lsk && sh refresh.sh"'
         }
 
         stage('Test connection') {

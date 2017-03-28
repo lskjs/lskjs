@@ -108,7 +108,7 @@ export default class CabinetLayout extends Component {
         icon: <Mail />,
         label: 10,
         title: 'Сообщения',
-        url: '/cabinet/im',
+        url: '/cabinet/messages',
       },
     ];
     const adminMenu = [
@@ -144,7 +144,7 @@ export default class CabinetLayout extends Component {
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
-              image={user.profile.avatar}
+              image={user.avatar}
               name={user.fullName}
               title={`Добро пожаловать, ${user.firstName}`}
               description="Ваш статус"
@@ -158,7 +158,7 @@ export default class CabinetLayout extends Component {
         <SidebarWrapper>
           <UserPanel
             statusText="В сети"
-            image={user.profile.avatar}
+            image={user.avatar}
             name={user.fullName}
           />
           <SidebarMenuWrapper>
@@ -179,7 +179,7 @@ export default class CabinetLayout extends Component {
           </SidebarMenuWrapper>
           <If condition={user.role === 'admin'}>
             <SidebarMenuWrapper>
-              <SidebarMenuHeader title="АДМИН МЕНЮ" />
+              <SidebarMenuHeader title="АДМИН ПАНЕЛЬ" />
               {adminMenu.map((menu, i) => {
                 menu.id = mainMenus.length + i + 1;
                 const isSelected = menu.id === this.state.selectedLinkId;
