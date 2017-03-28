@@ -13,7 +13,8 @@ export default class AppStore {
   }
   static v = 2;
   constructor(params) {
-    const { rootState: state, req, config } = params;
+    // console.log('AppStore.constructor');
+    const { rootState: state, req = {}, config } = params;
     this.config = __SERVER__ ? config.client : config;
     const base = __SERVER__ ? config.client.api.base : config.api.base;
     const user = req.user || state.user;
@@ -21,7 +22,7 @@ export default class AppStore {
 
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, user);
-    this.setData(params);
+    // this.setData(params);
   }
 
   setData({ page, uapp }) {

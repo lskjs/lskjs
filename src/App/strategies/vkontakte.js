@@ -23,6 +23,7 @@ export default (ctx) => {
         'photo_100',
         'photo_200',
         'photo_max_orig',
+        'photo_max',
       ] } = ctx.config.auth.socials.vkontakte;
       const res = await fetch(
         `https://api.vk.com/method/users.get?fields=${fields.join(',')}&access_token=${accessToken}`,
@@ -44,13 +45,14 @@ export default (ctx) => {
             extraData.photo_50,
             extraData.photo_100,
             extraData.photo_200,
+            extraData.photo_max,
+            extraData.photo_max_orig,
           ],
-          avatar: extraData.photo_max_orig,
+          avatar: extraData.photo_200,
           city: extraData.city,
           country: extraData.country,
         },
       };
-      console.log(data);
       const passport = new Passport(data);
       return passport.save();
     }

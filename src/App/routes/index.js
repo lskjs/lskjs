@@ -1,9 +1,19 @@
 import ErrorLayout from './ErrorLayout';
 import MainLayout from './MainLayout';
-import config from '../../config/client';
 
 export default {
   path: '/',
+  async action({ next, uapp, page }) {
+    const config = uapp.rootState.config; // @TODO: потом сделать uapp.config
+    return page
+    .meta({
+      title: config.siteTitle,
+      description: config.siteDescription,
+    })
+    .layout(MainLayout)
+    .errorLayout(ErrorLayout)
+    .next(next);
+  },
   children: [
     {
       path: '/',
@@ -28,11 +38,4 @@ export default {
       },
     },
   ],
-  async action({ next, page }) {
-    return page
-    .pushTitle(config.siteTitle || 'Site Name')
-    .layout(MainLayout)
-    .errorLayout(ErrorLayout)
-    .next(next);
-  },
 };

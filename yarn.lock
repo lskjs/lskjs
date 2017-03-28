@@ -4005,9 +4005,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.4.6:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.6.tgz#ddf20cb104550eb94642ee001195c7eb92b40685"
+lego-starter-kit@1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.4.8.tgz#97f5c6777dc6574a65ad13aad0da9659af980b69"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -4449,9 +4449,9 @@ lsk-build@0.6.7:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.6.8:
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.8.tgz#711dd591a5dd9a7be872e915e6623a2fc5f85ead"
+lsk-general@0.6.9:
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.9.tgz#24325f71a49793498595793f2873868094931e00"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"

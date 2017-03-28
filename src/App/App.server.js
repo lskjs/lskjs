@@ -17,11 +17,14 @@ export default class App extends ReactApp {
 
   init() {
     super.init();
-    const strategies = require('./strategies').default(this) || {};
-    this.strategies = _.map(strategies, (Strategy) => {
-      return new Strategy();
-    });
     this.passport = passport;
+    const strategies = require('./strategies').default(this) || {};
+    if (this.config.auth && this.config.auth.socials) {
+      this.strategies = _.map(strategies, (Strategy, name) => {
+        if (!this.config.auth.socials[name]) return null;
+        return new Strategy();
+      }).filter(s => s);
+    }
   }
 
   getStatics() {
@@ -35,9 +38,11 @@ export default class App extends ReactApp {
 
   run() {
     super.run();
-    _.map(this.strategies || [], (strategy) => {
-      this.passport.use(strategy.getStrategy(strategy));
-    });
+    if (this.strategies) {
+      _.forEach(this.strategies || [], (strategy) => {
+        this.passport.use(strategy.getStrategy(strategy));
+      });
+    }
   }
 
 

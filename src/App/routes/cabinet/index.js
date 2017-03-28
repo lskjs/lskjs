@@ -8,7 +8,7 @@ import MessagesPage from './MessagesPage';
 export default {
   action({ next, page }) {
     return page
-      // .pushTitle('Кабинет', '/cabinet')
+      .isAuth()
       .meta({
         title: 'Кабинет',
         description: 'Личный кабинет',
@@ -22,7 +22,7 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .component(ProfilePage, {});
+          .component(ProfilePage);
       },
     },
     {
@@ -34,7 +34,7 @@ export default {
             description: 'Старница настроек',
             url: '/cabinet/settings',
           })
-          .component(SettingsPage, {});
+          .component(SettingsPage);
       },
     },
     {
@@ -50,7 +50,7 @@ export default {
             description: 'Посты созданные тобой',
             url: '/cabinet/posts',
           })
-          .component(PostsPage, {});
+          .component(PostsPage);
       },
     },
     {
@@ -62,7 +62,7 @@ export default {
             description: 'Все сообщения',
             url: '/cabinet/posts',
           })
-          .component(MessagesPage, {});
+          .component(MessagesPage);
       },
     },
     {

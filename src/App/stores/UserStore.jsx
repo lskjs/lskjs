@@ -1,14 +1,17 @@
 import { extendObservable, observable, action, computed, toJS } from 'mobx';
 import { set, clone } from 'lodash';
 
-const defaultAvatar = 'https://ssl.gstatic.com/images/icons/material/product/1x/avatar_circle_blue_120dp.png';
+const sample = {
+  avatar: '/assets/no-avatar.png',
+  fullName: 'Счастливый Пользователь',
+};
 
 export default class UserStore {
 
   @observable _id;
   @observable role;
   @observable profile = {
-    avatar: defaultAvatar,
+    avatar: undefined,
     firstName: undefined,
     lastName: undefined,
     middleName: undefined,
@@ -47,7 +50,7 @@ export default class UserStore {
       _id: undefined,
       role: undefined,
       profile: {
-        avatar: defaultAvatar,
+        avatar: undefined,
         firstName: undefined,
         lastName: undefined,
         middleName: undefined,
@@ -81,8 +84,23 @@ export default class UserStore {
     return res;
   }
 
+  @computed get avatar() {
+    // console.log('get avatar', this.profile && this.profile.avatar );
+    return this.profile && this.profile.avatar || sample.avatar;
+  }
+
   @computed get fullName() {
-    return `${this.profile.firstName || 'Нет данных'} ${this.profile.lastName || ''}`;
+    let fullname;
+    if (this.profile.middleName) {
+      fullname = [this.profile.lastName, this.profile.firstName, this.profile.middleName];
+    } else {
+      fullname = [this.profile.firstName, this.profile.lastName];
+    }
+    return fullname.filter(a => a).join(' ') || sample.fullName;
+  }
+
+  @computed get firstName() {
+    return this.profile.firstName || (this.fullName || '').split(' ')[0];
   }
 
   @computed get toJS() {

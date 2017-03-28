@@ -44,7 +44,7 @@ export default class Header extends Component {
     const userTitle = (
       <div style={{ display: 'inline-block', alignItems: 'center' }}>
         <img
-          src={user.profile.avatar}
+          src={user.avatar}
           alt={user.fullName}
           name={user.fullName}
           width={18}
@@ -83,8 +83,8 @@ export default class Header extends Component {
               </NavDropdown>
             </If>
             <If condition={!auth.isAuth}>
-              <NavItem eventKey={2} componentClass={Link} href="/auth/login">Вход</NavItem>
-              <NavItem eventKey={3} componentClass={Link} href="/auth/signup">Регистрация</NavItem>
+              <NavItem eventKey={2} componentClass={Link} href="/auth/login">Войти</NavItem>
+              {/* <NavItem eventKey={3} componentClass={Link} href="/auth/signup">Регистрация</NavItem> */}
             </If>
           </Nav>
         </Navbar.Collapse>
