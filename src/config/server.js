@@ -19,6 +19,20 @@ const result = config.serverWithEnv(baseConfig, {
   auth: {
     socials: require('./socials.js').default,
   },
+  mail: {
+    transport: {
+      host: 'smtp.yandex.ru',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'example@gmail.com@ya.ru',
+        pass: 'password',
+      },
+    },
+    options: {
+      from: '"example@gmail.com" <example@gmail.com@ya.ru>',
+    },
+  },
   upload: {
     // @TODO: @andruxa externalPath (absolute)
     path: 'storage',

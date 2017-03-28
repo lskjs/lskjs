@@ -4,11 +4,15 @@ import Modules from '../v1.modules';
 export default (ctx) => {
   const { User } = ctx.models;
   const modules = new Modules(ctx);
-  const { e500 } = ctx.errors;
+  const { e404, e500 } = ctx.errors;
   const controller = {};
+
   controller.get = async (req) => {
     const criteria = modules.getCriteria(req);
     const user = await User.findOne(criteria);
+    if (!user) {
+      throw e404('User not found!');
+    }
     return user;
   };
 
@@ -18,6 +22,9 @@ export default (ctx) => {
       const userId = req.user._id;
       const params = req.allParams();
       const user = await User.findById(userId);
+      if (!user) {
+        throw e404('User not found!');
+      }
       ctx.log.info('params', params);
       ctx.log.info('user', user);
       Object.assign(user, _.pick(params, ['username', 'password', 'profile']));

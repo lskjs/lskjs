@@ -6,7 +6,7 @@ import getApi from './api/v1';
 import getDocs from './api/v1/v1.docs';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line
-
+import getMailer from './mailer'
 export default class App extends ReactApp {
 
   getModels() {
@@ -21,17 +21,20 @@ export default class App extends ReactApp {
     this.strategies = _.map(strategies, (Strategy) => {
       return new Strategy();
     });
+    this.mailer = getMailer(this)
     this.passport = passport;
   }
 
-  getStatics() {
-    return {
-      ...super.getStatics(),
-      ...{
-        '/storage': `${__dirname}/../${this.config.upload.path || 'storage'}`,
-      },
-    };
-  }
+  // getStatics() {
+  //   const buildRoot = `${__dirname}/public`;
+  //   const root = __DEV__ ? `${__dirname}/../src/public` : buildRoot;
+  //   const storage = __DEV__ ? `${__dirname}/../s` : buildRoot;
+  //   return {
+  //     '/': root,
+  //     '/storage': root,
+  //     '/favicon.ico': buildRoot + require('file!../public/favicon.ico'), // eslint-disable-line
+  //   };
+  // }
 
   run() {
     super.run();
