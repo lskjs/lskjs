@@ -37,6 +37,7 @@ node('master') {
         }
 
         stage('Clean build') {
+            sh 'sudo chown -R jenkins:jenkins build node_modules'
             sh 'rm -rf node_modules build'
             mail body: "lsk-example Build # ${env.BUILD_NUMBER} - SUCCESS:\nCheck console output at ${env.BUILD_URL} to view the results.",
                 from: 'ci@mgbeta.ru',
@@ -46,6 +47,7 @@ node('master') {
 
     } catch (err) {
         currentBuild.result = "FAILURE"
+        sh 'sudo chown -R jenkins:jenkins build node_modules'
         sh 'rm -rf node_modules build'
         mail body: "lsk-example - Build # ${env.BUILD_NUMBER} - FAILURE:\nCheck console output at ${env.BUILD_URL} to view the results.",
             from: 'ci@mgbeta.ru',
