@@ -1,27 +1,76 @@
 import _ from 'lodash';
 
+function getConfig(path) {
+  if (__SERVER__) {
+    const fs = require('fs');
+    if (path[0] !== '/') {
+      path = `${process.cwd()}/${path}`;
+    }
+    let confStr;
+    try {
+      confStr = fs.readFileSync(path, 'utf-8');
+    } catch (err) {
+      return {};
+    }
+    try {
+      const config = Object.assign({}, { _json: 1 }, JSON.parse(confStr));
+      return config;
+    } catch (err) {
+      console.log('.env.json error', err);
+      return {};
+    }
+  }
+  return {};
+}
+
+
+class Config {
+
+  constructor(c = {}) {
+    Object.assign(this, c);
+  }
+
+  extend(c) {
+    if (_.isFunction(c)) {
+      return c(this);
+    }
+    return this.merge(c);
+  }
+  extendEnv(path = '.env.json') {
+    const config = getConfig(path);
+    // console.log('extendEnv', this.client, "\n---\n", config.client, "\n---\n", _.merge({}, this.client, config.client));
+    return this.merge(config);
+  }
+
+  merge(c = {}) {
+    const object = c.toObject && c.toObject() || c;
+    _.merge(this, object);
+    return this;
+  }
+
+  toObject() {
+    return _.toPlainObject(this);
+  }
+
+  toJSON() {
+    if (this.toObject) {
+      return this.toObject();
+    }
+    return this;
+  }
+}
+
 export default {
+  init(c) {
+    return new Config(c);
+  },
   flatten2nested(flatten) {
     const config = {};
     _.forEach(flatten, (val, key) => {
       _.set(config, key, val);
     });
   },
-  getConfig(path) {
-    if (__SERVER__) {
-      const fs = require('fs');
-      if (path[0] !== '/') {
-        path = `${process.cwd()}/${path}`;
-      }
-      try {
-        const config = JSON.parse(fs.readFileSync(path, 'utf-8'));
-        return config;
-      } catch (err) {
-        return {};
-      }
-    }
-    return {};
-  },
+  getConfig,
   serverWithEnv(...configs) {
     return this.server(...configs, '.env.json');
   },

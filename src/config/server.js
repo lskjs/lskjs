@@ -1,6 +1,5 @@
 import config from 'lego-starter-kit/utils/config';
-
-export default config.server({
+export default config.init({
   client: require('./client').default,
   port: process.env.PORT || 8080,
   host: 'localhost',
