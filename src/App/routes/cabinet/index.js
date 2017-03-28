@@ -7,7 +7,7 @@ import MessagesPage from './MessagesPage';
 
 export default {
   async action({ next, page, appStore }) {
-    if (!await appStore.auth.isAuthAsync()) throw 'Не авторизован';
+    if (!await appStore.auth.isAuthAsync()) return page.redirect('/auth/login');
     return page
       .meta({
         title: 'Кабинет',
