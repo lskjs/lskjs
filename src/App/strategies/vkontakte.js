@@ -9,7 +9,7 @@ export default (ctx) => {
     providerName = 'vkontakte'
     updateConfig(config) {
       if (!config.callbackURL) {
-        config.callbackURL = `${ctx.config.protocol}://${ctx.config.host}:${ctx.config.externalPort}/api/v1/auth/vkontakte/callback`;
+        config.callbackURL = `${ctx.config.url}/api/v1/auth/vkontakte/callback`;
       }
       return config;
     }

@@ -10,7 +10,7 @@ export default (ctx) => {
     providerName = 'youtube'
     updateConfig(config) {
       if (!config.callbackURL) {
-        config.callbackURL = `${ctx.config.protocol}://${ctx.config.host}:${ctx.config.externalPort}/api/v1/auth/${this.providerName}/callback`;
+        config.callbackURL = `${ctx.config.url}/api/v1/auth/${this.providerName}/callback`;
       }
       if (!config.scope) {
         config.scope = [
