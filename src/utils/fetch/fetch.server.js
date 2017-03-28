@@ -9,7 +9,10 @@
 
 import Promise from 'bluebird';
 import fetch, { Request, Headers, Response } from 'node-fetch';
-import { host } from 'lego-starter-kit/config';
+// @TODO: @isuvorov: Не резолвит host (undefined)
+// import { host } from 'lego-starter-kit/config';
+
+const host = 'localhost:8080';
 
 fetch.Promise = Promise;
 Response.Promise = Promise;
