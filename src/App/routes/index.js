@@ -6,10 +6,7 @@ export default {
   async action({ next, uapp, page }) {
     const config = uapp.rootState.config; // @TODO: потом сделать uapp.config
     return page
-    .meta({
-      title: config.siteTitle,
-      description: config.siteDescription,
-    })
+    .meta(config.site || {})
     .layout(MainLayout)
     .errorLayout(ErrorLayout)
     .next(next);

@@ -58,7 +58,7 @@ export default class Header extends Component {
       <Navbar staticTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link href="/">{config.siteTitle}</Link>
+            <Link href="/">{config.site && config.site.title}</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

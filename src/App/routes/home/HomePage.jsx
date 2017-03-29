@@ -4,7 +4,7 @@ import { inject } from 'mobx-react';
 import { Button } from 'react-bootstrap';
 
 import Component from 'lsk-general/General/Component';
-import Slide from 'lsk-general/General/Slide';
+import Slide from '../Slide';
 import Link from 'lsk-general/General/Link';
 
 @inject('config')
@@ -14,12 +14,17 @@ export default class HomePage extends Component {
     config: PropTypes.object.isRequired,
   }
   render() {
-    const { siteTitle, siteDescription } = this.props.config;
+    const { site } = this.props.config;
     return (
       <div>
-        <Slide full center>
-          <h1>{siteTitle}</h1>
-          <h2>{siteDescription}</h2>
+        <Slide
+          center
+          video={false}
+          image={false}
+          overlay={false}
+        >
+          <h1>{site.title}</h1>
+          <h2>{site.description}</h2>
           <div style={{ marginTop: 30 }}>
             <Button componentClass={Link} href="/cabinet" bsSize="large">Войти</Button>
           </div>

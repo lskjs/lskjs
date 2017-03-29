@@ -1,14 +1,23 @@
 import config from 'lego-starter-kit/config/client';
 export default config.extend({
-  siteTitle: 'The Site Title',
-  siteDescription: 'The Description',
-  siteCopyright: '<span>Copyright &copy; 2016-2017 </span><a href="http://github.com/isuvorov/lego-starter-kit">Lego-starter-kit</a>.</strong> All rights reserved.',
+  site: {
+    abbr: 'TST',
+    title: 'The Site Title',
+    description: 'The Description',
+    copyright: 'Copyright &copy; 2016-2017',
+    slide: {
+      image: '',
+      video: '',
+    }
+  },
+
+  url: 'http://localhost:3000',
   api: {
     base: '/api/v1',
   },
-  host: 'http://localhost:3000',
+  host: 'http://localhost:3000', // depreacated
+
   auth: {
-    signup: ['firstName', 'lastName'],
     profile: {
       firstName: {
         required: true,
@@ -50,6 +59,7 @@ export default config.extend({
         },
       },
     },
+    signup: ['firstName', 'lastName'],
     socials: ['vkontakte', 'youtube'],
   },
 });

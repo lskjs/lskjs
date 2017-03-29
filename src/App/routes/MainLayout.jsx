@@ -24,26 +24,8 @@ export default class MainLayout extends Component {
           err.text = 'Успех';
         }
       }
-      this.createNotification(err);
+      NotificationManager[err.type || 'info'](err.title, err.text, err.time || 4000, err.callback);
     };
-  }
-  createNotification = (msg) => {
-    switch (msg.type) {
-      case 'info':
-        NotificationManager.info(msg.title, msg.text, 2000);
-        break;
-      case 'success':
-        NotificationManager.success(msg.title, msg.text, 2000);
-        break;
-      case 'warning':
-        NotificationManager.warning(msg.title, msg.text, 2000);
-        break;
-      case 'error':
-        NotificationManager.error(msg.title, msg.text, 2000);
-        break;
-      default:
-        NotificationManager.info(msg.title, 2000);
-    }
   }
   render() {
     return (

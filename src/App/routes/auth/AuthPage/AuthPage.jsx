@@ -22,12 +22,12 @@ import Error from 'react-icons/lib/md/clear';
 import Check from 'react-icons/lib/md/check';
 
 import Component from 'lsk-general/General/Component';
-import Slide from 'lsk-general/General/Slide';
+import Slide from '../../Slide';
 import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
-import SocialButtons from './SocialButtons'
+import SocialButtons, { SocialButton, buttons } from './SocialButtons';
 // const infoFields = [
 //   {
 //     name: 'profile.firstName',
@@ -52,7 +52,7 @@ import SocialButtons from './SocialButtons'
 //   },
 // ];
 
-@inject('auth', 'ui', 'config') @observer
+@inject('auth', 'config') @observer
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
 
@@ -74,7 +74,7 @@ export default class AuthPage extends Component {
       name: 'login',
       title: 'Email',
       control: {
-        placeholder: 'Например, utkin@mail.ru',
+        placeholder: 'Ваш Email',
       },
     };
     const password = {
@@ -114,7 +114,7 @@ export default class AuthPage extends Component {
       name: `profile.${field.name}`,
       title: field.title,
       control: field.control || {},
-    }))
+    }));
 
     if (type === 'signupPassport') {
       return [
@@ -142,12 +142,14 @@ export default class AuthPage extends Component {
       }
     }
     if (type === 'signupPassport') {
-      await auth.signupPassport(data, query);
-      this.redirect('/');
+      await auth.signupPassport({ ...data, p: query.p }).then(() => {
+        this.redirect('/');
+      });
     }
     if (type === 'signup') {
-      await auth.signup(data);
-      this.redirect('/');
+      await auth.signup(data).then(() => {
+        this.redirect('/');
+      });
     }
     if (type === 'recovery') {
       await auth.recovery(data);
@@ -158,16 +160,13 @@ export default class AuthPage extends Component {
     }
   }
 
+
   render() {
-    const { type, auth, config } = this.props;
-    const status = this.props.ui.statusRequest;
+    const { type, auth, config, passport } = this.props;
+    const status = null;// this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
-      <Slide
-        full
-        video="http://skill-branch.ru/video-background.webm"
-        overlay
-      >
+      <Slide>
         <Grid>
           <Row>
             <Col md={4} mdOffset={4}>
@@ -178,12 +177,18 @@ export default class AuthPage extends Component {
                       Вход
                     </If>
                     <If condition={['signupPassport', 'signup'].includes(type)}>
-                      {`Регистрация${type === 'signupPassport' ? ' через соц.сеть' : ''}`}
+                      {`Регистрация${type === 'signupPassport' ? ` через ${buttons[passport.provider].title}` : ''}`}
                     </If>
                     <If condition={type === 'recovery'}>
                       Восстановить пароль
                     </If>
                   </CardTitle>
+                  <If condition={type == 'signupPassport'}>
+                    <SocialButton name={passport.provider} />
+                    <div style={{ textAlign: 'center' }}>
+                      <img src={passport.profile.avatar} style={{ borderRadius: '50%' }} />
+                    </div>
+                  </If>
                   <Form
                     fields={fields}
                     validators={{

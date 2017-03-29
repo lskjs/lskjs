@@ -14,8 +14,9 @@ import Instagram from 'react-icons/lib/fa/instagram';
 
 import _ from 'lodash';
 
-const passportButtons = {
+export const buttons = {
   vkontakte: {
+    title: 'ВКонтакте',
     icon: <VKontakte />,
     color: '#fff000',
   },
@@ -38,6 +39,23 @@ const passportButtons = {
     icon: <Instagram />,
   },
 };
+
+@importcss(require('./AuthPage.css'))
+export class SocialButton extends Component {
+  render() {
+    const { name } = this.props;
+    const value = buttons[name];
+    return (
+      <Button
+        {...this.props}
+        styleName={`btn-social is-${name}`}
+      >
+        {value.icon}
+      </Button>
+    );
+  }
+}
+
 @importcss(require('./AuthPage.css'))
 export default class SocialButtons extends Component {
   static propTypes = {
@@ -47,23 +65,21 @@ export default class SocialButtons extends Component {
   render() {
     const { auth, config } = this.props;
     const socials = _.get(config, 'auth.socials', []);
-    const buttons = _.map(passportButtons, (value, name) => {
+    const buttons2 = _.map(buttons, (value, name) => {
       if (socials.indexOf(name) === -1) return null;
       return { name, ...value };
     }).filter(a => a);
 
-    if (buttons.length == 0) return null;
+    if (buttons2.length == 0) return null;
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {buttons.map(value => (
-          <Button
+        {buttons2.map(value => (
+          <SocialButton
             key={value.name}
-            styleName={`btn-social is-${value.name}`}
+            name={value.name}
             onClick={() => auth.authPassport(value.name)}
-          >
-            {value.icon}
-          </Button>
+          />
         ))}
       </div>
     );

@@ -75,10 +75,13 @@ export default class CabinetLayout extends Component {
     const description = page.getMeta('description');
     const breadItems = (page.state.metas || []).map((meta, key) => ({
       key,
-      title: meta.crumb && meta.crumb.title || meta.title || 'title',
+      title: meta.crumb && meta.crumb.title || meta.title || 'Главная',
       url: meta.crumb && meta.crumb.url || meta.url || '/',
       icon: meta.crumb && meta.crumb.icon || meta.icon// || <DashboardIcon />,
     }));
+    if (breadItems && breadItems[0] && !breadItems[0].icon) {
+      breadItems[0].icon = <DashboardIcon />;
+    }
     // [
     //   { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
     //   ...breadcrumbs,
@@ -86,58 +89,68 @@ export default class CabinetLayout extends Component {
     const mainMenus = [
       {
         icon: <DashboardIcon />,
-        title: 'Главная',
+        title: 'Кабинет',
         url: '/cabinet',
       },
       {
         icon: <Users />,
-        title: 'Друзья',
-        label: 14,
-        items: [
-          { title: 'Все друзья', url: '/cabinet/friends' },
-          { title: 'Входящие заявки', url: '/cabinet/friends/in' },
-          { title: 'Исходящие заявки', url: '/cabinet/friends/out' },
-        ],
+        title: 'Профиль',
+        url: '/cabinet/settings',
       },
-      {
-        icon: <Posts />,
-        title: 'Посты',
-        url: '/cabinet/posts',
-      },
-      {
-        icon: <Mail />,
-        label: 10,
-        title: 'Сообщения',
-        url: '/cabinet/messages',
-      },
+      // {
+      //   icon: <DashboardIcon />,
+      //   title: 'Профиль',
+      //   url: '/cabinet/profile',
+      // },
+      // {
+      //   icon: <Users />,
+      //   title: 'Друзья',
+      //   label: 14,
+      //   items: [
+      //     { title: 'Все друзья', url: '/cabinet/friends' },
+      //     { title: 'Входящие заявки', url: '/cabinet/friends/in' },
+      //     { title: 'Исходящие заявки', url: '/cabinet/friends/out' },
+      //   ],
+      // },
+      // {
+      //   icon: <Posts />,
+      //   title: 'Посты',
+      //   url: '/cabinet/posts',
+      // },
+      // {
+      //   icon: <Mail />,
+      //   label: 10,
+      //   title: 'Сообщения',
+      //   url: '/cabinet/messages',
+      // },
     ];
     const adminMenu = [
       {
         icon: <DashboardIcon />,
-        title: 'Панель управления',
+        title: 'Дешборд',
         url: '/admin',
       },
       {
         icon: <Users />,
-        label: '6',
+        // label: '6',
         title: 'Пользователи',
         url: '/admin/users',
       },
-      {
-        icon: <Zip />,
-        title: 'Еще кнопка',
-        url: '#',
-      },
+      // {
+      //   icon: <Zip />,
+      //   title: 'Еще кнопка',
+      //   url: '#',
+      // },
     ];
     return (
       <LayoutWrapper color="black">
         <HeaderWrapper>
           <Logo>
             <MiniLogo onClick={this.toDashboard}>
-              {config.siteTitle.substr(0, 2)}
+              {config.site.abbr}
             </MiniLogo>
             <LargeLogo onClick={this.toDashboard}>
-              {config.siteTitle}
+              {config.site.title}
             </LargeLogo>
           </Logo>
           <Navbar controlbar={false}>

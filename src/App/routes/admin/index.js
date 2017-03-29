@@ -10,35 +10,33 @@ import Users from './Users';
 export default {
   action({ next, page }) {
     return page
-      .pushTitle('Администраторская', '/admin')
-      .layout(CabinetLayout)
-      .next(next);
+    .meta({
+      title: 'Админ Панель',
+      url: '/admin',
+    })
+    .layout(CabinetLayout)
+    .next(next);
   },
   children: [
     {
       path: '/',
       async action({ page }) {
         return page
-          .pushTitle('Панель управления')
-          // .description('Ваш кабинет')
+          .meta({
+            title: 'Дешборд',
+            url: '/admin',
+          })
           .component(Dashboard, { page });
-      },
-    },
-    {
-      path: '/profile',
-      async action({ page }) {
-        return page
-          .pushTitle('Профиль')
-          // .description('Ваш кабинет')
-          .component(Profile, { page });
       },
     },
     {
       path: '/users',
       async action({ page }) {
         return page
-          .pushTitle('Список пользователей')
-          // .description('Ваш кабинет')
+          .meta({
+            title: 'Пользователи',
+            url: '/admin/users',
+          })
           .component(Users, { page });
       },
     },

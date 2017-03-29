@@ -10,7 +10,7 @@ import {
   Button,
 } from 'react-bootstrap';
 
-import Slide from 'lsk-general/General/Slide';
+import Slide from './Slide';
 import Link from 'lsk-general/General/Link';
 import Navbar from './Navbar';
 
@@ -22,11 +22,7 @@ export default class ErrorLayout extends Component {
     return (
       <div>
         <Navbar />
-        <Slide
-          full
-          video="http://skill-branch.ru/video-background.webm"
-          overlay
-        >
+        <Slide>
           <Grid>
             <Row>
               <Col md={4} mdOffset={4}>
