@@ -18,18 +18,18 @@ export default config.extend({
   auth: {
     socials: require('./socials.js').default,
   },
-  mail: {
+  mailer: {
     transport: {
       host: 'smtp.yandex.ru',
       port: 465,
       secure: true,
       auth: {
-        user: 'example@gmail.com@ya.ru',
-        pass: 'password',
+        user: 'example@gmail.com',
+        pass: 'example',
       },
     },
     options: {
-      from: '"example@gmail.com" <example@gmail.com@ya.ru>',
+      from: '"example" <example@gmail.com>',
     },
   },
   upload: {
@@ -44,14 +44,5 @@ export default config.extend({
     // formats: ['png', 'jpg', 'jpeg', 'gif'],
     mimetypes: ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'],
   },
-})
-.extend((config) => {
-  // console.log(2222, config);
-  if (config.protocol === 'https') {
-    config.url = `${config.protocol}://${config.host}`;
-  } else {
-    config.url = `${config.protocol}://${config.host}:${config.externalPort}`;
-  }
-  return config;
 })
 .extendEnv();

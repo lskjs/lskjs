@@ -14,16 +14,16 @@ export default (ctx, params) => {
 
   api.all('/send', async (req) => {
     const params = req.allParams();
-    return ctx.mailer.send({
+    return ctx.modules.mailer.send({
       to: 'shitric2@gmail.com',
-      type: params.type || 'recovery',
+      template: params.type || 'recovery',
       params: {
         user: await ctx.models.User.findOne(),
         password: '123456',
       },
-      options: {
-        subject: params.subject || 'Восстановление пароля',
-      },
+      // options: {
+      //   subject: params.subject || 'Восстановление пароля',
+      // },
     });
   });
 

@@ -6,7 +6,7 @@ import getApi from './api/v1';
 import getDocs from './api/v1/v1.docs';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line
-import getMailer from './mailer'
+import getModules from './modules';
 export default class App extends ReactApp {
 
   getModels() {
@@ -17,7 +17,6 @@ export default class App extends ReactApp {
 
   init() {
     super.init();
-    this.mailer = getMailer(this)
     this.passport = passport;
     const strategies = require('./strategies').default(this) || {};
     if (this.config.auth && this.config.auth.socials) {
@@ -26,6 +25,13 @@ export default class App extends ReactApp {
         return new Strategy();
       }).filter(s => s);
     }
+  }
+
+  getModules() {
+    return {
+      ...super.getModules(),
+      ...getModules(this),
+    };
   }
 
   // getStatics() {
