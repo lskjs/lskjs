@@ -12,7 +12,7 @@ import routes from './routes';
 import Html from './Html';
 import Provider from './Provider';
 import _ from 'lodash';
-
+var bunyan = require('browser-bunyan');
 
 const LOGGING = false;
 
@@ -21,6 +21,11 @@ export default class ReactApp {
   static mixin = mixin;
   constructor(params = {}) {
     Object.assign(this, params);
+
+    this.log = bunyan.createLogger({
+      name: 'appClient',
+      src: true,
+    });
   }
 
   static Html = Html;
@@ -211,7 +216,7 @@ export default class ReactApp {
       req,
       config: this.config,
       app: this,
-    }
+    };
     if (this.Provider.v === 2) {
       return new this.Provider(params);
     }
@@ -248,7 +253,7 @@ export default class ReactApp {
       ctx: reqCtx,
       appStore: reqCtx && reqCtx.provider,
       status: 200,
-      ...require('./getReqPropsMigrationV2').default(this, {reqCtx, req}),
+      ...require('./getReqPropsMigrationV2').default(this, { reqCtx, req }),
     };
   }
 
@@ -256,7 +261,7 @@ export default class ReactApp {
     const reqProps = await this.getReqProps(req);
     let route = await UniversalRouter.resolve(this.getUniversalRoutes(), reqProps);
     if (route._page) {
-      route = route.getState()
+      route = route.getState();
     }
     return {
       ...reqProps,

@@ -31,6 +31,46 @@ export function getSchema(ctx) {
     role: {
       type: String,
     },
+    meta: {
+      type: Object,
+      default: {},
+    },
+    profile: {
+      type: Object,
+      default: {},
+      // email: {
+      //   type: String,
+      // },
+      // phone: {
+      //   type: String,
+      // },
+      // firstName: {
+      //   type: String,
+      // },
+      // lastName: {
+      //   type: String,
+      // },
+      // middleName: {
+      //   type: String,
+      // },
+      // avatar: {
+      //   type: String,
+      // },
+      // about: {
+      //   type: String,
+      // },
+      // city: {
+      //   type: String,
+      // },
+      // sex: {
+      //   type: String,
+      //   enum: ['male', 'female', null],
+      //   default: null,
+      // },
+      // bdate: {
+      //   type: Date,
+      // },
+    },
   }, {
     collection: 'user',
     timestamps: true,

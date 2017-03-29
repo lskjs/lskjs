@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Lego Starter Kit — Node.js & React isomorphic app creator (Node.js, Express, React.js, Babel, PostCSS, Webpack)",
   "dependencies": {
     "babel-polyfill": "6.22.0",
@@ -8,6 +8,7 @@
     "bcryptjs": "2.4.0",
     "bluebird": "3.4.7",
     "body-parser": "1.16.0",
+    "browser-bunyan": "^0.4.0",
     "bunyan": "1.8.5",
     "connect-static-file": "1.1.2",
     "cookie-parser": "1.4.3",

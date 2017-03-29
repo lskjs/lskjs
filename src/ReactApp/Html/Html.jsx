@@ -51,7 +51,9 @@ export default class Html {
   getHtmlClass(req) {
     const ua = {};// useragent.is(req.headers['user-agent'])
     ua.js = false;
-    return _.map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '';
+
+    const postfix = __DEV__ ? ' __DEV__' : ''
+    return (_.map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
   }
 
   getRootState() {
@@ -114,7 +116,7 @@ ${page.renderFooter()}
       ${root}
     </div>
     <script>
-      window.__ROOT_STATE__ = ${JSON.stringify(this.getRootState())};
+      window.__ROOT_STATE__ = ${JSON.stringify(this.getRootState(), null, __DEV__ ? 4 : 0)};
     </script>
     ${this.renderAssets('js')}
     ${this.renderFooter()}
