@@ -7,25 +7,27 @@ import Navbar from './Navbar';
 export default class MainLayout extends Component {
   constructor(props) {
     super();
-    global.toast = (err = {}) => {
-      props.log.error('throwError', err);
-      if (!err.type) err.type = 'error';
-      if (!err.title) {
-        if (err.type === 'error') {
-          err.title = 'Ошибка';
-        } else {
-          err.title = 'Успех';
+    if (__CLIENT__) {
+      global.toast = (err = {}) => {
+        props.log.error('throwError', err);
+        if (!err.type) err.type = 'error';
+        if (!err.title) {
+          if (err.type === 'error') {
+            err.title = 'Ошибка';
+          } else {
+            err.title = 'Успех';
+          }
         }
-      }
-      if (!err.text) {
-        if (err.type === 'error') {
-          err.text = 'Что-то пошло не так';
-        } else {
-          err.text = 'Успех';
+        if (!err.text) {
+          if (err.type === 'error') {
+            err.text = 'Что-то пошло не так';
+          } else {
+            err.text = 'Успех';
+          }
         }
-      }
-      NotificationManager[err.type || 'info'](err.title, err.text, err.time || 4000, err.callback);
-    };
+        NotificationManager[err.type || 'info'](err.title, err.text, err.time || 4000, err.callback);
+      };
+    }
   }
   render() {
     return (

@@ -153,7 +153,7 @@ export default class AuthPage extends Component {
     }
     if (type === 'recovery') {
       await auth.recovery(data);
-      global.toast({
+      global.toast && global.toast({
         type: 'success',
         title: 'Письмо с восстановлением пароля отправлено на почту.',
       });

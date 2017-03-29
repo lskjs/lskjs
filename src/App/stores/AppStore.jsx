@@ -53,6 +53,7 @@ export default class AppStore {
       app: this,
       log: this.log,
       auth: this.auth,
+      api: this.api,
       user: this.user,
       config: this.config,
       page: this.page,
