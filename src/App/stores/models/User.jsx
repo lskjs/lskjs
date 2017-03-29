@@ -1,4 +1,4 @@
-import { computed, toJS } from 'mobx';
+import { observable, computed, toJS } from 'mobx';
 import { set } from 'lodash';
 
 const sample = {
@@ -9,21 +9,21 @@ const sample = {
 export default ctx => (
 
   class UserModel {
-    //
-    // @observable _id;
-    // @observable role;
-    // @observable profile = {
-    //   avatar: undefined,
-    //   firstName: undefined,
-    //   lastName: undefined,
-    //   middleName: undefined,
-    //   city: undefined,
-    //   bdate: undefined,
-    //   sex: undefined,
-    //   about: undefined,
-    //   phone: undefined,
-    //   email: undefined,
-    // };
+
+    @observable _id;
+    @observable role;
+    @observable profile = {
+      avatar: undefined,
+      firstName: undefined,
+      lastName: undefined,
+      middleName: undefined,
+      city: undefined,
+      bdate: undefined,
+      sex: undefined,
+      about: undefined,
+      phone: undefined,
+      email: undefined,
+    };
 
     constructor(user) {
       if (user) {
@@ -37,7 +37,6 @@ export default ctx => (
     }
 
     setData(user) {
-      ctx.log.info('[Y] ingoing user', user);
       if (!user) return this.reset();
       for (const item in user) {
         set(this, item, user[item]);

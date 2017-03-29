@@ -7,6 +7,20 @@ export default (ctx) => {
   const { e404, e500 } = ctx.errors;
   const controller = {};
 
+  controller.list = async (req) => {
+    try {
+      modules.isAuth(req);
+      const users = await User.find({});
+      console.log(users);
+      if (!users) {
+        throw e404('Users not found!');
+      }
+      return users;
+    } catch (error) {
+      throw e500(error);
+    }
+  };
+
   controller.get = async (req) => {
     const criteria = modules.getCriteria(req);
     const user = await User.findOne(criteria);

@@ -8,10 +8,6 @@ import UIStore from './UIStore';
 export default class AppStore {
 
   ui = new UIStore();
-  log = {
-    info: (...args) => { console.log('[LOGGER]', ...args); },
-    error: (...args) => { console.error('[ERROR]', ...args); },
-  };
   static v = 2;
   constructor(params) {
     // Object.assing(this, params)
@@ -21,7 +17,24 @@ export default class AppStore {
     this.api = new ApiClient({ base: state.config.api.base });
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, state.user);
+    this.init();
+  }
+
+  async init() {
     this.models = this.getModels();
+    this.stores = this.getStores();
+    this.log = this.getLogger();
+  }
+
+  getLogger() {
+    return {
+      info: (...args) => { console.log('[LOGGER]', ...args); },
+      error: (...args) => { console.error('[ERROR]', ...args); },
+    };
+  }
+
+  getStores() {
+    return require('./stores').default(this); // eslint-disable-line
   }
 
   getModels() {
@@ -39,11 +52,8 @@ export default class AppStore {
       log: this.log,
       auth: this.auth,
       user: this.user,
-      api: this.api,
-      ui: this.ui,
       config: this.config,
       page: this.page,
-      models: this.models,
     };
   }
 

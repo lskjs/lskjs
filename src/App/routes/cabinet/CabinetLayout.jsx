@@ -21,6 +21,7 @@ import SidebarMenuWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarMenuWrapper';
 import SidebarMenuHeader from 'lsk-admin/Admin/lib/sidebar/SidebarMenuHeader';
 import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 
+import User from 'react-icons/lib/fa/user';
 import Users from 'react-icons/lib/fa/group';
 import Mail from 'react-icons/lib/fa/envelope';
 import Posts from 'react-icons/lib/fa/th-large';
@@ -93,9 +94,14 @@ export default class CabinetLayout extends Component {
         url: '/cabinet',
       },
       {
-        icon: <Users />,
+        icon: <User />,
         title: 'Профиль',
         url: `/cabinet/user/${user._id}`,
+      },
+      {
+        icon: <Users />,
+        title: 'Пользователи',
+        url: '/cabinet/users',
       },
       // {
       //   icon: <DashboardIcon />,
