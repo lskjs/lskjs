@@ -13,13 +13,12 @@ import Form from 'lsk-general/General/Form';
 import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
 
-@inject('user', 'auth', 'ui')
+@inject('user', 'auth')
 @observer
 export default class ProfilePage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired,
   }
   @autobind
   async handleSubmit(data) {
@@ -27,8 +26,8 @@ export default class ProfilePage extends Component {
     this.redirect('/cabinet');
   }
   render() {
-    const { user, auth, ui } = this.props;
-    const status = ui.statusRequest;
+    const { user, auth } = this.props;
+    const status = null;
     if (!auth.isAuth) return false;
     const fields = [
       {
