@@ -22,7 +22,7 @@ import Error from 'react-icons/lib/md/clear';
 import Check from 'react-icons/lib/md/check';
 
 import Component from 'lsk-general/General/Component';
-import Slide from 'lsk-general/General/Slide';
+import Slide from '../../Slide';
 import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
@@ -74,7 +74,7 @@ export default class AuthPage extends Component {
       name: 'login',
       title: 'Email',
       control: {
-        placeholder: 'Например, utkin@mail.ru',
+        placeholder: 'Ваш Email',
       },
     };
     const password = {
@@ -166,11 +166,7 @@ export default class AuthPage extends Component {
     const status = null;// this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
-      <Slide
-        full
-        video="http://skill-branch.ru/video-background.webm"
-        overlay
-      >
+      <Slide>
         <Grid>
           <Row>
             <Col md={4} mdOffset={4}>

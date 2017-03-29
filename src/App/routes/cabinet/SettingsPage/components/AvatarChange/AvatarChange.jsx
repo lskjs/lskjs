@@ -65,7 +65,7 @@ export default class AvatarChange extends Component {
             <Col xs={12} sm={6} styleName="inner center">
               <b>Текущий аватар</b>
               <img
-                src={user.profile.avatar}
+                src={user.avatar}
                 alt={user.fullName} title={user.fullName}
                 style={{ borderRadius: '50%' }}
               />

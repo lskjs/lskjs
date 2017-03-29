@@ -1,12 +1,14 @@
 import config from 'lego-starter-kit/config/client';
 export default config.extend({
-  siteTitle: 'The Site Title',
-  siteDescription: 'The Description',
-  siteCopyright: '<span>Copyright &copy; 2016-2017 </span><a href="http://github.com/isuvorov/lego-starter-kit">Lego-starter-kit</a>.</strong> All rights reserved.',
   site: {
-    title: '123',
-    description: '123',
-    copyright: '123',
+    abbr: 'TST',
+    title: 'The Site Title',
+    description: 'The Description',
+    copyright: 'Copyright &copy; 2016-2017',
+    slide: {
+      image: '',
+      video: '',
+    }
   },
 
   url: 'http://localhost:3000',
