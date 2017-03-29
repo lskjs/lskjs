@@ -75,8 +75,7 @@ export default class AuthStore {
   async writeResponse() {
     this.store.log.info('[Y] promise', this.promise);
     const res = await this.promise;
-    this.store.log.info('[Y] res', res);
-    this.store.ui.status(res.code);
+    this.store.log.info('[Y] response', res);
     await this.setToken(res.token);
     await this.updateUser(res.user);
     return res;
@@ -90,14 +89,12 @@ export default class AuthStore {
 
   @action
   async signup(data) {
-    this.store.ui.status('wait');
     this.promise = this.store.api.authSignup(data);
     await this.writeResponse();
   }
 
   @action
   async login(data) {
-    this.store.ui.status('wait');
     this.promise = this.store.api.authLogin(data);
     const res = await this.writeResponse();
     return res;
@@ -105,7 +102,6 @@ export default class AuthStore {
 
   @action
   async recovery(data) {
-    this.store.ui.status('wait');
     this.promise = this.store.api.authRecovery(data);
     const res = await this.promise;
     this.store.ui.status(res.code);
@@ -119,7 +115,6 @@ export default class AuthStore {
   @action
   async signupPassport(params) {
     this.store.log.info('signupPassport');
-    this.store.ui.status('wait');
     this.promise = this.store.api.authSignupPassport(params);
     await this.writeResponse();
   }
@@ -128,7 +123,6 @@ export default class AuthStore {
   async loginPassport(params) {
     if (__CLIENT__) {
       this.store.log.info('loginPassport');
-      this.store.ui.status('wait');
       this.promise = this.store.api.authLoginPassport(params);
       await this.writeResponse();
       return true;
