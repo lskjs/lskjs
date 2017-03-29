@@ -17,7 +17,6 @@ export default class UsersPage extends Component {
   }
 
   nameDate(data, cell) {
-    console.log(data, cell);
     return `<p>${moment(cell[data]).locale('ru').format('LL')}</p>`;
   }
 
