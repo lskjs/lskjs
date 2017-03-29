@@ -14,11 +14,15 @@ export default class AppStore {
   };
   static v = 2;
   constructor(params) {
-    const { rootState: state, req = {} } = params;
+    const { rootState: state, req = {}, app } = params;
     this.config = state.config;
     this.api = new ApiClient({ base: state.config.api.base });
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, state.user);
+    this.log = app.log || {
+      info: (...args) => { console.log('[LOGGER]', ...args); },
+      error: (...args) => { console.error('[ERROR]', ...args); },
+    }
   }
 
   setData({ page, uapp }) {

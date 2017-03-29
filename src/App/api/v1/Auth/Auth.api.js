@@ -7,6 +7,7 @@ export default (ctx, params) => {
   api.all('/login', ctx.resourses.Auth.login);
   api.post('/signup', ctx.resourses.Auth.signup);
   api.all('/recovery', ctx.resourses.Auth.recovery);
+  if (!controller) return api
   // Регистрация пользователя через соц сеть
   api.all('/social/signup', controller.socialSign);
   api.all('/social/login', controller.socialLogin);

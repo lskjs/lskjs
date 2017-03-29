@@ -1,5 +1,6 @@
-import _ from 'lodash'
+import _ from 'lodash';
 export default (ctx) => {
+  if (!ctx.passport) return null;
   const { e400, e404 } = ctx.errors;
   const { User, Passport } = ctx.models;
   const controller = {};
