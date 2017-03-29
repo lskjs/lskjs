@@ -8,21 +8,39 @@ import UIStore from './UIStore';
 export default class AppStore {
 
   ui = new UIStore();
-  log = {
-    info: (...args) => { console.log('[LOGGER]', ...args); },
-    error: (...args) => { console.error('[ERROR]', ...args); },
-  };
   static v = 2;
   constructor(params) {
+    // Object.assing(this, params)
     const { rootState: state, req = {}, app } = params;
+    this._app = app;
     this.config = state.config;
+    this.rootState = state;
     this.api = new ApiClient({ base: state.config.api.base });
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, state.user);
-    this.log = app.log || {
+    this.init();
+  }
+
+  async init() {
+    this.models = this.getModels();
+    this.stores = this.getStores();
+    this.log = this.getLogger();
+  }
+
+  getLogger() {
+    // console.log('bunyan log', this._app.log)
+    return {
       info: (...args) => { console.log('[LOGGER]', ...args); },
       error: (...args) => { console.error('[ERROR]', ...args); },
-    }
+    };
+  }
+
+  getStores() {
+    return require('./stores').default(this); // eslint-disable-line
+  }
+
+  getModels() {
+    return require('./models').default(this); // eslint-disable-line
   }
 
   setData({ page, uapp }) {
@@ -36,8 +54,6 @@ export default class AppStore {
       log: this.log,
       auth: this.auth,
       user: this.user,
-      api: this.api,
-      ui: this.ui,
       config: this.config,
       page: this.page,
     };

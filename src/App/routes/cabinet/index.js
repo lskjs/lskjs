@@ -1,6 +1,8 @@
 import CabinetLayout from './CabinetLayout';
 
-import ProfilePage from './ProfilePage';
+import DashboardPage from './DashboardPage';
+import UserPage from './UserPage';
+import UsersPage from './UsersPage';
 import SettingsPage from './SettingsPage';
 import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
@@ -22,7 +24,20 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .component(ProfilePage, {});
+          .component(DashboardPage, {});
+      },
+    },
+    {
+      path: '/user/:id',
+      async action({ page, appStore }, { id }) {
+        const user = await appStore.models.User.getById(id);
+        return page
+          .meta({
+            title: user.fullName,
+            description: 'Профиль пользователя',
+            url: `/cabinet/user/${id}`,
+          })
+          .component(UserPage, { user });
       },
     },
     {
@@ -40,6 +55,20 @@ export default {
     {
       path: '/friends',
       ...require('./FriendsPage/index').default,
+    },
+    {
+      path: '/users',
+      async action({ page, appStore }) {
+        const users = new appStore.stores.Users();
+        await users.fetchUsers();
+        return page
+          .meta({
+            title: 'Список пользователей',
+            description: 'Все пользователи',
+            url: '/cabinet/users',
+          })
+          .component(UsersPage, { users });
+      },
     },
     {
       path: '/posts',

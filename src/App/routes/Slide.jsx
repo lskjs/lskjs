@@ -7,7 +7,6 @@ function Slide(props) {
   return (
     <BaseSlide
       full
-      video="http://skill-branch.ru/video-background.webm"
       overlay
       {...slide}
       {...props}

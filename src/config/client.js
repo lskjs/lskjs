@@ -7,8 +7,8 @@ export default config.extend({
     copyright: 'Copyright &copy; 2016-2017',
     slide: {
       image: '',
-      video: '',
-    }
+      video: 'http://skill-branch.ru/video-background.webm',
+    },
   },
 
   url: 'http://localhost:3000',
