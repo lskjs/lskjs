@@ -28,10 +28,11 @@ export default class App extends ReactApp {
   }
 
   getModules() {
-    return {
+    const models = {
       ...super.getModules(),
       ...getModules(this),
     };
+    return models;
   }
 
   // getStatics() {

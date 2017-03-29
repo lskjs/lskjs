@@ -3,6 +3,7 @@ import getUser from './User';
 import getPassport from './Passport';
 import getUpload from '../upload';
 
+
 export default (ctx, params) => {
   const upload = getUpload(ctx);
   const api = ctx.asyncRouter();
@@ -26,7 +27,6 @@ export default (ctx, params) => {
       // },
     });
   });
-
   api.all('*', () => {
     throw ctx.errors.e404('No such API method');
   });
