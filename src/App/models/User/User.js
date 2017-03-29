@@ -4,51 +4,11 @@ export function getSchema(ctx) {
   const { Types } = ctx.db.Schema;
   const DefaultSchema = getDefaultSchema(ctx);
   const schema = DefaultSchema.extend({
-    meta: {
-      type: Object,
-      default: {},
-    },
     // Аналог profile для других моделей
     // info: {
     //   type: Object,
     //   default: {},
     // }
-    profile: {
-      type: Object,
-      default: {},
-      // email: {
-      //   type: String,
-      // },
-      // phone: {
-      //   type: String,
-      // },
-      // firstName: {
-      //   type: String,
-      // },
-      // lastName: {
-      //   type: String,
-      // },
-      // middleName: {
-      //   type: String,
-      // },
-      // avatar: {
-      //   type: String,
-      // },
-      // about: {
-      //   type: String,
-      // },
-      // city: {
-      //   type: String,
-      // },
-      // sex: {
-      //   type: String,
-      //   enum: ['male', 'female', null],
-      //   default: null,
-      // },
-      // bdate: {
-      //   type: Date,
-      // },
-    },
     visitedAt: {
       type: Date,
       default: Date.now,

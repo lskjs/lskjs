@@ -3,6 +3,7 @@ import getUser from './User';
 import getPassport from './Passport';
 import getUpload from '../upload';
 
+
 export default (ctx, params) => {
   const upload = getUpload(ctx);
   const api = ctx.asyncRouter();
@@ -14,19 +15,18 @@ export default (ctx, params) => {
 
   api.all('/send', async (req) => {
     const params = req.allParams();
-    return ctx.mailer.send({
+    return ctx.modules.mailer.send({
       to: 'shitric2@gmail.com',
-      type: params.type || 'recovery',
+      template: params.type || 'recovery',
       params: {
         user: await ctx.models.User.findOne(),
         password: '123456',
       },
-      options: {
-        subject: params.subject || 'Восстановление пароля',
-      },
+      // options: {
+      //   subject: params.subject || 'Восстановление пароля',
+      // },
     });
   });
-
   api.all('*', () => {
     throw ctx.errors.e404('No such API method');
   });

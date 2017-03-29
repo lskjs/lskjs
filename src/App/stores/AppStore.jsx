@@ -11,7 +11,8 @@ export default class AppStore {
   static v = 2;
   constructor(params) {
     // Object.assing(this, params)
-    const { rootState: state, req = {} } = params;
+    const { rootState: state, req = {}, app } = params;
+    this._app = app;
     this.config = state.config;
     this.rootState = state;
     this.api = new ApiClient({ base: state.config.api.base });
@@ -27,6 +28,7 @@ export default class AppStore {
   }
 
   getLogger() {
+    // console.log('bunyan log', this._app.log)
     return {
       info: (...args) => { console.log('[LOGGER]', ...args); },
       error: (...args) => { console.error('[ERROR]', ...args); },
