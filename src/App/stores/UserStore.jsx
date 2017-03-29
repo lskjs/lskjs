@@ -32,7 +32,6 @@ export default class UserStore {
   }
 
   update(user) {
-    this.store.log.info('[Y] ingoing user', user);
     if (!user) return this.reset();
     for (const item in user) {
       set(this, item, user[item]);

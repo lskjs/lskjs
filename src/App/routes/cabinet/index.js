@@ -1,6 +1,7 @@
 import CabinetLayout from './CabinetLayout';
 
-import ProfilePage from './ProfilePage';
+import DashboardPage from './DashboardPage';
+import UserPage from './UserPage';
 import SettingsPage from './SettingsPage';
 import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
@@ -22,7 +23,20 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .component(ProfilePage, {});
+          .component(DashboardPage, {});
+      },
+    },
+    {
+      path: '/user/:id',
+      async action({ page, appStore }, { id }) {
+        const user = await appStore.models.User.getById(id);
+        return page
+          .meta({
+            title: user.fullName,
+            description: 'Профиль пользователя',
+            url: `/cabinet/user/${id}`,
+          })
+          .component(UserPage, { user });
       },
     },
     {

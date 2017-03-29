@@ -14,11 +14,18 @@ export default class AppStore {
   };
   static v = 2;
   constructor(params) {
+    // Object.assing(this, params)
     const { rootState: state, req = {} } = params;
     this.config = state.config;
+    this.rootState = state;
     this.api = new ApiClient({ base: state.config.api.base });
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, state.user);
+    this.models = this.getModels();
+  }
+
+  getModels() {
+    return require('./models').default(this); // eslint-disable-line
   }
 
   setData({ page, uapp }) {
@@ -36,6 +43,7 @@ export default class AppStore {
       ui: this.ui,
       config: this.config,
       page: this.page,
+      models: this.models,
     };
   }
 

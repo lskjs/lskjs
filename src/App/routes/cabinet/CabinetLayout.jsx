@@ -95,7 +95,7 @@ export default class CabinetLayout extends Component {
       {
         icon: <Users />,
         title: 'Профиль',
-        url: '/cabinet/settings',
+        url: `/cabinet/user/${user._id}`,
       },
       // {
       //   icon: <DashboardIcon />,
