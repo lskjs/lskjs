@@ -8,23 +8,9 @@ const sample = {
 
 export default class UserStore {
 
-  @observable _id;
-  @observable role;
-  @observable profile = {
-    avatar: undefined,
-    firstName: undefined,
-    lastName: undefined,
-    middleName: undefined,
-    city: undefined,
-    bdate: undefined,
-    sex: undefined,
-    about: undefined,
-    phone: undefined,
-    email: undefined,
-  };
-
   constructor(store, user) {
     this.store = store;
+    this.reset();
     if (user) {
       this.update(user);
       store.auth.init(user);
