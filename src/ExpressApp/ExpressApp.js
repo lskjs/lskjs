@@ -3,6 +3,7 @@ import express from 'express';
 import { Server as httpServer } from 'http';
 import mixin from 'lego-starter-kit/utils/mixin';
 import AsyncRouter from 'lego-starter-kit/utils/AsyncRouter';
+import _ from 'lodash';
 
 export default class ExpressApp {
   static mixin = mixin;
@@ -12,6 +13,7 @@ export default class ExpressApp {
     if (!this.log) this.log = this.getLogger(); // because CoreApp.log() before init
     try {
       this.init();
+      this.initModules();
       this.initExpress();
     } catch (err) {
       this.log.fatal('init err', err);
@@ -28,10 +30,26 @@ export default class ExpressApp {
     }, this.config.logger || {});
     return bunyan.createLogger(options, params);
   }
+  getModules() {
+    return {}
+  }
+
+  getModulesSequence() {
+    return _.values(this.modules || {});
+  }
   init() {
     this.log.trace('ExpressApp init');
     this.app = this.createExpressApp();
     this.httpServer = httpServer(this.app);
+  }
+  initModules() {
+    this.modulesClasses = this.getModules()
+    const modules = {}
+    _.forEach(this.modulesClasses, (Module, key) => modules[key] = new Module(this))
+    this.modules = modules
+    return Promise.each(this.getModulesSequence(), m => m.init && m.init())
+    // this.modules = this.getModulesSequence().map(Module => new Module(this));
+    // return Promise.each(this.getModulesSequence(), m => m.init && m.init())
   }
 
   initExpress() {
@@ -63,9 +81,17 @@ export default class ExpressApp {
       });
     });
   }
+  runModules() {
+    return Promise.each(this.getModulesSequence(), m => m.run && m.run())
+  }
 
   async start() {
-    await this.run();
+    try {
+      await this.run();
+      await this.runModules();
+    } catch (err) {
+      this.log.fatal('run err', err);
+    }
     console.log(`🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing()}ms]`);
   }
 }
