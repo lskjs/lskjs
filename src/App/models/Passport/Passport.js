@@ -40,6 +40,9 @@ export function getSchema(ctx) {
     token: {
       type: String,
     },
+    meta: {
+      type: Object,
+    },
     // статус пасспорта: валиден или нет
     // пока не используется
     status: {
