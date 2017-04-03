@@ -59,6 +59,6 @@ export default config.extend({
       },
     },
     signup: ['firstName', 'lastName'],
-    socials: ['vkontakte', 'youtube'],
+    // socials: ['vkontakte', 'youtube'],
   },
 });
