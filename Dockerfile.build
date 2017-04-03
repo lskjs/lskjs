@@ -1,7 +1,7 @@
 FROM node:6.9.2
 RUN npm i -g yarn
 
-VOLUME ["~/.docker-yarn-cache", "/root/yarn-cache"]
+VOLUME ["/tmp/.cache", "/root/.cache"]
 
 WORKDIR /app
 CMD sh -c "echo \"Start\" && \

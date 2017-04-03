@@ -13,22 +13,20 @@ import Form from 'lsk-general/General/Form';
 import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
 
-@inject('user', 'auth', 'ui')
+@inject('user', 'auth')
 @observer
 export default class ProfilePage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired,
   }
   @autobind
   async handleSubmit(data) {
     await this.props.user.editUser(data);
-    this.redirect('/cabinet');
   }
   render() {
-    const { user, auth, ui } = this.props;
-    const status = ui.statusRequest;
+    const { user, auth } = this.props;
+    const status = null;
     if (!auth.isAuth) return false;
     const fields = [
       {
@@ -63,38 +61,38 @@ export default class ProfilePage extends Component {
           placeholder: 'Например, Александрович',
         },
       },
-      {
-        name: 'profile.phone',
-        title: 'Телефон',
-        value: user.profile.phone,
-        control: {
-          placeholder: 'Например, 927000000',
-        },
-      },
-      {
-        name: 'profile.email',
-        title: 'Электронная почта для связи',
-        value: user.profile.email,
-        control: {
-          placeholder: 'E-mail для связи',
-        },
-      },
-      {
-        name: 'profile.city',
-        title: 'Город',
-        value: user.profile.city,
-        control: {
-          placeholder: 'Откуда вы?',
-        },
-      },
-      {
-        name: 'profile.about',
-        title: 'О себе',
-        value: user.profile.about,
-        control: {
-          placeholder: 'Расскажите о себе',
-        },
-      },
+      // {
+      //   name: 'profile.phone',
+      //   title: 'Телефон',
+      //   value: user.profile.phone,
+      //   control: {
+      //     placeholder: 'Например, 927000000',
+      //   },
+      // },
+      // {
+      //   name: 'profile.email',
+      //   title: 'Электронная почта для связи',
+      //   value: user.profile.email,
+      //   control: {
+      //     placeholder: 'E-mail для связи',
+      //   },
+      // },
+      // {
+      //   name: 'profile.city',
+      //   title: 'Город',
+      //   value: user.profile.city,
+      //   control: {
+      //     placeholder: 'Откуда вы?',
+      //   },
+      // },
+      // {
+      //   name: 'profile.about',
+      //   title: 'О себе',
+      //   value: user.profile.about,
+      //   control: {
+      //     placeholder: 'Расскажите о себе',
+      //   },
+      // },
     ];
     return (
       <Row>

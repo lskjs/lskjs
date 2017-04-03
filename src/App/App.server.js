@@ -35,16 +35,13 @@ export default class App extends ReactApp {
     return models;
   }
 
-  // getStatics() {
-  //   const buildRoot = `${__dirname}/public`;
-  //   const root = __DEV__ ? `${__dirname}/../src/public` : buildRoot;
-  //   const storage = __DEV__ ? `${__dirname}/../s` : buildRoot;
-  //   return {
-  //     '/': root,
-  //     '/storage': root,
-  //     '/favicon.ico': buildRoot + require('file!../public/favicon.ico'), // eslint-disable-line
-  //   };
-  // }
+  getStatics() {
+    const statics = super.getStatics();
+    if (__DEV__) {
+      statics['/storage'] = `${__dirname}/../storage`
+    }
+    return statics;
+  }
 
   run() {
     super.run();

@@ -20,11 +20,10 @@ import Loading from 'react-icons/lib/md/refresh';
 import Error from 'react-icons/lib/md/clear';
 import Check from 'react-icons/lib/md/check';
 
-@inject('user', 'ui')
+@inject('user')
 export default class PasswordChange extends Component {
 
   static propTypes = {
-    ui: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
   }
 
@@ -75,7 +74,7 @@ export default class PasswordChange extends Component {
       passwordStatus,
       passwordConfirmStatus,
     } = this.state;
-    const status = this.props.ui.statusRequest;
+    const status = null;
     return (
       <Card style={{ margin: '10px 0' }}>
         <CardBlock>

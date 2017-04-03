@@ -10,7 +10,7 @@ export default class ApiClient extends ApiClientBase {
     const title = err && err.statusText || 'Ошибка';
     const text = err && err.data && err.data.message || error.message;
 
-    global.toast({
+    global.toast && global.toast({
       title,
       text,
     });

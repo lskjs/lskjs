@@ -6,9 +6,8 @@ export default config.extend({
     description: 'The Description',
     copyright: 'Copyright &copy; 2016-2017',
     slide: {
-      image: '',
-      video: '',
-    }
+      video: 'https://skill-branch.ru/video-background.webm',
+    },
   },
 
   url: 'http://localhost:3000',
@@ -60,6 +59,6 @@ export default config.extend({
       },
     },
     signup: ['firstName', 'lastName'],
-    socials: ['vkontakte', 'youtube'],
+    // socials: ['vkontakte', 'youtube'],
   },
 });

@@ -4616,9 +4616,9 @@ lsk-build@0.6.7:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.6.9:
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.9.tgz#24325f71a49793498595793f2873868094931e00"
+lsk-general@0.6.11:
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.11.tgz#4ec92dce7f6b27ea61ae7b571bf37a591a4a73b5"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"
@@ -5102,7 +5102,7 @@ nodemailer-fetch@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.4.0.tgz#08a6174f755aba6ad9d88133355a70c1dee4e698"
 
-nodemailer-juice@^1.0.0:
+nodemailer-juice@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/nodemailer-juice/-/nodemailer-juice-1.0.0.tgz#7df048c2fdbb8f070e0a8a1b6b75758961ccebdc"
   dependencies:
@@ -6278,7 +6278,7 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-addons-css-transition-group@^15.4.2:
+react-addons-css-transition-group@15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.4.2.tgz#b7828834dfa14229fe07750e331e8a8cb6fb7745"
   dependencies:
@@ -7156,7 +7156,7 @@ source-map-support@^0.2.10, source-map-support@~0.2.8:
   dependencies:
     source-map "0.1.32"
 
-source-map-support@^0.4.0, source-map-support@^0.4.2:
+source-map-support@^0.4.0, source-map-support@^0.4.14, source-map-support@^0.4.2:
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.14.tgz#9d4463772598b86271b4f523f6c1f4e02a7d6aef"
   dependencies:

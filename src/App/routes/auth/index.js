@@ -5,6 +5,11 @@ import getData from './getData';
 
 export default {
   action({ next, page }) {
+    if (__SERVER__) {
+      return page
+        .pushTitle('Loading')
+        .component('Loading');
+    }
     return page
       .pushTitle('Авторизация')
       .layout(AuthLayout)
