@@ -9,12 +9,11 @@ import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
 import staticFileMiddleware from 'connect-static-file';
 
-
+const DEBUG = 0;
 export default class CoreApp extends ExpressApp {
   init() {
     super.init(...arguments);
     this.log.trace('CoreApp init');
-
     this.db = this.getDatabase();
     this.requests = this.getRequests();
     this.log.trace('requests', Object.keys(this.requests));
@@ -136,12 +135,15 @@ export default class CoreApp extends ExpressApp {
   }
 
   useMiddlewares() {
+    DEBUG && this.log.trace('CoreApp.useMiddlewares');
     const middlewares = _.flattenDeep(this.getUsingMiddlewares());
     middlewares.forEach((middleware) => {
       middleware && typeof middleware === 'function' && this.app.use(middleware);
     });
   }
   useDefaultRoute() {
+    DEBUG && this.log.trace('CoreApp.useDefaultRoute');
+    // console.log('useDefaultRoute');
     this.app.use((req, res, next) => {
       const err = this.errors.e404('Route not found');
       next(err);
@@ -168,14 +170,10 @@ export default class CoreApp extends ExpressApp {
 
 
   async run(...args) {
+    await super.run(...args);
     this.log.trace('CoreApp.run');
     this.config.db && this.db && await this.runDb();
-    await super.run(...args);
     this.config.sockets && await this.runSockets();
-    await this.afterRun();
   }
 
-  afterRun() {
-
-  }
 }
