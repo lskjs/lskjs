@@ -69,14 +69,17 @@ export default class Page {
 
   enable() {
     this.disabled = false;
-    return true;
+    return this;
   }
   disable() {
     this.disabled = true;
-    return true;
+    return this;
   }
 
   error(err) {
+    if (__DEV__) {
+      console.error({err});
+    }
     if (this.disabled) return this;
     return this
       .layout(this.state.errorLayout)
