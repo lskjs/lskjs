@@ -1287,6 +1287,10 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
+browser-bunyan@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/browser-bunyan/-/browser-bunyan-0.4.0.tgz#ec98f731801b646668f137bb09413a42eb2ff940"
+
 browser-sync-client@2.4.5:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/browser-sync-client/-/browser-sync-client-2.4.5.tgz#976afab1a54f255baa38fe22ae3c0d3753ad337b"
@@ -1841,7 +1845,7 @@ cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
 
-cookie@0.3.1, cookie@^0.3.1:
+cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
@@ -2329,7 +2333,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-ejs@^2.5.6:
+ejs@2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.6.tgz#479636bfa3fe3b1debd52087f0acb204b4f19c88"
 
@@ -3904,6 +3908,10 @@ js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
+js-cookie@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.1.4.tgz#da4ec503866f149d164cf25f579ef31015025d8d"
+
 js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
@@ -4165,15 +4173,16 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.5.1.tgz#57b46856413506f2859c068043b84ebb9137b554"
+lego-starter-kit@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.6.0.tgz#a877c7744db1c0b575a9eae50fa80fd3a3271a57"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
     bcryptjs "2.4.0"
     bluebird "3.4.7"
     body-parser "1.16.0"
+    browser-bunyan "^0.4.0"
     bunyan "1.8.5"
     connect-static-file "1.1.2"
     cookie-parser "1.4.3"
@@ -6316,13 +6325,6 @@ react-bootstrap@0.30.7, react-bootstrap@^0.30.7:
     uncontrollable "^4.0.1"
     warning "^3.0.0"
 
-react-cookie@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-1.0.4.tgz#4fe715d4c0abbcd18b671df5752c43d3109836c9"
-  dependencies:
-    cookie "^0.3.1"
-    object-assign "^4.1.0"
-
 react-css-modules@^3.7.10:
   version "3.7.10"
   resolved "https://registry.yarnpkg.com/react-css-modules/-/react-css-modules-3.7.10.tgz#300da561e550eeec5ebc0bc8c7d51d77d88ae2d7"
@@ -6416,6 +6418,10 @@ react-proxy@^3.0.0-alpha.0:
   resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
   dependencies:
     lodash "^4.6.1"
+
+react-visibility-sensor@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-visibility-sensor/-/react-visibility-sensor-3.7.0.tgz#0ce8c1849cc48597101c90f7bf408012639760a5"
 
 react@15.4.2, react@^15.4.1, react@^15.4.2:
   version "15.4.2"
@@ -7150,17 +7156,17 @@ source-list-map@^0.1.4, source-list-map@~0.1.7:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
 
+source-map-support@0.4.14, source-map-support@^0.4.0, source-map-support@^0.4.2:
+  version "0.4.14"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.14.tgz#9d4463772598b86271b4f523f6c1f4e02a7d6aef"
+  dependencies:
+    source-map "^0.5.6"
+
 source-map-support@^0.2.10, source-map-support@~0.2.8:
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.2.10.tgz#ea5a3900a1c1cb25096a0ae8cc5c2b4b10ded3dc"
   dependencies:
     source-map "0.1.32"
-
-source-map-support@^0.4.0, source-map-support@^0.4.14, source-map-support@^0.4.2:
-  version "0.4.14"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.14.tgz#9d4463772598b86271b4f523f6c1f4e02a7d6aef"
-  dependencies:
-    source-map "^0.5.6"
 
 source-map@0.1.32:
   version "0.1.32"

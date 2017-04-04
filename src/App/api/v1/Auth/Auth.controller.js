@@ -60,7 +60,7 @@ export default (ctx) => {
     }
   };
   controller.vkAuth = ctx.passport.authenticate('vkontakte',
-    { scope: ctx.config.auth.socials.vkontakte.scope },
+    { scope: ctx.config.auth && ctx.config.auth.socials && ctx.config.auth.socials.vkontakte && ctx.config.auth.socials.vkontakte.scope },
   );
 
   controller.youtubeAuth = ctx.passport.authenticate('youtube');

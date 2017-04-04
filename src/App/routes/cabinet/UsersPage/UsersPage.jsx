@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardBlock, Button } from 'react-bootstrap';
+import { autobind } from 'core-decorators';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { observer } from 'mobx-react';
 import Link from 'lsk-general/General/Link';
 import moment from 'moment';
+import VisibilitySensor from 'react-visibility-sensor';
 
 @observer
 export default class UsersPage extends Component {
@@ -12,18 +14,43 @@ export default class UsersPage extends Component {
     users: PropTypes.object.isRequired,
   }
 
-  nameFormatter(data, cell) {
-    return `<p>${cell[data]}</p>`;
+  nameFormatter(data) {
+    return data || '';
   }
 
-  nameDate(data, cell) {
-    return `<p>${moment(cell[data]).locale('ru').format('LL')}</p>`;
+  nameDate(data) {
+    return moment(data).locale('ru').format('LL');
   }
 
   addButton(data) {
     return (
-      <Link href={`/cabinet/user/${data}`}>Перейти</Link>
+      <Button
+        componentClass={Link}
+        bsSize="sm"
+        href={`/cabinet/user/${data}`}
+      >
+        Перейти
+      </Button>
     );
+  }
+
+  avatarFormatter(data) {
+    return (
+      `<img
+        width="40"
+        height="40"
+        src="${data}"
+        style="border-radius: 50%"
+      />`
+    );
+  }
+
+  @autobind
+  async handleMoreUsers(isVisible) {
+    console.log('isVisible', isVisible);
+    if (isVisible) {
+      await this.props.users.fetchUsers(5);
+    }
   }
 
   render() {
@@ -31,17 +58,74 @@ export default class UsersPage extends Component {
     return (
       <Card>
         <CardBlock>
-          <BootstrapTable data={users.list} bordered={false}>
-            <TableHeaderColumn isKey dataField="_id" hidden>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField="username">Юзернейм</TableHeaderColumn>
-            <TableHeaderColumn dataField="profile" dataFormat={this.nameFormatter.bind(this, 'firstName')}>Имя</TableHeaderColumn>
-            <TableHeaderColumn dataField="profile" dataFormat={this.nameFormatter.bind(this, 'lastName')}>Фамилия</TableHeaderColumn>
-            <TableHeaderColumn dataField="profile" dataFormat={this.nameFormatter.bind(this, 'middleName')}>Отчество</TableHeaderColumn>
-            <TableHeaderColumn dataField="createdAt" filterFormatted dataFormat={this.nameDate}>Зарегистрирован</TableHeaderColumn>
-            <TableHeaderColumn dataField="updatedAt" filterFormatted dataFormat={this.nameDate}>Последнее изменение</TableHeaderColumn>
-            <TableHeaderColumn dataField="visitedAt" filterFormatted dataFormat={this.nameDate}>Последнее посещение</TableHeaderColumn>
-            <TableHeaderColumn dataField="_id" filterFormatted dataFormat={this.addButton}>Действие</TableHeaderColumn>
+          <BootstrapTable
+            hover
+            bordered={false}
+            data={users.list}
+            trClassName="centered-table"
+          >
+            <TableHeaderColumn
+              isKey
+              hidden
+              dataField="_id"
+            />
+            <TableHeaderColumn
+              filterFormatted
+              dataField="avatar"
+              dataFormat={this.avatarFormatter}
+            />
+            <TableHeaderColumn
+              dataField="username"
+              filter={{
+                type: 'TextFilter',
+                delay: 0,
+                placeholder: 'Поиск по Юзернейму',
+              }}
+            >
+              Юзернейм
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              filterFormatted
+              dataField="fullName"
+              dataFormat={this.nameFormatter}
+            >
+              ФИО
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataSort
+              filterFormatted
+              dataField="createdAt"
+              dataFormat={this.nameDate}
+            >
+              Регистрация
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataSort
+              filterFormatted
+              dataField="updatedAt"
+              dataFormat={this.nameDate}
+            >
+              Изменение
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              dataSort
+              filterFormatted
+              dataField="visitedAt"
+              dataFormat={this.nameDate}
+            >
+              Посещение
+            </TableHeaderColumn>
+            <TableHeaderColumn
+              filterFormatted
+              dataField="_id"
+              dataFormat={this.addButton}
+            />
           </BootstrapTable>
+          <VisibilitySensor
+            onChange={this.handleMoreUsers}
+            intervalCheck={false}
+            scrollCheck
+          />
         </CardBlock>
       </Card>
     );

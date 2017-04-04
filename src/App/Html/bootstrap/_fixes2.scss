@@ -7,3 +7,32 @@
   background-color: #222d32;
   color: white;
 }
+
+.centered-table {
+  > td {
+    vertical-align: middle !important;
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.react-bs-container-header {
+  border-bottom: 2px solid #dce4ec;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  > table {
+    margin-bottom: 0 !important;
+  }
+  th {
+    vertical-align: top !important;
+  }
+  .filter {
+    margin-top: 5px;
+    height: auto;
+    padding: 6px 9px;
+    font-size: 13px;
+    line-height: 1;
+    border-radius: 3px;
+  }
+}

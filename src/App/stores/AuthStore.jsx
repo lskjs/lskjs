@@ -1,5 +1,5 @@
-import { computed, action } from 'mobx';
-import cookie from 'react-cookie';
+import { action } from 'mobx';
+import cookie from 'js-cookie';
 
 export default class AuthStore {
 
@@ -13,26 +13,17 @@ export default class AuthStore {
   }
 
   authenticate() {
-    if (__CLIENT__) return this.authOnClient();
-    if (__SERVER__) return this.authOnServer();
-    return null;
-  }
-
-  authOnServer() {
-    if (!this.isErrorJWT && this.isToken && this.isUser) {
-      this.setToken(this.data.state.token);
-      this.updateUser(this.data.state.user);
-    } else {
-      this.logout();
+    if (__CLIENT__) {
+      if (this.isToken && this.isUser) {
+        this.setToken(cookie.get('token'));
+        this.updateUser(this.data.state.user);
+      }
     }
-  }
-
-  authOnClient() {
-    if (this.isToken && this.isUser) {
-      this.setToken(cookie.load('token'));
-      this.updateUser(this.data.state.user);
-    } else {
-      this.logout();
+    if (__SERVER__) {
+      if (!this.isErrorJWT && this.isToken && this.isUser) {
+        this.setToken(this.data.state.token);
+        this.updateUser(this.data.state.user);
+    }
     }
   }
 
@@ -45,30 +36,29 @@ export default class AuthStore {
     return false;
   }
 
-  async checkAuthData() {
-    if (!this.isToken || !this.isUser) {
-      await this.logout();
-      return false;
-    }
-    return true;
-  }
-
   async logout() {
     await this.unsetToken();
     this.updateUser();
   }
 
-  async unsetToken() {
-    await this.store.api.setAuthToken(null);
+  updateUser(data = null) {
+    this.data.state.user = data;
+    if (this.store.user) {
+      this.store.user.update(data);
+    }
+  }
+
+  unsetToken() {
+    if (__CLIENT__) cookie.remove('token');
+    this.store.api.setAuthToken(null);
     this.data.state.token = null;
-    cookie.remove('token', { path: '/' });
     this.token = null;
   }
 
-  async setToken(token) {
+  setToken(token) {
+    if (__CLIENT__) cookie.set('token', token);
     this.store.api.setAuthToken(token);
     this.data.state.token = token;
-    cookie.save('token', token, { path: '/' });
     this.token = token;
   }
 
@@ -76,8 +66,8 @@ export default class AuthStore {
     this.store.log.info('[Y] promise', this.promise);
     const res = await this.promise;
     this.store.log.info('[Y] response', res);
-    await this.setToken(res.token);
-    await this.updateUser(res.user);
+    this.setToken(res.token);
+    this.updateUser(res.user);
     return res;
   }
 
@@ -103,8 +93,7 @@ export default class AuthStore {
   @action
   async recovery(data) {
     this.promise = this.store.api.authRecovery(data);
-    const res = await this.promise;
-    this.store.ui.status(res.code);
+    await this.promise;
   }
 
   @action
@@ -129,26 +118,19 @@ export default class AuthStore {
     }
   }
 
-  async updateUser(data = null) {
-    this.data.state.user = data;
-    if (this.store.user) {
-      this.store.user.update(data);
-    }
-  }
-
-  @computed get isAuth() {
+  get isAuth() {
     return !!this.store.user._id;
   }
 
-  @computed get isErrorJWT() {
+  get isErrorJWT() {
     return this.data.req._errJwt;
   }
 
-  @computed get isToken() {
-    return !!this.data.state.token || !!cookie.load('token');
+  get isToken() {
+    return !!this.data.state.token || !!cookie.get('token');
   }
 
-  @computed get isUser() {
+  get isUser() {
     return this.data.state.user && this.data.state.user._id;
   }
 
