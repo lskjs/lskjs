@@ -115,24 +115,6 @@ export default class ProfilePage extends Component {
                     <span style={{ display: !status ? 'block' : 'none' }}>
                       Сохранить
                     </span>
-                    <If condition={status}>
-                      <div
-                        className={cx({
-                          'button-icon-status': true,
-                          spin: status === 'wait',
-                        })}
-                      >
-                        <If condition={status === 'wait'}>
-                          <Loading />
-                        </If>
-                        <If condition={status === 'ok'}>
-                          <Check />
-                        </If>
-                        <If condition={status === 'error'}>
-                          <Error />
-                        </If>
-                      </div>
-                    </If>
                   </Button>
                 )}
               />

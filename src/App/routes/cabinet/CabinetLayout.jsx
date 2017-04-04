@@ -103,6 +103,11 @@ export default class CabinetLayout extends Component {
         title: 'Пользователи',
         url: '/cabinet/users',
       },
+      {
+        icon: <Users />,
+        title: 'Комментарии',
+        url: '/cabinet/comments',
+      },
       // {
       //   icon: <DashboardIcon />,
       //   title: 'Профиль',

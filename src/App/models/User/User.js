@@ -21,6 +21,18 @@ export function getSchema(ctx) {
     ],
   });
 
+  schema.methods.updateSocialData = async function () {
+    const passport = await ctx.models.Passport.findOne({
+      provider: 'youtube',
+      user: this._id,
+    });
+    console.log(passport);
+    if (passport) {
+      return passport.updateUser();
+    }
+    return null;
+  };
+
   schema.virtual('online').get(() => {
     return false;
   });
