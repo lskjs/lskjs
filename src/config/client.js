@@ -12,9 +12,16 @@ export default config.extend({
 
   url: 'http://localhost:3000',
   api: {
+    url: 'http://localhost:8080',
     base: '/api/v1',
+    ws: {
+      url: 'http://localhost:8080',
+      base: '/api',
+      options: {
+        transports: ['websocket'],
+      },
+    },
   },
-  host: 'http://localhost:3000', // depreacated
 
   auth: {
     profile: {

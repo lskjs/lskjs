@@ -14,7 +14,7 @@ export default class AppStore {
     this._app = app;
     this.config = state.config;
     this.rootState = state;
-    this.api = new ApiClient({ base: state.config.api.base });
+    this.api = new ApiClient(state.config.api);
     this.auth = new AuthStore(this, { state, req });
     this.user = new UserStore(this, state.user);
     this.init();
