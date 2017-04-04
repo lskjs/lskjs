@@ -24,29 +24,14 @@ export default (ctx) => {
     async getExtraData({ accessToken, refreshToken, profile }) {
       return {};
     }
-    async createPassport({ accessToken, refreshToken, profile, extraData = {}, providerId }) {
-      // console.log('GET EMAIL');
-      // await this.getEmail({ accessToken });
-      // console.log('GET PROFILE');
-      // await this.getProfile({ accessToken, providerId });
-      // console.log('GET STATISTICS');
-      // await this.getStatics({ accessToken, providerId });
-      // console.log('GET VIDEOS');
-      // await this.getAllVideos({ accessToken, providerId });
-      // console.log('GET LAST VIDEO');
-      // await this.getLastVideo({ accessToken, providerId });
-      // console.log('GET ANALYTICS');
-      // await this.getAnalytics({ accessToken, providerId });
-      // await this.getAnalyticsForVideos({ accessToken, providerId });
-      const data = {
+    async getPassportData({ providerId, accessToken, extraData = {} }) {
+      return {
         provider: this.providerName,
         providerId,
         raw: extraData,
         token: accessToken,
         profile: {
           email: await this.getEmail({ accessToken }),
-          firstName: profile.displayName,
-          avatar: _.get(profile, '_json.items[0].snippet.thumbnails.high.url'),
         },
         meta: {
           statics: await this.getStatics({ accessToken, providerId }),
@@ -56,7 +41,9 @@ export default (ctx) => {
           subscribers: await this.getSubscribers({ accessToken, providerId }),
         },
       };
-      // console.log(data);
+    }
+    async createPassport(params) {
+      const data = this.getPassportData(params);
       const passport = new Passport(data);
       return passport.save();
     }

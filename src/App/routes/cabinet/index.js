@@ -6,6 +6,7 @@ import UsersPage from './UsersPage';
 import SettingsPage from './SettingsPage';
 import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
+import Comments from './Comments';
 
 export default {
   async action({ next, page, appStore }) {
@@ -26,6 +27,16 @@ export default {
       async action({ page }) {
         return page
           .component(DashboardPage, {});
+      },
+    },
+    {
+      path: '/comments',
+      async action({ page }) {
+        if (__CLIENT__) {
+          return page
+            .component(Comments, {});
+        }
+        return {};
       },
     },
     {

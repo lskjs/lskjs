@@ -59,9 +59,14 @@ export default (ctx) => {
       console.error(err, 'ERROR!');
     }
   };
-  controller.vkAuth = ctx.passport.authenticate('vkontakte',
-    { scope: ctx.config.auth && ctx.config.auth.socials && ctx.config.auth.socials.vkontakte && ctx.config.auth.socials.vkontakte.scope },
-  );
+  try {
+    controller.vkAuth = ctx.passport.authenticate('vkontakte',
+      { scope: ctx.config.auth.socials.vkontakte.scope },
+    );
+  } catch (err) {
+    console.log('VK is disable');
+  }
+
 
   controller.youtubeAuth = ctx.passport.authenticate('youtube');
   return controller;

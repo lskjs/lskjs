@@ -8,6 +8,7 @@ export default (ctx, params) => {
   api.all('/length', resource.length);
   api.all('/get', resource.get);
   api.all('/edit', resource.edit);
+  api.all('/update', controller.update);
 
   return api;
 };
