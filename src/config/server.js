@@ -28,6 +28,7 @@ export default config.extend({
       from: '"example" <example@gmail.com>',
     },
   },
+  sockets: {},
   upload: {
     // @TODO: @andruxa externalPath (absolute)
     path: 'storage',

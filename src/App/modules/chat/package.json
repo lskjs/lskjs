@@ -1,3 +1,4 @@
 {
-  "main": "chat.js"
+  "main": "chat.server.js",
+  "browser": "chat.client.js"
 }

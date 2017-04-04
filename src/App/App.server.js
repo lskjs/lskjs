@@ -16,7 +16,7 @@ export default class App extends ReactApp {
   }
 
   init() {
-    super.init();
+    super.init();   
     this.passport = passport;
     const strategies = require('./strategies').default(this) || {};
     if (this.config.auth && this.config.auth.socials) {

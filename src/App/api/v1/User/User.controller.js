@@ -59,5 +59,10 @@ export default (ctx) => {
     // }
   };
 
+  controller.update = async (req) => {
+    const user = await User.findById(req.user._id);
+    return user.updateSocialData();
+  };
+
   return controller;
 };

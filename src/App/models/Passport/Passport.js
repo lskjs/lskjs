@@ -40,6 +40,9 @@ export function getSchema(ctx) {
     token: {
       type: String,
     },
+    meta: {
+      type: Object,
+    },
     // статус пасспорта: валиден или нет
     // пока не используется
     status: {
@@ -49,6 +52,17 @@ export function getSchema(ctx) {
   }, {
     timestamps: true,
   });
+
+  schema.methods.updateUser = async () => {
+    const { User } = ctx.models;
+    const user = await User.findById(this.user);
+    if (!user) return null;
+    const strategy = ctx.strategies[this.provider];
+    if (!strategy) return null;
+    const data = await strategy.getPassportData();
+    _.merge(user, data);
+    return user.save();
+  };
   schema.methods.generateUsername = async function () {
     const { User } = ctx.models;
     let username = `${this.providerId}_${this.provider}.com`;
