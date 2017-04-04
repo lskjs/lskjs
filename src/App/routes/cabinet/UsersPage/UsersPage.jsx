@@ -7,11 +7,20 @@ import Link from 'lsk-general/General/Link';
 import moment from 'moment';
 import VisibilitySensor from 'react-visibility-sensor';
 
+import Refresh from 'react-icons/lib/fa/refresh';
+
 @observer
 export default class UsersPage extends Component {
 
   static propTypes = {
     users: PropTypes.object.isRequired,
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      loading: false,
+    };
   }
 
   nameFormatter(data) {
@@ -47,13 +56,15 @@ export default class UsersPage extends Component {
 
   @autobind
   async handleMoreUsers(isVisible) {
-    console.log('isVisible', isVisible);
     if (isVisible) {
+      this.setState({ loading: true });
       await this.props.users.fetchUsers(5);
+      this.setState({ loading: false });
     }
   }
 
   render() {
+    const { loading } = this.state;
     const { users } = this.props;
     return (
       <Card>
@@ -126,6 +137,12 @@ export default class UsersPage extends Component {
             intervalCheck={false}
             scrollCheck
           />
+          <If condition={loading}>
+            <div className="loading-block">
+              <Refresh />
+              <span>Загрузка пользователей...</span>
+            </div>
+          </If>
         </CardBlock>
       </Card>
     );

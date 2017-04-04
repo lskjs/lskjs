@@ -35,7 +35,7 @@ export default ctx => (
 
     async fetchUsers(limit = 0, offset = this.list.length) {
       if (offset !== 0 && this.previousOffset === offset) {
-        ctx.log.info('offset is loaded');
+        ctx.log.info('Users with current offset already loaded');
         return false;
       }
       this.previousOffset = offset;
