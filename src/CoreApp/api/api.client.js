@@ -1,6 +1,7 @@
-import ApiClientBase from './ApiClientBase';
+import ApiClientBase from '../../utils/ApiClient';
 
 export default class ApiClient extends ApiClientBase {
+
   authLogin(data) {
     return this.fetch('auth/login', {
       method: 'POST',

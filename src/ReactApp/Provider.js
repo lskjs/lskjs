@@ -1,36 +1,41 @@
-// import UserStore from './stores/UserStore';
-// import ProfileStore from './stores/ProfileStore';
-// import ApiClient from './api/api.client';
 
-class Provider {
-  // user = null;
-  // api = null;
-  static v = 1;
+export default class Provider {
+  static v = 2;
   constructor(props = {}) {
-    // const token = props.token || (props.user && props.user.token)
-    // // console.log('AppStore constructor token', token);
-    // this.api = new ApiClient({ base: '/api/v1' });
-    // if (token) {
-    //   this.api.setAuthToken(token)
-    // }
-    // const userData = {
-    //   token: props.token,
-    //   user: props.user,
-    // }
-    // this.user = new UserStore(this, userData);
-    // this.profile = new ProfileStore(this);
-    // this.app = this;
-    // if (__CLIENT__) {
-    //   global.api = this.api
-    // }
+    Object.assign(this, props);
+    this.log = this.getLogger();
+  }
+
+  getLogger(params) {
+    if (this.app.log) {
+      return this.app.log;
+    }
+    console.error('bunyan log not found');
+    return {
+      info: (...args) => { console.log('[LOGGER]', ...args); },
+      error: (...args) => { console.error('[ERROR]', ...args); },
+    };
+  }
+
+  initV2(props = {}) {
+    Object.assign(this, props);
+    if (!this.page) {
+      this.page = new this.Page({}, { uapp: this });
+    } else {
+      // @TODO:  update page
+    }
+    return {
+      uapp: this,
+      page: this.page,
+      Page: this.Page,
+    };
   }
 
   provide() {
     return {
-      asd: 123,
+      uapp: this,
+      log: this.log,
+      config: this.config,
     };
   }
-
 }
-
-export default Provider;

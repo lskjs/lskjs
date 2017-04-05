@@ -1,5 +1,6 @@
 export default () => {
   return function (socket, next) {
+    // console.log('socket.middleware reqData');
     const { query } = socket.handshake;
     const req = socket.request;
     if (!req.query) {

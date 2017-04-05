@@ -9,28 +9,27 @@ import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
 import staticFileMiddleware from 'connect-static-file';
 
-const DEBUG = 0;
 export default class CoreApp extends ExpressApp {
   init() {
     super.init(...arguments);
     this.log.trace('CoreApp init');
     this.db = this.getDatabase();
     this.requests = this.getRequests();
-    this.log.trace('requests', Object.keys(this.requests));
+    this.log.debug('requests', Object.keys(this.requests));
     this.responses = this.getResponses();
-    this.log.trace('responses', Object.keys(this.responses));
+    this.log.debug('responses', Object.keys(this.responses));
     this.errors = this.getErrors();
-    this.log.trace('errors', Object.keys(this.errors));
+    this.log.debug('errors', Object.keys(this.errors));
     this.middlewares = this.getMiddlewares();
-    this.log.trace('middlewares', Object.keys(this.middlewares));
+    this.log.debug('middlewares', Object.keys(this.middlewares));
     this.models = this.getModels();
-    this.log.trace('models', Object.keys(this.models));
+    this.log.debug('models', Object.keys(this.models));
     this.resourses = this.getResourses();
-    this.log.trace('resourses', Object.keys(this.resourses));
+    this.log.debug('resourses', Object.keys(this.resourses));
     this.helpers = this.getHelpers();
-    this.log.trace('helpers', Object.keys(this.helpers));
+    this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
-    this.log.trace('statics', this.statics);
+    this.log.debug('statics', this.statics);
   }
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line
@@ -110,39 +109,29 @@ export default class CoreApp extends ExpressApp {
 
   createExpressApp() {
     const app = super.createExpressApp();
-    this.config.sockets && this.useSockets(app);
+    if (!this.config.ws) return app;
+    this.ws = createSockets(this);
+    this.ws.wrapExpress(app);
     return app;
   }
 
-  async useSockets(app) {
-    if (!this.config.sockets) return;
-    this.log.trace('CoreApp.useSockets');
-    this.io = createSockets(this);
-    app.ws = (route, callback) => {
-      if (typeof callback !== 'function') throw '!ws callback(namespace)';
-      const namespace = this.io.of(route);
-      this.io.atachMiddlwares(namespace);
-      callback(namespace);
-    };
-  }
-
-  async runSockets() {
-    if (!this.config.sockets) return;
-    this.io.serveClient(false);
-    this.io.attach(this.httpServer);
-    const transports = this.config.sockets.transports || ['websocket'];
-    this.io.set('transports', transports);
+  async runWs() {
+    if (!this.config.ws) return;
+    this.ws.serveClient(false);
+    this.ws.attach(this.httpServer);
+    const transports = this.config.ws.transports || ['websocket'];
+    this.ws.set('transports', transports);
   }
 
   useMiddlewares() {
-    DEBUG && this.log.trace('CoreApp.useMiddlewares');
+    this.log.trace('CoreApp.useMiddlewares');
     const middlewares = _.flattenDeep(this.getUsingMiddlewares());
     middlewares.forEach((middleware) => {
       middleware && typeof middleware === 'function' && this.app.use(middleware);
     });
   }
   useDefaultRoute() {
-    DEBUG && this.log.trace('CoreApp.useDefaultRoute');
+    this.log.trace('CoreApp.useDefaultRoute');
     // console.log('useDefaultRoute');
     this.app.use((req, res, next) => {
       const err = this.errors.e404('Route not found');
@@ -173,7 +162,7 @@ export default class CoreApp extends ExpressApp {
     await super.run(...args);
     this.log.trace('CoreApp.run');
     this.config.db && this.db && await this.runDb();
-    this.config.sockets && await this.runSockets();
+    this.config.ws && await this.runWs();
   }
 
 }

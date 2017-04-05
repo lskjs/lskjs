@@ -8,27 +8,38 @@ import sockets from 'socket.io';
 
 export default (ctx) => {
   try {
-    const io = sockets();
-    // console.log({io}, ctx.httpServer);
-    // io.serveClient(false);
-    // io.attach(ctx.httpServer);
-    io.middlewares = {
+    const ws = sockets();
+    ws.middlewares = {
       parseUser: parseUser(ctx),
       reqData: reqData(ctx),
       socketAsPromised: socketAsPromised(),
     };
-    io.usedMiddlewares = [
-      io.middlewares.parseUser,
-      io.middlewares.reqData,
-      io.middlewares.socketAsPromised,
+    ctx.log.debug('ws.middlewares', Object.keys(ws.middlewares));
+
+    ws.usedMiddlewares = [
+      ws.middlewares.parseUser,
+      ws.middlewares.reqData,
+      ws.middlewares.socketAsPromised,
     ];
-    io.atachMiddlwares = (namespace) => {
-      (io.usedMiddlewares).map((middleware) => {
+    ws.atachMiddlwares = (namespace) => {
+      (ws.usedMiddlewares).map((middleware) => {
         namespace.use(middleware);
       });
     };
-    return io;
+    ws.wrapExpress = (app) => {
+      app.ws = (route, callback) => {
+        // if (!ws) {
+        //   this.log.error('!this.ws');
+        //   return null;
+        // }
+        const namespace = ws.of(route);
+        ws.atachMiddlwares(namespace);
+        typeof callback === 'function' && ws.on('connection', callback);
+        return namespace;
+      };
+    };
+    return ws;
   } catch (err) {
-    console.log('err', err);
+    ctx.log.error('ws init', err);
   }
 };

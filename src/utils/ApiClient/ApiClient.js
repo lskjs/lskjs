@@ -1,5 +1,6 @@
 // import fetch from 'node-fetch';
 import _ from 'lodash';
+import io from 'socket.io-client';
 export function trim(initialStr, begin = true, end = true, symbol = '/') {
   if (initialStr == null) return initialStr;
   let str = initialStr;
@@ -21,21 +22,17 @@ function queryParams(params) {
 }
 
 
-// new ApiClientBase({
-//   base: '/api/v1',
-// })
-
 export default class ApiClient {
   constructor(params) {
-    this.base = trim(params.base, false);
+    // console.log('ApiClient', params);
+    this.base = params.base;
+    this.url = params.url;
+    this.wsConfig = params.ws;
     this.authToken = params.authToken || null;
   }
 
   setAuthToken(authToken) {
     this.authToken = authToken;
-  }
-
-  ws() {
   }
 
   // onError(err) {
@@ -71,18 +68,16 @@ export default class ApiClient {
   }
 
   createUrl(path, options = {}) {
-    // console.log('createUrl', path);
     if (path.substr(0, 5) === 'http:' || path.substr(0, 6) === 'https:') {
       return path;
     }
-    let url;
-    if (path[0] === '/') {
-      url = [this.url, path.substr(1)];
-    } else {
-      url = [this.url, this.base, path];
-    }
-    // console.log('url', url);
-    return url.map(a => a).join('/');
+    const url = options.url || this.url || '/';
+    const base = options.base || this.base;
+    const array = [url, path[0] === '/' ? null : trim(base), trim(path)];
+    return array
+      .map(a => trim(a))
+      .filter((a, i) => (i === 0 || a))
+      .join('/');
   }
 
 
@@ -113,7 +108,7 @@ export default class ApiClient {
   }
 
   fetch(...args) {
-    const throwError = args[1].throwError || this.throwError;
+    const throwError = args[1] && args[1].throwError || this.throwError;
     return this.getFetch(...args)
     .then(async (res) => {
       let text;
@@ -148,7 +143,18 @@ export default class ApiClient {
   }
 
 
-  ws(path, options) {
+  ws(path = '', options = {}) {
+    if (__SERVER__) return null;
+    if (!this.wsConfig) return null;
+    const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
 
+    // console.log(opts.query, opts.query.token, this.authToken);
+    if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
+    // console.log(opts.query, opts.query.token, this.authToken);
+
+    return io(
+      this.createUrl(path, this.wsConfig),
+      opts,
+    );
   }
 }

@@ -10,7 +10,10 @@
     "document": true,
     "window": true,
     "screen": true,
-    "If": true
+    "If": true,
+    "expect": true,
+    "test": true,
+    "describe": true
   },
   "parserOptions": {
     "ecmaFeatures": {

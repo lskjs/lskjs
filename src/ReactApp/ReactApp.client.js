@@ -12,7 +12,7 @@ import routes from './routes';
 import Html from './Html';
 import Provider from './Provider';
 import _ from 'lodash';
-var bunyan = require('browser-bunyan');
+const bunyan = require('browser-bunyan');
 
 const LOGGING = false;
 
@@ -21,11 +21,17 @@ export default class ReactApp {
   static mixin = mixin;
   constructor(params = {}) {
     Object.assign(this, params);
+    this.log = this.getLogger();
+  }
 
-    this.log = bunyan.createLogger({
-      name: 'appClient',
-      src: true,
-    });
+
+  getLogger(params) {
+    const options = Object.assign({
+      name: 'client',
+      src: __DEV__,
+      level: 'trace',
+    }, this.config && this.config.log || {});
+    return bunyan.createLogger(options, params);
   }
 
   static Html = Html;
@@ -137,10 +143,17 @@ export default class ReactApp {
     }
   }
 
+  getRootState() {
+    return window.__ROOT_STATE__ || {};
+  }
+
   @autobind
   init() {
-    this.rootState = window.__ROOT_STATE__ || {};
-    this.config = _.merge({}, this.config, this.rootState.config || {}) || {};
+    this.rootState = this.getRootState();
+    // console.log('this.config 11', this.config);
+    this.config = _.merge({}, this.config || {}, this.rootState && this.rootState.config || {});
+    console.log('this.config @', this.config);
+    this.rootState.config = null;
     FastClick.attach(document.body);
     this.container = document.getElementById('root');
     if (window.history && 'scrollRestoration' in window.history) {

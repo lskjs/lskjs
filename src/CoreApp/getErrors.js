@@ -1,4 +1,4 @@
-import AppError from './AppError';
+import AppError from '../utils/AppError';
 
 export default (ctx) => {
   return {

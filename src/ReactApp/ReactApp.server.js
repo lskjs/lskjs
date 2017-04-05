@@ -41,8 +41,9 @@ export default class ReactApp extends CoreApp {
   // Synonims
 
   getReqRootState(req) {
-    const config = this.config.client;
+    const config = this.config.remoteConfig && this.config.client || {};
     return {
+      reqId: req.reqId,
       token: req.token,
       user: req.user,
       config,
@@ -54,7 +55,7 @@ export default class ReactApp extends CoreApp {
     const params = {
       rootState,
       req,
-      config: this.config,
+      config: this.config.client,
       app: this,
     }
     if (this.Provider.v === 2) {
