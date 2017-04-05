@@ -45,12 +45,14 @@ export default (ctx) => {
     const params = req.allParams();
     try {
       return new Promise((resolve) => {
-        return (ctx.passport.authenticate(params.provider, {}, (err, data) => {
+        return (ctx.passport.authenticate(params.provider, {}, async (err, data) => {
           if (err) {
             return resolve({ err });
           }
           if (data.passport) {
-            const { passport } = data;
+            const { passport, accessToken } = data;
+            passport.token = accessToken;
+            await passport.save();
             return resolve(res.redirect(`${ctx.config.url}/auth/passport?p=${passport.generateToken()}`));
           }
         }))(req);

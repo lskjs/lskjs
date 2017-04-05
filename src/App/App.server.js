@@ -19,12 +19,15 @@ export default class App extends ReactApp {
   init() {
     super.init();
     this.passport = passport;
+    const strategies = require('./strategies').default(this) || {};
     if (this.config.auth && this.config.auth.socials) {
-      const strategies = require('./strategies').default(this) || {};
-      this.strategies = _.map(strategies, (Strategy, name) => {
+      this.strategies = {};
+      _.map(strategies, (Strategy, name) => {
         if (!this.config.auth.socials[name]) return null;
         return new Strategy();
-      }).filter(s => s);
+      }).filter(s => s).map((strategy) => {
+        this.strategies[strategy.providerName] = strategy;
+      });
     }
   }
 

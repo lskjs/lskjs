@@ -18,7 +18,6 @@ export default (ctx) => {
           'https://www.googleapis.com/auth/youtube.readonly',
         ];
       }
-      // console.log(config);
       return config;
     }
     async getExtraData({ accessToken, refreshToken, profile }) {
