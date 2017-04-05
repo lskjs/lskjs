@@ -32,11 +32,12 @@ export default {
     {
       path: '/comments',
       async action({ page }) {
-        if (__CLIENT__) {
-          return page
-            .component(Comments, {});
-        }
-        return {};
+        return page
+          .meta({
+            title: 'Комментарии',
+            url: '/cabinet/comments',
+          })
+          .component(Comments, {});
       },
     },
     {

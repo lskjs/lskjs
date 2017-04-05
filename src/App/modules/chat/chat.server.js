@@ -73,6 +73,7 @@ export default (ctx) => {
 
     @autobind
     onSocket(socket) {
+      console.log('onSocket');
       const { Message } = this.models;
 
       console.log('socket.user', socket.user);

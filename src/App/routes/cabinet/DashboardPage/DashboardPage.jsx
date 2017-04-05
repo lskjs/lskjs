@@ -9,6 +9,7 @@ import css from 'importcss';
 
 import Male from 'react-icons/lib/fa/male';
 import Female from 'react-icons/lib/fa/female';
+// import Female from '~/utils/formatter';
 
 export function formatter(value) {
   const arr = [];

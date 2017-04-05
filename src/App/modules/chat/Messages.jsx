@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject } from 'mobx-react';
+import { autobind } from 'core-decorators';
 import _ from 'lodash';
 import {
   Card,
@@ -8,7 +9,7 @@ import {
 } from 'react-bootstrap';
 
 @inject('user', 'api')
-export default class Chat extends Component {
+export default class Messages extends Component {
   constructor() {
     super();
     this.state = {};
@@ -19,47 +20,47 @@ export default class Chat extends Component {
       query: { subjectType, subjectId },
     });
     this.socket.on('message', async (message) => {
+      console.log('message@@!!');
       const { messages } = this.state;
       messages.push(message);
       this.setState({ messages });
     });
-
-    const res = await this.getLastMessages();
-    this.setState({ messages: res.data || [] });
+    const messages = await this.getLastMessages();
+    this.setState({ messages });
   }
   componentWillUnmount() {
     this.socket && this.socket.disconnect();
   }
 
   async getLastMessages() {
-    return this.props.api.fetch(`/api/module/message/${this.props.subjectType}/${this.props.subjectId}`);
+    const res = await this.props.api.fetch(`/api/module/message/${this.props.subjectType}/${this.props.subjectId}`);
+    return res.data || [];
   }
-  handleOnKeyPress() {
-    return (e) => {
-      const { key } = e;
-      const { value } = e.target;
-      if (key === 'Enter') {
-        const { text } = this.state;
-        if (!text || text.length === 0) return;
-        // this.socket.emit('message', { content: text });
-        this.props.api.fetch('/api/module/message', {
-          method: 'POST',
-          body: {
-            content: text,
-            subjectType: this.props.subjectType,
-            subjectId: this.props.subjectId,
-          },
-        });
-        this.setState({ text: '' });
-      }
-    };
+
+  @autobind
+  handleOnKeyPress(e) {
+    const { key } = e;
+    if (key !== 'Enter') return false;
+    const { text } = this.state;
+    if (!text || text.length === 0) return;
+      // this.socket.emit('message', { content: text });
+    this.props.api.fetch('/api/module/message', {
+      method: 'POST',
+      body: {
+        content: text,
+        subjectType: this.props.subjectType,
+        subjectId: this.props.subjectId,
+      },
+    });
+    this.setState({ text: '' });
   }
-  handleOnChange() {
-    return (e) => {
-      const { value } = e.target;
-      this.setState({ text: value });
-    };
+
+  @autobind
+  handleOnChange(e) {
+    const { value } = e.target;
+    this.setState({ text: value });
   }
+
   render() {
     return (
       <div>
@@ -86,8 +87,8 @@ export default class Chat extends Component {
             <CardBlock>
               <FormControl
                 value={this.state.text}
-                onKeyPress={this.handleOnKeyPress()}
-                onChange={this.handleOnChange()}
+                onKeyPress={this.handleOnKeyPress}
+                onChange={this.handleOnChange}
               />
             </CardBlock>
           </Card>

@@ -3,16 +3,15 @@ import {
   Card,
   CardBlock,
 } from 'react-bootstrap';
-import Comments from '~/App/modules/chat';
-
+import Messages from '~/App/modules/chat/Messages';
 
 export default class CommentsPage extends Component {
   render() {
     return (
       <Card>
         <CardBlock>
-          Здесь будет чат
-          <Comments subjectType="Chat" subjectId="test" />
+          Здесь будет ПОСТ, и коментарии под ним
+          <Messages subjectType="Chat" subjectId="test" />
         </CardBlock>
       </Card>
     );
