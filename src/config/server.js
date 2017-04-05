@@ -1,7 +1,7 @@
 import config from 'lego-starter-kit/config/server';
 export default config.extend({
   client: require('./client').default, // eslint-disable-line
-
+  remoteConfig: true,
   port: process.env.PORT || 8080,
   url: process.env.URL || 'http://localhost:3000',
 
@@ -12,7 +12,7 @@ export default config.extend({
     secret: 'REPLACE_ME_PLEASE',
   },
   auth: {
-    socials: require('./socials.js').default,
+    socials: require('./socials.js'),
   },
   mailer: {
     transport: {
@@ -28,7 +28,7 @@ export default config.extend({
       from: '"example" <example@gmail.com>',
     },
   },
-  sockets: {},
+  ws: {},
   upload: {
     // @TODO: @andruxa externalPath (absolute)
     path: 'storage',

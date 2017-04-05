@@ -13,7 +13,7 @@ import Form from 'lsk-general/General/Form';
 import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
 
-@inject('user', 'auth')
+@inject('user')
 @observer
 export default class ProfilePage extends Component {
   static propTypes = {
@@ -25,9 +25,8 @@ export default class ProfilePage extends Component {
     await this.props.user.editUser(data);
   }
   render() {
-    const { user, auth } = this.props;
+    const { user } = this.props;
     const status = null;
-    if (!auth.isAuth) return false;
     const fields = [
       {
         name: 'username',

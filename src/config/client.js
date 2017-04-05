@@ -9,10 +9,11 @@ export default config.extend({
       video: 'https://skill-branch.ru/video-background.webm',
     },
   },
-
+  log: {
+    level: 'trace',
+  },
   url: 'http://localhost:3000',
   api: {
-    url: 'http://localhost:8080',
     base: '/api/v1',
     ws: {
       url: 'http://localhost:8080',

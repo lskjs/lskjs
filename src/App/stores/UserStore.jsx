@@ -8,16 +8,19 @@ const sample = {
 
 export default class UserStore {
 
-  constructor(store, user) {
-    this.store = store;
+  constructor({ api, log }) {
+    this.api = api;
+    this.log = log;
     this.reset();
-    if (user) {
-      this.update(user);
-      store.auth.init(user);
-    }
+    // if (user) {
+    //   this.update(user);
+    //   // __CLIENT__ && store.auth.init(user);
+    // }
   }
 
+  @action
   update(user) {
+    this.log.trace('UserStore.update', user);
     // this.store.log.info('incoming user', user);
     if (!user) return this.reset();
     for (const item in user) {
@@ -26,7 +29,9 @@ export default class UserStore {
     return true;
   }
 
+  @action
   reset() {
+    this.log.trace('UserStore.reset');
     extendObservable(this, {
       _id: undefined,
       role: undefined,
@@ -48,7 +53,7 @@ export default class UserStore {
   @action
   async editUser(data) {
     const backup = clone(this.toJS);
-    const res = await this.store.api.userEdit(data);
+    const res = await this.api.userEdit(data);
     this.update(res.data);
     if (res.message !== 'ok') {
       this.update(backup);
@@ -56,15 +61,12 @@ export default class UserStore {
   }
 
   @action
-  async editPassword(password) {
-    this.store.ui.status('wait');
-    const res = await this.store.api.userEdit({ password });
-    this.store.ui.status(res.code);
-    return res;
+  editPassword(password) {
+    return this.api.userEdit({ password });
   }
 
   @computed get avatar() {
-    // console.log('get avatar', this.profile && this.profile.avatar );
+    // this.log.trace('get avatar', this.profile && this.profile.avatar );
     return this.profile && this.profile.avatar || sample.avatar;
   }
 

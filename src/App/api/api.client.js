@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export default class ApiClient extends ApiClientBase {
   throwError({ err }) {
-    console.log('throwError', err);
+    console.error('throwError', err);
     const message = err && err.message || err;
     const error = new Error(_.isPlainObject(message) ? JSON.stringify(message) : message);
 
@@ -17,7 +17,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async getUser(body) {
-    const res = await this.fetch('/user/get', {
+    const res = await this.fetch('user/get', {
       method: 'POST',
       body,
     });
@@ -25,7 +25,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async userEdit(body) {
-    const res = await this.fetch('/user/edit', {
+    const res = await this.fetch('user/edit', {
       method: 'POST',
       body,
     });
@@ -33,7 +33,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async authSignupPassport(data) {
-    const res = await this.fetch('/auth/social/signup', {
+    const res = await this.fetch('auth/social/signup', {
       method: 'POST',
       body: data,
     });
@@ -41,53 +41,15 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async authLoginPassport(data) {
-    const res = await this.fetch('/auth/social/login', {
+    const res = await this.fetch('auth/social/login', {
       method: 'POST',
       body: data,
-    })
-    return res.data
-  }
-
-  async signupSocial(data) {
-    let url = `/auth/${data.provider}/signup?`;
-    if (data) {
-      const keys = Object.keys(data);
-      keys.map((key) => {
-        url += `${key}=`;
-        url += data[key];
-        url += '&';
-      });
-    }
-    return this.fetch(url, {
-      method: 'GET',
     });
-  }
-
-  async loginSocial(data) {
-    let url = `/auth/${data.provider}/login?`;
-    if (data) {
-      const keys = Object.keys(data);
-      keys.map((key) => {
-        url += `${key}=`;
-        url += data[key];
-        url += '&';
-      });
-    }
-    return this.fetch(url, {
-      method: 'GET',
-    });
-  }
-
-  async getPassportByToken(token) {
-    const url = `/passport?p=${token}`;
-    return this.fetch(url, {
-      method: 'GET',
-    });
+    return res.data;
   }
 
   async uploadImage(body) {
-    console.log(body);
-    const res = await this.fetch('/upload', {
+    const res = await this.fetch('upload', {
       method: 'POST',
       headers: {
         'Content-Type': '!',

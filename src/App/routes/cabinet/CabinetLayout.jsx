@@ -229,7 +229,7 @@ export default class CabinetLayout extends Component {
           </PageContent>
         </PageWrapper>
         <FooterWrapper>
-          <div className="pull-right hidden-xs" dangerouslySetInnerHTML={{ __html: config.siteCopyright }} />
+          <div className="pull-right hidden-xs" dangerouslySetInnerHTML={{ __html: config.site.copyright }} />
         </FooterWrapper>
       </LayoutWrapper>
     );

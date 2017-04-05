@@ -4,9 +4,8 @@ import MainLayout from './MainLayout';
 export default {
   path: '/',
   async action({ next, uapp, page }) {
-    const config = uapp.rootState.config; // @TODO: потом сделать uapp.config
     return page
-    .meta(config.site || {})
+    .meta(uapp.config && uapp.config.site || {})
     .layout(MainLayout)
     .errorLayout(ErrorLayout)
     .next(next);

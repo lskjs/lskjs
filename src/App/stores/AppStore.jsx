@@ -4,35 +4,23 @@ import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 
 // Prototype of Uapp class
-export default class AppStore {
+import Provider from 'lego-starter-kit/ReactApp/Provider';
+export default class AppStore extends Provider {
 
   static v = 2;
 
   constructor(params) {
-    // Object.assing(this, params)
-    const { rootState: state, req = {}, app } = params;
-    this._app = app;
-    this.config = state.config;
-    this.rootState = state;
-    this.api = new ApiClient(state.config.api);
-    this.auth = new AuthStore(this, { state, req });
-    this.user = new UserStore(this, state.user);
-    this.init();
-  }
-
-  async init() {
+    super(params);
+    // console.log('AppStore.config', this.config);
+    this.api = new ApiClient(this.config && this.config.api || {});
+    this.user = new UserStore(this);
+    this.auth = new AuthStore(this);
     this.models = this.getModels();
     this.stores = this.getStores();
-    this.log = this.getLogger();
+
+    this.auth.authenticate(this.rootState)
   }
 
-  getLogger() {
-    // console.log('bunyan log', this._app.log)
-    return {
-      info: (...args) => { console.log('[LOGGER]', ...args); },
-      error: (...args) => { console.error('[ERROR]', ...args); },
-    };
-  }
 
   getStores() {
     return require('./stores').default(this); // eslint-disable-line
@@ -42,19 +30,13 @@ export default class AppStore {
     return require('./models').default(this); // eslint-disable-line
   }
 
-  setData({ page, uapp }) {
-    this.page = page;
-    this.uapp = uapp;
-  }
 
   provide() {
     return {
-      app: this,
-      log: this.log,
+      ...super.provide(),
       auth: this.auth,
       api: this.api,
       user: this.user,
-      config: this.config,
       page: this.page,
     };
   }

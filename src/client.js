@@ -4,6 +4,5 @@ import App from './App';
 import config from './config/client';
 wrap(require('react-bootstrap'));
 ready();
-const ctx = { config };
-const app = new App(ctx);
+const app = new App({ config });
 app.start();

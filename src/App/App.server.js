@@ -10,16 +10,17 @@ import getModules from './modules';
 export default class App extends ReactApp {
 
   getModels() {
-    const superModels = super.getModels();
-    const models = require('./models').default(this);
-    return Object.assign(superModels, models);
+    return {
+      ...super.getModels(),
+      ...require('./models').default(this),
+    };
   }
 
   init() {
-    super.init();   
+    super.init();
     this.passport = passport;
-    const strategies = require('./strategies').default(this) || {};
     if (this.config.auth && this.config.auth.socials) {
+      const strategies = require('./strategies').default(this) || {};
       this.strategies = _.map(strategies, (Strategy, name) => {
         if (!this.config.auth.socials[name]) return null;
         return new Strategy();
@@ -38,7 +39,7 @@ export default class App extends ReactApp {
   getStatics() {
     const statics = super.getStatics();
     if (__DEV__) {
-      statics['/storage'] = `${__dirname}/../storage`
+      statics['/storage'] = `${__dirname}/../storage`;
     }
     return statics;
   }
