@@ -10,5 +10,8 @@ export default (ctx) => {
   api.all('/edit', controller.edit);
   api.all('/update', controller.update);
 
+  api.get('/social/data', controller.getSocialData);
+  api.get('/social/data/update', controller.updateSocialData);
+
   return api;
 };

@@ -32,6 +32,14 @@ export function getSchema(ctx) {
     }
     return null;
   };
+  schema.methods.getSocialData = async function () {
+    const passport = await ctx.models.Passport.findOne({
+      provider: 'youtube',
+      user: this._id,
+    });
+    if (passport) return passport.meta;
+    return null;
+  };
 
   schema.virtual('online').get(() => {
     return false;

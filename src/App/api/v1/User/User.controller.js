@@ -19,9 +19,10 @@ function fullName(user) {
 
 
 export default (ctx) => {
-  const { User } = ctx.models;
+  const { User, Passport } = ctx.models;
   const modules = new Modules(ctx);
-  const { e404, e500 } = ctx.errors;
+  const { e404 } = ctx.errors;
+  const { checkNotFound } = ctx.helpers;
   const controller = {};
 
   controller.list = async (req) => {
@@ -72,9 +73,24 @@ export default (ctx) => {
     // }
   };
 
-  controller.update = async (req) => {
-    const user = await User.findById(req.user._id);
-    return user.updateSocialData();
+  controller.updateSocialData = async (req) => {
+    const user = await User
+    .findById(req.user._id)
+    .then(checkNotFound);
+    const passport = await Passport.findOne({
+      user: user._id,
+      provider: 'youtube',
+    });
+    await passport.updateSocialData();
+    return passport.save();
+  };
+  controller.getSocialData = async (req) => {
+    const user = await User
+    .findById(req.user._id)
+    .then(checkNotFound);
+    const socialData = await user.getSocialData();
+    if (socialData) return socialData;
+    throw e404('!passport.meta');
   };
 
   return controller;

@@ -13,20 +13,20 @@ export default (ctx, params) => {
   api.use('/passport', getPassport(ctx, params));
   api.use('/upload', upload);
 
-  api.all('/send', async (req) => {
-    const params = req.allParams();
-    return ctx.modules.mailer.send({
-      to: 'shitric2@gmail.com',
-      template: params.type || 'recovery',
-      params: {
-        user: await ctx.models.User.findOne(),
-        password: '123456',
-      },
-      // options: {
-      //   subject: params.subject || 'Восстановление пароля',
-      // },
-    });
-  });
+  // api.all('/send', async (req) => {
+  //   const params = req.allParams();
+  //   return ctx.modules.mailer.send({
+  //     to: 'shitric2@gmail.com',
+  //     template: params.type || 'recovery',
+  //     params: {
+  //       user: await ctx.models.User.findOne(),
+  //       password: '123456',
+  //     },
+  //     // options: {
+  //     //   subject: params.subject || 'Восстановление пароля',
+  //     // },
+  //   });
+  // });
   api.all('*', () => {
     throw ctx.errors.e404('No such API method');
   });

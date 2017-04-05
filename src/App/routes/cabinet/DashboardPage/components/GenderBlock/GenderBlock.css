@@ -1,0 +1,25 @@
+.gender-block {
+  display: flex;
+  flex: 1;
+}
+
+.gender-block-stat {
+  display: flex;
+  flex: 5;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > svg {
+    font-size: 2.5em;
+  }
+  > div {
+    margin-top: 5px;
+    font-weight: bold;
+  }
+}
+
+.gender-block-info {
+  display: flex;
+  flex-direction: column;
+  flex: 9;
+}
