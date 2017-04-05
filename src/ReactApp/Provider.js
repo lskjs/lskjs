@@ -22,6 +22,7 @@ export default class Provider {
     if (!this.page) {
       this.page = new this.Page({}, { uapp: this });
     } else {
+      this.page = new this.Page({}, { uapp: this });
       // @TODO:  update page
     }
     return {
