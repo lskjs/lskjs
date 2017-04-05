@@ -15,10 +15,9 @@ import AvatarChange from './components/AvatarChange';
 
 @inject('user')
 @observer
-export default class ProfilePage extends Component {
+export default class SettingsPage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
   }
   @autobind
   async handleSubmit(data) {

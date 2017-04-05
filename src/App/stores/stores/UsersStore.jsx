@@ -14,17 +14,17 @@ export default ctx => (
     }
 
     static async getUsers(qs) {
-      const { data } = await ctx.api.fetch('/user/list', { qs });
+      const { data } = await ctx.api.fetch('user/list', { qs });
       return data.map(obj => new ctx.models.User(obj));
     }
 
     static async getUsersLength() {
-      const { data } = await ctx.api.fetch('/user/length');
+      const { data } = await ctx.api.fetch('user/length');
       return data;
     }
 
     static async getUserById(id) {
-      const user = await ctx.api.fetch(`/user/${id}`);
+      const user = await ctx.api.fetch(`user/${id}`);
       return new ctx.models.User(user);
     }
 

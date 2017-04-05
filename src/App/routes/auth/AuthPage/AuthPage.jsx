@@ -205,12 +205,11 @@ export default class AuthPage extends Component {
                       <Button
                         type="submit"
                         bsStyle="primary"
-                        disabled={!!status}
                         style={{
                           position: 'relative',
                         }}
                       >
-                        <span style={{ display: !status ? 'block' : 'none' }}>
+                        <span>
                           <If condition={type === 'login'}>
                             Войти
                           </If>
