@@ -67,9 +67,6 @@ export default class CabinetLayout extends Component {
       this.context.history.replace('/auth/logout');
     }
   }
-  toDashboard = () => {
-    this.context.history.push('/');
-  }
   render() {
     const { user, children, breadcrumbs, page, config } = this.props;
     const title = page.getMeta('title');
@@ -157,10 +154,10 @@ export default class CabinetLayout extends Component {
       <LayoutWrapper color="black">
         <HeaderWrapper>
           <Logo>
-            <MiniLogo onClick={this.toDashboard}>
+            <MiniLogo href="/">
               {config.site.abbr}
             </MiniLogo>
-            <LargeLogo onClick={this.toDashboard}>
+            <LargeLogo href="/">
               {config.site.title}
             </LargeLogo>
           </Logo>

@@ -1,0 +1,21 @@
+.block {
+  display: flex;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+> svg {
+    animation-name: spin;
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    font-size: 1.2em;
+  }
+> span {
+    padding-left: 5px;
+  }
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}

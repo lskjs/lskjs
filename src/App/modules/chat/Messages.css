@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  margin: 15px 0;
+  > img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}
+
+.info {
+  display: flex;
+}
+
+.author {
+  font-weight: bold;
+  &:after {
+     content: ':';
+     margin-right: 5px;
+  }
+}
