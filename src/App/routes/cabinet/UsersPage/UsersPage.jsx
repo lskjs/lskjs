@@ -6,8 +6,7 @@ import { observer } from 'mobx-react';
 import Link from 'lsk-general/General/Link';
 import moment from 'moment';
 import VisibilitySensor from 'react-visibility-sensor';
-
-import Refresh from 'react-icons/lib/fa/refresh';
+import Loading from '~/App/components/Loading';
 
 @observer
 export default class UsersPage extends Component {
@@ -138,10 +137,7 @@ export default class UsersPage extends Component {
             scrollCheck
           />
           <If condition={loading}>
-            <div className="loading-block">
-              <Refresh />
-              <span>Загрузка пользователей...</span>
-            </div>
+            <Loading text="Загрузка пользователей.." />
           </If>
         </CardBlock>
       </Card>
