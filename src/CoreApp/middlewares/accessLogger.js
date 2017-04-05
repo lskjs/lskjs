@@ -53,7 +53,18 @@ function leftPad(str, len, ch) {
 
 // "asd \x1b[41m \e[0;34m asdas" +
 
-function levelFn(data) {
+function levelFn(data, status) {
+  if (data.method === 'WS') {
+    if (status === 'start') {
+      return 'info'
+    }
+    if (status === 'finish') {
+      return 'debug'
+    }
+  }
+  if (status === 'start') {
+    return 'debug'
+  }
   if (data.err || data.status >= 500 || data.duration > 10000) { // server internal error or error
     return 'error';
   } else if (data.status >= 400 || data.duration > 3000) { // client error
@@ -72,6 +83,9 @@ function logFinish(data) {
   const time = (data.duration || 0).toFixed(3);
   const method = leftPad(data.method, 4);
   const length = data.length || 0;
+  if (data.method === 'WS') {
+    return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(time, 7)}ms `;
+  }
   return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(data.status, 3)} ${leftPad(time, 7)}ms ${length}b `;
 }
 
@@ -96,11 +110,12 @@ export default (ctx) => {
         '127.0.0.1';
 
     if (__DEV__) {
-      log.debug(data, logStart(data));
+      log[levelFn(data, 'start')](data, logStart(data));
       if (req.body) {
         log.trace(JSON.stringify(req.body));
       }
     }
+
 
     const hrtime = process.hrtime();
     function logging() {
@@ -110,7 +125,7 @@ export default (ctx) => {
       const diff = process.hrtime(hrtime);
       data.duration = diff[0] * 1e3 + diff[1] * 1e-6;
 
-      log[levelFn(data)](data, logFinish(data));
+      log[levelFn(data, 'finish')](data, logFinish(data));
     }
     res.on('finish', logging);
     res.on('close', logging);

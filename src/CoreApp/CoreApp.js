@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import ExpressApp from 'lego-starter-kit/ExpressApp';
 
-import createSockets from './sockets';
+import createWs from './ws';
 import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
 import staticFileMiddleware from 'connect-static-file';
@@ -30,6 +30,8 @@ export default class CoreApp extends ExpressApp {
     this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
     this.log.debug('statics', this.statics);
+
+    this.config.ws && this.initWs();
   }
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line
@@ -107,12 +109,9 @@ export default class CoreApp extends ExpressApp {
     return api;
   }
 
-  createExpressApp() {
-    const app = super.createExpressApp();
-    if (!this.config.ws) return app;
-    this.ws = createSockets(this);
-    this.ws.wrapExpress(app);
-    return app;
+  initWs() {
+    this.ws = createWs(this);
+    this.ws.wrapExpress(this.app);
   }
 
   async runWs() {

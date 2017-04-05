@@ -1,26 +1,9 @@
 // import fetch from 'node-fetch';
 import _ from 'lodash';
-import io from 'socket.io-client';
-export function trim(initialStr, begin = true, end = true, symbol = '/') {
-  if (initialStr == null) return initialStr;
-  let str = initialStr;
-  if (end && str[str.length - 1] === symbol) {
-    str = str.substr(0, str.length - 1);
-  }
-  if (begin && str[0] === symbol) {
-    str = str.substr(1);
-  }
-  if (str !== initialStr) return trim(str, begin, end, symbol);
-  return str;
-}
-
-
-function queryParams(params) {
-  return Object.keys(params)
-    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-    .join('&');
-}
-
+import io from '../socket-io-universal';
+import trim from '../trim';
+import createQueryParams from '../createQueryParams';
+import fetch from 'isomorphic-fetch';
 
 export default class ApiClient {
   constructor(params) {
@@ -101,7 +84,7 @@ export default class ApiClient {
     }
 
     if (options.queryParams || options.qs) {
-      url += (url.indexOf('?') === -1 ? '?' : '&') + queryParams(options.queryParams || options.qs);
+      url += (url.indexOf('?') === -1 ? '?' : '&') + createQueryParams(options.queryParams || options.qs);
     }
 
     return fetch(this.createUrl(url), options);
@@ -144,12 +127,16 @@ export default class ApiClient {
 
 
   ws(path = '', options = {}) {
-    if (__SERVER__) return null;
-    if (!this.wsConfig) return null;
+    if (!this.wsConfig) {
+      console.error('Вы не можете использовать api.ws без сокет конфигов')
+      return null;
+    }
     const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
 
     // console.log(opts.query, opts.query.token, this.authToken);
-    if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
+    if (this.wsConfig.tokenInCookie) {
+      if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
+    }
     // console.log(opts.query, opts.query.token, this.authToken);
 
     return io(

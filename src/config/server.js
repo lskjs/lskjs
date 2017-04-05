@@ -17,5 +17,5 @@ export default config.init({
   // ws: {
   //   transports: ['websocket'],
   // },
-  middlewares: require('./middlewares').default,
+middlewares: require('./middlewares').default,
 });
