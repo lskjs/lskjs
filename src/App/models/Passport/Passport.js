@@ -53,16 +53,29 @@ export function getSchema(ctx) {
     timestamps: true,
   });
 
-  schema.methods.updateUser = async () => {
-    const { User } = ctx.models;
-    const user = await User.findById(this.user);
-    if (!user) return null;
-    const strategy = ctx.strategies[this.provider];
-    if (!strategy) return null;
-    const data = await strategy.getPassportData();
-    _.merge(user, data);
-    return user.save();
+  schema.methods.updateSocialData = async function () {
+    try {
+      const { token } = this;
+      console.log(ctx.strategies, this.strategies);
+      const strategy = ctx.strategies[this.provider];
+      if (this.provider !== 'youtube') return;
+      const data = {
+        statics: await strategy.getStatics({ accessToken: token, providerId: this.providerId }),
+        videos: await strategy.getAllVideos({ accessToken: token, providerId: this.providerId }),
+        lastVideo: await strategy.getLastVideo({ accessToken: token, providerId: this.providerId }),
+        analytics: await strategy.getAnalytics({ accessToken: token, providerId: this.providerId }),
+        subscribers: await strategy.getSubscribers({ accessToken: token, providerId: this.providerId }),
+      };
+      if (data.statics && data.videos && data.lastVideo && data.analytics && data.subscribers) {
+        _.merge(this.meta, data);
+        this.fetchedAt = new Date();
+      }
+    } catch (err) {
+      ctx.log.error('update fail', err);
+    }
+    return this;
   };
+
   schema.methods.generateUsername = async function () {
     const { User } = ctx.models;
     let username = `${this.providerId}_${this.provider}.com`;

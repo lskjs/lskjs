@@ -1,0 +1,32 @@
+.gender-graph {
+  display: flex;
+  > span {
+    padding-right: 10px;
+    flex: 2;
+  }
+  &:first-child {
+    .progressbar-wrapper {
+      border-radius: 3px 3px 0 0;
+    }
+  }
+  &:last-child {
+    .progressbar-wrapper {
+      border-radius: 0 0 3px 3px;
+    }
+  }
+}
+
+.progressbar-wrapper {
+  flex: 4;
+  overflow: hidden;
+}
+
+.progressbar-container {
+  background: #e1e1e1;
+  height: 20px;
+  .progressbar-progress {
+    background: #222d32;
+    height: 20px;
+    transition: width .2s ease;
+  }
+}

@@ -5,19 +5,17 @@ import {
   Card,
   CardBlock,
 } from 'react-bootstrap';
+import InfoBox from 'lsk-admin/Admin/lib/widgets/InfoBox';
+import Group from 'react-icons/lib/fa/group';
+import Eye from 'react-icons/lib/fa/eye';
+import Clock from 'react-icons/lib/fa/clock-o';
+import Laptop from 'react-icons/lib/fa/laptop';
+import Tablet from 'react-icons/lib/fa/tablet';
+import Mobile from 'react-icons/lib/fa/mobile';
+import Desktop from 'react-icons/lib/fa/desktop';
 import css from 'importcss';
-
-import Male from 'react-icons/lib/fa/male';
-import Female from 'react-icons/lib/fa/female';
-
-export function formatter(value) {
-  const arr = [];
-  String(value).split('').reverse().forEach((c, i) => {
-    if (i % 3 === 0) arr.push(' ');
-    arr.push(c);
-  });
-  return arr.reverse().join('').trim();
-}
+import { formatter } from '~/utils';
+import GenderBlock from './components/GenderBlock';
 
 @css(require('./DashboardPage.css'))
 export default class DashboardPage extends Component {
@@ -25,86 +23,87 @@ export default class DashboardPage extends Component {
     return (
       <Row>
         <Col xs={12}>
-          <Row>
-            <Col sm={4}>
-              <Card>
-                <CardBlock styleName="centered">
-                  <div styleName="value">{formatter(1943991)}</div>
-                  <div styleName="key">подписчики</div>
-                </CardBlock>
-              </Card>
-              <Card>
-                <CardBlock styleName="centered">
-                  <div styleName="value">{formatter(467870)}</div>
-                  <div styleName="key">средние просмотры</div>
-                </CardBlock>
-              </Card>
-              <Card>
-                <CardBlock styleName="centered">
-                  <div styleName="value">03:06:04</div>
-                  <div styleName="key">среднее время просмотра</div>
-                </CardBlock>
-              </Card>
-            </Col>
-            <Col sm={8}>
-              <Card>
+          <div styleName="flex-row">
+            <div styleName="flex-col gr-1">
+              <InfoBox
+                icon={<Group />}
+                text="Подписчики"
+                count={formatter(1943991)}
+                color="red"
+              />
+              <InfoBox
+                count={formatter(467870)}
+                text="Средние просмотры"
+                icon={<Eye />}
+                color="red"
+              />
+              <InfoBox
+                count="03:06:04"
+                text="Среднее время просмотра"
+                icon={<Clock />}
+                color="red"
+              />
+            </div>
+            <div styleName="flex-col gr-4">
+              <Card styleName="flex-obj">
                 <CardBlock styleName="flex">
                   <Row>
-                    <Col sm={6}>
+                    <Col md={6}>
                       <GenderBlock sex="male" precent="66.6" />
                     </Col>
-                    <Col sm={6}>
+                    <Col md={6}>
                       <GenderBlock sex="female" precent="33.4" />
                     </Col>
                   </Row>
                 </CardBlock>
               </Card>
-            </Col>
-          </Row>
+              <Card styleName="flex-obj">
+                <CardBlock styleName="flex">
+                  <Row>
+                    <Col xs={6} md={3}>
+                      <div styleName="centered device">
+                        <Laptop />
+                        <div styleName="info">
+                          <p>42.24%</p>
+                          <small>Компьютеры</small>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col xs={6} md={3}>
+                      <div styleName="centered device">
+                        <Tablet />
+                        <div styleName="info">
+                          <p>27.5%</p>
+                          <small>Планшеты</small>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col xs={6} md={3}>
+                      <div styleName="centered device">
+                        <Mobile />
+                        <div styleName="info">
+                          <p>27.5%</p>
+                          <small>Планшеты</small>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col xs={6} md={3}>
+                      <div styleName="centered device">
+                        <Desktop />
+                        <div styleName="info">
+                          <p>2.39%</p>
+                          <small>Телевизоры</small>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                </CardBlock>
+              </Card>
+            </div>
+          </div>
         </Col>
       </Row>
     );
   }
 }
 
-@css(require('./DashboardPage.css'))
-class GenderBlock extends Component {
-  render() {
-    const { sex, precent } = this.props;
-    return (
-      <div styleName="gender-block">
-        <div styleName="gender-block-stat">
-          {sex === 'male' && <Male />}
-          {sex === 'female' && <Female />}
-          <div>{`${precent}%`}</div>
-        </div>
-        <div styleName="gender-block-info">
-          <GenderGraph name="13-17" value="22" />
-          <GenderGraph name="18-24" value="26" />
-          <GenderGraph name="25-34" value="24" />
-          <GenderGraph name="35+" value="8" />
-        </div>
-      </div>
-    );
-  }
-}
-
-@css(require('./DashboardPage.css'))
-class GenderGraph extends Component {
-  render() {
-    const { name, value } = this.props;
-    return (
-      <div styleName="gender-graph">
-        <span>{name}</span>
-        <div styleName="progressbar-wrapper">
-          <div styleName="progressbar-container">
-            <div
-              styleName="progressbar-progress"
-              style={{ width: `${value}%` }}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
