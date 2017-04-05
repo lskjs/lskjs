@@ -1,0 +1,58 @@
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.key {
+  margin: 3px 0;
+}
+
+.value {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.gender-block {
+  display: flex;
+  flex: 1;
+}
+
+.gender-block-stat {
+  display: flex;
+  flex: 5;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > svg {
+    font-size: 2.5em;
+  }
+}
+
+.gender-block-info {
+  display: flex;
+  flex-direction: column;
+  flex: 9;
+}
+
+.gender-graph {
+  display: flex;
+  > span {
+    padding-right: 10px;
+    flex: 2;
+  }
+}
+
+.progressbar-wrapper {
+  flex: 4;
+}
+.progressbar-container {
+  background: #e1e1e1;
+  .progressbar-progress {
+    background: #222d32;
+    height: 20px;
+    transition: width .2s ease;
+  }
+}

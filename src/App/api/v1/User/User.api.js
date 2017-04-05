@@ -1,14 +1,14 @@
 import getController from './User.controller';
 
-export default (ctx, params) => {
+export default (ctx) => {
   const api = ctx.asyncRouter();
-  const resource = getController(ctx);
+  const controller = getController(ctx);
 
-  api.all('/list', resource.list);
-  api.all('/length', resource.length);
-  api.all('/get', resource.get);
-  api.all('/edit', resource.edit);
-  api.all('/update', resource.update);
+  api.all('/list', controller.list);
+  api.all('/length', controller.length);
+  api.all('/get', controller.get);
+  api.all('/edit', controller.edit);
+  api.all('/update', controller.update);
 
   return api;
 };
