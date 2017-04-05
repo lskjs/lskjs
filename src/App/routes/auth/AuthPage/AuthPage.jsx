@@ -13,7 +13,6 @@ import {
   Row,
   Col,
   Button,
-  ButtonGroup,
 } from 'react-bootstrap';
 import { get } from 'lodash';
 
@@ -28,31 +27,9 @@ import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 
 import SocialButtons, { SocialButton, buttons } from './SocialButtons';
-// const infoFields = [
-//   {
-//     name: 'profile.firstName',
-//     title: 'Имя',
-//     control: {
-//       placeholder: 'Например, Василий',
-//     },
-//   },
-//   {
-//     name: 'profile.lastName',
-//     title: 'Фамилия',
-//     control: {
-//       placeholder: 'Например, Пушкин',
-//     },
-//   },
-//   {
-//     name: 'profile.middleName',
-//     title: 'Отчество',
-//     control: {
-//       placeholder: 'Например, Александрович',
-//     },
-//   },
-// ];
 
-@inject('auth', 'config') @observer
+@inject('auth', 'config')
+@observer
 @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
 
@@ -64,7 +41,6 @@ export default class AuthPage extends Component {
   static propTypes = {
     type: PropTypes.string,
     passport: PropTypes.object,
-    ui: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
   }
@@ -163,7 +139,6 @@ export default class AuthPage extends Component {
 
   render() {
     const { type, auth, config, passport } = this.props;
-    const status = null;// this.props.ui.statusRequest;
     const fields = this.getFields(type);
     return (
       <Slide>
@@ -246,24 +221,6 @@ export default class AuthPage extends Component {
                             Сбросить пароль
                           </If>
                         </span>
-                        <If condition={status}>
-                          <div
-                            className={cx({
-                              'button-icon-status': true,
-                              spin: status === 'wait',
-                            })}
-                          >
-                            <If condition={status === 'wait'}>
-                              <Loading />
-                            </If>
-                            <If condition={status === 'ok'}>
-                              <Check />
-                            </If>
-                            <If condition={status === 'error'}>
-                              <Error />
-                            </If>
-                          </div>
-                        </If>
                       </Button>
                     )}
                   />

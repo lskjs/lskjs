@@ -72,7 +72,7 @@ export default {
       path: '/users',
       async action({ page, appStore }) {
         const users = new appStore.stores.Users();
-        await users.fetchUsers();
+        await users.fetchUsers(5);
         return page
           .meta({
             title: 'Список пользователей',

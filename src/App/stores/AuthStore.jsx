@@ -1,4 +1,3 @@
-import { computed, action } from 'mobx';
 import cookie from 'js-cookie';
 
 export default class AuthStore {

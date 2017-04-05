@@ -26,8 +26,21 @@ export default (ctx) => {
 
   controller.list = async (req) => {
     modules.isAuth(req);
-    const users = await User.find({});
+    const params = req.allParams();
+    const { query } = params;
+    let { limit = undefined, offset = 0 } = params;
+    if (offset) offset = parseInt(offset, 10);
+    if (limit) limit = parseInt(limit, 10);
+    const users = await User
+      .find(query)
+      .limit(limit)
+      .skip(offset);
     return users;
+  };
+
+  controller.length = async () => {
+    const users = await User.find({});
+    return { count: users.length };
   };
 
   controller.get = async (req) => {
