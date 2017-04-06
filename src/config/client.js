@@ -19,6 +19,7 @@ export default config.extend({
     ws: {
       url: 'http://localhost:8080',
       base: '/api',
+      tokenInCookie: true,
       options: {
         transports: ['websocket'],
       },

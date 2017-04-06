@@ -11,7 +11,7 @@ export default (ctx) => {
     async run() {
       ctx.app.use('/api/module', this.getApi());
       this.ws = ctx.app.ws('/api/module/chat/comments')
-        .on('coneection', this.onSocket);
+        .on('connection', this.onSocket);
     }
 
     getApi() {
@@ -73,21 +73,13 @@ export default (ctx) => {
 
     @autobind
     onSocket(socket) {
-      console.log('onSocket');
+      const { req } = socket;
       const { Message } = this.models;
+      if (!req.user || !req.user._id) throw new Error('Not Auth')
 
-      console.log('socket.user', socket.user);
-      // console.log('socket', Object.keys(socket), socket.data, socket.user);
-
-      // // create namespace
-      // this.namespace = ctx.app.ws.namespace('/api/module/chat/comments')
-      // .on('connection', async (socket) => {
-      const { subjectType, subjectId } = socket.data;
+      const { subjectType, subjectId } = req.data;
       const roomName = this.getRoomName(subjectType, subjectId);
-        // console.log('socket connected', socket.user._id);
-      if (socket.user && socket.user.id) {
-        socket.join(`user_${socket.user.id}`);
-      }
+      socket.join(`user_${req.user.id}`);
       socket.join(roomName);
       socket.on('message', async (data) => {
         const message = new Message({
@@ -98,53 +90,9 @@ export default (ctx) => {
         });
         await message.save();
         await Message.populate(message, 'user');
-          // console.log(message);
-          // console.log(`Шлю в комнату ${roomName} сообщение ${message.content}`);
         return this.emit(roomName, message);
       });
-      // })
-      // .on('disconnection', async (socket) => {
-      //
-      // });
 
-
-      // const socket = ctx.io.getSocket('/api/module/chat/comments');
-
-      // bug fix
-      // this.namespace = ctx.io.of('/api/module/chat/comments').on('connection', async (socket) => {
-      //   const { subjectType, subjectId } = socket.data;
-      //   const roomName = this.getRoomName(subjectType, subjectId);
-      //   // console.log('socket connected', socket.user._id);
-      //   socket.join(`user_${socket.user.id}`);
-      //   socket.join(roomName);
-      //   socket.on('message', async (data) => {
-      //     const message = new Message({
-      //       ...data,
-      //       subjectType,
-      //       subjectId,
-      //       user: socket.user._id,
-      //     });
-      //     await message.save();
-      //     await Message.populate(message, 'user');
-      //     // console.log(message);
-      //     // console.log(`Шлю в комнату ${roomName} сообщение ${message.content}`);
-      //     return this.emit(roomName, message);
-      //   });
-      // });
-      // // middleware
-      // this.namespace.use((socket, next) => {
-      //   const { query } = socket.handshake;
-      //   const req = socket.request;
-      //   const res = req.res;
-      //   if (!req.query) {
-      //     req.query = {};
-      //   }
-      //   Object.assign(req.query, query);
-      //   const { parseToken } = ctx.middlewares;
-      //   parseToken(req, res, next);
-      // });
-      // // // other middlewares
-      // ctx.io.atachMiddlwares(this.namespace);
     }
   };
 };
