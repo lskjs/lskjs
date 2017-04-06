@@ -5,6 +5,7 @@
 $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic" !default;
 @import url($web-font-path);
 
+@icon-font-path: './bootstrap/fonts/';
 // Navbar =====================================================================
 
 .navbar {
@@ -333,4 +334,9 @@ a.list-group-item {
 
 .popover {
   color: $text-color;
+}
+
+
+.form-control-feedback {
+  top: 28px;
 }
