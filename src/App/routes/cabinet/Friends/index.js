@@ -1,4 +1,4 @@
-import FriendsPage from './FriendsPage';
+import FriendsPage from './Friends';
 import FriendsInRequestsPage from './tabs/InRequests';
 import FriendsOutRequestsPage from './tabs/OutRequests';
 

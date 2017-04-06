@@ -1,16 +1,16 @@
 import CabinetLayout from './CabinetLayout';
 
-import DashboardPage from './DashboardPage';
-import UserPage from './UserPage';
-import UsersPage from './UsersPage';
-import SettingsPage from './SettingsPage';
-import PostsPage from './PostsPage';
-import MessagesPage from './MessagesPage';
+import Dashboard from './Dashboard';
+import User from './User';
+import Users from './Users';
+import Settings from './Settings';
+import Posts from './Posts';
+import Messages from './Messages';
 import Comments from './Comments';
+import Offers from './Offers';
 
 export default {
-  async action({ next, page, appStore }) {
-    // if (!await appStore.auth.isAuthAsync()) return page.redirect('/auth/login');
+  async action({ next, page }) {
     return page
       .isAuth()
       .meta({
@@ -26,7 +26,7 @@ export default {
       path: '/',
       async action({ page }) {
         return page
-          .component(DashboardPage, {});
+          .component(Dashboard, {});
       },
     },
     {
@@ -50,7 +50,7 @@ export default {
             description: 'Профиль пользователя',
             url: `/cabinet/user/${id}`,
           })
-          .component(UserPage, { user });
+          .component(User, { user });
       },
     },
     {
@@ -62,12 +62,12 @@ export default {
             description: 'Старница настроек',
             url: '/cabinet/settings',
           })
-          .component(SettingsPage, {});
+          .component(Settings, {});
       },
     },
     {
       path: '/friends',
-      ...require('./FriendsPage/index').default,
+      ...require('./Friends/index').default,
     },
     {
       path: '/users',
@@ -80,7 +80,7 @@ export default {
             description: 'Все пользователи',
             url: '/cabinet/users',
           })
-          .component(UsersPage, { users });
+          .component(Users, { users });
       },
     },
     {
@@ -92,7 +92,7 @@ export default {
             description: 'Посты созданные тобой',
             url: '/cabinet/posts',
           })
-          .component(PostsPage, {});
+          .component(Posts, {});
       },
     },
     {
@@ -102,10 +102,14 @@ export default {
           .meta({
             title: 'Сообщения',
             description: 'Все сообщения',
-            url: '/cabinet/posts',
+            url: '/cabinet/messages',
           })
-          .component(MessagesPage, {});
+          .component(Messages, {});
       },
+    },
+    {
+      path: '/offers',
+      ...require('./Offers/index').default,
     },
     {
       path: '*',

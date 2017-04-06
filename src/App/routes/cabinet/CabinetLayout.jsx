@@ -23,9 +23,8 @@ import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 
 import User from 'react-icons/lib/fa/user';
 import Users from 'react-icons/lib/fa/group';
-import Mail from 'react-icons/lib/fa/envelope';
-import Posts from 'react-icons/lib/fa/th-large';
-import Zip from 'react-icons/lib/fa/file-archive-o';
+import Comments from 'react-icons/lib/fa/comments';
+import Cards from 'react-icons/lib/fa/th-large';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
@@ -35,17 +34,11 @@ export default class CabinetLayout extends Component {
   static contextTypes = {
     history: PropTypes.object.isRequired,
   }
-  static defaultProps = {
-    description: null,
-    breadcrumbs: [],
-    additionalMenus: [],
-  }
   static propTypes = {
     user: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
     page: PropTypes.any.isRequired,
     children: PropTypes.any.isRequired,
-    breadcrumbs: PropTypes.array,
   }
   constructor(props) {
     super(props);
@@ -68,22 +61,18 @@ export default class CabinetLayout extends Component {
     }
   }
   render() {
-    const { user, children, breadcrumbs, page, config } = this.props;
+    const { user, children, page, config } = this.props;
     const title = page.getMeta('title');
     const description = page.getMeta('description');
     const breadItems = (page.state.metas || []).map((meta, key) => ({
       key,
       title: meta.crumb && meta.crumb.title || meta.title || 'Главная',
       url: meta.crumb && meta.crumb.url || meta.url || '/',
-      icon: meta.crumb && meta.crumb.icon || meta.icon// || <DashboardIcon />,
+      icon: meta.crumb && meta.crumb.icon || meta.icon
     }));
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
       breadItems[0].icon = <DashboardIcon />;
     }
-    // [
-    //   { key: 1, icon: <DashboardIcon />, title: 'Личный кабинет', url: '/cabinet' },
-    //   ...breadcrumbs,
-    // ];
     const mainMenus = [
       {
         icon: <DashboardIcon />,
@@ -101,9 +90,17 @@ export default class CabinetLayout extends Component {
         url: '/cabinet/users',
       },
       {
-        icon: <Users />,
+        icon: <Comments />,
         title: 'Комментарии',
         url: '/cabinet/comments',
+      },
+      {
+        icon: <Cards />,
+        title: 'Предложения',
+        items: [
+          { title: 'Все предложения', url: '/cabinet/offers' },
+          { title: 'Создать новое', url: '/cabinet/offers/add' },
+        ],
       },
       // {
       //   icon: <DashboardIcon />,

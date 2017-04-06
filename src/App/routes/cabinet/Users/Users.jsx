@@ -9,7 +9,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import Loading from '~/App/components/Loading';
 
 @observer
-export default class UsersPage extends Component {
+export default class Users extends Component {
 
   static propTypes = {
     users: PropTypes.object.isRequired,

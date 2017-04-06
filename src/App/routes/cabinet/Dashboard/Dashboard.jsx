@@ -17,8 +17,8 @@ import css from 'importcss';
 import { formatter } from '~/utils';
 import GenderBlock from './components/GenderBlock';
 
-@css(require('./DashboardPage.css'))
-export default class DashboardPage extends Component {
+@css(require('./Dashboard.css'))
+export default class Dashboard extends Component {
   render() {
     return (
       <Row>

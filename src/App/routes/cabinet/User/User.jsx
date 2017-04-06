@@ -8,8 +8,8 @@ import {
 } from 'react-bootstrap';
 import css from 'importcss';
 
-@css(require('./UserPage.css'))
-export default class ProfilePage extends Component {
+@css(require('./User.css'))
+export default class User extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   }
