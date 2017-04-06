@@ -4571,9 +4571,9 @@ lsk-admin@1.0.10:
     sass-loader "5.0.0"
     validate.js "0.11.1"
 
-lsk-build@0.6.7:
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.6.7.tgz#e67f9d464bed8eaf78317f37fbe634d414aeca46"
+lsk-build@0.6.9:
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.6.9.tgz#668b61d7c97c954a81b2afe684b91a3ebc5d08df"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.2"

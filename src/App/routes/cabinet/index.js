@@ -7,10 +7,10 @@ import SettingsPage from './SettingsPage';
 import PostsPage from './PostsPage';
 import MessagesPage from './MessagesPage';
 import Comments from './Comments';
+import Offers from './Offers';
 
 export default {
-  async action({ next, page, appStore }) {
-    // if (!await appStore.auth.isAuthAsync()) return page.redirect('/auth/login');
+  async action({ next, page }) {
     return page
       .isAuth()
       .meta({
@@ -102,9 +102,23 @@ export default {
           .meta({
             title: 'Сообщения',
             description: 'Все сообщения',
-            url: '/cabinet/posts',
+            url: '/cabinet/messages',
           })
           .component(MessagesPage, {});
+      },
+    },
+    {
+      path: '/offers',
+      async action({ page, appStore }) {
+        const offers = new appStore.stores.Offers();
+        await offers.fetchOffers(5);
+        return page
+          .meta({
+            title: 'Предложения',
+            description: 'Все предложения',
+            url: '/cabinet/offers',
+          })
+          .component(Offers, { offers });
       },
     },
     {

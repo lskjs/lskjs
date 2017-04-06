@@ -65,30 +65,31 @@ export default class Messages extends Component {
   }
 
   render() {
+    const { messages, text } = this.state;
+    if (!messages) return <Loading text="Загрузка сообщений.." />;
     return (
       <div>
-        <If condition={!this.state.messages}>
-          <Loading text="Загрузка сообщений.." />
-        </If>
-        <If condition={this.state.messages}>
-          {this.state.messages.map(message => (
+        {messages.map((message) => {
+          return (
             <div key={message._id} styleName="container">
               <img src={_.get(message, 'user.profile.avatar')} />
               <div styleName="info">
-                <div styleName="author">{`${message.user.profile.firstName} ${message.user.profile.lastName}`}</div>
+                <div styleName="author">
+                  {message.name}
+                </div>
                 {message.content}
               </div>
             </div>
-          ))}
-          <Card>
-            <FormControl
-              value={this.state.text}
-              onKeyPress={this.handleOnKeyPress}
-              onChange={this.handleOnChange}
-              placeholder="Введите текст комментария"
-            />
-          </Card>
-        </If>
+          );
+        })}
+        <Card>
+          <FormControl
+            value={text}
+            onKeyPress={this.handleOnKeyPress}
+            onChange={this.handleOnChange}
+            placeholder="Введите текст комментария"
+          />
+        </Card>
       </div>
     );
   }
