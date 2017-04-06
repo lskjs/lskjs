@@ -1058,16 +1058,9 @@ babel-register@^6.24.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@6.22.0:
+babel-runtime@6.22.0, babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.9.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.22.0.tgz#1cf8b4ac67c77a4ddb0db2ae1f74de52ac4ca611"
-  dependencies:
-    core-js "^2.4.0"
-    regenerator-runtime "^0.10.0"
-
-babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.9.0:
-  version "6.23.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
@@ -1106,7 +1099,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.22.0, babel-traverse@^6.23.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0:
+babel-types@6.9.0, babel-types@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1116,7 +1109,7 @@ babel-types@6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0, babel-types@^6.9.0:
+babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -1294,7 +1287,7 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-browser-bunyan@^0.4.0:
+browser-bunyan@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/browser-bunyan/-/browser-bunyan-0.4.0.tgz#ec98f731801b646668f137bb09413a42eb2ff940"
 
@@ -2153,7 +2146,7 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
 
-deepmerge@^1.3.2:
+deepmerge@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.3.2.tgz#1663691629d4dbfe364fa12a2a4f0aa86aa3a050"
 
@@ -3865,7 +3858,7 @@ isobject@^2.0.0:
   dependencies:
     isarray "1.0.0"
 
-isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
+isomorphic-fetch@2.2.1, isomorphic-fetch@^2.1.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
   dependencies:
@@ -3911,7 +3904,7 @@ js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
-js-cookie@2.1.4, js-cookie@^2.1.4:
+js-cookie@2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.1.4.tgz#da4ec503866f149d164cf25f579ef31015025d8d"
 
@@ -3920,8 +3913,8 @@ js-tokens@^3.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
 
 js-yaml@^3.4.3, js-yaml@^3.5.1:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.2.tgz#02d3e2c0f6beab20248d412c352203827d786721"
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.3.tgz#33a05ec481c850c8875929166fe1beb61c728766"
   dependencies:
     argparse "^1.0.7"
     esprima "^3.1.1"
@@ -4176,29 +4169,29 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.8.0.tgz#3401378018818f2a4f23aa5441c6b6693a8fe76b"
+lego-starter-kit@1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.8.3.tgz#0b976ecef7276e61f6fffccac40e4a36881d19ec"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
     bcryptjs "2.4.0"
     bluebird "3.4.7"
     body-parser "1.16.0"
-    browser-bunyan "^0.4.0"
+    browser-bunyan "0.4.0"
     bunyan "1.8.5"
     connect-static-file "1.1.2"
     cookie-parser "1.4.3"
     core-decorators "0.15.0"
     cors "2.8.1"
-    deepmerge "^1.3.2"
+    deepmerge "1.3.2"
     express "4.14.1"
     express-jwt "5.1.0"
     fastclick "1.0.6"
     history "4.5.1"
     importcss "1.0.3"
-    isomorphic-fetch "^2.2.1"
-    js-cookie "^2.1.4"
+    isomorphic-fetch "2.2.1"
+    js-cookie "2.1.4"
     jsonwebtoken "7.2.1"
     lodash "4.17.4"
     moment "2.17.1"
@@ -4208,7 +4201,7 @@ lego-starter-kit@1.8.0:
     react-deep-force-update "2.0.1"
     react-dom "15.4.2"
     socket.io "1.7.2"
-    socket.io-as-promised "^1.0.0"
+    socket.io-as-promised "1.0.0"
     universal-router "2.0.0"
     uuid "3.0.1"
 
@@ -4552,9 +4545,9 @@ lru-queue@0.1:
   dependencies:
     es5-ext "~0.10.2"
 
-lsk-admin@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.8.tgz#41271accc73b412db8f8bc904d74d5e23c076f14"
+lsk-admin@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.10.tgz#731b465f6e05aabad6c00fdc9ccafeb13ed751f5"
   dependencies:
     admin-lte "2.3.11"
     animate-sass "0.6.6"
@@ -4628,9 +4621,9 @@ lsk-build@0.6.7:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.6.11:
-  version "0.6.11"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.11.tgz#4ec92dce7f6b27ea61ae7b571bf37a591a4a73b5"
+lsk-general@0.6.16:
+  version "0.6.16"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.16.tgz#958f3e8d6ed7a941389627fa0ceaf6151e12d1d2"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"
@@ -4954,8 +4947,8 @@ mv@~2:
     rimraf "~2.4.0"
 
 nan@^2.3.0, nan@^2.3.2, nan@^2.3.3:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.1.tgz#8c84f7b14c96b89f57fbc838012180ec8ca39a01"
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -6307,9 +6300,9 @@ react-addons-css-transition-group@15.4.2:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-addons-update/-/react-addons-update-15.3.2.tgz#b6385c4db1e5df371825e0615b04360ed94430fe"
 
-react-bootstrap-card@0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-card/-/react-bootstrap-card-0.1.4.tgz#2dbcd44e2a2bb74fe3c4f3dc3896f8b6612d60ca"
+react-bootstrap-card@0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-card/-/react-bootstrap-card-0.1.5.tgz#5a43af0be6de8a0f59f8eab226345fbbc2cba968"
   dependencies:
     classnames "^2.2.3"
 
@@ -7080,7 +7073,7 @@ socket.io-adapter@0.5.0:
     debug "2.3.3"
     socket.io-parser "2.3.1"
 
-socket.io-as-promised@^1.0.0:
+socket.io-as-promised@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/socket.io-as-promised/-/socket.io-as-promised-1.0.0.tgz#ea3926df3f3cccb5f19b8d43747a6c31ec35a187"
   dependencies:
