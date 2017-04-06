@@ -5,11 +5,10 @@ global.startedAt = Date.now();
 global.timing = () => {
   return Date.now() - global.startedAt;
 };
-// }
+if (!global.Promise) global.Promise = require('bluebird');
+if (!global.fetch) global.fetch = require('isomorphic-fetch');
 require('babel-polyfill');
 require('babel-runtime/core-js/promise').default = require('bluebird');
-global.Promise = require('bluebird');
-global.fetch = require('isomorphic-fetch');
 // require('event-source-polyfill');
 // global.fetch = require('./fetch').default;
 
@@ -35,8 +34,9 @@ Date.toHumanString = function toHumanString(date) {
 };
 
 
-export default function ready() {
+export default function ready(cb) {
   if (__DEV__) {
     console.log(`🔥  Compiled [${global.timing()}ms]`);
   }
+  if (typeof cb === 'function') cb();
 }

@@ -152,7 +152,6 @@ export default class ReactApp {
     this.rootState = this.getRootState();
     // console.log('this.config 11', this.config);
     this.config = _.merge({}, this.config || {}, this.rootState && this.rootState.config || {});
-    console.log('this.config @', this.config);
     this.rootState.config = null;
     FastClick.attach(document.body);
     this.container = document.getElementById('root');

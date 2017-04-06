@@ -20,11 +20,9 @@ export default class Provider {
   initV2(props = {}) {
     Object.assign(this, props);
     if (!this.page) {
-      this.page = new this.Page({}, { uapp: this });
-    } else {
-      this.page = new this.Page({}, { uapp: this });
-      // @TODO:  update page
+      this.page = new this.Page();
     }
+    this.page.init({}, { uapp: this })
     return {
       uapp: this,
       page: this.page,

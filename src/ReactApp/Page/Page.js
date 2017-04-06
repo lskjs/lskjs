@@ -4,19 +4,23 @@ import _ from 'lodash';
 const defaultState = {
   favicon: '/favicon.ico',
 };
+const defaultContext = {
+};
 
 export default class Page {
-  constructor(props = {}, context = {}) {
+  constructor(...args) {
+    this.init(...args)
+  }
+
+  async init(props = {}, context = {}) {
     this._page = true;
     this.state = Object.assign({}, defaultState);
     Object.assign(this.state, props);
-    this.context = {};
+    this.context = Object.assign({}, defaultContext);
     Object.assign(this.context, context);
-    this.init();
-  }
 
-  async init() {
-    if (this.state.titles) this.state.titles = [];
+    this.state.titles = [];
+    this.disabled = false;
   }
 
   checkAuth() {
@@ -130,11 +134,6 @@ export default class Page {
   layout(layout) {
     if (this.disabled) return this;
     this.state.layout = layout;
-    return this;
-  }
-
-  description(description) {
-    console.log('Page.description() deprecated');
     return this;
   }
 
