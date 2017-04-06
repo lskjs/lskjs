@@ -63,7 +63,7 @@ export default (ctx) => {
         namespace.originalOn = namespace.on;
         namespace.on = function(event, callback) {
           // console.log('ns.on', event);
-            namespace.originalOn(event, (socket) => {
+            return namespace.originalOn(event, (socket) => {
               // socket.on()
               // ctx.log.debug('WS.' + event, {err});
 
