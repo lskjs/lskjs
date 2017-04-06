@@ -153,11 +153,11 @@ export default class CabinetLayout extends Component {
     return (
       <LayoutWrapper color="black">
         <HeaderWrapper>
-          <Logo>
-            <MiniLogo href="/">
+          <Logo href="/">
+            <MiniLogo>
               {config.site.abbr}
             </MiniLogo>
-            <LargeLogo href="/">
+            <LargeLogo>
               {config.site.title}
             </LargeLogo>
           </Logo>
