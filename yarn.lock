@@ -1099,7 +1099,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.22.0, babel-traverse@^6.23.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0, babel-types@^6.9.0:
+babel-types@6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1109,7 +1109,7 @@ babel-types@6.9.0, babel-types@^6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
+babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0, babel-types@^6.9.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -4169,9 +4169,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@1.8.3:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.8.3.tgz#0b976ecef7276e61f6fffccac40e4a36881d19ec"
+lego-starter-kit@1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.8.4.tgz#edbd1e97b68d40edcb9a746d155c858c7513160a"
   dependencies:
     babel-polyfill "6.22.0"
     babel-runtime "6.22.0"
@@ -4571,9 +4571,9 @@ lsk-admin@1.0.10:
     sass-loader "5.0.0"
     validate.js "0.11.1"
 
-lsk-build@0.6.9:
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.6.9.tgz#668b61d7c97c954a81b2afe684b91a3ebc5d08df"
+lsk-build@0.6.7:
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.6.7.tgz#e67f9d464bed8eaf78317f37fbe634d414aeca46"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.2"
