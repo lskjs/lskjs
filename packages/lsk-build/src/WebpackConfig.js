@@ -337,22 +337,27 @@ export default class WebpackConfig {
         loader: 'json-loader',
       },
       {
-        test: /\.(png|jpg|jpeg|gif|eot|svg|ttf|woff(2)?)(\?.+)?$/,
+        test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
         loader: 'url-loader',
         query: {
           name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-          limit: 50000,
-          outputPath: this.getOutput().path,
-          publicPath: this.getOutput().publicPath,
+          limit: 8192,
         },
       },
       {
-        test: /\.(eot|svg|ttf|woff(2)?|wav|mp3)(\?.+)?$/,
+        test: /\.(woff(2)?)(\?.+)?$/,
+        loader: 'url-loader',
+        query: {
+          name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+          mimetype: 'application/font-woff',
+          limit: 8192,
+        },
+      },
+      {
+        test: /\.(eot|ttf|wav|mp3)(\?.+)?$/,
         loader: 'file-loader',
         query: {
           name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-          outputPath: this.getOutput().path,
-          publicPath: this.getOutput().publicPath,
         },
       },
     ];
