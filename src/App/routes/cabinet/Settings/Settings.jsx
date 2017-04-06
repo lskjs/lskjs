@@ -15,7 +15,7 @@ import AvatarChange from './components/AvatarChange';
 
 @inject('user')
 @observer
-export default class SettingsPage extends Component {
+export default class Settings extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   }
@@ -25,7 +25,6 @@ export default class SettingsPage extends Component {
   }
   render() {
     const { user } = this.props;
-    const status = null;
     const fields = [
       {
         name: 'username',
@@ -105,14 +104,11 @@ export default class SettingsPage extends Component {
                   <Button
                     type="submit"
                     bsStyle="primary"
-                    disabled={!!status}
                     style={{
                       position: 'relative',
                     }}
                   >
-                    <span style={{ display: !status ? 'block' : 'none' }}>
-                      Сохранить
-                    </span>
+                    Сохранить
                   </Button>
                 )}
               />

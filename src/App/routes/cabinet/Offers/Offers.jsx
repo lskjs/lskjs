@@ -5,7 +5,9 @@ import {
   CardBlock,
   Row,
   Col,
+  Button,
 } from 'react-bootstrap';
+import Link from 'lsk-general/General/Link';
 
 @observer
 export default class Offers extends Component {
@@ -16,15 +18,21 @@ export default class Offers extends Component {
     const { offers } = this.props;
     return (
       <Row>
-        {offers.list.map(offer => (
-          <Col key={offer._id} md={6}>
-            <Card>
-              <CardBlock>
-                {offer._id}
-              </CardBlock>
-            </Card>
-          </Col>
-        ))}
+        <Col xs={12}>
+          <Button componentClass={Link} href="/cabinet/offers/add">Создать новое предложение</Button>
+        </Col>
+        {offers.list.map((offer) => {
+          console.log(offer);
+          return (
+            <Col key={offer._id} xs={12} md={6}>
+              <Card>
+                <CardBlock>
+                  {offer._id}
+                </CardBlock>
+              </Card>
+            </Col>
+          );
+        })}
       </Row>
     );
   }
