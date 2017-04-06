@@ -1099,7 +1099,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.22.0, babel-traverse@^6.23.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0:
+babel-types@6.9.0, babel-types@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1109,7 +1109,7 @@ babel-types@6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0, babel-types@^6.9.0:
+babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
@@ -2265,11 +2265,7 @@ domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
 
-domelementtype@1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.0.tgz#b17aed82e8ab59e52dd9c19b1756e0fc187204c2"
-
-domelementtype@~1.1.1:
+domelementtype@1, domelementtype@~1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.1.3.tgz#bd28773e2642881aec51544924299c5cd822185b"
 
@@ -3411,13 +3407,9 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-highlight.js@9.8.0:
+highlight.js@9.8.0, highlight.js@^9.8.0:
   version "9.8.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.8.0.tgz#38eeef40cd45eaddbec8c9e5238fb7a783a3b685"
-
-highlight.js@^9.8.0:
-  version "9.10.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
 
 history@4.5.1:
   version "4.5.1"
@@ -4553,9 +4545,9 @@ lru-queue@0.1:
   dependencies:
     es5-ext "~0.10.2"
 
-lsk-admin@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.9.tgz#621d50fee7d9be1be205a5cf0ba4744502153e1a"
+lsk-admin@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/lsk-admin/-/lsk-admin-1.0.10.tgz#731b465f6e05aabad6c00fdc9ccafeb13ed751f5"
   dependencies:
     admin-lte "2.3.11"
     animate-sass "0.6.6"
@@ -4629,9 +4621,9 @@ lsk-build@0.6.7:
     webpack-hot-middleware "^2.16.1"
     webpack-middleware "^1.5.1"
 
-lsk-general@0.6.15:
-  version "0.6.15"
-  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.15.tgz#4a5fdc88426eebc1accd47573b9671f3be2ebc90"
+lsk-general@0.6.16:
+  version "0.6.16"
+  resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.6.16.tgz#958f3e8d6ed7a941389627fa0ceaf6151e12d1d2"
   dependencies:
     core-decorators "^0.15.0"
     glob-loader "0.3.0"
@@ -4687,19 +4679,9 @@ markdown-it-emoji@1.3.0, markdown-it-emoji@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/markdown-it-emoji/-/markdown-it-emoji-1.3.0.tgz#903ae1a9968c3f17d4e142f115d4ec575e56d2cb"
 
-markdown-it@8.1.0:
+markdown-it@8.1.0, markdown-it@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.1.0.tgz#38902d4e7bac2260c073eb67be623211fbb2c2e3"
-  dependencies:
-    argparse "^1.0.7"
-    entities "~1.1.1"
-    linkify-it "^2.0.0"
-    mdurl "^1.0.1"
-    uc.micro "^1.0.3"
-
-markdown-it@^8.1.0:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.3.1.tgz#2f4b622948ccdc193d66f3ca2d43125ac4ac7323"
   dependencies:
     argparse "^1.0.7"
     entities "~1.1.1"
@@ -6318,9 +6300,9 @@ react-addons-css-transition-group@15.4.2:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-addons-update/-/react-addons-update-15.3.2.tgz#b6385c4db1e5df371825e0615b04360ed94430fe"
 
-react-bootstrap-card@0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-card/-/react-bootstrap-card-0.1.4.tgz#2dbcd44e2a2bb74fe3c4f3dc3896f8b6612d60ca"
+react-bootstrap-card@0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-card/-/react-bootstrap-card-0.1.5.tgz#5a43af0be6de8a0f59f8eab226345fbbc2cba968"
   dependencies:
     classnames "^2.2.3"
 

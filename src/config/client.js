@@ -12,14 +12,13 @@ export default config.extend({
   log: {
     level: 'trace',
   },
-  url: 'http://localhost:3000',
+  url: __DEV__ ? 'http://localhost:3000' : '/',
   api: {
-    url: 'http://localhost:3000',
+    url: __DEV__ ? 'http://localhost:3000' : '/',
     base: '/api/v1',
     ws: {
-      url: 'http://localhost:8080',
+      url: __DEV__ ? 'http://localhost:8080' : '/',
       base: '/api',
-      tokenInCookie: true,
       options: {
         transports: ['websocket'],
       },
