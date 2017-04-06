@@ -101,7 +101,11 @@ export default (ctx) => {
     data.method = req.method;
     if (req.ws) data.method = 'WS';
     data.host = req.headers.host;
-    data.url = (req.baseUrl || '') + (req.url || '-');
+    if (req.ws) {
+      data.url = req.ws.nsp.name + ' ' + JSON.stringify(_.omit(req.data, ['EIO', 'transport', 'token']))
+    } else {
+      data.url = (req.baseUrl || '') + (req.url || '-');
+    }
     data.referer = req.header('referer') || req.header('referrer');
     data.ua = req.header('user-agent');
     data.ip = req.ip || req.connection.remoteAddress ||

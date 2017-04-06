@@ -59,6 +59,24 @@ export default (ctx) => {
         // }
         const namespace = ws.of(route);
         ws.atachMiddlwares(namespace);
+        // @TODO: may be in middleware
+        namespace.originalOn = namespace.on;
+        namespace.on = function(event, callback) {
+          // console.log('ns.on', event);
+            namespace.originalOn(event, (socket) => {
+              // socket.on()
+              // ctx.log.debug('WS.' + event, {err});
+
+              // console.log('ns.originalOn', event);
+              try {
+                return callback(socket)
+              } catch (err) {
+                ctx.log.error('ws.on error', {err});
+                namespace.emit('err', err.message)
+                return {err}
+              }
+            })
+        }
         typeof callback === 'function' && ws.on('connection', callback);
         return namespace;
       };

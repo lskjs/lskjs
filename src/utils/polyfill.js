@@ -8,7 +8,8 @@ global.timing = () => {
 // }
 require('babel-polyfill');
 require('babel-runtime/core-js/promise').default = require('bluebird');
-require('isomorphic-fetch');
+global.Promise = require('bluebird');
+global.fetch = require('isomorphic-fetch');
 // require('event-source-polyfill');
 // global.fetch = require('./fetch').default;
 
@@ -21,6 +22,18 @@ if (typeof window !== 'undefined') {
     };
   };
 }
+
+Date.prototype.toHumanString = function toHumanString() {
+  return [
+    this.toISOString().substr(0, 10).split('-').reverse().join('.'),
+    this.toISOString().substr(11, 8),
+  ].join(' ');
+};
+Date.toHumanString = function toHumanString(date) {
+  if (!date) return date;
+  return new Date(date).toHumanString();
+};
+
 
 export default function ready() {
   if (__DEV__) {

@@ -11,7 +11,7 @@ const ctx = {
       name: 'lego-starter-kit',
       path: fs.realpathSync(dirname + '/src'),
       alias: 'lego-starter-kit',
-    }
+    },
   ],
   alias: {
     // 'lego-starter-kit': fs.realpathSync(dirname + '/src'),
