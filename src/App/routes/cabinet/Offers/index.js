@@ -1,4 +1,5 @@
 import Offers from './Offers';
+import Offer from './Offer';
 import NewOffer from './NewOffer';
 
 export default {
@@ -6,15 +7,15 @@ export default {
     {
       path: '/',
       async action({ page, appStore }) {
-        const offers = new appStore.stores.Offers();
-        await offers.fetchOffers(5);
+        // const offers = new appStore.stores.Offers();
+        // await offers.fetchOffers(5);
         return page
           .meta({
             title: 'Предложения',
             description: 'Все предложения',
             url: '/cabinet/offers',
           })
-          .component(Offers, { offers });
+          .component(Offers, { /*offers*/ });
       },
     },
     {
@@ -27,6 +28,19 @@ export default {
             url: '/cabinet/offers/add',
           })
           .component(NewOffer, {});
+      },
+    },
+    {
+      path: '/:id',
+      async action({ page, appStore }, { id }) {
+        // const offer = await appStore.models.Offer.getById(id);
+        return page
+          .meta({
+            title: 'Кек',
+            description: 'Страница предложения',
+            url: `/cabinet/offers/${id}`,
+          })
+          .component(Offer, { /*offer*/ });
       },
     },
   ],

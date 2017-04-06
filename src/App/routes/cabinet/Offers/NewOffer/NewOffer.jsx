@@ -18,11 +18,7 @@ export default class NewOffer extends Component {
   }
   @autobind
   handleSubmit(body) {
-    const { api, log } = this.props;
-    api.fetch('offer', { method: 'POST', body })
-      .then((res) => {
-        log.info('res', res);
-      });
+    if (__CLIENT__) alert(JSON.stringify(body));
   }
   render() {
     const fields = [

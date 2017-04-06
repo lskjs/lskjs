@@ -14,6 +14,11 @@ export default ctx => (
       }
     }
 
+    static async getById(_id) {
+      const offerData = await ctx.api.fetch(`/offer/${_id}`);
+      return new this(offerData);
+    }
+
     setData(offer) {
       for (const item in offer) {
         if (item === 'user') {

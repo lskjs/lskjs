@@ -69,26 +69,32 @@ export default class Messages extends Component {
     if (!messages) return <Loading text="Загрузка сообщений.." />;
     return (
       <div>
-        {messages.map((message) => {
-          return (
-            <div key={message._id} styleName="container">
-              <img src={_.get(message, 'user.profile.avatar')} />
-              <div styleName="info">
-                <div styleName="author">
-                  {message.name}
-                </div>
-                {message.content}
-              </div>
-            </div>
-          );
-        })}
         <Card>
-          <FormControl
-            value={text}
-            onKeyPress={this.handleOnKeyPress}
-            onChange={this.handleOnChange}
-            placeholder="Введите текст комментария"
-          />
+          <CardBlock>
+            {messages.map((message) => {
+              return (
+                <div key={message._id} styleName="container">
+                  <img src={_.get(message, 'user.profile.avatar')} />
+                  <div styleName="info">
+                    <div styleName="author">
+                      {message.name}
+                    </div>
+                    {message.content}
+                  </div>
+                </div>
+              );
+            })}
+          </CardBlock>
+        </Card>
+        <Card>
+          <CardBlock>
+            <FormControl
+              value={text}
+              onKeyPress={this.handleOnKeyPress}
+              onChange={this.handleOnChange}
+              placeholder="Введите текст комментария"
+            />
+          </CardBlock>
         </Card>
       </div>
     );
