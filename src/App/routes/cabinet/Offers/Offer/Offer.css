@@ -1,0 +1,7 @@
+.heading {
+  font-size: 24px;
+  margin-top: 24px;
+  > small {
+    padding-left: 4px;
+  }
+}

@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
 
-import DashboardIcon from 'react-icons2/fa/dashboard';
-
 import LayoutWrapper from 'lsk-admin/Admin/lib/layout/LayoutWrapper';
 import PageWrapper from 'lsk-admin/Admin/lib/page/PageWrapper';
 import PageHeader from 'lsk-admin/Admin/lib/page/PageHeader';
@@ -21,10 +19,11 @@ import SidebarMenuWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarMenuWrapper';
 import SidebarMenuHeader from 'lsk-admin/Admin/lib/sidebar/SidebarMenuHeader';
 import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 
-import User from 'react-icons2/fa/user';
-import Users from 'react-icons2/fa/group';
-import Comments from 'react-icons2/fa/comments';
-import Cards from 'react-icons2/fa/th-large';
+import Dashboard from 'react-icons2/mdi/view-dashboard';
+import User from 'react-icons2/mdi/account';
+import Users from 'react-icons2/mdi/account-multiple';
+import Comments from 'react-icons2/mdi/comment-multipe-outline';
+import Cards from 'react-icons2/mdi/view-carousel';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
@@ -71,11 +70,11 @@ export default class CabinetLayout extends Component {
       icon: meta.crumb && meta.crumb.icon || meta.icon,
     }));
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
-      breadItems[0].icon = <DashboardIcon />;
+      breadItems[0].icon = <Dashboard />;
     }
     const mainMenus = [
       {
-        icon: <DashboardIcon />,
+        icon: <Dashboard />,
         title: 'Кабинет',
         url: '/cabinet',
       },
@@ -103,7 +102,7 @@ export default class CabinetLayout extends Component {
         ],
       },
       // {
-      //   icon: <DashboardIcon />,
+      //   icon: <Dashboard />,
       //   title: 'Профиль',
       //   url: '/cabinet/profile',
       // },
@@ -131,7 +130,7 @@ export default class CabinetLayout extends Component {
     ];
     const adminMenu = [
       {
-        icon: <DashboardIcon />,
+        icon: <Dashboard />,
         title: 'Дешборд',
         url: '/admin',
       },

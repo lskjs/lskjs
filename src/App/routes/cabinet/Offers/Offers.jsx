@@ -32,6 +32,7 @@ export default class Offers extends Component {
           {/*return (*/}
             <Col xs={12} md={6}>
               <OfferCard
+                linked
                 _id={1}
                 title="Кек"
                 user={{

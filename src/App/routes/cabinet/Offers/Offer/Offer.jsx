@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import css from 'importcss';
 import {
   Row,
   Col,
@@ -6,6 +7,7 @@ import {
 import OfferCard from '../OfferCard';
 import Messages from '~/App/modules/chat/Messages';
 
+@css(require('./Offer.css'))
 export default class Offer extends Component {
   render() {
     return (
@@ -25,7 +27,8 @@ export default class Offer extends Component {
             }}
             createdAt={1491091200000}
           />
-          <Messages subjectType="Chat" subjectId="test" />
+          <h3 styleName="heading">Отклики <small>Люди заинтересовавшиеся предложением</small></h3>
+          {/*<Messages subjectType="Offer" subjectId="test" />*/}
         </Col>
       </Row>
     );

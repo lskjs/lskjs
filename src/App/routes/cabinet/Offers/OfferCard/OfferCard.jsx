@@ -14,6 +14,7 @@ export default class OfferCard extends Component {
   static defaultProps = {
     type: null,
     price: null,
+    linked: false,
   }
   static propTypes = {
     _id: PropTypes.string.isRequired,
@@ -22,38 +23,48 @@ export default class OfferCard extends Component {
     title: PropTypes.string.isRequired,
     type: PropTypes.string,
     price: PropTypes.number,
+    linked: PropTypes.boolean,
   }
-  render() {
-    const { _id, user, type, createdAt, title, info, price } = this.props;
+  renderCard() {
+    const { user, type, createdAt, title, info, price } = this.props;
     return (
       <Card styleName="card">
-        <Link styleName="link" href={`/cabinet/offers/${_id}`}>
-          <CardBlock>
-            <section styleName="header">
-              <img
-                src={user.avatar}
-                alt={user.fullName}
-              />
-              <div styleName="info">
-                <h5>{user.fullName}</h5>
-                <small>{moment(createdAt).locale('ru').fromNow()}</small>
+        <CardBlock>
+          <section styleName="header">
+            <img
+              src={user.avatar}
+              alt={user.fullName}
+            />
+            <div styleName="info">
+              <h5>{user.fullName}</h5>
+              <small>{moment(createdAt).locale('ru').fromNow()}</small>
+            </div>
+            {type && (
+              <div styleName="type">
+                {type}
               </div>
-              {type && (
-                <div styleName="type">
-                  {type}
-                </div>
-              )}
-            </section>
-            <section styleName="body">
-              <h4>{title}</h4>
-              <p>{info.content}</p>
-            </section>
-            <section styleName="footer">
-              {price && <Label bsStyle="primary">{`${formatter(price)} руб.`}</Label>}
-            </section>
-          </CardBlock>
-        </Link>
+            )}
+          </section>
+          <section styleName="body">
+            <h4>{title}</h4>
+            <p>{info.content}</p>
+          </section>
+          <section styleName="footer">
+            {price && <Label bsStyle="primary">{`${formatter(price)} руб.`}</Label>}
+          </section>
+        </CardBlock>
       </Card>
     );
+  }
+  render() {
+    const { _id, linked } = this.props;
+    if (linked) {
+      return (
+        <Link styleName="link" href={`/cabinet/offers/${_id}`}>
+          {this.renderCard()}
+        </Link>
+      )
+    }
+    return this.renderCard();
   }
 }
