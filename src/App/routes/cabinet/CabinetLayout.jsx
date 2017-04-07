@@ -12,18 +12,11 @@ import MiniLogo from 'lsk-admin/Admin/lib/header/MiniLogo';
 import LargeLogo from 'lsk-admin/Admin/lib/header/LargeLogo';
 import Navbar from 'lsk-admin/Admin/lib/header/Navbar';
 import UserMenu from 'lsk-admin/Admin/lib/header/UserMenu';
-import SidebarWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarWrapper';
-import UserPanel from 'lsk-admin/Admin/lib/sidebar/UserPanel';
 import FooterWrapper from 'lsk-admin/Admin/lib/footer/FooterWrapper';
-import SidebarMenuWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarMenuWrapper';
-import SidebarMenuHeader from 'lsk-admin/Admin/lib/sidebar/SidebarMenuHeader';
-import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 
 import Dashboard from 'react-icons2/mdi/view-dashboard';
-import User from 'react-icons2/mdi/account';
-import Users from 'react-icons2/mdi/account-multiple';
-import Comments from 'react-icons2/mdi/comment-multipe-outline';
-import Cards from 'react-icons2/mdi/view-carousel';
+
+import CabinetSidebar from './CabinetSidebar';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 
@@ -72,80 +65,7 @@ export default class CabinetLayout extends Component {
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
       breadItems[0].icon = <Dashboard />;
     }
-    const mainMenus = [
-      {
-        icon: <Dashboard />,
-        title: 'Кабинет',
-        url: '/cabinet',
-      },
-      {
-        icon: <User />,
-        title: 'Профиль',
-        url: `/cabinet/user/${user._id}`,
-      },
-      {
-        icon: <Users />,
-        title: 'Пользователи',
-        url: '/cabinet/users',
-      },
-      {
-        icon: <Comments />,
-        title: 'Комментарии',
-        url: '/cabinet/comments',
-      },
-      {
-        icon: <Cards />,
-        title: 'Предложения',
-        items: [
-          { title: 'Все предложения', url: '/cabinet/offers' },
-          { title: 'Создать новое', url: '/cabinet/offers/add' },
-        ],
-      },
-      // {
-      //   icon: <Dashboard />,
-      //   title: 'Профиль',
-      //   url: '/cabinet/profile',
-      // },
-      // {
-      //   icon: <Users />,
-      //   title: 'Друзья',
-      //   label: 14,
-      //   items: [
-      //     { title: 'Все друзья', url: '/cabinet/friends' },
-      //     { title: 'Входящие заявки', url: '/cabinet/friends/in' },
-      //     { title: 'Исходящие заявки', url: '/cabinet/friends/out' },
-      //   ],
-      // },
-      // {
-      //   icon: <Posts />,
-      //   title: 'Посты',
-      //   url: '/cabinet/posts',
-      // },
-      // {
-      //   icon: <Mail />,
-      //   label: 10,
-      //   title: 'Сообщения',
-      //   url: '/cabinet/messages',
-      // },
-    ];
-    const adminMenu = [
-      {
-        icon: <Dashboard />,
-        title: 'Дешборд',
-        url: '/admin',
-      },
-      {
-        icon: <Users />,
-        // label: '6',
-        title: 'Пользователи',
-        url: '/admin/users',
-      },
-      // {
-      //   icon: <Zip />,
-      //   title: 'Еще кнопка',
-      //   url: '#',
-      // },
-    ];
+
     return (
       <LayoutWrapper color="black">
         <HeaderWrapper>
@@ -172,47 +92,7 @@ export default class CabinetLayout extends Component {
             />
           </Navbar>
         </HeaderWrapper>
-        <SidebarWrapper>
-          <UserPanel
-            statusText="В сети"
-            image={user.avatar}
-            name={user.fullName}
-          />
-          <SidebarMenuWrapper>
-            <SidebarMenuHeader title="НАВИГАЦИЯ" />
-            {mainMenus.map((menu, i) => {
-              const isSelected = menu.url === page.getMeta('url');
-              return (
-                <TreeMenu
-                  key={i}
-                  {...menu}
-                  isSelected={isSelected}
-                  onClick={() => this.onMenuClick(menu)}
-                  onItemClick={this.onMenuClick}
-                  pageUrl={page.getMeta('url')}
-                />
-              );
-            })}
-          </SidebarMenuWrapper>
-          <If condition={user.role === 'admin'}>
-            <SidebarMenuWrapper>
-              <SidebarMenuHeader title="АДМИН ПАНЕЛЬ" />
-              {adminMenu.map((menu, i) => {
-                const isSelected = menu.url === page.getMeta('url');
-                return (
-                  <TreeMenu
-                    key={i}
-                    {...menu}
-                    isSelected={isSelected}
-                    onClick={() => this.onMenuClick(menu)}
-                    onItemClick={this.onMenuClick}
-                    pageUrl={page.getMeta('url')}
-                  />
-                );
-              })}
-            </SidebarMenuWrapper>
-          </If>
-        </SidebarWrapper>
+        <CabinetSidebar />
         <PageWrapper>
           <PageHeader title={title} description={description}>
             <Breadcrumb items={breadItems} />

@@ -112,14 +112,6 @@ export default class Users extends Component {
             <TableHeaderColumn
               dataSort
               filterFormatted
-              dataField="updatedAt"
-              dataFormat={this.nameDate}
-            >
-              Изменение
-            </TableHeaderColumn>
-            <TableHeaderColumn
-              dataSort
-              filterFormatted
               dataField="visitedAt"
               dataFormat={this.nameDate}
             >

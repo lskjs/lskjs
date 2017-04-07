@@ -25,7 +25,17 @@ export default {
     {
       path: '/',
       async action({ page }) {
+        return page.redirect('/cabinet/dashboard');
+      },
+    },
+    {
+      path: '/dashboard',
+      async action({ page }) {
         return page
+          .meta({
+            title: 'Дешборд',
+            url: '/cabinet/dashboard',
+          })
           .component(Dashboard, {});
       },
     },
