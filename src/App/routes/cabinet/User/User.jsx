@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { inject } from 'mobx-react';
 import {
+  Button,
   Row,
   Col,
   Card,
@@ -7,21 +9,30 @@ import {
   CardHeader,
 } from 'react-bootstrap';
 import css from 'importcss';
-import AccountSearch from 'react-icons2/mdi/headphones-box';
+import Edit from 'react-icons2/mdi/account-settings';
 import Messages from '~/App/modules/chat/Messages';
+import Link from 'lsk-general/General/Link';
 
+@inject(stores => ({ myUser: stores.user }))
 @css(require('./User.css'))
 export default class User extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   }
   render() {
-    const { user } = this.props;
+    const { user, myUser } = this.props;
     return (
       <Row>
         <Col xs={12} styleName="center">
           <img styleName="avatar" src={user.avatar} alt={user.fullName} />
           <h3>{user.fullName}</h3>
+          <If condition={user._id === myUser._id}>
+            <Link href="/cabinet/settings">
+              <Button bsStyle="warning" bsSize="small">
+                <Edit /> Редактировать профиль
+              </Button>
+            </Link>
+          </If>
         </Col>
         <Col md={6} xs={12}>
           <Card style={{ margin: '10px 0' }}>
