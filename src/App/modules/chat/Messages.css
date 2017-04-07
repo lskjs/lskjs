@@ -11,13 +11,14 @@
 }
 
 .info {
-  display: flex;
+  /*display: flex;*/
+  flex: 1;
 }
 
 .author {
   font-weight: bold;
-  &:after {
-     content: ':';
+  display: block;
+  /*&:after {
      margin-right: 5px;
-  }
+  }*/
 }

@@ -64,7 +64,6 @@ export default (ctx) => {
     if (params.username) user.username = params.username;
     if (params.password) user.password = params.password;
     user.profile = _.merge({}, user.profile, params.profile);
-    console.log('user.profile', user.profile);
     user.name = fullName(user);
 
     return user.save();

@@ -8,34 +8,50 @@ export default class AuthStore {
     this.user = user;
     this.api = api;
     this.log = log;
-    this.rootState = rootState;
+    this.rootState = rootState || {};
   }
 
-  authenticate(res) {
-    // @TODO: подумать
-    if (res.token && res.user && res.user._id) {
-      this.setToken(res.token);
-      this.setUser(res.user);
-      return true;
+  init() {
+    const res = this.getUserAndToken();
+    this.log.trace('AuthStore.init res', res);
+    this.setUserAndToken(res);
+    this.initUserProfile();
+  }
+
+  initUserProfile() {
+    if (
+      this.rootState.token &&
+      __CLIENT__ &&
+      !(this.rootState.user && this.rootState.user.profile)
+    ) {
+      this.applyPromise(
+        this.findUserProfile(),
+      );
     }
-    return false;
   }
 
-  async setToken(token) {
+
+  async findUserProfile() {
+    return this.api.getUser({ _id: this.user._id }).then(user => ({ user }));
+  }
+
+
+  setToken(token) {
+    this.log.trace('AuthStore.setToken', token);
     this.api.setAuthToken(token);
     this.rootState.token = token;
     if (__CLIENT__) {
       if (token == null) {
-        this.log.trace('AuthStore cookie.remove');
+        // this.log.trace('AuthStore cookie.remove');
         cookie.remove('token'/* , { path: '/' }*/);
       } else {
-        this.log.trace('AuthStore cookie.set', token);
+        // this.log.trace('AuthStore cookie.set', token);
         cookie.set('token', token/* , { path: '/' }*/);
       }
     }
   }
 
-  async setUser(user = null) {
+  setUser(user = null) {
     this.log.trace('AuthStore.setUser', user);
     this.rootState.user = user;
     if (this.user) {
@@ -47,38 +63,63 @@ export default class AuthStore {
     }
   }
 
-  async init(data) {
-    this.promise = this.api.getUser(data);
-    const user = await this.promise;
-    this.user && this.user.update(user);
+  setUserAndToken(res = {}) {
+    this.log.trace('AuthStore.setUserAndToken', res);
+    if (res.token || res.user) {
+      if (res.token) {
+        this.setToken(res.token);
+      }
+      if (res.user && res.user._id) {
+        this.setUser(res.user);
+      }
+    } else {
+      this.setToken(null);
+      this.setUser(null);
+    }
+  }
+
+  getUserAndToken() {
+    this.log.trace('AuthStore.getUserAndToken');
+    const res = {};
+    if (this.rootState) {
+      if (this.rootState.token) {
+        res.token = this.rootState.token;
+      }
+      if (this.rootState.user) {
+        res.user = this.rootState.user;
+      }
+    }
+    if (!res.token && cookie.get('token')) {
+      res.token = cookie.get('token');
+    }
+    return res;
+  }
+
+  async applyPromise(promise) {
+    this.log.trace('AuthStore.applyPromise');
+    // @TODO: промис может быть в процессе резрешения
+    this.promise = promise;
+    const res = await this.promise;
+    this.setUserAndToken(res);
+    return res;
   }
 
   isAuthAsync() {
+    this.log.trace('AuthStore.isAuthAsync');
     if (!this.promise) return false;
     return this.promise
-      .then(() => !!this.isAuth())
-      .catch(() => !!this.isAuth());
+      .then(() => this.isAuth())
+      .catch(() => this.isAuth());
   }
 
   isAuth() {
     return !!(this.rootState && this.rootState.token && this.rootState.user && this.rootState.user._id);
   }
 
-  async applyPromise(promise) {
-    // @TODO: промис может быть в процессе резрешения
-    // this.log.info('[Y] promise', promise);
-    this.promise = promise;
-    const res = await this.promise;
-    // this.log.info('[Y] res', res);
-    await this.setToken(res.token);
-    await this.setUser(res.user);
-    return res;
-  }
 
   logout() {
     this.log.trace('AuthStore.logout');
-    this.setToken(null);
-    this.setUser(null);
+    this.setUserAndToken({});
   }
 
   signup(data) {

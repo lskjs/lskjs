@@ -5,7 +5,9 @@ import css from 'importcss';
 import _ from 'lodash';
 import {
   Card,
+  CardHeader,
   CardBlock,
+  CardFooter,
   FormControl,
 } from 'react-bootstrap';
 import Loading from '~/App/components/Loading';
@@ -23,7 +25,7 @@ export default class Messages extends Component {
       query: { subjectType, subjectId },
     });
     this.socket.on('message', async (message) => {
-      console.log('message@@!!');
+      // console.log('message@@!!');
       const { messages } = this.state;
       messages.push(message);
       this.setState({ messages });
@@ -64,39 +66,99 @@ export default class Messages extends Component {
     this.setState({ text: value });
   }
 
-  render() {
-    const { messages, text } = this.state;
+  renderMessages() {
+    const { messages } = this.state;
     if (!messages) return <Loading text="Загрузка сообщений.." />;
     return (
       <div>
-        <Card>
-          <CardBlock>
-            {messages.map((message) => {
-              return (
-                <div key={message._id} styleName="container">
-                  <img src={_.get(message, 'user.profile.avatar')} />
-                  <div styleName="info">
-                    <div styleName="author">
-                      {message.name}
-                    </div>
-                    {message.content}
-                  </div>
+        {messages.map((message) => {
+          return (
+            <div key={message._id} styleName="container">
+              <img src={_.get(message, 'user.profile.avatar')} />
+              <div styleName="info">
+                <div styleName="author">
+                  {message.user.name}
                 </div>
-              );
-            })}
-          </CardBlock>
-        </Card>
-        <Card>
-          <CardBlock>
-            <FormControl
-              value={text}
-              onKeyPress={this.handleOnKeyPress}
-              onChange={this.handleOnChange}
-              placeholder="Введите текст комментария"
-            />
-          </CardBlock>
-        </Card>
+                {message.content}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
+  }
+  renderFooter() {
+    const { text } = this.state;
+    const { user } = this.props;
+    if (!user) return null;
+    // if (!text) return null;
+    return (
+      <div styleName="container">
+        <img src={user.avatar} />
+        <div styleName="info">
+          <FormControl
+            value={text}
+            onKeyPress={this.handleOnKeyPress}
+            onChange={this.handleOnChange}
+            placeholder="Введите текст комментария"
+          />
+        </div>
+      </div>
+    );
+  }
+  render() {
+    const { wrap, title } = this.props;
+    if (wrap || title) {
+      return (
+        <Card style={{ margin: '10px 0' }}>
+          <If condition={title}>
+            <CardHeader>
+              {title}
+            </CardHeader>
+          </If>
+          <CardBlock>
+            {this.renderMessages()}
+          </CardBlock>
+          <CardFooter>
+            {this.renderFooter()}
+          </CardFooter>
+        </Card>
+      );
+    }
+    return (<div>
+      {this.renderMessages()}
+      {this.renderFooter()}
+    </div>);
+    // return (
+    //   <div>
+    //     <Card>
+    //       <CardBlock>
+    //         {messages.map((message) => {
+    //           return (
+    //             <div key={message._id} styleName="container">
+    //               <img src={_.get(message, 'user.profile.avatar')} />
+    //               <div styleName="info">
+    //                 <div styleName="author">
+    //                   {message.name}
+    //                 </div>
+    //                 {message.content}
+    //               </div>
+    //             </div>
+    //           );
+    //         })}
+    //       </CardBlock>
+    //     </Card>
+    //     <Card>
+    //       <CardBlock>
+    //         <FormControl
+    //           value={text}
+    //           onKeyPress={this.handleOnKeyPress}
+    //           onChange={this.handleOnChange}
+    //           placeholder="Введите текст комментария"
+    //         />
+    //       </CardBlock>
+    //     </Card>
+    //   </div>
+    // );
   }
 }

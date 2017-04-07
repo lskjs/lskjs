@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 import css from 'importcss';
 import AccountSearch from 'react-icons2/mdi/headphones-box';
+import Messages from '~/App/modules/chat/Messages';
 
 @css(require('./User.css'))
 export default class User extends Component {
@@ -40,15 +41,15 @@ export default class User extends Component {
           </Card>
         </Col>
         <Col md={6} xs={12}>
-          <Card style={{ margin: '10px 0' }}>
+          <Messages title="Комментарии" subjectType="User" subjectId={user._id} />
+          {/* <Card style={{ margin: '10px 0' }}>
             <CardHeader>
-              О себе
+              Комментарии
             </CardHeader>
             <CardBlock>
-              <AccountSearch />
-
+              <Messages subjectType="User" subjectId={user._id} />
             </CardBlock>
-          </Card>
+          </Card> */}
           {['phone', 'email'].includes(user.profile) && (
             <Card style={{ margin: '10px 0' }}>
               <CardHeader>

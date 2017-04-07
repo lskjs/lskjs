@@ -18,7 +18,7 @@ export default class AppStore extends Provider {
     this.models = this.getModels();
     this.stores = this.getStores();
 
-    this.auth.authenticate(this.rootState)
+    this.auth.init();
   }
 
 

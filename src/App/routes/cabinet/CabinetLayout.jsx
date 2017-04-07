@@ -64,11 +64,11 @@ export default class CabinetLayout extends Component {
     const { user, children, page, config } = this.props;
     const title = page.getMeta('title');
     const description = page.getMeta('description');
-    const breadItems = (page.state.metas || []).map((meta, key) => ({
+    const breadItems = (page.state.metas || []).slice(1).map((meta, key) => ({
       key,
       title: meta.crumb && meta.crumb.title || meta.title || 'Главная',
       url: meta.crumb && meta.crumb.url || meta.url || '/',
-      icon: meta.crumb && meta.crumb.icon || meta.icon
+      icon: meta.crumb && meta.crumb.icon || meta.icon,
     }));
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
       breadItems[0].icon = <DashboardIcon />;
