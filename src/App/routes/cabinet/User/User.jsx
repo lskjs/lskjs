@@ -7,6 +7,7 @@ import {
   CardHeader,
 } from 'react-bootstrap';
 import css from 'importcss';
+import AccountSearch from 'react-icons2/mdi/headphones-box';
 
 @css(require('./User.css'))
 export default class User extends Component {
@@ -34,6 +35,7 @@ export default class User extends Component {
               {user.profile.city && <p><b>Город: </b>{user.profile.city}</p>}
               {user.profile.bdate && <p><b>Дата рождения: </b>{user.profile.bdate}</p>}
               <p><b>Пол: </b>{user.profile.sex || 'Не определился'}</p>
+              <p><b>О себе: </b>{user.profile.about || 'Не указано'}</p>
             </CardBlock>
           </Card>
         </Col>
@@ -43,7 +45,8 @@ export default class User extends Component {
               О себе
             </CardHeader>
             <CardBlock>
-              {user.profile.about || 'Не указано'}
+              <AccountSearch />
+
             </CardBlock>
           </Card>
           {['phone', 'email'].includes(user.profile) && (

@@ -16,9 +16,9 @@ import {
 } from 'react-bootstrap';
 import { get } from 'lodash';
 
-import Loading from 'react-icons/lib/md/refresh';
-import Error from 'react-icons/lib/md/clear';
-import Check from 'react-icons/lib/md/check';
+import Loading from 'react-icons2/md/refresh';
+import Error from 'react-icons2/md/clear';
+import Check from 'react-icons2/md/check';
 
 import Component from 'lsk-general/General/Component';
 import Slide from '../../Slide';

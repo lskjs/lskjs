@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
 
-import DashboardIcon from 'react-icons/lib/fa/dashboard';
+import DashboardIcon from 'react-icons2/fa/dashboard';
 
 import LayoutWrapper from 'lsk-admin/Admin/lib/layout/LayoutWrapper';
 import PageWrapper from 'lsk-admin/Admin/lib/page/PageWrapper';
@@ -21,10 +21,10 @@ import SidebarMenuWrapper from 'lsk-admin/Admin/lib/sidebar/SidebarMenuWrapper';
 import SidebarMenuHeader from 'lsk-admin/Admin/lib/sidebar/SidebarMenuHeader';
 import TreeMenu from 'lsk-admin/Admin/lib/sidebar/TreeMenu';
 
-import User from 'react-icons/lib/fa/user';
-import Users from 'react-icons/lib/fa/group';
-import Comments from 'react-icons/lib/fa/comments';
-import Cards from 'react-icons/lib/fa/th-large';
+import User from 'react-icons2/fa/user';
+import Users from 'react-icons2/fa/group';
+import Comments from 'react-icons2/fa/comments';
+import Cards from 'react-icons2/fa/th-large';
 
 import 'lsk-admin/Admin/sass/AdminLTE.g.scss';
 

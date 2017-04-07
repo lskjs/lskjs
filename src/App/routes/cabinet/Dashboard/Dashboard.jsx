@@ -6,13 +6,13 @@ import {
   CardBlock,
 } from 'react-bootstrap';
 import InfoBox from 'lsk-admin/Admin/lib/widgets/InfoBox';
-import Group from 'react-icons/lib/fa/group';
-import Eye from 'react-icons/lib/fa/eye';
-import Clock from 'react-icons/lib/fa/clock-o';
-import Laptop from 'react-icons/lib/fa/laptop';
-import Tablet from 'react-icons/lib/fa/tablet';
-import Mobile from 'react-icons/lib/fa/mobile';
-import Desktop from 'react-icons/lib/fa/desktop';
+import Group from 'react-icons2/fa/group';
+import Eye from 'react-icons2/fa/eye';
+import Clock from 'react-icons2/fa/clock-o';
+import Laptop from 'react-icons2/fa/laptop';
+import Tablet from 'react-icons2/fa/tablet';
+import Mobile from 'react-icons2/fa/mobile';
+import Desktop from 'react-icons2/fa/desktop';
 import css from 'importcss';
 import { formatter } from '~/utils';
 import GenderBlock from './components/GenderBlock';

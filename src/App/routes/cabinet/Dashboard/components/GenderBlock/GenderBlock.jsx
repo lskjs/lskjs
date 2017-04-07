@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import css from 'importcss';
-import Male from 'react-icons/lib/fa/male';
-import Female from 'react-icons/lib/fa/female';
+import Male from 'react-icons2/fa/male';
+import Female from 'react-icons2/fa/female';
 import GenderGraph from '../GenderGraph';
 
 @css(require('./GenderBlock.css'))

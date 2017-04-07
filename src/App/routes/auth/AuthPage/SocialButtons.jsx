@@ -4,13 +4,13 @@ import {
   Button,
 } from 'react-bootstrap';
 
-import VKontakte from 'react-icons/lib/fa/vk';
-import Odnoklassniki from 'react-icons/lib/fa/odnoklassniki';
-import Facebook from 'react-icons/lib/fa/facebook';
-import Twitter from 'react-icons/lib/fa/twitter';
-import Twitch from 'react-icons/lib/fa/twitch';
-import Youtube from 'react-icons/lib/fa/youtube-play';
-import Instagram from 'react-icons/lib/fa/instagram';
+import VKontakte from 'react-icons2/fa/vk';
+import Odnoklassniki from 'react-icons2/fa/odnoklassniki';
+import Facebook from 'react-icons2/fa/facebook';
+import Twitter from 'react-icons2/fa/twitter';
+import Twitch from 'react-icons2/fa/twitch';
+import Youtube from 'react-icons2/fa/youtube-play';
+import Instagram from 'react-icons2/fa/instagram';
 
 import _ from 'lodash';
 

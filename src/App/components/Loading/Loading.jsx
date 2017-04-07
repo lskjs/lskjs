@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import css from 'importcss';
-import Refresh from 'react-icons/lib/fa/refresh';
+import Refresh from 'react-icons2/fa/refresh';
 
 @css(require('./Loading.css'))
 export default class Loading extends PureComponent {

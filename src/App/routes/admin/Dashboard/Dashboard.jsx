@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import StatBox from 'lsk-admin/Admin/lib/widgets/StatBox';
 import InfoBox from 'lsk-admin/Admin/lib/widgets/InfoBox';
-import Users from 'react-icons/lib/fa/group';
-import Star from 'react-icons/lib/fa/star-o';
+import Users from 'react-icons2/fa/group';
+import Star from 'react-icons2/fa/star-o';
 
 export default class Dashboard extends Component {
   render() {
