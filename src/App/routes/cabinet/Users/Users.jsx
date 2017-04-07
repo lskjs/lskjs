@@ -125,9 +125,10 @@ export default class Users extends Component {
           </BootstrapTable>
           <VisibilitySensor
             onChange={this.handleMoreUsers}
-            intervalCheck={false}
+            // intervalCheck={false}
             scrollCheck
           />
+          {/* @TODO: сделать кнопку загрузить пользователей */}
           <If condition={loading}>
             <Loading text="Загрузка пользователей.." />
           </If>
