@@ -1,3 +1,4 @@
+@import "rc-steps/assets/index.css";
 @import "./notifications.css";
 
 html {
@@ -37,3 +38,8 @@ body {
   to {transform:rotate(360deg);}
 }
 
+.rc-steps-label-vertical {
+  .rc-steps-description {
+    text-align: center !important;
+  }
+}

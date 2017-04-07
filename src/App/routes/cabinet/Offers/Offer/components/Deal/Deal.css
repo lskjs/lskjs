@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  > img {
+    flex-shrink: 0;
+    width: 100px;
+    height:100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  > h4 {
+    font-size: 24px;
+    margin: 0 0 8px;
+  }
+}
+
+.line {
+  display: flex;
+  align-items: center;
+}
+
+:global .label {
+  align-self: baseline;
+  padding: 4px 8px;
+  margin-bottom: 5px;
+}
+
+.body {
+  margin-top: 15px;
+}
+
+.steps {
+  padding: 20px 0 10px;
+  margin-top: 15px;
+}
+
+.accepted {
+  outline: 1px solid #4caf50;
+}
+
+.footer {
+  border-top: 2px solid #d5dbdc;
+  padding-top: 20px;
+}

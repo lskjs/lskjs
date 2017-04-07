@@ -4369,6 +4369,10 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+
 lodash.get@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-3.7.0.tgz#3ce68ae2c91683b281cc5394128303cbf75e691f"
@@ -6275,6 +6279,13 @@ raw-body@~2.2.0:
 raw-loader@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
+
+rc-steps@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/rc-steps/-/rc-steps-2.5.0.tgz#ef7288a2c9de118fa0fe890926d81a53fb774fd0"
+  dependencies:
+    classnames "^2.2.3"
+    lodash.debounce "^4.0.8"
 
 rc@^1.1.7:
   version "1.2.1"

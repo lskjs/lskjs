@@ -26,6 +26,7 @@
     "passport": "0.3.2",
     "passport-vkontakte": "0.3.2",
     "passport-youtube-v3": "2.0.0",
+    "rc-steps": "^2.5.0",
     "react": "15.4.2",
     "react-addons-css-transition-group": "15.4.2",
     "react-bootstrap": "0.30.7",

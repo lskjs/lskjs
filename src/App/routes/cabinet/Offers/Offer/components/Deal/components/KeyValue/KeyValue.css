@@ -1,0 +1,14 @@
+.tag {
+  margin: 0 3px;
+}
+
+.key {
+  &:after {
+    content: ':';
+    padding-right: 5px;
+  }
+}
+
+.value {
+
+}
