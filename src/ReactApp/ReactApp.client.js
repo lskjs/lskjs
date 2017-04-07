@@ -24,8 +24,18 @@ export default class ReactApp {
     this.log = this.getLogger();
   }
 
-
   getLogger(params) {
+    if (__DEV__) {
+      const logger = (type) => {
+        return (...args) => {
+          console.log(`[${type}]`, ...args);
+        }
+      }
+      return ['trace', 'debug', 'info', 'warn', 'error'].reduce((r, name) => {
+        r[name] = logger(name);
+        return r;
+      }, {})
+    }
     const options = Object.assign({
       name: 'client',
       src: __DEV__,
