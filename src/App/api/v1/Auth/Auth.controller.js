@@ -100,9 +100,9 @@ export default (ctx) => {
 
     // OR passportId: passport._id
     const findParams = {};
-    if (findParams.passportId) findParams._id = findParams.passportId;
-    if (findParams.provider) findParams.provider = findParams.provider;
-    params.user = userId;
+    if (params.passportId) findParams._id = params.passportId;
+    if (params.provider) findParams.provider = params.provider;
+    findParams.user = userId;
     if (!findParams.passportId && !findParams.provider) {
       throw e400('!findParams.passportId && !findParams.provider');
     }
