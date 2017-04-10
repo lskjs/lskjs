@@ -9,8 +9,8 @@ export default (ctx) => {
       this.models = getModels(ctx);
     }
     async run() {
-      ctx.app.use('/api/module', this.getApi());
-      this.ws = ctx.app.ws('/api/module/chat/comments')
+      ctx.app.use('/api/module/chat', this.getApi());
+      this.ws = ctx.app.ws('/api/module/chat/message')
         .on('connection', this.onSocket);
     }
 
@@ -33,6 +33,7 @@ export default (ctx) => {
         params.user = userId;
         const message = new Message(params);
         await message.save();
+        console.log(this.ws, 'this.ws');
         this.emit(
           this.getRoomName(params.subjectType, params.subjectId),
           await Message.populate(message, 'user'),
@@ -58,7 +59,7 @@ export default (ctx) => {
         // check owner
         return comment.remove();
       }); // Изменить комментарий
-      api.use('/chat', wrapResourse(createResourse(Chat)));
+      api.use('/', wrapResourse(createResourse(Chat)));
       api.use('/message', wrapResourse(createResourse(Message)));
       return api;
     }
@@ -68,14 +69,16 @@ export default (ctx) => {
     }
 
     emit(room, message, emitAction = 'message') {
+      console.log(`Шлю в комнату ${room} сообщение ${message.content}`);
       return this.ws.to(room).emit(emitAction, message);
     }
 
     @autobind
     onSocket(socket) {
+      console.log('socket connected');
       const { req } = socket;
       const { Message } = this.models;
-      if (!req.user || !req.user._id) throw new Error('Not Auth')
+      if (!req.user || !req.user._id) throw new Error('Not Auth');
 
       const { subjectType, subjectId } = req.data;
       const roomName = this.getRoomName(subjectType, subjectId);
@@ -92,7 +95,6 @@ export default (ctx) => {
         await Message.populate(message, 'user');
         return this.emit(roomName, message);
       });
-
     }
   };
 };

@@ -25,7 +25,7 @@ export default (ctx) => {
       try {
         if (!to) throw '!to';
         if (!template) throw '!template';
-        if (!transporter) throw '!transporter';
+        if (!this.transporter) throw '!transporter';
         // Ищем шаблон
         if (this.templates[template]) {
           // Шаблон это класс, создаем экземпляр

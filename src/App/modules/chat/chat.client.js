@@ -24,7 +24,7 @@ export default class Chat extends Component {
       messages.push(message);
       this.setState({ messages });
     });
-    console.log(this.socket);
+
     const res = await this.getLastMessages();
     this.setState({ messages: res.data || [] });
   }

@@ -20,12 +20,13 @@ export default config.extend({
       port: 465,
       secure: true,
       auth: {
-        user: 'example@gmail.com',
-        pass: 'example',
+        user: 'lsk@mgbeta.ru',
+        pass: 'DqPDBbPBlz5A8zwb2M',
       },
     },
     options: {
-      from: '"example" <example@gmail.com>',
+      from: '"lego-starter-kit!" <lsk@mgbeta.ru>',
+      subject: 'lego-starter-kit',
     },
   },
   ws: {},

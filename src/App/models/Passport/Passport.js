@@ -51,6 +51,8 @@ export function getSchema(ctx) {
     },
   }, {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   });
 
   schema.methods.updateSocialData = async function () {
@@ -67,7 +69,7 @@ export function getSchema(ctx) {
         subscribers: await strategy.getSubscribers({ accessToken: token, providerId: this.providerId }),
       };
       if (data.statics && data.videos && data.lastVideo && data.analytics && data.subscribers) {
-        _.merge(this.meta, data);
+        this.meta = _.merge({}, this.meta, data);
         this.fetchedAt = new Date();
       }
     } catch (err) {
@@ -79,14 +81,16 @@ export function getSchema(ctx) {
   schema.methods.generateUsername = async function () {
     const { User } = ctx.models;
     let username = `${this.providerId}_${this.provider}.com`;
+    username = username.toLowerCase();
     let user = await User.findOne({ username });
+    console.log({ user });
     let count = 0;
     while (user) {
       count += 1;
       username += `_${count}`;
       user = await User.findOne({ username }); // eslint-disable-line
     }
-    return username.toLowerCase();
+    return username;
   };
   schema.methods.getUser = async function () {
     return ctx.models.User.findById(this.user);

@@ -1,0 +1,4 @@
+{
+  "main": "offer.server.js",
+  "browser": "offer.client.js"
+}
