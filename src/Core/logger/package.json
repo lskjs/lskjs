@@ -1,0 +1,4 @@
+{
+  "main": "logger.server.js",
+  "browser": "logger.client.js"
+}
