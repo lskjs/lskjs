@@ -57,16 +57,16 @@ export function getSchema(ctx) {
     .then(checkNotFound);
     if (user.email !== email) throw e400('user.email !== email');
     if (!user.private) user.private = {};
-    console.log(user.private.approvedEmailToken);
-    console.log('=================================');
-    console.log(token);
+    // console.log(user.private.approvedEmailToken);
+    // console.log('=================================');
+    // console.log(token);
     if (user.private.approvedEmailToken !== token) throw e400('wrong token');
     user.private.approvedEmailDate = new Date();
     user.meta.approvedEmail = true;
     user.private.approvedEmailToken = null;
     user.markModified('private');
     user.markModified('meta');
-    console.log(user);
+    // console.log(user);
     return user.save();
   };
 

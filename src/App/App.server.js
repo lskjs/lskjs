@@ -1,13 +1,17 @@
 import ReactApp from 'lego-starter-kit/ReactApp'; // eslint-disable-line
 import passport from 'passport';
 import _ from 'lodash';
+import getModules from '~/modules/index.server'; // eslint-disable-line
 
 import getApi from './api/v1';
 import getDocs from './api/v1/v1.docs';
-import routes from './routes';
 import assets from './assets'; // eslint-disable-line
-import getModules from './modules';
+
 export default class App extends ReactApp {
+
+  getAssets() {
+    return assets.main;
+  }
 
   getModels() {
     return {
@@ -16,8 +20,8 @@ export default class App extends ReactApp {
     };
   }
 
-  init() {
-    super.init();
+  async init() {
+    await super.init();
     this.passport = passport;
     const strategies = require('./strategies').default(this) || {};
     if (this.config.auth && this.config.auth.socials) {
@@ -47,8 +51,8 @@ export default class App extends ReactApp {
     return statics;
   }
 
-  run() {
-    super.run();
+  async run() {
+    await super.run();
     if (this.strategies) {
       _.forEach(this.strategies || [], (strategy) => {
         this.passport.use(strategy.getStrategy(strategy));
@@ -67,15 +71,5 @@ export default class App extends ReactApp {
     this.app.use('/api/v1', getApi(this));
   }
 
-  getAssets() {
-    return assets.main;
-  }
-
-  static Html = require('./Html').default; // eslint-disable-line
-  Provider = require('./stores/AppStore').default; // eslint-disable-line
-
-  getUniversalRoutes() {
-    return routes;
-  }
 
 }

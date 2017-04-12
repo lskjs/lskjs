@@ -1,9 +1,11 @@
 import jwt from 'express-jwt';
-import validator from 'validator';
 export function canonize(str) {
   return str.toLowerCase().trim();
 }
-
+function isEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
 
 export default (ctx) => {
   const User = ctx.models.User;
@@ -40,18 +42,18 @@ export default (ctx) => {
   };
   resourse.getUserFields = function (req) {
     const params = req.allParams();
-    console.log({ params });
+    // console.log({ params });
     if (params.login) {
       if (!params.username) {
         params.username = params.login.split('@')[0];
       }
-      if (!params.email && validator.isEmail(params.login)) {
+      if (!params.email && isEmail(params.login)) {
         params.email = params.login;
       } // if email
     }
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
-    console.log({ params });
+    // console.log({ params });
     return params;
   };
   resourse.getUserCriteria = function (req) {
@@ -87,7 +89,7 @@ export default (ctx) => {
     if (existUser) throw ctx.errors.e400('Username with this email or username is registered');
     if (!userFields.meta) userFields.meta = {};
     userFields.meta.approvedEmail = false;
-    console.log({ userFields });
+    // console.log({ userFields });
     const user = new User(userFields);
     await user.save();
 

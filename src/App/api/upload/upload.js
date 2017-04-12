@@ -91,7 +91,7 @@ export default (ctx) => {
     });
   });
   api.post('/', upload.single('file'), async (req) => {
-    console.log(req.file);
+    // console.log(req.file);
     const { file } = req;
     return {
       name: file.fieldname,

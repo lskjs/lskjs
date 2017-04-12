@@ -58,7 +58,7 @@ export function getSchema(ctx) {
   schema.methods.updateSocialData = async function () {
     try {
       const { token } = this;
-      console.log(ctx.strategies, this.strategies);
+      // console.log(ctx.strategies, this.strategies);
       const strategy = ctx.strategies[this.provider];
       if (this.provider !== 'youtube') return;
       const data = {
@@ -83,7 +83,7 @@ export function getSchema(ctx) {
     let username = `${this.providerId}_${this.provider}.com`;
     username = username.toLowerCase();
     let user = await User.findOne({ username });
-    console.log({ user });
+    // console.log({ user });
     let count = 0;
     while (user) {
       count += 1;

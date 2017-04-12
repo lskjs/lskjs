@@ -18,7 +18,7 @@ export default (ctx) => {
       req.data, // meta
       { username: await passport.generateUsername() },
     );
-    console.log({ params });
+    // console.log({ params });
     const user = new User(params);
     await user.save();
     passport.user = user._id;

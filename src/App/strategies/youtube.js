@@ -287,7 +287,7 @@ export default (ctx) => {
         if (dimensions.length > 0) {
           url += `&dimensions=${dimensions.join(',')}`;
         }
-        console.log(url);
+        // console.log(url);
         const response = await fetch(url, {
           method: 'GET',
           headers: {
