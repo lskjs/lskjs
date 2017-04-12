@@ -149,7 +149,8 @@ export default class CoreApp extends ExpressApp {
     if (!this.db) return;
     this.log.trace('CoreApp.runDb');
     try {
-      return this.db.run();
+      await this.db.run();
+      return true;
     } catch (err) {
       this.log.fatal(err);
       throw err;

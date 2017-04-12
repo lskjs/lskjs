@@ -230,7 +230,6 @@ export default class Page {
 
   renderRoot() {
     const Root = this.Root;
-    console.log({ Root });
     return (
       <Root {...this.getRootComponentProps()}>
         {this.renderComponentWithLayout()}

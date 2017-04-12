@@ -3,7 +3,7 @@ import logger from './logger';
 // import config from './config';
 
 function isClass(v) {
-  return typeof v === 'function' && /^\s*class\s+/.test(v.toString());
+  return typeof v === 'function';// && /^\s*class\s+/.test(v.toString());
 }
 
 export default class Core {
@@ -51,8 +51,10 @@ export default class Core {
   }
 
   broadcastModules(method) {
+    this.log.trace('Core.broadcastModules', method);
     return Promise.each(this.getModulesSequence(), (pack) => {
-      if (!(pack.module && typeof pack.module.init === 'function')) return;
+      // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
+      if (!(pack.module && typeof pack.module[method] === 'function')) return;
       this.log.trace(`module ${pack.name}.${method}()`);
       return pack.module[method]();
     });
@@ -60,6 +62,7 @@ export default class Core {
 
   initModules() {
     this._modules = this.getModules();
+    // console.log('@@!!', {modules});
     const modules = {};
     _.forEach(this._modules, (Module, key) => {
       // const Module = module(ctx);
@@ -70,7 +73,8 @@ export default class Core {
       }
     });
     this.modules = modules;
-    this.log.debug('modules', Object.keys(this.modules));
+    this.log.debug('Core.modules', Object.keys(this.modules));
+    // this.log.debug('_modules', Object.keys(this._modules));
     return this.broadcastModules('init');
   }
 

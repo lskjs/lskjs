@@ -17,7 +17,7 @@ export default (ctx, params) => {
   mongoose.reconnect = () => {
     ctx.log.trace('db reconnect');
     mongoose.disconnect();
-    mongoose.run();
+    return mongoose.run();
   };
 
   let reconnectIteration = 0;
