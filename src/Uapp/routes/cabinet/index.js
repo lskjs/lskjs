@@ -29,6 +29,13 @@ export default {
       },
     },
     {
+      path: '/profile',
+      async action({ page, user }) {
+        return page
+          .redirect(`/cabinet/user/${user._id}`);
+      },
+    },
+    {
       path: '/dashboard',
       async action({ page }) {
         return page
