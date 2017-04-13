@@ -21,7 +21,6 @@ $brand-info:            #3498DB !default;
 $brand-warning:         #F39C12 !default;
 $brand-danger:          #E74C3C !default;
 
-
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
@@ -146,9 +145,9 @@ $table-border-color:            $gray-lighter !default;
 $btn-font-weight:                normal !default;
 
 $btn-default-color:              #fff !default;
-$btn-default-bg:                 $gray !default;
-$btn-default-border:             $btn-default-bg !default;
-
+$btn-default-bg:                 #95a5a6 !default;
+$btn-default-border:             #95a5a6 !default;
+//
 $btn-primary-color:              $btn-default-color !default;
 $btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             $btn-primary-bg !default;
@@ -171,10 +170,13 @@ $btn-danger-border:              $btn-danger-bg !default;
 
 $btn-link-disabled-color:        $gray-light !default;
 
-// Allows for customizing button radius independently from global border radius
+ //Allows for customizing button radius independently from global border radius
 $btn-border-radius-base:         $border-radius-base !default;
 $btn-border-radius-large:        $border-radius-large !default;
 $btn-border-radius-small:        $border-radius-small !default;
+
+$btn-default-bg-hover:           #798d8f !default;
+
 
 
 //== Forms
