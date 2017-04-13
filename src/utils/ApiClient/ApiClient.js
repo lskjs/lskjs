@@ -8,6 +8,7 @@ import fetch from 'isomorphic-fetch';
 export default class ApiClient {
   constructor(params) {
     // console.log('ApiClient', params);
+    this.log = params.log;
     this.base = params.base;
     this.url = params.url;
     this.wsConfig = params.ws;
@@ -87,6 +88,9 @@ export default class ApiClient {
       url += (url.indexOf('?') === -1 ? '?' : '&') + createQueryParams(options.queryParams || options.qs);
     }
 
+    if (this.log && this.log.trace) {
+      this.log.trace('[api]', (options && options.method || 'GET'), this.createUrl(url));
+    }
     return fetch(this.createUrl(url), options);
   }
 
@@ -128,7 +132,7 @@ export default class ApiClient {
 
   ws(path = '', options = {}) {
     if (!this.wsConfig) {
-      console.error('Вы не можете использовать api.ws без сокет конфигов')
+      console.error('Вы не можете использовать api.ws без сокет конфигов');
       return null;
     }
     const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
@@ -143,6 +147,5 @@ export default class ApiClient {
       this.createUrl(path, this.wsConfig),
       opts,
     );
-
   }
 }
