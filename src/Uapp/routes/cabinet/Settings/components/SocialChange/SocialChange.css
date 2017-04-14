@@ -1,0 +1,13 @@
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  display: flex;
+  flex-flow: row wrap;
+  margin: -5px -10px;
+  > * {
+    margin: 10px;
+  }
+}

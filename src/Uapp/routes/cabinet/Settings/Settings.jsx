@@ -12,6 +12,7 @@ import Form from 'lsk-general/General/Form';
 
 import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
+import SocialChange from './components/SocialChange';
 
 @inject('user')
 @observer
@@ -114,6 +115,7 @@ export default class Settings extends Component {
               />
             </CardBlock>
           </Card>
+          <SocialChange />
         </Col>
         <Col md={6} xs={12}>
           <AvatarChange />
