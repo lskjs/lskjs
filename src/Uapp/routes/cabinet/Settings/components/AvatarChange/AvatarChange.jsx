@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Component from 'lsk-general/General/Component';
 import { autobind } from 'core-decorators';
 import Dropzone from 'react-dropzone';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import css from 'importcss';
 import {
   Card,
@@ -14,6 +14,7 @@ import {
 } from 'react-bootstrap';
 
 @inject('user', 'api')
+@observer
 @css(require('./AvatarChange.css'))
 export default class AvatarChange extends Component {
 
@@ -48,6 +49,7 @@ export default class AvatarChange extends Component {
         avatar: avatar.path,
       },
     });
+    this.setState({ files: null });
   }
   @autobind
   cancelSelect() {
