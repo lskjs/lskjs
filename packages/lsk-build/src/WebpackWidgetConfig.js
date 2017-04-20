@@ -6,7 +6,7 @@ import WebpackConfig from './WebpackConfig';
 
 export default class WebpackWidgetConfig extends WebpackConfig {
   getTarget() {
-    return 'node';
+    return 'webworker';
   }
 
   getEntry() {
