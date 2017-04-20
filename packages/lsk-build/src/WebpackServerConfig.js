@@ -15,7 +15,7 @@ export default class WebpackServerConfig extends WebpackConfig {
       ...super.getGlobals(),
       __SERVER__: true,
       __CLIENT__: false,
-      __BROWSER__: false,
+      __WIDGET__: false,
     };
   }
 

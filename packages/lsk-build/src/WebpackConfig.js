@@ -9,6 +9,10 @@ export default class WebpackConfig {
   constructor(ctx = {}) {
     Object.assign(this, ctx);
   }
+  static getConfig(ctx, ...args) {
+    const object = new this(ctx);
+    return object.getConfig(...args);
+  }
 
   resolvePath(...args) {
     if (this.dirname) return path.resolve(this.dirname, ...args);
@@ -419,8 +423,18 @@ export default class WebpackConfig {
     };
   }
 
+  getEntryPrefix() {
+    return [];
+    // return ['babel-polyfill'];
+  }
+
   getEntry() {
-    return ['babel-polyfill', 'index.js'];
+    return 'index.js';
+  }
+
+  getFullEntry() {
+    const entry = this.getEntry();
+    return Array.isArray(entry) ? [...this.getEntryPrefix(), ...entry] : [...this.getEntryPrefix(), entry];
   }
 
   getOutput() {
@@ -435,7 +449,7 @@ export default class WebpackConfig {
     return {
       context: this.resolvePath('src'),
       target: this.getTarget(),
-      entry: this.getEntry(),
+      entry: this.getFullEntry(),
       resolve: this.getResolve(),
       output: this.getOutput(),
       module: this.getModule(),
