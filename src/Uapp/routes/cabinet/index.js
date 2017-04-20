@@ -8,6 +8,7 @@ import Posts from './Posts';
 import Messages from './Messages';
 import Comments from './Comments';
 import Offers from './Offers';
+import Guidelines from './Guidelines';
 
 export default {
   async action({ next, page }) {
@@ -44,6 +45,17 @@ export default {
             url: '/cabinet/dashboard',
           })
           .component(Dashboard, {});
+      },
+    },
+    {
+      path: '/guidelines',
+      async action({ page }) {
+        return page
+          .meta({
+            title: 'Гайдлайны',
+            url: '/cabinet/guidelines',
+          })
+          .component(Guidelines, {});
       },
     },
     {
