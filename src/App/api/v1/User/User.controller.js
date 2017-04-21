@@ -87,7 +87,7 @@ export default (ctx) => {
     const user = await User
     .findById(req.user._id)
     .then(checkNotFound);
-    const socialData = await user.getSocialData();
+    const socialData = await user.getSocialData(req.data.provider);
     if (socialData) return socialData;
     throw e404('!passport.meta');
   };

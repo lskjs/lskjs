@@ -80,11 +80,12 @@ export function getSchema(ctx) {
     }
     return null;
   };
-  schema.methods.getSocialData = async function () {
-    const passport = await ctx.models.Passport.findOne({
-      provider: 'youtube',
+  schema.methods.getSocialData = async function (provider) {
+    const params = {
       user: this._id,
-    });
+    };
+    if (provider) params.provider = provider;
+    const passport = await ctx.models.Passport.findOne(params);
     if (passport) return passport.meta;
     return null;
   };

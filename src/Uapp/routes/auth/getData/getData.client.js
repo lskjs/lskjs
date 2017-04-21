@@ -1,10 +1,10 @@
 import fetch from 'isomorphic-fetch';
-export default async ({ ctx }) => {
+export default async ({ uapp }) => {
   // @TODO Andruxa
-  if (!ctx.rootState) ctx.rootState = {};
+  if (!uapp.rootState) uapp.rootState = {};
   // const res = await fetch(`/api/v1/passport?p=${query.p}`);
   // const passport = await res.json();
-  // ctx.rootState.pageData = { passport };
-  // ctx.rootState.pageData = {};
-  return ctx.rootState.pageData;
+  // uapp.rootState.pageData = { passport };
+  // uapp.rootState.pageData = {};
+  return uapp.rootState.pageData;
 };

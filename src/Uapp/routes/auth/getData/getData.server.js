@@ -1,11 +1,11 @@
 
-export default async ({ app, query, ctx }) => {
-  if (!ctx.rootState) ctx.rootState = {};
+export default async ({ query, uapp }) => {
+  if (!uapp.rootState) uapp.rootState = {};
 
 
-  const { Passport } = app.models;
+  const { Passport } = uapp.app.models;
   const passport = await Passport.getByToken(query.p);
 
-  ctx.rootState.pageData = { passport };
-  return ctx.rootState.pageData;
+  uapp.rootState.pageData = { passport };
+  return uapp.rootState.pageData;
 };
