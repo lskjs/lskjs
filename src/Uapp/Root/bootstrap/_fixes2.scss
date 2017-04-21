@@ -55,3 +55,36 @@
     padding: 14.5px 15px;
   }
 }
+
+@media (max-width: 767px) {
+  .skin-black .main-header > .logo {
+    background-color: #fff;
+    color: #333;
+    border-bottom: 0 solid transparent;
+    border-right: 1px solid #eee;
+    z-index:5;
+
+    width: 200px;
+    margin: 0 auto;
+    position: absolute;
+    top: 0px;
+    left: 46px;
+    // display: block;
+  }
+  .skin-black .main-header > .logo:hover {
+    background-color: #fcfcfc;
+  }
+
+  .navbar-static-top {
+    z-index:4;
+  }
+}
+.wrapper {
+  .content-wrapper {
+    .content {
+      .container {
+        width: inherit;
+      }
+    }
+  }
+}

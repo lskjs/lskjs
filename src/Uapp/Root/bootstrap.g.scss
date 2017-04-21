@@ -10,6 +10,7 @@
 // Core variables and mixins
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "./bootstrap/variables";
+@import "./lsk-admin/variables";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 
 // Reset and dependencies
@@ -60,8 +61,7 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
-@import '~lsk-admin/Admin/sass/AdminLTE.g.scss';
-
+@import '~lsk-admin/Admin/sass/AdminLTE-novar.g.scss';
 
 
 @import "./bootstrap/fixes";
