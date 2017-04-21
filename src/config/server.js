@@ -42,5 +42,23 @@ export default config.extend({
     // formats: ['png', 'jpg', 'jpeg', 'gif'],
     mimetypes: ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'],
   },
+  rating: {
+    subjects: {
+      Post: {
+        // type: 'like',
+        type: 'likeDislike',
+      },
+      User: {
+        type: 'like',
+      },
+      Profile: {
+        type: 'rating',
+        values: {
+          min: 1,
+          max: 10,
+        },
+      },
+    },
+  },
 })
 .extendEnv();
