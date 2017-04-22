@@ -2,10 +2,12 @@
 import _ from 'lodash';
 import io from '../socket-io-universal';
 import trim from '../trim';
-import createQueryParams from '../createQueryParams';
+import qs from 'qs';
 import fetch from 'isomorphic-fetch';
 
 export default class ApiClient {
+  qs = qs
+
   constructor(params) {
     // console.log('ApiClient', params);
     this.log = params.log;
@@ -85,7 +87,7 @@ export default class ApiClient {
     }
 
     if (options.queryParams || options.qs) {
-      url += (url.indexOf('?') === -1 ? '?' : '&') + createQueryParams(options.queryParams || options.qs);
+      url += (url.indexOf('?') === -1 ? '?' : '&') + qs.stringify(options.queryParams || options.qs);
     }
 
     if (this.log && this.log.trace) {

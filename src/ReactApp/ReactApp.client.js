@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import UniversalRouter from 'universal-router';
-import qs from 'query-string';
+import qs from 'qs';
 import { createPath } from 'history/PathUtils';
 import history from './core/history';
 import { ErrorReporter, deepForceUpdate } from './core/devUtils';
