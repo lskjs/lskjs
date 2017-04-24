@@ -33,8 +33,6 @@ export function getSchema(ctx) {
       required: true,
       index: true,
     },
-  }, {
-    timestamps: true,
   });
 
   schema.virtual('user', {
@@ -73,9 +71,6 @@ export function getSchema(ctx) {
     return next();
   });
 
-  schema.post('save', function(next) {
-
-  })
   // api/v1/module/notification POST socket
   // api/v1/admin/module/notification POST
 

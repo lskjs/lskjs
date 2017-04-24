@@ -115,15 +115,7 @@ export default {
     },
     {
       path: '/posts',
-      async action({ page }) {
-        return page
-          .meta({
-            title: 'Публикации',
-            description: 'Посты созданные тобой',
-            url: '/cabinet/posts',
-          })
-          .component(Posts, {});
-      },
+      ...require('~/modules/posts/router').default,  // @TODO: @isuvorov: Реквайр роутеров из модулей
     },
     {
       path: '/messages',
