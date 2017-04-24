@@ -4,14 +4,13 @@ import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import moment from 'moment';
 export default (ctx) => {
-  const { Passport } = ctx.models;
   const GeneralAuth = getGeneralAuth(ctx);
   return class VkAuth extends GeneralAuth {
     Strategy = Youtube.Strategy
     providerName = 'youtube'
     updateConfig(config) {
       if (!config.callbackURL) {
-        config.callbackURL = `${ctx.config.url}/api/v1/auth/${this.providerName}/callback`;
+        config.callbackURL = `${ctx.config.url}/api/module/auth/${this.providerName}/callback`;
       }
       if (!config.scope) {
         config.scope = [
@@ -53,6 +52,7 @@ export default (ctx) => {
       };
     }
     async createPassport(params) {
+      const { Passport } = ctx.modules.auth.models;
       const data = await this.getPassportData(params);
       const passport = new Passport(data);
       await passport.save();

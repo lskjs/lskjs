@@ -1,19 +1,19 @@
 import React from 'react';
-import AuthLayout from '../MainLayout';
+// import AuthPage from './AuthPage';
 import getData from './getData';
 
 export default {
-  action({ next, page }) {
-    // if (__PROD__ && __SERVER__) {
-    //   return page
-    //     .pushTitle('Loading')
-    //     .component('Loading');
-    // }
-    return page
-      .pushTitle('Авторизация')
-      .layout(AuthLayout)
-      .next(next);
-  },
+  // action({ next, page }) {
+  //   // if (__PROD__ && __SERVER__) {
+  //   //   return page
+  //   //     .pushTitle('Loading')
+  //   //     .component('Loading');
+  //   // }
+  //   return page
+  //     .pushTitle('Авторизация')
+  //     .layout(AuthLayout)
+  //     .next(next);
+  // },
   children: [
     {
       path: '/(login|)',

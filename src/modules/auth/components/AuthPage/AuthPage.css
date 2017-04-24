@@ -1,0 +1,82 @@
+$twitch: #6441a4;
+$vkontakte: #507299;
+$odnoklassniki: #ee8208;
+$tumblr: #36465d;
+$twitter: #41abe0;
+$instagram: #262626;
+$facebook: #4867aa;
+$youtube: #e62117;
+
+:global .input-group-addon svg {
+    display: flex;
+}
+
+.recovery-password {
+  float: right;
+  font-size: .85em;
+  padding: 5px 0;
+}
+
+.button-icon-status {
+  width: 54px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  animation-name: flipInX;
+  animation-duration: .5s;
+}
+.button-icon-status svg {
+  display: flex;
+}
+.button-icon-status.spin svg {
+  animation:spin .8s linear infinite;
+}
+.btn-social,
+.btn-social svg {
+  display: flex;
+}
+
+.btn-social {
+  padding: 1.2rem;
+  font-size: 18px;
+  color: #404040;
+  margin: 3px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@define-mixin socialButtons $network {
+  .btn-social.is-$(network) {
+    background-color: transparent;
+    border: none;
+    transition: .2s ease-in-out;
+    outline: none;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    &:hover {
+      background-color: $($network);
+      border: none;
+      color: white;
+      z-index: inherit;
+    }
+    &:focus {
+      color: $($network);
+    }
+  }
+}
+
+@mixin socialButtons twitch {}
+@mixin socialButtons twitter {}
+@mixin socialButtons odnoklassniki {}
+@mixin socialButtons vkontakte {}
+@mixin socialButtons tumblr {}
+@mixin socialButtons instagram {}
+@mixin socialButtons facebook {}
+@mixin socialButtons youtube {}
+
+@keyframes spin { 100% { transform:rotate(360deg); } }

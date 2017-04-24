@@ -153,7 +153,7 @@ export default class AuthStore {
   }
 
   authPassport(provider) {
-    window.location = `/api/v1/auth/${provider}`;
+    window.location = `/api/module/auth/${provider}`;
   }
 
 }

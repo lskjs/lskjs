@@ -16,6 +16,34 @@ export default class ApiClient extends ApiClientBase {
     });
   }
 
+  authLogin(data) {
+    return this.fetch('/api/module/auth/login', {
+      method: 'POST',
+      body: data,
+    });
+  }
+
+  authSignup(data) {
+    return this.fetch('/api/module/auth/signup', {
+      method: 'POST',
+      body: data,
+    });
+  }
+
+  authValidate(data) {
+    return this.fetch('/api/module/auth/validate', {
+      method: 'GET',
+      body: data,
+    });
+  }
+
+  authRecovery(data) {
+    return this.fetch('/api/module/auth/recovery', {
+      method: 'POST',
+      body: data,
+    });
+  }
+
   async getUser(body) {
     const res = await this.fetch('user/get', {
       method: 'POST',
@@ -33,7 +61,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async authSignupPassport(data) {
-    const res = await this.fetch('auth/social/signup', {
+    const res = await this.fetch('/api/module/auth/social/signup', {
       method: 'POST',
       body: data,
     });
@@ -41,7 +69,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async authLoginPassport(data) {
-    const res = await this.fetch('auth/social/login', {
+    const res = await this.fetch('/api/module/auth/social/login', {
       method: 'POST',
       body: data,
     });

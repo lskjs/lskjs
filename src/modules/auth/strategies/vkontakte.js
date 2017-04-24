@@ -2,14 +2,13 @@ import getGeneralAuth from './GeneralAuth';
 import Vkontakte from 'passport-vkontakte';
 import fetch from 'isomorphic-fetch';
 export default (ctx) => {
-  const { Passport } = ctx.models;
   const GeneralAuth = getGeneralAuth(ctx);
   return class VkAuth extends GeneralAuth {
     Strategy = Vkontakte.Strategy
     providerName = 'vkontakte'
     updateConfig(config) {
       if (!config.callbackURL) {
-        config.callbackURL = `${ctx.config.url}/api/v1/auth/vkontakte/callback`;
+        config.callbackURL = `${ctx.config.url}/api/module/auth/vkontakte/callback`;
       }
       return config;
     }
@@ -32,6 +31,7 @@ export default (ctx) => {
       return json.response[0];
     }
     async createPassport({ accessToken, refreshToken, profile, extraData = {}, providerId }) {
+      const { Passport } = ctx.modules.auth.models;
       const data = {
         provider: this.providerName,
         providerId,

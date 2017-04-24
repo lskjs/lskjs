@@ -1,5 +1,6 @@
 import ErrorLayout from './ErrorLayout';
 import MainLayout from './MainLayout';
+import AuthRouter from '../../modules/auth/router'; // TODO: isuvorov не знаю как иначе
 
 export default {
   path: '/',
@@ -17,7 +18,12 @@ export default {
     },
     {
       path: '/auth',
-      ...require('./auth').default,
+      async action({ next, page }) {
+        return page
+          .pushTitle('Авторизация')
+          .next(next);
+      },
+      ...AuthRouter,
     },
     {
       path: '/cabinet',

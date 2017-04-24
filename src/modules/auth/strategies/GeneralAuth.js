@@ -13,7 +13,7 @@ export default (ctx) => {
       return config;
     }
     async createPassport({ accessToken, refreshToken, profile = {}, extraData, providerId }) {
-      const { Passport } = ctx.models;
+      const { Passport } = ctx.modules.auth.models;
       const data = {
         provider: this.providerName,
         providerId,
@@ -26,7 +26,7 @@ export default (ctx) => {
       return new this.Strategy(
         this.updateConfig(ctx.config.auth.socials[this.providerName].config),
         async (accessToken, refreshToken, profile, done) => {
-          const { Passport } = ctx.models;
+          const { Passport } = ctx.modules.auth.models;
           const providerId = this.getProviderId(profile);
           let passport = await Passport.findOne({
             provider: this.providerName,

@@ -20,21 +20,6 @@ export default class App extends ReactApp {
     };
   }
 
-  async init() {
-    await super.init();
-    this.passport = passport;
-    const strategies = require('./strategies').default(this) || {};
-    if (this.config.auth && this.config.auth.socials) {
-      this.strategies = {};
-      _.map(strategies, (Strategy, name) => {
-        if (!this.config.auth.socials[name]) return null;
-        return new Strategy();
-      }).filter(s => s).map((strategy) => {
-        this.strategies[strategy.providerName] = strategy;
-      });
-    }
-  }
-
   getModules() {
     const models = {
       ...super.getModules(),
@@ -49,15 +34,6 @@ export default class App extends ReactApp {
       statics['/storage'] = `${__dirname}/../storage`;
     }
     return statics;
-  }
-
-  async run() {
-    await super.run();
-    if (this.strategies) {
-      _.forEach(this.strategies || [], (strategy) => {
-        this.passport.use(strategy.getStrategy(strategy));
-      });
-    }
   }
 
 
