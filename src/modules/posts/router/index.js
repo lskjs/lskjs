@@ -4,6 +4,7 @@ export default {
     {
       path: '/',
       async action({ page, uapp }) {
+        console.log(uapp);
         const posts = new uapp.modules.posts.stores.Posts();
         const Posts = uapp.modules.posts.components.Posts;
         await posts.fetchPosts(20);
