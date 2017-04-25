@@ -2,6 +2,7 @@ import _ from 'lodash';
 import UniversalRouter from 'universal-router';
 import Core from '../Core';
 import Page from './Page';
+import Api from '../utils/ApiClient';
 
 function isRightHostname(hostnames = [], hostname) {
   for (const name of hostnames) {
@@ -45,6 +46,7 @@ function getSiteConfig(props) {
 
 export default class Uapp extends Core {
   Page = Page;
+  Api = Api;
   // constructor(props = {}) {
   //   super(...arguments);
   //   // Object.assign(this, props);
@@ -54,6 +56,7 @@ export default class Uapp extends Core {
     super.init();
     this.config = this.getConfig(this);
     this.routes = this.getRoutes();
+    this.api = new this.Api(this.config && this.config.api || {});
     // this.log = this.getLogger();
   }
 
@@ -96,14 +99,18 @@ export default class Uapp extends Core {
   // }
 
   // return page for req
-  resolve(req = {}) {
+  resolve(reqParams = {}) {
+    const req = Api.createReq(reqParams);
+    // console.log('Uapp.resolve', req);
     this.resetPage();
     const page = UniversalRouter.resolve(this.routes, {
       ...this.provide(),
-      ...req,
+      path: reqParams.path,
+      query: reqParams.query,
+      req,
     });
     if (page._page) throw '!page';
-    return page
+    return page;
   }
 
   provide() {
@@ -112,6 +119,7 @@ export default class Uapp extends Core {
       log: this.log,
       config: this.config,
       page: this.page,
+      api: this.api,
     };
   }
 }

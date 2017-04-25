@@ -11,6 +11,7 @@ export default class ApiClient {
   constructor(params) {
     // console.log('ApiClient', params);
     this.log = params.log;
+    this.root = params.root;
     this.base = params.base;
     this.url = params.url;
     this.wsConfig = params.ws;
@@ -19,6 +20,24 @@ export default class ApiClient {
 
   setAuthToken(authToken) {
     this.authToken = authToken;
+  }
+
+  static createReq(req) {
+    // req.path,
+    // req.query,
+    return {
+      ...req,
+      create(params) {
+        const query = qs.stringify(params);
+        return (this.path || '/') + (query ? '?' + query : '');
+      },
+      merge(params) {
+        return this.create({
+          ...this.query,
+          ...params,
+        });
+      },
+    };
   }
 
   // onError(err) {
