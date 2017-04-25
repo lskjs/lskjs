@@ -32,6 +32,16 @@ export function getSchema(ctx) {
     timestamps: true,
   });
 
+  schema.post('save', (next) => {
+    ctx.modules.Notification.notify({
+      subjectId: this._id,
+      subjectType: 'Message',
+      objectId: this.user,
+      objectType: 'User',
+      action: 'message',
+    });
+  });
+
   return schema;
 }
 
