@@ -68,6 +68,9 @@ export function getSchema(ctx) {
     justOne: true,
   });
 
+  schema.methods.send = async function () {
+    return {};
+  };
   return schema;
 }
 

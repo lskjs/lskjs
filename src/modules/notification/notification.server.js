@@ -1,3 +1,4 @@
+import { autobind } from 'core-decorators';
 import getModels from './models';
 
 export default (ctx) => {
@@ -8,7 +9,35 @@ export default (ctx) => {
       this.config = ctx.config.rating;
     }
     async run() {
+      this.ws = ctx.app.ws('/api/module/notification')
+        .on('connection', this.onSocket);
       ctx.app.use('/api/module/notification', this.getApi());
+    }
+
+    async notify(params) {
+      const { Notification } = this.models;
+      const notification = new Notification(params);
+      await notification.save();
+      if (params.userId) {
+        const room = this.getRoomName(params.userId);
+        this.emit({ room, data: notification });
+      }
+    }
+
+    getRoomName(userId) {
+      return `user_${userId}`;
+    }
+
+    emit(room, data, action = 'notification') {
+      return this.ws.to(room).emit(action, data);
+    }
+
+    @autobind
+    onSocket(socket) {
+      const { req } = socket;
+      if (!req.user || !req.user._id) throw new Error('Not Auth');
+      const roomName = this.getRoomName(req.user._id);
+      socket.join(roomName);
     }
 
     getApi() {
