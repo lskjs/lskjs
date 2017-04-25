@@ -2,6 +2,20 @@ import { getSchema as getDefaultSchema } from 'lego-starter-kit/CoreApp/models/U
 import _ from 'lodash';
 import jwt from 'jsonwebtoken';
 export function getSchema(ctx) {
+  const sample = {
+    avatar: '/assets/no-avatar.png',
+    fullName: 'Счастливый Пользователь',
+  };
+  function fullName(user) {
+    let fullname;
+    if (user.profile.middleName) {
+      fullname = [user.profile.lastName, user.profile.firstName, user.profile.middleName];
+    } else {
+      fullname = [user.profile.firstName, user.profile.lastName];
+    }
+    return fullname.filter(a => a).join(' ') || sample.fullName;
+  }
+
   const { e400, e500 } = ctx.errors;
   const { Types } = ctx.db.Schema;
   const DefaultSchema = getDefaultSchema(ctx);
@@ -27,6 +41,13 @@ export function getSchema(ctx) {
   }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+  });
+
+  schema.pre('save', function (next) {
+    if (this.isModified('profile')) {
+      this.name = fullName(this) || '';
+    }
+    return next();
   });
 
   schema.methods.toJSON = function () {
