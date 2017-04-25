@@ -16,28 +16,48 @@ export default (ctx) => {
 
     async notify(params) {
       const { Notification } = this.models;
-      const notification = new Notification(params);
+      let notification = new Notification(params);
       await notification.save();
       if (params.userId) {
         const room = this.getRoomName(params.userId);
+        notification = await this.populate2(notification);
         this.emit({ room, data: notification });
       }
+      return notification;
     }
 
     getRoomName(userId) {
       return `user_${userId}`;
     }
 
-    emit(room, data, action = 'notification') {
+    emit({ room, data, action = 'notification' }) {
       return this.ws.to(room).emit(action, data);
     }
 
     @autobind
     onSocket(socket) {
       const { req } = socket;
+      console.log('Connected!', req.user._id);
       if (!req.user || !req.user._id) throw new Error('Not Auth');
       const roomName = this.getRoomName(req.user._id);
       socket.join(roomName);
+    }
+
+    async populate2(notification) {
+      const { Notification } = this.models;
+      try {
+        await Notification.populate(notification, {
+          path: 'object',
+          model: notification.objectType,
+        });
+      } catch (err) {}
+      try {
+        await Notification.populate(notification, {
+          path: 'subject',
+          model: notification.subjectType,
+        });
+      } catch (err) {}
+      return notification;
     }
 
     getApi() {
@@ -55,13 +75,16 @@ export default (ctx) => {
         notifications = await Promise.all(notifications.map((notification) => {
           return new Promise(async (resolve) => {
             try {
-              await Notification.populate(notification, 'user');
+              await Notification.populate(notification, {
+                path: 'object',
+                model: notification.objectType,
+              });
             } catch (err) {}
             try {
-              await Notification.populate(notification, 'object');
-            } catch (err) {}
-            try {
-              await Notification.populate(notification, 'subject');
+              await Notification.populate(notification, {
+                path: 'subject',
+                model: notification.subjectType,
+              });
             } catch (err) {}
             return resolve(notification);
           });
@@ -70,8 +93,7 @@ export default (ctx) => {
       });
       api.post('/', isAuth, async (req) => {
         const params = req.allParams();
-        const notification = new Notification(params);
-        return notification.save();
+        return this.notify(params);
       });
       api.post('/view/:id', isAuth, async (req) => {
         // const userId = req.user._id;

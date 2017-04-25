@@ -17,9 +17,8 @@ import FooterWrapper from 'lsk-admin/Admin/lib/footer/FooterWrapper';
 import Dashboard from 'react-icons2/mdi/view-dashboard';
 
 import CabinetSidebar from './CabinetSidebar';
-import NotificationCenter from './NotificationCenter';
 
-@inject('user', 'config', 'page')
+@inject('user', 'config', 'page', 'uapp')
 @observer
 export default class CabinetLayout extends Component {
   static contextTypes = {
@@ -53,7 +52,7 @@ export default class CabinetLayout extends Component {
     }
   }
   render() {
-    const { user, children, page, config } = this.props;
+    const { user, children, page, config, uapp } = this.props;
     const title = page.getMeta('title');
     const description = page.getMeta('description');
     const breadItems = (page.state.metas || []).slice(1).map((meta, key) => ({
@@ -65,6 +64,7 @@ export default class CabinetLayout extends Component {
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
       breadItems[0].icon = <Dashboard />;
     }
+    const { Notification } = uapp.modules.notification.components;
 
     return (
       <LayoutWrapper color="black">
@@ -78,7 +78,7 @@ export default class CabinetLayout extends Component {
             </LargeLogo>
           </Logo>
           <Navbar controlbar={false}>
-            <NotificationCenter />
+            <Notification />
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
