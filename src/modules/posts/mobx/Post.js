@@ -7,6 +7,7 @@ export default ctx => (
 
     @observable _id;
     @observable content;
+    @observable category;
 
     constructor(data) {
       if (data) {

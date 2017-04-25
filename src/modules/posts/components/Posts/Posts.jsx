@@ -6,8 +6,9 @@ import { observer } from 'mobx-react';
 import Link from 'lsk-general/General/Link';
 import VisibilitySensor from 'react-visibility-sensor';
 import Loading from '~/App/components/Loading';
+import keyBy from 'lodash/keyBy';
 
-export default ctx => (
+export default (ctx, module) => (
 
   @observer
   class Posts extends Component {
@@ -18,12 +19,18 @@ export default ctx => (
     constructor() {
       super();
       this.state = {
-        loading: false,
+        users: {},
+        categories: {},
       };
     }
 
-    username(cell) {
-      return cell.fullName;
+    componentDidMount() {
+      this.getUsers();
+      this.getCategories();
+    }
+
+    username(cell, obj) {
+      return obj.user.fullName;
     }
 
     date(cell) {
@@ -42,26 +49,79 @@ export default ctx => (
       );
     }
 
+    convertToOptions(arr, params) {
+      const obj = keyBy(arr, params.key);
+      const options = {};
+      for (const key in obj) {
+        options[key] = obj[key][params.field];
+      }
+      return options;
+    }
+
+    @autobind
+    async getCategories() {
+      const arr = await module.stores.Posts.getCategories();
+      const categories = this.convertToOptions(arr, {
+        key: 'category',
+        field: 'category',
+      });
+      this.setState({ categories });
+    }
+
+    @autobind
+    async getUsers() {
+      const arr = await ctx.stores.Users.getUsers();
+      const users = this.convertToOptions(arr, {
+        key: '_id',
+        field: 'fullName',
+      });
+      this.setState({ users });
+    }
+
     @autobind
     async handleMoreUsers(isVisible) {
       if (isVisible) {
-        this.setState({ loading: true });
         await this.props.posts.fetchPosts(20);
-        this.setState({ loading: false });
       }
     }
 
+    @autobind
+    async onSortChange(sortName, sortOrder) {
+      await this.props.posts.sortPosts(sortName, sortOrder);
+    }
+
+    @autobind
+    async onFilterChange(obj) {
+      if (Object.keys(obj).length === 0) {
+        await this.props.posts.clearFilters();
+        return false;
+      }
+      const filters = {};
+      for (const field in obj) {
+        filters[field] = obj[field].value;
+      }
+      ctx.log.trace('filters', filters);
+      await this.props.posts.filterPosts(filters);
+      return true;
+    }
+
     render() {
-      const { loading } = this.state;
       const { posts } = this.props;
+      const { users, categories } = this.state;
       return (
         <Card>
           <CardBlock>
             <Button componentClass={Link} href="/cabinet/posts/create">Создать пост</Button>
             <BootstrapTable
               hover
+              remote
               bordered={false}
               data={posts.list}
+              options={{
+                onSortChange: this.onSortChange,
+                onFilterChange: this.onFilterChange,
+                noDataText: <p style={{ textAlign: 'center' }}>Результатов не найдено</p>,
+              }}
               trClassName="centered-table"
             >
               <TableHeaderColumn
@@ -74,9 +134,9 @@ export default ctx => (
                 dataField="user"
                 dataFormat={this.username}
                 filter={{
-                  type: 'TextFilter',
-                  delay: 0,
-                  placeholder: 'Поиск по Юзернейму',
+                  type: 'SelectFilter',
+                  options: users,
+                  placeholder: 'Поиск по пользователю',
                 }}
               >
                 Имя пользователя
@@ -84,8 +144,23 @@ export default ctx => (
               <TableHeaderColumn
                 filterFormatted
                 dataField="content"
+                filter={{
+                  type: 'TextFilter',
+                  placeholder: 'Поиск по контенту',
+                }}
               >
                 Контент
+              </TableHeaderColumn>
+              <TableHeaderColumn
+                filterFormatted
+                dataField="category"
+                filter={{
+                  type: 'SelectFilter',
+                  options: categories,
+                  placeholder: 'Поиск по категории',
+                }}
+              >
+                Категория
               </TableHeaderColumn>
               <TableHeaderColumn
                 filterFormatted
@@ -111,10 +186,11 @@ export default ctx => (
             </BootstrapTable>
             <VisibilitySensor
               onChange={this.handleMoreUsers}
+              intervalCheck={false}
               scrollCheck
             />
             {/* @TODO: сделать кнопку загрузить пользователей */}
-            <If condition={loading}>
+            <If condition={posts.loading}>
               <Loading text="Загрузка пользователей.." />
             </If>
           </CardBlock>

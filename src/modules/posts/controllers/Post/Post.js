@@ -9,16 +9,33 @@ export default (ctx) => {
 
   controller.all = async (req) => {
     const params = req.allParams();
-    const { query } = params;
-    let { limit = undefined, offset = 0 } = params;
+    const { field = null, order = null } = params;
+    let { filters, limit = 0, offset = 0 } = params;
+    const sort = (field && order) ? { [field]: order } : {};
     if (offset) offset = parseInt(offset, 10);
     if (limit) limit = parseInt(limit, 10);
+    filters = JSON.parse(filters);
+    const query = {};
+    for (const key in filters) {
+      if (filters.hasOwnProperty(key)) {
+        query[key] = key === 'user'
+          ? filters[key]
+          : { $regex: filters[key], $options: 'i' };
+      }
+    }
     const posts = await Post
       .find(query)
+      .sort(sort)
       .limit(limit)
       .skip(offset)
       .populate('user');
     return posts;
+  };
+
+  controller.categories = async (req) => {
+    const params = req.allParams();
+    const categories = await Post.getCategories({ short: params.short });
+    return categories;
   };
 
   controller.create = async (req) => {

@@ -14,6 +14,7 @@ import Users from 'react-icons2/mdi/account-multiple';
 import Comments from 'react-icons2/mdi/comment-multipe-outline';
 import Cards from 'react-icons2/mdi/view-carousel';
 import Book from 'react-icons2/mdi/book';
+import Stream from 'react-icons2/mdi/view-stream';
 
 @inject('user', 'page')
 @observer
@@ -76,6 +77,11 @@ export default class CabinetLayout extends Component {
             icon: <Comments />,
             title: 'Комментарии',
             url: '/cabinet/comments',
+          },
+          {
+            icon: <Stream />,
+            title: 'Посты',
+            url: '/cabinet/posts',
           },
           {
             icon: <Cards />,

@@ -1,4 +1,5 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
+import uniq from 'lodash/uniq';
 
 export function getSchema(ctx) {
   const { db } = ctx;
@@ -12,11 +13,19 @@ export function getSchema(ctx) {
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      default: 'Общее',
+    },
   });
   schema.statics = {
     async getById(_id) {
       const post = await this.findOne({ _id }).populate('user');
       return post;
+    },
+    async getCategories({ short = false }) {
+      const raw = await this.find({}).select('-_id category');
+      return short ? uniq(raw.map(o => o.category)) : raw;
     },
   };
   return schema;

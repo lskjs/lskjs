@@ -19,7 +19,9 @@ export default ctx => (
       const { Post } = this.controllers;
 
       api.get('/', Post.all);
+      api.get('/categories', Post.categories);
       api.post('/create', Post.create);
+
       api.get('/:id', Post.get);
       api.put('/:id', Post.edit);
       api.delete('/:id', Post.delete);

@@ -57,7 +57,7 @@ export default class Users extends Component {
   async handleMoreUsers(isVisible) {
     if (isVisible) {
       this.setState({ loading: true });
-      await this.props.users.fetchUsers(5);
+      await this.props.users.fetchUsers(20);
       this.setState({ loading: false });
     }
   }
@@ -125,7 +125,7 @@ export default class Users extends Component {
           </BootstrapTable>
           <VisibilitySensor
             onChange={this.handleMoreUsers}
-            // intervalCheck={false}
+            intervalCheck={false}
             scrollCheck
           />
           {/* @TODO: сделать кнопку загрузить пользователей */}

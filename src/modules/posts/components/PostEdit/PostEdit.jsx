@@ -24,6 +24,16 @@ export default ctx => (
         {
           name: 'content',
           value: post.content,
+          control: {
+            placeholder: 'Контент поста',
+          },
+        },
+        {
+          name: 'category',
+          value: post.category,
+          control: {
+            placeholder: 'Категория поста',
+          },
         },
       ];
       return (
@@ -33,6 +43,11 @@ export default ctx => (
               fields={fields}
               validators={{
                 content: {
+                  presence: {
+                    message: 'Поле не должно быть пустым.',
+                  },
+                },
+                category: {
                   presence: {
                     message: 'Поле не должно быть пустым.',
                   },

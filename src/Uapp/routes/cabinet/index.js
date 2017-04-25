@@ -103,7 +103,7 @@ export default {
       path: '/users',
       async action({ page, uapp }) {
         const users = new uapp.stores.Users();
-        await users.fetchUsers(5);
+        await users.fetchUsers(20);
         return page
           .meta({
             title: 'Список пользователей',
