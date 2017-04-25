@@ -72,7 +72,7 @@ export default class ReactApp extends Core {
     return {
       hostname: window.location.hostname,
       path: window.location.pathname,
-      query: qs.parse(window.location.search),
+      query: qs.parse(window.location.search.substr(1)),
     };
   }
 
