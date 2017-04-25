@@ -6,5 +6,6 @@ export default function () {
     rating: require('./rating/rating.server').default(...arguments),
     notification: require('./notification/notification.server').default(...arguments),
     auth: require('./auth/auth.server').default(...arguments),
+    posts: require('./posts/posts.server').default(...arguments),
   };
 }

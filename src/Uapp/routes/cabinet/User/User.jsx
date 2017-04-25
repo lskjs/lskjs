@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { inject } from 'mobx-react';
+import omit from 'lodash/omit';
 import {
   Button,
   Row,
@@ -14,17 +15,27 @@ import Link from 'lsk-general/General/Link';
 
 @inject(stores => ({
   myUser: stores.user,
-  // stores,
+  profile: stores.config.auth.profile,
   Messages: stores.uapp.modules.chat.components.Messages,
 }))
 @css(require('./User.css'))
 export default class User extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
+    myUser: PropTypes.object.isRequired,
+    Messages: PropTypes.node.isRequired,
+    profile: PropTypes.object.isRequired,
+  };
+  getFields(obj, user) {
+    return Object.keys(obj)
+      .map(key => ({
+        name: `profile.${key}`,
+        value: user.profile[key],
+        ...omit(obj[key], 'validate'),
+      }));
   }
   render() {
-    const { user, myUser, Messages } = this.props;
-    // console.log({stores});
+    const { profile, user, myUser, Messages } = this.props;
     return (
       <Row>
         <Col xs={12} styleName="center">
@@ -41,22 +52,19 @@ export default class User extends Component {
         <Col md={6} xs={12}>
           <Card style={{ margin: '10px 0' }}>
             <CardHeader>
-              Основное
+              Информация о пользователе
             </CardHeader>
             <CardBlock>
-              <p><b>Юзернейм: {user.username}</b></p>
-              <p><b>Имя: </b>{user.profile.firstName}</p>
-              <p><b>Фамилия: </b>{user.profile.lastName}</p>
-              <p><b>Отчество: </b>{user.profile.middleName}</p>
-              {user.profile.city && <p><b>Город: </b>{user.profile.city}</p>}
-              {user.profile.bdate && <p><b>Дата рождения: </b>{user.profile.bdate}</p>}
-              <p><b>Пол: </b>{user.profile.sex || 'Не определился'}</p>
-              <p><b>О себе: </b>{user.profile.about || 'Не указано'}</p>
+              {this.getFields(profile, user).map((obj) => {
+                if (obj.value) {
+                  return <p key={obj.name}><strong>{`${obj.title}: `}</strong>{obj.value}</p>;
+                }
+                return false;
+              })}
             </CardBlock>
           </Card>
         </Col>
         <Col md={6} xs={12}>
-          {/* <Messages title="Комментарии" subjectType="User" subjectId={user._id} /> */}
           <Card style={{ margin: '10px 0' }}>
             <CardHeader>
               Комментарии
@@ -65,17 +73,6 @@ export default class User extends Component {
               <Messages subjectType="User" subjectId={user._id} />
             </CardBlock>
           </Card>
-          {['phone', 'email'].includes(user.profile) && (
-            <Card style={{ margin: '10px 0' }}>
-              <CardHeader>
-                Контактная информация
-              </CardHeader>
-              <CardBlock>
-                {user.profile.phone && <p><b>Телефон: </b>{user.profile.phone}</p>}
-                {user.profile.email && <p><b>Электронная почта: </b>{user.profile.email}</p>}
-              </CardBlock>
-            </Card>
-          )}
         </Col>
       </Row>
     );

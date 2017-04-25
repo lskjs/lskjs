@@ -5,5 +5,6 @@ export default function () {
     rating: require('./rating/rating.uapp').default(...arguments),
     notification: require('./notification/notification.uapp').default(...arguments),
     auth: require('./auth/auth.uapp').default(...arguments),
+    posts: require('./posts/posts.uapp').default(...arguments),
   };
 }

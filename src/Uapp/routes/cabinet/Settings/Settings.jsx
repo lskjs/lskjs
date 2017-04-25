@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
 import { autobind } from 'core-decorators';
+import omit from 'lodash/omit';
 import { Row, Col, Button, Card, CardBlock } from 'react-bootstrap';
 import cx from 'classnames';
 
@@ -14,84 +15,36 @@ import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
 import SocialChange from './components/SocialChange';
 
-@inject('user')
+@inject('user', 'config', 'log')
 @observer
 export default class Settings extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
+  };
+  getFields(obj, user) {
+    return Object.keys(obj)
+      .map(key => ({
+        name: `profile.${key}`,
+        value: user.profile[key],
+        ...omit(obj[key], 'validate'),
+      }));
+  }
+  getValidators(obj) {
+    const validators = {};
+    for (const key in obj) {
+      if (obj[key].validate) {
+        validators[`profile.${key}`] = obj[key].validate;
+      }
+    }
+    return validators;
   }
   @autobind
   async handleSubmit(data) {
     await this.props.user.editUser(data);
   }
   render() {
-    const { user } = this.props;
-    const fields = [
-      {
-        name: 'username',
-        title: 'Почта',
-        value: user.username,
-        control: {
-          placeholder: 'Например, utkin@mail.ru',
-        },
-      },
-      {
-        name: 'profile.firstName',
-        title: 'Имя',
-        value: user.profile.firstName,
-        control: {
-          placeholder: 'Например, Василий',
-        },
-      },
-      {
-        name: 'profile.lastName',
-        title: 'Фамилия',
-        value: user.profile.lastName,
-        control: {
-          placeholder: 'Например, Пушкин',
-        },
-      },
-      {
-        name: 'profile.middleName',
-        title: 'Отчество',
-        value: user.profile.middleName,
-        control: {
-          placeholder: 'Например, Александрович',
-        },
-      },
-      // {
-      //   name: 'profile.phone',
-      //   title: 'Телефон',
-      //   value: user.profile.phone,
-      //   control: {
-      //     placeholder: 'Например, 927000000',
-      //   },
-      // },
-      // {
-      //   name: 'profile.email',
-      //   title: 'Электронная почта для связи',
-      //   value: user.profile.email,
-      //   control: {
-      //     placeholder: 'E-mail для связи',
-      //   },
-      // },
-      // {
-      //   name: 'profile.city',
-      //   title: 'Город',
-      //   value: user.profile.city,
-      //   control: {
-      //     placeholder: 'Откуда вы?',
-      //   },
-      // },
-      // {
-      //   name: 'profile.about',
-      //   title: 'О себе',
-      //   value: user.profile.about,
-      //   control: {
-      //     placeholder: 'Расскажите о себе',
-      //   },
-      // },
-    ];
+    const { config, user } = this.props;
     return (
       <Row>
         <Col md={6} xs={12}>
@@ -99,7 +52,8 @@ export default class Settings extends Component {
             <CardBlock>
               <h4>Редактирование</h4>
               <Form
-                fields={fields}
+                fields={this.getFields(config.auth.profile, user)}
+                validators={this.getValidators(config.auth.profile)}
                 onSubmit={this.handleSubmit}
                 submitButton={(
                   <Button

@@ -17,7 +17,7 @@ export default (ctx) => {
       const api = ctx.asyncRouter();
       const { isAuth } = ctx.middlewares;
       const { Rating } = this.models;
-      api.get('/:subjectType/:subjectId', async (req) => {
+      api.get('/:subjectType/:subjectId', async (req) => { // Список лайков для конкретного документа
         const params = req.allParams();
         return Rating.find({
           subjectType: params.subjectType,
