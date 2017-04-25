@@ -1,4 +1,4 @@
-import { extendObservable, observable, action, computed, toJS } from 'mobx';
+import { extendObservable, action, computed, toJS } from 'mobx';
 import { set, clone } from 'lodash';
 
 const sample = {
@@ -12,21 +12,22 @@ export default class UserStore {
     this.api = api;
     this.log = log;
     this.reset();
-    // if (user) {
-    //   this.update(user);
-    //   // __CLIENT__ && store.auth.init(user);
-    // }
   }
 
   @action
   update(user) {
     this.log.trace('UserStore.update', user);
-    // this.store.log.info('incoming user', user);
     if (!user) return this.reset();
     for (const item in user) {
       set(this, item, user[item]);
     }
+    this.getNotifications();
     return true;
+  }
+
+  async getNotifications() {
+    const { data } = await this.api.fetch('/api/module/notification');
+    this.notifications = data;
   }
 
   @action
@@ -35,6 +36,7 @@ export default class UserStore {
     extendObservable(this, {
       _id: undefined,
       role: undefined,
+      notifications: [],
       profile: {
         avatar: undefined,
         firstName: undefined,
@@ -66,7 +68,6 @@ export default class UserStore {
   }
 
   @computed get avatar() {
-    // this.log.trace('get avatar', this.profile && this.profile.avatar );
     return this.profile && this.profile.avatar || sample.avatar;
   }
 

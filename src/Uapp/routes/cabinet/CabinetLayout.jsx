@@ -17,7 +17,7 @@ import FooterWrapper from 'lsk-admin/Admin/lib/footer/FooterWrapper';
 import Dashboard from 'react-icons2/mdi/view-dashboard';
 
 import CabinetSidebar from './CabinetSidebar';
-
+import NotificationCenter from './NotificationCenter';
 
 @inject('user', 'config', 'page')
 @observer
@@ -78,6 +78,7 @@ export default class CabinetLayout extends Component {
             </LargeLogo>
           </Logo>
           <Navbar controlbar={false}>
+            <NotificationCenter />
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}
