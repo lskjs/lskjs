@@ -21,13 +21,7 @@ export default class UserStore {
     for (const item in user) {
       set(this, item, user[item]);
     }
-    this.getNotifications();
     return true;
-  }
-
-  async getNotifications() {
-    const { data } = await this.api.fetch('/api/module/notification');
-    this.notifications = data;
   }
 
   @action
@@ -36,7 +30,6 @@ export default class UserStore {
     extendObservable(this, {
       _id: undefined,
       role: undefined,
-      notifications: [],
       profile: {
         avatar: undefined,
         firstName: undefined,

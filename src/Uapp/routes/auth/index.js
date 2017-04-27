@@ -43,6 +43,22 @@ export default {
       },
     },
     {
+      path: '/bind',
+      async action(params) {
+        const { uapp, query, page } = params;
+        const { BindPage } = uapp.modules.auth.components;
+        let passport;
+        try {
+          passport = (await getData(params)).passport;
+        } catch (err) {
+          throw err;
+        }
+        return page
+          .pushTitle('Подключение социальной сети')
+          .component(BindPage, { passport, query });
+      },
+    },
+    {
       path: '/passport',
       async action(params) {
         const { uapp, query, page } = params;

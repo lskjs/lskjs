@@ -18,7 +18,7 @@ export const buttons = {
   vkontakte: {
     title: 'ВКонтакте',
     icon: <VKontakte />,
-    color: '#fff000',
+    color: '#507299',
   },
   odnoklassniki: {
     icon: <Odnoklassniki />,
@@ -33,7 +33,9 @@ export const buttons = {
     icon: <Twitch />,
   },
   youtube: {
+    title: 'YouTube',
     icon: <Youtube />,
+    color: '#e62117',
   },
   instagram: {
     icon: <Instagram />,

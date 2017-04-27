@@ -56,6 +56,10 @@
   }
 }
 
+.input-group-addon svg {
+  display: flex;
+}
+
 @media (max-width: 767px) {
   .skin-black .main-header > .logo {
     background-color: #fff;

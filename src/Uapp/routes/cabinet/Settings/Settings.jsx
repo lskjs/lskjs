@@ -21,6 +21,7 @@ export default class Settings extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
+    passports: PropTypes.object.isRequired,
   };
   getFields(obj, user) {
     return Object.keys(obj)
@@ -44,7 +45,7 @@ export default class Settings extends Component {
     await this.props.user.editUser(data);
   }
   render() {
-    const { config, user } = this.props;
+    const { config, user, passports } = this.props;
     return (
       <Row>
         <Col md={6} xs={12}>
@@ -69,7 +70,7 @@ export default class Settings extends Component {
               />
             </CardBlock>
           </Card>
-          <SocialChange />
+          <SocialChange passports={passports} />
         </Col>
         <Col md={6} xs={12}>
           <AvatarChange />

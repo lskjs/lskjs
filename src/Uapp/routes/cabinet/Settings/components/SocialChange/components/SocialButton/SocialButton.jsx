@@ -19,6 +19,8 @@ export default class SocialButton extends PureComponent {
     style: 'default',
     styleName: null,
     tooltip: null,
+    onClick: null,
+    href: null,
   }
   static propTypes = {
     icon: PropTypes.node,
@@ -27,6 +29,8 @@ export default class SocialButton extends PureComponent {
     style: PropTypes.oneOf(['default', 'inverse']),
     styleName: PropTypes.string,
     tooltip: PropTypes.string,
+    onClick: PropTypes.func,
+    href: PropTypes.string,
   }
   renderOverlay() {
     const { active } = this.props;
@@ -37,24 +41,25 @@ export default class SocialButton extends PureComponent {
     );
   }
   renderButton() {
-    const { icon, color, style, styleName } = this.props;
+    const { icon, color, style, styleName, href = null, onClick = null } = this.props;
     const wStyle = {
-      border: `2px solid rgba(${hexToRgb(color).r},${hexToRgb(color).g},${hexToRgb(color).b}, 0.4)`
+      border: `2px solid rgba(${hexToRgb(color).r},${hexToRgb(color).g},${hexToRgb(color).b}, 0.4)`,
     };
-    const bStyle = {
-      backgroundColor: color,
+    const linkProps = {
+      style: {
+        backgroundColor: color,
+      },
+      styleName: cx({
+        btn: true,
+        [style]: true,
+        [styleName]: styleName,
+      }),
     };
+    if (href) linkProps.href = href;
+    if (onClick) linkProps.onClick = onClick;
     return (
       <div styleName="wrapper" style={wStyle}>
-        <Link
-          {...this.props}
-          style={bStyle}
-          styleName={cx({
-            btn: true,
-            [style]: true,
-            [styleName]: styleName,
-          })}
-        >
+        <Link {...linkProps}>
           <span>{icon}</span>
           {this.renderOverlay()}
         </Link>
@@ -64,7 +69,7 @@ export default class SocialButton extends PureComponent {
   render() {
     const { tooltip } = this.props;
     if (tooltip) {
-      const owTooltip = <Tooltip>{tooltip}</Tooltip>;
+      const owTooltip = <Tooltip id={tooltip}>{tooltip}</Tooltip>;
       return (
         <OverlayTrigger placement="top" overlay={owTooltip}>
           {this.renderButton()}

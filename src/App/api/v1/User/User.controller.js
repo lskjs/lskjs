@@ -40,8 +40,8 @@ export default (ctx) => {
   };
 
   controller.length = async () => {
-    const users = await User.find({});
-    return { count: users.length };
+    const count = await User.count({});
+    return { count };
   };
 
   controller.get = async (req) => {

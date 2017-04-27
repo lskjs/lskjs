@@ -278,11 +278,11 @@ export default (ctx) => {
       controller.socialBind = async (req) => {
         const userId = req.user._id;
         const passport = await Passport
-        .getByToken(req.data.p)
-        .then(checkNotFound);
+          .getByToken(req.data.p)
+          .then(checkNotFound);
         const user = await User
-        .findById(req.user._id)
-        .then(checkNotFound);
+          .findById(req.user._id)
+          .then(checkNotFound);
         if (passport.user) throw e400('passport.user already exist');
         passport.user = userId;
         user.passports.push(passport._id);
@@ -301,8 +301,8 @@ export default (ctx) => {
         const params = req.allParams();
         const userId = req.user._id;
         const user = await User
-        .findById(req.user._id)
-        .then(checkNotFound);
+          .findById(req.user._id)
+          .then(checkNotFound);
 
         // OR passportId: passport._id
         const findParams = {};
@@ -313,8 +313,8 @@ export default (ctx) => {
           throw e400('!findParams.passportId && !findParams.provider');
         }
         const passport = await Passport
-        .findOne(findParams)
-        .then(checkNotFound);
+          .findOne(findParams)
+          .then(checkNotFound);
         if (passport.user != userId) throw e403('Wrong user!');
         passport.user = null;
         user.passports = user.passports.filter((pId) => {

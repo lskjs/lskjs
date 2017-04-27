@@ -85,14 +85,15 @@ export default {
     },
     {
       path: '/settings',
-      async action({ page }) {
+      async action({ page, uapp }) {
+        const passports = await uapp.modules.auth.stores.Passports.getPassports();
         return page
           .meta({
             title: 'Редактирование профиля',
             description: 'Старница настроек',
             url: '/cabinet/settings',
           })
-          .component(Settings, {});
+          .component(Settings, { passports });
       },
     },
     {

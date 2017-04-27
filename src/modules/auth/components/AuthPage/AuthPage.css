@@ -7,10 +7,6 @@ $instagram: #262626;
 $facebook: #4867aa;
 $youtube: #e62117;
 
-:global .input-group-addon svg {
-    display: flex;
-}
-
 .recovery-password {
   float: right;
   font-size: .85em;
