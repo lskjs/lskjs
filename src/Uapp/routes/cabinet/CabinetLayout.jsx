@@ -64,7 +64,7 @@ export default class CabinetLayout extends Component {
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
       breadItems[0].icon = <Dashboard />;
     }
-    const { Notification } = uapp.modules.notification.components;
+    const { NotificationCenter } = uapp.modules.notification.components;
 
     return (
       <LayoutWrapper color="black">
@@ -78,7 +78,7 @@ export default class CabinetLayout extends Component {
             </LargeLogo>
           </Logo>
           <Navbar controlbar={false}>
-            <Notification />
+            <NotificationCenter />
             <UserMenu
               // onLinkClick={action('onLinkClick')}
               onButtonClick={this.logout}

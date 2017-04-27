@@ -1,16 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import css from 'importcss';
 import { observer, inject } from 'mobx-react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import moment from 'moment';
 
 import Bell from 'react-icons2/mdi/bell';
+import BellRing from 'react-icons2/mdi/bell-ring';
 
-@inject('user', 'api')
+@inject(stores => ({
+  store: stores.uapp.modules.notification.notificationStore,
+  api: stores.api,
+}))
 @observer
-@css(require('./Notification.css'))
-export default class Notification extends Component {
-
+@css(require('./NotificationCenter.css'))
+export default class NotificationCenter extends Component {
+  static propTypes = {
+    api: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
+  }
   componentDidMount() {
     this.socket = this.props.api.ws('module/notification');
     this.socket.on('notification', async (notification) => {
@@ -22,13 +29,12 @@ export default class Notification extends Component {
       });
     });
   }
-
   render() {
-    const { user } = this.props;
+    const { store } = this.props;
     const notifications = (
       <Popover id="notifications" title="Уведомления">
-        {user.notifications.length > 0 ? (
-          user.notifications.map((notify) => {
+        {store.list.length > 0 ? (
+          store.list.map((notify) => {
             return (
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div style={{ fontSize: '90%' }}>{`${notify.objectId} ${notify.action} ${notify.subjectId}`}</div>
@@ -47,8 +53,8 @@ export default class Notification extends Component {
       <li>
         <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={notifications}>
           <a styleName="link">
-            <Bell />
-            {user.notifications.length > 0 && <div styleName="badge" />}
+            {store.list.length > 0 ? <BellRing /> : <Bell />}
+            {store.list.length > 0 && <div styleName="badge" />}
           </a>
         </OverlayTrigger>
       </li>

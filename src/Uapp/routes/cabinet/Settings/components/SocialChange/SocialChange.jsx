@@ -7,7 +7,7 @@ import css from 'importcss';
 import { observer, inject } from 'mobx-react';
 import { autobind } from 'core-decorators';
 
-import { buttons as socials } from '~/Uapp/routes/auth/AuthPage/SocialButtons';
+import { buttons as socials } from '~/modules/auth/components/AuthPage/SocialButtons';
 import SocialButton from './components/SocialButton';
 
 @inject('config', 'log')
