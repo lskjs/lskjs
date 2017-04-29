@@ -97,15 +97,38 @@ export default class CoreApp extends ExpressApp {
     };
   }
 
-  getDocsRouter(getDocs, params) {
-    const api = this.asyncRouter();
-    const docsParams = Object.assign({}, params, {
-      docs: `${params.path || '/api'}/docs`,
-      docsJson: `${params.path || '/api'}/docs/json`,
+  getDocsRouter(getDocs, p) {
+    const params = Object.assign({}, p, {
+      docs: `${p.path || '/api'}/docs`,
+      docsJson: `${p.path || '/api'}/docs/json`,
     });
-    api.all('/', (req, res) => res.json(docsParams));
-    api.all('/docs', (req, res) => res.send(getDocsTemplate(this, docsParams)));
-    api.all('/docs/json', (req, res) => res.json(getDocs(this, docsParams)));
+    const api = this.asyncRouter();
+    api.all('/', (req, res) => res.json(params));
+    api.all('/docs', (req, res) => res.send(getDocsTemplate(this, params)));
+
+    const ctx = this;
+    const site = ctx.config && ctx.config.client && ctx.config.client.site || { title: 'API' };
+    const url = ctx.config.url;
+    const defaultSwaggerJson = {
+      swagger: '2.0',
+      info: {
+        ...site,
+        title: `${site.title} API`,
+        version: params.v,
+      },
+      host: url,
+      // host: url + params.path,
+      schemes: [
+        url.split('://')[0],
+      ],
+      basePath: params.path,
+      produces: ['application/json'],
+      paths: {},
+    };
+    api.all('/docs/json', (req, res) => {
+      const swaggerJson = Object.assign({}, defaultSwaggerJson, getDocs(this, params));
+      return res.json(swaggerJson);
+    });
     return api;
   }
 

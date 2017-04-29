@@ -1,14 +1,12 @@
-export default (params) => {
-  if (typeof params === 'string') {
-    params = {
-      url: params,
-    };
-  }
+export default (ctx, params) => {
   return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${params.name} API docs</title>
+<!--
+${JSON.stringify(params, null, 2)}
+-->
+  <title>${params.name || ''} API docs</title>
   <link rel="icon" type="image/png" href="//cdn.mgbeta.ru/swagger/images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="//cdn.mgbeta.ru/swagger/images/favicon-16x16.png" sizes="16x16" />
   <link href='//cdn.mgbeta.ru/swagger/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -59,7 +57,7 @@ export default (params) => {
         url = decodeURIComponent(url[1]);
       } else {
         // Путь
-        url = "${params.url}";
+        url = "${params.docsJson}";
       }
 
       hljs.configure({
@@ -113,7 +111,7 @@ export default (params) => {
 <body class="swagger-section">
 <div id='header'>
   <div class="swagger-ui-wrap">
-    <a id="logo" href="/"><img class="logo__img" alt="swagger" height="30" width="30" src="//cdn.mgbeta.ru/swagger/images/logo_small.png" /><span class="logo__title">${params.name}</span></a>
+    <a id="logo" href="/"><img class="logo__img" alt="swagger" height="30" width="30" src="//cdn.mgbeta.ru/swagger/images/logo_small.png" /><span class="logo__title">${params.name || 'API Docs'}</span></a>
     <form id='api_selector'>
       <div class='input'><input placeholder="//example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
       <div id='auth_container'></div>
