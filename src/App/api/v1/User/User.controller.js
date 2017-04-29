@@ -26,7 +26,7 @@ export default (ctx) => {
   const controller = {};
 
   controller.list = async (req) => {
-    modules.isAuth(req);
+    // modules.isAuth(req);
     const params = req.allParams();
     const { query } = params;
     let { limit = undefined, offset = 0 } = params;

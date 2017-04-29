@@ -4,6 +4,41 @@
 export default function getDocs(ctx, params) {
   return {
     "paths": {
+      "/user/list": {
+        "get": {
+          "summary": "Получить список пользователей",
+          "tags": ["User"],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/UserExtend"
+              }
+            }
+          },
+          "example": {
+            "_id": "57cd52a7ffeddc341d31bfc6",
+            "updatedAt": "2016-09-05T12:21:38.307Z",
+            "createdAt": "2016-09-05T11:10:31.120Z",
+            "name": "Andruxa",
+            "description": "Тестовый юзер, по совместительству Бог",
+            "email": "shitric2@gmail.com",
+            "nativeLanguage": "ru-RU",
+            "bdate": "1994-10-09T20:00:00.000Z",
+            "city": "TLT",
+            "pubNub": "123",
+            "isOnline": true,
+            "__v": 0,
+            "chatAvailable": true,
+            "askHelp": null,
+            "futureEvents": [],
+            "lng": 111,
+            "lat": 123,
+            "avatar": "https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif",
+            "learningLanguages": ["en-EN"]
+          }
+        },
+      },
       "/profiles": {
         "post": {
           "summary": "Создание нового профиля пользователя",
@@ -104,7 +139,7 @@ export default function getDocs(ctx, params) {
             "200": {
               "description": "",
               "schema": {
-                "$ref": "#/definitions/ProfileExtend"
+                "$ref": "#/definitions/UserExtend"
               }
             }
           },
@@ -137,7 +172,7 @@ export default function getDocs(ctx, params) {
             "200": {
               "description": "",
               "schema": {
-                "$ref": "#/definitions/ProfileExtend"
+                "$ref": "#/definitions/UserExtend"
               }
             }
           }
@@ -222,7 +257,7 @@ export default function getDocs(ctx, params) {
             "200": {
               "description": "",
               "schema": {
-                "$ref": "#/definitions/ProfileExtend"
+                "$ref": "#/definitions/UserExtend"
               }
             }
           }
@@ -309,7 +344,7 @@ export default function getDocs(ctx, params) {
             "200": {
               "description": "Profile",
               "schema": {
-                "$ref": "#/definitions/Profile"
+                "$ref": "#/definitions/User"
               }
             }
           }
@@ -332,7 +367,7 @@ export default function getDocs(ctx, params) {
               "schema": {
                 "description": "Profile",
                 "schema": {
-                  "$ref": "#/definitions/Profile"
+                  "$ref": "#/definitions/User"
                 }
               }
             }
@@ -414,13 +449,160 @@ export default function getDocs(ctx, params) {
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Profile"
+                  "$ref": "#/definitions/User"
                 }
               }
             }
           }
         }
       },
+    },
+    "definitions": {
+      "User":{
+        type:"object",
+        "properties":{
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+        }
+      },
+      "Message":{
+        type:"object",
+        "properties":{
+          "id": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/definitions/User"
+          },
+          "to": {
+            "$ref": "#/definitions/User"
+          },
+          "text": {
+            "type": "string"
+          },
+        }
+      },
+      "UserExtend": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "language": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "nativeLanguage": {
+            "type": "string"
+          },
+          "learningLanguages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "bdate": {
+            "type": "string",
+            "format": "date"
+          },
+          "city": {
+            "type": "string"
+          },
+          "pubNub": {
+            "type": "string"
+          },
+          "socialNetworkType": {
+            "type": "string"
+          },
+          "linkToSocialNetwork": {
+            "type": "string"
+          },
+          "futureEvents":{
+            type: "array",
+            items: {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id event"
+          },
+          "language": {
+            "type": "integer",
+            "format": "int32",
+            "description": "language code"
+          },
+          "title": {
+            "type": "string",
+            "description": "event title"
+          },
+          "description": {
+            "type": "string",
+            "description": "event description"
+          },
+          "owner": {
+            "type": "string",
+            "description": "owner profile id"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "YYYY-MM-DDTHH:mm:ss.sssZ"
+          },
+          "wantVisit": {
+            "type": "boolean",
+            "description": "default value false"
+          }
+        }
+      },
+
     }
   }
 }
