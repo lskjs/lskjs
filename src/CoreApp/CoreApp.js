@@ -116,7 +116,7 @@ export default class CoreApp extends ExpressApp {
         title: `${site.title} API`,
         version: params.v,
       },
-      host: url,
+      host: url.split('://')[1],
       // host: url + params.path,
       schemes: [
         url.split('://')[0],
