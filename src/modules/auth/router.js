@@ -46,12 +46,24 @@ export default {
       path: '/passport',
       async action(params) {
         const { uapp, query, page } = params;
-        const { AuthPage } = uapp.modules.auth.components;
+        const { AuthPage, BindPage } = uapp.modules.auth.components;
         let passport;
         try {
           passport = (await getData(params)).passport;
         } catch (err) {
           throw err;
+        }
+        const isAuth = await uapp.auth.isAuthAsync();
+        if (isAuth) {
+          const passports = await new uapp.modules.auth.stores.Passports();
+          if (__SERVER__) {
+            return page
+              .pushTitle('Подключение соц.сети')
+              .component(<div>Загрузка...</div>);
+          }
+          return page
+            .pushTitle('Подключение социальной сети')
+            .component(BindPage, { passports, passport, query });
         }
         if (passport.user) {
           if (__SERVER__) {
@@ -65,9 +77,12 @@ export default {
           }
           throw 'Непонятная ошибка при входе в соцсеть';
         }
-        return page
-           .pushTitle('Регистрация через соц.сеть')
-           .component(AuthPage, { type: 'signupPassport', passport, query });
+        if (!isAuth) {
+          return page
+            .pushTitle('Регистрация через соц.сеть')
+            .component(AuthPage, { type: 'signupPassport', passport, query });
+        }
+        return page.pushTitle('Загрузка...').component(<div>Загрузка...</div>, {});
       },
     },
     {

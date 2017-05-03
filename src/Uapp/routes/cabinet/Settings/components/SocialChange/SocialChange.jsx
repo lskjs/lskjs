@@ -21,8 +21,8 @@ export default class SocialChange extends PureComponent {
   };
   @autobind
   bind(provider) {
-    this.props.log.info('Пока не работает!', provider);
-    // window.location = `/api/module/auth/${provider}?bind=true`;
+    // this.props.log.info('Пока не работает!', provider);
+    window.location = `/api/module/auth/${provider}`;
   }
   @autobind
   unbind(provider) {

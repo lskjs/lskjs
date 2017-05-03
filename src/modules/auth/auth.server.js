@@ -287,7 +287,10 @@ export default (ctx) => {
         passport.user = userId;
         user.passports.push(passport._id);
         await passport.save();
-        return user.save();
+        await user.save();
+        return Passport.find({
+          user: userId,
+        });
       };
 
       controller.getSocials = async (req) => {
@@ -321,7 +324,10 @@ export default (ctx) => {
           return pId && pId.toString() !== params.p;
         });
         await passport.save();
-        return user.save();
+        await user.save();
+        return Passport.find({
+          user: userId,
+        });
       };
 
       controller.approvedEmail = async (req) => {

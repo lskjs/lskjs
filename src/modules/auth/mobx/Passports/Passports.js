@@ -40,11 +40,13 @@ export default (ctx, mctx) => (
     async connectSocial(token) {
       const data = await this.constructor.bindSocial({ p: token });
       ctx.log.info('bindSocial', data);
+      this.list.push(data);
     }
 
     async disconnectSocial(provider) {
       const data = await this.constructor.unbindSocial({ provider });
       ctx.log.info('unbindSocial', data);
+      this.list = this.list.filter(o => o.provider !== provider);
     }
 
   }
