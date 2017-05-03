@@ -338,7 +338,7 @@ export default (ctx) => {
 
 
       controller.youtubeAuth = this.passport.authenticate('youtube');
-      console.log(ctx.config.auth.socials.vkontakte);
+      // console.log(ctx.config.auth.socials.vkontakte);
       try {
         controller.vkAuth = this.passport.authenticate('vkontakte',
           { scope: ctx.config.auth.socials.vkontakte.scope || [] },

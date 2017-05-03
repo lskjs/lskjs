@@ -5,7 +5,7 @@ export default (ctx) => {
       this.stores = require('./mobx').default(ctx);
     },
     async run() {
-      this.notificationStore = await this.stores.Notifications.getNotifications();
+      this.notificationStore = __CLIENT__ ? await this.stores.Notifications.getNotifications() : [];
     },
   };
 };

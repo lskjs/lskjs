@@ -4,11 +4,8 @@ import Dashboard from './Dashboard';
 import User from './User';
 import Users from './Users';
 import Settings from './Settings';
-import Posts from './Posts';
 import Messages from './Messages';
 import Comments from './Comments';
-import Offers from './Offers';
-import Guidelines from './Guidelines';
 
 export default {
   async action({ next, page }) {
@@ -50,12 +47,16 @@ export default {
     {
       path: '/guidelines',
       async action({ page }) {
-        return page
-          .meta({
-            title: 'Гайдлайны',
-            url: '/cabinet/guidelines',
-          })
-          .component(Guidelines, {});
+        if (__CLIENT__) {
+          const Guidelines = require('./Guidelines').default;
+          return page
+            .meta({
+              title: 'Гайдлайны',
+              url: '/cabinet/guidelines',
+            })
+            .component(Guidelines, {});
+        }
+        return <div>Загрузка...</div>;
       },
     },
     {
