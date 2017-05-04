@@ -4,6 +4,8 @@ import Core from '../Core';
 import Page from './Page';
 import Api from '../utils/ApiClient';
 
+
+// TODO: вынести функции работы с хостнеймом куда нибудь
 function isRightHostname(hostnames = [], hostname) {
   for (const name of hostnames) {
     // @TODO: check wildcards
@@ -44,6 +46,24 @@ function getSiteConfig(props) {
   return siteConfig;
 }
 
+
+// TODO: вынести функции куда нибудь
+function resolveCtxRoutes(routes, ctx) {
+  function resolveCtxRoute(initRoutes) {
+    let routes = initRoutes; // eslint-disable-line
+    if (typeof routes === 'function') {
+      routes = routes(ctx) || {};
+    }
+    if (routes.children) {
+      routes.children = routes.children.map(resolveCtxRoute);
+    }
+    return routes;
+  }
+  const resultRoutes = resolveCtxRoute(routes);
+  return resultRoutes;
+}
+
+
 export default class Uapp extends Core {
   Page = Page;
   Api = Api;
@@ -52,12 +72,17 @@ export default class Uapp extends Core {
   //   // Object.assign(this, props);
   // }
 
-  init(props = {}) {
-    super.init();
+  async init(props = {}) {
+    await super.init();
     this.config = this.getConfig(this);
-    this.routes = this.getRoutes();
+    // TODO: прокинуть домен (req) когда сервер
     this.api = new this.Api(this.config && this.config.api || {});
     // this.log = this.getLogger();
+  }
+
+  async run(props = {}) {
+    await super.run();
+    this.routes = resolveCtxRoutes(this.getRoutes(), this);
   }
 
 
@@ -71,7 +96,7 @@ export default class Uapp extends Core {
   }
 
   getRoutes() {
-    console.log('getRoutes *********');
+    console.log('getRoutes ********* ');
     return require('../ReactApp/routes').default;
   }
 

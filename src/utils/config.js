@@ -39,7 +39,7 @@ class Config {
   }
   extendEnv(path = '.env.json') {
     const config = getConfig(path);
-    // console.log('extendEnv', this.client, "\n---\n", config.client, "\n---\n", _.merge({}, this.client, config.client));
+    // console.log('extendEnv', this.client, "\n---\n", config.clienyarm t, "\n---\n", _.merge({}, this.client, config.client));
     return this.merge(config);
   }
 
