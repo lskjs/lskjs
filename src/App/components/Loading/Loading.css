@@ -1,5 +1,6 @@
 .block {
   display: flex;
+  margin-top: 15px;
   margin-bottom: 15px;
   justify-content: center;
   align-items: center;

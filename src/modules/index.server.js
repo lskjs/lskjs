@@ -7,5 +7,6 @@ export default function () {
     notification: require('./notification/notification.server').default(...arguments),
     auth: require('./auth/auth.server').default(...arguments),
     posts: require('./posts/posts.server').default(...arguments),
+    upload: require('./upload/upload.server').default(...arguments),
   };
 }

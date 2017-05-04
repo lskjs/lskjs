@@ -12,6 +12,7 @@ import {
 import css from 'importcss';
 import Edit from 'react-icons2/mdi/account-settings';
 import Link from 'lsk-general/General/Link';
+import Avatar from '~/App/components/Avatar';
 
 @inject(stores => ({
   myUser: stores.user,
@@ -39,7 +40,11 @@ export default class User extends Component {
     return (
       <Row>
         <Col xs={12} styleName="center">
-          <img styleName="avatar" src={user.avatar} alt={user.fullName} />
+          <Avatar
+            size={200}
+            src={user.avatar}
+            title={user.fullName}
+          />
           <h3>{user.fullName}</h3>
           <If condition={user._id === myUser._id}>
             <Link href="/cabinet/settings">

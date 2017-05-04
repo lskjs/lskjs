@@ -15,6 +15,7 @@ export default (ctx) => {
     }
 
     async notify(params) {
+      // console.log('notify', params);
       const { Notification } = this.models;
       let notification = new Notification(params);
       await notification.save();
@@ -37,7 +38,7 @@ export default (ctx) => {
     @autobind
     onSocket(socket) {
       const { req } = socket;
-      console.log('Connected!', req.user._id);
+      // console.log('Connected!', req.user._id);
       if (!req.user || !req.user._id) throw new Error('Not Auth');
       const roomName = this.getRoomName(req.user._id);
       socket.join(roomName);

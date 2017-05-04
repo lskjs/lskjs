@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Component from 'lsk-general/General/Component';
+import Avatar from '~/App/components/Avatar';
 import { autobind } from 'core-decorators';
 import Dropzone from 'react-dropzone';
 import { inject, observer } from 'mobx-react';
@@ -7,13 +8,20 @@ import css from 'importcss';
 import {
   Card,
   CardBlock,
+  CardTitle,
+  CardHeader,
+  CardFooter,
   Row,
   Col,
   Button,
-  ButtonToolbar
+  ButtonToolbar,
 } from 'react-bootstrap';
 
-@inject('user', 'api')
+@inject(s => ({
+  user: s.user,
+  api: s.api,
+  uploadImage: s.uapp.modules.upload.uploadImage,
+}))
 @observer
 @css(require('./AvatarChange.css'))
 export default class AvatarChange extends Component {
@@ -38,11 +46,11 @@ export default class AvatarChange extends Component {
   @autobind
   async acceptSelect() {
     const { files } = this.state;
-    const { api, user } = this.props;
+    const { uploadImage, user } = this.props;
 
     const data = new FormData();
     data.append('file', files[0]);
-    const avatar = await api.uploadImage(data);
+    const avatar = await uploadImage(data);
     // console.log(avatar);
     await user.editUser({
       profile: {
@@ -61,50 +69,60 @@ export default class AvatarChange extends Component {
     const { user } = this.props;
     return (
       <Card style={{ margin: '10px 0' }}>
+        <CardHeader>
+          Изменить аватар
+        </CardHeader>
         <CardBlock>
-          <h4>Изменить аватар</h4>
+          {/* <CardTitle>Изменить аватар</CardTitle> */}
           <Row>
-            <Col xs={12} sm={6} styleName="inner center">
+            <Col xs={6} sm={6} styleName="inner center">
               <b>Текущий аватар</b>
-              <img
+              <Avatar
                 src={user.avatar}
-                alt={user.fullName} title={user.fullName}
-                style={{ borderRadius: '50%' }}
+                title={user.fullName}
               />
             </Col>
-            <Col xs={12} sm={6} styleName="inner center">
-              <b>Новый аватар</b>
-              <Dropzone
-                multiple={false}
-                styleName="zone"
-                ref={(e) => { this.dropzone = e; }}
-                onDrop={this.onDrop}
-              >
-                <div>Переместите сюда изображение или нажмите что бы выбрать</div>
-              </Dropzone>
+            <Col xs={6} sm={6} styleName="inner center">
+              <b>Изменить аватар</b>
+              <If condition={files && files.length}>
+                {files.map((file, index) => (
+                  <Avatar
+                    key={index}
+                    src={file.preview}
+                    title={user.fullName}
+                  />
+                ))}
+              </If>
+              <If condition={!(files && files.length)}>
+                <Dropzone
+                  multiple={false}
+                  styleName="zone"
+                  ref={(e) => { this.dropzone = e; }}
+                  onDrop={this.onDrop}
+                >
+                  <div>
+                    <p>Переместите сюда изображение или нажмите что бы выбрать</p>
+                    <button>
+                      Загрузить изображение
+                    </button>
+                  </div>
+                </Dropzone>
+              </If>
             </Col>
-            {files && (
-              <Col xs={12} styleName="inner center top">
-                <b>Предварительный просмотр</b>
-                <div styleName="files">
-                  {files.length === 1 && (
-                    <ButtonToolbar styleName="confirm">
-                      <Button bsStyle="primary" onClick={this.acceptSelect}>Сохранить</Button>
-                    </ButtonToolbar>
-                  )}
-                  {files.map((file, index) => (
-                    <img key={index} alt="" src={file.preview} />
-                  ))}
-                  {files.length === 1 && (
-                    <ButtonToolbar styleName="confirm">
-                      <Button onClick={this.cancelSelect}>Отменить</Button>
-                    </ButtonToolbar>
-                  )}
-                </div>
-              </Col>
-            )}
           </Row>
         </CardBlock>
+        <If condition={files && files.length}>
+          <CardFooter>
+            <Row>
+              <Col xs={6} sm={6} styleName="inner center">
+                <Button bsStyle="primary" onClick={this.acceptSelect}>Заменить</Button>
+              </Col>
+              <Col xs={6} sm={6} styleName="inner center">
+                <Button onClick={this.cancelSelect}>Отменить</Button>
+              </Col>
+            </Row>
+          </CardFooter>
+        </If>
       </Card>
     );
   }

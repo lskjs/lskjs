@@ -33,15 +33,19 @@ export function getSchema(ctx) {
   });
 
   schema.post('save', function () {
-    // @TODO: Убрать захардкоженный ID
-    ctx.modules.notification.notify({
-      subjectId: this._id,
-      subjectType: 'Message',
-      objectId: this.user,
-      objectType: 'User',
-      action: 'message',
-      userId: '590446cd993cd10011d7fde3',
-    });
+    if (this.subjectType === 'User') {
+      ctx.modules.notification.notify({
+        subjectId: this._id,
+        subjectType: 'Message',
+        objectId: this.user,
+        objectType: 'User',
+        action: 'message',
+        userId: this.subjectId,
+      });
+    }
+    if (this.subjectType === 'Chat') {
+      console.log(123123);
+    }
   });
 
   return schema;

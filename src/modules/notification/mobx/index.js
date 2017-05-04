@@ -1,5 +1,5 @@
 export default function () {
   return {
-    Notifications: require('./Notifications').default(...arguments),
+    NotificationStore: require('./NotificationStore').default(...arguments),
   };
 }

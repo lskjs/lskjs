@@ -5,7 +5,13 @@ export default (ctx) => {
       this.stores = require('./mobx').default(ctx);
     },
     async run() {
-      this.notificationStore = __CLIENT__ ? await this.stores.Notifications.getNotifications() : { list: [] };
+      this.notificationStore = await this.stores.NotificationStore.getNotificationStore();
+      if (__CLIENT__) {
+        this.notificationStore.init();
+      }
+      //
+      // if (relogin) LOGIC HERE
+      // this.notificationStore.reinit()
     },
   };
 };

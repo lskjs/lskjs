@@ -16,7 +16,7 @@ export default class UserStore {
 
   @action
   update(user) {
-    this.log.trace('UserStore.update', user);
+    // this.log.trace('UserStore.update', user);
     if (!user) return this.reset();
     for (const item in user) {
       set(this, item, user[item]);

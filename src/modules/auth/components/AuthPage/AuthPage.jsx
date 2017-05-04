@@ -25,6 +25,7 @@ import Slide from './Slide';
 import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
+import Avatar from '~/App/components/Avatar';
 
 import SocialButtons, { SocialButton, buttons } from './SocialButtons';
 
@@ -161,7 +162,9 @@ export default class AuthPage extends Component {
                   <If condition={type == 'signupPassport'}>
                     <SocialButton name={passport.provider} />
                     <div style={{ textAlign: 'center' }}>
-                      <img src={passport.profile.avatar} style={{ borderRadius: '50%' }} />
+                      <Avatar
+                        src={passport.profile.avatar}
+                      />
                     </div>
                   </If>
                   <Form

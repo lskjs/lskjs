@@ -6,6 +6,8 @@ import {
   CardBlock,
   FormControl,
 } from 'react-bootstrap';
+import Avatar from '~/App/components/Avatar';
+import Loading from '~/App/components/Loading';
 
 @inject('user', 'api')
 export default class Chat extends Component {
@@ -65,19 +67,18 @@ export default class Chat extends Component {
     return (
       <div>
         <If condition={!this.state.messages}>
-          Loading
+          <Loading />
         </If>
         <If condition={this.state.messages}>
           {this.state.messages.map(message => (
             <Card key={message._id}>
               <CardBlock>
-                <img
+                <Avatar
+                  size={20}
+                  src={_.get(message, 'user.profile.avatar')}
                   style={{
-                    width: '20px',
-                    borderRadius: '50%',
                     margin: '10px',
                   }}
-                  src={_.get(message, 'user.profile.avatar')}
                 />
                 {message.content}
               </CardBlock>

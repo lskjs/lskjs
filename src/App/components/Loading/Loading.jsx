@@ -11,11 +11,17 @@ export default class Loading extends PureComponent {
   static propTypes = {
     text: PropTypes.string,
     icon: PropTypes.any,
-  }
+  };
+
   render() {
     const { text, icon } = this.props;
+
+    const style = this.props.full ? {
+      height: '87vh',
+    } : {};
+
     return (
-      <div styleName="block">
+      <div styleName="block" style={style}>
         {icon}<span>{text}</span>
       </div>
     );

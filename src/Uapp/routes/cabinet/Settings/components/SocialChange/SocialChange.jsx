@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import {
   Card,
   CardBlock,
+  CardHeader,
 } from 'react-bootstrap';
 import css from 'importcss';
 import { observer, inject } from 'mobx-react';
@@ -48,8 +49,10 @@ export default class SocialChange extends PureComponent {
     const available = config.auth.socials.filter(i => !connected.includes(i));
     return (
       <Card>
+        <CardHeader>
+          Социальные сети
+        </CardHeader>
         <CardBlock styleName="flex">
-          <h4>Социальные сети</h4>
           {connected.length > 0 && (
             <div>
               <b>Подключённые</b>

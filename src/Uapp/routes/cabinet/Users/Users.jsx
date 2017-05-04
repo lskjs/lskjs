@@ -7,6 +7,7 @@ import Link from 'lsk-general/General/Link';
 import moment from 'moment';
 import VisibilitySensor from 'react-visibility-sensor';
 import Loading from '~/App/components/Loading';
+import Avatar from '~/App/components/Avatar';
 
 @observer
 export default class Users extends Component {
@@ -44,12 +45,10 @@ export default class Users extends Component {
 
   avatarFormatter(data) {
     return (
-      `<img
-        width="40"
-        height="40"
-        src="${data}"
-        style="border-radius: 50%"
-      />`
+      <Avatar
+        size={40}
+        src={data}
+      />
     );
   }
 

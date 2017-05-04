@@ -1,19 +1,8 @@
 import React from 'react';
-// import AuthPage from './AuthPage';
 import getData from './getData';
+import Loading from '~/App/components/Loading';
 
 export default {
-  // action({ next, page }) {
-  //   // if (__PROD__ && __SERVER__) {
-  //   //   return page
-  //   //     .pushTitle('Loading')
-  //   //     .component('Loading');
-  //   // }
-  //   return page
-  //     .pushTitle('Авторизация')
-  //     .layout(AuthLayout)
-  //     .next(next);
-  // },
   children: [
     {
       path: '/(login|)',
@@ -53,36 +42,27 @@ export default {
         } catch (err) {
           throw err;
         }
+        if (__SERVER__) {
+          return page
+            .pushTitle('Подключение соц.сети')
+            .component(<Loading full />);
+        }
         const isAuth = await uapp.auth.isAuthAsync();
         if (isAuth) {
-          const passports = await new uapp.modules.auth.stores.Passports();
-          if (__SERVER__) {
-            return page
-              .pushTitle('Подключение соц.сети')
-              .component(<div>Загрузка...</div>);
-          }
           return page
             .pushTitle('Подключение социальной сети')
-            .component(BindPage, { passports, passport, query });
+            .component(BindPage, { passport, query });
         }
         if (passport.user) {
-          if (__SERVER__) {
-            return page
-              .pushTitle('Вход через соц.сеть')
-              .component(<div>Загрузка...</div>);
-          }
           const res = await uapp.auth.loginPassport({ p: query.p });
           if (res) {
             return page.redirect('/');
           }
           throw 'Непонятная ошибка при входе в соцсеть';
         }
-        if (!isAuth) {
-          return page
-            .pushTitle('Регистрация через соц.сеть')
-            .component(AuthPage, { type: 'signupPassport', passport, query });
-        }
-        return page.pushTitle('Загрузка...').component(<div>Загрузка...</div>, {});
+        return page
+          .pushTitle('Регистрация через соц.сеть')
+          .component(AuthPage, { type: 'signupPassport', passport, query });
       },
     },
     {
@@ -91,7 +71,7 @@ export default {
         if (__SERVER__) {
           return page
              .pushTitle('Logout')
-             .component(<div>Загрузка...</div>);
+             .component(<Loading full />);
         }
         uapp.auth.logout();
         return page.redirect('/');

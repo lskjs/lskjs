@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-
+const DEBUG = 0;
 export default class AuthStore {
 
   promise = null;
@@ -13,7 +13,7 @@ export default class AuthStore {
 
   init() {
     const res = this.getUserAndToken();
-    this.log.trace('AuthStore.init res', res);
+    DEBUG && this.log.trace('AuthStore.init res', res);
     this.setUserAndToken(res);
     this.initUserProfile();
   }
@@ -37,7 +37,7 @@ export default class AuthStore {
 
 
   setToken(token) {
-    this.log.trace('AuthStore.setToken', token);
+    DEBUG && this.log.trace('AuthStore.setToken', token);
     this.api.setAuthToken(token);
     this.rootState.token = token;
     if (__CLIENT__) {
@@ -52,7 +52,7 @@ export default class AuthStore {
   }
 
   setUser(user = null) {
-    this.log.trace('AuthStore.setUser', user);
+    DEBUG && this.log.trace('AuthStore.setUser', user);
     this.rootState.user = user;
     if (this.user) {
       if (user) {
@@ -64,7 +64,7 @@ export default class AuthStore {
   }
 
   setUserAndToken(res = {}) {
-    this.log.trace('AuthStore.setUserAndToken', res);
+    DEBUG && this.log.trace('AuthStore.setUserAndToken', res);
     if (res.token || res.user) {
       if (res.token) {
         this.setToken(res.token);
@@ -79,7 +79,7 @@ export default class AuthStore {
   }
 
   getUserAndToken() {
-    this.log.trace('AuthStore.getUserAndToken');
+    DEBUG && this.log.trace('AuthStore.getUserAndToken');
     const res = {};
     if (this.rootState) {
       if (this.rootState.token) {
@@ -96,7 +96,7 @@ export default class AuthStore {
   }
 
   async applyPromise(promise) {
-    this.log.trace('AuthStore.applyPromise');
+    DEBUG && this.log.trace('AuthStore.applyPromise');
     // @TODO: промис может быть в процессе резрешения
     this.promise = promise;
     const res = await this.promise;
@@ -105,7 +105,7 @@ export default class AuthStore {
   }
 
   isAuthAsync() {
-    this.log.trace('AuthStore.isAuthAsync');
+    DEBUG && this.log.trace('AuthStore.isAuthAsync');
     if (!this.promise) return false;
     return this.promise
       .then(() => this.isAuth())
@@ -118,7 +118,7 @@ export default class AuthStore {
 
 
   logout() {
-    this.log.trace('AuthStore.logout');
+    DEBUG && this.log.trace('AuthStore.logout');
     this.setUserAndToken({});
   }
 

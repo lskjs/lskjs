@@ -6,6 +6,8 @@ import isEqual from 'lodash/isEqual';
 import {
   Card,
   CardBlock,
+  CardHeader,
+  CardFooter,
   Form,
   FormGroup,
   ControlLabel,
@@ -76,10 +78,12 @@ export default class PasswordChange extends Component {
     } = this.state;
     const status = null;
     return (
-      <Card style={{ margin: '10px 0' }}>
-        <CardBlock>
-          <h4>Изменить пароль</h4>
-          <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
+        <Card style={{ margin: '10px 0' }}>
+          <CardHeader>
+            Изменить пароль
+          </CardHeader>
+          <CardBlock>
             <FormGroup controlId="passwordValue" validationState={passwordStatus}>
               <ControlLabel>Новый пароль</ControlLabel>
               <FormControl
@@ -88,8 +92,8 @@ export default class PasswordChange extends Component {
                 onChange={this.handleChangePasswordField('password')}
               />
               {passwordStatus === 'error' && (
-                <HelpBlock>Пароль должен быть больше 6 символов</HelpBlock>
-              )}
+              <HelpBlock>Пароль должен быть больше 6 символов</HelpBlock>
+                )}
             </FormGroup>
             <FormGroup controlId="passwordConfirmValue" validationState={passwordConfirmStatus}>
               <ControlLabel>Подтверждение пароля</ControlLabel>
@@ -99,9 +103,13 @@ export default class PasswordChange extends Component {
                 onChange={this.handleChangePasswordField('passwordConfirm')}
               />
               {passwordConfirmStatus === 'error' && (
-                <HelpBlock>Пароль не совпадает с введённым ранее</HelpBlock>
-              )}
+              <HelpBlock>Пароль не совпадает с введённым ранее</HelpBlock>
+                )}
             </FormGroup>
+          </CardBlock>
+          <CardFooter
+            style={{textAlign:'center'}}
+          >
             <Button
               type="submit"
               bsStyle="primary"
@@ -132,9 +140,9 @@ export default class PasswordChange extends Component {
                 </div>
               </If>
             </Button>
-          </Form>
-        </CardBlock>
-      </Card>
+          </CardFooter>
+        </Card>
+      </Form>
     );
   }
 }

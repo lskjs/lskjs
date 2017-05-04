@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
 import { autobind } from 'core-decorators';
 import omit from 'lodash/omit';
-import { Row, Col, Button, Card, CardBlock } from 'react-bootstrap';
+import { Row, Col, Button, Card, CardHeader, CardFooter, CardBlock } from 'react-bootstrap';
 import cx from 'classnames';
 
 import Loading from 'react-icons2/md/refresh';
@@ -15,7 +15,7 @@ import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
 import SocialChange from './components/SocialChange';
 
-@inject('user', 'config', 'log')
+@inject('user', 'config')
 @observer
 export default class Settings extends Component {
   static propTypes = {
@@ -49,32 +49,36 @@ export default class Settings extends Component {
     return (
       <Row>
         <Col md={6} xs={12}>
+          <AvatarChange />
+          <PasswordChange />
+          <SocialChange passports={passports} />
+        </Col>
+        <Col md={6} xs={12}>
           <Card style={{ margin: '10px 0' }}>
+            <CardHeader>
+              Параметры пользователя
+            </CardHeader>
             <CardBlock>
-              <h4>Редактирование</h4>
               <Form
                 fields={this.getFields(config.auth.profile, user)}
                 validators={this.getValidators(config.auth.profile)}
                 onSubmit={this.handleSubmit}
                 submitButton={(
-                  <Button
-                    type="submit"
-                    bsStyle="primary"
-                    style={{
-                      position: 'relative',
-                    }}
-                  >
-                    Сохранить
-                  </Button>
+                  <CardFooter>
+                    <Button
+                      type="submit"
+                      bsStyle="primary"
+                      style={{
+                        position: 'relative',
+                      }}
+                    >
+                      Сохранить
+                    </Button>
+                  </CardFooter>
                 )}
               />
             </CardBlock>
           </Card>
-          <SocialChange passports={passports} />
-        </Col>
-        <Col md={6} xs={12}>
-          <AvatarChange />
-          <PasswordChange />
         </Col>
       </Row>
     );

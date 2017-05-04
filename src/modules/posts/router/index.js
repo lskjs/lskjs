@@ -1,5 +1,14 @@
 
 export default {
+  async action({ next, uapp, page }) {
+    return page
+    .meta({
+      title: 'Посты',
+      description: 'Посты созданные тобой',
+      url: '/cabinet/posts',
+    })
+    .next(next);
+  },
   children: [
     {
       path: '/',
@@ -8,11 +17,6 @@ export default {
         const Posts = uapp.modules.posts.components.Posts;
         await posts.fetchPosts(20);
         return page
-          .meta({
-            title: 'Посты',
-            description: 'Посты созданные тобой',
-            url: '/cabinet/posts',
-          })
           .component(Posts, { posts });
       },
     },
@@ -49,6 +53,11 @@ export default {
         const post = await uapp.modules.posts.stores.Post.getById(id);
         const PostEdit = uapp.modules.posts.components.PostEdit;
         return page
+          .meta({
+            title: 'Отдельный пост',
+            description: 'Da!',
+            url: `/cabinet/posts/${id}`,
+          })
           .meta({
             title: 'Редактирование поста',
             description: 'Мемы!',

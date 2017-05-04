@@ -1,5 +1,6 @@
-import CabinetLayout from './CabinetLayout';
+import Loading from '~/App/components/Loading';
 
+import CabinetLayout from './CabinetLayout';
 import Dashboard from './Dashboard';
 import User from './User';
 import Users from './Users';
@@ -56,7 +57,7 @@ export default {
             })
             .component(Guidelines, {});
         }
-        return <div>Загрузка...</div>;
+        return <Loading full  />;
       },
     },
     {
@@ -77,8 +78,8 @@ export default {
         // const { Messages } = uapp.modules.chat.components;
         return page
           .meta({
-            title: user.fullName,
-            description: 'Профиль пользователя',
+            title: 'Профиль пользователя',
+            description: user.fullName,
             url: `/cabinet/user/${id}`,
           })
           .component(User, { user });
@@ -89,6 +90,11 @@ export default {
       async action({ page, uapp }) {
         const passports = await uapp.modules.auth.stores.Passports.getPassports();
         return page
+          .meta({
+            title: 'Профиль пользователя',
+            description: 'Профиль пользователя',
+            url: '/cabinet/profile',
+          })
           .meta({
             title: 'Редактирование профиля',
             description: 'Старница настроек',

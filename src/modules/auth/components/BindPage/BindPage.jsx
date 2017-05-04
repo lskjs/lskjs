@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { autobind } from 'core-decorators';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import {
   Card,
   CardBlock,
@@ -20,7 +20,11 @@ import Link from 'lsk-general/General/Link';
 
 import { buttons } from '../AuthPage/SocialButtons';
 import Slide from '../AuthPage/Slide';
+import Avatar from '~/App/components/Avatar';
 
+@inject(stores => ({
+  Passports: stores.uapp.modules.auth.stores.Passports,
+}))
 @observer
 export default class AuthPage extends Component {
   static defaultProps = {
@@ -28,13 +32,13 @@ export default class AuthPage extends Component {
   };
   static propTypes = {
     passport: PropTypes.object,
-    passports: PropTypes.any.isRequired,
+    Passports: PropTypes.any.isRequired,
   };
   @autobind
   async handleSubmit() {
-    const { query, passports } = this.props;
-    console.log('passports', passports);
-    await passports.connectSocial(query.p).then(() => {
+    const { query, Passports } = this.props;
+    // console.log('passports', passports);
+    await Passports.bindSocial(query).then(() => {
       this.redirect('/cabinet/settings');
       global.toast && global.toast({
         type: 'success',
@@ -55,11 +59,13 @@ export default class AuthPage extends Component {
                     {`Подключить ${buttons[passport.provider].title}?`}
                   </CardTitle>
                   <div style={{ textAlign: 'center', margin: '20px 0' }}>
-                    <img src={passport.profile.avatar} style={{ borderRadius: '50%' }} />
+                    <Avatar
+                      src={passport.profile.avatar}
+                    />
                   </div>
                   <ButtonGroup style={{ width: '100%' }}>
                     <Button style={{ width: '50%' }} bsStyle="success" onClick={this.handleSubmit}><Check /> Подключить</Button>
-                    <Button style={{ width: '50%' }} bsStyle="danger" componentClass={Link} href="/cabient/settings"><Error /> Не подключать</Button>
+                    <Button style={{ width: '50%' }} bsStyle="danger" componentClass={Link} href="/cabinet/settings"><Error /> Не подключать</Button>
                   </ButtonGroup>
                 </CardBlock>
               </Card>
