@@ -55,21 +55,28 @@ export default class NotificationCenter extends Component {
     const notifications = (
       <Popover id="notifications" title="Уведомления">
         {store.list.length > 0 ? (
-          store.list.map(notify => (
-            <div
-              key={notify._id}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginBottom: 10,
-              }}
-            >
-              {this.switchActions(notify)}
-              <div style={{ fontSize: '70%', textAlign: 'right', opacity: 0.7 }}>
-                {moment(notify.createdAt).locale('ru').fromNow()}
+          <div>
+            {store.list.map(notify => (
+              <div
+                key={notify._id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginBottom: 10,
+                }}
+              >
+                {this.switchActions(notify)}
+                <div style={{ fontSize: '70%', textAlign: 'right', opacity: 0.7 }}>
+                  {moment(notify.createdAt).locale('ru').fromNow()}
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+            <If condition={store.list.length === 10}>
+              <A href="/cabinet/notifications">
+                Посмотреть все уведомления
+              </A>
+            </If>
+          </div>
         ) : (
           <p>У вас нет новых уведомлений</p>
         )}

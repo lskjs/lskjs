@@ -1,5 +1,4 @@
 import getUser from './User';
-import getPassport from './Passport';
 // import getUpload from '../upload';
 
 

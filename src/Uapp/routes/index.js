@@ -2,7 +2,7 @@ import ErrorLayout from './ErrorLayout';
 import MainLayout from './MainLayout';
 import AuthRouter from '../../modules/auth/router'; // TODO: isuvorov не знаю как иначе
 
-export default {
+export default uapp => ({
   path: '/',
   async action({ next, uapp, page }) {
     return page
@@ -27,7 +27,7 @@ export default {
     },
     {
       path: '/cabinet',
-      ...require('./cabinet').default,
+      ...require('./cabinet').default(uapp),
     },
     {
       path: '/admin',
@@ -40,4 +40,4 @@ export default {
       },
     },
   ],
-};
+});

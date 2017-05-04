@@ -8,7 +8,8 @@ import Settings from './Settings';
 import Messages from './Messages';
 import Comments from './Comments';
 
-export default {
+export default uapp => ({
+  uapp,
   async action({ next, page }) {
     return page
       .isAuth()
@@ -57,7 +58,7 @@ export default {
             })
             .component(Guidelines, {});
         }
-        return <Loading full  />;
+        return <Loading full />;
       },
     },
     {
@@ -123,7 +124,9 @@ export default {
     },
     {
       path: '/posts',
-      ...require('~/modules/posts/router').default,  // @TODO: @isuvorov: Реквайр роутеров из модулей
+      posts: uapp.modules.posts,
+      router: uapp.modules.posts.router,
+      ...uapp.modules.posts.router,
     },
     {
       path: '/messages',
@@ -148,4 +151,4 @@ export default {
       },
     },
   ],
-};
+});

@@ -24,12 +24,12 @@ export default (ctx, mctx) => (
     }
 
     // getNotificationStore
-    static async getNotificationStore() {
+    static async getNotificationStore({ limit = 10 } = {}) {
       const isAuth = await ctx.auth.isAuthAsync();
       let notifications = [];
       if (isAuth) {
         const { data } = await ctx.api.fetch('/api/module/notification');
-        notifications = data;
+        notifications = data.slice(0, limit); // TODO: СДелать потом по нормальному на сервере
         // notifications = data.map((e) => {
         //   e.action = this.convertAction(e.action);
         //   return e;

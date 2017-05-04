@@ -53,18 +53,22 @@ export function getSchema(ctx) {
     justOne: true,
   });
 
+  schema.pre('save', function (next) {
+    this.wasNew = this.isNew;
+    next();
+  });
+
   schema.post('save', function () {
-    // @TODO: Убрать захардкоженный ID
-    console.log('save deal!!!')
-    ctx.modules.notification.notify({
-      subjectId: this._id,
-      subjectType: 'Deal',
-      objectId: this.offerId,
-      objectType: 'Offer',
-      action: 'deal',
-      userId: '590446cd993cd10011d7fde3',
-    });
-    console.log('deal NOTIFY!!!!!!')
+    if (this.wasNew) {
+      ctx.modules.notification.notify({
+        subjectId: this._id,
+        subjectType: 'Deal',
+        objectId: this.offerId,
+        objectType: 'Offer',
+        action: 'deal',
+        userId: this.offerUserId,
+      });
+    }
   });
 
   return schema;

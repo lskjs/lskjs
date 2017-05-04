@@ -27,7 +27,7 @@ export default {
         return page
           .meta({
             title: 'Создание поста',
-            description: 'Da!',
+            // description: 'Da!',
             url: '/cabinet/posts/create',
           })
           .component(PostCreate, {});
@@ -41,7 +41,7 @@ export default {
         return page
           .meta({
             title: 'Отдельный пост',
-            description: 'Da!',
+            // description: 'Da!',
             url: `/cabinet/posts/${id}`,
           })
           .component(Post, { post });
@@ -55,7 +55,7 @@ export default {
         return page
           .meta({
             title: 'Отдельный пост',
-            description: 'Da!',
+            // description: 'Da!',
             url: `/cabinet/posts/${id}`,
           })
           .meta({
