@@ -1,26 +1,30 @@
-import Offers from './Offers';
-import Offer from './Offer';
-import NewOffer from './NewOffer';
-
 export default {
+  async action({ next, page }) {
+    return page
+      .meta({
+        title: 'Предложения',
+        description: 'Все предложения',
+        url: '/cabinet/offers',
+      })
+      .next(next);
+  },
   children: [
     {
       path: '/',
       async action({ page, uapp }) {
-        // const offers = new uapp.stores.Offers();
-        // await offers.fetchOffers(5);
+        const { components, stores } = uapp.modules.offer;
+        const { Offers } = components;
+        const offers = new stores.OffersStore();
+        await offers.fetchOffers(20);
         return page
-          .meta({
-            title: 'Предложения',
-            description: 'Все предложения',
-            url: '/cabinet/offers',
-          })
-          .component(Offers, { /*offers*/ });
+          .component(Offers, { offers });
       },
     },
     {
       path: '/add',
-      async action({ page }) {
+      async action({ page, uapp }) {
+        const { components } = uapp.modules.offer;
+        const { NewOffer } = components;
         return page
           .meta({
             title: 'Новое предложение',
@@ -33,14 +37,16 @@ export default {
     {
       path: '/:id',
       async action({ page, uapp }, { id }) {
-        // const offer = await uapp.models.Offer.getById(id);
+        const { components, stores } = uapp.modules.offer;
+        const { Offer } = components;
+        const offer = await stores.OfferModel.getById(id);
         return page
           .meta({
             title: 'Кек',
             description: 'Страница предложения',
             url: `/cabinet/offers/${id}`,
           })
-          .component(Offer, { /*offer*/ });
+          .component(Offer, { offer });
       },
     },
   ],

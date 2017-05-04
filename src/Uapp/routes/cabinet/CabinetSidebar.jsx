@@ -88,7 +88,6 @@ export default class CabinetLayout extends Component {
             title: 'Предложения',
             items: [
               { title: 'Все предложения', url: '/cabinet/offers' },
-              { title: 'Одно предложение', url: '/cabinet/offers/1' },
               { title: 'Создать новое', url: '/cabinet/offers/add' },
             ],
           },

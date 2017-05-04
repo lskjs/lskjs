@@ -47,6 +47,7 @@ export default class NewOffer extends Component {
         title: 'Цена',
         control: {
           type: 'number',
+          placeholder: 'Установите цену',
           min: 0,
         },
       },
@@ -55,10 +56,33 @@ export default class NewOffer extends Component {
         title: 'Срок (в днях)',
         control: {
           type: 'number',
+          placeholder: 'Укажите кол-во дней',
           min: 0,
         },
       },
     ];
+    const validators = {
+      title: {
+        presence: {
+          message: 'Поле не должно быть пустым',
+        },
+      },
+      'info.content': {
+        presence: {
+          message: 'Поле не должно быть пустым',
+        },
+      },
+      price: {
+        presence: {
+          message: 'Поле не должно быть пустым',
+        },
+      },
+      term: {
+        presence: {
+          message: 'Поле не должно быть пустым',
+        },
+      },
+    };
     return (
       <Row style={{ display: 'flex', justifyContent: 'center' }}>
         <Col xs={12} md={6}>
@@ -66,6 +90,7 @@ export default class NewOffer extends Component {
             <CardBlock>
               <Form
                 fields={fields}
+                validators={validators}
                 onSubmit={this.handleSubmit}
                 submitButton={(
                   <Button

@@ -1,16 +1,16 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
-import _ from 'lodash';
+
 export function getSchema(ctx) {
-  const mongoose = ctx.db;
+  const { db } = ctx;
   const schema = new UniversalSchema({
     userId: { // id создателя
-      type: mongoose.Schema.Types.ObjectId,
+      type: db.Schema.Types.ObjectId,
       ref: 'User',
       index: true,
       required: true,
     },
     dealId: { // Выбранный deal
-      type: mongoose.Schema.Types.ObjectId,
+      type: db.Schema.Types.ObjectId,
       ref: 'Deal',
       default: null,
       index: true,
@@ -53,8 +53,8 @@ export function getSchema(ctx) {
     },
     status: { // Тоже хз
       type: String,
-      enum: ['PUBLIC'], // МНОГО МНОГО
-      default: 'PUBLIC',
+      enum: ['notStarted', 'inProgress', 'review', 'finished'], // МНОГО МНОГО
+      default: 'notStarted',
       index: true,
     },
   }, {

@@ -9,7 +9,7 @@ export default class KeyValue extends PureComponent {
   }
   static propTypes = {
     name: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.any,
   }
   render() {
     const { name, value } = this.props;
