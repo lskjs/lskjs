@@ -49,7 +49,7 @@ export default class Runner {
     ['server', 'client', 'uapp'].forEach((type) => {
       const filename = this.resolvePath(outputDir, `${type}.js`);
       // console.log({ filename });
-      const content = `
+      const content = `\
 export default function () {
   return {
 ${_.map(this.modules.modules, (val, key) => {
@@ -73,7 +73,7 @@ ${_.map(this.modules.modules, (val, key) => {
 }
 `;
       console.log(content);
-      fs.writeFileSync(filename, content.trim());
+      fs.writeFileSync(filename, content);
     });
     //
     // modules
