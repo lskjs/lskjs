@@ -1,7 +1,12 @@
 export default {
   output: '~/modules',
   modules: {
-    mailer: 'lsk-mailer',
+    rating: 'lsk-rating',
+    notification: 'lsk-notification',
+    chat: 'lsk-chat',
+    auth: 'lsk-auth',
+    upload: 'lsk-upload',
     offer: '~/modules/offer',
+    posts: '~/modules/posts',
   },
 };

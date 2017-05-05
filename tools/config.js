@@ -4,7 +4,6 @@ const ctx = {
   env: process.env.NODE_ENV,
   debug: !process.argv.includes('--release'),
   verbose: process.argv.includes('--verbose'),
-  webpackConfigDist: `${dirname}/build/webpack.config.js`, // TODO: generation by default
   // webpackStats: 'verbose',
   dirname,
   pkg: require('../package.json'),
