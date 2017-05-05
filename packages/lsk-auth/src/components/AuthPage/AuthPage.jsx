@@ -25,7 +25,7 @@ import Slide from './Slide';
 import Link from 'lsk-general/General/Link';
 import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
-import Avatar from '~/App/components/Avatar';
+import Avatar from 'lsk-general/General/Avatar';
 
 import SocialButtons, { SocialButton, buttons } from './SocialButtons';
 

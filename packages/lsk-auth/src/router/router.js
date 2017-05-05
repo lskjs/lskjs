@@ -1,6 +1,6 @@
 import React from 'react';
 import getData from './getData';
-import Loading from '~/App/components/Loading';
+import Loading from 'lsk-general/General/Loading';
 
 export default {
   children: [

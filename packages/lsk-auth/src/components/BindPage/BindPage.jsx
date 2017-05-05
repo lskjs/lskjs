@@ -20,7 +20,7 @@ import Link from 'lsk-general/General/Link';
 
 import { buttons } from '../AuthPage/SocialButtons';
 import Slide from '../AuthPage/Slide';
-import Avatar from '~/App/components/Avatar';
+import Avatar from 'lsk-general/General/Avatar';
 
 @inject(stores => ({
   Passports: stores.uapp.modules.auth.stores.Passports,
