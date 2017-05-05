@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import logger from './logger';
+import Promise from 'bluebird';
 // import config from './config';
 
 function isClass(v) {
