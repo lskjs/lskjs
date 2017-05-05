@@ -8,35 +8,35 @@ import css from 'importcss';
 import {
   Card,
   CardBlock,
-  CardTitle,
   CardHeader,
   CardFooter,
   Row,
   Col,
   Button,
-  ButtonToolbar,
 } from 'react-bootstrap';
 
 @inject(s => ({
   user: s.user,
-  api: s.api,
-  uploadImage: s.uapp.modules.upload.uploadImage,
+  upload: s.uapp.modules.upload,
 }))
 @observer
 @css(require('./AvatarChange.css'))
 export default class AvatarChange extends Component {
 
   static propTypes = {
-    api: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
   }
 
-  constructor() {
-    super();
-    this.state = {
-      files: null,
-    };
+  state = {
+    files: null,
   }
+
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     files: null,
+  //   };
+  // }
 
   @autobind
   onDrop(files) {
@@ -46,11 +46,11 @@ export default class AvatarChange extends Component {
   @autobind
   async acceptSelect() {
     const { files } = this.state;
-    const { uploadImage, user } = this.props;
-
+    const { upload, user } = this.props;
+    if (!upload) return false;
     const data = new FormData();
     data.append('file', files[0]);
-    const avatar = await uploadImage(data);
+    const avatar = await upload.uploadImage(data);
     // console.log(avatar);
     await user.editUser({
       profile: {
@@ -66,49 +66,53 @@ export default class AvatarChange extends Component {
 
   render() {
     const { files } = this.state;
-    const { user } = this.props;
+    const { user, upload } = this.props;
     return (
       <Card style={{ margin: '10px 0' }}>
         <CardHeader>
-          Изменить аватар
+          Аватар
         </CardHeader>
         <CardBlock>
           {/* <CardTitle>Изменить аватар</CardTitle> */}
           <Row>
-            <Col xs={6} sm={6} styleName="inner center">
-              <b>Текущий аватар</b>
+            <Col xs={upload ? 6 : 12} sm={upload ? 6 : 12} styleName="inner center">
+              <b>Твой аватар</b>
               <Avatar
+                size={200}
                 src={user.avatar}
                 title={user.fullName}
               />
             </Col>
-            <Col xs={6} sm={6} styleName="inner center">
-              <b>Изменить аватар</b>
-              <If condition={files && files.length}>
-                {files.map((file, index) => (
-                  <Avatar
-                    key={index}
-                    src={file.preview}
-                    title={user.fullName}
-                  />
-                ))}
-              </If>
-              <If condition={!(files && files.length)}>
-                <Dropzone
-                  multiple={false}
-                  styleName="zone"
-                  ref={(e) => { this.dropzone = e; }}
-                  onDrop={this.onDrop}
-                >
-                  <div>
-                    <p>Переместите сюда изображение или нажмите что бы выбрать</p>
-                    <button>
-                      Загрузить изображение
-                    </button>
-                  </div>
-                </Dropzone>
-              </If>
-            </Col>
+            <If condition={upload}>
+              <Col xs={6} sm={6} styleName="inner center">
+                <b>Новый аватар</b>
+                <If condition={files && files.length}>
+                  {files.map((file, index) => (
+                    <Avatar
+                      key={index}
+                      src={file.preview}
+                      title={user.fullName}
+                    />
+                  ))}
+                </If>
+                <If condition={!(files && files.length)}>
+                  <Dropzone
+                    multiple={false}
+                    styleName="zone"
+                    ref={(e) => { this.dropzone = e; }}
+                    onDrop={this.onDrop}
+                  >
+                    <div>
+                      <b>Изменить аватар</b>
+                      <p>Переместите сюда изображение или нажмите на кнопку</p>
+                      <button>
+                        Загрузить изображение
+                      </button>
+                    </div>
+                  </Dropzone>
+                </If>
+              </Col>
+            </If>
           </Row>
         </CardBlock>
         <If condition={files && files.length}>

@@ -13,7 +13,7 @@ import Form from 'lsk-general/General/Form';
 
 import PasswordChange from './components/PasswordChange';
 import AvatarChange from './components/AvatarChange';
-import SocialChange from './components/SocialChange';
+// import SocialChange from './components/SocialChange';
 
 @inject('user', 'config')
 @observer
@@ -51,7 +51,7 @@ export default class Settings extends Component {
         <Col md={6} xs={12}>
           <AvatarChange />
           <PasswordChange />
-          <SocialChange passports={passports} />
+          {/* <SocialChange passports={passports} /> */}
         </Col>
         <Col md={6} xs={12}>
           <Card style={{ margin: '10px 0' }}>

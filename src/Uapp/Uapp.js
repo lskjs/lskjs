@@ -3,7 +3,6 @@ import Api from './Api';
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 import Page from './Page';
-import getModules from '~/modules/index.uapp';
 
 import BaseUapp from 'lego-starter-kit/Uapp';
 export default class Uapp extends BaseUapp {
@@ -34,7 +33,7 @@ export default class Uapp extends BaseUapp {
   getModules() {
     return {
       ...super.getModules(),
-      ...getModules(this),
+      ...require('~/modules/uapp').default(this), // eslint-disable-line
     };
   }
 

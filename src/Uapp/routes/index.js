@@ -1,6 +1,5 @@
 import ErrorLayout from './ErrorLayout';
 import MainLayout from './MainLayout';
-import AuthRouter from '../../modules/auth/router'; // TODO: isuvorov не знаю как иначе
 
 export default uapp => ({
   path: '/',
@@ -23,7 +22,7 @@ export default uapp => ({
           .pushTitle('Авторизация')
           .next(next);
       },
-      ...AuthRouter,
+      ...require('lsk-auth/router').default,
     },
     {
       path: '/cabinet',

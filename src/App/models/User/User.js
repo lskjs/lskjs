@@ -6,12 +6,12 @@ export function getSchema(ctx) {
     avatar: '/assets/no-avatar.png',
     fullName: 'Счастливый Пользователь',
   };
-  function fullName(user) {
+  function fullName(profile) {
     let fullname;
-    if (user.profile.middleName) {
-      fullname = [user.profile.lastName, user.profile.firstName, user.profile.middleName];
+    if (profile.middleName) {
+      fullname = [profile.lastName, profile.firstName, profile.middleName];
     } else {
-      fullname = [user.profile.firstName, user.profile.lastName];
+      fullname = [profile.firstName, profile.lastName];
     }
     return fullname.filter(a => a).join(' ') || sample.fullName;
   }
@@ -45,7 +45,7 @@ export function getSchema(ctx) {
 
   schema.pre('save', function (next) {
     if (this.isModified('profile')) {
-      this.name = fullName(this) || '';
+      this.name = fullName(this.profile) || '';
     }
     return next();
   });
@@ -113,15 +113,6 @@ export function getSchema(ctx) {
 
   schema.virtual('online').get(() => {
     return false;
-  });
-  schema.virtual('fullname').get(function () {
-    let fullname = '';
-    if (this.profile.firstName) fullname += this.profile.firstName;
-    if (this.profile.lastName) {
-      if (fullname.length > 0) fullname += ' ';
-      fullname += this.profile.lastName;
-    }
-    return fullname;
   });
 
   return schema;

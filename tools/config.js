@@ -4,27 +4,19 @@ const ctx = {
   env: process.env.NODE_ENV,
   debug: !process.argv.includes('--release'),
   verbose: process.argv.includes('--verbose'),
-  webpackConfigDist: `${dirname}/build/webpack.config.js`,
+  webpackConfigDist: `${dirname}/build/webpack.config.js`, // TODO: generation by default
   // webpackStats: 'verbose',
   dirname,
   pkg: require('../package.json'),
+  modules: require('./modules').default,
   deps: [
-    {
-      name: 'lego-starter-kit',
-      path: fs.realpathSync(`${dirname}/node_modules/lego-starter-kit/src`),
-      alias: 'lego-starter-kit',
-    },
-    {
-      name: 'lsk-general',
-      path: fs.realpathSync(`${dirname}/node_modules/lsk-general/src`),
-      alias: 'lsk-general',
-    },
-    {
-      name: 'lsk-admin',
-      path: fs.realpathSync(`${dirname}/node_modules/lsk-admin/src`),
-      alias: 'lsk-admin',
-    },
-  ],
+    'lego-starter-kit', 'lsk-general', 'lsk-admin',
+    'lsk-auth', 'lsk-mailer', 'lsk-upload', 'lsk-chat', 'lsk-rating', 'lsk-notification',
+  ].map(dep => ({
+    name: dep,
+    path: fs.realpathSync(`${dirname}/node_modules/${dep}/src`),
+    alias: dep,
+  })),
   alias: {
     react: fs.realpathSync(`${dirname}/node_modules/react`),
     'react-dom': fs.realpathSync(`${dirname}/node_modules/react-dom`),

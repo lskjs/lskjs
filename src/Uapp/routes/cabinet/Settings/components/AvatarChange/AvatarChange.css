@@ -23,7 +23,7 @@
   padding: 15px;
   cursor: pointer;
   text-align: center;
-  height: 160px;
+  min-height: 200px;
   display: flex;
   align-items: center;
   &:hover {

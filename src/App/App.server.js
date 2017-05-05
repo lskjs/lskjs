@@ -1,8 +1,4 @@
 import ReactApp from 'lego-starter-kit/ReactApp'; // eslint-disable-line
-import passport from 'passport';
-import _ from 'lodash';
-import getModules from '~/modules/index.server'; // eslint-disable-line
-
 import getApi from './api/v1';
 import getDocs from './api/v1/v1.docs';
 import assets from './assets'; // eslint-disable-line
@@ -23,7 +19,7 @@ export default class App extends ReactApp {
   getModules() {
     const models = {
       ...super.getModules(),
-      ...getModules(this),
+      ...require('~/modules/server').default(this),
     };
     return models;
   }
