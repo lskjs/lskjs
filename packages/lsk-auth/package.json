@@ -1,0 +1,14 @@
+{
+  "name": "lsk-auth",
+  "version": "0.1.0",
+  "author": "isuvorov",
+  "license": "MIT",
+  "dependencies": {
+    "passport": "0.3.2",
+    "passport-vkontakte": "0.3.2",
+    "passport-youtube-v3": "2.0.0"
+  },
+  "peerDependencies": {
+    "react-icons2": "2.3.0"
+  }
+}
