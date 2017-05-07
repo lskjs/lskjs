@@ -5,7 +5,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { observer } from 'mobx-react';
 import Link from 'lsk-general/General/Link';
 import VisibilitySensor from 'react-visibility-sensor';
-import Loading from '~/App/components/Loading';
+import Loading from 'lsk-general/General/Loading';
 import keyBy from 'lodash/keyBy';
 
 export default (ctx, module) => (

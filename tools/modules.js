@@ -8,5 +8,6 @@ export default {
     upload: 'lsk-upload',
     offer: '~/modules/offer',
     posts: '~/modules/posts',
+    user: '~/modules/user',
   },
 };

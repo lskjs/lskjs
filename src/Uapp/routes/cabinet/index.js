@@ -1,4 +1,4 @@
-import Loading from '~/App/components/Loading';
+import Loading from 'lsk-general/General/Loading';
 
 import CabinetLayout from './CabinetLayout';
 import Dashboard from './Dashboard';

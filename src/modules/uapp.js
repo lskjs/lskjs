@@ -6,6 +6,7 @@ export default function () {
     auth: require('lsk-auth/uapp').default(...arguments),
     upload: require('lsk-upload/uapp').default(...arguments),
     offer: require('~/modules/offer/uapp').default(...arguments),
-    posts: require('~/modules/posts/uapp').default(...arguments)
+    posts: require('~/modules/posts/uapp').default(...arguments),
+    // user: require('~/modules/user/uapp').default(...arguments)
   };
 }

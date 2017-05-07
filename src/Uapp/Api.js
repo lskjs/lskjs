@@ -45,7 +45,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async getUser(body) {
-    const res = await this.fetch('user/get', {
+    const res = await this.fetch('/api/module/user/get', {
       method: 'POST',
       body,
     });
@@ -53,7 +53,7 @@ export default class ApiClient extends ApiClientBase {
   }
 
   async userEdit(body) {
-    const res = await this.fetch('user/edit', {
+    const res = await this.fetch('/api/module/user/edit', {
       method: 'POST',
       body,
     });
@@ -72,17 +72,6 @@ export default class ApiClient extends ApiClientBase {
     const res = await this.fetch('/api/module/auth/social/login', {
       method: 'POST',
       body: data,
-    });
-    return res.data;
-  }
-
-  async uploadImage(body) {
-    const res = await this.fetch('upload', {
-      method: 'POST',
-      headers: {
-        'Content-Type': '!',
-      },
-      body,
     });
     return res.data;
   }

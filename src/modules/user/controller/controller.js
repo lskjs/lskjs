@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Modules from '../v1.modules';
+import Modules from './user.modules';
 
 
 const sample = {

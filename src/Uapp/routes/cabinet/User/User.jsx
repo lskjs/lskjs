@@ -12,7 +12,7 @@ import {
 import css from 'importcss';
 import Edit from 'react-icons2/mdi/account-settings';
 import Link from 'lsk-general/General/Link';
-import Avatar from '~/App/components/Avatar';
+import Avatar from 'lsk-general/General/Avatar';
 
 @inject(stores => ({
   myUser: stores.user,

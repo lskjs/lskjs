@@ -14,7 +14,7 @@ export default ctx => (
     }
 
     static async getUsers(qs) {
-      const { data } = await ctx.api.fetch('user/list', { qs });
+      const { data } = await ctx.api.fetch('/api/module/user/list', { qs });
       return data.map(obj => new ctx.models.User(obj));
     }
 

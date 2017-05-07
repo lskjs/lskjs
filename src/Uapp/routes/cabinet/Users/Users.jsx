@@ -6,8 +6,8 @@ import { observer } from 'mobx-react';
 import Link from 'lsk-general/General/Link';
 import moment from 'moment';
 import VisibilitySensor from 'react-visibility-sensor';
-import Loading from '~/App/components/Loading';
-import Avatar from '~/App/components/Avatar';
+import Loading from 'lsk-general/General/Loading';
+import Avatar from 'lsk-general/General/Avatar';
 
 @observer
 export default class Users extends Component {
