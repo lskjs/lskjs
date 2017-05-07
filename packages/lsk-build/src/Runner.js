@@ -72,7 +72,7 @@ ${_.map(this.modules.modules, (val, key) => {
   };
 }
 `;
-      console.log(content);
+      // console.log(content);
       fs.writeFileSync(filename, content);
     });
     //
