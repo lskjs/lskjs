@@ -71,6 +71,7 @@ ${_.map(this.modules.modules, (val, key) => {
 }).join(',\n')}
   };
 }
+
 `;
       // console.log(content);
       fs.writeFileSync(filename, content);
