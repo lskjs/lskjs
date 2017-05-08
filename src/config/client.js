@@ -6,7 +6,7 @@ export default config.extend({
     description: 'The Description',
     copyright: 'Copyright &copy; 2016-2017',
     slide: {
-      video: 'https://skill-branch.ru/video-background.webm',
+      // video: 'https://skill-branch.ru/video-background.webm',
     },
   },
   log: {

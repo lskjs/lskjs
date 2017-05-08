@@ -6,8 +6,8 @@ export default {
     chat: 'lsk-chat',
     auth: 'lsk-auth',
     upload: 'lsk-upload',
+    user: 'lsk-user',
     offer: '~/modules/offer',
     posts: '~/modules/posts',
-    user: '~/modules/user',
   },
 };
