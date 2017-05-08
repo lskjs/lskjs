@@ -4,14 +4,15 @@ import bcrypt from 'bcryptjs'
 const bcryptGenSalt = Promise.promisify(bcrypt.genSalt)
 const bcryptHash = Promise.promisify(bcrypt.hash)
 const bcryptCompare = Promise.promisify(bcrypt.compare)
-import nodemailer from 'nodemailer'
+// import nodemailer from 'nodemailer'
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema'
 
 export function getSchema(ctx) {
   // const mongoose = ctx.db
 
-  const transporter = (ctx.config.mail && ctx.config.mail.transport) &&
-    Promise.promisifyAll(nodemailer.createTransport(ctx.config.mail.transport))
+  // const transporter = (ctx.config.mail && ctx.config.mail.transport) &&
+  const transporter = null;
+  //   Promise.promisifyAll(nodemailer.createTransport(ctx.config.mail.transport))
 
   const schema = new UniversalSchema({
     username: {

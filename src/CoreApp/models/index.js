@@ -1,5 +1,5 @@
 export default function () {
   return {
-    User: require('./User').default(...arguments),
+    // User: require('./User').default(...arguments),
   }
 }

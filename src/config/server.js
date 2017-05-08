@@ -2,7 +2,6 @@ import config from 'lego-starter-kit/utils/config';
 export default config.init({
   client: require('./client').default,
   remoteConfig: false,
-
   log: {
     level: __DEV__ ? 'debug' : 'error',
   },
@@ -17,5 +16,5 @@ export default config.init({
   // ws: {
   //   transports: ['websocket'],
   // },
-middlewares: require('./middlewares').default,
+  middlewares: require('./middlewares').default,
 });
