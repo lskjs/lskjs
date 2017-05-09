@@ -2,9 +2,9 @@ export default ctx => (
   function isAuth(req, res, next) {
     try {
       if (!ctx.helpers.isAuth(req)) {
-        next('!isAuth');
+        return next('!isAuth');
       }
-      next();
+      return next();
     } catch(err) {
       next(err)
     }
