@@ -2,9 +2,6 @@ import React, { PropTypes } from 'react';
 import { autobind } from 'core-decorators';
 import { observer, inject } from 'mobx-react';
 import {
-  Card,
-  CardBlock,
-  CardTitle,
   Grid,
   Row,
   Col,
@@ -12,13 +9,20 @@ import {
   ButtonGroup,
 } from 'react-bootstrap';
 
+import {
+  Card,
+  CardBlock,
+  CardFooter,
+  CardTitle,
+  CardText,
+} from 'react-bootstrap-card';
 import Error from 'react-icons2/md/clear';
 import Check from 'react-icons2/md/check';
 
 import Component from 'lsk-general/General/Component';
 import Link from 'lsk-general/General/Link';
 
-import { buttons } from '../AuthPage/SocialButtons';
+import buttons from '../../socials';
 import Slide from '../AuthPage/Slide';
 import Avatar from 'lsk-general/General/Avatar';
 

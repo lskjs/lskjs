@@ -4,16 +4,18 @@ import { autobind } from 'core-decorators';
 import { inject, observer } from 'mobx-react';
 import cx from 'classnames';
 import {
-  Card,
-  CardBlock,
-  CardFooter,
-  CardTitle,
-  CardText,
   Grid,
   Row,
   Col,
   Button,
 } from 'react-bootstrap';
+import {
+  Card,
+  CardBlock,
+  CardFooter,
+  CardTitle,
+  CardText,
+} from 'react-bootstrap-card';
 import { get } from 'lodash';
 
 import Loading from 'react-icons2/md/refresh';
@@ -27,7 +29,9 @@ import A from 'lsk-general/General/A';
 import Form from 'lsk-general/General/Form';
 import Avatar from 'lsk-general/General/Avatar';
 
-import SocialButtons, { SocialButton, buttons } from './SocialButtons';
+import buttons from '../../socials';
+import SocialButtons from '../SocialButtons';
+import SocialButton from '../SocialButton';
 
 @inject('auth', 'config')
 @observer
@@ -110,6 +114,12 @@ export default class AuthPage extends Component {
   }
 
   @autobind
+  async handleSocialButtonClick(name) {
+    const { auth } = this.props;
+    auth.authPassport(name);
+  }
+
+  @autobind
   async handleSubmit(data) {
     const { type, auth, query } = this.props;
     if (type === 'login') {
@@ -137,7 +147,6 @@ export default class AuthPage extends Component {
     }
   }
 
-
   render() {
     const { type, auth, config, passport } = this.props;
     const fields = this.getFields(type);
@@ -159,12 +168,16 @@ export default class AuthPage extends Component {
                       Восстановить пароль
                     </If>
                   </CardTitle>
-                  <If condition={type == 'signupPassport'}>
-                    <SocialButton name={passport.provider} />
+                  <If condition={type === 'signupPassport'}>
                     <div style={{ textAlign: 'center' }}>
                       <Avatar
+                        size={100}
                         src={passport.profile.avatar}
-                      />
+                      >
+                        <Avatar.Badge right={3} bottom={3}>
+                          <SocialButton name={passport.provider} size={32} />
+                        </Avatar.Badge>
+                      </Avatar>
                     </div>
                   </If>
                   <Form
@@ -228,7 +241,7 @@ export default class AuthPage extends Component {
                   />
                 </CardBlock>
                 <CardFooter className="text-xs-center">
-                  <SocialButtons auth={auth} config={config} />
+                  <SocialButtons onClick={this.handleSocialButtonClick} />
                 </CardFooter>
               </Card>
               <If condition={type === 'signup'}>

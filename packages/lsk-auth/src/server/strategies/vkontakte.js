@@ -1,9 +1,9 @@
-import getGeneralAuth from './GeneralAuth';
 import Vkontakte from 'passport-vkontakte';
 import fetch from 'isomorphic-fetch';
-export default (ctx) => {
-  const GeneralAuth = getGeneralAuth(ctx);
-  return class VkAuth extends GeneralAuth {
+export default (ctx, module) => {
+
+  const { Strategy } = module;
+  return class VkAuth extends Strategy {
     Strategy = Vkontakte.Strategy
     providerName = 'vkontakte'
     updateConfig(config) {

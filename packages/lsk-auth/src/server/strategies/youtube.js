@@ -1,11 +1,9 @@
-import getGeneralAuth from './GeneralAuth';
 import Youtube from 'passport-youtube-v3';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import moment from 'moment';
-export default (ctx) => {
-  const GeneralAuth = getGeneralAuth(ctx);
-  return class VkAuth extends GeneralAuth {
+export default (ctx, { Strategy }) => {
+  return class VkAuth extends Strategy {
     Strategy = Youtube.Strategy
     providerName = 'youtube'
     updateConfig(config) {
