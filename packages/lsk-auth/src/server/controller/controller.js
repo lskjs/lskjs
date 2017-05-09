@@ -1,4 +1,5 @@
 import validator from 'validator';
+import _ from 'lodash';
 
 
 export function canonize(str) {
@@ -197,7 +198,7 @@ export default (ctx, module) => {
     await user.save();
     passport.user = user._id;
     await passport.save();
-    user.passports.push(passport._id);
+    // user.passports.push(passport._id);
     await user.save();
     return {
       user,
@@ -227,7 +228,7 @@ export default (ctx, module) => {
       .then(checkNotFound);
     if (passport.user) throw e400('passport.user already exist');
     passport.user = userId;
-    user.passports.push(passport._id);
+    // user.passports.push(passport._id);
     await passport.save();
     await user.save();
     return Passport.find({
@@ -262,9 +263,9 @@ export default (ctx, module) => {
       .then(checkNotFound);
     if (passport.user != userId) throw e403('Wrong user!');
     passport.user = null;
-    user.passports = user.passports.filter((pId) => {
-      return pId && pId.toString() !== params.p;
-    });
+    // user.passports = user.passports.filter((pId) => {
+    //   return pId && pId.toString() !== params.p;
+    // });
     await passport.save();
     await user.save();
     return Passport.find({
