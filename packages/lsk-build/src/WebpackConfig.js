@@ -1,6 +1,7 @@
 import extend from 'extend';
 import path from 'path';
 import webpack from 'webpack';
+import fs from 'fs';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const StatsPlugin = require('stats-webpack-plugin');
 
@@ -62,9 +63,21 @@ export default class WebpackConfig {
   }
 
   getDeps() {
-    return this.deps || [];
+    const deps = this.deps || [];
+    if (!this.modules || !this.modules.modules) return deps;
+    const modules = this.modules.modules;
+    const modulesDeps = Object
+    .keys(modules)
+    .filter(dep => modules[dep][0] !== '~')
+    .map((dep) => {
+      return {
+        name: modules[dep],
+        path: fs.realpathSync(`${this.dirname}/node_modules/${modules[dep]}/src`),
+        alias: modules[dep],
+      };
+    });
+    return [...deps, ...modulesDeps];
   }
-
 
   getBabelPresets() {
     return [
