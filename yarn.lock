@@ -4606,7 +4606,7 @@ lsk-admin@1.1.4:
     sass-loader "5.0.0"
     validate.js "0.11.1"
 
-lsk-auth@^0.2.2:
+lsk-auth@0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/lsk-auth/-/lsk-auth-0.2.2.tgz#1ac419e2855fb0affdf1f40874013079b65a236f"
   dependencies:
@@ -4614,9 +4614,9 @@ lsk-auth@^0.2.2:
     passport-vkontakte "0.3.2"
     passport-youtube-v3 "2.0.0"
 
-lsk-build@0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.8.2.tgz#64c293dbe5da41a639ca9770ba88ef1e3de414c7"
+lsk-build@0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-0.8.4.tgz#1a5b23abac9c94cf2624ed16e15f2acd8a4b7acf"
   dependencies:
     assets-webpack-plugin "3.5.1"
     autoprefixer "6.7.2"
@@ -4696,7 +4696,7 @@ lsk-mailer@0.1.0:
     nodemailer "2.5.0"
     nodemailer-juice "1.0.0"
 
-lsk-notification@^0.1.1:
+lsk-notification@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/lsk-notification/-/lsk-notification-0.1.1.tgz#19e668f37d5a4ff5a584f3d953806899705457eb"
 
@@ -4710,7 +4710,7 @@ lsk-upload@0.1.1:
   dependencies:
     multer "1.3.0"
 
-lsk-user@^0.2.0:
+lsk-user@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/lsk-user/-/lsk-user-0.2.0.tgz#1961e97976ab3fdd0cfcc2331c8b99af344c8eb5"
 

@@ -10,7 +10,7 @@ const ctx = {
   modules: require('./modules').default,
   deps: [
     'lego-starter-kit', 'lsk-general', 'lsk-admin',
-    'lsk-auth', 'lsk-mailer', 'lsk-upload', 'lsk-chat', 'lsk-rating', 'lsk-notification', 'lsk-user',
+    // 'lsk-auth', 'lsk-mailer', 'lsk-upload', 'lsk-chat', 'lsk-rating', 'lsk-notification', 'lsk-user',
   ].map(dep => ({
     name: dep,
     path: fs.realpathSync(`${dirname}/node_modules/${dep}/src`),
