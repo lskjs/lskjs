@@ -42,7 +42,7 @@ export default {
         const offer = await stores.OfferModel.getById(id);
         return page
           .meta({
-            title: 'Кек',
+            title: 'Предложение',
             description: 'Страница предложения',
             url: `/cabinet/offers/${id}`,
           })
@@ -50,8 +50,4 @@ export default {
       },
     },
   ],
-  async action({ next }) {
-    const route = await next();
-    return route;
-  },
 };

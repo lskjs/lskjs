@@ -29,6 +29,10 @@ export default uapp => ({
       ...require('./cabinet').default(uapp),
     },
     {
+      path: '/demo',
+      ...require('./demo').default,
+    },
+    {
       path: '/admin',
       ...require('./admin').default,
     },

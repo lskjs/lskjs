@@ -69,16 +69,6 @@ export default class CabinetLayout extends Component {
             url: '/cabinet/dashboard',
           },
           {
-            icon: <Book />,
-            title: 'Гайдлайны',
-            url: '/cabinet/guidelines',
-          },
-          {
-            icon: <Comments />,
-            title: 'Комментарии',
-            url: '/cabinet/comments',
-          },
-          {
             icon: <Stream />,
             title: 'Посты',
             url: '/cabinet/posts',
@@ -90,6 +80,22 @@ export default class CabinetLayout extends Component {
               { title: 'Все предложения', url: '/cabinet/offers' },
               { title: 'Создать новое', url: '/cabinet/offers/add' },
             ],
+          },
+        ],
+      },
+      {
+        title: 'ДЕВ ПАНЕЛЬ2',
+        show: __DEV__,
+        items: [
+          {
+            icon: <Book />,
+            title: 'Гайдлайны',
+            url: '/cabinet/guidelines',
+          },
+          {
+            icon: <Comments />,
+            title: 'Комментарии',
+            url: '/cabinet/comments',
           },
         ],
       },

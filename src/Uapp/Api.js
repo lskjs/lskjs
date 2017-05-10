@@ -52,6 +52,14 @@ export default class ApiClient extends ApiClientBase {
     return res.data;
   }
 
+  async getMyUser(body) {
+    const res = await this.fetch('/api/module/user/me', {
+      method: 'POST',
+      body,
+    });
+    return res.data;
+  }
+
   async userEdit(body) {
     const res = await this.fetch('/api/module/user/edit', {
       method: 'POST',

@@ -32,7 +32,7 @@ export default class AuthStore {
 
 
   async findUserProfile() {
-    return this.api.getUser({ _id: this.user._id }).then(user => ({ user }));
+    return this.api.getMyUser().then(user => ({ user }));
   }
 
 

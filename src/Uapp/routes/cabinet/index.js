@@ -1,16 +1,10 @@
-import Loading from 'lsk-general/General/Loading';
-
 import CabinetLayout from './CabinetLayout';
 import Dashboard from './Dashboard';
-import User from './User';
-import Users from './Users';
-import Settings from './Settings';
 import Messages from './Messages';
-import Comments from './Comments';
 
 export default uapp => ({
-  uapp,
   async action({ next, page }) {
+    // console.log('uapp.modules.user.router.children', uapp.modules.user.router.children);
     return page
       .isAuth()
       .meta({
@@ -25,16 +19,10 @@ export default uapp => ({
     {
       path: '/',
       async action({ page }) {
-        return page.redirect('/cabinet/dashboard');
+        return page.redirect('/cabinet/profile');
       },
     },
-    {
-      path: '/profile',
-      async action({ page, user }) {
-        return page
-          .redirect(`/cabinet/user/${user._id}`);
-      },
-    },
+    ...uapp.modules.user.router.children,
     {
       path: '/dashboard',
       async action({ page }) {
@@ -47,85 +35,11 @@ export default uapp => ({
       },
     },
     {
-      path: '/guidelines',
-      async action({ page }) {
-        if (__CLIENT__) {
-          const Guidelines = require('./Guidelines').default;
-          return page
-            .meta({
-              title: 'Гайдлайны',
-              url: '/cabinet/guidelines',
-            })
-            .component(Guidelines, {});
-        }
-        return <Loading full />;
-      },
-    },
-    {
-      path: '/comments',
-      async action({ page }) {
-        return page
-          .meta({
-            title: 'Комментарии',
-            url: '/cabinet/comments',
-          })
-          .component(Comments, {});
-      },
-    },
-    {
-      path: '/user/:id',
-      async action({ page, uapp }, { id }) {
-        const user = await uapp.models.User.getById(id);
-        // const { Messages } = uapp.modules.chat.components;
-        return page
-          .meta({
-            title: 'Профиль пользователя',
-            description: user.fullName,
-            url: `/cabinet/user/${id}`,
-          })
-          .component(User, { user });
-      },
-    },
-    {
-      path: '/settings',
-      async action({ page, uapp }) {
-        const passports = await uapp.modules.auth.stores.Passports.getPassports();
-        return page
-          .meta({
-            title: 'Профиль пользователя',
-            description: 'Профиль пользователя',
-            url: '/cabinet/profile',
-          })
-          .meta({
-            title: 'Редактирование профиля',
-            description: 'Старница настроек',
-            url: '/cabinet/settings',
-          })
-          .component(Settings, { passports });
-      },
-    },
-    {
       path: '/friends',
       ...require('./Friends/index').default,
     },
     {
-      path: '/users',
-      async action({ page, uapp }) {
-        const users = new uapp.stores.Users();
-        await users.fetchUsers(20);
-        return page
-          .meta({
-            title: 'Список пользователей',
-            description: 'Все пользователи',
-            url: '/cabinet/users',
-          })
-          .component(Users, { users });
-      },
-    },
-    {
       path: '/posts',
-      posts: uapp.modules.posts,
-      router: uapp.modules.posts.router,
       ...uapp.modules.posts.router,
     },
     {
@@ -142,7 +56,8 @@ export default uapp => ({
     },
     {
       path: '/offers',
-      ...require('./Offers/index').default,
+      ...uapp.modules.offer.router, //.children,
+      // ...require('./Offers/index').default,
     },
     {
       path: '*',
