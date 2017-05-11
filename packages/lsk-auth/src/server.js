@@ -47,7 +47,7 @@ export default (ctx) => {
       api.all('/email/approve', this.controller.emailApprove);
 
       // Регистрация пользователя через соц сеть
-      // api.all('/social', isAuth, this.controller.getSocials);
+      api.all('/social', isAuth, this.controller.getSocials);
       api.all('/social/signup', this.controller.socialSign);
       api.all('/social/login', this.controller.socialLogin);
       api.all('/social/bind', isAuth, this.controller.socialBind); // Добавление соц.сетей к пользователю
