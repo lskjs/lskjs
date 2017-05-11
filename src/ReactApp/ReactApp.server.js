@@ -1,8 +1,5 @@
 import { createMemoryHistory } from 'history';
 import CoreApp from 'lego-starter-kit/CoreApp';
-import routes from './routes';
-import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
 import Uapp from '../Uapp';
 
 import assets from './assets'; // eslint-disable-line
@@ -59,6 +56,7 @@ export default class ReactApp extends CoreApp {
       let page;
       try {
         page = await this.getPage(req);
+        // console.log({page});
       } catch (err) {
         this.log.error('SSR app.getPage(req) err', err)
         return next(err);

@@ -29,7 +29,7 @@ export default class ApiClient {
       ...req,
       create(params) {
         const query = qs.stringify(params);
-        return (this.path || '/') + (query ? '?' + query : '');
+        return (this.path || '/') + (query ? `?${query}` : '');
       },
       merge(params) {
         return this.create({
@@ -48,7 +48,9 @@ export default class ApiClient {
   async throwError({ err }) {
     __DEV__ && console.error('throwError', err);
     const message = err && err.message || err;
-    throw new Error(_.isPlainObject(message) ? JSON.stringify(message) : message);
+    const err2 = new Error(_.isPlainObject(message) ? JSON.stringify(message) : message);
+    err2.res = err;
+    throw err2;
   }
 
   async afterFetch({ json, res, throwError }) {

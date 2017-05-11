@@ -96,8 +96,8 @@ export default class Uapp extends Core {
   }
 
   getRoutes() {
-    console.log('getRoutes ********* ');
-    return require('../ReactApp/routes').default;
+    // console.log('getRoutes ********* ');
+    return {};// require('../ReactApp/routes').default;
   }
 
   resetPage() {

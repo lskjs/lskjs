@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
-import UniversalRouter from 'universal-router';
 import qs from 'qs';
 import { createPath } from 'history/PathUtils';
 import history from './core/history';
