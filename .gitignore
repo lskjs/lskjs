@@ -10,3 +10,6 @@ npm-debug.log
 *.env.json
 storage
 .idea/
+modules/client.js
+modules/server.js
+modules/uapp.js
