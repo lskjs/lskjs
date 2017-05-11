@@ -1,4 +1,5 @@
 NODE_ENV=production yarn run build &&
+NODE_ENV=production yarn run build-storybook &&
 cd ./build &&
 NODE_ENV=production yarn &&
 cd .. &&

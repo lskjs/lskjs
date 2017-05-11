@@ -37,9 +37,6 @@ export default config.extend({
           presence: {
             message: 'Поле не должно быть пустым.',
           },
-          email: {
-            message: 'Введите корректный адрес почты.',
-          },
         },
       },
       lastName: {
@@ -58,12 +55,6 @@ export default config.extend({
         title: 'Отчество',
         control: {
           placeholder: 'Например, Сергеевич',
-        },
-      },
-      icq: {
-        title: 'ICQ',
-        control: {
-          placeholder: 'Например, 336-844-366',
         },
       },
     },

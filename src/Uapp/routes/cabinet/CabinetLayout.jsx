@@ -64,7 +64,13 @@ export default class CabinetLayout extends Component {
     if (breadItems && breadItems[0] && !breadItems[0].icon) {
       breadItems[0].icon = <Dashboard />;
     }
-    const { NotificationCenter } = uapp.modules.notification.components;
+
+    let NotificationCenter;
+    if (uapp.modules.notification) {
+      NotificationCenter = uapp.modules.notification.components.NotificationCenter;
+    } else {
+      NotificationCenter = 'div';
+    }
 
     return (
       <LayoutWrapper color="black">

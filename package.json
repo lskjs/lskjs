@@ -92,6 +92,7 @@
     "start": "node build/server.js",
     "start-bunyan": "npm start | node node_modules/lego-starter-kit/src/utils/bunyan -o short -l trace",
     "dev": "babel-node tools/run start | node node_modules/lego-starter-kit/src/utils/bunyan -o short -l trace",
-    "storybook": "start-storybook -p 9001"
+    "storybook": "start-storybook -p 9001",
+    "build-storybook": "build-storybook -c .storybook -o build/public/storybook"
   }
 }

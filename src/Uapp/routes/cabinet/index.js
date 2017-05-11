@@ -2,6 +2,10 @@ import CabinetLayout from './CabinetLayout';
 import Dashboard from './Dashboard';
 import Messages from './Messages';
 
+// export default uapp => {
+//   console.log(uapp.modules.user.router);
+// ...uapp.modules.user.router.children,
+// }
 export default uapp => ({
   async action({ next, page }) {
     // console.log('uapp.modules.user.router.children', uapp.modules.user.router.children);
@@ -22,7 +26,7 @@ export default uapp => ({
         return page.redirect('/cabinet/profile');
       },
     },
-    ...uapp.modules.user.router.children,
+    ...(!uapp.modules.user ? [] : uapp.modules.user.router.children),
     {
       path: '/dashboard',
       async action({ page }) {
@@ -38,7 +42,7 @@ export default uapp => ({
       path: '/friends',
       ...require('./Friends/index').default,
     },
-    {
+    !uapp.modules.posts ? null : {
       path: '/posts',
       ...uapp.modules.posts.router,
     },
@@ -54,7 +58,7 @@ export default uapp => ({
           .component(Messages, {});
       },
     },
-    {
+    !uapp.modules.offer ? null : {
       path: '/offers',
       ...uapp.modules.offer.router, //.children,
       // ...require('./Offers/index').default,
@@ -65,5 +69,5 @@ export default uapp => ({
         throw 'Page not found in cabinet';
       },
     },
-  ],
+  ].filter(a => a),
 });
