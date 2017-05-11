@@ -1,5 +1,7 @@
-NODE_ENV=production yarn run build &&
 NODE_ENV=production yarn run build-storybook &&
+rsync -avz ./build-storybook/* s3:/projects/lsk/app/public/storybook &&
+
+NODE_ENV=production yarn run build &&
 cd ./build &&
 NODE_ENV=production yarn &&
 cd .. &&
