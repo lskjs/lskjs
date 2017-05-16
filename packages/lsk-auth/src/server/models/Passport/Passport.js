@@ -50,6 +50,7 @@ export function getSchema(ctx) {
       default: true,
     },
   }, {
+    collection: 'passport',
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
@@ -116,7 +117,8 @@ export function getSchema(ctx) {
 
   return schema;
 }
-
+// export default getSchema;
+//
 export default(ctx) => {
-  return ctx.db.model('Passport', getSchema(ctx).getMongooseSchema(), 'passports');
+  return getSchema(ctx).getMongooseModel(ctx.db);
 };

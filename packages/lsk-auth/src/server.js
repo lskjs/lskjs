@@ -9,6 +9,8 @@ export default (ctx) => {
       this.models = require('./server/models').default(ctx, this);
       ctx.models.User = this.models.User;
 
+      // ctx.
+
       this.controller = require('./server/controller').default(ctx, this);
       this.Strategy = require('./server/Strategy').default(ctx, this);
       this.strategies = require('./server/strategies').default(ctx, this);

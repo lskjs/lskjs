@@ -10,10 +10,13 @@ export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
   const { e400, e404 } = ctx.errors;
   const { Passport } = module.models;
-  const { User } = ctx.models;
+  // console.log('User', Object.keys(User));
+  // console.log(User);
+  // console.log('User', Object.keys(User));
   const controller = {};
 
   controller.validate = async function (req) {
+    const { User } = ctx.models;
     const user = await User.findById(req.user._id);
     if (!user) throw ctx.errors.e404('Не найден user в базе');
     return {
@@ -26,6 +29,7 @@ export default (ctx, module) => {
   };
 
   controller.silent = async function (req) {
+    const { User } = ctx.models;
     const params = req.allParams();
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
@@ -85,6 +89,7 @@ export default (ctx, module) => {
     throw ctx.errors.e400('Параметр username, email, login не передан');
   };
   controller.signup = async function (req) {
+    const { User } = ctx.models;
     const userFields = controller.getUserFields(req);
     const criteria = controller.getUserCriteria(req);
     const existUser = await User.findOne(criteria);
@@ -123,6 +128,7 @@ export default (ctx, module) => {
   };
 
   controller.login = async function (req) {
+    const { User } = ctx.models;
     const params = req.allParams();
 
     if (!params.password) throw ctx.errors.e400('Параметр password не передан');
@@ -143,6 +149,7 @@ export default (ctx, module) => {
     };
   };
   controller.recovery = async function (req) {
+    const { User } = ctx.models;
     // const params = req.allParams();
 
     const criteria = controller.getUserCriteria(req);
@@ -175,12 +182,14 @@ export default (ctx, module) => {
   };
 
   controller.emailApprove = async (req) => {
+    const { User } = ctx.models;
     const params = req.allParams();
     const { t } = params;
     return User.findAndApproveEmail(t);
   };
 
   controller.socialSign = async (req) => {
+    const { User } = ctx.models;
     const passport = await Passport.getByToken(req.data.p);
     if (!passport) {
       return e404('!passport');
@@ -244,6 +253,7 @@ export default (ctx, module) => {
   };
 
   controller.socialUnbind = async (req) => {
+    const { User } = ctx.models;
     const params = req.allParams();
     const userId = req.user._id;
     const user = await User
@@ -274,6 +284,7 @@ export default (ctx, module) => {
   };
 
   controller.approvedEmail = async (req) => {
+    const { User } = ctx.models;
     const params = req.allParams();
     const { t } = params;
     return User.findAndApproveEmail(t);

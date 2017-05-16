@@ -217,8 +217,10 @@ export function getSchema(ctx, module) {
   return schema;
 }
 
-
-export default (ctx, module) => {
-  const schema = getSchema(ctx, module);
-  return ctx.db.model('User', schema.getMongooseSchema(), 'user');
-};
+export default getSchema;
+//
+//
+// export default (ctx, module) => {
+//   const schema = getSchema(ctx, module);
+//   return ctx.db.model('User', schema.getMongooseSchema(), 'user');
+// };
