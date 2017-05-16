@@ -136,6 +136,9 @@ export default class CoreApp extends ExpressApp {
     this.ws = createWs(this);
     this.ws.wrapExpress(this.app);
   }
+  async afterInit() {
+    await this.runModels();
+  }
 
   async runWs() {
     if (!this.config.ws) return;
@@ -160,13 +163,22 @@ export default class CoreApp extends ExpressApp {
       next(err);
     });
   }
-  afterUseMiddlewares() {
-    this.log.debug('CoreApp.afterUseMiddlewares DEPRECATED');
-  }
+  // afterUseMiddlewares() {
+  //   this.log.debug('CoreApp.afterUseMiddlewares DEPRECATED');
+  // }
   useCatchErrors() {
     this.middlewares.catchError && this.app.use(this.middlewares.catchError);
   }
 
+
+  runModels() {
+    const promises = _.map(this.models, async (model, name) => {
+      if (model.run) {
+        this.models[name] = await model.run(this);
+      }
+    });
+    return Promise.all(promises);
+  }
 
   async runDb() {
     if (!this.db) return;

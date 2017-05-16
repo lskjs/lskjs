@@ -31,6 +31,7 @@ export default class UniversalSchema {
     // this.indexes = {}
   }
 
+
   extend(schema, options) {
     const object = new UniversalSchema();
     const fields = ['schema', 'options', 'statics', 'methods', 'preMethods', 'postMethods'];
@@ -69,6 +70,19 @@ export default class UniversalSchema {
       schema.index(...args);
     });
     return schema;
+  }
+
+  getMongooseModel(db) {
+    if (!db) {
+      console.log('ERROR UniversalSchema.getMongooseModel() !db');
+      throw 'ERROR UniversalSchema.getMongooseModel() !db';
+      return null;
+    }
+    return db.model(this.generateMongooseName(this.options.collection), this.getMongooseSchema(), this.options.collection);
+  }
+
+  run({ db } = {}) {
+    return this.getMongooseModel(db);
   }
 
   pre(key, val) {

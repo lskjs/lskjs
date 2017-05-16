@@ -65,6 +65,7 @@ function resolveCtxRoutes(routes, ctx) {
 
 
 export default class Uapp extends Core {
+  name='Uapp';
   Page = Page;
   Api = Api;
   // constructor(props = {}) {

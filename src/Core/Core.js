@@ -7,7 +7,10 @@ function isClass(v) {
   return typeof v === 'function';// && /^\s*class\s+/.test(v.toString());
 }
 
+const DEBUG = true;
+
 export default class Core {
+  name = 'Core';
   constructor(params = {}) {
     Object.assign(this, params);
     this.log = this.getLogger();
@@ -39,7 +42,7 @@ export default class Core {
 
   async init() {
     if (!this.log) this.log = this.getLogger();
-    this.log.trace('Core.init()');
+    this.log.trace(`${this.name}.init()`);
     // if (!this.config) this.config = config;
   }
 
@@ -52,7 +55,7 @@ export default class Core {
   }
 
   broadcastModules(method) {
-    this.log.trace('Core.broadcastModules', method);
+    this.log.trace(`${this.name}.broadcastModules`, method);
     return Promise.each(this.getModulesSequence(), (pack) => {
       // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
       if (!(pack.module && typeof pack.module[method] === 'function')) return;
@@ -72,9 +75,12 @@ export default class Core {
       } else {
         modules[key] = Module;
       }
+      if (!modules[key].name || modules[key].name === 'Core') {
+        modules[key].name = key;
+      }
     });
     this.modules = modules;
-    this.log.debug('Core.modules', Object.keys(this.modules));
+    DEBUG && this.log.debug(`${this.name}.modules`, Object.keys(this.modules));
     // this.log.debug('_modules', Object.keys(this._modules));
     return this.broadcastModules('init');
   }
@@ -92,30 +98,34 @@ export default class Core {
       await this.init();
       // }
       if (typeof this.initModules === 'function') {
-        this.log.trace('Core.initModules()');
+        this.log.trace(`${this.name}.initModules()`);
         await this.initModules();
       }
+      if (typeof this.afterInit === 'function') {
+        this.log.trace(`${this.name}.afterInit()`);
+        await this.afterInit();
+      }
       if (typeof this.run === 'function') {
-        this.log.trace('Core.run()');
+        this.log.trace(`${this.name}.run()`);
         await this.run();
       }
       if (typeof this.runModules === 'function') {
-        this.log.trace('Core.runModules()');
+        this.log.trace(`${this.name}.runModules()`);
         await this.runModules();
       }
       if (typeof this.afterRun === 'function') {
-        this.log.trace('Core.afterRun()');
+        this.log.trace(`${this.name}.afterRun()`);
         await this.afterRun();
       }
       if (typeof this.started === 'function') {
-        this.log.trace('Core.started()');
+        this.log.trace(`${this.name}.started()`);
         await this.started();
       }
     } catch (err) {
       if (this.log && this.log.fatal) {
-        this.log.fatal('Core.start() err', err);
+        this.log.fatal(`${this.name}.start() err`, err);
       } else {
-        console.error('Core.start() err', err);
+        console.error(`${this.name}.start() err`, err);
       }
       throw err;
     }
