@@ -15,14 +15,15 @@ export default (ctx, module) => class GeneralAuth {
   //   const data = {
   //     provider: this.providerName,
   //     providerId,
-  //     profile,
+//     profile,
   //   };
   //   const passport = new Passport(data);
   //   return passport.save();
   // }
   getStrategy() {
+    const config = this.updateConfig(ctx.config.auth.socials[this.providerName].config);
     return new this.Strategy(
-      this.updateConfig(ctx.config.auth.socials[this.providerName].config),
+      config,
       async (accessToken, refreshToken, profile, done) => {
         const { Passport } = ctx.modules.auth.models;
         const providerId = this.getProviderId(profile);

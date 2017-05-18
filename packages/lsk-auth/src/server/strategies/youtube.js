@@ -15,6 +15,9 @@ export default (ctx, { Strategy }) => {
           'https://www.googleapis.com/auth/youtube.readonly',
         ];
       }
+      // if (Array.isArray(config.scope)) config.scope = config.scope.join(',')
+      // console.log('config.scope', config.scope);
+      //
       return config;
     }
     async getExtraData({ accessToken, refreshToken, profile }) {

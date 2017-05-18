@@ -1,15 +1,56 @@
 import _ from 'lodash';
 import { Passport } from 'passport';
 
+const onlineService = {
+  visitedAt: {},
+  timeout: 10 * 60 * 1000,
+  touchOnline(id) {
+    this.setOnline(id, new Date());
+  },
+  setOnline(id, value) {
+    if (!value) {
+      delete this.visitedAt[id];
+    }
+    this.visitedAt[id] = value;
+  },
+  isOnline(id) {
+    if (!this.visitedAt[id]) return false;
+    if ((Date.now() - this.visitedAt[id]) > this.timeout) {
+      this.setOnline(id, null);
+      return false;
+    }
+    return true;
+  },
+  count() {
+    return Object.keys(this.visitedAt).filter(key => this.isOnline(key)).length;
+  },
+};
+
+
 export default (ctx) => {
   return class AuthModule {
+    initOnlineService() {
+      this.online = onlineService;
+      // setInterval(() => {
+      //   console.log('online users', this.online.count());
+      // }, 10000);
+
+      ctx.middlewares.parseUser = [
+        ctx.middlewares.parseUser,
+        (req, res, next) => {
+          if (req.user && req.user._id) {
+            this.online.touchOnline(req.user._id);
+          }
+          next();
+        },
+      ];
+    }
     async init() {
       this.config = _.get(ctx, 'config.auth', {});
       if (!this.config.socials) this.config.socials = {};
+      this.initOnlineService();
       this.models = require('./server/models').default(ctx, this);
       ctx.models.User = this.models.User;
-
-      // ctx.
 
       this.controller = require('./server/controller').default(ctx, this);
       this.Strategy = require('./server/Strategy').default(ctx, this);

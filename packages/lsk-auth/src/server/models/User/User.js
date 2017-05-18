@@ -79,6 +79,7 @@ export function getSchema(ctx, module) {
   }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    model: 'User',
     collection: 'user',
     timestamps: true,
   });
@@ -159,7 +160,7 @@ export function getSchema(ctx, module) {
     this.private.approvedEmailToken = token;
     this.markModified('private');
     // ctx.getUrl()
-    return `${ctx.config.url}/api/v1/auth/email/approve?t=${token}`;
+    return `${ctx.config.url}/module/auth/email/approve?t=${token}`;
   };
 
   schema.statics.findAndApproveEmail = async function (token) {
@@ -210,8 +211,10 @@ export function getSchema(ctx, module) {
     return null;
   };
 
-  schema.virtual('online').get(() => {
-    return false;
+
+  schema.virtual('online')
+  .get(function () {
+    return module.online.isOnline(this._id);
   });
 
   return schema;
