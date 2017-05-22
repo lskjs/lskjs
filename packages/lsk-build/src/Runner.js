@@ -109,7 +109,7 @@ ${_.map(this.modules.modules, (val, key) => {
   }
 
   async traceWebpackConfig() {
-    if (this.webpackConfigDist == null) return;
+    if (this.webpackConfigDist === false) return;
     const webpackConfigDist = this.webpackConfigDist || `${this.dirname}/build/webpack.config.js`;
     try {
       fs.writeFileSync(webpackConfigDist, stringify(this.webpackConfig, 2));

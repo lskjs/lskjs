@@ -63,7 +63,10 @@ export default class WebpackConfig {
   }
 
   getDeps() {
-    const deps = this.deps || [];
+    const deps = (this.deps || []).map(dep => ({
+      ...dep,
+      path: fs.realpathSync(dep.path),
+    }));
     if (!this.modules || !this.modules.modules) return deps;
     const modules = this.modules.modules;
     const modulesDeps = Object
