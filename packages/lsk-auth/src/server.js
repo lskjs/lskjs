@@ -14,6 +14,7 @@ const onlineService = {
     this.visitedAt[id] = value;
   },
   isOnline(id) {
+    // console.log('isOnline', id, this.visitedAt[id]);
     if (!this.visitedAt[id]) return false;
     if ((Date.now() - this.visitedAt[id]) > this.timeout) {
       this.setOnline(id, null);
@@ -39,22 +40,32 @@ export default (ctx) => {
         ctx.middlewares.parseUser,
         (req, res, next) => {
           if (req.user && req.user._id) {
+            // console.log('touchOnline');
             this.online.touchOnline(req.user._id);
           }
           next();
         },
       ];
     }
+    getModels() {
+      return require('./server/models').default(ctx, this);
+    }
+    getController() {
+      return require('./server/controller').default(ctx, this);
+    }
+    getStrategies() {
+      return require('./server/strategies').default(ctx, this);
+    }
     async init() {
       this.config = _.get(ctx, 'config.auth', {});
       if (!this.config.socials) this.config.socials = {};
       this.initOnlineService();
-      this.models = require('./server/models').default(ctx, this);
+      this.models = this.getModels();
       ctx.models.User = this.models.User;
 
-      this.controller = require('./server/controller').default(ctx, this);
+      this.controller = this.getController();
       this.Strategy = require('./server/Strategy').default(ctx, this);
-      this.strategies = require('./server/strategies').default(ctx, this);
+      this.strategies = this.getStrategies();
       this._strategies = {};
       this.passport = new Passport();
     }

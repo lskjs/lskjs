@@ -208,7 +208,7 @@ export default (ctx, module) => {
     passport.user = user._id;
     await passport.save();
     // user.passports.push(passport._id);
-    await user.save();
+    // await user.save();
     return {
       user,
       token: user.generateAuthToken(),
@@ -228,6 +228,7 @@ export default (ctx, module) => {
   };
 
   controller.socialBind = async (req) => {
+    const { User } = ctx.models;
     const userId = req.user._id;
     const passport = await Passport
       .getByToken(req.data.p)
@@ -271,7 +272,7 @@ export default (ctx, module) => {
     const passport = await Passport
       .findOne(findParams)
       .then(checkNotFound);
-    if (passport.user != userId) throw e403('Wrong user!');
+    if (passport.user !== userId) throw e403('Wrong user!');
     passport.user = null;
     // user.passports = user.passports.filter((pId) => {
     //   return pId && pId.toString() !== params.p;

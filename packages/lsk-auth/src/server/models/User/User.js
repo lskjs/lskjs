@@ -49,7 +49,10 @@ export function getSchema(ctx, module) {
     },
     email: {
       type: String,
-      index: { unique: true },
+      index: {
+        unique: true,
+        sparse: true,
+      },
     },
     password: {
       type: String,
@@ -61,15 +64,15 @@ export function getSchema(ctx, module) {
       type: String,
     },
     meta: {
-      type: Object,
+      type: {},
       default: {},
     },
     profile: {
-      type: Object,
+      type: {},
       default: {},
     },
     private: {
-      type: Object,
+      type: {},
       default: {},
     },
     visitedAt: {

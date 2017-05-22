@@ -1,11 +1,11 @@
 export default (ctx) => {
   return {
     init() {
-      this.components = require('./components').default(ctx);
-      this.socials = require('./socials').default;// (ctx);
-      // this.models = require('./models').default(ctx);
-      this.stores = require('./mobx').default(ctx);
-      this.router = require('./router').default;
+      this.components = require('./uapp/components').default(ctx);
+      this.socials = require('./uapp/socials').default;// (ctx);
+      // this.models = require('./uapp/models').default(ctx);
+      this.stores = require('./uapp/stores').default(ctx);
+      this.router = require('./uapp/router').default;
     },
   };
 };
