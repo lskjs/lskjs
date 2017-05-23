@@ -13,7 +13,6 @@ export default class Navbar extends Component {
   }
   render() {
     const { auth, user, config } = this.props;
-    this.props.log.trace('Navbar.render', auth.isAuth(), user && (user.name || user._id));
     const menu = [
       {
         componentClass: Link,

@@ -2,8 +2,8 @@ import ApiClientBase from 'lego-starter-kit/CoreApp/api/api.client';
 import _ from 'lodash';
 
 export default class ApiClient extends ApiClientBase {
-  throwError({ err }) {
-    console.error('throwError', err);
+  async throwError({ err }) {
+    __DEV__ && console.error('throwError', err);
     const message = err && err.message || err;
     const error = new Error(_.isPlainObject(message) ? JSON.stringify(message) : message);
 
@@ -14,6 +14,7 @@ export default class ApiClient extends ApiClientBase {
       title,
       text,
     });
+    throw err;
   }
 
   authLogin(data) {

@@ -26,3 +26,16 @@
   display: inline-block;
 
 }
+
+
+.guideline__section > h3 {
+  margin-bottom: 20px;
+}
+
+.guideline__section > div {
+  margin: -5px -5px 10px;
+}
+
+.guideline__section > div > * {
+  margin: 5px;
+}

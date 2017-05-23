@@ -55,7 +55,6 @@ const BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger'];
 const ACTIONS = [{}, { active: true }, { disabled: true }];
 const SIZES = ['lg', null, 'sm', 'xs'];
 
-@css(require('./Guidelines.css'))
 export default class Guidelines extends Component {
   render() {
     return (
@@ -123,7 +122,6 @@ export default class Guidelines extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Menus extends Component {
   render() {
     return (
@@ -174,11 +172,10 @@ class Menus extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Cards extends Component {
   render() {
     return (
-      <section className="card-static">
+      <section className="card-static guideline__section">
         <h3>Карточка</h3>
         <div>
           <Card>
@@ -278,11 +275,10 @@ function FieldGroup({ id, label, help, ...props }) {
     </FormGroup>
   );
 }
-@css(require('./Guidelines.css'))
 class FormsPage extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Формы</h3>
         <div>
           <form>
@@ -629,11 +625,10 @@ class FormsPage extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Wells extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Колодцы</h3>
         <div>
           <Well>Look I'm in a well!</Well>
@@ -648,11 +643,10 @@ class Wells extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Panels extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Панель</h3>
         <div>
           <Panel onClick={() => alert('Мемы')}>
@@ -721,11 +715,10 @@ class Panels extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Tables extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Таблица</h3>
         <div>
           <Table striped bordered condensed hover>
@@ -762,44 +755,44 @@ class Tables extends Component {
         <div>
           <Table responsive>
             <thead>
-            <tr>
-              <th>#</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-            </tr>
+              <tr>
+                <th>#</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+                <th>Table heading</th>
+              </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>1</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-            </tr>
+              <tr>
+                <td>1</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
             </tbody>
           </Table>
         </div>
@@ -807,11 +800,10 @@ class Tables extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class PageLayout extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Джамботрон</h3>
         <div>
           <Jumbotron>
@@ -864,11 +856,10 @@ class PageLayout extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Paginations extends Component {
   render() {
-     return (
-      <section>
+    return (
+      <section className="guideline__section">
         <h3>Пагинация</h3>
         <div>
           <PaginationBasic />
@@ -899,7 +890,6 @@ class Paginations extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class PaginationBasic extends Component {
   constructor() {
     super();
@@ -951,11 +941,10 @@ class PaginationBasic extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Navbars extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Навигационный бар</h3>
         <div>
           <Navbar>
@@ -1048,14 +1037,13 @@ class Navbars extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Navs extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Навигация (кнопки)</h3>
         <div>
-          <Nav bsStyle="pills" activeKey={1} onSelect={(e) => alert(`selected ${e}`)}>
+          <Nav bsStyle="pills" activeKey={1} onSelect={e => alert(`selected ${e}`)}>
             <NavItem eventKey={1}>NavItem 1 content</NavItem>
             <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
             <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
@@ -1078,7 +1066,7 @@ class Navs extends Component {
         </div>
         <h3>Вертикальная навигация</h3>
         <div>
-          <Nav bsStyle="pills" stacked activeKey={1} onSelect={(e) => alert(`selected ${e}`)}>
+          <Nav bsStyle="pills" stacked activeKey={1} onSelect={e => alert(`selected ${e}`)}>
             <NavItem eventKey={1}>NavItem 1 content</NavItem>
             <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
             <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
@@ -1103,7 +1091,6 @@ class Navs extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Popovers extends Component {
   render() {
     const popover = (
@@ -1112,7 +1099,7 @@ class Popovers extends Component {
       </Popover>
     );
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Тело всплывающего окна</h3>
         <div style={{ height: 120 }}>
           <Popover
@@ -1144,12 +1131,11 @@ class Popovers extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Tooltips extends Component {
   render() {
     const tooltip = <Tooltip id="tooltip"><strong>Holy guacamole!</strong> Check this info.</Tooltip>;
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Тело всплывающей подсказки</h3>
         <div>
           <div className="tooltip-static">
@@ -1189,11 +1175,10 @@ class Tooltips extends Component {
     );
   }
 }
-@css(require('./Guidelines.css'))
 class Modals extends Component {
   render() {
     return (
-      <section>
+      <section className="guideline__section">
         <h3>Статический вид</h3>
         <div>
           <div className="static-modal">
@@ -1254,7 +1239,6 @@ function MyLargeModal(props) {
     </Modal>
   );
 }
-@css(require('./Guidelines.css'))
 class ExampleModal extends Component {
   constructor() {
     super();
@@ -1330,188 +1314,6 @@ class ExampleModal extends Component {
           </Modal.Footer>
         </Modal>
       </div>
-    );
-  }
-}
-@css(require('./Guidelines.css'))
-class Dropdowns extends Component {
-  render() {
-    const dropdownBody = [
-      {
-        eventKey: 1,
-        children: 'Action',
-      },
-      {
-        eventKey: 2,
-        children: 'Another action',
-      },
-      {
-        eventKey: 3,
-        active: true,
-        children: 'Active item',
-      },
-      {
-        divider: true,
-      },
-      {
-        eventKey: 4,
-        children: 'Separated link',
-      },
-    ];
-    return (
-      <section>
-        <h3>Выпадающие списки</h3>
-        {ACTIONS.map(action => (
-          SIZES.map((size, i) => (
-            <div key={i}>
-              {BUTTONS.map((title, i) => (
-                <DropdownButton
-                  key={i}
-                  title={title}
-                  bsSize={size}
-                  bsStyle={title.toLowerCase()}
-                  id={`dropdown-${size}-${i}`}
-                  {...action}
-                >
-                  {dropdownBody.map((o, i) => <MenuItem key={i} {...o} />)}
-                </DropdownButton>
-              ))}
-            </div>
-          ))
-        ))}
-        <h3>Разделенные выпадающие списки</h3>
-        {ACTIONS.map(action => (
-          SIZES.map((size, i) => (
-            <div key={i}>
-              {BUTTONS.map((title, i) => (
-                <SplitButton
-                  key={i}
-                  title={title}
-                  bsSize={size}
-                  bsStyle={title.toLowerCase()}
-                  id={`split-button-basic-${i}`}
-                  {...action}
-                >
-                  {dropdownBody.map((o, i) => <MenuItem key={i} {...o} />)}
-                </SplitButton>
-              ))}
-            </div>
-          ))
-        ))}
-        <h3>Без стрелочек</h3>
-        <div>
-          {BUTTONS.map((title, i) => (
-            <DropdownButton key={i} bsStyle={title.toLowerCase()} title="No caret" noCaret id="dropdown-no-caret">
-              {dropdownBody.map((o, i) => <MenuItem key={i} {...o} />)}
-            </DropdownButton>
-          ))}
-        </div>
-        <h3>Варианты выпадения списка</h3>
-        <div>
-          <SplitButton title="Dropup" dropup id="split-button-dropup">
-            {dropdownBody.map((o, i) => <MenuItem key={i} {...o} />)}
-          </SplitButton>
-          <SplitButton title="Right dropup" dropup pullRight id="split-button-dropup-pull-right">
-            {dropdownBody.map((o, i) => <MenuItem key={i} {...o} />)}
-          </SplitButton>
-          <SplitButton title="Dropdown right" pullRight id="split-button-pull-right">
-            {dropdownBody.map((o, i) => <MenuItem key={i} {...o} />)}
-          </SplitButton>
-        </div>
-        <h3>Меню выпадающего списка</h3>
-        <div>
-          <ul className="dropdown-menu" style={{ display: 'block', position: 'relative' }}>
-            <MenuItem header>Header</MenuItem>
-            <MenuItem>link</MenuItem>
-            <MenuItem divider />
-            <MenuItem header>Header</MenuItem>
-            <MenuItem>link</MenuItem>
-            <MenuItem disabled>disabled</MenuItem>
-            <MenuItem title="See? I have a title.">
-              link with title
-            </MenuItem>
-            <MenuItem eventKey={1} href="#someHref" onSelect={() => alert('Йо!')}>
-              link that alerts
-            </MenuItem>
-          </ul>
-        </div>
-      </section>
-    );
-  }
-}
-@css(require('./Guidelines.css'))
-class Buttons extends Component {
-  render() {
-    return (
-      <section>
-        <h3>Кнопки</h3>
-        {ACTIONS.map(action => (
-          SIZES.map((size, i) => (
-            <div key={i}>
-              {BUTTONS.map((title, i) => (
-                <Button
-                  key={i}
-                  bsSize={size}
-                  bsStyle={title.toLowerCase()}
-                  {...action}
-                >
-                  {title}
-                </Button>
-              ))}
-            </div>
-          ))
-        ))}
-        <h3>Группы кнопок</h3>
-        <div>
-          <ButtonGroup>
-            <Button>Left</Button>
-            <Button>Middle</Button>
-            <Button>Right</Button>
-          </ButtonGroup>
-        </div>
-        <div>
-          <ButtonGroup>
-            <Button bsStyle="primary">Left</Button>
-            <Button bsStyle="warning">Middle</Button>
-            <Button bsStyle="danger">Right</Button>
-          </ButtonGroup>
-        </div>
-        <div>
-          <ButtonGroup vertical>
-            <Button>Left</Button>
-            <Button>Middle</Button>
-            <Button>Right</Button>
-          </ButtonGroup>
-        </div>
-        <div>
-          <ButtonGroup vertical>
-            <Button bsStyle="primary">Left</Button>
-            <Button bsStyle="warning">Middle</Button>
-            <Button bsStyle="danger">Right</Button>
-          </ButtonGroup>
-        </div>
-        <h3>Тулбар кнопок</h3>
-        <div>
-          <ButtonToolbar>
-            <ButtonGroup>
-              <Button>1</Button>
-              <Button>2</Button>
-              <Button>3</Button>
-              <Button>4</Button>
-            </ButtonGroup>
-
-            <ButtonGroup>
-              <Button>5</Button>
-              <Button>6</Button>
-              <Button>7</Button>
-            </ButtonGroup>
-
-            <ButtonGroup>
-              <Button>8</Button>
-            </ButtonGroup>
-          </ButtonToolbar>
-        </div>
-      </section>
     );
   }
 }

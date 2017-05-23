@@ -17,12 +17,7 @@ export default uapp => ({
     },
     {
       path: '/auth',
-      async action({ next, page }) {
-        return page
-          .pushTitle('Авторизация')
-          .next(next);
-      },
-      ...require('lsk-auth/router').default,
+      ...uapp.modules.auth.router,
     },
     {
       path: '/cabinet',
