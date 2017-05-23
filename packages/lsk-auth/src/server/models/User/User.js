@@ -12,8 +12,6 @@ async function hashPassword(password) {
   return await bcryptHash(password, salt);
 }
 
-// import nodemailer from 'nodemailer'
-
 const sample = {
   avatar: '/assets/no-avatar.png',
   fullName: 'Счастливый Пользователь',
@@ -32,13 +30,6 @@ function fullName(profile) {
 
 
 export function getSchema(ctx, module) {
-  // const mongoose = ctx.db
-  // console.log({module});
-  // const { Passport } = module.models;
-  // const transporter = (ctx.config.mail && ctx.config.mail.transport) &&
-  const transporter = null;
-  //   Promise.promisifyAll(nodemailer.createTransport(ctx.config.mail.transport))
-
   const schema = new UniversalSchema({
     username: {
       type: String,
@@ -106,37 +97,12 @@ export function getSchema(ctx, module) {
     return jwt.sign(this.getIdentity(params), ctx.config.jwt.secret);
   };
   schema.methods.verifyPassword = async function (password) {
-    // return this.password === password
     return await bcryptCompare(password, this.password);
   };
   schema.methods.getEmail = function () {
     return this.email || this.toJSON().email;// || this.username || this.toJSON().username;
   };
-  // schema.methods.sendEmail = function (inputParams) {
-  //   if (!transporter) throw '!transporter';
-  //   let params = inputParams;
-  //   if (typeof params === 'string') {
-  //     params = { text: params };
-  //   }
-  //
-  //   const email = this.getEmail();
-  //   const options = Object.assign({ to: email }, ctx.config.mail.options, params);
-  //   // console.log({options});
-  //   return transporter.sendMailAsync(options);
-  // };
 
-  // schema.methods.toJSON = function () {
-  //   return _.omit(this.toObject(), ['password'])
-  // }
-  // schema.methods.getIdentity = function () {
-  //   return _.pick(this.toObject(), ['_id', 'username', 'name', 'avatar', 'role'])
-  // }
-  // schema.methods.genAuthToken = function () {
-  //   return jwt.sign(this.getIdentity(), ctx.config.jwt.secret)
-  // }
-  // schema.methods.verifyPassword = function (password) {
-  //   return this.password === password
-  // }
   const { e400, e500 } = ctx.errors;
 
   schema.pre('save', async function (next) {
@@ -215,8 +181,7 @@ export function getSchema(ctx, module) {
   };
 
 
-  schema.virtual('online')
-  .get(function () {
+  schema.virtual('online').get(function () {
     return module.online.isOnline(this._id);
   });
 

@@ -100,7 +100,7 @@ export default (ctx, module) => {
     const user = new User(userFields);
     await user.save();
 
-    let sended;
+    let emailSended;
     try {
       const link = await user.genereateEmailApprovedLink();
       await user.save();
@@ -112,16 +112,16 @@ export default (ctx, module) => {
           link,
         },
       });
-      sended = true;
+      emailSended = true;
     } catch (err) {
       ctx.log.warn(err);
-      sended = false;
+      emailSended = false;
     }
 
     return {
       __pack: 1,
       signup: true,
-      emailSended: sended,
+      emailSended,
       user,
       token: user.generateAuthToken(),
     };
@@ -150,34 +150,33 @@ export default (ctx, module) => {
   };
   controller.recovery = async function (req) {
     const { User } = ctx.models;
+    if (!ctx.mailer) throw '!ctx.mailer';
+
     // const params = req.allParams();
 
     const criteria = controller.getUserCriteria(req);
-
     const user = await User.findOne(criteria);
     if (!user) throw ctx.errors.e404('Такой пользователь не найден');
+    const email = user.getEmail();
+    if (!email) throw ctx.errors.e400('У пользователя отсутсвует емейл');
 
     const password = User.generatePassword();
+
+    await ctx.modules.mailer.send({
+      to: email,
+      template: 'recovery',
+      params: {
+        user: user.toJSON(),
+        password,
+      },
+    });
+
     user.password = password;
     await user.save();
-    // console.log('user', user);
-    const emailOptions = {
-      subject: 'Восстановление пароля на сайте',
-      text: `Ваш пароль: ${password}`,
-    };
-
-    let sended;
-    try {
-      await user.sendEmail(emailOptions);
-      sended = true;
-    } catch (err) {
-      ctx.log.warn(err);
-      sended = false;
-    }
 
     return {
       __pack: 1,
-      emailSended: sended,
+      emailSended: true,
     };
   };
 
