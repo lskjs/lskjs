@@ -21,9 +21,10 @@ export default (ctx) => {
       }
     }
     // Отправить email
-    async send({ to, template, params = {}, options = {} }) {
+    async send(args) {
+      const { to, template, params = {}, options = {} } = args;
       try {
-        if (!to) throw '!to';
+        if (!to) throw '!to email';
         if (!template) throw '!template';
         if (!this.transporter) throw '!transporter';
         if (!this.templates[template]) throw 'cant find email templete'
