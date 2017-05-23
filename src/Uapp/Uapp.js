@@ -1,24 +1,17 @@
-import Api from './Api';
-
-import AuthStore from './AuthStore';
-import UserStore from './UserStore';
-import Page from './Page';
-
 import BaseUapp from 'lego-starter-kit/Uapp';
 export default class Uapp extends BaseUapp {
 
-  Page = Page;
+  Api = require('./Api').default;
+  Page = require('./Page').default;
   getRoutes() {
     return require('./routes').default;
   }
 
   async init() {
     await super.init();
-    this.api = new Api(this.config && this.config.api || {});
-    this.user = new UserStore(this);
-    this.auth = new AuthStore(this);
-    this.models = this.getModels();
     this.stores = this.getStores();
+    this.user = new this.stores.User(this);
+    this.auth = new this.stores.Auth(this);
   }
 
   async run() {
@@ -27,7 +20,7 @@ export default class Uapp extends BaseUapp {
   }
 
   getStores() {
-    return require('./stores').default(this); // eslint-disable-line
+    return require('./stores').default(this);
   }
 
   getModules() {
@@ -36,10 +29,10 @@ export default class Uapp extends BaseUapp {
       ...require('~/modules/uapp').default(this), // eslint-disable-line
     };
   }
-
-  getModels() {
-    return require('./models').default(this); // eslint-disable-line
-  }
+  //
+  // getModels() {
+  //   return require('./models').default(this); // eslint-disable-line
+  // }
 
   provide() {
     return {

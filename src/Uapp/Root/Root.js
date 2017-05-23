@@ -11,7 +11,7 @@ export default class Root extends RootBase {
     super(props);
     if (__CLIENT__) {
       global.toast = (err = {}) => {
-        console.error('throwError', err);
+        // console.error('throwError', err);
         if (!err.type) err.type = 'error';
         if (!err.title) {
           if (err.type === 'error') {

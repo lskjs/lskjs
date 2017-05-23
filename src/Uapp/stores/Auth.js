@@ -1,6 +1,6 @@
 import cookie from 'js-cookie';
 const DEBUG = 0;
-export default class AuthStore {
+export default ctx => class AuthStore {
 
   promise = null;
 
