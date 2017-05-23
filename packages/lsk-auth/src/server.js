@@ -98,7 +98,9 @@ export default (ctx) => {
       api.all('/login', this.controller.login);
       api.post('/signup', this.controller.signup);
       api.all('/recovery', this.controller.recovery);
-      api.all('/email/approve', this.controller.emailApprove);
+      api.all('/email/approve', this.controller.emailApprove, (req, res) => {
+        return res.redirect('/cabinet');
+      });
 
       // Регистрация пользователя через соц сеть
       api.all('/social', isAuth, this.controller.getSocials);

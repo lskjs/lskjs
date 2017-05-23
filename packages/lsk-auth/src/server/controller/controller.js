@@ -150,7 +150,7 @@ export default (ctx, module) => {
   };
   controller.recovery = async function (req) {
     const { User } = ctx.models;
-    if (!ctx.mailer) throw '!ctx.mailer';
+    if (!ctx.modules.mailer) throw '!ctx.modules.mailer';
 
     // const params = req.allParams();
 

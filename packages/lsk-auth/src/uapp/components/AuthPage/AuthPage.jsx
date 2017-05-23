@@ -122,29 +122,41 @@ export default class AuthPage extends Component {
   @autobind
   async handleSubmit(data) {
     const { type, auth, query } = this.props;
-    if (type === 'login') {
-      const res = await auth.login(data);
-      if (res.message === 'ok') {
-        this.redirect('/');
+    try {
+      if (type === 'login') {
+        await auth.login(data).then(res => {
+          if (res.message === 'ok') {
+            this.redirect('/');
+          }
+        })
       }
+      if (type === 'signupPassport') {
+        await auth.signupPassport({ ...data, p: query.p }).then(() => {
+          this.redirect('/');
+        });
+      }
+      if (type === 'signup') {
+        await auth.signup(data).then(() => {
+          this.redirect('/');
+        });
+      }
+      if (type === 'recovery') {
+        await auth.recovery(data).then(() => {
+          global.toast && global.toast({
+            type: 'success',
+            title: 'Письмо с восстановлением пароля отправлено на почту.',
+          });
+        })
+      }
+    } catch (err) {
+      this.onError(err)
     }
-    if (type === 'signupPassport') {
-      await auth.signupPassport({ ...data, p: query.p }).then(() => {
-        this.redirect('/');
-      });
-    }
-    if (type === 'signup') {
-      await auth.signup(data).then(() => {
-        this.redirect('/');
-      });
-    }
-    if (type === 'recovery') {
-      await auth.recovery(data);
-      global.toast && global.toast({
-        type: 'success',
-        title: 'Письмо с восстановлением пароля отправлено на почту.',
-      });
-    }
+  }
+
+  @autobind
+  onError(err) {
+    console.log('AuthPage.onError', err);
+
   }
 
   render() {

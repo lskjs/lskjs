@@ -129,7 +129,7 @@ export function getSchema(ctx, module) {
     this.private.approvedEmailToken = token;
     this.markModified('private');
     // ctx.getUrl()
-    return `${ctx.config.url}/module/auth/email/approve?t=${token}`;
+    return `${ctx.config.url}/api/module/auth/email/approve?t=${token}`; // TODO: сделать по умному
   };
 
   schema.statics.findAndApproveEmail = async function (token) {
