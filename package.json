@@ -14,7 +14,7 @@
     "lodash": "4.17.4",
     "lsk-admin": "1.1.8",
     "lsk-auth": "0.4.0",
-    "lsk-chat": "0.4.0",
+    "lsk-chat": "0.4.1",
     "lsk-general": "0.10.5",
     "lsk-mailer": "0.1.1",
     "lsk-notification": "0.1.3",

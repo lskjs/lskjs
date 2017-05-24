@@ -468,7 +468,7 @@ babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.22.0, ba
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-core@6.9.0:
+babel-core@6.9.0, babel-core@^6.1.2, babel-core@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.9.0.tgz#d38c221b0ed02e628a1b10daa920151821272d41"
   dependencies:
@@ -494,7 +494,7 @@ babel-core@6.9.0:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-core@^6.1.2, babel-core@^6.11.4, babel-core@^6.18.2, babel-core@^6.24.1, babel-core@^6.9.0:
+babel-core@^6.11.4, babel-core@^6.18.2, babel-core@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.24.1.tgz#8c428564dce1e1f41fb337ec34f4c3b022b5ad83"
   dependencies:
@@ -1437,7 +1437,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.16.0, babel-traverse@^6.24.1, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@6.9.0, babel-types@^6.9.0:
+babel-types@6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.9.0.tgz#87c9aece3c2947cca1e9f9c03f30cc879224fe3c"
   dependencies:
@@ -1447,7 +1447,7 @@ babel-types@6.9.0, babel-types@^6.9.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.15.0, babel-types@^6.16.0, babel-types@^6.19.0, babel-types@^6.24.1:
+babel-types@^6.15.0, babel-types@^6.16.0, babel-types@^6.19.0, babel-types@^6.24.1, babel-types@^6.9.0:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.24.1.tgz#a136879dc15b3606bda0d90c1fc74304c2ff0975"
   dependencies:
@@ -5048,7 +5048,7 @@ lsk-admin@1.1.8:
     sass-loader "5.0.0"
     validate.js "0.11.1"
 
-lsk-auth@^0.4.0:
+lsk-auth@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/lsk-auth/-/lsk-auth-0.4.0.tgz#862f6cb7e817663587a1bbfa884411eba27b7316"
   dependencies:
@@ -5106,14 +5106,14 @@ lsk-build@0.8.5:
     webpack-hot-middleware "2.16.1"
     webpack-middleware "1.5.1"
 
-lsk-chat@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/lsk-chat/-/lsk-chat-0.4.0.tgz#9fdfb4e2917098ac4406f883275e08adebb589b6"
+lsk-chat@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/lsk-chat/-/lsk-chat-0.4.1.tgz#a3d3c70d04779e067951189f8586e8a56ecc76f0"
   dependencies:
     react-textarea-autosize "^4.3.0"
     react-timeago "^3.3.0"
 
-lsk-general@^0.10.5:
+lsk-general@0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/lsk-general/-/lsk-general-0.10.5.tgz#36e8987df9a5da6c382ceb2b222b6efa38c96587"
   dependencies:
@@ -5132,7 +5132,7 @@ lsk-mailer@0.1.1:
     nodemailer "2.5.0"
     nodemailer-juice "1.0.0"
 
-lsk-notification@^0.1.3:
+lsk-notification@0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/lsk-notification/-/lsk-notification-0.1.3.tgz#898957234fb5ffb5d4abe4e1ae79f83f927d197e"
 
@@ -5146,7 +5146,7 @@ lsk-upload@0.1.1:
   dependencies:
     multer "1.3.0"
 
-lsk-user@^0.4.0:
+lsk-user@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/lsk-user/-/lsk-user-0.4.0.tgz#017941c18b88aa3622e98b85260d101466337e72"
 
@@ -8708,7 +8708,7 @@ webpack-dev-middleware@^1.6.0:
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-webpack-hot-middleware@2.15.0, webpack-hot-middleware@^2.13.2:
+webpack-hot-middleware@2.15.0:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.15.0.tgz#71995af7c0025f109df482f86f1e10379526d026"
   dependencies:
@@ -8717,7 +8717,7 @@ webpack-hot-middleware@2.15.0, webpack-hot-middleware@^2.13.2:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-hot-middleware@2.16.1:
+webpack-hot-middleware@2.16.1, webpack-hot-middleware@^2.13.2:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.16.1.tgz#ae209bcab2b9b672f1b0fdcf6c5c2a680ff118e1"
   dependencies:
