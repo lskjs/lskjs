@@ -1,54 +1,72 @@
-export default (ctx, module) => class GeneralAuth {
+export default (ctx, module) => class Strategy {
+
+  static getPassportParams() {
+    return { };
+  }
+
   Strategy = null
   providerName = null
-  getProviderId(profile) {
-    return profile.id;
+  getProviderId(passportProfile) {
+    return passportProfile.id;
   }
-  async getExtraData() {
-    return {};
-  }
-  updateConfig(config) {
+  getStrategyConfig() {
+    const config = ctx.config.auth.socials[this.providerName].config || {};
+    if (!config.callbackURL) {
+      config.callbackURL = `${ctx.config.url}/api/module/auth/${this.providerName}/callback`;
+    }
     return config;
   }
-  // async createPassport({ accessToken, refreshToken, profile = {}, extraData, providerId }) {
-  //   const { Passport } = ctx.modules.auth.models;
-  //   const data = {
-  //     provider: this.providerName,
-  //     providerId,
-//     profile,
-  //   };
-  //   const passport = new Passport(data);
-  //   return passport.save();
-  // }
+
+  // @TODO: getPassportStrategy() {
   getStrategy() {
-    const config = this.updateConfig(ctx.config.auth.socials[this.providerName].config);
     return new this.Strategy(
-      config,
-      async (accessToken, refreshToken, profile, done) => {
+      this.getStrategyConfig(),
+      async (accessToken, refreshToken, passportProfile, done) => {
         const { Passport } = ctx.modules.auth.models;
-        const providerId = this.getProviderId(profile);
+        const providerId = this.getProviderId(passportProfile);
         let passport = await Passport.findOne({
           provider: this.providerName,
           providerId,
         });
-        if (passport) {
-          return done(null, { accessToken, refreshToken, profile, passport });
-        }
-        const extraData = await this
-        .getExtraData({
+        const params = {
           accessToken,
           refreshToken,
-          profile,
-        });
-        passport = await this.createPassport({
-          accessToken,
-          refreshToken,
-          profile,
-          extraData,
+          passportProfile,
           providerId,
-        });
-        return done(null, { accessToken, refreshToken, profile, passport });
+        };
+        if (!passport) {
+          passport = await this.createPassport(params);
+          params.isNew = true;
+        }
+        params.passport = passport;
+        await this.updatePassport(params);
+        params.redirect = this.getSuccessRedirect(params);
+        return done(null, params);
       },
     );
+  }
+
+  async createPassport({ accessToken, refreshToken, profile, providerId }) {
+    const { Passport } = module.models;
+    const data = {
+      provider: this.providerName,
+      providerId,
+      token: accessToken,
+    };
+    return new Passport(data);
+  }
+
+  async updatePassport({ accessToken, passport }) {
+    passport.token = accessToken;
+    passport.profile = await this.getProfile(passport);
+    return passport.save();
+  }
+
+  async getProfile(passport) {
+    return {};
+  }
+
+  getSuccessRedirect({ passport }) {
+    return `${ctx.config.url}/auth/passport?p=${passport.generateToken()}`;
   }
 };

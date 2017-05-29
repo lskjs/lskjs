@@ -8,7 +8,7 @@ export function canonize(str) {
 
 export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
-  const { e400, e404 } = ctx.errors;
+  const { e400, e403, e404 } = ctx.errors;
   const { Passport } = module.models;
   // console.log('User', Object.keys(User));
   // console.log(User);
@@ -218,7 +218,7 @@ export default (ctx, module) => {
     const passport = await Passport.getByToken(req.data.p);
     const user = await passport.getUser();
     if (!user) {
-      return e404('User is not founded');
+      return e404('User not found');
     }
     return {
       user,
@@ -283,28 +283,41 @@ export default (ctx, module) => {
     });
   };
 
-  controller.approvedEmail = async (req) => {
+  controller.approveEmail = async (req) => {
     const { User } = ctx.models;
     const params = req.allParams();
     const { t } = params;
     return User.findAndApproveEmail(t);
   };
+  controller.approvedEmail = async (req) => {
+    console.log('lsk-auth  approvedEmail => approveEmail');
+    this.approveEmail(req);
+  };
+
+
+  controller.socialCallback2 = async (req, res, next) => {
+    const { provider } = req.params;
+    module.passport.authenticate(provider, (err, { redirect }) => {
+      if (err) { return next(err); }
+      res.redirect(redirect || '/');
+    })(req, res, next);
+  };
 
   controller.socialCallback = async (req, res) => {
     const { provider } = req.params;
+    console.log('socialCallback');
     try {
-      return new Promise((resolve) => {
-        return (module.passport.authenticate(provider, {}, async (err, data) => {
-          if (err) {
-            return resolve({ err });
-          }
-          if (data.passport) {
-            const { passport, accessToken } = data;
-            passport.token = accessToken;
-            await passport.save();
-            return resolve(res.redirect(`${ctx.config.url}/auth/passport?p=${passport.generateToken()}`));
-          }
-        }))(req);
+      return new Promise((resolve, reject) => {
+        (
+          module.passport.authenticate(
+            provider,
+            module.strategies[provider].getPassportParams(),
+            async (err, data) => {
+              console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
+              if (err) return reject(err);
+              return resolve(res.redirect(data.redirect || '/'));
+            })
+        )(req);
       });
     } catch (err) {
       console.error(err, 'ERROR!');
@@ -314,14 +327,13 @@ export default (ctx, module) => {
 
   controller.socialAuth = (req, res, next) => {
     const { provider } = req.params;
-    console.log('socialAuth', provider);
-    if (!module._strategies[provider]) return e404('not such provider');
-
-    let params = {};
-    if (provider === 'vkontakte') {
-      params = { scope: ctx.config.auth.socials.vkontakte.scope };
-    }
-    module.passport.authenticate(provider, params)(req, res, next);
+    console.log('socialAuth');
+    // console.log('socialAuth', provider);
+    if (!module._strategies[provider] || !module.strategies[provider]) return e404('not such provider');
+    module.passport.authenticate(
+      provider,
+      module.strategies[provider].getPassportParams(),
+    )(req, res, next);
   };
 
   return controller;
