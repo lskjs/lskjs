@@ -93,7 +93,7 @@ export default (ctx, module) => {
     const userFields = controller.getUserFields(req);
     const criteria = controller.getUserCriteria(req);
     const existUser = await User.findOne(criteria);
-    if (existUser) throw ctx.errors.e400('Username with this email or username is registered');
+    if (existUser) throw ctx.errors.e400('Пользователь с таким логином уже зарегистрирован');
     if (!userFields.meta) userFields.meta = {};
     userFields.meta.approvedEmail = false;
     // console.log({ userFields });
@@ -131,15 +131,17 @@ export default (ctx, module) => {
     const { User } = ctx.models;
     const params = req.allParams();
 
-    if (!params.password) throw ctx.errors.e400('Параметр password не передан');
+    if (!params.password) throw ctx.errors.e400('Пароль не заполнен');
 
     const criteria = controller.getUserCriteria(req);
     const user = await User.findOne(criteria);
 
-    if (!user) throw ctx.errors.e404('Такой пользователь не найден');
+    if (!user) throw ctx.errors.e404('Неверный логин');
+    // if (!user) throw ctx.errors.e404('Такой пользователь не найден');
 
     if (!await user.verifyPassword(params.password)) {
-      throw ctx.errors.e400('Переданный пароль не подходит');
+      throw ctx.errors.e400('Неверный пароль');
+      // throw ctx.errors.e400('Переданный пароль не подходит');
     }
 
     return {
@@ -148,17 +150,36 @@ export default (ctx, module) => {
       token: user.generateAuthToken(),
     };
   };
+
+  controller.updateToken = async function (req) {
+    const { User } = ctx.models;
+    const params = req.allParams();
+
+    const userId = req.user && req.user._id;
+    if (!userId) throw ctx.errors.e404('Токен не верный');
+
+    const user = await User.findById(userId);
+
+    if (!user) throw ctx.errors.e404('Такой пользователь не найден');
+
+    return {
+      __pack: 1,
+      user,
+      token: user.generateAuthToken(),
+    };
+  };
+
   controller.recovery = async function (req) {
     const { User } = ctx.models;
-    if (!ctx.modules.mailer) throw '!ctx.modules.mailer';
+    if (!ctx.modules.mailer) throw 'Система не может отправить email';
 
     // const params = req.allParams();
 
     const criteria = controller.getUserCriteria(req);
     const user = await User.findOne(criteria);
-    if (!user) throw ctx.errors.e404('Такой пользователь не найден');
+    if (!user) throw ctx.errors.e404('Неверный логин');
     const email = user.getEmail();
-    if (!email) throw ctx.errors.e400('У пользователя отсутсвует емейл');
+    if (!email) throw ctx.errors.e400('У этого пользователя не был указан емейл для восстановления');
 
     const password = User.generatePassword();
 

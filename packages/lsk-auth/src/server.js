@@ -98,6 +98,7 @@ export default (ctx) => {
       api.all('/login', this.controller.login);
       api.post('/signup', this.controller.signup);
       api.all('/recovery', this.controller.recovery);
+      api.all('/updateToken', this.controller.updateToken);
       api.all('/email/approve', this.controller.emailApprove, (req, res) => {
         return res.redirect('/cabinet');
       });
