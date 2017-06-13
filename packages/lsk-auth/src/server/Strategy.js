@@ -52,12 +52,14 @@ export default (ctx, module) => class Strategy {
       provider: this.providerName,
       providerId,
       token: accessToken,
+      refreshToken,
     };
     return new Passport(data);
   }
 
-  async updatePassport({ accessToken, passport }) {
+  async updatePassport({ accessToken, refreshToken, passport }) {
     passport.token = accessToken;
+    passport.refreshToken = refreshToken;
     passport.profile = await this.getProfile(passport);
     return passport.save();
   }

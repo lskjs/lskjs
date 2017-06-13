@@ -53,7 +53,7 @@ export default {
             .pushTitle('Подключение социальной сети')
             .component(BindPage, { passport, query });
         }
-        if (passport.user) {
+        if (passport.userId) {
           const res = await uapp.auth.loginPassport({ p: query.p });
           if (res) {
             return page.redirect('/');

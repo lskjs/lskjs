@@ -214,7 +214,7 @@ export default (ctx, module) => {
     if (!passport) {
       return e404('!passport');
     }
-    if (passport.user) {
+    if (passport.userId) {
       return e400('passport already have user');
     }
     const params = _.merge(
@@ -225,8 +225,9 @@ export default (ctx, module) => {
     // console.log({ params });
     const user = new User(params);
     await user.save();
-    passport.user = user._id;
+    passport.userId = user._id;
     await passport.save();
+    await User.updateFromPassport(passport);
     // user.passports.push(passport._id);
     // await user.save();
     return {
@@ -236,6 +237,7 @@ export default (ctx, module) => {
   };
 
   controller.socialLogin = async (req) => {
+    console.log('socialLogin');
     const passport = await Passport.getByToken(req.data.p);
     const user = await passport.getUser();
     if (!user) {
@@ -256,20 +258,21 @@ export default (ctx, module) => {
     const user = await User
       .findById(req.user._id)
       .then(checkNotFound);
-    if (passport.user) throw e400('passport.user already exist');
-    passport.user = userId;
+    if (passport.userId) throw e400('passport.userId already exist');
+    passport.userId = userId;
     // user.passports.push(passport._id);
     await passport.save();
+    await user.updateFromPassport(passport);
     await user.save();
     return Passport.find({
-      user: userId,
+      userId,
     });
   };
 
   controller.getSocials = async (req) => {
     const userId = req.user._id;
     return Passport.find({
-      user: userId,
+      userId,
     });
   };
 
@@ -285,22 +288,22 @@ export default (ctx, module) => {
     const findParams = {};
     if (params.passportId) findParams._id = params.passportId;
     if (params.provider) findParams.provider = params.provider;
-    findParams.user = userId;
+    findParams.userId = userId;
     if (!findParams.passportId && !findParams.provider) {
       throw e400('!findParams.passportId && !findParams.provider');
     }
     const passport = await Passport
       .findOne(findParams)
       .then(checkNotFound);
-    if (passport.user !== userId) throw e403('Wrong user!');
-    passport.user = null;
+    if (passport.userId !== userId) throw e403('Wrong user!');
+    passport.userId = null;
     // user.passports = user.passports.filter((pId) => {
     //   return pId && pId.toString() !== params.p;
     // });
     await passport.save();
     await user.save();
     return Passport.find({
-      user: userId,
+      userId,
     });
   };
 
@@ -326,7 +329,6 @@ export default (ctx, module) => {
 
   controller.socialCallback = async (req, res) => {
     const { provider } = req.params;
-    console.log('socialCallback');
     try {
       return new Promise((resolve, reject) => {
         (
@@ -334,7 +336,7 @@ export default (ctx, module) => {
             provider,
             module.strategies[provider].getPassportParams(),
             async (err, data) => {
-              console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
+              // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
               if (err) return reject(err);
               return resolve(res.redirect(data.redirect || '/'));
             })
@@ -348,7 +350,7 @@ export default (ctx, module) => {
 
   controller.socialAuth = (req, res, next) => {
     const { provider } = req.params;
-    console.log('socialAuth');
+    // console.log('socialAuth');
     // console.log('socialAuth', provider);
     if (!module._strategies[provider] || !module.strategies[provider]) return e404('not such provider');
     module.passport.authenticate(

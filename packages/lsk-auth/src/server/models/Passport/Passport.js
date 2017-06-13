@@ -4,9 +4,9 @@ import _ from 'lodash';
 export function getSchema(ctx) {
   const mongoose = ctx.db;
   const schema = new UniversalSchema({
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      // ref: 'User',
     },
     // Сырые данные которые пришли из соц сети
     raw: {
@@ -40,6 +40,9 @@ export function getSchema(ctx) {
     token: {
       type: String,
     },
+    refreshToken: {
+      type: String,
+    },
     meta: {
       type: Object,
     },
@@ -56,29 +59,6 @@ export function getSchema(ctx) {
     toObject: { virtuals: true },
   });
 
-  schema.methods.updateSocialData = async function () {
-    try {
-      const { token } = this;
-      // console.log(ctx.strategies, this.strategies);
-      const strategy = ctx.strategies[this.provider];
-      if (this.provider !== 'youtube') return;
-      const data = {
-        statics: await strategy.getStatics({ accessToken: token, providerId: this.providerId }),
-        videos: await strategy.getAllVideos({ accessToken: token, providerId: this.providerId }),
-        lastVideo: await strategy.getLastVideo({ accessToken: token, providerId: this.providerId }),
-        analytics: await strategy.getAnalytics({ accessToken: token, providerId: this.providerId }),
-        subscribers: await strategy.getSubscribers({ accessToken: token, providerId: this.providerId }),
-      };
-      if (data.statics && data.videos && data.lastVideo && data.analytics && data.subscribers) {
-        this.meta = _.merge({}, this.meta, data);
-        this.fetchedAt = new Date();
-      }
-    } catch (err) {
-      ctx.log.error('update fail', err);
-    }
-    return this;
-  };
-
   schema.methods.generateUsername = async function () {
     const { User } = ctx.models;
     let username = `${this.providerId}_${this.provider}.com`;
@@ -94,7 +74,7 @@ export function getSchema(ctx) {
     return username;
   };
   schema.methods.getUser = async function () {
-    return ctx.models.User.findById(this.user);
+    return ctx.models.User.findById(this.userId);
   };
 
   schema.methods.getIdentity = function (params = {}) {

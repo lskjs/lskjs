@@ -132,6 +132,24 @@ export function getSchema(ctx, module) {
     return `${ctx.config.url}/api/module/auth/email/approve?t=${token}`; // TODO: сделать по умному
   };
 
+  schema.methods.updateFromPassport = async function (passport) {
+    // console.log('""""schema.methods.updateFromPassport""""');
+    return null;
+  };
+
+  // console.log('UUU*U*U*U*U*U*U**U*UU(U(U(U(U(U');
+  schema.statics.updateFromPassport = async function (passport) {
+    // console.log('"""schema.statics.updateFromPassport"""', passport.userId);
+    if (!passport.userId) return null;
+    const user = await this.findById(passport.userId);
+    // console.log({user});
+    if (!user) return null;
+    // console.log('ser.updateFromPassport', user.updateFromPassport);
+    if (!user.updateFromPassport) return null;
+    await user.updateFromPassport(passport);
+    return user.save();
+  };
+
   schema.statics.findAndApproveEmail = async function (token) {
     const { checkNotFound } = ctx.helpers;
     const decode = jwt.verify(token, ctx.config.jwt.secret);
@@ -157,28 +175,28 @@ export function getSchema(ctx, module) {
     return user.save();
   };
 
-  schema.methods.updateSocialData = async function () {
-    const { Passport } = module.models;
-    const passport = await Passport.findOne({
-      provider: 'youtube',
-      user: this._id,
-    });
-    if (passport) {
-      return passport.updateUser();
-    }
-    return null;
-  };
-
-  schema.methods.getSocialData = async function (provider) {
-    const { Passport } = module.models;
-    const params = {
-      user: this._id,
-    };
-    if (provider) params.provider = provider;
-    const passport = await Passport.findOne(params);
-    if (passport) return passport.meta;
-    return null;
-  };
+  // schema.methods.updateSocialData = async function () {
+  //   const { Passport } = module.models;
+  //   const passport = await Passport.findOne({
+  //     provider: 'youtube',
+  //     user: this._id,
+  //   });
+  //   if (passport) {
+  //     return passport.updateUser();
+  //   }
+  //   return null;
+  // };
+  //
+  // schema.methods.getSocialData = async function (provider) {
+  //   const { Passport } = module.models;
+  //   const params = {
+  //     user: this._id,
+  //   };
+  //   if (provider) params.provider = provider;
+  //   const passport = await Passport.findOne(params);
+  //   if (passport) return passport.meta;
+  //   return null;
+  // };
 
 
   schema.virtual('online').get(function () {
