@@ -78,6 +78,9 @@ export default class UniversalSchema {
       throw 'ERROR UniversalSchema.getMongooseModel() !db';
       return null;
     }
+    if (!this.options.collection) {
+      throw '!this.options.collection'
+    }
     return db.model(this.options.model || this.generateMongooseName(this.options.collection), this.getMongooseSchema(), this.options.collection);
   }
 

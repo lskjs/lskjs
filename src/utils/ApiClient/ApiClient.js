@@ -5,6 +5,20 @@ import trim from '../trim';
 import qs from 'qs';
 import fetch from 'isomorphic-fetch';
 
+const FETCH_PARAMS = [
+  'method',
+  'url',
+  'headers',
+  'context',
+  'referrer',
+  'referrerPolicy',
+  'mode',
+  'credentials',
+  'redirect',
+  'integrity',
+  'cache',
+];
+
 export default class ApiClient {
   qs = qs
 
@@ -40,38 +54,51 @@ export default class ApiClient {
     };
   }
 
-  // onError(err) {
-  //   console.log('pack.err', err)
-  //   throw err
-  // }
-
-  async throwError({ err }) {
-    __DEV__ && console.error('throwError', err);
+  async throwError({ err, res, req }) {
+    if (__DEV__) {
+      const str = `\
+==============
+  fetch error:
+${_.isPlainObject(err) ? JSON.stringify(err, null, 2) : err}
+  req:
+${JSON.stringify(req, null, 2)}
+  json:
+${JSON.stringify(res.json, null, 2)}
+==============\
+`;
+      console.error(str);
+    }
     const message = err && err.message || err;
     const err2 = new Error(_.isPlainObject(message) ? JSON.stringify(message) : message);
-    err2.res = err;
+    err2.res = res;
+    err2.req = req;
     throw err2;
   }
 
-  async afterFetch({ json, res, throwError }) {
+  async afterFetch(ctx) {
+    const { res, throwError } = ctx;
     if (res.status >= 400) {
+      const type = 'RES_STATUS_ERROR';
       await throwError({
+        ...ctx,
         err: {
+          type,
           status: res.status,
           statusText: res.statusText,
-          data: json,
+          message: `${type}: ${res.status} ${res.statusText}`,
         },
-        res,
       });
     }
-    if (json.err) {
+    if (res.json && res.json.err) {
       await throwError({
-        err: json.err,
-        json,
-        res,
+        ...ctx,
+        err: {
+          type: 'CUSTOM_ERROR',
+          ...res.json.err,
+        }
       });
     }
-    return json;
+    return res.json;
   }
 
   createUrl(path, options = {}) {
@@ -87,69 +114,103 @@ export default class ApiClient {
       .join('/');
   }
 
+  getCtx(url, params = {}) {
+    const req = Object.assign(
+      { url },
+      _.pick(params, FETCH_PARAMS),
+    );
 
-  getFetch(url, params = {}) {
-    const options = Object.assign({}, params);
-
-    if (options.data && !options.body) {
-      options.body = options.data;
+    const body = params.body || params.data;
+    if (_.isPlainObject(body)) {
+      req._body = body;
+      req.body = JSON.stringify(body);
+    } else if (typeof body === 'string') {
+      req._body = body;
+      req.body = body;
     }
-    if (_.isPlainObject(options.body)) {
-      options.body = JSON.stringify(options.body);
+    if (!req.headers) req.headers = {};
+    if (!req.headers.Accept) req.headers.Accept = 'application/json';
+    if (!req.headers['Content-Type']) req.headers['Content-Type'] = 'application/json; charset=utf-8';
+    if (req.headers['Content-Type'] === '!') {
+      delete req.headers['Content-Type'];
     }
-    if (!options.headers) options.headers = {};
-    if (!options.headers.Accept) options.headers.Accept = 'application/json';
-    if (!options.headers['Content-Type']) options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    if (options.headers['Content-Type'] === '!') {
-      delete options.headers['Content-Type'];
-    }
-    if (!options.headers.Authorization && this.authToken) {
-      options.headers.Authorization = `Bearer ${this.authToken}`;
-    }
-
-    if (options.queryParams || options.qs) {
-      url += (url.indexOf('?') === -1 ? '?' : '&') + qs.stringify(options.queryParams || options.qs);
+    const authToken = (params.authToken || this.authToken);
+    if (!req.headers.Authorization && authToken) {
+      req.headers.Authorization = `Bearer ${authToken}`;
     }
 
-    if (this.log && this.log.trace) {
-      this.log.trace('[api]', (options && options.method || 'GET'), this.createUrl(url));
+    req.qs = params.queryParams || params.qs;
+    if (req.qs) {
+      req.url += (req.url.indexOf('?') === -1 ? '?' : '&') + qs.stringify(req.qs);
     }
-    return fetch(this.createUrl(url), options);
+    req.url = this.createUrl(req.url);
+
+    if (!req.method) {
+      req.method = 'GET';
+    }
+    const throwError = params.throwError || this.throwError;
+    const afterFetch = params.afterFetch || this.afterFetch;
+    const parseResult = params.parseResult || this.parseResult;
+
+    return {
+      req,
+      authToken,
+      throwError,
+      afterFetch,
+      parseResult,
+    };
+  }
+
+  async parseResult(ctx, result) {
+    const res = {
+      result,
+      status: result.status,
+      statusText: result.statusText,
+    };
+    try {
+      res.text = await result.text();
+    } catch (err) {
+      const type = 'TEXT_PARSE_ERROR';
+      await ctx.throwError({
+        ...ctx,
+        res,
+        err: {
+          type,
+          message: type,
+          err,
+        },
+      });
+    }
+    try {
+      res.json = JSON.parse(res.text);
+    } catch (err) {
+      const type = 'JSON_PARSE_ERROR';
+      await ctx.throwError({
+        ...ctx,
+        res,
+        err: {
+          type,
+          message: type,
+          err,
+        },
+      });
+    }
+    return res;
   }
 
   fetch(...args) {
-    const throwError = args[1] && args[1].throwError || this.throwError;
-    return this.getFetch(...args)
-    .then(async (res) => {
-      let text;
-      let json;
-      try {
-        text = await res.text();
-        json = JSON.parse(text);
-      } catch (e) {
-        await throwError({
-          err: {
-            status: res.status,
-            statusText: res.statusText,
-            // text: text,
-            message: text,
-          },
-          res,
-        });
-      }
-      const params = {
-        url: args[0],
-        params: args[1],
-        json,
-        text,
-        res,
-        throwError,
-      };
-      if (args[1] && args[1].afterFetch) {
-        return args[1].afterFetch(params);
-      }
-      return this.afterFetch(params);
-    });
+    const ctx = this.getCtx(...args);
+    const { req, parseResult, afterFetch } = ctx;
+    if (this.log && this.log.trace) {
+      this.log.trace('[api]', req.method, req.url, req._body);
+    }
+    const { url, ...params } = req;
+    return fetch(url, params)
+    .then(async (result) => {
+      ctx.res = await parseResult(req, result);
+      return ctx;
+    })
+    .then(afterFetch);
   }
 
 

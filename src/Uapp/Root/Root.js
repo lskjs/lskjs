@@ -1,5 +1,13 @@
 import { Component, PropTypes } from 'react';
 
+function isTouchDevice() {
+  const el = document.createElement('div');
+  el.setAttribute('ongesturestart', 'return;');
+  const result = typeof el.ongesturestart === 'function';
+  // console.log('@@@@isTouchableDevice', result);
+  return result;
+}
+
 export default class Root extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
@@ -23,6 +31,9 @@ export default class Root extends Component {
     if (__CLIENT__) {
       const html = document.getElementsByTagName('html')[0];
       html.className = html.className.replace('ua_js_no', 'ua_js_yes');
+      if (isTouchDevice()) {
+        html.className = html.className.replace('ua_touchable_no', 'ua_touchable_yes');
+      }
     }
   }
 

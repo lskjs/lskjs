@@ -237,9 +237,19 @@ export default class Page {
     );
   }
 
+  getTitle() {
+    const metas = this.state.metas || [];
+    // "profile.games": { $in: ["aa", "bb", "z"] }
+    // console.log(metas);
+    return _.get(metas, `${metas.length - 1}.title`) || '';
+  }
+
+  renderTitle() {
+    return this.renderFullTitle();
+  }
 
   // RENDER
-  renderTitle() {
+  renderFullTitle() {
     return (this.state.metas || []).reverse().map(t => t.title).join(' - ');
   }
 
@@ -276,6 +286,7 @@ ${this.renderStyle()}
   getHtmlClass() {
     const ua = {};// useragent.is(req.headers['user-agent'])
     ua.js = false;
+    ua.touchable = false;
 
     const postfix = __DEV__ ? ' __DEV__' : '';
     return (_.map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
