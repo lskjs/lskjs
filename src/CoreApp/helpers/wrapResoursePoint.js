@@ -5,7 +5,7 @@ export default (ctx) => {
     const api = params.api || params.router || asyncRouter();
     const prefix = params.prefix || '';
     const middleware = params.middleware || function () {};
-    const actions = params.actions || ['list', 'get', 'create', 'update', 'remove'];
+    const actions = params.actions || Object.keys(resourse); // ['list', 'get', 'create', 'update', 'remove'];
 
     actions.forEach((action) => {
       if (!resourse[action]) return;

@@ -207,7 +207,7 @@ ${JSON.stringify(res.json, null, 2)}
     const { url, ...params } = req;
     return fetch(url, params)
     .then(async (result) => {
-      ctx.res = await parseResult(req, result);
+      ctx.res = await parseResult(ctx, result);
       return ctx;
     })
     .then(afterFetch);
