@@ -124,10 +124,11 @@ ${JSON.stringify(res.json, null, 2)}
     );
 
     const body = params.body || params.data;
+
     if (isPlainObject(body)) {
       req._body = body;
       req.body = JSON.stringify(body);
-    } else if (typeof body === 'string') {
+    } else {
       req._body = body;
       req.body = body;
     }
@@ -206,7 +207,7 @@ ${JSON.stringify(res.json, null, 2)}
     const { fetch } = this.constructor;
     const { req, parseResult, afterFetch } = ctx;
     if (this.log && this.log.trace) {
-      this.log.trace('[api]', req.method, req.url, req._body);
+      this.log.trace('[api]', req.method, req.url, req._body, req);
     }
     const { url, ...params } = req;
     return fetch(url, params)
@@ -218,6 +219,7 @@ ${JSON.stringify(res.json, null, 2)}
   }
 
   ws(path = '', options = {}) {
+    // console.log('ws !@#!@#!#!!@#', this.wsConfig);
     if (!this.wsConfig) {
       console.error('Вы не можете использовать api.ws без сокет конфигов');
       return null;
@@ -225,13 +227,15 @@ ${JSON.stringify(res.json, null, 2)}
     const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
 
     // console.log(opts.query, opts.query.token, this.authToken);
-    if (!(this.wsConfig && this.wsConfig.tokenInCookie)) {
+    // console.log({opts});
+    if (!this.wsConfig.tokenInCookie) {
       if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
     }
-    // console.log(opts.query, opts.query.token, this.authToken);
+    // console.log('wsConfig', opts.query, this.authToken);
 
     return io(
-      this.createUrl(path, this.wsConfig),
+      // this.createUrl(path, this.wsConfig),
+      this.createUrl(path, opts),
       opts,
     );
   }
