@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "globals": {
+    "__SERVER__": true,
+    "__CLIENT__": true,
+    "__PROD__": true,
+    "__STAGE__": true,
+    "__DEV__": true,
+    "document": true,
+    "window": true,
+    "screen": true,
+    "If": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "rules": {
+    "no-console": "warn",
+    "arrow-body-style": "off",
+    "func-names": "warn",
+    "no-param-reassign": "warn",
+    "react/react-in-jsx-scope": "warn",
+    "no-underscore-dangle": "warn",
+    "global-require": "off",
+    "react/prop-types": "warn",
+    "react/jsx-first-prop-new-line": "warn",
+    "guard-for-in": "off",
+    "no-restricted-syntax": ["error", "WithStatement"],
+    "react/forbid-prop-types": "off",
+    "no-unused-vars": "off",
+    "no-throw-literal": "off"
+  }
+}
