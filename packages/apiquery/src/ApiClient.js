@@ -110,13 +110,17 @@ ${JSON.stringify(res.json, null, 2)}
     if (path.substr(0, 5) === 'http:' || path.substr(0, 6) === 'https:') {
       return path;
     }
-    const url = options.url || this.url || '/';
+    let url = options.url || this.url || '/';
     const base = options.base || this.base;
     const array = [url, path[0] === '/' ? null : trim(base), trim(path)];
-    return array
+    url = array
       .map(a => trim(a))
       .filter((a, i) => (i === 0 || a))
       .join('/');
+    if (options.qs) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + this.constructor.qs.stringify(options.qs);
+    }
+    return url;
   }
 
   getCtx(url, params = {}) {
@@ -228,14 +232,42 @@ ${JSON.stringify(res.json, null, 2)}
     }
     const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
 
-    if (!this.wsConfig.tokenInCookie) {
+    // console.log(opts.query, opts.query.token, this.authToken);
+    if (!(this.wsConfig && this.wsConfig.tokenInCookie)) {
       if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
     }
-
-    return this.io(
-      this.createUrl(path, opts),
+    const params2 = {}
+    if (!this.wsConfig.tokenInCookie) {
+      if (!params2.qs) params2.qs = {};
+      if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
+    }
+    // console.log(opts.query, opts.query.token, this.authToken);
+    console.log({opts}, this.createUrl(path, this.wsConfig), io);
+    return io(
+      this.createUrl(path, {...this.wsConfig, ...params2}),
       opts,
     );
+  }
+  ws2(path = '', params = {}) {
+    if (!this.wsConfig) {
+      console.error('Вы не можете использовать api.ws без сокет конфигов');
+      return null;
+    }
+    const params2 = Object.assign({}, this.wsConfig, params);
+
+    if (!this.wsConfig.tokenInCookie) {
+      if (!params2.qs) params2.qs = {};
+      if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
+    }
+
+    const res = this.io(
+      this.createUrl(path, params2),
+      {
+        ...this.wsConfig.options,
+        ...params,
+      },
+    );
+    return res;
   }
 
 }
