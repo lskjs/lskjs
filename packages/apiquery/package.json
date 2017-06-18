@@ -1,6 +1,6 @@
 {
   "name": "apiq",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "http + websockets api client for Web, Node.js and React Native",
   "repository": {
     "type": "git",

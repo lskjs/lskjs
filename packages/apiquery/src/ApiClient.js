@@ -24,9 +24,11 @@ const DEBUG = __DEV__;
 export default class ApiClient {
   static fetch = global.fetch;
   static qs = qs
+  // io = io
 
   constructor(params) {
     // console.log('ApiClient', params);
+    this.io = io;
     this.log = params.log;
     this.root = params.root;
     this.base = params.base;
@@ -98,7 +100,7 @@ ${JSON.stringify(res.json, null, 2)}
         err: {
           type: 'CUSTOM_ERROR',
           ...res.json.err,
-        }
+        },
       });
     }
     return res.json;
@@ -207,7 +209,8 @@ ${JSON.stringify(res.json, null, 2)}
     const { fetch } = this.constructor;
     const { req, parseResult, afterFetch } = ctx;
     if (this.log && this.log.trace) {
-      this.log.trace('[api]', req.method, req.url, req._body, req);
+      this.log.trace('[api]', req.method, req.url, req._body);
+      // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
     const { url, ...params } = req;
     return fetch(url, params)
@@ -219,22 +222,17 @@ ${JSON.stringify(res.json, null, 2)}
   }
 
   ws(path = '', options = {}) {
-    // console.log('ws !@#!@#!#!!@#', this.wsConfig);
     if (!this.wsConfig) {
       console.error('Вы не можете использовать api.ws без сокет конфигов');
       return null;
     }
     const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
 
-    // console.log(opts.query, opts.query.token, this.authToken);
-    // console.log({opts});
     if (!this.wsConfig.tokenInCookie) {
       if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
     }
-    // console.log('wsConfig', opts.query, this.authToken);
 
-    return io(
-      // this.createUrl(path, this.wsConfig),
+    return this.io(
       this.createUrl(path, opts),
       opts,
     );
