@@ -60,7 +60,7 @@ export default class ApiClient {
   }
 
   async throwError({ err, res, req }) {
-    if (this.logErrors && this.log) {
+    if (this.showError && this.log) {
       const str = `\
 ==============
   fetch error:
