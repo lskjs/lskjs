@@ -1,6 +1,6 @@
 {
   "name": "apiquery",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "http + websockets api client for Web, Node.js and React Native",
   "repository": {
     "type": "git",
@@ -11,9 +11,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/isuvorov/apiq/issues"
+    "url": "https://github.com/isuvorov/apiquery/issues"
   },
-  "homepage": "https://github.com/isuvorov/apiq#readme",
+  "homepage": "https://github.com/isuvorov/apiquery#readme",
   "main": "index.js",
   "scripts": {
     "release": "DEBUG=0 npm run build && npm publish dist",

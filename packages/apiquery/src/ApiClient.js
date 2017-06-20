@@ -19,7 +19,7 @@ const FETCH_PARAMS = [
   'cache',
 ];
 
-const DEBUG = __DEV__;
+// const DEBUG = __DEV__;
 
 export default class ApiClient {
   static fetch = global.fetch;
@@ -60,7 +60,7 @@ export default class ApiClient {
   }
 
   async throwError({ err, res, req }) {
-    if (__DEV__ && this.log) {
+    if (this.logErrors && this.log) {
       const str = `\
 ==============
   fetch error:
@@ -111,6 +111,17 @@ ${JSON.stringify(res.json, null, 2)}
       return path;
     }
     let url = options.url || this.url || '/';
+    const port = options.port || this.port || null;
+
+    if (url && url.length > 1 && port) {
+      if (url.search(/:(\d+)/) !== -1) {
+        url = url.replace(/:(\d+)/, `:${port}`);
+      } else {
+        url = `${url}:${port}`;
+      }
+    }
+    console.log('createUrl', options, url);
+
     const base = options.base || this.base;
     const array = [url, path[0] === '/' ? null : trim(base), trim(path)];
     url = array
@@ -236,15 +247,15 @@ ${JSON.stringify(res.json, null, 2)}
     if (!(this.wsConfig && this.wsConfig.tokenInCookie)) {
       if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
     }
-    const params2 = {}
+    const params2 = {};
     if (!this.wsConfig.tokenInCookie) {
       if (!params2.qs) params2.qs = {};
       if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
     }
     // console.log(opts.query, opts.query.token, this.authToken);
-    console.log({opts}, this.createUrl(path, this.wsConfig), io);
+    console.log({ opts }, this.createUrl(path, this.wsConfig), io);
     return io(
-      this.createUrl(path, {...this.wsConfig, ...params2}),
+      this.createUrl(path, { ...this.wsConfig, ...params2 }),
       opts,
     );
   }
