@@ -1,10 +1,10 @@
 {
-  "name": "apiq",
+  "name": "apiquery",
   "version": "0.0.6",
   "description": "http + websockets api client for Web, Node.js and React Native",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/isuvorov/apiq.git"
+    "url": "git+ssh://git@github.com/isuvorov/apiquery.git"
   },
   "contributors": [
     "Igor Suvorov <hi@isuvorov.ru> (http://isuvorov.ru)"
