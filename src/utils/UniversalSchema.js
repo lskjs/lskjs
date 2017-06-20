@@ -1,26 +1,39 @@
 import mongoose from 'mongoose';
 import _ from 'lodash';
 
-const defaultParams = {
-  filter: {},
-  sort: {},
-  limit: 20,
-  populate: [],
-};
-const defaultOptions = {
-  timestamps: true,
-};
-
 export default class UniversalSchema {
+  static defaultParams = {
+    filter: {},
+    sort: {},
+    limit: 20,
+    populate: [],
+    prepare: null,
+  };
+  static defaultOptions = {
+    timestamps: true,
+  };
   constructor(schema = {}, options = {}) {
     this.schema = schema;
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = Object.assign({}, this.constructor.defaultOptions, options);
     this.statics = {
       findByParams(incomeParams) {
-        const params = Object.assign({}, defaultParams, incomeParams);
-        return this.find(params.filter)
-        .sort(params.sort)
-        .limit(params.limit);
+        const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
+
+        const res = this.find(params.filter)
+          .sort(params.sort)
+          .limit(params.limit);
+        if (params.prepare) {
+          return this.prepare(res, params.prepare)
+        }
+      },
+      async prepareOne(obj) {
+        return obj;
+      },
+      prepare(obj, ...args) {
+        if (Array.isArray(obj)) {
+          return Promise.map(obj, o => this.prepareOne(o, ...args));
+        }
+        return this.prepareOne(obj, ...args);
       },
     };
     this.methods = {};
@@ -28,15 +41,14 @@ export default class UniversalSchema {
     this.postMethods = {};
     this.indexes = [];
     this.virtuals = [];
-    // this.indexes = {}
   }
 
 
   extend(schema, options) {
     const object = new UniversalSchema();
-    const fields = ['schema', 'options', 'statics', 'methods', 'preMethods', 'postMethods'];
+    const fields = ['schema', 'options', 'statics', 'methods', 'preMethods', 'postMethods', 'indexes', 'virtuals'];
     fields.forEach((key) => {
-      object[key] = Object.assign({}, this[key]);
+      object[key] = _.clone(this[key]);
     });
     Object.assign(object.schema, schema);
     Object.assign(object.options, options);
@@ -79,7 +91,7 @@ export default class UniversalSchema {
       return null;
     }
     if (!this.options.collection) {
-      throw '!this.options.collection'
+      throw '!this.options.collection';
     }
     return db.model(this.options.model || this.generateMongooseName(this.options.collection), this.getMongooseSchema(), this.options.collection);
   }
