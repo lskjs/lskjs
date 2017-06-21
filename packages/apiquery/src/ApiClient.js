@@ -172,9 +172,11 @@ ${JSON.stringify(res.json, null, 2)}
     const throwError = params.throwError || this.throwError;
     const afterFetch = params.afterFetch || this.afterFetch;
     const parseResult = params.parseResult || this.parseResult;
+    const timeout = params.timeout;
 
     return {
       req,
+      timeout
       authToken,
       throwError,
       afterFetch,
@@ -228,12 +230,21 @@ ${JSON.stringify(res.json, null, 2)}
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
     const { url, ...params } = req;
-    return fetch(url, params)
-    .then(async (result) => {
-      ctx.res = await parseResult(ctx, result);
-      return ctx;
-    })
-    .then(afterFetch);
+    const res = fetch(url, params)
+      .then(async (result) => {
+        ctx.res = await parseResult(ctx, result);
+        return ctx;
+      })
+      .then(afterFetch);
+    if (!ctx.timeout) return res;
+
+    return Promise.race([
+      res,
+      new Promise(function (resolve, reject) {
+        setTimeout(() => reject(new Error('fetch timeout')), ctx.timeout)
+      })
+    ])
+
   }
 
   ws(path = '', options = {}) {
