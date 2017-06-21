@@ -106,11 +106,12 @@ export function getSchema(ctx, module) {
   const { e400, e500 } = ctx.errors;
 
   schema.pre('save', async function (next) {
+    this.wasNew = this.isNew;
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }
     if (this.isModified('profile')) {
-      this.name = fullName(this.profile) || sample.fullName;
+      this.name = fullName(this.profile) || _.get(ctx, 'config.auth.sample.name', sample.fullName);
     }
     return next();
   });

@@ -209,6 +209,8 @@ export default (ctx, module) => {
   };
 
   controller.socialSign = async (req) => {
+    // console.log('socialSign !@#!@#!123123');
+
     const { User } = ctx.models;
     const passport = await Passport.getByToken(req.data.p);
     if (!passport) {
@@ -217,19 +219,28 @@ export default (ctx, module) => {
     if (passport.userId) {
       return e400('passport already have user');
     }
+
+    // const _id = ctx.db.Types.ObjectId();
     const params = _.merge(
       { profile: passport.profile },
       req.data, // meta
-      { username: await passport.generateUsername() },
+      {
+        username: await passport.generateUsername(),
+        // _id,
+      },
     );
     // console.log({ params });
     const user = new User(params);
-    await user.save();
+    // await user.save();
+    user.updateFromPassport(passport);
+    await user.save()
     passport.userId = user._id;
     await passport.save();
-    await User.updateFromPassport(passport);
-    // user.passports.push(passport._id);
+    // await User.updateFromPassport(passport);
+    // user.passports.push
+    // (passport._id);
     // await user.save();
+    // console.log('user', {user});
     return {
       user,
       token: user.generateAuthToken(),
