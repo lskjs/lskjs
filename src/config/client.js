@@ -57,6 +57,22 @@ export default config.extend({
           placeholder: 'Например, Сергеевич',
         },
       },
+      gender: {
+        title: 'Пол',
+      },
+      age: {
+        title: 'Возраст',
+      },
+      country: {
+        title: 'Страна',
+      },
+      city: {
+        title: 'Город',
+      },
+      position: {
+        title: 'Сфера деятельности',
+      },
+      // "showOnline" : true
     },
     signup: ['firstName', 'lastName'],
     // socials: ['vkontakte', 'youtube'],

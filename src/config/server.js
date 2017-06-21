@@ -60,5 +60,8 @@ export default config.extend({
       },
     },
   },
+  notification: {
+
+  },
 })
 .extendEnv();

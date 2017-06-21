@@ -11,4 +11,5 @@ export default {
     offer: '~/modules/offer',
     posts: '~/modules/posts',
   },
+
 };
