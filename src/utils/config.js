@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import deepmerge from 'deepmerge';
 
-function getConfig(path) {
+function getConfig(prePath) {
+  let path = prePath;
   if (__SERVER__) {
     const fs = require('fs');
     if (path[0] !== '/') {
@@ -11,13 +12,16 @@ function getConfig(path) {
     try {
       confStr = fs.readFileSync(path, 'utf-8');
     } catch (err) {
+      if (prePath !== '.env.json') {
+        console.error(`Can't read file ${path}, error`, err);
+      }
       return {};
     }
     try {
       const config = Object.assign({}, { _json: 1 }, JSON.parse(confStr));
       return config;
     } catch (err) {
-      console.log('.env.json error', err);
+      console.error(`Can't parse file ${path}, error`, err);
       return {};
     }
   }
@@ -49,8 +53,7 @@ class Config {
     Object.assign(this, deepmerge(this, object, { arrayMerge: (d, s, o) => {
       // console.log('arrayMerge', d, s, o);
 
-      return s
-
+      return s;
     } }));
     return this;
   }
