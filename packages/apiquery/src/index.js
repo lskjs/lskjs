@@ -1,1 +1,1 @@
-module.exports = require('./ApiClient');
+module.exports = require('./apiquery');

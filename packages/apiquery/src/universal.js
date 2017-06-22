@@ -1,6 +1,6 @@
-import ApiClient from './ApiClient';
+import apiquery from './apiquery';
 
-export default class ApiClientWeb extends ApiClient {
+export default class ApiClientWeb extends apiquery {
   constructor(props) {
     super(props);
     console.log('ApiClientWeb', this.url);

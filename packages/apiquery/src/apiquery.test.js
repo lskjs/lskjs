@@ -1,7 +1,7 @@
-import ApiClient from './ApiClient';
+import apiquery from './apiquery';
 
 describe('base /api/v1', () => {
-  const api = new ApiClient({
+  const api = new apiquery({
     base: '/api/v1',
   });
   test('api.createUrl(\'messages\')', () => {

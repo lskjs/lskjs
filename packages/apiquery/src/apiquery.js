@@ -59,7 +59,7 @@ export default class ApiClient {
     };
   }
 
-  async throwError({ err, res, req }) {
+  async throwError = ({ err, res, req }) => {
     if (this.showError && this.log) {
       const str = `\
 ==============
@@ -120,7 +120,6 @@ ${JSON.stringify(res.json, null, 2)}
         url = `${url}:${port}`;
       }
     }
-    console.log('createUrl', options, url);
 
     const base = options.base || this.base;
     const array = [url, path[0] === '/' ? null : trim(base), trim(path)];
