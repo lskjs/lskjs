@@ -59,7 +59,7 @@ export default class ApiClient {
     };
   }
 
-  async throwError = ({ err, res, req }) => {
+  throwError = async ({ err, res, req }) => {
     if (this.showError && this.log) {
       const str = `\
 ==============
