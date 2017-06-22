@@ -26,7 +26,7 @@ export default class ApiClient {
   static qs = qs
   // io = io
 
-  constructor(params) {
+  constructor(params = {}) {
     // console.log('ApiClient', params);
     this.io = io;
     this.log = params.log;
@@ -176,7 +176,7 @@ ${JSON.stringify(res.json, null, 2)}
 
     return {
       req,
-      timeout
+      timeout,
       authToken,
       throwError,
       afterFetch,
