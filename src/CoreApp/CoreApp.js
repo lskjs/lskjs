@@ -3,6 +3,7 @@ import path from 'path';
 import _ from 'lodash';
 
 import ExpressApp from 'lego-starter-kit/ExpressApp';
+import Api from 'apiquery';
 
 import createWs from './ws';
 import getMongoose from './getMongoose';
@@ -30,6 +31,8 @@ export default class CoreApp extends ExpressApp {
     this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
     this.log.debug('statics', this.statics);
+    this.Api = Api;
+    this.api = new Api();
 
     this.config.ws && this.initWs();
   }

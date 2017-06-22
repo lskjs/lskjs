@@ -25,6 +25,8 @@ export default class UniversalSchema {
         if (params.prepare) {
           return this.prepare(res, params.prepare)
         }
+
+        return res;
       },
       async prepareOne(obj) {
         return obj;
