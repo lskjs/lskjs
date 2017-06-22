@@ -137,9 +137,9 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
-apiquery@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/apiquery/-/apiquery-0.1.1.tgz#e71a6fff0f88618fdeb92effdd40c1923313bf79"
+apiquery@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/apiquery/-/apiquery-0.1.3.tgz#3c3d385f320474b0b21ba19e10da7061aae225a0"
   dependencies:
     lodash.isplainobject "4.0.6"
     lodash.pick "4.4.0"
