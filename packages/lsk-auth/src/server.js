@@ -102,6 +102,9 @@ export default (ctx) => {
       api.all('/email/approve', this.controller.emailApprove, (req, res) => {
         return res.redirect('/cabinet');
       });
+      api.all('/phone/code', this.controller.phoneCode);
+      api.all('/phone/approve', this.controller.phoneApprove);
+      api.all('/phone/login', this.controller.phoneLogin);
 
       // Регистрация пользователя через соц сеть
       api.all('/social', isAuth, this.controller.getSocials);

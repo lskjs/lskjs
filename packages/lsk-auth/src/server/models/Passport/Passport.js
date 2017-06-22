@@ -1,6 +1,7 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import canonizeUsername from '../../canonizeUsername';
 export function getSchema(ctx) {
   const mongoose = ctx.db;
   const schema = new UniversalSchema({
@@ -61,17 +62,8 @@ export function getSchema(ctx) {
 
   schema.methods.generateUsername = async function () {
     const { User } = ctx.models;
-    let username = `${this.providerId}_${this.provider}.com`;
-    username = username.toLowerCase();
-    let user = await User.findOne({ username });
-    // console.log({ user });
-    let count = 0;
-    while (user) {
-      count += 1;
-      username += `_${count}`;
-      user = await User.findOne({ username }); // eslint-disable-line
-    }
-    return username;
+    let username = `${this.providerId}_${this.provider}`;
+    return canonizeUsername(username.toLowerCase());
   };
   schema.methods.getUser = async function () {
     return ctx.models.User.findById(this.userId);

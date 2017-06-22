@@ -1,10 +1,7 @@
 import validator from 'validator';
 import _ from 'lodash';
-
-
-export function canonize(str) {
-  return str.toLowerCase().trim();
-}
+import canonize from '../canonize';
+import canonizeUsername from '../canonizeUsername';
 
 export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
@@ -13,6 +10,7 @@ export default (ctx, module) => {
   // console.log('User', Object.keys(User));
   // console.log(User);
   // console.log('User', Object.keys(User));
+  //
   const controller = {};
 
   controller.validate = async function (req) {
@@ -46,18 +44,19 @@ export default (ctx, module) => {
       token: user.generateAuthToken(),
     };
   };
+  // get for create
   controller.getUserFields = function (req) {
     const params = req.allParams();
     // console.log({ params });
     if (params.login) {
       if (!params.username) {
-        params.username = params.login.split('@')[0];
+        params.username = params.login;
       }
       if (!params.email && validator.isEmail(params.login)) {
         params.email = params.login;
       } // if email
     }
-    if (params.username) params.username = canonize(params.username);
+    if (params.username) params.username = canonizeUsername(params.username);
     if (params.email) params.email = canonize(params.email);
     // console.log({ params });
     return params;
@@ -90,6 +89,7 @@ export default (ctx, module) => {
   };
   controller.signup = async function (req) {
     const { User } = ctx.models;
+    const { mailer } = ctx.modules;
     const userFields = controller.getUserFields(req);
     const criteria = controller.getUserCriteria(req);
     const existUser = await User.findOne(criteria);
@@ -100,22 +100,24 @@ export default (ctx, module) => {
     const user = new User(userFields);
     await user.save();
 
-    let emailSended;
-    try {
-      const link = await user.genereateEmailApprovedLink();
-      await user.save();
-      await ctx.modules.mailer.send({
-        to: user.getEmail(),
-        template: 'approveEmail',
-        params: {
-          user: user.toJSON(),
-          link,
-        },
-      });
-      emailSended = true;
-    } catch (err) {
-      ctx.log.warn(err);
-      emailSended = false;
+    await user.save();
+    let emailSended = null;
+    if (mailer) {
+      try {
+        const link = await user.genereateEmailApprovedLink();
+        await mailer.send({
+          to: user.getEmail(),
+          template: 'approveEmail',
+          params: {
+            user: user.toJSON(),
+            link,
+          },
+        });
+        emailSended = true;
+      } catch (err) {
+        ctx.log.warn(err);
+        emailSended = false;
+      }
     }
 
     return {
@@ -171,7 +173,8 @@ export default (ctx, module) => {
 
   controller.recovery = async function (req) {
     const { User } = ctx.models;
-    if (!ctx.modules.mailer) throw 'Система не может отправить email';
+    const { mailer } = ctx.modules;
+    if (!mailer) throw 'Система не может отправить email';
 
     // const params = req.allParams();
 
@@ -183,7 +186,7 @@ export default (ctx, module) => {
 
     const password = User.generatePassword();
 
-    await ctx.modules.mailer.send({
+    await mailer.send({
       to: email,
       template: 'recovery',
       params: {
@@ -233,7 +236,7 @@ export default (ctx, module) => {
     const user = new User(params);
     // await user.save();
     user.updateFromPassport(passport);
-    await user.save()
+    await user.save();
     passport.userId = user._id;
     await passport.save();
     // await User.updateFromPassport(passport);
@@ -368,6 +371,56 @@ export default (ctx, module) => {
       provider,
       module.strategies[provider].getPassportParams(),
     )(req, res, next);
+  };
+
+  controller.phoneCode = async (req) => {
+    const { phone } = req.data;
+    controller.lastCode = _.random(100000, 999999);
+    const text = `Ваш проверочный код: ${controller.lastCode}`;
+    const qs = {
+      id: 30921,
+      key: '6BF5D7552D43B1E8',
+      to: phone,
+      from: 'test',
+      text,
+    };
+    const res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs });
+    return {
+      phone,
+      res,
+      code: controller.lastCode,
+    };
+  };
+
+  controller.phoneApprove = (req, res, next) => {
+    const { phone, code } = req.data;
+    return { phone, code };
+  };
+
+  controller.phoneLogin = async (req, res, next) => {
+    const { phone, code } = req.data;
+    const { User } = ctx.models;
+    if (!(code == 123123 || code == controller.lastCode)) {
+      throw 'Код не верный';
+    }
+
+    let user = await User.findOne({ username: phone });
+    if (!user) {
+      user = await User.create({
+        username: phone,
+        profile: {
+          contacts: {
+            phone,
+          },
+        },
+      });
+    }
+
+    return {
+      __pack: 1,
+      user,
+      token: user.generateAuthToken(),
+    };
   };
 
   return controller;
