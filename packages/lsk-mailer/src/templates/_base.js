@@ -4,22 +4,18 @@ export default class Template {
   }
   renderHead() {
     return `
-    <head>
-      <meta charset="UTF-8">
-      <title></title>
-      <link href="http://hi-jay.eu/mails/mail.css" rel="stylesheet" type="text/css" media="all">
-    </head>
-    `;
+<head>
+  <title>Title</title>
+  header
+</head>
+`.trim();
   }
   renderFooter() {
-    return ``;
     return `
-    <div class="footer1">
-      <p>Напиши на <a href="mailto:support@hi-jay.eu">support@hi-jay.eu</a>, если у тебя возникли проблемы с использованием «Hi, Jay!», мы обязательно тебе поможем.
-      <p>С уважением, команда «Hi, Jay!».
-      <p><a href="http://www.hi-jay.eu" target="_blank">www.hi-jay.eu</a>
-    </div>
-    `;
+<div>
+  footer
+</div>
+`.trim();
   }
   renderContent() {
     return `
@@ -27,6 +23,7 @@ export default class Template {
     `;
   }
   renderBody({ params }) {
+    // <div class="header">Привет!</div>
     return `
     <body>
       <div style="background:#dfe8ef;display: table;width: 100%;margin: 0px auto;">
@@ -39,7 +36,6 @@ export default class Template {
             <div></div>
           </div>
           <div class="body_mail">
-            <div class="header">Привет!</div>
             <div class="content">
               ${this.renderContent(...arguments)}
               ${this.renderFooter(...arguments)}
@@ -57,6 +53,8 @@ export default class Template {
     </body>`;
   }
   render(params = {}) {
+    //
+    // ${this.renderBody(params)}
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -64,5 +62,9 @@ export default class Template {
       ${this.renderBody(params)}
     </html>
     `;
+  }
+
+  getHtml(...args) {
+    return this.render(...args);
   }
 }
