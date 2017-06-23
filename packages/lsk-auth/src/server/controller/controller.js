@@ -7,10 +7,7 @@ export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
   const { e400, e403, e404 } = ctx.errors;
   const { Passport } = module.models;
-  // console.log('User', Object.keys(User));
-  // console.log(User);
-  // console.log('User', Object.keys(User));
-  //
+
   const controller = {};
 
   controller.validate = async function (req) {
@@ -374,33 +371,49 @@ export default (ctx, module) => {
   };
 
   controller.phoneCode = async (req) => {
+    if (!module.config.sms) throw '!module.config.sms';
+    const smsConfig = module.config.sms;
+
     const { phone } = req.data;
-    controller.lastCode = _.random(100000, 999999);
-    const text = `Ваш проверочный код: ${controller.lastCode}`;
-    const qs = {
-      id: 30921,
-      key: '6BF5D7552D43B1E8',
-      to: phone,
-      from: 'test',
-      text,
-    };
-    const res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs });
-    return {
+    const code = _.random(100000, 999999);
+    controller.lastCode = code;
+    const text = `Ваш проверочный код: ${code}`;
+    if (module.tbot) {
+      module.tbot.notify(`Номер: ${phone} Проверочный код: ${code}`);
+    }
+
+    let res;
+    if (smsConfig.provider === 'bytehand') {
+      const qs = {
+        ...smsConfig.params,
+        to: phone,
+        text,
+      };
+      res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs });
+    } else {
+      throw '!provider';
+    }
+    const pack = {
       phone,
       res,
-      code: controller.lastCode,
     };
+    if (__DEV__) {
+      pack.code = code;
+    }
+    return pack;
   };
 
   controller.phoneApprove = (req, res, next) => {
+    if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     return { phone, code };
   };
 
   controller.phoneLogin = async (req, res, next) => {
+    if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     const { User } = ctx.models;
-    if (!(code == 123123 || code == controller.lastCode)) {
+    if (!((module.config.sms.defaultCode && code == module.config.sms.code) || code == controller.lastCode)) {
       throw 'Код не верный';
     }
 

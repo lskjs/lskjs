@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { Passport } from 'passport';
+import TelegramBot from 'node-telegram-bot-api';
 
 const onlineService = {
   visitedAt: {},
@@ -58,6 +59,18 @@ export default (ctx) => {
     }
     async init() {
       this.config = _.get(ctx, 'config.auth', {});
+
+      if (this.config.telegram) {
+        module.tbot = new TelegramBot(this.config.telegram.token, { polling: true });
+        module.tbot.notify = (text) => {
+          (this.config.telegram.notify || []).forEach(id => {
+            module.tbot.sendMessage(id, text);
+          })
+        }
+      }
+
+
+
       if (!this.config.socials) this.config.socials = {};
       this.initOnlineService();
       this.models = this.getModels();
