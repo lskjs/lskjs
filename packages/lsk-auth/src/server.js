@@ -1,33 +1,20 @@
 import _ from 'lodash';
 import { Passport } from 'passport';
-import TelegramBot from 'node-telegram-bot-api';
+import onlineService from './server/onlineService';
 
-const onlineService = {
-  visitedAt: {},
-  timeout: 10 * 60 * 1000,
-  touchOnline(id) {
-    this.setOnline(id, new Date());
-  },
-  setOnline(id, value) {
-    if (!value) {
-      delete this.visitedAt[id];
-    }
-    this.visitedAt[id] = value;
-  },
-  isOnline(id) {
-    // console.log('isOnline', id, this.visitedAt[id]);
-    if (!this.visitedAt[id]) return false;
-    if ((Date.now() - this.visitedAt[id]) > this.timeout) {
-      this.setOnline(id, null);
-      return false;
-    }
-    return true;
-  },
-  count() {
-    return Object.keys(this.visitedAt).filter(key => this.isOnline(key)).length;
-  },
-};
-
+let TelegramBot;
+try {
+  Promise.config({
+    cancellation: true,
+  });
+} catch (err) {
+  console.log('Promise', err);
+}
+try {
+  TelegramBot = require('node-telegram-bot-api');
+} catch (err) {
+  console.log('TelegramBot init', err);
+}
 
 export default (ctx) => {
   return class AuthModule {
@@ -61,14 +48,25 @@ export default (ctx) => {
       this.config = _.get(ctx, 'config.auth', {});
 
       if (this.config.telegram) {
-        module.tbot = new TelegramBot(this.config.telegram.token, { polling: true });
-        module.tbot.notify = (text) => {
-          (this.config.telegram.notify || []).forEach(id => {
-            module.tbot.sendMessage(id, text);
-          })
+        try {
+          this.tbot = new TelegramBot(this.config.telegram.token, { polling: true });
+          this.tbot.notify = (text) => {
+            try {
+              (this.config.telegram.notify || []).forEach((id) => {
+                try {
+                  this.tbot.sendMessage(id, text).catch((err) => { console.log('tbot.sendMessage err', err); });
+                } catch (err) {
+                  console.log('tbot.sendMessage err', err);
+                }
+              });
+            } catch (err) {
+              console.log('tbot.notify err', err);
+            }
+          };
+        } catch (err) {
+          console.log('TelegramBot', err);
         }
       }
-
 
 
       if (!this.config.socials) this.config.socials = {};

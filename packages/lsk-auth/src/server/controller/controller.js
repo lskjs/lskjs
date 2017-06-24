@@ -2,6 +2,7 @@ import validator from 'validator';
 import _ from 'lodash';
 import canonize from '../canonize';
 import canonizeUsername from '../canonizeUsername';
+import canonizeAndValidatePhone from '../canonizeAndValidatePhone';
 
 export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
@@ -374,12 +375,14 @@ export default (ctx, module) => {
     if (!module.config.sms) throw '!module.config.sms';
     const smsConfig = module.config.sms;
 
-    const { phone } = req.data;
+
+    const phone = canonizeAndValidatePhone(req.data.phone);
     const code = _.random(100000, 999999);
     controller.lastCode = code;
     const text = `Ваш проверочный код: ${code}`;
+
     if (module.tbot) {
-      module.tbot.notify(`Номер: ${phone} Проверочный код: ${code}`);
+      module.tbot.notify(`Номер: ${phone} Проверочный код: ${code}`)
     }
 
     let res;
@@ -389,7 +392,10 @@ export default (ctx, module) => {
         to: phone,
         text,
       };
-      res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs });
+      res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs })
+      .catch(err => {
+        console.log('bytehand err', err);
+      });
     } else {
       throw '!provider';
     }
@@ -411,7 +417,8 @@ export default (ctx, module) => {
 
   controller.phoneLogin = async (req, res, next) => {
     if (!module.config.sms) throw '!module.config.sms';
-    const { phone, code } = req.data;
+    const { code } = req.data;
+    const phone = canonizeAndValidatePhone(req.data.phone);
     const { User } = ctx.models;
     if (!((module.config.sms.defaultCode && code == module.config.sms.code) || code == controller.lastCode)) {
       throw 'Код не верный';
