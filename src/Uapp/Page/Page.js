@@ -3,14 +3,16 @@ import _ from 'lodash';
 import Root from '../Root';
 import ReactDOM from 'react-dom/server';
 
-const defaultState = {
-  favicon: '/favicon.ico',
-};
-const defaultProps = {
-};
-
 export default class Page {
+
   Root = Root;
+
+  state = {
+    favicon: '/favicon.ico',
+  }
+
+  defaultProps = {
+  }
 
   constructor(...args) {
     this.init(...args);
@@ -19,11 +21,14 @@ export default class Page {
   async init(props = {}, state = {}) {
     this._page = true;
 
-    this.props = Object.assign({}, defaultProps);
-    Object.assign(this.props, props);
-
-    this.state = Object.assign({}, defaultState);
-    Object.assign(this.state, state);
+    this.props = {
+      ...this.defaultProps,
+      ...props,
+    };
+    this.state = {
+      ...this.defaultState,
+      ...state,
+    };
 
     this.uapp = this.props.uapp || {};
 
@@ -314,8 +319,18 @@ ${this.renderStyle()}
   renderFooter() {
     const util = require('util');
     const debug = __DEV__ && __SERVER__ ? `<!--
-uapp:
-${util.inspect({ ...this.uapp, style: undefined, req: undefined, ctx: null })}
+DEBUG INFO
+
+__SERVER__: ${__SERVER__}
+__DEV__: ${__DEV__}
+__PROD__: ${__PROD__}
+__STAGE__: ${__STAGE__}
+
+uapp.keys: ${Object.keys(this.uapp)}
+uapp.config:
+${util.inspect(this.uapp.config)}
+uapp.page.state:
+${util.inspect(this.uapp.page.state)}
 -->` : '';
       // const debug = __DEV__ && __SERVER__ ? `<!-- ${util.inspect({ ...this.props, style: undefined, req: undefined, ctx: null })} -->` : '';
       // ${debug}
