@@ -12,6 +12,7 @@ export default (ctx) => {
   return class LskUpload {
     async init() {
       this.config = ctx.config.upload;
+      console.log('this.config', this.config);
 
       if (this.config.s3) {
         this.s3 = new aws.S3(this.config.s3);
@@ -76,15 +77,18 @@ export default (ctx) => {
     getS3Storage() {
       return multerS3({
         s3: this.s3,
-        bucket: this.s3.bucket,
+        bucket: this.config.s3.bucket,
         // metadata: function (req, file, cb) {
         //   cb(null, {fieldName: file.fieldname});
         // },
         key: async (req, file, cb) => {
           let filename;
           try {
+            console.log('req, file', req, file);
             filename = this.getFilePath(req, file);
+            console.log('filename', filename);
             filename = filename.replace(/_/g, '/');
+            console.log('filename2', filename);
           } catch (err) {
             return cb(err);
           }
@@ -95,26 +99,31 @@ export default (ctx) => {
     getDiskStorage() {
       const config = ctx.config.upload;
       const storage = multer.diskStorage({
-        // destination(req, file, cb) {
-        //   let path;
-        //   try {
-        //     path = this.getFilePath(req, file);
-        //   } catch (err) {
-        //     return cb(err);
-        //   }
-        //   this.createDir(path);
-        //   return cb(null, path);
-        // },
-        filename: (req, file, cb) => {
+        destination: (req, file, cb) => {
+          console.log('destination');
           let path;
+          let dirname;
           try {
             path = this.getFilePath(req, file);
+            dirname = path.split('/').slice(0, -1).join('/');
+            this.createDir(dirname);
           } catch (err) {
             return cb(err);
           }
-          const dirname = path.split('/').slice(0, -1).join('/');
-          this.createDir(dirname);
-          return dirname;
+          return cb(null, dirname);
+        },
+        filename: (req, file, cb) => {
+          let path;
+          let filename;
+          try {
+            path = this.getFilePath(req, file);
+            filename = path.split('/').reverse()[0];
+          } catch (err) {
+            return cb(err);
+          }
+          console.log('filename', filename);
+          // this.createDir(filename);
+          return cb(null, filename);
         },
       });
       return storage;
