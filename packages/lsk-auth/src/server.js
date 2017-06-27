@@ -1,12 +1,30 @@
 import _ from 'lodash';
 import { Passport } from 'passport';
 import onlineService from './server/onlineService';
+import Promise from 'bluebird';
+
+Promise.config = () => {}
+
+function prepare() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), 2000);
+  });
+}
+
+function build() {
+  return prepare().then(() => console.log('it was built'));
+}
+
+function run() {
+  return build()
+    .timeout(1000)
+    .catch(Promise.TimeoutError, err => console.log('there was an error'));
+}
+
 
 let TelegramBot;
 try {
-  Promise.config({
-    cancellation: true,
-  });
+  run();
 } catch (err) {
   console.log('Promise', err);
 }
@@ -63,6 +81,7 @@ export default (ctx) => {
               console.log('tbot.notify err', err);
             }
           };
+          // this.tbot.notify('Всем приветик в этом чатике');
         } catch (err) {
           console.log('TelegramBot', err);
         }

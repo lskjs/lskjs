@@ -98,12 +98,11 @@ export default (ctx, module) => {
     const user = new User(userFields);
     await user.save();
 
-    await user.save();
     let emailSended = null;
     if (mailer) {
       try {
         const link = await user.genereateEmailApprovedLink();
-        await mailer.send({
+        mailer.send({
           to: user.getEmail(),
           template: 'approveEmail',
           params: {
@@ -121,7 +120,7 @@ export default (ctx, module) => {
     return {
       __pack: 1,
       signup: true,
-      emailSended,
+      // emailSended,
       user,
       token: user.generateAuthToken(),
     };
@@ -249,7 +248,7 @@ export default (ctx, module) => {
   };
 
   controller.socialLogin = async (req) => {
-    console.log('socialLogin');
+    // console.log('socialLogin');
     const passport = await Passport.getByToken(req.data.p);
     const user = await passport.getUser();
     if (!user) {

@@ -50,6 +50,7 @@ export function getSchema(ctx, module) {
     },
     name: {
       type: String,
+      text: true,
     },
     role: {
       type: String,
