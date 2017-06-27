@@ -1,12 +1,14 @@
 {
   "name": "lsk-upload",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "author": "isuvorov",
   "license": "MIT",
   "scripts": {
     "release": "npm publish"
   },
   "dependencies": {
-    "multer": "1.3.0"
+    "aws-sdk": "^2.77.0",
+    "multer": "1.3.0",
+    "multer-s3": "^2.7.0"
   }
 }
