@@ -7,6 +7,7 @@ export default class UniversalSchema {
     sort: {},
     limit: 20,
     populate: [],
+    skip: 0,
     prepare: null,
   };
   static defaultOptions = {
@@ -19,11 +20,13 @@ export default class UniversalSchema {
       findByParams(incomeParams) {
         const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
 
+
         const res = this.find(params.filter)
           .sort(params.sort)
+          .skip(params.skip)
           .limit(params.limit);
         if (params.prepare) {
-          return this.prepare(res, params.prepare)
+          return this.prepare(res, params.prepare);
         }
 
         return res;
