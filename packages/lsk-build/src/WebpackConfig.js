@@ -48,9 +48,8 @@ export default class WebpackConfig {
       'process.env.NODE_ENV': JSON.stringify(this.getEnv()),
       __ENV__: JSON.stringify(this.getEnv()),
       __DEV__: this.getEnv() === 'development',
-      __STAGE__: this.getEnv() === 'stage',
       __PROD__: this.getEnv() === 'production',
-      '__STAGE(': `('${this.getStage()}' === `,
+      __STAGE__: this.getStage(),
     };
   }
 
