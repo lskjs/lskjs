@@ -24,6 +24,10 @@ export default class WebpackConfig {
     return this.env || 'development';
   }
 
+  getStage() {
+    return this.stage || 'development';
+  }
+
   isDebug() {
     if (this.debug == null) return true;
     return !!this.debug;
@@ -46,6 +50,7 @@ export default class WebpackConfig {
       __DEV__: this.getEnv() === 'development',
       __STAGE__: this.getEnv() === 'stage',
       __PROD__: this.getEnv() === 'production',
+      '__STAGE(': `('${this.getStage()}' === `,
     };
   }
 
