@@ -35,9 +35,13 @@ export default class Runner {
     return `${this.dirname}/node_modules/${p}/src`;
   }
 
+  getDistDir() {
+    return this.distDir || 'build';
+  }
+
   async clean() {
-    await del(['.tmp', 'build/*', '!build/.git'], { dot: true });
-    await makeDir('build/public');
+    await del([`${this.getDistDir()}/*`], { dot: true });
+    await makeDir(`${this.getDistDir()}/public`);
   }
 
   async prebuild() {
@@ -87,7 +91,7 @@ ${_.map(this.modules.modules, (val, key) => {
 
 
   async copy({ watch } = {}) {
-    await writeFile(this.resolvePath('build/package.json'), JSON.stringify({
+    await writeFile(this.resolvePath(`${this.getDistDir()}/package.json`), JSON.stringify({
       private: true,
       engines: this.pkg.engines,
       dependencies: this.pkg.dependencies,
@@ -110,7 +114,7 @@ ${_.map(this.modules.modules, (val, key) => {
 
   async traceWebpackConfig() {
     if (this.webpackConfigDist === false) return;
-    const webpackConfigDist = this.webpackConfigDist || `${this.dirname}/build/webpack.config.js`;
+    const webpackConfigDist = this.webpackConfigDist || `${this.getDistDir()}/webpack.config.js`;
     try {
       fs.writeFileSync(webpackConfigDist, stringify(this.webpackConfig, 2));
       console.log('Compiling webpack.config.js => ', webpackConfigDist);
@@ -244,6 +248,7 @@ ${_.map(this.modules.modules, (val, key) => {
   }
 
   async render(routes) {
+
     DEBUG && console.log('render', routes);
     if (!routes) {
       routes = [
@@ -256,7 +261,7 @@ ${_.map(this.modules.modules, (val, key) => {
     await Promise.all(routes.map(async (route, index) => {
       const url = `http://${server.host}${route}`;
       const fileName = route.endsWith('/') ? 'index.html' : `${path.basename(route, '.html')}.html`;
-      const dirName = path.join('build/public', route.endsWith('/') ? route : path.dirname(route));
+      const dirName = path.join(`${this.getDistDir()}/public`, route.endsWith('/') ? route : path.dirname(route));
       const dist = `${dirName}${fileName}`;
       const timeStart = new Date();
       const response = await fetch(url);
