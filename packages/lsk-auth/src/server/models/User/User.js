@@ -107,6 +107,7 @@ export function getSchema(ctx, module) {
   const { e400, e500 } = ctx.errors;
 
   schema.pre('save', async function (next) {
+    this.wasNew = this.isNew;
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }
