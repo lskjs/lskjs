@@ -1,15 +1,6 @@
 import _ from 'lodash';
 import { Passport } from 'passport';
 import onlineService from './server/onlineService';
-import Promise from 'bluebird';
-
-Promise.config = () => {}; // херов багфикс для телеграма
-let TelegramBot;
-try {
-  TelegramBot = require('node-telegram-bot-api');
-} catch (err) {
-  __DEV__ && console.log('TelegramBot init', err);
-}
 
 export default (ctx) => {
   return class AuthModule {
@@ -43,25 +34,7 @@ export default (ctx) => {
       this.config = _.get(ctx, 'config.auth', {});
 
       if (this.config.telegram) {
-        try {
-          this.tbot = new TelegramBot(this.config.telegram.token, { polling: true });
-          this.tbot.notify = (text) => {
-            try {
-              (this.config.telegram.notify || []).forEach((id) => {
-                try {
-                  this.tbot.sendMessage(id, text).catch((err) => { console.log('tbot.sendMessage err', err); });
-                } catch (err) {
-                  console.log('tbot.sendMessage err', err);
-                }
-              });
-            } catch (err) {
-              console.log('tbot.notify err', err);
-            }
-          };
-          // this.tbot.notify('Всем приветик в этом чатике');
-        } catch (err) {
-          console.log('TelegramBot', err);
-        }
+        this.tbot = require('./tbot').default(ctx, this);
       }
 
 

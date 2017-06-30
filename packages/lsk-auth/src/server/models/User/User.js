@@ -122,7 +122,7 @@ export function getSchema(ctx, module) {
     return _.omit(user, ['private', 'password']);
   };
 
-  schema.methods.genereateEmailApprovedLink = async function () {
+  schema.methods.generateEmailApproveLink = async function () {
     const token = jwt.sign({
       userId: this._id.toString(),
       email: this.email,
@@ -130,7 +130,6 @@ export function getSchema(ctx, module) {
     if (!this.private) this.private = {};
     this.private.approvedEmailToken = token;
     this.markModified('private');
-    // ctx.getUrl()
     return `${ctx.config.url}/api/module/auth/email/approve?t=${token}`; // TODO: сделать по умному
   };
 

@@ -101,7 +101,7 @@ export default (ctx, module) => {
     let emailSended = null;
     if (mailer) {
       try {
-        const link = await user.genereateEmailApprovedLink();
+        const link = await user.generateEmailApproveLink();
         mailer.send({
           to: user.getEmail(),
           template: 'approveEmail',
