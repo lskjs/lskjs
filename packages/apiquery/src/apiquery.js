@@ -100,6 +100,32 @@ ${JSON.stringify(res.json, null, 2)}
           status: res.status,
           statusText: res.statusText,
           message: `${type}: ${res.status} ${res.statusText}`,
+          ...(res.json || {}),
+        },
+      });
+    }
+    if (res.textErr) {
+      const type = 'TEXT_PARSE_ERROR';
+      await ctx.throwError({
+        ...ctx,
+        res,
+        err: {
+          type,
+          message: 'Ошибка передачи данных',
+          err: res.textErr,
+        },
+      });
+    }
+    if (res.jsonErr) {
+      const type = 'JSON_PARSE_ERROR';
+      await ctx.throwError({
+        ...ctx,
+        res,
+        err: {
+          type,
+          message: 'Ошибка сервера',
+          // message: type,
+          err: res.jsonErr,
         },
       });
     }
@@ -192,31 +218,12 @@ ${JSON.stringify(res.json, null, 2)}
     try {
       res.text = await result.text();
     } catch (err) {
-      const type = 'TEXT_PARSE_ERROR';
-      await ctx.throwError({
-        ...ctx,
-        res,
-        err: {
-          type,
-          message: 'Ошибка передачи данных',
-          err,
-        },
-      });
+      res.textErr = err;
     }
     try {
       res.json = JSON.parse(res.text);
     } catch (err) {
-      const type = 'JSON_PARSE_ERROR';
-      await ctx.throwError({
-        ...ctx,
-        res,
-        err: {
-          type,
-          message: 'Ошибка сервера',
-          // message: type,
-          err,
-        },
-      });
+      res.jsonErr = err;
     }
     return res;
   }
@@ -240,11 +247,10 @@ ${JSON.stringify(res.json, null, 2)}
 
     return Promise.race([
       res,
-      new Promise(function (resolve, reject) {
-        setTimeout(() => reject(new Error('fetch timeout')), ctx.timeout)
-      })
-    ])
-
+      new Promise((resolve, reject) => {
+        setTimeout(() => reject(new Error('fetch timeout')), ctx.timeout);
+      }),
+    ]);
   }
 
   ws(path = '', options = {}) {
