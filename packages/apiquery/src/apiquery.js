@@ -82,6 +82,15 @@ ${JSON.stringify(res.json, null, 2)}
 
   async afterFetch(ctx) {
     const { res, throwError } = ctx;
+    if (res.json && res.json.err) {
+      await throwError({
+        ...ctx,
+        err: {
+          type: 'CUSTOM_ERROR',
+          ...res.json.err,
+        },
+      });
+    }
     if (res.status >= 400) {
       const type = 'RES_STATUS_ERROR';
       await throwError({
@@ -91,15 +100,6 @@ ${JSON.stringify(res.json, null, 2)}
           status: res.status,
           statusText: res.statusText,
           message: `${type}: ${res.status} ${res.statusText}`,
-        },
-      });
-    }
-    if (res.json && res.json.err) {
-      await throwError({
-        ...ctx,
-        err: {
-          type: 'CUSTOM_ERROR',
-          ...res.json.err,
         },
       });
     }
@@ -198,7 +198,7 @@ ${JSON.stringify(res.json, null, 2)}
         res,
         err: {
           type,
-          message: type,
+          message: 'Ошибка передачи данных',
           err,
         },
       });
@@ -212,7 +212,8 @@ ${JSON.stringify(res.json, null, 2)}
         res,
         err: {
           type,
-          message: type,
+          message: 'Ошибка сервера',
+          // message: type,
           err,
         },
       });
@@ -263,7 +264,7 @@ ${JSON.stringify(res.json, null, 2)}
       if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
     }
     // console.log(opts.query, opts.query.token, this.authToken);
-    console.log({ opts }, this.createUrl(path, this.wsConfig), io);
+    // console.log({ opts }, this.createUrl(path, this.wsConfig), io);
     return io(
       this.createUrl(path, { ...this.wsConfig, ...params2 }),
       opts,
