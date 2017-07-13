@@ -50,7 +50,6 @@ export function getSchema(ctx, module) {
     },
     name: {
       type: String,
-      text: true,
     },
     role: {
       type: String,
@@ -107,7 +106,6 @@ export function getSchema(ctx, module) {
   const { e400, e500 } = ctx.errors;
 
   schema.pre('save', async function (next) {
-    this.wasNew = this.isNew;
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }
@@ -122,7 +120,7 @@ export function getSchema(ctx, module) {
     return _.omit(user, ['private', 'password']);
   };
 
-  schema.methods.generateEmailApproveLink = async function () {
+  schema.methods.genereateEmailApprovedLink = async function () {
     const token = jwt.sign({
       userId: this._id.toString(),
       email: this.email,
@@ -130,6 +128,7 @@ export function getSchema(ctx, module) {
     if (!this.private) this.private = {};
     this.private.approvedEmailToken = token;
     this.markModified('private');
+    // ctx.getUrl()
     return `${ctx.config.url}/api/module/auth/email/approve?t=${token}`; // TODO: сделать по умному
   };
 

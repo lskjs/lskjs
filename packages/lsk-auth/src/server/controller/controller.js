@@ -2,7 +2,7 @@ import validator from 'validator';
 import _ from 'lodash';
 import canonize from '../canonize';
 import canonizeUsername from '../canonizeUsername';
-import canonizeAndValidatePhone from '../canonizeAndValidatePhone';
+import transliterate from '../transliterate';
 
 export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
@@ -101,8 +101,8 @@ export default (ctx, module) => {
     let emailSended = null;
     if (mailer) {
       try {
-        const link = await user.generateEmailApproveLink();
-        mailer.send({
+        const link = await user.genereateEmailApprovedLink();
+        await mailer.send({
           to: user.getEmail(),
           template: 'approveEmail',
           params: {
@@ -120,7 +120,7 @@ export default (ctx, module) => {
     return {
       __pack: 1,
       signup: true,
-      // emailSended,
+      emailSended,
       user,
       token: user.generateAuthToken(),
     };
@@ -248,7 +248,7 @@ export default (ctx, module) => {
   };
 
   controller.socialLogin = async (req) => {
-    // console.log('socialLogin');
+    console.log('socialLogin');
     const passport = await Passport.getByToken(req.data.p);
     const user = await passport.getUser();
     if (!user) {
@@ -374,15 +374,15 @@ export default (ctx, module) => {
     if (!module.config.sms) throw '!module.config.sms';
     const smsConfig = module.config.sms;
 
-
-    const phone = canonizeAndValidatePhone(req.data.phone);
+    const { phone } = req.data;
     const code = _.random(100000, 999999);
     controller.lastCode = code;
-    const text = `Ваш проверочный код: ${code}`;
 
+    const smsText = `Ваш проверочный код: ${code}`;
     if (module.tbot) {
-      module.tbot.notify(`Номер: ${phone} Проверочный код: ${code}`)
+      module.tbot.notify(`Номер: ${phone}\n${smsText}`);
     }
+    const text = transliterate(smsText);
 
     let res;
     if (smsConfig.provider === 'bytehand') {
@@ -391,10 +391,14 @@ export default (ctx, module) => {
         to: phone,
         text,
       };
-      res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs })
-      .catch(err => {
-        console.log('bytehand err', err);
-      });
+      res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs });
+    } else if (smsConfig.provider === 'nexmo') {
+      const body = {
+        ...smsConfig.params,
+        to: phone,
+        text,
+      };
+      res = await ctx.api.fetch('https://rest.nexmo.com/sms/json', { body });
     } else {
       throw '!provider';
     }
@@ -416,8 +420,7 @@ export default (ctx, module) => {
 
   controller.phoneLogin = async (req, res, next) => {
     if (!module.config.sms) throw '!module.config.sms';
-    const { code } = req.data;
-    const phone = canonizeAndValidatePhone(req.data.phone);
+    const { phone, code } = req.data;
     const { User } = ctx.models;
     if (!((module.config.sms.defaultCode && code == module.config.sms.code) || code == controller.lastCode)) {
       throw 'Код не верный';
