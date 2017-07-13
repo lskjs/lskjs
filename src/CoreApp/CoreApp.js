@@ -11,6 +11,7 @@ import getDocsTemplate from './getDocsTemplate';
 import staticFileMiddleware from 'connect-static-file';
 
 export default class CoreApp extends ExpressApp {
+  Api = Api;
   init() {
     super.init(...arguments);
     this.log.trace('CoreApp init');
@@ -31,9 +32,7 @@ export default class CoreApp extends ExpressApp {
     this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
     this.log.debug('statics', this.statics);
-    this.Api = Api;
-    this.api = new Api();
-
+    this.api = new this.Api();
     this.config.ws && this.initWs();
   }
   getMiddlewares() {

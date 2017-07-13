@@ -2,7 +2,7 @@ import _ from 'lodash';
 import UniversalRouter from 'universal-router';
 import Core from '../Core';
 import Page from './Page';
-import Api from '../utils/ApiClient';
+import Api from 'apiquery';
 
 
 // TODO: вынести функции работы с хостнеймом куда нибудь
@@ -68,10 +68,6 @@ export default class Uapp extends Core {
   name='Uapp';
   Page = Page;
   Api = Api;
-  // constructor(props = {}) {
-  //   super(...arguments);
-  //   // Object.assign(this, props);
-  // }
 
   async init(props = {}) {
     await super.init();
@@ -111,18 +107,6 @@ export default class Uapp extends Core {
     return this.page;
   }
 
-  // initV2(props = {}) {
-  //   Object.assign(this, props);
-  //   if (!this.page) {
-  //     this.page = new this.Page();
-  //   }
-  //   this.page.init({}, { uapp: this })
-  //   return {
-  //     uapp: this,
-  //     page: this.page,
-  //     Page: this.Page,
-  //   };
-  // }
 
   // return page for req
   resolve(reqParams = {}) {

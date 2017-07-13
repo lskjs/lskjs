@@ -19,8 +19,6 @@ export default class UniversalSchema {
     this.statics = {
       findByParams(incomeParams) {
         const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
-
-
         const res = this.find(params.filter)
           .sort(params.sort)
           .skip(params.skip)
@@ -28,7 +26,6 @@ export default class UniversalSchema {
         if (params.prepare) {
           return this.prepare(res, params.prepare);
         }
-
         return res;
       },
       async prepareOne(obj) {
