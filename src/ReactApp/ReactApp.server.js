@@ -36,7 +36,7 @@ export default class ReactApp extends CoreApp {
     });
     try {
       await uapp.start();
-    } catch(err)  {
+    } catch (err) {
       this.log.error('uapp.start()', err)
       throw err;
     }

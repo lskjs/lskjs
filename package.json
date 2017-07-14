@@ -1,9 +1,9 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.15.1",
+  "version": "1.15.2",
   "description": "Lego Starter Kit — Node.js & React isomorphic app creator (Node.js, Express, React.js, Babel, PostCSS, Webpack)",
   "dependencies": {
-    "apiquery": "0.1.7",
+    "apiquery": "0.1.8",
     "babel-polyfill": "6.23.0",
     "babel-runtime": "6.23.0",
     "bcryptjs": "2.4.3",

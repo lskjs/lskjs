@@ -32,7 +32,10 @@ export default class CoreApp extends ExpressApp {
     this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
     this.log.debug('statics', this.statics);
-    this.api = new this.Api();
+    this.api = new this.Api({
+      url: this.config.url,
+      log: this.log,
+    });
     this.config.ws && this.initWs();
   }
   getMiddlewares() {
