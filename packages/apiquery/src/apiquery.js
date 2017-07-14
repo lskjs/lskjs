@@ -2,6 +2,7 @@
 import isPlainObject from 'lodash.isplainobject';
 import pick from 'lodash.pick';
 import qs from 'qs';
+import FormData from 'form-data';
 import io from './socket-io-universal';
 import trim from './trim';
 // import fetch from 'isomorphic-fetch';
@@ -244,7 +245,7 @@ ${JSON.stringify(res.json, null, 2)}
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
     const { url, ...params } = req;
-    console.log('@@@fetch', url, params);
+    // console.log('@@@fetch', url, params);
     const res = fetch(url, params)
       .then(async (result) => {
         ctx.res = await parseResult(ctx, result);

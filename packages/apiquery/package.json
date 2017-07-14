@@ -1,6 +1,6 @@
 {
   "name": "apiquery",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "http + websockets api client for Web, Node.js and React Native",
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "dev": "DEBUG=1 npm run build -- --watch"
   },
   "dependencies": {
+    "form-data": "2.2.0",
     "lodash.isplainobject": "4.0.6",
     "lodash.pick": "4.4.0",
     "qs": "6.4.0",
