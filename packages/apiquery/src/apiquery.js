@@ -167,18 +167,25 @@ ${JSON.stringify(res.json, null, 2)}
 
     const body = params.body || params.data;
 
-    if (isPlainObject(body)) {
-      req._body = body;
-      req.body = JSON.stringify(body);
-    } else {
-      req._body = body;
-      req.body = body;
-    }
     if (!req.headers) req.headers = {};
     if (!req.headers.Accept) req.headers.Accept = 'application/json';
     if (!req.headers['Content-Type']) req.headers['Content-Type'] = 'application/json; charset=utf-8';
     if (req.headers['Content-Type'] === '!') {
       delete req.headers['Content-Type'];
+    }
+
+    req._body = body;
+    req.body = body;
+    if (isPlainObject(body)) {
+      if (req.headers['Content-Type'] && req.headers['Content-Type'].includes('application/json')) {
+        req.body = JSON.stringify(body);
+      } else {
+        const form = new FormData();
+        Object.keys(body).forEach((key) => {
+          form.append(key, body[key]);
+        });
+        req.body = form;
+      }
     }
     const authToken = (params.authToken || this.authToken);
     if (!req.headers.Authorization && authToken) {
@@ -237,6 +244,7 @@ ${JSON.stringify(res.json, null, 2)}
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
     const { url, ...params } = req;
+    console.log('@@@fetch', url, params);
     const res = fetch(url, params)
       .then(async (result) => {
         ctx.res = await parseResult(ctx, result);
