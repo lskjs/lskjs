@@ -1,7 +1,6 @@
 import mongooseLib from 'mongoose';
 import _ from 'lodash';
 
-
 export default (ctx, params) => {
   ctx.log.trace('db init');
   const mongoose = new mongooseLib.Mongoose();
@@ -12,7 +11,6 @@ export default (ctx, params) => {
 
   mongoose.run = () => {
     ctx.log.trace('db run');
-    console.log(12312312);
     return mongoose.connect(params.uri, options);
   };
   mongoose.reconnect = () => {
