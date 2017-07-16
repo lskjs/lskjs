@@ -10,10 +10,10 @@ export default (ctx, params) => {
 
   mongoose.Promise = ctx.Promise || global.Promise;
 
-
   mongoose.run = () => {
     ctx.log.trace('db run');
-    return mongoose.createConnection(params.uri, options);
+    console.log(12312312);
+    return mongoose.connect(params.uri, options);
   };
   mongoose.reconnect = () => {
     ctx.log.trace('db reconnect');

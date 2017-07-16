@@ -1,18 +1,7 @@
 import mongoose from 'mongoose';
 import _ from 'lodash';
 
-export default class UniversalSchema {
-  static defaultParams = {
-    filter: {},
-    sort: {},
-    limit: 20,
-    populate: [],
-    skip: 0,
-    prepare: null,
-  };
-  static defaultOptions = {
-    timestamps: true,
-  };
+class UniversalSchema {
   constructor(schema = {}, options = {}) {
     this.schema = schema;
     this.options = Object.assign({}, this.constructor.defaultOptions, options);
@@ -128,3 +117,17 @@ export default class UniversalSchema {
   }
 
 }
+
+UniversalSchema.defaultParams = {
+  filter: {},
+  sort: {},
+  limit: 20,
+  populate: [],
+  skip: 0,
+  prepare: null,
+};
+UniversalSchema.defaultOptions = {
+  timestamps: true,
+};
+
+export default UniversalSchema;
