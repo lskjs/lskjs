@@ -38,6 +38,11 @@ export default class WebpackConfig {
     return !!this.sourcemap;
   }
 
+  isCssSourcemap() {
+    if (this.cssSourcemap == null) return false;
+    return !!this.cssSourcemap;
+  }
+
   isVerbose() {
     return !!this.verbose;
   }
@@ -154,7 +159,7 @@ export default class WebpackConfig {
           preExt: 'm?',
           loaders: [
             `css-loader?${JSON.stringify({
-              sourceMap: this.isSourcemap(),
+              sourceMap: this.isCssSourcemap(),
               modules: true,
               localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
               minimize: !this.isDebug(),
@@ -165,7 +170,7 @@ export default class WebpackConfig {
           preExt: 'g',
           loaders: [
             `css-loader?${JSON.stringify({
-              sourceMap: this.isSourcemap(),
+              sourceMap: this.isCssSourcemap(),
               modules: false,
               minimize: !this.isDebug(),
             })}`,
@@ -329,21 +334,21 @@ export default class WebpackConfig {
           resolve: require('./utils/resolve-id'),
         }),
         require('postcss-mixins')(),
-        require('postcss-custom-properties')(),
+        // require('postcss-custom-properties')(),
         require('postcss-simple-vars')(), // / !
-        require('postcss-custom-media')(),
-        require('postcss-media-minmax')(),
-        require('postcss-custom-selectors')(),
-        require('postcss-calc')(),
+        // require('postcss-custom-media')(),
+        // require('postcss-media-minmax')(),
+        // require('postcss-custom-selectors')(),
+        // require('postcss-calc')(),
         // require('postcss-nesting')(),
         require('postcss-color-function')(),
-        require('pleeease-filters')(),
-        require('pixrem')(),
-        require('postcss-selector-matches')(),
-        require('postcss-selector-not')(),
-        require('postcss-animation')(), // / !
-        require('rucksack-css')(), // / !
-        require('lost')(), // / !
+        // require('pleeease-filters')(),
+        // require('pixrem')(),
+        // require('postcss-selector-matches')(),
+        // require('postcss-selector-not')(),
+        // require('postcss-animation')(), // / !
+        // require('rucksack-css')(), // / !
+        // require('lost')(), // / !
         require('postcss-nested')(), // / !
         require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
       ],
