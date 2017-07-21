@@ -12,18 +12,15 @@ export default (ctx) => {
   return class LskUpload {
     async init() {
       this.config = ctx.config.upload;
-      console.log('this.config', this.config);
-
+      if (!this.config.url) {
+        this.config.url = ctx.config.url;
+      }
       if (this.config.s3) {
         this.s3 = new aws.S3(this.config.s3);
       }
-
       this.storage = this.getStorage();
       this.multer = this.getMulter();
-
-      // this.models = getModels(ctx);
     }
-
 
     getFileType(file) {
       if (file && file.originalname) {
@@ -71,23 +68,38 @@ export default (ctx) => {
         throw e403('Guest can not upload files');
       }
 
-      return path;
+      let fileName;
+      if (config.allowSetFilename) {
+        fileName = file.originalname;
+      } else {
+        fileName = `${Date.now()}_${_.random(0, 1000)}.${this.getFileType(file)}`;
+      }
+      const { prefix = '' } = config;
+      const path2 = `${path}/${prefix}${fileName}`;
+      console.log({ path2 });
+
+      return path2;
     }
 
     getS3Storage() {
       return multerS3({
         s3: this.s3,
         bucket: this.config.s3.bucket,
-        // metadata: function (req, file, cb) {
-        //   cb(null, {fieldName: file.fieldname});
-        // },
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read',
+        key3: (req, file, cb) => {
+          const filename = path.parse(file.originalname);
+          // console.log({ req, file });
+          console.log(`avatar_${req.user._id}.${filename.ext}`);
+          cb(null, `avatar_${req.user._id}.${filename.ext}`);
+        },
         key: async (req, file, cb) => {
           let filename;
           try {
-            console.log('req, file', req, file);
+            console.log('req, file', file);
             filename = this.getFilePath(req, file);
             console.log('filename', filename);
-            filename = filename.replace(/_/g, '/');
+            filename = filename.replace(/\//g, '__');
             console.log('filename2', filename);
           } catch (err) {
             return cb(err);
@@ -100,7 +112,7 @@ export default (ctx) => {
       const config = ctx.config.upload;
       const storage = multer.diskStorage({
         destination: (req, file, cb) => {
-          console.log('destination');
+          // console.log('destination');
           let path;
           let dirname;
           try {
@@ -121,7 +133,7 @@ export default (ctx) => {
           } catch (err) {
             return cb(err);
           }
-          console.log('filename', filename);
+          // console.log('filename', filename);
           // this.createDir(filename);
           return cb(null, filename);
         },
@@ -145,6 +157,11 @@ export default (ctx) => {
         const fileSize = parseFloat(config.maxSize) * 1024 * 1024;
         limits.fileSize = fileSize;
       }
+      // console.log('getMulter', {
+      //   storage: this.storage,
+      //   limits,
+      //   fileFilter,
+      // });
       return multer({
         storage: this.storage,
         limits,
@@ -155,26 +172,43 @@ export default (ctx) => {
       const { e400, e403 } = ctx.errors;
       const config = ctx.config.upload;
 
-      const api = ctx.asyncRouter();
-      api.post('/many', this.multer.any(), async (req) => {
-        const { files = [] } = req;
-        return files.map((file) => {
+
+      function processFile(file) {
+        if (config.s3) {
           return {
-            url: `${config.url}/${file.path}`,
-            path: `/${file.path}`,
+            name: file.fieldname,
+            url: file.location,
+            path: file.location,
+            relative: `/${file.key}`,
+            mimetype: file.contentType,
+            filename: file.originalname,
           };
-        });
-      });
-      api.post('/', this.multer.single('file'), async (req) => {
-        // console.log(req.file);
-        const { file } = req;
+        }
+
         return {
           name: file.fieldname,
           url: `${config.url}/${file.path}`,
           path: `/${file.path}`,
+          relative: `/${file.path}`,
           mimetype: file.mimetype,
           filename: file.originalname,
         };
+      }
+
+      const api = ctx.asyncRouter();
+      api.post('/many', this.multer.any(), async (req) => {
+        const { files = [] } = req;
+        return files.map(processFile);
+      });
+
+      const upload = multer();
+      // api.post('/', this.multer.single('file'), async (req) => {
+      api.post('/', this.multer.single('file'), async (req) => {
+        const { file } = req;
+        if (!file) {
+          throw '!file';
+        }
+        return processFile(file);
       });
       return api;
     }
