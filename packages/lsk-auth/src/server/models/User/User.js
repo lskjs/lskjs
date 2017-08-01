@@ -87,7 +87,14 @@ export function getSchema(ctx, module) {
     return Math.random().toString(36).substr(2, length);
   };
   schema.methods.toJSON = function () {
-    return _.omit(this.toObject(), ['password']);
+    const objs = _.omit(this.toObject(), ['password', 'private']);
+
+    const visitedAt = module.online.visitedAt[this._id];
+    if (visitedAt) {
+      objs.visitedAt = visitedAt;
+    }
+
+    return objs;
   };
   schema.methods.getIdentity = function (params = {}) {
     const object = _.pick(this.toObject(), ['_id', 'username', 'name', 'avatar', 'role']);
@@ -106,6 +113,7 @@ export function getSchema(ctx, module) {
   const { e400, e500 } = ctx.errors;
 
   schema.pre('save', async function (next) {
+    this.wasNew = this.isNew;
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }

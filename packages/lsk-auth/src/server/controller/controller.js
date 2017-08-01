@@ -385,6 +385,7 @@ export default (ctx, module) => {
     const text = transliterate(smsText);
 
     let res;
+    // console.log('smsConfig.provider', smsConfig.provider);
     if (smsConfig.provider === 'bytehand') {
       const qs = {
         ...smsConfig.params,
@@ -398,7 +399,19 @@ export default (ctx, module) => {
         to: phone,
         text,
       };
-      res = await ctx.api.fetch('https://rest.nexmo.com/sms/json', { body });
+      // console.log('https://rest.nexmo.com/sms/json', { body });
+      res = await ctx.api.fetch('https://rest.nexmo.com/sms/json', {
+        method: 'POST',
+        // headers: {
+        //   'Content-Type': '!',
+        // },
+        body,
+      });
+      // console.log(res.messages[0].status !== 0, res.messages[0].status, JSON.stringify(res, null, 2));
+      if (res.messages[0].status !== '0') {
+        throw res.messages[0]['error-text'];
+        // throw res.messages[0].errorText;
+      }
     } else {
       throw '!provider';
     }
@@ -409,6 +422,7 @@ export default (ctx, module) => {
     if (__DEV__) {
       pack.code = code;
     }
+    // console.log('result', JSON.stringify(pack, null, 2));
     return pack;
   };
 
