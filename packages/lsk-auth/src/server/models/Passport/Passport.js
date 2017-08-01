@@ -89,18 +89,14 @@ export function getSchema(ctx, module) {
 
 
   schema.methods.getStrategy = function () {
-    console.log('getStrategy');
     const strategy = module._strategies[this.provider]
-    console.log({strategy});
     return strategy
   }
 
   schema.methods.updateDataAndSave = async function () {
     const strategy = this.getStrategy()
     if (!strategy) return null;
-    console.log('before updateToken', strategy);
     await strategy.updateToken(this);
-    console.log('after updateToken');
     return strategy.updatePassport({
       accessToken: this.token,
       refreshToken: this.refreshToken,
