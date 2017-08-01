@@ -2,7 +2,7 @@ import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import canonizeUsername from '../../canonizeUsername';
-export function getSchema(ctx) {
+export function getSchema(ctx, module) {
   const mongoose = ctx.db;
   const schema = new UniversalSchema({
     userId: {
@@ -87,10 +87,31 @@ export function getSchema(ctx) {
     return this.findById(_id);
   };
 
+
+  schema.methods.getStrategy = function () {
+    console.log('getStrategy');
+    const strategy = module._strategies[this.provider]
+    console.log({strategy});
+    return strategy
+  }
+
+  schema.methods.updateDataAndSave = async function () {
+    const strategy = this.getStrategy()
+    if (!strategy) return null;
+    console.log('before updateToken', strategy);
+    await strategy.updateToken(this);
+    console.log('after updateToken');
+    return strategy.updatePassport({
+      accessToken: this.token,
+      refreshToken: this.refreshToken,
+      passport: this,
+    })
+  };
+
   return schema;
 }
 // export default getSchema;
 //
-export default(ctx) => {
-  return getSchema(ctx).getMongooseModel(ctx.db);
+export default(ctx, module) => {
+  return getSchema(ctx, module).getMongooseModel(ctx.db);
 };

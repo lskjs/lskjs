@@ -36,8 +36,6 @@ export default (ctx) => {
       if (this.config.telegram) {
         this.tbot = require('./tbot').default(ctx, this);
       }
-
-
       if (!this.config.socials) this.config.socials = {};
       this.initOnlineService();
       this.models = this.getModels();
@@ -58,7 +56,7 @@ export default (ctx) => {
         if (!strategy) return null;
         const { providerName } = strategy;
         if (!this.config.socials[providerName]) return null;
-        this._strategies[providerName] = true;
+        this._strategies[providerName] = strategy;
         this.passport.use(strategy.getStrategy(strategy));
       });
       // if (this.strategies) {

@@ -64,6 +64,10 @@ export default (ctx, module) => class Strategy {
     return passport.save();
   }
 
+  async updateToken(passport) {
+
+  }
+
   async getProfile(passport) {
     return {};
   }

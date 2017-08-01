@@ -1,7 +1,8 @@
 import Youtube from 'passport-youtube-v3';
 import _ from 'lodash';
+import Api from 'apiquery';
 
-export default (ctx, { Strategy }) => {
+export default (ctx, { Strategy, config }) => {
   return class YoutubeStrategy extends Strategy {
     Strategy = Youtube.Strategy
     providerName = 'youtube'
@@ -14,6 +15,49 @@ export default (ctx, { Strategy }) => {
         ];
       }
       return config;
+    }
+    async updateToken(passport) {
+      const ytConfig = _.get(config, 'socials.youtube.config');
+      if (!ytConfig) return null;
+      const api = new Api();
+      try {
+        const body = Api.qs.stringify({
+          refresh_token: passport.refreshToken,
+          client_id: ytConfig.clientID,
+          client_secret: ytConfig.clientSecret,
+          grant_type: 'refresh_token',
+        });
+        const res = await Api.fetch(
+          'https://www.googleapis.com/oauth2/v4/token',
+          {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body,
+          }
+        );
+        const data = res.json();
+        if (data.access_token) {
+          this.accessToken = data.access_token;
+        }
+        // TODO: сначала протестить
+        // if (data.refresh_token) {
+        //   this.refreshToken = data.refresh_token;
+        // }
+        // console.log(await res.text());
+      } catch (err) {
+        console.log('updateToken err', err.message);
+      }
+
+      return this.accessToken;
+
+      // if (!config.scope) {
+      //   config.scope = [
+      //     'https://www.googleapis.com/auth/youtube.readonly',
+      //   ];
+      // }
+      // return config;
     }
 
     async getProfile(passport) {
