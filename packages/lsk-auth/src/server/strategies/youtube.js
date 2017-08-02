@@ -46,11 +46,12 @@ export default (ctx, { Strategy, config }) => {
         //   this.refreshToken = data.refresh_token;
         // }
         // console.log(await res.text());
+        return data;
       } catch (err) {
         console.log('updateToken err', err.message);
       }
 
-      return this.accessToken;
+      return null;
 
       // if (!config.scope) {
       //   config.scope = [
