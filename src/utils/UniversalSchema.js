@@ -72,6 +72,7 @@ class UniversalSchema {
     _.forEach(this.indexes, (args) => {
       schema.index(...args);
     });
+    schema._uschema = this;
     return schema;
   }
 
