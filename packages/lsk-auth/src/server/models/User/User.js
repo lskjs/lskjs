@@ -113,6 +113,11 @@ export function getSchema(ctx, module) {
   const { e400, e500 } = ctx.errors;
 
   schema.pre('save', async function (next) {
+    await this.preSave();
+    next();
+  });
+
+  schema.methods.preSave = async function () {
     this.wasNew = this.isNew;
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
@@ -120,8 +125,7 @@ export function getSchema(ctx, module) {
     if (this.isModified('profile')) {
       this.name = fullName(this.profile) || sample.fullName;
     }
-    return next();
-  });
+  };
 
   schema.methods.toJSON = function () {
     const user = this.toObject();
