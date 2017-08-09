@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import get from 'lodash/get';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
@@ -12,7 +13,7 @@ async function hashPassword(password) {
   return await bcryptHash(password, salt);
 }
 
-const sample = {
+const sample2 = {
   avatar: '/assets/no-avatar.png',
   fullName: 'Счастливый Пользователь',
 };
@@ -30,6 +31,7 @@ function fullName(profile) {
 
 
 export function getSchema(ctx, module) {
+  const sample = get(module, 'config.sample', sample2);
   const schema = new UniversalSchema({
     username: {
       type: String,
@@ -122,6 +124,7 @@ export function getSchema(ctx, module) {
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }
+    console.log('preSave', this.name, fullName(this.profile), sample.fullName);
     if (this.isModified('profile')) {
       this.name = fullName(this.profile) || sample.fullName;
     }
