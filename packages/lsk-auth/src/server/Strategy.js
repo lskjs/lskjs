@@ -40,6 +40,7 @@ export default (ctx, module) => class Strategy {
         }
         params.passport = passport;
         await this.updatePassport(params);
+        await passport.save();
         params.redirect = this.getSuccessRedirect(params);
         return done(null, params);
       },
@@ -58,14 +59,18 @@ export default (ctx, module) => class Strategy {
   }
 
   async updatePassport({ accessToken, refreshToken, passport }) {
-    passport.token = accessToken;
-    passport.refreshToken = refreshToken;
+    if (accessToken) passport.token = accessToken;
+    if (refreshToken) passport.refreshToken = refreshToken;
     passport.profile = await this.getProfile(passport);
-    return passport.save();
+    // return passport
   }
+  //
+  // async updateToken(passport) {
+  //
+  // }
 
-  async updateToken(passport) {
-
+  async updateTokens(passport) {
+    // return passport;
   }
 
   async getProfile(passport) {

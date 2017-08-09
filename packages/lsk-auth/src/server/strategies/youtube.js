@@ -16,42 +16,43 @@ export default (ctx, { Strategy, config }) => {
       }
       return config;
     }
-    async updateToken(passport) {
+
+    async updateTokens(passport) {
       const ytConfig = _.get(config, 'socials.youtube.config');
       if (!ytConfig) return null;
       const api = new Api();
-      try {
-        const body = Api.qs.stringify({
-          refresh_token: passport.refreshToken,
-          client_id: ytConfig.clientID,
-          client_secret: ytConfig.clientSecret,
-          grant_type: 'refresh_token',
-        });
-        const res = await Api.fetch(
-          'https://www.googleapis.com/oauth2/v4/token',
-          {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body,
-          }
-        );
-        const data = res.json();
-        if (data.access_token) {
-          this.accessToken = data.access_token;
+      const body = Api.qs.stringify({
+        refresh_token: passport.refreshToken,
+        client_id: ytConfig.clientID,
+        client_secret: ytConfig.clientSecret,
+        grant_type: 'refresh_token',
+      });
+      const res = await Api.fetch(
+        'https://www.googleapis.com/oauth2/v4/token',
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body,
         }
-        // TODO: сначала протестить
-        // if (data.refresh_token) {
-        //   this.refreshToken = data.refresh_token;
-        // }
-        // console.log(await res.text());
-        return data;
-      } catch (err) {
-        console.log('updateToken err', err.message);
+      );
+      const data = await res.json();
+      const ret = {}
+      // console.log('updateTokens', data);
+      if (data.access_token) {
+        // console.log('updateTokens.access_token', passport.token, data.access_token, passport.token === data.access_token);
+        passport.token = data.access_token;
+        ret.accessToken = data.access_token;
       }
+      // TODO: сначала протестить
+      if (data.refresh_token) {
+        // passport.refreshToken = data.refresh_token;
+        __DEV__ && console.log('TODO: сначала протестить', passport.refreshToken, data.refresh_token);
+        ret.refreshToken = data.refresh_token;
+      }
+      return ret;
 
-      return null;
 
       // if (!config.scope) {
       //   config.scope = [

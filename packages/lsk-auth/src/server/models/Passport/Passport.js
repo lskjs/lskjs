@@ -93,16 +93,28 @@ export function getSchema(ctx, module) {
     return strategy
   }
 
-  schema.methods.updateDataAndSave = async function () {
+  schema.methods.updateData = async function () {
     const strategy = this.getStrategy()
     if (!strategy) return null;
-    await strategy.updateToken(this);
-    return strategy.updatePassport({
-      accessToken: this.token,
-      refreshToken: this.refreshToken,
+    await strategy.updateTokens(this);
+    await strategy.updatePassport({
       passport: this,
     })
   };
+  // schema.methods.updateToken = async function () {
+  //   const strategy = this.getStrategy()
+  //   if (!strategy) return null;
+  //   const tokens = await strategy.updateToken(this);
+  //   // console.log('schema.methods.updateToken ', tokens);
+  //   // this
+  //   //
+  //   return strategy.updatePassport({
+  //     accessToken: tokens.accessToken || this.token,
+  //     refreshToken: this.refreshToken,
+  //     // refreshToken: accessToken.refreshToken,
+  //     passport: this,
+  //   })
+  // };
 
   return schema;
 }

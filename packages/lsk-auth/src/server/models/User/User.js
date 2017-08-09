@@ -124,7 +124,6 @@ export function getSchema(ctx, module) {
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }
-    console.log('preSave', this.name, fullName(this.profile), sample.fullName);
     if (this.isModified('profile')) {
       this.name = fullName(this.profile) || sample.fullName;
     }
