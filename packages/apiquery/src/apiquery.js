@@ -263,25 +263,37 @@ ${JSON.stringify(res.json, null, 2)}
   }
 
   ws(path = '', options = {}) {
+    // console.log('api.ws @#');
     if (!this.wsConfig) {
       console.error('Вы не можете использовать api.ws без сокет конфигов');
       return null;
     }
     const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
-
+    // console.log('WS WS WS',
+    //   {
+    //     q: this.wsConfig && this.wsConfig.options,
+    //     w: options,
+    //     e: opts,
+    //     r: Object.assign({}, this.wsConfig && this.wsConfig.options, options)
+    //   }
+    // );
     // console.log(opts.query, opts.query.token, this.authToken);
     if (!(this.wsConfig && this.wsConfig.tokenInCookie)) {
       if (opts.query && !opts.query.token && this.authToken) opts.query.token = this.authToken;
     }
     const params2 = {};
     if (!this.wsConfig.tokenInCookie) {
-      if (!params2.qs) params2.qs = {};
+      if (!params2.qs) params2.qs = {
+        ...(opts.query || {})
+      };
       if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
     }
-    // console.log(opts.query, opts.query.token, this.authToken);
-    // console.log({ opts }, this.createUrl(path, this.wsConfig), io);
+
+    // console.log('WS opts.query, opts.query.token, this.authToken', opts.query, opts.query.token, this.authToken);
+    const url = this.createUrl(path, { ...this.wsConfig, ...params2 });
+    // console.log('ws url', {wsConfig: this.wsConfig, path, options, url, opts,} );
     return io(
-      this.createUrl(path, { ...this.wsConfig, ...params2 }),
+      url,
       opts,
     );
   }
