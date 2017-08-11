@@ -35,11 +35,13 @@ export default class ApiClient {
     this.base = params.base;
     this.url = params.url;
     this.wsConfig = params.ws;
+    this.wsConnections = {};
     this.authToken = params.authToken || null;
   }
 
   setAuthToken(authToken) {
     this.authToken = authToken;
+    this.wsReconnect();
   }
 
   static createReq(req) {
@@ -262,8 +264,21 @@ ${JSON.stringify(res.json, null, 2)}
     ]);
   }
 
+  wsReconnect() {
+    if (this.log && this.log.trace) {
+      this.log.trace('[api] WS.wsReconnect', Object.keys(this.wsConnections));
+    }
+    Object.keys(this.wsConnections).forEach((key) => {
+      const [path, options, socket] = this.wsConnections[key];
+      socket.disconnect();
+      this.ws(path, options);
+    });
+  }
+
   ws(path = '', options = {}) {
-    // console.log('api.ws @#');
+    // console.log('api.ws', path)
+    const key = path + JSON.stringify(options);
+    if (this.wsConnections[key]) return this.wsConnections[key];
     if (!this.wsConfig) {
       console.error('Вы не можете использовать api.ws без сокет конфигов');
       return null;
@@ -283,19 +298,32 @@ ${JSON.stringify(res.json, null, 2)}
     }
     const params2 = {};
     if (!this.wsConfig.tokenInCookie) {
-      if (!params2.qs) params2.qs = {
-        ...(opts.query || {})
-      };
+      if (!params2.qs) {
+        params2.qs = {
+          ...(opts.query || {}),
+        };
+      }
       if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
     }
 
     // console.log('WS opts.query, opts.query.token, this.authToken', opts.query, opts.query.token, this.authToken);
     const url = this.createUrl(path, { ...this.wsConfig, ...params2 });
     // console.log('ws url', {wsConfig: this.wsConfig, path, options, url, opts,} );
-    return io(
+    if (this.log && this.log.trace) {
+      this.log.trace('[api] WS', url, options);
+      // this.log.trace('[api]', req.method, req.url, req._body, req);
+    }
+    const socket = io(
       url,
       opts,
     );
+
+    this.wsConnections[key] = [path, options, socket];
+    socket.on('disconnect', () => {
+      delete this.wsConnections[key];
+    });
+
+    return socket;
   }
   ws2(path = '', params = {}) {
     if (!this.wsConfig) {
