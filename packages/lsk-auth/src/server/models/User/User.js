@@ -116,8 +116,8 @@ export function getSchema(ctx, module) {
 
 
   schema.methods.preSave = async function () {
-    console.log('User.methods.preSave');
-    this.wasNew = this.isNew;
+    console.log('User.methods.preSave', this.isNew, this.wasNew);
+    this.wasNew = this.wasNew || this.isNew;
     if (this.isModified('password')) {
       this.password = await hashPassword(this.password);
     }
@@ -126,17 +126,17 @@ export function getSchema(ctx, module) {
     }
   };
   schema.pre('save', async function (next) {
-    console.log('schema.pre(save');
+    console.log('schema.pre(save', this.isNew);
     await this.preSave();
     next();
   });
 
 
   schema.methods.postSave = async function () {
-    console.log('User.methods.postSave');
+    console.log('User.methods.postSave', this.wasNew);
   };
   schema.post('save', async function () {
-    console.log('schema.post(save');
+    console.log('schema.post(save', this.wasNew);
     await this.postSave();
     // next();
   });
