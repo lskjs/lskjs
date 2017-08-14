@@ -1,6 +1,6 @@
 {
   "name": "apiquery",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "description": "http + websockets api client for Web, Node.js and React Native",
   "repository": {
     "type": "git",

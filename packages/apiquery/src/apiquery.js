@@ -47,6 +47,12 @@ function ioMock(...initParams) {
         const [name, ...params] = event;
         mock.connection[name](...params);
       });
+
+      mock.connection.recreateSocket = (...newInitParams2) => {
+        __DEV__ && console.log('recreateSocket2', ...newInitParams2);
+        return mock.recreateSocket(...newInitParams2);
+      }
+      __DEV__ && console.log('recreateConnection');
       return mock.connection;
     },
   };
@@ -299,13 +305,15 @@ ${JSON.stringify(res.json, null, 2)}
 
   wsReconnect() {
     if (this.log && this.log.trace) {
-      this.log.trace('[api] WS.wsReconnect', Object.keys(this.wsConnections));
+      this.log.trace('[api] WS.wsReconnect ###', Object.keys(this.wsConnections));
     }
 
     Object.keys(this.wsConnections).forEach((key) => {
       const [path, options, socket] = this.wsConnections[key];
+      __DEV__ && this.log.trace('[api] prepare reconnect @@', socket);
+      __DEV__ && console.log('prepare reconnect @@', socket);
       if (!socket.recreateSocket) {
-        console.log('!socket.recreateSocket', socket);
+        __DEV__ && console.log('!socket.recreateSocket', socket);
       }
       socket.recreateSocket(path, options);
       // socket.disconnect();
