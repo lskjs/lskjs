@@ -1,7 +1,6 @@
-import ApiClientBase from 'lego-starter-kit/CoreApp/api/api.client';
 import _ from 'lodash';
 
-export default class ApiClient extends ApiClientBase {
+export default ApiClientBase => class ApiClient extends ApiClientBase {
   async throwError({ err }) {
     __DEV__ && console.error('throwError', err);
     const message = err && err.message || err;
@@ -84,5 +83,4 @@ export default class ApiClient extends ApiClientBase {
     });
     return res.data;
   }
-
-}
+};

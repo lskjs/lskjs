@@ -1,7 +1,7 @@
 import BaseUapp from 'lego-starter-kit/Uapp';
 export default class Uapp extends BaseUapp {
 
-  Api = require('./Api').default;
+  Api = require('./Api').default(this.Api);
   Page = require('./Page').default;
   getRoutes() {
     return require('./routes').default;
@@ -38,7 +38,6 @@ export default class Uapp extends BaseUapp {
     return {
       ...super.provide(),
       auth: this.auth,
-      api: this.api,
       user: this.user,
     };
   }
