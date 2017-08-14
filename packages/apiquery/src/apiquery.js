@@ -304,6 +304,9 @@ ${JSON.stringify(res.json, null, 2)}
 
     Object.keys(this.wsConnections).forEach((key) => {
       const [path, options, socket] = this.wsConnections[key];
+      if (!socket.recreateSocket) {
+        console.log('!socket.recreateSocket', socket);
+      }
       socket.recreateSocket(path, options);
       // socket.disconnect();
       // this.ws(path, options);
@@ -348,7 +351,7 @@ ${JSON.stringify(res.json, null, 2)}
       this.log.trace('[api] WS', url, options);
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
-    const socket = io(
+    const socket = this.io(
       url,
       opts,
     );
