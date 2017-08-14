@@ -20,6 +20,39 @@ const FETCH_PARAMS = [
   'cache',
 ];
 
+function ioMock(...initParams) {
+  __DEV__ && console.log('ioMock', ...initParams);
+  // const socket = io(...params)
+  const mock = {
+    Manager: io.Manager,
+    Socket: io.Socket,
+    connection: null,
+    events: [],
+    on(...params) {
+      mock.events.push(['on', ...params]);
+    },
+    use(...params) {
+      mock.events.push(['use', ...params]);
+    },
+    disconnect(...params) {
+      mock.connection.disconnect(...params);
+    },
+    recreateSocket(...newInitParams) {
+      __DEV__ && console.log('recreateSocket', ...newInitParams);
+      if (mock.connection && mock.connection.disconnect) {
+        mock.connection.disconnect();
+      }
+      mock.connection = io(...newInitParams);
+      mock.events.forEach((event) => {
+        const [name, ...params] = event;
+        mock.connection[name](...params);
+      });
+      return mock.connection;
+    },
+  };
+  return mock.recreateSocket(...initParams);
+}
+
 // const DEBUG = __DEV__;
 
 export default class ApiClient {
@@ -29,7 +62,7 @@ export default class ApiClient {
 
   constructor(params = {}) {
     // console.log('ApiClient', params);
-    this.io = io;
+    this.io = ioMock;
     this.log = params.log;
     this.root = params.root;
     this.base = params.base;
@@ -268,10 +301,12 @@ ${JSON.stringify(res.json, null, 2)}
     if (this.log && this.log.trace) {
       this.log.trace('[api] WS.wsReconnect', Object.keys(this.wsConnections));
     }
+
     Object.keys(this.wsConnections).forEach((key) => {
       const [path, options, socket] = this.wsConnections[key];
-      socket.disconnect();
-      this.ws(path, options);
+      socket.recreateSocket(path, options);
+      // socket.disconnect();
+      // this.ws(path, options);
     });
   }
 
