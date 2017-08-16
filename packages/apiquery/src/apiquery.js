@@ -21,7 +21,7 @@ const FETCH_PARAMS = [
 ];
 
 function ioMock(...initParams) {
-  __DEV__ && console.log('ioMock', ...initParams);
+  // __DEV__ && console.log('ioMock', ...initParams);
   // const socket = io(...params)
   const mock = {
     Manager: io.Manager,
@@ -38,7 +38,7 @@ function ioMock(...initParams) {
       mock.connection.disconnect(...params);
     },
     recreateSocket(...newInitParams) {
-      __DEV__ && console.log('recreateSocket', ...newInitParams);
+      // __DEV__ && console.log('recreateSocket', ...newInitParams);
       if (mock.connection && mock.connection.disconnect) {
         mock.connection.disconnect();
       }
@@ -49,10 +49,10 @@ function ioMock(...initParams) {
       });
 
       mock.connection.recreateSocket = (...newInitParams2) => {
-        __DEV__ && console.log('recreateSocket2', ...newInitParams2);
+        // __DEV__ && console.log('recreateSocket2', ...newInitParams2);
         return mock.recreateSocket(...newInitParams2);
       }
-      __DEV__ && console.log('recreateConnection');
+      // __DEV__ && console.log('recreateConnection');
       return mock.connection;
     },
   };
@@ -310,11 +310,11 @@ ${JSON.stringify(res.json, null, 2)}
 
     Object.keys(this.wsConnections).forEach((key) => {
       const [path, options, socket] = this.wsConnections[key];
-      __DEV__ && this.log.trace('[api] prepare reconnect @@', socket);
-      __DEV__ && console.log('prepare reconnect @@', socket);
-      if (!socket.recreateSocket) {
-        __DEV__ && console.log('!socket.recreateSocket', socket);
-      }
+      // __DEV__ && this.log.trace('[api] prepare reconnect @@', socket);
+      // // __DEV__ && console.log('prepare reconnect @@', socket);
+      // if (!socket.recreateSocket) {
+      //   // __DEV__ && console.log('!socket.recreateSocket', socket);
+      // }
       socket.recreateSocket(path, options);
       // socket.disconnect();
       // this.ws(path, options);
