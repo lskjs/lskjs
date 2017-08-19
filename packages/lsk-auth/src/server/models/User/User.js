@@ -143,7 +143,11 @@ export function getSchema(ctx, module) {
 
   schema.methods.toJSON = function () {
     const user = this.toObject();
-    return _.omit(user, ['private', 'password']);
+    const visitedAt = module.online.visitedAt[this._id] || user.visitedAt;
+    return {
+      ..._.omit(user, ['private', 'password']),
+      visitedAt,
+    };
   };
 
   schema.methods.genereateEmailApprovedLink = async function () {
