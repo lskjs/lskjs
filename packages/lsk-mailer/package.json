@@ -1,14 +1,14 @@
 {
   "name": "lsk-mailer",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "isuvorov",
   "license": "MIT",
   "scripts": {
     "release": "npm publish"
   },
   "dependencies": {
-    "mjml": "^3.3.3",
-    "nodemailer": "^4.0.1",
+    "mjml": "3.3.3",
+    "nodemailer": "4.0.1",
     "nodemailer-juice": "1.0.0"
   }
 }

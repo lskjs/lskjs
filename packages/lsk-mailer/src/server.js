@@ -27,7 +27,7 @@ export default (ctx) => {
     // Отправить email
     async send(args) {
       const { to, template, params = {}, options = {}, t: tFunc, locale } = args;
-      const t = tFunc ? tFunc : ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a) => a
+      const t = tFunc ? tFunc : ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a => a);
       try {
         if (!to) throw '!to email';
         if (!template) throw '!template';
