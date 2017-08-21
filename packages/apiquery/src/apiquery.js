@@ -72,6 +72,7 @@ export default class ApiClient {
     this.log = params.log;
     this.root = params.root;
     this.base = params.base;
+    this.headers = params.headers || {};
     this.url = params.url;
     this.wsConfig = params.ws;
     this.wsConnections = {};
@@ -203,7 +204,9 @@ ${JSON.stringify(res.json, null, 2)}
 
   getCtx(url, params = {}) {
     const req = Object.assign(
-      { url },
+      { url, headers: {
+        ...this.headers
+      } },
       pick(params, FETCH_PARAMS),
     );
 
