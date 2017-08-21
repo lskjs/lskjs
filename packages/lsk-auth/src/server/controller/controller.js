@@ -85,19 +85,8 @@ export default (ctx, module) => {
     }
     throw ctx.errors.e400('Параметр username, email, login не передан');
   };
-  controller.signup = async function (req) {
-    const { User } = ctx.models;
+  controller.afterSignup = async function ({ req, user }) {
     const { mailer } = ctx.modules;
-    const userFields = controller.getUserFields(req);
-    const criteria = controller.getUserCriteria(req);
-    const existUser = await User.findOne(criteria);
-    if (existUser) throw ctx.errors.e400('Пользователь с таким логином уже зарегистрирован');
-    if (!userFields.meta) userFields.meta = {};
-    userFields.meta.approvedEmail = false;
-    // console.log({ userFields });
-    const user = new User(userFields);
-    await user.save();
-
     let emailSended = null;
     if (mailer) {
       try {
@@ -125,6 +114,19 @@ export default (ctx, module) => {
       user,
       token: user.generateAuthToken(),
     };
+  }
+  controller.signup = async function (req) {
+    const { User } = ctx.models;
+    const userFields = controller.getUserFields(req);
+    const criteria = controller.getUserCriteria(req);
+    const existUser = await User.findOne(criteria);
+    if (existUser) throw ctx.errors.e400('Пользователь с таким логином уже зарегистрирован');
+    if (!userFields.meta) userFields.meta = {};
+    userFields.meta.approvedEmail = false;
+    // console.log({ userFields });
+    const user = new User(userFields);
+    await user.save();
+    return controller.afterSignup({ req, user })
   };
 
   controller.login = async function (req) {
