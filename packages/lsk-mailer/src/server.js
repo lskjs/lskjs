@@ -9,18 +9,25 @@ export default (ctx) => {
     async init() {
       this.config = _.get(ctx, 'config.mailer');
       this.templates = this.getTemplates();
-      const transporter = (this.config && this.config.transport)
-        && Promise.promisifyAll(nodemailer.createTransport(this.config.transport));
-      this.transporter = transporter;
+      this.transporter = this.getTransporter();
     }
+
+    getTransporter() {
+      return (this.config && this.config.transport)
+        && Promise.promisifyAll(nodemailer.createTransport(this.config.transport));
+    }
+
     async run() {
-      if (this.transporter) {
+      if (this.transporter && this.config.juice) {
+        // нельзя прогонять через эту херню html который уже покрыт inline css
         this.transporter.use('compile', inlineCss());
       }
     }
+
     // Отправить email
     async send(args) {
-      const { to, template, params = {}, options = {} } = args;
+      const { to, template, params = {}, options = {}, t: tFunc, locale } = args;
+      const t = tFunc ? tFunc : ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a) => a
       try {
         if (!to) throw '!to email';
         if (!template) throw '!template';
@@ -28,22 +35,30 @@ export default (ctx) => {
         if (!this.templates[template]) throw 'cant find email template'
         // Ищем шаблон
           // Шаблон это класс, создаем экземпляр
-        const emailTemplate = new this.templates[template]({ ctx, params });
+        const args2 = { ctx, t, locale, params };
+        const emailTemplate = new this.templates[template](args2);
         // вызываем render
-        const defaultOptions = emailTemplate.getOptions({ ctx, params });
-        const html = emailTemplate.getHtml({ ctx, params });
-        const options2 = Object.assign({}, this.config.options, defaultOptions, options);
-        options2.to = to;
-        options2.html = html;
-        options2.text = '';
-        console.log({options2});
-        const res = await this.transporter.sendMailAsync(options2);
-        console.log({res});
-        return res
+        const defaultOptions = emailTemplate.getOptions(args2);
+        const html = emailTemplate.getHtml(args2);
+        const text = emailTemplate.getText && emailTemplate.getText(args2) || '';
+        const sendOptions = Object.assign({}, this.config.options, defaultOptions, options);
+        sendOptions.to = to;
+        sendOptions.html = html;
+        sendOptions.text = text;
+        return await this.transporter.sendMail(sendOptions);
       } catch (err) {
         throw err;
       }
       return null;
+    }
+
+    async sendText(to, subject, message, from) {
+      if (!from) from = ctx.config.mailer.options.from;
+      try {
+        return await this.transporter.sendMail({ to, subject, text: message, from });
+      } catch (e) {
+        throw e;
+      }
     }
   };
 };
