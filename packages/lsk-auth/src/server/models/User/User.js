@@ -111,6 +111,13 @@ export function getSchema(ctx, module) {
   schema.methods.getEmail = function () {
     return this.email || this.toJSON().email;// || this.username || this.toJSON().username;
   };
+  schema.methods.getMailerParams = function (type) {
+    return {
+      to: this.email,
+      locale: this.locale || 'ru',
+      user: this,
+    }; //this.email || this.toJSON().email;// || this.username || this.toJSON().username;
+  };
 
   const { e400, e500 } = ctx.errors;
 

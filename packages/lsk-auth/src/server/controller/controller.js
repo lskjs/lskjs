@@ -92,9 +92,10 @@ export default (ctx, module) => {
       try {
         const link = await user.genereateEmailApprovedLink();
         await mailer.send({
+          ...user.getMailerParams('primary'),
           template: 'approveEmail',
-          locale: user.locale || req.locale,
-          to: user.getEmail(),
+          // locale: user.locale || req.locale,
+          // to: user.getEmail('primary'),
           params: {
             user: user.toJSON(),
             link,
@@ -187,9 +188,10 @@ export default (ctx, module) => {
     const password = User.generatePassword();
 
     await mailer.send({
+      ...user.getMailerParams('primary'),
       template: 'recovery',
-      locale: user.locale || req.locale,
-      to: user.getEmail(),
+      // locale: user.locale || req.locale,
+      // to: user.getEmail(),
       params: {
         user: user.toJSON(),
         password,
