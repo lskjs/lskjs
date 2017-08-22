@@ -6,15 +6,19 @@ export default (ctx) => {
   return class AuthModule {
     initOnlineService() {
       this.online = onlineService;
+      this.online.save = async (_id, visitedAt) => {
+        // console.log('this.online.save', _id, visitedAt);
+        const { User } = ctx.models;
+        await User.update({ _id }, { visitedAt });
+      };
       // setInterval(() => {
       //   console.log('online users', this.online.count());
       // }, 10000);
-
       ctx.middlewares.parseUser = [
         ctx.middlewares.parseUser,
         (req, res, next) => {
-          if (req.user && req.user._id) {
-            // console.log('touchOnline');
+          // console.log('!req.headers.offline', !req.headers.offline, req.headers.offline, req.headers);
+          if (req.user && req.user._id && !req.headers.offline) {
             this.online.touchOnline(req.user._id);
           }
           next();
