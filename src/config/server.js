@@ -4,7 +4,6 @@ export default config.extend({
   remoteConfig: true,
   port: process.env.PORT || 8080,
   url: process.env.URL || 'http://localhost:3000',
-
   db: {
     uri: process.env.DB || 'mongodb://lsk-example1:lsk-example1-pass@publicdb.mgbeta.ru:27000/lsk-example1',
   },
@@ -43,6 +42,13 @@ export default config.extend({
     mimetypes: ['image/jpeg', 'image/jpg', 'image/gif', 'image/png'],
   },
   rating: {
+    types: [
+      'like', // Или лайк или ничего
+      'block', // block
+      'rating', // Оценка 1 - 10
+      'view', // Просмотр
+      'follow', // Просмотр
+    ],
     subjects: {
       Post: {
         // type: 'like',
