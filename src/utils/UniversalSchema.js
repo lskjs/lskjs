@@ -28,7 +28,17 @@ class UniversalSchema {
       },
     };
     this.methods = {};
-    this.preMethods = {};
+    this.preMethods = {
+      save: async (next) => {
+        this.preSave && await this.preSave();
+        next();
+      }
+    };
+    this.postMethods = {
+      save: async () => {
+        this.postSave && this.postSave();
+      }
+    };
     this.postMethods = {};
     this.indexes = [];
     this.virtuals = [];
