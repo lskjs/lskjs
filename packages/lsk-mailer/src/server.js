@@ -26,16 +26,16 @@ export default (ctx) => {
 
     // Отправить email
     async send(args) {
-      const { to, template, params = {}, options = {}, t: tFunc, locale } = args;
+      const { to, template, params = {}, options = {}, t: tFunc, locale, ...otherProps } = args;
       const t = tFunc ? tFunc : ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a => a);
       try {
         if (!to) throw '!to email';
         if (!template) throw '!template';
         if (!this.transporter) throw '!transporter';
-        if (!this.templates[template]) throw 'cant find email template'
+        if (!this.templates[template]) throw 'cant find email template ' + template
         // Ищем шаблон
           // Шаблон это класс, создаем экземпляр
-        const args2 = { ctx, t, locale, params };
+        const args2 = { ctx, t, locale, params, ...otherProps };
         const emailTemplate = new this.templates[template](args2);
         // вызываем render
         const defaultOptions = emailTemplate.getOptions(args2);
