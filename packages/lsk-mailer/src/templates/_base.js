@@ -1,4 +1,8 @@
 export default class Template {
+  constructor(params = {}) {
+    Object.assign(this, params);
+  }
+
   getOptions() {
     return {};
   }
