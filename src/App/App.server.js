@@ -5,6 +5,43 @@ import assets from './assets'; // eslint-disable-line
 
 export default class App extends ReactApp {
 
+
+  getI18Params(params = {}) {
+    const config = this.config.i18 || {};
+    return {
+      resources: {
+        en: {
+          translation: require('../locales/en.json'),
+        },
+        ru: {
+          translation: require('../locales/ru.json'),
+        },
+      },
+      fallbackLng: __STAGE__ !== 'master' ? 'en' : 'ru',
+      ...config,
+      ...params,
+    };
+  }
+
+  async getI18(...args) {
+    return new Promise((resolve, reject) => {
+      const newInstance = i18next.createInstance();
+      newInstance.init(this.getI18Params(...args), (err) => {
+        if (err) return reject(err);
+        return resolve(newInstance);
+      });
+    });
+  }
+
+  // async run() {
+  //   await super.run();
+  //   this.i18 = await this.getI18();
+  //   this.t = (...args) => {
+  //     return this.i18.t(...args);
+  //   };
+  // }
+
+
   getAssets() {
     return assets.main;
   }

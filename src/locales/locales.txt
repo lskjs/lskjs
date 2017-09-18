@@ -1,0 +1,3 @@
+category	subid	ru	en
+page1	hello	Привет	Hello
+page1	world	Мир	World
