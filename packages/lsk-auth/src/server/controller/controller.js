@@ -18,7 +18,7 @@ export default (ctx, module) => {
     return {
       __pack: 1,
       jwt: req.user,
-      user,
+      user: await User.prepare(user, { req }),
       // token: user.getToken()
       // user,
     };
@@ -35,10 +35,11 @@ export default (ctx, module) => {
       type: 'silent',
     }, params));
     await user.save();
+    req.user = user;
     return {
       __pack: 1,
       signup: true,
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
   };
@@ -86,6 +87,7 @@ export default (ctx, module) => {
     throw ctx.errors.e400('Параметр username, email, login не передан');
   };
   controller.afterSignup = async function ({ req, user }) {
+    const { User } = ctx.models;
     const { mailer } = ctx.modules;
     let emailSended = null;
     if (mailer) {
@@ -112,10 +114,10 @@ export default (ctx, module) => {
       __pack: 1,
       signup: true,
       emailSended,
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
-  }
+  };
   controller.signup = async function (req) {
     const { User } = ctx.models;
     const userFields = controller.getUserFields(req);
@@ -124,10 +126,11 @@ export default (ctx, module) => {
     if (existUser) throw ctx.errors.e400('Пользователь с таким логином уже зарегистрирован');
     if (!userFields.meta) userFields.meta = {};
     userFields.meta.approvedEmail = false;
-    // console.log({ userFields });
     const user = new User(userFields);
     await user.save();
-    return controller.afterSignup({ req, user })
+    req.user = user;
+
+    return controller.afterSignup({ req, user });
   };
 
   controller.login = async function (req) {
@@ -140,16 +143,14 @@ export default (ctx, module) => {
     const user = await User.findOne(criteria);
 
     if (!user) throw ctx.errors.e404('Неверный логин');
-    // if (!user) throw ctx.errors.e404('Такой пользователь не найден');
-
     if (!await user.verifyPassword(params.password)) {
       throw ctx.errors.e400('Неверный пароль');
-      // throw ctx.errors.e400('Переданный пароль не подходит');
     }
+    req.user = user;
 
     return {
       __pack: 1,
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
   };
@@ -162,12 +163,12 @@ export default (ctx, module) => {
     if (!userId) throw ctx.errors.e404('Токен не верный');
 
     const user = await User.findById(userId);
-
     if (!user) throw ctx.errors.e404('Такой пользователь не найден');
+    req.user = user;
 
     return {
       __pack: 1,
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
   };
@@ -207,13 +208,6 @@ export default (ctx, module) => {
     };
   };
 
-  controller.emailApprove = async (req) => {
-    const { User } = ctx.models;
-    const params = req.allParams();
-    const { t } = params;
-    return User.findAndApproveEmail(t);
-  };
-
   controller.socialSign = async (req) => {
     // console.log('socialSign !@#!@#!123123');
 
@@ -242,26 +236,29 @@ export default (ctx, module) => {
     await user.save();
     passport.userId = user._id;
     await passport.save();
+    req.user = user;
     // await User.updateFromPassport(passport);
     // user.passports.push
     // (passport._id);
     // await user.save();
     // console.log('user', {user});
     return {
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
   };
 
   controller.socialLogin = async (req) => {
+    const { User } = ctx.models;
     console.log('socialLogin');
     const passport = await Passport.getByToken(req.data.p);
     const user = await passport.getUser();
     if (!user) {
       return e404('User not found');
     }
+    req.user = user;
     return {
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
   };
@@ -324,15 +321,34 @@ export default (ctx, module) => {
     });
   };
 
+
+  controller.tokenLogin = async function (req) {
+    const { User } = ctx.models;
+    const token = req.data.t || req.data.token;
+    if (!token) throw ctx.errors.e400('!token');
+
+    const user = await User.tokenLogin({ token });
+    if (!user) throw ctx.errors.e404('!user');
+    req.user = user;
+
+    return {
+      __pack: 1,
+      user: await User.prepare(user, { req }),
+      token: user.generateAuthToken(),
+    };
+  };
+
   controller.approveEmail = async (req) => {
     const { User } = ctx.models;
-    const params = req.allParams();
-    const { t } = params;
-    return User.findAndApproveEmail(t);
+    return User.findAndApproveEmail(req.data.t);
   };
   controller.approvedEmail = async (req) => {
-    console.log('lsk-auth  approvedEmail => approveEmail');
-    this.approveEmail(req);
+    console.log('DEPRECATED lsk-auth  approvedEmail => approveEmail');
+    return this.approveEmail(req);
+  };
+  controller.emailApprove = async (req) => {
+    console.log('DEPRECATED lsk-auth  emailApprove => approveEmail');
+    return this.approveEmail(req);
   };
 
 
@@ -457,10 +473,11 @@ export default (ctx, module) => {
         },
       });
     }
+    req.user = user;
 
     return {
       __pack: 1,
-      user,
+      user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
   };

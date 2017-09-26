@@ -10,7 +10,7 @@ const bcryptCompare = Promise.promisify(bcrypt.compare);
 const SALT_WORK_FACTOR = 10;
 async function hashPassword(password) {
   const salt = await bcryptGenSalt(SALT_WORK_FACTOR);
-  return await bcryptHash(password, salt);
+  return bcryptHash(password, salt);
 }
 
 const sample2 = {
@@ -90,12 +90,10 @@ export function getSchema(ctx, module) {
   };
   schema.methods.toJSON = function () {
     const objs = _.omit(this.toObject(), ['password', 'private']);
-
     const visitedAt = module.online.visitedAt[this._id];
     if (visitedAt) {
       objs.visitedAt = visitedAt;
     }
-
     return objs;
   };
   schema.methods.getIdentity = function (params = {}) {
@@ -105,8 +103,8 @@ export function getSchema(ctx, module) {
   schema.methods.generateAuthToken = function (params) {
     return jwt.sign(this.getIdentity(params), ctx.config.jwt.secret);
   };
-  schema.methods.verifyPassword = async function (password) {
-    return await bcryptCompare(password, this.password);
+  schema.methods.verifyPassword = function (password) {
+    return bcryptCompare(password, this.password);
   };
   schema.methods.getEmail = function () {
     return this.email || this.toJSON().email;// || this.username || this.toJSON().username;
@@ -120,7 +118,6 @@ export function getSchema(ctx, module) {
   };
 
   const { e400, e500 } = ctx.errors;
-
 
   schema.methods.preSave = async function () {
     // console.log('User.methods.preSave', this.isNew, this.wasNew);
@@ -137,7 +134,6 @@ export function getSchema(ctx, module) {
     await this.preSave();
     next();
   });
-
 
   schema.methods.postSave = async function () {
     // console.log('User.methods.postSave', this.wasNew);
@@ -156,6 +152,22 @@ export function getSchema(ctx, module) {
       visitedAt,
     };
   };
+  schema.methods.setupOnetimeToken = async function () {
+    const token = schema.statics.generatePassword(16);
+    this.private.onetimeToken = token;
+    this.private.onetimeTokenAt = new Date();
+    this.markModified('private');
+    return token;
+  };
+
+  schema.methods.generateOnetimeTokenUrl = async function () {
+    const token = await this.setupOnetimeToken();
+    return ctx.url(`/api/module/auth/token?t=${token}`);
+  };
+
+  // schema.methods.genereateEmailApprovedLink = async function () {
+  //   return this.generateOnetimeTokenUrl();
+  // };
 
   schema.methods.genereateEmailApprovedLink = async function () {
     const token = jwt.sign({
@@ -166,7 +178,7 @@ export function getSchema(ctx, module) {
     this.private.approvedEmailToken = token;
     this.markModified('private');
     // ctx.getUrl()
-    return `${ctx.config.url}/api/module/auth/email/approve?t=${token}`; // TODO: сделать по умному
+    return ctx.url(`/api/module/auth/email/approve?t=${token}`);
   };
 
   schema.methods.updateFromPassport = async function (passport) {
