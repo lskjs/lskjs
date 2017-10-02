@@ -109,17 +109,22 @@ export default class Uapp extends Core {
 
 
   // return page for req
-  resolve(reqParams = {}) {
+  async resolve(reqParams = {}) {
     const req = Api.createReq(reqParams);
     // console.log('Uapp.resolve', req);
     this.resetPage();
-    const page = UniversalRouter.resolve(this.routes, {
+    const page = await UniversalRouter.resolve(this.routes, {
       ...this.provide(),
       path: reqParams.path,
       query: reqParams.query,
       req,
     });
-    if (page._page) throw '!page';
+    if (__CLIENT__) {
+      document.body.scrollTop = 0; // @TODO: back
+      document.title = page.renderFullTitle();
+      // @TODO: to @natavts favicon, meta tags
+    }
+    // if (page._page) throw '!page';
     return page;
   }
 
