@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { antimergeDeep } from 'antimerge';
 import Root from '../Root';
 import ReactDOM from 'react-dom/server';
 
@@ -339,6 +340,9 @@ ${this.renderStyle()}
   }
 
   renderFooter() {
+    console.log(this.getRootState());
+    console.log(this.uapp.config);
+    console.log(antimergeDeep(this.getRootState().config, this.uapp.config))
     const util = require('util');
     const debug = __DEV__ && __SERVER__ ? `<!--
 DEBUG INFO
