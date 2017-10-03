@@ -1,14 +1,23 @@
 import { createMemoryHistory } from 'history';
 import CoreApp from 'lego-starter-kit/CoreApp';
 import Uapp from '../Uapp';
+import { antimergeDeep } from 'antimerge';
+import cloneDeep from 'lodash/cloneDeep';
 
 import assets from './assets'; // eslint-disable-line
 
-
 export default class ReactApp extends CoreApp {
 
+  async run() {
+    await super.run();
+    this.initConfigClient = cloneDeep(this.config.client); // подумать в init или в run
+  }
+
   getRootState(req) {
-    const config = this.config.remoteConfig && this.config.client || {};
+    const realConfig = this.config.remoteConfig && this.config.client || {};
+
+    const config = antimergeDeep(realConfig, this.initConfigClient);
+
     return {
       reqId: req.reqId,
       token: req.token,
@@ -37,7 +46,7 @@ export default class ReactApp extends CoreApp {
     try {
       await uapp.start();
     } catch (err) {
-      this.log.error('uapp.start()', err)
+      this.log.error('uapp.start()', err);
       throw err;
     }
     return uapp;
@@ -58,7 +67,7 @@ export default class ReactApp extends CoreApp {
         page = await this.getPage(req);
         // console.log({page});
       } catch (err) {
-        this.log.error('SSR app.getPage(req) err', err)
+        this.log.error('SSR app.getPage(req) err', err);
         return next(err);
       }
       if (page.state.redirect) {
@@ -69,7 +78,7 @@ export default class ReactApp extends CoreApp {
       try {
         content = page.renderHtml();
       } catch (err) {
-        this.log.error('SSR page.renderHtml() err', err)
+        this.log.error('SSR page.renderHtml() err', err);
         return next(err);
       }
 

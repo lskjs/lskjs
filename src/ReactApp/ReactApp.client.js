@@ -22,7 +22,7 @@ export default class ReactApp extends Core {
   init() {
     this.rootState = this.getRootState();
     this.config = _.merge({}, this.config || {}, this.rootState && this.rootState.config || {});
-    this.rootState.config = null;
+    this.rootState.config = null; // не понмю для чего
     FastClick.attach(document.body);
     this.container = document.getElementById('root');
     this.hmrInit();

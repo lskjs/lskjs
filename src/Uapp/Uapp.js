@@ -3,7 +3,7 @@ import UniversalRouter from 'universal-router';
 import Core from '../Core';
 import Page from './Page';
 import Api from 'apiquery';
-
+import cloneDeep from 'lodash/cloneDeep';
 
 // TODO: вынести функции работы с хостнеймом куда нибудь
 function isRightHostname(hostnames = [], hostname) {
@@ -72,6 +72,7 @@ export default class Uapp extends Core {
   async init(props = {}) {
     await super.init();
     this.config = this.getConfig(this);
+    this.initConfig = cloneDeep(this.config); // подумать в init или в run
     // TODO: прокинуть домен (req) когда сервер
     this.api = new this.Api(this.config && this.config.api || {});
     // this.log = this.getLogger();
