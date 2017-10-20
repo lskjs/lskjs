@@ -60,10 +60,22 @@ export function getSchema(ctx, module) {
     toObject: { virtuals: true },
   });
 
-  schema.methods.generateUsername = async function () {
+  schema.methods.generateUsername = async function (collection) {
     const { User } = ctx.models;
     let username = `${this.providerId}_${this.provider}`;
-    return canonizeUsername(username.toLowerCase());
+    username = canonizeUsername(username.toLowerCase());
+    if (!collection) return username;
+    if (!(await collection.count({ username }))) return username;
+    const prefixusername = `${username}_`;
+
+    // TODO!!!!!! убрать хуев китайский стайл цикл
+    username = prefixusername + (Math.random() % 100);
+    if (!(await collection.count({ username }))) return username;
+
+    username = prefixusername + (Math.random() % 100);
+    if (!(await collection.count({ username }))) return username;
+
+    throw 'cant generate unique username';
   };
   schema.methods.getUser = async function () {
     return ctx.models.User.findById(this.userId);
@@ -89,17 +101,17 @@ export function getSchema(ctx, module) {
 
 
   schema.methods.getStrategy = function () {
-    const strategy = module._strategies[this.provider]
-    return strategy
-  }
+    const strategy = module._strategies[this.provider];
+    return strategy;
+  };
 
   schema.methods.updateData = async function () {
-    const strategy = this.getStrategy()
+    const strategy = this.getStrategy();
     if (!strategy) return null;
     await strategy.updateTokens(this);
     await strategy.updatePassport({
       passport: this,
-    })
+    });
   };
   // schema.methods.updateToken = async function () {
   //   const strategy = this.getStrategy()

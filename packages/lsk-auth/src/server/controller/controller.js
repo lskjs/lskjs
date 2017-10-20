@@ -225,7 +225,7 @@ export default (ctx, module) => {
       { profile: passport.profile },
       req.data, // meta
       {
-        username: await passport.generateUsername(),
+        username: await passport.generateUsername(User),
         // _id,
       },
     );
