@@ -232,7 +232,7 @@ export default (ctx, module) => {
     // console.log({ params });
     const user = new User(params);
     // await user.save();
-    user.updateFromPassport(passport);
+    user.updateFromPassport(passport, { req });
     await user.save();
     passport.userId = user._id;
     await passport.save();
@@ -250,7 +250,6 @@ export default (ctx, module) => {
 
   controller.socialLogin = async (req) => {
     const { User } = ctx.models;
-    console.log('socialLogin');
     const passport = await Passport.getByToken(req.data.p);
     const user = await passport.getUser();
     if (!user) {
