@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import qs from 'qs';
 import { createPath } from 'history/PathUtils';
-import history from './core/history';
 import { ErrorReporter, deepForceUpdate } from './core/devUtils';
 import { autobind } from 'core-decorators';
 import Uapp from '../Uapp';
 import _ from 'lodash';
 import Core from '../Core';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 const DEBUG = false;
 
@@ -19,6 +19,11 @@ export default class ReactApp extends Core {
     return window.__ROOT_STATE__ || {};
   }
 
+  historyConfirm(message, callback) { // eslint-disable-line
+    console.log('historyConfirm 1', message);
+    return callback(window.confirm(message));
+  }
+
   init() {
     this.rootState = this.getRootState();
     this.config = _.merge({}, this.config || {}, this.rootState && this.rootState.config || {});
@@ -26,10 +31,13 @@ export default class ReactApp extends Core {
     FastClick.attach(document.body);
     this.container = document.getElementById('root');
     this.hmrInit();
+    this.history = createBrowserHistory({
+      getUserConfirmation: (...args) => this.historyConfirm(...args),
+    });
   }
 
   run() {
-    history.listen(this.onLocationChange);
+    this.history.listen(this.onLocationChange);
     this.onLocationChange(this.currentLocation);
   }
 
@@ -47,7 +55,7 @@ export default class ReactApp extends Core {
     }
 
     if (page.state.redirect) {
-      history.replace(page.state.redirect);
+      this.history.replace(page.state.redirect);
     }
 
     try {
@@ -79,7 +87,7 @@ export default class ReactApp extends Core {
   async getUapp(req) {
     if (this.uapp) return this.uapp;
     this.uapp = new (this.Uapp || this.BaseUapp)({
-      history,
+      history: this.history,
       styles: [],
       insertCss: (...styles) => {
         const removeCss = styles.map(x => x._insertCss());
