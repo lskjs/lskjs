@@ -25,7 +25,7 @@ export default class HomePage extends Component {
         >
           <h1>{site.title}</h1>
           <h2>{site.description}</h2>
-          <div style={{ marginTop: 30 }}>
+          <div style={{ marginTop: 30 }} styleName={'test'}>
             <Button componentClass={Link} href="/cabinet" bsSize="large">Войти</Button>
           </div>
         </Slide>

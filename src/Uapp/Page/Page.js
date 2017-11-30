@@ -21,7 +21,7 @@ ${super.renderHead()}
   renderFooter() {
     return `\
 ${super.renderFooter()}
-${__PROD__ ? require('raw!./footer.html') : ''}
+${__PROD__ ? require('raw-loader!./footer.html') : ''}
 `;
   }
 

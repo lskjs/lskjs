@@ -1,7 +1,8 @@
-import { Runner } from 'lsk-build';
-import config from './config';
-import webpackConfig from './webpack.config';
-
+require('@babel/register');
+require('@babel/polyfill');
+const Runner = require('lsk-build').Runner;
+const config = require('./config').default;
+const webpackConfig = require('./webpack.config');
 const ctx = config;
 ctx.webpackConfig = webpackConfig;
 const app = new Runner(ctx);
