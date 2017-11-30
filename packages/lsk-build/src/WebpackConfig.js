@@ -549,6 +549,7 @@ export default class WebpackConfig {
       chunkModules: this.isVerbose(),
       cached: this.isVerbose(),
       cachedAssets: this.isVerbose(),
+      modules: false,
     };
   }
 
