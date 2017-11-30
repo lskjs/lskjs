@@ -3,6 +3,7 @@ import AssetsPlugin from 'assets-webpack-plugin';
 const OptimizeJsPlugin = require('optimize-js-plugin');
 // var CompressionPlugin = require("compression-webpack-plugin");
 import WebpackConfig from './WebpackConfig';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 export default class WebpackClientConfig extends WebpackConfig {
   getTarget() {
@@ -56,26 +57,16 @@ export default class WebpackClientConfig extends WebpackConfig {
 
       ...this.isDebug() ? [] : [
 
-        // Search for equal or similar files and deduplicate them in the output
-        // https://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-        new webpack.optimize.DedupePlugin(),
-
-        // Minimize all JavaScript output of chunks
-        // https://github.com/mishoo/UglifyJS2#compressor-options
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            screw_ie8: true,
-            warnings: this.isVerbose(),
-            unused: true,
-            dead_code: true,
-          },
-          mangle: {
-            screw_ie8: true,
-          },
-          output: {
-            comments: false,
-            screw_ie8: true,
-          },
+        new UglifyJsPlugin({
+          parallel: true,
+          uglifyOptions: {
+            ie8: true,
+            compress: {
+              warnings: this.isVerbose(),
+              unused: true,
+              dead_code: true,
+            }
+          }
         }),
         new OptimizeJsPlugin({
           sourceMap: false,
