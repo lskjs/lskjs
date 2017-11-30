@@ -93,46 +93,51 @@ export default class WebpackConfig {
 
   getBabelPresets() {
     return [
-      'react',
-      'es2015',
-      'stage-0',
+      '@babel/preset-react',
+      '@babel/preset-es2015',
+      '@babel/preset-stage-0',
     ];
   }
 
   getBabelPlugins() {
     return [
-      'jsx-control-statements',
+      'module:jsx-control-statements',
       'react-require',
       'transform-decorators-legacy',
+      'transform-class-properties'
     ];
   }
 
   getJsxLoader() {
     return {
       test: /\.(jsx|js)?$/,
-      loader: 'babel-loader',
       include: [
         ...this.getDeps().map(dep => dep.path),
         this.resolvePath('src'),
       ],
       // exclude: /node_modules/,
-      query: {
+      use: {
+        loader: 'babel-loader',
         // https://github.com/babel/babel-loader#options
-        cacheDirectory: this.isDebug(),
-
+        
         // https://babeljs.io/docs/usage/options/
-        babelrc: false,
-        sourceMaps: this.isSourcemap(),
-        presets: this.getBabelPresets(),
-        plugins: [
-          ...this.getBabelPlugins(),
-          'transform-runtime',
-          ...(this.isDebug() ? [] : [
-            'transform-react-remove-prop-types',
-            'transform-react-constant-elements',
-            // 'transform-react-inline-elements',
-          ]),
-        ],
+        options: {
+          //sourceMaps: this.isSourcemap(),
+          cacheDirectory: this.isDebug(),
+          babelrc: false,
+          presets: this.getBabelPresets(),
+          plugins: [
+            ...this.getBabelPlugins(),
+            ['@babel/plugin-transform-runtime', {
+              polyfill: false
+            }],
+            ...(this.isDebug() ? [] : [
+              'transform-react-remove-prop-types',
+              '@babel/plugin-transform-react-constant-elements',
+              // 'transform-react-inline-elements',
+            ]),
+          ],
+        }
       },
     };
   }
@@ -229,8 +234,7 @@ export default class WebpackConfig {
       tester.test = new RegExp(test);
       return tester;
     });
-
-
+    const getPostcssModule = (bundle) => this.getPostcssModule(bundle);
     return [
       // ...testers,
       // {
@@ -249,7 +253,26 @@ export default class WebpackConfig {
       // },
       {
         test: /\.g(lobal)?\.css$/,
-        loaders: [
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: this.isSourcemap(),
+                modules: false,
+                minimize: !this.isDebug(),
+              }
+            }, {
+              loader: 'postcss-loader',
+              options: {
+                // pack: 'default',
+                plugins: getPostcssModule
+              }
+            }
+          ]
+          })
+        /*[
           ExtractTextPlugin.extract(
             'style-loader',
           ),
@@ -259,38 +282,89 @@ export default class WebpackConfig {
             minimize: !this.isDebug(),
           })}`,
           'postcss-loader?pack=default',
-        ],
+        ]*/,
       },
       {
         test: /\.css$/,
         exclude: /\.g(lobal)?\.css$/,
-        loaders: [
+        use: [
           'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: this.isSourcemap(),
+              modules: true,
+              localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+              minimize: !this.isDebug(),
+            }
+          }, {
+            loader: 'postcss-loader',
+            options: {
+              // pack: 'default',
+              plugins: getPostcssModule
+            }
+          }
+          /*`css-loader?${JSON.stringify({
             sourceMap: this.isSourcemap(),
             modules: true,
             localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
             minimize: !this.isDebug(),
           })}`,
-          'postcss-loader?pack=default',
+          'postcss-loader?pack=default',*/
         ],
       },
       {
         test: /\.igscss$/,
-        loaders: [
+        use: [
           'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: this.isSourcemap(),
+              modules: false,
+              minimize: !this.isDebug(),  
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              // pack: 'sass',
+              plugins: getPostcssModule
+            }
+          },
+          'sass-loader'
+          /*`css-loader?${JSON.stringify({
             sourceMap: this.isSourcemap(),
             modules: false,
             minimize: !this.isDebug(),
           })}`,
           'postcss-loader?pack=sass',
-          'sass-loader',
+          'sass-loader',*/
         ],
       },
       {
         test: /\.g(lobal)?\.scss$/,
-        loaders: [
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: this.isSourcemap(),
+                modules: false,
+                minimize: !this.isDebug(),
+              }
+            }, {
+              loader: 'postcss-loader',
+              options: {
+                // pack: 'sass',
+                plugins: getPostcssModule
+              }
+            }, 
+            'sass-loader'
+          ]
+        })
+        /*[
           ExtractTextPlugin.extract(
             'style-loader',
           ),
@@ -301,61 +375,73 @@ export default class WebpackConfig {
           })}`,
           'postcss-loader?pack=sass',
           'sass-loader',
-        ],
+        ]*/,
       },
       {
         test: /\.scss$/,
         exclude: /\.g(lobal)?\.scss$/,
-        loaders: [
+        use: [
           'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: this.isSourcemap(),
+              modules: true,
+              localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+              minimize: !this.isDebug(),  
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              // pack: 'sass',
+              plugins: getPostcssModule
+            }
+          },
+          'sass-loader',
+          /*`css-loader?${JSON.stringify({
             sourceMap: this.isSourcemap(),
             modules: true,
             localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
             minimize: !this.isDebug(),
           })}`,
           'postcss-loader?pack=sass',
-          'sass-loader',
+          'sass-loader',*/
         ],
       },
     ];
   }
   getPostcssModule(bundler) {
-    return {
-      default: [
-        require('postcss-import')({
-          addDependencyTo: bundler,
-          path: [
-            this.resolvePath('src'),
-            ...this.getDeps().map(dep => dep.path),
-            this.resolvePath('node_modules'),
-          ],
-          trigger: '&',
-          resolve: require('./utils/resolve-id'),
-        }),
-        require('postcss-mixins')(),
-        // require('postcss-custom-properties')(),
-        require('postcss-simple-vars')(), // / !
-        // require('postcss-custom-media')(),
-        // require('postcss-media-minmax')(),
-        // require('postcss-custom-selectors')(),
-        // require('postcss-calc')(),
-        // require('postcss-nesting')(),
-        require('postcss-color-function')(),
-        // require('pleeease-filters')(),
-        // require('pixrem')(),
-        // require('postcss-selector-matches')(),
-        // require('postcss-selector-not')(),
-        // require('postcss-animation')(), // / !
-        // require('rucksack-css')(), // / !
-        // require('lost')(), // / !
-        require('postcss-nested')(), // / !
-        require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
-      ],
-      sass: [
-        require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
-      ],
-    };
+    return [
+      require('postcss-import')({
+        addDependencyTo: bundler,
+        path: [
+          this.resolvePath('src'),
+          ...this.getDeps().map(dep => dep.path),
+          this.resolvePath('node_modules'),
+        ],
+        trigger: '&',
+        resolve: require('./utils/resolve-id'),
+      }),
+      require('postcss-mixins')(),
+      // require('postcss-custom-properties')(),
+      require('postcss-simple-vars')(), // / !
+      // require('postcss-custom-media')(),
+      // require('postcss-media-minmax')(),
+      // require('postcss-custom-selectors')(),
+      // require('postcss-calc')(),
+      // require('postcss-nesting')(),
+      require('postcss-color-function')(),
+      // require('pleeease-filters')(),
+      // require('pixrem')(),
+      // require('postcss-selector-matches')(),
+      // require('postcss-selector-not')(),
+      // require('postcss-animation')(), // / !
+      // require('rucksack-css')(), // / !
+      // require('lost')(), // / !
+      require('postcss-nested')(), // / !
+      require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
+    ];
   }
   getLoaders() {
     return [
@@ -363,30 +449,38 @@ export default class WebpackConfig {
       ...this.getCssLoaders(),
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        use: {
+          loader: 'json-loader'
+        }
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
-        loader: 'url-loader',
-        query: {
-          name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-          limit: 8192,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+            limit: 8192,
+          },
         },
       },
       {
         test: /\.(woff(2)?)(\?.+)?$/,
-        loader: 'url-loader',
-        query: {
-          name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-          mimetype: 'application/font-woff',
-          limit: 8192,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+            mimetype: 'application/font-woff',
+            limit: 8192,
+          },
         },
       },
       {
         test: /\.(eot|ttf|wav|mp3)(\?.+)?$/,
-        loader: 'file-loader',
-        query: {
-          name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+          },
         },
       },
     ];
@@ -394,7 +488,7 @@ export default class WebpackConfig {
 
   getModule() {
     return {
-      loaders: this.getLoaders(),
+      rules: this.getLoaders(),
     };
   }
 
@@ -402,23 +496,33 @@ export default class WebpackConfig {
     return [
       // Define free variables
       // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+      new webpack.LoaderOptionsPlugin({
+        debug: this.isDebug(),
+      }),
       new webpack.DefinePlugin(this.getGlobals()),
       new ExtractTextPlugin(this.isDebug() ? '[name].css?[chunkhash]' : '[name].[chunkhash].css'),
       ...!this.webpackStats ? [] : [new StatsPlugin(`webpack.${this.getTarget() === 'node' ? 'server' : 'client'}.stats.json`, this.webpackStats)],
+      new webpack.ProvidePlugin({
+        Promise: 'bluebird',
+      }),
     ];
   }
 
   getResolve() {
     return {
-      root: this.resolvePath('src'),
+      /* root: this.resolvePath('src'),
+      modulesDirectories: ['node_modules'],*/
       alias: this.getResolveAlias(),
-      modulesDirectories: ['node_modules'],
       extensions: this.getResolveExtensions(),
+      modules: [
+        this.resolvePath('src'),
+        "node_modules",
+      ]
     };
   }
 
   getResolveExtensions() {
-    return ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'];
+    return ['.webpack.js', '.web.js', '.js', '.jsx', '.json'];
   }
 
   getResolveAlias() {
@@ -480,10 +584,10 @@ export default class WebpackConfig {
       module: this.getModule(),
       plugins: this.getPlugins(),
       cache: this.isDebug(),
-      debug: this.isDebug(),
+      // debug: this.isDebug(),
       bail: !this.isDebug(),
       stats: this.getStats(),
-      postcss: (...args) => this.getPostcssModule(...args),
+      // postcss: (...args) => this.getPostcssModule(...args),
     };
   }
 

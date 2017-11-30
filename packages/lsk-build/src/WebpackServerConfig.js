@@ -25,9 +25,7 @@ export default class WebpackServerConfig extends WebpackConfig {
 
       // Adds a banner to the top of each generated chunk
       // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
-      ...(!this.isSourcemap() ? [] : [new webpack.BannerPlugin(
-        'require("source-map-support").install();',
-        { raw: true, entryOnly: false },
+      ...(!this.isSourcemap() ? [] : [new webpack.BannerPlugin({ banner: 'require("source-map-support").install();', raw: true, entryOnly: false },
       )]),
 
       // Do not create separate chunks of the server bundle

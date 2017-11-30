@@ -151,8 +151,8 @@ ${_.map(this.modules.modules, (val, key) => {
           .concat(config.entry);
         config.output.filename = config.output.filename.replace('[chunkhash', '[hash');
         config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash', '[hash');
-        config.module.loaders.find(x => x.loader === 'babel-loader')
-          .query.plugins.unshift('react-hot-loader/babel');
+        config.module.rules.find(x => x.use.loader === 'babel-loader')
+          .use.options.plugins.unshift('react-hot-loader/babel');
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
         config.plugins.push(new webpack.NoErrorsPlugin());
       }
