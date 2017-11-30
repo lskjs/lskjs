@@ -7,8 +7,7 @@ global.timing = () => {
 };
 if (!global.Promise) global.Promise = require('bluebird');
 if (!global.fetch) global.fetch = require('isomorphic-fetch');
-require('babel-polyfill');
-require('babel-runtime/core-js/promise').default = require('bluebird');
+require('@babel/polyfill');
 // require('event-source-polyfill');
 // global.fetch = require('./fetch').default;
 
