@@ -97,6 +97,8 @@ export default class WebpackConfig {
       '@babel/preset-es2015',
       '@babel/preset-stage-0',
       ['@babel/preset-env', {
+        modules: false,
+        loose: true,
         useBuiltIns: 'entry',
         targets: {
           forceAllTransforms: true,

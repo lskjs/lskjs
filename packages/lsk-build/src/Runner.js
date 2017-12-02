@@ -145,9 +145,9 @@ ${_.map(this.modules.modules, (val, key) => {
     await new Promise((resolve) => {
       // Hot Module Replacement (HMR) + React Hot Reload
       // console.log('config', config);
-      if (config.debug) {
+      if (this.debug) {
         // console.log('config.entry', config.entry);
-        config.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client']
+        config.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client?reload=true']
           .concat(config.entry);
         config.output.filename = config.output.filename.replace('[chunkhash', '[hash');
         config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash', '[hash');
@@ -155,6 +155,7 @@ ${_.map(this.modules.modules, (val, key) => {
           .use.options.plugins.unshift('react-hot-loader/babel');
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
         config.plugins.push(new webpack.NoErrorsPlugin());
+        config.plugins.push(new webpack.NamedModulesPlugin());
       }
       this.traceWebpackConfig();
 
@@ -170,7 +171,7 @@ ${_.map(this.modules.modules, (val, key) => {
           const server = await this.runServer();
           const bs = Browsersync.create();
           bs.init({
-            ...(config.debug ? {} : { notify: false, ui: false }),
+            ...(this.debug ? {} : { notify: false, ui: false }),
             proxy: {
               target: server.host,
               middleware: [wpMiddleware, hotMiddleware],
