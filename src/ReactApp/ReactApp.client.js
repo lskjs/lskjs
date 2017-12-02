@@ -9,6 +9,7 @@ import Uapp from '../Uapp';
 import _ from 'lodash';
 import Core from '../Core';
 import createBrowserHistory from 'history/createBrowserHistory';
+import { AppContainer } from 'react-hot-loader';
 
 const DEBUG = false;
 
@@ -59,7 +60,11 @@ export default class ReactApp extends Core {
     }
 
     try {
-      this.appInstance = ReactDOM.render(page.renderRoot(), this.container, this.postRender);
+      if (module.hot) {
+        this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: page.renderRoot()}), this.container, this.postRender);
+      } else {
+        this.appInstance = ReactDOM.render(page.renderRoot(), this.container, this.postRender);
+      }
     } catch (err) {
       this.log.error('CSR renderRoot err', err);
       // Display the error in full-screen for development mode
