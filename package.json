@@ -76,7 +76,7 @@
     "glob-loader": "0.3.0",
     "json-loader": "0.5.7",
     "jsx-control-statements": "3.2.8",
-    "lsk-build": "^0.10.2",
+    "lsk-build": "^0.10.3",
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.9",
     "react-hot-loader": "3.1.3",
