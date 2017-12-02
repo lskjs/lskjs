@@ -5583,9 +5583,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lego-starter-kit@^1.16.1:
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.16.1.tgz#4d68946463cae9d63934ea14c095075f4573d24b"
+lego-starter-kit@^1.16.2:
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/lego-starter-kit/-/lego-starter-kit-1.16.2.tgz#9361ea67c40112d3a01d86aadd50a2f7a80e99d8"
   dependencies:
     "@babel/polyfill" "^7.0.0-beta.32"
     "@babel/runtime" "^7.0.0-beta.32"
