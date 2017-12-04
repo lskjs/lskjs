@@ -11,7 +11,6 @@ import {
 } from 'react-bootstrap';
 import { formatter } from '~/utils';
 import Link from 'lsk-general/General/Link';
-import Steps, { Step } from 'rc-steps';
 import find from 'lodash/find';
 
 import Ruble from 'react-icons2/mdi/currency-rub';
