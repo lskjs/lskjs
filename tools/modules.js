@@ -8,7 +8,7 @@ export default {
     upload: 'lsk-upload',
     mailer: 'lsk-mailer',
     user: 'lsk-user',
-    offer: '~/modules/offer',
+    // offer: '~/modules/offer',
     posts: '~/modules/posts',
   },
 

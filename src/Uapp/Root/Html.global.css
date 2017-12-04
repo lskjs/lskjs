@@ -1,4 +1,3 @@
-@import "rc-steps/assets/index.css";
 @import "./notifications.css";
 
 html {
@@ -36,10 +35,4 @@ body {
 @keyframes spin {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
-}
-
-.rc-steps-label-vertical {
-  .rc-steps-description {
-    text-align: center !important;
-  }
 }

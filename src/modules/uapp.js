@@ -7,7 +7,6 @@ export default function () {
     upload: require('lsk-upload/uapp').default(...arguments),
     // mailer: require('lsk-mailer/uapp').default(...arguments),
     user: require('lsk-user/uapp').default(...arguments),
-    offer: require('~/modules/offer/uapp').default(...arguments),
     posts: require('~/modules/posts/uapp').default(...arguments)
   };
 }

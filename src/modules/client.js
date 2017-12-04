@@ -7,7 +7,6 @@ export default function () {
     // upload: require('lsk-upload/client').default(...arguments),
     // mailer: require('lsk-mailer/client').default(...arguments),
     // user: require('lsk-user/client').default(...arguments),
-    // offer: require('~/modules/offer/client').default(...arguments),
     // posts: require('~/modules/posts/client').default(...arguments)
   };
 }
