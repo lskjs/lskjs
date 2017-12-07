@@ -48,6 +48,14 @@ export default (ctx, module) => {
         ids = getIds(args[0]);
         text = args[1];
       }
+      const debugIds = getIds('debug');
+      debugIds.forEach((id) => {
+        try {
+          tbot.sendMessage(id, `#debug ${args[0]} => ${JSON.stringify(ids)}\n\n${text}`).catch((err) => { console.log('tbot.sendMessage err', err); });
+        } catch (err) {
+          __DEV__ && console.log('tbot.sendMessage err', err);
+        }
+      });
       ids.forEach((id) => {
         try {
           // console.log('this.tbot.sendMessage', id);
