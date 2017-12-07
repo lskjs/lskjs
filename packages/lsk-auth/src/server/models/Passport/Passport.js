@@ -25,8 +25,6 @@ export function getSchema(ctx, module) {
       default: Date.now,
     },
 
-    // /////
-
     // название соцсети из passport
     provider: {
       type: String,

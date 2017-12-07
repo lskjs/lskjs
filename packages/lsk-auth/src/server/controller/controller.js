@@ -208,59 +208,34 @@ export default (ctx, module) => {
     };
   };
 
-  controller.socialSign = async (req) => {
-    // console.log('socialSign !@#!@#!123123');
-
-    const { User } = ctx.models;
-    const passport = await Passport.getByToken(req.data.p);
-    if (!passport) {
-      return e404('!passport');
-    }
-    if (passport.userId) {
-      return e400('passport already have user');
-    }
-
-    // const _id = ctx.db.Types.ObjectId();
-    const params = _.merge(
-      { profile: passport.profile },
-      req.data, // meta
-      {
-        username: await passport.generateUsername(User),
-        // _id,
-      },
-    );
-    // console.log({ params });
-    const user = new User(params);
-    // await user.save();
-    user.updateFromPassport(passport, { req });
-    await user.save();
-    passport.userId = user._id;
-    await passport.save();
-    req.user = user;
-    // await User.updateFromPassport(passport);
-    // user.passports.push
-    // (passport._id);
-    // await user.save();
-    // console.log('user', {user});
-    return {
-      user: await User.prepare(user, { req }),
-      token: user.generateAuthToken(),
-    };
-  };
-
   controller.socialLogin = async (req) => {
     const { User } = ctx.models;
     const passport = await Passport.getByToken(req.data.p);
-    const user = await passport.getUser();
+    let user = await passport.getUser();
     if (!user) {
-      return e404('User not found');
+      const params = _.merge(
+        { profile: passport.profile },
+        // req.data, // meta
+        {
+          username: await passport.generateUsername(User),
+          // _id,
+        },
+      );
+      // console.log({ params });
+      user = new User(params);
+      // await user.save();
+      user.updateFromPassport(passport, { req });
+      await user.save();
+      passport.userId = user._id;
+      await passport.save();
     }
     req.user = user;
+
     return {
       user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
-  };
+  }
 
   controller.socialBind = async (req) => {
     const { User } = ctx.models;
