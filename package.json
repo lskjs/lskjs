@@ -39,6 +39,7 @@
     "react-icons2": "2.3.2",
     "react-notifications": "1.4.3",
     "react-visibility-sensor": "3.10.1",
+    "redbox-react": "^1.5.0",
     "source-map-support": "0.4.16",
     "validator": "8.0.0"
   },
