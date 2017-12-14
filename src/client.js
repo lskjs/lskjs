@@ -4,25 +4,19 @@ import App from './App';
 import Uapp from './Uapp';
 import config from './config';
 
-// for react only update
-// if(module.hot) {
-//     module.hot.accept();
-// }
-//
-// if(!global.__APP) {
-//     ready();
-//     const app = new App({ config, Uapp });
-//     global.__APP = app;
-//     app.start();
-// } else {
-//     require('./Uapp/routes').default(global.__APP.uapp)
-//     global.__APP.hmrUpdate();
-// }
-
 ready();
 const app = new App({ config, Uapp });
 app.start();
+global.app;
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept('./App', () => {
+    console.log('module.hot.accept ./App');
+  });
+  module.hot.accept('./Uapp', () => {
+    const Uapp = require('./Uapp').default;
+    const app = new App({ config, Uapp });
+    app.start();
+    global.app;
+  });
 }

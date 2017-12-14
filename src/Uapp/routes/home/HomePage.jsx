@@ -7,6 +7,12 @@ import Component from 'lsk-general/General/Component';
 import Slide from '../Slide';
 import Link from 'lsk-general/General/Link';
 
+const a = {
+  b: {
+    c: 5
+  }
+}
+
 @inject('config')
 @importcss(require('./HomePage.css'))
 export default class HomePage extends Component {
@@ -23,6 +29,7 @@ export default class HomePage extends Component {
           image={false}
           overlay={false}
         >
+          <h1>{a?.b?.c}</h1>
           <h1>{site.title}</h1>
           <h2>{site.description}</h2>
           <div style={{ marginTop: 30 }} styleName={'test'}>
