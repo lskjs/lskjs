@@ -35,7 +35,7 @@ export default class WebpackClientConfig extends WebpackConfig {
     return {
       ...super.getOutput(),
       filename: this.isDebug() ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
-      chunkFilename: this.isDebug() ? '[name].[id].js?[chunkhash]' : '[name].[id].[chunkhash].js',
+      chunkFilename: this.isDebug() ? 'module_[name].js?[chunkhash]' : 'module_[name].[chunkhash].js',
     };
   }
 
