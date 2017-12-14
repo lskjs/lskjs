@@ -175,8 +175,14 @@ export default class Page {
     return this;
   }
 
-  component(...args) {
+  async component(...args) {
     if (this.disabled) return this;
+    if (args[0] && Object.prototype.toString.call(args[0]) === '[object Promise]') {
+      const result = await args[0];
+      if (result.default) {
+        args[0] = result.default;
+      }
+    }
     if (args.length > 1) {
       this.state.component = args;
     } else {
