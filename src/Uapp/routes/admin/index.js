@@ -2,7 +2,6 @@
 import React from 'react';
 import CabinetLayout from '../cabinet/CabinetLayout';
 
-import Dashboard from './Dashboard';
 import Profile from './Profile';
 import Users from './Users';
 
@@ -26,7 +25,7 @@ export default {
             title: 'Дешборд',
             url: '/admin',
           })
-          .component(Dashboard, { page });
+          .component(import('./Dashboard'), { page });
       },
     },
     {

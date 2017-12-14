@@ -33,7 +33,7 @@ export default {
           });
         if (__SERVER__) return p.component(Loading, { full: true });
         return page
-          .component(require('./Guidelines').default, {});
+          .component(import('./Guidelines'), {});
       },
     },
     {
