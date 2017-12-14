@@ -13,24 +13,25 @@ export default class Core {
   name = 'Core';
   constructor(params = {}) {
     Object.assign(this, params);
-    this.log = this.getLogger();
+    this.log = this.createLogger();
   }
 
-  getLoggerMock() {
+  createLoggerMock() {
     const logger2 = (type) => {
       return (...args) => {
         console.log(`[${type}]`, ...args);
+        if (type === 'error' || type === 'fatal') throw type;
       };
     };
-    return ['trace', 'debug', 'info', 'warn', 'error'].reduce((r, name) => {
+    return ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].reduce((r, name) => {
       r[name] = logger2(name);
       return r;
     }, {});
   }
 
-  getLogger(params) {
+  createLogger(params) {
     if (__DEV__ && __CLIENT__) {
-      return this.getLoggerMock();
+      return this.createLoggerMock();
     }
     const options = Object.assign({
       name: 'app',
@@ -41,7 +42,7 @@ export default class Core {
   }
 
   async init() {
-    if (!this.log) this.log = this.getLogger();
+    if (!this.log) this.log = this.createLogger();
     this.log.trace(`${this.name}.init()`);
     // if (!this.config) this.config = config;
   }

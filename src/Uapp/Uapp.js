@@ -4,6 +4,8 @@ import Core from '../Core';
 import Page from './Page';
 import Api from 'apiquery';
 import cloneDeep from 'lodash/cloneDeep';
+import React from 'react';
+// import safeRender from './safeRender';
 
 // TODO: вынести функции работы с хостнеймом куда нибудь
 function isRightHostname(hostnames = [], hostname) {
@@ -109,6 +111,12 @@ export default class Uapp extends Core {
   }
 
 
+  async updateClientRoot(page) {
+    document.body.scrollTop = 0; // @TODO: back
+    document.title = page.renderFullTitle();
+    // @TODO: to @natavts favicon, meta tags
+  }
+
   // return page for req
   async resolve(reqParams = {}) {
     const req = Api.createReq(reqParams);
@@ -121,9 +129,7 @@ export default class Uapp extends Core {
       req,
     });
     if (__CLIENT__) {
-      document.body.scrollTop = 0; // @TODO: back
-      document.title = page.renderFullTitle();
-      // @TODO: to @natavts favicon, meta tags
+      this.updateClientRoot(page);
     }
     // if (page._page) throw '!page';
     return page;
