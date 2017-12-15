@@ -12,7 +12,6 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 const DEBUG = false;
 
-
 export default class ReactApp extends Core {
 
   getRootState() {
@@ -20,7 +19,7 @@ export default class ReactApp extends Core {
   }
 
   historyConfirm(message, callback) { // eslint-disable-line
-    console.log('historyConfirm 1', message);
+    DEBUG && console.log('historyConfirm 1', message);
     return callback(window.confirm(message));
   }
 
@@ -45,12 +44,24 @@ export default class ReactApp extends Core {
   @autobind
   async onLocationChange(location) {
     const req = this.getReq();
-
+    DEBUG && console.log('onLocationChange 1', location, req);
+    if (location && location.hash) {
+      DEBUG && console.log('!@#!@#!@#');
+      return;
+    }
+    if (
+      location &&
+      (location.pathname || '') === (req.pathname || '') &&
+      (location.search || '') === (req.search || '')
+    ) {
+      DEBUG && console.log('DONT NEED RELOCATION');
+      return ;
+    }
     let page;
     try {
       page = await this.getPage(req);
     } catch (err) {
-      this.log.error('CSR getPage err', err);
+      this.log.error('CSR getPage err (ROUTER ERROR)', err);
       throw err;
     }
 
@@ -61,7 +72,7 @@ export default class ReactApp extends Core {
     try {
       this.appInstance = ReactDOM.render(page.renderRoot(), this.container, this.postRender);
     } catch (err) {
-      this.log.error('CSR renderRoot err', err);
+      this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
       // Display the error in full-screen for development mode
       // if (__DEV__) {
       //   this.appInstance = null;

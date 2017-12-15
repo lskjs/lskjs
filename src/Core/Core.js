@@ -37,7 +37,7 @@ export default class Core {
       name: 'app',
       src: __DEV__,
       level: 'trace',
-    }, this.config.log || {}, params);
+    }, this && this.config && this.config.log || {}, params);
     return logger.createLogger(options);
   }
 
