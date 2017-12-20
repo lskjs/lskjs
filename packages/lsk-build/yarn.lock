@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@babel/cli@^7.0.0-beta.32":
+"@babel/cli@7.0.0-beta.32":
   version "7.0.0-beta.32"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.32.tgz#1efd1afd9b0f4414f2f0bfcbeebf4ea55cf99809"
   dependencies:
@@ -25,7 +25,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/core@^7.0.0-beta.32":
+"@babel/core@7.0.0-beta.32":
   version "7.0.0-beta.32"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.0.0-beta.32.tgz#cc927d7d78a10d0444adaf08fbbda2ed644822f6"
   dependencies:
@@ -426,7 +426,7 @@
     "@babel/helper-regex" "7.0.0-beta.32"
     regexpu-core "^4.1.3"
 
-"@babel/preset-env@^7.0.0-beta.32":
+"@babel/preset-env@7.0.0-beta.32":
   version "7.0.0-beta.32"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.0.0-beta.32.tgz#db1ebf62f6bc9fc08e49c4eea58463e1eb6c3bca"
   dependencies:
@@ -468,7 +468,7 @@
     invariant "^2.2.2"
     semver "^5.3.0"
 
-"@babel/preset-es2015@^7.0.0-beta.32":
+"@babel/preset-es2015@7.0.0-beta.32":
   version "7.0.0-beta.32"
   resolved "https://registry.yarnpkg.com/@babel/preset-es2015/-/preset-es2015-7.0.0-beta.32.tgz#cf35726213e6760402238ade6bb70c4d6f4495bf"
   dependencies:
@@ -498,7 +498,7 @@
     "@babel/plugin-transform-typeof-symbol" "7.0.0-beta.32"
     "@babel/plugin-transform-unicode-regex" "7.0.0-beta.32"
 
-"@babel/preset-stage-2@^7.0.0-beta.32":
+"@babel/preset-stage-2@7.0.0-beta.32":
   version "7.0.0-beta.32"
   resolved "https://registry.yarnpkg.com/@babel/preset-stage-2/-/preset-stage-2-7.0.0-beta.32.tgz#7621094accd616592f4d10febc02202c2e873c80"
   dependencies:
@@ -916,7 +916,7 @@ babel-plugin-syntax-jsx@^6.1.18:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-jsx/-/babel-plugin-syntax-jsx-6.18.0.tgz#0af32a9a6e13ca7a3fd5069e62d7b0f58d0d8946"
 
-babel-plugin-transform-class-properties@^6.24.1:
+babel-plugin-transform-class-properties@6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-class-properties/-/babel-plugin-transform-class-properties-6.24.1.tgz#6a79763ea61d33d36f37b611aa9def81a81b46ac"
   dependencies:
@@ -929,7 +929,7 @@ babel-plugin-transform-inline-environment-variables@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-inline-environment-variables/-/babel-plugin-transform-inline-environment-variables-0.2.0.tgz#37dad411a819667fd69c33e72f7a14ea1a50ba98"
 
-babel-plugin-transform-promise-to-bluebird@^1.1.1:
+babel-plugin-transform-promise-to-bluebird@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-promise-to-bluebird/-/babel-plugin-transform-promise-to-bluebird-1.1.1.tgz#dbb0882086ba3da6e1dfc2eeb58d1293acfee8f6"
 
@@ -1067,6 +1067,10 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
+bluebird@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
+
 bluebird@^3.5.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
@@ -1118,7 +1122,7 @@ browser-sync-ui@0.6.3:
     stream-throttle "^0.1.3"
     weinre "^2.0.0-pre-I0Z7U9OV"
 
-browser-sync@^2.18.13:
+browser-sync@2.18.13:
   version "2.18.13"
   resolved "https://registry.yarnpkg.com/browser-sync/-/browser-sync-2.18.13.tgz#c28dc3eb3be67c97a907082b772a37f915c14d7d"
   dependencies:
@@ -1647,7 +1651,7 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
-css-loader@^0.28.7:
+css-loader@0.28.7:
   version "0.28.7"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-0.28.7.tgz#5f2ee989dd32edd907717f953317656160999c1b"
   dependencies:
@@ -2339,7 +2343,7 @@ express@2.5.x:
     mkdirp "0.3.0"
     qs "0.4.x"
 
-extend@^3.0.1, extend@~3.0.0:
+extend@3.0.1, extend@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
@@ -3164,7 +3168,7 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
-json-loader@^0.5.4, json-loader@^0.5.7:
+json-loader@0.5.7, json-loader@^0.5.4:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.7.tgz#dca14a70235ff82f0ac9a3abeb60d337a365185d"
 
@@ -3227,7 +3231,7 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-jsx-control-statements@^3.2.8:
+jsx-control-statements@3.2.8:
   version "3.2.8"
   resolved "https://registry.yarnpkg.com/jsx-control-statements/-/jsx-control-statements-3.2.8.tgz#8e77560e95a050617c9ce2b15fe70c00e3e824b3"
   dependencies:
@@ -3714,7 +3718,14 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-node-fetch@^1.0.1, node-fetch@^1.7.1:
+node-fetch@1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.1.tgz#899cb3d0a3c92f952c47f1b876f4c8aeabd400d5"
+  dependencies:
+    encoding "^0.1.11"
+    is-stream "^1.0.1"
+
+node-fetch@^1.0.1:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
   dependencies:
@@ -5743,15 +5754,7 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
-uglifyjs-webpack-plugin@^0.4.6:
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-0.4.6.tgz#b951f4abb6bd617e66f63eb891498e391763e309"
-  dependencies:
-    source-map "^0.5.6"
-    uglify-js "^2.8.29"
-    webpack-sources "^1.0.1"
-
-uglifyjs-webpack-plugin@^1.1.2:
+uglifyjs-webpack-plugin@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.1.2.tgz#8a9abc238d01a33daaf86fa9a84c7ebc1e67b0f9"
   dependencies:
@@ -5762,6 +5765,14 @@ uglifyjs-webpack-plugin@^1.1.2:
     uglify-es "^3.2.0"
     webpack-sources "^1.0.1"
     worker-farm "^1.4.1"
+
+uglifyjs-webpack-plugin@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-0.4.6.tgz#b951f4abb6bd617e66f63eb891498e391763e309"
+  dependencies:
+    source-map "^0.5.6"
+    uglify-js "^2.8.29"
+    webpack-sources "^1.0.1"
 
 uid-number@^0.0.6:
   version "0.0.6"
