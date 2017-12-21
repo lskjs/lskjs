@@ -421,6 +421,7 @@ export default class WebpackConfig {
   }
   getPostcssModule(bundler) {
     return [
+      require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
       require('postcss-import')({
         addDependencyTo: bundler,
         path: [
@@ -448,7 +449,6 @@ export default class WebpackConfig {
       // require('rucksack-css')(), // / !
       // require('lost')(), // / !
       require('postcss-nested')(), // / !
-      require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
     ];
   }
   getLoaders() {

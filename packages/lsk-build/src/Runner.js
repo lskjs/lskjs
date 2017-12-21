@@ -154,7 +154,7 @@ ${_.map(this.modules.modules, (val, key) => {
         config.module.rules.find(x => x.use.loader === 'babel-loader')
           .use.options.plugins.unshift('react-hot-loader/babel');
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
-        config.plugins.push(new webpack.NoErrorsPlugin());
+        config.plugins.push(new webpack.NoEmitOnErrorsPlugin());
         config.plugins.push(new webpack.NamedModulesPlugin());
       }
       this.traceWebpackConfig();
