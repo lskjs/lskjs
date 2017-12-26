@@ -16,14 +16,23 @@ export default class Core {
     this.log = this.createLogger();
   }
 
-  createLoggerMock() {
+  createLoggerMock() { // TODO: переделать в LSK
+    const config = this && this.config && this.config.log || {};
+    const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
+
+    const level = config.level || 'trace';
+    const printLevels = levels.slice(levels.indexOf(level));
     const logger2 = (type) => {
       return (...args) => {
+        // console.log(printLevels, type, !printLevels.includes(type));
+        if (!printLevels.includes(type)) return;
         console.log(`[${type}]`, ...args);
         if (type === 'error' || type === 'fatal') throw type;
       };
     };
-    return ['trace', 'debug', 'info', 'warn', 'error', 'fatal'].reduce((r, name) => {
+
+
+    return levels.reduce((r, name) => {
       r[name] = logger2(name);
       return r;
     }, {});
