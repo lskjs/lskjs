@@ -6,7 +6,8 @@ import { createPath } from 'history/PathUtils';
 import { ErrorReporter, deepForceUpdate } from './core/devUtils';
 import { autobind } from 'core-decorators';
 import Uapp from '../Uapp';
-import _ from 'lodash';
+import merge from 'lodash/merge';
+import get from 'lodash/get';
 import Core from '../Core';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { AppContainer } from 'react-hot-loader';
@@ -26,7 +27,7 @@ export default class ReactApp extends Core {
 
   init() {
     this.rootState = this.getRootState();
-    this.config = _.merge({}, this.config || {}, this.rootState && this.rootState.config || {});
+    this.config = merge({}, this.config || {}, this.rootState && this.rootState.config || {});
     this.rootState.config = null; // не понмю для чего
     FastClick.attach(document.body);
     this.container = document.getElementById('root');
@@ -43,11 +44,18 @@ export default class ReactApp extends Core {
 
 
   @autobind
-  async onLocationChange(location) {
+  async onLocationChange(location, action) {
     const req = this.getReq();
     DEBUG && console.log('onLocationChange 1', location, req);
     if (location && location.hash) {
       DEBUG && console.log('!@#!@#!@#');
+      return;
+    }
+    const replace = get(history, 'state.state.replace');
+    // action && action !== 'POP' &&
+    if (replace && location && location.search && (location.pathname || '') === (req.path || '')) {
+      // history.pushState(null, '', location.search);
+      history.replaceState(null, '', location.search);
       return;
     }
     if (
