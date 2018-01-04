@@ -370,10 +370,13 @@ ${this.state.footerHtml || ''}
 
   renderHtml() {
     let root;
+    let rootDom;
     try {
-      root = ReactDOM.renderToStaticMarkup(this.renderRoot()); // because async style render
+      rootDom = this.renderRoot();
+      root = ReactDOM.renderToStaticMarkup(rootDom); // because async style render
     } catch (err) {
       console.error('ReactDOM.renderToStaticMarkup', err);
+      // __DEV__ && console.log(err);
       return `ReactDOM.renderToStaticMarkup err${JSON.stringify(err)}`;
     }
     return `\

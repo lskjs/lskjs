@@ -12,7 +12,7 @@ import Core from '../Core';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { AppContainer } from 'react-hot-loader';
 
-const DEBUG = false;
+const DEBUG = true;
 
 export default class ReactApp extends Core {
 
@@ -47,25 +47,49 @@ export default class ReactApp extends Core {
   async onLocationChange(location, action) {
     const req = this.getReq();
     DEBUG && console.log('onLocationChange 1', location, req);
-    if (location && location.hash) {
-      DEBUG && console.log('!@#!@#!@#');
-      return;
-    }
-    const replace = get(history, 'state.state.replace');
+    // if (location && location.hash) {
+    //   DEBUG && console.log('!@#!@#!@#');
+    //   return;
+    // }
+    // console.log({
+    //   location,
+    //   req,
+    //   'this.history.location': this.history.location,
+    // });
+    // if (
+    //   location &&
+    //   (location.pathname || '') === (req.pathname || '') &&
+    //   (location.search || '') === (req.search || '')
+    // ) {
+    //   DEBUG && console.log('DONT NEED RELOCATION');
+    //   return ;
+    // }
+    // const replace = get(this.history, 'state.state.replace');
+    // const replace = get(this.history, 'location.method');
+    const method = get(this.history, 'location.method');
+    // console.log({method}, this.history[method], history[method]);
+    // console.log({
+    //   location,
+    //   history: this.history,
+    //   // method
+    // });
     // action && action !== 'POP' &&
-    if (replace && location && location.search && (location.pathname || '') === (req.path || '')) {
+    if (method && typeof history !== undefined && history[method]) {
+      // console.log('replaceState');
+      // console.log('method', method);
       // history.pushState(null, '', location.search);
-      history.replaceState(null, '', location.search);
+      // history.replaceState(null, '', location.search);
+      history[method](null, '', location.search);
       return;
     }
-    if (
-      location &&
-      (location.pathname || '') === (req.pathname || '') &&
-      (location.search || '') === (req.search || '')
-    ) {
-      DEBUG && console.log('DONT NEED RELOCATION');
-      return ;
-    }
+    // if (
+    //   location &&
+    //   (location.pathname || '') === (req.pathname || '') &&
+    //   (location.search || '') === (req.search || '')
+    // ) {
+    //   DEBUG && console.log('DONT NEED RELOCATION');
+    //   return ;
+    // }
     let page;
     try {
       page = await this.getPage(req);
@@ -76,6 +100,7 @@ export default class ReactApp extends Core {
 
     if (page.state.redirect) {
       this.history.replace(page.state.redirect);
+      return ;
     }
 
     try {
@@ -103,6 +128,7 @@ export default class ReactApp extends Core {
     return {
       hostname: window.location.hostname,
       path: window.location.pathname,
+      search: window.location.search,
       query: qs.parse(window.location.search.substr(1)),
     };
   }
