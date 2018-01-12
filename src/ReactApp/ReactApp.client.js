@@ -12,7 +12,7 @@ import Core from '../Core';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { AppContainer } from 'react-hot-loader';
 
-const DEBUG = true;
+const DEBUG = __DEV__ && false;
 
 export default class ReactApp extends Core {
 

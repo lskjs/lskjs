@@ -36,6 +36,11 @@ export default class Page {
     this.disabled = false;
   }
 
+  toTop() {
+    if (__CLIENT__) document.body.scrollTop = 0;
+    return this;
+  }
+
   checkAuth() {
     // console.log('checkAuth',!!(this.uapp && this.uapp.rootState.user),this.uapp);
     return this.uapp.rootState.user;
@@ -188,7 +193,7 @@ export default class Page {
     } else {
       this.state.component = args[0];
     }
-    return this;
+    return this.toTop();
   }
 
   content(content) {

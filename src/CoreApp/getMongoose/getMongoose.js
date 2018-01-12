@@ -4,7 +4,15 @@ import _ from 'lodash';
 export default (ctx, params) => {
   ctx.log.trace('db init');
   const mongoose = new mongooseLib.Mongoose();
-  const defaultOptions = { server: { socketOptions: { keepAlive: 1 } } };
+  const defaultOptions = {
+    keepAlive: true,
+    // server: {
+    // socketOptions: {
+    //   keepAlive: 1
+    //  }
+    // },
+    useMongoClient: true ,
+  };
   const options = _.defaultsDeep({}, defaultOptions, params.options || {});
 
   mongoose.Promise = ctx.Promise || global.Promise;

@@ -126,7 +126,6 @@ class UniversalSchema {
   index(...args) {
     this.indexes.push(args);
   }
-
 }
 
 UniversalSchema.defaultParams = {
