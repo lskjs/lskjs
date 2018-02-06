@@ -1,5 +1,5 @@
 export default {
-  modules: require('glob!./glob.txt'),
+  modules: require('glob-loader!./glob.txt'),
   options: {
     name: 'YourComponent',
   },

@@ -1,3 +1,3 @@
 import params from './params';
-import addons from 'storybox/custom-addons';
+import addons from 'storybox/dist/custom-addons';
 addons(params);
