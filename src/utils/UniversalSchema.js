@@ -31,8 +31,12 @@ class UniversalSchema {
     this.preMethods = {
       save: async function (next) {
         this.wasNew = this.isNew;
-        this.preSave && await this.preSave();
-        next();
+        try {
+          this.preSave && await this.preSave();
+        } catch(err) {
+          return next(err);
+        }
+        return next();
       }
     };
     this.postMethods = {
