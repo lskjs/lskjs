@@ -50,8 +50,7 @@ export default class Page {
     // if ()
     return !!(this.uapp && this.uapp.rootState.user &&
       (
-        this.uapp.rootState.user.role === role ||
-        this.uapp.rootState.user.username === 'me@coder24.ru'
+        this.uapp.rootState.user.role === role
       )
     );
   }
