@@ -10,6 +10,11 @@ import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
 import staticFileMiddleware from 'connect-static-file';
 
+process.on('unhandledRejection', err => {
+  console.log("UnhandledPromiseRejectionWarning: Unhandled promise rejection:");
+  console.log(err.stack);
+});
+
 export default class CoreApp extends ExpressApp {
   Api = Api;
   init() {

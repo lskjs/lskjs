@@ -1,11 +1,10 @@
 {
   "presets": [
-    "@babel/preset-react",
     "@babel/preset-es2015",
-    "@babel/preset-stage-2"
+    "@babel/preset-react",
+    "@babel/preset-stage-0"
   ],
   "plugins": [
-    "module:jsx-control-statements",
     "react-require",
     "transform-decorators-legacy"
   ]

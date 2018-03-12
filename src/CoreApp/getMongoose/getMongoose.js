@@ -11,7 +11,7 @@ export default (ctx, params) => {
     //   keepAlive: 1
     //  }
     // },
-    useMongoClient: true ,
+    // useMongoClient: true ,
   };
   const options = _.defaultsDeep({}, defaultOptions, params.options || {});
 

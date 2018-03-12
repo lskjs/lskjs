@@ -155,10 +155,11 @@ export default class ReactApp extends Core {
 
   async getPage(req) {
     const uapp = await this.getUapp(req);
-    return uapp.resolve({
+    uapp.resolve({
       path: req.path,
       query: req.query,
     });
+    return uapp.page;
   }
 
 

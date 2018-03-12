@@ -83,6 +83,9 @@ export default class Uapp extends Core {
   async run(props = {}) {
     await super.run();
     this.routes = resolveCtxRoutes(this.getRoutes(), this);
+    this.router = new UniversalRouter(this.routes, {
+      context: this.provide(),
+    });
   }
 
 
@@ -96,8 +99,15 @@ export default class Uapp extends Core {
   }
 
   getRoutes() {
-    // console.log('getRoutes ********* ');
-    return {};// require('../ReactApp/routes').default;
+    return {
+      path: '/:a?/:b?/:c?/:d?',
+      action(params, route) {
+        const { page } = params;
+        return page.component('div', {
+          children: 'Hello World',
+        })
+      }
+    };// require('../ReactApp/routes').default;
   }
 
   resetPage() {
@@ -111,9 +121,10 @@ export default class Uapp extends Core {
   }
 
 
-  async updateClientRoot(page) {
+  async updateClientRoot() {
+    // this.page
     document.body.scrollTop = 0; // @TODO: back
-    document.title = page.renderFullTitle();
+    document.title = this.page.renderFullTitle();
     // @TODO: to @natavts favicon, meta tags
   }
 
@@ -122,17 +133,18 @@ export default class Uapp extends Core {
     const req = Api.createReq(reqParams);
     // console.log('Uapp.resolve', req);
     this.resetPage();
-    const page = await UniversalRouter.resolve(this.routes, {
-      ...this.provide(),
+    // console.log('page $$$$', this.page);
+    await this.router.resolve({
+      pathname: reqParams.path,
       path: reqParams.path,
       query: reqParams.query,
       req,
+      page: this.page,
     });
+    // console.log('2222222');
     if (__CLIENT__) {
-      this.updateClientRoot(page);
+      this.updateClientRoot();
     }
-    // if (page._page) throw '!page';
-    return page;
   }
 
   provide() {

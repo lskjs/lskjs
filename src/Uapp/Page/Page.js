@@ -208,16 +208,19 @@ export default class Page {
     return this;
   }
 
-
-  // //////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////
 
   renderLayout(props = {}, layout = null) {
+    // console.log('page.renderLayout', props);
+    // if (typeof props.children === 'undefined') {
+    //   props.children = 'undefined'
+    // }
     if (!this.state.layout) {
       return props.children;
     }
     if (!layout) layout = this.state.layout;
     const Layout = layout;
+    // console.log('page.render');
 
     return <Layout {...props} />;
   }
@@ -230,9 +233,18 @@ export default class Page {
   }
 
   renderComponentWithLayout() {
-    // console.log('page.render');
+    let children = this.renderComponent();
+    if (typeof children === 'undefined') {
+      if (__DEV__) {
+        children = 'undefined';
+      } else {
+        children = '';
+      }
+    };
+    // console.log('page.children', children, typeof children, typeof children === 'undefined');
+
     return this.renderLayout({
-      children: this.renderComponent(),
+      children,
     });
   }
 
@@ -255,8 +267,6 @@ export default class Page {
 
   getTitle() {
     const metas = this.state.metas || [];
-    // "profile.games": { $in: ["aa", "bb", "z"] }
-    // console.log(metas);
     return _.get(metas, `${metas.length - 1}.title`) || '';
   }
 
@@ -380,9 +390,13 @@ ${this.state.footerHtml || ''}
       rootDom = this.renderRoot();
       root = ReactDOM.renderToStaticMarkup(rootDom); // because async style render
     } catch (err) {
-      console.error('ReactDOM.renderToStaticMarkup', err);
+      const text = ['Error', 'Page.renderHtml', 'ReactDOM.renderToStaticMarkup', ''].join(':\n');
+      console.error(text, err);
       // __DEV__ && console.log(err);
-      return `ReactDOM.renderToStaticMarkup err${JSON.stringify(err)}`;
+      if (__DEV__) {
+        return `<pre>${text}${err.stack}</pre>`;
+      }
+      return err.message;
     }
     return `\
   <!doctype html>
