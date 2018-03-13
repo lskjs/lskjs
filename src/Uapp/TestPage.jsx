@@ -9,26 +9,24 @@ export default class TestPage extends PureComponent {
   render() {
     const { uapp } = this.props;
     const { count } = this.state;
-    return (
+    return <>
+      <h1>Hello World: {uapp?.name}</h1>
       <div>
-        <h1>Hello World: {uapp?.name}</h1>
-        <div>
-          {count}
-          <button onClick={() => this.setState({
-            count: count + 1,
-          })}>
-            ++
-          </button>
-        </div>
-        <div>
-          {[
-            __DEV__ && '__DEV__',
-            __PROD__ && '__PROD__',
-            __SERVER__ && '__SERVER__',
-            __CLIENT__ && '__CLIENT__',
-          ].filter(a => a).join(' ')}
-        </div>
+        {count}
+        <button onClick={() => this.setState({
+          count: count + 1,
+        })}>
+          ++
+        </button>
       </div>
-    )
+      <div>
+        {[
+          __DEV__ && '__DEV__',
+          __PROD__ && '__PROD__',
+          __SERVER__ && '__SERVER__',
+          __CLIENT__ && '__CLIENT__',
+        ].filter(a => a).join(' ')}
+      </div>
+    </>
   }
 }
