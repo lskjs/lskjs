@@ -93,26 +93,27 @@ export default class WebpackConfig {
 
   getBabelPresets() {
     return [
-      '@babel/preset-react',
-      '@babel/preset-es2015',
+      '@babel/preset-env',
       '@babel/preset-stage-0',
-      ['@babel/preset-env', {
-        modules: false,
-        loose: true,
-        useBuiltIns: 'entry',
-        targets: {
-          forceAllTransforms: true,
-        },
-      }],
+      '@babel/preset-react',
+      // ['@babel/preset-env', {
+      //   modules: false,
+      //   loose: true,
+      //   useBuiltIns: 'entry',
+      //   targets: {
+      //     forceAllTransforms: true,
+      //   },
+      // }],
     ];
   }
 
   getBabelPlugins() {
+    // console.log(2312312312312);
     return [
       'module:jsx-control-statements',
-      'react-require',
-      'transform-decorators-legacy',
-      'transform-class-properties'
+      // 'react-require',
+      // 'transform-decorators-legacy',
+      // 'transform-class-properties'
     ];
   }
 
@@ -127,7 +128,7 @@ export default class WebpackConfig {
       use: {
         loader: 'babel-loader',
         // https://github.com/babel/babel-loader#options
-        
+
         // https://babeljs.io/docs/usage/options/
         options: {
           //sourceMaps: this.isSourcemap(),
@@ -330,7 +331,7 @@ export default class WebpackConfig {
             options: {
               sourceMap: this.isSourcemap(),
               modules: false,
-              minimize: !this.isDebug(),  
+              minimize: !this.isDebug(),
             }
           },
           {
@@ -368,7 +369,7 @@ export default class WebpackConfig {
                 // pack: 'sass',
                 plugins: getPostcssModule
               }
-            }, 
+            },
             'sass-loader'
           ]
         })
@@ -396,7 +397,7 @@ export default class WebpackConfig {
               sourceMap: this.isSourcemap(),
               modules: true,
               localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-              minimize: !this.isDebug(),  
+              minimize: !this.isDebug(),
             },
           },
           {
