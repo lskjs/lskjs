@@ -39,9 +39,9 @@ export default class Core {
   }
 
   createLogger(params) {
-    if (__DEV__ && __CLIENT__) {
-      return this.createLoggerMock();
-    }
+    // if (__DEV__ && __CLIENT__) {
+    //   return this.createLoggerMock();
+    // }
     const options = Object.assign({
       name: 'app',
       src: __DEV__,

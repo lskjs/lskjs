@@ -225,6 +225,7 @@ export default class Page {
   }
 
   renderComponent() {
+    // console.log('renderComponent', this.state);
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
@@ -233,14 +234,15 @@ export default class Page {
 
   renderComponentWithLayout() {
     let children = this.renderComponent();
+    // console.log('page.children111', children, typeof children, typeof children === 'undefined');
     if (typeof children === 'undefined') {
       if (__DEV__) {
-        children = 'undefined';
+        children = '@undefined';
       } else {
         children = '';
       }
     };
-    // console.log('page.children', children, typeof children, typeof children === 'undefined');
+    // console.log('page.children222', children, typeof children, typeof children === 'undefined');
 
     return this.renderLayout({
       children,

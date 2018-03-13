@@ -5,6 +5,7 @@ import Page from './Page';
 import Api from 'apiquery';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
+import TestPage from './TestPage';
 // import safeRender from './safeRender';
 
 // TODO: вынести функции работы с хостнеймом куда нибудь
@@ -103,14 +104,16 @@ export default class Uapp extends Core {
       path: '/:a?/:b?/:c?/:d?',
       action(params, route) {
         const { page } = params;
-        return page.component('div', {
-          children: 'Hello World',
-        })
+        // console.log({TestPage});
+        return page.component(TestPage, {
+          count: 10
+        });
       }
     };// require('../ReactApp/routes').default;
   }
 
   resetPage() {
+    // console.log('resetPage');
     if (!this.page) {
       this.page = new this.Page();
     }
@@ -130,18 +133,23 @@ export default class Uapp extends Core {
 
   // return page for req
   async resolve(reqParams = {}) {
+    // console.log('resolve');
     const req = Api.createReq(reqParams);
     // console.log('Uapp.resolve', req);
     this.resetPage();
     // console.log('page $$$$', this.page);
-    await this.router.resolve({
-      pathname: reqParams.path,
-      path: reqParams.path,
-      query: reqParams.query,
-      req,
-      page: this.page,
-    });
-    // console.log('2222222');
+    // console.log('this.router.resolve');
+    try {
+      await this.router.resolve({
+        pathname: reqParams.path,
+        path: reqParams.path,
+        query: reqParams.query,
+        req,
+        page: this.page,
+      });
+    } catch(err) {
+      console.log('app.router.resolve err', err);
+    }
     if (__CLIENT__) {
       this.updateClientRoot();
     }

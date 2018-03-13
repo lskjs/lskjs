@@ -14,6 +14,7 @@ import { AppContainer } from 'react-hot-loader';
 
 const DEBUG = __DEV__ && false;
 
+
 export default class ReactApp extends Core {
 
   getRootState() {
@@ -25,7 +26,7 @@ export default class ReactApp extends Core {
     return callback(window.confirm(message));
   }
 
-  init() {
+  async init() {
     this.rootState = this.getRootState();
     this.config = merge({}, this.config || {}, this.rootState && this.rootState.config || {});
     this.rootState.config = null; // не понмю для чего
@@ -104,10 +105,11 @@ export default class ReactApp extends Core {
     }
 
     try {
+      const root = page.renderRoot();
       if (module.hot) {
-        this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: page.renderRoot()}), this.container, this.postRender);
+        this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: root}), this.container, this.postRender);
       } else {
-        this.appInstance = ReactDOM.render(page.renderRoot(), this.container, this.postRender);
+        this.appInstance = ReactDOM.render(root, this.container, this.postRender);
       }
     } catch (err) {
       this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
@@ -155,7 +157,7 @@ export default class ReactApp extends Core {
 
   async getPage(req) {
     const uapp = await this.getUapp(req);
-    uapp.resolve({
+    await uapp.resolve({
       path: req.path,
       query: req.query,
     });
