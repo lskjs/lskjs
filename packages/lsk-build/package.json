@@ -1,6 +1,6 @@
 {
   "name": "lsk-build",
-  "version": "1.17.1",
+  "version": "1.17.2",
   "description": "Lego Starter Kit builder & webpack configurator",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,6 @@
     "css-loader": "0.28.10",
     "del": "3.0.0",
     "extend": "3.0.1",
-    "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.11",
     "json-loader": "0.5.7",
     "jsx-control-statements": "3.2.8",
@@ -62,17 +61,18 @@
     "style-loader": "0.20.3",
     "uglifyjs-webpack-plugin": "1.2.3",
     "url-loader": "1.0.1",
-    "webpack": "4.1.1",
+    "webpack": "3.11.0",
     "webpack-hot-middleware": "2.21.2",
-    "webpack-middleware": "1.5.1"
+    "webpack-middleware": "1.5.1",
+    "extract-text-webpack-plugin": "3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.40",
     "@babel/core": "7.0.0-beta.40",
     "@babel/preset-env": "7.0.0-beta.40",
-    "@babel/preset-stage-0": "^7.0.0-beta.40",
+    "@babel/preset-stage-0": "7.0.0-beta.40",
     "babel-eslint": "8.2.2",
-    "babel-loader": "^8.0.0-beta.2",
+    "babel-loader": "8.0.0-beta.2",
     "babel-plugin-transform-class-properties": "6.24.1",
     "eslint": "4.18.2",
     "eslint-config-airbnb": "16.1.0",

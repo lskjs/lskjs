@@ -172,9 +172,19 @@ ${_.map(this.modules.modules, (val, key) => {
           const bs = Browsersync.create();
           bs.init({
             ...(this.debug ? {} : { notify: false, ui: false }),
+            // ghostMode: {
+            //   clicks: true,
+            //   forms: true,
+            //   scroll: false,
+            // },
+            ghostMode: false,
+            codeSync: false,
             proxy: {
               target: server.host,
-              middleware: [wpMiddleware, hotMiddleware],
+              middleware: [
+                wpMiddleware,
+                hotMiddleware
+              ],
               proxyOptions: {
                 xfwd: true,
               },
