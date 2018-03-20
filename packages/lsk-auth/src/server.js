@@ -57,12 +57,15 @@ export default (ctx) => {
       _.forEach(this.strategies, (Strategy) => {
         if (!Strategy) return null;
         const strategy = new Strategy();
+        console.log({strategy});
         if (!strategy) return null;
         const { providerName } = strategy;
+        console.log({providerName});
         if (!this.config.socials[providerName]) return null;
         this._strategies[providerName] = strategy;
         this.passport.use(strategy.getStrategy(strategy));
       });
+      ctx.log.trace('auth strategies', Object.keys(this._strategies));
       // if (this.strategies) {
       //   _.forEach(this.strategies || [], (strategy) => {
       //     this.passport.use(strategy.getStrategy(strategy));
@@ -96,6 +99,7 @@ export default (ctx) => {
       api.all('/social/bind', isAuth, this.controller.socialBind); // Добавление соц.сетей к пользователю
       api.all('/social/unbind', isAuth, this.controller.socialUnbind);
 
+      console.log('@@@@@@');
       // social auth init
       api.get('/:provider', this.controller.socialAuth);
       api.get('/:provider/auth', this.controller.socialAuth);

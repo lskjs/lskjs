@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-import { autobind } from 'core-decorators';
+import React from 'react';
+import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import { observer, inject } from 'mobx-react';
 import {
   Grid,

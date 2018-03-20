@@ -235,7 +235,7 @@ export default (ctx, module) => {
       user: await User.prepare(user, { req }),
       token: user.generateAuthToken(),
     };
-  }
+  };
 
   controller.socialBind = async (req) => {
     const { User } = ctx.models;
@@ -328,6 +328,7 @@ export default (ctx, module) => {
 
   controller.socialCallback2 = async (req, res, next) => {
     const { provider } = req.params;
+    __DEV__ && console.log('socialCallback2');
     module.passport.authenticate(provider, (err, { redirect }) => {
       if (err) { return next(err); }
       res.redirect(redirect || '/');
@@ -336,6 +337,7 @@ export default (ctx, module) => {
 
   controller.socialCallback = async (req, res) => {
     const { provider } = req.params;
+    __DEV__ && console.log('socialCallback');
     try {
       return new Promise((resolve, reject) => {
         (
@@ -346,7 +348,8 @@ export default (ctx, module) => {
               // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
               if (err) return reject(err);
               return resolve(res.redirect(data.redirect || '/'));
-            })
+            },
+          )
         )(req);
       });
     } catch (err) {
@@ -358,8 +361,11 @@ export default (ctx, module) => {
   controller.socialAuth = (req, res, next) => {
     const { provider } = req.params;
     // console.log('socialAuth');
-    // console.log('socialAuth', provider);
-    if (!module._strategies[provider] || !module.strategies[provider]) return e404('not such provider');
+    // console.log('socialAuth', provider, !!module._strategies[provider], !!module.strategies[provider]);
+    if (!module.strategies[provider]) return e404(`No provider: ${provider}`);
+    if (!module._strategies[provider]) return e404(`No config for provider: ${provider}`);
+    // console.log('socialAuth2', provider);
+
     module.passport.authenticate(
       provider,
       module.strategies[provider].getPassportParams(),

@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { autobind } from 'core-decorators';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import importcss from 'importcss';
 import _ from 'lodash';
 import {
