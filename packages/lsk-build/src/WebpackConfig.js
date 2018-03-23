@@ -111,6 +111,7 @@ export default class WebpackConfig {
     // console.log(2312312312312);
     return [
       'module:jsx-control-statements',
+      '@babel/plugin-proposal-class-properties',
       // 'react-require',
       // 'transform-decorators-legacy',
       // 'transform-class-properties'
