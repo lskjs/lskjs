@@ -244,7 +244,7 @@ export default class Runner extends RunnerBase {
   }
 
 
-  async start4() {
+  async start() {
     DEBUG && console.log('Runner.start');
     const webpackConfig = this.webpackConfig;
     const [config] = webpackConfig;
@@ -270,7 +270,7 @@ export default class Runner extends RunnerBase {
 
       console.log(111);
       const bundler = webpack(webpackConfig);
-      console.log(222);
+      console.log(222, bundler);
       // const wpMiddleware = webpackMiddleware(bundler, {
       //   publicPath: config.output.publicPath,
       //   stats: config.stats,

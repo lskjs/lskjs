@@ -4,10 +4,10 @@ const bunyan = {
   createLogger: (params) => {
     return createLogger({
      streams: [
-          {
-              level: DEBUG, // or use the string 'info'
-              stream: new ConsoleFormattedStream()
-          }
+        {
+          level: DEBUG, // or use the string 'info'
+          stream: new ConsoleFormattedStream()
+        }
       ],
 
       serializers: stdSerializers,

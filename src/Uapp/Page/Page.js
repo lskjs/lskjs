@@ -95,9 +95,9 @@ export default class Page {
 
 
   isAuth() {
-    if (!this.checkAuth()) {
+    if (!this.uapp.rootState.user) {
       return this
-        .redirect('/auth/login?r=/return/back/url') // @TODO return back url
+        .redirect('/auth/login?r=' + this.uapp?.req?.path)
         .disable();
     }
     return this;
@@ -124,21 +124,37 @@ export default class Page {
 
   error(err) {
     if (__DEV__) {
-      console.error({ err });
+      if (err.message) {
+        console.error(err.message);
+        console.error(err.stack);
+      } else {
+        console.error(err);
+      }
     }
     if (this.disabled) return this;
     return this
       .layout(this.state.errorLayout)
-      .title('ERROR!!!')
-      .component(`Error: ${err}`);
+      // .title('ERROR')
+      .component('div', { children: `Error: ${err}` });
   }
 
-  next(next) {
+  async next(next) {
+    // console.log('next111');
     if (this.disabled) return this;
-    return next()
-    .catch((err) => {
+    // console.log('next1222');
+    try {
+      const res = await next();
+      // console.log('next result', res);
+      return res;
+    } catch(err) {
       return this.error(err);
-    });
+    }
+    // return res;
+    // return res
+    // .catch((err) => {
+    //   console.log('nex333');
+    //   return this.error(err);
+    // });
   }
 
   title(...args) {
@@ -225,7 +241,7 @@ export default class Page {
   }
 
   renderComponent() {
-    // console.log('renderComponent', this.state);
+    console.log('Page.renderComponent', this.state);
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }

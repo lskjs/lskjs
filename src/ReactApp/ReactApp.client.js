@@ -106,11 +106,11 @@ export default class ReactApp extends Core {
 
     try {
       const root = page.renderRoot();
-      if (module.hot) {
-        this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: root}), this.container, this.postRender);
-      } else {
+      // if (module.hot) {
+      //   this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: root}), this.container, this.postRender);
+      // } else {
         this.appInstance = ReactDOM.render(root, this.container, this.postRender);
-      }
+      // }
     } catch (err) {
       this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
       // Display the error in full-screen for development mode

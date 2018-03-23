@@ -26,11 +26,12 @@ var child_process = require('child_process'),
     execFile = child_process.execFile;
 var assert = require('assert');
 
-try {
-    var moment = require('moment');
-} catch (e) {
-    moment = null;
-}
+var moment = null;
+// try {
+//     var moment = require('moment');
+// } catch (e) {
+//     moment = null;
+// }
 
 
 //---- globals and constants

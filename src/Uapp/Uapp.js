@@ -135,11 +135,12 @@ export default class Uapp extends Core {
   async resolve(reqParams = {}) {
     // console.log('resolve');
     const req = Api.createReq(reqParams);
-    // console.log('Uapp.resolve', req);
+    __DEV__ && console.log('Uapp.resolve', req);
     this.resetPage();
     // console.log('page $$$$', this.page);
-    // console.log('this.router.resolve');
+    console.log('this.router.resolve');
     try {
+      // console.log('Uapp.router.resolve', );
       await this.router.resolve({
         pathname: reqParams.path,
         path: reqParams.path,
@@ -150,9 +151,9 @@ export default class Uapp extends Core {
     } catch(err) {
       console.log('app.router.resolve err', err);
     }
-    if (__CLIENT__) {
-      this.updateClientRoot();
-    }
+    // if (__CLIENT__) {
+    //   this.updateClientRoot();
+    // }
   }
 
   provide() {
