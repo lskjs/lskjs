@@ -66,7 +66,7 @@ export default class ReactApp extends CoreApp {
       let page;
       try {
         page = await this.getPage(req);
-        __DEV__ && console.log({page});
+        // __DEV__ && console.log({page});
       } catch (err) {
         this.log.error('SSR app.getPage(req) err', err);
         return next(err);
