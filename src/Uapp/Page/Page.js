@@ -241,7 +241,7 @@ export default class Page {
   }
 
   renderComponent() {
-    console.log('Page.renderComponent', this.state);
+    // console.log('Page.renderComponent', this.state);
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }

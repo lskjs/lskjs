@@ -138,7 +138,7 @@ export default class Uapp extends Core {
     __DEV__ && console.log('Uapp.resolve', req);
     this.resetPage();
     // console.log('page $$$$', this.page);
-    console.log('this.router.resolve');
+    // console.log('this.router.resolve');
     try {
       // console.log('Uapp.router.resolve', );
       await this.router.resolve({

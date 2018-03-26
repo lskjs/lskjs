@@ -17,10 +17,10 @@ process.on('unhandledRejection', err => {
 
 export default class CoreApp extends ExpressApp {
   Api = Api;
-  init() {
+  async init() {
     super.init(...arguments);
     this.log.trace('CoreApp init');
-    this.db = this.getDatabase();
+    this.db = await this.getDatabase();
     this.requests = this.getRequests();
     this.log.debug('requests', Object.keys(this.requests));
     this.responses = this.getResponses();
