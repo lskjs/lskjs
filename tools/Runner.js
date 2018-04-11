@@ -5,7 +5,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
+// import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 // import webpackConfig from './webpack.config';
 // import run, { format } from './run';
 // import clean from './clean';
@@ -69,7 +69,7 @@ export default class Runner extends RunnerBase {
    */
     if (server) return server;
     server = express();
-    server.use(errorOverlayMiddleware());
+    // server.use(errorOverlayMiddleware());
     server.use(express.static(path.resolve(__dirname, '../public')));
 
     // Configure client-side hot module replacement

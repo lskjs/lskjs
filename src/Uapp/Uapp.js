@@ -83,9 +83,11 @@ export default class Uapp extends Core {
 
   async run(props = {}) {
     await super.run();
+    const context = this.provide();
+    this.log.trace('router.context', Object.keys(context))
     this.routes = resolveCtxRoutes(this.getRoutes(), this);
     this.router = new UniversalRouter(this.routes, {
-      context: this.provide(),
+      context,
     });
   }
 
@@ -101,10 +103,13 @@ export default class Uapp extends Core {
 
   getRoutes() {
     return {
-      path: '/:a?/:b?/:c?/:d?',
-      action(params, route) {
+      path: '(.*)',
+      action(params) {
         const { page } = params;
         // console.log({TestPage});
+        if (__CLIENT__) {
+          this.log(params.pathname, params);
+        }
         return page.component(TestPage, {
           count: 10
         });
