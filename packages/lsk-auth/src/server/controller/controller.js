@@ -1,5 +1,6 @@
 import validator from 'validator';
-import _ from 'lodash';
+import merge from 'lodash/merge';
+import random from 'lodash/random';
 import canonize from '../canonize';
 import canonizeUsername from '../canonizeUsername';
 import transliterate from '../transliterate';
@@ -213,7 +214,7 @@ export default (ctx, module) => {
     const passport = await Passport.getByToken(req.data.p);
     let user = await passport.getUser();
     if (!user) {
-      const params = _.merge(
+      const params = merge(
         { profile: passport.profile },
         // req.data, // meta
         {
@@ -377,7 +378,7 @@ export default (ctx, module) => {
     const smsConfig = module.config.sms;
 
     const { phone } = req.data;
-    const code = _.random(100000, 999999);
+    const code = random(100000, 999999);
     controller.lastCode = code;
 
     const smsText = `Ваш проверочный код: ${code}`;

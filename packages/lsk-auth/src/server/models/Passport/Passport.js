@@ -1,6 +1,6 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 import jwt from 'jsonwebtoken';
-import _ from 'lodash';
+import pick from 'lodash/pick';
 import canonizeUsername from '../../canonizeUsername';
 export function getSchema(ctx, module) {
   const mongoose = ctx.db;
@@ -80,7 +80,7 @@ export function getSchema(ctx, module) {
   };
 
   schema.methods.getIdentity = function (params = {}) {
-    const object = _.pick(this.toObject(), ['_id']);
+    const object = pick(this.toObject(), ['_id']);
     return Object.assign(object, params);
   };
 
@@ -101,6 +101,12 @@ export function getSchema(ctx, module) {
   schema.methods.getStrategy = function () {
     const strategy = module._strategies[this.provider];
     return strategy;
+  };
+
+  schema.methods.updateToken = async function () {
+    const strategy = this.getStrategy();
+    if (!strategy) return null;
+    await strategy.updateTokens(this);
   };
 
   schema.methods.updateData = async function () {

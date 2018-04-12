@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import get from 'lodash/get';
+import forEach from 'lodash/forEach';
 import { Passport } from 'passport';
 import onlineService from './server/onlineService';
 
@@ -35,7 +36,7 @@ export default (ctx) => {
       return require('./server/strategies').default(ctx, this);
     }
     async init() {
-      this.config = _.get(ctx, 'config.auth', {});
+      this.config = get(ctx, 'config.auth', {});
 
       if (this.config.telegram) {
         this.tbot = require('./tbot').default(ctx, this);
@@ -54,20 +55,20 @@ export default (ctx) => {
     async run() {
       // this.strategies = require('./strategies').default(ctx, this);
       // const { strategies } = this || {};
-      _.forEach(this.strategies, (Strategy) => {
+      forEach(this.strategies, (Strategy) => {
         if (!Strategy) return null;
         const strategy = new Strategy();
-        console.log({strategy});
+        // console.log({strategy});
         if (!strategy) return null;
         const { providerName } = strategy;
-        console.log({providerName});
+        // console.log({providerName});
         if (!this.config.socials[providerName]) return null;
         this._strategies[providerName] = strategy;
         this.passport.use(strategy.getStrategy(strategy));
       });
       ctx.log.trace('auth strategies', Object.keys(this._strategies));
       // if (this.strategies) {
-      //   _.forEach(this.strategies || [], (strategy) => {
+      //   forEach(this.strategies || [], (strategy) => {
       //     this.passport.use(strategy.getStrategy(strategy));
       //   });
       // }
@@ -99,7 +100,6 @@ export default (ctx) => {
       api.all('/social/bind', isAuth, this.controller.socialBind); // Добавление соц.сетей к пользователю
       api.all('/social/unbind', isAuth, this.controller.socialUnbind);
 
-      console.log('@@@@@@');
       // social auth init
       api.get('/:provider', this.controller.socialAuth);
       api.get('/:provider/auth', this.controller.socialAuth);

@@ -2,7 +2,11 @@ import _ from 'lodash';
 import get from 'lodash/get';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import isPlainObject from 'lodash/isPlainObject';
+import omit from 'lodash/omit';
+import pick from 'lodash/pick';
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
+
 const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);
 const bcryptHash = Promise.promisify(bcrypt.hash);
 const bcryptCompare = Promise.promisify(bcrypt.compare);
@@ -19,7 +23,7 @@ const sample2 = {
 };
 
 function fullName(profile) {
-  if (!profile || !_.isPlainObject(profile)) return null;
+  if (!profile || !isPlainObject(profile)) return null;
   let fullname;
   if (profile.middleName) {
     fullname = [profile.lastName, profile.firstName, profile.middleName];
@@ -89,7 +93,7 @@ export function getSchema(ctx, module) {
     return Math.random().toString(36).substr(2, length);
   };
   schema.methods.toJSON = function () {
-    const objs = _.omit(this.toObject(), ['password', 'private']);
+    const objs = omit(this.toObject(), ['password', 'private']);
     const visitedAt = module.online.visitedAt[this._id];
     if (visitedAt) {
       objs.visitedAt = visitedAt;
@@ -97,7 +101,7 @@ export function getSchema(ctx, module) {
     return objs;
   };
   schema.methods.getIdentity = function (params = {}) {
-    const object = _.pick(this.toObject(), ['_id', 'username', 'name', 'avatar', 'role']);
+    const object = pick(this.toObject(), ['_id', 'username', 'name', 'avatar', 'role']);
     return Object.assign(object, params);
   };
   schema.methods.generateAuthToken = function (params) {
@@ -114,7 +118,7 @@ export function getSchema(ctx, module) {
       to: this.email,
       locale: this.locale || 'ru',
       user: this,
-    }; //this.email || this.toJSON().email;// || this.username || this.toJSON().username;
+    }; // this.email || this.toJSON().email;// || this.username || this.toJSON().username;
   };
 
   const { e400, e500 } = ctx.errors;
@@ -148,7 +152,7 @@ export function getSchema(ctx, module) {
     const user = this.toObject();
     const visitedAt = module.online.visitedAt[this._id] || user.visitedAt;
     return {
-      ..._.omit(user, ['private', 'password']),
+      ...omit(user, ['private', 'password']),
       visitedAt,
     };
   };
@@ -207,8 +211,8 @@ export function getSchema(ctx, module) {
     if (!decode.userId) throw e400('!decode.userId');
     if (!decode.email) throw e400('!decode.email');
     const user = await this
-    .findById(userId)
-    .then(checkNotFound);
+      .findById(userId)
+      .then(checkNotFound);
     if (user.email !== email) throw e400('user.email !== email');
     if (!user.private) user.private = {};
     // console.log(user.private.approvedEmailToken);

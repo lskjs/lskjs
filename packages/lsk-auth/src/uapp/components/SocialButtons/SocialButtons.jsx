@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import importcss from 'importcss';
 import { inject } from 'mobx-react';
-import _ from 'lodash';
+import get from 'lodash/get';
+import filter from 'lodash/filter';
 import SocialButton from '../SocialButton';
 import buttons from '../../socials';
 
@@ -14,8 +15,8 @@ export default class SocialButtons extends Component {
   }
   render() {
     const { config } = this.props;
-    const socials = _.get(config, 'auth.socials', []);
-    const buttons2 = _.filter(buttons, (value, name) => {
+    const socials = get(config, 'auth.socials', []);
+    const buttons2 = filter(buttons, (value, name) => {
       if (socials.indexOf(value.name) === -1) return false;
       return true;
     });

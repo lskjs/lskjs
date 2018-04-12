@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'core-decorators/lib/autobind';
 import importcss from 'importcss';
-import _ from 'lodash';
+import omit from 'lodash/omit';
 import {
   Button,
 } from 'react-bootstrap';
@@ -48,7 +48,7 @@ export default class SocialButton extends Component {
     const Icon = value.icon;
     return (
       <span
-        {..._.omit(this.props, ['clickable'])}
+        {...omit(this.props, ['clickable'])}
         style={style}
         onMouseEnter={this.toggleHover}
         onMouseLeave={this.toggleHover}

@@ -1,5 +1,5 @@
 import Youtube from 'passport-youtube-v3';
-import _ from 'lodash';
+import get from 'lodash/get';
 import Api from 'apiquery';
 
 export default (ctx, { Strategy, config }) => {
@@ -18,7 +18,7 @@ export default (ctx, { Strategy, config }) => {
     }
 
     async updateTokens(passport) {
-      const ytConfig = _.get(config, 'socials.youtube.config');
+      const ytConfig = get(config, 'socials.youtube.config');
       if (!ytConfig) return null;
       const api = new Api();
       const body = Api.qs.stringify({
@@ -71,8 +71,8 @@ export default (ctx, { Strategy, config }) => {
       });
       const json = await response.json();
       const profile = {
-        avatar: _.get(json, 'items[0].snippet.thumbnails.high.url'),
-        title: _.get(json, 'items[0].snippet.title'),
+        avatar: get(json, 'items[0].snippet.thumbnails.high.url'),
+        title: get(json, 'items[0].snippet.title'),
       };
 
       if (profile.title) {
