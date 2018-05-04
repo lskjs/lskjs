@@ -1,0 +1,2 @@
+- rename `config.client` => `config.uapp`
+- прокинуть сквозные конфиги во все модули

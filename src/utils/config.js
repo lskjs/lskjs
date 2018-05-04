@@ -1,5 +1,13 @@
-import _ from 'lodash';
 import deepmerge from 'deepmerge';
+import isFunction from 'lodash/isFunction';
+import merge from 'lodash/merge';
+import toPlainObject from 'lodash/toPlainObject';
+import forEach from 'lodash/forEach';
+import set from 'lodash/set';
+import defaultsDeep from 'lodash/defaultsDeep';
+import reverse from 'lodash/reverse';
+import cloneDeep from 'lodash/cloneDeep';
+
 
 function getConfig(prePath) {
   let path = prePath;
@@ -13,7 +21,9 @@ function getConfig(prePath) {
       confStr = fs.readFileSync(path, 'utf-8');
     } catch (err) {
       if (prePath !== '.env.json') {
-        console.error(`Can't read file ${path}, error`, err);
+        console.error(`====================`);
+        console.error(`WARNING: Can't read file ${path}\n`, err);
+        console.error(`====================`);
       }
       return {};
     }
@@ -21,7 +31,9 @@ function getConfig(prePath) {
       const config = Object.assign({}, { _json: 1 }, JSON.parse(confStr));
       return config;
     } catch (err) {
-      console.error(`Can't parse file ${path}, error`, err);
+      console.error(`====================`);
+      console.error(`WARNING: Can't parse file ${path}\n`, err);
+      console.error(`====================`);
       return {};
     }
   }
@@ -36,14 +48,15 @@ class Config {
   }
 
   extend(c) {
-    if (_.isFunction(c)) {
+    if (isFunction(c)) {
       return c(this);
     }
     return this.merge(c);
   }
   extendEnv(path = '.env.json') {
     const config = getConfig(path);
-    // console.log('extendEnv', this.client, "\n---\n", config.clienyarm t, "\n---\n", _.merge({}, this.client, config.client));
+    this._withoutEnvJson = cloneDeep(this.toObject());
+    // console.log('extendEnv', this.client, "\n---\n", config.clienyarm t, "\n---\n", merge({}, this.client, config.client));
     return this.merge(config);
   }
 
@@ -59,7 +72,7 @@ class Config {
   }
 
   toObject() {
-    return _.toPlainObject(this);
+    return toPlainObject(this);
   }
 
   toJSON() {
@@ -76,8 +89,8 @@ export default {
   },
   flatten2nested(flatten) {
     const config = {};
-    _.forEach(flatten, (val, key) => {
-      _.set(config, key, val);
+    forEach(flatten, (val, key) => {
+      set(config, key, val);
     });
   },
   getConfig,
@@ -99,12 +112,12 @@ export default {
       }
       return config;
     });
-    return _.defaultsDeep({}, ..._.reverse(_configs));
+    return defaultsDeep({}, ...reverse(_configs));
   },
   // clientWithEnv(...configs) {
   //   return this.client(...configs, '.env.json');
   // },
   client(...configs) {
-    return _.defaultsDeep({}, ..._.reverse(configs));
+    return defaultsDeep({}, ...reverse(configs));
   },
 };

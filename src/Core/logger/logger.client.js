@@ -1,18 +1,24 @@
-import { createLogger, INFO, DEBUG, stdSerializers } from 'browser-bunyan';
-import { ConsoleFormattedStream } from '@browser-bunyan/console-formatted-stream';
+import { createLogger, stdSerializers } from 'browser-bunyan';
+import ConsoleFormattedStream from './tiny-console-formatted-stream/log';
 const bunyan = {
-  createLogger: (params) => {
+  createLogger: (config) => {
     return createLogger({
      streams: [
         {
-          level: DEBUG, // or use the string 'info'
-          stream: new ConsoleFormattedStream()
+          level: config.level || 'trace',
+          stream: new ConsoleFormattedStream({
+            logByLevel: true,
+          })
         }
       ],
-
       serializers: stdSerializers,
-      src: true,
-      ...params,
+      // serializers: (...args) => {
+      //   console.log({args});
+      //   return 'asd'
+      // },
+      // src: __DEV__,
+      src: false,
+      ...config,
     })
   }
 };

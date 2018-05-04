@@ -1062,19 +1062,20 @@ function emitRecord(rec, line, opts, stylize) {
                 extras,
                 details));
         else
-           if(nameStr.substr(0, 'app/req'.length) === 'app/req') {
+          if(['app/req', 'uapp/req'].filter(name => nameStr.substr(0, name.length).toLowerCase()=== name.toLowerCase()).length) {
+          // if(nameStr.substr(0, 'app/req'.length) === 'app/req') {
             emit(format('%s%s\n',
                 level,
                 onelineMsg));
-          } else if(nameStr.substr(0, 'app'.length) === 'app') {
-            if(nameStr.length == 3) {
+          } else if(['app', 'uapp'].filter(name => nameStr.substr(0, name.length).toLowerCase()=== name.toLowerCase()).length) {
+            // if(nameStr.length == 3) {
               emit(format('%s %s:%s%s\n%s',
                   level,
                   nameStr,
                   onelineMsg,
                   extras,
                   details));
-            } else {}
+            // } else {}
 
           } else {
             emit(format('%s %s %s:%s%s\n%s',

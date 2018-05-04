@@ -1,6 +1,9 @@
 import express from 'express';
 import path from 'path';
-import _ from 'lodash';
+import mapValues from 'lodash/mapValues';
+import forEach from 'lodash/forEach';
+import flattenDeep from 'lodash/flattenDeep';
+import map from 'lodash/map';
 
 import ExpressApp from 'lego-starter-kit/ExpressApp';
 import Api from 'apiquery';
@@ -76,10 +79,10 @@ export default class CoreApp extends ExpressApp {
     };
   }
   getResolvedStatics() {
-    return _.mapValues(this.getStatics() || {}, p => path.resolve(p));
+    return mapValues(this.getStatics() || {}, p => path.resolve(p));
   }
   useStatics() {
-    _.forEach(this.statics, (path, url) => {
+    forEach(this.statics, (path, url) => {
       this.app.use(url, express.static(path));
       this.app.use(url, staticFileMiddleware(path));
     });
@@ -117,7 +120,7 @@ export default class CoreApp extends ExpressApp {
     api.all('/docs', (req, res) => res.send(getDocsTemplate(this, params)));
 
     const ctx = this;
-    const site = ctx.config && ctx.config.client && ctx.config.client.site || { title: 'API' };
+    const site = ctx.config && ctx.config.client && ctx.config.client.site || { title: 'App' };
     const url = ctx.config.url;
     const defaultSwaggerJson = {
       swagger: '2.0',
@@ -160,7 +163,7 @@ export default class CoreApp extends ExpressApp {
 
   useMiddlewares() {
     this.log.trace('CoreApp.useMiddlewares');
-    const middlewares = _.flattenDeep(this.getUsingMiddlewares());
+    const middlewares = flattenDeep(this.getUsingMiddlewares());
     middlewares.forEach((middleware) => {
       middleware && typeof middleware === 'function' && this.app.use(middleware);
     });
@@ -182,7 +185,7 @@ export default class CoreApp extends ExpressApp {
 
 
   runModels() {
-    const promises = _.map(this.models, async (model, name) => {
+    const promises = map(this.models, async (model, name) => {
       if (model.run) {
         this.models[name] = await model.run(this);
       }

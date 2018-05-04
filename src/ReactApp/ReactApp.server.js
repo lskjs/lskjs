@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
 import CoreApp from 'lego-starter-kit/CoreApp';
 import Uapp from '../Uapp';
@@ -7,23 +8,34 @@ import cloneDeep from 'lodash/cloneDeep';
 import assets from './assets'; // eslint-disable-line
 
 export default class ReactApp extends CoreApp {
+  name = 'App';
 
+  async init() {
+    await super.init();
+    // const initConfigClient = get(this, 'config._withoutEnvJson.client', get(this, 'config.client', {}));
+    const initConfigClient = get(this, 'config._withoutEnvJson.client');
+    this.initConfigClient = cloneDeep(initConfigClient);
+  }
   async run() {
     await super.run();
-    this.initConfigClient = cloneDeep(this.config.client); // подумать в init или в run
+    // this.initConfigClient = cloneDeep(this.config.client); // подумать в init или в run
   }
 
   getRootState(req) {
-    const realConfig = this.config.remoteConfig && this.config.client || {};
 
-    const config = antimergeDeep(realConfig, this.initConfigClient);
-
-    return {
+    const rootState = {
       reqId: req.reqId,
       token: req.token,
       user: req.user,
-      config,
     };
+    if (this.config.remoteConfig) {
+      const realConfig = this.config.client || {};
+      rootState.config = antimergeDeep(realConfig, this.initConfigClient);
+      // console.log('realConfig', realConfig);
+      // console.log('this.initConfigClient', this.initConfigClient);
+      // console.log('rootState.config', rootState.config);
+    }
+    return rootState;
   }
 
   BaseUapp = Uapp

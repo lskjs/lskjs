@@ -16,6 +16,7 @@ const DEBUG = __DEV__ && false;
 
 
 export default class ReactApp extends Core {
+  name = 'App';
 
   getRootState() {
     return window.__ROOT_STATE__ || {};

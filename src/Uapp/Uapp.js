@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import merge from 'lodash/merge';
 import UniversalRouter from 'universal-router';
 import Core from '../Core';
 import Page from './Page';
@@ -42,7 +42,7 @@ function getSiteConfig(props) {
     const findedConfig = findConfigByHostname(config.sites, hostname);
     // console.log({findedConfig});
     if (findedConfig) {
-      siteConfig = _.merge({}, siteConfig, findedConfig);
+      siteConfig = merge({}, siteConfig, findedConfig);
     }
   }
   // console.log({siteConfig});
@@ -68,16 +68,24 @@ function resolveCtxRoutes(routes, ctx) {
 
 
 export default class Uapp extends Core {
-  name='Uapp';
+  name = 'Uapp';
   Page = Page;
   Api = Api;
 
   async init(props = {}) {
+    // this.log.trace('Uapp.init')
     await super.init();
     this.config = this.getConfig(this);
     this.initConfig = cloneDeep(this.config); // подумать в init или в run
     // TODO: прокинуть домен (req) когда сервер
-    this.api = new this.Api(this.config && this.config.api || {});
+    const apiConfig = (this.config && this.config.api || {})
+    this.api = new this.Api({
+      ...apiConfig,
+      url: apiConfig.url ? apiConfig.url : (
+        __CLIENT__ ? '/' : ('http://127.0.0.1:' + (process.env.PORT || 8080))
+        // TODO: this.app.httpServer
+      )
+    });
     // this.log = this.getLogger();
   }
 
@@ -105,10 +113,10 @@ export default class Uapp extends Core {
     return {
       path: '(.*)',
       action(params) {
-        const { page } = params;
+        const { page, uapp } = params;
         // console.log({TestPage});
         if (__CLIENT__) {
-          this.log(params.pathname, params);
+          uapp.log.trace(params.pathname, params);
         }
         return page.component(TestPage, {
           count: 10
@@ -128,7 +136,6 @@ export default class Uapp extends Core {
     return this.page;
   }
 
-
   async updateClientRoot() {
     // this.page
     document.body.scrollTop = 0; // @TODO: back
@@ -140,7 +147,10 @@ export default class Uapp extends Core {
   async resolve(reqParams = {}) {
     // console.log('resolve');
     const req = Api.createReq(reqParams);
-    this.log.trace('resolve', req.path, req.query);
+    __CLIENT__ && this.log.trace('Uapp.resolve', req.path, req.query);
+    // this.log.trace('resolve1', req.path, req.query);
+    // this.log.trace({r:'resolve2'});
+    // this.log.trace('resolve3', 'some');
     // __DEV__ && console.log('Uapp.resolve', req);
     this.resetPage();
     // console.log('page $$$$', this.page);
@@ -155,8 +165,8 @@ export default class Uapp extends Core {
         page: this.page,
       });
     } catch(err) {
-      this.log.error('resolveErr', err);
-      // console.log('app.router.resolve err', err);
+      console.log('app.router.resolve err', err, this.log);
+      // this.log.error('resolveErr', err);
     }
     // if (__CLIENT__) {
     //   this.updateClientRoot();

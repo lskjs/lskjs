@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Core from '../Core';
 
 export default class ExpressApp extends Core {
+  name = 'App';
   asyncRouter = AsyncRouter;
 
   async init() {

@@ -1,8 +1,9 @@
-import _ from 'lodash';
+import toPairs from 'lodash/toPairs';
+import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import logger from './logger';
 import Promise from 'bluebird';
 // import config from './config';
-//
 
 function isClass(v) {
   return typeof v === 'function';// && /^\s*class\s+/.test(v.toString());
@@ -14,41 +15,24 @@ export default class Core {
   name = 'Core';
   constructor(params = {}) {
     Object.assign(this, params);
-    this.log = this.createLogger();
   }
 
-  createLoggerMock() { // TODO: переделать в LSK
-    const config = this && this.config && this.config.log || {};
-    const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
-
-    const level = config.level || 'trace';
-    const printLevels = levels.slice(levels.indexOf(level));
-    const logger2 = (type) => {
-      return (...args) => {
-        // console.log(printLevels, type, !printLevels.includes(type));
-        if (!printLevels.includes(type)) return;
-        console.log(`[${type}]`, ...args);
-        if (type === 'error' || type === 'fatal') throw type;
-      };
-    };
-
-
-    return levels.reduce((r, name) => {
-      r[name] = logger2(name);
-      return r;
-    }, {});
+  createLoggerMock() {
+    return createLoggerMock(get(this, 'config.log', {}));
   }
 
   createLogger(params) {
-    // if (__DEV__ && __CLIENT__) {
-    //   return this.createLoggerMock();
-    // }
-    const options = Object.assign({
-      name: 'app',
+    return logger.createLogger({
+      name: this.name || 'app',
       src: __DEV__,
       level: 'trace',
-    }, this && this.config && this.config.log || {}, params);
-    return logger.createLogger(options);
+      ...get(this, 'config.log', {}),
+      ...params,
+    });
+  }
+
+  async beforeInit() {
+    if (!this.log) this.log = this.createLogger();
   }
 
   async init() {
@@ -62,7 +46,7 @@ export default class Core {
   }
 
   getModulesSequence() {
-    return _.toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
+    return toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
   }
 
   broadcastModules(method) {
@@ -79,7 +63,7 @@ export default class Core {
     this._modules = this.getModules();
     // console.log('@@!!', {modules});
     const modules = {};
-    _.forEach(this._modules, (Module, key) => {
+    forEach(this._modules, (Module, key) => {
       // const Module = module(ctx);
       if (isClass(Module)) {
         modules[key] = new Module(this);
@@ -105,9 +89,12 @@ export default class Core {
 
   async start() {
     try {
-      // if (typeof this.init === 'function') {
-      await this.init();
-      // }
+      if (typeof this.beforeInit === 'function') {
+        await this.beforeInit();
+      }
+      if (typeof this.init === 'function') {
+        await this.init();
+      }
       if (typeof this.initModules === 'function') {
         this.log.trace(`${this.name}.initModules()`);
         await this.initModules();
