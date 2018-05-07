@@ -41,9 +41,10 @@ export default class CoreApp extends ExpressApp {
     this.statics = this.getResolvedStatics();
     this.log.debug('statics', this.statics);
     this.api = new this.Api({
-      url: this.config.url,
+      url: 'http://127.0.0.1:' + this.config.port,
       log: this.log,
     });
+
     this.config.ws && this.initWs();
   }
   getMiddlewares() {

@@ -6,3 +6,6 @@ polyfill();
 const ctx = { config };
 const app = new App(ctx);
 app.start()
+
+
+// asdasda

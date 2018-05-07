@@ -82,7 +82,7 @@ export default class Uapp extends Core {
     this.api = new this.Api({
       ...apiConfig,
       url: apiConfig.url ? apiConfig.url : (
-        __CLIENT__ ? '/' : ('http://127.0.0.1:' + (process.env.PORT || 8080))
+        __CLIENT__ ? '/' : ('http://127.0.0.1:' + this.app.config.port)
         // TODO: this.app.httpServer
       )
     });

@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.18.1",
+  "version": "1.18.2",
   "license": "MIT",
   "description": "Lego Starter Kit — Node.js & React isomorphic app creator (Node.js, Express, React.js, Babel, PostCSS, Webpack)",
   "dependencies": {
