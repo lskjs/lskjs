@@ -6,6 +6,7 @@ import WebpackConfig from './WebpackConfig';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 export default class WebpackClientConfig extends WebpackConfig {
+  name = 'client';
   getTarget() {
     return 'web';
   }
@@ -27,7 +28,11 @@ export default class WebpackClientConfig extends WebpackConfig {
   getPreConfig() {
     return {
       ...super.getPreConfig(),
-      devtool: this.isSourcemap() ? 'source-map' : false,
+      // cheap-module-source-map
+      // devtool: this.isSourcemap() ? 'source-map' : false,
+      // devtool: this.isSourcemap() ? 'cheap-module-source-map' : false,
+      // devtool: isDebug ? 'cheap-module-inline-source-map' : 'source-map',
+      devtool: this.isSourcemap() ? 'eval' : false,
     };
   }
 

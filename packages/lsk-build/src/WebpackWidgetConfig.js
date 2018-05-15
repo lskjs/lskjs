@@ -6,6 +6,7 @@ import WebpackConfig from './WebpackConfig';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 export default class WebpackWidgetConfig extends WebpackConfig {
+  name = 'widget';
   getTarget() {
     return 'webworker';
   }

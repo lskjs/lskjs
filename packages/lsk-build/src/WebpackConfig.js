@@ -5,11 +5,19 @@ import fs from 'fs';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const StatsPlugin = require('stats-webpack-plugin');
 
+const reScript = /\.(js|jsx|mjs)$/;
+const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
+const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
+
+
+
 export default class WebpackConfig {
+  name = 'webpack';
 
   constructor(ctx = {}) {
     Object.assign(this, ctx);
   }
+
   static getConfig(ctx, ...args) {
     const object = new this(ctx);
     return object.getConfig(...args);
@@ -153,124 +161,49 @@ export default class WebpackConfig {
     };
   }
   getCssLoaders() {
-    const dimensions = [
-      [
-        {
-          preExt: 'i?',
-          loaders: [
-            'isomorphic-style-loader',
-          ],
-        },
-        {
-          preExt: 'f',
-          loaders: [
-            ExtractTextPlugin.extract(
-              'style-loader',
-            ),
-          ],
-        },
-      ],
-      [
-        {
-          preExt: 'm?',
-          loaders: [
-            `css-loader?${JSON.stringify({
-              sourceMap: this.isCssSourcemap(),
-              modules: true,
-              localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-              minimize: !this.isDebug(),
-            })}`,
-          ],
-        },
-        {
-          preExt: 'g',
-          loaders: [
-            `css-loader?${JSON.stringify({
-              sourceMap: this.isCssSourcemap(),
-              modules: false,
-              minimize: !this.isDebug(),
-            })}`,
-          ],
-        },
-      ],
-      [
-        {
-          ext: 'p?css',
-          // name: '\\.css',
-          loaders: [
-            'postcss-loader?pack=default',
-          ],
-        },
-        {
-          ext: '(sass|scss)',
-          loaders: [
-            'postcss-loader?pack=sass',
-            'sass-loader',
-          ],
-        },
-      ],
-    ];
-    function getVectors(dimensions) {
-      let results = [];
-      for (var i = 0; i < dimensions[0]; i++) {
-        if (dimensions.length <= 1) {
-          results = [...results, [i]];
-        } else {
-          results = [...results, ...getVectors(dimensions.slice(1)).map((d) => {
-            return [i, ...d];
-          })];
-        }
-      }
-      return results;
-    }
-    const vectors = getVectors(dimensions.map(d => d.length));
-    const testers = vectors.map((vector) => {
-      const tester = {
-        loaders: [],
-      };
-      let ext = '';
-      let preExt = '';
-      vector.forEach((v, i) => {
-        const subtest = dimensions[i][v];
-        ext += subtest.ext || '';
-        preExt += subtest.preExt || '';
-        tester.loaders = [
-          ...tester.loaders,
-          ...subtest.loaders,
-        ];
-      });
-
-      const test = `${preExt ? `\.${preExt}` : ''}${ext ? `\.${ext}` : ''}`;
-
-      tester.test = new RegExp(test);
-      return tester;
-    });
     const getPostcssModule = (bundle) => this.getPostcssModule(bundle);
+    // return [
+    //   [0,0],
+    //   [0,1],
+    //   [1,0],
+    //   [1,1],
+    // ].map(([isModules, isScss]) => {
+    //   return   {
+    //     test: /\.css$/,
+    //     exclude: /\.g(lobal)?\.css$/,
+    //     loader: ExtractTextPlugin.extract({
+    //       fallback: 'style-loader',
+    //       use: [
+    //         // 'isomorphic-style-loader',
+    //         {
+    //           loader: 'css-loader',
+    //           options: {
+    //             sourceMap: this.isSourcemap(),
+    //             modules: true,
+    //             localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+    //             minimize: !this.isDebug(),
+    //           }
+    //         }, {
+    //           loader: 'postcss-loader',
+    //           options: {
+    //             plugins: getPostcssModule
+    //           }
+    //         }
+    //       ],
+    //     })
+    //   }
+    // })
+
     return [
-      // ...testers,
-      // {
-      //   test: /\.xcss$/,
-      //   loaders: [
-      //     ExtractTextPlugin.extract(
-      //       'style-loader',
-      //     ),
-      //     `css-loader?${JSON.stringify({
-      //       sourceMap: this.isDebug(),
-      //       modules: false,
-      //       minimize: !this.isDebug(),
-      //     })}`,
-      //     'postcss-loader?pack=default',
-      //   ],
-      // },
       {
         test: /\.g(lobal)?\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
+        loader: ExtractTextPlugin.extract({
+          // fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
               options: {
-                sourceMap: this.isSourcemap(),
+                sourceMap: this.isCssSourcemap(),
                 modules: false,
                 minimize: !this.isDebug(),
               }
@@ -282,86 +215,41 @@ export default class WebpackConfig {
               }
             }
           ]
-          })
-        /*[
-          ExtractTextPlugin.extract(
-            'style-loader',
-          ),
-          `css-loader?${JSON.stringify({
-            sourceMap: this.isSourcemap(),
-            modules: false,
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=default',
-        ]*/,
+        })
       },
       {
         test: /\.css$/,
         exclude: /\.g(lobal)?\.css$/,
-        use: [
-          'isomorphic-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: this.isSourcemap(),
-              modules: true,
-              localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-              minimize: !this.isDebug(),
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              // pack: 'default',
-              plugins: getPostcssModule
-            }
-          }
-          /*`css-loader?${JSON.stringify({
-            sourceMap: this.isSourcemap(),
-            modules: true,
-            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=default',*/
-        ],
-      },
-      {
-        test: /\.igscss$/,
-        use: [
-          'isomorphic-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: this.isSourcemap(),
-              modules: false,
-              minimize: !this.isDebug(),
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              // pack: 'sass',
-              plugins: getPostcssModule
-            }
-          },
-          'sass-loader'
-          /*`css-loader?${JSON.stringify({
-            sourceMap: this.isSourcemap(),
-            modules: false,
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=sass',
-          'sass-loader',*/
-        ],
-      },
-      {
-        test: /\.g(lobal)?\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
+        loader: ExtractTextPlugin.extract({
+          // fallback: 'style-loader',
           use: [
+            // 'isomorphic-style-loader',
             {
               loader: 'css-loader',
               options: {
                 sourceMap: this.isSourcemap(),
+                modules: true,
+                localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+                minimize: !this.isDebug(),
+              }
+            }, {
+              loader: 'postcss-loader',
+              options: {
+                plugins: getPostcssModule
+              }
+            }
+          ],
+        })
+      },
+      {
+        test: /\.g(lobal)?\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          // fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: this.isCssSourcemap(),
                 modules: false,
                 minimize: !this.isDebug(),
               }
@@ -375,50 +263,32 @@ export default class WebpackConfig {
             'sass-loader'
           ]
         })
-        /*[
-          ExtractTextPlugin.extract(
-            'style-loader',
-          ),
-          `css-loader?${JSON.stringify({
-            sourceMap: this.isSourcemap(),
-            modules: false,
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=sass',
-          'sass-loader',
-        ]*/,
       },
       {
         test: /\.scss$/,
         exclude: /\.g(lobal)?\.scss$/,
-        use: [
-          'isomorphic-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: this.isSourcemap(),
-              modules: true,
-              localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-              minimize: !this.isDebug(),
+        loader: ExtractTextPlugin.extract({
+          // fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: this.isCssSourcemap(),
+                modules: true,
+                localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+                minimize: !this.isDebug(),
+              },
             },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              // pack: 'sass',
-              plugins: getPostcssModule
-            }
-          },
-          'sass-loader',
-          /*`css-loader?${JSON.stringify({
-            sourceMap: this.isSourcemap(),
-            modules: true,
-            localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            minimize: !this.isDebug(),
-          })}`,
-          'postcss-loader?pack=sass',
-          'sass-loader',*/
-        ],
+            {
+              loader: 'postcss-loader',
+              options: {
+                // pack: 'sass',
+                plugins: getPostcssModule
+              }
+            },
+            'sass-loader',
+          ]
+        })
       },
     ];
   }
@@ -433,7 +303,7 @@ export default class WebpackConfig {
           this.resolvePath('node_modules'),
         ],
         trigger: '&',
-        resolve: require('./utils/resolve-id'),
+        resolve: require('./resolve-id'),
       }),
       require('postcss-mixins')(),
       // require('postcss-custom-properties')(),
@@ -458,12 +328,14 @@ export default class WebpackConfig {
     return [
       this.getJsxLoader(),
       ...this.getCssLoaders(),
-      {
-        test: /\.json$/,
-        use: {
-          loader: 'json-loader'
-        }
-      },
+      // {
+      //   test: /\.json$/,
+      //   loader: 'json-loader'
+      //   // test: /\.json$/,
+      //   // use: {
+      //   //   loader: 'json-loader'
+      //   // }
+      // },
       {
         test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
         use: {
@@ -494,11 +366,20 @@ export default class WebpackConfig {
           },
         },
       },
+      {
+        exclude: [reScript, reStyle, reImage, /\.json$/, /\.txt$/, /\.md$/],
+        loader: 'file-loader',
+        options: {
+          name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+        },
+      },
     ];
   }
 
   getModule() {
     return {
+      // Make missing exports an error instead of warning
+      strictExportPresence: true,
       rules: this.getLoaders(),
     };
   }
@@ -580,15 +461,28 @@ export default class WebpackConfig {
 
   getOutput() {
     return {
+      // path: this.resolvePath('build/public/assets'),
+      // publicPath: '/assets/',
+      // sourcePrefix: '  ',
       path: this.resolvePath('build/public/assets'),
       publicPath: '/assets/',
-      sourcePrefix: '  ',
+      pathinfo: this.isVerbose(),
+      // filename: this.isDebug() ? '[name].js' : '[name].[chunkhash:8].js',
+      // chunkFilename: this.isDebug()
+      //   ? '[name].chunk.js'
+      //   : '[name].[chunkhash:8].chunk.js',
+      // Point sourcemap entries to original disk location (format as URL on Windows)
+      devtoolModuleFilenameTemplate: info =>
+        path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
     };
   }
 
   getPreConfig() {
     return {
+      name: this.name,
+      mode: this.isDebug() ? 'development' : 'production',
       context: this.resolvePath('src'),
+      // mode: this.isDebug() ? 'development' : 'production', // webpack4
       target: this.getTarget(),
       entry: this.getFullEntry(),
       resolve: this.getResolve(),

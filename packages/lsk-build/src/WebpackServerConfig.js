@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import WebpackConfig from './WebpackConfig';
 
 export default class WebpackServerConfig extends WebpackConfig {
+  name = 'server';
   getTarget() {
     return 'node';
   }
