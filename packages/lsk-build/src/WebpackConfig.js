@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import fs from 'fs';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const StatsPlugin = require('stats-webpack-plugin');
+import stringify from 'serialize-javascript';
 
 const reScript = /\.(js|jsx|mjs)$/;
 const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
@@ -328,14 +329,6 @@ export default class WebpackConfig {
     return [
       this.getJsxLoader(),
       ...this.getCssLoaders(),
-      // {
-      //   test: /\.json$/,
-      //   loader: 'json-loader'
-      //   // test: /\.json$/,
-      //   // use: {
-      //   //   loader: 'json-loader'
-      //   // }
-      // },
       {
         test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
         use: {
@@ -366,13 +359,13 @@ export default class WebpackConfig {
           },
         },
       },
-      {
-        exclude: [reScript, reStyle, reImage, /\.json$/, /\.txt$/, /\.md$/],
-        loader: 'file-loader',
-        options: {
-          name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-        },
-      },
+      // {
+      //   exclude: [reScript, reStyle, reImage, /\.json$/, /\.txt$/, /\.md$/],
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+      //   },
+      // },
     ];
   }
 
@@ -389,7 +382,7 @@ export default class WebpackConfig {
       // Define free variables
       // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
       new webpack.LoaderOptionsPlugin({
-        debug: this.isDebug(),
+        // debug: this.isDebug(),
       }),
       new webpack.DefinePlugin(this.getGlobals()),
       new ExtractTextPlugin(this.isDebug() ? '[name].css?[chunkhash]' : '[name].[chunkhash].css'),
@@ -481,8 +474,8 @@ export default class WebpackConfig {
     return {
       name: this.name,
       mode: this.isDebug() ? 'development' : 'production',
+      // debug: this.isDebug(),
       context: this.resolvePath('src'),
-      // mode: this.isDebug() ? 'development' : 'production', // webpack4
       target: this.getTarget(),
       entry: this.getFullEntry(),
       resolve: this.getResolve(),
@@ -490,7 +483,6 @@ export default class WebpackConfig {
       module: this.getModule(),
       plugins: this.getPlugins(),
       cache: this.isDebug(),
-      // debug: this.isDebug(),
       bail: !this.isDebug(),
       stats: this.getStats(),
       // postcss: (...args) => this.getPostcssModule(...args),
@@ -502,6 +494,27 @@ export default class WebpackConfig {
     if (!this.webpack || withoutMerge) return config;
     // return Object.extend({}, config, this.webpack)
     return extend(true, config, this.webpack);
+  }
+
+
+
+  traceWebpackConfig() {
+    if (this.webpackConfigDist === false) return;
+    const webpackConfigDist = this.webpackConfigDist || `${this.getDistDir()}/webpack.config.js`;
+    try {
+      fs.writeFileSync(webpackConfigDist, stringify(this.webpackConfig, 2));
+      console.log('Compiling webpack.config.js => ', webpackConfigDist);
+    } catch (err) { }
+  }
+
+  static save(filename, obj) {
+    try {
+      fs.writeFileSync(filename, stringify(obj, 2));
+    } catch (err) { }
+  }
+
+  save(filename) {
+    return this.constructor.save(filename, this.getConfig());
   }
 
 }
