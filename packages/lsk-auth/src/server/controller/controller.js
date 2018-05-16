@@ -40,7 +40,7 @@ export default (ctx, module) => {
     return {
       __pack: 1,
       signup: true,
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -115,7 +115,7 @@ export default (ctx, module) => {
       __pack: 1,
       signup: true,
       emailSended,
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -151,7 +151,7 @@ export default (ctx, module) => {
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -169,7 +169,7 @@ export default (ctx, module) => {
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -233,7 +233,7 @@ export default (ctx, module) => {
     req.user = user;
 
     return {
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -308,7 +308,7 @@ export default (ctx, module) => {
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -458,7 +458,7 @@ export default (ctx, module) => {
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req }),
+      user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
