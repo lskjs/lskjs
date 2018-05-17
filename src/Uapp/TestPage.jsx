@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 // import { inject } from 'mobx-react';
+import Button from './Button';
+import Button2 from './Button2';
 
 // @inject('uapp')
 export default class TestPage extends PureComponent {
@@ -11,6 +13,12 @@ export default class TestPage extends PureComponent {
     const { count } = this.state;
     return <>
       <h1>Hello World: {uapp?.name}</h1>
+      <Button>
+        Button
+      </Button>
+      <Button2>
+        Button2
+      </Button2>
       <div>
         {count}
         <button onClick={() => this.setState({
@@ -18,6 +26,7 @@ export default class TestPage extends PureComponent {
         })}>
           ++
         </button>
+        ??
       </div>
       <div>
         {[

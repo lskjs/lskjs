@@ -48,7 +48,7 @@ export default class ReactApp extends CoreApp {
       }),
       styles: [],
       insertCss: (...styles) => {
-        styles.forEach(style => uapp.styles.push(style._getCss()));
+        styles.forEach(style => style && style._getCss && uapp.styles.push(style._getCss()));
       },
       req,
       rootState: this.getRootState(req),

@@ -7,5 +7,8 @@ const ctx = { config };
 const app = new App(ctx);
 app.start()
 
-
-// asdasda
+if (module.hot) {
+  app.hot = module.hot;
+  // module.hot.accept('./router');
+}
+export default app;

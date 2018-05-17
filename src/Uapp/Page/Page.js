@@ -109,7 +109,7 @@ export default class Page {
         .error('Доступ запрещен')
         .disable();
     }
-    return this;
+  return this;
   }
 
 

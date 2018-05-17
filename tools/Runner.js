@@ -9,7 +9,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 // import webpackConfig from './webpack.config';
 // import run, { format } from './run';
 // import clean from './clean';
-const RunnerBase = require('lsk-build').Runner;
+const RunnerBase = require('@lskjs/build').Runner;
 
 const isDebug = !process.argv.includes('--release');
 const DEBUG = true;

@@ -4801,9 +4801,9 @@ lru-cache@^4.1.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-lsk-build@1.17.5:
+@lskjs/build@1.17.5:
   version "1.17.5"
-  resolved "https://registry.yarnpkg.com/lsk-build/-/lsk-build-1.17.5.tgz#df982184a846f912390b866fa7d570321c4c9725"
+  resolved "https://registry.yarnpkg.com/@lskjs/build/-/@lskjs/build-1.17.5.tgz#df982184a846f912390b866fa7d570321c4c9725"
   dependencies:
     assets-webpack-plugin "3.5.1"
     autoprefixer "8.2.0"

@@ -11,7 +11,7 @@ export default class ExpressApp extends Core {
   async init() {
     super.init();
     this.log.trace('ExpressApp init');
-    this.express = this.createExpress();
+    this.express = this.createExpressApp();
     this.httpServer = httpServer(this.express);
     if (this.config.express) {
       this.log.trace('express config:', this.config.express);
@@ -19,19 +19,12 @@ export default class ExpressApp extends Core {
         this.express.set(key, value);
       });
     }
+    this.app = this.express; // Fallback
   }
 
   createExpressApp() {
     return express();
   }
-
-  async init() {
-    super.init();
-    this.log.trace('ExpressApp init');
-    this.app = this.createExpressApp();
-    this.httpServer = httpServer(this.app);
-  }
-
 
   async run() {
     this.log.trace('ExpressApp run');

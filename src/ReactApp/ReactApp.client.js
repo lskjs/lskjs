@@ -143,8 +143,8 @@ export default class ReactApp extends Core {
       history: this.history,
       styles: [],
       insertCss: (...styles) => {
-        const removeCss = styles.map(x => x._insertCss());
-        return () => { removeCss.forEach(f => f()); };
+        const removeCss = styles.map(x => x && x._insertCss && x._insertCss());
+        return () => { removeCss.forEach(f => f && f()); };
       },
       req,
       rootState: this.rootState,
