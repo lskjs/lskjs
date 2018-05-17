@@ -100,6 +100,21 @@ export default class WebpackConfig {
     return [...deps, ...modulesDeps];
   }
 
+  babelrc = {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-stage-0"
+    ],
+    "plugins": [
+      'module:jsx-control-statements',
+      '@babel/plugin-proposal-decorators',
+      ['@babel/plugin-proposal-class-properties', { loose: true, }]
+      ['@babel/plugin-transform-runtime', { polyfill: false }],
+    ]
+  }
+
+
   getBabelPresets() {
     return [
       '@babel/preset-env',
@@ -122,6 +137,7 @@ export default class WebpackConfig {
       'module:jsx-control-statements',
       '@babel/plugin-proposal-decorators',
       ['@babel/plugin-proposal-class-properties', { loose: true, }]
+      ['@babel/plugin-transform-runtime', { polyfill: false }],
       // 'react-require',
       // 'transform-decorators-legacy',
       // 'transform-class-properties'
@@ -144,13 +160,10 @@ export default class WebpackConfig {
         options: {
           //sourceMaps: this.isSourcemap(),
           cacheDirectory: this.isDebug(),
-          babelrc: false,
-          presets: this.getBabelPresets(),
+          babelrc: true,
+          // presets: this.getBabelPresets(),
           plugins: [
-            ...this.getBabelPlugins(),
-            ['@babel/plugin-transform-runtime', {
-              polyfill: false
-            }],
+            // ...this.getBabelPlugins(),
             ...(this.isDebug() ? [] : [
               'transform-react-remove-prop-types',
               '@babel/plugin-transform-react-constant-elements',
