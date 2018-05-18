@@ -101,47 +101,17 @@ export default class WebpackConfig {
   }
 
   babelrc = {
-    "presets": [
+    presets: [
       "@babel/preset-env",
       "@babel/preset-react",
       "@babel/preset-stage-0"
     ],
-    "plugins": [
+    plugins: [
       'module:jsx-control-statements',
       '@babel/plugin-proposal-decorators',
       ['@babel/plugin-proposal-class-properties', { loose: true, }]
       ['@babel/plugin-transform-runtime', { polyfill: false }],
     ]
-  }
-
-
-  getBabelPresets() {
-    return [
-      '@babel/preset-env',
-      '@babel/preset-stage-0',
-      '@babel/preset-react',
-      // ['@babel/preset-env', {
-      //   modules: false,
-      //   loose: true,
-      //   useBuiltIns: 'entry',
-      //   targets: {
-      //     forceAllTransforms: true,
-      //   },
-      // }],
-    ];
-  }
-
-  getBabelPlugins() {
-    // console.log(2312312312312);
-    return [
-      'module:jsx-control-statements',
-      '@babel/plugin-proposal-decorators',
-      ['@babel/plugin-proposal-class-properties', { loose: true, }]
-      ['@babel/plugin-transform-runtime', { polyfill: false }],
-      // 'react-require',
-      // 'transform-decorators-legacy',
-      // 'transform-class-properties'
-    ];
   }
 
   getJsxLoader() {
@@ -155,15 +125,14 @@ export default class WebpackConfig {
       use: {
         loader: 'babel-loader',
         // https://github.com/babel/babel-loader#options
-
         // https://babeljs.io/docs/usage/options/
         options: {
-          //sourceMaps: this.isSourcemap(),
+          sourceMap: this.isSourcemap(),
           cacheDirectory: this.isDebug(),
-          babelrc: true,
-          // presets: this.getBabelPresets(),
+          babelrc: false, // true
+          presets: (this.babelrc.presets || {}),
           plugins: [
-            // ...this.getBabelPlugins(),
+            ...(this.babelrc.plugins || []),
             ...(this.isDebug() ? [] : [
               'transform-react-remove-prop-types',
               '@babel/plugin-transform-react-constant-elements',
@@ -241,7 +210,7 @@ export default class WebpackConfig {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: this.isSourcemap(),
+                sourceMap: this.isCssSourcemap(),
                 modules: true,
                 localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
                 minimize: !this.isDebug(),
