@@ -36,7 +36,7 @@
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.8.2",
-    "@lskjs/build": "1.19.2",
+    "@lskjs/build": "1.19.3",
     "webpack": "4.8.3",
     "webpack-hot-middleware": "2.22.2",
     "webpack-middleware": "1.5.1"
