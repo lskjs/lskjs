@@ -1,6 +1,6 @@
 require('@babel/register');
 require('@babel/polyfill');
-const Runner = require('lsk-build').Runner;
+const Runner = require('@lskjs/build').Runner;
 const config = require('./config').default;
 const webpackConfig = require('./webpack.config');
 const ctx = config;

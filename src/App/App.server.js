@@ -1,9 +1,9 @@
-import ReactApp from 'lego-starter-kit/ReactApp'; // eslint-disable-line
+import CoreApp from 'lego-starter-kit/CoreApp'; // eslint-disable-line
 import getApi from './api/v1';
 import getDocs from './api/v1/v1.docs';
 import assets from './assets'; // eslint-disable-line
 
-export default class App extends ReactApp {
+export default class App extends CoreApp {
 
 
   getI18Params(params = {}) {
