@@ -4,9 +4,10 @@ require('@babel/polyfill');
 const Runner = require('@lskjs/build').Runner;
 const config = require('./config').default;
 const webpackConfig = require('./webpack.config');
+// const webpackConfig = require('./webpack.config').default;
+
 const ctx = config;
 ctx.webpackConfig = webpackConfig;
-
 const app = new Runner(ctx);
 if (process.argv.length > 2) {
   const method = process.argv[2];

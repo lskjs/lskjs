@@ -14,10 +14,10 @@ export default class TestPage extends PureComponent {
     return <>
       <h1>Hello World: {uapp?.name}</h1>
       <Button>
-        Button
+        Button @@
       </Button>
       <Button2>
-        Button2
+        Button 4
       </Button2>
       <div>
         {count}

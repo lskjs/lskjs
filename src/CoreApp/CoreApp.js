@@ -214,4 +214,9 @@ export default class CoreApp extends ExpressApp {
     this.config.ws && await this.runWs();
   }
 
+  async stop() {
+    await super.stop();
+    this.db && this.db.disconnect();
+  }
+
 }

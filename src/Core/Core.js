@@ -130,4 +130,8 @@ export default class Core {
     return this;
   }
 
+  async stop() {
+    this.log.trace(`${this.name}.stop()`);
+  }
+
 }

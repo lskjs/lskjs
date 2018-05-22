@@ -4,6 +4,10 @@ import AsyncRouter from 'lego-starter-kit/utils/AsyncRouter';
 import _ from 'lodash';
 import Core from '../Core';
 
+// process.on('exit', function(code) {
+//   console.log('client exit', code);
+// });
+
 export default class ExpressApp extends Core {
   name = 'App';
   asyncRouter = AsyncRouter;
@@ -43,6 +47,12 @@ export default class ExpressApp extends Core {
         resolve(this);
       });
     });
+  }
+  async stop() {
+    await super.stop();
+    await new Promise((resolved) => {
+      this.httpInstance.close(resolved);
+    })
   }
 
   useMiddlewares() {}

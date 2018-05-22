@@ -22,7 +22,6 @@ export default class ReactApp extends CoreApp {
   }
 
   getRootState(req) {
-
     const rootState = {
       reqId: req.reqId,
       token: req.token,

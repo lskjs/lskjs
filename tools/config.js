@@ -16,6 +16,7 @@ const ctx = {
   alias: {
     // 'lego-starter-kit': fs.realpathSync(dirname + '/src'),
     react: fs.realpathSync(dirname + '/node_modules/react'),
+    'react-dom': fs.realpathSync(dirname + '/node_modules/react-dom'),
   },
 }
 export default ctx

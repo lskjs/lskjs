@@ -19,6 +19,7 @@ export default class ReactApp extends Core {
   name = 'App';
 
   getRootState() {
+    // console.log('getRootState');
     return window.__ROOT_STATE__ || {};
   }
 
@@ -29,6 +30,7 @@ export default class ReactApp extends Core {
 
   async init() {
     this.rootState = this.getRootState();
+    // console.log('init, rootState', this.rootState);
     this.config = merge({}, this.config || {}, this.rootState && this.rootState.config || {});
     this.rootState.config = null; // не понмю для чего
     FastClick.attach(document.body);
@@ -110,7 +112,7 @@ export default class ReactApp extends Core {
       // if (module.hot) {
       //   this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: root}), this.container, this.postRender);
       // } else {
-        this.appInstance = ReactDOM.render(root, this.container, this.postRender);
+        this.appInstance = ReactDOM.render(root, this.container, () => this.postRender());
       // }
     } catch (err) {
       this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
@@ -168,6 +170,7 @@ export default class ReactApp extends Core {
 
   @autobind
   postRender() {
+    // console.log('postRender', this);
     if (!this.rootState.renderCount) {
       const elem = document.getElementById('css');
       if (elem) elem.parentNode.removeChild(elem);

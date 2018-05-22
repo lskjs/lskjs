@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongooseLib from 'mongoose';
 
 export default async (ctx, params) => {
   const options = {
@@ -6,6 +6,7 @@ export default async (ctx, params) => {
     ...(params.options || {}),
   }
   ctx.log.trace('db init');
+  const mongoose = new mongooseLib.Mongoose();
   mongoose.Promise = Promise;
 
   mongoose.run = () => {
@@ -13,6 +14,7 @@ export default async (ctx, params) => {
     mongoose.connect(params.uri, options); // , options
     return mongoose;
   };
+
 
   mongoose.reconnect = () => {
     ctx.log.trace('db reconnect');
