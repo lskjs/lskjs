@@ -28,11 +28,7 @@ export default class WebpackClientConfig extends WebpackConfig {
   getPreConfig() {
     return {
       ...super.getPreConfig(),
-      // cheap-module-source-map
-      // devtool: this.isSourcemap() ? 'source-map' : false,
-      // devtool: this.isSourcemap() ? 'cheap-module-source-map' : false,
-      // devtool: isDebug ? 'cheap-module-inline-source-map' : 'source-map',
-      devtool: this.isSourcemap() ? 'eval' : false,
+      devtool: this.clientDevtool || 'cheap-module-eval-source-map' || 'cheap-eval-source-map' || 'eval',
     };
   }
 

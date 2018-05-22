@@ -2,18 +2,24 @@ import extend from 'extend';
 import path from 'path';
 import webpack from 'webpack';
 import fs from 'fs';
+import get from 'lodash.get';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const StatsPlugin = require('stats-webpack-plugin');
 import stringify from 'serialize-javascript';
 
 const reScript = /\.(js|jsx|mjs)$/;
+// /\.(jsx|js)?$/,
 const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
+// test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
 
 
 
 export default class WebpackConfig {
   name = 'webpack';
+  reScript = reScript;
+  reStyle = reStyle;
+  reImage = reImage;
 
   constructor(ctx = {}) {
     Object.assign(this, ctx);
@@ -43,6 +49,7 @@ export default class WebpackConfig {
   }
 
   isSourcemap() {
+    // console.log('isSourcemap', this.isDebug());
     if (this.sourcemap == null) return this.isDebug();
     return !!this.sourcemap;
   }
@@ -109,40 +116,103 @@ export default class WebpackConfig {
     plugins: [
       'module:jsx-control-statements',
       '@babel/plugin-proposal-decorators',
-      ['@babel/plugin-proposal-class-properties', { loose: true, }]
+      ['@babel/plugin-proposal-class-properties', { loose: true, }],
       ['@babel/plugin-transform-runtime', { polyfill: false }],
     ]
   }
 
   getJsxLoader() {
-    return {
-      test: /\.(jsx|js)?$/,
+    const loader = {
+      test: reScript,
       include: [
         ...this.getDeps().map(dep => dep.path),
         this.resolvePath('src'),
       ],
       // exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        // https://github.com/babel/babel-loader#options
-        // https://babeljs.io/docs/usage/options/
-        options: {
-          sourceMap: this.isSourcemap(),
-          cacheDirectory: this.isDebug(),
-          babelrc: false, // true
-          presets: (this.babelrc.presets || {}),
-          plugins: [
-            ...(this.babelrc.plugins || []),
-            ...(this.isDebug() ? [] : [
-              'transform-react-remove-prop-types',
-              '@babel/plugin-transform-react-constant-elements',
-              // 'transform-react-inline-elements',
-            ]),
-          ],
-        }
+      loader: 'babel-loader',
+      // https://github.com/babel/babel-loader#options
+      // https://babeljs.io/docs/usage/options/
+      options: {
+        // sourceMap: this.isSourcemap(),
+        cacheDirectory: this.isDebug(),
+        babelrc: false, // true
+        presets: (this.babelrc.presets || []).map(preset => {
+          const presetName = typeof preset === 'string' ? preset : preset[0];
+          const presetOptions = typeof preset === 'string' ? {} : preset[1];
+          // console.log({presetName, presetOptions});
+          if (presetName === '@babel/preset-env') {
+            const targets = {};
+            if (this.name === 'client') {
+              targets.browsers = get(this, 'pkg.browserslist', []);
+              targets.forceAllTransforms = !this.isDebug();
+            }
+            if (this.name === 'server') {
+              targets.node = get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0];
+
+            }
+            return [
+              '@babel/preset-env',
+              {
+                ...presetOptions,
+                targets,
+                modules: false,
+                useBuiltIns: false,
+                debug: false,
+              },
+            ]
+            // if (this.name === 'client') {
+            //   return [
+            //     '@babel/preset-env',
+            //     {
+            //       ...presetOptions,
+            //       targets: {
+            //         // browsers: pkg.browserslist,
+            //         // forceAllTransforms: !isDebug, // for UglifyJS
+            //
+            //         node: get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0],
+            //       },
+            //       modules: false,
+            //       useBuiltIns: false,
+            //       debug: false,
+            //     },
+            //   ]
+            // }
+          }
+          if (presetName === '@babel/preset-react') {
+            return [
+              '@babel/preset-react',
+              {
+                ...presetOptions,
+                development: this.isDebug(),
+              },
+            ]
+          }
+          return preset;
+        }),
+        plugins: [
+          ...(this.babelrc.plugins || []),
+          ...(this.isDebug() ? [] : [
+            // Treat React JSX elements as value types and hoist them to the highest scope
+            // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
+            '@babel/transform-react-constant-elements',
+            // Replaces the React.createElement function with one that is more optimized for production
+            // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
+            '@babel/transform-react-inline-elements',
+            // Remove unnecessary React propTypes from the production build
+            // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
+            'transform-react-remove-prop-types',
+
+            'transform-react-remove-prop-types', // ?
+            '@babel/plugin-transform-react-constant-elements', // ?
+            // 'transform-react-inline-elements',
+          ]),
+        ].filter(a => a),
       },
     };
+    // console.log('loader', loader);
+    return loader;
   }
+
   getCssLoaders() {
     const getPostcssModule = (bundle) => this.getPostcssModule(bundle);
     // return [
@@ -176,6 +246,11 @@ export default class WebpackConfig {
     //     })
     //   }
     // })
+    //
+    const localIdentName = this.isDebug()
+      ? '[name]-[local]-[hash:base64:5]'
+      : '[hash:base64:5]';
+    // localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
 
     return [
       {
@@ -189,6 +264,7 @@ export default class WebpackConfig {
                 sourceMap: this.isCssSourcemap(),
                 modules: false,
                 minimize: !this.isDebug(),
+                localIdentName, // ?
               }
             }, {
               loader: 'postcss-loader',
@@ -212,7 +288,7 @@ export default class WebpackConfig {
               options: {
                 sourceMap: this.isCssSourcemap(),
                 modules: true,
-                localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+                localIdentName, // ?
                 minimize: !this.isDebug(),
               }
             }, {
@@ -234,6 +310,7 @@ export default class WebpackConfig {
               options: {
                 sourceMap: this.isCssSourcemap(),
                 modules: false,
+                localIdentName, // ?
                 minimize: !this.isDebug(),
               }
             }, {
@@ -258,7 +335,7 @@ export default class WebpackConfig {
               options: {
                 sourceMap: this.isCssSourcemap(),
                 modules: true,
-                localIdentName: this.isDebug() ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+                localIdentName,
                 minimize: !this.isDebug(),
               },
             },
@@ -308,11 +385,11 @@ export default class WebpackConfig {
     ];
   }
   getLoaders() {
-    return [
+    const loaders = [
       this.getJsxLoader(),
       ...this.getCssLoaders(),
       {
-        test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
+        test: reImage,
         use: {
           loader: 'url-loader',
           options: {
@@ -329,6 +406,7 @@ export default class WebpackConfig {
             name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
             mimetype: 'application/font-woff',
             limit: 8192,
+            emitFile: this.name !== 'server',
           },
         },
       },
@@ -338,6 +416,7 @@ export default class WebpackConfig {
           loader: 'file-loader',
           options: {
             name: this.isDebug() ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
+            emitFile: this.name !== 'server',
           },
         },
       },
@@ -349,6 +428,16 @@ export default class WebpackConfig {
       //   },
       // },
     ];
+
+    if (!this.isDebug()) {
+      getLoaders.push({
+        test: resolvePath(
+          'node_modules/react-deep-force-update/lib/index.js',
+        ),
+        loader: 'null-loader',
+      })
+    }
+    return loaders;
   }
 
   getModule() {
@@ -407,16 +496,16 @@ export default class WebpackConfig {
 
   getStats() {
     return {
-      colors: true,
-      reasons: this.isDebug(),
-      hash: this.isVerbose(),
-      version: this.isVerbose(),
-      timings: true,
-      chunks: this.isVerbose(),
-      chunkModules: this.isVerbose(),
       cached: this.isVerbose(),
       cachedAssets: this.isVerbose(),
-      modules: false,
+      chunks: this.isVerbose(),
+      chunkModules: this.isVerbose(),
+      colors: true,
+      hash: this.isVerbose(),
+      modules: this.isVerbose(),
+      reasons: this.isDebug(),
+      timings: true,
+      version: this.isVerbose(),
     };
   }
 
@@ -442,31 +531,45 @@ export default class WebpackConfig {
       path: this.resolvePath('build/public/assets'),
       publicPath: '/assets/',
       pathinfo: this.isVerbose(),
+      filename: this.isDebug() ? '[name].js' : '[name].[chunkhash:8].js',
+      chunkFilename: this.isDebug()
+        ? '[name].chunk.js'
+        : '[name].[chunkhash:8].chunk.js',
+      // Point sourcemap entries to original disk location (format as URL on Windows)
+      devtoolModuleFilenameTemplate: info =>
+        path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+
+
       // filename: this.isDebug() ? '[name].js' : '[name].[chunkhash:8].js',
       // chunkFilename: this.isDebug()
       //   ? '[name].chunk.js'
       //   : '[name].[chunkhash:8].chunk.js',
       // Point sourcemap entries to original disk location (format as URL on Windows)
-      devtoolModuleFilenameTemplate: info =>
-        path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+      // devtoolModuleFilenameTemplate: )
+      // devtoolModuleFilenameTemplate: info =>
+      //   path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+      // devtoolModuleFilenameTemplate: info => {
+      //   // console.log('devtoolModuleFilenameTemplate', ingo);
+      //   return path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+      // },
     };
   }
 
   getPreConfig() {
     return {
       name: this.name,
-      mode: this.isDebug() ? 'development' : 'production',
-      // debug: this.isDebug(),
       context: this.resolvePath('src'),
-      target: this.getTarget(),
-      entry: this.getFullEntry(),
-      resolve: this.getResolve(),
+      mode: this.isDebug() ? 'development' : 'production',
       output: this.getOutput(),
+      resolve: this.getResolve(),
+      entry: this.getFullEntry(),
+      target: this.getTarget(),
       module: this.getModule(),
       plugins: this.getPlugins(),
       cache: this.isDebug(),
       bail: !this.isDebug(),
       stats: this.getStats(),
+      // debug: this.isDebug(),
       // postcss: (...args) => this.getPostcssModule(...args),
     };
   }

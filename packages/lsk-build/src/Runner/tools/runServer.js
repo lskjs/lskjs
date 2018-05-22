@@ -19,7 +19,8 @@ let pending = true;
 
 // Launch or restart the Node.js server
 function runServer() {
-  
+  console.log('#####  runServer');
+
   const serverConfig = this.webpackConfig.filter(c => c.name === 'server')[0];
   const serverPath = path.join(
     serverConfig.output.path,
@@ -30,6 +31,7 @@ function runServer() {
     function onStdOut(data) {
       const time = new Date().toTimeString();
       const match = data.toString('utf8').match(RUNNING_REGEXP);
+      // console.log({match});
 
       process.stdout.write(time.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] '));
       process.stdout.write(data);

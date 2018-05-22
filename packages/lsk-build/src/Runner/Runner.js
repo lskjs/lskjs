@@ -48,7 +48,10 @@ export default class Runner {
   }
 
   resolveDist(path) {
-    return (this.dirname ? (this.dirname + '/') : '') + '/' + path;
+    return this.resolvePath(path);
+    const resolved = path.resolve((this.dirname ? (this.dirname + '/') : '') + '/' + path);
+    console.log({path, resolved});
+    return this.resolvePath(path);
   }
 
 

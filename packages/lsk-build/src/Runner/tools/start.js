@@ -19,6 +19,7 @@ import { format } from './run';
 // import run, { format } from './run';
 // import clean from './clean';
 
+const __DEV__ = false;
 const isDebug = !process.argv.includes('--release');
 
 // https://webpack.js.org/configuration/watch/#watchoptions
@@ -70,7 +71,6 @@ async function start() {
   this.server.use(errorOverlayMiddleware());
   this.server.use(express.static(path.resolve(__dirname, this.resolveDist('../public'))));
   // Configure client-side hot module replacement
-  // console.log('this.webpackConfig', this.webpackConfig);
   const clientConfig = this.webpackConfig.find(config => config.name === 'client');
   clientConfig.entry.client = ['./tools/lib/webpackHotDevClient']
     .concat(clientConfig.entry.client)
@@ -151,6 +151,7 @@ async function start() {
       })
       .catch(error => console.error(error));
   });
+  const runner = this;
 
   function checkForUpdate(fromUpdate) {
     const hmrPrefix = '[\x1b[35mHMR\x1b[0m] ';
@@ -163,6 +164,7 @@ async function start() {
     return app.hot
       .check(true)
       .then(updatedModules => {
+        __DEV__ && console.log('app.hot.check', fromUpdate, updatedModules);
         if (!updatedModules) {
           if (fromUpdate) {
             console.info(`${hmrPrefix}Update applied.`);
@@ -179,12 +181,19 @@ async function start() {
           checkForUpdate(true);
         }
       })
-      .catch(error => {
+      .catch(async (error) => {
+        __DEV__ && console.log('CATCH', 'app.hot.status()', app.hot.status(), error);
         if (['abort', 'fail'].includes(app.hot.status())) {
           console.warn(`${hmrPrefix}Cannot apply update.`);
-          delete require.cache[require.resolve('../build/server')];
+          await app.stop();
+          // console.log(11111);
+          // console.log(222, runner.resolveDist('build/server'));
+          // console.log(3333, require.resolve(runner.resolveDist('build/server')));
+          // console.log(4444, Object.keys(require.cache));
+          delete require.cache[require.resolve(runner.resolveDist('build/server'))];
+          // console.log(123123123123);
           // eslint-disable-next-line global-require, import/no-unresolved
-          app = require('../build/server').default;
+          app = require(runner.resolveDist('build/server')).default;
           console.warn(`${hmrPrefix}App has been reloaded.`);
         } else {
           console.warn(
