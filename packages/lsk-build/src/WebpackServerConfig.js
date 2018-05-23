@@ -77,25 +77,30 @@ export default class WebpackServerConfig extends WebpackConfig {
       externals: [
         './chunk-manifest.json',
         './asset-manifest.json',
-        nodeExternals({
-          whitelist: [this.reStyle, this.reImage],
-        }),
         './assets',
-        (context, request, callback) => {
-          const depsStr = this.getDeps().map(dep => dep.name).filter(a => a).join('|');
-          const isExternal =
-            request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
-            !request.match(/\.(css|less|scss|sss)$/i) &&
-            (!depsStr || !request.match(new RegExp(`^(${depsStr})`)));
-          // console.log('==================');
-          // console.log(depsStr);
-          // console.log(request.match(/^[@a-z][a-z\/\.\-0-9]*$/i), !!request.match(/^[@a-z][a-z\/\.\-0-9]*$/i));
-          // console.log(request.match(/\.(css|less|scss|sss)$/i), !request.match(/\.(css|less|scss|sss)$/i));
-          // console.log(request.match(new RegExp(`^(${depsStr})`)), !request.match(new RegExp(`^(${depsStr})`)));
-          // !Boolean(isExternal) && console.log('!!!!!!!!!!!!ext', request, !request.match(new RegExp(`^(${depsStr})`)), Boolean(isExternal));
-          // console.log('==================');
-          callback(null, Boolean(isExternal));
-        },
+        nodeExternals({
+          whitelist: [
+            new RegExp(`^(${this.getDeps().map(dep => dep.name).filter(a => a).join('|')})`),
+            this.reStyle,
+            this.reImage,
+          ],
+        }),
+        // (context, request, callback) => {
+        //   const depsStr = this.getDeps().map(dep => dep.name).filter(a => a).join('|');
+        //   console.log('depsStr', depsStr);
+        //   const isExternal =
+        //     request.match(/^[@a-z][a-z\/\.\-0-9]*$/i) &&
+        //     !request.match(/\.(css|less|scss|sss)$/i) &&
+        //     (!depsStr || !request.match(new RegExp(`^(${depsStr})`)));
+        //   // console.log('==================');
+        //   // console.log(depsStr);
+        //   // console.log(request.match(/^[@a-z][a-z\/\.\-0-9]*$/i), !!request.match(/^[@a-z][a-z\/\.\-0-9]*$/i));
+        //   // console.log(request.match(/\.(css|less|scss|sss)$/i), !request.match(/\.(css|less|scss|sss)$/i));
+        //   // console.log(request.match(new RegExp(`^(${depsStr})`)), !request.match(new RegExp(`^(${depsStr})`)));
+        //   // !Boolean(isExternal) && console.log('!!!!!!!!!!!!ext', request, !request.match(new RegExp(`^(${depsStr})`)), Boolean(isExternal));
+        //   // console.log('=================='); 
+        //   callback(null, Boolean(isExternal));
+        // },
       ],
 
       node: {

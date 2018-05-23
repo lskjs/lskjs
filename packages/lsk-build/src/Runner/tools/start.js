@@ -67,6 +67,9 @@ function createCompilationPromise(name, compiler, config) {
  */
 async function start() {
   if (this.server) return this.server;
+  await this.run(this.clean);
+  this.traceWebpackConfig();
+
   this.server = express();
   this.server.use(errorOverlayMiddleware());
   this.server.use(express.static(path.resolve(__dirname, this.resolveDist('../public'))));
@@ -99,7 +102,6 @@ async function start() {
   serverConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Configure compilation
-  await this.run(this.clean);
   const multiCompiler = webpack(this.webpackConfig);
   const clientCompiler = multiCompiler.compilers.find(
     compiler => compiler.name === 'client',
