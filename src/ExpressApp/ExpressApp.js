@@ -32,13 +32,13 @@ export default class ExpressApp extends Core {
 
   async run() {
     this.log.trace('ExpressApp run');
+    this.useStatics();
     this.useMiddlewares();
   }
 
   async afterRun() {
     this.log.trace('ExpressApp afterRun');
     this.useRoutes();
-    this.useStatics();
     this.useDefaultRoute();
     this.useCatchErrors();
     return new Promise((resolve) => {
@@ -51,7 +51,11 @@ export default class ExpressApp extends Core {
   async stop() {
     await super.stop();
     await new Promise((resolved) => {
-      this.httpInstance.close(resolved);
+      if (this.httpInstance) {
+        this.httpInstance.close(resolved);
+      } else {
+        resolved();
+      }
     })
   }
 

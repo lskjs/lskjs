@@ -76,7 +76,7 @@ export default class CoreApp extends ExpressApp {
     const root = __DEV__ ? `${__dirname}/../src/public` : buildRoot;
     return {
       '/': root,
-      '/favicon.ico': buildRoot + require('file-loader!../public/favicon.ico'), // eslint-disable-line
+      // '/favicon.ico': buildRoot + require('file-loader!../public/favicon.ico'), // eslint-disable-line
     };
   }
   getResolvedStatics() {

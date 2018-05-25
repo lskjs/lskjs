@@ -14,7 +14,7 @@ export default class TestPage extends PureComponent {
     return <>
       <h1>Hello World: {uapp?.name}</h1>
       <Button>
-        Button @@
+        Button @@3
       </Button>
       <Button2>
         Button 4
