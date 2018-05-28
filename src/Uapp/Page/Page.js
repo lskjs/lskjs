@@ -66,6 +66,7 @@ export default class Page {
     return this.state;
   }
 
+
   // useRes(res) {
   //   if (this.state.redirect) {
   //     return res.redirect(this.state.redirect);
@@ -137,6 +138,11 @@ export default class Page {
       // .title('ERROR')
       .component('div', { children: `Error: ${err}` });
   }
+
+  loading() {
+    return this.component('Loading...');
+  }
+
 
   async next(next) {
     // console.log('next111');

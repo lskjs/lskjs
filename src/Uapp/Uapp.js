@@ -5,7 +5,6 @@ import Page from './Page';
 import Api from 'apiquery';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
-import TestPage from './TestPage';
 // import safeRender from './safeRender';
 
 // TODO: вынести функции работы с хостнеймом куда нибудь
@@ -110,19 +109,7 @@ export default class Uapp extends Core {
   }
 
   getRoutes() {
-    return {
-      path: '(.*)',
-      action(params) {
-        const { page, uapp } = params;
-        // console.log({TestPage});
-        if (__CLIENT__) {
-          uapp.log.trace(params.pathname, params);
-        }
-        return page.component(TestPage, {
-          count: 10
-        });
-      }
-    };// require('../ReactApp/routes').default;
+    return require('./router').default(this)
   }
 
   resetPage() {

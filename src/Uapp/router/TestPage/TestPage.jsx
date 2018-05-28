@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 // import { inject } from 'mobx-react';
-import Button from './Button';
-import Button2 from './Button2';
+import Button from '../Button';
+import Button2 from '../Button2';
 
 // @inject('uapp')
 export default class TestPage extends PureComponent {
@@ -17,7 +17,7 @@ export default class TestPage extends PureComponent {
         Button 1
       </Button>
       <Button2>
-        Button 2
+        Button 5+
       </Button2>
       <div>
         {count}
