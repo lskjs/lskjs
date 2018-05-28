@@ -364,14 +364,39 @@ ${this.renderStyle()}
   }
 
 
+
+  renderChunks(type, chunk = 'client') {
+    const props = this.uapp;
+    if (!props || !props.assets) return '';
+    // console.log('props.assets', props.assets);
+    const assets = props.assets[chunk];
+    if (type === 'css' && assets) {
+      return assets
+        .filter(filename => filename.includes('.css'))
+        .map(filename => (
+          `<link rel="stylesheet" href="${filename}">`
+        ))
+        .join('\n')
+    }
+    if (type === 'js' && assets) {
+      return assets
+        .filter(filename => filename.includes('.js'))
+        .map(filename => (
+          `<script id="js" src="${filename}"></script>`
+        ))
+        .join('\n')
+    }
+    return '';
+  }
+
   renderAssets(type) {
     const props = this.uapp;
     if (!props || !props.assets) return '';
-    if (type === 'css' && props.assets && props.assets.css) {
-      return `<link rel="stylesheet" href="${props.assets.css}">`;
+    if (type === 'css' && props.assets) {
+      return `<link rel="stylesheet" href="${props.assets['client.css']}">`;
     }
-    if (type === 'js' && props.assets && props.assets.js) {
-      return `<script id="js" src="${props.assets.js}"></script>`;
+    if (type === 'js' && props.assets) {
+      return `<script id="js" src="${props.assets['client.js']}"></script>`;
     }
     return '';
   }

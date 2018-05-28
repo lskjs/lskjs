@@ -75,7 +75,7 @@ export default class Core {
       }
     });
     this.modules = modules;
-    DEBUG && this.log.debug(`${this.name}.modules`, Object.keys(this.modules));
+    DEBUG && this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
     // this.log.debug('_modules', Object.keys(this._modules));
     return this.broadcastModules('init');
   }

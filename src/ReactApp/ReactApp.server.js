@@ -4,8 +4,9 @@ import CoreApp from 'lego-starter-kit/CoreApp';
 import Uapp from '../Uapp';
 import { antimergeDeep } from 'antimerge';
 import cloneDeep from 'lodash/cloneDeep';
-
-import assets from './assets'; // eslint-disable-line
+import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
+import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
+// console.log({assets, chunks});
 
 export default class ReactApp extends CoreApp {
   name = 'App';
@@ -41,14 +42,15 @@ export default class ReactApp extends CoreApp {
   async getUapp(req) {
     const Uapp2 = this.Uapp || this.BaseUapp;
     const uapp = new Uapp2({
-      assets: assets.main,
+      assets,
+      chunks,
       history: createMemoryHistory({
         initialEntries: [req.url],
       }),
-      styles: [],
-      insertCss: (...styles) => {
-        styles.forEach(style => style && style._getCss && uapp.styles.push(style._getCss()));
-      },
+      // styles: [],
+      // insertCss: (...styles) => {
+      //   styles.forEach(style => style && style._getCss && uapp.styles.push(style._getCss()));
+      // },
       req,
       rootState: this.getRootState(req),
       config: this.config.client,
