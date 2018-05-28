@@ -9,7 +9,12 @@ export default class WebpackServerConfig extends WebpackConfig {
   }
 
   getEntry() {
-    return './server.js';
+    return {
+      server: [
+        // '@babel/polyfill',
+        './server.js',
+      ],
+    };
   }
 
   getGlobals() {
@@ -98,7 +103,7 @@ export default class WebpackServerConfig extends WebpackConfig {
         //   // console.log(request.match(/\.(css|less|scss|sss)$/i), !request.match(/\.(css|less|scss|sss)$/i));
         //   // console.log(request.match(new RegExp(`^(${depsStr})`)), !request.match(new RegExp(`^(${depsStr})`)));
         //   // !Boolean(isExternal) && console.log('!!!!!!!!!!!!ext', request, !request.match(new RegExp(`^(${depsStr})`)), Boolean(isExternal));
-        //   // console.log('=================='); 
+        //   // console.log('==================');
         //   callback(null, Boolean(isExternal));
         // },
       ],

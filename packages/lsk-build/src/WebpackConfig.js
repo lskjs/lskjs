@@ -509,19 +509,20 @@ export default class WebpackConfig {
     };
   }
 
-  getEntryPrefix() {
-    return [];
-    // return ['babel-polyfill'];
-  }
+  // getEntryPrefix() {
+  //   // return [];
+  //   return ['babel-polyfill'];
+  // }
 
   getEntry() {
-    return 'index.js';
+    return {}
+    // return 'index.js';
   }
 
-  getFullEntry() {
-    const entry = this.getEntry();
-    return Array.isArray(entry) ? [...this.getEntryPrefix(), ...entry] : [...this.getEntryPrefix(), entry];
-  }
+  // getFullEntry() {
+  //   const entry = this.getEntry();
+  //   return Array.isArray(entry) ? [...this.getEntryPrefix(), ...entry] : [...this.getEntryPrefix(), entry];
+  // }
 
   getOutput() {
     return {
@@ -562,7 +563,7 @@ export default class WebpackConfig {
       mode: this.isDebug() ? 'development' : 'production',
       output: this.getOutput(),
       resolve: this.getResolve(),
-      entry: this.getFullEntry(),
+      entry: this.getEntry(),
       target: this.getTarget(),
       module: this.getModule(),
       plugins: this.getPlugins(),
