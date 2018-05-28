@@ -76,7 +76,7 @@ async function start() {
   // Configure client-side hot module replacement
   const clientConfig = this.webpackConfig.find(config => config.name === 'client');
   // clientConfig.entry.client = [__dirname + '/tools/lib/webpackHotDevClient.js']
-  clientConfig.entry.client = ['../node_modules/@lskjs/build/dist/Runner/tools/lib/webpackHotDevClient.js']
+  clientConfig.entry.client = ['../node_modules/@lskjs/build/webpackHotDevClient.js']
     .concat(clientConfig.entry.client)
     .sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));
   clientConfig.output.filename = clientConfig.output.filename.replace(
