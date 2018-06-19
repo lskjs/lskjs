@@ -110,8 +110,9 @@ export default class WebpackConfig {
   babelrc = {
     presets: [
       "@babel/preset-env",
+      // ["@babel/preset-stage-0", {"decoratorsLegacy": true}]
+      "@babel/preset-stage-0",
       "@babel/preset-react",
-      "@babel/preset-stage-0"
     ],
     plugins: [
       'module:jsx-control-statements',
@@ -137,6 +138,7 @@ export default class WebpackConfig {
         cacheDirectory: this.isDebug(),
         babelrc: false, // true
         presets: (this.babelrc.presets || []).map(preset => {
+          return preset;
           const presetName = typeof preset === 'string' ? preset : preset[0];
           const presetOptions = typeof preset === 'string' ? {} : preset[1];
           // console.log({presetName, presetOptions});
@@ -147,8 +149,7 @@ export default class WebpackConfig {
               targets.forceAllTransforms = !this.isDebug();
             }
             if (this.name === 'server') {
-              targets.node = get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0];
-
+              targets.node = get(this, 'pkg.engines.node', '6.10').match(/(\d+\.?)+/)[0];
             }
             return [
               '@babel/preset-env',
@@ -202,7 +203,7 @@ export default class WebpackConfig {
             // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
             'transform-react-remove-prop-types',
 
-            'transform-react-remove-prop-types', // ?
+            // 'transform-react-remove-prop-types', // ?
             '@babel/plugin-transform-react-constant-elements', // ?
             // 'transform-react-inline-elements',
           ]),
@@ -430,8 +431,8 @@ export default class WebpackConfig {
     ];
 
     if (!this.isDebug()) {
-      getLoaders.push({
-        test: resolvePath(
+      loaders.push({
+        test: this.resolvePath(
           'node_modules/react-deep-force-update/lib/index.js',
         ),
         loader: 'null-loader',
