@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build",
-  "version": "1.19.11",
+  "version": "1.19.13",
   "description": "Lego Starter Kit builder & webpack configurator",
   "main": "index.js",
   "scripts": {
@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/isuvorov/lsk-build#readme",
   "dependencies": {
+    "@babel/plugin-transform-react-constant-elements": "^7.0.0-beta.51",
+    "@babel/plugin-transform-react-inline-elements": "^7.0.0-beta.51",
     "assets-webpack-plugin": "^3.6.0",
     "autoprefixer": "8.5.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
     "bluebird": "3.5.1",
     "browser-sync": "2.24.4",
     "css-loader": "0.28.11",

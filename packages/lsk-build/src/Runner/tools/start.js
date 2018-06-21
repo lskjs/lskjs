@@ -68,7 +68,7 @@ function createCompilationPromise(name, compiler, config) {
 async function start() {
   if (this.server) return this.server;
   await this.run(this.clean);
-  this.traceWebpackConfig();
+  await this.traceWebpackConfig();
 
   this.server = express();
   this.server.use(errorOverlayMiddleware());

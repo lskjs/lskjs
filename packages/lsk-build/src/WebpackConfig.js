@@ -4,16 +4,15 @@ import webpack from 'webpack';
 import fs from 'fs';
 import get from 'lodash.get';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-const StatsPlugin = require('stats-webpack-plugin');
 import stringify from 'serialize-javascript';
+import StatsPlugin from 'stats-webpack-plugin';
+// const StatsPlugin = require('stats-webpack-plugin');
 
 const reScript = /\.(js|jsx|mjs)$/;
 // /\.(jsx|js)?$/,
 const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 // test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
-
-
 
 export default class WebpackConfig {
   name = 'webpack';
@@ -95,31 +94,31 @@ export default class WebpackConfig {
     if (!this.modules || !this.modules.modules) return deps;
     const modules = this.modules.modules;
     const modulesDeps = Object
-    .keys(modules)
-    .filter(dep => modules[dep][0] !== '~')
-    .map((dep) => {
-      return {
-        name: modules[dep],
-        path: fs.realpathSync(`${this.dirname}/node_modules/${modules[dep]}/src`),
-        alias: modules[dep],
-      };
-    });
+      .keys(modules)
+      .filter(dep => modules[dep][0] !== '~')
+      .map((dep) => {
+        return {
+          name: modules[dep],
+          path: fs.realpathSync(`${this.dirname}/node_modules/${modules[dep]}/src`),
+          alias: modules[dep],
+        };
+      });
     return [...deps, ...modulesDeps];
   }
 
   babelrc = {
     presets: [
-      "@babel/preset-env",
+      '@babel/preset-env',
       // ["@babel/preset-stage-0", {"decoratorsLegacy": true}]
-      "@babel/preset-stage-0",
-      "@babel/preset-react",
+      '@babel/preset-stage-0',
+      '@babel/preset-react',
     ],
     plugins: [
       'module:jsx-control-statements',
       '@babel/plugin-proposal-decorators',
-      ['@babel/plugin-proposal-class-properties', { loose: true, }],
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
       ['@babel/plugin-transform-runtime', { polyfill: false }],
-    ]
+    ],
   }
 
   getJsxLoader() {
@@ -137,7 +136,7 @@ export default class WebpackConfig {
         // sourceMap: this.isSourcemap(),
         cacheDirectory: this.isDebug(),
         babelrc: false, // true
-        presets: (this.babelrc.presets || []).map(preset => {
+        presets: (this.babelrc.presets || []).map((preset) => {
           return preset;
           const presetName = typeof preset === 'string' ? preset : preset[0];
           const presetOptions = typeof preset === 'string' ? {} : preset[1];
@@ -160,7 +159,7 @@ export default class WebpackConfig {
                 useBuiltIns: false,
                 debug: false,
               },
-            ]
+            ];
             // if (this.name === 'client') {
             //   return [
             //     '@babel/preset-env',
@@ -186,7 +185,7 @@ export default class WebpackConfig {
                 ...presetOptions,
                 development: this.isDebug(),
               },
-            ]
+            ];
           }
           return preset;
         }),
@@ -198,14 +197,10 @@ export default class WebpackConfig {
             '@babel/transform-react-constant-elements',
             // Replaces the React.createElement function with one that is more optimized for production
             // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
-            '@babel/transform-react-inline-elements',
+            // '@babel/transform-react-inline-elements ',
             // Remove unnecessary React propTypes from the production build
             // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
             'transform-react-remove-prop-types',
-
-            // 'transform-react-remove-prop-types', // ?
-            '@babel/plugin-transform-react-constant-elements', // ?
-            // 'transform-react-inline-elements',
           ]),
         ].filter(a => a),
       },
@@ -215,7 +210,7 @@ export default class WebpackConfig {
   }
 
   getCssLoaders() {
-    const getPostcssModule = (bundle) => this.getPostcssModule(bundle);
+    const getPostcssModule = bundle => this.getPostcssModule(bundle);
     // return [
     //   [0,0],
     //   [0,1],
@@ -266,16 +261,16 @@ export default class WebpackConfig {
                 modules: false,
                 minimize: !this.isDebug(),
                 localIdentName, // ?
-              }
+              },
             }, {
               loader: 'postcss-loader',
               options: {
                 // pack: 'default',
-                plugins: getPostcssModule
-              }
-            }
-          ]
-        })
+                plugins: getPostcssModule,
+              },
+            },
+          ],
+        }),
       },
       {
         test: /\.css$/,
@@ -291,15 +286,15 @@ export default class WebpackConfig {
                 modules: true,
                 localIdentName, // ?
                 minimize: !this.isDebug(),
-              }
+              },
             }, {
               loader: 'postcss-loader',
               options: {
-                plugins: getPostcssModule
-              }
-            }
+                plugins: getPostcssModule,
+              },
+            },
           ],
-        })
+        }),
       },
       {
         test: /\.g(lobal)?\.scss$/,
@@ -313,17 +308,17 @@ export default class WebpackConfig {
                 modules: false,
                 localIdentName, // ?
                 minimize: !this.isDebug(),
-              }
+              },
             }, {
               loader: 'postcss-loader',
               options: {
                 // pack: 'sass',
-                plugins: getPostcssModule
-              }
+                plugins: getPostcssModule,
+              },
             },
-            'sass-loader'
-          ]
-        })
+            'sass-loader',
+          ],
+        }),
       },
       {
         test: /\.scss$/,
@@ -344,12 +339,12 @@ export default class WebpackConfig {
               loader: 'postcss-loader',
               options: {
                 // pack: 'sass',
-                plugins: getPostcssModule
-              }
+                plugins: getPostcssModule,
+              },
             },
             'sass-loader',
-          ]
-        })
+          ],
+        }),
       },
     ];
   }
@@ -432,11 +427,9 @@ export default class WebpackConfig {
 
     if (!this.isDebug()) {
       loaders.push({
-        test: this.resolvePath(
-          'node_modules/react-deep-force-update/lib/index.js',
-        ),
+        test: this.resolvePath('node_modules/react-deep-force-update/lib/index.js'),
         loader: 'null-loader',
-      })
+      });
     }
     return loaders;
   }
@@ -468,13 +461,13 @@ export default class WebpackConfig {
   getResolve() {
     return {
       /* root: this.resolvePath('src'),
-      modulesDirectories: ['node_modules'],*/
+      modulesDirectories: ['node_modules'], */
       alias: this.getResolveAlias(),
       extensions: this.getResolveExtensions(),
       modules: [
         this.resolvePath('src'),
-        "node_modules",
-      ]
+        'node_modules',
+      ],
     };
   }
 
@@ -516,7 +509,7 @@ export default class WebpackConfig {
   // }
 
   getEntry() {
-    return {}
+    return {};
     // return 'index.js';
   }
 
@@ -584,7 +577,6 @@ export default class WebpackConfig {
   }
 
 
-
   traceWebpackConfig() {
     if (this.webpackConfigDist === false) return;
     const webpackConfigDist = this.webpackConfigDist || `${this.getDistDir()}/webpack.config.js`;
@@ -603,5 +595,4 @@ export default class WebpackConfig {
   save(filename) {
     return this.constructor.save(filename, this.getConfig());
   }
-
 }
