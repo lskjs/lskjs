@@ -129,8 +129,8 @@ export default class WebpackClientConfig extends WebpackConfig {
         // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
         // new webpack.optimize.AggressiveMergingPlugin(),
 
-        new BundleAnalyzerPlugin(),
-        // ...(this.isAnalyze() ? [new BundleAnalyzerPlugin()] : []),
+        // new BundleAnalyzerPlugin(),
+        ...(this.isAnalyze && this.isAnalyze() ? [new BundleAnalyzerPlugin()] : []),
       ],
     ];
   }
