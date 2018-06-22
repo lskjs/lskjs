@@ -5,6 +5,12 @@ import onlineService from './server/onlineService';
 
 export default (ctx) => {
   return class AuthModule {
+    canonize = require('./server/canonize').default.bind(this)
+    canonizeAndValidatePhone = require('./server/canonizeAndValidatePhone').default.bind(this)
+    canonizePhone = require('./server/canonizePhone').default.bind(this)
+    canonizeUsername = require('./server/canonizeUsername').default.bind(this)
+    transliterate = require('./server/transliterate').default.bind(this)
+
     initOnlineService() {
       this.online = onlineService;
       this.online.save = async (_id, visitedAt) => {
