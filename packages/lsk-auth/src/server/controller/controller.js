@@ -1,9 +1,13 @@
-import validator from 'validator';
+// import validator from 'validator';
 import merge from 'lodash/merge';
 import random from 'lodash/random';
 import canonize from '../canonize';
 import canonizeUsername from '../canonizeUsername';
 import transliterate from '../transliterate';
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
 
 export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
@@ -52,7 +56,7 @@ export default (ctx, module) => {
       if (!params.username) {
         params.username = params.login;
       }
-      if (!params.email && validator.isEmail(params.login)) {
+      if (!params.email && validateEmail(params.login)) {
         params.email = params.login;
       } // if email
     }
