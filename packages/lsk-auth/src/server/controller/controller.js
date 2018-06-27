@@ -4,8 +4,9 @@ import random from 'lodash/random';
 import canonize from '../canonize';
 import canonizeUsername from '../canonizeUsername';
 import transliterate from '../transliterate';
+
 function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
 
@@ -465,6 +466,10 @@ export default (ctx, module) => {
       user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
+  };
+
+  controller.getPassportByToken = async (req, res) => {
+    return Passport.getByToken(req.data.p);
   };
 
   return controller;

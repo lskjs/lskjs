@@ -106,6 +106,8 @@ export default (ctx) => {
       api.all('/social/bind', isAuth, this.controller.socialBind); // Добавление соц.сетей к пользователю
       api.all('/social/unbind', isAuth, this.controller.socialUnbind);
 
+      api.all('/passport/getByToken', this.controller.getPassportByToken);
+
       // social auth init
       api.get('/:provider', this.controller.socialAuth);
       api.get('/:provider/auth', this.controller.socialAuth);

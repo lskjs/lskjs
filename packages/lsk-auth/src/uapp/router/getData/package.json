@@ -1,4 +1,0 @@
-{
-  "browser": "getData.client",
-  "main": "getData.server"
-}

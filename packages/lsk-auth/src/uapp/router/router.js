@@ -1,5 +1,4 @@
 import React from 'react';
-import getData from './getData';
 import Loading from 'lsk-general/General/Loading';
 
 export default {
@@ -34,11 +33,13 @@ export default {
     {
       path: '/passport',
       async action(params) {
-        const { uapp, query, page } = params;
+        const { uapp, query, page, api, } = params;
         const { AuthPage, BindPage } = uapp.modules.auth.components;
         let passport;
         try {
-          passport = (await getData(params)).passport;
+          const { data } = api.fetch('/api/module/auth/passport/getByToken', query);
+          // passport = (await getData(params)).passport;
+          passport = data;
         } catch (err) {
           throw err;
         }
