@@ -37,7 +37,10 @@ export default {
         const { AuthPage, BindPage } = uapp.modules.auth.components;
         let passport;
         try {
-          const { data } = api.fetch('/api/module/auth/passport/getByToken', query);
+          const { data } = await api.fetch('/api/module/auth/passport/getByToken', {
+            method: 'GET',
+            qs: query,
+          });
           // passport = (await getData(params)).passport;
           passport = data;
         } catch (err) {
