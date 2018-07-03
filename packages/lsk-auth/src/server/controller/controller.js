@@ -1,9 +1,9 @@
 // import validator from 'validator';
 import merge from 'lodash/merge';
 import random from 'lodash/random';
-import canonize from '../canonize';
-import canonizeUsername from '../canonizeUsername';
-import transliterate from '../transliterate';
+// import canonize from '../canonize';
+// import canonizeUsername from '../canonizeUsername';
+// import transliterate from '../transliterate';
 
 function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -33,8 +33,8 @@ export default (ctx, module) => {
   controller.silent = async function (req) {
     const { User } = ctx.models;
     const params = req.allParams();
-    if (params.username) params.username = canonize(params.username);
-    if (params.email) params.email = canonize(params.email);
+    if (params.username) params.username = module.canonize(params.username);
+    if (params.email) params.email = module.canonize(params.email);
     const username = `__s${Date.now()}__`;
     const user = new User(Object.assign({
       username,
@@ -61,8 +61,8 @@ export default (ctx, module) => {
         params.email = params.login;
       } // if email
     }
-    if (params.username) params.username = canonizeUsername(params.username);
-    if (params.email) params.email = canonize(params.email);
+    if (params.username) params.username = module.canonizeUsername(params.username);
+    if (params.email) params.email = module.canonize(params.email);
     // console.log({ params });
     return params;
   };
@@ -70,22 +70,22 @@ export default (ctx, module) => {
     const params = req.allParams();
     if (params.username) {
       return {
-        username: canonize(params.username),
+        username: module.canonize(params.username),
       };
     }
     if (params.email) {
       return {
-        email: canonize(params.email),
+        email: module.canonize(params.email),
       };
     }
     if (params.login) {
       return {
         $or: [
           {
-            username: canonize(params.login),
+            username: module.canonize(params.login),
           },
           {
-            email: canonize(params.login),
+            email: module.canonize(params.login),
           },
         ],
       };
@@ -390,7 +390,7 @@ export default (ctx, module) => {
     if (module.tbot) {
       module.tbot.notify(`Номер: ${phone}\n${smsText}`);
     }
-    const text = transliterate(smsText);
+    const text = module.transliterate(smsText);
 
     let res;
     // console.log('smsConfig.provider', smsConfig.provider);
@@ -444,7 +444,7 @@ export default (ctx, module) => {
     if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     const { User } = ctx.models;
-    if (!((module.config.sms.defaultCode && code == module.config.sms.code) || code == controller.lastCode)) {
+    if (!((module.config.sms.defaultCode && code === module.config.sms.code) || code === controller.lastCode)) {
       throw 'Код не верный';
     }
 
