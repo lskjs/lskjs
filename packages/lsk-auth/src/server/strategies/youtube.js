@@ -18,6 +18,7 @@ export default (ctx, { Strategy, config }) => {
     }
 
     async updateTokens(passport) {
+      // console.log('@@updateTokens');
       const ytConfig = get(config, 'socials.youtube.config');
       if (!ytConfig) return null;
       const api = new Api();
@@ -40,6 +41,13 @@ export default (ctx, { Strategy, config }) => {
       const data = await res.json();
       const ret = {}
       // console.log('updateTokens', data);
+      if (data.error) {
+        throw {
+          code: data.error,
+          message: data.error_description,
+          error: data,
+        };
+      }
       if (data.access_token) {
         // console.log('updateTokens.access_token', passport.token, data.access_token, passport.token === data.access_token);
         passport.token = data.access_token;
@@ -48,7 +56,7 @@ export default (ctx, { Strategy, config }) => {
       // TODO: сначала протестить
       if (data.refresh_token) {
         // passport.refreshToken = data.refresh_token;
-        __DEV__ && console.log('TODO: сначала протестить', passport.refreshToken, data.refresh_token);
+        // __DEV__ && console.log('TODO: сначала протестить', passport.refreshToken, data.refresh_token);
         ret.refreshToken = data.refresh_token;
       }
       return ret;
