@@ -18,10 +18,13 @@ export function getSchema(ctx, module) {
       type: Object, // по идее тут должна быть структура данных
       default: {},
     },
+    meta: {
+      type: Object,
+    },
     // Дата последнего обновления данных
     fetchedAt: {
       type: Date,
-      default: Date.now,
+      default: null,
     },
 
     // название соцсети из passport
@@ -41,14 +44,18 @@ export function getSchema(ctx, module) {
     refreshToken: {
       type: String,
     },
-    meta: {
+    lastError: {
       type: Object,
+    },
+    lastErrorAt: {
+      type: Date,
     },
     // статус пасспорта: валиден или нет
     // пока не используется
     status: {
-      type: Boolean,
-      default: true,
+      type: String,
+      enum: [null, 'valid', 'invalid', 'removed', 'expired', 'unauthorized'],
+      default: null,
     },
   }, {
     collection: 'passport',

@@ -40,8 +40,23 @@ export default (ctx, { Strategy, config }) => {
       );
       const data = await res.json();
       const ret = {}
-      // console.log('updateTokens', data);
+      // console.log('updateTokens data', data);
       if (data.error) {
+        if (data.error_description === 'Account has been deleted') {
+          passport.status = 'removed';
+        } else if (data.error_description === 'Token has been expired or revoked') {
+          passport.status = 'expired';
+        } else if (data.error === 'invalid_grant') {
+          passport.status = 'invalid';
+        } else if (data.error === 'unauthorized_client') {
+          passport.status = 'unauthorized';
+        } else {
+          ctx.log.error('Passport update unknown error', data);
+          passport.status = 'invalid';
+        }
+        passport.lastError = data;
+        passport.lastErrorAt = new Date();
+
         throw {
           code: data.error,
           message: data.error_description,
@@ -49,6 +64,7 @@ export default (ctx, { Strategy, config }) => {
         };
       }
       if (data.access_token) {
+        passport.status = 'valid';
         // console.log('updateTokens.access_token', passport.token, data.access_token, passport.token === data.access_token);
         passport.token = data.access_token;
         ret.accessToken = data.access_token;
