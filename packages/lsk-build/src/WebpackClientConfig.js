@@ -17,7 +17,6 @@ export default class WebpackClientConfig extends WebpackConfig {
   getEntry() {
     return {
       client: [
-        '@babel/polyfill',
         './client.js',
       ],
     };
