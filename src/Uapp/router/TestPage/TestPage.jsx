@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 // import { inject } from 'mobx-react';
+// import A from '@lskjs/general/A';
 import Button from '../Button';
 import Button2 from '../Button2';
 
@@ -19,6 +20,9 @@ export default class TestPage extends PureComponent {
       <Button2>
         Button 5+
       </Button2>
+      {/* <A>
+        test a
+      </A> */}
       <div>
         {count}
         <button onClick={() => this.setState({

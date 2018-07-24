@@ -187,4 +187,6 @@ function once(fn) {
   };
 }
 
-module.exports = exp;
+// export default { AsyncRouter };
+// module.exports = exp;
+export { AsyncRouter };

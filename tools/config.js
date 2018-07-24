@@ -6,6 +6,7 @@ const ctx = {
   verbose: process.argv.includes('--verbose'),
   dirname,
   pkg: require('../package.json'),
+  babelrc: JSON.parse(fs.readFileSync(`${dirname}/.babelrc`)),
   deps: [
     {
       name: 'lego-starter-kit',
@@ -15,6 +16,7 @@ const ctx = {
   ],
   alias: {
     // 'lego-starter-kit': fs.realpathSync(dirname + '/src'),
+    // '@lskjs/general': fs.realpathSync(dirname + '/node_modules/@lskjs/general/dist'),
     react: fs.realpathSync(dirname + '/node_modules/react'),
     'react-dom': fs.realpathSync(dirname + '/node_modules/react-dom'),
   },

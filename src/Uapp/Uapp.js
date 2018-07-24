@@ -24,7 +24,7 @@ function findConfigByHostname(configs, hostname) {
       return config;
     }
     // console.log('isRightHostname(config.hosts, hostname)', isRightHostname(config.hosts, hostname));
-    if (config.hosts && isRightHostname(config.hosts, тв)) {
+    if (config.hosts && isRightHostname(config.hosts, hostname)) {
       // console.log('RETURN', config);
       return config;
     }
