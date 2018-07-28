@@ -233,6 +233,7 @@ export default (ctx, module) => {
       user.updateFromPassport(passport, { req });
       await user.save();
       passport.userId = user._id;
+      // console.log('passport.save before', passport);
       await passport.save();
     }
     req.user = user;
@@ -344,6 +345,8 @@ export default (ctx, module) => {
   controller.socialCallback = async (req, res) => {
     const { provider } = req.params;
     __DEV__ && console.log('socialCallback');
+    // console.log(123123123);
+    
     try {
       return new Promise((resolve, reject) => {
         (
@@ -351,7 +354,7 @@ export default (ctx, module) => {
             provider,
             module.strategies[provider].getPassportParams(),
             async (err, data) => {
-              // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
+              console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
               if (err) return reject(err);
               return resolve(res.redirect(data.redirect || '/'));
             },

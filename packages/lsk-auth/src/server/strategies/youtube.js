@@ -17,15 +17,24 @@ export default (ctx, { Strategy, config }) => {
       return config;
     }
 
-    async updateTokens(passport) {
+    async updateTokens(passport, creds2) {
       // console.log('@@updateTokens');
-      const ytConfig = get(config, 'socials.youtube.config');
-      if (!ytConfig) return null;
+      const ytConfig = get(config, 'socials.youtube.config', {});
+
+      const creds = {};
+      if (creds2 && (creds2.clientId || creds2.clientID) && creds2.clientSecret) {
+        creds.clientId = creds2.clientId || creds2.clientID
+        creds.clientSecret = creds2.clientSecret;
+      } else {
+        creds.clientId = ytConfig.clientId || ytConfig.clientID;
+        creds.clientSecret = ytConfig.clientSecret;
+      }
+      // console.log({creds});
       const api = new Api();
       const body = Api.qs.stringify({
         refresh_token: passport.refreshToken,
-        client_id: ytConfig.clientID,
-        client_secret: ytConfig.clientSecret,
+        client_id: creds.clientId,
+        client_secret: creds.clientSecret,
         grant_type: 'refresh_token',
       });
       const res = await Api.fetch(

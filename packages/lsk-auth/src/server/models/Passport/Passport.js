@@ -109,10 +109,10 @@ export function getSchema(ctx, module) {
     return strategy;
   };
 
-  schema.methods.updateToken = async function () {
+  schema.methods.updateToken = async function (...args) {
     const strategy = this.getStrategy();
     if (!strategy) return null;
-    await strategy.updateTokens(this);
+    await strategy.updateTokens(this, ...args);
   };
 
   schema.methods.updateData = async function () {
