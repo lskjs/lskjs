@@ -48,13 +48,17 @@ function getSiteConfig(props) {
   return siteConfig;
 }
 
-
 // TODO: вынести функции куда нибудь
 function resolveCtxRoutes(routes, ctx) {
   function resolveCtxRoute(initRoutes) {
     let routes = initRoutes; // eslint-disable-line
     if (typeof routes === 'function') {
-      routes = routes(ctx) || {};
+      try {
+        routes = routes(ctx) || {};
+      } catch (err) {
+        console.log('resolveCtxRoute err', err, routes);
+        routes = {};
+      }
     }
     if (routes.children) {
       routes.children = routes.children.map(resolveCtxRoute);
@@ -92,7 +96,9 @@ export default class Uapp extends Core {
     await super.run();
     const context = this.provide();
     this.log.trace('router.context', Object.keys(context))
-    this.routes = resolveCtxRoutes(this.getRoutes(), this);
+    const routes = this.getRoutes();
+    this.routes = resolveCtxRoutes(routes, this);
+    __DEV__ && console.log('Uapp.routes', this.routes);
     this.router = new UniversalRouter(this.routes, {
       context,
     });

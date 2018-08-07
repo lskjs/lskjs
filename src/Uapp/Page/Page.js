@@ -110,7 +110,7 @@ export default class Page {
         .error('Доступ запрещен')
         .disable();
     }
-  return this;
+    return this;
   }
 
 
@@ -136,7 +136,7 @@ export default class Page {
     return this
       .layout(this.state.errorLayout)
       // .title('ERROR')
-      .component('div', { children: `Error: ${err}` });
+      .component('div', { children: err });
   }
 
   loading() {
