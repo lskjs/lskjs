@@ -103,6 +103,7 @@ export default class ReactApp extends Core {
     }
 
     if (page.state.redirect) {
+      __DEV__ && console.log('Page.redirect', page.state.redirect)
       this.history.replace(page.state.redirect);
       return ;
     }

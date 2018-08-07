@@ -85,6 +85,7 @@ export default class ReactApp extends CoreApp {
         return next(err);
       }
       if (page.state.redirect) {
+        __DEV__ && console.log('Page.redirect', page.state.redirect)
         return res.redirect(page.state.redirect);
       }
 
