@@ -1,0 +1,10 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "shippedProposals": true
+    }],
+    ["@babel/preset-stage-0", {
+      "loose": false
+    }]
+  ]
+}

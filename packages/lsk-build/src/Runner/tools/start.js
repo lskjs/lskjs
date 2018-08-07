@@ -39,21 +39,16 @@ function createCompilationPromise(name, compiler, config) {
       console.info(`[${format(timeStart)}] Compiling '${name}'...`);
     });
 
-    compiler.hooks.done.tap(name, stats => {
+    compiler.hooks.done.tap(name, (stats) => {
+      console.info('STATS');
       console.info(stats.toString(config.stats));
       const timeEnd = new Date();
       const time = timeEnd.getTime() - timeStart.getTime();
       if (stats.hasErrors()) {
-        console.info(
-          `[${format(timeEnd)}] Failed to compile '${name}' after ${time} ms`,
-        );
+        console.info(`[${format(timeEnd)}] Failed to compile '${name}' after ${time} ms` );
         reject(new Error('Compilation failed!'));
       } else {
-        console.info(
-          `[${format(
-            timeEnd,
-          )}] Finished '${name}' compilation after ${time} ms`,
-        );
+        console.info(`[${format(timeEnd )}] Finished '${name}' compilation after ${time} ms` );
         resolve(stats);
       }
     });
@@ -87,9 +82,7 @@ async function start() {
     'chunkhash',
     'hash',
   );
-  clientConfig.module.rules = clientConfig.module.rules.filter(
-    x => x.loader !== 'null-loader',
-  );
+  clientConfig.module.rules = clientConfig.module.rules.filter(x => x.loader !== 'null-loader' );
   clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Configure server-side hot module replacement
@@ -97,19 +90,13 @@ async function start() {
   serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
   serverConfig.output.hotUpdateChunkFilename =
     'updates/[id].[hash].hot-update.js';
-  serverConfig.module.rules = serverConfig.module.rules.filter(
-    x => x.loader !== 'null-loader',
-  );
+  serverConfig.module.rules = serverConfig.module.rules.filter(x => x.loader !== 'null-loader' );
   serverConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Configure compilation
   const multiCompiler = webpack(this.webpackConfig);
-  const clientCompiler = multiCompiler.compilers.find(
-    compiler => compiler.name === 'client',
-  );
-  const serverCompiler = multiCompiler.compilers.find(
-    compiler => compiler.name === 'server',
-  );
+  const clientCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'client' );
+  const serverCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'server' );
   const clientPromise = createCompilationPromise(
     'client',
     clientCompiler,
@@ -122,13 +109,11 @@ async function start() {
   );
 
   // https://github.com/webpack/webpack-dev-middleware
-  this.server.use(
-    webpackDevMiddleware(clientCompiler, {
-      publicPath: clientConfig.output.publicPath,
-      logLevel: 'silent',
-      watchOptions,
-    }),
-  );
+  this.server.use(webpackDevMiddleware(clientCompiler, {
+    publicPath: clientConfig.output.publicPath,
+    logLevel: 'silent',
+    watchOptions,
+  }) );
 
   // https://github.com/glenjamin/webpack-hot-middleware
   this.server.use(webpackHotMiddleware(clientCompiler, { log: false }));
@@ -150,7 +135,7 @@ async function start() {
       .then(() => {
         // console.log('appPromise after', app, app.express);
         // console.log({app});
-        return app.express.handle(req, res)
+        return app.express.handle(req, res);
       })
       .catch(error => console.error(error));
   });
@@ -166,7 +151,7 @@ async function start() {
     }
     return app.hot
       .check(true)
-      .then(updatedModules => {
+      .then((updatedModules) => {
         __DEV__ && console.log('app.hot.check', fromUpdate, updatedModules);
         if (!updatedModules) {
           if (fromUpdate) {
@@ -179,8 +164,7 @@ async function start() {
         } else {
           console.info(`${hmrPrefix}Updated modules:`);
           updatedModules.forEach(moduleId =>
-            console.info(`${hmrPrefix} - ${moduleId}`),
-          );
+            console.info(`${hmrPrefix} - ${moduleId}`) );
           checkForUpdate(true);
         }
       })
@@ -188,20 +172,28 @@ async function start() {
         __DEV__ && console.log('CATCH', 'app.hot.status()', app.hot.status(), error);
         if (['abort', 'fail'].includes(app.hot.status())) {
           console.warn(`${hmrPrefix}Cannot apply update.`);
-          await app.stop();
-          // console.log(11111);
+          console.log(9999999999);
+          app.stop()
+            .then(() => {
+              console.log('app.stoped');
+            })
+            .catch((err) => {
+              console.log('app.stop err', err);
+            });
+          console.log(11111);
           // console.log(222, runner.resolveDist('build/server'));
           // console.log(3333, require.resolve(runner.resolveDist('build/server')));
           // console.log(4444, Object.keys(require.cache));
+          console.log(22222);
           delete require.cache[require.resolve(runner.resolveDist('build/server'))];
+          console.log(33333);
           // console.log(123123123123);
           // eslint-disable-next-line global-require, import/no-unresolved
           app = require(runner.resolveDist('build/server')).default;
+          console.log(444444);
           console.warn(`${hmrPrefix}App has been reloaded.`);
         } else {
-          console.warn(
-            `${hmrPrefix}Update failed: ${error.stack || error.message}`,
-          );
+          console.warn(`${hmrPrefix}Update failed: ${error.stack || error.message}` );
         }
       });
   }
@@ -241,8 +233,7 @@ async function start() {
         ...(isDebug ? {} : { notify: false, ui: false }),
       },
       (error, bs) => (error ? reject(error) : resolve(bs)),
-    ),
-  );
+    ) );
 
   const timeEnd = new Date();
   const time = timeEnd.getTime() - timeStart.getTime();
