@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build",
-  "version": "1.19.15",
+  "version": "1.19.16",
   "description": "Lego Starter Kit builder & webpack configurator",
   "main": "index.js",
   "scripts": {
