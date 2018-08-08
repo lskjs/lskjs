@@ -203,12 +203,13 @@ export default class Page {
 
   async component(...args) {
     if (this.disabled) return this;
-    if (args[0] && Object.prototype.toString.call(args[0]) === '[object Promise]') {
-      const result = await args[0];
-      if (result.default) {
-        args[0] = result.default;
-      }
+    const result = await args[0];
+    if (result.default) {
+      args[0] = result.default;
+    } else {
+      args[0] = result;
     }
+    // }
     if (args.length > 1) {
       this.state.component = args;
     } else {
