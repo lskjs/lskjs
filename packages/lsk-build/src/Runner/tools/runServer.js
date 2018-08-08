@@ -19,7 +19,7 @@ let pending = true;
 
 // Launch or restart the Node.js server
 function runServer() {
-  console.log('#####  runServer');
+  // console.log('#####  runServer');
 
   const serverConfig = this.webpackConfig.filter(c => c.name === 'server')[0];
   const serverPath = path.join(
