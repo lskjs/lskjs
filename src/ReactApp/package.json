@@ -1,4 +1,4 @@
 {
-  "main": "ReactApp.server.js",
+  "main": "ReactApp.server",
   "browser": "ReactApp.client.js"
 }

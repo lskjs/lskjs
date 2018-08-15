@@ -1,4 +1,4 @@
 {
-  "main": "logger.server.js",
+  "main": "logger.server",
   "browser": "logger.client.js"
 }

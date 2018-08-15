@@ -99,6 +99,12 @@ export default class ReactApp extends Core {
       page = await this.getPage(req);
     } catch (err) {
       this.log.error('CSR getPage err (ROUTER ERROR)', err);
+      try {
+        // --- Welcome to debugging React ---
+        // This error was thrown as a convenience so that you can use this stack
+        // to find the callsite that caused this warning to fire.
+        throw new Error('CSR getPage err (ROUTER ERROR)');
+      } catch (x) {}
       throw err;
     }
 

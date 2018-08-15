@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.20.3",
+  "version": "1.21.1",
   "engines": {
     "node": ">=6.13.1",
     "npm": ">=3.10.10"
@@ -84,16 +84,18 @@
     "webpack-node-externals": "1.7.2"
   },
   "scripts": {
+    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
+    "release": "npm run babel-build && npm publish --access=public dist",
     "build": "babel tools/run build --release",
     "start": "node build/server.js",
-    "release": "npm publish",
     "test": "jest --config=test/config.json --watch",
     "dev": "node tools/run.js start | node ./src/utils/bunyan -o short -l trace",
     "dev5": "npx babel-node tools/run.js start  | node ./src/utils/bunyan -o short -l trace",
     "dev4": "npx babel-node tools/run.js",
     "dev2": "babel-node tools/run.js start  | node ./src/utils/bunyan -o short -l trace",
     "storybook": "start-storybook -p 9001",
-    "babel-build": "rimraf lib && babel src --out-dir lib --source-maps inline --copy-files && cp {package.json,README.md} lib/",
-    "deploy": "npm run babel-build && npm publish lib"
+    "__release": "npm publish",
+    "__babel-build": "rimraf lib && babel src --out-dir lib --source-maps inline --copy-files && cp {package.json,README.md} lib/",
+    "__deploy": "npm run babel-build && npm publish lib"
   }
 }
