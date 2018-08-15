@@ -35,7 +35,6 @@ export default class TestPage extends PureComponent {
       <div>
         {[
           __DEV__ && '__DEV__',
-          __PROD__ && '__PROD__',
           __SERVER__ && '__SERVER__',
           __CLIENT__ && '__CLIENT__',
         ].filter(a => a).join(' ')}

@@ -99,7 +99,7 @@ export default {
   },
   serverWithDotEnv(...configs) {
     if (__SERVER__) {
-      const env = require('./env').config({ silent: __PROD__ });
+      const env = require('./env').config({ silent: !__DEV__ });
       const envConfig = this.flatten2nested(env);
       configs.push(envConfig.lsk || {});
     }

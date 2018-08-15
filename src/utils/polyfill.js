@@ -1,3 +1,12 @@
+
+const globalOrWindow = typeof window !== 'undefined' ? window : global;
+globalOrWindow.__CLIENT__ = typeof window === 'undefined';
+globalOrWindow.__SERVER__ = !globalOrWindow.__CLIENT__;
+if (typeof __DEV__ === 'undefined') {
+  globalOrWindow.__DEV__ = false;
+}
+globalOrWindow.__DEV__ = !globalOrWindow.__PROD__;
+
 if (__DEV__) {
   console.log('Compiling ...');
 }
