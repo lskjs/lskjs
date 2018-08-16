@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import uniq from 'lodash/uniq';
+import map from 'lodash/map';
 
 export function hasMethod(obj, name, type) {
   const desc = Object.getOwnPropertyDescriptor(obj, name);
@@ -47,7 +48,7 @@ export default function getClassInfo(cls) {
   const result = {};
   info = info.reverse().slice(2);
   ['methods', 'fields', 'staticMethods', 'staticFields'].forEach((name) => {
-    result[name] = _.uniq([].concat(..._.map(info, name)));
+    result[name] = uniq([].concat(...map(info, name)));
   });
   return result;
 }

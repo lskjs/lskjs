@@ -123,6 +123,7 @@ export default class ReactApp extends Core {
       // }
     } catch (err) {
       this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
+      document.title = `Error: ${err.message}`;
       // Display the error in full-screen for development mode
       // if (__DEV__) {
       //   this.appInstance = null;

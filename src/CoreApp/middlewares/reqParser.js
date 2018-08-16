@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -8,23 +8,23 @@ export default (ctx) => {
   const preMiddlewares = [
     [
       bodyParser.json,
-      _.get(ctx, 'config.middlewares.bodyParser.json'),
-      _.get(ctx, 'defaultOptions.bodyParser.json'),
+      get(ctx, 'config.middlewares.bodyParser.json'),
+      get(ctx, 'defaultOptions.bodyParser.json'),
     ],
     [
       bodyParser.urlencoded,
-      _.get(ctx, 'config.middlewares.bodyParser.urlencoded'),
-      _.get(ctx, 'defaultOptions.bodyParser.urlencoded'),
+      get(ctx, 'config.middlewares.bodyParser.urlencoded'),
+      get(ctx, 'defaultOptions.bodyParser.urlencoded'),
     ],
     [
       cookieParser,
-      _.get(ctx, 'config.middlewares.cookieParser'),
-      _.get(ctx, 'defaultOptions.cookieParser'),
+      get(ctx, 'config.middlewares.cookieParser'),
+      get(ctx, 'defaultOptions.cookieParser'),
     ],
     [
       cors,
-      _.get(ctx, 'config.middlewares.cors'),
-      _.get(ctx, 'defaultOptions.cors'),
+      get(ctx, 'config.middlewares.cors'),
+      get(ctx, 'defaultOptions.cors'),
     ],
   ];
   preMiddlewares.forEach(([middleware, options1, options2]) => {

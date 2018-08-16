@@ -7,6 +7,18 @@ if (typeof __DEV__ === 'undefined') {
 }
 globalOrWindow.__DEV__ = !globalOrWindow.__PROD__;
 
+if (__SERVER__) {
+  process.on('unhandledRejection', (err) => {
+    console.error('Promise: Unhandled Rejection'); // eslint-disable-line
+    console.error(err.stack); //eslint-disable-line
+    if (typeof err.message === 'string' && err.message.indexOf('reason: socket hang up') !== -1) {
+      console.error('socket hang up => process.exit'); // eslint-disable-line
+      process.exit(1);
+      // process.kill();
+    }
+    // application specific logging, throwing an error, or other logic here
+  });
+}
 if (__DEV__) {
   console.log('Compiling ...');
 }

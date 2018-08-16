@@ -1,5 +1,7 @@
 import React from 'react';
-import _ from 'lodash';
+import merge from 'lodash/merge';
+import get from 'lodash/get';
+import map from 'lodash/map';
 import ReactDOM from 'react-dom/server';
 import Root from '../Root';
 
@@ -41,20 +43,6 @@ export default class Page {
     return this;
   }
 
-  checkAuth() {
-    // console.log('checkAuth',!!(this.uapp && this.uapp.rootState.user),this.uapp);
-    return this.uapp.rootState.user;
-  }
-
-  checkUserRole(role) {
-    // if ()
-    return !!(this.uapp && this.uapp.rootState.user &&
-      (
-        this.uapp.rootState.user.role === role
-      )
-    );
-  }
-
   setState(state = {}) {
     this.state = {
       ...this.state,
@@ -94,26 +82,6 @@ export default class Page {
     };
   }
 
-
-  isAuth() {
-    if (!this.uapp.rootState.user) {
-      return this
-        .redirect('/auth/login?r=' + this.uapp?.req?.path)
-        .disable();
-    }
-    return this;
-  }
-
-  isUserRole(role) {
-    if (!this.checkUserRole(role)) {
-      return this
-        .error('Доступ запрещен')
-        .disable();
-    }
-    return this;
-  }
-
-
   enable() {
     this.disabled = false;
     return this;
@@ -135,7 +103,6 @@ export default class Page {
     if (this.disabled) return this;
     return this
       .layout(this.state.errorLayout)
-      // .title('ERROR')
       .component('div', { children: err });
   }
 
@@ -145,22 +112,13 @@ export default class Page {
 
 
   async next(next) {
-    // console.log('next111');
     if (this.disabled) return this;
-    // console.log('next1222');
     try {
       const res = await next();
-      // console.log('next result', res);
       return res;
     } catch(err) {
       return this.error(err);
     }
-    // return res;
-    // return res
-    // .catch((err) => {
-    //   console.log('nex333');
-    //   return this.error(err);
-    // });
   }
 
   title(...args) {
@@ -173,7 +131,7 @@ export default class Page {
   }
 
   composeMeta(metas = []) {
-    return _.merge({}, ...metas);
+    return merge({}, ...metas);
   }
 
   getMeta(name, def = null) {
@@ -291,7 +249,7 @@ export default class Page {
 
   getTitle() {
     const metas = this.state.metas || [];
-    return _.get(metas, `${metas.length - 1}.title`) || '';
+    return get(metas, `${metas.length - 1}.title`) || '';
   }
 
   renderTitle() {
@@ -361,7 +319,7 @@ ${this.renderStyle()}
     ua.touchable = false;
 
     const postfix = __DEV__ ? ' __DEV__' : '';
-    return (_.map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
+    return (map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
   }
 
 

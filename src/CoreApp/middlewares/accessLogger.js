@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import get from 'lodash/get';
+import omit from 'lodash/omit';
 const cache = [
   '',
   ' ',
@@ -90,7 +91,7 @@ function logFinish(data) {
 }
 
 export default (ctx) => {
-  if (!_.has(ctx, 'config.middlewares.accessLogger')) return null;
+  if (!get(ctx, 'config.middlewares.accessLogger')) return null;
   return (req, res, next) => {
     const data = {};
     const log = req.log.child({
@@ -102,7 +103,7 @@ export default (ctx) => {
     if (req.ws) data.method = 'WS';
     data.host = req.headers.host;
     if (req.ws) {
-      data.url = req.ws.nsp.name + ' ' + JSON.stringify(_.omit(req.data, ['EIO', 'transport', 'token']))
+      data.url = req.ws.nsp.name + ' ' + JSON.stringify(omit(req.data, ['EIO', 'transport', 'token']))
     } else {
       data.url = (req.baseUrl || '') + (req.url || '-');
     }

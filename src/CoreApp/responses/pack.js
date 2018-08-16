@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import omit from 'lodash/omit';
 
 export default (ctx) => {
   return function pack(data, info) {
@@ -8,7 +8,7 @@ export default (ctx) => {
     };
     if (data) {
       if (data.__pack) {
-        Object.assign(pck, _.omit(data, ['__pack']));
+        Object.assign(pck, omit(data, ['__pack']));
       } else {
         pck.data = data;
       }
