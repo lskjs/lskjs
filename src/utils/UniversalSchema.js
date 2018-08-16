@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import _ from 'lodash';
+import forEach from 'lodash/forEach';
+import clone from 'lodash/clone';
+import Promise from 'bluebird';
 
 class UniversalSchema {
   constructor(schema = {}, options = {}) {
@@ -53,7 +55,7 @@ class UniversalSchema {
     const object = new UniversalSchema();
     const fields = ['schema', 'options', 'statics', 'methods', 'preMethods', 'postMethods', 'indexes', 'virtuals'];
     fields.forEach((key) => {
-      object[key] = _.clone(this[key]);
+      object[key] = clone(this[key]);
     });
     Object.assign(object.schema, schema);
     Object.assign(object.options, options);
@@ -69,13 +71,13 @@ class UniversalSchema {
     const schema = new mongoose.Schema(this.schema, this.options);
     schema.statics = this.statics;
     schema.methods = this.methods;
-    _.forEach(this.preMethods, (val, key) => {
+    forEach(this.preMethods, (val, key) => {
       schema.pre(key, val);
     });
-    _.forEach(this.postMethods, (val, key) => {
+    forEach(this.postMethods, (val, key) => {
       schema.post(key, val);
     });
-    _.forEach(this.virtuals, ([args1, method, args2]) => {
+    forEach(this.virtuals, ([args1, method, args2]) => {
       // console.log('virtuals', method, args1);
       if (method === 'init') {
         schema.virtual(...args1);
@@ -83,7 +85,7 @@ class UniversalSchema {
         schema.virtual(...args1)[method](...args2);
       }
     });
-    _.forEach(this.indexes, (args) => {
+    forEach(this.indexes, (args) => {
       schema.index(...args);
     });
     schema._uschema = this;

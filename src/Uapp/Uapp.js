@@ -98,7 +98,7 @@ export default class Uapp extends Core {
     this.log.trace('router.context', Object.keys(context))
     const routes = this.getRoutes();
     this.routes = resolveCtxRoutes(routes, this);
-    __DEV__ && console.log('Uapp.routes', this.routes);
+    // __DEV__ && console.log('Uapp.routes', this.routes);
     this.router = new UniversalRouter(this.routes, {
       context,
     });
@@ -131,8 +131,9 @@ export default class Uapp extends Core {
 
   async updateClientRoot() {
     // this.page
-    document.body.scrollTop = 0; // @TODO: back
+    // document.body.scrollTop = 0; // @TODO: back
     document.title = this.page.renderFullTitle();
+    this.page.toTop();
     // @TODO: to @natavts favicon, meta tags
   }
 
@@ -140,7 +141,7 @@ export default class Uapp extends Core {
   async resolve(reqParams = {}) {
     // console.log('resolve');
     const req = Api.createReq(reqParams);
-    __CLIENT__ && this.log.trace('Uapp.resolve', req.path, req.query);
+    __CLIENT__ && __DEV__ && this.log.trace('Uapp.resolve', req.path, req.query);
     // this.log.trace('resolve1', req.path, req.query);
     // this.log.trace({r:'resolve2'});
     // this.log.trace('resolve3', 'some');
@@ -158,12 +159,12 @@ export default class Uapp extends Core {
         page: this.page,
       });
     } catch(err) {
-      console.log('app.router.resolve err', err, this.log);
+      console.error('app.router.resolve err', err, this.log); //eslint-disable-line
       // this.log.error('resolveErr', err);
     }
-    // if (__CLIENT__) {
-    //   this.updateClientRoot();
-    // }
+    if (__CLIENT__) {
+      this.updateClientRoot();
+    }
   }
 
   provide() {

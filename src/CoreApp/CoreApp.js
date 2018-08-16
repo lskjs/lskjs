@@ -13,10 +13,6 @@ import getMongoose from './getMongoose';
 import getDocsTemplate from './getDocsTemplate';
 import staticFileMiddleware from 'connect-static-file';
 
-process.on('unhandledRejection', err => {
-  console.log("UnhandledPromiseRejectionWarning: Unhandled promise rejection:");
-  console.log(err.stack);
-});
 
 export default class CoreApp extends ExpressApp {
   Api = Api;
@@ -73,7 +69,7 @@ export default class CoreApp extends ExpressApp {
   }
   getStatics() {
     const buildRoot = `${__dirname}/public`;
-    const root = __DEV__ ? `${__dirname}/../src/public` : buildRoot;
+    const root = __DEV__ ? `${__dirname}/../public` : buildRoot;
     return {
       '/': root,
       // '/favicon.ico': buildRoot + require('file-loader!../public/favicon.ico'), // eslint-disable-line
