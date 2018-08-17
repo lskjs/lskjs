@@ -51,7 +51,7 @@ function ioMock(...initParams) {
       mock.connection.recreateSocket = (...newInitParams2) => {
         // __DEV__ && console.log('recreateSocket2', ...newInitParams2);
         return mock.recreateSocket(...newInitParams2);
-      }
+      };
       // __DEV__ && console.log('recreateConnection');
       return mock.connection;
     },
@@ -204,9 +204,10 @@ ${JSON.stringify(res.json, null, 2)}
 
   getCtx(url, params = {}) {
     const req = Object.assign(
-      { url, headers: {
-        ...this.headers
-      } },
+      { url,
+        headers: {
+          ...this.headers,
+        } },
       pick(params, FETCH_PARAMS),
     );
 
@@ -362,10 +363,17 @@ ${JSON.stringify(res.json, null, 2)}
       this.log.trace('[api] WS', url, options);
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
-    const socket = this.io(
+    let socket = this.io(
       url,
       opts,
     );
+
+    if (Array.isArray(socket)) {
+      if ((typeof window !== 'undefined' ? window : global).__DEV__) {
+        console.warn('multiple open sockets', socket);
+      }
+      socket = socket[2];
+    }
 
     this.wsConnections[key] = [path, options, socket];
     socket.on('disconnect', () => {
