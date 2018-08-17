@@ -1,8 +1,6 @@
-import asyncRouter from 'lego-starter-kit/utils/AsyncRouter';
-
 export default (ctx) => {
   return function wrapResoursePoint(resourse, params = {}) {
-    const api = params.api || params.router || asyncRouter();
+    const api = params.api || params.router || ctx.asyncRouter();
     const prefix = params.prefix || null;
     const middleware = params.middleware || null;
     const actions = params.actions || Object.keys(resourse); // ['list', 'get', 'create', 'update', 'remove'];

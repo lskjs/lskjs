@@ -5,7 +5,7 @@ import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 
-import ExpressApp from 'lego-starter-kit/ExpressApp';
+import ExpressApp from '../ExpressApp';
 import Api from 'apiquery';
 
 import createWs from './ws';

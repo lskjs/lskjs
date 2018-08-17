@@ -1,12 +1,8 @@
 import express from 'express';
 import { Server as httpServer } from 'http';
-import AsyncRouter from 'lego-starter-kit/utils/AsyncRouter';
+import AsyncRouter from '../utils/AsyncRouter';
 import forEach from 'lodash/forEach';
 import Core from '../Core';
-
-// process.on('exit', function(code) {
-//   console.log('client exit', code);
-// });
 
 export default class ExpressApp extends Core {
   name = 'App';

@@ -7,13 +7,13 @@ const ctx = {
   dirname,
   pkg: require('../package.json'),
   babelrc: JSON.parse(fs.readFileSync(`${dirname}/.babelrc`)),
-  deps: [
-    {
-      name: 'lego-starter-kit',
-      path: fs.realpathSync(dirname + '/src'),
-      alias: 'lego-starter-kit',
-    },
-  ],
+  // deps: [
+  //   {
+  //     name: 'lego-starter-kit',
+  //     path: fs.realpathSync(dirname + '/src'),
+  //     alias: 'lego-starter-kit',
+  //   },
+  // ],
   alias: {
     // 'lego-starter-kit': fs.realpathSync(dirname + '/src'),
     // '@lskjs/general': fs.realpathSync(dirname + '/node_modules/@lskjs/general/dist'),

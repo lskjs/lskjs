@@ -1,4 +1,4 @@
-import config from 'lego-starter-kit/utils/config';
+import config from '../utils/config';
 export default config.init({
   client: require('./client').default,
   remoteConfig: true,

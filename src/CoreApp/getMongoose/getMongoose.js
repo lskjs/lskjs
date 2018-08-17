@@ -5,13 +5,15 @@ export default async (ctx, params) => {
     keepAlive: true,
     ...(params.options || {}),
   }
+  console.log('options', options);
   ctx.log.trace('db init');
   const mongoose = new mongooseLib.Mongoose();
   mongoose.Promise = Promise;
 
   mongoose.run = () => {
-    ctx.log.trace('db run');
-    mongoose.connect(params.uri, options); // , options
+    // ctx.log.trace('db run');
+    ctx.log.trace('db connect', options.uri);
+    mongoose.connect(options.uri, options); // , options
     return mongoose;
   };
 
