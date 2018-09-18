@@ -157,7 +157,6 @@ export default class AuthPage extends Component {
   @autobind
   onError(err) {
     console.log('AuthPage.onError', err);
-
   }
 
   render() {
