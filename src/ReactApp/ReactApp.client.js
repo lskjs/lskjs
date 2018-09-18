@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FastClick from 'fastclick';
+import initReactFastClick from 'react-fastclick';
 import qs from 'qs';
 import { createPath } from 'history/PathUtils';
 import { ErrorReporter, deepForceUpdate } from './core/devUtils';
@@ -33,7 +33,7 @@ export default class ReactApp extends Core {
     // console.log('init, rootState', this.rootState);
     this.config = merge({}, this.config || {}, this.rootState && this.rootState.config || {});
     this.rootState.config = null; // не понмю для чего
-    FastClick.attach(document.body);
+    initReactFastClick();
     this.container = document.getElementById('root');
     this.hmrInit();
     this.history = createBrowserHistory({
