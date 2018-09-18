@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import isPlainObject from 'lodash/isPlainObject';
 import omit from 'lodash/omit';
 import pick from 'lodash/pick';
+import Promise from 'bluebird';
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 
 const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "author": "isuvorov",
   "license": "MIT",
   "scripts": {
@@ -9,6 +9,7 @@
     "dev": "DEBUG=1 npm run babel-build -- --watch"
   },
   "dependencies": {
+    "bluebird": "3.5.1",
     "apiquery": "0.1.24",
     "node-telegram-bot-api": "0.30.0",
     "passport": "0.4.0",
