@@ -190,23 +190,24 @@ export default class CoreApp extends ExpressApp {
     return Promise.all(promises);
   }
 
-  async runDb() {
-    if (!this.db) return;
-    this.log.trace('CoreApp.runDb');
-    try {
-      await this.db.run();
-      return true;
-    } catch (err) {
-      this.log.fatal(err);
-      throw err;
-    }
-  }
+  // async runDb() {
+  //   if (!this.db) return;
+  //   this.log.trace('CoreApp.runDb');
+  //   try {
+  //     await this.db.connect();
+  //     return true;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
 
   async run(...args) {
     await super.run(...args);
     this.log.trace('CoreApp.run');
-    this.config.db && this.db && await this.runDb();
+    // console.log('this.config.db', this.config, this.config?.db);
+    
+    this.config.db && this.db && await this.db.run();
     this.config.ws && await this.runWs();
   }
 

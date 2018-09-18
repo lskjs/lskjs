@@ -1,8 +1,8 @@
 import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
-import CoreApp from 'lego-starter-kit/CoreApp';
+import CoreApp from '../CoreApp';
 import Uapp from '../Uapp';
-import { antimergeDeep } from 'antimerge';
+import antimergeDeep from 'antimerge/antimergeDeep';
 import cloneDeep from 'lodash/cloneDeep';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 // import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
@@ -17,10 +17,10 @@ export default class ReactApp extends CoreApp {
     const initConfigClient = get(this, 'config._withoutEnvJson.client');
     this.initConfigClient = cloneDeep(initConfigClient);
   }
-  async run() {
-    await super.run();
-    // this.initConfigClient = cloneDeep(this.config.client); // подумать в init или в run
-  }
+  // async run() {
+  //   await super.run();
+  //   // this.initConfigClient = cloneDeep(this.config.client); // подумать в init или в run
+  // }
 
   getRootState(req) {
     const rootState = {

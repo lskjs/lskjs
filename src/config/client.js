@@ -1,4 +1,4 @@
-import config from '../utils/config';
+import config from '../utils/configManager';
 export default config.init({
   log: {
     level: (

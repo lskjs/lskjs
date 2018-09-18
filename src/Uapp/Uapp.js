@@ -132,7 +132,9 @@ export default class Uapp extends Core {
   async updateClientRoot() {
     // this.page
     // document.body.scrollTop = 0; // @TODO: back
-    document.title = this.page.renderFullTitle();
+    if (typeof document !== 'undefined') {
+      document.title = this.page.renderFullTitle();
+    }
     this.page.toTop();
     // @TODO: to @natavts favicon, meta tags
   }

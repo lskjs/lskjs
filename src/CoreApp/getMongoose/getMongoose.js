@@ -1,43 +1,53 @@
 import mongooseLib from 'mongoose';
 
-export default async (ctx, params) => {
-  const options = {
+export default async (ctx, params = {}) => {
+  const { options = {}, uri, debug } = params
+  const defaultOptions = {
     keepAlive: true,
-    ...(params.options || {}),
+    useNewUrlParser: true,
+    // reconnectTries: __DEV__ ? 10000 : 30,
+    // reconnectInterval: __DEV__ ? 30000 : 1000, // sets the delay between every retry (milliseconds)
   }
-  console.log('options', options);
-  ctx.log.trace('db init');
+  // console.log('options', options);
+  // ctx.log.trace('db.init');
   const mongoose = new mongooseLib.Mongoose();
   mongoose.Promise = Promise;
 
   mongoose.run = () => {
-    // ctx.log.trace('db run');
-    ctx.log.trace('db connect', options.uri);
-    mongoose.connect(options.uri, options); // , options
+    if (!uri) throw '!db.uri'
+    const finalOptions = {
+      ...defaultOptions,
+      ...options
+    }
+    const dbname = (uri || '').split('@')[1]
+    ctx.log.trace('db.connect()', dbname, finalOptions);
+    mongoose.connect(uri, finalOptions); // , options
+    // console.log(123123123);
+    
     return mongoose;
   };
 
 
   mongoose.reconnect = () => {
-    ctx.log.trace('db reconnect');
+    ctx.log.trace('db.reconnect()');
     mongoose.disconnect();
     return mongoose.run();
   };
 
   let reconnectIteration = 0;
   mongoose.connection.on('connected', () => {
-    ctx.log.trace('db connected');
+    ctx.log.trace('db.connected');
     reconnectIteration = 0;
   });
   mongoose.connection.on('error', (err) => {
-    ctx.log.error('db error', err);
+    ctx.log.error('db.error', err);
     const interval = reconnectIteration++ * 2000 + 1000;
-    ctx.log.warn(`db reconnect after ${interval} ms`);
+    ctx.log.warn(`db.reconnect after ${interval} ms`);
     setTimeout(mongoose.reconnect, interval);
   });
   mongoose.connection.on('disconnected', () => {
-    ctx.log.trace('db disconnected');
+    ctx.log.trace('db.disconnected');
   });
-  mongoose.set('debug', params.debug || false);
+  mongoose.set('debug', debug || false);
   return mongoose;
 };

@@ -1,0 +1,4 @@
+{
+  "main": "Config.server",
+  "browser": "Config"
+}

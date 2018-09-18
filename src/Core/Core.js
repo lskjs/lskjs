@@ -51,11 +51,16 @@ export default class Core {
 
   broadcastModules(method) {
     this.log.trace(`${this.name}.broadcastModules`, method);
-    return Promise.each(this.getModulesSequence(), (pack) => {
+    return Promise.map(this.getModulesSequence(), (pack) => {
       // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
       if (!(pack.module && typeof pack.module[method] === 'function')) return;
-      this.log.trace(`module ${pack.name}.${method}()`);
-      return pack.module[method]();
+      let res
+      try {
+        this.log.trace(`module ${pack.name}.${method}()`);
+        return pack.module[method]();
+      } catch(err) {
+        this.log.error(`module ${pack.name}.${method}() ERROR:`, err);
+      }
     });
   }
 
@@ -83,10 +88,6 @@ export default class Core {
   run() {
   }
 
-  runModules() {
-    return this.broadcastModules('run');
-  }
-
   async start() {
     try {
       if (typeof this.beforeInit === 'function') {
@@ -107,9 +108,9 @@ export default class Core {
         this.log.trace(`${this.name}.run()`);
         await this.run();
       }
-      if (typeof this.runModules === 'function') {
-        this.log.trace(`${this.name}.runModules()`);
-        await this.runModules();
+      if (typeof this.broadcastModules === 'function') {
+        this.log.trace(`${this.name}.broadcastModules('run')`);
+        await this.broadcastModules('run');
       }
       if (typeof this.afterRun === 'function') {
         this.log.trace(`${this.name}.afterRun()`);
@@ -125,6 +126,9 @@ export default class Core {
       } else {
         console.error(`${this.name}.start() err`, err);
       }
+      if (typeof process !== 'undefined') {
+        process.exit(1);
+      }
       throw err;
     }
     return this;
@@ -132,6 +136,27 @@ export default class Core {
 
   async stop() {
     this.log.trace(`${this.name}.stop()`);
+    try {
+      if (typeof this.broadcastModules === 'function') {
+        this.log.trace(`${this.name}.broadcastModules('stop')`);
+        await this.broadcastModules('stop');
+      }
+      if (typeof this.stopped === 'function') {
+        this.log.trace(`${this.name}.stopped()`);
+        await this.stopped();
+      }
+    } catch (err) {
+      if (this.log && this.log.fatal) {
+        this.log.fatal(`${this.name}.stop() err`, err);
+      } else {
+        console.error(`${this.name}.stop() err`, err);
+      }
+      if (typeof process !== 'undefined') {
+        process.exit(1);
+      }
+      throw err;
+    }
+    return this;
   }
 
 }

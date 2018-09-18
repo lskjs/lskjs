@@ -1,4 +1,4 @@
-import config from '../utils/config';
+import config from '../utils/configManager';
 export default config.init({
   client: require('./client').default,
   remoteConfig: true,
@@ -7,11 +7,8 @@ export default config.init({
   },
   port: process.env.PORT || 8080,
   // url: 'http://localhost:3000',
-  db: {
-    uri: 'mongodb://publicdb.mgbeta.ru:27000/lsk-master',
-  },
   jwt: {
-    secret: 'replaceMyPlease',
+    secret: 'PLEASE_REPLACE_ME',
   },
   // ws: {
   //   transports: ['websocket'],
