@@ -4,6 +4,7 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import ReactDOM from 'react-dom/server';
 import Root from '../Root';
+const DEBUG = false;
 
 export default class Page {
 
@@ -161,6 +162,7 @@ export default class Page {
 
   async component(...args) {
     if (this.disabled) return this;
+    DEBUG && console.log('args[0]', args[0]);
     const result = await args[0];
     if (result.default) {
       args[0] = result.default;
@@ -173,6 +175,7 @@ export default class Page {
     } else {
       this.state.component = args[0];
     }
+    DEBUG && console.log('this.state.component', this.state.component);
     return this.toTop();
   }
 
@@ -206,10 +209,12 @@ export default class Page {
   }
 
   renderComponent() {
-    // console.log('Page.renderComponent', this.state);
+    DEBUG && console.log('Page.renderComponent', this.state);
+    DEBUG && console.log('Array.isArray(this.state.component)', Array.isArray(this.state.component));
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
+    DEBUG && console.log('return !@#!@#!@#!@');
     return React.createElement(this.state.component[0], this.state.component[1]);
   }
 
