@@ -1,15 +1,21 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
+import getParser from './parser';
 export default (ctx) => {
+  const Parser = getParser(ctx);
   return class Mailer {
     getTemplates() {
       return require('./templates').default(ctx);
     }
     async init() {
-      this.config = _.get(ctx, 'config.mailer');
+      // nodemailer
+      this.config = get(ctx, 'config.mailer');
       this.templates = this.getTemplates();
       this.transporter = this.getTransporter();
+      this.parser = new Parser();
+      //parser
+      await this.parser.init();
     }
 
     getTransporter() {
@@ -22,6 +28,7 @@ export default (ctx) => {
         // нельзя прогонять через эту херню html который уже покрыт inline css
         this.transporter.use('compile', inlineCss());
       }
+      await this.parser.run();
     }
 
     // Отправить email
