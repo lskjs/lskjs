@@ -4,7 +4,7 @@
   "author": "isuvorov",
   "license": "MIT",
   "scripts": {
-    "release": "npm publish --access=public",
+    "release": "npm publish --access=public dist",
     "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files"
   },
   "dependencies": {
