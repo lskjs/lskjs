@@ -5,6 +5,7 @@ import find from 'lodash/find';
 import set from 'lodash/set';
 import merge from 'lodash/merge';
 import { MailParser } from 'mailparser';
+import Promise from 'bluebird';
 
 export default (ctx) => {
   // Должна быть выключена двухфакторная авторизация
@@ -125,39 +126,10 @@ export default (ctx) => {
         });
       });
     }
-    async markSeen(ids) {
-      return new Promise((resolve, reject) => {
-        if (!ids || !ids.length) return resolve();
-        return this.imap.addFlags(ids, ['\\Seen'], (err, res) => {
-          if (err) return reject(err);
-          return resolve(res);
-        });
-      });
-    }
     async saveEmail({ message, subtype = 'i' }) {
       const { Email, Thread } = this.models;
       const isExist = await Email.countDocuments({ uid: message.uid, 'from.address': message.from.address });
       if (isExist) return;
-      const { User } = ctx.models;
-      const promises = {};
-      if (message?.from?.address) {
-        promises.fromUser = User
-          .findOne({ email: message.from.address })
-          .select(['_id']);
-      }
-      if (message?.to?.address) {
-        promises.toUser = User
-          .findOne({ email: message.to.address })
-          .select(['_id']);
-      }
-      const { fromUser, toUser } = await Promise
-        .props(promises);
-      if (fromUser) {
-        set(message, 'from.userId', fromUser._id);
-      }
-      if (toUser) {
-        set(message, 'to.userId', toUser._id);
-      }
       const email = new Email({
         uid: message.uid,
         info: {

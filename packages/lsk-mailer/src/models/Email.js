@@ -1,4 +1,5 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
+import Promise from 'bluebird';
 
 function getSchema(ctx, module) {
   const mongoose = ctx.db;
