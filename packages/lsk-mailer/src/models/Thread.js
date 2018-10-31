@@ -196,7 +196,7 @@ function getSchema(ctx, module) {
       this.status = null;
       this.color = null;
     }
-    const lastEmailId = last(emails)._id;
+    const lastEmailId = last(emails)?._id;
     let lastInEmailId;
     let lastOutEmailId;
     let apponentEmail;
