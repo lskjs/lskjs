@@ -171,7 +171,7 @@ function getSchema(ctx, module) {
   };
 
   schema.methods.updateMeta = async function () {
-    const { Email } = module.parser.models;
+    const { Email } = module.models;
     const emails = await Email
       .find({ threadId: this._id })
       .select([
