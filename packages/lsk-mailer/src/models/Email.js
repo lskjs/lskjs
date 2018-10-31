@@ -1,5 +1,4 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
-import Promise from 'bluebird';
 
 function getSchema(ctx, module) {
   const mongoose = ctx.db;
@@ -84,6 +83,7 @@ function getSchema(ctx, module) {
       },
     },
   }, {
+    model: 'Email',
     collection: module.prefix ? `${module.prefix}_email` : 'email',
   });
 
