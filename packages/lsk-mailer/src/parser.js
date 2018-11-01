@@ -163,12 +163,12 @@ export default (ctx) => {
         }
         email.threadId = thread._id;
         await email.save();
-        await thread.calculateSummary();
+        await thread.updateMeta();
         await thread.save();
-        ctx.emit('models.Email.saved', { email, thread });
+        ctx.emit('models.Email.created', { email, thread });
       } else {
         await email.save();
-        ctx.emit('models.Email.saved', { email });
+        ctx.emit('models.Email.created', { email });
       }
     }
     async sync({ box = 'INBOX', connection, subtype }) {
