@@ -1,7 +1,9 @@
 import get from 'lodash/get';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
+import Promise from 'bluebird';
 import getParser from './parser';
+
 export default (ctx) => {
   const Parser = getParser(ctx);
   return class Mailer {
@@ -14,7 +16,7 @@ export default (ctx) => {
       this.templates = this.getTemplates();
       this.transporter = this.getTransporter();
       this.parser = new Parser();
-      //parser
+      // parser
       await this.parser.init();
     }
 
@@ -33,16 +35,20 @@ export default (ctx) => {
 
     // Отправить email
     async send(args) {
-      const { to, template, params = {}, options = {}, t: tFunc, locale, ...otherProps } = args;
-      const t = tFunc ? tFunc : ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a => a);
+      const {
+        to, template, params = {}, options = {}, t: tFunc, locale, ...otherProps
+      } = args;
+      const t = tFunc || ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a => a);
       try {
         if (!to) throw '!to email';
         if (!template) throw '!template';
         if (!this.transporter) throw '!transporter';
-        if (!this.templates[template]) throw 'cant find email template ' + template
+        if (!this.templates[template]) throw `cant find email template ${template}`;
         // Ищем шаблон
-          // Шаблон это класс, создаем экземпляр
-        const args2 = { ctx, t, locale, params, ...otherProps };
+        // Шаблон это класс, создаем экземпляр
+        const args2 = {
+          ctx, t, locale, params, ...otherProps,
+        };
         const emailTemplate = new this.templates[template](args2);
         // вызываем render
         const defaultOptions = emailTemplate.getOptions(args2);
@@ -62,7 +68,9 @@ export default (ctx) => {
     async sendText(to, subject, message, from) {
       if (!from) from = ctx.config.mailer.options.from;
       try {
-        return await this.transporter.sendMail({ to, subject, text: message, from });
+        return await this.transporter.sendMail({
+          to, subject, text: message, from,
+        });
       } catch (e) {
         throw e;
       }

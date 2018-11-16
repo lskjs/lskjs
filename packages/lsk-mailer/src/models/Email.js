@@ -7,7 +7,6 @@ function getSchema(ctx, module) {
     uid: {
       type: Number,
       required: true,
-      unique: true,
     },
     threadId: {
       type: ObjectId,
@@ -55,6 +54,10 @@ function getSchema(ctx, module) {
         type: String,
         index: true,
       }, // Нужно для reply (id сообщения в переписке)
+      mailbox: {
+        type: String,
+        index: true,
+      }, // Почтовый ящик для которого было спарсено письмо
     },
     from: { // от кого
       address: { // почта
@@ -82,9 +85,19 @@ function getSchema(ctx, module) {
         index: true,
       },
     },
+    meta: {
+      type: Object,
+    },
   }, {
     model: 'Email',
     collection: module.prefix ? `${module.prefix}_email` : 'email',
+    toObject: { virtuals: true },
+  });
+  schema.virtual('fromUser', {
+    ref: 'User', // The model to use
+    localField: 'from.userId', // Find people where `localField`
+    foreignField: '_id', // is equal to `foreignField`,
+    justOne: true,
   });
 
   return schema;

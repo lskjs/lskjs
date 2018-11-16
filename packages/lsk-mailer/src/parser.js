@@ -6,6 +6,7 @@ import set from 'lodash/set';
 import merge from 'lodash/merge';
 import { MailParser } from 'mailparser';
 import Promise from 'bluebird';
+import Eventemitter from 'eventemitter3';
 
 export default (ctx) => {
   // Должна быть выключена двухфакторная авторизация
@@ -26,15 +27,17 @@ export default (ctx) => {
         parseInterval: 60000,
         parseTimeout: 300000,
         parseLimit: 100,
+        parseMailboxDelay: 500,
+        parseBoxDelay: 500,
       };
       if (this.parserConfig) {
         this.parserConfig = merge(this.defaultParserConfig, this.parserConfig);
-        this.imapConfig = this.parserConfig.config;
       }
       this.models = require('./models').default(ctx, this);
+      this.emitter = new Eventemitter();
     }
     async run() {
-      if (!this.parserConfig || !this.imapConfig) return;
+      if (!this.parserConfig) return;
       this.logger = ctx.createLogger({
         name: 'mailer',
         level: 'trace',
@@ -53,7 +56,7 @@ export default (ctx) => {
       }
     }
     log(...args) {
-      if (this.debug) {
+      if (this.parserConfig.debug) {
         this.logger.trace(...args);
       }
     }
@@ -64,16 +67,24 @@ export default (ctx) => {
     }
     async syncAll() {
       this.log('syncAll');
-      const { boxes } = this.parserConfig;
-      await Promise.mapSeries(boxes, async (box) => {
-        const { box: boxName } = box;
-        this.connections[boxName] = await this.createConnection(box);
-        await this.sync({ ...box, connection: this.connections[boxName] });
-        await Promise.delay(500);
+      const { mailboxes = [], parseBoxDelay, parseMailboxDelay } = this.parserConfig;
+      await Promise.mapSeries(mailboxes, async (mailbox) => {
+        const { boxes } = mailbox;
+        await Promise.mapSeries(boxes, async (box) => {
+          const { boxName } = box;
+          this.connections[boxName] = await this.createConnection({ box, mailbox });
+          await this.sync({ ...box, connection: this.connections[boxName], mailbox });
+          if (parseBoxDelay) {
+            await Promise.delay(parseBoxDelay);
+          }
+        });
+        if (parseMailboxDelay) {
+          await Promise.delay(parseMailboxDelay);
+        }
       });
     }
     async runCron() {
-      if (__INSTANCE !== '1') return;
+      if (__INSTANCE !== '1') return;  //eslint-disable-line
       try {
         await this.syncAll();
       } catch (err) {
@@ -82,13 +93,15 @@ export default (ctx) => {
       // console.log(config.parseInterval, 'config.parseInterval');
       setTimeout(() => this.runCron(), this.parserConfig.parseInterval);
     }
-    async createConnection({ box }) {
-      if (!this.parserConfig || !this.imapConfig) throw '!config';
+    async createConnection({ box, mailbox }) {
+      if (!box) throw '!box';
+      if (!mailbox) throw '!mailbox';
+      const { boxName } = box;
       return new Promise((resolve, reject) => {
-        const connection = new Imap(this.imapConfig);
+        const connection = new Imap(mailbox.imapConfig);
         this.log('createConnection', { box });
         function openInbox(cb) {
-          connection.openBox(box, true, cb);
+          connection.openBox(boxName, true, cb);
         }
         let isReady = false;
         connection.once('ready', () => {
@@ -117,7 +130,7 @@ export default (ctx) => {
       });
     }
     disconnect({ connection }) {
-      if (!this.parserConfig || !this.imapConfig) throw '!config';
+      if (!this.parserConfig) throw '!config';
       if (!connection) throw '!connection';
       return new Promise((resolve, reject) => {
         return connection.end((err, res) => {
@@ -126,12 +139,28 @@ export default (ctx) => {
         });
       });
     }
-    async saveEmail({ message, subtype = 'i' }) {
-      const { Email, Thread } = this.models;
-      const isExist = await Email.countDocuments({ uid: message.uid, 'from.address': message.from.address });
+    async saveEmail({ message, subtype = 'i', mailbox }) {
+      const { Email } = this.models;
+      let isExist;
+      const countParams = {
+        uid: message.uid,
+        'from.address': message.from.address,
+        'to.address': message.to.address,
+      };
+      if (Email.countDocuments) {
+        isExist = await Email.countDocuments(countParams);
+      } else {
+        isExist = await Email.count(countParams);
+      }
       if (isExist) return;
+      if (message['x-lsk-user-id']) {
+        set(message.from, 'userId', message['x-lsk-user-id']);
+      }
       const email = new Email({
         uid: message.uid,
+        from: message.from,
+        to: message.to,
+        subtype,
         info: {
           date: message.date,
           text: message.text,
@@ -142,45 +171,29 @@ export default (ctx) => {
           messageId: message.messageId,
           cc: message.cc,
           bcc: message.bcc,
+          mailbox: mailbox.imapConfig.user,
         },
-        from: message.from,
-        to: message.to,
-        subtype,
+        meta: {
+          'x-gm-thrid': message['x-gm-thrid'],
+          'x-lsk-user-id': message['x-lsk-user-id'],
+        },
       });
-      const gmailThreadId = message['x-gm-thrid'];
-      if (gmailThreadId) {
-        let thread = await Thread
-          .findOne({ 'info.gmailThreadId': gmailThreadId })
-          .select(['_id']);
-        if (!thread) {
-          thread = new Thread({
-            info: {
-              gmailThreadId,
-              subject: email.info.subject,
-            },
-          });
-          await thread.save();
-        }
-        email.threadId = thread._id;
-        await email.save();
-        await thread.updateMeta();
-        await thread.save();
-        ctx.emit('models.Email.created', { email, thread });
-      } else {
-        await email.save();
-        ctx.emit('models.Email.created', { email });
-      }
+      await email.save();
+      this.emitter.emit('models.Email.created', { email });
     }
-    async sync({ box = 'INBOX', connection, subtype }) {
-      if (__STAGE === 'master') throw 'STAGE === master';
+    async sync({
+      box = 'INBOX', connection, subtype, mailbox,
+    }) {
       const { Email } = this.models;
+      const findParams = {
+        'info.date': {
+          $exists: true,
+        },
+        'info.mailbox': mailbox.imapConfig.user,
+        subtype,
+      };
       const lastEmail = await Email
-        .findOne({
-          'info.date': {
-            $exists: true,
-          },
-          subtype,
-        })
+        .findOne(findParams)
         .sort({ 'info.date': -1 })
         .select(['info.date']);
       const filter = [];
@@ -197,7 +210,9 @@ export default (ctx) => {
       }
       this.log('filter', filter);
       if (!filter.length) filter.push('ALL');
-      await this.searchAndSave({ filter, box, connection, subtype });
+      await this.searchAndSave({
+        filter, box, connection, subtype, mailbox,
+      });
       this.disconnect({ connection });
     }
     async getMessages(f, length) {
@@ -240,15 +255,19 @@ export default (ctx) => {
         });
       });
     }
-    async searchAndSave({ filter, connection, box = this.parserConfig.boxes.inbox, subtype }) {
+    async searchAndSave({
+      filter, connection, box = this.parserConfig.boxes.inbox, subtype, mailbox,
+    }) {
       this.log('searchAndSave', { filter, box });
       return new Promise((resolve, reject) => {
         try {
           const fetchTimeout = setTimeout(() => {
             reject(new Error('timeout'));
-          }, this.parserConfig.parseTimeout); // если парсить слишком долго, завис, то заканчиваем парсинг
+          }, this.parserConfig.parseTimeout);
+          // если парсить слишком долго, завис, то заканчиваем парсинг
           // connection.getBoxes((err2, boxes) => { // На всякий случай
-          //   console.log({ err2, boxes });
+          //   if (err2) console.error(err2);
+          //   console.log(boxes['[Gmail]']);
           // });
           this.log('search', { box, filter, subtype });
           return connection.search(filter, async (searchErr, results) => {
@@ -256,12 +275,19 @@ export default (ctx) => {
             if (searchErr) return reject(searchErr);
             if (!results.length) return resolve([]);
             const { Email } = this.models;
+            const findParams = {
+              uid: {
+                $in: results,
+              },
+              subtype,
+            };
+            if (subtype === 'o' && mailbox.imapConfig.user) {
+              findParams['from.address'] = mailbox.imapConfig.user;
+            } else if (subtype === 'i' && mailbox.imapConfig.user) {
+              findParams['to.address'] = mailbox.imapConfig.user;
+            }
             const emails = await Email
-              .find({
-                uid: {
-                  $in: results,
-                },
-              })
+              .find(findParams)
               .select(['uid']);
             results = results.filter((uid) => {
               return !find(emails, { uid });
@@ -343,7 +369,12 @@ export default (ctx) => {
                 if (attrs['x-gm-thrid']) {
                   message['x-gm-thrid'] = attrs['x-gm-thrid']; // Gmail Thread Id
                 }
-                await this.saveEmail({ message, box, subtype });
+                if (headers.get('x-lsk-user-id')) {
+                  message['x-lsk-user-id'] = headers.get('x-lsk-user-id'); // Gmail Thread Id
+                }
+                await this.saveEmail({
+                  message, box, subtype, mailbox,
+                });
               } catch (parseError) {
                 console.error('imap sync search on "data"', parseError);  //eslint-disable-line
               }
