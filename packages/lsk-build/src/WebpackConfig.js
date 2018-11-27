@@ -15,7 +15,11 @@ const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 // test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
 
 function isDir(dir) {
-  return fs.lstatSync(dir).isDirectory();
+  try {
+    return fs.lstatSync(dir).isDirectory();
+  } catch (err) {
+    return null;
+  }
 }
 export default class WebpackConfig {
   name = 'webpack';

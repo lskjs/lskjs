@@ -15,9 +15,12 @@ import { writeFile, makeDir } from './utils/fs';
 const DEBUG = false;
 
 function isDir(dir) {
-  return fs.lstatSync(dir).isDirectory();
+  try {
+    return fs.lstatSync(dir).isDirectory();
+  } catch (err) {
+    return null;
+  }
 }
-
 export default class Runner {
   constructor(ctx = {}) {
     Object.assign(this, ctx);
