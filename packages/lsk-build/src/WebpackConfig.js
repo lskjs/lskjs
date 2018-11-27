@@ -425,12 +425,12 @@ export default class WebpackConfig {
       // },
     ];
 
-    if (!this.isDebug()) {
-      loaders.push({
-        test: this.resolvePath('node_modules/react-deep-force-update/lib/index.js'),
-        loader: 'null-loader',
-      });
-    }
+    // if (!this.isDebug()) {
+    //   loaders.push({
+    //     test: this.resolvePath('node_modules/react-deep-force-update/lib/index.js'),
+    //     loader: 'null-loader',
+    //   });
+    // }
     return loaders;
   }
 

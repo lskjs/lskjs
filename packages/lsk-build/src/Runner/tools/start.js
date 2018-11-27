@@ -19,7 +19,7 @@ import { format } from './run';
 // import run, { format } from './run';
 // import clean from './clean';
 
-const __DEV__ = false;
+const __DEV__ = true;
 const isDebug = !process.argv.includes('--release');
 
 // https://webpack.js.org/configuration/watch/#watchoptions
@@ -42,10 +42,11 @@ function createCompilationPromise(name, compiler, config) {
     compiler.hooks.done.tap(name, (stats) => {
       console.info('STATS');
       console.info(stats.toString(config.stats));
+      console.info('//////STATS');
       const timeEnd = new Date();
       const time = timeEnd.getTime() - timeStart.getTime();
       if (stats.hasErrors()) {
-        console.info(`[${format(timeEnd)}] Failed to compile '${name}' after ${time} ms`);
+        console.error(`[${format(timeEnd)}] Failed to compile '${name}' after ${time} ms`);
         reject(new Error('Compilation failed!'));
       } else {
         console.info(`[${format(timeEnd)}] Finished '${name}' compilation after ${time} ms`);
@@ -133,8 +134,14 @@ async function start() {
     // console.log('appPromise before');
     appPromise
       .then(() => {
-        // console.log('appPromise after', app, app.express);
-        // console.log({app});
+        if (!app) {
+          console.error('!app');
+          return;
+        }
+        if (!app.express) {
+          console.error('!app.express');
+          return;
+        }
         return app.express.handle(req, res);
       })
       .catch(error => console.error(error));
@@ -225,6 +232,8 @@ async function start() {
         middleware: [this.server],
         open: !process.argv.includes('--silent'),
         ...(isDebug ? {} : { notify: false, ui: false }),
+        ghostMode: false,
+        codeSync: false,
       },
       (error, bs) => (error ? reject(error) : resolve(bs)),
     ));

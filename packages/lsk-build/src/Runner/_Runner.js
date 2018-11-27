@@ -16,7 +16,6 @@ import stringify from 'serialize-javascript';
 const DEBUG = false;
 
 export default class Runner {
-
   constructor(ctx = {}) {
     Object.assign(this, ctx);
   }
@@ -52,6 +51,7 @@ export default class Runner {
     ['server', 'client', 'uapp'].forEach((type) => {
       const filename = this.resolvePath(outputDir, `${type}.js`);
       // console.log({ filename });
+      /* eslint-disable indent */
       const content = `\
 export default function () {
   return {
@@ -77,6 +77,7 @@ ${Object.keys(this.modules.modules).map((key) => {
 }
 
 `;
+      /* eslint-enable indent */
       // console.log(content);
       fs.writeFileSync(filename, content);
     });
@@ -350,7 +351,7 @@ ${Object.keys(this.modules.modules).map((key) => {
               target: server.host,
               middleware: [
                 wpMiddleware,
-                hotMiddleware
+                hotMiddleware,
               ],
               proxyOptions: {
                 xfwd: true,
@@ -426,7 +427,6 @@ ${Object.keys(this.modules.modules).map((key) => {
   }
 
   async render(routes) {
-
     DEBUG && console.log('render', routes);
     if (!routes) {
       routes = [
@@ -453,5 +453,4 @@ ${Object.keys(this.modules.modules).map((key) => {
 
     server.kill('SIGTERM');
   }
-
 }

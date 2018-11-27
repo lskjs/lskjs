@@ -14,8 +14,11 @@ import { writeFile, makeDir } from './utils/fs';
 // require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
 const DEBUG = false;
 
-export default class Runner {
+function isDir(dir) {
+  return fs.lstatSync(dir).isDirectory();
+}
 
+export default class Runner {
   constructor(ctx = {}) {
     Object.assign(this, ctx);
     // console.log(111111, Object.keys(this));
@@ -37,10 +40,17 @@ export default class Runner {
 
   resolveNpmPath(p, resNpm = 0) {
     if (p[0] === '~') {
-      return `${this.dirname}/src${p.substr(1)}`;
+      if (isDir(`${this.dirname}/src${p.substr(1)}`)) {
+        return `${this.dirname}/src${p.substr(1)}`;
+      }
+      return `${this.dirname}${p.substr(1)}`;
     }
     if (!resNpm) return p;
-    return `${this.dirname}/node_modules/${p}/src`;
+
+    if (isDir(`${this.dirname}/node_modules/${p}/src`)) {
+      return `${this.dirname}/node_modules/${p}/src`;
+    }
+    return `${this.dirname}/node_modules/${p}`;
   }
 
   getDistDir() {
@@ -58,7 +68,7 @@ export default class Runner {
   async prebuild() {
     if (!this.modules) return;
     DEBUG && console.log('prebuild');
-
+    /* eslint-disable indent */
     const outputDir = this.resolvePath(this.resolveNpmPath(this.modules.output));
     // console.log({ outputDir });
     ['server', 'client', 'uapp'].forEach((type) => {
@@ -89,6 +99,7 @@ ${Object.keys(this.modules.modules).map((key) => {
 }
 
 `;
+      /* eslint-enable indent */
       // console.log(content);
       fs.writeFileSync(filename, content);
     });
@@ -362,7 +373,7 @@ ${Object.keys(this.modules.modules).map((key) => {
               target: server.host,
               middleware: [
                 wpMiddleware,
-                hotMiddleware
+                hotMiddleware,
               ],
               proxyOptions: {
                 xfwd: true,
@@ -438,7 +449,6 @@ ${Object.keys(this.modules.modules).map((key) => {
   }
 
   async render2(routes) {
-
     DEBUG && console.log('render', routes);
     if (!routes) {
       routes = [
@@ -465,5 +475,4 @@ ${Object.keys(this.modules.modules).map((key) => {
 
     server.kill('SIGTERM');
   }
-
 }
