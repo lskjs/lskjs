@@ -14,6 +14,9 @@ const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 // test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
 
+function isDir(dir) {
+  return fs.lstatSync(dir).isDirectory();
+}
 export default class WebpackConfig {
   name = 'webpack';
   reScript = reScript;
@@ -97,9 +100,13 @@ export default class WebpackConfig {
       .keys(modules)
       .filter(dep => modules[dep][0] !== '~')
       .map((dep) => {
+        let pathModule = `${this.dirname}/node_modules/${modules[dep]}/src`;
+        if (!isDir(pathModule)) {
+          pathModule = `${this.dirname}/node_modules/${modules[dep]}`;
+        }
         return {
           name: modules[dep],
-          path: fs.realpathSync(`${this.dirname}/node_modules/${modules[dep]}/src`),
+          path: fs.realpathSync(pathModule),
           alias: modules[dep],
         };
       });
