@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from 'lsk-general/General/Loading';
+import Loading from '@lskjs/general/Loading';
 
 export default {
   children: [

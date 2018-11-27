@@ -20,12 +20,12 @@ import {
 import Error from 'react-icons2/md/clear';
 import Check from 'react-icons2/md/check';
 
-import Component from 'lsk-general/General/Component';
-import Link from 'lsk-general/General/Link';
+import Component from '@lskjs/general/Component';
+import Link from '@lskjs/general/Link';
 
 import buttons from '../../socials';
 import Slide from '../AuthPage/Slide';
-import Avatar from 'lsk-general/General/Avatar';
+import Avatar from '@lskjs/general/Avatar';
 
 @inject(stores => ({
   Passports: stores.uapp.modules.auth.stores.Passports,

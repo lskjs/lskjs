@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseSlide from 'lsk-general/General/Slide';
+import BaseSlide from '@lskjs/general/Slide';
 import { inject } from 'mobx-react';
 
 function Slide(props) {

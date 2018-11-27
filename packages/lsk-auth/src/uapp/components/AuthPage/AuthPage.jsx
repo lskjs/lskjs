@@ -23,12 +23,12 @@ import Loading from 'react-icons2/md/refresh';
 import Error from 'react-icons2/md/clear';
 import Check from 'react-icons2/md/check';
 
-import Component from 'lsk-general/General/Component';
+import Component from '@lskjs/general/Component';
 import Slide from './Slide';
-import Link from 'lsk-general/General/Link';
-import A from 'lsk-general/General/A';
-import Form from 'lsk-general/General/Form';
-import Avatar from 'lsk-general/General/Avatar';
+import Link from '@lskjs/general/Link';
+import A from '@lskjs/general/A';
+import Form from '@lskjs/general/Form';
+import Avatar from '@lskjs/general/Avatar';
 
 import buttons from '../../socials';
 import SocialButtons from '../SocialButtons';
