@@ -6,6 +6,8 @@ import get from 'lodash.get';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import stringify from 'serialize-javascript';
 import StatsPlugin from 'stats-webpack-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 // const StatsPlugin = require('stats-webpack-plugin');
 
 const reScript = /\.(js|jsx|mjs)$/;
@@ -67,6 +69,10 @@ export default class WebpackConfig {
 
   isVerbose() {
     return !!this.verbose;
+  }
+
+  isTypescriptSupport() {
+    return !!this.typescriptSupport;
   }
 
   getGlobals() {
@@ -202,7 +208,13 @@ export default class WebpackConfig {
         }),
         plugins: [
           ...(this.babelrc.plugins || []),
-          ...(this.isDebug() ? [] : [
+          ...(this.isDebug() ? [
+            [
+              "emotion",
+              { "sourceMap": true, "autoLabel": true }
+            ],
+          ] : [
+            ["emotion", { "hoist": true }], // .babelrc продакшн не продакшн
             // Treat React JSX elements as value types and hoist them to the highest scope
             // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
             '@babel/transform-react-constant-elements',
@@ -393,7 +405,27 @@ export default class WebpackConfig {
   }
   getLoaders() {
     const loaders = [
-      this.getJsxLoader(),
+      ...(this.isTypescriptSupport() ? [{
+        oneOf: [
+          this.getJsxLoader(),
+          {
+            test: /\.(ts|tsx)$/,
+            include: [
+              ...this.getDeps().map(dep => dep.path),
+              this.resolvePath('src'),
+            ],
+            use: [
+              {
+                loader: 'ts-loader',
+                options: {
+                  // disable type checker - we will use it in fork plugin
+                  transpileOnly: true,
+                },
+              },
+            ],
+          },
+        ],
+      }] : [this.getJsxLoader()]),
       ...this.getCssLoaders(),
       {
         test: reImage,
@@ -466,6 +498,17 @@ export default class WebpackConfig {
       new webpack.ProvidePlugin({
         Promise: 'bluebird',
       }),
+      ...((this.isTypescriptSupport() && this.name === 'client') ? [
+        new ForkTsCheckerWebpackPlugin({
+          async: false,
+          ...(this.isDebug() ? {
+            watch: this.resolvePath('src'),
+            memoryLimit: 4096,
+          } : {}),
+          tsconfig: this.resolvePath('tsconfig.json'),
+          tslint: this.resolvePath('tslint.json'),
+        }),
+      ] : [])
     ];
   }
 
@@ -479,11 +522,18 @@ export default class WebpackConfig {
         this.resolvePath('src'),
         'node_modules',
       ],
+      ...(this.isTypescriptSupport() ? {
+        plugins: [
+          new TsconfigPathsPlugin({ configFile: this.resolvePath('tsconfig.json') }),
+        ]
+      } : {}),
     };
   }
 
   getResolveExtensions() {
-    return ['.webpack.js', '.web.js', '.js', '.jsx', '.json'];
+    let ext = ['.webpack.js', '.web.js', '.js', '.jsx', '.json'];
+    if (this.isTypescriptSupport())  ext = [ ...ext, '.tsx', '.ts' ];
+    return ext;
   }
 
   getResolveAlias() {
