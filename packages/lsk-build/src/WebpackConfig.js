@@ -2,7 +2,7 @@ import extend from 'extend';
 import path from 'path';
 import webpack from 'webpack';
 import fs from 'fs';
-import get from 'lodash.get';
+// import get from 'lodash.get';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import stringify from 'serialize-javascript';
 import StatsPlugin from 'stats-webpack-plugin';
@@ -105,7 +105,7 @@ export default class WebpackConfig {
       path: fs.realpathSync(dep.path),
     }));
     if (!this.modules || !this.modules.modules) return deps;
-    const modules = this.modules.modules;
+    const { modules } = this.modules;
     const modulesDeps = Object
       .keys(modules)
       .filter(dep => modules[dep][0] !== '~')
@@ -155,56 +155,56 @@ export default class WebpackConfig {
         babelrc: false, // true
         presets: (this.babelrc.presets || []).map((preset) => {
           return preset;
-          const presetName = typeof preset === 'string' ? preset : preset[0];
-          const presetOptions = typeof preset === 'string' ? {} : preset[1];
-          // console.log({presetName, presetOptions});
-          if (presetName === '@babel/preset-env') {
-            const targets = {};
-            if (this.name === 'client') {
-              targets.browsers = get(this, 'pkg.browserslist', []);
-              targets.forceAllTransforms = !this.isDebug();
-            }
-            if (this.name === 'server') {
-              targets.node = get(this, 'pkg.engines.node', '6.10').match(/(\d+\.?)+/)[0];
-            }
-            return [
-              '@babel/preset-env',
-              {
-                ...presetOptions,
-                targets,
-                modules: false,
-                useBuiltIns: false,
-                debug: false,
-              },
-            ];
-            // if (this.name === 'client') {
-            //   return [
-            //     '@babel/preset-env',
-            //     {
-            //       ...presetOptions,
-            //       targets: {
-            //         // browsers: pkg.browserslist,
-            //         // forceAllTransforms: !isDebug, // for UglifyJS
-            //
-            //         node: get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0],
-            //       },
-            //       modules: false,
-            //       useBuiltIns: false,
-            //       debug: false,
-            //     },
-            //   ]
-            // }
-          }
-          if (presetName === '@babel/preset-react') {
-            return [
-              '@babel/preset-react',
-              {
-                ...presetOptions,
-                development: this.isDebug(),
-              },
-            ];
-          }
-          return preset;
+          // const presetName = typeof preset === 'string' ? preset : preset[0];
+          // const presetOptions = typeof preset === 'string' ? {} : preset[1];
+          // // console.log({presetName, presetOptions});
+          // if (presetName === '@babel/preset-env') {
+          //   const targets = {};
+          //   if (this.name === 'client') {
+          //     targets.browsers = get(this, 'pkg.browserslist', []);
+          //     targets.forceAllTransforms = !this.isDebug();
+          //   }
+          //   if (this.name === 'server') {
+          //     targets.node = get(this, 'pkg.engines.node', '6.10').match(/(\d+\.?)+/)[0];
+          //   }
+          //   return [
+          //     '@babel/preset-env',
+          //     {
+          //       ...presetOptions,
+          //       targets,
+          //       modules: false,
+          //       useBuiltIns: false,
+          //       debug: false,
+          //     },
+          //   ];
+          //   // if (this.name === 'client') {
+          //   //   return [
+          //   //     '@babel/preset-env',
+          //   //     {
+          //   //       ...presetOptions,
+          //   //       targets: {
+          //   //         // browsers: pkg.browserslist,
+          //   //         // forceAllTransforms: !isDebug, // for UglifyJS
+          //   //
+          //   //         node: get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0],
+          //   //       },
+          //   //       modules: false,
+          //   //       useBuiltIns: false,
+          //   //       debug: false,
+          //   //     },
+          //   //   ]
+          //   // }
+          // }
+          // if (presetName === '@babel/preset-react') {
+          //   return [
+          //     '@babel/preset-react',
+          //     {
+          //       ...presetOptions,
+          //       development: this.isDebug(),
+          //     },
+          //   ];
+          // }
+          // return preset;
         }),
         plugins: [
           ...(this.babelrc.plugins || []),
