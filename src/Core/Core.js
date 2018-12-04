@@ -88,6 +88,12 @@ export default class Core {
   run() {
   }
 
+  async restart() {
+    this.log.trace(`${this.name}.restart()`);
+    await this.stop();
+    await this.start();
+  }
+
   async start() {
     try {
       if (typeof this.beforeInit === 'function') {
@@ -126,7 +132,7 @@ export default class Core {
       } else {
         console.error(`${this.name}.start() err`, err);
       }
-      if (typeof process !== 'undefined') {
+      if (typeof process !== 'undefined' && process.exit) {
         process.exit(1);
       }
       throw err;
@@ -151,7 +157,7 @@ export default class Core {
       } else {
         console.error(`${this.name}.stop() err`, err);
       }
-      if (typeof process !== 'undefined') {
+      if (typeof process !== 'undefined' && process.exit) {
         process.exit(1);
       }
       throw err;

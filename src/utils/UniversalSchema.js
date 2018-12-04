@@ -10,16 +10,64 @@ class UniversalSchema {
     this.statics = {
       findByParams(incomeParams) {
         const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
-        const res = this.find(params.filter)
-          .sort(params.sort)
-          .skip(params.skip)
-          .limit(params.limit);
+        let res = this.find(params.filter);
+        if (params.sort) {
+          res = res.sort(params.sort);
+        }
+        if (params.skip) {
+          res = res.skip(params.skip);
+        }
+        if (params.limit) {
+          res = res.limit(params.limit);
+        }
+        if (incomeParams.select) {
+          res = res.select(incomeParams.select);
+        }
+        // if (params.populate) {
+        //   res = res.populate(params.populate);
+        // }
         if (params.prepare) {
           return this.prepare(res, params.prepare);
         }
         return res;
       },
+      findOneByParams(params = {}) {
+        return this.findByParams2({
+          ...params,
+          method: 'findOne',
+        })
+      },
+      findByParams2(incomeParams) {
+        console.log('findByParams2', incomeParams);
+        const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
+        let res;;
+        if (params.method === 'findOne') {
+          res = this.findOne(params.filter);
+        } else {
+          res = this.find(params.filter);
+        }
+        if (params.sort) {
+          res = res.sort(params.sort);
+        }
+        if (params.skip) {
+          res = res.skip(params.skip);
+        }
+        if (params.limit) {
+          res = res.limit(params.limit);
+        }
+
+        if (params.select) {
+          console.log('select', params.select);
+          
+          res = res.select(params.select);
+        }
+        if (params.populate) {
+          res = res.populate(params.populate);
+        }
+        return res;
+      },
       async prepareOne(obj) {
+        // console.log('@@@ Base prepareOne');
         return obj;
       },
       prepare(obj, ...args) {
@@ -136,11 +184,12 @@ class UniversalSchema {
 
 UniversalSchema.defaultParams = {
   filter: {},
-  sort: {},
+  // sort: {},
   limit: 20,
-  populate: [],
+  // populate: [],
   skip: 0,
   prepare: null,
+  select: [],
 };
 UniversalSchema.defaultOptions = {
   timestamps: true,
