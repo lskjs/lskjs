@@ -22,10 +22,10 @@ import Check from 'react-icons2/md/check';
 
 import Component from '@lskjs/general/Component';
 import Link from '@lskjs/general/Link';
+import Avatar from '@lskjs/general/Avatar';
 
 import buttons from '../../socials';
 import Slide from '../AuthPage/Slide';
-import Avatar from '@lskjs/general/Avatar';
 
 @inject(stores => ({
   Passports: stores.uapp.modules.auth.stores.Passports,

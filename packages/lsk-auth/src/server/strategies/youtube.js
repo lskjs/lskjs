@@ -1,54 +1,53 @@
 import Youtube from 'passport-youtube-v3';
 import get from 'lodash/get';
 import Api from 'apiquery';
+import fetch from 'isomorphic-fetch';
 
-export default (ctx, { Strategy, config }) => {
+
+export default (ctx, { Strategy }) => {
   return class YoutubeStrategy extends Strategy {
     Strategy = Youtube.Strategy
-    providerName = 'youtube'
+    type = 'youtube'
 
-    getConfig() {
-      const config = super.getConfig();
-      if (!config.scope) {
-        config.scope = [
+    getPassportStrategyConfig() {
+      const config = super.getPassportStrategyConfig();
+      return {
+        ...config,
+        scope: config.scope && config.scope.length ? config.scope : [
           'https://www.googleapis.com/auth/youtube.readonly',
-        ];
-      }
-      return config;
+        ],
+      };
     }
 
-    async updateTokens(passport, creds2) {
+    async updateTokens(passport, creds2) {  //eslint-disable-line
       // console.log('@@updateTokens');
-      const ytConfig = get(config, 'socials.youtube.config', {});
+      const ytConfig = this.config;
 
       const creds = {};
       if (creds2 && (creds2.clientId || creds2.clientID) && creds2.clientSecret) {
-        creds.clientId = creds2.clientId || creds2.clientID
+        creds.clientId = creds2.clientId || creds2.clientID;
         creds.clientSecret = creds2.clientSecret;
       } else {
         creds.clientId = ytConfig.clientId || ytConfig.clientID;
         creds.clientSecret = ytConfig.clientSecret;
       }
-      // console.log({creds});
-      const api = new Api();
-      const body = Api.qs.stringify({
-        refresh_token: passport.refreshToken,
-        client_id: creds.clientId,
-        client_secret: creds.clientSecret,
-        grant_type: 'refresh_token',
-      });
-      const res = await Api.fetch(
+      const res = await fetch(
         'https://www.googleapis.com/oauth2/v4/token',
         {
           method: 'post',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body,
-        }
+          body: Api.qs.stringify({
+            refresh_token: passport.refreshToken,
+            client_id: creds.clientId,
+            client_secret: creds.clientSecret,
+            grant_type: 'refresh_token',
+          }),
+        },
       );
       const data = await res.json();
-      const ret = {}
+      const ret = {};
       // console.log('updateTokens data', data);
       if (data.error) {
         if (data.error_description === 'Account has been deleted') {
@@ -95,7 +94,7 @@ export default (ctx, { Strategy, config }) => {
       // return config;
     }
 
-    async getProfile(passport) {
+    async getProfile(passport) {  //eslint-disable-line
       const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${passport.providerId}`, {
         method: 'GET',
         headers: {
@@ -109,8 +108,8 @@ export default (ctx, { Strategy, config }) => {
       };
 
       if (profile.title) {
-        const names = profile.title.split(' ')
-        profile.firstName = names[0];
+        const names = profile.title.split(' ');
+        profile.firstName = names[0];  // eslint-disable-line
         profile.lastName = names.slice(1).join(' ');
       }
 

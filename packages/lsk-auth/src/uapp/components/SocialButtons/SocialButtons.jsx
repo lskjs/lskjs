@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import importcss from 'importcss';
 import { inject } from 'mobx-react';
 import get from 'lodash/get';
+import map from 'lodash/map';
 import filter from 'lodash/filter';
 import SocialButton from '../SocialButton';
-import buttons from '../../socials';
+import socials from '../../socials';
 
 @inject('config')
 export default class SocialButtons extends Component {
@@ -15,22 +16,27 @@ export default class SocialButtons extends Component {
   }
   render() {
     const { config } = this.props;
-    const socials = get(config, 'auth.socials', []);
-    const buttons2 = filter(buttons, (value, name) => {
-      if (socials.indexOf(value.name) === -1) return false;
-      return true;
-    });
+    const providers = get(config, 'auth.providers', []);
+    // console.log({providers});
 
-    if (buttons2.length === 0) return null;
+    const buttons = map(providers || [], (provider) => {
+      if (!socials[provider.type]) return null;
+      return {
+        ...socials[provider.type],
+        ...provider,
+      };
+    }).filter(a => a);
+
+    if (buttons.length === 0) return null;
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {buttons2.map((value, i) => (
+        {buttons.map((value, i) => (
           <SocialButton
-            key={value.name}
-            name={value.name}
+            key={value.provider}
+            name={value.type}
             clickable
-            onClick={() => this.props.onClick(value.name)}
+            onClick={() => this.props.onClick(value.provider)}
             size={40}
             style={{ marginLeft: i ? 10 : 0 }}
           />

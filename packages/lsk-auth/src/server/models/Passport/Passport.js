@@ -1,6 +1,7 @@
 import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
+
 export function getSchema(ctx, module) {
   const mongoose = ctx.db;
   const schema = new UniversalSchema({
@@ -27,6 +28,10 @@ export function getSchema(ctx, module) {
       default: null,
     },
 
+    // название соцсети из passport
+    providerProject: {
+      type: String,
+    },
     // название соцсети из passport
     provider: {
       type: String,
@@ -64,7 +69,7 @@ export function getSchema(ctx, module) {
     toObject: { virtuals: true },
   });
 
-  schema.methods.generateUsername = async function (collection) {
+  schema.methods.generateUsername = async function a(collection) {
     const { User } = ctx.models;
     let username = `${this.providerId}_${this.provider}`;
     username = module.canonizeUsername(username.toLowerCase());
@@ -81,43 +86,43 @@ export function getSchema(ctx, module) {
 
     throw 'cant generate unique username';
   };
-  schema.methods.getUser = async function () {
+  schema.methods.getUser = async function a() {
     return ctx.models.User.findById(this.userId);
   };
 
-  schema.methods.getIdentity = function (params = {}) {
+  schema.methods.getIdentity = function a(params = {}) {
     const object = pick(this.toObject(), ['_id']);
     return Object.assign(object, params);
   };
 
-  schema.methods.generateToken = function (params) {
+  schema.methods.generateToken = function a(params) {
     return jwt.sign(this.getIdentity(params), ctx.config.jwt.secret);
   };
 
-  schema.statics.decodeToken = function (token) {
+  schema.statics.decodeToken = function a(token) {
     return jwt.verify(token, ctx.config.jwt.secret);
   };
 
-  schema.statics.getByToken = async function (token) {
+  schema.statics.getByToken = async function a(token) {
     const { _id } = this.decodeToken(token);
     return this.findById(_id);
   };
 
 
-  schema.methods.getStrategy = function () {
+  schema.methods.getStrategy = function a() {
     const strategy = module._strategies[this.provider];
     return strategy;
   };
 
-  schema.methods.updateToken = async function (...args) {
+  schema.methods.updateToken = async function a(...args) {
     const strategy = this.getStrategy();
-    if (!strategy) return null;
+    if (!strategy) return;
     await strategy.updateTokens(this, ...args);
   };
 
-  schema.methods.updateData = async function () {
+  schema.methods.updateData = async function a() {
     const strategy = this.getStrategy();
-    if (!strategy) return null;
+    if (!strategy) return;
     await strategy.updateTokens(this);
     await strategy.updatePassport({
       passport: this,

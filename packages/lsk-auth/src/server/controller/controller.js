@@ -336,23 +336,33 @@ export default (ctx, module) => {
   controller.socialCallback2 = async (req, res, next) => {
     const { provider } = req.params;
     __DEV__ && console.log('socialCallback2');
-    module.passport.authenticate(provider, (err, { redirect }) => {
+    module.passportService.authenticate(provider, (err, { redirect }) => {
       if (err) { return next(err); }
       res.redirect(redirect || '/');
     })(req, res, next);
   };
 
+  controller.socialAuth = (req, res, next) => {
+    const { provider } = req.params;
+    if (!module.strategies[provider]) return e404(`No provider: ${provider}`);
+    module.passportService.authenticate(
+      provider,
+      module.strategies[provider].getPassportAuthenticateParams(),
+    )(req, res, next);
+  };
+
   controller.socialCallback = async (req, res) => {
+    // throw '!socialCallback';
     const { provider } = req.params;
     __DEV__ && console.log('socialCallback');
     // console.log(123123123);
-    
+
     try {
       return new Promise((resolve, reject) => {
         (
-          module.passport.authenticate(
+          module.passportService.authenticate(
             provider,
-            module.strategies[provider].getPassportParams(),
+            module.strategies[provider].getPassportAuthenticateParams(),
             async (err, data) => {
               console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
               if (err) return reject(err);
@@ -367,19 +377,6 @@ export default (ctx, module) => {
     }
   };
 
-  controller.socialAuth = (req, res, next) => {
-    const { provider } = req.params;
-    // console.log('socialAuth');
-    // console.log('socialAuth', provider, !!module._strategies[provider], !!module.strategies[provider]);
-    if (!module.strategies[provider]) return e404(`No provider: ${provider}`);
-    if (!module._strategies[provider]) return e404(`No config for provider: ${provider}`);
-    // console.log('socialAuth2', provider);
-
-    module.passport.authenticate(
-      provider,
-      module.strategies[provider].getPassportParams(),
-    )(req, res, next);
-  };
 
   controller.phoneCode = async (req) => {
     if (!module.config.sms) throw '!module.config.sms';

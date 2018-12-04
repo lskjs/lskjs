@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import autobind from 'core-decorators/lib/autobind';
 import importcss from 'importcss';
 import omit from 'lodash/omit';
-import {
-  Button,
-} from 'react-bootstrap';
+import { Button  } from 'react-bootstrap';
 import socials from '../../socials';
 
 export default class SocialButton extends Component {

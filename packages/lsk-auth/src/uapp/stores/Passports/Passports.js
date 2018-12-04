@@ -3,7 +3,6 @@ import { observable } from 'mobx';
 export default (ctx, mctx) => (
 
   class PassportsStore {
-
     @observable list = [];
 
     constructor(data) {
@@ -48,6 +47,5 @@ export default (ctx, mctx) => (
       ctx.log.info('unbindSocial', data);
       this.list = this.list.filter(o => o.provider !== provider);
     }
-
   }
 );

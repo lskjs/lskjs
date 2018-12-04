@@ -1,40 +1,50 @@
 import React from 'react';
-import Loading from '@lskjs/general/Loading';
 
 export default {
   children: [
     {
-      path: '/(login|)',
-      action({ page, uapp }) {
-        const { AuthPage } = uapp.modules.auth.components;
+      path: '',
+      async action({ page, uapp }) {
+        return page.redirect('/auth/login');
+      },
+    },
+    {
+      path: '/login',
+      async action({ page, uapp }) {
+        const AuthPage = await import('../components/AuthPage');
         return page
-          .pushTitle('Вход')
+          .meta({
+            title: 'Вход',
+          })
           .component(AuthPage, { type: 'login' });
       },
     },
     {
       path: '/recovery',
       action({ page, uapp }) {
-        const { AuthPage } = uapp.modules.auth.components;
         return page
-          .pushTitle('Восстановление пароля')
-          .component(AuthPage, { type: 'recovery' });
+          .meta({
+            title: 'Восстановление пароля',
+          })
+          .component(import('../components/AuthPage'), { type: 'recovery' });
       },
     },
     {
       path: '/signup',
       action({ page, uapp }) {
-        const { AuthPage } = uapp.modules.auth.components;
         return page
-          .pushTitle('Signup')
-          .component(AuthPage, { type: 'signup' });
+          .meta({
+            title: 'Signup',
+          })
+          .component(import('../components/AuthPage'), { type: 'signup' });
       },
     },
     {
       path: '/passport',
       async action(params) {
-        const { uapp, query, page, api, } = params;
-        const { AuthPage, BindPage } = uapp.modules.auth.components;
+        const {
+          uapp, query, page, api,
+        } = params;
         let passport;
         try {
           const { data } = await api.fetch('/api/module/auth/passport/getByToken', {
@@ -48,14 +58,18 @@ export default {
         }
         if (__SERVER__) {
           return page
-            .pushTitle('Подключение соц.сети')
-            .component(<Loading full />);
+            .meta({
+              title: 'Подключение соц.сети',
+            })
+            .loading();
         }
         const isAuth = await uapp.auth.isAuthAsync();
         if (isAuth) {
           return page
-            .pushTitle('Подключение социальной сети')
-            .component(BindPage, { passport, query });
+            .meta({
+              title: 'Подключение социальной сети',
+            })
+            .component(import('../components/BindPage'), { passport, query });
         }
         if (passport.userId) {
           const res = await uapp.auth.loginPassport({ p: query.p });
@@ -65,8 +79,10 @@ export default {
           throw 'Непонятная ошибка при входе в соцсеть';
         }
         return page
-          .pushTitle('Регистрация через соц.сеть')
-          .component(AuthPage, { type: 'signupPassport', passport, query });
+          .meta({
+            title: 'Регистрация через соц.сеть',
+          })
+          .component(import('../components/AuthPage'), { type: 'signupPassport', passport, query });
       },
     },
     {
@@ -74,8 +90,10 @@ export default {
       action({ uapp, page }) {
         if (__SERVER__) {
           return page
-             .pushTitle('Logout')
-             .component(<Loading full />);
+            .meta({
+              title: 'Logout',
+            })
+            .loading();
         }
         uapp.auth.logout();
         return page.redirect('/');

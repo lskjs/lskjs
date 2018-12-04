@@ -18,27 +18,21 @@ import {
   CardText,
 } from 'react-bootstrap-card';
 import { get } from 'lodash';
-
-import Loading from 'react-icons2/md/refresh';
-import Error from 'react-icons2/md/clear';
-import Check from 'react-icons2/md/check';
-
-import Component from '@lskjs/general/Component';
-import Slide from './Slide';
 import Link from '@lskjs/general/Link';
 import A from '@lskjs/general/A';
 import Form from '@lskjs/general/Form';
 import Avatar from '@lskjs/general/Avatar';
+import Component from '@lskjs/general/Component';
 
 import buttons from '../../socials';
 import SocialButtons from '../SocialButtons';
 import SocialButton from '../SocialButton';
+import Slide from './Slide';
 
-@inject('auth', 'config')
+@inject('uapp', 'auth', 'config')
 @observer
-@importcss(require('./AuthPage.css'))
+// @importcss(require('./AuthPage.css'))
 export default class AuthPage extends Component {
-
   static defaultProps = {
     type: 'login',
     passport: {},
@@ -90,13 +84,13 @@ export default class AuthPage extends Component {
 
     const config = this.props.config;
     const infoFields = config.auth.signup
-    .map(name => ({ name, ...config.auth.profile[name] }))
-    .filter(f => f)
-    .map(field => ({
-      name: `profile.${field.name}`,
-      title: field.title,
-      control: field.control || {},
-    }));
+      .map(name => ({ name, ...config.auth.profile[name] }))
+      .filter(f => f)
+      .map(field => ({
+        name: `profile.${field.name}`,
+        title: field.title,
+        control: field.control || {},
+      }));
 
     if (type === 'signupPassport') {
       return [
@@ -122,14 +116,14 @@ export default class AuthPage extends Component {
 
   @autobind
   async handleSubmit(data) {
-    const { type, auth, query } = this.props;
+    const { type, auth, query, uapp } = this.props;
     try {
       if (type === 'login') {
-        await auth.login(data).then(res => {
+        await auth.login(data).then((res) => {
           if (res.message === 'ok') {
             this.redirect('/');
           }
-        })
+        });
       }
       if (type === 'signupPassport') {
         await auth.signupPassport({ ...data, p: query.p }).then(() => {
@@ -147,20 +141,17 @@ export default class AuthPage extends Component {
             type: 'success',
             title: 'Письмо с восстановлением пароля отправлено на почту.',
           });
-        })
+        });
       }
     } catch (err) {
-      this.onError(err)
+      uapp.onError(err);
     }
   }
 
-  @autobind
-  onError(err) {
-    console.log('AuthPage.onError', err);
-  }
-
   render() {
-    const { type, auth, config, passport } = this.props;
+    const {
+      type, auth, config, passport,
+    } = this.props;
     const fields = this.getFields(type);
     return (
       <Slide>

@@ -5,11 +5,12 @@ import onlineService from './server/onlineService';
 
 export default (ctx) => {
   return class AuthModule {
-    canonize = require('./server/canonize').default.bind(this)
-    canonizeAndValidatePhone = require('./server/canonizeAndValidatePhone').default.bind(this)
-    canonizePhone = require('./server/canonizePhone').default.bind(this)
-    canonizeUsername = require('./server/canonizeUsername').default.bind(this)
-    transliterate = require('./server/transliterate').default.bind(this)
+    config = get(ctx, 'config.auth', {});
+    canonize = require('./server/canonize').default.bind(this);
+    canonizeAndValidatePhone = require('./server/canonizeAndValidatePhone').default.bind(this);
+    canonizePhone = require('./server/canonizePhone').default.bind(this);
+    canonizeUsername = require('./server/canonizeUsername').default.bind(this);
+    transliterate = require('./server/transliterate').default.bind(this);
 
     initOnlineService() {
       this.online = onlineService;
@@ -54,25 +55,38 @@ export default (ctx) => {
 
       this.controller = this.getController();
       this.Strategy = require('./server/Strategy').default(ctx, this);
-      this.strategies = this.getStrategies();
-      this._strategies = {};
-      this.passport = new Passport();
+      this.strategyProviders = this.getStrategies();
+      this.strategies = {};
+
+      this.passportService = new Passport();
+      const providers = get(this, 'config.providers', {});
+      console.log({ providers });
+
+      forEach(providers, (config) => {
+        const { provider, type, ...strategyConfig } = config;
+        // console.log({ provider, type });
+
+        const StrategyProvider = this.strategyProviders[type];
+        if (!StrategyProvider) return;
+        const strategy = new StrategyProvider({
+          provider,
+          type,
+          config: strategyConfig,
+        });
+        // console.log({strategy});
+        if (!strategy) return;
+        this.strategies[provider] = strategy;
+        console.log('!!!!');
+      });
     }
+
     async run() {
       // this.strategies = require('./strategies').default(ctx, this);
       // const { strategies } = this || {};
-      forEach(this.strategies, (Strategy) => {
-        if (!Strategy) return null;
-        const strategy = new Strategy();
-        // console.log({strategy});
-        if (!strategy) return null;
-        const { providerName } = strategy;
-        // console.log({providerName});
-        if (!this.config.socials[providerName]) return null;
-        this._strategies[providerName] = strategy;
-        this.passport.use(strategy.getStrategy(strategy));
+      ctx.log.trace('auth strategies', Object.keys(this.strategies));
+      forEach(this.strategies || [], (strategy) => {
+        this.passportService.use(strategy.getPassportStrategy());
       });
-      ctx.log.trace('auth strategies', Object.keys(this._strategies));
       // if (this.strategies) {
       //   forEach(this.strategies || [], (strategy) => {
       //     this.passport.use(strategy.getStrategy(strategy));

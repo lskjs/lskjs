@@ -3,13 +3,11 @@ import fetch from 'isomorphic-fetch';
 
 export default (ctx, { Strategy }) => class VkontakteStrategy extends Strategy {
   Strategy = Vkontakte.Strategy
-  providerName = 'vkontakte'
+  type = 'vkontakte'
 
-  static getPassportParams() {
-    return { scope: ctx.config.auth.socials.vkontakte.scope };
-  }
+  async getProfile(passport) {  //eslint-disable-line
+    console.log('getProfile', passport);
 
-  async getProfile(passport) {
     const fields = [
       'sex',
       'bdate',
@@ -20,11 +18,13 @@ export default (ctx, { Strategy }) => class VkontakteStrategy extends Strategy {
       'photo_200',
       'photo_max_orig',
       'photo_max',
+      'domain',
+      'id',
+      'about',
     ];
     const res = await fetch(`https://api.vk.com/method/users.get?fields=${fields.join(',')}&access_token=${passport.token}&v=5`);
     const json = await res.json();
     const data = json.response[0];
-
     return {
       firstName: data.first_name,
       lastName: data.last_name,
@@ -36,23 +36,12 @@ export default (ctx, { Strategy }) => class VkontakteStrategy extends Strategy {
         data.photo_max,
         data.photo_max_orig,
       ],
+      domain: data.domain,
+      about: data.about,
       bdate: data.bdate,
       avatar: data.photo_200,
-      city: `Город ${data.city}`,
-      country: `Страна ${data.country}`,
+      city: data.city,
+      country: data.country,
     };
-  }
-
-  async updatePassport({ accessToken, refreshToken, passport }) {
-    // console.log('updatePassport EXTENDED', accessToken, refreshToken) ;
-    const { User } = ctx.models;
-    if (accessToken) passport.token = accessToken;
-    if (refreshToken) passport.refreshToken = refreshToken;
-    passport.profile = await this.getProfile(passport);
-    // const data = await module.getPassportData(passport);
-    passport.meta = {};
-    await passport.save();
-    await User.updateFromPassport(passport);
-    return passport;
   }
 };
