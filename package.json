@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/isuvorov/lego-starter-kitgit"
+    "url": "git+ssh://git@github.com/isuvorov/lego-starter-kit"
   },
   "contributors": [
     "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
