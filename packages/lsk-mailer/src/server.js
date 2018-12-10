@@ -19,6 +19,9 @@ export default (ctx) => {
       // parser
       await this.parser.init();
     }
+    async stop() {
+      await this.parser.stop();
+    }
 
     getTransporter() {
       return (this.config && this.config.transport)
