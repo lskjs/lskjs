@@ -5,7 +5,7 @@ export default (ctx, module) => class Strategy {
 
   config = {};
   Strategy = null;
-  type = 'youtube';
+  type = null;
 
   getProviderId({ id } = {}) { // eslint-disable-line class-methods-use-this
     return id;
@@ -26,20 +26,17 @@ export default (ctx, module) => class Strategy {
 
 
   async passportStrategyCallback(...args) {
-    console.log('passportStrategyCallback args', args);
-
-    const [accessToken, refreshToken, passportProfile] = args;
-    // async passportStrategyCallback(accessToken, refreshToken, passportProfile) {
+    const [accessToken, refreshToken, profile] = args;
     const { Passport } = ctx.modules.auth.models;
-    const providerId = this.getProviderId(passportProfile);
+    const providerId = this.getProviderId(profile);
     let passport = await Passport.findOne({
-      provider: this.providerName,
+      provider: this.provider,
       providerId,
     });
     const params = {
       accessToken,
       refreshToken,
-      passportProfile,
+      profile,
       providerId,
     };
     if (!passport) {
@@ -57,11 +54,13 @@ export default (ctx, module) => class Strategy {
   // passport.use(strategy.getPassportStrategy());
   getPassportStrategy() {
     const config = this.getPassportStrategyConfig();
-    return new this.Strategy(
-      {
-        ...config,
-        clientID: config.clientID || config.clientId,
-      },
+    const conf = {
+      ...config,
+      clientID: config.clientID || config.clientId,
+    };
+
+    const strategy = new this.Strategy(
+      conf,
       (...args1) => {
         const [done, ...args2] = args1.reverse();
         const args = args2.reverse();
@@ -71,6 +70,9 @@ export default (ctx, module) => class Strategy {
           .catch(err => done(err));
       },
     );
+
+    strategy.name = this.provider;
+    return strategy;
   }
 
 

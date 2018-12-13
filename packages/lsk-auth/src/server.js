@@ -60,7 +60,7 @@ export default (ctx) => {
 
       this.passportService = new Passport();
       const providers = get(this, 'config.providers', {});
-      console.log({ providers });
+      // console.log({ providers });
 
       forEach(providers, (config) => {
         const { provider, type, ...strategyConfig } = config;
@@ -76,7 +76,6 @@ export default (ctx) => {
         // console.log({strategy});
         if (!strategy) return;
         this.strategies[provider] = strategy;
-        console.log('!!!!');
       });
     }
 

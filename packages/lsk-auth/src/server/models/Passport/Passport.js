@@ -28,8 +28,8 @@ export function getSchema(ctx, module) {
       default: null,
     },
 
-    // название соцсети из passport
-    providerProject: {
+    // тип провадера
+    type: {
       type: String,
     },
     // название соцсети из passport

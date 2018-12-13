@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-export default (ctx, mctx) => (
+export default uapp => (
 
   class PassportsStore {
     @observable list = [];
@@ -12,12 +12,12 @@ export default (ctx, mctx) => (
     }
 
     static async getPassports() {
-      const { data } = await ctx.api.fetch('/api/module/auth/social');
+      const { data } = await uapp.api.fetch('/api/module/auth/social');
       return new this(data);
     }
 
     static async bindSocial(qs) {
-      const { data } = await ctx.api.fetch('/api/module/auth/social/bind', {
+      const { data } = await uapp.api.fetch('/api/module/auth/social/bind', {
         method: 'POST',
         qs,
       });
@@ -25,7 +25,7 @@ export default (ctx, mctx) => (
     }
 
     static async unbindSocial(qs) {
-      const { data } = await ctx.api.fetch('/api/module/auth/social/unbind', {
+      const { data } = await uapp.api.fetch('/api/module/auth/social/unbind', {
         method: 'POST',
         qs,
       });
@@ -38,13 +38,13 @@ export default (ctx, mctx) => (
 
     async connectSocial(token) {
       const data = await this.constructor.bindSocial({ p: token });
-      ctx.log.info('bindSocial', data);
+      uapp.log.info('bindSocial', data);
       this.list = data;
     }
 
     async disconnectSocial(provider) {
       const data = await this.constructor.unbindSocial({ provider });
-      ctx.log.info('unbindSocial', data);
+      uapp.log.info('unbindSocial', data);
       this.list = this.list.filter(o => o.provider !== provider);
     }
   }

@@ -354,7 +354,7 @@ export default (ctx, module) => {
   controller.socialCallback = async (req, res) => {
     // throw '!socialCallback';
     const { provider } = req.params;
-    __DEV__ && console.log('socialCallback');
+    // __DEV__ && console.log('socialCallback');
     // console.log(123123123);
 
     try {
@@ -364,7 +364,7 @@ export default (ctx, module) => {
             provider,
             module.strategies[provider].getPassportAuthenticateParams(),
             async (err, data) => {
-              console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
+              // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
               if (err) return reject(err);
               return resolve(res.redirect(data.redirect || '/'));
             },
@@ -372,7 +372,7 @@ export default (ctx, module) => {
         )(req);
       });
     } catch (err) {
-      console.error(err, 'ERROR!');
+      // console.error(err, 'ERROR!');
       throw err;
     }
   };
