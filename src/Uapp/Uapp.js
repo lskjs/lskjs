@@ -1,82 +1,53 @@
 import merge from 'lodash/merge';
 import UniversalRouter from 'universal-router';
-import Core from '../Core';
-import Page from './Page';
 import Api from 'apiquery';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
+import autobind from 'core-decorators/lib/autobind';
+import Favico from 'favico.js';
+
+import SmoothScroll from '../utils/UniversalSmoothScroll';
+import Core from '../Core';
+import Page from './Page';
 // import safeRender from './safeRender';
 
-// TODO: вынести функции работы с хостнеймом куда нибудь
-function isRightHostname(hostnames = [], hostname) {
-  for (const name of hostnames) {
-    // @TODO: check wildcards
-    // console.log('===', name, hostname, name === '*');
-    if (name === '*') return true;
-    if (name === hostname) return true;
-  }
-  return false;
-}
+// import { observable, action } from 'mobx';
+// import map from 'lodash/map';
+// import React from 'react';
+// import moment from 'moment';
+// import 'moment/locale/ru';
 
-function findConfigByHostname(configs, hostname) {
-  for (const config of configs) {
-    if (config.hostnames && isRightHostname(config.hostnames, hostname)) {
-      return config;
-    }
-    // console.log('isRightHostname(config.hosts, hostname)', isRightHostname(config.hosts, hostname));
-    if (config.hosts && isRightHostname(config.hosts, hostname)) {
-      // console.log('RETURN', config);
-      return config;
-    }
-  }
-  return {};
-}
+// import Notification from '~/Uapp/components/Notification';
 
-function getSiteConfig(props) {
-  const config = props.config || {};
-  const hostname = props.req.hostname;
-  let siteConfig = config.site || {};
-  // console.log({hostname, siteConfig});
-  if (config.sites && Array.isArray(config.sites)) {
-    const findedConfig = findConfigByHostname(config.sites, hostname);
-    // console.log({findedConfig});
-    if (findedConfig) {
-      siteConfig = merge({}, siteConfig, findedConfig);
-    }
-  }
-  // console.log({siteConfig});
-  return siteConfig;
-}
+// import sound from '../utils/sound';
+// import MobxUapp from '../MobxUapp';
+// import RenderQueue from './RenderQueue';
 
-// TODO: вынести функции куда нибудь
-function resolveCtxRoutes(routes, ctx) {
-  function resolveCtxRoute(initRoutes) {
-    let routes = initRoutes; // eslint-disable-line
-    if (typeof routes === 'function') {
-      try {
-        routes = routes(ctx) || {};
-      } catch (err) {
-        console.log('resolveCtxRoute err', err, routes);
-        routes = {};
-      }
-    }
-    if (routes.children) {
-      routes.children = routes.children.map(resolveCtxRoute);
-    }
-    return routes;
-  }
-  const resultRoutes = resolveCtxRoute(routes);
-  return resultRoutes;
-}
 
+global.DEV = ({ children, json, pretty = true }) => ( // eslint-disable-line
+  __DEV__ ? (
+    <div style={{ outline: '1px dotted black' }}>
+      {json
+        ? (
+          <pre>
+            {pretty
+              ? JSON.stringify(json).replace(/,"/ig, ',\n"')
+              : JSON.stringify(json)}
+          </pre>
+        )
+        : children}
+    </div>
+  ) : null
+);
 
 export default class Uapp extends Core {
   name = 'Uapp';
   Page = Page;
   Api = Api;
 
+  theme = require('./theme').default;
+
   async init(props = {}) {
-    // this.log.trace('Uapp.init')
     await super.init();
     this.config = this.getConfig(this);
     this.initConfig = cloneDeep(this.config); // подумать в init или в run
@@ -86,36 +57,130 @@ export default class Uapp extends Core {
       ...apiConfig,
       url: apiConfig.url ? apiConfig.url : (
         __CLIENT__ ? '/' : ('http://127.0.0.1:' + this.app.config.port)
-        // TODO: this.app.httpServer
       )
     });
-    // this.log = this.getLogger();
+    if (__SERVER__) {
+      this.api.remoteFetch = this.api.fetch;
+      const uapp = this;
+      this.api.fetch = function (url, options = {}) {
+        const { body = {}, method = 'GET', qs = {} } = options;
+        if (url.substr(0, 4) === 'http') {
+          return this.api.remoteFetch(...arguments);
+        }
+        return uapp.app.resolve({
+          url,
+          method,
+          body: method === 'POST' ? body : qs,
+          headers: {
+            authorization: `Bearer ${this.authToken}`,
+          },
+          token: this.authToken,
+        });
+      };
+    }
+
+    if (__CLIENT__) {
+      console.log('__CLIENT__', __CLIENT__);
+      
+      this.app.historyConfirm = async (message, callback) => {
+        const res = await this.confirm({
+          title: this.t('form.confirm.title'),
+          text: message || this.t('form.confirm.text'),
+          cancel: this.t('form.confirm.cancel'),
+          submit: this.t('form.confirm.submit'),
+        })
+        return callback(res);
+      };
+      this.favico = new Favico({
+        animation: 'none',
+      });
+      this.scroll = new SmoothScroll('a[href*="asdjhashdkjasdkja"]', {
+        speed: 500,
+        offset: -300,
+        easing: 'easeInOutCubic',
+      });
+    }
+    this.initI18();
+  }
+
+  url(str, params = null) {
+    let query = '';
+    if (params) {
+      query = `?${map(params, (val, key) => `${key}=${val}`).join('&')}`;
+    }
+    return `${this.config.url || ''}${str}${query}`;
+  }
+
+
+  setLocale = require('./helpers/setLocale').default;
+  getLocale = require('./helpers/getLocale').default;
+  getI18Params = require('./helpers/getI18Params').default;
+  getI18 = require('./helpers/getI18').default;
+  initI18 = require('./helpers/initI18').default;
+
+  prepareNotificationData = require('./helpers/prepareNotificationData').default;
+  toast = require('./helpers/toast').default.bind(this);
+  
+
+  @autobind
+  onError(err = {}, err2) {
+    this.toast({
+      ...this.prepareNotificationData(err, 'error'),
+      ...this.prepareNotificationData(err2, 'error'),
+    });
+  }
+
+
+  confirm(props) {
+    return this.confirmRef?.open(props);
+  }
+
+  scrollTo(selector) {
+    if (this.scroll) {
+      if (!selector) return null;
+      const field = document.querySelector(selector);
+      if (!field) return null;
+      this.scroll.animateScroll(field);
+    }
+    return null;
+  }
+
+
+  async checkVersion() {
+    const data = await this.api.fetch('/api/healthcheck?info=1');
+    if (__VERSION && data.__VERSION && __VERSION !== data.__VERSION) {
+      window.location.reload(true);
+    }
   }
 
   async run(props = {}) {
     await super.run();
     const context = this.provide();
     this.log.trace('router.context', Object.keys(context))
-    const routes = this.getRoutes();
-    this.routes = resolveCtxRoutes(routes, this);
-    // __DEV__ && console.log('Uapp.routes', this.routes);
+    this.routes = this.getRoutes();
     this.router = new UniversalRouter(this.routes, {
       context,
     });
+
+
+    if (__CLIENT__ && !__DEV__) {
+      setTimeout(() => this.checkVersion(), 120 * 1000);
+    }
   }
 
 
   getConfig(props) {
-    const site = getSiteConfig(props);
-    // console.log({site});
-    return {
-      ...props.config,
-      site,
-    };
+    return props.config;
+    // const site = getSiteConfig(props);
+    // // console.log({site});
+    // return {
+    //   ...props.config,
+    //   site,
+    // };
   }
 
   getRoutes() {
-    return require('./router').default(this)
+    return require('./routes').default;
   }
 
   resetPage() {
@@ -141,6 +206,7 @@ export default class Uapp extends Core {
 
   // return page for req
   async resolve(reqParams = {}) {
+    await this.beforeResolve();
     // console.log('resolve');
     const req = Api.createReq(reqParams);
     __CLIENT__ && __DEV__ && this.log.trace('Uapp.resolve', req.path, req.query);
@@ -161,12 +227,30 @@ export default class Uapp extends Core {
         page: this.page,
       });
     } catch(err) {
-      console.error('app.router.resolve err', err, this.log); //eslint-disable-line
+      console.error('uapp.router.resolve err', err, this.log); //eslint-disable-line
       // this.log.error('resolveErr', err);
     }
+    await this.afterResolve();
     if (__CLIENT__) {
       this.updateClientRoot();
     }
+  }
+
+  async beforeResolve(...args) {
+    if (__CLIENT__) {
+      global.NProgress = NProgress;
+      NProgress.start();
+      NProgress.set(0.4);
+    }
+  }
+  async afterResolve(...args) {
+    if (__CLIENT__) {
+      NProgress.done();
+    }
+  }
+
+  restart() {
+   
   }
 
   provide() {
@@ -176,6 +260,11 @@ export default class Uapp extends Core {
       config: this.config,
       page: this.page,
       api: this.api,
+
+      i18: this.i18,
+      t: this.t,
+      locale: this.locale,
+      theme: this.theme,
     };
   }
 }

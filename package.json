@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.23.0",
+  "version": "1.24.0",
   "engines": {
     "node": ">=6.13.1",
     "npm": ">=3.10.10"
@@ -40,8 +40,11 @@
     "deepmerge": "2.1.1",
     "express": "4.16.3",
     "express-jwt": "5.3.1",
+    "favico.js": "^0.3.10",
     "file-loader": "2.0.0",
     "history": "4.7.2",
+    "i18next": "^13.0.0",
+    "i18next-xhr-backend": "^1.5.1",
     "importcss": "1.1.6",
     "isomorphic-fetch": "2.2.1",
     "js-cookie": "2.2.0",
@@ -53,6 +56,7 @@
     "react-deep-force-update": "2.1.3",
     "react-dom": "16.5.2",
     "react-fastclick": "3.0.2",
+    "smooth-scroll": "^15.0.0",
     "socket.io": "2.1.1",
     "socket.io-as-promised": "1.0.0",
     "universal-router": "6.0.0",
@@ -91,22 +95,19 @@
     "webpack-hot-middleware": "2.24.2",
     "webpack-node-externals": "1.7.2"
   },
-  "scripts": {
+  "__note": {
     "webpack-middleware": "1.5.1",
     "css-loader": "0.28.11",
-    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
-    "release": "npm run babel-build && npm publish --access=public dist",
-    "dev": "DEBUG=1 npm run babel-build -- --watch",
-    "build": "babel tools/run build --release",
-    "start": "node build/server.js",
-    "test": "jest --config=test/config.json --watch",
-    "dev-run": "node tools/run.js start | node ./src/utils/bunyan -o short -l trace",
-    "dev5": "npx babel-node tools/run.js start  | node ./src/utils/bunyan -o short -l trace",
-    "dev4": "npx babel-node tools/run.js",
-    "dev2": "babel-node tools/run.js start  | node ./src/utils/bunyan -o short -l trace",
-    "storybook": "start-storybook -p 9001",
     "__release": "npm publish",
     "__babel-build": "rimraf lib && babel src --out-dir lib --source-maps inline --copy-files && cp {package.json,README.md} lib/",
     "__deploy": "npm run babel-build && npm publish lib"
+  },
+  "scripts": {
+    "release": "rm -rf dist && npm run babel-build && npm publish --access=public dist",
+    "babel-build": "mkdir -p dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
+    "start": "node build/server.js",
+    "dev": "DEBUG=1 npm run babel-build -- --watch",
+    "test": "jest --config=test/config.json --watch",
+    "storybook": "start-storybook -p 9001"
   }
 }

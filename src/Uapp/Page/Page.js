@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/server';
 import Root from '../Root';
 const DEBUG = false;
 
+
 export default class Page {
 
   Root = Root;
@@ -373,13 +374,13 @@ ${this.renderStyle()}
 
   renderFooter() {
     const util = require('util');
-    const debug = __DEV__ && __SERVER__ ? `<!--
+    const SHOW_DEBUG = true; //__DEV__ && __SERVER__
+    const debug =  SHOW_DEBUG ? `<!--
 DEBUG INFO
 
 __SERVER__: ${__SERVER__}
 __DEV__: ${__DEV__}
-__PROD__: ${__PROD__}
-__STAGE__: ${__STAGE__}
+__STAGE: ${__STAGE}
 
 uapp.keys: ${Object.keys(this.uapp)}
 uapp.config:

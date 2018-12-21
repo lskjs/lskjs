@@ -30,7 +30,11 @@ export default class ReactApp extends CoreApp {
     };
     if (this.config.remoteConfig) {
       const realConfig = this.config.client || {};
-      rootState.config = antimergeDeep(realConfig, this.initConfigClient);
+      if (__DEV__) {
+        rootState.config = realConfig;
+      } else {
+        rootState.config = antimergeDeep(realConfig, this.initConfigClient);
+      }
       // console.log('realConfig', realConfig);
       // console.log('this.initConfigClient', this.initConfigClient);
       // console.log('rootState.config', rootState.config);

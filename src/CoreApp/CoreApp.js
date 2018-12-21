@@ -213,7 +213,7 @@ export default class CoreApp extends ExpressApp {
 
   async stop() {
     await super.stop();
-    this.db && this.db.disconnect();
+    this.db && this.db.stop();
   }
 
 }

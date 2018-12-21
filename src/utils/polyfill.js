@@ -1,11 +1,17 @@
-
 const globalOrWindow = typeof window !== 'undefined' ? window : global;
-globalOrWindow.__CLIENT__ = typeof window === 'undefined';
-globalOrWindow.__SERVER__ = !globalOrWindow.__CLIENT__;
-if (typeof __DEV__ === 'undefined') {
+globalOrWindow.__SERVER__ = typeof window === 'undefined';
+globalOrWindow.__CLIENT__ = !globalOrWindow.__SERVER__;
+if (typeof __DEV__ === 'undefined' && !globalOrWindow.__DEV__) {
   globalOrWindow.__DEV__ = false;
 }
-globalOrWindow.__DEV__ = !globalOrWindow.__PROD__;
+// if (!globalOrWindow.__STAGE__ && !globalOrWindow.__STAGE__) {
+//   globalOrWindow.__STAGE__ = 'stage';
+// }
+// console.log({
+//   __SERVER__,
+//   __CLIENT__,
+//   __DEV__
+// });
 
 if (__SERVER__) {
   process.on('unhandledRejection', (err) => {

@@ -3,6 +3,7 @@ import App from './ReactApp';
 import config from './config/client';
 polyfill();
 const ctx = { config };
+
 const app = new App(ctx);
 app.start()
 

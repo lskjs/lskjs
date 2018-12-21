@@ -22,10 +22,18 @@ export default async (ctx, params = {}) => {
     const dbname = (uri || '').split('@')[1]
     ctx.log.trace('db.connect()', dbname, finalOptions);
     mongoose.connect(uri, finalOptions); // , options
-    // console.log(123123123);
     
     return mongoose;
   };
+  mongoose.removeModels = () => {
+    Object.keys(mongoose.connection.models).forEach(key => {
+      delete mongoose.connection.models[key];
+    });
+  };
+  mongoose.stop = () => {
+    mongoose.disconnect();
+    mongoose.removeModels();
+  }
 
 
   mongoose.reconnect = () => {

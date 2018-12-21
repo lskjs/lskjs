@@ -1,12 +1,13 @@
 import toPairs from 'lodash/toPairs';
 import forEach from 'lodash/forEach';
+import isFunction from 'lodash/isFunction';
 import get from 'lodash/get';
 import logger from './logger';
 import Promise from 'bluebird';
 // import config from './config';
 
 function isClass(v) {
-  return typeof v === 'function';// && /^\s*class\s+/.test(v.toString());
+  return isFunction(v);// && /^\s*class\s+/.test(v.toString());
 }
 
 const DEBUG = true;
@@ -53,7 +54,7 @@ export default class Core {
     this.log.trace(`${this.name}.broadcastModules`, method);
     return Promise.map(this.getModulesSequence(), (pack) => {
       // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
-      if (!(pack.module && typeof pack.module[method] === 'function')) return;
+      if (!(pack.module && isFunction(pack.module[method] === 'function'))) return;
       let res
       try {
         this.log.trace(`module ${pack.name}.${method}()`);
@@ -88,44 +89,57 @@ export default class Core {
   run() {
   }
 
+  async startOrRestart() {
+    if (this.startCount) {
+      this.restart()
+    } else {
+      this.start()
+    }
+  }
+
   async restart() {
     this.log.trace(`${this.name}.restart()`);
     await this.stop();
+    if (isFunction(this.onRestart)) {
+      this.log.trace(`${this.name}.onRestart()`);
+      await this.onRestart();
+    }
     await this.start();
   }
-
+  startCount = 0;
   async start() {
     try {
-      if (typeof this.beforeInit === 'function') {
+      if (isFunction(this.beforeInit)) {
         await this.beforeInit();
       }
-      if (typeof this.init === 'function') {
+      if (isFunction(this.init)) {
         await this.init();
       }
-      if (typeof this.initModules === 'function') {
+      if (isFunction(this.initModules)) {
         this.log.trace(`${this.name}.initModules()`);
         await this.initModules();
       }
-      if (typeof this.afterInit === 'function') {
+      if (isFunction(this.afterInit)) {
         this.log.trace(`${this.name}.afterInit()`);
         await this.afterInit();
       }
-      if (typeof this.run === 'function') {
+      if (isFunction(this.run)) {
         this.log.trace(`${this.name}.run()`);
         await this.run();
       }
-      if (typeof this.broadcastModules === 'function') {
+      if (isFunction(this.broadcastModules)) {
         this.log.trace(`${this.name}.broadcastModules('run')`);
         await this.broadcastModules('run');
       }
-      if (typeof this.afterRun === 'function') {
+      if (isFunction(this.afterRun)) {
         this.log.trace(`${this.name}.afterRun()`);
         await this.afterRun();
       }
-      if (typeof this.started === 'function') {
-        this.log.trace(`${this.name}.started()`);
-        await this.started();
+      if (isFunction(this.onStart)) {
+        this.log.trace(`${this.name}.onStart()`);
+        await this.onStart();
       }
+      this.startCount += 1;
     } catch (err) {
       if (this.log && this.log.fatal) {
         this.log.fatal(`${this.name}.start() err`, err);
@@ -143,13 +157,13 @@ export default class Core {
   async stop() {
     this.log.trace(`${this.name}.stop()`);
     try {
-      if (typeof this.broadcastModules === 'function') {
+      if (isFunction(this.broadcastModules)) {
         this.log.trace(`${this.name}.broadcastModules('stop')`);
         await this.broadcastModules('stop');
       }
-      if (typeof this.stopped === 'function') {
-        this.log.trace(`${this.name}.stopped()`);
-        await this.stopped();
+      if (isFunction(this.onStop)) {
+        this.log.trace(`${this.name}.onStop()`);
+        await this.onStop();
       }
     } catch (err) {
       if (this.log && this.log.fatal) {

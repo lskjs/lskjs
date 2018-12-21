@@ -1,6 +1,6 @@
 import TestPage from './TestPage';
 
-export default uapp => ({
+export default {
   path: '(.*)',
   action(params) {
     const { page, uapp } = params;
@@ -12,4 +12,4 @@ export default uapp => ({
       count: 10
     });
   }
-})
+};

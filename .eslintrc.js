@@ -7,7 +7,6 @@ module.exports = {
   globals: {
     __SERVER__: true,
     __CLIENT__: true,
-    __PROD__: true,
     __STAGE__: true,
     __DEV__: true,
     document: true,
