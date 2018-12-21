@@ -12,7 +12,7 @@ import { writeFile, makeDir } from './utils/fs';
 
 // verbose webpack config
 // require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
-const DEBUG = false;
+const DEBUG = true;
 
 function isDir(dir) {
   try {

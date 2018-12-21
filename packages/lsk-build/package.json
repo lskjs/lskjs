@@ -1,11 +1,11 @@
 {
   "name": "@lskjs/build",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "description": "Lego Starter Kit builder & webpack configurator",
   "main": "index.js",
   "scripts": {
-    "release": "npm run babel-build && npm publish --access=public dist",
-    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
+    "release": "rm -rf dist && npm run babel-build && npm publish --access=public dist",
+    "babel-build": "mkdir -p dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
     "dev": "DEBUG=1 npm run babel-build -- --watch"
   },
   "repository": {
