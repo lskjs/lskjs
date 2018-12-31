@@ -52,9 +52,11 @@ export default class Core {
 
   broadcastModules(method) {
     this.log.trace(`${this.name}.broadcastModules`, method);
+    // console.log('this.getModulesSequence()', this.getModulesSequence());
+    
     return Promise.map(this.getModulesSequence(), (pack) => {
       // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
-      if (!(pack.module && isFunction(pack.module[method] === 'function'))) return;
+      if (!(pack.module && isFunction(pack.module[method]))) return;
       let res
       try {
         this.log.trace(`module ${pack.name}.${method}()`);

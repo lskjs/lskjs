@@ -80,8 +80,6 @@ export default class Uapp extends Core {
     }
 
     if (__CLIENT__) {
-      console.log('__CLIENT__', __CLIENT__);
-      
       this.app.historyConfirm = async (message, callback) => {
         const res = await this.confirm({
           title: this.t('form.confirm.title'),
