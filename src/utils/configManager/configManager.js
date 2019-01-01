@@ -3,10 +3,8 @@ import set from 'lodash/set';
 
 import Config from './Config';
 // import getConfigFromEnvJson from './Config/getConfigFromEnvJson';
-console.log('LSK configManager');
 export default {
   init(c) {
-    console.log('LSK configManager Config.init', c);
     return new Config(c);
   },
   extend(c) {

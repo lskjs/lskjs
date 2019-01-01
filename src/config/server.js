@@ -1,5 +1,4 @@
 import config from '../utils/configManager';
-console.log('LSK config/server');
 export default config.init({
   client: require('./client').default,
   remoteConfig: true,
