@@ -39,5 +39,7 @@ export default function(rawData = {}) {
       autoDismiss,
       children: data.children,
     });
+  } else {
+    __DEV__ && console.log('!notificationSystem');
   }
 }

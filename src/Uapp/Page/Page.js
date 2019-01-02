@@ -119,6 +119,9 @@ export default class Page {
       const res = await next();
       return res;
     } catch(err) {
+      if (__CLIENT__ && this.uapp.checkVersion) {
+        this.uapp.checkVersion();
+      }
       return this.error(err);
     }
   }
@@ -277,8 +280,9 @@ export default class Page {
   }
 
   renderFavicon() {
+    // ${!this.state.favicon ? '' : `<link rel="shortcut icon" href="${this.state.favicon}" type="image/x-icon" />`}
     return `\
-${!this.state.favicon ? '' : `<link rel="shortcut icon" href="${this.state.favicon}" type="image/x-icon" />`}
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png" />
 <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png" />
@@ -299,12 +303,12 @@ ${!this.state.favicon ? '' : `<link rel="shortcut icon" href="${this.state.favic
 `;
   }
 
-
   getRootState() {
     return this.uapp.rootState;
   }
 
   renderHead() {
+    const js = this.renderJS();
     return `\
 <title>${this.renderTitle()}</title>
 <meta charset="utf-8">
@@ -315,6 +319,7 @@ ${this.renderFavicon()}
 ${this.renderOGMeta()}
 ${this.renderAssets('css')}
 ${this.renderStyle()}
+${!js ? '' : `<script>${js}</script>`}
 `;
   }
 
@@ -328,13 +333,22 @@ ${this.renderStyle()}
     return (map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
   }
 
-
   renderStyle() {
     const styles = this.uapp.styles || [];
     return `<style id="css">${(styles).join('\n')}</style>`;
   }
 
 
+  renderJS() {
+    if (__CLIENT__) return '';
+    return `
+      window.__VERSION='${__VERSION}';
+      window.__STAGE='${__STAGE}';
+      window.__INSTANCE='${__INSTANCE}';
+      window.__MASTER=${__MASTER} || false;
+      window.__STAGE='${process.env.STAGE || 'develop'}';
+    `;
+  }
 
   renderChunks(type, chunk = 'client') {
     const props = this.uapp;
@@ -374,7 +388,8 @@ ${this.renderStyle()}
 
   renderFooter() {
     const util = require('util');
-    const SHOW_DEBUG = true; //__DEV__ && __SERVER__
+    // const SHOW_DEBUG = true; //__DEV__ && __SERVER__
+    const SHOW_DEBUG = __DEV__ && __SERVER__;
     const debug =  SHOW_DEBUG ? `<!--
 DEBUG INFO
 
