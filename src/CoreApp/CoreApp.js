@@ -28,7 +28,7 @@ export default class CoreApp extends ExpressApp {
     this.log.debug('errors', Object.keys(this.errors));
     this.middlewares = this.getMiddlewares();
     this.log.debug('middlewares', Object.keys(this.middlewares));
-    this.models = this.getModels();
+    this.models = this.getMongooseModels();
     this.log.debug('models', Object.keys(this.models));
     this.resourses = this.getResourses();
     this.log.debug('resourses', Object.keys(this.resourses));
@@ -45,6 +45,15 @@ export default class CoreApp extends ExpressApp {
   }
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line
+  }
+  getMongooseModels() {
+    const models = this.getModels();
+    return mapValues(models, model => {
+      if (model._universal) {
+        return model.getMongooseModel(this.db);
+      }
+      return model;
+    })
   }
   getModels() {
     return require('./models').default(this); // eslint-disable-line

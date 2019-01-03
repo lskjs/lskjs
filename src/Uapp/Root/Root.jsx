@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DevTools from 'mobx-react-devtools';
 import NotificationSystem from 'react-notification-system';
-import { ThemeProvider } from 'emotion-theming';
 import { Provider } from 'mobx-react';
+import { ThemeProvider } from 'emotion-theming';
 
 function isTouchDevice() {
   const el = document.createElement('div');
@@ -13,7 +13,12 @@ function isTouchDevice() {
   return result;
 }
 
+const DEBUG = false;
+
 export default class Root extends Component {
+  Provider = Provider;
+  ThemeProvider = ThemeProvider;
+
   static propTypes = {
     history: PropTypes.object.isRequired,
     insertCss: PropTypes.func.isRequired,
@@ -90,70 +95,87 @@ export default class Root extends Component {
   }
 
   render() {
+    DEBUG && console.log('Root.render');
+    
     const { uapp } = this.props;
+    let { children } = this.props;
+
+    children = (
+      <div>
+        {children}
+        <NotificationSystem
+          ref={(n) => {
+            if (uapp) {
+              uapp.notificationSystem = n;
+            } else {
+              __DEV__ && console.log('LSK/Root !uapp');
+            }
+          }}
+          style={{
+            NotificationItem: { // Override the notification item
+              DefaultStyle: { // Applied to every notification, regardless of the notification level
+                padding: '0px',
+                backgroundColor: '#ffffff',
+                boxShadow: '0 20px 30px 0 rgba(0, 0, 0, 0.2)',
+                border: 'none',
+                borderRadius: 2,
+                overflow: 'hidden',
+              },
+            },
+            Dismiss: {
+              DefaultStyle: {
+                zIndex: '100',
+                color: '#9b9b9b',
+                backgroundColor: 'transparent',
+                fontSize: 18,
+                top: 6,
+                right: 6,
+              },
+            },
+          }}
+        />
+        {DEBUG && (
+          <DevTools
+          position={{
+            bottom: 0,
+            right: 20,
+          }}
+          />
+        )}
+      </div>
+    )
+
+    DEBUG && console.log('Root.render2');
+
+
+    
+    
+    
+    const { Provider } = this;
     const stores = this.props.uapp && this.props.uapp.provide() || {};
     uapp.log.trace('uapp.provide', Object.keys(stores));
-
-    let { children } = this.props;
-    children = [
-      children,
-      <NotificationSystem
-        ref={(n) => {
-          console.log('NotificationSystem ref');
-          
-          if (uapp) {
-            uapp.notificationSystem = n;
-          } else {
-            __DEV__ && console.log('LSK/Root !uapp');
-          }
-        }}
-        style={{
-          NotificationItem: { // Override the notification item
-            DefaultStyle: { // Applied to every notification, regardless of the notification level
-              padding: '0px',
-              backgroundColor: '#ffffff',
-              boxShadow: '0 20px 30px 0 rgba(0, 0, 0, 0.2)',
-              border: 'none',
-              borderRadius: 2,
-              overflow: 'hidden',
-            },
-          },
-          Dismiss: {
-            DefaultStyle: {
-              zIndex: '100',
-              color: '#9b9b9b',
-              backgroundColor: 'transparent',
-              fontSize: 18,
-              top: 6,
-              right: 6,
-            },
-          },
-        }}
-      />,
-      __DEV__ && (
-        <DevTools
-        position={{
-          bottom: 0,
-          right: 20,
-        }}
-        />
-      )
-    ]
-
-    const { emotionTheme } = uapp;
-    
-    if (emotionTheme) {
+    if (stores && Object.keys(stores).length && Provider) {
+      DEBUG && console.log('Root.render3 @@@@');
       children = (
-        <ThemeProvider theme={emotionTheme}>
+        <Provider {...stores}>
+          {children}
+        </Provider>
+      )
+    }
+    DEBUG && console.log('Root.render4');
+
+    const { ThemeProvider } = this;
+    const { theme } = uapp;
+    if (theme && ThemeProvider) {
+      DEBUG && console.log('Root.render2 @@@@');
+      children = (
+        <ThemeProvider theme={theme}>
           {children}
         </ThemeProvider>
       )
     }
+    DEBUG && console.log('Root.render3');
 
-    return (
-      <Provider {...stores}>
-        {children}
-      </Provider>
-    );
+    return children;
   }
 }

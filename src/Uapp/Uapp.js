@@ -5,10 +5,10 @@ import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import autobind from 'core-decorators/lib/autobind';
 import Favico from 'favico.js';
+import NProgress from 'nprogress';
 
 import SmoothScroll from '../utils/UniversalSmoothScroll';
 import Core from '../Core';
-import Page from './Page';
 // import safeRender from './safeRender';
 
 // import { observable, action } from 'mobx';
@@ -42,9 +42,9 @@ global.DEV = ({ children, json, pretty = true }) => ( // eslint-disable-line
 
 export default class Uapp extends Core {
   name = 'Uapp';
-  Page = Page;
   Api = Api;
-
+  Page = require('./Page').default;
+  Root = require('./Root').default;
   theme = require('./theme').default;
 
   async init(props = {}) {
@@ -187,6 +187,7 @@ export default class Uapp extends Core {
       this.page = new this.Page();
     }
     this.page.init({
+      Root: this.Root,
       uapp: this,
     });
     return this.page;

@@ -2,40 +2,26 @@ import React from 'react';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 import map from 'lodash/map';
+import omit from 'lodash/omit';
 import ReactDOM from 'react-dom/server';
-import Root from '../Root';
 const DEBUG = false;
 
-
 export default class Page {
-
-  Root = Root;
-
-  state = {
+  _page = true;
+  defaultState = {
     favicon: '/favicon.ico',
-  }
-
-  defaultProps = {
   }
 
   constructor(...args) {
     this.init(...args);
   }
 
-  async init(props = {}, state = {}) {
-    this._page = true;
-
-    this.props = {
-      ...this.defaultProps,
-      ...props,
-    };
+  async init(props = {}) {
+    Object.assign(this, omit(props, ['state']))
     this.state = {
       ...this.defaultState,
-      ...state,
+      ...props.state,
     };
-
-    this.uapp = this.props.uapp || {};
-
     this.state.titles = [];
     this.disabled = false;
   }
@@ -51,11 +37,6 @@ export default class Page {
       ...state,
     };
   }
-
-  getState() {
-    return this.state;
-  }
-
 
   // useRes(res) {
   //   if (this.state.redirect) {
@@ -248,10 +229,12 @@ export default class Page {
   }
 
   renderRoot() {
-    const Root = this.Root;
+    const children = this.renderComponentWithLayout();
+    if (!this.Root) return children;
+    const { Root } = this;
     return (
       <Root {...this.getRootComponentProps()}>
-        {this.renderComponentWithLayout()}
+        {children}
       </Root>
     );
   }
@@ -311,17 +294,93 @@ export default class Page {
     const js = this.renderJS();
     return `\
 <title>${this.renderTitle()}</title>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="${this.getMeta('description')}"/>
+${this.renderMeta()}
+${this.renderShims()}
 ${this.renderFavicon()}
 ${this.renderOGMeta()}
 ${this.renderAssets('css')}
 ${this.renderStyle()}
 ${!js ? '' : `<script>${js}</script>`}
+${this.renderPreloader()}
 `;
   }
+
+
+  renderMeta() {
+    return `\
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />
+<meta name="description" content="${this.getMeta('description')}"/>
+`;
+  }
+  renderShims() {
+    return `\
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+`;
+  }
+
+  preloader = `
+    <img
+      src="/preloader.gif"
+      alt="Loading"
+      width="120"
+      height="120"
+      class="preloader-gif"
+    />
+  `;
+  renderPreloader() {
+    if (!this.preloader) return '';
+    return `\
+    <style type="text/css">
+      .ua_js_no .preloader {
+        visibility: visible;
+        opacity: 1;
+      }
+      .ua_js_yes .preloader {
+        visibility: hidden;
+        opacity: 0;
+      }
+      .preloader {
+          transition: opacity .8s ease-out, visibility .8s ease-out;
+          height: 100%;
+          min-height: 100%;
+          margin: 0;
+          overflow: hidden;
+          user-select: none;
+          cursor: progress;
+          width: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 10000;
+
+          pointer-events: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgb(255, 255, 255);
+      }
+      .preloader-element {
+        display: flex;
+      }
+      .preloader-gif {
+        user-select: none;
+      }
+    </style>
+    ${!(!__DEV__ && __SERVER__) ? '' : `
+      <div class="preloader">
+        <div class="preloader-element">
+          ${this.preloader}
+        </div>
+      </div>
+    `}
+`;
+  }
+
 
 
   getHtmlClass() {
@@ -408,6 +467,7 @@ ${util.inspect(this.uapp.page.state)}
     return `\
 ${debug}
 ${this.state.footerHtml || ''}
+${this.footer || ''}
 `;
   }
 

@@ -5,6 +5,7 @@ import Promise from 'bluebird';
 
 class UniversalSchema {
   constructor(schema = {}, options = {}) {
+    this._universal = true;
     this.schema = schema;
     this.options = Object.assign({}, this.constructor.defaultOptions, options);
     this.statics = {
