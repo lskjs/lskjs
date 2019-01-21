@@ -109,9 +109,9 @@ export default class ReactApp extends Core {
     }
 
     if (page.state.redirect) {
-      __DEV__ && console.log('Page.redirect', page.state.redirect)
+      __DEV__ && console.log('Page.redirect', page.state.redirect);
       this.history.replace(page.state.redirect);
-      return ;
+      return;
     }
 
     try {
@@ -119,7 +119,7 @@ export default class ReactApp extends Core {
       // if (module.hot) {
       //   this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: root}), this.container, this.postRender);
       // } else {
-        this.appInstance = ReactDOM.render(root, this.container, () => this.postRender());
+      this.appInstance = ReactDOM.render(root, this.container, () => this.postRender());
       // }
     } catch (err) {
       this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
@@ -206,5 +206,4 @@ export default class ReactApp extends Core {
     }
     // this.onLocationChange(this.currentLocation); // @TODO: REMOVE??
   }
-
 }

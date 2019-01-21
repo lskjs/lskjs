@@ -26,7 +26,7 @@ function findConfigByHostname(configs, hostname) {
 
 function getSiteConfig(props) {
   const config = props.config || {};
-  const hostname = props.req.hostname;
+  const { hostname } = props.req;
   let siteConfig = config.site || {};
   // console.log({hostname, siteConfig});
   if (config.sites && Array.isArray(config.sites)) {

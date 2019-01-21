@@ -52,7 +52,7 @@ export default class ExpressApp extends Core {
       } else {
         resolved();
       }
-    })
+    });
   }
 
   useMiddlewares() {}

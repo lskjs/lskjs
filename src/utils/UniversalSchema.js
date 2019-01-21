@@ -36,12 +36,12 @@ class UniversalSchema {
         return this.findByParams2({
           ...params,
           method: 'findOne',
-        })
+        });
       },
       findByParams2(incomeParams) {
         console.log('findByParams2', incomeParams);
         const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
-        let res;;
+        let res;
         if (params.method === 'findOne') {
           res = this.findOne(params.filter);
         } else {
@@ -59,7 +59,7 @@ class UniversalSchema {
 
         if (params.select) {
           console.log('select', params.select);
-          
+
           res = res.select(params.select);
         }
         if (params.populate) {
@@ -80,20 +80,20 @@ class UniversalSchema {
     };
     this.methods = {};
     this.preMethods = {
-      save: async function (next) {
+      async save(next) {
         this.wasNew = this.isNew;
         try {
           this.preSave && await this.preSave();
-        } catch(err) {
+        } catch (err) {
           return next(err);
         }
         return next();
-      }
+      },
     };
     this.postMethods = {
-      save: async function () {
+      async save() {
         this.postSave && this.postSave();
-      }
+      },
     };
     this.indexes = [];
     this.virtuals = [];

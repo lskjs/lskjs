@@ -1,3 +1,4 @@
 {
-  "main": "Uapp"
+  "main": "Uapp.server",
+  "browser": "Uapp.client"
 }

@@ -5,8 +5,8 @@ export default ctx => (
         return next('!isAuth');
       }
       return next();
-    } catch(err) {
-      next(err)
+    } catch (err) {
+      next(err);
     }
   }
 );

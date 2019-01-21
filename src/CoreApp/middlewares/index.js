@@ -9,5 +9,6 @@ export default function () { // eslint-disable-line
     reqData: require('./reqData').default(...arguments), // eslint-disable-line
     reqLog: require('./reqLog').default(...arguments), // eslint-disable-line
     extendReqRes: require('./extendReqRes').default(...arguments), // eslint-disable-line
+    i18: require('./i18').default(...arguments), // eslint-disable-line
   };
 }

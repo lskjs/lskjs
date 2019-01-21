@@ -4,11 +4,11 @@ import i18nextXhrBackend from 'i18next-xhr-backend';
 export default function (...i18Args) {
   return new Promise((resolve, reject) => {
     // console.log('@@@!!!!');
-    
-    
+
+
     const i18 = i18next.createInstance();
     // console.log('@@@ 22');
-    
+
     const app = this;
     if (__CLIENT__) {
       // console.log('@@@ 222222');
@@ -30,7 +30,7 @@ export default function (...i18Args) {
         error(args) {
           app.log.error(args.join(', '));
         },
-      })
+      });
     }
     // console.log('@@@ 444');
     i18.init(this.getI18Params(...i18Args), (err) => {

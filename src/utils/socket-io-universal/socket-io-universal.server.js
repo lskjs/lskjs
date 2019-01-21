@@ -1,7 +1,7 @@
-export default function(url, options) {
+export default function (url, options) {
   return {
-    __noSuchMethod__ : function(id, args) {
+    __noSuchMethod__(id, args) {
       console.log('__noSuchMethod__');
-    }
-  }
+    },
+  };
 }

@@ -10,14 +10,14 @@ export function getInfoResult(obj) {
   const methods = [];
   const fields = [];
   Object
-  .getOwnPropertyNames(obj)
-  .forEach((name) => {
-    if (hasMethod(obj, name, 'function')) {
-      methods.push(name);
-    } else {
-      fields.push(name);
-    }
-  });
+    .getOwnPropertyNames(obj)
+    .forEach((name) => {
+      if (hasMethod(obj, name, 'function')) {
+        methods.push(name);
+      } else {
+        fields.push(name);
+      }
+    });
   return { methods, fields };
 }
 

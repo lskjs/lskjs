@@ -1,11 +1,12 @@
 import polyfill from './utils/polyfill';
 import App from './ReactApp';
 import config from './config/client';
+
 polyfill();
 const ctx = { config };
 
 const app = new App(ctx);
-app.start()
+app.start();
 
 if (module.hot) {
   app.hot = module.hot;

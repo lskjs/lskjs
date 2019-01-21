@@ -96,7 +96,7 @@ export default class Root extends Component {
 
   render() {
     DEBUG && console.log('Root.render');
-    
+
     const { uapp } = this.props;
     let { children } = this.props;
 
@@ -136,21 +136,18 @@ export default class Root extends Component {
         />
         {DEBUG && (
           <DevTools
-          position={{
+            position={{
             bottom: 0,
             right: 20,
           }}
           />
         )}
       </div>
-    )
+    );
 
     DEBUG && console.log('Root.render2');
 
 
-    
-    
-    
     const { Provider } = this;
     const stores = this.props.uapp && this.props.uapp.provide() || {};
     uapp.log.trace('uapp.provide', Object.keys(stores));
@@ -160,7 +157,7 @@ export default class Root extends Component {
         <Provider {...stores}>
           {children}
         </Provider>
-      )
+      );
     }
     DEBUG && console.log('Root.render4');
 
@@ -172,7 +169,7 @@ export default class Root extends Component {
         <ThemeProvider theme={theme}>
           {children}
         </ThemeProvider>
-      )
+      );
     }
     DEBUG && console.log('Root.render3');
 

@@ -1,39 +1,39 @@
 import mongooseLib from 'mongoose';
 
 export default async (ctx, params = {}) => {
-  const { options = {}, uri, debug } = params
+  const { options = {}, uri, debug } = params;
   const defaultOptions = {
     keepAlive: true,
     useNewUrlParser: true,
     // reconnectTries: __DEV__ ? 10000 : 30,
     // reconnectInterval: __DEV__ ? 30000 : 1000, // sets the delay between every retry (milliseconds)
-  }
+  };
   // console.log('options', options);
   // ctx.log.trace('db.init');
   const mongoose = new mongooseLib.Mongoose();
   mongoose.Promise = Promise;
 
   mongoose.run = () => {
-    if (!uri) throw '!db.uri'
+    if (!uri) throw '!db.uri';
     const finalOptions = {
       ...defaultOptions,
-      ...options
-    }
-    const dbname = (uri || '').split('@')[1]
+      ...options,
+    };
+    const dbname = (uri || '').split('@')[1];
     ctx.log.trace('db.connect()', dbname, finalOptions);
     mongoose.connect(uri, finalOptions); // , options
-    
+
     return mongoose;
   };
   mongoose.removeModels = () => {
-    Object.keys(mongoose.connection.models).forEach(key => {
+    Object.keys(mongoose.connection.models).forEach((key) => {
       delete mongoose.connection.models[key];
     });
   };
   mongoose.stop = () => {
     mongoose.disconnect();
     mongoose.removeModels();
-  }
+  };
 
 
   mongoose.reconnect = () => {

@@ -9,7 +9,7 @@ export default {
       uapp.log.trace(params.pathname, params);
     }
     return page.component(TestPage, {
-      count: 10
+      count: 10,
     });
-  }
+  },
 };

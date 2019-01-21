@@ -2,8 +2,10 @@ import toPairs from 'lodash/toPairs';
 import forEach from 'lodash/forEach';
 import isFunction from 'lodash/isFunction';
 import get from 'lodash/get';
-import logger from './logger';
+// import PromiseMap from 'bluebird/js/release/map';
 import Promise from 'bluebird';
+import logger from './logger';
+// import createLoggerMock from './logger/createLoggerMock';
 // import config from './config';
 
 function isClass(v) {
@@ -18,9 +20,9 @@ export default class Core {
     Object.assign(this, params);
   }
 
-  createLoggerMock() {
-    return createLoggerMock(get(this, 'config.log', {}));
-  }
+  // createLoggerMock() {
+  //   return createLoggerMock(get(this, 'config.log', {}));
+  // }
 
   createLogger(params) {
     return logger.createLogger({
@@ -53,17 +55,18 @@ export default class Core {
   broadcastModules(method) {
     this.log.trace(`${this.name}.broadcastModules`, method);
     // console.log('this.getModulesSequence()', this.getModulesSequence());
-    
+
     return Promise.map(this.getModulesSequence(), (pack) => {
       // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
-      if (!(pack.module && isFunction(pack.module[method]))) return;
-      let res
+      if (!(pack.module && isFunction(pack.module[method]))) return null;
+      // let res;
       try {
         this.log.trace(`module ${pack.name}.${method}()`);
         return pack.module[method]();
-      } catch(err) {
+      } catch (err) {
         this.log.error(`module ${pack.name}.${method}() ERROR:`, err);
       }
+      return null;
     });
   }
 
@@ -93,9 +96,9 @@ export default class Core {
 
   async startOrRestart() {
     if (this.startCount) {
-      this.restart()
+      this.restart();
     } else {
-      this.start()
+      this.start();
     }
   }
 
@@ -180,5 +183,4 @@ export default class Core {
     }
     return this;
   }
-
 }

@@ -1,4 +1,5 @@
 import config from '../utils/configManager';
+
 export default config.init({
   client: require('./client').default,
   remoteConfig: true,

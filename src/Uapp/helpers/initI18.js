@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export default async function(...args) {
+export default async function (...args) {
   const { locales } = this.config;
 
   this.i18 = await this.getI18(...args);
@@ -20,6 +20,6 @@ export default async function(...args) {
   this.m = m;
   this.i18.m = m;
   this.t = (...args2) => {
-    return (this.i18.t(...args2) || '').replace(/\\n/ig, '\n');
+    return (this.i18.t(...args2) || args2[0] || '').replace(/\\n/ig, '\n');
   };
 }

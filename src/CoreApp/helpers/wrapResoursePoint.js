@@ -10,11 +10,11 @@ export default (ctx) => {
       const args = [
         [prefix, action].filter(a => !!a).join('/'),
         middleware,
-        resourse[action]
+        resourse[action],
       ].filter(a => !!a);
 
       if (args[0] !== '/') {
-        args[0] = '/' + args[0];
+        args[0] = `/${args[0]}`;
       }
       api.all(...args);
     });

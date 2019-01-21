@@ -34,8 +34,9 @@ global.timing = () => {
 };
 if (!global.Promise) global.Promise = require('bluebird');
 if (!global.fetch) global.fetch = require('isomorphic-fetch');
+
 if (!global._babelPolyfill) {
-	require('@babel/polyfill');
+  require('@babel/polyfill');
 }
 // require('@babel/polyfill');
 // require('event-source-polyfill');
@@ -53,7 +54,8 @@ if (typeof window !== 'undefined') {
 
 Date.prototype.toHumanString = function toHumanString() {
   return [
-    this.toISOString().substr(0, 10).split('-').reverse().join('.'),
+    this.toISOString().substr(0, 10).split('-').reverse()
+      .join('.'),
     this.toISOString().substr(11, 8),
   ].join(' ');
 };

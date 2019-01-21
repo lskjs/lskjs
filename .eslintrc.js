@@ -1,64 +1,132 @@
-// require('babel-core/register');
-// require('@babel/register');
+var path = require('path');
+const __DEV__ = true;
+const user = process.env.USER;
 
-module.exports = {
+const warn = user === 'isuvorov' ? 'off' : 'warn';
+const визуальнаяХуйня = [
+  'jsx-a11y/no-static-element-interactions',
+  'jsx-a11y/click-events-have-key-events',
+  'jsx-a11y/anchor-is-valid',
+  'jsx-a11y/label-has-for',
+  'jsx-a11y/accessible-emoji',
+  'react/jsx-no-target-blank',
+  // 'max-len',
+  'import/no-unresolved',
+  'import/extensions',
+]
+
+const res =  {
   parser: 'babel-eslint',
-  extends: 'airbnb',
-  globals: {
-    __SERVER__: true,
-    __CLIENT__: true,
-    __STAGE__: true,
-    __DEV__: true,
-    document: true,
-    FormData: true,
-    window: true,
-    navigator: true,
-    screen: true,
-    If: true,
-    DEV: true
+  env: {
+    browser: true,
+    es6: true
   },
+  extends: ['eslint:recommended', 'airbnb'],
+  plugins: ['import'],
   parserOptions: {
+    ecmaVersion: 8,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
       modules: true
     }
   },
+  globals: {
+    __SERVER__: true,
+    __CLIENT__: true,
+    __PROD__: true,
+    __DEV__: true,
+
+    __INSTANCE: true,
+    __STAGE: true,
+    __VERSION: true,
+    __MASTER: true,
+
+    document: true,
+    FormData: true,
+    window: true,
+    screen: true,
+    If: true,
+    DEV: true
+  },
   rules: {
-    'no-console': 1,
-    'arrow-body-style': 0,
-    'func-names': 0,
-    'no-param-reassign': 0,
-    'no-underscore-dangle': 0,
-    'global-require': 0, // 1
-    'guard-for-in': 0,
-    'no-restricted-syntax': [2, 'WithStatement'],
-    'no-use-before-define': [2, {
-      functions: false,
-      classes: true
-    }],
-    'no-throw-literal': 0,
-    'new-cap': 0,
-    'one-var': 0,
-    'one-var-declaration-per-line': 0,
-    'max-len': [2, 120],
-    'import/no-extraneous-dependencies': 0,
-    'import/no-webpack-loader-syntax': 0,
-    'react/prop-types': 1,
-    'react/forbid-prop-types': 0,
-    'react/react-in-jsx-scope': 1,
-    'react/jsx-first-prop-new-line': 1,
-    'react/prefer-stateless-function': 0,
-    // isuvorov
-    'class-methods-use-this': 0,
-    'prefer-rest-params': 0,
+    // Lego-Starter-Kit
+    'object-curly-newline': 'off',
+    'no-console': 'error',
+    // 'no-console': __DEV__ ? 'off' : 'error',
+    'arrow-body-style': 'off',
+    'func-names': 'off',
+    'no-param-reassign': 'off', // ??
+    'no-underscore-dangle': 'off',
+    'global-require': 'off', // 1
+    'guard-for-in': 'off',
+    'no-restricted-syntax': ['error', 'WithStatement'],
+    'no-use-before-define': [
+      'error',
+      {
+        functions: false,
+        classes: true,
+      },
+    ],
+    'no-throw-literal': 'off',
+    'new-cap': 'off',
+    'one-var': 'off',
+    'one-var-declaration-per-line': 'off',
+    'max-len': [
+      'error',
+      {
+        code: 120,
+        ignoreComments: true,
+      }
+    ],
+    'import/no-webpack-loader-syntax': 'off',
+    'react/prop-types': warn,
+    'react/forbid-prop-types': 'off',
+    'react/react-in-jsx-scope': warn,
+    'react/jsx-first-prop-new-line': warn,
+    'react/prefer-stateless-function': 'off',
+    'react/jsx-no-undef': [
+      warn,
+      {
+        allowGlobals: warn,
+      },
+    ],
+    // @andruxa
+    // @natavts
+    'function-paren-newline': ['error', 'consistent'],
+    // @isuvorov
+    'no-else-return': 'off',
+    'class-methods-use-this': 'off',
+    'prefer-rest-params': 'off',
+    'no-unused-expressions': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'no-mixed-operators': 'off',
+    'react/jsx-filename-extension': [warn, { extensions: ['.js', '.jsx'] }],
+    'prefer-destructuring': ['error', { object: true, array: false }],
+    'import/no-extraneous-dependencies': 'off',
+    'react/default-props-match-prop-types': warn,
+    'jsx-a11y/alt-text': warn,
+    // yukioru
+    "jsx-a11y/label-has-for": 'off', // Обязательный htmlFor для label https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-for.md
+    // 'no-plusplus': 'off',
+    // давайте не использовать, где можно, есть += 1; если очень нужно использовать (для циклов прописал)
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-continue': 'off',
   },
   settings: {
     'import/resolver': {
-      webpack: {
-        config: require('./build/webpack.config'),
-        // config: require('./tools/webpack.config'),
-        'config-index': 0,
-      }
+      alias: {
+        map: [
+          ['~', path.resolve('./src/')],
+        ],
+        extensions: ['.ts', '.js', '.jsx', '.json']
+      },
     }
   }
 }
+if (user === 'isuvorov') {
+  визуальнаяХуйня.forEach(x => {
+    res.rules[x] = 'off';
+  })
+}
+module.exports = res;

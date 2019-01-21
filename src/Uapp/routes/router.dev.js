@@ -4,9 +4,9 @@ if (__SERVER__ && __DEV__) {
       path: '(.*)',
       action({ page }) {
         return page.loading();
-      }
-    }
-  }
+      },
+    },
+  };
 } else {
-  module.exports = require('./router')
+  module.exports = require('./router');
 }

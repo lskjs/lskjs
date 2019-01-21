@@ -4,14 +4,12 @@ import mapValues from 'lodash/mapValues';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
+import Api from 'apiquery';
+import staticFileMiddleware from 'connect-static-file';
 
 import ExpressApp from '../ExpressApp';
-import Api from 'apiquery';
-
 import createWs from './ws';
 import getMongoose from './getMongoose';
-import getDocsTemplate from './getDocsTemplate';
-import staticFileMiddleware from 'connect-static-file';
 
 
 export default class CoreApp extends ExpressApp {
@@ -37,23 +35,43 @@ export default class CoreApp extends ExpressApp {
     this.statics = this.getResolvedStatics();
     this.log.debug('statics', this.statics);
     this.api = new this.Api({
-      url: 'http://127.0.0.1:' + this.config.port,
+      url: `http://127.0.0.1:${this.config.port}`,
       log: this.log,
     });
-
+    
     this.config.ws && this.initWs();
+    this.initI18();
   }
+
+  url(str, params = null) {
+    let query = '';
+    if (params) {
+      query = `?${map(params, (val, key) => `${key}=${val}`).join('&')}`;
+    }
+    return `${this.config.url}${str}${query}`;
+  }
+
+  emit(...args) {
+    this.modules.events && this.modules.events.emit(...args); // eslint-disable-line
+  }
+  on(...args) {
+    this.modules.events && this.modules.events.on(...args); // eslint-disable-line
+  }
+  once(...args) {
+    this.modules.events && this.modules.events.once(...args); // eslint-disable-line
+  }
+
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line
   }
   getMongooseModels() {
     const models = this.getModels();
-    return mapValues(models, model => {
+    return mapValues(models, (model) => {
       if (model._universal) {
         return model.getMongooseModel(this.db);
       }
       return model;
-    })
+    });
   }
   getModels() {
     return require('./models').default(this); // eslint-disable-line
@@ -88,9 +106,9 @@ export default class CoreApp extends ExpressApp {
     return mapValues(this.getStatics() || {}, p => path.resolve(p));
   }
   useStatics() {
-    forEach(this.statics, (path, url) => {
-      this.app.use(url, express.static(path));
-      this.app.use(url, staticFileMiddleware(path));
+    forEach(this.statics, (_path, url) => {
+      this.app.use(url, express.static(_path));
+      this.app.use(url, staticFileMiddleware(_path));
     });
   }
 
@@ -107,6 +125,7 @@ export default class CoreApp extends ExpressApp {
       this.middlewares.reqData,
       this.middlewares.parseToken,
       this.middlewares.parseUser,
+      this.middlewares.i18,
     ];
   }
 
@@ -114,41 +133,6 @@ export default class CoreApp extends ExpressApp {
     return (req, res, next) => {
       next();
     };
-  }
-
-  getDocsRouter(getDocs, p) {
-    const params = Object.assign({}, p, {
-      docs: `${p.path || '/api'}/docs`,
-      docsJson: `${p.path || '/api'}/docs/json`,
-    });
-    const api = this.asyncRouter();
-    api.all('/', (req, res) => res.json(params));
-    api.all('/docs', (req, res) => res.send(getDocsTemplate(this, params)));
-
-    const ctx = this;
-    const site = ctx.config && ctx.config.client && ctx.config.client.site || { title: 'App' };
-    const url = ctx.config.url;
-    const defaultSwaggerJson = {
-      swagger: '2.0',
-      info: {
-        ...site,
-        title: `${site.title} API`,
-        version: params.v,
-      },
-      host: url.split('://')[1],
-      // host: url + params.path,
-      schemes: [
-        url.split('://')[0],
-      ],
-      basePath: params.path,
-      produces: ['application/json'],
-      paths: {},
-    };
-    api.all('/docs/json', (req, res) => {
-      const swaggerJson = Object.assign({}, defaultSwaggerJson, getDocs(this, params));
-      return res.json(swaggerJson);
-    });
-    return api;
   }
 
   initWs() {
@@ -182,13 +166,10 @@ export default class CoreApp extends ExpressApp {
       next(err);
     });
   }
-  // afterUseMiddlewares() {
-  //   this.log.debug('CoreApp.afterUseMiddlewares DEPRECATED');
-  // }
+
   useCatchErrors() {
     this.middlewares.catchError && this.app.use(this.middlewares.catchError);
   }
-
 
   runModels() {
     const promises = map(this.models, async (model, name) => {
@@ -199,30 +180,31 @@ export default class CoreApp extends ExpressApp {
     return Promise.all(promises);
   }
 
-  // async runDb() {
-  //   if (!this.db) return;
-  //   this.log.trace('CoreApp.runDb');
-  //   try {
-  //     await this.db.connect();
-  //     return true;
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+
+  getDocsRouter = require('./methods/getDocsRouter').default;
+  getDocsTemplate = require('./methods/getDocsTemplate').default;
+
+  resolve = require('./methods/resolve').default;
+  runRedis = require('./methods/runRedis').default;
+
+  getI18 = require('./methods/getI18').default;
+  getI18Params = require('./methods/getI18Params').default;
+  getLocale = require('./methods/getLocale').default;
+  initI18 = require('./methods/initI18').default;
 
 
   async run(...args) {
     await super.run(...args);
     this.log.trace('CoreApp.run');
     // console.log('this.config.db', this.config, this.config?.db);
-    
+
     this.config.db && this.db && await this.db.run();
     this.config.ws && await this.runWs();
+    this.config.redis && await this.runRedis();
   }
 
   async stop() {
     await super.stop();
     this.db && this.db.stop();
   }
-
 }

@@ -1,4 +1,4 @@
-import qs from 'querystring'
+import qs from 'querystring';
 import cookieParser from 'cookie-parser';
 
 export default () => {
@@ -9,20 +9,20 @@ export default () => {
         return null;
       },
       on(event, ...args) {
-        if (event === 'close'){
+        if (event === 'close') {
           event = 'disconnect';
         }
         socket.on(event, ...args);
       },
       __noSuchMethod__: () => {
         console.log('__noSuchMethod____noSuchMethod____noSuchMethod____noSuchMethod__');
-      }
-    }
+      },
+    };
     const { req, res } = socket;
     req.ws = socket;
-    req.header = function(name) {
-      return this.headers[name]
-    }
+    req.header = function (name) {
+      return this.headers[name];
+    };
     const { query } = socket.handshake;
     req.query = query;
     req.data = req.query; // @TODO: подумать про другие источники данных

@@ -1,13 +1,14 @@
 const express = require('express');
+
 const consolevoid = { log() {} };
 // var consolevoid = console
 const exp = {};
-    // #endregion
-    // #region Types and Constants
+// #endregion
+// #region Types and Constants
 let DEFAULT_SENDER = function (req, res, val) { res.send(val); },
   SHORTCUTS_METHODS = ['all', 'get', 'post', 'put', 'delete', 'patch', 'options', 'head'];
-    // #endregion
-    // #region Public
+// #endregion
+// #region Public
 function AsyncRouter(options) {
   let sender = getSender(options),
     innerRouter = express.Router(options),
@@ -39,9 +40,9 @@ function AsyncRouter(options) {
     const args = [];
     for (let _i = 0; _i < arguments.length; _i++) {
       args[_i - 0] = arguments[_i];
-                // if (arguments[_i] && arguments[_i].__asyncRouter) {
-                //   return this.useRouter.apply(this, arguments);
-                // }
+      // if (arguments[_i] && arguments[_i].__asyncRouter) {
+      //   return this.useRouter.apply(this, arguments);
+      // }
     }
 
     innerRouter.use(...args.map((arg) => { return typeof arg === 'function' && !arg.__asyncRouter ? wrapHandlerOrErrorHandler(arg) : arg; }));
@@ -54,8 +55,8 @@ function create(options) {
   return AsyncRouter(options);
 }
 exp.create = create;
-    // #endregion
-    // #region Private Methods
+// #endregion
+// #region Private Methods
 function getSender(options) {
   if (!options) {
     return DEFAULT_SENDER;
@@ -161,8 +162,8 @@ function toCallback(thenable, next, req, res, end) {
   }
   thenable.then(() => {
     consolevoid.log('tc 3 = !!next , !end , !res.headersSent', !!next, !end, !res.headersSent);
-          // consolevoid.log(end);
-          // next()
+    // consolevoid.log(end);
+    // next()
     if (next && !end && !res.headersSent) {
       next();
     }

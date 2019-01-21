@@ -1,7 +1,7 @@
 import React from 'react';
 import Notification from './notify/Notification';
 
-export default function(rawData = {}) {
+export default function (rawData = {}) {
   const data = this.prepareNotificationData(rawData, 'success') || {};
   if (__DEV__) {
     if (data.type === 'error') {

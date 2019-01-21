@@ -7,7 +7,7 @@ import Button2 from '../Button2';
 // @inject('uapp')
 export default class TestPage extends PureComponent {
   state = {
-    count: 0
+    count: 0,
   }
   render() {
     const { uapp } = this.props;
@@ -27,7 +27,8 @@ export default class TestPage extends PureComponent {
         {count}
         <button onClick={() => this.setState({
           count: count + 1,
-        })}>
+        })}
+        >
           ++
         </button>
         ??
@@ -39,6 +40,6 @@ export default class TestPage extends PureComponent {
           __CLIENT__ && '__CLIENT__',
         ].filter(a => a).join(' ')}
       </div>
-    </>
+    </>;
   }
 }

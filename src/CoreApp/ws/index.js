@@ -15,8 +15,8 @@ export default (ctx) => {
     ws.wrapExpressMiddleware = (middleware) => {
       return function (socket, next) {
         middleware(socket.req, socket.res, next);
-      }
-    }
+      };
+    };
 
     ws.middlewares = [
       // expressMiddlewares
@@ -26,13 +26,13 @@ export default (ctx) => {
       'parseUser',
     ].reduce((r, name) => ({
       ...r,
-      [name]: ws.wrapExpressMiddleware(ctx.middlewares[name])
+      [name]: ws.wrapExpressMiddleware(ctx.middlewares[name]),
     }), {
       // socketio middlewares
-      cookieParser:  ws.wrapExpressMiddleware(cookieParser()),
+      cookieParser: ws.wrapExpressMiddleware(cookieParser()),
       socket2req: socket2req(ctx),
       socketAsPromised: socketAsPromised(),
-    })
+    });
 
     ctx.log.debug('WS middlewares', Object.keys(ws.middlewares));
 
@@ -61,22 +61,22 @@ export default (ctx) => {
         ws.atachMiddlwares(namespace);
         // @TODO: may be in middleware
         namespace.originalOn = namespace.on;
-        namespace.on = function(event, callback) {
+        namespace.on = function (event, callback) {
           // console.log('ns.on', event);
-            return namespace.originalOn(event, (socket) => {
-              // socket.on()
-              // ctx.log.debug('WS.' + event, {err});
+          return namespace.originalOn(event, (socket) => {
+            // socket.on()
+            // ctx.log.debug('WS.' + event, {err});
 
-              // console.log('ns.originalOn', event);
-              try {
-                return callback(socket)
-              } catch (err) {
-                ctx.log.error('ws.on error', {err});
-                namespace.emit('err', err.message)
-                return {err}
-              }
-            })
-        }
+            // console.log('ns.originalOn', event);
+            try {
+              return callback(socket);
+            } catch (err) {
+              ctx.log.error('ws.on error', { err });
+              namespace.emit('err', err.message);
+              return { err };
+            }
+          });
+        };
         typeof callback === 'function' && ws.on('connection', callback);
         return namespace;
       };

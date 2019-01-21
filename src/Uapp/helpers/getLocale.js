@@ -17,10 +17,9 @@ function getLocaleStr() {
     if (locale) return locale;
   }
   return locale;
-};
+}
 
 export default function (lng) {
-
   let locale = lng || getLocaleStr.bind(this)();
   if (locale) locale = locale.split('-')[0];
 

@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import omit from 'lodash/omit';
+
 const cache = [
   '',
   ' ',
@@ -57,14 +58,14 @@ function leftPad(str, len, ch) {
 function levelFn(data, status) {
   if (data.method === 'WS') {
     if (status === 'start') {
-      return 'info'
+      return 'info';
     }
     if (status === 'finish') {
-      return 'debug'
+      return 'debug';
     }
   }
   if (status === 'start') {
-    return 'debug'
+    return 'debug';
   }
   if (data.err || data.status >= 500 || data.duration > 10000) { // server internal error or error
     return 'error';
@@ -103,7 +104,7 @@ export default (ctx) => {
     if (req.ws) data.method = 'WS';
     data.host = req.headers.host;
     if (req.ws) {
-      data.url = req.ws.nsp.name + ' ' + JSON.stringify(omit(req.data, ['EIO', 'transport', 'token']))
+      data.url = `${req.ws.nsp.name} ${JSON.stringify(omit(req.data, ['EIO', 'transport', 'token']))}`;
     } else {
       data.url = (req.baseUrl || '') + (req.url || '-');
     }
