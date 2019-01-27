@@ -1,8 +1,6 @@
 export default function () {
   return {
-    ...require('@lskjs/general/stores').default,
-
-
+    // ...require('@lskjs/general/stores').default,
     // Store: require('./Store').default,
     // EntityStore: require('./EntityStore').default,
     // ListStore: require('./ListStore').default,
