@@ -30,6 +30,13 @@ export default class Uapp extends Core {
     return api;
   }
 
+  async initSession() {
+    const { UserStore, AuthStore } = this.stores;
+
+    this.user = new UserStore(this.rootState.user);
+    this.auth = new AuthStore();
+  }
+
   async init() {
     await super.init();
     this.config = this.getConfig();
@@ -37,9 +44,7 @@ export default class Uapp extends Core {
 
 
     this.stores = this.getStores();
-
-    this.user = new this.stores.User(this.rootState.user);
-    this.auth = new this.stores.Auth();
+    await this.initSession();
 
 
     // TODO: прокинуть домен (req) когда сервер

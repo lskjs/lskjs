@@ -4,13 +4,37 @@ import clone from 'lodash/clone';
 import Promise from 'bluebird';
 
 class UniversalSchema {
-  constructor(schema = {}, options = {}) {
-    this._universal = true;
+  _universal = true;
+  constructor(schema = {}, { defaultParams: incomeDefaultParams, ...incomeOptions } = {}) {
+    const defaultParams = {
+      skip: 0,
+      limit: 10,
+      filter: {},
+      // sort: {},
+      select: ['_id'],
+      // populate: [],
+      prepare: null,
+      ...incomeDefaultParams,
+    };
+    const options = {
+      timestamps: true,
+      ...incomeOptions,
+    };
     this.schema = schema;
-    this.options = Object.assign({}, this.constructor.defaultOptions, options);
+    this.options = options;
+    this.defaultParams = defaultParams;
     this.statics = {
+      getParams(incomeParams) {
+        const params = { ...defaultParams, ...incomeParams };
+        if (params.limit > 50) params.limit = 50;
+        return params;
+      },
+      countByParams(incomeParams) {
+        const params = this.getParams(incomeParams);
+        return this.countDocuments(params.filter);
+      },
       findByParams(incomeParams) {
-        const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
+        const params = this.getParams(incomeParams);
         let res = this.find(params.filter);
         if (params.sort) {
           res = res.sort(params.sort);
@@ -21,8 +45,8 @@ class UniversalSchema {
         if (params.limit) {
           res = res.limit(params.limit);
         }
-        if (incomeParams.select) {
-          res = res.select(incomeParams.select);
+        if (params.select) {
+          res = res.select(params.select);
         }
         // if (params.populate) {
         //   res = res.populate(params.populate);
@@ -39,7 +63,6 @@ class UniversalSchema {
         });
       },
       findByParams2(incomeParams) {
-        console.log('findByParams2', incomeParams);
         const params = Object.assign({}, this.constructor.defaultParams, incomeParams);
         let res;
         if (params.method === 'findOne') {
@@ -56,10 +79,7 @@ class UniversalSchema {
         if (params.limit) {
           res = res.limit(params.limit);
         }
-
         if (params.select) {
-          console.log('select', params.select);
-
           res = res.select(params.select);
         }
         if (params.populate) {
@@ -68,7 +88,6 @@ class UniversalSchema {
         return res;
       },
       async prepareOne(obj) {
-        // console.log('@@@ Base prepareOne');
         return obj;
       },
       prepare(obj, ...args) {
@@ -159,15 +178,18 @@ class UniversalSchema {
 
   pre(key, val) {
     this.preMethods[key] = val;
+    return this;
   }
 
   post(key, val) {
     this.postMethods[key] = val;
+    return this;
   }
 
   virtual(...args1) {
     if (args1.length > 1) {
       this.virtuals.push([args1, 'init']);
+      return this;
     }
     return {
       set: (...args2) => {
@@ -180,20 +202,9 @@ class UniversalSchema {
   }
   index(...args) {
     this.indexes.push(args);
+    return this;
   }
 }
 
-UniversalSchema.defaultParams = {
-  filter: {},
-  // sort: {},
-  limit: 20,
-  // populate: [],
-  skip: 0,
-  prepare: null,
-  select: [],
-};
-UniversalSchema.defaultOptions = {
-  timestamps: true,
-};
 
 export default UniversalSchema;
