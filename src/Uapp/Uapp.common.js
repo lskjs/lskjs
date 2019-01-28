@@ -49,7 +49,7 @@ export default class Uapp extends Core {
 
     // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
-    this.initI18();
+    await this.initI18();
   }
 
   getStores() {
