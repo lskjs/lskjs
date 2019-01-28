@@ -45,7 +45,7 @@
     "favico.js": "^0.3.10",
     "file-loader": "2.0.0",
     "history": "4.7.2",
-    "i18next": "^13.1.4",
+    "i18next": "^14.0.1",
     "i18next-xhr-backend": "^1.5.1",
     "importcss": "1.1.6",
     "isomorphic-fetch": "2.2.1",

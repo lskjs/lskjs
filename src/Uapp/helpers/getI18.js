@@ -2,14 +2,15 @@ import i18next from 'i18next';
 import i18nextXhrBackend from 'i18next-xhr-backend';
 
 export default function (...i18Args) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     // console.log('@@@!!!!');
 
 
-    const i18 = i18next.createInstance();
+    const i18 = i18next;
     // console.log('@@@ 22');
 
     const app = this;
+    const i18params = this.getI18Params(...i18Args);
     if (__CLIENT__) {
       // console.log('@@@ 222222');
       i18.use(i18nextXhrBackend);
@@ -32,15 +33,14 @@ export default function (...i18Args) {
         },
       });
     }
-    // console.log('@@@ 444');
-    i18.init(this.getI18Params(...i18Args), (err) => {
-      // console.log('@@@!!!! resolved', err);
-
-      if (err) {
+    return i18
+      .init(i18params)
+      .then(() => {
+        return resolve(i18);
+      })
+      .catch((err) => {
         console.error('i18next.init reject', err);
         return reject(err);
-      }
-      return resolve(i18next);
-    });
+      });
   });
 }
