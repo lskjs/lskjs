@@ -87,6 +87,15 @@ export default class Uapp extends BaseUapp {
   }
 
 
+  async beforeResolve(...args) {
+    await super.beforeResolve(...args);
+    try {
+      global.NProgress = NProgress;
+      NProgress.start();
+    } catch (err) {
+      // console.log('NProgress', err);
+    }
+  }
   async afterResolve(...args) {
     await super.afterResolve(...args);
     // this.page
@@ -95,15 +104,11 @@ export default class Uapp extends BaseUapp {
       document.title = this.page.renderFullTitle();
     }
     this.page.toTop();
+    try {
+      NProgress.done();
+    } catch (err) {
+      // console.log('NProgress', err);
+    }
     // @TODO: to @natavts favicon, meta tags
-  }
-
-  async beforeResolve(...args) {
-    global.NProgress = NProgress;
-    NProgress.start();
-    NProgress.set(0.4);
-  }
-  async afterResolve(...args) {
-    NProgress.done();
   }
 }
