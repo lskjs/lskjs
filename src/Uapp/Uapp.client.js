@@ -100,10 +100,12 @@ export default class Uapp extends BaseUapp {
     await super.afterResolve(...args);
     // this.page
     // document.body.scrollTop = 0; // @TODO: back
-    if (typeof document !== 'undefined') {
-      document.title = this.page.renderFullTitle();
+    if (this.page && this.page.renderFullTitle) {
+      if (typeof document !== 'undefined') {
+        document.title = this.page.renderFullTitle();
+      }
+      this.page.toTop();
     }
-    this.page.toTop();
     try {
       NProgress.done();
     } catch (err) {
