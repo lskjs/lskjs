@@ -58,6 +58,10 @@ function getSchema(ctx, module) {
         type: String,
         index: true,
       }, // Почтовый ящик для которого было спарсено письмо
+      box: {
+        type: String,
+        index: true,
+      }, // ящик из которого было спарсено письмо
     },
     from: { // от кого
       address: { // почта
@@ -96,6 +100,12 @@ function getSchema(ctx, module) {
   schema.virtual('fromUser', {
     ref: 'User', // The model to use
     localField: 'from.userId', // Find people where `localField`
+    foreignField: '_id', // is equal to `foreignField`,
+    justOne: true,
+  });
+  schema.virtual('toUser', {
+    ref: 'User', // The model to use
+    localField: 'to.userId', // Find people where `localField`
     foreignField: '_id', // is equal to `foreignField`,
     justOne: true,
   });
