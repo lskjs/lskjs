@@ -7,6 +7,7 @@ class UniversalSchema {
   _universal = true;
   constructor(schema = {}, { defaultParams: incomeDefaultParams, ...incomeOptions } = {}) {
     const defaultParams = {
+      count: false,
       skip: 0,
       limit: 10,
       filter: {},
