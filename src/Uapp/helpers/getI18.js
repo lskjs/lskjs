@@ -6,7 +6,7 @@ export default function (...i18Args) {
     // console.log('@@@!!!!');
 
 
-    const i18 = i18next;
+    const i18 = i18next.createInstance();
     // console.log('@@@ 22');
 
     const app = this;
