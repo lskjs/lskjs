@@ -46,6 +46,10 @@ export default class ReactApp extends Core {
     this.onLocationChange(this.currentLocation);
   }
 
+  redirect(path) {
+    __DEV__ && console.log('ReactApp.redirect', path);
+    this.history.replace(path);
+  }
 
   @autobind
   async onLocationChange(location, action) {
@@ -109,8 +113,7 @@ export default class ReactApp extends Core {
     }
 
     if (page.state.redirect) {
-      __DEV__ && console.log('Page.redirect', page.state.redirect);
-      this.history.replace(page.state.redirect);
+      this.redirect(page.state.redirect);
       return;
     }
 

@@ -207,7 +207,7 @@ export default class Uapp extends Core {
 
 
   @observable locale = 'ru';
-  @observable t = e => e;
+  // @observable t = e => e;
   state = {
     secret: false,
   };
@@ -288,6 +288,16 @@ export default class Uapp extends Core {
   async beforeResolve(...args) {
   }
   async afterResolve(...args) {
+  }
+
+
+  redirect(path) {
+    __DEV__ && console.log('ReactApp.redirect', path);
+    if (__CLIENT__) {
+      this.app.history.replace(path);
+    } else {
+      __DEV__ && console.log('cant history.redirect because it server', path);
+    }
   }
 
   restart() {
