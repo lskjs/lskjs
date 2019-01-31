@@ -27,6 +27,9 @@ class UniversalSchema {
     this.statics = {
       getParams(incomeParams) {
         const params = { ...defaultParams, ...incomeParams };
+        if (__DEV__ && incomeParams.debug) {
+          delete params.select;
+        }
         if (params.limit > 50) params.limit = 50;
         return params;
       },
