@@ -187,10 +187,10 @@ export default class CoreApp extends ExpressApp {
   resolve = require('./methods/resolve').default;
   runRedis = require('./methods/runRedis').default;
 
-  getI18 = require('./methods/getI18').default;
-  getI18Params = require('./methods/getI18Params').default;
-  getLocale = require('./methods/getLocale').default;
-  initI18 = require('./methods/initI18').default;
+  getI18 = require('../Uapp/i18/getI18').default;
+  getI18Params = require('../Uapp/i18/getI18Params').default;
+  getLocale = require('../Uapp/i18/getLocale').default;
+  initI18 = require('../Uapp/i18/initI18').default;
 
 
   async run(...args) {

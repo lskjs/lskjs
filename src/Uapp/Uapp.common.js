@@ -211,11 +211,11 @@ export default class Uapp extends Core {
   state = {
     secret: false,
   };
-  setLocale = require('./helpers/setLocale').default;
-  getLocale = require('./helpers/getLocale').default;
-  getI18Params = require('./helpers/getI18Params').default;
-  getI18 = require('./helpers/getI18').default;
-  initI18 = require('./helpers/initI18').default;
+  setLocale = require('./i18/setLocale').default;
+  getLocale = require('./i18/getLocale').default;
+  getI18Params = require('./i18/getI18Params').default;
+  getI18 = require('./i18/getI18').default;
+  initI18 = require('./i18/initI18').default;
 
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
   toast = require('./helpers/toast').default.bind(this);
