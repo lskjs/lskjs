@@ -291,6 +291,12 @@ export default class Uapp extends Core {
   }
 
 
+  refresh() {
+    if (__CLIENT__) {
+      window.location.reload();
+    }
+  }
+
   redirect(path) {
     __DEV__ && console.log('ReactApp.redirect', path);
     if (__CLIENT__) {
