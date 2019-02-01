@@ -20,19 +20,14 @@ function getLocaleStr() {
 }
 
 export default function (lng) {
-  let locale;
-  if (__CLIENT__) {
-    locale = lng;
-  } else {
-    locale = lng || getLocaleStr.bind(this)();
-  }
+  let locale = lng || getLocaleStr.bind(this)();
   if (locale) locale = locale.split('-')[0];
 
   let locales;
   if (__CLIENT__) {
-    ({ locales } = this.config.client);
-  } else {
     ({ locales } = this.config);
+  } else {
+    ({ locales } = this.config.client);
   }
   if (!locales.includes(locale)) {
     locale = locales[0];

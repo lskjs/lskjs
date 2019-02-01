@@ -10,9 +10,7 @@ export default async function (...args) {
     }
 
     this.locale = locale;
-    if (__CLIENT__) {
-      moment.locale(this.locale);
-    }
+    moment.locale(this.locale);
     const m = (...momentArgs) => {
       return moment(...momentArgs).locale(this.locale);
     };
