@@ -20,13 +20,22 @@ function getLocaleStr() {
 }
 
 export default function (lng) {
-  let locale = lng || getLocaleStr.bind(this)();
+  let locale;
+  if (__CLIENT__) {
+    locale = lng;
+  } else {
+    locale = lng || getLocaleStr.bind(this)();
+  }
   if (locale) locale = locale.split('-')[0];
 
-  const { locales } = this.config;
+  let locales;
+  if (__CLIENT__) {
+    ({ locales } = this.config.client);
+  } else {
+    ({ locales } = this.config);
+  }
   if (!locales.includes(locale)) {
     locale = locales[0];
   }
-
   return locale;
 }
