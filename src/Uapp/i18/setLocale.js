@@ -5,7 +5,7 @@ export default async function (locale) {
   // uapp.setState({ locale });
   if (locale && this.user && this.user?.locale !== locale) {
     try {
-      const { User: UserStore } = this.stores;
+      const { UserStore } = this.stores;
       await UserStore.update({
         _id: this.user?._id,
         locale,

@@ -6,6 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import autobind from 'core-decorators/lib/autobind';
 import { observable } from 'mobx';
+import I19 from './i18/i19';
 
 import Core from '../Core';
 
@@ -49,6 +50,7 @@ export default class Uapp extends Core {
 
     // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
+    if (this.i19) await this.i19.init();
     await this.initI18();
   }
 
@@ -216,6 +218,7 @@ export default class Uapp extends Core {
   getI18Params = require('./i18/getI18Params').default;
   getI18 = require('./i18/getI18').default;
   initI18 = require('./i18/initI18').default;
+  i19 = new I19(this);
 
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
   toast = require('./helpers/toast').default.bind(this);

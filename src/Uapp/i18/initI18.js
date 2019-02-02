@@ -1,3 +1,4 @@
+
 export default async function (...args) {
   this.i18 = await this.getI18(...args);
   if (__CLIENT__) {
@@ -10,11 +11,12 @@ export default async function (...args) {
     }
 
     this.locale = locale;
-    moment.locale(this.locale);
+
+    this.i18.locale = locale;
+    moment.locale(locale);
     const m = (...momentArgs) => {
-      return moment(...momentArgs).locale(this.locale);
+      return moment(...momentArgs).locale(this.i18.locale);
     };
-    this.m = m;
     this.i18.m = m;
   }
   this.t = (...args2) => {
