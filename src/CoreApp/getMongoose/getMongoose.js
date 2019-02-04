@@ -1,4 +1,5 @@
 import mongooseLib from 'mongoose';
+import Promise from 'bluebird';
 
 export default async (ctx, params = {}) => {
   const { options = {}, uri, debug } = params;
@@ -21,9 +22,11 @@ export default async (ctx, params = {}) => {
     };
     const dbname = (uri || '').split('@')[1];
     ctx.log.trace('db.connect()', dbname, finalOptions);
-    mongoose.connect(uri, finalOptions); // , options
-
-    return mongoose;
+    return new Promise((resolve, reject) => {
+      return mongoose.connect(uri, finalOptions).then(resolve, reject);
+    });
+    // return mongoose.connect(uri, finalOptions); // , options
+    // return mongoose;
   };
   mongoose.removeModels = () => {
     Object.keys(mongoose.connection.models).forEach((key) => {
@@ -31,14 +34,16 @@ export default async (ctx, params = {}) => {
     });
   };
   mongoose.stop = () => {
+    mongoose.connection.close();
     mongoose.disconnect();
     mongoose.removeModels();
+    return Promise.delay(1000);
   };
 
 
   mongoose.reconnect = () => {
     ctx.log.trace('db.reconnect()');
-    mongoose.disconnect();
+    mongoose.stop();
     return mongoose.run();
   };
 

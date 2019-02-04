@@ -96,9 +96,9 @@ export default class Core {
 
   async startOrRestart() {
     if (this.startCount) {
-      this.restart();
+      return this.restart();
     } else {
-      this.start();
+      return this.start();
     }
   }
 

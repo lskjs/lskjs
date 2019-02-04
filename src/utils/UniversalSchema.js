@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import forEach from 'lodash/forEach';
 import clone from 'lodash/clone';
+import pick from 'lodash/pick';
 import Promise from 'bluebird';
 
 class UniversalSchema {
@@ -25,20 +26,23 @@ class UniversalSchema {
     this.options = options;
     this.defaultParams = defaultParams;
     this.statics = {
-      getParams(incomeParams) {
-        const params = { ...defaultParams, ...incomeParams };
+      getParams(incomeParams, systemParams) {
+        const params = { ...defaultParams, ...pick(incomeParams, ['filter', 'sort', 'skip', 'limit', 'select']) };
         if (__DEV__ && incomeParams.debug) {
           delete params.select;
         }
         if (params.limit > 50) params.limit = 50;
-        return params;
+        return {
+          ...params,
+          ...systemParams,
+        };
       },
-      countByParams(incomeParams) {
-        const params = this.getParams(incomeParams);
+      countByParams(incomeParams, systemParams) {
+        const params = this.getParams(incomeParams, systemParams);
         return this.countDocuments(params.filter);
       },
-      findByParams(incomeParams) {
-        const params = this.getParams(incomeParams);
+      findByParams(incomeParams, systemParams) {
+        const params = this.getParams(incomeParams, systemParams);
         let res = this.find(params.filter);
         if (params.sort) {
           res = res.sort(params.sort);
@@ -52,12 +56,15 @@ class UniversalSchema {
         if (params.select) {
           res = res.select(params.select);
         }
+        // if (params.then) {
+        //   res = params.then(res);
+        // }
         // if (params.populate) {
         //   res = res.populate(params.populate);
         // }
-        if (params.prepare) {
-          return this.prepare(res, params.prepare);
-        }
+        // if (params.prepare) {
+        //   return this.prepare(res, params.prepare);
+        // }
         return res;
       },
       findOneByParams(params = {}) {
@@ -94,11 +101,30 @@ class UniversalSchema {
       async prepareOne(obj) {
         return obj;
       },
-      prepare(obj, ...args) {
+      async prepare(obj, params) {
+        // console.log('PREPARE params.toObject', params.toObject);
+        // console.log('params.toObject2@@@', params.toObject2);
+        const toObjectOne = (o) => {
+          // console.log('toObjectOne');
+
+          if (!params.toObject2 || !Object.keys(params.toObject2).length) return o;
+          // console.log('toObjectOne22', !!(o && o.toObject), params.toObject2, o.toObject(params.toObject2), o);
+
+          if (o && o.toObject) return (o.toObject(params.toObject2));
+          return o;
+        };
+
+        let res;
         if (Array.isArray(obj)) {
-          return Promise.map(obj, o => this.prepareOne(o, ...args));
+          res = await Promise.map(obj, o => this.prepareOne(o, params));
+        } else {
+          res = await this.prepareOne(obj, params);
         }
-        return this.prepareOne(obj, ...args);
+
+        if (Array.isArray(res)) {
+          return res.map(toObjectOne);
+        }
+        return toObjectOne(res);
       },
     };
     this.methods = {};
