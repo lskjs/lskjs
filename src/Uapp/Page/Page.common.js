@@ -2,7 +2,7 @@ import React from 'react';
 import merge from 'lodash/merge';
 import Promise from 'bluebird';
 
-const DEBUG = true;
+const DEBUG = __DEV__;
 
 export default class Page {
   _page = true;
@@ -40,7 +40,7 @@ export default class Page {
     DEBUG && console.log('Page.exit');
 
     const { onExit = [] } = this.state;
-    return Promise.all(onExit);
+    return Promise.map(onExit, fn => fn());
   }
 
   async enter() {
