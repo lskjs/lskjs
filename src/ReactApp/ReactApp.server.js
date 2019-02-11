@@ -94,7 +94,8 @@ export default class ReactApp extends CoreApp {
         this.log.error('SSR app.getPage(req) err', err);
         return next(err);
       }
-      if (page.state.redirect) {
+      // console.log('page', page);
+      if (get(page, 'state.redirect')) {
         __DEV__ && console.log('Page.redirect', page.state.redirect);
         return res.redirect(page.state.redirect);
       }

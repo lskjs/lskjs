@@ -1,27 +1,53 @@
 import React from 'react';
 import merge from 'lodash/merge';
-import omit from 'lodash/omit';
+import Promise from 'bluebird';
 
-const DEBUG = false;
+const DEBUG = true;
 
 export default class Page {
   _page = true;
-  defaultState = {
-    favicon: '/favicon.ico',
-  }
+  state = {};
 
   constructor(...args) {
     this.init(...args);
   }
 
   async init(props = {}) {
-    Object.assign(this, omit(props, ['state']));
-    this.state = {
-      ...this.defaultState,
-      ...props.state,
-    };
-    this.state.titles = [];
-    this.disabled = false;
+    Object.assign(this, props);
+  }
+
+  onExit(fn) {
+    DEBUG && console.log('Page.onExit');
+    const { onExit = [] } = this.state;
+    this.setState({
+      onExit: [
+        ...onExit,
+        fn,
+      ],
+    });
+    return this;
+  }
+
+  onError(err) {
+    DEBUG && console.log('Page.onError', err);
+    if (__CLIENT__ && this.uapp.checkVersion) { // / !!!!!!!!!!!!!
+      this.uapp.checkVersion();
+    }
+    return this;
+  }
+
+  async exit() {
+    DEBUG && console.log('Page.exit');
+
+    const { onExit = [] } = this.state;
+    return Promise.all(onExit);
+  }
+
+  async enter() {
+    DEBUG && console.log('Page.enter');
+
+    if (__CLIENT__) document.body.scrollTop = 0;
+    // change title
   }
 
   toTop() {
@@ -30,49 +56,36 @@ export default class Page {
   }
 
   setState(state = {}) {
+    DEBUG && console.log('Page.setState');
+
     this.state = {
       ...this.state,
       ...state,
     };
+    return this;
   }
 
-  // useRes(res) {
+  // getRes(isRenderHtml = false) {
   //   if (this.state.redirect) {
-  //     return res.redirect(this.state.redirect);
+  //     return {
+  //       redirect: this.state.redirect,
+  //     };
   //   }
-  //   return res
-  //     .status(200)
-  //     .send(this.render());
+  //   if (isRenderHtml) {
+  //     return {
+  //       status: 200,
+  //       content: this.renderHtml(),
+  //     };
+  //   }
+  //   return {
+  //     status: 200,
+  //     component: this.renderRoot(),
+  //   };
   // }
 
-  getRes(isRenderHtml = false) {
-    if (this.state.redirect) {
-      return {
-        redirect: this.state.redirect,
-      };
-    }
-    if (isRenderHtml) {
-      return {
-        status: 200,
-        content: this.renderHtml(),
-      };
-    }
-    return {
-      status: 200,
-      component: this.renderRoot(),
-    };
-  }
-
-  enable() {
-    this.disabled = false;
-    return this;
-  }
-  disable() {
-    this.disabled = true;
-    return this;
-  }
 
   error(err) {
+    DEBUG && console.log('Page.error', err);
     if (__DEV__) {
       if (err.message) {
         console.error(err.message);
@@ -81,71 +94,42 @@ export default class Page {
         console.error(err);
       }
     }
+    // return this.setState({ err });
     if (this.disabled) return this;
     return this
-      .layout(this.state.errorLayout)
+      .setState({ layout: this.state.errorLayout })
       .component('div', { children: err });
   }
 
   loading() {
-    return this.component('Loading...');
+    DEBUG && console.log('Page.loading');
+    const Loading = this.state.loading || 'Loading...';
+    return this.component(Loading);
   }
 
 
   async next(next) {
+    DEBUG && console.log('Page.next');
     if (this.disabled) return this;
     try {
       const res = await next();
       return res;
     } catch (err) {
-      if (__CLIENT__ && this.uapp.checkVersion) {
-        this.uapp.checkVersion();
-      }
+      this.onError(err);
       return this.error(err);
     }
   }
 
-  title(...args) {
-    return this.pushTitle(...args);
-  }
-
-
-  pushTitle(...args) {
-    return this.meta({ title: args[0] });
-  }
-
-  composeMeta(metas = []) {
-    return merge({}, ...metas);
-  }
-
-  getMeta(name, def = null) {
-    if (name) return (this.state.meta || {})[name] || def;
-    return this.state.meta || {};
-  }
-
   meta(meta) {
-    if (this.disabled) return this;
+    DEBUG && console.log('Page.meta');
     if (!this.state.metas) this.state.metas = [];
     this.state.metas.push(meta);
-    this.state.meta = this.composeMeta(this.state.metas);
-    return this;
-  }
-
-  errorLayout(errorLayout) {
-    if (this.disabled) return this;
-    this.state.errorLayout = errorLayout;
-    return this;
-  }
-
-  layout(layout) {
-    if (this.disabled) return this;
-    this.state.layout = layout;
+    this.state.meta = merge({}, ...this.state.metas);
     return this;
   }
 
   async component(...args) {
-    if (this.disabled) return this;
-    DEBUG && console.log('args[0]', args[0]);
+    DEBUG && console.log('Page.component', args[0]);
     const result = await args[0];
     if (result.default) {
       args[0] = result.default;
@@ -158,17 +142,12 @@ export default class Page {
     } else {
       this.state.component = args[0];
     }
-    DEBUG && console.log('this.state.component', this.state.component);
-    return this.toTop();
-  }
-
-  content(content) {
-    if (this.disabled) return this;
-    this.state.content = content;
+    DEBUG && console.log('Page.this.state.component', this.state.component);
     return this;
   }
 
   redirect(redirect) {
+    DEBUG && console.log('Page.redirect', redirect);
     if (this.disabled) return this;
     this.state.redirect = redirect;
     return this;
@@ -176,11 +155,12 @@ export default class Page {
 
   // ///////////////////////////////////////////////////////////////////////
   renderLayout(props = {}, layout = null) {
+    DEBUG && console.log('Page.renderLayout');
     // console.log('page.renderLayout', props);
     // if (typeof props.children === 'undefined') {
     //   props.children = 'undefined'
     // }
-    if (!this.state.layout) {
+    if (!this.state.layout && !layout) {
       return props.children;
     }
     let Layout;
@@ -194,6 +174,7 @@ export default class Page {
   }
 
   renderComponent() {
+    DEBUG && console.log('Page.renderComponent');
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
@@ -201,6 +182,7 @@ export default class Page {
   }
 
   renderComponentWithLayout() {
+    DEBUG && console.log('Page.renderComponentWithLayout');
     let children = this.renderComponent();
     // console.log('page.children111', children, typeof children, typeof children === 'undefined');
     if (typeof children === 'undefined') {
@@ -218,6 +200,7 @@ export default class Page {
   }
 
   getRootComponentProps() {
+    DEBUG && console.log('Page.getRootComponentProps');
     return {
       uapp: this.uapp,
       history: this.uapp.history,
@@ -226,6 +209,7 @@ export default class Page {
   }
 
   renderRoot() {
+    DEBUG && console.log('Page.renderRoot');
     const children = this.renderComponentWithLayout();
     if (!this.Root) return children;
     const { Root } = this;

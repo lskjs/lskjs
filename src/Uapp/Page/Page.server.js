@@ -20,11 +20,12 @@ export default class Page extends BasePage {
   }
 
   renderOGMeta() {
+    const { meta = {} } = this.state;
     return `\
-<meta property="og:title" content="${this.getMeta('title')}" />
-<meta property="og:description" content="${this.getMeta('description')}" />
-<meta property="og:url" content="${this.getMeta('url')}" />
-<meta property="og:image" content="${this.getMeta('image')}" />
+${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}
+${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}
+${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}
+${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
 `;
   }
 
@@ -73,11 +74,13 @@ ${this.renderPreloader()}
 
 
   renderMeta() {
+    const { meta = {} } = this.state;
     return `\
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />
-<meta name="description" content="${this.getMeta('description')}"/>
+${meta.description ? `<meta name="description" content="${meta.description}"/>` : ''}
+
 `;
   }
   renderShims() {

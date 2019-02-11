@@ -248,32 +248,35 @@ export default class Uapp extends Core {
     return {};
   }
 
-  resetPage() {
+  async resetPage() {
     // console.log('resetPage');
     if (!this.page) {
       this.page = new this.Page();
+    } else {
+      await this.page.exit();
     }
-    this.page.init({
+    await this.page.init({
       Root: this.Root,
       uapp: this,
+      state: {},
     });
     return this.page;
   }
 
   async resolve(reqParams = {}) {
+    // __DEV__ && console.log('Uapp.resolve');
     await this.beforeResolve();
-    // console.log('resolve');
     const req = Api.createReq(reqParams);
     __CLIENT__ && __DEV__ && this.log.trace('Uapp.resolve', req.path, req.query);
     // this.log.trace('resolve1', req.path, req.query);
     // this.log.trace({r:'resolve2'});
     // this.log.trace('resolve3', 'some');
     // __DEV__ && console.log('Uapp.resolve', req);
-    this.resetPage();
+    await this.resetPage();
     // console.log('page $$$$', this.page);
     // console.log('this.router.resolve');
     try {
-      // console.log('Uapp.router.resolve', );
+      // console.log('Uapp.router.resolve');
       await this.router.resolve({
         pathname: reqParams.path,
         path: reqParams.path,
@@ -282,7 +285,7 @@ export default class Uapp extends Core {
         page: this.page,
       });
     } catch (err) {
-      console.error('uapp.router.resolve err', err, this.log); //eslint-disable-line
+      console.error('uapp.router.resolve err', err); //eslint-disable-line
       // this.log.error('resolveErr', err);
     }
     await this.afterResolve();
@@ -301,9 +304,9 @@ export default class Uapp extends Core {
   }
 
   redirect(path) {
-    __DEV__ && console.log('ReactApp.redirect', path);
+    __DEV__ && console.log('Uapp.redirect', path);
     if (__CLIENT__) {
-      this.app.history.replace(path);
+      this.app.redirect(path);
     } else {
       __DEV__ && console.log('cant history.redirect because it server', path);
     }

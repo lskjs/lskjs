@@ -48,7 +48,9 @@ export default class ReactApp extends Core {
 
   redirect(path) {
     __DEV__ && console.log('ReactApp.redirect', path);
-    this.history.replace(path);
+    setTimeout(() => {
+      this.history.replace(path);
+    }, __DEV__ ? 1000 : 0);
   }
 
   @autobind
