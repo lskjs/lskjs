@@ -42,8 +42,9 @@ export default async function (params = {}) {
     };
     if (Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 9) {
       const x = new http.OutgoingMessage();
-      const s = Object.getOwnPropertySymbols(x);
-      res[s[1]] = h;
+      const symbols = Object.getOwnPropertySymbols(x);
+      const symbol = symbols.find((item => (item.toString() == "Symbol(outHeadersKey)")));
+      res[symbol] = h;
     }
     express.handle(req, res);
   });
