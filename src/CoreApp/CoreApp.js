@@ -10,6 +10,7 @@ import staticFileMiddleware from 'connect-static-file';
 import ExpressApp from '../ExpressApp';
 import createWs from './ws';
 import getMongoose from './getMongoose';
+import I19 from '../Uapp/i19';
 
 
 export default class CoreApp extends ExpressApp {
@@ -38,9 +39,10 @@ export default class CoreApp extends ExpressApp {
       url: `http://127.0.0.1:${this.config.port}`,
       log: this.log,
     });
-    
     this.config.ws && this.initWs();
     this.initI18();
+    this.i19 = new I19(this);
+    await this.i19.init();
   }
 
   url(str, params = null) {
