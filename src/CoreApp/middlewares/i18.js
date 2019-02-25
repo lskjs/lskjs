@@ -1,12 +1,10 @@
-export default ctx => async (req, res, next) => {
+export default app => async (req, res, next) => {
   req.getLocale = () => {
-    const locale = req.data.locale;  //eslint-disable-line
-    if (locale) return locale.split('-')[0];
+    if (req.data.locale) return req.data.locale;
+    if (req.user && req.user.locale) return req.user.locale;
     return null;
   };
-  req.i18 = await ctx.getI18({ lng: req.getLocale() });
-  req.t = (...args) => {
-    return req.i18.t(...args);
-  };
+  req.i18 = await app.i18.getI18({ lng: req.getLocale() });
+  req.t = (...args) => req.i18.t(...args);
   next();
 };

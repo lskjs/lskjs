@@ -2,7 +2,6 @@ import { observable } from 'mobx';
 import i18next from 'i18next';
 import i18nextXhrBackend from 'i18next-xhr-backend';
 import moment from 'moment';
-import Cookies from 'js-cookie';
 
 class I19 {
   @observable locale;
@@ -47,10 +46,7 @@ class I19 {
         ...config,
         ...params,
       };
-      const locale = this.getI18Locale();
-      if (locale) {
-        result.lng = locale;
-      }
+      if (!params.lng) result.lng = this.getI18Locale();
       return result;
     } catch (err) {
       console.error('I19 geti18Params', err);  //eslint-disable-line
@@ -76,12 +72,8 @@ class I19 {
             }
             log.trace(args.join(', '));
           },
-          warn(args) {
-            log.warn(args.join(', '));
-          },
-          error(args) {
-            log.error(args.join(', '));
-          },
+          warn(args) { log.warn(args.join(', ')); },
+          error(args) { log.error(args.join(', ')); },
         });
       }
 
