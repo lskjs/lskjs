@@ -229,6 +229,7 @@ export default class Uapp extends Core {
   i18 = new I19({
     uapp: this,
     config: this.config.i18,
+    onSetLocale: this.onSetLocale,
   });
 
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
@@ -325,6 +326,15 @@ export default class Uapp extends Core {
 
   restart() {
 
+  }
+  @autobind
+  async onSetLocale(locale) {
+    try {
+      console.log(this.user);
+      await this.user.update({ locale });
+    } catch (err) {
+      console.error('Uapp onSetLocale', err);
+    }
   }
 
   provide() {

@@ -45,7 +45,7 @@ class I19 {
   }
   getI18Params(params) {
     try {
-      const { config } = this.config;
+      const { config } = this;
       const result = {
         ...config,
         ...params,
@@ -67,6 +67,7 @@ class I19 {
       if (__CLIENT__ && i18params.backend) {
         i18.use(i18nextXhrBackend);
       }
+      console.log(i18params, 'i18params');
       return i18
         .init(i18params)
         .then(() => {
@@ -81,6 +82,10 @@ class I19 {
   async setLocale(locale) {
     this.i18.changeLanguage(locale);
     this.initObservable();
+    console.log('setLocale', this.onSetLocale);
+    if (this.onSetLocale) {
+      await this.onSetLocale(locale);
+    }
   }
   async loadNamespaces(...args) {
     await this.i18.loadNamespaces(...args);

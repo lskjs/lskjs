@@ -41,7 +41,7 @@ export default class CoreApp extends ExpressApp {
     });
     this.config.ws && this.initWs();
     this.initI18();
-    this.i19 = new I19(this);
+    this.i19 = new I19({ uapp: this, config: this.config.i18 });
     await this.i19.init();
   }
 
