@@ -18,9 +18,7 @@ export default async function (locale) {
     Cookies.set('locale', locale);
   }
   if (this.t('locale') !== locale) {
-    await this.initI18({
-      lng: locale,
-    });
+    await this.i18.setLocale(locale);
     // setTimeout(() => {     //   uapp.history.go(0);    // }, 500);
   }
 }
