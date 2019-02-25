@@ -25,7 +25,7 @@ class I19 {
       return this.i18.t(...args);
     };
   }
-  getDefaultLocale() {
+  getLocale() {
     let locale;
     if (__SERVER__) {
       if (this.uapp?.state?.locale) return this.uapp.state.locale;
@@ -45,9 +45,9 @@ class I19 {
     try {
       const config = this.uapp.config.i18;
       const result = Object.assign({}, config, params);
-      if (!result.lng) {
-        const defaultLocale = this.getDefaultLocale();
-        if (defaultLocale) result.lng = defaultLocale;
+      const locale = this.getLocale();
+      if (locale) {
+        result.lng = locale;
       }
       return result;
     } catch (err) {
