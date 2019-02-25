@@ -28,10 +28,10 @@ class I19 {
   getDefaultLocale() {
     let locale;
     if (__SERVER__) {
-      if (this.state?.locale) return this.state?.locale;
-      if (this.state2?.locale) return this.state2?.locale;
-      if (this.user?.locale) return this.user?.locale;
-      if (this.req?.cookies?.locale) return this.req?.cookies?.locale;
+      if (this.uapp?.state?.locale) return this.uapp.state.locale;
+      if (this.uapp?.state2?.locale) return this.uapp.state2.locale;
+      if (this.uapp?.user?.locale) return this.uapp.user.locale;
+      if (this.uapp?.req?.cookies?.locale) return this.uapp.req.cookies.locale;
     }
     if (__CLIENT__) {
       locale = Cookies.get('locale');
