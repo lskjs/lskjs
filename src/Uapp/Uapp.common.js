@@ -330,6 +330,7 @@ export default class Uapp extends Core {
       user: this.user,
 
       i18: this.i18,
+      i19: this.i19,
       t: this.t,
       locale: this.locale,
       theme: this.theme,

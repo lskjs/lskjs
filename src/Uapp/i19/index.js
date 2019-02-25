@@ -13,13 +13,15 @@ class I19 {
   constructor(uapp) {
     this.uapp = uapp;
   }
-
   async init(params) {
     this.i18 = await this.getI18(params);
+    this.initObservable();
+  }
+  initObservable() {
     const { language: locale } = this.i18;
     this.locale = locale;
     this.m = (...args) => {
-      return moment(...args).locale(locale);
+      return moment(...args).locale(this.locale);
     };
     this.t = (...args) => {
       return this.i18.t(...args);
@@ -89,13 +91,16 @@ class I19 {
       Cookies.set('locale', locale);
     }
     if (this.t('locale') !== locale) {
-      await this.init({
-        lng: locale,
-      });
+      await this.i18.changeLanguage(locale);
+      this.initObservable();
+      // await this.init({
+      //   lng: locale,
+      // });
     }
   }
-  loadNamespaces(...args) {
-    return this.i18.loadNamespaces(...args);
+  async loadNamespaces(...args) {
+    await this.i18.loadNamespaces(...args);
+    this.initObservable();
   }
 }
 
