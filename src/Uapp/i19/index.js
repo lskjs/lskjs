@@ -11,7 +11,11 @@ class I19 {
   @observable i18;
 
   constructor(props = {}) {
+    this.setState(props);
+  }
+  setState(props = {}) {
     Object.assign(this, props);
+    return this;
   }
   async init(params) {
     this.i18 = await this.getI18(params);
@@ -20,6 +24,8 @@ class I19 {
   initObservable() {
     const { language: locale } = this.i18;
     this.locale = locale;
+    console.log('initObservable', { locale });
+
     this.m = (...args) => {
       return moment(...args).locale(this.locale);
     };
@@ -43,9 +49,9 @@ class I19 {
     }
     return 'en';
   }
-  getI18Params(params) {
+  getI18Params(params = {}) {
     try {
-      const { config } = this.config;
+      const { config } = this;
       const result = {
         ...config,
         ...params,

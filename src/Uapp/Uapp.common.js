@@ -18,6 +18,7 @@ export default class Uapp extends Core {
   Page = require('./Page').default;
   Root = require('./Root').default;
   theme = require('./theme').default;
+  i18 = new I19();
 
   getApi() {
     const apiConfig = (this.config && this.config.api || {});
@@ -51,14 +52,21 @@ export default class Uapp extends Core {
     this.config = this.getConfig();
     this.initConfig = cloneDeep(this.config); // подумать в init или в run
 
-
     this.stores = this.getStores();
     await this.initSession();
 
 
     // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
-    if (this.i18) await this.i18.init();
+    if (this.i18) {
+      console.log('this.app.config.i18', this.app.config.i18);
+      
+      await this.i18
+        .setState({
+          config: this.app.config.i18,
+        })
+        .init();
+    }
     // await this.initI18();
   }
 
@@ -226,10 +234,6 @@ export default class Uapp extends Core {
   // getI18Params = require('./i18/getI18Params').default;
   // getI18 = require('./i18/getI18').default;
   // initI18 = require('./i18/initI18').default;
-  i18 = new I19({
-    uapp: this,
-    config: this.config.i18,
-  });
 
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
   toast = require('./helpers/toast').default.bind(this);
