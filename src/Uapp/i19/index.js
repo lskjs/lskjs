@@ -13,32 +13,17 @@ class I19 {
   constructor(uapp) {
     this.uapp = uapp;
   }
-  // setLocale = require('./setLocale').default;
-  // getLocale = require('./getLocale').default;
-  // getI18Params = require('./getI18Params').default;
-  // getI18 = require('./getI18').default;
-  // initI18 = require('./initI18').default;
 
   async init(params) {
-    console.log('i19 init');
     this.i18 = await this.getI18(params);
-    const { locale } = this.i18;
-    // const { locales } = this.config;
-    // const { lng } = params;
-    // let locale = lng ? this.getLocale(lng) : this.getDefaultLocale();
-    // if (!locales.includes(locale)) {
-    //   locale = locales[0];
-    // }
+    const { language: locale } = this.i18;
     this.locale = locale;
-    // this.i18.locale = locale;
-    const m = (...momentArgs) => {
-      return moment(...momentArgs).locale(this.i18.locale);
+    this.m = (...args) => {
+      return moment(...args).locale(locale);
     };
-    this.m = m;
-    this.t = (...tArgs) => {
-      return this.i18.t(...tArgs);
+    this.t = (...args) => {
+      return this.i18.t(...args);
     };
-    console.log('i19 init completed');
   }
   getDefaultLocale() {
     let locale;
@@ -51,47 +36,31 @@ class I19 {
     if (__CLIENT__) {
       locale = Cookies.get('locale');
       if (locale) return locale;
-    }
-    if (__CLIENT__) {
       locale = window.navigator.userLanguage || window.navigator.language;
       if (locale) return locale;
     }
-    return locale;
+    return 'en';
   }
-  async getI18Params(params) {
-    const config = this.config.i18;
-    const result = Object.assign({}, config, params);
-    if (!result.lng) {
-      const defaultLocale = this.getDefaultLocale();
-      if (defaultLocale) result.lng = defaultLocale;
+  getI18Params(params) {
+    try {
+      const config = this.uapp.config.i18;
+      const result = Object.assign({}, config, params);
+      if (!result.lng) {
+        const defaultLocale = this.getDefaultLocale();
+        if (defaultLocale) result.lng = defaultLocale;
+      }
+      return result;
+    } catch (err) {
+      console.error('I19 geti18Params', err);  //eslint-disable-line
+      throw err;
     }
-    console.log(result, 'result');
-    return result;
   }
   async getI18(params) {
     return new Promise(async (resolve, reject) => {
       const i18 = i18next.createInstance();
-      const app = this;
       const i18params = this.getI18Params(params);
       if (__CLIENT__ && i18params.backend) {
         i18.use(i18nextXhrBackend);
-      }
-      if (__DEV__) {
-        i18.use({
-          type: 'logger',
-          log(args) {
-            if (args[0] === 'i18next: initialized') return;
-            if (args[0] === 'i18next::translator: missingKey') {
-              app.log.error(args.join(', '));
-            }
-          },
-          warn(args) {
-            app.log.warn(args.join(', '));
-          },
-          error(args) {
-            app.log.error(args.join(', '));
-          },
-        });
       }
       return i18
         .init(i18params)
@@ -99,7 +68,7 @@ class I19 {
           return resolve(i18);
         })
         .catch((err) => {
-          console.error('i18next.init reject', err);  //eslint-disable-line
+          console.error('getI18 init', err);  //eslint-disable-line
           return reject(err);
         });
     });
@@ -117,13 +86,16 @@ class I19 {
       }
     }
     if (Cookies && locale && Cookies.get('locale') !== locale) {
-      Cookies.set('locale', locale); 
+      Cookies.set('locale', locale);
     }
     if (this.t('locale') !== locale) {
       await this.init({
         lng: locale,
       });
     }
+  }
+  loadNamespaces(...args) {
+    return this.i18.loadNamespaces(...args);
   }
 }
 

@@ -6,7 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import autobind from 'core-decorators/lib/autobind';
 import { observable } from 'mobx';
-import I19 from './i18/i19';
+import I19 from './i19';
 
 import Core from '../Core';
 
