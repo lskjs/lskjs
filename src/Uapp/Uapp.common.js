@@ -33,6 +33,7 @@ export default class Uapp extends Core {
     this.api = this.getApi();
     if (this.i18) {
       await this.i18.setState({
+        log: this.log,
         config: this.config.i18,
         getLocale: this.getLocale,
       }).init();
@@ -225,7 +226,7 @@ export default class Uapp extends Core {
   state = {
     secret: false,
   };
-  
+
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
   toast = require('./helpers/toast').default.bind(this);
 

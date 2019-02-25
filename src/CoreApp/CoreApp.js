@@ -43,7 +43,8 @@ export default class CoreApp extends ExpressApp {
     this.config.ws && this.initWs();
     if (this.i18) {
       await this.i18.setState({
-        config: this.app.config.i18,
+        log: this.log,
+        config: this.config.i18,
         getLocale: this.getLocale,
       }).init();
     }

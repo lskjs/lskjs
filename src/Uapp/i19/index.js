@@ -64,6 +64,26 @@ class I19 {
       if (__CLIENT__ && i18params.backend) {
         i18.use(i18nextXhrBackend);
       }
+      if (this.config.debug) {
+        i18.use({
+          type: 'logger',
+          log(args) {
+            if (args[0] === 'i18next: initialized') return;
+            if (args[0] === 'i18next::translator: missingKey') {
+              this.log.error(args.join(', '));
+              return;
+            }
+            this.log.trace(args.join(', '));
+          },
+          warn(args) {
+            this.log.warn(args.join(', '));
+          },
+          error(args) {
+            this.log.error(args.join(', '));
+          },
+        });
+      }
+
       return i18
         .init(i18params)
         .then(() => {
@@ -78,10 +98,6 @@ class I19 {
   async setLocale(locale) {
     this.i18.changeLanguage(locale);
     this.initObservable();
-    console.log('setLocale', this.onSetLocale);
-    if (this.onSetLocale) {
-      await this.onSetLocale(locale);
-    }
   }
   async loadNamespaces(...args) {
     await this.i18.loadNamespaces(...args);
