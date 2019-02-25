@@ -306,7 +306,8 @@ export default class Uapp extends Core {
 
   refresh() {
     if (__CLIENT__) {
-      window.location.reload();
+      // window.location.reload();
+      this.app.render();
     }
   }
 

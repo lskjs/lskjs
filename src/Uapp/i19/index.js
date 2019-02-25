@@ -65,21 +65,22 @@ class I19 {
         i18.use(i18nextXhrBackend);
       }
       if (this.config.debug) {
+        const { log = console } = this;
         i18.use({
           type: 'logger',
           log(args) {
             if (args[0] === 'i18next: initialized') return;
             if (args[0] === 'i18next::translator: missingKey') {
-              this.log.error(args.join(', '));
+              log.error(args.join(', '));
               return;
             }
-            this.log.trace(args.join(', '));
+            log.trace(args.join(', '));
           },
           warn(args) {
-            this.log.warn(args.join(', '));
+            log.warn(args.join(', '));
           },
           error(args) {
-            this.log.error(args.join(', '));
+            log.error(args.join(', '));
           },
         });
       }

@@ -19,6 +19,10 @@ export default async function (locale) {
   }
   if (this.i18.locale !== locale) {
     await this.i18.setLocale(locale);
-    // setTimeout(() => {     //   uapp.history.go(0);    // }, 500);
+    if (!__DEV__) {
+      setTimeout(() => {
+        this.refresh();
+      }, 200);
+    }
   }
 }
