@@ -40,10 +40,9 @@ export default class CoreApp extends ExpressApp {
       log: this.log,
     });
     this.config.ws && this.initWs();
-    // this.initI18();
-    this.i18 = new I19(this);
-    // await this.i18.init();
-    this.i18.init();
+    this.initI18();
+    this.i19 = new I19(this);
+    await this.i19.init();
   }
 
   url(str, params = null) {
@@ -190,10 +189,10 @@ export default class CoreApp extends ExpressApp {
   resolve = require('./methods/resolve').default;
   runRedis = require('./methods/runRedis').default;
 
-  // getI18 = require('../Uapp/i18/getI18').default;
-  // getI18Params = require('../Uapp/i18/getI18Params').default;
-  // getLocale = require('../Uapp/i18/getLocale').default;
-  // initI18 = require('../Uapp/i18/initI18').default;
+  getI18 = require('../Uapp/i18/getI18').default;
+  getI18Params = require('../Uapp/i18/getI18Params').default;
+  getLocale = require('../Uapp/i18/getLocale').default;
+  initI18 = require('../Uapp/i18/initI18').default;
 
 
   async run(...args) {

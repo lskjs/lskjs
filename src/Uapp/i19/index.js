@@ -28,7 +28,19 @@ class I19 {
     };
   }
   getLocale() {
-
+    let locale;
+    if (__SERVER__) {
+      if (this.uapp?.state?.locale) return this.uapp.state.locale;
+      if (this.uapp?.state2?.locale) return this.uapp.state2.locale;
+      if (this.uapp?.user?.locale) return this.uapp.user.locale;
+      if (this.uapp?.req?.cookies?.locale) return this.uapp.req.cookies.locale;
+    }
+    if (__CLIENT__) {
+      locale = Cookies.get('locale');
+      if (locale) return locale;
+      locale = window.navigator.userLanguage || window.navigator.language;
+      if (locale) return locale;
+    }
     return 'en';
   }
   getI18Params(params) {

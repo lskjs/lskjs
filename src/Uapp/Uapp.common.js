@@ -31,6 +31,14 @@ export default class Uapp extends Core {
     return api;
   }
 
+
+  @autobind
+  t(...args) {
+    // console.log('DEPRECATED uapp.t', args[0]);
+    if (this.i18) return this.i18.t(...args);
+    return '!uapp.i18';
+  }
+
   async initSession() {
     const { UserStore, AuthStore } = this.stores;
 
@@ -50,8 +58,8 @@ export default class Uapp extends Core {
 
     // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
-    if (this.i19) await this.i19.init();
-    await this.initI18();
+    if (this.i18) await this.i18.init();
+    // await this.initI18();
   }
 
   getStores() {
@@ -208,17 +216,20 @@ export default class Uapp extends Core {
   }
 
 
-  @observable locale = 'ru';
+  // @observable locale = 'ru';
   // @observable t = e => e;
   state = {
     secret: false,
   };
-  setLocale = require('./i18/setLocale').default;
-  getLocale = require('./i18/getLocale').default;
-  getI18Params = require('./i18/getI18Params').default;
-  getI18 = require('./i18/getI18').default;
-  initI18 = require('./i18/initI18').default;
-  i19 = new I19(this);
+  // setLocale = require('./i18/setLocale').default;
+  // getLocale = require('./i18/getLocale').default;
+  // getI18Params = require('./i18/getI18Params').default;
+  // getI18 = require('./i18/getI18').default;
+  // initI18 = require('./i18/initI18').default;
+  i18 = new I19({
+    uapp: this,
+    config: this.config.i18,
+  });
 
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
   toast = require('./helpers/toast').default.bind(this);
@@ -331,7 +342,7 @@ export default class Uapp extends Core {
 
       i18: this.i18,
       t: this.t,
-      locale: this.locale,
+      // locale: this.locale,
       theme: this.theme,
     };
   }
