@@ -2,7 +2,7 @@ import React from 'react';
 import merge from 'lodash/merge';
 import Promise from 'bluebird';
 
-const DEBUG = __DEV__;
+const DEBUG = __DEV__ && false;
 
 export default class Page {
   _page = true;
@@ -17,7 +17,7 @@ export default class Page {
   }
 
   onExit(fn) {
-    DEBUG && console.log('Page.onExit');
+    if (DEBUG) console.log('Page.onExit');
     const { onExit = [] } = this.state;
     this.setState({
       onExit: [
@@ -29,7 +29,7 @@ export default class Page {
   }
 
   onError(err) {
-    DEBUG && console.log('Page.onError', err);
+    if (DEBUG) console.log('Page.onError', err);
     if (__CLIENT__ && this.uapp.checkVersion) { // / !!!!!!!!!!!!!
       this.uapp.checkVersion();
     }
@@ -37,14 +37,16 @@ export default class Page {
   }
 
   async exit() {
-    DEBUG && console.log('Page.exit');
-
-    const { onExit = [] } = this.state;
-    return Promise.map(onExit, fn => fn());
+    if (DEBUG) console.log('Page.exit');
+    const { onExit } = this.state;
+    if (onExit && onExit.length) {
+      await Promise.map(onExit, fn => fn());
+      this.state.onExit = [];
+    }
   }
 
   async enter() {
-    DEBUG && console.log('Page.enter');
+    if (DEBUG) console.log('Page.enter');
 
     if (__CLIENT__) document.body.scrollTop = 0;
     // change title
@@ -56,7 +58,7 @@ export default class Page {
   }
 
   setState(state = {}) {
-    DEBUG && console.log('Page.setState');
+    if (DEBUG) console.log('Page.setState');
 
     this.state = {
       ...this.state,
@@ -85,7 +87,7 @@ export default class Page {
 
 
   error(err) {
-    DEBUG && console.log('Page.error', err);
+    if (DEBUG) console.log('Page.error', err);
     if (__DEV__) {
       if (err.message) {
         console.error(err.message);
@@ -102,14 +104,14 @@ export default class Page {
   }
 
   loading() {
-    DEBUG && console.log('Page.loading');
+    if (DEBUG) console.log('Page.loading');
     const Loading = this.state.loading || 'Loading...';
     return this.component(Loading);
   }
 
 
   async next(next) {
-    DEBUG && console.log('Page.next');
+    if (DEBUG) console.log('Page.next');
     if (this.disabled) return this;
     try {
       const res = await next();
@@ -121,7 +123,7 @@ export default class Page {
   }
 
   meta(meta) {
-    DEBUG && console.log('Page.meta');
+    if (DEBUG) console.log('Page.meta');
     if (!this.state.metas) this.state.metas = [];
     this.state.metas.push(meta);
     this.state.meta = merge({}, ...this.state.metas);
@@ -129,7 +131,7 @@ export default class Page {
   }
 
   async component(...args) {
-    DEBUG && console.log('Page.component', args[0]);
+    if (DEBUG) console.log('Page.component', args[0]);
     const result = await args[0];
     if (result.default) {
       args[0] = result.default;
@@ -142,12 +144,12 @@ export default class Page {
     } else {
       this.state.component = args[0];
     }
-    DEBUG && console.log('Page.this.state.component', this.state.component);
+    if (DEBUG) console.log('Page.this.state.component', this.state.component);
     return this;
   }
 
   redirect(redirect) {
-    DEBUG && console.log('Page.redirect', redirect);
+    if (DEBUG) console.log('Page.redirect', redirect);
     if (this.disabled) return this;
     this.state.redirect = redirect;
     return this;
@@ -155,7 +157,7 @@ export default class Page {
 
   // ///////////////////////////////////////////////////////////////////////
   renderLayout(props = {}, layout = null) {
-    DEBUG && console.log('Page.renderLayout');
+    if (DEBUG) console.log('Page.renderLayout');
     // console.log('page.renderLayout', props);
     // if (typeof props.children === 'undefined') {
     //   props.children = 'undefined'
@@ -174,7 +176,7 @@ export default class Page {
   }
 
   renderComponent() {
-    DEBUG && console.log('Page.renderComponent');
+    if (DEBUG) console.log('Page.renderComponent');
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
@@ -182,7 +184,7 @@ export default class Page {
   }
 
   renderComponentWithLayout() {
-    DEBUG && console.log('Page.renderComponentWithLayout');
+    if (DEBUG) console.log('Page.renderComponentWithLayout');
     let children = this.renderComponent();
     // console.log('page.children111', children, typeof children, typeof children === 'undefined');
     if (typeof children === 'undefined') {
@@ -200,7 +202,7 @@ export default class Page {
   }
 
   getRootComponentProps() {
-    DEBUG && console.log('Page.getRootComponentProps');
+    if (DEBUG) console.log('Page.getRootComponentProps');
     return {
       uapp: this.uapp,
       history: this.uapp.history,
@@ -209,7 +211,7 @@ export default class Page {
   }
 
   renderRoot() {
-    DEBUG && console.log('Page.renderRoot');
+    if (DEBUG) console.log('Page.renderRoot');
     const children = this.renderComponentWithLayout();
     if (!this.Root) return children;
     const { Root } = this;

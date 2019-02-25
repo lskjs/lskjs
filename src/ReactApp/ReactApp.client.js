@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import initReactFastClick from 'react-fastclick';
 import qs from 'qs';
 import { createPath } from 'history/PathUtils';
-import { ErrorReporter, deepForceUpdate } from './core/devUtils';
-import { autobind } from 'core-decorators';
-import Uapp from '../Uapp';
+import autobind from 'core-decorators/lib/autobind';
 import merge from 'lodash/merge';
-import get from 'lodash/get';
-import Core from '../Core';
 import createBrowserHistory from 'history/createBrowserHistory';
-import { AppContainer } from 'react-hot-loader';
+import { Redbox, deepForceUpdate } from './core/devUtils';
+import Uapp from '../Uapp';
+import Core from '../Core';
+// import { AppContainer } from 'react-hot-loader';
 
 const DEBUG = __DEV__ && false;
 
@@ -21,6 +20,14 @@ export default class ReactApp extends Core {
   getRootState() {
     // console.log('getRootState');
     return window.__ROOT_STATE__ || {};
+  }
+
+
+  @autobind
+  historyListen(location, action) {
+    DEBUG && console.log('App.historyListen', location, action);
+    if (location.method === 'replaceState') return;
+    this.render();
   }
 
   historyConfirm(message, callback) { // eslint-disable-line
@@ -42,64 +49,24 @@ export default class ReactApp extends Core {
   }
 
   run() {
-    this.history.listen(this.onLocationChange);
-    this.onLocationChange(this.currentLocation);
+    this.history.listen(this.historyListen);
+    this.render();
   }
 
+
   redirect(path) {
-    __DEV__ && console.log('ReactApp.redirect', path);
+    DEBUG && console.log('ReactApp.redirect', path);
     setTimeout(() => {
       this.history.replace(path);
-    }, __DEV__ ? 1000 : 0);
+    }, DEBUG ? 1000 : 0);
   }
 
   @autobind
-  async onLocationChange(location, action) {
+  async render() {
     const req = this.getReq();
-    DEBUG && console.log('onLocationChange 1', location, req);
-    // if (location && location.hash) {
-    //   DEBUG && console.log('!@#!@#!@#');
-    //   return;
-    // }
-    // console.log({
-    //   location,
-    //   req,
-    //   'this.history.location': this.history.location,
-    // });
-    // if (
-    //   location &&
-    //   (location.pathname || '') === (req.pathname || '') &&
-    //   (location.search || '') === (req.search || '')
-    // ) {
-    //   DEBUG && console.log('DONT NEED RELOCATION');
-    //   return ;
-    // }
-    // const replace = get(this.history, 'state.state.replace');
-    // const replace = get(this.history, 'location.method');
-    const method = get(this.history, 'location.method');
-    // console.log({method}, this.history[method], history[method]);
-    // console.log({
-    //   location,
-    //   history: this.history,
-    //   // method
-    // });
-    // action && action !== 'POP' &&
-    if (method && typeof history !== undefined && history[method]) {
-      // console.log('replaceState');
-      // console.log('method', method);
-      // history.pushState(null, '', location.search);
-      // history.replaceState(null, '', location.search);
-      history[method](null, '', location.search);
-      return;
+    if (this.uapp && this.uapp.page && this.uapp.page.exit) {
+      await this.uapp.page.exit();
     }
-    // if (
-    //   location &&
-    //   (location.pathname || '') === (req.pathname || '') &&
-    //   (location.search || '') === (req.search || '')
-    // ) {
-    //   DEBUG && console.log('DONT NEED RELOCATION');
-    //   return ;
-    // }
     let page;
     try {
       page = await this.getPage(req);
@@ -111,6 +78,7 @@ export default class ReactApp extends Core {
         // to find the callsite that caused this warning to fire.
         throw new Error('CSR getPage err (ROUTER ERROR)');
       } catch (x) {}
+      this.renderError(err);
       throw err;
     }
 
@@ -121,25 +89,17 @@ export default class ReactApp extends Core {
 
     try {
       const root = page.renderRoot();
-      // if (module.hot) {
-      //   this.appInstance = ReactDOM.render(React.createElement(AppContainer, {key: Math.random(), warnings: false, children: root}), this.container, this.postRender);
-      // } else {
-      this.appInstance = ReactDOM.render(root, this.container, () => this.postRender());
-      // }
+      this.appInstance = ReactDOM.render(root, this.container, this.postRender);
     } catch (err) {
       this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
-      document.title = `Error: ${err.message}`;
-      // Display the error in full-screen for development mode
-      // if (__DEV__) {
-      //   this.appInstance = null;
-      //   document.title = `Error: ${error.message}`;
-      //   ReactDOM.render(<ErrorReporter error={error} />, this.container);
-      //   return;
-      // }
-      throw err;
-      // Avoid broken navigation in production mode by a full page reload on error
-      // window.location.reload();
+      this.renderError(err);
     }
+  }
+
+  renderError(error = {}) {
+    document.title = `Error: ${error.message}`;
+    const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
+    this.appInstance = ReactDOM.render(root, this.container, this.postRender);
   }
 
   getReq() {
@@ -183,32 +143,31 @@ export default class ReactApp extends Core {
 
   @autobind
   postRender() {
-    // console.log('postRender', this);
-    if (!this.rootState.renderCount) {
-      const elem = document.getElementById('css');
-      if (elem) elem.parentNode.removeChild(elem);
-      return;
-    }
-    if (!__DEV__ && window.ga) {
+    // if (!this.rootState.renderCount) {
+    //   const elem = document.getElementById('css');
+    //   if (elem) elem.parentNode.removeChild(elem);
+    //   return;
+    // }
+    if (!DEBUG && window.ga) {
       window.ga('send', 'pageview', createPath(window.location));
     }
     this.rootState.renderCount = (this.rootState.renderCount || 0) + 1;
   }
 
   hmrInit() {
+    DEBUG && console.log('App.hmrInit');
   }
 
   hmrUpdate() {
+    DEBUG && console.log('App.hmrUpdate');
     if (this.appInstance) {
       try {
         deepForceUpdate(this.appInstance);
       } catch (err) {
         this.log.error('hmrUpdate deepForceUpdate err', err);
-        // this.appInstance = null;
-        // document.title = `Hot Update Error: ${error.message}`;
-        // ReactDOM.render(<ErrorReporter error={error} />, this.container);
+        this.renderError(err);
       }
     }
-    // this.onLocationChange(this.currentLocation); // @TODO: REMOVE??
+    // this.render(this.currentLocation); // @TODO: REMOVE??
   }
 }
