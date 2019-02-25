@@ -1,4 +1,4 @@
-
+const http = require("http");
 
 export default async function (params = {}) {
   const express = this.express || this.app;
@@ -11,14 +11,15 @@ export default async function (params = {}) {
   } = params;
 
   const remoteAddress = '127.0.0.1';
+  const h = {
+    host,
+    ...headers,
+  };
   const req = {
     ...params,
     url,
     method: 'GET',
-    headers: {
-      host,
-      ...headers,
-    },
+    headers: h,
     connection: {
       remoteAddress,
     },
@@ -39,6 +40,12 @@ export default async function (params = {}) {
         // console.log('res.setHeader', args);
       },
     };
+    if (Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 9) {
+      const x = new http.OutgoingMessage();
+      const symbols = Object.getOwnPropertySymbols(x);
+      const symbol = symbols.find((item => (item.toString() == "Symbol(outHeadersKey)")));
+      res[symbol] = h;
+    }
     express.handle(req, res);
   });
 
