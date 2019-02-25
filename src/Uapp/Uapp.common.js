@@ -20,6 +20,25 @@ export default class Uapp extends Core {
   theme = require('./theme').default;
   i18 = new I19();
 
+  async init() {
+    await super.init();
+    this.config = this.getConfig();
+    this.initConfig = cloneDeep(this.config); // подумать в init или в run
+
+    this.stores = this.getStores();
+    await this.initSession();
+
+
+    // TODO: прокинуть домен (req) когда сервер
+    this.api = this.getApi();
+    if (this.i18) {
+      await this.i18.setState({
+        config: this.config.i18,
+        getLocale: this.getLocale,
+      }).init();
+    }
+  }
+
   getApi() {
     const apiConfig = (this.config && this.config.api || {});
 
@@ -32,6 +51,8 @@ export default class Uapp extends Core {
     return api;
   }
 
+  getLocale = require('./i18/getLocale').default
+  setLocale = require('./i18/setLocale').default
 
   @autobind
   t(...args) {
@@ -45,29 +66,6 @@ export default class Uapp extends Core {
 
     this.user = new UserStore(this.rootState.user);
     this.auth = new AuthStore();
-  }
-
-  async init() {
-    await super.init();
-    this.config = this.getConfig();
-    this.initConfig = cloneDeep(this.config); // подумать в init или в run
-
-    this.stores = this.getStores();
-    await this.initSession();
-
-
-    // TODO: прокинуть домен (req) когда сервер
-    this.api = this.getApi();
-    if (this.i18) {
-      console.log('this.app.config.i18', this.app.config.i18);
-      
-      await this.i18
-        .setState({
-          config: this.app.config.i18,
-        })
-        .init();
-    }
-    // await this.initI18();
   }
 
   getStores() {
@@ -224,17 +222,10 @@ export default class Uapp extends Core {
   }
 
 
-  // @observable locale = 'ru';
-  // @observable t = e => e;
   state = {
     secret: false,
   };
-  // setLocale = require('./i18/setLocale').default;
-  // getLocale = require('./i18/getLocale').default;
-  // getI18Params = require('./i18/getI18Params').default;
-  // getI18 = require('./i18/getI18').default;
-  // initI18 = require('./i18/initI18').default;
-
+  
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
   toast = require('./helpers/toast').default.bind(this);
 

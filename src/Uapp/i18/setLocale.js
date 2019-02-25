@@ -17,7 +17,7 @@ export default async function (locale) {
   if (Cookies && locale && Cookies.get('locale') !== locale) {
     Cookies.set('locale', locale);
   }
-  if (this.t('locale') !== locale) {
+  if (this.i18.locale !== locale) {
     await this.i18.setLocale(locale);
     // setTimeout(() => {     //   uapp.history.go(0);    // }, 500);
   }

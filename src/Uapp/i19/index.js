@@ -19,13 +19,12 @@ class I19 {
   }
   async init(params) {
     this.i18 = await this.getI18(params);
+    if (this.config.locales) this.locales = this.config.locales;
     this.initObservable();
   }
   initObservable() {
     const { language: locale } = this.i18;
     this.locale = locale;
-    console.log('initObservable', { locale });
-
     this.m = (...args) => {
       return moment(...args).locale(this.locale);
     };
@@ -33,21 +32,13 @@ class I19 {
       return this.i18.t(...args);
     };
   }
-  getLocale() {
+  getI18Locale() {
     let locale;
-    if (__SERVER__) {
-      if (this.uapp?.state?.locale) return this.uapp.state.locale;
-      if (this.uapp?.state2?.locale) return this.uapp.state2.locale;
-      if (this.uapp?.user?.locale) return this.uapp.user.locale;
-      if (this.uapp?.req?.cookies?.locale) return this.uapp.req.cookies.locale;
-    }
-    if (__CLIENT__) {
-      locale = Cookies.get('locale');
-      if (locale) return locale;
-      locale = window.navigator.userLanguage || window.navigator.language;
-      if (locale) return locale;
-    }
-    return 'en';
+    if (this.getLocale) locale = this.getLocale({ uapp: this });
+    const { locales = [] } = this.config;
+    if (!locales.includes(locale)) locale = null;
+    if (locale) return locale;
+    return this.config.lng || 'en';
   }
   getI18Params(params = {}) {
     try {
@@ -56,7 +47,7 @@ class I19 {
         ...config,
         ...params,
       };
-      const locale = this.getLocale();
+      const locale = this.getI18Locale();
       if (locale) {
         result.lng = locale;
       }
@@ -87,6 +78,10 @@ class I19 {
   async setLocale(locale) {
     this.i18.changeLanguage(locale);
     this.initObservable();
+    console.log('setLocale', this.onSetLocale);
+    if (this.onSetLocale) {
+      await this.onSetLocale(locale);
+    }
   }
   async loadNamespaces(...args) {
     await this.i18.loadNamespaces(...args);

@@ -1,36 +1,21 @@
 import Cookies from 'js-cookie';
 
-function getLocaleStr() {
-  let locale;
-  if (__SERVER__) {
-    if (this.state?.locale) return this.state?.locale;
-    if (this.state2?.locale) return this.state2?.locale;
-    if (this.user?.locale) return this.user?.locale;
-    if (this.req?.cookies?.locale) return this.req?.cookies?.locale;
-  }
-  if (__CLIENT__) {
-    locale = Cookies.get('locale');
-    if (locale) return locale;
-  }
-  if (__CLIENT__) {
-    locale = window.navigator.userLanguage || window.navigator.language;
-    if (locale) return locale;
-  }
-  return locale;
+function getWindowLocale() {
+  const locale = window.navigator.userLanguage || window.navigator.language;
+  if (!locale) return null;
+  return locale.split('-')[0];
 }
 
-export default function (lng) {
-  let locale = lng || getLocaleStr.bind(this)();
-  if (locale) locale = locale.split('-')[0];
-
-  let locales;
+function getLocale({ uapp }) {
+  if (__SERVER__ && uapp) {
+    if (uapp.state?.locale) return uapp.state?.locale;
+    if (uapp.state2?.locale) return uapp.state2?.locale;
+    if (uapp.user?.locale) return uapp.user?.locale;
+    if (uapp.req?.cookies?.locale) return uapp.req?.cookies?.locale;
+  }
   if (__CLIENT__) {
-    ({ locales } = this.config);
-  } else {
-    ({ locales } = this.config.client);
+    if (Cookies.get('locale')) return Cookies.get('locale');
+    if (getWindowLocale()) return getWindowLocale();
   }
-  if (!locales.includes(locale)) {
-    locale = locales[0];
-  }
-  return locale;
+  return null;
 }

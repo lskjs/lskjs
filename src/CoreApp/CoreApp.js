@@ -15,6 +15,7 @@ import I19 from '../Uapp/i19';
 
 export default class CoreApp extends ExpressApp {
   Api = Api;
+  i18 = new I19();
   async init() {
     super.init(...arguments);
     this.log.trace('CoreApp init');
@@ -40,12 +41,14 @@ export default class CoreApp extends ExpressApp {
       log: this.log,
     });
     this.config.ws && this.initWs();
-    // this.initI18();
-    this.i18 = new I19({
-      config: this.config.i18,
-    });
-    await this.i18.init();
+    if (this.i18) {
+      await this.i18.setState({
+        config: this.app.config.i18,
+        getLocale: this.getLocale,
+      }).init();
+    }
   }
+
 
   url(str, params = null) {
     let query = '';
