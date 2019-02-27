@@ -7,38 +7,31 @@
     "start": "node index.js",
     "dev123": "nodemon --exec babel-node index.js",
     "build": "scripts/npm-build.sh",
-    "watch": "rm -rf build && DEBUG=1 DIST=build npm run build -- --watch",
-    "release": "rm -rf release && DIST=release npm run build && npm publish --access=public release",
-
-    "build-packs": "lerna exec --scope '@storybook/*' -- \\$LERNA_ROOT_PATH/scripts/build-pack.sh \\$LERNA_ROOT_PATH/packs",
-
+    "watch": "lerna exec -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh",
+    "release": "lerna exec -- \\$LERNA_ROOT_PATH/scripts/pack-release.sh",
+    "build-packs": "lerna exec --scope '@lskjs/*' -- \\$LERNA_ROOT_PATH/scripts/build-pack.sh \\$LERNA_ROOT_PATH/packs",
+    "ls": "lerna exec --scope '@lskjs/*' -- \\$LERNA_ROOT_PATH/scripts/ls.sh",
     "dev": "concurrently --kill-others \"yarn dev:ts\" \"yarn dev:js\"",
     "dev:js": "lerna exec --parallel -- cross-env-shell node \\$LERNA_ROOT_PATH/scripts/watch-js.js",
     "dev:ts": "lerna exec --parallel -- cross-env-shell node \\$LERNA_ROOT_PATH/scripts/watch-ts.js",
-
-
     "lint:ci": "yarn lint:js --format ./node_modules/eslint-teamcity/index.js . && yarn lint:ts **/*.ts && yarn lint:md .",
     "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json,.html --report-unused-disable-directives",
     "lint:md": "remark -q",
     "lint:ts": "tslint -p . -c tslint.json -t stylish",
-
     "publish:latest": "lerna publish --exact --concurrency 1 --force-publish",
     "publish:next": "npm run publish:latest -- --npm-tag=next",
     "publish:debug": "npm run publish:latest -- --npm-tag=debug --no-push",
-
     "test": "node ./scripts/test.js",
     "test-latest-cra": "yarn --prefix --cwd lib/cli run test-latest-cra",
     "test:cli": "npm --prefix lib/cli run test"
   },
   "author": "isuvorov",
   "license": "ISC",
-
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint-staged"
     }
   },
-
   "devDependencies": {
     "lint-staged": "^8.1.4",
     "@babel/cli": "^7.2.3",
@@ -53,12 +46,8 @@
     "eslint-plugin-react": "^7.12.4",
     "lerna": "^3.13.1",
     "nodemon": "^1.18.10",
-
-    "cross-env": "^5.2.0",
-    "lint-staged": "^8.1.4"
-    
+    "cross-env": "^5.2.0"
   },
-
   "lint-staged": {
     "linters": {
       "*.js": [
@@ -75,10 +64,7 @@
       ]
     }
   },
-  "dependencies": {
-
-  },
-
+  "dependencies": {},
   "devDependencies2": {
     "@babel/cli": "7.0.0-beta.42",
     "@babel/core": "7.0.0-beta.42",
