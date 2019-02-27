@@ -1,0 +1,20 @@
+{
+  "name": "@lskjs/permit",
+  "version": "0.0.1",
+  "author": "isuvorov",
+  "license": "MIT",
+  "dependencies": {
+    "apiquery": "0.1.24",
+    "bluebird": "3.5.1",
+    "node-telegram-bot-api": "0.30.0",
+    "passport": "0.4.0",
+    "passport-facebook": "2.1.1",
+    "passport-telegram-official": "1.0.3",
+    "passport-vkontakte": "0.3.2",
+    "passport-youtube-v3": "2.1.0",
+    "react-bootstrap-card": "0.2.1"
+  },
+  "peerDependencies": {
+    "react-icons2": "*"
+  }
+}
