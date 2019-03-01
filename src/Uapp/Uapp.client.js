@@ -61,17 +61,6 @@ export default class Uapp extends BaseUapp {
     return this.confirmRef?.open(props);
   }
 
-  scrollTo(selector) {
-    if (this.scroll) {
-      if (!selector) return null;
-      const field = document.querySelector(selector);
-      if (!field) return null;
-      this.scroll.animateScroll(field);
-    }
-    return null;
-  }
-
-
   async checkVersion() {
     const data = await this.api.fetch('/api/healthcheck?info=1');
     if (__VERSION && data.__VERSION && __VERSION !== data.__VERSION) {
@@ -98,13 +87,9 @@ export default class Uapp extends BaseUapp {
   }
   async afterResolve(...args) {
     await super.afterResolve(...args);
-    // this.page
-    // document.body.scrollTop = 0; // @TODO: back
-    if (this.page && this.page.renderFullTitle) {
-      if (typeof document !== 'undefined') {
-        document.title = this.page.renderFullTitle();
-      }
-      this.page.toTop();
+    setTimeout(this.scrollTo); // @TODO: back
+    if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
+      document.title = this.page.renderTitle();
     }
     try {
       NProgress.done();

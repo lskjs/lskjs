@@ -6,7 +6,8 @@ function getWindowLocale() {
   return locale.split('-')[0];
 }
 
-export default function getLocale({ uapp }) {
+export default function getLocale() { // { uapp } = {}
+  const uapp = this;
   if (__SERVER__ && uapp) {
     if (uapp.state?.locale) return uapp.state?.locale;
     if (uapp.state2?.locale) return uapp.state2?.locale;

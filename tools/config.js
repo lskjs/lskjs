@@ -1,5 +1,6 @@
-import fs from 'fs'
-const dirname = __dirname + '/..'
+import fs from 'fs';
+
+const dirname = `${__dirname}/..`;
 const ctx = {
   env: process.env.NODE_ENV,
   debug: !process.argv.includes('--release'),
@@ -17,8 +18,8 @@ const ctx = {
   alias: {
     // 'lego-starter-kit': fs.realpathSync(dirname + '/src'),
     // '@lskjs/general': fs.realpathSync(dirname + '/node_modules/@lskjs/general/dist'),
-    react: fs.realpathSync(dirname + '/node_modules/react'),
-    'react-dom': fs.realpathSync(dirname + '/node_modules/react-dom'),
+    react: fs.realpathSync(`${dirname}/node_modules/react`),
+    'react-dom': fs.realpathSync(`${dirname}/node_modules/react-dom`),
   },
-}
-export default ctx
+};
+export default ctx;

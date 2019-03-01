@@ -16,10 +16,17 @@ export default class Uapp extends Core {
   name = 'Uapp';
   Api = Api;
   Page = require('./Page').default;
+  pageProps = {};
   Root = require('./Root').default;
   theme = require('./theme').default;
   i18 = new I19();
 
+  async beforeInit() {
+    const level = __DEV__ ? ( // eslint-disable-line no-nested-ternary
+      __SERVER__ ? 'warn' : 'trace'
+    ) : 'error';
+    this.log = this.createLogger({ level });
+  }
   async init() {
     await super.init();
     this.config = this.getConfig();
@@ -34,7 +41,7 @@ export default class Uapp extends Core {
     if (this.i18) {
       await this.i18.setState({
         log: this.log,
-        config: this.config.i18,
+        config: this.app.config.i18,
         getLocale: this.getLocale,
       }).init();
     }
@@ -52,8 +59,8 @@ export default class Uapp extends Core {
     return api;
   }
 
-  getLocale = require('./i18/getLocale').default
-  setLocale = require('./i18/setLocale').default
+  getLocale = require('./i19/getLocale').default
+  setLocale = require('./i19/setLocale').default
 
   @autobind
   t(...args) {
@@ -258,7 +265,7 @@ export default class Uapp extends Core {
   async resetPage() {
     // console.log('resetPage');
     if (!this.page) {
-      this.page = new this.Page();
+      this.page = new this.Page(this.pageProps || {});
     } else {
       await this.page.exit();
     }

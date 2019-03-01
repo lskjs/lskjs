@@ -16,6 +16,10 @@ export default class Page {
     Object.assign(this, props);
   }
 
+  renderTitle() {
+    return (this.state.metas || []).reverse().map(t => t.title).join(' - ');
+  }
+
   onExit(fn) {
     if (DEBUG) console.log('Page.onExit');
     const { onExit = [] } = this.state;
@@ -36,6 +40,11 @@ export default class Page {
     return this;
   }
 
+  scrollTo(id) {
+    console.log('Реализуй меня: Uapp.scrollTo', id);
+  }
+
+
   async exit() {
     if (DEBUG) console.log('Page.exit');
     const { onExit } = this.state;
@@ -45,17 +54,13 @@ export default class Page {
     }
   }
 
+
   async enter() {
     if (DEBUG) console.log('Page.enter');
 
-    if (__CLIENT__) document.body.scrollTop = 0;
-    // change title
+    if (__CLIENT__) this.scrollTo(0);
   }
 
-  toTop() {
-    if (__CLIENT__) document.body.scrollTop = 0;
-    return this;
-  }
 
   setState(state = {}) {
     if (DEBUG) console.log('Page.setState');

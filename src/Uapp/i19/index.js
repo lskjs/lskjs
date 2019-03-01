@@ -33,7 +33,7 @@ class I19 {
   }
   getI18Locale() {
     let locale;
-    if (this.getLocale) locale = this.getLocale({ uapp: this });
+    if (this.getLocale) locale = this.getLocale();
     const { locales = [] } = this.config;
     if (!locales.includes(locale)) locale = null;
     if (locale) return locale;
@@ -66,6 +66,7 @@ class I19 {
           type: 'logger',
           log(args) {
             if (args[0] === 'i18next: initialized') return;
+            if (args[0] === 'i18next: languageChanged') return;
             if (args[0] === 'i18next::translator: missingKey') {
               log.error(args.join(', '));
               return;
