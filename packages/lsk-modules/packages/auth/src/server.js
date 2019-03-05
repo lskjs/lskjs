@@ -120,6 +120,9 @@ export default (ctx) => {
       api.all('/social/unbind', isAuth, this.controller.socialUnbind);
 
       api.all('/passport/getByToken', this.controller.getPassportByToken);
+      api.all('/restorePasswordPermit', this.controller.restorePasswordPermit);
+      api.all('/confirmPassword', this.controller.confirmPassword);
+      api.all('/getPermit', this.controller.getPermit);
 
       // social auth init
       api.get('/:provider', this.controller.socialAuth);
