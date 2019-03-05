@@ -1,9 +1,9 @@
-import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 import SHA256 from 'crypto-js/sha256';
 import m from 'moment';
 import pick from 'lodash/pick';
+import UniversalSchema from './UniversalSchema';
 
-export default app => {
+export function getSchema(ctx) {
   const mongoose = ctx.db;
   const Permit = new UniversalSchema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -58,7 +58,7 @@ export default app => {
         value = `0${value}`;
       }
       return value;
-    } else if (type === 'hash') {
+    } if (type === 'hash') {
       if (iteration) {
         str += Math.floor(Math.random() * 100000);
       }
@@ -128,3 +128,5 @@ export default app => {
   };
   return Permit;
 }
+
+export default (ctx, module) => getSchema(ctx, module).getMongooseModel(ctx.db);
