@@ -733,7 +733,11 @@ export default (ctx, module) => {
     set(user, 'private.lastUpdates.password', date);
     user.markModified('private.lastUpdates.password');
     await user.save();
-    return Permit.prepare(permit, { req });
+    return Promise.props({
+      user: User.prepare(user, { req }),
+      token: user.generateAuthToken(),
+      permit: Permit.prepare(permit, { req }); 
+    })
   };
   controller.findOneByCode = async (req) => {
     const { code } = req.data;
