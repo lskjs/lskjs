@@ -736,8 +736,8 @@ export default (ctx, module) => {
     return Promise.props({
       user: User.prepare(user, { req }),
       token: user.generateAuthToken(),
-      permit: Permit.prepare(permit, { req }); 
-    })
+      permit: Permit.prepare(permit, { req }),
+    });
   };
   controller.findOneByCode = async (req) => {
     const { code } = req.data;
