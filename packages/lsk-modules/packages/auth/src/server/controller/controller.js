@@ -677,7 +677,6 @@ export default (ctx, module) => {
       throw 'notFound';
     }
     const { PermitModel: Permit } = ctx.modules.permit.models;
-    console.log(ctx.modules.permit.models, 'models');
     const date = new Date();
     const str = `${user._id}_${email}_${date.getTime()}`;
     const code = await Permit.generateUniqCode({
@@ -708,9 +707,9 @@ export default (ctx, module) => {
       user,
       permit,
       email,
-      link: ctx.url(`/auth/restore?code=${permit.code}`),
+      link: ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`),
     });
-    console.log(ctx.url(`/auth/restore?code=${permit.code}`), 'events.user.restorePassword');
+    console.log(ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
     return Permit.prepare(permit, { req });
   };
   controller.confirmPassword = async (req) => {
@@ -735,6 +734,22 @@ export default (ctx, module) => {
     user.markModified('private.lastUpdates.password');
     await user.save();
     return Permit.prepare(permit, { req });
+  };
+  controller.findOneByCode = async (req) => {
+    const { code } = req.data;
+    if (!code) throw '!code';
+    const { PermitModel: Permit } = ctx.modules.permit.models;
+    const permit = await Permit.findOne({
+      code,
+    });
+    if (!permit) throw '!permit';
+    if (permit.type === 'user.restorePassword') return Permit.prepare(permit, { req });
+    if (!req.user || !req.user._id) throw '!userId';
+    if (!permit) throw 'not found';
+    if (ctx.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
+      return Permit.prepare(permit, { req });
+    }
+    throw '!permission';
   };
 
   return controller;
