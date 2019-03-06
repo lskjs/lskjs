@@ -1,7 +1,7 @@
 
-export default app => class PermitModule {
+export default ctx => class PermitModule {
   getModels() {
-    return require('./server/models').default(app, this);
+    return require('./server/models').default(ctx, this);
   }
 
   async init() {
@@ -9,5 +9,6 @@ export default app => class PermitModule {
   }
 
   async run() {
+    ctx.app.use('/api/module/auth', require('./server/api').default(ctx));
   }
 };
