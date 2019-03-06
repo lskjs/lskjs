@@ -1,7 +1,4 @@
-/node_modules
-/packages/permit/node_modules
-/packages/auth/node_modules
-/packages/i18/node_modules
+node_modules/
 build
 release
 .lerna_debug
