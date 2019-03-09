@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "0.0.6-alpha.0",
+  "version": "0.26.0",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "schema"
   ],
   "dependencies": {
-    "@lskjs/db": "^0.0.6-alpha.0",
+    "@lskjs/db": "^0.26.0",
     "eventemitter3": "^3.1.0",
     "imap": "^0.8.19",
     "mailparser": "^2.4.0",
@@ -24,13 +24,13 @@
   },
   "devDependencies": {
     "bluebird": "^3.5.2",
-    "moment": "^2.22.2",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2"
   },
   "peerDependencies": {
     "bluebird": "*",
-    "moment": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "moment": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
