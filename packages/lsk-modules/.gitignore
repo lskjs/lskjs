@@ -1,4 +1,4 @@
 **/node_modules
-**/build
-**/release
+packages/*/build
+packages/*/release
 lerna-debug.log
