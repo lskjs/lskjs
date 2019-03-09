@@ -1,3 +1,3 @@
 rm -rf release && \
-DIST=release scripts/build.sh && \
+DIST=release "`pwd`scripts/build.sh" && \
 npm publish --access=public release

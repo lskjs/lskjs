@@ -1,16 +1,23 @@
-/* eslint-disable */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable indent */
 import Base from './_base';
-export default class Recovery extends Base {
-  getOptions({ ctx, params }) {
-    return {
-      subject: 'Подтверждение почты!',
-    }
+
+export default class ApproveEmailTemplate extends Base {
+  getSubject() {
+    return this.t('email.approveEmail.subject', this.props);
   }
 
-  renderContent({ params }) {
+  render() {
     return `
-  <h1>Привет ${params.user.name}!</h1>
-  <p>Для подтверждения почты нажми на <a href=${params.link}>ссылку!</a></p>
-`
+      ${this.header()}
+      ${this.content(`
+        ${this.title(this.t('email.approveEmail.title', this.props))}
+        ${this.text(this.t('email.approveEmail.text', this.props))}
+        ${this.buttonWithLink(this.t('common.confirm'), {
+          href: this.props.link,
+        })}
+      `)}
+      ${this.render()}
+    `;
   }
 }

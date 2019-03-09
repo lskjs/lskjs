@@ -1,34 +1,267 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable indent */
 import { mjml2html } from 'mjml';
+import Template from './_html';
 
-/* eslint-disable */
-import BaseTemplate from './_base';
-export default class Mjml extends BaseTemplate {
-
-
-  getHtml(...args) {
-    const { errors, html } = mjml2html(this.render(...args));
+export default class Base extends Template {
+  getHtml() {
+    const { errors, html } = mjml2html(this.render());
+    if (__DEV__) {
+      console.error('mjml errors', errors);
+    }
     return html;
   }
 
-  render({ ctx, params }) {
+  font(name, gFontsLink) {
+    const fontStr = `'${name}', sans-serif;`;
+    this.fontFamily = fontStr;
     return `
-<mjml>
-  <mj-body>
-    <mj-container>
+      <mj-font name="${name}" href="${gFontsLink}" />
+      <mj-style inline="inline">
+        body {
+          font-family: ${fontStr}
+        }
+      </mj-style>
+    `;
+  }
+
+  logo({ src }) {
+    return `
       <mj-section>
-        <mj-column>
-
-          <mj-image width="100" src="/assets/img/logo-small.png"></mj-image>
-
-          <mj-divider border-color="#F45E43"></mj-divider>
-
-          <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
-
+        <mj-column width="100%">
+          <mj-image
+            src="${src}"
+            width="200"
+          />
         </mj-column>
       </mj-section>
-    </mj-container>
-  </mj-body>
-</mjml>
+    `;
+  }
+
+  headerImage({ src }) {
+    return `
+      <mj-section padding="0">
+        <mj-column width="100%">
+          <mj-image
+            src="${{ src }}"
+            width="600"
+            padding="0"
+          />
+        </mj-column>
+      </mj-section>
+    `;
+  }
+
+  copyrights({ title, subtitle }) {
+    return `
+      <mj-column width="100%">
+        ${subtitle && `
+          <mj-text
+            align="center"
+            color="${this.theme.colors.secondary}"
+            font-family="${this.fontFamily}"
+            line-height="20px"
+            font-size="14"
+            padding-top="32"
+            padding-bottom="6"
+          >
+            ${subtitle}
+          </mj-text>
+        `}
+        <mj-text
+          align="center"
+          color="${this.theme.colors.secondary}"
+          font-family="${this.fontFamily}"
+          line-height="20px"
+          font-size="14"
+          padding-top="0"
+        >
+          &copy; ${title}
+        </mj-text>
+      </mj-column>
+    `;
+  }
+
+  footerLinks(list = []) {
+    return `
+      <mj-column width="100%">
+        <mj-table padding-bottom="32">
+          <tr>
+            ${list.map((item, index) => (`
+              <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
+                <a href="${item.href}" target="_blank" style="color: ${this.theme.colors.primary}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
+                  ${item.title}
+                </a>
+              </td>
+            `)).join('')}
+          </tr>
+        </mj-table>
+      </mj-column>
+    `;
+  }
+
+  team() {
+    return `
+      <mj-section background-color="${this.theme.colors.white}">
+        <mj-column width="100%">
+          <mj-divider border-width="1px" border-style="solid" border-color="${this.theme.colors.border}" />
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="${this.theme.colors.white}" padding="0 0 42px">
+        ${this.title(this.t('email.goodDay'))}
+        ${this.text(this.t('email.incircle.isuvorov.com'))}
+      </mj-section>
+    `;
+  }
+
+  title(title) {
+    return `
+      <mj-column width="95%">
+        <mj-text
+          font-family="${this.fontFamily}"
+          color="${this.theme.colors.main}"
+          font-size="28px"
+          line-height="34px"
+          align="center"
+        >
+          ${title}
+        </mj-text>
+      </mj-column>
+    `;
+  }
+
+  subtitle(children) {
+    return `
+      <mj-column width="80%">
+        <mj-text
+          font-family="${this.fontFamily}"
+          color="${this.theme.colors.main}"
+          align="center"
+          font-size="20px"
+          padding-top="10px"
+          font-weight="bold"
+          padding="0px"
+        >
+          ${children}
+        </mj-text>
+      </mj-column>
+    `;
+  }
+
+  text(children) {
+    return `
+      <mj-column width="80%">
+        <mj-text
+          font-family="${this.fontFamily}"
+          color="${this.theme.colors.secondary}"
+          font-size="16px"
+          line-height="26px"
+          align="center"
+          padding-top="24"
+        >
+          ${children}
+        </mj-text>
+      </mj-column>
+    `;
+  }
+
+  button(children, options = {}) {
+    const { href = '#!', color = 'white', backgroundColor = '#4B86C6' } = options;
+    return `
+      <mj-column width="100%">
+        <mj-button
+          font-family="${this.fontFamily}"
+          background-color="${backgroundColor}"
+          text-transform="uppercase"
+          line-height="26px"
+          font-size="13px"
+          padding-top="24"
+          href="${href}"
+          color="${color}"
+        >
+          ${children}
+        </mj-button>
+      </mj-column>
+    `;
+  }
+
+  buttonWithLink(children, params = {}) {
+    return `
+      ${this.button(children, params)}
+      ${this.text(`
+        <p>
+          <a class="link" href="${params.href}">${params.href}</a>
+        </p>
+      `)}
+    `;
+  }
+
+
+  header() {
+    return `
+      <mjml>
+        <mj-head>
+          ${this.font('Roboto', 'https://fonts.googleapis.com/css?family=Roboto:400,400i,700&amp;subset=cyrillic')}
+        </mj-head>
+        <mj-body>
+          <mj-container background-color="${this.theme.colors.mainBackground}">
+            ${this.logo('https://i.imgur.com/4K9cdsl.png')}
+            ${this.headerImage('https://i.imgur.com/B8GzjNO.png')}
+    `;
+  }
+
+
+  footer() {
+    return `
+            <mj-section padding="16"/>
+            <mj-section padding="32px" border-radius="4">
+              <!--${this.footerLinks([
+                {
+                  href: 'https://incircle.isuvorov.com',
+                  title: 'incircle.isuvorov.com',
+                },
+                {
+                  href: 'mailto:mail@localhost',
+                  title: 'mail@localhost',
+                },
+                {
+                  href: 'mailto:mail@localhost',
+                  title: 'Отписаться от рассылки',
+                },
+              ])}-->
+              ${this.copyrights({
+    title: 'InCircle 2019',
+    subtitle: 'Your company address',
+  })}
+            </mj-section>
+          </mj-container>
+        </mj-body>
+      </mjml>
+    `;
+  }
+
+  content(children) {
+    return `
+      <mj-section background-color="${this.theme.colors.white}" padding="32px 0 12px">
+        ${children}
+      </mj-section>
+    `;
+  }
+
+  render() {
+    return `
+      ${this.header()}
+      ${this.content(`
+        ${this.title('Default title')}
+        ${this.subtitle('Beautiful subtitle')}
+        ${this.text('Hello world')}
+        ${this.button('Button name', {
+    href: 'https://google.com',
+    color: '#4a4a4a',
+    backgroundColor: '#e3e3e3',
+  })}
+      `)}
+      ${this.footer()}
     `;
   }
 }

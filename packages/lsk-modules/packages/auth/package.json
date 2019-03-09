@@ -1,13 +1,22 @@
 {
   "name": "@lskjs/auth",
-  "version": "0.11.6",
-  "author": "isuvorov",
+  "version": "0.12.0",
+  "description": "LSK module for auth.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
-  "scripts": {
-    "release": "rm -rf dist && npm run babel-build && npm publish --access=public dist",
-    "babel-build": "mkdir -p dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
-    "dev": "DEBUG=1 npm run babel-build -- --watch"
+  "publishConfig": {
+    "access": "public"
   },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/auth",
+  "keywords": [
+    "auth",
+    "oAuth",
+    "passport",
+    "facebook",
+    "telegram",
+    "vk",
+    "vkontakte"
+  ],
   "dependencies": {
     "apiquery": "0.1.24",
     "bluebird": "3.5.1",
@@ -26,5 +35,10 @@
   "peerDependencies": {
     "react-icons2": "*",
     "mobx": "*"
+  },
+  "scripts": {
+    "release": "rm -rf dist && npm run babel-build && npm publish --access=public dist",
+    "babel-build": "mkdir -p dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files",
+    "dev": "DEBUG=1 npm run babel-build -- --watch"
   }
 }

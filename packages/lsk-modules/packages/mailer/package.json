@@ -1,18 +1,22 @@
 {
   "name": "@lskjs/mailer",
   "version": "0.5.8",
-  "author": "isuvorov",
+  "description": "LSK module for send and receive emails.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
-  "scripts": {
-    "release": "npm run babel-build && npm publish --access=public dist",
-    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files"
+  "publishConfig": {
+    "access": "public"
   },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/mailer",
+  "keywords": [
+    "database",
+    "mongoose",
+    "schema"
+  ],
   "dependencies": {
     "bluebird": "^3.5.2",
     "eventemitter3": "^3.1.0",
     "imap": "^0.8.19",
-    "lego-starter-kit": "^1.22.3",
-    "lodash": "^4.17.11",
     "mailparser": "^2.4.0",
     "mjml": "3.3.3",
     "moment": "^2.22.2",
@@ -20,26 +24,15 @@
     "nodemailer-juice": "1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.42",
-    "@babel/core": "7.0.0-beta.42",
-    "@babel/node": "7.0.0-beta.42",
-    "@babel/plugin-transform-runtime": "7.0.0-beta.42",
-    "@babel/preset-env": "7.0.0-beta.42",
-    "@babel/preset-react": "7.0.0-beta.42",
-    "@babel/preset-stage-0": "7.0.0-beta.42",
-    "@babel/register": "7.0.0-beta.42",
-    "@babel/template": "7.0.0-beta.42",
-    "@babel/types": "7.0.0-beta.42",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "8.2.3",
-    "eslint": "4.19.1",
-    "eslint-config-airbnb": "16.1.0",
-    "eslint-loader": "2.0.0",
-    "eslint-plugin-import": "2.12.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-react": "7.8.2"
+    "lodash": "^4.17.11",
+    "@lskjs/db": "0.0.1"
   },
   "peerDependencies": {
-    "react-icons2": "2.3.0"
+    "lodash": "*",
+    "@lskjs/db": "*"
+  },
+  "scripts": {
+    "release": "npm run babel-build && npm publish --access=public dist",
+    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files"
   }
 }

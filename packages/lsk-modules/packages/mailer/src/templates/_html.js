@@ -1,11 +1,28 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable indent */
+
 export default class Template {
+  theme = { colors: {} };
+  fontFamily = this.theme.fontFamily;
+
   constructor(params = {}) {
     Object.assign(this, params);
   }
 
-  getOptions() {
-    return {};
+  getSubject() {
+    return 'subject';
   }
+  getText() {
+    return 'text';
+  }
+  getHtml() {
+    return this.render();
+  }
+
+  url(str, params) {
+    return this.ctx.url(str, params);
+  }
+
   renderHead() {
     return `
 <head>
@@ -26,8 +43,7 @@ export default class Template {
     Base Sample Email
     `;
   }
-  renderBody({ params }) {
-    // <div class="header">Привет!</div>
+  renderBody() {
     return `
     <body>
       <div style="background:#dfe8ef;display: table;width: 100%;margin: 0px auto;">
@@ -41,8 +57,8 @@ export default class Template {
           </div>
           <div class="body_mail">
             <div class="content">
-              ${this.renderContent(...arguments)}
-              ${this.renderFooter(...arguments)}
+              ${this.renderContent()}
+              ${this.renderFooter()}
             </div>
           </div>
           <div class="lines">
@@ -56,19 +72,14 @@ export default class Template {
       </div>
     </body>`;
   }
-  render(params = {}) {
-    //
-    // ${this.renderBody(params)}
+  render() {
     return `
     <!DOCTYPE html>
     <html lang="en">
-      ${this.renderHead(params)}
-      ${this.renderBody(params)}
+      ${this.renderHead()}
+      ${this.renderBody()}
     </html>
     `;
   }
 
-  getHtml(...args) {
-    return this.render(...args);
-  }
 }

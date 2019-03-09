@@ -1,9 +1,9 @@
-import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
+import MongooseSchema from '@lskjs/db/MongooseSchema';
 
-function getSchema(ctx, module) {
+export default (ctx, module) => {
   const mongoose = ctx.db;
   const { ObjectId } = mongoose.Schema.Types;
-  const schema = new UniversalSchema({
+  const schema = new MongooseSchema({
     uid: {
       type: Number,
       required: true,
@@ -111,8 +111,4 @@ function getSchema(ctx, module) {
   });
 
   return schema;
-}
-
-export default(ctx, module) => {
-  return getSchema(ctx, module).getMongooseModel(ctx.db);
 };

@@ -4,23 +4,13 @@
   "author": "isuvorov",
   "license": "MIT",
   "dependencies": {
-    "@lskjs/general": "^0.15.261",
-    "apiquery": "0.1.24",
     "bluebird": "3.5.1",
-    "crypto-js": "^3.1.9-1",
-    "moment": "^2.24.0",
-    "mongoose": "5.2.15",
-    "node-telegram-bot-api": "0.30.0",
-    "passport": "0.4.0",
-    "passport-facebook": "2.1.1",
-    "passport-telegram-official": "1.0.3",
-    "passport-vkontakte": "0.3.2",
-    "passport-youtube-v3": "2.1.0",
-    "react-bootstrap-card": "0.2.1"
+    "crypto-js": "^3.1.9-1"
+  },
+  "devDependencies": {
+    "@lskjs/general": "^0.15.261"
   },
   "peerDependencies": {
-    "react-icons2": "*",
-    "react": "^15.4.2",
-    "react-dom": "^16.0.2"
+    "@lskjs/general": "*"
   }
 }

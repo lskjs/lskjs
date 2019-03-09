@@ -1,5 +1,5 @@
 import Imap from 'imap';
-import m from 'moment';
+// import moment from 'moment';
 import get from 'lodash/get';
 import find from 'lodash/find';
 import set from 'lodash/set';
@@ -301,7 +301,7 @@ export default (ctx) => {
       const filter = [];
       if (lastEmail) {
         try {
-          const date = m(lastEmail.info.date)
+          const date = moment(lastEmail.info.date)
             .add(-1, 'day')
             .locale('en')
             .format('LL');

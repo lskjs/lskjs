@@ -1,16 +1,20 @@
-/* eslint-disable */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable indent */
 import Base from './_base';
-export default class Recovery extends Base {
-  getOptions({ ctx, params }) {
-    return {
-      subject: 'Восстановление пароля',
-    }
+
+export default class RecoveryTemplate extends Base {
+  getSubject() {
+    return this.t('email.recovery.subject', this.props);
   }
 
-  renderContent({ ctx, params }) {
+  render() {
     return `
-  <h1>Мы получили от тебя запрос на<br>восставление пароля для<br>доступа к «${ctx.site && ctx.site.title}»</h1>
-  <p>Твой новый пароль: <b>${params.password}</b>
-`
+      ${this.header()}
+      ${this.content(`
+        ${this.title(this.t('email.recovery.title', this.props))}
+        ${this.text(this.t('email.recovery.text', this.props))}
+      `)}
+      ${this.footer()}
+    `;
   }
 }
