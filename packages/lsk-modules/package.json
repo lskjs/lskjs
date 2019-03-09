@@ -11,6 +11,7 @@
     "build": "lerna exec -- \\$LERNA_ROOT_PATH/scripts/pack-build.sh",
     "watch": "lerna exec -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh",
     "release": "lerna exec -- \\$LERNA_ROOT_PATH/scripts/pack-release.sh",
+    "release-db": "lerna exec --scope @lskjs/db -- \\$LERNA_ROOT_PATH/scripts/pack-release.sh",
     "link": "lerna exec -- \\$LERNA_ROOT_PATH/scripts/pack-link.sh",
     "build-packs": "lerna exec --scope '@lskjs/*' -- \\$LERNA_ROOT_PATH/scripts/build-pack.sh \\$LERNA_ROOT_PATH/packs",
     "ls": "lerna exec --scope '@lskjs/*' -- \\$LERNA_ROOT_PATH/scripts/ls.sh",
