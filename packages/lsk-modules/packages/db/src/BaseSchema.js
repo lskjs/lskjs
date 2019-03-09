@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 
 const Schema = () => { console.log('OVERWRITE ME')};
 
+
 export default class BaseSchema {
   static Schema = Schema;
   _universal = true;
