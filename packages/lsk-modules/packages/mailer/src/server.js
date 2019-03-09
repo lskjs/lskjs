@@ -33,7 +33,6 @@ export default app => class Mailer {
       to: user.email,
       locale,
       user,
-      t: user.getT ? user.getT() : this.getT({ locale }),
     };
   }
 
@@ -41,7 +40,7 @@ export default app => class Mailer {
     if (app.i18 && app.i18.getT) {
       return app.i18.getT(props.locale || 'en');
     }
-    return a => a;
+    return (a) => { app.log.error('!Mailer.getT'); return a; };
   }
 
   getTemplateOptions(email) {
@@ -61,37 +60,46 @@ export default app => class Mailer {
     return options;
   }
 
-  renderTemplate(props) {
+  renderTemplate(params) {
     const {
-      to, template, params = {}, options = {}, ...otherProps
-    } = props;
-
-    // throw { sadas: 567, message: 32456, err: 123123123, status: 404, code: 1231231, };
-    // throw app.e('mailer.!to123', { asd: 123, adff: 567, sadas: 567, err: 123123123, status: 404 });
-    if (!to) throw app.e('mailer.!to');
+      template, props = {}, ...otherProps
+    } = params;
     if (!template) throw app.e('mailer.!template');
     const Template = this.templates[template];
     if (!Template) throw app.e('mailer.!Template', { template });
-
     const email = new Template({
-      // app,
       theme: this.theme,
       log: app.log,
       url: app.url,
-      t: otherProps.t || this.getT(otherProps),
-      props: params,
+      t: this.getT(otherProps.locale),
+      props,
       ...otherProps,
     });
     return {
       ...this.config.options,
       ...this.getTemplateOptions(email),
-      ...options,
     };
   }
 
   async send(props) {
-    const sendOptions = this.getTemplateOptions(props);
-    return this.transporter.sendMail(sendOptions);
+    const {
+      to, cc, bcc, ...other
+    } = props;
+    if (!to) throw app.e('mailer.!to');
+    const options = this.renderTemplate(other);
+    console.log({
+      to,
+      cc,
+      bcc,
+      ...options,
+    });
+
+    return this.transporter.sendMail({
+      to,
+      cc,
+      bcc,
+      ...options,
+    });
   }
 
   async sendTo(props = {}, params = {}) {
@@ -100,9 +108,12 @@ export default app => class Mailer {
 
     const user = props.user || await User.findById(props.userId);
     if (!user) throw app.e('mailer.!user');
+    const userParams = this.getUserMailerParams(user);
+    console.log({ user, userParams });
+
 
     return this.send({
-      ...this.getUserMailerParams(user),
+      ...userParams,
       ...params,
     });
   }

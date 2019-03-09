@@ -7,8 +7,9 @@ export default class Base extends Template {
   getHtml() {
     const { errors, html } = mjml2html(this.render());
     if (__DEV__) {
-      this.log.error('mjml errors', errors);
-      // console.error('mjml errors', errors);
+      if (errors && errors.length) {
+        this.log.error('Template.getHtml mjml', errors);
+      }
     }
     return html;
   }
@@ -166,8 +167,9 @@ export default class Base extends Template {
     `;
   }
 
-  button(children, options = {}) {
-    const { href = '#!', color = 'white', backgroundColor = '#4B86C6' } = options;
+  button(children, params = {}) {
+    if (!params.href) return '';
+    const { href = '#!', color = 'white', backgroundColor = '#4B86C6' } = params;
     return `
       <mj-column width="100%">
         <mj-button
@@ -187,6 +189,7 @@ export default class Base extends Template {
   }
 
   buttonWithLink(children, params = {}) {
+    if (!params.href) return '';
     return `
       ${this.button(children, params)}
       ${this.text(`
@@ -198,7 +201,7 @@ export default class Base extends Template {
   }
 
 
-  header({ logo = 'https://i.imgur.com/4K9cdsl.png', headerImage = 'https://i.imgur.com/B8GzjNO.png' } = {}) {
+  header({ logo = 'https://i.imgur.com/4K9cdsl.png', image = 'https://i.imgur.com/B8GzjNO.png' } = {}) {
     return `
       <mjml>
         <mj-head>
@@ -207,7 +210,7 @@ export default class Base extends Template {
         <mj-body>
           <mj-container background-color="${this.theme.colors.mainBackground}">
             ${this.logo({ src: logo })}
-            ${this.headerImage({ src: headerImage })}
+            ${this.headerImage({ src: image })}
     `;
   }
 

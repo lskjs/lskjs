@@ -98,32 +98,12 @@ export default (ctx, module) => {
   };
   controller.afterSignup = async function ({ req, user }) {
     const { User } = ctx.models;
-    const { mailer } = ctx.modules;
-    let emailSended = null;
-    if (mailer) {
-      try {
-        const link = await user.genereateEmailApprovedLink();
-        await mailer.send({
-          ...user.getMailerParams('primary'),
-          template: 'approveEmail',
-          // locale: user.locale || req.locale,
-          // to: user.getEmail('primary'),
-          params: {
-            user: user.toJSON(),
-            link,
-          },
-        });
-        emailSended = true;
-      } catch (err) {
-        ctx.log.warn(err);
-        emailSended = false;
-      }
-    }
+    const link = await user.genereateEmailApprovedLink();
+    ctx.emit('events.auth.signup', { user, link });
 
     return {
       __pack: 1,
       signup: true,
-      emailSended,
       user: await User.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
@@ -133,7 +113,7 @@ export default (ctx, module) => {
     const { password, ...userFields } = controller.getUserFields(req);
     const criteria = controller.getUserCriteria(req);
     const existUser = await User.findOne(criteria);
-    if (existUser) throw ctx.errors.e400('Пользователь с таким логином уже зарегистрирован');
+    if (existUser) throw ctx.e('auth.userExist', { status: 400, criteria });
     if (!userFields.meta) userFields.meta = {};
     userFields.meta.approvedEmail = false;
     const user = new User(userFields);
@@ -150,14 +130,14 @@ export default (ctx, module) => {
     const { User } = ctx.models;
     const params = req.allParams();
 
-    if (!params.password) throw ctx.errors.e400('Пароль не заполнен');
+    if (!params.password) throw ctx.e('auth.!password', { status: 400 });
 
     const criteria = controller.getUserCriteria(req);
     const user = await User.findOne(criteria);
 
-    if (!user) throw ctx.errors.e404('Неверный логин');
+    if (!user) throw ctx.e('auth.loginIncorrect', { status: 400 });
     if (!await user.verifyPassword(params.password)) {
-      throw ctx.errors.e400('Неверный пароль');
+      throw ctx.e('auth.passwordIncorrect', { status: 400 });
     }
     req.user = user;
 
@@ -663,6 +643,8 @@ export default (ctx, module) => {
     return permit;
   };
   controller.restorePasswordPermit = async (req) => {
+    console.log('123123123');
+    
     const { User } = ctx.models;
     const { email } = req.data;
     if (!email || !validator.isEmail(email)) {
@@ -701,15 +683,15 @@ export default (ctx, module) => {
       },
       code,
     });
-    ctx.emit('events.user.restorePassword', {
-      type: 'events.user.restorePassword',
+    ctx.emit('events.auth.restorePassword', {
+      type: 'events.auth.restorePassword',
       targetUser: user,
       user,
       permit,
       email,
       link: ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`),
     });
-    console.log(ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
+    // console.log(ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
     return Permit.prepare(permit, { req });
   };
   controller.confirmPassword = async (req) => {
@@ -734,9 +716,12 @@ export default (ctx, module) => {
     user.markModified('private.lastUpdates.password');
     await user.save();
     return Promise.props({
+      __pack: true,
       user: User.prepare(user, { req }),
       token: user.generateAuthToken(),
-      permit: Permit.prepare(permit, { req }),
+      data: {
+        permit: Permit.prepare(permit, { req }),
+      },
     });
   };
   controller.findOneByCode = async (req) => {

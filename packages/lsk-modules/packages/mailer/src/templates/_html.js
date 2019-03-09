@@ -11,11 +11,11 @@ export default class Template {
   }
 
   getSubject() {
-    return 'subject';
+    return null;
   }
 
   getText() {
-    return 'text';
+    return null;
   }
 
   getHtml() {
