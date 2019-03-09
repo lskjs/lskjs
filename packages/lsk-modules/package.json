@@ -27,7 +27,8 @@
     "publish:debug": "npm run publish:latest -- --npm-tag=debug --no-push",
     "test": "node ./scripts/test.js",
     "test-latest-cra": "yarn --prefix --cwd lib/cli run test-latest-cra",
-    "test:cli": "npm --prefix lib/cli run test"
+    "test:cli": "npm --prefix lib/cli run test",
+    "echo": "pwd"
   },
   "author": "isuvorov",
   "license": "ISC",
