@@ -9,9 +9,8 @@
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/permit",
   "keywords": [
-    "database",
-    "mongoose",
-    "schema"
+    "one time code",
+    "permit"
   ],
   "dependencies": {
   },
@@ -24,9 +23,5 @@
     "bluebird": "*",
     "crypto-js": "*",
     "@lskjs/general": "*"
-  },
-  "scripts": {
-    "release": "npm run babel-build && npm publish --access=public dist",
-    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && babel src --out-dir dist --source-maps inline --copy-files"
   }
 }
