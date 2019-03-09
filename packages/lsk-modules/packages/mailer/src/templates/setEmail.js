@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable indent */
-import Base from './_base';
+import Base from './_mjml';
 
 export default class SetEmailTemplate extends Base {
   getSubject() {

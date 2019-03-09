@@ -3,6 +3,7 @@
 
 export default class Template {
   theme = { colors: {} };
+
   fontFamily = this.theme.fontFamily;
 
   constructor(params = {}) {
@@ -12,16 +13,15 @@ export default class Template {
   getSubject() {
     return 'subject';
   }
+
   getText() {
     return 'text';
   }
+
   getHtml() {
     return this.render();
   }
 
-  url(str, params) {
-    return this.ctx.url(str, params);
-  }
 
   renderHead() {
     return `
@@ -31,6 +31,7 @@ export default class Template {
 </head>
 `.trim();
   }
+
   renderFooter() {
     return `
 <div>
@@ -38,11 +39,13 @@ export default class Template {
 </div>
 `.trim();
   }
+
   renderContent() {
     return `
     Base Sample Email
     `;
   }
+
   renderBody() {
     return `
     <body>
@@ -72,6 +75,7 @@ export default class Template {
       </div>
     </body>`;
   }
+
   render() {
     return `
     <!DOCTYPE html>
@@ -81,5 +85,4 @@ export default class Template {
     </html>
     `;
   }
-
 }
