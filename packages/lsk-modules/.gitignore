@@ -1,4 +1,4 @@
-node_modules/
-build/
-release/
+**/node_modules
+**/build
+**/release
 .lerna_debug
