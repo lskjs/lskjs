@@ -17,7 +17,7 @@ export default class ApproveEmailTemplate extends Base {
           href: this.props.link,
         })}
       `)}
-      ${this.render()}
+      ${this.footer()}
     `;
   }
 }

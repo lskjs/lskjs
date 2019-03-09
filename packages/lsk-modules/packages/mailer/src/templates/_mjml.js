@@ -7,7 +7,8 @@ export default class Base extends Template {
   getHtml() {
     const { errors, html } = mjml2html(this.render());
     if (__DEV__) {
-      console.error('mjml errors', errors);
+      this.log.error('mjml errors', errors);
+      // console.error('mjml errors', errors);
     }
     return html;
   }
@@ -43,7 +44,7 @@ export default class Base extends Template {
       <mj-section padding="0">
         <mj-column width="100%">
           <mj-image
-            src="${{ src }}"
+            src="${src}"
             width="600"
             padding="0"
           />
@@ -197,7 +198,7 @@ export default class Base extends Template {
   }
 
 
-  header() {
+  header({ logo = 'https://i.imgur.com/4K9cdsl.png', headerImage = 'https://i.imgur.com/B8GzjNO.png' } = {}) {
     return `
       <mjml>
         <mj-head>
@@ -205,8 +206,8 @@ export default class Base extends Template {
         </mj-head>
         <mj-body>
           <mj-container background-color="${this.theme.colors.mainBackground}">
-            ${this.logo('https://i.imgur.com/4K9cdsl.png')}
-            ${this.headerImage('https://i.imgur.com/B8GzjNO.png')}
+            ${this.logo({ src: logo })}
+            ${this.headerImage({ src: headerImage })}
     `;
   }
 
@@ -228,11 +229,11 @@ export default class Base extends Template {
                   href: 'mailto:mail@localhost',
                   title: 'Отписаться от рассылки',
                 },
-              ])}-->
+              ])}
               ${this.copyrights({
     title: 'InCircle 2019',
     subtitle: 'Your company address',
-  })}
+  })}-->
             </mj-section>
           </mj-container>
         </mj-body>

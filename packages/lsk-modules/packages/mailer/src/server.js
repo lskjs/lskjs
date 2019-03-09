@@ -65,13 +65,18 @@ export default app => class Mailer {
     const {
       to, template, params = {}, options = {}, ...otherProps
     } = props;
-    if (!to) throw app.e('errors.mailer.!to');
-    if (!template) throw app.e('errors.mailer.!template');
+
+    // throw { sadas: 567, message: 32456, err: 123123123, status: 404, code: 1231231, };
+    // throw app.e('mailer.!to123', { asd: 123, adff: 567, sadas: 567, err: 123123123, status: 404 });
+    if (!to) throw app.e('mailer.!to');
+    if (!template) throw app.e('mailer.!template');
     const Template = this.templates[template];
-    if (!Template) throw app.e('errors.mailer.!Template', { template });
+    if (!Template) throw app.e('mailer.!Template', { template });
 
     const email = new Template({
-      app,
+      // app,
+      theme: this.theme,
+      log: app.log,
       url: app.url,
       t: otherProps.t || this.getT(otherProps),
       props: params,
@@ -91,10 +96,10 @@ export default app => class Mailer {
 
   async sendTo(props = {}, params = {}) {
     const { User } = app.models;
-    if (!props.user && !props.userId) throw app.e('errors.mailer.!userId');
+    if (!props.user && !props.userId) throw app.e('mailer.!userId');
 
     const user = props.user || await User.findById(props.userId);
-    if (!user) throw app.e('errors.mailer.!user');
+    if (!user) throw app.e('mailer.!user');
 
     return this.send({
       ...this.getUserMailerParams(user),
