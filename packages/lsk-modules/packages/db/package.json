@@ -22,6 +22,6 @@
     "mongoose": "*"
   },
   "scripts": {
-    "postversion": "$LERNA_ROOT_PATH/scripts/pack-release.sh"
+    "postversion": "../../scripts/pack-release.sh"
   }
 }
