@@ -13,13 +13,16 @@
     "permit"
   ],
   "devDependencies": {
-    "@lskjs/general": "^0.15.261",
-    "bluebird": "3.5.1",
+    "@lskjs/general": "^0.15.267",
+    "bluebird": "^3.5.3",
     "crypto-js": "^3.1.9-1"
   },
   "peerDependencies": {
     "@lskjs/general": "*",
     "bluebird": "*",
     "crypto-js": "*"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
   }
 }

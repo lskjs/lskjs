@@ -33,7 +33,6 @@
     "lodash": "*"
   },
   "scripts": {
-    "release": "npm run babel-build && npm publish --access=public dist",
-    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,package-lock.json,README.md} dist/ && npx babel src --out-dir dist --source-maps inline --copy-files"
+    "postversion": "../../scripts/pack-release.sh"
   }
 }
