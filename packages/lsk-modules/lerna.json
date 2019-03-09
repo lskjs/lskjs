@@ -6,6 +6,8 @@
   "command": {
     "publish": {
       "ignoreChanges": [
+        "**/dist/**",
+        "**/release/**",
         "**/*.md",
         "**/example/**",
         "**/test/**"
