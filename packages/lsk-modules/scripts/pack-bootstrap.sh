@@ -1,5 +1,6 @@
 #!/bin/sh
 pwd && \
+touch bump.txt && \
 rm -rf .babelrc && \
 cp ../../.babelrc . && \
 rm -rf node_modules && \
