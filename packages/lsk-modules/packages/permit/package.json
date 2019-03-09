@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/permit",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "LSK module for one time codes and permits.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -12,16 +12,14 @@
     "one time code",
     "permit"
   ],
-  "dependencies": {
-  },
   "devDependencies": {
+    "@lskjs/general": "^0.15.261",
     "bluebird": "3.5.1",
-    "crypto-js": "^3.1.9-1",
-    "@lskjs/general": "^0.15.261"
+    "crypto-js": "^3.1.9-1"
   },
   "peerDependencies": {
+    "@lskjs/general": "*",
     "bluebird": "*",
-    "crypto-js": "*",
-    "@lskjs/general": "*"
+    "crypto-js": "*"
   }
 }

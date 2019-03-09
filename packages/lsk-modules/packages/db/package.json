@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/db",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -13,14 +13,13 @@
     "mongoose",
     "schema"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "mongoose": "5.2.15",
-    "lodash": "4.17.11"
+    "lodash": "4.17.11",
+    "mongoose": "5.2.15"
   },
   "peerDependencies": {
-    "mongoose": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "mongoose": "*"
   },
   "scripts": {
     "release": "npm run babel-build && npm publish --access=public dist",
