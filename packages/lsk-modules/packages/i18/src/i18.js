@@ -16,20 +16,28 @@ export default class I18 {
     Object.assign(this, props);
     return this;
   }
+  getT(locale) {
+    const instance = this.instances[locale];
+    if (!instance) throw 'i18.getT !instance';
+    // return instance.t;
+    return (...args) => instance.t(...args);
+  }
   async init(params) {
     this.instance = await this.getI18(params);
     if (this.config.locales) this.locales = this.config.locales;
+    if (__SERVER__) {
+      this.instances = {};
+      Promise.map(this.locales, async (locale) => {
+        this.instances[locale] = await this.getI18({ lng: locale });
+      });
+    }
     this.initObservable();
   }
   initObservable() {
     const { language: locale } = this.instance;
     this.locale = locale;
-    this.m = (...args) => {
-      return moment(...args).locale(this.locale);
-    };
-    this.t = (...args) => {
-      return this.instance.t(...args);
-    };
+    this.m = (...args) => moment(...args).locale(this.locale);
+    this.t = (...args) => this.instance.t(...args);
   }
   getI18Locale() {
     let locale;
@@ -80,9 +88,7 @@ export default class I18 {
 
       return instance
         .init(i18params)
-        .then(() => {
-          return resolve(instance);
-        })
+        .then(() => resolve(instance))
         .catch((err) => {
           console.error('getI18 init', err);  //eslint-disable-line
           return reject(err);
@@ -98,4 +104,3 @@ export default class I18 {
     this.initObservable();
   }
 }
-

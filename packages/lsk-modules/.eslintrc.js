@@ -26,6 +26,7 @@ const res =  {
   rules: {
     'class-methods-use-this': 'off',    
     'global-require': 'off',    
+    'lines-between-class-members': 'off',    
   },
   settings: {
     'import/resolver': {
