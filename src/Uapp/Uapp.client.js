@@ -1,5 +1,3 @@
-import React from 'react';
-import autobind from 'core-decorators/lib/autobind';
 import Favico from 'favico.js';
 import BaseUapp from './Uapp.common';
 
@@ -19,18 +17,6 @@ export default class Uapp extends BaseUapp {
       animation: 'none',
     });
   }
-
-  // prepareNotificationData = require('./helpers/prepareNotificationData').default;
-  // toast = require('./helpers/toast').default.bind(this);
-
-
-  // @autobind
-  // onError(err = {}, err2) {
-  //   this.toast({
-  //     ...this.prepareNotificationData(err, 'error'),
-  //     ...this.prepareNotificationData(err2, 'error'),
-  //   });
-  // }
 
 
   confirm(props) {

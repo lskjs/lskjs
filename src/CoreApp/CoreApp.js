@@ -66,7 +66,7 @@ export default class CoreApp extends ExpressApp {
     const t = this.i18 && this.i18.t || (a => a);
     return {
       code,
-      message: t(`errors.${code}`),
+      message: t(`errors.${code}`, params),
       status: 500,
       ...params,
     };

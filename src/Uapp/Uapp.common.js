@@ -260,19 +260,24 @@ export default class Uapp extends Core {
   // toast = require('./helpers/toast').default.bind(this);
 
 
+  // uapp.onError(t('common.errorData'), err); ??? // bad
+  // uapp.onError(uapp.e('errorData', { err })); ???
   @autobind
-  onError(err = {}, err2) {
-    this.toast({
-      ...this.prepareNotificationData(err, 'error'),
-      ...this.prepareNotificationData(err2, 'error'),
-    });
+  onError(err) {
+    return this.toast(err);
+    // this.toast({
+    //   ...this.prepareNotificationData(err, 'error'),
+    //   ...this.prepareNotificationData(err2, 'error'),
+    // });
   }
 
 
-  toast(obj) {
-    console.log('toast', obj, this.notificationSystem);
+  toast(err) {
+    // console.log('toast', err, this.notificationSystem);
     if (this.notificationSystem && this.notificationSystem.current) {
-      this.notificationSystem.current.toast(obj);
+      this.notificationSystem.current.toast(err);
+    } else {
+      console.error('Uapp.toast', err);
     }
   }
 

@@ -1,11 +1,12 @@
 import dns from 'dns';
 import redisAdapter from 'socket.io-redis';
-import redis from 'redis';
+// import redis from 'redis';
 import Promise from 'bluebird';
 
 const dnsLookup = Promise.promisify(dns.lookup);
 
 export default async function () {
+  return false
   let pubClient;
   let subClient;
   const DEBUG = this.config.redis.debug;
