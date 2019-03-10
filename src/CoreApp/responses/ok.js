@@ -1,11 +1,7 @@
 
-export default (ctx) => {
-  return function ok(data) {
-    // console.log('ok', data);
-    const info = {
-      code: 0,
-      message: 'ok',
-    };
-    return this.pack(data, info);
-  };
+export default ctx => function ok(data) {
+  return this.pack(data, {
+    code: 0,
+    message: 'ok',
+  });
 };

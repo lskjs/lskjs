@@ -117,10 +117,6 @@ export default class ReactApp extends Core {
     this.uapp = new (this.Uapp || this.BaseUapp)({
       history: this.history,
       styles: [],
-      insertCss: (...styles) => {
-        const removeCss = styles.map(x => x && x._insertCss && x._insertCss());
-        return () => { removeCss.forEach(f => f && f()); };
-      },
       req,
       rootState: this.rootState,
       config: this.config,

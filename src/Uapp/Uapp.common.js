@@ -6,7 +6,12 @@ import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import autobind from 'core-decorators/lib/autobind';
 import { observable } from 'mobx';
+import scrollTo from '@lskjs/general/utils/scrollTo';
+import detectHtmlClasses from '@lskjs/general/utils/detectHtmlClasses';
+import addClassToHtml from '@lskjs/general/utils/addClassToHtml';
+import removeClassFromHtml from '@lskjs/general/utils/removeClassFromHtml';
 import I19 from './i19';
+import logger from '../Core/logger';
 
 import Core from '../Core';
 
@@ -20,13 +25,24 @@ export default class Uapp extends Core {
   Root = require('./Root').default;
   theme = require('./theme').default;
   i18 = new I19();
+  scrollTo = scrollTo;
+  scrollTo = scrollTo;
 
-  async beforeInit() {
+
+  createLogger(params) {
     const level = __DEV__ ? ( // eslint-disable-line no-nested-ternary
       __SERVER__ ? 'warn' : 'trace'
     ) : 'error';
-    this.log = this.createLogger({ level });
+
+    return logger.createLogger({
+      name: this.name || 'app',
+      src: __DEV__,
+      level,
+      ...get(this, 'config.log', {}),
+      ...params,
+    });
   }
+
   async init() {
     await super.init();
     this.config = this.getConfig();
@@ -44,6 +60,12 @@ export default class Uapp extends Core {
         config: this.app.config.i18,
         getLocale: this.getLocale,
       }).init();
+    }
+    if (__CLIENT__) {
+      const classes = detectHtmlClasses();
+      classes.forEach(addClassToHtml);
+      removeClassFromHtml('ua_js_no');
+      addClassToHtml('ua_js_yes');
     }
   }
 
@@ -235,7 +257,7 @@ export default class Uapp extends Core {
   };
 
   prepareNotificationData = require('./helpers/prepareNotificationData').default;
-  toast = require('./helpers/toast').default.bind(this);
+  // toast = require('./helpers/toast').default.bind(this);
 
 
   @autobind
@@ -247,11 +269,17 @@ export default class Uapp extends Core {
   }
 
 
+  toast(obj) {
+    console.log('toast', obj, this.notificationSystem);
+    if (this.notificationSystem && this.notificationSystem.current) {
+      this.notificationSystem.current.toast(obj);
+    }
+  }
+
   confirm(props) {
     return this.confirmRef?.open(props);
   }
 
-  scrollTo() { }
 
   getConfig() {
     const { config } = this;

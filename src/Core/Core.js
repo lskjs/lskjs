@@ -5,6 +5,7 @@ import get from 'lodash/get';
 // import PromiseMap from 'bluebird/js/release/map';
 import Promise from 'bluebird';
 import logger from './logger';
+import emitter from './emitter';
 // import createLoggerMock from './logger/createLoggerMock';
 // import config from './config';
 
@@ -20,10 +21,6 @@ export default class Core {
     Object.assign(this, params);
   }
 
-  // createLoggerMock() {
-  //   return createLoggerMock(get(this, 'config.log', {}));
-  // }
-
   createLogger(params) {
     return logger.createLogger({
       name: this.name || 'app',
@@ -34,12 +31,31 @@ export default class Core {
     });
   }
 
+  emit(...args) {
+    if (this.log) this.log.trace(`${this.name}`, ...args);
+    if (this.ee) this.ee.emit(...args);
+  }
+  on(...args) {
+    if (this.ee) {
+      this.ee.on(args[0], async (...params) => {
+        try {
+          await args[1](...params);
+        } catch (err) {
+          this.log.error(`App.on(${args[0]})`, err);
+        }
+      }, args[2]);
+    }
+  }
+
   async beforeInit() {
+    if (!this.ee) this.ee = new emitter();
     if (!this.log) this.log = this.createLogger();
+    if (this.log) this.ee.on('*', event => this.log.trace(event));
   }
 
   async init() {
-    if (!this.log) this.log = this.createLogger();
+    // if (!this.log) this.log = this.createLogger();
+    this.emit('init');
     this.log.trace(`${this.name}.init()`);
     // if (!this.config) this.config = config;
   }
@@ -92,6 +108,7 @@ export default class Core {
   }
 
   run() {
+    this.emit('run');
   }
 
   async startOrRestart() {
@@ -160,6 +177,7 @@ export default class Core {
   }
 
   async stop() {
+    this.emit('stop');
     this.log.trace(`${this.name}.stop()`);
     try {
       if (isFunction(this.broadcastModules)) {

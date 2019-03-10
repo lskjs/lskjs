@@ -6,6 +6,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 import Api from 'apiquery';
 import staticFileMiddleware from 'connect-static-file';
+import autobind from 'core-decorators/lib/autobind';
 
 import ExpressApp from '../ExpressApp';
 import createWs from './ws';
@@ -51,23 +52,35 @@ export default class CoreApp extends ExpressApp {
   }
 
 
+  @autobind
   url(str, params = null) {
     let query = '';
-    if (params) {
+    if (params && Object.keys(params.length)) {
       query = `?${map(params, (val, key) => `${key}=${val}`).join('&')}`;
     }
     return `${this.config.url}${str}${query}`;
   }
 
-  emit(...args) {
-    this.modules.events && this.modules.events.emit(...args); // eslint-disable-line
+
+  e(code, params) {
+    const t = this.i18 && this.i18.t || (a => a);
+    return {
+      code,
+      message: t(`errors.${code}`),
+      status: 500,
+      ...params,
+    };
   }
-  on(...args) {
-    this.modules.events && this.modules.events.on(...args); // eslint-disable-line
-  }
-  once(...args) {
-    this.modules.events && this.modules.events.once(...args); // eslint-disable-line
-  }
+
+  // emit(...args) {
+  //   this.modules && this.modules.events && this.modules.events.emit(...args); // eslint-disable-line
+  // }
+  // on(...args) {
+  //   this.modules && this.modules.events && this.modules.events.on(...args); // eslint-disable-line
+  // }
+  // once(...args) {
+  //   this.modules && this.modules.events && this.modules.events.once(...args); // eslint-disable-line
+  // }
 
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line

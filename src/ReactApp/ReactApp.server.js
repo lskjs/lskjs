@@ -57,10 +57,6 @@ export default class ReactApp extends CoreApp {
       history: createMemoryHistory({
         initialEntries: [req.url],
       }),
-      // styles: [],
-      // insertCss: (...styles) => {
-      //   styles.forEach(style => style && style._getCss && uapp.styles.push(style._getCss()));
-      // },
       req,
       rootState: this.getRootState(req),
       config: this.config.client,

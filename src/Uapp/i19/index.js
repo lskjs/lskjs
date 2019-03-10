@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import { observable } from 'mobx';
 import i18next from 'i18next';
 import i18nextXhrBackend from 'i18next-xhr-backend';
@@ -16,9 +17,25 @@ class I19 {
     Object.assign(this, props);
     return this;
   }
+  getT(locale) {
+    const instance = this.instances[locale];
+    if (!instance) throw 'i18.getT !instance';
+
+    // return instance.t;
+    return (...args) => instance.t(...args);
+  }
   async init(params) {
     this.i18 = await this.getI18(params);
-    if (this.config.locales) this.locales = this.config.locales;
+    if (this.config.locales) {
+      this.locales = this.config.locales;
+    }
+    if (__SERVER__) {
+      this.instances = {};
+      Promise.map(this.locales, async (locale) => {
+        this.instances[locale] = await this.getI18({ lng: locale });
+      });
+    }
+
     this.initObservable();
   }
   initObservable() {

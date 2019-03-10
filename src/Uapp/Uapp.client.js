@@ -1,26 +1,7 @@
 import React from 'react';
 import autobind from 'core-decorators/lib/autobind';
 import Favico from 'favico.js';
-import NProgress from 'nprogress';
-import SmoothScroll from '../utils/UniversalSmoothScroll';
 import BaseUapp from './Uapp.common';
-
-
-global.DEV = ({ children, json, pretty = true }) => ( // eslint-disable-line
-  __DEV__ ? (
-    <div style={{ outline: '1px dotted black' }}>
-      {json
-        ? (
-          <pre>
-            {pretty
-              ? JSON.stringify(json).replace(/,"/ig, ',\n"')
-              : JSON.stringify(json)}
-          </pre>
-        )
-        : children}
-    </div>
-  ) : null
-);
 
 export default class Uapp extends BaseUapp {
   async init() {
@@ -37,24 +18,19 @@ export default class Uapp extends BaseUapp {
     this.favico = new Favico({
       animation: 'none',
     });
-    this.scroll = new SmoothScroll('a[href*="asdjhashdkjasdkja"]', {
-      speed: 500,
-      offset: -300,
-      easing: 'easeInOutCubic',
-    });
   }
 
-  prepareNotificationData = require('./helpers/prepareNotificationData').default;
-  toast = require('./helpers/toast').default.bind(this);
+  // prepareNotificationData = require('./helpers/prepareNotificationData').default;
+  // toast = require('./helpers/toast').default.bind(this);
 
 
-  @autobind
-  onError(err = {}, err2) {
-    this.toast({
-      ...this.prepareNotificationData(err, 'error'),
-      ...this.prepareNotificationData(err2, 'error'),
-    });
-  }
+  // @autobind
+  // onError(err = {}, err2) {
+  //   this.toast({
+  //     ...this.prepareNotificationData(err, 'error'),
+  //     ...this.prepareNotificationData(err2, 'error'),
+  //   });
+  // }
 
 
   confirm(props) {
@@ -79,7 +55,6 @@ export default class Uapp extends BaseUapp {
   async beforeResolve(...args) {
     await super.beforeResolve(...args);
     try {
-      global.NProgress = NProgress;
       NProgress.start();
     } catch (err) {
       // console.log('NProgress', err);

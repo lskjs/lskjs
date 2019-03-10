@@ -211,7 +211,6 @@ export default class Page {
     return {
       uapp: this.uapp,
       history: this.uapp.history,
-      insertCss: this.uapp.insertCss,
     };
   }
 
