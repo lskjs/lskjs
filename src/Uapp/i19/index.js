@@ -12,6 +12,7 @@ class I19 {
 
   constructor(props = {}) {
     this.setState(props);
+    this.mapFixedT = {};
   }
   setState(props = {}) {
     Object.assign(this, props);
@@ -47,6 +48,18 @@ class I19 {
     this.t = (...args) => {
       return this.i18.t(...args);
     };
+  }
+  async getFixedT(params = {}) {
+    if (typeof params === 'string') {
+      params = { lng: params };
+    }
+    const key = JSON.stringify(params);
+    if (this.mapFixedT[key]) return this.mapFixedT[key];
+    const i18 = await this.getI18(params);
+    this.mapFixedT[key] = (...args) => {
+      return i18.t(...args);
+    };
+    return this.mapFixedT[key];
   }
   getI18Locale() {
     let locale;
