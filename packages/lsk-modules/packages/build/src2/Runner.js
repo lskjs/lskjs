@@ -8,7 +8,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import cp from 'child_process';
 import fs from 'fs';
 import stringify from 'serialize-javascript';
-import { writeFile, makeDir } from './Runner/utils/fs';
+import { writeFile, makeDir } from './utils/fs';
 
 // verbose webpack config
 // require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
@@ -25,15 +25,15 @@ export default class Runner {
   constructor(ctx = {}) {
     Object.assign(this, ctx);
     // console.log(111111, Object.keys(this));
-    this.build = require('./Runner/tools/build').default.bind(this);
-    this.bundle = require('./Runner/tools/bundle').default.bind(this);
-    this.clean = require('./Runner/tools/clean').default.bind(this);
-    this.copy = require('./Runner/tools/copy').default.bind(this);
-    this.deploy = require('./Runner/tools/deploy').default.bind(this);
-    this.render = require('./Runner/tools/render').default.bind(this);
-    this.run = require('./Runner/tools/run').default.bind(this);
-    this.runServer = require('./Runner/tools/runServer').default.bind(this);
-    this.start = require('./Runner/tools/start').default.bind(this);
+    this.build = require('./Runner/build').default.bind(this);
+    this.bundle = require('./Runner/bundle').default.bind(this);
+    this.clean = require('./Runner/clean').default.bind(this);
+    this.copy = require('./Runner/copy').default.bind(this);
+    this.deploy = require('./Runner/deploy').default.bind(this);
+    this.render = require('./Runner/render').default.bind(this);
+    this.run = require('./Runner/run').default.bind(this);
+    this.runServer = require('./Runner/runServer').default.bind(this);
+    this.start = require('./Runner/start').default.bind(this);
   }
 
   resolvePath(...args) {
@@ -169,7 +169,7 @@ ${Object.keys(this.modules.modules).map((key) => {
     //
     // // Configure client-side hot module replacement
     // const clientConfig = webpackConfig.find(config => config.name === 'client');
-    // clientConfig.entry.client = ['./Runner/tools/lib/webpackHotDevClient']
+    // clientConfig.entry.client = ['./Runner/lib/webpackHotDevClient']
     //   .concat(clientConfig.entry.client)
     //   .sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));
     // clientConfig.output.filename = clientConfig.output.filename.replace(
@@ -330,7 +330,7 @@ ${Object.keys(this.modules.modules).map((key) => {
 
   async start2() {
     DEBUG && console.log('Runner.start');
-    const webpackConfig = this.webpackConfig;
+    const { webpackConfig } = this;
     const [config] = webpackConfig;
     await this.clean();
     await this.prebuild();
@@ -394,6 +394,7 @@ ${Object.keys(this.modules.modules).map((key) => {
   }
 
   server = null
+
   runServer2() {
     DEBUG && console.log('Runner.runServer');
     const RUNNING_REGEXP = /.*🎃.*\/\/(.*?)\//;

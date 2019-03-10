@@ -1,6 +1,8 @@
-export { default as Runner } from './Runner';
-export { default } from './WebpackConfig';
-export { default as WebpackConfig } from './WebpackConfig';
-export { default as WebpackClientConfig } from './WebpackClientConfig';
-export { default as WebpackServerConfig } from './WebpackServerConfig';
-export { default as getWebpackConfig } from './getWebpackConfig';
+module.exports = {
+  default: require('./WebpackConfig').default,
+  Runner: require('./Runner').default,
+  WebpackConfig: require('./WebpackConfig').default,
+  WebpackClientConfig: require('./WebpackClientConfig').default,
+  WebpackServerConfig: require('./WebpackServerConfig').default,
+  getWebpackConfig: require('./getWebpackConfig').default,
+};
