@@ -12,15 +12,16 @@
     "one time code",
     "permit"
   ],
+  "dependencies": {
+    "crypto-js": "3.1.9-1"
+  },
   "devDependencies": {
-    "@lskjs/general": "^0.15.267",
-    "bluebird": "^3.5.3",
-    "crypto-js": "^3.1.9-1"
+    "@lskjs/general": "0.15.267",
+    "bluebird": "3.5.3"
   },
   "peerDependencies": {
     "@lskjs/general": "*",
-    "bluebird": "*",
-    "crypto-js": "*"
+    "bluebird": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"

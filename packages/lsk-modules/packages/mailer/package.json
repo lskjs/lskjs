@@ -18,14 +18,14 @@
     "eventemitter3": "^3.1.0",
     "imap": "^0.8.19",
     "mailparser": "^2.4.0",
-    "mjml": "3.3.3",
-    "nodemailer": "4.1.0",
-    "nodemailer-juice": "1.0.0"
+    "mjml": "^4.3.1",
+    "nodemailer": "^5.1.1",
+    "nodemailer-juice": "^1.0.1"
   },
   "devDependencies": {
-    "bluebird": "^3.5.2",
+    "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
-    "moment": "^2.22.2"
+    "moment": "^2.24.0"
   },
   "peerDependencies": {
     "bluebird": "*",
