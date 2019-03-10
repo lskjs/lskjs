@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/upload",
-  "version": "0.26.0",
+  "version": "0.26.4",
   "description": "LSK module for uploading files.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
