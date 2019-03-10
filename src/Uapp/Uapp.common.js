@@ -256,19 +256,11 @@ export default class Uapp extends Core {
     secret: false,
   };
 
-  prepareNotificationData = require('./helpers/prepareNotificationData').default;
-  // toast = require('./helpers/toast').default.bind(this);
-
-
   // uapp.onError(t('common.errorData'), err); ??? // bad
   // uapp.onError(uapp.e('errorData', { err })); ???
   @autobind
   onError(err) {
     return this.toast(err);
-    // this.toast({
-    //   ...this.prepareNotificationData(err, 'error'),
-    //   ...this.prepareNotificationData(err2, 'error'),
-    // });
   }
 
 
