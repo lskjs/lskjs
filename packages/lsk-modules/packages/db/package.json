@@ -18,11 +18,9 @@
     "mongoose": "5.2.15"
   },
   "devDependencies": {
-    "@babel/runtime": "7.1.5",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
-    "@babel/runtime": "*",
     "lodash": "*"
   },
   "scripts": {
