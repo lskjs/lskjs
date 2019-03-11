@@ -18,7 +18,7 @@ export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
   const { e400, e403, e404 } = ctx.errors;
   const { Passport } = module.models;
-  if (!ctx.e) ctx.e = (name, params = {}) => (throw { ...params, name });
+  if (!ctx.e) ctx.e = (name, params = {}) => { throw { ...params, name }; };
   // some
 
   const controller = {};
