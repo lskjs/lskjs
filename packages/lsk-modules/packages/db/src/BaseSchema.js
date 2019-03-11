@@ -1,4 +1,5 @@
 import forEach from 'lodash/forEach';
+import Promise from 'bluebird';
 import clone from 'lodash/clone';
 import pick from 'lodash/pick';
 

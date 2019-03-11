@@ -18,9 +18,11 @@
     "mongoose": "5.2.15"
   },
   "devDependencies": {
+    "bluebird": "3.5.3",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
+    "bluebird": "*",
     "lodash": "*"
   },
   "scripts": {
