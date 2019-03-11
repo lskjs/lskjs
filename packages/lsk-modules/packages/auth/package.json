@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "0.26.4",
+  "version": "0.26.6",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -30,22 +30,22 @@
     "validator": "10.11.0"
   },
   "devDependencies": {
-    "@lskjs/db": "0.26.4",
+    "@lskjs/db": "^0.26.6",
     "bluebird": "3.5.3",
     "lodash": "4.17.11",
     "mobx": "5.6.0",
-    "react-icons2": "2.5.0",
     "moment": "2.24.0",
-    "mongoose": "5.2.15"
+    "mongoose": "5.2.15",
+    "react-icons2": "2.5.0"
   },
   "peerDependencies": {
     "@lskjs/db": "*",
     "bluebird": "*",
     "lodash": "*",
     "mobx": "*",
-    "react-icons2": "*",
     "moment": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "react-icons2": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/ui",
-  "version": "0.16.1",
+  "version": "0.26.6",
   "author": "isuvorov",
   "license": "MIT",
   "dependencies": {
@@ -50,12 +50,12 @@
     "validate.js": "0.12.0"
   },
   "peerDependencies": {
-    "react-bootstrap": "^0.32.4",
     "antd": "^3.11.0",
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "prop-types": "^15.6.2"
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^15.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
