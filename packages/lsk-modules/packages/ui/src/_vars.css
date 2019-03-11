@@ -1,0 +1,64 @@
+@custom-media --xs (width  < 544px);
+@custom-media --sm (544px  <= width < 768px);
+@custom-media --md (768px  <= width < 992px);
+@custom-media --lg (992px  <= width < 1200px);
+@custom-media --xl (1200px <= width < 9999px);
+
+@define-mixin gridColors {
+  background: #fc8ffb;
+  @media (--xs) {
+    background: green;
+  }
+  @media (--sm) {
+    background: blue;
+  }
+  @media (--md) {
+    background: red;
+  }
+  @media (--lg) {
+    background: yellow;
+  }
+  @media (--xl) {
+    background: #01ffe1;
+  }
+}
+
+@define-mixin gridContainer {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  @media (--md) {
+    width: 750px;
+    /*width: 768px;*/
+  }
+  @media (--lg) {
+    width: 970px;
+    /*width: 992px;*/
+  }
+  @media (--xl) {
+    width: 1170px;
+    /*width: 1200px;*/
+  }
+}
+
+$color-default: #404040;
+
+$color-primary: #108ee9;
+$color-primary-hovered: #49a9ee;
+
+$color-secondary: #d9d9d9;
+$color-secondary-hovered: #656565;
+
+$color-lightgray: #acacac;
+$color-darkgray: #222222;
+
+$color-clay: #c3c7cf;
+
+$color-background: #f2f2f2;
+$color-border: #ebebeb;
+$color-shadow: rgba(0, 0, 0, 0.2);
+
+$color-transparent: rgba(0, 0, 0, 0);
+$color-overlay: rgba(132, 132, 132, .7);
+
+$submit-button-top-offset: 5px;

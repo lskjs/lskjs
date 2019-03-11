@@ -1,8 +1,9 @@
 #!/bin/sh
 pwd && \
-touch bump.txt && \
+# rm -rf bump.txt && \
 rm -rf .babelrc && \
-cp ../../.babelrc . && \
+rm -rf .babelrc.js && \
+cp ../../.babelrc.js . && \
 rm -rf node_modules && \
 npm i && \
 rm -rf release && \
@@ -14,4 +15,5 @@ cp -R package-lock.json build &&
 cp -R node_modules build && 
 cd build && \
 pwd && \
-npm link
+npm link && \
+echo "OK"

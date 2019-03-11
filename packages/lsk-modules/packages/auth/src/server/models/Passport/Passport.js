@@ -1,10 +1,10 @@
-import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
+import MongooseSchema from '@lskjs/db/MongooseSchema';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
 
 export function getSchema(ctx, module) {
   const mongoose = ctx.db;
-  const schema = new UniversalSchema({
+  const schema = new MongooseSchema({
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       // ref: 'User',

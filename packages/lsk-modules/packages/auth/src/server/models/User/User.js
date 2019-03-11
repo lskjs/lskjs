@@ -1,12 +1,11 @@
-import _ from 'lodash';
 import get from 'lodash/get';
 import jwt from 'jsonwebtoken';
+import MongooseSchema from '@lskjs/db/MongooseSchema';
 import bcrypt from 'bcryptjs';
 import isPlainObject from 'lodash/isPlainObject';
 import omit from 'lodash/omit';
 import pick from 'lodash/pick';
 import Promise from 'bluebird';
-import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 
 const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);
 const bcryptHash = Promise.promisify(bcrypt.hash);
@@ -37,7 +36,7 @@ function fullName(profile) {
 
 export function getSchema(ctx, module) {
   const sample = get(module, 'config.sample', sample2);
-  const schema = new UniversalSchema({
+  const schema = new MongooseSchema({
     username: {
       type: String,
       // required: true,
@@ -128,7 +127,7 @@ export function getSchema(ctx, module) {
 
   schema.methods.setPassword = async function (password) {
     this.password = await hashPassword(password);
-  }
+  };
   schema.methods.preSave = async function () {
     // console.log('User.methods.preSave', this.isNew, this.wasNew);
     this.wasNew = this.wasNew || this.isNew;

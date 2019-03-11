@@ -644,7 +644,7 @@ export default (ctx, module) => {
   };
   controller.restorePasswordPermit = async (req) => {
     console.log('123123123');
-    
+
     const { User } = ctx.models;
     const { email } = req.data;
     if (!email || !validator.isEmail(email)) {

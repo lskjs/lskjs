@@ -26,7 +26,8 @@
     "test-latest-cra": "yarn --prefix --cwd lib/cli run test-latest-cra",
     "test:cli": "npm --prefix lib/cli run test",
     "echo": "pwd",
-    "custom": "lerna exec --scope @lskjs/mailer -- \\$LERNA_ROOT_PATH/scripts/pack-bootstrap.sh"
+    "custom": "lerna exec --scope @lskjs/ui -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh",
+    "custom2": "lerna exec --scope @lskjs/general -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh"
   },
   "author": "isuvorov",
   "license": "ISC",
