@@ -3,7 +3,7 @@ import Promise from 'bluebird';
 import clone from 'lodash/clone';
 import pick from 'lodash/pick';
 
-const Schema = () => { console.log('OVERWRITE ME')};
+const Schema = () => { console.log('OVERWRITE ME'); };
 
 
 export default class BaseSchema {
