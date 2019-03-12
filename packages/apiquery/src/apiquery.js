@@ -5,19 +5,35 @@ import qs from 'qs';
 import FormData from 'form-data';
 import io from './socket-io-universal';
 import trim from './trim';
-// import fetch from 'isomorphic-fetch';
-const FETCH_PARAMS = [
-  'method',
+
+const AXIOS_PARAMS = [
   'url',
+  'method',
+  'baseURL',
+  'transformRequest',
+  'transformResponse',
   'headers',
-  'context',
-  'referrer',
-  'referrerPolicy',
-  'mode',
-  'credentials',
-  'redirect',
-  'integrity',
-  'cache',
+  'params',
+  'paramsSerializer',
+  'data',
+  'timeout',
+  'withCredentials',
+  'adapter',
+  'auth',
+  'responseType',
+  'responseEncoding',
+  'xsrfCookieName',
+  'xsrfHeaderName',
+  'onUploadProgress',
+  'onDownloadProgress',
+  'maxContentLength',
+  'validateStatus',
+  'maxRedirects',
+  'socketPath',
+  'httpAgent',
+  'httpsAgent',
+  'proxy',
+  'cancelToken',
 ];
 
 function ioMock(...initParams) {
@@ -62,8 +78,8 @@ function ioMock(...initParams) {
 // const DEBUG = __DEV__;
 
 export default class ApiClient {
-  static fetch = global.fetch;
-  static qs = qs
+  static axios = global.axios;
+  static qs = qs;
   // io = io
 
   constructor(params = {}) {
@@ -208,7 +224,7 @@ ${JSON.stringify(res.json, null, 2)}
         headers: {
           ...this.headers,
         } },
-      pick(params, FETCH_PARAMS),
+      pick(params, AXIOS_PARAMS),
     );
 
     const body = params.body || params.data;
@@ -268,32 +284,43 @@ ${JSON.stringify(res.json, null, 2)}
       status: result.status,
       statusText: result.statusText,
     };
-    try {
-      res.text = await result.text();
-    } catch (err) {
-      res.textErr = err;
+
+    if (typeof res.result.data === 'object') {
+      res.json = res.result.data;
+    } else {
+      try {
+        if (!res.result.data) {
+          throw new Error('Empty data');
+        }
+      } catch (err) {
+        res.textErr = err;
+      }
+
+      try {
+        res.json = JSON.parse(res.result.data);
+      } catch (err) {
+        res.jsonErr = err;
+      }
     }
-    try {
-      res.json = JSON.parse(res.text);
-    } catch (err) {
-      res.jsonErr = err;
-    }
+
     return res;
   }
 
-  fetch(...args) {
+  axios(...args) {
     const ctx = this.getCtx(...args);
-    const { fetch } = this.constructor;
+    const { axios } = this.constructor;
     const { req, parseResult, afterFetch } = ctx;
+
     if (this.log && this.log.trace) {
       this.log.trace('[api]', req.method, req.url, req._body);
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
+
     const { url, ...params } = req;
-    // console.log('@@@fetch', url, params);
-    const res = fetch(url, params)
-      .then(async (result) => {
-        ctx.res = await parseResult(ctx, result);
+
+    const res = axios(req)
+      .then(async (response) => {
+        ctx.res = await parseResult(ctx, response);
         return ctx;
       })
       .then(afterFetch);
@@ -302,7 +329,7 @@ ${JSON.stringify(res.json, null, 2)}
     return Promise.race([
       res,
       new Promise((resolve, reject) => {
-        setTimeout(() => reject(new Error('fetch timeout')), ctx.timeout);
+        setTimeout(() => reject(new Error('axios timeout')), ctx.timeout);
       }),
     ]);
   }
