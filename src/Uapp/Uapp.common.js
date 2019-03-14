@@ -259,7 +259,7 @@ export default class Uapp extends Core {
   // uapp.onError(uapp.e('errorData', { err })); ???
   @autobind
   onError(err) {
-    return this.toast(err);
+    return this.toast(err, { defaultType: 'error' });
   }
 
 
