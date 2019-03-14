@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/i18",
-  "version": "0.26.6",
+  "version": "0.26.15",
   "description": "LSK module for internationalization with i18next.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -18,16 +18,16 @@
     "i18next-xhr-backend": "2.0.1"
   },
   "devDependencies": {
+    "bluebird": "^3.5.3",
     "js-cookie": "2.2.0",
     "mobx": "5.9.0",
-    "moment": "2.24.0",
-    "bluebird": "^3.5.3"
+    "moment": "2.24.0"
   },
   "peerDependencies": {
+    "bluebird": "*",
     "js-cookie": "*",
     "mobx": "*",
-    "moment": "*",
-    "bluebird": "*"
+    "moment": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
