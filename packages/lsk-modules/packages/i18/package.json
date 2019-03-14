@@ -20,12 +20,14 @@
   "devDependencies": {
     "js-cookie": "2.2.0",
     "mobx": "5.9.0",
-    "moment": "2.24.0"
+    "moment": "2.24.0",
+    "bluebird": "^3.5.3"
   },
   "peerDependencies": {
     "js-cookie": "*",
     "mobx": "*",
-    "moment": "*"
+    "moment": "*",
+    "bluebird": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
