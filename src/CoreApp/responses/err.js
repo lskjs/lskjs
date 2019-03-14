@@ -8,7 +8,7 @@ export default ctx => function (pack) {
     ...debug
   } = pack;
 
-  console.log('errORORORO', message, pack.message, pack);
+  // console.log('errORORORO', message, pack.message, pack);
 
 
   const res = {};
