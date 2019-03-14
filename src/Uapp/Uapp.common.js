@@ -80,8 +80,8 @@ export default class Uapp extends Core {
     return api;
   }
 
-  getLocale = require('./i19/getLocale').default
-  setLocale = require('./i19/setLocale').default
+  getLocale = require('./i18/getLocale').default
+  setLocale = require('./i18/setLocale').default
 
   @autobind
   t(...args) {
