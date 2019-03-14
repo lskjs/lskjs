@@ -1,6 +1,7 @@
 import React from 'react';
 import merge from 'lodash/merge';
 import Promise from 'bluebird';
+import Loading from '@lskjs/general/Loading';
 
 const DEBUG = __DEV__ && false;
 
@@ -54,13 +55,10 @@ export default class Page {
     }
   }
 
-
   async enter() {
     if (DEBUG) console.log('Page.enter');
-
     if (__CLIENT__) this.scrollTo(0);
   }
-
 
   setState(state = {}) {
     if (DEBUG) console.log('Page.setState');
@@ -71,25 +69,6 @@ export default class Page {
     };
     return this;
   }
-
-  // getRes(isRenderHtml = false) {
-  //   if (this.state.redirect) {
-  //     return {
-  //       redirect: this.state.redirect,
-  //     };
-  //   }
-  //   if (isRenderHtml) {
-  //     return {
-  //       status: 200,
-  //       content: this.renderHtml(),
-  //     };
-  //   }
-  //   return {
-  //     status: 200,
-  //     component: this.renderRoot(),
-  //   };
-  // }
-
 
   error(err) {
     if (DEBUG) console.log('Page.error', err);
@@ -110,8 +89,9 @@ export default class Page {
 
   loading() {
     if (DEBUG) console.log('Page.loading');
-    const Loading = this.state.loading || 'Loading...';
-    return this.component(Loading);
+    // const Loading = this.state.loading || 'Loading...';
+    const loading = this.state.loading || <Loading full />;
+    return this.component(loading);
   }
 
 

@@ -10,7 +10,7 @@ import scrollTo from '@lskjs/general/utils/scrollTo';
 import detectHtmlClasses from '@lskjs/general/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/general/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/general/utils/removeClassFromHtml';
-import I19 from './i19';
+import I18 from '@lskjs/i18/I18';
 import logger from '../Core/logger';
 
 import Core from '../Core';
@@ -24,9 +24,8 @@ export default class Uapp extends Core {
   pageProps = {};
   Root = require('./Root').default;
   theme = require('./theme').default;
-  i18 = new I19();
   scrollTo = scrollTo;
-  scrollTo = scrollTo;
+  i18 = new I18({ ctx: this });
 
 
   createLogger(params) {

@@ -7,16 +7,16 @@ import map from 'lodash/map';
 import Api from 'apiquery';
 import staticFileMiddleware from 'connect-static-file';
 import autobind from 'core-decorators/lib/autobind';
+import I18 from '@lskjs/i18/I18';
 
 import ExpressApp from '../ExpressApp';
 import createWs from './ws';
 import getMongoose from './getMongoose';
-import I19 from '../Uapp/i19';
 
 
 export default class CoreApp extends ExpressApp {
   Api = Api;
-  i18 = new I19();
+  i18 = new I18({ ctx: this });
   async init() {
     super.init(...arguments);
     this.log.trace('CoreApp init');

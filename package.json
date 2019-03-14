@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.25.23",
+  "version": "1.25.24",
   "engines": {
     "node": ">=6.13.1",
     "npm": ">=3.10.10"
@@ -27,6 +27,7 @@
     "@babel/polyfill": "7.0.0-beta.42",
     "@babel/runtime": "7.0.0-beta.42",
     "@lskjs/general": "^0.15.267",
+    "@lskjs/i18": "^0.26.16",
     "antimerge": "0.0.5",
     "apiquery": "0.1.24",
     "bcryptjs": "2.4.3",

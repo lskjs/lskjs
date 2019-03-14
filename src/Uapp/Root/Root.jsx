@@ -4,6 +4,7 @@ import DevTools from 'mobx-react-devtools';
 import { Provider } from 'mobx-react';
 import { ThemeProvider } from 'emotion-theming';
 import NotificationSystem from '@lskjs/general/NotificationSystem';
+import Loading from '@lskjs/general/Loading';
 
 const DEBUG = false;
 

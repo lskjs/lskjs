@@ -1,16 +1,9 @@
-import get from 'lodash/get';
 import map from 'lodash/map';
 import ReactDOM from 'react-dom/server';
-
+import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 import BasePage from './Page.client';
 
 export default class Page extends BasePage {
-  getTitle() {
-    const metas = this.state.metas || [];
-    return get(metas, `${metas.length - 1}.title`) || '';
-  }
-
-
   renderOGMeta() {
     const { meta = {} } = this.state;
     return `\
@@ -38,10 +31,13 @@ ${this.renderOGMeta()}
 ${this.renderAssets('css')}
 ${this.renderStyle()}
 ${!js ? '' : `<script>${js}</script>`}
-${this.renderPreloader()}
+${this.renderPreloader()} 
 `;
   }
 
+  renderPreloader() {
+    return renderPreloader();
+  }
 
   renderMeta() {
     const { meta = {} } = this.state;
@@ -62,65 +58,6 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 `;
   }
 
-  preloader = `
-    <img
-      src="/assets/loader.gif"
-      alt="Loading"
-      width="120"
-      height="120"
-      class="preloader-gif"
-    />
-  `;
-  renderPreloader() {
-    if (!this.preloader) return '';
-    return `\
-    <style type="text/css">
-      .ua_js_no .preloader {
-        visibility: visible;
-        opacity: 1;
-      }
-      .ua_js_yes .preloader {
-        visibility: hidden;
-        opacity: 0;
-      }
-      .preloader {
-          transition: opacity .8s ease-out, visibility .8s ease-out;
-          height: 100%;
-          min-height: 100%;
-          margin: 0;
-          overflow: hidden;
-          user-select: none;
-          cursor: progress;
-          width: 100%;
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 10000;
-
-          pointer-events: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: rgb(255, 255, 255);
-      }
-      .preloader-element {
-        display: flex;
-      }
-      .preloader-gif {
-        user-select: none;
-      }
-    </style>
-    ${!(!__DEV__ && __SERVER__) ? '' : `
-      <div class="preloader">
-        <div class="preloader-element">
-          ${this.preloader}
-        </div>
-      </div>
-    `}
-`;
-  }
-
-
   getHtmlClass() {
     const ua = {};// useragent.is(req.headers['user-agent'])
     ua.js = false;
@@ -138,12 +75,12 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
   renderJS() {
     if (__CLIENT__) return '';
+    // window.__STAGE='${process.env.STAGE || 'develop'}';
     return `
       window.__VERSION='${__VERSION}';
       window.__STAGE='${__STAGE}';
       window.__INSTANCE='${__INSTANCE}';
       window.__MASTER=${__MASTER} || false;
-      window.__STAGE='${process.env.STAGE || 'develop'}';
     `;
   }
 
@@ -183,11 +120,9 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
     return '';
   }
 
-  renderFooter() {
+  renderDebug() {
     const util = require('util');
-    // const SHOW_DEBUG = true; //__DEV__ && __SERVER__
-    const SHOW_DEBUG = __DEV__ && __SERVER__;
-    const debug = SHOW_DEBUG ? `<!--
+    return `<!--
 DEBUG INFO
 
 __SERVER__: ${__SERVER__}
@@ -199,11 +134,12 @@ uapp.config:
 ${util.inspect(this.uapp.config)}
 uapp.page.state:
 ${util.inspect(this.uapp.page.state)}
--->` : '';
-      // const debug = __DEV__ && __SERVER__ ? `<!-- ${util.inspect({ ...this.props, style: undefined, req: undefined, ctx: null })} -->` : '';
-      // ${debug}
+-->`;
+  }
+
+  renderFooter() {
     return `\
-${debug}
+${__DEV__ ? this.renderDebug() : ''}
 ${this.state.footerHtml || ''}
 ${this.footer || ''}
 `;
