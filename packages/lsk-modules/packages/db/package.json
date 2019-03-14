@@ -14,7 +14,7 @@
     "schema"
   ],
   "dependencies": {
-    "mongoose": "5.2.15"
+    "mongoose": "5.4.19"
   },
   "devDependencies": {
     "bluebird": "3.5.3",
