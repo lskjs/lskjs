@@ -476,6 +476,8 @@ export default (ctx, module) => {
   };
   controller.emailPermit = async (req) => {
     const { User } = ctx.models;
+    const { PermitModel } = ctx.modules.permit.models;
+
     const { ObjectId } = ctx.db.Types;
     if (!req.user || !req.user._id) throw '!_id';
     let userId = req.user._id;
@@ -489,7 +491,6 @@ export default (ctx, module) => {
     const user = await User
       .findById(userId);
     if (!user) throw '!user';
-    const { PermitModel: Permit } = ctx.modules.permit.models;
     const { email } = req.data;
     if (!email || !validator.isEmail(email)) {
       throw 'emailNotValid';
@@ -504,7 +505,7 @@ export default (ctx, module) => {
       throw 'emailNotChanged';
     }
     const date = new Date();
-    const isTimeout = await Permit.countDocuments({
+    const isTimeout = await PermitModel.countDocuments({
       activatedAt: {
         $exists: false,
       },
@@ -542,7 +543,7 @@ export default (ctx, module) => {
     } else if (type === 'set') {
       str = `${user._id}_${email}_${date.getTime()}`;
     }
-    const code = await Permit.generateUniqCode({
+    const code = await PermitModel.generateUniqCode({
       codeParams: { str, type: 'hash' },
       criteria: {
         type: `user.${type}Email`,
@@ -554,8 +555,8 @@ export default (ctx, module) => {
         },
       },
     });
-    const permit = await Permit.createPermit({
-      expiredAt: Permit.makeExpiredAt(User.changeEmailLiveTime),
+    const permit = await PermitModel.createPermit({
+      expiredAt: PermitModel.makeExpiredAt(User.changeEmailLiveTime),
       type: `user.${type}Email`,
       userId: user._id,
       info: {
@@ -580,7 +581,7 @@ export default (ctx, module) => {
       link: ctx.url(`/auth/confirm/email?code=${permit.code}`),
     });
     console.log(ctx.url(`/auth/confirm/email?code=${permit.code}`), eventType);
-    return Permit.prepare(permit, { req });
+    return PermitModel.prepare(permit, { req });
   };
   controller.confirmEmail = async (req) => {
     const { User } = ctx.models;
@@ -647,7 +648,9 @@ export default (ctx, module) => {
   controller.restorePasswordPermit = async (req) => {
     // console.log('123123123');
     const { User } = ctx.models;
+    const { PermitModel } = ctx.modules.permit.models;
     const { email } = req.data;
+
     if (!email || !validator.isEmail(email)) {
       throw 'emailNotValid';
     }
@@ -659,10 +662,10 @@ export default (ctx, module) => {
     if (!user) {
       throw 'notFound';
     }
-    const { PermitModel: Permit } = ctx.modules.permit.models;
     const date = new Date();
     const str = `${user._id}_${email}_${date.getTime()}`;
-    const code = await Permit.generateUniqCode({
+    console.log({ PermitModel });
+    const code = await PermitModel.generateUniqCode({
       codeParams: { str, type: 'hash' },
       criteria: {
         type: 'user.restorePassword',
@@ -674,8 +677,8 @@ export default (ctx, module) => {
         },
       },
     });
-    const permit = await Permit.createPermit({
-      expiredAt: Permit.makeExpiredAt(User.restorePasswordLiveTime),
+    const permit = await PermitModel.createPermit({
+      expiredAt: PermitModel.makeExpiredAt(User.restorePasswordLiveTime),
       type: 'user.restorePassword',
       userId: user._id,
       info: {
@@ -693,7 +696,7 @@ export default (ctx, module) => {
       link: ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`),
     });
     // console.log(ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
-    return Permit.prepare(permit, { req });
+    return PermitModel.prepare(permit, { req });
   };
   controller.confirmPassword = async (req) => {
     const { User } = ctx.models;

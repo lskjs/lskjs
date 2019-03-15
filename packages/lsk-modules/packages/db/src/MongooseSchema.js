@@ -1,7 +1,6 @@
-import {Schema} from 'mongoose';
+import { Schema } from 'mongoose';
 import BaseSchema from './BaseSchema';
 
-export default class UniversalSchema extends BaseSchema {
+export default class MongooseSchema extends BaseSchema {
   static Schema = Schema;
 }
-

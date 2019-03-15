@@ -51,7 +51,7 @@ export default (ctx) => {
       if (!this.config.socials) this.config.socials = {};
       this.initOnlineService();
       this.models = this.getModels();
-      ctx.models.User = this.models.User;
+      // ctx.models.User = this.models.User;
 
       this.controller = this.getController();
       this.Strategy = require('./server/Strategy').default(ctx, this);
