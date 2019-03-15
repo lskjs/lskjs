@@ -1,12 +1,12 @@
+import UniversalSchema from '@lskjs/db/MongooseSchema';
 import SHA256 from 'crypto-js/sha256';
 import m from 'moment';
 import pick from 'lodash/pick';
-import UniversalSchema from './UniversalSchema';
 
-export function getSchema(ctx) {
-  const mongoose = ctx.db;
-  const Permit = new UniversalSchema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+export default function PermitModel({ emit, db }) {
+  const { Schema } = db;
+  const schema = new UniversalSchema({
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     type: {
       type: String,
       required: true,
@@ -25,9 +25,10 @@ export function getSchema(ctx) {
     },
     info: Object, // Всякая кастомная херь
   }, {
-    collection: 'permits',
+    model: 'Permit',
+    collection: 'permit',
   });
-  Permit.statics.createPermit = async function (data) {
+  schema.statics.createPermit = async function (data) { // eslint-disable-line func-names
     const {
       userId, expiredAt, info, code, type,
     } = data;
@@ -45,7 +46,7 @@ export function getSchema(ctx) {
     }
     return permit;
   };
-  Permit.statics.generateCode = function ({ str, type = 'random', length = 4 }, iteration) {
+  schema.statics.generateCode = function ({ str, type = 'random', length = 4 }, iteration) { // eslint-disable-line func-names
     if (type === 'random') {
       const min = 0;
       let maxNumber = '';
@@ -66,7 +67,7 @@ export function getSchema(ctx) {
     }
     throw '!type';
   };
-  Permit.statics.isCode = function ({ code, type, length = 4 }) {
+  schema.statics.isCode = function ({ code, type, length = 4 }) { // eslint-disable-line func-names
     if (type === 'random') {
       if (typeof code === 'string' && code.length === length) {
         let strRegexp = '';
@@ -78,7 +79,7 @@ export function getSchema(ctx) {
     }
     return false;
   };
-  Permit.statics.generateUniqCode = async function ({ criteria, codeParams = {}, iteration = 0 }) {
+  schema.statics.generateUniqCode = async function ({ criteria, codeParams = {}, iteration = 0 }) { // eslint-disable-line func-names
     // throw '!code';
     if (iteration > 100) throw '!code';
     const code = this.generateCode(codeParams, iteration);
@@ -94,7 +95,7 @@ export function getSchema(ctx) {
     }
     return code;
   };
-  Permit.statics.findByCode = async function (code, params = {}) {
+  schema.statics.findByCode = async function (code, params = {}) { // eslint-disable-line func-names
     return this.findOne({
       code,
       expiredAt: {
@@ -106,27 +107,25 @@ export function getSchema(ctx) {
       ...params,
     });
   };
-  Permit.statics.activate = async function (code) {
+  schema.statics.activate = async function (code) { // eslint-disable-line func-names
     const permit = await this.findByCode(code);
     if (permit) {
       return permit.activate();
     }
     return null;
   };
-  Permit.statics.makeExpiredAt = function ({ value = 1, type = 'hour' } = {}) {
+  schema.statics.makeExpiredAt = function ({ value = 1, type = 'hour' } = {}) { // eslint-disable-line func-names
     return m().add(value, type).toDate();
   };
-  Permit.methods.activate = async function () {
+  schema.methods.activate = async function () { // eslint-disable-line func-names
     this.activatedAt = new Date();
     await this.save();
-    ctx.emit(`models.Permit.activated_${this.type}`, this);
+    emit(`models.Permit.activated_${this.type}`, this);
     return this;
   };
-  Permit.statics.prepareOne = async function (obj) {
+  schema.statics.prepareOne = async function (obj) { // eslint-disable-line func-names
     obj.info = pick(obj.info, ['email', 'type']);
     return obj;
   };
-  return Permit;
+  return schema;
 }
-
-export default (ctx, module) => getSchema(ctx, module).getMongooseModel(ctx.db);

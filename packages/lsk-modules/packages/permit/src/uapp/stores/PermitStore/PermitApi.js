@@ -1,4 +1,5 @@
 import CrudApi from '@lskjs/general/stores/CrudApi';
+// import CrudApi from '@lskjs/mobx/stores/CrudApi';
 
 export default class UserApi extends CrudApi {
   base = '/api/module/permit';

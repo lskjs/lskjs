@@ -2,7 +2,7 @@ import MongooseSchema from '@lskjs/db/MongooseSchema';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
 
-export function getSchema(ctx, module) {
+export default function getSchema(ctx, module) {
   const mongoose = ctx.db;
   const schema = new MongooseSchema({
     userId: {
@@ -63,10 +63,11 @@ export function getSchema(ctx, module) {
       default: null,
     },
   }, {
+    model: 'Passport',
     collection: 'passport',
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    // timestamps: true,
+    // toJSON: { virtuals: true },
+    // toObject: { virtuals: true },
   });
 
   schema.methods.generateUsername = async function a(collection) {
@@ -150,6 +151,6 @@ export function getSchema(ctx, module) {
 }
 // export default getSchema;
 //
-export default(ctx, module) => {
-  return getSchema(ctx, module).getMongooseModel(ctx.db);
-};
+// export default(ctx, module) => {
+//   return getSchema(ctx, module).getMongooseModel(ctx.db);
+// };

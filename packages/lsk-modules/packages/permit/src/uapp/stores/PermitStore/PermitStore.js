@@ -1,6 +1,7 @@
 import { observable } from 'mobx';
 import set from 'lodash/set';
 import CrudStore from '@lskjs/general/stores/CrudStore';
+// import CrudStore from '@lskjs/mobx/stores/CrudStore';
 import PermitApi from './PermitApi';
 
 export default uapp => class PermitStore extends CrudStore {
