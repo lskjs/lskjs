@@ -314,6 +314,8 @@ export default class Uapp extends Core {
     await this.resetPage();
     // console.log('page $$$$', this.page);
     // console.log('this.router.resolve');
+    console.log(13112312);
+    
     try {
       // console.log('Uapp.router.resolve');
       await this.router.resolve({
@@ -327,7 +329,8 @@ export default class Uapp extends Core {
       console.error('uapp.router.resolve err', err); //eslint-disable-line
       this.log.error('resolveErr', err);
     }
-    this.emit('resolve:after');
+    console.log(13112312);
+    this.emit('resolve:after', { req, reqParams });
   }
 
   refresh() {

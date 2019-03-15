@@ -24,9 +24,9 @@ export default class Uapp extends BaseUapp {
       }
     });
     this.on('resolve:after', () => {
-      console.log('resolve:afterresolve:afterresolve:afterresolve:after');
+      console.log('resolve:afterresolve:afterresolve:afterresolve:after', this.scrollTo);
       if (this.scrollTo) {
-        setTimeout(this.scrollTo); // @TODO: back
+        setTimeout(this.scrollTo, 10); // @TODO: back
       }
       if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
         document.title = this.page.renderTitle();

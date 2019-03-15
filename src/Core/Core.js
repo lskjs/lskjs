@@ -32,7 +32,7 @@ export default class Core {
   }
 
   emit(...args) {
-    if (this.log) this.log.trace(`${this.name}`, ...args);
+    this.log ? this.log.trace(`${this.name}`, ...args) : console.log(`${this.name}`, ...args);
     if (this.ee) this.ee.emit(...args);
   }
   on(...args) {
