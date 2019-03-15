@@ -34,7 +34,7 @@ export default class Base extends Template {
         <mj-column width="100%">
           <mj-image
             src="${src}"
-            width="200"
+            width="200px"
           />
         </mj-column>
       </mj-section>
@@ -43,12 +43,12 @@ export default class Base extends Template {
 
   headerImage({ src }) {
     return `
-      <mj-section padding="0">
+      <mj-section padding="0px">
         <mj-column width="100%">
           <mj-image
             src="${src}"
-            width="600"
-            padding="0"
+            width="600px"
+            padding="0px"
           />
         </mj-column>
       </mj-section>
@@ -64,9 +64,9 @@ export default class Base extends Template {
             color="${this.theme.colors.secondary}"
             font-family="${this.fontFamily}"
             line-height="20px"
-            font-size="14"
-            padding-top="32"
-            padding-bottom="6"
+            font-size="14px"
+            padding-top="32px"
+            padding-bottom="6px"
           >
             ${subtitle}
           </mj-text>
@@ -76,8 +76,8 @@ export default class Base extends Template {
           color="${this.theme.colors.secondary}"
           font-family="${this.fontFamily}"
           line-height="20px"
-          font-size="14"
-          padding-top="0"
+          font-size="14px"
+          padding-top="0px"
         >
           &copy; ${title}
         </mj-text>
@@ -88,7 +88,7 @@ export default class Base extends Template {
   footerLinks(list = []) {
     return `
       <mj-column width="100%">
-        <mj-table padding-bottom="32">
+        <mj-table padding-bottom="32px">
           <tr>
             ${list.map((item, index) => (`
               <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
@@ -110,7 +110,7 @@ export default class Base extends Template {
           <mj-divider border-width="1px" border-style="solid" border-color="${this.theme.colors.border}" />
         </mj-column>
       </mj-section>
-      <mj-section background-color="${this.theme.colors.white}" padding="0 0 42px">
+      <mj-section background-color="${this.theme.colors.white}" padding="0px 0px 42px">
         ${this.title(this.t('email.goodDay'))}
         ${this.text(this.t('email.incircle.isuvorov.com'))}
       </mj-section>
@@ -160,7 +160,7 @@ export default class Base extends Template {
           font-size="16px"
           line-height="26px"
           align="center"
-          padding-top="24"
+          padding-top="24px"
         >
           ${children}
         </mj-text>
@@ -179,7 +179,7 @@ export default class Base extends Template {
           text-transform="uppercase"
           line-height="26px"
           font-size="13px"
-          padding-top="24"
+          padding-top="24px"
           href="${href}"
           color="${color}"
         >
@@ -218,8 +218,8 @@ export default class Base extends Template {
 
   footer() {
     return `
-            <mj-section padding="16"/>
-            <mj-section padding="32px" border-radius="4">
+            <mj-section padding="16px"/>
+            <mj-section padding="32px" border-radius="4px">
               <!--${this.footerLinks([
                 {
                   href: 'https://incircle.isuvorov.com',
@@ -247,7 +247,7 @@ export default class Base extends Template {
 
   content(children) {
     return `
-      <mj-section background-color="${this.theme.colors.white}" padding="32px 0 12px">
+      <mj-section background-color="${this.theme.colors.white}" padding="32px 0px 12px">
         ${children}
       </mj-section>
     `;
