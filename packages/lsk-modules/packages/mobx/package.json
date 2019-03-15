@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mobx",
-  "version": "0.26.6",
+  "version": "0.26.18",
   "description": "LSK module for mobx.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -12,7 +12,6 @@
     "mobx",
     "stores"
   ],
-  "dependencies": {},
   "devDependencies": {
     "bluebird": "3.5.3",
     "lodash": "4.17.11",
