@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.25.30",
+  "version": "1.25.31",
   "engines": {
     "node": ">=6.13.1",
     "npm": ">=3.10.10"
@@ -83,7 +83,7 @@
     "@babel/template": "7.0.0-beta.42",
     "@babel/types": "7.0.0-beta.42",
     "@lskjs/build": "1.19.28",
-    "@lskjs/general": "^0.15.291",
+    "@lskjs/general": "^0.15.292",
     "@lskjs/i18": "0.26.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
