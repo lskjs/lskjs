@@ -27,6 +27,7 @@ export default uapp => class PermitStore extends CrudStore {
     console.log(this.activatedAt);
     console.log(this.disabledAt);
     console.log(this.expiredAt);
+    console.log(!this.activatedAt && !this.disabledAt);
     
     return !this.activatedAt && !this.disabledAt;
   }

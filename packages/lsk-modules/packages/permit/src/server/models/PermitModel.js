@@ -3,7 +3,8 @@ import SHA256 from 'crypto-js/sha256';
 import m from 'moment';
 import pick from 'lodash/pick';
 
-export default function PermitModel({ emit, db }) {
+export default function PermitModel(ctx) {
+  const { db } = ctx;
   const { Schema } = db;
   const schema = new UniversalSchema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -120,7 +121,7 @@ export default function PermitModel({ emit, db }) {
   schema.methods.activate = async function () { // eslint-disable-line func-names
     this.activatedAt = new Date();
     await this.save();
-    emit(`models.Permit.activated_${this.type}`, this);
+    ctx.emit(`models.Permit.activated_${this.type}`, this);
     return this;
   };
   schema.statics.prepareOne = async function (obj) { // eslint-disable-line func-names
