@@ -265,10 +265,10 @@ export default class Uapp extends Core {
   }
 
 
-  toast(err) {
+  toast(err, config) {
     // console.log('toast', err, this.notificationSystem);
     if (this.notificationSystem && this.notificationSystem.current) {
-      this.notificationSystem.current.toast(err);
+      this.notificationSystem.current.toast(err, config);
     } else {
       console.error('Uapp.toast', err);
     }
