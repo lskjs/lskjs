@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import If from 'react-if';
 import PropTypes from 'prop-types';
-import autobind from 'core-decorators/lib/autobind';
 import get from 'lodash/get';
 import Plus from 'react-icons2/mdi/plus-circle';
 
@@ -72,50 +71,42 @@ class TagsPicker extends PureComponent {
     this.setState(state);
   }
 
-  @autobind
-  getValue() {
+  getValue = () => {
     const { value } = this.state;
     return !Array.isArray(value) ? [value] : value;
   }
 
-  @autobind
-  handleDeleteTag(id) {
+  handleDeleteTag = (id) => {
     const { value } = this.state;
     this.setState({ value: value.filter(e => e !== id) }, this.callbackCombo);
   }
 
-  @autobind
-  callbackCombo() {
+  callbackCombo = () => {
     this.callbackChange();
     this.callbackSubmit();
   }
 
-  @autobind
-  handleSubmit(value) {
+  handleSubmit = (value) => {
     this.setState({ value }, this.callbackSubmit);
   }
 
-  @autobind
-  callbackSubmit() {
+  callbackSubmit = () => {
     const { onSubmit } = this.props;
     const { value } = this.state;
     if (onSubmit) onSubmit(value);
   }
 
-  @autobind
-  handleChange(value) {
+  handleChange = (value) => {
     this.setState({ value }, this.callbackChange);
   }
 
-  @autobind
-  callbackChange() {
+  callbackChange = () => {
     const { onChange } = this.props;
     const { value } = this.state;
     if (onChange) onChange(value);
   }
 
-  @autobind
-  renderModal(trigger) {
+  renderModal = (trigger) => {
     const {
       flat, title, onChange, fields, createTag,
     } = this.props;

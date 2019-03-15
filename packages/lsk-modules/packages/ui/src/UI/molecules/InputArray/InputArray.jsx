@@ -1,6 +1,5 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import autobind from 'core-decorators/lib/autobind';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import DebounceInput from 'react-debounce-input';
@@ -39,14 +38,12 @@ class InputArray extends React.Component {
     this.onChange();
   }
 
-  @autobind
-  onChange() {
+  onChange = () => {
     const { value } = this.state;
     if (this.props.onChange) this.props.onChange((value || []).filter(a => a));
   }
 
-  @autobind
-  onChangeHandler(i, val) {
+  onChangeHandler = (i, val) => {
     const value = [...this.state.value];
     value[i] = val;
 
@@ -57,8 +54,7 @@ class InputArray extends React.Component {
     });
   }
 
-  @autobind
-  onBlurHandler(i) {
+  onBlurHandler = (i) => {
     if (this.state.value.length > 1) {
       if (this.state.value[i] === '') {
         const value = [...this.state.value];

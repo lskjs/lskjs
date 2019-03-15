@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import isEqual from 'lodash/isEqual';
 import If from 'react-if';
 import PropTypes from 'prop-types';
-import autobind from 'core-decorators/lib/autobind';
 import { formatter } from '../../../utils/formatter';
 import RangeGroup from '../RangeGroup';
 import { Wrapper, Values, ValueItem } from './RangeFilterOption.styles';
@@ -115,8 +114,7 @@ class RangeFilterOption extends Component {
     });
     return values;
   }
-  @autobind
-  selectShortValue(value, type) {
+  selectShortValue = (value, type) => {
     const reverse = type === 'min' ? 'max' : 'min';
     this.setState({
       [`${type}Value`]: value,
@@ -137,8 +135,7 @@ class RangeFilterOption extends Component {
       }
     });
   }
-  @autobind
-  handleFocus(type) {
+  handleFocus = (type) => {
     const reverse = type === 'min' ? 'max' : 'min';
     this.setState({
       [`${type}Focused`]: true,
@@ -146,16 +143,14 @@ class RangeFilterOption extends Component {
     });
     this[`${type}Ref`]?.focus(); // eslint-disable-line
   }
-  @autobind
-  callback(min, max) {
+  callback = (min, max) => {
     const { onChange } = this.props;
     onChange({
       title: `${min ? formatter(min) : 'Мин.'} - ${max ? formatter(max) : 'Макс.'}`,
       value: [min, max],
     });
   }
-  @autobind
-  handleChangeRange([min, max]) {
+  handleChangeRange = ([min, max]) => {
     this.setState({
       minValue: min,
       maxValue: max,

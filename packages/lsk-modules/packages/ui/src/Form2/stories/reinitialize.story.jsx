@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'formik';
-import autobind from 'core-decorators/lib/autobind';
 
 import Story from '../../Story';
 import createForm from '../createForm';
@@ -58,8 +57,7 @@ class Container extends Component {
   state = {
     input: 'demo',  // eslint-disable-line
   }
-  @autobind
-  handleChange(values) {
+  handleChange = (values) => {
     this.setState(values);
   }
   render() {

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import autobind from 'core-decorators/lib/autobind';
 import PropTypes from 'prop-types';
 import {
   Label,
@@ -19,7 +18,7 @@ class Switcher extends PureComponent {
     onChange: null,
     validationState: null,
   }
-  @autobind handleChange() {
+  handleChange = () => {
     const { onChange, value } = this.props;
     if (onChange) onChange(!value);
   }

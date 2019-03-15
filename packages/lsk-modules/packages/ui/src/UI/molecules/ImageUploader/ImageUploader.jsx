@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import autobind from 'core-decorators/lib/autobind';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import File from 'react-icons2/mdi/file-image';
@@ -75,8 +74,7 @@ class ImageUploader extends Component {
       this.setState({ value: next.value });
     }
   }
-  @autobind
-  async onDrop(files = []) {
+  onDrop = async (files = []) => {
     const { onSubmit, upload, onError } = this.props;
     if (!upload) return;
     let value = null;
@@ -94,12 +92,10 @@ class ImageUploader extends Component {
     }
     this.setState({ value, dragged: false });
   }
-  @autobind
-  onDragged(dragged) {
+  onDragged = (dragged) => {
     this.setState({ dragged });
   }
-  @autobind
-  removeFile() {
+  removeFile = () => {
     const { onSubmit } = this.props;
     this.setState({ value: null }, () => {
       if (onSubmit) onSubmit(null);

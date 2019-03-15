@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 // import get from 'lodash/get';
-import autobind from 'core-decorators/lib/autobind';
 import CalendarBase from 'antd/es/calendar';
 import moment from 'moment';
 import HighlightedCell from '../../../UI/atoms/HighlightedCell';
@@ -9,8 +8,7 @@ class Calendar extends PureComponent {
   static isAnyTypeDate(f) {
     return (new Date(f)).getTime() > 0;
   }
-  @autobind
-  validationDate(value) {
+  validationDate = (value) => {
     const { field, ...props } = this.props;
     let validValue = moment(new Date());
     if (this.constructor.isAnyTypeDate(value)) {

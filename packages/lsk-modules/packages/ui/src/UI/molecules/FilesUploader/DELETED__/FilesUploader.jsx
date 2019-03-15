@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import autobind from 'core-decorators/lib/autobind';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
@@ -65,7 +64,7 @@ class FilesUploader extends Component {
       this.setState({ files: next.files });
     }
   }
-  @autobind async onDrop(inputFiles = []) {
+  onDrop = async (inputFiles = []) => {
     let files = inputFiles;
     const alreadyFiles = this.state.files;
     const {
@@ -92,10 +91,10 @@ class FilesUploader extends Component {
     }
     this.setState({ files: uploaded, dragged: false });
   }
-  @autobind onDragged(dragged) {
+  onDragged = (dragged) => {
     this.setState({ dragged });
   }
-  @autobind removeFile(index) {
+  removeFile = (index) => {
     const { files } = this.state;
     const { onSubmit } = this.props;
     files.splice(index, 1);

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import CreditCard from 'react-icons2/mdi/credit-card';
-import autobind from 'core-decorators/lib/autobind';
 import InputGroup from '../InputGroup';
 import Input from '../../../Input';
 import Button from '../../../Button';
@@ -40,11 +39,11 @@ class CardToken extends Component {
     if (newValue !== next.value) state.value = next.value;
     this.setState(state);
   }
-  @autobind getValue() {
+  getValue = () => {
     const { value } = this.state;
     return value;
   }
-  @autobind handleSubmit(value) {
+  handleSubmit = (value) => {
     const { uapp } = this.props;
     const { token, errorMsgs } = value;
     if (!token) uapp.onError('!token');
@@ -57,20 +56,20 @@ class CardToken extends Component {
     this.setState({ value: token }, this.callbackSubmit);
     this.modal.close();
   }
-  @autobind callbackSubmit() {
+  callbackSubmit = () => {
     const { onSubmit } = this.props;
     const { value } = this.state;
     if (onSubmit) onSubmit(value);
   }
-  @autobind handleChange(value) {
+  handleChange = (value) => {
     this.setState({ value }, this.callbackChange);
   }
-  @autobind callbackChange() {
+  callbackChange = () => {
     const { onChange } = this.props;
     const { value } = this.state;
     if (onChange) onChange(value);
   }
-  @autobind initWidget(data) {
+  initWidget = (data) => {
     const { uapp } = this.props;
     const style = {
       widget: {},
@@ -105,12 +104,12 @@ class CardToken extends Component {
       });
     });
   }
-  @autobind async handleOpen() {
+  handleOpen = async () => {
     const { uapp } = this.props;
     const res = await uapp.modules.billing.stores.Transactions.getCardTokenSign();
     this.initWidget(res?.data);
   }
-  @autobind renderModal(trigger) {
+  renderModal = (trigger) => {
     const { title, onChange, t } = this.props;
     return (
       <Modal

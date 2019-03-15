@@ -1,7 +1,6 @@
 /* eslint import/no-unresolved: 0, import/extensions: 0 */
 import React, { Component } from 'react';
 import If from 'react-if';
-import autobind from 'core-decorators/lib/autobind';
 
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
@@ -92,8 +91,7 @@ class TreePicker extends Component {
     return titles;
   }
 
-  @autobind
-  initFuse(fields) {
+  initFuse = (fields) => {
     this.fuse = new Fuse(this.getArrays(fields), {
       shouldSort: true,
       threshold: 0.1,
@@ -107,24 +105,20 @@ class TreePicker extends Component {
     });
   }
 
-  @autobind
-  handleSearch(search) {
+  handleSearch = (search) => {
     this.setState({ search });
   }
 
-  @autobind
-  handleSelect(value) {
+  handleSelect = (value) => {
     this.setState({ value }, this.callbackChange);
   }
 
-  @autobind
-  callbackChange() {
+  callbackChange = () => {
     const { onChange } = this.props;
     if (onChange) onChange(this.state.value);
   }
 
-  @autobind
-  resetToProps() {
+  resetToProps = () => {
     const { value, search } = this.props;
     this.setState({
       value,
@@ -132,21 +126,18 @@ class TreePicker extends Component {
     });
   }
 
-  @autobind
-  handleReset() {
+  handleReset = () => {
     if (this.modal) this.modal.close();
   }
 
-  @autobind
-  async handleSubmit() {
+  handleSubmit = async () => {
     const { value } = this.state;
     const { onSubmit } = this.props;
     if (onSubmit) await onSubmit(value);
     if (this.modal) this.modal.close();
   }
 
-  @autobind
-  deepSearch(searchedFields, fields = this.props.fields || [], searchedFieldIds) {
+  deepSearch = (searchedFields, fields = this.props.fields || [], searchedFieldIds) => {
     if (!searchedFieldIds) {
       searchedFieldIds = map(searchedFields, '_id');
     }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import autobind from 'core-decorators/lib/autobind';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import toNumber from 'lodash/toNumber';
@@ -61,8 +60,7 @@ class PriceConverter extends Component {
   //   if (action) state.type = action;
   //   this.setState(state, this.callback);
   // }
-  @autobind
-  handleChangePrice(newValue) {
+  handleChangePrice = (newValue) => {
     const { value } = this.state;
     // console.log({ newValue, value });
     if (newValue === value) return;
@@ -71,8 +69,7 @@ class PriceConverter extends Component {
     this.setState(state, this.callback);
   }
 
-  @autobind
-  handleChangeAction(newType) {
+  handleChangeAction = (newType) => {
     const { type } = this.state;
     if ((newType === type)) return;
     const state = { ...this.state, type };
@@ -80,13 +77,11 @@ class PriceConverter extends Component {
     this.setState(state, this.callback);
   }
 
-  @autobind
-  handleClearValue() {
+  handleClearValue = () => {
     this.setState({ value: '' }, this.callback);
   }
 
-  @autobind
-  callback() {
+  callback = () => {
     const { value, type } = this.state;
     const { onChange } = this.props;
     if (onChange) {

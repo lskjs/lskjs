@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import autobind from 'core-decorators/lib/autobind';
 import omit from 'lodash/omit';
 import StatusButton from '../StatusButton';
 
@@ -13,8 +12,7 @@ export default class TestPromise extends Component {
     };
   }
 
-  @autobind
-  getData() {
+  getData = () => {
     this.promise = new Promise((resolve, reject) => {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
@@ -25,8 +23,7 @@ export default class TestPromise extends Component {
     return this.promise;
   }
 
-  @autobind
-  async handleClick() {
+  handleClick = async () => {
     const result = await this.getData();
     this.props.onClick && this.props.onClick(result);
   }

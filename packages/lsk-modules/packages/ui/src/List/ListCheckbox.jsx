@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import Checkbox from 'antd/lib/checkbox';
-import autobind from 'core-decorators/lib/autobind';
 
 @inject('selectStore')
 @observer
 class ListCheckbox extends Component {
-  @autobind
-  handleClick() {
+  handleClick = () => {
     const { selectStore, item, global } = this.props;
     if (global) {
       selectStore.globalToggle();

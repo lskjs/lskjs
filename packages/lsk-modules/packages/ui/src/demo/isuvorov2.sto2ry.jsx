@@ -34,7 +34,7 @@ class SuperInput extends React.Component {  //eslint-disable-line
   }
 }
 
-const Block = styled(SuperInput)`
+const Block = css(SuperInput)`
   width: 70px;
   height: 50px;
   

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import autobind from 'core-decorators/lib/autobind';
 import ChevronDownIcon from 'react-icons2/mdi/chevron-down';
 import { Manager, Reference, Popper } from 'react-popper';
 import Outside from 'react-click-outside';
@@ -32,8 +31,7 @@ class SelectFilter extends PureComponent {
     this.content = React.createRef();
   }
 
-  @autobind
-  openHandler(open) {
+  openHandler = (open) => {
     this.setState({ open }, () => {
       this.setState({
         contentHeight: this.content.current?.scrollHeight || '100%', // eslint-disable-line no-undef
@@ -41,8 +39,7 @@ class SelectFilter extends PureComponent {
     });
   }
 
-  @autobind
-  renderContent({ ref, style, placement }) {
+  renderContent = ({ ref, style, placement }) => {
     const { open, contentHeight } = this.state;
     const { children, contentWrapperProps } = this.props;
     if (!open) return false;
@@ -62,8 +59,7 @@ class SelectFilter extends PureComponent {
       </Content>
     );
   }
-  @autobind
-  onClickOutside() {
+  onClickOutside = () => {
     const { open } = this.state;
     if (!open) return;
     this.openHandler(false);

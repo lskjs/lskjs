@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import If from 'react-if';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import autobind from 'core-decorators/lib/autobind';
 import { debounce } from 'lodash-decorators';
 import DebounceInput from 'react-debounce-input';
 
@@ -67,8 +66,7 @@ class PriceInput extends Component {
     this.store.update(props);
   }
 
-  @autobind
-  onInputFilterValue(e) {
+  onInputFilterValue = (e) => {
     // this.props.filter
     const dots = !this.props.dots ? '\\.\\,' : '';// this.dots// \.\,
     const regExp = new RegExp(`[^0-9${dots}]`, 'g');

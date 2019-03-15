@@ -1,5 +1,4 @@
 import { observable, computed, action } from 'mobx';
-import { autobind } from 'core-decorators';
 import debounce from 'lodash-decorators/debounce';
 import isEmpty from 'lodash/isEmpty';
 import every from 'lodash/every';
@@ -60,8 +59,7 @@ export default class ListStore extends FetchStore {
   /**
     * @param {Number} page - page from 1
     */
-  @autobind
-  setPage(page) {
+  setPage = (page) => {
     this.setStateAndUpdate({
       skip: Math.floor((page - 1) * this.limit),
     });
@@ -71,53 +69,46 @@ export default class ListStore extends FetchStore {
    * Handlers
    */
 
-  @autobind
-  setTab(tab) {
+  setTab = (tab) => {
     this.setStateAndUpdate({
       tab,
       skip: 0,
     });
   }
 
-  @autobind
-  setLimit(limit) {
+  setLimit = (limit) => {
     this.setStateAndUpdate({
       limit,
     });
   }
 
-  @autobind
-  setFilter(values) {
+  setFilter = (values) => {
     this.setStateAndUpdate({
       filter: values,
       skip: 0,
     });
   }
 
-  @autobind
-  toggleFilter() {
+  toggleFilter = () => {
     this.setState({
       showFilter: !this.showFilter,
     });
   }
 
-  @autobind
-  setSearch(search) {
+  setSearch = (search) => {
     this.setStateAndUpdate({
       search,
       skip: 0,
     });
   }
 
-  @autobind
-  handleChangeLimit(limit) {
+  handleChangeLimit = (limit) => {
     this.setStateAndUpdate({
       limit,
     });
   }
 
-  @autobind
-  clearFilter() {
+  clearFilter = () => {
     this.setStateAndUpdate({
       filter: {},
       search: '',
@@ -129,8 +120,7 @@ export default class ListStore extends FetchStore {
    * Первый клик - равен -1, те сортирвка по возрастанию (возможно нужно вторым аргументов задавать)
    * @param {String} field - поле для которого инверсируют сортировку
    */
-  @autobind
-  toggleSort(field) {
+  toggleSort = (field) => {
     // пока только одна сортировка
     const value = this.sort && this.sort[field];
     this.setStateAndUpdate({

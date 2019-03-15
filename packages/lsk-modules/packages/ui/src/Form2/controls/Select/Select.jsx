@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
-import autobind from 'core-decorators/lib/autobind';
 import ReactSelect from 'react-select';
 import ReactAsyncSelect from 'react-select/lib/Async';
 import cx from 'classnames';
@@ -45,8 +44,7 @@ class Select extends Component {
     const option = await loadOption(value);
     this.setState({ option, initOption: true }); // eslint-disable-line react/no-unused-state
   }
-  @autobind
-  async loadOptions(...args) {
+  loadOptions = async (...args) => {
     try {
       // console.log('loadOptions');
       const { loadOptions, ...props } = this.props;
@@ -58,8 +56,7 @@ class Select extends Component {
       return [];
     }
   }
-  @autobind
-  handleChange(option) {
+  handleChange = (option) => {
     const { form, field, onChange } = this.props;
     this.setState({ option, initOption: false }); // eslint-disable-line react/no-unused-state
     let value;

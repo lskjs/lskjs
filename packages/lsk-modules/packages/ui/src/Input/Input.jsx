@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import autobind from 'core-decorators/lib/autobind';
 
 // import getBlock from './Input.styles';
 import If from 'react-if';
@@ -67,8 +66,7 @@ class Input extends PureComponent {
     }
   }
 
-  @autobind
-  handleChange(e) {
+  handleChange = (e) => {
     const { regex } = this.props;
     let value = e;
     if (!(typeof value === 'number' || typeof value === 'string') && value) {

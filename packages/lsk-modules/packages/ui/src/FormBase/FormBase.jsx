@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import autobind from 'core-decorators/lib/autobind';
 import importcss from 'importcss';
 import cx from 'classnames';
 import validate from 'validate.js';
@@ -135,8 +134,7 @@ export default class FormBase extends Component {
     return errors && errors[name] || {};
   }
 
-  @autobind
-  getData() {
+  getData = () => {
     return this.state.data;
   }
 
@@ -205,8 +203,7 @@ export default class FormBase extends Component {
     }
   }
 
-  @autobind
-  handleChangeField(name, ...args) {
+  handleChangeField = (name, ...args) => {
     // console.log('handleChangeField', name, ...args);
     return async (inputValue) => {
       await this.setFieldData(name, inputValue, ...args);
@@ -224,16 +221,14 @@ export default class FormBase extends Component {
     }
   }
 
-  @autobind
-  async handleSubmit(e) {
+  handleSubmit = async (e) => {
     e && e.preventDefault && e.preventDefault();
     if (await this.validate()) {
       return this.onSubmit(this.getData());
     }
   }
 
-  @autobind
-  handleCancel(e) {
+  handleCancel = (e) => {
     e && e.preventDefault && e.preventDefault();
     this.setState({
       data: this.processStateData(this.props),

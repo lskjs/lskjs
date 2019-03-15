@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import hash from 'object-hash';
+// import hash from 'object-hash';
 
 class SimpleFormGroup extends Component {
   render() {
@@ -10,7 +10,7 @@ class SimpleFormGroup extends Component {
       ...props
     } = this.props;
     const errorMessage = form && form.errors && form.errors[field.name];
-    const fieldId = `field__${hash(field.name)}`;
+    const fieldId = `field__${Math.random()}`;
     const style = {};
     if (errorMessage) style.color = '#ff0000';
     return (

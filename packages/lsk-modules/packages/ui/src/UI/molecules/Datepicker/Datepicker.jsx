@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import autobind from 'core-decorators/lib/autobind';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import DatePicker from 'antd/lib/date-picker';
@@ -29,8 +28,7 @@ class Datepicker extends Component {
     validationState: null,
     ranged: false,
   }
-  @autobind
-  getCalendarContainer() {
+  getCalendarContainer = () => {
     const { id } = this.props;
     if (!__CLIENT__ && !id) return false;
     return document.querySelector(`.datepicker-${id}`)

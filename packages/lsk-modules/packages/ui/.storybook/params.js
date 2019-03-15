@@ -13,5 +13,6 @@ export default {
     name: 'LskGeneral',
   },
   info: true,
+  knobs: false,
 };
 

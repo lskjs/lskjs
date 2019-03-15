@@ -4,7 +4,6 @@ import cx from 'classnames';
 import pick from 'lodash/pick';
 import omit from 'lodash/omit';
 import ReactModal from 'react-modal';
-import autobind from 'core-decorators/lib/autobind';
 
 import ModalSubtitle from '../UI/atoms/ModalSubtitle';
 import ModalDescription from '../UI/atoms/ModalDescription';
@@ -61,8 +60,7 @@ class Modal2 extends PureComponent {
     this.state = { visible: props.defaultVisible };
   }
 
-  @autobind
-  toggle() {
+  toggle = () => {
     if (this.state.visible) {
       this.close();
     } else {
@@ -70,13 +68,11 @@ class Modal2 extends PureComponent {
     }
   }
 
-  @autobind
-  open() {
+  open = () => {
     this.setState({ visible: true });
     if (this.props.onOpen) this.props.onOpen();
   }
-  @autobind
-  close() {
+  close = () => {
     this.setState({ visible: false });
     if (this.props.onClose) this.props.onClose();
   }

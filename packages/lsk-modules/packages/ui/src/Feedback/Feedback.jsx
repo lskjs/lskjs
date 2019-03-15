@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // import Star from '~/icons/star';
-import autobind from 'core-decorators/lib/autobind';
 import { inject, observer } from 'mobx-react';
 
 import Rate from 'antd/lib/rate';
@@ -22,12 +21,10 @@ class Feedback extends Component {
       this.setState({ value: next.value });
     }
   }
-  @autobind
-  handleChangeStar(value) {
+  handleChangeStar = (value) => {
     this.setState({ value }, this.callback);
   }
-  @autobind
-  callback() {
+  callback = () => {
     const { onChange } = this.props;
     const { value } = this.state;
     if (onChange) onChange(value);

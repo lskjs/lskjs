@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 import defaultTheme from './theme';
 import Performance from './DEV/Performance';
-// import './styles.g.css';
+import './styles.g.css';
 
 class Story extends Component {
   componentDidMount() {

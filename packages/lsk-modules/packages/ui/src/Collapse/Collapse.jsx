@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import autobind from 'core-decorators/lib/autobind';
 import PropTypes from 'prop-types';
 import { injectGlobal } from 'emotion';
 import { Collapse as ReactCollapse, UnmountClosed } from 'react-collapse';
@@ -54,8 +53,7 @@ class Collapse extends PureComponent {
     }
   }
 
-  @autobind
-  handleRenderer({ current, to }) {
+  handleRenderer = ({ current, to }) => {
     const { rest } = this.state;
     if (current !== to && !rest) return;
     this.toggleRestFilterBar(true);
