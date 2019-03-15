@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DevTools from 'mobx-react-devtools';
-import { Provider } from 'mobx-react';
+import { Provider as DefaultProvider } from 'mobx-react';
 import { ThemeProvider } from 'emotion-theming';
 import NotificationSystem from '@lskjs/general/NotificationSystem';
-import Loading from '@lskjs/general/Loading';
+// import Loading from '@lskjs/general/Loading';
 
 const DEBUG = false;
 
 export default class Root extends Component {
-  Provider = Provider;
-  ThemeProvider = ThemeProvider;
-
   static propTypes = {
     history: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
@@ -20,34 +17,17 @@ export default class Root extends Component {
   static childContextTypes = {
     history: PropTypes.object.isRequired,
   };
-
+  constructor({ uapp }) {
+    super();
+    uapp.notificationSystem = React.createRef();
+  }
   getChildContext() {
     return {
       history: this.props.history,
     };
   }
-
-  constructor({ uapp }) {
-    super();
-    uapp.notificationSystem = React.createRef();
-  }
-
-
-  // getChildContext() {
-  //   const { uapp } = this.props;
-  //   const stores = (uapp && uapp.provide()) || {};
-  //   uapp.log.trace('uapp.provide', Object.keys(stores));
-  //   return {
-  //     ...super.getChildContext(),
-  //     addClassToHtml: Root.addClassToHtml,
-  //     removeClassToHtml: Root.removeClassToHtml,
-  //     mobxStores: stores,
-  //   };
-  // }
-  // static contextTypes = {
-  //   mobxStores: MobxTypes.objectOrObservableObject,
-  // }
-
+  Provider = DefaultProvider;
+  ThemeProvider = ThemeProvider;
 
   render() {
     DEBUG && console.log('Root.render');

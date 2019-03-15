@@ -1,6 +1,6 @@
 {
   "name": "lego-starter-kit",
-  "version": "1.25.29",
+  "version": "1.25.30",
   "engines": {
     "node": ">=6.13.1",
     "npm": ">=3.10.10"
@@ -26,8 +26,7 @@
   "dependencies": {
     "@babel/polyfill": "7.0.0-beta.42",
     "@babel/runtime": "7.0.0-beta.42",
-    "@lskjs/general": "^0.15.290",
-    "@lskjs/i18": "0.26.16",
+    "@lskjs/db": "^0.26.18",
     "antimerge": "0.0.5",
     "apiquery": "0.1.24",
     "bcryptjs": "2.4.3",
@@ -56,8 +55,6 @@
     "mobx": "5.8.0",
     "mobx-react": "5.4.3",
     "mobx-react-devtools": "6.0.3",
-    "mongoose": "5.2.15",
-    "nprogress": "0.2.0",
     "prop-types": "15.6.2",
     "react": "16.5.2",
     "react-deep-force-update": "2.1.3",
@@ -65,9 +62,7 @@
     "react-emotion": "9.1.3",
     "react-fastclick": "3.0.2",
     "react-icon-base": "2.1.2",
-    "react-notification-system": "0.2.17",
     "redis": "2.8.0",
-    "smooth-scroll": "15.0.0",
     "socket.io": "2.1.1",
     "socket.io-as-promised": "1.0.0",
     "socket.io-redis": "5.2.0",
@@ -88,6 +83,8 @@
     "@babel/template": "7.0.0-beta.42",
     "@babel/types": "7.0.0-beta.42",
     "@lskjs/build": "1.19.28",
+    "@lskjs/general": "^0.15.291",
+    "@lskjs/i18": "0.26.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
@@ -114,6 +111,10 @@
     "webpack-bundle-analyzer": "3.0.2",
     "webpack-hot-middleware": "2.24.3",
     "webpack-node-externals": "1.7.2"
+  },
+  "peerDependencies": {
+    "@lskjs/general": "*",
+    "@lskjs/i18": "*"
   },
   "__note": {
     "webpack-middleware": "1.5.1",

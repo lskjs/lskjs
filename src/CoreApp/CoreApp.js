@@ -8,10 +8,10 @@ import Api from 'apiquery';
 import staticFileMiddleware from 'connect-static-file';
 import autobind from 'core-decorators/lib/autobind';
 import I18 from '@lskjs/i18/I18';
+import db from '@lskjs/db/server';
 
 import ExpressApp from '../ExpressApp';
 import createWs from './ws';
-import getMongoose from './getMongoose';
 
 
 export default class CoreApp extends ExpressApp {
@@ -98,7 +98,7 @@ export default class CoreApp extends ExpressApp {
     return require('./models').default(this); // eslint-disable-line
   }
   getDatabase() {
-    return this.config.db && getMongoose(this, this.config.db);
+    return this.config.db && db(this, this.config.db);
   }
   getErrors() {
     return require('./getErrors').default(this); // eslint-disable-line
@@ -219,7 +219,7 @@ export default class CoreApp extends ExpressApp {
     this.log.trace('CoreApp.run');
     // console.log('this.config.db', this.config, this.config?.db);
 
-    this.config.db && this.db && await this.db.run();
+    this.db && await this.db.run();
     this.config.ws && await this.runWs();
     this.config.redis && await this.runRedis();
   }

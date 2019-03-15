@@ -16,6 +16,25 @@ export default class Uapp extends BaseUapp {
     this.favico = new Favico({
       animation: 'none',
     });
+
+    this.on('resolve:before', () => {
+      console.log('resolve:beforeresolve:beforeresolve:beforeresolve:before');
+      if (this.progress && this.progress.current) {
+        this.progress.current.start();
+      }
+    });
+    this.on('resolve:after', () => {
+      console.log('resolve:afterresolve:afterresolve:afterresolve:after');
+      if (this.scrollTo) {
+        setTimeout(this.scrollTo); // @TODO: back
+      }
+      if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
+        document.title = this.page.renderTitle();
+      }
+      if (this.progress && this.progress.current) {
+        this.progress.current.finish();
+      }
+    });
   }
 
 
@@ -35,28 +54,5 @@ export default class Uapp extends BaseUapp {
     if (__CLIENT__ && !__DEV__) {
       setTimeout(() => this.checkVersion(), 120 * 1000);
     }
-  }
-
-
-  async beforeResolve(...args) {
-    await super.beforeResolve(...args);
-    try {
-      NProgress.start();
-    } catch (err) {
-      // console.log('NProgress', err);
-    }
-  }
-  async afterResolve(...args) {
-    await super.afterResolve(...args);
-    setTimeout(this.scrollTo); // @TODO: back
-    if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
-      document.title = this.page.renderTitle();
-    }
-    try {
-      NProgress.done();
-    } catch (err) {
-      // console.log('NProgress', err);
-    }
-    // @TODO: to @natavts favicon, meta tags
   }
 }

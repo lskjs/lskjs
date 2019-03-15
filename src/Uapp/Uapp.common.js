@@ -10,6 +10,7 @@ import scrollTo from '@lskjs/general/utils/scrollTo';
 import detectHtmlClasses from '@lskjs/general/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/general/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/general/utils/removeClassFromHtml';
+import Root from '@lskjs/general/Root';
 import I18 from '@lskjs/i18/I18';
 import logger from '../Core/logger';
 
@@ -22,7 +23,8 @@ export default class Uapp extends Core {
   Api = Api;
   Page = require('./Page').default;
   pageProps = {};
-  Root = require('./Root').default;
+  // Root = require('./Root').default;
+  Root = Root;
   theme = require('./theme').default;
   scrollTo = scrollTo;
   i18 = new I18({ ctx: this });
@@ -302,9 +304,8 @@ export default class Uapp extends Core {
   }
 
   async resolve(reqParams = {}) {
-    // __DEV__ && console.log('Uapp.resolve');
-    await this.beforeResolve();
     const req = Api.createReq(reqParams);
+    this.emit('resolve:before', { req, reqParams });
     __CLIENT__ && __DEV__ && this.log.trace('Uapp.resolve', req.path, req.query);
     // this.log.trace('resolve1', req.path, req.query);
     // this.log.trace({r:'resolve2'});
@@ -324,16 +325,10 @@ export default class Uapp extends Core {
       });
     } catch (err) {
       console.error('uapp.router.resolve err', err); //eslint-disable-line
-      // this.log.error('resolveErr', err);
+      this.log.error('resolveErr', err);
     }
-    await this.afterResolve();
+    this.emit('resolve:after');
   }
-
-  async beforeResolve(...args) {
-  }
-  async afterResolve(...args) {
-  }
-
 
   refresh() {
     if (__CLIENT__) {
