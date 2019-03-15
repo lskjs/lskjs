@@ -29,10 +29,7 @@ export default class CoreApp extends ExpressApp {
     this.log.debug('errors', Object.keys(this.errors));
     this.middlewares = this.getMiddlewares();
     this.log.debug('middlewares', Object.keys(this.middlewares));
-    this.models = this.getMongooseModels();
-    this.log.debug('models', Object.keys(this.models));
-    this.resourses = this.getResourses();
-    this.log.debug('resourses', Object.keys(this.resourses));
+
     this.helpers = this.getHelpers();
     this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this.getResolvedStatics();
@@ -49,6 +46,14 @@ export default class CoreApp extends ExpressApp {
         getLocale: this.getLocale,
       }).init();
     }
+  }
+  async afterInit() {
+    // super.afterInit(...arguments);
+    this.models = this.getMongooseModels();
+    this.log.debug('models', Object.keys(this.models));
+    this.resourses = this.getResourses();
+    this.log.debug('resourses', Object.keys(this.resourses));
+    await this.runModels();
   }
 
 
@@ -86,8 +91,37 @@ export default class CoreApp extends ExpressApp {
     return require('./middlewares').default(this); // eslint-disable-line
   }
   getMongooseModels() {
+    console.log('getMongooseModels', Object.keys(this.modules));
     const models = this.getModels();
-    return mapValues(models, (model) => {
+
+
+    forEach(this.modules, (mdl, moduleName) => {
+      let models2 = {};
+      if (mdl.getModels) {
+        models2 = mdl.getModels();
+      } else if (mdl.models) {
+        models2 = mdl.models;
+      }
+      console.log('models2', Object.keys(models2));
+
+
+      forEach(models2, (model, modelName) => {
+        if (models[modelName]) {
+          console.log(`CONFLICT modules/${moduleName}/${modelName}`);
+          return;
+        }
+        models[modelName] = models2[modelName];
+      });
+    });
+    console.log('models', Object.keys(models));
+
+    return mapValues(models, (model, modelName) => {
+      console.log('modelName', modelName);
+      if (modelName === 'PermitModel') {
+        console.log('model', model);
+        console.log('model._universal', model._universal);
+        
+      }
       if (model._universal) {
         return model.getMongooseModel(this.db);
       }
@@ -160,10 +194,6 @@ export default class CoreApp extends ExpressApp {
     this.ws = createWs(this);
     this.ws.wrapExpress(this.app);
   }
-  async afterInit() {
-    await this.runModels();
-  }
-
   async runWs() {
     if (!this.config.ws) return;
     this.ws.serveClient(false);

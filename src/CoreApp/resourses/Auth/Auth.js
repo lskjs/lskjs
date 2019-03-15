@@ -1,15 +1,13 @@
-import jwt from 'express-jwt';
-
 export function canonize(str) {
   return str.toLowerCase().trim();
 }
 
 
 export default (ctx) => {
-  const User = ctx.models.User;
   const resourse = {};
 
   resourse.validate = async function (req) {
+    const { User } = ctx.models;
     const user = await User.findById(req.user._id);
     if (!user) throw ctx.errors.e404('Не найден user в базе');
     return {
@@ -22,6 +20,7 @@ export default (ctx) => {
   };
 
   resourse.silent = async function (req) {
+    const { User } = ctx.models;
     const params = req.allParams();
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
@@ -39,6 +38,7 @@ export default (ctx) => {
     };
   };
   resourse.getUserFields = function (req) {
+    const { User } = ctx.models;
     const params = req.allParams();
     if (params.login) {
       if (!params.username) params.username = params.login;
@@ -75,6 +75,7 @@ export default (ctx) => {
     throw ctx.errors.e400('Параметр username, email, login не передан');
   };
   resourse.signup = async function (req) {
+    const { User } = ctx.models;
     const userFields = resourse.getUserFields(req);
     const criteria = resourse.getUserCriteria(req);
     const existUser = await User.findOne(criteria);
@@ -106,6 +107,7 @@ export default (ctx) => {
   };
 
   resourse.login = async function (req) {
+    const { User } = ctx.models;
     const params = req.allParams();
 
     if (!params.password) throw ctx.errors.e400('Параметр password не передан');
@@ -126,6 +128,7 @@ export default (ctx) => {
     };
   };
   resourse.recovery = async function (req) {
+    const { User } = ctx.models;
     // const params = req.allParams();
 
     const criteria = resourse.getUserCriteria(req);
