@@ -71,7 +71,7 @@ export default function getSchema(ctx, module) {
   });
 
   schema.methods.generateUsername = async function a(collection) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     let username = `${this.providerId}_${this.provider}`;
     username = module.canonizeUsername(username.toLowerCase());
     if (!collection) return username;

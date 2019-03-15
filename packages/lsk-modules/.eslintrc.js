@@ -27,6 +27,9 @@ const res =  {
     'class-methods-use-this': 'off',    
     'global-require': 'off',    
     'lines-between-class-members': 'off',    
+    'func-names': 'off',    
+    'no-underscore-dangle': 'off',    
+    'no-throw-literal': 'off',    
   },
   settings: {
     'import/resolver': {

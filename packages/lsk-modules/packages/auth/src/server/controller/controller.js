@@ -17,32 +17,31 @@ function validateEmail(email) {
 export default (ctx, module) => {
   const { checkNotFound } = ctx.helpers;
   const { e400, e403, e404 } = ctx.errors;
-  const { Passport } = module.models;
   if (!ctx.e) ctx.e = (name, params = {}) => { throw { ...params, name }; };
   // some
 
   const controller = {};
 
   controller.validate = async function (req) {
-    const { User } = ctx.models;
-    const user = await User.findById(req.user._id);
+    const { User: UserModel } = ctx.models;
+    const user = await UserModel.findById(req.user._id);
     if (!user) throw ctx.errors.e404('Не найден user в базе');
     return {
       __pack: 1,
       jwt: req.user,
-      user: await User.prepare(user, { req }),
+      user: await UserModel.prepare(user, { req }),
       // token: user.getToken()
       // user,
     };
   };
 
   controller.silent = async function (req) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     const params = req.allParams();
     if (params.username) params.username = module.canonize(params.username);
     if (params.email) params.email = module.canonize(params.email);
     const username = `__s${Date.now()}__`;
-    const user = new User(Object.assign({
+    const user = new UserModel(Object.assign({
       username,
       type: 'silent',
     }, params));
@@ -51,7 +50,7 @@ export default (ctx, module) => {
     return {
       __pack: 1,
       signup: true,
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
@@ -99,26 +98,26 @@ export default (ctx, module) => {
     throw ctx.errors.e400('Параметр username, email, login не передан');
   };
   controller.afterSignup = async function ({ req, user }) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     const link = await user.genereateEmailApprovedLink();
     ctx.emit('events.auth.signup', { user, link });
 
     return {
       __pack: 1,
       signup: true,
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
   controller.signup = async function (req) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     const { password, ...userFields } = controller.getUserFields(req);
     const criteria = controller.getUserCriteria(req);
-    const existUser = await User.findOne(criteria);
+    const existUser = await UserModel.findOne(criteria);
     if (existUser) throw ctx.e('auth.userExist', { status: 400, criteria });
     if (!userFields.meta) userFields.meta = {};
     userFields.meta.approvedEmail = false;
-    const user = new User(userFields);
+    const user = new UserModel(userFields);
     if (password) {
       await user.setPassword(password);
     }
@@ -129,13 +128,13 @@ export default (ctx, module) => {
   };
 
   controller.login = async function (req) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     const params = req.allParams();
 
     if (!params.password) throw ctx.e('auth.!password', { status: 400 });
 
     const criteria = controller.getUserCriteria(req);
-    const user = await User.findOne(criteria);
+    const user = await UserModel.findOne(criteria);
 
     if (!user) throw ctx.e('auth.loginIncorrect', { status: 400 });
     if (!await user.verifyPassword(params.password)) {
@@ -145,43 +144,43 @@ export default (ctx, module) => {
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
 
   controller.updateToken = async function (req) {
-    const { User } = ctx.models;
-    const params = req.allParams();
+    const { User: UserModel } = ctx.models;
+    // const params = req.allParams();
 
     const userId = req.user && req.user._id;
     if (!userId) throw ctx.errors.e404('Токен не верный');
 
-    const user = await User.findById(userId);
+    const user = await UserModel.findById(userId);
     if (!user) throw ctx.errors.e404('Такой пользователь не найден');
     req.user = user;
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
 
   controller.recovery = async function (req) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     const { mailer } = ctx.modules;
     if (!mailer) throw 'Система не может отправить email';
 
     // const params = req.allParams();
 
     const criteria = controller.getUserCriteria(req);
-    const user = await User.findOne(criteria);
+    const user = await UserModel.findOne(criteria);
     if (!user) throw ctx.errors.e404('Неверный логин');
     const email = user.getEmail();
     if (!email) throw ctx.errors.e400('У этого пользователя не был указан емейл для восстановления');
 
-    const password = User.generatePassword();
+    const password = UserModel.generatePassword();
 
     await mailer.send({
       ...user.getMailerParams('primary'),
@@ -204,20 +203,20 @@ export default (ctx, module) => {
   };
 
   controller.socialLogin = async (req) => {
-    const { User } = ctx.models;
-    const passport = await Passport.getByToken(req.data.p);
+    const { User: UserModel, Passport: PassportModel } = ctx.models;
+    const passport = await PassportModel.getByToken(req.data.p);
     let user = await passport.getUser();
     if (!user) {
       const params = merge(
         { profile: passport.profile },
         // req.data, // meta
         {
-          username: await passport.generateUsername(User),
+          username: await passport.generateUsername(UserModel),
           // _id,
         },
       );
       // console.log({ params });
-      user = new User(params);
+      user = new UserModel(params);
       // await user.save();
       user.updateFromPassport(passport, { req });
       await user.save();
@@ -228,18 +227,18 @@ export default (ctx, module) => {
     req.user = user;
 
     return {
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
 
   controller.socialBind = async (req) => {
-    const { User } = ctx.models;
+    const { User: UserModel, Passport: PassportModel } = ctx.models;
     const userId = req.user._id;
-    const passport = await Passport
+    const passport = await PassportModel
       .getByToken(req.data.p)
       .then(checkNotFound);
-    const user = await User
+    const user = await UserModel
       .findById(req.user._id)
       .then(checkNotFound);
     if (passport.userId) throw e400('passport.userId already exist');
@@ -248,23 +247,24 @@ export default (ctx, module) => {
     await passport.save();
     await user.updateFromPassport(passport);
     await user.save();
-    return Passport.find({
+    return PassportModel.find({
       userId,
     });
   };
 
   controller.getSocials = async (req) => {
+    const { Passport: PassportModel } = ctx.models;
     const userId = req.user._id;
-    return Passport.find({
+    return PassportModel.find({
       userId,
     });
   };
 
   controller.socialUnbind = async (req) => {
-    const { User } = ctx.models;
+    const { User: UserModel, Passport: PassportModel } = ctx.models;
     const params = req.allParams();
     const userId = req.user._id;
-    const user = await User
+    const user = await UserModel
       .findById(req.user._id)
       .then(checkNotFound);
 
@@ -276,7 +276,7 @@ export default (ctx, module) => {
     if (!findParams.passportId && !findParams.provider) {
       throw e400('!findParams.passportId && !findParams.provider');
     }
-    const passport = await Passport
+    const passport = await PassportModel
       .findOne(findParams)
       .then(checkNotFound);
     if (passport.userId !== userId) throw e403('Wrong user!');
@@ -286,31 +286,31 @@ export default (ctx, module) => {
     // });
     await passport.save();
     await user.save();
-    return Passport.find({
+    return PassportModel.find({
       userId,
     });
   };
 
 
   controller.tokenLogin = async function (req) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     const token = req.data.t || req.data.token;
     if (!token) throw ctx.errors.e400('!token');
 
-    const user = await User.tokenLogin({ token });
+    const user = await UserModel.tokenLogin({ token });
     if (!user) throw ctx.errors.e404('!user');
     req.user = user;
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
 
   controller.approveEmail = async (req) => {
-    const { User } = ctx.models;
-    return User.findAndApproveEmail(req.data.t);
+    const { User: UserModel } = ctx.models;
+    return UserModel.findAndApproveEmail(req.data.t);
   };
   controller.approvedEmail = async (req) => {
     console.log('DEPRECATED lsk-auth  approvedEmail => approveEmail');
@@ -432,14 +432,14 @@ export default (ctx, module) => {
   controller.phoneLogin = async (req, res, next) => {
     if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     if (!((module.config.sms.defaultCode && code === module.config.sms.code) || code === controller.lastCode)) {
       throw 'Код не верный';
     }
 
-    let user = await User.findOne({ username: phone });
+    let user = await UserModel.findOne({ username: phone });
     if (!user) {
-      user = await User.create({
+      user = await UserModel.create({
         username: phone,
         profile: {
           contacts: {
@@ -452,31 +452,35 @@ export default (ctx, module) => {
 
     return {
       __pack: 1,
-      user: await User.prepare(user, { req, withAppState: true }),
+      user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
   };
 
-  controller.getPassportByToken = async (req, res) => Passport.getByToken(req.data.p);
+  controller.getPassportByToken = async (req, res) => {
+    const { Passport: PassportModel } = ctx.models;
+
+    return PassportModel.getByToken(req.data.p);
+  };
   controller.getPermit = async (req) => {
     const { _id } = req.data;
     if (!_id) throw '!_id';
-    const { PermitModel: Permit } = ctx.modules.permit.models;
-    const permit = await Permit.findOne({
+    const { PermitModel } = ctx.models;
+    const permit = await PermitModel.findOne({
       _id,
     });
     if (!permit) throw '!permit';
-    if (permit.type === 'user.restorePassword') return Permit.prepare(permit, { req });
+    if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
     if (!req.user || !req.user._id) throw '!userId';
     if (!permit) throw 'not found';
     if (ctx.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
-      return Permit.prepare(permit, { req });
+      return PermitModel.prepare(permit, { req });
     }
     throw '!permission';
   };
   controller.emailPermit = async (req) => {
-    const { User } = ctx.models;
-    const { PermitModel } = ctx.modules.permit.models;
+    const { User: UserModel } = ctx.models;
+    const { PermitModel } = ctx.models;
 
     const { ObjectId } = ctx.db.Types;
     if (!req.user || !req.user._id) throw '!_id';
@@ -488,8 +492,7 @@ export default (ctx, module) => {
         throw '!permission';
       }
     }
-    const user = await User
-      .findById(userId);
+    const user = await UserModel.findById(userId);
     if (!user) throw '!user';
     const { email } = req.data;
     if (!email || !validator.isEmail(email)) {
@@ -521,13 +524,13 @@ export default (ctx, module) => {
         ],
       },
       createdAt: {
-        $gte: m(date).add(-User.changeEmailTimeout.value, User.changeEmailTimeout.type).toDate(),
+        $gte: m(date).add(-UserModel.changeEmailTimeout.value, UserModel.changeEmailTimeout.type).toDate(),
       },
     });
     if (isTimeout) {
       throw 'timeout';
     }
-    const emailExist = await User
+    const emailExist = await UserModel
       .countDocuments({
         _id: {
           $ne: userId,
@@ -556,7 +559,7 @@ export default (ctx, module) => {
       },
     });
     const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.makeExpiredAt(User.changeEmailLiveTime),
+      expiredAt: PermitModel.makeExpiredAt(UserModel.changeEmailLiveTime),
       type: `user.${type}Email`,
       userId: user._id,
       info: {
@@ -584,11 +587,11 @@ export default (ctx, module) => {
     return PermitModel.prepare(permit, { req });
   };
   controller.confirmEmail = async (req) => {
-    const { User } = ctx.models;
-    const { PermitModel: Permit } = ctx.modules.permit.models;
+    const { User: UserModel } = ctx.models;
+    const { PermitModel } = ctx.models;
     const { code } = req.data;
     if (!code) throw '!code';
-    const permit = await Permit.findOne({
+    const permit = await PermitModel.findOne({
       $or: [
         {
           type: 'user.changeEmail',
@@ -603,10 +606,10 @@ export default (ctx, module) => {
     if (permit.activatedAt) throw 'activated';
     const date = new Date();
     if (date > permit.expiredAt) throw 'expired';
-    const user = await User
+    const user = await UserModel
       .findById(permit.info.userId);
     if (!user) throw '!user';
-    const emailExist = await User
+    const emailExist = await UserModel
       .findOne({
         _id: {
           $ne: user._id,
@@ -634,7 +637,7 @@ export default (ctx, module) => {
       user.markModified('meta.approvedEmail');
     }
     await user.save();
-    const permits = await Permit.find({
+    const permits = await PermitModel.find({
       _id: { $ne: permit._id },
       type: permit.type,
       userId: user._id,
@@ -647,14 +650,14 @@ export default (ctx, module) => {
   };
   controller.restorePasswordPermit = async (req) => {
     // console.log('123123123');
-    const { User } = ctx.models;
-    const { PermitModel } = ctx.modules.permit.models;
+    const { User: UserModel } = ctx.models;
+    const { PermitModel } = ctx.models;
     const { email } = req.data;
 
     if (!email || !validator.isEmail(email)) {
       throw 'emailNotValid';
     }
-    const user = await User
+    const user = await UserModel
       .findOne({ email })
       .select([
         'email',
@@ -678,7 +681,7 @@ export default (ctx, module) => {
       },
     });
     const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.makeExpiredAt(User.restorePasswordLiveTime),
+      expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
       type: 'user.restorePassword',
       userId: user._id,
       info: {
@@ -699,11 +702,11 @@ export default (ctx, module) => {
     return PermitModel.prepare(permit, { req });
   };
   controller.confirmPassword = async (req) => {
-    const { User } = ctx.models;
-    const { PermitModel: Permit } = ctx.modules.permit.models;
+    const { User: UserModel } = ctx.models;
+    const { PermitModel } = ctx.models;
     const { code, password } = req.data;
     if (!code) throw '!code';
-    const permit = await Permit.findOne({
+    const permit = await PermitModel.findOne({
       type: 'user.restorePassword',
       code,
     });
@@ -711,8 +714,7 @@ export default (ctx, module) => {
     if (permit.activatedAt) throw { code: 'activated' };
     const date = new Date();
     if (date > permit.expiredAt) throw { code: 'expired' };
-    const user = await User
-      .findById(permit.userId);
+    const user = await UserModel.findById(permit.userId);
     if (!user) throw '!user';
     await permit.activate();
     await user.setPassword(password);
@@ -721,26 +723,26 @@ export default (ctx, module) => {
     await user.save();
     return Promise.props({
       __pack: true,
-      user: User.prepare(user, { req }),
+      user: UserModel.prepare(user, { req }),
       token: user.generateAuthToken(),
       data: {
-        permit: Permit.prepare(permit, { req }),
+        permit: PermitModel.prepare(permit, { req }),
       },
     });
   };
   controller.findOneByCode = async (req) => {
     const { code } = req.data;
     if (!code) throw '!code';
-    const { PermitModel: Permit } = ctx.modules.permit.models;
-    const permit = await Permit.findOne({
+    const { PermitModel } = ctx.models;
+    const permit = await PermitModel.findOne({
       code,
     });
     if (!permit) throw '!permit';
-    if (permit.type === 'user.restorePassword') return Permit.prepare(permit, { req });
+    if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
     if (!req.user || !req.user._id) throw '!userId';
     if (!permit) throw 'not found';
     if (ctx.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
-      return Permit.prepare(permit, { req });
+      return PermitModel.prepare(permit, { req });
     }
     throw '!permission';
   };

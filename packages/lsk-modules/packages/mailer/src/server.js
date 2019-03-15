@@ -103,10 +103,10 @@ export default app => class Mailer {
   }
 
   async sendTo(props = {}, params = {}) {
-    const { User } = app.models;
+    const { User: UserModel } = app.models;
     if (!props.user && !props.userId) throw app.e('mailer.!userId');
 
-    const user = props.user || await User.findById(props.userId);
+    const user = props.user || await UserModel.findById(props.userId);
     if (!user) throw app.e('mailer.!user');
     const userParams = this.getUserMailerParams(user);
     console.log({ user, userParams });

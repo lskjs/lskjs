@@ -12,8 +12,8 @@ export default (ctx, module) => {
       return 'test';
     },
     async email(req) {
-      const { User } = ctx.models;
-      const user = await User.findOne();
+      const { User: UserModel } = ctx.models;
+      const user = await UserModel.findOne();
       const { data } = req;
       const { template } = req.data;
       console.log({ template });

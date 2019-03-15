@@ -16,8 +16,8 @@ export default (ctx) => {
       this.online = onlineService;
       this.online.save = async (_id, visitedAt) => {
         // console.log('this.online.save', _id, visitedAt);
-        const { User } = ctx.models;
-        await User.update({ _id }, { visitedAt });
+        const { User: UserModel } = ctx.models;
+        await UserModel.update({ _id }, { visitedAt });
       };
       // setInterval(() => {
       //   console.log('online users', this.online.count());
