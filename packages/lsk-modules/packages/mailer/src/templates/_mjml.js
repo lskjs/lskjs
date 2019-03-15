@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable indent */
-import { mjml2html } from 'mjml';
+import mjml2html from 'mjml';
+// import { mjml2html } from 'mjml';
 import Template from './_html';
 
 export default class Base extends Template {
