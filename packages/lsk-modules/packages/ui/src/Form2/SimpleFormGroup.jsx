@@ -20,7 +20,7 @@ class SimpleFormGroup extends Component {
       >
         <div id={fieldId} className="smooth" />
         <h4>
-          {props.label ? props.label : `${props.title}${props.required ? ' *' : ''}`}
+          {props.label ? props.label : `${props.title}${props.required || props._required ? ' *' : ''}`}
         </h4>
         <div>
           {children}

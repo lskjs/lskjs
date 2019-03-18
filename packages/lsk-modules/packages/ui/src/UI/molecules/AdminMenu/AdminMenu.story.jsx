@@ -82,6 +82,7 @@ const items2 = [
     title: 'Задачи менеджеров',
     label: 4,
   },
+  'divider',
   {
     key: 'users',
     title: 'Пользователи',

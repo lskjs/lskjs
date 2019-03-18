@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+// import { observer } from 'mobx-react';
 import keyBy from 'lodash/keyBy';
 // import Tooltip from '~/Uapp/components/Tooltip';
 import countries from './countries.json';
@@ -7,7 +7,7 @@ import countries from './countries.json';
 const codes = keyBy(countries, 'code');
 
 // @inject('t')
-@observer
+// @observer
 class FlagIcon extends Component {
   static codes = codes;
   static getInfo(inputCode) {
@@ -43,6 +43,7 @@ class FlagIcon extends Component {
       <img
         style={{
           height: '16px',
+          border: '1px solid #e3e3e3',
         }}
         src={flag}
         alt={t(`country.${country.code}`)}

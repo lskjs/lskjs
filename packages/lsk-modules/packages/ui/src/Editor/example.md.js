@@ -7,14 +7,12 @@ export default `
 https://github.com/isuvorov/lsk-general
 
 Чтобы запустить визуальные примеры:
-
 \`\`\`sh
 git clone git@github.com:isuvorov/lsk-general.git
 cd lsk-general
 npm install
 npm run storybook
 \`\`\`
-
 ## 1. Компонент Progress
 Реализовать компонент полоски загрузки.
 

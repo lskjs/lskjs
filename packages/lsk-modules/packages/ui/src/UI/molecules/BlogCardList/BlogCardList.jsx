@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import If from 'react-if';
-import ImageComponent from '../Image';
+import Image from '../Image';
 import filterProps from '../../../utils/filterProps';
 
 import {
@@ -43,6 +43,7 @@ class BlogCardList extends PureComponent {
     const {
       id,
       img,
+      imgObjectFit = 'cover',
       title,
       tag,
       content,
@@ -53,13 +54,13 @@ class BlogCardList extends PureComponent {
     return (
       <Wrapper componentClass={componentClass} {...filterProps(props)}>
         <ImageContainer>
-          <ImageComponent
+          <Image
             id={id}
             width="100%"
             height="100%"
             src={img}
             alt={title}
-            objectFit="contain"
+            objectFit={imgObjectFit}
           />
         </ImageContainer>
         <Body>

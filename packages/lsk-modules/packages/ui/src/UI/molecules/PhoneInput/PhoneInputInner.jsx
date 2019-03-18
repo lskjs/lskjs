@@ -11,7 +11,7 @@ import { allCountries } from './countriesData';
 import isNumberValid from './isNumberValid';
 import Input from '../../../Input';
 
-const isModernBrowser = Boolean(__CLIENT__ && document.createElement('input').setSelectionRange);
+const isModernBrowser = Boolean(__CLIENT__ && typeof document !== 'undefined' && document.createElement('input').setSelectionRange);
 
 
 const keys = {
@@ -56,12 +56,12 @@ class ReactPhoneInput extends Component {
     super(props);
     const inputNumber = this.props.value || '';
     const onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
-    const selectedCountryGuess = find(onlyCountries, { iso2: this.props.defaultCountry });
+    const selectedCountryGuess = find(onlyCountries, { iso2: this.props.defaultCountry }) || { iso2: onlyCountries[0].iso2 };
     const selectedCountryGuessIndex = findIndex(allCountries, selectedCountryGuess);
     const dialCode = (
       selectedCountryGuess
       && !startsWith(inputNumber.replace(/\D/g, ''), selectedCountryGuess.dialCode)
-        ? selectedCountryGuess.dialCode : ''
+        ? selectedCountryGuess.dialCode || onlyCountries[0].dialCode : ''
     );
     const formattedNumber = (
       this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess
@@ -150,7 +150,6 @@ class ReactPhoneInput extends Component {
       });
 
       const inputFlagClasses = `flag ${country.iso2}`;
-
       return (
         <li
           aria-hidden

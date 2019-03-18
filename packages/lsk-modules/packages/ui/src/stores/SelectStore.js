@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import findIndex from 'lodash/findIndex';
 import pick from 'lodash/pick';
 import unionBy from 'lodash/unionBy';
@@ -59,6 +59,11 @@ export default class SelectStore extends Store {
 
   globalIsIndeterminate() {
     return this.items.length > 0 && !this.globalIsChecked();
+  }
+
+  @computed
+  get length() {
+    return this.items.length;
   }
 
   toJSON() {

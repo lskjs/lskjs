@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Dropdown from 'antd/lib/dropdown';
 import If from 'react-if';
 import Fire from 'react-icons2/mdi/fire';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import Avatar from '../../../Avatar';
 import LayoutHeaderListItem from '../../atoms/LayoutHeaderListItem';
 // import { DropdownLink /* , AvatarText */ } from './LayoutHeaderUserMenu.styles';

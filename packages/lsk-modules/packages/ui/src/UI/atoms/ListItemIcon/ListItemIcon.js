@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import removeProps from '../../../utils/removeProps';
 
 const filteredTag = removeProps('div', ['color', 'background']);

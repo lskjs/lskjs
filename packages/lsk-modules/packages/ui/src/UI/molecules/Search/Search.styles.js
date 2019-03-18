@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 
 import { DebounceInput } from 'react-debounce-input';
 
@@ -90,13 +90,13 @@ export const Actions = styled('div')`
 
 export const Action = styled('div')`
   margin-right: 12px;
-  height: 100%;
   display: flex;
   align-items: center;
   ${p => (p.additional && css`
     padding-left: 12px;
     border-left: 1px solid ${p.theme.colors.border};
-    
+    ${!p.divide && 'border-left-color: transparent;'}
+
     > *:not(:last-child) {
       margin-right: 6px;
     }

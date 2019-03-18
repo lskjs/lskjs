@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import Layout from 'antd/lib/layout';
 import LayoutSidenavFooter from '../../atoms/LayoutSidenavFooter';
 import LayoutSidenavBrand from '../../atoms/LayoutSidenavBrand';

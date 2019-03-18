@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
+import autobind from 'core-decorators/lib/autobind';
 import ReactSelect from 'react-select';
 import ReactAsyncSelect from 'react-select/lib/Async';
 import cx from 'classnames';
 import Up from 'react-icons2/mdi/chevron-up';
 import Down from 'react-icons2/mdi/chevron-down';
-import { getOptionValue, getReverseOptionValue, getNormalizedOptions } from './utils';
+import { getOptionValue, getReverseOptionValue, getNormalizedOptions, NULL_STRING } from './utils';
 
 import SingleValue from './SingleValue';
 import Option from './Option';
@@ -15,10 +16,14 @@ import CollapsedValueContainer from './CollapsedValueContainer';
 import CollapsedMultiValue from './CollapsedMultiValue';
 
 class Select extends Component {
-  state = {};
+  state = {}
   componentDidMount() {
-    const { loadOption, value, async } = this.props;
+    const {
+      loadOption, field, async, isMulti,
+    } = this.props;
+    const value = get(field, 'value');
     if (async && value && loadOption) {
+      if (isMulti && !value.length) return;
       this.initOption();
     }
   }
@@ -40,11 +45,13 @@ class Select extends Component {
     return false;
   }
   async initOption() {
-    const { loadOption, value } = this.props;
+    const { loadOption, field } = this.props;
+    const { value } = field;
     const option = await loadOption(value);
     this.setState({ option, initOption: true }); // eslint-disable-line react/no-unused-state
   }
-  loadOptions = async (...args) => {
+  @autobind
+  async loadOptions(...args) {
     try {
       // console.log('loadOptions');
       const { loadOptions, ...props } = this.props;
@@ -56,7 +63,8 @@ class Select extends Component {
       return [];
     }
   }
-  handleChange = (option) => {
+  @autobind
+  handleChange(option) {
     const { form, field, onChange } = this.props;
     this.setState({ option, initOption: false }); // eslint-disable-line react/no-unused-state
     let value;
@@ -72,6 +80,7 @@ class Select extends Component {
   }
   render() {
     const {
+      blurInputOnSelect = true,
       placeholder = '',
       value: propValue,
       field,
@@ -82,27 +91,52 @@ class Select extends Component {
       className,
       components = {},
       styles = {},
+      isMulti,
       ...props
     } = this.props;
     const normalizedOptions = getNormalizedOptions(options, props);
-    const value = getOptionValue(field ? field.value : propValue);
-    const option = async ? this.state.option : find(normalizedOptions, { value });
+    let option;
+    let value;
+    if (!async) {
+      value = getOptionValue(field ? field.value : propValue);
+    }
+    if (async) {
+      ({ option } = this.state);
+    } else if (!isMulti) {
+      option = find(normalizedOptions, { value });
+    } else if (isMulti) {
+      if (Array.isArray(value)) {
+        option = normalizedOptions.filter((el) => {
+          return value.includes(el.value);
+        });
+      } else {
+        option = [];
+      }
+    }
     const SelectComponent = async ? ReactAsyncSelect : ReactSelect;
     const hasError = field && field.name && !!get(form, `errors.${field.name}`);
     const collapsedComponents = {
       ValueContainer: CollapsedValueContainer,
       MultiValue: CollapsedMultiValue,
     };
+    const nullOption = find(normalizedOptions, o => o.value === NULL_STRING);
+    const defaultIsClearable = !props.required && !nullOption;
+    const defaultIsSearchable = options && options.length > 10;
+    // console.log({ defaultIsClearable }, props.required, !!nullOption, !props.required, !nullOption, nullOption, props.isClearable, normalizedOptions);
     return (
       <SelectComponent
-        isClearable={!props.required}
+        blurInputOnSelect={blurInputOnSelect}
+        // isClearable={defaultIsClearable}
+        isSearchable={defaultIsSearchable}
+        isClearable={defaultIsClearable}
         arrowRenderer={e => (e.isOpen ? <Up /> : <Down />)}
         error={hasError}
         classNamePrefix="react-select"
         cacheOptions={async}
         defaultOptions={async}
-        closeMenuOnSelect={!props.isMulti}
+        closeMenuOnSelect={false}
         placeholder={placeholder}
+        isMulti={isMulti}
         {...field}
         {...props}
         components={{
@@ -133,7 +167,7 @@ class Select extends Component {
           [className]: !!className,
           'has-error': hasError,
         })}
-        value={option}
+        value={option || null}
         loadOptions={this.loadOptions}
         onChange={this.handleChange}
         options={async ? null : normalizedOptions}

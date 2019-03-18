@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import autobind from 'core-decorators/lib/autobind';
 import PropTypes from 'prop-types';
 import SelectCard from '../SelectCard';
 import Block from './RadioCards.styles';
@@ -28,10 +29,10 @@ class RadioCards extends PureComponent {
       this.setState({ value: next.value });
     }
   }
-  handleSelect = (value) => {
+  @autobind handleSelect(value) {
     this.setState({ value }, this.callback);
   }
-  callback = () => {
+  @autobind callback() {
     const { value } = this.state;
     const { onChange } = this.props;
     if (onChange) onChange(value);

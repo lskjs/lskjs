@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import createDynamicTag from '../../../utils/createDynamicTag';
 import removeProps from '../../../utils/removeProps';
 
@@ -36,7 +36,7 @@ export const InfoMask = styled('div')`
   border-radius: 50%;
   opacity: 0;
   transform: scale(0);
-  transition: all .4s cubic-bezier(.4,0,.2,1);
+  transition: all .6s cubic-bezier(.4,0,.2,1);
 `;
 
 export const InfoContent = styled('div')`
@@ -66,7 +66,7 @@ export const ACard = styled(filteredTag)`
         &:hover {
           ${InfoMask} {
             opacity: .8;
-            transform: scale(1.21);
+            transform: scaleX(2.21);
           }
           ${InfoContent} {
             opacity: 1;

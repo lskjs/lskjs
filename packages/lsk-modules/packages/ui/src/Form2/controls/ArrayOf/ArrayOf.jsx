@@ -1,4 +1,5 @@
 import React from 'react';
+import autobind from 'core-decorators/lib/autobind';
 import isArray from 'lodash/isArray';
 import { Field } from 'formik';
 import Tooltip from 'antd/lib/tooltip';
@@ -79,7 +80,8 @@ class ArrayOf extends React.Component {
   }
 
 
-  removeButtonHandler = (key) => {
+  @autobind
+  removeButtonHandler(key) {
     const { form, field } = this.props;
 
     let value = field.value || [];
@@ -97,7 +99,8 @@ class ArrayOf extends React.Component {
     ]);
   }
 
-  addButtonHandler = () => {
+  @autobind
+  addButtonHandler() {
     const { form, field, itemInitialValue = null } = this.props;
     // console.log({ form, field });
 

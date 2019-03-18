@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
-import Title from '../UI/atoms/PageTitle';
+import { PageTitle as Title } from './Page.styles';
 import PageTitleActions from '../UI/atoms/PageTitleActions';
 
 @inject('page')

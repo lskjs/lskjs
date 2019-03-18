@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import autobind from 'core-decorators/lib/autobind';
 import ChevronDownIcon from 'react-icons2/mdi/chevron-down';
 import { Manager, Reference, Popper } from 'react-popper';
-import Outside from 'react-click-outside';
-import { contentStyle, popperDisabledStyle, Content, Trigger, Icon } from './DropdownAsSelect.styles';
+
+import Outside from '../../../utils/react-click-outside';
+import { contentStyle, popperDisabledStyle, Content, Trigger as TriggerStyled, Icon } from './DropdownAsSelect.styles';
 
 class SelectFilter extends PureComponent {
+  static Trigger = TriggerStyled;
   static propTypes = {
     trigger: PropTypes.any,
     children: PropTypes.any,
@@ -20,6 +23,7 @@ class SelectFilter extends PureComponent {
     children: null,
     disabled: false,
     contentWrapperProps: {},
+    onClose: null,
   }
 
   constructor(props) {
@@ -31,7 +35,18 @@ class SelectFilter extends PureComponent {
     this.content = React.createRef();
   }
 
-  openHandler = (open) => {
+  @autobind
+  onClickOutside() {
+    const { open } = this.state;
+    if (!open) return;
+    this.openHandler(false);
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
+  }
+
+  @autobind
+  openHandler(open) {
     this.setState({ open }, () => {
       this.setState({
         contentHeight: this.content.current?.scrollHeight || '100%', // eslint-disable-line no-undef
@@ -39,7 +54,8 @@ class SelectFilter extends PureComponent {
     });
   }
 
-  renderContent = ({ ref, style, placement }) => {
+  @autobind
+  renderContent({ ref, style, placement }) {
     const { open, contentHeight } = this.state;
     const { children, contentWrapperProps } = this.props;
     if (!open) return false;
@@ -59,17 +75,11 @@ class SelectFilter extends PureComponent {
       </Content>
     );
   }
-  onClickOutside = () => {
-    const { open } = this.state;
-    if (!open) return;
-    this.openHandler(false);
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  }
+
   render() {
     const { open } = this.state;
     const { trigger, disabled } = this.props;
+    const { Trigger } = this.constructor;
     return (
       <Outside onClickOutside={this.onClickOutside}>
         <Manager>
@@ -83,13 +93,13 @@ class SelectFilter extends PureComponent {
                 type="button"
               >
                 {trigger}
-                <Icon>
+                  <Icon>
                   <ChevronDownIcon />
                 </Icon>
               </Trigger>
             )}
           </Reference>
-          <Popper
+            <Popper
             placement="bottom"
             eventsEnabled={open}
             modifiers={{

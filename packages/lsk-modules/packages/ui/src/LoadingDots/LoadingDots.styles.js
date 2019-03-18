@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
-
+import { keyframes } from 'emotion';
 
 const bounce = keyframes`
   0%, 80%, 100% { 

@@ -24,10 +24,12 @@ const DateForm = createForm({
       title: 'Date',
       component: Date,
       ranged: true,
+      futureOnly: true,
     },
     date2: {
       title: 'Date',
       component: Date,
+      futureOnly: true,
     },
   },
 });

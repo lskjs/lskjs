@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import If from 'react-if';
 // import Divider from 'antd/lib/divider';
 import Icon from 'antd/lib/icon';
@@ -31,11 +32,13 @@ class LayoutHeader extends Component {
     onCloseMobile: null,
     noMenu: false,
   }
-  onToggleCollapsed = () => {
+  @autobind
+  onToggleCollapsed() {
     const { onCollapsed, collapsed } = this.props;
     if (onCollapsed) onCollapsed(!collapsed);
   }
-  onToggleHiddenMobile = () => {
+  @autobind
+  onToggleHiddenMobile() {
     const { onCloseMobile, mobileHidden } = this.props;
     if (onCloseMobile) onCloseMobile(!mobileHidden);
   }

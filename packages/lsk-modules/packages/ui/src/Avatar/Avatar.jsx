@@ -146,8 +146,8 @@ export default class Avatar extends PureComponent {
     return (
       <ReactImageFallback
         src={src}
-        fallbackImage={this.constructor.defaultAvatar}
-        initialImage={this.constructor.defaultAvatar}
+        fallbackImage={this.props.defaultAvatar || this.constructor.defaultAvatar}
+        initialImage={this.props.defaultAvatar || this.constructor.defaultAvatar}
         style={this.getInnerStyle()}
         alt={title}
         title={title}

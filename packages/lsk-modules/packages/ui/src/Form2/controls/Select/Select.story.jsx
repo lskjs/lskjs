@@ -8,11 +8,14 @@ import RadioSelected from 'react-icons2/mdi/checkbox-marked-circle';
 import range from 'lodash/range';
 import keys from 'lodash/keys';
 
+import Modal, { Title, Content } from '../../../Modal2';
 import Story from '../../../Story';
 import createForm from '../../createForm';
 import FormDebug from '../../FormDebug';
+import Performance from '../../../DEV/Performance';
 import Select from './Select';
 import FlagIcon from '../../../UI/organisms/FlagIcon';
+import countriesList from '../../../UI/organisms/FlagIcon/countriesList';
 import createFormWithI18 from '../../createFormWithI18';
 
 const SelectFormView = (props) => {
@@ -25,7 +28,23 @@ const SelectFormView = (props) => {
       <Field {...props.controls.select4} />
       <Field {...props.controls.select5} />
       <Field {...props.controls.radio} />
-      <hr />
+      <Field {...props.controls.get('info.initialValue')} />
+      <Performance name="countries">
+        <Field {...props.controls.countries} />
+      </Performance>
+      <Performance name="countries2">
+        <Field {...props.controls.countries} />
+      </Performance>
+      <Performance name="countries3">
+        <Field {...props.controls.countries} />
+      </Performance>
+      <Performance name="countries4">
+        <Field {...props.controls.countries} />
+      </Performance>
+      <Performance name="countries5">
+        <Field {...props.controls.countries} />
+      </Performance>
+      {/* <hr />
       <h1>Мультиселекты</h1>
       <Field {...props.controls.multiselect} />
       <Field {...props.controls.multiselect2} />
@@ -35,6 +54,7 @@ const SelectFormView = (props) => {
       <h1>Асинхронные селекты</h1>
       <Field {...props.controls.asyncSelect} />
       <Field {...props.controls.asyncSelect2} />
+      <Field {...props.controls.asyncMultiSelect} />
       <hr />
       <h1>Кастомный дизайн</h1>
       <Field {...props.controls.games} />
@@ -43,6 +63,8 @@ const SelectFormView = (props) => {
       <Field {...props.controls.countries} />
       <Field {...props.controls.userSelect} />
       <hr />
+      <h1>initialValue - баг</h1>
+      <Field {...props.controls.get('info.bug1')} />
       <hr />
       <hr />
       <select>
@@ -51,263 +73,11 @@ const SelectFormView = (props) => {
         <option value="mercedes">Mercedes</option>
         <option value="audi">Audi</option>
       </select>
-      <FormDebug {...props} />
+      <FormDebug {...props} /> */}
     </Form>
   );
 };
 
-const countriesList = {
-  AU: 'Австралия',
-  AT: 'Австрия',
-  AZ: 'Азербайджан',
-  AX: 'Аландские острова',
-  AL: 'Албания',
-  DZ: 'Алжир',
-  VI: 'Виргинские Острова (США)',
-  AS: 'Американское Самоа',
-  AI: 'Ангилья',
-  AO: 'Ангола',
-  AD: 'Андорра',
-  AQ: 'Антарктида',
-  AG: 'Антигуа и Барбуда',
-  AR: 'Аргентина',
-  AM: 'Армения',
-  AW: 'Аруба',
-  AF: 'Афганистан',
-  BS: 'Багамы',
-  BD: 'Бангладеш',
-  BB: 'Барбадос',
-  BH: 'Бахрейн',
-  BZ: 'Белиз',
-  BY: 'Беларусь',
-  BE: 'Бельгия',
-  BJ: 'Бенин',
-  BM: 'Бермуды',
-  BG: 'Болгария',
-  BO: 'Боливия',
-  BQ: 'Бонэйр, Синт-Эстатиус и Саба',
-  BA: 'Босния и Герцеговина',
-  BW: 'Ботсвана',
-  BR: 'Бразилия',
-  IO: 'Британская территория в Индийском океане',
-  VG: 'Виргинские Острова (Великобритания)',
-  BN: 'Бруней',
-  BF: 'Буркина-Фасо',
-  BI: 'Бурунди',
-  BT: 'Бутан',
-  VU: 'Вануату',
-  VA: 'Ватикан',
-  GB: 'Великобритания',
-  HU: 'Венгрия',
-  VE: 'Венесуэла',
-  UM: 'Внешние малые острова (США)',
-  TL: 'Восточный Тимор',
-  VN: 'Вьетнам',
-  GA: 'Габон',
-  HT: 'Гаити',
-  GY: 'Гайана',
-  GM: 'Гамбия',
-  GH: 'Гана',
-  GP: 'Гваделупа',
-  GT: 'Гватемала',
-  GF: 'Гвиана',
-  GN: 'Гвинея',
-  GW: 'Гвинея-Бисау',
-  DE: 'Германия',
-  GG: 'Гернси',
-  GI: 'Гибралтар',
-  HN: 'Гондурас',
-  HK: 'Гонконг',
-  GD: 'Гренада',
-  GL: 'Гренландия',
-  GR: 'Греция',
-  GE: 'Грузия',
-  GU: 'Гуам',
-  DK: 'Дания',
-  JE: 'Джерси',
-  DJ: 'Джибути',
-  DM: 'Доминика',
-  DO: 'Доминиканская Республика',
-  CD: 'Демократическая Республика Конго',
-  EG: 'Египет',
-  ZM: 'Замбия',
-  EH: 'САДР',
-  ZW: 'Зимбабве',
-  IL: 'Израиль',
-  IN: 'Индия',
-  ID: 'Индонезия',
-  JO: 'Иордания',
-  IQ: 'Ирак',
-  IR: 'Иран',
-  IE: 'Ирландия',
-  IS: 'Исландия',
-  ES: 'Испания',
-  IT: 'Италия',
-  YE: 'Йемен',
-  CV: 'Кабо-Верде',
-  KZ: 'Казахстан',
-  KY: 'Острова Кайман',
-  KH: 'Камбоджа',
-  CM: 'Камерун',
-  CA: 'Канада',
-  QA: 'Катар',
-  KE: 'Кения',
-  CY: 'Кипр',
-  KG: 'Киргизия',
-  KI: 'Кирибати',
-  TW: 'Китайская Республика',
-  KP: 'КНДР (Корейская Народно-Демократическая Республика)',
-  CN: 'КНР (Китайская Народная Республика)',
-  CC: 'Кокосовые острова',
-  CO: 'Колумбия',
-  KM: 'Коморы',
-  CR: 'Коста-Рика',
-  CI: 'Кот-д’Ивуар',
-  CU: 'Куба',
-  KW: 'Кувейт',
-  CW: 'Кюрасао',
-  LA: 'Лаос',
-  LV: 'Латвия',
-  LS: 'Лесото',
-  LR: 'Либерия',
-  LB: 'Ливан',
-  LY: 'Ливия',
-  LT: 'Литва',
-  LI: 'Лихтенштейн',
-  LU: 'Люксембург',
-  MU: 'Маврикий',
-  MR: 'Мавритания',
-  MG: 'Мадагаскар',
-  YT: 'Майотта',
-  MO: 'Макао',
-  MK: 'Македония',
-  MW: 'Малави',
-  MY: 'Малайзия',
-  ML: 'Мали',
-  MV: 'Мальдивы',
-  MT: 'Мальта',
-  MA: 'Марокко',
-  MQ: 'Мартиника',
-  MH: 'Маршалловы Острова',
-  MX: 'Мексика',
-  FM: 'Микронезия',
-  MZ: 'Мозамбик',
-  MD: 'Молдавия',
-  MC: 'Монако',
-  MN: 'Монголия',
-  MS: 'Монтсеррат',
-  MM: 'Мьянма',
-  NA: 'Намибия',
-  NR: 'Науру',
-  NP: 'Непал',
-  NE: 'Нигер',
-  NG: 'Нигерия',
-  NL: 'Нидерланды',
-  NI: 'Никарагуа',
-  NU: 'Ниуэ',
-  NZ: 'Новая Зеландия',
-  NC: 'Новая Каледония',
-  NO: 'Норвегия',
-  AE: 'ОАЭ',
-  OM: 'Оман',
-  BV: 'Остров Буве',
-  IM: 'Остров Мэн',
-  CK: 'Острова Кука',
-  NF: 'Остров Норфолк',
-  CX: 'Остров Рождества',
-  PN: 'Острова Питкэрн',
-  SH: 'Острова Святой Елены, Вознесения и Тристан-да-Кунья',
-  PK: 'Пакистан',
-  PW: 'Палау',
-  PS: 'Государство Палестина',
-  PA: 'Панама',
-  PG: 'Папуа — Новая Гвинея',
-  PY: 'Парагвай',
-  PE: 'Перу',
-  PL: 'Польша',
-  PT: 'Португалия',
-  PR: 'Пуэрто-Рико',
-  CG: 'Республика Конго',
-  KR: 'Республика Корея',
-  RE: 'Реюньон',
-  RU: 'Россия',
-  RW: 'Руанда',
-  RO: 'Румыния',
-  SV: 'Сальвадор',
-  WS: 'Самоа',
-  SM: 'Сан-Марино',
-  ST: 'Сан-Томе и Принсипи',
-  SA: 'Саудовская Аравия',
-  SZ: 'Свазиленд',
-  MP: 'Северные Марианские Острова',
-  SC: 'Сейшельские Острова',
-  BL: 'Сен-Бартелеми',
-  MF: 'Сен-Мартен',
-  PM: 'Сен-Пьер и Микелон',
-  SN: 'Сенегал',
-  VC: 'Сент-Винсент и Гренадины',
-  KN: 'Сент-Китс и Невис',
-  LC: 'Сент-Люсия',
-  RS: 'Сербия',
-  SG: 'Сингапур',
-  SX: 'Синт-Мартен',
-  SY: 'Сирия',
-  SK: 'Словакия',
-  SI: 'Словения',
-  SB: 'Соломоновы Острова',
-  SO: 'Сомали',
-  SD: 'Судан',
-  SR: 'Суринам',
-  US: 'США',
-  SL: 'Сьерра-Леоне',
-  TJ: 'Таджикистан',
-  TH: 'Таиланд',
-  TZ: 'Танзания',
-  TC: 'Теркс и Кайкос',
-  TG: 'Того',
-  TK: 'Токелау',
-  TO: 'Тонга',
-  TT: 'Тринидад и Тобаго',
-  TV: 'Тувалу',
-  TN: 'Тунис',
-  TM: 'Туркмения',
-  TR: 'Турция',
-  UG: 'Уганда',
-  UZ: 'Узбекистан',
-  UA: 'Украина',
-  WF: 'Уоллис и Футуна',
-  UY: 'Уругвай',
-  FO: 'Фареры',
-  FJ: 'Фиджи',
-  PH: 'Филиппины',
-  FI: 'Финляндия',
-  FK: 'Фолклендские острова',
-  FR: 'Франция',
-  PF: 'Французская Полинезия',
-  TF: 'Французские Южные и Антарктические Территории',
-  HM: 'Херд и Макдональд',
-  HR: 'Хорватия',
-  CF: 'ЦАР',
-  TD: 'Чад',
-  ME: 'Черногория',
-  CZ: 'Чехия',
-  CL: 'Чили',
-  CH: 'Швейцария',
-  SE: 'Швеция',
-  SJ: 'Шпицберген и Ян-Майен',
-  LK: 'Шри-Ланка',
-  EC: 'Эквадор',
-  GQ: 'Экваториальная Гвинея',
-  ER: 'Эритрея',
-  EE: 'Эстония',
-  ET: 'Эфиопия',
-  ZA: 'ЮАР',
-  GS: 'Южная Георгия и Южные Сандвичевы Острова',
-  SS: 'Южный Судан',
-  JM: 'Ямайка',
-  JP: 'Япония',
-  XK: 'Косово',
-};
 
 
 // const ValueContainer = ({ children, selectProps, ...props }) => {
@@ -328,7 +98,7 @@ const SelectForm = createForm({
         value: id,
         title: `The ${id}`,
       })),
-      menuIsOpen: true,
+      // menuIsOpen: true,
     },
     select2: {
       title: 'The Select2: without title',
@@ -362,6 +132,8 @@ const SelectForm = createForm({
         id,
         title: `User ${id}`,
       })),
+      hideSelectedOptions: false,
+      blurInputOnSelect: false,
     },
     multiselect2: {
       title: 'multiselect2: isMulti & hideSelectedOptions',
@@ -433,6 +205,7 @@ const SelectForm = createForm({
       component: Select,
       isMulti: true,
       hideSelectedOptions: false,
+      blurInputOnSelect: false,
       collapsed: true,
       options: range(1, 11).map(id => ({
         value: id,
@@ -514,13 +287,36 @@ const SelectForm = createForm({
           }))), 50);
         });
       },
-      // return range(start, start + 10).map(value => ({
-      //   value,
-      //   id: value,
-      //   image: `https://picsum.photos/40/40/?image=${value}`,
-      //   title: `User ${value}`,
-      // }));
-      // },
+    },
+    asyncMultiSelect: {
+      title: 'The asyncMultiSelect',
+      component: Select,
+      async: true,
+      isMulti: true,
+      loadOption: async (values) => {
+        if (Array.isArray(values)) {
+          return values.map((value) => {
+            return {
+              value,
+              id: value,
+              image: `https://picsum.photos/40/40/?image=${value}`,
+              label: `User ${value}`,
+            };
+          });
+        }
+        return [];
+      },
+      loadOptions: async (searchValue = '') => {
+        const start = searchValue.length;
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(range(start, start + 10).map(value => ({
+            value,
+            id: value,
+            image: `https://picsum.photos/40/40/?image=${value}`,
+            title: `User ${value}`,
+          }))), 50);
+        });
+      },
     },
     asyncSelect2: {
       title: 'The asyncSelect2',
@@ -544,6 +340,46 @@ const SelectForm = createForm({
         });
       },
     },
+    'info.bug1': {
+      title: 'offerEdit.type.title',
+      component: Select,
+      initialValue: 'fixed',
+      options: [
+        {
+          value: 'fixed',
+          label: 'offerEdit.type.fixed',
+          info: 'offerEdit.type.fixedInfo',
+          help: 'offerEdit.type.fixedHelp',
+        },
+        {
+          value: 'cpm',
+          label: 'offerEdit.type.cpm',
+          info: 'offerEdit.type.cpmInfo',
+          help: 'offerEdit.type.cpmHelp',
+        },
+      ],
+    },
+    'info.initialValue': {
+      component: Select,
+      title: 'offerEdit.visibility',
+      placeholder: 'offer.placeholders.title',
+      format: Boolean,
+      initialValue: true,
+      options: [
+        {
+          // icon: <AccountMulti />,
+          title: 'offer.type.public',
+          description: 'offer.type.publicInfo',
+          value: true,
+        },
+        {
+          // icon: <Account />,
+          title: 'offer.type.private',
+          description: 'offer.type.privateInfo',
+          value: false,
+        },
+      ],
+    },
   },
 });
 
@@ -558,7 +394,7 @@ const SelectFormWithI18 = createFormWithI18(({ i18 }) => ({
         value: id,
         title: i18.t(`select.${id}`),
       })),
-      menuIsOpen: true,
+      // menuIsOpen: true,
     },
     select2: {
       title: 'The Select2: without title',
@@ -736,6 +572,21 @@ const SelectFormWithI18 = createFormWithI18(({ i18 }) => ({
       // }));
       // },
     },
+    countries: {
+      title: 'Countries',
+      component: Select,
+      options: keys(countriesList).map((value) => {
+        return (
+          {
+            title: value,
+            // title: i18.t(`countries.${value}`),
+            value,
+            // icon: () => '@', // <FlagIcon code={value} />,
+            Icon: () => <FlagIcon code={value} />,
+          }
+        );
+      }),
+    },
     asyncSelect2: {
       title: 'The asyncSelect2',
       component: Select,
@@ -771,6 +622,8 @@ export default ({ storiesOf }) =>
             initialValues={{
               select4: 'two',
               asyncSelect2: 99,
+              asyncSelect: 1,
+              asyncMultiSelect: [4],
             }}
           />
         </Story>
@@ -783,8 +636,21 @@ export default ({ storiesOf }) =>
             initialValues={{
               select4: 'two',
               asyncSelect2: 99,
+              // info: {},
             }}
           />
+        </Story>
+      );
+    })
+    .add('Modal select', () => {
+      return (
+        <Story devtools perf>
+          <Modal trigger={<div>asd</div>}>
+            <Title>asd</Title>
+            <Content>
+              <SelectForm />
+            </Content>
+          </Modal>
         </Story>
       );
     });

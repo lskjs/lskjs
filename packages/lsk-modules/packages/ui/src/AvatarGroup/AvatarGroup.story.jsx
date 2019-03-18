@@ -22,8 +22,8 @@ const userWithHref = () => ({
   href: `user/href-${random(99)}`,
 });
 
-module.exports = function ({ storiesOf, action, knob }) {
-  return storiesOf('AvatarGroup', module)
+export default ({ storiesOf }) => (
+  storiesOf('AvatarGroup', module)
     .add('Items only', () => (
       <Story>
         <AvatarGroup
@@ -153,5 +153,6 @@ module.exports = function ({ storiesOf, action, knob }) {
           count={20}
         />
       </Story>
-    ));
-};
+    ))
+);
+

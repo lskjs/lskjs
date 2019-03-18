@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
+import map from 'lodash/map';
 
 function isMiddleClickEvent(event) {
   return event.button === 1;
@@ -37,6 +40,22 @@ class Link extends PureComponent {
     history: PropTypes.object.isRequired,
   };
 
+  getHref() {
+    const { to, href, qs } = this.props;
+    let toOrHref = to || href;
+    if (qs) {
+      if (toOrHref.indexOf('?') === -1) {
+        toOrHref += '?';
+      } else {
+        toOrHref += '&';
+      }
+      toOrHref += map(qs, (val, key) => {
+        if (!(isArray(val) || isPlainObject(val))) return [key, val].join('=');
+        return [key, JSON.stringify(val)].join('=');
+      }).join('&');
+    }
+    return toOrHref;
+  }
   handleClick = (e) => {
     if (isMiddleClickEvent(e)) {
       return;
@@ -54,7 +73,7 @@ class Link extends PureComponent {
       return;
     }
 
-    const url = this.props.to || this.props.href;
+    const url = this.getHref();
     if (url == null) {
       return;
     }
@@ -70,10 +89,12 @@ class Link extends PureComponent {
     const {
       to,
       href,
+      qs,
       children,
       ...props
     } = this.props;
-    return <a href={to || href} {...props} onClick={this.handleClick}>{children}</a>;
+    const url = this.getHref();
+    return <a href={url} {...props} onClick={this.handleClick}>{children}</a>;
   }
 }
 

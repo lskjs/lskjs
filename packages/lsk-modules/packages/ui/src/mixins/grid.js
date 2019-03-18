@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import facepaint from 'facepaint';
 
 const breakpoints = [768, 992, 1200];

@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 import defaultTheme from './theme';
 import Performance from './DEV/Performance';
+import State from './DEV/State';
 import './styles.g.css';
 
 class Story extends Component {
@@ -13,8 +14,9 @@ class Story extends Component {
   }
   render() {
     const {
-      children, devtools, locale = 'en', theme = defaultTheme, style,
+      children, devtools, locale = 'en', theme = defaultTheme, style, state = {},
     } = this.props;
+    const user = {};
     const api = {
       fetch: (...args) => console.log('api.get', ...args),
     };
@@ -25,12 +27,15 @@ class Story extends Component {
     const config = {};
     const uapp = {
       i18,
+      user,
       t,
       config,
       api,
       modules: {
         upload: {
-          uploadFile: async () => ({ url: 'https://picsum.photos/1280/720/?random' }),
+          uploadFile: async (e) => {
+            return { url: e.name };
+          },
         },
         billing: {
           stores: {
@@ -45,6 +50,7 @@ class Story extends Component {
         t,
         config,
         i18,
+        user,
         uapp,
         api,
       }),
@@ -65,7 +71,9 @@ class Story extends Component {
               ...style,
             }}
             >
-              {children}
+              <State {...state}>
+                {children}
+              </State>
               {devtools && <DevTools />}
             </div>
           </Provider>

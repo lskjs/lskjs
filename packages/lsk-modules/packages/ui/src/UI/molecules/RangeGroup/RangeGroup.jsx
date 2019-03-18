@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import If from 'react-if';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 
 import InputRange from '../InputRange';
 import Slider from '../Slider';
@@ -23,10 +24,10 @@ class RangeGroup extends PureComponent {
   componentWillReceiveProps(next) {
     if (this.props.value !== next.value) this.setState({ value: next.value });
   }
-  handleChange = (value) => {
+  @autobind handleChange(value) {
     this.setState({ value }, this.callback);
   }
-  callback = () => {
+  @autobind callback() {
     const { onChange } = this.props;
     if (onChange) onChange(this.state.value);
   }

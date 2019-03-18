@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import GridCol from '../GridCol';
 import removeProps from '../../utils/removeProps';
 
@@ -10,7 +10,7 @@ export default styled(filter)`
   flex-wrap: wrap;
   margin-right: -${p => (p.gap || p.theme.gridGap)}px;
   margin-left: -${p => (p.gap || p.theme.gridGap)}px;
-  
+
   ${p => (p.vertical && css`
     margin-top: -${p.gap || p.theme.gridGap}px;
     margin-bottom: -${p.gap || p.theme.gridGap}px;

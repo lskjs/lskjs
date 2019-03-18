@@ -7,7 +7,7 @@ import { closeButtonStyle } from './Modal2.styles';
 export default props => (
   <Button
     type="button"
-    view="transparent"
+    paint="transparent"
     icon={<Close />}
     className={closeButtonStyle}
     {...props}

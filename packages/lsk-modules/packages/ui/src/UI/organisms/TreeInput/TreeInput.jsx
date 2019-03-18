@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import autobind from 'core-decorators/lib/autobind';
 import { debounce } from 'lodash-decorators';
 import { inject, observer } from 'mobx-react';
 import uniq from 'lodash/uniq';
+import flattenDeep from 'lodash/flattenDeep';
 import Tree from 'antd/lib/tree';
 
 const { TreeNode } = Tree;
@@ -29,18 +31,44 @@ class TreeInput extends Component {
     if (onChange) onChange(this.state.value);
   }
 
-  handleChange = (value) => {
+  @autobind
+  handleSetStateWithDebouncedCallback(value) {
+    this.setState({ value: uniq(value) }, () => {
+      this.handleChangeDebounced();
+    });
+  }
+
+  @autobind
+  handleCheck(value) {
     const { flat = false } = this.props;
-    // чистим от категорий игр
     if (!flat) {
       value = value.filter(id => id.charAt(0) !== '@');
     }
-    value = uniq(value);
+    this.handleSetStateWithDebouncedCallback(value);
+  }
 
-    // console.log('handleChange');
-    this.setState({ value }, () => {
-      this.handleChangeDebounced();
-    });
+  @autobind
+  handleSelect(value) {
+    const { flat = false, fields } = this.props;
+    if (!flat) {
+      const atElem = value.filter(id => id.charAt(0) === '@');
+      const notAtElem = value.filter(id => id.charAt(0) !== '@');
+      if (atElem.length) {
+        const keys = atElem.map(e => e.split('@')[1]);
+        const filtered = fields
+          .filter(e => keys.includes(e.value))
+          .map(item => item.children.map(child => child.value));
+        const flatArr = flattenDeep(filtered);
+        if (notAtElem.filter(item => flatArr.includes(item)).length) {
+          value = notAtElem.filter(item => !flatArr.includes(item));
+        } else {
+          value = flatArr.concat(notAtElem);
+        }
+      } else if (notAtElem.length) {
+        value = notAtElem;
+      }
+    }
+    this.handleSetStateWithDebouncedCallback(value);
   }
 
   render() {
@@ -53,8 +81,8 @@ class TreeInput extends Component {
         checkable
         checkedKeys={uniq(value)}
         selectedKeys={uniq(value)}
-        onSelect={this.handleChange}
-        onCheck={this.handleChange}
+        onSelect={this.handleSelect}
+        onCheck={this.handleCheck}
       >
         {
           (fields || []).map((category) => {

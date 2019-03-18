@@ -10,7 +10,12 @@ import {
 
 class ErrorComponent extends PureComponent {
   static propTypes = {
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.element,
+      PropTypes.arrayOf(PropTypes.element),
+    ]),
     subtitle: PropTypes.string,
     actions: PropTypes.any,
     footer: PropTypes.string,

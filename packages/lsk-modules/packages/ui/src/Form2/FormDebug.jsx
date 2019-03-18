@@ -1,9 +1,6 @@
 import React from 'react';
-import Form from 'antd/lib/form';
 import DEV from '../DEV';
-import Button from '../Button';
-import getControlHtmlId from './getControlHtmlId';
-import FormError from './FormError';
+import FormSubmit from './FormSubmit';
 
 export default (props) => {
   const {
@@ -11,28 +8,15 @@ export default (props) => {
     isSubmitting,
     errors,
     values,
-    handleSubmit,
     status,
-    // controls,
-    // ...props
   } = props;
 
   return (
     <React.Fragment>
       <hr />
-      <Form.Item
-        validateStatus="error"
-      >
-        {errors.onSubmit && <FormError id={getControlHtmlId('onSubmit')}>{errors.onSubmit}</FormError>}
-        <Button
-          paint="primary"
-          state={status}
-          disabled={!!status}
-          onClick={handleSubmit}
-        >
-          Отправить
-        </Button>
-      </Form.Item>
+      <FormSubmit {...props}>
+        Submit
+      </FormSubmit>
       <div />
       <DEV
         json={{

@@ -16,9 +16,6 @@ const CustomInputComponent = ({
           form.setFieldValue(field.name, value);
         }}
       />
-      {/* <input type="text" {...field} {...props} /> */}
-      {/* {touched[field.name] &&
-        errors[field.name] && <div className="error">{errors[field.name]}</div>} */}
     </React.Fragment>
   );
 };

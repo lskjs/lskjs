@@ -5,20 +5,22 @@ import InputBase from '../../../Input';
 const Input = ({
   field,
   form,
+  format = () => ({}),
   ...props
 }) => {
   const hasError = field && field.name && !!get(form, `errors.${field.name}`);
   return (
     <InputBase
       {...field}
+      value={field.value || ''}
       debounce={0}
       {...props}
       regex={props.regex}
       style={{ border: hasError ? '1px solid red' : '' }}
-      // leftIcon={<Icon color="#0088cc" size={24} />}
       onChange={(value) => {
         form.setFieldValue(field.name, value);
       }}
+      {...format({ field, form, ...props })}
     />
   );
 };

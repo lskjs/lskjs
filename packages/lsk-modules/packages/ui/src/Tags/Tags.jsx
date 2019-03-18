@@ -51,6 +51,7 @@ class Tags extends PureComponent {
             onClick={() => onClick && onClick(item)}
             closable={closable && !disabled}
             children={item.title || item.children}
+            style={{ cursor: onClick ? 'pointer' : null }}
           />
         ))}
         {children}

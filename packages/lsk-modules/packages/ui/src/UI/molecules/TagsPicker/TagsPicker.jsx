@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getKeys from 'lodash/keys';
 import intersection from 'lodash/intersection';
 import isEqual from 'lodash/isEqual';
+import autobind from 'core-decorators/lib/autobind';
 import get from 'lodash/get';
 import Plus from 'react-icons2/mdi/plus-circle';
 import If from 'react-if';
@@ -72,46 +73,54 @@ class TagsPicker extends PureComponent {
     this.setState(state);
   }
 
-  getValue = () => {
+  @autobind
+  getValue() {
     const { value } = this.state;
     return !Array.isArray(value) ? [value] : value;
   }
 
-  handleDeleteTag = (id) => {
+  @autobind
+  handleDeleteTag(id) {
     const { value } = this.state;
     this.setState({ value: value.filter(e => e !== id) }, this.callbackCombo);
   }
 
-  callbackCombo = () => {
+  @autobind
+  callbackCombo() {
     this.callbackChange();
     this.callbackSubmit();
   }
 
-  handleSubmit = (value) => {
+  @autobind
+  handleSubmit(value) {
     const { fields } = this.props;
     value = getAvailable(fields, value);
     this.setState({ value }, this.callbackSubmit);
   }
 
-  callbackSubmit = () => {
+  @autobind
+  callbackSubmit() {
     const { onSubmit } = this.props;
     const { value } = this.state;
     if (onSubmit) onSubmit(value);
   }
 
-  handleChange = (value) => {
+  @autobind
+  handleChange(value) {
     const { fields } = this.props;
     value = getAvailable(fields, value);
     this.setState({ value }, this.callbackChange);
   }
 
-  callbackChange = () => {
+  @autobind
+  callbackChange() {
     const { onChange } = this.props;
     const { value } = this.state;
     if (onChange) onChange(value);
   }
 
-  renderModal = (trigger) => {
+  @autobind
+  renderModal(trigger) {
     const {
       flat, title, onChange, fields, createTag,
     } = this.props;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Marker from 'react-icons2/md/room';
+import autobind from 'core-decorators/lib/autobind';
 import GoogleMapReact from 'google-map-react';
-import { css } from '@emotion/core';
+import { css } from 'emotion'
 import SearchBox from './SearchBox';
 // import { Icon } from './Geo2.styles';
 
@@ -54,7 +55,8 @@ class Geo2 extends Component {
   //   console.log('onCircleInteraction called with', childProps);
   // }
 
-  onChange = ({ center, zoom }) => {
+  @autobind
+  onChange({ center, zoom }) {
     const { field, form } = this.props;
     form.setFieldValue(field.name, [center.lng, center.lat]);
     // console.log('onChange', center, zoom);
@@ -64,7 +66,8 @@ class Geo2 extends Component {
     });
   }
 
-  apiLoaded = ({ map, maps }) => {
+  @autobind
+  apiLoaded({ map, maps }) {
     this.setState({
       mapsApiLoaded: true,
       mapInstance: map,

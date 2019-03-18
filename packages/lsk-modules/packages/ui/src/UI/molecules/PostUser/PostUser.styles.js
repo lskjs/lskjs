@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import AntAvatar from 'antd/lib/avatar';
 import AntIcon from 'antd/lib/icon';
 

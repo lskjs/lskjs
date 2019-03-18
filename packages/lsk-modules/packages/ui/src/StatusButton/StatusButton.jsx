@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/core';
+import { css, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import cx from 'classnames';
@@ -122,7 +122,7 @@ class StatusButton extends PureComponent {
     tag: Button,
   };
   static propTypes = {
-    status: React.PropTypes.string,
+    status: PropTypes.string,
     children: PropTypes.any,
     promise: PropTypes.any,
     bsStyle: PropTypes.string,

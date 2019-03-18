@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import Menu from 'antd/lib/menu';
 import get from 'lodash/get';
-import { css } from '@emotion/core';
+import { css } from 'emotion'
 
 export const tabsStyle = css`
   background: transparent;

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import autobind from 'core-decorators/lib/autobind';
 import CheckIcon from 'react-icons2/mdi/check';
 import CloseIcon from 'react-icons2/mdi/close';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import omit from 'lodash/omit';
 import If from 'react-if';
 import LoadingDots from '../LoadingDots';
 import filterProps from '../utils/filterProps';
+import isTouchDevice from '../utils/isTouchDevice';
 import {
   Btn,
   Text,
@@ -14,6 +16,7 @@ import {
   Ripple,
   RippleCircle,
 } from './Button.styles';
+
 class Button extends PureComponent {
   static propTypes = {
     children: PropTypes.any,
@@ -31,6 +34,8 @@ class Button extends PureComponent {
       'danger',
       'info',
       'success',
+      'transparent',
+      'transparentDark',
     ]),
     state: PropTypes.oneOf([
       'processing', 'progress',
@@ -42,6 +47,7 @@ class Button extends PureComponent {
       'solid',
       'text',
       'transparent',
+      'transparentDark',
     ]),
     type: PropTypes.string,
     componentClass: PropTypes.any,
@@ -63,6 +69,7 @@ class Button extends PureComponent {
     rounded: PropTypes.bool,
     style: PropTypes.object,
     colors: PropTypes.object,
+    isRipple: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -92,6 +99,7 @@ class Button extends PureComponent {
     autoMobile: false,
     rounded: false,
     style: null,
+    isRipple: !isTouchDevice(),
   }
 
   constructor(props) {
@@ -104,7 +112,7 @@ class Button extends PureComponent {
 
   componentDidMount() {
     if (__CLIENT__) {
-      if (!this.props.disabled) {
+      if (!this.props.disabled && this.props.isRipple) {
         const condition = this.isBrowser('safari') || this.isBrowser('firefox');
         this.ripple.current.addEventListener(condition ? 'click' : 'mousedown', this.clickListener);
       }
@@ -113,7 +121,7 @@ class Button extends PureComponent {
 
   componentWillUnmount() {
     if (__CLIENT__) {
-      if (!this.props.disabled) {
+      if (!this.props.disabled && this.props.isRipple) {
         const condition = this.isBrowser('safari') || this.isBrowser('firefox');
         this.ripple.current.removeEventListener(condition ? 'click' : 'mousedown', this.clickListener);
       }
@@ -131,7 +139,8 @@ class Button extends PureComponent {
     return state;
   }
 
-  getButtonStateTheme = () => {
+  @autobind
+  getButtonStateTheme() {
     switch (this.getPropsState()) {
       case 'processing':
         return {
@@ -176,8 +185,9 @@ class Button extends PureComponent {
     }
   }
 
-  clickListener = (e) => {
-    if (!this.props.disabled) {
+  @autobind
+  clickListener(e) {
+    if (!this.props.disabled && this.props.isRipple) {
       this.circle.style.top = `${e.offsetY}px`;
       this.circle.style.left = `${e.offsetX}px`;
 
@@ -189,13 +199,15 @@ class Button extends PureComponent {
     return document.documentElement.className.includes(name);
   }
 
-  endAnimationRipple = () => {
-    if (!this.props.disabled) {
+  @autobind
+  endAnimationRipple() {
+    if (!this.props.disabled && this.props.isRipple) {
       this.setState({ isRippleActive: false });
     }
   }
 
-  renderIcon = (icon, dir) => {
+  @autobind
+  renderIcon(icon, dir) {
     return (
       <Icon direction={dir}>
         {icon}
@@ -225,6 +237,8 @@ class Button extends PureComponent {
       type,
       style,
       colors,
+      onlyIcon,
+      isRipple,
       ...props
     } = this.props;
     const tag = componentClass || 'button';
@@ -263,7 +277,7 @@ class Button extends PureComponent {
         auto={autoMobile}
         className={className}
         iconDirection={iconDirection}
-        onlyIcon={icon && !children}
+        onlyIcon={onlyIcon || (icon && !children)}
         onClick={!disabled ? onClick : null}
         twoIcons={icoLeft && iconRight}
         style={style}
@@ -271,7 +285,7 @@ class Button extends PureComponent {
         {...filterProps(buttonProps, tag)}
         // {...buttonProps}
       >
-        <If condition={!disabled}>
+        <If condition={!disabled && isRipple}>
           <Ripple
             innerRef={this.ripple}
             active={isRippleActive}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import If from 'react-if';
 import isEqual from 'lodash/isEqual';
 import pick from 'lodash/pick';
 // import PropTypes from 'prop-types';
@@ -31,18 +32,21 @@ class Option extends Component {
       theme,
       // ...props
     } = this.props;
+    const { Icon } = data;
+    // console.log({ Icon, props });
     return (
       <OptionItem
         onClick={() => selectOption(data)}
         focused={isFocused}
         selected={isSelected}
+        type="button"
       >
         <If condition={data.image}>
           {typeof data.image === 'string' ? <Image src={data.image} /> : data.image}
         </If>
-        <If condition={data.icon}>
+        <If condition={data.icon || Icon}>
           <IconWrapper color={data.iconColor || theme.colors.secondary}>
-            {(isSelected && data.iconActive) ? data.iconActive : data.icon}
+            {(isSelected && data.iconActive) ? data.iconActive : (Icon ? <Icon /> : data.icon)}
           </IconWrapper>
         </If>
         <Title>

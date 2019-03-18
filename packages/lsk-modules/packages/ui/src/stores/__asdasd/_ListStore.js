@@ -8,6 +8,7 @@ import {
 } from 'mobx';
 import { debounce } from 'lodash-decorators';
 import download from 'downloadjs';
+import autobind from 'core-decorators/lib/autobind';
 
 // import data from './data.json';
 
@@ -176,14 +177,17 @@ export default class ListStore {
     return this.fetch(...args);
   }
 
-  downloadCsv = async (params) => {
+  @autobind
+  async downloadCsv(params) {
     return this.download({ format: 'csv', ...params });
   }
-  downloadExcel = async (params) => {
+  @autobind
+  async downloadExcel(params) {
     return this.download({ format: 'xlsx', ...params });
   }
 
-  download = async (params, ctx) => {
+  @autobind
+  async download(params, ctx) {
     const { baseUrl, method = 'download' } = params;
     if (!baseUrl) throw new Error('Url is not set');
     if (!ctx) throw new Error('Context is not set');

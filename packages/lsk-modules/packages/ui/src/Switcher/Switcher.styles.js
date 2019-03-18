@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Label = styled('b')`
   font-family: ${p => p.theme.fontFamily};

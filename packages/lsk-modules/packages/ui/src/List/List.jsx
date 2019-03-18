@@ -19,9 +19,11 @@ import {
   PagesWrapper,
   StepperWrapper,
   SelectWrapper,
+  SelectRowWrapper,
 } from './List.styles';
 import { Provider } from './List.context';
 
+import ListSelectRow from './ListSelectRow';
 import ListSticky from './ListSticky';
 import ListHeader from './ListHeader';
 import ListSearch from './ListSearch';
@@ -37,7 +39,7 @@ import ListSortHeader from './ListSortHeader';
 import ListCheckbox from './ListCheckbox';
 import ListPaginator from './ListPaginator';
 
-
+import DefaultLoader from './DefaultLoader';
 import DefaultTags from './DefaultTags';
 import DefaultTag from './DefaultTag';
 
@@ -46,6 +48,7 @@ const defaultShow = {
   /** */ sticky: true,
   /** */ search: true,
   /** */ /** */ filterButton: true,
+  /** */ /** */ filterModal: true,
   /** */ tags: true,
 
   /** body */
@@ -62,6 +65,7 @@ const defaultShow = {
 class List extends Component {
   static Tag = DefaultTag;
   static Tags = DefaultTags;
+  static LoaderIcon = DefaultLoader;
   static Sticky = ListSticky;
   static Header = ListHeader;
   static Search = ListSearch;
@@ -76,7 +80,8 @@ class List extends Component {
   static Empty = ListEmpty;
   static SortHeader = ListSortHeader;
   static Checkbox = ListCheckbox;
-
+  static SelectRow = ListSelectRow;
+  static isFilterModal = true;
   static Button = Button;
   static SearchWrapper = Search;
   // static DownloadButton = ({ children }) => children;
@@ -94,14 +99,15 @@ class List extends Component {
   static PagesWrapper = PagesWrapper; // pages
   static StepperWrapper = StepperWrapper; // stepper
   static SelectWrapper = SelectWrapper;
+  static SelectRowWrapper = SelectRowWrapper;
   static PaginatorWrapper = PaginatorWrapper;
 
   render() {
     const {
       debug, columns, show: customShow = {}, pageSize = 10, paginatorProps = {},
-      Item, FilterForm, HeaderItem, Tags = this.constructor.Tags, Tag = this.constructor.Tag,
+      Item, FilterForm, HeaderItem, Tags = this.constructor.Tags, Tag = this.constructor.Tag, filterProps,
     } = this.props;
-
+    const isFilterModal = this.props.isFilterModal || this.constructor.isFilterModal;
     let { listStore } = this.props;
 
     if (!listStore) {
@@ -117,6 +123,7 @@ class List extends Component {
     }, Boolean);
 
     const List = {  //eslint-disable-line
+      LoaderIcon: this.props.LoaderIcon || this.constructor.LoaderIcon,
       Sticky: this.props.Sticky || this.constructor.Sticky,
       Header: this.props.Header || this.constructor.Header,
       Search: this.props.Search || this.constructor.Search,
@@ -131,6 +138,7 @@ class List extends Component {
       Empty: this.props.Empty || this.constructor.Empty,
       SortHeader: this.props.SortHeader || this.constructor.SortHeader,
       Checkbox: this.props.Checkbox || this.constructor.Checkbox,
+      SelectRow: this.props.SelectRow || this.constructor.SelectRow,
 
       Button: this.props.Button || this.constructor.Button,
       SearchWrapper: this.props.SearchWrapper || this.constructor.SearchWrapper,
@@ -148,6 +156,7 @@ class List extends Component {
       PagesWrapper: this.props.PagesWrapper || this.constructor.PagesWrapper,
       StepperWrapper: this.props.StepperWrapper || this.constructor.StepperWrapper,
       SelectWrapper: this.props.SelectWrapper || this.constructor.SelectWrapper,
+      SelectRowWrapper: this.props.SelectRowWrapper || this.constructor.SelectRowWrapper,
     };
 
     let { children } = this.props;
@@ -188,8 +197,10 @@ class List extends Component {
           Tags,
           Tag,
           HeaderItem,
+          isFilterModal,
           paginatorProps,
           debug,
+          filterProps,
         }}
       >
         <MobxProvider listStore={listStore} selectStore={selectStore} >

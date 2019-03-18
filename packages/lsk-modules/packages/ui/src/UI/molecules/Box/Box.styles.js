@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import creacteDynamicTag from '../../../utils/createDynamicTag';
 import removeProps from '../../../utils/removeProps';
 

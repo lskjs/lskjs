@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import DebounceInput from 'react-debounce-input';
 import {
   Form as BsForm,
@@ -17,7 +18,8 @@ import filterProps from '../utils/filterProps';
 
 
 class Input extends PureComponent {
-  onChange = (e) => {
+  @autobind
+  onChange(e) {
     const { value } = e.target;
     if (this.props.onChange) this.props.onChange(value);
   }
@@ -62,7 +64,8 @@ export default class Form extends FormBase {
   }
 
 
-  renderFormControl = (item) => {
+  @autobind
+  renderFormControl(item) {
     const { Control } = item;
     let control;
     if (Control) {

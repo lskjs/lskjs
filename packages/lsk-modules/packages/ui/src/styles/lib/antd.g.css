@@ -18171,6 +18171,9 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
     opacity: 0;
   }
 }
+body {
+  height: auto;
+}
 .ant-calendar-picker > div {
   position: relative;
 }
@@ -18288,5 +18291,41 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
 }
 .ant-layout.ant-layout-has-sider > .ant-layout,
 .ant-layout.ant-layout-has-sider > .ant-layout-content {
-  overflow-x: inherit;
+  overflow-x: hidden !important;
+}
+.ant-fullcalendar-disabled-cell > .ant-fullcalendar-date > .ant-fullcalendar-value:hover,
+.ant-fullcalendar-disabled-cell > .ant-fullcalendar-date > .ant-fullcalendar-value:active {
+  background-color: transparent;
+}
+.ant-fullcalendar-cell > .ant-fullcalendar-date > .ant-fullcalendar-value {
+  position: relative;
+  z-index: 1;
+}
+.ant-fullcalendar-today .ant-fullcalendar-value,
+.ant-fullcalendar-month-panel-current-cell .ant-fullcalendar-value {
+  box-shadow: none;
+}
+.ant-tag {
+  cursor: default;
+}
+.ant-badge-count {
+  min-width: 7px;
+}
+.ant-radio-inner:after {
+  left: 4px !important;
+  top: 4px !important;
+}
+.ant-checkbox-checked:after,
+.ant-radio-checked:after {
+  top: -1px;
+  left: -1px;
+}
+.lsk-form-select .react-select__menu {
+  z-index: 3;
+}
+.ant-fullcalendar-header .ant-radio-group {
+  display: none !important;
+}
+.ant-drawer {
+  z-index: 10000;
 }

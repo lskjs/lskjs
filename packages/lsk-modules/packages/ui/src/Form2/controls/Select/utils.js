@@ -6,7 +6,7 @@ import isNumber from 'lodash/isNumber';
 import isBoolean from 'lodash/isBoolean';
 import omit from 'lodash/omit';
 
-const NULL_STRING = '@@NULL@@';
+export const NULL_STRING = '@@NULL@@';
 
 const isSimple = str => isString(str) || isNumber(str) || isBoolean(str);
 
@@ -22,8 +22,7 @@ export const getNormalizedOptions = (options = [], props = {}) => {
     }
 
     if (props.nullOption) {
-      const option = isPlainObject(props.nullOption) ? props.nullOption : {};
-      // if (!option.title) option.title = t && t('form.nullOption');
+      const option = isPlainObject(props.nullOption) ? props.nullOption : isSimple(props.nullOption) ? { title: props.nullOption } : {};
       if (!option.value) option.value = null;
       preOptions.unshift(option);
     }

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import createDynamicTag from '../../../utils/createDynamicTag';
 
 const dynamicTag = createDynamicTag('article');
@@ -8,13 +8,15 @@ export const ImageContainer = styled(dynamicTag)`
   flex: 0 0 100%;
   max-width: 100%;
   height: 100%;
-  padding: 12px;
-  background-color: ${p => p.theme.colors.lighterPrimary};
+  padding: 0;
+  max-height: 235px;
+  overflow: hidden;
+  /* background-color: ${p => p.theme.colors.lighterPrimary}; */
   @media screen and (min-width: 768px) {
     flex: 0 0 30%;
     max-width: 30%;
     height: inherit;
-    padding: 12px 0;
+    padding: 0;
   }
 `;
 
@@ -32,15 +34,16 @@ export const Body = styled('div')`
   }
 `;
 
-export const Image = styled('img')`
-  width: 100%;
-  max-width: 100%;
-  object-fit: cover;
-  @media screen and (min-width: 768px) {
-    height: 100%;
-    border-radius: ${p => p.theme.borderRadius} 0 0 ${p => p.theme.borderRadius};
-  }
-`;
+// export const Image = styled('img')`
+//   height: 100%;
+//   width: 100%;
+//   max-width: 100%;
+//   object-fit: ${p => p.objectFit || 'cover'};
+//   @media screen and (min-width: 768px) {
+//     height: 100%;
+//     border-radius: ${p => p.theme.borderRadius} 0 0 ${p => p.theme.borderRadius};
+//   }
+// `;
 
 export const TagItem = styled('div')`
   font-size: 14px;
@@ -59,14 +62,12 @@ export const Title = styled('h4')`
   margin: 16px 0 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
 `;
 
 export const Content = styled('div')`
   padding: 0;
   flex: 1;
   height: 46px;
-  overflow: hidden;
   margin-bottom: 13px;
   font-family: ${p => p.theme.fontFamily};
 `;
@@ -74,9 +75,10 @@ export const Content = styled('div')`
 export const Author = styled('div')`
   padding-top: 24px;
   border-top: 1px solid rgba(0,0,0,.1);
-  padding-top: 26px;
+  padding-top: 27px;
   font-family: ${p => p.theme.fontFamily};
 `;
+
 
 export const Wrapper = styled(dynamicTag)`
   border: 1px solid rgba(0,0,0,.1);

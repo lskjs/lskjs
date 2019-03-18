@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from 'emotion'
 
 export default css`
   max-width: 300px;

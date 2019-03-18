@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/core';
+import { css, keyframes } from 'emotion';
+import get from 'lodash/get';
 import createDynamicTag from '../utils/createDynamicTag';
 import removeProps from '../utils/removeProps';
+import defaultTheme from '../theme';
+
+const themeGet = (theme, path) => {
+  return get(theme, path, get(defaultTheme, path));
+};
 
 const iconLeft = css`
   margin-right: 8px;
@@ -67,7 +73,7 @@ const largeSize = props => css`
 `;
 
 const defaultSize = css`
-  padding: 12px 17px 14px 16px;
+  padding: 13px 16px;
   font-size: 13px;
   font-weight: 500;
   font-style: normal;
@@ -78,11 +84,11 @@ const defaultSize = css`
 `;
 
 const smallSize = css`
-  padding: 9px 12px;
+  padding: 10px 8px;
   min-width: 48px;
 
-  font-size: 11px;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 500;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -103,7 +109,7 @@ const xsmallSize = css`
 `;
 
 const iconButtonLeft = props => css`
-  display: flex;
+  display: ${props.block ? 'flex' : 'inline-flex'};
   align-items: center;
   ${props.size === 'large' && `
     padding-left: 9px;
@@ -124,18 +130,18 @@ const iconButtonLeft = props => css`
     }
   `}
   ${props.size === 'small' && `
-    padding-left: 9px;
+    padding-left: 8px;
     padding-top: 6px;
     padding-bottom: 6px;
 
     ${Icon} {
-      font-size: 20px;
+      font-size: 24px;
     }
   `}
 `;
 
 const iconButtonRight = props => css`
-  display: flex;
+  display: ${props.block ? 'flex' : 'inline-flex'};
   align-items: center;
   ${props.size === 'large' && `
     padding-top: 9px;
@@ -158,26 +164,25 @@ const iconButtonRight = props => css`
   ${props.size === 'small' && `
     padding-top: 6px;
     padding-bottom: 6px;
-    padding-right: 6px;
+    padding-right: 8px;
 
     ${Icon} {
-      font-size: 20px;
+      font-size: 24px;
     }
   `}
 `;
 
 const iconButtonSingle = props => css`
-  display: flex;
+  display: ${props.block ? 'flex' : 'inline-flex'};
   align-items: center;
   ${props.size === 'large' && `
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
-    padding-right: 12px !important;
-    padding-left: 12px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-right: 6px !important;
+    padding-left: 6px !important;
 
     ${Icon} {
-      font-size: 20px;
-      padding-right: 8px;
+      font-size: 26px;
     }
   `}
   ${props.size === 'default' && `
@@ -197,7 +202,7 @@ const iconButtonSingle = props => css`
     padding-left: 8px !important;
 
     ${Icon} {
-      font-size: 18px;
+      font-size: 20px;
     }
   `}
 `;
@@ -229,6 +234,7 @@ const defaultSolidTheme = props => css`
   }
 
   ${props.disabled && `
+    pointer-events: none;
     color: rgba(74, 74, 74, 0.5) !important;
     background-color: rgba(255, 255, 255, 0.5) !important;
     &:hover,
@@ -241,81 +247,82 @@ const defaultSolidTheme = props => css`
 `;
 
 const primarySolidTheme = ({ theme }) => css`
-  color: ${theme.colors.white};
-  background-color: ${theme.colors.primary};
+  color: ${themeGet(theme, 'colors.white')};
+  background-color: ${themeGet(theme, 'colors.primary')};
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkPrimary};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkPrimary')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkPrimary};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkPrimary')};
   }
 `;
 
 const dangerSolidTheme = ({ theme }) => css`
-  color: ${theme.colors.white};
-  background-color: ${theme.colors.danger};
+  color: ${themeGet(theme, 'colors.white')};
+  background-color: ${themeGet(theme, 'colors.danger')};
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.danger};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.danger')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkDanger};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkDanger')};
   }
 `;
 
 const warningSolidTheme = ({ theme }) => css`
   color: #4a4a4a;
-  background-color: ${theme.colors.warning};
+  background-color: ${themeGet(theme, 'colors.warning')};
 
   &:hover {
     color: #4a4a4a;
-    background-color: ${theme.colors.darkWarning};
+    background-color: ${themeGet(theme, 'colors.darkWarning')};
   }
 
   &:active {
     color: #4a4a4a;
-    background-color: ${theme.colors.darkWarning};
+    background-color: ${themeGet(theme, 'colors.darkWarning')};
   }
 `;
 
 const infoSolidTheme = ({ theme }) => css`
-  color: ${theme.colors.white};
-  background-color: ${theme.colors.primary};
+  color: ${themeGet(theme, 'colors.white')};
+  background-color: ${themeGet(theme, 'colors.primary')};
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkPrimary};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkPrimary')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkPrimary};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkPrimary')};
   }
 `;
 
 const successSolidTheme = ({ theme }) => css`
-  color: ${theme.colors.white};
-  background-color: ${theme.colors.success};
+  color: ${themeGet(theme, 'colors.white')};
+  background-color: ${themeGet(theme, 'colors.success')};
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkSuccess};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkSuccess')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.darkSuccess};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.darkSuccess')};
   }
 `;
 
 const viewTextDisabled = css`
+  pointer-events: none;
   color: rgba(74, 74, 74, 0.5) !important;
   background-color: transparent !important;
   &:hover,
@@ -345,81 +352,82 @@ const defaultTextTheme = css`
 `;
 
 const primaryTextTheme = ({ theme }) => css`
-  color: ${theme.colors.primary};
+  color: ${themeGet(theme, 'colors.primary')};
   background-color: transparent;
 
   &:hover {
-    color: ${theme.colors.primary};
-    background-color: ${theme.colors.lighterPrimary};
+    color: ${themeGet(theme, 'colors.primary')};
+    background-color: ${themeGet(theme, 'colors.lighterPrimary')};
   }
 
   &:active {
-    color: ${theme.colors.primary};
-    background-color: ${theme.colors.lighterPrimary};
+    color: ${themeGet(theme, 'colors.primary')};
+    background-color: ${themeGet(theme, 'colors.lighterPrimary')};
   }
 `;
 
 const dangerTextTheme = ({ theme }) => css`
-  color: ${theme.colors.white};
-  background-color: ${theme.colors.danger};
+  color: ${themeGet(theme, 'colors.danger')};
+  background-color: ${themeGet(theme, 'colors.white')};
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.danger};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.danger')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.danger};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.danger')};
   }
 `;
 
 const warningTextTheme = ({ theme }) => css`
-  color: ${theme.colors.warning};
+  color: ${themeGet(theme, 'colors.warning')};
   background-color: transparent;
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.warning};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.warning')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.warning};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.warning')};
   }
 `;
 
 const infoTextTheme = ({ theme }) => css`
-  color: ${theme.colors.primary};
+  color: ${themeGet(theme, 'colors.primary')};
   background-color: transparent;
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.primary};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.primary')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.primary};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.primary')};
   }
 `;
 
 const successTextTheme = ({ theme }) => css`
-  color: ${theme.colors.success};
+  color: ${themeGet(theme, 'colors.success')};
   background-color: transparent;
 
   &:hover {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.success};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.success')};
   }
 
   &:active {
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.success};
+    color: ${themeGet(theme, 'colors.white')};
+    background-color: ${themeGet(theme, 'colors.success')};
   }
 `;
 
 const viewTransparentDisabled = css`
+  pointer-events: none;
   color: rgba(255, 255, 255, 0.5) !important;
   background-color: transparent !important;
   &:hover,
@@ -435,6 +443,7 @@ const viewTransparentDisabled = css`
 
 
 const viewTransparentDisabledDark = css`
+  pointer-events: none;
   color: rgba(0, 0, 0, 0.5) !important;
   background-color: transparent !important;
   &:hover,
@@ -448,32 +457,32 @@ const viewTransparentDisabledDark = css`
   }
 `;
 
-const transparentTheme = props => css`
-  color: ${props.theme.colors.white};
+const transparentTheme = ({ theme = defaultTheme }) => css`
+  color: ${themeGet(theme, 'colors.white')};
   background-color: transparent;
 
   &:hover {
-    color: ${props.theme.colors.white};
+    color: ${themeGet(theme, 'colors.white')};
     background-color: rgba(255, 255, 255, 0.16);
   }
 
   &:active {
-    color: ${props.theme.colors.white};
+    color: ${themeGet(theme, 'colors.white')};
     background-color: rgba(255, 255, 255, 0.16);
   }
 `;
 
-const transparentThemeDark = props => css`
-  color: ${props.theme.colors.main};
+const transparentThemeDark = ({ theme = defaultTheme }) => css`
+  color: ${themeGet(theme, 'colors.main')};
   background-color: transparent;
 
   &:hover {
-    color: ${props.theme.colors.main};
+    color: ${themeGet(theme, 'colors.main')};
     background-color: rgba(0, 0, 0, 0.16);
   }
 
   &:active {
-    color: ${props.theme.colors.main};
+    color: ${themeGet(theme, 'colors.main')};
     background-color: rgba(0, 0, 0, 0.16);
   }
 `;
@@ -525,7 +534,7 @@ export const Btn = styled(filteredTag)`
           ${Icon} {
             margin-left: 0;
           }
-          display: flex;
+          display: ${props.block ? 'flex' : 'inline-flex'};
           align-items: center;
           ${props.size === 'large' && `
             padding-top: 9px;
@@ -640,6 +649,7 @@ export const Btn = styled(filteredTag)`
   }}
   ${props => (props.disabled && `
     cursor: not-allowed !important;
+    pointer-events: none !important;
   `)}
   ${props => (props.block && `
     width: 100%;
@@ -688,7 +698,7 @@ export const RippleCircle = styled('span')`
   width: 0;
   height: 0;
   border-radius: ${p => p.theme.borderCircle};
-  background: rgba(255, 255, 255, .40);
+  background: rgba(0, 0, 0, .10);
 `;
 
 const aRipple = keyframes`
@@ -782,4 +792,62 @@ export const State = styled('div')`
   ${props => ((props.view === 'transparent' && props.state === 'processing') && `
     background-color: transparent !important;
   `)}
+`;
+
+
+// РЕАЛИЗОВАТЬ
+// https://github.com/twbs/bootstrap/blob/ff29c1224c20b8fcf2d1e7c28426470f1dc3e40d/scss/_button-group.scss
+export const ButtonGroup = styled('div')`
+  width: 100%;
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  flex-wrap: wrap;
+  ${p => p.padded && css`
+    ${Btn} {
+      margin: 5px;
+    }`}
+  @media screen and (max-width: 768px) {
+    ${p => p.block && css`
+      flex-direction: column;`}
+    ${Btn} {
+      margin: 8px 0 8px 0;
+    }
+  }
+  ${p => p.panel && css`
+    button {
+      &:first-child {
+        border-radius: 3px 0 0 3px;
+      }
+      &:last-child {
+        border-radius: 0 3px 3px 0;
+      }
+      border-radius: 0;
+    }
+  `}
+  /* ${p => !p.panel && css`
+    ${Btn} {
+      margin: 0 4px;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }`} */
+
+  & > * {
+    position: relative;
+    ${p => p.block && css`
+      flex: 1 1 auto;`}
+
+    /* @include hover {
+      z-index: 1;
+    } */
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 1;
+    }
+  }
 `;

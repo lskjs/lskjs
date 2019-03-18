@@ -1,9 +1,7 @@
 import set from 'lodash/set';
-import {
-  observable,
-  action,
-} from 'mobx';
+import { observable, action, toJS } from 'mobx';
 import axios from 'axios';
+import mapValues from 'lodash/mapValues';
 import omitEmpty from '../utils/omitEmpty';
 import Progress from '../utils/Progress';
 
@@ -11,6 +9,13 @@ import Store from './Store';
 import insertArray from '../utils/insertArray';
 
 const { CancelToken } = axios;
+
+const omitEmptyParams = params => (
+  omitEmpty(mapValues(params, (a, key) => {
+    if (key === 'filter') return toJS(omitEmpty(a));
+    return toJS(a);
+  }))
+);
 
 function getFindParams(store) {
   return {
@@ -45,7 +50,7 @@ export default class FetchStore extends Store {
     if (this.getFindParams) params = this.getFindParams(this, params);
     const raw = await this.api.find({
       count: 1,
-      ...omitEmpty(params),
+      ...omitEmptyParams(params),
       limit,
       skip,
       cancelToken,
@@ -54,7 +59,6 @@ export default class FetchStore extends Store {
     let items;
     let count;
     if (Array.isArray(raw)) {
-      // console.warn('pack lost, raw != {data}');
       items = raw;
       count = raw.count >= 0 ? raw.count : null;
     } else {

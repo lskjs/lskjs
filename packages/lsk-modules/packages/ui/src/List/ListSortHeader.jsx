@@ -5,9 +5,9 @@ import Sort from 'react-icons2/fa/sort';
 
 const SortDirection = ({ value, size = 14 }) => (
   value === 1 ? // eslint-disable-line no-nested-ternary
-    <ArrowDown size={size} /> :
+    <ArrowUp size={size} /> :
     value === -1 ?
-      <ArrowUp size={size} /> :
+      <ArrowDown size={size} /> :
       <Sort size={size} />
 );
 

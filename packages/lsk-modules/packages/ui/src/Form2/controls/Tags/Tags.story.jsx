@@ -9,11 +9,12 @@ import FormDebug from '../../FormDebug';
 const TagsFormView = (props) => {
   return (
     <Form>
-      <Field {...props.controls.tags} />
-      <Field {...props.controls.tags2} />
-      <Field {...props.controls.tags3} />
-      <Field {...props.controls.tags4} />
-      <Field {...props.controls.tags5} />
+      <Field {...props.control('tags')} />
+      <Field {...props.control('tags1')} />
+      <Field {...props.control('tags2')} />
+      <Field {...props.control('tags3')} />
+      <Field {...props.control('tags4')} />
+      <Field {...props.control('tags5')} />
       <FormDebug {...props} />
     </Form>
   );
@@ -45,6 +46,13 @@ const TagsForm = createForm({
           title: 'Четыре',
         },
       ],
+    },
+    tags1: {
+      title: 'Tags 1',
+      component: Tags,
+      triggerTitle: 'Выбрать теги',
+      flat: true,
+      options: ['one', 'two', 'three', 'four'],
     },
     tags2: {
       title: 'Tags2',
@@ -115,7 +123,9 @@ export default ({ storiesOf }) =>
     .add('Tags ', () => {
       return (
         <Story>
-          <TagsForm />
+          <TagsForm
+            initialValues={{ tags1: ['one'] }}
+          />
         </Story>
       );
     });

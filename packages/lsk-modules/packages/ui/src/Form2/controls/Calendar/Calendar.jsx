@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react';
 // import get from 'lodash/get';
-import CalendarBase from 'antd/es/calendar';
+import autobind from 'core-decorators/lib/autobind';
 import moment from 'moment';
 import HighlightedCell from '../../../UI/atoms/HighlightedCell';
+import CalendarBase from './antd-calendar';
 
 class Calendar extends PureComponent {
   static isAnyTypeDate(f) {
     return (new Date(f)).getTime() > 0;
   }
-  validationDate = (value) => {
+  @autobind
+  validationDate(value) {
     const { field, ...props } = this.props;
     let validValue = moment(new Date());
     if (this.constructor.isAnyTypeDate(value)) {
@@ -17,6 +19,25 @@ class Calendar extends PureComponent {
       validValue = moment(new Date(props.defaultValue));
     }
     return validValue;
+  }
+  @autobind
+  disabledDate(current) {
+    const { highlightedDates = [], futureOnly } = this.props;
+    current = (moment(current)).startOf('day').valueOf();
+    if (!Array.isArray(highlightedDates)) return false;
+
+    if (futureOnly) {
+      return current < Date.now();
+    }
+    if (highlightedDates) {
+      for (let highDate of highlightedDates) {
+        highDate = moment(highDate).startOf('day').valueOf();
+        if (highDate === current) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
   render() {
     const {
@@ -49,6 +70,7 @@ class Calendar extends PureComponent {
           if (isValid) return <HighlightedCell />;
           return '';
         }}
+        disabledDate={this.disabledDate}
         value={this.validationDate(field.value)}
         fullscreen={false}
       />

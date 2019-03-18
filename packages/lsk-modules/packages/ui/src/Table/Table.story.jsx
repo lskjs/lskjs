@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Story from '../Story';
 import range from 'lodash/range';
+import Story from '../Story';
 
 import { Table, Row, Col } from './index';
 

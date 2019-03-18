@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import omit from 'lodash/omit';
 import { inject, observer } from 'mobx-react';
 import StatefulButton from '../StatefulButton';
@@ -21,7 +22,8 @@ class UrlButton extends Component {
     url: null,
   };
 
-  onClick = async () => {
+  @autobind
+  async onClick() {
     const { api, url, onSuccess } = this.props;
     const res = await api.fetch(url);
     if (onSuccess) {
@@ -29,7 +31,8 @@ class UrlButton extends Component {
     }
   }
 
-  onError = (err) => {
+  @autobind
+  onError(err) {
     const { uapp } = this.props;
     uapp.onError(err);
   }

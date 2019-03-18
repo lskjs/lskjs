@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Title = styled('div')`
   font-family: ${p => p.theme.fontFamily};
@@ -7,12 +7,14 @@ export const Title = styled('div')`
   line-height: 1.0;
   text-align: center;
   letter-spacing: -0.1px;
+  text-align: left;
   color: ${p => p.theme.colors.primary};
 `;
 
 export const CloseWrapper = styled('button')`
   background: transparent;
   border: none;
+  cursor: pointer;
   outline: none;
   color: ${p => p.theme.colors.primary};
   padding: 5px;
@@ -31,6 +33,7 @@ export const TagItem = styled('div')`
   padding: 9px 8px;
   display: inline-flex;
   align-items: center;
+  cursor: default;
   justify-content: center;
   min-width: 64px;
   ${p => (p.disabled && `

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const DropdownLink = styled('a')`
   display: flex !important;

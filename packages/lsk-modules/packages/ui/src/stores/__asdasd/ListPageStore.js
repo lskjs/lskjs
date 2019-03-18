@@ -12,6 +12,7 @@ import set from 'lodash/set';
 import pick from 'lodash/pick';
 import intersection from 'lodash/intersection';
 // import replaceHistory from '~/utils/replaceHistory2';
+import { autobind } from 'core-decorators';
 
 import SelectStore from './SelectStore';
 import PageStore from './PageStore';
@@ -70,6 +71,7 @@ export default class ListPageStore extends PageStore {
     this.selectStore.globalCheck = false;
   }
 
+  @autobind
   @action
   toggleSelectAll() {
     if (this.selectStore.globalCheck) {
@@ -87,7 +89,8 @@ export default class ListPageStore extends PageStore {
     }
   }
 
-  toggleSelect = (...args) => {
+  @autobind
+  toggleSelect(...args) {
     this.selectStore.toggle(...args);
     this.checkGlobalSelect();
   }
@@ -137,7 +140,8 @@ export default class ListPageStore extends PageStore {
     return this.limit * (this.page - 1);
   }
 
-  nextPage = () => {
+  @autobind
+  nextPage() {
     // let skip = this.skip + this.limit;
     this.page += 1;
     // if (skip < this.listStore.count) skip = this.listStore.count - this.limit;
@@ -160,7 +164,8 @@ export default class ListPageStore extends PageStore {
     return this.getSkip() + this.limit < this.listStore.count;
   }
 
-  prevPage = () => {
+  @autobind
+  prevPage() {
     this.page -= 1;
     if (this.page <= 1) {
       this.page = 1;

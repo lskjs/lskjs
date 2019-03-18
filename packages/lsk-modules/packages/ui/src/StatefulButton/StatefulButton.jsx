@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import omit from 'lodash/omit';
 import filterProps from '../utils/filterProps';
 
@@ -64,7 +65,8 @@ class StatefulButton extends PureComponent {
     this.isMounted = false;
   }
 
-  onClick = (e) => {
+  @autobind
+  onClick(e) {
     if (this.getButtonState() === 'ready') {
       const {
         onSubmit, onClick, form, state,
@@ -108,7 +110,8 @@ class StatefulButton extends PureComponent {
     this.privateTimeoutId = action;
   }
 
-  getButtonState = () => {
+  @autobind
+  getButtonState() {
     return this.props.state
       || this.state.internalState
       || this.props.baseState;
@@ -118,7 +121,8 @@ class StatefulButton extends PureComponent {
   privateResetInternalStateAfterProcessing;
   privateIsMounted;
 
-  doResetInternalState = () => {
+  @autobind
+  doResetInternalState() {
     if (this.isMounted) {
       this.setState({
         internalState: null,
@@ -126,7 +130,8 @@ class StatefulButton extends PureComponent {
     }
   }
 
-  doResetInternalStateAfterTimer = () => {
+  @autobind
+  doResetInternalStateAfterTimer() {
     this.timeoutId = setTimeout(() => {
       this.timeoutId = null;
       this.doResetInternalState();

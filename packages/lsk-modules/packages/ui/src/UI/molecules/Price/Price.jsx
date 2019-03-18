@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
+import autobind from 'core-decorators/lib/autobind';
 import round from 'lodash/round';
 import get from 'lodash/get';
 import map from 'lodash/map';
@@ -42,7 +43,7 @@ class Price extends Component {
     currency: 'usd',
   }
 
-  renderBody = () => {
+  @autobind renderBody() {
     let {
       value, valueTo,
     } = this.props;

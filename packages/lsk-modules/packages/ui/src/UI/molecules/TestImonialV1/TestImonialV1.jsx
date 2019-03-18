@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Avatar from '../../../Avatar';
 import {
   Content,
   Meta,
   InfoHolder,
   AuthorImg,
-  AvatarItem,
+  // AvatarItem,
   AuthorDesc,
 } from './TestImonialV1.styles';
 
@@ -37,7 +38,7 @@ class TestImonialV1 extends PureComponent {
         <Content color={color}>{content}</Content>
         <Meta>
           <InfoHolder>
-            <AuthorImg> <AvatarItem alt="avatar" src={avatar} size={60} /> </AuthorImg>
+            <AuthorImg> <Avatar title={name} alt="avatar" src={avatar} size={60} /> </AuthorImg>
             <div>
               <div>{name}</div>
               <AuthorDesc>{title}</AuthorDesc>

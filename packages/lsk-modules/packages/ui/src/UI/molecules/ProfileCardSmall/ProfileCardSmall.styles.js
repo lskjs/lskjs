@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('article')`
   border: 1px solid rgba(0,0,0,.1);

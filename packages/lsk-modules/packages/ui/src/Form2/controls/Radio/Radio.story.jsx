@@ -3,14 +3,15 @@ import { Form, Field } from 'formik';
 import Story from '../../../Story';
 import createForm from '../../createForm';
 import Radio from './Radio';
+import Checkbox from '../Checkbox';
 import FormDebug from '../../FormDebug';
 
 const RadioFormView = (props) => {
   return (
     <Form>
-      <Field {...props.controls.blue} />
-      <Field {...props.controls.black} />
-      <Field {...props.controls.green} />
+      <Field {...props.controls.get('blue')} />
+      <Field {...props.controls.get('blue')} />
+      <Field {...props.controls.get('blueCheckbox')} />
       <FormDebug {...props} />
     </Form>
   );
@@ -20,19 +21,13 @@ const RadioForm = createForm({
   view: RadioFormView,
   controls: {
     blue: {
+      component: Radio,
       title: 'first value',
-      component: Radio,
-      id: 1,
     },
-    black: {
-      title: 'second value',
-      component: Radio,
-      id: 2,
-    },
-    green: {
-      title: 'third value',
-      component: Radio,
-      id: 3,
+    blueCheckbox: {
+      key: 'blue',
+      component: Checkbox,
+      title: 'first value',
     },
   },
 });

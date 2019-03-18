@@ -11,6 +11,7 @@ const TextArea = ({
   const hasError = field && field.name && !!get(form, `errors.${field.name}`);
   return (
     <Input
+      minRows={3}
       {...field}
       debounce={0}
       {...props}

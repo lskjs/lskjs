@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('section')`
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);

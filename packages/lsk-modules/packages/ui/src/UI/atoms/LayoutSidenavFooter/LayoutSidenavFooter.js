@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('div')`
   color: ${p => p.theme.colors.darkGray};

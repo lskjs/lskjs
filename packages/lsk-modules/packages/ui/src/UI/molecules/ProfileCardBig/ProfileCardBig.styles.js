@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import Avatar from '../../../Avatar';
 import createdynamicTag from '../../../utils/createDynamicTag';
 import removeProps from '../../../utils/removeProps';

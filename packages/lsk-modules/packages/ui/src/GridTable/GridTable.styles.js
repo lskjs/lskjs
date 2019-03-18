@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import createDynamicTag from '../utils/createDynamicTag';
 
 export const Header = styled('div')`

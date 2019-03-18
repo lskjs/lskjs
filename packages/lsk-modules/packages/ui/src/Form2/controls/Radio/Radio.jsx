@@ -1,57 +1,47 @@
 import React from 'react';
-import cloneDeep from 'lodash/cloneDeep';
-import sortBy from 'lodash/sortBy';
-import isPlainObject from 'lodash/isPlainObject';
-// import RadioBase from '../../../Radio';
+import AntRadio from 'antd/lib/radio';
 import RadioBase from './RadioBase';
+import Bool from '../Checkbox/Bool';
+import Label from '../Checkbox/Checkbox.styles';
 
-const NULL_STRING = '@@NULL@@';
+// export default (...props) => <Bool {...props} componentClass={AntRadio} />;
 
-const Radio = ({
-  field,
-  form,
-  ...props
-}) => {
-  const valueBefore = field.name;
-  const value = (valueBefore == null) ? NULL_STRING : valueBefore;
+const BaseRadio = ({ onChange, validationState, ...props }) => (
+  <AntRadio
+    {...props}
+    onClick={() => onChange(true)}
+  >
+    <Label validationState={validationState} >
+      {props.label}
+    </Label>
+  </AntRadio>
+);
 
-  let preOptions = [];
-  if (props.options) {
-    preOptions = cloneDeep(props.options);
-    if (field.sortOptions) {
-      preOptions = sortBy(preOptions, 'title');
-    }
+export default props => <Bool {...props} componentClass={BaseRadio} />;
 
-    if (field.nullOption && field.options) {
-      const option = isPlainObject(field.nullOption) ? field.nullOption : {};
-      // if (!option.title) option.title = t && t('form.nullOption');
-      if (!option.value) option.value = null;
-      preOptions.unshift(option);
-    }
-    // console.log({ preOptions });
-    // console.log('field.options', field.options, field);
-  }
 
-  const options = preOptions.map(option => ({
-    ...option,
-    label: option.label || option.title,
-    value: option.value == null ? NULL_STRING : option.value,
-  }));
-  return (
-    <RadioBase
-      {...field}
-      {...props}
-      validationState={form.errors[field.name] ? 'error' : null}
-      value={value}
-      onChange={(val) => {
-        form.setFieldValue(field.name, val);
-      }}
-      options={options}
-    >
-      {props.title}
-    </RadioBase>
-  );
-};
+// )
+// const Radio = ({
+//   field,
+//   form,
+//   ...props
+// }) => {
 
-export default Radio;
+
+//   return (
+//     <RadioBase
+//       {...field}
+//       {...props}
+//       validationState={form.errors[field.name] ? 'error' : null}
+//       value={value}
+//       onChange={(val) => {
+//         form.setFieldValue(field.name, val);
+//       }}
+//     >
+//       {props.title}
+//     </RadioBase>
+//   );
+// };
+
+// export default Radio;
 

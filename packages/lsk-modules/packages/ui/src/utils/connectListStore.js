@@ -4,8 +4,7 @@ import omit from 'lodash/omit';
 import getParamsFromQuery from './getParamsFromQuery';
 import getQueryFromParams from './getQueryFromParams';
 
-const DEBUG = __DEV__;
-// DEBUG = false;
+const DEBUG = __DEV__ && false;
 
 const omitKeys = ['filter', 'sort', 'sortBy', 'search', 'skip', 'limit'];
 
@@ -28,33 +27,45 @@ const connectListStore = async ({
     listStore.setState(queryParams);
   }
 
-  await Promise.delay(1000);
+  await Promise.delay(10);
+  // return () => {}
   const remove = autorun(async () => {
     const params = {
       ...omit(query, omitKeys),
       ...getParams(listStore),
     };
-    DEBUG && console.log('autorun', { params }, { defaultParams }, omit(query, omitKeys), {
-      ...defaultParams,
+    DEBUG && console.log('autorun', params, defaultParams, omit(query, omitKeys), {
+
       ...omit(query, omitKeys),
     });
 
     let string = getQueryFromParams(params, defaultParams);
     if (string) string = `?${string}`;
+    // console.log('COMPARE', page.uapp.history.location.search, string, page.uapp.history.location.search === string);
+    if (page.uapp.history.location.search === string) return;
+    DEBUG && console.log('connectListStore: waiting for refresh', page.uapp.history.location.search, '=>', string, page.uapp);
 
-
-    await Promise.delay(1000);
+    if (__DEV__) {
+      await Promise.delay(1000);
+    }
     page.uapp.history.replace({
       search: string,
       method: 'replaceState',
     });
   });
+  const removeWrapper = () => {
+    DEBUG && console.log('REMOVE @@@!!!!');
+    remove();
+  };
 
   if (__DEV__) {
-    setTimeout(remove, 5000);
+    setTimeout(() => {
+      DEBUG && console.log('AUTOREMOVE');
+      removeWrapper();
+    }, 30000);
   }
 
-  return remove;
+  return removeWrapper;
 };
 
 

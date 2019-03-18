@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import removeProps from '../../../utils/removeProps';
 
 export const Title = styled(removeProps('div', ['align']))`
@@ -18,6 +18,7 @@ export const Title = styled(removeProps('div', ['align']))`
   letter-spacing: -0.1px;
   color: ${p => p.theme.colors.white};
   box-sizing: border-box;
+  border-radius: 8px 8px 0 0;
 `;
 
 export const buttonStyle = css`

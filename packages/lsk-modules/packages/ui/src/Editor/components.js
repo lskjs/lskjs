@@ -1,5 +1,4 @@
-import React from 'react';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Button = styled('span')`
   cursor: pointer;
@@ -9,11 +8,9 @@ export const Button = styled('span')`
       : props.active ? 'black' : '#ccc')};
 `;
 
-export const Icon = styled(({ className, ...rest }) => {
-  return <span className={`material-icons ${className}`} {...rest} />;
-})`
-  font-size: 18px;
-  vertical-align: text-bottom;
+export const Icon = styled('div')`
+  font-size: 24px;
+  display: flex;
 `;
 
 export const Menu = styled('div')`
@@ -26,9 +23,15 @@ export const Menu = styled('div')`
 `;
 
 export const Toolbar = styled(Menu)`
-  position: relative;
-  padding: 1px 18px 17px;
-  margin: 0 -20px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px 8px 12px;
+  margin: 0 0 20px;
   border-bottom: 2px solid #eee;
-  margin-bottom: 20px;
+  background: #fff;
+`;
+
+export const EditorWrapper = styled('div')`
+  font-family: ${p => p.theme.fontFamily};
 `;

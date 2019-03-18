@@ -1,16 +1,17 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('div')`
   background-color: #e6f7ff;
   height: 24px;
-  z-index: -1;
+  z-index: 0;
   width: 24px;
   color: white;
   position: absolute;
   border-radius: 2px;
   left: 0;
   right: 0;
-  top: -6px;
+  top: 0;
   margin: auto;
-  border: 5px solid #e6f7ff;
+  outline: 5px solid #e6f7ff;
 `;
+

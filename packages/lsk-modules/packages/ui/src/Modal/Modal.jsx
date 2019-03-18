@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
+import autobind from 'core-decorators/lib/autobind';
 import cx from 'classnames';
 import Component from '../Component';
 
@@ -113,7 +114,8 @@ export class Open extends Component { // eslint-disable-line
     children: PropTypes.any,
   };
 
-  handle = (e) => {
+  @autobind
+  handle(e) {
     const { type, id } = this.props;
     if (!e.isDefaultPrevented()) {
       this.context._modal({ type, id });
@@ -148,7 +150,8 @@ export class Close extends Component { // eslint-disable-line
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     children: PropTypes.any,
   };
-  handle = () => {
+  @autobind
+  handle() {
     const { type, id } = this.props;
     this.context._modal({ type, id });
   }
@@ -179,7 +182,8 @@ export class ModalContent extends Component { // eslint-disable-line
     title: PropTypes.string,
     fullscreen: PropTypes.bool,
   };
-  handle = () => {
+  @autobind
+  handle() {
     const { id } = this.props;
     this.context._modal({ type: 'close', id });
   }

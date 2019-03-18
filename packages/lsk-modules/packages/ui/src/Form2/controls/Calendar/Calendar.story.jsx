@@ -26,13 +26,15 @@ const CalendarForm = createForm({
     calendar1: {
       title: 'Calendar',
       component: Calendar,
+      futureOnly: true,
       highlightedDates: [
         new Date('2019-02-15'),
         new Date('2019-02-18'),
         new Date('2019-02-17'),
         '2019-02-02',
-        '2019-02-03',
+        '2019-03-13',
         '2019-02-04',
+        '2019-02-13',
         Date.now(),
       ],
     },

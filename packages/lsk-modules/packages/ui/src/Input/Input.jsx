@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
+import autobind from 'core-decorators/lib/autobind';
 
 // import getBlock from './Input.styles';
 import If from 'react-if';
@@ -24,7 +25,7 @@ class Input extends PureComponent {
     leftIcon: PropTypes.any,
     rightIcon: PropTypes.any,
     className: PropTypes.string,
-    regex: PropTypes.string,
+    regex: PropTypes.regexp,
   }
   static defaultProps = {
     validationState: null,
@@ -66,7 +67,8 @@ class Input extends PureComponent {
     }
   }
 
-  handleChange = (e) => {
+  @autobind
+  handleChange(e) {
     const { regex } = this.props;
     let value = e;
     if (!(typeof value === 'number' || typeof value === 'string') && value) {

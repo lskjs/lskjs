@@ -1,4 +1,5 @@
  import React, { PureComponent } from 'react';
+import autobind from 'core-decorators/lib/autobind';
 import DebounceInput from 'react-debounce-input';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
@@ -36,7 +37,8 @@ class Search extends PureComponent {
     actions: null,
     onClear: null,
   }
-  handleChange = (event) => {
+  @autobind
+  handleChange(event) {
     const { onChange } = this.props;
     let value = '';
     if (typeof event === 'string') {
@@ -47,13 +49,15 @@ class Search extends PureComponent {
     if (onChange) onChange(value);
   }
 
-  handlePress = (event) => {
+  @autobind
+  handlePress(event) {
     if (event.keyCode === 13) {
       this.handleChange(event);
     }
   }
 
-  handleClick = () => {
+  @autobind
+  handleClick() {
     if (this.input) {
       this.handleChange(this.input.state.value);
     }
@@ -96,13 +100,12 @@ class Search extends PureComponent {
                 icon={<CloseIcon />}
                 paint="primary"
                 view="text"
-                size="large"
                 onClick={onClear}
               />
             </Action>
           </If>
           <If condition={actions}>
-            <Action additional>
+            <Action additional divide={max || canClear}>
               {actions}
             </Action>
           </If>

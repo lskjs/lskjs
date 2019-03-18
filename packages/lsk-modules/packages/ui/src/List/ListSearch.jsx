@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { contextToProps } from './List.context';
 
-@contextToProps('List', 'show')
+@contextToProps('List', 'show', 'FilterForm')
 @inject('listStore', 'i18')
 @observer
 class ListSearch extends Component {

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('span')`
   ${p => (p.validationState === 'error' && `

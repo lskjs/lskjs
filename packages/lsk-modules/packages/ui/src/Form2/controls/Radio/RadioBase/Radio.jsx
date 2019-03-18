@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import autobind from 'core-decorators/lib/autobind';
 import PropTypes from 'prop-types';
 
 import Blank from 'react-icons2/mdi/checkbox-blank-circle-outline';
@@ -8,7 +9,7 @@ import { Icon, Item } from './Radio.styles';
 class Radio extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
-    selected: PropTypes.bool,
+    checked: PropTypes.bool,
     value: PropTypes.any.isRequired,
     id: PropTypes.number.isRequired,
     children: PropTypes.any,
@@ -17,63 +18,57 @@ class Radio extends PureComponent {
   }
   static defaultProps = {
     onChange: null,
-    selected: false,
+    checked: false,
     children: null,
     validationState: null,
     disabled: false,
   }
-  constructor(props) {
-    super(props);
+  constructor({ checked }) {
+    super();
     this.state = {
-      selected: props.selected,
+      checked,
     };
   }
   componentWillReceiveProps(next) {
-    const { selected } = this.props;
-    if (selected !== next.selected) {
-      this.setState({ selected: next.selected });
+    const { checked } = this.props;
+    if (checked !== next.checked) {
+      this.setState({ checked: next.checked });
     }
   }
-  handleSelect = () => {
-    this.setState({ selected: !this.state.selected }, this.callback);
-  }
-  callback = () => {
-    const { onChange, value } = this.props;
-    const { selected } = this.state;
-    if (onChange) onChange({ [value]: selected });
-    // if (onChange) onChange(selected);
+  @autobind
+  handleSelect() {
+    const { onChange } = this.props;
+    onChange(true);
+    this.setState({ checked: true });
   }
   render() {
-    const { selected } = this.state;
+    const { checked } = this.state;
     const {
       block,
       disabled,
       validationState,
-      id,
+      id = `r${Math.random()}`,
       children,
       ...otherProps
     } = this.props;
-
-    let onChange = this.handleSelect;
-    if (selected) onChange = null;
     return (
-
       <Item
-        selected={selected}
+        selected={checked}
         validationState={validationState}
         disabled={disabled}
         block={block}
+        {...otherProps}
       >
         <input
-          {...otherProps}
+          // {...otherProps}
           type="radio"
           id={id}
-          selected={selected}
-          onChange={onChange}
+          selected={checked}
+          onChange={this.handleSelect}
           disabled={disabled}
         />
-        <Icon type="button" onClick={onChange} disabled={disabled}>
-          {selected ? <Selected /> : <Blank />}
+        <Icon type="button" onClick={this.handleSelect} disabled={disabled}>
+          {checked ? <Selected /> : <Blank />}
           <label // eslint-disable-line
             htmlFor={id}
           >

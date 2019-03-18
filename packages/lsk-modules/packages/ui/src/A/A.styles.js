@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import Link from '../Link';
 
 const defaultStyle = ({ theme }) => css`

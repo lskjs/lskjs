@@ -32,7 +32,7 @@ export default ({ storiesOf }) =>
       return (
         <Story>
           <GeoGoogleForm
-            initialValue={{
+            initialValues={{
               geo: [-122.268783, 37.871263],
             }}
           />

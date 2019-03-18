@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import { removeProps } from '../../../../utils';
 
 export const OptionItem = styled('button')`
@@ -10,9 +10,10 @@ export const OptionItem = styled('button')`
   border: none;
   height: 48px;
   padding-left: 8px;
+  z-index: 111111;
 
   font-family: ${p => p.theme.fontFamily};
-  background-color: ${p => (p.focused ? p.theme.colors.lighterPrimary : p.theme.colors.white)};
+  background-color: ${p => (p.focused ? '#F0F0FF' : p.theme.colors.white)};
   font-size: 13px;
   font-weight: normal;
   font-style: normal;
@@ -21,16 +22,16 @@ export const OptionItem = styled('button')`
   letter-spacing: -0.1px;
   color: ${p => p.theme.colors.main};
   &:focus{
-    background-color: #eff4fa !important;
+    background-color: #ffffff !important;
     color: ${p => p.theme.colors.main} !important;
   }
   &:hover {
-    background-color: #eff4fa !important;
+    background-color: #F0F0FF !important;
     color: ${p => p.theme.colors.main} !important;
   }
   ${p => (p.selected && css`
-    background-color: #f0f0ff !important;
-    color: ${p.theme.colors.primary} !important;
+    background-color: #ffffff !important;
+    color: #7070FF !important;
   `)}
 `;
 

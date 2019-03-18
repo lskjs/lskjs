@@ -1,4 +1,7 @@
 import { observable, computed, action } from 'mobx';
+import { autobind } from 'core-decorators';
+import { toJS } from 'mobx';
+import downloadjs from 'downloadjs';
 import debounce from 'lodash-decorators/debounce';
 import isEmpty from 'lodash/isEmpty';
 import every from 'lodash/every';
@@ -59,7 +62,8 @@ export default class ListStore extends FetchStore {
   /**
     * @param {Number} page - page from 1
     */
-  setPage = (page) => {
+  @autobind
+  setPage(page) {
     this.setStateAndUpdate({
       skip: Math.floor((page - 1) * this.limit),
     });
@@ -69,46 +73,53 @@ export default class ListStore extends FetchStore {
    * Handlers
    */
 
-  setTab = (tab) => {
+  @autobind
+  setTab(tab) {
     this.setStateAndUpdate({
       tab,
       skip: 0,
     });
   }
 
-  setLimit = (limit) => {
+  @autobind
+  setLimit(limit) {
     this.setStateAndUpdate({
       limit,
     });
   }
 
-  setFilter = (values) => {
+  @autobind
+  setFilter(values) {
     this.setStateAndUpdate({
       filter: values,
       skip: 0,
     });
   }
 
-  toggleFilter = () => {
+  @autobind
+  toggleFilter() {
     this.setState({
       showFilter: !this.showFilter,
     });
   }
 
-  setSearch = (search) => {
+  @autobind
+  setSearch(search) {
     this.setStateAndUpdate({
       search,
       skip: 0,
     });
   }
 
-  handleChangeLimit = (limit) => {
+  @autobind
+  handleChangeLimit(limit) {
     this.setStateAndUpdate({
       limit,
     });
   }
 
-  clearFilter = () => {
+  @autobind
+  clearFilter() {
     this.setStateAndUpdate({
       filter: {},
       search: '',
@@ -120,7 +131,8 @@ export default class ListStore extends FetchStore {
    * Первый клик - равен -1, те сортирвка по возрастанию (возможно нужно вторым аргументов задавать)
    * @param {String} field - поле для которого инверсируют сортировку
    */
-  toggleSort = (field) => {
+  @autobind
+  toggleSort(field) {
     // пока только одна сортировка
     const value = this.sort && this.sort[field];
     this.setStateAndUpdate({
@@ -129,5 +141,11 @@ export default class ListStore extends FetchStore {
       },
       skip: 0,
     });
+  }
+
+  @autobind
+  download() {
+    const data = JSON.stringify(toJS(this.items));
+    downloadjs(data, 'file.json', 'text/plain');
   }
 }

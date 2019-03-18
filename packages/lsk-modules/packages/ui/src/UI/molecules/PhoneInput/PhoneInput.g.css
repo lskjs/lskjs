@@ -801,6 +801,7 @@
   overflow-y: scroll;
   border-radius: 0 0 3px 3px;
   top: 37px;
+  text-align: left;
 }
 .react-tel-input .country-list .flag {
   display: inline-block;
@@ -833,7 +834,7 @@
 
 
 .react-tel-input .flag-dropdown {
-  padding: 10px 5px !important;
+  padding: 17px 5px !important;
 }
 
 .react-tel-input .country-list {

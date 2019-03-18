@@ -47,6 +47,7 @@ export const FormExample2 = createForm({
     select: {
       title: 'The Select',
       component: Select,
+      nullOption: 'not selected',
       options: [
         {
           value: 'corporation',
@@ -57,7 +58,7 @@ export const FormExample2 = createForm({
           title: 'second',
         },
       ],
-      placeholder: 'placeholder',
+      // placeholder: 'placeholder',
     },
     checkbox: {
       title: 'The Checkbox',

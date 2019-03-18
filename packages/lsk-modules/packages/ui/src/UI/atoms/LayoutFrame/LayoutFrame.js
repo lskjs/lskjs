@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from 'emotion';
 import Layout from 'antd/lib/layout';
 import Sider from '../../molecules/LayoutSidenav/LayoutSidenav.styles';
 import LayoutSidebarContainer from '../LayoutSidebarContainer';

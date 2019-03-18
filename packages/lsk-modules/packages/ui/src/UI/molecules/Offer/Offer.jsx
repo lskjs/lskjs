@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import Image from './Image';
 import Info from './Info';
 import Title from './Title';

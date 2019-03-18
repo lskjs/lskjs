@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import isEqual from 'lodash/isEqual';
 import If from 'react-if';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import { formatter } from '../../../utils/formatter';
 import RangeGroup from '../RangeGroup';
 import { Wrapper, Values, ValueItem } from './RangeFilterOption.styles';
@@ -34,23 +35,23 @@ class RangeFilterOption extends Component {
       minFocused: true,
       maxFocused: false,
       prevFocused: 'max',
-      minDisabledValues: this.getMinDisabledValues(props),
+      // minDisabledValues: this.getMinDisabledValues(props),
       maxDisabledValues: this.getMaxDisabledValues(props),
     };
   }
   componentWillReceiveProps(props) {
     let hasChanges = false;
-    const minDisabledValues = this.getMinDisabledValues(props, this.state);
-    if (!isEqual(minDisabledValues, this.state.minDisabledValues)) {
-      hasChanges = true;
-    }
+    // const minDisabledValues = this.getMinDisabledValues(props, this.state);
+    // if (!isEqual(minDisabledValues, this.state.minDisabledValues)) {
+    //   hasChanges = true;
+    // }
     const maxDisabledValues = this.getMaxDisabledValues(props, this.state);
     if (!isEqual(maxDisabledValues, this.state.maxDisabledValues)) {
       hasChanges = true;
     }
     if (hasChanges) {
       this.setState({
-        minDisabledValues,
+        // minDisabledValues,
         maxDisabledValues,
       });
     }
@@ -64,11 +65,11 @@ class RangeFilterOption extends Component {
     if (!isEqual(maxFocused, nextState.maxFocused)) {
       return true;
     }
-    const prevMinDisabledValues = this.state.minDisabledValues;
-    const { minDisabledValues } = nextState;
-    if (!isEqual(prevMinDisabledValues, minDisabledValues)) {
-      return true;
-    }
+    // const prevMinDisabledValues = this.state.minDisabledValues;
+    // const { minDisabledValues } = nextState;
+    // if (!isEqual(prevMinDisabledValues, minDisabledValues)) {
+    //   return true;
+    // }
     const prevMaxDisabledValues = this.state.maxDisabledValues;
     const { maxDisabledValues } = nextState;
     if (!isEqual(prevMaxDisabledValues, maxDisabledValues)) {
@@ -88,19 +89,19 @@ class RangeFilterOption extends Component {
     }
     return state.minValue;
   }
-  getMinDisabledValues(props, state) {
-    const maxValue = this.getMaxValue(props, state);
-    const { quickValues } = props;
-    const { min = [] } = quickValues;
-    const values = [];
-    if (!maxValue) return [];
-    min.forEach(({ value }) => {
-      if (value > Number(maxValue)) {
-        values.push(value);
-      }
-    });
-    return values;
-  }
+  // getMinDisabledValues(props, state) {
+  //   const maxValue = this.getMaxValue(props, state);
+  //   const { quickValues } = props;
+  //   const { min = [] } = quickValues;
+  //   const values = [];
+  //   if (!maxValue) return [];
+  //   min.forEach(({ value }) => {
+  //     if (value > Number(maxValue)) {
+  //       values.push(value);
+  //     }
+  //   });
+  //   return values;
+  // }
   getMaxDisabledValues(props, state) {
     const minValue = this.getMinValue(props, state);
     const { quickValues } = props;
@@ -114,7 +115,8 @@ class RangeFilterOption extends Component {
     });
     return values;
   }
-  selectShortValue = (value, type) => {
+  @autobind
+  selectShortValue(value, type) {
     const reverse = type === 'min' ? 'max' : 'min';
     this.setState({
       [`${type}Value`]: value,
@@ -135,7 +137,8 @@ class RangeFilterOption extends Component {
       }
     });
   }
-  handleFocus = (type) => {
+  @autobind
+  handleFocus(type) {
     const reverse = type === 'min' ? 'max' : 'min';
     this.setState({
       [`${type}Focused`]: true,
@@ -143,18 +146,20 @@ class RangeFilterOption extends Component {
     });
     this[`${type}Ref`]?.focus(); // eslint-disable-line
   }
-  callback = (min, max) => {
+  @autobind
+  callback(min, max) {
     const { onChange } = this.props;
     onChange({
       title: `${min ? formatter(min) : 'Мин.'} - ${max ? formatter(max) : 'Макс.'}`,
       value: [min, max],
     });
   }
-  handleChangeRange = ([min, max]) => {
+  @autobind
+  handleChangeRange([min, max]) {
     this.setState({
       minValue: min,
       maxValue: max,
-      minDisabledValues: this.getMinDisabledValues(this.props, { ...this.state, minValue: min, maxValue: max }),
+      // minDisabledValues: this.getMinDisabledValues(this.props, { ...this.state, minValue: min, maxValue: max }),
       maxDisabledValues: this.getMaxDisabledValues(this.props, { ...this.state, minValue: min, maxValue: max }),
     }, () => {
       this.callback(min, max);
@@ -162,7 +167,7 @@ class RangeFilterOption extends Component {
   }
   render() {
     const {
-      minFocused, maxFocused, minValue, maxValue, minDisabledValues, maxDisabledValues,
+      minFocused, maxFocused, minValue, maxValue, maxDisabledValues,
     } = this.state;
     const {
       min, max, stats, quickValues, footer,
@@ -215,8 +220,7 @@ class RangeFilterOption extends Component {
           <If condition={minValues || maxValues}>
             <Values>
               {values.map((item, i) => {
-                const disabled = minFocused && minDisabledValues.includes(item.value)
-                || maxFocused && maxDisabledValues.includes(item.value);
+                const disabled = maxFocused && maxDisabledValues.includes(item.value);
                 // if (minFocused) disabled = item.value >= Number(maxValue);
                 // if (maxFocused) disabled = item.value <= Number(minValue);
                 return (

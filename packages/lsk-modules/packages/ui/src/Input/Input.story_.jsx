@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from '~/lsk/Form';
-import Textarea from 'react-textarea-autosize';
+// import Form from '../Form';
+// import Textarea from 'react-textarea-autosize';
 
 import Input from './Input';
 
@@ -71,31 +71,31 @@ module.exports = function ({ storiesOf, action }) {
         onChange={action('change field')}
       />
     ))
-    .add('Input with Form', () => (
-      <Form
-        validators={{
-          text: {
-            presence: {
-              message: 'Поле не должно быть пустым',
-            },
-          },
-        }}
-        fields={[
-          {
-            name: 'text',
-            controlType: 'input2',
-            title: 'Инпут',
-            control: {
-              type: 'text',
-              placeholder: 'Текст',
-            },
-          },
-        ]}
-        onChange={action('onChange')}
-        onSubmit={action('onSubmit')}
-        onError={action('onError')}
-      />
-    ))
+    // .add('Input with Form', () => (
+    //   <Form
+    //     validators={{
+    //       text: {
+    //         presence: {
+    //           message: 'Поле не должно быть пустым',
+    //         },
+    //       },
+    //     }}
+    //     fields={[
+    //       {
+    //         name: 'text',
+    //         controlType: 'input2',
+    //         title: 'Инпут',
+    //         control: {
+    //           type: 'text',
+    //           placeholder: 'Текст',
+    //         },
+    //       },
+    //     ]}
+    //     onChange={action('onChange')}
+    //     onSubmit={action('onSubmit')}
+    //     onError={action('onError')}
+    //   />
+    // ))
     .add('Textarea', () => (
       <Input
         componentClass="textarea"

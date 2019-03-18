@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import CoverTitle from '../../atoms/CoverTitle';
 import CoverSubTitle from '../../atoms/CoverSubtitle';
 import CoverFooter from '../../atoms/CoverFooter';

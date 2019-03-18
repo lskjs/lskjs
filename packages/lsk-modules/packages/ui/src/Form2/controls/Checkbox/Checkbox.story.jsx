@@ -5,12 +5,27 @@ import createForm from '../../createForm';
 import Checkbox from './Checkbox';
 import FormDebug from '../../FormDebug';
 
+import T from '../../../T';
+import Account from 'react-icons2/mdi/account-box-outline';
+import Desktop from 'react-icons2/mdi/desktop-mac';
+import Camera from 'react-icons2/mdi/camcorder';
+
+
 const CheckboxFormView = (props) => {
   return (
     <Form>
-      <Field {...props.controls.blue} />
-      <Field {...props.controls.black} />
-      <Field {...props.controls.green} />
+      <Checkbox label="test" />
+      <Checkbox checked />
+      <Checkbox checked={false} />
+      <Checkbox value />
+      <Checkbox value={false} />
+      <Checkbox onChange={value => console.log({ value })} />
+      <hr />
+      <Field {...props.controls.get('blue')} />
+      <Field {...props.controls.get('black')} />
+      <Field {...props.controls.get('black')} />
+      <hr />
+      <Field {...props.controls.get('screen')} />
       <FormDebug {...props} />
     </Form>
   );
@@ -20,19 +35,23 @@ const CheckboxForm = createForm({
   view: CheckboxFormView,
   controls: {
     blue: {
-      title: 'first value',
       component: Checkbox,
+      title: 'first value',
       label: '1',
+      help: 'help 1',
+      tooltip: 'tooltip 1',
     },
     black: {
+      component: Checkbox,
       title: 'second value',
-      component: Checkbox,
       label: '2',
+      help: 'help 2',
+      tooltip: 'tooltip 2',
     },
-    green: {
-      title: 'third value',
+    screen: {
       component: Checkbox,
-      label: '3',
+      title: 'videoTypes.screencast',
+      label: <span><Desktop /> <T name="videoTypes.screencast" /></span>,
     },
   },
 });

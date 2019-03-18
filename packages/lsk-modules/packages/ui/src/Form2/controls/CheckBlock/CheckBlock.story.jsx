@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Field } from 'formik';
 import Story from '../../../Story';
 import createForm from '../../createForm';
-import InputComponent from '../Input';
 import CheckBlock from './CheckBlock';
 import FormDebug from '../../FormDebug';
 
@@ -10,7 +9,8 @@ import FormDebug from '../../FormDebug';
 const CheckBlockViewForm = (props) => {
   return (
     <Form>
-      <Field {...props.controls.checkBlock} />
+      <Field {...props.controls.get('radio')} />
+      <Field {...props.controls.get('checkbox')} />
       <FormDebug {...props} />
     </Form>
   );
@@ -19,17 +19,23 @@ const CheckBlockViewForm = (props) => {
 const CheckBlockForm = createForm({
   view: CheckBlockViewForm,
   controls: {
-    checkBlock: {
-      title: 'checkBlock',
+    radio: {
+      // title: 'checkBlock',
       component: CheckBlock,
+      view: 'radio',
       label: 'test',
       info: 'this is info',
-      children: 'This is children',
+      // children: 'asd',
       block: true,
     },
-    input: {
-      title: 'Input',
-      component: InputComponent,
+    checkbox: {
+      // title: 'checkBlock',
+      component: CheckBlock,
+      view: 'checkbox',
+      label: 'test',
+      info: 'this is info',
+      // children: 'asd',
+      block: true,
     },
   },
 });

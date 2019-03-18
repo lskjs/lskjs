@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('div')`
   margin: -12px 0 24px;

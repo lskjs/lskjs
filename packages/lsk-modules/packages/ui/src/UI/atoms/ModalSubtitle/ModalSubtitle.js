@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import removeProps from '../../../utils/removeProps';
 
 export default styled(removeProps('h2', ['align']))`

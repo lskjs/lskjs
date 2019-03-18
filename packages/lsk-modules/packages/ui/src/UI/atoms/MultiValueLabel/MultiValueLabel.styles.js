@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Value = styled('span')`
   color: ${p => p.theme.colors.primary};

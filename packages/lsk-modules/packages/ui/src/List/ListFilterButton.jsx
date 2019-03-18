@@ -3,13 +3,14 @@ import { toJS } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import filter from 'lodash/filter';
 import { Badge } from 'antd';
+// import If from 'react-if';
 import TuneIcon from 'react-icons2/mdi/tune';
 import isEmpty from '../utils/isEmpty';
 import T from '../T';
+import withResponsive from '../Button/withResponsive';
 import { contextToProps } from './List.context';
 
-
-@contextToProps('List')
+@contextToProps('List', 'isFilterModal')
 @inject('listStore')
 @observer
 class FilterButton extends Component {
@@ -17,26 +18,29 @@ class FilterButton extends Component {
     const {
       List, listStore,
     } = this.props;
+    console.log(this.props);
     const badge = listStore.hasFilter ? filter(toJS(listStore.filter), a => !isEmpty(a)).length : 0;
-
-    // console.log('Object.keys(listStore.filter)', Object.keys(listStore.filter));
-    // const badge = !listStore.hasFilter
-
+    const ResponsiveButton = withResponsive(List.Button);
+    const Button = props => (
+      <ResponsiveButton
+        icon={<TuneIcon />}
+        paint="primary"
+        size="small"
+        view="text"
+        bordered
+        {...props}
+      />
+    );
     return (
       <React.Fragment>
-        {/* <Badge count={listStore.hasFilter ? 1 : 0}> */}
+        {/*  className={isFilterModal ? 'd-none d-md-flex' : null} */}
         <Badge count={badge}>
-          <List.Button
-            icon={<TuneIcon />}
-            paint="primary"
-            view="text"
-            size="large"
-            bordered
-            style={{ backgroundColor: listStore.showFilter ? '#F0F0FF' : '' }}
+          <Button
+            size="small"
             onClick={listStore.toggleFilter}
           >
             <T name="lskList.filterButton" />
-          </List.Button>
+          </Button>
         </Badge>
       </React.Fragment>
     );

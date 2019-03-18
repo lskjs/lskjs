@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css } from 'emotion'
 import { withTheme } from 'emotion-theming';
 import { Scrollbars } from 'react-custom-scrollbars';
 import cx from 'classnames';

@@ -4,11 +4,13 @@ import Story from '../../../Story';
 import createForm from '../../createForm';
 import ArrayOf from './ArrayOf';
 import Input from '../Input/Input';
+import Radio from '../Radio';
 import FormDebug from '../../FormDebug';
 
 const ArrayOfFormView = (props) => {
   return (
     <Form>
+      <Field {...props.controls.inputArray4} />
       <Field {...props.controls.inputArray} />
       <FastField {...props.controls.inputArray} title="FastField/inputArray" />
       <hr />

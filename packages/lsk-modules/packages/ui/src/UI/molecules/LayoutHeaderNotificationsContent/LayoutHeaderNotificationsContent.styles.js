@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export default styled('div')`
   .ant-tabs-nav .ant-tabs-tab {

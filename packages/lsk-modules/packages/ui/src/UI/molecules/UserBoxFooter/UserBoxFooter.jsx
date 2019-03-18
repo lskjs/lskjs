@@ -12,7 +12,7 @@ import {
 
 class UserBoxFooter extends PureComponent {
   static propTypes = {
-    subtitle: PropTypes.string,
+    subtitle: PropTypes.any,
     actions: PropTypes.any,
     user: PropTypes.object,
   };

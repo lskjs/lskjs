@@ -3,10 +3,11 @@ import Api from './Api';
 
 export default class CrudApi extends Api {
   base = '/api/v1/some';
-  find(body) {
+  find(body, params) {
     return this.fetch(`${this.base}/find`, {
       method: 'POST',
       body,
+      ...params,
     });
   }
   findOne(_id) {

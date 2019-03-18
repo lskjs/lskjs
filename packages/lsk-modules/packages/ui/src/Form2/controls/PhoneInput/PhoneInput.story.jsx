@@ -5,8 +5,6 @@ import createForm from '../../createForm';
 import PhoneInput from './PhoneInput';
 import FormDebug from '../../FormDebug';
 
-import '../../../UI/molecules/PhoneInput/PhoneInput.g.css';
-
 const PhoneInputFormView = (props) => {
   return (
     <Form>
@@ -22,6 +20,7 @@ const PhoneInputForm = createForm({
     phoneInput: {
       title: 'PhoneInput',
       component: PhoneInput,
+      defaultCountry: 'ru',
     },
   },
 });

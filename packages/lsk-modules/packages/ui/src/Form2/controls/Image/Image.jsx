@@ -1,27 +1,50 @@
 import React from 'react';
-import get from 'lodash/get';
-import ImageUploaderBase from '../../../UI/molecules/ImageUploader';
+import PropTypes from 'prop-types';
+import Files from '../../../UI/molecules/Files';
+
+import DefaultBody from './DefaultBody';
+import DefaultFooter from './DefaultFooter';
 
 const ImageUploader = ({
   field,
   form,
   onError,
+  components,
+  isMulti,
   ...props
 }) => {
+  const Body = components.Body || ImageUploader.defaultProps.components.Body;
+  const Footer = components.Footer || ImageUploader.defaultProps.components.Footer;
   return (
-    <ImageUploaderBase
+    <Files
       {...field}
       {...props}
-      validationState={form.errors[field.name] ? 'error' : null}
-      onSubmit={(value) => {
-        form.setFieldValue(field.name, value);
-      }}
+      multiple={isMulti}
+      onSubmit={value => form.setFieldValue(field.name, value)}
       onError={() => onError?.(form.errors[field.name])} // this.globalError
-      value={field.value}
-      onBlur={e => console.log('bluuuuurr', { e })}
-    />
+      validationState={form.errors[field.name] ? 'error' : null}
+      files={field.value}
+      onBlur={null}
+      accept="image/jpeg, image/png"
+      footer={Footer}
+    >
+      {Body}
+    </Files>
   );
 };
 
-export default ImageUploader;
+ImageUploader.propTypes = {
+  components: PropTypes.shape({
+    Body: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    Footer: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  }),
+};
 
+ImageUploader.defaultProps = {
+  components: {
+    Body: DefaultBody,
+    Footer: DefaultFooter,
+  },
+};
+
+export default ImageUploader;

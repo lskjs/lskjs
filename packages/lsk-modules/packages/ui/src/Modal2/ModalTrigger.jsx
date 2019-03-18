@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'core-decorators/lib/autobind';
 import filterProps from '../utils/filterProps';
 import { contextToProps } from './Modal2.context';
 
@@ -16,8 +17,10 @@ class ModalTrigger extends Component { // eslint-disable-line
   //   children: PropTypes.any,
   // };
 
-  handleClick = (e) => {
-    const { modal, type } = this.props;
+  @autobind
+  handleClick(e) {
+    const { modal, type, disabled } = this.props;
+    if (disabled) return;
     if (e.isDefaultPrevented()) return;
     if (type === 'open') {
       modal.open();

@@ -7,7 +7,7 @@ import withResponsive from '../Button/withResponsive';
 import Button from '../Button';
 import { contextToProps } from './List.context';
 import { SelectWrapper } from './List.styles';
-import { Container, Item, Left } from './TableFooter';
+import { Container, Item, Left } from './AlignLayout';
 
 const ResponsiveButton = withResponsive(Button);
 
