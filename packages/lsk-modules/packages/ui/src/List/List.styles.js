@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import createDynamicTag from '../utils/createDynamicTag';
 // import TabBlock from '~/Uapp/components.v2/atoms/TabBlock';
 

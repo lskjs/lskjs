@@ -6,6 +6,7 @@ import defaultTheme from './theme';
 import Performance from './DEV/Performance';
 import State from './DEV/State';
 import './styles.g.css';
+import './UI/molecules/Modal/Modal.g.css';
 
 class Story extends Component {
   componentDidMount() {

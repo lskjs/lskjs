@@ -3,7 +3,7 @@ import range from 'lodash/range';
 import random from 'lodash/random';
 import sample from 'lodash/sample';
 import { observer } from 'mobx-react';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import cx from 'classnames';
 import Promise from 'bluebird';
 

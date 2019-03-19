@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { inject, observer } from 'mobx-react';
 import cx from 'classnames';
 import isArray from 'lodash/isArray';

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import Icon from 'antd/lib/icon';
 import createDynamicTag from '../../../utils/createDynamicTag';
 import removeProps from '../../../utils/removeProps';

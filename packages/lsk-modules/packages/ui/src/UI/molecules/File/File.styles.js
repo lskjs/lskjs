@@ -1,4 +1,4 @@
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { Row } from '../../../Grid';
 
 export const containerStyle = css`

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Modal from './Modal2';
 import Story from '../Story';
 import Button from '../Button';

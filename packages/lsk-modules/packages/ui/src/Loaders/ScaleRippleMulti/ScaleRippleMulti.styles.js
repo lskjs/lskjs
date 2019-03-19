@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css, keyframes } from 'emotion';
+import { css, keyframes } from '@emotion/core';
 import range from 'lodash/range';
 
 const rippleMulti = keyframes`

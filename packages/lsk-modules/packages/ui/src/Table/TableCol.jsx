@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import cx from 'classnames';
 import filterProps from '../utils/filterProps';
 

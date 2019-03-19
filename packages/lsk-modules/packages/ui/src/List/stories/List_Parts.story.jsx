@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import cx from 'classnames';
 import Story from '../../Story';
 import { Row, Col, ItemRow, ItemCol, HeaderRow, HeaderCol } from '../Table';

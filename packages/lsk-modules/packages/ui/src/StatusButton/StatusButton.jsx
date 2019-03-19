@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from '@emotion/styled';
-import { css, keyframes } from 'emotion';
+import { css, keyframes } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import cx from 'classnames';

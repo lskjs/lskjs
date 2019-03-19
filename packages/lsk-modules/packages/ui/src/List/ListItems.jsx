@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { observer, inject } from 'mobx-react';
 import If from 'react-if';
 import DEV from '../DEV';

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import Avatar from '../../../Avatar';
 
 export const Wrapper = styled('div')`

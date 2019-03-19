@@ -18,10 +18,10 @@ cfg.module.rules[0].options = {
 // module.exports = cfg;
 module.exports = ({ config }) => {
     config.module.rules = cfg.module.rules;
-    config.module.rules[1].loader.splice(0, 1);
-    config.module.rules[2].loader.splice(0, 1);
-    config.module.rules[3].loader.splice(0, 1);
-    config.module.rules[4].loader.splice(0, 1);
+    config.module.rules[1].loader[0] = { loader: 'style-loader' };
+    config.module.rules[2].loader[0] = { loader: 'style-loader' };
+    config.module.rules[3].loader[0] = { loader: 'style-loader' };
+    config.module.rules[4].loader[0] = { loader: 'style-loader' };
     config.plugins[1] = cfg.plugins[1];
     return config;
 };

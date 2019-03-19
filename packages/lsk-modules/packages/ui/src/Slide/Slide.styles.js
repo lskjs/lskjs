@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 
 const bg = css`
   width: 100%;

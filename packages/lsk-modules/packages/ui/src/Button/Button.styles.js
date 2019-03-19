@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css, keyframes } from 'emotion';
+import { css, keyframes } from '@emotion/core';
 import get from 'lodash/get';
 import createDynamicTag from '../utils/createDynamicTag';
 import removeProps from '../utils/removeProps';

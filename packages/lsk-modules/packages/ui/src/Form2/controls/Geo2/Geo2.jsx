@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Marker from 'react-icons2/md/room';
 import autobind from 'core-decorators/lib/autobind';
 import GoogleMapReact from 'google-map-react';
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import SearchBox from './SearchBox';
 // import { Icon } from './Geo2.styles';
 
