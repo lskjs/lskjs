@@ -15,11 +15,11 @@ pkgs.forEach((item) => {
   const folder = path.dirname(item);
   let str = '';
   if (pkg.main && pkg.browser) {
-    str = `const exports = {};
+    str = `let exports = {};
 
-if (__SERVER__) exports.default = require('./${pkg.main}').default;
-if (__CLIENT__) exports.default = require('./${pkg.browser}').default;
-    
+if (__SERVER__) exports = require('./${pkg.main}').default;
+if (__CLIENT__) exports = require('./${pkg.browser}').default;
+
 module.exports = exports;`;
   } else if (pkg.main) {
     str = `export { default } from './${pkg.main}';`;

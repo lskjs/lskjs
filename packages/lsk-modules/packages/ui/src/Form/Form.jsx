@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'core-decorators/lib/autobind';
 import DebounceInput from 'react-debounce-input';
+import If from 'react-if';
 import {
   Form as BsForm,
   FormGroup,

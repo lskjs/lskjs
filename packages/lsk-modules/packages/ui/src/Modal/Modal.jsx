@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import autobind from 'core-decorators/lib/autobind';
 import cx from 'classnames';
+import If from 'react-if';
 import Component from '../Component';
 
 const DEBUG = 0;

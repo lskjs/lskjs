@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import DefaultAvatar from '../Avatar';
 import merge from 'lodash/merge';
 import isEqual from 'lodash/isEqual';
+import If from 'react-if';
 
 export default class AvatarGroup extends PureComponent {
   static propTypes = {

@@ -19,7 +19,7 @@ const value2 = {
 
 export default ({ storiesOf, action }) => {
   return storiesOf('Form', module)
-    .addHtml(<link rel="stylesheet" type="text/css" href="http://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" />)
+    // .addHtml(<link rel="stylesheet" type="text/css" href="http://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" />)
     .add('Fields as strings', () => (
       <Story>
         <Form

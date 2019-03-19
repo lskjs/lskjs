@@ -121,7 +121,7 @@ export default class Slide extends Component {
           <Overlay style={{ backgroundColor: overlay }} />
         </If>
         <If condition={video}>
-          {this.renderVideo(video)}
+          {!!video && this.renderVideo(video)}
         </If>
         <If condition={image}>
           <Image style={{ backgroundImage: `url(${image})` }} />
