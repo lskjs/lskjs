@@ -194,8 +194,8 @@ export default class Base extends Template {
     return `
       ${this.button(children, params)}
       ${this.text(`
-        <p>
-          <a class="link" href="${params.href}">${params.href}</a>
+        <p style="font-size: 10px; margin: -18px 0 18px;">
+          <a style="color: #a0a0a0; overflow: hidden; display: block; height: 30px;" class="link" href="${params.href}">${params.href}</a>
         </p>
       `)}
     `;
