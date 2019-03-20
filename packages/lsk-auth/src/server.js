@@ -16,8 +16,8 @@ export default (ctx) => {
       this.online = onlineService;
       this.online.save = async (_id, visitedAt) => {
         // console.log('this.online.save', _id, visitedAt);
-        const { User } = ctx.models;
-        await User.update({ _id }, { visitedAt });
+        const { User: UserModel } = ctx.models;
+        await UserModel.update({ _id }, { visitedAt });
       };
       // setInterval(() => {
       //   console.log('online users', this.online.count());
@@ -51,7 +51,7 @@ export default (ctx) => {
       if (!this.config.socials) this.config.socials = {};
       this.initOnlineService();
       this.models = this.getModels();
-      ctx.models.User = this.models.User;
+      // ctx.models.User = this.models.User;
 
       this.controller = this.getController();
       this.Strategy = require('./server/Strategy').default(ctx, this);
@@ -120,6 +120,9 @@ export default (ctx) => {
       api.all('/social/unbind', isAuth, this.controller.socialUnbind);
 
       api.all('/passport/getByToken', this.controller.getPassportByToken);
+      api.all('/restorePasswordPermit', this.controller.restorePasswordPermit);
+      api.all('/confirmPassword', this.controller.confirmPassword);
+      api.all('/getPermit', this.controller.getPermit);
 
       // social auth init
       api.get('/:provider', this.controller.socialAuth);

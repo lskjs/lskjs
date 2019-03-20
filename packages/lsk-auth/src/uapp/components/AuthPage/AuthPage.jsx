@@ -32,7 +32,7 @@ import Slide from './Slide';
 @inject('uapp', 'auth', 'config')
 @observer
 // @importcss(require('./AuthPage.css'))
-export default class AuthPage extends Component {
+class AuthPage extends Component {
   static defaultProps = {
     type: 'login',
     passport: {},
@@ -282,3 +282,5 @@ export default class AuthPage extends Component {
     );
   }
 }
+
+export default AuthPage

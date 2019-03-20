@@ -1,12 +1,11 @@
-import _ from 'lodash';
 import get from 'lodash/get';
 import jwt from 'jsonwebtoken';
+import MongooseSchema from '@lskjs/db/MongooseSchema';
 import bcrypt from 'bcryptjs';
 import isPlainObject from 'lodash/isPlainObject';
 import omit from 'lodash/omit';
 import pick from 'lodash/pick';
 import Promise from 'bluebird';
-import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
 
 const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);
 const bcryptHash = Promise.promisify(bcrypt.hash);
@@ -37,11 +36,11 @@ function fullName(profile) {
 
 export function getSchema(ctx, module) {
   const sample = get(module, 'config.sample', sample2);
-  const schema = new UniversalSchema({
+  const schema = new MongooseSchema({
     username: {
       type: String,
       // required: true,
-      index: { unique: true },
+      // index: { unique: true },
       tolowercase: true,
       trim: true,
     },
@@ -69,6 +68,10 @@ export function getSchema(ctx, module) {
       type: {},
       default: {},
     },
+    info: {
+      type: {},
+      default: {},
+    },
     private: {
       type: {},
       default: {},
@@ -78,8 +81,6 @@ export function getSchema(ctx, module) {
       default: Date.now,
     },
   }, {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
     model: 'User',
     collection: 'user',
     timestamps: true,
@@ -124,15 +125,18 @@ export function getSchema(ctx, module) {
 
   const { e400, e500 } = ctx.errors;
 
+  schema.methods.setPassword = async function (password) {
+    this.password = await hashPassword(password);
+  };
   schema.methods.preSave = async function () {
     // console.log('User.methods.preSave', this.isNew, this.wasNew);
     this.wasNew = this.wasNew || this.isNew;
-    if (this.isModified('password')) {
-      this.password = await hashPassword(this.password);
-    }
-    if (this.isModified('profile')) {
-      this.name = fullName(this.profile) || sample.fullName;
-    }
+    // if (this.isModified('password')) {
+    //   this.password = await hashPassword(this.password);
+    // }
+    // if (this.isModified('profile')) {
+    //   this.name = fullName(this.profile) || sample.fullName;
+    // }
   };
   schema.pre('save', async function (next) {
     // console.log('schema.pre(save', this.isNew);

@@ -1,10 +1,10 @@
-import UniversalSchema from 'lego-starter-kit/utils/UniversalSchema';
+import MongooseSchema from '@lskjs/db/MongooseSchema';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
 
-export function getSchema(ctx, module) {
+export default function getSchema(ctx, module) {
   const mongoose = ctx.db;
-  const schema = new UniversalSchema({
+  const schema = new MongooseSchema({
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       // ref: 'User',
@@ -63,14 +63,15 @@ export function getSchema(ctx, module) {
       default: null,
     },
   }, {
+    model: 'Passport',
     collection: 'passport',
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    // timestamps: true,
+    // toJSON: { virtuals: true },
+    // toObject: { virtuals: true },
   });
 
   schema.methods.generateUsername = async function a(collection) {
-    const { User } = ctx.models;
+    const { User: UserModel } = ctx.models;
     let username = `${this.providerId}_${this.provider}`;
     username = module.canonizeUsername(username.toLowerCase());
     if (!collection) return username;
@@ -116,7 +117,10 @@ export function getSchema(ctx, module) {
 
   schema.methods.updateToken = async function a(...args) {
     const strategy = this.getStrategy();
-    if (!strategy) return;
+    if (!strategy) {
+      console.error('passport.updateToken: !strategy');
+      return;
+    }
     await strategy.updateTokens(this, ...args);
   };
 
@@ -147,6 +151,6 @@ export function getSchema(ctx, module) {
 }
 // export default getSchema;
 //
-export default(ctx, module) => {
-  return getSchema(ctx, module).getMongooseModel(ctx.db);
-};
+// export default(ctx, module) => {
+//   return getSchema(ctx, module).getMongooseModel(ctx.db);
+// };

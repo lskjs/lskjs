@@ -1,5 +1,6 @@
 export default function () {
   return {
-    Passports: require('./Passports').default(...arguments),
+    PassportStore: require('./PassportStore').default(...arguments),
+    Passports: require('./PassportStore').default(...arguments),
   };
 }
