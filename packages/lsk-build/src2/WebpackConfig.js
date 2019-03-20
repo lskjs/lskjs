@@ -16,8 +16,6 @@ const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 // test: /\.(png|jpg|jpeg|gif|svg)(\?.+)?$/,
 
-const srcDir = 'src';
-
 function isDir(dir) {
   try {
     return fs.lstatSync(dir).isDirectory();
@@ -27,8 +25,11 @@ function isDir(dir) {
 }
 export default class WebpackConfig {
   name = 'webpack';
+
   reScript = reScript;
+
   reStyle = reStyle;
+
   reImage = reImage;
 
   constructor(ctx = {}) {
@@ -54,7 +55,6 @@ export default class WebpackConfig {
   }
 
   isDebug() {
-    return true;
     if (this.debug == null) return true;
     return !!this.debug;
   }
@@ -71,7 +71,6 @@ export default class WebpackConfig {
   }
 
   isVerbose() {
-    return true;
     return !!this.verbose;
   }
 
@@ -86,7 +85,6 @@ export default class WebpackConfig {
       __ENV__: JSON.stringify(this.getEnv()),
       __DEV__: this.getEnv() === 'development',
       __PROD__: this.getEnv() === 'production',
-      __STAGE__: JSON.stringify(this.getStage()),
     };
   }
 
@@ -147,93 +145,89 @@ export default class WebpackConfig {
       test: reScript,
       include: [
         ...this.getDeps().map(dep => dep.path),
-        this.resolvePath(srcDir),
+        this.resolvePath('src'),
       ],
-      exclude: /node_modules/,
+      // exclude: /node_modules/,
       loader: 'babel-loader',
-      options: {
-        babelrc: true, //this.resolvePath('.babelrc'),
-      },
       // https://github.com/babel/babel-loader#options
       // https://babeljs.io/docs/usage/options/
-      // options: {
-      //   // sourceMap: this.isSourcemap(),
-      //   cacheDirectory: this.isDebug(),
-      //   babelrc: false, // true
-      //   presets: (this.babelrc.presets || []).map((preset) => {
-      //     return preset;
-      //     // const presetName = typeof preset === 'string' ? preset : preset[0];
-      //     // const presetOptions = typeof preset === 'string' ? {} : preset[1];
-      //     // // console.log({presetName, presetOptions});
-      //     // if (presetName === '@babel/preset-env') {
-      //     //   const targets = {};
-      //     //   if (this.name === 'client') {
-      //     //     targets.browsers = get(this, 'pkg.browserslist', []);
-      //     //     targets.forceAllTransforms = !this.isDebug();
-      //     //   }
-      //     //   if (this.name === 'server') {
-      //     //     targets.node = get(this, 'pkg.engines.node', '6.10').match(/(\d+\.?)+/)[0];
-      //     //   }
-      //     //   return [
-      //     //     '@babel/preset-env',
-      //     //     {
-      //     //       ...presetOptions,
-      //     //       targets,
-      //     //       modules: false,
-      //     //       useBuiltIns: false,
-      //     //       debug: false,
-      //     //     },
-      //     //   ];
-      //     //   // if (this.name === 'client') {
-      //     //   //   return [
-      //     //   //     '@babel/preset-env',
-      //     //   //     {
-      //     //   //       ...presetOptions,
-      //     //   //       targets: {
-      //     //   //         // browsers: pkg.browserslist,
-      //     //   //         // forceAllTransforms: !isDebug, // for UglifyJS
-      //     //   //
-      //     //   //         node: get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0],
-      //     //   //       },
-      //     //   //       modules: false,
-      //     //   //       useBuiltIns: false,
-      //     //   //       debug: false,
-      //     //   //     },
-      //     //   //   ]
-      //     //   // }
-      //     // }
-      //     // if (presetName === '@babel/preset-react') {
-      //     //   return [
-      //     //     '@babel/preset-react',
-      //     //     {
-      //     //       ...presetOptions,
-      //     //       development: this.isDebug(),
-      //     //     },
-      //     //   ];
-      //     // }
-      //     // return preset;
-      //   }),
-      //   plugins: [
-      //     ...(this.babelrc.plugins || []),
-      //     ...(this.isDebug() ? [
-      //       [
-      //         "emotion",
-      //         { "sourceMap": true }
-      //       ],
-      //     ] : [
-      //       ["emotion", { "hoist": true, "autoLabel": true }], // .babelrc продакшн не продакшн
-      //       // Treat React JSX elements as value types and hoist them to the highest scope
-      //       // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
-      //       '@babel/transform-react-constant-elements',
-      //       // Replaces the React.createElement function with one that is more optimized for production
-      //       // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
-      //       // '@babel/transform-react-inline-elements ',
-      //       // Remove unnecessary React propTypes from the production build
-      //       // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
-      //       'transform-react-remove-prop-types',
-      //     ]),
-      //   ].filter(a => a),
-      // },
+      options: {
+        // sourceMap: this.isSourcemap(),
+        cacheDirectory: this.isDebug(),
+        babelrc: false, // true
+        presets: (this.babelrc.presets || []).map(preset => preset,
+          // const presetName = typeof preset === 'string' ? preset : preset[0];
+          // const presetOptions = typeof preset === 'string' ? {} : preset[1];
+          // // console.log({presetName, presetOptions});
+          // if (presetName === '@babel/preset-env') {
+          //   const targets = {};
+          //   if (this.name === 'client') {
+          //     targets.browsers = get(this, 'pkg.browserslist', []);
+          //     targets.forceAllTransforms = !this.isDebug();
+          //   }
+          //   if (this.name === 'server') {
+          //     targets.node = get(this, 'pkg.engines.node', '6.10').match(/(\d+\.?)+/)[0];
+          //   }
+          //   return [
+          //     '@babel/preset-env',
+          //     {
+          //       ...presetOptions,
+          //       targets,
+          //       modules: false,
+          //       useBuiltIns: false,
+          //       debug: false,
+          //     },
+          //   ];
+          //   // if (this.name === 'client') {
+          //   //   return [
+          //   //     '@babel/preset-env',
+          //   //     {
+          //   //       ...presetOptions,
+          //   //       targets: {
+          //   //         // browsers: pkg.browserslist,
+          //   //         // forceAllTransforms: !isDebug, // for UglifyJS
+          //   //
+          //   //         node: get(this, 'pkg.engines.node', 'node8').match(/(\d+\.?)+/)[0],
+          //   //       },
+          //   //       modules: false,
+          //   //       useBuiltIns: false,
+          //   //       debug: false,
+          //   //     },
+          //   //   ]
+          //   // }
+          // }
+          // if (presetName === '@babel/preset-react') {
+          //   return [
+          //     '@babel/preset-react',
+          //     {
+          //       ...presetOptions,
+          //       development: this.isDebug(),
+          //     },
+          //   ];
+          // }
+          // return preset;
+        ),
+        plugins: [
+          ...(this.babelrc.plugins || []),
+          ...(this.isDebug() ? [
+            [
+              'emotion',
+              { sourceMap: true, autoLabel: true },
+            ],
+          ] : [
+            ['emotion', { hoist: true }], // .babelrc продакшн не продакшн
+            // Treat React JSX elements as value types and hoist them to the highest scope
+            // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
+            '@babel/transform-react-constant-elements',
+            // Replaces the React.createElement function with one that is more optimized for production
+            // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
+            // '@babel/transform-react-inline-elements ',
+            // Remove unnecessary React propTypes from the production build
+            // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
+            'transform-react-remove-prop-types',
+          ]),
+        ].filter(a => a),
+      },
     };
     // console.log('loader', loader);
     return loader;
@@ -378,18 +372,19 @@ export default class WebpackConfig {
       },
     ];
   }
+
   getPostcssModule(bundler) {
     return [
       require('autoprefixer')({ browsers: this.getAutoprefixerBrowsers() }),
       require('postcss-import')({
         addDependencyTo: bundler,
         path: [
-          this.resolvePath(srcDir),
+          this.resolvePath('src'),
           ...this.getDeps().map(dep => dep.path),
           this.resolvePath('node_modules'),
         ],
-        trigger: '&',
-        resolve: require('./resolve-id'),
+        // trigger: '&',
+        // resolve: require('./resolve-id'),
       }),
       require('postcss-mixins')(),
       // require('postcss-custom-properties')(),
@@ -410,6 +405,7 @@ export default class WebpackConfig {
       require('postcss-nested')(), // / !
     ];
   }
+
   getLoaders() {
     const loaders = [
       ...(this.isTypescriptSupport() ? [{
@@ -419,7 +415,7 @@ export default class WebpackConfig {
             test: /\.(ts|tsx)$/,
             include: [
               ...this.getDeps().map(dep => dep.path),
-              this.resolvePath(srcDir),
+              this.resolvePath('src'),
             ],
             use: [
               {
@@ -509,45 +505,51 @@ export default class WebpackConfig {
         new ForkTsCheckerWebpackPlugin({
           async: false,
           ...(this.isDebug() ? {
-            watch: this.resolvePath(srcDir),
+            watch: this.resolvePath('src'),
             memoryLimit: 4096,
           } : {}),
           tsconfig: this.resolvePath('tsconfig.json'),
           tslint: this.resolvePath('tslint.json'),
         }),
-      ] : [])
+      ] : []),
     ];
   }
 
   getResolve() {
     return {
-      /* root: this.resolvePath(srcDir),
+      /* root: this.resolvePath('src'),
       modulesDirectories: ['node_modules'], */
       alias: this.getResolveAlias(),
       extensions: this.getResolveExtensions(),
       modules: [
-        this.resolvePath(srcDir),
+        this.resolvePath('src'),
         'node_modules',
       ],
       ...(this.isTypescriptSupport() ? {
         plugins: [
           new TsconfigPathsPlugin({ configFile: this.resolvePath('tsconfig.json') }),
-        ]
+        ],
       } : {}),
     };
   }
 
   getResolveExtensions() {
-    let ext = ['.webpack.js', '.web.js', '.js', '.jsx', '.json'];
-    if (this.isTypescriptSupport())  ext = [ ...ext, '.tsx', '.ts' ];
+    let ext = ['.js', '.jsx', '.json'];
+    if (this.isTypescriptSupport()) ext = [...ext, '.tsx', '.ts'];
     return ext;
   }
 
   getResolveAlias() {
-    return {
+    const alias = {
       '~': this.resolvePath('src'),
-      ...this.alias,
     };
+    this.getDeps().forEach((dep) => {
+      if (dep.alias) {
+        alias[dep.alias] = dep.path;
+      }
+    });
+
+    return Object.assign(alias, this.alias || {});
   }
 
   getStats() {
@@ -593,8 +595,7 @@ export default class WebpackConfig {
         ? '[name].chunk.js'
         : '[name].[chunkhash:8].chunk.js',
       // Point sourcemap entries to original disk location (format as URL on Windows)
-      devtoolModuleFilenameTemplate: info =>
-        path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+      devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
 
 
       // filename: this.isDebug() ? '[name].js' : '[name].[chunkhash:8].js',
@@ -615,7 +616,7 @@ export default class WebpackConfig {
   getPreConfig() {
     return {
       name: this.name,
-      context: this.resolvePath(srcDir),
+      context: this.resolvePath('src'),
       mode: this.isDebug() ? 'development' : 'production',
       output: this.getOutput(),
       resolve: this.getResolve(),

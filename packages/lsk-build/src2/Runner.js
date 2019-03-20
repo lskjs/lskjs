@@ -1,5 +1,4 @@
 import path from 'path';
-import del from 'del';
 import fetch from 'node-fetch';
 import Promise from 'bluebird';
 import Browsersync from 'browser-sync';
@@ -8,16 +7,33 @@ import webpackMiddleware from 'webpack-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import cp from 'child_process';
 import fs from 'fs';
-import { writeFile, makeDir } from './utils/fs';
 import stringify from 'serialize-javascript';
+import { writeFile, makeDir } from './utils/fs';
 
 // verbose webpack config
 // require('fs').writeFileSync('_webpack.config.json', JSON.stringify(webpackConfig, null, 2))
-const DEBUG = false;
+const DEBUG = true;
 
+function isDir(dir) {
+  try {
+    return fs.lstatSync(dir).isDirectory();
+  } catch (err) {
+    return null;
+  }
+}
 export default class Runner {
   constructor(ctx = {}) {
     Object.assign(this, ctx);
+    // console.log(111111, Object.keys(this));
+    this.build = require('./Runner/build').default.bind(this);
+    this.bundle = require('./Runner/bundle').default.bind(this);
+    this.clean = require('./Runner/clean').default.bind(this);
+    this.copy = require('./Runner/copy').default.bind(this);
+    this.deploy = require('./Runner/deploy').default.bind(this);
+    this.render = require('./Runner/render').default.bind(this);
+    this.run = require('./Runner/run').default.bind(this);
+    this.runServer = require('./Runner/runServer').default.bind(this);
+    this.start = require('./Runner/start').default.bind(this);
   }
 
   resolvePath(...args) {
@@ -27,31 +43,40 @@ export default class Runner {
 
   resolveNpmPath(p, resNpm = 0) {
     if (p[0] === '~') {
-      return `${this.dirname}/src${p.substr(1)}`;
+      if (isDir(`${this.dirname}/src${p.substr(1)}`)) {
+        return `${this.dirname}/src${p.substr(1)}`;
+      }
+      return `${this.dirname}${p.substr(1)}`;
     }
     if (!resNpm) return p;
-    return `${this.dirname}/node_modules/${p}/src`;
+
+    if (isDir(`${this.dirname}/node_modules/${p}/src`)) {
+      return `${this.dirname}/node_modules/${p}/src`;
+    }
+    return `${this.dirname}/node_modules/${p}`;
   }
 
   getDistDir() {
     return this.distDir || 'build';
   }
 
-  async clean() {
-    await del([`${this.getDistDir()}/*`], { dot: true });
-    await makeDir(`${this.getDistDir()}/public`);
+  resolveDist(p) {
+    return this.resolvePath(p);
+    // const resolved = path.resolve((this.dirname ? (this.dirname + '/') : '') + '/' + path);
+    // // console.log({path, resolved});
+    // return this.resolvePath(path);
   }
+
 
   async prebuild() {
     if (!this.modules) return;
     DEBUG && console.log('prebuild');
-
+    /* eslint-disable indent */
     const outputDir = this.resolvePath(this.resolveNpmPath(this.modules.output));
     // console.log({ outputDir });
     ['server', 'client', 'uapp'].forEach((type) => {
       const filename = this.resolvePath(outputDir, `${type}.js`);
       // console.log({ filename });
-      /* eslint-disable indent */
       const content = `\
 export default function () {
   return {
@@ -91,7 +116,7 @@ ${Object.keys(this.modules.modules).map((key) => {
   }
 
 
-  async copy({ watch } = {}) {
+  async copy2({ watch } = {}) {
     await writeFile(this.resolvePath(`${this.getDistDir()}/package.json`), JSON.stringify({
       private: true,
       engines: this.pkg.engines,
@@ -103,7 +128,7 @@ ${Object.keys(this.modules.modules).map((key) => {
   }
 
 
-  async build() {
+  async build2() {
     await this.clean();
     await this.prebuild();
     await this.copy();
@@ -122,7 +147,7 @@ ${Object.keys(this.modules.modules).map((key) => {
     } catch (err) { }
   }
 
-  bundle() {
+  bundle2() {
     return new Promise((resolve, reject) => {
       this.traceWebpackConfig();
       webpack(this.webpackConfig).run((err, stats) => {
@@ -136,7 +161,7 @@ ${Object.keys(this.modules.modules).map((key) => {
     });
   }
 
-  async start() {
+  async start2() {
     // if (server) return server;
     // server = express();
     // server.use(errorOverlayMiddleware());
@@ -144,7 +169,7 @@ ${Object.keys(this.modules.modules).map((key) => {
     //
     // // Configure client-side hot module replacement
     // const clientConfig = webpackConfig.find(config => config.name === 'client');
-    // clientConfig.entry.client = ['./tools/lib/webpackHotDevClient']
+    // clientConfig.entry.client = ['./Runner/lib/webpackHotDevClient']
     //   .concat(clientConfig.entry.client)
     //   .sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));
     // clientConfig.output.filename = clientConfig.output.filename.replace(
@@ -249,7 +274,7 @@ ${Object.keys(this.modules.modules).map((key) => {
     //     .catch(error => {
     //       if (['abort', 'fail'].includes(app.hot.status())) {
     //         console.warn(`${hmrPrefix}Cannot apply update.`);
-    //         delete require.cache[require.resolve('../build/server')];
+    //         ete require.cache[require.resolve('../build/server')];
     //         // eslint-disable-next-line global-require, import/no-unresolved
     //         app = require('../build/server').default;
     //         console.warn(`${hmrPrefix}App has been reloaded.`);
@@ -305,7 +330,7 @@ ${Object.keys(this.modules.modules).map((key) => {
 
   async start2() {
     DEBUG && console.log('Runner.start');
-    const webpackConfig = this.webpackConfig;
+    const { webpackConfig } = this;
     const [config] = webpackConfig;
     await this.clean();
     await this.prebuild();
@@ -369,7 +394,8 @@ ${Object.keys(this.modules.modules).map((key) => {
   }
 
   server = null
-  runServer() {
+
+  runServer2() {
     DEBUG && console.log('Runner.runServer');
     const RUNNING_REGEXP = /.*🎃.*\/\/(.*?)\//;
 
@@ -426,7 +452,7 @@ ${Object.keys(this.modules.modules).map((key) => {
     });
   }
 
-  async render(routes) {
+  async render2(routes) {
     DEBUG && console.log('render', routes);
     if (!routes) {
       routes = [

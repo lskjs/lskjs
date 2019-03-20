@@ -1,23 +1,25 @@
 import fs from 'fs';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
+const OptimizeJsPlugin = require('optimize-js-plugin');
 // var CompressionPlugin = require("compression-webpack-plugin");
 import WebpackConfig from './WebpackConfig';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import WebpackAssetsManifest from 'webpack-assets-manifest';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-const OptimizeJsPlugin = require('optimize-js-plugin');
 
 export default class WebpackClientConfig extends WebpackConfig {
   name = 'client';
-
   getTarget() {
     return 'web';
   }
 
   getEntry() {
     return {
-      client: './client.js',
+      client: [
+        '@babel/polyfill',
+        './client.js',
+      ],
     };
   }
 
@@ -88,7 +90,7 @@ export default class WebpackClientConfig extends WebpackConfig {
             fs.writeFileSync(chunkFileName, JSON.stringify(chunkFiles, null, 2));
           } catch (err) {
             console.error(`ERROR: Cannot write ${chunkFileName}: `, err);
-            if (!isDebug) process.exit(1);
+            if (!this.isDebug) process.exit(1);
           }
         },
       }),
