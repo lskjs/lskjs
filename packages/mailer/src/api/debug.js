@@ -16,9 +16,7 @@ export default (ctx, module) => {
       const user = await UserModel.findOne();
       const { data } = req;
       const { template } = req.data;
-      console.log({ template });
-
-
+      // console.log({ template });
       return module.renderTemplate({
         ...module.getMailerParams(user),
         ...template,

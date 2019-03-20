@@ -87,13 +87,12 @@ export default app => class Mailer {
     } = props;
     if (!to) throw app.e('mailer.!to');
     const options = this.renderTemplate(other);
-    console.log({
-      to,
-      cc,
-      bcc,
-      ...options,
-    });
-
+    // console.log({
+    //   to,
+    //   cc,
+    //   bcc,
+    //   ...options,
+    // });
     return this.transporter.sendMail({
       to,
       cc,
@@ -102,19 +101,21 @@ export default app => class Mailer {
     });
   }
 
-  async sendTo(props = {}, params = {}) {
+  async sendTo(params1 = {}, params2 = {}) {
     const { User: UserModel } = app.models;
-    if (!props.user && !props.userId) throw app.e('mailer.!userId');
+    if (!params1.user && !params1.userId) throw app.e('mailer.!userId');
 
-    const user = props.user || await UserModel.findById(props.userId);
+    const user = params1.user || await UserModel.findById(params1.userId);
     if (!user) throw app.e('mailer.!user');
     const userParams = this.getUserMailerParams(user);
-    console.log({ user, userParams });
-
-
+    const props = {
+      me: user,
+      ...(params2.props || {}),
+    };
     return this.send({
       ...userParams,
-      ...params,
+      ...params2,
+      props,
     });
   }
 };
