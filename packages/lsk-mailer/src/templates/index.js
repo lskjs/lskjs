@@ -1,6 +1,7 @@
 export default function () {
   return {
-    recovery: require('./recovery').default,
-    approveEmail: require('./approveEmail').default,
+    signup: require('./signup').default,
+    changeEmail: require('./changeEmail').default,
+    restorePassword: require('./restorePassword').default,
   };
 }

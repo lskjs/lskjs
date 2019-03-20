@@ -1,64 +1,120 @@
 import get from 'lodash/get';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
-export default (ctx) => {
-  return class Mailer {
-    getTemplates() {
-      return require('./templates').default(ctx);
-    }
-    async init() {
-      this.config = get(ctx, 'config.mailer');
-      this.templates = this.getTemplates();
-      this.transporter = this.getTransporter();
-    }
 
-    getTransporter() {
-      return (this.config && this.config.transport)
-        && Promise.promisifyAll(nodemailer.createTransport(this.config.transport));
-    }
+export default app => class Mailer {
+  getTemplates() {
+    return require('./templates').default(app);
+  }
 
-    async run() {
-      if (this.transporter && this.config.juice) {
-        // нельзя прогонять через эту херню html который уже покрыт inline css
-        this.transporter.use('compile', inlineCss());
-      }
-    }
+  async init() {
+    this.config = get(app, 'config.mailer');
+    this.templates = this.getTemplates();
+    this.transporter = this.getTransporter();
+  }
 
-    // Отправить email
-    async send(args) {
-      const { to, template, params = {}, options = {}, t: tFunc, locale, ...otherProps } = args;
-      const t = tFunc ? tFunc : ctx.i18 && ctx.i18.getFixedT && ctx.i18.getFixedT(locale || 'en') || (a => a);
-      try {
-        if (!to) throw '!to email';
-        if (!template) throw '!template';
-        if (!this.transporter) throw '!transporter';
-        if (!this.templates[template]) throw 'cant find email template ' + template
-        // Ищем шаблон
-          // Шаблон это класс, создаем экземпляр
-        const args2 = { ctx, t, locale, params, ...otherProps };
-        const emailTemplate = new this.templates[template](args2);
-        // вызываем render
-        const defaultOptions = emailTemplate.getOptions(args2);
-        const html = emailTemplate.getHtml(args2);
-        const text = emailTemplate.getText && emailTemplate.getText(args2) || '';
-        const sendOptions = Object.assign({}, this.config.options, defaultOptions, options);
-        sendOptions.to = to;
-        sendOptions.html = html;
-        sendOptions.text = text;
-        return await this.transporter.sendMail(sendOptions);
-      } catch (err) {
-        throw err;
-      }
-      return null;
+  getTransporter() {
+    if (this.config && this.config.transport) {
+      return Promise.promisifyAll(nodemailer.createTransport(this.config.transport));
     }
+    return null;
+  }
 
-    async sendText(to, subject, message, from) {
-      if (!from) from = ctx.config.mailer.options.from;
-      try {
-        return await this.transporter.sendMail({ to, subject, text: message, from });
-      } catch (e) {
-        throw e;
-      }
+  async run() {
+    if (this.transporter && this.config.juice) {
+      // нельзя прогонять через эту херню html который уже покрыт inline css
+      this.transporter.use('compile', inlineCss());
     }
-  };
+  }
+
+  getUserMailerParams(user) {
+    const { locale = 'en' } = user;
+    return {
+      to: user.email,
+      locale,
+      user,
+    };
+  }
+
+  getT(props) {
+    if (app.i18 && app.i18.getT) {
+      return app.i18.getT(props.locale || 'en');
+    }
+    return (a) => { app.log.error('!Mailer.getT'); return a; };
+  }
+
+  getTemplateOptions(email) {
+    const options = {};
+    if (email.getSubject) {
+      const subject = email.getSubject();
+      if (subject) options.subject = subject;
+    }
+    if (email.getHtml) {
+      const html = email.getHtml();
+      if (html) options.html = html;
+    }
+    if (email.getText) {
+      const text = email.getText();
+      if (text) options.text = text;
+    }
+    return options;
+  }
+
+  renderTemplate(params) {
+    const {
+      template, props = {}, ...otherProps
+    } = params;
+    if (!template) throw app.e('mailer.!template');
+    const Template = this.templates[template];
+    if (!Template) throw app.e('mailer.!Template', { template });
+    const email = new Template({
+      theme: this.theme,
+      log: app.log,
+      url: app.url,
+      t: this.getT(otherProps.locale),
+      props,
+      ...otherProps,
+    });
+    return {
+      ...this.config.options,
+      ...this.getTemplateOptions(email),
+    };
+  }
+
+  async send(props) {
+    const {
+      to, cc, bcc, ...other
+    } = props;
+    if (!to) throw app.e('mailer.!to');
+    const options = this.renderTemplate(other);
+    console.log({
+      to,
+      cc,
+      bcc,
+      ...options,
+    });
+
+    return this.transporter.sendMail({
+      to,
+      cc,
+      bcc,
+      ...options,
+    });
+  }
+
+  async sendTo(props = {}, params = {}) {
+    const { User: UserModel } = app.models;
+    if (!props.user && !props.userId) throw app.e('mailer.!userId');
+
+    const user = props.user || await UserModel.findById(props.userId);
+    if (!user) throw app.e('mailer.!user');
+    const userParams = this.getUserMailerParams(user);
+    console.log({ user, userParams });
+
+
+    return this.send({
+      ...userParams,
+      ...params,
+    });
+  }
 };
