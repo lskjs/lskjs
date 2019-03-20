@@ -18,15 +18,15 @@ export default class Uapp extends BaseUapp {
     });
 
     this.on('resolve:before', () => {
-      console.log('resolve:beforeresolve:beforeresolve:beforeresolve:before');
+      // console.log('resolve:beforeresolve:beforeresolve:beforeresolve:before');
       if (this.progress && this.progress.current) {
         this.progress.current.start();
       }
     });
     this.on('resolve:after', () => {
-      console.log('resolve:afterresolve:afterresolve:afterresolve:after', this.scrollTo);
+      // console.log('resolve:afterresolve:afterresolve:afterresolve:after', this.scrollTo);
       if (this.scrollTo) {
-        setTimeout(this.scrollTo, 10); // @TODO: back
+        setTimeout(() => this.scrollTo(0), 10); // @TODO: back
       }
       if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
         document.title = this.page.renderTitle();
