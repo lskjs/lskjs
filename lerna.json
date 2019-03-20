@@ -1,0 +1,17 @@
+{
+  "version": "0.28.1",
+  "packages": [
+    "packages/*"
+  ],
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "**/dist/**",
+        "**/release/**",
+        "**/*.md",
+        "**/example/**",
+        "**/test/**"
+      ]
+    }
+  }
+}
