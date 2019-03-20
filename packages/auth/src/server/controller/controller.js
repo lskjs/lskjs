@@ -583,7 +583,6 @@ export default (ctx, module) => {
       email,
       link: ctx.url(`/auth/confirm/email?code=${permit.code}`),
     });
-    console.log(ctx.url(`/auth/confirm/email?code=${permit.code}`), eventType);
     return PermitModel.prepare(permit, { req });
   };
   controller.confirmEmail = async (req) => {
@@ -667,7 +666,6 @@ export default (ctx, module) => {
     }
     const date = new Date();
     const str = `${user._id}_${email}_${date.getTime()}`;
-    console.log({ PermitModel });
     const code = await PermitModel.generateUniqCode({
       codeParams: { str, type: 'hash' },
       criteria: {
