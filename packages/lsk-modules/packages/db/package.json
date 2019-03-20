@@ -1,0 +1,30 @@
+{
+  "name": "@lskjs/db",
+  "version": "0.28.0",
+  "description": "LSK module for database.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/db",
+  "keywords": [
+    "database",
+    "mongoose",
+    "schema"
+  ],
+  "dependencies": {
+    "mongoose": "5.4.19"
+  },
+  "devDependencies": {
+    "bluebird": "3.5.3",
+    "lodash": "4.17.11"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
+  }
+}

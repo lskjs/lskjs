@@ -1,0 +1,2602 @@
+[
+  {
+    "code": "ru",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "ru"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "en",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/flags/4x3/gb.svg",
+    "languages": [
+      "en"
+    ],
+    "isNotReal": true,
+    "channelCountries": true
+  },
+  {
+    "code": "au",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "en"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "at",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.2,
+    "flag": null,
+    "languages": [
+      "de"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "az",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ax",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "al",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "dz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "vi",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "as",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ai",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ao",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "pt"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ad",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "aq",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ag",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ar",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "am",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "aw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "af",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bs",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bd",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bb",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bh",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "by",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "ru"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "be",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.21,
+    "flag": null,
+    "languages": [
+      "de",
+      "fr"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "bj",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bg",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.2,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "bo",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bq",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ba",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "br",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "pt"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "io",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "vg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bi",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bt",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "vu",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "va",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gb",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.2,
+    "flag": null,
+    "languages": [
+      "en"
+    ],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "hu",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.27,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ve",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "um",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tl",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "vn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ga",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ht",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gy",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gh",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gp",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gt",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "de",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.19,
+    "flag": null,
+    "languages": [
+      "de"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "gg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gi",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "hn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "hk",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gd",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gl",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gr",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.24,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ge",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "ru"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "gu",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "dk",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.25,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "je",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "dj",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "dm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "do",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "cd",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "eu",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "eg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "zm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "eh",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "zw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "il",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "in",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "id",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "id"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "jo",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "iq",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ir",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ie",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.23,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "is",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "es",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.21,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "it",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.22,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ye",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cv",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "kz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "ru"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ky",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "kh",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ca",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "en",
+      "fr"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "qa",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ke",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cy",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.19,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "kg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ki",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "kp",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "co",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "km",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ci",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cu",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "kw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "la",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "lv",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ls",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "lr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "lb",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ly",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.21,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "lt",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.21,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "li",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "de"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "lu",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.17,
+    "flag": null,
+    "languages": [
+      "de",
+      "fr"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "mu",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "yt",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mo",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mk",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "my",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "id"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ml",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mv",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mt",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.18,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ma",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "mq",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mh",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mx",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "fm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "md",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "fr"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "mn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ms",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "na",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "nr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "np",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ne",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ng",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "nl",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "de"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ni",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "nu",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "nz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "nc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "no",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ae",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "om",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bv",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "im",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ck",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "nf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cx",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sh",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pk",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ps",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pa",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "py",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pe",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "pl",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.23,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "pt",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.23,
+    "flag": null,
+    "languages": [
+      "pt"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "pr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "kr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "re",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "rw",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ro",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.19,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "sv",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ws",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "st",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sa",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mp",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "bl",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "mf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "pm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "vc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "kn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "lc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "rs",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sx",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sy",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sk",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.2,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "si",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.22,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sb",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "so",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sd",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "su",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "us",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "sl",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tj",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "th",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tc",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tg",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tk",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "to",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tt",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tv",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tn",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tr",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ug",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "uz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ua",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "ru"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "wf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "uy",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "fo",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "fj",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ph",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "fi",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.24,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "fk",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "fr",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.2,
+    "flag": null,
+    "languages": [
+      "fr"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "pf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "tf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "hm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "hr",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.25,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cf",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "td",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "me",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "cz",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.21,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "cl",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "ch",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "de",
+      "fr"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "se",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.25,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "sj",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "lk",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ec",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [
+      "es"
+    ],
+    "isNotReal": false,
+    "channelCountries": true
+  },
+  {
+    "code": "gq",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "er",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ee",
+    "cis": true,
+    "eu": true,
+    "vatRate": 0.2,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "et",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "za",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "gs",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "ss",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "jm",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "jp",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": null,
+    "languages": [],
+    "isNotReal": false,
+    "channelCountries": false
+  },
+  {
+    "code": "zz",
+    "cis": true,
+    "eu": true,
+    "vatRate": null,
+    "flag": "http://pics.wikireality.ru/upload/thumb/4/47/Pirate_Flag_of_Jack_Rackham.svg/50px-Pirate_Flag_of_Jack_Rackham.svg.png",
+    "languages": [],
+    "isNotReal": true,
+    "channelCountries": false
+  }
+]

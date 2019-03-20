@@ -1,0 +1,227 @@
+
+
+// https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+
+@import "antd/lib/style/themes/default";
+@import "antd/lib/style/mixins/index";
+@import "antd/lib/style/core/iconfont";
+@import "antd/lib/style/core/motion";
+@import "components";
+
+// mapping scss veraibles to less
+@dark: #343a40; // $gray-800
+@cyan: #01BCD4;
+@green: #66BB6A;
+
+// -------- Colors -----------
+@primary-color          : @blue-6; // #1890ff
+@info-color             : @cyan;
+@success-color          : @green;
+@processing-color       : @blue-6;
+@error-color            : @red-5; // #ff4d4f
+@highlight-color        : @red-5;
+@warning-color          : @gold-5; // #ffc53d
+@normal-color           : #d9d9d9;
+
+@font-family-no-number  : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+@font-family            : @font-family-no-number;
+@line-height-base       : 1.714285714285714; // 24px
+
+// Base Scaffolding Variables
+// ---
+
+@border-radius-base     : 6px;
+
+// ICONFONT
+// @icon-url               : "/vendors/antd/iconfont/iconfont"; // By default it use alicdn.com
+@menu-dark-bg: @dark;
+@menu-dark-submenu-bg: darken(@dark, 3%);
+
+// Layout
+@layout-header-background       : transparent;
+
+body {
+  height: auto;
+}
+
+.ant-calendar-picker {
+  > div {
+    position: relative;
+  }
+}
+.ant-tree li span.ant-tree-switcher,
+.ant-tree li span.ant-tree-iconEle {
+  display: none !important;
+}
+
+.ant-tree-node-selected {
+  background: none !important;
+}
+.ant-tree-node-content-wrapper {
+  padding: 2px 5px 0px 5px !important;
+  &:hover {
+    background: none !important;
+  }
+}
+.ant-tree-switcher-noop {
+  display: none !important;
+}
+
+.ant-input {
+ height: 48px;
+}
+
+.ant-calendar-range-picker-separator {
+  vertical-align: baseline;
+}
+
+.ant-tag {
+  margin-bottom: 8px;
+}
+
+.ant-form-item {
+  width: 100%;
+}
+
+.ant-calendar-picker:hover
+.ant-calendar-picker-clear {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ant-calendar-picker-clear {
+  margin-right: 15px;
+  opacity: 0;
+  z-index: 0;
+  font-size: 14px;
+  color: rgba(0,0,0,0.25);
+  background: #fff;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.ant-calendar-picker-icon {
+  font-size: 14px;
+  color: rgba(0,0,0,0.25);
+  display: inline-block;
+  line-height: 1;
+}
+
+.ant-calendar-picker-clear,
+.ant-calendar-picker-icon {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 12px;
+  top: 50%;
+  margin-top: -7px;
+  line-height: 14px;
+  font-size: 12px;
+  transition: all .3s;
+  user-select: none;
+  z-index: 0;
+}
+
+.ant-form-item-children {
+  position: relative;
+  > div > div > input {
+    width: 100%;
+    /* background-color: rgba(255, 255, 255, 0.44); */
+    border: solid 1px #e3e3e3;
+    color: #4a4a4a;
+    font-size: 13px;
+    line-height: 1.43;
+    text-align: left;
+    min-height: 48px;
+    outline: none;
+    box-sizing: border-box;
+    margin: 0;
+    display: block;
+    resize: none;
+    padding: 13px 12px;
+    border-radius: 3px;
+    margin-left: 8px;
+    margin-top: 8px;
+    &:focus,
+    &:active {
+      border-color: #1890ff;
+    }
+    &::-webkit-input-placeholder {
+      opacity: 0.5 !important;
+      color: #9b9b9b !important;
+      font-size: 14px !important;
+      line-height: 1.43 !important;
+    }
+
+    &::-moz-placeholder {
+      opacity: 0.5 !important;
+      color: #9b9b9b !important;
+      font-size: 14px !important;
+      line-height: 1.43 !important;
+    }
+
+    &:-moz-placeholder {
+      opacity: 0.5 !important;
+      color: #9b9b9b !important;
+      font-size: 14px !important;
+      line-height: 1.43 !important;
+    }
+
+    &:-ms-input-placeholder {
+      opacity: 0.5 !important;
+      color: #9b9b9b !important;
+      font-size: 14px !important;
+      line-height: 1.43 !important;
+    }
+  }
+}
+
+.ant-layout.ant-layout-has-sider > .ant-layout,
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+  overflow-x: hidden !important;
+}
+
+.ant-fullcalendar-disabled-cell > .ant-fullcalendar-date > .ant-fullcalendar-value:hover,
+.ant-fullcalendar-disabled-cell > .ant-fullcalendar-date > .ant-fullcalendar-value:active {
+  background-color: transparent;
+}
+.ant-fullcalendar-cell > .ant-fullcalendar-date > .ant-fullcalendar-value {
+  position: relative;
+  z-index: 1;
+}
+
+.ant-fullcalendar-today .ant-fullcalendar-value,
+.ant-fullcalendar-month-panel-current-cell .ant-fullcalendar-value {
+  box-shadow: none;
+}
+
+.ant-tag {
+  cursor: default;
+}
+
+.ant-badge-count {
+  min-width: 7px;
+}
+
+.ant-radio-inner:after {
+  left: 4px !important;
+  top: 4px !important;
+}
+
+.ant-checkbox-checked:after,
+.ant-radio-checked:after {
+  top: -1px;
+  left: -1px;
+}
+
+.lsk-form-select .react-select__menu {
+  z-index: 3;
+}
+
+.ant-fullcalendar-header .ant-radio-group {
+  display: none !important;
+}
+
+.ant-drawer {
+  z-index: 10000;
+}

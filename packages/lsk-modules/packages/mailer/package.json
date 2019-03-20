@@ -1,0 +1,38 @@
+{
+  "name": "@lskjs/mailer",
+  "version": "0.28.1",
+  "description": "LSK module for send and receive emails.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/mailer",
+  "keywords": [
+    "database",
+    "mongoose",
+    "schema"
+  ],
+  "dependencies": {
+    "@lskjs/db": "^0.28.0",
+    "eventemitter3": "^3.1.0",
+    "imap": "^0.8.19",
+    "mailparser": "^2.4.0",
+    "mjml": "^4.3.1",
+    "nodemailer": "^5.1.1",
+    "nodemailer-juice": "^1.0.1"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*",
+    "moment": "*"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
+  }
+}

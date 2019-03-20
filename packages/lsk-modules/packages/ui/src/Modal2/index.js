@@ -1,0 +1,13 @@
+export { default } from './Modal2';
+export { default as Title } from '../UI/molecules/ModalTitle';
+export { default as Subtitle } from '../UI/atoms/ModalSubtitle';
+export { default as Image } from '../UI/atoms/ModalImage';
+export { default as Description } from '../UI/atoms/ModalDescription';
+export { default as Content } from '../UI/atoms/ModalContent';
+export { default as Footer } from '../UI/atoms/ModalFooter';
+export { default as Help } from '../UI/atoms/ModalHelp';
+export { default as Scroll } from '../UI/organisms/ModalScroll';
+export { default as Trigger } from './ModalTrigger';
+export { default as Inner } from './ModalInner';
+export { default as InnerWrapper } from './Modal2.styles';
+export { default as CloseIcon } from './ModalCloseIcon';

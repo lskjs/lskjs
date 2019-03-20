@@ -1,0 +1,28 @@
+{
+  "name": "@lskjs/mobx",
+  "version": "0.28.0",
+  "description": "LSK module for mobx.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/mobx",
+  "keywords": [
+    "mobx",
+    "stores"
+  ],
+  "devDependencies": {
+    "bluebird": "3.5.3",
+    "lodash": "4.17.11",
+    "mobx": "5.6.0"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*",
+    "mobx": "*"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
+  }
+}
