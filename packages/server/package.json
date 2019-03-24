@@ -1,0 +1,53 @@
+{
+  "name": "@lskjs/server",
+  "version": "0.29.0",
+  "description": "LSK universal react app wrapper",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [
+    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
+    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
+    "Nata <natavts@gmail.com> (https://natavts.ru)",
+    "Andruxa <anchurikov94@gmail.com>"
+  ],
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/uapp",
+  "keywords": [
+    "database",
+    "mongoose",
+    "schema"
+  ],
+  "dependencies": {
+    "antimerge": "0.0.5",
+    "apiquery": "0.1.24",
+    "core-decorators": "0.20.0",
+    "emotion": "9.1.3",
+    "emotion-theming": "9.1.2",
+    "eventemitter3": "3.1.0",
+    "favico.js": "0.3.10",
+    "history": "4.7.2",
+    "js-cookie": "2.2.0",
+    "mobx-react-devtools": "6.0.3",
+    "react-emotion": "9.1.3",
+    "react-fastclick": "3.0.2"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "prop-types": "15.6.2",
+    "react": "16.5.2"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*",
+    "moment": "*",
+    "prop-types": "*",
+    "react": "*"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
+  }
+}

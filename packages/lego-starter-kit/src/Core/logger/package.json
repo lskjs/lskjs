@@ -1,4 +1,0 @@
-{
-  "main": "logger.server",
-  "browser": "logger.client.js"
-}

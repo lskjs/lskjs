@@ -1,4 +1,0 @@
-{
-  "main": "emitter.server",
-  "browser": "emitter.client.js"
-}
