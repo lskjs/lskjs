@@ -1,4 +1,0 @@
-{
-  "main": "Page.server.js",
-  "browser": "Page.client.js"
-}

@@ -11,14 +11,14 @@ import I18 from '@lskjs/i18';
 import db from '@lskjs/db';
 import module from '@lskjs/module';
 import { Server as httpServer } from 'http';
-import forEach from 'lodash/forEach';
 
 import AsyncRouter from './AsyncRouter';
-import ExpressApp from '../ExpressApp';
 import createWs from './ws';
 
 
 export default class CoreApp extends Module {
+  name = 'App';
+  asyncRouter = AsyncRouter;
   Api = Api;
   i18 = new I18({ ctx: this });
   async init() {
@@ -252,14 +252,8 @@ export default class CoreApp extends Module {
     this.config.redis && await this.runRedis();
   }
 
-  async stop() {
-    await super.stop();
-    this.db && await this.db.stop();
-  }
 
 
-  name = 'App';
-  asyncRouter = AsyncRouter;
 
   async init() {
     super.init();
@@ -299,6 +293,7 @@ export default class CoreApp extends Module {
   }
   async stop() {
     await super.stop();
+    this.db && await this.db.stop();
     await new Promise((resolved) => {
       if (this.httpInstance) {
         this.httpInstance.close(resolved);
@@ -308,15 +303,7 @@ export default class CoreApp extends Module {
     });
   }
 
-  useMiddlewares() {}
   useRoutes() {}
-  useStatics() {}
-  useDefaultRoute() {
-    this.app.use((req, res) => {
-      return res.send(`Hello World from "${this.config.name}"`);
-    });
-  }
-  useCatchErrors() {}
 
   async started() {
     console.log(`🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing()}ms]`);

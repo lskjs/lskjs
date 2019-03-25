@@ -6,6 +6,7 @@ rm -rf .babelrc.js && \
 cp ../../.babelrc.js . && \
 rm -rf node_modules && \
 npm i && \
+mkdir -p node_modules && \
 rm -rf release && \
 rm -rf release && \
 rm -rf build && \
