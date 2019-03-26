@@ -1,11 +1,14 @@
 import map from 'lodash/map';
 import ReactDOM from 'react-dom/server';
 import renderPreloader from '@lskjs/general/Loading/renderPreloader';
-import BasePage from './Page.client';
 
-export default class Page extends BasePage {
+export default class PageServer {
+  constructor(props) {
+    Object.assign(this, props);
+  }
+
   renderOGMeta() {
-    const { meta = {} } = this.state;
+    const { meta = {} } = this.page.state;
     return `\
 ${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}
 ${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}
@@ -17,7 +20,7 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
   renderFavicon = require('./renderFavicon').default
 
   getRootState() {
-    return this.uapp.rootState;
+    return this.page.uapp.rootState;
   }
 
   renderHead() {
@@ -40,7 +43,7 @@ ${this.renderPreloader()}
   }
 
   renderMeta() {
-    const { meta = {} } = this.state;
+    const { meta = {} } = this.page.state;
     return `\
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -68,7 +71,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   renderStyle() {
-    const styles = this.uapp.styles || [];
+    const styles = this.page.uapp.styles || [];
     return `<style id="css">${(styles).join('\n')}</style>`;
   }
 
@@ -85,7 +88,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   renderChunks(type, chunk = 'client') {
-    const props = this.uapp;
+    const props = this.page.uapp;
     if (!props || !props.assets) return '';
     // console.log('props.assets', props.assets);
     const assets = props.assets[chunk];
@@ -109,7 +112,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   renderAssets(type) {
-    const props = this.uapp;
+    const props = this.page.uapp;
     if (!props || !props.assets) return '';
     if (type === 'css' && props.assets) {
       return `<link rel="stylesheet" href="${props.assets['client.css']}">`;
@@ -129,19 +132,19 @@ __SERVER__: ${__SERVER__}
 __DEV__: ${__DEV__}
 __STAGE: ${__STAGE}
 
-uapp.keys: ${Object.keys(this.uapp)}
+uapp.keys: ${Object.keys(this.page.uapp)}
 uapp.config:
-${util.inspect(this.uapp.config)}
+${util.inspect(this.page.uapp.config)}
 uapp.page.state:
-${util.inspect(this.uapp.page.state)}
+${util.inspect(this.page.state)}
 -->`;
   }
 
   renderFooter() {
     return `\
 ${__DEV__ ? this.renderDebug() : ''}
-${this.state.footerHtml || ''}
-${this.footer || ''}
+${this.page.state.footerHtml || ''}
+${this.page.footer || ''}
 `;
   }
 

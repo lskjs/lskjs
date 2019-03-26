@@ -1,7 +1,7 @@
 import React from 'react';
 import merge from 'lodash/merge';
 import Promise from 'bluebird';
-import Loading from '@lskjs/general/Loading';
+// import Loading from '@lskjs/general/Loading';
 
 const DEBUG = __DEV__ && false;
 
@@ -89,8 +89,8 @@ export default class Page {
 
   loading() {
     if (DEBUG) console.log('Page.loading');
-    // const Loading = this.state.loading || 'Loading...';
-    const loading = this.state.loading || <Loading full />;
+    const Loading = this.state.loading || 'Loading...';
+    // const loading = this.state.loading || <Loading full />;
     return this.component(loading);
   }
 

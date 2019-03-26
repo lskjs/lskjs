@@ -5,27 +5,29 @@ import Api from 'apiquery';
 import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import { observable } from 'mobx';
-import scrollTo from '@lskjs/general/utils/scrollTo';
-import detectHtmlClasses from '@lskjs/general/utils/detectHtmlClasses';
-import addClassToHtml from '@lskjs/general/utils/addClassToHtml';
-import removeClassFromHtml from '@lskjs/general/utils/removeClassFromHtml';
-import Root from '@lskjs/general/Root';
+import scrollTo from '@lskjs/scroll';
+import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
+import addClassToHtml from '@lskjs/utils/addClassToHtml';
+import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import { createLogger } from '@lskjs/log';
 import Favico from 'favico.js';
 import autobind from 'core-decorators/lib/autobind';
+import Root from './UappProvider';
 import wrapApi from './wrapApi';
+import DefaultPage from './Page';
+import defaultTheme from './theme';
 
 global.DEV = () => null;
 
 export default class Uapp extends Module {
   name = 'Uapp';
   Api = Api;
-  Page = require('./Page').default;
+  Page = DefaultPage;
   pageProps = {};
   Root = Root;
-  theme = require('./theme').default;
+  theme = defaultTheme;
   scrollTo = scrollTo;
   i18 = new I18({ ctx: this });
 
@@ -129,7 +131,7 @@ export default class Uapp extends Module {
   }
 
   getStores() {
-    return require('./stores').default();
+    return {};
   }
 
   async run() {

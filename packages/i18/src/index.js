@@ -1,3 +1,3 @@
-import I18 from './i18';
+import I18 from './I18';
 
 export default I18;
