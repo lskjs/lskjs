@@ -3,6 +3,7 @@
 
 export default class Template {
   theme = { colors: {} };
+  config = {}
 
   fontFamily = this.theme.fontFamily;
 

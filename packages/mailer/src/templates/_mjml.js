@@ -5,6 +5,7 @@ import mjml2html from 'mjml';
 import Template from './_html';
 
 export default class Base extends Template {
+
   getHtml() {
     const { errors, html } = mjml2html(this.render());
     if (__DEV__) {
@@ -201,8 +202,9 @@ export default class Base extends Template {
     `;
   }
 
-
-  header({ logo = 'https://i.imgur.com/4K9cdsl.png', image = 'https://i.imgur.com/B8GzjNO.png' } = {}) {
+  header({ logo = this.config.logo, image = this.config.headerImage } = {}) {
+    console.log({logo, config: this.config});
+    
     return `
       <mjml>
         <mj-head>
@@ -210,8 +212,8 @@ export default class Base extends Template {
         </mj-head>
         <mj-body>
           <mj-container background-color="${this.theme.colors.mainBackground}">
-            ${this.logo({ src: logo })}
-            ${this.headerImage({ src: image })}
+            ${!logo ? '' : this.logo({ src: logo })}
+            ${!image ? '' : this.headerImage({ src: image })}
     `;
   }
 

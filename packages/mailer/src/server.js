@@ -60,6 +60,14 @@ export default app => class Mailer {
     return options;
   }
 
+  getTemplateConfig() {
+    const { site = { assets: '/assets' } } = app.config.client;
+    return {
+      logo: app.url(`${site.assets}/logo.png`),
+      headerImage: app.url(`${site.assets}/emailHeaderImage.png`),
+    };
+  }
+
   renderTemplate(params) {
     const {
       template, props = {}, ...otherProps
@@ -72,6 +80,7 @@ export default app => class Mailer {
       log: app.log,
       url: app.url,
       t: this.getT(otherProps.locale),
+      config: this.getTemplateConfig(),
       props,
       ...otherProps,
     });
