@@ -1,0 +1,118 @@
+{
+  "name": "@lskjs/modules",
+  "version": "0.29.3-alpha.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev123": "nodemon --exec babel-node index.js",
+    "dev": "npm run watch",
+    "bootstrap": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-bootstrap.sh",
+    "build": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-build.sh",
+    "watch": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh",
+    "release": "scripts/release.sh",
+    "link": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-link.sh",
+    "bump": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-bump.sh",
+    "dev2": "concurrently --kill-others \"yarn dev:ts\" \"yarn dev:js\"",
+    "dev:js": "lerna exec --parallel -- cross-env-shell node \\$LERNA_ROOT_PATH/scripts/watch-js.js",
+    "dev:ts": "lerna exec --parallel -- cross-env-shell node \\$LERNA_ROOT_PATH/scripts/watch-ts.js",
+    "lint:ci": "yarn lint:js --format ./node_modules/eslint-teamcity/index.js . && yarn lint:ts **/*.ts && yarn lint:md .",
+    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json,.html --report-unused-disable-directives",
+    "lint:md": "remark -q",
+    "lint:ts": "tslint -p . -c tslint.json -t stylish",
+    "publish:latest": "lerna publish --exact --concurrency 1 --force-publish",
+    "publish:next": "npm run publish:latest -- --npm-tag=next",
+    "publish:debug": "npm run publish:latest -- --npm-tag=debug --no-push",
+    "test": "node ./scripts/test.js",
+    "test-latest-cra": "yarn --prefix --cwd lib/cli run test-latest-cra",
+    "test:cli": "npm --prefix lib/cli run test",
+    "echo": "pwd",
+    "custom": "lerna exec --scope @lskjs/ui -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh",
+    "custom2": "lerna exec --scope @lskjs/general -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh"
+  },
+  "author": "isuvorov",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
+  },
+  "devDependenciesOLD": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-decorators": "^7.2.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.3",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-decorators": "^7.2.3",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "7.0.0-beta.42",
+    "@babel/runtime": "7.1.5",
+    "babel-eslint": "8.2.3",
+    "babel-plugin-emotion": "9.2.11",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "lerna": "^3.13.1",
+    "lint-staged": "^8.1.4"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "npm lint:js --fix",
+        "git add"
+      ],
+      "*.ts": [
+        "npm lint:ts --fix",
+        "git add"
+      ],
+      "*.json": [
+        "npm lint:js --fix",
+        "git add"
+      ]
+    }
+  },
+  "devDependencies2": {
+    "@babel/cli": "7.0.0-beta.42",
+    "@babel/core": "7.0.0-beta.42",
+    "@babel/node": "7.0.0-beta.42",
+    "@babel/plugin-transform-runtime": "7.0.0-beta.42",
+    "@babel/preset-env": "7.0.0-beta.42",
+    "@babel/preset-react": "7.0.0-beta.42",
+    "@babel/preset-stage-0": "7.0.0-beta.42",
+    "@babel/register": "7.0.0-beta.42",
+    "@babel/template": "7.0.0-beta.42",
+    "@babel/types": "7.0.0-beta.42",
+    "@lskjs/general": "0.15.256",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "8.2.3",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-loader": "2.0.0",
+    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.8.2",
+    "lodash": "4.17.11",
+    "react-icons2": "2.4.0",
+    "source-map-support": "0.5.9"
+  }
+}
