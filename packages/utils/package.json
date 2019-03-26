@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "0.29.0",
+  "version": "0.29.3-alpha.0",
   "description": "LSK ux subrepo: utils",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -9,7 +9,6 @@
   },
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
-  "dependencies": {},
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
   }
