@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "0.29.3-alpha.0",
+  "version": "0.29.5-alpha.0",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "schema"
   ],
   "dependencies": {
-    "@lskjs/db": "^0.29.3-alpha.0",
+    "@lskjs/db": "^0.29.5-alpha.0",
     "eventemitter3": "^3.1.0",
     "imap": "^0.8.19",
     "mailparser": "^2.4.0",
