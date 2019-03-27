@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "0.29.8-alpha.0",
+  "version": "0.30.0",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -10,14 +10,14 @@
   "repository": "https://github.com/lskjs/modules/tree/master/packages/module",
   "keywords": [],
   "devDependencies": {
+    "@lskjs/log": "*",
     "bluebird": "^3.5.3",
-    "lodash": "^4.17.11",
-    "@lskjs/log": "*"
+    "lodash": "^4.17.11"
   },
   "peerDependencies": {
+    "@lskjs/log": "*",
     "bluebird": "*",
-    "lodash": "*",
-    "@lskjs/log": "*"
+    "lodash": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
