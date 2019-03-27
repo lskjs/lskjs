@@ -156,6 +156,10 @@ export default class Core {
         this.log.trace(`${this.name}.afterRun()`);
         await this.afterRun();
       }
+      if (isFunction(this.started)) {
+        this.log.trace(`${this.name}.started()`);
+        await this.started();
+      }
       if (isFunction(this.onStart)) {
         this.log.trace(`${this.name}.onStart()`);
         await this.onStart();

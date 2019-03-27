@@ -40,7 +40,7 @@
     "@lskjs/i18": "^0.30.1",
     "@lskjs/log": "^0.30.1",
     "@lskjs/module": "^0.30.1",
-    "@lskjs/scroll": "^0.30.0",
+    "@lskjs/scroll": "^0.30.1",
     "@lskjs/utils": "^0.30.1",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
@@ -51,6 +51,7 @@
     "react": "16.5.2"
   },
   "peerDependencies": {
+    "@lskjs/autobind": "*",
     "@lskjs/i18": "*",
     "@lskjs/log": "*",
     "@lskjs/module": "*",

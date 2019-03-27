@@ -11,7 +11,8 @@ import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
-import { createLogger } from '@lskjs/log';
+import logger from '@lskjs/log';
+// import { createLogger } from '@lskjs/log';
 import Favico from 'favico.js';
 import autobind from '@lskjs/autobind';
 import Root from './UappProvider';
@@ -21,11 +22,15 @@ import defaultTheme from './theme';
 
 global.DEV = () => null;
 
+console.log({autobind, logger});
+
+
 export default class Uapp extends Module {
   name = 'Uapp';
   Api = Api;
   Page = DefaultPage;
   pageProps = {};
+  rootState = {};
   Root = Root;
   theme = defaultTheme;
   scrollTo = scrollTo;
@@ -37,7 +42,7 @@ export default class Uapp extends Module {
       __SERVER__ ? 'warn' : 'trace'
     ) : 'error';
 
-    return createLogger({
+    return logger.createLogger({
       name: this.name || 'app',
       src: __DEV__,
       level,
@@ -116,16 +121,17 @@ export default class Uapp extends Module {
   getLocale = require('./i18/getLocale').default
   setLocale = require('./i18/setLocale').default
 
-  @autobind
-  t(...args) {
+  // @autobind
+  t = (...args) => {
     // console.log('DEPRECATED uapp.t', args[0]);
     if (this.i18) return this.i18.t(...args);
     return '!uapp.i18';
   }
 
   async initSession() {
+    return ;
     const { UserStore, AuthStore } = this.stores;
-
+    console.log('this.rootState', this.rootState);
     this.user = new UserStore(this.rootState.user);
     this.auth = new AuthStore();
   }
@@ -150,7 +156,7 @@ export default class Uapp extends Module {
 
 
   async lazyRun() {
-    await this.auth.init();
+    if (this.auth) await this.auth.init();
     await this.reconnect();
     // await this.initStateStorage();
     // await super.run();
@@ -293,8 +299,8 @@ export default class Uapp extends Module {
 
   // uapp.onError(t('common.errorData'), err); ??? // bad
   // uapp.onError(uapp.e('errorData', { err })); ???
-  @autobind
-  onError(err) {
+  // @autobind
+  onError = (err) => {
     return this.toast(err, { defaultType: 'error' });
   }
 
@@ -372,6 +378,8 @@ export default class Uapp extends Module {
 
   }
   started() {
+    console.log('started');
+    
     if (__CLIENT__) {
       removeClassFromHtml('ua_js_no');
       addClassToHtml('ua_js_yes');

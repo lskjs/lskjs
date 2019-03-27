@@ -5,6 +5,7 @@ import moment from 'moment';
 import Promise from 'bluebird';
 
 export default class I18 {
+  config = {};
   @observable locale;
   @observable t;
   @observable m;
@@ -26,7 +27,11 @@ export default class I18 {
   async init(params) {
     this.instance = await this.getI18(params);
     if (!this.config) console.error('!i18.config');
-    if (this.config.locales) this.locales = this.config.locales;
+    if (this.config && this.config.locales) {
+      this.locales = this.config.locales;
+    } else {
+      this.locales = [];
+    }
     if (__SERVER__) {
       this.instances = {};
       if (this.locales) {

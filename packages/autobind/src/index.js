@@ -1,1 +1,1 @@
-export * from 'autobind-decorator';
+export { default } from 'autobind-decorator';

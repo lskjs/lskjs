@@ -1,0 +1,34 @@
+{
+  "name": "@lskjs/reactapp",
+  "version": "0.30.1",
+  "description": "LSK ux subrepo: reactapp",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/ux/tree/master/packages/reactapp",
+  "keywords": [],
+  "dependencies": {
+    "antimerge": "0.0.5",
+    "history": "^4.9.0",
+    "redbox-react": "^1.6.0"
+  },
+  "devDependencies": {
+    "@lskjs/module": "^0.30.1",
+    "@lskjs/uapp": "^0.30.1",
+    "lodash": "^4.17.11",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
+  },
+  "peerDependencies": {
+    "@lskjs/module": "*",
+    "@lskjs/uapp": "*",
+    "lodash": "*",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
+  }
+}

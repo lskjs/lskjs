@@ -1,50 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import initReactFastClick from 'react-fastclick';
 import qs from 'qs';
-import { createPath } from 'history/PathUtils';
 import autobind from '@lskjs/autobind';
 import merge from 'lodash/merge';
 import createBrowserHistory from 'history/createBrowserHistory';
-import { Redbox, deepForceUpdate } from './core/devUtils';
-import Uapp from '../Uapp';
-import Core from '../Core';
+import Module from '@lskjs/module';
+import BaseUapp from '@lskjs/uapp';
+import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
 
 const DEBUG = __DEV__ && false;
 
-
-export default class ReactApp extends Core {
+export default class ReactApp extends Module {
+  BaseUapp = BaseUapp;
   name = 'App';
 
   getRootState() {
-    // console.log('getRootState');
     return window.__ROOT_STATE__ || {};
   }
 
-
   @autobind
   historyListen(location, action) {
-    DEBUG && console.log('App.historyListen', location, action);
     if (location.method === 'replaceState') return;
     this.render();
   }
 
-  historyConfirm(message, callback) { // eslint-disable-line
-    DEBUG && console.log('historyConfirm 1', message);
-    return callback(window.confirm(message));
-  }
-
   async init() {
-    this.rootState = this.getRootState();
+    if (!this.rootState) this.rootState = this.getRootState();
     // console.log('init, rootState', this.rootState);
     this.config = merge({}, this.config || {}, this.rootState && this.rootState.config || {});
     this.rootState.config = null; // не понмю для чего
-    initReactFastClick();
-    this.container = document.getElementById('root');
-    this.hmrInit();
+    if (!this.container) this.container = document.getElementById('root');
     this.history = createBrowserHistory({
-      getUserConfirmation: (...args) => this.historyConfirm(...args),
+      // getUserConfirmation: (...args) => this.historyConfirm(...args),
     });
   }
 
@@ -111,24 +99,21 @@ export default class ReactApp extends Core {
     };
   }
 
-  BaseUapp = Uapp;
-  async getUapp(req) {
+  async getUapp(params = {}) {
     if (this.uapp) return this.uapp;
-    this.uapp = new (this.Uapp || this.BaseUapp)({
-      history: this.history,
-      styles: [],
-      req,
+    const { Uapp } = this;
+    this.uapp = new Uapp({
       rootState: this.rootState,
       config: this.config,
       app: this,
+      ...params
     });
     await this.uapp.start();
     return this.uapp;
   }
 
-
   async getPage(req) {
-    const uapp = await this.getUapp(req);
+    const uapp = this.uapp || await this.getUapp({ req });
     await uapp.resolve({
       path: req.path,
       query: req.query,
@@ -136,34 +121,9 @@ export default class ReactApp extends Core {
     return uapp.page;
   }
 
-
   @autobind
   postRender() {
-    // if (!this.rootState.renderCount) {
-    //   const elem = document.getElementById('css');
-    //   if (elem) elem.parentNode.removeChild(elem);
-    //   return;
-    // }
-    if (!DEBUG && window.ga) {
-      window.ga('send', 'pageview', createPath(window.location));
-    }
     this.rootState.renderCount = (this.rootState.renderCount || 0) + 1;
   }
 
-  hmrInit() {
-    DEBUG && console.log('App.hmrInit');
-  }
-
-  hmrUpdate() {
-    DEBUG && console.log('App.hmrUpdate');
-    if (this.appInstance) {
-      try {
-        deepForceUpdate(this.appInstance);
-      } catch (err) {
-        this.log.error('hmrUpdate deepForceUpdate err', err);
-        this.renderError(err);
-      }
-    }
-    // this.render(this.currentLocation); // @TODO: REMOVE??
-  }
 }
