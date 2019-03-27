@@ -9,11 +9,11 @@
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/log",
   "keywords": [],
-  "scripts": {
-    "postversion": "../../scripts/pack-release.sh"
-  },
   "dependencies": {
     "browser-bunyan": "^1.5.0",
     "bunyan": "^1.8.12"
+  },
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
   }
 }
