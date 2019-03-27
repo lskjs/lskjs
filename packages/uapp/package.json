@@ -20,6 +20,11 @@
     "schema"
   ],
   "dependencies": {
+    "@lskjs/i18": "0.29.6-alpha.0",
+    "@lskjs/log": "0.29.6-alpha.0",
+    "@lskjs/module": "0.29.6-alpha.0",
+    "@lskjs/scroll": "0.29.6-alpha.0",
+    "@lskjs/utils": "0.29.6-alpha.0",
     "antimerge": "0.0.5",
     "apiquery": "0.1.24",
     "core-decorators": "0.20.0",
@@ -33,13 +38,6 @@
     "react-emotion": "9.1.3",
     "react-fastclick": "3.0.2",
     "universal-router": "^8.1.0"
-  },
-  "devDependencies2": {
-    "@lskjs/i18": "0.29.5-alpha.0",
-    "@lskjs/log": "0.29.5-alpha.0",
-    "@lskjs/module": "0.29.5-alpha.0",
-    "@lskjs/scroll": "0.29.6-alpha.0",
-    "@lskjs/utils": "0.29.5-alpha.0"
   },
   "devDependencies": {
     "bluebird": "^3.5.3",
