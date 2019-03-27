@@ -2,9 +2,9 @@ import toPairs from 'lodash/toPairs';
 import forEach from 'lodash/forEach';
 import isFunction from 'lodash/isFunction';
 import get from 'lodash/get';
-// import PromiseMap from 'bluebird/js/release/map';
 import Promise from 'bluebird';
-import logger from './logger';
+import logger from '@lskjs/log';
+// import PromiseMap from 'bluebird/js/release/map';
 import emitter from './emitter';
 // import createLoggerMock from './logger/createLoggerMock';
 // import config from './config';
@@ -114,9 +114,8 @@ export default class Core {
   async startOrRestart() {
     if (this.startCount) {
       return this.restart();
-    } else {
-      return this.start();
     }
+    return this.start();
   }
 
   async restart() {

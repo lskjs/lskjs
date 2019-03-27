@@ -9,6 +9,16 @@
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/module",
   "keywords": [],
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11",
+    "@lskjs/log": "*"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*",
+    "@lskjs/log": "*"
+  },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
   }
