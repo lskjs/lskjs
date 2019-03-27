@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import importcss from 'importcss';
-import autobind from 'core-decorators/lib/autobind';
+import autobind from '@lskjs/autobind';
 import { inject, observer } from 'mobx-react';
 import cx from 'classnames';
 import {

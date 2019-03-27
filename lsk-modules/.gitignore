@@ -1,6 +1,0 @@
-**/node_modules
-packages/*/build
-packages/*/release
-packages/uapp
-packages/server
-lerna-debug.log

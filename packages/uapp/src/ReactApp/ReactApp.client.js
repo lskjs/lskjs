@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import initReactFastClick from 'react-fastclick';
 import qs from 'qs';
 import { createPath } from 'history/PathUtils';
-import autobind from 'core-decorators/lib/autobind';
+import autobind from '@lskjs/autobind';
 import merge from 'lodash/merge';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Redbox, deepForceUpdate } from './core/devUtils';

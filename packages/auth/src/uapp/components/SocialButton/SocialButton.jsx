@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import autobind from 'core-decorators/lib/autobind';
+import autobind from '@lskjs/autobind';
 import importcss from 'importcss';
 import omit from 'lodash/omit';
 import { Button  } from 'react-bootstrap';

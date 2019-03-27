@@ -13,7 +13,7 @@ import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import { createLogger } from '@lskjs/log';
 import Favico from 'favico.js';
-import autobind from 'core-decorators/lib/autobind';
+import autobind from '@lskjs/autobind';
 import Root from './UappProvider';
 import wrapApi from './wrapApi';
 import DefaultPage from './Page';

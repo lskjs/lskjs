@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-      "experimentalDecorators": true,
-      "target": "ES6"
-  },
-  "include": [
-    "src/**/*"
-  ]
-}

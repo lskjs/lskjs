@@ -6,7 +6,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 import Api from 'apiquery';
 import staticFileMiddleware from 'connect-static-file';
-import autobind from 'core-decorators/lib/autobind';
+import autobind from '@lskjs/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db';
 import module from '@lskjs/module';

@@ -1,0 +1,18 @@
+{
+  "name": "@lskjs/autobind",
+  "version": "0.30.0",
+  "description": "LSK ux subrepo: autobind",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/ux/tree/master/packages/autobind",
+  "keywords": [],
+  "scripts": {
+    "postversion": "../../scripts/pack-release.sh"
+  },
+  "dependencies": {
+    "autobind-decorator": "^2.4.0"
+  }
+}
