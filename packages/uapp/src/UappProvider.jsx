@@ -5,7 +5,7 @@ import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
 
 export default class UappProvider extends Component {
   static propTypes = {
-    uapp: PropTypes.node.isRequired,
+    uapp: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
   };
   MobxProvider = DefaultMobxProvider;

@@ -11,7 +11,8 @@
   "keywords": [],
   "dependencies": {
     "browser-bunyan": "^1.5.0",
-    "bunyan": "^1.8.12"
+    "bunyan": "^1.8.12",
+    "source-map-support": "^0.5.11"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"

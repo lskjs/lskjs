@@ -1,12 +1,12 @@
 import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
-import BaseUapp from '@lskjs/uapp';
+// import BaseUapp from '@lskjs/uapp';
 import antimergeDeep from 'antimerge/antimergeDeep';
 import cloneDeep from 'lodash/cloneDeep';
 
 export default class ReactApp extends Module {
-  BaseUapp = BaseUapp;
+  // BaseUapp = BaseUapp;
   name = 'App';
 
   async init() {
@@ -39,7 +39,6 @@ export default class ReactApp extends Module {
     };
   }
 
-  Uapp = BaseUapp
   async getUapp({ req , ...params}) {
     const { Uapp } = this;
     const uapp = new Uapp({

@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import qs from 'qs';
-import autobind from '@lskjs/autobind';
+// import autobind from '@lskjs/autobind';
 import merge from 'lodash/merge';
-import createBrowserHistory from 'history/createBrowserHistory';
+import {createBrowserHistory} from 'history';
 import Module from '@lskjs/module';
-import BaseUapp from '@lskjs/uapp';
+// import BaseUapp from '@lskjs/uapp';
 import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
 
 const DEBUG = __DEV__ && false;
 
 export default class ReactApp extends Module {
-  BaseUapp = BaseUapp;
+  // BaseUapp = BaseUapp;
   name = 'App';
 
   getRootState() {
     return window.__ROOT_STATE__ || {};
   }
 
-  @autobind
-  historyListen(location, action) {
+  // @autobind
+  historyListen = (location, action) => {
     if (location.method === 'replaceState') return;
     this.render();
   }
@@ -49,8 +49,8 @@ export default class ReactApp extends Module {
     }, DEBUG ? 1000 : 0);
   }
 
-  @autobind
-  async render() {
+  // @autobind
+  render = async () => {
     const req = this.getReq();
     if (this.uapp && this.uapp.page && this.uapp.page.exit) {
       await this.uapp.page.exit();
@@ -121,8 +121,8 @@ export default class ReactApp extends Module {
     return uapp.page;
   }
 
-  @autobind
-  postRender() {
+  // @autobind
+  postRender = () => {
     this.rootState.renderCount = (this.rootState.renderCount || 0) + 1;
   }
 

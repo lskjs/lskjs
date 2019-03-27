@@ -3,7 +3,8 @@ import merge from 'lodash/merge';
 import Promise from 'bluebird';
 // import Loading from '@lskjs/general/Loading';
 
-const DEBUG = __DEV__ && false;
+// const DEBUG = __DEV__ && false;
+const DEBUG = true;
 
 export default class Page {
   _page = true;
@@ -161,7 +162,7 @@ export default class Page {
   }
 
   renderComponent() {
-    if (DEBUG) console.log('Page.renderComponent');
+    if (DEBUG) console.log('Page.renderComponent', this.state);
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
