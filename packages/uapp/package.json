@@ -22,9 +22,9 @@
   "dependencies": {
     "@lskjs/i18": "0.29.6-alpha.0",
     "@lskjs/log": "^0.29.7-alpha.0",
-    "@lskjs/module": "0.29.6-alpha.0",
-    "@lskjs/scroll": "0.29.6-alpha.0",
-    "@lskjs/utils": "0.29.6-alpha.0",
+    "@lskjs/module": "0.29.4-alpha.0",
+    "@lskjs/scroll": "0.29.5-alpha.0",
+    "@lskjs/utils": "0.29.3-alpha.0",
     "antimerge": "0.0.5",
     "apiquery": "0.1.24",
     "core-decorators": "0.20.0",
