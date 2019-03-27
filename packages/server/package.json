@@ -9,6 +9,38 @@
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/server",
   "keywords": [],
+  "olddependencies": {
+    "@babel/polyfill": "7.0.0-beta.42",
+    "@babel/runtime": "7.0.0-beta.42"
+  },
+  "dependencies": {
+    "@lskjs/db": "^0.26.18",
+    "antimerge": "0.0.5",
+    "apiquery": "0.1.24",
+    "body-parser": "1.18.3",
+    "connect-static-file": "2.0.0",
+    "cookie-parser": "1.4.4",
+    "cors": "2.8.5",
+    "deepmerge": "2.1.1",
+    "emotion": "9.1.3",
+    "emotion-theming": "9.1.2",
+    "express": "4.16.4",
+    "express-jwt": "5.3.1",
+    "react-emotion": "9.1.3",
+    "redis": "2.8.0",
+    "socket.io": "2.1.1",
+    "socket.io-as-promised": "1.0.0",
+    "socket.io-redis": "5.2.0",
+    "uuid": "3.3.2"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*"
+  },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
   }

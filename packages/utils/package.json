@@ -9,6 +9,14 @@
   },
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
+  "devDependencies": {
+    "lodash": "^4.17.11",
+    "@babel/polyfill": "^7.2.5"
+  },
+  "peerDependencies": {
+    "lodash": "*",
+    "@babel/polyfill": "*"
+  },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
   }

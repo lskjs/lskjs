@@ -35,9 +35,9 @@ global.timing = () => Date.now() - global.startedAt;
 // if (!global.Promise) global.Promise = require('bluebird');
 // if (!global.fetch) global.fetch = require('isomorphic-fetch');
 
-// if (!global._babelPolyfill) {
-//   require('@babel/polyfill');
-// }
+if (!global._babelPolyfill) {
+  require('@babel/polyfill');
+}
 // // require('@babel/polyfill');
 // // require('event-source-polyfill');
 // // global.fetch = require('./fetch').default;
