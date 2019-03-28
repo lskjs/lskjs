@@ -6,10 +6,10 @@ import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 import Api from '@lskjs/apiquery';
 import staticFileMiddleware from 'connect-static-file';
-import autobind from '@lskjs/autobind';
+// // import autobind from '@lskjs/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db';
-import module from '@lskjs/module';
+import Module from '@lskjs/module';
 import { Server as httpServer } from 'http';
 
 import AsyncRouter from './AsyncRouter';
@@ -61,8 +61,8 @@ export default class CoreApp extends Module {
   }
 
 
-  @autobind
-  url(str, params = null) {
+  //@autobind
+  url = (str, params = null) => {
     let query = '';
     if (params && Object.keys(params.length)) {
       query = `?${map(params, (val, key) => `${key}=${val}`).join('&')}`;

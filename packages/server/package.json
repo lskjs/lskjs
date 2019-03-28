@@ -38,6 +38,7 @@
     "lodash": "^4.17.11"
   },
   "peerDependencies": {
+    "@lskjs/apiquery": "*",
     "bluebird": "*",
     "lodash": "*"
   },
