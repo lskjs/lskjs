@@ -1,9 +1,9 @@
 // import fetch from 'node-fetch';
-import isPlainObject from 'lodash.isplainobject';
-import pick from 'lodash.pick';
+import isPlainObject from 'lodash/isPlainObject';
+import pick from 'lodash/pick';
 import qs from 'qs';
 import FormData from 'form-data';
-import io from './socket-io-universal';
+import io from './socket.io-client';
 import trim from './trim';
 
 const AXIOS_PARAMS = [
@@ -77,7 +77,7 @@ function ioMock(...initParams) {
 
 // const DEBUG = __DEV__;
 
-export default class ApiClient {
+export default class Apiquery {
   static axios = global.axios;
   static qs = qs;
   // io = io

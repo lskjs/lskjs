@@ -1,4 +1,0 @@
-{
-  "main": "socket-io-universal.server.js",
-  "browser": "socket-io-universal.client.js"
-}

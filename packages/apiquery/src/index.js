@@ -1,1 +1,1 @@
-module.exports = require('./apiquery');
+export { default } from './apiquery'
