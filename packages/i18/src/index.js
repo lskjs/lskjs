@@ -1,3 +1,5 @@
-import I18 from './I18';
-
-export default I18;
+if (typeof window !== 'undefined') {
+  module.exports = require('./I18.client').default;
+} else {
+  module.exports = require('./I18.common').default;
+}

@@ -1,15 +1,13 @@
-import { observable } from 'mobx';
 import i18next from 'i18next';
 import i18nextXhrBackend from 'i18next-xhr-backend';
-import moment from 'moment';
 import Promise from 'bluebird';
 
 export default class I18 {
   config = {};
-  @observable locale;
-  @observable t;
-  @observable m;
-  @observable i18;
+  locale = null;
+  t = () => null;
+  m = () => null;
+  i18 = null;
 
   constructor(props = {}) {
     this.setState(props);

@@ -14,7 +14,6 @@
     "@babel/runtime": "7.0.0-beta.42"
   },
   "dependencies": {
-    "@lskjs/db": "^0.26.18",
     "antimerge": "0.0.5",
     "body-parser": "1.18.3",
     "connect-static-file": "2.0.0",
@@ -33,12 +32,18 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
+    "@lskjs/db": "^0.26.18",
     "@lskjs/apiquery": "^0.30.4",
+    "@lskjs/i18": "^0.30.4",
+    "moment": "2.24.0",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11"
   },
   "peerDependencies": {
+    "@lskjs/db": "*",
     "@lskjs/apiquery": "*",
+    "@lskjs/i18": "*",
+    "moment": "*",
     "bluebird": "*",
     "lodash": "*"
   },

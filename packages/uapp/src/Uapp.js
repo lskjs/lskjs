@@ -22,9 +22,6 @@ import defaultTheme from './theme';
 
 global.DEV = () => null;
 
-console.log({autobind, logger});
-
-
 export default class Uapp extends Module {
   name = 'Uapp';
   Api = Api;

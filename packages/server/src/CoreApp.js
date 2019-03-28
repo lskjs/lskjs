@@ -22,7 +22,18 @@ export default class CoreApp extends Module {
   Api = Api;
   i18 = new I18({ ctx: this });
   async init() {
-    super.init(...arguments);
+    super.init();
+    this.log.trace('ExpressApp init');
+    this.express = this.createExpressApp();
+    this.httpServer = httpServer(this.express);
+    if (this.config.express) {
+      this.log.trace('express config:', this.config.express);
+      forEach((this.config.express || {}), (value, key) => {
+        this.express.set(key, value);
+      });
+    }
+    this.app = this.express; // Fallback
+
     this.log.trace('CoreApp init');
     this.db = await this.getDatabase();
     this.requests = this.getRequests();
@@ -254,20 +265,6 @@ export default class CoreApp extends Module {
 
 
 
-
-  async init() {
-    super.init();
-    this.log.trace('ExpressApp init');
-    this.express = this.createExpressApp();
-    this.httpServer = httpServer(this.express);
-    if (this.config.express) {
-      this.log.trace('express config:', this.config.express);
-      forEach((this.config.express || {}), (value, key) => {
-        this.express.set(key, value);
-      });
-    }
-    this.app = this.express; // Fallback
-  }
 
   createExpressApp() {
     return express();
