@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import get from 'lodash/get';
 import UniversalRouter from 'universal-router';
-import Api from 'apiquery';
+import Api from '@lskjs/apiquery';
 import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import { observable } from 'mobx';

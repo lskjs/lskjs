@@ -1,6 +1,6 @@
 import Youtube from 'passport-youtube-v3';
 import get from 'lodash/get';
-import Api from 'apiquery';
+import Api from '@lskjs/apiquery';
 import fetch from 'isomorphic-fetch';
 
 

@@ -1,5 +1,4 @@
 **/node_modules
 packages/*/build
 packages/*/release
-packages/apiquery2
 lerna-debug.log

@@ -4,7 +4,7 @@ import mapValues from 'lodash/mapValues';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
-import Api from 'apiquery';
+import Api from '@lskjs/apiquery';
 import staticFileMiddleware from 'connect-static-file';
 import autobind from '@lskjs/autobind';
 import I18 from '@lskjs/i18';

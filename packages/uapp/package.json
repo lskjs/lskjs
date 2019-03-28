@@ -21,7 +21,6 @@
   ],
   "dependencies": {
     "antimerge": "0.0.5",
-    "apiquery": "0.1.24",
     "core-decorators": "0.20.0",
     "emotion": "9.1.3",
     "emotion-theming": "9.1.2",
@@ -36,6 +35,7 @@
     "universal-router": "^8.1.0"
   },
   "devDependencies": {
+    "@lskjs/apiquery": "^0.30.3",
     "@lskjs/autobind": "^0.30.3",
     "@lskjs/i18": "^0.30.3",
     "@lskjs/log": "^0.30.3",

@@ -16,7 +16,6 @@
   "dependencies": {
     "@lskjs/db": "^0.26.18",
     "antimerge": "0.0.5",
-    "apiquery": "0.1.24",
     "body-parser": "1.18.3",
     "connect-static-file": "2.0.0",
     "cookie-parser": "1.4.4",
@@ -34,6 +33,7 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
+    "@lskjs/apiquery": "^0.30.3",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11"
   },
