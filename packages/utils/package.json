@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "0.30.3",
+  "version": "0.30.4",
   "description": "LSK ux subrepo: utils",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -10,12 +10,12 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
   "devDependencies": {
-    "lodash": "^4.17.11",
-    "@babel/polyfill": "^7.2.5"
+    "@babel/polyfill": "^7.2.5",
+    "lodash": "^4.17.11"
   },
   "peerDependencies": {
-    "lodash": "*",
-    "@babel/polyfill": "*"
+    "@babel/polyfill": "*",
+    "lodash": "*"
   },
   "scripts": {
     "postversion": "../../scripts/pack-release.sh"
