@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/reactapp",
-  "version": "0.30.5",
+  "version": "0.30.7",
   "description": "LSK ux subrepo: reactapp",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -15,8 +15,8 @@
     "redbox-react": "^1.6.0"
   },
   "devDependencies": {
-    "@lskjs/autobind": "^0.30.4",
-    "@lskjs/module": "^0.30.5",
+    "@lskjs/autobind": "^0.30.7",
+    "@lskjs/module": "^0.30.7",
     "lodash": "^4.17.11",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
