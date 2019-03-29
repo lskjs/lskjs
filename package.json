@@ -33,7 +33,9 @@
   },
   "author": "isuvorov",
   "license": "ISC",
-  "files": [ "build/" ],
+  "files": [
+    "build/"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -69,7 +71,7 @@
     "jest": "23.6.0",
     "babel-eslint": "8.2.3",
     "babel-plugin-emotion": "9.2.11",
-    "babel-plugin-transform-class-property-arrow-to-bind": "^1.0.0",
+    "babel-plugin-transform-class-property-arrow-to-bind": "^1.1.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",

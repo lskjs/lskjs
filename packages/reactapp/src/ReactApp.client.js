@@ -50,9 +50,9 @@ export default class ReactApp extends Module {
   }
 
   // @autobind
-  render = () => this.render2()
-
-  async render2() {
+  // render = () => this.render2()
+  // async render2() {
+  render = async () => {
     if (this.uapp && this.uapp.page && this.uapp.page.exit) {
       await this.uapp.page.exit();
     }
@@ -77,7 +77,16 @@ export default class ReactApp extends Module {
       return;
     }
 
-    this.appInstance = ReactDOM.render(page.render(), this.container, this.postRender);
+    if (!this.container) {
+      this.log.error('!ReactApp.container');
+    }
+    const component = page.render();
+    // Check if the root node has any children to detect if the app has been prerendered
+    if (this.container.hasChildNodes()) {
+      this.appInstance = ReactDOM.hydrate(component, this.container, this.postRender);
+    } else {
+      this.appInstance = ReactDOM.render(component, this.container, this.postRender);
+    }
   }
 
   renderError(error = {}) {

@@ -18,6 +18,7 @@
     "@lskjs/autobind": "^0.31.0",
     "@lskjs/log": "^0.31.0",
     "@lskjs/module": "^0.31.0",
+    "emotion-server": "^10.0.9",
     "lodash": "^4.17.11",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
@@ -26,6 +27,7 @@
     "@lskjs/autobind": "*",
     "@lskjs/log": "*",
     "@lskjs/module": "*",
+    "emotion-server": "*",
     "lodash": "*",
     "react": "*",
     "react-dom": "*"

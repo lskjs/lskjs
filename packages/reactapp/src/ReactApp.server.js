@@ -3,10 +3,10 @@ import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
 import antimergeDeep from 'antimerge/antimergeDeep';
-import ReactDOM from 'react-dom/server';
+// import ReactDOM from 'react-dom/server';
+import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
+import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import Html from './Html';
-
-console.log(8789789798);
 
 export default class ReactApp extends Module {
   // BaseUapp = BaseUapp;
@@ -74,11 +74,38 @@ export default class ReactApp extends Module {
     return this.renderTemplate(`<pre>${text}${err.stack}</pre>`);
   }
 
+  async renderToNodeStream({ res, render, component }) {
+    const delemitter = `<!-- renderToNodeStream ${Math.random()} renderToNodeStream --->`;
+    const content = await render(delemitter);
+    const [before, after] = content.split(delemitter);
+    res.write(before);
+    const stream = renderToNodeStream(component).pipe(renderStylesToNodeStream());
+    stream.pipe(res, { end: false });
+    stream.on('end', () => {
+      res.write(after);
+      res.end();
+    });
+  }
+
+
+  createHtmlRender(page) {
+    return (content) => {
+      const html = new Html({
+        content,
+        meta: page.state.meta,
+        rootState: page.uapp.rootState,
+      });
+      return html.render();
+    };
+  }
+
   async render(req, res) {
-    
-    let page;
+    const strategy = null; // renderToNodeStream';
     let status = 200;
+    let page;
+    let component;
     let content;
+
     try {
       try {
         page = await this.getPage({ req });
@@ -92,21 +119,28 @@ export default class ReactApp extends Module {
         }
         return res.redirect(page.state.redirect);
       }
-      let component;
       try {
         ({ status } = page.state);
         component = page.render();
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'page.render()'] };
       }
-      console.log('component', component)
+      // console.log('component', component);
       try {
-        content = ReactDOM.renderToStaticMarkup(component); // because async style render
+        if (strategy === 'renderToNodeStream') {
+          // рендерим потом асинхронно
+        } else {
+          if (strategy === 'renderToStaticMarkup') {
+            content = renderToStaticMarkup(component);
+          } else {
+            content = renderToString(component);
+          }
+          content = renderStylesToString(content);
+        }
       } catch (err) {
         return { err, stack: ['Error SSR', 'ReactApp.render', 'ReactDOM.renderToStaticMarkup(component)'] };
       }
-      console.log('content', content)
-
+      // console.log('content', content);
     } catch ({ err, stack }) {
       status = 500;
       if (__DEV__) {
@@ -117,13 +151,14 @@ export default class ReactApp extends Module {
         content = err.message;
       }
     }
-    try {
-      const html = new Html({
-        content,
-        meta: page.state.meta,
-        rootState: page.uapp.rootState,
+    const render = this.createHtmlRender(page);
+    if (strategy === 'renderToNodeStream' && !content && component) {
+      return this.renderToNodeStream({
+        req, res, render, component,
       });
-      content = await html.render();
+    }
+    try {
+      content = await render(content);
     } catch (err2) {
       status = 500;
       content = 'ERROR: Html.render()';
