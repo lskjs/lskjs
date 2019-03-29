@@ -109,8 +109,9 @@ export default class Uapp extends Module {
       ...apiConfig,
       url,
     });
-    if (__SERVER__) {
-      wrapApi(api);
+    const { app } = this;
+    if (__SERVER__ && app) {
+      wrapApi({ api, app });
     }
     return api;
   }
@@ -126,7 +127,7 @@ export default class Uapp extends Module {
   }
 
   async initSession() {
-    return ;
+    return;
     const { UserStore, AuthStore } = this.stores;
     console.log('this.rootState', this.rootState);
     this.user = new UserStore(this.rootState.user);
@@ -297,9 +298,7 @@ export default class Uapp extends Module {
   // uapp.onError(t('common.errorData'), err); ??? // bad
   // uapp.onError(uapp.e('errorData', { err })); ???
   // @autobind
-  onError = (err) => {
-    return this.toast(err, { defaultType: 'error' });
-  }
+  onError = err => this.toast(err, { defaultType: 'error' })
 
 
   toast(err, config) {
@@ -340,8 +339,9 @@ export default class Uapp extends Module {
     this.emit('resolve:before', { req, reqParams });
     __CLIENT__ && __DEV__ && this.log.trace('Uapp.resolve', req.path, req.query);
     await this.resetPage();
+    let res;
     try {
-      await this.router.resolve({
+      res = await this.router.resolve({
         pathname: reqParams.path,
         path: reqParams.path,
         query: reqParams.query,
@@ -353,6 +353,7 @@ export default class Uapp extends Module {
       this.log.error('resolveErr', err);
     }
     this.emit('resolve:after', { req, reqParams });
+    return res;
   }
 
   refresh() {
@@ -376,7 +377,7 @@ export default class Uapp extends Module {
   }
   started() {
     console.log('started');
-    
+
     if (__CLIENT__) {
       removeClassFromHtml('ua_js_no');
       addClassToHtml('ua_js_yes');

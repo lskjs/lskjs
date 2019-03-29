@@ -17,6 +17,7 @@
   "devDependencies": {
     "@lskjs/autobind": "^0.30.7",
     "@lskjs/module": "^0.30.8",
+    "@lskjs/log": "^0.30.7",
     "lodash": "^4.17.11",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
@@ -24,6 +25,7 @@
   "peerDependencies": {
     "@lskjs/autobind": "*",
     "@lskjs/module": "*",
+    "@lskjs/log": "*",
     "lodash": "*",
     "react": "*",
     "react-dom": "*"

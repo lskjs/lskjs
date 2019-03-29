@@ -3,8 +3,8 @@ import merge from 'lodash/merge';
 import Promise from 'bluebird';
 // import Loading from '@lskjs/general/Loading';
 
-// const DEBUG = __DEV__ && false;
-const DEBUG = true;
+const DEBUG = __DEV__ && false;
+// const DEBUG = true;
 
 export default class Page {
   _page = true;
@@ -90,7 +90,7 @@ export default class Page {
 
   loading() {
     if (DEBUG) console.log('Page.loading');
-    const Loading = this.state.loading || 'Loading...';
+    const loading = this.state.loading || 'Loading...';
     // const loading = this.state.loading || <Loading full />;
     return this.component(loading);
   }
@@ -195,7 +195,7 @@ export default class Page {
     };
   }
 
-  renderRoot() {
+  render() {
     if (DEBUG) console.log('Page.renderRoot');
     const children = this.renderComponentWithLayout();
     if (!this.Root) return children;

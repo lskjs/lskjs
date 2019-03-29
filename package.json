@@ -13,28 +13,30 @@
     "release": "scripts/release.sh",
     "link": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-link.sh",
     "bump": "lerna exec --parallel -- \\$LERNA_ROOT_PATH/scripts/pack-bump.sh",
-    "dev2": "concurrently --kill-others \"yarn dev:ts\" \"yarn dev:js\"",
+    "dev2": "concurrently --kill-others \"npm dev:ts\" \"npm dev:js\"",
     "dev:js": "lerna exec --parallel -- cross-env-shell node \\$LERNA_ROOT_PATH/scripts/watch-js.js",
     "dev:ts": "lerna exec --parallel -- cross-env-shell node \\$LERNA_ROOT_PATH/scripts/watch-ts.js",
-    "lint:ci": "yarn lint:js --format ./node_modules/eslint-teamcity/index.js . && yarn lint:ts **/*.ts && yarn lint:md .",
-    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json,.html --report-unused-disable-directives",
+    "lint:ci": "npm lint:js --format ./node_modules/eslint-teamcity/index.js . && npm lint:ts **/*.ts && npm lint:md .",
+    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json,.html --report-unused-disable-directives .",
     "lint:md": "remark -q",
     "lint:ts": "tslint -p . -c tslint.json -t stylish",
     "publish:latest": "lerna publish --exact --concurrency 1 --force-publish",
     "publish:next": "npm run publish:latest -- --npm-tag=next",
     "publish:debug": "npm run publish:latest -- --npm-tag=debug --no-push",
     "test": "node ./scripts/test.js",
-    "test-latest-cra": "yarn --prefix --cwd lib/cli run test-latest-cra",
+    "test-latest-cra": "npm --prefix --cwd lib/cli run test-latest-cra",
     "test:cli": "npm --prefix lib/cli run test",
     "echo": "pwd",
+    "lint-staged": "lint-staged",
     "custom": "lerna exec --scope @lskjs/ui -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh",
     "custom2": "lerna exec --scope @lskjs/general -- \\$LERNA_ROOT_PATH/scripts/pack-watch.sh"
   },
   "author": "isuvorov",
   "license": "ISC",
+  "files": [ "build/" ],
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "devDependenciesOLD": {
@@ -64,8 +66,10 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "7.0.0-beta.42",
     "@babel/runtime": "7.1.5",
+    "jest": "23.6.0",
     "babel-eslint": "8.2.3",
     "babel-plugin-emotion": "9.2.11",
+    "babel-plugin-transform-class-property-arrow-to-bind": "^1.0.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",

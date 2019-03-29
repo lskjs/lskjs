@@ -1,14 +1,18 @@
 import map from 'lodash/map';
-import ReactDOM from 'react-dom/server';
-import renderPreloader from '@lskjs/general/Loading/renderPreloader';
+// import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
-export default class PageServer {
+export default class Html {
   constructor(props) {
     Object.assign(this, props);
   }
 
+  renderTitle() {
+    const { meta = {} } = this;
+    return meta.title;
+  }
+
   renderOGMeta() {
-    const { meta = {} } = this.page.state;
+    const { meta = {} } = this;
     return `\
 ${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}
 ${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}
@@ -17,11 +21,9 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
 `;
   }
 
-  renderFavicon = require('./renderFavicon').default
+  // renderFavicon = require('./renderFavicon').default
 
-  getRootState() {
-    return this.page.uapp.rootState;
-  }
+  renderFavicon = () => 'favicon'
 
   renderHead() {
     const js = this.renderJS();
@@ -39,11 +41,12 @@ ${this.renderPreloader()}
   }
 
   renderPreloader() {
-    return renderPreloader();
+    return 'renderPreloader'
+    // return renderPreloader();
   }
 
   renderMeta() {
-    const { meta = {} } = this.page.state;
+    const { meta = {} } = this;
     return `\
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -71,13 +74,13 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   renderStyle() {
-    const styles = this.page.uapp.styles || [];
+    const { styles = [] } = this;
     return `<style id="css">${(styles).join('\n')}</style>`;
   }
 
 
   renderJS() {
-    if (__CLIENT__) return '';
+    return '';
     // window.__STAGE='${process.env.STAGE || 'develop'}';
     return `
       window.__VERSION='${__VERSION}';
@@ -88,10 +91,9 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   renderChunks(type, chunk = 'client') {
-    const props = this.page.uapp;
-    if (!props || !props.assets) return '';
+    if (!this.assets) return '';
     // console.log('props.assets', props.assets);
-    const assets = props.assets[chunk];
+    const assets = this.assets[chunk];
     if (type === 'css' && assets) {
       return assets
         .filter(filename => filename.includes('.css'))
@@ -112,13 +114,12 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   renderAssets(type) {
-    const props = this.page.uapp;
-    if (!props || !props.assets) return '';
-    if (type === 'css' && props.assets) {
-      return `<link rel="stylesheet" href="${props.assets['client.css']}">`;
+    if (!this.assets) return '';
+    if (type === 'css') {
+      return `<link rel="stylesheet" href="${this.assets['client.css']}">`;
     }
-    if (type === 'js' && props.assets) {
-      return `<script id="js" src="${props.assets['client.js']}"></script>`;
+    if (type === 'js') {
+      return `<script id="js" src="${this.assets['client.js']}"></script>`;
     }
     return '';
   }
@@ -148,21 +149,8 @@ ${this.page.footer || ''}
 `;
   }
 
-  renderHtml() {
-    let root;
-    let rootDom;
-    try {
-      rootDom = this.renderRoot();
-      root = ReactDOM.renderToStaticMarkup(rootDom); // because async style render
-    } catch (err) {
-      const text = ['Error', 'Page.renderHtml', 'ReactDOM.renderToStaticMarkup', ''].join(':\n');
-      console.error(text, err);
-      // __DEV__ && console.log(err);
-      if (__DEV__) {
-        return `<pre>${text}${err.stack}</pre>`;
-      }
-      return err.message;
-    }
+
+  render() {
     return `\
   <!doctype html>
   <html class="${this.getHtmlClass()}">
@@ -171,15 +159,32 @@ ${this.page.footer || ''}
     </head>
     <body>
       <div id="root"/>
-        ${root}
+        ${this.content}
       </div>
       <script>
-        window.__ROOT_STATE__ = ${JSON.stringify(this.getRootState(), null, __DEV__ ? 4 : 0)};
+        window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};
       </script>
       ${this.renderAssets('js')}
-      ${this.renderFooter()}
+      ${false && this.renderFooter()}
     </body>
   </html>
       `;
   }
+
+  // render() {
+  //   let component;
+  //   try {
+  //     component = this.page.render();
+  //   } catch (err) {
+  //     return this.renderError(err, ['Error', 'Html.render', 'page.render']);
+  //   }
+  //   let content;
+  //   try {
+  //     content = ReactDOM.renderToStaticMarkup(component); // because async style render
+  //   } catch (err) {
+  //     return this.renderError(err, ['Error', 'Html.render', 'ReactDOM.renderToStaticMarkup']);
+  //   }
+
+  //   return this.renderTemplate(content);
+  // }
 }

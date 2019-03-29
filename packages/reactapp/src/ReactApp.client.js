@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import qs from 'qs';
 // import autobind from '@lskjs/autobind';
 import merge from 'lodash/merge';
-import {createBrowserHistory} from 'history';
+import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
-import { Redbox } from './core/devUtils';
+// import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
 
 const DEBUG = __DEV__ && false;
@@ -50,11 +50,13 @@ export default class ReactApp extends Module {
   }
 
   // @autobind
-  render = async () => {
-    const req = this.getReq();
+  render = () => this.render2()
+
+  async render2() {
     if (this.uapp && this.uapp.page && this.uapp.page.exit) {
       await this.uapp.page.exit();
     }
+    const req = this.getReq();
     let page;
     try {
       page = await this.getPage(req);
@@ -75,19 +77,15 @@ export default class ReactApp extends Module {
       return;
     }
 
-    try {
-      const root = page.renderRoot();
-      this.appInstance = ReactDOM.render(root, this.container, this.postRender);
-    } catch (err) {
-      this.log.error('CSR renderRoot err (REACT RENDER ERROR)', err);
-      this.renderError(err);
-    }
+    this.appInstance = ReactDOM.render(page.render(), this.container, this.postRender);
   }
 
   renderError(error = {}) {
-    document.title = `Error: ${error.message}`;
-    const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
-    this.appInstance = ReactDOM.render(root, this.container, this.postRender);
+    console.log('ERROR', error);
+
+    // document.title = `Error: ${error.message}`;
+    // const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
+    // this.appInstance = ReactDOM.render(root, this.container, this.postRender);
   }
 
   getReq() {
@@ -106,7 +104,7 @@ export default class ReactApp extends Module {
       rootState: this.rootState,
       config: this.config,
       app: this,
-      ...params
+      ...params,
     });
     await this.uapp.start();
     return this.uapp;
@@ -125,5 +123,4 @@ export default class ReactApp extends Module {
   postRender = () => {
     this.rootState.renderCount = (this.rootState.renderCount || 0) + 1;
   }
-
 }

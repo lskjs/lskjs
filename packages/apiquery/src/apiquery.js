@@ -64,10 +64,10 @@ function ioMock(...initParams) {
         mock.connection[name](...params);
       });
 
-      mock.connection.recreateSocket = (...newInitParams2) => {
+      mock.connection.recreateSocket = (...newInitParams2) =>
         // __DEV__ && console.log('recreateSocket2', ...newInitParams2);
-        return mock.recreateSocket(...newInitParams2);
-      };
+        mock.recreateSocket(...newInitParams2)
+      ;
       // __DEV__ && console.log('recreateConnection');
       return mock.connection;
     },
@@ -220,10 +220,12 @@ ${JSON.stringify(res.json, null, 2)}
 
   getCtx(url, params = {}) {
     const req = Object.assign(
-      { url,
+      {
+        url,
         headers: {
           ...this.headers,
-        } },
+        },
+      },
       pick(params, AXIOS_PARAMS),
     );
 
@@ -266,7 +268,7 @@ ${JSON.stringify(res.json, null, 2)}
     const throwError = params.throwError || this.throwError;
     const afterFetch = params.afterFetch || this.afterFetch;
     const parseResult = params.parseResult || this.parseResult;
-    const timeout = params.timeout;
+    const { timeout } = params;
 
     return {
       req,
@@ -306,7 +308,7 @@ ${JSON.stringify(res.json, null, 2)}
     return res;
   }
 
-  axios(...args) {
+  fetch(...args) {
     const ctx = this.getCtx(...args);
     const { axios } = this.constructor;
     const { req, parseResult, afterFetch } = ctx;
@@ -430,5 +432,4 @@ ${JSON.stringify(res.json, null, 2)}
     );
     return res;
   }
-
 }

@@ -1,6 +1,7 @@
 import get from 'lodash/get';
 
-export default ({ api, app }) => {
+export default ({ api, app } = {}) => {
+  if (!api || !app) return api;
   api.remoteFetch = api.fetch;
   const authToken = get(this, 'rootState.token');
   api.fetch = function (...args) {

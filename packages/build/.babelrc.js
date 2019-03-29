@@ -4,6 +4,7 @@ module.exports = {
     "@babel/preset-react"
   ],
   "plugins": [
+    "transform-class-property-arrow-to-bind",
     ["@babel/plugin-proposal-decorators", { "legacy": false, "decoratorsBeforeExport": true  }],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-syntax-dynamic-import",
