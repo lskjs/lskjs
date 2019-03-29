@@ -6,10 +6,9 @@ import antimergeDeep from 'antimerge/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
 import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
-import Html from './Html';
+import BaseHtml from './Html';
 
 export default class ReactApp extends Module {
-  // BaseUapp = BaseUapp;
   name = 'App';
 
   getRootState({ req } = {}) {
@@ -89,6 +88,7 @@ export default class ReactApp extends Module {
 
 
   createHtmlRender(page) {
+    const { Html = BaseHtml } = this;
     return (content) => {
       const html = new Html({
         content,
@@ -100,7 +100,7 @@ export default class ReactApp extends Module {
   }
 
   async render(req, res) {
-    const strategy = null; // renderToNodeStream';
+    const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
     let status = 200;
     let page;
     let component;

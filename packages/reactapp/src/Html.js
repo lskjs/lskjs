@@ -2,13 +2,13 @@ import map from 'lodash/map';
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
 export default class Html {
-  constructor(props) {
+  constructor(props) {    
     Object.assign(this, props);
   }
 
   renderTitle() {
     const { meta = {} } = this;
-    return meta.title;
+    return meta.title || '';
   }
 
   renderOGMeta() {
@@ -41,7 +41,7 @@ ${this.renderPreloader()}
   }
 
   renderPreloader() {
-    return 'renderPreloader'
+    return 'renderPreloader';
     // return renderPreloader();
   }
 
@@ -80,14 +80,16 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
 
   renderJS() {
-    return '';
-    // window.__STAGE='${process.env.STAGE || 'develop'}';
+    const { js = '' } = this;
     return `
-      window.__VERSION='${__VERSION}';
-      window.__STAGE='${__STAGE}';
-      window.__INSTANCE='${__INSTANCE}';
-      window.__MASTER=${__MASTER} || false;
+${this.renderGlobals()}
+${js}
     `;
+  }
+
+  renderGlobals() {
+    const { globals = {} } = this;
+    return map(globals, (val, key) => (`window['${key}']=${JSON.stringify(val)};`)).join('');
   }
 
   renderChunks(type, chunk = 'client') {
@@ -131,7 +133,7 @@ DEBUG INFO
 
 __SERVER__: ${__SERVER__}
 __DEV__: ${__DEV__}
-__STAGE: ${__STAGE}
+__STAGE: ${__STAGE__}
 
 uapp.keys: ${Object.keys(this.page.uapp)}
 uapp.config:
@@ -142,32 +144,33 @@ ${util.inspect(this.page.state)}
   }
 
   renderFooter() {
+    const { footer } = this;
+    // ${this.page.state.footerHtml || ''}
+    // ${__DEV__ ? this.renderDebug() : ''}
     return `\
-${__DEV__ ? this.renderDebug() : ''}
-${this.page.state.footerHtml || ''}
-${this.page.footer || ''}
+${footer || ''}
 `;
   }
 
 
   render() {
     return `\
-  <!doctype html>
-  <html class="${this.getHtmlClass()}">
-    <head>
-      ${this.renderHead()}
-    </head>
-    <body>
-      <div id="root"/>
-        ${this.content}
-      </div>
-      <script>
-        window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};
-      </script>
-      ${this.renderAssets('js')}
-      ${false && this.renderFooter()}
-    </body>
-  </html>
+<!doctype html>
+<html class="${this.getHtmlClass()}">
+  <head>
+    ${this.renderHead()}
+  </head>
+  <body>
+    <div id="root"/>
+      ${this.content}
+    </div>
+    <script>
+      window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};
+    </script>
+    ${this.renderAssets('js')}
+    ${this.renderFooter()}
+  </body>
+</html>
       `;
   }
 

@@ -376,8 +376,6 @@ export default class Uapp extends Module {
 
   }
   started() {
-    console.log('started');
-
     if (__CLIENT__) {
       removeClassFromHtml('ua_js_no');
       addClassToHtml('ua_js_yes');
