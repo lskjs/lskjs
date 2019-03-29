@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/apiquery",
-  "version": "0.30.7",
+  "version": "0.31.0",
   "description": "http/s + websockets api client for Web, Node.js and React Native throw fetch or axios",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
