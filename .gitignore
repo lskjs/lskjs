@@ -1,3 +1,5 @@
+.cache
+.idea
 **/node_modules
 packages/*/build
 packages/*/release
