@@ -7,7 +7,6 @@ rm -rf node_modules && \
 npm i && \
 mkdir -p node_modules && \
 rm -rf release && \
-rm -rf release && \
 rm -rf build && \
 mkdir -p build && \
 cp -R package.json build && \
