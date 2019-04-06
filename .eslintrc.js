@@ -32,14 +32,18 @@ const res =  {
     'no-throw-literal': 'off',    
   },
   settings: {
-    'import/resolver': {
-      alias: {
-        map: [
-          ['~', path.resolve('./src/')],
-        ],
-        extensions: ['.ts', '.js', '.jsx', '.json']
-      },
-    }
+    "import/resolver": {
+      "babel-plugin-root-import": [{
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "./src"
+      }, {
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "./packages/lib1/src"
+      }, {
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "./packages/lib2/src"
+      }]
+    },
   }
 }
 

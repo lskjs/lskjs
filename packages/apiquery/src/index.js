@@ -1,1 +1,1 @@
-export { default } from './apiquery'
+export { default } from './apiquery';

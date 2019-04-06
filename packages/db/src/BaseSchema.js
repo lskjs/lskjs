@@ -5,7 +5,6 @@ import pick from 'lodash/pick';
 
 const Schema = () => { console.log('OVERWRITE ME'); };
 
-
 export default class BaseSchema {
   static Schema = Schema;
   _universal = true;
@@ -108,11 +107,7 @@ export default class BaseSchema {
         // console.log('PREPARE params.toObject', params.toObject);
         // console.log('params.toObject2@@@', params.toObject2);
         const toObjectOne = (o) => {
-          // console.log('toObjectOne');
-
           if (!params.toObject2 || !Object.keys(params.toObject2).length) return o;
-          // console.log('toObjectOne22', !!(o && o.toObject), params.toObject2, o.toObject(params.toObject2), o);
-
           if (o && o.toObject) return (o.toObject(params.toObject2));
           return o;
         };
@@ -135,7 +130,7 @@ export default class BaseSchema {
       async save(next) {
         this.wasNew = this.isNew;
         try {
-          this.preSave && await this.preSave();
+          if (this.preSave) await this.preSave();
         } catch (err) {
           return next(err);
         }
@@ -144,7 +139,7 @@ export default class BaseSchema {
     };
     this.postMethods = {
       async save() {
-        this.postSave && this.postSave();
+        if (this.postSave) this.postSave();
       },
     };
     this.indexes = [];
@@ -197,12 +192,16 @@ export default class BaseSchema {
     if (!db) {
       console.log('ERROR UniversalSchema.getMongooseModel() !db');
       throw 'ERROR UniversalSchema.getMongooseModel() !db';
-      return null;
+      // return null;
     }
     if (!this.options.collection) {
       throw '!this.options.collection';
     }
-    return db.model(this.options.model || this.generateMongooseName(this.options.collection), this.getMongooseSchema(), this.options.collection);
+    return db.model(
+      this.options.model || this.generateMongooseName(this.options.collection),
+      this.getMongooseSchema(),
+      this.options.collection,
+    );
   }
 
   run({ db } = {}) {

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "checkJs": true,
+    "baseUrl": "./",  
+    "paths": {
+      "~/*" : [
+       "./*",
+       "packages/lib1/src/*"
+      ]
+    }
+  }
+}

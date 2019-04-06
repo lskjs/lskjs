@@ -66,6 +66,14 @@
     "react": "*"
   },
   "scripts": {
-    "postversion": "../../scripts/pack-release.sh"
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh"
   }
 }

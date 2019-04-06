@@ -7,7 +7,8 @@ export default async (ctx, params = {}) => {
     keepAlive: true,
     useNewUrlParser: true,
     // reconnectTries: __DEV__ ? 10000 : 30,
-    // reconnectInterval: __DEV__ ? 30000 : 1000, // sets the delay between every retry (milliseconds)
+    // reconnectInterval: __DEV__ ? 30000 : 1000,
+    // sets the delay between every retry (milliseconds)
   };
   // console.log('options', options);
   // ctx.log.trace('db.init');
@@ -22,7 +23,9 @@ export default async (ctx, params = {}) => {
     };
     const dbname = (uri || '').split('@')[1];
     ctx.log.trace('db.connect()', dbname, finalOptions);
-    return new Promise((resolve, reject) => mongoose.connect(uri, finalOptions).then(resolve, reject));
+    return new Promise((resolve, reject) => (
+      mongoose.connect(uri, finalOptions).then(resolve, reject)
+    ));
     // return mongoose.connect(uri, finalOptions); // , options
     // return mongoose;
   };
@@ -52,7 +55,7 @@ export default async (ctx, params = {}) => {
   });
   mongoose.connection.on('error', (err) => {
     ctx.log.error('db.error', err);
-    const interval = reconnectIteration++ * 2000 + 1000;
+    const interval = reconnectIteration++ * 2000 + 1000; // eslint-disable-line no-plusplus
     ctx.log.warn(`db.reconnect after ${interval} ms`);
     setTimeout(mongoose.reconnect, interval);
   });

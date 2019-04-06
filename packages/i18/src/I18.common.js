@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import moment from 'moment';
 import i18nextXhrBackend from 'i18next-xhr-backend';
 import Promise from 'bluebird';
 

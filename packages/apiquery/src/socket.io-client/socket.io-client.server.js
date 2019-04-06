@@ -1,6 +1,6 @@
-export default function(url, options) {
+export default function () {
   return {
-    __noSuchMethod__ : function(id, args) {
-    }
-  }
+    __noSuchMethod__() {
+    },
+  };
 }

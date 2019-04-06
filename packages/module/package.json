@@ -9,6 +9,9 @@
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/module",
   "keywords": [],
+  "dependencies": {
+    "eventemitter3": "^3.1.0"
+  },
   "devDependencies": {
     "@lskjs/log": "^0.32.0",
     "bluebird": "^3.5.3",
@@ -20,9 +23,14 @@
     "lodash": "*"
   },
   "scripts": {
-    "postversion": "../../scripts/pack-release.sh"
-  },
-  "dependencies": {
-    "eventemitter3": "^3.1.0"
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh"
   }
 }
