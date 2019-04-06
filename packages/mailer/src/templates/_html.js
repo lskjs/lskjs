@@ -1,6 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable indent */
-
 export default class Template {
   theme = { colors: {} };
   config = {}

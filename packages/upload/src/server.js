@@ -1,6 +1,6 @@
 import multer from 'multer';
 import fs from 'fs';
-import path from 'path';
+import nodepath from 'path';
 import random from 'lodash/random';
 import aws from 'aws-sdk';
 import multerS3 from 'multer-s3';
@@ -20,7 +20,7 @@ export default ctx => class LskUpload {
 
   getFileType(file) {
     if (file && file.originalname) {
-      const res = file.originalname.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);
+      const res = file.originalname.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);  //eslint-disable-line
       if (res && res[1]) {
         return res[1];
       }
@@ -36,7 +36,7 @@ export default ctx => class LskUpload {
     if (!fs.existsSync(targetDir)) {
       targetDir.split('/').forEach((dir, index, splits) => {
         const parent = splits.slice(0, index).join('/');
-        const dirPath = path.resolve(parent, dir);
+        const dirPath = nodepath.resolve(parent, dir);
         if (!fs.existsSync(dirPath)) {
           fs.mkdirSync(dirPath);
         }
@@ -84,7 +84,7 @@ export default ctx => class LskUpload {
       contentType: multerS3.AUTO_CONTENT_TYPE,
       acl: 'public-read',
       key3: (req, file, cb) => {
-        const filename = path.parse(file.originalname);
+        const filename = nodepath.parse(file.originalname);
         // console.log({ req, file });
         // console.log(`avatar_${req.user._id}.${filename.ext}`);
         cb(null, `avatar_${req.user._id}.${filename.ext}`);
@@ -106,7 +106,7 @@ export default ctx => class LskUpload {
   }
 
   getDiskStorage() {
-    const config = ctx.config.upload;
+    // const config = ctx.config.upload;
     const storage = multer.diskStorage({
       destination: (req, file, cb) => {
         // console.log('destination');
@@ -126,7 +126,7 @@ export default ctx => class LskUpload {
         let filename;
         try {
           path = this.getFilePath(req, file);
-          filename = path.split('/').reverse()[0];
+          [filename] = path.split('/').reverse();
         } catch (err) {
           return cb(err);
         }
@@ -168,10 +168,7 @@ export default ctx => class LskUpload {
   }
 
   getApi() {
-    const { e400, e403 } = ctx.errors;
     const config = ctx.config.upload;
-
-
     function processFile(file) {
       if (config.s3) {
         return {
@@ -200,7 +197,7 @@ export default ctx => class LskUpload {
       return files.map(processFile);
     });
 
-    const upload = multer();
+    // const upload = multer();
     // api.post('/', this.multer.single('file'), async (req) => {
     api.post('/', this.multer.single('file'), async (req) => {
       const { file } = req;

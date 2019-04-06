@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import Promise from 'bluebird';
 import logger from '@lskjs/log';
 // import PromiseMap from 'bluebird/js/release/map';
-import emitter from './emitter';
+import Emitter from './emitter';
 // import createLoggerMock from './logger/createLoggerMock';
 // import config from './config';
 
@@ -32,7 +32,11 @@ export default class Core {
   }
 
   emit(...args) {
-    this.log ? this.log.trace(`${this.name}`, ...args) : console.log(`${this.name}`, ...args);
+    if (this.log) {
+      this.log.trace(`${this.name}`, ...args);
+    } else {
+      console.log(`${this.name}`, ...args); // eslint-disable-line no-console
+    }
     if (this.ee) this.ee.emit(...args);
   }
   on(...args) {
@@ -48,7 +52,7 @@ export default class Core {
   }
 
   async beforeInit() {
-    if (!this.ee) this.ee = new emitter();
+    if (!this.ee) this.ee = new Emitter();
     if (!this.log) this.log = this.createLogger();
     if (this.log) this.ee.on('*', event => this.log.trace(event));
   }
@@ -73,7 +77,6 @@ export default class Core {
     // console.log('this.getModulesSequence()', this.getModulesSequence());
 
     return Promise.map(this.getModulesSequence(), (pack) => {
-      // this.log.trace(`@@@@ module ${pack.name}.${method}()`, typeof pack.module[method], pack.module);
       if (!(pack.module && isFunction(pack.module[method]))) return null;
       // let res;
       try {
@@ -102,7 +105,7 @@ export default class Core {
       }
     });
     this.modules = modules;
-    DEBUG && this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
+    if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
     // this.log.debug('_modules', Object.keys(this._modules));
     return this.broadcastModules('init');
   }
@@ -169,7 +172,7 @@ export default class Core {
       if (this.log && this.log.fatal) {
         this.log.fatal(`${this.name}.start() err`, err);
       } else {
-        console.error(`${this.name}.start() err`, err);
+        console.error(`${this.name}.start() err`, err); // eslint-disable-line no-console
       }
       if (typeof process !== 'undefined' && process.exit) {
         process.exit(1);
@@ -195,7 +198,7 @@ export default class Core {
       if (this.log && this.log.fatal) {
         this.log.fatal(`${this.name}.stop() err`, err);
       } else {
-        console.error(`${this.name}.stop() err`, err);
+        console.error(`${this.name}.stop() err`, err); // eslint-disable-line no-console
       }
       if (typeof process !== 'undefined' && process.exit) {
         process.exit(1);

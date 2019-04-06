@@ -10,4 +10,3 @@ export default (obj = {}) => {
   });
   return res;
 };
-

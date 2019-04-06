@@ -25,7 +25,7 @@ export default class I18 {
   }
   async init(params) {
     this.instance = await this.getI18(params);
-    if (!this.config) console.error('!i18.config');
+    if (!this.config) console.error('!i18.config'); // eslint-disable-line no-console
     if (this.config && this.config.locales) {
       this.locales = this.config.locales;
     } else {

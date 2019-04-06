@@ -3,8 +3,7 @@ import forEach from 'lodash/forEach';
 import { Passport } from 'passport';
 import onlineService from './server/onlineService';
 
-export default (ctx) => {
-  return class AuthModule {
+export default ctx => class AuthModule {
     config = get(ctx, 'config.auth', {});
     canonize = require('./server/canonize').default.bind(this);
     canonizeAndValidatePhone = require('./server/canonizeAndValidatePhone').default.bind(this);
@@ -25,7 +24,6 @@ export default (ctx) => {
       ctx.middlewares.parseUser = [
         ctx.middlewares.parseUser,
         (req, res, next) => {
-          // console.log('!req.headers.offline', !req.headers.offline, req.headers.offline, req.headers);
           if (req.user && req.user._id && !req.headers.offline) {
             this.online.touchOnline(req.user._id);
           }
@@ -105,9 +103,7 @@ export default (ctx) => {
       api.all('/recovery', this.controller.recovery);
       api.all('/updateToken', this.controller.updateToken);
       api.all('/loginToken', this.controller.loginToken);
-      api.all('/email/approve', this.controller.emailApprove, (req, res) => {
-        return res.redirect('/cabinet');
-      });
+      api.all('/email/approve', this.controller.emailApprove, (req, res) => res.redirect('/cabinet'));
       api.all('/phone/code', this.controller.phoneCode);
       api.all('/phone/approve', this.controller.phoneApprove);
       api.all('/phone/login', this.controller.phoneLogin);
@@ -131,5 +127,4 @@ export default (ctx) => {
 
       return api;
     }
-  };
 };

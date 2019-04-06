@@ -8,7 +8,7 @@ export default (ctx, module) => {
     //   const user = await User.findOne();
     //   return req.template;
     // },
-    async test(req) {
+    async test() {
       return 'test';
     },
     async email(req) {

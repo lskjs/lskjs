@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const clogs = {
-  _default: console.log,
-  trace: console.log,
-  log: console.log,
-  warn: console.warn,
-  error: console.error,
+  _default: console.log, // eslint-disable-line no-console
+  trace: console.log, // eslint-disable-line no-console
+  log: console.log, // eslint-disable-line no-console
+  warn: console.warn, // eslint-disable-line no-console
+  error: console.error, // eslint-disable-line no-console
 };
 
 const statuses = {
@@ -33,11 +33,11 @@ class Logger {
     const { prefix } = this;
     const clog = clogs[action] || clogs._default;
     const status = statuses[action] || statuses._default;
-    function addHash(tag) {
-      if (['#', '@'].includes(tag[0])) {
+    // function addHash(tag) {
+    //   if (['#', '@'].includes(tag[0])) {
 
-      }
-    }
+    //   }
+    // }
     const tags = (params.tags || []).map(t => (['#', '@'].includes(t[0]) ? '' : `#${t}`)).join(' ');
     const errText = params.err;
 
@@ -45,7 +45,6 @@ class Logger {
     clog(md);
 
     const url = [this.base, this.project].join('/');
-    // console.log({url});
 
     return axios.post(url, {
       action,
@@ -53,7 +52,7 @@ class Logger {
       text: md,
       tags: params.tags,
     }).catch((err) => {
-      console.log(`Logger.${action} error`, err);
+      console.log(`Logger.${action} error`, err); // eslint-disable-line no-console
       return null;
     });
   }

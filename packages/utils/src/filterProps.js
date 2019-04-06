@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // https://raw.githubusercontent.com/emotion-js/emotion/master/packages/is-prop-valid/src/props.js
 export const validProps = {
   //  https://reactjs.org/docs/events.html

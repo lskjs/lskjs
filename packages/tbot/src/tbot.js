@@ -9,13 +9,13 @@ export default ({ config }) => {
   Promise.config = () => {}; // херов багфикс для телеграма
   let TelegramBot;
   if (!config) {
-    DEBUG && console.log('!tbot.config');
+    if (DEBUG) console.log('!tbot.config'); // eslint-disable-line no-console
     return null;
   }
   try {
     TelegramBot = require('node-telegram-bot-api');
   } catch (err) {
-    DEBUG && console.log('TelegramBot init', err);
+    if (DEBUG) console.log('TelegramBot init', err); // eslint-disable-line no-console
     return null;
   }
 
@@ -49,25 +49,25 @@ export default ({ config }) => {
       let text;
       if (args.length === 1) {
         ids = getIds('root');
-        text = args[0];
+        text = args[0]; // eslint-disable-line prefer-destructuring
       } else {
         ids = getIds(args[0]);
-        text = args[1];
+        text = args[1]; // eslint-disable-line prefer-destructuring
       }
       const debugIds = getIds('debug');
       debugIds.forEach((id) => {
         try {
-          tbot.sendMessage(id, `#debug ${args[0]} => ${JSON.stringify(ids)}\n\n${text}`).catch((err) => { console.log('tbot.sendMessage err', err); });
+          tbot.sendMessage(id, `#debug ${args[0]} => ${JSON.stringify(ids)}\n\n${text}`).catch((err) => { console.log('tbot.sendMessage err', err); }); // eslint-disable-line no-console
         } catch (err) {
-          DEBUG && console.log('tbot.sendMessage err', err);
+          if (DEBUG) console.error('tbot.sendMessage err', err); // eslint-disable-line no-console
         }
       });
       ids.forEach((id) => {
         try {
           // console.log('this.tbot.sendMessage', id);
-          tbot.sendMessage(id, text).catch((err) => { console.log('tbot.sendMessage err', err); });
+          tbot.sendMessage(id, text).catch((err) => { console.log('tbot.sendMessage err', err); }); // eslint-disable-line no-console
         } catch (err) {
-          DEBUG && console.log('tbot.sendMessage err', err);
+          if (DEBUG) console.error('tbot.sendMessage err', err); // eslint-disable-line no-console
         }
       });
     };
@@ -76,7 +76,7 @@ export default ({ config }) => {
     };
     // this.tbot.notify('Всем приветик в этом чатике');
   } catch (err) {
-    DEBUG && console.log('TelegramBot', err);
+    if (DEBUG) console.error('TelegramBot', err); // eslint-disable-line no-console
   }
 
   return tbot;

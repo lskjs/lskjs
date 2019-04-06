@@ -3,9 +3,9 @@ import autobind from '@lskjs/autobind';
 import debounce from 'lodash-decorators/debounce';
 import isEmpty from 'lodash/isEmpty';
 import every from 'lodash/every';
+import connectListStore from '../utils/connectListStore';
 import SelectStore from './SelectStore';
 import FetchStore from './FetchStore';
-import connectListStore from '../utils/connectListStore';
 
 export default class ListStore extends FetchStore {
   static connect = connectListStore;

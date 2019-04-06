@@ -4,11 +4,10 @@ import {
   action,
 } from 'mobx';
 import axios from 'axios';
-import omitEmpty from '../utils/omitEmpty';
-import Progress from '../utils/Progress';
+import omitEmpty from '@lskjs/utils/omitEmpty';
+import insertArray from '@lskjs/utils/insertArray';
 
 import Store from './Store';
-import insertArray from '../utils/insertArray';
 
 const { CancelToken } = axios;
 
@@ -82,7 +81,7 @@ export default class FetchStore extends Store {
     if (this.loading) this.cancelFetch();
     this.loading = true;
     this.cancelToken = CancelToken.source();
-    this.progress && this.progress.start();
+    if (this.progress) this.progress.start();
     try {
       const { items, count } = await this.find({
         skip,
@@ -96,7 +95,7 @@ export default class FetchStore extends Store {
     } finally {
       this.loading = false;
       this.cancelToken = null;
-      this.progress && this.progress.done();
+      if (this.progress) this.progress.done();
     }
   }
 
@@ -104,7 +103,7 @@ export default class FetchStore extends Store {
     if (!(this.cancelToken && this.cancelToken.cancel)) return;
     this.loading = false;
     this.cancelToken.cancel();
-    this.progress && this.progress.done();
+    if (this.progress) this.progress.done();
   }
 
   canFetchMore(dir = 1) {

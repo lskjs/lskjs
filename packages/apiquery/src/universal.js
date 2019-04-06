@@ -3,7 +3,7 @@ import apiquery from './apiquery';
 export default class ApiClientWeb extends apiquery {
   constructor(props) {
     super(props);
-    console.log('ApiClientWeb', this.url);
+    console.log('ApiClientWeb', this.url);  //eslint-disable-line
     if (!this.url) {
       if (__CLIENT__) {
         this.url = window.location.origin;
@@ -14,6 +14,6 @@ export default class ApiClientWeb extends apiquery {
         }
       }
     }
-    console.log('ApiClientWeb 2', this.url);
+    console.log('ApiClientWeb 2', this.url); //eslint-disable-line
   }
 }

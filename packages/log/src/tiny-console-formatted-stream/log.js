@@ -1,4 +1,6 @@
-import { TRACE, DEBUG, INFO, WARN, ERROR, FATAL, nameFromLevel } from '@browser-bunyan/levels';
+import {
+  TRACE, DEBUG, INFO, WARN, ERROR, FATAL, nameFromLevel,
+} from '@browser-bunyan/levels';
 
 const DEFAULT_CSS = {
   levels: {
@@ -21,7 +23,8 @@ export default class ConsoleFormattedStream {
   }
 
   write(rec) {
-    let levelCss, consoleMethod;
+    let levelCss; let
+      consoleMethod;
     const defaultCss = this.css.def;
     const msgCss = this.css.msg;
     const srcCss = this.css.src;
@@ -38,9 +41,9 @@ export default class ConsoleFormattedStream {
       } else if (rec.level === FATAL) {
         levelName = 'error';
       }
-      consoleMethod = typeof console[levelName] === 'function' ? console[levelName] : console.log;
+      consoleMethod = typeof console[levelName] === 'function' ? console[levelName] : console.log; // eslint-disable-line no-console
     } else {
-      consoleMethod = console.log;
+      consoleMethod = console.log;// eslint-disable-line no-console
     }
 
     if (rec.level < DEBUG) {
@@ -57,7 +60,7 @@ export default class ConsoleFormattedStream {
       levelCss = this.css.levels.fatal;
     }
 
-    const padZeros = (number, len) => Array((len + 1) - (`${number}`).length).join('0') + number;
+    // const padZeros = (number, len) => Array((len + 1) - (`${number}`).length).join('0') + number;
 
     const logArgs = [];
     // [time] level: loggerName: msg src?

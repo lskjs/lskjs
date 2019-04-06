@@ -38,9 +38,9 @@ export default class SelectStore extends Store {
 
   globalIsChecked() {
     return (
-      this.items.length > 0 &&
-      this.items.length >= this.listStore.items.length &&
-      unionBy(this.items, this.listStore.items, this.idKey).length === this.items.length
+      this.items.length > 0
+      && this.items.length >= this.listStore.items.length
+      && unionBy(this.items, this.listStore.items, this.idKey).length === this.items.length
     );
   }
 

@@ -8,17 +8,13 @@ if (typeof __DEV__ === 'undefined' && !globalOrWindow.__DEV__) {
 if (!globalOrWindow.__STAGE__ && !globalOrWindow.__STAGE__) {
   globalOrWindow.__STAGE__ = 'stage';
 }
-// console.log({
-//   __SERVER__,
-//   __CLIENT__,
-//   __DEV__
-// });
 
 // if (__SERVER__) {
 //   process.on('unhandledRejection', (err) => {
 //     console.error('Promise: Unhandled Rejection'); // eslint-disable-line
 //     console.error(err.stack); //eslint-disable-line
-//     if (typeof err.message === 'string' && err.message.indexOf('reason: socket hang up') !== -1) {
+//     if (typeof err.message === 'string' &&
+//  err.message.indexOf('reason: socket hang up') !== -1) {
 //       console.error('socket hang up => process.exit'); // eslint-disable-line
 //       process.exit(1);
 //       // process.kill();
@@ -27,7 +23,7 @@ if (!globalOrWindow.__STAGE__ && !globalOrWindow.__STAGE__) {
 //   });
 // }
 if (__DEV__) {
-  console.log('Compiling ...');
+  console.log('Compiling ...'); // eslint-disable-line no-console
 }
 global.startedAt = Date.now();
 global.timing = () => Date.now() - global.startedAt;
@@ -53,7 +49,7 @@ if (!global._babelPolyfill) {
 
 export default function ready(cb) {
   if (__DEV__) {
-    console.log(`🔥  Compiled [${global.timing()}ms]`);
+    console.log(`🔥  Compiled [${global.timing()}ms]`); // eslint-disable-line no-console
   }
   if (typeof cb === 'function') cb();
 }

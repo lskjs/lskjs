@@ -1,11 +1,9 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable indent */
 import mjml2html from 'mjml';
 // import { mjml2html } from 'mjml';
 import Template from './_html';
 
 export default class Base extends Template {
-
   getHtml() {
     const { errors, html } = mjml2html(this.render());
     if (__DEV__) {
@@ -203,8 +201,6 @@ export default class Base extends Template {
   }
 
   header({ logo = this.config.logo, image = this.config.headerImage } = {}) {
-    console.log({logo, config: this.config});
-    
     return `
       <mjml>
         <mj-head>

@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable indent */
 import Base from './_mjml';
 
@@ -16,8 +15,6 @@ ${this.props.link}
   }
 
   render() {
-    console.log('EMMAIL', this.props);
-    
     return `
       ${this.header()}
       ${this.content(`

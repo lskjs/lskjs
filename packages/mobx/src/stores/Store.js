@@ -21,7 +21,7 @@ export default class Store {
 
   @action
   setState(state = {}) {
-    for (const item in state) {
+    for (const item in state) {  //eslint-disable-line
       this.setStateField(item, state[item]);
     }
     return this;

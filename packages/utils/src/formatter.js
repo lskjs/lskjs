@@ -52,7 +52,7 @@ export function toShort(price) {
       [10 ** (3 * 1), 'k'],
     ];
 
-    for (const key of keys) {
+    for (const key of keys) {  //eslint-disable-line
       if (price > key[0]) {
         return numberWithSpaces(+toFixedWithoutRounding((price / key[0]), 2)) + key[1];
       }

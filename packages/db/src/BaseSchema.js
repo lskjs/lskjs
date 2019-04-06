@@ -3,7 +3,7 @@ import Promise from 'bluebird';
 import clone from 'lodash/clone';
 import pick from 'lodash/pick';
 
-const Schema = () => { console.log('OVERWRITE ME'); };
+const Schema = () => { console.error('OVERWRITE ME'); }; // eslint-disable-line no-console
 
 export default class BaseSchema {
   static Schema = Schema;
@@ -190,7 +190,7 @@ export default class BaseSchema {
 
   getMongooseModel(db) {
     if (!db) {
-      console.log('ERROR UniversalSchema.getMongooseModel() !db');
+      // console.log('ERROR UniversalSchema.getMongooseModel() !db');
       throw 'ERROR UniversalSchema.getMongooseModel() !db';
       // return null;
     }
