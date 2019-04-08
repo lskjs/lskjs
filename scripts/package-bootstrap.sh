@@ -14,10 +14,7 @@ rm -rf build && \
 mkdir -p build && \
 cp -R package.json build && \
 cp -R package-lock.json build && \
-cd build && \
-npm link && \
 $DIR/package-link.sh && \
-cd .. && \
 cp -R node_modules build && \
 echo "OK"
 

@@ -2,11 +2,12 @@ module.exports = {
   presets: [
     '@babel/preset-env',
     '@babel/preset-react',
+    '@babel/typescript'
     // '@babel/preset-stage-0',
   ],
   plugins: [
     'transform-class-property-arrow-to-bind',
-    ['@babel/plugin-proposal-decorators', { legacy: false, decoratorsBeforeExport: true }],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-syntax-dynamic-import',
     // '@babel/plugin-proposal-optional-chaining',

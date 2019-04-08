@@ -10,9 +10,10 @@
     "release": "lerna publish --skip-npm",
     "bootstrap": "lerna exec -- npm run bootstrap",
     "build": "lerna exec -- npm run build",
-    "watch": "lerna exec -- npm run dev",
+    "watch": "lerna run --parallel watch",
     "link": "lerna exec -- npm run link",
     "bump": "lerna exec -- npm run bump",
+    "storybook": "./scripts/storybook.sh",
     "lint": "npm run lint:js && npm run lint:md .",
     "lint:ci": "npm runlint:js --format ./node_modules/eslint-teamcity/index.js . && npm lint:ts **/*.ts && npm lint:md .",
     "lint:js": "lerna exec -- npm run lint:js",
@@ -54,7 +55,11 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0-beta.42",
     "@babel/preset-stage-0": "^7.0.0",
-    "@babel/runtime": "7.1.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/runtime": "^7.4.3",
+    "@storybook/react": "^5.0.6",
+    "@types/react": "^16.8.13",
+    "@types/storybook__react": "^4.0.1",
     "babel-eslint": "8.2.3",
     "babel-jest": "^24.7.1",
     "babel-plugin-emotion": "9.2.11",
@@ -81,9 +86,8 @@
     "remark-cli": "^6.0.1",
     "remark-preset-lint-recommended": "^3.0.2",
     "size-limit": "^1.0.0",
+    "storybox": "^1.1.0",
+    "typescript": "^3.4.2",
     "yaspeller": "^5.0.1"
-  },
-  "dependencies": {
-    "lerna-jsconfig": "^0.1.4"
   }
 }
