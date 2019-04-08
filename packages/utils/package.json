@@ -11,7 +11,8 @@
   "keywords": [],
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "react": "^16.8.6"
   },
   "peerDependencies": {
     "@babel/polyfill": "*",
