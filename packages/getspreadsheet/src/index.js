@@ -29,7 +29,11 @@ const start = async (url, filename) => {
       const a = await auth();
       body = await get(a, { fileId: spreadsheetId, gid: sheetId });
     }
-    fs.writeFileSync(`${filename}.csv`, body, 'utf8');
+    if (filename) {
+      fs.writeFileSync(`${filename}`, body, 'utf8');
+    } else {
+      console.log(body);
+    }
   } catch (e) {
     if (e && e.statusCode == '404') {
       console.log('File not found');
@@ -60,10 +64,6 @@ const cli = meow(`
 if (!cli.input[0]) {
   console.log('URL not found');
 }
-
-if (!cli.flags.filename) {
-  console.log('filename not found');
-}
-if (cli.input[0] && cli.flags.filename) {
+if (cli.input[0]) {
   start(cli.input[0], cli.flags.filename);
 }

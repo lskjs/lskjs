@@ -28,5 +28,8 @@
     "link": "../../scripts/package-link.sh",
     "bump": "../../scripts/package-bump.sh",
     "release": "../../scripts/package-release.sh"
+  },
+  "dependencies": {
+    "csv-string": "^3.1.5"
   }
 }
