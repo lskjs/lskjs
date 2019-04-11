@@ -40,13 +40,15 @@ const start = async (url, filename) => {
 };
 const cli = meow(`
 	Usage
-	  $ script URL --filename name.json
+    $ getspreadsheet URL > name.json
+	  $ getspreadsheet URL --filename name.json
 
 	Options
 	  --filename  File name
 
 	Examples
-	  $ script https://docs.google.com/spreadsheets/d/1_qVnTw1Cwb2Ziwta_N0p-V4_ptD6-ZypDvCIrnryNF/edit#gid=0 --filename locales.csv
+	  $ getspreadsheet https://docs.google.com/spreadsheets/d/1_qVnTw1Cwb2Ziwta_N0p-V4_ptD6-ZypDvCIrnryNF/edit#gid=0 --filename locales.csv
+	  $ getspreadsheet https://docs.google.com/spreadsheets/d/1_qVnTw1Cwb2Ziwta_N0p-V4_ptD6-ZypDvCIrnryNF/edit#gid=0 > locales.csv
 `, {
     flags: {
       filename: {
