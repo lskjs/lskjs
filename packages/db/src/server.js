@@ -6,8 +6,10 @@ export default async (ctx, params = {}) => {
   const defaultOptions = {
     keepAlive: true,
     useNewUrlParser: true,
-    // reconnectTries: __DEV__ ? 10000 : 30,
-    // reconnectInterval: __DEV__ ? 30000 : 1000,
+    autoReconnect: true,
+    reconnectTries: __DEV__ ? 10000 : 30,
+    reconnectInterval: __DEV__ ? 30000 : 1000,
+    connectTimeoutMS: 5000,
     // sets the delay between every retry (milliseconds)
   };
   // console.log('options', options);

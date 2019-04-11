@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "csv-parse": "^4.3.4",
+    "googleapis": "27",
+    "got": "^9.6.0",
+    "lodash": "^4.17.11",
+    "meow": "^5.0.0",
+    "mkdirp": "^0.5.1"
+  }
+}
