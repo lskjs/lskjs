@@ -1,16 +1,16 @@
-const fs = require('fs');
-const groupBy = require('lodash/groupBy');
-const forEach = require('lodash/forEach');
-const parse = require('csv-parse')
-const { promisify } = require('util');
-const mkdirp = require('mkdirp');
-const rimraf = require('rimraf');
-const { getKeyValJson, parseRawJson, parseTxt } = require('./utils');
+import fs from 'fs';
+import groupBy from 'lodash/groupBy';
+import forEach from 'lodash/forEach';
+import parse from 'csv-parse';
+import { promisify } from 'util';
+import mkdirp from 'mkdirp';
+import rimraf from 'rimraf';
+import { getKeyValJson } from './utils';
 const parseAsync = promisify(parse);
+const readFileAsync = promisify(fs.readFile);
 
 // const blackListNs = ['events', 'adminTelegram', 'document'];
 const locales = ['ru', 'en'];
-const rawDir = 'locales-raw'; // `${__dirname}/../public/locales`;
 const localesDirname = 'locales';
 // const urls = [
 //   'locales-raw/lsk.csv',
@@ -23,15 +23,12 @@ const files = [
   // 'locales-raw/buzzguru-analytics.csv',
 ];
 
-(async () => {
-  const localesRows = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for (const file of files) {
-    const csvStr = fs.readFileSync(file, 'utf8');
-    // eslint-disable-next-line no-await-in-loop
-    const rows = await parseAsync(csvStr, { columns: true });
-    localesRows.push(...rows);
-  }
+const localesRows = [];
+Promise.all(files.map(async (file) => {
+  const csvStr = await readFileAsync(file, 'utf8');
+  const rows = await parseAsync(csvStr, { columns: true });
+  localesRows.push(...rows);
+})).then(() => {
   try {
     rimraf.sync(`${localesDirname}`);
     mkdirp.sync(`${localesDirname}`);
@@ -53,4 +50,4 @@ const files = [
       fs.writeFileSync(`${dirname}/${ns}.json`, JSON.stringify(getKeyValJson(rows, locale), null, 2));
     });
   });
-})();
+});

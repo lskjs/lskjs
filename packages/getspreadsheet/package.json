@@ -1,4 +1,5 @@
 {
+  "name": "@lskjs/getspreadsheet",
   "dependencies": {
     "csv-parse": "^4.3.4",
     "googleapis": "27",
@@ -6,5 +7,8 @@
     "lodash": "^4.17.11",
     "meow": "^5.0.0",
     "mkdirp": "^0.5.1"
+  },
+  "scripts": {
+    "build": "../../scripts/package-build.sh"
   }
 }
