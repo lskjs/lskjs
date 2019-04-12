@@ -30,6 +30,7 @@ const start = async ({ locales, link, dist }) => {
   const links = Array.isArray(link) ? link : [link];
 
   const spreadsheets = await Promise.all(links.map(getSpreadsheet));
-  buildLocales(spreadsheets, localesArray, dist);
+  await buildLocales(spreadsheets, localesArray, dist);
+  console.log('Complete');
 };
 start(cli.flags);
