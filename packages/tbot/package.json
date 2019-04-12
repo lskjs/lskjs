@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/tbot",
-  "version": "0.32.2",
+  "version": "0.33.0",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
