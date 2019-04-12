@@ -1,0 +1,14 @@
+{
+  "name": "@lskjs/config",
+  "dependencies": {
+    "csv-parse": "^4.4.0",
+    "csvtojson": "^2.0.8",
+    "jsongrid": "^1.0.2",
+    "lodash": "^4.17.11",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.3"
+  },
+  "scripts": {
+    "build": "../../scripts/package-build.sh"
+  }
+}
