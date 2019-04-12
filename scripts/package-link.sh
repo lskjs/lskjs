@@ -1,4 +1,4 @@
-cd build && \
+cd build
 npm link
 # npm link \
 npm link @lskjs/apiquery
@@ -29,4 +29,4 @@ npm link @lskjs/uapp
 npm link @lskjs/ui
 npm link @lskjs/upload
 npm link @lskjs/utils
-&& cd ..
+cd ..
