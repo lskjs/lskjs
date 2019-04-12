@@ -1,5 +1,14 @@
 {
   "name": "@lskjs/getspreadsheet",
+  "version": "0.32.2",
+  "description": "LSK getspreadsheet.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/getspreadsheet",
+  "keywords": [],
   "dependencies": {
     "csv-parse": "^4.3.4",
     "googleapis": "27",

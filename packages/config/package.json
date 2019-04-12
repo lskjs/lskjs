@@ -1,5 +1,14 @@
 {
   "name": "@lskjs/config",
+  "version": "0.32.2",
+  "description": "LSK config.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/config",
+  "keywords": [],
   "dependencies": {
     "csv-parse": "^4.4.0",
     "csvtojson": "^2.0.8",
