@@ -81,6 +81,7 @@
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
     "react": "^16.8.6",
+    "react-styleguidist": "^9.0.6",
     "react-test-renderer": "^16.8.6",
     "remark": "^10.0.1",
     "remark-cli": "^6.0.1",
@@ -88,6 +89,7 @@
     "size-limit": "^1.0.0",
     "storybox": "^1.1.0",
     "typescript": "^3.4.2",
+    "webpack": "^4.29.6",
     "yaspeller": "^5.0.1"
   }
 }
