@@ -36,6 +36,7 @@
     "@lskjs/db": "^0.32.2",
     "@lskjs/i18": "^0.32.2",
     "@lskjs/module": "^0.32.2",
+    "@lskjs/log": "^0.32.2",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
     "moment": "2.24.0"
@@ -45,6 +46,7 @@
     "@lskjs/db": "*",
     "@lskjs/i18": "*",
     "@lskjs/module": "*",
+    "@lskjs/log": "^0.32.2",
     "bluebird": "*",
     "lodash": "*",
     "moment": "*"
