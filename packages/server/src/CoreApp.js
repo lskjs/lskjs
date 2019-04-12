@@ -263,9 +263,6 @@ export default class CoreApp extends Module {
     this.config.redis && await this.runRedis();
   }
 
-
-
-
   createExpressApp() {
     return express();
   }
