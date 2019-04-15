@@ -37,6 +37,7 @@
     "@lskjs/i18": "^0.33.0",
     "@lskjs/log": "^0.33.0",
     "@lskjs/module": "^0.33.0",
+    "@lskjs/utils": "^0.33.0",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
     "moment": "2.24.0"
@@ -45,7 +46,8 @@
     "@lskjs/apiquery": "*",
     "@lskjs/db": "*",
     "@lskjs/i18": "*",
-    "@lskjs/log": "^0.32.2",
+    "@lskjs/log": "*",
+    "@lskjs/utils": "*",
     "@lskjs/module": "*",
     "bluebird": "*",
     "lodash": "*",

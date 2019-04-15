@@ -1,4 +1,4 @@
-import AppError from '../utils/AppError';
+import AppError from '@lskjs/utils/AppError';
 
 export default () => ({
   e: (code, message, status) => (new AppError(code, message, status)),
