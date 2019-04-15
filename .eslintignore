@@ -1,3 +1,4 @@
 **/node_modules
 packages/*/build
 packages/*/release
+packages/*/release-*
