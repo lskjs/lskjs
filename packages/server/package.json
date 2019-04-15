@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "0.33.1",
+  "version": "0.33.2",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -35,8 +35,8 @@
     "@lskjs/apiquery": "^0.33.1",
     "@lskjs/db": "^0.33.1",
     "@lskjs/i18": "^0.33.1",
-    "@lskjs/log": "^0.33.1",
-    "@lskjs/module": "^0.33.1",
+    "@lskjs/log": "^0.33.2",
+    "@lskjs/module": "^0.33.2",
     "@lskjs/utils": "^0.33.1",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
