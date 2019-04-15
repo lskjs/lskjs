@@ -3,11 +3,11 @@ import Cookies from 'js-cookie';
 export default async function (locale) {
   // TODO:
   // uapp.setState({ locale });
-  if (locale && this.user && this.user?.locale !== locale) {
+  if (locale && this.user && this.user.locale !== locale) {
     try {
       const { UserStore } = this.stores;
       await UserStore.update({
-        _id: this.user?._id,
+        _id: this.user._id,
         locale,
       });
     } catch (err) {

@@ -119,8 +119,8 @@ export default class Uapp extends Module {
   getLocale = require('./i18/getLocale').default
   setLocale = require('./i18/setLocale').default
 
-  // @autobind
-  t = (...args) => {
+  @autobind
+  t(...args) {
     // console.log('DEPRECATED uapp.t', args[0]);
     if (this.i18) return this.i18.t(...args);
     return '!uapp.i18';
@@ -196,7 +196,7 @@ export default class Uapp extends Module {
         const state = await this.api.fetch('/api/module/appstate/save', {
           method: 'POST',
           body: {
-            userId: this.user?._id,
+            userId: this.user && this.user._id,
             ...data,
             // state: data,
           },
@@ -236,7 +236,7 @@ export default class Uapp extends Module {
     // }
 
     let state = {};
-    const userId = this.user?._id;
+    const userId = this.user && this.user._id;
     if (userId) {
       // console.log('-- 1111');
       // console.log('-- 1111', this.api);
@@ -246,7 +246,7 @@ export default class Uapp extends Module {
         },
       }).catch(err => this.log.error('Uapp.initStateStorage: getOrCreate', err));
       // console.log('-- 2222');
-      if (res?.data) {
+      if (res && res.data) {
         state = {
           ...state,
           ...res.data,
@@ -297,8 +297,10 @@ export default class Uapp extends Module {
 
   // uapp.onError(t('common.errorData'), err); ??? // bad
   // uapp.onError(uapp.e('errorData', { err })); ???
-  // @autobind
-  onError = err => this.toast(err, { defaultType: 'error' })
+  @autobind
+  onError(err) {
+    return this.toast(err, { defaultType: 'error' });
+  }
 
 
   toast(err, config) {
@@ -311,7 +313,7 @@ export default class Uapp extends Module {
   }
 
   confirm(props) {
-    return this.confirmRef?.open(props);
+    return this.confirmRef && this.confirmRef.open(props);
   }
 
 
@@ -382,9 +384,6 @@ export default class Uapp extends Module {
     }
   }
 
-  confirm(props) {
-    return this.confirmRef?.open(props);
-  }
 
   async checkVersion() {
     const data = await this.api.fetch('/api/healthcheck?info=1');
