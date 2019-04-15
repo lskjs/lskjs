@@ -6,7 +6,6 @@ export default class Store {
     if (state) this.setState(state);
   }
 
-
   toJS() {
     return toJS(this);
   }

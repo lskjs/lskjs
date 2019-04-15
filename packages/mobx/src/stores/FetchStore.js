@@ -1,8 +1,5 @@
 import set from 'lodash/set';
-import {
-  observable,
-  action,
-} from 'mobx';
+import { observable, action } from 'mobx';
 import axios from 'axios';
 import omitEmpty from '@lskjs/utils/omitEmpty';
 import insertArray from '@lskjs/utils/insertArray';

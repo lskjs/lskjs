@@ -43,7 +43,9 @@ const connectListStore = async ({
     let string = getQueryFromParams(params, defaultParams);
     if (string) string = `?${string}`;
     if (page.uapp.history.location.search === string) return;
-    if (DEBUG) console.log('connectListStore: waiting for refresh', page.uapp.history.location.search, '=>', string, page.uapp); // eslint-disable-line no-console
+    if (DEBUG) {
+      console.log('connectListStore: waiting for refresh', page.uapp.history.location.search, '=>', string, page.uapp); // eslint-disable-line no-console
+    }
 
     if (__DEV__) {
       await Promise.delay(1000);
