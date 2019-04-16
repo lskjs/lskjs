@@ -1,6 +1,6 @@
 import getSpreadsheet from '@lskjs/getspreadsheet';
-import buildLocales from '@lskjs/config/build-locales';
 import meow from 'meow';
+import buildLocales from '../build-locales';
 
 const cli = meow(`
   Usage

@@ -1,0 +1,36 @@
+{
+  "name": "@lskjs/build-locales",
+  "version": "0.33.1",
+  "description": "LSK build-locales.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/build-locales",
+  "keywords": [],
+  "dependencies": {
+    "@lskjs/getspreadsheet": "^0.33.1",
+    "@lskjs/utils": "^0.33.1",
+    "csv-parse": "^4.4.0",
+    "csvtojson": "^2.0.8",
+    "jsongrid": "^1.0.2",
+    "lodash": "^4.17.11",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.3"
+  },
+  "bin": {
+    "build-locales": "./bin/build-locales.js"
+  },
+  "scripts": {
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh"
+  }
+}
