@@ -9,6 +9,7 @@ const pkgPath = path.join(currentPath, 'package.json');
 const execAsync = (cmd, opts = {}) => new Promise((resolve) => {
   exec(cmd, opts, (error, stdout) => resolve(stdout));
 });
+const DEBUG = false;
 
 async function start(pkg) {
   const allPkgs = Object.keys(
@@ -30,7 +31,7 @@ async function start(pkg) {
     const atIndex = module.lastIndexOf('@');
     return module.slice(0, atIndex);
   });
-  console.log('all-links in global', globalModules);
+  if (DEBUG) console.log('all-links in global', globalModules);
   const matchedPackages = allPkgs.filter(item => globalModules.includes(item));
   if (matchedPackages.length > 0) {
     console.log(`exec npm link ${matchedPackages.join(' ')}`);
