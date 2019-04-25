@@ -10,6 +10,7 @@
     "release": "lerna publish --skip-npm",
     "bootstrap": "lerna exec -- npm run bootstrap",
     "update": "lerna exec -- npm run update",
+    "update-force": "lerna exec -- ../../scripts/package-update.sh",
     "build": "lerna exec -- npm run build",
     "watch": "lerna run --parallel watch",
     "link": "lerna exec -- npm run link",
