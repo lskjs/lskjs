@@ -9,17 +9,6 @@
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/module",
   "keywords": [],
-  "dependencies": {
-    "node-telegram-bot-api": "0.30.0"
-  },
-  "devDependencies": {
-    "bluebird": "^3.5.3",
-    "lodash": "^4.17.11"
-  },
-  "peerDependencies": {
-    "bluebird": "*",
-    "lodash": "*"
-  },
   "scripts": {
     "dev": "npm run watch",
     "postversion": "npm run release",
@@ -30,6 +19,20 @@
     "watch": "../../scripts/package-watch.sh",
     "link": "../../scripts/package-link.sh",
     "bump": "../../scripts/package-bump.sh",
-    "release": "../../scripts/package-release.sh"
+    "release": "../../scripts/package-release.sh",
+    "release:docs": "../../scripts/package-release-docs.sh",
+    "storybook": "../../scripts/package-storybook.sh",
+    "styleguide": "../../scripts/package-styleguide.sh"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "0.30.0"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11"
+  },
+  "peerDependencies": {
+    "bluebird": "*",
+    "lodash": "*"
   }
 }

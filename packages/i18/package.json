@@ -13,6 +13,21 @@
     "internationalization",
     "schema"
   ],
+  "scripts": {
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "update": "../../scripts/package-update.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh",
+    "release:docs": "../../scripts/package-release-docs.sh",
+    "storybook": "../../scripts/package-storybook.sh",
+    "styleguide": "../../scripts/package-styleguide.sh"
+  },
   "dependencies": {
     "i18next": "^15.0.6",
     "i18next-xhr-backend": "2.0.1"
@@ -28,17 +43,5 @@
     "js-cookie": "*",
     "mobx": "*",
     "moment": "*"
-  },
-  "scripts": {
-    "dev": "npm run watch",
-    "postversion": "npm run release",
-    "lint:js": "../../scripts/package-lint-js.sh",
-    "bootstrap": "../../scripts/package-bootstrap.sh",
-    "update": "../../scripts/package-update.sh",
-    "build": "../../scripts/package-build.sh",
-    "watch": "../../scripts/package-watch.sh",
-    "link": "../../scripts/package-link.sh",
-    "bump": "../../scripts/package-bump.sh",
-    "release": "../../scripts/package-release.sh"
   }
 }

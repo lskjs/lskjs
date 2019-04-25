@@ -14,17 +14,6 @@
     "amazon",
     "multipart"
   ],
-  "dependencies": {
-    "aws-sdk": "^2.418.0",
-    "multer": "^1.4.1",
-    "multer-s3": "^2.9.0"
-  },
-  "devDependencies": {
-    "lodash": "^4.17.11"
-  },
-  "peerDependencies": {
-    "lodash": "*"
-  },
   "scripts": {
     "dev": "npm run watch",
     "postversion": "npm run release",
@@ -35,6 +24,20 @@
     "watch": "../../scripts/package-watch.sh",
     "link": "../../scripts/package-link.sh",
     "bump": "../../scripts/package-bump.sh",
-    "release": "../../scripts/package-release.sh"
+    "release": "../../scripts/package-release.sh",
+    "release:docs": "../../scripts/package-release-docs.sh",
+    "storybook": "../../scripts/package-storybook.sh",
+    "styleguide": "../../scripts/package-styleguide.sh"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.418.0",
+    "multer": "^1.4.1",
+    "multer-s3": "^2.9.0"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.11"
+  },
+  "peerDependencies": {
+    "lodash": "*"
   }
 }

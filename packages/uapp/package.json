@@ -7,18 +7,27 @@
   "publishConfig": {
     "access": "public"
   },
-  "contributors": [
-    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
-    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
-    "Nata <natavts@gmail.com> (https://natavts.ru)",
-    "Andruxa <anchurikov94@gmail.com>"
-  ],
   "repository": "https://github.com/lskjs/modules/tree/master/packages/uapp",
   "keywords": [
     "database",
     "mongoose",
     "schema"
   ],
+  "scripts": {
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "update": "../../scripts/package-update.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh",
+    "release:docs": "../../scripts/package-release-docs.sh",
+    "storybook": "../../scripts/package-storybook.sh",
+    "styleguide": "../../scripts/package-styleguide.sh"
+  },
   "dependencies": {
     "antimerge": "0.0.5",
     "core-decorators": "0.20.0",
@@ -50,6 +59,12 @@
     "prop-types": "15.6.2",
     "react": "16.5.2"
   },
+  "contributors": [
+    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
+    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
+    "Nata <natavts@gmail.com> (https://natavts.ru)",
+    "Andruxa <anchurikov94@gmail.com>"
+  ],
   "peerDependencies": {
     "@lskjs/autobind": "*",
     "@lskjs/i18": "*",
@@ -64,17 +79,5 @@
     "moment": "*",
     "prop-types": "*",
     "react": "*"
-  },
-  "scripts": {
-    "dev": "npm run watch",
-    "postversion": "npm run release",
-    "lint:js": "../../scripts/package-lint-js.sh",
-    "bootstrap": "../../scripts/package-bootstrap.sh",
-    "update": "../../scripts/package-update.sh",
-    "build": "../../scripts/package-build.sh",
-    "watch": "../../scripts/package-watch.sh",
-    "link": "../../scripts/package-link.sh",
-    "bump": "../../scripts/package-bump.sh",
-    "release": "../../scripts/package-release.sh"
   }
 }

@@ -6,7 +6,7 @@ module.exports = {
     // '@babel/preset-stage-0',
   ],
   plugins: [
-    'transform-class-property-arrow-to-bind',
+    // 'transform-class-property-arrow-to-bind',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-syntax-dynamic-import',
