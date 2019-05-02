@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "0.33.2",
+  "version": "0.33.12",
   "description": "LSK log.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
