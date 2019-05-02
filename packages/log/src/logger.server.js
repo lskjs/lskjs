@@ -1,3 +1,3 @@
-import bunyan from '@scoop/bunyan';
+import bunyan from 'bunyan-sfdx-no-dtrace';
 
 export default bunyan;
