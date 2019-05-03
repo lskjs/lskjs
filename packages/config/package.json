@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/config",
-  "version": "0.33.8",
+  "version": "0.33.14",
   "description": "LSK config.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
