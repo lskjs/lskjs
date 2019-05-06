@@ -138,7 +138,7 @@ export default class ReactApp extends Module {
           content = renderStylesToString(content);
         }
       } catch (err) {
-        return { err, stack: ['Error SSR', 'ReactApp.render', 'ReactDOM.renderToStaticMarkup(component)'] };
+        throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactDOM.renderToStaticMarkup(component)'] };
       }
       // console.log('content', content);
     } catch ({ err, stack }) {

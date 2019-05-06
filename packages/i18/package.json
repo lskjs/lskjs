@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/permit",
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/i18",
   "keywords": [
     "i18",
     "internationalization",
