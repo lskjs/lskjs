@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/apiquery",
-  "version": "0.33.15",
+  "version": "0.33.16",
   "description": "http/s + websockets api client for Web, Node.js and React Native throw fetch or axios",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "nock": "^10.0.6"
   },
   "peerDependencies": {
-    "lodash": "*",
-    "axios": "*"
+    "axios": "*",
+    "lodash": "*"
   }
 }
