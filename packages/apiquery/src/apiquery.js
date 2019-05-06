@@ -3,6 +3,7 @@
 import isPlainObject from 'lodash/isPlainObject';
 import pick from 'lodash/pick';
 import qs from 'qs';
+import axios from 'axios';
 import FormData from 'form-data';
 import io from './socket.io-client';
 import trim from './trim';
@@ -79,7 +80,7 @@ function ioMock(...initParams) {
 // const DEBUG = __DEV__;
 
 export default class Apiquery {
-  static axios = global.axios;
+  static axios = axios;
   static qs = qs;
   // io = io
 
