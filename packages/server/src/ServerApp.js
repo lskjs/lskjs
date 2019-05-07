@@ -242,10 +242,10 @@ export default class ServerApp extends Module {
   runRedis = require('./methods/runRedis').default;
 
   _getRoutes(...args) {
-    return require('./methods/_getRoutes').default(...args);
+    return require('./methods/_getRoutes').default.bind(this)(...args);
   }
   runRoutes(...args) {
-    return require('./methods/runRoutes').default(...args);
+    return require('./methods/runRoutes').default.bind(this)(...args);
   }
   // getI18 = require('../Uapp/i18/getI18').default;
   // getI18Params = require('../Uapp/i18/getI18Params').default;
