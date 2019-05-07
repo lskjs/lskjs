@@ -43,6 +43,7 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
+    "@lskjs/autobind": "^0.33.15",
     "@lskjs/apiquery": "^0.33.16",
     "@lskjs/db": "^0.33.15",
     "@lskjs/i18": "^0.33.15",
@@ -58,6 +59,7 @@
     "@babel/runtime": "7.0.0-beta.42"
   },
   "peerDependencies": {
+    "@lskjs/autobind": "*",
     "@lskjs/apiquery": "*",
     "@lskjs/db": "*",
     "@lskjs/i18": "*",

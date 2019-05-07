@@ -1,1 +1,1 @@
-export { default } from './CoreApp';
+export { default } from './ServerApp';
