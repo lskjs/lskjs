@@ -1,6 +1,33 @@
 import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
+import mapValues from 'lodash/mapValues';
+
+// import isClass from 'lodash/isClass';
+const isClass = () => false;
+
+export function getRoutes(ctx) {
+  const iterate = (item) => {
+    if (isClass(item)) {
+      const api = new item(ctx); // eslint-disable-line new-cap
+      return api.getRoutes();
+    } if (!isPlainObject(item)) {
+      if (item.getRoutes) {
+        return item.getRoutes();
+      }
+      if (item.routes) {
+        return item.routes;
+      }
+      return item;
+    }
+    return mapValues(item, iterate);
+  };
+  if (ctx.getRoutes && isFunction(ctx.getRoutes)) {
+    return iterate(ctx.getRoutes());
+  }
+  return {};
+}
+
 
 function getMethodAndPath(key = '', val) {
   let method;
@@ -19,38 +46,31 @@ function getMethodAndPath(key = '', val) {
   };
 }
 
+function iterateRoute(data, { AsyncRouter } = {}) { // params
+  if (isPlainObject(data)) {
+    const asyncRouter = AsyncRouter();
+    forEach(data, (val, key) => {
+      const { path, method } = getMethodAndPath(key, val);
+      const route = iterateRoute(val, { AsyncRouter }); // , { path: params.path + path, i: params.i + 1 });
+      // console.log('asyncRouter', method, path);
+      asyncRouter[method](path, route);
+    });
+    return asyncRouter;
+  } if (isFunction(data)) {
+    return data;
+  } if (data && data.getRoutes && isFunction(data.getRoutes)) {
+    return data.getRoutes();
+  } if (data && data.api && isFunction(data.getRoutes)) {
+    return data.api();
+  }
+  return () => {};
+}
+
 
 export default function () {
-  const iterate = (data) => { // params
-    // console.log('iterate', params, {
-    //   getRouter: !!data.getRouter,
-    //   isPlainObject: isPlainObject(data),
-    //   isFunction: isFunction(data),
-    // });
-    if (isPlainObject(data)) {
-      const subRouter = this.asyncRouter();
-      forEach(data, (val, key) => {
-        const { path, method } = getMethodAndPath(key, val);
-        const route = iterate(val); // , { path: params.path + path, i: params.i + 1 });
-        // console.log('subRouter', method, path);
-        subRouter[method](path, route);
-      });
-      return subRouter;
-    } if (isFunction(data)) {
-      return data;
-    } if (data && data.getRoutes) {
-      return data.getRoutes();
-    }
-    return () => {};
-  };
+  this.routes = getRoutes(this);
   const asyncRouter = this.asyncRouter();
-  const router = iterate(this.routes, { path: '/', i: 1 });
+  const router = iterateRoute(this.routes, { AsyncRouter: this.asyncRouter, path: '/', i: 1 });
   asyncRouter.use('/', router);
   this.app.use('/', asyncRouter);
-  this.app.use('*', (req, ...args) => {
-    req.url = req.originalUrl;
-    this.reactApp.render(req, ...args);
-  });
-  // return () => 'asdadfgd';
-  // return iterate(this.apiRouter);
 }

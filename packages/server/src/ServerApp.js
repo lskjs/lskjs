@@ -241,9 +241,6 @@ export default class ServerApp extends Module {
   resolve = require('./methods/resolve').default;
   runRedis = require('./methods/runRedis').default;
 
-  _getRoutes(...args) {
-    return require('./methods/_getRoutes').default.bind(this)(...args);
-  }
   runRoutes(...args) {
     return require('./methods/runRoutes').default.bind(this)(...args);
   }
@@ -268,7 +265,7 @@ export default class ServerApp extends Module {
   }
 
   async afterRun() {
-    this.log.trace('ServerApp afterRun');
+    this.log.trace('ServerApp afterRun @@@@');
     this.runRoutes();
     this.runDefaultRoute();
     this.runCatchErrors();
