@@ -105,8 +105,6 @@ export default class ServerApp extends Module {
   }
   getMongooseModels() {
     const models = this.getModels();
-
-
     forEach(this.modules, (mdl, moduleName) => {
       let models2 = {};
       if (mdl.getModels) {
