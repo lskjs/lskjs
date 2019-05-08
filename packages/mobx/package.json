@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mobx",
-  "version": "0.33.23",
+  "version": "0.33.24",
   "description": "LSK module for mobx.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -30,10 +30,9 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@lskjs/autobind": "^0.33.20",
-    "@lskjs/utils": "^0.33.23",
+    "@lskjs/autobind": "^0.33.24",
+    "@lskjs/utils": "^0.33.24",
     "axios": "^0.18.0",
     "bluebird": "3.5.3",
     "lodash": "4.17.11",

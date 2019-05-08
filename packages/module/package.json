@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "0.33.20",
+  "version": "0.33.24",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "eventemitter3": "^3.1.0"
   },
   "devDependencies": {
-    "@lskjs/log": "^0.33.20",
+    "@lskjs/log": "^0.33.24",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11"
   },
