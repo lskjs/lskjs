@@ -5,9 +5,8 @@ export default ({ api, app } = {}) => {
   api.remoteFetch = api.fetch;
   const authToken = get(this, 'rootState.token');
   api.fetch = function (...args) {
-    
-    const { url, options = {} } = args;
-    console.log('api.fetch', url);
+    const [url, options = {}] = args;
+    // console.log('api.fetch', url, args);
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return api.remoteFetch(...args);
     }
