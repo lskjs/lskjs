@@ -1,4 +1,3 @@
-/* eslint-disable  */
 // import fetch from 'node-fetch';
 import isPlainObject from 'lodash/isPlainObject';
 import pick from 'lodash/pick';
@@ -231,8 +230,7 @@ ${JSON.stringify(res.json, null, 2)}
       pick(params, AXIOS_PARAMS),
     );
 
-    const body = params.body || params.data;
-
+    // const body = params.body || params.data;
     if (!req.headers) req.headers = {};
     if (!req.headers.Accept) req.headers.Accept = 'application/json';
     if (!req.headers['Content-Type']) req.headers['Content-Type'] = 'application/json; charset=utf-8';
@@ -240,19 +238,19 @@ ${JSON.stringify(res.json, null, 2)}
       delete req.headers['Content-Type'];
     }
 
-    req._body = body;
-    req.body = body;
-    if (isPlainObject(body)) {
-      if (req.headers['Content-Type'] && req.headers['Content-Type'].includes('application/json')) {
-        req.body = JSON.stringify(body);
-      } else {
-        const form = new FormData();
-        Object.keys(body).forEach((key) => {
-          form.append(key, body[key]);
-        });
-        req.body = form;
-      }
-    }
+    // req._body = body;
+    // req.body = body;
+    // if (isPlainObject(body)) {
+    //   if (req.headers['Content-Type'] && req.headers['Content-Type'].includes('application/json')) {
+    //     req.body = JSON.stringify(body);
+    //   } else {
+    //     const form = new FormData();
+    //     Object.keys(body).forEach((key) => {
+    //       form.append(key, body[key]);
+    //     });
+    //     req.body = form;
+    //   }
+    // }
     const authToken = (params.authToken || this.authToken);
     if (!req.headers.Authorization && authToken) {
       req.headers.Authorization = `Bearer ${authToken}`;

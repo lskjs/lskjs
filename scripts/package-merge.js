@@ -2,10 +2,10 @@ const json = require(process.cwd() + '/package.json'); // eslint-disable-line
 const baseJson = require(__dirname + '/package.json'); // eslint-disable-line
 
 const newJson = {
-  ...baseJson,
   ...json,
+  ...baseJson,
   scripts: {
-    ...(baseJson.scripts || {}),
+    ...(baseJson.json || {}),
     ...(baseJson.scripts || {}),
   },
 };

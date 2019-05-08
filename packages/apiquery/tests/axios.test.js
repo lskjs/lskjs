@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it, before, beforeEach } from 'mocha';
 import axios from 'axios';
-import ApiClient from '../apiquery';
+import ApiClient from '../src/apiquery';
 
 global.axios = axios;
 const nock = require('nock');
