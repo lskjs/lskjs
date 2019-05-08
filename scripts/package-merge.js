@@ -5,7 +5,7 @@ const newJson = {
   ...json,
   ...baseJson,
   scripts: {
-    ...(baseJson.json || {}),
+    ...(json.scripts || {}),
     ...(baseJson.scripts || {}),
   },
 };
