@@ -11,7 +11,7 @@ rm -rf tsconfig.json && cp ../../tsconfig.json . && \
 # update package
 node ../../scripts/package-merge.js && \
 
-
 # update deps
-../../node_modules/npm-check-updates/bin/ncu '/^@lskjs/.*$/' -u && \
+../../node_modules/npm-check-updates/bin/ncu --dep=prod,dev '/^@lskjs/.*$/' -u && \
+../../node_modules/npm-check-updates/bin/ncu --dep=peer,optional '/^@lskjs/.*$/' -u && \
 npm install
