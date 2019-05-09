@@ -23,7 +23,7 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
 
   // renderFavicon = require('./renderFavicon').default
 
-  renderFavicon = () => 'favicon'
+  renderFavicon = () => '<!-- favicon -->'
 
   renderHead() {
     const js = this.renderJS();
@@ -41,7 +41,7 @@ ${this.renderPreloader()}
   }
 
   renderPreloader() {
-    return 'renderPreloader';
+    return '<!-- renderPreloader -->';
     // return renderPreloader();
   }
 

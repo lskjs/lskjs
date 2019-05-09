@@ -69,7 +69,7 @@ export default class ReactApp extends Module {
   renderError(err, stack = []) {
     if (!__DEV__) return err.message;
     const text = [...stack, ''].join(':\n');
-    console.error(text, err);
+    console.error(text, err); // eslint-disable-line no-console
     return this.renderTemplate(`<pre>${text}${err.stack}</pre>`);
   }
 
