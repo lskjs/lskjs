@@ -2,7 +2,7 @@ import map from 'lodash/map';
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
 export default class Html {
-  constructor(props) {    
+  constructor(props) {
     Object.assign(this, props);
   }
 
@@ -27,6 +27,7 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
 
   renderHead() {
     const js = this.renderJS();
+    const { head } = this;
     return `\
 <title>${this.renderTitle()}</title>
 ${this.renderMeta()}
@@ -35,6 +36,7 @@ ${this.renderFavicon()}
 ${this.renderOGMeta()}
 ${this.renderAssets('css')}
 ${this.renderStyle()}
+${head || ''}
 ${!js ? '' : `<script>${js}</script>`}
 ${this.renderPreloader()} 
 `;

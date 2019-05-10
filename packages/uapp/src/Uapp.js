@@ -351,8 +351,8 @@ export default class Uapp extends Module {
         page: this.page,
       });
     } catch (err) {
-      console.error('uapp.router.resolve err', err); //eslint-disable-line
-      this.log.error('resolveErr', err);
+      this.log.error('uapp.router.resolve', err);
+      console.error(err); // eslint-disable-line no-console
     }
     this.emit('resolve:after', { req, reqParams });
     return res;
