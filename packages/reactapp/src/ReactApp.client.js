@@ -113,6 +113,7 @@ export default class ReactApp extends Module {
       rootState: this.rootState,
       config: this.config,
       app: this,
+      history: this.history,
       ...params,
     });
     await this.uapp.start();
