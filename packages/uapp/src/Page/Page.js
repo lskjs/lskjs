@@ -9,6 +9,7 @@ const DEBUG = __DEV__ && false;
 export default class Page {
   _page = true;
   state = {};
+  baseState = {};
 
   constructor(...args) {
     this.init(...args);
@@ -90,7 +91,7 @@ export default class Page {
 
   loading() {
     if (DEBUG) console.log('Page.loading');
-    const loading = this.state.loading || 'Loading...';
+    const loading = this.state.loading || this.baseState.loading || 'Loading...';
     // const loading = this.state.loading || <Loading full />;
     return this.component(loading);
   }
