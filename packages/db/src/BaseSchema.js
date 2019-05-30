@@ -33,7 +33,7 @@ export default class BaseSchema {
         if (__DEV__ && incomeParams.debug) {
           delete params.select;
         }
-        if (params.limit > 50) params.limit = 50;
+        if (params.limit > 100) params.limit = 100;
         return {
           ...params,
           ...systemParams,
