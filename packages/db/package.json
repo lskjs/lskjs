@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/db",
-  "version": "0.34.1",
+  "version": "0.34.2",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
