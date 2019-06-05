@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mobx",
-  "version": "0.34.3",
+  "version": "0.34.4",
   "description": "LSK module for mobx.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
