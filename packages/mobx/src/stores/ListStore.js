@@ -20,11 +20,39 @@ export default class ListStore extends FetchStore {
     if (!this.selectStore) this.selectStore = new SelectStore({ listStore: this });
   }
 
+
+  getState() {
+    return {
+      skip: this.skip,
+      limit: this.limit,
+      filter: this.filter,
+      showFilter: this.showFilter,
+      tab: this.tab,
+      sort: this.sort,
+      search: this.search,
+    };
+  }
+
   @action
-  setStateAndUpdate(...args) {
+  async setStateAndUpdate(...args) {
+    let state;
+    if (this.updated) {
+      state = this.getState();
+    }
     super.setState(...args);
-    this.update();
+    await this.update();
+    if (this.updated) this.updated(state, this.getState());
     return this;
+  }
+
+
+  // TODO: переписать на норм subscribe модель
+  updated() { }
+  subscribe(callback) {
+    this.update = callback;
+    return () => {
+      this.update = null;
+    };
   }
 
   @debounce(100)
