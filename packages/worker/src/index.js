@@ -2,6 +2,7 @@ import Module from '@lskjs/module';
 import db from '@lskjs/db/server';
 import forEach from 'lodash/forEach';
 import mapValues from 'lodash/mapValues';
+import map from 'lodash/map';
 
 export default class extends Module {
   name = 'Worker';
@@ -13,6 +14,7 @@ export default class extends Module {
   async afterInit() {
     this.models = this.getMongooseModels();
     this.log.debug('models', Object.keys(this.models));
+    await this.runModels();
   }
   async run(...args) {
     await super.run(...args);
