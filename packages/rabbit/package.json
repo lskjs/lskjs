@@ -1,15 +1,16 @@
 {
-  "name": "@lskjs/worker",
+  "name": "@lskjs/rabbit",
   "version": "0.34.2",
-  "description": "LSK module for worker.",
+  "description": "LSK module for rabbit.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/worker",
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/rabbit",
   "keywords": [
-    "worker"
+    "queue",
+    "rabbit"
   ],
   "scripts": {
     "dev": "npm run watch",
@@ -29,17 +30,13 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
-  "dependencies": {},
+  "dependencies": {
+    "amqplib": "^0.5.3"
+  },
   "devDependencies": {
-    "@lskjs/db": "^0.34.2",
-    "@lskjs/log": "^0.34.2",
-    "@lskjs/module": "^0.34.2",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
-    "@lskjs/db": "*",
-    "@lskjs/log": "*",
-    "@lskjs/module": "*",
     "lodash": "*"
   }
 }
