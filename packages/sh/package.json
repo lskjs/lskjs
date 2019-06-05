@@ -1,13 +1,13 @@
 {
-  "name": "@lskjs/utils",
+  "name": "@lskjs/sh",
   "version": "0.34.2",
-  "description": "LSK ux subrepo: utils",
+  "description": "LSK ux subrepo: sh",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
+  "repository": "https://github.com/lskjs/ux/tree/master/packages/sh",
   "keywords": [],
   "scripts": {
     "dev": "npm run watch",
@@ -28,17 +28,6 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "csv-string": "^3.1.5"
-  },
-  "devDependencies": {
-    "@babel/polyfill": "^7.2.5",
-    "lodash": "^4.17.11",
-    "moment": "^2.24.0",
-    "react": "^16.8.6"
-  },
-  "peerDependencies": {
-    "@babel/polyfill": "*",
-    "moment": "^2.24.0",
-    "lodash": "*"
+    "@lskjs/utils": "^0.34.2"
   }
 }
