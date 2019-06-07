@@ -129,7 +129,7 @@ export default class ListStore extends FetchStore {
     });
   }
 
-  @autobind
+  @debounce(500)
   setSearch(search) {
     this.setStateAndUpdate({
       search,

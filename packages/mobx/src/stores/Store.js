@@ -11,9 +11,7 @@ export default class Store {
   }
 
   setStateField(item, value) {
-    if (isComputedProp(this, item)) {
-      // ignore updated
-    } else {
+    if (!isComputedProp(this, item)) {
       set(this, item, value);
     }
   }
