@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/config",
-  "version": "0.34.6",
+  "version": "0.34.8",
   "description": "LSK config.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,6 +34,5 @@
     "lodash": "^4.17.11",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3"
-  },
-  "devDependencies": {}
+  }
 }
