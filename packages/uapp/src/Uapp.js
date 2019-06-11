@@ -1,10 +1,12 @@
+/* eslint-disable global-require */
 import map from 'lodash/map';
 import get from 'lodash/get';
 import UniversalRouter from 'universal-router';
-import Api from '@lskjs/apiquery';
 import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import { observable } from 'mobx';
+import Favico from 'favico.js';
+import Api from '@lskjs/apiquery';
 import scrollTo from '@lskjs/scroll';
 import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/utils/addClassToHtml';
@@ -13,7 +15,6 @@ import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import logger from '@lskjs/log';
 // import { createLogger } from '@lskjs/log';
-import Favico from 'favico.js';
 import autobind from '@lskjs/autobind';
 import Root from './UappProvider';
 import wrapApi from './wrapApi';
@@ -103,7 +104,7 @@ export default class Uapp extends Module {
   }
 
   getApi() {
-    const apiConfig = (this.config && this.config.api || {});
+    const apiConfig = this.config ? this.config.api : {};
     const url = get(apiConfig, 'url', __CLIENT__ ? '/' : `http://127.0.0.1:${this.app.config.port}`);
     const api = new this.Api({
       ...apiConfig,
@@ -339,7 +340,7 @@ export default class Uapp extends Module {
   async resolve(reqParams = {}) {
     const req = Api.createReq(reqParams);
     this.emit('resolve:before', { req, reqParams });
-    __CLIENT__ && __DEV__ && this.log.trace('Uapp.resolve', req.path, req.query);
+    if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
     await this.resetPage();
     let res;
     try {

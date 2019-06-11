@@ -70,6 +70,7 @@
     "Andruxa <anchurikov94@gmail.com>"
   ],
   "peerDependencies": {
+    "@lskjs/apiquery": "^0.34.2",
     "@lskjs/autobind": "*",
     "@lskjs/i18": "*",
     "@lskjs/log": "*",

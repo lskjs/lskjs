@@ -20,7 +20,7 @@ export default class Page {
   }
 
   renderTitle() {
-    return (this.state.metas || []).reverse().map(t => t.title).join(' - ');
+    return (this.state.metas || []).map(t => t.title).reverse().join(' - ');
   }
 
   onExit(fn) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import qs from 'qs';
-// import autobind from '@lskjs/autobind';
+import autobind from '@lskjs/autobind';
 import merge from 'lodash/merge';
 import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';
@@ -19,8 +19,8 @@ export default class ReactApp extends Module {
     return window.__ROOT_STATE__ || {};
   }
 
-  // @autobind
-  historyListen = (location, action) => {
+  @autobind
+  historyListen(location) { // , action
     if (location.method === 'replaceState') return;
     this.render();
   }
@@ -42,8 +42,12 @@ export default class ReactApp extends Module {
   }
 
 
+  /**
+   * Редирект без сохранения в history
+   * @param {String} path Новый url для редиректа
+   */
   redirect(path) {
-    DEBUG && console.log('ReactApp.redirect', path);
+    if (DEBUG) console.log('ReactApp.redirect', path);
     setTimeout(() => {
       this.history.replace(path);
     }, DEBUG ? 1000 : 0);
@@ -67,7 +71,9 @@ export default class ReactApp extends Module {
         // This error was thrown as a convenience so that you can use this stack
         // to find the callsite that caused this warning to fire.
         throw new Error('CSR getPage err (ROUTER ERROR)');
-      } catch (x) {}
+      } catch (x) {
+        //
+      }
       this.renderError(err);
       throw err;
     }
@@ -90,8 +96,7 @@ export default class ReactApp extends Module {
   }
 
   renderError(error = {}) {
-    console.log('ERROR', error);
-
+    console.error('App.renderError', error);
     // document.title = `Error: ${error.message}`;
     // const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
     // this.appInstance = ReactDOM.render(root, this.container, this.postRender);
@@ -129,8 +134,8 @@ export default class ReactApp extends Module {
     return uapp.page;
   }
 
-  // @autobind
-  postRender = () => {
+  @autobind
+  postRender() {
     this.rootState.renderCount = (this.rootState.renderCount || 0) + 1;
   }
 }
