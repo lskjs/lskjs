@@ -52,7 +52,7 @@
     "@lskjs/i18": "^0.34.6",
     "@lskjs/log": "^0.34.6",
     "@lskjs/module": "^0.34.6",
-    "@lskjs/scroll": "^0.33.41",
+    "@lskjs/scroll": "^0.34.28",
     "@lskjs/utils": "^0.34.6",
     "axios": "^0.18.0",
     "bluebird": "^3.5.3",
@@ -70,7 +70,7 @@
     "Andruxa <anchurikov94@gmail.com>"
   ],
   "peerDependencies": {
-    "@lskjs/apiquery": "^0.34.2",
+    "@lskjs/apiquery": "^0.34.6",
     "@lskjs/autobind": "*",
     "@lskjs/i18": "*",
     "@lskjs/log": "*",
