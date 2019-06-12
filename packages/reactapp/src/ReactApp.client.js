@@ -46,17 +46,21 @@ export default class ReactApp extends Module {
    * Редирект без сохранения в history
    * @param {String} path Новый url для редиректа
    */
-  redirect(path) {
+  redirect(path, saveInHistory = false) {
     if (DEBUG) console.log('ReactApp.redirect', path);
     setTimeout(() => {
-      this.history.replace(path);
+      if (saveInHistory) {
+        this.history.replace(path);
+      } else {
+        this.history.push(path);
+      }
     }, DEBUG ? 1000 : 0);
   }
 
-  // @autobind
   // render = () => this.render2()
   // async render2() {
-  render = async () => {
+  @autobind
+  async render() {
     if (this.uapp && this.uapp.page && this.uapp.page.exit) {
       await this.uapp.page.exit();
     }

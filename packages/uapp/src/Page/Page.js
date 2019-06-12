@@ -16,6 +16,7 @@ export default class Page {
   }
 
   async init(props = {}) {
+    this.state = {};
     Object.assign(this, props);
   }
 
@@ -110,7 +111,7 @@ export default class Page {
   }
 
   meta(meta) {
-    if (DEBUG) console.log('Page.meta');
+    if (DEBUG) console.log('Page.meta', JSON.stringify(this.state.metas), meta);
     if (!this.state.metas) this.state.metas = [];
     this.state.metas.push(meta);
     this.state.meta = merge({}, ...this.state.metas);
