@@ -49,9 +49,9 @@ export default class ListStore extends FetchStore {
   // TODO: переписать на норм subscribe модель
   updated() { }
   subscribe(callback) {
-    this.update = callback;
+    this.updated = callback;
     return () => {
-      this.update = null;
+      this.updated = null;
     };
   }
 
