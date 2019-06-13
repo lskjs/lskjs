@@ -22,11 +22,11 @@ export default ({ config }) => class RabbitModule {
   ack(msg) {
     return this.channel.ack(msg);
   }
-  async assertQueue(q) {
-    await this.channel.assertQueue(q, get(config, 'rabbit.options'));
+  assertQueue(q) {
+    this.channel.assertQueue(q, get(config, 'rabbit.options'));
     const prefetchCount = get(config, 'rabbit.options.prefetch');
     if (prefetchCount) {
-      await this.channel.prefetch(prefetchCount);
+      this.channel.prefetch(prefetchCount);
     }
   }
   sendToQueue(q, data, options) {
