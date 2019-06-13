@@ -1,4 +1,5 @@
 import merge from 'lodash/merge';
+import get from 'lodash/get';
 import amqp from 'amqplib';
 
 export default ({ config }) => class RabbitModule {
@@ -18,17 +19,24 @@ export default ({ config }) => class RabbitModule {
     this.onOpen();
   }
   onOpen() {}
-  assertQueue(q, params) {
-    return this.channel.assertQueue(q, params);
+  ack(msg) {
+    return this.channel.ack(msg);
   }
-  sendToQueue(q, data) {
+  async assertQueue(q) {
+    await this.channel.assertQueue(q, get(config, 'rabbit.options'));
+    const prefetchCount = get(config, 'rabbit.options.prefetch');
+    if (prefetchCount) {
+      await this.channel.prefetch(prefetchCount);
+    }
+  }
+  sendToQueue(q, data, options) {
     let str = data;
     if (typeof data !== 'string') {
       str = JSON.stringify(data);
     }
-    return this.channel.sendToQueue(q, Buffer.from(str));
+    return this.channel.sendToQueue(q, Buffer.from(str), options);
   }
-  consume(q, callback) {
-    return this.channel.consume(q, callback);
+  consume(q, callback, options) {
+    return this.channel.consume(q, callback, options);
   }
 };
