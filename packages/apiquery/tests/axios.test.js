@@ -66,7 +66,7 @@ describe('axios', () => {
 
   describe('with cancelToken', () => {
     const source = axios.CancelToken.source();
-    const query = () => api.axios('ping', { method: 'post', cancelToken: source.token });
+    const query = () => api.axios('ping', { method: 'post', __cancelToken: source.token });
     before(() => nock(nockUrl).post('/ping').reply((uri, requestBody, cb) => {
       setTimeout(() => cb(null, [500, 'THIS IS THE REPLY BODY']), 10000);
     }));

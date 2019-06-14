@@ -34,7 +34,7 @@ const AXIOS_PARAMS = [
   'httpAgent',
   'httpsAgent',
   'proxy',
-  'cancelToken',
+  '__cancelToken',
 ];
 
 function ioMock(...initParams) {
@@ -312,28 +312,24 @@ ${JSON.stringify(res.json, null, 2)}
     const ctx = this.getCtx(...args);
     const { axios } = this.constructor;
     const { req, parseResult, afterFetch } = ctx;
+    const { data: { __cancelToken, ...data }, ...params } = req;
 
     if (this.log && this.log.trace) {
       this.log.trace('[api]', req.method, req.url, req._body);
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
 
-    const { url, ...params } = req;
-
-    const res = axios(req)
+    params.data = data;
+    const params2 = {};
+    if (__cancelToken && __cancelToken.token) {
+      params.cancelToken = __cancelToken.token;
+    }
+    const res = axios(params, params2)
       .then(async (response) => {
         ctx.res = await parseResult(ctx, response);
         return ctx;
       })
       .then(afterFetch);
-    if (!ctx.timeout) return res;
-
-    return Promise.race([
-      res,
-      new Promise((resolve, reject) => {
-        setTimeout(() => reject(new Error('axios timeout')), ctx.timeout);
-      }),
-    ]);
   }
 
   wsReconnect() {

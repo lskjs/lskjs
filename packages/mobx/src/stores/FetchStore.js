@@ -1,4 +1,5 @@
 import set from 'lodash/set';
+import Promise from 'bluebird';
 import { observable, action } from 'mobx';
 import axios from 'axios';
 import omitEmpty from '@lskjs/utils/omitEmpty';
@@ -24,7 +25,7 @@ export default class FetchStore extends Store {
   @observable loading = false;
   @observable fetchedAt = null;
   @observable select = {};
-  cancelToken = null;
+  __cancelToken = null;
 
   setStateField(item, value) {
     if (['skip', 'limit'].includes(item)) {
@@ -34,7 +35,7 @@ export default class FetchStore extends Store {
     }
   }
 
-  async find({ skip, limit, cancelToken } = {}) {
+  async find({ skip, limit, __cancelToken } = {}) {
     if (!this.api) throw '!api';
     if (!this.api.find) throw '!api.find';
     let params = getFindParams(this);
@@ -44,7 +45,7 @@ export default class FetchStore extends Store {
       ...omitEmpty(params),
       limit,
       skip,
-      cancelToken,
+      __cancelToken,
     });
 
     let items;
@@ -75,15 +76,15 @@ export default class FetchStore extends Store {
 
   @action
   async fetch({ skip = this.skip, limit = this.limit, cache } = {}) {
-    if (this.loading) this.cancelFetch();
+    if (this.loading) await this.cancelFetch();
     this.loading = true;
-    this.cancelToken = CancelToken.source();
+    this.__cancelToken = CancelToken.source();
     if (this.progress) this.progress.start();
     try {
       const { items, count } = await this.find({
         skip,
         limit,
-        cancelToken: this.cancelToken,
+        __cancelToken: this.__cancelToken,
       });
       this.setItems(items, { skip, cache });
       this.count = count;
@@ -91,16 +92,17 @@ export default class FetchStore extends Store {
       if (skip < this.skip) this.skip = skip;
     } finally {
       this.loading = false;
-      this.cancelToken = null;
+      this.__cancelToken = null;
       if (this.progress) this.progress.done();
     }
   }
 
   async cancelFetch() {
-    if (!(this.cancelToken && this.cancelToken.cancel)) return;
+    if (!(this.__cancelToken && this.__cancelToken.cancel)) return;
     this.loading = false;
-    this.cancelToken.cancel();
     if (this.progress) this.progress.done();
+    await this.__cancelToken.cancel('fetch canceled');
+    await Promise.delay(10);
   }
 
   canFetchMore(dir = 1) {
