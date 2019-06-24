@@ -7,31 +7,29 @@ export default ({ config }) => class SequelizeModule {
     if (!config.sequelize) return;
     this.enabled = true;
     this.defaultConfig = {
-      host: 'localhost',
-      port: 27002,
-      username: 'postgres',
-      password: '',
-      database: '',
-      logging: false,
-      pool: {
-        max: 5,
-        min: 0,
-        idle: 100000,
-        acquire: 50000,
-        evict: 50000,
-        handleDisconnects: true,
+      uri: '',
+      options: {
+        logging: false,
+        pool: {
+          max: 5,
+          min: 0,
+          idle: 100000,
+          acquire: 50000,
+          evict: 50000,
+          handleDisconnects: true,
+        },
       },
     };
-    this.config = merge({ dialect: 'postgres' }, this.defaultConfig, config.sequelize);
-    this.client = new Sequelize(this.config);
+    this.config = merge({
+      options: {
+        dialect: 'postgres',
+      },
+    }, this.defaultConfig, config.sequelize);
+    this.client = new Sequelize(this.config.uri, this.config.options);
     await this.client.authenticate();
   }
   async run() {
     if (!this.enabled) return;
     await this.client.sync();
-  }
-
-  getModels() {
-    return {};
   }
 };
