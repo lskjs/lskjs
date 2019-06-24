@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sequelize",
-  "version": "0.34.11",
+  "version": "0.34.12",
   "description": "LSK module for sequelize.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
