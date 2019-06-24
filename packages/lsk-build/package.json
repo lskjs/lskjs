@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build",
-  "version": "0.34.8",
+  "version": "0.34.13",
   "description": "Lego Starter Kit builder & webpack configurator",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
