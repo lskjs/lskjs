@@ -330,6 +330,7 @@ ${JSON.stringify(res.json, null, 2)}
         return ctx;
       })
       .then(afterFetch);
+    return res;
   }
 
   wsReconnect() {
