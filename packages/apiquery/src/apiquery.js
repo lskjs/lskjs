@@ -312,7 +312,7 @@ ${JSON.stringify(res.json, null, 2)}
     const ctx = this.getCtx(...args);
     const { axios } = this.constructor;
     const { req, parseResult, afterFetch } = ctx;
-    const { data: { __cancelToken, ...data }, ...params } = req;
+    const { data: { __cancelToken, ...data } = {}, ...params } = req;
 
     if (this.log && this.log.trace) {
       this.log.trace('[api]', req.method, req.url, req._body);
