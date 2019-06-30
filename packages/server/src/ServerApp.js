@@ -60,7 +60,9 @@ export default class ServerApp extends Module {
         getLocale: this.getLocale,
       }).init();
     }
+    this._healthcheck = this.createHealthcheck(this.healthcheck ? this.healthcheck() : {});
   }
+
   async afterInit() {
     // super.afterInit(...arguments);
     this.models = this.getMongooseModels();
@@ -232,7 +234,7 @@ export default class ServerApp extends Module {
     return Promise.all(promises);
   }
 
-
+  createHealthcheck = require('./methods/createHealthcheck').default;
   getDocsRouter = require('./methods/getDocsRouter').default;
   getDocsTemplate = require('./methods/getDocsTemplate').default;
 

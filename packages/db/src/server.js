@@ -24,7 +24,7 @@ export default async (ctx, params = {}) => {
       ...options,
     };
     const dbname = (uri || '').split('@')[1];
-    ctx.log.trace('db.connect()', dbname, finalOptions);
+    ctx.log.trace('db.connect()', dbname); // finalOptions
     return new Promise((resolve, reject) => (
       mongoose.connect(uri, finalOptions).then(resolve, reject)
     ));
