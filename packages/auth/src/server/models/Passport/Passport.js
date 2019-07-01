@@ -1,6 +1,7 @@
-import MongooseSchema from '@lskjs/db/MongooseSchema';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
+import MongooseSchema from '@lskjs/db/MongooseSchema';
+import canonizeUsername from '@lskjs/utils/canonizeUsername';
 
 export default function getSchema(ctx, module) {
   const mongoose = ctx.db;
@@ -71,9 +72,9 @@ export default function getSchema(ctx, module) {
   });
 
   schema.methods.generateUsername = async function a(collection) {
-    const { User: UserModel } = ctx.models;
+    // const { User: UserModel } = ctx.models;
     let username = `${this.providerId}_${this.provider}`;
-    username = module.canonizeUsername(username.toLowerCase());
+    username = canonizeUsername(username.toLowerCase());
     if (!collection) return username;
     if (!(await collection.count({ username }))) return username;
     const prefixusername = `${username}_`;
@@ -118,7 +119,7 @@ export default function getSchema(ctx, module) {
   schema.methods.updateToken = async function a(...args) {
     const strategy = this.getStrategy();
     if (!strategy) {
-      console.error('passport.updateToken: !strategy');
+      console.error('passport.updateToken: !strategy');  //eslint-disable-line
       return;
     }
     await strategy.updateTokens(this, ...args);

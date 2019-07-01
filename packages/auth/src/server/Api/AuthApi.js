@@ -5,27 +5,59 @@ import m from 'moment';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
 import validator from 'validator';
+import BaseApi from '@lskjs/server/Api';
 import canonize from '@lskjs/utils/canonize';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
-import transliterate from '@lskjs/utils/transliterate';
+// import transliterate from '@lskjs/utils/transliterate';
+import validateEmail from '@lskjs/utils/validateEmail';
 
-function validateEmail(email) {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;  //eslint-disable-line
-  return re.test(String(email).toLowerCase());
-}
+export default class Api extends BaseApi {
+  getRoutes() {
+    // const { isAuth } = this.app.middlewares;
 
-export default (ctx, module) => {
-  const { checkNotFound } = ctx.helpers;
-  const { e400, e403, e404 } = ctx.errors;
-  if (!ctx.e) ctx.e = (name, params = {}) => { throw { ...params, name }; };
-  // some
+    return {
+      '/login': this.login,
+      '/signup': this.signup, // POST
+      '/recovery': this.recovery,
+      '/updateToken': this.updateToken,
+      '/loginToken': this.loginToken,
+      '/email/approve': this.emailApprove, // (req, res) => res.redirect('/cabinet'));
+      '/phone/code': this.phoneCode,
+      '/phone/approve': this.phoneApprove,
+      '/phone/login': this.phoneLogin,
 
-  const controller = {};
+      // Регистрация пользователя через соц сеть
+      '/social': this.getSocials, // isAuth,
+      '/social/signup': this.socialLogin,
+      '/social/login': this.socialLogin,
+      '/social/bind': this.socialBind, // Добавление соц.сетей к пользователю // isAuth,
+      '/social/unbind': this.socialUnbind, // isAuth,
 
-  controller.validate = async function (req) {
-    const { User: UserModel } = ctx.models;
+      '/passport/getByToken': this.getPassportByToken,
+      '/restorePasswordPermit': this.restorePasswordPermit,
+      '/confirmPassword': this.confirmPassword,
+      '/getPermit': this.getPermit,
+
+      // social auth init
+      '/:provider': this.socialAuth,
+      '/:provider/auth': this.socialAuth,
+      '/:provider/callback': this.socialCallback,
+    };
+  }
+
+
+  // export default (this.app, module) => {
+  //   const { checkNotFound } = this.app.helpers;
+  //   const { e400, e403, e404 } = this.app.errors;
+  //   if (!this.app.e) this.app.e = (name, params = {}) => { throw { ...params, name }; };
+  //   // some
+
+  //   const this = {};
+
+  async validate(req) {
+    const { User: UserModel } = this.app.models;
     const user = await UserModel.findById(req.user._id);
-    if (!user) throw ctx.errors.e404('Не найден user в базе');
+    if (!user) throw this.app.errors.e404('Не найден user в базе');
     return {
       __pack: 1,
       jwt: req.user,
@@ -33,10 +65,10 @@ export default (ctx, module) => {
       // token: user.getToken()
       // user,
     };
-  };
+  }
 
-  controller.silent = async function (req) {
-    const { User: UserModel } = ctx.models;
+  async silent(req) {
+    const { User: UserModel } = this.app.models;
     const params = req.allParams();
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
@@ -53,9 +85,9 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
-  // get for create
-  controller.getUserFields = function (req) {
+  }
+
+  getUserFields(req) {
     const params = req.allParams();
     // console.log({ params });
     if (params.login) {
@@ -70,8 +102,9 @@ export default (ctx, module) => {
     if (params.email) params.email = canonize(params.email);
     // console.log({ params });
     return params;
-  };
-  controller.getUserCriteria = function (req) {
+  }
+
+  getUserCriteria(req) {
     const params = req.allParams();
     if (params.username) {
       return {
@@ -95,12 +128,13 @@ export default (ctx, module) => {
         ],
       };
     }
-    throw ctx.errors.e400('Параметр username, email, login не передан');
-  };
-  controller.afterSignup = async function ({ req, user }) {
-    const { User: UserModel } = ctx.models;
+    throw this.app.errors.e400('Параметр username, email, login не передан');
+  }
+
+  async afterSignup({ req, user }) {
+    const { User: UserModel } = this.app.models;
     const link = await user.genereateEmailApprovedLink();
-    ctx.emit('events.auth.signup', { user, link });
+    this.app.emit('events.auth.signup', { user, link });
 
     return {
       __pack: 1,
@@ -108,13 +142,14 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
-  controller.signup = async function (req) {
-    const { User: UserModel } = ctx.models;
-    const { password, ...userFields } = controller.getUserFields(req);
-    const criteria = controller.getUserCriteria(req);
+  }
+
+  async signup(req) {
+    const { User: UserModel } = this.app.models;
+    const { password, ...userFields } = this.getUserFields(req);
+    const criteria = this.getUserCriteria(req);
     const existUser = await UserModel.findOne(criteria);
-    if (existUser) throw ctx.e('auth.userExist', { status: 400, criteria });
+    if (existUser) throw this.app.e('auth.userExist', { status: 400, criteria });
     if (!userFields.meta) userFields.meta = {};
     userFields.meta.approvedEmail = false;
     const user = new UserModel(userFields);
@@ -124,21 +159,21 @@ export default (ctx, module) => {
     await user.save();
     req.user = user;
 
-    return controller.afterSignup({ req, user });
-  };
+    return this.afterSignup({ req, user });
+  }
 
-  controller.login = async function (req) {
-    const { User: UserModel } = ctx.models;
+  async login(req) {
+    const { User: UserModel } = this.app.models;
     const params = req.allParams();
 
-    if (!params.password) throw ctx.e('auth.!password', { status: 400 });
+    if (!params.password) throw this.app.e('auth.!password', { status: 400 });
 
-    const criteria = controller.getUserCriteria(req);
+    const criteria = this.getUserCriteria(req);
     const user = await UserModel.findOne(criteria);
 
-    if (!user) throw ctx.e('auth.loginIncorrect', { status: 400 });
+    if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
     if (!await user.verifyPassword(params.password)) {
-      throw ctx.e('auth.passwordIncorrect', { status: 400 });
+      throw this.app.e('auth.passwordIncorrect', { status: 400 });
     }
     req.user = user;
 
@@ -147,17 +182,17 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
+  }
 
-  controller.updateToken = async function (req) {
-    const { User: UserModel } = ctx.models;
+  async updateToken(req) {
+    const { User: UserModel } = this.app.models;
     // const params = req.allParams();
 
     const userId = req.user && req.user._id;
-    if (!userId) throw ctx.errors.e404('Токен не верный');
+    if (!userId) throw this.app.errors.e404('Токен не верный');
 
     const user = await UserModel.findById(userId);
-    if (!user) throw ctx.errors.e404('Такой пользователь не найден');
+    if (!user) throw this.app.errors.e404('Такой пользователь не найден');
     req.user = user;
 
     return {
@@ -165,20 +200,20 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
+  }
 
-  controller.recovery = async function (req) {
-    const { User: UserModel } = ctx.models;
-    const { mailer } = ctx.modules;
+  async recovery(req) {
+    const { User: UserModel } = this.app.models;
+    const { mailer } = this.app.modules;
     if (!mailer) throw 'Система не может отправить email';
 
     // const params = req.allParams();
 
-    const criteria = controller.getUserCriteria(req);
+    const criteria = this.getUserCriteria(req);
     const user = await UserModel.findOne(criteria);
-    if (!user) throw ctx.errors.e404('Неверный логин');
+    if (!user) throw this.app.errors.e404('Неверный логин');
     const email = user.getEmail();
-    if (!email) throw ctx.errors.e400('У этого пользователя не был указан емейл для восстановления');
+    if (!email) throw this.app.errors.e400('У этого пользователя не был указан емейл для восстановления');
 
     const password = UserModel.generatePassword();
 
@@ -200,10 +235,10 @@ export default (ctx, module) => {
       __pack: 1,
       emailSended: true,
     };
-  };
+  }
 
-  controller.socialLogin = async (req) => {
-    const { User: UserModel, Passport: PassportModel } = ctx.models;
+  async socialLogin(req) {
+    const { User: UserModel, Passport: PassportModel } = this.app.models;
     const passport = await PassportModel.getByToken(req.data.p);
     let user = await passport.getUser();
     if (!user) {
@@ -230,10 +265,12 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
+  }
 
-  controller.socialBind = async (req) => {
-    const { User: UserModel, Passport: PassportModel } = ctx.models;
+  async socialBind(req) {
+    const { checkNotFound } = this.app.helpers;
+    const { e400 } = this.app.errors;
+    const { User: UserModel, Passport: PassportModel } = this.app.models;
     const userId = req.user._id;
     const passport = await PassportModel
       .getByToken(req.data.p)
@@ -250,18 +287,20 @@ export default (ctx, module) => {
     return PassportModel.find({
       userId,
     });
-  };
+  }
 
-  controller.getSocials = async (req) => {
-    const { Passport: PassportModel } = ctx.models;
+  async getSocials(req) {
+    const { Passport: PassportModel } = this.app.models;
     const userId = req.user._id;
     return PassportModel.find({
       userId,
     });
-  };
+  }
 
-  controller.socialUnbind = async (req) => {
-    const { User: UserModel, Passport: PassportModel } = ctx.models;
+  async socialUnbind(req) {
+    const { checkNotFound } = this.app.helpers;
+    const { e400, e403 } = this.app.errors;
+    const { User: UserModel, Passport: PassportModel } = this.app.models;
     const params = req.allParams();
     const userId = req.user._id;
     const user = await UserModel
@@ -289,16 +328,16 @@ export default (ctx, module) => {
     return PassportModel.find({
       userId,
     });
-  };
+  }
 
 
-  controller.tokenLogin = async function (req) {
-    const { User: UserModel } = ctx.models;
+  async tokenLogin(req) {
+    const { User: UserModel } = this.app.models;
     const token = req.data.t || req.data.token;
-    if (!token) throw ctx.errors.e400('!token');
+    if (!token) throw this.app.errors.e400('!token');
 
     const user = await UserModel.tokenLogin({ token });
-    if (!user) throw ctx.errors.e404('!user');
+    if (!user) throw this.app.errors.e404('!user');
     req.user = user;
 
     return {
@@ -306,40 +345,41 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
+  }
 
-  controller.approveEmail = async (req) => {
-    const { User: UserModel } = ctx.models;
+  async approveEmail(req) {
+    const { User: UserModel } = this.app.models;
     return UserModel.findAndApproveEmail(req.data.t);
-  };
-  controller.approvedEmail = async (req) => {
+  }
+  async approvedEmail(req) {
     console.log('DEPRECATED lsk-auth  approvedEmail => approveEmail');  //eslint-disable-line
     return this.approveEmail(req);
-  };
-  controller.emailApprove = async (req) => {
-    console.log('DEPRECATED lsk-auth  emailApprove => approveEmail');  //eslint-disable-line
+  }
+  async emailApprove(req) {
+    console.log('DEPRECATED lsk-auth  emailApprove => approveEmail'); //eslint-disable-line
     return this.approveEmail(req);
-  };
+  }
 
 
-  controller.socialCallback2 = async (req, res, next) => {
+  async socialCallback2(req, res, next) {
     const { provider } = req.params;
     module.passportService.authenticate(provider, (err, { redirect }) => { // eslint-disable-line consistent-return
       if (err) { return next(err); }
       res.redirect(redirect || '/');
     })(req, res, next);
-  };
+  }
 
-  controller.socialAuth = (req, res, next) => { // eslint-disable-line consistent-return
+  socialAuth(req, res, next) {
+    const { e404 } = this.app.errors;
     const { provider } = req.params;
-    if (!module.strategies[provider]) return e404(`No provider: ${provider}`);
+    if (!module.strategies[provider]) next(e404(`No provider: ${provider}`));
     module.passportService.authenticate(
       provider,
       module.strategies[provider].getPassportAuthenticateParams(),
     )(req, res, next);
-  };
+  }
 
-  controller.socialCallback = async (req, res) => {
+  async socialCallback(req, res) {
     // throw '!socialCallback';
     const { provider } = req.params;
     // __DEV__ && console.log('socialCallback');
@@ -363,22 +403,22 @@ export default (ctx, module) => {
       // console.error(err, 'ERROR!');
       throw err;
     }
-  };
+  }
 
 
-  controller.phoneCode = async (req) => {
+  async phoneCode(req) {
     if (!module.config.sms) throw '!module.config.sms';
     const smsConfig = module.config.sms;
 
     const { phone } = req.data;
     const code = random(100000, 999999);
-    controller.lastCode = code;
+    this.lastCode = code;
 
     const smsText = `Ваш проверочный код: ${code}`;
     if (module.tbot) {
       module.tbot.notify(`Номер: ${phone}\n${smsText}`);
     }
-    const text = transliterate(smsText);
+    const text = module.transliterate(smsText);
 
     let res;
     // console.log('smsConfig.provider', smsConfig.provider);
@@ -388,7 +428,7 @@ export default (ctx, module) => {
         to: phone,
         text,
       };
-      res = await ctx.api.fetch('http://bytehand.com:3800/send', { qs });
+      res = await this.app.api.fetch('http://bytehand.com:3800/send', { qs });
     } else if (smsConfig.provider === 'nexmo') {
       const body = {
         ...smsConfig.params,
@@ -396,7 +436,7 @@ export default (ctx, module) => {
         text,
       };
       // console.log('https://rest.nexmo.com/sms/json', { body });
-      res = await ctx.api.fetch('https://rest.nexmo.com/sms/json', {
+      res = await this.app.api.fetch('https://rest.nexmo.com/sms/json', {
         method: 'POST',
         // headers: {
         //   'Content-Type': '!',
@@ -420,19 +460,19 @@ export default (ctx, module) => {
     }
     // console.log('result', JSON.stringify(pack, null, 2));
     return pack;
-  };
+  }
 
-  controller.phoneApprove = (req) => {
+  phoneApprove(req) {
     if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     return { phone, code };
-  };
+  }
 
-  controller.phoneLogin = async (req) => {
+  async phoneLogin(req) {
     if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
-    const { User: UserModel } = ctx.models;
-    if (!((module.config.sms.defaultCode && code === module.config.sms.code) || code === controller.lastCode)) {
+    const { User: UserModel } = this.app.models;
+    if (!((module.config.sms.defaultCode && code === module.config.sms.code) || code === this.lastCode)) {
       throw 'Код не верный';
     }
 
@@ -454,17 +494,17 @@ export default (ctx, module) => {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  };
+  }
 
-  controller.getPassportByToken = async (req) => {
-    const { Passport: PassportModel } = ctx.models;
+  async getPassportByToken(req) {
+    const { Passport: PassportModel } = this.app.models;
 
     return PassportModel.getByToken(req.data.p);
-  };
-  controller.getPermit = async (req) => {
+  }
+  async getPermit(req) {
     const { _id } = req.data;
     if (!_id) throw '!_id';
-    const { PermitModel } = ctx.models;
+    const { PermitModel } = this.app.models;
     const permit = await PermitModel.findOne({
       _id,
     });
@@ -472,20 +512,20 @@ export default (ctx, module) => {
     if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
     if (!req.user || !req.user._id) throw '!userId';
     if (!permit) throw 'not found';
-    if (ctx.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
+    if (this.app.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
       return PermitModel.prepare(permit, { req });
     }
     throw '!permission';
-  };
-  controller.emailPermit = async (req) => {
-    const { User: UserModel } = ctx.models;
-    const { PermitModel } = ctx.models;
+  }
+  async emailPermit(req) {
+    const { User: UserModel } = this.app.models;
+    const { PermitModel } = this.app.models;
 
-    const { ObjectId } = ctx.db.Types;
+    const { ObjectId } = this.app.db.Types;
     if (!req.user || !req.user._id) throw '!_id';
     let userId = req.user._id;
     if (req.data._id && req.data._id !== userId) {
-      if (ctx.hasGrant(req.user, 'admin')) {
+      if (this.app.hasGrant(req.user, 'admin')) {
         userId = req.data._id;
       } else {
         throw '!permission';
@@ -573,20 +613,20 @@ export default (ctx, module) => {
     set(user, 'private.info.emailPermitId', permit._id);
     user.markModified('private.info');
     await user.save();
-    const eventType = `events.user.${type}Email${ctx.hasGrant(user, 'newUser') ? 'Old' : ''}`;
-    ctx.emit(eventType, {
+    const eventType = `events.user.${type}Email${this.app.hasGrant(user, 'newUser') ? 'Old' : ''}`;
+    this.app.emit(eventType, {
       type: eventType,
       targetUser: user,
       user,
       permit,
       email,
-      link: ctx.url(`/auth/confirm/email?code=${permit.code}`),
+      link: this.app.url(`/auth/confirm/email?code=${permit.code}`),
     });
     return PermitModel.prepare(permit, { req });
-  };
-  controller.confirmEmail = async (req) => {
-    const { User: UserModel } = ctx.models;
-    const { PermitModel } = ctx.models;
+  }
+  async confirmEmail(req) {
+    const { User: UserModel } = this.app.models;
+    const { PermitModel } = this.app.models;
     const { code } = req.data;
     if (!code) throw '!code';
     const permit = await PermitModel.findOne({
@@ -645,11 +685,11 @@ export default (ctx, module) => {
       return p.save();
     });
     return permit;
-  };
-  controller.restorePasswordPermit = async (req) => {
+  }
+  async restorePasswordPermit(req) {
     // console.log('123123123');
-    const { User: UserModel } = ctx.models;
-    const { PermitModel } = ctx.models;
+    const { User: UserModel } = this.app.models;
+    const { PermitModel } = this.app.models;
     const { email } = req.data;
 
     if (!email || !validator.isEmail(email)) {
@@ -687,20 +727,20 @@ export default (ctx, module) => {
       },
       code,
     });
-    ctx.emit('events.auth.restorePassword', {
+    this.app.emit('events.auth.restorePassword', {
       type: 'events.auth.restorePassword',
       targetUser: user,
       user,
       permit,
       email,
-      link: ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`),
+      link: this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`),
     });
-    // console.log(ctx.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
+    // console.log(this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
     return PermitModel.prepare(permit, { req });
-  };
-  controller.confirmPassword = async (req) => {
-    const { User: UserModel } = ctx.models;
-    const { PermitModel } = ctx.models;
+  }
+  async confirmPassword(req) {
+    const { User: UserModel } = this.app.models;
+    const { PermitModel } = this.app.models;
     const { code, password } = req.data;
     if (!code) throw '!code';
     const permit = await PermitModel.findOne({
@@ -726,11 +766,11 @@ export default (ctx, module) => {
         permit: PermitModel.prepare(permit, { req }),
       },
     });
-  };
-  controller.findOneByCode = async (req) => {
+  }
+  async findOneByCode(req) {
     const { code } = req.data;
     if (!code) throw '!code';
-    const { PermitModel } = ctx.models;
+    const { PermitModel } = this.app.models;
     const permit = await PermitModel.findOne({
       code,
     });
@@ -738,11 +778,9 @@ export default (ctx, module) => {
     if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
     if (!req.user || !req.user._id) throw '!userId';
     if (!permit) throw 'not found';
-    if (ctx.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
+    if (this.app.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
       return PermitModel.prepare(permit, { req });
     }
     throw '!permission';
-  };
-
-  return controller;
-};
+  }
+}

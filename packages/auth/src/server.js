@@ -1,15 +1,15 @@
+/* eslint-disable global-require */
 import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import { Passport } from 'passport';
 import onlineService from './server/onlineService';
+import Api from './server/Api';
+
 
 export default ctx => class AuthModule {
     config = get(ctx, 'config.auth', {});
-    canonize = require('./server/canonize').default.bind(this);
-    canonizeAndValidatePhone = require('./server/canonizeAndValidatePhone').default.bind(this);
-    canonizePhone = require('./server/canonizePhone').default.bind(this);
-    canonizeUsername = require('./server/canonizeUsername').default.bind(this);
-    transliterate = require('./server/transliterate').default.bind(this);
+    Api = Api;
+    api = new Api(this);
 
     initOnlineService() {
       this.online = onlineService;
