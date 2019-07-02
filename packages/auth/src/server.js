@@ -9,7 +9,7 @@ import Api from './server/Api';
 export default ctx => class AuthModule {
     config = get(ctx, 'config.auth', {});
     Api = Api;
-    api = new Api(this);
+    api = new Api(ctx, this);
 
     initOnlineService() {
       this.online = onlineService;

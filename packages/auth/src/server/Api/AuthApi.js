@@ -8,7 +8,7 @@ import validator from 'validator';
 import BaseApi from '@lskjs/server/Api';
 import canonize from '@lskjs/utils/canonize';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
-// import transliterate from '@lskjs/utils/transliterate';
+import transliterate from '@lskjs/utils/transliterate';
 import validateEmail from '@lskjs/utils/validateEmail';
 
 export default class Api extends BaseApi {
@@ -363,7 +363,7 @@ export default class Api extends BaseApi {
 
   async socialCallback2(req, res, next) {
     const { provider } = req.params;
-    module.passportService.authenticate(provider, (err, { redirect }) => { // eslint-disable-line consistent-return
+    this.app.modules.auth.passportService.authenticate(provider, (err, { redirect }) => { // eslint-disable-line consistent-return
       if (err) { return next(err); }
       res.redirect(redirect || '/');
     })(req, res, next);
@@ -372,10 +372,10 @@ export default class Api extends BaseApi {
   socialAuth(req, res, next) {
     const { e404 } = this.app.errors;
     const { provider } = req.params;
-    if (!module.strategies[provider]) next(e404(`No provider: ${provider}`));
-    module.passportService.authenticate(
+    if (!this.app.modules.auth.strategies[provider]) next(e404(`No provider: ${provider}`));
+    this.app.modules.auth.passportService.authenticate(
       provider,
-      module.strategies[provider].getPassportAuthenticateParams(),
+      this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),
     )(req, res, next);
   }
 
@@ -388,9 +388,9 @@ export default class Api extends BaseApi {
     try {
       return new Promise((resolve, reject) => {
         (
-          module.passportService.authenticate(
+          this.app.modules.auth.passportService.authenticate(
             provider,
-            module.strategies[provider].getPassportAuthenticateParams(),
+            this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),
             async (err, data) => {
               // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
               if (err) return reject(err);
@@ -407,18 +407,18 @@ export default class Api extends BaseApi {
 
 
   async phoneCode(req) {
-    if (!module.config.sms) throw '!module.config.sms';
-    const smsConfig = module.config.sms;
+    if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
+    const smsConfig = this.app.modules.auth.config.sms;
 
     const { phone } = req.data;
     const code = random(100000, 999999);
     this.lastCode = code;
 
     const smsText = `Ваш проверочный код: ${code}`;
-    if (module.tbot) {
-      module.tbot.notify(`Номер: ${phone}\n${smsText}`);
+    if (this.app.modules.auth.tbot) {
+      this.app.modules.auth.tbot.notify(`Номер: ${phone}\n${smsText}`);
     }
-    const text = module.transliterate(smsText);
+    const text = transliterate(smsText);
 
     let res;
     // console.log('smsConfig.provider', smsConfig.provider);
@@ -463,16 +463,16 @@ export default class Api extends BaseApi {
   }
 
   phoneApprove(req) {
-    if (!module.config.sms) throw '!module.config.sms';
+    if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     return { phone, code };
   }
 
   async phoneLogin(req) {
-    if (!module.config.sms) throw '!module.config.sms';
+    if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     const { User: UserModel } = this.app.models;
-    if (!((module.config.sms.defaultCode && code === module.config.sms.code) || code === this.lastCode)) {
+    if (!((this.app.modules.auth.config.sms.defaultCode && code === this.app.modules.auth.config.sms.code) || code === this.lastCode)) {
       throw 'Код не верный';
     }
 

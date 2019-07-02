@@ -8,7 +8,9 @@ export default class Api {
   constructor(app, params = {}) {
     this.app = app;
     this.asyncRouter = app.asyncRouter;
-    this.wrapResoursePoint = app.helpers.wrapResoursePoint;
+    if (app.helpers && app.helpers.wrapResoursePoint) {
+      this.wrapResoursePoint = app.helpers.wrapResoursePoint;
+    }
     // this.isAuth = __DEV__ ? () => true : app.helpers.isAuth;
     this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
     this.e = app.errors.e;

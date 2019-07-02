@@ -7,6 +7,23 @@ export default (ctx, { Strategy }) => class FacebookStrategy extends Strategy {
   Strategy = Facebook.Strategy
   type = 'facebook'
 
+  async checkToken(uid, accessToken) {
+    return new Promise(async (resolve) => {
+      try {
+        const res = await fetch(`https://graph.facebook.com/me?access_token=${accessToken}`, {
+          method: 'GET',
+        });
+        const json = await res.json();
+        if (json && json.id && json.id.toString() === uid.toString()) {
+          return resolve(true);
+        }
+        return resolve(false);
+      } catch (err) {
+        return resolve(false);
+      }
+    });
+  }
+
   async getProfile(passport) {  //eslint-disable-line
     const fields = [
       'gender',

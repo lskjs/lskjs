@@ -5,8 +5,31 @@ export default (ctx, { Strategy }) => class VkontakteStrategy extends Strategy {
   Strategy = Vkontakte.Strategy
   type = 'vkontakte'
 
+  async checkToken(id, accessToken) {
+    if (!id || !accessToken) {
+      return false;
+    }
+    try {
+      return fetch(`https://api.vk.com/method/users.get?access_token=${accessToken}&v=5.00`)
+        .then(response => response.json().then((json) => {
+          if (json
+              && json.response
+              && json.response[0]
+              && json.response[0].id
+              && json.response[0].id.toString() === id.toString()
+          ) {
+            return true;
+          }
+          return false;
+        }));
+    } catch (err) {
+      return false;
+    }
+    return false;
+  }
+
   async getProfile(passport) {  //eslint-disable-line
-    console.log('getProfile', passport);
+    // console.log('getProfile', passport);
 
     const fields = [
       'sex',
@@ -22,7 +45,7 @@ export default (ctx, { Strategy }) => class VkontakteStrategy extends Strategy {
       'id',
       'about',
     ];
-    const res = await fetch(`https://api.vk.com/method/users.get?fields=${fields.join(',')}&access_token=${passport.token}&v=5`);
+    const res = await fetch(`https://api.vk.com/method/users.get?fields=${fields.join(',')}&access_token=${passport.token}&v=5.00`);
     const json = await res.json();
     const data = json.response[0];
     return {

@@ -48,7 +48,7 @@ export default function PermitModel(ctx) {
     return permit;
   };
   schema.statics.generateCode = function ({ str, type = 'random', length = 4 }, iteration) { // eslint-disable-line func-names
-    if (type === 'random') {
+    if (type === 'random' || type === 'number') {
       const min = 0;
       let maxNumber = '';
       for (let i = 0; i < length; i += 1) {
