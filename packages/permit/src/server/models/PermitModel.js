@@ -7,7 +7,11 @@ export default function PermitModel(ctx) {
   const { db } = ctx;
   const { Schema } = db;
   const schema = new UniversalSchema({
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      // required: true,
+    },
     type: {
       type: String,
       required: true,
