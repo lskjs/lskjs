@@ -31,15 +31,15 @@ export default async (ctx, params = {}) => {
     // return mongoose.connect(uri, finalOptions); // , options
     // return mongoose;
   };
-  mongoose.removeModels = () => {
-    Object.keys(mongoose.connection.models).forEach((key) => {
-      delete mongoose.connection.models[key];
-    });
-  };
+  // mongoose.removeModels = () => {
+  //   Object.keys(mongoose.connection.models).forEach((key) => {
+  //     delete mongoose.connection.models[key];
+  //   });
+  // };
   mongoose.stop = () => {
     mongoose.connection.close();
     mongoose.disconnect();
-    mongoose.removeModels();
+    // mongoose.removeModels();
     return Promise.delay(1000);
   };
 
