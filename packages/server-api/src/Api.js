@@ -50,7 +50,11 @@ export default class Api {
     // return true;
     if (get(req, 'user.role') !== 'admin') throw this.e(403, '!admin');
   }
-  assign(model, params, fields) {
+  assign(model, params, fields = []) {
+    if (field.length === 0) {
+      console.error('Api.assign enmpty fields');
+      return;
+    }
     fields.forEach((field) => {
       if (params[field] === undefined) return;
       model[field] = params[field];
