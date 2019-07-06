@@ -11,14 +11,20 @@ export default class Api {
     if (app.helpers && app.helpers.wrapResoursePoint) {
       this.wrapResoursePoint = app.helpers.wrapResoursePoint;
     }
-    // this.isAuth = __DEV__ ? () => true : app.helpers.isAuth;
-    this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
+    // this.isAuth = app.helpers.isAuth;
+    // this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
     this.e = app.errors.e;
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });
     Object.assign(this, params);
   }
+  isAuth(req) {
+    if (req._errJwt) throw req._errJwt;
+    if (!req.user || !req.user._id) throw this.errors.e401('!req.user');
+    return true;
+  }
+
   url(path, params) {
     return this.app.url((this.path || '/api') + path, params);
   }
@@ -41,7 +47,7 @@ export default class Api {
     };
   }
   isAdmin(req) {
-    return true;
+    // return true;
     if (get(req, 'user.role') !== 'admin') throw this.e(403, '!admin');
   }
   assign(model, params, fields) {

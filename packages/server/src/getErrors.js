@@ -1,10 +1,18 @@
-import AppError from '@lskjs/utils/AppError';
+const createErr = code => message => ({
+  status: code > 200 && code < 600 ? code : 500,
+  code,
+  message,
+});
 
 export default () => ({
-  e: (code, message, status) => (new AppError(code, message, status)),
-  e500: message => (new AppError(500, message, 500)),
-  e404: message => (new AppError(404, message, 404)),
-  e403: message => (new AppError(403, message, 403)),
-  e401: message => (new AppError(401, message, 401)), // unauth
-  e400: message => (new AppError(400, message, 400)),
+  e: (code, message, status) => ({
+    code,
+    message,
+    status,
+  }),
+  e500: createErr(500),
+  e404: createErr(404),
+  e403: createErr(403),
+  e401: createErr(401),
+  e400: createErr(400),
 });

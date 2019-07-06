@@ -5,7 +5,7 @@ import m from 'moment';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
 import validator from 'validator';
-import BaseApi from '@lskjs/server/Api';
+import BaseApi from '@lskjs/server-api';
 import canonize from '@lskjs/utils/canonize';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
 import transliterate from '@lskjs/utils/transliterate';

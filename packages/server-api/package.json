@@ -1,0 +1,42 @@
+{
+  "name": "@lskjs/server-api",
+  "version": "0.35.5",
+  "description": "LSK server-api.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/modules/tree/master/packages/server-api",
+  "keywords": [],
+  "scripts": {
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "bootstrap:nodemodules": "../../scripts/package-bootstrap-nodemodules.sh",
+    "update": "../../scripts/package-update.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "link:me": "../../scripts/package-link-me.sh",
+    "link:all": "../../scripts/package-link-all.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh",
+    "release:docs": "../../scripts/package-release-docs.sh",
+    "storybook": "../../scripts/package-storybook.sh",
+    "styleguide": "../../scripts/package-styleguide.sh"
+  },
+  "dependencies": {
+    "cacheman": "^2.2.1",
+    "object-hash": "^1.3.1"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11"
+  },
+  "peerDependencies": {
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11"
+  }
+}
