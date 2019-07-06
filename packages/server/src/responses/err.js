@@ -1,5 +1,6 @@
 
 export default ctx => function (pack) {
+  if (typeof pack === 'string') pack = { message: pack };
   const {
     code,
     message,
@@ -11,7 +12,7 @@ export default ctx => function (pack) {
   // console.log('errORORORO', message, pack.message, pack);
 
 
-  const res = {};
+  const res = { };
   if (!message) {
     if (typeof err === 'string') {
       res.message = err;
@@ -19,7 +20,7 @@ export default ctx => function (pack) {
       res.message = 'The error';
     }
   }
-  if (!res.code) res.code = 1;
+  if (!code) res.code = 1;
   if (!status || !(status >= 400 && status <= 600)) {
     res.status = 500;
   }
@@ -42,4 +43,3 @@ export default ctx => function (pack) {
 
   return this.pack(null, { code, message, status, ...res });
 };
-
