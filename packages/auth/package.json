@@ -58,9 +58,11 @@
     "mobx": "5.6.0",
     "moment": "2.24.0",
     "mongoose": "5.2.15",
-    "react-icons2": "2.5.0"
+    "react-icons2": "2.5.0",
+    "@lskjs/server-api": "^0.35.6"
   },
   "peerDependencies": {
+    "@lskjs/server-api": "^0.35.6",
     "@lskjs/apiquery": "^0.35.0",
     "@lskjs/db": "^0.35.4",
     "@lskjs/server": "^0.35.4",

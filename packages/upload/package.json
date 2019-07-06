@@ -38,9 +38,11 @@
     "multer-s3": "^2.9.0"
   },
   "devDependencies": {
+    "@lskjs/server-api": "^0.35.6",
     "lodash": "^4.17.11"
   },
   "peerDependencies": {
+    "@lskjs/server-api": "^0.35.6",
     "lodash": "*"
   }
 }
