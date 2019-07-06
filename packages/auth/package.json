@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "0.35.6",
+  "version": "0.35.7",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -48,22 +48,22 @@
     "validator": "10.11.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^0.35.6",
-    "@lskjs/db": "^0.35.6",
-    "@lskjs/utils": "^0.35.6",
+    "@lskjs/apiquery": "^0.35.7",
+    "@lskjs/db": "^0.35.7",
+    "@lskjs/server-api": "^0.35.7",
+    "@lskjs/utils": "^0.35.7",
     "axios": "^0.19.0",
     "bluebird": "3.5.3",
     "lodash": "4.17.11",
     "mobx": "5.6.0",
     "moment": "2.24.0",
     "mongoose": "5.2.15",
-    "react-icons2": "2.5.0",
-    "@lskjs/server-api": "^0.35.6"
+    "react-icons2": "2.5.0"
   },
   "peerDependencies": {
-    "@lskjs/server-api": "^0.35.6",
     "@lskjs/apiquery": "^0.35.0",
     "@lskjs/db": "^0.35.4",
+    "@lskjs/server-api": "^0.35.6",
     "@lskjs/utils": "^0.35.2",
     "axios": "^0.19.0",
     "bluebird": "*",
