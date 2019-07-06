@@ -1,12 +1,23 @@
 const globalOrWindow = typeof window !== 'undefined' ? window : global;
 globalOrWindow.__SERVER__ = typeof window === 'undefined';
 globalOrWindow.__CLIENT__ = !globalOrWindow.__SERVER__;
+
 if (typeof __DEV__ === 'undefined' && !globalOrWindow.__DEV__) {
-  globalOrWindow.__DEV__ = false;
+  if (globalOrWindow.__SERVER__) {
+    globalOrWindow.__DEV__ = process.env.NODE_ENV !== 'production';
+  } else {
+    globalOrWindow.__DEV__ = false;
+  }
 }
-// globalOrWindow.__WEBVIEW__ = !globalOrWindow.__SERVER__;
-if (!globalOrWindow.__STAGE__ && !globalOrWindow.__STAGE__) {
-  globalOrWindow.__STAGE__ = 'stage';
+globalOrWindow.__DEV__ = !!globalOrWindow.__DEV__;
+globalOrWindow.__PROD__ = !globalOrWindow.__DEV__;
+if (!globalOrWindow.__STAGE__) {
+  if (globalOrWindow.__SERVER__) {
+    globalOrWindow.__STAGE__ = process.env.STAGE;
+  }
+  if (!globalOrWindow.__STAGE__) {
+    globalOrWindow.__STAGE__ = 'development';
+  }
 }
 
 // if (__SERVER__) {
