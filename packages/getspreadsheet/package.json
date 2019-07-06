@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/getspreadsheet",
-  "version": "0.35.5",
+  "version": "0.35.6",
   "description": "LSK getspreadsheet.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
