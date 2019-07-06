@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import Promise from 'bluebird';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
 
@@ -15,7 +16,8 @@ export default app => class Mailer {
 
   getTransporter() {
     if (this.config && this.config.transport) {
-      return Promise.promisifyAll(nodemailer.createTransport(this.config.transport));
+      const transport = nodemailer.createTransport(this.config.transport);
+      return Promise.promisifyAll(transport);
     }
     return null;
   }
@@ -36,7 +38,7 @@ export default app => class Mailer {
     };
   }
 
-  getT(props) {
+  getT(props = {}) {
     if (app.i18 && app.i18.getT) {
       return app.i18.getT(props.locale || 'en');
     }
@@ -61,10 +63,10 @@ export default app => class Mailer {
   }
 
   getTemplateConfig() {
-    const { site = { assets: '/assets' } } = app.config.client;
+    const assets = get(app, 'config.client.site.assets') || get(app, 'config.about.assets') || '/assets';
     return {
-      logo: app.url(`${site.assets}/logo.png`),
-      headerImage: app.url(`${site.assets}/emailHeaderImage.png`),
+      logo: app.url(`${assets}/logo.png`),
+      headerImage: app.url(`${assets}/emailHeaderImage.png`),
     };
   }
 

@@ -2,12 +2,17 @@ import multer from 'multer';
 import fs from 'fs';
 import nodepath from 'path';
 import random from 'lodash/random';
+import get from 'lodash/get';
 import aws from 'aws-sdk';
 import multerS3 from 'multer-s3';
 
 export default ctx => class LskUpload {
   async init() {
-    this.config = ctx.config.upload;
+    this.config = get(ctx, 'config.upload');
+    if (!this.config) {
+      console.error('config.upload is missing');
+      this.config = {};
+    }
     if (!this.config.url) {
       this.config.url = ctx.config.url;
     }

@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import mjml2html from 'mjml';
+import get from 'lodash/get';
 // import { mjml2html } from 'mjml';
 import Template from './_html';
 
@@ -60,7 +61,7 @@ export default class Base extends Template {
         ${subtitle && `
           <mj-text
             align="center"
-            color="${this.theme.colors.secondary}"
+            color="${get(this, 'theme.colors.secondary')}"
             font-family="${this.fontFamily}"
             line-height="20px"
             font-size="14px"
@@ -72,7 +73,7 @@ export default class Base extends Template {
         `}
         <mj-text
           align="center"
-          color="${this.theme.colors.secondary}"
+          color="${get(this, 'theme.colors.secondary')}"
           font-family="${this.fontFamily}"
           line-height="20px"
           font-size="14px"
@@ -91,7 +92,7 @@ export default class Base extends Template {
           <tr>
             ${list.map((item, index) => (`
               <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
-                <a href="${item.href}" target="_blank" style="color: ${this.theme.colors.primary}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
+                <a href="${item.href}" target="_blank" style="color: ${get(this, 'theme.colors.primary')}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
                   ${item.title}
                 </a>
               </td>
@@ -104,12 +105,12 @@ export default class Base extends Template {
 
   team() {
     return `
-      <mj-section background-color="${this.theme.colors.white}">
+      <mj-section background-color="${get(this, 'theme.colors.white')}">
         <mj-column width="100%">
-          <mj-divider border-width="1px" border-style="solid" border-color="${this.theme.colors.border}" />
+          <mj-divider border-width="1px" border-style="solid" border-color="${get(this, 'theme.colors.border')}" />
         </mj-column>
       </mj-section>
-      <mj-section background-color="${this.theme.colors.white}" padding="0px 0px 42px">
+      <mj-section background-color="${get(this, 'theme.colors.white')}" padding="0px 0px 42px">
         ${this.title(this.t('email.goodDay'))}
         ${this.text(this.t('email.incircle.isuvorov.com'))}
       </mj-section>
@@ -121,7 +122,7 @@ export default class Base extends Template {
       <mj-column width="95%">
         <mj-text
           font-family="${this.fontFamily}"
-          color="${this.theme.colors.main}"
+          color="${get(this, 'theme.colors.main')}"
           font-size="28px"
           line-height="34px"
           align="center"
@@ -137,7 +138,7 @@ export default class Base extends Template {
       <mj-column width="80%">
         <mj-text
           font-family="${this.fontFamily}"
-          color="${this.theme.colors.main}"
+          color="${get(this, 'theme.colors.main')}"
           align="center"
           font-size="20px"
           padding-top="10px"
@@ -155,7 +156,7 @@ export default class Base extends Template {
       <mj-column width="80%">
         <mj-text
           font-family="${this.fontFamily}"
-          color="${this.theme.colors.secondary}"
+          color="${get(this, 'theme.colors.secondary')}"
           font-size="16px"
           line-height="26px"
           align="center"
@@ -207,7 +208,7 @@ export default class Base extends Template {
           ${this.font('Roboto', 'https://fonts.googleapis.com/css?family=Roboto:400,400i,700&amp;subset=cyrillic')}
         </mj-head>
         <mj-body>
-          <mj-container background-color="${this.theme.colors.mainBackground}">
+          <mj-container background-color="${get(this, 'theme.colors.mainBackground')}">
             ${!logo ? '' : this.logo({ src: logo })}
             ${!image ? '' : this.headerImage({ src: image })}
     `;
@@ -245,7 +246,7 @@ export default class Base extends Template {
 
   content(children) {
     return `
-      <mj-section background-color="${this.theme.colors.white}" padding="32px 0px 12px">
+      <mj-section background-color="${get(this, 'theme.colors.white')}" padding="32px 0px 12px">
         ${children}
       </mj-section>
     `;

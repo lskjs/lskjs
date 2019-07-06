@@ -41,7 +41,11 @@ export default ctx => class AuthModule {
       return require('./server/strategies').default(ctx, this);
     }
     async init() {
-      this.config = get(ctx, 'config.auth', {});
+      this.config = get(ctx, 'config.auth');
+      if (!this.config) {
+        console.error('config.auth is missing');
+        this.config = {};
+      }
 
       if (this.config.telegram) {
         this.tbot = require('./tbot').default(ctx, this);
