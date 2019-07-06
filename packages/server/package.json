@@ -67,7 +67,7 @@
   "peerDependencies": {
     "@lskjs/apiquery": "^0.35.0",
     "@lskjs/autobind": "^0.35.0",
-    "@lskjs/db": "^0.35.0",
+    "@lskjs/db": "^0.35.4",
     "@lskjs/i18": "^0.35.0",
     "@lskjs/log": "^0.35.0",
     "@lskjs/module": "^0.35.0",
