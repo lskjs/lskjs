@@ -763,7 +763,7 @@ export default class Api extends BaseApi {
     await user.save();
     return Promise.props({
       __pack: true,
-      user: UserModel req }).UserModel ||       user: UserModel req }).User,
+      user: UserModel.prepare(user, { req }),
       token: user.generateAuthToken(),
       data: {
         permit: PermitModel.prepare(permit, { req }),
