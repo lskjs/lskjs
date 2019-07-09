@@ -238,7 +238,8 @@ export default class Api extends BaseApi {
   }
 
   async socialLogin(req) {
-    const UserModel Passport: PassportModel } = this.app.models.UserModel || this.app.models.User;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const UserModel = this.app.models.PassportModel || this.app.models.Passport;
     const passport = await PassportModel.getByToken(req.data.p);
     let user = await passport.getUser();
     if (!user) {
@@ -270,7 +271,8 @@ export default class Api extends BaseApi {
   async socialBind(req) {
     const { checkNotFound } = this.app.helpers;
     const { e400 } = this.app.errors;
-    const UserModel Passport: PassportModel } = this.app.models.UserModel || this.app.models.User;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const UserModel = this.app.models.PassportModel || this.app.models.Passport;
     const userId = req.user._id;
     const passport = await PassportModel
       .getByToken(req.data.p)
@@ -300,7 +302,8 @@ export default class Api extends BaseApi {
   async socialUnbind(req) {
     const { checkNotFound } = this.app.helpers;
     const { e400, e403 } = this.app.errors;
-    const UserModel Passport: PassportModel } = this.app.models.UserModel || this.app.models.User;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const UserModel = this.app.models.PassportModel || this.app.models.Passport;
     const params = req.allParams();
     const userId = req.user._id;
     const user = await UserModel
