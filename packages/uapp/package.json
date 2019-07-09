@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "0.35.8",
+  "version": "0.35.15",
   "description": "LSK universal react app wrapper",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -47,7 +47,7 @@
     "universal-router": "^8.1.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^0.35.7",
+    "@lskjs/apiquery": "^0.35.15",
     "@lskjs/autobind": "^0.35.7",
     "@lskjs/i18": "^0.35.7",
     "@lskjs/log": "^0.35.7",

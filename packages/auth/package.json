@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "0.35.14",
+  "version": "0.35.15",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "validator": "10.11.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^0.35.7",
+    "@lskjs/apiquery": "^0.35.15",
     "@lskjs/db": "^0.35.7",
     "@lskjs/server-api": "^0.35.8",
     "@lskjs/utils": "^0.35.7",
