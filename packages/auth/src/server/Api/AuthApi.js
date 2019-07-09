@@ -16,32 +16,32 @@ export default class Api extends BaseApi {
     // const { isAuth } = this.app.middlewares;
 
     return {
-      '/login': this.login,
-      '/signup': this.signup, // POST
-      '/recovery': this.recovery,
-      '/updateToken': this.updateToken,
-      '/loginToken': this.loginToken,
-      '/email/approve': this.emailApprove, // (req, res) => res.redirect('/cabinet'));
-      '/phone/code': this.phoneCode,
-      '/phone/approve': this.phoneApprove,
-      '/phone/login': this.phoneLogin,
+      '/login': ::this.login,
+      '/signup': ::this.signup, // POST
+      '/recovery': ::this.recovery,
+      '/updateToken': ::this.updateToken,
+      '/loginToken': ::this.loginToken,
+      '/email/approve': ::this.emailApprove, // (req, res) => res.redirect('/cabinet'));
+      '/phone/code': ::this.phoneCode,
+      '/phone/approve': ::this.phoneApprove,
+      '/phone/login': ::this.phoneLogin,
 
       // Регистрация пользователя через соц сеть
-      '/social': this.getSocials, // isAuth,
-      '/social/signup': this.socialLogin,
-      '/social/login': this.socialLogin,
-      '/social/bind': this.socialBind, // Добавление соц.сетей к пользователю // isAuth,
-      '/social/unbind': this.socialUnbind, // isAuth,
+      '/social': ::this.getSocials, // isAuth,
+      '/social/signup': ::this.socialLogin,
+      '/social/login': ::this.socialLogin,
+      '/social/bind': ::this.socialBind, // Добавление соц.сетей к пользователю // isAuth,
+      '/social/unbind': ::this.socialUnbind, // isAuth,
 
-      '/passport/getByToken': this.getPassportByToken,
-      '/restorePasswordPermit': this.restorePasswordPermit,
-      '/confirmPassword': this.confirmPassword,
-      '/getPermit': this.getPermit,
+      '/passport/getByToken': ::this.getPassportByToken,
+      '/restorePasswordPermit': ::this.restorePasswordPermit,
+      '/confirmPassword': ::this.confirmPassword,
+      '/getPermit': ::this.getPermit,
 
       // social auth init
-      '/:provider': this.socialAuth,
-      '/:provider/auth': this.socialAuth,
-      '/:provider/callback': this.socialCallback,
+      '/:provider': ::this.socialAuth,
+      '/:provider/auth': ::this.socialAuth,
+      '/:provider/callback': ::this.socialCallback,
     };
   }
 
@@ -55,7 +55,7 @@ export default class Api extends BaseApi {
   //   const this = {};
 
   async validate(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const user = await UserModel.findById(req.user._id);
     if (!user) throw this.app.errors.e404('Не найден user в базе');
     return {
@@ -68,7 +68,7 @@ export default class Api extends BaseApi {
   }
 
   async silent(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const params = req.allParams();
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
@@ -132,7 +132,7 @@ export default class Api extends BaseApi {
   }
 
   async afterSignup({ req, user }) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const link = await user.genereateEmailApprovedLink();
     this.app.emit('events.auth.signup', { user, link });
 
@@ -145,7 +145,7 @@ export default class Api extends BaseApi {
   }
 
   async signup(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const { password, ...userFields } = this.getUserFields(req);
     const criteria = this.getUserCriteria(req);
     const existUser = await UserModel.findOne(criteria);
@@ -163,7 +163,7 @@ export default class Api extends BaseApi {
   }
 
   async login(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const params = req.allParams();
 
     if (!params.password) throw this.app.e('auth.!password', { status: 400 });
@@ -185,7 +185,7 @@ export default class Api extends BaseApi {
   }
 
   async updateToken(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     // const params = req.allParams();
 
     const userId = req.user && req.user._id;
@@ -203,7 +203,7 @@ export default class Api extends BaseApi {
   }
 
   async recovery(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const { mailer } = this.app.modules;
     if (!mailer) throw 'Система не может отправить email';
 
@@ -238,7 +238,7 @@ export default class Api extends BaseApi {
   }
 
   async socialLogin(req) {
-    const { User: UserModel, Passport: PassportModel } = this.app.models;
+    const UserModel Passport: PassportModel } = this.app.models.UserModel || this.app.models.User;
     const passport = await PassportModel.getByToken(req.data.p);
     let user = await passport.getUser();
     if (!user) {
@@ -270,7 +270,7 @@ export default class Api extends BaseApi {
   async socialBind(req) {
     const { checkNotFound } = this.app.helpers;
     const { e400 } = this.app.errors;
-    const { User: UserModel, Passport: PassportModel } = this.app.models;
+    const UserModel Passport: PassportModel } = this.app.models.UserModel || this.app.models.User;
     const userId = req.user._id;
     const passport = await PassportModel
       .getByToken(req.data.p)
@@ -300,7 +300,7 @@ export default class Api extends BaseApi {
   async socialUnbind(req) {
     const { checkNotFound } = this.app.helpers;
     const { e400, e403 } = this.app.errors;
-    const { User: UserModel, Passport: PassportModel } = this.app.models;
+    const UserModel Passport: PassportModel } = this.app.models.UserModel || this.app.models.User;
     const params = req.allParams();
     const userId = req.user._id;
     const user = await UserModel
@@ -332,7 +332,7 @@ export default class Api extends BaseApi {
 
 
   async tokenLogin(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const token = req.data.t || req.data.token;
     if (!token) throw this.app.errors.e400('!token');
 
@@ -348,7 +348,7 @@ export default class Api extends BaseApi {
   }
 
   async approveEmail(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     return UserModel.findAndApproveEmail(req.data.t);
   }
   async approvedEmail(req) {
@@ -471,7 +471,7 @@ export default class Api extends BaseApi {
   async phoneLogin(req) {
     if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     if (!((this.app.modules.auth.config.sms.defaultCode && code === this.app.modules.auth.config.sms.code) || code === this.lastCode)) {
       throw 'Код не верный';
     }
@@ -518,7 +518,7 @@ export default class Api extends BaseApi {
     throw '!permission';
   }
   async emailPermit(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const { PermitModel } = this.app.models;
 
     const { ObjectId } = this.app.db.Types;
@@ -625,7 +625,7 @@ export default class Api extends BaseApi {
     return PermitModel.prepare(permit, { req });
   }
   async confirmEmail(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const { PermitModel } = this.app.models;
     const { code } = req.data;
     if (!code) throw '!code';
@@ -688,7 +688,7 @@ export default class Api extends BaseApi {
   }
   async restorePasswordPermit(req) {
     // console.log('123123123');
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const { PermitModel } = this.app.models;
     const { email } = req.data;
 
@@ -739,7 +739,7 @@ export default class Api extends BaseApi {
     return PermitModel.prepare(permit, { req });
   }
   async confirmPassword(req) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     const { PermitModel } = this.app.models;
     const { code, password } = req.data;
     if (!code) throw '!code';
@@ -760,7 +760,7 @@ export default class Api extends BaseApi {
     await user.save();
     return Promise.props({
       __pack: true,
-      user: UserModel.prepare(user, { req }),
+      user: UserModel req }).UserModel ||       user: UserModel req }).User,
       token: user.generateAuthToken(),
       data: {
         permit: PermitModel.prepare(permit, { req }),
