@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sms",
-  "version": "0.35.7",
+  "version": "0.35.16",
   "description": "LSK module for sms.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -29,7 +29,6 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
-  "dependencies": {},
   "devDependencies": {
     "axios": "^0.19.0",
     "plivo": "^4.1.2",
