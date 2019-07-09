@@ -20,7 +20,7 @@ export default class Api extends BaseApi {
       '/signup': ::this.signup, // POST
       '/recovery': ::this.recovery,
       '/updateToken': ::this.updateToken,
-      '/loginToken': ::this.loginToken,
+      // // '/loginToken': ::this.loginToken,
       '/email/approve': ::this.emailApprove, // (req, res) => res.redirect('/cabinet'));
       '/phone/code': ::this.phoneCode,
       '/phone/approve': ::this.phoneApprove,
