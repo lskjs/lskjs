@@ -1,5 +1,5 @@
 export default ctx => (
-  (err, req, res, next) => { // eslint-disable-line
+  (err, req, res, next) => { // eslint-disable-line    
     if (req && req.log && req.log.error) {
       req.log.error({
         err,

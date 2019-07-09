@@ -5,6 +5,7 @@ import mapValues from 'lodash/mapValues';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
+import isObject from 'lodash/isObject';
 import staticFileMiddleware from 'connect-static-file';
 import Api from '@lskjs/apiquery';
 import autobind from '@lskjs/autobind';
@@ -82,7 +83,25 @@ export default class ServerApp extends Module {
     return `${this.config.url}${str}${query}`;
   }
 
-  e(code, params) {
+  e(params1, params2) {
+    let params = {};
+    if (typeof params1 === 'string') {
+      params.code = params1;
+    }
+    if (isObject(params1)) {
+      params = {
+        ...params,
+        ...params1,
+      };
+    }
+    if (isObject(params2)) {
+      params = {
+        ...params,
+        ...params2,
+      };
+    }
+    const { code } = params;
+
     const t = this.i18 ? this.i18.t : (a => a);
     return {
       code,
