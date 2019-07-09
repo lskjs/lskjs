@@ -386,6 +386,19 @@ export default class Uapp extends Module {
   }
 
 
+  createOnSubmit(fn) {
+    return async (...args) => {
+      try {
+        const res = await fn(...args);
+        return res;
+      } catch (err) {
+        this.onError(err);
+        throw err;
+      }
+    };
+  }
+
+
   async checkVersion() {
     const data = await this.api.fetch('/api/healthcheck?info=1');
     if (__VERSION && data.__VERSION && __VERSION !== data.__VERSION) {
