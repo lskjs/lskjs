@@ -51,7 +51,6 @@ export default ctx => class AuthModule {
         this.tbot = require('./tbot').default(ctx, this);
       }
       if (!this.config.socials) this.config.socials = {};
-      this.initOnlineService();
       this.models = this.getModels();
       // ctx.models.User = this.models.User;
 

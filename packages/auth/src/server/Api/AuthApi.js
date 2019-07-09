@@ -14,7 +14,6 @@ import validateEmail from '@lskjs/utils/validateEmail';
 export default class Api extends BaseApi {
   getRoutes() {
     // const { isAuth } = this.app.middlewares;
-
     return {
       '/login': ::this.login,
       '/signup': ::this.signup, // POST
