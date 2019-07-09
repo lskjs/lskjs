@@ -3,7 +3,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import pick from 'lodash/pick';
 import qs from 'qs';
 import axios from 'axios';
-import FormData from 'form-data';
+// import FormData from 'form-data';
 import io from './socket.io-client';
 import trim from './trim';
 
@@ -119,78 +119,35 @@ export default class Apiquery {
     };
   }
 
-  throwError = async ({ err, res, req }) => {
+  catchError(err) {
+    const { data } = err.response;
+    // if (true) {
     if (this.showError && this.log) {
       const str = `\
 ==============
   fetch error:
 ${isPlainObject(err) ? JSON.stringify(err, null, 2) : err}
-  req:
-${JSON.stringify(req, null, 2)}
-  json:
-${JSON.stringify(res.json, null, 2)}
+  request:
+${JSON.stringify(JSON.parse(err.config.data), null, 2)}
+  response:
+${JSON.stringify(data, null, 2)}
 ==============\
 `;
+      // console.log(str);
       this.log.error(str);
     }
-    const message = err && err.message || err;
-    const err2 = new Error(isPlainObject(message) ? JSON.stringify(message) : message);
-    err2.res = res;
-    err2.req = req;
-    throw err2;
+    if (data.message) {
+      err.message = data.message;
+    }
+    if (data.code) {
+      err.code = data.code;
+    }
+    // if (data.status) {
+    //   err.status = data.status;
+    // }
+    throw err;
   }
 
-  async afterFetch(ctx) {
-    const { res, throwError } = ctx;
-    if (res.json && res.json.err) {
-      await throwError({
-        ...ctx,
-        err: {
-          type: 'CUSTOM_ERROR',
-          ...res.json.err,
-        },
-      });
-    }
-    if (res.status >= 400) {
-      const type = 'RES_STATUS_ERROR';
-      await throwError({
-        ...ctx,
-        err: {
-          type,
-          status: res.status,
-          statusText: res.statusText,
-          message: `${type}: ${res.status} ${res.statusText}`,
-          ...(res.json || {}),
-        },
-      });
-    }
-    if (res.textErr) {
-      const type = 'TEXT_PARSE_ERROR';
-      await ctx.throwError({
-        ...ctx,
-        res,
-        err: {
-          type,
-          message: 'Ошибка передачи данных',
-          err: res.textErr,
-        },
-      });
-    }
-    if (res.jsonErr) {
-      const type = 'JSON_PARSE_ERROR';
-      await ctx.throwError({
-        ...ctx,
-        res,
-        err: {
-          type,
-          message: 'Ошибка сервера',
-          // message: type,
-          err: res.jsonErr,
-        },
-      });
-    }
-    return res.json;
-  }
 
   createUrl(path, options = {}) {
     if (path.substr(0, 5) === 'http:' || path.substr(0, 6) === 'https:') {
@@ -265,7 +222,7 @@ ${JSON.stringify(res.json, null, 2)}
     if (!req.method) {
       req.method = 'GET';
     }
-    const throwError = params.throwError || this.throwError;
+    const catchError = params.catchError || this.catchError;
     const afterFetch = params.afterFetch || this.afterFetch;
     const parseResult = params.parseResult || this.parseResult;
     const { timeout } = params;
@@ -274,44 +231,20 @@ ${JSON.stringify(res.json, null, 2)}
       req,
       timeout,
       authToken,
-      throwError,
+      catchError,
       afterFetch,
       parseResult,
     };
   }
 
-  async parseResult(ctx, result) {
-    const res = {
-      result,
-      status: result.status,
-      statusText: result.statusText,
-    };
-
-    if (typeof res.result.data === 'object') {
-      res.json = res.result.data;
-    } else {
-      try {
-        if (!res.result.data) {
-          throw new Error('Empty data');
-        }
-      } catch (err) {
-        res.textErr = err;
-      }
-
-      try {
-        res.json = JSON.parse(res.result.data);
-      } catch (err) {
-        res.jsonErr = err;
-      }
-    }
-
-    return res;
+  parseResult(res) {
+    return res.data;
   }
 
   fetch(...args) {
     const ctx = this.getCtx(...args);
-    const { axios } = this.constructor;
-    const { req, parseResult, afterFetch } = ctx;
+    const { axios: _axios } = this.constructor;
+    const { req, parseResult, catchError } = ctx;
     const { data: { __cancelToken, ...data } = {}, ...params } = req;
 
     if (this.log && this.log.trace) {
@@ -324,12 +257,8 @@ ${JSON.stringify(res.json, null, 2)}
     if (__cancelToken && __cancelToken.token) {
       params.cancelToken = __cancelToken.token;
     }
-    const res = axios(params, params2)
-      .then(async (response) => {
-        ctx.res = await parseResult(ctx, response);
-        return ctx;
-      })
-      .then(afterFetch);
+
+    const res = _axios(params, params2).then(parseResult).catch(catchError.bind(this));
     return res;
   }
 
