@@ -20,5 +20,6 @@ export default (params = {}) => {
     )),
   )
     .map(p => path.resolve(p))
-    .filter(p => fs.existsSync(p));
+    .filter(p => fs.existsSync(p))
+    .reverse();
 };
