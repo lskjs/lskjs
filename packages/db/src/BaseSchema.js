@@ -49,11 +49,11 @@ export default class BaseSchema {
         if (params.sort) {
           res = res.sort(params.sort);
         }
-        if (params.skip) {
-          res = res.skip(params.skip);
+        if (params.skip && +params.skip) {
+          res = res.skip(+params.skip);
         }
-        if (params.limit) {
-          res = res.limit(params.limit);
+        if (params.limit && +params.limit) {
+          res = res.limit(+params.limit);
         }
         if (params.select) {
           res = res.select(params.select);

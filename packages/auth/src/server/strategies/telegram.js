@@ -10,9 +10,9 @@ export default (ctx, { Strategy }) => class TelegramStrategy extends Strategy {
   }
 
   async passportStrategyCallback(req, user, done) {
-    const { Passport } = ctx.modules.auth.models;
+    const PassportModel = ctx.modules.auth.models.PassportModel || ctx.modules.auth.models.Passport;
     const providerId = this.getProviderId(user);
-    let passport = await Passport.findOne({
+    let passport = await PassportModel.findOne({
       provider: this.providerName,
       providerId,
     });

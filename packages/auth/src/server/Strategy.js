@@ -27,9 +27,9 @@ export default (ctx, module) => class Strategy {
 
   async passportStrategyCallback(...args) {
     const [accessToken, refreshToken, profile] = args;
-    const { Passport } = ctx.modules.auth.models;
+    const PassportModel = ctx.modules.auth.models.PassportModel || ctx.modules.auth.models.Passport;
     const providerId = this.getProviderId(profile);
-    let passport = await Passport.findOne({
+    let passport = await PassportModel.findOne({
       provider: this.provider,
       providerId,
     });
@@ -79,8 +79,8 @@ export default (ctx, module) => class Strategy {
   async createPassport({
     token, accessToken, refreshToken, providerId,
   }) {
-    const { Passport } = module.models;
-    return new Passport({
+    const PassportModel = module.models.PassportModel || module.models.Passport;
+    return new PassportModel({
       type: this.type,
       provider: this.provider,
       providerId,
