@@ -127,10 +127,12 @@ export default ({ docsJson: url, name } = {}) => `\
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 <script type = "text/javascript">
   $(document).ready(function(){
+    $('.token__input').val(localStorage.getItem('token'));
     $('.token__input').change(function(){
       var el = $(this)
       var token = el.val()
       swaggerUi.api.clientAuthorizations.add("x-access-token", new SwaggerClient.ApiKeyAuthorization("x-access-token", token, "header"));
+      localStorage.setItem('token', token);
     })
   })
 </script>
