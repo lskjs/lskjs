@@ -51,13 +51,13 @@ export default class Api {
     if (get(req, 'user.role') !== 'admin') throw this.e(403, '!admin');
   }
   assign(model, params, fields = []) {
-    if (field.length === 0) {
-      console.error('Api.assign enmpty fields');
+    if (fields.length === 0) {
+      console.error('Api.assign empty fields');
       return;
     }
     fields.forEach((field) => {
       if (params[field] === undefined) return;
-      model[field] = params[field];
+      model[field] = params[field]; // eslint-disable-line no-param-reassign
       if (!model.markModified) return;
       model.markModified(field);
     });

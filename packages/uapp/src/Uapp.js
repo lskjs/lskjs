@@ -367,12 +367,10 @@ export default class Uapp extends Module {
   }
 
   redirect(path) {
-    __DEV__ && console.log('Uapp.redirect', path);
+    if (__DEV__) console.log('Uapp.redirect', path);
     if (__CLIENT__) {
       this.app.redirect(path);
-    } else {
-      __DEV__ && console.log('cant history.redirect because it server', path);
-    }
+    } else if (__DEV__) console.log('cant history.redirect because it server', path);
   }
 
   restart() {
@@ -400,8 +398,12 @@ export default class Uapp extends Module {
 
 
   async checkVersion() {
+    const version = typeof __VERSION !== 'undefined' ? __VERSION : typeof __VERSION__ !== 'undefined' ? __VERSION__ : null;  // eslint-disable-line
+    if (!version) return;
     const data = await this.api.fetch('/api/healthcheck?info=1');
-    if (__VERSION && data.__VERSION && __VERSION !== data.__VERSION) {
+    const dataVersion = data.__VERSION || data.__VERSION__;
+    if (!dataVersion) return;
+    if (version !== dataVersion) {
       window.location.reload(true);
     }
   }

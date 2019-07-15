@@ -291,7 +291,7 @@ export default class Api extends BaseApi {
   }
 
   async getSocials(req) {
-    const { Passport: PassportModel } = this.app.models;
+    const PassportModel = this.app.models.PassportModel || this.app.models.Passport;
     const userId = req.user._id;
     return PassportModel.find({
       userId,
@@ -499,7 +499,7 @@ export default class Api extends BaseApi {
   }
 
   async getPassportByToken(req) {
-    const { Passport: PassportModel } = this.app.models;
+    const PassportModel = this.app.models.PassportModel || this.app.models.Passport;
 
     return PassportModel.getByToken(req.data.p);
   }

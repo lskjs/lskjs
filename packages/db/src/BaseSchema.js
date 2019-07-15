@@ -103,7 +103,7 @@ export default class BaseSchema {
       async prepareOne(obj) {
         return obj;
       },
-      async prepare(obj, params) {
+      async prepare(obj, params = {}) {
         // console.log('PREPARE params.toObject', params.toObject);
         // console.log('params.toObject2@@@', params.toObject2);
         const toObjectOne = (o) => {

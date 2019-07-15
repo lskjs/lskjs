@@ -203,7 +203,8 @@ export default (ctx, module) => {
   };
 
   controller.socialLogin = async (req) => {
-    const { User: UserModel, Passport: PassportModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
+    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
     const passport = await PassportModel.getByToken(req.data.p);
     let user = await passport.getUser();
     if (!user) {
@@ -233,7 +234,8 @@ export default (ctx, module) => {
   };
 
   controller.socialBind = async (req) => {
-    const { User: UserModel, Passport: PassportModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
+    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
     const userId = req.user._id;
     const passport = await PassportModel
       .getByToken(req.data.p)
@@ -253,7 +255,7 @@ export default (ctx, module) => {
   };
 
   controller.getSocials = async (req) => {
-    const { Passport: PassportModel } = ctx.models;
+    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
     const userId = req.user._id;
     return PassportModel.find({
       userId,
@@ -261,7 +263,8 @@ export default (ctx, module) => {
   };
 
   controller.socialUnbind = async (req) => {
-    const { User: UserModel, Passport: PassportModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
+    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
     const params = req.allParams();
     const userId = req.user._id;
     const user = await UserModel
@@ -293,7 +296,7 @@ export default (ctx, module) => {
 
 
   controller.tokenLogin = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const token = req.data.t || req.data.token;
     if (!token) throw ctx.errors.e400('!token');
 
@@ -309,7 +312,7 @@ export default (ctx, module) => {
   };
 
   controller.approveEmail = async (req) => {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     return UserModel.findAndApproveEmail(req.data.t);
   };
   controller.approvedEmail = async (req) => {
@@ -457,7 +460,7 @@ export default (ctx, module) => {
   };
 
   controller.getPassportByToken = async (req) => {
-    const { Passport: PassportModel } = ctx.models;
+    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
 
     return PassportModel.getByToken(req.data.p);
   };
@@ -647,8 +650,8 @@ export default (ctx, module) => {
     return permit;
   };
   controller.restorePasswordPermit = async (req) => {
-    // console.log('123123123');
-    const { User: UserModel } = ctx.models;
+    // console.log('123123123')
+    const UserModel = ctx.models.UserModel || ctx.models.User
     const { PermitModel } = ctx.models;
     const { email } = req.data;
 
@@ -699,7 +702,7 @@ export default (ctx, module) => {
     return PermitModel.prepare(permit, { req });
   };
   controller.confirmPassword = async (req) => {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const { PermitModel } = ctx.models;
     const { code, password } = req.data;
     if (!code) throw '!code';

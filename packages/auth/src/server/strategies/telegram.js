@@ -43,7 +43,7 @@ export default (ctx, { Strategy }) => class TelegramStrategy extends Strategy {
 
   async updatePassport({ user, passport }) {
     // console.log('updatePassport EXTENDED', accessToken, refreshToken) ;
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     if (user.hash) passport.token = user.hash;
     passport.profile = await this.getProfile(user, passport);
     // const data = await module.getPassportData(passport);

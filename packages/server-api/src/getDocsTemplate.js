@@ -4,7 +4,7 @@ export default ({ docsJson: url, name } = {}) => `\
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${name} API docs</title>
+  <title>${name} API docs // LSK</title>
   <link rel="icon" type="image/png" href="//lskjs.github.io/lskjs/swagger/images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="//lskjs.github.io/lskjs/swagger/images/favicon-16x16.png" sizes="16x16" />
   <link href='//lskjs.github.io/lskjs/swagger/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -127,7 +127,11 @@ export default ({ docsJson: url, name } = {}) => `\
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 <script type = "text/javascript">
   $(document).ready(function(){
-    $('.token__input').val(localStorage.getItem('token'));
+    var initToken = localStorage.getItem('token');
+    if (initToken) {
+      $('.token__input').val(initToken);
+      swaggerUi.api.clientAuthorizations.add("x-access-token", new SwaggerClient.ApiKeyAuthorization("x-access-token", initToken, "header"));
+    }
     $('.token__input').change(function(){
       var el = $(this)
       var token = el.val()
