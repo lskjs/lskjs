@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "0.35.21",
+  "version": "0.35.22",
   "description": "LSK universal react app wrapper",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -53,7 +53,7 @@
     "@lskjs/log": "^0.35.16",
     "@lskjs/module": "^0.35.16",
     "@lskjs/scroll": "^0.34.59",
-    "@lskjs/utils": "^0.35.21",
+    "@lskjs/utils": "^0.35.22",
     "axios": "^0.18.0",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11",
