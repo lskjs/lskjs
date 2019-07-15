@@ -255,7 +255,7 @@ export default class ServerApp extends Module {
 
   createHealthcheck = require('./methods/createHealthcheck').default;
   getDocsRouter = require('./methods/getDocsRouter').default;
-  getDocsTemplate = require('./methods/getDocsTemplate').default;
+  getDocsTemplate = () => 'deprecated';
 
   resolve = require('./methods/resolve').default;
   runRedis = require('./methods/runRedis').default;
