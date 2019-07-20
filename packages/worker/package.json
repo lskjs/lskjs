@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "0.35.22",
+  "version": "0.35.27",
   "description": "LSK module for worker.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
