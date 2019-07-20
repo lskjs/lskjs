@@ -284,7 +284,7 @@ export default class ServerApp extends Module {
   }
 
   async afterRun() {
-    this.log.trace('ServerApp afterRun @@@@');
+    this.log.trace('ServerApp afterRun');
     this.runRoutes();
     this.runDefaultRoute();
     this.runCatchErrors();

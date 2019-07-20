@@ -2,6 +2,7 @@ import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
+import autobind from '@lskjs/autobind';
 import antimergeDeep from 'antimerge/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
@@ -37,11 +38,12 @@ export default class ReactApp extends Module {
 
   async getUapp({ req, ...params }) {
     const { Uapp } = this;
+    const url = req.originalUrl || req.url;
     const uapp = new Uapp({
       ...params,
       ...this.getAssetsAndChunks(),
       history: createMemoryHistory({
-        initialEntries: [req.url],
+        initialEntries: [url],
       }),
       req,
       rootState: this.getRootState({ req }),
@@ -99,6 +101,8 @@ export default class ReactApp extends Module {
     };
   }
 
+  
+  @autobind
   async render(req, res) {
     const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
     let status = 200;
@@ -145,7 +149,11 @@ export default class ReactApp extends Module {
       status = 500;
       if (__DEV__) {
         const text = [...stack, ''].join(':\n');
-        this.log.error(text, err);
+        if (this.log && this.log.error) {
+          this.log.error(text, err);
+        } else {
+          console.error(text, err);
+        }
         content = `<pre>${text}${err.stack}</pre>`;
       } else {
         content = err.message;
@@ -162,7 +170,11 @@ export default class ReactApp extends Module {
     } catch (err2) {
       status = 500;
       content = 'ERROR: Html.render()';
-      this.log.error(content, err2);
+      if (this.log && this.log.error) {
+        this.log.error(content, err2);
+      } else {
+        console.error(content, err2);
+      }
     }
 
     return res.status(status || 200).send(content);

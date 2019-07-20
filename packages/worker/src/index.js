@@ -22,7 +22,7 @@ export default class extends Module {
     if (this.db) await this.db.run();
   }
   afterRun() {
-    this.log.trace('Worker afterRun @@@@');
+    // this.log.trace('Worker afterRun @@@@');
   }
   getDatabase() {
     return this.config.db ? db(this, this.config.db) : null;
