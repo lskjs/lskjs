@@ -33,7 +33,7 @@ export default class Uapp extends Module {
   theme = defaultTheme;
   scrollTo = scrollTo;
   i18 = new I18({ ctx: this });
-
+  @observable req = {};
 
   createLogger(params) {
     const level = __DEV__ ? ( // eslint-disable-line no-nested-ternary
@@ -96,6 +96,7 @@ export default class Uapp extends Module {
         if (this.progress && this.progress.current) {
           this.progress.current.finish();
         }
+        this.req = this.history.location;
       });
 
       const classes = detectHtmlClasses();
@@ -416,6 +417,7 @@ export default class Uapp extends Module {
       page: this.page,
       rootState: this.rootState,
       state: this.state, // appState
+      req: this.req,
 
       api: this.api,
       auth: this.auth,
