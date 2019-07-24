@@ -132,7 +132,7 @@ export default class Api extends BaseApi {
 
   async afterSignup({ req, user }) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
-    const link = await user.genereateEmailApprovedLink();
+    const link = await user.genereateEmailApprovedLink ? user.genereateEmailApprovedLink() : null;
     this.app.emit('events.auth.signup', { user, link });
 
     return {

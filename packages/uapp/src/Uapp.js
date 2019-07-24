@@ -135,7 +135,7 @@ export default class Uapp extends Module {
     this.user = new UserStore(this.rootState.user);
     this.auth = new AuthStore();
   }
-
+auhj
   getStores() {
     return {};
   }

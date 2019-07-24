@@ -23,7 +23,7 @@ export default (ctx, module) => {
   const controller = {};
 
   controller.validate = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const user = await UserModel.findById(req.user._id);
     if (!user) throw ctx.errors.e404('Не найден user в базе');
     return {
@@ -36,7 +36,7 @@ export default (ctx, module) => {
   };
 
   controller.silent = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const params = req.allParams();
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
@@ -98,8 +98,8 @@ export default (ctx, module) => {
     throw ctx.errors.e400('Параметр username, email, login не передан');
   };
   controller.afterSignup = async function ({ req, user }) {
-    const { User: UserModel } = ctx.models;
-    const link = await user.genereateEmailApprovedLink();
+    const UserModel = ctx.models.UserModel || ctx.models.User;
+    const link = await user.genereateEmailApprovedLink ? user.genereateEmailApprovedLink() : null;
     ctx.emit('events.auth.signup', { user, link });
 
     return {
@@ -110,7 +110,7 @@ export default (ctx, module) => {
     };
   };
   controller.signup = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const { password, ...userFields } = controller.getUserFields(req);
     const criteria = controller.getUserCriteria(req);
     const existUser = await UserModel.findOne(criteria);
@@ -128,7 +128,7 @@ export default (ctx, module) => {
   };
 
   controller.login = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const params = req.allParams();
 
     if (!params.password) throw ctx.e('auth.!password', { status: 400 });
@@ -150,7 +150,7 @@ export default (ctx, module) => {
   };
 
   controller.updateToken = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     // const params = req.allParams();
 
     const userId = req.user && req.user._id;
@@ -168,7 +168,7 @@ export default (ctx, module) => {
   };
 
   controller.recovery = async function (req) {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const { mailer } = ctx.modules;
     if (!mailer) throw 'Система не может отправить email';
 
@@ -434,7 +434,7 @@ export default (ctx, module) => {
   controller.phoneLogin = async (req) => {
     if (!module.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     if (!((module.config.sms.defaultCode && code === module.config.sms.code) || code === controller.lastCode)) {
       throw 'Код не верный';
     }
@@ -481,7 +481,7 @@ export default (ctx, module) => {
     throw '!permission';
   };
   controller.emailPermit = async (req) => {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const { PermitModel } = ctx.models;
 
     const { ObjectId } = ctx.db.Types;
@@ -588,7 +588,7 @@ export default (ctx, module) => {
     return PermitModel.prepare(permit, { req });
   };
   controller.confirmEmail = async (req) => {
-    const { User: UserModel } = ctx.models;
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const { PermitModel } = ctx.models;
     const { code } = req.data;
     if (!code) throw '!code';
@@ -651,7 +651,7 @@ export default (ctx, module) => {
   };
   controller.restorePasswordPermit = async (req) => {
     // console.log('123123123')
-    const UserModel = ctx.models.UserModel || ctx.models.User
+    const UserModel = ctx.models.UserModel || ctx.models.User;
     const { PermitModel } = ctx.models;
     const { email } = req.data;
 
