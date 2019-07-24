@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/autobind",
-  "version": "0.35.16",
+  "version": "0.35.29",
   "description": "LSK ux subrepo: autobind",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
