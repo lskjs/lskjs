@@ -100,7 +100,17 @@ export default class Api {
   async cache(key, ...args) {
     const [fn, params = { ttl: 60 }] = args.reverse();
     const { ttl } = params;
-    const hashedKey = hash(key);
+    let hashedKey;
+    try {
+      hashedKey = hash(key);
+    } catch (err) {
+      try {
+        hashedKey = hash(JSON.stringify(key));
+      } catch (err2) {
+        console.error('Api.cache', err2);  //eslint-disable-line
+        hashedKey = '!!!ERR!!!';
+      }
+    }
     const value = await this.cacheStore.get(hashedKey);
     if (value) return value;
     const res = await fn();
