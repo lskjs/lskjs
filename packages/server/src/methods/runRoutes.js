@@ -32,7 +32,7 @@ export function getRoutes(ctx) {
 function getMethodAndPath(key = '', val) {
   let method;
   if (isPlainObject(val)) method = 'use';
-  const chunk = key.split(' ');
+  const chunk = key.trim().split(' ');
   let path;
   if (chunk.length >= 2) {
     [method, path] = chunk;
