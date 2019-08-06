@@ -12,7 +12,7 @@ import autobind from '@lskjs/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db/server';
 import Module from '@lskjs/module';
-import { Server as httpServer } from 'http';
+import http from 'http';
 
 import AsyncRouter from './AsyncRouter';
 import createWs from './ws';
@@ -28,7 +28,7 @@ export default class ServerApp extends Module {
     this.log.trace('ServerApp init');
     this.express = this.createExpress();
     this.app = this.express; // Fallback
-    this.httpServer = httpServer(this.express);
+    this.httpServer = http.createServer(this.express);
     if (this.config.express) {
       this.log.trace('express config:', this.config.express);
       forEach((this.config.express || {}), (value, key) => {
@@ -184,8 +184,8 @@ export default class ServerApp extends Module {
 
   runStatics() {
     forEach(this.statics, (_path, url) => {
-      this.app.use(url, express.static(_path));
-      this.app.use(url, staticFileMiddleware(_path));
+      this.express.use(url, express.static(_path));
+      this.express.use(url, staticFileMiddleware(_path));
     });
   }
 
@@ -214,7 +214,7 @@ export default class ServerApp extends Module {
 
   initWs() {
     this.ws = createWs(this);
-    this.ws.wrapExpress(this.app);
+    this.ws.wrapExpress(this.express);
   }
   async runWs() {
     if (!this.config.ws) return;
@@ -223,25 +223,26 @@ export default class ServerApp extends Module {
     this.ws.attach(this.httpServer);
     const transports = this.config.ws.transports || ['websocket'];
     this.ws.set('transports', transports);
+    if (this.config.ws.origins) this.ws.set('origins', this.config.ws.origins);
   }
 
   runMiddlewares() {
     this.log.trace('ServerApp.runMiddlewares');
     const middlewares = flattenDeep(this.getUsingMiddlewares());
     middlewares.forEach((middleware) => {
-      if (middleware && typeof middleware === 'function') this.app.use(middleware);
+      if (middleware && typeof middleware === 'function') this.express.use(middleware);
     });
   }
   runDefaultRoute() {
     this.log.trace('ServerApp.runDefaultRoute');
-    this.app.use((req, res, next) => {
+    this.express.use((req, res, next) => {
       const err = this.errors.e404('Route not found');
       next(err);
     });
   }
 
   runCatchErrors() {
-    if (this.middlewares.catchError) this.app.use(this.middlewares.catchError);
+    if (this.middlewares.catchError) this.express.use(this.middlewares.catchError);
   }
 
   runModels() {
