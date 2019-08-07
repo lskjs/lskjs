@@ -29,11 +29,15 @@ export default class BaseSchema {
     this.defaultParams = defaultParams;
     this.statics = {
       getParams(incomeParams, systemParams) {
-        const params = { ...defaultParams, ...pick(incomeParams, ['filter', 'sort', 'skip', 'limit', 'select']) };
-        if (__DEV__ && incomeParams.debug) {
+        const params = { ...defaultParams, ...pick(incomeParams, ['filter', 'sort', 'skip', 'limit', 'select', 'view']) };
+        params.select = this.getSelect(params);
+        if (__DEV__ && (incomeParams.debug || params.select.includes('*'))) {
           delete params.select;
         }
-        if (params.limit > 100) params.limit = 100;
+        if (params.limit > 100) {
+          console.log('params.limit > 100');  //eslint-disable-line
+          params.limit = 100;
+        }
         return {
           ...params,
           ...systemParams,
@@ -42,6 +46,13 @@ export default class BaseSchema {
       countByParams(incomeParams, systemParams) {
         const params = this.getParams(incomeParams, systemParams);
         return this.countDocuments(params.filter);
+      },
+      getSelect({ view = 'default', select = [] } = {}) {
+        const { views = {} } = this;
+        return [
+          ...(views[view] || []),
+          ...(select || []),
+        ];
       },
       findByParams(incomeParams, systemParams) {
         const params = this.getParams(incomeParams, systemParams);
