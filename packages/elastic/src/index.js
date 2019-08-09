@@ -78,7 +78,7 @@ export default ({ db, config }) => class ElasticModule {
     return projection;
   }
 
-  async sync(model, params) {
+  async sync({ model, params, again = false } = {}) {
     const projection = this.getProjectionModel(model);
     const { modelName } = model;
     if (params || !this.nowSync.includes(modelName)) {
@@ -92,18 +92,26 @@ export default ({ db, config }) => class ElasticModule {
         await model.esSynchronize(params || {}, projection);
         if (!params) {
           this.removeFromNowSync(modelName);
-          // eslint-disable-next-line no-console
-          console.log('sync end', modelName);
+        }
+        if (again) {
           setTimeout(() => {
-            this.sync(model);
-          }, parseInt(this.config.syncTimeDelay, 10));
+            this.sync({ model });
+          }, parseInt(this.config.syncTimeDelay, 10) || 5000);
+        }
+        if (!params || again) {
+          console.log('sync end', modelName);
         }
       } catch (err) {
         if (!params) {
           this.removeFromNowSync(modelName);
+        }
+        if (again) {
           setTimeout(() => {
-            this.sync(model);
-          }, parseInt(this.config.syncTimeDelay, 10));
+            this.sync({ model });
+          }, parseInt(this.config.syncTimeDelay, 10) || 5000);
+        }
+        if (!params || again) {
+          console.log('sync end', modelName);
         }
         // eslint-disable-next-line no-console
         console.error(err, 'es error', modelName);
@@ -114,12 +122,12 @@ export default ({ db, config }) => class ElasticModule {
     }
   }
 
-  async syncAll() {
+  async syncAll({ again = false } = {}) {
     const modelNames = db.modelNames();
     modelNames.forEach(async (modelName) => {
       const model = db.model(modelName);
       if (model.esCreateMapping) {
-        this.sync(model);
+        this.sync({ model, again });
       }
     });
   }
