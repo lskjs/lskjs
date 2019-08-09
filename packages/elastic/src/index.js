@@ -95,14 +95,14 @@ export default ({ db, config }) => class ElasticModule {
           // eslint-disable-next-line no-console
           console.log('sync end', modelName);
           setTimeout(() => {
-            this.sync(model, projection);
+            this.sync(model);
           }, parseInt(this.config.syncTimeDelay, 10));
         }
       } catch (err) {
         if (!params) {
           this.removeFromNowSync(modelName);
           setTimeout(() => {
-            this.sync(model, projection);
+            this.sync(model);
           }, parseInt(this.config.syncTimeDelay, 10));
         }
         // eslint-disable-next-line no-console
