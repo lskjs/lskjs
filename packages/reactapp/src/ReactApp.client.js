@@ -1,4 +1,5 @@
 import React from 'react';
+import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
 import qs from 'qs';
 import autobind from '@lskjs/autobind';
@@ -8,6 +9,8 @@ import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
 // import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
+
+Promise.config({ cancellation: true });
 
 const DEBUG = __DEV__ && false;
 
@@ -69,6 +72,10 @@ export default class ReactApp extends Module {
     try {
       page = await this.getPage(req);
     } catch (err) {
+      if (err && err.type === 'cancel') {
+        console.log('CSR.canceled');
+        return;
+      }
       this.log.error('CSR getPage err (ROUTER ERROR)', err);
       try {
         // --- Welcome to debugging React ---
@@ -131,10 +138,15 @@ export default class ReactApp extends Module {
 
   async getPage(req) {
     const uapp = this.uapp || await this.getUapp({ req });
-    await uapp.resolve({
+    if (this.reqPromise) this.reqPromise.cancel();
+    const reqPromise = uapp.resolve({
       path: req.path,
       query: req.query,
     });
+    this.reqPromise = reqPromise;
+    await reqPromise;
+    if (reqPromise.isCanceled()) throw 'cancel';
+    this.reqPromise = null;
     return uapp.page;
   }
 

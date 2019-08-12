@@ -4,6 +4,7 @@ import path from 'path';
 import mapValues from 'lodash/mapValues';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
+import get from 'lodash/get';
 import map from 'lodash/map';
 import isObject from 'lodash/isObject';
 import staticFileMiddleware from 'connect-static-file';
@@ -42,6 +43,7 @@ export default class ServerApp extends Module {
     this.log.debug('responses', Object.keys(this.responses));
     this.errors = this.getErrors();
     this.log.debug('errors', Object.keys(this.errors));
+    this.log.debug('config.middlewares', this.config.middlewares);
     this.middlewares = this.getMiddlewares();
     this.log.debug('middlewares', Object.keys(this.middlewares));
 
