@@ -1,5 +1,5 @@
 import elasticsearch from 'elasticsearch';
-import mexp from 'mongoose-elasticsearch-xp';
+import mexp from 'mongoose-elasticsearch-xp-async';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 
