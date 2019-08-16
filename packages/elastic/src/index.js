@@ -39,6 +39,10 @@ export default ({ db, config }) => class ElasticModule {
               min_gram: 1,
               max_gram: 20,
             },
+            stopprotocol_filter: {
+              type: 'stop',
+              stopwords: ['http', 'https', 'ftp', 'www'],
+            }
           },
           analyzer: {
             ngram_analyzer: {
@@ -49,7 +53,7 @@ export default ({ db, config }) => class ElasticModule {
                 'lowercase',
               ],
             },
-            autocomplete: { 
+            autocomplete: {
               type: 'custom',
               tokenizer: 'standard',
               filter: [
@@ -57,6 +61,11 @@ export default ({ db, config }) => class ElasticModule {
                 'autocomplete_filter',
               ],
             },
+            url_lowercase_without_protocols: {
+              type: 'custom',
+              tokenizer: 'lowercase',
+              filter: ['stopprotocol_filter']
+            }
           },
         },
       },
@@ -153,7 +162,7 @@ export default ({ db, config }) => class ElasticModule {
     }, params);
     schema.getMongooseSchema().plugin(mexp.v7, options);
   }
-  
+
   async run() {
     if (!this.enabled) return;
   }
