@@ -1,7 +1,10 @@
 import { observable, computed, action } from 'mobx';
 import autobind from '@lskjs/autobind';
+import each from 'lodash/each';
 import debounce from 'lodash-decorators/debounce';
-import isEmpty from 'lodash/isEmpty';
+import filter from 'lodash/filter';
+import isEmpty from '@lskjs/utils/isEmpty';
+// import isEmpty from 'lodash/isEmpty';
 import every from 'lodash/every';
 import connectListStore from '../utils/connectListStore';
 import SelectStore from './SelectStore';
@@ -10,6 +13,7 @@ import FetchStore from './FetchStore';
 export default class ListStore extends FetchStore {
   static connect = connectListStore;
   @observable filter = {};
+  @observable excludeFilterFields = [];
   @observable showFilter = false;
   @observable tab = null;
   @observable sort = {};
@@ -66,6 +70,21 @@ export default class ListStore extends FetchStore {
   @computed
   get hasFilter() {
     return !every(Object.values(this.filter), a => isEmpty(a)) || !isEmpty(this.search);
+  }
+
+  @computed
+  get filterUi() {
+    const obj = {};
+    each(this.filter, (value, key) => {
+      if (this.excludeFilterFields.includes(key)) return;
+      obj[key] = value;
+    });
+    return obj;
+  }
+
+  @computed
+  get getActiveFilter() {
+    return filter(this.filterUi, a => !isEmpty(a)).length;
   }
 
   map(...args) {
