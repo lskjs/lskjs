@@ -4,7 +4,7 @@ import AuthApi from './uapp/AuthApi';
 const DEBUG = __DEV__ && false;
 
 
-export default class AuthModule {
+export default app => class AuthModule {
   constructor(app) {
     this.uapp = app;
     this.app = app;
@@ -239,7 +239,7 @@ export default class AuthModule {
   authPassport(provider) {
     window.location = `/api/module/auth/${provider}`;
   }
-}
+};
 
 
 // export default ctx => ({
