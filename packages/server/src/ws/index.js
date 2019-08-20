@@ -8,13 +8,8 @@ import sockets from 'socket.io';
 import isFunction from 'lodash/isFunction';
 import socket2req from './middlewares/socket2req';
 
-console.log(123123123123, {cookieParser});
-
-
 export default (app) => {
   try {
-console.log({cookieParser});
-
     const ws = sockets();
 
     ws.wrapExpressMiddleware = (middleware, name) => function (socket, next) {
@@ -64,7 +59,7 @@ console.log({cookieParser});
     };
     ws.wrapExpress = (express) => {
       express.ws = (route, callback) => { // eslint-disable-line no-param-reassign
-        console.log('express WS', route);
+        // console.log('express WS', route);
         
         // if (!ws) {
         //   this.log.error('!this.ws');
@@ -86,8 +81,6 @@ console.log({cookieParser});
 
             // console.log('ns.originalOn', event);
             try {
-              console.log('@nsCallback');
-              
               return nsCallback(socket);
             } catch (err) {
               app.log.error('ws.on error', { err });
