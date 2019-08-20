@@ -145,7 +145,7 @@ export default class ReactApp extends Module {
     });
     this.reqPromise = reqPromise;
     await reqPromise;
-    if (reqPromise.isCanceled()) throw 'cancel';
+    if (req.isCanceled && reqPromise.isCanceled()) throw 'cancel';
     this.reqPromise = null;
     return uapp.page;
   }
