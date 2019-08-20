@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "0.35.37",
+  "version": "0.35.38",
   "description": "LSK build-locales.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -28,8 +28,8 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/getspreadsheet": "^0.35.37",
-    "@lskjs/utils": "^0.35.37",
+    "@lskjs/getspreadsheet": "^0.35.38",
+    "@lskjs/utils": "^0.35.38",
     "csv-parse": "^4.4.0",
     "csvtojson": "^2.0.8",
     "jsongrid": "^1.0.2",
@@ -37,7 +37,6 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3"
   },
-  "devDependencies": {},
   "bin": {
     "build-locales": "./bin/build-locales.js"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build",
-  "version": "0.35.37",
+  "version": "0.35.38",
   "description": "Lego Starter Kit builder & webpack configurator",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -76,7 +76,6 @@
     "webpack-middleware": "1.5.1",
     "webpack-node-externals": "1.7.2"
   },
-  "devDependencies": {},
   "removedependencies": {
     "jsx-control-statements": "3.2.8",
     "del": "3.0.0",

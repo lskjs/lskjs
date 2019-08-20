@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit",
-  "version": "0.35.37",
+  "version": "0.35.38",
   "description": "LSK module for rabbit.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
