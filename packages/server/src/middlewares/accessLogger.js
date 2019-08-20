@@ -69,7 +69,7 @@ function levelFn(data, status) {
   }
   if (data.err || data.status >= 500 || data.duration > 10000) { // server internal error or error
     return 'error';
-  } else if (data.status >= 400 || data.duration > 3000) { // client error
+  } if (data.status >= 400 || data.duration > 3000) { // client error
     return 'warn';
   }
   return 'info';
@@ -110,10 +110,10 @@ export default (ctx) => {
     }
     data.referer = req.header('referer') || req.header('referrer');
     data.ua = req.header('user-agent');
-    data.ip = req.ip || req.connection.remoteAddress ||
-        (req.socket && req.socket.remoteAddress) ||
-        (req.socket.socket && req.socket.socket.remoteAddress) ||
-        '127.0.0.1';
+    data.ip = req.ip || req.connection.remoteAddress
+        || (req.socket && req.socket.remoteAddress)
+        || (req.socket.socket && req.socket.socket.remoteAddress)
+        || '127.0.0.1';
 
     if (__DEV__) {
       log[levelFn(data, 'start')](data, logStart(data));

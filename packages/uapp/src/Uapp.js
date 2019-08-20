@@ -342,7 +342,9 @@ auhj
     const req = Api.createReq(reqParams);
     this.emit('resolve:before', { req, reqParams });
     if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
+    
     await this.resetPage();
+
     let res;
     try {
       res = await this.router.resolve({
