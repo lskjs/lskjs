@@ -3,7 +3,6 @@ import cookieParser from 'cookie-parser';
 
 export default () => {
   return function (socket, next) {
-    socket.qwe = 12312312;
     socket.req = socket.request;
     socket.res = {
       getHeader() {
@@ -29,8 +28,6 @@ export default () => {
     req.data = req.query; // @TODO: подумать про другие источники данных
     // if (!req.query) req.query = {};
     // socket.data = Object.assign({}, query, req.query);
-    // console.log("asdasdasdasdas das dasd asda d");
-    
     return next();
   };
 };
