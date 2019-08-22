@@ -104,7 +104,7 @@ export default ({ db, config }) => class ElasticModule {
         }
         if (again) {
           setTimeout(() => {
-            this.sync({ model });
+            this.sync({ model, again });
           }, parseInt(this.config.syncTimeDelay, 10) || 5000);
         }
         if (!params || again) {
@@ -116,7 +116,7 @@ export default ({ db, config }) => class ElasticModule {
         }
         if (again) {
           setTimeout(() => {
-            this.sync({ model });
+            this.sync({ model, again });
           }, parseInt(this.config.syncTimeDelay, 10) || 5000);
         }
         if (!params || again) {
