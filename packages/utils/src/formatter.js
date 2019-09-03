@@ -47,7 +47,7 @@ export function toShort(price) {
   try {
     const keys = [
       [10 ** (3 * 4), 'T'],
-      [10 ** (3 * 3), 'G'],
+      [10 ** (3 * 3), 'B'],
       [10 ** (3 * 2), 'M'],
       [10 ** (3 * 1), 'k'],
     ];
