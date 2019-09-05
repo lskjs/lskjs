@@ -182,7 +182,7 @@ export default class ListStore extends FetchStore {
     const value = this.sort && this.sort[field];
     this.setStateAndUpdate({
       sort: {
-        [field]: value !== 1 ? -1 : 1,
+        [field]: value === -1 ? 1 : -1,
       },
       skip: 0,
     });
