@@ -159,6 +159,7 @@ export default ({ db, config }) => class ElasticModule {
       mappingSettings: {
         settings: this.config.settings,
       },
+      numberOfShards: this.config.numberOfShards,
     }, params);
     schema.getMongooseSchema().plugin(mexp.v7, options);
   }
