@@ -48,6 +48,7 @@ export default class BaseSchema {
         return this.countDocuments(params.filter);
       },
       getSelect({ view = 'default', select = [] } = {}) {
+        if (typeof select === 'string') select = [select];
         const { views = {} } = this;
         return [
           ...(views[view] || []),
