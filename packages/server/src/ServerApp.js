@@ -172,14 +172,24 @@ export default class ServerApp extends Module {
   getHelpers() {
     return require('./helpers').default(this);
   }
+
+  getStaticsDir(dirPath) {
+    const fs = require('fs');
+    const { readdirSync } = fs;
+    const files = readdirSync(dirPath).filter(p => p !== '.' && p !== '..');
+    const res = {};
+    files.forEach((file) => {
+      res[`/${file}`] = `${dirPath}/${file}`;
+    });
+    return res;
+  }
+
   getStatics() {
     const buildRoot = `${__dirname}/public`;
     const root = __DEV__ ? `${__dirname}/../public` : buildRoot;
-    return {
-      '/': root,
-      // '/favicon.ico': buildRoot + require('file-loader!../public/favicon.ico'),
-    };
+    return this.getStaticsDir(root);
   }
+
   _getStatics() {
     return mapValues(this.getStatics() || {}, p => path.resolve(p));
   }

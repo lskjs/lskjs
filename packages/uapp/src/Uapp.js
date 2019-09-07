@@ -135,7 +135,19 @@ export default class Uapp extends Module {
     this.user = new UserStore(this.rootState.user);
     this.auth = new AuthStore();
   }
-auhj
+
+  createOnSubmit(fn) {
+    return async (...args) => {
+      try {
+        const res = await fn(...args);
+        return res;
+      } catch (err) {
+        this.onError(err);
+        throw err;
+      }
+    };
+  }
+
   getStores() {
     return {};
   }
@@ -342,7 +354,7 @@ auhj
     const req = Api.createReq(reqParams);
     this.emit('resolve:before', { req, reqParams });
     if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
-    
+
     await this.resetPage();
 
     let res;
