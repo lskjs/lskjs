@@ -153,6 +153,13 @@ ${util.inspect(this.page.state)}
 ${footer || ''}
 `;
   }
+  renderRootState() {
+    return `\
+<script>
+window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};
+</script>
+`;
+  }
 
 
   render() {
@@ -166,9 +173,7 @@ ${footer || ''}
     <div id="root"/>
       ${this.content}
     </div>
-    <script>
-      window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};
-    </script>
+    ${this.renderRootState()}
     ${this.renderAssets('js')}
     ${this.renderFooter()}
   </body>

@@ -184,10 +184,24 @@ export default class ServerApp extends Module {
     return res;
   }
 
+  getEnv(req) {
+    return {
+      __ROOT_STATE__: {
+        token: req.token,
+        user: req.user,
+        config: this.config.client || {},
+      },
+      __DEV__,
+      __PROD__,
+      __STAGE__,
+    };
+  }
+
   getStatics() {
-    const buildRoot = `${__dirname}/public`;
-    const root = __DEV__ ? `${__dirname}/../public` : buildRoot;
-    return this.getStaticsDir(root);
+    if (this.staticDir) {
+      return this.getStaticsDir(this.staticDir);
+    }
+    return {};
   }
 
   _getStatics() {

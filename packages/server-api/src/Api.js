@@ -2,6 +2,12 @@ import Promise from 'bluebird';
 import hash from 'object-hash';
 import Cacheman from 'cacheman';
 import get from 'lodash/get';
+import pick from 'lodash/pick';
+import mapValues from 'lodash/mapValues';
+import isArray from 'lodash/isArray';
+import set from 'lodash/set';
+import forEach from 'lodash/forEach';
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import getDocsTemplate from './getDocsTemplate';
 
 export default class Api {
@@ -27,6 +33,37 @@ export default class Api {
     if (req._errJwt) throw req._errJwt;
     if (!req.user || !req.user._id) throw this.errors.e401('!req.user');
     return true;
+  }
+
+
+  getListParams(req) {
+    const { data } = req;
+    const params = mapValues(
+      pick(data, ['filter', 'sort', 'skip', 'limit', 'select', 'view', 'operation']),
+      a => tryJSONparse(a),
+    );
+
+    if (!params.filter) params.filter = {};
+    if (req.data) {
+      forEach(req.data, (val, key) => {
+        if (key.substr(0, 'filter.'.length) === 'filter.') {
+          set(params, key, val);
+        }
+        if (key.substr(0, 'sort.'.length) === 'sort.') {
+          set(params, key, val);
+        }
+      });
+    }
+    if (params.limit > 100) params.limit = 100;
+    if (!params.select) params.select = [];
+    if (typeof params.select === 'string') {
+      params.select = params.select.trim().split(',').map(a => a.trim());
+    }
+    if (!isArray(params.select)) throw 'select not array';
+    if (!params.view) params.view = 'default';
+    // params.operation = req.data.operation;
+
+    return params;
   }
 
   url(path, params) {
