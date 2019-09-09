@@ -13,10 +13,13 @@ import FetchStore from './FetchStore';
 export default class ListStore extends FetchStore {
   static connect = connectListStore;
   @observable filter = {};
+  @observable fallbackFilter = {};
   @observable excludeFilterFields = [];
   @observable showFilter = false;
   @observable tab = null;
   @observable sort = {};
+  @observable fallbackSort = {};
+  @observable pureSearch = false;
   @observable search = '';
 
   constructor(...args) {
@@ -148,11 +151,36 @@ export default class ListStore extends FetchStore {
     });
   }
 
+  pureSearchHandler(search) {
+    if (this.pureSearch) {
+      if (!this.search && search) {
+        return {
+          fallbackFilter: this.filter,
+          fallbackSort: this.sort,
+          filter: {},
+          sort: {},
+        };
+      }
+      if (this.search && !search) {
+        return {
+          filter: this.fallbackFilter,
+          sort: this.fallbackSort,
+          fallbackFilter: {},
+          fallbackSort: {},
+        };
+      }
+      return {};
+    }
+    return {};
+  }
+
   @debounce(500)
   setSearch(search) {
+    const pureState = this.pureSearchHandler(search);
     this.setStateAndUpdate({
       search,
       skip: 0,
+      ...pureState,
     });
   }
 
