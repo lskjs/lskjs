@@ -21,7 +21,7 @@ export default class IndexApi extends Api {
         url: api,
         routes: __DEV__ ? mapValuesDeep(this.routes, a => true) : undefined,
       }),
-      '/env': this.app.getEnv,
+      '/env': req => this.app.getEnv(req),
       '/env.js': (req, res) => res.send(serializeWindow(this.app.getEnv(req))),
       '/config': () => (__DEV__ ? this.app.config : {}),
       '/healthcheck': this.healthcheck,
