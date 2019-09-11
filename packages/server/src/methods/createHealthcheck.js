@@ -32,6 +32,16 @@ export default incomeData => async function (req, res) {
     __MASTER: process.env.__MASTER || global.__MASTER,
     __SERVER__: process.env.__SERVER__ || global.__SERVER__,
     __PROD__: process.env.__PROD__ || global.__PROD__,
+    env: {
+      __IMAGE__: global.__IMAGE__,
+      __VERSION__: global.__VERSION__,
+      __INSTANCE__: global.__INSTANCE__,
+      __STAGE__: global.__STAGE__,
+      __PROD__: global.__PROD__,
+      __DEV__: global.__DEV__,
+      __SERVER__: global.__SERVER__,
+      __CLIENT__: global.__CLIENT__,
+    },
   };
 
   return res.status(status).json({
