@@ -154,7 +154,7 @@ export default class ReactApp extends Module {
         } else {
           console.error(text, err);
         }
-        content = `<pre>${text}${err.stack}</pre>`;
+        content = `<pre>${text}${err ? JSON.stringify(err.stack) : ''}</pre>`;
       } else {
         content = err.message;
       }
