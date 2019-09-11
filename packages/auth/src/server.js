@@ -40,6 +40,29 @@ export default ctx => class AuthModule {
     getStrategies() {
       return require('./server/strategies').default(ctx, this);
     }
+    async getPassportStrategy(passport) {
+      const strategy = this.strategyProviders[passport.provider];
+      return strategy;
+    }
+    async updatePassportTokens(passport, ...args) {
+      const strategy = this.getStrategy();
+      if (!strategy) {
+        console.error('passport.updateToken: !strategy');  //eslint-disable-line
+        return;
+      }
+      await strategy.updateTokens(passport, ...args);
+    }
+    async updatePassportData(passport) {
+      const strategy = this.getStrategy(passport);
+      if (!strategy) {
+        console.error('passport.updateToken: !strategy');  //eslint-disable-line
+        return;
+      }
+      await strategy.updateTokens(passport);
+      await strategy.updatePassport({
+        passport,
+      });
+    }
     async init() {
       this.config = get(ctx, 'config.auth');
       if (!this.config) {

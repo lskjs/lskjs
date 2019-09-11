@@ -3,7 +3,8 @@ import pick from 'lodash/pick';
 import MongooseSchema from '@lskjs/db/MongooseSchema';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
 
-export default function getSchema(ctx, module) {
+export default function getSchema(ctx) {
+  const authModule = ctx.modules.auth;
   const mongoose = ctx.db;
   const schema = new MongooseSchema({
     userId: {
@@ -111,43 +112,28 @@ export default function getSchema(ctx, module) {
   };
 
 
-  schema.methods.getStrategy = function a() {
-    const strategy = module._strategies[this.provider];
-    return strategy;
-  };
-
-  schema.methods.updateToken = async function a(...args) {
-    const strategy = this.getStrategy();
-    if (!strategy) {
-      console.error('passport.updateToken: !strategy');  //eslint-disable-line
-      return;
-    }
-    await strategy.updateTokens(this, ...args);
-  };
-
-  schema.methods.updateData = async function a() {
-    const strategy = this.getStrategy();
-    if (!strategy) return;
-    await strategy.updateTokens(this);
-    await strategy.updatePassport({
-      passport: this,
-    });
-  };
-  // schema.methods.updateToken = async function () {
-  //   const strategy = this.getStrategy()
-  //   if (!strategy) return null;
-  //   const tokens = await strategy.updateToken(this);
-  //   // console.log('schema.methods.updateToken ', tokens);
-  //   // this
-  //   //
-  //   return strategy.updatePassport({
-  //     accessToken: tokens.accessToken || this.token,
-  //     refreshToken: this.refreshToken,
-  //     // refreshToken: accessToken.refreshToken,
-  //     passport: this,
-  //   })
+  // schema.methods.getStrategy = function a() {
+  //   const strategy = authModule.strategyProviders[this.provider];
+  //   return strategy;
   // };
 
+  // schema.methods.updateToken = async function a(...args) {
+  //   const strategy = this.getStrategy();
+  //   if (!strategy) {
+  //     console.error('passport.updateToken: !strategy');  //eslint-disable-line
+  //     return;
+  //   }
+  //   await strategy.updateTokens(this, ...args);
+  // };
+
+  // schema.methods.updateData = async function a() {
+  //   const strategy = this.getStrategy();
+  //   if (!strategy) return;
+  //   await strategy.updateTokens(this);
+  //   await strategy.updatePassport({
+  //     passport: this,
+  //   });
+  // };
   return schema;
 }
 // export default getSchema;
