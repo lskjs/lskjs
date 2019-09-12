@@ -1,6 +1,5 @@
-/* global REQ_TIMEOUT */
 import Facebook from 'passport-facebook';
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 import get from 'lodash/get';
 
@@ -26,10 +25,9 @@ export default (ctx, { Strategy }) => class FacebookStrategy extends Strategy {
       'name',
       'birthday',
     ];
-    const res = await fetch(`https://graph.facebook.com/me?access_token=${passport.token}&fields=${fields.join(',')}`, {
-      timeout: REQ_TIMEOUT, // global REQ_TIMEOUT
+    const { data } = await axios(`https://graph.facebook.com/me?access_token=${passport.token}&fields=${fields.join(',')}`, {
+      timeout: 3000,
     });
-    const data = await res.json();
     return {
       ...data,
       firstName: data.first_name,
