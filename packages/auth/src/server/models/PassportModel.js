@@ -111,33 +111,5 @@ export default function getSchema(ctx) {
     return this.findById(_id);
   };
 
-
-  // schema.methods.getStrategy = function a() {
-  //   const strategy = authModule.strategyProviders[this.provider];
-  //   return strategy;
-  // };
-
-  // schema.methods.updateToken = async function a(...args) {
-  //   const strategy = this.getStrategy();
-  //   if (!strategy) {
-  //     console.error('passport.updateToken: !strategy');  //eslint-disable-line
-  //     return;
-  //   }
-  //   await strategy.updateTokens(this, ...args);
-  // };
-
-  // schema.methods.updateData = async function a() {
-  //   const strategy = this.getStrategy();
-  //   if (!strategy) return;
-  //   await strategy.updateTokens(this);
-  //   await strategy.updatePassport({
-  //     passport: this,
-  //   });
-  // };
   return schema;
 }
-// export default getSchema;
-//
-// export default(ctx, module) => {
-//   return getSchema(ctx, module).getMongooseModel(ctx.db);
-// };

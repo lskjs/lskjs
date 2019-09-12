@@ -7,6 +7,7 @@ export default (ctx, module) => class Strategy {
   Strategy = null;
   type = null;
 
+
   getProviderId({ id } = {}) { // eslint-disable-line class-methods-use-this
     return id;
   }
@@ -99,12 +100,9 @@ export default (ctx, module) => class Strategy {
     }
     // return passport
   }
-  //
-  // async updateToken(passport) {
-  //
-  // }
 
   async updateTokens(passport) {
+    console.log('NOT OVERRIDED updateTokens');
     // return passport;
   }
 

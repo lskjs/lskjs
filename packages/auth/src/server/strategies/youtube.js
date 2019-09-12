@@ -20,7 +20,6 @@ export default (ctx, { Strategy }) => {
     }
 
     async updateTokens(passport, creds2) {  //eslint-disable-line
-      // console.log('@@updateTokens');
       const ytConfig = this.config;
 
       const creds = {};
@@ -48,7 +47,6 @@ export default (ctx, { Strategy }) => {
       );
       const data = await res.json();
       const ret = {};
-      // console.log('updateTokens data', data);
       if (data.error) {
         if (data.error_description === 'Account has been deleted') {
           passport.status = 'removed';
@@ -73,7 +71,6 @@ export default (ctx, { Strategy }) => {
       }
       if (data.access_token) {
         passport.status = 'valid';
-        // console.log('updateTokens.access_token', passport.token, data.access_token, passport.token === data.access_token);
         passport.token = data.access_token;
         ret.accessToken = data.access_token;
       }

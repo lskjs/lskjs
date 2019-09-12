@@ -42,22 +42,20 @@ export default ctx => class AuthModule {
     }
     getPassportStrategy(passport) {
       const strategy = this.strategyProviders[passport.provider];
+      if (!strategy) {
+        console.error('AuthModule !strategy');  //eslint-disable-line
+      }
       return strategy;
     }
     async updatePassportTokens(passport, ...args) {
       const strategy = this.getPassportStrategy(passport);
-      if (!strategy) {
-        console.error('passport.updateToken: !strategy');  //eslint-disable-line
-        return;
-      }
       await strategy.updateTokens(passport, ...args);
     }
     async updatePassportData(passport) {
       const strategy = this.getPassportStrategy(passport);
-      if (!strategy) {
-        console.error('passport.updateToken: !strategy');  //eslint-disable-line
-        return;
-      }
+      if (!strategy) return;
+      console.log('strategy.updateTokens', strategy.updateTokens);
+      
       await strategy.updateTokens(passport);
       await strategy.updatePassport({
         passport,
