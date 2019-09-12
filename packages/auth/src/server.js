@@ -45,7 +45,7 @@ export default ctx => class AuthModule {
       return strategy;
     }
     async updatePassportTokens(passport, ...args) {
-      const strategy = this.getStrategy();
+      const strategy = this.getPassportStrategy(passport);
       if (!strategy) {
         console.error('passport.updateToken: !strategy');  //eslint-disable-line
         return;
@@ -53,7 +53,7 @@ export default ctx => class AuthModule {
       await strategy.updateTokens(passport, ...args);
     }
     async updatePassportData(passport) {
-      const strategy = this.getStrategy(passport);
+      const strategy = this.getPassportStrategy(passport);
       if (!strategy) {
         console.error('passport.updateToken: !strategy');  //eslint-disable-line
         return;
