@@ -40,7 +40,7 @@ export default ctx => class AuthModule {
     getStrategies() {
       return require('./server/strategies').default(ctx, this);
     }
-    async getPassportStrategy(passport) {
+    getPassportStrategy(passport) {
       const strategy = this.strategyProviders[passport.provider];
       return strategy;
     }
