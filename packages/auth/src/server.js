@@ -41,7 +41,7 @@ export default ctx => class AuthModule {
       return require('./server/strategies').default(ctx, this);
     }
     getPassportStrategy(passport) {
-      const strategy = this.strategyProviders[passport.provider];
+      const strategy = this.strategies[passport.provider];
       if (!strategy) {
         console.error('AuthModule !strategy');  //eslint-disable-line
       }
