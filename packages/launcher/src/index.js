@@ -44,13 +44,20 @@ function launch(arr = []) {
           event.emit('event', turnIndex);
         }
       });
+      const isPrefix = false;
+      const prefix = isPrefix ? `${params[1]}: ` : '';
 
       pr.stderr.on('data', (data) => {
-        console.error(`${params[1]} ERR: ${data}`);
+        console.error(`${prefix}${data}`);
       });
 
       pr.on('close', (code) => {
-        console.log(`${params[1]} process exited with code ${code}`);
+        const text = `${prefix}process exited with code ${code}`;
+        if (code) {
+          console.error(text);
+        } else {
+          console.log(text);
+        }
       });
     });
   }
