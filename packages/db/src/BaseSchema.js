@@ -2,6 +2,7 @@ import forEach from 'lodash/forEach';
 import Promise from 'bluebird';
 import clone from 'lodash/clone';
 import pick from 'lodash/pick';
+import get from 'lodash/get';
 
 const Schema = () => { console.error('OVERWRITE ME'); }; // eslint-disable-line no-console
 
@@ -47,7 +48,9 @@ export default class BaseSchema {
         const params = this.getParams(incomeParams, systemParams);
         return this.countDocuments(params.filter);
       },
-      getSelect({ view = 'default', select = [] } = {}) {
+      getSelect(params = {}) {
+        let select = get(params, 'select', get(params, 'req.data.select', []));
+        const view = get(params, 'view', get(params, 'req.data.view', 'default'));
         if (typeof select === 'string') select = [select];
         const { views = {} } = this;
         return [

@@ -29,7 +29,7 @@ export default app => class Mailer {
     }
   }
 
-  getUserMailerParams(user) {
+  getUserParams(user) {
     const { locale = 'en' } = user;
     return {
       to: user.email,
@@ -118,7 +118,7 @@ export default app => class Mailer {
 
     const user = params1.user || await UserModel.findById(params1.userId);
     if (!user) throw app.e('mailer.!user');
-    const userParams = this.getUserMailerParams(user);
+    const userParams = this.getUserParams(user);
     const props = {
       me: user,
       ...(params2.props || {}),
