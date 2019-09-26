@@ -37,6 +37,7 @@
     "@lskjs/log": "^0.35.57",
     "@lskjs/module": "^0.35.57",
     "emotion": "^9.1.3",
+    "bluebird": "^3.5.5",
     "emotion-server": "^9.1.3",
     "lodash": "^4.17.11",
     "react": "^16.8.5",
@@ -48,6 +49,7 @@
     "@lskjs/module": "*",
     "emotion": "*",
     "emotion-server": "*",
+    "bluebird": "*",
     "lodash": "*",
     "react": "*",
     "react-dom": "*"

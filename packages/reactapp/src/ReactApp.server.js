@@ -2,6 +2,7 @@ import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
+import Promise from 'bluebird';
 import autobind from '@lskjs/autobind';
 import antimergeDeep from 'antimerge/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
