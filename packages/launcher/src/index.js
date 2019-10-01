@@ -37,15 +37,16 @@ function launch(arr = []) {
       const [command, ...params] = cmd.split(' ');
       console.log(`═══ Launcher start turn ${turnIndex + 1}: ${params[1]} ═══`);
       const pr = spawn(command, params);
+      const isPrefix = false;
+      const prefix = isPrefix ? `${params[1]}: ` : '';
+      
       pr.stdout.on('data', (data) => {
-        stdout.write(`${params[1]}: ${data}`);
+        stdout.write(`${prefix}${data}`);
         if (!isTurnCompleted(turnIndex) && rx.test(data)) {
           checks[turnIndex][index] = true;
           event.emit('event', turnIndex);
         }
       });
-      const isPrefix = false;
-      const prefix = isPrefix ? `${params[1]}: ` : '';
 
       pr.stderr.on('data', (data) => {
         console.error(`${prefix}${data}`);
