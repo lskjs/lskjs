@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/reactapp",
-  "version": "0.35.65",
+  "version": "0.35.66",
   "description": "LSK ux subrepo: reactapp",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "@lskjs/autobind": "^0.35.63",
-    "@lskjs/log": "^0.35.65",
-    "@lskjs/module": "^0.35.65",
+    "@lskjs/log": "^0.35.66",
+    "@lskjs/module": "^0.35.66",
     "bluebird": "^3.5.5",
     "emotion": "^9.1.3",
     "emotion-server": "^9.1.3",
