@@ -669,8 +669,8 @@ function stylizeWithColor(str, color) {
         return '';
     var codes = colors[color];
     if (codes) {
-        return '\033[' + codes[0] + 'm' + str +
-                     '\033[' + codes[1] + 'm';
+        return '\0o33[' + codes[0] + 'm' + str +
+                     '\0o33[' + codes[1] + 'm';
     } else {
         return str;
     }
@@ -1464,7 +1464,7 @@ function cleanupAndExit(code, signal) {
 
     // Clear possibly interrupted ANSI code (issue #59).
     if (usingAnsiCodes) {
-        stdout.write('\033[0m');
+        stdout.write('\0o33[0m');
     }
 
     // Kill possible dtrace child.
