@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable */
 /**
  * Copyright 2016 Trent Mick. All rights reserved.
  * Copyright 2016 Joyent Inc. All rights reserved.
@@ -11,6 +12,7 @@
  * vim: expandtab:ts=4:sw=4
  */
 
+var v033 = '\x1B'; // '\033';
 var VERSION = '1.8.1';
 
 var p = console.log;
@@ -669,8 +671,8 @@ function stylizeWithColor(str, color) {
         return '';
     var codes = colors[color];
     if (codes) {
-        return '\0o33[' + codes[0] + 'm' + str +
-                     '\0o33[' + codes[1] + 'm';
+        return v033 + '[' + codes[0] + 'm' + str +
+                     v033 + '[' + codes[1] + 'm';
     } else {
         return str;
     }
@@ -1464,7 +1466,7 @@ function cleanupAndExit(code, signal) {
 
     // Clear possibly interrupted ANSI code (issue #59).
     if (usingAnsiCodes) {
-        stdout.write('\0o33[0m');
+        stdout.write(v033 + '[0m');
     }
 
     // Kill possible dtrace child.
