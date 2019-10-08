@@ -12,31 +12,40 @@ export default ({ config }) => class RabbitModule {
     };
     this.config = merge({}, this.defaultConfig, config.rabbit);
   }
+  async createConnection() {
+    const connection = await amqp.connect(this.config.uri);
+    return connection;
+  }
   async run() {
     if (!this.enabled) return;
-    const connection = await amqp.connect(this.config.uri);
-    this.channel = await connection.createChannel();
+    this.listenConnection = await this.createConnection();
+    this.sendConnection = await this.createConnection();
+    this.listenChannel = await this.listenConnection.createChannel();
+    this.sendChannel = await this.sendConnection.createChannel();
     this.onOpen();
   }
   onOpen() {}
   ack(msg) {
-    return this.channel.ack(msg);
+    return this.listenChannel.ack(msg);
+  }
+  nack(msg) {
+    return this.listenChannel.nack(msg);
   }
   assertQueue(q) {
-    this.channel.assertQueue(q, get(config, 'rabbit.options'));
+    this.listenChannel.assertQueue(q, get(config, 'rabbit.options'));
     const prefetchCount = get(config, 'rabbit.options.prefetch');
     if (prefetchCount) {
-      this.channel.prefetch(prefetchCount);
+      this.listenChannel.prefetch(prefetchCount);
     }
   }
-  sendToQueue(q, data, options) {
+  sendToQueue(q, data, options, channel = this.sendChannel) {
     let str = data;
     if (typeof data !== 'string') {
       str = JSON.stringify(data);
     }
-    return this.channel.sendToQueue(q, Buffer.from(str), options);
+    return channel.sendToQueue(q, Buffer.from(str), options);
   }
   consume(q, callback, options) {
-    return this.channel.consume(q, callback, options);
+    return this.listenChannel.consume(q, callback, options);
   }
 };
