@@ -94,8 +94,6 @@ export default ({ db, config }) => class ElasticModule {
       try {
         if (!params) {
           this.nowSync.push(modelName);
-          // eslint-disable-next-line no-console
-          console.log('sync start', modelName);
         }
         await model.esCreateMapping();
         await model.esSynchronize(params || {}, projection);
@@ -107,9 +105,6 @@ export default ({ db, config }) => class ElasticModule {
             this.sync({ model, again });
           }, parseInt(this.config.syncTimeDelay, 10) || 5000);
         }
-        if (!params || again) {
-          console.log('sync end', modelName);
-        }
       } catch (err) {
         if (!params) {
           this.removeFromNowSync(modelName);
@@ -118,9 +113,6 @@ export default ({ db, config }) => class ElasticModule {
           setTimeout(() => {
             this.sync({ model, again });
           }, parseInt(this.config.syncTimeDelay, 10) || 5000);
-        }
-        if (!params || again) {
-          console.log('sync end', modelName);
         }
         // eslint-disable-next-line no-console
         console.error(err, 'es error', modelName);
