@@ -1,5 +1,5 @@
 import http from 'http';
-import nodeVersion from '@lskjs/utils/nodeVersion';
+import nodeVesion from '@lskjs/utils/nodeVersion';
 
 export default async function (params = {}) {
   const express = this.express || this.app;
@@ -38,16 +38,15 @@ export default async function (params = {}) {
       resolve(data);
     };
 
-    if (nodeVersion >= 9) {
+    if (nodeVesion() >= 9) {
       const x = new http.OutgoingMessage();
       const symbols = Object.getOwnPropertySymbols(x);
-
       const outHeadersKey = symbols.find((item => (item.toString() === 'Symbol(outHeadersKey)')));
       if (outHeadersKey) {
         res[outHeadersKey] = headers;
       }
       const kOutHeaders = symbols.find((item => (item.toString() === 'Symbol(kOutHeaders)')));
-      if (outHeadersKey) {
+      if (kOutHeaders) {
         res[kOutHeaders] = headers;
       }
     }
