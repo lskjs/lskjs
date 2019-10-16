@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "0.35.70",
+  "version": "0.35.71",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -53,7 +53,7 @@
     "@lskjs/db": "^0.35.63",
     "@lskjs/i18": "^0.35.67",
     "@lskjs/log": "^0.35.66",
-    "@lskjs/module": "^0.35.70",
+    "@lskjs/module": "^0.35.71",
     "@lskjs/utils": "^0.35.63",
     "axios": "^0.19.0",
     "bluebird": "^3.5.3",
