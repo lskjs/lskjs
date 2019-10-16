@@ -54,11 +54,11 @@ export default class Uapp extends Module {
     this.initConfig = cloneDeep(this.config); // подумать в init или в run
 
     this.stores = this.getStores();
+    // TODO: прокинуть домен (req) когда сервер
+    this.api = this.getApi();
     await this.initSession();
 
 
-    // TODO: прокинуть домен (req) когда сервер
-    this.api = this.getApi();
     if (this.i18) {
       await this.i18.setState({
         log: this.log,
