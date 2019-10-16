@@ -15,7 +15,7 @@ function isClass(v) {
 
 const DEBUG = true;
 
-export default class Core {
+export default class Module {
   name = 'Core';
   constructor(params = {}) {
     Object.assign(this, params);
