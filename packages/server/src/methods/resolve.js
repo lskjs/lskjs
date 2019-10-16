@@ -1,5 +1,5 @@
 import http from 'http';
-import nodeVesion from '@lskjs/utils/nodeVesion';
+import nodeVersion from '@lskjs/utils/nodeVersion';
 
 export default async function (params = {}) {
   const express = this.express || this.app;
@@ -38,7 +38,7 @@ export default async function (params = {}) {
       resolve(data);
     };
 
-    if (nodeVesion >= 9) {
+    if (nodeVersion >= 9) {
       const x = new http.OutgoingMessage();
       const symbols = Object.getOwnPropertySymbols(x);
 
