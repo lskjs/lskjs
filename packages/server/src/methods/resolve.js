@@ -1,4 +1,5 @@
-const http = require("http");
+import http from 'http';
+import nodeVesion from '@lskjs/utils/nodeVesion';
 
 export default async function (params = {}) {
   const express = this.express || this.app;
@@ -7,19 +8,20 @@ export default async function (params = {}) {
     host = '', // ?
     url,
     body = {},
-    headers = {},
+    headers: _headers = {},
   } = params;
 
   const remoteAddress = '127.0.0.1';
-  const h = {
+  const headers = {
     host,
-    ...headers,
+    ..._headers,
   };
   const req = {
     ...params,
     url,
+    _direct: true,
     method: 'GET',
-    headers: h,
+    headers,
     connection: {
       remoteAddress,
     },
@@ -30,21 +32,24 @@ export default async function (params = {}) {
     },
     body,
   };
-  // let data = '{}';
   const data = await new Promise((resolve) => {
-    const res = {
-      send(data) { //eslint-disable-line
-        resolve(data);
-      },
-      setHeader(...args) { //eslint-disable-line
-        // console.log('res.setHeader', args);
-      },
+    const res = Object.create(http.ServerResponse.prototype);
+    res.send = function(data) { //eslint-disable-line
+      resolve(data);
     };
-    if (Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 9) {
+
+    if (nodeVesion >= 9) {
       const x = new http.OutgoingMessage();
       const symbols = Object.getOwnPropertySymbols(x);
-      const symbol = symbols.find((item => (item.toString() == "Symbol(outHeadersKey)")));
-      res[symbol] = h;
+
+      const outHeadersKey = symbols.find((item => (item.toString() === 'Symbol(outHeadersKey)')));
+      if (outHeadersKey) {
+        res[outHeadersKey] = headers;
+      }
+      const kOutHeaders = symbols.find((item => (item.toString() === 'Symbol(kOutHeaders)')));
+      if (outHeadersKey) {
+        res[kOutHeaders] = headers;
+      }
     }
     express.handle(req, res);
   });

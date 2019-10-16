@@ -102,6 +102,7 @@ export default (ctx) => {
     data.reqId = req.reqId;
     data.method = req.method;
     if (req.ws) data.method = 'WS';
+    if (req._direct) data.method = `#${data.method}`;
     data.host = req.headers.host;
     if (req.ws) {
       data.url = `${req.ws.nsp.name} ${JSON.stringify(omit(req.data, ['EIO', 'transport', 'token']))}`;
