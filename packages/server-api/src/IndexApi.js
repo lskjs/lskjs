@@ -46,7 +46,7 @@ export default class IndexApi extends Api {
     return {
       '/': ::this.index,
       '/env': ::this.env,
-      '/env.js': ::this.js,
+      '/env.js': ::this.envjs,
       '/config': ::this.config,
       '/healthcheck': ::this.healthcheck,
     };
