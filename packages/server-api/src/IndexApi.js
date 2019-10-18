@@ -21,10 +21,10 @@ export default class IndexApi extends Api {
         url: api,
         routes: __DEV__ ? mapValuesDeep(this.routes, a => true) : undefined,
       }),
-      '/env': req => this.app.getEnv(req),
+      '/env': req => this.app && this.app.getEnv(req),
       '/env.js': (req, res) => res.send(serializeWindow(this.app.getEnv(req))),
       '/config': () => (__DEV__ ? this.app.config : {}),
-      '/healthcheck': this.healthcheck,
+      '/healthcheck': req => this.app && this.app.healthcheck(req),
     };
   }
 }
