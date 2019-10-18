@@ -279,7 +279,6 @@ export default class ServerApp extends Module {
     return Promise.all(promises);
   }
 
-  createHealthcheck = require('./methods/createHealthcheck').default;
   getDocsRouter = require('./methods/getDocsRouter').default;
   getDocsTemplate = () => 'deprecated';
 
