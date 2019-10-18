@@ -16,8 +16,8 @@ export default class IndexApi extends Api {
   path = '/api';
   healthcheck(req) {
     if (!this.app) return null;
-    if (!this.app.healthcheck) return this.app.healthcheck(req);
-    if (!this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
+    if (this.app.healthcheck) return this.app.healthcheck(req);
+    if (this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
     return null;
   }
   index() {
