@@ -134,7 +134,6 @@ export default (ctx) => {
 
       log[levelFn(data, 'finish')](data, logFinish(data));
     }
-    res.on('finish', logging);
     res.on('close', logging);
     next();
   };
