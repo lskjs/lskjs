@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "npm run watch",
     "dev:lib1": "npm run watch --scope @lib-initial-kit/lib1",
-    "release": "lerna publish --skip-npm",
+    "release": "lerna publish --skip-npm  -m \"release: %s\" patch",
     "bootstrap": "lerna exec -- npm run bootstrap",
     "update": "lerna exec -- npm run update",
     "update-force": "lerna exec -- ../../scripts/package-update.sh",
