@@ -3,24 +3,22 @@ import isFunction from 'lodash/isFunction';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
-export default incomeData => async function (req, res) {
+export default async (incomeData) => {
   let data = {};
-  if (res) {
-    const promises = mapValues(incomeData, async (fn, key) => {
-      if (!isFunction(fn)) return fn;
-      const start = Date.now();
-      try {
-        const result = await fn();
-        if (!result) return null;
-        return Date.now() - start;
-      } catch (err) {
-        console.error(`healthcheck(${key}) err`, err);  //eslint-disable-line
-        return null;
-      }
-    });
+  const promises = mapValues(incomeData, async (fn, key) => {
+    if (!isFunction(fn)) return fn;
+    const start = Date.now();
+    try {
+      const result = await fn();
+      if (!result) return null;
+      return Date.now() - start;
+    } catch (err) {
+      console.error(`healthcheck(${key}) err`, err);  //eslint-disable-line
+      return null;
+    }
+  });
 
-    data = await Promise.props(promises);
-  }
+  data = await Promise.props(promises);
 
   const status = some(data, a => a == null) ? 500 : 200;
 
@@ -44,10 +42,12 @@ export default incomeData => async function (req, res) {
     },
   };
 
-  return res.status(status).json({
+  return {
+    __pack: true,
+    __status: status,
     ok: true,
     date: new Date(),
     ...mapValues(json, Boolean),
     data,
-  });
+  };
 };

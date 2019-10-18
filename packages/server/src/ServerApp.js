@@ -63,7 +63,6 @@ export default class ServerApp extends Module {
         getLocale: this.getLocale,
       }).init();
     }
-    this._healthcheck = this.createHealthcheck(this.healthcheck ? this.healthcheck() : {});
   }
 
   async afterInit() {
