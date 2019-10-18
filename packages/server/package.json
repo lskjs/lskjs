@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "0.35.78",
+  "version": "0.35.82",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
