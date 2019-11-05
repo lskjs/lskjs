@@ -31,12 +31,13 @@ export default ({ config }) => class RabbitModule {
   nack(msg) {
     return this.listenChannel.nack(msg);
   }
-  assertQueue(q) {
-    this.listenChannel.assertQueue(q, get(config, 'rabbit.options'));
+  async assertQueue(q) {
     const prefetchCount = get(config, 'rabbit.options.prefetch');
     if (prefetchCount) {
       this.listenChannel.prefetch(prefetchCount);
     }
+    const res = await this.listenChannel.assertQueue(q, get(config, 'rabbit.options'));
+    return res;
   }
   sendToQueue(q, data, options, channel = this.sendChannel) {
     let str = data;
