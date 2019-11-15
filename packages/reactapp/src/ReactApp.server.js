@@ -13,11 +13,17 @@ import BaseHtml from './Html';
 export default class ReactApp extends Module {
   name = 'App';
 
+  constructor(params = {}) {
+    super(params);
+    Object.assign(this, params);
+  }
+
   getRootState({ req } = {}) {
     const rootState = {
       reqId: req.reqId,
       token: req.token,
       user: req.user,
+      ...(this.rootState || {}),
     };
     if (this.config.remoteConfig) {
       const realConfig = this.config.client || {};

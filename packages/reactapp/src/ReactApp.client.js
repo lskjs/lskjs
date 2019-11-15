@@ -18,6 +18,11 @@ export default class ReactApp extends Module {
   // BaseUapp = BaseUapp;
   name = 'App';
 
+  constructor(params = {}) {
+    super(params);
+    Object.assign(this, params);
+  }
+
   getRootState() {
     return window.__ROOT_STATE__ || {};
   }

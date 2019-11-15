@@ -35,6 +35,11 @@ export default class Uapp extends Module {
   i18 = new I18({ ctx: this });
   @observable req = {};
 
+  constructor(params = {}) {
+    super(params);
+    Object.assign(this, params);
+  }
+
   createLogger(params) {
     const level = __DEV__ ? ( // eslint-disable-line no-nested-ternary
       __SERVER__ ? 'warn' : 'trace'

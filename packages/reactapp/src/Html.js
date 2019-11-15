@@ -1,4 +1,5 @@
 import map from 'lodash/map';
+
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
 export default class Html {
@@ -91,7 +92,7 @@ ${js}
 
   renderGlobals() {
     const { globals = {} } = this;
-    return map(globals, (val, key) => (`window['${key}']=${JSON.stringify(val)};`)).join('');
+    return map(globals, (val, key) => (`window['${key}'] = ${JSON.stringify(val)};\n`)).join('');
   }
 
   renderChunks(type, chunk = 'client') {
