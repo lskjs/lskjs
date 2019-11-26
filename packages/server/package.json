@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "0.35.84",
+  "version": "0.35.85",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -51,7 +51,7 @@
     "@lskjs/apiquery": "^0.35.84",
     "@lskjs/autobind": "^0.35.84",
     "@lskjs/db": "^0.35.84",
-    "@lskjs/i18": "^0.35.84",
+    "@lskjs/i18": "^0.35.85",
     "@lskjs/log": "^0.35.84",
     "@lskjs/module": "^0.35.84",
     "@lskjs/utils": "^0.35.84",
