@@ -62,7 +62,10 @@ export default class I18 {
         ...config,
         ...params,
       };
-      if (!result.lng) result.lng = this.getI18Locale() || 'en';
+      const remoteLocale = this.getI18Locale();
+      if (remoteLocale !== result.lng) {
+        result.lng = this.getI18Locale() || 'en';
+      }
       return result;
     } catch (err) {
       console.error('I18 getI18Params', err);  //eslint-disable-line
