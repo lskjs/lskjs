@@ -58,17 +58,13 @@ export default class I18 {
   getI18Params(params = {}) {
     try {
       const { config } = this;
-      const result = {
+      return {
         ...config,
+        lng: this.getI18Locale(),
         ...params,
       };
-      const remoteLocale = this.getI18Locale();
-      if (remoteLocale !== result.lng) {
-        result.lng = this.getI18Locale() || 'en';
-      }
-      return result;
     } catch (err) {
-      console.error('I18 getI18Params', err);  //eslint-disable-line
+      console.error('I18.getI18Params', err); // eslint-disable-line no-console
       throw err;
     }
   }
