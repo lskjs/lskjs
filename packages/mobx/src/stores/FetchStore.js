@@ -9,7 +9,7 @@ import Store from './Store';
 
 const { CancelToken } = axios;
 
-function getFindParams(store) {
+export function getFindParams(store) {
   return {
     search: store.search,
     filter: store.filter,

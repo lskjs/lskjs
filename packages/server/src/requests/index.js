@@ -1,12 +1,5 @@
 import forEach from 'lodash/forEach';
-
-const tryJSONparse = (str, defaultValue = str) => {
-  try {
-    return JSON.parse(str);
-  } catch (err) {
-    return defaultValue;
-  }
-};
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
 
 const getData = function (parseJson = false) {
   const params = {};
