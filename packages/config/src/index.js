@@ -7,7 +7,7 @@ import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import getEnvPaths from './getEnvPaths';
 
 export default function mergeEnvs(...configs) {
-  // const init = () => 
+  // const init = () =>
   let config = {};
   configs.forEach((conf) => {
     merge(config, conf);
@@ -45,11 +45,17 @@ export default function mergeEnvs(...configs) {
     // });
   });
 
-  Object.keys(process.env, (key) => {
-    const [mainKey, ...otherKeys] = key.split('.');
-    if (mainKey === 'config') {
-      set(config, otherKeys.join('.'), tryJSONparse(process.env[key]));
+  const getConfigKey = key => ['.', '__'].map((delemiter) => {
+    const [mainKey, ...otherKeys] = key.split(delemiter);
+    if (mainKey === 'config' && otherKeys.length) {
+      return otherKeys.join('.');
     }
+  }).filter(Boolean)[0];
+
+  Object.keys(process.env, (key) => {
+    const configKey = getConfigKey(key);
+    if (!configKey) return;
+    set(config, configKey, tryJSONparse(process.env[key]));
   });
 
   return config;
