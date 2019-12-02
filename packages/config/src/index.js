@@ -52,7 +52,7 @@ export default function mergeEnvs(...configs) {
     }
   }).filter(Boolean)[0];
 
-  Object.keys(process.env, (key) => {
+  Object.keys(process.env).forEach((key) => {
     const configKey = getConfigKey(key);
     if (!configKey) return;
     set(config, configKey, tryJSONparse(process.env[key]));
