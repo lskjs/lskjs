@@ -28,10 +28,10 @@ export default ctx => function pack(raw = {}, info) {
   if (isRaw) {
     if (isLog) {
       ctx.log.trace('>>>>>>');
-      console.log(raw); // eslint-disable-line no-console
+      console.log(data); // eslint-disable-line no-console
       ctx.log.trace('<<<<<<');
     }
-    return res.send(raw);
+    return res.send(data);
   }
   if (config.debug && info.err) {
     json.err = info.err;
