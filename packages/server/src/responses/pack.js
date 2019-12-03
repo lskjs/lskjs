@@ -5,7 +5,7 @@ export default ctx => function pack(raw = {}, info) {
   const res = this;
   const config = get(ctx, 'config.response', __DEV__ ? { log: false, debug: true } : {});
   // const isRaw = get(raw, '__raw', false) || get(raw, '__pack', false);
-  const isLog = Boolean(get(raw, '__log') === null ? config.log : get(raw, '__log'));
+  const isLog = Boolean(get(raw, '__log') == null ? config.log : get(raw, '__log'));
   const status = info.status || get(raw, '__status', null);
   let isJson;
   let wrap;
