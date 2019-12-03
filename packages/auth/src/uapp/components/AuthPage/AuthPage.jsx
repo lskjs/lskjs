@@ -120,7 +120,7 @@ class AuthPage extends Component {
     try {
       if (type === 'login') {
         await auth.login(data).then((res) => {
-          if (res.message === 'ok') {
+          if (res.code === 0) {
             this.redirect('/');
           }
         });
