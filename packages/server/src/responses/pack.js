@@ -3,9 +3,9 @@ import get from 'lodash/get';
 
 export default ctx => function pack(raw = {}, info) {
   const res = this;
-  const config = get(ctx, 'config.response', __DEV__ ? { log: true, debug: true } : {});
+  const config = get(ctx, 'config.response', __DEV__ ? { log: false, debug: true } : {});
   const isRaw = get(raw, '__raw', false) || get(raw, '__pack', false);
-  const isLog = config.log || get(raw, '__log', false);
+  const isLog = Boolean(get(raw, '__log') === null ? config.log : get(raw, '__log'));
   const status = info.status || get(raw, '__status', null);
   const data = raw ? omit(raw, ['__pack', '__raw', '__log', '__status']) : null;
 
