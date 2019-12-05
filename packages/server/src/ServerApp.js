@@ -12,6 +12,7 @@ import Api from '@lskjs/apiquery';
 import autobind from '@lskjs/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db/server';
+import e from '@lskjs/utils/e';
 import Module from '@lskjs/module';
 import http from 'http';
 
@@ -84,35 +85,8 @@ export default class ServerApp extends Module {
     return `${this.config.url}${str}${query}`;
   }
 
-  e(params1, params2) {
-    let params = {};
-    if (typeof params1 === 'string') {
-      params.code = params1;
-    }
-    if (typeof params2 === 'string') {
-      params.message = params2;
-    }
-    if (isObject(params1)) {
-      params = {
-        ...params,
-        ...params1,
-      };
-    }
-    if (isObject(params2)) {
-      params = {
-        ...params,
-        ...params2,
-      };
-    }
-    const { code } = params;
-
-    const t = this.i18 ? this.i18.t : (a => a);
-    return {
-      code,
-      message: t(`errors.${code}`, params),
-      status: 500,
-      ...params,
-    };
+  e(...params) {
+    return e.call(this, ...params);
   }
 
   // emit(...args) {

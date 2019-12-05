@@ -16,6 +16,7 @@ import Module from '@lskjs/module';
 import logger from '@lskjs/log';
 // import { createLogger } from '@lskjs/log';
 import autobind from '@lskjs/autobind';
+import e from '@lskjs/utils/e';
 import Root from './UappProvider';
 import wrapApi from './wrapApi';
 import DefaultPage from './Page';
@@ -313,6 +314,11 @@ export default class Uapp extends Module {
   state = {
     secret: false,
   };
+
+
+  e(...params) {
+    return e.call(this, ...params);
+  }
 
   // uapp.onError(t('common.errorData'), err); ??? // bad
   // uapp.onError(uapp.e('errorData', { err })); ???
