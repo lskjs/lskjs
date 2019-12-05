@@ -1,12 +1,11 @@
-const createErr = (code, app) => message => (
+const createErr = (code, app) => (message) => {
   console.log('createErr DEPRECATED!!!!!!');
-  
-  app.e({
+  return app.e({
     status: code > 200 && code < 600 ? code : 500,
     code,
     message,
-  })
-);
+  });
+};
 
 export default app => ({
   e: (code, message, status) => (
