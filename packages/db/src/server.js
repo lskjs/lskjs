@@ -5,6 +5,7 @@ export default async (ctx, params = {}) => {
   const { options = {}, uri, debug } = params;
   const defaultOptions = {
     keepAlive: true,
+    useUnifiedTopology: true,
     useNewUrlParser: true,
     autoReconnect: true,
     reconnectTries: __DEV__ ? 10000 : 30,
