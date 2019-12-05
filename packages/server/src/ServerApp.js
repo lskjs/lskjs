@@ -310,7 +310,7 @@ export default class ServerApp extends Module {
   async started() {
     const str = `🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing && global.timing()}ms]`;
     if (__DEV__) {
-      console.lor(str);
+      console.log(str);
     } else {
       this.log.warn(str);
     }
