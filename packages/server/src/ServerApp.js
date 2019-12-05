@@ -89,6 +89,9 @@ export default class ServerApp extends Module {
     if (typeof params1 === 'string') {
       params.code = params1;
     }
+    if (typeof params2 === 'string') {
+      params.message = params2;
+    }
     if (isObject(params1)) {
       params = {
         ...params,
@@ -315,7 +318,6 @@ export default class ServerApp extends Module {
     this.runCatchErrors();
     return new Promise((resolve) => {
       this.httpInstance = this.httpServer.listen(this.config.port, () => {
-        this.log.trace(`App running on port ${this.config.port}!`);
         resolve(this);
       });
     });
@@ -333,6 +335,12 @@ export default class ServerApp extends Module {
   }
 
   async started() {
-    console.log(`🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing && global.timing()}ms]`);
+    const str = `🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing && global.timing()}ms]`;
+    if (__DEV__) {
+      console.lor(str);
+    } else {
+      this.log.warn(str);
+    }
+    // if (__DEV__) console.log();
   }
 }
