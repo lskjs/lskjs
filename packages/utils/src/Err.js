@@ -1,5 +1,5 @@
 import forEach from 'lodash/forEach';
-import errMerge from './eerrMerge';
+import errMerge from './errMerge';
 
 export default class Err extends Error {
   constructor(...params) {
