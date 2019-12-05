@@ -238,8 +238,7 @@ export default class ServerApp extends Module {
   runDefaultRoute() {
     this.log.trace('ServerApp.runDefaultRoute');
     this.express.use((req, res, next) => {
-      const err = this.errors.e404('Route not found');
-      next(err);
+      next(this.e('ROUTE_NOT_FOUND', { status: 404 }));
     });
   }
 

@@ -1,4 +1,6 @@
 const createErr = (code, app) => message => (
+  console.log('createErr DEPRECATED!!!!!!');
+  
   app.e({
     status: code > 200 && code < 600 ? code : 500,
     code,
