@@ -71,7 +71,7 @@ function retry(func, options) {
                     || (giveup_time && (now + interval >= giveup_time)))) {
           if (options.throw_original) {
             return Promise.reject(err);
-          } else if (!(err instanceof Error)) {
+          } if (!(err instanceof Error)) {
             let failure = err;
 
             if (failure) {
@@ -82,7 +82,7 @@ function retry(func, options) {
 
             err = new Error(`rejected with non-error: ${failure}`);
             err.failure = failure;
-          } else 
+          }
 
           const timeout = new Error(`operation timed out after ${now - start} ms, ${tries} tries with error: ${err.message}`);
           timeout.failure = err;
