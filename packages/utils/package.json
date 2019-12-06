@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",
+    "bluebird": "^3.7.2",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "react": "^16.8.6",
