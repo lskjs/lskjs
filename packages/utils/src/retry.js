@@ -106,16 +106,27 @@ function retry(func, options) {
 //
 // Otherwise the cancel error object itself is propagated to the caller.
 //
-function StopError(err) {
-  this.name = 'StopError';
-  if (err instanceof Error) {
-    this.err = err;
-  } else {
-    this.message = err || 'cancelled';
+
+class StopError extends Error {
+  constructor(err) {
+    super(err);
+    if (err instanceof Error) {
+      this.err = err;
+    } else {
+      this.message = err || 'cancelled';
+    }
   }
 }
-StopError.prototype = Object.create(Error.prototype);
-retry.StopError = StopError;
+
+// function StopError(err) {
+//   if (err instanceof Error) {
+//     this.err = err;
+//   } else {
+//     this.message = err || 'cancelled';
+//   }
+// }
+// StopError.prototype = Object.create(Error.prototype);
+retry.StopError = (...args) => new StopError(...args);
 
 // Return the updated interval after applying the various backoff options
 function backoff(interval, options) {
