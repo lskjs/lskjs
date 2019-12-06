@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sh",
-  "version": "0.35.102",
+  "version": "0.35.103",
   "description": "LSK ux subrepo: sh",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -28,6 +28,6 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "^0.35.102"
+    "@lskjs/utils": "^0.35.103"
   }
 }
