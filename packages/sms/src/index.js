@@ -7,6 +7,6 @@ export default (config = {}) => {
   if (provider === 'telesign') Class = require('./transports/telesign').default;
   if (provider === 'bytehand') Class = require('./transports/bytehand').default;
   if (provider === 'nexmo') Class = require('./transports/nexmo').default;
-  if (!Class) throw '!provider';
+  if (!Class) throw '!sms.provider';
   return new Class(config);
 };
