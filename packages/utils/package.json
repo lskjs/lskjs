@@ -10,6 +10,7 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
   "scripts": {
+    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "dev": "../../node_modules/nodemon/bin/nodemon.js src/index",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
