@@ -90,7 +90,7 @@ export default class Stats {
     const speed1 = !time1 ? null : `${beauty(acks1 / time1 * sec, 2)}/s`;
     const speed2 = !time2 ? null : `${beauty(acks2 / time2 * min)}/m`;
     const speed3 = !time3 ? null : `${beauty(acks3 / time3 * hour)}/h`;
-    const speed4 = !time3 ? null : `${beauty(acks3 / time3 * 24 * hour)}/day`;
+    const speed4 = !time3 ? null : `${beauty(acks3 / time3 * 24 * hour)}/d`;
 
     // const speed1 = `${round(count / (get(storages, 'name1.last', new Date()) - get(storages, 'name1.start', new Date())) * sec, 2)}/s`;
     // // const speed1 = `${round(count / (get(storages, 'name1.last', new Date()) - get(storages, 'name1.start', new Date())) * sec, 2)}/s`;
@@ -99,10 +99,13 @@ export default class Stats {
     // const speed2 = (name, count) => `${round(count / (get(storages, [name, 'last'].join('.'), new Date()) - get(storages, [name, 'start'].join('.'), new Date())) * min, 1)}/m`;
     // const speed3 = (name, count) => `${round(count / (get(storages, [name, 'last'].join('.'), new Date()) - get(storages, [name, 'start'].join('.'), new Date())) * hour)}/h`;
     // const getSuccess
-    const speed = [speed1, speed2, speed3, speed4].filter(Boolean).join(' ');
+    const speed = [speed1, speed2, speed3, speed4]
+      .filter(Boolean)
+      .map(a => String(a).padStart(8))
+      .join(' ');
     const str = `\
-✅ ${acks3} ${speed ? `— ${speed}` : ''} \
-${nacks1 ? `⚠️ ${nacks1} (${nacksPercent1}%) last min` : ''} \
+✅ ${String(acks3).padEnd(8)} ${speed} \
+${nacks1 ? `   ⚠️  ${nacks1} (${nacksPercent1}%) last min` : ''} \
 `.trim();
     log(str);
     // }
