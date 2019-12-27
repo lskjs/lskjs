@@ -10,6 +10,7 @@ const hour = 60 * min;
 
 export default class Stats {
   storages = {}
+  floodTime = __DEV__ ? sec : min;
   info = {
     names: __DEV__ ? ['sec10', 'min1', 'all'] : ['min1', 'hour1', 'all'],
     // names: __DEV__ ? ['sec10', 'min1', 'all'] : ['min1', 'hour1', 'all'],
@@ -63,7 +64,11 @@ export default class Stats {
 
     return isRemove;
   }
-  print({ prefix = 'all', successKey = 'event.ack', unsuccessKey = 'event.nack' } = {}) {
+
+
+  print({ log = console.log, prefix = 'all', successKey = 'event.ack', unsuccessKey = 'event.nack' } = {}) {
+    if (this.printedAt && (this.printedAt + this.floodTime) > Date.now()) return;
+    this.printedAt = Date.now();
     const [name1, name2, name3] = this.info.names;
     const storages = this.storages[prefix];
 
@@ -94,10 +99,11 @@ export default class Stats {
     // const speed3 = (name, count) => `${round(count / (get(storages, [name, 'last'].join('.'), new Date()) - get(storages, [name, 'start'].join('.'), new Date())) * hour)}/h`;
     // const getSuccess
     const speed = [speed1, speed2, speed3, speed4].filter(Boolean).join(' ');
-    return `\
+    const str = `\
 ✅ ${acks3} ${speed ? `— ${speed}` : ''} \
 ${nacks1 ? `⚠️ ${nacks1} (${nacksPercent1}%) last min` : ''} \
 `.trim();
+    log(str);
     // }
   }
 }

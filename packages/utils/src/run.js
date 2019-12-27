@@ -16,5 +16,5 @@ setInterval(() => {
   }
   stats.trigger({ event, startedAt, err, proxy });
   // stats.trigger({ event, startedAt, err, prefix: proxy });
-  console.log(stats.print());
+  stats.print();
 }, 10);
