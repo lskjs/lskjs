@@ -3,6 +3,7 @@ import get from 'lodash/get';
 import round from 'lodash/round';
 import forEach from 'lodash/forEach';
 import inc from './inc';
+import beauty from './beauty';
 
 const sec = 1000;
 const min = 60 * sec;
@@ -86,10 +87,10 @@ export default class Stats {
     const nacksPercent3 = round(get(storages, `${name3}.${unsuccessKey}`, 0) / get(storages, `${name3}.count`, 0) * 100);
 
 
-    const speed1 = !time1 ? null : `${round(acks1 / time1 * sec, 2)}/s`;
-    const speed2 = !time2 ? null : `${round(acks2 / time2 * min)}/m`;
-    const speed3 = !time3 ? null : `${round(acks3 / time3 * hour)}/h`;
-    const speed4 = !time3 ? null : `${round(acks3 / time3 * 24 * hour)}/day`;
+    const speed1 = !time1 ? null : `${beauty(acks1 / time1 * sec, 2)}/s`;
+    const speed2 = !time2 ? null : `${beauty(acks2 / time2 * min)}/m`;
+    const speed3 = !time3 ? null : `${beauty(acks3 / time3 * hour)}/h`;
+    const speed4 = !time3 ? null : `${beauty(acks3 / time3 * 24 * hour)}/day`;
 
     // const speed1 = `${round(count / (get(storages, 'name1.last', new Date()) - get(storages, 'name1.start', new Date())) * sec, 2)}/s`;
     // // const speed1 = `${round(count / (get(storages, 'name1.last', new Date()) - get(storages, 'name1.start', new Date())) * sec, 2)}/s`;
