@@ -1,5 +1,16 @@
 ![Lego Starter Kit](http://i.imgur.com/RJ5WyRL.jpg)
 
+## Как запускать любой lsk-образный проект
+
+1. git clone `repo`
+2. npm install
+3. npm run bootstrap
+4. 
+ - copy .env.js if needed
+ - npm run dev *or*  
+ - cd packages/`package` && npm run dev
+
+
 Вдохновлен:
 * [Express.js](): концепция средних слоев, способ их конфигурирования
 * [Sails.js & Grails.js]()
@@ -107,7 +118,7 @@ Before you start, take a moment to see how the project structure looks like:
 │   │   └── responses.js        # Респонсы приложения
 │   ├── /client.js              # Точка входа Клиентского приложения
 │   ├── /config                 # Общие настройки проекта
-│   └── /server.js              # Точка входа Сервернрнр приложения
+│   └── /server.js              # Точка входа Серверного приложения
 ├── /test/                      # Модульные и интеграционные тесты
 ├── /tools/                     # Скрипты и утилиты для автоматизации сборки проекта
 │   ├── /config.js              # Конфигурация сборки проекта
