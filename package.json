@@ -82,6 +82,7 @@
     "jest": "^24.7.1",
     "lerna": "^3.13.1",
     "lint-staged": "^8.1.4",
+    "nodemon": "^2.0.2",
     "npm-check-updates": "^3.1.8",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",

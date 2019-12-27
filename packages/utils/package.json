@@ -10,7 +10,7 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
   "scripts": {
-    "dev": "npm run watch",
+    "dev": "../../node_modules/nodemon/bin/nodemon.js src/index",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
     "bootstrap": "../../scripts/package-bootstrap.sh",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",
+    "@babel/register": "^7.7.7",
     "bluebird": "^3.7.2",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
