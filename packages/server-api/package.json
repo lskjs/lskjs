@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "0.35.107",
+  "version": "0.35.108",
   "description": "LSK server-api.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "object-hash": "^1.3.1"
   },
   "devDependencies": {
-    "@lskjs/utils": "^0.35.107",
+    "@lskjs/utils": "^0.35.108",
     "bluebird": "^3.5.3",
     "lodash": "^4.17.11"
   },
