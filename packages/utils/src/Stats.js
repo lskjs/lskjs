@@ -22,11 +22,10 @@ export default class Stats {
     // day: 24 60 * * 60 * 1000,
     all: 365 * 24 * hour,
   }
-
   getStorages(prefix) {
     return this.info.names.map((name) => {
       const key = [prefix, name].filter(Boolean).join('.');
-      if (!get(this.storages, key)) set(this.storages, key, []);
+      if (!get(this.storages, key)) set(this.storages, key, {});
       return get(this.storages, key);
     });
   }
