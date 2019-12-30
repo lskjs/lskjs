@@ -1610,7 +1610,8 @@ module.exports.resolveLevel = resolveLevel;
 module.exports.levelFromName = levelFromName;
 module.exports.nameFromLevel = nameFromLevel;
 
-module.exports.VERSION = require('../package.json').version;
+// module.exports.VERSION = require('../package.json').version;
+module.exports.VERSION = 'HZHZHZHZH';
 module.exports.LOG_VERSION = LOG_VERSION;
 
 module.exports.createLogger = function createLogger(options) {
