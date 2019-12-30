@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bunyan",
-  "version": "0.35.101",
+  "version": "0.35.111",
   "description": "LSK a JSON logging library for node.js services withdout dtrace",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -8,7 +8,13 @@
     "access": "public"
   },
   "repository": "https://github.com/lskjs/modules/tree/master/packages/bunyan",
-  "keywords": ["log", "logging", "log4j", "json", "bunyan"],
+  "keywords": [
+    "log",
+    "logging",
+    "log4j",
+    "json",
+    "bunyan"
+  ],
   "scripts": {
     "dev": "npm run watch",
     "postversion": "npm run release",
@@ -40,10 +46,10 @@
     "moment": "^2.10.6"
   },
   "devDependencies": {
-    "nodeunit": "0.9",
     "ben": "0.0.0",
     "markdown-toc": "0.12.x",
-    "verror": "1.3.3",
-    "vasync": "1.4.3"
+    "nodeunit": "0.9",
+    "vasync": "1.4.3",
+    "verror": "1.3.3"
   }
 }
