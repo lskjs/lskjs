@@ -13,6 +13,7 @@
  * This will be incremented if there is any backward incompatible change to
  * the log record format. Details will be in 'CHANGES.md' (the change log).
  */
+
 var LOG_VERSION = 0;
 
 
