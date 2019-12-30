@@ -1,3 +1,3 @@
-import bunyan from 'bunyan';
+import bunyan from '@lskjs/bunyan';
 
 export default bunyan;
