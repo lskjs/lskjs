@@ -99,8 +99,7 @@ export default class Stats {
     // const speed3 = (name, count) => `${round(count / (get(storages, [name, 'last'].join('.'), new Date()) - get(storages, [name, 'start'].join('.'), new Date())) * hour)}/h`;
     // const getSuccess
     const speed = [speed1, speed2, speed3, speed4]
-      .filter(Boolean)
-      .map(a => String(a).padStart(8))
+      .map(a => String(a || '').padStart(8))
       .join(' ');
     const str = `\
 ✅ ${String(acks3).padEnd(8)} ${speed} \

@@ -42,7 +42,9 @@
   },
   "peerDependencies": {
     "@babel/polyfill": "*",
-    "lodash": "*",
+    "lodash": "*"
+  },
+  "optionalDependencies": {
     "moment": "^2.24.0"
   }
 }
