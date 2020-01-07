@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "0.35.118",
+  "version": "0.35.119",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -48,10 +48,10 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^0.35.101",
-    "@lskjs/autobind": "^0.35.101",
-    "@lskjs/db": "^0.35.104",
-    "@lskjs/i18": "^0.35.101",
+    "@lskjs/apiquery": "^0.35.119",
+    "@lskjs/autobind": "^0.35.119",
+    "@lskjs/db": "^0.35.119",
+    "@lskjs/i18": "^0.35.119",
     "@lskjs/log": "^0.35.114",
     "@lskjs/module": "^0.35.114",
     "@lskjs/utils": "^0.35.117",
