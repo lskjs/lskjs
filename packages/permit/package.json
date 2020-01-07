@@ -36,15 +36,18 @@
   "devDependencies": {
     "@lskjs/db": "^0.35.104",
     "@lskjs/mobx": "^0.35.117",
+    "mobx": "5.6.0",
     "bluebird": "3.5.3",
     "lodash": "4.17.11",
     "moment": "2.24.0"
   },
   "peerDependencies": {
     "@lskjs/db": "*",
-    "@lskjs/general": "*",
+    "@lskjs/mobx": "^0.35.37",
+    "mobx": "*",
     "bluebird": "*",
     "lodash": "*",
     "moment": "*"
   }
 }
+

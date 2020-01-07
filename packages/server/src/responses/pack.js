@@ -19,7 +19,7 @@ export default ctx => function pack(raw = {}, info) {
   } else {
     wrap = !get(raw, '__pack', false);
     isJson = true;
-    if (isPlainObject) {
+    if (isPlainObject(raw)) {
       data = omit(raw, ['__pack', '__raw', '__log', '__status']);
     } else {
       data = raw;
