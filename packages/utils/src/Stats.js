@@ -13,7 +13,7 @@ export default class Stats {
   storages = {}
   floodTime = __DEV__ ? sec : min;
   info = {
-    names: __DEV__ ? ['sec10', 'min1', 'all'] : ['min1', 'hour1', 'all'],
+    names: __DEV__ ? ['sec10', 'min1', 'all'] : ['sec10', 'min1', 'all'],
     // names: __DEV__ ? ['sec10', 'min1', 'all'] : ['min1', 'hour1', 'all'],
     sec10: 10 * sec,
     min1: min,

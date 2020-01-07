@@ -1,5 +1,6 @@
 import omit from 'lodash/omit';
 import get from 'lodash/get';
+import isPlainObject from 'lodash/isPlainObject';
 
 export default ctx => function pack(raw = {}, info) {
   const res = this;
@@ -17,10 +18,10 @@ export default ctx => function pack(raw = {}, info) {
   } else {
     wrap = !get(raw, '__pack', false);
     isJson = true;
-    if (raw === null) {
-      data = null;
-    } else {
+    if (isPlainObject) {
       data = omit(raw, ['__pack', '__raw', '__log', '__status']);
+    } else {
+      data = raw;
     }
   }
   let result;
