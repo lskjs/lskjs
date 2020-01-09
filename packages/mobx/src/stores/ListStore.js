@@ -1,7 +1,7 @@
 import { observable, computed, action } from 'mobx';
 import autobind from '@lskjs/autobind';
 import each from 'lodash/each';
-import debounce from 'lodash-decorators/debounce';
+import debounce from '@lskjs/utils/decorator-debounce';
 import filter from 'lodash/filter';
 import isEmpty from '@lskjs/utils/isEmpty';
 // import isEmpty from 'lodash/isEmpty';
