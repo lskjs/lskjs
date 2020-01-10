@@ -10,7 +10,6 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
   "scripts": {
-    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "dev": "../../node_modules/nodemon/bin/nodemon.js src/index",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
@@ -26,7 +25,8 @@
     "release": "../../scripts/package-release.sh",
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
-    "styleguide": "../../scripts/package-styleguide.sh"
+    "styleguide": "../../scripts/package-styleguide.sh",
+    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
     "csv-string": "^3.1.5"

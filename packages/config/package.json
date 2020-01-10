@@ -34,6 +34,6 @@
     "@lskjs/utils": "^0.35.122"
   },
   "peerDependencies": {
-    "@lskjs/utils": "^0.35.37"
+    "@lskjs/utils": "^0.35.122"
   }
 }

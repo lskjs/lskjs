@@ -9,4 +9,4 @@ release-*
 packages/*/build
 packages/*/release
 packages/*/release-*
-bunyan
+packages/*/coverage
