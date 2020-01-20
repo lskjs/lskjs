@@ -33,16 +33,16 @@
   },
   "dependencies": {
     "@lskjs/db": "^0.35.119",
-    "eventemitter3": "^3.1.0",
+    "eventemitter3": "^4.0.0",
     "imap": "^0.8.19",
-    "mailparser": "^2.4.0",
-    "mjml": "^4.3.1",
+    "mailparser": "^2.7.7",
+    "mjml": "^4.5.1",
     "nodemailer": "^5.1.1",
     "nodemailer-juice": "^1.0.1"
   },
   "devDependencies": {
-    "bluebird": "^3.5.3",
-    "lodash": "^4.17.11",
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0"
   },
   "peerDependencies": {
