@@ -45,6 +45,6 @@
     "lodash": "*"
   },
   "optionalDependencies": {
-    "moment": "^2.24.0"
+    "moment": "*"
   }
 }

@@ -65,14 +65,14 @@
     "@babel/runtime": "7.0.0-beta.42"
   },
   "peerDependencies": {
-    "@lskjs/apiquery": "^0.35.119",
-    "@lskjs/autobind": "^0.35.119",
-    "@lskjs/db": "^0.35.119",
-    "@lskjs/i18": "^0.35.119",
-    "@lskjs/log": "^0.35.114",
-    "@lskjs/module": "^0.35.114",
-    "@lskjs/utils": "^0.35.122",
-    "axios": "^0.19.0",
+    "@lskjs/apiquery": "*",
+    "@lskjs/autobind": "*",
+    "@lskjs/db": "*",
+    "@lskjs/i18": "*",
+    "@lskjs/log": "*",
+    "@lskjs/module": "*",
+    "@lskjs/utils": "*",
+    "axios": "*",
     "bluebird": "*",
     "lodash": "*",
     "moment": "*"

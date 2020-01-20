@@ -43,7 +43,7 @@
   },
   "peerDependencies": {
     "@lskjs/db": "*",
-    "@lskjs/mobx": "^0.35.122",
+    "@lskjs/mobx": "*",
     "bluebird": "*",
     "lodash": "*",
     "mobx": "*",

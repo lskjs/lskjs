@@ -37,8 +37,8 @@
     "lodash": "^4.17.11"
   },
   "peerDependencies": {
-    "@lskjs/utils": "^0.35.122",
-    "bluebird": "^3.5.3",
-    "lodash": "^4.17.11"
+    "@lskjs/utils": "*",
+    "bluebird": "*",
+    "lodash": "*"
   }
 }

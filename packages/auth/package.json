@@ -63,12 +63,12 @@
     "react-icons2": "2.5.0"
   },
   "peerDependencies": {
-    "@lskjs/apiquery": "^0.35.119",
-    "@lskjs/db": "^0.35.119",
-    "@lskjs/mobx": "^0.35.122",
-    "@lskjs/server-api": "^0.35.122",
-    "@lskjs/utils": "^0.35.122",
-    "axios": "^0.19.0",
+    "@lskjs/apiquery": "*",
+    "@lskjs/db": "*",
+    "@lskjs/mobx": "*",
+    "@lskjs/server-api": "*",
+    "@lskjs/utils": "*",
+    "axios": "*",
     "bluebird": "*",
     "js-cookie": "^2.2.0",
     "lodash": "*",
