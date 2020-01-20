@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sms",
-  "version": "0.36.0",
+  "version": "0.36.1",
   "description": "LSK module for sms.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
