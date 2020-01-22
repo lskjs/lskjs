@@ -10,8 +10,12 @@
 
 По итогу реализовывать в lskjs-ux pull request'ом, созваниваемся, обсуждаем решение.
 
+---
+
 ![Дизайн Компонента Password](https://downloader.disk.yandex.ru/preview/cc52b2b83afc126e9900016e4de221ef0f3f209a63e10b656058b6211d37c49b/5e28aad0/87JynfxthgLHXZRH8cCNEKoZ42DwNoSbk4Tvqiq8NvTXgnnbtc4SO7UkcfTrBzBAuKZLp4eZlEqEdkCOUbLk0w==?uid=0&filename=Password.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&owner_uid=162217558&size=2048x2048)
 *Дизайн Компонента Password*
+
+[Ссылка на Компонент Input](https://github.com/lskjs/ux/tree/master/packages/form/src/controls/Input), на основе которого будет сделан Компонент Password.
 
 ## 1. Компонент Password
 
@@ -21,8 +25,6 @@
 - Добавить кнопку с иконкой глаза, при единичном нажатии на которую будет показываться/скрываться текст, курсор при этом можно уводить в сторону, статус (показано/скрыто) должен сохряняться;
 - Привести к дизайну (скриншот прикреплен выше; не обращаем внимание на слабый/надежный);
 - Должна быть возможность заменить кнопку на любую иконку (не только глаз).
-
-[Ссылка на Компонент Input, на основе которого будет сделан Компонент Password](https://github.com/lskjs/ux/tree/master/packages/form/src/controls/Input)
 
 *Подсказка*
 Чекер стойкости пароля можно сделать на основе этого пакета (или поискать более популярные аналоги):
