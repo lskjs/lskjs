@@ -1,9 +1,14 @@
 import React from 'react';
 import merge from 'lodash/merge';
 import Promise from 'bluebird';
+import createLogger from '@lskjs/utils/createLogger';
 // import Loading from '@lskjs/general/Loading';
 
-const DEBUG = __DEV__ && false;
+// const DEBUG = __DEV__ && false;
+const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
+const deprecated = createLogger({ name: 'uapp/Page', type: 'deprecated' });
+
+// DEBUG ? () => null : console.log; // eslint-disable-line no-console
 // const DEBUG = true;
 
 export default class Page {
@@ -25,7 +30,7 @@ export default class Page {
   }
 
   onExit(fn) {
-    if (DEBUG) console.log('Page.onExit');
+    debug('Page.onExit');
     const { onExit = [] } = this.state;
     this.setState({
       onExit: [
@@ -36,21 +41,14 @@ export default class Page {
     return this;
   }
 
-  onError(err) {
-    if (DEBUG) console.log('Page.onError', err);
-    if (__CLIENT__ && this.uapp.checkVersion) { // / !!!!!!!!!!!!!
-      this.uapp.checkVersion();
-    }
-    return this;
-  }
 
   scrollTo(id) {
-    console.log('Реализуй меня: Uapp.scrollTo', id);
+    console.log(`Not realized: Uapp.scrollTo(${id})`); // eslint-disable-line no-console
   }
 
 
   async exit() {
-    if (DEBUG) console.log('Page.exit');
+    debug('Page.exit');
     const { onExit } = this.state;
     if (onExit && onExit.length) {
       await Promise.map(onExit, fn => fn());
@@ -59,13 +57,12 @@ export default class Page {
   }
 
   async enter() {
-    if (DEBUG) console.log('Page.enter');
-    if (__CLIENT__) this.scrollTo(0);
+    debug('Page.enter');
+    this.scrollTo(0);
   }
 
   setState(state = {}) {
-    if (DEBUG) console.log('Page.setState');
-
+    debug('Page.setState');
     this.state = {
       ...this.state,
       ...state,
@@ -73,25 +70,24 @@ export default class Page {
     return this;
   }
 
-  error(err) {
-    if (DEBUG) console.log('Page.error', err);
+  catchError(err) {
+    debug('Page.error', err);
     if (__DEV__) {
       if (err.message) {
-        console.error(err.message);
-        console.error(err.stack);
+        console.error('Page.error:', err.message); // eslint-disable-line no-console
+        if (err.stack) console.error(err.stack); // eslint-disable-line no-console
       } else {
-        console.error(err);
+        console.error(err); // eslint-disable-line no-console
       }
     }
-    // return this.setState({ err });
-    if (this.disabled) return this;
-    return this
-      .setState({ layout: this.state.errorLayout })
-      .component('div', { children: err });
+    if (__CLIENT__ && this.uapp.checkVersion) { // / !!!!!!!!!!!!!
+      this.uapp.checkVersion();
+    }
+    throw err;
   }
 
   loading() {
-    if (DEBUG) console.log('Page.loading');
+    debug('Page.loading');
     const loading = this.state.loading || this.baseState.loading || 'Loading...';
     // const loading = this.state.loading || <Loading full />;
     return this.component(loading);
@@ -99,19 +95,18 @@ export default class Page {
 
 
   async next(next) {
-    if (DEBUG) console.log('Page.next');
+    debug('Page.next');
     if (this.disabled) return this;
     try {
       const res = await next();
       return res;
     } catch (err) {
-      this.onError(err);
-      return this.error(err);
+      return this.catchError(err);
     }
   }
 
   meta(meta) {
-    if (DEBUG) console.log('Page.meta', JSON.stringify(this.state.metas), meta);
+    debug('Page.meta', JSON.stringify(this.state.metas), meta);
     if (!this.state.metas) this.state.metas = [];
     this.state.metas.push(meta);
     this.state.meta = merge({}, ...this.state.metas);
@@ -119,25 +114,25 @@ export default class Page {
   }
 
   async component(...args) {
-    if (DEBUG) console.log('Page.component', args[0]);
+    debug('Page.component', args[0]);
     const result = await args[0];
     if (result.default) {
-      args[0] = result.default;
+      args[0] = result.default; // eslint-disable-line no-param-reassign
     } else {
-      args[0] = result;
+      args[0] = result; // eslint-disable-line no-param-reassign
     }
     // }
     if (args.length > 1) {
       this.state.component = args;
     } else {
-      this.state.component = args[0];
+      this.state.component = args[0]; // eslint-disable-line prefer-destructuring
     }
-    if (DEBUG) console.log('Page.this.state.component', this.state.component);
+    debug('Page.this.state.component', this.state.component);
     return this;
   }
 
   redirect(redirect) {
-    if (DEBUG) console.log('Page.redirect', redirect);
+    debug('Page.redirect', redirect);
     if (this.disabled) return this;
     this.state.redirect = redirect;
     return this;
@@ -145,7 +140,9 @@ export default class Page {
 
   // ///////////////////////////////////////////////////////////////////////
   renderLayout(props = {}, layout = null) {
-    if (DEBUG) console.log('Page.renderLayout');
+    deprecated('Page.renderLayout');
+    // debug('Page.renderLayout');
+    console.log('Page.renderLayout');
     // console.log('page.renderLayout', props);
     // if (typeof props.children === 'undefined') {
     //   props.children = 'undefined'
@@ -160,11 +157,11 @@ export default class Page {
       Layout = this.state.layout;
     }
 
-    return <Layout {...props} />;
+    return React.createElement(Layout, props);
   }
 
   renderComponent() {
-    if (DEBUG) console.log('Page.renderComponent', this.state);
+    debug('Page.renderComponent', this.state);
     if (!Array.isArray(this.state.component)) {
       return this.state.component;
     }
@@ -172,12 +169,12 @@ export default class Page {
   }
 
   renderComponentWithLayout() {
-    if (DEBUG) console.log('Page.renderComponentWithLayout');
+    debug('Page.renderComponentWithLayout');
     let children = this.renderComponent();
     // console.log('page.children111', children, typeof children, typeof children === 'undefined');
     if (typeof children === 'undefined') {
       if (__DEV__) {
-        children = '@undefined';
+        children = 'Page return empty result';
       } else {
         children = '';
       }
@@ -190,7 +187,7 @@ export default class Page {
   }
 
   getRootComponentProps() {
-    if (DEBUG) console.log('Page.getRootComponentProps');
+    debug('Page.getRootComponentProps');
     return {
       uapp: this.uapp,
       history: this.uapp.history,
@@ -198,7 +195,7 @@ export default class Page {
   }
 
   render() {
-    if (DEBUG) console.log('Page.renderRoot');
+    debug('Page.renderRoot');
     const children = this.renderComponentWithLayout();
     if (!this.Root) return children;
     const { Root } = this;

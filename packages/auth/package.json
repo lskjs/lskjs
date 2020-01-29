@@ -60,7 +60,8 @@
     "mobx": "5.6.0",
     "moment": "2.24.0",
     "mongoose": "5.2.15",
-    "react-icons2": "2.5.0"
+    "react-icons2": "2.5.0",
+    "node-accountkit": "^1.1.6"
   },
   "peerDependencies": {
     "@lskjs/apiquery": "*",
@@ -76,5 +77,8 @@
     "moment": "*",
     "mongoose": "*",
     "react-icons2": "*"
+  },
+  "optionalDependencies": {
+    "node-accountkit": "^1.1.6"
   }
 }

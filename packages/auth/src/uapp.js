@@ -4,17 +4,17 @@ import AuthApi from './uapp/AuthApi';
 const DEBUG = __DEV__ && false;
 
 
-export default app => class AuthModule {
-  constructor(app) {
-    this.uapp = app;
+export default class AuthModule {
+  constructor(appOrCtx) {
+    const app = (appOrCtx && appOrCtx.app) ? appOrCtx.app : appOrCtx;
+    // this.app = app;
     this.app = app;
     this.Api = AuthApi;
     this.api = new AuthApi(this.app);
   }
 
-  qwe = 123;
   init() {
-    this.stores = require('./uapp/stores').default(this.app);
+    this.stores = require('./uapp/stores').default(this.app); // eslint-disable-line global-require
   }
 
   async initAuth() {
@@ -43,14 +43,14 @@ export default app => class AuthModule {
     DEBUG && console.log('AuthStore.initUserProfile uapp.rootState.user', uapp.rootState.user);  //eslint-disable-line
     if (__CLIENT__) {
       if (
-        this.uapp.rootState.token
-        && !(this.uapp.rootState.user && this.uapp.rootState.user.profile)
+        this.app.rootState.token
+        && !(this.app.rootState.user && this.app.rootState.user.profile)
       ) {
         this.applyPromise(this.findUserProfile());
       }
     } else if (
-      this.uapp.rootState.token
-        && !(this.uapp.rootState.user && this.uapp.rootState.user.profile)
+      this.app.rootState.token
+        && !(this.app.rootState.user && this.app.rootState.user.profile)
     ) {
       await this.applyPromise(this.findUserProfile());
     }
@@ -67,15 +67,15 @@ export default app => class AuthModule {
     return this.getMyUser()
       .then(user => ({ user }))
       .catch((err) => {
-        this.uapp.log.error(err);
+        this.app.log.error(err);
         throw err;
       });
   }
 
   setToken(token, expires = 365, cookies = true) {
     DEBUG && console.log('AuthStore.setToken', token);  //eslint-disable-line
-    this.uapp.api.setAuthToken(token);
-    this.uapp.rootState.token = token;
+    this.app.api.setAuthToken(token);
+    this.app.rootState.token = token;
     if (__CLIENT__ && cookies) {
       if (token == null) {
         cookie.remove('token');
@@ -87,13 +87,13 @@ export default app => class AuthModule {
 
   setUser(user = null) {
     DEBUG && console.log('AuthStore.setUser', user);  //eslint-disable-line
-    this.uapp.rootState.user = user;
-    // this.uapp.resetState();
-    if (this.uapp.user) {
+    this.app.rootState.user = user;
+    // this.app.resetState();
+    if (this.app.user) {
       if (user) {
-        this.uapp.user.setState(user);
+        this.app.user.setState(user);
       } else {
-        this.uapp.user.reset();
+        this.app.user.reset();
       }
     }
   }
@@ -116,12 +116,12 @@ export default app => class AuthModule {
   getUserAndTokenFromRootState() {
     // DEBUG && console.log('AuthStore.getUserAndToken');  //eslint-disable-line
     const res = {};
-    if (this.uapp.rootState) {
-      if (this.uapp.rootState.token) {
-        res.token = this.uapp.rootState.token;
+    if (this.app.rootState) {
+      if (this.app.rootState.token) {
+        res.token = this.app.rootState.token;
       }
-      if (this.uapp.rootState.user) {
-        res.user = this.uapp.rootState.user;
+      if (this.app.rootState.user) {
+        res.user = this.app.rootState.user;
       }
     }
     if (!res.token && cookie.get('token')) {
@@ -149,9 +149,9 @@ export default app => class AuthModule {
       DEBUG && console.log('AuthStore.applyPromise @@@2 - result', res);  //eslint-disable-line
       await this.setUserAndToken(res);
       try {
-        await this.uapp.reconnect();
+        await this.app.reconnect();
       } catch (err) {
-        console.error('AuthStore.applyPromise: this.uapp.reconnect', err);  //eslint-disable-line
+        console.error('AuthStore.applyPromise: this.app.reconnect', err);  //eslint-disable-line
       }
     } catch (err) {
       DEBUG && console.log('AuthStore.applyPromise ERR', err);  //eslint-disable-line
@@ -170,7 +170,12 @@ export default app => class AuthModule {
   }
 
   isAuth() {
-    return !!(this.uapp.rootState && this.uapp.rootState.token && this.uapp.rootState.user && this.uapp.rootState.user._id);
+    return !!(
+      this.app.rootState
+      && this.app.rootState.token
+      && this.app.rootState.user
+      && this.app.rootState.user._id
+    );
   }
 
 
@@ -183,7 +188,7 @@ export default app => class AuthModule {
     }
     if (redirect) {
       if (__CLIENT__) window.location = '/';
-      return this.uapp.redirect('/');
+      this.app.redirect('/');
       // this.setUserAndToken({});
     }
   }
@@ -239,7 +244,7 @@ export default app => class AuthModule {
   authPassport(provider) {
     window.location = `/api/module/auth/${provider}`;
   }
-};
+}
 
 
 // export default ctx => ({

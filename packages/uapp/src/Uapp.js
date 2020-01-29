@@ -14,7 +14,6 @@ import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import logger from '@lskjs/log';
-// import { createLogger } from '@lskjs/log';
 import autobind from '@lskjs/autobind';
 import e from '@lskjs/utils/e';
 import Root from './UappProvider';
@@ -142,7 +141,12 @@ export default class Uapp extends Module {
     this.auth = new AuthStore();
   }
 
-  createOnSubmit(fn) {
+  createOnSubmit(...props) {
+    console.log('depreacted uapp.createOnSubmit=>catchError');  //eslint-disable-line
+    return this.catchOnError(...props);
+  }
+
+  catchError(fn) {
     return async (...args) => {
       try {
         const res = await fn(...args);
@@ -407,19 +411,6 @@ export default class Uapp extends Module {
       removeClassFromHtml('ua_js_no');
       addClassToHtml('ua_js_yes');
     }
-  }
-
-
-  createOnSubmit(fn) {
-    return async (...args) => {
-      try {
-        const res = await fn(...args);
-        return res;
-      } catch (err) {
-        this.onError(err);
-        throw err;
-      }
-    };
   }
 
 
