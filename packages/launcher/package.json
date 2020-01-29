@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/launcher",
-  "version": "0.36.0",
+  "version": "0.37.1",
   "description": "LSK Launcher.",
   "author": "Andrey Kondalov <i@yukio.ru>",
   "license": "MIT",
