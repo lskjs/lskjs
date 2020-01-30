@@ -42,10 +42,9 @@ export default class Grant {
   }
   getUserByUserId(userId) {
     if (__CLIENT__) {
-      return this.app.models.UserModel.findById(.userId);
-    } else {
-      return this.app.stores.UserStore.findById(.userId);
+      return this.app.stores.UserStore.findById(userId);
     }
+    return this.app.models.UserModel.findById(userId);
   }
   async can(...args) {
     const params = await this.getParams(args);

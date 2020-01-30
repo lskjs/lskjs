@@ -29,7 +29,7 @@
     "test": "npm run lint && npm run spellcheck",
     "pretty-staged": "pretty-quick --staged",
     "lint-staged": "lint-staged",
-    "publish:latest": "lerna publish --exact --force-publish",
+    "publish:latest": "lerna publish --exact --concurrency 10 --force-publish",
     "publish:next": "npm run publish:latest -- --npm-tag=next",
     "publish:debug": "npm run publish:latest -- --npm-tag=debug --no-push",
     "test-latest-cra": "npm --prefix --cwd lib/cli run test-latest-cra",
