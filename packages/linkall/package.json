@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/linkall",
-  "version": "0.37.1",
+  "version": "0.37.2",
   "description": "LSK link all.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -30,7 +30,6 @@
   "dependencies": {
     "@babel/runtime": "^7.4.3"
   },
-  "devDependencies": {},
   "bin": {
     "linkall": "./index.js"
   }
