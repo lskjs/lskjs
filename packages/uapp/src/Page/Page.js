@@ -142,7 +142,6 @@ export default class Page {
   renderLayout(props = {}, layout = null) {
     deprecated('Page.renderLayout');
     // debug('Page.renderLayout');
-    console.log('Page.renderLayout');
     // console.log('page.renderLayout', props);
     // if (typeof props.children === 'undefined') {
     //   props.children = 'undefined'
@@ -162,10 +161,17 @@ export default class Page {
 
   renderComponent() {
     debug('Page.renderComponent', this.state);
-    if (!Array.isArray(this.state.component)) {
-      return this.state.component;
+    let Component;
+    let props = {};
+    if (Array.isArray(this.state.component)) {
+      ([Component, props] = this.state.component);
+    } else {
+      Component = this.state.component;
     }
-    return React.createElement(this.state.component[0], this.state.component[1]);
+    if (Array.isArray(this.state.component)) {
+      return React.createElement(this.state.component[0], this.state.component[1] || {});
+    }
+    return React.createElement(Component, props);
   }
 
   renderComponentWithLayout() {

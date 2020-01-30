@@ -29,6 +29,7 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
+  "dependencies": {},
   "devDependencies": {
     "@lskjs/db": "^0.37.1",
     "@lskjs/log": "^0.37.1",
