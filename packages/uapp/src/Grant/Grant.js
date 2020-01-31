@@ -1,6 +1,7 @@
 import createLogger from '@lskjs/utils/createLogger';
 
-const debug = createLogger({ name: 'Grant', enable: __DEV__ && false });
+const DEBUG = __DEV__; // && false;
+const debug = createLogger({ name: 'Grant', enable: DEBUG });
 // && false
 // [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
 export default class Grant {
@@ -63,8 +64,9 @@ export default class Grant {
     const params = await this.getParams(args);
     const { action } = params;
     debug('can', action);
-    if (this.rules[action]) {
-      return this.rules[action].bind(this)(params);
+    const { rules } = this;
+    if (rules && rules[action]) {
+      return rules[action].bind(this)(params);
     }
     if (__CLIENT__) return this.askServer(params);
     return false;
