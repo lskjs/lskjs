@@ -17,6 +17,9 @@ export default class AuthModule {
     this.stores = require('./uapp/stores').default(this.app); // eslint-disable-line global-require
   }
 
+
+  
+
   async initAuth() {
     const res = this.getUserAndTokenFromRootState();
     DEBUG && console.log('AuthStore.init res', res);  //eslint-disable-line
