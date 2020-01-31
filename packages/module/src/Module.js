@@ -1,18 +1,16 @@
 import toPairs from 'lodash/toPairs';
 import forEach from 'lodash/forEach';
-import isFunction from 'lodash/isFunction';
 import get from 'lodash/get';
 import Promise from 'bluebird';
 import logger from '@lskjs/log';
+import isFunction from 'lodash/isFunction';
+// import isClass from '@lskjs/utils/isClass';
 // import PromiseMap from 'bluebird/js/release/map';
 import Emitter from './emitter';
 // import createLoggerMock from './logger/createLoggerMock';
 // import config from './config';
 
-function isClass(v) {
-  return isFunction(v);// && /^\s*class\s+/.test(v.toString());
-}
-
+const isClass = isFunction;
 const DEBUG = true;
 
 export default class Module {
@@ -107,6 +105,8 @@ export default class Module {
   }
 
   initModules() {
+    this._asyncModules = this.getAsyncModules();
+
     this._modules = this.getModules();
     // console.log('@@!!', {modules});
     const modules = {};
