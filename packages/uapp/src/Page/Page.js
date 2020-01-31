@@ -140,7 +140,7 @@ export default class Page {
 
   // ///////////////////////////////////////////////////////////////////////
   renderLayout(props = {}, layout = null) {
-    deprecated('Page.renderLayout');
+    debug('Page.renderLayout');
     // debug('Page.renderLayout');
     // console.log('page.renderLayout', props);
     // if (typeof props.children === 'undefined') {

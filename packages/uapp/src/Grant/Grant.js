@@ -1,12 +1,13 @@
 import createLogger from '@lskjs/utils/createLogger';
 
-const debug = createLogger({ name: 'Grant', enable: __DEV__ });
+const debug = createLogger({ name: 'Grant', enable: __DEV__ && false });
 // && false
-
+// [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
 export default class Grant {
   constructor(params = {}) {
     Object.assign(this, params);
   }
+  rules = {};
   async getParams(args) {
     if (args.length === 1) {
       const [params = {}] = args;
@@ -46,10 +47,26 @@ export default class Grant {
     }
     return this.app.models.UserModel.findById(userId);
   }
+  async askServer({ userId, user, action, ...params }) {
+    if (__SERVER__) return false;
+    const { data } = await this.app.api.fetch('/api/grant/can', {
+      method: 'POST',
+      data: {
+        action,
+        userId,
+        ...params,
+      },
+    });
+    return data;
+  }
   async can(...args) {
     const params = await this.getParams(args);
     const { action } = params;
     debug('can', action);
-    return this.askServer(params);
+    if (this.rules[action]) {
+      return this.rules[action].bind(this)(params);
+    }
+    if (__CLIENT__) return this.askServer(params);
+    return false;
   }
 }
