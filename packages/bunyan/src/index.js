@@ -74,32 +74,32 @@ if (runtimeEnv === 'browser') {
 } else {
     os = require('os');
     fs = require('fs');
-    try {
-        dtrace = require('dtrace-provider' + '');
-    } catch (e) {
+    // try {
+    //     dtrace = require('dtrace-provider' + '');
+    // } catch (e) {
         dtrace = null;
-    }
+    // }
 }
 var util = require('util');
 var assert = require('assert');
 var EventEmitter = require('events').EventEmitter;
 var stream = require('stream');
 
-try {
-    var safeJsonStringify = require('safe-json-stringify');
-} catch (e) {
-    safeJsonStringify = null;
-}
+// try {
+//     var safeJsonStringify = require('safe-json-stringify');
+// } catch (e) {
+    var safeJsonStringify = null;
+// }
 if (process.env.BUNYAN_TEST_NO_SAFE_JSON_STRINGIFY) {
     safeJsonStringify = null;
 }
 
 // The 'mv' module is required for rotating-file stream support.
-try {
-    var mv = require('mv' + '');
-} catch (e) {
-    mv = null;
-}
+// try {
+//     var mv = require('mv' + '');
+// } catch (e) {
+    var mv = null;
+// }
 
 try {
     var sourceMapSupport = require('source-map-support' + '');
