@@ -24,16 +24,18 @@ export default async (spreadsheets, locales, destination) => {
   }
   locales.forEach((locale) => {
     const dirname = path.join(destination, locale);
-    try {
-      mkdirp.sync(dirname);
-    } catch (err) {
-      console.error(err);
-    }
+   
     fs.writeFileSync(`${dirname}.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     // fs.writeFileSync(`${dirname}/translation.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     const namespaces = groupBy(localesRows, 'ns');
-    forEach(namespaces, (rows, ns) => {
+    forEach(namespaces, (rows, pns) => {
+      const ns = String(pns).trim();
       if (!ns) return;
+      try {
+        mkdirp.sync(dirname);
+      } catch (err) {
+        console.error(err);
+      }
       fs.writeFileSync(`${dirname}/${ns}.json`, JSON.stringify(getKeyValJson(rows, locale), null, 2));
     });
   });

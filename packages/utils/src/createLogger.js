@@ -2,9 +2,6 @@ export default ({ type = 'debug', enable = __DEV__, name } = {}) => (...args) =>
   if (!enable) return;
   const messages = [];
   if (name) messages.push(`(${name})`);
-
-  console.log({type});
-  
   if (type === 'deprecatated') {
     messages.unshift('!DEPRECATED!');
   } else if (type === 'debug') {

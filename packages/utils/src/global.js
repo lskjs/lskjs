@@ -1,5 +1,3 @@
-import { defaultCipherList } from 'constants';
-
 const globalOrWindow = typeof window !== 'undefined' ? window : global;
 globalOrWindow.__SERVER__ = typeof window === 'undefined';
 globalOrWindow.__CLIENT__ = !globalOrWindow.__SERVER__;
