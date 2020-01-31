@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "0.37.2",
+  "version": "0.37.4",
   "description": "LSK module for worker.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "@lskjs/db": "^0.37.2",
-    "@lskjs/log": "^0.37.2",
-    "@lskjs/module": "^0.37.2",
+    "@lskjs/log": "^0.37.4",
+    "@lskjs/module": "^0.37.4",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
