@@ -68,15 +68,32 @@ export default class Module {
     return {};
   }
 
-  getModulesSequence() {
-    return toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
+  getAsyncModules() {
+    return {};
+  }
+  asyncModules = {};
+  async module(name) {
+    if (this.asyncModules && this.asyncModules[name]) return this.asyncModules[name];
+    if (!this._asyncModules || !this._asyncModules[name]) throw `!uapp._asyncModules.${name}`;
+    const pack = await this._asyncModules[name]();
+    let AsyncModule;
+    if (pack && pack.default) {
+      AsyncModule = pack.default;
+    } else {
+      AsyncModule = pack;
+    }
+    const asyncModule = new AsyncModule({ app: this });
+    if (asyncModule.init) await asyncModule.init();
+    if (asyncModule.run) await asyncModule.run();
+    this.asyncModules[name] = asyncModule;
+    return this.asyncModules[name];
   }
 
   broadcastModules(method) {
     this.log.trace(`${this.name}.broadcastModules`, method);
     // console.log('this.getModulesSequence()', this.getModulesSequence());
-
-    return Promise.map(this.getModulesSequence(), (pack) => {
+    const modules = toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
+    return Promise.map(modules, (pack) => {
       if (!(pack.module && isFunction(pack.module[method]))) return null;
       // let res;
       try {
@@ -130,6 +147,7 @@ export default class Module {
     }
     await this.start();
   }
+
   startCount = 0;
   async start() {
     try {

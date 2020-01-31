@@ -427,6 +427,7 @@ export default class Uapp extends Module {
 
   provide() {
     return {
+      app: this,
       uapp: this,
       log: this.log,
       config: this.config,
@@ -441,6 +442,9 @@ export default class Uapp extends Module {
 
       i18: this.i18,
       t: this.t,
+      grant: this.grant,
+      module: this.module,
+
       // locale: this.locale,
       theme: this.theme,
     };
