@@ -108,7 +108,7 @@
     "remark-preset-lint-recommended": "^3.0.2",
     "size-limit": "^4.0.0",
     "storybox": "^1.1.0",
-    "typescript": "^3.4.2",
+    "typescript": "^3.7.5",
     "webpack": "^4.29.6",
     "yaspeller": "^6.0.2"
   },
