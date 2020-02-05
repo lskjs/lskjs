@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 cd build && \
 NPMDIR=`npm root -g` && \
 PACKAGE=`node -e "console.log(require('./package.json').name)"` && \

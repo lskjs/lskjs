@@ -1,0 +1,17 @@
+# docker-compose up -d --build
+version: "3"
+services:
+  app:
+    # image: node:13.6.0-alpine
+    image: node:13.6.0
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.dev
+    working_dir: /app
+    command: npm run dev
+    volumes:
+        - .:/app
+    ports:
+      - 8081:8080
+      - 3001:3000
+     
