@@ -1,5 +1,5 @@
 /* global test expect */
-import secToTime from '../secToTime';
+import secToTime from '../src/secToTime';
 
 test('test hours secToTime', () => {
   expect(secToTime(38000)).toBe('10:33:20');

@@ -8,7 +8,7 @@ const groups = {
   4: 't',
 };
 
-export default (initNum) => {
+export default (initNum: number): string => {
   let group = 0;
   let lead = initNum;
 

@@ -1,5 +1,5 @@
 /* global test expect */
-import beauty from '../beauty';
+import beauty from '../src/beauty';
 
 test('check 0', () => {
   expect(beauty(0)).toBe('0');

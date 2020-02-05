@@ -1,6 +1,6 @@
 /* global test expect */
 import get from 'lodash/get';
-import avg from '../avg';
+import avg from '../src/avg';
 
 test('check 0', () => {
   const obj = {};
