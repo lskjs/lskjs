@@ -2,9 +2,18 @@ import map from 'lodash/map';
 
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
+
+
 export default class Html {
   constructor(props) {
     Object.assign(this, props);
+  }
+
+  publicDir = `${__dirname}/../public`,
+  assets(url) {
+    const str = require('fs').readFileSync(this.publicDir + '/asset-manifest.json');
+    const json = JSON.parse(str);
+    return json[url];
   }
 
   renderTitle() {
@@ -121,10 +130,25 @@ ${js}
   renderAssets(type) {
     if (!this.assets) return '';
     if (type === 'css') {
-      return `<link rel="stylesheet" href="${this.assets['client.css']}">`;
+      try {
+        return this.assets('main.css');
+      } catch (err) {
+        if (__DEV__) {
+          console.error('renderAssets', type, err); // eslint-disable-line no-console
+        }
+        return '';
+      }
+      return this.assets('main.css');
     }
     if (type === 'js') {
-      return `<script id="js" src="${this.assets['client.js']}"></script>`;
+      try {
+        return require('fs').readFileSync(this.publicDir + `/footer.html`).toString()
+      } catch(){
+        if (__DEV__) {
+          console.error('renderAssets', type, err); // eslint-disable-line no-console
+        }
+        return ''
+      }
     }
     return '';
   }
@@ -148,12 +172,11 @@ ${util.inspect(this.page.state)}
 
   renderFooter() {
     const { footer } = this;
-    // ${this.page.state.footerHtml || ''}
-    // ${__DEV__ ? this.renderDebug() : ''}
     return `\
 ${footer || ''}
 `;
   }
+
   renderRootState() {
     return `\
 <script>
