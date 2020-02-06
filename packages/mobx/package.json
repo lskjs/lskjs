@@ -36,7 +36,6 @@
     "axios": "^0.18.0",
     "bluebird": "3.5.3",
     "lodash": "4.17.11",
-    "lodash-decorators": "^6.0.1",
     "mobx": "5.6.0"
   },
   "peerDependencies": {
@@ -45,7 +44,6 @@
     "axios": "*",
     "bluebird": "*",
     "lodash": "*",
-    "lodash-decorators": "*",
     "mobx": "*"
   }
 }
