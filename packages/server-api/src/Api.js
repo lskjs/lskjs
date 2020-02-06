@@ -9,6 +9,8 @@ import set from 'lodash/set';
 import forEach from 'lodash/forEach';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import getDocsTemplate from './getDocsTemplate';
+import mapValues from 'lodash/mapValues';
+import some from 'lodash/some';
 
 export default class Api {
   constructor(app, params = {}) {
@@ -35,6 +37,35 @@ export default class Api {
     return true;
   }
 
+
+  async validateParams(data, fields) {
+    const errors = mapValues(fields, (validator, param) => {
+      if (validator && validator.required && data[param] == null) {
+        return {
+          name: 'validateParams.required',
+          param,
+        };
+      }
+      return null;
+    });
+
+    if (some(errors, Boolean)) {
+      throw {
+        name: 'validateParams',
+        status: 400,
+        errors,
+      };
+    }
+
+    return mapValues(fields, (validator, param) => {
+      const aliases = [param, ...(validator.alias || [])];
+      // eslint-disable-next-line no-restricted-syntax
+      for (param of aliases) {
+        if (data[param] != null) return data[param];
+      }
+      return null;
+    });
+  }
 
   getListParams(req) {
     const { data } = req;
