@@ -3,7 +3,7 @@
 const shell = require('shelljs');
 
 const DIST = process.env.DIST || 'build';
-const BUILD_PARAMS = process.env.DIST || '--copy-files';
+const BUILD_PARAMS = process.env.BUILD_PARAMS || '--copy-files';
 console.log(`DIST=${DIST} BUILD_PARAMS=${BUILD_PARAMS}`);
 
 async function packageBuild() {
@@ -40,7 +40,6 @@ async function packageBuild() {
     ].join(' '),
   );
   if (res.code !== 0 && res.stdout.trim() !== "error TS6053: File 'src/**.ts' not found.") throw res;
-
 
   // #  --minified
   // # npx babel src --out-dir ${DIST:-build} --source-maps --minified --comments false --copy-files  ${BUILD_PARAMS}

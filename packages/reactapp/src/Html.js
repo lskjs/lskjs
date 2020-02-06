@@ -1,15 +1,12 @@
 import map from 'lodash/map';
 
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
-
-
-
 export default class Html {
   constructor(props) {
     Object.assign(this, props);
   }
 
-  publicDir = `${__dirname}/../public`,
+  publicDir = `${__dirname}/../public`;
   assets(url) {
     const str = require('fs').readFileSync(this.publicDir + '/asset-manifest.json');
     const json = JSON.parse(str);
@@ -143,7 +140,7 @@ ${js}
     if (type === 'js') {
       try {
         return require('fs').readFileSync(this.publicDir + `/footer.html`).toString()
-      } catch(){
+      } catch(err){
         if (__DEV__) {
           console.error('renderAssets', type, err); // eslint-disable-line no-console
         }
