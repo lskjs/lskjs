@@ -1,3 +1,7 @@
+
+Example:
+
+```js
 import ready from './polyfill';
 import Stats from './Stats';
 
@@ -18,3 +22,4 @@ setInterval(() => {
   // stats.trigger({ event, startedAt, err, prefix: proxy });
   stats.print();
 }, 10);
+```

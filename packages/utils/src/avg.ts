@@ -3,7 +3,12 @@ import get from 'lodash/get';
 import isNumber from 'lodash/isNumber';
 import isObject from 'lodash/isObject';
 
-export default (object: object, key: string, val?: number | {value:number, count:number}) => {
+type valType = number | {
+  value: number,
+  count: number,
+};
+
+export default (object: object, key: string, val?: valType) => {
   let value = 1;
   let count = 1;
   if (isObject(val)) {

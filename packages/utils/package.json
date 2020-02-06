@@ -10,7 +10,7 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
   "scripts": {
-    "dev": "../../node_modules/nodemon/bin/nodemon.js src/index",
+    "dev": "../../scripts/package-watch.sh",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
     "bootstrap": "../../scripts/package-bootstrap.sh",
