@@ -3,7 +3,6 @@ import hash from 'object-hash';
 import Cacheman from 'cacheman';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
-import mapValues from 'lodash/mapValues';
 import isArray from 'lodash/isArray';
 import set from 'lodash/set';
 import forEach from 'lodash/forEach';
