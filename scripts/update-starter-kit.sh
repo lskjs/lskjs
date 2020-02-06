@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-HOME='.'
+DIRTO='.'
 DIR=`pwd`
 
 # cd ../lib-starter-kit && git pull && cd $DIR && \
-rsync -avEp --progress  ../lib-starter-kit/ $HOME \
+rsync -avEp --progress  ../lib-starter-kit/ $DIRTO \
   --exclude='*/' \
   --exclude='.git' \
   --exclude='coverage' \
@@ -12,6 +12,6 @@ rsync -avEp --progress  ../lib-starter-kit/ $HOME \
   --exclude='README.md' \
   --exclude='CHANGELOG.md'\
   --exclude='.env.js' && \
-rsync -avEp --progress  ../lib-starter-kit/.storybook $HOME && \
-rsync -avEp --progress  ../lib-starter-kit/scripts/* $HOME/scripts && \
+rsync -avEp --progress  ../lib-starter-kit/.storybook $DIRTO && \
+rsync -avEp --progress  ../lib-starter-kit/scripts/* $DIRTO/scripts && \
 echo "\n\n\nYou need:\nnpm install && npm run bootstrap && npm run update"

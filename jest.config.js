@@ -7,5 +7,5 @@ module.exports = {
   globals: {
     __DEV__: false,
   },
-  collectCoverageFrom: [ "packages/**/src/*.js"],
+  collectCoverageFrom: ['packages/**/src/*.js'],
 };

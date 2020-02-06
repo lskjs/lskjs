@@ -48,7 +48,7 @@ const rules = {
 
 const res = {
   parser: 'babel-eslint',
-  parser: '@typescript-eslint/parser',
+  // parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     es6: true,
