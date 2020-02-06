@@ -72,6 +72,7 @@ export default class Module {
   asyncModules = {};
   async module(name) {
     if (this.asyncModules && this.asyncModules[name]) return this.asyncModules[name];
+    if (this.modules && this.modules[name]) return this.modules[name];
     if (!this._asyncModules || !this._asyncModules[name]) throw `!uapp._asyncModules.${name}`;
     const pack = await this._asyncModules[name]();
     let AsyncModule;
