@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/config",
-  "version": "0.38.5",
+  "version": "0.39.0",
   "description": "LSK config.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "@lskjs/utils": "^0.38.5"
+    "@lskjs/utils": "^0.39.0"
   },
   "peerDependencies": {
     "@lskjs/utils": "*"
