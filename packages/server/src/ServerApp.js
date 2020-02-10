@@ -128,7 +128,7 @@ export default class ServerApp extends Module {
     });
   }
   getModels() {
-    return require('./models').default(this);
+    return {};
   }
   getDatabase() {
     return this.config.db ? db(this, this.config.db) : null;
