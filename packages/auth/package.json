@@ -59,7 +59,7 @@
     "lodash": "4.17.11",
     "mobx": "5.6.0",
     "moment": "2.24.0",
-    "mongoose": "5.2.15",
+    "mongoose": "5.7.5",
     "node-accountkit": "^1.1.6",
     "react-icons2": "2.5.0"
   },
