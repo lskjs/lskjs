@@ -1,2 +1,4 @@
 - rename `config.client` => `config.uapp`
 - прокинуть сквозные конфиги во все модули
+- изменить new Api(app) => new Api({app})
+- изменить ServerApp.api = new Api(), клиентское api поместить кудато еще
