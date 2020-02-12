@@ -201,21 +201,4 @@ window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)}
 </html>
       `;
   }
-
-  // render() {
-  //   let component;
-  //   try {
-  //     component = this.page.render();
-  //   } catch (err) {
-  //     return this.renderError(err, ['Error', 'Html.render', 'page.render']);
-  //   }
-  //   let content;
-  //   try {
-  //     content = ReactDOM.renderToStaticMarkup(component); // because async style render
-  //   } catch (err) {
-  //     return this.renderError(err, ['Error', 'Html.render', 'ReactDOM.renderToStaticMarkup']);
-  //   }
-
-  //   return this.renderTemplate(content);
-  // }
 }

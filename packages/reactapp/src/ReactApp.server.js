@@ -7,7 +7,7 @@ import autobind from '@lskjs/autobind';
 import antimergeDeep from 'antimerge/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
-import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
+// import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
 export default class ReactApp extends Module {
@@ -19,6 +19,7 @@ export default class ReactApp extends Module {
   }
 
   getRootState({ req } = {}) {
+    return { __EMPTY__: true };
     const rootState = {
       reqId: req.reqId,
       token: req.token,
@@ -43,9 +44,9 @@ export default class ReactApp extends Module {
     };
   }
 
-  async getUapp({ req, ...params }) {
+  async getUapp({ req, ...params } = {}) {
     const { Uapp } = this;
-    const url = req.originalUrl || req.url;
+    const url = req.originalUrl || req.url || req.path;
     const uapp = new Uapp({
       ...params,
       ...this.getAssetsAndChunks(),
@@ -54,11 +55,13 @@ export default class ReactApp extends Module {
       }),
       req,
       rootState: this.getRootState({ req }),
-      config: this.config.client,
+      config: get(this, 'config.client', {}),
       app: this,
     });
     try {
-      await uapp.start();
+      if (uapp.start) {
+        await uapp.start();
+      }
     } catch (err) {
       this.log.error('uapp.start()', err);
       throw err;
@@ -66,20 +69,13 @@ export default class ReactApp extends Module {
     return uapp;
   }
 
-  async getPage({ req }) {
+  async getPage({ req } = {}) {
     const uapp = await this.getUapp({ req });
     await uapp.resolve({
-      path: req.path,
+      path: req.originalUrl || req.url || req.path,
       query: req.query,
     });
     return uapp.page;
-  }
-
-  renderError(err, stack = []) {
-    if (!__DEV__) return err.message;
-    const text = [...stack, ''].join(':\n');
-    console.error(text, err); // eslint-disable-line no-console
-    return this.renderTemplate(`<pre>${text}${err.stack}</pre>`);
   }
 
   async renderToNodeStream({ res, render, component }) {
@@ -87,7 +83,7 @@ export default class ReactApp extends Module {
     const content = await render(delemitter);
     const [before, after] = content.split(delemitter);
     res.write(before);
-    const stream = renderToNodeStream(component).pipe(renderStylesToNodeStream());
+    const stream = renderToNodeStream(component); //.pipe(renderStylesToNodeStream());
     stream.pipe(res, { end: false });
     stream.on('end', () => {
       res.write(after);
@@ -95,28 +91,26 @@ export default class ReactApp extends Module {
     });
   }
 
-
   createHtmlRender(page) {
     const { Html = BaseHtml } = this;
-    return (content) => {
+    return content => {
       const html = new Html({
         content,
-        meta: page.state.meta,
-        rootState: page.uapp.rootState,
+        meta: get(page, 'state.meta', {}),
+        rootState: get(page, 'uapp.rootState,', {}),
       });
       return html.render();
     };
   }
 
-  
   @autobind
   async render(req, res) {
-    const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
+    const strategy = get(req, 'query.__strategy') || get(this, 'config.reactApp.strategy') || null;
+    // const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
     let status = 200;
     let page;
     let component;
     let content;
-
     try {
       try {
         page = await this.getPage({ req });
@@ -124,36 +118,42 @@ export default class ReactApp extends Module {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactApp.getPage(req)'] };
       }
       if (get(page, 'state.redirect')) {
+        // eslint-disable-next-line no-shadow
+        const { redirect, status = 300 } = get(page, 'state', {});
         if (__DEV__) {
-          this.log.debug('ReactApp.redirect', page.state.redirect);
+          this.log.debug('ReactApp.redirect', redirect);
           await Promise.delay(2000);
         }
-        return res.redirect(page.state.redirect);
+        if (strategy === 'json') {
+          return { status, redirect };
+        }
+        return res.redirect(redirect);
       }
       try {
-        ({ status } = page.state);
+        ({ status = 200 } = get(page, 'state', {}));
         component = page.render();
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'page.render()'] };
       }
+
       // console.log('component', component);
       try {
-        if (strategy === 'renderToNodeStream') {
+        if (strategy === 'nodeStream') {
           // рендерим потом асинхронно
         } else {
-          if (strategy === 'renderToStaticMarkup') {
+          if (strategy === 'staticMarkup') {
             content = renderToStaticMarkup(component);
           } else {
             content = renderToString(component);
           }
-          content = renderStylesToString(content);
+          // content = renderStylesToString(content);
         }
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactDOM.renderToStaticMarkup(component)'] };
       }
       // console.log('content', content);
     } catch ({ err, stack }) {
-      status = 500;
+      status = 505;
       if (__DEV__) {
         const text = [...stack, ''].join(':\n');
         if (this.log && this.log.error) {
@@ -167,15 +167,18 @@ export default class ReactApp extends Module {
       }
     }
     const render = this.createHtmlRender(page);
-    if (strategy === 'renderToNodeStream' && !content && component) {
+    if (strategy === 'nodeStream' && !content && component) {
       return this.renderToNodeStream({
-        req, res, render, component,
+        req,
+        res,
+        render,
+        component,
       });
     }
     try {
       content = await render(content);
     } catch (err2) {
-      status = 500;
+      status = 505;
       content = 'ERROR: Html.render()';
       if (this.log && this.log.error) {
         this.log.error(content, err2);
@@ -184,6 +187,10 @@ export default class ReactApp extends Module {
       }
     }
 
-    return res.status(status || 200).send(content);
+    if (strategy === 'json') {
+      return { status, content };
+    }
+
+    return res.status(status).send(content);
   }
 }
