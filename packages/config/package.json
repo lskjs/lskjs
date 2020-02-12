@@ -28,7 +28,7 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "4.17.15"
   },
   "devDependencies": {
     "@lskjs/utils": "^0.39.1"

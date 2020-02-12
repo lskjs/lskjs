@@ -34,7 +34,7 @@
     "amqplib": "^0.5.3"
   },
   "devDependencies": {
-    "lodash": "4.17.11"
+    "lodash": "4.17.15"
   },
   "peerDependencies": {
     "lodash": "*"

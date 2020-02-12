@@ -35,7 +35,7 @@
   "devDependencies": {
     "axios": "^0.18.0",
     "chai": "^4.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "4.17.15",
     "mocha": "^6.0.2",
     "nock": "^10.0.6"
   },

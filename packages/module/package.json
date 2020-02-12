@@ -33,7 +33,7 @@
   "devDependencies": {
     "@lskjs/log": "^0.39.1",
     "bluebird": "^3.5.3",
-    "lodash": "^4.17.11"
+    "lodash": "4.17.15"
   },
   "peerDependencies": {
     "@lskjs/log": "*",

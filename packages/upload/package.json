@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@lskjs/server-api": "^0.39.1",
-    "lodash": "^4.17.11"
+    "lodash": "4.17.15"
   },
   "peerDependencies": {
     "@lskjs/server-api": "*",

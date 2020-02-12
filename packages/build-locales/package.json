@@ -33,7 +33,7 @@
     "csv-parse": "^4.4.0",
     "csvtojson": "^2.0.8",
     "jsongrid": "^1.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "4.17.15",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3"
   },
