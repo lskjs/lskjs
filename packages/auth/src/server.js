@@ -68,9 +68,9 @@ export default ctx => class AuthModule {
         this.config = {};
       }
 
-      if (this.config.telegram) {
-        this.tbot = require('./tbot').default(ctx, this);
-      }
+      // if (this.config.telegram) {
+      //   this.tbot = require('./tbot').default(ctx, this);
+      // }
       if (!this.config.socials) this.config.socials = {};
       this.models = this.getModels();
       // ctx.models.User = this.models.User;
