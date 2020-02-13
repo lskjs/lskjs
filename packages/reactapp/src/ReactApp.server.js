@@ -4,14 +4,14 @@ import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
 import Promise from 'bluebird';
 import autobind from '@lskjs/autobind';
-import antimergeDeep from 'antimerge/antimergeDeep';
+import antimergeDeep from '@lskjs/utils/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
 // import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
 export default class ReactApp extends Module {
-  name = 'App';
+  name = 'App'; 
 
   constructor(params = {}) {
     super(params);
