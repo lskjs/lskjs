@@ -29,22 +29,21 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "antimerge": "0.0.5",
-    "history": "^4.10.1",
-    "redbox-react": "^1.6.0"
+    "history": "4.10.1",
+    "redbox-react": "1.6.0"
   },
   "devDependencies": {
-    "@emotion/core": "^10.0.27",
-    "@emotion/styled": "^10.0.27",
-    "@lskjs/autobind": "^0.39.0",
-    "@lskjs/log": "^0.39.1",
+    "@emotion/core": "10.0.27",
+    "@emotion/styled": "10.0.27",
+    "@lskjs/autobind": "0.39.0",
+    "@lskjs/log": "0.39.1",
     "@lskjs/module": "^0.39.2",
     "@lskjs/utils": "^0.39.2",
-    "bluebird": "^3.7.2",
-    "create-emotion-server": "^10.0.27",
-    "lodash": "^4.17.15",
-    "react": "^16.8.6",
-    "react-dom": "^16.12.0"
+    "bluebird": "3.7.2",
+    "create-emotion-server": "10.0.27",
+    "lodash": "4.17.15",
+    "react": "16.8.6",
+    "react-dom": "16.12.0"
   },
   "peerDependencies": {
     "@lskjs/autobind": "*",

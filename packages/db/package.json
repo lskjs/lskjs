@@ -32,10 +32,10 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "mongoose": "5.7.5"
+    "mongoose": "^5.8.12"
   },
   "devDependencies": {
-    "bluebird": "^3.5.5",
+    "bluebird": "^3.7.2",
     "lodash": "4.17.15"
   },
   "peerDependencies": {

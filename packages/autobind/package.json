@@ -28,6 +28,6 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "autobind-decorator": "^2.4.0"
+    "autobind-decorator": "2.4.0"
   }
 }

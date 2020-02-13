@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@lskjs/db": "^0.39.2",
-    "@lskjs/log": "^0.39.1",
+    "@lskjs/log": "0.39.1",
     "@lskjs/module": "^0.39.2",
     "lodash": "4.17.15"
   },

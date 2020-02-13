@@ -28,16 +28,14 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "form-data": "^2.3.3",
-    "qs": "^6.7.0",
-    "socket.io-client": "^2.2.0"
+    "form-data": "^3.0.0",
+    "qs": "^6.9.1",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
-    "chai": "^4.2.0",
-    "lodash": "4.17.15",
-    "mocha": "^6.0.2",
-    "nock": "^10.0.6"
+    "axios": "^0.19.2",
+    "chai": "4.2.0",
+    "lodash": "4.17.15"
   },
   "peerDependencies": {
     "axios": "*",

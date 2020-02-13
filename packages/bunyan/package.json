@@ -34,14 +34,14 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "exeunt": "1.1.0"
+    "exeunt": "^1.1.1"
   },
   "devDependencies": {
     "ben": "0.0.0",
-    "markdown-toc": "0.12.x",
-    "nodeunit": "0.9",
-    "vasync": "1.4.3",
-    "verror": "1.3.3"
+    "markdown-toc": "^1.2.0",
+    "nodeunit": "^0.11.3",
+    "vasync": "^2.2.0",
+    "verror": "^1.10.0"
   },
   "// dtrace-provider": "~0.8 required for dtrace features",
   "// mv": "required for RotatingFileStream",
@@ -50,6 +50,6 @@
     "dtrace-provider": "~0.8",
     "mv": "~2",
     "safe-json-stringify": "~1",
-    "moment": "^2.10.6"
+    "moment": "2.10.6"
   }
 }

@@ -30,15 +30,14 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "devDependencies": {
-    "axios": "^0.19.0",
-    "plivo": "^4.1.2",
-    "telesignsdk": "^2.2.1"
+    "axios": "^0.19.2",
+    "plivo": "^4.1.9",
+    "telesignsdk": "2.2.1"
   },
   "peerDependencies": {
     "axios": "*"
   },
   "optionalDependencies": {
-    "plivo": "^4.1.2",
-    "telesignsdk": "^2.2.1"
+    "telesignsdk": "*"
   }
 }

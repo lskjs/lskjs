@@ -28,11 +28,11 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "csv-parse": "^4.3.4",
-    "googleapis": "27",
-    "got": "^9.6.0",
+    "csv-parse": "^4.8.5",
+    "googleapis": "^47.0.0",
+    "got": "^10.5.5",
     "lodash": "4.17.15",
-    "meow": "^5.0.0",
-    "mkdirp": "^0.5.1"
+    "meow": "^6.0.0",
+    "mkdirp": "^1.0.3"
   }
 }
