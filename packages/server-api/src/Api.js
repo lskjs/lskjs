@@ -7,35 +7,37 @@ import isArray from 'lodash/isArray';
 import set from 'lodash/set';
 import forEach from 'lodash/forEach';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
-import getDocsTemplate from './getDocsTemplate';
+import assignProps from '@lskjs/utils/assignProps';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
+import getDocsTemplate from './getDocsTemplate';
 
 export default class Api {
-  constructor(app, params = {}) {
-    this.app = app;
-    this.asyncRouter = app.asyncRouter;
-    if (app.helpers && app.helpers.wrapResoursePoint) {
-      this.wrapResoursePoint = app.helpers.wrapResoursePoint;
+  constructor(props, params) {
+    assignProps(this, props);
+    if (!this.app) throw '!app';
+    this.asyncRouter = this.app.asyncRouter;
+    if (this.app.helpers && this.app.helpers.wrapResoursePoint) {
+      this.wrapResoursePoint = this.app.helpers.wrapResoursePoint;
     }
-    // this.isAuth = app.helpers.isAuth;
+    // this.isAuth = this.app.helpers.isAuth;
     // this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
-    if (app && app.errors) {
-      this.e = app.errors.e;
+    if (this.app && this.app.errors) {
+      this.e = this.app.errors.e;
     } else {
       this.e = a => a;
     }
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });
-    Object.assign(this, params);
+    this.routes = this.getRoutes();
+    assignProps(this, params);
   }
   isAuth(req) {
     if (req._errJwt) throw req._errJwt;
     if (!req.user || !req.user._id) throw this.errors.e401('!req.user');
     return true;
   }
-
 
   async validateParams(data, fields) {
     const errors = mapValues(fields, (validator, param) => {
@@ -59,8 +61,8 @@ export default class Api {
     return mapValues(fields, (validator, param) => {
       const aliases = [param, ...(validator.alias || [])];
       // eslint-disable-next-line no-restricted-syntax
-      for (param of aliases) {
-        if (data[param] != null) return data[param];
+      for (const param2 of aliases) {
+        if (data[param2] != null) return data[param2];
       }
       return null;
     });
@@ -68,9 +70,8 @@ export default class Api {
 
   getListParams(req) {
     const { data } = req;
-    const params = mapValues(
-      pick(data, ['filter', 'sort', 'skip', 'limit', 'select', 'view', 'operation']),
-      a => tryJSONparse(a),
+    const params = mapValues(pick(data, ['filter', 'sort', 'skip', 'limit', 'select', 'view', 'operation']), a =>
+      tryJSONparse(a),
     );
 
     if (!params.filter) params.filter = {};
@@ -87,7 +88,10 @@ export default class Api {
     if (params.limit > 100) params.limit = 100;
     if (!params.select) params.select = [];
     if (typeof params.select === 'string') {
-      params.select = params.select.trim().split(',').map(a => a.trim());
+      params.select = params.select
+        .trim()
+        .split(',')
+        .map(a => a.trim());
     }
     if (!isArray(params.select)) throw 'select not array';
     if (!params.view) params.view = 'default';
@@ -123,10 +127,10 @@ export default class Api {
   }
   assign(model, params, fields = []) {
     if (fields.length === 0) {
-      console.error('Api.assign empty fields');
+      console.error('Api.assign empty fields'); // eslint-disable-line no-console
       return;
     }
-    fields.forEach((field) => {
+    fields.forEach(field => {
       if (params[field] === undefined) return;
       model[field] = params[field]; // eslint-disable-line no-param-reassign
       if (!model.markModified) return;
@@ -155,12 +159,14 @@ export default class Api {
       ...other,
       filter: {
         ...filter,
-        $and: [{
-          [field]: {
-            $regex: search,
-            $options: 'i',
+        $and: [
+          {
+            [field]: {
+              $regex: search,
+              $options: 'i',
+            },
           },
-        }],
+        ],
       },
     };
   }

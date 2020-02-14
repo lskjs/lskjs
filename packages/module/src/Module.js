@@ -4,19 +4,21 @@ import get from 'lodash/get';
 import Promise from 'bluebird';
 import logger from '@lskjs/log';
 import isFunction from 'lodash/isFunction';
-// import isClass from '@lskjs/utils/isClass';
+import assignProps from '@lskjs/utils/assignProps';
+import isClass from '@lskjs/utils/isClass';
 // import PromiseMap from 'bluebird/js/release/map';
 import Emitter from './emitter';
 // import createLoggerMock from './logger/createLoggerMock';
 // import config from './config';
 
-const isClass = isFunction;
+// const isClass = isFunction;
 const DEBUG = true;
 
 export default class Module {
-  name = 'Core';
-  constructor(params = {}) {
-    Object.assign(this, params);
+  _module = true;
+  name = 'Module';
+  constructor(props) {
+    assignProps(this, props);
   }
 
   createLogger(params) {
@@ -39,13 +41,17 @@ export default class Module {
   }
   on(...args) {
     if (this.ee) {
-      this.ee.on(args[0], async (...params) => {
-        try {
-          await args[1](...params);
-        } catch (err) {
-          this.log.error(`App.on(${args[0]})`, err);
-        }
-      }, args[2]);
+      this.ee.on(
+        args[0],
+        async (...params) => {
+          try {
+            await args[1](...params);
+          } catch (err) {
+            this.log.error(`App.on(${args[0]})`, err);
+          }
+        },
+        args[2],
+      );
     }
   }
 
@@ -92,7 +98,7 @@ export default class Module {
     this.log.trace(`${this.name}.broadcastModules`, method);
     // console.log('this.getModulesSequence()', this.getModulesSequence());
     const modules = toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
-    return Promise.map(modules, (pack) => {
+    return Promise.map(modules, pack => {
       if (!(pack.module && isFunction(pack.module[method]))) return null;
       // let res;
       try {
@@ -111,10 +117,10 @@ export default class Module {
     this._modules = this.getModules();
     // console.log('@@!!', {modules});
     const modules = {};
-    forEach(this._modules, (Module, key) => {
+    forEach(this._modules, (SubModule, key) => {
       // const Module = module(ctx);
       if (isClass(Module)) {
-        modules[key] = new Module(this);
+        modules[key] = new SubModule(this);
       } else {
         modules[key] = Module;
       }
@@ -124,7 +130,7 @@ export default class Module {
     });
     this.modules = modules;
     if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
-    // this.log.debug('_modules', Object.keys(this._modules));
+    this.log.trace(`${this.name}._asyncModules`, Object.keys(this.modules)); // this.log.debug('_modules', Object.keys(this._modules));
     return this.broadcastModules('init');
   }
 
@@ -171,7 +177,7 @@ export default class Module {
         await this.run();
       }
       if (isFunction(this.broadcastModules)) {
-        this.log.trace(`${this.name}.broadcastModules('run')`);
+        if (DEBUG) this.log.trace(`${this.name}.broadcastModules('run')`);
         await this.broadcastModules('run');
       }
       if (isFunction(this.afterRun)) {

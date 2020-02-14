@@ -1,16 +1,7 @@
-
-
-import mapValues from 'lodash/mapValues';
-import isPlainObject from 'lodash/isPlainObject';
 import serializeWindow from '@lskjs/utils/serializeWindow';
+import flattenKeys from '@lskjs/utils/flattenKeys';
 import awaitHealthchecks from './awaitHealthcheck';
 import Api from './Api';
-
-const mapValuesDeep = (v, callback) => (
-  isPlainObject(v)
-    ? mapValues(v, c => mapValuesDeep(c, callback))
-    : callback(v)
-);
 
 export default class IndexApi extends Api {
   path = '/api';
@@ -23,7 +14,7 @@ export default class IndexApi extends Api {
   index() {
     let routes;
     if (__DEV__) {
-      routes = mapValuesDeep(this.routes, () => true);
+      routes = flattenKeys(this.routes, [], a => a.join('/'));
     }
     const url = this.path;
     return {
@@ -46,6 +37,7 @@ export default class IndexApi extends Api {
     return {
       '/': ::this.index,
       '/env': ::this.env,
+      '/env.json': ::this.env,
       '/env.js': ::this.envjs,
       '/config': ::this.config,
       '/healthcheck': ::this.healthcheck,
