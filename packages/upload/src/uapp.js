@@ -1,5 +1,3 @@
-/* global window */
-
 export default uapp => ({
   async uploadFile(file) {
     if (typeof window === 'undefined') return false;
