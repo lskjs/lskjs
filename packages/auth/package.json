@@ -38,42 +38,41 @@
   "dependencies": {
     "bcryptjs": "2.4.3",
     "isomorphic-fetch": "2.2.1",
-    "jsonwebtoken": "^8.5.1",
-    "passport": "^0.4.1",
-    "passport-facebook": "^3.0.0",
-    "passport-telegram-official": "^1.1.0",
+    "jsonwebtoken": "8.5.1",
+    "passport": "0.4.1",
+    "passport-facebook": "3.0.0",
+    "passport-telegram-official": "1.1.0",
     "passport-vkontakte": "0.3.2",
     "passport-youtube-v3": "2.1.0",
-    "validator": "^12.2.0"
+    "qs": "6.9.1",
+    "validator": "12.2.0"
   },
   "devDependencies": {
     "@lskjs/apiquery": "1.0.1",
-    "@lskjs/db": "^1.0.0",
+    "@lskjs/db": "1.0.0",
     "@lskjs/mobx": "1.0.1",
+    "@lskjs/module": "1.0.1",
     "@lskjs/server-api": "1.0.1",
-    "@lskjs/utils": "^1.0.0",
-    "axios": "^0.19.2",
-    "bluebird": "^3.7.2",
-    "js-cookie": "^2.2.1",
+    "@lskjs/utils": "1.0.0",
+    "axios": "0.19.2",
+    "bluebird": "3.7.2",
+    "js-cookie": "2.2.1",
     "lodash": "4.17.15",
-    "mobx": "^5.15.4",
-    "moment": "2.24.0",
-    "node-accountkit": "1.1.6",
-    "react-icons2": "2.5.0"
+    "mobx": "5.15.4",
+    "node-accountkit": "1.1.6"
   },
   "peerDependencies": {
     "@lskjs/apiquery": "*",
     "@lskjs/db": "*",
     "@lskjs/mobx": "*",
+    "@lskjs/module": "*",
     "@lskjs/server-api": "*",
     "@lskjs/utils": "*",
     "axios": "*",
     "bluebird": "*",
     "js-cookie": "*",
     "lodash": "*",
-    "mobx": "*",
-    "moment": "*",
-    "react-icons2": "*"
+    "mobx": "*"
   },
   "optionalDependencies": {
     "node-accountkit": "*"
