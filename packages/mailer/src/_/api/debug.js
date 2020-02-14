@@ -25,8 +25,11 @@ export default (ctx, module) => {
     },
   };
 
-  api.use('/', wrapResoursePoint(resource, {
-    actions: Object.keys(resource),
-  }));
+  api.use(
+    '/',
+    wrapResoursePoint(resource, {
+      actions: Object.keys(resource),
+    }),
+  );
   return api;
 };

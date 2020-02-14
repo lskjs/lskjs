@@ -1,5 +1,4 @@
-/* eslint-disable indent */
-import Base from './_mjml';
+import Base from './MjmlTemplate';
 
 export default class RestorePasswordTemplate extends Base {
   getSubject() {

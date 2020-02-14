@@ -1,6 +1,6 @@
-export default class Template {
+export default class HtmlTemplate {
   theme = { colors: {} };
-  config = {}
+  config = {};
 
   fontFamily = this.theme.fontFamily;
 
@@ -19,7 +19,6 @@ export default class Template {
   getHtml() {
     return this.render();
   }
-
 
   renderHead() {
     return `

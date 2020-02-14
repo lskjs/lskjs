@@ -1,8 +1,6 @@
-export default function () {
-  return {
-    raw: require('./raw').default,
-    signup: require('./signup').default,
-    changeEmail: require('./changeEmail').default,
-    restorePassword: require('./restorePassword').default,
-  };
-}
+export default () => ({
+  RawTemplate: require('./RawTemplate').default,
+  signup: require('./SignupTemplate').default,
+  changeEmail: require('./ChangeEmailTemplate').default,
+  restorePassword: require('./RestorePasswordTemplate').default,
+});

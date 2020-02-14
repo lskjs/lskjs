@@ -1,10 +1,9 @@
-/* eslint-disable indent */
+/* eslint-disable max-len */
 import mjml2html from 'mjml';
 import get from 'lodash/get';
-// import { mjml2html } from 'mjml';
-import Template from './_html';
+import HtmlTemplate from './HtmlTemplate';
 
-export default class Base extends Template {
+export default class MjmlTemplate extends HtmlTemplate {
   getHtml() {
     const { errors, html } = mjml2html(this.render());
     if (__DEV__) {
@@ -58,7 +57,8 @@ export default class Base extends Template {
   copyrights({ title, subtitle }) {
     return `
       <mj-column width="100%">
-        ${subtitle && `
+        ${subtitle &&
+          `
           <mj-text
             align="center"
             color="${get(this, 'theme.colors.secondary')}"
@@ -90,13 +90,20 @@ export default class Base extends Template {
       <mj-column width="100%">
         <mj-table padding-bottom="32px">
           <tr>
-            ${list.map((item, index) => (`
+            ${list
+              .map(
+                (item, index) => `
               <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
-                <a href="${item.href}" target="_blank" style="color: ${get(this, 'theme.colors.primary')}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
+                <a href="${item.href}" target="_blank" style="color: ${get(
+                  this,
+                  'theme.colors.primary',
+                )}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
                   ${item.title}
                 </a>
               </td>
-            `)).join('')}
+            `,
+              )
+              .join('')}
           </tr>
         </mj-table>
       </mj-column>
@@ -214,7 +221,6 @@ export default class Base extends Template {
     `;
   }
 
-
   footer() {
     return `
             <mj-section padding="16px"/>
@@ -234,9 +240,9 @@ export default class Base extends Template {
                 },
               ])}
               ${this.copyrights({
-    title: 'InCircle 2019',
-    subtitle: 'Your company address',
-  })}-->
+                title: 'InCircle 2019',
+                subtitle: 'Your company address',
+              })}-->
             </mj-section>
           </mj-container>
         </mj-body>
@@ -260,10 +266,10 @@ export default class Base extends Template {
         ${this.subtitle('Beautiful subtitle')}
         ${this.text('Hello world')}
         ${this.button('Button name', {
-    href: 'https://google.com',
-    color: '#4a4a4a',
-    backgroundColor: '#e3e3e3',
-  })}
+          href: 'https://google.com',
+          color: '#4a4a4a',
+          backgroundColor: '#e3e3e3',
+        })}
       `)}
       ${this.footer()}
     `;
