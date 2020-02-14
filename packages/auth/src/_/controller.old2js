@@ -1,7 +1,6 @@
 // import validator from 'validator';
 import merge from 'lodash/merge';
 import random from 'lodash/random';
-import m from 'moment';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
 import validator from 'validator';

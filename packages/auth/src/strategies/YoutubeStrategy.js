@@ -1,25 +1,25 @@
 import Youtube from 'passport-youtube-v3';
 import get from 'lodash/get';
-import Api from '@lskjs/apiquery';
+import { stringify } from 'qs';
 import fetch from 'isomorphic-fetch';
+import BaseStrategy from './BaseStrategy';
 
-
-export default (ctx, { Strategy }) => {
-  return class YoutubeStrategy extends Strategy {
-    Strategy = Youtube.Strategy
-    type = 'youtube'
+export default ctx => {
+  return class YoutubeStrategy extends BaseStrategy {
+    Strategy = Youtube.Strategy;
+    type = 'youtube';
 
     getPassportStrategyConfig() {
       const config = super.getPassportStrategyConfig();
       return {
         ...config,
-        scope: config.scope && config.scope.length ? config.scope : [
-          'https://www.googleapis.com/auth/youtube.readonly',
-        ],
+        scope:
+          config.scope && config.scope.length ? config.scope : ['https://www.googleapis.com/auth/youtube.readonly'],
       };
     }
 
-    async updateTokens(passport, creds2) {  //eslint-disable-line
+    async updateTokens(passport, creds2) {
+      /* eslint-disable no-param-reassign */
       const ytConfig = this.config;
 
       const creds = {};
@@ -30,21 +30,18 @@ export default (ctx, { Strategy }) => {
         creds.clientId = ytConfig.clientId || ytConfig.clientID;
         creds.clientSecret = ytConfig.clientSecret;
       }
-      const res = await fetch(
-        'https://www.googleapis.com/oauth2/v4/token',
-        {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: Api.qs.stringify({
-            refresh_token: passport.refreshToken,
-            client_id: creds.clientId,
-            client_secret: creds.clientSecret,
-            grant_type: 'refresh_token',
-          }),
+      const res = await fetch('https://www.googleapis.com/oauth2/v4/token', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-      );
+        body: stringify({
+          refresh_token: passport.refreshToken,
+          client_id: creds.clientId,
+          client_secret: creds.clientSecret,
+          grant_type: 'refresh_token',
+        }),
+      });
       const data = await res.json();
       const ret = {};
       if (data.error) {
@@ -82,22 +79,25 @@ export default (ctx, { Strategy }) => {
       }
       return ret;
 
-
       // if (!config.scope) {
       //   config.scope = [
       //     'https://www.googleapis.com/auth/youtube.readonly',
       //   ];
       // }
       // return config;
+      /* eslint-enable no-param-reassign */
     }
 
     async getProfile(passport) {  //eslint-disable-line
-      const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${passport.providerId}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${passport.token}`,
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${passport.providerId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${passport.token}`,
+          },
         },
-      });
+      );
       const json = await response.json();
       const profile = {
         avatar: get(json, 'items[0].snippet.thumbnails.high.url'),

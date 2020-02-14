@@ -1,24 +1,17 @@
 import cookie from 'js-cookie';
-import AuthApi from './uapp/AuthApi';
+import Module from '@lskjs/module';
+import AuthApi from './stores/AuthApi';
 
 const DEBUG = __DEV__ && false;
 
-
-export default class AuthModule {
-  constructor(appOrCtx) {
-    const app = (appOrCtx && appOrCtx.app) ? appOrCtx.app : appOrCtx;
-    // this.app = app;
-    this.app = app;
+export default class AuthClientModule extends Module {
+  name = 'AuthClientModule';
+  constructor(props) {
+    super(props);
     this.Api = AuthApi;
     this.api = new AuthApi(this.app);
+    this.stores = require('./stores').default(this.app); // eslint-disable-line global-require
   }
-
-  init() {
-    this.stores = require('./uapp/stores').default(this.app); // eslint-disable-line global-require
-  }
-
-
-  
 
   async initAuth() {
     const res = this.getUserAndTokenFromRootState();
@@ -45,16 +38,10 @@ export default class AuthModule {
   async initUserProfile() {
     DEBUG && console.log('AuthStore.initUserProfile uapp.rootState.user', uapp.rootState.user);  //eslint-disable-line
     if (__CLIENT__) {
-      if (
-        this.app.rootState.token
-        && !(this.app.rootState.user && this.app.rootState.user.profile)
-      ) {
+      if (this.app.rootState.token && !(this.app.rootState.user && this.app.rootState.user.profile)) {
         this.applyPromise(this.findUserProfile());
       }
-    } else if (
-      this.app.rootState.token
-        && !(this.app.rootState.user && this.app.rootState.user.profile)
-    ) {
+    } else if (this.app.rootState.token && !(this.app.rootState.user && this.app.rootState.user.profile)) {
       await this.applyPromise(this.findUserProfile());
     }
   }
@@ -69,7 +56,7 @@ export default class AuthModule {
   async findUserProfile() {
     return this.getMyUser()
       .then(user => ({ user }))
-      .catch((err) => {
+      .catch(err => {
         this.app.log.error(err);
         throw err;
       });
@@ -167,20 +154,12 @@ export default class AuthModule {
   isAuthAsync() {
     DEBUG && console.log('AuthStore.isAuthAsync', this.promise);  //eslint-disable-line
     if (!this.promise) return this.isAuth();
-    return this.promise
-      .then(() => this.isAuth())
-      .catch(() => this.isAuth());
+    return this.promise.then(() => this.isAuth()).catch(() => this.isAuth());
   }
 
   isAuth() {
-    return !!(
-      this.app.rootState
-      && this.app.rootState.token
-      && this.app.rootState.user
-      && this.app.rootState.user._id
-    );
+    return !!(this.app.rootState && this.app.rootState.token && this.app.rootState.user && this.app.rootState.user._id);
   }
-
 
   logout(dontSaveCookies = false, redirect = true) {
     DEBUG && console.log('AuthStore.logout!');  //eslint-disable-line
@@ -197,9 +176,7 @@ export default class AuthModule {
   }
 
   silent(data) {
-    return this.applyPromiseAndFetchProfile(
-      this.api.authSilent(data),
-    );
+    return this.applyPromiseAndFetchProfile(this.api.authSilent(data));
   }
 
   setData(...args) {
@@ -209,16 +186,11 @@ export default class AuthModule {
     return this.api.signup(data);
   }
   signupAndLogin(data, params) {
-    return this.applyPromiseAndFetchProfile(
-      this.api.signup(data),
-      params,
-    );
+    return this.applyPromiseAndFetchProfile(this.api.signup(data), params);
   }
 
   login(data) {
-    return this.applyPromiseAndFetchProfile(
-      this.api.login(data),
-    );
+    return this.applyPromiseAndFetchProfile(this.api.login(data));
   }
 
   recovery(data) {
@@ -239,16 +211,13 @@ export default class AuthModule {
   }
 
   loginPassport(data) {
-    return this.applyPromiseAndFetchProfile(
-      this.api.authLoginPassport(data),
-    );
+    return this.applyPromiseAndFetchProfile(this.api.authLoginPassport(data));
   }
 
   authPassport(provider) {
     window.location = `/api/module/auth/${provider}`;
   }
 }
-
 
 // export default ctx => ({
 //   init() {

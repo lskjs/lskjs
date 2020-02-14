@@ -2,10 +2,11 @@ import Facebook from 'passport-facebook';
 // import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 import get from 'lodash/get';
+import BaseStrategy from './BaseStrategy';
 
-export default (ctx, { Strategy }) => class FacebookStrategy extends Strategy {
-  Strategy = Facebook.Strategy
-  type = 'facebook'
+export default class FacebookStrategy extends BaseStrategy {
+  Strategy = Facebook.Strategy;
+  type = 'facebook';
 
   async checkToken(accessToken) {
     const { data } = await axios(`https://graph.facebook.com/me?access_token=${accessToken}`);
@@ -25,9 +26,12 @@ export default (ctx, { Strategy }) => class FacebookStrategy extends Strategy {
       'name',
       'birthday',
     ];
-    const { data } = await axios(`https://graph.facebook.com/me?access_token=${passport.token}&fields=${fields.join(',')}`, {
-      timeout: 3000,
-    });
+    const { data } = await axios(
+      `https://graph.facebook.com/me?access_token=${passport.token}&fields=${fields.join(',')}`,
+      {
+        timeout: 3000,
+      },
+    );
     return {
       ...data,
       firstName: data.first_name,
@@ -36,4 +40,4 @@ export default (ctx, { Strategy }) => class FacebookStrategy extends Strategy {
       domain: data.id,
     };
   }
-};
+}

@@ -1,16 +1,16 @@
 import Telegram from 'passport-telegram-official';
-// import fetch from 'isomorphic-fetch2';
+import BaseStrategy from './BaseStrategy';
 
-export default (ctx, { Strategy }) => class TelegramStrategy extends Strategy {
-  Strategy = Telegram
-  type = 'telegram'
+export default class TelegramStrategy extends BaseStrategy {
+  Strategy = Telegram;
+  type = 'telegram';
 
   getProviderId({ username } = {}) {
     return username;
   }
 
   async passportStrategyCallback(req, user, done) {
-    const PassportModel = ctx.modules.auth.models.PassportModel || ctx.modules.auth.models.Passport;
+    const { PassportModel } = this.app.modules.auth.models;
     const providerId = this.getProviderId(user);
     let passport = await PassportModel.findOne({
       provider: this.providerName,
@@ -42,8 +42,9 @@ export default (ctx, { Strategy }) => class TelegramStrategy extends Strategy {
   }
 
   async updatePassport({ user, passport }) {
+    /* eslint-disable no-param-reassign */
     // console.log('updatePassport EXTENDED', accessToken, refreshToken) ;
-    const UserModel = ctx.models.UserModel || ctx.models.User;
+    const UserModel = this.app.models.UserModel || this.app.models.User;
     if (user.hash) passport.token = user.hash;
     passport.profile = await this.getProfile(user, passport);
     // const data = await module.getPassportData(passport);
@@ -51,5 +52,6 @@ export default (ctx, { Strategy }) => class TelegramStrategy extends Strategy {
     await passport.save();
     await UserModel.updateFromPassport(passport);
     return passport;
+    /* eslint-enable no-param-reassign */
   }
-};
+}

@@ -1,9 +1,9 @@
 // import validator from 'validator';
 import merge from 'lodash/merge';
 import random from 'lodash/random';
-import m from 'moment';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
+import get from 'lodash/get';
 import validator from 'validator';
 import BaseApi from '@lskjs/server-api';
 import canonize from '@lskjs/utils/canonize';
@@ -34,7 +34,6 @@ export default class Api extends BaseApi {
       '/check': ::this.check,
       '/confirm': ::this.confirm,
 
-
       // Регистрация пользователя через соц сеть
       '/social': ::this.getSocials, // isAuth,
       '/social/signup': ::this.socialLogin,
@@ -54,7 +53,6 @@ export default class Api extends BaseApi {
       '/:provider/callback': ::this.socialCallback,
     };
   }
-
 
   // export default (this.app, module) => {
   //   const { checkNotFound } = this.app.helpers;
@@ -83,10 +81,11 @@ export default class Api extends BaseApi {
     if (params.username) params.username = canonize(params.username);
     if (params.email) params.email = canonize(params.email);
     const username = `__s${Date.now()}__`;
-    const user = new UserModel(Object.assign({
+    const user = new UserModel({
       username,
       type: 'silent',
-    }, params));
+      ...params,
+    });
     await user.save();
     req.user = user;
     return {
@@ -143,7 +142,7 @@ export default class Api extends BaseApi {
 
   async afterSignup({ req, user }) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
-    const link = await user.genereateEmailApprovedLink ? user.genereateEmailApprovedLink() : null;
+    const link = (await user.genereateEmailApprovedLink) ? user.genereateEmailApprovedLink() : null;
     this.app.emit('events.auth.signup', { user, link });
 
     return {
@@ -182,7 +181,7 @@ export default class Api extends BaseApi {
     const user = await UserModel.findOne(criteria);
 
     if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
-    if (!await user.verifyPassword(params.password)) {
+    if (!(await user.verifyPassword(params.password))) {
       throw this.app.e('auth.passwordIncorrect', { status: 400 });
     }
     req.user = user;
@@ -284,12 +283,8 @@ export default class Api extends BaseApi {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const PassportModel = this.app.models.PassportModel || this.app.models.Passport;
     const userId = req.user._id;
-    const passport = await PassportModel
-      .getByToken(req.data.p)
-      .then(checkNotFound);
-    const user = await UserModel
-      .findById(req.user._id)
-      .then(checkNotFound);
+    const passport = await PassportModel.getByToken(req.data.p).then(checkNotFound);
+    const user = await UserModel.findById(req.user._id).then(checkNotFound);
     if (passport.userId) throw e400('passport.userId already exist');
     passport.userId = userId;
     // user.passports.push(passport._id);
@@ -309,7 +304,6 @@ export default class Api extends BaseApi {
     });
   }
 
-
   async passportsDetach(req) {
     await this.isAuth(req);
     const { PassportModel } = this.app.models;
@@ -325,7 +319,8 @@ export default class Api extends BaseApi {
     const { debug } = req.data;
     const { accountkit } = this.app.config.auth.providers;
     if (!accountkit) throw '!config.auth.accountkit';
-    const Accountkit = require('node-accountkit'); // eslint-disable-line global-require
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    const Accountkit = require('node-accountkit');
     const { appId, appSecret, apiVersion, requireAppSecret } = accountkit;
 
     const csrf = 'qwertyui';
@@ -449,7 +444,6 @@ export default class Api extends BaseApi {
     };
   }
 
-
   async socialUnbind(req) {
     const { checkNotFound } = this.app.helpers;
     const { e400, e403 } = this.app.errors;
@@ -457,9 +451,7 @@ export default class Api extends BaseApi {
     const PassportModel = this.app.models.PassportModel || this.app.models.Passport;
     const params = req.data;
     const userId = req.user._id;
-    const user = await UserModel
-      .findById(req.user._id)
-      .then(checkNotFound);
+    const user = await UserModel.findById(req.user._id).then(checkNotFound);
 
     // OR passportId: passport._id
     const findParams = {};
@@ -469,9 +461,7 @@ export default class Api extends BaseApi {
     if (!findParams.passportId && !findParams.provider) {
       throw e400('!findParams.passportId && !findParams.provider');
     }
-    const passport = await PassportModel
-      .findOne(findParams)
-      .then(checkNotFound);
+    const passport = await PassportModel.findOne(findParams).then(checkNotFound);
     if (passport.userId !== userId) throw e403('Wrong user!');
     passport.userId = null;
     // user.passports = user.passports.filter((pId) => {
@@ -483,7 +473,6 @@ export default class Api extends BaseApi {
       userId,
     });
   }
-
 
   async tokenLogin(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
@@ -514,12 +503,14 @@ export default class Api extends BaseApi {
     return this.approveEmail(req);
   }
 
-
   async socialCallback2(req, res, next) {
     const { provider } = req.params;
-    this.app.modules.auth.passportService.authenticate(provider, (err, { redirect }) => { // eslint-disable-line consistent-return
-      if (err) { return next(err); }
-      res.redirect(redirect || '/');
+    this.app.modules.auth.passportService.authenticate(provider, (err, { redirect }) => {
+      // eslint-disable-line consistent-return
+      if (err) {
+        return next(err);
+      }
+      return res.redirect(redirect || '/');
     })(req, res, next);
   }
 
@@ -534,31 +525,19 @@ export default class Api extends BaseApi {
   }
 
   async socialCallback(req, res) {
-    // throw '!socialCallback';
     const { provider } = req.params;
-    // __DEV__ && console.log('socialCallback');
-    // console.log(123123123);
-
-    try {
-      return new Promise((resolve, reject) => {
-        (
-          this.app.modules.auth.passportService.authenticate(
-            provider,
-            this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),
-            async (err, data) => {
-              // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
-              if (err) return reject(err);
-              return resolve(res.redirect(data.redirect || '/'));
-            },
-          )
-        )(req);
-      });
-    } catch (err) {
-      // console.error(err, 'ERROR!');
-      throw err;
-    }
+    return new Promise((resolve, reject) => {
+      this.app.modules.auth.passportService.authenticate(
+        provider,
+        this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),
+        async (err, data) => {
+          // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
+          if (err) return reject(err);
+          return resolve(res.redirect(data.redirect || '/'));
+        },
+      )(req);
+    });
   }
-
 
   async phoneCode(req) {
     if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
@@ -626,7 +605,12 @@ export default class Api extends BaseApi {
     if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
     const { phone, code } = req.data;
     const UserModel = this.app.models.UserModel || this.app.models.User;
-    if (!((this.app.modules.auth.config.sms.defaultCode && code === this.app.modules.auth.config.sms.code) || code === this.lastCode)) {
+    if (
+      !(
+        (this.app.modules.auth.config.sms.defaultCode && code === this.app.modules.auth.config.sms.code) ||
+        code === this.lastCode
+      )
+    ) {
       throw 'Код не верный';
     }
 
@@ -701,6 +685,7 @@ export default class Api extends BaseApi {
       throw 'emailNotChanged';
     }
     const date = new Date();
+    const changeEmailTimeout = get(this, 'app.config.auth.changeEmailTimeout', 7 * 24 * 60 * 60 * 1000);
     const isTimeout = await PermitModel.countDocuments({
       activatedAt: {
         $exists: false,
@@ -711,25 +696,21 @@ export default class Api extends BaseApi {
       'info.email': email,
       'info.userId': ObjectId(user._id),
       type: {
-        $in: [
-          'user.setEmail',
-          'user.changeEmail',
-        ],
+        $in: ['user.setEmail', 'user.changeEmail'],
       },
       createdAt: {
-        $gte: m(date).add(-UserModel.changeEmailTimeout.value, UserModel.changeEmailTimeout.type).toDate(),
+        $gte: +date - changeEmailTimeout,
       },
     });
     if (isTimeout) {
       throw 'timeout';
     }
-    const emailExist = await UserModel
-      .countDocuments({
-        _id: {
-          $ne: userId,
-        },
-        email,
-      });
+    const emailExist = await UserModel.countDocuments({
+      _id: {
+        $ne: userId,
+      },
+      email,
+    });
     if (emailExist) {
       throw 'emailExist';
     }
@@ -798,19 +779,14 @@ export default class Api extends BaseApi {
     if (permit.activatedAt) throw 'activated';
     const date = new Date();
     if (date > permit.expiredAt) throw 'expired';
-    const user = await UserModel
-      .findById(permit.info.userId);
+    const user = await UserModel.findById(permit.info.userId);
     if (!user) throw '!user';
-    const emailExist = await UserModel
-      .findOne({
-        _id: {
-          $ne: user._id,
-        },
-        email: permit.info.email,
-      })
-      .select([
-        'email',
-      ]);
+    const emailExist = await UserModel.findOne({
+      _id: {
+        $ne: user._id,
+      },
+      email: permit.info.email,
+    }).select(['email']);
     if (emailExist) {
       throw 'emailExist';
     }
@@ -834,7 +810,7 @@ export default class Api extends BaseApi {
       type: permit.type,
       userId: user._id,
     });
-    await Promise.map(permits, (p) => {
+    await Promise.map(permits, p => {
       p.disabledAt = date; // eslint-disable-line no-param-reassign
       return p.save();
     });
@@ -849,11 +825,7 @@ export default class Api extends BaseApi {
     if (!email || !validator.isEmail(email)) {
       throw 'emailNotValid';
     }
-    const user = await UserModel
-      .findOne({ email })
-      .select([
-        'email',
-      ]);
+    const user = await UserModel.findOne({ email }).select(['email']);
     if (!user) {
       throw 'notFound';
     }
@@ -938,7 +910,6 @@ export default class Api extends BaseApi {
     throw '!permission';
   }
 
-
   async confirm(req) {
     const { code, permitId } = req.data;
     const { UserModel, PermitModel } = this.app.models;
@@ -986,7 +957,7 @@ export default class Api extends BaseApi {
     await permit.activate();
     await user.save();
     const token = user.generateAuthToken();
-    console.log(`auth/confirm ${user._id} ${token}`); // this.app.logger
+    // console.log(`auth/confirm ${user._id} ${token}`); // this.app.logger
     return {
       isNew: operation === 'signup',
       operation,
@@ -995,7 +966,6 @@ export default class Api extends BaseApi {
       user: await UserModel.prepare(user, { req, view: 'extended' }),
     };
   }
-
 
   async check(req) {
     const criteria = {};
@@ -1020,7 +990,7 @@ export default class Api extends BaseApi {
     const user = await UserModel.findOne({ _id });
     if (!user) throw this.e(404, 'User not found!');
     const token = user.generateAuthToken();
-    console.log(`auth/status ${user._id} ${token}`); // this.app.logger
+    // console.log(`auth/status ${user._id} ${token}`); // this.app.logger
     return {
       api: {
         v: 5,

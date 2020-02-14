@@ -1,4 +1,4 @@
-export default (ctx, module) => class Strategy {
+export default class Strategy {
   constructor(params) {
     Object.assign(this, params);
   }
@@ -7,28 +7,31 @@ export default (ctx, module) => class Strategy {
   Strategy = null;
   type = null;
 
-
-  getProviderId({ id } = {}) { // eslint-disable-line class-methods-use-this
+  getProviderId({ id } = {}) {
+    // eslint-disable-line class-methods-use-this
     return id;
   }
 
-  getPassportAuthenticateParams() { // eslint-disable-line class-methods-use-this
+  getPassportAuthenticateParams() {
+    // eslint-disable-line class-methods-use-this
     return {};
   }
 
-  Strategy = null
+  Strategy = null;
   getPassportStrategyConfig() {
     return {
       ...this.config,
       scope: this.config.scope || [],
-      callbackURL: this.config.callbackURL || this.config.callbackUrl || ctx.url(`/api/module/auth/${this.provider}/callback`),
+      callbackURL:
+        this.config.callbackURL ||
+        this.config.callbackUrl ||
+        this.app.url(`/api/module/auth/${this.provider}/callback`),
     };
   }
 
-
   async passportStrategyCallback(...args) {
     const [accessToken, refreshToken, profile] = args;
-    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
+    const { PassportModel } = this.app.models;
     const providerId = this.getProviderId(profile);
     let passport = await PassportModel.findOne({
       provider: this.provider,
@@ -60,27 +63,20 @@ export default (ctx, module) => class Strategy {
       clientID: config.clientID || config.clientId,
     };
 
-    const strategy = new this.Strategy(
-      conf,
-      (...args1) => {
-        const [done, ...args2] = args1.reverse();
-        const args = args2.reverse();
-        this
-          .passportStrategyCallback(...args)
-          .then(data => done(null, data))
-          .catch(err => done(err));
-      },
-    );
+    const strategy = new this.Strategy(conf, (...args1) => {
+      const [done, ...args2] = args1.reverse();
+      const args = args2.reverse();
+      this.passportStrategyCallback(...args)
+        .then(data => done(null, data))
+        .catch(err => done(err));
+    });
 
     strategy.name = this.provider;
     return strategy;
   }
 
-
-  async createPassport({
-    token, accessToken, refreshToken, providerId,
-  }) {
-    const PassportModel = ctx.models.PassportModel || ctx.models.Passport;
+  async createPassport({ token, accessToken, refreshToken, providerId }) {
+    const { PassportModel } = this.app.models;
     return new PassportModel({
       type: this.type,
       provider: this.provider,
@@ -91,26 +87,29 @@ export default (ctx, module) => class Strategy {
   }
 
   async updatePassport({ accessToken, refreshToken, passport }) {
+    /* eslint-disable no-param-reassign */
     if (accessToken) passport.token = accessToken;
     if (refreshToken) passport.refreshToken = refreshToken;
     try {
       passport.profile = await this.getProfile(passport);
     } catch (err) {
-      console.log('updatePassport err', err);
+      this.app.log.warn('NOT OVERRIDED: Strategy.getProfile err', err);
     }
-    // return passport
+    /* eslint-enable no-param-reassign */
   }
 
-  async updateTokens(passport) {
-    console.log('NOT OVERRIDED updateTokens');
+  async updateTokens() {
+    // passport
+    this.app.log.warn('NOT OVERRIDED: Strategy.updateTokens');
     // return passport;
   }
 
-  async getProfile(passport) {
+  async getProfile() {
+    // passport
     return {};
   }
 
-  getSuccessRedirect({ passport }) {
-    return ctx.url(`/auth/passport?p=${passport.generateToken()}`);
+  getSuccessRedirect(passport) {
+    return this.app.url(`/auth/passport?p=${passport.generateToken()}`);
   }
-};
+}
