@@ -21,6 +21,7 @@ import createWs from './ws';
 
 
 export default class ServerApp extends Module {
+  _module = 'app';
   name = 'App';
   asyncRouter = AsyncRouter;
   Api = Api;
