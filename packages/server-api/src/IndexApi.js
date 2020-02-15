@@ -12,16 +12,15 @@ export default class IndexApi extends Api {
     return null;
   }
   index() {
-    let routes;
-    if (__DEV__) {
-      routes = flattenKeys(this.routes, [], a => a.join('/'));
-    }
     const url = this.path;
-    return {
+    const res = {
       message: `Current API version is here: ${url}`,
       url,
-      routes,
     };
+    if (__DEV__) {
+      res.routes = flattenKeys(this.getRoutes(), [], a => a.join('/'));
+    }
+    return res;
   }
   config() {
     if (!__DEV__) return {};

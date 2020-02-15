@@ -30,7 +30,6 @@ export default class Api {
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });
-    this.routes = this.getRoutes();
     assignProps(this, params);
   }
   isAuth(req) {
