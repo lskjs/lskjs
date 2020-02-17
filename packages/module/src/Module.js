@@ -88,8 +88,12 @@ export default class Module {
       AsyncModule = pack;
     }
     const asyncModule = new AsyncModule({ app: this });
-    if (asyncModule.init) await asyncModule.init();
-    if (asyncModule.run) await asyncModule.run();
+    if (asyncModule.start) {
+      await asyncModule.start();
+    } else {
+      if (asyncModule.init) await asyncModule.init();
+      if (asyncModule.run) await asyncModule.run();
+    }
     this.asyncModules[name] = asyncModule;
     return this.asyncModules[name];
   }
