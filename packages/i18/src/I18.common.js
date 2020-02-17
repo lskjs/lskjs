@@ -34,7 +34,7 @@ export default class I18 {
     if (__SERVER__) {
       this.instances = {};
       if (this.locales) {
-        Promise.map(this.locales, async (locale) => {
+        Promise.map(this.locales, async locale => {
           this.instances[locale] = await this.getI18({ lng: locale });
         });
       }
@@ -69,7 +69,7 @@ export default class I18 {
     }
   }
   async getI18(params) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const instance = i18next.createInstance();
       const i18params = this.getI18Params(params);
       if (__CLIENT__ && i18params.backend) {
@@ -88,15 +88,19 @@ export default class I18 {
             }
             log.trace(args.join(', '));
           },
-          warn(args) { log.warn(args.join(', ')); },
-          error(args) { log.error(args.join(', ')); },
+          warn(args) {
+            log.warn(args.join(', '));
+          },
+          error(args) {
+            log.error(args.join(', '));
+          },
         });
       }
 
       return instance
         .init(i18params)
         .then(() => resolve(instance))
-        .catch((err) => {
+        .catch(err => {
           console.error('getI18 init', err);  //eslint-disable-line
           return reject(err);
         });
