@@ -32,11 +32,13 @@
   },
   "devDependencies": {
     "@lskjs/log": "1.0.1",
+    "@lskjs/utils": "1.0.2",
     "bluebird": "^3.7.2",
     "lodash": "4.17.15"
   },
   "peerDependencies": {
     "@lskjs/log": "*",
+    "@lskjs/utils": "*",
     "bluebird": "*",
     "lodash": "*"
   }
