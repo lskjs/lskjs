@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/reactapp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "LSK ux subrepo: reactapp",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -37,8 +37,8 @@
     "@emotion/styled": "10.0.27",
     "@lskjs/autobind": "^1.0.0",
     "@lskjs/log": "1.0.1",
-    "@lskjs/module": "^1.0.5",
-    "@lskjs/utils": "^1.0.2",
+    "@lskjs/module": "^1.0.6",
+    "@lskjs/utils": "^1.0.6",
     "bluebird": "3.7.2",
     "create-emotion-server": "10.0.27",
     "lodash": "4.17.15",
