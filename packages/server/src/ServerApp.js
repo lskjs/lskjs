@@ -18,6 +18,7 @@ import defaultServerConfig from './config';
 import AsyncRouter from './AsyncRouter';
 import createWs from './ws';
 
+const DEBUG = __DEV__ && false;
 export default class ServerApp extends Module {
   _module = 'app';
   name = 'App';
@@ -26,12 +27,12 @@ export default class ServerApp extends Module {
   i18 = new I18({ ctx: this });
   async init() {
     super.init();
-    this.log.trace('ServerApp init');
+    if (DEBUG) this.log.trace('ServerApp init');
     this.express = this.createExpress();
     this.app = this.express; // Fallback
     this.serverConfig = this.config.server || defaultServerConfig;
     this.httpServer = http.createServer(this.express);
-    if (this.serverConfig.express) {
+    if (this.serverConfig.express && Object.keys(this.serverConfig.express).length) {
       this.log.trace('serverConfig.express:', this.serverConfig.express);
       forEach(this.serverConfig.express || {}, (value, key) => {
         this.express.set(key, value);
@@ -39,13 +40,13 @@ export default class ServerApp extends Module {
     }
     this.db = await this.getDatabase();
     this.responses = this.getResponses();
-    this.log.debug('responses', Object.keys(this.responses));
-    this.log.debug('serverConfig.middlewares', this.serverConfig.middlewares);
+    if (DEBUG) this.log.debug('responses', Object.keys(this.responses));
+    if (DEBUG) this.log.debug('serverConfig.middlewares', this.serverConfig.middlewares);
     this.middlewares = this.getMiddlewares();
     this.log.debug('middlewares', Object.keys(this.middlewares));
 
     this.helpers = this.getHelpers();
-    this.log.debug('helpers', Object.keys(this.helpers));
+    if (DEBUG) this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this._getStatics();
     this.log.debug('statics', this.statics);
     this.api = new this.Api({
@@ -203,7 +204,7 @@ export default class ServerApp extends Module {
   }
   async runWs() {
     if (!this.serverConfig.ws) return;
-    this.log.trace('ServerApp.runWs');
+    if (DEBUG) this.log.trace('ServerApp.runWs');
     this.ws.serveClient(false);
     this.ws.attach(this.httpServer);
     const transports = this.serverConfig.ws.transports || ['websocket'];
@@ -212,14 +213,14 @@ export default class ServerApp extends Module {
   }
 
   runMiddlewares() {
-    this.log.trace('ServerApp.runMiddlewares');
+    if (DEBUG) this.log.trace('ServerApp.runMiddlewares');
     const middlewares = flattenDeep(this.getUsingMiddlewares());
     middlewares.forEach(middleware => {
       if (middleware && typeof middleware === 'function') this.express.use(middleware);
     });
   }
   runDefaultRoute() {
-    this.log.trace('ServerApp.runDefaultRoute');
+    if (DEBUG) this.log.trace('ServerApp.runDefaultRoute');
     this.express.use((req, res, next) => {
       next(this.e('ROUTE_NOT_FOUND', { status: 404 }));
     });
@@ -254,7 +255,7 @@ export default class ServerApp extends Module {
 
   async run(...args) {
     await super.run(...args);
-    this.log.trace('ServerApp.run');
+    if (DEBUG) this.log.trace('ServerApp.run');
     if (this.db) await this.db.run();
     if (this.serverConfig.ws) await this.runWs();
     if (this.config.redis) await this.runRedis();
@@ -267,7 +268,7 @@ export default class ServerApp extends Module {
   }
 
   async afterRun() {
-    this.log.trace('ServerApp afterRun');
+    if (DEBUG) this.log.trace('ServerApp afterRun');
     this.runRoutes();
     this.runDefaultRoute();
     this.runCatchErrors();

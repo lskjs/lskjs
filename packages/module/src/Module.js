@@ -12,7 +12,7 @@ import Emitter from './emitter';
 // import config from './config';
 
 // const isClass = isFunction;
-const DEBUG = true;
+const DEBUG = __DEV__ && false;
 
 export default class Module {
   _module = true;
@@ -33,9 +33,9 @@ export default class Module {
 
   emit(...args) {
     if (this.log) {
-      this.log.trace(`${this.name}`, ...args);
+      this.log.trace(`[e] ${this.name}:`, ...args);
     } else {
-      console.log(`${this.name}`, ...args); // eslint-disable-line no-console
+      console.log(`[e] ${this.name}:`, ...args); // eslint-disable-line no-console
     }
     if (this.ee) this.ee.emit(...args);
   }
@@ -99,14 +99,14 @@ export default class Module {
   }
 
   broadcastModules(method) {
-    this.log.trace(`${this.name}.broadcastModules`, method);
+    if (DEBUG) this.log.trace(`${this.name}.broadcastModules`, method);
     // console.log('this.getModulesSequence()', this.getModulesSequence());
     const modules = toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
     return Promise.map(modules, pack => {
       if (!(pack.module && isFunction(pack.module[method]))) return null;
       // let res;
       try {
-        this.log.trace(`module ${pack.name}.${method}()`);
+        if (DEBUG) this.log.trace(`module ${pack.name}.${method}()`);
         return pack.module[method]();
       } catch (err) {
         this.log.error(`module ${pack.name}.${method}() ERROR:`, err);
@@ -134,7 +134,7 @@ export default class Module {
     });
     this.modules = modules;
     if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
-    this.log.trace(`${this.name}._asyncModules`, Object.keys(this.modules)); // this.log.debug('_modules', Object.keys(this._modules));
+    this.log.trace(`${this.name}._asyncModules`, Object.keys(this._asyncModules)); // this.log.debug('_modules', Object.keys(this._modules));
     return this.broadcastModules('init');
   }
 
@@ -169,15 +169,15 @@ export default class Module {
         await this.init();
       }
       if (isFunction(this.initModules)) {
-        this.log.trace(`${this.name}.initModules()`);
+        if (DEBUG) this.log.trace(`${this.name}.initModules()`);
         await this.initModules();
       }
       if (isFunction(this.afterInit)) {
-        this.log.trace(`${this.name}.afterInit()`);
+        if (DEBUG) this.log.trace(`${this.name}.afterInit()`);
         await this.afterInit();
       }
       if (isFunction(this.run)) {
-        this.log.trace(`${this.name}.run()`);
+        if (DEBUG) this.log.trace(`${this.name}.run()`);
         await this.run();
       }
       if (isFunction(this.broadcastModules)) {
@@ -185,15 +185,15 @@ export default class Module {
         await this.broadcastModules('run');
       }
       if (isFunction(this.afterRun)) {
-        this.log.trace(`${this.name}.afterRun()`);
+        if (DEBUG) this.log.trace(`${this.name}.afterRun()`);
         await this.afterRun();
       }
       if (isFunction(this.started)) {
-        this.log.trace(`${this.name}.started()`);
+        if (DEBUG) this.log.trace(`${this.name}.started()`);
         await this.started();
       }
       if (isFunction(this.onStart)) {
-        this.log.trace(`${this.name}.onStart()`);
+        if (DEBUG) this.log.trace(`${this.name}.onStart()`);
         await this.onStart();
       }
       this.startCount += 1;
@@ -216,11 +216,11 @@ export default class Module {
     this.log.trace(`${this.name}.stop()`);
     try {
       if (isFunction(this.broadcastModules)) {
-        this.log.trace(`${this.name}.broadcastModules('stop')`);
+        if (DEBUG) this.log.trace(`${this.name}.broadcastModules('stop')`);
         await this.broadcastModules('stop');
       }
       if (isFunction(this.onStop)) {
-        this.log.trace(`${this.name}.onStop()`);
+        if (DEBUG) this.log.trace(`${this.name}.onStop()`);
         await this.onStop();
       }
     } catch (err) {
