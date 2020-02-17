@@ -56,7 +56,6 @@ export default class Api extends BaseApi {
 
   // export default (this.app, module) => {
   //   const { checkNotFound } = this.app.helpers;
-  //   const { e400, e403, e404 } = this.app.errors;
   //   if (!this.app.e) this.app.e = (name, params = {}) => { throw { ...params, name }; };
   //   // some
 
@@ -65,7 +64,7 @@ export default class Api extends BaseApi {
   async validate(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const user = await UserModel.findById(req.user._id);
-    if (!user) throw this.app.errors.e404('Не найден user в базе');
+    if (!user) throw this.app.e('Не найден user в базе', { status: 404 });
     return {
       __pack: 1,
       jwt: req.user,
@@ -137,7 +136,7 @@ export default class Api extends BaseApi {
         ],
       };
     }
-    throw this.app.errors.e400('Параметр username, email, login не передан');
+    throw this.app.e('Параметр username, email, login не передан', { status: 400 });
   }
 
   async afterSignup({ req, user }) {
@@ -198,10 +197,10 @@ export default class Api extends BaseApi {
     // const params = req.data;
 
     const userId = req.user && req.user._id;
-    if (!userId) throw this.app.errors.e404('Токен не верный');
+    if (!userId) throw this.app.e('Токен не верный', { status: 404 });
 
     const user = await UserModel.findById(userId);
-    if (!user) throw this.app.errors.e404('Такой пользователь не найден');
+    if (!user) throw this.app.e('Такой пользователь не найден', { status: 404 });
     req.user = user;
 
     return {
@@ -220,9 +219,9 @@ export default class Api extends BaseApi {
 
     const criteria = this.getUserCriteria(req);
     const user = await UserModel.findOne(criteria);
-    if (!user) throw this.app.errors.e404('Неверный логин');
+    if (!user) throw this.app.e('Неверный логин', { status: 404 });
     const email = user.getEmail();
-    if (!email) throw this.app.errors.e400('У этого пользователя не был указан емейл для восстановления');
+    if (!email) throw this.app.e('У этого пользователя не был указан емейл для восстановления', { status: 400 });
 
     const password = UserModel.generatePassword();
 
@@ -279,13 +278,12 @@ export default class Api extends BaseApi {
 
   async socialBind(req) {
     const { checkNotFound } = this.app.helpers;
-    const { e400 } = this.app.errors;
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const PassportModel = this.app.models.PassportModel || this.app.models.Passport;
     const userId = req.user._id;
     const passport = await PassportModel.getByToken(req.data.p).then(checkNotFound);
     const user = await UserModel.findById(req.user._id).then(checkNotFound);
-    if (passport.userId) throw e400('passport.userId already exist');
+    if (passport.userId) throw this.app.e('passport.userId already exist', { status: 400 });
     passport.userId = userId;
     // user.passports.push(passport._id);
     await passport.save();
@@ -446,7 +444,6 @@ export default class Api extends BaseApi {
 
   async socialUnbind(req) {
     const { checkNotFound } = this.app.helpers;
-    const { e400, e403 } = this.app.errors;
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const PassportModel = this.app.models.PassportModel || this.app.models.Passport;
     const params = req.data;
@@ -459,10 +456,10 @@ export default class Api extends BaseApi {
     if (params.provider) findParams.provider = params.provider;
     findParams.userId = userId;
     if (!findParams.passportId && !findParams.provider) {
-      throw e400('!findParams.passportId && !findParams.provider');
+      throw this.app.e('!findParams.passportId && !findParams.provider', { status: 400 });
     }
     const passport = await PassportModel.findOne(findParams).then(checkNotFound);
-    if (passport.userId !== userId) throw e403('Wrong user!');
+    if (passport.userId !== userId) throw this.app.e('Wrong user!', { status: 403 });
     passport.userId = null;
     // user.passports = user.passports.filter((pId) => {
     //   return pId && pId.toString() !== params.p;
@@ -477,10 +474,10 @@ export default class Api extends BaseApi {
   async tokenLogin(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const token = req.data.t || req.data.token;
-    if (!token) throw this.app.errors.e400('!token');
+    if (!token) throw this.app.e('!token', { status: 400 });
 
     const user = await UserModel.tokenLogin({ token });
-    if (!user) throw this.app.errors.e404('!user');
+    if (!user) throw this.app.e('!user', { status: 404 });
     req.user = user;
 
     return {
@@ -515,9 +512,8 @@ export default class Api extends BaseApi {
   }
 
   socialAuth(req, res, next) {
-    const { e404 } = this.app.errors;
     const { provider } = req.params;
-    if (!this.app.modules.auth.strategies[provider]) next(e404(`No provider: ${provider}`));
+    if (!this.app.modules.auth.strategies[provider]) next(this.app.e(`No provider: ${provider}`), { status: 404 });
     this.app.modules.auth.passportService.authenticate(
       provider,
       this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),

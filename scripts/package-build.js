@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 const glob = require('glob');
 const shell = require('shelljs');
 

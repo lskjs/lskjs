@@ -57,7 +57,6 @@ export default class UploadServerModule {
   }
 
   getFilePath(req, file) {
-    const { e403 } = this.app.errors;
     const { config } = this;
     let { path = 'storage' } = config;
 
@@ -66,7 +65,7 @@ export default class UploadServerModule {
     } else if (config.allowGuest) {
       path += '/general';
     } else {
-      throw e403('Guest can not upload files');
+      throw this.app.e('Guest can not upload files', { status: 403 });
     }
 
     let fileName;
@@ -147,12 +146,11 @@ export default class UploadServerModule {
   }
 
   getMulter() {
-    const { e400 } = this.app.errors;
     const config = this.app.config.upload;
     const fileFilter = (req, file, cb) => {
       if (Array.isArray(config.mimetypes)) {
         if (config.mimetypes.indexOf(file.mimetype) === -1) {
-          return cb(e400('You are not allowed to upload files with this extension'));
+          return cb(this.app.e('You are not allowed to upload files with this extension'));
         }
       }
       return cb(null, true);

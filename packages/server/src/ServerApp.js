@@ -13,6 +13,7 @@ import db from '@lskjs/db/server';
 import e from '@lskjs/utils/e';
 import Module from '@lskjs/module';
 import http from 'http';
+import defaultServerConfig from './config';
 
 import AsyncRouter from './AsyncRouter';
 import createWs from './ws';
@@ -28,19 +29,18 @@ export default class ServerApp extends Module {
     this.log.trace('ServerApp init');
     this.express = this.createExpress();
     this.app = this.express; // Fallback
+    this.serverConfig = this.config.server || defaultServerConfig;
     this.httpServer = http.createServer(this.express);
-    if (this.config.express) {
-      this.log.trace('express config:', this.config.express);
-      forEach(this.config.express || {}, (value, key) => {
+    if (this.serverConfig.express) {
+      this.log.trace('serverConfig.express:', this.serverConfig.express);
+      forEach(this.serverConfig.express || {}, (value, key) => {
         this.express.set(key, value);
       });
     }
     this.db = await this.getDatabase();
     this.responses = this.getResponses();
     this.log.debug('responses', Object.keys(this.responses));
-    this.errors = this.getErrors();
-    this.log.debug('errors', Object.keys(this.errors));
-    this.log.debug('config.middlewares', this.config.middlewares);
+    this.log.debug('serverConfig.middlewares', this.serverConfig.middlewares);
     this.middlewares = this.getMiddlewares();
     this.log.debug('middlewares', Object.keys(this.middlewares));
 
@@ -49,10 +49,10 @@ export default class ServerApp extends Module {
     this.statics = this._getStatics();
     this.log.debug('statics', this.statics);
     this.api = new this.Api({
-      url: `http://127.0.0.1:${this.config.port}`,
+      url: this.url('/'), // `http://127.0.0.1:${this.config.port || this.serverConfig.port}`,
       log: this.log,
     });
-    if (this.config.ws) this.initWs();
+    if (this.serverConfig.ws) this.initWs();
     if (this.i18) {
       await this.i18
         .setState({
@@ -68,8 +68,6 @@ export default class ServerApp extends Module {
     // super.afterInit(...arguments);
     this.models = this.getMongooseModels();
     this.log.debug('models', Object.keys(this.models));
-    this.resourses = this.getResourses();
-    this.log.debug('resourses', Object.keys(this.resourses));
     await this.runModels();
   }
 
@@ -79,7 +77,7 @@ export default class ServerApp extends Module {
     if (params && Object.keys(params.length)) {
       query = `?${map(params, (val, key) => `${key}=${val}`).join('&')}`;
     }
-    return `${this.config.url}${str}${query}`;
+    return `${this.config.url || this.serverConfig.url || '/'}${str}${query}`;
   }
 
   e(...params) {
@@ -132,9 +130,6 @@ export default class ServerApp extends Module {
   }
   getErrors() {
     return require('./getErrors').default(this);
-  }
-  getResourses() {
-    return require('./resourses').default(this);
   }
   getResponses() {
     return require('./responses').default(this);
@@ -207,13 +202,13 @@ export default class ServerApp extends Module {
     this.ws.wrapExpress(this.express);
   }
   async runWs() {
-    if (!this.config.ws) return;
+    if (!this.serverConfig.ws) return;
     this.log.trace('ServerApp.runWs');
     this.ws.serveClient(false);
     this.ws.attach(this.httpServer);
-    const transports = this.config.ws.transports || ['websocket'];
+    const transports = this.serverConfig.ws.transports || ['websocket'];
     this.ws.set('transports', transports);
-    if (this.config.ws.origins) this.ws.set('origins', this.config.ws.origins);
+    if (this.serverConfig.ws.origins) this.ws.set('origins', this.serverConfig.ws.origins);
   }
 
   runMiddlewares() {
@@ -261,7 +256,7 @@ export default class ServerApp extends Module {
     await super.run(...args);
     this.log.trace('ServerApp.run');
     if (this.db) await this.db.run();
-    if (this.config.ws) await this.runWs();
+    if (this.serverConfig.ws) await this.runWs();
     if (this.config.redis) await this.runRedis();
     this.runStatics();
     this.runMiddlewares();
@@ -277,7 +272,7 @@ export default class ServerApp extends Module {
     this.runDefaultRoute();
     this.runCatchErrors();
     return new Promise(resolve => {
-      this.httpInstance = this.httpServer.listen(this.config.port, () => {
+      this.httpInstance = this.httpServer.listen(this.config.port || this.serverConfig.port, () => {
         resolve(this);
       });
     });
@@ -295,13 +290,12 @@ export default class ServerApp extends Module {
   }
 
   async started() {
-    const str = `🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing &&
-      global.timing()}ms]`;
+    const timing = global.timing ? `[${global.timing()}ms]` : '';
+    const str = `🎃  The server is running at http://127.0.0.1:${this.httpInstance.address().port}/ ${timing}`;
     if (__DEV__) {
       console.log(str); // eslint-disable-line no-console
     } else {
       this.log.warn(str);
     }
-    // if (__DEV__) console.log();
   }
 }

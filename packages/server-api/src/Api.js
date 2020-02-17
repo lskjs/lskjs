@@ -22,11 +22,7 @@ export default class Api {
     }
     // this.isAuth = this.app.helpers.isAuth;
     // this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
-    if (this.app && this.app.errors) {
-      this.e = this.app.errors.e;
-    } else {
-      this.e = a => a;
-    }
+    this.e = (...args) => this.app.e(...args);
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });

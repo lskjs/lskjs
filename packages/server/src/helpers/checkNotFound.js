@@ -1,6 +1,6 @@
-export default (ctx) => {
+export default ctx => {
   return function checkNotFound(data) {
-    if (!data) throw ctx.errors.e404('Object not found');
+    if (!data) throw ctx.e('Object not found', { status: 404 });
     return Promise.resolve(data);
   };
 };

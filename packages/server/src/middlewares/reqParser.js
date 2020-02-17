@@ -6,29 +6,17 @@ import config from '../config';
 
 const { middlewares: defaultOptions } = config;
 
-export default (ctx) => {
+export default ctx => {
   const middlewares = [];
   const preMiddlewares = [
-    [
-      bodyParser.json,
-      get(ctx, 'config.middlewares.bodyParser.json'),
-      get(defaultOptions, 'bodyParser.json'),
-    ],
+    [bodyParser.json, get(ctx, 'serverConfig.middlewares.bodyParser.json'), get(defaultOptions, 'bodyParser.json')],
     [
       bodyParser.urlencoded,
-      get(ctx, 'config.middlewares.bodyParser.urlencoded'),
+      get(ctx, 'serverConfig.middlewares.bodyParser.urlencoded'),
       get(defaultOptions, 'bodyParser.urlencoded'),
     ],
-    [
-      cookieParser,
-      get(ctx, 'config.middlewares.cookieParser'),
-      get(defaultOptions, 'cookieParser'),
-    ],
-    [
-      cors,
-      get(ctx, 'config.middlewares.cors'),
-      get(defaultOptions, 'cors'),
-    ],
+    [cookieParser, get(ctx, 'serverConfig.middlewares.cookieParser'), get(defaultOptions, 'cookieParser')],
+    [cors, get(ctx, 'serverConfig.middlewares.cors'), get(defaultOptions, 'cors')],
   ];
   preMiddlewares.forEach(([middleware, options1, options2]) => {
     if (options1) {

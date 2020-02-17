@@ -1,59 +1,6 @@
 import get from 'lodash/get';
 import omit from 'lodash/omit';
-
-const cache = [
-  '',
-  ' ',
-  '  ',
-  '   ',
-  '    ',
-  '     ',
-  '      ',
-  '       ',
-  '        ',
-  '         ',
-];
-
-function leftPad(str, len, ch) {
-  // convert `str` to `string`
-  str = `${str}`;
-  // `len` is the `pad`'s length now
-  //
-  let reverse = 0;
-  if (len < 0) {
-    len *= -1;
-    reverse = 1;
-  }
-  len -= str.length;
-  // doesn't need to pad
-  if (len <= 0) return str;
-  // `ch` defaults to `' '`
-  if (!ch && ch !== 0) ch = ' ';
-  // convert `ch` to `string`
-  ch = `${ch}`;
-  // cache common use cases
-  if (ch === ' ' && len < 10) return reverse ? str + cache[len] : cache[len] + str;
-  // `pad` starts with an empty string
-  let pad = '';
-  // loop
-  while (true) {
-    // add `ch` to `pad` if `len` is odd
-    if (len & 1) pad += ch;
-    // divide `len` by 2, ditch the remainder
-    len >>= 1;
-    // "double" the `ch` so this operation count grows logarithmically on `len`
-    // each time `ch` is "doubled", the `len` would need to be "doubled" too
-    // similar to finding a value in binary search tree, hence O(log(n))
-    if (len) ch += ch;
-    // `len` is 0, exit the loop
-    else break;
-  }
-  // pad `str`!
-
-  return reverse ? str + pad : pad + str;
-}
-
-// "asd \x1b[41m \e[0;34m asdas" +
+import leftPad from '@lskjs/utils/leftPad';
 
 function levelFn(data, status) {
   if (data.method === 'WS') {
@@ -67,9 +14,12 @@ function levelFn(data, status) {
   if (status === 'start') {
     return 'debug';
   }
-  if (data.err || data.status >= 500 || data.duration > 10000) { // server internal error or error
+  if (data.err || data.status >= 500 || data.duration > 10000) {
+    // server internal error or error
     return 'error';
-  } if (data.status >= 400 || data.duration > 3000) { // client error
+  }
+  if (data.status >= 400 || data.duration > 3000) {
+    // client error
     return 'warn';
   }
   return 'info';
@@ -78,7 +28,7 @@ function levelFn(data, status) {
 const urlPad = -20;
 
 function logStart(data) {
-  return `${leftPad(data.method, 4)} ${leftPad(data.url, urlPad)} #${data.reqId}`;// + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
+  return `${leftPad(data.method, 4)} ${leftPad(data.url, urlPad)} #${data.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
 }
 
 function logFinish(data) {
@@ -88,11 +38,14 @@ function logFinish(data) {
   if (data.method === 'WS') {
     return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(time, 7)}ms `;
   }
-  return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(data.status, 3)} ${leftPad(time, 7)}ms ${length}b `;
+  return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(data.status, 3)} ${leftPad(
+    time,
+    7,
+  )}ms ${length}b `;
 }
 
-export default (ctx) => {
-  if (!get(ctx, 'config.middlewares.accessLogger')) return null;
+export default ctx => {
+  if (!get(ctx, 'serverConfig.middlewares.accessLogger')) return null;
   return (req, res, next) => {
     const data = {};
     const log = req.log.child({
@@ -111,10 +64,12 @@ export default (ctx) => {
     }
     data.referer = req.header('referer') || req.header('referrer');
     data.ua = req.header('user-agent');
-    data.ip = req.ip || req.connection.remoteAddress
-        || (req.socket && req.socket.remoteAddress)
-        || (req.socket.socket && req.socket.socket.remoteAddress)
-        || '127.0.0.1';
+    data.ip =
+      req.ip ||
+      req.connection.remoteAddress ||
+      (req.socket && req.socket.remoteAddress) ||
+      (req.socket.socket && req.socket.socket.remoteAddress) ||
+      '127.0.0.1';
 
     if (__DEV__) {
       log[levelFn(data, 'start')](data, logStart(data));
@@ -122,7 +77,6 @@ export default (ctx) => {
         log.trace(JSON.stringify(req.body));
       }
     }
-
 
     const hrtime = process.hrtime();
     function logging() {
