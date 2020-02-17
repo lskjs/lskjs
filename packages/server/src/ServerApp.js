@@ -4,9 +4,7 @@ import path from 'path';
 import mapValues from 'lodash/mapValues';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
-import get from 'lodash/get';
 import map from 'lodash/map';
-import isObject from 'lodash/isObject';
 import staticFileMiddleware from 'connect-static-file';
 import Api from '@lskjs/apiquery';
 import autobind from '@lskjs/autobind';
@@ -18,7 +16,6 @@ import http from 'http';
 
 import AsyncRouter from './AsyncRouter';
 import createWs from './ws';
-
 
 export default class ServerApp extends Module {
   _module = 'app';
@@ -34,13 +31,11 @@ export default class ServerApp extends Module {
     this.httpServer = http.createServer(this.express);
     if (this.config.express) {
       this.log.trace('express config:', this.config.express);
-      forEach((this.config.express || {}), (value, key) => {
+      forEach(this.config.express || {}, (value, key) => {
         this.express.set(key, value);
       });
     }
     this.db = await this.getDatabase();
-    this.requests = this.getRequests();
-    this.log.debug('requests', Object.keys(this.requests));
     this.responses = this.getResponses();
     this.log.debug('responses', Object.keys(this.responses));
     this.errors = this.getErrors();
@@ -59,11 +54,13 @@ export default class ServerApp extends Module {
     });
     if (this.config.ws) this.initWs();
     if (this.i18) {
-      await this.i18.setState({
-        log: this.log,
-        config: this.config.i18,
-        getLocale: this.getLocale,
-      }).init();
+      await this.i18
+        .setState({
+          log: this.log,
+          config: this.config.i18,
+          getLocale: this.getLocale,
+        })
+        .init();
     }
   }
 
@@ -75,7 +72,6 @@ export default class ServerApp extends Module {
     this.log.debug('resourses', Object.keys(this.resourses));
     await this.runModels();
   }
-
 
   @autobind
   url(str, params = null) {
@@ -121,7 +117,7 @@ export default class ServerApp extends Module {
         models[modelName] = models2[modelName];
       });
     });
-    return mapValues(models, (model) => {
+    return mapValues(models, model => {
       if (model._universal) {
         return model.getMongooseModel(this.db);
       }
@@ -140,22 +136,18 @@ export default class ServerApp extends Module {
   getResourses() {
     return require('./resourses').default(this);
   }
-  getRequests() {
-    return require('./requests').default(this);
-  }
   getResponses() {
     return require('./responses').default(this);
   }
   getHelpers() {
     return require('./helpers').default(this);
   }
-
   getStaticsDir(dirPath) {
     const fs = require('fs');
     const { readdirSync } = fs;
     const files = readdirSync(dirPath).filter(p => p !== '.' && p !== '..');
     const res = {};
-    files.forEach((file) => {
+    files.forEach(file => {
       res[`/${file}`] = `${dirPath}/${file}`;
     });
     return res;
@@ -169,8 +161,7 @@ export default class ServerApp extends Module {
         config: this.config.client || {},
       },
       __DEV__,
-      __PROD__,
-      __STAGE__,
+      __STAGE__: global.__STAGE__,
     };
   }
 
@@ -190,10 +181,6 @@ export default class ServerApp extends Module {
       this.express.use(url, express.static(_path));
       this.express.use(url, staticFileMiddleware(_path));
     });
-  }
-
-  useStaticPublic(publicPath, urlPath = null) {
-    this.log.trace('DEPRECATED');
   }
 
   getUsingMiddlewares() {
@@ -232,7 +219,7 @@ export default class ServerApp extends Module {
   runMiddlewares() {
     this.log.trace('ServerApp.runMiddlewares');
     const middlewares = flattenDeep(this.getUsingMiddlewares());
-    middlewares.forEach((middleware) => {
+    middlewares.forEach(middleware => {
       if (middleware && typeof middleware === 'function') this.express.use(middleware);
     });
   }
@@ -270,7 +257,6 @@ export default class ServerApp extends Module {
   // getLocale = require('../Uapp/i18/getLocale').default;
   // initI18 = require('../Uapp/i18/initI18').default;
 
-
   async run(...args) {
     await super.run(...args);
     this.log.trace('ServerApp.run');
@@ -290,7 +276,7 @@ export default class ServerApp extends Module {
     this.runRoutes();
     this.runDefaultRoute();
     this.runCatchErrors();
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.httpInstance = this.httpServer.listen(this.config.port, () => {
         resolve(this);
       });
@@ -299,7 +285,7 @@ export default class ServerApp extends Module {
   async stop() {
     await super.stop();
     if (this.db) await this.db.stop();
-    await new Promise((resolved) => {
+    await new Promise(resolved => {
       if (this.httpInstance) {
         this.httpInstance.close(resolved);
       } else {
@@ -309,7 +295,8 @@ export default class ServerApp extends Module {
   }
 
   async started() {
-    const str = `🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing && global.timing()}ms]`;
+    const str = `🎃  The server is running at http://127.0.0.1:${this.config.port}/ [${global.timing &&
+      global.timing()}ms]`;
     if (__DEV__) {
       console.log(str); // eslint-disable-line no-console
     } else {
