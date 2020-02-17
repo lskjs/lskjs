@@ -60,15 +60,14 @@ function ioMock(...initParams) {
         mock.connection.disconnect();
       }
       mock.connection = io(...newInitParams);
-      mock.events.forEach((event) => {
+      mock.events.forEach(event => {
         const [name, ...params] = event;
         mock.connection[name](...params);
       });
 
       mock.connection.recreateSocket = (...newInitParams2) =>
         // __DEV__ && console.log('recreateSocket2', ...newInitParams2);
-        mock.recreateSocket(...newInitParams2)
-      ;
+        mock.recreateSocket(...newInitParams2);
       // __DEV__ && console.log('recreateConnection');
       return mock.connection;
     },
@@ -120,7 +119,7 @@ export default class Apiquery {
   }
 
   catchError(err) {
-    const { data } = err.response;
+    const { data } = err.response || {};
     // if (true) {
     if (this.showError && this.log) {
       const str = `\
@@ -137,9 +136,11 @@ ${JSON.stringify(data, null, 2)}
       this.log.error(str);
     }
     if (data.message) {
+      // eslint-disable-next-line no-param-reassign
       err.message = data.message;
     }
     if (data.code) {
+      // eslint-disable-next-line no-param-reassign
       err.code = data.code;
     }
     // if (data.status) {
@@ -147,7 +148,6 @@ ${JSON.stringify(data, null, 2)}
     // }
     throw err;
   }
-
 
   createUrl(path, options = {}) {
     if (path.substr(0, 5) === 'http:' || path.substr(0, 6) === 'https:') {
@@ -168,7 +168,7 @@ ${JSON.stringify(data, null, 2)}
     const array = [url, path[0] === '/' ? null : trim(base), trim(path)];
     url = array
       .map(a => trim(a))
-      .filter((a, i) => (i === 0 || a))
+      .filter((a, i) => i === 0 || a)
       .join('/');
     if (options.qs) {
       url += (url.indexOf('?') === -1 ? '?' : '&') + this.constructor.qs.stringify(options.qs);
@@ -177,15 +177,13 @@ ${JSON.stringify(data, null, 2)}
   }
 
   getCtx(url, params = {}) {
-    const req = Object.assign(
-      {
-        url,
-        headers: {
-          ...this.headers,
-        },
+    const req = {
+      url,
+      headers: {
+        ...this.headers,
       },
-      pick(params, AXIOS_PARAMS),
-    );
+      ...pick(params, AXIOS_PARAMS),
+    };
 
     // const body = params.body || params.data;
     if (!req.headers) req.headers = {};
@@ -208,7 +206,7 @@ ${JSON.stringify(data, null, 2)}
     //     req.body = form;
     //   }
     // }
-    const authToken = (params.authToken || this.authToken);
+    const authToken = params.authToken || this.authToken;
     if (!req.headers.Authorization && authToken) {
       req.headers.Authorization = `Bearer ${authToken}`;
     }
@@ -258,7 +256,9 @@ ${JSON.stringify(data, null, 2)}
       params.cancelToken = __cancelToken.token;
     }
 
-    const res = _axios(params, params2).then(parseResult).catch(catchError.bind(this));
+    const res = _axios(params, params2)
+      .then(parseResult)
+      .catch(catchError.bind(this));
     return res;
   }
 
@@ -267,7 +267,7 @@ ${JSON.stringify(data, null, 2)}
       this.log.trace('[api] WS.wsReconnect ###', Object.keys(this.wsConnections));
     }
 
-    Object.keys(this.wsConnections).forEach((key) => {
+    Object.keys(this.wsConnections).forEach(key => {
       const [path, options, socket] = this.wsConnections[key];
       // __DEV__ && this.log.trace('[api] prepare reconnect @@', socket);
       // // __DEV__ && console.log('prepare reconnect @@', socket);
@@ -285,10 +285,10 @@ ${JSON.stringify(data, null, 2)}
     const key = path + JSON.stringify(options);
     if (this.wsConnections[key]) return this.wsConnections[key];
     if (!this.wsConfig) {
-      console.error('Вы не можете использовать api.ws без сокет конфигов');
+      console.error('Вы не можете использовать api.ws без сокет конфигов'); // eslint-disable-line no-console
       return null;
     }
-    const opts = Object.assign({}, this.wsConfig && this.wsConfig.options, options);
+    const opts = { ...(this.wsConfig && this.wsConfig.options), ...options };
     // console.log('WS WS WS',
     //   {
     //     q: this.wsConfig && this.wsConfig.options,
@@ -318,15 +318,13 @@ ${JSON.stringify(data, null, 2)}
       this.log.trace('[api] WS', url, options);
       // this.log.trace('[api]', req.method, req.url, req._body, req);
     }
-    let socket = this.io(
-      url,
-      opts,
-    );
+    let socket = this.io(url, opts);
 
     if (Array.isArray(socket)) {
       if ((typeof window !== 'undefined' ? window : global).__DEV__) {
-        console.warn('multiple open sockets', socket);
+        console.warn('multiple open sockets', socket); // eslint-disable-line no-console
       }
+      // eslint-disable-next-line prefer-destructuring
       socket = socket[2];
     }
 
@@ -339,23 +337,20 @@ ${JSON.stringify(data, null, 2)}
   }
   ws2(path = '', params = {}) {
     if (!this.wsConfig) {
-      console.error('Вы не можете использовать api.ws без сокет конфигов');
+      console.error('Вы не можете использовать api.ws без сокет конфигов'); // eslint-disable-line no-console
       return null;
     }
-    const params2 = Object.assign({}, this.wsConfig, params);
+    const params2 = { ...this.wsConfig, ...params };
 
     if (!this.wsConfig.tokenInCookie) {
       if (!params2.qs) params2.qs = {};
       if (params2.qs && !params2.qs.token && this.authToken) params2.qs.token = this.authToken;
     }
 
-    const res = this.io(
-      this.createUrl(path, params2),
-      {
-        ...this.wsConfig.options,
-        ...params,
-      },
-    );
+    const res = this.io(this.createUrl(path, params2), {
+      ...this.wsConfig.options,
+      ...params,
+    });
     return res;
   }
 }
