@@ -135,11 +135,11 @@ ${JSON.stringify(data, null, 2)}
       // console.log(str);
       this.log.error(str);
     }
-    if (data.message) {
+    if (data && data.message) {
       // eslint-disable-next-line no-param-reassign
       err.message = data.message;
     }
-    if (data.code) {
+    if (data && data.code) {
       // eslint-disable-next-line no-param-reassign
       err.code = data.code;
     }
