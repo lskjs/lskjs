@@ -7,13 +7,18 @@ import get from 'lodash/get';
 import validator from 'validator';
 import BaseApi from '@lskjs/server-api';
 import canonize from '@lskjs/utils/canonize';
-import canonizeUsername from '@lskjs/utils/canonizeUsername';
-import canonizeEmail from '@lskjs/utils/canonizeEmail';
-import canonizePhone from '@lskjs/utils/canonizePhone';
+// import canonizeUsername from '@lskjs/utils/canonizeUsername';
+// import canonizeEmail from '@lskjs/utils/canonizeEmail';
+// import canonizePhone from '@lskjs/utils/canonizePhone';
 import transliterate from '@lskjs/utils/transliterate';
 import validateEmail from '@lskjs/utils/validateEmail';
+import createHelpers from '../utils/createHelpers';
 
 export default class Api extends BaseApi {
+  constructor(...props) {
+    super(...props);
+    this.helpers = createHelpers(this);
+  }
   getRoutes() {
     // const { isAuth } = this.app.middlewares;
     return {
@@ -51,6 +56,175 @@ export default class Api extends BaseApi {
       '/:provider': ::this.socialAuth,
       '/:provider/auth': ::this.socialAuth,
       '/:provider/callback': ::this.socialCallback,
+    };
+  }
+
+  // getRoutes() {
+  //   return {
+  //     '/login': ::this.login,
+  //     '/accountkit': ::this.accountkit,
+  //     '/facebook': ::this.facebook,
+  //     '/social': ::this.social,
+  //     // '/vkontakte': ::this.vkontakte,
+  //     '/phone': ::this.phoneOrEmail,
+  //     '/email': ::this.phoneOrEmail,
+  //     '/confirm': ::this.confirm,
+  //     '/status': ::this.status,
+  //     '/check': ::this.check,
+  //   };
+  // }
+
+  // async login() {
+  //   return { asd: 12 };
+  // }
+
+  async updateToken(req) {
+    const { UserModel } = this.app.models;
+    const userId = req.user && req.user._id;
+    if (!userId) throw this.app.e('auth.tokenIncorrect', { status: 404 });
+
+    const user = await UserModel.findById(userId);
+    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
+    req.user = user;
+
+    const token = this.helpers.generateAuthToken(user);
+    return {
+      __pack: 1,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
+    };
+  }
+
+  async status(req) {
+    await this.isAuth(req);
+    const { _id } = req.user;
+    const { UserModel } = this.app.models;
+    const user = await UserModel.findOne({ _id });
+    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
+    const token = this.helpers.generateAuthToken(user);
+    return {
+      api: {
+        v: 1,
+        isExpired: false,
+        actualApi: '/api',
+      },
+      // state: await this.app.getAppState(_id),
+      token,
+      status: await user.getStatus(),
+      user: await UserModel.prepare(user, { req, view: 'extended' }),
+    };
+  }
+
+  async check(req) {
+    const criteria = {};
+    if (req.data.phone) {
+      criteria.phone = canonizePhone(req.data.phone);
+    }
+    if (req.data.email) {
+      criteria.email = canonizeEmail(req.data.email);
+    }
+    if (!Object.keys(criteria)) throw this.e('auth.loginRequired', { status: 400 });
+    const { UserModel } = this.app.models;
+    const user = await UserModel.findOne(criteria).select('_id');
+    return {
+      exists: !!user,
+    };
+  }
+  //
+
+  loginCreds = ['username', 'email', 'phone', 'login'];
+  getUserCriteria(req) {
+    const { loginCreds = [] } = this;
+
+    return this.helpers.getUserCriteria(req.data, { loginCreds });
+  }
+
+  async login(req) {
+    const UserModel = this.app.models;
+    const { password } = req.data;
+    if (!password) throw this.app.e('auth.passwordEmpty', { status: 400 });
+    const criteria = this.getUserCriteria(req);
+    const user = await UserModel.findOne(criteria);
+    if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
+    if (!(await this.helpers.verifyPassword(password, user.password))) {
+      throw this.app.e('auth.passwordIncorrect', { status: 400 });
+    }
+    req.user = user;
+    const token = this.helpers.generateAuthToken(user);
+    user.updateVisitedAt();
+    return {
+      __pack: 1,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
+    };
+  }
+
+  async signup(req) {
+    if (!req.data.code) throw '!code';
+    if (req.data.code !== 'iuytrewq') throw 'invalidCode';
+
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const { password, ...userFields } = this.getUserFields(req);
+    const criteria = this.getUserCriteria(req);
+    if (userFields.email.includes('@yahoo') || userFields.email.includes('@aol')) {
+      throw this.app.e('auth.yahooaol', { status: 400, criteria });
+    }
+    const existUser = await UserModel.findOne(criteria);
+    if (existUser) throw this.app.e('auth.userExist', { status: 400, criteria });
+    if (!userFields.meta) userFields.meta = {};
+    userFields.meta.approvedEmail = false;
+    const user = new UserModel(userFields);
+    if (password) {
+      await this.helpers.setPassword(user, password);
+    }
+    await user.save();
+    req.user = user;
+
+    return this.afterSignup({ req, user });
+  }
+
+  async confirmPassword(req) {
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const { PermitModel } = this.app.models;
+    const { code, password } = req.data;
+    if (!code) throw '!code';
+    const permit = await PermitModel.findOne({
+      type: 'user.restorePassword',
+      code,
+    });
+    if (!permit) throw { code: 'invalidCode' };
+    if (permit.activatedAt) throw { code: 'activated' };
+    const date = new Date();
+    if (date > permit.expiredAt) throw { code: 'expired' };
+    const user = await UserModel.findById(permit.userId);
+    if (!user) throw '!user';
+    await permit.activate();
+    await this.helpers.setPassword(user, password);
+    // await user.setPassword(password);
+    set(user, 'private.lastUpdates.password', date);
+    user.markModified('private.lastUpdates.password');
+    await user.save();
+    const token = this.helpers.generateAuthToken(user);
+    return Promise.props({
+      __pack: true,
+      user: UserModel.prepare(user, { req }),
+      token,
+      data: {
+        permit: PermitModel.prepare(permit, { req }),
+      },
+    });
+  }
+
+  async afterSignup({ req, user }) {
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const link = (await this.helpers.genereateEmailApprovedLink) ? this.helpers.genereateEmailApprovedLink() : null;
+    this.app.emit('events.auth.signup', { user, link });
+    const token = this.helpers.generateAuthToken(user);
+    return {
+      __pack: 1,
+      signup: true,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
     };
   }
 
@@ -112,33 +286,6 @@ export default class Api extends BaseApi {
     return params;
   }
 
-  getUserCriteria(req) {
-    const params = req.data;
-    if (params.username) {
-      return {
-        username: canonize(params.username),
-      };
-    }
-    if (params.email) {
-      return {
-        email: canonize(params.email),
-      };
-    }
-    if (params.login) {
-      return {
-        $or: [
-          {
-            username: canonize(params.login),
-          },
-          {
-            email: canonize(params.login),
-          },
-        ],
-      };
-    }
-    throw this.app.e('Параметр username, email, login не передан', { status: 400 });
-  }
-
   async afterSignup({ req, user }) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const link = (await user.genereateEmailApprovedLink) ? user.genereateEmailApprovedLink() : null;
@@ -174,7 +321,7 @@ export default class Api extends BaseApi {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const params = req.data;
 
-    if (!params.password) throw this.app.e('auth.!password', { status: 400 });
+    if (!params.password) throw this.app.e('auth.emptyPassword', { status: 400 });
 
     const criteria = this.getUserCriteria(req);
     const user = await UserModel.findOne(criteria);
@@ -183,24 +330,6 @@ export default class Api extends BaseApi {
     if (!(await user.verifyPassword(params.password))) {
       throw this.app.e('auth.passwordIncorrect', { status: 400 });
     }
-    req.user = user;
-
-    return {
-      __pack: 1,
-      user: await UserModel.prepare(user, { req, withAppState: true }),
-      token: user.generateAuthToken(),
-    };
-  }
-
-  async updateToken(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    // const params = req.data;
-
-    const userId = req.user && req.user._id;
-    if (!userId) throw this.app.e('Токен не верный', { status: 404 });
-
-    const user = await UserModel.findById(userId);
-    if (!user) throw this.app.e('Такой пользователь не найден', { status: 404 });
     req.user = user;
 
     return {
@@ -957,52 +1086,6 @@ export default class Api extends BaseApi {
     return {
       isNew: operation === 'signup',
       operation,
-      token,
-      status: await user.getStatus(),
-      user: await UserModel.prepare(user, { req, view: 'extended' }),
-    };
-  }
-
-  async check(req) {
-    const criteria = {};
-    if (req.data.phone) {
-      criteria.phone = canonizePhone(req.data.phone);
-    }
-    if (req.data.email) {
-      criteria.email = canonizeEmail(req.data.email);
-    }
-    if (!Object.keys(criteria)) throw 'email or phone required';
-    const { UserModel } = this.app.models;
-    const user = await UserModel.findOne(criteria).select('_id');
-    return {
-      exists: !!user,
-    };
-  }
-
-  async status(req) {
-    await this.isAuth(req);
-    const { _id } = req.user;
-    const { UserModel } = this.app.models;
-    const user = await UserModel.findOne({ _id });
-    if (!user) throw this.e(404, 'User not found!');
-    const token = user.generateAuthToken();
-    // console.log(`auth/status ${user._id} ${token}`); // this.app.logger
-    return {
-      api: {
-        v: 5,
-        isExpired: false,
-        actualApi: '/api/v5',
-        ios: {
-          id: 1071097131,
-          slug: 'hi-jay-native-speakers-nearby',
-          url: 'https://apps.apple.com/us/app/hi-jay-native-speakers-nearby/id1071097131',
-        },
-        android: {
-          id: 'com.hijay.hijay',
-          url: 'https://play.google.com/store/apps/details?id=com.hijay.hijay',
-        },
-      },
-      state: await this.app.getAppState(_id),
       token,
       status: await user.getStatus(),
       user: await UserModel.prepare(user, { req, view: 'extended' }),

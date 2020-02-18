@@ -1,0 +1,230 @@
+// import Api from './BaseApi';
+import bcrypt from 'bcryptjs';
+import Promise from 'bluebird';
+import pick from 'lodash/pick';
+import get from 'lodash/get';
+import set from 'lodash/set';
+import jwt from 'jsonwebtoken';
+import Api from '@lskjs/auth/server/Api';
+
+const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);
+const bcryptHash = Promise.promisify(bcrypt.hash);
+const bcryptCompare = Promise.promisify(bcrypt.compare);
+
+const SALT_WORK_FACTOR = 10;
+async function hashPassword(password) {
+  const salt = await bcryptGenSalt(SALT_WORK_FACTOR);
+  return bcryptHash(password, salt);
+}
+
+
+export default class AuthApi extends Api {
+  constructor(...args) {
+    super(...args);
+
+    this.app = args[0]; // eslint-disable-line prefer-destructuring
+
+    const configJwt = get(this, 'app.config.jwt', {});
+    if (!configJwt.secret) console.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
+    const auth = {
+      async setPassword(user, password) {
+        user.password = await hashPassword(password); // eslint-disable-line no-param-reassign
+      },
+      verifyPassword(password1, password2) {
+        // console.log('verifyPassword', password1, password2);
+        if (!password1 || !password2) return false;
+        return bcryptCompare(password1, password2);
+      },
+      getIdentity(user, params = {}) {
+        const userParams = user.toObject ? user.toObject() : user;
+        return {
+          ...pick(userParams, ['_id', 'username', 'name', 'avatar', 'role']),
+          ...params,
+        };
+      },
+      generateAuthToken(...params) { // TODO переместить в modules.auth
+        return jwt.sign(auth.getIdentity(...params), configJwt.secret);
+      },
+      async genereateEmailApprovedLink(user) {
+        const token = jwt.sign({
+          userId: String(user._id),
+          email: user.email,
+        }, configJwt.secret);
+        if (!user.private) user.private = {}; // eslint-disable-line no-param-reassign
+        user.private.approvedEmailToken = token; // eslint-disable-line no-param-reassign
+        if (user.markModified) user.markModified('private');
+
+        return user.app.url(`/api/auth/email/approve?t=${token}`);
+      },
+    };
+    this.auth = auth;
+  }
+
+
+  getRoutes() {
+    return {
+      '/qwe': () => 123,
+      '/status': ::this.status,
+      '/check': ::this.check,
+      '/updateToken': ::this.updateToken,
+      ...super.getRoutes(),
+    };
+  }
+
+
+
+  async updateToken(req) {
+    const { UserModel } = this.app.models;
+    // const params = req.allParams();
+
+    const userId = req.user && req.user._id;
+    if (!userId) throw this.app.e('Токен не верный');
+
+    const user = await UserModel.findById(userId);
+    if (!user) throw this.app.e('Такой пользователь не найден');
+    req.user = user;
+
+    const token = this.auth.generateAuthToken(user);
+    return {
+      __pack: 1,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
+    };
+  }
+
+  async status(req) {
+    await this.isAuth(req);
+    const { _id } = req.user;
+    const { UserModel } = this.app.models;
+    const user = await UserModel.findOne({ _id });
+    if (!user) throw this.e(404, 'User not found!');
+
+    const token = this.auth.generateAuthToken(user);
+    return {
+      __pack: 1,
+      token,
+      user: await UserModel.prepare(user, { req, view: 'extended' }),
+    };
+  }
+  async check(req) {
+    const criteria = this.getUserCriteria(req);
+    if (!Object.keys(criteria)) throw 'email or phone required';
+    const { UserModel } = this.app.models;
+    const user = await UserModel.findOne(criteria).select('_id');
+    return {
+      exists: !!user,
+    };
+  }
+
+  // getRoutes() {
+  //   return {
+  //     '/login': ::this.login,
+  //     '/accountkit': ::this.accountkit,
+  //     '/facebook': ::this.facebook,
+  //     '/social': ::this.social,
+  //     // '/vkontakte': ::this.vkontakte,
+  //     '/phone': ::this.phoneOrEmail,
+  //     '/email': ::this.phoneOrEmail,
+  //     '/confirm': ::this.confirm,
+  //     '/status': ::this.status,
+  //     '/check': ::this.check,
+  //   };
+  // }
+
+  // async login() {
+  //   return { asd: 12 };
+  // }
+
+
+  async login(req) {
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const { password } = req.data;
+    if (!password) throw this.app.e('auth.!password', { status: 400 });
+    const criteria = this.getUserCriteria(req);
+    const user = await UserModel.findOne(criteria);
+    if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
+    if (!await this.auth.verifyPassword(password, user.password)) {
+      throw this.app.e('auth.passwordIncorrect', { status: 400 });
+    }
+    req.user = user;
+    const token = this.auth.generateAuthToken(user);
+    user.updateVisitedAt();
+    return {
+      __pack: 1,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
+    };
+  }
+
+
+  async signup(req) {
+    if (!req.data.code) throw '!code';
+    if (req.data.code !== 'iuytrewq') throw 'invalidCode';
+
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const { password, ...userFields } = this.getUserFields(req);
+    const criteria = this.getUserCriteria(req);
+    if (userFields.email.includes('@yahoo') || userFields.email.includes('@aol')) {
+      throw this.app.e('auth.yahooaol', { status: 400, criteria });
+    }
+    const existUser = await UserModel.findOne(criteria);
+    if (existUser) throw this.app.e('auth.userExist', { status: 400, criteria });
+    if (!userFields.meta) userFields.meta = {};
+    userFields.meta.approvedEmail = false;
+    const user = new UserModel(userFields);
+    if (password) {
+      await this.auth.setPassword(user, password);
+    }
+    await user.save();
+    req.user = user;
+
+    return this.afterSignup({ req, user });
+  }
+
+
+  async confirmPassword(req) {
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const { PermitModel } = this.app.models;
+    const { code, password } = req.data;
+    if (!code) throw '!code';
+    const permit = await PermitModel.findOne({
+      type: 'user.restorePassword',
+      code,
+    });
+    if (!permit) throw { code: 'invalidCode' };
+    if (permit.activatedAt) throw { code: 'activated' };
+    const date = new Date();
+    if (date > permit.expiredAt) throw { code: 'expired' };
+    const user = await UserModel.findById(permit.userId);
+    if (!user) throw '!user';
+    await permit.activate();
+    await this.auth.setPassword(user, password);
+    // await user.setPassword(password);
+    set(user, 'private.lastUpdates.password', date);
+    user.markModified('private.lastUpdates.password');
+    await user.save();
+    const token = this.auth.generateAuthToken(user);
+    return Promise.props({
+      __pack: true,
+      user: UserModel.prepare(user, { req }),
+      token,
+      data: {
+        permit: PermitModel.prepare(permit, { req }),
+      },
+    });
+  }
+
+
+  async afterSignup({ req, user }) {
+    const UserModel = this.app.models.UserModel || this.app.models.User;
+    const link = await this.auth.genereateEmailApprovedLink ? this.auth.genereateEmailApprovedLink() : null;
+    this.app.emit('events.auth.signup', { user, link });
+    const token = this.auth.generateAuthToken(user);
+    return {
+      __pack: 1,
+      signup: true,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
+    };
+  }
+}

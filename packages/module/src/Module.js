@@ -134,7 +134,9 @@ export default class Module {
     });
     this.modules = modules;
     if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
-    this.log.trace(`${this.name}._asyncModules`, Object.keys(this._asyncModules)); // this.log.debug('_modules', Object.keys(this._modules));
+    if (Object.keys(this._asyncModules).length) {
+      this.log.debug(`${this.name}._asyncModules`, Object.keys(this._asyncModules));
+    }
     return this.broadcastModules('init');
   }
 
