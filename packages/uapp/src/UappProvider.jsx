@@ -7,7 +7,7 @@ const UappProvider = ({ uapp, children: rawChildren }) => {
   let children = <>{rawChildren}</>;
 
   const { MobxProvider } = UappProvider;
-  const stores = (uapp && uapp.provide && uapp.provide()) || {};
+  const stores = (uapp && uapp._provide && uapp._provide()) || (uapp && uapp.provide && uapp.provide()) || {};
   if (stores && Object.keys(stores).length && MobxProvider) {
     children = <MobxProvider {...stores}>{children}</MobxProvider>;
   }

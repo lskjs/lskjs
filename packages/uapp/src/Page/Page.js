@@ -6,7 +6,7 @@ import createLogger from '@lskjs/utils/createLogger';
 
 // const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
-const deprecated = createLogger({ name: 'uapp/Page', type: 'deprecated' });
+// const deprecated = createLogger({ name: 'uapp/Page', type: 'deprecated' });
 
 // DEBUG ? () => null : console.log; // eslint-disable-line no-console
 // const DEBUG = true;
@@ -195,6 +195,6 @@ export default class Page {
     const children = this.renderComponentWithLayout();
     const { Provider } = this;
     if (!Provider) return children;
-    return <Provider uapp={this.uapp}>{children}</Provider>;
+    return React.createElement(Provider, { uapp: this.uapp }, children);
   }
 }

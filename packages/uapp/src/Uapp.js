@@ -41,11 +41,12 @@ export default class Uapp extends Module {
     Object.assign(this, params);
   }
 
-
   createLogger(params) {
-    const level = __DEV__ ? ( // eslint-disable-line no-nested-ternary
-      __SERVER__ ? 'warn' : 'trace'
-    ) : 'error';
+    const level = __DEV__ // eslint-disable-line no-nested-ternary
+      ? __SERVER__
+        ? 'warn'
+        : 'trace'
+      : 'error';
 
     return logger.createLogger({
       name: this.name || 'app',
@@ -72,16 +73,17 @@ export default class Uapp extends Module {
 
     const rules = this.getGrantRules();
     this.grant = new this.Grant({ app: this, rules });
-    
+
     await this.initSession();
 
-
     if (this.i18) {
-      await this.i18.setState({
-        log: this.log,
-        config: this.app.config.i18,
-        getLocale: this.getLocale,
-      }).init();
+      await this.i18
+        .setState({
+          log: this.log,
+          config: this.app.config.i18,
+          getLocale: this.getLocale,
+        })
+        .init();
     }
     if (__CLIENT__) {
       this.app.historyConfirm = async (message, callback) => {
@@ -135,8 +137,8 @@ export default class Uapp extends Module {
     return api;
   }
 
-  getLocale = require('./i18/getLocale').default
-  setLocale = require('./i18/setLocale').default
+  getLocale = require('./i18/getLocale').default;
+  setLocale = require('./i18/setLocale').default;
 
   @autobind
   t(...args) {
@@ -146,11 +148,11 @@ export default class Uapp extends Module {
   }
 
   async initSession() {
-    return;
-    const { UserStore, AuthStore } = this.stores;
-    console.log('this.rootState', this.rootState);
-    this.user = new UserStore(this.rootState.user);
-    this.auth = new AuthStore();
+    // return;
+    // const { UserStore, AuthStore } = this.stores;
+    // console.log('this.rootState', this.rootState);
+    // this.user = new UserStore(this.rootState.user);
+    // this.auth = new AuthStore();
   }
 
   createOnSubmit(...props) {
@@ -188,7 +190,6 @@ export default class Uapp extends Module {
     await this.lazyRun();
   }
 
-
   async lazyRun() {
     if (this.auth) await this.auth.init();
     await this.reconnect();
@@ -196,12 +197,10 @@ export default class Uapp extends Module {
     // await super.run();
   }
 
-
   async reconnect() {
     // await this.auth.reconnect();
     // await this.initStateStorage();
   }
-
 
   // ////////////////////
   @observable state2 = {
@@ -276,11 +275,13 @@ export default class Uapp extends Module {
     if (userId) {
       // console.log('-- 1111');
       // console.log('-- 1111', this.api);
-      const res = await this.api.fetch('/api/module/appstate/getOrCreate', {
-        qs: {
-          userId,
-        },
-      }).catch(err => this.log.error('Uapp.initStateStorage: getOrCreate', err));
+      const res = await this.api
+        .fetch('/api/module/appstate/getOrCreate', {
+          qs: {
+            userId,
+          },
+        })
+        .catch(err => this.log.error('Uapp.initStateStorage: getOrCreate', err));
       // console.log('-- 2222');
       if (res && res.data) {
         state = {
@@ -306,7 +307,6 @@ export default class Uapp extends Module {
     });
     // console.log('initStateStorage /api/module/appstate/get', { data: res?.data });
 
-
     // if (__CLIENT__) this.setState();
     // autorun(() => {
     //   if (__DEV__ || __CLIENT__) {
@@ -317,7 +317,6 @@ export default class Uapp extends Module {
     // }
   }
 
-
   url(str, params = null) {
     let query = '';
     if (params) {
@@ -326,11 +325,9 @@ export default class Uapp extends Module {
     return `${this.config.url || ''}${str}${query}`;
   }
 
-
   state = {
     secret: false,
   };
-
 
   e(...params) {
     return e.call(this, ...params);
@@ -343,20 +340,18 @@ export default class Uapp extends Module {
     return this.toast(err, { defaultType: 'error' });
   }
 
-
   toast(err, config) {
     // console.log('toast', err, this.notificationSystem);
     if (this.notificationSystem && this.notificationSystem.current) {
       this.notificationSystem.current.toast(err, config);
     } else {
-      console.error('Uapp.toast', err);
+      console.error('Uapp.toast', err); // eslint-disable-line no-console
     }
   }
 
   confirm(props) {
     return this.confirmRef && this.confirmRef.open(props);
   }
-
 
   getRoutes() {
     return {};
@@ -409,22 +404,19 @@ export default class Uapp extends Module {
   }
 
   redirect(path) {
-    if (__DEV__) console.log('Uapp.redirect', path);
+    if (__DEV__) console.log('Uapp.redirect', path); // eslint-disable-line no-console
     if (__CLIENT__) {
       this.app.redirect(path);
-    } else if (__DEV__) console.log('cant history.redirect because it server', path);
+    } else if (__DEV__) console.log('cant history.redirect because it server', path); // eslint-disable-line no-console
   }
 
-  restart() {
-
-  }
+  restart() {}
   started() {
     if (__CLIENT__) {
       removeClassFromHtml('ua_js_no');
       addClassToHtml('ua_js_yes');
     }
   }
-
 
   async checkVersion() {
     const version = typeof __VERSION !== 'undefined' ? __VERSION : typeof __VERSION__ !== 'undefined' ? __VERSION__ : null;  // eslint-disable-line
@@ -460,5 +452,11 @@ export default class Uapp extends Module {
       // locale: this.locale,
       theme: this.theme,
     };
+  }
+
+  _provide() {
+    if (this._provides) return this._provides;
+    this._provides = this.provide();
+    return this._provides;
   }
 }
