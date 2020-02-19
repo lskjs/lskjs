@@ -6,12 +6,10 @@ import unset from 'lodash/unset';
 import get from 'lodash/get';
 import validator from 'validator';
 import BaseApi from '@lskjs/server-api';
-import canonize from '@lskjs/utils/canonize';
-// import canonizeUsername from '@lskjs/utils/canonizeUsername';
-// import canonizeEmail from '@lskjs/utils/canonizeEmail';
-// import canonizePhone from '@lskjs/utils/canonizePhone';
 import transliterate from '@lskjs/utils/transliterate';
-import validateEmail from '@lskjs/utils/validateEmail';
+import canonizeParams from '@lskjs/utils/canonizeParams';
+import canonizePhone from '@lskjs/utils/canonizePhone';
+import validatePhone from '@lskjs/utils/validatePhone';
 import createHelpers from '../utils/createHelpers';
 
 export default class Api extends BaseApi {
@@ -116,13 +114,7 @@ export default class Api extends BaseApi {
   }
 
   async check(req) {
-    const criteria = {};
-    if (req.data.phone) {
-      criteria.phone = canonizePhone(req.data.phone);
-    }
-    if (req.data.email) {
-      criteria.email = canonizeEmail(req.data.email);
-    }
+    const criteria = canonizeParams(req.data);
     if (!Object.keys(criteria)) throw this.e('auth.loginRequired', { status: 400 });
     const { UserModel } = this.app.models;
     const user = await UserModel.findOne(criteria).select('_id');
@@ -133,25 +125,30 @@ export default class Api extends BaseApi {
   //
 
   loginCreds = ['username', 'email', 'phone', 'login'];
-  getUserCriteria(req) {
+  getUserCriteria(rawParams) {
     const { loginCreds = [] } = this;
-
-    return this.helpers.getUserCriteria(req.data, { loginCreds });
+    const params = canonizeParams(rawParams);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const cred of loginCreds) {
+      if (loginCreds.includes(cred) && params[cred]) {
+        return { [cred]: params[cred] };
+      }
+    }
+    throw { code: 'auth.loginEmpty', status: 400 };
   }
 
   async login(req) {
-    const UserModel = this.app.models;
+    const { UserModel } = this.app.models;
     const { password } = req.data;
     if (!password) throw this.app.e('auth.passwordEmpty', { status: 400 });
-    const criteria = this.getUserCriteria(req);
-    const user = await UserModel.findOne(criteria);
+    const user = await UserModel.findOne(this.getUserCriteria(req.data));
     if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
     if (!(await this.helpers.verifyPassword(password, user.password))) {
       throw this.app.e('auth.passwordIncorrect', { status: 400 });
     }
     req.user = user;
     const token = this.helpers.generateAuthToken(user);
-    user.updateVisitedAt();
+    // await this.helpers.updateLoginAt(user);
     return {
       __pack: 1,
       user: await UserModel.prepare(user, { req, withAppState: true }),
@@ -160,32 +157,35 @@ export default class Api extends BaseApi {
   }
 
   async signup(req) {
-    if (!req.data.code) throw '!code';
-    if (req.data.code !== 'iuytrewq') throw 'invalidCode';
-
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { password, ...userFields } = this.getUserFields(req);
-    const criteria = this.getUserCriteria(req);
-    if (userFields.email.includes('@yahoo') || userFields.email.includes('@aol')) {
-      throw this.app.e('auth.yahooaol', { status: 400, criteria });
-    }
-    const existUser = await UserModel.findOne(criteria);
-    if (existUser) throw this.app.e('auth.userExist', { status: 400, criteria });
-    if (!userFields.meta) userFields.meta = {};
-    userFields.meta.approvedEmail = false;
-    const user = new UserModel(userFields);
+    const { UserModel } = this.app.models;
+    const { password, ...userFields } = req.data;
+    const loginParams = canonizeParams(req.data);
+    const criteria = this.getUserCriteria(loginParams);
+    const existUser = await UserModel.findOne(criteria).select('_id');
+    const loginField = Object.keys(criteria)[0];
+    if (existUser) throw this.app.e(`auth.${loginField}Exists`, { status: 400 });
+    const user = new UserModel({
+      ...loginParams,
+      ...userFields, // TODO validation
+    });
     if (password) {
       await this.helpers.setPassword(user, password);
     }
     await user.save();
     req.user = user;
-
-    return this.afterSignup({ req, user });
+    const link = (await this.helpers.genereateEmailApprovedLink) ? this.helpers.genereateEmailApprovedLink(user) : null;
+    this.app.emit('events.auth.signup', { user, link });
+    const token = this.helpers.generateAuthToken(user);
+    return {
+      __pack: 1,
+      signup: true,
+      user: await UserModel.prepare(user, { req, withAppState: true }),
+      token,
+    };
   }
 
   async confirmPassword(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { PermitModel } = this.app.models;
+    const { UserModel, PermitModel } = this.app.models;
     const { code, password } = req.data;
     if (!code) throw '!code';
     const permit = await PermitModel.findOne({
@@ -200,7 +200,6 @@ export default class Api extends BaseApi {
     if (!user) throw '!user';
     await permit.activate();
     await this.helpers.setPassword(user, password);
-    // await user.setPassword(password);
     set(user, 'private.lastUpdates.password', date);
     user.markModified('private.lastUpdates.password');
     await user.save();
@@ -215,129 +214,24 @@ export default class Api extends BaseApi {
     });
   }
 
-  async afterSignup({ req, user }) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const link = (await this.helpers.genereateEmailApprovedLink) ? this.helpers.genereateEmailApprovedLink() : null;
-    this.app.emit('events.auth.signup', { user, link });
-    const token = this.helpers.generateAuthToken(user);
-    return {
-      __pack: 1,
-      signup: true,
-      user: await UserModel.prepare(user, { req, withAppState: true }),
-      token,
-    };
-  }
-
-  // export default (this.app, module) => {
-  //   const { checkNotFound } = this.app.helpers;
-  //   if (!this.app.e) this.app.e = (name, params = {}) => { throw { ...params, name }; };
-  //   // some
-
-  //   const this = {};
-
-  async validate(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const user = await UserModel.findById(req.user._id);
-    if (!user) throw this.app.e('Не найден user в базе', { status: 404 });
-    return {
-      __pack: 1,
-      jwt: req.user,
-      user: await UserModel.prepare(user, { req }),
-      // token: user.getToken()
-      // user,
-    };
-  }
-
-  async silent(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const params = req.data;
-    if (params.username) params.username = canonize(params.username);
-    if (params.email) params.email = canonize(params.email);
-    const username = `__s${Date.now()}__`;
-    const user = new UserModel({
-      username,
-      type: 'silent',
-      ...params,
-    });
-    await user.save();
-    req.user = user;
-    return {
-      __pack: 1,
-      signup: true,
-      user: await UserModel.prepare(user, { req, withAppState: true }),
-      token: user.generateAuthToken(),
-    };
-  }
-
-  getUserFields(req) {
-    const params = req.data;
-    // console.log({ params });
-    if (params.login) {
-      if (!params.username) {
-        params.username = params.login;
-      }
-      if (!params.email && validateEmail(params.login)) {
-        params.email = params.login;
-      } // if email
-    }
-    if (params.username) params.username = canonizeUsername(params.username);
-    if (params.email) params.email = canonize(params.email);
-    // console.log({ params });
-    return params;
-  }
-
-  async afterSignup({ req, user }) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const link = (await user.genereateEmailApprovedLink) ? user.genereateEmailApprovedLink() : null;
-    this.app.emit('events.auth.signup', { user, link });
-
-    return {
-      __pack: 1,
-      signup: true,
-      user: await UserModel.prepare(user, { req, withAppState: true }),
-      token: user.generateAuthToken(),
-    };
-  }
-
-  async signup(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { password, ...userFields } = this.getUserFields(req);
-    const criteria = this.getUserCriteria(req);
-    const existUser = await UserModel.findOne(criteria);
-    if (existUser) throw this.app.e('auth.userExist', { status: 400, criteria });
-    if (!userFields.meta) userFields.meta = {};
-    userFields.meta.approvedEmail = false;
-    const user = new UserModel(userFields);
-    if (password) {
-      await user.setPassword(password);
-    }
-    await user.save();
-    req.user = user;
-
-    return this.afterSignup({ req, user });
-  }
-
-  async login(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const params = req.data;
-
-    if (!params.password) throw this.app.e('auth.emptyPassword', { status: 400 });
-
-    const criteria = this.getUserCriteria(req);
-    const user = await UserModel.findOne(criteria);
-
-    if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
-    if (!(await user.verifyPassword(params.password))) {
-      throw this.app.e('auth.passwordIncorrect', { status: 400 });
-    }
-    req.user = user;
-
-    return {
-      __pack: 1,
-      user: await UserModel.prepare(user, { req, withAppState: true }),
-      token: user.generateAuthToken(),
-    };
-  }
+  // async silent(req) {
+  //   const UserModel = this.app.models.UserModel || this.app.models.User;
+  //   const { login, params } = canonizeParams(req.data);
+  //   const username = `__s${Date.now()}__`;
+  //   const user = new UserModel({
+  //     username,
+  //     type: 'silent',
+  //     ...params,
+  //   });
+  //   await user.save();
+  //   req.user = user;
+  //   return {
+  //     __pack: 1,
+  //     signup: true,
+  //     user: await UserModel.prepare(user, { req, withAppState: true }),
+  //     token: user.generateAuthToken(),
+  //   };
+  // }
 
   async recovery(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
@@ -534,6 +428,7 @@ export default class Api extends BaseApi {
       });
     });
     const phone = canonizePhone(data.phone.number);
+    if (!validatePhone(phone)) throw this.app.e('auth.invalidPhone', { status: 400 });
 
     const provider = 'phone';
     const params = { phone };
@@ -988,35 +883,6 @@ export default class Api extends BaseApi {
     });
     // console.log(this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
     return PermitModel.prepare(permit, { req });
-  }
-  async confirmPassword(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { PermitModel } = this.app.models;
-    const { code, password } = req.data;
-    if (!code) throw '!code';
-    const permit = await PermitModel.findOne({
-      type: 'user.restorePassword',
-      code,
-    });
-    if (!permit) throw { code: 'invalidCode' };
-    if (permit.activatedAt) throw { code: 'activated' };
-    const date = new Date();
-    if (date > permit.expiredAt) throw { code: 'expired' };
-    const user = await UserModel.findById(permit.userId);
-    if (!user) throw '!user';
-    await permit.activate();
-    await user.setPassword(password);
-    set(user, 'private.lastUpdates.password', date);
-    user.markModified('private.lastUpdates.password');
-    await user.save();
-    return Promise.props({
-      __pack: true,
-      user: UserModel.prepare(user, { req }),
-      token: user.generateAuthToken(),
-      data: {
-        permit: PermitModel.prepare(permit, { req }),
-      },
-    });
   }
   async findOneByCode(req) {
     const { code } = req.data;

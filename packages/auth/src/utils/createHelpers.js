@@ -3,9 +3,7 @@ import bcrypt from 'bcryptjs';
 import Promise from 'bluebird';
 import pick from 'lodash/pick';
 import get from 'lodash/get';
-import map from 'lodash/map';
 import jwt from 'jsonwebtoken';
-import canonizeParams from '@lskjs/utils/canonizeParams';
 
 const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);
 const bcryptHash = Promise.promisify(bcrypt.hash);
@@ -22,20 +20,6 @@ export default function createHelpers({ app } = {}) {
   const configJwt = get(app, 'config.jwt', {});
   if (!configJwt.secret) app.log.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
   const helpers = {
-    getUserCriteria(rawParams, { loginCreds = [] } = {}) {
-      const params = canonizeParams(rawParams);
-      // eslint-disable-next-line no-restricted-syntax
-      for (const cred of loginCreds) {
-        if (cred === 'login' && params[cred]) {
-          return { $or: map(params, (value, key) => ({ [key]: value })) };
-        }
-        if (loginCreds.includes(cred) && params[cred]) {
-          return { [cred]: params[cred] };
-        }
-      }
-      throw { code: 'auth.loginEmpty', status: 400 };
-    },
-
     async setPassword(user, password) {
       user.password = await hashPassword(password); // eslint-disable-line no-param-reassign
     },
