@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/elastic",
-  "version": "1.0.0",
+  "version": "1.0.11",
   "description": "LSK module for elastic.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
