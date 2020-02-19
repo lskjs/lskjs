@@ -1,3 +1,3 @@
-import canonize from './canonize';
+import { canonize } from './validateEmail';
 
 export default canonize;

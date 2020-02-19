@@ -1,3 +1,4 @@
-export default function canonize(str = '') {
-  return str.toLowerCase().trim();
-}
+export default (str = '') =>
+  String(str)
+    .toLowerCase()
+    .trim();

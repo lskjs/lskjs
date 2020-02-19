@@ -1,3 +1,5 @@
-export default function canonizePhone(str = '') {
-  return str.replace(/[^0-9]+/gi, '');
-}
+import validatePhone from './validatePhone';
+
+console.log({ validatePhone });
+
+export default validatePhone;

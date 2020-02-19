@@ -1,4 +1,4 @@
-export function secToTime(sec) {
+function secToTime(sec) {
   let s = sec;
   let h = Math.floor(s / 3600);
   s %= 3600;
