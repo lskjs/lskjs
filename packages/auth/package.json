@@ -48,12 +48,12 @@
     "validator": "12.2.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^1.0.6",
+    "@lskjs/apiquery": "1.0.6",
     "@lskjs/db": "1.0.0",
-    "@lskjs/mobx": "^1.0.9",
-    "@lskjs/module": "^1.0.9",
-    "@lskjs/server-api": "^1.0.9",
-    "@lskjs/utils": "^1.0.9",
+    "@lskjs/mobx": "1.0.9",
+    "@lskjs/module": "1.0.9",
+    "@lskjs/server-api": "1.0.9",
+    "@lskjs/utils": "1.0.9",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",

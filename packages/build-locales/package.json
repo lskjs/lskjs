@@ -28,14 +28,14 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/getspreadsheet": "^1.0.0",
-    "@lskjs/utils": "^1.0.9",
-    "csv-parse": "^4.8.5",
-    "csvtojson": "^2.0.10",
+    "@lskjs/getspreadsheet": "1.0.0",
+    "@lskjs/utils": "1.0.9",
+    "csv-parse": "4.8.5",
+    "csvtojson": "2.0.10",
     "jsongrid": "1.0.2",
     "lodash": "4.17.15",
-    "mkdirp": "^1.0.3",
-    "rimraf": "^3.0.2"
+    "mkdirp": "1.0.3",
+    "rimraf": "3.0.2"
   },
   "bin": {
     "build-locales": "./bin/build-locales.js"

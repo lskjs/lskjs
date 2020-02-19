@@ -32,7 +32,7 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/db": "^1.0.0",
+    "@lskjs/db": "1.0.0",
     "eventemitter3": "4.0.0",
     "imap": "0.8.19",
     "mailparser": "2.7.7",

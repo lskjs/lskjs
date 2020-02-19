@@ -32,33 +32,31 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "0.19.2",
     "core-decorators": "0.20.0",
-    "emotion": "^10.0.27",
-    "emotion-theming": "^10.0.27",
-    "eventemitter3": "^4.0.0",
+    "emotion": "10.0.27",
+    "emotion-theming": "10.0.27",
+    "eventemitter3": "4.0.0",
     "favico.js": "0.3.10",
-    "history": "^4.10.1",
-    "js-cookie": "^2.2.1",
-    "mobx-react-devtools": "^6.1.1",
+    "history": "4.10.1",
+    "js-cookie": "2.2.1",
     "react-dom": "16.8.5",
     "react-fastclick": "3.0.2",
-    "universal-router": "^8.3.0"
+    "universal-router": "8.3.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^1.0.6",
-    "@lskjs/autobind": "^1.0.0",
-    "@lskjs/i18": "^1.0.7",
+    "@lskjs/apiquery": "1.0.6",
+    "@lskjs/autobind": "1.0.0",
+    "@lskjs/i18": "1.0.7",
     "@lskjs/log": "1.0.1",
-    "@lskjs/module": "^1.0.9",
-    "@lskjs/scroll": "^1.1.0",
-    "@lskjs/utils": "^1.0.9",
-    "bluebird": "^3.7.2",
+    "@lskjs/module": "1.0.9",
+    "@lskjs/scroll": "1.1.0",
+    "@lskjs/utils": "1.0.9",
+    "bluebird": "3.7.2",
     "lodash": "4.17.15",
-    "mobx": "^5.15.4",
-    "mobx-react": "^6.1.7",
+    "mobx-react": "6.1.8",
     "moment": "2.24.0",
-    "prop-types": "^15.7.2",
+    "prop-types": "15.7.2",
     "react": "16.8.6"
   },
   "contributors": [
@@ -77,10 +75,9 @@
     "@lskjs/utils": "*",
     "bluebird": "*",
     "lodash": "*",
-    "mobx": "*",
-    "mobx-react": "*",
     "moment": "*",
     "prop-types": "*",
-    "react": "*"
+    "react": "*",
+    "mobx-react": "*"
   }
 }

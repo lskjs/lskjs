@@ -28,6 +28,6 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "^1.0.9"
+    "@lskjs/utils": "1.0.9"
   }
 }

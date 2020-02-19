@@ -30,7 +30,7 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "elasticsearch": "^16.6.0",
+    "elasticsearch": "16.6.0",
     "mongoose-elasticsearch-xp-async": "0.1.2"
   },
   "devDependencies": {

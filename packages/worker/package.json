@@ -30,9 +30,9 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "devDependencies": {
-    "@lskjs/db": "^1.0.0",
+    "@lskjs/db": "1.0.0",
     "@lskjs/log": "1.0.1",
-    "@lskjs/module": "^1.0.9",
+    "@lskjs/module": "1.0.9",
     "lodash": "4.17.15"
   },
   "peerDependencies": {

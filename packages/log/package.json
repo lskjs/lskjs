@@ -28,13 +28,13 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@browser-bunyan/levels": "^1.5.3",
-    "@lskjs/bunyan": "^1.0.0",
-    "browser-bunyan": "^1.5.3",
-    "source-map-support": "^0.5.16"
+    "@browser-bunyan/levels": "1.5.3",
+    "@lskjs/bunyan": "1.0.0",
+    "browser-bunyan": "1.5.3",
+    "source-map-support": "0.5.16"
   },
   "devDependencies": {
-    "axios": "^0.19.2"
+    "axios": "0.19.2"
   },
   "peerDependencies": {
     "axios": "*"

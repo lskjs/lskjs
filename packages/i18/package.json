@@ -32,13 +32,13 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "i18next": "^19.1.0",
-    "i18next-xhr-backend": "^3.2.2"
+    "i18next": "19.1.0",
+    "i18next-xhr-backend": "3.2.2"
   },
   "devDependencies": {
-    "bluebird": "^3.7.2",
-    "js-cookie": "^2.2.1",
-    "mobx": "^5.15.4",
+    "bluebird": "3.7.2",
+    "js-cookie": "2.2.1",
+    "mobx": "5.15.4",
     "moment": "2.24.0"
   },
   "peerDependencies": {

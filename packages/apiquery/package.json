@@ -28,12 +28,12 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "form-data": "^3.0.0",
-    "qs": "^6.9.1",
-    "socket.io-client": "^2.3.0"
+    "form-data": "3.0.0",
+    "qs": "6.9.1",
+    "socket.io-client": "2.3.0"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "0.19.2",
     "chai": "4.2.0",
     "lodash": "4.17.15"
   },

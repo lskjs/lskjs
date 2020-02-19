@@ -31,14 +31,14 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "crypto-js": "^4.0.0"
+    "crypto-js": "4.0.0"
   },
   "devDependencies": {
-    "@lskjs/db": "^1.0.0",
-    "@lskjs/mobx": "^1.0.9",
-    "bluebird": "^3.7.2",
+    "@lskjs/db": "1.0.0",
+    "@lskjs/mobx": "1.0.9",
+    "bluebird": "3.7.2",
     "lodash": "4.17.15",
-    "mobx": "^5.15.4",
+    "mobx": "5.15.4",
     "moment": "2.24.0"
   },
   "peerDependencies": {

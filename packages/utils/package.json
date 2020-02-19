@@ -37,15 +37,11 @@
     "@types/lodash": "4.14.149",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
-    "moment": "2.24.0",
     "react": "16.8.6",
     "serialize-javascript": "2.1.2"
   },
   "peerDependencies": {
     "@babel/polyfill": "*",
     "lodash": "*"
-  },
-  "optionalDependencies": {
-    "moment": "*"
   }
 }
