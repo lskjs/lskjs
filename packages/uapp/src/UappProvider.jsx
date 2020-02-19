@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider as DefaultMobxProvider } from 'mobx-react';
 import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
+// import DefaultLinkProvider from '@lskjs/ui/Link/LinkProvider';
+
 
 const UappProvider = ({ uapp, children: rawChildren }) => {
   let children = <>{rawChildren}</>;
@@ -10,6 +12,15 @@ const UappProvider = ({ uapp, children: rawChildren }) => {
   const stores = (uapp && uapp._provide && uapp._provide()) || (uapp && uapp.provide && uapp.provide()) || {};
   if (stores && Object.keys(stores).length && MobxProvider) {
     children = <MobxProvider {...stores}>{children}</MobxProvider>;
+  }
+
+  const { LinkProvider } = UappProvider;
+  if (uapp && uapp.history && LinkProvider) {
+    children = (
+      <LinkProvider onClick={url => uapp.history.push(url)}>
+        {children}
+      </LinkProvider>
+    );
   }
 
   const { ThemeProvider } = UappProvider;
@@ -28,5 +39,6 @@ UappProvider.propTypes = {
 };
 UappProvider.MobxProvider = DefaultMobxProvider;
 UappProvider.ThemeProvider = DefaultThemeProvider;
+// UappProvider.LinkProvider = DefaultLinkProvider;
 
 export default UappProvider;

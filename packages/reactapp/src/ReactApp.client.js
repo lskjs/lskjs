@@ -144,7 +144,7 @@ export default class ReactApp extends Module {
   }
 
   async getPage(req) {
-    const uapp = this.uapp || (await this.getUapp({ req }));
+    const uapp = await this.getUapp({ req });
     if (this.reqPromise) this.reqPromise.cancel();
     const reqPromise = uapp.resolve({
       path: req.path,
