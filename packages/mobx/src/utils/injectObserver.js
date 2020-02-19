@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import pick from 'lodash/pick';
@@ -22,4 +21,3 @@ export default (fields, creator) => {
   }
   return Component2;
 };
-
