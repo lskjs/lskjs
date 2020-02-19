@@ -26,26 +26,24 @@ export default class Page {
   }
 
   renderTitle() {
-    return (this.state.metas || []).map(t => t.title).reverse().join(' - ');
+    return (this.state.metas || [])
+      .map(t => t.title)
+      .reverse()
+      .join(' - ');
   }
 
   onExit(fn) {
     debug('Page.onExit');
     const { onExit = [] } = this.state;
     this.setState({
-      onExit: [
-        ...onExit,
-        fn,
-      ],
+      onExit: [...onExit, fn],
     });
     return this;
   }
 
-
   scrollTo(id) {
     console.log(`Not realized: Uapp.scrollTo(${id})`); // eslint-disable-line no-console
   }
-
 
   async exit() {
     debug('Page.exit');
@@ -80,7 +78,8 @@ export default class Page {
         console.error(err); // eslint-disable-line no-console
       }
     }
-    if (__CLIENT__ && this.uapp.checkVersion) { // / !!!!!!!!!!!!!
+    if (__CLIENT__ && this.uapp.checkVersion) {
+      // / !!!!!!!!!!!!!
       this.uapp.checkVersion();
     }
     throw err;
@@ -92,7 +91,6 @@ export default class Page {
     // const loading = this.state.loading || <Loading full />;
     return this.component(loading);
   }
-
 
   async next(next) {
     debug('Page.next');
@@ -164,7 +162,7 @@ export default class Page {
     let Component;
     let props = {};
     if (Array.isArray(this.state.component)) {
-      ([Component, props] = this.state.component);
+      [Component, props] = this.state.component;
     } else {
       Component = this.state.component;
     }
@@ -192,23 +190,11 @@ export default class Page {
     });
   }
 
-  getRootComponentProps() {
-    debug('Page.getRootComponentProps');
-    return {
-      uapp: this.uapp,
-      history: this.uapp.history,
-    };
-  }
-
   render() {
     debug('Page.renderRoot');
     const children = this.renderComponentWithLayout();
-    if (!this.Root) return children;
-    const { Root } = this;
-    return (
-      <Root {...this.getRootComponentProps()}>
-        {children}
-      </Root>
-    );
+    const { Provider } = this;
+    if (!Provider) return children;
+    return <Provider uapp={this.uapp}>{children}</Provider>;
   }
 }

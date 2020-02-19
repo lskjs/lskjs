@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider as DefaultMobxProvider } from 'mobx-react';
 import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
 
-const UappProvider = ({ uapp, children: rawChildren }) => {
+function UappProvider({ uapp, children: rawChildren }) {
   let children = <>{rawChildren}</>;
 
   const { MobxProvider } = this;
@@ -19,7 +19,7 @@ const UappProvider = ({ uapp, children: rawChildren }) => {
   }
 
   return children;
-};
+}
 
 UappProvider.propTypes = {
   uapp: PropTypes.instanceOf(PropTypes.object).isRequired,
@@ -27,3 +27,5 @@ UappProvider.propTypes = {
 };
 UappProvider.MobxProvider = DefaultMobxProvider;
 UappProvider.ThemeProvider = DefaultThemeProvider;
+
+export default UappProvider;

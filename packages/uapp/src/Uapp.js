@@ -16,7 +16,7 @@ import Module from '@lskjs/module';
 import logger from '@lskjs/log';
 import autobind from '@lskjs/autobind';
 import e from '@lskjs/utils/e';
-import Root from './UappProvider';
+import UappProvider from './UappProvider';
 import wrapApi from './wrapApi';
 import DefaultPage from './Page';
 import defaultTheme from './theme';
@@ -30,7 +30,7 @@ export default class Uapp extends Module {
   Page = DefaultPage;
   pageProps = {};
   rootState = {};
-  Root = Root;
+  Provider = UappProvider;
   theme = defaultTheme;
   scrollTo = scrollTo;
   i18 = new I18({ ctx: this });
@@ -370,7 +370,7 @@ export default class Uapp extends Module {
       await this.page.exit();
     }
     await this.page.init({
-      Root: this.Root,
+      Provider: this.Provider,
       uapp: this,
       state: {},
     });
