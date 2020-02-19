@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "LSK universal react app wrapper",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
