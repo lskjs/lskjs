@@ -1,4 +1,3 @@
-import React from 'react';
 import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
 import qs from 'qs';
@@ -28,7 +27,8 @@ export default class ReactApp extends Module {
   }
 
   @autobind
-  historyListen(location) { // , action
+  historyListen(location) {
+    // , action
     if (location.method === 'replaceState') return;
     this.render();
   }
@@ -36,7 +36,7 @@ export default class ReactApp extends Module {
   async init() {
     if (!this.rootState) this.rootState = this.getRootState();
     // console.log('init, rootState', this.rootState);
-    this.config = merge({}, this.config || {}, this.rootState && this.rootState.config || {});
+    this.config = merge({}, this.config || {}, (this.rootState && this.rootState.config) || {});
     this.rootState.config = null; // не понмю для чего
     if (!this.container) this.container = document.getElementById('root');
     this.history = createBrowserHistory({
@@ -49,20 +49,22 @@ export default class ReactApp extends Module {
     this.render();
   }
 
-
   /**
    * Редирект без сохранения в history
    * @param {String} path Новый url для редиректа
    */
   redirect(path, saveInHistory = false) {
-    if (DEBUG) console.log('ReactApp.redirect', path);
-    setTimeout(() => {
-      if (saveInHistory) {
-        this.history.replace(path);
-      } else {
-        this.history.push(path);
-      }
-    }, DEBUG ? 1000 : 0);
+    if (DEBUG) console.log('ReactApp.redirect', path); // eslint-disable-line no-console
+    setTimeout(
+      () => {
+        if (saveInHistory) {
+          this.history.replace(path);
+        } else {
+          this.history.push(path);
+        }
+      },
+      DEBUG ? 1000 : 0,
+    );
   }
 
   // render = () => this.render2()
@@ -78,7 +80,7 @@ export default class ReactApp extends Module {
       page = await this.getPage(req);
     } catch (err) {
       if (err && err.type === 'cancel') {
-        console.log('CSR.canceled');
+        console.error('CSR.canceled'); // eslint-disable-line no-console
         return;
       }
       this.log.error('CSR getPage err (ROUTER ERROR)', err);
@@ -105,14 +107,14 @@ export default class ReactApp extends Module {
     const component = page.render();
     // Check if the root node has any children to detect if the app has been prerendered
     if (this.container.hasChildNodes()) {
-      this.appInstance = ReactDOM.hydrate(component, this.container, this.postRender);
+      ReactDOM.hydrate(component, this.container, this.postRender);
     } else {
-      this.appInstance = ReactDOM.render(component, this.container, this.postRender);
+      ReactDOM.render(component, this.container, this.postRender);
     }
   }
 
   renderError(error = {}) {
-    console.error('App.renderError', error);
+    console.error('App.renderError', error); // eslint-disable-line no-console
     // document.title = `Error: ${error.message}`;
     // const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
     // this.appInstance = ReactDOM.render(root, this.container, this.postRender);
@@ -142,7 +144,7 @@ export default class ReactApp extends Module {
   }
 
   async getPage(req) {
-    const uapp = this.uapp || await this.getUapp({ req });
+    const uapp = this.uapp || (await this.getUapp({ req }));
     if (this.reqPromise) this.reqPromise.cancel();
     const reqPromise = uapp.resolve({
       path: req.path,
