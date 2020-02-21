@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "history": "4.10.1",
+    "qs": "^6.9.1",
     "redbox-react": "1.6.0"
   },
   "devDependencies": {

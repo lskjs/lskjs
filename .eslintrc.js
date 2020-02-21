@@ -103,6 +103,7 @@ const res = {
   globals: {
     __SERVER__: true,
     __CLIENT__: true,
+    __STAGE__: true,
     __DEV__: true,
   },
   rules,
