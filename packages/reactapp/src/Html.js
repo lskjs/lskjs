@@ -6,7 +6,7 @@ export default class Html {
     Object.assign(this, props);
   }
 
-  publicDir = `${process.cwd()}/public`;
+  publicDir = __DEV__ ? `${process.cwd()}/public` : `${process.cwd()}/../public`;
   assets(url) {
     const str = require('fs').readFileSync(`${this.publicDir}/asset-manifest.json`);
     const json = JSON.parse(str);
@@ -123,7 +123,7 @@ ${js}
     if (!this.assets) return '';
     if (type === 'css') {
       try {
-        return this.assets('main.css');
+        return this.assets('main.css') || '';
       } catch (err) {
         if (__DEV__) {
           console.error('renderAssets', type, err); // eslint-disable-line no-console
@@ -133,9 +133,11 @@ ${js}
     }
     if (type === 'js') {
       try {
-        return require('fs')
-          .readFileSync(`${this.publicDir}/footer.html`)
-          .toString();
+        return (
+          require('fs')
+            .readFileSync(`${this.publicDir}/footer.html`)
+            .toString() || ''
+        );
       } catch (err) {
         if (__DEV__) {
           console.error('renderAssets', type, err); // eslint-disable-line no-console

@@ -47,7 +47,7 @@ export default class AuthServerModule extends Module {
   getPassportStrategy(passport) {
     const strategy = this.strategies[passport.provider];
     if (!strategy) {
-      this.app.log.error('AuthModule !strategy');  //eslint-disable-line no-console
+      this.app.log.error('AuthModule !strategy');
     }
     return strategy;
   }
@@ -66,7 +66,7 @@ export default class AuthServerModule extends Module {
   }
   async init() {
     if (!this.config) {
-      this.app.log.warn('config.auth is missing'); // eslint-disable-line no-console
+      this.app.log.warn('config.auth is missing');
       this.config = {};
     }
 
@@ -85,8 +85,6 @@ export default class AuthServerModule extends Module {
 
     forEach(providers, config => {
       const { provider, type, ...strategyConfig } = config;
-      console.log({ provider, type });
-
       const StrategyProvider = this.strategyProviders[type];
       if (!StrategyProvider) return;
       const strategy = new StrategyProvider({
