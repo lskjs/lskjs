@@ -119,7 +119,8 @@ export default class ReactApp extends Module {
       }
       if (get(page, 'state.redirect')) {
         // eslint-disable-next-line no-shadow
-        const { redirect, status = 300 } = get(page, 'state', {});
+        const { redirect: redirectArgs, status = 300 } = get(page, 'state', {});
+        const [redirect] = redirectArgs;
         if (__DEV__) {
           this.log.debug('ReactApp.redirect', redirect);
           await Promise.delay(2000);

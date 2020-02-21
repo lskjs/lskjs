@@ -129,10 +129,11 @@ export default class Page {
     return this;
   }
 
-  redirect(redirect) {
+  redirect(...args) {
+    const [redirect] = args;
     debug('Page.redirect', redirect);
     if (this.disabled) return this;
-    this.state.redirect = redirect;
+    this.state.redirect = args;
     return this;
   }
 

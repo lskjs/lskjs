@@ -58,9 +58,9 @@ export default class ReactApp extends Module {
     setTimeout(
       () => {
         if (saveInHistory) {
-          this.history.replace(path);
-        } else {
           this.history.push(path);
+        } else {
+          this.history.replace(path);
         }
       },
       DEBUG ? 1000 : 0,
@@ -97,7 +97,7 @@ export default class ReactApp extends Module {
     }
 
     if (page.state.redirect) {
-      this.redirect(page.state.redirect);
+      this.redirect(...page.state.redirect);
       return;
     }
 
@@ -107,14 +107,14 @@ export default class ReactApp extends Module {
     const component = page.render();
     // Check if the root node has any children to detect if the app has been prerendered
     if (this.container.hasChildNodes()) {
-      ReactDOM.hydrate(component, this.container, this.postRender);
+      ReactDOM.hydrate(component, this.container);
     } else {
-      ReactDOM.render(component, this.container, this.postRender);
+      ReactDOM.render(component, this.container);
     }
   }
 
   renderError(error = {}) {
-    console.error('App.renderError', error); // eslint-disable-line no-console
+    console.error('App.renderError TODO:', error); // eslint-disable-line no-console
     // document.title = `Error: ${error.message}`;
     // const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
     // this.appInstance = ReactDOM.render(root, this.container, this.postRender);
@@ -155,10 +155,5 @@ export default class ReactApp extends Module {
     if (req.isCanceled && reqPromise.isCanceled()) throw 'cancel';
     this.reqPromise = null;
     return uapp.page;
-  }
-
-  @autobind
-  postRender() {
-    this.rootState.renderCount = (this.rootState.renderCount || 0) + 1;
   }
 }
