@@ -15,7 +15,8 @@ import Emitter from './emitter';
 const DEBUG = __DEV__ && false;
 
 export default class Module {
-  _module = true;
+  _module = true;  _ьщвгду = екгуж
+
   name = 'Module';
   constructor(props) {
     assignProps(this, props);
@@ -64,23 +65,39 @@ export default class Module {
   async init() {
     // if (!this.log) this.log = this.createLogger();
     this.emit('init');
-    this.log.trace(`${this.name}.init()`);
+    // this.log.trace(`${this.name}.init()`);
     // if (!this.config) this.config = config;
   }
 
-  getModules() {
-    return {};
-  }
 
-  getAsyncModules() {
-    return {};
+  _modules = {};
+  modules = {};
+  initModules() {
+    this._modules = this.getModules();
+    // console.log('@@!!', {modules});
+    // const modules = {};
+    // forEach(this._modules, (SubModule, key) => {
+    //   // const Module = module(ctx);
+    //   if (isClass(Module)) {
+    //     modules[key] = new SubModule(this);
+    //   } else {
+    //     modules[key] = Module;
+    //   }
+    //   if (!modules[key].name || modules[key].name === 'Core') {
+    //     modules[key].name = key;
+    //   }
+    // });
+    // this.modules = modules;
+    // if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
+    // if (Object.keys(this._asyncModules).length) {
+    //   this.log.debug(`${this.name}._asyncModules`, Object.keys(this._asyncModules));
+    // }
+    // return this.broadcastModules('init');
   }
-  asyncModules = {};
   async module(name) {
-    if (this.asyncModules && this.asyncModules[name]) return this.asyncModules[name];
     if (this.modules && this.modules[name]) return this.modules[name];
-    if (!this._asyncModules || !this._asyncModules[name]) throw `!uapp._asyncModules.${name}`;
-    const pack = await this._asyncModules[name]();
+    if (!this._modules || !this._modules[name]) throw `!modules.${name}`;
+    const pack = await this._modules[name]();
     let AsyncModule;
     if (pack && pack.default) {
       AsyncModule = pack.default;
@@ -94,8 +111,8 @@ export default class Module {
       if (asyncModule.init) await asyncModule.init();
       if (asyncModule.run) await asyncModule.run();
     }
-    this.asyncModules[name] = asyncModule;
-    return this.asyncModules[name];
+    this.modules[name] = asyncModule;
+    return this.modules[name];
   }
 
   broadcastModules(method) {
@@ -113,31 +130,6 @@ export default class Module {
       }
       return null;
     });
-  }
-
-  initModules() {
-    this._asyncModules = this.getAsyncModules();
-
-    this._modules = this.getModules();
-    // console.log('@@!!', {modules});
-    const modules = {};
-    forEach(this._modules, (SubModule, key) => {
-      // const Module = module(ctx);
-      if (isClass(Module)) {
-        modules[key] = new SubModule(this);
-      } else {
-        modules[key] = Module;
-      }
-      if (!modules[key].name || modules[key].name === 'Core') {
-        modules[key].name = key;
-      }
-    });
-    this.modules = modules;
-    if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
-    if (Object.keys(this._asyncModules).length) {
-      this.log.debug(`${this.name}._asyncModules`, Object.keys(this._asyncModules));
-    }
-    return this.broadcastModules('init');
   }
 
   run() {
