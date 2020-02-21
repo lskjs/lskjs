@@ -12,9 +12,7 @@ import transliterate from '@lskjs/utils/transliterate';
 import canonizeParams from '@lskjs/utils/canonizeParams';
 import canonizePhone from '@lskjs/utils/canonizePhone';
 import validatePhone from '@lskjs/utils/validatePhone';
-import getReqDomain from '@lskjs/utils/getReqDomain';
 import getReqOrigin from '@lskjs/utils/getReqOrigin';
-import getReqUrl from '@lskjs/utils/getReqUrl';
 import createHelpers from '../utils/createHelpers';
 
 export default class Api extends BaseApi {
@@ -274,15 +272,9 @@ export default class Api extends BaseApi {
     };
   }
 
-  async info(req) {
-      console.log(444);
-
+  async info() {
     const authModule = await this.app.module('auth');
-    if (!authModule) return []
-    // settings: 'https://developers.facebook.com/apps/341748562873675/dashboard/',
-    // const providers = get(this, 'app.config.auth.providers', []);
-    // console.log('authModule.strategies', authModule.strategies);
-    
+    if (!authModule) return [];
     return {
       providers: map(authModule.strategies, (strategy, provider) => ({
         provider,
@@ -291,11 +283,9 @@ export default class Api extends BaseApi {
     };
   }
 
-
-
   async socialAuth(req, res, next) {
     const authModule = await this.app.module('auth');
-    if (!authModule) throw '!authModule'
+    if (!authModule) throw '!authModule';
     const { provider } = req.params;
     const origin = getReqOrigin(req);
     const strategy = authModule.strategies[provider];
@@ -308,7 +298,7 @@ export default class Api extends BaseApi {
 
   async socialCallback(req, res) {
     const authModule = await this.app.module('auth');
-    if (!authModule) throw '!authModule'
+    if (!authModule) throw '!authModule';
     const { provider } = req.params;
     return new Promise((resolve, reject) => {
       authModule.passportService.authenticate(
@@ -323,7 +313,7 @@ export default class Api extends BaseApi {
     });
   }
 
-  //////////////////////////
+  // ////////////////////////
 
   async socialLogin(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
@@ -580,7 +570,6 @@ export default class Api extends BaseApi {
     console.log('DEPRECATED lsk-auth  emailApprove => approveEmail'); //eslint-disable-line
     return this.approveEmail(req);
   }
-
 
   async phoneCode(req) {
     if (!this.app.modules.auth.config.sms) throw '!module.config.sms';

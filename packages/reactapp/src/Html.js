@@ -6,9 +6,9 @@ export default class Html {
     Object.assign(this, props);
   }
 
-  publicDir = `${__dirname}/../public`;
+  publicDir = `${process.cwd()}/public`;
   assets(url) {
-    const str = require('fs').readFileSync(this.publicDir + '/asset-manifest.json');
+    const str = require('fs').readFileSync(`${this.publicDir}/asset-manifest.json`);
     const json = JSON.parse(str);
     return json[url];
   }
@@ -30,7 +30,7 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
 
   // renderFavicon = require('./renderFavicon').default
 
-  renderFavicon = () => '<!-- favicon -->'
+  renderFavicon = () => '<!-- favicon -->';
 
   renderHead() {
     const js = this.renderJS();
@@ -74,7 +74,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   }
 
   getHtmlClass() {
-    const ua = {};// useragent.is(req.headers['user-agent'])
+    const ua = {}; // useragent.is(req.headers['user-agent'])
     ua.js = false;
     ua.touchable = false;
 
@@ -84,9 +84,8 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
   renderStyle() {
     const { styles = [] } = this;
-    return `<style id="css">${(styles).join('\n')}</style>`;
+    return `<style id="css">${styles.join('\n')}</style>`;
   }
-
 
   renderJS() {
     const { js = '' } = this;
@@ -98,7 +97,7 @@ ${js}
 
   renderGlobals() {
     const { globals = {} } = this;
-    return map(globals, (val, key) => (`window['${key}'] = ${JSON.stringify(val)};\n`)).join('');
+    return map(globals, (val, key) => `window['${key}'] = ${JSON.stringify(val)};\n`).join('');
   }
 
   renderChunks(type, chunk = 'client') {
@@ -108,17 +107,13 @@ ${js}
     if (type === 'css' && assets) {
       return assets
         .filter(filename => filename.includes('.css'))
-        .map(filename => (
-          `<link rel="stylesheet" href="${filename}">`
-        ))
+        .map(filename => `<link rel="stylesheet" href="${filename}">`)
         .join('\n');
     }
     if (type === 'js' && assets) {
       return assets
         .filter(filename => filename.includes('.js'))
-        .map(filename => (
-          `<script id="js" src="${filename}"></script>`
-        ))
+        .map(filename => `<script id="js" src="${filename}"></script>`)
         .join('\n');
     }
     return '';
@@ -135,16 +130,17 @@ ${js}
         }
         return '';
       }
-      return this.assets('main.css');
     }
     if (type === 'js') {
       try {
-        return require('fs').readFileSync(this.publicDir + `/footer.html`).toString()
-      } catch(err){
+        return require('fs')
+          .readFileSync(`${this.publicDir}/footer.html`)
+          .toString();
+      } catch (err) {
         if (__DEV__) {
           console.error('renderAssets', type, err); // eslint-disable-line no-console
         }
-        return ''
+        return '';
       }
     }
     return '';
@@ -181,7 +177,6 @@ window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)}
 </script>
 `;
   }
-
 
   render() {
     return `\

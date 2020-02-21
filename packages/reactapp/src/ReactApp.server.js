@@ -4,37 +4,38 @@ import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
 import Promise from 'bluebird';
 import autobind from '@lskjs/autobind';
-import antimergeDeep from '@lskjs/utils/antimergeDeep';
+// import antimergeDeep from '@lskjs/utils/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
 // import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
 export default class ReactApp extends Module {
-  name = 'App'; 
+  name = 'App';
 
   constructor(params = {}) {
     super(params);
     Object.assign(this, params);
   }
 
-  getRootState({ req } = {}) {
+  getRootState() {
+    // ({ req } = {}) {
     return { __EMPTY__: true };
-    const rootState = {
-      reqId: req.reqId,
-      token: req.token,
-      user: req.user,
-      ...(this.rootState || {}),
-    };
-    if (this.config.remoteConfig) {
-      const realConfig = this.config.client || {};
-      if (__DEV__) {
-        rootState.config = realConfig;
-      } else {
-        rootState.config = antimergeDeep(realConfig, this.initConfigClient);
-      }
-    }
-    return rootState;
+    // const rootState = {
+    //   reqId: req.reqId,
+    //   token: req.token,
+    //   user: req.user,
+    //   ...(this.rootState || {}),
+    // };
+    // if (this.config.remoteConfig) {
+    //   const realConfig = this.config.client || {};
+    //   if (__DEV__) {
+    //     rootState.config = realConfig;
+    //   } else {
+    //     rootState.config = antimergeDeep(realConfig, this.initConfigClient);
+    //   }
+    // }
+    // return rootState;
   }
 
   getAssetsAndChunks() {
@@ -83,7 +84,7 @@ export default class ReactApp extends Module {
     const content = await render(delemitter);
     const [before, after] = content.split(delemitter);
     res.write(before);
-    const stream = renderToNodeStream(component); //.pipe(renderStylesToNodeStream());
+    const stream = renderToNodeStream(component); // .pipe(renderStylesToNodeStream());
     stream.pipe(res, { end: false });
     stream.on('end', () => {
       res.write(after);
@@ -141,13 +142,10 @@ export default class ReactApp extends Module {
       try {
         if (strategy === 'nodeStream') {
           // рендерим потом асинхронно
+        } else if (strategy === 'staticMarkup') {
+          content = renderToStaticMarkup(component);
         } else {
-          if (strategy === 'staticMarkup') {
-            content = renderToStaticMarkup(component);
-          } else {
-            content = renderToString(component);
-          }
-          // content = renderStylesToString(content);
+          content = renderToString(component);
         }
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactDOM.renderToStaticMarkup(component)'] };
@@ -160,7 +158,7 @@ export default class ReactApp extends Module {
         if (this.log && this.log.error) {
           this.log.error(text, err);
         } else {
-          console.error(text, err);
+          console.error(text, err); // eslint-disable-line no-console
         }
         content = `<pre>${text}${err ? JSON.stringify(err.stack) : ''}</pre>`;
       } else {
@@ -184,7 +182,7 @@ export default class ReactApp extends Module {
       if (this.log && this.log.error) {
         this.log.error(content, err2);
       } else {
-        console.error(content, err2);
+        console.error(content, err2); // eslint-disable-line no-console
       }
     }
 

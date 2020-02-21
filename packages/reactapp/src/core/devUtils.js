@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 if (module.hot || process.env.NODE_ENV !== 'production') {
