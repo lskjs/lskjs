@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider as DefaultMobxProvider } from 'mobx-react';
 import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
-// import DefaultLinkProvider from '@lskjs/ui/Link/LinkProvider';
+import DefaultLinkProvider from '@lskjs/link/LinkProvider';
 
 
 const UappProvider = ({ uapp, children: rawChildren }) => {
@@ -39,6 +39,6 @@ UappProvider.propTypes = {
 };
 UappProvider.MobxProvider = DefaultMobxProvider;
 UappProvider.ThemeProvider = DefaultThemeProvider;
-// UappProvider.LinkProvider = DefaultLinkProvider;
+UappProvider.LinkProvider = DefaultLinkProvider;
 
 export default UappProvider;
