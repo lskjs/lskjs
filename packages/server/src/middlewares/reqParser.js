@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -9,12 +10,8 @@ const { middlewares: defaultOptions } = config;
 export default ctx => {
   const middlewares = [];
   const preMiddlewares = [
-    [bodyParser.json, get(ctx, 'serverConfig.middlewares.bodyParser.json'), get(defaultOptions, 'bodyParser.json')],
-    [
-      bodyParser.urlencoded,
-      get(ctx, 'serverConfig.middlewares.bodyParser.urlencoded'),
-      get(defaultOptions, 'bodyParser.urlencoded'),
-    ],
+    [bodyParser.json, get(ctx, 'serverConfig.middlewares.bodyParserJson'), get(defaultOptions, 'bodyParserJson')],
+    [express.urlencoded, get(ctx, 'serverConfig.middlewares.urlencoded'), get(defaultOptions, 'urlencoded')],
     [cookieParser, get(ctx, 'serverConfig.middlewares.cookieParser'), get(defaultOptions, 'cookieParser')],
     [cors, get(ctx, 'serverConfig.middlewares.cors'), get(defaultOptions, 'cors')],
   ];

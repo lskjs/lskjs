@@ -26,7 +26,7 @@ export default class ServerApp extends Module {
   Api = Api;
   i18 = new I18({ ctx: this });
   async init() {
-    super.init();
+    await super.init();
     if (DEBUG) this.log.trace('ServerApp init');
     this.express = this.createExpress();
     this.app = this.express; // Fallback
