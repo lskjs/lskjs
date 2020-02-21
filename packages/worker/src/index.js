@@ -4,10 +4,10 @@ import forEach from 'lodash/forEach';
 import mapValues from 'lodash/mapValues';
 import map from 'lodash/map';
 
-export default class extends Module {
+export default class Worker extends Module {
   name = 'Worker';
   async init() {
-    super.init();
+    await super.init();
     this.log.trace('Worker init');
     this.db = await this.getDatabase();
   }

@@ -23,10 +23,8 @@ export default {
     accessLogger: __DEV__,
     reqData: true,
     cookieParser: true,
-    bodyParser: {
-      json: true,
-      urlencoded: true,
-    },
+    bodyParserJson: true,
+    urlencoded: { extended: true },
     cors: __DEV__,
   },
 };
