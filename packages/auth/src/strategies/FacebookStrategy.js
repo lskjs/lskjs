@@ -13,6 +13,12 @@ export default class FacebookStrategy extends BaseStrategy {
     const { id: providerId, ...params } = data;
     return { ...params, providerId };
   }
+  getInfo() {
+    return {
+      ...super.getInfo(),
+      settings: 'https://developers.facebook.com/apps/' + this.config.clientId + '/dashboard/',
+    }
+  }
 
   async getProfile(passport) {  //eslint-disable-line
     const fields = [

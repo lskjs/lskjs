@@ -2,6 +2,8 @@
 import merge from 'lodash/merge';
 import random from 'lodash/random';
 import set from 'lodash/set';
+import map from 'lodash/map';
+import omit from 'lodash/omit';
 import unset from 'lodash/unset';
 import get from 'lodash/get';
 import validator from 'validator';
@@ -11,6 +13,11 @@ import canonizeParams from '@lskjs/utils/canonizeParams';
 import canonizePhone from '@lskjs/utils/canonizePhone';
 import validatePhone from '@lskjs/utils/validatePhone';
 import createHelpers from '../utils/createHelpers';
+
+
+const getReqDomain = (req) => req.get('host').toLowerCase().replace(/^www\./, '');
+const getReqOrigin = (req) => req.protocol + '://' + getReqDomain(req)
+const getReqUrl = (req) => getReqOrigin(req)+ req.originalUrl;
 
 export default class Api extends BaseApi {
   constructor(...props) {
@@ -50,6 +57,7 @@ export default class Api extends BaseApi {
       '/confirmPassword': ::this.confirmPassword,
       '/getPermit': ::this.getPermit,
 
+      '/info': ::this.info,
       // social auth init
       '/:provider': ::this.socialAuth,
       '/:provider/auth': ::this.socialAuth,
@@ -267,6 +275,57 @@ export default class Api extends BaseApi {
       emailSended: true,
     };
   }
+
+  async info(req) {
+      console.log(444);
+
+    const authModule = await this.app.module('auth');
+    if (!authModule) return []
+    // settings: 'https://developers.facebook.com/apps/341748562873675/dashboard/',
+    // const providers = get(this, 'app.config.auth.providers', []);
+    // console.log('authModule.strategies', authModule.strategies);
+    
+    return {
+      providers: map(authModule.strategies, (strategy, provider) => ({
+        provider,
+        ...omit(strategy.getInfo(), __DEV__ ? [] : ['settings', 'clientId']),
+      })),
+    };
+  }
+
+
+
+  async socialAuth(req, res, next) {
+    const authModule = await this.app.module('auth');
+    if (!authModule) throw '!authModule'
+    const { provider } = req.params;
+    const origin = getReqOrigin(req);
+    const strategy = authModule.strategies[provider];
+    if (!strategy) next(this.app.e('auth.providerInvalid'), { status: 404, provider });
+    authModule.passportService.authenticate(
+      provider,
+      strategy.getPassportAuthenticateParams({ method: 'auth', origin }),
+    )(req, res, next);
+  }
+
+  async socialCallback(req, res) {
+    const authModule = await this.app.module('auth');
+    if (!authModule) throw '!authModule'
+    const { provider } = req.params;
+    return new Promise((resolve, reject) => {
+      authModule.passportService.authenticate(
+        provider,
+        authModule.strategies[provider].getPassportAuthenticateParams({ method: 'callback' }),
+        async (err, data) => {
+          console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
+          if (err) return reject(err);
+          return resolve(res.redirect(data.redirect || '/'));
+        },
+      )(req);
+    });
+  }
+
+  //////////////////////////
 
   async socialLogin(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
@@ -524,40 +583,6 @@ export default class Api extends BaseApi {
     return this.approveEmail(req);
   }
 
-  async socialCallback2(req, res, next) {
-    const { provider } = req.params;
-    this.app.modules.auth.passportService.authenticate(provider, (err, { redirect }) => {
-      // eslint-disable-line consistent-return
-      if (err) {
-        return next(err);
-      }
-      return res.redirect(redirect || '/');
-    })(req, res, next);
-  }
-
-  socialAuth(req, res, next) {
-    const { provider } = req.params;
-    if (!this.app.modules.auth.strategies[provider]) next(this.app.e(`No provider: ${provider}`), { status: 404 });
-    this.app.modules.auth.passportService.authenticate(
-      provider,
-      this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),
-    )(req, res, next);
-  }
-
-  async socialCallback(req, res) {
-    const { provider } = req.params;
-    return new Promise((resolve, reject) => {
-      this.app.modules.auth.passportService.authenticate(
-        provider,
-        this.app.modules.auth.strategies[provider].getPassportAuthenticateParams(),
-        async (err, data) => {
-          // console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
-          if (err) return reject(err);
-          return resolve(res.redirect(data.redirect || '/'));
-        },
-      )(req);
-    });
-  }
 
   async phoneCode(req) {
     if (!this.app.modules.auth.config.sms) throw '!module.config.sms';

@@ -30,6 +30,13 @@ export default class VkontakteStrategy extends BaseStrategy {
     }
   }
 
+  getInfo() {
+    return {
+      ...super.getInfo(),
+      settings: `https://vk.com/editapp?id=${this.config.clientId || this.config.clientID}`,
+    }
+  }
+
   async getProfile(passport) {  //eslint-disable-line
     // console.log('getProfile', passport);
 

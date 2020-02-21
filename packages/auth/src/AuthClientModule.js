@@ -1,6 +1,6 @@
 import cookie from 'js-cookie';
 import Module from '@lskjs/module';
-import AuthApi from './stores/AuthApi';
+// import AuthApi from './stores/AuthApi';
 
 const DEBUG = __DEV__ && false;
 
@@ -8,8 +8,8 @@ export default class AuthClientModule extends Module {
   name = 'AuthClientModule';
   constructor(props) {
     super(props);
-    this.Api = AuthApi;
-    this.api = new AuthApi(this.app);
+    // this.Api = AuthApi;
+    // this.api = new AuthApi(this.app);
     this.stores = require('./stores').default(this.app); // eslint-disable-line global-require
   }
 
@@ -75,16 +75,14 @@ export default class AuthClientModule extends Module {
     }
   }
 
-  setUser(user = null) {
+  setUser(userData = null) {
     DEBUG && console.log('AuthStore.setUser', user);  //eslint-disable-line
-    this.app.rootState.user = user;
+    this.app.rootState.user = userData;
     // this.app.resetState();
-    if (this.app.user) {
-      if (user) {
-        this.app.user.setState(user);
-      } else {
-        this.app.user.reset();
-      }
+    if (userData) {
+      if (this.app.user && this.app.user.setState) this.app.user.setState(userData);
+    } else {
+      if (this.app.user && this.app.user.reset) this.app.user.reset();
     }
   }
 

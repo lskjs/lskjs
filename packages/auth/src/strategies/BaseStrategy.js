@@ -1,3 +1,5 @@
+import pick from 'lodash/pick';
+
 export default class Strategy {
   constructor(params) {
     Object.assign(this, params);
@@ -7,14 +9,41 @@ export default class Strategy {
   Strategy = null;
   type = null;
 
+  url(path, options = {}) {
+    const {origin} = options;
+    if (origin) {
+      return origin + path
+    } else {
+      return this.app.url(path)
+    }
+  }
+
+  getInfo() {
+    return {
+      type: this.type,
+      ...pick(this.config, ['clientId', 'clientID'])
+    };
+  }
+
+
   getProviderId({ id } = {}) {
-    // eslint-disable-line class-methods-use-this
     return id;
   }
 
-  getPassportAuthenticateParams() {
-    // eslint-disable-line class-methods-use-this
-    return {};
+  getCallbackUrl({origin} = {}) {
+    return (
+      this.config.callbackURL ||
+      this.config.callbackUrl ||
+      this.url(`/api/auth/${this.provider}/callback`, { origin })
+    )
+  }
+  getPassportAuthenticateParams({method = 'auth', origin} = {}) {
+    console.log('getPassportAuthenticateParams callbackURL', this.getCallbackUrl({origin}));
+    if (method === 'auth') {
+
+      return {       callbackURL: this.getCallbackUrl({origin})    };
+    }
+      return {}
   }
 
   Strategy = null;
@@ -22,10 +51,7 @@ export default class Strategy {
     return {
       ...this.config,
       scope: this.config.scope || [],
-      callbackURL:
-        this.config.callbackURL ||
-        this.config.callbackUrl ||
-        this.app.url(`/api/module/auth/${this.provider}/callback`),
+      callbackURL: this.getCallbackUrl(),
     };
   }
 
@@ -110,6 +136,6 @@ export default class Strategy {
   }
 
   getSuccessRedirect(passport) {
-    return this.app.url(`/auth/passport?p=${passport.generateToken()}`);
+    return this.url(`/auth/passport?p=${passport.generateToken()}`);
   }
 }

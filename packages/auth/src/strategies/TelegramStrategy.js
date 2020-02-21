@@ -1,4 +1,4 @@
-import Telegram from 'passport-telegram-official';
+import { TelegramStrategy as Telegram } from 'passport-telegram-official';
 import BaseStrategy from './BaseStrategy';
 
 export default class TelegramStrategy extends BaseStrategy {

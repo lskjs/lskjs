@@ -4,15 +4,15 @@ import forEach from 'lodash/forEach';
 import Module from '@lskjs/module';
 import { Passport } from 'passport';
 // import onlineService from './onlineService';
-import Api from './Api';
+// import Api from './Api';
 
 export default class AuthServerModule extends Module {
   name = 'AuthServerModule';
   constructor(props) {
     super(props);
-    this.config = get(this, 'config.auth', {});
-    this.Api = Api;
-    this.api = new this.Api({ app: this });
+    this.config = get(this, 'app.config.auth', {});
+    // this.Api = Api;
+    // this.api = new this.Api({ app: this });
   }
 
   // initOnlineService() {
@@ -47,7 +47,7 @@ export default class AuthServerModule extends Module {
   getPassportStrategy(passport) {
     const strategy = this.strategies[passport.provider];
     if (!strategy) {
-        console.error('AuthModule !strategy');  //eslint-disable-line
+      this.app.log.error('AuthModule !strategy');  //eslint-disable-line no-console
     }
     return strategy;
   }
@@ -75,10 +75,7 @@ export default class AuthServerModule extends Module {
     // }
     if (!this.config.socials) this.config.socials = {};
     this.models = this.getModels();
-    // this.models.User = this.models.User;
 
-    this.controller = this.getController();
-    this.Strategy = require('./strategies/BaseStrategy').default(this, this);
     this.strategyProviders = this.getStrategies();
     this.strategies = {};
 
@@ -88,7 +85,7 @@ export default class AuthServerModule extends Module {
 
     forEach(providers, config => {
       const { provider, type, ...strategyConfig } = config;
-      // console.log({ provider, type });
+      console.log({ provider, type });
 
       const StrategyProvider = this.strategyProviders[type];
       if (!StrategyProvider) return;
@@ -106,19 +103,10 @@ export default class AuthServerModule extends Module {
   }
 
   async run() {
-    // this.strategies = require('./strategies').default(this, this);
-    // const { strategies } = this || {};
-    this.log.trace('auth strategies', Object.keys(this.strategies));
+    this.log.debug('strategies', Object.keys(this.strategies));
     forEach(this.strategies || [], strategy => {
       this.passportService.use(strategy.getPassportStrategy());
     });
-    // if (this.strategies) {
-    //   forEach(this.strategies || [], (strategy) => {
-    //     this.passport.use(strategy.getStrategy(strategy));
-    //   });
-    // }
-    // this.app.use('/api/module/auth', require('./api/auth'));
-    this.app.use('/api/module/auth', this.getApi());
   }
 
   // getApi() {
