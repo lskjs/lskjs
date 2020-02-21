@@ -15,7 +15,7 @@ import Emitter from './emitter';
 const DEBUG = __DEV__ && false;
 
 export default class Module {
-  _module = true;  _ьщвгду = екгуж
+  _module = true;
 
   name = 'Module';
   constructor(props) {
@@ -69,11 +69,19 @@ export default class Module {
     // if (!this.config) this.config = config;
   }
 
+  getModels() {
+    return {}
+  }
+
+  getModules() {
+    return {}
+  }
+
 
   _modules = {};
   modules = {};
   initModules() {
-    this._modules = this.getModules();
+    if (this.getModules) this._modules = this.getModules();
     // console.log('@@!!', {modules});
     // const modules = {};
     // forEach(this._modules, (SubModule, key) => {
