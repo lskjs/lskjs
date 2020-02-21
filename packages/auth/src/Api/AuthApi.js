@@ -12,12 +12,10 @@ import transliterate from '@lskjs/utils/transliterate';
 import canonizeParams from '@lskjs/utils/canonizeParams';
 import canonizePhone from '@lskjs/utils/canonizePhone';
 import validatePhone from '@lskjs/utils/validatePhone';
+import getReqDomain from '@lskjs/utils/getReqDomain';
+import getReqOrigin from '@lskjs/utils/getReqOrigin';
+import getReqUrl from '@lskjs/utils/getReqUrl';
 import createHelpers from '../utils/createHelpers';
-
-
-const getReqDomain = (req) => req.get('host').toLowerCase().replace(/^www\./, '');
-const getReqOrigin = (req) => req.protocol + '://' + getReqDomain(req)
-const getReqUrl = (req) => getReqOrigin(req)+ req.originalUrl;
 
 export default class Api extends BaseApi {
   constructor(...props) {
