@@ -1,4 +1,4 @@
-import isObject from 'lodash/isObject';
+import isPlainObject from 'lodash/isPlainObject';
 
 export default function errMerge(params1, params2, params3) {
   const params = {};
@@ -10,8 +10,8 @@ export default function errMerge(params1, params2, params3) {
   }
   return {
     ...params,
-    ...(isObject(params1) ? params1 : {}),
-    ...(isObject(params2) ? params2 : {}),
-    ...(isObject(params3) ? params3 : {}),
+    ...(isPlainObject(params1) ? params1 : {}),
+    ...(isPlainObject(params2) ? params2 : {}),
+    ...(isPlainObject(params3) ? params3 : {}),
   };
 }
