@@ -6,11 +6,12 @@ const DEBUG = __DEV__ && false;
 
 export default class AuthClientModule extends Module {
   name = 'AuthClientModule';
-  constructor(props) {
-    super(props);
-    // this.Api = AuthApi;
-    // this.api = new AuthApi(this.app);
+
+  async init() {
+    await super.init();
     this.stores = require('./stores').default(this.app); // eslint-disable-line global-require
+    const { AuthStore } = this.stores;
+    this.authStore = new AuthStore();
   }
 
   async initAuth() {
@@ -81,9 +82,7 @@ export default class AuthClientModule extends Module {
     // this.app.resetState();
     if (userData) {
       if (this.app.user && this.app.user.setState) this.app.user.setState(userData);
-    } else {
-      if (this.app.user && this.app.user.reset) this.app.user.reset();
-    }
+    } else if (this.app.user && this.app.user.reset) this.app.user.reset();
   }
 
   async setUserAndToken(res = {}) {
@@ -174,25 +173,26 @@ export default class AuthClientModule extends Module {
   }
 
   silent(data) {
-    return this.applyPromiseAndFetchProfile(this.api.authSilent(data));
+    return this.applyPromiseAndFetchProfile(this.authStore.authSilent(data));
   }
 
   setData(...args) {
-    return this.api.setData(...args);
+    return this.authStore.setData(...args);
   }
   signup(data) {
-    return this.api.signup(data);
+    return this.authStore.signup(data);
   }
   signupAndLogin(data, params) {
-    return this.applyPromiseAndFetchProfile(this.api.signup(data), params);
+    return this.applyPromiseAndFetchProfile(this.authStore.signup(data), params);
   }
 
   login(data) {
-    return this.applyPromiseAndFetchProfile(this.api.login(data));
+    return this.authStore.login(data);
+    return this.applyPromiseAndFetchProfile(this.authStore.login(data));
   }
 
   recovery(data) {
-    return this.api.authRecovery(data);
+    return this.authStore.authRecovery(data);
   }
 
   restorePassword({ email }) {

@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { observable } from 'mobx';
 import Api from '@lskjs/mobx/stores/Api';
 import Store from '@lskjs/mobx/stores/Store';
@@ -88,9 +89,28 @@ export class AuthApi extends Api {
   // }
 }
 
-
-export default uapp => class AuthStore extends Store {
-  static api = new AuthApi({ uapp });
-  @observable sessions = [];
-
-};
+export default uapp =>
+  class AuthStore extends Store {
+    static api = new AuthApi({ uapp });
+    @observable session = [];
+    @observable sessions = [];
+    async applySession({ user, token }) {
+      let session = this.sessions.find(s => s._id === user._id);
+      if (session) {
+        session.token = token;
+        session.user = user;
+      } else {
+        session = {
+          _id: user._id,
+          user,
+          token,
+        };
+      }
+      if (!this.session) this.session = session;
+    }
+    async login(props) {
+      const session = await this.constructor.api.login(props);
+      this.applySession(session);
+      throw '123123';
+    }
+  };
