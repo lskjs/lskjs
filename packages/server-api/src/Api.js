@@ -9,6 +9,7 @@ import forEach from 'lodash/forEach';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import assignProps from '@lskjs/utils/assignProps';
 import mapValues from 'lodash/mapValues';
+import map from 'lodash/map';
 import some from 'lodash/some';
 import getDocsTemplate from './getDocsTemplate';
 
@@ -22,11 +23,14 @@ export default class Api {
     }
     // this.isAuth = this.app.helpers.isAuth;
     // this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
-    this.e = (...args) => this.app.e(...args);
+
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });
     assignProps(this, params);
+  }
+  e(...args) {
+    return this.app.e(...args);
   }
   isAuth(req) {
     if (req._errJwt) throw req._errJwt;
@@ -35,22 +39,24 @@ export default class Api {
   }
 
   async validateParams(data, fields) {
-    const errors = mapValues(fields, (validator, param) => {
+    const errors = map(fields, (validator, param) => {
       if (validator && validator.required && data[param] == null) {
         return {
-          name: 'validateParams.required',
+          name: 'api.validateParams.required',
           param,
         };
       }
-      return null;
-    });
+      return undefined;
+    }).filter(Boolean);
 
     if (some(errors, Boolean)) {
-      throw {
-        name: 'validateParams',
+      throw this.e({
+        code: 'api.validateParams',
         status: 400,
-        errors,
-      };
+        data: {
+          errors,
+        },
+      });
     }
 
     return mapValues(fields, (validator, param) => {
