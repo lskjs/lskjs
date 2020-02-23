@@ -47,7 +47,7 @@ var vm = require('vm');
 var http = require('http');
 
 var fs = require('fs');
-var getMarker = require('@lskjs/utils/marker');
+var getMarker = require('@lskjs/utils/marker').default;
 
 var warn = console.warn;
 
