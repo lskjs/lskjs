@@ -1,5 +1,7 @@
 import map from 'lodash/map';
 
+const trim = str => str;
+
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 export default class Html {
   constructor(props) {
@@ -20,11 +22,11 @@ export default class Html {
 
   renderOGMeta() {
     const { meta = {} } = this;
-    return `\
-${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}
-${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}
-${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}
-${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
+    return trim`\
+${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}\
+${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}\
+${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}\
+${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
 `;
   }
 
@@ -35,17 +37,17 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}
   renderHead() {
     const js = this.renderJS();
     const { head } = this;
-    return `\
-<title>${this.renderTitle()}</title>
-${this.renderMeta()}
-${this.renderShims()}
-${this.renderFavicon()}
-${this.renderOGMeta()}
-${this.renderAssets('css')}
-${this.renderStyle()}
-${head || ''}
-${!js ? '' : `<script>${js}</script>`}
-${this.renderPreloader()} 
+    return trim`\
+<title>${this.renderTitle()}</title>\
+${this.renderMeta()}\
+${this.renderShims()}\
+${this.renderFavicon()}\
+${this.renderOGMeta()}\
+${this.renderAssets('css')}\
+${this.renderStyle()}\
+${head || ''}\
+${!js ? '' : `<script>${js}</script>`}\
+${this.renderPreloader()} \
 `;
   }
 
@@ -56,20 +58,19 @@ ${this.renderPreloader()}
 
   renderMeta() {
     const { meta = {} } = this;
-    return `\
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />
-${meta.description ? `<meta name="description" content="${meta.description}"/>` : ''}
-
+    return trim`\
+<meta charset="utf-8">\
+<meta http-equiv="x-ua-compatible" content="ie=edge" />\
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />\
+${meta.description ? `<meta name="description" content="${meta.description}"/>` : ''}\
 `;
   }
   renderShims() {
-    return `\
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+    return trim`\
+<!--[if lt IE 9]>\
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>\
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>\
+<![endif]-->\
 `;
   }
 
@@ -84,15 +85,15 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
   renderStyle() {
     const { styles = [] } = this;
-    return `<style id="css">${styles.join('\n')}</style>`;
+    return trim`<style id="css">${styles.join('\n')}</style>`;
   }
 
   renderJS() {
     const { js = '' } = this;
-    return `
-${this.renderGlobals()}
-${js}
-    `;
+    return trim`\
+${this.renderGlobals()}\
+${js}\
+`;
   }
 
   renderGlobals() {
@@ -150,7 +151,7 @@ ${js}
 
   renderDebug() {
     const util = require('util');
-    return `<!--
+    return trim`<!--
 DEBUG INFO
 
 __SERVER__: ${__SERVER__}
@@ -167,35 +168,35 @@ ${util.inspect(this.page.state)}
 
   renderFooter() {
     const { footer } = this;
-    return `\
-${footer || ''}
+    return trim`\
+${footer || ''}\
 `;
   }
 
   renderRootState() {
-    return `\
-<script>
-window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};
-</script>
+    return trim`\
+<script>\
+window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};\
+</script>\
 `;
   }
 
   render() {
-    return `\
-<!doctype html>
-<html class="${this.getHtmlClass()}">
-  <head>
-    ${this.renderHead()}
-  </head>
-  <body>
-    <div id="root"/>
-      ${this.content}
-    </div>
-    ${this.renderRootState()}
-    ${this.renderAssets('js')}
-    ${this.renderFooter()}
-  </body>
-</html>
-      `;
+    return trim`\
+<!doctype html>\
+<html class="${this.getHtmlClass()}">\
+<head>\
+${this.renderHead()}\
+</head>\
+<body>\
+<div id="root"/>\
+${this.content}\
+</div>\
+${this.renderRootState()}\
+${this.renderAssets('js')}\
+${this.renderFooter()}\
+</body>\
+</html>\
+`;
   }
 }
