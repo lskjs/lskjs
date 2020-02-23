@@ -47,6 +47,7 @@ var vm = require('vm');
 var http = require('http');
 
 var fs = require('fs');
+var getMarker = require('@lskjs/utils/marker');
 
 var warn = console.warn;
 
@@ -938,6 +939,7 @@ function emitRecord(rec, line, opts, stylize) {
 
       var colorCode = hashCode(rec.color || rec.req_id || rec.reqId);
       var color =  colorCode === 0 ? null : colorsKeys[colorCode % Object.keys(colorsKeys).length];
+      var createMarker = getMarker(rec.color || rec.req_id || rec.reqId);
 
       if (rec.req_id) {
         extras.push('req_id=' + rec.req_id);
@@ -1169,7 +1171,7 @@ function emitRecord(rec, line, opts, stylize) {
 
       extras = stylize(extras.length ? ' (' + extras.join(', ') + ')' : '', 'XXX');
       details = stylize(details.length ? details.join('\n    --\n') + '\n' : '', 'XXX');
-      var marker = stylizeBg(' ', color);
+      var marker = createMarker();
       // var marker = stylizeBg('🦏', color);
       // console.log({marker, color})
       var nameStr2 = nameStr;

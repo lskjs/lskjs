@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "@browser-bunyan/levels": "1.5.3",
-    "@lskjs/bunyan": "^1.0.14",
+    "@lskjs/bunyan": "1.0.14",
+    "@lskjs/utils": "1.0.15",
     "browser-bunyan": "1.5.3",
     "source-map-support": "0.5.16"
   },
