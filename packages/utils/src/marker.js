@@ -63,7 +63,7 @@ export const getInfo = id => {
   cd = Math.floor(cd / base);
   // const bgColorCode = cd % base;
   const bgColorCode = -1;
-  return {
+  const res = {
     id,
     code,
     colorCode,
@@ -73,9 +73,11 @@ export const getInfo = id => {
     charCode,
     char: chars[charCode],
   };
+  return res;
 };
 
 const marker = id => {
+  if (id == null) return a => a || ' ';
   const res = getInfo(id);
   const { color, bgColor, char } = res;
   return str => {
@@ -83,10 +85,10 @@ const marker = id => {
   };
 };
 
+console.log(marker()());
 // for (let id = 0; id < 100; id++) {
 //   const wrap = marker(id);
 //   console.log(id, wrap(), wrap(id));
 // }
-
 
 export default marker;
