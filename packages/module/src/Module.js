@@ -70,13 +70,12 @@ export default class Module {
   }
 
   getModels() {
-    return {}
+    return {};
   }
 
   getModules() {
-    return {}
+    return {};
   }
-
 
   _modules = {};
   modules = {};
@@ -102,7 +101,16 @@ export default class Module {
     // }
     // return this.broadcastModules('init');
   }
-  async module(name) {
+  async module(nameOrNames) {
+    if (Array.isArray(nameOrNames)) {
+      const modules = {};
+      await Promise.map(nameOrNames, async name => {
+        modules[name] = await this.module(name);
+      });
+      return modules;
+    }
+    const name = nameOrNames;
+
     if (this.modules && this.modules[name]) return this.modules[name];
     if (!this._modules || !this._modules[name]) throw `!modules.${name}`;
     const pack = await this._modules[name]();
