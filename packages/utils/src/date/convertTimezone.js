@@ -18,7 +18,7 @@ export default (dateStr, targetOffset, fromOffset) => {
   const deltaMin = targetOffset - fromOffset;
   const delta = deltaMin * 60 * 1000;
   const res = new Date(+date + delta);
-  console.log({ date, deltaMin, delta, targetOffset, fromOffset, res });
+  // console.log({ date, deltaMin, delta, targetOffset, fromOffset, res });
 
   return res;
 };
