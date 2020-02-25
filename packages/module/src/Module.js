@@ -1,11 +1,11 @@
 import toPairs from 'lodash/toPairs';
-import forEach from 'lodash/forEach';
+// import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import Promise from 'bluebird';
 import logger from '@lskjs/log';
 import isFunction from 'lodash/isFunction';
 import assignProps from '@lskjs/utils/assignProps';
-import isClass from '@lskjs/utils/isClass';
+// import isClass from '@lskjs/utils/isClass';
 // import PromiseMap from 'bluebird/js/release/map';
 import Emitter from './emitter';
 // import createLoggerMock from './logger/createLoggerMock';

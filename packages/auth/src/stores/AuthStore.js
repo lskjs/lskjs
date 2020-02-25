@@ -92,10 +92,10 @@ export class AuthApi extends Api {
 export default uapp =>
   class AuthStore extends Store {
     static api = new AuthApi({ uapp });
-    @observable session = [];
+    @observable session = null;
     @observable sessions = [];
     async applySession({ user, token }) {
-      let session = this.sessions.find(s => s._id === user._id);
+      let session = this.sessions.filter(s => s._id === user._id)[0];
       if (session) {
         session.token = token;
         session.user = user;
@@ -106,10 +106,12 @@ export default uapp =>
           token,
         };
       }
-      if (!this.session) this.session = session;
+      this.session = session;
+      // if (!this.session) this.session = session;
     }
     async login(props) {
       const session = await this.constructor.api.login(props);
       this.applySession(session);
+      return session;
     }
   };

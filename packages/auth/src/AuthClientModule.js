@@ -1,5 +1,6 @@
 import cookie from 'js-cookie';
 import Module from '@lskjs/module';
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
 // import AuthApi from './stores/AuthApi';
 
 const DEBUG = __DEV__ && false;
@@ -14,12 +15,17 @@ export default class AuthClientModule extends Module {
     this.authStore = new AuthStore();
   }
 
+  async run() {
+    await super.run();
+    await this.loadStore();
+  }
+
   async initAuth() {
     const res = this.getUserAndTokenFromRootState();
     DEBUG && console.log('AuthStore.init res', res);  //eslint-disable-line
 
-    this.setUserAndToken(res);
-    await this.initUserProfile();
+    // this.setUserAndToken(res);
+    // await this.initUserProfile();
     // if (res.user.iat && res.token) {
     //   try {
     //     const { user } = await this.findUserProfile();
@@ -85,21 +91,6 @@ export default class AuthClientModule extends Module {
     } else if (this.app.user && this.app.user.reset) this.app.user.reset();
   }
 
-  async setUserAndToken(res = {}) {
-    DEBUG && console.log('AuthStore.setUserAndToken', res);  //eslint-disable-line
-    if (res.token || res.user) {
-      if (res.token) {
-        await this.setToken(res.token);
-      }
-      if (res.user && res.user._id) {
-        await this.setUser(res.user);
-      }
-    } else {
-      await this.setUser(null);
-      await this.setToken(null);
-    }
-  }
-
   getUserAndTokenFromRootState() {
     // DEBUG && console.log('AuthStore.getUserAndToken');  //eslint-disable-line
     const res = {};
@@ -118,34 +109,51 @@ export default class AuthClientModule extends Module {
     return res;
   }
 
-  async applyPromiseAndFetchProfile(promise) {
-    const res = await this.applyPromise(promise);
-    // if (__CLIENT__) {
-    //   await this.applyPromise(this.findUserProfile());
-    // }
-    return res;
-  }
+  // async saveStore(promise) {
+  //   const res = await this.applyPromise(promise);
+  //   // if (__CLIENT__) {
+  //   //   await this.applyPromise(this.findUserProfile());
+  //   // }
+  //   return res;
+  // }
 
-  async applyPromise(promise) {
-    DEBUG && console.log('AuthStore.applyPromise @@@1', promise);  //eslint-disable-line
-    // @TODO: промис может быть в процессе резрешения
-    this.promise = promise;
-    let res;
-    try {
-      res = await this.promise;
-      DEBUG && console.log('AuthStore.applyPromise @@@2 - result', res);  //eslint-disable-line
-      await this.setUserAndToken(res);
-      try {
-        await this.app.reconnect();
-      } catch (err) {
-        console.error('AuthStore.applyPromise: this.app.reconnect', err);  //eslint-disable-line
-      }
-    } catch (err) {
-      DEBUG && console.log('AuthStore.applyPromise ERR', err);  //eslint-disable-line
-      this.logout(false, false);
-      throw err;
+  async loadStore() {
+    if (typeof localStorage !== 'undefined') {
+      const sessions = tryJSONparse(localStorage.getItem('lsk.auth.sessions'));
+      console.log({ sessions });
+      this.authStore.sessions = sessions || [];
     }
-    return res;
+  }
+  async saveStore() {
+    // DEBUG && console.log('AuthStore.applyPromise @@@1', promise);  //eslint-disable-line
+    // @TODO: промис может быть в процессе резрешения
+
+    const { session, sessions } = this.authStore;
+
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('lsk.auth.sessions', JSON.stringify(sessions));
+    }
+
+    // DEBUG && console.log('AuthStore.setUserAndToken', res);  //eslint-disable-line
+    if (session.token || session.user) {
+      if (session.token) {
+        await this.setToken(session.token);
+      }
+      if (session.user && session.user._id) {
+        await this.setUser(session.user);
+      }
+    } else {
+      await this.setUser(null);
+      await this.setToken(null);
+    }
+
+    // try {
+    //   await this.app.reconnect();
+    // } catch (err) {
+    //   console.error('AuthStore.applyPromise: this.app.reconnect', err);  //eslint-disable-line
+    // }
+
+    // return res;
   }
 
   isAuthAsync() {
@@ -155,6 +163,7 @@ export default class AuthClientModule extends Module {
   }
 
   isAuth() {
+    return !!(this.authStore && this.authStore.session);
     return !!(this.app.rootState && this.app.rootState.token && this.app.rootState.user && this.app.rootState.user._id);
   }
 
@@ -172,27 +181,32 @@ export default class AuthClientModule extends Module {
     }
   }
 
-  silent(data) {
-    return this.applyPromiseAndFetchProfile(this.authStore.authSilent(data));
-  }
-
   setData(...args) {
     return this.authStore.setData(...args);
   }
-  signup(data) {
-    return this.authStore.signup(data);
-  }
-  signupAndLogin(data, params) {
-    return this.applyPromiseAndFetchProfile(this.authStore.signup(data), params);
+  signup(...args) {
+    return this.authStore.signup(...args);
   }
 
-  login(data) {
-    return this.authStore.login(data);
-    return this.applyPromiseAndFetchProfile(this.authStore.login(data));
+  async silent(...args) {
+    await this.authStore.authSilent(...args);
+    return this.saveStore();
   }
 
-  recovery(data) {
-    return this.authStore.authRecovery(data);
+  async signupAndLogin(...args) {
+    await this.authStore.signup(...args);
+    return this.saveStore();
+  }
+
+  async login(...args) {
+    console.log('login @@@');
+
+    await this.authStore.login(...args);
+    return this.saveStore();
+  }
+
+  recovery(...args) {
+    return this.authStore.authRecovery(...args);
   }
 
   restorePassword({ email }) {
