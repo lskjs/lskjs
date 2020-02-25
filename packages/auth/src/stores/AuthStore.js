@@ -111,6 +111,5 @@ export default uapp =>
     async login(props) {
       const session = await this.constructor.api.login(props);
       this.applySession(session);
-      throw '123123';
     }
   };

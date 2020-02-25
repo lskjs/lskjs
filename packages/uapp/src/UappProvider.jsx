@@ -4,7 +4,6 @@ import { Provider as DefaultMobxProvider } from 'mobx-react';
 import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
 import DefaultLinkProvider from '@lskjs/link/LinkProvider';
 
-
 const UappProvider = ({ uapp, children: rawChildren }) => {
   let children = <>{rawChildren}</>;
 
@@ -16,11 +15,7 @@ const UappProvider = ({ uapp, children: rawChildren }) => {
 
   const { LinkProvider } = UappProvider;
   if (uapp && uapp.history && LinkProvider) {
-    children = (
-      <LinkProvider onClick={url => uapp.history.push(url)}>
-        {children}
-      </LinkProvider>
-    );
+    children = <LinkProvider onClick={url => uapp.history.push(url)}>{children}</LinkProvider>;
   }
 
   const { ThemeProvider } = UappProvider;
