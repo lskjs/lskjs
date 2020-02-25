@@ -15,6 +15,7 @@ const DEBUG = __DEV__ && false;
 
 export default class ReactApp extends Module {
   // BaseUapp = BaseUapp;
+  ReactDOM = ReactDOM;
   name = 'App';
 
   constructor(params = {}) {
@@ -107,9 +108,9 @@ export default class ReactApp extends Module {
     const component = page.render();
     // Check if the root node has any children to detect if the app has been prerendered
     if (this.container.hasChildNodes()) {
-      ReactDOM.hydrate(component, this.container);
+      this.ReactDOM.hydrate(component, this.container);
     } else {
-      ReactDOM.render(component, this.container);
+      this.ReactDOM.render(component, this.container);
     }
   }
 
