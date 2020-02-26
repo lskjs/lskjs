@@ -1,3 +1,4 @@
+import Module from '@lskjs/module';
 import multer from 'multer';
 import fs from 'fs';
 import nodepath from 'path';
@@ -6,7 +7,7 @@ import get from 'lodash/get';
 import aws from 'aws-sdk';
 import multerS3 from 'multer-s3';
 
-export default class UploadServerModule {
+export default class UploadServerModule extends Module {
   async init() {
     await super.init();
     this.config = get(this.app, 'config.upload');
