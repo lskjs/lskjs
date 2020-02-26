@@ -8,6 +8,7 @@ import aws from 'aws-sdk';
 import multerS3 from 'multer-s3';
 
 export default class UploadServerModule extends Module {
+  name = 'UploadServerModule';
   async init() {
     await super.init();
     this.config = get(this.app, 'config.upload');

@@ -4,6 +4,7 @@ import mexp from 'mongoose-elasticsearch-xp-async';
 import merge from 'lodash/merge';
 
 export default class ElasticServerModule extends Module {
+  name = 'ElasticServerModule';
   enabled = false;
   delayedModels = [];
   defaultConfig = {

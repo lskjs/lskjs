@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import merge from 'lodash/merge';
 
 export default class SequelizeServerModule extends Module {
+  name = 'SequelizeServerModule';
   enabled = false;
   defaultConfig = {
     uri: '',

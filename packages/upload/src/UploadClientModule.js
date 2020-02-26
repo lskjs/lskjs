@@ -1,6 +1,7 @@
 import Module from '@lskjs/module';
 
 export default class UploadClientModule extends Module {
+  name = 'UploadClientModule';
   async uploadFile(file) {
     if (typeof window === 'undefined') return false;
     const { FormData } = window;
