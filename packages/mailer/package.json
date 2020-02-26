@@ -41,11 +41,13 @@
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
+    "@lskjs/module": "1.0.20",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
     "moment": "2.24.0"
   },
   "peerDependencies": {
+    "@lskjs/module": "*",
     "bluebird": "*",
     "lodash": "*",
     "moment": "*"

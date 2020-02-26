@@ -1,15 +1,17 @@
+import Module from '@lskjs/module';
 import get from 'lodash/get';
 import Promise from 'bluebird';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
 
-export default class MailerServerModule {
+export default class MailerServerModule extends Module {
   name = 'MailerServerModule';
   getTemplates() {
-    return require('./templates').default(this.app);
+    return require('./templates').default({ app: this.app });
   }
 
   async init() {
+    await super.init();
     this.config = get(this.app, 'config.mailer');
     this.templates = this.getTemplates();
     this.transporter = this.getTransporter();
@@ -24,6 +26,7 @@ export default class MailerServerModule {
   }
 
   async run() {
+    await super.run();
     if (this.transporter && this.config.juice) {
       // нельзя прогонять через эту херню html который уже покрыт inline css
       this.transporter.use('compile', inlineCss());

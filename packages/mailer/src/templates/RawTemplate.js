@@ -1,6 +1,6 @@
-import Base from './MjmlTemplate';
+import MjmlTemplate from './MjmlTemplate';
 
-export default class RawTemplate extends Base {
+export default class RawTemplate extends MjmlTemplate {
   getSubject() {
     return this.props.subject;
   }
