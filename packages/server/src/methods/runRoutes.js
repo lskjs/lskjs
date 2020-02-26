@@ -7,11 +7,12 @@ import mapValues from 'lodash/mapValues';
 const isClass = () => false;
 
 export function getRoutes(ctx) {
-  const iterate = (item) => {
+  const iterate = item => {
     if (isClass(item)) {
       const api = new item(ctx); // eslint-disable-line new-cap
       return api.getRoutes();
-    } if (!isPlainObject(item)) {
+    }
+    if (!isPlainObject(item)) {
       if (item.getRoutes) {
         return item.getRoutes();
       }
@@ -27,7 +28,6 @@ export function getRoutes(ctx) {
   }
   return {};
 }
-
 
 function getMethodAndPath(key = '', val) {
   let method;
@@ -46,7 +46,8 @@ function getMethodAndPath(key = '', val) {
   };
 }
 
-function iterateRoute(data, { AsyncRouter } = {}) { // params
+function iterateRoute(data, { AsyncRouter } = {}) {
+  // params
   if (isPlainObject(data)) {
     const asyncRouter = AsyncRouter();
     forEach(data, (val, key) => {
@@ -56,18 +57,20 @@ function iterateRoute(data, { AsyncRouter } = {}) { // params
       asyncRouter[method](path, route);
     });
     return asyncRouter;
-  } if (isFunction(data)) {
+  }
+  if (isFunction(data)) {
     return data;
-  } if (data && data.getRoutes && isFunction(data.getRoutes)) {
+  }
+  if (data && data.getRoutes && isFunction(data.getRoutes)) {
     return data.getRoutes();
-  } if (data && data.api && isFunction(data.getRoutes)) {
+  }
+  if (data && data.api && isFunction(data.getRoutes)) {
     return data.api();
   }
   return () => {};
 }
 
-
-export default function () {
+export default function() {
   this.routes = getRoutes(this);
   const asyncRouter = this.asyncRouter();
   const router = iterateRoute(this.routes, { AsyncRouter: this.asyncRouter, path: '/', i: 1 });

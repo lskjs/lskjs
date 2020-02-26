@@ -20,7 +20,6 @@ import UappProvider from './UappProvider';
 import wrapApi from './wrapApi';
 import DefaultPage from './Page';
 import defaultTheme from './theme';
-import Grant from './Grant';
 
 global.DEV = () => null;
 
@@ -56,12 +55,6 @@ export default class Uapp extends Module {
       ...params,
     });
   }
-  Grant = Grant;
-  getGrantRules() {
-    return {
-      aasdasd: 123123,
-    };
-  }
 
   async init() {
     await super.init();
@@ -70,9 +63,6 @@ export default class Uapp extends Module {
     this.stores = this.getStores();
     // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
-
-    const rules = this.getGrantRules();
-    this.grant = new this.Grant({ app: this, rules });
 
     await this.initSession();
 
@@ -446,7 +436,6 @@ export default class Uapp extends Module {
 
       i18: this.i18,
       t: this.t,
-      grant: this.grant,
       module: this.module,
 
       // locale: this.locale,
