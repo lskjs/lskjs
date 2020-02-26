@@ -13,7 +13,7 @@ export default class Grant extends Module {
   async init() {
     await super.init();
     this.rules = this.getRules();
-    this.log.trace('Grant.rules', Object.keys(this.rusles));
+    this.log.trace('Grant.rules', Object.keys(this.rules));
   }
   async getParams(args) {
     if (args.length === 1) {
