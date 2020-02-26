@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/permit",
-  "version": "1.0.19",
+  "version": "1.0.29",
   "description": "LSK module for one time codes and permits.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
