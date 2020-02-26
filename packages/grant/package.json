@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -29,7 +29,6 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
-  "dependencies": {},
   "devDependencies": {
     "@lskjs/module": "1.0.20",
     "@lskjs/server-api": "1.0.19",
