@@ -115,9 +115,9 @@ export default class ElasticServerModule extends Module {
   }
 
   async syncAll({ again = false } = {}) {
-    const modelNames = db.modelNames();
+    const modelNames = this.app.db.modelNames();
     modelNames.forEach(async modelName => {
-      const model = db.model(modelName);
+      const model = this.app.db.model(modelName);
       if (model.esCreateMapping) {
         this.sync({ model, again });
       }
@@ -152,5 +152,8 @@ export default class ElasticServerModule extends Module {
 
   async run() {
     if (!this.enabled) return;
+    if (this.config.sync) {
+      this.syncAll({ again: true });
+    }
   }
 }

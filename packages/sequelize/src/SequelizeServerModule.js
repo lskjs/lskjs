@@ -33,7 +33,11 @@ export default class SequelizeServerModule extends Module {
       configSequelize,
     );
     this.client = new Sequelize(this.config.uri, this.config.options);
+    this.sqlModels = this.getSQLModels();
     await this.client.authenticate();
+  }
+  getSQLModels() {
+    return {};
   }
   async run() {
     if (!this.enabled) return;
