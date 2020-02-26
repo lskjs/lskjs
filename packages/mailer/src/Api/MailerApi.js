@@ -3,14 +3,24 @@ import Api from '@lskjs/server-api';
 export default class MailerApi extends Api {
   getRoutes() {
     return {
-      '/dev/html/:template': ::this.devHtml,
-      '/dev/email/:template': ::this.devEmail,
+      '/dev/:type/:template': ::this.dev,
     };
   }
-  devHtml() {
-    return 'devHtml';
-  }
-  devEmail() {
-    return 'devEmail';
+  async dev(req, res) {
+    const mailer = await this.app.module('mailer');
+    if (!mailer) throw '!mailer';
+    const {
+      data: { email, ...data },
+      params: { template, type },
+    } = req;
+    if (type === 'email') {
+      if (!email) throw '!email';
+      return this.send({ ...data, template, to: email });
+    }
+    const options = this.renderTemplate({ ...data, template });
+    if (type === 'email') {
+      return res.send(options.html);
+    }
+    return options;
   }
 }
