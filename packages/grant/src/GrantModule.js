@@ -1,10 +1,12 @@
+import Module from '@lskjs/module';
 import createLogger from '@lskjs/utils/createLogger';
 
 const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
 // && false
 // [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
-export default class Grant {
+export default class Grant extends Module {
+  name = 'GrantClientModule';
   rules = {};
   async getParams(args) {
     if (args.length === 1) {

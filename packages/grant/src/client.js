@@ -1,1 +1,1 @@
-export { default } from './GrantModule';
+export { default } from './GrantClientModule';
