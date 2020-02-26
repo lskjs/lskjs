@@ -1,0 +1,12 @@
+.cache
+.idea
+.vscode
+lerna-debug.log
+**/node_modules
+build
+release
+release-*
+packages/*/build
+packages/*/release
+packages/*/release-*
+packages/*/coverage
