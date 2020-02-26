@@ -8,6 +8,7 @@ import multerS3 from 'multer-s3';
 
 export default class UploadServerModule {
   async init() {
+    await super.init();
     this.config = get(this.app, 'config.upload');
     if (!this.config) {
       this.app.log.error('config.upload is missing');
