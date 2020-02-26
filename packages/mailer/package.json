@@ -42,12 +42,14 @@
   },
   "devDependencies": {
     "@lskjs/module": "1.0.20",
+    "@lskjs/server-api": "1.0.19",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
     "moment": "2.24.0"
   },
   "peerDependencies": {
     "@lskjs/module": "*",
+    "@lskjs/server-api": "*",
     "bluebird": "*",
     "lodash": "*",
     "moment": "*"
