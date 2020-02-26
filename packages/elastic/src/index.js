@@ -1,76 +1,67 @@
+import Module from '@lskjs/module';
 import elasticsearch from 'elasticsearch';
 import mexp from 'mongoose-elasticsearch-xp-async';
 import merge from 'lodash/merge';
-import get from 'lodash/get';
 
-export default ({ db, config }) => class ElasticModule {
-  constructor() {
-    this.delayedModels = [];
-  }
+export default class ElasticServerModule extends Module {
+  enabled = false;
+  delayedModels = [];
+  defaultConfig = {
+    sync: true,
+    client: {
+      host: 'localhost:9200',
+      maxRetries: 10000,
+      log: {
+        level: 'error',
+      },
+    },
+    pingTimeout: 5000,
+    settings: {
+      analysis: {
+        filter: {
+          ngram_filter: {
+            type: 'ngram',
+            min_gram: 3,
+            max_gram: 4,
+            token_chars: ['letter', 'digit'],
+          },
+          autocomplete_filter: {
+            type: 'edge_ngram',
+            min_gram: 1,
+            max_gram: 20,
+          },
+          stopprotocol_filter: {
+            type: 'stop',
+            stopwords: ['http', 'https', 'ftp', 'www'],
+          },
+        },
+        analyzer: {
+          ngram_analyzer: {
+            type: 'custom',
+            tokenizer: 'standard',
+            filter: ['ngram_filter', 'lowercase'],
+          },
+          autocomplete: {
+            type: 'custom',
+            tokenizer: 'standard',
+            filter: ['lowercase', 'autocomplete_filter'],
+          },
+          url_lowercase_without_protocols: {
+            type: 'custom',
+            tokenizer: 'lowercase',
+            filter: ['stopprotocol_filter'],
+          },
+        },
+      },
+    },
+  };
   async init() {
-    this.enabled = false;
-    if (!config.elasticsearch) return;
+    await super.init();
+    const configElasticsearch = this.app.config.elasticsearch;
+    if (!configElasticsearch) return;
     this.enabled = true;
     this.nowSync = [];
-    this.defaultConfig = {
-      sync: true,
-      client: {
-        host: 'localhost:9200',
-        maxRetries: 10000,
-        log: {
-          level: 'error',
-        },
-      },
-      pingTimeout: 5000,
-      settings: {
-        analysis: {
-          filter: {
-            ngram_filter: {
-              type: 'ngram',
-              min_gram: 3,
-              max_gram: 4,
-              token_chars: [
-                'letter',
-                'digit',
-              ],
-            },
-            autocomplete_filter: {
-              type: 'edge_ngram',
-              min_gram: 1,
-              max_gram: 20,
-            },
-            stopprotocol_filter: {
-              type: 'stop',
-              stopwords: ['http', 'https', 'ftp', 'www'],
-            }
-          },
-          analyzer: {
-            ngram_analyzer: {
-              type: 'custom',
-              tokenizer: 'standard',
-              filter: [
-                'ngram_filter',
-                'lowercase',
-              ],
-            },
-            autocomplete: {
-              type: 'custom',
-              tokenizer: 'standard',
-              filter: [
-                'lowercase',
-                'autocomplete_filter',
-              ],
-            },
-            url_lowercase_without_protocols: {
-              type: 'custom',
-              tokenizer: 'lowercase',
-              filter: ['stopprotocol_filter']
-            }
-          },
-        },
-      },
-    };
-    this.config = merge({}, this.defaultConfig, config.elasticsearch);
+    this.config = merge({}, this.defaultConfig, configElasticsearch);
     this.client = new elasticsearch.Client(this.config.client);
     this.delayedModels.forEach(([schema, params]) => {
       this.addModel(schema, params);
@@ -78,7 +69,7 @@ export default ({ db, config }) => class ElasticModule {
   }
   getProjectionModel(model) {
     const projection = {};
-    Object.keys(model.schema.obj).forEach((key) => {
+    Object.keys(model.schema.obj).forEach(key => {
       const field = model.schema.obj[key];
       if (field.es_indexed) {
         projection[key] = 1;
@@ -125,7 +116,7 @@ export default ({ db, config }) => class ElasticModule {
 
   async syncAll({ again = false } = {}) {
     const modelNames = db.modelNames();
-    modelNames.forEach(async (modelName) => {
+    modelNames.forEach(async modelName => {
       const model = db.model(modelName);
       if (model.esCreateMapping) {
         this.sync({ model, again });
@@ -143,20 +134,23 @@ export default ({ db, config }) => class ElasticModule {
 
   addModel(schema, params = {}) {
     if (!this.enabled) return;
-    const options = merge({
-      client: this.client,
-      bulk: {
-        batch: 1000,
+    const options = merge(
+      {
+        client: this.client,
+        bulk: {
+          batch: 1000,
+        },
+        mappingSettings: {
+          settings: this.config.settings,
+        },
+        numberOfShards: this.config.numberOfShards,
       },
-      mappingSettings: {
-        settings: this.config.settings,
-      },
-      numberOfShards: this.config.numberOfShards,
-    }, params);
+      params,
+    );
     schema.getMongooseSchema().plugin(mexp.v7, options);
   }
 
   async run() {
     if (!this.enabled) return;
   }
-};
+}

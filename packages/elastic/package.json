@@ -34,9 +34,11 @@
     "mongoose-elasticsearch-xp-async": "0.1.2"
   },
   "devDependencies": {
+    "@lskjs/module": "1.0.20",
     "lodash": "4.17.15"
   },
   "peerDependencies": {
+    "@lskjs/module": "*",
     "lodash": "*"
   }
 }
