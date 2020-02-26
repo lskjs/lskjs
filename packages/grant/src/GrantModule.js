@@ -7,7 +7,9 @@ const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
 // [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
 export default class Grant extends Module {
   name = 'GrantClientModule';
-  rules = {};
+  getRules() {
+    return {};
+  }
   async init() {
     await super.init();
     this.rules = this.getRules();
