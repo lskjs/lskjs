@@ -10,7 +10,7 @@ export default class AuthClientModule extends Module {
 
   async init() {
     await super.init();
-    this.stores = require('./stores').default(this.app); // eslint-disable-line global-require
+    this.stores = require('./stores').default(this.app);
     const { AuthStore } = this.stores;
     this.authStore = new AuthStore();
   }
