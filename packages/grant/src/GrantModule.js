@@ -8,6 +8,11 @@ const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
 export default class Grant extends Module {
   name = 'GrantClientModule';
   rules = {};
+  async init() {
+    await super.init();
+    this.rules = this.getRules();
+    this.log.trace('Grant.rules', Object.keys(this.rusles));
+  }
   async getParams(args) {
     if (args.length === 1) {
       const [params = {}] = args;
@@ -68,6 +73,7 @@ export default class Grant extends Module {
       return rules[action].bind(this)(params);
     }
     if (__CLIENT__) return this.askServer(params);
+    this.log.trace(`!Grant.rules[${action}]`);
     return false;
   }
 }

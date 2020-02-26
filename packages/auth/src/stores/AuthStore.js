@@ -105,6 +105,7 @@ export default uapp =>
           user,
           token,
         };
+        this.sessions.push(session);
       }
       this.session = session;
       // if (!this.session) this.session = session;

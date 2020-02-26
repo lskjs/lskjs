@@ -190,10 +190,10 @@ export default class Module {
         if (DEBUG) this.log.trace(`${this.name}.run()`);
         await this.run();
       }
-      if (isFunction(this.broadcastModules)) {
-        if (DEBUG) this.log.trace(`${this.name}.broadcastModules('run')`);
-        await this.broadcastModules('run');
-      }
+      // if (isFunction(this.broadcastModules)) {
+      //   if (DEBUG) this.log.trace(`${this.name}.broadcastModules('run')`);
+      //   await this.broadcastModules('run');
+      // }
       if (isFunction(this.afterRun)) {
         if (DEBUG) this.log.trace(`${this.name}.afterRun()`);
         await this.afterRun();

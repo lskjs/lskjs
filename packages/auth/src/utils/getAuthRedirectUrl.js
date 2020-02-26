@@ -1,4 +1,3 @@
-import toQs from '@lskjs/utils/toQs';
+import getRedirectUrl from './getRedirectUrl';
 
-export default req =>
-  `/auth/login?r=${encodeURIComponent(req.path + (req.query && Object.keys(req.query).length ? toQs(req.query) : ''))}`;
+export default (req, prefix = `/auth/login`) => getRedirectUrl(req, prefix);

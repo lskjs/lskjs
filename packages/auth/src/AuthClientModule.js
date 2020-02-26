@@ -120,7 +120,6 @@ export default class AuthClientModule extends Module {
   async loadStore() {
     if (typeof localStorage !== 'undefined') {
       const sessions = tryJSONparse(localStorage.getItem('lsk.auth.sessions'));
-      console.log({ sessions });
       this.authStore.sessions = sessions || [];
     }
   }
@@ -130,6 +129,9 @@ export default class AuthClientModule extends Module {
 
     const { session, sessions } = this.authStore;
 
+    const js = this.authStore.toJS();
+    // console.log({ session, sessions, js});
+    
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('lsk.auth.sessions', JSON.stringify(sessions));
     }
