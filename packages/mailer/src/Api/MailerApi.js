@@ -18,7 +18,7 @@ export default class MailerApi extends Api {
       return mailer.send({ ...data, template, to: email });
     }
     const options = mailer.renderTemplate({ ...data, template });
-    if (type === 'email') {
+    if (type === 'html') {
       return res.send(options.html);
     }
     return options;
