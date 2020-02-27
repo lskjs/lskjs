@@ -29,6 +29,7 @@ export default async (spreadsheets, locales, destination) => {
     // fs.writeFileSync(`${dirname}/translation.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     const namespaces = groupBy(localesRows, 'ns');
     forEach(namespaces, (rows, pns) => {
+      if (!pns) return;
       const ns = String(pns).trim();
       if (!ns) return;
       try {
