@@ -94,6 +94,8 @@ export default uapp =>
     static api = new AuthApi({ uapp });
     @observable session = null;
     @observable sessions = [];
+    // @computed isAuth() {
+    // }
     async applySession({ user, token }) {
       let session = this.sessions.filter(s => s._id === user._id)[0];
       if (session) {
@@ -114,5 +116,15 @@ export default uapp =>
       const session = await this.constructor.api.login(props);
       this.applySession(session);
       return session;
+    }
+    async signup(props) {
+      const session = await this.constructor.api.signup(props);
+      this.applySession(session);
+      return session;
+    }
+    async logout() {
+      this.sessions = this.sessions.filter(s => s._id !== this.session._id);
+      // eslint-disable-next-line prefer-destructuring
+      this.session = this.sessions[0];
     }
   };

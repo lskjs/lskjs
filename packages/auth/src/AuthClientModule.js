@@ -1,7 +1,7 @@
 import cookie from 'js-cookie';
+import get from 'lodash/get';
 import Module from '@lskjs/module';
-import tryJSONparse from '@lskjs/utils/tryJSONparse';
-// import AuthApi from './stores/AuthApi';
+import Storage from './Storage';
 
 const DEBUG = __DEV__ && false;
 
@@ -12,52 +12,13 @@ export default class AuthClientModule extends Module {
     await super.init();
     this.stores = require('./stores').default(this.app);
     const { AuthStore } = this.stores;
-    this.authStore = new AuthStore();
+    this.store = new AuthStore();
+    this.storage = new Storage({ config: get(this, 'app.config.storage', {}) });
   }
 
   async run() {
     await super.run();
     await this.loadStore();
-  }
-
-  async initAuth() {
-    const res = this.getUserAndTokenFromRootState();
-    DEBUG && console.log('AuthStore.init res', res);  //eslint-disable-line
-
-    // this.setUserAndToken(res);
-    // await this.initUserProfile();
-    // if (res.user.iat && res.token) {
-    //   try {
-    //     const { user } = await this.findUserProfile();
-    //     this.setUser(user);
-    //   } catch (err) {
-    //     uapp.log.error(err);
-    //     if (__DEV__) {
-    //       console.log('Auth.logout();');  //eslint-disable-line
-    //       this.logout();
-    //     } else {
-    //       this.logout();
-    //     }
-    //   }
-    // }
-  }
-
-  async initUserProfile() {
-    DEBUG && console.log('AuthStore.initUserProfile uapp.rootState.user', uapp.rootState.user);  //eslint-disable-line
-    if (__CLIENT__) {
-      if (this.app.rootState.token && !(this.app.rootState.user && this.app.rootState.user.profile)) {
-        this.applyPromise(this.findUserProfile());
-      }
-    } else if (this.app.rootState.token && !(this.app.rootState.user && this.app.rootState.user.profile)) {
-      await this.applyPromise(this.findUserProfile());
-    }
-  }
-  async getMyUser(body) {
-    const res = await this.api.fetch('/api/users/me', {
-      method: 'POST',
-      body,
-    });
-    return res.data;
   }
 
   async findUserProfile() {
@@ -82,15 +43,6 @@ export default class AuthClientModule extends Module {
     }
   }
 
-  setUser(userData = null) {
-    DEBUG && console.log('AuthStore.setUser', user);  //eslint-disable-line
-    this.app.rootState.user = userData;
-    // this.app.resetState();
-    if (userData) {
-      if (this.app.user && this.app.user.setState) this.app.user.setState(userData);
-    } else if (this.app.user && this.app.user.reset) this.app.user.reset();
-  }
-
   getUserAndTokenFromRootState() {
     // DEBUG && console.log('AuthStore.getUserAndToken');  //eslint-disable-line
     const res = {};
@@ -109,106 +61,46 @@ export default class AuthClientModule extends Module {
     return res;
   }
 
-  // async saveStore(promise) {
-  //   const res = await this.applyPromise(promise);
-  //   // if (__CLIENT__) {
-  //   //   await this.applyPromise(this.findUserProfile());
-  //   // }
-  //   return res;
-  // }
-
   async loadStore() {
-    if (typeof localStorage !== 'undefined') {
-      const sessions = tryJSONparse(localStorage.getItem('lsk.auth.sessions'));
-      this.authStore.sessions = sessions || [];
-    }
+    this.store.setState(this.storage.get('auth'));
   }
   async saveStore() {
-    // DEBUG && console.log('AuthStore.applyPromise @@@1', promise);  //eslint-disable-line
-    // @TODO: промис может быть в процессе резрешения
-
-    const { session, sessions } = this.authStore;
-
-    const js = this.authStore.toJS();
-    // console.log({ session, sessions, js});
-    
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('lsk.auth.sessions', JSON.stringify(sessions));
-    }
-
-    // DEBUG && console.log('AuthStore.setUserAndToken', res);  //eslint-disable-line
-    if (session.token || session.user) {
-      if (session.token) {
-        await this.setToken(session.token);
-      }
-      if (session.user && session.user._id) {
-        await this.setUser(session.user);
-      }
-    } else {
-      await this.setUser(null);
-      await this.setToken(null);
-    }
-
+    const { session } = this.store;
+    this.storage.set('auth', this.store.toJS());
+    await this.setToken(session ? session.token : null);
     // try {
     //   await this.app.reconnect();
     // } catch (err) {
     //   console.error('AuthStore.applyPromise: this.app.reconnect', err);  //eslint-disable-line
     // }
-
-    // return res;
-  }
-
-  isAuthAsync() {
-    DEBUG && console.log('AuthStore.isAuthAsync', this.promise);  //eslint-disable-line
-    if (!this.promise) return this.isAuth();
-    return this.promise.then(() => this.isAuth()).catch(() => this.isAuth());
   }
 
   isAuth() {
-    return !!(this.authStore && this.authStore.session);
-    return !!(this.app.rootState && this.app.rootState.token && this.app.rootState.user && this.app.rootState.user._id);
+    return !!this.store.session;
   }
 
-  logout(dontSaveCookies = false, redirect = true) {
-    DEBUG && console.log('AuthStore.logout!');  //eslint-disable-line
-    this.setToken(null, 365, !dontSaveCookies);
-    this.setUser(null);
-    if (__CLIENT__) {
-      localStorage.clear();
-    }
-    if (redirect) {
-      if (__CLIENT__) window.location = '/';
-      this.app.redirect('/');
-      // this.setUserAndToken({});
-    }
+  async logout(redirect = true) {
+    await this.store.logout();
+    await this.saveStore();
+    if (redirect) this.app.redirect('/');
   }
 
-  setData(...args) {
-    return this.authStore.setData(...args);
-  }
-  signup(...args) {
-    return this.authStore.signup(...args);
-  }
-
-  async silent(...args) {
-    await this.authStore.authSilent(...args);
-    return this.saveStore();
-  }
-
-  async signupAndLogin(...args) {
-    await this.authStore.signup(...args);
-    return this.saveStore();
+  async signup(...args) {
+    await this.store.signup(...args);
+    await this.saveStore();
   }
 
   async login(...args) {
-    console.log('login @@@');
+    await this.store.login(...args);
+    await this.saveStore();
+  }
 
-    await this.authStore.login(...args);
-    return this.saveStore();
+  setData(...args) {
+    return this.store.setData(...args);
   }
 
   recovery(...args) {
-    return this.authStore.authRecovery(...args);
+    return this.store.authRecovery(...args);
   }
 
   restorePassword({ email }) {
