@@ -58,8 +58,11 @@ export default class ElasticServerModule extends Module {
   };
   async init() {
     await super.init();
-    const configElasticsearch = this.app.config.elasticsearch;
-    if (!configElasticsearch) return;
+    const configElasticsearch = this.app.config.elastic || this.app.config.elasticsearch;
+    if (!configElasticsearch) {
+      this.log.warn('config.elastic IS EMPTY');
+      return;
+    }
     this.enabled = true;
     this.nowSync = [];
     this.config = merge({}, this.defaultConfig, configElasticsearch);

@@ -1,4 +1,4 @@
-export default (val) => {
+export default val => {
   try {
     return (val || '').toString().replace(/\\n/g, '\n');
   } catch (err) {

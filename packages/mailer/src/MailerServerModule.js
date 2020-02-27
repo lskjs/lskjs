@@ -13,6 +13,10 @@ export default class MailerServerModule extends Module {
   async init() {
     await super.init();
     this.config = get(this.app, 'config.mailer');
+    if (!this.config) {
+      this.log.warn('config.mailer IS EMPTY');
+      return;
+    }
     this.templates = this.getTemplates();
     this.transporter = this.getTransporter();
   }
@@ -92,7 +96,7 @@ export default class MailerServerModule extends Module {
       ...otherProps,
     });
     return {
-      ...this.config.options,
+      ...this.config.options || {},
       ...this.getTemplateOptions(email),
     };
   }

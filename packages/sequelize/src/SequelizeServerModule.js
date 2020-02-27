@@ -22,7 +22,10 @@ export default class SequelizeServerModule extends Module {
   async init() {
     await super.init();
     const configSequelize = this.app.config.sequelize;
-    if (!configSequelize) return;
+    if (!configSequelize) {
+      this.log.warn('config.sequelize IS EMPTY');
+      return;
+    }
     this.enabled = true;
     this.config = merge(
       {
