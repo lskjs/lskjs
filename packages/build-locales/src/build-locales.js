@@ -12,24 +12,28 @@ const parseAsync = promisify(parse);
 
 export default async (spreadsheets, locales, destination) => {
   const localesRows = [];
-  await Promise.all(spreadsheets.map(async (spreadsheet) => {
-    const rows = await parseAsync(spreadsheet, { columns: true });
-    localesRows.push(...rows);
-  }));
+  await Promise.all(
+    spreadsheets.map(async spreadsheet => {
+      const rows = await parseAsync(spreadsheet, { columns: true });
+      localesRows.push(...rows);
+    }),
+  );
   try {
     rimraf.sync(destination);
     mkdirp.sync(destination);
   } catch (err) {
     console.error(err);
   }
-  locales.forEach((locale) => {
+  locales.forEach(locale => {
     const dirname = path.join(destination, locale);
-   
+
     fs.writeFileSync(`${dirname}.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     // fs.writeFileSync(`${dirname}/translation.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
-    const namespaces = groupBy(localesRows, 'ns');
+    const namespaces = groupBy(
+      localesRows.filter(row => row.ns),
+      'ns',
+    );
     forEach(namespaces, (rows, pns) => {
-      if (!pns) return;
       const ns = String(pns).trim();
       if (!ns) return;
       try {
