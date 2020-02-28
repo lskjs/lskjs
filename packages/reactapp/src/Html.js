@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 
-const trim = str => str;
+// const trim = str => str;
 
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 export default class Html {
@@ -22,7 +22,7 @@ export default class Html {
 
   renderOGMeta() {
     const { meta = {} } = this;
-    return trim`\
+    return `\
 ${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}\
 ${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}\
 ${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}\
@@ -37,7 +37,7 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
   renderHead() {
     const js = this.renderJS();
     const { head } = this;
-    return trim`\
+    return `\
 <title>${this.renderTitle()}</title>\
 ${this.renderMeta()}\
 ${this.renderShims()}\
@@ -58,7 +58,7 @@ ${this.renderPreloader()} \
 
   renderMeta() {
     const { meta = {} } = this;
-    return trim`\
+    return `\
 <meta charset="utf-8">\
 <meta http-equiv="x-ua-compatible" content="ie=edge" />\
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />\
@@ -66,7 +66,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 `;
   }
   renderShims() {
-    return trim`\
+    return `\
 <!--[if lt IE 9]>\
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>\
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>\
@@ -90,7 +90,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
   renderJS() {
     const { js = '' } = this;
-    return trim`\
+    return `\
 ${this.renderGlobals()}\
 ${js}\
 `;
@@ -168,13 +168,13 @@ ${util.inspect(this.page.state)}
 
   renderFooter() {
     const { footer } = this;
-    return trim`\
+    return `\
 ${footer || ''}\
 `;
   }
 
   renderRootState() {
-    return trim`\
+    return `\
 <script>\
 window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};\
 </script>\
@@ -182,7 +182,7 @@ window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)}
   }
 
   render() {
-    return trim`\
+    return `\
 <!doctype html>\
 <html class="${this.getHtmlClass()}">\
 <head>\
