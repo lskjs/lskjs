@@ -85,7 +85,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
   renderStyle() {
     const { styles = [] } = this;
-    return trim`<style id="css">${styles.join('\n')}</style>`;
+    return `<style id="css">${styles.join('\n')}</style>`;
   }
 
   renderJS() {
@@ -151,7 +151,7 @@ ${js}\
 
   renderDebug() {
     const util = require('util');
-    return trim`<!--
+    return `<!--
 DEBUG INFO
 
 __SERVER__: ${__SERVER__}
