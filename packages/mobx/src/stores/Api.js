@@ -11,3 +11,4 @@ export default class Api {
     return api.fetch(...args);
   }
 }
+

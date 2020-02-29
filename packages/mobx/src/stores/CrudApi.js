@@ -3,10 +3,10 @@ import Api from './Api';
 
 export default class CrudApi extends Api {
   base = '/api/v1/some';
-  find(body) {
+  find(data) {
     return this.fetch(`${this.base}/find`, {
       method: 'POST',
-      body,
+      data,
     });
   }
   findOne(_id) {
@@ -15,18 +15,18 @@ export default class CrudApi extends Api {
       qs: { _id },
     });
   }
-  create(body) {
+  create(data) {
     return this.fetch(`${this.base}/create`, {
       method: 'POST',
-      body,
+      data,
     });
   }
-  update({ _id, ...body }) {
-  // update(_id, body) {
+  update({ _id, ...data }) {
+  // update(_id, data) {
     return this.fetch(`${this.base}/update`, {
       method: 'POST',
       qs: { _id },
-      body,
+      data,
     });
   }
   remove(_id) {

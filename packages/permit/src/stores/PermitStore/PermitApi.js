@@ -11,17 +11,17 @@ export default class PermitApi extends CrudApi {
     });
   }
 
-  approveEmail(body) {
+  approveEmail(data) {
     return this.fetch(`${this.base}/approveEmail`, {
       method: 'POST',
-      body,
+      data,
     });
   }
 
-  changePassword(body) {
+  changePassword(data) {
     return this.fetch(`${this.base}/changePassword`, {
       method: 'POST',
-      body,
+      data,
     });
   }
 }

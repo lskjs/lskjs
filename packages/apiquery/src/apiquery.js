@@ -177,15 +177,16 @@ ${JSON.stringify(data, null, 2)}
   }
 
   getCtx(url, params = {}) {
+    const data = params.data || params.body;
     const req = {
       url,
       headers: {
         ...this.headers,
       },
       ...pick(params, AXIOS_PARAMS),
+      data,
     };
 
-    // const body = params.body || params.data;
     if (!req.headers) req.headers = {};
     if (!req.headers.Accept) req.headers.Accept = 'application/json';
     if (!req.headers['Content-Type']) req.headers['Content-Type'] = 'application/json; charset=utf-8';
