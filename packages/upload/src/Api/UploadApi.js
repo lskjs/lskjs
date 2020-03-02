@@ -1,5 +1,5 @@
 import Api from '@lskjs/server-api';
-import getFileExtension from '@lskjs/utils/getFileExtension';
+// import getFileExtension from '@lskjs/utils/getFileExtension';
 import multer from 'multer';
 import fs from 'fs';
 import path from 'path';
@@ -37,10 +37,6 @@ export default class V5UploadCardApi extends Api {
       filename: file.originalname,
     };
   }
-
-  iamge() {
-    throw 'not realized yet';
-  }
   async middleware(middleware, [req, res], callback) {
     return middleware(req, res, callback);
   }
@@ -60,5 +56,8 @@ export default class V5UploadCardApi extends Api {
       const { files = [] } = req;
       return Promise.map(files, file => this.saveFile(file));
     });
+  }
+  image() {
+    throw 'not realized yet';
   }
 }

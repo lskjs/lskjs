@@ -43,7 +43,6 @@
   "devDependencies": {
     "@lskjs/module": "1.0.37",
     "@lskjs/server-api": "1.0.37",
-    "@lskjs/utils": "1.0.37",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
     "moment": "2.24.0"
@@ -51,7 +50,6 @@
   "peerDependencies": {
     "@lskjs/module": "*",
     "@lskjs/server-api": "*",
-    "@lskjs/utils": "*",
     "bluebird": "*",
     "lodash": "*",
     "moment": "*"
