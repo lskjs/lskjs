@@ -33,6 +33,7 @@ export default class AuthClientModule extends Module {
   setToken(token, expires = 365, cookies = true) {
     DEBUG && console.log('AuthStore.setToken', token);  //eslint-disable-line
     this.app.api.setAuthToken(token);
+    if (this.app.apiq) this.app.apiq.setToken(token);
     this.app.rootState.token = token;
     if (__CLIENT__ && cookies) {
       if (token == null) {

@@ -68,6 +68,7 @@ export default class UploadServerModule extends Module {
     } else if (config.allowGuest) {
       path += '/general';
     } else {
+      this.app.log.error('Guest can not upload files');
       throw this.app.e('Guest can not upload files', { status: 403 });
     }
 

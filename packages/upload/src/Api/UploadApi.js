@@ -9,10 +9,8 @@ export default class V5UploadCardApi extends Api {
       'POST /photo': ::this.image,
     };
   }
-
-  saveFile(file) {
-    const { upload: config } = this.app.config.upload;
-
+  getFileInfo(file) {
+    const { upload: config = {} } = this.app.config.upload;
     if (config.s3) {
       return {
         name: file.fieldname,
@@ -23,35 +21,29 @@ export default class V5UploadCardApi extends Api {
         filename: file.originalname,
       };
     }
-
     return {
       name: file.fieldname,
-      url: `${config.url}/${file.path}`,
+      url: this.app.url(`/${file.path}`),
       path: `/${file.path}`,
       relative: `/${file.path}`,
       mimetype: file.mimetype,
       filename: file.originalname,
     };
   }
-  async middleware(middleware, [req, res], callback) {
-    return middleware(req, res, callback);
-  }
-  async file(...args) {
+  async file(req, res) {
     const upload = await this.app.module('upload');
     if (!upload) throw '!upload';
-    return this.middleware(upload.multer.single('file'), args, req => {
-      const { file } = req;
-      if (!file) throw this.app.e('upload.emptyFile', { status: 400 });
-      return this.saveFile(file);
-    });
+    await this.useMiddleware(upload.multer.single('file'), req, res);
+    const { file } = req;
+    if (!file) throw this.app.e('upload.emptyFile', { status: 400 });
+    return this.getFileInfo(file);
   }
-  async files(...args) {
+  async files(req, res) {
     const upload = await this.app.module('upload');
     if (!upload) throw '!upload';
-    return this.middleware(upload.multer.any(), args, req => {
-      const { files = [] } = req;
-      return Promise.map(files, file => this.saveFile(file));
-    });
+    await this.useMiddleware(upload.multer.any(), req, res);
+    const { files = [] } = req;
+    return Promise.map(files, file => this.getFileInfo(file));
   }
   image() {
     throw 'not realized yet';
