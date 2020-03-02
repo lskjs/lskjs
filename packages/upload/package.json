@@ -38,13 +38,15 @@
     "multer-s3": "2.9.0"
   },
   "devDependencies": {
-    "@lskjs/module": "^1.0.47",
-    "@lskjs/server-api": "^1.0.48",
-    "lodash": "4.17.15"
+    "@lskjs/module": "1.0.47",
+    "@lskjs/server-api": "1.0.48",
+    "lodash": "4.17.15",
+    "bluebird": "3.7.2"
   },
   "peerDependencies": {
     "@lskjs/module": "*",
     "@lskjs/server-api": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "bluebird": "*"
   }
 }

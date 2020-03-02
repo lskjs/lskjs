@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+import Promise from 'bluebird';
 
 export default class UploadClientModule extends Module {
   name = 'UploadClientModule';
