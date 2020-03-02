@@ -7,6 +7,7 @@ import forEach from 'lodash/forEach';
 import { observable } from 'mobx';
 import Favico from 'favico.js';
 import Api from '@lskjs/apiquery';
+import Apiq from '@lskjs/apiquery/q';
 import scrollTo from '@lskjs/scroll';
 import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/utils/addClassToHtml';
@@ -26,6 +27,7 @@ global.DEV = () => null;
 export default class Uapp extends Module {
   name = 'Uapp';
   Api = Api;
+  Apiq = Apiq;
   Page = DefaultPage;
   pageProps = {};
   rootState = {};
@@ -63,6 +65,10 @@ export default class Uapp extends Module {
     this.stores = this.getStores();
     // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
+    this.apiq = new this.Apiq({
+      config: this.config ? this.config.apiq : {},
+      resolve: this.app.resolve,
+    });
 
     await this.initSession();
 

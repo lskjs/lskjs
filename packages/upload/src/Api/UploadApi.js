@@ -1,8 +1,4 @@
 import Api from '@lskjs/server-api';
-// import getFileExtension from '@lskjs/utils/getFileExtension';
-import multer from 'multer';
-import fs from 'fs';
-import path from 'path';
 
 export default class V5UploadCardApi extends Api {
   getRoutes() {
