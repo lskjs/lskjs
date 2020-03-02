@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -46,13 +46,13 @@
     "uuid": "3.4.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^1.0.46",
-    "@lskjs/autobind": "1.0.0",
-    "@lskjs/db": "^1.0.18",
-    "@lskjs/i18": "^1.0.18",
-    "@lskjs/log": "^1.0.37",
-    "@lskjs/module": "^1.0.46",
-    "@lskjs/utils": "^1.0.37",
+    "@lskjs/apiquery": "^1.0.47",
+    "@lskjs/autobind": "^1.0.47",
+    "@lskjs/db": "^1.0.47",
+    "@lskjs/i18": "^1.0.47",
+    "@lskjs/log": "^1.0.47",
+    "@lskjs/module": "^1.0.47",
+    "@lskjs/utils": "^1.0.47",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
