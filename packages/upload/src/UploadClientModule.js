@@ -2,8 +2,12 @@ import Module from '@lskjs/module';
 
 export default class UploadClientModule extends Module {
   name = 'UploadClientModule';
+  async uploadFiles(files) {
+    if (typeof window === 'undefined') throw '!FormData';
+    return Promise.map(files, file => this.uploadFile(file));
+  }
   async uploadFile(file) {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') throw '!FormData';
     const { FormData } = window;
     const data = new FormData();
     data.append('file', file);
