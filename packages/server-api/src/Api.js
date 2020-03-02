@@ -37,7 +37,14 @@ export default class Api {
     if (!req.user || !req.user._id) throw this.errors.e401('!req.user');
     return true;
   }
-
+  async useMiddleware(middleware, req, res) {
+    return new Promise((resolve, reject) => {
+      return middleware(req, res, async err => {
+        if (err) return reject(err);
+        return resolve();
+      });
+    });
+  }
   async validateParams(data, fields) {
     const errors = map(fields, (validator, param) => {
       if (validator && validator.required && data[param] == null) {

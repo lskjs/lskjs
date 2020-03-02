@@ -7,6 +7,20 @@ import Api from './Api';
 export default class TestApi extends Api {
   getRoutes() {
     return {
+      '/middleware/1': async (req, res) => {
+        const middleware = (req2, res2, next) => {
+          req2.file = 123;
+          if (Math.random() < 0.5) {
+            console.log('test.error');
+            next(new Error('test.error'));
+          } else {
+            next();
+          }
+        };
+        await this.useMiddleware(middleware, req, res);
+        console.log('req.file', req.file);
+        return { asd: 123 };
+      },
       '/res/1': () => 123,
       '/res/2': () => 'Hello',
       '/res/3': () => () => {},
