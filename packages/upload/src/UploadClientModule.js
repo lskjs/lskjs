@@ -7,7 +7,7 @@ export default class UploadClientModule extends Module {
     const { FormData } = window;
     const data = new FormData();
     data.append('file', file);
-    const res = await this.app.api.fetch('/api/module/upload', {
+    const res = await this.app.api.fetch('/api/upload/file', {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -17,7 +17,7 @@ export default class UploadClientModule extends Module {
     return res.data;
   }
   async uploadImage(data) {
-    const res = await this.app.api.fetch('/api/module/upload', {
+    const res = await this.app.api.fetch('/api/upload/image', {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',

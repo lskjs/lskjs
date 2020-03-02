@@ -9,7 +9,8 @@ export default class V5UploadCardApi extends Api {
     return {
       'POST /file': ::this.file,
       'POST /files': ::this.files,
-      'POST /photo': ::this.photo,
+      'POST /image': ::this.image,
+      'POST /photo': ::this.image,
     };
   }
 
@@ -37,7 +38,7 @@ export default class V5UploadCardApi extends Api {
     };
   }
 
-  photo() {
+  iamge() {
     throw 'not realized yet';
   }
   async middleware(middleware, [req, res], callback) {
