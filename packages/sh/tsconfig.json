@@ -11,7 +11,7 @@
       "dom"
     ],
     "sourceMap": true,
-    "allowJs": false,
+    "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDirs": [
@@ -37,6 +37,7 @@
   "exclude": [
     "node_modules",
     "build",
+    "release",
     "scripts"
   ]
 }

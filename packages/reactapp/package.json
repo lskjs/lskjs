@@ -10,7 +10,6 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/reactapp",
   "keywords": [],
   "scripts": {
-    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "dev": "npm run jest test/active -- --watch",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
@@ -26,7 +25,8 @@
     "release": "../../scripts/package-release.sh",
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
-    "styleguide": "../../scripts/package-styleguide.sh"
+    "styleguide": "../../scripts/package-styleguide.sh",
+    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
     "history": "4.10.1",

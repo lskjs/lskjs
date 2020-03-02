@@ -2,7 +2,7 @@ module.exports = {
   presets: [
     '@babel/preset-env',
     '@babel/preset-react',
-    '@babel/typescript'
+    '@babel/typescript',
     // '@babel/preset-stage-0',
   ],
   plugins: [
@@ -15,17 +15,20 @@ module.exports = {
     '@babel/plugin-proposal-export-namespace-from',
     '@babel/plugin-transform-modules-commonjs',
     '@babel/plugin-transform-runtime',
-    ["babel-plugin-root-import", {
-      "rootPathPrefix": "~",
-      "rootPathSuffix": "src"
-    }],
+    [
+      'babel-plugin-root-import',
+      {
+        rootPathPrefix: '~',
+        rootPathSuffix: 'src',
+      },
+    ],
     'emotion',
   ],
-  env: {
-    production: {
-      presets: ['minify'],
-    },
-  },
+  // env: {
+  //   production: {
+  //     presets: ['minify'],
+  //   },
+  // },
 };
 
 // https://github.com/trayio/babel-plugin-webpack-alias
