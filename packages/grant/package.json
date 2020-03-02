@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@lskjs/module": "^1.0.47",
-    "@lskjs/server-api": "^1.0.47",
+    "@lskjs/server-api": "^1.0.48",
     "@lskjs/utils": "^1.0.47",
     "lodash": "4.17.15"
   },
