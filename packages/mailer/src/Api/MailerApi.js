@@ -1,4 +1,5 @@
 import Api from '@lskjs/server-api';
+import get from 'lodash/get';
 
 export default class MailerApi extends Api {
   getRoutes() {
@@ -13,11 +14,13 @@ export default class MailerApi extends Api {
       data: { email, ...data },
       params: { template, type },
     } = req;
+    const devProps = get(mailer.devProps, template, {});
+    const params = { ...devProps, ...data, template };
     if (type === 'email') {
       if (!email) throw '!email';
-      return mailer.send({ ...data, template, to: email });
+      return mailer.send({ ...params, to: email });
     }
-    const options = mailer.renderTemplate({ ...data, template });
+    const options = mailer.renderTemplate(params);
     if (type === 'html') {
       return res.send(options.html);
     }

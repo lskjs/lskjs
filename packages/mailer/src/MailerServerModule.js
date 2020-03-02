@@ -7,7 +7,7 @@ import inlineCss from 'nodemailer-juice';
 export default class MailerServerModule extends Module {
   name = 'MailerServerModule';
   getTemplates() {
-    return require('./templates').default({ app: this.app });
+    return require('./templates').default;
   }
 
   async init() {
@@ -87,6 +87,7 @@ export default class MailerServerModule extends Module {
     const Template = this.templates[template];
     if (!Template) throw this.app.e('mailer.!Template', { template });
     const email = new Template({
+      // app: this.app,
       theme: this.theme,
       log: this.app.log,
       url: this.app.url,
