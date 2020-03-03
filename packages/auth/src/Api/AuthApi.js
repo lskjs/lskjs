@@ -6,12 +6,12 @@ import map from 'lodash/map';
 import omit from 'lodash/omit';
 import unset from 'lodash/unset';
 import get from 'lodash/get';
-import validator from 'validator';
 import BaseApi from '@lskjs/server-api';
 import transliterate from '@lskjs/utils/transliterate';
 import canonizeParams from '@lskjs/utils/canonizeParams';
-import canonizePhone from '@lskjs/utils/canonizePhone';
-import validatePhone from '@lskjs/utils/validatePhone';
+// import canonizePhone from '@lskjs/utils/canonizePhone';
+// import validatePhone from '@lskjs/utils/validatePhone';
+import validateEmail from '@lskjs/utils/validateEmail';
 import getReqOrigin from '@lskjs/utils/getReqOrigin';
 import createHelpers from '../utils/createHelpers';
 
@@ -25,33 +25,34 @@ export default class Api extends BaseApi {
     return {
       '/login': ::this.login,
       '/signup': ::this.signup, // POST
-      '/recovery': ::this.recovery,
       '/updateToken': ::this.updateToken,
 
+      '/permit': ::this.getPermit,
+      '/confirm': ::this.confirmPermit,
       // // '/loginToken': ::this.loginToken,
-      '/email/approve': ::this.emailApprove, // (req, res) => res.redirect('/cabinet'));
 
-      '/phone/code': ::this.phoneCode,
-      '/phone/approve': ::this.phoneApprove,
-      '/phone/login': ::this.phoneLogin,
-      '/accountkit': ::this.accountkit,
+      '/restorePassword': ::this.restorePassword,
+      // '/setPassword': ::this.setPassword, => confirm
+
+      // '/email/confirm': ::this.confirmEmail, // (req, res) => res.redirect('/cabinet'));
+
+      // '/phone/code': ::this.phoneCode,
+      // '/phone/approve': ::this.phoneApprove, => confirm
+      // '/phone/login': ::this.phoneLogin,
       //
       '/status': ::this.status,
       '/check': ::this.check,
-      '/confirm': ::this.confirm,
 
       // Регистрация пользователя через соц сеть
-      '/social': ::this.getSocials, // isAuth,
-      '/social/signup': ::this.socialLogin,
-      '/social/login': ::this.socialLogin,
-      '/social/bind': ::this.socialBind, // Добавление соц.сетей к пользователю // isAuth,
-      '/social/unbind': ::this.socialUnbind, // isAuth,
+      // '/social': ::this.getSocials, // isAuth,
+      // '/social/signup': ::this.socialLogin,
+      // '/social/login': ::this.socialLogin,
+      // '/social/bind': ::this.socialBind, // Добавление соц.сетей к пользователю // isAuth,
+      // '/social/unbind': ::this.socialUnbind, // isAuth,
 
-      '/passport/getByToken': ::this.getPassportByToken,
-      '/passports/detach': ::this.passportsDetach,
-      '/restorePasswordPermit': ::this.restorePasswordPermit,
-      '/confirmPassword': ::this.confirmPassword,
-      '/getPermit': ::this.getPermit,
+      // '/passport/getByToken': ::this.getPassportByToken,
+      // '/passports/detach': ::this.passportsDetach,
+      // '/restorePasswordPermit': ::this.restorePasswordPermit,
 
       '/info': ::this.info,
       // social auth init
@@ -188,7 +189,111 @@ export default class Api extends BaseApi {
     };
   }
 
-  async confirmPassword(req) {
+  async confirmPermit(req) {
+    const { code, permitId } = req.data;
+    const { UserModel, PermitModel } = this.app.models;
+    if (!code) throw '!code';
+    // const permit = await PermitModel.findById(permitId);
+    // if (!permit) throw this.e(404, 'Permit not found!');
+
+    const permit = await PermitModel.findByCode(code, {
+      _id: permitId,
+      type: 'auth',
+    });
+
+    if (!permit) throw 'invalidCode';
+    const { provider } = permit.info;
+    if (!provider) throw '!provider';
+
+    if (!permit.info[provider]) throw '!permit.info[provider]';
+    const params = {
+      [provider]: permit.info[provider],
+    };
+
+    const operation = await this.getOperation(req, { provider, params });
+
+    let user;
+    if (operation === 'signup') {
+      user = new UserModel(params);
+      user.editedAt = new Date();
+      user.signinAt = new Date();
+    } else if (operation === 'login') {
+      user = await UserModel.findOne(params).sort({ createdAt: 1 });
+      if (!user) throw '!user';
+      user.signinAt = new Date();
+    } else if (operation === 'attach') {
+      if (!req.user) throw '!user';
+      user = await UserModel.findById(req.user._id);
+      if (!user) throw '!user';
+      user[provider] = permit.info[provider];
+      user.editedAt = new Date();
+      const user2 = await UserModel.findOne(params);
+      if (user2) throw 'HAS_BEEN_ATTACHED';
+    } else {
+      throw '!operation';
+    }
+
+    await permit.activate();
+    await user.save();
+    const token = user.generateAuthToken();
+    // console.log(`auth/confirm ${user._id} ${token}`); // this.app.logger
+    return {
+      isNew: operation === 'signup',
+      operation,
+      token,
+      status: await user.getStatus(),
+      user: await UserModel.prepare(user, { req, view: 'extended' }),
+    };
+  }
+
+  async restorePassword(req) {
+    const { UserModel, PermitModel } = this.app.models;
+    const { email } = req.data;
+
+    if (!email || !validateEmail(email)) {
+      throw 'emailNotValid';
+    }
+    const user = await UserModel.findOne({ email }).select(['email']);
+    if (!user) {
+      throw 'notFound';
+    }
+    const date = new Date();
+    const str = `${user._id}_${email}_${date.getTime()}`;
+    const code = await PermitModel.generateUniqCode({
+      codeParams: { str, type: 'hash' },
+      criteria: {
+        type: 'user.restorePassword',
+        activatedAt: {
+          $exists: false,
+        },
+        expiredAt: {
+          $gte: date,
+        },
+      },
+    });
+    const permit = await PermitModel.createPermit({
+      expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
+      type: 'user.restorePassword',
+      userId: user._id,
+      info: {
+        userId: user._id,
+        email,
+      },
+      code,
+    });
+    this.app.emit('events.auth.restorePassword', {
+      type: 'events.auth.restorePassword',
+      targetUser: user,
+      user,
+      permit,
+      email,
+      link: this.app.url(`/auth/permit?permitId=${permit._id}&code=${permit.code}`),
+    });
+    // console.log(this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
+    return PermitModel.prepare(permit, { req });
+  }
+
+  async setPassword(req) {
     const { UserModel, PermitModel } = this.app.models;
     const { code, password } = req.data;
     if (!code) throw '!code';
@@ -237,40 +342,40 @@ export default class Api extends BaseApi {
   //   };
   // }
 
-  async recovery(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { mailer } = this.app.modules;
-    if (!mailer) throw 'Система не может отправить email';
+  // async recovery(req) {
+  //   const UserModel = this.app.models.UserModel || this.app.models.User;
+  //   const { mailer } = this.app.modules;
+  //   if (!mailer) throw 'Система не может отправить email';
 
-    // const params = req.data;
+  //   // const params = req.data;
 
-    const criteria = this.getUserCriteria(req);
-    const user = await UserModel.findOne(criteria);
-    if (!user) throw this.app.e('Неверный логин', { status: 404 });
-    const email = user.getEmail();
-    if (!email) throw this.app.e('У этого пользователя не был указан емейл для восстановления', { status: 400 });
+  //   const criteria = this.getUserCriteria(req);
+  //   const user = await UserModel.findOne(criteria);
+  //   if (!user) throw this.app.e('Неверный логин', { status: 404 });
+  //   const email = user.getEmail();
+  //   if (!email) throw this.app.e('У этого пользователя не был указан емейл для восстановления', { status: 400 });
 
-    const password = UserModel.generatePassword();
+  //   const password = UserModel.generatePassword();
 
-    await mailer.send({
-      ...user.getMailerParams('primary'),
-      template: 'recovery',
-      // locale: user.locale || req.locale,
-      // to: user.getEmail(),
-      params: {
-        user: user.toJSON(),
-        password,
-      },
-    });
+  //   await mailer.send({
+  //     ...user.getMailerParams('primary'),
+  //     template: 'recovery',
+  //     // locale: user.locale || req.locale,
+  //     // to: user.getEmail(),
+  //     params: {
+  //       user: user.toJSON(),
+  //       password,
+  //     },
+  //   });
 
-    await user.setPassword(password);
-    await user.save();
+  //   await user.setPassword(password);
+  //   await user.save();
 
-    return {
-      __pack: 1,
-      emailSended: true,
-    };
-  }
+  //   return {
+  //     __pack: 1,
+  //     emailSended: true,
+  //   };
+  // }
 
   async info() {
     const authModule = await this.app.module('auth');
@@ -383,136 +488,6 @@ export default class Api extends BaseApi {
     return { ok: 1 };
   }
 
-  async accountkit(req, res) {
-    const { debug } = req.data;
-    const { accountkit } = this.app.config.auth.providers;
-    if (!accountkit) throw '!config.auth.accountkit';
-    // eslint-disable-next-line import/no-extraneous-dependencies
-    const Accountkit = require('node-accountkit');
-    const { appId, appSecret, apiVersion, requireAppSecret } = accountkit;
-
-    const csrf = 'qwertyui';
-
-    if (__DEV__ && debug) {
-      return res.send(`
-<script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
-
-<input value="+7" id="country_code" />
-<input placeholder="phone number" id="phone_number" value="9178292237"/>
-<button onclick="smsLogin();">Login via SMS</button>
-<div>OR</div>
-<input placeholder="email" id="email"/>
-<button onclick="emailLogin();">Login via Email</button>
-
-
-
-<script>
-  // initialize Account Kit with CSRF protection
-  AccountKit_OnInteractive = function(){
-    AccountKit.init(
-      {
-        appId:"${appId}", 
-        state:"${csrf}", 
-        version:"${apiVersion}",
-        fbAppEventsEnabled:true,
-        redirect:"http://localhost:8080/api/v5/auth/accountkit"
-      }
-    );
-  };
-
-  // login callback
-  function loginCallback(response) {
-    console.log('response', response);
-    if (response.status === "PARTIALLY_AUTHENTICATED") {
-      var code = response.code;
-      var csrf = response.state;
-     window.location='/api/v5/auth/accountkit?csrf=${csrf}&access_token=' + response.code;
-      // Send code to server to exchange for access token
-    }
-    else if (response.status === "NOT_AUTHENTICATED") {
-      // handle authentication failure
-    }
-    else if (response.status === "BAD_PARAMS") {
-      // handle bad parameters
-    }
-  }
-
-  // phone form submission handler
-  function smsLogin() {
-    var countryCode = document.getElementById("country_code").value;
-    var phoneNumber = document.getElementById("phone_number").value;
-    AccountKit.login(
-      'PHONE', 
-      {countryCode: countryCode, phoneNumber: phoneNumber}, // will use default values if not specified
-      loginCallback
-    );
-  }
-
-
-  // email form submission handler
-  function emailLogin() {
-    var emailAddress = document.getElementById("email").value;
-    AccountKit.login(
-      'EMAIL',
-      {emailAddress: emailAddress},
-      loginCallback
-    );
-  }
-</script>
-      `);
-    }
-
-    const { UserModel } = this.app.models;
-    // eslint-disable-next-line camelcase
-    const { access_token } = req.data;
-    Accountkit.set(appId, appSecret, apiVersion);
-    Accountkit.requireAppSecret(requireAppSecret);
-
-    const data = await new Promise((resolve, reject) => {
-      Accountkit.getAccountInfo(access_token, (err, resp) => {
-        if (err) return reject(err);
-        return resolve(resp);
-      });
-    });
-    const phone = canonizePhone(data.phone.number);
-    if (!validatePhone(phone)) throw this.app.e('auth.invalidPhone', { status: 400 });
-
-    const provider = 'phone';
-    const params = { phone };
-    const operation = await this.getOperation(req, { provider, params });
-
-    let user;
-    if (operation === 'signup') {
-      user = new UserModel(params);
-      user.editedAt = new Date();
-      user.signinAt = new Date();
-    } else if (operation === 'login') {
-      user = await UserModel.findOne(params);
-      if (!user) throw '!user';
-      user.signinAt = new Date();
-    } else if (operation === 'attach') {
-      if (!req.user) throw '!user';
-      user = await UserModel.findById(req.user._id);
-      if (!user) throw '!user';
-      user.phone = phone;
-      user.editedAt = new Date();
-      const user2 = await UserModel.findOne(params);
-      if (user2) throw 'HAS_BEEN_ATTACHED';
-    } else {
-      throw '!operation';
-    }
-    await user.save();
-    const token = user.generateAuthToken();
-    // console.log(`auth/accountkit ${user._id} ${token}`); // this.app.logger
-    return {
-      isNew: operation === 'signup',
-      operation,
-      token,
-      status: await user.getStatus(),
-      user: await UserModel.prepare(user, { req, view: 'extended' }),
-    };
-  }
-
   async socialUnbind(req) {
     const { checkNotFound } = this.app.helpers;
     const UserModel = this.app.models.UserModel || this.app.models.User;
@@ -556,19 +531,6 @@ export default class Api extends BaseApi {
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
-  }
-
-  async approveEmail(req) {
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    return UserModel.findAndApproveEmail(req.data.t);
-  }
-  async approvedEmail(req) {
-    console.log('DEPRECATED lsk-auth  approvedEmail => approveEmail');  //eslint-disable-line
-    return this.approveEmail(req);
-  }
-  async emailApprove(req) {
-    console.log('DEPRECATED lsk-auth  emailApprove => approveEmail'); //eslint-disable-line
-    return this.approveEmail(req);
   }
 
   async phoneCode(req) {
@@ -704,7 +666,7 @@ export default class Api extends BaseApi {
     const user = await UserModel.findById(userId);
     if (!user) throw '!user';
     const { email } = req.data;
-    if (!email || !validator.isEmail(email)) {
+    if (!email || !validateEmail(email)) {
       throw 'emailNotValid';
     }
     let type;
@@ -848,54 +810,6 @@ export default class Api extends BaseApi {
     });
     return permit;
   }
-  async restorePasswordPermit(req) {
-    // console.log('123123123');
-    const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { PermitModel } = this.app.models;
-    const { email } = req.data;
-
-    if (!email || !validator.isEmail(email)) {
-      throw 'emailNotValid';
-    }
-    const user = await UserModel.findOne({ email }).select(['email']);
-    if (!user) {
-      throw 'notFound';
-    }
-    const date = new Date();
-    const str = `${user._id}_${email}_${date.getTime()}`;
-    const code = await PermitModel.generateUniqCode({
-      codeParams: { str, type: 'hash' },
-      criteria: {
-        type: 'user.restorePassword',
-        activatedAt: {
-          $exists: false,
-        },
-        expiredAt: {
-          $gte: date,
-        },
-      },
-    });
-    const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
-      type: 'user.restorePassword',
-      userId: user._id,
-      info: {
-        userId: user._id,
-        email,
-      },
-      code,
-    });
-    this.app.emit('events.auth.restorePassword', {
-      type: 'events.auth.restorePassword',
-      targetUser: user,
-      user,
-      permit,
-      email,
-      link: this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`),
-    });
-    // console.log(this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
-    return PermitModel.prepare(permit, { req });
-  }
   async findOneByCode(req) {
     const { code } = req.data;
     if (!code) throw '!code';
@@ -911,62 +825,5 @@ export default class Api extends BaseApi {
       return PermitModel.prepare(permit, { req });
     }
     throw '!permission';
-  }
-
-  async confirm(req) {
-    const { code, permitId } = req.data;
-    const { UserModel, PermitModel } = this.app.models;
-    if (!code) throw '!code';
-    // const permit = await PermitModel.findById(permitId);
-    // if (!permit) throw this.e(404, 'Permit not found!');
-
-    const permit = await PermitModel.findByCode(code, {
-      _id: permitId,
-      type: 'auth',
-    });
-
-    if (!permit) throw 'invalidCode';
-    const { provider } = permit.info;
-    if (!provider) throw '!provider';
-
-    if (!permit.info[provider]) throw '!permit.info[provider]';
-    const params = {
-      [provider]: permit.info[provider],
-    };
-
-    const operation = await this.getOperation(req, { provider, params });
-
-    let user;
-    if (operation === 'signup') {
-      user = new UserModel(params);
-      user.editedAt = new Date();
-      user.signinAt = new Date();
-    } else if (operation === 'login') {
-      user = await UserModel.findOne(params).sort({ createdAt: 1 });
-      if (!user) throw '!user';
-      user.signinAt = new Date();
-    } else if (operation === 'attach') {
-      if (!req.user) throw '!user';
-      user = await UserModel.findById(req.user._id);
-      if (!user) throw '!user';
-      user[provider] = permit.info[provider];
-      user.editedAt = new Date();
-      const user2 = await UserModel.findOne(params);
-      if (user2) throw 'HAS_BEEN_ATTACHED';
-    } else {
-      throw '!operation';
-    }
-
-    await permit.activate();
-    await user.save();
-    const token = user.generateAuthToken();
-    // console.log(`auth/confirm ${user._id} ${token}`); // this.app.logger
-    return {
-      isNew: operation === 'signup',
-      operation,
-      token,
-      status: await user.getStatus(),
-      user: await UserModel.prepare(user, { req, view: 'extended' }),
-    };
   }
 }
