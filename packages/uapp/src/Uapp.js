@@ -399,11 +399,11 @@ export default class Uapp extends Module {
     }
   }
 
-  redirect(path) {
-    if (__DEV__) console.log('Uapp.redirect', path); // eslint-disable-line no-console
+  redirect(...args) {
+    if (__DEV__) console.log('Uapp.redirect', ...args); // eslint-disable-line no-console
     if (__CLIENT__) {
-      this.app.redirect(path);
-    } else if (__DEV__) console.log('cant history.redirect because it server', path); // eslint-disable-line no-console
+      this.app.redirect(...args);
+    } else if (__DEV__) console.log('cant history.redirect because it server', ...args); // eslint-disable-line no-console
   }
 
   restart() {}
