@@ -34,9 +34,10 @@
     "crypto-js": "4.0.0"
   },
   "devDependencies": {
-    "@lskjs/db": "^1.0.47",
-    "@lskjs/mobx": "^1.0.47",
-    "@lskjs/module": "^1.0.47",
+    "@lskjs/db": "1.0.47",
+    "@lskjs/mobx": "1.0.47",
+    "@lskjs/module": "1.0.47",
+    "@lskjs/server-api": "1.0.48",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
     "mobx": "5.15.4",
@@ -46,6 +47,7 @@
     "@lskjs/db": "*",
     "@lskjs/mobx": "*",
     "@lskjs/module": "*",
+    "@lskjs/server-api": "*",
     "bluebird": "*",
     "lodash": "*",
     "mobx": "*",

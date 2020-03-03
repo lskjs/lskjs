@@ -3,8 +3,7 @@ import SHA256 from 'crypto-js/sha256';
 import m from 'moment';
 import pick from 'lodash/pick';
 
-export default function PermitModel(app) {
-  const { db } = app;
+export default function PermitModel({ db, emit }) {
   const { Schema } = db;
   const schema = new MongooseSchema(
     {
@@ -133,8 +132,13 @@ export default function PermitModel(app) {
   schema.methods.activate = async function() {
     this.activatedAt = new Date();
     await this.save();
-    app.emit(`models.Permit.activated_${this.type}`, this);
+    emit(`models.Permit.activated_${this.type}`, this);
     return this;
+  };
+  schema.methods.getStatus = async function() {
+    if (this.expiredAt) return 'expired';
+    if (this.activatedAt) return 'activated';
+    return 'valid';
   };
   schema.statics.prepareOne = async function(obj) {
     // eslint-disable-next-line no-param-reassign

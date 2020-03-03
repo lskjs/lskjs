@@ -1,5 +1,3 @@
-export default function (ctx) {
-  return {
-    PermitStore: require('./PermitStore').default(ctx),
-  };
-}
+export default (...args) => ({
+  PermitStore: require('./PermitStore').default(...args),
+});
