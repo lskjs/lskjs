@@ -6,27 +6,28 @@ export default () => {
       _type: {
         type: String,
       },
-      email: {
-        // index: true,
+      role: {
         type: String,
-        trim: true,
-        lowercase: true,
+      },
+      email: {
+        type: String,
       },
       phone: {
-        // index: true,
         type: String,
-        trim: true,
-        lowercase: true,
       },
       password: {
-        type: 'String',
-        default: null,
+        type: String,
       },
       name: {
         type: String,
-        trim: true,
+      },
+      avatar: {
+        type: String,
       },
       info: {
+        type: Object,
+      },
+      meta: {
         type: Object,
       },
     },
@@ -37,8 +38,9 @@ export default () => {
   );
 
   schema.statics.views = {};
-  schema.statics.views.tiny = ['_id', 'name', 'info.avatar'];
+  schema.statics.views.tiny = ['_id', 'role', 'name', 'avatar'];
   schema.statics.views.default = [...schema.statics.views.tiny];
+  // schema.statics.views.owner = [...schema.statics.views.default, 'email', 'phone', 'info', 'meta'];
 
   return schema;
 };

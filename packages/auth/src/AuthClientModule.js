@@ -97,21 +97,23 @@ export default class AuthClientModule extends Module {
   }
 
   restorePassword({ email }) {
-    return this.api.fetch('/api/auth/restorePassword', {
+    console.log(123123);
+    
+    return this.app.api.fetch('/api/auth/restorePassword', {
       method: 'POST',
       body: { email },
     });
   }
 
   setPassword({ permitId, code, password }) {
-    return this.api.fetch('/api/auth/setPassword', {
+    return this.app.api.fetch('/api/auth/setPassword', {
       method: 'POST',
       body: { permitId, code, password },
     });
   }
 
   confirmEmail({ permitId, code }) {
-    return this.api.fetch('/api/auth/confirmEmail', {
+    return this.app.api.fetch('/api/auth/confirmEmail', {
       method: 'POST',
       body: { permitId, code },
     });
@@ -122,7 +124,7 @@ export default class AuthClientModule extends Module {
   }
 
   loginPassport(data) {
-    return this.applyPromiseAndFetchProfile(this.api.authLoginPassport(data));
+    return this.applyPromiseAndFetchProfile(this.app.api.authLoginPassport(data));
   }
 
   authPassport(provider) {
