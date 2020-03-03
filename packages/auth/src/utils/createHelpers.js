@@ -51,7 +51,7 @@ export default function createHelpers({ app } = {}) {
       user.private.approvedEmailToken = token; // eslint-disable-line no-param-reassign
       if (user.markModified) user.markModified('private');
 
-      return user.app.url(`/api/auth/email/approve?t=${token}`);
+      return app.url(`/api/auth/email/approve?t=${token}`);
     },
   };
   return helpers;

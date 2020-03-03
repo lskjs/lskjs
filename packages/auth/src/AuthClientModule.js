@@ -87,13 +87,15 @@ export default class AuthClientModule extends Module {
   }
 
   async signup(...args) {
-    await this.store.signup(...args);
+    const res = await this.store.signup(...args);
     await this.saveStore();
+    return res;
   }
 
   async login(...args) {
-    await this.store.login(...args);
+    const res = await this.store.login(...args);
     await this.saveStore();
+    return res;
   }
 
   confirm(values) {
