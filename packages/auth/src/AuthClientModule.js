@@ -96,26 +96,31 @@ export default class AuthClientModule extends Module {
     await this.saveStore();
   }
 
+  confirm(values) {
+    return this.app.api.fetch('/api/auth/permit/confirm', {
+      method: 'POST',
+      data: values,
+    });
+  }
+
   restorePassword({ email }) {
-    console.log(123123);
-    
     return this.app.api.fetch('/api/auth/restorePassword', {
       method: 'POST',
-      body: { email },
+      data: { email },
     });
   }
 
   setPassword({ permitId, code, password }) {
     return this.app.api.fetch('/api/auth/setPassword', {
       method: 'POST',
-      body: { permitId, code, password },
+      data: { permitId, code, password },
     });
   }
 
   confirmEmail({ permitId, code }) {
     return this.app.api.fetch('/api/auth/confirmEmail', {
       method: 'POST',
-      body: { permitId, code },
+      data: { permitId, code },
     });
   }
 

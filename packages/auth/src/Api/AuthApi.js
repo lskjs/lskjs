@@ -28,7 +28,8 @@ export default class Api extends BaseApi {
       '/updateToken': ::this.updateToken,
 
       '/permit': ::this.getPermit,
-      '/confirm': ::this.confirmPermit,
+      // '/confirm': ::this.confirmPermit,
+      '/permit/confirm': ::this.confirmPermit,
       // // '/loginToken': ::this.loginToken,
 
       '/restorePassword': ::this.restorePassword,
@@ -193,15 +194,17 @@ export default class Api extends BaseApi {
     const { code, permitId } = req.data;
     const { UserModel, PermitModel } = this.app.models;
     if (!code) throw '!code';
+    if (!permitId) throw this.app.e('permit.permitIdEmpty', { status: 400 });
     // const permit = await PermitModel.findById(permitId);
     // if (!permit) throw this.e(404, 'Permit not found!');
+    const permit = await PermitModel.findById(permitId);
+    if (!permit) throw this.app.e('permit.permitNotFound', { status: 404 });
+    const status = permit.getStatus();
+    if (status !== 'valid') {
+      throw this.app.e('permit.statusInvalid', { status: 400, data: { status } });
+    }
+    if (code !== permit.code) throw this.app.e('permit.codeInvalid', { status: 400 });
 
-    const permit = await PermitModel.findByCode(code, {
-      _id: permitId,
-      type: 'auth',
-    });
-
-    if (!permit) throw 'invalidCode';
     const { provider } = permit.info;
     if (!provider) throw '!provider';
 
