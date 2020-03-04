@@ -178,8 +178,10 @@ export default class Api {
       },
     };
   }
+  enableCache = false;
   async cache(key, ...args) {
     const [fn, params = { ttl: 60 }] = args.reverse();
+    if (!this.enableCache) return fn();
     const { ttl } = params;
     let hashedKey;
     try {
