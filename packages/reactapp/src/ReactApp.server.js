@@ -81,7 +81,7 @@ export default class ReactApp extends Module {
   }
 
   getAssetManifest(){
-    const publicPath = get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '..')}/public`);
+    const publicPath = get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
     const assetManifestPath = publicPath + '/asset-manifest.json'
     try {
       const str = require('fs').readFileSync(assetManifestPath);
@@ -98,7 +98,7 @@ export default class ReactApp extends Module {
     return content => {
       const html = new Html({
         content,
-        assetsManifest: this.getAssetManifest(),
+        assetManifest: this.getAssetManifest(),
         meta: get(page, 'state.meta', {}),
         rootState: get(page, 'rootState.rootState,', {SOME_ROOT_STATE:1}),
       });

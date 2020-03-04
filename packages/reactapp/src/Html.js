@@ -8,18 +8,18 @@ export default class Html {
   constructor(props) {
     Object.assign(this, props);
   }
-  assets(name) {
+  asset(name) {
     try {
       return this.assetManifest[name];
     } catch (err) {
       if (__DEV__) {
-        console.error('Html.assets not found', name); // eslint-disable-line no-console
+        console.error('Html.asset not found', name); // eslint-disable-line no-console
       }
       return null;
     }
   }
-  renderAssets(name = '') {
-    const path = this.assets(name);
+  renderAsset(name = '') {
+    const path = this.asset(name);
     if (!path) return '';
     const ext = name.split('.').reverse()[0];
     if (ext === 'css') {
@@ -63,8 +63,8 @@ ${this.renderMeta()}\
 ${this.renderPolyfill()}\
 ${this.renderFavicon()}\
 ${this.renderOGMeta()}\
-${this.renderAssets('vendor.css')}\
-${this.renderAssets('main.css')}\
+${this.renderAsset('vendor.css')}\
+${this.renderAsset('main.css')}\
 ${this.renderStyle()}\
 ${head}\
 ${!js ? '' : `<script>${js}</script>`}\
@@ -151,8 +151,8 @@ ${this.renderHead()}\
 ${this.content}\
 </div>\
 ${this.renderRootState()}\
-${this.renderAssets('vendor.js')}\
-${this.renderAssets('main.js')}\
+${this.renderAsset('vendor.js')}\
+${this.renderAsset('main.js')}\
 ${this.renderFooter()}\
 </body>\
 </html>\
