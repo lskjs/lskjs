@@ -16,14 +16,12 @@ import Module from '@lskjs/module';
 import http from 'http';
 import defaultServerConfig from './config';
 
-import AsyncRouter from './AsyncRouter';
 import createWs from './ws';
 
 const DEBUG = __DEV__ && false;
 export default class ServerApp extends Module {
   _module = 'app';
   name = 'App';
-  asyncRouter = AsyncRouter;
   // Api = Api;
   i18 = new I18({ ctx: this });
   async init() {
@@ -248,10 +246,7 @@ export default class ServerApp extends Module {
 
   resolve = require('./methods/resolve').default;
   runRedis = require('./methods/runRedis').default;
-
-  runRoutes(...args) {
-    return require('./methods/runRoutes').default.bind(this)(...args);
-  }
+  runRoutes = require('./methods/runRoutes').default;
   // getI18 = require('../Uapp/i18/getI18').default;
   // getI18Params = require('../Uapp/i18/getI18Params').default;
   // getLocale = require('../Uapp/i18/getLocale').default;

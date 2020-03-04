@@ -2,6 +2,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
 import mapValues from 'lodash/mapValues';
+import AsyncRouter from '../AsyncRouter';
 
 // import isClass from 'lodash/isClass';
 const isClass = () => false;
@@ -72,8 +73,8 @@ function iterateRoute(data, { AsyncRouter } = {}) {
 
 export default function() {
   this.routes = getRoutes(this.rootApi);
-  const asyncRouter = this.asyncRouter();
-  const router = iterateRoute(this.routes, { AsyncRouter: this.asyncRouter, path: '/', i: 1 });
+  const asyncRouter = AsyncRouter();
+  const router = iterateRoute(this.routes, { AsyncRouter, path: '/', i: 1 });
   asyncRouter.use('/', router);
   this.express.use('/', asyncRouter);
 }
