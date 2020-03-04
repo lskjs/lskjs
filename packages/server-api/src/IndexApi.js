@@ -11,6 +11,9 @@ export default class IndexApi extends Api {
     if (this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
     return null;
   }
+  getRoutesList() {
+    return flattenKeys(this.getRoutes(), [], a => a.join('/'));
+  }
   index() {
     const url = this.path;
     const res = {
@@ -18,7 +21,7 @@ export default class IndexApi extends Api {
       url,
     };
     if (__DEV__) {
-      res.routes = flattenKeys(this.getRoutes(), [], a => a.join('/'));
+      res.routes = this.getRoutesList();
     }
     return res;
   }

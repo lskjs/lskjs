@@ -16,7 +16,7 @@ import getDocsTemplate from './getDocsTemplate';
 export default class Api {
   constructor(props, params) {
     assignProps(this, props);
-    if (!this.app) throw '!app';
+    if (!this.app) throw 'Api !app';
     this.asyncRouter = this.app.asyncRouter;
     if (this.app.helpers && this.app.helpers.wrapResoursePoint) {
       this.wrapResoursePoint = this.app.helpers.wrapResoursePoint;

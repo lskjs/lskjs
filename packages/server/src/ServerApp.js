@@ -2,6 +2,7 @@
 import express from 'express';
 import path from 'path';
 import mapValues from 'lodash/mapValues';
+import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
@@ -44,7 +45,6 @@ export default class ServerApp extends Module {
     if (DEBUG) this.log.debug('serverConfig.middlewares', this.serverConfig.middlewares);
     this.middlewares = this.getMiddlewares();
     this.log.debug('middlewares', Object.keys(this.middlewares));
-
     this.helpers = this.getHelpers();
     if (DEBUG) this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this._getStatics();
@@ -53,7 +53,15 @@ export default class ServerApp extends Module {
       url: this.url('/'),
       log: this.log,
     });
-    if (this.Api) this.rootApi = new this.Api(this);
+    if (this.Api) {
+      this.rootApi = new this.Api({ app: this });
+      const indexApi = get(this, 'rootApi.indexApi');
+      if (indexApi) {
+        this.log.trace('routes', indexApi.getRoutesList());
+      }
+    } else {
+      this.log.warn('!app.Api');
+    }
     if (this.serverConfig.ws) this.initWs();
     if (this.i18) {
       await this.i18
