@@ -23,7 +23,7 @@ export function getRoutes(ctx) {
     }
     return mapValues(item, iterate);
   };
-  if (ctx.getRoutes && isFunction(ctx.getRoutes)) {
+  if (ctx && ctx.getRoutes && isFunction(ctx.getRoutes)) {
     return iterate(ctx.getRoutes());
   }
   return {};
@@ -71,7 +71,7 @@ function iterateRoute(data, { AsyncRouter } = {}) {
 }
 
 export default function() {
-  this.routes = getRoutes(this);
+  this.routes = getRoutes(this.rootApi);
   const asyncRouter = this.asyncRouter();
   const router = iterateRoute(this.routes, { AsyncRouter: this.asyncRouter, path: '/', i: 1 });
   asyncRouter.use('/', router);

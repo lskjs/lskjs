@@ -56,7 +56,7 @@ export default class ServerApp extends Module {
     if (this.Api) {
       this.rootApi = new this.Api({ app: this });
       const indexApi = get(this, 'rootApi.indexApi');
-      if (indexApi) {
+      if (indexApi && indexApi.getRoutesList) {
         this.log.trace('routes', indexApi.getRoutesList());
       }
     } else {
