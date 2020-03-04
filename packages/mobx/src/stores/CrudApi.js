@@ -1,4 +1,3 @@
-
 import Api from './Api';
 
 export default class CrudApi extends Api {
@@ -22,7 +21,7 @@ export default class CrudApi extends Api {
     });
   }
   update({ _id, ...data }) {
-  // update(_id, data) {
+    // update(_id, data) {
     return this.fetch(`${this.base}/update`, {
       method: 'POST',
       qs: { _id },
