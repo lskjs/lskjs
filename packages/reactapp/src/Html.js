@@ -9,17 +9,30 @@ export default class Html {
   }
 
   publicDir = __DEV__ ? `${process.cwd()}/public` : `${process.cwd()}/../public`;
-  assets(path) {
+  assets(name) {
     try {
       const str = require('fs').readFileSync(`${this.publicDir}/asset-manifest.json`);
       const json = JSON.parse(str);
-      return json[path];
+      return json[name];
     } catch (err) {
       if (__DEV__) {
-        console.error('Html.assets not found', path); // eslint-disable-line no-console
+        console.error('Html.assets not found', name); // eslint-disable-line no-console
       }
-      return '';
+      return null;
     }
+  }
+
+  renderAssets(name = '') {
+    const path = this.assets(name);
+    if (!path) return '';
+    const ext = name.split('.').reverse()[0];
+    if (ext === 'css') {
+      return `<link rel="stylesheet" type="text/css" href="${path}">`;
+    }
+    if (ext === 'js') {
+      return `<script type="text/javascript" src="${path}"></script>`;
+    }
+    return '';
   }
 
   renderTitle() {
@@ -50,8 +63,8 @@ ${this.renderMeta()}\
 ${this.renderPolyfill()}\
 ${this.renderFavicon()}\
 ${this.renderOGMeta()}\
-${this.assets('vendor.css')}\
-${this.assets('main.css')}\
+${this.renderAssets('vendor.css')}\
+${this.renderAssets('main.css')}\
 ${this.renderStyle()}\
 ${head || ''}\
 ${!js ? '' : `<script>${js}</script>`}\
@@ -154,8 +167,8 @@ ${this.renderHead()}\
 ${this.content}\
 </div>\
 ${this.renderRootState()}\
-${this.assets('vendor.js')}\
-${this.assets('main.js')}\
+${this.renderAssets('vendor.js')}\
+${this.renderAssets('main.js')}\
 ${this.renderFooter()}\
 </body>\
 </html>\
