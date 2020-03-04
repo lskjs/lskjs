@@ -10,7 +10,9 @@ export default class Html {
   }
   asset(name) {
     try {
-      return this.assetManifest[name];
+      const res = this.assetManifest.files[name];
+      if (!res) throw '!res'
+      return res;
     } catch (err) {
       if (__DEV__) {
         console.error('Html.asset not found', name); // eslint-disable-line no-console
