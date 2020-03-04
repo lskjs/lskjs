@@ -202,12 +202,6 @@ export default class ServerApp extends Module {
     ];
   }
 
-  acl() {
-    return (req, res, next) => {
-      next();
-    };
-  }
-
   initWs() {
     this.ws = createWs(this);
     this.ws.wrapExpress(this.express);
