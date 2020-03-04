@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/upload",
-  "version": "1.0.50",
+  "version": "1.0.53",
   "description": "LSK module for uploading files.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@lskjs/module": "1.0.47",
-    "@lskjs/server-api": "1.0.48",
+    "@lskjs/server-api": "^1.0.53",
     "bluebird": "3.7.2",
     "lodash": "4.17.15"
   },
