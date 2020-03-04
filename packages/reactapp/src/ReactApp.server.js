@@ -13,11 +13,6 @@ import BaseHtml from './Html';
 export default class ReactApp extends Module {
   name = 'App';
 
-  constructor(params = {}) {
-    super(params);
-    Object.assign(this, params);
-  }
-
   getRootState() {
     // ({ req } = {}) {
     return { __EMPTY__: true };
@@ -38,19 +33,12 @@ export default class ReactApp extends Module {
     // return rootState;
   }
 
-  getAssetsAndChunks() {
-    return {
-      assets: {},
-      chunks: {},
-    };
-  }
 
   async getUapp({ req, ...params } = {}) {
     const { Uapp } = this;
     const url = req.originalUrl || req.url || req.path;
     const uapp = new Uapp({
       ...params,
-      ...this.getAssetsAndChunks(),
       history: createMemoryHistory({
         initialEntries: [url],
       }),
@@ -92,13 +80,27 @@ export default class ReactApp extends Module {
     });
   }
 
+  getAssetManifest(){
+    const publicPath = get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '..')}/public`);
+    const assetManifestPath = publicPath + '/asset-manifest.json'
+    try {
+      const str = require('fs').readFileSync(assetManifestPath);
+      const json = JSON.parse(str);
+      return json
+    } catch (err) {
+      this.app.error('Html getAssetManifest can\'t open: ' +  assetManifestPath, err);
+      return {};
+    }
+  }
+
   createHtmlRender(page) {
     const { Html = BaseHtml } = this;
     return content => {
       const html = new Html({
         content,
+        assetsManifest: this.getAssetManifest(),
         meta: get(page, 'state.meta', {}),
-        rootState: get(page, 'uapp.rootState,', {}),
+        rootState: get(page, 'rootState.rootState,', {SOME_ROOT_STATE:1}),
       });
       return html.render();
     };
