@@ -1,19 +1,16 @@
 import map from 'lodash/map';
 
 // const trim = str => str;
-
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
+
 export default class Html {
+  assetManifest = {}
   constructor(props) {
     Object.assign(this, props);
   }
-
-  publicDir = __DEV__ ? `${process.cwd()}/public` : `${process.cwd()}/../public`;
   assets(name) {
     try {
-      const str = require('fs').readFileSync(`${this.publicDir}/asset-manifest.json`);
-      const json = JSON.parse(str);
-      return json[name];
+      return this.assetManifest[name];
     } catch (err) {
       if (__DEV__) {
         console.error('Html.assets not found', name); // eslint-disable-line no-console
@@ -21,7 +18,6 @@ export default class Html {
       return null;
     }
   }
-
   renderAssets(name = '') {
     const path = this.assets(name);
     if (!path) return '';
