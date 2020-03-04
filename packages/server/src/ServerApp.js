@@ -6,7 +6,7 @@ import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 import staticFileMiddleware from 'connect-static-file';
-import Api from '@lskjs/apiquery';
+import Apiquery from '@lskjs/apiquery';
 import autobind from '@lskjs/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db/server';
@@ -23,13 +23,13 @@ export default class ServerApp extends Module {
   _module = 'app';
   name = 'App';
   asyncRouter = AsyncRouter;
-  Api = Api;
+  // Api = Api;
   i18 = new I18({ ctx: this });
   async init() {
     await super.init();
     if (DEBUG) this.log.trace('ServerApp init');
     this.express = this.createExpress();
-    this.app = this.express; // Fallback
+    // this.app = this.express; // Fallback
     this.serverConfig = this.config.server || defaultServerConfig;
     this.httpServer = http.createServer(this.express);
     if (this.serverConfig.express && Object.keys(this.serverConfig.express).length) {
@@ -49,10 +49,11 @@ export default class ServerApp extends Module {
     if (DEBUG) this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this._getStatics();
     this.log.debug('statics', this.statics);
-    this.api = new this.Api({
-      url: this.url('/'), // `http://127.0.0.1:${this.config.port || this.serverConfig.port}`,
+    this.api = new Apiquery({
+      url: this.url('/'),
       log: this.log,
     });
+    if (this.Api) this.rootApi = new this.Api(this);
     if (this.serverConfig.ws) this.initWs();
     if (this.i18) {
       await this.i18
@@ -78,6 +79,7 @@ export default class ServerApp extends Module {
     if (params && Object.keys(params.length)) {
       query = `?${map(params, (val, key) => `${key}=${val}`).join('&')}`;
     }
+    // `http://127.0.0.1:${this.config.port || this.serverConfig.port}`,
     return `${this.config.url || this.serverConfig.url || '/'}${str}${query}`;
   }
 
@@ -162,8 +164,8 @@ export default class ServerApp extends Module {
   }
 
   getStatics() {
-    if (this.staticDir) {
-      return this.getStaticsDir(this.staticDir);
+    if (this.staticDir && this.serverConfig.public) {
+      return this.getStaticsDir(this.serverConfig.public);
     }
     return {};
   }
