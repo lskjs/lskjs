@@ -52,11 +52,15 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
 
   // renderFavicon = require('./renderFavicon').default
 
-  renderFavicon = () => '<!-- favicon -->';
+  favicon = '<!-- favicon -->';
+  renderFavicon() {
+    return this.favicon || '';
+  }
 
+  head = '';
   renderHead() {
     const js = this.renderJS();
-    const { head } = this;
+    const { head = '' } = this;
     return `\
 <title>${this.renderTitle()}</title>\
 ${this.renderMeta()}\
@@ -66,17 +70,18 @@ ${this.renderOGMeta()}\
 ${this.renderAssets('vendor.css')}\
 ${this.renderAssets('main.css')}\
 ${this.renderStyle()}\
-${head || ''}\
+${head}\
 ${!js ? '' : `<script>${js}</script>`}\
 ${this.renderPreloader()} \
 `;
   }
 
+  preloader = '<!-- renderPreloader -->';
   renderPreloader() {
-    return '<!-- renderPreloader -->';
-    // return renderPreloader();
+    return this.preloader || '';
   }
 
+  meta = {};
   renderMeta() {
     const { meta = {} } = this;
     return `\
@@ -110,6 +115,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
     return `<style id="css">${styles.join('\n')}</style>`;
   }
 
+  js = '';
   renderJS() {
     const { js = '' } = this;
     return `\
@@ -118,33 +124,15 @@ ${js}\
 `;
   }
 
+  globals = {};
   renderGlobals() {
     const { globals = {} } = this;
     return map(globals, (val, key) => `window['${key}'] = ${JSON.stringify(val)};\n`).join('');
   }
 
-  renderDebug() {
-    const util = require('util');
-    return `<!--
-DEBUG INFO
-
-__SERVER__: ${__SERVER__}
-__DEV__: ${__DEV__}
-__STAGE: ${__STAGE__}
-
-uapp.keys: ${Object.keys(this.page.uapp)}
-uapp.config:
-${util.inspect(this.page.uapp.config)}
-uapp.page.state:
-${util.inspect(this.page.state)}
--->`;
-  }
-
+  footer = '';
   renderFooter() {
-    const { footer } = this;
-    return `\
-${footer || ''}\
-`;
+    return this.footer || '';
   }
 
   renderRootState() {
