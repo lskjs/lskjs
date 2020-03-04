@@ -170,7 +170,7 @@ export default class ServerApp extends Module {
   }
 
   getStatics() {
-    if (this.staticDir && this.serverConfig.public) {
+    if (this.serverConfig && this.serverConfig.public) {
       return this.getStaticsDir(this.serverConfig.public);
     }
     return {};
