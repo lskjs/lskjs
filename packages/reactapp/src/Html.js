@@ -9,10 +9,17 @@ export default class Html {
   }
 
   publicDir = __DEV__ ? `${process.cwd()}/public` : `${process.cwd()}/../public`;
-  assets(url) {
-    const str = require('fs').readFileSync(`${this.publicDir}/asset-manifest.json`);
-    const json = JSON.parse(str);
-    return json[url];
+  assets(path) {
+    try {
+      const str = require('fs').readFileSync(`${this.publicDir}/asset-manifest.json`);
+      const json = JSON.parse(str);
+      return json[path];
+    } catch (err) {
+      if (__DEV__) {
+        console.error('Html.assets not found', path); // eslint-disable-line no-console
+      }
+      return '';
+    }
   }
 
   renderTitle() {
@@ -40,10 +47,11 @@ ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
     return `\
 <title>${this.renderTitle()}</title>\
 ${this.renderMeta()}\
-${this.renderShims()}\
+${this.renderPolyfill()}\
 ${this.renderFavicon()}\
 ${this.renderOGMeta()}\
-${this.renderAssets('css')}\
+${this.assets('vendor.css')}\
+${this.assets('main.css')}\
 ${this.renderStyle()}\
 ${head || ''}\
 ${!js ? '' : `<script>${js}</script>`}\
@@ -65,12 +73,13 @@ ${this.renderPreloader()} \
 ${meta.description ? `<meta name="description" content="${meta.description}"/>` : ''}\
 `;
   }
-  renderShims() {
+  renderPolyfill() {
     return `\
 <!--[if lt IE 9]>\
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>\
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>\
 <![endif]-->\
+<script>!function(e){function t(t){for(var n,i,l=t[0],f=t[1],a=t[2],c=0,s=[];c<l.length;c++)i=l[c],Object.prototype.hasOwnProperty.call(o,i)&&o[i]&&s.push(o[i][0]),o[i]=0;for(n in f)Object.prototype.hasOwnProperty.call(f,n)&&(e[n]=f[n]);for(p&&p(t);s.length;)s.shift()();return u.push.apply(u,a||[]),r()}function r(){for(var e,t=0;t<u.length;t++){for(var r=u[t],n=!0,l=1;l<r.length;l++){var f=r[l];0!==o[f]&&(n=!1)}n&&(u.splice(t--,1),e=i(i.s=r[0]))}return e}var n={},o={1:0},u=[];function i(t){if(n[t])return n[t].exports;var r=n[t]={i:t,l:!1,exports:{}};return e[t].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=e,i.c=n,i.d=function(e,t,r){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(i.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)i.d(r,n,function(t){return e[t]}.bind(null,n));return r},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="/";var l=this.webpackJsonpinit=this.webpackJsonpinit||[],f=l.push.bind(l);l.push=t,l=l.slice();for(var a=0;a<l.length;a++)t(l[a]);var p=f;r()}([])</script>
 `;
   }
 
@@ -99,54 +108,6 @@ ${js}\
   renderGlobals() {
     const { globals = {} } = this;
     return map(globals, (val, key) => `window['${key}'] = ${JSON.stringify(val)};\n`).join('');
-  }
-
-  renderChunks(type, chunk = 'client') {
-    if (!this.assets) return '';
-    // console.log('props.assets', props.assets);
-    const assets = this.assets[chunk];
-    if (type === 'css' && assets) {
-      return assets
-        .filter(filename => filename.includes('.css'))
-        .map(filename => `<link rel="stylesheet" href="${filename}">`)
-        .join('\n');
-    }
-    if (type === 'js' && assets) {
-      return assets
-        .filter(filename => filename.includes('.js'))
-        .map(filename => `<script id="js" src="${filename}"></script>`)
-        .join('\n');
-    }
-    return '';
-  }
-
-  renderAssets(type) {
-    if (!this.assets) return '';
-    if (type === 'css') {
-      try {
-        return this.assets('main.css') || '';
-      } catch (err) {
-        if (__DEV__) {
-          console.error('renderAssets', type, err); // eslint-disable-line no-console
-        }
-        return '';
-      }
-    }
-    if (type === 'js') {
-      try {
-        return (
-          require('fs')
-            .readFileSync(`${this.publicDir}/footer.html`)
-            .toString() || ''
-        );
-      } catch (err) {
-        if (__DEV__) {
-          console.error('renderAssets', type, err); // eslint-disable-line no-console
-        }
-        return '';
-      }
-    }
-    return '';
   }
 
   renderDebug() {
@@ -193,7 +154,8 @@ ${this.renderHead()}\
 ${this.content}\
 </div>\
 ${this.renderRootState()}\
-${this.renderAssets('js')}\
+${this.assets('vendor.js')}\
+${this.assets('main.js')}\
 ${this.renderFooter()}\
 </body>\
 </html>\
