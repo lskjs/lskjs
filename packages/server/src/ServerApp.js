@@ -51,15 +51,6 @@ export default class ServerApp extends Module {
       url: this.url('/'),
       log: this.log,
     });
-    if (this.Api) {
-      this.rootApi = new this.Api({ app: this });
-      const indexApi = get(this, 'rootApi.indexApi');
-      if (indexApi && indexApi.getRoutesList) {
-        this.log.trace('routes', indexApi.getRoutesList());
-      }
-    } else {
-      this.log.warn('!app.Api');
-    }
     if (this.serverConfig.ws) this.initWs();
     if (this.i18) {
       await this.i18

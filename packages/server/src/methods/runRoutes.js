@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import AsyncRouter from '../AsyncRouter';
 
@@ -72,6 +73,15 @@ function iterateRoute(data, { AsyncRouter } = {}) {
 }
 
 export default function() {
+  if (this.Api) {
+    this.rootApi = new this.Api({ app: this });
+    const indexApi = get(this, 'rootApi.indexApi');
+    if (indexApi && indexApi.getRoutesList) {
+      this.log.trace('routes', indexApi.getRoutesList());
+    }
+  } else {
+    this.log.warn('!app.Api');
+  }
   this.routes = getRoutes(this.rootApi);
   const asyncRouter = AsyncRouter();
   const router = iterateRoute(this.routes, { AsyncRouter, path: '/', i: 1 });
