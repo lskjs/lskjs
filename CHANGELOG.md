@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/lskjs/lskjs/compare/v1.2.0...v1.2.1) (2020-03-05)
+
+
+### Bug Fixes
+
+* bugfix in lerna.json ([3dbef34](https://github.com/lskjs/lskjs/commit/3dbef345cfdfc264ccf511b4408cc1960c34c829))
+* change package name in docs and package json ([e946c32](https://github.com/lskjs/lskjs/commit/e946c3229fff55d509b860409d08576dc0f6327d))
+* remove log ([ea019b7](https://github.com/lskjs/lskjs/commit/ea019b794666a5f2c4d8dc95ef6f8b07f8ce7fe5))
+
+
+### Features
+
+* add --github-release and other features ([35def61](https://github.com/lskjs/lskjs/commit/35def61b581c365b1d3550d8830bd5b5e0eb68d1))
+
+
+
+
+
 # [1.2.0](https://github.com/lskjs/lskjs/compare/v1.1.1...v1.2.0) (2020-03-05)
 
 
