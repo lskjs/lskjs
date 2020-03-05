@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/isuvorov/lib-starter-kit/tree/master/packages/lib1",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/lib1",
   "keywords": [],
   "scripts": {
     "dev": "npm run watch",

@@ -3,7 +3,7 @@
   "description": "Lego starter kit command line helper",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
-  "repository": "https://github.com/isuvorov/lib-starter-kit",
+  "repository": "https://github.com/lskjs/lskjs",
   "keywords": [],
   "scripts": {
     "commit": "./node_modules/cz-customizable/standalone.js -S",
