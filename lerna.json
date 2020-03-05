@@ -4,6 +4,17 @@
     "packages/*"
   ],
   "command": {
+    "create": {
+      "homepage": "https://github.com/lskjs/lskjs",
+      "license": "MIT"
+    },
+    "version": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "exact": true,
+      "gitRemote": "upstream",
+      "message": "chore(release): %s"
+    },
     "publish": {
       "conventionalCommits": true,
       "ignoreChanges": [

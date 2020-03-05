@@ -8,8 +8,8 @@
   "scripts": {
     "commit": "./node_modules/cz-customizable/standalone.js -S",
     "dev": "./scripts/dev.sh",
-    "release": "lerna publish --skip-npm",
-    "release:patch": "lerna publish --skip-npm  -m \"release: %s\" --yes patch",
+    "release": "lerna publish --skip-npm --github-release",
+    "release:patch": "lerna publish --skip-npm --github-release --yes",
     "release:it": "release-it",
     "release:changelog": "lerna-changelog",
     "build-locales": "./scripts/build-locales.sh",
