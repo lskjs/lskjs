@@ -13,7 +13,13 @@ export default class AuthClientModule extends Module {
     this.stores = require('./stores').default(this.app);
     const { AuthStore } = this.stores;
     this.store = new AuthStore();
-    this.storage = new Storage({ config: get(this, 'app.config.storage', {}) });
+    if (__DEV__) {
+      console.log('Auth rootState', this.app.rootState);
+    }
+    this.storage = new Storage({
+      config: get(this, 'app.config.storage', {}),
+      state: this.app.rootState,
+    });
   }
 
   async run() {
