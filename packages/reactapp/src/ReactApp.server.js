@@ -33,7 +33,6 @@ export default class ReactApp extends Module {
     // return rootState;
   }
 
-
   async getUapp({ req, ...params } = {}) {
     const { Uapp } = this;
     const url = req.originalUrl || req.url || req.path;
@@ -80,15 +79,15 @@ export default class ReactApp extends Module {
     });
   }
 
-  getAssetManifest(){
+  getAssetManifest() {
     const publicPath = get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
-    const assetManifestPath = publicPath + '/asset-manifest.json'
+    const assetManifestPath = `${publicPath}/asset-manifest.json`;
     try {
       const str = require('fs').readFileSync(assetManifestPath);
       const json = JSON.parse(str);
-      return json
+      return json;
     } catch (err) {
-      this.app.error('Html getAssetManifest can\'t open: ' +  assetManifestPath, err);
+      this.app.log.error(`Html getAssetManifest can't open: ${assetManifestPath}`, err);
       return {};
     }
   }
@@ -100,7 +99,7 @@ export default class ReactApp extends Module {
         content,
         assetManifest: this.getAssetManifest(),
         meta: get(page, 'state.meta', {}),
-        rootState: get(page, 'rootState.rootState,', {SOME_ROOT_STATE:1}),
+        rootState: get(page, 'rootState.rootState,', { SOME_ROOT_STATE: 1 }),
       });
       return html.render();
     };
