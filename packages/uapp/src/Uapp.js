@@ -23,6 +23,11 @@ import DefaultPage from './Page';
 import defaultTheme from './theme';
 
 global.DEV = () => null;
+// class Req {
+//   // ...
+//   @observable path = null;
+//   @observable query = null;
+// }
 
 export default class Uapp extends Module {
   name = 'Uapp';
@@ -35,6 +40,7 @@ export default class Uapp extends Module {
   theme = defaultTheme;
   scrollTo = scrollTo;
   i18 = new I18({ ctx: this });
+  // req = new Req();
   @observable req = {};
 
   constructor(params = {}) {
@@ -111,7 +117,8 @@ export default class Uapp extends Module {
         if (this.progress && this.progress.current) {
           this.progress.current.finish();
         }
-        this.req = this.history.location;
+        this.req.path = this.history.location.path;
+        this.req.query = this.history.location.query;
       });
 
       const classes = detectHtmlClasses();
@@ -369,26 +376,29 @@ export default class Uapp extends Module {
   }
 
   async resolve(reqParams = {}) {
-    const req = Api.createReq(reqParams);
-    this.emit('resolve:before', { req, reqParams });
+    this.emit('resolve:before', reqParams);
+    const req = {
+      ...this.req,
+      path: reqParams.path,
+      query: reqParams.query,
+    };
     if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
-
     await this.resetPage();
-
     let res;
     try {
       res = await this.router.resolve({
         pathname: reqParams.path,
         path: reqParams.path,
         query: reqParams.query,
-        req,
+        // req,
         page: this.page,
+        req,
       });
     } catch (err) {
       this.log.error('uapp.router.resolve', err);
       console.error(err); // eslint-disable-line no-console
     }
-    this.emit('resolve:after', { req, reqParams });
+    this.emit('resolve:after', reqParams);
     return res;
   }
 

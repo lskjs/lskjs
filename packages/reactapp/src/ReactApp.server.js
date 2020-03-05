@@ -1,9 +1,11 @@
 import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
+import pick from 'lodash/pick';
 // import BaseUapp from '@lskjs/uapp';
 import Promise from 'bluebird';
 import autobind from '@lskjs/autobind';
+import collectExpressReq from '@lskjs/utils/collectExpressReq';
 // import antimergeDeep from '@lskjs/utils/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
@@ -33,16 +35,18 @@ export default class ReactApp extends Module {
     // return rootState;
   }
 
-  async getUapp({ req, ...params } = {}) {
+  async getUapp({ req: initReq, ...params } = {}) {
     const { Uapp } = this;
-    const url = req.originalUrl || req.url || req.path;
+    const req = collectExpressReq(initReq);
+
+    const url = initReq.originalUrl; // || req.url || req.path;
     const uapp = new Uapp({
       ...params,
       history: createMemoryHistory({
         initialEntries: [url],
       }),
       req,
-      rootState: this.getRootState({ req }),
+      rootState: this.getRootState({ req: initReq }),
       config: get(this, 'config.client', {}),
       app: this,
     });

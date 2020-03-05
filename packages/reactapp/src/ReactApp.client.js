@@ -2,6 +2,7 @@ import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
 import qs from 'qs';
 import autobind from '@lskjs/autobind';
+import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import merge from 'lodash/merge';
 import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';
@@ -138,6 +139,7 @@ export default class ReactApp extends Module {
       config: this.config,
       app: this,
       history: this.history,
+      req: this.rootState.req || collectWindowReq() || {},
       ...params,
     });
     await this.uapp.start();
