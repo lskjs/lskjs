@@ -10,9 +10,10 @@ const isClass = () => false;
 
 export function getRoutes(ctx) {
   const iterate = item => {
+    if (!item) return null;
     if (isClass(item)) {
       const api = new item(ctx); // eslint-disable-line new-cap
-      return api.getRoutes();
+      return api && isFunction(api.getRoutes) && api.getRoutes();
     }
     if (!isPlainObject(item)) {
       if (item.getRoutes) {
@@ -66,7 +67,7 @@ function iterateRoute(data, { AsyncRouter } = {}) {
   if (data && data.getRoutes && isFunction(data.getRoutes)) {
     return data.getRoutes();
   }
-  if (data && data.api && isFunction(data.getRoutes)) {
+  if (data && data.api && isFunction(data.api)) {
     return data.api();
   }
   return () => {};
