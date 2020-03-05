@@ -11,6 +11,11 @@
     "version": {
       "allowBranch": "master",
       "conventionalCommits": true,
+      "message": "chore(release): %s"
+    },
+    "version2": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
       "exact": true,
       "gitRemote": "upstream",
       "message": "chore(release): %s"
