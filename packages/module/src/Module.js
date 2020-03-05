@@ -101,6 +101,16 @@ export default class Module {
     // }
     // return this.broadcastModules('init');
   }
+  statusModule(name) {
+    if (!this._modules || !this._modules[name]) return 'undefined';
+    // undefined
+    // notImported
+    // imported
+    // inited
+    // runned
+    if (this.modules && this.modules[name]) return 'started';
+    return null;
+  }
   async module(nameOrNames) {
     if (Array.isArray(nameOrNames)) {
       const modules = {};
