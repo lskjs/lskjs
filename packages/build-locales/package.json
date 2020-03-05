@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "1.0.63",
+  "version": "1.2.0",
   "description": "LSK build-locales.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@lskjs/getspreadsheet": "^1.0.47",
-    "@lskjs/utils": "^1.0.63",
+    "@lskjs/utils": "^1.2.0",
     "csv-parse": "4.8.5",
     "csvtojson": "2.0.10",
     "jsongrid": "1.0.2",

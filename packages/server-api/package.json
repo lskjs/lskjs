@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "1.0.64",
+  "version": "1.2.0",
   "description": "LSK server-api.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@lskjs/autobind": "^1.0.47",
-    "@lskjs/utils": "^1.0.63",
+    "@lskjs/utils": "^1.2.0",
     "cacheman": "2.2.1",
     "object-hash": "2.0.2"
   },
