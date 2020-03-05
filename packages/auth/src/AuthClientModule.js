@@ -14,7 +14,7 @@ export default class AuthClientModule extends Module {
     const { AuthStore } = this.stores;
     this.store = new AuthStore();
     if (__DEV__) {
-      console.log('Auth rootState', this.app.rootState);
+      console.log('Auth rootState 23', this.app.rootState);
     }
     this.storage = new Storage({
       config: get(this, 'app.config.storage', {}),
