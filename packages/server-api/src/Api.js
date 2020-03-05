@@ -8,6 +8,7 @@ import set from 'lodash/set';
 import forEach from 'lodash/forEach';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import assignProps from '@lskjs/utils/assignProps';
+import autobind from '@lskjs/autobind';
 import mapValues from 'lodash/mapValues';
 import map from 'lodash/map';
 import some from 'lodash/some';
@@ -31,6 +32,16 @@ export default class Api {
   }
   e(...args) {
     return this.app.e(...args);
+  }
+
+  @autobind
+  e404(req) {
+    throw this.app.e('E_404', {
+      status: 404,
+      message: `Not found path ${req.path}`,
+      path: req.path,
+      level: 'warn',
+    });
   }
   isAuth(req) {
     if (req._errJwt) throw req._errJwt;
