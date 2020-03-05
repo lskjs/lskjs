@@ -100,23 +100,23 @@ export default class Apiquery {
     this.wsReconnect();
   }
 
-  static createReq(req) {
-    // req.path,
-    // req.query,
-    return {
-      ...req,
-      create(params) {
-        const query = this.qs.stringify(params);
-        return (this.path || '/') + (query ? `?${query}` : '');
-      },
-      merge(params) {
-        return this.create({
-          ...this.query,
-          ...params,
-        });
-      },
-    };
-  }
+  // static createReq(req) {
+  //   // req.path,
+  //   // req.query,
+  //   return {
+  //     ...req,
+  //     create(params) {
+  //       const query = this.qs.stringify(params);
+  //       return (this.path || '/') + (query ? `?${query}` : '');
+  //     },
+  //     merge(params) {
+  //       return this.create({
+  //         ...this.query,
+  //         ...params,
+  //       });
+  //     },
+  //   };
+  // }
 
   catchError(err) {
     const { data } = err.response || {};
