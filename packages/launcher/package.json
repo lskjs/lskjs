@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/launcher",
-  "version": "1.0.47",
+  "version": "1.4.0",
   "description": "LSK Launcher.",
   "author": "Andrey Kondalov <i@yukio.ru>",
   "license": "MIT",
@@ -26,7 +26,5 @@
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  }
 }
