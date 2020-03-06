@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.4.3...v1.5.0) (2020-03-06)
+
+
+### Features
+
+* **auth:** add MemoryStorage and LocalStorage ([c06b56b](https://github.com/lskjs/modules/tree/master/packages/auth/commit/c06b56bf357edc23ec350085ae8e1ba45a223824))
+
+
+
+
+
 # [1.4.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.3.0...v1.4.0) (2020-03-06)
 
 

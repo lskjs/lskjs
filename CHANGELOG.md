@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/lskjs/lskjs/compare/v1.4.3...v1.5.0) (2020-03-06)
+
+
+### Features
+
+* **auth:** add MemoryStorage and LocalStorage ([c06b56b](https://github.com/lskjs/lskjs/commit/c06b56bf357edc23ec350085ae8e1ba45a223824))
+* **utils:** add isBrowser ([1e08e4c](https://github.com/lskjs/lskjs/commit/1e08e4ccd491a1a3e8f5636866bcf03559412f94))
+
+
+
+
+
 ## [1.4.3](https://github.com/lskjs/lskjs/compare/v1.4.2...v1.4.3) (2020-03-06)
 
 
