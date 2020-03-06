@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.4.2...v1.4.3) (2020-03-06)
+
+
+### Bug Fixes
+
+* Forget about duplicate of constructor ([0b67713](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/0b67713e9fcb40317d6abfc9b88bfdfecc9a6bd5))
+
+
+
+
+
 ## [1.4.2](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.4.1...v1.4.2) (2020-03-06)
 
 
