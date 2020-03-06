@@ -91,7 +91,6 @@ export default class ReactApp extends Module {
 
   createHtmlRender(page) {
     const { Html = BaseHtml } = this;
-    console.log('page@@@', page)
     return content => {
       const html = new Html({
         content,

@@ -64,7 +64,10 @@ export default class Uapp extends Module {
   }
 
   async getRootState() {
-    return this.rootState;
+    return {
+      ...(this.rootState || {}),
+      Uapp: __CLIENT__ ? 'client 123' : 'server 321',
+    };
   }
 
   async historyConfirm(message, callback) {
@@ -357,7 +360,7 @@ export default class Uapp extends Module {
     if (!this.page) {
       this.page = new Page({
         Provider: this.Provider,
-        rootState: this.rootState,
+        rootState: this.getRootState(),
         uapp: this,
         app: this,
       });

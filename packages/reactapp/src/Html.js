@@ -146,7 +146,7 @@ ${js}\
     }
     return `\
 <script>\
-${rootStateStr};\
+${rootStateStr}\
 </script>\
 `;
   }

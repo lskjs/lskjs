@@ -24,7 +24,10 @@ export default class Page {
     this.state = {};
   }
   getRootState() {
-    return this.rootState;
+    return {
+      Page: 123,
+      ...(this.rootState || {}),
+    };
   }
   getMeta() {
     const meta = (this.state && this.state.meta) || {};
