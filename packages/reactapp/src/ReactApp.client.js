@@ -35,6 +35,14 @@ export default class ReactApp extends Module {
     this.render();
   }
 
+  async historyConfirm(message, callback) {
+    if (this.uapp && this.uapp.historyConfirm) {
+      this.uapp.historyConfirm(message, callback);
+    } else {
+      callback(true);
+    }
+  }
+
   async init() {
     if (!this.rootState) this.rootState = this.getRootState();
     // console.log('init, rootState', this.rootState);
@@ -42,7 +50,7 @@ export default class ReactApp extends Module {
     this.rootState.config = null; // не понмю для чего
     if (!this.container) this.container = document.getElementById('root');
     this.history = createBrowserHistory({
-      // getUserConfirmation: (...args) => this.historyConfirm(...args),
+      getUserConfirmation: (...args) => this.historyConfirm(...args),
     });
   }
 

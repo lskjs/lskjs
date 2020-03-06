@@ -64,6 +64,16 @@ export default class Uapp extends Module {
     });
   }
 
+  async historyConfirm(message, callback) {
+    if (!this.confirm || !this.confirm.open) return callback(false);
+    const res = await this.confirm.open({
+      title: this.i18.t('form.confirm.title'),
+      text: message || this.i18.t('form.confirm.text'),
+      cancel: this.i18.t('form.confirm.cancel'),
+      submit: this.i18.t('form.confirm.submit'),
+    });
+    return callback(res);
+  }
   async init() {
     await super.init();
     this.initConfig = cloneDeep(this.config); // подумать в init или в run
