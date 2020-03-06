@@ -8,10 +8,8 @@
   "scripts": {
     "commit": "./node_modules/cz-customizable/standalone.js -S",
     "dev": "./scripts/dev.sh",
-    "release": "lerna publish --skip-npm --github-release",
-    "release:patch": "lerna publish --skip-npm --github-release --yes",
-    "release:it": "release-it",
-    "release:changelog": "lerna-changelog",
+    "release": "lerna publish --skip-npm --exact",
+    "release:yes": "lerna publish --skip-npm --exact --github-release --yes",
     "build-locales": "./scripts/build-locales.sh",
     "bootstrap": "./scripts/bootstrap.sh",
     "update-starter-kit": "./scripts/check-unstaged-files.sh && ./scripts/update-starter-kit.sh",
