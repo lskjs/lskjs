@@ -1,7 +1,8 @@
 import cookie from 'js-cookie';
 import get from 'lodash/get';
 import Module from '@lskjs/module';
-import Storage from './Storage';
+import LocalStorage from './Storage/LocalStorage';
+import MemoryStorage from './Storage/MemoryStorage';
 
 const DEBUG = __DEV__ && false;
 
@@ -13,13 +14,17 @@ export default class AuthClientModule extends Module {
     this.stores = require('./stores').default(this.app);
     const { AuthStore } = this.stores;
     this.store = new AuthStore();
-    if (__DEV__) {
-      console.log('Auth rootState 2', this.app.rootState);
+    if (__CLIENT__) {
+      this.storage = new LocalStorage({
+        // memoryState: this.app.rootState,
+        config: get(this, 'app.config.storage', {}),
+      });
+    } else {
+      this.storage = new MemoryStorage({
+        state: this.app.rootState,
+        config: get(this, 'app.config.storage', {}),
+      });
     }
-    this.storage = new Storage({
-      config: get(this, 'app.config.storage', {}),
-      state: this.app.rootState,
-    });
   }
 
   async run() {

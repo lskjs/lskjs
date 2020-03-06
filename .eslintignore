@@ -3,6 +3,7 @@
 build
 release*
 storage
+!**/src/storage
 .storybook
 .env*
 
