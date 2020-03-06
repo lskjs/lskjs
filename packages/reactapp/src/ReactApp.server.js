@@ -3,7 +3,7 @@ import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
 import cloneDeep from 'lodash/cloneDeep';
 import Promise from 'bluebird';
-import autobind from '@lskjs/autobind';
+import autobind from '@lskjs/utils/autobind';
 import collectExpressReq from '@lskjs/utils/collectExpressReq';
 // import antimergeDeep from '@lskjs/utils/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
@@ -16,6 +16,7 @@ export default class ReactApp extends Module {
 
   getRootState({ req, uappReq, ...props }) {
     return {
+      ReactAppServer: 123,
       req: {
         reqId: req.reqId,
         user: req.user,
@@ -90,12 +91,13 @@ export default class ReactApp extends Module {
 
   createHtmlRender(page) {
     const { Html = BaseHtml } = this;
+    console.log('page@@@', page)
     return content => {
       const html = new Html({
         content,
         assetManifest: this.getAssetManifest(),
-        meta: this.page.getMeta(),
-        rootState: this.page.getRootState(),
+        meta: page.getMeta(),
+        rootState: page.getRootState(),
       });
       return html.render();
     };

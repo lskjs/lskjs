@@ -45,9 +45,8 @@
     "universal-router": "8.3.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "^1.2.0",
-    "@lskjs/autobind": "^1.0.47",
-    "@lskjs/i18": "^1.0.47",
+    "@lskjs/apiquery": "1.2.0",
+    "@lskjs/i18": "1.0.47",
     "@lskjs/link": "1.1.10",
     "@lskjs/log": "1.3.0",
     "@lskjs/module": "1.3.0",
@@ -69,7 +68,6 @@
   ],
   "peerDependencies": {
     "@lskjs/apiquery": "*",
-    "@lskjs/autobind": "*",
     "@lskjs/i18": "*",
     "@lskjs/link": "*",
     "@lskjs/log": "*",

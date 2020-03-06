@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
-import autobind from '@lskjs/autobind';
+import autobind from '@lskjs/utils/autobind';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';

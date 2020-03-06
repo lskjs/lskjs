@@ -8,7 +8,7 @@ import set from 'lodash/set';
 import forEach from 'lodash/forEach';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import assignProps from '@lskjs/utils/assignProps';
-import autobind from '@lskjs/autobind';
+import autobind from '@lskjs/utils/autobind';
 import mapValues from 'lodash/mapValues';
 import map from 'lodash/map';
 import some from 'lodash/some';

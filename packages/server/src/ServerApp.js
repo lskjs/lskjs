@@ -8,7 +8,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 import staticFileMiddleware from 'connect-static-file';
 import Apiquery from '@lskjs/apiquery';
-import autobind from '@lskjs/autobind';
+import autobind from '@lskjs/utils/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db/server';
 import e from '@lskjs/utils/e';

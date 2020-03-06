@@ -29,6 +29,7 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
+  "dependencies": {},
   "devDependencies": {
     "axios": "0.19.2",
     "plivo": "4.1.9",

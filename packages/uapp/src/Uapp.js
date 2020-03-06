@@ -15,7 +15,7 @@ import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import logger from '@lskjs/log';
-import autobind from '@lskjs/autobind';
+import autobind from '@lskjs/utils/autobind';
 import e from '@lskjs/utils/e';
 import UappProvider from './UappProvider';
 import wrapApi from './wrapApi';
