@@ -1,6 +1,7 @@
 import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
 import autobind from '@lskjs/utils/autobind';
+import assignProps from '@lskjs/utils/assignProps';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';
@@ -17,9 +18,10 @@ export default class ReactApp extends Module {
   ReactDOM = ReactDOM;
   name = 'App';
 
-  constructor(params = {}) {
-    super(params);
-    Object.assign(this, params);
+  constructor(props) {
+    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху.
+    super(props);
+    assignProps(this, props);
   }
 
   getRootState() {

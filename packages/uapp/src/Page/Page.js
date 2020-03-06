@@ -20,6 +20,7 @@ export default class Page {
   constructor(props) {
     assignProps(this, props);
   }
+
   reset() {
     this.state = {};
   }

@@ -12,6 +12,7 @@ import scrollTo from '@lskjs/scroll';
 import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
+import assignProps from '@lskjs/utils/assignProps';
 import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import logger from '@lskjs/log';
@@ -34,13 +35,18 @@ export default class Uapp extends Module {
   Api = Api;
   Apiq = Apiq;
   Page = DefaultPage;
-  rootState = {};
   Provider = UappProvider;
   theme = defaultTheme;
   scrollTo = scrollTo;
   i18 = new I18({ ctx: this });
   // req = new Req();
   @observable req = {};
+
+  constructor(props) {
+    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху.
+    super(props);
+    assignProps(this, props);
+  }
 
   createLogger(params) {
     const level = __DEV__ // eslint-disable-line no-nested-ternary
