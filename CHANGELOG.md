@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/lskjs/lskjs/compare/v1.2.2...v1.3.0) (2020-03-06)
+
+
+### Features
+
+* **reactapp:** change rootState workflow in reactapp and html and uapp and page ([da2ec84](https://github.com/lskjs/lskjs/commit/da2ec841985ef0a0f7bb107d9f52a2bd63244669))
+* **uapp:** add historyConfirm ([910e058](https://github.com/lskjs/lskjs/commit/910e058b5dce86290b1785ff6524f45a7b73caa9))
+* **utils:** add collectWindowReq and collectExpressReq ([0091279](https://github.com/lskjs/lskjs/commit/00912799bc857162fb9da2509e0c82751b932ca1))
+* **utils:** add qs and autobind in deps ([ff1d81d](https://github.com/lskjs/lskjs/commit/ff1d81d43a3e35aaaca8a0c44056ce6715880bc5))
+
+
+
+
+
 ## [1.2.2](https://github.com/lskjs/lskjs/compare/v1.2.1...v1.2.2) (2020-03-05)
 
 
