@@ -15,6 +15,7 @@ const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
 export default class Page {
   _page = true;
   state = {};
+  rootState = null;
 
   constructor(props) {
     assignProps(this, props);
@@ -22,7 +23,9 @@ export default class Page {
   reset() {
     this.state = {};
   }
-
+  getRootState() {
+    return this.rootState;
+  }
   getMeta() {
     const meta = (this.state && this.state.meta) || {};
     const title = (this.state.metas || [])
