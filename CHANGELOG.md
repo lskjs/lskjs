@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/lskjs/lskjs/compare/v1.4.0...v1.4.1) (2020-03-06)
+
+
+### Bug Fixes
+
+* **uapp:** forget getRootState in Page ([35a9f80](https://github.com/lskjs/lskjs/commit/35a9f80d6dc4b2bab87e8ec68f2f5d59c751565c))
+
+
+
+
+
 # [1.4.0](https://github.com/lskjs/lskjs/compare/v1.3.0...v1.4.0) (2020-03-06)
 
 
