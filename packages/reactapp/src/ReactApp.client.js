@@ -1,9 +1,7 @@
 import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
-import qs from 'qs';
 import autobind from '@lskjs/autobind';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
-import merge from 'lodash/merge';
 import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
@@ -44,10 +42,6 @@ export default class ReactApp extends Module {
   }
 
   async init() {
-    if (!this.rootState) this.rootState = this.getRootState();
-    // console.log('init, rootState', this.rootState);
-    this.config = merge({}, this.config || {}, (this.rootState && this.rootState.config) || {});
-    this.rootState.config = null; // не понмю для чего
     if (!this.container) this.container = document.getElementById('root');
     this.history = createBrowserHistory({
       getUserConfirmation: (...args) => this.historyConfirm(...args),
@@ -84,13 +78,13 @@ export default class ReactApp extends Module {
     if (this.uapp && this.uapp.page && this.uapp.page.exit) {
       await this.uapp.page.exit();
     }
-    const req = this.getReq();
+    const req = collectWindowReq();
     let page;
     try {
       page = await this.getPage(req);
     } catch (err) {
-      if (err && err.type === 'cancel') {
-        console.error('CSR.canceled'); // eslint-disable-line no-console
+      if ((err && err.type === 'cancel') || err === 'cancel') {
+        console.error('!!!!!!!!!!!!!!! CSR.canceled'); // eslint-disable-line no-console
         return;
       }
       this.log.error('CSR getPage err (ROUTER ERROR)', err);
@@ -102,7 +96,6 @@ export default class ReactApp extends Module {
       } catch (x) {
         //
       }
-      this.renderError(err);
       throw err;
     }
 
@@ -123,31 +116,15 @@ export default class ReactApp extends Module {
     }
   }
 
-  renderError(error = {}) {
-    console.error('App.renderError TODO:', error); // eslint-disable-line no-console
-    // document.title = `Error: ${error.message}`;
-    // const root = React.createElement(Redbox, { error, editorScheme: 'vscode' });
-    // this.appInstance = ReactDOM.render(root, this.container, this.postRender);
-  }
-
-  getReq() {
-    return {
-      hostname: window.location.hostname,
-      path: window.location.pathname,
-      search: window.location.search,
-      query: qs.parse(window.location.search.substr(1)),
-    };
-  }
-
   async getUapp(params = {}) {
     if (this.uapp) return this.uapp;
     const { Uapp } = this;
     this.uapp = new Uapp({
-      rootState: this.rootState,
-      config: this.config,
       app: this,
+      rootState: this.getRootState(),
+      config: this.config,
       history: this.history,
-      req: this.rootState.req || collectWindowReq() || {},
+      req: collectWindowReq(),
       ...params,
     });
     await this.uapp.start();
@@ -158,12 +135,18 @@ export default class ReactApp extends Module {
     const uapp = await this.getUapp({ req });
     if (this.reqPromise) this.reqPromise.cancel();
     const reqPromise = uapp.resolve({
-      path: req.path,
+      path: req.path || req.pathname,
       query: req.query,
     });
     this.reqPromise = reqPromise;
     await reqPromise;
-    if (req.isCanceled && reqPromise.isCanceled()) throw 'cancel';
+    if (!reqPromise.isCanceled) {
+      if (__STAGE__ === 'isuvorov') console.log('!isCanceled !isCanceled isCanceled');
+    }
+    if (reqPromise.isCanceled && reqPromise.isCanceled()) {
+      if (__STAGE__ === 'isuvorov') console.log('CANCEL CANCEL CANCEL');
+      throw 'cancel';
+    }
     this.reqPromise = null;
     return uapp.page;
   }

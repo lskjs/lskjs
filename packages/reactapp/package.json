@@ -31,15 +31,16 @@
   "dependencies": {
     "history": "4.10.1",
     "qs": "6.9.1",
-    "redbox-react": "1.6.0"
+    "redbox-react": "1.6.0",
+    "serialize-javascript": "3.0.0",
+    "@lskjs/utils": "1.2.0"
   },
   "devDependencies": {
     "@emotion/core": "10.0.27",
     "@emotion/styled": "10.0.27",
-    "@lskjs/autobind": "^1.0.47",
-    "@lskjs/log": "^1.2.0",
-    "@lskjs/module": "^1.2.0",
-    "@lskjs/utils": "^1.2.0",
+    "@lskjs/autobind": "1.0.47",
+    "@lskjs/log": "1.2.0",
+    "@lskjs/module": "1.2.0",
     "bluebird": "3.7.2",
     "create-emotion-server": "10.0.27",
     "lodash": "4.17.15",
@@ -50,7 +51,6 @@
     "@lskjs/autobind": "*",
     "@lskjs/log": "*",
     "@lskjs/module": "*",
-    "@lskjs/utils": "*",
     "bluebird": "*",
     "lodash": "*",
     "react": "*",

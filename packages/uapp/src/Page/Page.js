@@ -2,6 +2,7 @@ import React from 'react';
 import merge from 'lodash/merge';
 import Promise from 'bluebird';
 import createLogger from '@lskjs/utils/createLogger';
+import assignProps from '@lskjs/utils/assignProps';
 // import Loading from '@lskjs/general/Loading';
 
 // const DEBUG = __DEV__ && false;
@@ -14,22 +15,24 @@ const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
 export default class Page {
   _page = true;
   state = {};
-  baseState = {};
 
-  constructor(...args) {
-    this.init(...args);
+  constructor(props) {
+    assignProps(this, props);
   }
-
-  async init(props = {}) {
+  reset() {
     this.state = {};
-    Object.assign(this, props);
   }
 
-  renderTitle() {
-    return (this.state.metas || [])
+  getMeta() {
+    const meta = (this.state && this.state.meta) || {};
+    const title = (this.state.metas || [])
       .map(t => t.title)
       .reverse()
       .join(' - ');
+    return {
+      ...meta,
+      title,
+    };
   }
 
   onExit(fn) {
@@ -71,13 +74,16 @@ export default class Page {
   catchError(err) {
     debug('Page.error', err);
     if (__DEV__) {
-      if (err.message) {
-        console.error('Page.error:', err.message); // eslint-disable-line no-console
-        if (err.stack) console.error(err.stack); // eslint-disable-line no-console
-      } else {
-        console.error(err); // eslint-disable-line no-console
-      }
+      this.uapp.onError(err);
     }
+    // if (__DEV__) {
+    //   if (err.message) {
+    //     console.error('Page.error:', err.message); // eslint-disable-line no-console
+    //     if (err.stack) console.error(err.stack); // eslint-disable-line no-console
+    //   } else {
+    //     console.error(err); // eslint-disable-line no-console
+    //   }
+    // }
     if (__CLIENT__ && this.uapp.checkVersion) {
       // / !!!!!!!!!!!!!
       this.uapp.checkVersion();
@@ -85,11 +91,10 @@ export default class Page {
     throw err;
   }
 
-  loading() {
+  loading(...args) {
     debug('Page.loading');
-    const loading = this.state.loading || this.baseState.loading || 'Loading...';
-    // const loading = this.state.loading || <Loading full />;
-    return this.component(loading);
+    if (!args.length) return this.component('Loading...');
+    return this.component(...args);
   }
 
   async next(next) {

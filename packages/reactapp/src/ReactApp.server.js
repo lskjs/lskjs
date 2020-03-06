@@ -1,8 +1,7 @@
 import get from 'lodash/get';
 import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
-import pick from 'lodash/pick';
-// import BaseUapp from '@lskjs/uapp';
+import cloneDeep from 'lodash/cloneDeep';
 import Promise from 'bluebird';
 import autobind from '@lskjs/autobind';
 import collectExpressReq from '@lskjs/utils/collectExpressReq';
@@ -15,39 +14,32 @@ import BaseHtml from './Html';
 export default class ReactApp extends Module {
   name = 'App';
 
-  getRootState() {
-    // ({ req } = {}) {
-    return { __EMPTY__: true };
-    // const rootState = {
-    //   reqId: req.reqId,
-    //   token: req.token,
-    //   user: req.user,
-    //   ...(this.rootState || {}),
-    // };
-    // if (this.config.remoteConfig) {
-    //   const realConfig = this.config.client || {};
-    //   if (__DEV__) {
-    //     rootState.config = realConfig;
-    //   } else {
-    //     rootState.config = antimergeDeep(realConfig, this.initConfigClient);
-    //   }
-    // }
-    // return rootState;
+  getRootState({ req, uappReq, ...props }) {
+    return {
+      req: {
+        reqId: req.reqId,
+        user: req.user,
+        userId: req.userId,
+        token: req.token,
+      },
+      ...props,
+    };
+    // const config = antimergeDeep(this.uapp.uapp.config, this.uapp.uapp._config);
   }
 
-  async getUapp({ req: initReq, ...params } = {}) {
+  async getUapp({ req, ...params } = {}) {
     const { Uapp } = this;
-    const req = collectExpressReq(initReq);
-
-    const url = initReq.originalUrl; // || req.url || req.path;
+    const uappReq = collectExpressReq(req);
+    const config = cloneDeep(get(this, 'config.client', {}));
     const uapp = new Uapp({
       ...params,
       history: createMemoryHistory({
-        initialEntries: [url],
+        // TODO: вырезать
+        initialEntries: [req.originalUrl],
       }),
-      req,
-      rootState: this.getRootState({ req: initReq }),
-      config: get(this, 'config.client', {}),
+      req: uappReq,
+      rootState: this.getRootState({ req, some: { test: 123 } }),
+      config,
       app: this,
     });
     try {
@@ -64,7 +56,7 @@ export default class ReactApp extends Module {
   async getPage({ req } = {}) {
     const uapp = await this.getUapp({ req });
     await uapp.resolve({
-      path: req.originalUrl || req.url || req.path,
+      path: req.originalUrl,
       query: req.query,
     });
     return uapp.page;
@@ -102,8 +94,8 @@ export default class ReactApp extends Module {
       const html = new Html({
         content,
         assetManifest: this.getAssetManifest(),
-        meta: get(page, 'state.meta', {}),
-        rootState: get(page, 'rootState.rootState,', { SOME_ROOT_STATE: 1 }),
+        meta: this.page.getMeta(),
+        rootState: this.page.getRootState(),
       });
       return html.render();
     };

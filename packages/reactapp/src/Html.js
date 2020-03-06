@@ -1,17 +1,21 @@
 import map from 'lodash/map';
+import serializeWindow from '@lskjs/utils/serializeWindow';
+import serializeJavascript from 'serialize-javascript';
+
+const serialize = __DEV__ ? JSON.stringify : serializeJavascript;
 
 // const trim = str => str;
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
 export default class Html {
-  assetManifest = {}
+  assetManifest = {};
   constructor(props) {
     Object.assign(this, props);
   }
   asset(name) {
     try {
       const res = this.assetManifest.files[name];
-      if (!res) throw '!res'
+      if (!res) throw '!res';
       return res;
     } catch (err) {
       if (__DEV__) {
@@ -41,7 +45,7 @@ export default class Html {
   renderOGMeta() {
     const { meta = {} } = this;
     return `\
-${meta.title ? `<meta property="og:title" content="${meta.title}" />` : ''}\
+${meta.title ? `<meta property="og:title" content="${this.renderTitle()}" />` : ''}\
 ${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}\
 ${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}\
 ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
@@ -125,7 +129,7 @@ ${js}\
   globals = {};
   renderGlobals() {
     const { globals = {} } = this;
-    return map(globals, (val, key) => `window['${key}'] = ${JSON.stringify(val)};\n`).join('');
+    return serializeWindow(globals, serialize);
   }
 
   footer = '';
@@ -134,9 +138,15 @@ ${js}\
   }
 
   renderRootState() {
+    let rootStateStr;
+    if (typeof this.rootState === 'string') {
+      rootStateStr = this.rootState;
+    } else {
+      rootStateStr = serializeWindow({ __ROOT_STATE__: this.rootState }, serialize);
+    }
     return `\
 <script>\
-window.__ROOT_STATE__ = ${JSON.stringify(this.rootState, null, __DEV__ ? 4 : 0)};\
+${rootStateStr};\
 </script>\
 `;
   }

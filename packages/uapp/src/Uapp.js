@@ -34,7 +34,6 @@ export default class Uapp extends Module {
   Api = Api;
   Apiq = Apiq;
   Page = DefaultPage;
-  pageProps = {};
   rootState = {};
   Provider = UappProvider;
   theme = defaultTheme;
@@ -42,11 +41,6 @@ export default class Uapp extends Module {
   i18 = new I18({ ctx: this });
   // req = new Req();
   @observable req = {};
-
-  constructor(params = {}) {
-    super(params);
-    Object.assign(this, params);
-  }
 
   createLogger(params) {
     const level = __DEV__ // eslint-disable-line no-nested-ternary
@@ -64,6 +58,15 @@ export default class Uapp extends Module {
     });
   }
 
+  async applyRootState(rootState) {
+    this._config = cloneDeep(this.config); // подумать в init или в run
+    this.rootState = rootState;
+  }
+
+  async getRootState() {
+    return this.rootState;
+  }
+
   async historyConfirm(message, callback) {
     if (!this.confirm || !this.confirm.open) return callback(false);
     const res = await this.confirm.open({
@@ -76,17 +79,15 @@ export default class Uapp extends Module {
   }
   async init() {
     await super.init();
-    this.initConfig = cloneDeep(this.config); // подумать в init или в run
-
+    if (this.rootState) {
+      await this.applyRootState(this.rootState);
+    }
     this.stores = this.getStores();
-    // TODO: прокинуть домен (req) когда сервер
     this.api = this.getApi();
     this.apiq = new this.Apiq({
       config: this.config ? this.config.apiq : {},
       resolve: this.app.resolve,
     });
-
-    await this.initSession();
 
     if (this.i18) {
       await this.i18
@@ -98,16 +99,8 @@ export default class Uapp extends Module {
         .init();
     }
     if (__CLIENT__) {
-      this.app.historyConfirm = async (message, callback) => {
-        const res = await this.confirm({
-          title: this.t('form.confirm.title'),
-          text: message || this.t('form.confirm.text'),
-          cancel: this.t('form.confirm.cancel'),
-          submit: this.t('form.confirm.submit'),
-        });
-        return callback(res);
-      };
       this.favico = new Favico({
+        // @TODO: вынести как модуль
         animation: 'none',
       });
 
@@ -119,10 +112,10 @@ export default class Uapp extends Module {
       this.on('resolve:after', () => {
         // console.log('resolve:afterresolve:afterresolve:afterresolve:after', this.scrollTo);
         if (this.scrollTo) {
-          setTimeout(() => this.scrollTo(0), 10); // @TODO: back
+          setTimeout(() => this.scrollTo(0), 10); // @TODO: back && go to page
         }
         if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
-          document.title = this.page.renderTitle();
+          document.title = this.page.getMeta().title;
         }
         if (this.progress && this.progress.current) {
           this.progress.current.finish();
@@ -158,14 +151,6 @@ export default class Uapp extends Module {
     // console.log('DEPRECATED uapp.t', args[0]);
     if (this.i18) return this.i18.t(...args);
     return '!uapp.i18';
-  }
-
-  async initSession() {
-    // return;
-    // const { UserStore, AuthStore } = this.stores;
-    // console.log('this.rootState', this.rootState);
-    // this.user = new UserStore(this.rootState.user);
-    // this.auth = new AuthStore();
   }
 
   createOnSubmit(...props) {
@@ -362,26 +347,24 @@ export default class Uapp extends Module {
     }
   }
 
-  confirm(props) {
-    return this.confirmRef && this.confirmRef.open(props);
-  }
-
   getRoutes() {
     return {};
   }
 
-  async resetPage() {
+  async getPage() {
     // console.log('resetPage');
+    const { Page } = this;
     if (!this.page) {
-      this.page = new this.Page(this.pageProps || {});
+      this.page = new Page({
+        Provider: this.Provider,
+        rootState: this.rootState,
+        uapp: this,
+        app: this,
+      });
     } else {
       await this.page.exit();
     }
-    await this.page.init({
-      Provider: this.Provider,
-      uapp: this,
-      state: {},
-    });
+    await this.page.reset();
     return this.page;
   }
 
@@ -393,7 +376,7 @@ export default class Uapp extends Module {
       query: reqParams.query,
     };
     if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
-    await this.resetPage();
+    const page = await this.getPage();
     let res;
     try {
       res = await this.router.resolve({
@@ -401,7 +384,7 @@ export default class Uapp extends Module {
         path: reqParams.path,
         query: reqParams.query,
         // req,
-        page: this.page,
+        page,
         req,
       });
     } catch (err) {
