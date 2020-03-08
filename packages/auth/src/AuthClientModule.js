@@ -15,16 +15,15 @@ export default class AuthClientModule extends Module {
     const { AuthStore } = this.stores;
     this.store = new AuthStore();
     if (__CLIENT__) {
-      this.storage = new LocalStorage({
+      this.localStorage = new LocalStorage({
         // memoryState: this.app.rootState,
         config: get(this, 'app.config.storage', {}),
       });
-    } else {
-      this.storage = new MemoryStorage({
-        state: this.app.rootState,
-        config: get(this, 'app.config.storage', {}),
-      });
     }
+    this.memoryStorage = new MemoryStorage({
+      state: this.app.rootState,
+      config: get(this, 'app.config.storage', {}),
+    });
   }
 
   async run() {
@@ -45,7 +44,7 @@ export default class AuthClientModule extends Module {
     DEBUG && console.log('AuthStore.setToken', token);  //eslint-disable-line
     this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
-    this.app.rootState.token = token;
+    if (this.memoryStorage) this.memoryStorage.set('req.token', token);
     if (__CLIENT__ && cookies) {
       if (token == null) {
         cookie.remove('token');
@@ -74,11 +73,45 @@ export default class AuthClientModule extends Module {
   }
 
   async loadStore() {
-    this.store.setState(this.storage.get('auth'));
+    let state = {};
+    if (this.memoryStorage) {
+      state = {
+        ...state,
+        ...this.memoryStorage.get('auth'),
+      };
+    }
+    if (this.localStorage) {
+      state = {
+        ...state,
+        ...this.localStorage.get('auth'),
+      };
+    }
+    console.log('this.memoryStorage', this.memoryStorage, this.memoryStorage.get('req.user'));
+
+    if (!state.session && this.memoryStorage.get('req.user')) {
+      console.log(123123123);
+      
+      const session = {
+        // _id: this.memoryStorage.get('req.userId'),
+        _id: this.memoryStorage.get('req.user._id'),
+        user: this.memoryStorage.get('req.user'),
+        token: this.memoryStorage.get('req.token'),
+      };
+      state = {
+        ...state,
+        session,
+        sessions: [session],
+      };
+    }
+    
+    if (__STAGE__ === 'isuvorov') this.log.debug('loadStore', state);
+    this.store.setState(state);
   }
+
   async saveStore() {
     const { session } = this.store;
-    this.storage.set('auth', this.store.toJS());
+    if (this.localStorage) this.localStorage.set('auth', this.store.toJS());
+    if (this.memoryStorage) this.memoryStorage.set('auth', this.store.toJS());
     await this.setToken(session ? session.token : null);
     // try {
     //   await this.app.reconnect();
