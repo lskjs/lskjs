@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/lskjs/lskjs/compare/v1.5.0...v1.6.0) (2020-03-08)
+
+
+### Features
+
+* **auth:** pass user & token to memoryStorage and localStorage ([72c3c61](https://github.com/lskjs/lskjs/commit/72c3c61fac4bc26a9750801b90d79834728142db))
+
+
+
+
+
 # [1.5.0](https://github.com/lskjs/lskjs/compare/v1.4.3...v1.5.0) (2020-03-06)
 
 
