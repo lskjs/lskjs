@@ -153,6 +153,10 @@ export default class ServerApp extends Module {
       __ROOT_STATE__: {
         token: req.token,
         user: req.user,
+        req: {
+          token: req.token,
+          user: req.user,
+        },
         config: this.config.client || {},
       },
       __DEV__,
