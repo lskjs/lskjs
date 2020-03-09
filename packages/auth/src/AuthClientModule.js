@@ -31,15 +31,6 @@ export default class AuthClientModule extends Module {
     await this.loadStore();
   }
 
-  async findUserProfile() {
-    return this.getMyUser()
-      .then(user => ({ user }))
-      .catch(err => {
-        this.app.log.error(err);
-        throw err;
-      });
-  }
-
   setToken(token, expires = 365, cookies = true) {
     DEBUG && console.log('AuthStore.setToken', token);  //eslint-disable-line
     this.app.api.setAuthToken(token);
@@ -52,24 +43,6 @@ export default class AuthClientModule extends Module {
         cookie.set('token', token, { expires });
       }
     }
-  }
-
-  getUserAndTokenFromRootState() {
-    // DEBUG && console.log('AuthStore.getUserAndToken');  //eslint-disable-line
-    const res = {};
-    if (this.app.rootState) {
-      if (this.app.rootState.token) {
-        res.token = this.app.rootState.token;
-      }
-      if (this.app.rootState.user) {
-        res.user = this.app.rootState.user;
-      }
-    }
-    if (!res.token && cookie.get('token')) {
-      res.token = cookie.get('token');
-    }
-    // DEBUG && console.log('AuthStore.getUserAndTokenFromRootState', res);  //eslint-disable-line
-    return res;
   }
 
   async loadStore() {
@@ -86,11 +59,7 @@ export default class AuthClientModule extends Module {
         ...this.localStorage.get('auth'),
       };
     }
-    console.log('this.memoryStorage', this.memoryStorage, this.memoryStorage.get('req.user'));
-
     if (!state.session && this.memoryStorage.get('req.user')) {
-      console.log(123123123);
-      
       const session = {
         // _id: this.memoryStorage.get('req.userId'),
         _id: this.memoryStorage.get('req.user._id'),
@@ -103,7 +72,7 @@ export default class AuthClientModule extends Module {
         sessions: [session],
       };
     }
-    
+
     if (__STAGE__ === 'isuvorov') this.log.debug('loadStore', state);
     this.store.setState(state);
   }
