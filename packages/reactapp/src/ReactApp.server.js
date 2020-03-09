@@ -12,7 +12,7 @@ import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-
 import BaseHtml from './Html';
 
 export default class ReactApp extends Module {
-  name = 'App';
+  name = 'ReactApp';
 
   getRootState({ req, uappReq, ...props }) {
     return {

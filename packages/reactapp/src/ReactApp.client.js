@@ -16,7 +16,7 @@ const DEBUG = __DEV__ && false;
 export default class ReactApp extends Module {
   // BaseUapp = BaseUapp;
   ReactDOM = ReactDOM;
-  name = 'App';
+  name = 'ReactApp';
 
   constructor(props) {
     // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху.
@@ -135,7 +135,14 @@ export default class ReactApp extends Module {
 
   async getPage(req) {
     const uapp = await this.getUapp({ req });
-    if (this.reqPromise) this.reqPromise.cancel();
+    if (this.reqPromise) {
+      if (this.reqPromise.cancel) {
+        this.reqPromise.cancel();
+      } else {
+        // eslint-disable-next-line no-lonely-if
+        if (__STAGE__ === 'isuvorov') console.log('!!!!this.reqPromise.cancel');
+      }
+    }
     const reqPromise = uapp.resolve({
       path: req.path || req.pathname,
       query: req.query,
@@ -144,11 +151,14 @@ export default class ReactApp extends Module {
     await reqPromise;
     if (!reqPromise.isCanceled) {
       if (__STAGE__ === 'isuvorov') console.log('!isCanceled !isCanceled isCanceled');
+    } else {
+      // eslint-disable-next-line no-lonely-if
+      if (reqPromise.isCanceled()) {
+        if (__STAGE__ === 'isuvorov') console.log('CANCEL CANCEL CANCEL');
+        throw 'cancel';
+      }
     }
-    if (reqPromise.isCanceled && reqPromise.isCanceled()) {
-      if (__STAGE__ === 'isuvorov') console.log('CANCEL CANCEL CANCEL');
-      throw 'cancel';
-    }
+
     this.reqPromise = null;
     return uapp.page;
   }
