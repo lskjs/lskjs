@@ -20,9 +20,10 @@ export default class Storage {
     let value;
     value = this._get(key)
     debug('get', key, value);
+    return value;
   }
-  set(key, value) {
-    return get(this, key, value)
+  _set(key, value) {
+    return set(this, key, value)
   }
   set(key, value) {
     this._set(key, value);
