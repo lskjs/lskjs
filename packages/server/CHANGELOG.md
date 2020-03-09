@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.6.0...v1.7.0) (2020-03-09)
+
+
+### Features
+
+* **server:** add req in rootState ([bdbaed3](https://github.com/lskjs/modules/tree/master/packages/server/commit/bdbaed32cd34ec87f45601f79286f5fd81c67f23))
+
+
+
+
+
 # [1.5.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.4.3...v1.5.0) (2020-03-06)
 
 **Note:** Version bump only for package @lskjs/server

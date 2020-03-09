@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.6.0...v1.7.0) (2020-03-09)
+
+
+### Bug Fixes
+
+* **reactapp:** fix name and reqPromise bugs ([1d1bb83](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/1d1bb83ae415c483aac0968308a1ee17bc36fb9c))
+
+
+
+
+
 # [1.5.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.4.3...v1.5.0) (2020-03-06)
 
 **Note:** Version bump only for package @lskjs/reactapp

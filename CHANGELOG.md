@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/lskjs/lskjs/compare/v1.6.0...v1.7.0) (2020-03-09)
+
+
+### Bug Fixes
+
+* **auth:** remove console logs and unuseful code ([068cbd4](https://github.com/lskjs/lskjs/commit/068cbd41e493777e17e8f9c8940c1e59e9fd0ad8))
+* **auth:** storage set/get fix ([ce97fee](https://github.com/lskjs/lskjs/commit/ce97fee6489d6540ee446af08f6926ad4a7f8a56))
+* **grant:** stable client/server grant while SSR ([d12a08e](https://github.com/lskjs/lskjs/commit/d12a08ec9dfaa71a9fe22f2e564f087d8e32c377))
+* **reactapp:** fix name and reqPromise bugs ([1d1bb83](https://github.com/lskjs/lskjs/commit/1d1bb83ae415c483aac0968308a1ee17bc36fb9c))
+
+
+### Features
+
+* **server:** add req in rootState ([bdbaed3](https://github.com/lskjs/lskjs/commit/bdbaed32cd34ec87f45601f79286f5fd81c67f23))
+
+
+
+
+
 # [1.6.0](https://github.com/lskjs/lskjs/compare/v1.5.0...v1.6.0) (2020-03-08)
 
 

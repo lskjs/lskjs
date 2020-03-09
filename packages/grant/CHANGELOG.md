@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.6.0...v1.7.0) (2020-03-09)
+
+
+### Bug Fixes
+
+* **grant:** stable client/server grant while SSR ([d12a08e](https://github.com/lskjs/lskjs/tree/master/packages/grant/commit/d12a08ec9dfaa71a9fe22f2e564f087d8e32c377))
+
+
+
+
+
 # [1.5.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.4.3...v1.5.0) (2020-03-06)
 
 **Note:** Version bump only for package @lskjs/grant

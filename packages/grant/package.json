@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
