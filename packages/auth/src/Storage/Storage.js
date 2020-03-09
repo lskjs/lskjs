@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import set from 'lodash/set';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
