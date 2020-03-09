@@ -27,7 +27,7 @@ export default class LocalStorage extends Storage {
       return null;
     }
   }
-  _set(key) {
+  _set(key, value) {
     const path = this.path(key);
     if (!this.state) {
       this.debug('set', path, '=( !localStorage');
