@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.7.1...v1.7.2) (2020-03-09)
+
+
+### Bug Fixes
+
+* **auth:** storage set ([4552857](https://github.com/lskjs/modules/tree/master/packages/auth/commit/45528575d7f0a20285c19c95f4ca7974ffd1a31e))
+
+
+
+
+
 ## [1.7.1](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.7.0...v1.7.1) (2020-03-09)
 
 
