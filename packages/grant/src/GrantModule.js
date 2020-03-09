@@ -54,18 +54,6 @@ export default class Grant extends Module {
     }
     return this.app.models.UserModel.findById(userId);
   }
-  async askServer({ userId, user, action, ...params }) {
-    if (__SERVER__) return false;
-    const { data } = await this.app.api.fetch('/api/grant/can', {
-      method: 'POST',
-      data: {
-        action,
-        userId,
-        ...params,
-      },
-    });
-    return data;
-  }
   async can(...args) {
     const params = await this.getParams(args);
     const { action } = params;
@@ -74,8 +62,6 @@ export default class Grant extends Module {
     if (rules && rules[action]) {
       return rules[action].bind(this)(params);
     }
-    if (__CLIENT__) return this.askServer(params);
-    this.log.trace(`!Grant.rules[${action}]`);
-    return false;
+    return null;
   }
 }
