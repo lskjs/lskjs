@@ -13,7 +13,7 @@ export default class EventModule extends Module {
   async init() {
     await super.init();
     this.events = this.getEvents();
-    this.log.trace('EventModule.rules', Object.keys(this.rules));
+    this.log.trace('EventModule.rules', Object.keys(this.events));
   }
   async run() {
     forEach(this.events, (fn, event) => {
