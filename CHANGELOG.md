@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/lskjs/lskjs/compare/v1.9.1...v1.10.0) (2020-03-11)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** remove got, add axios ([2989e5c](https://github.com/lskjs/lskjs/commit/2989e5c376547831be82f4d6313d3e3385bb918f))
+
+
+### Features
+
+* **build-locales:** add debug info ([fcc3dfd](https://github.com/lskjs/lskjs/commit/fcc3dfd20b78de8ceea1a8f823fe258291d6a1b5))
+* **mailer:** add test template ([bae6550](https://github.com/lskjs/lskjs/commit/bae6550740b0d0e8ce559d416ebb00b19a0464ca))
+
+
+
+
+
 ## [1.9.1](https://github.com/lskjs/lskjs/compare/v1.9.0...v1.9.1) (2020-03-11)
 
 **Note:** Version bump only for package lskjs

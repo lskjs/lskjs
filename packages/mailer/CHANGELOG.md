@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.9.1...v1.10.0) (2020-03-11)
+
+
+### Features
+
+* **mailer:** add test template ([bae6550](https://github.com/lskjs/modules/tree/master/packages/mailer/commit/bae6550740b0d0e8ce559d416ebb00b19a0464ca))
+
+
+
+
+
 ## [1.9.1](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.9.0...v1.9.1) (2020-03-11)
 
 **Note:** Version bump only for package @lskjs/mailer
