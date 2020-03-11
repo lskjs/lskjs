@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/event",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "LSK module for event.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

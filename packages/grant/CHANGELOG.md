@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.7.2...v1.8.0) (2020-03-11)
+
+
+### Bug Fixes
+
+* **grant:** fix trace logs ([6695469](https://github.com/lskjs/lskjs/tree/master/packages/grant/commit/66954695803e196e687ad413edd50bad8d30f133))
+
+
+
+
+
 # [1.7.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.6.0...v1.7.0) (2020-03-09)
 
 

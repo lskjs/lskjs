@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/lskjs/lskjs/compare/v1.7.2...v1.8.0) (2020-03-11)
+
+
+### Bug Fixes
+
+* **grant:** fix trace logs ([6695469](https://github.com/lskjs/lskjs/commit/66954695803e196e687ad413edd50bad8d30f133))
+
+
+### Features
+
+* **event:** create events ([92408e5](https://github.com/lskjs/lskjs/commit/92408e503ac03cff0c92bd9ef6eb18d9b61f517d))
+
+
+
+
+
 ## [1.7.2](https://github.com/lskjs/lskjs/compare/v1.7.1...v1.7.2) (2020-03-09)
 
 
