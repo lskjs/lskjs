@@ -1,4 +1,5 @@
 import getSpreadsheet from '@lskjs/getspreadsheet';
+import Promise from 'bluebird';
 import meow from 'meow';
 import buildLocales from '../build-locales';
 
@@ -29,7 +30,11 @@ const start = async ({ locales, link, dist }) => {
   const localesArray = locales.split(',');
   const links = Array.isArray(link) ? link : [link];
 
-  const spreadsheets = await Promise.all(links.map(getSpreadsheet));
+  console.log('try to getSpreadsheets', links);
+  const spreadsheets = await Promise.all(links.map(getSpreadsheet)).catch(err => {
+    console.log('getSpreadsheet err', err);
+  });
+  console.log('getSpreadsheet done');
   await buildLocales(spreadsheets, localesArray, dist);
   console.log('Complete');
 };

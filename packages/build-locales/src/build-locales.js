@@ -19,14 +19,19 @@ export default async (spreadsheets, locales, destination) => {
     }),
   );
   try {
+    console.log(`rm ${destination}`);
     rimraf.sync(destination);
+  } catch (err) {
+    console.error(`rimraf err ${destination}`, err);
+  }
+  try {
+    console.log(`mkdir -p ${destination}`);
     mkdirp.sync(destination);
   } catch (err) {
-    console.error(err);
+    console.error(`mkdirp err ${destination}`, err);
   }
   locales.forEach(locale => {
     const dirname = path.join(destination, locale);
-
     fs.writeFileSync(`${dirname}.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     // fs.writeFileSync(`${dirname}/translation.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     const namespaces = groupBy(

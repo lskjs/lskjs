@@ -30,10 +30,12 @@
   "dependencies": {
     "@lskjs/getspreadsheet": "1.4.0",
     "@lskjs/utils": "1.9.1",
+    "bluebird": "3.7.2",
     "csv-parse": "4.8.5",
     "csvtojson": "2.0.10",
     "jsongrid": "1.0.2",
     "lodash": "4.17.15",
+    "meow": "6.0.1",
     "mkdirp": "1.0.3",
     "rimraf": "3.0.2"
   },
