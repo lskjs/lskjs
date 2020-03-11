@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import GrantModule from './GrantModule';
 
 export default class GrantServerModule extends GrantModule {
-  name = 'GrantClientModule';
+  name = 'GrantServerModule';
   async can(...args) {
     const value = await super.can(...args);
     if (value !== null) return value;

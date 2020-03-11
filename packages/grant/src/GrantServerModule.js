@@ -6,7 +6,7 @@ export default class GrantServerModule extends GrantModule {
     const value = await super.can(...args);
     if (value !== null) return value;
     const { action } = await this.getParams(args);
-    this.log.trace(`!Grant.rules[${action}]`);
+    this.log.trace(`!GrantServerModule.rules[${action}]`);
     return false;
   }
 }

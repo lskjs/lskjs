@@ -5,15 +5,15 @@ const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
 // && false
 // [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
-export default class Grant extends Module {
-  name = 'GrantClientModule';
+export default class GrantModule extends Module {
+  name = 'GrantModule';
   getRules() {
     return {};
   }
   async init() {
     await super.init();
     this.rules = this.getRules();
-    this.log.trace('Grant.rules', Object.keys(this.rules));
+    this.log.trace('GrantModule.rules', Object.keys(this.rules));
   }
   async getParams(args) {
     if (args.length === 1) {
