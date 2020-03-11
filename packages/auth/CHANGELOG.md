@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.8.1...v1.9.0) (2020-03-11)
+
+
+### Features
+
+* **auth:** add userId in events ([b3edf04](https://github.com/lskjs/modules/tree/master/packages/auth/commit/b3edf04865535ae0fb60ad2a44d7afbcf19b3d97))
+
+
+
+
+
 ## [1.7.2](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.7.1...v1.7.2) (2020-03-09)
 
 

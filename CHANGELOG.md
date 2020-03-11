@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/lskjs/lskjs/compare/v1.8.1...v1.9.0) (2020-03-11)
+
+
+### Features
+
+* **auth:** add userId in events ([b3edf04](https://github.com/lskjs/lskjs/commit/b3edf04865535ae0fb60ad2a44d7afbcf19b3d97))
+* **rlog:** add module rlog ([2c36c0f](https://github.com/lskjs/lskjs/commit/2c36c0f39f944d63fff689f94c8de9d982fa7bb8))
+
+
+
+
+
 ## [1.8.1](https://github.com/lskjs/lskjs/compare/v1.8.0...v1.8.1) (2020-03-11)
 
 
