@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "1.5.0",
+  "version": "1.9.1",
   "description": "LSK log.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@browser-bunyan/levels": "1.5.3",
     "@lskjs/bunyan": "1.0.47",
-    "@lskjs/utils": "1.5.0",
+    "@lskjs/utils": "1.9.1",
     "browser-bunyan": "1.5.3",
     "source-map-support": "0.5.16"
   },
