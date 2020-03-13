@@ -39,20 +39,20 @@ export default function createHelpers({ app } = {}) {
       // TODO переместить в modules.auth
       return jwt.sign(helpers.getIdentity(...params), configJwt.secret);
     },
-    async genereateEmailApprovedLink(user) {
-      const token = jwt.sign(
-        {
-          userId: String(user._id),
-          email: user.email,
-        },
-        configJwt.secret,
-      );
-      if (!user.private) user.private = {}; // eslint-disable-line no-param-reassign
-      user.private.approvedEmailToken = token; // eslint-disable-line no-param-reassign
-      if (user.markModified) user.markModified('private');
+    // async genereateEmailApprovedLink(user) {
+    //   const token = jwt.sign(
+    //     {
+    //       userId: String(user._id),
+    //       email: user.email,
+    //     },
+    //     configJwt.secret,
+    //   );
+    //   if (!user.private) user.private = {}; // eslint-disable-line no-param-reassign
+    //   user.private.approvedEmailToken = token; // eslint-disable-line no-param-reassign
+    //   if (user.markModified) user.markModified('private');
 
-      return app.url(`/api/auth/email/approve?t=${token}`);
-    },
+    //   return app.url(`/api/auth/email/approve?t=${token}`);
+    // },
   };
   return helpers;
 }

@@ -163,7 +163,8 @@ export default class Api extends BaseApi {
   }
 
   async signup(req) {
-    const { UserModel } = this.app.models;
+    const permitModule = this.app.module('permit');
+    const { UserModel, PermitModel } = this.app.models;
     const { password, ...userFields } = req.data;
     const loginParams = canonizeParams(req.data);
     const criteria = this.getUserCriteria(loginParams);
@@ -179,8 +180,31 @@ export default class Api extends BaseApi {
     }
     await user.save();
     req.user = user;
-    const link = (await this.helpers.genereateEmailApprovedLink) ? this.helpers.genereateEmailApprovedLink(user) : null;
-    this.app.emit('events.auth.signup', { user, link });
+
+    if (loginField === 'email') {
+      const { email } = loginParams;
+      const code = await permitModule.genCode('emailVerifyStrong');
+      const permit = await PermitModel.createPermit({
+        expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
+        type: 'auth.verifyEmail',
+        userId: user._id,
+        info: {
+          userId: user._id,
+          email,
+        },
+        code,
+      });
+      this.app.emit('events.auth.signup', {
+        type: 'events.auth.signup',
+        userId: user._id,
+        user,
+        permit,
+        email,
+        link: this.app.url(`/auth/permit?permitId=${permit._id}&code=${permit.code}`),
+      });
+    }
+    // const link = (await this.helpers.genereateEmailApprovedLink) ? this.helpers.genereateEmailApprovedLink(user) : null;
+    // this.app.emit('events.auth.signup', { user, link });
     const token = this.helpers.generateAuthToken(user);
     return {
       __pack: 1,
@@ -250,6 +274,7 @@ export default class Api extends BaseApi {
   }
 
   async restorePassword(req) {
+    const permitModule = await this.app.module('permit');
     const { UserModel, PermitModel } = this.app.models;
     const { email } = req.data;
 
@@ -260,20 +285,7 @@ export default class Api extends BaseApi {
     if (!user) {
       throw 'notFound';
     }
-    const date = new Date();
-    const str = `${user._id}_${email}_${date.getTime()}`;
-    const code = await PermitModel.generateUniqCode({
-      codeParams: { str, type: 'hash' },
-      criteria: {
-        type: 'user.restorePassword',
-        activatedAt: {
-          $exists: false,
-        },
-        expiredAt: {
-          $gte: date,
-        },
-      },
-    });
+    const code = await permitModule.genCode('emailVerifyStrong');
     const permit = await PermitModel.createPermit({
       expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
       type: 'user.restorePassword',
@@ -286,14 +298,12 @@ export default class Api extends BaseApi {
     });
     this.app.emit('events.auth.restorePassword', {
       type: 'events.auth.restorePassword',
-      targetUser: user,
-      user,
       userId: user._id,
+      user,
       permit,
       email,
       link: this.app.url(`/auth/permit?permitId=${permit._id}&code=${permit.code}`),
     });
-    // console.log(this.app.url(`/auth/permit/${permit._id}?code=${permit.code}`), 'events.user.restorePassword');
     return PermitModel.prepare(permit, { req });
   }
 
