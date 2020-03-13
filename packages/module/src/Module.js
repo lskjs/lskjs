@@ -33,12 +33,12 @@ export default class Module {
   }
 
   emit(...args) {
-    if (this.log) {
+    if (this.log && this.log.trace) {
       this.log.trace(`[e] ${this.name}:`, ...args);
     } else {
       console.log(`[e] ${this.name}:`, ...args); // eslint-disable-line no-console
     }
-    if (this.ee) this.ee.emit(...args);
+    if (this.ee && this.ee.emit) this.ee.emit(...args);
   }
   on(...args) {
     if (this.ee) {
@@ -59,7 +59,7 @@ export default class Module {
   async beforeInit() {
     if (!this.ee) this.ee = new Emitter();
     if (!this.log) this.log = this.createLogger();
-    if (this.log) this.ee.on('*', event => this.log.trace(event));
+    if (this.ee && this.log) this.ee.on('*', event => this.log.trace(event));
   }
 
   async init() {
