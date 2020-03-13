@@ -1,5 +1,4 @@
 import MongooseSchema from '@lskjs/db/MongooseSchema';
-import SHA256 from 'crypto-js/sha256';
 import m from 'moment';
 import pick from 'lodash/pick';
 
@@ -55,29 +54,8 @@ export default function PermitModel({ db, emit }) {
     }
     return permit;
   };
-  schema.statics.generateCode = function({ str, type = 'random', length = 4 }, iteration) {
-    if (type === 'random' || type === 'number') {
-      const min = 0;
-      let maxNumber = '';
-      for (let i = 0; i < length; i += 1) {
-        maxNumber += '9';
-      }
-      const max = Number(maxNumber) + 1;
-      let value = String(Math.floor(Math.random() * (max - min)) + min);
-      while (value.length < length) {
-        value = `0${value}`;
-      }
-      return value;
-    }
-    if (type === 'hash') {
-      let str2 = str;
-      if (iteration) {
-        str2 += Math.floor(Math.random() * 100000);
-      }
-      return SHA256(str2).toString();
-    }
-    throw '!type';
-  };
+  schema.statics.generateCode = (...args) => this.parent.generateCode(...args);
+  schema.statics.generateUniqCode = (...args) => this.parent.generateUniqCode(...args);
   schema.statics.isCode = function({ code, type, length = 4 }) {
     if (type === 'random') {
       if (typeof code === 'string' && code.length === length) {
@@ -90,21 +68,7 @@ export default function PermitModel({ db, emit }) {
     }
     return false;
   };
-  schema.statics.generateUniqCode = async function({ criteria, codeParams = {}, iteration = 0 }) {
-    // throw '!code';
-    if (iteration > 100) throw '!code';
-    const code = this.generateCode(codeParams, iteration);
-    const permit = await this.findOne({
-      ...criteria,
-      code,
-    }).select('_id');
-    if (permit) {
-      const params = { criteria, codeParams, iteration };
-      params.iteration += 1;
-      return this.generateUniqCode(params);
-    }
-    return code;
-  };
+  
   schema.statics.findByCode = async function(code, params = {}) {
     return this.findOne({
       code,
