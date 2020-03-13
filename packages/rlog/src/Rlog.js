@@ -22,12 +22,20 @@ const statuses = {
 };
 
 const checkLimit = (stat, limit, size) => {
-  if (new Date() > (stat.startedAt || 0) + size) {
-    stat.startedAt = new Date();
+  // console.log(Date.now());
+  // console.log(+(stat.startedAt || 0) + size);
+
+  if (Date.now() > +(stat.startedAt || 0) + size) {
+    // console.log('RESET');
+    stat.startedAt = Date.now();
     stat.ignore = 0;
     stat.count = 0;
   }
+
   if (stat.count > limit) {
+    // console.log('stat.count', stat.count);
+    // console.log('limit', limit);
+    // console.log('stat.ignore', stat.ignore);
     stat.ignore += 1;
     return false;
   }
@@ -44,14 +52,17 @@ const checkLimits = (stats, limits) => {
     '10sec': 10 * 1000,
   };
 
-  return Object.keys(sizes)
+  const checks = Object.keys(sizes)
     .reverse()
-    .every(name => {
+    .map(name => {
       const size = sizes[name];
       if (!stats[name]) stats[name] = {};
       return checkLimit(stats[name], limits[name], size);
-    })
-    .every(Boolean);
+    });
+
+  // console.log({ checks });
+
+  return checks.every(Boolean);
 
   // if (!this.stats.last.startedAt) {
   //   this.stats.last.startedAt = new Date();
@@ -73,7 +84,7 @@ class Rlog {
   statuses = statuses;
 
   limits = {
-    sum: null,
+    sum: 9999999999,
     '1hour': 300,
     '5min': 60,
     '1min': 30,
@@ -92,7 +103,7 @@ class Rlog {
     const clog = clogs[action] || clogs._default;
     const status = statuses[action] || statuses._default;
 
-    if (!checkLimits(this.stats, limits)) {
+    if (!(params.force || params.ignoreLimits) && !checkLimits(this.stats, limits)) {
       console.error('Rlog.send: IGNORE BY LIMITS');
       return null;
     }
