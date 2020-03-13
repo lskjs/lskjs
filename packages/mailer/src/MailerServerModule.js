@@ -3,6 +3,7 @@ import get from 'lodash/get';
 import Promise from 'bluebird';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
+import config from './config';
 
 export default class MailerServerModule extends Module {
   name = 'MailerServerModule';
@@ -12,7 +13,10 @@ export default class MailerServerModule extends Module {
 
   async init() {
     await super.init();
-    this.config = get(this.app, 'config.mailer');
+    this.config = {
+      ...config,
+      ...get(this, 'app.config.mailer', {}),
+    };
     if (!this.config) {
       this.log.warn('config.mailer IS EMPTY');
       return;
@@ -74,10 +78,12 @@ export default class MailerServerModule extends Module {
   }
 
   getTemplateConfig() {
-    const assets = get(this.app, 'config.client.site.assets') || get(this.app, 'config.about.assets') || '/assets';
+    const assets =
+      get(this.app, 'config.client.site.assets') || get(this.app, 'config.about.assets') || '/assets/mailer';
     return {
       logo: this.app.url(`${assets}/logo.png`),
-      headerImage: this.app.url(`${assets}/emailHeaderImage.png`),
+      headerImage: this.app.url(`${assets}/header.png`),
+      about: get(this, 'app.config.client.about', {}),
     };
   }
 
@@ -86,32 +92,30 @@ export default class MailerServerModule extends Module {
     if (!template) throw this.app.e('mailer.!template');
     const Template = this.templates[template];
     if (!Template) throw this.app.e('mailer.!Template', { template });
+    const config = this.getTemplateConfig();
+    if (__DEV__) console.log({ config });
+
     const email = new Template({
       // app: this.app,
-      theme: this.theme,
+      theme: this.theme || this.app.theme,
       log: this.app.log,
       url: this.app.url,
       t: this.getT(otherProps.locale),
-      config: this.getTemplateConfig(),
+      config,
       props,
       ...otherProps,
     });
     return {
-      ...this.config.options || {},
+      ...(this.config.options || {}),
       ...this.getTemplateOptions(email),
     };
   }
 
   async send(props) {
-    const { to, cc, bcc, ...other } = props;
+    const { to, cc, bcc, template, ...otherProps } = props;
     if (!to) throw this.app.e('mailer.!to');
-    const options = this.renderTemplate(other);
-    // console.log({
-    //   to,
-    //   cc,
-    //   bcc,
-    //   ...options,
-    // });
+    const options = this.renderTemplate({ template, ...otherProps });
+    this.log.trace(`mailer.send [${template}] => ${[to, cc, bcc].filter(Boolean).join(',')}`);
     return this.transporter.sendMail({
       to,
       cc,

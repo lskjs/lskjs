@@ -14,8 +14,14 @@ export default class MailerApi extends Api {
       data: { email, ...data },
       params: { template, type },
     } = req;
-    const devProps = get(mailer.devProps, template, {});
-    const params = { ...devProps, ...data, template };
+
+    const devProps = get(
+      mailer.devProps || mailer.testProps,
+      template,
+      get(mailer, `templates.${template}.testProps`, {}),
+    );
+    const props = { ...devProps, ...data };
+    const params = { props, template };
     if (type === 'email') {
       if (!email) throw '!email';
       return mailer.send({ ...params, to: email });
