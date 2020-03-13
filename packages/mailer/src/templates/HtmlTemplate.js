@@ -8,6 +8,14 @@ export default class HtmlTemplate {
     Object.assign(this, params);
   }
 
+  getUnsubscribeEvent() {
+    return null;
+  }
+  getUnsubscribeLink() {
+    const event = this.getUnsubscribeEvent();
+    return event ? this.url(`/api/mailer/unsubscribe?event=${event}`) : null;
+  }
+
   getSubject() {
     return null;
   }

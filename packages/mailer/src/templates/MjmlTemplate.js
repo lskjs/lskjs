@@ -91,6 +91,7 @@ export default class MjmlTemplate extends HtmlTemplate {
         <mj-table padding-bottom="32px">
           <tr>
             ${list
+              .filter(item => item.title || item.href)
               .map(
                 (item, index) => `
               <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
@@ -107,20 +108,6 @@ export default class MjmlTemplate extends HtmlTemplate {
           </tr>
         </mj-table>
       </mj-column>
-    `;
-  }
-
-  team() {
-    return `
-      <mj-section background-color="${get(this, 'theme.colors.white')}">
-        <mj-column width="100%">
-          <mj-divider border-width="1px" border-style="solid" border-color="${get(this, 'theme.colors.border')}" />
-        </mj-column>
-      </mj-section>
-      <mj-section background-color="${get(this, 'theme.colors.white')}" padding="0px 0px 42px">
-        ${this.title(this.t('email.goodDay'))}
-        ${this.text(this.t('email.incircle.isuvorov.com'))}
-      </mj-section>
     `;
   }
 
@@ -208,48 +195,6 @@ export default class MjmlTemplate extends HtmlTemplate {
     `;
   }
 
-  header({ logo = this.config.logo, image = this.config.headerImage } = {}) {
-    return `
-      <mjml>
-        <mj-head>
-          ${this.font('Roboto', 'https://fonts.googleapis.com/css?family=Roboto:400,400i,700&amp;subset=cyrillic')}
-        </mj-head>
-        <mj-body>
-          <mj-container background-color="${get(this, 'theme.colors.mainBackground')}">
-            ${!logo ? '' : this.logo({ src: logo })}
-            ${!image ? '' : this.headerImage({ src: image })}
-    `;
-  }
-
-  footer() {
-    return `
-            <mj-section padding="16px"/>
-            <mj-section padding="32px" border-radius="4px">
-              <!--${this.footerLinks([
-                {
-                  href: 'https://incircle.isuvorov.com',
-                  title: 'incircle.isuvorov.com',
-                },
-                {
-                  href: 'mailto:mail@localhost',
-                  title: 'mail@localhost',
-                },
-                {
-                  href: 'mailto:mail@localhost',
-                  title: 'Отписаться от рассылки',
-                },
-              ])}
-              ${this.copyrights({
-                title: 'InCircle 2019',
-                subtitle: 'Your company address',
-              })}-->
-            </mj-section>
-          </mj-container>
-        </mj-body>
-      </mjml>
-    `;
-  }
-
   content(children) {
     return `
       <mj-section background-color="${get(this, 'theme.colors.white')}" padding="32px 0px 12px">
@@ -258,6 +203,16 @@ export default class MjmlTemplate extends HtmlTemplate {
     `;
   }
 
+  header() {
+    return `
+     <!--header-->
+    `;
+  }
+  footer() {
+    return `
+     <!--footer-->
+    `;
+  }
   render() {
     return `NOT IMPLEMENTED`;
   }
