@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.10.0...v1.11.0) (2020-03-13)
+
+
+### Bug Fixes
+
+* **auth:** fixes for restore password ([13f3aa3](https://github.com/lskjs/modules/tree/master/packages/auth/commit/13f3aa372092ad165c6e2059ddf2c22e8b6d96ff))
+
+
+
+
+
 ## [1.9.1](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.9.0...v1.9.1) (2020-03-11)
 
 **Note:** Version bump only for package @lskjs/auth

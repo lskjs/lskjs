@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/elastic",
-  "version": "1.9.1",
+  "version": "1.11.0",
   "description": "LSK module for elastic.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "mongoose-elasticsearch-xp-async": "0.1.2"
   },
   "devDependencies": {
-    "@lskjs/module": "1.9.1",
+    "@lskjs/module": "1.11.0",
     "lodash": "4.17.15"
   },
   "peerDependencies": {

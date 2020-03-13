@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.10.0...v1.11.0) (2020-03-13)
+
+
+### Features
+
+* **permit:** new permit workflow ([bbec961](https://github.com/lskjs/modules/tree/master/packages/permit/commit/bbec961db3667f553cd55e8b139b43537e9d1a85))
+
+
+
+
+
 ## [1.9.1](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.9.0...v1.9.1) (2020-03-11)
 
 **Note:** Version bump only for package @lskjs/permit

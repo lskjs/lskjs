@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/lskjs/lskjs/compare/v1.10.0...v1.11.0) (2020-03-13)
+
+
+### Bug Fixes
+
+* **auth:** fixes for restore password ([13f3aa3](https://github.com/lskjs/lskjs/commit/13f3aa372092ad165c6e2059ddf2c22e8b6d96ff))
+* **mailer:** some refactor and fixes ([95d50ad](https://github.com/lskjs/lskjs/commit/95d50ad66ab6735ad390b0a106e4ea8e3eba3e31))
+* **rlog:** rlog limits debugging ([5f57dc8](https://github.com/lskjs/lskjs/commit/5f57dc8517379756261600bb55af19caa933de34))
+
+
+### Features
+
+* **mailer:** add BaseTemplate and some fixes ([82af656](https://github.com/lskjs/lskjs/commit/82af656f62368e7cc61f2b215523c946acaf9b8c))
+* **module:** a little checks in module ([aae6f5e](https://github.com/lskjs/lskjs/commit/aae6f5efc3373eff1397f7d0331dca27e5194a03))
+* **permit:** new permit workflow ([bbec961](https://github.com/lskjs/lskjs/commit/bbec961db3667f553cd55e8b139b43537e9d1a85))
+
+
+
+
+
 # [1.10.0](https://github.com/lskjs/lskjs/compare/v1.9.1...v1.10.0) (2020-03-11)
 
 

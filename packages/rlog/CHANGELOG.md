@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/lskjs/lskjs/tree/master/packages/rlog/compare/v1.10.0...v1.11.0) (2020-03-13)
+
+
+### Bug Fixes
+
+* **rlog:** rlog limits debugging ([5f57dc8](https://github.com/lskjs/lskjs/tree/master/packages/rlog/commit/5f57dc8517379756261600bb55af19caa933de34))
+
+
+
+
+
 ## [1.9.1](https://github.com/lskjs/lskjs/tree/master/packages/rlog/compare/v1.9.0...v1.9.1) (2020-03-11)
 
 **Note:** Version bump only for package @lskjs/rlog
