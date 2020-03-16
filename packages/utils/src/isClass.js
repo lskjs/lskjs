@@ -1,3 +1,5 @@
-import isFunction from 'lodash/isFunction';
+// import isFunction from 'lodash/isFunction';
 
-export default isFunction;
+export default v => {
+  return typeof v === 'function' && /^\s*class\s+/.test(v.toString());
+};
