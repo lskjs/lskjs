@@ -3,10 +3,11 @@ import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
+import isClass from '@lskjs/utils/isClass';
 import AsyncRouter from '../AsyncRouter';
 
 // import isClass from 'lodash/isClass';
-const isClass = () => false;
+// const isClass = () => false;
 
 export function getRoutes(ctx) {
   const iterate = item => {
