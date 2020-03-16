@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/lskjs/lskjs/tree/master/packages/event/compare/v1.11.0...v1.12.0) (2020-03-16)
+
+
+### Bug Fixes
+
+* **event:** fix console.log ([5716245](https://github.com/lskjs/lskjs/tree/master/packages/event/commit/5716245df172938eeb753f8a3fe6a6f129fbcac6))
+
+
+
+
+
 # [1.11.0](https://github.com/lskjs/lskjs/tree/master/packages/event/compare/v1.10.0...v1.11.0) (2020-03-13)
 
 **Note:** Version bump only for package @lskjs/event

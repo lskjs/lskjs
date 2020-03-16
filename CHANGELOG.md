@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/lskjs/lskjs/compare/v1.11.0...v1.12.0) (2020-03-16)
+
+
+### Bug Fixes
+
+* **event:** fix console.log ([5716245](https://github.com/lskjs/lskjs/commit/5716245df172938eeb753f8a3fe6a6f129fbcac6))
+* **nginx:** update html and css for nginx config ([0af696c](https://github.com/lskjs/lskjs/commit/0af696cdea854ab90a118adbff4ac290f89ddd4d))
+* **server:** improve index api ([6517f5a](https://github.com/lskjs/lskjs/commit/6517f5ab6dd222d6e7d16019bac09552f1fbcfad))
+
+
+### Features
+
+* **module:** now module can load new async and old sync submodules ([7f19240](https://github.com/lskjs/lskjs/commit/7f1924050031f374d60b13b759b820181806a6ce))
+* **utils:** update isClass ([3bf236f](https://github.com/lskjs/lskjs/commit/3bf236fc1e3ab09c62b5dc143e95ba9ad830e389))
+* upload nginx public ([2284784](https://github.com/lskjs/lskjs/commit/2284784d933bd86fb6ea5b8669e093b025dbcc7e))
+
+
+
+
+
 # [1.11.0](https://github.com/lskjs/lskjs/compare/v1.10.0...v1.11.0) (2020-03-13)
 
 

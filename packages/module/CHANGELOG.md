@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/lskjs/modules/tree/master/packages/module/compare/v1.11.0...v1.12.0) (2020-03-16)
+
+
+### Features
+
+* **module:** now module can load new async and old sync submodules ([7f19240](https://github.com/lskjs/modules/tree/master/packages/module/commit/7f1924050031f374d60b13b759b820181806a6ce))
+
+
+
+
+
 # [1.11.0](https://github.com/lskjs/modules/tree/master/packages/module/compare/v1.10.0...v1.11.0) (2020-03-13)
 
 

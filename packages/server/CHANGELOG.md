@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.11.0...v1.12.0) (2020-03-16)
+
+
+### Bug Fixes
+
+* **server:** improve index api ([6517f5a](https://github.com/lskjs/modules/tree/master/packages/server/commit/6517f5ab6dd222d6e7d16019bac09552f1fbcfad))
+
+
+
+
+
 # [1.11.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.10.0...v1.11.0) (2020-03-13)
 
 **Note:** Version bump only for package @lskjs/server
