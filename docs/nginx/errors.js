@@ -31,17 +31,23 @@ const errors = [
     code: 504,
     title: 'Время вышло',
   },
-].map((c)  => ({
+].map(c => ({
   code: c.code,
   title: c.title,
   text: 'Свяжитесь с администратором для подробностей',
+  copyright: '',
 }));
 
-const fs = require('fs')
+const fs = require('fs');
 const handlebars = require('handlebars');
-const source = fs.readFileSync(__dirname + '/error.html').toString().replace(/\s*\n\s*/ig, '').replace(/\s+/ig, ' ');
+
+const source = fs
+  .readFileSync(`${__dirname}/error.html`)
+  .toString()
+  .replace(/\s*\n\s*/gi, '')
+  .replace(/\s+/gi, ' ');
 
 const template = handlebars.compile(source, { strict: true });
 errors.forEach(data => {
-  fs.writeFileSync(__dirname + '/config/errors/' + data.code + '.html', template(data));
-})
+  fs.writeFileSync(`${__dirname}/config/errors/${data.code}.html`, template(data));
+});

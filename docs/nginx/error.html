@@ -28,6 +28,8 @@
         --primary-color: #2d2d2d;
         --bar-color: #fff;
         --red-color: #d54343;
+        --green-color: #35998e;
+        --blue-color: #5651db;
         --purple-color: #dbafe0;
         --gold-color: #f6cf00;
         --spinggreen-color: #00ec91;
@@ -84,6 +86,12 @@
         width: 100%;
       }
 
+      .copyright {
+        text-align: center;
+        margin: 1em auto;
+        width: 100%;
+      }
+
       .bar {
         display: flex;
         background: var(--bar-color);
@@ -104,7 +112,7 @@
       }
 
       .bar > .bar-item {
-        width: 25%;
+        width: 33.34%;
       }
 
       .bar-one {
@@ -112,15 +120,11 @@
       }
 
       .bar-two {
-        background: var(--purple-color);
+        background: var(--green-color);
       }
 
       .bar-three {
-        background: var(--gold-color);
-      }
-
-      .bar-four {
-        background: var(--spinggreen-color);
+        background: var(--blue-color);
       }
 
       @media screen and (max-width: 768px) {
@@ -162,7 +166,9 @@
         <div class="bar-item bar-one"></div>
         <div class="bar-item bar-two"></div>
         <div class="bar-item bar-three"></div>
-        <div class="bar-item bar-four"></div>
+      </div>
+      <div class="copyright">
+        {{copyright}}
       </div>
     </footer>
     <!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter34613875 = new Ya.Metrika({ id:34613875, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/34613875" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
