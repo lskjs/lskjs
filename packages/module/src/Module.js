@@ -1,17 +1,12 @@
 import toPairs from 'lodash/toPairs';
-// import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import Promise from 'bluebird';
 import logger from '@lskjs/log';
 import isFunction from 'lodash/isFunction';
 import assignProps from '@lskjs/utils/assignProps';
-// import isClass from '@lskjs/utils/isClass';
-// import PromiseMap from 'bluebird/js/release/map';
+import isClass from '@lskjs/utils/isClass';
 import Emitter from './emitter';
-// import createLoggerMock from './logger/createLoggerMock';
-// import config from './config';
 
-// const isClass = isFunction;
 const DEBUG = __DEV__ && false;
 
 export default class Module {
@@ -81,25 +76,6 @@ export default class Module {
   modules = {};
   initModules() {
     if (this.getModules) this._modules = this.getModules();
-    // console.log('@@!!', {modules});
-    // const modules = {};
-    // forEach(this._modules, (SubModule, key) => {
-    //   // const Module = module(ctx);
-    //   if (isClass(Module)) {
-    //     modules[key] = new SubModule(this);
-    //   } else {
-    //     modules[key] = Module;
-    //   }
-    //   if (!modules[key].name || modules[key].name === 'Core') {
-    //     modules[key].name = key;
-    //   }
-    // });
-    // this.modules = modules;
-    // if (DEBUG) this.log.trace(`${this.name}.modules`, Object.keys(this.modules));
-    // if (Object.keys(this._asyncModules).length) {
-    //   this.log.debug(`${this.name}._asyncModules`, Object.keys(this._asyncModules));
-    // }
-    // return this.broadcastModules('init');
   }
   statusModule(name) {
     if (!this._modules || !this._modules[name]) return 'undefined';
@@ -130,7 +106,12 @@ export default class Module {
     } else {
       AsyncModule = pack;
     }
-    const asyncModule = new AsyncModule({ app: this });
+    let asyncModule;
+    if (isClass(AsyncModule)) {
+      asyncModule = new AsyncModule({ app: this });
+    } else {
+      asyncModule = AsyncModule(this);
+    }
     if (asyncModule.start) {
       await asyncModule.start();
     } else {
