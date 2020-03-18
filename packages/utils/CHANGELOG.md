@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.13.1...v1.13.2) (2020-03-18)
+
+
+### Bug Fixes
+
+* **utils:** stability collectExpressReq and create tests ([2693afe](https://github.com/lskjs/ux/tree/master/packages/utils/commit/2693afe1062c15359d85dfea9abb82befc366429))
+
+
+
+
+
 # [1.13.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.12.0...v1.13.0) (2020-03-18)
 
 
