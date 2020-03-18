@@ -5,7 +5,6 @@ import logger from '@lskjs/log';
 import isFunction from 'lodash/isFunction';
 import assignProps from '@lskjs/utils/assignProps';
 import classNewOrFunctionCall from '@lskjs/utils/classNewOrFunctionCall';
-import isClass from '@lskjs/utils/isClass';
 import Emitter from './emitter';
 
 const DEBUG = __DEV__ && false;

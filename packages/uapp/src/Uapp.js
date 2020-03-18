@@ -32,6 +32,7 @@ global.DEV = () => null;
 
 export default class Uapp extends Module {
   name = 'Uapp';
+  _module = 'app';
   Api = Api;
   Apiq = Apiq;
   Page = DefaultPage;
