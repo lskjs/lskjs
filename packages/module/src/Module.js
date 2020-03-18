@@ -4,6 +4,7 @@ import Promise from 'bluebird';
 import logger from '@lskjs/log';
 import isFunction from 'lodash/isFunction';
 import assignProps from '@lskjs/utils/assignProps';
+import classNewOrFunctionCall from '@lskjs/utils/classNewOrFunctionCall';
 import isClass from '@lskjs/utils/isClass';
 import Emitter from './emitter';
 
@@ -106,12 +107,8 @@ export default class Module {
     } else {
       AsyncModule = pack;
     }
-    let asyncModule;
-    if (isClass(AsyncModule)) {
-      asyncModule = new AsyncModule({ app: this });
-    } else {
-      asyncModule = AsyncModule(this);
-    }
+    // let asyncModule;
+    const asyncModule = classNewOrFunctionCall(AsyncModule, this);
     if (asyncModule.start) {
       await asyncModule.start();
     } else {
