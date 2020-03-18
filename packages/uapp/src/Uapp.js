@@ -70,7 +70,7 @@ export default class Uapp extends Module {
     this.rootState = rootState;
   }
 
-  async getRootState() {
+  getRootState() {
     return {
       ...(this.rootState || {}),
       Uapp: __CLIENT__ ? 'client 123' : 'server 321',
