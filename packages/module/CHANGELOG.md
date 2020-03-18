@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.1](https://github.com/lskjs/modules/tree/master/packages/module/compare/v1.13.0...v1.13.1) (2020-03-18)
+
+
+### Bug Fixes
+
+* **uapp:** pass app throw props without object ([85f8d4c](https://github.com/lskjs/modules/tree/master/packages/module/commit/85f8d4c94f47183c16dcb06385699afa8d79eb27))
+
+
+
+
+
 # [1.13.0](https://github.com/lskjs/modules/tree/master/packages/module/compare/v1.12.0...v1.13.0) (2020-03-18)
 
 
