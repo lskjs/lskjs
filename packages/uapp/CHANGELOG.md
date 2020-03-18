@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.3](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.13.2...v1.13.3) (2020-03-18)
+
+
+### Bug Fixes
+
+* **uapp:** uapp.getRootState bug ([b8f33b2](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/b8f33b25fc5088c1aa2c32937d8ddc9e5d5f87c5))
+
+
+
+
+
 ## [1.13.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.13.1...v1.13.2) (2020-03-18)
 
 **Note:** Version bump only for package @lskjs/uapp
