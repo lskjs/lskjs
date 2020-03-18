@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/lskjs/lskjs/compare/v1.12.0...v1.13.0) (2020-03-18)
+
+
+### Bug Fixes
+
+* **module:** async module check and run ([c440a70](https://github.com/lskjs/lskjs/commit/c440a70e81fc58d6bc88c452222309e0aa5e4fdf))
+
+
+### Features
+
+* **utils:** add classNewOrFunctionCall ([74fedc4](https://github.com/lskjs/lskjs/commit/74fedc43979fe963d7520b75df4d0f4433fd0242))
+
+
+
+
+
 # [1.12.0](https://github.com/lskjs/lskjs/compare/v1.11.0...v1.12.0) (2020-03-16)
 
 

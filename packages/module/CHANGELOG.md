@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/lskjs/modules/tree/master/packages/module/compare/v1.12.0...v1.13.0) (2020-03-18)
+
+
+### Bug Fixes
+
+* **module:** async module check and run ([c440a70](https://github.com/lskjs/modules/tree/master/packages/module/commit/c440a70e81fc58d6bc88c452222309e0aa5e4fdf))
+
+
+
+
+
 # [1.12.0](https://github.com/lskjs/modules/tree/master/packages/module/compare/v1.11.0...v1.12.0) (2020-03-16)
 
 

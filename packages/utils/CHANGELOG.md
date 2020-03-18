@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.12.0...v1.13.0) (2020-03-18)
+
+
+### Features
+
+* **utils:** add classNewOrFunctionCall ([74fedc4](https://github.com/lskjs/ux/tree/master/packages/utils/commit/74fedc43979fe963d7520b75df4d0f4433fd0242))
+
+
+
+
+
 # [1.12.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.11.0...v1.12.0) (2020-03-16)
 
 
