@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/lskjs/lskjs/compare/v1.14.0...v1.14.1) (2020-03-20)
+
+
+### Bug Fixes
+
+* **sms:** fix log error ([6a81cec](https://github.com/lskjs/lskjs/commit/6a81cec0f5c675dd333fde1056bf66f475018600))
+
+
+
+
+
 # [1.14.0](https://github.com/lskjs/lskjs/compare/v1.13.3...v1.14.0) (2020-03-20)
 
 
