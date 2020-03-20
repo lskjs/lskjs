@@ -3,22 +3,34 @@ import { Client } from 'plivo';
 
 export default class SmsPlivo {
   constructor(config) {
-    this.config = config;
+    this.config = config || {};
     this.client = new Client(this.config.authId, this.config.authToken);
   }
-  send({ phone, text, ...params } = {}) {
+  getSender(phone = '') {
+    const { phones } = this.config;
+    if (phones && phones.length) {
+      const filtered = phones.filter(p => phone[0] === p[0]);
+      if (filtered.length) return filtered[0];
+      return phones[0];
+    }
+    if (this.config.phone) return this.config.phone;
+    return null;
+  }
+  send({ phone, text } = {}) {
+    const sender = this.getSender(phone);
+    this.log.trace(`Sms.send[plivo] ${sender} => ${phone}: ${text}`);
     return this.client.messages
       .create(
-        this.config.phone, // src
+        sender,
         phone, // dst
         text, // text
       )
       .then(
         response => {
-          console.log(response);
+          this.log.trace(`Sms.send[plivo]`, response);
         },
         err => {
-          console.error(err);
+          this.log.error(`Sms.send[plivo]`, err);
         },
       );
   }
