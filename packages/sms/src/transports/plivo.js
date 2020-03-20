@@ -18,7 +18,7 @@ export default class SmsPlivo {
   }
   send({ phone, text } = {}) {
     const sender = this.getSender(phone);
-    this.log.trace(`Sms.send[plivo] ${sender} => ${phone}: ${text}`);
+    this.app.log.trace(`Sms.send[plivo] ${sender} => ${phone}: ${text}`);
     return this.client.messages
       .create(
         sender,
@@ -27,10 +27,10 @@ export default class SmsPlivo {
       )
       .then(
         response => {
-          this.log.trace(`Sms.send[plivo]`, response);
+          this.app.log.trace(`Sms.send[plivo]`, response);
         },
         err => {
-          this.log.error(`Sms.send[plivo]`, err);
+          this.app.log.error(`Sms.send[plivo]`, err);
         },
       );
   }
