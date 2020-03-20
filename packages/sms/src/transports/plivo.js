@@ -16,9 +16,19 @@ export default class SmsPlivo {
     if (this.config.phone) return this.config.phone;
     return null;
   }
+  log() {
+    return {
+      trace(...args) {
+        console.log(...args); // eslint-disable-line no-console
+      },
+      error(...args) {
+        console.error(...args); // eslint-disable-line no-console
+      },
+    };
+  }
   send({ phone, text } = {}) {
     const sender = this.getSender(phone);
-    this.app.log.trace(`Sms.send[plivo] ${sender} => ${phone}: ${text}`);
+    this.log.trace(`Sms.send[plivo] ${sender} => ${phone}: ${text}`);
     return this.client.messages
       .create(
         sender,
@@ -27,10 +37,10 @@ export default class SmsPlivo {
       )
       .then(
         response => {
-          this.app.log.trace(`Sms.send[plivo]`, response);
+          this.log.trace(`Sms.send[plivo]`, response);
         },
         err => {
-          this.app.log.error(`Sms.send[plivo]`, err);
+          this.log.error(`Sms.send[plivo]`, err);
         },
       );
   }
