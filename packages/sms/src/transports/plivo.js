@@ -5,6 +5,14 @@ export default class SmsPlivo {
   constructor(config) {
     this.config = config || {};
     this.client = new Client(this.config.authId, this.config.authToken);
+    this.log = {
+      trace(...args) {
+        console.log(...args); // eslint-disable-line no-console
+      },
+      error(...args) {
+        console.error(...args); // eslint-disable-line no-console
+      },
+    };
   }
   getSender(phone = '') {
     const { phones } = this.config;
@@ -15,16 +23,6 @@ export default class SmsPlivo {
     }
     if (this.config.phone) return this.config.phone;
     return null;
-  }
-  log() {
-    return {
-      trace(...args) {
-        console.log(...args); // eslint-disable-line no-console
-      },
-      error(...args) {
-        console.error(...args); // eslint-disable-line no-console
-      },
-    };
   }
   send({ phone, text } = {}) {
     const sender = this.getSender(phone);
