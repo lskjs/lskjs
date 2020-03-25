@@ -1,15 +1,19 @@
 import http from 'http';
 import nodeVesion from '@lskjs/utils/nodeVersion';
 
-export default async function (params = {}) {
+const DEBUG = __STAGE__ === 'isuvorov';
+
+export default async function(params = {}) {
   const express = this.express || this.app;
 
   const {
     host = '', // ?
     url,
-    body = {},
+    // body = {},
     headers: _headers = {},
   } = params;
+  const body = params.data || params.body || {};
+  const query = params.query || params.params || {};
 
   const remoteAddress = '127.0.0.1';
   const headers = {
@@ -18,6 +22,7 @@ export default async function (params = {}) {
   };
   const req = {
     ...params,
+    // query,
     url,
     _direct: true,
     method: 'GET',
@@ -32,24 +37,31 @@ export default async function (params = {}) {
     },
     body,
   };
-  const data = await new Promise((resolve) => {
+  const data = await new Promise((resolve, reject) => {
     const res = Object.create(http.ServerResponse.prototype);
     res.send = function(data) { //eslint-disable-line
-      resolve(data);
+      if (DEBUG) console.log('express.resolve.send', data); // eslint-disable-line no-console
+      if (res.statusCode >= 400) {
+        reject(data);
+      } else {
+        resolve(data);
+      }
+      // console.log('statusCode', res.statusCode);
     };
 
     if (nodeVesion() >= 9) {
       const x = new http.OutgoingMessage();
       const symbols = Object.getOwnPropertySymbols(x);
-      const outHeadersKey = symbols.find((item => (item.toString() === 'Symbol(outHeadersKey)')));
+      const outHeadersKey = symbols.find(item => item.toString() === 'Symbol(outHeadersKey)');
       if (outHeadersKey) {
         res[outHeadersKey] = headers;
       }
-      const kOutHeaders = symbols.find((item => (item.toString() === 'Symbol(kOutHeaders)')));
+      const kOutHeaders = symbols.find(item => item.toString() === 'Symbol(kOutHeaders)');
       if (kOutHeaders) {
         res[kOutHeaders] = headers;
       }
     }
+    if (DEBUG) console.log('express.resolve', req); // eslint-disable-line no-console
     express.handle(req, res);
   });
 

@@ -9,6 +9,9 @@ export default ({ api, app } = {}) => {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return api.remoteFetch(...args);
     }
+    // TODO: сделать как-нибудь по нормальному и проверенно
+    args[0] = `http://localhost:${app.app.httpInstance.address().port}${args[0]}`;
+    return api.remoteFetch(...args);
     const { body = {}, method = 'GET', qs = {} } = options;
     const props = {
       url,
