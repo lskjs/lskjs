@@ -1,5 +1,6 @@
 import Module from '@lskjs/module';
 import createLogger from '@lskjs/utils/createLogger';
+import isObject from 'lodash/isObject';
 
 const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
@@ -28,18 +29,17 @@ export default class GrantModule extends Module {
     let userId;
     if (typeof userOrId === 'string') {
       userId = userOrId;
-    } else {
+    } else if (isObject(userOrId)) {
       user = userOrId;
       userId = userOrId._id;
-    }
-    if (params.user) {
+    } else if (params.user) {
       ({ user } = params);
       userId = user._id;
     } else if (params.userId) {
       ({ userId } = params);
-      user = await this.getUserByUserId(params.userId);
-    } else {
-      user = null;
+    }
+    if (userId && !user) {
+      user = await this.getUserByUserId(userOrId);
     }
     return {
       user,
