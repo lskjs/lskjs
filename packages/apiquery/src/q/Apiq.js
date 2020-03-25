@@ -11,6 +11,7 @@ export default class Apiq {
     this.instance = axios.create(this.config);
   }
   setToken(token) {
+    this.authToken = token;
     this.instance.defaults.headers.common.Authorization = token;
   }
   setAuthToken(token) {

@@ -1,25 +1,28 @@
-import get from 'lodash/get';
+/* eslint-disable no-param-reassign */
 
 export default ({ api, app } = {}) => {
   if (!api || !app) return api;
   api.remoteFetch = api.fetch;
-  api.fetch = function (...args) {
+  api.fetch = function(...args) {
     const { authToken } = api;
     const [url, options = {}] = args;
-    // console.log('api.fetch', url, args);
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return api.remoteFetch(...args);
     }
     const { body = {}, method = 'GET', qs = {} } = options;
-    return app.resolve({
+    const props = {
       url,
       method,
       body: method === 'POST' ? body : qs,
-      headers: authToken ? {
-        authorization: `Bearer ${authToken}`,
-      } : {},
+      headers: authToken
+        ? {
+            authorization: `Bearer ${authToken}`,
+          }
+        : {},
       token: authToken,
-    });
+    };
+    if (__STAGE__ === 'isuvorov') console.log('wrapApi.fetch', url, args, '=>', props); // eslint-disable-line no-console
+    return app.resolve(props);
   };
   return api;
 };
