@@ -17,7 +17,12 @@ import getReqOrigin from '@lskjs/utils/getReqOrigin';
 export default class Api extends BaseApi {
   constructor(...props) {
     super(...props);
-    this.helpers = this.app.helpers;
+    this.init();
+  }
+  async init() {
+    // TODO: ввести в лск асинхронную загрузку Api
+    const auth = await this.app.module('auth');
+    this.helpers = auth.helpers;
   }
   getRoutes() {
     // const { isAuth } = this.app.middlewares;
