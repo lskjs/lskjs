@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.15.0...v1.16.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **uapp:** fix unstable wrapApi for SSR ([450255f](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/450255f37942573b1dc5cfaa83e809e8351d1b45))
+
+
+
+
+
 # [1.15.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.14.3...v1.15.0) (2020-03-25)
 
 

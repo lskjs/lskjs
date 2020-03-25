@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.15.0...v1.16.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **auth:** not inited heplers ([ed2b0d4](https://github.com/lskjs/modules/tree/master/packages/auth/commit/ed2b0d437c838f4819fcc8e7b0763411c88182bb))
+
+
+### Features
+
+* **auth:** improve token saving in loadStore while ssr ([87207ce](https://github.com/lskjs/modules/tree/master/packages/auth/commit/87207ce369fd81747ddee52544891c903006a051))
+
+
+
+
+
 # [1.15.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.14.3...v1.15.0) (2020-03-25)
 
 
