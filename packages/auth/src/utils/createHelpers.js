@@ -20,6 +20,7 @@ export default function createHelpers({ app } = {}) {
   const configJwt = get(app, 'config.jwt', {});
   if (!configJwt.secret) app.log.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
   const helpers = {
+    hashPassword,
     async setPassword(user, password) {
       user.password = await hashPassword(password); // eslint-disable-line no-param-reassign
     },

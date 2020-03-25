@@ -13,12 +13,11 @@ import canonizeParams from '@lskjs/utils/canonizeParams';
 // import validatePhone from '@lskjs/utils/validatePhone';
 import validateEmail from '@lskjs/utils/validateEmail';
 import getReqOrigin from '@lskjs/utils/getReqOrigin';
-import createHelpers from '../utils/createHelpers';
 
 export default class Api extends BaseApi {
   constructor(...props) {
     super(...props);
-    this.helpers = createHelpers(this);
+    this.helpers = this.app.helpers;
   }
   getRoutes() {
     // const { isAuth } = this.app.middlewares;

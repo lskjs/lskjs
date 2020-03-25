@@ -3,18 +3,21 @@ import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import Module from '@lskjs/module';
 import { Passport } from 'passport';
-// import onlineService from './onlineService';
-// import Api from './Api';
+import createHelpers from './utils/createHelpers';
 
 export default class AuthServerModule extends Module {
   name = 'AuthServerModule';
   constructor(props) {
     super(props);
     this.config = get(this, 'app.config.auth', {});
-    // this.Api = Api;
-    // this.api = new this.Api({ app: this });
+    // console.log(123123);
+    // try {
+    this.helpers = createHelpers({ app: this.app }); // TODO: потом надо будет по другому кидать app, а еще лучше вообще не кидать
+    // } catch (err) {
+    //   console.error({ err });
+    // }
+    // console.log(3435345);
   }
-
   // initOnlineService() {
   //   this.online = onlineService;
   //   this.online.save = async (_id, visitedAt) => {
@@ -34,12 +37,6 @@ export default class AuthServerModule extends Module {
   //       next();
   //     },
   //   ];
-  // }
-  // getModels() {
-  //   return require('./models').default(this, this);
-  // }
-  // getController() {
-  //   return require('./controller').default(this, this);
   // }
   getStrategies() {
     return require('./strategies').default(this);
@@ -106,38 +103,4 @@ export default class AuthServerModule extends Module {
       this.passportService.use(strategy.getPassportStrategy());
     });
   }
-
-  // getApi() {
-  //   const api = this.asyncRouter();
-  //   const { isAuth } = this.middlewares;
-
-  //   api.all('/login', this.controller.login);
-  //   api.post('/signup', this.controller.signup);
-  //   api.all('/recovery', this.controller.recovery);
-  //   api.all('/updateToken', this.controller.updateToken);
-  //   api.all('/loginToken', this.controller.loginToken);
-  //   api.all('/email/approve', this.controller.emailApprove, (req, res) => res.redirect('/cabinet'));
-  //   api.all('/phone/code', this.controller.phoneCode);
-  //   api.all('/phone/approve', this.controller.phoneApprove);
-  //   api.all('/phone/login', this.controller.phoneLogin);
-
-  //   // Регистрация пользователя через соц сеть
-  //   api.all('/social', isAuth, this.controller.getSocials);
-  //   api.all('/social/signup', this.controller.socialLogin);
-  //   api.all('/social/login', this.controller.socialLogin);
-  //   api.all('/social/bind', isAuth, this.controller.socialBind); // Добавление соц.сетей к пользователю
-  //   api.all('/social/unbind', isAuth, this.controller.socialUnbind);
-
-  //   api.all('/passport/getByToken', this.controller.getPassportByToken);
-  //   api.all('/restorePasswordPermit', this.controller.restorePasswordPermit);
-  //   api.all('/confirmPassword', this.controller.confirmPassword);
-  //   api.all('/getPermit', this.controller.getPermit);
-
-  //   // social auth init
-  //   api.get('/:provider', this.controller.socialAuth);
-  //   api.get('/:provider/auth', this.controller.socialAuth);
-  //   api.get('/:provider/callback', this.controller.socialCallback);
-
-  //   return api;
-  // }
 }
