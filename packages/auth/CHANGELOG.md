@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.14.3...v1.15.0) (2020-03-25)
+
+
+### Features
+
+* **auth:** add helpers in auth ([8db9b96](https://github.com/lskjs/modules/tree/master/packages/auth/commit/8db9b96b796193eebef8b3edebe83d1625afb306))
+
+
+
+
+
 # [1.14.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.13.3...v1.14.0) (2020-03-20)
 
 **Note:** Version bump only for package @lskjs/auth

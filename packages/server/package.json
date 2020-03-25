@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -45,7 +45,7 @@
     "socket.io-redis": "5.2.0"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "1.2.0",
+    "@lskjs/apiquery": "1.15.0",
     "@lskjs/db": "1.0.47",
     "@lskjs/i18": "1.0.47",
     "@lskjs/log": "1.14.0",

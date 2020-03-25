@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.14.3...v1.15.0) (2020-03-25)
+
+
+### Features
+
+* **server:** add env PORT in server config ([09bbd27](https://github.com/lskjs/modules/tree/master/packages/server/commit/09bbd27ba2bf4778ccddf7c5d1817a0170994049))
+
+
+
+
+
 # [1.14.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.13.3...v1.14.0) (2020-03-20)
 
 **Note:** Version bump only for package @lskjs/server

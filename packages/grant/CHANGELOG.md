@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.14.3...v1.15.0) (2020-03-25)
+
+
+### Features
+
+* **grant:** add new checks in getParams of Grant ([5fe387c](https://github.com/lskjs/lskjs/tree/master/packages/grant/commit/5fe387c020f1832cc430013066ea270fcfe50ce0))
+
+
+
+
+
 # [1.14.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.13.3...v1.14.0) (2020-03-20)
 
 **Note:** Version bump only for package @lskjs/grant

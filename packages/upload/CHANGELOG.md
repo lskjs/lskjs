@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/lskjs/modules/tree/master/packages/upload/compare/v1.14.3...v1.15.0) (2020-03-25)
+
+
+### Features
+
+* **upload:** add s3 config in upload ([2f973c1](https://github.com/lskjs/modules/tree/master/packages/upload/commit/2f973c1189d9dfad47c729a416c9b4aafb3da621))
+* **upload:** add tests in image upload ([845df08](https://github.com/lskjs/modules/tree/master/packages/upload/commit/845df08c0ecfb109a257c5b3f49609d5d57f3a3b))
+
+
+
+
+
 # [1.14.0](https://github.com/lskjs/modules/tree/master/packages/upload/compare/v1.13.3...v1.14.0) (2020-03-20)
 
 **Note:** Version bump only for package @lskjs/upload

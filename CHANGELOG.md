@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/lskjs/lskjs/compare/v1.14.3...v1.15.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **apiquery:** authToken in apiq ([a8aa7c7](https://github.com/lskjs/lskjs/commit/a8aa7c73a172904cb677d66e15372b98859419b0))
+
+
+### Features
+
+* **auth:** add helpers in auth ([8db9b96](https://github.com/lskjs/lskjs/commit/8db9b96b796193eebef8b3edebe83d1625afb306))
+* **grant:** add new checks in getParams of Grant ([5fe387c](https://github.com/lskjs/lskjs/commit/5fe387c020f1832cc430013066ea270fcfe50ce0))
+* **server:** add env PORT in server config ([09bbd27](https://github.com/lskjs/lskjs/commit/09bbd27ba2bf4778ccddf7c5d1817a0170994049))
+* **upload:** add s3 config in upload ([2f973c1](https://github.com/lskjs/lskjs/commit/2f973c1189d9dfad47c729a416c9b4aafb3da621))
+* **upload:** add tests in image upload ([845df08](https://github.com/lskjs/lskjs/commit/845df08c0ecfb109a257c5b3f49609d5d57f3a3b))
+
+
+
+
+
 ## [1.14.3](https://github.com/lskjs/lskjs/compare/v1.14.2...v1.14.3) (2020-03-20)
 
 
