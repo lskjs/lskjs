@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/lskjs/lskjs/compare/v1.16.0...v1.17.0) (2020-04-01)
+
+
+### Bug Fixes
+
+* **auth:** forgotten query question mark ([56d38a8](https://github.com/lskjs/lskjs/commit/56d38a823c5b84cd4ffa39a001d7f8f84cf7547e))
+
+
+### Features
+
+* **utils:** chunkBy ([d632d5e](https://github.com/lskjs/lskjs/commit/d632d5ef351d33794af0aa07602e7cb98d4ceea2))
+
+
+
+
+
 # [1.16.0](https://github.com/lskjs/lskjs/compare/v1.15.0...v1.16.0) (2020-03-25)
 
 

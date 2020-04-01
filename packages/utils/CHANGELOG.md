@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.16.0...v1.17.0) (2020-04-01)
+
+
+### Features
+
+* **utils:** chunkBy ([d632d5e](https://github.com/lskjs/ux/tree/master/packages/utils/commit/d632d5ef351d33794af0aa07602e7cb98d4ceea2))
+
+
+
+
+
 # [1.14.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.13.3...v1.14.0) (2020-03-20)
 
 **Note:** Version bump only for package @lskjs/utils
