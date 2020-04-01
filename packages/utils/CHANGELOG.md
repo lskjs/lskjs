@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.17.0...v1.17.1) (2020-04-01)
+
+
+### Bug Fixes
+
+* **utils:** re deploy ([b6a258d](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b6a258d98b64ca4d74194e302a7337e7377e1be1))
+
+
+
+
+
 # [1.17.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.16.0...v1.17.0) (2020-04-01)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rlog",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "description": "LSK module for remote logger.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
-    "@lskjs/module": "1.17.0",
-    "@lskjs/utils": "1.17.0",
+    "@lskjs/module": "1.17.1",
+    "@lskjs/utils": "1.17.1",
     "axios": "0.19.2",
     "lodash": "4.17.15"
   }
