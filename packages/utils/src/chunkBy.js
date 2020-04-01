@@ -7,7 +7,6 @@ export default (collection, predicate) => {
   const chunks = [];
   const counts = {};
   const groups = groupBy(collection, predicate);
-
   while (Object.keys(groups).length) {
     forEach(groups, (group, key) => {
       const count = get(counts, key, 0);
@@ -21,6 +20,5 @@ export default (collection, predicate) => {
       if (group.length === 0) delete groups[key];
     });
   }
-
   return chunks;
 };
