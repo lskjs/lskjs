@@ -21,7 +21,7 @@ export default ({ config }) => class RabbitModule {
     this.listenConnection = await this.createConnection();
     this.sendConnection = await this.createConnection();
     this.listenChannel = await this.listenConnection.createChannel();
-    this.sendChannel = await this.sendConnection.createChannel();
+    this.sendChannel = await this.sendConnection.createConfirmChannel();
     this.onOpen();
   }
   onOpen() {}
@@ -40,11 +40,19 @@ export default ({ config }) => class RabbitModule {
     return res;
   }
   sendToQueue(q, data, options, channel = this.sendChannel) {
-    let str = data;
-    if (typeof data !== 'string') {
-      str = JSON.stringify(data);
-    }
-    return channel.sendToQueue(q, Buffer.from(str), options);
+    return new Promise((res, rej) => {
+      let str = data;
+      if (typeof data !== 'string') {
+        str = JSON.stringify(data);
+      }
+      channel.sendToQueue(q, Buffer.from(str), options, (err, ok) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(ok);
+        }
+      })
+    });
   }
   consume(q, callback, options) {
     return this.listenChannel.consume(q, callback, options);
