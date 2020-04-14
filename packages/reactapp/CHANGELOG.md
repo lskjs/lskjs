@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.18.0...v1.18.1) (2020-04-14)
+
+
+### Bug Fixes
+
+* **reactapp:** fix isCancelled mistake ([4ce2e02](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/4ce2e02a1956a22df58d59987fd7b26bec2a5d2c))
+
+
+
+
+
 ## [1.17.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.17.0...v1.17.1) (2020-04-01)
 
 **Note:** Version bump only for package @lskjs/reactapp
