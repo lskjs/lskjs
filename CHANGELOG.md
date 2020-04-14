@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/lskjs/lskjs/compare/v1.17.2...v1.18.0) (2020-04-14)
+
+
+### Features
+
+* **uapp:** add Promise cancelation in resolve ([19caff4](https://github.com/lskjs/lskjs/commit/19caff43909a8ea1083cac51e1c7dd8ebab9d464))
+
+
+
+
+
 ## [1.17.2](https://github.com/lskjs/lskjs/compare/v1.17.1...v1.17.2) (2020-04-09)
 
 

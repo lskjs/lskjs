@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.17.2...v1.18.0) (2020-04-14)
+
+
+### Features
+
+* **uapp:** add Promise cancelation in resolve ([19caff4](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/19caff43909a8ea1083cac51e1c7dd8ebab9d464))
+
+
+
+
+
 ## [1.17.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.17.0...v1.17.1) (2020-04-01)
 
 **Note:** Version bump only for package @lskjs/uapp
