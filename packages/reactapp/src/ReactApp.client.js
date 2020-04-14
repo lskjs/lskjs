@@ -149,11 +149,11 @@ export default class ReactApp extends Module {
     });
     this.reqPromise = reqPromise;
     await reqPromise;
-    if (!reqPromise.isCanceled) {
-      if (__STAGE__ === 'isuvorov') console.log('!isCanceled !isCanceled isCanceled');
+    if (!reqPromise.isCancelled) {
+      if (__STAGE__ === 'isuvorov') console.log('!isCancelled !isCancelled !isCancelled', reqPromise);
     } else {
       // eslint-disable-next-line no-lonely-if
-      if (reqPromise.isCanceled()) {
+      if (reqPromise.isCancelled()) {
         if (__STAGE__ === 'isuvorov') console.log('CANCEL CANCEL CANCEL');
         throw 'cancel';
       }
