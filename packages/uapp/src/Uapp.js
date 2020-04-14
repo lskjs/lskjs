@@ -1,9 +1,10 @@
 /* eslint-disable global-require */
 import map from 'lodash/map';
 import get from 'lodash/get';
-import UniversalRouter from 'universal-router';
 import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
+import UniversalRouter from 'universal-router';
+import Promise from 'bluebird';
 import { observable } from 'mobx';
 import Favico from 'favico.js';
 import Api from '@lskjs/apiquery';
@@ -24,6 +25,7 @@ import DefaultPage from './Page';
 import defaultTheme from './theme';
 
 global.DEV = () => null;
+Promise.config({ cancellation: true });
 // class Req {
 //   // ...
 //   @observable path = null;
@@ -378,31 +380,34 @@ export default class Uapp extends Module {
     return this.page;
   }
 
-  async resolve(reqParams = {}) {
-    this.emit('resolve:before', reqParams);
-    const req = {
-      ...this.req,
-      path: reqParams.path,
-      query: reqParams.query,
-    };
-    if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
-    const page = await this.getPage();
-    let res;
-    try {
-      res = await this.router.resolve({
-        pathname: reqParams.path,
+  resolve(reqParams = {}) {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async resolve => {
+      this.emit('resolve:before', reqParams);
+      const req = {
+        ...this.req,
         path: reqParams.path,
         query: reqParams.query,
-        // req,
-        page,
-        req,
-      });
-    } catch (err) {
-      this.log.error('uapp.router.resolve', err);
-      console.error(err); // eslint-disable-line no-console
-    }
-    this.emit('resolve:after', reqParams);
-    return res;
+      };
+      if (__CLIENT__ && __DEV__) this.log.trace('Uapp.resolve', req.path, req.query);
+      const page = await this.getPage();
+      let res;
+      try {
+        res = await this.router.resolve({
+          pathname: reqParams.path,
+          path: reqParams.path,
+          query: reqParams.query,
+          // req,
+          page,
+          req,
+        });
+      } catch (err) {
+        this.log.error('uapp.router.resolve', err);
+        console.error(err); // eslint-disable-line no-console
+      }
+      this.emit('resolve:after', reqParams);
+      resolve(res);
+    });
   }
 
   refresh() {
