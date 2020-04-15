@@ -1,5 +1,5 @@
 if (typeof window !== 'undefined') {
-  module.exports = require('./ReactApp.client').default;
+  module.exports = require('./ReactAppClient').default;
 } else {
-  module.exports = require('./ReactApp.server').default;
+  module.exports = require('./ReactAppServer').default;
 }

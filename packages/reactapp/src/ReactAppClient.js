@@ -13,10 +13,10 @@ Promise.config({ cancellation: true });
 
 const DEBUG = __DEV__ && false;
 
-export default class ReactApp extends Module {
+export default class ReactAppClient extends Module {
   // BaseUapp = BaseUapp;
   ReactDOM = ReactDOM;
-  name = 'ReactApp';
+  name = 'ReactAppClient';
 
   constructor(props) {
     // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху.
@@ -28,30 +28,24 @@ export default class ReactApp extends Module {
     return window.__ROOT_STATE__ || {};
   }
 
-  @autobind
-  historyListen(location) {
-    // , action
-    if (location.method === 'replaceState') return;
-    this.render();
-  }
-
-  async historyConfirm(message, callback) {
-    if (this.uapp && this.uapp.historyConfirm) {
-      this.uapp.historyConfirm(message, callback);
-    } else {
-      callback(true);
-    }
-  }
-
   async init() {
     if (!this.container) this.container = document.getElementById('root');
     this.history = createBrowserHistory({
-      getUserConfirmation: (...args) => this.historyConfirm(...args),
+      getUserConfirmation: (message, callback) => {
+        if (!(this.uapp && this.uapp.historyConfirm)) {
+          callback(true);
+          return;
+        }
+        this.uapp.historyConfirm(message, callback);
+      },
     });
   }
 
   run() {
-    this.history.listen(this.historyListen);
+    this.history.listen(location => {
+      if (location.method === 'replaceState') return;
+      this.render();
+    });
     this.render();
   }
 
@@ -73,9 +67,7 @@ export default class ReactApp extends Module {
     );
   }
 
-  // render = () => this.render2()
-  // async render2() {
-  @autobind
+  // @autobind
   async render() {
     if (this.uapp && this.uapp.page && this.uapp.page.exit) {
       await this.uapp.page.exit();
@@ -83,18 +75,18 @@ export default class ReactApp extends Module {
     const req = collectWindowReq();
     let page;
     try {
-      page = await this.getPage(req);
+      page = await this.resolve(req);
     } catch (err) {
       if ((err && err.type === 'cancel') || err === 'cancel') {
         console.error('!!!!!!!!!!!!!!! CSR.canceled'); // eslint-disable-line no-console
         return;
       }
-      this.log.error('CSR getPage err (ROUTER ERROR)', err);
+      this.log.error('ReactAppClient.resolve err (ROUTER ERROR)', err);
       try {
         // --- Welcome to debugging React ---
         // This error was thrown as a convenience so that you can use this stack
         // to find the callsite that caused this warning to fire.
-        throw new Error('CSR getPage err (ROUTER ERROR)');
+        throw new Error('ReactAppClient.resolve err (ROUTER ERROR)');
       } catch (x) {
         //
       }
@@ -107,7 +99,7 @@ export default class ReactApp extends Module {
     }
 
     if (!this.container) {
-      this.log.error('!ReactApp.container');
+      this.log.error('!ReactAppClient.container');
     }
     const component = page.render();
     // Check if the root node has any children to detect if the app has been prerendered
@@ -133,7 +125,7 @@ export default class ReactApp extends Module {
     return this.uapp;
   }
 
-  async getPage(req) {
+  async resolve(req) {
     const uapp = await this.getUapp({ req });
     if (this.reqPromise) {
       if (this.reqPromise.cancel) {

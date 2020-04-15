@@ -11,8 +11,8 @@ import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-
 // import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
-export default class ReactApp extends Module {
-  name = 'ReactApp';
+export default class ReactAppServer extends Module {
+  name = 'ReactAppServer';
 
   getRootState({ req, uappReq, ...props }) {
     return {
@@ -54,7 +54,7 @@ export default class ReactApp extends Module {
     return uapp;
   }
 
-  async getPage({ req } = {}) {
+  async resolve({ req } = {}) {
     const uapp = await this.getUapp({ req });
     await uapp.resolve({
       path: req.originalUrl,
@@ -112,9 +112,9 @@ export default class ReactApp extends Module {
     let content;
     try {
       try {
-        page = await this.getPage({ req });
+        page = await this.resolve({ req });
       } catch (err) {
-        throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactApp.getPage(req)'] };
+        throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactApp.resolve(req)'] };
       }
       if (get(page, 'state.redirect')) {
         // eslint-disable-next-line no-shadow
