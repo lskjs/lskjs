@@ -12,6 +12,6 @@ rm -rf .storybook && cp -R ../../.storybook/.storybook-package .storybook
 node ../../scripts/package-merge.js 
 
 # update deps
-../../node_modules/npm-check-updates/bin/ncu -u --save-exact --dep=prod,dev,peer,optional '/^@lskjs/.*$/' && \
+../../node_modules/npm-check-updates/bin/ncu -u --dep=prod,dev,peer,optional '/^@lskjs/.*$/' && \
 npm install
 # ../../node_modules/npm-check-updates/bin/ncu -u --save-exact --dep=prod,dev,peer,optional  && \

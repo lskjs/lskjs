@@ -26,5 +26,7 @@
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
-  }
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

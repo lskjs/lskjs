@@ -29,6 +29,9 @@
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh"
   },
+  "dependencies": {
+    "@lskjs/utils": "1.19.0"
+  },
   "devDependencies": {
     "axios": "0.19.2",
     "plivo": "4.1.9",
@@ -40,8 +43,5 @@
   "optionalDependencies": {
     "plivo": "4.1.9",
     "telesignsdk": "*"
-  },
-  "dependencies": {
-    "@lskjs/utils": "1.19.0"
   }
 }
