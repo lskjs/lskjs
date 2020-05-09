@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.18.1...v1.19.0) (2020-05-09)
+
+**Note:** Version bump only for package @lskjs/mailer
+
+
+
+
+
 ## [1.17.1](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.17.0...v1.17.1) (2020-04-01)
 
 **Note:** Version bump only for package @lskjs/mailer

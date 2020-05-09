@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/lskjs/modules/tree/master/packages/sms/compare/v1.18.1...v1.19.0) (2020-05-09)
+
+
+### Features
+
+* **sms:** add  SmsTransport prototype ([dccfe1b](https://github.com/lskjs/modules/tree/master/packages/sms/commit/dccfe1b8b9303f78d532fe6c570b71626bac44c5))
+* **sms:** add bytehand sms transport ([ed8b52d](https://github.com/lskjs/modules/tree/master/packages/sms/commit/ed8b52d9c33849fd66d40e977ff1f1efc443edb9))
+
+
+
+
+
 ## [1.14.3](https://github.com/lskjs/modules/tree/master/packages/sms/compare/v1.14.2...v1.14.3) (2020-03-20)
 
 

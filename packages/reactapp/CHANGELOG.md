@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.18.1...v1.19.0) (2020-05-09)
+
+
+### Features
+
+* **reactapp:** renaming and refacroring ([d858c4b](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/d858c4b2e2c54d2071005868c8816ffa62ce6ece))
+
+
+
+
+
 ## [1.18.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.18.0...v1.18.1) (2020-04-14)
 
 

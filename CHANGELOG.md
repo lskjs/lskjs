@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/lskjs/lskjs/compare/v1.18.1...v1.19.0) (2020-05-09)
+
+
+### Bug Fixes
+
+* **server:** change server.response config path ([c365b27](https://github.com/lskjs/lskjs/commit/c365b27103f4098d6db05e44c2b9cf058f0bc1ad))
+* **utils:** fixed not working canonizePhone ([6a4f184](https://github.com/lskjs/lskjs/commit/6a4f18460e9a8413f843aac10f9b0658b4475e6a))
+
+
+### Features
+
+* **reactapp:** renaming and refacroring ([d858c4b](https://github.com/lskjs/lskjs/commit/d858c4b2e2c54d2071005868c8816ffa62ce6ece))
+* **sms:** add  SmsTransport prototype ([dccfe1b](https://github.com/lskjs/lskjs/commit/dccfe1b8b9303f78d532fe6c570b71626bac44c5))
+* **sms:** add bytehand sms transport ([ed8b52d](https://github.com/lskjs/lskjs/commit/ed8b52d9c33849fd66d40e977ff1f1efc443edb9))
+
+
+
+
+
 ## [1.18.1](https://github.com/lskjs/lskjs/compare/v1.18.0...v1.18.1) (2020-04-14)
 
 

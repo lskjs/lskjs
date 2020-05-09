@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.18.1...v1.19.0) (2020-05-09)
+
+
+### Bug Fixes
+
+* **utils:** fixed not working canonizePhone ([6a4f184](https://github.com/lskjs/ux/tree/master/packages/utils/commit/6a4f18460e9a8413f843aac10f9b0658b4475e6a))
+
+
+
+
+
 ## [1.17.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.17.0...v1.17.1) (2020-04-01)
 
 
