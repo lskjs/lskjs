@@ -38,6 +38,7 @@
     "axios": "*"
   },
   "optionalDependencies": {
+    "plivo": "4.1.9",
     "telesignsdk": "*"
   }
 }
