@@ -1,3 +1,3 @@
-import validatePhone from './validatePhone';
+import { canonize } from './validatePhone';
 
-export default validatePhone;
+export default canonize;
