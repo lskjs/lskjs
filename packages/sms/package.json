@@ -40,5 +40,8 @@
   "optionalDependencies": {
     "plivo": "4.1.9",
     "telesignsdk": "*"
+  },
+  "dependencies": {
+    "@lskjs/utils": "1.17.1"
   }
 }
