@@ -13,6 +13,9 @@ export default class SmsTransport {
       trace(...args) {
         console.log(...args); // eslint-disable-line no-console
       },
+      verbose(...args) {
+        console.log(...args); // eslint-disable-line no-console
+      },
       error(...args) {
         console.error(...args); // eslint-disable-line no-console
       },

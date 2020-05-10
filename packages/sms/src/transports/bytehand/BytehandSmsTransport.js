@@ -10,17 +10,9 @@ const BASE = 'https://api.bytehand.com/v2';
 
 export default class BytehandSmsTransport extends SmsTransport {
   name = 'bytehand';
-  getSender(phone = '') {
-    const { phones } = this.config;
-    if (phones && phones.length) {
-      const filtered = phones.filter(p => phone[0] === p[0]);
-      if (filtered.length) return filtered[0];
-      return phones[0];
-    }
-    if (this.config.phone) return this.config.phone;
-    return null;
+  getSender(props) {
+    return super.getSender(props) || 'SMS-INFO';
   }
-
   async _send({ phone, text, sender, ...params } = {}) {
     if (!this.config.apiKey) throw new Err('sms.invalidApiKey');
     const res = await axios({

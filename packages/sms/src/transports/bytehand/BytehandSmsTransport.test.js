@@ -1,15 +1,25 @@
-/* global test */
+/* eslint-disable no-console */
+import polyfill from '@lskjs/utils/polyfill';
 import BytehandSmsTransport from './BytehandSmsTransport';
 
-const sms = new BytehandSmsTransport({
-  apiKey: 'ab4db0b982dcd0ba63e44191e5d71ef8',
-  sender: 'LSK',
-});
+polyfill();
 
-test('test1 0', async () => {
-  await sms.send({
+const sms = new BytehandSmsTransport({
+  apiKey: process.env.SMS_API_KEY,
+  sender: 'SMS-INFO',
+});
+sms
+  .send({
+    phone: '+35796101148',
+    text: 'Your auth code: 234567',
+  })
+  .catch((err) => console.error('sms.send err', err))
+  .then((ok) => console.log('sms.send ok', ok));
+sms
+  .send({
     phone: '+35796101148',
     sender: 'MyShop',
     text: 'Today only! 20% off for all goods!!',
-  });
-});
+  })
+  .catch((err) => console.error('sms.send err', err))
+  .then((ok) => console.log('sms.send ok', ok));
