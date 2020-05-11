@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.4](https://github.com/lskjs/lskjs/compare/v1.20.3...v1.20.4) (2020-05-11)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** remove fake package json ([7a82978](https://github.com/lskjs/lskjs/commit/7a829788187fef3ba4b58a68859d85f2b987c066))
+
+
+
+
+
 ## [1.20.3](https://github.com/lskjs/lskjs/compare/v1.20.2...v1.20.3) (2020-05-11)
 
 
