@@ -16,6 +16,7 @@ const parseAsync = promisify(parse);
 // ' https://docs.google.com/spreadsheets/d/1c9oYV4xIG32w7Y3Sh1V71zoQQBPhgxuXj2ea_tJU0RM',
 
 program
+  // eslint-disable-next-line import/no-unresolved
   .version(require('../package.json').version)
   .command('getspreadsheet <url>')
   // .requiredOption('-u, --url <url>', 'url to the Google Spreadsheet document')
