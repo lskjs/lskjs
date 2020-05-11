@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.2](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.20.1...v1.20.2) (2020-05-11)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** forget @babel/runtime ([7f5b019](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/commit/7f5b019d7e3623c4c18a01c0b2cfe3f46b2e8c73))
+
+
+
+
+
 ## [1.20.1](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.20.0...v1.20.1) (2020-05-11)
 
 
