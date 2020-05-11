@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/lskjs/lskjs/tree/master/packages/launcher/compare/v1.19.0...v1.20.0) (2020-05-11)
+
+**Note:** Version bump only for package @lskjs/launcher
+
+
+
+
+
 # [1.11.0](https://github.com/lskjs/lskjs/tree/master/packages/launcher/compare/v1.10.0...v1.11.0) (2020-03-13)
 
 **Note:** Version bump only for package @lskjs/launcher

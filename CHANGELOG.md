@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/lskjs/lskjs/compare/v1.19.0...v1.20.0) (2020-05-11)
+
+
+### Bug Fixes
+
+* **sms:** stable butehand sms sender ([a2d7498](https://github.com/lskjs/lskjs/commit/a2d7498c69926fe98d2131aa768bbd1ea34c2a46))
+
+
+### Features
+
+* add getspreadsheet to npx ([692df16](https://github.com/lskjs/lskjs/commit/692df16fa523612416fb9a12ce6b9bfb26490e25))
+
+
+
+
+
 # [1.19.0](https://github.com/lskjs/lskjs/compare/v1.18.1...v1.19.0) (2020-05-09)
 
 

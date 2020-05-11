@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.19.0...v1.20.0) (2020-05-11)
+
+
+### Features
+
+* add getspreadsheet to npx ([692df16](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/commit/692df16fa523612416fb9a12ce6b9bfb26490e25))
+
+
+
+
+
 # [1.11.0](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.10.0...v1.11.0) (2020-03-13)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet
