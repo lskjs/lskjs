@@ -28,6 +28,7 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
+    "@babel/runtime": "7.9.6",
     "axios": "0.19.2",
     "commander": "5.1.0",
     "csv-parse": "4.9.0",
