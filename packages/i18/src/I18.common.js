@@ -73,7 +73,7 @@ export default class I18 {
     return new Promise((resolve, reject) => {
       const instance = i18next.createInstance();
       const i18params = this.getI18Params(params);
-      if (__CLIENT__ && i18params.backend) {
+      if (typeof window !== 'undefined' && i18params.backend) {
         instance.use(i18nextXhrBackend);
       }
       if (this.config.debug) {
