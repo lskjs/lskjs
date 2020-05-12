@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.20.4...v1.21.0) (2020-05-12)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix eslint ([1205080](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/commit/120508077dc73a7abf87463ac1717e9bd403971a))
+* eslint ([17457b3](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/commit/17457b3a2391981769ba85702213314be86bba6d))
+
+
+
+
+
 ## [1.20.4](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.20.3...v1.20.4) (2020-05-11)
 
 

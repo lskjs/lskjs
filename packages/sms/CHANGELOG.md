@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/lskjs/modules/tree/master/packages/sms/compare/v1.20.4...v1.21.0) (2020-05-12)
+
+
+### Features
+
+* **sms:** rename providers to transports ([c51bc59](https://github.com/lskjs/modules/tree/master/packages/sms/commit/c51bc591b129837ce4e220e370b7aedeafb376c2))
+
+
+
+
+
 # [1.20.0](https://github.com/lskjs/modules/tree/master/packages/sms/compare/v1.19.0...v1.20.0) (2020-05-11)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/lskjs/lskjs/tree/master/packages/rlog/compare/v1.20.4...v1.21.0) (2020-05-12)
+
+
+### Features
+
+* **rlog:** add tests and prevent start() ([4500219](https://github.com/lskjs/lskjs/tree/master/packages/rlog/commit/450021920bda96a36328e9285ff3b10df90b8528))
+
+
+
+
+
 # [1.20.0](https://github.com/lskjs/lskjs/tree/master/packages/rlog/compare/v1.19.0...v1.20.0) (2020-05-11)
 
 **Note:** Version bump only for package @lskjs/rlog

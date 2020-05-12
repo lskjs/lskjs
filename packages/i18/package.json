@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/i18",
-  "version": "1.0.47",
+  "version": "1.21.0",
   "description": "LSK module for internationalization with i18next.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

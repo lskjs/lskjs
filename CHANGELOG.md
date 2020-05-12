@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/lskjs/lskjs/compare/v1.20.4...v1.21.0) (2020-05-12)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix eslint ([1205080](https://github.com/lskjs/lskjs/commit/120508077dc73a7abf87463ac1717e9bd403971a))
+* **i18:** remove __CLIENT__ constant ([06f785e](https://github.com/lskjs/lskjs/commit/06f785e6628e9b560a3ca7bc57ebf4fc07a6a93b))
+* eslint ([17457b3](https://github.com/lskjs/lskjs/commit/17457b3a2391981769ba85702213314be86bba6d))
+
+
+### Features
+
+* **rlog:** add tests and prevent start() ([4500219](https://github.com/lskjs/lskjs/commit/450021920bda96a36328e9285ff3b10df90b8528))
+* **sms:** rename providers to transports ([c51bc59](https://github.com/lskjs/lskjs/commit/c51bc591b129837ce4e220e370b7aedeafb376c2))
+
+
+
+
+
 ## [1.20.4](https://github.com/lskjs/lskjs/compare/v1.20.3...v1.20.4) (2020-05-11)
 
 
