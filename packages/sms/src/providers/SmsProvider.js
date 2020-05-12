@@ -2,7 +2,7 @@ import canonizePhone from '@lskjs/utils/canonizePhone';
 import validatePhone from '@lskjs/utils/validatePhone';
 import Err from '@lskjs/utils/Err';
 
-export default class SmsTransport {
+export default class SmsProvider {
   constructor(config) {
     if (!config) throw '!config ';
     this.config = config || {};

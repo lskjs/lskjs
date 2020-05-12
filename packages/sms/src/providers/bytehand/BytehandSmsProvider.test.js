@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import polyfill from '@lskjs/utils/polyfill';
-import BytehandSmsTransport from './BytehandSmsTransport';
+import BytehandSmsProvider from './BytehandSmsProvider';
 
 polyfill();
 
-const sms = new BytehandSmsTransport({
+const sms = new BytehandSmsProvider({
   apiKey: process.env.SMS_API_KEY,
   sender: 'SMS-INFO',
 });
