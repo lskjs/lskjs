@@ -28,9 +28,11 @@ program
   )
   .action((url, { out, format } = {}) => {
     if (url.indexOf('#') === -1) {
+      // eslint-disable-next-line no-param-reassign
       url += '#gid=0';
     }
     if (!out) {
+      // eslint-disable-next-line no-param-reassign
       out = `spreadsheet${format === 'raw' ? '.csv' : '.json'}`;
     }
     const filename = (out[0] !== '~' && out[0] !== '/' ? `${process.cwd()}/` : '') + out;
