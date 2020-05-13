@@ -50,15 +50,15 @@ export default class I18 {
   getI18Locale() {
     let locale;
     if (this.getLocale) locale = this.getLocale();
-    const { locales = [] } = this.config;
+    const { locales = [] } = this.config || {};
     if (!locales.includes(locale)) locale = null;
     if (locale) return locale;
-    return this.config.lng || 'en';
+    return this.config ? this.config.lng : 'en';
   }
   getI18Params(params = {}) {
     const lng = params.lng || this.getI18Locale();
     try {
-      const { config } = this;
+      const { config = {} } = this;
       return {
         ...config,
         ...params,
@@ -76,7 +76,7 @@ export default class I18 {
       if (typeof window !== 'undefined' && i18params.backend) {
         instance.use(i18nextXhrBackend);
       }
-      if (this.config.debug) {
+      if (this.config && this.config.debug) {
         const { log = console } = this;
         instance.use({
           type: 'logger',
