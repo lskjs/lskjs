@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.1](https://github.com/lskjs/modules/tree/master/packages/i18/compare/v1.21.0...v1.21.1) (2020-05-13)
+
+
+### Bug Fixes
+
+* **i18:** i18 config is not required ([ff8e91b](https://github.com/lskjs/modules/tree/master/packages/i18/commit/ff8e91b4ebf84c4d8e522256f75147711344eb8e))
+
+
+
+
+
 # [1.21.0](https://github.com/lskjs/modules/tree/master/packages/i18/compare/v1.20.4...v1.21.0) (2020-05-12)
 
 
