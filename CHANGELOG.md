@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.2](https://github.com/lskjs/lskjs/compare/v1.21.1...v1.21.2) (2020-05-14)
+
+
+### Bug Fixes
+
+* **reactapp:** warn if router resolve empty page ([d9a98de](https://github.com/lskjs/lskjs/commit/d9a98de724730b4fc21a6f6bc9d2698be1db8a6b))
+
+
+
+
+
 ## [1.21.1](https://github.com/lskjs/lskjs/compare/v1.21.0...v1.21.1) (2020-05-13)
 
 
