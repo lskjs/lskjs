@@ -91,12 +91,12 @@ export default class ReactAppServer extends Module {
 
   createHtmlRender(page) {
     const { Html = BaseHtml } = this;
-    return content => {
+    return (content) => {
       const html = new Html({
         content,
         assetManifest: this.getAssetManifest(),
-        meta: page.getMeta(),
-        rootState: page.getRootState(),
+        meta: page ? page.getMeta() : '',
+        rootState: page ? page.getRootState() : '',
       });
       return html.render();
     };
@@ -113,6 +113,9 @@ export default class ReactAppServer extends Module {
     try {
       try {
         page = await this.resolve({ req });
+        if (!page) {
+          this.log.warn('ReactAppServer: !page');
+        }
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactApp.resolve(req)'] };
       }
