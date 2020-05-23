@@ -56,10 +56,12 @@ export default class ReactAppServer extends Module {
 
   async resolve({ req } = {}) {
     const uapp = await this.getUapp({ req });
+    if (!uapp) throw '!uapp';
     await uapp.resolve({
       path: req.originalUrl,
       query: req.query,
     });
+    if (!uapp.page) throw '!uapp.page';
     return uapp.page;
   }
 
@@ -95,8 +97,8 @@ export default class ReactAppServer extends Module {
       const html = new Html({
         content,
         assetManifest: this.getAssetManifest(),
-        meta: page ? page.getMeta() : '',
-        rootState: page ? page.getRootState() : '',
+        meta: page && page.getMeta ? page.getMeta() : '',
+        rootState: page && page.getRootState ? page.getRootState() : '',
       });
       return html.render();
     };
