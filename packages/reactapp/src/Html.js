@@ -1,4 +1,5 @@
 import map from 'lodash/map';
+import get from 'lodash/get';
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import serializeJavascript from 'serialize-javascript';
 
@@ -19,7 +20,15 @@ export default class Html {
       return res;
     } catch (err) {
       if (__DEV__) {
-        console.error('Html.asset not found', name); // eslint-disable-line no-console
+        let errText;
+        if (!get(this, 'assetManifest')) {
+          errText = '!assetManifest';
+        } else if (!get(this, 'assetManifest.files')) {
+          errText = '!assetManifest.files';
+        } else {
+          errText = `${name} not includes in [${Object.keys(this.assetManifest.files).join(',')}]`;
+        }
+        console.error('Html.asset not found', errText); // eslint-disable-line no-console
       }
       return null;
     }
