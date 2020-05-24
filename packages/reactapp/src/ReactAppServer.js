@@ -57,12 +57,13 @@ export default class ReactAppServer extends Module {
   async resolve({ req } = {}) {
     const uapp = await this.getUapp({ req });
     if (!uapp) throw '!uapp';
-    await uapp.resolve({
+    const page = await uapp.resolve({
       path: req.originalUrl,
       query: req.query,
     });
-    if (!uapp.page) throw '!uapp.page';
-    return uapp.page;
+    // const page = uapp.page
+    if (!page || !page._page) throw '!uapp.page';
+    return page;
   }
 
   async renderToNodeStream({ res, render, component }) {
@@ -115,8 +116,8 @@ export default class ReactAppServer extends Module {
     try {
       try {
         page = await this.resolve({ req });
-        if (!page) {
-          this.log.warn('ReactAppServer: !page');
+        if (!page || !page._page) {
+          this.log.warn('ReactAppServer.resolve(): !page');
         }
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactApp.resolve(req)'] };
@@ -136,6 +137,9 @@ export default class ReactAppServer extends Module {
       }
       try {
         ({ status = 200 } = get(page, 'state', {}));
+        if (__DEV__ && !get(page, 'render')) {
+          console.error('!page', { page });
+        }
         component = page.render();
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'page.render()'] };
