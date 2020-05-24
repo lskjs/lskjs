@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/lskjs/lskjs/compare/v1.22.0...v1.23.0) (2020-05-24)
+
+
+### Features
+
+* **reactapp:** props htmlProps from reactapp ([f789f94](https://github.com/lskjs/lskjs/commit/f789f941c8f8cef74d514ac150f6f230865d6fea))
+
+
+
+
+
 # [1.22.0](https://github.com/lskjs/lskjs/compare/v1.21.3...v1.22.0) (2020-05-24)
 
 
