@@ -95,13 +95,14 @@ export default class ReactAppServer extends Module {
   }
 
   createHtmlRender(page) {
-    const { Html = BaseHtml } = this;
+    const { Html = BaseHtml, htmlProps = {} } = this;
     return (content) => {
       const html = new Html({
         content,
         assetManifest: this.getAssetManifest(),
         meta: page && page.getMeta ? page.getMeta() : '',
         rootState: page && page.getRootState ? page.getRootState() : '',
+        ...htmlProps,
       });
       return html.render();
     };
@@ -132,7 +133,7 @@ export default class ReactAppServer extends Module {
         const { redirect: redirectArgs, status = 300 } = get(page, 'state', {});
         const [redirect] = redirectArgs;
         if (__DEV__) {
-          this.log.debug('ReactApp.redirect', redirect);
+          this.log.debug('ReactAppServer.redirect', redirect);
           await Promise.delay(2000);
         }
         if (strategy === 'json') {
@@ -153,7 +154,7 @@ export default class ReactAppServer extends Module {
           throw '!page';
         }
       } catch (err) {
-        throw { err, stack: ['Error SSR', 'ReactApp.render', 'page.render()'] };
+        throw { err, stack: ['Error SSR', 'ReactAppServer.render', 'page.render()'] };
       }
 
       // console.log('component', component);
@@ -169,12 +170,12 @@ export default class ReactAppServer extends Module {
           content = renderToString(component);
         }
       } catch (err) {
-        if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no=console
+        if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
         throw {
           err,
           stack: [
             'Error SSR',
-            'ReactApp.render',
+            'ReactAppServer.render',
             strategyMethod ? `ReactDOM.${strategyMethod}(component)` : null,
           ].filter(Boolean),
         };

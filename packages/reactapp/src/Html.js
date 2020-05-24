@@ -87,7 +87,7 @@ ${this.renderPreloader()} \
 `;
   }
 
-  preloader = '<!-- renderPreloader -->';
+  preloader = '<!-- preloader -->';
   renderPreloader() {
     return this.preloader || '';
   }
