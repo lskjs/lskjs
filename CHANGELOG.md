@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/lskjs/lskjs/compare/v1.21.3...v1.22.0) (2020-05-24)
+
+
+### Bug Fixes
+
+* **reactapp:** rename resolve to uappResolve and fix bugs ([41489ad](https://github.com/lskjs/lskjs/commit/41489ad360f8cf7cbe75dc7a9765646fc671ec30))
+* **server:** rename resolve to expressResolve, fix bugs ([632b3bb](https://github.com/lskjs/lskjs/commit/632b3bb1337f62b83b4a9ec45f1dc6b48272ea46))
+
+
+### Features
+
+* **reactapp:** more details in errors ([2ee8a64](https://github.com/lskjs/lskjs/commit/2ee8a64029325e44c6744e82e0340172d5735789))
+
+
+
+
+
 ## [1.21.3](https://github.com/lskjs/lskjs/compare/v1.21.2...v1.21.3) (2020-05-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.21.3...v1.22.0) (2020-05-24)
+
+
+### Bug Fixes
+
+* **server:** rename resolve to expressResolve, fix bugs ([632b3bb](https://github.com/lskjs/modules/tree/master/packages/server/commit/632b3bb1337f62b83b4a9ec45f1dc6b48272ea46))
+
+
+
+
+
 ## [1.21.3](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.21.2...v1.21.3) (2020-05-24)
 
 
