@@ -3,8 +3,11 @@ import nodeVesion from '@lskjs/utils/nodeVersion';
 
 const DEBUG = __STAGE__ === 'isuvorov';
 
-export default async function(params = {}) {
+export default async function (params = {}) {
+  // eslint-disable-next-line no-console
+  if (DEBUG) console.log('ServerApp.resolve', Object.keys(params));
   const express = this.express || this.app;
+  if (!express) throw '!express';
 
   const {
     host = '', // ?
@@ -40,7 +43,7 @@ export default async function(params = {}) {
   const data = await new Promise((resolve, reject) => {
     const res = Object.create(http.ServerResponse.prototype);
     res.send = function(data) { //eslint-disable-line
-      // if (DEBUG) console.log('express.resolve.send', Object.keys(data)); // eslint-disable-line no-console
+      if (DEBUG) console.log('express.resolve.send', Object.keys(data)); // eslint-disable-line no-console
       if (res.statusCode >= 400) {
         reject(data);
       } else {
@@ -52,11 +55,11 @@ export default async function(params = {}) {
     if (nodeVesion() >= 9) {
       const x = new http.OutgoingMessage();
       const symbols = Object.getOwnPropertySymbols(x);
-      const outHeadersKey = symbols.find(item => item.toString() === 'Symbol(outHeadersKey)');
+      const outHeadersKey = symbols.find((item) => item.toString() === 'Symbol(outHeadersKey)');
       if (outHeadersKey) {
         res[outHeadersKey] = headers;
       }
-      const kOutHeaders = symbols.find(item => item.toString() === 'Symbol(kOutHeaders)');
+      const kOutHeaders = symbols.find((item) => item.toString() === 'Symbol(kOutHeaders)');
       if (kOutHeaders) {
         res[kOutHeaders] = headers;
       }

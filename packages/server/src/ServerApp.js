@@ -239,7 +239,7 @@ export default class ServerApp extends Module {
   getDocsRouter = require('./methods/getDocsRouter').default;
   getDocsTemplate = () => 'deprecated';
 
-  resolve = require('./methods/resolve').default;
+  expressResolve = require('./methods/expressResolve').default;
   runRedis = require('./methods/runRedis').default;
   runRoutes = require('./methods/runRoutes').default;
   // getI18 = require('../Uapp/i18/getI18').default;
