@@ -11,6 +11,8 @@ import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-
 // import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
+const DEBUG = false;
+
 export default class ReactAppServer extends Module {
   name = 'ReactAppServer';
 
@@ -54,7 +56,8 @@ export default class ReactAppServer extends Module {
     return uapp;
   }
 
-  async resolve({ req } = {}) {
+  async uappResolve({ req } = {}) {
+    if (DEBUG) console.log('ReactAppServer.resolve req=', !!req); // eslint-disable-line no-console
     const uapp = await this.getUapp({ req });
     if (!uapp) throw '!uapp';
     const page = await uapp.resolve({
@@ -62,7 +65,6 @@ export default class ReactAppServer extends Module {
       query: req.query,
     });
     // const page = uapp.page
-    if (!page || !page._page) throw '!uapp.page';
     return page;
   }
 
@@ -108,6 +110,7 @@ export default class ReactAppServer extends Module {
   @autobind
   async render(req, res) {
     const strategy = get(req, 'query.__strategy') || get(this, 'config.reactApp.strategy') || null;
+    if (DEBUG) console.log('ReactAppServer.render', { strategy }, this.name); // eslint-disable-line no-console
     // const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
     let status = 200;
     let page;
@@ -115,12 +118,14 @@ export default class ReactAppServer extends Module {
     let content;
     try {
       try {
-        page = await this.resolve({ req });
-        if (!page || !page._page) {
-          this.log.warn('ReactAppServer.resolve(): !page');
+        page = await this.uappResolve({ req });
+        if (!page) {
+          this.log.warn('ReactAppServer.uappResolve(): !page');
+        } else if (!page._page) {
+          this.log.debug('ReactAppServer.uappResolve(): !page._page');
         }
       } catch (err) {
-        throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactApp.resolve(req)'] };
+        throw { err, stack: ['Error SSR', `${this.name}.render`, `${this.name}.uappResolve({req})`] };
       }
       if (get(page, 'state.redirect')) {
         // eslint-disable-next-line no-shadow
@@ -137,25 +142,42 @@ export default class ReactAppServer extends Module {
       }
       try {
         ({ status = 200 } = get(page, 'state', {}));
-        if (__DEV__ && !get(page, 'render')) {
-          console.error('!page', { page });
+        if (get(page, 'render')) {
+          component = page.render();
+        } else if (typeof page === 'string') {
+          component = page;
+        } else {
+          if (__DEV__ && !get(page, 'render')) {
+            console.error('!page', { page }); // eslint-disable-line no-console
+          }
+          throw '!page';
         }
-        component = page.render();
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactApp.render', 'page.render()'] };
       }
 
       // console.log('component', component);
+      let strategyMethod;
       try {
         if (strategy === 'nodeStream') {
           // рендерим потом асинхронно
         } else if (strategy === 'staticMarkup') {
+          strategyMethod = 'renderToStaticMarkup';
           content = renderToStaticMarkup(component);
         } else {
+          strategyMethod = 'renderToString';
           content = renderToString(component);
         }
       } catch (err) {
-        throw { err, stack: ['Error SSR', 'ReactApp.render', 'ReactDOM.renderToStaticMarkup(component)'] };
+        if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no=console
+        throw {
+          err,
+          stack: [
+            'Error SSR',
+            'ReactApp.render',
+            strategyMethod ? `ReactDOM.${strategyMethod}(component)` : null,
+          ].filter(Boolean),
+        };
       }
       // console.log('content', content);
     } catch ({ err, stack }) {
