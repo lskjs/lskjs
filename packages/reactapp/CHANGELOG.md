@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.3](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.21.2...v1.21.3) (2020-05-24)
+
+
+### Bug Fixes
+
+* improve debug info ([f8dd8e2](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/f8dd8e2e1e2299e666f766a8a463fefa9a82bd8f))
+* ReactAppServer.resolve ([68e7e5c](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/68e7e5c1ad3056c22ca4a5a6f1eb952bb07fc598))
+
+
+
+
+
 ## [1.21.2](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.21.1...v1.21.2) (2020-05-14)
 
 

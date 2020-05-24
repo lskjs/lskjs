@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.3](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.21.2...v1.21.3) (2020-05-24)
+
+
+### Bug Fixes
+
+* ReactAppServer.resolve ([68e7e5c](https://github.com/lskjs/modules/tree/master/packages/server/commit/68e7e5c1ad3056c22ca4a5a6f1eb952bb07fc598))
+
+
+
+
+
 ## [1.21.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.21.0...v1.21.1) (2020-05-13)
 
 **Note:** Version bump only for package @lskjs/server
