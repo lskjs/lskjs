@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://github.com/lskjs/lskjs/compare/v1.25.3...v1.26.0) (2020-05-25)
+
+
+### Bug Fixes
+
+* **permit:** aync function bugfix ([9691b59](https://github.com/lskjs/lskjs/commit/9691b592d4671cf9ef633ef17332cd9821263ba2))
+
+
+### Features
+
+* **auth:** getUserId from module ([b1e0e2b](https://github.com/lskjs/lskjs/commit/b1e0e2b0ca05c986bda9d83929efa4a7486280e4))
+
+
+
+
+
 ## [1.25.3](https://github.com/lskjs/lskjs/compare/v1.25.2...v1.25.3) (2020-05-25)
 
 
