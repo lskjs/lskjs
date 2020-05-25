@@ -89,6 +89,31 @@ export default class Uapp extends Module {
     });
     return callback(res);
   }
+  async resolveStart() {
+    if (this.progress && this.progress.current) {
+      this.progress.current.start();
+    }
+  }
+  async resolveFinish() {
+    if (this.scrollTo) {
+      setTimeout(() => this.scrollTo(0), 10); // @TODO: back && go to page
+    }
+    try {
+      const { title } = this.page.getMeta();
+      if (title && typeof document !== 'undefined') {
+        document.title = title;
+      }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      if (__DEV__) console.error("Uapp can't set title");
+      this.log.error('err', err);
+    }
+    if (this.progress && this.progress.current) {
+      this.progress.current.finish();
+    }
+    this.req.path = this.history.location.path;
+    this.req.query = this.history.location.query;
+  }
   async init() {
     await super.init();
     if (this.rootState) {
@@ -116,25 +141,8 @@ export default class Uapp extends Module {
         animation: 'none',
       });
 
-      this.on('resolve:before', () => {
-        if (this.progress && this.progress.current) {
-          this.progress.current.start();
-        }
-      });
-      this.on('resolve:after', () => {
-        // console.log('resolve:afterresolve:afterresolve:afterresolve:after', this.scrollTo);
-        if (this.scrollTo) {
-          setTimeout(() => this.scrollTo(0), 10); // @TODO: back && go to page
-        }
-        if (this.page && this.page.renderTitle && typeof document !== 'undefined') {
-          document.title = this.page.getMeta().title;
-        }
-        if (this.progress && this.progress.current) {
-          this.progress.current.finish();
-        }
-        this.req.path = this.history.location.path;
-        this.req.query = this.history.location.query;
-      });
+      this.on('resolve:start', () => this.resolveStart());
+      this.on('resolve:finish', () => this.resolveFinish();
 
       const classes = detectHtmlClasses();
       classes.forEach(addClassToHtml);
@@ -291,7 +299,7 @@ export default class Uapp extends Module {
             userId,
           },
         })
-        .catch(err => this.log.error('Uapp.initStateStorage: getOrCreate', err));
+        .catch((err) => this.log.error('Uapp.initStateStorage: getOrCreate', err));
       // console.log('-- 2222');
       if (res && res.data) {
         state = {
@@ -382,8 +390,8 @@ export default class Uapp extends Module {
 
   resolve(reqParams = {}) {
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async resolve => {
-      this.emit('resolve:before', reqParams);
+    return new Promise(async (resolve) => {
+      this.emit('resolve:start', reqParams);
       const req = {
         ...this.req,
         path: reqParams.path,
@@ -405,7 +413,7 @@ export default class Uapp extends Module {
         this.log.error('uapp.router.resolve', err);
         console.error(err); // eslint-disable-line no-console
       }
-      this.emit('resolve:after', reqParams);
+      this.emit('resolve:finish', reqParams);
       resolve(res);
     });
   }
