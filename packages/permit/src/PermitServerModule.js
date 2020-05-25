@@ -16,7 +16,7 @@ export default class PermitServerModule extends Module {
       ...get(this, 'app.config.permit', {}),
       scenarios: {
         ...config.scenarios,
-        ...get(this, 'app.config.permit.scenario', {}),
+        ...get(this, 'app.config.permit.scenarios', {}),
       },
     };
     this.models = this.getModels();
