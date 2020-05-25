@@ -77,7 +77,7 @@ export default class ReactAppClient extends Module {
     try {
       page = await this.resolve(req);
     } catch (err) {
-        if (__STAGE__ === 'isuvorov') console.log('err @!#!@#!@# ', err);
+      if (__STAGE__ === 'isuvorov') console.log('err @!#!@#!@# ', err);
       if ((err && err.type === 'cancel') || (err && err.code === 'page.cancel') || err === 'page.cancel') {
         if (__DEV__) console.warn('!!!!!!!!!!!!!!! CSR.canceled !!!!!!!!!!!!!'); // eslint-disable-line no-console
         return;

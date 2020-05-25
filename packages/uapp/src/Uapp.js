@@ -355,6 +355,9 @@ export default class Uapp extends Module {
   // uapp.onError(uapp.e('errorData', { err })); ???
   @autobind
   onError(err) {
+    if ((err && err.type === 'cancel') || (err && err.code === 'page.cancel') || err === 'page.cancel') {
+      return null;
+    }
     return this.toast(err, { defaultType: 'error' });
   }
 
