@@ -3,6 +3,7 @@ import merge from 'lodash/merge';
 import Promise from 'bluebird';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
+import { observable } from 'mobx';
 // import Loading from '@lskjs/general/Loading';
 
 // const DEBUG = __DEV__ && false;
@@ -14,7 +15,7 @@ const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
 
 export default class Page {
   _page = 1;
-  state = {};
+  @observable state = {};
   rootState = null;
 
   constructor(props) {
@@ -139,6 +140,8 @@ export default class Page {
     return this;
   }
 
+  components = [];
+
   async component(...args) {
     debug('Page.component', args[0]);
     const result = await args[0];
@@ -149,11 +152,11 @@ export default class Page {
     }
     // }
     if (args.length > 1) {
-      this.state.component = args;
+      this.components = args;
     } else {
-      this.state.component = args[0]; // eslint-disable-line prefer-destructuring
+      this.components = args[0]; // eslint-disable-line prefer-destructuring
     }
-    debug('Page.this.state.component', this.state.component);
+    debug('Page.components', this.components);
     return this;
   }
 
@@ -190,13 +193,13 @@ export default class Page {
     debug('Page.renderComponent', this.state);
     let Component;
     let props = {};
-    if (Array.isArray(this.state.component)) {
-      [Component, props] = this.state.component;
+    if (Array.isArray(this.components)) {
+      [Component, props] = this.components;
     } else {
-      Component = this.state.component;
+      Component = this.components;
     }
-    if (Array.isArray(this.state.component)) {
-      return React.createElement(this.state.component[0], this.state.component[1] || {});
+    if (Array.isArray(this.components)) {
+      return React.createElement(this.components[0], this.components[1] || {});
     }
     return React.createElement(Component, props);
   }
