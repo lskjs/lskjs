@@ -142,7 +142,7 @@ export default class Uapp extends Module {
       });
 
       this.on('resolve:start', () => this.resolveStart());
-      this.on('resolve:finish', () => this.resolveFinish();
+      this.on('resolve:finish', () => this.resolveFinish());
 
       const classes = detectHtmlClasses();
       classes.forEach(addClassToHtml);
