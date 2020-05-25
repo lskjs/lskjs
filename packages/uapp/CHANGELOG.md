@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.23.0...v1.24.0) (2020-05-25)
+
+
+### Bug Fixes
+
+* **uapp:** resolveStart, resolveFinish, set title in resolveFinish ([f906d5e](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/f906d5e3536d002ec334eb3fe802c5d507f6ad32))
+
+
+### Features
+
+* **uapp:** page.state.component => page.components ([a595f05](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/a595f0567bdb7b1c524624a95fe30b69156588e9))
+* **uapp:** Page.wait ([327d7aa](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/327d7aa6fd9782f4875a0e614949e5a048f1da81))
+
+
+
+
+
 ## [1.21.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.21.0...v1.21.1) (2020-05-13)
 
 **Note:** Version bump only for package @lskjs/uapp
