@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.3](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.25.2...v1.25.3) (2020-05-25)
+
+
+### Bug Fixes
+
+* **permit:** typo mistake in config extracter ([253b6cd](https://github.com/lskjs/modules/tree/master/packages/permit/commit/253b6cd43f6ee791044daad0c96b7669882ee811))
+
+
+
+
+
 # [1.20.0](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.19.0...v1.20.0) (2020-05-11)
 
 **Note:** Version bump only for package @lskjs/permit
