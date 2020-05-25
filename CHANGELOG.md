@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.2](https://github.com/lskjs/lskjs/compare/v1.25.1...v1.25.2) (2020-05-25)
+
+
+### Bug Fixes
+
+* **auth:** working singup ([e4687c8](https://github.com/lskjs/lskjs/commit/e4687c8b6f30e24508cb501a1cc353eca1ba687b))
+
+
+
+
+
 ## [1.25.1](https://github.com/lskjs/lskjs/compare/v1.25.0...v1.25.1) (2020-05-25)
 
 
