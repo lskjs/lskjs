@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.24.0...v1.25.0) (2020-05-25)
+
+
+### Features
+
+* **reactapp:** page.cancel without errors ([1c8709c](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/1c8709c0f14e6fa24109bb61d378e33310b59806))
+
+
+
+
+
 # [1.24.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.23.0...v1.24.0) (2020-05-25)
 
 
