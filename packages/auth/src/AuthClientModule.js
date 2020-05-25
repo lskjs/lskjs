@@ -153,6 +153,10 @@ export default class AuthClientModule extends Module {
   authPassport(provider) {
     window.location = `/api/module/auth/${provider}`;
   }
+
+  getUserId() {
+    return get(this, 'store.session._id');
+  }
 }
 
 // export default ctx => ({

@@ -229,6 +229,8 @@ export default class Api extends BaseApi {
     const permit = await PermitModel.findById(permitId);
     if (!permit) throw this.app.e('permit.permitNotFound', { status: 404 });
     const status = permit.getStatus();
+    if (__STAGE__ === 'isuvorov') console.log('permit.status', status);
+
     if (status !== 'valid') {
       throw this.app.e('permit.statusInvalid', { status: 400, data: { status } });
     }
