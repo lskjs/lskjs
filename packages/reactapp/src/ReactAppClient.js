@@ -77,8 +77,9 @@ export default class ReactAppClient extends Module {
     try {
       page = await this.resolve(req);
     } catch (err) {
-      if ((err && err.type === 'cancel') || err === 'cancel') {
-        console.error('!!!!!!!!!!!!!!! CSR.canceled'); // eslint-disable-line no-console
+        if (__STAGE__ === 'isuvorov') console.log('err @!#!@#!@# ', err);
+      if ((err && err.type === 'cancel') || (err && err.code === 'page.cancel') || err === 'page.cancel') {
+        if (__DEV__) console.warn('!!!!!!!!!!!!!!! CSR.canceled !!!!!!!!!!!!!'); // eslint-disable-line no-console
         return;
       }
       this.log.error('ReactAppClient.resolve err (ROUTER ERROR)', err);

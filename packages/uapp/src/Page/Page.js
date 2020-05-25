@@ -3,6 +3,7 @@ import merge from 'lodash/merge';
 import Promise from 'bluebird';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
+import Err from '@lskjs/utils/Err';
 import { observable } from 'mobx';
 // import Loading from '@lskjs/general/Loading';
 
@@ -36,7 +37,7 @@ export default class Page {
       err = error;
     }
     const afterPageId = this._page;
-    if (beforePageId !== afterPageId) throw 'page.parallel';
+    if (beforePageId !== afterPageId) throw new Err('page.cancel');
     if (err) throw err;
     return res;
   }
