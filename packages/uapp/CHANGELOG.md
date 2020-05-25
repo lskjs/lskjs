@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.25.0...v1.25.1) (2020-05-25)
+
+
+### Bug Fixes
+
+* **uapp:** ignore err code page.cancel ([9d77bd4](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/9d77bd40565bd4f860612209360d397966d923be))
+
+
+
+
+
 # [1.25.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.24.0...v1.25.0) (2020-05-25)
 
 
