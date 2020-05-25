@@ -38,7 +38,7 @@ export default function PermitModel({ db, emit }) {
       collection: 'permit',
     },
   );
-  schema.statics.createPermit = async function(data) {
+  schema.statics.createPermit = async function (data) {
     const { userId, expiredAt, info, code, type } = data;
     const permit = new this({
       type,
@@ -56,7 +56,7 @@ export default function PermitModel({ db, emit }) {
   };
   schema.statics.generateCode = (...args) => this.parent.generateCode(...args);
   schema.statics.generateUniqCode = (...args) => this.parent.generateUniqCode(...args);
-  schema.statics.isCode = function({ code, type, length = 4 }) {
+  schema.statics.isCode = function ({ code, type, length = 4 }) {
     if (type === 'random') {
       if (typeof code === 'string' && code.length === length) {
         let strRegexp = '';
@@ -68,8 +68,8 @@ export default function PermitModel({ db, emit }) {
     }
     return false;
   };
-  
-  schema.statics.findByCode = async function(code, params = {}) {
+
+  schema.statics.findByCode = async function (code, params = {}) {
     return this.findOne({
       code,
       expiredAt: {
@@ -81,30 +81,28 @@ export default function PermitModel({ db, emit }) {
       ...params,
     });
   };
-  schema.statics.activate = async function(code) {
+  schema.statics.activate = async function (code) {
     const permit = await this.findByCode(code);
     if (permit) {
       return permit.activate();
     }
     return null;
   };
-  schema.statics.makeExpiredAt = function({ value = 1, type = 'hour' } = {}) {
-    return m()
-      .add(value, type)
-      .toDate();
+  schema.statics.makeExpiredAt = function ({ value = 1, type = 'hour' } = {}) {
+    return m().add(value, type).toDate();
   };
-  schema.methods.activate = async function() {
+  schema.methods.activate = async function () {
     this.activatedAt = new Date();
     await this.save();
     emit(`models.Permit.activated_${this.type}`, this);
     return this;
   };
-  schema.methods.getStatus = async function() {
+  schema.methods.getStatus = function () {
     if (this.expiredAt) return 'expired';
     if (this.activatedAt) return 'activated';
     return 'valid';
   };
-  schema.statics.prepareOne = async function(obj) {
+  schema.statics.prepareOne = async function (obj) {
     // eslint-disable-next-line no-param-reassign
     obj.info = pick(obj.info, ['email', 'type']);
     return obj;
