@@ -167,7 +167,8 @@ export default class Api extends BaseApi {
   }
 
   async signup(req) {
-    const permitModule = this.app.module('permit');
+    const permitModule = await this.app.module('permit');
+    if (!permitModule) throw '!permitModule';
     const { UserModel, PermitModel } = this.app.models;
     const { password, ...userFields } = req.data;
     const loginParams = canonizeParams(req.data);
@@ -823,7 +824,7 @@ export default class Api extends BaseApi {
       type: permit.type,
       userId: user._id,
     });
-    await Promise.map(permits, p => {
+    await Promise.map(permits, (p) => {
       p.disabledAt = date; // eslint-disable-line no-param-reassign
       return p.save();
     });
