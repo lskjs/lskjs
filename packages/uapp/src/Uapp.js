@@ -384,7 +384,7 @@ export default class Uapp extends Module {
     } else {
       await this.page.exit();
     }
-    await this.page.reset();
+    await this.page.init();
     return this.page;
   }
 

@@ -13,7 +13,7 @@ const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
 // const DEBUG = true;
 
 export default class Page {
-  _page = true;
+  _page = 1;
   state = {};
   rootState = null;
 
@@ -21,9 +21,25 @@ export default class Page {
     assignProps(this, props);
   }
 
-  reset() {
+  init() {
     this.state = {};
+    this._page += 1;
   }
+  async wait(promise) {
+    const beforePageId = this._page;
+    let res;
+    let err;
+    try {
+      res = await promise;
+    } catch (error) {
+      err = error;
+    }
+    const afterPageId = this._page;
+    if (beforePageId !== afterPageId) throw 'page.parallel';
+    if (err) throw err;
+    return res;
+  }
+
   getRootState() {
     return {
       Page: 123,
@@ -33,7 +49,7 @@ export default class Page {
   getMeta() {
     const meta = (this.state && this.state.meta) || {};
     const title = (this.state.metas || [])
-      .map(t => t.title)
+      .map((t) => t.title)
       .reverse()
       .join(' - ');
     return {
@@ -59,7 +75,7 @@ export default class Page {
     debug('Page.exit');
     const { onExit } = this.state;
     if (onExit && onExit.length) {
-      await Promise.map(onExit, fn => fn());
+      await Promise.map(onExit, (fn) => fn());
       this.state.onExit = [];
     }
   }
