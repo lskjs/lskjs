@@ -204,7 +204,7 @@ export default class Api extends BaseApi {
         userId: user._id,
         user,
         permit,
-        email,
+        email: permit.info.email,
         link: this.app.url(`/auth/permit?permitId=${permit._id}&code=${permit.code}`),
       });
     }
