@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.26.0...v1.27.0) (2020-06-02)
+
+
+### Bug Fixes
+
+* **auth:** email from permit for event ([d42ab09](https://github.com/lskjs/modules/tree/master/packages/auth/commit/d42ab09c1ca976dd71e17f505ca2e45fbb768b0c))
+
+
+
+
+
 # [1.26.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.25.3...v1.26.0) (2020-05-25)
 
 
