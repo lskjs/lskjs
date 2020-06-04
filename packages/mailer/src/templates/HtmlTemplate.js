@@ -1,11 +1,29 @@
-export default class HtmlTemplate {
-  theme = { colors: {} };
-  config = {};
+import get from 'lodash/get';
 
-  fontFamily = this.theme.fontFamily;
+export default class HtmlTemplate {
+  config = {};
+  theme = {};
 
   constructor(params = {}) {
     Object.assign(this, params);
+  }
+
+  url(str) {
+    return this.mailer ? this.mailer.url(str) : str;
+  }
+
+  assetsUrl(str) {
+    return this.mailer ? this.mailer.assetsUrl(str) : str;
+  }
+
+  getTheme(name, defaultValue = '') {
+    const value = get(this, `theme.${name}`);
+    if (typeof value === 'undefined') {
+      // eslint-disable-next-line no-console
+      console.error('Template.getTheme not found:', name);
+      return defaultValue;
+    }
+    return value;
   }
 
   getUnsubscribeEvent() {
@@ -13,7 +31,11 @@ export default class HtmlTemplate {
   }
   getUnsubscribeLink() {
     const event = this.getUnsubscribeEvent();
-    return event ? this.url(`/api/mailer/unsubscribe?event=${event}`) : null;
+    let url = `/api/mailer/unsubscribe`;
+    if (event) {
+      url += `?event=${event}`;
+    }
+    return event ? this.url(url) : null;
   }
 
   getSubject() {

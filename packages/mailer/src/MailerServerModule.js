@@ -54,7 +54,7 @@ export default class MailerServerModule extends Module {
     if (this.app.i18 && this.app.i18.getT) {
       return this.app.i18.getT(props.locale || 'en');
     }
-    return a => {
+    return (a) => {
       this.app.log.error('!Mailer.getT');
       return a;
     };
@@ -77,13 +77,23 @@ export default class MailerServerModule extends Module {
     return options;
   }
 
-  getTemplateConfig() {
+  url(str) {
+    // console.log('_BASE', this);
+    if (__DEV__) return `https://staging.buzz.guru${str}`;
+    return this.app.url(str);
+  }
+
+  assetsUrl(str) {
     const assets =
       get(this.app, 'config.client.site.assets') || get(this.app, 'config.about.assets') || '/assets/mailer';
+    return this.url(assets + str);
+  }
+
+  getTemplateConfig() {
     return {
-      logo: this.app.url(`${assets}/logo.png`),
-      headerImage: this.app.url(`${assets}/header.png`),
-      about: get(this, 'app.config.client.about', {}),
+      logo: this.assetsUrl(`/logo.png`),
+      headerImage: this.assetsUrl(`/header.png`),
+      ...get(this, 'app.config.client.about', {}),
     };
   }
 
@@ -92,14 +102,13 @@ export default class MailerServerModule extends Module {
     if (!template) throw this.app.e('mailer.!template');
     const Template = this.templates[template];
     if (!Template) throw this.app.e('mailer.!Template', { template });
+    // eslint-disable-next-line no-shadow
     const config = this.getTemplateConfig();
-    if (__DEV__) console.log({ config });
-
     const email = new Template({
       // app: this.app,
+      mailer: this,
       theme: this.theme || this.app.theme,
       log: this.app.log,
-      url: this.app.url,
       t: this.getT(otherProps.locale),
       config,
       props,

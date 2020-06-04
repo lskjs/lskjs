@@ -5,7 +5,8 @@ import HtmlTemplate from './HtmlTemplate';
 
 export default class MjmlTemplate extends HtmlTemplate {
   getHtml() {
-    const { errors, html } = mjml2html(this.render());
+    const mjml = this.render();
+    const { errors, html } = mjml2html(mjml);
     if (__DEV__) {
       if (errors && errors.length) {
         this.log.error('Template.getHtml mjml', errors);
@@ -14,16 +15,23 @@ export default class MjmlTemplate extends HtmlTemplate {
     return html;
   }
 
-  font(name, gFontsLink) {
-    const fontStr = `'${name}', sans-serif;`;
-    this.fontFamily = fontStr;
+  head() {
     return `
-      <mj-font name="${name}" href="${gFontsLink}" />
-      <mj-style inline="inline">
-        body {
-          font-family: ${fontStr}
-        }
-      </mj-style>
+<mj-title>${this.getSubject()}</mj-title>
+<mj-font name="Gotham Pro" href="${this.assetsUrl('/fonts/stylesheet.css')}" />
+<mj-style inline="inline"></mj-style>
+`;
+  }
+
+  font(name, fontLink) {
+    const fontStr = `'${this.getTheme('fontFamily')}', sans-serif;`;
+    return `
+<mj-font name="${name}" href="${fontLink}" />
+<mj-style inline="inline">
+  body {
+    font-family: ${fontStr}
+  }
+</mj-style>
     `;
   }
 
@@ -57,12 +65,13 @@ export default class MjmlTemplate extends HtmlTemplate {
   copyrights({ title, subtitle }) {
     return `
       <mj-column width="100%">
-        ${subtitle &&
+        ${
+          subtitle &&
           `
           <mj-text
             align="center"
-            color="${get(this, 'theme.colors.secondary')}"
-            font-family="${this.fontFamily}"
+            color="${this.getTheme('colors.secondary')}"
+            font-family="${this.getTheme('fontFamily')}"
             line-height="20px"
             font-size="14px"
             padding-top="32px"
@@ -70,11 +79,12 @@ export default class MjmlTemplate extends HtmlTemplate {
           >
             ${subtitle}
           </mj-text>
-        `}
+        `
+        }
         <mj-text
           align="center"
-          color="${get(this, 'theme.colors.secondary')}"
-          font-family="${this.fontFamily}"
+          color="${this.getTheme('colors.secondary')}"
+          font-family="${this.getTheme('fontFamily')}"
           line-height="20px"
           font-size="14px"
           padding-top="0px"
@@ -91,14 +101,14 @@ export default class MjmlTemplate extends HtmlTemplate {
         <mj-table padding-bottom="32px">
           <tr>
             ${list
-              .filter(item => item.title || item.href)
+              .filter((item) => item.title || item.href)
               .map(
                 (item, index) => `
               <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
                 <a href="${item.href}" target="_blank" style="color: ${get(
                   this,
                   'theme.colors.primary',
-                )}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
+                )}; text-decoration: none; font-family: ${this.getTheme('fontFamily')}; font-size: 14px">
                   ${item.title}
                 </a>
               </td>
@@ -115,8 +125,8 @@ export default class MjmlTemplate extends HtmlTemplate {
     return `
       <mj-column width="95%">
         <mj-text
-          font-family="${this.fontFamily}"
-          color="${get(this, 'theme.colors.main')}"
+          font-family="${this.getTheme('fontFamily')}"
+          color="${this.getTheme('colors.main')}"
           font-size="28px"
           line-height="34px"
           align="center"
@@ -131,8 +141,8 @@ export default class MjmlTemplate extends HtmlTemplate {
     return `
       <mj-column width="80%">
         <mj-text
-          font-family="${this.fontFamily}"
-          color="${get(this, 'theme.colors.main')}"
+          font-family="${this.getTheme('fontFamily')}"
+          color="${this.getTheme('colors.main')}"
           align="center"
           font-size="20px"
           padding-top="10px"
@@ -149,8 +159,8 @@ export default class MjmlTemplate extends HtmlTemplate {
     return `
       <mj-column width="80%">
         <mj-text
-          font-family="${this.fontFamily}"
-          color="${get(this, 'theme.colors.secondary')}"
+          font-family="${this.getTheme('fontFamily')}"
+          color="${this.getTheme('colors.secondary')}"
           font-size="16px"
           line-height="26px"
           align="center"
@@ -168,7 +178,7 @@ export default class MjmlTemplate extends HtmlTemplate {
     return `
       <mj-column width="100%">
         <mj-button
-          font-family="${this.fontFamily}"
+          font-family="${this.getTheme('fontFamily')}"
           background-color="${backgroundColor}"
           text-transform="uppercase"
           line-height="26px"
@@ -197,7 +207,7 @@ export default class MjmlTemplate extends HtmlTemplate {
 
   content(children) {
     return `
-      <mj-section background-color="${get(this, 'theme.colors.white')}" padding="32px 0px 12px">
+      <mj-section background-color="${this.getTheme('colors.white')}" padding="32px 0px 12px">
         ${children}
       </mj-section>
     `;

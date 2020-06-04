@@ -30,16 +30,17 @@ export default class BaseTemplate extends MjmlTemplate {
     `;
   }
   copyrights({ title, subtitle } = {}) {
-    if (!title) title = get(this, 'config.about.copyright');
-    if (!subtitle) subtitle = get(this, 'config.about.address');
+    if (!title) title = get(this, 'config.copyright');
+    if (!subtitle) subtitle = get(this, 'config.address');
     return `
       <mj-column width="100%">
-        ${subtitle &&
+        ${
+          subtitle &&
           `
           <mj-text
             align="center"
-            color="${get(this, 'theme.colors.secondary')}"
-            font-family="${this.fontFamily}"
+            color="${this.getTheme('colors.secondary')}"
+            font-family="${this.getTheme('fontFamily')}"
             line-height="20px"
             font-size="14px"
             padding-top="32px"
@@ -47,13 +48,15 @@ export default class BaseTemplate extends MjmlTemplate {
           >
             ${subtitle}
           </mj-text>
-        `}
-        ${subtitle &&
+        `
+        }
+        ${
+          subtitle &&
           `
           <mj-text
             align="center"
-            color="${get(this, 'theme.colors.secondary')}"
-            font-family="${this.fontFamily}"
+            color="${this.getTheme('colors.secondary')}"
+            font-family="${this.getTheme('fontFamily')}"
             line-height="20px"
             font-size="14px"
             padding-top="0px"
@@ -61,7 +64,8 @@ export default class BaseTemplate extends MjmlTemplate {
             <!-- &copy; -->
             ${title}
           </mj-text>
-        `}
+        `
+        }
       </mj-column>
     `;
   }
@@ -75,10 +79,9 @@ export default class BaseTemplate extends MjmlTemplate {
               .map(
                 (item, index) => `
               <td align="center" style="${index ? 'border-left: 1px solid #1890ff;' : ''}">
-                <a href="${item.href}" target="_blank" style="color: ${get(
-                  this,
-                  'theme.colors.primary',
-                )}; text-decoration: none; font-family: ${this.fontFamily}; font-size: 14px">
+                <a href="${item.href}" target="_blank" 
+                  style="color: ${this.getTheme('colors.primary')}; 
+                  text-decoration: none; font-family: ${this.getTheme('fontFamily')}; font-size: 14px">
                   ${item.title}
                 </a>
               </td>
@@ -99,7 +102,7 @@ export default class BaseTemplate extends MjmlTemplate {
           ${this.font('Roboto', 'https://fonts.googleapis.com/css?family=Roboto:400,400i,700&amp;subset=cyrillic')}
         </mj-head>
         <mj-body>
-          <mj-container background-color="${get(this, 'theme.colors.mainBackground')}">
+          <mj-container background-color="${this.getTheme('colors.mainBackground')}">
             ${!logo ? '' : this.logo({ src: logo })}
     `;
   }
@@ -111,10 +114,10 @@ export default class BaseTemplate extends MjmlTemplate {
               ${this.footerLinks([
                 {
                   href: this.url('/'),
-                  title: get(this, 'config.about.title'),
+                  title: get(this, 'config.title'),
                 },
                 {
-                  href: `mailto:${get(this, 'config.about.email')}`,
+                  href: `mailto:${get(this, 'config.email')}`,
                   title: this.t('mailer.contactEmail'),
                 },
                 {
