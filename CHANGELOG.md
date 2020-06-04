@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.1](https://github.com/lskjs/lskjs/compare/v1.29.0...v1.29.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* **grant:** add bluebird ([2a12fb7](https://github.com/lskjs/lskjs/commit/2a12fb722dedb834f97dc59b882ab54f00b567d2))
+
+
+
+
+
 # [1.29.0](https://github.com/lskjs/lskjs/compare/v1.28.0...v1.29.0) (2020-06-04)
 
 
