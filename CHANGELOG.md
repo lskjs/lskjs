@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.2](https://github.com/lskjs/lskjs/compare/v1.29.1...v1.29.2) (2020-06-04)
+
+
+### Bug Fixes
+
+* **grant:** fix can api ([9576fda](https://github.com/lskjs/lskjs/commit/9576fdaec38d8c47c9b9e9ef05bf3df01a3e9c57))
+
+
+
+
+
 ## [1.29.1](https://github.com/lskjs/lskjs/compare/v1.29.0...v1.29.1) (2020-06-04)
 
 
