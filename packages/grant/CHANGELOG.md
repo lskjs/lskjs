@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.28.0...v1.29.0) (2020-06-04)
+
+
+### Features
+
+* **grant:** getCache ([09f2bb9](https://github.com/lskjs/lskjs/tree/master/packages/grant/commit/09f2bb9f0a3dbb1c28488fb2be86faed5e0c56ec))
+
+
+
+
+
 # [1.28.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.27.0...v1.28.0) (2020-06-04)
 
 **Note:** Version bump only for package @lskjs/grant
