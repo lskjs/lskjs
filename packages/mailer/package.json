@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "1.27.0",
+  "version": "1.28.0",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@lskjs/module": "1.27.0",
-    "@lskjs/server-api": "1.27.0",
+    "@lskjs/server-api": "1.28.0",
     "bluebird": "3.7.2",
     "lodash": "4.17.15",
     "moment": "2.24.0"

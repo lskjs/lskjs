@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.27.0...v1.28.0) (2020-06-04)
+
+
+### Features
+
+* **mailer:** stable mjml  templates ([2cd4ed2](https://github.com/lskjs/modules/tree/master/packages/mailer/commit/2cd4ed2eb3be054e228b0bb86748f1db4147b615))
+
+
+
+
+
 # [1.27.0](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.26.0...v1.27.0) (2020-06-02)
 
 **Note:** Version bump only for package @lskjs/mailer
