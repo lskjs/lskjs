@@ -1,5 +1,6 @@
 import Module from '@lskjs/module';
 import createLogger from '@lskjs/utils/createLogger';
+import hashCode from '@lskjs/utils/hashCode';
 import isObject from 'lodash/isObject';
 
 const DEBUG = __DEV__ && false;
@@ -54,6 +55,10 @@ export default class GrantModule extends Module {
     }
     return this.app.models.UserModel.findById(userId);
   }
+  async hasRule(rule) {
+    const { action } = await this.getParams(rule);
+    return !!this.rules[action];
+  }
   async can(...args) {
     const params = await this.getParams(args);
     const { action } = params;
@@ -63,5 +68,22 @@ export default class GrantModule extends Module {
       return rules[action].bind(this)(params);
     }
     return null;
+  }
+  async getCache(initRules) {
+    const rules = {};
+    await Promise.map(initRules, async (rule) => {
+      // const { action } = await this.getParams(rule);
+      const hash = hashCode(rule);
+      const res = await this.can(rule);
+      rules[hash] = res;
+      return res;
+    });
+    return {
+      rules,
+      can(rule) {
+        const hash = hashCode(rule);
+        return rules[hash] || null;
+      },
+    };
   }
 }
