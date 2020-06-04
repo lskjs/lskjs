@@ -2,6 +2,7 @@ import Module from '@lskjs/module';
 import createLogger from '@lskjs/utils/createLogger';
 import hashCode from '@lskjs/utils/hashCode';
 import isObject from 'lodash/isObject';
+import Promise from 'bluebird';
 
 const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
