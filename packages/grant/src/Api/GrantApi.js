@@ -12,6 +12,7 @@ export default class GrantApi extends Api {
     const grant = await this.app.module('grant');
     if (!isPlainObject(rule)) throw 'data is not object';
     if (rule.userId && rule.userId !== userId) {
+      // eslint-disable-next-line no-console
       console.log('ALARMAAAAAA ALARMAAAAAAALARMAAAAAAALARMAAAAAA -- userId is changed');
     }
     const res = await grant.can({
@@ -22,7 +23,7 @@ export default class GrantApi extends Api {
   }
   async can(req) {
     const userId = req.user && req.user._id;
-    return this.check(userId, req.data);
+    return this.check(req.data, userId);
   }
   async batch(req) {
     const userId = req.user && req.user._id;

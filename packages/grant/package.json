@@ -31,18 +31,15 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
+    "@lskjs/utils": "1.27.0",
+    "@lskjs/module": "1.27.0",
+    "@lskjs/server-api": "1.28.0",
     "bluebird": "^3.7.2"
   },
   "devDependencies": {
-    "@lskjs/module": "1.27.0",
-    "@lskjs/server-api": "1.28.0",
-    "@lskjs/utils": "1.27.0",
     "lodash": "4.17.15"
   },
   "peerDependencies": {
-    "@lskjs/module": "*",
-    "@lskjs/server-api": "*",
-    "@lskjs/utils": "*",
     "lodash": "*"
   }
 }
