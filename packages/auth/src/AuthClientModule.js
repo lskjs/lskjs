@@ -29,6 +29,12 @@ export default class AuthClientModule extends Module {
   async run() {
     await super.run();
     await this.loadStore();
+    if (this.store.isAuth()) {
+      const timeout = __DEV__ ? 10000 : 1000;
+      setTimeout(() => {
+        this.updateSession();
+      }, timeout);
+    }
   }
 
   setToken(token, expires = 365, cookies = true) {
@@ -93,7 +99,11 @@ export default class AuthClientModule extends Module {
   }
 
   isAuth() {
-    return !!this.store.session;
+    return !!(this.store && this.store.session && this.store.session._id);
+  }
+
+  getSession() {
+    return this.store && this.store.session;
   }
 
   async logout(redirect = true) {
@@ -110,6 +120,12 @@ export default class AuthClientModule extends Module {
 
   async login(...args) {
     const res = await this.store.login(...args);
+    await this.saveStore();
+    return res;
+  }
+
+  async updateSession(...args) {
+    const res = await this.store.updateSession(...args);
     await this.saveStore();
     return res;
   }

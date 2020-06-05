@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
+import forEach from 'lodash/forEach';
 import Api from '@lskjs/mobx/stores/Api';
 import Store from '@lskjs/mobx/stores/Store';
 
@@ -47,6 +48,12 @@ export class AuthApi extends Api {
       data,
     });
   }
+  session(data) {
+    return this.fetch(`${this.base}/session`, {
+      method: 'POST',
+      data,
+    });
+  }
   info(data) {
     return this.fetch(`${this.base}/info`, {
       method: 'POST',
@@ -89,28 +96,27 @@ export class AuthApi extends Api {
   // }
 }
 
-export default uapp =>
+export default (uapp) =>
   class AuthStore extends Store {
     static api = new AuthApi({ uapp });
     @observable session = null;
     @observable sessions = [];
     // @computed isAuth() {
     // }
-    async applySession({ user, token }) {
-      let session = this.sessions.filter(s => s._id === user._id)[0];
-      if (session) {
-        session.token = token;
-        session.user = user;
-      } else {
-        session = {
-          _id: user._id,
-          user,
-          token,
-        };
+    @action
+    async applySession({ _id, ...props }) {
+      let session = this.sessions.filter((s) => s._id === _id)[0];
+      if (!session) {
+        session = { _id };
         this.sessions.push(session);
       }
+      forEach(props, (value, key) => {
+        session[key] = value;
+      });
       this.session = session;
-      // if (!this.session) this.session = session;
+    }
+    isAuth() {
+      return !!(this.session && this.session._id);
     }
     async login(props) {
       const session = await this.constructor.api.login(props);
@@ -122,8 +128,13 @@ export default uapp =>
       this.applySession(session);
       return session;
     }
+    async updateSession(props) {
+      const { data: session } = await this.constructor.api.session(props);
+      this.applySession(session);
+      return session;
+    }
     async logout() {
-      this.sessions = this.sessions.filter(s => s._id !== this.session._id);
+      this.sessions = this.sessions.filter((s) => s._id !== this.session._id);
       // eslint-disable-next-line prefer-destructuring
       this.session = this.sessions[0];
     }

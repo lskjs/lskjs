@@ -46,6 +46,7 @@ export default class Api extends BaseApi {
       // '/phone/login': ::this.phoneLogin,
       //
       '/status': ::this.status,
+      '/session': ::this.session,
       '/check': ::this.check,
 
       // Регистрация пользователя через соц сеть
@@ -104,23 +105,12 @@ export default class Api extends BaseApi {
   }
 
   async status(req) {
-    await this.isAuth(req);
-    const { _id } = req.user;
-    const { UserModel } = this.app.models;
-    const user = await UserModel.findOne({ _id });
-    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
-    const token = this.helpers.generateAuthToken(user);
-    return {
-      api: {
-        v: 1,
-        isExpired: false,
-        actualApi: '/api',
-      },
-      // state: await this.app.getAppState(_id),
-      token,
-      status: await user.getStatus(),
-      user: await UserModel.prepare(user, { req, view: 'extended' }),
-    };
+    return {};
+  }
+
+  async session(req) {
+    const authModule = await this.app.module('auth');
+    return authModule.getAuthSession(req);
   }
 
   async check(req) {

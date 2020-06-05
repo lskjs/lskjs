@@ -80,7 +80,7 @@ export default class AuthServerModule extends Module {
     const providers = get(this, 'config.providers', {});
     // console.log({ providers });
 
-    forEach(providers, config => {
+    forEach(providers, (config) => {
       const { provider, type, ...strategyConfig } = config;
       const StrategyProvider = this.strategyProviders[type];
       if (!StrategyProvider) return;
@@ -97,9 +97,26 @@ export default class AuthServerModule extends Module {
     });
   }
 
+  async getAuthSession(req) {
+    const userId = req.user && req.user._id;
+    if (!userId) return {};
+    const { UserModel } = this.app.models;
+    const user = await UserModel.findOne({ _id: userId });
+    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
+    const token = this.helpers.generateAuthToken(user);
+    return {
+      // api
+      // state: await this.app.getAppState(_id),
+      // status: await user.getStatus(),
+      _id: userId,
+      token,
+      user: await UserModel.prepare(user, { req, view: 'extended' }),
+    };
+  }
+
   async run() {
     this.log.debug('strategies', Object.keys(this.strategies));
-    forEach(this.strategies || [], strategy => {
+    forEach(this.strategies || [], (strategy) => {
       this.passportService.use(strategy.getPassportStrategy());
     });
   }
