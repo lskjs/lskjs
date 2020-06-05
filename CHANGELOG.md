@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://github.com/lskjs/lskjs/compare/v1.29.3...v1.30.0) (2020-06-05)
+
+
+### Features
+
+* **upload:** stable s3 upload, fix extention detection of blob files ([16bf4a5](https://github.com/lskjs/lskjs/commit/16bf4a56691380493ea26b779fd910cdc435e708))
+
+
+
+
+
 ## [1.29.3](https://github.com/lskjs/lskjs/compare/v1.29.2...v1.29.3) (2020-06-05)
 
 
