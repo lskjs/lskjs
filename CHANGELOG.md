@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.3](https://github.com/lskjs/lskjs/compare/v1.29.2...v1.29.3) (2020-06-05)
+
+
+### Bug Fixes
+
+* **apiquery:** add Bearer prefix ([55b511f](https://github.com/lskjs/lskjs/commit/55b511f9104434e8125a20a172a6c42dee0bf71a))
+
+
+
+
+
 ## [1.29.2](https://github.com/lskjs/lskjs/compare/v1.29.1...v1.29.2) (2020-06-04)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.3](https://github.com/lskjs/ux/tree/master/packages/apiquery/compare/v1.29.2...v1.29.3) (2020-06-05)
+
+
+### Bug Fixes
+
+* **apiquery:** add Bearer prefix ([55b511f](https://github.com/lskjs/ux/tree/master/packages/apiquery/commit/55b511f9104434e8125a20a172a6c42dee0bf71a))
+
+
+
+
+
 # [1.15.0](https://github.com/lskjs/ux/tree/master/packages/apiquery/compare/v1.14.3...v1.15.0) (2020-03-25)
 
 
