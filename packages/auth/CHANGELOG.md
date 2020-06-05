@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.30.0...v1.31.0) (2020-06-05)
+
+
+### Features
+
+* **auth:** getSession ([4fffeef](https://github.com/lskjs/modules/tree/master/packages/auth/commit/4fffeef41349817458fb658f420d0d83f3fc0e38))
+
+
+
+
+
 ## [1.29.3](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.29.2...v1.29.3) (2020-06-05)
 
 **Note:** Version bump only for package @lskjs/auth
