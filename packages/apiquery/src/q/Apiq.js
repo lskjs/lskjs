@@ -12,7 +12,7 @@ export default class Apiq {
   }
   setToken(token) {
     this.authToken = token;
-    this.instance.defaults.headers.common.Authorization = token;
+    this.instance.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
   setAuthToken(token) {
     this.setToken(token);
