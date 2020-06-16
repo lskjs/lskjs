@@ -5,26 +5,30 @@ export default class UploadClientModule extends Module {
   name = 'UploadClientModule';
   async uploadFiles(files) {
     if (typeof window === 'undefined') throw '!FormData';
-    return Promise.map(files, file => this.uploadFile(file));
+    return Promise.map(files, (file) => this.uploadFile(file));
   }
   async uploadFile(file) {
     if (typeof window === 'undefined') throw '!FormData';
     const { FormData } = window;
-    const data = new FormData();
-    data.append('file', file);
-    const res = await this.app.apiq.post('/api/upload/file', data, {
+    const formData = new FormData();
+    formData.append('file', file);
+    const {
+      data: { data },
+    } = await this.app.apiq.post('/api/upload/file', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return res.data;
+    return data;
   }
   async uploadImage(formData) {
-    const res = await this.app.apiq.post('/api/upload/image', formData, {
+    const {
+      data: { data },
+    } = await this.app.apiq.post('/api/upload/image', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return res.data;
+    return data;
   }
 }
