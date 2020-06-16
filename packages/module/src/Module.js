@@ -21,7 +21,8 @@ export default class Module {
     return logger.createLogger({
       name: this.name || 'app',
       src: __DEV__,
-      level: 'trace',
+      // level: 'trace',
+      level: __DEV__ ? (__STAGE__ === 'isuvorov' ? 'trace' : 'debug') : __STAGE__ === 'production' ? 'error' : 'warn', // eslint-disable-line no-nested-ternary
       ...get(this, 'config.log', {}),
       ...params,
     });
