@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.2](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.32.1...v1.32.2) (2020-06-16)
+
+
+### Bug Fixes
+
+* **module:** remove trace log levels ([d344f7a](https://github.com/lskjs/lskjs/tree/master/packages/grant/commit/d344f7acad7c49163d3dd3ebc9dda6c95906427f))
+
+
+
+
+
 ## [1.29.2](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.29.1...v1.29.2) (2020-06-04)
 
 
