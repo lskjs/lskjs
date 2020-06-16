@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.31.0...v1.32.0) (2020-06-16)
+
+
+### Features
+
+* **auth:** getSession and getUserId in store ([faccc84](https://github.com/lskjs/modules/tree/master/packages/auth/commit/faccc8417a7fb64ac9457ef61e1113950c0e1ab0))
+
+
+
+
+
 # [1.31.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.30.0...v1.31.0) (2020-06-05)
 
 
