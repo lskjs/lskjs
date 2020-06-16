@@ -101,8 +101,6 @@ export default (uapp) =>
     static api = new AuthApi({ uapp });
     @observable session = null;
     @observable sessions = [];
-    // @computed isAuth() {
-    // }
     @action
     async applySession({ _id, ...props }) {
       let session = this.sessions.filter((s) => s._id === _id)[0];
@@ -115,9 +113,17 @@ export default (uapp) =>
       });
       this.session = session;
     }
-    isAuth() {
-      return !!(this.session && this.session._id);
+    getSession() {
+      return this.session;
     }
+    getUserId() {
+      const session = this.getSession();
+      return session ? session._id : null;
+    }
+    isAuth() {
+      return !!this.getUserId();
+    }
+
     async login(props) {
       const session = await this.constructor.api.login(props);
       this.applySession(session);

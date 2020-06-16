@@ -99,11 +99,13 @@ export default class AuthClientModule extends Module {
   }
 
   isAuth() {
-    return !!(this.store && this.store.session && this.store.session._id);
+    return this.store.isAuth();
   }
-
   getSession() {
-    return this.store && this.store.session;
+    return this.store.getSession();
+  }
+  getUserId() {
+    return this.store.getUserId();
   }
 
   async logout(redirect = true) {
@@ -168,10 +170,6 @@ export default class AuthClientModule extends Module {
 
   authPassport(provider) {
     window.location = `/api/module/auth/${provider}`;
-  }
-
-  getUserId() {
-    return get(this, 'store.session._id');
   }
 }
 
