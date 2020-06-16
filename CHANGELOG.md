@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.1](https://github.com/lskjs/lskjs/compare/v1.32.0...v1.32.1) (2020-06-16)
+
+
+### Bug Fixes
+
+* **upload:** return data, without wrapper ([711c0c8](https://github.com/lskjs/lskjs/commit/711c0c8b561dd9cc83086e46c7e5148ec5cc3920))
+
+
+
+
+
 # [1.32.0](https://github.com/lskjs/lskjs/compare/v1.31.0...v1.32.0) (2020-06-16)
 
 
