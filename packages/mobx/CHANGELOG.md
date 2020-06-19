@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.3](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.32.2...v1.32.3) (2020-06-19)
+
+
+### Bug Fixes
+
+* **mobx:** updated method in list ([100bbd1](https://github.com/lskjs/modules/tree/master/packages/mobx/commit/100bbd12f0b719a7f45a714db59e24fc81034311))
+
+
+
+
+
 # [1.27.0](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.26.0...v1.27.0) (2020-06-02)
 
 **Note:** Version bump only for package @lskjs/mobx

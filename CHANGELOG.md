@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.3](https://github.com/lskjs/lskjs/compare/v1.32.2...v1.32.3) (2020-06-19)
+
+
+### Bug Fixes
+
+* **mobx:** updated method in list ([100bbd1](https://github.com/lskjs/lskjs/commit/100bbd12f0b719a7f45a714db59e24fc81034311))
+* **reactapp:** write globals in ssr ([f8683e8](https://github.com/lskjs/lskjs/commit/f8683e83870632bffa208ff8decd63d1d29c9a70))
+
+
+
+
+
 ## [1.32.2](https://github.com/lskjs/lskjs/compare/v1.32.1...v1.32.2) (2020-06-16)
 
 
