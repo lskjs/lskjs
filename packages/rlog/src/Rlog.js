@@ -97,8 +97,10 @@ class Rlog {
   }
 
   async send(action, text, params = {}) {
-    const prefix = params.prefix || this.prefix;
+    const base = params.base || this.base;
+    const project = params.project || this.project;
     const secret = params.secret || this.secret;
+    const prefix = params.prefix || this.prefix;
     const limits = params.limits || this.limits;
     const clog = clogs[action] || clogs._default;
     const status = statuses[action] || statuses._default;
@@ -114,7 +116,7 @@ class Rlog {
     const md = `${status}  ${prefix} ${[text, errText].filter(a => a).join('\n')}\n\n${tags}`.trim();
     clog(md);
 
-    const url = [this.base, this.project].join('/');
+    const url = [base, project].join('/');
     // console.log({url});
 
     return axios
