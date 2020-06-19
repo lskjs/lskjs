@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.1](https://github.com/lskjs/lskjs/compare/v1.33.0...v1.33.1) (2020-06-19)
+
+
+### Bug Fixes
+
+* **reactapp:** globals in ssr ([8199c1c](https://github.com/lskjs/lskjs/commit/8199c1c5e41112d302f82e1029b6b396e3e0f124))
+
+
+
+
+
 # [1.33.0](https://github.com/lskjs/lskjs/compare/v1.32.3...v1.33.0) (2020-06-19)
 
 
