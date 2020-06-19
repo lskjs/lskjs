@@ -27,7 +27,6 @@ export default class ListStore extends FetchStore {
     if (!this.selectStore) this.selectStore = new SelectStore({ listStore: this });
   }
 
-
   getState() {
     return {
       skip: this.skip,
@@ -52,9 +51,8 @@ export default class ListStore extends FetchStore {
     return this;
   }
 
-
   // TODO: переписать на норм subscribe модель
-  updated() { }
+  updated = () => {};
   subscribe(callback) {
     this.updated = callback;
     return () => {
@@ -72,7 +70,7 @@ export default class ListStore extends FetchStore {
    */
   @computed
   get hasFilter() {
-    return !every(Object.values(this.filter), a => isEmpty(a)) || !isEmpty(this.search);
+    return !every(Object.values(this.filter), (a) => isEmpty(a)) || !isEmpty(this.search);
   }
 
   @computed
@@ -87,7 +85,7 @@ export default class ListStore extends FetchStore {
 
   @computed
   get getActiveFilter() {
-    return filter(this.filterUi, a => !isEmpty(a)).length;
+    return filter(this.filterUi, (a) => !isEmpty(a)).length;
   }
 
   map(...args) {
@@ -108,8 +106,8 @@ export default class ListStore extends FetchStore {
     return Math.floor(this.count / this.limit) + 1;
   }
   /**
-    * @param {Number} page - page from 1
-    */
+   * @param {Number} page - page from 1
+   */
   @autobind
   setPage(page) {
     this.setStateAndUpdate({
