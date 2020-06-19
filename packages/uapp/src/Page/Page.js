@@ -44,7 +44,6 @@ export default class Page {
 
   getRootState() {
     return {
-      Page: 123,
       ...(this.rootState || {}),
     };
   }

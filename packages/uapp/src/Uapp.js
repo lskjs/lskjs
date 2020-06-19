@@ -75,7 +75,6 @@ export default class Uapp extends Module {
   getRootState() {
     return {
       ...(this.rootState || {}),
-      Uapp: __CLIENT__ ? 'client 123' : 'server 321',
     };
   }
 

@@ -129,16 +129,20 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   js = '';
   renderJS() {
     const { js = '' } = this;
-    return `\
-${this.renderGlobals()}\
-${js}\
-`;
+    return js;
   }
 
   globals = {};
   renderGlobals() {
     const { globals = {} } = this;
-    return serializeWindow(globals, serialize);
+    return serializeWindow(
+      {
+        __DEV__,
+        __STAGE__,
+        ...globals,
+      },
+      serialize,
+    );
   }
 
   footer = '';
@@ -172,6 +176,7 @@ ${this.renderHead()}\
 ${this.content}\
 </div>\
 ${this.renderRootState()}\
+${this.renderGlobals()}\
 ${this.renderAsset('vendor.js')}\
 ${this.renderAsset('main.js')}\
 ${this.renderFooter()}\

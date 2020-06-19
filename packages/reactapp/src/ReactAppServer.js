@@ -18,7 +18,6 @@ export default class ReactAppServer extends Module {
 
   getRootState({ req, uappReq, ...props }) {
     return {
-      ReactAppServer: 123,
       req: {
         reqId: req.reqId,
         user: req.user,
@@ -41,7 +40,7 @@ export default class ReactAppServer extends Module {
         initialEntries: [req.originalUrl],
       }),
       req: uappReq,
-      rootState: this.getRootState({ req, some: { test: 123 } }),
+      rootState: this.getRootState({ req }),
       config,
       app: this,
     });
