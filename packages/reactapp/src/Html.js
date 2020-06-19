@@ -135,7 +135,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
   globals = {};
   renderGlobals() {
     const { globals = {} } = this;
-    return serializeWindow(
+    const str = serializeWindow(
       {
         __DEV__,
         __STAGE__,
@@ -143,6 +143,12 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
       },
       serialize,
     );
+    if (!str) return '';
+    return `\
+<script>\
+${str}\
+</script>\
+`;
   }
 
   footer = '';
@@ -157,6 +163,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
     } else {
       rootStateStr = serializeWindow({ __ROOT_STATE__: this.rootState }, serialize);
     }
+    if (!rootStateStr) return '';
     return `\
 <script>\
 ${rootStateStr}\
