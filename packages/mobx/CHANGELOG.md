@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.33.1...v1.34.0) (2020-06-22)
+
+
+### Features
+
+* **mobx:** fetch callback ([e8f793e](https://github.com/lskjs/modules/tree/master/packages/mobx/commit/e8f793e2a676e7bf94c1f2afc7d0ac9358e0542a))
+
+
+
+
+
 ## [1.32.3](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.32.2...v1.32.3) (2020-06-19)
 
 
