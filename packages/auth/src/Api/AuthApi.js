@@ -1,4 +1,4 @@
-// import validator from 'validator';
+import Promise from 'bluebird';
 import merge from 'lodash/merge';
 import random from 'lodash/random';
 import set from 'lodash/set';
@@ -180,12 +180,13 @@ export default class Api extends BaseApi {
       const { email } = loginParams;
       const code = await permitModule.genCode('emailVerifyStrong');
       const permit = await PermitModel.createPermit({
-        expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
-        type: 'auth.verifyEmail',
+        expiredAt: PermitModel.createExpiredAt(UserModel.restorePasswordLiveTime),
+        type: 'auth.confirmEmail',
         userId: user._id,
         info: {
-          userId: user._id,
+          provider: 'email',
           email,
+          userId: user._id,
         },
         code,
       });
@@ -209,9 +210,49 @@ export default class Api extends BaseApi {
     };
   }
 
+  async permitAction({ req, permit }) {
+    const { UserModel, PermitModel } = this.app.models;
+    if (permit.type === 'auth.confirmEmail') {
+      const { email } = permit.info;
+      const user = await UserModel.findOne({ email }).sort({ createdAt: 1 });
+      if (!user) throw '!user';
+      await permit.activate();
+      user.setStatus('confirmEmailAt', new Date());
+      await user.save();
+      const token = this.helpers.generateAuthToken(user);
+      return Promise.props({
+        __pack: true,
+        user: UserModel.prepare(user, { req }),
+        token,
+        data: {
+          permit: PermitModel.prepare(permit, { req }),
+        },
+      });
+    }
+    if (permit.type === 'auth.restorePassword') {
+      const { password } = req.data;
+      const user = await UserModel.findById(permit.userId);
+      if (!user) throw '!user';
+      await permit.activate();
+      await this.helpers.setPassword(user, password);
+      user.setStatus('passwordAt', new Date());
+      await user.save();
+      const token = this.helpers.generateAuthToken(user);
+      return Promise.props({
+        __pack: true,
+        user: UserModel.prepare(user, { req }),
+        token,
+        data: {
+          permit: PermitModel.prepare(permit, { req }),
+        },
+      });
+    }
+    throw 'permit.incorrectType';
+  }
+
   async confirmPermit(req) {
     const { code, permitId } = req.data;
-    const { UserModel, PermitModel } = this.app.models;
+    const { PermitModel } = this.app.models;
     if (!code) throw '!code';
     if (!permitId) throw this.app.e('permit.permitIdEmpty', { status: 400 });
     // const permit = await PermitModel.findById(permitId);
@@ -219,55 +260,13 @@ export default class Api extends BaseApi {
     const permit = await PermitModel.findById(permitId);
     if (!permit) throw this.app.e('permit.permitNotFound', { status: 404 });
     const status = permit.getStatus();
-    if (__STAGE__ === 'isuvorov') console.log('permit.status', status);
 
     if (status !== 'valid') {
       throw this.app.e('permit.statusInvalid', { status: 400, data: { status } });
     }
     if (code !== permit.code) throw this.app.e('permit.codeInvalid', { status: 400 });
 
-    const { provider } = permit.info;
-    if (!provider) throw '!provider';
-
-    if (!permit.info[provider]) throw '!permit.info[provider]';
-    const params = {
-      [provider]: permit.info[provider],
-    };
-
-    const operation = await this.getOperation(req, { provider, params });
-
-    let user;
-    if (operation === 'signup') {
-      user = new UserModel(params);
-      user.editedAt = new Date();
-      user.signinAt = new Date();
-    } else if (operation === 'login') {
-      user = await UserModel.findOne(params).sort({ createdAt: 1 });
-      if (!user) throw '!user';
-      user.signinAt = new Date();
-    } else if (operation === 'attach') {
-      if (!req.user) throw '!user';
-      user = await UserModel.findById(req.user._id);
-      if (!user) throw '!user';
-      user[provider] = permit.info[provider];
-      user.editedAt = new Date();
-      const user2 = await UserModel.findOne(params);
-      if (user2) throw 'HAS_BEEN_ATTACHED';
-    } else {
-      throw '!operation';
-    }
-
-    await permit.activate();
-    await user.save();
-    const token = user.generateAuthToken();
-    // console.log(`auth/confirm ${user._id} ${token}`); // this.app.logger
-    return {
-      isNew: operation === 'signup',
-      operation,
-      token,
-      status: await user.getStatus(),
-      user: await UserModel.prepare(user, { req, view: 'extended' }),
-    };
+    return this.permitAction({ req, permit });
   }
 
   async restorePassword(req) {
@@ -284,7 +283,7 @@ export default class Api extends BaseApi {
     }
     const code = await permitModule.genCode('emailVerifyStrong');
     const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.makeExpiredAt(UserModel.restorePasswordLiveTime),
+      expiredAt: PermitModel.createExpiredAt(UserModel.restorePasswordLiveTime),
       type: 'user.restorePassword',
       userId: user._id,
       info: {
@@ -738,7 +737,7 @@ export default class Api extends BaseApi {
       },
     });
     const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.makeExpiredAt(UserModel.changeEmailLiveTime),
+      expiredAt: PermitModel.createExpiredAt(UserModel.changeEmailLiveTime),
       type: `user.${type}Email`,
       userId: user._id,
       info: {

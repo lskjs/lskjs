@@ -3,16 +3,10 @@ import MongooseSchema from '@lskjs/db/MongooseSchema';
 export default () => {
   const schema = new MongooseSchema(
     {
-      _type: {
-        type: String,
-      },
       role: {
         type: String,
       },
       email: {
-        type: String,
-      },
-      phone: {
         type: String,
       },
       password: {
@@ -24,11 +18,28 @@ export default () => {
       avatar: {
         type: String,
       },
+      profile: {
+        type: Object,
+      },
       info: {
         type: Object,
       },
-      meta: {
+      private: {
         type: Object,
+      },
+      statuses: {
+        signinAt: {
+          type: Date,
+        },
+        editAt: {
+          type: Date,
+        },
+        activityAt: {
+          type: Date,
+        },
+        passwordAt: {
+          type: Date,
+        },
       },
     },
     {
@@ -36,6 +47,11 @@ export default () => {
       collection: 'user',
     },
   );
+  schema.methods.setStatus = async function (statusName) {
+    if (!this.statuses) this.statuses = {};
+    this.statuses[statusName] = new Date();
+    this.markModified(`statuses.${statusName}`);
+  };
 
   schema.statics.views = {};
   schema.statics.views.tiny = ['_id', 'role', 'name', 'avatar'];

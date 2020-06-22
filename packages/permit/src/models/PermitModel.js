@@ -2,7 +2,8 @@ import MongooseSchema from '@lskjs/db/MongooseSchema';
 import m from 'moment';
 import pick from 'lodash/pick';
 
-export default function PermitModel({ db, emit }) {
+export default function PermitModel(app) {
+  const { db } = app;
   const { Schema } = db;
   const schema = new MongooseSchema(
     {
@@ -88,18 +89,21 @@ export default function PermitModel({ db, emit }) {
     }
     return null;
   };
-  schema.statics.makeExpiredAt = function ({ value = 1, type = 'hour' } = {}) {
+  schema.statics.createExpiredAt = function ({ value = 1, type = 'hour' } = {}) {
     return m().add(value, type).toDate();
   };
   schema.methods.activate = async function () {
+    // if (this.activatedAt) throw 'permit.activatedBefore';
+    // if (new Date(this.expiredAt) < new Date()) throw 'permit.expired';
+    // this.getStatus()
     this.activatedAt = new Date();
     await this.save();
-    emit(`models.Permit.activated_${this.type}`, this);
+    app.emit(`models.Permit.activated_${this.type}`, this);
     return this;
   };
-  schema.methods.getStatus = function () {
-    if (this.expiredAt) return 'expired';
+  schema.methods.getStatus = function ({ date = new Date() } = {}) {
     if (this.activatedAt) return 'activated';
+    if (new Date(this.expiredAt) < date) return 'expired';
     return 'valid';
   };
   schema.statics.prepareOne = async function (obj) {
