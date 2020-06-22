@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.1](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.35.0...v1.35.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* **utils:** correct canonize login ([57d238b](https://github.com/lskjs/modules/tree/master/packages/mailer/commit/57d238bd063e751e49d34f454df81c51cab04aa9))
+
+
+
+
+
 # [1.35.0](https://github.com/lskjs/modules/tree/master/packages/mailer/compare/v1.34.0...v1.35.0) (2020-06-22)
 
 
