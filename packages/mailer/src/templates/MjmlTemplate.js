@@ -1,16 +1,20 @@
 /* eslint-disable max-len */
 import mjml2html from 'mjml';
 import get from 'lodash/get';
+import Err from '@lskjs/utils/Err';
 import HtmlTemplate from './HtmlTemplate';
 
 export default class MjmlTemplate extends HtmlTemplate {
   getHtml() {
     const mjml = this.render();
     const { errors, html } = mjml2html(mjml);
-    if (__DEV__) {
-      if (errors && errors.length) {
-        this.log.error('Template.getHtml mjml', errors);
+    if (errors && errors.length) {
+      this.log.error('Template.getHtml mjml', errors);
+      if (__DEV__) {
+        // eslint-disable-next-line no-console
+        console.error('mjml', mjml);
       }
+      throw new Err('MJML_RENDER', { errors });
     }
     return html;
   }
