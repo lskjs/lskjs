@@ -78,9 +78,7 @@ export default class MailerServerModule extends Module {
   }
 
   url(str) {
-    // console.log('_BASE', this);
-    if (__DEV__) return `https://staging.buzz.guru${str}`;
-    return this.app.url(str);
+    return this.app ? this.app.url(str) : str;
   }
 
   assetsUrl(str) {
