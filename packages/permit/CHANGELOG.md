@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.34.0...v1.35.0) (2020-06-22)
+
+
+### Features
+
+* **auth:** add permits, user.statueses and cofirm email ([14bf0c5](https://github.com/lskjs/modules/tree/master/packages/permit/commit/14bf0c5b200c998b9df572ad8fcc2eadca6ceb39))
+
+
+
+
+
 # [1.34.0](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.33.1...v1.34.0) (2020-06-22)
 
 **Note:** Version bump only for package @lskjs/permit

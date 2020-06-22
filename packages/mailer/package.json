@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "1.32.2",
+  "version": "1.35.0",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
