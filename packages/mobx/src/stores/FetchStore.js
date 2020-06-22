@@ -25,6 +25,7 @@ export default class FetchStore extends Store {
   @observable loading = false;
   @observable fetchedAt = null;
   @observable select = {};
+  @observable fetchCallback;
   __cancelToken = null;
 
   setStateField(item, value) {
@@ -94,6 +95,9 @@ export default class FetchStore extends Store {
       this.loading = false;
       this.__cancelToken = null;
       if (this.progress) this.progress.done();
+      if (this.fetchCallback) {
+        this.fetchCallback(this);
+      }
     }
   }
 
