@@ -180,7 +180,7 @@ export default class Api extends BaseApi {
       const { email } = loginParams;
       const code = await permitModule.genCode('emailVerifyStrong');
       const permit = await PermitModel.createPermit({
-        expiredAt: PermitModel.createExpiredAt(UserModel.restorePasswordLiveTime),
+        expiredAt: permitModule.createExpiredAt('emailVerifyStrong'),
         type: 'auth.confirmEmail',
         userId: user._id,
         info: {
@@ -283,7 +283,7 @@ export default class Api extends BaseApi {
     }
     const code = await permitModule.genCode('emailVerifyStrong');
     const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.createExpiredAt(UserModel.restorePasswordLiveTime),
+      expiredAt: permitModule.createExpiredAt('emailVerifyStrong'),
       type: 'user.restorePassword',
       userId: user._id,
       info: {
@@ -660,6 +660,7 @@ export default class Api extends BaseApi {
     throw '!permission';
   }
   async emailPermit(req) {
+    const permitModule = await this.app.module('permit');
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const { PermitModel } = this.app.models;
 
@@ -737,7 +738,7 @@ export default class Api extends BaseApi {
       },
     });
     const permit = await PermitModel.createPermit({
-      expiredAt: PermitModel.createExpiredAt(UserModel.changeEmailLiveTime),
+      expiredAt: permitModule.createExpiredAt('emailVerifyStrong'),
       type: `user.${type}Email`,
       userId: user._id,
       info: {
