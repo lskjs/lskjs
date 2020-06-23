@@ -25,6 +25,20 @@ export default class PermitServerModule extends Module {
     return require('./models').default(this.app);
   }
 
+  createExpiredAt(scenario, params = {}) {
+    let scenarioConfig = this.config.scenarios[scenario];
+    if (!scenarioConfig) {
+      scenarioConfig = this.config.scenarios.default;
+    }
+    scenarioConfig = {
+      ...scenarioConfig,
+      ...params,
+    };
+    const time = scenarioConfig.time || 60 * 60 * 1000;
+
+    return new Date(Date.now() + time);
+  }
+
   genCode(scenario, params = {}) {
     let scenarioConfig = this.config.scenarios[scenario];
     if (!scenarioConfig) {
@@ -37,6 +51,7 @@ export default class PermitServerModule extends Module {
     if (scenarioConfig.uniq) return this.generateUniqCode(scenarioConfig);
     return this.generateCode(scenarioConfig);
   }
+
   generateCode({ type = 'hex', length = 10 } = {}) {
     if (type === 'number') {
       return generate('1234567890', length);

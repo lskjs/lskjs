@@ -1,5 +1,4 @@
 import MongooseSchema from '@lskjs/db/MongooseSchema';
-import m from 'moment';
 import pick from 'lodash/pick';
 
 export default function PermitModel(app) {
@@ -88,9 +87,6 @@ export default function PermitModel(app) {
       return permit.activate();
     }
     return null;
-  };
-  schema.statics.createExpiredAt = function ({ value = 1, type = 'hour' } = {}) {
-    return m().add(value, type).toDate();
   };
   schema.methods.activate = async function () {
     // if (this.activatedAt) throw 'permit.activatedBefore';
