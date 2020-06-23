@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.36.0](https://github.com/lskjs/lskjs/compare/v1.35.1...v1.36.0) (2020-06-23)
+
+
+### Features
+
+* **auth:** add perimitModule.createExpiredAt in AuthApi ([980bfb1](https://github.com/lskjs/lskjs/commit/980bfb11821bec58f4530cc6dba7b67a90f9b612))
+* **permit:** add perimitModule.createExpiredAt and time in scenarios ([8eb599c](https://github.com/lskjs/lskjs/commit/8eb599c31b19ed21ef405f1f158c21bf81651505))
+
+
+
+
+
 ## [1.35.1](https://github.com/lskjs/lskjs/compare/v1.35.0...v1.35.1) (2020-06-22)
 
 
