@@ -178,9 +178,9 @@ export default class Api extends BaseApi {
 
     if (loginField === 'email') {
       const { email } = loginParams;
-      const code = await permitModule.genCode('emailVerifyStrong');
+      const code = await permitModule.genCode('emailVerify');
       const permit = await PermitModel.createPermit({
-        expiredAt: permitModule.createExpiredAt('emailVerifyStrong'),
+        expiredAt: permitModule.createExpiredAt('emailVerify'),
         type: 'auth.confirmEmail',
         userId: user._id,
         info: {
@@ -284,7 +284,7 @@ export default class Api extends BaseApi {
     const code = await permitModule.genCode('emailVerifyStrong');
     const permit = await PermitModel.createPermit({
       expiredAt: permitModule.createExpiredAt('emailVerifyStrong'),
-      type: 'user.restorePassword',
+      type: 'auth.restorePassword',
       userId: user._id,
       info: {
         userId: user._id,
@@ -303,36 +303,35 @@ export default class Api extends BaseApi {
     return PermitModel.prepare(permit, { req });
   }
 
-  async setPassword(req) {
-    const { UserModel, PermitModel } = this.app.models;
-    const { code, password } = req.data;
-    if (!code) throw '!code';
-    const permit = await PermitModel.findOne({
-      type: 'user.restorePassword',
-      code,
-    });
-    if (!permit) throw { code: 'invalidCode' };
-    if (permit.activatedAt) throw { code: 'activated' };
-    const date = new Date();
-    if (date > permit.expiredAt) throw { code: 'expired' };
-    const user = await UserModel.findById(permit.userId);
-    if (!user) throw '!user';
-    await permit.activate();
-    await this.helpers.setPassword(user, password);
-    set(user, 'private.lastUpdates.password', date);
-    user.markModified('private.lastUpdates.password');
-    await user.save();
-    const token = this.helpers.generateAuthToken(user);
-    return Promise.props({
-      __pack: true,
-      user: UserModel.prepare(user, { req }),
-      token,
-      data: {
-        permit: PermitModel.prepare(permit, { req }),
-      },
-    });
-  }
-
+  // async setPassword(req) {
+  //   const { UserModel, PermitModel } = this.app.models;
+  //   const { code, password } = req.data;
+  //   if (!code) throw '!code';
+  //   const permit = await PermitModel.findOne({
+  //     type: 'user.restorePassword',
+  //     code,
+  //   });
+  //   if (!permit) throw { code: 'invalidCode' };
+  //   if (permit.activatedAt) throw { code: 'activated' };
+  //   const date = new Date();
+  //   if (date > permit.expiredAt) throw { code: 'expired' };
+  //   const user = await UserModel.findById(permit.userId);
+  //   if (!user) throw '!user';
+  //   await permit.activate();
+  //   await this.helpers.setPassword(user, password);
+  //   set(user, 'private.lastUpdates.password', date);
+  //   user.markModified('private.lastUpdates.password');
+  //   await user.save();
+  //   const token = this.helpers.generateAuthToken(user);
+  //   return Promise.props({
+  //     __pack: true,
+  //     user: UserModel.prepare(user, { req }),
+  //     token,
+  //     data: {
+  //       permit: PermitModel.prepare(permit, { req }),
+  //     },
+  //   });
+  // }
   // async silent(req) {
   //   const UserModel = this.app.models.UserModel || this.app.models.User;
   //   const { login, params } = canonizeParams(req.data);
