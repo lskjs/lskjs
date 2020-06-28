@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/lskjs/lskjs/compare/v1.37.0...v1.38.0) (2020-06-28)
+
+
+### Features
+
+* **utils:** isCrappyIEBrowser ([23865d1](https://github.com/lskjs/lskjs/commit/23865d171cd46aad1997b843d8b9492862454c70))
+* **utils:** isMobileBrowser ([ea82c31](https://github.com/lskjs/lskjs/commit/ea82c318853d256bd0214d61424349bb9c67430d))
+
+
+
+
+
 # [1.37.0](https://github.com/lskjs/lskjs/compare/v1.36.0...v1.37.0) (2020-06-25)
 
 
