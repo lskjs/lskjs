@@ -6,7 +6,11 @@ export default class Err extends Error {
     const err = errMerge(...params);
     super(err.message || err.code || 'err_unknown');
     forEach(err, (val, key) => {
-      this[key] = val;
+      if (key === 'message') {
+        this[`_${key}`] = val;
+      } else {
+        this[key] = val;
+      }
     });
   }
 }

@@ -4,23 +4,31 @@ import e from '@lskjs/utils/e';
 import Err from '@lskjs/utils/Err';
 import Api from './Api';
 
+const middleware = (req, res, next) => {
+  req.file = '[some-file]';
+  if (Math.random() < 0.5) {
+    console.log('test.error');
+    next(new Error('test.error'));
+  } else {
+    next();
+  }
+};
+
 export default class TestApi extends Api {
   getRoutes() {
     return {
       '/middleware/1': async (req, res) => {
-        const middleware = (req2, res2, next) => {
-          req2.file = 123;
-          if (Math.random() < 0.5) {
-            console.log('test.error');
-            next(new Error('test.error'));
-          } else {
-            next();
-          }
-        };
         await this.useMiddleware(middleware, req, res);
         console.log('req.file', req.file);
-        return { asd: 123 };
+        return { file: req.file };
       },
+      '/middleware/2': [
+        middleware,
+        async (req, res) => {
+          console.log('req.file', req.file);
+          return { file: req.file };
+        },
+      ],
       '/res/1': () => 123,
       '/res/2': () => 'Hello',
       '/res/3': () => () => {},
@@ -79,6 +87,26 @@ export default class TestApi extends Api {
       },
       '/err/14': () => {
         throw e('validate.error', { status: 400, data: { errors: [1, 2, 3] } });
+      },
+      '/err/15': (req) => {
+        // const err = new Err('code');
+        // console.log('err)', err);
+        // console.log('err.code', err.code);
+        // console.log('err.message', err.message);
+        // console.log('err', JSON.stringify(err));
+        // const err2 = new Err('validate.error', { status: 400, data: { errors: [1, 2, 3] } });
+        // console.log('err2)', err2);
+        // console.log('err2.code', err2.code);
+        // console.log('err2.message', err2.message);
+        // console.log('err2', JSON.stringify(err2));
+        // req.e = e.bind(req);
+        throw req.e('validate.error', { status: 400, data: { errors: [1, 2, 3] } });
+      },
+      '/form': (req) => {
+        const { email, password } = req.data;
+        if (email !== 'password') throw req.e('auth.passwordInvalud', { status: 400, data: { password } });
+        if (email !== 'test@coder24.ru') throw req.e('auth.emailInvalud', { status: 400, data: { email } });
+        return { ok: 123 };
       },
     };
   }
