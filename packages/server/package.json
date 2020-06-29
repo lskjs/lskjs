@@ -42,7 +42,8 @@
     "redis": "3.0.2",
     "socket.io": "2.3.0",
     "socket.io-as-promised": "1.0.0",
-    "socket.io-redis": "5.2.0"
+    "socket.io-redis": "5.2.0",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "@lskjs/apiquery": "1.29.3",
