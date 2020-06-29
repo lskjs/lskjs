@@ -1,10 +1,11 @@
 import e from '@lskjs/utils/e';
 
-export default app => async (req, res, next) => {
+export default (app) => async (req, res, next) => {
   if (!req.getLocale) {
     req.getLocale = () => {
       if (req.data && req.data.locale) return req.data.locale;
       if (req.user && req.user.locale) return req.user.locale;
+      if (req.cookies && req.cookies.locale) return req.cookies.locale;
       return null;
     };
   }

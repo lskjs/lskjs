@@ -108,6 +108,9 @@ export default class TestApi extends Api {
         if (email !== 'test@coder24.ru') throw req.e('auth.emailInvalud', { status: 400, data: { email } });
         return { ok: 123 };
       },
+      '/locale': (req) => {
+        return { locale: req.getLocale(), test: req.t('test.test') };
+      },
     };
   }
 }
