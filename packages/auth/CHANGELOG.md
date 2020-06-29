@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.1](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.39.0...v1.39.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* **auth:** i18 errors ([643af1f](https://github.com/lskjs/modules/tree/master/packages/auth/commit/643af1f8c3f90a92fab5c272b8274446ee22f238))
+
+
+
+
+
 # [1.39.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.38.1...v1.39.0) (2020-06-29)
 
 **Note:** Version bump only for package @lskjs/auth
