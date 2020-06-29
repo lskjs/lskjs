@@ -264,7 +264,7 @@ export default class Api extends BaseApi {
     if (status !== 'valid') {
       throw this.app.e('permit.statusInvalid', { status: 400, data: { status } });
     }
-    if (code !== permit.code) throw this.app.e('permit.codeInvalid', { status: 400 });
+    if (!this.equal(code, permit.code)) throw this.app.e('permit.codeInvalid', { status: 400 });
 
     return this.permitAction({ req, permit });
   }
