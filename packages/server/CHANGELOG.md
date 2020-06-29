@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.38.1...v1.39.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* **server:** i18 locale server cookie detection ([53fef39](https://github.com/lskjs/modules/tree/master/packages/server/commit/53fef39a5eb512121bed85758aa2767e3829c3b7))
+
+
+### Features
+
+* **server:** reqLog nanoid in production ([170f8dc](https://github.com/lskjs/modules/tree/master/packages/server/commit/170f8dcc35dff561f7fe9b891eae19be0c97db52))
+
+
+
+
+
 ## [1.38.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.38.0...v1.38.1) (2020-06-29)
 
 
