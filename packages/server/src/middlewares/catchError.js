@@ -2,7 +2,7 @@
 import get from 'lodash/get';
 
 export default () =>
-  function(err, req, res, next) {
+  function (err, req, res, next) {
     if (get(err, 'level', 'error') === 'error') {
       if (req && req.log && req.log.error) {
         req.log.error(

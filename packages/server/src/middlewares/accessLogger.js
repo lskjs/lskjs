@@ -44,7 +44,7 @@ function logFinish(data) {
   )}ms ${length}b `;
 }
 
-export default ctx => {
+export default (ctx) => {
   if (!get(ctx, 'serverConfig.middlewares.accessLogger')) return null;
   return (req, res, next) => {
     const data = {};
