@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.38.1](https://github.com/lskjs/lskjs/compare/v1.38.0...v1.38.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* **utils:** e and Err ([6de9ac9](https://github.com/lskjs/lskjs/commit/6de9ac926b715f695b10a95f35443e73a60a89c6))
+
+
+
+
+
 # [1.38.0](https://github.com/lskjs/lskjs/compare/v1.37.0...v1.38.0) (2020-06-28)
 
 
