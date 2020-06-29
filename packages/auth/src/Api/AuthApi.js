@@ -90,10 +90,10 @@ export default class Api extends BaseApi {
   async updateToken(req) {
     const { UserModel } = this.app.models;
     const userId = req.user && req.user._id;
-    if (!userId) throw this.app.e('auth.tokenIncorrect', { status: 404 });
+    if (!userId) throw req.e('auth.tokenIncorrect', { status: 404 });
 
     const user = await UserModel.findById(userId);
-    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
+    if (!user) throw req.e('auth.userNotFound', { status: 404 });
     req.user = user;
 
     const token = this.helpers.generateAuthToken(user);
@@ -140,11 +140,11 @@ export default class Api extends BaseApi {
   async login(req) {
     const { UserModel } = this.app.models;
     const { password } = req.data;
-    if (!password) throw this.app.e('auth.passwordEmpty', { status: 400 });
+    if (!password) throw req.e('auth.passwordEmpty', { status: 400 });
     const user = await UserModel.findOne(this.getUserCriteria(req.data));
-    if (!user) throw this.app.e('auth.loginIncorrect', { status: 400 });
+    if (!user) throw req.e('auth.loginIncorrect', { status: 400 });
     if (!(await this.helpers.verifyPassword(password, user.password))) {
-      throw this.app.e('auth.passwordIncorrect', { status: 400 });
+      throw req.e('auth.passwordIncorrect', { status: 400 });
     }
     req.user = user;
     const token = this.helpers.generateAuthToken(user);
@@ -165,7 +165,7 @@ export default class Api extends BaseApi {
     const criteria = this.getUserCriteria(loginParams);
     const existUser = await UserModel.findOne(criteria).select('_id');
     const loginField = Object.keys(criteria)[0];
-    if (existUser) throw this.app.e(`auth.${loginField}Exists`, { status: 400 });
+    if (existUser) throw req.e(`auth.${loginField}Exists`, { status: 400 });
     const user = new UserModel({
       ...loginParams,
       ...userFields, // TODO validation
@@ -254,17 +254,17 @@ export default class Api extends BaseApi {
     const { code, permitId } = req.data;
     const { PermitModel } = this.app.models;
     if (!code) throw '!code';
-    if (!permitId) throw this.app.e('permit.permitIdEmpty', { status: 400 });
+    if (!permitId) throw req.e('permit.permitIdEmpty', { status: 400 });
     // const permit = await PermitModel.findById(permitId);
     // if (!permit) throw this.e(404, 'Permit not found!');
     const permit = await PermitModel.findById(permitId);
-    if (!permit) throw this.app.e('permit.permitNotFound', { status: 404 });
+    if (!permit) throw req.e('permit.permitNotFound', { status: 404 });
     const status = permit.getStatus();
 
     if (status !== 'valid') {
-      throw this.app.e('permit.statusInvalid', { status: 400, data: { status } });
+      throw req.e('permit.statusInvalid', { status: 400, data: { status } });
     }
-    if (code !== permit.code) throw this.app.e('permit.codeInvalid', { status: 400 });
+    if (code !== permit.code) throw req.e('permit.codeInvalid', { status: 400 });
 
     return this.permitAction({ req, permit });
   }
@@ -360,9 +360,9 @@ export default class Api extends BaseApi {
 
   //   const criteria = this.getUserCriteria(req);
   //   const user = await UserModel.findOne(criteria);
-  //   if (!user) throw this.app.e('Неверный логин', { status: 404 });
+  //   if (!user) throw req.e('Неверный логин', { status: 404 });
   //   const email = user.getEmail();
-  //   if (!email) throw this.app.e('У этого пользователя не был указан емейл для восстановления', { status: 400 });
+  //   if (!email) throw req.e('У этого пользователя не был указан емейл для восстановления', { status: 400 });
 
   //   const password = UserModel.generatePassword();
 
@@ -403,7 +403,7 @@ export default class Api extends BaseApi {
     const { provider } = req.params;
     const origin = getReqOrigin(req);
     const strategy = authModule.strategies[provider];
-    if (!strategy) next(this.app.e('auth.providerInvalid'), { status: 404, provider });
+    if (!strategy) next(req.e('auth.providerInvalid'), { status: 404, provider });
     authModule.passportService.authenticate(
       provider,
       strategy.getPassportAuthenticateParams({ method: 'auth', origin }),
@@ -467,7 +467,7 @@ export default class Api extends BaseApi {
     const userId = req.user._id;
     const passport = await PassportModel.getByToken(req.data.p).then(checkNotFound);
     const user = await UserModel.findById(req.user._id).then(checkNotFound);
-    if (passport.userId) throw this.app.e('passport.userId already exist', { status: 400 });
+    if (passport.userId) throw req.e('passport.userId already exist', { status: 400 });
     passport.userId = userId;
     // user.passports.push(passport._id);
     await passport.save();
@@ -511,10 +511,10 @@ export default class Api extends BaseApi {
     if (params.provider) findParams.provider = params.provider;
     findParams.userId = userId;
     if (!findParams.passportId && !findParams.provider) {
-      throw this.app.e('!findParams.passportId && !findParams.provider', { status: 400 });
+      throw req.e('!findParams.passportId && !findParams.provider', { status: 400 });
     }
     const passport = await PassportModel.findOne(findParams).then(checkNotFound);
-    if (passport.userId !== userId) throw this.app.e('Wrong user!', { status: 403 });
+    if (passport.userId !== userId) throw req.e('Wrong user!', { status: 403 });
     passport.userId = null;
     // user.passports = user.passports.filter((pId) => {
     //   return pId && pId.toString() !== params.p;
@@ -529,10 +529,10 @@ export default class Api extends BaseApi {
   async tokenLogin(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const token = req.data.t || req.data.token;
-    if (!token) throw this.app.e('!token', { status: 400 });
+    if (!token) throw req.e('!token', { status: 400 });
 
     const user = await UserModel.tokenLogin({ token });
-    if (!user) throw this.app.e('!user', { status: 404 });
+    if (!user) throw req.e('!user', { status: 404 });
     req.user = user;
 
     return {
