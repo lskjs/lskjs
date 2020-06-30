@@ -26,15 +26,20 @@ describe('Post Endpoints', () => {
   test('test 2', async () => {
     const app = express();
     const router = AsyncRouter();
-    router.all('/test', middlewareUserId, async (req, res) => {
-      return res.send(200);
+    router['all']('/test', (req, res, next) => {
+      console.log('middleware');
+      next();
+    }, async (req, res) => {
+      return res.json({ test: true });
     });
     app.use('/', router);
-    const res = await request(app).get('/test');
-    expect(res.statusCode).toEqual(200);
-    // expect(res.body).toHaveProperty('post')
-  });
-  test('test 3', async () => {
+    const res = await request(app)
+      .get('/test')
+      .set('Content-Type', 'application/json')
+    expect(res.statusCode).toEqual(200)
+    expect(res.body).toEqual({ test: true })
+  })
+  it('test 3', async () => {
     const app = express();
     const router = AsyncRouter();
     router.use('/test', middlewareUserId, middlewareReqId, async (req, res) => {
