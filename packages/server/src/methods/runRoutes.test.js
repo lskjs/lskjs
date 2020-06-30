@@ -1,43 +1,44 @@
-/* global test expect */
-import { getRoutes, iterateRoute, default as runRoutes } from './runRoutes';
-import AsyncRouter from '../AsyncRouter';
+/* global describe test expect */
 import express from 'express';
-import request from 'supertest'
+import request from 'supertest';
+import runRoutes from './runRoutes';
 
 describe('Post Endpoints', () => {
-  it('should create a new post', async () => {
-    let app = express();
+  test('should create a new post', async () => {
+    let expressApp = express();
+    const middleware = (req, res, next) => {
+      req.userId = 123;
+      return next();
+    };
 
     const routes = {
-      getRoutes: () => {
+      getRoutes() {
         return {
           '/channels': {
             '/find': (req, res) => {
-              return res.send(200);
-            }
-          },
-          '/video': [
-            (req, res, next) => {
-              console.log('middleware');
-              return next();
+              return res.status(200).json({ hello: 'world' });
             },
+          },
+          'USE /video': [
+            middleware,
             {
               '/find': (req, res) => {
-                return res.send(200);
-              }
-            }
+                return res.status(200).json({ userId: req.userId });
+              },
+            },
           ],
-        }
-      }
-    }
+        };
+      },
+    };
 
-    app = runRoutes.call({ this: this, rootApi: routes, express: app, log: { warn: console.warn } })
-    const res = await request(app)
-      .get('/channels/find');
-    const res2 = await request(app)
-      .get('/videos/find');
-    expect(res.statusCode).toEqual(200)
-    expect(res2.statusCode).toEqual(200)
-    // expect(res.body).toHaveProperty('post')
-  })
-})
+    const app = {};
+    expressApp = runRoutes.call({ this: app, rootApi: routes, express: expressApp });
+    const res = await request(expressApp).get('/channels/find');
+    expect(res.statusCode).toEqual(200);
+    // const res3 = await request(expressApp).get('/videos/qwe/find');
+    // expect(res3.statusCode).toEqual(200);
+    const res2 = await request(expressApp).get('/videos/find');
+    expect(res2.statusCode).toEqual(200);
+    // expect(res.body).toEqual({ userId: 123 }); // TODO: DO IT
+  });
+});
