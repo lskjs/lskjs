@@ -4,13 +4,13 @@ import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import isClass from '@lskjs/utils/isClass';
+import express from 'express';
 import AsyncRouter from '../AsyncRouter';
 
-// import isClass from 'lodash/isClass';
-// const isClass = () => false;
+const DEBUG = false;
 
-export function getRoutes(ctx) {
-  const iterate = item => {
+export function getRoutesTree(ctx) {
+  const iterate = (item) => {
     if (!item) return null;
     if (isClass(item)) {
       const api = new item(ctx); // eslint-disable-line new-cap
@@ -50,14 +50,13 @@ function getMethodAndPath(key = '', val) {
   };
 }
 
-function iterateRoute(data, { AsyncRouter } = {}) {
-  // params
+function iterateRoute(data, info = { path: '/' }) {
+  if (DEBUG) console.warn('iterateRoute', info); // eslint-disable-line no-console
   if (isPlainObject(data)) {
     const asyncRouter = AsyncRouter();
     forEach(data, (val, key) => {
       const { path, method } = getMethodAndPath(key, val);
-      const route = iterateRoute(val, { AsyncRouter }); // , { path: params.path + path, i: params.i + 1 });
-      // console.log('asyncRouter', method, path);
+      const route = iterateRoute(val, { method, path, parent: info }); // , { path: params.path + path, i: params.i + 1 });
       asyncRouter[method](path, route);
     });
     return asyncRouter;
@@ -71,10 +70,22 @@ function iterateRoute(data, { AsyncRouter } = {}) {
   if (data && data.api && isFunction(data.api)) {
     return data.api();
   }
+  if (Array.isArray(data)) {
+    const middlewares = data.slice(0, -1);
+    const [routes] = data.slice(-1);
+
+    const subRouter = iterateRoute(routes, { elem: data.length - 1, parent: info }); // , { path: params.path + path, i: params.i + 1 });
+    const router = express.Router();
+    router.use(...middlewares, subRouter);
+
+    return router;
+  }
+
+  if (DEBUG) console.warn('iterateRoute NOT FOUND CASE', info); // eslint-disable-line no-console
   return () => {};
 }
 
-export default function() {
+export default function () {
   if (this.Api) {
     this.rootApi = new this.Api({ app: this });
     const indexApi = get(this, 'rootApi.indexApi');
@@ -82,11 +93,14 @@ export default function() {
       this.log.trace('routes', indexApi.getRoutesList());
     }
   } else {
-    this.log.warn('!app.Api');
+    // eslint-disable-next-line no-unused-expressions
+    this.log ? this.log.warn('!app.Api') : console.warn('!app.Api'); // eslint-disable-line no-console
   }
-  this.routes = getRoutes(this.rootApi);
+  this.routes = getRoutesTree(this.rootApi);
+  if (DEBUG) console.warn('this.routes', this.routes); // eslint-disable-line no-console
+  const router = iterateRoute(this.routes);
   const asyncRouter = AsyncRouter();
-  const router = iterateRoute(this.routes, { AsyncRouter, path: '/', i: 1 });
   asyncRouter.use('/', router);
   this.express.use('/', asyncRouter);
+  return this.express;
 }

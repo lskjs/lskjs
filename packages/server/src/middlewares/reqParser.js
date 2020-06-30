@@ -7,7 +7,7 @@ import config from '../config';
 
 const { middlewares: defaultOptions } = config;
 
-export default ctx => {
+export default (ctx) => {
   const middlewares = [];
   const preMiddlewares = [
     [bodyParser.json, get(ctx, 'serverConfig.middlewares.bodyParserJson'), get(defaultOptions, 'bodyParserJson')],
