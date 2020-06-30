@@ -26,13 +26,14 @@ describe('Post Endpoints', () => {
       console.log('middleware');
       next();
     }, async (req, res) => {
-      return res.send(200);
+      return res.json({ test: true });
     });
     app.use('/', router);
     const res = await request(app)
-      .get('/test');
+      .get('/test')
+      .set('Content-Type', 'application/json')  
     expect(res.statusCode).toEqual(200)
-    // expect(res.body).toHaveProperty('post')
+    expect(res.body).toEqual({ test: true })
   })
   it('test 3', async () => {
     const app = express();
