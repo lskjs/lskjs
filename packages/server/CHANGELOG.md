@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.39.1...v1.40.0) (2020-06-30)
+
+
+### Features
+
+* **server:** allow middleware arrays in api getRoutes ([1892735](https://github.com/lskjs/modules/tree/master/packages/server/commit/1892735cf21fc44a3ef0be391ff0232b44a6f050))
+
+
+
+
+
 # [1.39.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.38.1...v1.39.0) (2020-06-29)
 
 
