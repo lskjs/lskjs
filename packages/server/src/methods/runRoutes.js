@@ -89,4 +89,5 @@ export default function() {
   const router = iterateRoute(this.routes, { AsyncRouter, path: '/', i: 1 });
   asyncRouter.use('/', router);
   this.express.use('/', asyncRouter);
+  return this.express;
 }
