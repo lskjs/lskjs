@@ -4,7 +4,7 @@ import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import isClass from '@lskjs/utils/isClass';
-import express from 'express';
+// import express from 'express';
 import AsyncRouter from '../AsyncRouter';
 
 const DEBUG = false;
@@ -35,7 +35,7 @@ export function getRoutesTree(ctx) {
 
 function getMethodAndPath(key = '', val) {
   let method;
-  if (isPlainObject(val)) method = 'use';
+  if (isPlainObject(val) || Array.isArray(val)) method = 'use';
   const chunk = key.trim().split(' ');
   let path;
   if (chunk.length >= 2) {
@@ -50,13 +50,27 @@ function getMethodAndPath(key = '', val) {
   };
 }
 
-function iterateRoute(data, info = { path: '/' }) {
-  if (DEBUG) console.warn('iterateRoute', info); // eslint-disable-line no-console
-  if (isPlainObject(data)) {
+function iterateRoute(data, parent = { path: '/' }) {
+  if (DEBUG) console.warn('iterateRoute', parent); // eslint-disable-line no-console
+  if (isPlainObject(data) || Array.isArray(data)) {
     const asyncRouter = AsyncRouter();
-    forEach(data, (val, key) => {
+
+    let routes;
+    let middlewares;
+    if (Array.isArray(data)) {
+      middlewares = data.slice(0, -1);
+      routes = { '/': data[data.length - 1] };
+    } else {
+      middlewares = [];
+      routes = data;
+    }
+    if (middlewares && middlewares.length) {
+      asyncRouter.use(...middlewares);
+    }
+
+    forEach(routes, (val, key) => {
       const { path, method } = getMethodAndPath(key, val);
-      const route = iterateRoute(val, { method, path, parent: info }); // , { path: params.path + path, i: params.i + 1 });
+      const route = iterateRoute(val, { method, path, parent }); // , { path: params.path + path, i: params.i + 1 });
       asyncRouter[method](path, route);
     });
     return asyncRouter;
@@ -70,18 +84,21 @@ function iterateRoute(data, info = { path: '/' }) {
   if (data && data.api && isFunction(data.api)) {
     return data.api();
   }
-  if (Array.isArray(data)) {
-    const middlewares = data.slice(0, -1);
-    const [routes] = data.slice(-1);
+  // if (Array.isArray(data)) {
+  //   const middlewares = data.slice(0, -1);
+  //   const [routes] = data.slice(-1);
+  //   // console.warn({routes});
 
-    const subRouter = iterateRoute(routes, { elem: data.length - 1, parent: info }); // , { path: params.path + path, i: params.i + 1 });
-    const router = express.Router();
-    router.use(...middlewares, subRouter);
+  //   return iterateRoute(routes, { elem: data.length - 1, parent }); // , { path: params.path + path, i: params.i + 1 });
 
-    return router;
-  }
+  //   // const subRouter = iterateRoute(routes, { elem: data.length - 1, parent }); // , { path: params.path + path, i: params.i + 1 });
+  //   // const router = express.Router();
+  //   // router.use(...middlewares, subRouter);
 
-  if (DEBUG) console.warn('iterateRoute NOT FOUND CASE', info); // eslint-disable-line no-console
+  //   // return router;
+  // }
+
+  if (DEBUG) console.warn('iterateRoute NOT FOUND CASE', parent); // eslint-disable-line no-console
   return () => {};
 }
 
