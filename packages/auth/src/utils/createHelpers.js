@@ -1,7 +1,6 @@
 // import Api from './BaseApi';
 import bcrypt from 'bcryptjs';
 import Promise from 'bluebird';
-import pick from 'lodash/pick';
 import get from 'lodash/get';
 import jwt from 'jsonwebtoken';
 
@@ -29,31 +28,19 @@ export default function createHelpers({ app } = {}) {
       if (!password1 || !password2) return false;
       return bcryptCompare(password1, password2);
     },
-    getIdentity(user, params = {}) {
-      const userParams = user.toObject ? user.toObject() : user;
-      return {
-        ...pick(userParams, ['_id', 'username', 'name', 'avatar', 'role']),
-        ...params,
-      };
-    },
-    generateAuthToken(...params) {
+    generateAuthToken({ _id, role }, params = {}) {
+      const { secret, ...options } = configJwt;
       // TODO переместить в modules.auth
-      return jwt.sign(helpers.getIdentity(...params), configJwt.secret);
+      return jwt.sign(
+        {
+          _id,
+          role,
+          ...params,
+        },
+        secret,
+        options || {},
+      );
     },
-    // async genereateEmailApprovedLink(user) {
-    //   const token = jwt.sign(
-    //     {
-    //       userId: String(user._id),
-    //       email: user.email,
-    //     },
-    //     configJwt.secret,
-    //   );
-    //   if (!user.private) user.private = {}; // eslint-disable-line no-param-reassign
-    //   user.private.approvedEmailToken = token; // eslint-disable-line no-param-reassign
-    //   if (user.markModified) user.markModified('private');
-
-    //   return app.url(`/api/auth/email/approve?t=${token}`);
-    // },
   };
   return helpers;
 }
