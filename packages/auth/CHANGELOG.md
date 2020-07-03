@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.40.0...v1.41.0) (2020-07-03)
+
+
+### Features
+
+* **auth:** remove name, avatar from jwt token [unstable] yet ([085ea5e](https://github.com/lskjs/modules/tree/master/packages/auth/commit/085ea5e0c4c73088c28abbef20271b81c38a5ee2))
+
+
+
+
+
 # [1.40.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.39.1...v1.40.0) (2020-06-30)
 
 **Note:** Version bump only for package @lskjs/auth

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.40.0...v1.41.0) (2020-07-03)
+
+
+### Features
+
+* **server:** stabilizing runRoutes with middlewares ([5623933](https://github.com/lskjs/modules/tree/master/packages/server/commit/5623933d9b62c47f681e68ebbb819c38f1b83573))
+* **server:** supertest json equal test ([74a4198](https://github.com/lskjs/modules/tree/master/packages/server/commit/74a419884b7b498c764e588ec228fd3d7e3e0bb6))
+
+
+
+
+
 # [1.40.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.39.1...v1.40.0) (2020-06-30)
 
 
