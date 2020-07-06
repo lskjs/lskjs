@@ -4,7 +4,8 @@ import Module from '@lskjs/module';
 import LocalStorage from './Storage/LocalStorage';
 import MemoryStorage from './Storage/MemoryStorage';
 
-const DEBUG = __DEV__ && __STAGE__ === 'isuvorov'; // false;
+// const DEBUG = __DEV__ && __STAGE__ === 'isuvorov';
+const DEBUG = false;
 
 export default class AuthClientModule extends Module {
   name = 'AuthClientModule';
@@ -38,7 +39,7 @@ export default class AuthClientModule extends Module {
   }
 
   setToken(token, expires = 365, cookies = true) {
-    DEBUG && console.log('AuthStore.setToken', token);  //eslint-disable-line
+    if (DEBUG) console.log('AuthStore.setToken', token); // eslint-disable-line no-console
     if (this.app.api) this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
@@ -79,7 +80,7 @@ export default class AuthClientModule extends Module {
       };
     }
 
-    if (__STAGE__ === 'isuvorov') this.log.debug('loadStore', state);
+    if (DEBUG) this.log.debug('loadStore', state);
     this.store.setState(state);
 
     const { session } = this.store;

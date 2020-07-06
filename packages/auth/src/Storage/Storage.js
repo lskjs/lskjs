@@ -4,7 +4,8 @@ import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
 
-const DEBUG = __DEV__; // && false;
+// const DEBUG = __DEV__ && __STAGE__ === 'isuvorov';
+const DEBUG = false;
 const debug = createLogger({ name: '@lskjs/storage', enable: DEBUG });
 export default class Storage {
   debug = debug;
