@@ -11,7 +11,7 @@ import Module from '@lskjs/module';
 
 Promise.config({ cancellation: true });
 
-const DEBUG = __DEV__ && false;
+const DEBUG = __DEV__ && false; // __STAGE__ === 'isuvorov'
 
 export default class ReactAppClient extends Module {
   // BaseUapp = BaseUapp;
@@ -42,7 +42,7 @@ export default class ReactAppClient extends Module {
   }
 
   run() {
-    this.history.listen(location => {
+    this.history.listen((location) => {
       if (location.method === 'replaceState') return;
       this.render();
     });
@@ -77,7 +77,7 @@ export default class ReactAppClient extends Module {
     try {
       page = await this.resolve(req);
     } catch (err) {
-      if (__STAGE__ === 'isuvorov') console.log('err @!#!@#!@# ', err);
+      if (DEBUG) console.log('err @!#!@#!@# ', err); // eslint-disable-line no-console
       if ((err && err.type === 'cancel') || (err && err.code === 'page.cancel') || err === 'page.cancel') {
         if (__DEV__) console.warn('!!!!!!!!!!!!!!! CSR.canceled !!!!!!!!!!!!!'); // eslint-disable-line no-console
         return;
@@ -133,7 +133,7 @@ export default class ReactAppClient extends Module {
         this.reqPromise.cancel();
       } else {
         // eslint-disable-next-line no-lonely-if
-        if (__STAGE__ === 'isuvorov') console.log('!!!!this.reqPromise.cancel');
+        if (DEBUG) console.log('!!!!this.reqPromise.cancel'); // eslint-disable-line no-console
       }
     }
     const reqPromise = uapp.resolve({
@@ -143,11 +143,11 @@ export default class ReactAppClient extends Module {
     this.reqPromise = reqPromise;
     await reqPromise;
     if (!reqPromise.isCancelled) {
-      if (__STAGE__ === 'isuvorov') console.log('!isCancelled !isCancelled !isCancelled', reqPromise);
+      if (DEBUG) console.log('!isCancelled !isCancelled !isCancelled', reqPromise); // eslint-disable-line no-console
     } else {
       // eslint-disable-next-line no-lonely-if
       if (reqPromise.isCancelled()) {
-        if (__STAGE__ === 'isuvorov') console.log('CANCEL CANCEL CANCEL');
+        if (DEBUG) console.log('CANCEL CANCEL CANCEL'); // eslint-disable-line no-console
         throw 'cancel';
       }
     }
