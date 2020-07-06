@@ -392,7 +392,7 @@ export default class Uapp extends Module {
 
   resolve(reqParams = {}) {
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve, reject) => {
       this.emit('resolve:start', reqParams);
       const req = {
         ...this.req,
@@ -411,12 +411,14 @@ export default class Uapp extends Module {
           page,
           req,
         });
+        this.emit('resolve:finish', reqParams);
+        resolve(res);
       } catch (err) {
-        this.log.error('uapp.router.resolve', err);
-        console.error(err); // eslint-disable-line no-console
+        this.emit('resolve:error', err);
+        this.log.error('uapp.router.resolve ERR:', err);
+        // console.error('@@@@', err); // eslint-disable-line no-console
+        reject(err);
       }
-      this.emit('resolve:finish', reqParams);
-      resolve(res);
     });
   }
 
