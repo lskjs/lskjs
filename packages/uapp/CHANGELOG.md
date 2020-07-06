@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.41.0...v1.41.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* **uapp:** throw error while uapp route resolving ([1571b76](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/1571b76574e4ff2c05e418da2fa750a7a8671c5b))
+
+
+
+
+
 # [1.40.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.39.1...v1.40.0) (2020-06-30)
 
 **Note:** Version bump only for package @lskjs/uapp

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.1](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.41.0...v1.41.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* **auth:** remove debugs ([c3cdaef](https://github.com/lskjs/modules/tree/master/packages/auth/commit/c3cdaeffd9728334c1af60f69aa9683817297018))
+
+
+
+
+
 # [1.41.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.40.0...v1.41.0) (2020-07-03)
 
 
