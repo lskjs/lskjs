@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.2](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.41.1...v1.41.2) (2020-07-07)
+
+
+### Bug Fixes
+
+* **server:** default jwt algorithms ([5403c71](https://github.com/lskjs/modules/tree/master/packages/server/commit/5403c712112fc0b6909a816e81a751b95a5be48a))
+
+
+
+
+
 ## [1.41.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.41.0...v1.41.1) (2020-07-06)
 
 **Note:** Version bump only for package @lskjs/server
