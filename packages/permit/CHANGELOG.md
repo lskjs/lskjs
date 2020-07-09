@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.41.2...v1.42.0) (2020-07-09)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
 # [1.40.0](https://github.com/lskjs/modules/tree/master/packages/permit/compare/v1.39.1...v1.40.0) (2020-06-30)
 
 **Note:** Version bump only for package @lskjs/permit

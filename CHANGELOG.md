@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/lskjs/lskjs/compare/v1.41.2...v1.42.0) (2020-07-09)
+
+
+### Bug Fixes
+
+* **mobx:** clear items after errors FetchStore ([0a43916](https://github.com/lskjs/lskjs/commit/0a43916b8438eff07f86609cebd2710613a42461))
+
+
+### Features
+
+* **utils:** isRoundDate ([f495e9c](https://github.com/lskjs/lskjs/commit/f495e9c5f279b3f57a4765b9dba75c3a7ba70fb6))
+
+
+
+
+
 ## [1.41.2](https://github.com/lskjs/lskjs/compare/v1.41.1...v1.41.2) (2020-07-07)
 
 

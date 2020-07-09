@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.41.2...v1.42.0) (2020-07-09)
+
+
+### Bug Fixes
+
+* **mobx:** clear items after errors FetchStore ([0a43916](https://github.com/lskjs/modules/tree/master/packages/mobx/commit/0a43916b8438eff07f86609cebd2710613a42461))
+
+
+
+
+
 # [1.40.0](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.39.1...v1.40.0) (2020-06-30)
 
 **Note:** Version bump only for package @lskjs/mobx

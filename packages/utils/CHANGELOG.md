@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.41.2...v1.42.0) (2020-07-09)
+
+
+### Features
+
+* **utils:** isRoundDate ([f495e9c](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f495e9c5f279b3f57a4765b9dba75c3a7ba70fb6))
+
+
+
+
+
 # [1.40.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.39.1...v1.40.0) (2020-06-30)
 
 **Note:** Version bump only for package @lskjs/utils
