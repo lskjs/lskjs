@@ -25,6 +25,7 @@ export default class FetchStore extends Store {
   @observable loading = false;
   @observable fetchedAt = null;
   @observable select = {};
+  @observable err = {};
   @observable fetchCallback;
   __cancelToken = null;
 
@@ -87,11 +88,17 @@ export default class FetchStore extends Store {
         limit,
         __cancelToken: this.__cancelToken,
       });
+      // /
       this.setItems(items, { skip, cache });
       this.count = count;
-      this.fetchedAt = new Date();
-      if (skip < this.skip) this.skip = skip;
+      this.err = null;
+    } catch (err) {
+      this.setItems([], { skip, cache });
+      this.count = 0;
+      this.err = err;
     } finally {
+      if (skip < this.skip) this.skip = skip;
+      this.fetchedAt = new Date();
       this.loading = false;
       this.__cancelToken = null;
       if (this.progress) this.progress.done();
