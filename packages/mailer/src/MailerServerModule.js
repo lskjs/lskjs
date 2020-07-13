@@ -117,9 +117,12 @@ export default class MailerServerModule extends Module {
       ...this.getTemplateOptions(email),
     };
   }
-
+  canSend() {
+    return true;
+  }
   async send(props) {
     const { to, cc, bcc, template, ...otherProps } = props;
+    if (!this.canSend(to)) throw this.app.e('mailer.canSend');
     if (!to) throw this.app.e('mailer.!to');
     const options = this.renderTemplate({ template, ...otherProps });
     this.log.trace(`mailer.send [${template}] => ${[to, cc, bcc].filter(Boolean).join(',')}`);
