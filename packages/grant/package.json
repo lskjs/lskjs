@@ -12,6 +12,7 @@
     "grant"
   ],
   "scripts": {
+    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "dev": "npm run watch",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",

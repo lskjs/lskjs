@@ -3,6 +3,7 @@ import createLogger from '@lskjs/utils/createLogger';
 import hashCode from '@lskjs/utils/hashCode';
 import isObject from 'lodash/isObject';
 import Promise from 'bluebird';
+import get from 'lodash/get';
 
 const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
@@ -12,6 +13,9 @@ export default class GrantModule extends Module {
   name = 'GrantModule';
   getRules() {
     return {};
+  }
+  test() {
+    return true;
   }
   async init() {
     await super.init();
@@ -50,6 +54,11 @@ export default class GrantModule extends Module {
       ...params,
     };
   }
+  getGroupParams(args) {
+    return Promise.map(args, async (arg) => {
+      return this.getParams([arg]);
+    });
+  }
   getUserByUserId(userId) {
     if (__CLIENT__) {
       return this.app.stores.UserStore.findById(userId);
@@ -70,20 +79,31 @@ export default class GrantModule extends Module {
     }
     return null;
   }
+  async canGroup(args) {
+    const params = await this.getGroupParams(args);
+    const { rules } = this;
+    const cans = {};
+    await Promise.map(
+      params,
+      async (data) => {
+        const { action } = data;
+        if (rules && rules[action]) {
+          debug('can', action);
+          const res = await rules[action].bind(this)(data);
+          cans[hashCode(action)] = res;
+        }
+      },
+      { concurrency: 10 },
+    );
+    return cans;
+  }
   async getCache(initRules) {
-    const rules = {};
-    await Promise.map(initRules, async (rule) => {
-      // const { action } = await this.getParams(rule);
-      const hash = hashCode(rule);
-      const res = await this.can(rule);
-      rules[hash] = res;
-      return res;
-    });
+    const rules = await this.canGroup(initRules);
     return {
       rules,
       can(rule) {
         const hash = hashCode(rule);
-        return rules[hash] || null;
+        return get(rules, hash, null);
       },
     };
   }

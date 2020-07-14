@@ -120,5 +120,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  }
+  },
+  "dependencies": {}
 }
