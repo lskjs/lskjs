@@ -4,7 +4,7 @@ import Storage from './Storage';
 
 export default class LocalStorage extends Storage {
   async init() {
-    await super.init()
+    await super.init();
     if (typeof window !== 'undefined') {
       this.state = window.localStorage;
     } else {
@@ -17,13 +17,14 @@ export default class LocalStorage extends Storage {
   _get(key) {
     const path = this.path(key);
     if (!this.state) {
-      this.debug('set', path, '=( !localStorage');
-      return null
+      this.debug('get', path, '=( !localStorage');
+      return null;
     }
+
     try {
-      return tryJSONparse(this.state.getItem(key));
-    } catch(err) {
-      this.debug('set', path, err);
+      return tryJSONparse(this.state.getItem(path));
+    } catch (err) {
+      this.debug('get', path, err);
       return null;
     }
   }
@@ -35,7 +36,7 @@ export default class LocalStorage extends Storage {
     }
     try {
       this.state.setItem(path, JSON.stringify(value));
-    } catch(err) {
+    } catch (err) {
       this.debug('set', path, err);
     }
   }

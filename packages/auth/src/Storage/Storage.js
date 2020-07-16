@@ -1,6 +1,5 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
-import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
 
@@ -12,20 +11,18 @@ export default class Storage {
   state = {};
   constructor(props = {}) {
     assignProps(this, props);
-    this.init();
   }
   init() {}
   _get(key) {
-    return get(this, 'state.' + key)
+    return get(this, `state.${key}`);
   }
   get(key) {
-    let value;
-    value = this._get(key)
+    const value = this._get(key);
     debug('get', key, value);
     return value;
   }
   _set(key, value) {
-    return set(this, key, value)
+    return set(this, `state.${key}`, value);
   }
   set(key, value) {
     this._set(key, value);
