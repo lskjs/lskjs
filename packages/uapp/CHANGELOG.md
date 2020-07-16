@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.44.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.44.0...v1.44.1) (2020-07-16)
+
+
+### Bug Fixes
+
+* **uapp:** scroll to anchor ([e521473](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/e52147315c51a26f2f0997867986242225692264))
+
+
+
+
+
 # [1.44.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.43.0...v1.44.0) (2020-07-16)
 
 
