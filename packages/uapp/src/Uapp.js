@@ -95,7 +95,8 @@ export default class Uapp extends Module {
   }
   async resolveFinish() {
     if (this.scrollTo) {
-      setTimeout(() => this.scrollTo(0, get(this, 'config.uapp.scrollTo')), 10); // @TODO: back && go to page
+      const to = this.req.hash || 0;
+      setTimeout(() => this.scrollTo(to, get(this, 'config.uapp.scrollTo')), 10); // @TODO: back && go to page
     }
     try {
       const { title } = this.page.getMeta();
