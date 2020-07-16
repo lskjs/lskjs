@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.44.0](https://github.com/lskjs/lskjs/compare/v1.43.0...v1.44.0) (2020-07-16)
+
+
+### Bug Fixes
+
+* **auth:** LocalStorage and Storage fixes ([c2b4b8c](https://github.com/lskjs/lskjs/commit/c2b4b8c36930d1bc36ad9ebd071d1f6ae4d3bf40))
+
+
+### Features
+
+* **uapp:** pass scrollTo in uapp ([9a8f8ee](https://github.com/lskjs/lskjs/commit/9a8f8ee9b7ff39aa5c4131d3c48574e49aaf7105))
+* **utils:** isAbsoluteExternalUrl ([84e577b](https://github.com/lskjs/lskjs/commit/84e577bb0cb54c1cd3fc9dc49c1f0a6a128b0232))
+
+
+
+
+
 # [1.43.0](https://github.com/lskjs/lskjs/compare/v1.42.0...v1.43.0) (2020-07-13)
 
 

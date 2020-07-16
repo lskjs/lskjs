@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.44.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.43.0...v1.44.0) (2020-07-16)
+
+
+### Features
+
+* **uapp:** pass scrollTo in uapp ([9a8f8ee](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/9a8f8ee9b7ff39aa5c4131d3c48574e49aaf7105))
+
+
+
+
+
 # [1.43.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.42.0...v1.43.0) (2020-07-13)
 
 **Note:** Version bump only for package @lskjs/uapp
