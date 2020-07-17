@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.45.1](https://github.com/lskjs/lskjs/compare/v1.45.0...v1.45.1) (2020-07-17)
+
+
+### Bug Fixes
+
+* **permit:** dont send code in permit findOne and incirease security ([53f9f1b](https://github.com/lskjs/lskjs/commit/53f9f1ba879c6f47d4c1419f6a6673322be1fa56))
+
+
+
+
+
 # [1.45.0](https://github.com/lskjs/lskjs/compare/v1.44.2...v1.45.0) (2020-07-17)
 
 
