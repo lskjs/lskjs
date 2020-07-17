@@ -8,7 +8,7 @@ import collectExpressReq from '@lskjs/utils/collectExpressReq';
 // import antimergeDeep from '@lskjs/utils/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
-// import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
+import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
 const DEBUG = false;
@@ -67,12 +67,15 @@ export default class ReactAppServer extends Module {
     return page;
   }
 
-  async renderToNodeStream({ res, render, component }) {
+  async renderToNodeStream({ res, render, component, styleStrategy }) {
     const delemitter = `<!-- renderToNodeStream ${Math.random()} renderToNodeStream --->`;
     const content = await render(delemitter);
     const [before, after] = content.split(delemitter);
     res.write(before);
-    const stream = renderToNodeStream(component); // .pipe(renderStylesToNodeStream());
+    let stream = renderToNodeStream(component);
+    if (styleStrategy === 'emotion') {
+      stream = stream.pipe(renderStylesToNodeStream());
+    }
     stream.pipe(res, { end: false });
     stream.on('end', () => {
       res.write(after);
@@ -109,7 +112,14 @@ export default class ReactAppServer extends Module {
 
   @autobind
   async render(req, res) {
-    const strategy = get(req, 'query.__strategy') || get(this, 'config.reactApp.strategy') || null;
+    const ssr = get(req, 'query.__ssr') || get(this, 'config.reactApp.ssr') || null;
+
+    let strategy;
+    let styleStrategy;
+    if (typeof ssr === 'string') {
+      [strategy, styleStrategy] = ssr.slice(',');
+    }
+
     if (DEBUG) console.log('ReactAppServer.render', { strategy }, this.name); // eslint-disable-line no-console
     // const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
     let status = 200;
@@ -168,6 +178,9 @@ export default class ReactAppServer extends Module {
           strategyMethod = 'renderToString';
           content = renderToString(component);
         }
+        if (content && styleStrategy === 'emotion') {
+          content = renderStylesToString(content);
+        }
       } catch (err) {
         if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
         throw {
@@ -201,6 +214,7 @@ export default class ReactAppServer extends Module {
         res,
         render,
         component,
+        styleStrategy,
       });
     }
     try {
