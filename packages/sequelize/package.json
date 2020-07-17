@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@lskjs/module": "1.44.0",
-    "lodash": "4.17.15"
+    "lodash": "4.17.19"
   },
   "peerDependencies": {
     "@lskjs/module": "*",

@@ -53,7 +53,7 @@
     "@lskjs/scroll": "1.1.0",
     "@lskjs/utils": "1.44.0",
     "bluebird": "3.7.2",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "mobx": "5.15.4",
     "mobx-react": "6.1.8",
     "moment": "2.24.0",

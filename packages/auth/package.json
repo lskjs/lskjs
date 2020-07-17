@@ -57,7 +57,7 @@
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "mobx": "5.15.4",
     "node-accountkit": "1.1.6"
   },
