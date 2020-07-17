@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.44.2](https://github.com/lskjs/lskjs/compare/v1.44.1...v1.44.2) (2020-07-17)
+
+**Note:** Version bump only for package lskjs
+
+
+
+
+
 ## [1.44.1](https://github.com/lskjs/lskjs/compare/v1.44.0...v1.44.1) (2020-07-16)
 
 
