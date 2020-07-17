@@ -11,16 +11,16 @@ export default class PermitApi extends Api {
       '/findOne': ::this.findOne,
     };
   }
-  isAuth(req) {
-    return true;
+  isAdmin(req) {
+    return req.user && req.user.role === 'admin';
   }
   async count(req) {
-    await this.isAuth(req);
+    await this.isAdmin(req);
     const { PermitModel } = this.app.models;
     return this.cache(['permit/count', req.data], () => PermitModel.countByParams(req.data));
   }
   async find(req) {
-    await this.isAuth(req);
+    await this.isAdmin(req);
     const { PermitModel } = this.app.models;
     const params = await this.getListParams(req);
     return this.cache(['permit/find', params], async () => {

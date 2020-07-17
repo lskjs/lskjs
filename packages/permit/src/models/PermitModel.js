@@ -104,8 +104,7 @@ export default function PermitModel(app) {
   };
   schema.statics.prepareOne = async function (obj) {
     // eslint-disable-next-line no-param-reassign
-    obj.info = pick(obj.info, ['email', 'type']);
-    return obj;
+    return pick(obj, ['_id', 'userId', 'type', 'createdAt', 'expiredAt', 'info']);
   };
   return schema;
 }
