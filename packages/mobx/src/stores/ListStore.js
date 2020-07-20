@@ -20,6 +20,7 @@ export default class ListStore extends FetchStore {
   @observable sort = {};
   @observable fallbackSort = {};
   @observable pureSearch = false;
+  @observable searchFromLength = 0;
   @observable search = '';
 
   constructor(...args) {
@@ -174,12 +175,14 @@ export default class ListStore extends FetchStore {
 
   @debounce(500)
   setSearch(search) {
-    const pureState = this.pureSearchHandler(search);
-    this.setStateAndUpdate({
-      search,
-      skip: 0,
-      ...pureState,
-    });
+    if (!search || (search && search.length >= this.searchFromLength)) {
+      const pureState = this.pureSearchHandler(search);
+      this.setStateAndUpdate({
+        search,
+        skip: 0,
+        ...pureState,
+      });
+    }
   }
 
   @autobind
