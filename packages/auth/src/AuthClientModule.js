@@ -128,9 +128,16 @@ export default class AuthClientModule extends Module {
   }
 
   async updateSession(...args) {
-    const res = await this.store.updateSession(...args);
-    await this.saveStore();
-    return res;
+    try {
+      const res = await this.store.updateSession(...args);
+      await this.saveStore();
+      return res;
+    } catch (err) {
+      if (err.code === 'auth.userNotFound') {
+        await this.logout();
+      }
+      throw err;
+    }
   }
 
   confirm(values) {
