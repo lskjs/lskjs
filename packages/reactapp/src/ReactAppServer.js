@@ -112,6 +112,13 @@ export default class ReactAppServer extends Module {
 
   @autobind
   async render(req, res) {
+    // ?__ssr=json
+    // ?__ssr=nodeStream
+    // ?__ssr=staticMarkup
+    // ?__ssr=staticMarkup
+    // ?__ssr=nodeStream,emotion
+    // ?__ssr=staticMarkup,emotion
+    // ?__ssr=renderToStaticMarkup,emotion
     const ssr = get(req, 'query.__ssr') || get(this, 'config.reactApp.ssr') || null;
 
     let strategy;
