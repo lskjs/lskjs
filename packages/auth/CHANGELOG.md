@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.46.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.45.2...v1.46.0) (2020-07-27)
+
+
+### Bug Fixes
+
+* **auth:** logout if user not found in db ([89801cd](https://github.com/lskjs/modules/tree/master/packages/auth/commit/89801cd3a0eb1890fec441237a832fdfb846b28e))
+
+
+
+
+
 ## [1.45.2](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.45.1...v1.45.2) (2020-07-20)
 
 **Note:** Version bump only for package @lskjs/auth

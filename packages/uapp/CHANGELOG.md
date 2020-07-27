@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.46.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.45.2...v1.46.0) (2020-07-27)
+
+
+### Features
+
+* **uapp:** separate initI18 ([adffd03](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/adffd03ceb0827da91a6f4058c610f07d07ecf47))
+
+
+
+
+
 ## [1.44.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.44.0...v1.44.1) (2020-07-16)
 
 
