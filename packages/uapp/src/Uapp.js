@@ -114,6 +114,15 @@ export default class Uapp extends Module {
     this.req.path = this.history.location.path;
     this.req.query = this.history.location.query;
   }
+  async initI18() {
+    await this.i18
+      .setState({
+        log: this.log,
+        config: this.app.config.i18,
+        getLocale: this.getLocale,
+      })
+      .init();
+  }
   async init() {
     await super.init();
     if (this.rootState) {
@@ -127,13 +136,7 @@ export default class Uapp extends Module {
     });
 
     if (this.i18) {
-      await this.i18
-        .setState({
-          log: this.log,
-          config: this.app.config.i18,
-          getLocale: this.getLocale,
-        })
-        .init();
+      await this.initI18();
     }
     if (__CLIENT__) {
       this.favico = new Favico({
@@ -433,8 +436,16 @@ export default class Uapp extends Module {
   redirect(...args) {
     if (__DEV__) console.log('Uapp.redirect', ...args); // eslint-disable-line no-console
     if (__CLIENT__) {
-      this.app.redirect(...args);
-    } else if (__DEV__) console.log('cant history.redirect because it server', ...args); // eslint-disable-line no-console
+      const [link] = args;
+      if ((link && link.startsWith('http://')) || link.startsWith('https://')) {
+        window.location.href = link;
+      } else {
+        this.app.redirect(...args);
+      }
+    } else {
+      // eslint-disable-next-line no-lonely-if
+      if (__DEV__) console.log('cant history.redirect because it server', ...args); // eslint-disable-line no-console
+    }
   }
 
   restart() {}
