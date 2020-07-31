@@ -143,6 +143,9 @@ export default class Api extends BaseApi {
     if (!password) throw req.e('auth.passwordEmpty', { status: 400 });
     const user = await UserModel.findOne(this.getUserCriteria(req.data));
     if (!user) throw req.e('auth.loginIncorrect', { status: 400 });
+    if (get(user, 'statuses.blockedAt')) {
+      throw req.e('auth.blocked', { status: 403 });
+    }
     if (!(await this.helpers.verifyPassword(password, user.password))) {
       throw req.e('auth.passwordIncorrect', { status: 400 });
     }
