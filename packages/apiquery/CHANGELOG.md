@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.47.0](https://github.com/lskjs/ux/tree/master/packages/apiquery/compare/v1.46.0...v1.47.0) (2020-07-31)
+
+
+### Features
+
+* bump lodash version ([1112980](https://github.com/lskjs/ux/tree/master/packages/apiquery/commit/1112980c289c4dfc2d921e20032c73f4231957d7))
+
+
+
+
+
 ## [1.29.3](https://github.com/lskjs/ux/tree/master/packages/apiquery/compare/v1.29.2...v1.29.3) (2020-06-05)
 
 
