@@ -34,7 +34,7 @@
     "@lskjs/utils": "1.44.0",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "mobx": "5.15.4"
   },
   "peerDependencies": {

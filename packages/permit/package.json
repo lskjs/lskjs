@@ -39,7 +39,7 @@
     "@lskjs/module": "1.44.0",
     "@lskjs/server-api": "1.44.0",
     "bluebird": "3.7.2",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "mobx": "5.15.4",
     "moment": "2.24.0"
   },
