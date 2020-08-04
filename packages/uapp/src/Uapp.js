@@ -95,7 +95,7 @@ export default class Uapp extends Module {
   }
   async resolveFinish() {
     if (this.scrollTo) {
-      const to = this.req.hash || 0;
+      const to = get(this, 'history.location.hash', 0);
       setTimeout(() => this.scrollTo(to, get(this, 'config.uapp.scrollTo')), 10); // @TODO: back && go to page
     }
     try {
