@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.47.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.47.0...v1.47.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* **uapp:** scroll to hash segment after route resolve ([4611504](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/46115044269faa56fcebce70b039bbac7e0edac1))
+
+
+
+
+
 # [1.47.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.46.0...v1.47.0) (2020-07-31)
 
 
