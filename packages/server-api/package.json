@@ -33,10 +33,12 @@
     "object-hash": "2.0.2"
   },
   "devDependencies": {
+    "axios": "0.19.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.19"
   },
   "peerDependencies": {
+    "axios": "0.19.2",
     "bluebird": "*",
     "lodash": "*"
   }
