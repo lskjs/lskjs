@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/lskjs/modules/tree/master/packages/server-api/compare/v1.47.2...v1.48.0) (2020-08-05)
+
+
+### Features
+
+* **server-api:** add createProxy ([ac14670](https://github.com/lskjs/modules/tree/master/packages/server-api/commit/ac14670739a9c77f938d498daf55e82483b7a07a))
+* **server-api:** IndexApi.getRoutesList return tree ([04c229c](https://github.com/lskjs/modules/tree/master/packages/server-api/commit/04c229ce017fc762f7b5596110bfaadf7ece632d))
+
+
+
+
+
 ## [1.47.2](https://github.com/lskjs/modules/tree/master/packages/server-api/compare/v1.47.1...v1.47.2) (2020-08-05)
 
 **Note:** Version bump only for package @lskjs/server-api

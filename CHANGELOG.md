@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/lskjs/lskjs/compare/v1.47.2...v1.48.0) (2020-08-05)
+
+
+### Bug Fixes
+
+* **server:** createFallback pass headers ([c70e79f](https://github.com/lskjs/lskjs/commit/c70e79f3f7b1de8378ddef7c33b63e51aa9f89da))
+* **utils:** flattenKeys style ([5cbfdf5](https://github.com/lskjs/lskjs/commit/5cbfdf51096b73d00d24ddf66a1a226c22bc3162))
+* **utils:** stable mapValuesDeep ([9894b92](https://github.com/lskjs/lskjs/commit/9894b927969e66a56218b03232887f17270983da))
+
+
+### Features
+
+* **server:** runRoutes refactor ad stabiling ([95f1c1f](https://github.com/lskjs/lskjs/commit/95f1c1fd9f863db7b97f7c5e56db6fc6e23a21ec))
+* **server-api:** add createProxy ([ac14670](https://github.com/lskjs/lskjs/commit/ac14670739a9c77f938d498daf55e82483b7a07a))
+* **server-api:** IndexApi.getRoutesList return tree ([04c229c](https://github.com/lskjs/lskjs/commit/04c229ce017fc762f7b5596110bfaadf7ece632d))
+
+
+
+
+
 ## [1.47.2](https://github.com/lskjs/lskjs/compare/v1.47.1...v1.47.2) (2020-08-05)
 
 
