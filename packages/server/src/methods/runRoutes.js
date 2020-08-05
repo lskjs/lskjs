@@ -15,7 +15,7 @@ export default function () {
   }
   this.routes = getRoutesTree(extractApi(this.rootApi, {}));
   log(
-    'log',
+    'trace',
     'routes',
     flattenKeys(this.routes, [], (a) => a.join('')),
   );
