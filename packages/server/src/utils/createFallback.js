@@ -1,9 +1,9 @@
 import fs from 'fs';
 import fallback from './fallback';
 
-export default ({ fallback: asset, url } = {}) => async (req, res) => {
+export default ({ fallback: asset, url, headers = { 'content-type': 'image/png' } } = {}) => async (req, res) => {
   if (__DEV__ && url) {
     return fallback({ url, req });
   }
-  return res.set({ 'content-type': 'image/png' }).send(fs.readFileSync(asset));
+  return res.set(headers).send(fs.readFileSync(asset));
 };
