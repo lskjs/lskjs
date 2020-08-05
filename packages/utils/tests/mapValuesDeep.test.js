@@ -1,5 +1,7 @@
 /* global test expect */
-import filter from 'lodash/filter';
+import pickBy from 'lodash/pickBy';
+import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
 import mapValuesDeep from '../src/mapValuesDeep';
 
 test('mapValuesDeep Boolean', () => {
@@ -26,8 +28,9 @@ test('mapValuesDeep Boolean', () => {
 
   expect(mapValuesDeep(obj, Boolean)).toStrictEqual(res);
 });
-test('mapValuesDeep to array', () => {
-  const obj = {
+
+test('mapValuesDeep with filter', () => {
+  const input = {
     a: {
       b: 1,
       c: {
@@ -36,17 +39,77 @@ test('mapValuesDeep to array', () => {
       },
     },
     f: 3,
+    g: 0,
   };
-  const res = {
+  const output = {
     a: {
-      b: true,
+      b: 1,
       c: {
-        d: true,
-        e: false,
+        d: 2,
       },
     },
-    f: true,
+    f: 3,
   };
 
-  expect(mapValuesDeep(obj, Boolean, res2 => filter(res2, Boolean))).toStrictEqual(res);
+  expect(
+    mapValuesDeep(
+      input,
+      (a) => a,
+      (res2) => (isPlainObject(res2) ? pickBy(res2, Boolean) : res2),
+    ),
+  ).toStrictEqual(output);
+});
+
+test('mapValuesDeep extract function', () => {
+  const input = {
+    a: 1,
+    b: 2,
+    extract: () => ({
+      c: 3,
+      d: 4,
+    }),
+  };
+  const output = {
+    a: 1,
+    b: 2,
+    extract: {
+      c: 3,
+      d: 4,
+    },
+  };
+
+  expect(mapValuesDeep(input, (node) => (isFunction(node) ? node() : node))).toStrictEqual(output);
+});
+
+test('mapValuesDeep extract function deep', () => {
+  const input = {
+    a: 1,
+    b: 2,
+    extract: () => ({
+      c: 3,
+      d: 4,
+      data: () => ({
+        e: 5,
+        f: 6,
+      }),
+    }),
+  };
+  const output = {
+    a: 1,
+    b: 2,
+    extract: {
+      c: 3,
+      d: 4,
+      data: {
+        e: 5,
+        f: 6,
+      },
+    },
+  };
+
+  function deepMap(item) {
+    return isFunction(item) ? mapValuesDeep(item(), deepMap) : item;
+  }
+
+  expect(mapValuesDeep(input, deepMap)).toStrictEqual(output);
 });
