@@ -1,5 +1,8 @@
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import flattenKeys from '@lskjs/utils/flattenKeys';
+import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
+import isPlainObject from 'lodash/isPlainObject';
+import pickBy from 'lodash/pickBy';
 import awaitHealthchecks from './awaitHealthcheck';
 import Api from './Api';
 
@@ -11,8 +14,15 @@ export default class IndexApi extends Api {
     if (this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
     return null;
   }
-  getRoutesList() {
-    return flattenKeys(this.getRoutes(), [], a => a.join('/'));
+  getRoutesList(tree = false) {
+    if (tree) {
+      return mapValuesDeep(
+        this.getRoutes(),
+        (a) => a,
+        (res2) => (isPlainObject(res2) ? pickBy(res2, Boolean) : res2),
+      );
+    }
+    return flattenKeys(this.getRoutes(), [], (a) => a.join(''));
   }
   index() {
     const url = this.path;
@@ -21,7 +31,7 @@ export default class IndexApi extends Api {
       url,
     };
     if (__DEV__) {
-      res.routes = this.getRoutesList();
+      res.routes = this.getRoutesList(true);
     }
     return res;
   }
