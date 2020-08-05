@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.47.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.47.1...v1.47.2) (2020-08-05)
+
+
+### Bug Fixes
+
+* **utils:** add importFn and undefault ([8e4a004](https://github.com/lskjs/ux/tree/master/packages/utils/commit/8e4a0043320313d9dc41288db58fa6079217a1df))
+
+
+
+
+
 # [1.47.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.46.0...v1.47.0) (2020-07-31)
 
 
