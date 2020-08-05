@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.1](https://github.com/lskjs/lskjs/compare/v1.48.0...v1.48.1) (2020-08-05)
+
+
+### Bug Fixes
+
+* **server:** runRoutes log ([233d7cf](https://github.com/lskjs/lskjs/commit/233d7cfd9c71e4f4736be5c56078871763ef37e7))
+
+
+
+
+
 # [1.48.0](https://github.com/lskjs/lskjs/compare/v1.47.2...v1.48.0) (2020-08-05)
 
 
