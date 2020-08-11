@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.3](https://github.com/lskjs/lskjs/compare/v1.48.2...v1.48.3) (2020-08-11)
+
+
+### Bug Fixes
+
+* **server:** un nessesary db.uri ([953430e](https://github.com/lskjs/lskjs/commit/953430edc8bf451d9aedba66ba6ee66dfc6ebd02))
+
+
+
+
+
 ## [1.48.2](https://github.com/lskjs/lskjs/compare/v1.48.1...v1.48.2) (2020-08-06)
 
 
