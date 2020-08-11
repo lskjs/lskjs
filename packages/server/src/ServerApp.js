@@ -115,7 +115,11 @@ export default class ServerApp extends Module {
         models[modelName] = models2[modelName];
       });
     });
-    return mapValues(models, model => {
+    if (Object.values(models).length && !this.db) {
+      this.log.warn('ServerApp.getMongooseModels: !db, cant load mongoose models');
+      return {};
+    }
+    return mapValues(models, (model) => {
       if (model._universal) {
         return model.getMongooseModel(this.db);
       }
@@ -140,9 +144,9 @@ export default class ServerApp extends Module {
   getStaticsDir(dirPath) {
     const fs = require('fs');
     const { readdirSync } = fs;
-    const files = readdirSync(dirPath).filter(p => p !== '.' && p !== '..');
+    const files = readdirSync(dirPath).filter((p) => p !== '.' && p !== '..');
     const res = {};
-    files.forEach(file => {
+    files.forEach((file) => {
       res[`/${file}`] = `${dirPath}/${file}`;
     });
     return res;
@@ -172,7 +176,7 @@ export default class ServerApp extends Module {
   }
 
   _getStatics() {
-    return mapValues(this.getStatics() || {}, p => path.resolve(p));
+    return mapValues(this.getStatics() || {}, (p) => path.resolve(p));
   }
 
   runStatics() {
@@ -212,7 +216,7 @@ export default class ServerApp extends Module {
   runMiddlewares() {
     if (DEBUG) this.log.trace('ServerApp.runMiddlewares');
     const middlewares = flattenDeep(this.getUsingMiddlewares());
-    middlewares.forEach(middleware => {
+    middlewares.forEach((middleware) => {
       if (middleware && typeof middleware === 'function') this.express.use(middleware);
     });
   }
@@ -250,7 +254,7 @@ export default class ServerApp extends Module {
   async run(...args) {
     await super.run(...args);
     if (DEBUG) this.log.trace('ServerApp.run');
-    if (this.db) await this.db.run();
+    if (this.db) await this.db.run().catch((err) => this.log.error('ServerApp.db', err));
     if (this.serverConfig.ws) await this.runWs();
     if (this.config.redis) await this.runRedis();
     this.runStatics();
@@ -266,7 +270,7 @@ export default class ServerApp extends Module {
     this.runRoutes();
     this.runDefaultRoute();
     this.runCatchErrors();
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.httpInstance = this.httpServer.listen(this.config.port || this.serverConfig.port, () => {
         resolve(this);
       });
@@ -275,7 +279,7 @@ export default class ServerApp extends Module {
   async stop() {
     await super.stop();
     if (this.db) await this.db.stop();
-    await new Promise(resolved => {
+    await new Promise((resolved) => {
       if (this.httpInstance) {
         this.httpInstance.close(resolved);
       } else {
