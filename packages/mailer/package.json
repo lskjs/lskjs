@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "1.48.4",
+  "version": "1.49.0",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/db": "1.48.4",
+    "@lskjs/db": "1.49.0",
     "@lskjs/utils": "1.48.0",
     "eventemitter3": "4.0.0",
     "imap": "0.8.19",

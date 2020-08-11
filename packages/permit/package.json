@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/permit",
-  "version": "1.48.4",
+  "version": "1.49.0",
   "description": "LSK module for one time codes and permits.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "nanoid": "2.1.11"
   },
   "devDependencies": {
-    "@lskjs/db": "1.48.4",
+    "@lskjs/db": "1.49.0",
     "@lskjs/mobx": "1.48.0",
     "@lskjs/module": "1.48.0",
     "@lskjs/server-api": "1.48.0",
