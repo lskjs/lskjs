@@ -130,7 +130,7 @@ export default class ServerApp extends Module {
     return {};
   }
   getDatabase() {
-    return this.config.db ? db(this, this.config.db) : null;
+    return this.config.db && this.config.db.uri ? db(this, this.config.db) : null;
   }
   getErrors() {
     return require('./getErrors').default(this);

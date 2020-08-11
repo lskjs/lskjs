@@ -13,37 +13,28 @@ export default async (ctx, params = {}) => {
     connectTimeoutMS: 5000,
     // sets the delay between every retry (milliseconds)
   };
-  // console.log('options', options);
-  // ctx.log.trace('db.init');
   const mongoose = new mongooseLib.Mongoose();
   mongoose.Promise = Promise;
-
-  mongoose.run = () => {
+  mongoose.run = async () => {
     if (!uri) throw '!db.uri';
     const finalOptions = {
       ...defaultOptions,
       ...options,
     };
     const dbname = (uri || '').split('@')[1];
-    ctx.log.trace('db.connect()', dbname); // finalOptions
-    return new Promise((resolve, reject) => (
-      mongoose.connect(uri, finalOptions).then(resolve, reject)
-    ));
-    // return mongoose.connect(uri, finalOptions); // , options
-    // return mongoose;
+    ctx.log.trace('db startToConnect', dbname); // finalOptions
+    const connection = await new Promise((resolve, reject) =>
+      mongoose.connect(uri, finalOptions).then(resolve, reject),
+    );
+    ctx.log.trace('db.connected', dbname);
+    return connection;
   };
-  // mongoose.removeModels = () => {
-  //   Object.keys(mongoose.connection.models).forEach((key) => {
-  //     delete mongoose.connection.models[key];
-  //   });
-  // };
   mongoose.stop = () => {
     mongoose.connection.close();
     mongoose.disconnect();
     // mongoose.removeModels();
     return Promise.delay(1000);
   };
-
 
   mongoose.reconnect = () => {
     ctx.log.trace('db.reconnect()');
