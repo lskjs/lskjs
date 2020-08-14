@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.49.0...v1.50.0) (2020-08-14)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
 ## [1.48.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.48.1...v1.48.2) (2020-08-06)
 
 

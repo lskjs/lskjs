@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/lskjs/lskjs/compare/v1.49.0...v1.50.0) (2020-08-14)
+
+
+### Features
+
+* **utils:** add asyncAction ([5196f8f](https://github.com/lskjs/lskjs/commit/5196f8fc76e633be640ef58481214ebad5ca0251))
+
+
+
+
+
 # [1.49.0](https://github.com/lskjs/lskjs/compare/v1.48.4...v1.49.0) (2020-08-11)
 
 
