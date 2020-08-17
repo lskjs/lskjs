@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.50.1](https://github.com/lskjs/lskjs/compare/v1.50.0...v1.50.1) (2020-08-17)
+
+
+### Bug Fixes
+
+* **utils:** add ret ([a8d7701](https://github.com/lskjs/lskjs/commit/a8d7701a7ce0dc2c2e7fc344c71eaa296833d303))
+
+
+
+
+
 # [1.50.0](https://github.com/lskjs/lskjs/compare/v1.49.0...v1.50.0) (2020-08-14)
 
 
