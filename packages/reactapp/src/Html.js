@@ -58,6 +58,13 @@ ${meta.title ? `<meta property="og:title" content="${this.renderTitle()}" />` : 
 ${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}\
 ${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}\
 ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
+${meta.type ? `<meta property="og:type" content="${meta.type}" />` : ''}\
+${meta.site_name ? `<meta property="og:site_name" content="${meta.site_name}" />` : ''}\
+${meta.twitter.title ? `<meta property="twitter:title" content="${meta.twitter.title || this.renderTitle()}" />` : ''}\
+${meta.twitter.description ? `<meta property="twitter:description" content="${meta.twitter.description || meta.description}" />`: ''}\
+${meta.twitter.url ? `<meta property="twitter:url" content="${meta.twitter.url || meta.url}" />` : ''}\
+${meta.twitter.image ? `<meta property="twitter:image" content="${meta.twitter.image || meta.image}" />` : ''}\
+${meta.twitter.card ? `<meta property="twitter:card" content="${meta.twitter.card}" />` : ''}\
 `;
   }
 
@@ -97,7 +104,7 @@ ${this.renderPreloader()} \
     const { meta = {} } = this;
     return `\
 <meta charset="utf-8">\
-<meta http-equiv="x-ua-compatible" content="ie=edge" />\
+<meta http-equiv="content-language" content=”${this.getLang('meta')}” />\
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />\
 ${meta.description ? `<meta name="description" content="${meta.description}"/>` : ''}\
 `;
@@ -119,6 +126,10 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
 
     const postfix = __DEV__ ? ' __DEV__' : '';
     return (map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
+  }
+
+  getLang() {
+    return 'en'; // @TODO: isuvorov поставь реальный язык, <3
   }
 
   renderStyle() {
@@ -174,7 +185,7 @@ ${rootStateStr}\
   render() {
     return `\
 <!doctype html>\
-<html class="${this.getHtmlClass()}">\
+<html class="${this.getHtmlClass()}" lang="${this.getLang()}" prefix="og: http://ogp.me/ns#">\
 <head>\
 ${this.renderHead()}\
 </head>\
