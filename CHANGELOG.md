@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/lskjs/lskjs/compare/v1.50.1...v1.51.0) (2020-08-27)
+
+
+### Features
+
+* **auth:** support custom jwt cookie config ([13035ae](https://github.com/lskjs/lskjs/commit/13035ae98fdd3a07e76839bdac70cd23cfe8a648))
+* **server:** support custom jwt cookie name ([9acbe74](https://github.com/lskjs/lskjs/commit/9acbe74891022e23d31cf97885f2634cb20acb8f))
+
+
+
+
+
 ## [1.50.1](https://github.com/lskjs/lskjs/compare/v1.50.0...v1.50.1) (2020-08-17)
 
 
