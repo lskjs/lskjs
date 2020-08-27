@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.1](https://github.com/lskjs/lskjs/compare/v1.51.0...v1.51.1) (2020-08-27)
+
+
+### Bug Fixes
+
+* **auth:** jwt cookie schema ([e9c5ce1](https://github.com/lskjs/lskjs/commit/e9c5ce192dc572305fd46c3362b34a430fda2139))
+* **server:** jwt cookie schema ([e4486f9](https://github.com/lskjs/lskjs/commit/e4486f9a3857401bf4ad0889297494ba5bf90666))
+
+
+
+
+
 # [1.51.0](https://github.com/lskjs/lskjs/compare/v1.50.1...v1.51.0) (2020-08-27)
 
 
