@@ -43,11 +43,14 @@ export default class AuthClientModule extends Module {
     if (this.app.api) this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
+    const config = __CLIENT__ ? this.app.getRootState().config : this.app.config;
+    const cookieName = get(config, 'jwt.cookie.name', 'token');
+    const cookieOptions = get(config, 'jwt.cookie.options', {});
     if (__CLIENT__ && cookies) {
       if (token == null) {
-        cookie.remove('token');
+        cookie.remove(cookieName, cookieOptions);
       } else {
-        cookie.set('token', token, { expires });
+        cookie.set(cookieName, token, { expires, ...cookieOptions });
       }
     }
   }
