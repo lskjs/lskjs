@@ -2,7 +2,7 @@ import get from 'lodash/get';
 
 export default (ctx) => {
   return function getToken(req) {
-    const cookieName = get(ctx.config, 'client.jwt.cookie.name', 'token');
+    const { name: cookieName = 'token' } = get(ctx.config, 'client.jwt.cookie', {});
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
       return req.headers.authorization.split(' ')[1];
     }
