@@ -39,18 +39,14 @@ export default class AuthClientModule extends Module {
   }
 
   setToken(token, expires = 365, cookies = true) {
-    if (DEBUG) console.log('AuthStore.setToken', token); // eslint-disable-line no-console
+    if (DEBUG) console.log('AuthClientModule.setToken', token); // eslint-disable-line no-console
     if (this.app.api) this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
-    let cfg;
-    if (__CLIENT__) {
-      const rootState = this.app.getRootState();
-      cfg = rootState.config;
-    } else {
-      cfg = this.app.config;
-    }
-    const { name = 'token', ...options } = get(cfg, 'jwt.cookie', {});
+    const rootState = this.app.getRootState();
+    const { name = 'token', ...options } = get(rootState, 'config.jwt.cookie', {});
+    // eslint-disable-next-line no-console
+    if (DEBUG) console.log('AuthClientModule.setToken cookie', name);
     if (__CLIENT__ && cookies) {
       if (token == null) {
         cookie.remove(name, options);
