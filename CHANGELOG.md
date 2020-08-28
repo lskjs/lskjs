@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.4](https://github.com/lskjs/lskjs/compare/v1.51.3...v1.51.4) (2020-08-28)
+
+
+### Bug Fixes
+
+* **reactapp:** config passed to getRootState ([7a29eb7](https://github.com/lskjs/lskjs/commit/7a29eb712601509c05892f18fd38b73316f847ef))
+
+
+
+
+
 ## [1.51.3](https://github.com/lskjs/lskjs/compare/v1.51.2...v1.51.3) (2020-08-28)
 
 
