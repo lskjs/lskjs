@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.3](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.51.2...v1.51.3) (2020-08-28)
+
+
+### Bug Fixes
+
+* **auth:** getRootState universal ([5c2c547](https://github.com/lskjs/modules/tree/master/packages/auth/commit/5c2c54725675e72354692aa38af44dafb97b54cf))
+
+
+
+
+
 ## [1.51.2](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.51.1...v1.51.2) (2020-08-28)
 
 
