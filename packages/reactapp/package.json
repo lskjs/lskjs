@@ -31,6 +31,7 @@
   "dependencies": {
     "@lskjs/module": "1.51.0",
     "@lskjs/utils": "1.51.0",
+    "emotion": "10.0.27",
     "emotion-server": "10.0.27",
     "history": "4.10.1",
     "qs": "6.9.1",
