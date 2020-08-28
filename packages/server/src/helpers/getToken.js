@@ -1,8 +1,12 @@
 import get from 'lodash/get';
 
+const DEBUG = false;
+
 export default (ctx) => {
   return function getToken(req) {
     const { name: cookieName = 'token' } = get(ctx.config, 'client.jwt.cookie', {});
+    // eslint-disable-next-line no-console
+    if (DEBUG) console.log('getToken cookie', cookieName);
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
       return req.headers.authorization.split(' ')[1];
     }
