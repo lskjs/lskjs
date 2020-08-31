@@ -45,12 +45,16 @@ export default function mergeEnvs(...configs) {
     // });
   });
 
-  const getConfigKey = key => ['.', '__'].map((delemiter) => {
-    const [mainKey, ...otherKeys] = key.split(delemiter);
-    if (mainKey === 'config' && otherKeys.length) {
-      return otherKeys.join('.');
-    }
-  }).filter(Boolean)[0];
+  const getConfigKey = (key) =>
+    ['.', '__']
+      .map((delemiter) => {
+        const [mainKey, ...otherKeys] = key.split(delemiter);
+        if (mainKey === 'config' && otherKeys.length) {
+          return otherKeys.join('.');
+        }
+        return null;
+      })
+      .filter(Boolean)[0];
 
   Object.keys(process.env).forEach((key) => {
     const configKey = getConfigKey(key);
