@@ -6,7 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import Promise from 'bluebird';
 import autobind from '@lskjs/utils/autobind';
 import collectExpressReq from '@lskjs/utils/collectExpressReq';
-// import antimergeDeep from '@lskjs/utils/antimergeDeep';
+import antimergeDeep from '@lskjs/utils/antimergeDeep';
 // import ReactDOM from 'react-dom/server';
 import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
 import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
@@ -17,30 +17,22 @@ const DEBUG = false;
 export default class ReactAppServer extends Module {
   name = 'ReactAppServer';
 
-  getRootState({ req, uappReq, ...props }) {
-    const config = this.getConfig(this.configRootStateFields);
+  getRootState({ req, ...props }) {
+    let config = null;
+    if (this.initClientConfig) {
+      config = antimergeDeep(this.config.client, this.initClientConfig);
+    }
     return {
-      req: {
-        reqId: req.reqId,
-        user: req.user,
-        userId: req.userId,
-        token: req.token,
-      },
+      req: pick(req, ['reqId', 'user', 'userId', 'token']),
       config,
       ...props,
     };
-    // const config = antimergeDeep(this.uapp.uapp.config, this.uapp.uapp._config);
-  }
-
-  getConfig(fields = []) {
-    const config = cloneDeep(get(this, 'config.client', {}));
-    if (Array.isArray(fields) && fields.length === 0) return config;
-    return pick(config, fields);
   }
 
   async getUapp({ req, ...params } = {}) {
     const { Uapp } = this;
     const uappReq = collectExpressReq(req);
+    const config = cloneDeep(get(this, 'config.client', {}));
     const uapp = new Uapp({
       ...params,
       history: createMemoryHistory({
@@ -49,7 +41,7 @@ export default class ReactAppServer extends Module {
       }),
       req: uappReq,
       rootState: this.getRootState({ req }),
-      config: this.getConfig(),
+      config,
       app: this,
     });
     try {

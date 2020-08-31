@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 import map from 'lodash/map';
 import get from 'lodash/get';
-import cloneDeep from 'lodash/cloneDeep';
 import forEach from 'lodash/forEach';
 import UniversalRouter from 'universal-router';
 import Promise from 'bluebird';
