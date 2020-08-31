@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.4](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.51.3...v1.51.4) (2020-08-28)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [1.51.3](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.51.2...v1.51.3) (2020-08-28)
+
+
+### Bug Fixes
+
+* **server:** console for debug ([3e26e0e](https://github.com/lskjs/modules/tree/master/packages/server/commit/3e26e0edf89620c7ce45881d1b9421fd7553d1c9))
+
+
+
+
+
+## [1.51.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.51.0...v1.51.1) (2020-08-27)
+
+
+### Bug Fixes
+
+* **server:** jwt cookie schema ([e4486f9](https://github.com/lskjs/modules/tree/master/packages/server/commit/e4486f9a3857401bf4ad0889297494ba5bf90666))
+
+
+
+
+
+# [1.51.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.50.1...v1.51.0) (2020-08-27)
+
+
+### Features
+
+* **server:** support custom jwt cookie name ([9acbe74](https://github.com/lskjs/modules/tree/master/packages/server/commit/9acbe74891022e23d31cf97885f2634cb20acb8f))
+
+
+
+
+
 ## [1.50.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.50.0...v1.50.1) (2020-08-17)
 
 **Note:** Version bump only for package @lskjs/server

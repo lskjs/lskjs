@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.50.1...v1.51.0) (2020-08-27)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
 # [1.47.0](https://github.com/lskjs/modules/tree/master/packages/getspreadsheet/compare/v1.46.0...v1.47.0) (2020-07-31)
 
 

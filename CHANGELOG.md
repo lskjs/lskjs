@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.4](https://github.com/lskjs/lskjs/compare/v1.51.3...v1.51.4) (2020-08-28)
+
+
+### Bug Fixes
+
+* **reactapp:** config passed to getRootState ([7a29eb7](https://github.com/lskjs/lskjs/commit/7a29eb712601509c05892f18fd38b73316f847ef))
+
+
+
+
+
+## [1.51.3](https://github.com/lskjs/lskjs/compare/v1.51.2...v1.51.3) (2020-08-28)
+
+
+### Bug Fixes
+
+* **auth:** getRootState universal ([5c2c547](https://github.com/lskjs/lskjs/commit/5c2c54725675e72354692aa38af44dafb97b54cf))
+* **server:** console for debug ([3e26e0e](https://github.com/lskjs/lskjs/commit/3e26e0edf89620c7ce45881d1b9421fd7553d1c9))
+
+
+
+
+
+## [1.51.2](https://github.com/lskjs/lskjs/compare/v1.51.1...v1.51.2) (2020-08-28)
+
+
+### Bug Fixes
+
+* **auth:** fix config is undefined property ([fa46ce2](https://github.com/lskjs/lskjs/commit/fa46ce293eccbf3b2d014e1e8ef7eb52d0e3dcb8))
+
+
+
+
+
+## [1.51.1](https://github.com/lskjs/lskjs/compare/v1.51.0...v1.51.1) (2020-08-27)
+
+
+### Bug Fixes
+
+* **auth:** jwt cookie schema ([e9c5ce1](https://github.com/lskjs/lskjs/commit/e9c5ce192dc572305fd46c3362b34a430fda2139))
+* **server:** jwt cookie schema ([e4486f9](https://github.com/lskjs/lskjs/commit/e4486f9a3857401bf4ad0889297494ba5bf90666))
+
+
+
+
+
+# [1.51.0](https://github.com/lskjs/lskjs/compare/v1.50.1...v1.51.0) (2020-08-27)
+
+
+### Features
+
+* **auth:** support custom jwt cookie config ([13035ae](https://github.com/lskjs/lskjs/commit/13035ae98fdd3a07e76839bdac70cd23cfe8a648))
+* **server:** support custom jwt cookie name ([9acbe74](https://github.com/lskjs/lskjs/commit/9acbe74891022e23d31cf97885f2634cb20acb8f))
+
+
+
+
+
 ## [1.50.1](https://github.com/lskjs/lskjs/compare/v1.50.0...v1.50.1) (2020-08-17)
 
 

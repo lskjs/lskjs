@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.51.4](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.51.3...v1.51.4) (2020-08-28)
+
+
+### Bug Fixes
+
+* **reactapp:** config passed to getRootState ([7a29eb7](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/7a29eb712601509c05892f18fd38b73316f847ef))
+
+
+
+
+
+# [1.51.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.50.1...v1.51.0) (2020-08-27)
+
+**Note:** Version bump only for package @lskjs/reactapp
+
+
+
+
+
 ## [1.50.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.50.0...v1.50.1) (2020-08-17)
 
 **Note:** Version bump only for package @lskjs/reactapp
