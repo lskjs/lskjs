@@ -68,7 +68,6 @@ export default class Uapp extends Module {
   }
 
   async applyRootState(rootState) {
-    this._config = cloneDeep(this.config); // подумать в init или в run
     this.rootState = rootState;
   }
 
@@ -126,6 +125,7 @@ export default class Uapp extends Module {
   }
   async init() {
     await super.init();
+    // this._config = cloneDeep(this.config); // backup for modifications
     if (this.rootState) {
       await this.applyRootState(this.rootState);
     }
