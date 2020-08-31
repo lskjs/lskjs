@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.51.4...v1.52.0) (2020-08-31)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
 # [1.51.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.50.1...v1.51.0) (2020-08-27)
 
 **Note:** Version bump only for package @lskjs/utils

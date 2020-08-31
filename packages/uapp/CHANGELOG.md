@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.51.4...v1.52.0) (2020-08-31)
+
+
+### Features
+
+* **reactapp:** add antimerge in getRootState ([677a9d9](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/677a9d9ce7a118225af13b78022060ccdb7969dd))
+
+
+
+
+
 ## [1.51.4](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.51.3...v1.51.4) (2020-08-28)
 
 **Note:** Version bump only for package @lskjs/uapp

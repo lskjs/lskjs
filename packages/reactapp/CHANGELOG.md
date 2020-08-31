@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.51.4...v1.52.0) (2020-08-31)
+
+
+### Bug Fixes
+
+* **reactapp:** bugs in Html ([463c68c](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/463c68cd8f549da927e162aa69f097330892e153))
+
+
+### Features
+
+* **reactapp:** add antimerge in getRootState ([677a9d9](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/677a9d9ce7a118225af13b78022060ccdb7969dd))
+* add meta-description ([6eccc40](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/6eccc40493ccbed43c1a0f0f2bbe2169290bda89))
+
+
+
+
+
 ## [1.51.4](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.51.3...v1.51.4) (2020-08-28)
 
 
