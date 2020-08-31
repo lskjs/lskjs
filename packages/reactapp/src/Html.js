@@ -53,6 +53,7 @@ export default class Html {
 
   renderOGMeta() {
     const { meta = {} } = this;
+    /* eslint-disable prettier/prettier */
     return `\
 ${meta.title ? `<meta property="og:title" content="${this.renderTitle()}" />` : ''}\
 ${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}\
@@ -60,12 +61,13 @@ ${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}\
 ${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
 ${meta.type ? `<meta property="og:type" content="${meta.type}" />` : ''}\
 ${meta.site_name ? `<meta property="og:site_name" content="${meta.site_name}" />` : ''}\
-${meta.twitter.title ? `<meta property="twitter:title" content="${meta.twitter.title || this.renderTitle()}" />` : ''}\
-${meta.twitter.description ? `<meta property="twitter:description" content="${meta.twitter.description || meta.description}" />`: ''}\
-${meta.twitter.url ? `<meta property="twitter:url" content="${meta.twitter.url || meta.url}" />` : ''}\
-${meta.twitter.image ? `<meta property="twitter:image" content="${meta.twitter.image || meta.image}" />` : ''}\
-${meta.twitter.card ? `<meta property="twitter:card" content="${meta.twitter.card}" />` : ''}\
+${meta.twitter && meta.twitter.title ? `<meta property="twitter:title" content="${meta.twitter.title || this.renderTitle()}" />` : ''}\
+${meta.twitter && meta.twitter.description ? `<meta property="twitter:description" content="${meta.twitter.description}" />` : ''}\
+${meta.twitter && meta.twitter.url ? `<meta property="twitter:url" content="${meta.twitter.url}" />` : ''}\
+${meta.twitter && meta.twitter.image ? `<meta property="twitter:image" content="${meta.twitter.image}" />` : ''}\
+${meta.twitter && meta.twitter.card ? `<meta property="twitter:card" content="${meta.twitter.card}" />` : ''}\
 `;
+    /* eslint-enable prettier/prettier */
   }
 
   // renderFavicon = require('./renderFavicon').default
@@ -104,6 +106,7 @@ ${this.renderPreloader()} \
     const { meta = {} } = this;
     return `\
 <meta charset="utf-8">\
+<meta http-equiv="x-ua-compatible" content="ie=edge" />\
 <meta http-equiv="content-language" content=”${this.getLang('meta')}” />\
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1., maximum-scale=1." />\
 ${meta.description ? `<meta name="description" content="${meta.description}"/>` : ''}\
