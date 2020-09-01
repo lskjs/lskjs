@@ -12,7 +12,9 @@ export default class Storage {
   constructor(props = {}) {
     assignProps(this, props);
   }
-  init() {}
+  init() {
+    this._inited = true;
+  }
   _get(key) {
     return get(this, `state.${key}`);
   }

@@ -15,6 +15,7 @@ export default class LocalStorage extends Storage {
     return `${get(this, 'config.prefix', 'lsk')}.${key}`;
   }
   _get(key) {
+    if (!this._inited) console.error('!LocalStorage._inited')
     const path = this.path(key);
     if (!this.state) {
       this.debug('get', path, '=( !localStorage');
@@ -29,6 +30,7 @@ export default class LocalStorage extends Storage {
     }
   }
   _set(key, value) {
+    if (!this._inited) console.error('!LocalStorage._inited')
     const path = this.path(key);
     if (!this.state) {
       this.debug('set', path, '=( !localStorage');

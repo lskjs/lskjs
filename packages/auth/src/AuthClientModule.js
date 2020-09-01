@@ -20,11 +20,13 @@ export default class AuthClientModule extends Module {
         // memoryState: this.app.rootState,
         config: get(this, 'app.config.storage', {}),
       });
+      await this.localStorage.init();
     }
     this.memoryStorage = new MemoryStorage({
       state: this.app.rootState,
       config: get(this, 'app.config.storage', {}),
     });
+    await this.memoryStorage.init();
   }
 
   async run() {
