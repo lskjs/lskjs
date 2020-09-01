@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "1.52.1",
+  "version": "1.52.2",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
