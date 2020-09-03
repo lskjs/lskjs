@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.55.0...v1.55.1) (2020-09-03)
+
+
+### Bug Fixes
+
+* **server:** nanoid fix ([c58a718](https://github.com/lskjs/modules/tree/master/packages/server/commit/c58a7182d5e03b95952dde06909ba3b6f869b494))
+
+
+
+
+
 # [1.55.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.54.0...v1.55.0) (2020-09-03)
 
 **Note:** Version bump only for package @lskjs/server
