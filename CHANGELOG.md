@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.53.0](https://github.com/lskjs/lskjs/compare/v1.52.2...v1.53.0) (2020-09-03)
+
+
+### Features
+
+* add getPasswordEntropy ([73fc8cc](https://github.com/lskjs/lskjs/commit/73fc8ccdb0fcbeda6cbb1035e8348fac72fe5997))
+
+
+
+
+
 ## [1.52.2](https://github.com/lskjs/lskjs/compare/v1.52.1...v1.52.2) (2020-09-01)
 
 
