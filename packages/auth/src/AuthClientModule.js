@@ -47,7 +47,7 @@ export default class AuthClientModule extends Module {
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
     const { name = 'token', ...options } = get(this.app, 'config.jwt.cookie', {});
     // eslint-disable-next-line no-console
-    if (DEBUG) console.log('AuthClientModule.setToken cookie', name);
+    if (DEBUG) console.log('AuthClientModule.setToken cookie', { name, options, token });
     if (__CLIENT__ && cookies) {
       if (token == null) {
         cookie.remove(name, options);

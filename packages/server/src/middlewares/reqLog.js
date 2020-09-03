@@ -1,5 +1,6 @@
 // import uuid from 'uuid';
-import { nanoid } from 'nanoid/non-secure';
+// import { nanoid } from 'nanoid/non-secure';
+import nanoid from 'nanoid';
 
 export default (ctx) => (req, res, next) => {
   if (__DEV__) {
