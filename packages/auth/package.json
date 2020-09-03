@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "1.53.0",
+  "version": "1.54.0",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -50,10 +50,10 @@
   "devDependencies": {
     "@lskjs/apiquery": "1.47.0",
     "@lskjs/db": "1.49.0",
-    "@lskjs/mobx": "1.53.0",
-    "@lskjs/module": "1.53.0",
-    "@lskjs/server-api": "1.53.0",
-    "@lskjs/utils": "1.53.0",
+    "@lskjs/mobx": "1.54.0",
+    "@lskjs/module": "1.54.0",
+    "@lskjs/server-api": "1.54.0",
+    "@lskjs/utils": "1.54.0",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",

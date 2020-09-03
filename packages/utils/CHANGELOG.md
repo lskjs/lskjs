@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.52.2...v1.54.0) (2020-09-03)
+
+
+### Bug Fixes
+
+* **utils:** default entropy 5 ([0bfd52f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/0bfd52f94957bb5511188b9f9ce1de2071c0db93))
+
+
+### Features
+
+* add getPasswordEntropy ([73fc8cc](https://github.com/lskjs/ux/tree/master/packages/utils/commit/73fc8ccdb0fcbeda6cbb1035e8348fac72fe5997))
+
+
+
+
+
 # [1.53.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.52.2...v1.53.0) (2020-09-03)
 
 
