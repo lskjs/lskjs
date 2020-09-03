@@ -4,7 +4,7 @@ export default (password) => {
   const lowerCaseRegExp = new RegExp(/[a-z]+/);
   const specialCharRegExp = new RegExp(/[$&+,:;=?@#|'<>.^*()%!-]/);
 
-  let entropy = 10;
+  let entropy = 5;
   if (
     password.length >= 8 &&
     password.match(upperCaseRegExp) &&
