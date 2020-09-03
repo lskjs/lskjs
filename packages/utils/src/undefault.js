@@ -1,4 +1,5 @@
-export default async (module) => {
-  if (module.__esModule) return module.default;
-  return module;
+export default async (moduleOrPromise) => {
+  const mayBeModule = await moduleOrPromise;
+  if (mayBeModule.__esModule) return mayBeModule.default;
+  return mayBeModule;
 };
