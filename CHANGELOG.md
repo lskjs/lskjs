@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/lskjs/lskjs/compare/v1.54.0...v1.55.0) (2020-09-03)
+
+
+### Features
+
+* **utils:** async undefault ([d0545c9](https://github.com/lskjs/lskjs/commit/d0545c9f47c5439b965244769871b5f3bd81c620))
+
+
+
+
+
 # [1.54.0](https://github.com/lskjs/lskjs/compare/v1.52.2...v1.54.0) (2020-09-03)
 
 

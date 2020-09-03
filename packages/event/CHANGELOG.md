@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/lskjs/lskjs/tree/master/packages/event/compare/v1.54.0...v1.55.0) (2020-09-03)
+
+**Note:** Version bump only for package @lskjs/event
+
+
+
+
+
 # [1.54.0](https://github.com/lskjs/lskjs/tree/master/packages/event/compare/v1.52.2...v1.54.0) (2020-09-03)
 
 **Note:** Version bump only for package @lskjs/event
