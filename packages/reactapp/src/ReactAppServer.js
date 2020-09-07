@@ -37,7 +37,7 @@ export default class ReactAppServer extends Module {
       ...params,
       history: createMemoryHistory({
         // TODO: вырезать
-        initialEntries: [req.originalUrl],
+        initialEntries: [req.originalUrl], // TODO: may be path ?
       }),
       req: uappReq,
       rootState: this.getRootState({ req }),
@@ -59,8 +59,9 @@ export default class ReactAppServer extends Module {
     if (DEBUG) console.log('ReactAppServer.resolve req=', !!req); // eslint-disable-line no-console
     const uapp = await this.getUapp({ req });
     if (!uapp) throw '!uapp';
+    const path = req.originalUrl.split('?').shift();
     const page = await uapp.resolve({
-      path: req.originalUrl,
+      path,
       query: req.query,
     });
     // const page = uapp.page
@@ -115,7 +116,6 @@ export default class ReactAppServer extends Module {
     // ?__ssr=json
     // ?__ssr=nodeStream
     // ?__ssr=staticMarkup
-    // ?__ssr=staticMarkup
     // ?__ssr=nodeStream,emotion
     // ?__ssr=staticMarkup,emotion
     // ?__ssr=renderToStaticMarkup,emotion
@@ -124,7 +124,7 @@ export default class ReactAppServer extends Module {
     let strategy;
     let styleStrategy;
     if (typeof ssr === 'string') {
-      [strategy, styleStrategy] = ssr.slice(',');
+      [strategy, styleStrategy] = ssr.split(',');
     }
 
     if (DEBUG) console.log('ReactAppServer.render', { strategy }, this.name); // eslint-disable-line no-console
