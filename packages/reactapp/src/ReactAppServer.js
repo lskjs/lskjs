@@ -84,9 +84,12 @@ export default class ReactAppServer extends Module {
     });
   }
 
+  getPublicPath() {
+    return get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
+  }
+  
   getAssetManifest() {
-    const publicPath = get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
-    const assetManifestPath = `${publicPath}/asset-manifest.json`;
+    const assetManifestPath = `${this.getPublicPath()}/asset-manifest.json`;
     try {
       const str = require('fs').readFileSync(assetManifestPath);
       const json = JSON.parse(str);
@@ -102,6 +105,7 @@ export default class ReactAppServer extends Module {
     return (content) => {
       const html = new Html({
         content,
+        publicPath: this.getPublicPath(),
         assetManifest: this.getAssetManifest(),
         meta: page && page.getMeta ? page.getMeta() : '',
         rootState: page && page.getRootState ? page.getRootState() : '',
@@ -118,7 +122,7 @@ export default class ReactAppServer extends Module {
     // ?__ssr=staticMarkup
     // ?__ssr=nodeStream,emotion
     // ?__ssr=staticMarkup,emotion
-    // ?__ssr=renderToStaticMarkup,emotion
+    // ?__ssr=string,emotion
     const ssr = get(req, 'query.__ssr') || get(this, 'config.reactApp.ssr') || null;
 
     let strategy;
