@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.55.2...v1.56.0) (2020-09-08)
+
+
+### Features
+
+* get dynamic runtime-main.js ([866675f](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/866675f975e3b3421c6971a91d8418066809851a))
+
+
+
+
+
 ## [1.55.2](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.55.1...v1.55.2) (2020-09-07)
 
 
