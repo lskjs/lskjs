@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.56.1](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.56.0...v1.56.1) (2020-09-11)
+
+
+### Bug Fixes
+
+* **auth:** correct session schema with _id ([314580c](https://github.com/lskjs/modules/tree/master/packages/auth/commit/314580c2cf76f6f17ed7d98e64e87364dc42af36))
+
+
+
+
+
 # [1.55.0](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.54.0...v1.55.0) (2020-09-03)
 
 **Note:** Version bump only for package @lskjs/auth

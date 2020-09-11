@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.56.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.56.0...v1.56.1) (2020-09-11)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
 ## [1.55.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.55.0...v1.55.1) (2020-09-03)
 
 
