@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.57.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.56.3...v1.57.0) (2020-09-11)
+
+
+### Features
+
+* **server:** async getModels ([917f45d](https://github.com/lskjs/modules/tree/master/packages/server/commit/917f45d6a5cab785841cf7b412456f611127532e))
+
+
+
+
+
 ## [1.56.1](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.56.0...v1.56.1) (2020-09-11)
 
 **Note:** Version bump only for package @lskjs/server

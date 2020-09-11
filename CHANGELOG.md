@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.57.0](https://github.com/lskjs/lskjs/compare/v1.56.3...v1.57.0) (2020-09-11)
+
+
+### Features
+
+* **server:** async getModels ([917f45d](https://github.com/lskjs/lskjs/commit/917f45d6a5cab785841cf7b412456f611127532e))
+* **utils:** add asyncMapValues ([aec4be8](https://github.com/lskjs/lskjs/commit/aec4be82635928987169059d2f78f0de9dc52b4c))
+
+
+
+
+
 ## [1.56.3](https://github.com/lskjs/lskjs/compare/v1.56.2...v1.56.3) (2020-09-11)
 
 
