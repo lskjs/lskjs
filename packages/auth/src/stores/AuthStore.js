@@ -135,7 +135,7 @@ export default (uapp) =>
       return session;
     }
     async updateSession(props) {
-      const { data: session } = await this.constructor.api.session(props);
+      const session = await this.constructor.api.session(props);
       this.applySession(session);
       return session;
     }

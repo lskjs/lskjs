@@ -154,6 +154,7 @@ export default class Api extends BaseApi {
     // await this.helpers.updateLoginAt(user);
     return {
       __pack: 1,
+      _id: user._id,
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token,
     };
@@ -208,6 +209,7 @@ export default class Api extends BaseApi {
     return {
       __pack: 1,
       signup: true,
+      _id: user._id,
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token,
     };
