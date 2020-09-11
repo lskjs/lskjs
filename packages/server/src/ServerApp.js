@@ -2,7 +2,6 @@
 import express from 'express';
 import path from 'path';
 import mapValues from 'lodash/mapValues';
-import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
@@ -12,6 +11,7 @@ import autobind from '@lskjs/utils/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db/server';
 import e from '@lskjs/utils/e';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Module from '@lskjs/module';
 import http from 'http';
 import defaultServerConfig from './config';
@@ -65,7 +65,7 @@ export default class ServerApp extends Module {
 
   async afterInit() {
     // super.afterInit(...arguments);
-    this.models = this.getMongooseModels();
+    this.models = await this.getMongooseModels();
     this.log.debug('models', Object.keys(this.models));
     await this.runModels();
   }
@@ -97,12 +97,12 @@ export default class ServerApp extends Module {
   getMiddlewares() {
     return require('./middlewares').default(this); // eslint-disable-line
   }
-  getMongooseModels() {
-    const models = this.getModels();
-    forEach(this.modules, (mdl, moduleName) => {
+  async getMongooseModels() {
+    const models = await this.getModels();
+    await asyncMapValues(this.modules, async (mdl, moduleName) => {
       let models2 = {};
       if (mdl.getModels) {
-        models2 = mdl.getModels();
+        models2 = await mdl.getModels();
       } else if (mdl.models) {
         models2 = mdl.models;
       }
@@ -119,7 +119,7 @@ export default class ServerApp extends Module {
       this.log.warn('ServerApp.getMongooseModels: !db, cant load mongoose models');
       return {};
     }
-    return mapValues(models, (model) => {
+    return asyncMapValues(models, (model) => {
       if (model._universal) {
         return model.getMongooseModel(this.db);
       }
