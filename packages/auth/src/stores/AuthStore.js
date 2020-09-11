@@ -103,6 +103,11 @@ export default (uapp) =>
     @observable sessions = [];
     @action
     async applySession({ _id, ...props }) {
+      if (!_id) {
+        // eslint-disable-next-line no-console
+        console.warn('AuthStore.applySession | "session._id" not provided!');
+        return;
+      }
       let session = this.sessions.filter((s) => s._id === _id)[0];
       if (!session) {
         session = { _id };
