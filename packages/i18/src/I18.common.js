@@ -34,7 +34,7 @@ export default class I18 {
     if (__SERVER__) {
       this.instances = {};
       if (this.locales) {
-        Promise.map(this.locales, async locale => {
+        await Promise.map(this.locales, async (locale) => {
           this.instances[locale] = await this.getI18({ lng: locale });
         });
       }
@@ -100,7 +100,7 @@ export default class I18 {
       return instance
         .init(i18params)
         .then(() => resolve(instance))
-        .catch(err => {
+        .catch((err) => {
           console.error('getI18 init', err);  //eslint-disable-line
           return reject(err);
         });
