@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.58.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.57.0...v1.58.0) (2020-09-14)
+
+
+### Features
+
+* **reactapp:** any dynamic og/twitter tags ([79bf8ae](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/79bf8aecd913b0c47f7e2ef8112fe9bab4dbf00c))
+
+
+
+
+
 # [1.57.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.56.3...v1.57.0) (2020-09-11)
 
 **Note:** Version bump only for package @lskjs/reactapp
