@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.2](https://github.com/lskjs/lskjs/compare/v1.58.1...v1.58.2) (2020-09-14)
+
+
+### Bug Fixes
+
+* **i18:** init server await forget bug ([ec0cc03](https://github.com/lskjs/lskjs/commit/ec0cc0311aa7e3137bbe1accd65a2d4853b9e9f8))
+
+
+
+
+
 ## [1.58.1](https://github.com/lskjs/lskjs/compare/v1.58.0...v1.58.1) (2020-09-14)
 
 
