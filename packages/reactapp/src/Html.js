@@ -1,6 +1,5 @@
 import map from 'lodash/map';
 import get from 'lodash/get';
-import mapValues from 'lodash/mapValues';
 import fs from 'fs';
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import serializeJavascript from 'serialize-javascript';
@@ -65,7 +64,7 @@ export default class Html {
   }
 
   renderOGNamespace(namespace, meta) {
-    return mapValues(meta, (content, name) =>
+    return map(meta, (content, name) =>
       this.renderOGMetaTag([namespace, name].filter(Boolean).join(':'), content),
     ).join('');
   }
