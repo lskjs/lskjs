@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.58.2...v1.59.0) (2020-09-14)
+
+
+### Features
+
+* **server:** remove app.api ([88aa6ee](https://github.com/lskjs/modules/tree/master/packages/server/commit/88aa6ee6910d8a9530330ac53ea61b472dca87a7))
+
+
+
+
+
 ## [1.58.2](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.58.1...v1.58.2) (2020-09-14)
 
 **Note:** Version bump only for package @lskjs/server
