@@ -1,26 +1,30 @@
 import Promise from 'bluebird';
 import isFunction from 'lodash/isFunction';
 import mapValues from 'lodash/mapValues';
-import some from 'lodash/some';
+// import some from 'lodash/some';
 
 export default async (healthchecks) => {
   let data = {};
+  // eslint-disable-next-line no-param-reassign
+  healthchecks = await healthchecks;
+  // eslint-disable-next-line no-param-reassign
+  if (!healthchecks) healthchecks = { healthcheck: healthchecks };
+  let status = 200;
   const promises = mapValues(healthchecks, async (fn, key) => {
     if (!isFunction(fn)) return fn;
     const start = Date.now();
     try {
-      const result = await fn();
-      if (!result) return null;
-      return Date.now() - start;
+      const res = await fn();
+      // if (!res) return null;
+      return { res, timeout: Date.now() - start };
     } catch (err) {
+      status = 500;
       console.error(`healthchecks[${key}] err`, err);  //eslint-disable-line
-      return null;
+      return { res: null, err, timeout: Date.now() - start };
     }
   });
 
   data = await Promise.props(promises);
-
-  const status = some(data, (a) => a == null) ? 500 : 200;
 
   return {
     __pack: true,

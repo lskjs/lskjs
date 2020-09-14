@@ -8,11 +8,11 @@ import Api from './Api';
 
 export default class IndexApi extends Api {
   path = '/api';
-  healthcheck(req) {
-    if (!this.app) return null;
-    if (this.app.healthcheck) return this.app.healthcheck(req);
+  async healthcheck(req) {
+    if (!this.app) return awaitHealthchecks({ healthcheck: null });
+    if (this.app.healthcheck) return awaitHealthchecks({ healthcheck: await this.app.healthcheck(req) });
     if (this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
-    return null;
+    return awaitHealthchecks({ healthcheck: null });
   }
   getRoutesList(tree = false) {
     if (tree) {
