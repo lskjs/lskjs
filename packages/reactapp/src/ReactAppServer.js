@@ -87,7 +87,7 @@ export default class ReactAppServer extends Module {
   getPublicPath() {
     return get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
   }
-  
+
   getAssetManifest() {
     const assetManifestPath = `${this.getPublicPath()}/asset-manifest.json`;
     try {

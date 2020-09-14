@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import get from 'lodash/get';
+import mapValues from 'lodash/mapValues';
 import fs from 'fs';
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import serializeJavascript from 'serialize-javascript';
@@ -41,6 +42,7 @@ export default class Html {
       try {
         raw = fs.readFileSync(this.publicPath + path).toString();
       } catch (err) {
+        // eslint-disable-next-line no-console
         if (__DEV__) console.error(`renderAsset(${name}, true) err`, err);
       }
     }
@@ -62,23 +64,26 @@ export default class Html {
     return meta.title || '';
   }
 
+  renderOGNamespace(namespace, meta) {
+    return mapValues(meta, (content, name) =>
+      this.renderOGMetaTag([namespace, name].filter(Boolean).join(':'), content),
+    ).join('');
+  }
+
+  renderOGMetaTag(namespace, name, content) {
+    return content ? `<meta property="${name}" content="${content}" />` : '';
+  }
   renderOGMeta() {
     const { meta = {} } = this;
-    /* eslint-disable prettier/prettier */
+    const { og = {}, twitter } = meta;
+    if (!og.title) og.title = meta.title ? meta.title : this.renderTitle();
+    ['description', 'url', 'image', 'type', 'site_name'].forEach((ogName) => {
+      if (!og[ogName] && meta[ogName]) og[ogName] = meta[ogName];
+    });
     return `\
-${meta.title ? `<meta property="og:title" content="${this.renderTitle()}" />` : ''}\
-${meta.description ? `<meta property="og:description" content="${meta.description}" />` : ''}\
-${meta.url ? `<meta property="og:url" content="${meta.url}" />` : ''}\
-${meta.image ? `<meta property="og:image" content="${meta.image}" />` : ''}\
-${meta.type ? `<meta property="og:type" content="${meta.type}" />` : ''}\
-${meta.site_name ? `<meta property="og:site_name" content="${meta.site_name}" />` : ''}\
-${meta.twitter && meta.twitter.title ? `<meta property="twitter:title" content="${meta.twitter.title || this.renderTitle()}" />` : ''}\
-${meta.twitter && meta.twitter.description ? `<meta property="twitter:description" content="${meta.twitter.description}" />` : ''}\
-${meta.twitter && meta.twitter.url ? `<meta property="twitter:url" content="${meta.twitter.url}" />` : ''}\
-${meta.twitter && meta.twitter.image ? `<meta property="twitter:image" content="${meta.twitter.image}" />` : ''}\
-${meta.twitter && meta.twitter.card ? `<meta property="twitter:card" content="${meta.twitter.card}" />` : ''}\
+${this.renderOGNamespace('og', og)}\
+${twitter ? this.renderOGNamespace('twitter', twitter) : ''}\
 `;
-    /* eslint-enable prettier/prettier */
   }
 
   // renderFavicon = require('./renderFavicon').default

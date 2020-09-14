@@ -1,1 +1,1 @@
-module.exports = require('./ReactAppServer').default;
+export { default } from './ReactAppServer';

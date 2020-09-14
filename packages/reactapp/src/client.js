@@ -1,1 +1,1 @@
-module.exports = require('./ReactAppClient').default;
+export { default } from './ReactAppClient';
