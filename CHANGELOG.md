@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.1](https://github.com/lskjs/lskjs/compare/v1.58.0...v1.58.1) (2020-09-14)
+
+
+### Bug Fixes
+
+* **reactapp:** renderOGNamespace bug ([3241ee8](https://github.com/lskjs/lskjs/commit/3241ee8b45f2644175c1e59350fa368088fbc383))
+
+
+
+
+
 # [1.58.0](https://github.com/lskjs/lskjs/compare/v1.57.0...v1.58.0) (2020-09-14)
 
 
