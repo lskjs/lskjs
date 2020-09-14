@@ -47,7 +47,6 @@
     "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "1.47.0",
     "@lskjs/db": "1.49.0",
     "@lskjs/i18": "1.58.2",
     "@lskjs/log": "1.57.0",
@@ -63,7 +62,6 @@
     "@babel/runtime": "7.0.0-beta.42"
   },
   "peerDependencies": {
-    "@lskjs/apiquery": "*",
     "@lskjs/db": "*",
     "@lskjs/i18": "*",
     "@lskjs/log": "*",

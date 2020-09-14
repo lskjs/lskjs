@@ -6,7 +6,7 @@ import forEach from 'lodash/forEach';
 import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
 import staticFileMiddleware from 'connect-static-file';
-import Apiquery from '@lskjs/apiquery';
+// import Apiquery from '@lskjs/apiquery';
 import autobind from '@lskjs/utils/autobind';
 import I18 from '@lskjs/i18';
 import db from '@lskjs/db/server';
@@ -47,10 +47,10 @@ export default class ServerApp extends Module {
     if (DEBUG) this.log.debug('helpers', Object.keys(this.helpers));
     this.statics = this._getStatics();
     this.log.debug('statics', this.statics);
-    this.api = new Apiquery({
-      url: this.url('/'),
-      log: this.log,
-    });
+    // this.api = new Apiquery({
+    //   url: this.url('/'),
+    //   log: this.log,
+    // });
     if (this.serverConfig.ws) this.initWs();
     if (this.i18) {
       await this.i18
