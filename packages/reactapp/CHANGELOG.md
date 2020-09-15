@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.59.0...v1.59.1) (2020-09-15)
+
+
+### Bug Fixes
+
+* **reactapp:** og method mistake ([de8ea87](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/de8ea87170e9cff9c9b2627ded65fd7017ed0b86))
+
+
+
+
+
 ## [1.58.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.58.0...v1.58.1) (2020-09-14)
 
 
