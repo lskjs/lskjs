@@ -69,7 +69,7 @@ export default class Html {
     ).join('');
   }
 
-  renderOGMetaTag(namespace, name, content) {
+  renderOGMetaTag(name, content) {
     return content ? `<meta property="${name}" content="${content}" />` : '';
   }
   renderOGMeta() {
