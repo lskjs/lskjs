@@ -21,10 +21,3 @@ export default function mapValuesDeep(value, map, reduce = (a) => a, keys = []) 
   if (DEBUG) console.log(`[${keys.join('.')}]:`, 'mapValue', mapValue, 'reduceValue', reduceValue);
   return reduceValue;
 }
-
-// const isCollection = value => isPlainObject(value) || isArray(value);
-// export default function mapDeep(value, reduce, keys = []) {
-//   return reduce(
-//     isCollection(value) ? mapValues(value, (v, k) => mapValuesDeep(v, map, reduce, [...keys, k])) : value,
-//   );
-// }

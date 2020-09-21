@@ -113,3 +113,14 @@ test('mapValuesDeep extract function deep', () => {
 
   expect(mapValuesDeep(input, deepMap)).toStrictEqual(output);
 });
+
+test('mapValuesDeep array function deep', () => {
+  const input = [1, 2, () => [3, 4, () => [5, 6]], [7, 8]];
+  const output = [1, 2, [3, 4, [5, 6]], [7, 8]];
+
+  function deepMap(item) {
+    return isFunction(item) ? mapValuesDeep(item(), deepMap) : item;
+  }
+
+  expect(mapValuesDeep(input, deepMap)).toStrictEqual(output);
+});
