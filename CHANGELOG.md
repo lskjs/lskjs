@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.2](https://github.com/lskjs/lskjs/compare/v1.61.1...v1.61.2) (2020-09-21)
+
+
+### Bug Fixes
+
+* **server:** debug async modules ([0a52614](https://github.com/lskjs/lskjs/commit/0a52614a60f421f32e2ce2be4f75df2c2cc25b66))
+
+
+
+
+
 ## [1.61.1](https://github.com/lskjs/lskjs/compare/v1.61.0...v1.61.1) (2020-09-21)
 
 
