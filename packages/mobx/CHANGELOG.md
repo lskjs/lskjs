@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.2](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.60.1...v1.60.2) (2020-09-21)
+
+
+### Bug Fixes
+
+* **mobx:** findOne backend method mistake ([66fcfa5](https://github.com/lskjs/modules/tree/master/packages/mobx/commit/66fcfa5df9e80f0989dafcecb665dbcfa23aefd8))
+
+
+
+
+
 ## [1.60.1](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.60.0...v1.60.1) (2020-09-21)
 
 
