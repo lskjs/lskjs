@@ -13,7 +13,7 @@ export default async function asyncMapValuesDeep(value, map, reduce = (a) => a, 
   if (isPlainObject(value)) {
     mapValue = await asyncMapValues(value, (v, k) => asyncMapValuesDeep(v, map, reduce, [...keys, k]));
   } else if (isArray(value)) {
-    mapValue = await Promise.map(value, (v, k) => asyncMapValuesDeep(v, map, reduce, [...keys, k]));
+    mapValue = await Bluebird.map(value, (v, k) => asyncMapValuesDeep(v, map, reduce, [...keys, k]));
   } else {
     mapValue = await map(value);
   }
