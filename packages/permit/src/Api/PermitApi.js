@@ -34,13 +34,17 @@ export default class PermitApi extends Api {
     });
   }
   async findOne(req) {
-    await this.isAuth(req);
     const { PermitModel } = this.app.models;
     return this.cache(['permit/findOne', req.data], async () => {
-      const { _id } = req.data;
+      const { _id, code } = req.data;
       if (!_id) throw this.e(404, '!_id');
       const item = await PermitModel.findById(_id);
       if (!item) throw this.e(404, '!item');
+      if (!(this.isAdmin(req) || String(req.user && req.user._id) === item.userId)) {
+        if (String(code) !== String(item.code)) {
+          throw code ? this.e(403, 'permit.incorrectCode') : this.e(403, '!owner');
+        }
+      }
       return PermitModel.prepare(item, { req, method: 'findOne' });
     });
   }
