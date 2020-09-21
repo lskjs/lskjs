@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.60.0](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.59.1...v1.60.0) (2020-09-21)
+
+
+### Features
+
+* **mobx:** CrudStore.findOne object data params ([c574035](https://github.com/lskjs/modules/tree/master/packages/mobx/commit/c574035367fab6bcd403b0cc5df391673e6b667c))
+
+
+
+
+
 # [1.57.0](https://github.com/lskjs/modules/tree/master/packages/mobx/compare/v1.56.3...v1.57.0) (2020-09-11)
 
 **Note:** Version bump only for package @lskjs/mobx

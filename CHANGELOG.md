@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.60.0](https://github.com/lskjs/lskjs/compare/v1.59.1...v1.60.0) (2020-09-21)
+
+
+### Features
+
+* **mobx:** CrudStore.findOne object data params ([c574035](https://github.com/lskjs/lskjs/commit/c574035367fab6bcd403b0cc5df391673e6b667c))
+* **permit:** findOne security ([9973c7f](https://github.com/lskjs/lskjs/commit/9973c7fab278b8401619b6380286a634b702e59b))
+
+
+
+
+
 ## [1.59.1](https://github.com/lskjs/lskjs/compare/v1.59.0...v1.59.1) (2020-09-15)
 
 
