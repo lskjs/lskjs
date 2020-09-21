@@ -5,9 +5,9 @@ export default class CrudStore extends ApiStore {
     if (!(this.api && this.api.find)) throw '!api.find';
     return this.wrap(this.api.find(data), { ...params, list: true });
   }
-  static findOne(_id, params) {
+  static findOne(data, params) {
     if (!(this.api && this.api.findOne)) throw '!api.findOne';
-    return this.wrap(this.api.findOne(_id), params);
+    return this.wrap(this.api.findOne(data), params);
   }
   static create(data = {}, params) {
     if (!(this.api && this.api.create)) throw '!api.create';

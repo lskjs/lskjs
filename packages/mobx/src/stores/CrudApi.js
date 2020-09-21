@@ -1,3 +1,4 @@
+import isPlainObject from 'lodash/isPlainObject';
 import Api from './Api';
 
 export default class CrudApi extends Api {
@@ -8,11 +9,22 @@ export default class CrudApi extends Api {
       data,
     });
   }
-  findOne(_id) {
+  findById(_id) {
+    const _id = data;
     return this.fetch(`${this.base}/findOne`, {
       method: 'GET',
       qs: { _id },
     });
+  }
+  findOne(data) {
+    if (isPlainObject(data)) {
+      return this.fetch(`${this.base}/find`, {
+        method: 'POST',
+        data,
+      });
+    } else {
+      return this.findById(data);
+    }
   }
   create(data) {
     return this.fetch(`${this.base}/create`, {
