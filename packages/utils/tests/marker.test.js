@@ -7,6 +7,10 @@ import marker from '../src/marker';
 test('marker 1', () => {
   const id = 1;
   const wrap = marker(id);
-  console.log(id, wrap(id));
-  expect(wrap(id)).toBe(1);
+  // console.log(id, wrap(id));
+  expect(
+    wrap(id)
+      .split('')
+      .map((i) => i.charCodeAt(0)),
+  ).toStrictEqual([27, 91, 51, 49, 109, 49, 27, 91, 51, 57, 109]);
 });

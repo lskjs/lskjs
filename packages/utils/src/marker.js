@@ -85,7 +85,7 @@ const marker = id => {
   };
 };
 
-console.log(marker()());
+// console.log(marker()());
 // for (let id = 0; id < 100; id++) {
 //   const wrap = marker(id);
 //   console.log(id, wrap(), wrap(id));
