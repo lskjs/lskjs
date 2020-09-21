@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.61.0](https://github.com/lskjs/lskjs/compare/v1.60.2...v1.61.0) (2020-09-21)
+
+
+### Bug Fixes
+
+* **utils:** fix some tests ([cdd0542](https://github.com/lskjs/lskjs/commit/cdd05429874c42241eaf019e4a34c8a57c40a1ed))
+* **utils:** mapValuesDeep cover tests ([c7c278b](https://github.com/lskjs/lskjs/commit/c7c278b81822cf4768310bb0f54e1c49a00b1d0f))
+
+
+### Features
+
+* **server:** make async Api.getRoutes and runRoutes ([1eb526d](https://github.com/lskjs/lskjs/commit/1eb526d99714e47434b8a9a4d173667d74b0754a))
+* **utils:** add asyncMapValuesDeep ([ecce97c](https://github.com/lskjs/lskjs/commit/ecce97cb6dc57a08ce7f317a7814497f17678775))
+
+
+
+
+
 ## [1.60.2](https://github.com/lskjs/lskjs/compare/v1.60.1...v1.60.2) (2020-09-21)
 
 

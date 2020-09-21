@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.61.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.60.2...v1.61.0) (2020-09-21)
+
+
+### Features
+
+* **server:** make async Api.getRoutes and runRoutes ([1eb526d](https://github.com/lskjs/modules/tree/master/packages/server/commit/1eb526d99714e47434b8a9a4d173667d74b0754a))
+
+
+
+
+
 # [1.59.0](https://github.com/lskjs/modules/tree/master/packages/server/compare/v1.58.2...v1.59.0) (2020-09-14)
 
 
