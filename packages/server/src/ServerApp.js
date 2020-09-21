@@ -64,6 +64,8 @@ export default class ServerApp extends Module {
   }
 
   async afterInit() {
+    this.log.debug(`modules [async]`, Object.keys(this._modules));
+    this.log.debug(`modules [inited]`, Object.keys(this.modules));
     // super.afterInit(...arguments);
     this.models = await this.getMongooseModels();
     this.log.debug('models', Object.keys(this.models));
