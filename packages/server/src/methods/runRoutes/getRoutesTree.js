@@ -2,7 +2,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
 import isClass from '@lskjs/utils/isClass';
 // import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
-import mapValuesDeep from './mapValuesDeep';
+import asyncMapValuesDeep from '@lskjs/utils/asyncMapValuesDeep';
 import extractApi from './extractApi';
 
 const DEBUG = false;
@@ -11,7 +11,7 @@ const finish = (res) => {
   return res;
 };
 
-export default function getRoutesTree(api) {
+export default async function getRoutesTree(api) {
   if (DEBUG)
     console.log(
       'getRoutesTree start',
@@ -26,9 +26,9 @@ export default function getRoutesTree(api) {
     // const api = new api(ctx); // eslint-disable-line new-cap
     // return finish(api && isFunction(api.getRoutes) && api.getRoutes());
   }
-  if (Array.isArray(api)) return finish(api.map((subApi) => getRoutesTree(subApi)));
-  if (isPlainObject(api)) return finish(mapValuesDeep(api, getRoutesTree, (a) => a));
-  const resultApi = extractApi(api, null);
+  if (Array.isArray(api)) return finish(await Promise.map(api, (subApi) => getRoutesTree(subApi)));
+  if (isPlainObject(api)) return finish(await asyncMapValuesDeep(api, getRoutesTree, (a) => a));
+  const resultApi = await extractApi(api, null);
   if (resultApi == null) return finish(null);
-  return finish(getRoutesTree(resultApi));
+  return getRoutesTree(resultApi);
 }

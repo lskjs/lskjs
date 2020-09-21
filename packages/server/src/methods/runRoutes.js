@@ -3,7 +3,7 @@ import routesTreeToExpressRouter from './runRoutes/routesTreeToExpressRouter';
 import extractApi from './runRoutes/extractApi';
 import getRoutesTree from './runRoutes/getRoutesTree';
 
-export default function () {
+export default async function () {
   const log = (level, ...args) => (this.log ? this.log[level](...args) : console[level] && console[level](...args)); // eslint-disable-line no-console
   if (this.Api) {
     this.rootApi = new this.Api({ app: this });
@@ -13,7 +13,7 @@ export default function () {
   } else if (!this.rootApi) {
     log('warn', '!app.Api');
   }
-  this.routes = getRoutesTree(extractApi(this.rootApi, {}));
+  this.routes = await getRoutesTree(await extractApi(this.rootApi, {}));
   log(
     'trace',
     'routes',

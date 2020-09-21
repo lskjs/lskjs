@@ -267,7 +267,7 @@ export default class ServerApp extends Module {
 
   async afterRun() {
     if (DEBUG) this.log.trace('ServerApp afterRun');
-    this.runRoutes();
+    await this.runRoutes();
     this.runDefaultRoute();
     this.runCatchErrors();
     return new Promise((resolve) => {
