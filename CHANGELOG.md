@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.1](https://github.com/lskjs/lskjs/compare/v1.60.0...v1.60.1) (2020-09-21)
+
+
+### Bug Fixes
+
+* **mobx:** typo ([ecda419](https://github.com/lskjs/lskjs/commit/ecda4198b02650985b7a62a7adbe58dee2463bb4))
+
+
+
+
+
 # [1.60.0](https://github.com/lskjs/lskjs/compare/v1.59.1...v1.60.0) (2020-09-21)
 
 
