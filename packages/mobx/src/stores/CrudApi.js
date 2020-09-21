@@ -17,7 +17,7 @@ export default class CrudApi extends Api {
   }
   findOne(data) {
     if (isPlainObject(data)) {
-      return this.fetch(`${this.base}/find`, {
+      return this.fetch(`${this.base}/findOne`, {
         method: 'POST',
         data,
       });
