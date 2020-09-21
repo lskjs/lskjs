@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "1.61.0",
+  "version": "1.61.1",
   "description": "LSK ux subrepo: utils",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
