@@ -10,7 +10,6 @@ export default class CrudApi extends Api {
     });
   }
   findById(_id) {
-    const _id = data;
     return this.fetch(`${this.base}/findOne`, {
       method: 'GET',
       qs: { _id },
@@ -22,9 +21,8 @@ export default class CrudApi extends Api {
         method: 'POST',
         data,
       });
-    } else {
-      return this.findById(data);
     }
+    return this.findById(data);
   }
   create(data) {
     return this.fetch(`${this.base}/create`, {
