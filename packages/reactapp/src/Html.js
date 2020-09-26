@@ -34,26 +34,39 @@ export default class Html {
       return null;
     }
   }
-  renderAsset(name = '', inline) {
-    const path = this.asset(name);
-    let raw;
+  renderAsset(name = '', inline, isArray) {
+    let paths = this.asset(name);
+    if (!Array.isArray(paths)) {
+      paths = [paths];
+    }
+    let raws;
     if (inline) {
       try {
-        raw = fs.readFileSync(this.publicPath + path).toString();
+        const readFilePath = (path) => fs.readFileSync(this.publicPath + path).toString();
+        raws = paths.map(readFilePath);
       } catch (err) {
         // eslint-disable-next-line no-console
         if (__DEV__) console.error(`renderAsset(${name}, true) err`, err);
       }
     }
-    if (!path) return '';
-    const ext = name.split('.').reverse()[0];
+
+    const renderRawCSS = (raw) => `<style rel="stylesheet" type="text/css">${raw}</style>`;
+    const renderPathCSS = (path) => `<link rel="stylesheet" type="text/css" href="${path}">`;
+    const renderRawJS = (raw) => `<script type="text/javascript">${raw}</script>`;
+    const renderPathJS = (path) => `<script type="text/javascript" src="${path}"></script>`;
+
+    if (!paths) return '';
+    let ext = name.split('.').reverse()[0];
+    if (isArray) {
+      ext = name.match(/([A-Z]+)/)[0].toLowerCase();
+    }
     if (ext === 'css') {
-      if (raw) return `<style rel="stylesheet" type="text/css">${raw}</style>`;
-      return `<link rel="stylesheet" type="text/css" href="${path}">`;
+      if (raws) return raws.map(renderRawCSS).join('\n');
+      return paths.map(renderPathCSS).join('\n');
     }
     if (ext === 'js') {
-      if (raw) return `<script type="text/javascript">${raw}</script>`;
-      return `<script type="text/javascript" src="${path}"></script>`;
+      if (raws) return raws.map(renderRawJS).join('\n');
+      return paths.map(renderPathJS).join('\n');
     }
     return '';
   }
@@ -102,7 +115,7 @@ ${this.renderMeta()}\
 ${this.renderPolyfill()}\
 ${this.renderFavicon()}\
 ${this.renderOGMeta()}\
-${this.renderAsset('vendor.css')}\
+${this.renderAsset('vendorsCSS', false, true)}\
 ${this.renderAsset('main.css')}\
 ${this.renderStyle()}\
 ${head}\
@@ -214,7 +227,7 @@ ${this.content}\
 ${this.renderRootState()}\
 ${this.renderGlobals()}\
 ${this.renderAsset('runtime-main.js', true)}\
-${this.renderAsset('vendor.js')}\
+${this.renderAsset('vendorsJS', false, true)}\
 ${this.renderAsset('main.js')}\
 ${this.renderFooter()}\
 </body>\
