@@ -218,8 +218,7 @@ export default class Api extends BaseApi {
   async permitAction({ req, permit }) {
     const { UserModel, PermitModel } = this.app.models;
     if (permit.type === 'auth.confirmEmail') {
-      const { email } = permit.info;
-      const user = await UserModel.findOne({ email }).sort({ createdAt: 1 });
+      const user = await UserModel.findById(permit.userId).sort({ createdAt: 1 });
       if (!user) throw '!user';
       await permit.activate();
       user.setStatus('confirmEmailAt', new Date());
