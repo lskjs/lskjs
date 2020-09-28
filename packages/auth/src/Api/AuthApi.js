@@ -171,8 +171,8 @@ export default class Api extends BaseApi {
     const loginField = Object.keys(criteria)[0];
     if (existUser) throw req.e(`auth.${loginField}Exists`, { status: 400 });
     const user = new UserModel({
+      ...userFields, // TODO: validation
       ...loginParams,
-      ...userFields, // TODO validation
     });
     if (password) {
       await this.helpers.setPassword(user, password);
