@@ -1,15 +1,16 @@
 import Twitter from 'twitter-lite';
+import BotProvider from './BotProvider';
 // https://github.com/draftbit/twitter-lite
 
-export default class TwitterBotProvider {
+export default class TwitterBotProvider extends BotProvider {
   name = 'TwitterBotProvider';
   Twitter = Twitter;
   async init() {
     await super.init();
-    if (!this.config.consumerKey) throw '!config.consumerKey';
-    if (!this.config.consumerSecret) throw '!config.consumerSecret';
-    if (!this.config.accessTokenKey) throw '!config.accessTokenKey';
-    if (!this.config.accessTokenSecret) throw '!config.accessTokenSecret';
+    if (!this.config.consumerKey) throw 'TwitterBotProvider !config.consumerKey';
+    if (!this.config.consumerSecret) throw 'TwitterBotProvider !config.consumerSecret';
+    if (!this.config.accessTokenKey) throw 'TwitterBotProvider !config.accessTokenKey';
+    if (!this.config.accessTokenSecret) throw 'TwitterBotProvider !config.accessTokenSecret';
     this.client = new Twitter({
       consumer_key: this.consumerKey,
       consumer_secret: this.consumerSecret,

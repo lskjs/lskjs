@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird';
 import Module from '@lskjs/module';
 import get from 'lodash/get';
 import importFn from '@lskjs/utils/importFn';
@@ -10,14 +9,17 @@ export default class BotsModule extends Module {
   async getPlugins() {
     return {
       DebugPlugin: () => import('./plugins/DebugPlugin'),
-    }
+    };
   }
   async init() {
+    await super.init();
     this.config = this.app.config.bots;
-    if (!this.config) return this.log.warn('!config');
+    if (!this.config) {
+      this.log.warn('!config');
+      return;
+    }
     const { info, ...botsConfigs } = this.config;
     const assign = get(info, 'assign', true);
-
 
     this.bots = await asyncMapValues(botsConfigs, async (config, name) => {
       const { provider } = config;
@@ -36,8 +38,7 @@ export default class BotsModule extends Module {
     });
     this.log.debug('bots', Object.keys(this.bots));
 
-
-    this.plugins = await asyncMapValues(await this.getPlugins(), async (pluginFn, name) => {
+    this.plugins = await asyncMapValues(await this.getPlugins(), async (pluginFn) => {
       const Plugin = await importFn(pluginFn);
       const plugin = new Plugin({ app: this.app, botsModule: this, bots: this.bots });
       await plugin.start();
@@ -45,24 +46,23 @@ export default class BotsModule extends Module {
     });
     this.log.debug('plugins', Object.keys(this.plugins));
 
-
     await asyncMapValues(this.bots, (bot) => this.applyPluginsForBot(bot));
 
     if (assign) Object.assign(this, this.bots);
   }
   async applyPluginsForBot(bot) {
-    await asyncMapValues(this.plugins, (plugin) => {
+    await asyncMapValues(this.plugins, async (plugin) => {
       await this.applyPluginForBot({ bot, plugin });
     });
   }
   async applyPluginForBot({ bot, plugin }) {
     if (Array.isArray(plugin.providers) && !plugin.providers.includes(bot.plugin)) {
-      
-      return ;
+      return;
     }
-    bot.on('*', plugin.emit)
+    bot.on('*', plugin.emit);
   }
   async run() {
+    await super.run();
     if (!this.config) return;
     await asyncMapValues(this.bots, (bot) => bot.run());
   }
