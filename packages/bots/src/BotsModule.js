@@ -41,7 +41,7 @@ export default class BotsModule extends Module {
     this.plugins = await asyncMapValues(await this.getPlugins(), async (pluginFn) => {
       const Plugin = await importFn(pluginFn);
       const plugin = new Plugin({ app: this.app, botsModule: this, bots: this.bots });
-      await plugin.start();
+      await plugin.init();
       return plugin;
     });
     this.log.debug('plugins', Object.keys(this.plugins));
@@ -65,5 +65,6 @@ export default class BotsModule extends Module {
     await super.run();
     if (!this.config) return;
     await asyncMapValues(this.bots, (bot) => bot.run());
+    await asyncMapValues(this.plugins, (plugin) => plugin.run());
   }
 }
