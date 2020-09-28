@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.1](https://github.com/lskjs/lskjs/compare/v1.62.0...v1.62.1) (2020-09-28)
+
+
+### Bug Fixes
+
+* **auth:** find user by userId ([5068af8](https://github.com/lskjs/lskjs/commit/5068af8fdee42633b8e16cbf0e1120a0c761c0f4))
+
+
+
+
+
 # [1.62.0](https://github.com/lskjs/lskjs/compare/v1.61.2...v1.62.0) (2020-09-28)
 
 
