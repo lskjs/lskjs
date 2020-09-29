@@ -1,7 +1,7 @@
 import global from './global';
 
 if (__DEV__) {
-  console.log('Compiling ...'); // eslint-disable-line no-console
+  console.log(`Compiling ... [__STAGE__=${__STAGE__} __DEV__=${__DEV__}]`); // eslint-disable-line no-console
 }
 global.startedAt = Date.now();
 global.timing = () => Date.now() - global.startedAt;
