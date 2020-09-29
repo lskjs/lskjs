@@ -35,6 +35,7 @@ export default class Html {
     }
   }
   renderAsset(name = '', inline) {
+    // inline for critical
     const path = this.asset(name);
     let raw;
     if (inline) {
@@ -49,7 +50,11 @@ export default class Html {
     const ext = name.split('.').reverse()[0];
     if (ext === 'css') {
       if (raw) return `<style rel="stylesheet" type="text/css">${raw}</style>`;
-      return `<link rel="stylesheet" type="text/css" href="${path}">`;
+      // return `<link rel="stylesheet" type="text/css" href="${path}">`;
+      return `\
+<link rel="preload" href="${path}" as="style" onload="this.onload=null;this.rel='stylesheet'">\
+<noscript><link rel="stylesheet" href="${path}"></noscript>\
+      `;
     }
     if (ext === 'js') {
       if (raw) return `<script type="text/javascript">${raw}</script>`;
