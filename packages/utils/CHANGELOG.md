@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.63.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.62.1...v1.63.0) (2020-09-29)
+
+
+### Features
+
+* **utils:** importFn check types and debug while compiling ([97082d8](https://github.com/lskjs/ux/tree/master/packages/utils/commit/97082d8b67cf78380967ce0fc4c03e11e17b3967))
+
+
+
+
+
 ## [1.61.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.61.0...v1.61.1) (2020-09-21)
 
 

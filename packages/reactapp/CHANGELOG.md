@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.63.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.62.1...v1.63.0) (2020-09-29)
+
+
+### Features
+
+* **reactapp:** async style renderAsset ([5d1f9e8](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/5d1f9e881132ea02008e46f93cdae40c570c7cc9))
+
+
+
+
+
 ## [1.61.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.61.0...v1.61.1) (2020-09-21)
 
 **Note:** Version bump only for package @lskjs/reactapp

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.63.0](https://github.com/lskjs/lskjs/compare/v1.62.1...v1.63.0) (2020-09-29)
+
+
+### Features
+
+* **bots:** alpha version of concepts ([64544ff](https://github.com/lskjs/lskjs/commit/64544fff23fd5fc817521bfb8c67470939d76087))
+* **bots:** new stable functional ([366c150](https://github.com/lskjs/lskjs/commit/366c150067a69f9cd974fb1dd3df79e0a4aa27fe))
+* **module:** debug trace logs ([ed232b0](https://github.com/lskjs/lskjs/commit/ed232b0750a03a67aed6f7e5ac2421ed682fe92a))
+* **reactapp:** async style renderAsset ([5d1f9e8](https://github.com/lskjs/lskjs/commit/5d1f9e881132ea02008e46f93cdae40c570c7cc9))
+* **utils:** importFn check types and debug while compiling ([97082d8](https://github.com/lskjs/lskjs/commit/97082d8b67cf78380967ce0fc4c03e11e17b3967))
+
+
+
+
+
 ## [1.62.1](https://github.com/lskjs/lskjs/compare/v1.62.0...v1.62.1) (2020-09-28)
 
 

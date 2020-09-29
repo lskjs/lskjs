@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "1.61.1",
+  "version": "1.63.0",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -32,9 +32,9 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
-    "@lskjs/module": "1.61.1",
-    "@lskjs/server-api": "1.61.1",
-    "@lskjs/utils": "1.61.1",
+    "@lskjs/module": "1.63.0",
+    "@lskjs/server-api": "1.63.0",
+    "@lskjs/utils": "1.63.0",
     "bluebird": "^3.7.2"
   },
   "devDependencies": {
