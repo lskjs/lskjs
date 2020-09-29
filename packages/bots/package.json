@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
+    "@lskjs/db": "^1.49.0",
     "@lskjs/module": "1.61.1",
     "@lskjs/utils": "1.61.1",
     "@slack/bolt": "^2.3.0",

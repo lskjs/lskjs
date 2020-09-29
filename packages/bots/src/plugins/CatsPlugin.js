@@ -2,7 +2,8 @@ import sample from 'lodash/sample';
 import Plugin from './Plugin';
 
 export default class CatsPlugin extends Plugin {
-  name = 'CatsAction';
+  name = 'CatsPlugin';
+  providers = ['telegram'];
   messages = [
     'нет, ты котик',
     'нАрКотИК!!1!!',
@@ -12,7 +13,6 @@ export default class CatsPlugin extends Plugin {
     'килограмм корма за хурму!1!!!1!!',
     'а можно фотку киски ?',
   ];
-
   narcos = [
     'нАрКотИК!!1!!',
     'сам ты наркотик пушистый',
@@ -27,7 +27,6 @@ export default class CatsPlugin extends Plugin {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3RJuURRZPFb_xl5Db-1f8SxDqbmVh043DgJg0PYglm2aUbt90vA&s',
     'https://i.pinimg.com/originals/19/6a/c6/196ac68e994e399f80d55c7e8d65f134.jpg',
   ];
-
   async getCat() {
     try {
       const resp = await fetch('https://api.thecatapi.com/v1/images/search?size=full');
@@ -40,31 +39,20 @@ export default class CatsPlugin extends Plugin {
       return null;
     }
   }
-
-  doAction(message) {
-    this.log('doAction');
-  }
-
   runBot(bot, name) {
-    if (!this.isRunBot(bot)) return;
-
     bot.on('message', async (message) => {
-      try {
-        if (!bot.testMessageRegExp(message, /котик|кусь/)) return;
+      if (!bot.isMessageContains(message, /котик|кусь/)) return;
 
-        if (bot.testMessageRegExp(message, /наркотик|наркусь/)) {
-          bot.sendMessage(message, sample(this.narcos));
-          return;
-        }
-        const cat = await this.getCat();
-        if (cat && this.percentProbability(50)) {
-          bot.sendPhoto(message, cat);
-          return;
-        }
-        bot.sendMessage(message, sample(this.messages));
-      } catch (err) {
-        this.log.error('runBot', err);
+      if (bot.isMessageContains(message, /наркотик|наркусь/)) {
+        bot.sendMessage(message, sample(this.narcos));
+        return;
       }
+      const cat = await this.getCat();
+      if (cat && this.percentProbability(50)) {
+        bot.sendPhoto(message, cat);
+        return;
+      }
+      bot.sendMessage(message, sample(this.messages));
     });
   }
 }

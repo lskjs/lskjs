@@ -1,15 +1,43 @@
 import Module from '@lskjs/module';
 import get from 'lodash/get';
-import importFn from '@lskjs/utils/importFn';
+// import importFn from '@lskjs/utils/importFn';
+import isFunction from '@lskjs/utils/isFunction';
+import undefault from '@lskjs/utils/undefault';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import providers from './providers';
 
+const importFn = async (fn) => {
+  let module;
+  if (isFunction(fn)) {
+    module = await fn();
+  } else {
+    module = await fn;
+  }
+  return undefault(module);
+};
+
 export default class BotsModule extends Module {
+  name = 'BotsModule';
   providers = providers;
   async getPlugins() {
     return {
       DebugPlugin: () => import('./plugins/DebugPlugin'),
+      CatsPlugin: () => import('./plugins/CatsPlugin'),
+      ExamplePlugin: () => import('./plugins/ExamplePlugin'),
+      PortalPlugin: () => import('./plugins/PortalPlugin'),
     };
+  }
+  // async getPlugins() {
+  //   return import('./plugins');
+  // }
+  // async getPlugins() {
+  //   return require('./plugins').default;
+  // }
+  // async getModels() {
+  //   return import('./models');
+  // }
+  getModels() {
+    return require('./models').default;
   }
   async init() {
     await super.init();
@@ -46,25 +74,16 @@ export default class BotsModule extends Module {
     });
     this.log.debug('plugins', Object.keys(this.plugins));
 
-    await asyncMapValues(this.bots, (bot) => this.applyPluginsForBot(bot));
-
     if (assign) Object.assign(this, this.bots);
   }
-  async applyPluginsForBot(bot) {
-    await asyncMapValues(this.plugins, async (plugin) => {
-      await this.applyPluginForBot({ bot, plugin });
-    });
-  }
-  async applyPluginForBot({ bot, plugin }) {
-    if (Array.isArray(plugin.providers) && !plugin.providers.includes(bot.plugin)) {
-      return;
-    }
-    bot.on('*', plugin.emit);
-  }
-  async run() {
-    await super.run();
-    if (!this.config) return;
-    await asyncMapValues(this.bots, (bot) => bot.run());
-    await asyncMapValues(this.plugins, (plugin) => plugin.run());
+    async run() {
+      await super.run();
+      if (!this.config) return;
+      await asyncMapValues(this.bots, (bot) => bot.run());
+      await asyncMapValues(this.plugins, (plugin) => plugin.run());
+      this.log.debug(
+        'bots x plugins',
+      await asyncMapValues(this.bots, async (bot) => bot.plugins.map((plugin) => plugin.name)),
+    );
   }
 }

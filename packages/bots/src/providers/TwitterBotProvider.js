@@ -1,9 +1,13 @@
 import Twitter from 'twitter-lite';
 import BotProvider from './BotProvider';
-// https://github.com/draftbit/twitter-lite
+
+/**
+ * Docs: https://github.com/draftbit/twitter-lite
+ */
 
 export default class TwitterBotProvider extends BotProvider {
   name = 'TwitterBotProvider';
+  provider = 'twitter';
   Twitter = Twitter;
   async init() {
     await super.init();
@@ -16,10 +20,10 @@ export default class TwitterBotProvider extends BotProvider {
       consumer_secret: this.consumerSecret,
       access_token_key: this.accessTokenKey,
       access_token_secret: this.accessTokenSecret,
-    })
+    });
   }
   async run() {
-    await super.run();
     if (!this.client) return;
+    await super.run();
   }
 }

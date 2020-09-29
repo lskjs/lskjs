@@ -1,9 +1,13 @@
 import VkBot from 'node-vk-bot-api';
 import BotProvider from './BotProvider';
-// https://www.npmjs.com/package/node-vk-bot-api
+
+/**
+ * Docs: https://www.npmjs.com/package/node-vk-bot-api
+ */
 
 export default class VkontakteBotProvider extends BotProvider {
   name = 'VkontakteBotProvider';
+  provider = 'vkontakte';
   VkBot = VkBot;
   async init() {
     await super.init();
@@ -11,8 +15,7 @@ export default class VkontakteBotProvider extends BotProvider {
     this.client = new VkBot(this.config.token);
   }
   async run() {
-    await super.run();
     if (!this.client) return;
-    // console.log(  )
+    await super.run();
   }
 }
