@@ -9,6 +9,18 @@ import Emitter from './emitter';
 
 const DEBUG = __DEV__ && false;
 
+logger.safeLog = (ctx, level = 'info', ...args) => {
+  if (ctx.log && ctx.log[level]) {
+    ctx.log[level](`<${ctx.name}>`, ...args);
+  } else {
+    console.log(`[${level[0]}] <${ctx.name}>`, ...args); // eslint-disable-line no-console
+  }
+};
+
+logger.fatalLog = (...args) => {
+  logger.safeLog(...args);
+  if (__DEV__) throw new Error(args[3]);
+};
 export default class Module {
   _module = true;
 
@@ -18,48 +30,54 @@ export default class Module {
   }
 
   createLogger(params) {
-    return logger.createLogger({
+    const loggerParams = {
       name: this.name || 'app',
       src: __DEV__,
       // level: 'trace',
       level: __DEV__ ? (__STAGE__ === 'isuvorov' ? 'trace' : 'debug') : __STAGE__ === 'production' ? 'error' : 'warn', // eslint-disable-line no-nested-ternary
       ...get(this, 'config.log', {}),
       ...params,
-    });
+    };
+    return logger.createLogger(loggerParams);
   }
 
   emit(...args) {
-    if (this.log && this.log.trace) {
-      this.log.trace(`[e] ${this.name}:`, ...args);
-    } else {
-      console.log(`[e] ${this.name}:`, ...args); // eslint-disable-line no-console
-    }
+    logger.safeLog(this, 'trace', `[ee] emit(${args[0]})`);
     if (this.ee && this.ee.emit) this.ee.emit(...args);
   }
   on(...args) {
-    if (this.ee) {
-      this.ee.on(
-        args[0],
-        async (...params) => {
-          try {
-            await args[1](...params);
-          } catch (err) {
-            this.log.error(`App.on(${args[0]})`, err);
-          }
-        },
-        args[2],
-      );
+    if (!this.ee) {
+      if (__DEV__) {
+        logger.safeLog(this, 'warn', `[ee] !ee`);
+      }
+      return;
     }
+    logger.safeLog(this, 'trace', `[ee] on(${args[0]})`);
+    this.ee.on(
+      args[0],
+      async (...params) => {
+        try {
+          await args[1](...params);
+        } catch (err) {
+          this.log.error(`[ee] on(${args[0]})`, err);
+        }
+      },
+      args[2],
+    );
   }
 
   async beforeInit() {
+    if (this.name === 'Module') logger.fatalLog(this, 'warn', `Module.name is empty`);
+    this._stage = 'beforeInit';
     if (!this.ee) this.ee = new Emitter();
     if (!this.log) this.log = this.createLogger();
-    if (this.ee && this.log) this.ee.on('*', event => this.log.trace(event));
+    if (this.ee && this.log) this.ee.on('*', (event) => this.log.trace('[EE]', event));
   }
 
   async init() {
-    // if (!this.log) this.log = this.createLogger();
+    await this.beforeInit();
+    if (this._stage !== 'beforeInit') logger.fatalLog(this, 'warn', `beforeInit() missing`);
+    this._stage = 'init';
     this.emit('init');
     // this.log.trace(`${this.name}.init()`);
     // if (!this.config) this.config = config;
@@ -91,7 +109,7 @@ export default class Module {
   async module(nameOrNames) {
     if (Array.isArray(nameOrNames)) {
       const modules = {};
-      await Promise.map(nameOrNames, async name => {
+      await Promise.map(nameOrNames, async (name) => {
         modules[name] = await this.module(name);
       });
       return modules;
@@ -123,7 +141,7 @@ export default class Module {
     if (DEBUG) this.log.trace(`${this.name}.broadcastModules`, method);
     // console.log('this.getModulesSequence()', this.getModulesSequence());
     const modules = toPairs(this.modules || {}).map(([k, v]) => ({ name: k, module: v }));
-    return Promise.map(modules, pack => {
+    return Promise.map(modules, (pack) => {
       if (!(pack.module && isFunction(pack.module[method]))) return null;
       // let res;
       try {
@@ -137,6 +155,8 @@ export default class Module {
   }
 
   run() {
+    if (this._stage !== 'init') logger.fatalLog(this, 'warn', `init() missing`);
+    this._stage = 'run';
     this.emit('run');
   }
 
@@ -160,9 +180,6 @@ export default class Module {
   startCount = 0;
   async start() {
     try {
-      if (isFunction(this.beforeInit)) {
-        await this.beforeInit();
-      }
       if (isFunction(this.init)) {
         await this.init();
       }
