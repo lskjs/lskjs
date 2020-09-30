@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.64.1](https://github.com/lskjs/modules/tree/master/packages/worker/compare/v1.64.0...v1.64.1) (2020-09-30)
+
+**Note:** Version bump only for package @lskjs/worker
+
+
+
+
+
 # [1.64.0](https://github.com/lskjs/modules/tree/master/packages/worker/compare/v1.63.0...v1.64.0) (2020-09-30)
 
 **Note:** Version bump only for package @lskjs/worker
