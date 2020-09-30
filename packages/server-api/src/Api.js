@@ -19,12 +19,6 @@ export default class Api {
     assignProps(this, props);
     if (!this.app) throw 'Api !app';
     this.asyncRouter = this.app.asyncRouter;
-    if (this.app.helpers && this.app.helpers.wrapResoursePoint) {
-      this.wrapResoursePoint = this.app.helpers.wrapResoursePoint;
-    }
-    // this.isAuth = this.app.helpers.isAuth;
-    // this.isAuth = () => true; // @TODO: Andruxa, перед релизом исправь
-
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });
