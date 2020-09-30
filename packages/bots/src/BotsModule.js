@@ -10,9 +10,9 @@ export default class BotsModule extends Module {
   async getPlugins() {
     return {
       DebugPlugin: () => import('./plugins/DebugPlugin'),
-      CatsPlugin: () => import('./plugins/CatsPlugin'),
-      ExamplePlugin: () => import('./plugins/ExamplePlugin'),
-      PortalPlugin: () => import('./plugins/PortalPlugin'),
+      // CatsPlugin: () => import('./plugins/CatsPlugin'),
+      // ExamplePlugin: () => import('./plugins/ExamplePlugin'),
+      // PortalPlugin: () => import('./plugins/PortalPlugin'),
       ...this.plugins,
     };
   }
@@ -30,10 +30,13 @@ export default class BotsModule extends Module {
   }
   async init() {
     await super.init();
-    this.config = this.app.config.bots;
     if (!this.config) {
-      this.log.warn('!config');
-      return;
+      if (this.app.config.bots) {
+        this.config = this.app.config.bots;
+      } else {
+        this.log.warn('!config');
+        return;
+      }
     }
     const { assignProviders = true, providers: providersConfigs, plugins: pluginsConfig } = this.config;
 
@@ -54,9 +57,14 @@ export default class BotsModule extends Module {
     });
     this.log.debug('bots', Object.keys(this.bots));
 
-    this.plugins = await asyncMapValues(await this.getPlugins(), async (pluginFn) => {
+    this.plugins = await asyncMapValues(await this.getPlugins(), async (pluginFn, name) => {
       const Plugin = await importFn(pluginFn);
-      const plugin = new Plugin({ app: this.app, botsModule: this, bots: this.bots });
+      const plugin = new Plugin({
+        app: this.app,
+        botsModule: this,
+        bots: this.bots,
+        config: pluginsConfig[name] || {},
+      });
       await plugin.init();
       return plugin;
     });
