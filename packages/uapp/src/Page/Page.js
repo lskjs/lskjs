@@ -19,8 +19,8 @@ export default class Page {
   @observable state = {};
   rootState = null;
 
-  constructor(props) {
-    assignProps(this, props);
+  constructor(...props) {
+    assignProps(this, ...props);
   }
 
   init() {

@@ -44,10 +44,10 @@ export default class Uapp extends Module {
   // req = new Req();
   @observable req = {};
 
-  constructor(props) {
-    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху.
-    super(props);
-    assignProps(this, props);
+  constructor(...props) {
+    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху. (ex Api, Apiq, Page, Provider, theme, scrollTo)
+    super(...props);
+    assignProps(this, ...props);
   }
 
   createLogger(params) {

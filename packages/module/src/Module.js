@@ -4,6 +4,7 @@ import Promise from 'bluebird';
 import logger from '@lskjs/log';
 import isFunction from 'lodash/isFunction';
 import assignProps from '@lskjs/utils/assignProps';
+import importFn from '@lskjs/utils/importFn';
 import classNewOrFunctionCall from '@lskjs/utils/classNewOrFunctionCall';
 import Emitter from './emitter';
 
@@ -25,8 +26,8 @@ export default class Module {
   _module = true;
 
   name = 'Module';
-  constructor(props) {
-    assignProps(this, props);
+  constructor(...props) {
+    assignProps(this, ...props);
   }
 
   createLogger(params) {
@@ -71,7 +72,7 @@ export default class Module {
     this._stage = 'beforeInit';
     if (!this.ee) this.ee = new Emitter();
     if (!this.log) this.log = this.createLogger();
-    if (this.ee && this.log) this.ee.on('*', (event) => this.log.trace('[EE]', event));
+    if (this.ee) this.ee.on('*', (event) => logger.safeLog(this, 'trace', `[ee] ${event}`));
   }
 
   async init() {
@@ -96,15 +97,16 @@ export default class Module {
   initModules() {
     if (this.getModules) this._modules = this.getModules();
   }
-  statusModule(name) {
+  getModuleStage(name) {
     if (!this._modules || !this._modules[name]) return 'undefined';
+    // TODO:
     // undefined
-    // notImported
-    // imported
-    // inited
-    // runned
-    if (this.modules && this.modules[name]) return 'started';
-    return null;
+    // notInited
+    // beforeInit
+    // init
+    // run
+    if (this.modules && this.modules[name]) return this.modules[name]._stage;
+    return 'notInited';
   }
   async module(nameOrNames) {
     if (Array.isArray(nameOrNames)) {
@@ -118,15 +120,18 @@ export default class Module {
 
     if (this.modules && this.modules[name]) return this.modules[name];
     if (!this._modules || !this._modules[name]) throw `!modules.${name}`;
-    const pack = await this._modules[name]();
-    let AsyncModule;
-    if (pack && pack.default) {
-      AsyncModule = pack.default;
-    } else {
-      AsyncModule = pack;
+    let asyncModule;
+    try {
+      const AsyncModule = await importFn(this._modules[name]);
+      if (Array.isArray(AsyncModule)) {
+        asyncModule = classNewOrFunctionCall(...AsyncModule, this);
+      } else {
+        asyncModule = classNewOrFunctionCall(AsyncModule, this);
+      }
+    } catch (err) {
+      this.log.error(`module(${name})`, err);
+      throw err;
     }
-    // let asyncModule;
-    const asyncModule = classNewOrFunctionCall(AsyncModule, this);
     if (asyncModule.start) {
       await asyncModule.start();
     } else {
@@ -161,7 +166,7 @@ export default class Module {
   }
 
   async startOrRestart() {
-    if (this.startCount) {
+    if (this._started) {
       return this.restart();
     }
     return this.start();
@@ -177,7 +182,7 @@ export default class Module {
     await this.start();
   }
 
-  startCount = 0;
+  _started = 0;
   async start() {
     try {
       if (isFunction(this.init)) {
@@ -211,7 +216,7 @@ export default class Module {
         if (DEBUG) this.log.trace(`${this.name}.onStart()`);
         await this.onStart();
       }
-      this.startCount += 1;
+      this._started += 1;
     } catch (err) {
       if (this.log && this.log.fatal) {
         this.log.fatal(`${this.name}.start() err`, err);

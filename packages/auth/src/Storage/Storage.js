@@ -9,8 +9,8 @@ const debug = createLogger({ name: '@lskjs/storage', enable: DEBUG });
 export default class Storage {
   debug = debug;
   state = {};
-  constructor(props = {}) {
-    assignProps(this, props);
+  constructor(...props) {
+    assignProps(this, ...props);
   }
   init() {
     this._inited = true;

@@ -17,10 +17,10 @@ export default class ReactAppClient extends Module {
   ReactDOM = ReactDOM;
   name = 'ReactAppClient';
 
-  constructor(props) {
-    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху.
-    super(props);
-    assignProps(this, props);
+  constructor(...props) {
+    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху (ex ReactDOM)
+    super(...props);
+    assignProps(this, ...props);
   }
 
   getRootState() {
