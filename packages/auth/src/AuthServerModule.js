@@ -62,6 +62,7 @@ export default class AuthServerModule extends Module {
     });
   }
   async init() {
+    await super.init();
     if (!this.config) {
       this.app.log.warn('config.auth is missing');
       this.config = {};

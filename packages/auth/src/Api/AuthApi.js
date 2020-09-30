@@ -20,6 +20,7 @@ export default class Api extends BaseApi {
     this.init();
   }
   async init() {
+    await super.init();
     // TODO: ввести в лск асинхронную загрузку Api
     const auth = await this.app.module('auth');
     this.helpers = auth.helpers;

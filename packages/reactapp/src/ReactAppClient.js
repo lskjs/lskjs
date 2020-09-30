@@ -28,6 +28,7 @@ export default class ReactAppClient extends Module {
   }
 
   async init() {
+    await super.init();
     if (!this.container) this.container = document.getElementById('root');
     this.history = createBrowserHistory({
       getUserConfirmation: (message, callback) => {
