@@ -27,7 +27,8 @@ export default function mergeEnvs(...configs) {
             config = merge(config, fnOrJson);
           }
         } catch (err) {
-          //
+          // eslint-disable-next-line no-console
+          console.error(`[ERROR] cannot load config ${configPath}`, err);
         }
         break;
       case 'json':
@@ -35,7 +36,8 @@ export default function mergeEnvs(...configs) {
           const json = JSON.parse(fs.readFileSync(configPath).toString());
           config = merge(config, json);
         } catch (err) {
-          //
+          // eslint-disable-next-line no-console
+          console.error(`[ERROR] cannot load config ${configPath}`, err);
         }
         break;
     }
