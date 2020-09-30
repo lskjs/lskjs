@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.64.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.63.0...v1.64.0) (2020-09-30)
+
+
+### Features
+
+* **utils:** add typeChecks ([b68409a](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b68409a58c3c386adc334b63d6358a8e00951412))
+* **utils:** better isClass detection ([f885d9a](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f885d9a780329bc1c67ab16e4754af4fe0ae707a))
+* **utils:** improve assignProps and importFn for array props ([31e7b56](https://github.com/lskjs/ux/tree/master/packages/utils/commit/31e7b56a5ad3ef35dfb41fcfcd4af97fec1cd7e5))
+
+
+
+
+
 # [1.63.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.62.1...v1.63.0) (2020-09-29)
 
 

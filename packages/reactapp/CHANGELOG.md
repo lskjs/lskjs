@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.64.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.63.0...v1.64.0) (2020-09-30)
+
+
+### Features
+
+* **module:** new modules pattern ([17cd5f0](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/17cd5f0b3fc310eaab33ad1a52dd3150bad5226c))
+
+
+
+
+
 # [1.63.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.62.1...v1.63.0) (2020-09-29)
 
 
