@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.65.0](https://github.com/lskjs/lskjs/compare/v1.64.1...v1.65.0) (2020-09-30)
+
+
+### Features
+
+* **config:** show errors if cannot parse json or js config ([6ab26de](https://github.com/lskjs/lskjs/commit/6ab26de92c34fe5b3e728a5d5fcf55f781593b8a))
+
+
+
+
+
 ## [1.64.1](https://github.com/lskjs/lskjs/compare/v1.64.0...v1.64.1) (2020-09-30)
 
 **Note:** Version bump only for package lskjs
