@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+/* eslint-disable no-console */
 import merge from 'lodash/merge';
 import isFunction from 'lodash/isFunction';
 import set from 'lodash/set';
@@ -15,31 +16,28 @@ export default function mergeEnvs(...configs) {
   const configPaths = getEnvPaths();
   configPaths.forEach((configPath) => {
     const type = configPath.split('.').reverse()[0];
-    switch (type) {
-      default:
-        break;
-      case 'js':
-        try {
-          const fnOrJson = require(configPath); // eslint-disable-line import/no-dynamic-require
-          if (isFunction(fnOrJson)) {
-            config = fnOrJson(config);
-          } else {
-            config = merge(config, fnOrJson);
-          }
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(`[ERROR] cannot load config ${configPath}`, err);
+    try {
+      if (type === 'js') {
+        const fnOrJson = require(configPath); // eslint-disable-line import/no-dynamic-require
+        if (isFunction(fnOrJson)) {
+          config = fnOrJson(config);
+        } else {
+          config = merge(config, fnOrJson);
         }
-        break;
-      case 'json':
-        try {
-          const json = JSON.parse(fs.readFileSync(configPath).toString());
-          config = merge(config, json);
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(`[ERROR] cannot load config ${configPath}`, err);
-        }
-        break;
+      } else if (type === 'jsson') {
+        const json = JSON.parse(fs.readFileSync(configPath).toString());
+        config = merge(config, json);
+      } else {
+        return;
+      }
+    } catch (err) {
+      console.error('[ERROR] [ERROR] [ERROR] [ERROR] [ERROR] [ERROR] [ERROR] [ERROR]');
+      console.error(``);
+      console.error(`cannot load config: ${configPath}`);
+      console.error(``);
+      console.error(err);
+      console.error(``);
+      console.error('[ERROR] [ERROR] [ERROR] [ERROR] [ERROR] [ERROR] [ERROR] [ERROR]');
     }
     // fs.watchFile('message.text', (curr, prev) => {
     //   console.log(`the current mtime is: ${curr.mtime}`);
