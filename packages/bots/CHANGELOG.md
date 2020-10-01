@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.66.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.65.0...v1.66.0) (2020-10-01)
+
+
+### Features
+
+* **bots:** add instagram bot ([0f37e32](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/0f37e32059ab31509dee78c8b05ceffda1821a09))
+
+
+
+
+
 # [1.65.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.64.1...v1.65.0) (2020-09-30)
 
 **Note:** Version bump only for package @lskjs/bots
