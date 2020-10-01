@@ -5,12 +5,15 @@ import BotProvider from './BotProvider';
  * Docs: https://telegraf.js.org/#/
  */
 
-const getTarget = (ctxOrMessage) => {
-  const message = ctxOrMessage.message || ctxOrMessage;
+const getMessage = (ctx) => {
+  return ctx.message || ctx;
+};
+const getTarget = (ctx) => {
+  const message = getMessage(ctx);
   return message.chat ? message.chat.id : message.from.id;
 };
-const getReplyMessageId = (ctxOrMessage) => {
-  const message = ctxOrMessage.message || ctxOrMessage;
+const getReplyMessageId = (ctx) => {
+  const message = getMessage(ctx);
   return message.message_id;
 };
 
@@ -50,6 +53,22 @@ export default class TelegramBotProvider extends BotProvider {
   isMessageCommand(message, command) {
     // console.log('isMessageCommand', message, command);
     return this.isMessageStartsWith(message, `/${command}`);
+  }
+  getMessageDate(ctx) {
+    const message = getMessage(ctx);
+    return new Date(message.date * 1000);
+  }
+
+  getMessageType(ctx) {
+    const message = getMessage(ctx);
+    if (message.photo) return 'photo';
+    if (message.sticker) return 'sticker';
+    if (message.voice) return 'voice';
+    if (message.location) return 'location';
+    if (message.document) return 'document';
+    if (message.audio) return 'audio';
+    if (message.text) return 'text';
+    return null;
   }
 
   reply(ctx, payload, extra = {}) {
