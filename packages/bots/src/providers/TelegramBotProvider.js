@@ -1,10 +1,18 @@
 import Telegraf from 'telegraf';
-import some from 'lodash/some';
 import BotProvider from './BotProvider';
 
 /**
  * Docs: https://telegraf.js.org/#/
  */
+
+const getTarget = (ctxOrMessage) => {
+  const message = ctxOrMessage.message || ctxOrMessage;
+  return message.chat ? message.chat.id : message.from.id;
+};
+const getReplyMessageId = (ctxOrMessage) => {
+  const message = ctxOrMessage.message || ctxOrMessage;
+  return message.message_id;
+};
 
 export default class TelegramBotProvider extends BotProvider {
   name = 'TelegramBotProvider';
@@ -44,17 +52,20 @@ export default class TelegramBotProvider extends BotProvider {
     return this.isMessageStartsWith(message, `/${command}`);
   }
 
-  reply(ctxOrMessage, payload, extra) {
-    // if (ctxOrMessage.reply) { // хз почему
-    //   ctxOrMessage.reply(payload);
-    // } else {
-    const message = ctxOrMessage.message || ctxOrMessage;
-    if (!extra) extra = {};
-    extra.reply_to_message_id = message.message_id;
-    this.client.telegram.sendMessage(message.chat ? message.chat.id : message.from.id, payload, extra);
-    // }
+  reply(ctx, payload, extra = {}) {
+    return this.client.telegram.sendMessage(getTarget(ctx), payload, {
+      ...extra,
+      reply_to_message_id: getReplyMessageId(ctx),
+    });
   }
 
+  sendMessage(ctx, ...args) {
+    return this.client.telegram.sendMessage(getTarget(ctx), ...args);
+  }
+
+  sendPhoto(ctx, ...args) {
+    return this.client.telegram.sendPhoto(getTarget(ctx), ...args);
+  }
   // async repost({message, chatId, forwardFrom}) {
   //   const data = { };
   //   if (message.sticker) {

@@ -37,7 +37,7 @@ export default class BotProvider extends Module {
    */
   // eslint-disable-next-line no-unused-vars
   isMessageContains(message, regExp) {
-    let text = this.getMessageText();
+    let text = this.getMessageText(message);
     if (!text) return false;
     text = text.toLowerCase();
     if (regExp instanceof RegExp) {
