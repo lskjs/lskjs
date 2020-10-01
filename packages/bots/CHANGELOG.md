@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.66.1...v1.67.0) (2020-10-01)
+
+
+### Features
+
+* **bots:** new features in telegram ([2a196a0](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/2a196a0e061521721efbb0f9d6aa1a5a02a93f54))
+
+
+
+
+
 ## [1.66.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.66.0...v1.66.1) (2020-10-01)
 
 
