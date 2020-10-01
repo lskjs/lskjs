@@ -22,12 +22,28 @@ export default class BotProvider extends Module {
   }
 
   /**
-   * getMessageText
-   * @param {*} message
+   *
+   * @param {*} ctx
    */
   // eslint-disable-next-line no-unused-vars
-  getMessageText(message) {
-    throw 'getMessageText not implemented';
+  getMessageDate(ctx) {
+    throw `${this.name}.getMessageDate not implemented`;
+  }
+  /**
+   *
+   * @param {*} ctx
+   */
+  // eslint-disable-next-line no-unused-vars
+  getMessageType(ctx) {
+    throw `${this.name}.getMessageType not implemented`;
+  }
+  /**
+   * getMessageText
+   * @param {*} ctx
+   */
+  // eslint-disable-next-line no-unused-vars
+  getMessageText(ctx) {
+    throw `${this.name}.getMessageText not implemented`;
   }
 
   /**
@@ -65,6 +81,7 @@ export default class BotProvider extends Module {
   isMessageCommand(message, command) {
     throw `${this.name}.isMessageCommand not implemented`;
   }
+
   /**
    * reply
    * @param {*} who

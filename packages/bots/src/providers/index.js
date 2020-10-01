@@ -2,8 +2,8 @@
 // export { default as telegraf } from './TelegrafBotProvider';
 
 export default {
-  discord: () => import('./discord'),
-  telegram: () => import('./telegram'),
+  telegram: () => import('./telegram'), // 
+  discord: () => import('./discord'), //
   slack: () => import('./slack'),
   twitter: () => import('./twitter'),
   vkontakte: () => import('./vkontakte'),

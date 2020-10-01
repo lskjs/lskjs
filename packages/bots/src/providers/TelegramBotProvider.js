@@ -8,7 +8,11 @@ import BotProvider from './BotProvider';
 const getMessage = (ctx) => {
   return ctx.message || ctx;
 };
-const getTarget = (ctx) => {
+const getMessageChatId = (ctx) => {
+  const message = getMessage(ctx);
+  return message.chat ? message.chat.id : null;
+};
+const getMessageTargetId = (ctx) => {
   const message = getMessage(ctx);
   return message.chat ? message.chat.id : message.from.id;
 };
@@ -44,23 +48,32 @@ export default class TelegramBotProvider extends BotProvider {
     await this.client.launch();
     await this.client.startPolling();
   }
-
+  getMessage(ctx) {
+    return getMessage(ctx);
+  }
+  getMessageChatId(ctx) {
+    return getMessageChatId(ctx);
+  }
+  getMessageTargetId(ctx) {
+    return getMessageTargetId(ctx);
+  }
+  getReplyMessageId(ctx) {
+    return getReplyMessageId(ctx);
+  }
   getMessageText(ctxOrMessage = {}) {
     if (ctxOrMessage.message) return ctxOrMessage.message.text;
     return ctxOrMessage.text;
   }
-
   isMessageCommand(message, command) {
     // console.log('isMessageCommand', message, command);
     return this.isMessageStartsWith(message, `/${command}`);
   }
   getMessageDate(ctx) {
-    const message = getMessage(ctx);
+    const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
   }
-
   getMessageType(ctx) {
-    const message = getMessage(ctx);
+    const message = this.getMessage(ctx);
     if (message.photo) return 'photo';
     if (message.sticker) return 'sticker';
     if (message.voice) return 'voice';
@@ -70,20 +83,39 @@ export default class TelegramBotProvider extends BotProvider {
     if (message.text) return 'text';
     return null;
   }
-
   reply(ctx, payload, extra = {}) {
-    return this.client.telegram.sendMessage(getTarget(ctx), payload, {
+    return this.client.telegram.sendMessage(getMessageTargetId(ctx), payload, {
       ...extra,
       reply_to_message_id: getReplyMessageId(ctx),
     });
   }
-
   sendMessage(ctx, ...args) {
-    return this.client.telegram.sendMessage(getTarget(ctx), ...args);
+    return this.client.telegram.sendMessage(getMessageTargetId(ctx), ...args);
+  }
+  sendSticker(ctx, ...args) {
+    return this.client.telegram.sendSticker(getMessageTargetId(ctx), ...args);
+  }
+  sendAnimation(ctx, ...args) {
+    return this.client.telegram.sendAnimation(getMessageTargetId(ctx), ...args);
+  }
+  sendDocument(ctx, ...args) {
+    return this.client.telegram.sendDocument(getMessageTargetId(ctx), ...args);
+  }
+  sendPhoto(ctx, ...args) {
+    return this.client.telegram.sendPhoto(getMessageTargetId(ctx), ...args);
   }
 
-  sendPhoto(ctx, ...args) {
-    return this.client.telegram.sendPhoto(getTarget(ctx), ...args);
+  isMessageLike(ctx) {
+    const message = this.getMessage(ctx);
+    const likes = ['+', '👍', '➕'].map((a) => a.codePointAt(0));
+
+    let firstSign;
+    if (message && message.text && message.text.codePointAt) {
+      firstSign = message.text.codePointAt(0);
+    } else if (message && message.sticker && message.sticker.emoji) {
+      firstSign = message.sticker.emoji.codePointAt(0);
+    }
+    return firstSign && likes.includes(firstSign);
   }
   // async repost({message, chatId, forwardFrom}) {
   //   const data = { };

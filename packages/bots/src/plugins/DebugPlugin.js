@@ -9,10 +9,8 @@ export default class DebugPlugin extends Plugin {
   }
   async runPing(bot) {
     bot.on('message', (ctx) => {
-      if (!bot.isMessageCommand(ctx, 'ping')) return;
-      ctx.reply(`pong 2`);
-
-      bot.reply(ctx, `pong`);
+      if (!bot.isMessageCommand(ctx, 'ping')) return null;
+      return bot.reply(ctx, `pong`);
     });
   }
   async runChatId(bot) {
