@@ -7,5 +7,6 @@ export default {
   slack: () => import('./slack'),
   twitter: () => import('./twitter'),
   vkontakte: () => import('./vkontakte'),
+  instagram: () => import('./instagram'),
   // whatsapp: () => import('./whatsapp'),
 };
