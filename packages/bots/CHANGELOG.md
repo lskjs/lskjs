@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.66.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.66.0...v1.66.1) (2020-10-01)
+
+
+### Bug Fixes
+
+* **bots:** fix latest bugs ([07b95b5](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/07b95b502fd003830301b085b6a3698e38fbe473))
+
+
+
+
+
 # [1.66.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.65.0...v1.66.0) (2020-10-01)
 
 
