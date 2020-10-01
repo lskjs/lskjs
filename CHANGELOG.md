@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.67.1](https://github.com/lskjs/lskjs/compare/v1.67.0...v1.67.1) (2020-10-01)
+
+
+### Bug Fixes
+
+* quickfix ([bc11552](https://github.com/lskjs/lskjs/commit/bc11552ebee52bfdb5e44a65bb58c7638d0b9a42))
+
+
+
+
+
 # [1.67.0](https://github.com/lskjs/lskjs/compare/v1.66.1...v1.67.0) (2020-10-01)
 
 
