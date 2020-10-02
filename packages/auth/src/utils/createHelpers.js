@@ -16,8 +16,13 @@ async function hashPassword(password) {
 
 export default function createHelpers({ app } = {}) {
   if (!app) throw '!app';
-  const configJwt = get(app, 'config.jwt', {});
-  if (!configJwt.secret) app.log.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
+  const configJwt = get(app, 'config.auth.jwt', get(app, 'config.jwt', {}));
+  if (!configJwt.secret) {
+    app.log.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
+    if (!__DEV__) {
+      throw 'auth.emptyJwtSecret';
+    }
+  }
   const helpers = {
     hashPassword,
     async setPassword(user, password) {
