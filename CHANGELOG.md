@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/lskjs/lskjs/compare/v1.68.2...v1.69.0) (2020-10-02)
+
+
+### Bug Fixes
+
+* **auth:** set any default jwt secret ([8e858d4](https://github.com/lskjs/lskjs/commit/8e858d48609e78ae050938a73cc7288b29a7aa3a))
+
+
+### Features
+
+* **auth:** add more debug checks ([9a13d7e](https://github.com/lskjs/lskjs/commit/9a13d7e2d0838cbd17a7c0f7f551b5f90565615f))
+
+
+
+
+
 ## [1.68.2](https://github.com/lskjs/lskjs/compare/v1.68.1...v1.68.2) (2020-10-02)
 
 
