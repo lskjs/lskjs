@@ -29,7 +29,7 @@ export default function createHelpers({ app } = {}) {
       return bcryptCompare(password1, password2);
     },
     generateAuthToken({ _id, role }, params = {}) {
-      const { secret, ...options } = configJwt;
+      const { secret = 'REPLACE_THIS_JS_SECRET_PLEASE', ...options } = configJwt;
       // TODO переместить в modules.auth
       return jwt.sign(
         {
