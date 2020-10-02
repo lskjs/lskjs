@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.68.2](https://github.com/lskjs/lskjs/compare/v1.68.1...v1.68.2) (2020-10-02)
+
+
+### Bug Fixes
+
+* **auth:** remove super.init from AuthApi ([84eb746](https://github.com/lskjs/lskjs/commit/84eb7465f00e162519b33505973a9a94a724be29))
+
+
+
+
+
 ## [1.68.1](https://github.com/lskjs/lskjs/compare/v1.68.0...v1.68.1) (2020-10-02)
 
 

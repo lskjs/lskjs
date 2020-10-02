@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.68.2](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.68.1...v1.68.2) (2020-10-02)
+
+
+### Bug Fixes
+
+* **auth:** remove super.init from AuthApi ([84eb746](https://github.com/lskjs/modules/tree/master/packages/auth/commit/84eb7465f00e162519b33505973a9a94a724be29))
+
+
+
+
+
 ## [1.64.1](https://github.com/lskjs/modules/tree/master/packages/auth/compare/v1.64.0...v1.64.1) (2020-09-30)
 
 **Note:** Version bump only for package @lskjs/auth
