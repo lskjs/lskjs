@@ -50,6 +50,7 @@ export default class Html {
       }
     }
 
+    const safeRender = (renderFunc) => (str) => (str ? renderFunc(str) : '');
     const renderRawCSS = (raw) => `<style rel="stylesheet" type="text/css">${raw}</style>`;
     const renderPathCSS = (path) => `<link rel="stylesheet" type="text/css" href="${path}">`;
     const renderRawJS = (raw) => `<script type="text/javascript">${raw}</script>`;
@@ -61,12 +62,12 @@ export default class Html {
       ext = name.match(/([A-Z]+)/)[0].toLowerCase();
     }
     if (ext === 'css') {
-      if (raws) return raws.map(renderRawCSS).join('\n');
-      return paths.map(renderPathCSS).join('\n');
+      if (raws) return raws.map(safeRender(renderRawCSS)).join('\n');
+      return paths.map(safeRender(renderPathCSS)).join('\n');
     }
     if (ext === 'js') {
-      if (raws) return raws.map(renderRawJS).join('\n');
-      return paths.map(renderPathJS).join('\n');
+      if (raws) return raws.map(safeRender(renderRawJS)).join('\n');
+      return paths.map(safeRender(renderPathJS)).join('\n');
     }
     return '';
   }
