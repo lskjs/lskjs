@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.69.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.69.0...v1.69.1) (2020-10-06)
+
+
+### Bug Fixes
+
+* **bots:** error if empty plugins in config ([23391a4](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/23391a4c1770e86b675ab5bc7bb6e4ea009c5f99))
+
+
+
+
+
 # [1.68.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.67.1...v1.68.0) (2020-10-01)
 
 
