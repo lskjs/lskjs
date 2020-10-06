@@ -75,7 +75,7 @@ export default class BotsModule extends Module {
         app: this.app,
         botsModule: this,
         bots: this.bots,
-        config: pluginsConfig[name] || {},
+        config: (pluginsConfig && pluginsConfig[name]) || {},
       });
       await plugin.init();
       return plugin;
