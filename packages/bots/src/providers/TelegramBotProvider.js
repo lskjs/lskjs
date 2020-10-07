@@ -1,4 +1,5 @@
 import Telegraf from 'telegraf';
+import get from 'lodash/get';
 import BotProvider from './BotProvider';
 
 /**
@@ -6,15 +7,19 @@ import BotProvider from './BotProvider';
  */
 
 const getMessage = (ctx) => {
-  return ctx.message || ctx;
+  if (get(ctx, 'message')) return get(ctx, 'message');
+  return ctx;
 };
 const getMessageChatId = (ctx) => {
   const message = getMessage(ctx);
-  return message.chat ? message.chat.id : null;
+  if (get(message, 'chat.id')) return get(message, 'chat.id');
+  return null;
 };
 const getMessageTargetId = (ctx) => {
   const message = getMessage(ctx);
-  return message.chat ? message.chat.id : message.from.id;
+  if (get(message, 'chat.id')) return get(message, 'chat.id');
+  if (get(message, 'from.id')) return get(message, 'from.id');
+  return message;
 };
 const getReplyMessageId = (ctx) => {
   const message = getMessage(ctx);
@@ -60,13 +65,13 @@ export default class TelegramBotProvider extends BotProvider {
   getReplyMessageId(ctx) {
     return getReplyMessageId(ctx);
   }
-  getMessageText(ctxOrMessage = {}) {
-    if (ctxOrMessage.message) return ctxOrMessage.message.text;
-    return ctxOrMessage.text;
+  getMessageText(ctx = {}) {
+    if (typeof ctx === 'string') return ctx;
+    if (get(ctx, 'message.text')) return get(ctx, 'message.text');
+    return get(ctx, 'text');
   }
-  isMessageCommand(message, command) {
-    // console.log('isMessageCommand', message, command);
-    return this.isMessageStartsWith(message, `/${command}`);
+  isMessageCommand(ctx, command) {
+    return this.isMessageStartsWith(ctx, `/${command}`);
   }
   getMessageDate(ctx) {
     const message = this.getMessage(ctx);
