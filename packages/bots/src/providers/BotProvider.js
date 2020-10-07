@@ -59,7 +59,7 @@ export default class BotProvider extends Module {
     if (regExp instanceof RegExp) {
       return text.match(regExp) != null;
     }
-    return text.includes(regExp);
+    return text.indexOf(regExp) !== -1;
   }
 
   isMessageStartsWith(message, regExp) {
