@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.69.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.69.1...v1.69.2) (2020-10-07)
+
+
+### Bug Fixes
+
+* **bots:** isMessageStartsWith works incorrect ([32efc23](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/32efc2307f931fb9f5b392f7c43b20ce8faae07a))
+* **bots:** telegramBot.sendMessage now can accept userId as number ([a50500c](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/a50500cde67c5677ab30772dded5776bad464fcd))
+
+
+
+
+
 ## [1.69.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.69.0...v1.69.1) (2020-10-06)
 
 
