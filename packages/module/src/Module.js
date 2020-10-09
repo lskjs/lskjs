@@ -6,6 +6,8 @@ import isFunction from 'lodash/isFunction';
 import assignProps from '@lskjs/utils/assignProps';
 import importFn from '@lskjs/utils/importFn';
 import classNewOrFunctionCall from '@lskjs/utils/classNewOrFunctionCall';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import arrayToObject from '@lskjs/utils/arrayToObject';
 import Emitter from './emitter';
 
 const DEBUG = __DEV__ && false;
@@ -108,16 +110,8 @@ export default class Module {
     if (this.modules && this.modules[name]) return this.modules[name]._stage;
     return 'notInited';
   }
-  async module(nameOrNames) {
-    if (Array.isArray(nameOrNames)) {
-      const modules = {};
-      await Promise.map(nameOrNames, async (name) => {
-        modules[name] = await this.module(name);
-      });
-      return modules;
-    }
-    const name = nameOrNames;
-
+  async module(name) {
+    if (Array.isArray(name)) return asyncMapValues(arrayToObject(name), (n) => this.checker(n));
     if (this.modules && this.modules[name]) return this.modules[name];
     if (!this._modules || !this._modules[name]) throw `!modules.${name}`;
     let asyncModule;
