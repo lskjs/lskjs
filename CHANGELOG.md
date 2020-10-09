@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/lskjs/lskjs/compare/v1.69.2...v1.70.0) (2020-10-09)
+
+
+### Features
+
+* **module:** optimize methods ([eafd301](https://github.com/lskjs/lskjs/commit/eafd30100cba2b487945c08a22060838ac1e05db))
+* **utils:** add arrayToObject ([881dcc7](https://github.com/lskjs/lskjs/commit/881dcc786ceeb9ac5b30a07516236533a2718e8b))
+
+
+
+
+
 ## [1.69.2](https://github.com/lskjs/lskjs/compare/v1.69.1...v1.69.2) (2020-10-07)
 
 
