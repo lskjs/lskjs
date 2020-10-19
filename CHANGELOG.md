@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/lskjs/lskjs/compare/v1.70.0...v1.71.0) (2020-10-19)
+
+
+### Features
+
+* **billing:** create billing module, transaction model, and yandex checkout provider ([2bda0b0](https://github.com/lskjs/lskjs/commit/2bda0b04e4c1bd52d19ccc75ef0e5604a9bb46f0))
+* **module:** add experemental logger ([6ba80f8](https://github.com/lskjs/lskjs/commit/6ba80f845ec78fc5305e2ce397c8b75a9a53626c))
+* **module:** start to develop Module v2 ([c4b688e](https://github.com/lskjs/lskjs/commit/c4b688e73f0470c096adda694b26036a029269c1))
+* **server:** add app.model() async method ([b4535bd](https://github.com/lskjs/lskjs/commit/b4535bdafc75058d98f78bf2b833ac5a55e20448))
+* **server-api:** extend BaseApi from Module v2 ([3871b75](https://github.com/lskjs/lskjs/commit/3871b759c79ee1b811dceea6702bfa29d89fc481))
+
+
+
+
+
 # [1.70.0](https://github.com/lskjs/lskjs/compare/v1.69.2...v1.70.0) (2020-10-09)
 
 

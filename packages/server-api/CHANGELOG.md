@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/lskjs/modules/tree/master/packages/server-api/compare/v1.70.0...v1.71.0) (2020-10-19)
+
+
+### Features
+
+* **server-api:** extend BaseApi from Module v2 ([3871b75](https://github.com/lskjs/modules/tree/master/packages/server-api/commit/3871b759c79ee1b811dceea6702bfa29d89fc481))
+
+
+
+
+
 # [1.70.0](https://github.com/lskjs/modules/tree/master/packages/server-api/compare/v1.69.2...v1.70.0) (2020-10-09)
 
 **Note:** Version bump only for package @lskjs/server-api

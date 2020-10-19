@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.70.0...v1.71.0) (2020-10-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
 # [1.70.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.69.2...v1.70.0) (2020-10-09)
 
 **Note:** Version bump only for package @lskjs/bots
