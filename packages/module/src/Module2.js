@@ -1,0 +1,94 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-console */
+import logger from '@lskjs/log';
+import assignProps from '@lskjs/utils/assignProps';
+import Emitter from './emitter';
+import createLogger from './createLogger';
+
+export default class Module2 {
+  constructor(...props) {
+    assignProps(this, ...props);
+  }
+  async getModules() {
+    return this.modules;
+  }
+
+  async beforeInit() {
+    if (this.name === 'Module') logger.fatalLog(this, 'warn', `Module.name is empty`);
+    this._stage = 'beforeInit';
+    if (!this.ee) this.ee = new Emitter();
+    if (!this.log) this.log = this.createLogger();
+    if (this.ee) this.ee.on('*', (event) => logger.safeLog(this, 'trace', `[ee] ${event}`));
+  }
+
+  async init() {
+    // if (!this.__runStage('init')) return;
+    if (this.__initAt) return;
+    this.__initAt = new Date();
+    this.name = this.constructor.name;
+    this.log = createLogger({ name: this.name });
+    this.log.trace('init');
+    this.ee = createLogger({ name: this.name });
+  }
+  async run() {
+    // if (!this.__runStage('run')) return;
+    if (this.__runAt) return;
+    if (!this.__initAt) await this.init();
+    this.__runAt = new Date();
+    this.log.trace('run');
+  }
+
+  __workflow = ['init', 'run'];
+  __runStage(stage) {
+    if (this.__stage === `${stage}.before`) return true;
+    if (stage === 'init') return this.__runWorkflow('init', 'init');
+    if (stage === 'run') return this.__runWorkflow('init', 'run');
+    return false;
+  }
+  async __runWorkflow(from, to) {
+    if (this.__workflowAt) {
+      console.log('WARN __workflowAt!');
+      return;
+    }
+    this.__workflowAt = new Date();
+    if (!from) from = this.__workflow[0];
+    if (!to) to = this.__workflow[this.__workflow.length - 1];
+    const workflow = this.__workflow.slice(this.__workflow.indexOf(from), this.__workflow.indexOf(to));
+    await Promise.each(workflow, (method) => {
+      this.__stage = `${method}.before`;
+
+      this.__stage = `${method}.after`;
+    });
+    this.__workflowAt = null;
+  }
+
+  async module(name) {
+    if (Array.isArray(name)) return asyncMapValues(arrayToObject(name), (n) => this.checker(n));
+    if (this.modules && this.modules[name]) return this.modules[name];
+    if (!this._modules || !this._modules[name]) throw `!modules.${name}`;
+    let asyncModule;
+    try {
+      const AsyncModule = await importFn(this._modules[name]);
+      if (Array.isArray(AsyncModule)) {
+        asyncModule = classNewOrFunctionCall(...AsyncModule, this);
+      } else {
+        asyncModule = classNewOrFunctionCall(AsyncModule, this);
+      }
+    } catch (err) {
+      this.log.error(`module(${name})`, err);
+      throw err;
+    }
+    if (asyncModule.start) {
+      await asyncModule.start();
+    } else {
+      if (asyncModule.init) await asyncModule.init();
+      if (asyncModule.run) await asyncModule.run();
+    }
+    this.modules[name] = asyncModule;
+    return this.modules[name];
+  }
+}
+
+// [t]
+// [d]• GET /api/billing/yandexCheckout/create #1

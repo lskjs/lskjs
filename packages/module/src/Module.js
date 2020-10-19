@@ -111,7 +111,7 @@ export default class Module {
     return 'notInited';
   }
   async module(name) {
-    if (Array.isArray(name)) return asyncMapValues(arrayToObject(name), (n) => this.checker(n));
+    if (Array.isArray(name)) return asyncMapValues(arrayToObject(name), (n) => this.module(n));
     if (this.modules && this.modules[name]) return this.modules[name];
     if (!this._modules || !this._modules[name]) throw `!modules.${name}`;
     let asyncModule;
