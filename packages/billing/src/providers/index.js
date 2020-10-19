@@ -6,5 +6,6 @@ export default {
   g2a: () => import('./G2aBillingProvider'),
   paypal: () => import('./PaypalBillingProvider'),
   stripe: () => import('./StripeBillingProvider'),
+  interkassa: () => import('./InterkassaBillingProvider'),
   yandexCheckout: () => import('./YandexCheckoutBillingProvider'),
 };
