@@ -2,6 +2,7 @@ import Plugin from './Plugin';
 
 export default class DebugPlugin extends Plugin {
   name = 'DebugPlugin';
+
   async runBot(bot, name) {
     await this.runLogger(bot, name);
     await this.runPing(bot, name);
