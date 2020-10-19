@@ -1,5 +1,6 @@
 import Telegraf from 'telegraf';
 import get from 'lodash/get';
+import session from 'telegraf/session';
 import BotProvider from './BotProvider';
 
 /**
@@ -45,11 +46,12 @@ export default class TelegramBotProvider extends BotProvider {
     await super.init();
     if (!this.config.token) throw 'TelegramBotProvider !config.token';
     this.client = new Telegraf(this.config.token);
-    await this.initEventEmitter();
+    this.client.use(session());
   }
   async run() {
     await super.run();
     if (!this.client) return;
+    await this.initEventEmitter();
     await this.client.launch();
     await this.client.startPolling();
   }

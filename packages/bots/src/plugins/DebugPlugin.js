@@ -2,18 +2,7 @@ import Plugin from './Plugin';
 
 export default class DebugPlugin extends Plugin {
   name = 'DebugPlugin';
-  async initBot(bot, name) {
-    this.greeterScene = new Scene('greeter-' + name)
-    this.stage = new Stage([this.greeterScene], { ttl: 10 });
-    bot.use(this.stage.middleware());
 
-
-    //
-    this.stage.enter((ctx) => ctx.reply('Hi'));
-    this.stage.leave((ctx) => ctx.reply('Bye'));
-    this.stage.hears('hi', enter('greeter'));
-    this.stage.on('message', (ctx) => ctx.replyWithMarkdown('Send `hi`'));
-  }
   async runBot(bot, name) {
     await this.runLogger(bot, name);
     await this.runPing(bot, name);

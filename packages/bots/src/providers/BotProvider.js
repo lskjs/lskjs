@@ -100,6 +100,8 @@ export default class BotProvider extends Module {
     return some(commands, (command) => this.isMessageCommand(message, command));
   }
 
+  initPlugin(plugin) {}
+
   runPlugin(plugin) {
     this.plugins.push(plugin);
   }

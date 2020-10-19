@@ -10,6 +10,7 @@ export default class Plugin extends Module {
     await super.init();
     await this.initBots();
   }
+  async initBot() {}
   async initBots() {
     await asyncMapValues(this.bots, async (bot, name) => {
       if (!this.canRunBot(bot)) return;
