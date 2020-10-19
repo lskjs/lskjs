@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import Module2 from '@lskjs/module/2';
 import hash from 'object-hash';
 import Cacheman from 'cacheman';
 import get from 'lodash/get';
@@ -14,8 +15,9 @@ import map from 'lodash/map';
 import some from 'lodash/some';
 import getDocsTemplate from './getDocsTemplate';
 
-export default class Api {
+export default class Api extends Module2 {
   constructor(props, params) {
+    super(props, params);
     assignProps(this, props);
     if (!this.app) throw 'Api !app';
     this.asyncRouter = this.app.asyncRouter;
@@ -44,7 +46,7 @@ export default class Api {
   }
   async useMiddleware(middleware, req, res) {
     return new Promise((resolve, reject) => {
-      return middleware(req, res, async err => {
+      return middleware(req, res, async (err) => {
         if (err) return reject(err);
         return resolve();
       });
@@ -83,7 +85,7 @@ export default class Api {
 
   getListParams(req) {
     const { data } = req;
-    const params = mapValues(pick(data, ['filter', 'sort', 'skip', 'limit', 'select', 'view', 'operation']), a =>
+    const params = mapValues(pick(data, ['filter', 'sort', 'skip', 'limit', 'select', 'view', 'operation']), (a) =>
       tryJSONparse(a),
     );
 
@@ -104,7 +106,7 @@ export default class Api {
       params.select = params.select
         .trim()
         .split(',')
-        .map(a => a.trim());
+        .map((a) => a.trim());
     }
     if (!isArray(params.select)) throw 'select not array';
     if (!params.view) params.view = 'default';
@@ -143,7 +145,7 @@ export default class Api {
       console.error('Api.assign empty fields'); // eslint-disable-line no-console
       return;
     }
-    fields.forEach(field => {
+    fields.forEach((field) => {
       if (params[field] === undefined) return;
       model[field] = params[field]; // eslint-disable-line no-param-reassign
       if (!model.markModified) return;
@@ -158,7 +160,7 @@ export default class Api {
     return String(objectId1) === String(objectId2);
   }
   findAndCountByParams(Model, params, params2) {
-    const { then = a => a } = params2; //  = a => a
+    const { then = (a) => a } = params2; //  = a => a
     return Promise.props({
       __pack: 1,
       count: params.count || params.count === '' ? Model.countByParams(params) : undefined,

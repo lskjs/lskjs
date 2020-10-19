@@ -131,7 +131,7 @@ export default class ServerApp extends Module {
   getModels() {
     return {};
   }
-  model(name) {
+  async model(name) {
     if (!this.models[name]) throw `!model ${name}`;
     return this.models[name];
   }
