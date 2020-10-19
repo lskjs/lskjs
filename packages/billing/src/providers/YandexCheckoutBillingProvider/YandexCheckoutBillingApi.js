@@ -32,34 +32,6 @@ export default class YandexCheckoutBillingApi extends Api {
 
     const transaction = await BillingTransactionModel.findById(_id);
     const res = await client.getPayment('271d3718-000f-5000-a000-1fadb264a853');
-    // {
-    //  -   id: '271d3718-000f-5000-a000-1fadb264a853',
-    //  -   status: 'pending',
-    //  -   paid: false,
-    //  -   amount: { value: '1.00', currency: 'RUB' },
-    //  -   confirmation: {
-    //  -     type: 'redirect',
-    //  -     return_url: 'http://localhost:8080/cabinet/billing/5f8b2357ff0210ed07b75961',
-    //  -     confirmation_url: 'https://money.yandex.ru/payments/external/confirmation?orderId=271d3718-000f-5000-a000-1fadb264a853'
-    //  -   },
-    //  -   created_at: '2020-10-17T17:01:12.192Z',
-    //  -   metadata: { scid: '1932812' },
-    //  -   payment_method: {
-    //  -     type: 'bank_card',
-    //  -     id: '271d3718-000f-5000-a000-1fadb264a853',
-    //  -     saved: false
-    //  -   },
-    //  -   recipient: { account_id: '747924', gateway_id: '1774130' },
-    //  -   refundable: false,
-    //  -   test: false,
-    //  -   _instance: {
-    //  -     shopId: '747924',
-    //  -     secretKey: 'live_OODFFAC-XF-Kz_Uj1B1Js8b9pKc4CyILyXFXAyAiLNA',
-    //  -     root: 'https://payment.yandex.net/api/v3/',
-    //  -     debug: false,
-    //  -     timeout: 0
-    //  -   }
-    //  - }
     this.log.trace('res', res);
 
     await transaction.setStatus(res.status);
