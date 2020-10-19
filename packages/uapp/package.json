@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/uapp",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/uapp",
   "keywords": [
     "database",
     "mongoose",

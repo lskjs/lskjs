@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/build-locales",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/build-locales",
   "keywords": [],
   "scripts": {
     "dev": "npm run watch",

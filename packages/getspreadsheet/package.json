@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/getspreadsheet",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
   "keywords": [],
   "scripts": {
     "dev": "npm run watch",

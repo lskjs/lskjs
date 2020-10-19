@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/mailer",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/mailer",
   "keywords": [
     "database",
     "mongoose",

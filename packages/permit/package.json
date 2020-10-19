@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/permit",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/permit",
   "keywords": [
     "one time code",
     "permit"
