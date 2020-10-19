@@ -131,6 +131,10 @@ export default class ServerApp extends Module {
   getModels() {
     return {};
   }
+  model(name) {
+    if (!this.models[name]) throw `!model ${name}`;
+    return this.models[name];
+  }
   getDatabase() {
     return this.config.db && this.config.db.uri ? db(this, this.config.db) : null;
   }
