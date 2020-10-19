@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/server-api",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/server-api",
   "keywords": [],
   "scripts": {
     "dev": "npm run watch",

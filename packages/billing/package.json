@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/billing",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/billing",
   "keywords": [
     "billing",
     "bitpay",

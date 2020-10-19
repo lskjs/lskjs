@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/lskjs/modules/tree/master/packages/auth",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
   "keywords": [
     "auth",
     "oAuth",

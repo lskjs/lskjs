@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.71.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.70.0...v1.71.0) (2020-10-19)
+# [1.71.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.70.0...v1.71.0) (2020-10-19)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.70.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.69.2...v1.70.0) (2020-10-09)
+# [1.70.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.69.2...v1.70.0) (2020-10-09)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -19,26 +19,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.64.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.63.0...v1.64.0) (2020-09-30)
+# [1.64.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.63.0...v1.64.0) (2020-09-30)
 
 
 ### Features
 
-* **module:** new modules pattern ([17cd5f0](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/17cd5f0b3fc310eaab33ad1a52dd3150bad5226c))
+* **module:** new modules pattern ([17cd5f0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/17cd5f0b3fc310eaab33ad1a52dd3150bad5226c))
 
 
 
 
 
-# [1.63.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.62.1...v1.63.0) (2020-09-29)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.61.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.61.0...v1.61.1) (2020-09-21)
+# [1.63.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.62.1...v1.63.0) (2020-09-29)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -46,7 +38,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.61.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.60.2...v1.61.0) (2020-09-21)
+## [1.61.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.61.0...v1.61.1) (2020-09-21)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -54,7 +46,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.58.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.58.1...v1.58.2) (2020-09-14)
+# [1.61.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.60.2...v1.61.0) (2020-09-21)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -62,7 +54,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.57.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.56.3...v1.57.0) (2020-09-11)
+## [1.58.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.58.1...v1.58.2) (2020-09-14)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -70,7 +62,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.56.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.56.0...v1.56.1) (2020-09-11)
+# [1.57.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.56.3...v1.57.0) (2020-09-11)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -78,7 +70,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.55.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.54.0...v1.55.0) (2020-09-03)
+## [1.56.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.56.0...v1.56.1) (2020-09-11)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -86,7 +78,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.54.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.52.2...v1.54.0) (2020-09-03)
+# [1.55.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.54.0...v1.55.0) (2020-09-03)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -94,7 +86,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.53.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.52.2...v1.53.0) (2020-09-03)
+# [1.54.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.52.2...v1.54.0) (2020-09-03)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -102,26 +94,26 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.52.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.51.4...v1.52.0) (2020-08-31)
+# [1.53.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.52.2...v1.53.0) (2020-09-03)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.52.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.51.4...v1.52.0) (2020-08-31)
 
 
 ### Features
 
-* **reactapp:** add antimerge in getRootState ([677a9d9](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/677a9d9ce7a118225af13b78022060ccdb7969dd))
+* **reactapp:** add antimerge in getRootState ([677a9d9](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/677a9d9ce7a118225af13b78022060ccdb7969dd))
 
 
 
 
 
-## [1.51.4](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.51.3...v1.51.4) (2020-08-28)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.51.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.50.1...v1.51.0) (2020-08-27)
+## [1.51.4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.51.3...v1.51.4) (2020-08-28)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -129,7 +121,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.50.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.50.0...v1.50.1) (2020-08-17)
+# [1.51.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.50.1...v1.51.0) (2020-08-27)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -137,7 +129,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.50.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.49.0...v1.50.0) (2020-08-14)
+## [1.50.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.50.0...v1.50.1) (2020-08-17)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -145,26 +137,26 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.48.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.48.1...v1.48.2) (2020-08-06)
+# [1.50.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.49.0...v1.50.0) (2020-08-14)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.48.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.48.1...v1.48.2) (2020-08-06)
 
 
 ### Bug Fixes
 
-* **uapp:** autoscroll fix ([83a0fc0](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/83a0fc0c69bae556485fe37539526d6003cb9c7e))
+* **uapp:** autoscroll fix ([83a0fc0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/83a0fc0c69bae556485fe37539526d6003cb9c7e))
 
 
 
 
 
-# [1.48.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.47.2...v1.48.0) (2020-08-05)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.47.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.47.1...v1.47.2) (2020-08-05)
+# [1.48.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.47.2...v1.48.0) (2020-08-05)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -172,246 +164,203 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.47.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.47.0...v1.47.1) (2020-08-04)
+## [1.47.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.47.1...v1.47.2) (2020-08-05)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.47.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.47.0...v1.47.1) (2020-08-04)
 
 
 ### Bug Fixes
 
-* **uapp:** scroll to hash segment after route resolve ([4611504](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/46115044269faa56fcebce70b039bbac7e0edac1))
+* **uapp:** scroll to hash segment after route resolve ([4611504](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/46115044269faa56fcebce70b039bbac7e0edac1))
 
 
 
 
 
-# [1.47.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.46.0...v1.47.0) (2020-07-31)
+# [1.47.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.46.0...v1.47.0) (2020-07-31)
 
 
 ### Features
 
-* bump lodash version ([1112980](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/1112980c289c4dfc2d921e20032c73f4231957d7))
+* bump lodash version ([1112980](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/1112980c289c4dfc2d921e20032c73f4231957d7))
 
 
 
 
 
-# [1.46.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.45.2...v1.46.0) (2020-07-27)
-
-
-### Features
-
-* **uapp:** separate initI18 ([adffd03](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/adffd03ceb0827da91a6f4058c610f07d07ecf47))
-
-
-
-
-
-## [1.44.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.44.0...v1.44.1) (2020-07-16)
-
-
-### Bug Fixes
-
-* **uapp:** scroll to anchor ([e521473](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/e52147315c51a26f2f0997867986242225692264))
-
-
-
-
-
-# [1.44.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.43.0...v1.44.0) (2020-07-16)
+# [1.46.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.45.2...v1.46.0) (2020-07-27)
 
 
 ### Features
 
-* **uapp:** pass scrollTo in uapp ([9a8f8ee](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/9a8f8ee9b7ff39aa5c4131d3c48574e49aaf7105))
+* **uapp:** separate initI18 ([adffd03](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/adffd03ceb0827da91a6f4058c610f07d07ecf47))
 
 
 
 
 
-# [1.43.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.42.0...v1.43.0) (2020-07-13)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.42.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.41.2...v1.42.0) (2020-07-09)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.41.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.41.0...v1.41.1) (2020-07-06)
+## [1.44.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.44.0...v1.44.1) (2020-07-16)
 
 
 ### Bug Fixes
 
-* **uapp:** throw error while uapp route resolving ([1571b76](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/1571b76574e4ff2c05e418da2fa750a7a8671c5b))
+* **uapp:** scroll to anchor ([e521473](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/e52147315c51a26f2f0997867986242225692264))
 
 
 
 
 
-# [1.40.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.39.1...v1.40.0) (2020-06-30)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.38.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.38.0...v1.38.1) (2020-06-29)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.38.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.37.0...v1.38.0) (2020-06-28)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.35.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.35.0...v1.35.1) (2020-06-22)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.32.3](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.32.2...v1.32.3) (2020-06-19)
-
-
-### Bug Fixes
-
-* **reactapp:** write globals in ssr ([f8683e8](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/f8683e83870632bffa208ff8decd63d1d29c9a70))
-
-
-
-
-
-## [1.32.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.32.1...v1.32.2) (2020-06-16)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.29.3](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.29.2...v1.29.3) (2020-06-05)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.27.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.26.0...v1.27.0) (2020-06-02)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.25.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.25.0...v1.25.1) (2020-05-25)
-
-
-### Bug Fixes
-
-* **uapp:** ignore err code page.cancel ([9d77bd4](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/9d77bd40565bd4f860612209360d397966d923be))
-
-
-
-
-
-# [1.25.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.24.0...v1.25.0) (2020-05-25)
+# [1.44.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.43.0...v1.44.0) (2020-07-16)
 
 
 ### Features
 
-* **reactapp:** page.cancel without errors ([1c8709c](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/1c8709c0f14e6fa24109bb61d378e33310b59806))
+* **uapp:** pass scrollTo in uapp ([9a8f8ee](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/9a8f8ee9b7ff39aa5c4131d3c48574e49aaf7105))
 
 
 
 
 
-# [1.24.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.23.0...v1.24.0) (2020-05-25)
+# [1.43.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.42.0...v1.43.0) (2020-07-13)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.42.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.41.2...v1.42.0) (2020-07-09)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.41.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.41.0...v1.41.1) (2020-07-06)
 
 
 ### Bug Fixes
 
-* **uapp:** resolveStart, resolveFinish, set title in resolveFinish ([f906d5e](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/f906d5e3536d002ec334eb3fe802c5d507f6ad32))
+* **uapp:** throw error while uapp route resolving ([1571b76](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/1571b76574e4ff2c05e418da2fa750a7a8671c5b))
+
+
+
+
+
+# [1.40.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.39.1...v1.40.0) (2020-06-30)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.38.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.38.0...v1.38.1) (2020-06-29)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.38.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.37.0...v1.38.0) (2020-06-28)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.35.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.35.0...v1.35.1) (2020-06-22)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.32.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.32.2...v1.32.3) (2020-06-19)
+
+
+### Bug Fixes
+
+* **reactapp:** write globals in ssr ([f8683e8](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/f8683e83870632bffa208ff8decd63d1d29c9a70))
+
+
+
+
+
+## [1.32.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.32.1...v1.32.2) (2020-06-16)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.29.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.29.2...v1.29.3) (2020-06-05)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.27.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.26.0...v1.27.0) (2020-06-02)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.25.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.25.0...v1.25.1) (2020-05-25)
+
+
+### Bug Fixes
+
+* **uapp:** ignore err code page.cancel ([9d77bd4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/9d77bd40565bd4f860612209360d397966d923be))
+
+
+
+
+
+# [1.25.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.24.0...v1.25.0) (2020-05-25)
 
 
 ### Features
 
-* **uapp:** page.state.component => page.components ([a595f05](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/a595f0567bdb7b1c524624a95fe30b69156588e9))
-* **uapp:** Page.wait ([327d7aa](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/327d7aa6fd9782f4875a0e614949e5a048f1da81))
+* **reactapp:** page.cancel without errors ([1c8709c](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/1c8709c0f14e6fa24109bb61d378e33310b59806))
 
 
 
 
 
-## [1.21.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.21.0...v1.21.1) (2020-05-13)
-
-**Note:** Version bump only for package @lskjs/uapp
+# [1.24.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.23.0...v1.24.0) (2020-05-25)
 
 
+### Bug Fixes
 
-
-
-# [1.21.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.20.4...v1.21.0) (2020-05-12)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.20.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.19.0...v1.20.0) (2020-05-11)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.19.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.18.1...v1.19.0) (2020-05-09)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.18.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.17.2...v1.18.0) (2020-04-14)
+* **uapp:** resolveStart, resolveFinish, set title in resolveFinish ([f906d5e](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/f906d5e3536d002ec334eb3fe802c5d507f6ad32))
 
 
 ### Features
 
-* **uapp:** add Promise cancelation in resolve ([19caff4](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/19caff43909a8ea1083cac51e1c7dd8ebab9d464))
+* **uapp:** page.state.component => page.components ([a595f05](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/a595f0567bdb7b1c524624a95fe30b69156588e9))
+* **uapp:** Page.wait ([327d7aa](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/327d7aa6fd9782f4875a0e614949e5a048f1da81))
 
 
 
 
 
-## [1.17.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.17.0...v1.17.1) (2020-04-01)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.17.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.16.0...v1.17.0) (2020-04-01)
+## [1.21.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.21.0...v1.21.1) (2020-05-13)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -419,29 +368,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.16.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.15.0...v1.16.0) (2020-03-25)
-
-
-### Bug Fixes
-
-* **uapp:** fix unstable wrapApi for SSR ([450255f](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/450255f37942573b1dc5cfaa83e809e8351d1b45))
-
-
-
-
-
-# [1.15.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.14.3...v1.15.0) (2020-03-25)
-
-
-### Bug Fixes
-
-* **apiquery:** authToken in apiq ([a8aa7c7](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/a8aa7c73a172904cb677d66e15372b98859419b0))
-
-
-
-
-
-# [1.14.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.13.3...v1.14.0) (2020-03-20)
+# [1.21.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.20.4...v1.21.0) (2020-05-12)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -449,18 +376,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.13.3](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.13.2...v1.13.3) (2020-03-18)
-
-
-### Bug Fixes
-
-* **uapp:** uapp.getRootState bug ([b8f33b2](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/b8f33b25fc5088c1aa2c32937d8ddc9e5d5f87c5))
-
-
-
-
-
-## [1.13.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.13.1...v1.13.2) (2020-03-18)
+# [1.20.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.19.0...v1.20.0) (2020-05-11)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -468,18 +384,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.13.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.13.0...v1.13.1) (2020-03-18)
-
-
-### Bug Fixes
-
-* **uapp:** pass app throw props without object ([85f8d4c](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/85f8d4c94f47183c16dcb06385699afa8d79eb27))
-
-
-
-
-
-# [1.13.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.12.0...v1.13.0) (2020-03-18)
+# [1.19.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.18.1...v1.19.0) (2020-05-09)
 
 **Note:** Version bump only for package @lskjs/uapp
 
@@ -487,97 +392,192 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.12.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.11.0...v1.12.0) (2020-03-16)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.11.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.10.0...v1.11.0) (2020-03-13)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.9.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.9.0...v1.9.1) (2020-03-11)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.5.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.4.3...v1.5.0) (2020-03-06)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.4.3](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.4.2...v1.4.3) (2020-03-06)
-
-
-### Bug Fixes
-
-* Forget about duplicate of constructor ([0b67713](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/0b67713e9fcb40317d6abfc9b88bfdfecc9a6bd5))
-
-
-
-
-
-## [1.4.2](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.4.1...v1.4.2) (2020-03-06)
-
-
-### Bug Fixes
-
-* fix rootStates ([ef9e8db](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/ef9e8dbaa48dc2176d48898a169ea60bd2e812cf))
-
-
-
-
-
-## [1.4.1](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.4.0...v1.4.1) (2020-03-06)
-
-
-### Bug Fixes
-
-* **uapp:** forget getRootState in Page ([35a9f80](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/35a9f80d6dc4b2bab87e8ec68f2f5d59c751565c))
-
-
-
-
-
-# [1.4.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.3.0...v1.4.0) (2020-03-06)
+# [1.18.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.17.2...v1.18.0) (2020-04-14)
 
 
 ### Features
 
-* remove autobinds and update packages ([a3f8703](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/a3f87036301c6c37c683839c41c4018406a444d5))
+* **uapp:** add Promise cancelation in resolve ([19caff4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/19caff43909a8ea1083cac51e1c7dd8ebab9d464))
 
 
 
 
 
-# [1.3.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.2.2...v1.3.0) (2020-03-06)
+## [1.17.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.17.0...v1.17.1) (2020-04-01)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.17.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.16.0...v1.17.0) (2020-04-01)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.16.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.15.0...v1.16.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **uapp:** fix unstable wrapApi for SSR ([450255f](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/450255f37942573b1dc5cfaa83e809e8351d1b45))
+
+
+
+
+
+# [1.15.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.14.3...v1.15.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **apiquery:** authToken in apiq ([a8aa7c7](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/a8aa7c73a172904cb677d66e15372b98859419b0))
+
+
+
+
+
+# [1.14.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.13.3...v1.14.0) (2020-03-20)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.13.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.13.2...v1.13.3) (2020-03-18)
+
+
+### Bug Fixes
+
+* **uapp:** uapp.getRootState bug ([b8f33b2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/b8f33b25fc5088c1aa2c32937d8ddc9e5d5f87c5))
+
+
+
+
+
+## [1.13.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.13.1...v1.13.2) (2020-03-18)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.13.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.13.0...v1.13.1) (2020-03-18)
+
+
+### Bug Fixes
+
+* **uapp:** pass app throw props without object ([85f8d4c](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/85f8d4c94f47183c16dcb06385699afa8d79eb27))
+
+
+
+
+
+# [1.13.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.12.0...v1.13.0) (2020-03-18)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.12.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.11.0...v1.12.0) (2020-03-16)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.11.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.10.0...v1.11.0) (2020-03-13)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.9.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.9.0...v1.9.1) (2020-03-11)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [1.5.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.4.3...v1.5.0) (2020-03-06)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [1.4.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.4.2...v1.4.3) (2020-03-06)
+
+
+### Bug Fixes
+
+* Forget about duplicate of constructor ([0b67713](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/0b67713e9fcb40317d6abfc9b88bfdfecc9a6bd5))
+
+
+
+
+
+## [1.4.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.4.1...v1.4.2) (2020-03-06)
+
+
+### Bug Fixes
+
+* fix rootStates ([ef9e8db](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/ef9e8dbaa48dc2176d48898a169ea60bd2e812cf))
+
+
+
+
+
+## [1.4.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.4.0...v1.4.1) (2020-03-06)
+
+
+### Bug Fixes
+
+* **uapp:** forget getRootState in Page ([35a9f80](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/35a9f80d6dc4b2bab87e8ec68f2f5d59c751565c))
+
+
+
+
+
+# [1.4.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.3.0...v1.4.0) (2020-03-06)
 
 
 ### Features
 
-* **reactapp:** change rootState workflow in reactapp and html and uapp and page ([da2ec84](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/da2ec841985ef0a0f7bb107d9f52a2bd63244669))
-* **uapp:** add historyConfirm ([910e058](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/910e058b5dce86290b1785ff6524f45a7b73caa9))
+* remove autobinds and update packages ([a3f8703](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/a3f87036301c6c37c683839c41c4018406a444d5))
 
 
 
 
 
-# [1.2.0](https://github.com/lskjs/modules/tree/master/packages/uapp/compare/v1.1.1...v1.2.0) (2020-03-05)
+# [1.3.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.2.2...v1.3.0) (2020-03-06)
 
 
 ### Features
 
-* **reactapp:** new req workflow ([b38c60d](https://github.com/lskjs/modules/tree/master/packages/uapp/commit/b38c60d56b641ccf39eecd1fb697b9b45da6a9eb))
+* **reactapp:** change rootState workflow in reactapp and html and uapp and page ([da2ec84](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/da2ec841985ef0a0f7bb107d9f52a2bd63244669))
+* **uapp:** add historyConfirm ([910e058](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/910e058b5dce86290b1785ff6524f45a7b73caa9))
+
+
+
+
+
+# [1.2.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.1.1...v1.2.0) (2020-03-05)
+
+
+### Features
+
+* **reactapp:** new req workflow ([b38c60d](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/b38c60d56b641ccf39eecd1fb697b9b45da6a9eb))
