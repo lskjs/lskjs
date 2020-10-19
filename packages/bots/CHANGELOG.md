@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.73.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.72.0...v1.73.0) (2020-10-19)
+
+
+### Features
+
+* add session, scene ([53b85ad](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/53b85ad32d14e1016006ec8b5bcf8ac571e53b8c))
+* **bots:** create new concept for telegram scenes ([c352c93](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/c352c93c849434a418e2f7812f572f8952c026f6))
+
+
+
+
+
 # [1.72.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.71.0...v1.72.0) (2020-10-19)
 
 **Note:** Version bump only for package @lskjs/bots
