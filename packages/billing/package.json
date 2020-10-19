@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "1.71.1",
+  "version": "1.72.0",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -39,9 +39,9 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
-    "@lskjs/db": "1.71.1",
-    "@lskjs/module": "1.71.1",
-    "@lskjs/server-api": "1.71.1",
+    "@lskjs/db": "1.72.0",
+    "@lskjs/module": "1.72.0",
+    "@lskjs/server-api": "1.72.0",
     "@lskjs/utils": "1.70.0"
   },
   "devDependencies": {
@@ -55,8 +55,8 @@
   "peerDependencies": {
     "axios": "*",
     "bluebird": "*",
-    "crypto-js": "*",
     "coingate-v2": "*",
+    "crypto-js": "*",
     "lodash": "*",
     "yandex-checkout": "*"
   }

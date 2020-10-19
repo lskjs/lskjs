@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/lskjs/lskjs/tree/master/packages/billing/compare/v1.71.0...v1.72.0) (2020-10-19)
+
+
+### Bug Fixes
+
+* invalid github path ([6e405c7](https://github.com/lskjs/lskjs/tree/master/packages/billing/commit/6e405c755c76a505833da05689fc0c5ee2fc992b))
+
+
+### Features
+
+* **billing:** add interkassa provider ([727d5c6](https://github.com/lskjs/lskjs/tree/master/packages/billing/commit/727d5c6108d7c04fa6f953060c597a50cfb38a39))
+
+
+
+
+
 ## [1.71.1](https://github.com/lskjs/lskjs/tree/master/packages/billing/compare/v1.71.0...v1.71.1) (2020-10-19)
 
 
