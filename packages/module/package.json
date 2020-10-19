@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@lskjs/utils": "1.70.0",
+    "colors": "^1.4.0",
     "eventemitter3": "4.0.0"
   },
   "devDependencies": {
