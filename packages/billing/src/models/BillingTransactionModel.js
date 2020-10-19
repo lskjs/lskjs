@@ -1,9 +1,9 @@
 import MongooseSchema from '@lskjs/db/MongooseSchema';
 import omit from 'lodash/omit';
 
-export const TRANSACTION_TYPE_IN = 'in';
-export const TRANSACTION_TYPE_BETWEEN = 'internal';
-export const TRANSACTION_TYPE_OUT = 'out';
+export const TRANSACTION_TYPE_IN = 'in'; // Пополнение
+export const TRANSACTION_TYPE_BETWEEN = 'internal'; // Перевод внутри системы
+export const TRANSACTION_TYPE_OUT = 'out'; // Снятие
 
 export const TRANSACTION_STATUS_PENDING = 'pending';
 export const TRANSACTION_STATUS_FAILURE = 'failure';

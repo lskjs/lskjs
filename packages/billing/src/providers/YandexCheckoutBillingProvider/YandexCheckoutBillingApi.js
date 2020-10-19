@@ -16,28 +16,40 @@ export default class YandexCheckoutBillingApi extends Api {
   url(...args) {
     return this.app.url(`/api/billing/yandexCheckout/${args[0]}`, ...args.slice(1));
   }
-
   index() {
     return 'ok';
   }
-
   async check(req) {
-    this.log = this.app.log;
     await this.isAuth(req);
-    const { billing } = await this.app.module(['billing']);
-    const { client } = await billing.provider('yandexCheckout');
     const { _id } = req.data;
     if (!_id) throw new Err('params.required', { status: 400, data: { field: '_id' } });
     const { BillingTransactionModel } = this.app.models;
-
     const transaction = await BillingTransactionModel.findById(_id);
-    const res = await client.getPayment('271d3718-000f-5000-a000-1fadb264a853');
-    this.log.trace('res', res);
+    return this._checkTransactionAndSave(transaction);
+  }
+  async _checkTransactionAndSave(transaction) {
+    const { billing } = await this.app.module(['billing']);
+    const { client } = await billing.provider('yandexCheckout');
 
-    await transaction.setStatus(res.status);
-    await transaction.save();
-
-    return res;
+    try {
+      const res = await client.getPayment(transaction.meta.id);
+      this.log.trace('getPayment res', res);
+      transaction.addEvent({
+        type: 'getPayment',
+        data: res,
+      });
+      await transaction.setStatus(res.status);
+      await transaction.save();
+      return transaction;
+    } catch (err) {
+      this.log.error('check err', err);
+      transaction.addEvent({
+        method: 'check',
+        data: err,
+      });
+      await transaction.save();
+      throw err;
+    }
   }
   async create(req) {
     this.log = this.app.log;
@@ -51,14 +63,15 @@ export default class YandexCheckoutBillingApi extends Api {
     const transaction = await BillingTransactionModel.createPayment({
       type: BillingTransactionModel.TYPE_IN,
       amount,
+      currency: 'RUB',
       provider: 'yandexCheckout',
       userId: req.user._id,
     });
 
     const data = {
       amount: {
+        currency: transaction.currency,
         value: String(transaction.amount / 100),
-        currency: 'RUB',
       },
       payment_method_data: {
         type: 'bank_card',
@@ -80,6 +93,7 @@ export default class YandexCheckoutBillingApi extends Api {
       });
       set(transaction, 'meta.id', get(res, 'id'));
       set(transaction, 'meta.continueUrl', get(res, 'confirmation.confirmation_url'));
+      transaction.markModified('meta.id');
       transaction.markModified('meta.continueUrl');
       await transaction.save();
       return transaction;
@@ -87,45 +101,18 @@ export default class YandexCheckoutBillingApi extends Api {
       this.log.error('createPayment err', err);
       transaction.addEvent({
         method: 'createPayment',
-        data: err,
+        status: 'error',
+        err,
       });
       await transaction.save();
       throw err;
     }
   }
 
-  // TODO:
-  // / pending vs progress
-
   async callback(req) {
+    const { yandexId } = req.data;
     const { BillingTransactionModel } = this.app.models;
-    const { billing } = await this.app.module(['billing']);
-    const { coingate } = billing.providers;
-    if (!coingate) throw '!coingate';
-    const { transactionToken } = req.query;
-    const id = coingate.decode(transactionToken);
-    const transaction = await BillingTransactionModel.findById(id);
-    if (!transaction) throw new Err('billing.transaction.notFound', { status: 404, data: { id } });
-    if (transaction.status !== BillingTransactionModel.STATUS_PENDING) {
-      throw new Err('transaction.notPending', { status: 400, data: { id } });
-    }
-    const data = req.body;
-
-    this.log.trace('callback', data);
-    const { status } = data;
-    transaction.addEvent({
-      type: status,
-      data,
-    });
-    if (status === 'paid') {
-      await transaction.changeStatus(BillingTransactionModel.STATUS_SUCCESS);
-      // dkjkdfjkdjfkdfjdsdfslkfjklsdfdsflknsklnkdnlknklmkldsfjsdklmksldmklvsdklmsdklfmsdklfjskldfmksdlkfmsdklsnklsdnfklnsd;
-    } else if (status === 'expired' || status === 'invalid' || status === 'canceled') {
-      await transaction.changeStatus(BillingTransactionModel.STATUS_CANCELED);
-      // this.emitrlog.broadcast('root', `coingate err 1 ${id} ${status}`);
-    }
-    await transaction.save();
-
-    return 'ok';
+    const transaction = await BillingTransactionModel.findById({ 'meta.id': yandexId });
+    return this._checkTransactionAndSave(transaction);
   }
 }
