@@ -38,10 +38,10 @@ export default class InterkassaBillingProvider extends BillingProvider {
 
   // https://docs.interkassa.com/#section/3.-Protokol/3.2.-Forma-zaprosa-platezha
   // TODO: почиать про 4.1.2. Получение доступного для кассы списка платежных направлений: https://docs.interkassa.com/#section/4.-Rasshirennye-vozmozhnosti/4.1.2.-Poluchenie-dostupnogo-dlya-kassy-spiska-platezhnyh-napravlenij
-  createPaymentUrl(initParams, secretKey, signature) {
-    if (!secretKey) throw '!secretKey';
+  createPaymentUrl(initParams, signature = true) {
+    if (!this.config.secretKey) throw '!config.secretKey';
     if (!initParams) throw '!initParams';
-    if (isPlainObject(initParams)) throw 'initParams is not a object';
+    if (!isPlainObject(initParams)) throw 'initParams is not a object';
     const params = { ...initParams };
 
     params.ik_co_id = this.config.coId;
@@ -55,7 +55,7 @@ export default class InterkassaBillingProvider extends BillingProvider {
     const paramsArray = Object.keys(params)
       .sort()
       .map((key) => params[key]);
-    paramsArray.push(secretKey);
+    paramsArray.push(this.config.secretKey);
     const paramsString = paramsArray.join(':');
     if (signature) {
       params.ik_sign = SHA256(paramsString);
