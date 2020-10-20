@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.73.1](https://github.com/lskjs/lskjs/tree/master/packages/billing/compare/v1.73.0...v1.73.1) (2020-10-20)
+
+
+### Bug Fixes
+
+* **billing:** createPaymentUrl fix ([7829ad4](https://github.com/lskjs/lskjs/tree/master/packages/billing/commit/7829ad4601d873bacaf1b698d4dd24c028c95aa1))
+
+
+
+
+
 # [1.72.0](https://github.com/lskjs/lskjs/tree/master/packages/billing/compare/v1.71.0...v1.72.0) (2020-10-19)
 
 
