@@ -75,7 +75,7 @@ export default (app) => {
 
     const statusChanged = this.wasStatus !== newStatus;
     if (statusChanged) {
-      const { balanceBefore, balanceAfter } = await this.statics.updateBalance(this);
+      const { balanceBefore, balanceAfter } = await this.constructor.updateBalance(this);
       if (balanceBefore !== null && balanceAfter !== null) {
         this.meta.statusInfo.balanceBefore = balanceBefore;
         this.meta.statusInfo.balanceAfter = balanceAfter;
