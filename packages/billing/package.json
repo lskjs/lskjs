@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "1.73.1",
+  "version": "1.73.2",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

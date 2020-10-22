@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.73.2](https://github.com/lskjs/lskjs/tree/master/packages/billing/compare/v1.73.1...v1.73.2) (2020-10-22)
+
+
+### Bug Fixes
+
+* **billing:** typo in changeStatus ([d9614fd](https://github.com/lskjs/lskjs/tree/master/packages/billing/commit/d9614fd35122822a79319bc7e794c063ce592b43))
+
+
+
+
+
 ## [1.73.1](https://github.com/lskjs/lskjs/tree/master/packages/billing/compare/v1.73.0...v1.73.1) (2020-10-20)
 
 
