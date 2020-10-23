@@ -79,7 +79,7 @@ export default class GrantModule extends Module {
     }
     return null;
   }
-  async canGroup(args) {
+  async canGroup(args, cache) {
     const params = await this.getGroupParams(args);
     const { rules } = this;
     const cans = {};
@@ -89,7 +89,7 @@ export default class GrantModule extends Module {
         const { action } = data;
         if (rules && rules[action]) {
           debug('can', action);
-          const res = await rules[action].bind(this)(data);
+          const res = await rules[action].bind(this)(data, cache);
           cans[hashCode(action)] = res;
         }
       },
