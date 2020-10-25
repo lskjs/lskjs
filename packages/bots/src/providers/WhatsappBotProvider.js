@@ -1,6 +1,9 @@
 import { Client } from 'whatsapp-web.js';
+import qrcode from 'qrcode-terminal';
 import get from 'lodash/get';
 import BotProvider from './BotProvider';
+
+console.log('qrcode', qrcode);
 
 export default class WhatsappBotProvider extends BotProvider {
   name = 'WhatsappBotProvider';
@@ -25,7 +28,6 @@ export default class WhatsappBotProvider extends BotProvider {
 
   async init() {
     await super.init();
-    if (!this.config.session) throw 'WhatsappBotProvider !config.session';
     this.client = new Client({ session: this.config.session });
   }
 
@@ -34,6 +36,19 @@ export default class WhatsappBotProvider extends BotProvider {
     if (!this.client) return;
     await this.initEventEmitter();
     this.client.initialize();
+
+    this.on('qr', (qr) => {
+      qrcode.generate(qr, { small: true });
+    });
+
+    this.on('authenticated', (session) => {
+      console.log('session', session);
+    });
+
+    this.on('auth_failure', () => {
+      // Fired if session restore was unsuccessfull
+      throw 'WhatsappBotProvider auth_failure';
+    });
   }
 
   getMessageText(ctx = {}) {

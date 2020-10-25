@@ -43,6 +43,7 @@
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.19",
+    "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.10.0"
   },
   "devDependencies": {
