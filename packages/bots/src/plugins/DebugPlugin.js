@@ -20,6 +20,10 @@ export default class DebugPlugin extends Plugin {
         bot.reply(ctx, ctx.message.reply_to_message ? ctx.message.reply_to_message.from.id : ctx.message.from.id);
         return;
       }
+      if (bot.provider === 'vk' && bot.isMessageCommands(ctx, ['id', 'ид'])) {
+        ctx.reply(ctx.message.reply_message ? ctx.message.reply_message.from_id : ctx.message.from_id);
+        return;
+      }
       if (bot.provider === 'telegram' && bot.isMessageCommands(ctx, ['chatid', 'чат'])) {
         bot.reply(
           ctx,
