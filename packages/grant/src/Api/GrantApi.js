@@ -25,7 +25,6 @@ export default class GrantApi extends Api {
     return res;
   }
   async checkGroup(rules, userId) {
-    console.log('checkgroup вызван!');
     const grant = await this.app.module('grant');
     // if (!isPlainObject(rule)) throw 'data is not object';
     // if (rule.userId && rule.userId !== userId) {
@@ -39,7 +38,6 @@ export default class GrantApi extends Api {
       };
     });
     const cache = new Cache();
-    console.log('я вообще запускаюсь?');
     return grant.canGroup(_rules, cache);
   }
   async can(req) {
@@ -48,11 +46,9 @@ export default class GrantApi extends Api {
   }
   async canGroup(req) {
     // return console.log(req.data);
-    console.log('але але але');
     const userId = req.user && req.user._id;
     const data = get(req.data, 'data', []);
     if (!Array.isArray(data)) throw 'data is not array';
-    console.log('вызываю checkGroup');
     return this.checkGroup(data, userId);
   }
   async batch(req) {

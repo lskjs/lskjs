@@ -1,9 +1,11 @@
-export default class Cache {
+export default class CacheStore {
   data = {};
   async set(key, value) {
     if (!this.data[key]) {
       if (value instanceof Promise) {
         this.data[key] = await value;
+      } else if (typeof value === 'function') {
+        this.data[key] = await value();
       }
     }
   }
