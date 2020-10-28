@@ -4,6 +4,7 @@ import hashCode from '@lskjs/utils/hashCode';
 import isObject from 'lodash/isObject';
 import Promise from 'bluebird';
 import get from 'lodash/get';
+import CacheStore from './CacheStore';
 
 const DEBUG = __DEV__ && false;
 const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
@@ -75,11 +76,16 @@ export default class GrantModule extends Module {
     debug('can', action);
     const { rules } = this;
     if (rules && rules[action]) {
+      if (!params.cacheStore) {
+        const cacheStore = new CacheStore();
+        cacheStore.name = 'can';
+        params.cacheStore = cacheStore;
+      }
       return rules[action].bind(this)(params);
     }
     return null;
   }
-  async canGroup(args, cache) {
+  async canGroup(args, cacheStore) {
     const params = await this.getGroupParams(args);
     const { rules } = this;
     const cans = {};
@@ -89,7 +95,7 @@ export default class GrantModule extends Module {
         const { action } = data;
         if (rules && rules[action]) {
           debug('can', action);
-          const res = await rules[action].bind(this)(data, cache);
+          const res = await rules[action].bind(this)({ ...data, cacheStore });
           cans[hashCode(action)] = res;
         }
       },

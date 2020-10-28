@@ -1,20 +1,11 @@
+/* global test expect */
 import { Mutex } from 'async-mutex';
 import Promise from 'bluebird';
 
-export default class CacheStore {
+class CacheStore {
   data = {};
   mutexes = {};
-  // constructor() {
-  //   this.initialDate = Date.now();
-  // }
   async cache(key, value) {
-    // if (value instanceof Promise) {
-    //   return value;
-    // } else if (typeof value === 'function') {
-    //   return value();
-    // } else {
-    //   return value;
-    // }
     if (this.data[key]) return this.data[key];
     if (!this.mutexes[key]) {
       this.mutexes[key] = new Mutex();
@@ -36,3 +27,18 @@ export default class CacheStore {
     return this.data[key];
   }
 }
+
+test('cacheStore', async () => {
+  const cacheStore = new CacheStore();
+  const keysMap = {
+    '1': 0,
+    '2': 0,
+  };
+  await Promise.map([{ key: 1 }, { key: 2 }, { key: 1 }, { key: 2 }, { key: 1 }, { key: 1 }], async ({ key }) => {
+    await cacheStore.cache(key, async () => {
+      keysMap[key] += 1;
+      await Promise.delay(1000);
+    });
+  });
+  expect(keysMap).toEqual({ '1': 1, '2': 1 });
+});
