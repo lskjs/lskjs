@@ -1,7 +1,7 @@
 import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import GrantModule from './GrantModule';
-import CacheStore from './CacheStore';
+import CacheStorage from './CacheStorage';
 
 export default class GrantClientModule extends GrantModule {
   name = 'GrantClientModule';
@@ -24,8 +24,8 @@ export default class GrantClientModule extends GrantModule {
     return this.askServer(params);
   }
   async canGroup(rules) {
-    const cacheStore = new CacheStore();
-    const data = await super.canGroup(rules, cacheStore);
+    const cache = new CacheStorage();
+    const data = await super.canGroup(rules, cache);
     let isHaveNull = false;
     forEach(data, (value) => {
       if (value === null) {

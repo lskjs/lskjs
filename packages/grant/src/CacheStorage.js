@@ -1,7 +1,7 @@
 import { Mutex } from 'async-mutex';
 import Promise from 'bluebird';
 
-export default class CacheStore {
+export default class CacheStorage {
   data = {};
   mutexes = {};
   // constructor() {
