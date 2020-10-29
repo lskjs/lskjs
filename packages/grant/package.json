@@ -35,6 +35,7 @@
     "@lskjs/module": "1.72.0",
     "@lskjs/server-api": "1.72.0",
     "@lskjs/utils": "1.70.0",
+    "async-mutex": "^0.2.4",
     "bluebird": "^3.7.2"
   },
   "devDependencies": {

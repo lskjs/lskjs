@@ -1,6 +1,7 @@
 import Api from '@lskjs/server-api';
 import isPlainObject from 'lodash/isPlainObject';
 import get from 'lodash/get';
+import CacheStore from '../CacheStore';
 
 export default class GrantApi extends Api {
   getRoutes() {
@@ -17,9 +18,11 @@ export default class GrantApi extends Api {
       // eslint-disable-next-line no-console
       console.log('ALARMAAAAAA ALARMAAAAAAALARMAAAAAAALARMAAAAAA -- userId is changed');
     }
+    const cacheStore = new CacheStore();
     const res = await grant.can({
       ...rule,
       userId,
+      cacheStore,
     });
     return res;
   }
@@ -36,7 +39,8 @@ export default class GrantApi extends Api {
         userId,
       };
     });
-    return grant.canGroup(_rules);
+    const cacheStore = new CacheStore();
+    return grant.canGroup(_rules, cacheStore);
   }
   async can(req) {
     const userId = req.user && req.user._id;
