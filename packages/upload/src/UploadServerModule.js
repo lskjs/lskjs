@@ -51,7 +51,7 @@ export default class UploadServerModule extends Module {
   }
 
   getMulter() {
-    const config = this.app.config.upload;
+    const { config } = this;
     const fileFilter = (req, file, cb) => {
       if (Array.isArray(config.mimetypes)) {
         if (config.mimetypes.indexOf(file.mimetype) === -1) {
