@@ -48,7 +48,7 @@
     "@slack/bolt": "2.3.0",
     "discord.js": "12.3.1",
     "instagram-private-api": "1.42.0",
-    "node-vk-bot-api": "3.3.7",
+    "node-vk-bot-api": "^3.3.7",
     "telegraf": "3.38.0",
     "twitter-lite": "0.14.0"
   },
