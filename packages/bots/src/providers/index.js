@@ -9,5 +9,5 @@ export default {
   vkontakte: () => import('./vkontakte'),
   instagram: () => import('./instagram'),
   vk: () => import('./vk'),
-  // whatsapp: () => import('./whatsapp'),
+  whatsapp: () => import('./whatsapp'),
 };

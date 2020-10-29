@@ -10,22 +10,24 @@ export default class VkBotProvider extends BotProvider {
     await super.init();
     if (!this.config.token) throw 'VkBotProvider !config.token';
     this.client = new VkBot(this.config.token);
-    this.client.use(async (ctx, next) => {
-      try {
-        await next();
-      } catch (e) {
-        console.error(e);
-      }
-    });
+    // this.client.use(async (ctx, next) => {
+    //   try {
+    //     await next();
+    //   } catch (err) {
+    //     this.log.error(err);
+    //   }
+    // });
   }
   async run() {
     await super.run();
     if (!this.client) return;
     await this.initEventEmitter();
-    this.client.startPolling((err) => {
-      if (err) {
-        console.error(err);
-      }
+    await new Promise((resolve, reject) => {
+      this.client.startPolling((err) => {
+        this.log.error(err);
+        if (err) return reject();
+        return resolve();
+      });
     });
   }
 

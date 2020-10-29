@@ -1,7 +1,7 @@
 {
   "name": "@lskjs/bots",
   "version": "1.73.0",
-  "description": "LSK module for telegram, slack, discord, whatsapp, twitter and vkontakte bots creation",
+  "description": "LSK module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
   "publishConfig": {
@@ -14,8 +14,11 @@
     "discord",
     "whatsapp",
     "twitter",
+    "instagram",
     "vkontakte",
-    "bots"
+    "vk",
+    "chatbot",
+    "bot"
   ],
   "scripts": {
     "dev": "npm run watch",
@@ -48,16 +51,20 @@
     "@slack/bolt": "2.3.0",
     "discord.js": "12.3.1",
     "instagram-private-api": "1.42.0",
-    "node-vk-bot-api": "^3.3.7",
-    "telegraf": "3.38.0",
-    "twitter-lite": "0.14.0"
-  },
-  "peerDependencies": {
-    "@slack/bolt": "2.3.0",
-    "discord.js": "12.3.1",
-    "instagram-private-api": "1.42.0",
     "node-vk-bot-api": "3.3.7",
     "telegraf": "3.38.0",
-    "twitter-lite": "0.14.0"
+    "twitter-lite": "0.14.0",
+    "qrcode-terminal": "0.12.0",
+    "whatsapp-web.js": "1.10.0"
+  },
+  "peerDependencies": {
+    "@slack/bolt": "*",
+    "discord.js": "*",
+    "instagram-private-api": "*",
+    "node-vk-bot-api": "*",
+    "telegraf": "*",
+    "twitter-lite": "*",
+    "qrcode-terminal": "*",
+    "whatsapp-web.js": "*"
   }
 }
