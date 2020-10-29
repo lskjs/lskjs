@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/lskjs/lskjs/compare/v1.73.2...v1.74.0) (2020-10-29)
+
+
+### Bug Fixes
+
+* **upload:** get config from module ([dfe77d8](https://github.com/lskjs/lskjs/commit/dfe77d8aa132e8c65289cef2faa380880f9545fc))
+
+
+### Features
+
+* **bots:** add terminal qr-code to WhatsappBotProvider login ([51e9e83](https://github.com/lskjs/lskjs/commit/51e9e83adc359df69d36bf4f426bc0e0f02a9334))
+* **bots:** add WhatsappBotProvider ([884f4ba](https://github.com/lskjs/lskjs/commit/884f4ba42ee65d48f7c33eae79b550e265137494))
+* **bots:** VkBotProvider ([e01c9b1](https://github.com/lskjs/lskjs/commit/e01c9b1a97d7b3896223422ee47b11d039779e40))
+
+
+
+
+
 ## [1.73.2](https://github.com/lskjs/lskjs/compare/v1.73.1...v1.73.2) (2020-10-22)
 
 

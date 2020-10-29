@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots",
-  "version": "1.73.0",
+  "version": "1.74.0",
   "description": "LSK module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -52,9 +52,9 @@
     "discord.js": "12.3.1",
     "instagram-private-api": "1.42.0",
     "node-vk-bot-api": "3.3.7",
+    "qrcode-terminal": "0.12.0",
     "telegraf": "3.38.0",
     "twitter-lite": "0.14.0",
-    "qrcode-terminal": "0.12.0",
     "whatsapp-web.js": "1.10.0"
   },
   "peerDependencies": {
@@ -62,9 +62,9 @@
     "discord.js": "*",
     "instagram-private-api": "*",
     "node-vk-bot-api": "*",
+    "qrcode-terminal": "*",
     "telegraf": "*",
     "twitter-lite": "*",
-    "qrcode-terminal": "*",
     "whatsapp-web.js": "*"
   }
 }

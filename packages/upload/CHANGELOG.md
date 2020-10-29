@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/lskjs/lskjs/tree/master/packages/upload/compare/v1.73.2...v1.74.0) (2020-10-29)
+
+
+### Bug Fixes
+
+* **upload:** get config from module ([dfe77d8](https://github.com/lskjs/lskjs/tree/master/packages/upload/commit/dfe77d8aa132e8c65289cef2faa380880f9545fc))
+
+
+
+
+
 # [1.72.0](https://github.com/lskjs/lskjs/tree/master/packages/upload/compare/v1.71.0...v1.72.0) (2020-10-19)
 
 
