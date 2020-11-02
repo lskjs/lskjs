@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.75.0](https://github.com/lskjs/lskjs/compare/v1.74.0...v1.75.0) (2020-11-02)
+
+
+### Features
+
+* **bots:** save message, chat and user in db ([235f36b](https://github.com/lskjs/lskjs/commit/235f36bac51de9fa67d60a18fad159b2940f1f4f))
+
+
+
+
+
 # [1.74.0](https://github.com/lskjs/lskjs/compare/v1.73.2...v1.74.0) (2020-10-29)
 
 
