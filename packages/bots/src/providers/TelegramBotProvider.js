@@ -69,6 +69,7 @@ export default class TelegramBotProvider extends BotProvider {
   }
   getMessageText(ctx = {}) {
     if (typeof ctx === 'string') return ctx;
+    if (get(ctx, 'message.caption')) return get(ctx, 'message.caption');
     if (get(ctx, 'message.text')) return get(ctx, 'message.text');
     return get(ctx, 'text');
   }

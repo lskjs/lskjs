@@ -3,6 +3,7 @@ import some from 'lodash/some';
 
 export default class BotProvider extends Module {
   name = 'BotProvider';
+  key = null;
   provider = null;
   plugins = [];
   eventTypes = [];
@@ -11,7 +12,7 @@ export default class BotProvider extends Module {
     if (!this.provider) this.log.warn('!provider');
   }
   getBotId() {
-    return null;
+    return this.key;
   }
   async initEventEmitter() {
     if (this.eventTypes && Array.isArray(this.eventTypes)) {

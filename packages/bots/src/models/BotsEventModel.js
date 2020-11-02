@@ -4,7 +4,10 @@ export default () => {
   const schema = new MongooseSchema(
     {
       botId: {
-        type: MongooseSchema.Types.ObjectId,
+        type: String,
+      },
+      provider: {
+        type: String,
       },
       type: {
         type: String,

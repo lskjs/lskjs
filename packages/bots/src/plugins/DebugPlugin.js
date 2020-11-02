@@ -34,17 +34,39 @@ export default class DebugPlugin extends Plugin {
       }
     });
   }
-  async runLogger(bot) {
-    const { BotsEventModel, BotsTelegramMessageModel } = this.app.models;
+  async runLogger(bot, botName) {
+    const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = this.app.models;
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
-      bot.on(type, (ctx) => {
+      bot.on(type, async (ctx) => {
         let eventData;
         if (provider === 'telegram' && type === 'message') {
           eventData = ctx.message;
           this.log.trace(`<${this.name}/${bot.name}> [${type}]`, eventData);
-          BotsTelegramMessageModel.create({
-            botId: bot.getBotId(),
+          // Don't wait
+          const messageType = bot.getMessageType(ctx);
+          console.log({messageType})
+
+          const { from, chat } = ctx.message;
+
+          const { _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate({ id: from.id }, from, {
+            new: true,
+            upsert: true,
+          });
+          let chatUserId;
+
+          if (chat && chat.id < 0) {
+            ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate({ id: chat.id }, from, {
+              new: true,
+              upsert: true,
+            }));
+          }
+
+          await BotsTelegramMessageModel.create({
+            botId: bot.getBotId() || botName,
+            telegramUserId,
+            chatUserId,
+            type: messageType,
             ...eventData,
           });
           // } else if (provider === 'discord') {
@@ -52,8 +74,9 @@ export default class DebugPlugin extends Plugin {
         } else {
           this.log.warn(`<${this.name}/${bot.name}> [${type}] LOGGER NOT IMPLEMENTED`);
         }
-        BotsEventModel.create({
+        await BotsEventModel.create({
           botId: bot.getBotId(),
+          provider: bot.provider,
           type,
           data: eventData,
         });

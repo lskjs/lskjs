@@ -51,18 +51,18 @@ export default class BotsModule extends Module {
     }
     const { assignProviders = true, providers: providersConfigs, plugins: pluginsConfig } = this.config;
     const providers = await this.getProviders(); // eslint-disable-line no-shadow
-    this.bots = await asyncMapValues(providersConfigs, async (config, name) => {
+    this.bots = await asyncMapValues(providersConfigs, async (config, key) => {
       const { provider } = config;
       if (!provider) {
-        this.log.warn(`Empty provider for bot '${name}'`);
+        this.log.warn(`Empty provider for bot '${key}'`);
         return null;
       }
       if (!providers[provider]) {
-        this.log.warn(`Can't find provider '${provider}' for bot '${name}'`);
+        this.log.warn(`Can't find provider '${provider}' for bot '${key}'`);
         return null;
       }
       const Provider = await importFn(providers[provider]);
-      const bot = new Provider({ app: this.app, botsModule: this, config, name });
+      const bot = new Provider({ app: this.app, botsModule: this, config, key });
       await bot.init();
       return bot;
     });
