@@ -213,7 +213,7 @@ ${rootStateStr}\
 ${this.renderHead()}\
 </head>\
 <body>\
-<div id="root"/>\
+<div id="root">\
 ${this.content}\
 </div>\
 ${this.renderRootState()}\
