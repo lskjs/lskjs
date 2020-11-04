@@ -1,6 +1,8 @@
 /* eslint-disable global-require */
 import map from 'lodash/map';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
+import merge from 'lodash/merge';
 import forEach from 'lodash/forEach';
 import UniversalRouter from 'universal-router';
 import Promise from 'bluebird';
@@ -66,8 +68,10 @@ export default class Uapp extends Module {
     });
   }
 
-  async applyRootState(rootState) {
+  async applyRootState(rootState = {}) {
+    this._config = cloneDeep(this.config);
     this.rootState = rootState;
+    this.config = merge(this.config, this.rootState.config);
   }
 
   getRootState() {
