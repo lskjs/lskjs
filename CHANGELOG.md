@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.75.1](https://github.com/lskjs/lskjs/compare/v1.75.0...v1.75.1) (2020-11-04)
+
+
+### Bug Fixes
+
+* **uapp:** applyRootState for client env ([a8e08c4](https://github.com/lskjs/lskjs/commit/a8e08c42e0c6ba931ffe65528316f6abf8943c1f))
+
+
+
+
+
 # [1.75.0](https://github.com/lskjs/lskjs/compare/v1.74.0...v1.75.0) (2020-11-02)
 
 

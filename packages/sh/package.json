@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sh",
-  "version": "1.70.0",
+  "version": "1.75.1",
   "description": "LSK ux subrepo: sh",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
