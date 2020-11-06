@@ -69,7 +69,6 @@ export default class ReactAppServer extends Module {
     const uapp = await this.getUapp({ req });
     if (!uapp) throw '!uapp';
     const path = req.originalUrl.split('?').shift();
-    console.log('!!sssr', req.originalUrl, req);
     console.log('!!ssr', path);
     const page = await uapp.resolve({
       path,
@@ -135,8 +134,6 @@ export default class ReactAppServer extends Module {
     // ?__ssr=staticMarkup,emotion
     // ?__ssr=string,emotion
     const ssr = get(req, 'query.__ssr') || get(this, 'config.reactApp.ssr') || null;
-    console.log('ssr', ssr);
-    console.log('ssr', req);
     let strategy;
     let styleStrategy;
     if (typeof ssr === 'string') {
@@ -200,11 +197,9 @@ export default class ReactAppServer extends Module {
         } else {
           strategyMethod = 'renderToString';
           content = renderToString(component);
-          console.log('ssr string method', content);
         }
         if (content && styleStrategy === 'emotion') {
           content = renderStylesToString(content);
-          console.log('ssr string emotion styles', content);
         }
       } catch (err) {
         if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
