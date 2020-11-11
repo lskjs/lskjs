@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "1.75.1",
+  "version": "1.75.2",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -40,9 +40,9 @@
   },
   "dependencies": {
     "@lskjs/db": "1.72.0",
-    "@lskjs/module": "1.75.1",
-    "@lskjs/server-api": "1.75.1",
-    "@lskjs/utils": "1.70.0"
+    "@lskjs/module": "1.75.2",
+    "@lskjs/server-api": "1.75.2",
+    "@lskjs/utils": "1.75.2"
   },
   "devDependencies": {
     "axios": "^0.20.0",

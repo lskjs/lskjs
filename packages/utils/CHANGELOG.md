@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.75.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.75.1...v1.75.2) (2020-11-11)
+
+
+### Bug Fixes
+
+* new GrantCache && tests ([b590c77](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b590c779548e6d768f374047d9807a4a4af25109))
+
+
+
+
+
 # [1.70.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.69.2...v1.70.0) (2020-10-09)
 
 

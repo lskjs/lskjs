@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.75.2](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.75.1...v1.75.2) (2020-11-11)
+
+
+### Bug Fixes
+
+* **reactapp:** remove a lot ssr debug logs ([832715d](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/832715d8f617786694c78fa8d2ced70006fa74c6))
+
+
+
+
+
 ## [1.75.1](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.75.0...v1.75.1) (2020-11-04)
 
 **Note:** Version bump only for package @lskjs/reactapp

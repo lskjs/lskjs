@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.75.2](https://github.com/lskjs/lskjs/compare/v1.75.1...v1.75.2) (2020-11-11)
+
+
+### Bug Fixes
+
+* **grant:** raname grantCache to cache ([5564be5](https://github.com/lskjs/lskjs/commit/5564be5a5d6d0f4ea8922f0de94d495dee3c949f))
+* **reactapp:** remove a lot ssr debug logs ([832715d](https://github.com/lskjs/lskjs/commit/832715d8f617786694c78fa8d2ced70006fa74c6))
+* fixes for grants ([dfe7750](https://github.com/lskjs/lskjs/commit/dfe7750d21f408c03e3eae046226a65d18e187fe))
+* new GrantCache && tests ([b590c77](https://github.com/lskjs/lskjs/commit/b590c779548e6d768f374047d9807a4a4af25109))
+
+
+
+
+
 ## [1.75.1](https://github.com/lskjs/lskjs/compare/v1.75.0...v1.75.1) (2020-11-04)
 
 
