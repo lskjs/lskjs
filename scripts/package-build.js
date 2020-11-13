@@ -4,13 +4,15 @@ const glob = require('glob');
 const shell = require('shelljs');
 
 const DIST = process.env.DIST || 'build';
+const { REMOVE } = process.env;
 const BUILD_PARAMS = process.env.BUILD_PARAMS || '--copy-files';
 if (process.env.DEBUG) console.log(`DIST=${DIST} BUILD_PARAMS=${BUILD_PARAMS}`);
 
 async function packageBuild() {
+  if (REMOVE) await shell.rm('-p', DIST);
   await shell.mkdir('-p', DIST);
   const copyFiles = ['package.json', 'package-lock.json', 'README.md'];
-  await copyFiles.map(async file => {
+  await copyFiles.map(async (file) => {
     await shell.cp('-R', file, `${DIST}/`);
   });
 
@@ -50,7 +52,7 @@ async function packageBuild() {
   console.log('OK package-build');
 }
 
-packageBuild().catch(err => {
+packageBuild().catch((err) => {
   console.error(`========= ERR (${err.code} ) ========`);
   if (err.stdout) console.error(err.stdout);
   if (err.stderr) console.error(err.stderr);

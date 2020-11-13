@@ -1,0 +1,41 @@
+{
+  "name": "@lskjs/log2",
+  "version": "1.75.2",
+  "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. defub. Базируется на debug-level.",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/log2",
+  "keywords": [],
+  "scripts": {
+    "dev": "npm run watch",
+    "postversion": "npm run release",
+    "lint:js": "../../scripts/package-lint-js.sh",
+    "bootstrap": "../../scripts/package-bootstrap.sh",
+    "bootstrap:nodemodules": "../../scripts/package-bootstrap-nodemodules.sh",
+    "update": "../../scripts/package-update.sh",
+    "build": "../../scripts/package-build.sh",
+    "watch": "../../scripts/package-watch.sh",
+    "link": "../../scripts/package-link.sh",
+    "link:me": "../../scripts/package-link-me.sh",
+    "link:all": "../../scripts/package-link-all.sh",
+    "bump": "../../scripts/package-bump.sh",
+    "release": "../../scripts/package-release.sh",
+    "release:docs": "../../scripts/package-release-docs.sh",
+    "storybook": "../../scripts/package-storybook.sh",
+    "styleguide": "../../scripts/package-styleguide.sh",
+    "test": "../../scripts/package-test.sh"
+  },
+  "dependencies": {
+    "@lskjs/debug-level": "0.3.2",
+    "@lskjs/utils": "1.75.2",
+    "colors": "1.4.0"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "bin": {
+    "lsklog": "./bin/lsklog.js"
+  }
+}
