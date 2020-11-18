@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.77.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.77.1...v1.77.2) (2020-11-18)
+
+
+### Bug Fixes
+
+* **module:** ts type mistake ([38630be](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/38630be7bfe56525fcefc1addf55d165ba9f4295))
+
+
+
+
+
 ## [1.77.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.77.0...v1.77.1) (2020-11-18)
 
 **Note:** Version bump only for package @lskjs/module

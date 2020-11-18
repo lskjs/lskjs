@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "1.77.1",
+  "version": "1.77.2",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -42,7 +42,7 @@
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
-    "@lskjs/module": "1.77.1",
+    "@lskjs/module": "1.77.2",
     "@lskjs/server-api": "1.77.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.19",
