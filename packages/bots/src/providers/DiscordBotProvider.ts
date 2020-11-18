@@ -5,30 +5,31 @@ import BotProvider from './BotProvider';
  * Docs: https://discord.js.org/#/docs/main/stable/general/welcome
  */
 
+type DiscordBotConfigType = {
+  token: string;
+};
+
 export default class DiscordBotProvider extends BotProvider {
-  name = 'DiscordBotProvider';
   provider = 'discord';
   Discord = Discord;
   eventTypes = ['message', 'guildMemberAdd']; // 'ready'
-  async init() {
+  config: DiscordBotConfigType;
+  async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'DiscordBotProvider !config.token';
     this.client = new Discord.Client();
   }
-  async run() {
+  async run(): Promise<void> {
     if (!this.client) return;
     await super.run();
     await this.client.login(this.config.token);
-    // this.bot.on('ready', async () => {
-    //   console.log(`Logged in as ${this.bot.user.tag}!`);
-    // });
   }
 
-  getMessageText(message) {
+  getMessageText(message: any): string {
     return message.content;
   }
 
-  isMessageCommand(message, command) {
+  isMessageCommand(message: any, command: string | RegExp): boolean {
     return this.isMessageContains(message, `/${command}`) || this.isMessageContains(message, `!${command}`);
   }
 }

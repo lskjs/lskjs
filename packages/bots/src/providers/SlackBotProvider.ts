@@ -5,8 +5,13 @@ import BotProvider from './BotProvider';
  * Docs: https://api.slack.com/bot-users
  */
 
+
+type SlackBotConfigType = {
+  token: string;
+  signingSecret: string;
+};
+
 export default class SlackBotProvider extends BotProvider {
-  name = 'SlackBotProvider';
   provider = 'slack';
   SlackApp = SlackApp;
   eventTypes = [
@@ -19,7 +24,8 @@ export default class SlackBotProvider extends BotProvider {
     'member_joined_channel',
     'presence_change',
   ];
-  async init() {
+  config: SlackBotConfigType;
+  async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'SlackBotProvider !config.token';
     if (!this.config.signingSecret) throw 'SlackBotProvider !config.signingSecret';
@@ -28,7 +34,7 @@ export default class SlackBotProvider extends BotProvider {
       token: this.config.token,
     });
   }
-  async run() {
+  async run(): Promise<void> {
     if (!this.client) return;
     await super.run();
   }

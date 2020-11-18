@@ -1,13 +1,21 @@
-import Module from '@lskjs/module';
 import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
-import providers from './providers';
+import Module from './module2';
+import providers from './providers/async';
+import { IBotProvider } from './providers/BotProvider';
+import { IBotPlugin } from './plugins/BotPlugin';
+
+export type AsyncProvidersType = {
+  [key: string]: IBotProvider;
+};
+export type AsyncPluginsType = {
+  [key: string]: IBotPlugin;
+};
 
 export default class BotsModule extends Module {
-  name = 'BotsModule';
-  providers = providers;
-  plugins = {};
+  providers: AsyncProvidersType = providers;
+  plugins: AsyncPluginsType = {};
   constructor(...props) {
     super(...props);
     assignProps(this, ...props);
@@ -36,10 +44,10 @@ export default class BotsModule extends Module {
   // async getModels() {
   //   return import('./models');
   // }
-  getModels() {
+  getModels(): Promise<any> {
     return require('./models').default;
   }
-  async init() {
+  async init(): Promise<void> {
     await super.init();
     if (!this.config) {
       if (this.app.config.bots) {
@@ -84,7 +92,7 @@ export default class BotsModule extends Module {
 
     if (assignProviders) Object.assign(this, this.bots);
   }
-  async run() {
+  async run(): Promise<void> {
     await super.run();
     if (!this.config) return;
     await asyncMapValues(this.bots, (bot) => bot.run());

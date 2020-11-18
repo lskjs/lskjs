@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import Twitter from 'twitter-lite';
 import BotProvider from './BotProvider';
 
@@ -5,24 +6,31 @@ import BotProvider from './BotProvider';
  * Docs: https://github.com/draftbit/twitter-lite
  */
 
+type TwitterBotConfigType = {
+  consumerKey: string | null;
+  consumerSecret: string | null;
+  accessTokenKey: string | null;
+  accessTokenSecret: string | null;
+};
+
 export default class TwitterBotProvider extends BotProvider {
-  name = 'TwitterBotProvider';
   provider = 'twitter';
   Twitter = Twitter;
-  async init() {
+  config: TwitterBotConfigType;
+  async init(): Promise<void> {
     await super.init();
     if (!this.config.consumerKey) throw 'TwitterBotProvider !config.consumerKey';
     if (!this.config.consumerSecret) throw 'TwitterBotProvider !config.consumerSecret';
     if (!this.config.accessTokenKey) throw 'TwitterBotProvider !config.accessTokenKey';
     if (!this.config.accessTokenSecret) throw 'TwitterBotProvider !config.accessTokenSecret';
     this.client = new Twitter({
-      consumer_key: this.consumerKey,
-      consumer_secret: this.consumerSecret,
-      access_token_key: this.accessTokenKey,
-      access_token_secret: this.accessTokenSecret,
+      consumer_key: this.config.consumerKey,
+      consumer_secret: this.config.consumerSecret,
+      access_token_key: this.config.accessTokenKey,
+      access_token_secret: this.config.accessTokenSecret,
     });
   }
-  async run() {
+  async run(): Promise<void> {
     if (!this.client) return;
     await super.run();
   }

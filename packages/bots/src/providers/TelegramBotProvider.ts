@@ -1,34 +1,19 @@
 import Telegraf from 'telegraf';
 import get from 'lodash/get';
 import session from 'telegraf/session';
-import BotProvider from './BotProvider';
+import BotProvider, { BotProviderMessageCtx } from './BotProvider';
+
+export type TelegramBotProviderMessageCtx = BotProviderMessageCtx;
 
 /**
  * Docs: https://telegraf.js.org/#/
  */
 
-const getMessage = (ctx) => {
-  if (get(ctx, 'message')) return get(ctx, 'message');
-  return ctx;
-};
-const getMessageChatId = (ctx) => {
-  const message = getMessage(ctx);
-  if (get(message, 'chat.id')) return get(message, 'chat.id');
-  return null;
-};
-const getMessageTargetId = (ctx) => {
-  const message = getMessage(ctx);
-  if (get(message, 'chat.id')) return get(message, 'chat.id');
-  if (get(message, 'from.id')) return get(message, 'from.id');
-  return message;
-};
-const getReplyMessageId = (ctx) => {
-  const message = getMessage(ctx);
-  return message.message_id;
+type TelegramBotConfigType = {
+  token: string;
 };
 
 export default class TelegramBotProvider extends BotProvider {
-  name = 'TelegramBotProvider';
   provider = 'telegram';
   Telegraf = Telegraf;
   eventTypes = [
@@ -42,7 +27,8 @@ export default class TelegramBotProvider extends BotProvider {
     'channel_post',
     'edited_channel_post',
   ];
-  async init() {
+  config: TelegramBotConfigType;
+  async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'TelegramBotProvider !config.token';
     this.client = new Telegraf(this.config.token);
@@ -55,32 +41,44 @@ export default class TelegramBotProvider extends BotProvider {
     await this.client.launch();
     await this.client.startPolling();
   }
-  getMessage(ctx) {
-    return getMessage(ctx);
+  getMessage(ctx: TelegramBotProviderMessageCtx): TelegramBotProviderMessageCtx {
+    if (get(ctx, 'message')) return get(ctx, 'message');
+    return ctx;
   }
-  getMessageChatId(ctx) {
-    return getMessageChatId(ctx);
+  getMessageUserId(ctx: TelegramBotProviderMessageCtx): number {
+    const message = this.getMessage(ctx);
+    if (get(message, 'from.id')) return get(message, 'from.id');
+    return null;
   }
-  getMessageTargetId(ctx) {
-    return getMessageTargetId(ctx);
+  getMessageChatId(ctx: TelegramBotProviderMessageCtx): number {
+    const message = this.getMessage(ctx);
+    if (get(message, 'chat.id')) return get(message, 'chat.id');
+    return null;
   }
-  getReplyMessageId(ctx) {
-    return getReplyMessageId(ctx);
+  getMessageTargetId(ctx: TelegramBotProviderMessageCtx): number {
+    const message = this.getMessage(ctx);
+    if (get(message, 'chat.id')) return get(message, 'chat.id');
+    if (get(message, 'from.id')) return get(message, 'from.id');
+    return message;
   }
-  getMessageText(ctx = {}) {
+  getReplyMessageId(ctx: TelegramBotProviderMessageCtx): number {
+    const message = this.getMessage(ctx);
+    return message.message_id;
+  }
+  getMessageText(ctx: TelegramBotProviderMessageCtx): string {
     if (typeof ctx === 'string') return ctx;
     if (get(ctx, 'message.caption')) return get(ctx, 'message.caption');
     if (get(ctx, 'message.text')) return get(ctx, 'message.text');
     return get(ctx, 'text');
   }
-  isMessageCommand(ctx, command) {
+  isMessageCommand(ctx: TelegramBotProviderMessageCtx, command: RegExp | string): boolean {
     return this.isMessageStartsWith(ctx, `/${command}`);
   }
-  getMessageDate(ctx) {
+  getMessageDate(ctx: TelegramBotProviderMessageCtx): Date {
     const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
   }
-  getMessageType(ctx) {
+  getMessageType(ctx: TelegramBotProviderMessageCtx): string {
     const message = this.getMessage(ctx);
     if (message.photo) return 'photo';
     if (message.sticker) return 'sticker';
@@ -92,25 +90,26 @@ export default class TelegramBotProvider extends BotProvider {
     return null;
   }
   reply(ctx, payload, extra = {}) {
-    return this.client.telegram.sendMessage(getMessageTargetId(ctx), payload, {
+    return this.client.telegram.sendMessage()
+    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, {
       ...extra,
-      reply_to_message_id: getReplyMessageId(ctx),
+      reply_to_message_id: this.getReplyMessageId(ctx),
     });
   }
   sendMessage(ctx, ...args) {
-    return this.client.telegram.sendMessage(getMessageTargetId(ctx), ...args);
+    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
   }
   sendSticker(ctx, ...args) {
-    return this.client.telegram.sendSticker(getMessageTargetId(ctx), ...args);
+    return this.client.telegram.sendSticker(this.getMessageTargetId(ctx), ...args);
   }
   sendAnimation(ctx, ...args) {
-    return this.client.telegram.sendAnimation(getMessageTargetId(ctx), ...args);
+    return this.client.telegram.sendAnimation(this.getMessageTargetId(ctx), ...args);
   }
   sendDocument(ctx, ...args) {
-    return this.client.telegram.sendDocument(getMessageTargetId(ctx), ...args);
+    return this.client.telegram.sendDocument(this.getMessageTargetId(ctx), ...args);
   }
   sendPhoto(ctx, ...args) {
-    return this.client.telegram.sendPhoto(getMessageTargetId(ctx), ...args);
+    return this.client.telegram.sendPhoto(this.getMessageTargetId(ctx), ...args);
   }
 
   isMessageLike(ctx) {

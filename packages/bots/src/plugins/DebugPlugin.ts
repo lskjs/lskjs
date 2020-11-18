@@ -1,20 +1,18 @@
-import Plugin from './Plugin';
+import BotPlugin from './BotPlugin';
 
-export default class DebugPlugin extends Plugin {
-  name = 'DebugPlugin';
-
-  async runBot(bot, name) {
+export class DebugPlugin extends BotPlugin {
+  async runBot(bot: IBotProvider, name: string): Promise<void> {
     await this.runLogger(bot, name);
     await this.runPing(bot, name);
     await this.runChatId(bot, name);
   }
-  async runPing(bot) {
+  async runPing(bot: IBotProvider, name: string): Promise<void> {
     bot.on('message', (ctx) => {
       if (!bot.isMessageCommand(ctx, 'ping')) return null;
       return bot.reply(ctx, `pong`);
     });
   }
-  async runChatId(bot) {
+  async runChatId(bot: IBotProvider, name: string): Promise<void> {
     bot.on('message', (ctx) => {
       if (bot.provider === 'telegram' && bot.isMessageCommands(ctx, ['id', 'ид'])) {
         bot.reply(ctx, ctx.message.reply_to_message ? ctx.message.reply_to_message.from.id : ctx.message.from.id);
@@ -34,7 +32,7 @@ export default class DebugPlugin extends Plugin {
       }
     });
   }
-  async runLogger(bot, botName) {
+  async runLogger(bot: IBotProvider, botName: string): Promise<void> {
     const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = this.app.models;
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
@@ -45,7 +43,7 @@ export default class DebugPlugin extends Plugin {
           this.log.trace(`<${this.name}/${bot.name}> [${type}]`, eventData);
           // Don't wait
           const messageType = bot.getMessageType(ctx);
-          console.log({messageType})
+          console.log({ messageType });
 
           const { from, chat } = ctx.message;
 
@@ -84,3 +82,5 @@ export default class DebugPlugin extends Plugin {
     });
   }
 }
+
+export default DebugPlugin;

@@ -3,10 +3,16 @@ import qrcode from 'qrcode-terminal';
 import get from 'lodash/get';
 import BotProvider from './BotProvider';
 
-export default class WhatsappBotProvider extends BotProvider {
-  name = 'WhatsappBotProvider';
-  provider = 'whatsapp';
+/**
+ * Docs: ????
+ */
 
+type WhatsappBotConfigType = {
+  session: string;
+};
+
+export default class WhatsappBotProvider extends BotProvider {
+  provider = 'whatsapp';
   eventTypes = [
     'qr',
     'authenticated',
@@ -23,6 +29,7 @@ export default class WhatsappBotProvider extends BotProvider {
     'change_battery',
     'disconnected',
   ];
+  config: WhatsappBotConfigType;
 
   async init() {
     await super.init();
