@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.77.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.76.0...v1.77.0) (2020-11-18)
+
+
+### Bug Fixes
+
+* **reactapp:** remove logs ([57d2db5](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/57d2db564be18e67a6167a80431d9960be74ce45))
+
+
+
+
+
 # [1.76.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.75.2...v1.76.0) (2020-11-18)
 
 **Note:** Version bump only for package @lskjs/reactapp
