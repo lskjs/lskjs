@@ -1,25 +1,23 @@
 import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
-import Module from './module2';
+import Module from '@lskjs/module/2';
 import providers from './providers/async';
-import { IBotProvider } from './providers/BotProvider';
-import { IBotPlugin } from './plugins/BotPlugin';
-
-export type AsyncProvidersType = {
-  [key: string]: IBotProvider;
-};
-export type AsyncPluginsType = {
-  [key: string]: IBotPlugin;
-};
+import { IBotProvider, IBotPlugin } from './types';
 
 export default class BotsModule extends Module {
+  app: any;
   providers: AsyncProvidersType = providers;
   plugins: AsyncPluginsType = {};
-  constructor(...props) {
+  bots: {
+    [name: string]: IBotProvider;
+  };
+
+  constructor(...props: any[]) {
     super(...props);
     assignProps(this, ...props);
   }
+
   async getPlugins() {
     return {
       DebugPlugin: () => import('./plugins/DebugPlugin'),

@@ -1,4 +1,4 @@
-import { Client } from 'whatsapp-web.js';
+import { Client, ClientOptions } from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
 import get from 'lodash/get';
 import BotProvider from './BotProvider';
@@ -7,9 +7,10 @@ import BotProvider from './BotProvider';
  * Docs: ????
  */
 
-type WhatsappBotConfigType = {
-  session: string;
-};
+export type WhatsappBotConfigType = ClientOptions;
+// export type WhatsappBotConfigType: = {
+//   session: string;
+// };
 
 export default class WhatsappBotProvider extends BotProvider {
   provider = 'whatsapp';
@@ -31,12 +32,12 @@ export default class WhatsappBotProvider extends BotProvider {
   ];
   config: WhatsappBotConfigType;
 
-  async init() {
+  async init(): Promise<void> {
     await super.init();
-    this.client = new Client({ session: this.config.session });
+    this.client = new Client(this.config);
   }
 
-  async run() {
+  async run(): Promise<void> {
     await super.run();
     if (!this.client) return;
     await this.initEventEmitter();

@@ -1,23 +1,11 @@
 import some from 'lodash/some';
-import Module from '../module2';
+import Module from '@lskjs/module/2';
+import { IBotProvider, IBotPlugin, BotProviderMessageCtx } from '../types';
 
-export interface BotPlugin {}
-
-export interface IBotProvider {
-  key: string | null;
-  provider: string;
-  plugins: Array<BotPlugin>;
-  eventTypes: Array<string>;
-  client: any;
-  config: {};
-}
-
-export interface BotProviderMessageCtx {}
-
-abstract class BotProvider extends Module implements IBotProvider{
+export class BotProvider extends Module implements IBotProvider { // abstract 
   key: string | null = null;
   provider: string;
-  plugins: Array<BotPlugin> = [];
+  plugins: Array<IBotPlugin> = [];
   eventTypes: Array<string> = [];
   client: any;
   config: {};
@@ -43,19 +31,19 @@ abstract class BotProvider extends Module implements IBotProvider{
    * Возвращает дату сообщения
    * @param message
    */
-  abstract getMessageDate(message: BotProviderMessageCtx): Date;
+  getMessageDate(message: BotProviderMessageCtx): Date; // abstract
 
   /**
    * Возвращает тип сообщения
    * @param {*} message
    */
-  abstract getMessageType(message: BotProviderMessageCtx): string;
+  getMessageType(message: BotProviderMessageCtx): string; // abstract 
 
   /**
    * Возвращает текст сообщения
    * @param {*} ctx
    */
-  abstract getMessageText(message: BotProviderMessageCtx): string;
+  getMessageText(message: BotProviderMessageCtx): string; // abstract 
 
   /**
    * Содержит ли сообщение подстроку или регулярку
@@ -92,14 +80,14 @@ abstract class BotProvider extends Module implements IBotProvider{
    * @param {*} message
    * @param {*} command
    */
-  abstract isMessageCommand(message: BotProviderMessageCtx, command: string): boolean;
+  isMessageCommand(message: BotProviderMessageCtx, command: string): boolean; // abstract 
 
   /**
    * reply
    * @param {*} who
    * @param {*} message
    */
-  abstract reply(who: any, message: BotProviderMessageCtx): void;
+  reply(who: any, message: BotProviderMessageCtx): void; // abstract 
 
   /**
    * Является ли сообщение одной из командой
@@ -117,7 +105,7 @@ abstract class BotProvider extends Module implements IBotProvider{
     //  nothing yet
   }
 
-  runPlugin(plugin: BotPlugin): void {
+  runPlugin(plugin: IBotPlugin): void {
     this.plugins.push(plugin);
   }
 }

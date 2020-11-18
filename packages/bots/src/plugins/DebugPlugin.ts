@@ -1,4 +1,5 @@
 import BotPlugin from './BotPlugin';
+import { IBotProvider } from '../types';
 
 export class DebugPlugin extends BotPlugin {
   async runBot(bot: IBotProvider, name: string): Promise<void> {

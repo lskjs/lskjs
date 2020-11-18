@@ -1,27 +1,23 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import Module from '../module2';
-import { IBotProvider } from '../providers/BotProvider';
+import Module from '@lskjs/module/2';
+import { IBotPlugin, IBotProvider } from '../types';
 
-export interface IBotPlugin {
-  canRunBot(bot: IBotProvider): boolean;
-  initBot(bot: IBotProvider, name: string): Promise<void>;
-  initBots(): Promise<void>;
-  runBot(bot: IBotProvider, name: string): Promise<void>;
-  runBots(): Promise<void>;
-}
-
+// extends Module
 export class BotPlugin extends Module implements IBotPlugin {
+  // abstract
   canRunBot(bot: IBotProvider): boolean {
-    return !(Array.isArray(this.providers) && !this.providers.includes(bot.provider));
+    return false;
+    // return !(Array.isArray(this.providers) && !this.providers.includes(bot.provider));
   }
-  
-  abstract async initBot(bot: IBotProvider, name: string): Promise<void>;
+
+  async initBot(bot: IBotProvider, name: string): Promise<void> {
+    // abstract
+  }
   async initBots(): Promise<void> {
     await asyncMapValues(this.bots, async (bot: IBotProvider, name: string) => {
       if (!this.canRunBot(bot)) return;
       await this.initBot(bot, name);
-      await bot.initPlugin(this);
+      await bot.initPlugin(this, name);
     });
   }
   async init(): Promise<void> {
@@ -29,12 +25,14 @@ export class BotPlugin extends Module implements IBotPlugin {
     await this.initBots();
   }
 
-  abstract async runBot(bot: IBotProvider, name: string): Promise<void>;
+  async runBot(bot: IBotProvider, name: string): Promise<void> {
+    // abstract
+  }
   async runBots(): Promise<void> {
     await asyncMapValues(this.bots, async (bot: IBotProvider, name: string) => {
       if (!this.canRunBot(bot)) return;
       await this.runBot(bot, name);
-      await bot.runPlugin(this);
+      await bot.runPlugin(this, name);
     });
   }
   async run(): Promise<void> {

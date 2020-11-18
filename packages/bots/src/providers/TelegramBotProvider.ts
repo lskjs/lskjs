@@ -1,7 +1,8 @@
 import Telegraf from 'telegraf';
 import get from 'lodash/get';
 import session from 'telegraf/session';
-import BotProvider, { BotProviderMessageCtx } from './BotProvider';
+import { BotProviderMessageCtx } from '../types';
+import BotProvider from './BotProvider';
 
 export type TelegramBotProviderMessageCtx = BotProviderMessageCtx;
 
