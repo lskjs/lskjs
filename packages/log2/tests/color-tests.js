@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import colors from 'colors/safe';
+const colors = require('colors/safe');
 
 console.log(colors.bold(colors.black('black')));
 console.log(colors.bold(colors.red('red')));

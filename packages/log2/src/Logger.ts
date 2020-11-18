@@ -65,7 +65,16 @@ export class Logger implements ILogger {
   prefix: string | null;
   ns: string | null;
   name: string | null;
-  levels = ['fatal', 'error', 'warn', 'debug', 'info', 'trace'];
+  level: string | null;
+  levelsPriority = {
+    log: 99,
+    fatal: 60,
+    error: 50,
+    warn: 40,
+    info: 30,
+    debug: 20,
+    trace: 10,
+  };
   randomColors = 7;
   theme = {
     // fatal: 'inverse',
@@ -75,6 +84,7 @@ export class Logger implements ILogger {
     debug: 'blue',
     info: 'green',
     trace: 'gray', // 'white'
+    log: 'white', // 'white'
 
     random0: [/* 'bold', */ 'white'],
     random1: [/* 'bold', */ 'green'],
@@ -86,29 +96,41 @@ export class Logger implements ILogger {
   };
   constructor(props: ILoggerProps) {
     Object.assign(this, props);
+    if (!this.level) this.level = 'trace';
+    if (!this.levelsPriority[this.level]) throw 'incorrect level ' + this.level;
     colors.setTheme(this.theme);
   }
 
+  canLog(level: string): boolean {
+    return (this.levelsPriority[level] || 0) >= (this.levelsPriority[this.level] || 0)
+  }
   fatal(...args: any[]): void {
+    if (!this.canLog('fatal')) return;
     this._log('fatal', ...args);
   }
   error(...args: any[]): void {
+    if (!this.canLog('error')) return;
     this._log('error', ...args);
   }
   warn(...args: any[]): void {
+    if (!this.canLog('warn')) return;
     this._log('warn', ...args);
   }
   debug(...args: any[]): void {
+    if (!this.canLog('debug')) return;
     this._log('debug', ...args);
   }
   info(...args: any[]): void {
+    if (!this.canLog('info')) return;
     this._log('info', ...args);
   }
   trace(...args: any[]): void {
+    if (!this.canLog('trace')) return;
     this._log('trace', ...args);
   }
   log(...args: any[]): void {
-    this._log('info', ...args);
+    if (!this.canLog('log')) return;
+    this._log('log', ...args);
   }
 
   color(name: string, str: string): string {
