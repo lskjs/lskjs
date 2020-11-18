@@ -28,6 +28,7 @@
     "styleguide": "../../scripts/package-styleguide.sh"
   },
   "dependencies": {
+    "@lskjs/log2": "^1.76.0",
     "@lskjs/utils": "1.76.0",
     "colors": "^1.4.0",
     "eventemitter3": "4.0.0"

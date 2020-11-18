@@ -1,12 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
-import logger from '@lskjs/log';
 import assignProps from '@lskjs/utils/assignProps';
+import { ILogger } from 'providers/BotProvider';
 import Emitter from './emitter';
-import createLogger from './createLogger';
+import Logger, { ILogger } from './Logger';
 
-export default class Module2 {
+export interface Module2 {
+  public module(name: string): Promise<Module2>;
+}
+
+export default class Module2 implements Module2 {
   constructor(...props) {
     assignProps(this, ...props);
   }
@@ -14,7 +18,13 @@ export default class Module2 {
     return this.modules;
   }
 
-  async beforeInit() {
+  Logger = Logger;
+  log: ILogger;
+  async createLogger() {
+    return new Logger();
+  }
+
+  async beforeInit(): void {
     if (this.name === 'Module') logger.fatalLog(this, 'warn', `Module.name is empty`);
     this._stage = 'beforeInit';
     if (!this.ee) this.ee = new Emitter();
@@ -22,16 +32,16 @@ export default class Module2 {
     if (this.ee) this.ee.on('*', (event) => logger.safeLog(this, 'trace', `[ee] ${event}`));
   }
 
-  async init() {
+  async init(): void {
     // if (!this.__runStage('init')) return;
     if (this.__initAt) return;
     this.__initAt = new Date();
     this.name = this.constructor.name;
     this.log = createLogger({ name: this.name });
     this.log.trace('init');
-    this.ee = createLogger({ name: this.name });
+    // this.ee = createLogger({ name: this.name });
   }
-  async run() {
+  async run(): void {
     // if (!this.__runStage('run')) return;
     if (this.__runAt) return;
     if (!this.__initAt) await this.init();
@@ -40,13 +50,13 @@ export default class Module2 {
   }
 
   __workflow = ['init', 'run'];
-  __runStage(stage) {
+  __runStage(stage): boolean {
     if (this.__stage === `${stage}.before`) return true;
     if (stage === 'init') return this.__runWorkflow('init', 'init');
     if (stage === 'run') return this.__runWorkflow('init', 'run');
     return false;
   }
-  async __runWorkflow(from, to) {
+  async __runWorkflow(from, to): void {
     if (this.__workflowAt) {
       console.log('WARN __workflowAt!');
       return;
