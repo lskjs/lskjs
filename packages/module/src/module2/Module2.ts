@@ -32,7 +32,7 @@ class Module2 implements IModule {
   ee: IEventEmitter | null;
   log: ILogger | null;
   config: {
-    log: object | null | undefined;
+    log: any;
     [key: string]: any;
   };
 
