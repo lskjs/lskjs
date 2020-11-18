@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.77.1](https://github.com/lskjs/ux/tree/master/packages/apiquery/compare/v1.77.0...v1.77.1) (2020-11-18)
+
+**Note:** Version bump only for package @lskjs/apiquery
+
+
+
+
+
 # [1.47.0](https://github.com/lskjs/ux/tree/master/packages/apiquery/compare/v1.46.0...v1.47.0) (2020-07-31)
 
 
