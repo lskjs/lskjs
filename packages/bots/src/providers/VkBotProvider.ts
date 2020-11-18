@@ -2,10 +2,17 @@ import VkBot from 'node-vk-bot-api';
 import get from 'lodash/get';
 import BotProvider from './BotProvider';
 
-export default class VkBotProvider extends BotProvider {
-  name = 'VkBotProvider';
-  provider = 'vk';
+/**
+ * Docs: ????
+ */
 
+type VkBotConfigType = {
+  token: string;
+};
+
+export default class VkBotProvider extends BotProvider {
+  provider = 'vk';
+  config: VkBotConfigType;
   async init() {
     await super.init();
     if (!this.config.token) throw 'VkBotProvider !config.token';

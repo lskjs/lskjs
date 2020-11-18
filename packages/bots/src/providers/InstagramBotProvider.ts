@@ -1,16 +1,20 @@
 import Bluebird from 'bluebird';
-import { IgApiClient } from '../utils/instagram-private-api';
+import { IgApiClient } from '@buzzguru/instagram-private-api';
 import BotProvider from './BotProvider';
 
 /**
  * Docs: https://github.com/dilame/instagram-private-api
  */
+type InstagramBotConfigType = {
+  username: string;
+  password: string;
+};
 
 export default class InstagramBotProvider extends BotProvider {
-  name = 'InstagramBotProvider';
   provider = 'instagram';
   IgApiClient = IgApiClient;
   eventTypes = [];
+  config: InstagramBotConfigType;
   async init() {
     await super.init();
     if (!this.config.username) throw 'InstagramBotProvider !config.username';
