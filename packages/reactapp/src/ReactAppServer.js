@@ -40,7 +40,6 @@ export default class ReactAppServer extends Module {
   async getUapp({ req, ...params } = {}) {
     const { Uapp } = this;
     const uappReq = collectExpressReq(req);
-    console.log('UAPP_REQ', uappReq);
     const config = cloneDeep(get(this, 'config.client', {}));
     const uapp = new Uapp({
       ...params,
@@ -69,7 +68,6 @@ export default class ReactAppServer extends Module {
     const uapp = await this.getUapp({ req });
     if (!uapp) throw '!uapp';
     const path = req.originalUrl.split('?').shift();
-    console.log('!!ssr', path);
     const page = await uapp.resolve({
       path,
       query: req.query,
