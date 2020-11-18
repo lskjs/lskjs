@@ -32,7 +32,8 @@
     "lint:spellcheck": "./scripts/spellcheck.sh",
     "size": "size-limit",
     "size:why": "size-limit --why",
-    "jest": "jest --coverage --verbose --color",
+    "jest": "jest --verbose --color",
+    "jest:coverage": "jest --coverage --verbose --color",
     "test": "npm run lint && npm run jest",
     "pretty-staged": "pretty-quick --staged"
   },
