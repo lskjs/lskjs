@@ -1,6 +1,5 @@
 /* eslint-disable no-bitwise */
-export default (...args) => {
-  const s = args.length > 0 && args[0] !== undefined ? args[0] : '';
+export default (s: string | number): number => {
   if (typeof s === 'number') return s;
   return Math.abs(
     String(s)

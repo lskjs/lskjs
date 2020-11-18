@@ -1,6 +1,6 @@
 /* global test expect */
 import flatten from 'lodash/flatten';
-import chunkBy from '../src/chunkBy';
+import chunkBy from '../src/chunkBy2';
 
 test('check 0', () => {
   const res = [

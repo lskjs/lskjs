@@ -1,4 +1,5 @@
-var path = require('path');
+const path = require('path');
+
 const user = process.env.USER;
 // const error = user === 'isuvorov' ? 'off' : 'error';
 const error = 'error';
@@ -42,6 +43,11 @@ const rules = {
     },
   ],
   '@typescript-eslint/no-explicit-any': warn, // вырубаю на переходный период, задолбаемся
+  'import/no-extraneous-dependencies': [
+    'error',
+    { devDependencies: false, optionalDependencies: true, peerDependencies: true },
+  ],
+
   // 'react/button-has-type': error,
   // "object-curly-newline": "off" // очень странное правило, почитать почему
 };
