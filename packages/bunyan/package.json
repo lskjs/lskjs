@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bunyan",
-  "version": "1.77.1",
+  "version": "1.77.3",
   "description": "LSK a JSON logging library for node.js services withdout dtrace",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
