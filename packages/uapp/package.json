@@ -40,6 +40,7 @@
     "favico.js": "0.3.10",
     "history": "4.10.1",
     "js-cookie": "2.2.1",
+    "querystring": "^0.2.0",
     "react-dom": "16.8.5",
     "react-fastclick": "3.0.2",
     "universal-router": "8.3.0"
