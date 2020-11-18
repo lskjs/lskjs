@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/event",
-  "version": "1.75.2",
+  "version": "1.76.0",
   "description": "LSK module for event.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -33,8 +33,8 @@
     "@babel/runtime": "7.8.4"
   },
   "devDependencies": {
-    "@lskjs/module": "1.75.2",
-    "@lskjs/utils": "1.75.2",
+    "@lskjs/module": "1.76.0",
+    "@lskjs/utils": "1.76.0",
     "lodash": "4.17.19"
   },
   "peerDependencies": {

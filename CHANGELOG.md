@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.76.0](https://github.com/lskjs/lskjs/compare/v1.75.2...v1.76.0) (2020-11-18)
+
+
+### Features
+
+* **log:** create log2 concept ([60ea079](https://github.com/lskjs/lskjs/commit/60ea07906b5a0525cdcfe7bf5f6f11b616320b38))
+* **log:** stable log2 alpha prototype by ts ([308d38d](https://github.com/lskjs/lskjs/commit/308d38d1494f45b5eaae9bb2b1bc089d4724abc7))
+* **utils:** add cutText ([6935ee7](https://github.com/lskjs/lskjs/commit/6935ee707f599cbd17f77f1f42fb2548625dd5b9))
+* **utils:** refactor assignProps, asyncMapsValues, chunkBy to ts ([5e4e49f](https://github.com/lskjs/lskjs/commit/5e4e49febbc7e971925d4f9703f8db4e37e9bb53))
+
+
+
+
+
 ## [1.75.2](https://github.com/lskjs/lskjs/compare/v1.75.1...v1.75.2) (2020-11-11)
 
 

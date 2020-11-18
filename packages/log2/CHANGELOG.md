@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.76.0](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.75.2...v1.76.0) (2020-11-18)
+
+
+### Features
+
+* **log:** create log2 concept ([60ea079](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/60ea07906b5a0525cdcfe7bf5f6f11b616320b38))
+* **log:** stable log2 alpha prototype by ts ([308d38d](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/308d38d1494f45b5eaae9bb2b1bc089d4724abc7))
+
+
+
+
+
 ## [1.75.2](https://github.com/lskjs/lskjs/tree/master/packages/log/compare/v1.75.1...v1.75.2) (2020-11-11)
 
 **Note:** Version bump only for package @lskjs/log

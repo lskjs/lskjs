@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.76.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.75.2...v1.76.0) (2020-11-18)
+
+
+### Features
+
+* **utils:** add cutText ([6935ee7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/6935ee707f599cbd17f77f1f42fb2548625dd5b9))
+* **utils:** refactor assignProps, asyncMapsValues, chunkBy to ts ([5e4e49f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/5e4e49febbc7e971925d4f9703f8db4e37e9bb53))
+
+
+
+
+
 ## [1.75.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.75.1...v1.75.2) (2020-11-11)
 
 
