@@ -1,40 +1,21 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import { Logger, ILogger } from '@lskjs/log2';
 import Emitter from './emitter';
-
-export interface IEventEmitter {
-  on(event: string, callback: (event: string, ...args: any[]) => void): void;
-  emit(event: string, ...args: any[]): void;
-}
-
-export interface IModuleWithEE {
-  ee: IEventEmitter | null;
-  createEventEmitter(): IEventEmitter;
-}
-
-export interface IModuleWithWorkflow {
-  init(): Promise<void>;
-  run(): Promise<void>;
-  start(): Promise<void>;
-}
-
-export interface IModuleWithLogger {
-  log: ILogger | null;
-  createLogger(): ILogger;
-}
-
-export interface IModule extends IModuleWithLogger, IModuleWithWorkflow, IModuleWithEE {
-  name: string;
-}
+import assignProps from '@lskjs/utils/assignProps';
+import { IEventEmitter, IModule } from './types';
 
 class Module2 implements IModule {
   name: string;
   ee: IEventEmitter | null;
   log: ILogger | null;
   config: {
-    log: any;
+    log?: any;
     [key: string]: any;
   };
+
+  constructor(...props: any[]) {
+    assignProps(this, ...props);
+  }
 
   createLogger(): ILogger {
     const logProps = this.config.log || {};
