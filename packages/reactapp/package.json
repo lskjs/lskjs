@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/reactapp",
-  "version": "1.77.3",
+  "version": "1.78.0",
   "description": "LSK ux subrepo: reactapp",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
-    "@lskjs/module": "1.77.3",
+    "@lskjs/module": "1.78.0",
     "@lskjs/utils": "1.77.3",
     "emotion": "10.0.27",
     "emotion-server": "10.0.27",

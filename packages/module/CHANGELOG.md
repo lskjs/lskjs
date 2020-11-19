@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.78.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.77.3...v1.78.0) (2020-11-19)
+
+
+### Features
+
+* **bots:** start to refactor to ts ([5ba8477](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/5ba847783d4cc30687e8146603315b1f83b1b6c3))
+* **module:** add more types for module2 ([46d13d5](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/46d13d5eeca66523766c17060a467d6d95097278))
+
+
+
+
+
 ## [1.77.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.77.2...v1.77.3) (2020-11-18)
 
 **Note:** Version bump only for package @lskjs/module

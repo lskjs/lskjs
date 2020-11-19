@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sequelize",
-  "version": "1.77.3",
+  "version": "1.78.0",
   "description": "LSK module for sequelize.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "sequelize": "5.21.4"
   },
   "devDependencies": {
-    "@lskjs/module": "1.77.3",
+    "@lskjs/module": "1.78.0",
     "lodash": "4.17.19"
   },
   "peerDependencies": {

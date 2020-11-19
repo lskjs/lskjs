@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.78.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.77.3...v1.78.0) (2020-11-19)
+
+
+### Features
+
+* **bots:** continue refactor to ts ([c097fb5](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/c097fb56a838a5adc56f288b1743096b8d59b8f7))
+* **bots:** start to refactor to ts ([5ba8477](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/5ba847783d4cc30687e8146603315b1f83b1b6c3))
+
+
+
+
+
 ## [1.77.3](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.77.2...v1.77.3) (2020-11-18)
 
 **Note:** Version bump only for package @lskjs/bots
