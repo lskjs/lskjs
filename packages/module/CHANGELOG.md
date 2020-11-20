@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.81.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.80.0...v1.81.0) (2020-11-20)
+
+
+### Features
+
+* **module:** add new stop method and docs ([9a7711f](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/9a7711f77cf24bf8948e95111ded2245f0703dd1))
+
+
+
+
+
 # [1.80.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.79.0...v1.80.0) (2020-11-20)
 
 
