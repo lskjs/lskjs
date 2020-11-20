@@ -11,6 +11,7 @@ abstract class Module2 implements IModule {
   parent?: IModule;
   ee?: IEventEmitter;
   log?: ILogger;
+  debug?: boolean;
   config: {
     log?: any;
     [key: string]: any;
@@ -47,14 +48,14 @@ abstract class Module2 implements IModule {
     this.__initAt = new Date();
     this.name = this.constructor.name;
     if (!this.log) this.log = this.createLogger();
-    this.log.trace('init');
+    if (this.debug) this.log.trace('init');
   }
 
   async run(): Promise<void> {
     if (this.__runAt) return;
     if (!this.__initAt) await this.init();
     this.__runAt = new Date();
-    this.log.trace('run');
+    if (this.debug) this.log.trace('run');
   }
 
   async start(): Promise<void> {
