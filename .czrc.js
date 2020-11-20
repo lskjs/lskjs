@@ -10,14 +10,6 @@ const exclude = variants => path => variants.every(variant => !path.includes(var
 
 module.exports = {
   // prettier-ignore
-  "path": "./node_modules/cz-lerna-changelog",
-  "maxHeaderWidth": 100,
-  "maxLineWidth": 100,
-  "defaultType": "",
-  "defaultScope": "",        
-  "defaultSubject": "",
-  "defaultBody": "",
-  "defaultIssues": "",
   types: [
         { value: 'feat',     name: 'feat:     A new feature' },
         { value: 'fix',      name: 'fix:      A bug fix' },
@@ -38,4 +30,7 @@ module.exports = {
     ],
   allowCustomScopes: true,
   allowBreakingChanges: ['feat', 'fix', 'revert'],
+  rules: {
+    'scope-case': [0, 'always', 'lower-case'],
+  }
 };

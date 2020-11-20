@@ -11,7 +11,6 @@ module.exports = {
 
   github: {
     release: false,
-    // release: true,
     releaseName: 'v${version}',
   },
 

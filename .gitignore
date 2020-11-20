@@ -1,17 +1,26 @@
 .cache
 .idea
 .vscode
+.ssh
 lerna-debug.log
 coverage
+**/.DS_Store
 **/node_modules
 
 build
 release*
 storage
-!**/src/storage
 .env*
+!.env.example.*
 
 packages/*/build
 packages/*/release*
 packages/*/storage
+packages/*/public/index.html
+packages/*/public/footer.html
+packages/*/public/asset-manifest.json
+packages/*/public/precache-manifest*
+packages/*/public/service-worker.js
+packages/*/public/static
 packages/*/.env*
+packages/*/cra/public/assets

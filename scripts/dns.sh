@@ -1,1 +1,8 @@
-DNS_LOG=1 DNS_HOST=api.hi-jay.eu,hijay5.isuvorov.com node scripts/dns.js
+#!/usr/bin/env bash
+if [[ -f ./.env ]]
+then
+  set -o allexport
+  source .env
+  set +o allexport
+fi
+node scripts/dns.js

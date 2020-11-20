@@ -8,7 +8,6 @@ const hosts = process.env.DNS_HOST.split(',');
 const ip = process.env.DNS_IP || address();
 createServer(dns)
   .route(hosts, ip)
-  .route('hijay5.isuvorov.com', '68.183.70.237')
   .on('resolve', data => process.env.DNS_LOG && console.log(`[DNS] ${data.rinfo.address} => ${data.domain}`))
   .listen();
 

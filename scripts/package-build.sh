@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-node $DIR/package-build.js --color always
+node $DIR/package-build.js --color always && \
+if [[ -d ./cra ]]
+then
+  sh ../../scripts/package-cra-build.sh
+fi
 # DIST=${DIST:-build}
 # echo "DIST=$DIST"
 # BUILD_PARAMS=${BUILD_PARAMS:---copy-files}

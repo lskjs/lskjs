@@ -1,5 +1,5 @@
 const json = require(process.cwd() + '/package.json'); // eslint-disable-line
-const baseJson = require(__dirname + '/package-merge.json'); // eslint-disable-line
+const baseJson = require(__dirname + '/assets/package-merge.json'); // eslint-disable-line
 
 const newJson = {
   ...baseJson,
