@@ -1,7 +1,7 @@
 export type AppProps = {
-  _module: string | null;
-  app: AppProps | null;
-  parent: AppProps | null;
+  _module?: boolean | string;
+  app?: AppProps;
+  parent?: AppProps;
 };
 
 export default (target: object, ...arrayAppOrProps: AppProps[]): void => {
