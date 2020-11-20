@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird';
 import { IgApiClient } from '@buzzguru/instagram-private-api';
-import BotProvider from './BotProvider';
+import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: https://github.com/dilame/instagram-private-api
@@ -10,7 +10,7 @@ type InstagramBotConfigType = {
   password: string;
 };
 
-export default class InstagramBotProvider extends BotProvider {
+export default class InstagramBotProvider extends BaseBotProvider {
   provider = 'instagram';
   IgApiClient = IgApiClient;
   eventTypes = [];

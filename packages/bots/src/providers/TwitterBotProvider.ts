@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import Twitter from 'twitter-lite';
-import BotProvider from './BotProvider';
+import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: https://github.com/draftbit/twitter-lite
@@ -13,7 +13,7 @@ type TwitterBotConfigType = {
   accessTokenSecret: string | null;
 };
 
-export default class TwitterBotProvider extends BotProvider {
+export default class TwitterBotProvider extends BaseBotProvider {
   provider = 'twitter';
   Twitter = Twitter;
   config: TwitterBotConfigType;

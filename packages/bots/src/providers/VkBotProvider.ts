@@ -1,6 +1,6 @@
 import VkBot from 'node-vk-bot-api';
 import get from 'lodash/get';
-import BotProvider from './BotProvider';
+import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: ????
@@ -10,7 +10,7 @@ type VkBotConfigType = {
   token: string;
 };
 
-export default class VkBotProvider extends BotProvider {
+export default class VkBotProvider extends BaseBotProvider {
   provider = 'vk';
   config: VkBotConfigType;
   async init() {

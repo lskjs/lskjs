@@ -1,3 +1,3 @@
-export default () => ({
-  DebugPlugin: () => import('./DebugPlugin'),
-});
+export default {
+  DebugBotPlugin: () => import('./DebugBotPlugin'),
+};

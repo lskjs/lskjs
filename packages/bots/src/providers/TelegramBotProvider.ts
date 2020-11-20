@@ -1,10 +1,10 @@
 import Telegraf from 'telegraf';
 import get from 'lodash/get';
 import session from 'telegraf/session';
-import { BotProviderMessageCtx } from '../types';
-import BotProvider from './BotProvider';
+import { IBotProviderMessageCtx } from '../types';
+import BaseBotProvider from './BaseBotProvider';
 
-export type TelegramBotProviderMessageCtx = BotProviderMessageCtx;
+export type TelegramIBotProviderMessageCtx = IBotProviderMessageCtx;
 
 /**
  * Docs: https://telegraf.js.org/#/
@@ -13,8 +13,9 @@ export type TelegramBotProviderMessageCtx = BotProviderMessageCtx;
 type TelegramBotConfigType = {
   token: string;
 };
+    
 
-export default class TelegramBotProvider extends BotProvider {
+export default class TelegramBotProvider extends BaseBotProvider {
   provider = 'telegram';
   Telegraf = Telegraf;
   eventTypes = [
@@ -42,44 +43,44 @@ export default class TelegramBotProvider extends BotProvider {
     await this.client.launch();
     await this.client.startPolling();
   }
-  getMessage(ctx: TelegramBotProviderMessageCtx): TelegramBotProviderMessageCtx {
+  getMessage(ctx: TelegramIBotProviderMessageCtx): TelegramIBotProviderMessageCtx {
     if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
   }
-  getMessageUserId(ctx: TelegramBotProviderMessageCtx): number {
+  getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number {
     const message = this.getMessage(ctx);
     if (get(message, 'from.id')) return get(message, 'from.id');
     return null;
   }
-  getMessageChatId(ctx: TelegramBotProviderMessageCtx): number {
+  getMessageChatId(ctx: TelegramIBotProviderMessageCtx): number {
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     return null;
   }
-  getMessageTargetId(ctx: TelegramBotProviderMessageCtx): number {
+  getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number {
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     if (get(message, 'from.id')) return get(message, 'from.id');
-    return message;
+    return null;
   }
-  getReplyMessageId(ctx: TelegramBotProviderMessageCtx): number {
+  getReplyMessageId(ctx: TelegramIBotProviderMessageCtx): number {
     const message = this.getMessage(ctx);
     return message.message_id;
   }
-  getMessageText(ctx: TelegramBotProviderMessageCtx): string {
+  getMessageText(ctx: TelegramIBotProviderMessageCtx): string {
     if (typeof ctx === 'string') return ctx;
     if (get(ctx, 'message.caption')) return get(ctx, 'message.caption');
     if (get(ctx, 'message.text')) return get(ctx, 'message.text');
     return get(ctx, 'text');
   }
-  isMessageCommand(ctx: TelegramBotProviderMessageCtx, command: RegExp | string): boolean {
+  isMessageCommand(ctx: TelegramIBotProviderMessageCtx, command: RegExp | string): boolean {
     return this.isMessageStartsWith(ctx, `/${command}`);
   }
-  getMessageDate(ctx: TelegramBotProviderMessageCtx): Date {
+  getMessageDate(ctx: TelegramIBotProviderMessageCtx): Date {
     const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
   }
-  getMessageType(ctx: TelegramBotProviderMessageCtx): string {
+  getMessageType(ctx: TelegramIBotProviderMessageCtx): string {
     const message = this.getMessage(ctx);
     if (message.photo) return 'photo';
     if (message.sticker) return 'sticker';

@@ -1,7 +1,7 @@
 import { Client, ClientOptions } from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
 import get from 'lodash/get';
-import BotProvider from './BotProvider';
+import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: ????
@@ -12,7 +12,7 @@ export type WhatsappBotConfigType = ClientOptions;
 //   session: string;
 // };
 
-export default class WhatsappBotProvider extends BotProvider {
+export default class WhatsappBotProvider extends BaseBotProvider {
   provider = 'whatsapp';
   eventTypes = [
     'qr',

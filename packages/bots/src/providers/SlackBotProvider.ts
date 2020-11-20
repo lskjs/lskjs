@@ -1,5 +1,5 @@
 import { App as SlackApp } from '@slack/bolt';
-import BotProvider from './BotProvider';
+import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: https://api.slack.com/bot-users
@@ -11,7 +11,7 @@ type SlackBotConfigType = {
   signingSecret: string;
 };
 
-export default class SlackBotProvider extends BotProvider {
+export default class SlackBotProvider extends BaseBotProvider {
   provider = 'slack';
   SlackApp = SlackApp;
   eventTypes = [

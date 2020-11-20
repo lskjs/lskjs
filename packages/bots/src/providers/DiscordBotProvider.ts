@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import BotProvider from './BotProvider';
+import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: https://discord.js.org/#/docs/main/stable/general/welcome
@@ -9,7 +9,7 @@ type DiscordBotConfigType = {
   token: string;
 };
 
-export default class DiscordBotProvider extends BotProvider {
+export default class DiscordBotProvider extends BaseBotProvider {
   provider = 'discord';
   Discord = Discord;
   eventTypes = ['message', 'guildMemberAdd']; // 'ready'

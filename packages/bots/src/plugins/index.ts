@@ -1,1 +1,2 @@
-export { default as DebugPlugin } from './DebugPlugin';
+export { BaseBotPlugin } from './BaseBotPlugin';
+export { DebugBotPlugin } from './DebugBotPlugin';

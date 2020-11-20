@@ -1,29 +1,25 @@
-import BotPlugin from './BotPlugin';
-import { IBotProvider } from '../types';
+import { BaseBotPlugin } from './BaseBotPlugin';
+import { IBotProvider, IBotProviderMessageCtx } from '../types';
 
-export class DebugPlugin extends BotPlugin {
-  async runBot(bot: IBotProvider, name: string): Promise<void> {
-    await this.runLogger(bot, name);
-    await this.runPing(bot, name);
-    await this.runChatId(bot, name);
+export class DebugBotPlugin extends BaseBotPlugin {
+  async runBot(bot: IBotProvider): Promise<void> {
+    await this.runLogger(bot);
+    await this.runPing(bot);
+    await this.runChatId(bot);
   }
-  async runPing(bot: IBotProvider, name: string): Promise<void> {
-    bot.on('message', (ctx) => {
+  async runPing(bot: IBotProvider): Promise<void> {
+    bot.on('message', (ctx: IBotProviderMessageCtx) => {
       if (!bot.isMessageCommand(ctx, 'ping')) return null;
       return bot.reply(ctx, `pong`);
     });
   }
-  async runChatId(bot: IBotProvider, name: string): Promise<void> {
-    bot.on('message', (ctx) => {
-      if (bot.provider === 'telegram' && bot.isMessageCommands(ctx, ['id', 'ид'])) {
-        bot.reply(ctx, ctx.message.reply_to_message ? ctx.message.reply_to_message.from.id : ctx.message.from.id);
-        return;
-      }
-      if (bot.provider === 'vk' && bot.isMessageCommands(ctx, ['id', 'ид'])) {
+  async runChatId(bot: IBotProvider): Promise<void> {
+    bot.on('message', (ctx: IBotProviderMessageCtx) => {
+      if (!bot.isMessageCommands(ctx, ['id', 'ид', 'chatid', 'чат'])) return;
+      if (bot.provider === 'vk') {
         ctx.reply(ctx.message.reply_message ? ctx.message.reply_message.from_id : ctx.message.from_id);
-        return;
       }
-      if (bot.provider === 'telegram' && bot.isMessageCommands(ctx, ['chatid', 'чат'])) {
+      if (bot.provider === 'telegram') {
         bot.reply(
           ctx,
           [ctx.message.from && `UserId: ${ctx.message.from.id}`, ctx.message.chat && `ChatId: ${ctx.message.chat.id}`]
@@ -33,7 +29,7 @@ export class DebugPlugin extends BotPlugin {
       }
     });
   }
-  async runLogger(bot: IBotProvider, botName: string): Promise<void> {
+  async runLogger(bot: IBotProvider): Promise<void> {
     const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = this.app.models;
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
@@ -62,7 +58,7 @@ export class DebugPlugin extends BotPlugin {
           }
 
           await BotsTelegramMessageModel.create({
-            botId: bot.getBotId() || botName,
+            botId: bot.getBotId(),
             telegramUserId,
             chatUserId,
             type: messageType,
@@ -84,4 +80,4 @@ export class DebugPlugin extends BotPlugin {
   }
 }
 
-export default DebugPlugin;
+export default DebugBotPlugin;

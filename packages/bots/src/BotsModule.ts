@@ -3,10 +3,10 @@ import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
 import Module from '@lskjs/module/2';
 import providers from './providers/async';
-import { IBotProvider, IBotPlugin } from './types';
+import plugins from './plugins/async';
+import { IBotProvider, IBotPlugin, AsyncProvidersType, AsyncPluginsType } from './types';
 
 export default class BotsModule extends Module {
-  app: any;
   providers: AsyncProvidersType = providers;
   plugins: AsyncPluginsType = {};
   bots: {
@@ -20,10 +20,7 @@ export default class BotsModule extends Module {
 
   async getPlugins() {
     return {
-      DebugPlugin: () => import('./plugins/DebugPlugin'),
-      // CatsPlugin: () => import('./plugins/CatsPlugin'),
-      // ExamplePlugin: () => import('./plugins/ExamplePlugin'),
-      // PortalPlugin: () => import('./plugins/PortalPlugin'),
+      ...plugins,
       ...(this.plugins || {}),
     };
   }

@@ -3,7 +3,9 @@ import Module from '@lskjs/module/2';
 import { IBotPlugin, IBotProvider } from '../types';
 
 // extends Module
-export class BotPlugin extends Module implements IBotPlugin {
+export class BaseBotPlugin extends Module implements IBotPlugin {
+  providers = [];
+  bots = {};
   // abstract
   canRunBot(bot: IBotProvider): boolean {
     return false;
@@ -41,4 +43,4 @@ export class BotPlugin extends Module implements IBotPlugin {
   }
 }
 
-export default BotPlugin;
+export default BaseBotPlugin;
