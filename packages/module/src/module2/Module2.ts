@@ -2,12 +2,15 @@
 import { Logger, ILogger } from '@lskjs/log2';
 import Emitter from './emitter';
 import assignProps from '@lskjs/utils/assignProps';
-import { IEventEmitter, IModule } from './types';
+import { IEventEmitter, IModule, IApp} from './types';
 
 class Module2 implements IModule {
   name: string;
-  ee: IEventEmitter | null;
-  log: ILogger | null;
+  _module?: boolean | string;
+  app?: IApp;
+  parent?: IModule;
+  ee?: IEventEmitter;
+  log?: ILogger;
   config: {
     log?: any;
     [key: string]: any;
