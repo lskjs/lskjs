@@ -40,10 +40,33 @@ export interface IModuleWithСonfig {
     [name: string]: any;
   };
 }
+
+/**
+ * ворфлоу работы модуля
+ */
 export interface IModuleWithWorkflow {
+  /**
+   * init -- по сути асинхронный конструктор, следует вызывать сразу после new, и дожидаться перед использованием
+   */
   init(): Promise<void>;
+  /**
+   * run -- запуск основных функций класса
+   * если у класса не сделан init, он сделает
+   * оперируем с переменными, запросы не делаем
+   */
   run(): Promise<void>;
+  /**
+   * start -- deprecated fallback
+   * для старых приложений, запускает init потом run
+   * начинаем делаеть запросы и тяжелые операции
+   * так же уже можно общаться с соденими модулями или дочкам
+   */
   start(): Promise<void>;
+  /**
+   * stop -- grace остановка класса
+   * выключаем все подключение и готовимся умирать
+   */
+  stop(): Promise<void>;
 }
 
 export interface IModuleWithLogger extends IModuleWithСonfig {

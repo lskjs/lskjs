@@ -62,6 +62,10 @@ abstract class Module2 implements IModule {
     if (!this.__initAt) await this.init();
     if (!this.__runAt) await this.run();
   }
+
+  async stop(): Promise<void> {
+    // 
+  }
 }
 
 export default Module2;
