@@ -10,3 +10,4 @@ README.md
 CHANGELOG.md
 .all-contributorsrc
 .env.*
+scripts/release-after-hook.sh
