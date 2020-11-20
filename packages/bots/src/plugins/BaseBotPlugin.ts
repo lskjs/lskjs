@@ -3,7 +3,7 @@ import Module from '@lskjs/module/2';
 import { IBotPlugin, IBotProvider } from '../types';
 
 // extends Module
-export class BaseBotPlugin extends Module implements IBotPlugin {
+export abstract class BaseBotPlugin extends Module implements IBotPlugin {
   providers = [];
   bots = {};
   // abstract

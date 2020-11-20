@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import { Logger, ILogger } from '@lskjs/log2';
-import Emitter from './emitter';
 import assignProps from '@lskjs/utils/assignProps';
-import { IEventEmitter, IModule, IApp} from './types';
+import Emitter from './emitter';
+import { IEventEmitter, IModule, IApp } from './types';
 
-class Module2 implements IModule {
+abstract class Module2 implements IModule {
   name: string;
   _module?: boolean | string;
   app?: IApp;

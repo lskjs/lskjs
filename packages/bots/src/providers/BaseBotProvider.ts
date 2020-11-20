@@ -4,7 +4,7 @@ import some from 'lodash/some';
 import Module from '@lskjs/module/2';
 import { IBotPlugin, IBotProvider, IBotProviderMessageCtx, IBotProviderCommand } from '../types';
 
-export class BaseBotProvider extends Module implements IBotProvider {
+export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
   key: string | null = null;
   provider: string;

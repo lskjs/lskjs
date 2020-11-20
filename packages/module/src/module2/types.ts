@@ -35,25 +35,30 @@ export interface IModuleWithEE extends IEventEmitter {
   createEventEmitter(): IEventEmitter;
 }
 
+export interface IModuleWithСonfig {
+  config?: {
+    [name: string]: any;
+  };
+}
 export interface IModuleWithWorkflow {
   init(): Promise<void>;
   run(): Promise<void>;
   start(): Promise<void>;
 }
 
-export interface IModuleWithLogger {
+export interface IModuleWithLogger extends IModuleWithСonfig {
   log?: ILogger;
   createLogger(): ILogger;
+  config?: {
+    log?: any;
+    [name: string]: any;
+  };
 }
 
 export interface IModuleWithCtx {
   _module?: boolean | string;
   app?: IApp;
   parent?: IModule;
-  config?: {
-    log?: any;
-    [name: string]: any;
-  };
 }
 
 export interface IModule extends IModuleWithLogger, IModuleWithWorkflow, IModuleWithEE, IModuleWithCtx {
