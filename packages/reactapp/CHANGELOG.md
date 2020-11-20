@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.78.0...v1.79.0) (2020-11-20)
+
+**Note:** Version bump only for package @lskjs/reactapp
+
+
+
+
+
 # [1.78.0](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v1.77.3...v1.78.0) (2020-11-19)
 
 **Note:** Version bump only for package @lskjs/reactapp

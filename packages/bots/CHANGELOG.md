@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.78.0...v1.79.0) (2020-11-20)
+
+
+### Features
+
+* **bots:** complete migration to ts ([3084fc8](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/3084fc89e49df68dac332c7b82b07c81b57e4ffa))
+
+
+
+
+
 # [1.78.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.77.3...v1.78.0) (2020-11-19)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/lskjs/lskjs/compare/v1.78.0...v1.79.0) (2020-11-20)
+
+
+### Bug Fixes
+
+* **module:** fix types ([d1e8d44](https://github.com/lskjs/lskjs/commit/d1e8d44a3de1b3c7a0af552d326c6f080adc5dea))
+* **utils:** assignProps more types ([12dd1c3](https://github.com/lskjs/lskjs/commit/12dd1c353f56df4aad9ea589dd91c1139f07d0d6))
+
+
+### Features
+
+* **bots:** complete migration to ts ([3084fc8](https://github.com/lskjs/lskjs/commit/3084fc89e49df68dac332c7b82b07c81b57e4ffa))
+
+
+
+
+
 # [1.78.0](https://github.com/lskjs/lskjs/compare/v1.77.3...v1.78.0) (2020-11-19)
 
 

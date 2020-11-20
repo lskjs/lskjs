@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.78.0...v1.79.0) (2020-11-20)
+
+
+### Bug Fixes
+
+* **utils:** assignProps more types ([12dd1c3](https://github.com/lskjs/ux/tree/master/packages/utils/commit/12dd1c353f56df4aad9ea589dd91c1139f07d0d6))
+
+
+
+
+
 ## [1.77.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.77.2...v1.77.3) (2020-11-18)
 
 **Note:** Version bump only for package @lskjs/utils
