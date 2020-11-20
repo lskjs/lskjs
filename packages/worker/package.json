@@ -12,7 +12,11 @@
     "worker"
   ],
   "scripts": {
+    "start": "../../scripts/package-start.sh",
     "dev": "npm run watch",
+    "dev:server": "../../scripts/package-dev-server.sh",
+    "dev:cra": "../../scripts/package-dev-cra.sh",
+    "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
     "bootstrap": "../../scripts/package-bootstrap.sh",
@@ -27,8 +31,11 @@
     "release": "../../scripts/package-release.sh",
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
-    "styleguide": "../../scripts/package-styleguide.sh"
+    "styleguide": "../../scripts/package-styleguide.sh",
+    "i18": "../../scripts/package-i18.sh",
+    "clear": "../../scripts/package-clear.sh"
   },
+  "dependencies": {},
   "devDependencies": {
     "@lskjs/db": "1.77.3",
     "@lskjs/log": "1.79.0",

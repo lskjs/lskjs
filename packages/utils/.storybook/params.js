@@ -7,7 +7,7 @@ const req = require.context(
 export default {
   modules: req.keys().map(req),
   options: {
-    name: 'LskGeneral',
+    name: 'LSK.js',
   },
   knobs: false,
 };

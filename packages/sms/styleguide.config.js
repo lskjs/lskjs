@@ -21,12 +21,7 @@ function components() {
 module.exports = {
   styleguideDir: 'release-styleguide',
   sections: [
-    // {
-    //   name: 'Введение',
-    //   content: '../../docs/intro.md',
-    // },
     {
-      // name: 'UI компоненты',
       components,
       ignore: [
         '**/__tests__/**',
@@ -69,26 +64,3 @@ module.exports = {
     },
   },
 };
-
-// module.exports = {
-//   components: 'src/**/*.jsx',
-//   styleguideDir: 'release-styleguide'
-//   webpackConfig: {
-//     resolve: {
-//       extensions: ['.ts', '.tsx', '.js', '.jsx'],
-//     },
-//     module: {
-//       rules: [
-//         {
-//           test: /\.js|.ts|.tsx|.jsx?$/,
-//           exclude: /node_modules/,
-//           loader: 'babel-loader',
-//         },
-//         {
-//           test: /\.css$/,
-//           use: ['style-loader', 'css-loader'],
-//         },
-//       ],
-//     },
-//   },
-// };

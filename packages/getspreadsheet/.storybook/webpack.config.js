@@ -10,6 +10,5 @@ module.exports = async ({ config, mode }) => {
     babelrc.plugins.splice(transformRuntimeIndex, 1);
   }
   config.module.rules[0].use[0].options.plugins = babelrc.plugins;
-  // config.module.rules[0].use[0].options.plugins.push('emotion');
   return config;
 };

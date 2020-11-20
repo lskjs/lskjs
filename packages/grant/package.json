@@ -12,8 +12,11 @@
     "grant"
   ],
   "scripts": {
-    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
+    "start": "../../scripts/package-start.sh",
     "dev": "npm run watch",
+    "dev:server": "../../scripts/package-dev-server.sh",
+    "dev:cra": "../../scripts/package-dev-cra.sh",
+    "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
     "bootstrap": "../../scripts/package-bootstrap.sh",
@@ -28,11 +31,14 @@
     "release": "../../scripts/package-release.sh",
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
-    "styleguide": "../../scripts/package-styleguide.sh"
+    "styleguide": "../../scripts/package-styleguide.sh",
+    "i18": "../../scripts/package-i18.sh",
+    "clear": "../../scripts/package-clear.sh",
+    "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
-    "@lskjs/module": "1.78.0",
+    "@lskjs/module": "1.81.0",
     "@lskjs/server-api": "1.79.0",
     "@lskjs/utils": "1.79.0",
     "async-mutex": "^0.2.4",

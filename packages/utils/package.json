@@ -10,7 +10,11 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
   "keywords": [],
   "scripts": {
+    "start": "../../scripts/package-start.sh",
     "dev": "../../scripts/package-watch.sh",
+    "dev:server": "../../scripts/package-dev-server.sh",
+    "dev:cra": "../../scripts/package-dev-cra.sh",
+    "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
     "bootstrap": "../../scripts/package-bootstrap.sh",
@@ -26,6 +30,8 @@
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh",
+    "i18": "../../scripts/package-i18.sh",
+    "clear": "../../scripts/package-clear.sh",
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "postinstall2": "node -e \"try{require('./postinstall')}catch(e){}\""
   },

@@ -10,7 +10,11 @@
   "repository": "https://github.com/lskjs/ux/tree/master/packages/reactapp",
   "keywords": [],
   "scripts": {
+    "start": "../../scripts/package-start.sh",
     "dev": "npm run jest test/active -- --watch",
+    "dev:server": "../../scripts/package-dev-server.sh",
+    "dev:cra": "../../scripts/package-dev-cra.sh",
+    "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",
     "postversion": "npm run release",
     "lint:js": "../../scripts/package-lint-js.sh",
     "bootstrap": "../../scripts/package-bootstrap.sh",
@@ -26,10 +30,12 @@
     "release:docs": "../../scripts/package-release-docs.sh",
     "storybook": "../../scripts/package-storybook.sh",
     "styleguide": "../../scripts/package-styleguide.sh",
+    "i18": "../../scripts/package-i18.sh",
+    "clear": "../../scripts/package-clear.sh",
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
-    "@lskjs/module": "1.78.0",
+    "@lskjs/module": "1.81.0",
     "@lskjs/utils": "1.79.0",
     "emotion": "10.0.27",
     "emotion-server": "10.0.27",
