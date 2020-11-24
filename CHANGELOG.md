@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.0...v1.81.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* **utils:** assignProps error ([3cc534e](https://github.com/isuvorov/lib-starter-kit/commit/3cc534e4fdaa219fdb899552485104ac2243927b))
+
+
+
+
+
 # [1.81.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.80.0...v1.81.0) (2020-11-20)
 
 

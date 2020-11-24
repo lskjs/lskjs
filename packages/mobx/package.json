@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mobx",
-  "version": "1.79.0",
+  "version": "1.81.1",
   "description": "LSK module for mobx.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -36,9 +36,8 @@
     "i18": "../../scripts/package-i18.sh",
     "clear": "../../scripts/package-clear.sh"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@lskjs/utils": "1.79.0",
+    "@lskjs/utils": "1.81.1",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.19",

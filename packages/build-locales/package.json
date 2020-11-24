@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "1.79.0",
+  "version": "1.81.1",
   "description": "LSK build-locales.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,8 +34,8 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/getspreadsheet": "1.77.3",
-    "@lskjs/utils": "1.79.0",
+    "@lskjs/getspreadsheet": "1.81.1",
+    "@lskjs/utils": "1.81.1",
     "bluebird": "3.7.2",
     "csv-parse": "4.8.5",
     "csvtojson": "2.0.10",
@@ -45,7 +45,6 @@
     "mkdirp": "1.0.3",
     "rimraf": "3.0.2"
   },
-  "devDependencies": {},
   "bin": {
     "build-locales": "./bin/build-locales.js"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/launcher",
-  "version": "1.77.3",
+  "version": "1.81.1",
   "description": "LSK Launcher.",
   "author": "Andrey Kondalov <i@yukio.ru>",
   "license": "MIT",
@@ -32,7 +32,5 @@
     "styleguide": "../../scripts/package-styleguide.sh",
     "i18": "../../scripts/package-i18.sh",
     "clear": "../../scripts/package-clear.sh"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+  }
 }
