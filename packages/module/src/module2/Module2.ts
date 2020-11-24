@@ -15,7 +15,7 @@ abstract class Module2 implements IModule {
   config: {
     log?: any;
     [key: string]: any;
-  };
+  } = {};
 
   constructor(...props: any[]) {
     assignProps(this, ...props);
