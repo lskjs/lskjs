@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sh",
-  "version": "1.81.1",
+  "version": "1.81.3",
   "description": "LSK ux subrepo: sh",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,6 +34,6 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "1.81.1"
+    "@lskjs/utils": "1.81.3"
   }
 }
