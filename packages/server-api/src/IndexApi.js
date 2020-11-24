@@ -35,10 +35,6 @@ export default class IndexApi extends Api {
     }
     return res;
   }
-  config() {
-    if (!__DEV__) return {};
-    return this.app.config;
-  }
   env(req) {
     return this.app.getEnv(req);
   }
@@ -51,7 +47,6 @@ export default class IndexApi extends Api {
       '/env': ::this.env,
       '/env.json': ::this.env,
       '/env.js': ::this.envjs,
-      '/config': ::this.config,
       '/healthcheck': ::this.healthcheck,
     };
   }
