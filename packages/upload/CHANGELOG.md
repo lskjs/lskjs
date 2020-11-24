@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.4](https://github.com/lskjs/lskjs/tree/master/packages/upload/compare/v1.81.3...v1.81.4) (2020-11-24)
+
+**Note:** Version bump only for package @lskjs/upload
+
+
+
+
+
 ## [1.81.3](https://github.com/lskjs/lskjs/tree/master/packages/upload/compare/v1.81.2...v1.81.3) (2020-11-24)
 
 **Note:** Version bump only for package @lskjs/upload

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "1.81.3",
+  "version": "1.81.4",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -39,7 +39,7 @@
   "dependencies": {
     "@babel/runtime": "7.8.4",
     "@lskjs/module": "1.81.3",
-    "@lskjs/server-api": "1.81.3",
+    "@lskjs/server-api": "1.81.4",
     "@lskjs/utils": "1.81.3",
     "async-mutex": "^0.2.4",
     "bluebird": "^3.7.2"

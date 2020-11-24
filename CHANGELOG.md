@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.4](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.3...v1.81.4) (2020-11-24)
+
+
+### Bug Fixes
+
+* **server-api:** remove config from IndexApi ([de00b9e](https://github.com/isuvorov/lib-starter-kit/commit/de00b9eb908d932b89edb8b0702a955db4d7b1e8))
+
+
+
+
+
 ## [1.81.3](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.2...v1.81.3) (2020-11-24)
 
 **Note:** Version bump only for package lskjs
