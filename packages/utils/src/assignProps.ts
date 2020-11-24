@@ -5,7 +5,7 @@ export type AppProps = {
 };
 
 export default (target: object, ...arrayAppOrProps: AppProps[]): void => {
-  let props: AppProps;
+  let props: AppProps = {};
   arrayAppOrProps.forEach((appOrProps) => {
     if (appOrProps && appOrProps._module) {
       if (appOrProps._module === 'app') {
