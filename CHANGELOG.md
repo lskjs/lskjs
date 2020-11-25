@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.6](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.5...v1.81.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* **bots:** strange ts behaviour ([9e20d06](https://github.com/isuvorov/lib-starter-kit/commit/9e20d06d2f941833734ad96af800d92641905688))
+* **module:** event emitter on ts ([e03ee6a](https://github.com/isuvorov/lib-starter-kit/commit/e03ee6a39aff47eb57a158e1e22f5c7630e065b6))
+
+
+
+
+
 ## [1.81.5](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.4...v1.81.5) (2020-11-25)
 
 
