@@ -1,6 +1,7 @@
 import Telegraf from 'telegraf';
 import get from 'lodash/get';
 import session from 'telegraf/session';
+import assignProps from '@lskjs/utils/assignProps';
 import { IBotProviderMessageCtx } from '../types';
 import BaseBotProvider from './BaseBotProvider';
 
@@ -30,6 +31,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
     'edited_channel_post',
   ];
   config: TelegramBotConfigType;
+
+  constructor(...props: any[]) {
+    super(...props)
+    assignProps(this, ...props);
+  }
+
   async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'TelegramBotProvider !config.token';

@@ -52,10 +52,13 @@ export default class BotsModule extends Module {
         return;
       }
     }
+    // console.log('this.app.config.bots', this.app.config.bots)
+    // console.log(this.config)
     const { assignProviders = true, providers: providersConfigs, plugins: pluginsConfig } = this.config;
     const providers = await this.getProviders(); // eslint-disable-line no-shadow
     this.log.debug('providers', Object.keys(providers));
     this.bots = await asyncMapValues(providersConfigs, async (config, key) => {
+      // this.log.info({key, config})
       const { provider } = config;
       if (!provider) {
         this.log.warn(`Empty provider for bot '${key}'`);
@@ -67,7 +70,9 @@ export default class BotsModule extends Module {
       }
       const Provider = await importFn(providers[provider]);
       const bot = new Provider({ app: this.app, botsModule: this, config, key });
+      // this.log.info(111, bot.config, !!bot.app, bot.key)
       await bot.init();
+      // this.log.info(222, bot.config, !!bot.app, bot.key)
       return bot;
     });
     this.log.debug('bots', Object.keys(this.bots));
