@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import { Logger, ILogger } from '@lskjs/log2';
+import get from 'lodash/get';
 import assignProps from '@lskjs/utils/assignProps';
 import Emitter from './emitter';
 import { IEventEmitter, IModule, IApp } from './types';
@@ -15,14 +16,14 @@ abstract class Module2 implements IModule {
   config: {
     log?: any;
     [key: string]: any;
-  } = {};
+  };
 
   constructor(...props: any[]) {
     assignProps(this, ...props);
   }
 
   createLogger(): ILogger {
-    const logProps = this.config.log || {};
+    const logProps = get(this, 'config.log', {});
     return new Logger({ ...logProps, name: this.name });
   }
 

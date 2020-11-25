@@ -54,6 +54,7 @@ export default class BotsModule extends Module {
     }
     const { assignProviders = true, providers: providersConfigs, plugins: pluginsConfig } = this.config;
     const providers = await this.getProviders(); // eslint-disable-line no-shadow
+    this.log.debug('providers', Object.keys(providers));
     this.bots = await asyncMapValues(providersConfigs, async (config, key) => {
       const { provider } = config;
       if (!provider) {
