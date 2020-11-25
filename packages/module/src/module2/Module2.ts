@@ -2,7 +2,7 @@
 import { Logger, ILogger } from '@lskjs/log2';
 import get from 'lodash/get';
 import assignProps from '@lskjs/utils/assignProps';
-import Emitter from './emitter';
+import createEventEmitter from './createEventEmitter';
 import { IEventEmitter, IModule, IApp } from './types';
 
 abstract class Module2 implements IModule {
@@ -28,7 +28,7 @@ abstract class Module2 implements IModule {
   }
 
   createEventEmitter(): IEventEmitter {
-    return Emitter();
+    return createEventEmitter();
   }
 
   on(event: string, callback: (event: string, ...args: any[]) => void): void {

@@ -2,9 +2,10 @@ import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
 import Module from '@lskjs/module/2';
+import { EventEmitter } from 'events';
 import providers from './providers/async';
 import plugins from './plugins/async';
-import { IBotProvider, IBotPlugin, AsyncProvidersType, AsyncPluginsType } from './types';
+import { IBotProvider, AsyncProvidersType, AsyncPluginsType } from './types';
 
 export default class BotsModule extends Module {
   providers: AsyncProvidersType = providers;
@@ -18,12 +19,17 @@ export default class BotsModule extends Module {
     assignProps(this, ...props);
   }
 
+  createEventEmitter() {
+    return new EventEmitter();
+  }
+
   async getPlugins() {
     return {
       ...plugins,
       ...(this.plugins || {}),
     };
   }
+
   async getProviders() {
     return {
       ...providers,
