@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.5](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.4...v1.81.5) (2020-11-25)
+
+
+### Bug Fixes
+
+* **module:** remove default config object ([d1b6f88](https://github.com/isuvorov/lib-starter-kit/commit/d1b6f8806c046e145c131ccf11393aa773c16b1a))
+
+
+
+
+
 ## [1.81.4](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.3...v1.81.4) (2020-11-24)
 
 
