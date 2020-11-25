@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.7](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.6...v1.81.7) (2020-11-25)
+
+
+### Bug Fixes
+
+* **module:** createEventEmitter ([a10904c](https://github.com/isuvorov/lib-starter-kit/commit/a10904cfa639be73d00ab4a539f3e85b8d36f271))
+
+
+
+
+
 ## [1.81.6](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.5...v1.81.6) (2020-11-25)
 
 
