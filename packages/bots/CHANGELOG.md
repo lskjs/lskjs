@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.9](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.81.8...v1.81.9) (2020-11-26)
+
+
+### Bug Fixes
+
+* **bots:** plugins array ([4012b5f](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/4012b5f2c2271b6676a0b871defec8993f1bd5e3))
+
+
+
+
+
 ## [1.81.8](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.81.7...v1.81.8) (2020-11-26)
 
 
