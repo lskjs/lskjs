@@ -33,7 +33,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   config: TelegramBotConfigType;
 
   constructor(...props: any[]) {
-    super(...props)
+    super(...props);
     assignProps(this, ...props);
   }
 
@@ -43,7 +43,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     this.client = new Telegraf(this.config.token);
     this.client.use(session());
   }
-  async run() {
+  async run(): Promise<void> {
     await super.run();
     if (!this.client) return;
     await this.initEventEmitter();

@@ -9,7 +9,7 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
   key: string | null = null;
   provider: string;
-  plugins: Array<IBotPlugin>;
+  plugins: Array<IBotPlugin> = [];
   eventTypes: Array<string>;
   client: any;
   config;
@@ -33,7 +33,8 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   }
 
   async runPlugin(plugin: IBotPlugin): Promise<void> {
-    (this.plugins || []).push(plugin);
+    // if (!this.plugins) this.plugins = []
+    this.plugins.push(plugin);
   }
 
   getBotId(): string | null {
