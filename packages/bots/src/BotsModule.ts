@@ -106,7 +106,7 @@ export default class BotsModule extends Module {
     await asyncMapValues(this.plugins, (plugin) => plugin.run());
     this.log.debug(
       'bots x plugins',
-      await asyncMapValues(this.bots, async (bot) => bot.plugins.map((plugin) => plugin.name)),
+      await asyncMapValues(this.bots, async (bot) => (bot.plugins || []).map((plugin) => plugin.name)),
     );
   }
 }

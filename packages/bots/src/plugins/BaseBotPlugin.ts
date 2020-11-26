@@ -1,15 +1,24 @@
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Module from '@lskjs/module/2';
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
+import assignProps from '@lskjs/utils/assignProps';
 import { IBotPlugin, IBotProvider } from '../types';
 
 // extends Module
 export abstract class BaseBotPlugin extends Module implements IBotPlugin {
   providers = [];
   bots = {};
+  debug = tryJSONparse(process.env.DEBUG_BOTS, false);
+
+  constructor(...props: any[]) {
+    super(...props)
+    assignProps(this, ...props);
+  }
+  
   // abstract
   canRunBot(bot: IBotProvider): boolean {
-    return false;
-    // return !(Array.isArray(this.providers) && !this.providers.includes(bot.provider));
+    // return false;
+    return !(Array.isArray(this.providers) && !this.providers.includes(bot.provider));
   }
 
   async initBot(bot: IBotProvider, name: string): Promise<void> {
@@ -31,7 +40,9 @@ export abstract class BaseBotPlugin extends Module implements IBotPlugin {
     // abstract
   }
   async runBots(): Promise<void> {
+    if (this.debug) this.log.trace('runBots', Object.keys(this.bots));
     await asyncMapValues(this.bots, async (bot: IBotProvider, name: string) => {
+      if (this.debug) this.log.trace('this.canRunBot(bot)', name, this.canRunBot(bot));
       if (!this.canRunBot(bot)) return;
       await this.runBot(bot, name);
       await bot.runPlugin(this, name);

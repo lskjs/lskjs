@@ -1,7 +1,13 @@
+import assignProps from '@lskjs/utils/assignProps';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
 
 export class DebugBotPlugin extends BaseBotPlugin {
+  constructor(...props: any[]) {
+    super(...props);
+    assignProps(this, ...props);
+  }
+
   async runBot(bot: IBotProvider): Promise<void> {
     await this.runLogger(bot);
     await this.runPing(bot);

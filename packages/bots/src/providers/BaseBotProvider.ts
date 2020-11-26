@@ -2,16 +2,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import some from 'lodash/some';
 import Module from '@lskjs/module/2';
+import assignProps from '@lskjs/utils/assignProps';
 import { IBotPlugin, IBotProvider, IBotProviderMessageCtx, IBotProviderCommand } from '../types';
 
 export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
   key: string | null = null;
   provider: string;
-  plugins: Array<IBotPlugin> = [];
-  eventTypes: Array<string> = [];
+  plugins: Array<IBotPlugin>;
+  eventTypes: Array<string>;
   client: any;
-  config: {};
+  config;
+
+  constructor(...props: any[]) {
+    super(...props)
+    assignProps(this, ...props);
+  }
 
   async init(): Promise<void> {
     await super.init();
@@ -27,7 +33,7 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   }
 
   async runPlugin(plugin: IBotPlugin): Promise<void> {
-    this.plugins.push(plugin);
+    (this.plugins || []).push(plugin);
   }
 
   getBotId(): string | null {
