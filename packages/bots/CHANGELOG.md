@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.8](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.81.7...v1.81.8) (2020-11-26)
+
+
+### Bug Fixes
+
+* **bots:** govno-fix ([a19bf26](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/a19bf26b9c3105ee60a0f5c4eca9a0ceefe4b7f1))
+
+
+
+
+
 ## [1.81.7](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.81.6...v1.81.7) (2020-11-25)
 
 
