@@ -26,7 +26,7 @@
  
 ## Packages included in this repo
 
-| Package | Description | Status | Version | Size
+| Package | Description | Downloads | LastVersion | Size
 |--- |--- |---  |---  |---
 | [apiquery](packages/apiquery) | пакет для общения front'a с back'ом, написан на axios, умеет в сокеты через socket.io [](https://npmjs.com/package/@lskjs/apiquery) 	|  [![NPM Badge](https://img.shields.io/npm/dw/@lskjs/apiquery.svg?logo=npm&label=&style=flat-square)](https://www.npmjs.com/package/@lskjs/apiquery) 	|  [![NPM Badge](https://img.shields.io/npm/v/@lskjs/apiquery.svg?logo=npm&label=&style=flat-square)](https://www.npmjs.com/package/@lskjs/apiquery) 	|  [![NPM Badge](https://img.shields.io/bundlephobia/minzip/@lskjs/apiquery?label=&style=flat-square)](https://www.npmjs.com/package/@lskjs/apiquery) 
 | [auth](packages/auth) | пакет в котором описана логика авторизации, имеет серверную и клиентскую часть [](https://npmjs.com/package/@lskjs/auth) 	|  [![NPM Badge](https://img.shields.io/npm/dw/@lskjs/auth.svg?logo=npm&label=&style=flat-square)](https://www.npmjs.com/package/@lskjs/auth) 	|  [![NPM Badge](https://img.shields.io/npm/v/@lskjs/auth.svg?logo=npm&label=&style=flat-square)](https://www.npmjs.com/package/@lskjs/auth) 	|  [![NPM Badge](https://img.shields.io/bundlephobia/minzip/@lskjs/auth?label=&style=flat-square)](https://www.npmjs.com/package/@lskjs/auth) 
