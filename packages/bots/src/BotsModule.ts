@@ -13,9 +13,17 @@ export default class BotsModule extends Module {
   bots: {
     [name: string]: IBotProvider;
   };
+  v: string;
 
   constructor(...props: any[]) {
     super(...props);
+
+    try {
+      this.v = require('./package.json').version;
+    } catch (err) {
+      console.log(err);
+    }
+
     assignProps(this, ...props);
   }
 
@@ -86,6 +94,7 @@ export default class BotsModule extends Module {
     const plugins = await this.getPlugins();
     this.plugins = await asyncMapValues(plugins, async (pluginFn, name) => {
       const Plugin = await importFn(pluginFn);
+      if (__DEV__) console.log({ Plugin });
       const plugin = new Plugin({
         app: this.app,
         botsModule: this,

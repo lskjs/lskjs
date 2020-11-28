@@ -11,14 +11,14 @@ export abstract class BaseBotPlugin extends Module implements IBotPlugin {
   debug = tryJSONparse(process.env.DEBUG_BOTS, false);
 
   constructor(...props: any[]) {
-    super(...props)
+    super(...props);
     assignProps(this, ...props);
   }
-  
+
   // abstract
   canRunBot(bot: IBotProvider): boolean {
-    // return false;
-    return !(Array.isArray(this.providers) && !this.providers.includes(bot.provider));
+    if (!Array.isArray(this.providers) || !this.providers.length) return true;
+    return Array.isArray(this.providers) && this.providers.includes(bot.provider);
   }
 
   async initBot(bot: IBotProvider, name: string): Promise<void> {

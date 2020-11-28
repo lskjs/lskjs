@@ -14,7 +14,6 @@ export type TelegramIBotProviderMessageCtx = IBotProviderMessageCtx;
 type TelegramBotConfigType = {
   token: string;
 };
-    
 
 export default class TelegramBotProvider extends BaseBotProvider {
   provider = 'telegram';
@@ -99,11 +98,15 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return null;
   }
   reply(ctx, payload, extra = {}) {
-    return this.client.telegram.sendMessage()
-    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, {
-      ...extra,
-      reply_to_message_id: this.getReplyMessageId(ctx),
-    });
+    return this.client.telegram
+      .sendMessage(this.getMessageTargetId(ctx), payload, {
+        ...extra,
+        reply_to_message_id: this.getReplyMessageId(ctx),
+      })
+      .catch((err) => {
+        this.log?.error(err);
+        throw err;
+      });
   }
   sendMessage(ctx, ...args) {
     return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
