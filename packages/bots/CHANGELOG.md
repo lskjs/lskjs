@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.82.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.81.10...v1.82.0) (2020-11-29)
+
+
+### Features
+
+* **bots:** create menu and buttons and router ([b5e2658](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/b5e26585bca8a74cc9c44d1af2fff4580291728e))
+* **bots:** fix bugs and start to develop menu plugin ([cf7a43c](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/cf7a43c6a682d54c0ad0614d557801cc38b8dd27))
+* **bots:** menu plugin, new router, new methods in providers ([da97e0e](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/da97e0e37149dcbd0aa40d761ab799d23c856513))
+
+
+
+
+
 ## [1.81.9](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.81.8...v1.81.9) (2020-11-26)
 
 
