@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.81.10](https://github.com/lskjs/lskjs/tree/master/packages/auth/compare/v1.81.9...v1.81.10) (2020-11-29)
+
+
+### Bug Fixes
+
+* **auth:** use types from static field ([e2f0178](https://github.com/lskjs/lskjs/tree/master/packages/auth/commit/e2f01788979b30f84e42a9ae8765026761ca3a98))
+
+
+
+
+
 ## [1.81.4](https://github.com/lskjs/lskjs/tree/master/packages/auth/compare/v1.81.3...v1.81.4) (2020-11-24)
 
 **Note:** Version bump only for package @lskjs/auth
