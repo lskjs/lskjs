@@ -14,7 +14,6 @@ export type TelegramIBotProviderMessageCtx = IBotProviderMessageCtx;
 type TelegramBotConfigType = {
   token: string;
 };
-    
 
 export default class TelegramBotProvider extends BaseBotProvider {
   provider = 'telegram';
@@ -80,30 +79,199 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, 'message.text')) return get(ctx, 'message.text');
     return get(ctx, 'text');
   }
+  getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any {
+    return get(ctx, 'update.callback_query.data', null);
+  }
+  isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
+    return get(ctx, 'updateType') === 'callback_query';
+  }
   isMessageCommand(ctx: TelegramIBotProviderMessageCtx, command: RegExp | string): boolean {
-    return this.isMessageStartsWith(ctx, `/${command}`);
+    return this.isMessageStartsWith(ctx, `/${command || ''}`);
   }
   getMessageDate(ctx: TelegramIBotProviderMessageCtx): Date {
     const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
   }
-  getMessageType(ctx: TelegramIBotProviderMessageCtx): string {
+  /**
+   * Docs: https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
+   * @param {object} ctx message or message context
+   */
+  getMessageType(ctx: TelegramIBotProviderMessageCtx): string | null {
     const message = this.getMessage(ctx);
+    if (message.audio) return 'audio';
+    if (message.document) return 'document';
+    if (message.animation) return 'animation';
     if (message.photo) return 'photo';
     if (message.sticker) return 'sticker';
+    if (message.video) return 'video';
+    if (message.video_note) return 'video_note';
     if (message.voice) return 'voice';
+    if (message.contact) return 'contact';
+    if (message.dice) return 'dice';
+    if (message.game) return 'game'; // TODO: проверить
+    if (message.poll) return 'poll';
     if (message.location) return 'location';
-    if (message.document) return 'document';
-    if (message.audio) return 'audio';
+    if (message.venue) return 'venue'; // TODO: проверить
     if (message.text) return 'text';
+
+    // СПОРНО
+    if (message.pinned_message) return 'pinned_message';
+    if (message.left_chat_member) return 'left_chat_member';
+    if (message.new_chat_members) return 'new_chat_members';
+    if (message.new_chat_title) return 'new_chat_title';
+    if (message.new_chat_photo) return 'new_chat_photo';
+    if (message.invoice) return 'invoice'; // TODO: проверить
+    if (message.successful_payment) return 'successful_payment'; // TODO: проверить
+    if (message.passport_data) return 'passport_data'; // TODO: проверить
+    // if (message.reply_markup) return 'reply_markup'; // TODO: проверить
     return null;
   }
+
+
+
+  forward(chatId: number|string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
+    const message = this.getMessage(ctx);
+    const forwardFrom = this.getForwardFrom(ctx);
+    return this.client.forwardMessage(chatId, forwardFrom, message.message_id);
+  };
+
+  /**
+   * Function for resend content
+   * Docs: https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
+   *
+   * @param {int|string} chatId repost target
+   * @param {object} ctx message or message context
+   */
+  repost(chatId: number | string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
+    const type = this.getMessageType(ctx);
+    const message = this.getMessage(ctx);
+    const data = {};
+
+    /** Caption for the animation, audio, document, photo, video or voice, 0-1024 characters */
+
+    if (type === 'audio') {
+      data.method = 'sendAudio';
+      data.args = [message.audio.file_id];
+    } else if (type === 'document') {
+      data.method = 'sendDocument';
+      data.args = [message.document.file_id];
+    } else if (type === 'animation') {
+      data.method = 'sendAnimation'; // TODO: проверить
+      data.args = [message.document.file_id];
+    } else if (type === 'photo') {
+      data.method = 'sendPhoto';
+      // data.text = message.caption || '';// TODO: проверить
+      data.args = [message.photo[0].file_id];
+    } else if (type === 'sticker') {
+      data.method = 'sendSticker';
+      data.args = [message.sticker.file_id];
+    } else if (type === 'video') {
+      data.method = 'sendVideo';
+      data.args = [message.video.file_id];
+    } else if (type === 'video_note') {
+      data.method = 'sendVideoNote';
+      data.args = [message.video_note.file_id];
+    } else if (type === 'voice') {
+      data.method = 'sendVoice';
+      data.args = [message.voice.file_id];
+    } else if (type === 'contact') {
+      data.method = 'sendContact';
+      data.args = [message.contact]; // TODO: xz
+    } else if (type === 'dice') {
+      data.method = 'sendDice';
+      data.args = [message.dice]; // TODO: xz
+    } else if (type === 'game') {
+      data.method = 'sendGame';
+      data.args = [message.game]; // TODO: xz
+    } else if (type === 'poll') {
+      if (message.poll.type === 'quiz') {
+        data.method = 'sendQuiz';
+      } else {
+        data.method = 'sendPoll';
+      }
+      console.log(message.poll.options);
+      data.args = [message.poll.question, message.poll.options.map((option) => option.text)]; // TODO: xz
+    } else if (type === 'location') {
+      data.method = 'sendLocation';
+      data.args = [message.location.latitude, message.location.longitude]; // TODO: xz
+      // data.args = [message.location.latitude;
+      // data.opt = message.location.longitude;
+    } else if (type === 'venue') {
+      data.method = 'sendVenue';
+      data.args = [message.venue]; // TODO: xz
+      // data.args = [message.location.latitude;
+      // data.opt = message.location.longitude;
+    } else if (type === 'text') {
+      data.method = 'sendMessage';
+      data.args = [message.text];
+    } else {
+      data.method = 'sendMessage';
+      data.args = [`НАТА РЕАЛИЗУЙ МЕНЯ!!! [${type}] ${message.message_id}`];
+    }
+    if (['animation', 'audio', 'document', 'photo', 'video', 'voice'].includes(type)) {
+      if (!data.extra) data.extra = {};
+      data.extra.caption = message.caption;
+    }
+    if (!this.client.telegram[data.method]) {
+      this.log.error(`!telegram.${data.method}`);
+      return false;
+    }
+    const args = [chatId, ...data.args, data.extra || {}];
+    this.log.trace(`telegram.${data.method}`, ...args);
+    return this.client.telegram[data.method](...args);
+  }
+  async sendContent(ctx, content, extra = {}) {
+    let type;
+    let payload;
+    if (typeof content === 'string') {
+      type = 'text';
+      payload = content
+    } else {
+      ({ type, ...payload } = content);
+      if (type === 'text') {
+        payload = payload.text;
+      }
+    }
+    let method;
+    if (type === 'document') {
+      method = 'sendDocument';
+    } else if (type === 'photo') {
+      method = 'sendPhoto';
+    } else {
+      method = 'sendMessage';
+    } 
+    // this.log?.trace('ctx', method)
+    await this[method](ctx, payload, extra);
+  }
+  async replyContent(ctx, content, extra = {}) {
+    let type;
+    let payload;
+    if (typeof content === 'string') {
+      type = 'text';
+      payload = content
+    } else {
+      ({ type, ...payload } = content);
+    }
+    let method;
+    if (type === 'document') {
+      method = 'replyWithDocument';
+    } else if (type === 'photo') {
+      method = 'replyWithText';
+    } else {
+      method = 'reply';
+    } 
+    await ctx[method](payload, extra);
+  }
   reply(ctx, payload, extra = {}) {
-    return this.client.telegram.sendMessage()
-    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, {
-      ...extra,
-      reply_to_message_id: this.getReplyMessageId(ctx),
-    });
+    return this.client.telegram
+      .sendMessage(this.getMessageTargetId(ctx), payload, {
+        ...extra,
+        reply_to_message_id: this.getReplyMessageId(ctx),
+      })
+      .catch((err) => {
+        this.log?.error(err);
+        throw err;
+      });
   }
   sendMessage(ctx, ...args) {
     return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);

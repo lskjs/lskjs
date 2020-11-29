@@ -1,1 +1,2 @@
-export { default } from './getSpreadsheet';
+export { default } from './getSpreadsheetRaw';
+export { default as getSpreadsheetJson } from './getSpreadsheetJson';
