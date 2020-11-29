@@ -79,8 +79,14 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, 'message.text')) return get(ctx, 'message.text');
     return get(ctx, 'text');
   }
+  getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any {
+    return get(ctx, 'update.callback_query.data', null);
+  }
+  isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
+    return get(ctx, 'updateType') === 'callback_query';
+  }
   isMessageCommand(ctx: TelegramIBotProviderMessageCtx, command: RegExp | string): boolean {
-    return this.isMessageStartsWith(ctx, `/${command}`);
+    return this.isMessageStartsWith(ctx, `/${command || ''}`);
   }
   getMessageDate(ctx: TelegramIBotProviderMessageCtx): Date {
     const message = this.getMessage(ctx);

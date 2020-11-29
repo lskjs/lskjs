@@ -1,4 +1,5 @@
 import assignProps from '@lskjs/utils/assignProps';
+import Bluebird from 'bluebird';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
 
@@ -8,13 +9,20 @@ export class DebugBotPlugin extends BaseBotPlugin {
     assignProps(this, ...props);
   }
 
-  async runBot(bot: IBotProvider): Promise<void> {
-    if (this.config?.logger !== false) await this.runLogger(bot);
+  async runBot(bot: IBotProvider, name: string): Promise<void> {
+    if (this.config?.logger !== false) await this.runLogger(bot, name);
     if (this.config?.ping !== false) await this.runPing(bot);
     if (this.config?.chat !== false) await this.runChatId(bot);
   }
   async runPing(bot: IBotProvider): Promise<void> {
-    bot.on('message', (ctx: IBotProviderMessageCtx) => {
+    bot.on('message', async (ctx: IBotProviderMessageCtx) => {
+      if (bot.isMessageCommand(ctx, 'kill')) {
+        this.log.error('KILL FORM USER', bot.getMessageUserId(ctx));
+        bot.reply(ctx, '[ok]');
+        await Bluebird.delay(1000);
+        process.exit(1);
+        return null;
+      }
       if (bot.isMessageCommand(ctx, 'ping')) {
         const ms = Math.floor((Date.now() / 1000 - ctx.message.date) * 1000);
         return bot.reply(ctx, `[pong] ${ms}ms`);
@@ -38,26 +46,28 @@ Made on @LSKjs with ❤️`;
   }
   async runChatId(bot: IBotProvider, name: string): Promise<void> {
     bot.on('message', (ctx: IBotProviderMessageCtx) => {
-      if (this.debug)
-        this.log.trace('bot.isMessageCommands', name, bot.isMessageCommands(ctx, ['id', 'ид', 'chatid', 'чат']));
       if (!bot.isMessageCommands(ctx, ['id', 'ид', 'chatid', 'чат'])) return;
       if (bot.provider === 'vk') {
         ctx.reply(ctx.message.reply_message ? ctx.message.reply_message.from_id : ctx.message.from_id);
       }
       if (bot.provider === 'telegram') {
+        const renderMessage = (message) => `id: \`${message.message_id}\` [${bot.getMessageType(message)}]`;
+        const renderChat = (chat) => `chatId: \`${chat.id}\` ${chat.type === 'supergroup' ? '[supergroup]' : ''}`; // [${chat.title}]
+        const renderUser = (from) => `userId: \`${from.id}\` ${from.is_bot ? '[bot]' : ''}`;
         const text = [
           '*Message*',
-          `id: \`${ctx.message.id}\``,
-          ctx.message.from && `userId: \`${ctx.message.from.id}\``,
-          ctx.message.chat && `chatId: \`${ctx.message.chat.id}\``,
-          ctx.message.reply_to_message && '\n*REPLIED MESSAGE*',
-          ctx.message.reply_to_message && `messageId: \`${ctx.message.reply_to_message.message_id}\``,
+          renderMessage(ctx.message),
+          ctx.message.from && renderUser(ctx.message.from),
+          ctx.message.chat && renderChat(ctx.message.chat),
+          ctx.message.reply_to_message && '\n*Replied message*',
+          ctx.message.reply_to_message && renderMessage(ctx.message.reply_to_message),
           ctx.message.reply_to_message &&
             ctx.message.reply_to_message.from &&
-            `userId: \`${ctx.message.reply_to_message.from.id}\``,
+            renderUser(ctx.message.reply_to_message.from),
+          ctx.message.reply_to_message && ctx.message.reply_to_message.forward_from && '\n*Forwarded user*',
           ctx.message.reply_to_message &&
-            ctx.message.reply_to_message.from.is_bot &&
-            `isBot: \`${ctx.message.reply_to_message.from.is_bot}\``,
+            ctx.message.reply_to_message.forward_from &&
+            renderUser(ctx.message.reply_to_message.forward_from),
         ]
           .filter(Boolean)
           .join('\n');
@@ -65,7 +75,7 @@ Made on @LSKjs with ❤️`;
       }
     });
   }
-  async runLogger(bot: IBotProvider): Promise<void> {
+  async runLogger(bot: IBotProvider, name: string): Promise<void> {
     const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = this.app.models;
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
@@ -73,7 +83,10 @@ Made on @LSKjs with ❤️`;
         let eventData;
         if (provider === 'telegram' && type === 'message') {
           eventData = ctx.message;
-          this.log.trace(`<${this.name}/${bot.name}> [${type}]`, eventData);
+          this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
+        } else if (provider === 'telegram' && type === 'message') {
+          eventData = ctx.message;
+          this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
           if (this.config?.save === false) return;
           // Don't wait
           const messageType = bot.getMessageType(ctx);
@@ -102,7 +115,7 @@ Made on @LSKjs with ❤️`;
           // } else if (provider === 'discord') {
           //   console.log(ctx);
         } else {
-          this.log.warn(`<${this.name}/${bot.name}> [${type}] LOGGER NOT IMPLEMENTED`);
+          this.log.warn(`<${this.name}/${name}> [${provider}/${type}] LOGGER NOT IMPLEMENTED`);
         }
         await BotsEventModel.create({
           botId: bot.getBotId(),
