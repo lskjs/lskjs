@@ -4,11 +4,10 @@ import MongooseSchema from '@lskjs/db/MongooseSchema';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
 
 export default function getSchema(ctx) {
-  const mongoose = ctx.db;
   const schema = new MongooseSchema(
     {
       userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: MongooseSchema.Types.ObjectId,
         // ref: 'User',
       },
       // Сырые данные которые пришли из соц сети
