@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.83.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.10...v1.83.0) (2020-11-30)
+
+
+### Bug Fixes
+
+* **bots:** ts fixes ([e8676d8](https://github.com/isuvorov/lib-starter-kit/commit/e8676d83b6bd8bee9c7a58bf0bfa939fe965688b))
+
+
+### Features
+
+* **bots:** create menu and buttons and router ([b5e2658](https://github.com/isuvorov/lib-starter-kit/commit/b5e26585bca8a74cc9c44d1af2fff4580291728e))
+* **bots:** fix bugs and start to develop menu plugin ([cf7a43c](https://github.com/isuvorov/lib-starter-kit/commit/cf7a43c6a682d54c0ad0614d557801cc38b8dd27))
+* **getspreadsheet:** get json ([121c6b7](https://github.com/isuvorov/lib-starter-kit/commit/121c6b77fe5b14bcb77007f4be9511412468e754))
+
+
+
+
+
 # [1.82.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.10...v1.82.0) (2020-11-29)
 
 

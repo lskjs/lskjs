@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.83.0](https://github.com/lskjs/lskjs/tree/master/packages/build-locales/compare/v1.81.10...v1.83.0) (2020-11-30)
+
+**Note:** Version bump only for package @lskjs/build-locales
+
+
+
+
+
 # [1.82.0](https://github.com/lskjs/lskjs/tree/master/packages/build-locales/compare/v1.81.10...v1.82.0) (2020-11-29)
 
 **Note:** Version bump only for package @lskjs/build-locales

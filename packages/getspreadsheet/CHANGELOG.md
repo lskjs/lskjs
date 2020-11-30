@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.83.0](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.81.10...v1.83.0) (2020-11-30)
+
+
+### Features
+
+* **bots:** menu plugin, new router, new methods in providers ([da97e0e](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/da97e0e37149dcbd0aa40d761ab799d23c856513))
+* **getspreadsheet:** get json ([121c6b7](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/121c6b77fe5b14bcb77007f4be9511412468e754))
+
+
+
+
+
 # [1.82.0](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.81.10...v1.82.0) (2020-11-29)
 
 
