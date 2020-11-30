@@ -91,10 +91,10 @@ export default class BotsModule extends Module {
     });
     this.log.debug('bots', Object.keys(this.bots));
 
-    const plugins = await this.getPlugins();
-    this.plugins = await asyncMapValues(plugins, async (pluginFn, name) => {
+    const currentPlugins = await this.getPlugins();
+    this.plugins = await asyncMapValues(currentPlugins, async (pluginFn, name) => {
       const Plugin = await importFn(pluginFn);
-      if (__DEV__) console.log({ Plugin });
+      // if (__DEV__) console.log({ Plugin });
       const plugin = new Plugin({
         app: this.app,
         botsModule: this,

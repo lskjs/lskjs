@@ -6,6 +6,7 @@ import { IBotPlugin, IBotProvider } from '../types';
 
 // extends Module
 export abstract class BaseBotPlugin extends Module implements IBotPlugin {
+  botsModule = null;
   providers = [];
   bots = {};
   debug = tryJSONparse(process.env.DEBUG_BOTS, false);

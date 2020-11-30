@@ -9,6 +9,7 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
   key: string | null = null;
   provider: string;
+  botsModule = null;
   plugins: Array<IBotPlugin> = [];
   eventTypes: Array<string>;
   client: any;

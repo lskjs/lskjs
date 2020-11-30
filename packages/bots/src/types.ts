@@ -13,6 +13,7 @@ export type IBotProviderPayload = object | string;
 export interface IBotProvider extends IModule {
   key: string | null;
   provider: string;
+  botsModule: IModule | null;
   plugins: IBotPlugin[];
   eventTypes: string[];
   client: any;
@@ -129,6 +130,7 @@ export interface IBotProvider extends IModule {
 
 export interface IBotPlugin extends IModule {
   providers: string[];
+  botsModule: IModule | null;
   bots: {
     [name: string]: IBotProvider;
   };

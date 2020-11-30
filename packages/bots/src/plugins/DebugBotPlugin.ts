@@ -12,7 +12,7 @@ export class DebugBotPlugin extends BaseBotPlugin {
   async runBot(bot: IBotProvider, name: string): Promise<void> {
     if (this.config?.logger !== false) await this.runLogger(bot, name);
     if (this.config?.ping !== false) await this.runPing(bot);
-    if (this.config?.chat !== false) await this.runChatId(bot);
+    if (this.config?.chat !== false) await this.runChatId(bot, name);
   }
   async runPing(bot: IBotProvider): Promise<void> {
     bot.on('message', async (ctx: IBotProviderMessageCtx) => {

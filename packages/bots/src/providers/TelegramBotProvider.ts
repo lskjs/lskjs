@@ -127,13 +127,11 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return null;
   }
 
-
-
-  forward(chatId: number|string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
-    const message = this.getMessage(ctx);
-    const forwardFrom = this.getForwardFrom(ctx);
-    return this.client.forwardMessage(chatId, forwardFrom, message.message_id);
-  };
+  // forward(chatId: number|string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
+  //   const message = this.getMessage(ctx);
+  //   const forwardFrom = this.getForwardFrom(ctx);
+  //   return this.client.forwardMessage(chatId, forwardFrom, message.message_id);
+  // };
 
   /**
    * Function for resend content
@@ -149,83 +147,86 @@ export default class TelegramBotProvider extends BaseBotProvider {
 
     /** Caption for the animation, audio, document, photo, video or voice, 0-1024 characters */
 
+    let method: string;
+    let args: any[];
+    let extra: any = {};
     if (type === 'audio') {
-      data.method = 'sendAudio';
-      data.args = [message.audio.file_id];
+      method = 'sendAudio';
+      args = [message.audio.file_id];
     } else if (type === 'document') {
-      data.method = 'sendDocument';
-      data.args = [message.document.file_id];
+      method = 'sendDocument';
+      args = [message.document.file_id];
     } else if (type === 'animation') {
-      data.method = 'sendAnimation'; // TODO: проверить
-      data.args = [message.document.file_id];
+      method = 'sendAnimation'; // TODO: проверить
+      args = [message.document.file_id];
     } else if (type === 'photo') {
-      data.method = 'sendPhoto';
-      // data.text = message.caption || '';// TODO: проверить
-      data.args = [message.photo[0].file_id];
+      method = 'sendPhoto';
+      // text = message.caption || '';// TODO: проверить
+      args = [message.photo[0].file_id];
     } else if (type === 'sticker') {
-      data.method = 'sendSticker';
-      data.args = [message.sticker.file_id];
+      method = 'sendSticker';
+      args = [message.sticker.file_id];
     } else if (type === 'video') {
-      data.method = 'sendVideo';
-      data.args = [message.video.file_id];
+      method = 'sendVideo';
+      args = [message.video.file_id];
     } else if (type === 'video_note') {
-      data.method = 'sendVideoNote';
-      data.args = [message.video_note.file_id];
+      method = 'sendVideoNote';
+      args = [message.video_note.file_id];
     } else if (type === 'voice') {
-      data.method = 'sendVoice';
-      data.args = [message.voice.file_id];
+      method = 'sendVoice';
+      args = [message.voice.file_id];
     } else if (type === 'contact') {
-      data.method = 'sendContact';
-      data.args = [message.contact]; // TODO: xz
+      method = 'sendContact';
+      args = [message.contact]; // TODO: xz
     } else if (type === 'dice') {
-      data.method = 'sendDice';
-      data.args = [message.dice]; // TODO: xz
+      method = 'sendDice';
+      args = [message.dice]; // TODO: xz
     } else if (type === 'game') {
-      data.method = 'sendGame';
-      data.args = [message.game]; // TODO: xz
+      method = 'sendGame';
+      args = [message.game]; // TODO: xz
     } else if (type === 'poll') {
       if (message.poll.type === 'quiz') {
-        data.method = 'sendQuiz';
+        method = 'sendQuiz';
       } else {
-        data.method = 'sendPoll';
+        method = 'sendPoll';
       }
-      console.log(message.poll.options);
-      data.args = [message.poll.question, message.poll.options.map((option) => option.text)]; // TODO: xz
+      // console.log(message.poll.options);
+      args = [message.poll.question, message.poll.options.map((option) => option.text)]; // TODO: xz
     } else if (type === 'location') {
-      data.method = 'sendLocation';
-      data.args = [message.location.latitude, message.location.longitude]; // TODO: xz
-      // data.args = [message.location.latitude;
-      // data.opt = message.location.longitude;
+      method = 'sendLocation';
+      args = [message.location.latitude, message.location.longitude]; // TODO: xz
+      // args = [message.location.latitude;
+      // opt = message.location.longitude;
     } else if (type === 'venue') {
-      data.method = 'sendVenue';
-      data.args = [message.venue]; // TODO: xz
-      // data.args = [message.location.latitude;
-      // data.opt = message.location.longitude;
+      method = 'sendVenue';
+      args = [message.venue]; // TODO: xz
+      // args = [message.location.latitude;
+      // opt = message.location.longitude;
     } else if (type === 'text') {
-      data.method = 'sendMessage';
-      data.args = [message.text];
+      method = 'sendMessage';
+      args = [message.text];
     } else {
-      data.method = 'sendMessage';
-      data.args = [`НАТА РЕАЛИЗУЙ МЕНЯ!!! [${type}] ${message.message_id}`];
+      method = 'sendMessage';
+      args = [`НАТА РЕАЛИЗУЙ МЕНЯ!!! [${type}] ${message.message_id}`];
     }
     if (['animation', 'audio', 'document', 'photo', 'video', 'voice'].includes(type)) {
-      if (!data.extra) data.extra = {};
-      data.extra.caption = message.caption;
+      extra.caption = message.caption;
     }
-    if (!this.client.telegram[data.method]) {
-      this.log.error(`!telegram.${data.method}`);
-      return false;
+    if (!this.client.telegram[method]) {
+      this.log.error(`!telegram.${method}`);
+      return null;
     }
-    const args = [chatId, ...data.args, data.extra || {}];
-    this.log.trace(`telegram.${data.method}`, ...args);
-    return this.client.telegram[data.method](...args);
+    const telegramArgs = [chatId, ...args, extra];
+    this.log.trace(`telegram.${method}`, ...telegramArgs);
+    return this.client.telegram[method](...telegramArgs);
   }
-  async sendContent(ctx, content, extra = {}) {
-    let type;
-    let payload;
+
+  async sendContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+    let type: string;
+    let payload: any;
     if (typeof content === 'string') {
       type = 'text';
-      payload = content
+      payload = content;
     } else {
       ({ type, ...payload } = content);
       if (type === 'text') {
@@ -243,12 +244,13 @@ export default class TelegramBotProvider extends BaseBotProvider {
     // this.log?.trace('ctx', method)
     await this[method](ctx, payload, extra);
   }
-  async replyContent(ctx, content, extra = {}) {
-    let type;
-    let payload;
+
+  async replyContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+    let type: string;
+    let payload: any;
     if (typeof content === 'string') {
       type = 'text';
-      payload = content
+      payload = content;
     } else {
       ({ type, ...payload } = content);
     }
@@ -262,7 +264,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     } 
     await ctx[method](payload, extra);
   }
-  reply(ctx, payload, extra = {}) {
+  reply(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
     return this.client.telegram
       .sendMessage(this.getMessageTargetId(ctx), payload, {
         ...extra,
