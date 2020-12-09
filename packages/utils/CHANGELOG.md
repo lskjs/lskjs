@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.84.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.83.0...v1.84.0) (2020-12-09)
+
+
+### Features
+
+* **utils:** add prettyStringify ([07d3ddb](https://github.com/lskjs/ux/tree/master/packages/utils/commit/07d3ddb65c892baf2e26f49988fa3d20f8dbf22e))
+* **utils:** add tryJSONstringify ([f2e677f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f2e677f88cfe802523c8ea3cee5f750c876dce14))
+
+
+
+
+
 ## [1.81.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.81.2...v1.81.3) (2020-11-24)
 
 **Note:** Version bump only for package @lskjs/utils

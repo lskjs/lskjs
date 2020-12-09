@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.84.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.83.0...v1.84.0) (2020-12-09)
+
+
+### Features
+
+* **utils:** add prettyStringify ([07d3ddb](https://github.com/isuvorov/lib-starter-kit/commit/07d3ddb65c892baf2e26f49988fa3d20f8dbf22e))
+* **utils:** add tryJSONstringify ([f2e677f](https://github.com/isuvorov/lib-starter-kit/commit/f2e677f88cfe802523c8ea3cee5f750c876dce14))
+
+
+
+
+
 # [1.83.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.81.10...v1.83.0) (2020-11-30)
 
 

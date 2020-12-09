@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "1.81.4",
+  "version": "1.84.0",
   "description": "LSK server-api.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "1.81.3",
+    "@lskjs/utils": "1.84.0",
     "cacheman": "2.2.1",
     "object-hash": "2.0.2"
   },
