@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.84.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.84.0...v1.84.1) (2020-12-10)
+
+
+### Bug Fixes
+
+* **elastic:** update mongoose-elastic ([22753c7](https://github.com/isuvorov/lib-starter-kit/commit/22753c74a457c7b4bc6a86b2803854b1236efa4a))
+
+
+
+
+
 # [1.84.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.83.0...v1.84.0) (2020-12-09)
 
 

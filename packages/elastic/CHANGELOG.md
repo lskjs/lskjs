@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.84.1](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v1.84.0...v1.84.1) (2020-12-10)
+
+
+### Bug Fixes
+
+* **elastic:** update mongoose-elastic ([22753c7](https://github.com/lskjs/lskjs/tree/master/packages/elastic/commit/22753c74a457c7b4bc6a86b2803854b1236efa4a))
+
+
+
+
+
 ## [1.81.1](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v1.81.0...v1.81.1) (2020-11-24)
 
 **Note:** Version bump only for package @lskjs/elastic
