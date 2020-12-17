@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.85.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.84.1...v1.85.0) (2020-12-17)
+
+
+### Features
+
+* **utils:** add tryParamParse ([ea7cfb1](https://github.com/isuvorov/lib-starter-kit/commit/ea7cfb1f8607e7b4a73874b496649ecadd8f6b14))
+
+
+
+
+
 ## [1.84.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.84.0...v1.84.1) (2020-12-10)
 
 
