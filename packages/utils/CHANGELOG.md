@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.86.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.85.0...v1.86.0) (2020-12-20)
+
+
+### Features
+
+* **utils:** add camelCaseKeys, lowerCaseKeys, snakeCaseKeys ([ec121eb](https://github.com/lskjs/ux/tree/master/packages/utils/commit/ec121eb7d280cfcd790aed49b6cc25c3c65087e1))
+* **utils:** add mapValuesKeys and mapKeys ([7155eff](https://github.com/lskjs/ux/tree/master/packages/utils/commit/7155eff37e938c2ff698d17f534d1b7d0ff2b922))
+
+
+
+
+
 # [1.85.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.84.1...v1.85.0) (2020-12-17)
 
 
