@@ -1,6 +1,7 @@
 import snakeCase from 'lodash/snakeCase';
 import mapKeys from './mapKeys';
 
-const snakeCaseKeys = (object) => mapKeys(object, (value, key) => snakeCase(key));
+const snakeCaseKeys = (object, allowLeadUnderscore) =>
+  mapKeys(object, (value, key) => (allowLeadUnderscore && key[0] === '_' ? `_${snakeCase(key)}` : snakeCase(key)));
 
 export default snakeCaseKeys;
