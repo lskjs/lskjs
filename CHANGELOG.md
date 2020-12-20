@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.87.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.86.0...v1.87.0) (2020-12-20)
+
+
+### Features
+
+* **utils:** add allowLeadUnderscore in caseKeys ([509ab57](https://github.com/isuvorov/lib-starter-kit/commit/509ab57d7f2f3e2a5e6a26b464a330481bd4a8cd))
+
+
+
+
+
 # [1.86.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.85.0...v1.86.0) (2020-12-20)
 
 
