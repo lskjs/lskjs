@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.88.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.87.0...v1.88.0) (2020-12-21)
+
+
+### Features
+
+* **utils:** add params schema parser ([92a25f9](https://github.com/lskjs/ux/tree/master/packages/utils/commit/92a25f9aaa353c3304a56eb53d49ed17888cb862))
+* **utils:** add params toBoolean, toNumber, toInt ([bab974e](https://github.com/lskjs/ux/tree/master/packages/utils/commit/bab974e3040ce5439baa87646a6e3f54a3a28f54))
+
+
+
+
+
 # [1.87.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.86.0...v1.87.0) (2020-12-20)
 
 

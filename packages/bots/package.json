@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots",
-  "version": "1.87.0",
+  "version": "1.88.0",
   "description": "LSK module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -47,8 +47,8 @@
   "dependencies": {
     "@babel/runtime": "7.8.4",
     "@lskjs/db": "1.81.1",
-    "@lskjs/module": "1.87.0",
-    "@lskjs/utils": "1.87.0",
+    "@lskjs/module": "1.88.0",
+    "@lskjs/utils": "1.88.0",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.19",
