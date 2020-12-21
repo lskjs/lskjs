@@ -2,6 +2,7 @@ import assignProps from '@lskjs/utils/assignProps';
 import Bluebird from 'bluebird';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
+import { getPrivateLinkToMessage } from 'plugins/private-linker';
 
 export class DebugBotPlugin extends BaseBotPlugin {
   constructor(...props: any[]) {
@@ -13,7 +14,10 @@ export class DebugBotPlugin extends BaseBotPlugin {
     if (this.config?.logger !== false) await this.runLogger(bot, name);
     if (this.config?.ping !== false) await this.runPing(bot);
     if (this.config?.chat !== false) await this.runChatId(bot, name);
+    // TODO: messageLink — пропосал, можно поменять на любую другую пропсу.
+    if (this.config?.messageLink !== false) await this.runMessageLink(bot, name);
   }
+
   async runPing(bot: IBotProvider): Promise<void> {
     bot.on('message', async (ctx: IBotProviderMessageCtx) => {
       if (bot.isMessageCommand(ctx, 'kill')) {
@@ -124,6 +128,38 @@ Made on @LSKjs with ❤️`;
           data: eventData,
         });
       });
+    });
+  }
+
+  /**
+   * Вешает обработчик который слушает команды на реплаи к сообщениям.
+   *
+   * Если команда совпадет со белым списком ('link', 'линк', 'ссылку')
+   * то бот пытается сгенерить ссылку на реплайнутое сообщение и удалить
+   * сообщение которое его стриггерило.
+   *
+   * @param bot
+   */
+  async runMessageLink(bot: IBotProvider): Promise<void> {
+    bot.on('message', async (ctx: IBotProviderMessageCtx) => {
+      if (!bot.isMessageCommands(ctx, ['link', 'линк', 'ссылку'])) {
+        return;
+      }
+
+      const triggerMessage = ctx.message;
+      const repliedMessage = ctx.reply_to_message;
+
+      try {
+        const text = getPrivateLinkToMessage(repliedMessage);
+        const options = { reply_to_message_id: repliedMessage.message_id };
+
+        await ctx.reply(text, options);
+      } catch (error) {
+        // TODO: Обработать ситуацию как нибудь!
+        console.error(error);
+      }
+
+      await ctx.deleteMessage(triggerMessage.message_id);
     });
   }
 }
