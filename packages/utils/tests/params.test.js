@@ -1,5 +1,5 @@
 /* global test expect */
-import { toBoolean, toNumber, toInt } from '../src/params';
+import { toBoolean, toNumber, toInt, params } from '../src/params';
 
 test('toBoolean("true") === true', () => {
   const obj = 'true';
@@ -48,4 +48,44 @@ test('toInt("123.34") === 123', () => {
   const res = 123;
 
   expect(toInt(obj)).toStrictEqual(res);
+});
+
+test('params', () => {
+  const data = {
+    a: 'true',
+    b: '123.45',
+    c: '123.45',
+    d: '2020-02-02',
+    e: '',
+    // f: 'true',
+    j: '{"a": true, "b": 123.45}',
+  };
+  const schema = {
+    a: 'boolean',
+    b: 'number',
+    c: 'int',
+    d: 'date',
+    e: {
+      type: 'boolean',
+      default: true,
+    },
+    f: {
+      type: 'boolean',
+      default: true,
+    },
+    j: 'json',
+  };
+  const res = {
+    a: true,
+    b: 123.45,
+    c: 123,
+    d: new Date('2020-02-02'),
+    e: false,
+    f: true,
+    j: {
+      a: true,
+      b: 123.45,
+    },
+  };
+  expect(params(data, schema)).toStrictEqual(res);
 });
