@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots",
-  "version": "1.88.0",
+  "version": "1.89.0",
   "description": "LSK module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
