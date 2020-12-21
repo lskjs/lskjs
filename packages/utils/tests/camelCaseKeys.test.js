@@ -1,7 +1,7 @@
 /* global test expect */
 import camelCaseKeys from '../src/camelCaseKeys';
 
-test('camelCaseKeys.test ', () => {
+test('camelCaseKeys ', () => {
   const obj = {
     _id: 0,
     hello_world: 1,

@@ -1,7 +1,7 @@
 /* global test expect */
 import kebabCaseKeys from '../src/kebabCaseKeys';
 
-test('kebabCaseKeys.test ', () => {
+test('kebabCaseKeys ', () => {
   const obj = {
     _id: 0,
     hello_world: 1,
