@@ -2,7 +2,7 @@ import assignProps from '@lskjs/utils/assignProps';
 import Bluebird from 'bluebird';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
-import { getPrivateLinkToMessage } from 'plugins/private-linker';
+import { getPrivateLinkToMessage } from '../plugins/private-linker';
 
 export class DebugBotPlugin extends BaseBotPlugin {
   constructor(...props: any[]) {
@@ -149,15 +149,13 @@ Made on @LSKjs with ❤️`;
       const triggerMessage = ctx.message;
       const repliedMessage = ctx.reply_to_message;
 
-      try {
-        const text = getPrivateLinkToMessage(repliedMessage);
-        const options = { reply_to_message_id: repliedMessage.message_id };
-
-        await ctx.reply(text, options);
-      } catch (error) {
-        // TODO: Обработать ситуацию как нибудь!
-        console.error(error);
-      }
+      // try {
+      const text = getPrivateLinkToMessage(repliedMessage);
+      await bot.reply(text);
+      // } catch (error) {
+      //   // TODO: Обработать ситуацию как нибудь!
+      //   console.error(error);
+      // }
 
       await ctx.deleteMessage(triggerMessage.message_id);
     });
