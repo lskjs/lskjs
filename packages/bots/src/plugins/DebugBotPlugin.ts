@@ -15,7 +15,7 @@ export class DebugBotPlugin extends BaseBotPlugin {
     if (this.config?.ping !== false) await this.runPing(bot);
     if (this.config?.chat !== false) await this.runChatId(bot, name);
     // TODO: messageLink — пропосал, можно поменять на любую другую пропсу.
-    if (this.config?.messageLink !== false) await this.runMessageLink(bot, name);
+    if (this.config?.messageLink !== false) await this.runMessageLink(bot);
   }
 
   async runPing(bot: IBotProvider): Promise<void> {
@@ -151,7 +151,7 @@ Made on @LSKjs with ❤️`;
 
       // try {
       const text = getPrivateLinkToMessage(repliedMessage);
-      await bot.reply(text);
+      await bot.reply(ctx, text);
       // } catch (error) {
       //   // TODO: Обработать ситуацию как нибудь!
       //   console.error(error);
