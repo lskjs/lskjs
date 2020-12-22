@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log2",
-  "version": "1.88.0",
+  "version": "1.89.1",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. defub. Базируется на debug-level.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

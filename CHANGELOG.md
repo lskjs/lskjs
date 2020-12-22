@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.89.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.89.0...v1.89.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* **bots:** bug fixes in DebugBotPlugin ([0bbf030](https://github.com/isuvorov/lib-starter-kit/commit/0bbf030e09f9ff2f0e8ff8a7a6e9fe1252d9dd22))
+
+
+
+
+
 # [1.89.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.88.0...v1.89.0) (2020-12-21)
 
 

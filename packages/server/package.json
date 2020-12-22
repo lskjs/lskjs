@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "1.88.0",
+  "version": "1.89.1",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -55,7 +55,7 @@
   "devDependencies": {
     "@lskjs/db": "1.81.1",
     "@lskjs/i18": "1.81.1",
-    "@lskjs/log": "1.88.0",
+    "@lskjs/log": "1.89.1",
     "@lskjs/module": "1.78.0",
     "@lskjs/utils": "1.88.0",
     "axios": "0.19.2",
