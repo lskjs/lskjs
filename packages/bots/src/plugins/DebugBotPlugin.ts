@@ -2,7 +2,7 @@ import assignProps from '@lskjs/utils/assignProps';
 import Bluebird from 'bluebird';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
-import { getPrivateLinkToMessage } from '../plugins/private-linker';
+import { getPrivateLinkToMessage } from '../utils/private-linker';
 
 export class DebugBotPlugin extends BaseBotPlugin {
   constructor(...props: any[]) {
