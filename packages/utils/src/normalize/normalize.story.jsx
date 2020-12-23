@@ -32,6 +32,7 @@ const arrayOfNames = [
   'İSHAK “ AĞIRMAN',
   'Sergio 🅲🅷🅴🅺🆈',
   '♂️ Milton Fernández 🇦🇷',
+  '🅲🅲🅲🅲🅲🅲🅲🅲',
 ];
 
 module.exports = function ({ storiesOf, action, knob }) {
