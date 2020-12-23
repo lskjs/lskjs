@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.91.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.89.2...v1.91.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* **utils:** normalize another example ([fa79d91](https://github.com/lskjs/ux/tree/master/packages/utils/commit/fa79d91860b714d21b09915018e2c2a57a32a4fa))
+
+
+### Features
+
+* **utils:** normalize string ([eb2501b](https://github.com/lskjs/ux/tree/master/packages/utils/commit/eb2501beff87ce134a6262042a0bbf541cba1a20))
+
+
+
+
+
 # [1.90.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.89.2...v1.90.0) (2020-12-23)
 
 

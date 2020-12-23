@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log2",
-  "version": "1.90.0",
+  "version": "1.91.0",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. defub. Базируется на debug-level.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@lskjs/debug-level": "0.3.2",
-    "@lskjs/utils": "1.90.0",
+    "@lskjs/utils": "1.91.0",
     "colors": "1.4.0"
   },
   "bin": {
