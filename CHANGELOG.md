@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.94.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.93.0...v1.94.0) (2020-12-24)
+
+
+### Features
+
+* **utils:** json is string json or object ([ac6a1c6](https://github.com/isuvorov/lib-starter-kit/commit/ac6a1c68aa03817b66057cbf66f2cf034c87d15b))
+
+
+
+
+
 # [1.93.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.92.0...v1.93.0) (2020-12-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.94.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.93.0...v1.94.0) (2020-12-24)
+
+
+### Features
+
+* **utils:** json is string json or object ([ac6a1c6](https://github.com/lskjs/ux/tree/master/packages/utils/commit/ac6a1c68aa03817b66057cbf66f2cf034c87d15b))
+
+
+
+
+
 # [1.91.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.89.2...v1.91.0) (2020-12-23)
 
 
