@@ -2,12 +2,13 @@ import isPlainObject from 'lodash/isPlainObject';
 import round from 'lodash/round';
 import forEach from 'lodash/forEach';
 import mapValues from 'lodash/mapValues';
+import isObjectLike from 'lodash/isObjectLike';
 import tryParamParse from './tryParamParse';
 
 export const toBoolean = (a, def = false) => Boolean(tryParamParse(a, def));
 export const toNumber = (a, def = 0) => Number(tryParamParse(a, def));
 export const toInt = (a, def = 0) => round(tryParamParse(a, def));
-export const toJson = (a, def = null) => tryParamParse(a, def);
+export const toJson = (a, def = null) => (isObjectLike(a) ? a : tryParamParse(a, def));
 export const toDate = (a, def = null) => (a ? new Date(a) || def : def);
 export const parse = (a, type, def) => {
   if (type === 'boolean' || type === 'bool') return toBoolean(a, def);
