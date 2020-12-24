@@ -43,6 +43,12 @@ export interface IBotProvider extends IModule {
   getMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx;
 
   /**
+   * Возвращает id сообщение из контекста
+   * @param {*} message message or message context
+   */
+  getMessageId(ctx: IBotProviderMessageCtx): number;
+
+  /**
    * Возвращает id пользователя написавшего сообщение
    * @param {*} message message or message context
    */
@@ -61,10 +67,16 @@ export interface IBotProvider extends IModule {
   getMessageTargetId(message: IBotProviderMessageCtx): number;
 
   /**
-   * Возвращает id чата или пользователя, которому/куда написано сообщение
+   * Возвращает сообщения, которое было реплайнуто
    * @param {*} message message or message context
    */
-  getReplyMessageId(message: IBotProviderMessageCtx): number;
+  getRepliedMessage(message: IBotProviderMessageCtx): IBotProviderMessageCtx;
+
+  /**
+   * Возвращает id сообщения, которое было реплайнуто
+   * @param {*} message message or message context
+   */
+  getRepliedMessageId(message: IBotProviderMessageCtx): number;
 
   /**
    * Возвращает текст сообщения

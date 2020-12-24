@@ -14,8 +14,7 @@ export class DebugBotPlugin extends BaseBotPlugin {
     if (this.config?.logger !== false) await this.runLogger(bot, name);
     if (this.config?.ping !== false) await this.runPing(bot);
     if (this.config?.chat !== false) await this.runChatId(bot, name);
-    // TODO: messageLink — пропосал, можно поменять на любую другую пропсу.
-    if (this.config?.messageLink !== false) await this.runMessageLink(bot);
+    if (this.config?.link !== false) await this.runLink(bot);
   }
 
   async runPing(bot: IBotProvider): Promise<void> {
@@ -140,24 +139,22 @@ Made on @LSKjs with ❤️`;
    *
    * @param bot
    */
-  async runMessageLink(bot: IBotProvider): Promise<void> {
+  async runLink(bot: IBotProvider): Promise<void> {
     bot.on('message', async (ctx: IBotProviderMessageCtx) => {
       if (!bot.isMessageCommands(ctx, ['link', 'линк', 'ссылку'])) {
         return;
       }
-
-      const triggerMessage = ctx.message;
-      const repliedMessage = ctx.reply_to_message;
-
-      // try {
-      const text = getPrivateLinkToMessage(repliedMessage);
+      const chatId = bot.getMessageChatId(ctx);
+      let removeMessageId = bot.getMessageId(ctx);
+      let messageId = bot.getRepliedMessageId(ctx);
+      if (!messageId) {
+        messageId = removeMessageId;
+        removeMessageId = null;
+      }
+      const text = getPrivateLinkToMessage({ chatId, messageId });
       await bot.reply(ctx, text);
-      // } catch (error) {
-      //   // TODO: Обработать ситуацию как нибудь!
-      //   console.error(error);
-      // }
 
-      await ctx.deleteMessage(triggerMessage.message_id);
+      await ctx.deleteMessage(removeMessageId);
     });
   }
 }

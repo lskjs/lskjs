@@ -53,6 +53,9 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   getMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx {
     throw new Error(`Method ${this.name}.getMessage not implemented.`);
   }
+  getMessageId(ctx: IBotProviderMessageCtx): number {
+    throw new Error(`Method ${this.name}.getMessageId, not implemented.`);
+  }
   getMessageUserId(message: IBotProviderMessageCtx): number {
     throw new Error(`Method ${this.name}.getMessageUserId not implemented.`);
   }
@@ -62,8 +65,11 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   getMessageTargetId(message: IBotProviderMessageCtx): number {
     throw new Error(`Method ${this.name}.getMessageTargetId not implemented.`);
   }
-  getReplyMessageId(message: IBotProviderMessageCtx): number {
-    throw new Error(`Method ${this.name}.getReplyMessageId not implemented.`);
+  getRepliedMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx {
+    throw new Error(`Method ${this.name}.getRepliedMessage not implemented.`);
+  }
+  getRepliedMessageId(message: IBotProviderMessageCtx): number {
+    throw new Error(`Method ${this.name}.getRepliedMessageId not implemented.`);
   }
 
   isMessageLike(ctx: IBotProviderMessageCtx): boolean {

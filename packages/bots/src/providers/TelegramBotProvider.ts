@@ -53,6 +53,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
   }
+  getMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+    const message = this.getMessage(ctx);
+    return message.message_id || null;
+  }
   getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number {
     const message = this.getMessage(ctx);
     if (get(message, 'from.id')) return get(message, 'from.id');
@@ -69,9 +73,14 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(message, 'from.id')) return get(message, 'from.id');
     return null;
   }
-  getReplyMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+  getRepliedMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx {
     const message = this.getMessage(ctx);
-    return message.message_id;
+    return message.reply_to_message || null;
+  }
+  getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+    const message = this.getRepliedMessage(ctx);
+    if (!message) return null;
+    return message.message_id || null;
   }
   getMessageText(ctx: TelegramIBotProviderMessageCtx): string {
     if (typeof ctx === 'string') return ctx;
@@ -149,7 +158,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
 
     let method: string;
     let args: any[];
-    let extra: any = {};
+    const extra: any = {};
     if (type === 'audio') {
       method = 'sendAudio';
       args = [message.audio.file_id];
@@ -240,7 +249,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
       method = 'sendPhoto';
     } else {
       method = 'sendMessage';
-    } 
+    }
     // this.log?.trace('ctx', method)
     await this[method](ctx, payload, extra);
   }
@@ -261,14 +270,14 @@ export default class TelegramBotProvider extends BaseBotProvider {
       method = 'replyWithText';
     } else {
       method = 'reply';
-    } 
+    }
     await ctx[method](payload, extra);
   }
   reply(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
     return this.client.telegram
       .sendMessage(this.getMessageTargetId(ctx), payload, {
         ...extra,
-        reply_to_message_id: this.getReplyMessageId(ctx),
+        reply_to_message_id: this.getRepliedMessageId(ctx),
       })
       .catch((err) => {
         this.log?.error(err);

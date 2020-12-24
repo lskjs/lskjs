@@ -89,8 +89,8 @@ export default class BotsModule extends Module {
       // this.log.info(222, bot.config, !!bot.app, bot.key)
       return bot;
     });
-    this.log.debug('bots', Object.keys(this.bots));
 
+    this.log.debug('bots', Object.keys(this.bots));
     const currentPlugins = await this.getPlugins();
     this.plugins = await asyncMapValues(currentPlugins, async (pluginFn, name) => {
       const Plugin = await importFn(pluginFn);
