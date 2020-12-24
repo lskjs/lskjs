@@ -2,6 +2,7 @@ import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
 import Module from '@lskjs/module/2';
+import pickBy from 'lodash/pickBy';
 import { EventEmitter } from 'events';
 import providers from './providers/async';
 import plugins from './plugins/async';
@@ -94,16 +95,19 @@ export default class BotsModule extends Module {
     const currentPlugins = await this.getPlugins();
     this.plugins = await asyncMapValues(currentPlugins, async (pluginFn, name) => {
       const Plugin = await importFn(pluginFn);
-      // if (__DEV__) console.log({ Plugin });
+      const pluginConfig = pluginsConfig && pluginsConfig[name];
+      // if (__DEV__) this.log.trace({ Plugin, pluginConfig });
+      if (pluginConfig === false) return null;
       const plugin = new Plugin({
         app: this.app,
         botsModule: this,
         bots: this.bots,
-        config: (pluginsConfig && pluginsConfig[name]) || {},
+        config: pluginConfig || {},
       });
       await plugin.init();
       return plugin;
     });
+    this.plugins = pickBy(this.plugins, Boolean);
     this.log.debug('plugins', Object.keys(this.plugins));
 
     if (assignProviders) Object.assign(this, this.bots);
