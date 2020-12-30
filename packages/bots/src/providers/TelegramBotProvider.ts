@@ -255,6 +255,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
 
   async replyContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+    console.log({content})
     let type: string;
     let payload: any;
     if (typeof content === 'string') {

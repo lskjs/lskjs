@@ -309,6 +309,11 @@ export default () => {
       passport_data: {
         type: Object,
       },
+
+      // Объект, в котрый можно складировать мета-информацию
+      meta: {
+        type: Object,
+      },
     },
     {
       model: 'BotsTelegramMessage',

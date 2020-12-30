@@ -3,9 +3,11 @@ import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
 import Module from '@lskjs/module/2';
 import pickBy from 'lodash/pickBy';
+import flatten from 'lodash/flatten';
 import { EventEmitter } from 'events';
 import providers from './providers/async';
 import plugins from './plugins/async';
+import Router from './utils/Router';
 import { IBotProvider, AsyncProvidersType, AsyncPluginsType } from './types';
 
 export default class BotsModule extends Module {
@@ -45,6 +47,60 @@ export default class BotsModule extends Module {
       ...(this.providers || {}),
     };
   }
+
+  async getRoutes(): any {
+    const plugingRoutes = await asyncMapValues(this.plugins, async (plugin) => {
+      if (plugin && plugin.getRoutes) {
+        const routes = await plugin.getRoutes();
+        if (!Array.isArray(routes)) return [routes];
+        return routes;
+      }
+      return [];
+    });
+    console.log({ plugingRoutes });
+    return {
+      children: [
+        ...flatten(Object.values(plugingRoutes)),
+        {
+          path: '/start',
+          action: this.onStart.bind(this),
+        },
+        {
+          path: '(.*)',
+          action({ path, log }) {
+            log.error('404', path);
+            return true;
+          },
+        },
+      ],
+    };
+  }
+
+  async onStart({ ctx, path }) {
+    await ctx.reply(`Hello LSK world`);
+    // const createButtons = (value) => {
+    //   if (Array.isArray(value)) return value.map(createButtons);
+    //   return Markup.callbackButton(value, value);
+    // };
+    // const buttons = [
+    //   ['/start', '/menu', '/menu/submenu'],
+    //   ['/menu/submenu/1', '/menu/submenu/2', '/menu/submenu/4'],
+    // ];
+
+    // const content = `Hello LSK world`;
+
+    // await ctx.reply(content);
+
+    // // await ctx.editMessageText();
+    // // await ctx.answerCbQuery();
+
+    // // await ctx.replyWithChatAction('typing');
+    // // await Bluebird.delay(500);
+    // // await ctx.editMessageText(this.app.i18.t('bot.city.enter'));
+    // // await ctx.answerCbQuery();
+    // return true;
+  }
+
   // async getPlugins() {
   //   return import('./plugins');
   // }
@@ -109,6 +165,24 @@ export default class BotsModule extends Module {
     });
     this.plugins = pickBy(this.plugins, Boolean);
     this.log.debug('plugins', Object.keys(this.plugins));
+
+    this.routes = await this.getRoutes();
+    this.log.debug(
+      'Bots.routes',
+      this.routes.children.map((c) => c.path),
+    );
+
+    this.routers = await asyncMapValues(this.bots, async (bot) => {
+      const router = new Router({
+        app: this.app,
+        botsModule: this.botsModule,
+        bots: this.bots,
+        bot,
+        routes: this.routes,
+      });
+      await router.init();
+      return router;
+    });
 
     if (assignProviders) Object.assign(this, this.bots);
   }

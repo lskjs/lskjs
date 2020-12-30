@@ -4,6 +4,7 @@ import some from 'lodash/some';
 import Module from '@lskjs/module/2';
 import assignProps from '@lskjs/utils/assignProps';
 import { IBotPlugin, IBotProvider, IBotProviderMessageCtx, IBotProviderCommand } from '../types';
+import emojiRegexp from '../utils/emojiRegexp';
 
 export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
@@ -16,7 +17,7 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   config;
 
   constructor(...props: any[]) {
-    super(...props)
+    super(...props);
     assignProps(this, ...props);
   }
 
@@ -125,6 +126,25 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
       return text.match(regExp) != null;
     }
     return text.startsWith(regExp);
+  }
+
+  isMessageStartsWithEmoji(message: IBotProviderMessageCtx): boolean {
+    return this.isMessageStartsWith(message, new RegExp(`^${emojiRegexp}`));
+  }
+  getMessageStartsEmoji(message: IBotProviderMessageCtx): string {
+    const messageText = this.getMessageText(message);
+    return messageText.match(new RegExp(`^${emojiRegexp}+`))[0];
+  }
+  getMessageStartsEmojiArray(message: IBotProviderMessageCtx): string[] {
+    const emojies = this.getMessageStartsEmoji(message);
+    const array = emojies.match(new RegExp(`${emojiRegexp}`, 'g'));
+    return array;
+  }
+
+  isMessageCommands(message: IBotProviderMessageCtx, commands: IBotProviderCommand[] | IBotProviderCommand): boolean {
+    // eslint-disable-next-line no-param-reassign
+    if (!Array.isArray(commands)) commands = [commands];
+    return some(commands, (command: string) => this.isMessageCommand(message, command));
   }
 
   isMessageCommands(message: IBotProviderMessageCtx, commands: IBotProviderCommand[] | IBotProviderCommand): boolean {

@@ -109,6 +109,18 @@ export interface IBotProvider extends IModule {
    * @param {*} substr
    */
   isMessageStartsWith(message: IBotProviderMessageCtx, substr: IBotProviderCommand): boolean;
+  
+  /**
+   * Начинается ли сообщение со строки или регулярки
+   * @param {*} message
+   */
+  isMessageStartsWithEmoji(message: IBotProviderMessageCtx): boolean;
+
+  /**
+   * Начинается ли сообщение со строки или регулярки
+   * @param {*} message
+   */
+  getMessageStartEmoji(message: IBotProviderMessageCtx): string;
 
   /**
    * Является ли сообщение конкретной командой
