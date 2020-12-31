@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.96.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.95.0...v1.96.0) (2020-12-31)
+
+
+### Features
+
+* **utils:** add errProps, Err2 ([82cb282](https://github.com/isuvorov/lib-starter-kit/commit/82cb282a6b9e12c9521a2bf900da965a58b9f954))
+* **utils:** improve errMerge ([7ceba99](https://github.com/isuvorov/lib-starter-kit/commit/7ceba99368a4da19faff521e53497239af5e9b6c))
+
+
+
+
+
 # [1.95.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.94.0...v1.95.0) (2020-12-31)
 
 
