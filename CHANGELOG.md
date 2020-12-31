@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.95.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.94.0...v1.95.0) (2020-12-31)
+
+
+### Features
+
+* **bots:** create useForm, renderForm, createForm ([97bcd0a](https://github.com/isuvorov/lib-starter-kit/commit/97bcd0a664bd756b41c644b0fb0e7d23be9bcd1a))
+* **bots:** global router, keyboard, emoji functions ([03fbaac](https://github.com/isuvorov/lib-starter-kit/commit/03fbaacacb680a0036fc2e9687b05a44cbf7929d))
+* **bots:** improve router and bots provider api ([2095431](https://github.com/isuvorov/lib-starter-kit/commit/2095431c6e3f121e62df9b5f53103f8a1c5939fe))
+
+
+
+
+
 # [1.94.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.93.0...v1.94.0) (2020-12-24)
 
 
