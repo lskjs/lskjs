@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.97.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.96.0...v1.97.0) (2020-12-31)
+
+
+### Features
+
+* **utils:** improve params and tryParamParse ([83d0f41](https://github.com/isuvorov/lib-starter-kit/commit/83d0f41a24dae51c284c0a6ba96faf45c5b192c7))
+
+
+
+
+
 # [1.96.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.95.0...v1.96.0) (2020-12-31)
 
 
