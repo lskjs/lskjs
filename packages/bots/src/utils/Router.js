@@ -1,6 +1,8 @@
 import UniversalRouter from 'universal-router';
 import Module2 from '@lskjs/module/2';
 import Bluebird from 'bluebird';
+import url from 'url';
+import qs from 'querystring';
 
 export class Router extends Module2 {
   // debug = true;
@@ -10,7 +12,7 @@ export class Router extends Module2 {
       this.log.warn('!routes');
       return;
     }
-    this.log.trace('Router.routes', Object.keys(this.routes));
+    this.log.trace('Router.routes', this.routes.map((c) => c.path).filter(Boolean));
     this.router = new UniversalRouter(this.routes);
     this.bot.client.use(::this.middleware);
   }
@@ -21,22 +23,34 @@ export class Router extends Module2 {
     const props = this.getPathFromEvent(ctx);
     // console.log('routerPath', { routerPath });
     const res = await this.resolve({ ctx, ...props });
-    console.log('middleware res', props, res);
+    // console.log('middleware res', props, res);
     // await this.redirect(ctx, routerPath);
     return next(ctx);
   }
 
+  parsePathnameAndQuery(str) {
+    const { pathname, query: queryString } = url.parse(str);
+    const query = queryString && queryString.length ? qs.decode(queryString) : undefined;
+
+    return {
+      pathname,
+      query,
+    };
+  }
+
   getPathFromEvent(ctx) {
     if (this.bot.isMessageCallback(ctx)) {
-      return { path: this.bot.getMessageCallbackData(ctx) };
+      delete ctx.session.nextRoute;
+      return this.parsePathnameAndQuery(this.bot.getMessageCallbackData(ctx));
     }
     if (this.bot.isMessageCommand(ctx)) {
-      return { path: this.bot.getMessageText(ctx) };
+      delete ctx.session.nextRoute;
+      return this.parsePathnameAndQuery(this.bot.getMessageCommand(ctx));
     }
     if (ctx.session.nextRoute) {
       const { nextRoute } = ctx.session;
-      ctx.session.nextRoute = null;
-      if (typeof nextRoute === 'string') return { path: nextRoute };
+      delete ctx.session.nextRoute;
+      if (typeof nextRoute === 'string') return this.parsePathnameAndQuery(nextRoute);
       return nextRoute;
     }
     if (this.bot.isMessageStartsWithEmoji(ctx)) {
@@ -66,18 +80,18 @@ export class Router extends Module2 {
 
   async resolve({ pathname, path, query = {}, ctx } = {}) {
     // eslint-disable-next-line no-param-reassign
-    if (!pathname && path) pathname = path;
+    if (!path && pathname) path = pathname;
     // const { routerPath: pathname } = ctx.session;
-    if (!pathname) {
-      if (this.debug) this.log.warn('!pathname');
+    if (!path) {
+      if (this.debug) this.log.warn('!path');
       return null;
     }
     if (!ctx) {
       if (this.debug) this.log.warn('!ctx');
       return null;
     }
-    if (this.debug) this.log.trace('resolve', pathname);
-    ctx.nextRedirect = async (path, query = {}) => {
+    if (this.debug) this.log.trace('resolve', path);
+    ctx.nextRedirect = async (path, query) => {
       if (!path) throw '!path';
       let props = {};
       if (typeof path === 'string') {
@@ -85,10 +99,10 @@ export class Router extends Module2 {
       } else {
         props = path;
       }
-      props.query = query;
+      if (!props.query && query) props.query = query;
       ctx.session.nextRoute = props;
       if (__DEV__) {
-        this.log.info(`nextRedirect => ${props.path || props.pathname} [delay] ${1000}`);
+        this.log.info(`nextRedirect =>  ${JSON.stringify(props)}`);
         // await Bluebird.delay(1000);
       }
       return props;
@@ -108,9 +122,20 @@ export class Router extends Module2 {
       }
       return this.resolve({ ctx, ...props });
     };
+    const provide = this.provide();
     const data = {
-      ...this.provide(),
-      pathname,
+      ...provide,
+      req: {
+        path,
+        pathname: path,
+        bot: provide.bot,
+        log: this.log,
+        ctx,
+        query,
+        i18: provide.i18,
+      },
+      path,
+      pathname: path,
       query,
       ctx,
     };

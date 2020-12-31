@@ -79,6 +79,9 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   isMessageCommand(message: IBotProviderMessageCtx, command: string): boolean {
     throw new Error(`Method ${this.name}.isMessageCommand not implemented.`);
   }
+  getMessageCommand(ctx: IBotProviderMessageCtx): string | null {
+    throw new Error(`Method ${this.name}.getMessageCommand not implemented.`);
+  }
 
   getMessageDate(message: IBotProviderMessageCtx): Date {
     throw new Error(`Method ${this.name}.getMessageDate not implemented.`);
@@ -131,7 +134,7 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   isMessageStartsWithEmoji(message: IBotProviderMessageCtx): boolean {
     return this.isMessageStartsWith(message, new RegExp(`^${emojiRegexp}`));
   }
-  getMessageStartsEmoji(message: IBotProviderMessageCtx): string {
+  getMessageStartsEmoji(message: IBotProviderMessageCtx): string | null {
     const messageText = this.getMessageText(message);
     return messageText.match(new RegExp(`^${emojiRegexp}+`))[0];
   }
@@ -139,12 +142,6 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
     const emojies = this.getMessageStartsEmoji(message);
     const array = emojies.match(new RegExp(`${emojiRegexp}`, 'g'));
     return array;
-  }
-
-  isMessageCommands(message: IBotProviderMessageCtx, commands: IBotProviderCommand[] | IBotProviderCommand): boolean {
-    // eslint-disable-next-line no-param-reassign
-    if (!Array.isArray(commands)) commands = [commands];
-    return some(commands, (command: string) => this.isMessageCommand(message, command));
   }
 
   isMessageCommands(message: IBotProviderMessageCtx, commands: IBotProviderCommand[] | IBotProviderCommand): boolean {

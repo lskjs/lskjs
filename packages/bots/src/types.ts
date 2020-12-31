@@ -120,7 +120,7 @@ export interface IBotProvider extends IModule {
    * Начинается ли сообщение со строки или регулярки
    * @param {*} message
    */
-  getMessageStartEmoji(message: IBotProviderMessageCtx): string;
+  getMessageStartsEmoji(message: IBotProviderMessageCtx): string | null;
 
   /**
    * Является ли сообщение конкретной командой
@@ -128,6 +128,12 @@ export interface IBotProvider extends IModule {
    * @param {*} command
    */
   isMessageCommand(message: IBotProviderMessageCtx, command: IBotProviderCommand): boolean;
+
+  /**
+   * Получить команду из сообщения
+   * @param {*} message
+   */
+  getMessageCommand(message: IBotProviderMessageCtx): string | null;
 
   /**
    * Является ли сообщение одной из командой

@@ -17,6 +17,8 @@ export default class BotsModule extends Module {
     [name: string]: IBotProvider;
   };
   v: string;
+  routes: any;
+  routers: any;
 
   constructor(...props: any[]) {
     super(...props);
@@ -48,7 +50,7 @@ export default class BotsModule extends Module {
     };
   }
 
-  async getRoutes(): any {
+  async getRoutes(): Promise<any> {
     const plugingRoutes = await asyncMapValues(this.plugins, async (plugin) => {
       if (plugin && plugin.getRoutes) {
         const routes = await plugin.getRoutes();
@@ -57,9 +59,7 @@ export default class BotsModule extends Module {
       }
       return [];
     });
-    console.log({ plugingRoutes });
-    return {
-      children: [
+    return [
         ...flatten(Object.values(plugingRoutes)),
         {
           path: '/start',
@@ -72,8 +72,7 @@ export default class BotsModule extends Module {
             return true;
           },
         },
-      ],
-    };
+      ]
   }
 
   async onStart({ ctx, path }) {
@@ -169,13 +168,13 @@ export default class BotsModule extends Module {
     this.routes = await this.getRoutes();
     this.log.debug(
       'Bots.routes',
-      this.routes.children.map((c) => c.path),
+      this.routes.map((c) => c.path),
     );
 
     this.routers = await asyncMapValues(this.bots, async (bot) => {
       const router = new Router({
         app: this.app,
-        botsModule: this.botsModule,
+        botsModule: this,
         bots: this.bots,
         bot,
         routes: this.routes,

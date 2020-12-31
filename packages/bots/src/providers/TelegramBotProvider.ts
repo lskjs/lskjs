@@ -75,9 +75,25 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
   getRepliedMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx {
     const message = this.getMessage(ctx);
+    // console.log({message})
     return message.reply_to_message || null;
   }
   getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+    const message = this.getRepliedMessage(ctx);
+    // console.log({getRepliedMessage: message})
+
+    if (!message) return null;
+    return message.message_id || null;
+  }
+  getCallback(ctx: TelegramIBotProviderMessageCtx): any {
+    return ctx.update && ctx.update.callback_query;
+  }
+  getCallbackMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx {
+    const callback = this.getCallback(ctx);
+    if (!callback) return null;
+    return callback.message;
+  }
+  getCallbackMessageId(ctx: TelegramIBotProviderMessageCtx): number {
     const message = this.getRepliedMessage(ctx);
     if (!message) return null;
     return message.message_id || null;
@@ -96,6 +112,11 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
   isMessageCommand(ctx: TelegramIBotProviderMessageCtx, command: RegExp | string): boolean {
     return this.isMessageStartsWith(ctx, `/${command || ''}`);
+  }
+  getMessageCommand(ctx: TelegramIBotProviderMessageCtx): string | null {
+    const messageText = this.getMessageText(ctx);
+    if (messageText[0] !== '/') return null;
+    return messageText.split('@')[0].split(' ')[0];
   }
   getMessageDate(ctx: TelegramIBotProviderMessageCtx): Date {
     const message = this.getMessage(ctx);
@@ -255,7 +276,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
 
   async replyContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
-    console.log({content})
+    // console.log({ content });
     let type: string;
     let payload: any;
     if (typeof content === 'string') {
@@ -274,16 +295,29 @@ export default class TelegramBotProvider extends BaseBotProvider {
     }
     await ctx[method](payload, extra);
   }
-  reply(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
-    return this.client.telegram
-      .sendMessage(this.getMessageTargetId(ctx), payload, {
-        ...extra,
-        reply_to_message_id: this.getRepliedMessageId(ctx),
-      })
-      .catch((err) => {
-        this.log?.error(err);
-        throw err;
-      });
+  reply(ctx: TelegramIBotProviderMessageCtx, payload: any, initExtra = {}) {
+    const extra = {
+      reply_to_message_id: this.getRepliedMessageId(ctx) || this.getMessageId(ctx),  //eslint-disable-line
+      ...initExtra,
+    };
+    // console.log({extra})
+    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, extra).catch((err) => {
+      this.log?.error(err);
+      throw err;
+    });
+  }
+  editMessage(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
+    // console.log({extra})
+    return this.client.telegram.editMessage(this.getMessageId(ctx), payload, extra).catch((err) => {
+      this.log?.error(err);
+      throw err;
+    });
+  }
+  deleteMessage(ctx: TelegramIBotProviderMessageCtx): any {
+    const chatId = this.getMessageChatId(ctx);
+    const messageId = this.getMessageTargetId(ctx);
+    // console.log({chatId, messageId})
+    return this.client.telegram.deleteMessage(chatId, messageId);
   }
   sendMessage(ctx, ...args) {
     return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
