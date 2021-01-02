@@ -4,7 +4,7 @@ import Bluebird from 'bluebird';
 import url from 'url';
 import qs from 'querystring';
 
-export class Router extends Module2 {
+export class BotsRouter extends Module2 {
   // debug = true;
   async init() {
     await super.init();
@@ -12,7 +12,15 @@ export class Router extends Module2 {
       this.log.warn('!routes');
       return;
     }
-    this.log.trace('Router.routes', this.routes.map((c) => c.path).filter(Boolean));
+    if (!this.bot.client) {
+      this.log.warn('!client');
+      return;
+    }
+    if (!this.bot.client.use) {
+      this.log.warn('!client.use');
+      return;
+    }
+    this.log.trace('routes', this.routes.map((c) => c.path).filter(Boolean));
     this.router = new UniversalRouter(this.routes);
     this.bot.client.use(::this.middleware);
   }
@@ -147,4 +155,4 @@ export class Router extends Module2 {
   }
 }
 
-export default Router;
+export default BotsRouter;

@@ -7,7 +7,7 @@ import flatten from 'lodash/flatten';
 import { EventEmitter } from 'events';
 import providers from './providers/async';
 import plugins from './plugins/async';
-import Router from './utils/Router';
+import BotsRouter from './utils/BotsRouter';
 import { IBotProvider, AsyncProvidersType, AsyncPluginsType } from './types';
 
 export default class BotsModule extends Module {
@@ -172,7 +172,7 @@ export default class BotsModule extends Module {
     );
 
     this.routers = await asyncMapValues(this.bots, async (bot) => {
-      const router = new Router({
+      const router = new BotsRouter({
         app: this.app,
         botsModule: this,
         bots: this.bots,
