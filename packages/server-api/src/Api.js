@@ -133,8 +133,12 @@ export default class Api extends Module2 {
   }
   getRoutes() {
     return {
-      '*': () => ({ ok: true, message: 'Api.getRoutes is empty' }),
+      '/': ::this.index,
+      '*': () => ({ __pack: 1, ok: true, message: 'Api.getRoutes is empty' }),
     };
+  }
+  async index() {
+    return `${this.name} – ok`;
   }
   isAdmin(req) {
     // return true;

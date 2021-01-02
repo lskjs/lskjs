@@ -41,8 +41,9 @@ export default class IndexApi extends Api {
   envjs(req, res) {
     return res.send(serializeWindow(this.app.getEnv(req)));
   }
-  getRoutes() {
+  async getRoutes() {
     return {
+      ...(await super.getRoutes()),
       '/': ::this.index,
       '/env': ::this.env,
       '/env.json': ::this.env,
