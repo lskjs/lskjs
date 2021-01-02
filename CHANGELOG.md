@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.98.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.97.0...v1.98.0) (2021-01-02)
+
+
+### Features
+
+* **server-api:** init Api before getRoutes call ([5d084f0](https://github.com/isuvorov/lib-starter-kit/commit/5d084f03eb4df0692ae5f5dfc4a59e86d7456546))
+* **utils:** improve mapKeys and mapKeyValues ([9a393b3](https://github.com/isuvorov/lib-starter-kit/commit/9a393b3bddd3e48ceed9ed39847a510e3e96f5cc))
+
+
+
+
+
 # [1.97.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.96.0...v1.97.0) (2020-12-31)
 
 

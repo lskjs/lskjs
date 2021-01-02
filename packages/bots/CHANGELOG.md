@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.98.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.97.0...v1.98.0) (2021-01-02)
+
+
+### Features
+
+* **utils:** improve mapKeys and mapKeyValues ([9a393b3](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/9a393b3bddd3e48ceed9ed39847a510e3e96f5cc))
+
+
+
+
+
 # [1.97.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.96.0...v1.97.0) (2020-12-31)
 
 **Note:** Version bump only for package @lskjs/bots
