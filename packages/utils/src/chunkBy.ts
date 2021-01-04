@@ -16,7 +16,8 @@ export default <T>(collection: Array<T>, predicate: () => boolean): Array<Array<
         chunk = [];
         chunks[count] = chunk;
       }
-      chunk.push(group.pop()); // TODO: подумать повнимательнее
+      const res = group.pop()
+      if (res !== undefined) chunk.push(res); // TODO: подумать повнимательнее
       set(counts, key, count + 1);
       if (group.length === 0) delete groups[key];
     });
