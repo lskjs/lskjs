@@ -35,6 +35,7 @@
     "i18": "../../scripts/package-i18.sh",
     "clear": "../../scripts/package-clear.sh"
   },
+  "dependencies": {},
   "devDependencies": {
     "@lskjs/db": "1.89.2",
     "@lskjs/log": "1.98.0",

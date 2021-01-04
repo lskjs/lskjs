@@ -39,6 +39,7 @@
     "@lskjs/utils": "1.98.0",
     "colors": "1.4.0"
   },
+  "devDependencies": {},
   "bin": {
     "lsklog": "./bin/lsklog.js"
   }

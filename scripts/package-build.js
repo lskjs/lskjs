@@ -31,15 +31,18 @@ async function packageBuild() {
 
   const list = glob.sync('src/**/**.ts');
   if (list.length) {
+    // NOTE: Why? https://github.com/babel/babel/issues/9668#issuecomment-602221154
     res = await shell.exec(
       [
         '../../node_modules/typescript/bin/tsc',
-        '--declaration',
-        '--declarationMap',
-        '--emitDeclarationOnly',
-        '--esModuleInterop',
-        `--outDir ${DIST}`,
-        'src/**.ts',
+        '-p tsconfig.types.json',
+        // '--target es5',
+        // '--declaration',
+        // '--declarationMap',
+        // '--emitDeclarationOnly',
+        // '--esModuleInterop',
+        // `--outDir ${DIST}`,
+        // 'src/**.ts',
       ].join(' '),
     );
     if (res.code !== 0 && res.stdout.trim() !== "error TS6053: File 'src/**.ts' not found.") throw res;

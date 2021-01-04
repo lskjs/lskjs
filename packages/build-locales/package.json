@@ -45,6 +45,7 @@
     "mkdirp": "1.0.3",
     "rimraf": "3.0.2"
   },
+  "devDependencies": {},
   "bin": {
     "build-locales": "./bin/build-locales.js"
   }

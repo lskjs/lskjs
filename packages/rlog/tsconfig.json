@@ -27,9 +27,13 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": true,
+    "declarationMap": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    //
+    // "isolatedModules": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*"
