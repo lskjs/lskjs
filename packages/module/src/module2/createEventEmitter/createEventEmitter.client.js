@@ -1,3 +1,3 @@
 import EventEmitter from 'eventemitter3';
 
-export default EventEmitter;
+export default () => new EventEmitter();

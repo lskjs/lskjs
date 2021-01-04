@@ -84,7 +84,23 @@ export interface IModuleWithCtx {
   parent?: IModule;
 }
 
-export interface IModule extends IModuleWithLogger, IModuleWithWorkflow, IModuleWithEE, IModuleWithCtx {
+export interface IModuleWithInstance {
+  // /**
+  //  * создать инстанс и проинициализировать его
+  //  */
+  // static create(...props: any[]): Promise<IModule>;
+  // /**
+  //  * создать инстанс, проинициализировать и запустить
+  //  */
+  // static createAndRun(...props: any[]): Promise<IModule>;
+}
+
+export interface IModule
+  extends IModuleWithLogger,
+    IModuleWithWorkflow,
+    IModuleWithEE,
+    IModuleWithCtx,
+    IModuleWithInstance {
   name?: string;
 }
 
@@ -94,4 +110,4 @@ export interface IApp extends IModule {
   };
 }
 
-export { ILogger };
+export { ILogger }; // @ts-ignore
