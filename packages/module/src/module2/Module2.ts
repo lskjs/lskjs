@@ -2,6 +2,8 @@
 import { Logger, ILogger } from '@lskjs/log2';
 import get from 'lodash/get';
 import assignProps from '@lskjs/utils/assignProps';
+// @ts-ignore
+import Err from '@lskjs/utils/Err';
 import createEventEmitter from './createEventEmitter';
 import { IEventEmitter, IModule, IApp } from './types';
 
@@ -19,12 +21,22 @@ class Module2 implements IModule {
     [key: string]: any;
   };
 
+  private __createdAt: Date;
+  private __initAt: Date;
+  private __runAt: Date;
+
   constructor(...props: any[]) {
     assignProps(this, ...props);
   }
 
+  assignProps(...props: any[]): void {
+    assignProps(this, ...props);
+  }
+
   static async create(...props: any[]): Promise<IModule> {
-    const instance = new this(...props);
+    const instance = new this();
+    instance.assignProps(...props);
+    instance.__createdAt = new Date();
     await instance.init();
     return instance;
   }
@@ -54,10 +66,10 @@ class Module2 implements IModule {
     this.ee.emit(event, ...args);
   }
 
-  private __initAt: Date;
-  private __runAt: Date;
-
   async init(): Promise<void> {
+    if (!this.__createdAt) {
+      throw new Err('INVALID_NEW_MODULE', 'use Module.create(props) instead new Module(props)');
+    }
     if (this.__initAt) return;
     this.__initAt = new Date();
     this.name = this.constructor.name;
@@ -78,7 +90,7 @@ class Module2 implements IModule {
   }
 
   async stop(): Promise<void> {
-    // 
+    //
   }
 }
 

@@ -93,6 +93,7 @@ export interface IModuleWithInstance {
   //  * создать инстанс, проинициализировать и запустить
   //  */
   // static createAndRun(...props: any[]): Promise<IModule>;
+  assignProps(...props: any[]): void;
 }
 
 export interface IModule
