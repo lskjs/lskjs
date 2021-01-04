@@ -65,7 +65,7 @@ export class Logger implements ILogger {
   prefix: string | null;
   ns: string | null;
   name: string | null;
-  level: string | null;
+  level: string;
   levelsPriority = {
     log: 99,
     fatal: 60,
