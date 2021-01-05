@@ -47,7 +47,7 @@
   "dependencies": {
     "@babel/runtime": "7.8.4",
     "@lskjs/db": "1.89.2",
-    "@lskjs/module": "1.98.0",
+    "@lskjs/module": "1.99.0",
     "@lskjs/utils": "1.98.0",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
@@ -57,6 +57,7 @@
   "devDependencies": {
     "@buzzguru/instagram-private-api": "^1.42.0",
     "@slack/bolt": "2.3.0",
+    "@types/node": "14.10.0",
     "discord.js": "12.3.1",
     "node-vk-bot-api": "3.3.7",
     "qrcode-terminal": "0.12.0",

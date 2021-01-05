@@ -35,14 +35,8 @@ async function packageBuild() {
     res = await shell.exec(
       [
         '../../node_modules/typescript/bin/tsc',
-        '-p tsconfig.types.json',
-        // '--target es5',
-        // '--declaration',
-        // '--declarationMap',
-        // '--emitDeclarationOnly',
-        // '--esModuleInterop',
-        // `--outDir ${DIST}`,
-        // 'src/**.ts',
+        '--project tsconfig.types.json',
+        `--outDir ${DIST}`,
       ].join(' '),
     );
     if (res.code !== 0 && res.stdout.trim() !== "error TS6053: File 'src/**.ts' not found.") throw res;
