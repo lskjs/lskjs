@@ -48,7 +48,7 @@ export class MenuBotPlugin extends BaseBotPlugin {
   async getRoutes() {
     return this.menus.map(({ path, ...other }) => ({
       path,
-      action: ::this.onMenu,
+      action: this.onMenu.bind(this),
       ...other,
     }));
   }

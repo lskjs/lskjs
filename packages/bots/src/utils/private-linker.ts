@@ -7,7 +7,7 @@ export function convertPublicToPrivateChatId(id: number): string {
   return privateChatId;
 }
 
-function generateMessageLink(chatId: string, messageId?: string): string {
+export function generateMessageLink(chatId: string, messageId?: string): string {
   if (!messageId) return `https://t.me/c/${chatId}`;
   return `https://t.me/c/${chatId}/${messageId}`
 }
@@ -23,7 +23,7 @@ export function getPrivateLinkToMessage({
   messageId: number;
 }): string {
   const chatId = convertPublicToPrivateChatId(initChatId);
-  return generateMessageLink(String(chatId), messageId ? String(messageId) : null);
+  return generateMessageLink(String(chatId), String(messageId));
 }
 
-export default { convertPublicToPrivateChatId, getPrivateLinkToMessage };
+export default { convertPublicToPrivateChatId, generateMessageLink, getPrivateLinkToMessage };

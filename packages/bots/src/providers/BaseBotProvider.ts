@@ -8,18 +8,13 @@ import emojiRegexp from '../utils/emojiRegexp';
 
 export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
-  key: string | null = null;
+  key?: string;
   provider: string;
-  botsModule = null;
+  botsModule;
   plugins: Array<IBotPlugin> = [];
   eventTypes: Array<string>;
   client: any;
   config;
-
-  constructor(...props: any[]) {
-    super(...props);
-    assignProps(this, ...props);
-  }
 
   async init(): Promise<void> {
     await super.init();
@@ -40,7 +35,7 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   }
 
   getBotId(): string | null {
-    return this.key;
+    return this.key || null;
   }
 
   async initEventEmitter(): Promise<void> {
@@ -51,28 +46,44 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
     }
   }
 
-  getMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx {
+  getMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx | null {
     throw new Error(`Method ${this.name}.getMessage not implemented.`);
   }
-  getMessageId(ctx: IBotProviderMessageCtx): number {
+  getMessageId(ctx: IBotProviderMessageCtx): number | null {
     throw new Error(`Method ${this.name}.getMessageId, not implemented.`);
   }
-  getMessageUserId(message: IBotProviderMessageCtx): number {
+  getMessageUserId(message: IBotProviderMessageCtx): number | null {
     throw new Error(`Method ${this.name}.getMessageUserId not implemented.`);
   }
-  getMessageChatId(message: IBotProviderMessageCtx): number {
+  getMessageChatId(message: IBotProviderMessageCtx): number | null {
     throw new Error(`Method ${this.name}.getMessageChatId not implemented.`);
   }
-  getMessageTargetId(message: IBotProviderMessageCtx): number {
+  getMessageTargetId(message: IBotProviderMessageCtx): number | null {
     throw new Error(`Method ${this.name}.getMessageTargetId not implemented.`);
   }
   getRepliedMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx {
     throw new Error(`Method ${this.name}.getRepliedMessage not implemented.`);
   }
-  getRepliedMessageId(message: IBotProviderMessageCtx): number {
+  getRepliedMessageId(message: IBotProviderMessageCtx): number | null {
     throw new Error(`Method ${this.name}.getRepliedMessageId not implemented.`);
   }
 
+  // Telegram
+  // getCallback(ctx: TelegramIBotProviderMessageCtx): any | null {
+  //   throw new Error(`Method ${this.name}.getCallback not implemented.`);
+  // }
+  // getCallbackMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx | null {
+  //   throw new Error(`Method ${this.name}.getCallbackMessage not implemented.`);
+  // }
+  // getCallbackMessageId(ctx: getCallbackMessageId): number | null {
+  //   throw new Error(`Method ${this.name}.getCallbackMessage not implemented.`);
+  // }
+  // getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any | null {
+  //   throw new Error(`Method ${this.name}.getMessageCallbackData not implemented.`);
+  // }
+  // isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
+  //   throw new Error(`Method ${this.name}.isMessageCallback not implemented.`);
+  // }
   isMessageLike(ctx: IBotProviderMessageCtx): boolean {
     throw new Error(`Method ${this.name}.isMessageLike not implemented.`);
   }
@@ -83,15 +94,16 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
     throw new Error(`Method ${this.name}.getMessageCommand not implemented.`);
   }
 
-  getMessageDate(message: IBotProviderMessageCtx): Date {
+  getMessageDate(message: IBotProviderMessageCtx): Date | null {
     throw new Error(`Method ${this.name}.getMessageDate not implemented.`);
   }
-  getMessageType(message: IBotProviderMessageCtx): string {
+  getMessageType(message: IBotProviderMessageCtx): string | null {
     throw new Error(`Method ${this.name}.getMessageType not implemented.`);
   }
-  getMessageText(message: IBotProviderMessageCtx): string {
+  getMessageText(message: IBotProviderMessageCtx): string | null {
     throw new Error(`Method ${this.name}.getMessageText not implemented.`);
   }
+
   sendMessage(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<object> {
     throw new Error(`Method ${this.name}.sendMessage not implemented.`);
   }
@@ -136,12 +148,16 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   }
   getMessageStartsEmoji(message: IBotProviderMessageCtx): string | null {
     const messageText = this.getMessageText(message);
-    return messageText.match(new RegExp(`^${emojiRegexp}+`))[0];
+    if (!messageText) return null;
+    const array = messageText.match(new RegExp(`^${emojiRegexp}+`));
+    if (!array) return null;
+    return array[0] || null;
   }
   getMessageStartsEmojiArray(message: IBotProviderMessageCtx): string[] {
     const emojies = this.getMessageStartsEmoji(message);
+    if (!emojies) return [];
     const array = emojies.match(new RegExp(`${emojiRegexp}`, 'g'));
-    return array;
+    return array || [];
   }
 
   isMessageCommands(message: IBotProviderMessageCtx, commands: IBotProviderCommand[] | IBotProviderCommand): boolean {

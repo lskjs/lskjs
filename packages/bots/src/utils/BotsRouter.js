@@ -22,7 +22,7 @@ export class BotsRouter extends Module2 {
     }
     this.log.trace('routes', this.routes.map((c) => c.path).filter(Boolean));
     this.router = new UniversalRouter(this.routes);
-    this.bot.client.use(::this.middleware);
+    this.bot.client.use(this.middleware.bind(this));
   }
 
   async middleware(ctx, next) {

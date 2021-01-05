@@ -53,21 +53,21 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
   }
-  getMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+  getMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
     const message = this.getMessage(ctx);
     return message.message_id || null;
   }
-  getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number {
+  getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number | null {
     const message = this.getMessage(ctx);
     if (get(message, 'from.id')) return get(message, 'from.id');
     return null;
   }
-  getMessageChatId(ctx: TelegramIBotProviderMessageCtx): number {
+  getMessageChatId(ctx: TelegramIBotProviderMessageCtx): number | null {
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     return null;
   }
-  getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number {
+  getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number | null {
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     if (get(message, 'from.id')) return get(message, 'from.id');
@@ -78,34 +78,34 @@ export default class TelegramBotProvider extends BaseBotProvider {
     // console.log({message})
     return message.reply_to_message || null;
   }
-  getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+  getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
     const message = this.getRepliedMessage(ctx);
     // console.log({getRepliedMessage: message})
 
     if (!message) return null;
     return message.message_id || null;
   }
-  getCallback(ctx: TelegramIBotProviderMessageCtx): any {
+  getCallback(ctx: TelegramIBotProviderMessageCtx): any | null {
     return ctx.update && ctx.update.callback_query;
   }
-  getCallbackMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx {
+  getCallbackMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx | null {
     const callback = this.getCallback(ctx);
     if (!callback) return null;
     return callback.message;
   }
-  getCallbackMessageId(ctx: TelegramIBotProviderMessageCtx): number {
+  getCallbackMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
     const message = this.getRepliedMessage(ctx);
     if (!message) return null;
     return message.message_id || null;
+  }
+  getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any | null {
+    return get(ctx, 'update.callback_query.data', null);
   }
   getMessageText(ctx: TelegramIBotProviderMessageCtx): string {
     if (typeof ctx === 'string') return ctx;
     if (get(ctx, 'message.caption')) return get(ctx, 'message.caption');
     if (get(ctx, 'message.text')) return get(ctx, 'message.text');
     return get(ctx, 'text');
-  }
-  getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any {
-    return get(ctx, 'update.callback_query.data', null);
   }
   isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
     return get(ctx, 'updateType') === 'callback_query';
@@ -170,12 +170,9 @@ export default class TelegramBotProvider extends BaseBotProvider {
    * @param {int|string} chatId repost target
    * @param {object} ctx message or message context
    */
-  repost(chatId: number | string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
+  async repost(chatId: number | string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
     const type = this.getMessageType(ctx);
     const message = this.getMessage(ctx);
-    const data = {};
-
-    /** Caption for the animation, audio, document, photo, video or voice, 0-1024 characters */
 
     let method: string;
     let args: any[];
@@ -239,7 +236,9 @@ export default class TelegramBotProvider extends BaseBotProvider {
       method = 'sendMessage';
       args = [`НАТА РЕАЛИЗУЙ МЕНЯ!!! [${type}] ${message.message_id}`];
     }
-    if (['animation', 'audio', 'document', 'photo', 'video', 'voice'].includes(type)) {
+
+    /** Caption for the animation, audio, document, photo, video or voice, 0-1024 characters */
+    if (type && ['animation', 'audio', 'document', 'photo', 'video', 'voice'].includes(type)) {
       extra.caption = message.caption;
     }
     if (!this.client.telegram[method]) {

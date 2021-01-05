@@ -2,17 +2,18 @@ import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
 import Module from '@lskjs/module/2';
+import { ILogger } from '@lskjs/module/module2/types';
 import pickBy from 'lodash/pickBy';
 import flatten from 'lodash/flatten';
-import { EventEmitter } from 'events';
 import providers from './providers/async';
 import plugins from './plugins/async';
-import BotsRouter from './utils/BotsRouter';
-import { IBotProvider, AsyncProvidersType, AsyncPluginsType } from './types';
+import { BotsRouter } from './utils/BotsRouter';
+import { IBotProvider, IAsyncProviders, IAsyncPlugins, IAnyKeyValue } from './types';
 
 export default class BotsModule extends Module {
-  providers: AsyncProvidersType = providers;
-  plugins: AsyncPluginsType = {};
+  providers: IAsyncProviders = providers;
+  plugins: IAsyncPlugins = {};
+  log: ILogger;
   bots: {
     [name: string]: IBotProvider;
   };
@@ -20,37 +21,30 @@ export default class BotsModule extends Module {
   routes: any;
   routers: any;
 
-  constructor(...props: any[]) {
-    super(...props);
-
+  assignProps(...props: any[]): void {
+    super.assignProps(...props);
     try {
       this.v = require('./package.json').version;
     } catch (err) {
       console.log(err);
     }
-
-    assignProps(this, ...props);
   }
 
-  createEventEmitter() {
-    return new EventEmitter();
-  }
-
-  async getPlugins() {
+  async getPlugins(): Promise<IAnyKeyValue> {
     return {
       ...plugins,
       ...(this.plugins || {}),
     };
   }
 
-  async getProviders() {
+  async getProviders(): Promise<IAnyKeyValue> {
     return {
       ...providers,
       ...(this.providers || {}),
     };
   }
 
-  async getRoutes(): Promise<any> {
+  async getRoutes(): Promise<any[]> {
     const plugingRoutes = await asyncMapValues(this.plugins, async (plugin) => {
       if (plugin && plugin.getRoutes) {
         const routes = await plugin.getRoutes();
@@ -60,22 +54,22 @@ export default class BotsModule extends Module {
       return [];
     });
     return [
-        ...flatten(Object.values(plugingRoutes)),
-        {
-          path: '/start',
-          action: this.onStart.bind(this),
+      ...flatten(Object.values(plugingRoutes)),
+      {
+        path: '/start',
+        action: this.onStart.bind(this),
+      },
+      {
+        path: '(.*)',
+        action({ path, log }: any) {
+          log.error('404', path);
+          return true;
         },
-        {
-          path: '(.*)',
-          action({ path, log }) {
-            log.error('404', path);
-            return true;
-          },
-        },
-      ]
+      },
+    ];
   }
 
-  async onStart({ ctx, path }) {
+  async onStart({ ctx, path }: any) {
     await ctx.reply(`Hello LSK world`);
     // const createButtons = (value) => {
     //   if (Array.isArray(value)) return value.map(createButtons);
@@ -115,12 +109,11 @@ export default class BotsModule extends Module {
   async init(): Promise<void> {
     await super.init();
     if (!this.config) {
-      if (this.app.config.bots) {
-        this.config = this.app.config.bots;
-      } else {
+      if (!this.app?.config?.bots) {
         this.log.warn('!config');
         return;
-      }
+      } 
+      this.config = this.app.config.bots;
     }
     // console.log('this.app.config.bots', this.app.config.bots)
     // console.log(this.config)
@@ -139,11 +132,7 @@ export default class BotsModule extends Module {
         return null;
       }
       const Provider = await importFn(providers[provider]);
-      const bot = new Provider({ app: this.app, botsModule: this, config, key });
-      // this.log.info(111, bot.config, !!bot.app, bot.key)
-      await bot.init();
-      // this.log.info(222, bot.config, !!bot.app, bot.key)
-      return bot;
+      return Provider.create({ app: this.app, botsModule: this, config, key });
     });
 
     this.log.debug('bots', Object.keys(this.bots));
@@ -153,14 +142,12 @@ export default class BotsModule extends Module {
       const pluginConfig = pluginsConfig && pluginsConfig[name];
       // if (__DEV__) this.log.trace({ Plugin, pluginConfig });
       if (pluginConfig === false) return null;
-      const plugin = new Plugin({
+      return Plugin.create({
         app: this.app,
         botsModule: this,
         bots: this.bots,
         config: pluginConfig || {},
       });
-      await plugin.init();
-      return plugin;
     });
     this.plugins = pickBy(this.plugins, Boolean);
     this.log.debug('plugins', Object.keys(this.plugins));
@@ -172,15 +159,13 @@ export default class BotsModule extends Module {
     );
 
     this.routers = await asyncMapValues(this.bots, async (bot) => {
-      const router = new BotsRouter({
+      return BotsRouter.create({
         app: this.app,
         botsModule: this,
         bots: this.bots,
         bot,
         routes: this.routes,
-      });
-      await router.init();
-      return router;
+      }, { asd: 123});
     });
 
     if (assignProviders) Object.assign(this, this.bots);

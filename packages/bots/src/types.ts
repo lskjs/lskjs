@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import { IModule } from '@lskjs/module/module2';
 
-export interface IBotProviderMessageCtx {
-  [name: string]: any;
+export type IAnyKeyValue = {
+  [key: string]: any;
 }
+
+export type IAnyAsyncKeyValue = {
+  [key: string]: () => Promise<any> | any;
+};
+
+export type IBotProviderMessageCtx = IAnyKeyValue;
 export interface TelegramIBotProviderMessageCtx extends IBotProviderMessageCtx {
   telegram: string;
 }
@@ -11,9 +17,9 @@ export interface TelegramIBotProviderMessageCtx extends IBotProviderMessageCtx {
 export type IBotProviderCommand = RegExp | string;
 export type IBotProviderPayload = object | string;
 export interface IBotProvider extends IModule {
-  key: string | null;
+  key?: string;
   provider: string;
-  botsModule: IModule | null;
+  botsModule?: IModule;
   plugins: IBotPlugin[];
   eventTypes: string[];
   client: any;
@@ -40,61 +46,61 @@ export interface IBotProvider extends IModule {
    * Возвращает сырое сообщение из контекста
    * @param {*} message message or message context
    */
-  getMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx;
+  getMessage(ctx: IBotProviderMessageCtx): IBotProviderMessageCtx | null;
 
   /**
    * Возвращает id сообщение из контекста
    * @param {*} message message or message context
    */
-  getMessageId(ctx: IBotProviderMessageCtx): number;
+  getMessageId(ctx: IBotProviderMessageCtx): number | null;
 
   /**
    * Возвращает id пользователя написавшего сообщение
    * @param {*} message message or message context
    */
-  getMessageUserId(message: IBotProviderMessageCtx): number;
+  getMessageUserId(message: IBotProviderMessageCtx): number | null;
 
   /**
    * Возвращает id чата в котором написано сообщение
    * @param {*} message message or message context
    */
-  getMessageChatId(message: IBotProviderMessageCtx): number;
+  getMessageChatId(message: IBotProviderMessageCtx): number | null;
 
   /**
    * Возвращает id чата или пользователя, которому/куда написано сообщение
    * @param {*} message message or message context
    */
-  getMessageTargetId(message: IBotProviderMessageCtx): number;
+  getMessageTargetId(message: IBotProviderMessageCtx): number | null;
 
   /**
    * Возвращает сообщения, которое было реплайнуто
    * @param {*} message message or message context
    */
-  getRepliedMessage(message: IBotProviderMessageCtx): IBotProviderMessageCtx;
+  getRepliedMessage(message: IBotProviderMessageCtx): IBotProviderMessageCtx | null;
 
   /**
    * Возвращает id сообщения, которое было реплайнуто
    * @param {*} message message or message context
    */
-  getRepliedMessageId(message: IBotProviderMessageCtx): number;
+  getRepliedMessageId(message: IBotProviderMessageCtx): number | null;
 
   /**
    * Возвращает текст сообщения
    * @param {*} message message or message context
    */
-  getMessageText(message: IBotProviderMessageCtx): string;
+  getMessageText(message: IBotProviderMessageCtx): string | null;
 
   /**
    * Возвращает дату сообщения
    * @param {*} message message or message context
    */
-  getMessageDate(message: IBotProviderMessageCtx): Date;
+  getMessageDate(message: IBotProviderMessageCtx): Date | null;
 
   /**
    * Возвращает тип сообщения
    * @param {*} message message or message context
    */
-  getMessageType(message: IBotProviderMessageCtx): string;
+  getMessageType(message: IBotProviderMessageCtx): string | null;
 
   /**
    * Содержит ли сообщение подстроку или регулярку
@@ -160,7 +166,7 @@ export interface IBotProvider extends IModule {
 
 export interface IBotPlugin extends IModule {
   providers: string[];
-  botsModule: IModule | null;
+  botsModule?: IModule;
   bots: {
     [name: string]: IBotProvider;
   };
@@ -178,9 +184,6 @@ export interface IBotPlugin extends IModule {
 //   [key: string]: () => Promise<{default: IBotPlugin }>;
 // };
 
-export type AsyncProvidersType = {
-  [key: string]: () => Promise<any>;
-};
-export type AsyncPluginsType = {
-  [key: string]: () => Promise<any>;
-};
+export type IAsyncProviders = IAnyAsyncKeyValue;
+
+export type IAsyncPlugins = IAnyAsyncKeyValue;

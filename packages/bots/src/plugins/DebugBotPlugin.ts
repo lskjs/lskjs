@@ -1,16 +1,11 @@
-import assignProps from '@lskjs/utils/assignProps';
 import Bluebird from 'bluebird';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
 import { getPrivateLinkToMessage } from '../utils/private-linker';
 
 export class DebugBotPlugin extends BaseBotPlugin {
-  constructor(...props: any[]) {
-    super(...props);
-    assignProps(this, ...props);
-  }
-
   async runBot(bot: IBotProvider, name: string): Promise<void> {
+    if (!this.app) throw '!app';
     if (this.config?.logger !== false) await this.runLogger(bot, name);
     if (this.config?.ping !== false) await this.runPing(bot);
     if (this.config?.chat !== false) await this.runChatId(bot, name);
@@ -31,8 +26,10 @@ export class DebugBotPlugin extends BaseBotPlugin {
         return bot.reply(ctx, `[pong] ${ms}ms`);
       }
       if (bot.isMessageCommands(ctx, ['v', 'powered', 'poweredby'])) {
+        if (!this.botsModule) this.log.warn('!botsModule')
+        const v = this.botsModule!.v || 0
         const text = `
-*BotKit* \`v${this.botsModule.v}\` 
+*BotKit* \`v${v}\` 
 Powerful starter kit for bot development on Telegram, Discord, Instagram, Twitter, Facebook, WhatsApp, Vkontakte
 
 Do you want bot? Ask @isuvorov
@@ -45,6 +42,7 @@ Any question: @lskjschat
 Made on @LSKjs with ❤️`;
         return bot.reply(ctx, text, { parse_mode: 'MarkdownV2' });
       }
+      return null;
     });
   }
   async runChatId(bot: IBotProvider, name: string): Promise<void> {
@@ -79,7 +77,7 @@ Made on @LSKjs with ❤️`;
     });
   }
   async runLogger(bot: IBotProvider, name: string): Promise<void> {
-    const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = this.app.models;
+    const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = await this.app!.model(['BotsEventModel', 'BotsTelegramMessageModel', 'BotsTelegramUserModel', 'BotsTelegramChatModel']);
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
       bot.on(type, async (ctx) => {
@@ -145,7 +143,9 @@ Made on @LSKjs with ❤️`;
         return;
       }
       const chatId = bot.getMessageChatId(ctx);
-      let removeMessageId = bot.getMessageId(ctx);
+      let removeMessageId: number | null = bot.getMessageId(ctx);
+      if (!chatId) throw '!chatId'
+      if (!removeMessageId) throw '!removeMessageId'
       let messageId = bot.getRepliedMessageId(ctx);
       if (!messageId) {
         messageId = removeMessageId;
@@ -154,7 +154,7 @@ Made on @LSKjs with ❤️`;
       const text = getPrivateLinkToMessage({ chatId, messageId });
       await bot.reply(ctx, text);
 
-      await ctx.deleteMessage(removeMessageId);
+      if (removeMessageId) await ctx.deleteMessage(removeMessageId);
     });
   }
 }
