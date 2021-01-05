@@ -94,7 +94,6 @@ export interface IModuleWithInstance {
   __runAt: Date;
 }
 
-
 export interface IModule
   extends IModuleWithLogger,
     IModuleWithWorkflow,
@@ -108,18 +107,21 @@ export interface IModuleConstructor<T extends IModule> {
   /**
    * создать инстанс и проинициализировать его
    */
-  create(...props: IModulePropsArray): Promise<T>;
+  create<T extends IModule>(this: IModuleConstructor<T>, ...props: IModulePropsArray): Promise<T>;
   /**
    * создать инстанс, проинициализировать и запустить
    */
-  createAndRun(...props: IModulePropsArray): Promise<T>;
+  createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...props: IModulePropsArray): Promise<T>;
   new (): T;
 }
 
+export type IAppModel = any;
+export type IAppModelKeyValue = { [name: string]: any };
+
 export interface IApp extends IModule {
-  models?: {
-    [name: string]: any;
-  };
+  models: IAppModelKeyValue;
+  model(name: string): Promise<IAppModel>;
+  model(names: string[]): Promise<IAppModelKeyValue>;
 }
 
-export { ILogger }; // @ts-ignore
+export { ILogger };

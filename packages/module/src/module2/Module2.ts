@@ -8,7 +8,7 @@ import createEventEmitter from './createEventEmitter';
 import { IModuleConstructor, IModulePropsArray, IEventEmitter, IModule, IApp } from './types';
 
 // abstract
-class Module2 implements IModule {
+abstract class Module2 implements IModule {
   name: string;
   _module?: boolean | string;
   app?: IApp;
@@ -33,7 +33,7 @@ class Module2 implements IModule {
     assignProps(this, ...props);
   }
 
-  static async create<T extends IModule>(this: IModuleConstructor<T>, props: IModulePropsArray): Promise<T> {
+  static async create<T extends IModule>(this: IModuleConstructor<T>, ...props: IModulePropsArray): Promise<T> {
     const instance = new this();
     instance.assignProps(...props);
     instance.__createdAt = new Date();
@@ -41,7 +41,7 @@ class Module2 implements IModule {
     return instance;
   }
 
-  static async createAndRun<T extends IModule>(this: IModuleConstructor<T>, props: IModulePropsArray): Promise<T> {
+  static async createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...props: IModulePropsArray): Promise<T> {
     const instance = await this.create(...props);
     await instance.run();
     return instance;
