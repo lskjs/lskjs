@@ -84,17 +84,16 @@ export interface IModuleWithCtx {
   parent?: IModule;
 }
 
+export type IModuleProps = { [key: string]: any } | IApp;
+export type IModulePropsArray = IModuleProps[];
+
 export interface IModuleWithInstance {
-  // /**
-  //  * создать инстанс и проинициализировать его
-  //  */
-  // static create(...props: any[]): Promise<IModule>;
-  // /**
-  //  * создать инстанс, проинициализировать и запустить
-  //  */
-  // static createAndRun(...props: any[]): Promise<IModule>;
-  assignProps(...props: any[]): void;
+  assignProps(...props: IModulePropsArray): void;
+  __createdAt: Date;
+  __initAt: Date;
+  __runAt: Date;
 }
+
 
 export interface IModule
   extends IModuleWithLogger,
@@ -103,6 +102,18 @@ export interface IModule
     IModuleWithCtx,
     IModuleWithInstance {
   name?: string;
+}
+
+export interface IModuleConstructor<T extends IModule> {
+  /**
+   * создать инстанс и проинициализировать его
+   */
+  create(...props: IModulePropsArray): Promise<T>;
+  /**
+   * создать инстанс, проинициализировать и запустить
+   */
+  createAndRun(...props: IModulePropsArray): Promise<T>;
+  new (): T;
 }
 
 export interface IApp extends IModule {

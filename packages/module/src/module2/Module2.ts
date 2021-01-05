@@ -5,7 +5,7 @@ import assignProps from '@lskjs/utils/assignProps';
 // @ts-ignore
 import Err from '@lskjs/utils/Err';
 import createEventEmitter from './createEventEmitter';
-import { IEventEmitter, IModule, IApp } from './types';
+import { IModuleConstructor, IModulePropsArray, IEventEmitter, IModule, IApp } from './types';
 
 // abstract
 class Module2 implements IModule {
@@ -14,26 +14,26 @@ class Module2 implements IModule {
   app?: IApp;
   parent?: IModule;
   ee?: IEventEmitter;
-  log?: ILogger;
+  log: ILogger;
   debug?: boolean;
   config: {
     log?: any;
     [key: string]: any;
   };
 
-  private __createdAt: Date;
-  private __initAt: Date;
-  private __runAt: Date;
+  __createdAt: Date;
+  __initAt: Date;
+  __runAt: Date;
 
-  constructor(...props: any[]) {
+  constructor(...props: IModulePropsArray) {
     assignProps(this, ...props);
   }
 
-  assignProps(...props: any[]): void {
+  assignProps(...props: IModulePropsArray): void {
     assignProps(this, ...props);
   }
 
-  static async create(...props: any[]): Promise<IModule> {
+  static async create<T extends IModule>(this: IModuleConstructor<T>, props: IModulePropsArray): Promise<T> {
     const instance = new this();
     instance.assignProps(...props);
     instance.__createdAt = new Date();
@@ -41,7 +41,7 @@ class Module2 implements IModule {
     return instance;
   }
 
-  static async createAndRun(...props: any[]): Promise<IModule> {
+  static async createAndRun<T extends IModule>(this: IModuleConstructor<T>, props: IModulePropsArray): Promise<T> {
     const instance = await this.create(...props);
     await instance.run();
     return instance;
