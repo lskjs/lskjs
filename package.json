@@ -14,6 +14,7 @@
     "dev:server": "lerna exec -- npm run dev:server",
     "release": "lerna publish --skip-npm --exact && npm run release:after",
     "release:yes": "lerna publish --skip-npm --exact --github-release --yes && npm run release:after",
+    "release:beta": "lerna publish --skip-npm --exact --github-release --yes --conventional-prerelease && npm run release:after",
     "release:after": "./scripts/release-after.sh",
     "release:it": "release-it",
     "release:changelog": "lerna-changelog",
