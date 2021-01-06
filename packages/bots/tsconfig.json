@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "build",
     "module": "commonjs",
     "target": "es5",
     "lib": [
@@ -21,7 +22,7 @@
 
     // ok
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false, // TODO: enable in future
+    "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
