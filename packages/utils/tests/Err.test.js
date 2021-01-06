@@ -2,6 +2,22 @@
 import pick from 'lodash/pick';
 import Err from '../src/Err';
 
+test('Err()', () => {
+  const input = [];
+  const res = {
+    name: 'Err',
+    code: 'err_unknown',
+    message: 'err_unknown',
+    stack: expect.stringMatching(/^Err: err_unknown/),
+  };
+  const err = new Err(...input);
+  expect(err instanceof Error).toBe(true);
+  expect(err instanceof Err).toBe(true);
+  expect(err.__err).toBe(true);
+  expect(err).toMatchObject(res);
+  expect(err.getJSON()).toStrictEqual(res);
+});
+
 test('Err("some_code")', () => {
   const input = ['some_code'];
   const res = {

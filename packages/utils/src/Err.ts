@@ -28,7 +28,6 @@ export const getJSON = (err: any, onlySafeField = false): object => {
 export default class Err extends Error {
   code?: string;
   __err = true;
-  __message?: any;
   // @ts-ignore
   constructor(...params: any[]) {
     const err = errMerge(...params);
@@ -37,10 +36,12 @@ export default class Err extends Error {
     forEach(err, (val, key) => {
       if (key === 'message') {
         if (this.message !== val && val) {
-          this.__message = val;
+        // @ts-ignore
+          this.__parentErrorMessage = val; // TODO: может не надо?
         }
-      } else if (key === 'stack') {
-        // TODO: подумать в будущем
+      } else if (key === 'stack') { // TODO: подумать в будущем, может надо сохранять?
+        // @ts-ignore
+        this.__parentErrorStack = val;
         // console.log('this.stack', this.stack);
         // console.log('err.stack', err.stack);
       } else {
