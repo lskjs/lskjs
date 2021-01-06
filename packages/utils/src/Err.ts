@@ -26,7 +26,10 @@ export const getJSON = (err: any, onlySafeField = false): object => {
 };
 
 export default class Err extends Error {
+  code?: string;
   __err = true;
+  __message?: any;
+  // @ts-ignore
   constructor(...params: any[]) {
     const err = errMerge(...params);
     super(getMessage(err));
@@ -34,7 +37,7 @@ export default class Err extends Error {
     forEach(err, (val, key) => {
       if (key === 'message') {
         if (this.message !== val && val) {
-          this._message = val;
+          this.__message = val;
         }
       } else if (key === 'stack') {
         // TODO: подумать в будущем
@@ -59,13 +62,13 @@ export default class Err extends Error {
     return getJSON(err, onlySafeField);
   }
   getText(): string {
-    return this.constructor.getText(this);
+    return getText(this);
   }
   getJSON(onlySafeField = false): object {
-    return this.constructor.getJSON(this, onlySafeField);
+    return getJSON(this, onlySafeField);
   }
   getMessage(): string {
-    return this.constructor.getMessage(this);
+    return getMessage(this);
   }
   toJSON(): object {
     const json = this.getJSON(true);
