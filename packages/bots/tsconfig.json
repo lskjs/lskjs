@@ -22,7 +22,7 @@
 
     // ok
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false, // TODO: enable in future
     "suppressImplicitAnyIndexErrors": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
