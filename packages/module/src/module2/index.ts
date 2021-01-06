@@ -1,3 +1,10 @@
 export * from './types';
+export * from './ModuleWithConfig';
+export * from './ModuleWithEE';
+export * from './ModuleWithLog';
+export * from './ModuleWithSubmodules';
+export * from './ModuleWithWorkflow';
 export * from './Module2';
+export * from './utils/createAsyncModule';
+// export * from './utils/importAsyncModule';
 export { default } from './Module2';
