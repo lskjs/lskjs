@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/lskjs/ux/tree/master/packages/autobind/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/autobind
+
+
+
+
+
 ## [1.89.2](https://github.com/lskjs/ux/tree/master/packages/autobind/compare/v1.89.1...v1.89.2) (2020-12-22)
 
 **Note:** Version bump only for package @lskjs/autobind

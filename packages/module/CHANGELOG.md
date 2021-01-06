@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **module:** create and createAndRun bugs ([2e4be34](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/2e4be342f9863c4950a85a4cafb00cf85bdf3114))
+
+
+### Features
+
+* **module:** add create and createAndRun, add tests ([c36ab1d](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/c36ab1d33995a470dd98df3b2b27e7786272462e))
+* **module:** improve module creation and types ([713d93b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/713d93bf4acabd89f5c320b0b7d50286a5231e8f))
+* **module:** improve module types ([9fcc15e](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/9fcc15e97c2e933873f345afa682a93c09740103))
+* **module:** improve TS, and workflow ([259b54a](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/259b54a8057682ab05aa71365753c989ce338f4a))
+
+
+### BREAKING CHANGES
+
+* **module:** you need to replace new Module(props) to Module.create(props) construction
+
+
+
+
+
 # [1.98.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.97.0...v1.98.0) (2021-01-02)
 
 **Note:** Version bump only for package @lskjs/module

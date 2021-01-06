@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/lskjs/tree/master/packages/grant/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+
+
+
+
+
 # [1.98.0](https://github.com/lskjs/lskjs/tree/master/packages/grant/compare/v1.97.0...v1.98.0) (2021-01-02)
 
 **Note:** Version bump only for package @lskjs/grant

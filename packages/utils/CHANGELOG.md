@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **utils:** improve chunkBy and asyncMapValues types ([de3c95a](https://github.com/lskjs/ux/tree/master/packages/utils/commit/de3c95a2c3224a1ece423cab6a2dbb2c6c100309))
+* **utils:** ts errors ([f326c38](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f326c388c36a543a617398374dc52228ef9db8f2))
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/ux/tree/master/packages/utils/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **utils:** add more tests for Err ([563d3af](https://github.com/lskjs/ux/tree/master/packages/utils/commit/563d3af982cef1ccae88ae6e0aedb673c5f7ec9c))
+* **utils:** improve arrayToObject to TS, cover tests ([4b3f454](https://github.com/lskjs/ux/tree/master/packages/utils/commit/4b3f454568fe39b8d99149f86c46adf481d8ec7d))
+* **utils:** improve Err to TS, cover tests ([e28f266](https://github.com/lskjs/ux/tree/master/packages/utils/commit/e28f266a9221d5ce10bcfba56421aa19addbb011))
+* **utils:** improve errMerge to TS, cover tests ([fd7611e](https://github.com/lskjs/ux/tree/master/packages/utils/commit/fd7611eda29b713272d35ba8b50c5d1eb117b617))
+* **utils:** improve errProps to TS, cover tests ([da9f5ee](https://github.com/lskjs/ux/tree/master/packages/utils/commit/da9f5eeb4a5f3b5bf5a58ad07fbd04a0bab996a0))
+
+
+
+
+
 # [1.98.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.97.0...v1.98.0) (2021-01-02)
 
 

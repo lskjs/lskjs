@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **log:** improve logger types ([28492d1](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/28492d1412442c7040402252b70e9d85dd52e82c))
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **module:** improve module creation and types ([713d93b](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/713d93bf4acabd89f5c320b0b7d50286a5231e8f))
+
+
+### BREAKING CHANGES
+
+* **module:** you need to replace new Module(props) to Module.create(props) construction
+
+
+
+
+
 # [1.98.0](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.97.0...v1.98.0) (2021-01-02)
 
 **Note:** Version bump only for package @lskjs/log2

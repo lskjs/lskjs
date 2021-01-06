@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,20 +34,20 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/log2": "1.98.0",
-    "@lskjs/utils": "1.99.0",
+    "@lskjs/log2": "2.0.0-beta.1",
+    "@lskjs/utils": "2.0.0-beta.1",
     "colors": "^1.4.0",
     "eventemitter3": "4.0.0"
   },
   "devDependencies": {
-    "@lskjs/log": "1.98.0",
+    "@lskjs/log": "2.0.0-beta.1",
     "@types/lodash": "4.14.167",
     "bluebird": "3.7.2",
     "lodash": "4.17.19"
   },
   "peerDependencies": {
-    "@types/lodash": "4.14.167",
     "@lskjs/log": "*",
+    "@types/lodash": "4.14.167",
     "bluebird": "*",
     "lodash": "*"
   }

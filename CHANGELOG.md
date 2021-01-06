@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **log:** improve logger types ([28492d1](https://github.com/isuvorov/lib-starter-kit/commit/28492d1412442c7040402252b70e9d85dd52e82c))
+* **module:** create and createAndRun bugs ([2e4be34](https://github.com/isuvorov/lib-starter-kit/commit/2e4be342f9863c4950a85a4cafb00cf85bdf3114))
+* **utils:** improve chunkBy and asyncMapValues types ([de3c95a](https://github.com/isuvorov/lib-starter-kit/commit/de3c95a2c3224a1ece423cab6a2dbb2c6c100309))
+* **utils:** ts errors ([f326c38](https://github.com/isuvorov/lib-starter-kit/commit/f326c388c36a543a617398374dc52228ef9db8f2))
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/isuvorov/lib-starter-kit/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **bots:** improve type checks ([3935d3e](https://github.com/isuvorov/lib-starter-kit/commit/3935d3eae4f411497f576dbf5080ed3c48fe21dd))
+* **module:** add create and createAndRun, add tests ([c36ab1d](https://github.com/isuvorov/lib-starter-kit/commit/c36ab1d33995a470dd98df3b2b27e7786272462e))
+* **module:** improve module creation and types ([713d93b](https://github.com/isuvorov/lib-starter-kit/commit/713d93bf4acabd89f5c320b0b7d50286a5231e8f))
+* **module:** improve module types ([9fcc15e](https://github.com/isuvorov/lib-starter-kit/commit/9fcc15e97c2e933873f345afa682a93c09740103))
+* **module:** improve TS, and workflow ([259b54a](https://github.com/isuvorov/lib-starter-kit/commit/259b54a8057682ab05aa71365753c989ce338f4a))
+* **utils:** add more tests for Err ([563d3af](https://github.com/isuvorov/lib-starter-kit/commit/563d3af982cef1ccae88ae6e0aedb673c5f7ec9c))
+* **utils:** improve arrayToObject to TS, cover tests ([4b3f454](https://github.com/isuvorov/lib-starter-kit/commit/4b3f454568fe39b8d99149f86c46adf481d8ec7d))
+* **utils:** improve Err to TS, cover tests ([e28f266](https://github.com/isuvorov/lib-starter-kit/commit/e28f266a9221d5ce10bcfba56421aa19addbb011))
+* **utils:** improve errMerge to TS, cover tests ([fd7611e](https://github.com/isuvorov/lib-starter-kit/commit/fd7611eda29b713272d35ba8b50c5d1eb117b617))
+* **utils:** improve errProps to TS, cover tests ([da9f5ee](https://github.com/isuvorov/lib-starter-kit/commit/da9f5eeb4a5f3b5bf5a58ad07fbd04a0bab996a0))
+
+
+### BREAKING CHANGES
+
+* **module:** you need to replace new Module(props) to Module.create(props) construction
+
+
+
+
+
 # [1.98.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.97.0...v1.98.0) (2021-01-02)
 
 
