@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
-    "@lskjs/module": "1.98.0",
-    "@lskjs/utils": "1.98.0",
+    "@lskjs/module": "2.0.0-beta.0",
+    "@lskjs/utils": "1.99.0",
     "axios": "0.19.2",
     "lodash": "4.17.19"
   },

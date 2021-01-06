@@ -16,7 +16,7 @@ import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 import assignProps from '@lskjs/utils/assignProps';
 import I18 from '@lskjs/i18';
-import Module from '@lskjs/module';
+import Module from '@lskjs/module/2';
 import logger from '@lskjs/log';
 import autobind from '@lskjs/utils/autobind';
 import e from '@lskjs/utils/e';
@@ -46,11 +46,6 @@ export default class Uapp extends Module {
   // req = new Req();
   @observable req = {};
 
-  constructor(...props) {
-    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху. (ex Api, Apiq, Page, Provider, theme, scrollTo)
-    super(...props);
-    assignProps(this, ...props);
-  }
 
   createLogger(params) {
     const level = __DEV__ // eslint-disable-line no-nested-ternary

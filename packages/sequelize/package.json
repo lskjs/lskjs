@@ -43,7 +43,7 @@
     "sequelize": "5.21.4"
   },
   "devDependencies": {
-    "@lskjs/module": "1.78.0",
+    "@lskjs/module": "2.0.0-beta.0",
     "lodash": "4.17.19"
   },
   "peerDependencies": {

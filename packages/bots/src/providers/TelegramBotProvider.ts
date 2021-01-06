@@ -30,12 +30,6 @@ export default class TelegramBotProvider extends BaseBotProvider {
     'edited_channel_post',
   ];
   config: TelegramBotConfigType;
-
-  constructor(...props: any[]) {
-    super(...props);
-    assignProps(this, ...props);
-  }
-
   async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'TelegramBotProvider !config.token';

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import assignProps from '@lskjs/utils/assignProps';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import { createBrowserHistory } from 'history';
-import Module from '@lskjs/module';
+import Module from '@lskjs/module/2';
 // import BaseUapp from '@lskjs/uapp';
 // import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
@@ -16,12 +16,6 @@ export default class ReactAppClient extends Module {
   // BaseUapp = BaseUapp;
   ReactDOM = ReactDOM;
   name = 'ReactAppClient';
-
-  constructor(...props) {
-    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху (ex ReactDOM)
-    super(...props);
-    assignProps(this, ...props);
-  }
 
   getRootState() {
     return window.__ROOT_STATE__ || {};

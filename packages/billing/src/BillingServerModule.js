@@ -9,10 +9,6 @@ export default class BillingServerModule extends Module {
   name = 'BillingServerModule';
   availableProviders = availableProviders;
   providers = {};
-  constructor(...props) {
-    super(...props);
-    assignProps(this, ...props);
-  }
   async getProviders() {
     return {
       ...availableProviders,
@@ -51,8 +47,7 @@ export default class BillingServerModule extends Module {
         return null;
       }
       const Provider = await importFn(availableProviders[providerName]);
-      const provider = new Provider({ app: this.app, module: this, config, name });
-      await provider.init();
+      const provider = await Provider.create({ app: this.app, module: this, config, name });
       return provider;
     });
     this.log.debug('providers', Object.keys(this.providers));

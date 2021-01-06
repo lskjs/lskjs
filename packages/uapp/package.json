@@ -56,7 +56,7 @@
     "@lskjs/i18": "1.89.2",
     "@lskjs/link": "1.1.10",
     "@lskjs/log": "1.98.0",
-    "@lskjs/module": "1.78.0",
+    "@lskjs/module": "2.0.0-beta.0",
     "@lskjs/scroll": "1.1.0",
     "@lskjs/utils": "1.98.0",
     "bluebird": "3.7.2",

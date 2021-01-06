@@ -36,7 +36,7 @@
   "dependencies": {
     "@browser-bunyan/levels": "1.5.3",
     "@lskjs/bunyan": "1.89.2",
-    "@lskjs/utils": "1.98.0",
+    "@lskjs/utils": "1.99.0",
     "browser-bunyan": "1.5.3",
     "source-map-support": "0.5.16"
   },

@@ -16,15 +16,14 @@ import some from 'lodash/some';
 import getDocsTemplate from './getDocsTemplate';
 
 export default class Api extends Module2 {
-  constructor(props, params) {
-    super(props, params);
-    assignProps(this, props);
+  assignProps(props, params) { // TODO: может как-то переписать
+    super.assignProps(this, props);
     if (!this.app) throw 'Api !app';
     this.asyncRouter = this.app.asyncRouter;
     this.cacheStore = new Cacheman('api', {
       ttl: 60,
     });
-    assignProps(this, params);
+    super.assignProps(this, params);
   }
   e(...args) {
     return this.app.e(...args);

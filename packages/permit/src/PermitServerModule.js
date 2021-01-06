@@ -2,7 +2,7 @@
 import nanoid from 'nanoid';
 import generate from 'nanoid/generate';
 import url from 'nanoid/url';
-import Module from '@lskjs/module';
+import Module from '@lskjs/module/2';
 import get from 'lodash/get';
 import config from './config';
 

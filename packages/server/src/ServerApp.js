@@ -63,6 +63,13 @@ export default class ServerApp extends Module {
     }
   }
 
+  async model(nameOrNames) {
+    if (Array.isArray(nameOrNames)) return asyncMapValues(arrayToObject(nameOrNames), (n) => this.model(n));
+    const name = nameOrNames;
+    if (!this.models || !this.models[name]) throw Err('MODULE_MODEL_MISSING', { data: { name } });
+    return this.models[name]
+  }
+
   async afterInit() {
     this.log.debug(`modules [async]`, Object.keys(this._modules));
     this.log.debug(`modules [inited]`, Object.keys(this.modules));

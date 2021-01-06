@@ -39,7 +39,7 @@
     "@babel/runtime": "7.8.4"
   },
   "devDependencies": {
-    "@lskjs/module": "1.78.0",
+    "@lskjs/module": "2.0.0-beta.0",
     "@lskjs/utils": "1.98.0",
     "lodash": "4.17.19"
   },

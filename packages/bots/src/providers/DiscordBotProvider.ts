@@ -15,12 +15,6 @@ export default class DiscordBotProvider extends BaseBotProvider {
   Discord = Discord;
   eventTypes = ['message', 'guildMemberAdd']; // 'ready'
   config: DiscordBotConfigType;
-
-  constructor(...props: any[]) {
-    super(...props)
-    assignProps(this, ...props);
-  }
-
   async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'DiscordBotProvider !config.token';
