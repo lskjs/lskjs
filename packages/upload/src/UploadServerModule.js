@@ -1,9 +1,9 @@
 import Module from '@lskjs/module';
+import Err from '@lskjs/utils/Err';
 import multer from 'multer';
 import fs from 'fs';
 import nodepath from 'path';
 import random from 'lodash/random';
-import get from 'lodash/get';
 
 const mimetypes = {
   'application/graphql': 'graphql',
@@ -38,11 +38,6 @@ export default class UploadServerModule extends Module {
   name = 'UploadServerModule';
   async init() {
     await super.init();
-    this.config = get(this.app, 'config.upload');
-    if (!this.config) {
-      this.app.log.error('config.upload is missing');
-      this.config = {};
-    }
     if (!this.config.url) {
       this.config.url = this.app.config.url;
     }
@@ -55,7 +50,7 @@ export default class UploadServerModule extends Module {
     const fileFilter = (req, file, cb) => {
       if (Array.isArray(config.mimetypes)) {
         if (config.mimetypes.indexOf(file.mimetype) === -1) {
-          return cb(this.app.e('You are not allowed to upload files with this extension'));
+          return cb(new Err('upload.invalidExtension', 'You are not allowed to upload files with this extension'));
         }
       }
       return cb(null, true);
@@ -141,7 +136,7 @@ export default class UploadServerModule extends Module {
       path += '/guests';
     } else {
       this.app.log.error('Guest can not upload files');
-      throw this.app.e('Guest can not upload files', { status: 403 });
+      throw new Err('Guest can not upload files', { status: 403 });
     }
 
     let fileName;

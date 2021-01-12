@@ -1,6 +1,6 @@
 import Api from '@lskjs/server-api';
 
-export default class V5UploadCardApi extends Api {
+export default class UploadApi extends Api {
   getRoutes() {
     return {
       'POST /file': ::this.file,
