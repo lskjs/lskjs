@@ -3,18 +3,17 @@ import flattenKeys from '@lskjs/utils/flattenKeys';
 import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
 import isPlainObject from 'lodash/isPlainObject';
 import pickBy from 'lodash/pickBy';
-import awaitHealthchecks from './awaitHealthcheck';
+import awaitHealthchecks from './utils/awaitHealthcheck';
 import Api from './Api';
 
 export default class IndexApi extends Api {
-  path = '/api';
   async healthcheck(req) {
     if (!this.app) return awaitHealthchecks({ healthcheck: null });
     if (this.app.healthcheck) return awaitHealthchecks({ healthcheck: await this.app.healthcheck(req) });
     if (this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
     return awaitHealthchecks({ healthcheck: null });
   }
-  getRoutesList(tree = false) {
+  __getRoutesList(tree = false) {
     if (tree) {
       return mapValuesDeep(
         this.getRoutes(),
@@ -31,7 +30,7 @@ export default class IndexApi extends Api {
       url,
     };
     if (__DEV__) {
-      res.routes = this.getRoutesList(true);
+      res.routes = this.__getRoutesList(true);
     }
     return res;
   }

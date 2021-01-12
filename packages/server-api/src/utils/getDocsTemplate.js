@@ -52,7 +52,6 @@ export default ({ docsJson: url, name } = {}) => `\
     $(function () {
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
-        console.log(123)
         url = decodeURIComponent(url[1]);
       } else {
         // Путь
