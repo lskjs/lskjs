@@ -1,5 +1,5 @@
 export default () =>
-  function(pack) {
+  function resErr(pack) {
     // eslint-disable-next-line no-param-reassign
     if (typeof pack === 'string') pack = { message: pack };
     const { code, message, status, err, data = null, ...debug } = pack;
@@ -32,7 +32,7 @@ export default () =>
     }
     if (res.stack) {
       const stack = res.stack.toString();
-      res.stack = stack.split('\n').map(s => s.trim());
+      res.stack = stack.split('\n').map((s) => s.trim());
     }
 
     return this.pack(data, { code, message, status, ...res });

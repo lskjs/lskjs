@@ -3,10 +3,10 @@ import get from 'lodash/get';
 import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
 
-export default ctx =>
+export default (webserver) =>
   function pack(raw = {}, info) {
     const res = this;
-    const config = get(ctx, 'config.server.response', __DEV__ ? { log: false, debug: true } : {});
+    const config = get(webserver, 'config.server.response', __DEV__ ? { log: false, debug: true } : {});
     const status = info.status || get(raw, '__status', null);
     let isJson;
     let wrap;
@@ -71,7 +71,7 @@ export default ctx =>
           }
           try {
             const filename = `${dir}/res_${new Date().toISOString().replace(/[^a-zA-Z0-9]+/gi, '_')}.${type}`;
-            ctx.log.trace(`>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${__DEV__ ? '[IGNORE]' : ''}`);
+            webserver.log.trace(`>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${__DEV__ ? '[IGNORE]' : ''}`);
             require('fs').writeFileSync(filename, str);
           } catch (e) {
             // ignore
@@ -80,9 +80,9 @@ export default ctx =>
         return;
       }
       // else
-      ctx.log.trace('>>>>>');
+      webserver.log.trace('>>>>>');
       console.log(str); // eslint-disable-line no-console
-      ctx.log.trace('<<<<<');
+      webserver.log.trace('<<<<<');
     };
 
     if (!isJson) {

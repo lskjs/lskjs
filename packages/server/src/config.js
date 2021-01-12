@@ -15,16 +15,33 @@ export default {
   url: 'http://localhost:8080',
   port: process.env.PORT || 8080,
   express: {},
-  ws: {
-    transports: ['websocket'],
-    // origins: [],
+  // ws: {
+  //   transports: ['websocket'],
+  //   // origins: [],
+  // },
+  api: {
+    debug: true,
   },
+  jwt: {},
   middlewares: {
-    accessLogger: __DEV__,
-    reqData: true,
+    lsk: {
+      reqId: true,
+      reqLog: true,
+      reqData: true, // { jsonParse: true }
+      reqI18: true,
+      res: true,
+      reqUser: true,
+      logger: true,
+      errorLogger: true, // ?
+    },
     cookieParser: true,
     bodyParserJson: true,
     urlencoded: { extended: true },
-    cors: __DEV__,
+    cors: false,
+  },
+  response: {
+    log: false,
+    debug: true,
+    debugDir: `/tmp/lsk`,
   },
 };

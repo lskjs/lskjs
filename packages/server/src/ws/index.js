@@ -12,19 +12,20 @@ export default (app) => {
   try {
     const ws = sockets();
 
-    ws.wrapExpressMiddleware = (middleware, name) => function (socket, next) {
-      // console.log('wrapExpressMiddleware ', socket, next);
-      if (!isFunction(middleware)) {
-        console.log('wrapExpressMiddleware middleware is not function ', name);
-        console.log('middleware ', middleware);
-        console.log('typeof  middleware', typeof middleware);
-        return null;
-      }
-      // console.log('socket.req', socket.req)
-      // console.log('socket.res', socket.res)
+    ws.wrapExpressMiddleware = (middleware, name) =>
+      function (socket, next) {
+        // console.log('wrapExpressMiddleware ', socket, next);
+        if (!isFunction(middleware)) {
+          console.log('wrapExpressMiddleware middleware is not function ', name);
+          console.log('middleware ', middleware);
+          console.log('typeof  middleware', typeof middleware);
+          return null;
+        }
+        // console.log('socket.req', socket.req)
+        // console.log('socket.res', socket.res)
 
-      middleware(socket.req, socket.res, next);
-    };
+        middleware(socket.req, socket.res, next);
+      };
 
     ws.middlewares = [
       // expressMiddlewares
@@ -32,15 +33,18 @@ export default (app) => {
       // 'accessLogger',
       'parseToken',
       'parseUser',
-    ].reduce((r, name) => ({
-      ...r,
-      [name]: ws.wrapExpressMiddleware(app.middlewares[name], name),
-    }), {
-      // socketio middlewares
-      cookieParser: ws.wrapExpressMiddleware(cookieParser(), 'cookieParser'),
-      socket2req: socket2req(app),
-      socketAsPromised: socketAsPromised(),
-    });
+    ].reduce(
+      (r, name) => ({
+        ...r,
+        [name]: ws.wrapExpressMiddleware(app.middlewares[name], name),
+      }),
+      {
+        // socketio middlewares
+        cookieParser: ws.wrapExpressMiddleware(cookieParser(), 'cookieParser'),
+        socket2req: socket2req(app),
+        socketAsPromised: socketAsPromised(),
+      },
+    );
 
     app.log.debug('WS middlewares', Object.keys(ws.middlewares));
 
@@ -52,15 +56,18 @@ export default (app) => {
       // 'parseToken',
       // 'parseUser',
       // 'socketAsPromised',
-    ].map(m => ws.middlewares[m]).filter(m => m);
+    ]
+      .map((m) => ws.middlewares[m])
+      .filter((m) => m);
 
     ws.atachMiddlwares = (namespace) => {
-      ws.usedMiddlewares.map(middleware => middleware && namespace.use(middleware));
+      ws.usedMiddlewares.map((middleware) => middleware && namespace.use(middleware));
     };
     ws.wrapExpress = (express) => {
-      express.ws = (route, callback) => { // eslint-disable-line no-param-reassign
+      express.ws = (route, callback) => {
+        // eslint-disable-line no-param-reassign
         // console.log('express WS', route);
-        
+
         // if (!ws) {
         //   this.log.error('!this.ws');
         //   return null;
