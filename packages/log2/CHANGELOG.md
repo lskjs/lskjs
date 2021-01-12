@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Features
+
+* **log:** child logs, improve logging, add cli options ([038493f](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/038493f0ebbe8e4270fa362b034a0ecb793422f6))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
 
 **Note:** Version bump only for package @lskjs/log2

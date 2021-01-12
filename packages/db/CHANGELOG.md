@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Bug Fixes
+
+* **db:** ts errors ([6424dff](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/6424dff1679172826d80b449c1ac63011fa5ad62))
+
+
+### Features
+
+* **db:** add Model, create typings, ModelsModule ([0f1c01a](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/0f1c01a5caf27d21d982fabf7d7ad8a48dbc9b91))
+* **db:** recreate db as module add typings ([f65e9a3](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/f65e9a3837834447a95666aa1a22366a93f49131))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
 
 **Note:** Version bump only for package @lskjs/db
