@@ -3,12 +3,12 @@ import BaseLogger from '../src/Logger';
 
 class Logger extends BaseLogger {
   lastLog: any[] | null;
-  _log(...args: any[]): void {
+  __log(...args: any[]): void {
     this.lastLog = args;
-    super._log(...args);
+    super.__log(...args);
   }
   lastLogger: any[] | null;
-  _logger(...args: any[]): void {
+  __logger(...args: any[]): void {
     this.lastLogger = args;
   }
 }

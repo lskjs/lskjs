@@ -1,7 +1,31 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 // import debug from 'debug';
 import colors from 'colors/safe';
-import hashCode from '@lskjs/utils/hashCode';
+import hashCode from './utils/hashCode';
+import leftPad from './utils/leftPad';
+import tryParamParse from './utils/tryParamParse';
+// import pick from './utils/pick';
+
+// npm install term-size
+
+
+const env = (name: string, def: any = null): any => {
+  const envs = typeof process !== 'undefined' ? process.env : typeof window !== 'undefined' ? window : {};
+  return tryParamParse(process.env[name], def);
+};
+
+const omitNull = (props: {[key: string]: any}) => {
+  const { ns, ...otherProps } = props;
+  if (ns) return props;
+  return otherProps;
+};
+
+const createColors = () => {
+  return colors;
+  const newColors = {};
+  Object.assign(newColors, colors);
+  return newColors;
+};
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
 //   return () => {
@@ -68,19 +92,27 @@ export class Logger implements ILogger {
   level: string;
   levelsPriority = {
     log: 99,
+    l: 99,
     fatal: 60,
+    f: 60,
     error: 50,
+    e: 50,
     warn: 40,
+    w: 40,
     info: 30,
+    i: 30,
     debug: 20,
+    d: 20,
     trace: 10,
+    t: 10,
   };
   randomColors = 7;
+  colors: any;
   theme = {
     // fatal: 'inverse',
     fatal: 'bgBrightRed',
-    error: 'red',
-    warn: 'yellow',
+    error: 'bgBrightRed',
+    warn: 'red', // 'yellow',
     debug: 'blue',
     info: 'green',
     trace: 'gray', // 'white'
@@ -94,47 +126,77 @@ export class Logger implements ILogger {
     random5: [/* 'bold', */ 'cyan'],
     random6: [/* 'bold', */ 'brightMagenta'],
   };
-  constructor(props: ILoggerProps) {
-    Object.assign(this, props);
+
+  constructor(...propsArray: ILoggerProps[]) {
+    this.setProps(...propsArray);
+  }
+
+  setProps(...propsArray: ILoggerProps[]): void {
+    const fields = ['prefix', 'ns', 'name', 'randomColors', 'theme', 'colors'];
+    propsArray.forEach((props) => {
+      Object.keys(props).forEach((key) => {
+        if (!fields.includes(key)) return;
+        this[key] = props[key];
+      });
+    });
     if (!this.level) this.level = 'trace';
-    if (!this.levelsPriority[this.level]) throw 'incorrect level ' + this.level;
-    colors.setTheme(this.theme);
+    if (!this.levelsPriority[this.level]) throw new Error(`Incorrect level ${this.level}`);
+    if (!this.colors) this.colors = createColors();
+    this.colors.setTheme(this.theme);
+  }
+
+  static create(...propsArray: ILoggerProps[]): ILogger {
+    return new this(...propsArray);
+  }
+
+  createChild(...propsArray: ILoggerProps[]): ILogger {
+    const ns = [this.ns, this.name].filter(Boolean).join('.');
+
+    // @ts-ignore
+    return new this.constructor(this, { colors: null, ns }, ...propsArray);
+  }
+
+  getLevelPriority(level: string): number {
+    return this.levelsPriority[level] || 0;
   }
 
   canLog(level: string): boolean {
-    return (this.levelsPriority[level] || 0) >= (this.levelsPriority[this.level] || 0)
+    return this.getLevelPriority(level) >= this.getLevelPriority(this.level);
+  }
+  __canPrint(level: string): boolean {
+    return this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));
   }
   fatal(...args: any[]): void {
     if (!this.canLog('fatal')) return;
-    this._log('fatal', ...args);
+    this.__log('fatal', ...args);
   }
   error(...args: any[]): void {
     if (!this.canLog('error')) return;
-    this._log('error', ...args);
+    this.__log('error', ...args);
   }
   warn(...args: any[]): void {
     if (!this.canLog('warn')) return;
-    this._log('warn', ...args);
+    this.__log('warn', ...args);
   }
   debug(...args: any[]): void {
     if (!this.canLog('debug')) return;
-    this._log('debug', ...args);
+    this.__log('debug', ...args);
   }
   info(...args: any[]): void {
     if (!this.canLog('info')) return;
-    this._log('info', ...args);
+    this.__log('info', ...args);
   }
   trace(...args: any[]): void {
     if (!this.canLog('trace')) return;
-    this._log('trace', ...args);
+    this.__log('trace', ...args);
   }
   log(...args: any[]): void {
     if (!this.canLog('log')) return;
-    this._log('log', ...args);
+    this.__log('log', ...args);
   }
-
   color(name: string, str: string): string {
-    return colors[name](str);
+    // console.log('2222', this.colors, name)
+    return (this.colors[name] || this.colors.white)(str);
   }
   // req() {
   //   return this;
@@ -145,19 +207,69 @@ export class Logger implements ILogger {
   getColor(color: string): string {
     return this.theme[color] || 'white';
   }
-  _logger(...args: any[]): void {
-    // eslint-disable-next-line no-console
-    console.log(...args);
+  __logger(...args: any[]): void {
+    // @ts-ignore
+    if (console._log) {
+      // @ts-ignore
+      // eslint-disable-next-line no-console
+      console._log(...args);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log(...args);
+    }
   }
-  _log(level: LoggerLevelType, ...args: any[]): void {
-    const logPrefix = [this.prefix, this.ns || this.name].filter(Boolean).join(':');
+  __log(level: LoggerLevelType, ...args: any[]): void {
+    if (!this.__canPrint(level)) return;
+    if (env('LOG_JSON', false)) {
+      this.__logger(
+        omitNull({
+          name: this.name,
+          ns: this.ns,
+          level,
+          date: Date.now(),
+          content: args,
+        }),
+      );
+      return;
+    }
+    const rawNames: any[] = [];
+    if (env('LOG_NS', true)) {
+      rawNames.push(this.ns);
+    }
+    if (env('LOG_NAME', true)) {
+      rawNames.push(this.name);
+    }
+    const names = rawNames.filter(Boolean);
+    const pad = (str = '') => {
+      if (env('LOG_ALIGN') === 'left') return str.padEnd(15);
+      if (env('LOG_ALIGN') === 'right') return str.padStart(15);
+      return str;
+    };
+    const logPrefix = names.length ? pad(names.join(':')) : null;
+
     const levelStr = `[${level[0].toLowerCase()}]`;
-    const arr = [
-      this.color(this.getColor(level), levelStr), // asda
-      this.color(this.getHashColor(logPrefix), logPrefix),
-      ...args,
-    ];
-    this._logger(...arr);
+
+    let [mainArg, ...otherArgs] = args;
+
+    if (typeof mainArg === 'string') {
+      if (['[', '<'].includes(mainArg[0]) && [']', '>'].includes(mainArg[mainArg.length - 1])) {
+        mainArg = this.color(this.getHashColor(mainArg), mainArg);
+      } else if (mainArg.includes('(')) {
+        mainArg = this.color('brightWhite', mainArg);
+      } else if (mainArg.length < 20 && otherArgs.length) {
+        mainArg = this.color('white', mainArg);
+      }
+    }
+
+    const arr = [mainArg, ...otherArgs];
+    arr.unshift(
+      ...[
+        this.color(this.getColor(level), levelStr),
+        logPrefix ? this.color(this.getHashColor(logPrefix), logPrefix) : null,
+      ].filter(Boolean),
+    );
+
+    this.__logger(...arr);
   }
 }
 
