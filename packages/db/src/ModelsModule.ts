@@ -25,7 +25,9 @@ export class ModelsModule extends Module2 implements IModelsModule {
   }
 
   async setProp(key: string, value: any): Promise<void> {
+    // @ts-ignore
     if (key === 'models') return super.setProp!('__models', value);
+    // @ts-ignore
     return super.setProp!(key, value);
   }
 
