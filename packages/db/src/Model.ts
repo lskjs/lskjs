@@ -1,7 +1,10 @@
+import { Schema } from 'mongoose';
 import { IModel } from './types'
 
-export class BaseModel implements IModel {
+export class Model implements IModel {
   __model = true;
+  static Schema = Schema;
+  static Types = Schema.Types;
   static defaultOptions: {[key: string]: any} = {
     timestamps: true,
   };
@@ -9,4 +12,4 @@ export class BaseModel implements IModel {
   static options: {[key: string]: any} = {};
 }
 
-export default BaseModel;
+export default Model;

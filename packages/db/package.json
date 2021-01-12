@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.0.0-beta.2",
+    "@lskjs/utils": "2.0.0-beta.2",
     "mongoose": "5.8.12"
   },
   "devDependencies": {
