@@ -50,24 +50,27 @@
     "socket.io": "2.3.0",
     "socket.io-as-promised": "1.0.0",
     "socket.io-redis": "5.3.0",
-    "supertest": "^4.0.2"
+    "portfinder": "1.0.28"
   },
   "devDependencies": {
     "@lskjs/db": "2.0.0-beta.2",
     "@lskjs/i18": "2.0.0-beta.2",
     "@lskjs/log": "2.0.0-beta.2",
+    "@lskjs/log2": "2.0.0-beta.2",
     "@lskjs/module": "2.0.0-beta.2",
-    "@lskjs/utils": "1.98.0",
+    "@lskjs/utils": "2.0.0-beta.2.1",
     "axios": "0.19.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.19",
-    "moment": "2.27.0"
+    "moment": "2.27.0",
+    "supertest": "^4.0.2"
   },
   "olddependencies": {
     "@babel/polyfill": "7.0.0-beta.42",
     "@babel/runtime": "7.0.0-beta.42"
   },
   "peerDependencies": {
+    "@lskjs/log2": "*",
     "@lskjs/db": "*",
     "@lskjs/i18": "*",
     "@lskjs/log": "*",

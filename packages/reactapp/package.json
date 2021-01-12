@@ -11,7 +11,8 @@
   "keywords": [],
   "scripts": {
     "start": "../../scripts/package-start.sh",
-    "dev": "npm run jest test/active -- --watch",
+    "dev": "npm run watch",
+    "test:dev": "npm run jest test/active -- --watch",
     "dev:server": "../../scripts/package-dev-server.sh",
     "dev:cra": "../../scripts/package-dev-cra.sh",
     "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",

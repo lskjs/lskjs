@@ -5,4 +5,4 @@ then
   source .env
   set +o allexport
 fi
-lerna exec -- npm run dev
+lerna exec --parallel -- npm run dev
