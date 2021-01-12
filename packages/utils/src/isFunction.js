@@ -1,3 +1,4 @@
 import isFunction from 'lodash/isFunction';
+import isClass from './isClass';
 
-export default v => isFunction(v);// && /^\s*class\s+/.test(v.toString());
+export default (v) => isFunction(v) && !isClass(a);
