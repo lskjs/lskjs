@@ -3,78 +3,78 @@ import pick from 'lodash/pick';
 import MongooseSchema from '@lskjs/db/MongooseSchema';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
 
-export default function getSchema(ctx) {
-  const schema = new MongooseSchema(
-    {
-      userId: {
-        type: MongooseSchema.Types.ObjectId,
-        // ref: 'User',
-      },
-      // Сырые данные которые пришли из соц сети
-      raw: {
-        type: Object,
-        default: {},
-      },
-      // Обработанные данные из соцсети
-      profile: {
-        type: Object, // по идее тут должна быть структура данных
-        default: {},
-      },
-      meta: {
-        type: Object,
-      },
-      // Дата последнего обновления данных
-      fetchedAt: {
-        type: Date,
-        default: null,
-      },
+import LskBaseModel from '@lskjs/db/LskBaseModel';
 
-      // тип провадера
-      type: {
-        type: String,
-      },
-      // название соцсети из passport
-      provider: {
-        type: String,
-        required: true,
-      },
-      // ID из соцсети
-      providerId: {
-        // link to social network
-        type: String,
-        required: true,
-      },
-      // token из соцсети
-      token: {
-        type: String,
-      },
-      refreshToken: {
-        type: String,
-      },
-      lastError: {
-        type: Object,
-      },
-      lastErrorAt: {
-        type: Date,
-      },
-      // статус пасспорта: валиден или нет
-      // пока не используется
-      status: {
-        type: String,
-        enum: [null, 'valid', 'invalid', 'removed', 'expired', 'unauthorized'],
-        default: null,
-      },
+export class PassportModel extends LskBaseModel {
+  schema = {
+    userId: {
+      type: MongooseSchema.Types.ObjectId,
+      // ref: 'User',
     },
-    {
-      model: 'Passport',
-      collection: 'passport',
-      // timestamps: true,
-      // toJSON: { virtuals: true },
-      // toObject: { virtuals: true },
+    // Сырые данные которые пришли из соц сети
+    raw: {
+      type: Object,
+      default: {},
     },
-  );
+    // Обработанные данные из соцсети
+    profile: {
+      type: Object, // по идее тут должна быть структура данных
+      default: {},
+    },
+    meta: {
+      type: Object,
+    },
+    // Дата последнего обновления данных
+    fetchedAt: {
+      type: Date,
+      default: null,
+    },
 
-  schema.methods.generateUsername = async function a(collection) {
+    // тип провадера
+    type: {
+      type: String,
+    },
+    // название соцсети из passport
+    provider: {
+      type: String,
+      required: true,
+    },
+    // ID из соцсети
+    providerId: {
+      // link to social network
+      type: String,
+      required: true,
+    },
+    // token из соцсети
+    token: {
+      type: String,
+    },
+    refreshToken: {
+      type: String,
+    },
+    lastError: {
+      type: Object,
+    },
+    lastErrorAt: {
+      type: Date,
+    },
+    // статус пасспорта: валиден или нет
+    // пока не используется
+    status: {
+      type: String,
+      enum: [null, 'valid', 'invalid', 'removed', 'expired', 'unauthorized'],
+      default: null,
+    },
+  };
+  options = {
+    model: 'Passport',
+    collection: 'passport',
+    // timestamps: true,
+    // toJSON: { virtuals: true },
+    // toObject: { virtuals: true },
+  };
+
+  async generateUsername(collection) {
     // const { User: UserModel } = ctx.models;
     let username = `${this.providerId}_${this.provider}`;
     username = canonizeUsername(username.toLowerCase());
@@ -90,28 +90,29 @@ export default function getSchema(ctx) {
     if (!(await collection.count({ username }))) return username;
 
     throw 'cant generate unique username';
-  };
-  schema.methods.getUser = async function a() {
-    return ctx.models.User.findById(this.userId);
-  };
+  }
+  async getUser() {
+    const UserModel = await this.__app.model('UserModel');
+    return UserModel.findById(this.userId);
+  }
 
-  schema.methods.getIdentity = function a(params = {}) {
+  getIdentity(params = {}) {
     const object = pick(this.toObject(), ['_id']);
     return Object.assign(object, params);
-  };
+  }
 
-  schema.methods.generateToken = function a(params) {
+  generateToken(params) {
     return jwt.sign(this.getIdentity(params), ctx.config.jwt.secret);
-  };
+  }
 
-  schema.statics.decodeToken = function a(token) {
+  static decodeToken(token) {
     return jwt.verify(token, ctx.config.jwt.secret);
-  };
+  }
 
-  schema.statics.getByToken = async function a(token) {
+  static async getByToken(token) {
     const { _id } = this.decodeToken(token);
     return this.findById(_id);
-  };
-
-  return schema;
+  }
 }
+
+export default PassportModel;

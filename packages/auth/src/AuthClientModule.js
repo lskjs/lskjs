@@ -8,8 +8,6 @@ import MemoryStorage from './Storage/MemoryStorage';
 const DEBUG = false;
 
 export default class AuthClientModule extends Module {
-  name = 'AuthClientModule';
-
   async init() {
     await super.init();
     this.stores = require('./stores').default(this.app);

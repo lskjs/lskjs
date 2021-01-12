@@ -15,18 +15,16 @@ import validateEmail from '@lskjs/utils/validateEmail';
 import getReqOrigin from '@lskjs/utils/getReqOrigin';
 
 export default class Api extends BaseApi {
-  constructor(...props) {
-    super(...props);
-    this.init();
-  }
   async init() {
+    await super.init();
     // TODO: ввести в лск асинхронную загрузку Api
     const auth = await this.app.module('auth');
     this.helpers = auth.helpers;
   }
-  getRoutes() {
+  async getRoutes() {
     // const { isAuth } = this.app.middlewares;
     return {
+      ...(await super.getRoutes()),
       '/login': ::this.login,
       '/signup': ::this.signup, // POST
       '/updateToken': ::this.updateToken,

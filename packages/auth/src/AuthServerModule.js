@@ -6,38 +6,6 @@ import { Passport } from 'passport';
 import createHelpers from './utils/createHelpers';
 
 export default class AuthServerModule extends Module {
-  name = 'AuthServerModule';
-  constructor(props) {
-    super(props);
-    this.config = get(this, 'app.config.auth', {});
-    // console.log(123123);
-    // try {
-    this.helpers = createHelpers({ app: this.app }); // TODO: потом надо будет по другому кидать app, а еще лучше вообще не кидать
-    // } catch (err) {
-    //   console.error({ err });
-    // }
-    // console.log(3435345);
-  }
-  // initOnlineService() {
-  //   this.online = onlineService;
-  //   this.online.save = async (_id, visitedAt) => {
-  //     // console.log('this.online.save', _id, visitedAt);
-  //     const { User: UserModel } = this.models;
-  //     await UserModel.update({ _id }, { visitedAt });
-  //   };
-  //   // setInterval(() => {
-  //   //   console.log('online users', this.online.count());
-  //   // }, 10000);
-  //   this.middlewares.parseUser = [
-  //     this.middlewares.parseUser,
-  //     (req, res, next) => {
-  //       if (req.user && req.user._id && !req.headers.offline) {
-  //         this.online.touchOnline(req.user._id);
-  //       }
-  //       next();
-  //     },
-  //   ];
-  // }
   getStrategies() {
     return require('./strategies').default(this);
   }
@@ -63,16 +31,10 @@ export default class AuthServerModule extends Module {
   }
   async init() {
     await super.init();
-    if (!this.config) {
-      this.app.log.warn('config.auth is missing');
-      this.config = {};
-    }
-
-    // if (this.config.telegram) {
-    //   this.tbot = require('./tbot').default(this, this);
-    // }
     if (!this.config.socials) this.config.socials = {};
-    this.models = this.getModels();
+    // this.models = this.getModels();
+
+    this.helpers = createHelpers({ app: this.app }); // TODO: потом надо будет по другому кидать app, а еще лучше вообще не кидать
 
     this.strategyProviders = this.getStrategies();
     this.strategies = {};
