@@ -1,4 +1,4 @@
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import Api from '@lskjs/server-api';
 
 export default class PermitApi extends Api {
@@ -26,7 +26,7 @@ export default class PermitApi extends Api {
     return this.cache(['permit/find', params], async () => {
       let items = await PermitModel.findByParams(params);
       items = await PermitModel.prepare(items, { req, ...params });
-      return Promise.props({
+      return Bluebird.props({
         data: items,
         count: PermitModel.countDocuments(params.filter),
         __pack: 1,

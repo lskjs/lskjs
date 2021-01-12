@@ -2,27 +2,37 @@
 import nanoid from 'nanoid';
 import generate from 'nanoid/generate';
 import url from 'nanoid/url';
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 import get from 'lodash/get';
 import config from './config';
+import models from './models';
 
-export default class PermitServerModule extends Module {
-  name = 'PermitServerModule';
+export class PermitServerModule extends Module {
+  config = config;
+
+  async getConfig() {
+    return {
+      ...(await super.getConfig()),
+      ...get(this, 'config', {}),
+      ...get(this, '__config', {}),
+      scenarios: {
+        ...get(this, 'config.scenarios', {}),
+        ...get(this, '__config.scenarios', {}),
+      },
+    };
+  }
 
   async init() {
     await super.init();
-    this.config = {
-      ...config,
-      ...get(this, 'app.config.permit', {}),
-      scenarios: {
-        ...config.scenarios,
-        ...get(this, 'app.config.permit.scenarios', {}),
-      },
-    };
-    this.models = this.getModels();
+    const modelsModule = await this.module('models');
+    this.model = modelsModule.model.bind(models);
   }
-  getModels() {
-    return require('./models').default(this.app);
+
+  async getModules() {
+    return {
+      ...(await super.getModules()),
+      models: [() => import('@lskjs/models'), { models }],
+    };
   }
 
   createExpiredAt(scenario, params = {}) {
@@ -63,12 +73,12 @@ export default class PermitServerModule extends Module {
       return generate(url, length);
     }
     if (type === 'hash') {
-      throw 'NOT IMPLEMENTED';
+      throw 'NOT_IMPLEMENTED';
     }
     return nanoid(length);
   }
   async generateUniqCode(params, iteration = 0) {
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.model('PermitModel');
     // throw '!code';
     // if (iteration) {
     //   str2 += Math.floor(Math.random() * 100000);
@@ -81,3 +91,6 @@ export default class PermitServerModule extends Module {
     return code;
   }
 }
+
+
+export default PermitServerModule;

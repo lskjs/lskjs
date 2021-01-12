@@ -1,3 +1,6 @@
-export default (...args) => ({
-  PermitModel: require('./PermitModel').default(...args),
-});
+// import PermitModel from './PermitModel';
+// export * from './PermitModel';
+
+export default {
+  PermitModel: () => import('./PermitModel'),
+};
