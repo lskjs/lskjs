@@ -1,10 +1,20 @@
 // @ts-ignore
 import importFn from '@lskjs/utils/importFn';
-import { IModuleConstructor, IModule, IAsyncModule,  } from '../types';
+import { IModuleConstructor, IModule, IAsyncModule } from '../types';
 
-export const createAsyncModule = async (initArg: IAsyncModule, parentModule?: IModule): Promise<IModule> => {
+export const createAsyncModule = async (initArg: IAsyncModule, parentProps: object): Promise<IModule> => {
   if (initArg.__module) return initArg as IModule;
-  const arg = (await importFn(initArg)) as IModuleConstructor<IModule>;
+  const arg = (await importFn(initArg))
+  if (!arg) throw '!Component';
+  if (Array.isArray(arg)) {
+    const [Module, ...propsArray] = arg;
+    return (Module as IModuleConstructor<IModule>).create(...propsArray, parentProps);
+  }
+  if (arg.Module) {
+    const { Module, ...props } = arg;
+    return (Module as IModuleConstructor<IModule>).create({ ...props, ...parentProps });
+  }
+  // console.log({ arg });
   // if (arg instanceof IModuleConstructor) return arg.create(parentModule);
   // if (arg instanceof IModuleConstructor) return arg.create(parentModule);
   // if (typeof arg === IModule) return arg;
@@ -13,7 +23,7 @@ export const createAsyncModule = async (initArg: IAsyncModule, parentModule?: IM
   // if (typeof arg === IAsyncModule) {
   //   const AsyncModule = importFn(IAsyncModule)
   // }
-  return arg.create({ parent: parentModule });
+  return arg.create(parentProps);
 };
 
 export default createAsyncModule;

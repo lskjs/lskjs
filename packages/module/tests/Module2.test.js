@@ -4,8 +4,7 @@ import Module from '../src/2';
 test('new Module()', () => {
   const instance = new Module();
   expect(instance).toEqual({
-    __initAt: undefined,
-    __runAt: undefined,
+    __workflow: {}
   });
 });
 
@@ -14,8 +13,7 @@ test('instance.assignProps()', async () => {
   instance.assignProps({ a: 123 });
   expect(instance).toMatchObject({
     a: 123,
-    __initAt: undefined,
-    __runAt: undefined,
+    __workflow: {}
   });
 });
 
@@ -29,8 +27,7 @@ test('instance.init() throw INVALID_NEW_MODULE without create', async () => {
   }
   expect(err.code).toBe('INVALID_NEW_MODULE');
   expect(instance).toMatchObject({
-    __initAt: undefined,
-    __runAt: undefined,
+    __workflow: {}
   });
 });
 

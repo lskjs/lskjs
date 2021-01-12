@@ -172,6 +172,8 @@ new TheModule(, {providers: {}})
 
 как прокидывать конфиги дальше?
 
+https://gist.githubusercontent.com/JamesMessinger/5d31c053d0b1d52389eb2723f7550907/raw/41ac88d0cd00c55bac925891296df05c894c4a34/github-markdown.css
+
 
 ## Гипотетическое использование
 
@@ -208,3 +210,225 @@ console.log(m.name === 'TheModule');
 ## Всякие ссылки
 
 - https://v8.dev/blog/fast-async
+========================
+При переинициализации мы должны получать тот же самый объект
+
+
+# =======================================
+
+# Модули и конфиги
+
+## Case 0 – empty config
+
+
+```js
+
+class SomeModule extends Module { }
+
+const some = await SomeModule.create();
+
+some.config === {};
+
+```
+---
+## Case 1 – default config
+
+
+```js
+class SomeModule extends Module {
+  defaultConfig = {
+    a: 1,
+  };
+}
+
+const some = await SomeModule.create();
+
+some.config === {
+  a: 1,
+};
+```
+---
+## Case 2 - config while creation
+
+```js
+class SomeModule extends Module {}
+
+const some = await SomeModule.create({
+  config: {
+    a: 11,
+  }
+});
+
+some.config === {
+  a: 11,
+};
+```
+---
+## Case 3 - merging default and top config
+```js
+class SomeModule extends Module {
+  defaultConfig = {
+    a: 1,
+    b: 2,
+  };
+}
+
+const some = await SomeModule.create({
+  config: {
+    a: 11,
+    c: 33
+  }
+})
+
+some.config === {
+  a: 11,
+  b: 2,
+  c: 33,
+}
+```
+
+## Case 4 - merging default and top config
+
+```js
+
+class SomeModule extends Module {
+  config = {
+    a: 1,
+    b: 2,
+  };
+}
+
+const some = await SomeModule.create({
+  config: {
+    a: 2,
+    c: 3
+  }
+})
+
+some.config === {
+  a: 2,
+  b: 2,
+  c: 3,
+}
+
+
+```
+
+---
+## Case 5 - async config from db
+
+```js
+class SomeModule extends Module {
+  config = {
+    a: 1,
+    b: 2,
+  };
+  async getConfigFromDb() {
+    return {
+      fields: true,
+      from: true,
+      db: true,
+    }
+  }
+  async getConfig() {
+    const localConfig = await super.getConfig();
+    const dbConfig = await this.getConfigFromDb().catch(err => {
+      this.log.error('something wrong', err);
+      if (neededFallApp) throw err
+      // throw err;
+      return {}
+    })
+    return {
+      ...localConfig,
+      ...dbConfig,
+    };
+  }
+}
+const some = await SomeModule.create({
+  config: {
+    a: 11,
+    c: 33
+  }
+})
+
+
+// if all ok
+some.config === {
+  a: 11,
+  b: 2,
+  c: 33,
+  fields: true,
+  from: true,
+  db: true,
+}
+
+// if all error not ok
+some.config === {
+  a: 11,
+  b: 2,
+  c: 33,
+}
+```
+
+## Case 6 - deep config merge
+```js
+
+class Module {
+  async getConfig() {
+    return {
+      ...this.defaultConfig,
+      ...this.config,
+    }
+  }
+}
+
+class Module {
+  async getConfig() {
+    return {
+      ...this.defaultConfig,
+      ...this.config,
+      ...this.__config,
+      deep: {
+        ...this.defaultConfig.deep,
+        ...this.config.deep,
+        ...this.__config.deep,
+        deepest: {
+          ...this.defaultConfig.deep.deepest,
+          ...this.config.deep.deepest,
+          ...this.__config.deep.deepest,
+        }
+      }
+    }
+  }
+
+  // or
+
+  async getConfig() {
+    return mergeDeep(
+      this.defaultConfig,
+      this.config,
+      this.__config,
+    }
+  }
+
+  defaultConfig = {
+    a: 1,
+    b: 2,
+  };
+}
+
+const some = await SomeModule.create({
+  config: {
+    a: 2,
+    c: 3
+  }
+})
+
+some.config === {
+  a: 2,
+  b: 2,
+  c: 3,
+}
+
+
+```
