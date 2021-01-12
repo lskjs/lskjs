@@ -1,5 +1,6 @@
 import Markup from 'telegraf/markup';
-import keyBy from 'lodash/keyBy';
+// import keyBy from 'lodash/keyBy';
+import uniqBy from 'lodash/uniqBy';
 import BaseBotPlugin from './BaseBotPlugin';
 import createKeyboard from '../utils/createKeyboard';
 
@@ -55,8 +56,37 @@ export class MenuBotPlugin extends BaseBotPlugin {
 
   async init() {
     await super.init();
-    this.menus = (this.config && this.config.menus) || [];
+    this.menus = await this.getMenus();
   }
+
+  async run() {
+    await super.run();
+    this.menus = await this.getMenus();
+  }
+
+  async getMenus() {
+    const configMenus = (this.config && this.config.menus) || [];
+    return uniqBy( //eslint-disable-line
+      [...configMenus, ...this(await this.getMenusFromDb())],
+      (m) => m.path,
+    );
+  }
+  getMenusFromDb() {
+    try {
+      const { MenuModel } = this.app.models;
+      return MenuModel.find();
+    } catch (err) {
+      this.log.error('getMenusFromDb', err);
+      return [];
+    }
+  }
+  // run() {
+  //   super.run();
+  //   const { type, title, value } = element;
+  //   const config = value === 'array' ? [title, itemValue] : [title, value];
+  //   const btn = type === 'url' ? Markup.urlButton(...config) : Markup.callbackButton(...config);
+  //   return btn;
+  // }
 }
 
 export default MenuBotPlugin;

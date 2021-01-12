@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import some from 'lodash/some';
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 import assignProps from '@lskjs/utils/assignProps';
 import { IBotPlugin, IBotProvider, IBotProviderMessageCtx, IBotProviderCommand } from '../types';
 import emojiRegexp from '../utils/emojiRegexp';

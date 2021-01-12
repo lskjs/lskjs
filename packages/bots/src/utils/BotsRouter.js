@@ -1,10 +1,10 @@
 import UniversalRouter from 'universal-router';
-import Module2 from '@lskjs/module/2';
+import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
 import url from 'url';
 import qs from 'querystring';
 
-export class BotsRouter extends Module2 {
+export class BotsRouter extends Module {
   // debug = true;
   async init() {
     await super.init();

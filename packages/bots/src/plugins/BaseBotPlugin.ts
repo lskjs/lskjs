@@ -1,5 +1,5 @@
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import { IBotPlugin, IBotProvider } from '../types';
 

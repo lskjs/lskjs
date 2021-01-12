@@ -1,7 +1,7 @@
 import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 import { ILogger } from '@lskjs/module/module2/types';
 import pickBy from 'lodash/pickBy';
 import flatten from 'lodash/flatten';
@@ -108,13 +108,6 @@ export default class BotsModule extends Module {
   }
   async init(): Promise<void> {
     await super.init();
-    if (!this.config) {
-      if (!this.app?.config?.bots) {
-        this.log.warn('!config');
-        return;
-      } 
-      this.config = this.app.config.bots;
-    }
     // console.log('this.app.config.bots', this.app.config.bots)
     // console.log(this.config)
     const { assignProviders = true, providers: providersConfigs, plugins: pluginsConfig } = this.config;

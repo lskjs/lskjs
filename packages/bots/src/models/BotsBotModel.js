@@ -1,24 +1,20 @@
-import MongooseSchema from '@lskjs/db/MongooseSchema';
-//
-export default () => {
-  const schema = new MongooseSchema(
-    {
-      customerId: {
-        type: MongooseSchema.Types.ObjectId,
-      },
-      provider: {
-        type: String,
-        required: true,
-      },
-      creds: {
-        type: Object,
-      },
-    },
-    {
-      model: 'BotsBot',
-      collection: 'bots_bot',
-    },
-  );
+import Model from '@lskjs/db/Model';
 
-  return schema;
-};
+export default class BotsBotModel extends Model {
+  static schema = {
+    customerId: {
+      type: Model.Types.ObjectId,
+    },
+    provider: {
+      type: String,
+      required: true,
+    },
+    creds: {
+      type: Object,
+    },
+  };
+  static options = {
+    model: 'BotsBot',
+    collection: 'bots_bot',
+  };
+}
