@@ -1,12 +1,10 @@
 import Module from '@lskjs/module/2';
 import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import assignProps from '@lskjs/utils/assignProps';
 import Err from '@lskjs/utils/Err';
 import availableProviders from './providers';
 
 export default class BillingServerModule extends Module {
-  name = 'BillingServerModule';
   availableProviders = availableProviders;
   providers = {};
   async getProviders() {
@@ -24,14 +22,6 @@ export default class BillingServerModule extends Module {
   }
   async init() {
     await super.init();
-    if (!this.config) {
-      if (this.app.config.billing) {
-        this.config = this.app.config.billing;
-      } else {
-        this.log.warn('!config');
-        return;
-      }
-    }
     this.log.debug('availableProviders', Object.keys(this.availableProviders));
     const { providers: providersConfigs } = this.config;
     const availableProviders = await this.getProviders(); // eslint-disable-line no-shadow
