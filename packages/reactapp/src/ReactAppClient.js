@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import assignProps from '@lskjs/utils/assignProps';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import { createBrowserHistory } from 'history';
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 // import BaseUapp from '@lskjs/uapp';
 // import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
@@ -15,7 +15,6 @@ const DEBUG = __DEV__ && false; // __STAGE__ === 'isuvorov'
 export default class ReactAppClient extends Module {
   // BaseUapp = BaseUapp;
   ReactDOM = ReactDOM;
-  name = 'ReactAppClient';
 
   getRootState() {
     return window.__ROOT_STATE__ || {};

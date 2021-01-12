@@ -5,10 +5,8 @@ import mapValues from 'lodash/mapValues';
 import map from 'lodash/map';
 
 export default class WorkerModule extends Module {
-  name = 'Worker';
   async init() {
     await super.init();
-    this.log.trace('Worker init');
     this.db = await this.getDatabase();
   }
   async afterInit() {

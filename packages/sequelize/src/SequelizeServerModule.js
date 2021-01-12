@@ -1,14 +1,14 @@
 import Module from '@lskjs/module';
 import Sequelize from 'sequelize';
 import merge from 'lodash/merge';
+import get from 'lodash/get';
 
 export default class SequelizeServerModule extends Module {
-  name = 'SequelizeServerModule';
   enabled = false;
   Sequelize = Sequelize;
-  defaultConfig = {
-    uri: '',
+  config = {
     options: {
+      dialect: 'postgres',
       logging: false,
       pool: {
         max: 5,
@@ -20,23 +20,23 @@ export default class SequelizeServerModule extends Module {
       },
     },
   };
+
+  async getConfig() {
+    return merge(
+      //
+      {},
+      await super.getConfig(),
+      get(this, 'config', {}),
+      get(this, '__config', {}),
+    );
+  }
+
   async init() {
     await super.init();
-    const configSequelize = this.app.config.sequelize;
-    if (!configSequelize) {
-      this.log.warn('config.sequelize IS EMPTY');
+    if (!this.config.uri) {
+      await this.log.warn('!uri ignore module');
       return;
     }
-    this.enabled = true;
-    this.config = merge(
-      {
-        options: {
-          dialect: 'postgres',
-        },
-      },
-      this.defaultConfig,
-      configSequelize,
-    );
     this.client = new Sequelize(this.config.uri, this.config.options);
     this.models = this.getModels();
     await this.client.authenticate();
@@ -45,7 +45,10 @@ export default class SequelizeServerModule extends Module {
     return {};
   }
   async run() {
-    if (!this.enabled) return;
+    if (!this.client) {
+      await this.log.warn('!client ignore module');
+      return;
+    }
     await this.client.sync();
   }
 }

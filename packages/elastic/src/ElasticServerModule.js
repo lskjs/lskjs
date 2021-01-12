@@ -2,12 +2,12 @@ import Module from '@lskjs/module';
 import elasticsearch from 'elasticsearch';
 import mexp from 'mongoose-elasticsearch-xp-async';
 import merge from 'lodash/merge';
+import get from 'lodash/get';
 
 export default class ElasticServerModule extends Module {
-  name = 'ElasticServerModule';
   enabled = false;
   delayedModels = [];
-  defaultConfig = {
+  config = {
     sync: true,
     client: {
       host: 'localhost:9200',
@@ -56,16 +56,21 @@ export default class ElasticServerModule extends Module {
       },
     },
   };
+
+  async getConfig() {
+    return merge(
+      //
+      {},
+      await super.getConfig(),
+      get(this, 'config', {}),
+      get(this, '__config', {}),
+    );
+  }
+
   async init() {
     await super.init();
-    const configElasticsearch = this.app.config.elastic || this.app.config.elasticsearch;
-    if (!configElasticsearch) {
-      this.log.warn('config.elastic IS EMPTY');
-      return;
-    }
     this.enabled = true;
     this.nowSync = [];
-    this.config = merge({}, this.defaultConfig, configElasticsearch);
     this.client = new elasticsearch.Client(this.config.client);
     this.delayedModels.forEach(([schema, params]) => {
       this.addModel(schema, params);
@@ -73,7 +78,7 @@ export default class ElasticServerModule extends Module {
   }
   getProjectionModel(model) {
     const projection = {};
-    Object.keys(model.schema.obj).forEach(key => {
+    Object.keys(model.schema.obj).forEach((key) => {
       const field = model.schema.obj[key];
       if (field.es_indexed) {
         projection[key] = 1;
@@ -120,7 +125,7 @@ export default class ElasticServerModule extends Module {
 
   async syncAll({ again = false } = {}) {
     const modelNames = this.app.db.modelNames();
-    modelNames.forEach(async modelName => {
+    modelNames.forEach(async (modelName) => {
       const model = this.app.db.model(modelName);
       if (model.esCreateMapping) {
         this.sync({ model, again });
@@ -129,7 +134,7 @@ export default class ElasticServerModule extends Module {
   }
 
   removeFromNowSync(modelName) {
-    this.nowSync = this.nowSync.filter(item => item !== modelName);
+    this.nowSync = this.nowSync.filter((item) => item !== modelName);
   }
 
   addModelWithDelay(schema, params = {}) {

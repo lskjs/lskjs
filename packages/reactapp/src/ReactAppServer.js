@@ -15,11 +15,8 @@ import BaseHtml from './Html';
 const DEBUG = false;
 
 export default class ReactAppServer extends Module {
-  name = 'ReactAppServer';
-
   async init() {
     await super.init();
-    if (!this.config && this.app) this.config = this.app.config;
     if (!this.expressResolve && this.app) this.expressResolve = this.app.expressResolve;
     if (!this.express && this.app) this.express = this.app.express;
     if (!this.Uapp) throw '!Uapp';

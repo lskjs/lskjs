@@ -16,7 +16,7 @@ import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 import assignProps from '@lskjs/utils/assignProps';
 import I18 from '@lskjs/i18';
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 import logger from '@lskjs/log';
 import autobind from '@lskjs/utils/autobind';
 import e from '@lskjs/utils/e';
@@ -34,8 +34,6 @@ Promise.config({ cancellation: true });
 // }
 
 export default class Uapp extends Module {
-  name = 'Uapp';
-  _module = 'app';
   Api = Api;
   Apiq = Apiq;
   Page = DefaultPage;
