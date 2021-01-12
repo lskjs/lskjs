@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **module:** stable workflow, typings, add tests ([39bb765](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/39bb765c846f8a92e7e474805fd094c73186ffdf))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
 
 

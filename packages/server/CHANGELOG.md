@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **server:** minify ServerApp, separate Webserver, refactor middlewares ([2650905](https://github.com/lskjs/lskjs/tree/master/packages/server/commit/2650905b990dce681afdb427966c6585c3414004))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
 
 

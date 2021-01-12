@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "LSK build-locales.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

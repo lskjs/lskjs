@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/i18/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **i18:** add I18Module, new logic separations ([5de4e45](https://github.com/lskjs/lskjs/tree/master/packages/i18/commit/5de4e4533a2b8254375a68fc7f57704597fd2ecb))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/i18/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
 
 

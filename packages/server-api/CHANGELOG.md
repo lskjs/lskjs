@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **server-api:** migrate Api to Module, new workflow, improve getRoutes ([8a8059b](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/8a8059bb9025a70fd1ff709ea1690a674647ff1d))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
 
 

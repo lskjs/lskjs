@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Bug Fixes
+
+* **db:** ts errors ([6424dff](https://github.com/isuvorov/lib-starter-kit/commit/6424dff1679172826d80b449c1ac63011fa5ad62))
+* **utils:** add tests asyncMapValuesDeep ([ac95eb7](https://github.com/isuvorov/lib-starter-kit/commit/ac95eb73e6f6b8b84bf6647e7347f628ddff895b))
+* **utils:** isFunction return false if it is class ([01fe461](https://github.com/isuvorov/lib-starter-kit/commit/01fe4617ddf204e2eab52b1a56bf9ef079a70b66))
+* **utils:** pass keys in context asyncMapValuesDeep ([d430f10](https://github.com/isuvorov/lib-starter-kit/commit/d430f109462fa60f47a0f554e1e5e8dec03c6c69))
+
+
+### Features
+
+* **db:** add Model, create typings, ModelsModule ([0f1c01a](https://github.com/isuvorov/lib-starter-kit/commit/0f1c01a5caf27d21d982fabf7d7ad8a48dbc9b91))
+* **db:** recreate db as module add typings ([f65e9a3](https://github.com/isuvorov/lib-starter-kit/commit/f65e9a3837834447a95666aa1a22366a93f49131))
+* **i18:** add I18Module, new logic separations ([5de4e45](https://github.com/isuvorov/lib-starter-kit/commit/5de4e4533a2b8254375a68fc7f57704597fd2ecb))
+* **log:** child logs, improve logging, add cli options ([038493f](https://github.com/isuvorov/lib-starter-kit/commit/038493f0ebbe8e4270fa362b034a0ecb793422f6))
+* **module:** stable workflow, typings, add tests ([39bb765](https://github.com/isuvorov/lib-starter-kit/commit/39bb765c846f8a92e7e474805fd094c73186ffdf))
+* **server:** minify ServerApp, separate Webserver, refactor middlewares ([2650905](https://github.com/isuvorov/lib-starter-kit/commit/2650905b990dce681afdb427966c6585c3414004))
+* **server-api:** migrate Api to Module, new workflow, improve getRoutes ([8a8059b](https://github.com/isuvorov/lib-starter-kit/commit/8a8059bb9025a70fd1ff709ea1690a674647ff1d))
+* **utils:** add omit and pick ([cedd642](https://github.com/isuvorov/lib-starter-kit/commit/cedd6424dea0312e2d69d408022df82527acef9e))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
 
 

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Bug Fixes
+
+* **utils:** add tests asyncMapValuesDeep ([ac95eb7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/ac95eb73e6f6b8b84bf6647e7347f628ddff895b))
+* **utils:** isFunction return false if it is class ([01fe461](https://github.com/lskjs/ux/tree/master/packages/utils/commit/01fe4617ddf204e2eab52b1a56bf9ef079a70b66))
+* **utils:** pass keys in context asyncMapValuesDeep ([d430f10](https://github.com/lskjs/ux/tree/master/packages/utils/commit/d430f109462fa60f47a0f554e1e5e8dec03c6c69))
+
+
+### Features
+
+* **utils:** add omit and pick ([cedd642](https://github.com/lskjs/ux/tree/master/packages/utils/commit/cedd6424dea0312e2d69d408022df82527acef9e))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
 
 
