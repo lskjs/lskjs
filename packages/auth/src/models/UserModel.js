@@ -1,7 +1,7 @@
-import LskBaseModel from '@lskjs/db/LskBaseModel';
+import Model from '@lskjs/db/Model';
 
-export class UserModel extends LskBaseModel {
-  schema = {
+export class UserModel extends Model {
+  static schema = {
     role: {
       type: String,
     },
@@ -41,7 +41,7 @@ export class UserModel extends LskBaseModel {
       },
     },
   };
-  options = {
+  static options = {
     model: 'User',
     collection: 'user',
   };

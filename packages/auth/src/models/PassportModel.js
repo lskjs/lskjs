@@ -1,14 +1,12 @@
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
-import MongooseSchema from '@lskjs/db/MongooseSchema';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
+import Model from '@lskjs/db/Model';
 
-import LskBaseModel from '@lskjs/db/LskBaseModel';
-
-export class PassportModel extends LskBaseModel {
-  schema = {
+export class PassportModel extends Model {
+  static schema = {
     userId: {
-      type: MongooseSchema.Types.ObjectId,
+      type: Model.Types.ObjectId,
       // ref: 'User',
     },
     // Сырые данные которые пришли из соц сети
@@ -66,7 +64,7 @@ export class PassportModel extends LskBaseModel {
       default: null,
     },
   };
-  options = {
+  static options = {
     model: 'Passport',
     collection: 'passport',
     // timestamps: true,

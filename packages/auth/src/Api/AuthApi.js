@@ -1,4 +1,4 @@
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import merge from 'lodash/merge';
 import random from 'lodash/random';
 import set from 'lodash/set';
@@ -14,7 +14,7 @@ import canonizeParams from '@lskjs/utils/canonizeParams';
 import validateEmail from '@lskjs/utils/validateEmail';
 import getReqOrigin from '@lskjs/utils/getReqOrigin';
 
-export default class Api extends BaseApi {
+export default class AuthApi extends BaseApi {
   async init() {
     await super.init();
     // TODO: ввести в лск асинхронную загрузку Api
@@ -222,7 +222,7 @@ export default class Api extends BaseApi {
       user.setStatus('confirmEmailAt', new Date());
       await user.save();
       const token = this.helpers.generateAuthToken(user);
-      return Promise.props({
+      return Bluebird.props({
         __pack: true,
         user: UserModel.prepare(user, { req }),
         token,
@@ -240,7 +240,7 @@ export default class Api extends BaseApi {
       user.setStatus('passwordAt', new Date());
       await user.save();
       const token = this.helpers.generateAuthToken(user);
-      return Promise.props({
+      return Bluebird.props({
         __pack: true,
         user: UserModel.prepare(user, { req }),
         token,
@@ -325,7 +325,7 @@ export default class Api extends BaseApi {
   //   user.markModified('private.lastUpdates.password');
   //   await user.save();
   //   const token = this.helpers.generateAuthToken(user);
-  //   return Promise.props({
+  //   return Bluebird.props({
   //     __pack: true,
   //     user: UserModel.prepare(user, { req }),
   //     token,
@@ -416,7 +416,7 @@ export default class Api extends BaseApi {
     const authModule = await this.app.module('auth');
     if (!authModule) throw '!authModule';
     const { provider } = req.params;
-    return new Promise((resolve, reject) => {
+    return new Bluebird((resolve, reject) => {
       authModule.passportService.authenticate(
         provider,
         authModule.strategies[provider].getPassportAuthenticateParams({ method: 'callback' }),
@@ -817,7 +817,7 @@ export default class Api extends BaseApi {
       type: permit.type,
       userId: user._id,
     });
-    await Promise.map(permits, (p) => {
+    await Bluebird.map(permits, (p) => {
       p.disabledAt = date; // eslint-disable-line no-param-reassign
       return p.save();
     });
