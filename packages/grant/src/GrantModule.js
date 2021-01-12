@@ -11,7 +11,6 @@ const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
 // && false
 // [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
 export default class GrantModule extends Module {
-  name = 'GrantModule';
   getRules() {
     return {};
   }
@@ -21,7 +20,7 @@ export default class GrantModule extends Module {
   async init() {
     await super.init();
     this.rules = this.getRules();
-    this.log.trace('GrantModule.rules', Object.keys(this.rules));
+    if (this.debug) this.log.debug('rules', Object.keys(this.rules));
   }
   async getParams(args) {
     if (args.length === 1) {
