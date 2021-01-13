@@ -49,6 +49,7 @@
     "lodash": "4.17.20"
   },
   "peerDependencies": {
+    "@types/mongoose": "*",
     "bluebird": "*",
     "lodash": "4.17.20"
   }

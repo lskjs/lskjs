@@ -8,9 +8,9 @@ test('new Module()', () => {
   });
 });
 
-test('instance.assignProps()', async () => {
+test('instance.setProps()', async () => {
   const instance = new Module();
-  instance.assignProps({ a: 123 });
+  instance.setProps({ a: 123 });
   expect(instance).toMatchObject({
     a: 123,
     __workflow: {}

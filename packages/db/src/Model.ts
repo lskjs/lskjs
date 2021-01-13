@@ -1,3 +1,4 @@
+// ts-ignore
 import { Schema } from 'mongoose';
 import { IModel } from './types'
 
