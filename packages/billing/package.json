@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -46,13 +46,13 @@
   },
   "dependencies": {
     "@lskjs/module": "1.99.1",
-    "@lskjs/utils": "2.0.0-beta.4",
+    "@lskjs/utils": "2.0.0-beta.5",
     "coingate-v2": "*",
     "yandex-checkout": "*"
   },
   "devDependencies": {
-    "@lskjs/db": "2.0.0-beta.4",
-    "@lskjs/server-api": "2.0.0-beta.4",
+    "@lskjs/db": "2.0.0-beta.5",
+    "@lskjs/server-api": "2.0.0-beta.5",
     "axios": "0.20.0",
     "bluebird": "3.7.2",
     "coingate-v2": "1.0.1",
