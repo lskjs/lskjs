@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.7](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* **utils:** isFunction error ([0796e90](https://github.com/lskjs/ux/tree/master/packages/utils/commit/0796e90c9683bba3c960426ec5dceb1112c4287d))
+
+
+
+
+
 # [2.0.0-beta.6](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
 
 **Note:** Version bump only for package @lskjs/utils

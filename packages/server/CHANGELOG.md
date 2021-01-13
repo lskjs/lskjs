@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* **server:** invalid import ([a00bf6c](https://github.com/lskjs/lskjs/tree/master/packages/server/commit/a00bf6cb596f877d9c8052693c5811d444ac5716))
+
+
+
+
+
 # [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
 
 **Note:** Version bump only for package @lskjs/server

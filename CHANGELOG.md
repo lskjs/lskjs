@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.7](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* **server:** invalid import ([a00bf6c](https://github.com/isuvorov/lib-starter-kit/commit/a00bf6cb596f877d9c8052693c5811d444ac5716))
+* **utils:** isFunction error ([0796e90](https://github.com/isuvorov/lib-starter-kit/commit/0796e90c9683bba3c960426ec5dceb1112c4287d))
+
+
+
+
+
 # [2.0.0-beta.6](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
 
 
