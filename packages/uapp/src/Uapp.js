@@ -8,16 +8,12 @@ import UniversalRouter from 'universal-router';
 import Promise from 'bluebird';
 import { observable } from 'mobx';
 import Favico from 'favico.js';
-import Api from '@lskjs/apiquery';
-import Apiq from '@lskjs/apiquery/q';
 import scrollTo from '@lskjs/scroll';
 import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
-import assignProps from '@lskjs/utils/assignProps';
 import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
-import logger from '@lskjs/log';
 import autobind from '@lskjs/utils/autobind';
 import e from '@lskjs/utils/e';
 import UappProvider from './UappProvider';
@@ -34,8 +30,6 @@ Promise.config({ cancellation: true });
 // }
 
 export default class Uapp extends Module {
-  Api = Api;
-  Apiq = Apiq;
   Page = DefaultPage;
   Provider = UappProvider;
   theme = defaultTheme;
@@ -45,21 +39,21 @@ export default class Uapp extends Module {
   @observable req = {};
 
 
-  createLogger(params) {
-    const level = __DEV__ // eslint-disable-line no-nested-ternary
-      ? __SERVER__
-        ? 'warn'
-        : 'trace'
-      : 'error';
+  // createLogger(params) {
+  //   const level = __DEV__ // eslint-disable-line no-nested-ternary
+  //     ? __SERVER__
+  //       ? 'warn'
+  //       : 'trace'
+  //     : 'error';
 
-    return logger.createLogger({
-      name: this.name || 'app',
-      src: __DEV__,
-      level,
-      ...get(this, 'config.log', {}),
-      ...params,
-    });
-  }
+  //   return logger.createLogger({
+  //     name: this.name || 'app',
+  //     src: __DEV__,
+  //     level,
+  //     ...get(this, 'config.log', {}),
+  //     ...params,
+  //   });
+  // }
 
   async applyRootState(rootState = {}) {
     this._config = cloneDeep(this.config);

@@ -34,8 +34,9 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@babel/runtime": "7.8.4"
+    "@babel/runtime": "7.12.5"
   },
+  "devDependencies": {},
   "bin": {
     "linkall": "./index.js"
   }

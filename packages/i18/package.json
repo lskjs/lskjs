@@ -44,13 +44,11 @@
   "devDependencies": {
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",
-    "mobx": "5.15.4",
-    "moment": "2.24.0"
+    "mobx": "5.15.4"
   },
   "peerDependencies": {
     "bluebird": "*",
     "js-cookie": "*",
-    "mobx": "*",
-    "moment": "*"
+    "mobx": "*"
   }
 }

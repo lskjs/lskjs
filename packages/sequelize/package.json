@@ -38,16 +38,15 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "pg": "7.18.1",
+    "@lskjs/module": "2.0.0-beta.4",
+    "pg": "8.5.1",
     "pg-hstore": "2.3.3",
-    "sequelize": "5.21.4"
+    "sequelize": "6.3.5"
   },
   "devDependencies": {
-    "@lskjs/module": "2.0.0-beta.4",
-    "lodash": "4.17.19"
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
-    "@lskjs/module": "*",
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

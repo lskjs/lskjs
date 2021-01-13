@@ -35,20 +35,18 @@
   },
   "dependencies": {
     "@lskjs/log2": "2.0.0-beta.4",
-    "@lskjs/utils": "2.0.0-beta.2",
+    "@lskjs/utils": "2.0.0-beta.4",
     "colors": "^1.4.0",
-    "eventemitter3": "4.0.0"
+    "eventemitter3": "4.0.7"
   },
   "devDependencies": {
-    "@lskjs/log": "2.0.0-beta.4",
     "@types/lodash": "4.14.167",
     "bluebird": "3.7.2",
-    "lodash": "4.17.19"
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
-    "@lskjs/log": "*",
-    "@types/lodash": "4.14.167",
+    "@types/lodash": "*",
     "bluebird": "*",
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

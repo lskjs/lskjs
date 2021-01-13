@@ -34,6 +34,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "1.98.0"
-  }
+    "@lskjs/utils": "1.99.0"
+  },
+  "devDependencies": {}
 }

@@ -34,14 +34,14 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "node-telegram-bot-api": "0.40.0"
+    "node-telegram-bot-api": "0.51.0"
   },
   "devDependencies": {
     "bluebird": "3.7.2",
-    "lodash": "4.17.19"
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
     "bluebird": "*",
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

@@ -34,17 +34,17 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@browser-bunyan/levels": "1.5.3",
+    "@browser-bunyan/levels": "1.6.0",
     "@lskjs/bunyan": "2.0.0-beta.2",
-    "@lskjs/utils": "2.0.0-beta.2",
-    "browser-bunyan": "1.5.3",
-    "source-map-support": "0.5.16"
+    "@lskjs/utils": "2.0.0-beta.4",
+    "browser-bunyan": "1.6.3",
+    "source-map-support": "0.5.19"
   },
   "devDependencies": {
-    "axios": "0.19.2"
+    "axios": "0.21.1"
   },
   "peerDependencies": {
-    "axios": "*"
+    "axios": "0.21.1"
   },
   "bin": {
     "lsknyan": "./bin/cli.js"

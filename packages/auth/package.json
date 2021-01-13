@@ -42,38 +42,38 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
+    "@lskjs/module": "2.0.0-beta.4",
+    "@lskjs/utils": "2.0.0-beta.4",
     "bcryptjs": "2.4.3",
-    "isomorphic-fetch": "2.2.1",
     "jsonwebtoken": "8.5.1",
+    "node-accountkit": "*",
     "passport": "0.4.1",
-    "passport-facebook": "3.0.0",
-    "passport-telegram-official": "1.1.0",
-    "passport-vkontakte": "0.3.2",
-    "passport-youtube-v3": "2.1.0",
-    "qs": "6.9.1",
-    "validator": "12.2.0"
+    "passport-facebook": "*",
+    "passport-telegram-official": "*",
+    "passport-vkontakte": "*",
+    "passport-youtube-v3": "*",
+    "qs": "6.9.4",
+    "validator": "13.5.2"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "2.0.0-beta.2",
     "@lskjs/db": "2.0.0-beta.4",
     "@lskjs/mobx": "2.0.0-beta.2",
-    "@lskjs/module": "2.0.0-beta.4",
     "@lskjs/server-api": "2.0.0-beta.4",
-    "@lskjs/utils": "1.98.0",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",
-    "lodash": "4.17.19",
+    "lodash": "4.17.20",
     "mobx": "5.15.4",
-    "node-accountkit": "1.1.6"
+    "node-accountkit": "1.1.6",
+    "passport-facebook": "3.0.0",
+    "passport-telegram-official": "1.1.0",
+    "passport-vkontakte": "0.5.0",
+    "passport-youtube-v3": "2.1.0"
   },
   "peerDependencies": {
-    "@lskjs/apiquery": "*",
     "@lskjs/db": "*",
     "@lskjs/mobx": "*",
-    "@lskjs/module": "*",
     "@lskjs/server-api": "*",
-    "@lskjs/utils": "*",
     "axios": "*",
     "bluebird": "*",
     "js-cookie": "*",
@@ -81,6 +81,10 @@
     "mobx": "*"
   },
   "optionalDependencies": {
-    "node-accountkit": "*"
+    "node-accountkit": "*",
+    "passport-facebook": "*",
+    "passport-telegram-official": "*",
+    "passport-vkontakte": "*",
+    "passport-youtube-v3": "*"
   }
 }

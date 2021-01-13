@@ -37,17 +37,18 @@
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
-    "@babel/runtime": "7.8.4",
     "@lskjs/module": "2.0.0-beta.4",
-    "@lskjs/server-api": "2.0.0-beta.4",
-    "@lskjs/utils": "2.0.0-beta.2",
-    "async-mutex": "^0.2.4",
-    "bluebird": "^3.7.2"
+    "@lskjs/utils": "2.0.0-beta.4",
+    "async-mutex": "0.2.4"
   },
   "devDependencies": {
-    "lodash": "4.17.19"
+    "@lskjs/server-api": "2.0.0-beta.4",
+    "bluebird": "3.7.2",
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
+    "@lskjs/server-api": "*",
+    "bluebird": "*",
     "lodash": "*"
   }
 }

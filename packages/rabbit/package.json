@@ -37,12 +37,12 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "amqplib": "0.5.5"
+    "amqplib": "0.6.0"
   },
   "devDependencies": {
-    "lodash": "4.17.19"
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

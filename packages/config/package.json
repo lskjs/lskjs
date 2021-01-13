@@ -34,12 +34,12 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "lodash": "4.17.19"
+    "@lskjs/utils": "1.99.0"
   },
   "devDependencies": {
-    "@lskjs/utils": "1.98.0"
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
-    "@lskjs/utils": "*"
+    "lodash": "*"
   }
 }

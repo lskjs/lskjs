@@ -34,51 +34,36 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
+    "@lskjs/module": "2.0.0-beta.4",
+    "@lskjs/utils": "2.0.0-beta.4",
     "body-parser": "1.19.0",
     "cacheman": "2.2.1",
     "connect-static-file": "2.0.0",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
-    "deepmerge": "4.2.2",
     "emotion": "10.0.27",
     "emotion-theming": "10.0.27",
     "express": "4.17.1",
     "express-jwt": "6.0.0",
-    "nanoid": "^3.1.10",
-    "object-hash": "2.0.3",
+    "nanoid": "3.1.20",
     "portfinder": "1.0.28",
-    "redis": "3.0.2",
-    "socket.io": "2.3.0",
+    "socket.io": "3.0.5",
     "socket.io-as-promised": "1.0.0",
-    "socket.io-redis": "5.3.0"
+    "socket.io-redis": "6.0.1"
   },
   "devDependencies": {
     "@lskjs/db": "2.0.0-beta.4",
     "@lskjs/i18": "2.0.0-beta.4",
-    "@lskjs/log": "2.0.0-beta.4",
-    "@lskjs/log2": "2.0.0-beta.4",
-    "@lskjs/module": "2.0.0-beta.4",
-    "@lskjs/utils": "2.0.0-beta.4",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "lodash": "4.17.19",
-    "moment": "2.27.0",
-    "supertest": "^4.0.2"
-  },
-  "olddependencies": {
-    "@babel/polyfill": "7.0.0-beta.42",
-    "@babel/runtime": "7.0.0-beta.42"
+    "lodash": "4.17.20",
+    "supertest": "6.0.1"
   },
   "peerDependencies": {
     "@lskjs/db": "*",
     "@lskjs/i18": "*",
-    "@lskjs/log": "*",
-    "@lskjs/log2": "*",
-    "@lskjs/module": "*",
-    "@lskjs/utils": "*",
-    "axios": "*",
+    "axios": "0.21.1",
     "bluebird": "*",
-    "lodash": "*",
-    "moment": "*"
+    "lodash": "4.17.20"
   }
 }

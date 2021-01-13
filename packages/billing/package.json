@@ -45,25 +45,31 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/db": "2.0.0-beta.4",
-    "@lskjs/module": "2.0.0-beta.4",
-    "@lskjs/server-api": "2.0.0-beta.4",
-    "@lskjs/utils": "2.0.0-beta.2"
+    "@lskjs/module": "1.99.1",
+    "@lskjs/utils": "2.0.0-beta.4",
+    "coingate-v2": "*",
+    "yandex-checkout": "*"
   },
   "devDependencies": {
-    "axios": "^0.20.0",
+    "@lskjs/db": "2.0.0-beta.4",
+    "@lskjs/server-api": "2.0.0-beta.4",
+    "axios": "0.20.0",
     "bluebird": "3.7.2",
-    "coingate-v2": "^1.0.1",
-    "crypto-js": "^4.0.0",
-    "lodash": "4.17.19",
+    "coingate-v2": "1.0.1",
+    "crypto-js": "4.0.0",
+    "lodash": "4.17.20",
     "yandex-checkout": "1.0.13"
   },
   "peerDependencies": {
+    "@lskjs/db": "*",
+    "@lskjs/server-api": "*",
     "axios": "*",
     "bluebird": "*",
-    "coingate-v2": "*",
     "crypto-js": "*",
-    "lodash": "*",
+    "lodash": "*"
+  },
+  "optionalDependencies": {
+    "coingate-v2": "*",
     "yandex-checkout": "*"
   }
 }

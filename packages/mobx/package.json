@@ -36,15 +36,16 @@
     "i18": "../../scripts/package-i18.sh",
     "clear": "../../scripts/package-clear.sh"
   },
+  "dependencies": {
+    "@lskjs/utils": "1.99.0"
+  },
   "devDependencies": {
-    "@lskjs/utils": "1.98.0",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "lodash": "4.17.19",
+    "lodash": "4.17.20",
     "mobx": "5.15.4"
   },
   "peerDependencies": {
-    "@lskjs/utils": "*",
     "axios": "*",
     "bluebird": "*",
     "lodash": "*",

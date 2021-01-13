@@ -34,13 +34,22 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@babel/runtime": "7.9.6",
-    "axios": "0.19.2",
     "bluebird": "3.7.2",
-    "commander": "5.1.0",
-    "csv-parse": "4.9.0",
-    "googleapis": "47.0.0",
-    "lodash": "4.17.19"
+    "commander": "6.2.1",
+    "csv-parse": "4.14.2",
+    "googleapis": "67.0.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.12.5",
+    "axios": "0.21.1",
+    "bluebird": "3.7.2",
+    "lodash": "4.17.20"
+  },
+  "peerDependencies": {
+    "@babel/runtime": "7.12.5",
+    "axios": "0.21.1",
+    "bluebird": "*",
+    "lodash": "4.17.20"
   },
   "bin": {
     "getspreadsheet": "./bin/getspreadsheet.js"

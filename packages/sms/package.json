@@ -36,10 +36,12 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "1.98.0"
+    "@lskjs/utils": "1.99.0",
+    "plivo": "*",
+    "telesignsdk": "*"
   },
   "devDependencies": {
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "plivo": "4.1.9",
     "telesignsdk": "2.2.1"
   },
@@ -47,7 +49,7 @@
     "axios": "*"
   },
   "optionalDependencies": {
-    "plivo": "4.1.9",
+    "plivo": "*",
     "telesignsdk": "*"
   }
 }

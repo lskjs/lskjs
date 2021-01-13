@@ -39,19 +39,18 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
+    "@lskjs/module": "2.0.0-beta.4",
     "@lskjs/utils": "2.0.0-beta.4",
     "aws-sdk": "2.617.0",
     "multer": "1.4.2",
     "multer-s3": "2.9.0"
   },
   "devDependencies": {
-    "@lskjs/module": "2.0.0-beta.4",
     "@lskjs/server-api": "2.0.0-beta.4",
     "bluebird": "3.7.2",
-    "lodash": "4.17.19"
+    "lodash": "4.17.20"
   },
   "peerDependencies": {
-    "@lskjs/module": "*",
     "@lskjs/server-api": "*",
     "bluebird": "*",
     "lodash": "*"
