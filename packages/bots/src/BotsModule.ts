@@ -21,8 +21,8 @@ export default class BotsModule extends Module {
   routes: any;
   routers: any;
 
-  assignProps(...props: any[]): void {
-    super.assignProps(...props);
+  setProps(...props: any[]): void {
+    super.setProps(...props);
     try {
       this.v = require('./package.json').version;
     } catch (err) {
@@ -142,6 +142,7 @@ export default class BotsModule extends Module {
         config: pluginConfig || {},
       });
     });
+    // @ts-ignore
     this.plugins = pickBy(this.plugins, Boolean);
     this.log.debug('plugins', Object.keys(this.plugins));
 
@@ -158,7 +159,7 @@ export default class BotsModule extends Module {
         bots: this.bots,
         bot,
         routes: this.routes,
-      }, { asd: 123});
+      });
     });
 
     if (assignProviders) Object.assign(this, this.bots);
