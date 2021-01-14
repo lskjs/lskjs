@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "2.1.0-beta.0",
+  "version": "2.1.0-beta.1",
   "description": "LSK module for worker.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -36,10 +36,10 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.0"
+    "@lskjs/module": "2.1.0-beta.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.1.0-beta.0",
+    "@lskjs/db": "2.1.0-beta.1",
     "lodash": "4.17.20"
   },
   "peerDependencies": {

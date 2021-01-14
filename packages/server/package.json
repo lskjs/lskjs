@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "2.1.0-beta.0",
+  "version": "2.1.0-beta.1",
   "description": "LSK server.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.0",
+    "@lskjs/module": "2.1.0-beta.1",
     "@lskjs/utils": "2.1.0-beta.0",
     "body-parser": "1.19.0",
     "cacheman": "2.2.1",
@@ -52,7 +52,7 @@
     "socket.io-redis": "6.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.1.0-beta.0",
+    "@lskjs/db": "2.1.0-beta.1",
     "@lskjs/i18": "2.1.0-beta.0",
     "axios": "0.21.1",
     "bluebird": "3.7.2",

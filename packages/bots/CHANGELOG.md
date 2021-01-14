@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **bots:** model in MenuPlugin bugs ([3688ecb](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/3688ecbed4320ef9e56e3ebf1a046a284d4874ed))
+
+
+
+
+
 # [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
 
 
