@@ -15,7 +15,7 @@ export class MenuBotPlugin extends BaseBotPlugin {
   }
 
   async getMenu(key, itemValue) {
-    const { BotsMenuModel } = this.app.models;
+    const BotsMenuModel = await this.botsModule.model('BotsMenuModel');
     const menu = await BotsMenuModel.findOne({ key }).select(['content', 'buttonsLayout']).lean();
     if (!menu) return [];
     const buttonsLayout = menu.buttonsLayout.map((element) => {
@@ -67,14 +67,14 @@ export class MenuBotPlugin extends BaseBotPlugin {
   async getMenus() {
     const configMenus = (this.config && this.config.menus) || [];
     return uniqBy( //eslint-disable-line
-      [...configMenus, ...this(await this.getMenusFromDb())],
+      [...configMenus, ...(await this.getMenusFromDb())],
       (m) => m.path,
     );
   }
-  getMenusFromDb() {
+  async getMenusFromDb() {
     try {
-      const { MenuModel } = this.app.models;
-      return MenuModel.find();
+      const BotsMenuModel = await this.botsModule.model('BotsMenuModel');
+      return BotsMenuModel.find().lean();
     } catch (err) {
       this.log.error('getMenusFromDb', err);
       return [];
