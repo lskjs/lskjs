@@ -1,7 +1,7 @@
 import { IModuleWithСonfig } from './types';
-import { ModuleWithWorkflow } from './ModuleWithWorkflow';
+import { ModuleWithLifecycle } from './ModuleWithLifecycle';
 
-export abstract class ModuleWithConfig extends ModuleWithWorkflow implements IModuleWithСonfig {
+export abstract class ModuleWithConfig extends ModuleWithLifecycle implements IModuleWithСonfig {
   config: { [key: string]: any };
   /**
    * config from constructor

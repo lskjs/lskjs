@@ -38,17 +38,17 @@ export abstract class ModuleWithLog extends ModuleWithConfig implements IModuleW
     if (this.debug) this.log.trace('stop');
   }
 
-  async __workflowEvent(name: string, value = new Date()): Promise<void> {
-    await super.__workflowEvent(name, value);
+  async __lifecycleEvent(name: string, value = new Date()): Promise<void> {
+    await super.__lifecycleEvent(name, value);
     if (this.debug) {
-      if (name === 'initFinishedAt') {
-        this.log.trace(`init finished in [${ms(this.__workflow.initFinishedAt!, this.__workflow.initAt!)}]`);
+      if (name === 'initFinish') {
+        this.log.trace(`init finished in [${ms(this.__lifecycle.initFinish!, this.__lifecycle.initStart!)}]`);
       }
-      if (name === 'runFinishedAt') {
-        this.log.trace(`run finished in [${ms(this.__workflow.runFinishedAt!, this.__workflow.runAt!)}]`);
+      if (name === 'runFinish') {
+        this.log.trace(`run finished in [${ms(this.__lifecycle.runFinish!, this.__lifecycle.runStart!)}]`);
       }
-      if (name === 'stopFinishedAt') {
-        this.log.trace(`stop finished in [${ms(this.__workflow.stopFinishedAt!, this.__workflow.stopAt!)}]`);
+      if (name === 'stopFinish') {
+        this.log.trace(`stop finished in [${ms(this.__lifecycle.stopFinish!, this.__lifecycle.stopStart!)}]`);
       }
     }
   }

@@ -3,38 +3,38 @@ import { ILogger as ILog } from '@lskjs/log2';
 import { IEventEmitter } from './utils/createEventEmitter/IEventEmitter.types';
 
 
-export interface IWorkflow {
+export interface IModuleLifecycle {
   /**
    * Дата создания модуля
    */
-  createdAt?: Date;
+  create?: Date;
   /**
    * Дата начала инициализации модуля
    */
-  initAt?: Date;
-  initFinishedAt?: Date;
+  initStart?: Date;
+  initFinish?: Date;
   /**
    * Дата начала запуска модуля
    */
-  runAt?: Date;
-  runFinishedAt?: Date;
+  runStart?: Date;
+  runFinish?: Date;
   /**
    * Дата начала остановки модуля
    */
-  stopAt?: Date;
-  stopFinishedAt?: Date;
+  stopStart?: Date;
+  stopFinish?: Date;
 };
 
 
 /**
  * ворфлоу работы модуля
  */
-export interface IModuleWithWorkflow {
+export interface IModuleWithLifecycle {
   name?: string;
   /**
    * Воркфлоу работы модуля
    */
-  __workflow: IWorkflow;
+  __lifecycle: IModuleLifecycle;
 
   /**
    * setProp -- правило заподнение класса пропом
@@ -69,7 +69,7 @@ export interface IModuleWithWorkflow {
   stop(): Promise<void>;
 }
 
-export interface IModuleWithСonfig extends IModuleWithWorkflow {
+export interface IModuleWithСonfig extends IModuleWithLifecycle {
   config?: {
     [name: string]: any;
   };

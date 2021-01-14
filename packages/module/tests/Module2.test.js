@@ -4,7 +4,7 @@ import Module from '../src/2';
 test('new Module()', () => {
   const instance = new Module();
   expect(instance).toEqual({
-    __workflow: {}
+    __lifecycle: {}
   });
 });
 
@@ -13,7 +13,7 @@ test('instance.setProps()', async () => {
   instance.setProps({ a: 123 });
   expect(instance).toMatchObject({
     a: 123,
-    __workflow: {}
+    __lifecycle: {}
   });
 });
 
@@ -27,7 +27,7 @@ test('instance.init() throw INVALID_NEW_MODULE without create', async () => {
   }
   expect(err.code).toBe('INVALID_NEW_MODULE');
   expect(instance).toMatchObject({
-    __workflow: {}
+    __lifecycle: {}
   });
 });
 

@@ -5,7 +5,7 @@ import { ModuleWithSubmodules } from './ModuleWithSubmodules';
 //   app?: IApp;
 // }
 
-export abstract class Module2 extends ModuleWithSubmodules implements IModule {
+export abstract class Module extends ModuleWithSubmodules implements IModule {
   app?: IApp;
   debug = false;
 
@@ -21,7 +21,7 @@ export abstract class Module2 extends ModuleWithSubmodules implements IModule {
   }
 }
 
-export const Module = Module2
+export const Module2 = Module
 
 
-export default Module2;
+export default Module;

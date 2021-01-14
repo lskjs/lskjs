@@ -11,7 +11,7 @@ import { IModule, IModuleWithSubmodules, IModuleKeyValue, IAsyncModuleKeyValue }
 
 const filterWildcard = (array: string[], pattern: string): string[] => (
   array.filter((name) => name.startsWith(pattern.substr(0, pattern.length - 1)))
-)
+);
 
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
   __availableModules: IAsyncModuleKeyValue = {};
@@ -24,7 +24,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     };
   }
 
-  parent?: IModule;
+  __parent?: IModule;
   modules?: IAsyncModuleKeyValue;
 
   getModules(): IAsyncModuleKeyValue {
@@ -59,7 +59,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
   }
 
   async module(nameOrNames: string | string[], { run: isRun = true } = {}): Promise<IModule | IModuleKeyValue> {
-    if (!this.__workflow.initAt)
+    if (!this.__lifecycle.initStart)
       throw new Err('MODULE_INVALID_WORKFLOW_INIT', 'please init module first before .module()');
     if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
       const names = filterWildcard(Object.keys(this.__availableModules), nameOrNames);
@@ -71,7 +71,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       return asyncMapValues(arrayToObject(nameOrNames), (n: string) => this.module(n) as Promise<IModule>);
     }
     const name = nameOrNames;
-    if (this.debug) this.log.trace(`module(${name}) ${isRun ? '[run]' : ''}`);
+    if (this.debug) this.log.trace(`module(${name})`, isRun ? 'run' : undefined);
     if (this.__initedModules[name]) return this.__initedModules[name];
     const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) throw new Err('MODULE_INJECTING_NOT_FOUND', { data: { name } });
@@ -102,8 +102,8 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
   private async __runModules(): Promise<void> {
     await asyncMapValues(this.__initedModules, (m: IModule) => {
       const isNeedRun = (
-        this.__workflow.initFinishedAt &&
-        (!this.__workflow.runAt || (this.__workflow.runAt && this.__workflow.stopFinishedAt))
+        this.__lifecycle.initFinish &&
+        (!this.__lifecycle.runStart || (this.__lifecycle.runStart && this.__lifecycle.stopFinish))
       );
       if (!isNeedRun) return;
       return m.__run();

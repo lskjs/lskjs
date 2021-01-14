@@ -34,8 +34,8 @@ export abstract class ModuleWithEE extends ModuleWithLog implements IModuleWithE
     if (this.ee) this.emit('init');
   }
 
-  async __workflowEvent(name: string, value = new Date()): Promise<void> {
-    await super.__workflowEvent(name, value);
+  async __lifecycleEvent(name: string, value = new Date()): Promise<void> {
+    await super.__lifecycleEvent(name, value);
     if (this.ee) this.emit(name);
   }
 }
