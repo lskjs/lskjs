@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.0](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* **bots:** fix bugs ([b785bb6](https://github.com/isuvorov/lib-starter-kit/commit/b785bb6d6498ee1fc2c104fdc8ad4ba8803b810c))
+* **db:** fix ts bug ([cfca89c](https://github.com/isuvorov/lib-starter-kit/commit/cfca89c95d228e3768212611065419c49e9bfc7c))
+* **db:** ts error ([cad5197](https://github.com/isuvorov/lib-starter-kit/commit/cad5197117e85c97a098d74c30c832f7510c48c2))
+* **server:** fix bugs ([857cc86](https://github.com/isuvorov/lib-starter-kit/commit/857cc8640dbb15d93f4291e310561b02caca2ff0))
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/isuvorov/lib-starter-kit/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+* **log:** improve logger ([fc3ab2e](https://github.com/isuvorov/lib-starter-kit/commit/fc3ab2eb984da1e3f7f898340a74c2dbbd199f41))
+* **module:** remove v1, rename workflow to lifecycle ([8e7b19c](https://github.com/isuvorov/lib-starter-kit/commit/8e7b19c0042923e58acacf599a94adcd0e5a60ad))
+
+
+
+
+
 # [2.0.0-beta.7](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
 
 

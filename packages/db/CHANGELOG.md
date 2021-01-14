@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* **db:** fix ts bug ([cfca89c](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/cfca89c95d228e3768212611065419c49e9bfc7c))
+* **db:** ts error ([cad5197](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/cad5197117e85c97a098d74c30c832f7510c48c2))
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+
+
+
+
+
 # [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
 
 **Note:** Version bump only for package @lskjs/db
