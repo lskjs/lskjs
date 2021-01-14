@@ -1,5 +1,64 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
-const colors = require('colors/safe');
+import colors from 'colors/safe.js';
+
+const colorsArray = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gray'];
+
+const upperFirst = (a) => a[0].toUpperCase() + a.substr(1);
+const bright = (a) => `bright${upperFirst(a)}`;
+const bg = (a) => `bg${upperFirst(a)}`;
+const space = (a, width = 20) => {
+  const extra = Math.floor((width - a.length) / 2);
+  if (extra <= 0) return `[${a}]`;
+  const pad = new Array(extra + 1).join(' ');
+  // console.log({ extra, pad });
+  return `[${pad}${a}${pad}]`;
+};
+
+for (const color of colorsArray) {
+  const brightColor = bright(color);
+  const bgColor = bg(color);
+  const bgBrightColor = bg(bright(color));
+  const str = [
+    colors[color](space(`${color}`)),
+    colors[brightColor] && colors[brightColor](space(`${brightColor}`)),
+
+    colors.bold(colors[color](space(`BOLD ${color}`))),
+    colors[brightColor] && colors.bold(colors[brightColor](space(`BOLD ${brightColor}`))),
+
+    colors[bgColor](space(`${bgColor}`)),
+    colors[bgBrightColor] && colors[bgBrightColor](space(`${bgBrightColor}`)),
+
+    colors.bold(colors[bgColor](space(`BOLD ${bgColor}`))),
+    colors[bgBrightColor] && colors.bold(colors[bgBrightColor](space(`BOLD ${bgBrightColor}`))),
+  ];
+  console.log(...str);
+}
+
+
+
+console.log();
+console.log();
+console.log(colors.gray('[t] trace'));
+console.log(colors.blue('[d] debug'));
+console.log(colors.green('[i] info'));
+console.log(colors.cyan('[i] info'));
+console.log(colors.yellow('[w] warning'));
+console.log(colors.red('[e] error'));
+console.log(colors.bgRed('[f] fatal'));
+console.log(colors.bgBrightRed('[f] fatal'));
+console.log(colors.white('[log] some log'));
+
+console.log();
+console.log();
+
+console.log(colors.bold(colors.black('black')));
+console.log(colors.bold(colors.red('red')));
+console.log(colors.bold(colors.green('green')));
+console.log(colors.bold(colors.yellow('yellow')));
+console.log(colors.bold(colors.blue('blue')));
+console.log(colors.bold(colors.magenta('magenta')));
+
 
 console.log(colors.bold(colors.black('black')));
 console.log(colors.bold(colors.red('red')));

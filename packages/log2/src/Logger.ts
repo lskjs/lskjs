@@ -2,16 +2,23 @@
 // import debug from 'debug';
 import colors from 'colors/safe';
 import hashCode from './utils/hashCode';
-import leftPad from './utils/leftPad';
 import tryParamParse from './utils/tryParamParse';
 // import pick from './utils/pick';
 
 // npm install term-size
 
+const pad = (a: string, width = 20): string => {
+  const extra = (width - a.length);
+  if (extra <= 0) return a;
+  const start = Math.floor(extra / 2);
+  const end = extra - start;
+  return a.padStart(start).padEnd(end);
+};
+
 
 const env = (name: string, def: any = null): any => {
   const envs = typeof process !== 'undefined' ? process.env : typeof window !== 'undefined' ? window : {};
-  return tryParamParse(process.env[name], def);
+  return tryParamParse(envs[name], def);
 };
 
 const omitNull = (props: {[key: string]: any}) => {
@@ -20,12 +27,6 @@ const omitNull = (props: {[key: string]: any}) => {
   return otherProps;
 };
 
-const createColors = () => {
-  return colors;
-  const newColors = {};
-  Object.assign(newColors, colors);
-  return newColors;
-};
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
 //   return () => {
@@ -42,16 +43,6 @@ interface ILoggerProps {
   prefix: string | null;
   ns: string | null;
   name: string | null;
-  randomColors: number;
-  theme: {
-    fatal: string | string[];
-    error: string | string[];
-    warn: string | string[];
-    debug: string | string[];
-    info: string | string[];
-    trace: string | string[];
-    [key: string]: string | string[];
-  };
 }
 
 export interface ILogger extends ILoggerProps {
@@ -85,52 +76,47 @@ export interface ILogger extends ILoggerProps {
 //   return logger;
 // };
 
+const levelsPriority = {
+  log: 99,
+  l: 99,
+  fatal: 60,
+  f: 60,
+  error: 50,
+  e: 50,
+  warn: 40,
+  w: 40,
+  info: 30,
+  i: 30,
+  debug: 20,
+  d: 20,
+  trace: 10,
+  t: 10,
+};
+
+const theme = {
+  // fatal: 'inverse',
+  fatal: 'bgRed',
+  error: 'bgBrightRed',
+  warn: 'bgYellow',
+  debug: 'brightCyan',
+  info: 'brightGreen',
+  trace: 'gray', // 'white'
+  log: 'bgWhite', // 'white'
+
+  randoms: [
+    'red', 'green', 'yellow', 'blue', 'magenta', 'cyan',
+    'brightRed','brightGreen', 'brightYellow', 'brightBlue', 'brightMagenta', 'brightCyan',
+  ]
+}
+
 export class Logger implements ILogger {
   prefix: string | null;
   ns: string | null;
   name: string | null;
   level: string;
-  levelsPriority = {
-    log: 99,
-    l: 99,
-    fatal: 60,
-    f: 60,
-    error: 50,
-    e: 50,
-    warn: 40,
-    w: 40,
-    info: 30,
-    i: 30,
-    debug: 20,
-    d: 20,
-    trace: 10,
-    t: 10,
-  };
-  randomColors = 7;
-  colors: any;
-  theme = {
-    // fatal: 'inverse',
-    fatal: 'bgBrightRed',
-    error: 'bgBrightRed',
-    warn: 'red', // 'yellow',
-    debug: 'blue',
-    info: 'green',
-    trace: 'gray', // 'white'
-    log: 'white', // 'white'
-
-    random0: [/* 'bold', */ 'white'],
-    random1: [/* 'bold', */ 'green'],
-    random2: [/* 'bold', */ 'yellow'],
-    random3: [/* 'bold', */ 'blue'],
-    random4: [/* 'bold', */ 'magenta'],
-    random5: [/* 'bold', */ 'cyan'],
-    random6: [/* 'bold', */ 'brightMagenta'],
-  };
-
   constructor(...propsArray: ILoggerProps[]) {
     this.setProps(...propsArray);
   }
-
   setProps(...propsArray: ILoggerProps[]): void {
     const fields = ['prefix', 'ns', 'name', 'randomColors', 'theme', 'colors'];
     propsArray.forEach((props) => {
@@ -140,31 +126,21 @@ export class Logger implements ILogger {
       });
     });
     if (!this.level) this.level = 'trace';
-    if (!this.levelsPriority[this.level]) throw new Error(`Incorrect level ${this.level}`);
-    if (!this.colors) this.colors = createColors();
-    this.colors.setTheme(this.theme);
+    if (!levelsPriority[this.level]) throw new Error(`Incorrect level ${this.level}`);
   }
-
   static create(...propsArray: ILoggerProps[]): ILogger {
     return new this(...propsArray);
   }
-
   createChild(...propsArray: ILoggerProps[]): ILogger {
     const ns = [this.ns, this.name].filter(Boolean).join('.');
-
     // @ts-ignore
     return new this.constructor(this, { colors: null, ns }, ...propsArray);
   }
-
   getLevelPriority(level: string): number {
-    return this.levelsPriority[level] || 0;
+    return levelsPriority[level] || 0;
   }
-
   canLog(level: string): boolean {
     return this.getLevelPriority(level) >= this.getLevelPriority(this.level);
-  }
-  __canPrint(level: string): boolean {
-    return this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));
   }
   fatal(...args: any[]): void {
     if (!this.canLog('fatal')) return;
@@ -195,17 +171,13 @@ export class Logger implements ILogger {
     this.__log('log', ...args);
   }
   color(name: string, str: string): string {
-    // console.log('2222', this.colors, name)
-    return (this.colors[name] || this.colors.white)(str);
-  }
-  // req() {
-  //   return this;
-  // }
-  getHashColor(key: string): string {
-    return `random${hashCode(key) % this.randomColors}`;
+    return colors[this.getColor(name)](str);
   }
   getColor(color: string): string {
-    return this.theme[color] || 'white';
+    return theme[color] ? theme[color] : colors[color] ? color : 'white';
+  }
+  getHashColor(key: string): string {
+    return theme.randoms[hashCode(key) % theme.randoms.length];
   }
   __logger(...args: any[]): void {
     // @ts-ignore
@@ -219,7 +191,8 @@ export class Logger implements ILogger {
     }
   }
   __log(level: LoggerLevelType, ...args: any[]): void {
-    if (!this.__canPrint(level)) return;
+    const canPrint = this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));;
+    if (!canPrint) return;
     if (env('LOG_JSON', false)) {
       this.__logger(
         omitNull({
@@ -232,44 +205,52 @@ export class Logger implements ILogger {
       );
       return;
     }
-    const rawNames: any[] = [];
-    if (env('LOG_NS', true)) {
-      rawNames.push(this.ns);
-    }
-    if (env('LOG_NAME', true)) {
-      rawNames.push(this.name);
-    }
-    const names = rawNames.filter(Boolean);
-    const pad = (str = '') => {
-      if (env('LOG_ALIGN') === 'left') return str.padEnd(15);
-      if (env('LOG_ALIGN') === 'right') return str.padStart(15);
-      return str;
-    };
-    const logPrefix = names.length ? pad(names.join(':')) : null;
 
-    const levelStr = `[${level[0].toLowerCase()}]`;
+    const res = [];
+    const envLogLevel = env('LOG_L', 'short');
+    if (!!envLogLevel) {
+      let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
+      logLevelStr = `[${logLevelStr}]`;
+      res.push(this.color(this.getColor(level), logLevelStr))
+    }
 
+    const envLogAlign= env('LOG_ALIGN');
+    const envLogNs= env('LOG_L', 'true');
+    const envLogName= env('LOG_NAME', 'true');
+
+    if (envLogNs || envLogName) {
+      let names: any[] = [];
+      if (envLogNs) {
+        names = (this.ns || '').split('.');
+      }
+      if (envLogName) {
+        names.push(this.name);
+      }
+      names = names.filter(Boolean);
+      let str: string;
+      if (names.length) {
+        str = names.map((name: string) => this.color(this.getHashColor(name), name)).join(':') ;
+        if (str && envLogAlign) {
+          if (envLogAlign === 'left') str = str.padEnd(15);
+          if (envLogAlign === 'right') str = str.padStart(15);
+        }
+        res.push(str)
+      }
+    }
+    
     let [mainArg, ...otherArgs] = args;
-
     if (typeof mainArg === 'string') {
       if (['[', '<'].includes(mainArg[0]) && [']', '>'].includes(mainArg[mainArg.length - 1])) {
         mainArg = this.color(this.getHashColor(mainArg), mainArg);
-      } else if (mainArg.includes('(')) {
+      } else if (mainArg.includes('(') || mainArg.includes('[')) {
         mainArg = this.color('brightWhite', mainArg);
       } else if (mainArg.length < 20 && otherArgs.length) {
         mainArg = this.color('white', mainArg);
       }
     }
+    res.push(mainArg, ...otherArgs);
 
-    const arr = [mainArg, ...otherArgs];
-    arr.unshift(
-      ...[
-        this.color(this.getColor(level), levelStr),
-        logPrefix ? this.color(this.getHashColor(logPrefix), logPrefix) : null,
-      ].filter(Boolean),
-    );
-
-    this.__logger(...arr);
+    this.__logger(...res);
   }
 }
 

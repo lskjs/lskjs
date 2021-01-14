@@ -1,4 +1,5 @@
 {
+  "_type": "module",
   "name": "@lskjs/log2",
   "version": "2.0.0-beta.7",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.",
