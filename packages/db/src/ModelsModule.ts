@@ -28,7 +28,7 @@ export class ModelsModule extends Module2 implements IModelsModule {
     // @ts-ignore
     if (key === 'models') return super.setProp('__models', value);
     // @ts-ignore
-    super.setProp(key, value);
+    return super.setProp(key, value);
   }
 
   async model(nameOrNames: string | string[], ...args: any[]): Promise<IModel | IModelKeyValue> {
