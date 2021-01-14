@@ -7,6 +7,8 @@ import pickBy from 'lodash/pickBy';
 import flatten from 'lodash/flatten';
 import providers from './providers/async';
 import plugins from './plugins/async';
+import models from './models';
+import { IModel } from '@lskjs/db';
 import { BotsRouter } from './utils/BotsRouter';
 import { IBotProvider, IAsyncProviders, IAsyncPlugins, IAnyKeyValue } from './types';
 
@@ -28,6 +30,11 @@ export default class BotsModule extends Module {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async model(...args: any[]): Promise<IModel> {
+    const modelsModule = await this.module('models');
+    return modelsModule.model(...args);
   }
 
   async getPlugins(): Promise<IAnyKeyValue> {
@@ -94,18 +101,14 @@ export default class BotsModule extends Module {
     // return true;
   }
 
-  // async getPlugins() {
-  //   return import('./plugins');
-  // }
-  // async getPlugins() {
-  //   return require('./plugins').default;
-  // }
-  // async getModels() {
-  //   return import('./models');
-  // }
-  getModels(): Promise<any> {
-    return require('./models').default;
+
+  async getModules(): Promise<IAsyncModelKeyValue> {
+    return {
+      ...super.getModules(),
+      models: [() => import('@lskjs/db/models'), { models }],
+    };
   }
+  
   async init(): Promise<void> {
     await super.init();
     // console.log('this.app.config.bots', this.app.config.bots)
@@ -137,6 +140,7 @@ export default class BotsModule extends Module {
       if (pluginConfig === false) return null;
       return Plugin.create({
         app: this.app,
+        __parent: this,
         botsModule: this,
         bots: this.bots,
         config: pluginConfig || {},
@@ -155,6 +159,7 @@ export default class BotsModule extends Module {
     this.routers = await asyncMapValues(this.bots, async (bot) => {
       return BotsRouter.create({
         app: this.app,
+        __parent: this,
         botsModule: this,
         bots: this.bots,
         bot,
@@ -167,8 +172,8 @@ export default class BotsModule extends Module {
   async run(): Promise<void> {
     await super.run();
     if (!this.config) return;
-    await asyncMapValues(this.bots, (bot) => bot.run());
-    await asyncMapValues(this.plugins, (plugin) => plugin.run());
+    await asyncMapValues(this.bots, (bot) => bot.__run());
+    await asyncMapValues(this.plugins, (plugin) => plugin.__run());
     this.log.debug(
       'bots x plugins',
       await asyncMapValues(this.bots, async (bot) => (bot.plugins || []).map((plugin) => plugin.name)),

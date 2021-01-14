@@ -77,7 +77,7 @@ Made on @LSKjs with ❤️`;
     });
   }
   async runLogger(bot: IBotProvider, name: string): Promise<void> {
-    const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = await this.app!.model(['BotsEventModel', 'BotsTelegramMessageModel', 'BotsTelegramUserModel', 'BotsTelegramChatModel']);
+    const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = await this.botsModule.model(['BotsEventModel', 'BotsTelegramMessageModel', 'BotsTelegramUserModel', 'BotsTelegramChatModel']);
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
       bot.on(type, async (ctx) => {

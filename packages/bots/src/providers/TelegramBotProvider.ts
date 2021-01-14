@@ -1,7 +1,6 @@
 import Telegraf from 'telegraf';
 import get from 'lodash/get';
 import session from 'telegraf/session';
-import assignProps from '@lskjs/utils/assignProps';
 import { IBotProviderMessageCtx } from '../types';
 import BaseBotProvider from './BaseBotProvider';
 

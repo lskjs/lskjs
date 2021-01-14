@@ -19,10 +19,6 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
   async init(): Promise<void> {
     await super.init();
     if (!this.provider) this.log.warn('!provider');
-    if (!this.config) {
-      this.log.warn('!config');
-      this.config = {};
-    }
   }
 
   async initPlugin(): Promise<void> {
