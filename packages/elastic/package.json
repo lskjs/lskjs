@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.0.0-beta.7",
-    "elasticsearch": "16.6.0",
+    "elasticsearch": "16.7.2",
     "mongoose-elasticsearch-xp-async": "0.1.3"
   },
   "devDependencies": {

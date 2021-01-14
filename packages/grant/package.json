@@ -39,7 +39,7 @@
   "dependencies": {
     "@lskjs/module": "2.0.0-beta.7",
     "@lskjs/utils": "2.0.0-beta.7",
-    "async-mutex": "0.2.4"
+    "async-mutex": "0.2.6"
   },
   "devDependencies": {
     "@lskjs/server-api": "2.0.0-beta.7",
@@ -49,6 +49,6 @@
   "peerDependencies": {
     "@lskjs/server-api": "*",
     "bluebird": "*",
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

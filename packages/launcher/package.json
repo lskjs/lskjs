@@ -32,5 +32,7 @@
     "styleguide": "../../scripts/package-styleguide.sh",
     "i18": "../../scripts/package-i18.sh",
     "clear": "../../scripts/package-clear.sh"
-  }
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

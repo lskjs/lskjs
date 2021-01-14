@@ -8,20 +8,19 @@ import tryParamParse from './utils/tryParamParse';
 // npm install term-size
 
 const pad = (a: string, width = 20): string => {
-  const extra = (width - a.length);
+  const extra = width - a.length;
   if (extra <= 0) return a;
   const start = Math.floor(extra / 2);
   const end = extra - start;
   return a.padStart(start).padEnd(end);
 };
 
-
 const env = (name: string, def: any = null): any => {
   const envs = typeof process !== 'undefined' ? process.env : typeof window !== 'undefined' ? window : {};
   return tryParamParse(envs[name], def);
 };
 
-const omitNull = (props: {[key: string]: any}) => {
+const omitNull = (props: { [key: string]: any }) => {
   const { ns, ...otherProps } = props;
   if (ns) return props;
   return otherProps;
@@ -104,10 +103,20 @@ const theme = {
   log: 'bgWhite', // 'white'
 
   randoms: [
-    'red', 'green', 'yellow', 'blue', 'magenta', 'cyan',
-    'brightRed','brightGreen', 'brightYellow', 'brightBlue', 'brightMagenta', 'brightCyan',
-  ]
-}
+    'red',
+    'green',
+    'yellow',
+    'blue',
+    'magenta',
+    'cyan',
+    'brightRed',
+    'brightGreen',
+    'brightYellow',
+    'brightBlue',
+    'brightMagenta',
+    'brightCyan',
+  ],
+};
 
 export class Logger implements ILogger {
   prefix: string | null;
@@ -191,7 +200,7 @@ export class Logger implements ILogger {
     }
   }
   __log(level: LoggerLevelType, ...args: any[]): void {
-    const canPrint = this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));;
+    const canPrint = this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));
     if (!canPrint) return;
     if (env('LOG_JSON', false)) {
       this.__logger(
@@ -208,15 +217,15 @@ export class Logger implements ILogger {
 
     const res = [];
     const envLogLevel = env('LOG_L', 'short');
-    if (!!envLogLevel) {
+    if (envLogLevel) {
       let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
       logLevelStr = `[${logLevelStr}]`;
-      res.push(this.color(this.getColor(level), logLevelStr))
+      res.push(this.color(this.getColor(level), logLevelStr));
     }
 
-    const envLogAlign= env('LOG_ALIGN');
-    const envLogNs= env('LOG_L', 'true');
-    const envLogName= env('LOG_NAME', 'true');
+    const envLogAlign = env('LOG_ALIGN');
+    const envLogNs = env('LOG_L', 'true');
+    const envLogName = env('LOG_NAME', 'true');
 
     if (envLogNs || envLogName) {
       let names: any[] = [];
@@ -229,15 +238,15 @@ export class Logger implements ILogger {
       names = names.filter(Boolean);
       let str: string;
       if (names.length) {
-        str = names.map((name: string) => this.color(this.getHashColor(name), name)).join(':') ;
+        str = names.map((name: string) => this.color(this.getHashColor(name), name)).join(':');
         if (str && envLogAlign) {
           if (envLogAlign === 'left') str = str.padEnd(15);
           if (envLogAlign === 'right') str = str.padStart(15);
         }
-        res.push(str)
+        res.push(str);
       }
     }
-    
+
     let [mainArg, ...otherArgs] = args;
     if (typeof mainArg === 'string') {
       if (['[', '<'].includes(mainArg[0]) && [']', '>'].includes(mainArg[mainArg.length - 1])) {

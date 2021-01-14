@@ -1,10 +1,10 @@
 // import Module from '@lskjs/module';
-import { IModule, Module2 } from '@lskjs/module';
+import { IModule, Module } from '@lskjs/module';
 import mapValues from 'lodash/mapValues';
 import isPlainObject from 'lodash/isPlainObject';
 import { IModelsModule, IAsyncModel, IAsyncModelKeyValue, IModel, IModelKeyValue } from './types';
 
-export class ModelsModule extends Module2 implements IModelsModule {
+export class ModelsModule extends Module implements IModelsModule {
   /**
    */
   __models?: IAsyncModelKeyValue;
@@ -33,7 +33,7 @@ export class ModelsModule extends Module2 implements IModelsModule {
 
   async model(nameOrNames: string | string[], ...args: any[]): Promise<IModel | IModelKeyValue> {
     const m = await this.module(nameOrNames, ...args);
-    if (m instanceof Module2) {
+    if (m instanceof Module) {
       // @ts-ignore
       return m.model;
     }

@@ -1,4 +1,4 @@
-import { client, testClient } from 'coingate-v2';
+import { client, testClient } from 'coingate-v2'; // npm audit error
 import BillingProvider from '../BillingProvider';
 
 // We have realization of this billing provider, just text us https://t.me/lskjs

@@ -35,30 +35,18 @@
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "postinstall2": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
-  "dependencies": {
-    "bluebird": "*",
-    "csv-string": "*",
-    "lodash": "*",
-    "normalize-unicode-text": "*",
-    "react": "*",
-    "serialize-javascript": "*"
-  },
   "devDependencies": {
     "@types/bluebird": "3.5.33",
-    "@types/lodash": "4.14.149",
+    "@types/lodash": "4.14.167",
     "bluebird": "3.7.2",
-    "csv-string": "3.1.7",
+    "csv-string": "4.0.1",
     "lodash": "4.17.20",
     "normalize-unicode-text": "0.0.1",
-    "react": "16.8.6",
-    "serialize-javascript": "2.1.2"
+    "react": "17.0.1",
+    "serialize-javascript": "5.0.1"
   },
-  "optionalDependencies": {
+  "optionalDeps": {
     "bluebird": "*",
-    "csv-string": "*",
-    "lodash": "*",
-    "normalize-unicode-text": "*",
-    "react": "*",
-    "serialize-javascript": "*"
+    "normalize-unicode-text": "*"
   }
 }

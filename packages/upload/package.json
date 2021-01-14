@@ -41,7 +41,7 @@
   "dependencies": {
     "@lskjs/module": "2.0.0-beta.7",
     "@lskjs/utils": "2.0.0-beta.7",
-    "aws-sdk": "2.617.0",
+    "aws-sdk": "2.827.0",
     "multer": "1.4.2",
     "multer-s3": "2.9.0"
   },
@@ -53,6 +53,6 @@
   "peerDependencies": {
     "@lskjs/server-api": "*",
     "bluebird": "*",
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

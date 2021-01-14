@@ -35,5 +35,6 @@
   },
   "dependencies": {
     "@lskjs/utils": "1.99.0"
-  }
+  },
+  "devDependencies": {}
 }

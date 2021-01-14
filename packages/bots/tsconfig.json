@@ -30,6 +30,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": false, // решим через eslint
     // hz

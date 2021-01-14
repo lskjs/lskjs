@@ -52,7 +52,7 @@
   "// dtrace-provider": "~0.8 required for dtrace features",
   "// mv": "required for RotatingFileStream",
   "// moment": "required for local time with CLI",
-  "nonOptionalDependencies": {
+  "nonOptionalDeps": {
     "dtrace-provider": "~0.8",
     "mv": "~2",
     "safe-json-stringify": "~1",

@@ -45,23 +45,14 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@buzzguru/instagram-private-api": "*",
     "@lskjs/module": "2.0.0-beta.7",
     "@lskjs/utils": "2.0.0-beta.7",
-    "@slack/bolt": "*",
-    "axios": "0.21.1",
-    "bluebird": "3.7.2",
-    "discord.js": "*",
-    "lodash": "4.17.20",
-    "node-vk-bot-api": "*",
-    "qrcode-terminal": "*",
-    "telegraf": "*",
-    "telegraf-router": "*",
-    "twitter-lite": "*",
-    "universal-router": "9.0.1",
-    "whatsapp-web.js": "*"
+    "universal-router": "9.0.1"
   },
   "devDependencies": {
+    "bluebird": "3.7.2",
+    "axios": "0.21.1",
+    "lodash": "4.17.20",
     "@buzzguru/instagram-private-api": "^1.42.0",
     "@lskjs/db": "2.0.0-beta.7",
     "@slack/bolt": "2.3.0",
@@ -75,9 +66,12 @@
     "whatsapp-web.js": "1.10.0"
   },
   "peerDependencies": {
+    "bluebird": "*",
+    "axios": "*",
+    "lodash": "*",
     "@lskjs/db": "*"
   },
-  "optionalDependencies": {
+  "optionalDeps": {
     "@buzzguru/instagram-private-api": "*",
     "@slack/bolt": "*",
     "discord.js": "*",

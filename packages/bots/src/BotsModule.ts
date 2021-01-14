@@ -1,14 +1,13 @@
 import importFn from '@lskjs/utils/importFn';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import assignProps from '@lskjs/utils/assignProps';
-import Module from '@lskjs/module';
-import { ILogger } from '@lskjs/module/module2/types';
+import { ILogger, IAsyncModuleKeyValue, Module } from '@lskjs/module';
 import pickBy from 'lodash/pickBy';
 import flatten from 'lodash/flatten';
 import providers from './providers/async';
 import plugins from './plugins/async';
 import models from './models';
-import { IModel } from '@lskjs/db';
+import { IModel, IModelKeyValue, IModelsModule } from '@lskjs/db';
 import { BotsRouter } from './utils/BotsRouter';
 import { IBotProvider, IAsyncProviders, IAsyncPlugins, IAnyKeyValue } from './types';
 
@@ -32,8 +31,9 @@ export default class BotsModule extends Module {
     }
   }
 
-  async model(...args: any[]): Promise<IModel> {
-    const modelsModule = await this.module('models');
+  async model(...args: any[]): Promise<IModel | IModelKeyValue> {
+    const modelsModule = await this.module('models') as IModelsModule;
+    // @ts-ignore
     return modelsModule.model(...args);
   }
 
@@ -102,7 +102,7 @@ export default class BotsModule extends Module {
   }
 
 
-  async getModules(): Promise<IAsyncModelKeyValue> {
+  async getModules(): Promise<IAsyncModuleKeyValue> {
     return {
       ...super.getModules(),
       models: [() => import('@lskjs/db/models'), { models }],

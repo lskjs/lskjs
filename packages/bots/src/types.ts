@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
-import { IModule } from '@lskjs/module/module2';
+import { IModule } from '@lskjs/module';
 
 export type IAnyKeyValue = {
   [key: string]: any;

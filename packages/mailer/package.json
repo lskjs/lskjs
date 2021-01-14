@@ -40,11 +40,11 @@
   "dependencies": {
     "@lskjs/module": "2.0.0-beta.7",
     "@lskjs/utils": "2.0.0-beta.7",
-    "eventemitter3": "4.0.0",
+    "eventemitter3": "4.0.7",
     "imap": "0.8.19",
-    "mailparser": "2.7.7",
-    "mjml": "4.5.1",
-    "nodemailer": "6.4.2",
+    "mailparser": "3.0.1",
+    "mjml": "4.8.1",
+    "nodemailer": "6.4.17",
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
@@ -57,6 +57,6 @@
     "@lskjs/db": "*",
     "@lskjs/server-api": "*",
     "bluebird": "*",
-    "lodash": "*"
+    "lodash": "4.17.20"
   }
 }

@@ -37,12 +37,6 @@
     "i18": "../../scripts/package-i18.sh",
     "clear": "../../scripts/package-clear.sh"
   },
-  "contributors": [
-    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
-    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
-    "Nata <natavts@gmail.com> (https://natavts.ru)",
-    "Andruxa <anchurikov94@gmail.com>"
-  ],
   "dependencies": {
     "@lskjs/module": "2.0.0-beta.7",
     "@lskjs/utils": "2.0.0-beta.7",
@@ -69,6 +63,12 @@
     "prop-types": "15.7.2",
     "react": "16.8.6"
   },
+  "contributors": [
+    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
+    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
+    "Nata <natavts@gmail.com> (https://natavts.ru)",
+    "Andruxa <anchurikov94@gmail.com>"
+  ],
   "peerDependencies": {
     "@lskjs/i18": "*",
     "@lskjs/link": "*",

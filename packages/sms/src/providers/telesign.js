@@ -1,4 +1,4 @@
-import TeleSignSDK from 'telesignsdk';
+import TeleSignSDK from 'telesignsdk'; // npm audit error
 
 const TIMEOUT = 10 * 1000; // 10 secs
 const MESSAGE_TYPE = 'ARN';
