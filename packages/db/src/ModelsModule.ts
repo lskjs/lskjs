@@ -24,11 +24,11 @@ export class ModelsModule extends Module2 implements IModelsModule {
     };
   }
 
-  async setProp(key: string, value: any): Promise<void> {
+  setProp(key: string, value: any): Promise<void> {
     // @ts-ignore
-    if (key === 'models') return super.setProp!('__models', value);
+    if (key === 'models') return super.setProp('__models', value);
     // @ts-ignore
-    return super.setProp!(key, value);
+    super.setProp(key, value);
   }
 
   async model(nameOrNames: string | string[], ...args: any[]): Promise<IModel | IModelKeyValue> {
