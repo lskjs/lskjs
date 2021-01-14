@@ -159,7 +159,7 @@ export default class WebserverModule extends Module {
     if (this.Api) {
       await this.useApi(this.Api);
     } else {
-      this.log.warn('!Api')
+      this.log.warn('!Api');
     }
     await this.runDefaultRoute();
     await this.runCatchErrors();

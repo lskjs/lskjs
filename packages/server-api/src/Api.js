@@ -19,7 +19,7 @@ export default class Api extends Module {
   __api = true;
   constructor(parent, ...propsArray) {
     super(parent, ...propsArray);
-    this.setProps(...propsArray, { '__workflow.createdAt': new Date() });
+    this.setProps(...propsArray, { '__lifecycle.create': new Date() });
     this.parent = parent;
     this.app = parent && parent.app;
     this.__config = parent.config;
@@ -60,7 +60,7 @@ export default class Api extends Module {
   }
 
   async __getRoutes() {
-    if (!this.__workflow.runAt) await this.__run();
+    if (!this.__lifecycle.run) await this.__run();
     return this.getRoutes();
   }
 
