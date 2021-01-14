@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.8](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2021-01-14)
+
+
+### Features
+
+* **log:** improve logger ([fc3ab2e](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/fc3ab2eb984da1e3f7f898340a74c2dbbd199f41))
+
+
+
+
+
 # [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
 
 **Note:** Version bump only for package @lskjs/log2

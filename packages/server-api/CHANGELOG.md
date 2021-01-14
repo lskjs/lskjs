@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.8](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2021-01-14)
+
+
+### Bug Fixes
+
+* **server:** fix bugs ([857cc86](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/857cc8640dbb15d93f4291e310561b02caca2ff0))
+
+
+
+
+
 # [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
 
 **Note:** Version bump only for package @lskjs/server-api
