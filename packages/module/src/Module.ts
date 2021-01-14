@@ -8,14 +8,10 @@ import { ModuleWithSubmodules } from './ModuleWithSubmodules';
 export abstract class Module extends ModuleWithSubmodules implements IModule {
   app?: IApp;
   debug = false;
-
-  async init(): Promise<void> {
-    await super.init();
-    // this.log.trace('kjsadghfjkahsjkdh')
-  }
   async getModuleProps(name: string): Promise<object> {
     return {
       ...(await super.getModuleProps(name)),
+      __parent: this,
       app: this.app || this,
     };
   }

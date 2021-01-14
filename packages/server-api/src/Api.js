@@ -19,22 +19,27 @@ export default class Api extends Module {
   __api = true;
   constructor(parent, ...propsArray) {
     super(parent, ...propsArray);
-    this.setProps(...propsArray, { '__lifecycle.create': new Date() });
-    this.parent = parent;
-    this.app = parent && parent.app;
-    this.__config = parent.config;
+    this.setProps(...propsArray, { 
+      '__lifecycle.create': new Date(),
+       __parent: parent,
+      app: parent && parent.app,
+      config: parent && parent.config
+    });
+    // this.__parent = parent;
+    // this.app = parent && parent.app;
+    // this.__config = parent && parent.config;
   }
 
   async init(...propsArray) {
     await super.init(...propsArray);
     // TODO: временная ошибка, как только мигрируем код, заменим на варинг
     if (!this.app) {
-      throw new Err(`API_APP_MISSING', 'Please use new ${this.name}(this) istead new ${this.name}(this.app)`);
+      throw new Err(`API_APP_MISSING', 'Please use new ${this.name}(this) instead new ${this.name}(this.app)`);
     }
-    if (!this.parent) {
-      throw new Err(`API_PARENT_MISSING', 'Please use new ${this.name}(this) istead new ${this.name}(this.app)`);
+    if (!this.__parent) {
+      throw new Err(`API_PARENT_MISSING', 'Please use new ${this.name}(this) instead new ${this.name}(this.app)`);
     }
-    this.paths = [...(this.parent.paths || []), this.path];
+    this.paths = [...(this.__parent.paths || []), this.path];
   }
   async isAuth(req) {
     if (req.__errJwt) throw req.__errJwt;
@@ -60,7 +65,7 @@ export default class Api extends Module {
   }
 
   async __getRoutes() {
-    if (!this.__lifecycle.run) await this.__run();
+    if (!this.__lifecycle.runStart) await this.__run();
     return this.getRoutes();
   }
 
@@ -75,13 +80,6 @@ export default class Api extends Module {
     return `${this.name} – ok`;
   }
 
-  // cacheStore = new Cacheman('api', {
-  //   ttl: 60,
-  // });
-  // e(...args) {
-  //   return new Err(...args);
-  // }
-
   e404(req) {
     throw new Err('E_404', {
       status: 404,
@@ -90,6 +88,13 @@ export default class Api extends Module {
       level: 'warn',
     });
   }
+
+  // cacheStore = new Cacheman('api', {
+  //   ttl: 60,
+  // });
+  // e(...args) {
+  //   return new Err(...args);
+  // }
 
   // async validateParams(data, fields) {
   //   const errors = map(fields, (validator, param) => {

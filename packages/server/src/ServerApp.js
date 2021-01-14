@@ -24,7 +24,7 @@ export default class ServerApp extends Module {
       // 'redis',
     ]);
     Object.assign(this, m);
-    this.on('runFinished', this.started.bind(this));
+    this.on('runFinish', this.started.bind(this));
   }
 
   url(str, params = null) {

@@ -18,7 +18,6 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   __lifecycle: IModuleLifecycle = {};
 
   static async create<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
-    console.log('create', this.name, propsArray);
     const instance = new this();
     instance.setProps(...propsArray, { '__lifecycle.create': new Date() });
     await instance.__init();
@@ -26,7 +25,6 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   }
 
   static async createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
-    console.log('createAndRun', this.name, propsArray);
     const instance = await this.create(...propsArray);
     await instance.__run();
     return instance;
@@ -51,7 +49,6 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   async __init(): Promise<void> {
     const { name } = this.constructor;
     if (!this.__lifecycle.create) {
-      // throw new Error('!!!!MODULE_INVALID_LIVECYCLE_NEW')
       throw new Err(
         'MODULE_INVALID_LIVECYCLE_NEW',
         `use ${name}.create(props) or ${name}.createAndRun(props) instead new ${name}(props) and init() and run()`,
@@ -59,7 +56,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       );
     }
     if (this.__lifecycle.initStart) return;
-    this.__lifecycleEvent('init');
+    this.__lifecycleEvent('initStart');
     await this.init().catch((err) => {
       safeLog(this, 'fatal', 'init()', err);
       throw err;
@@ -97,7 +94,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
         data: { name: this.name },
       });
     }
-    this.__lifecycleEvent('run');
+    this.__lifecycleEvent('runStart');
     await this.run().catch((err) => {
       safeLog(this, 'fatal', 'run()', err);
       throw err;
@@ -121,7 +118,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       if (STRICT_DEBUG) throw new Err('MODULE_NOT_RUNNED_YET');
       return;
     }
-    this.__lifecycleEvent('stop');
+    this.__lifecycleEvent('stopStart');
     await this.stop().catch((err) => {
       safeLog(this, 'fatal', 'stop()', err);
       throw err;
