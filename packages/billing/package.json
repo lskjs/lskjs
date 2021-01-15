@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "2.1.0-beta.1",
+  "version": "2.1.0-beta.2",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -49,7 +49,7 @@
     "@lskjs/utils": "2.1.0-beta.0"
   },
   "devDependencies": {
-    "@lskjs/db": "2.1.0-beta.1",
+    "@lskjs/db": "2.1.0-beta.2",
     "@lskjs/server-api": "2.1.0-beta.1",
     "axios": "0.21.1",
     "bluebird": "3.7.2",

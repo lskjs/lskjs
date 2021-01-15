@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
+
+
+### Bug Fixes
+
+* **bots:** fix ee and add telegram trace logs ([cf3e14b](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/cf3e14b346e3f6e2f1aea222a49df228df23f060))
+
+
+
+
+
 # [2.1.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
 
 
