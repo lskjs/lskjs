@@ -7,7 +7,6 @@ export abstract class BaseBotPlugin extends Module implements IBotPlugin {
   botsModule;
   providers: string[] = [];
   bots = {};
-  debug = tryJSONparse(process.env.DEBUG_BOTS, false);
 
   // abstract
   canRunBot(bot: IBotProvider): boolean {

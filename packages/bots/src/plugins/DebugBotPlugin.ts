@@ -91,7 +91,7 @@ Made on @LSKjs with ❤️`;
           if (this.config?.save === false) return;
           // Don't wait
           const messageType = bot.getMessageType(ctx);
-          const { from, chat } = ctx.message;
+          const { from, chat } = eventData;
 
           const { _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate({ id: from.id }, from, {
             new: true,

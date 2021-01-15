@@ -167,6 +167,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   async repost(chatId: number | string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
     const type = this.getMessageType(ctx);
     const message = this.getMessage(ctx);
+    this.log.trace('repost', type);
 
     let method: string;
     let args: any[];
@@ -245,6 +246,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
 
   async sendContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+    this.log.trace('sendContent');
     let type: string;
     let payload: any;
     if (typeof content === 'string') {
@@ -269,6 +271,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
 
   async replyContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+    this.log.trace('replyContent');
     // console.log({ content });
     let type: string;
     let payload: any;
@@ -289,6 +292,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     await ctx[method](payload, extra);
   }
   reply(ctx: TelegramIBotProviderMessageCtx, payload: any, initExtra = {}) {
+    this.log.trace('reply');
     const extra = {
       reply_to_message_id: this.getRepliedMessageId(ctx) || this.getMessageId(ctx),  //eslint-disable-line
       ...initExtra,
@@ -300,6 +304,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     });
   }
   editMessage(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
+    this.log.trace('editMessage');
     // console.log({extra})
     return this.client.telegram.editMessage(this.getMessageId(ctx), payload, extra).catch((err) => {
       this.log?.error(err);
@@ -307,24 +312,30 @@ export default class TelegramBotProvider extends BaseBotProvider {
     });
   }
   deleteMessage(ctx: TelegramIBotProviderMessageCtx): any {
+    this.log.trace('deleteMessage');
     const chatId = this.getMessageChatId(ctx);
     const messageId = this.getMessageTargetId(ctx);
     // console.log({chatId, messageId})
     return this.client.telegram.deleteMessage(chatId, messageId);
   }
   sendMessage(ctx, ...args) {
+    this.log.trace('sendMessage');
     return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
   }
   sendSticker(ctx, ...args) {
+    this.log.trace('sendSticker');
     return this.client.telegram.sendSticker(this.getMessageTargetId(ctx), ...args);
   }
   sendAnimation(ctx, ...args) {
+    this.log.trace('sendAnimation');
     return this.client.telegram.sendAnimation(this.getMessageTargetId(ctx), ...args);
   }
   sendDocument(ctx, ...args) {
+    this.log.trace('sendDocument');
     return this.client.telegram.sendDocument(this.getMessageTargetId(ctx), ...args);
   }
   sendPhoto(ctx, ...args) {
+    this.log.trace('sendPhoto');
     return this.client.telegram.sendPhoto(this.getMessageTargetId(ctx), ...args);
   }
 

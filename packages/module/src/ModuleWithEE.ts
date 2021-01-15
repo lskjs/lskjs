@@ -15,7 +15,7 @@ export abstract class ModuleWithEE extends ModuleWithLog implements IModuleWithE
     this.ee.on(event, async (...args) => {
       try {
         if (this.debug) this.log.trace('[ee]', `on(${event}) <==`);
-        await callback(event, ...args);
+        await callback(...args);
       } catch (err) {
         this.log.error('[ee]', `on(${event}) <==`, err);
       }
