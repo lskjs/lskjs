@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.5](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2021-01-18)
+
+
+### Features
+
+* **apm:** create apm module ([8da6970](https://github.com/isuvorov/lib-starter-kit/commit/8da6970fa25d1a6f25ab37b987161082381a2ea5))
+* **kafka:** create kafka module ([33f6533](https://github.com/isuvorov/lib-starter-kit/commit/33f653356a95122816182145787196e71ff70dcd))
+* **rabbit:** create rabbit module ([646706f](https://github.com/isuvorov/lib-starter-kit/commit/646706fef94dba6a20ba5f14774e8bb230ec3d1d))
+* **scylla:** create scylla module ([2ce6e09](https://github.com/isuvorov/lib-starter-kit/commit/2ce6e094b9a0e4ab40d2e3ddfd37b12488dd6056))
+
+
+
+
+
 # [2.1.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
 
 

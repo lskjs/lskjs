@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2021-01-18)
+
+
+### Features
+
+* **rabbit:** create rabbit module ([646706f](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/646706fef94dba6a20ba5f14774e8bb230ec3d1d))
+
+
+
+
+
 # [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
 
 

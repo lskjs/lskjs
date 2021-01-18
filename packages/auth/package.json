@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "2.1.0-beta.4",
+  "version": "2.1.0-beta.5",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -42,7 +42,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.4",
+    "@lskjs/module": "2.1.0-beta.5",
     "@lskjs/utils": "2.1.0-beta.4",
     "bcryptjs": "2.4.3",
     "jsonwebtoken": "8.5.1",
@@ -51,7 +51,7 @@
     "validator": "13.5.2"
   },
   "devDependencies": {
-    "@lskjs/db": "2.1.0-beta.4",
+    "@lskjs/db": "2.1.0-beta.5",
     "@lskjs/mobx": "2.1.0-beta.4",
     "@lskjs/server-api": "2.1.0-beta.4",
     "axios": "0.21.1",
