@@ -4,7 +4,7 @@ import { IModuleConstructor, IModule, IAsyncModule } from '../types';
 
 export const createAsyncModule = async (initArg: IAsyncModule, parentProps: object): Promise<IModule> => {
   if (initArg.__module) return initArg as IModule;
-  const arg = (await importFn(initArg))
+  const arg = await importFn(initArg);
   if (!arg) throw '!Component';
   if (Array.isArray(arg)) {
     const [Module, ...propsArray] = arg;

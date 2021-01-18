@@ -40,7 +40,7 @@ export class RabbitWorker extends Module {
     });
   }
   async onConsumeError({ err, job }) {
-    const errInfo = this.app.getErrorInfo(Err.getCode(err));
+    const errInfo = this.app && this.app.getErrorInfo ? this.app.getErrorInfo(Err.getCode(err)) : {};
     const nack = get(errInfo, 'nack', true);
     const telegram = get(errInfo, 'telegram', true) && !__DEV__;
     const log = get(errInfo, 'log', 'error');

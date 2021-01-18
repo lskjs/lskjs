@@ -8,6 +8,36 @@ const proxyManager = new ProxyManager({
   raw: process.env.PROXY,
 });
 
+
+// 'NETWORK_NOT_200',
+// 'NETWORK_JSON_EXPECTED',
+// 'NETWORK_BAN',
+// 'NETWORK_RECAPCHA',
+// 'NETWORK_TOO_MANY_REQUESTS',
+// 'PROXY_AUTH_REQUIRED',
+
+const wildcardNetworkErrors = [
+  'PROXY_',
+  'NETWORK_',
+]
+const networkErrors = [
+  'FETCH_TIMEOUT',
+  'ECONNRESET',
+  'ECONNREFUSED',
+  'TIMEOUT_RESPONSE_TEXT',
+  'SELF_SIGNED_CERT_IN_CHAIN',
+  'EHOSTUNREACH',
+  'UNABLE_TO_GET_ISSUER_CERT_LOCALLY',
+  'EPROTO',
+  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+  'CERT_HAS_EXPIRED',
+  'NETWORK_BAN_CAPCHA',
+  'EAI_AGAIN',
+  'Z_BUF_ERROR',
+  'ENETUNREACH',
+  'ERR_TLS_CERT_ALTNAME_INVALID',
+];
+
 export const MAX_NETWORK_TRIES = 10;
 export async function request({ driver = 'axios', max_tries: maxTries = MAX_NETWORK_TRIES, timeout, ...params }) {
   if (driver !== 'axios') throw 'driver not realized yet';
@@ -50,7 +80,9 @@ export async function request({ driver = 'axios', max_tries: maxTries = MAX_NETW
 
         return res;
       } catch (err) {
-        if (Err.getCode(err).startsWith('NETWORK_')) throw err;
+        const errCode = Err.getCode(err);
+        const isRetry = wildcardNetworkErrors.filter(w => errCode.startsWith(w)).length || networkErrors.includes(errCode);
+        if (isRetry) throw err;
         throw retry.StopError(err);
       }
     },
