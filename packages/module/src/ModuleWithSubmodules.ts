@@ -59,7 +59,6 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
   }
 
   hasModule(nameOrNames: string | string[]): boolean | { [name: string]: boolean } {
-    console.log('@@@ hasModule', this.name, nameOrNames, JSON.stringify(this.__lifecycle))
     if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
       // eslint-disable-next-line no-param-reassign
       nameOrNames = filterWildcard(Object.keys(this.__availableModules), nameOrNames);
@@ -68,11 +67,8 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       return mapValues(arrayToObject(nameOrNames), (n: string) => this.hasModule(n) as boolean);
     }
     const name = nameOrNames;
-    console.log({ name }, this.__availableModules[name], Boolean(this.__availableModules[name]), Object.keys(this.__availableModules).includes(name));
     return Boolean(this.__availableModules[name]);
   }
-
-  __availableModules: IAsyncModuleKeyValue = {};
 
   async module(nameOrNames: string | string[], { run: isRun = true } = {}): Promise<IModule | IModuleKeyValue> {
     if (!this.__lifecycle.initStart)

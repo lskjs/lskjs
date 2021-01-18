@@ -9,7 +9,7 @@ export abstract class ModuleWithEE extends ModuleWithLog implements IModuleWithE
     return createEventEmitter() as IEventEmitter;
   }
 
-  on(event: string, callback: (event: string, ...args: any[]) => void): void {
+  on(event: string, callback: (...args: any[]) => void): void {
     if (this.debug) this.log.trace('[ee]', `on(${event}) [subscribed]`);
     if (!this.ee) this.ee = this.createEe();
     this.ee.on(event, async (...args) => {
