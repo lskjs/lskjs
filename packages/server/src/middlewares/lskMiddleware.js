@@ -9,7 +9,7 @@ export default (webserver) =>
   async function lskMiddleware(req, res, next) {
     try {
       const config = get(webserver, 'config.middlewares.lsk', {});
-      const debug = true;
+      const debug = false;
 
       /**
        * reqId submiddleware
@@ -34,7 +34,9 @@ export default (webserver) =>
           reqLogConfig.reqId = req.reqId;
         }
         req.log = webserver.log.createChild({
-          name: 'req',
+          __log: 'req',
+          ns: `${webserver.log.ns}:req`,
+          name: `req`,
           ...reqLogConfig,
         });
       }
@@ -53,8 +55,6 @@ export default (webserver) =>
       if (config.reqI18 && req.getLocale) {
         if (debug) webserver.log.trace('apply reqI18 @@@');
         req.getLocale = webserver.helpers.getReqLocale;
-        console.log('webserver.helpers', webserver.helpers);
-        console.log('req.getLocale', req.getLocale);
         const i18Module = await webserver.app.module('i18');
         req.i18 = await i18Module.instance(req.getLocale());
         forEach(webserver.responses, (val, key) => {

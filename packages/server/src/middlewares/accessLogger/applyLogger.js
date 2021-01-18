@@ -1,7 +1,7 @@
 import omit from 'lodash/omit';
 import leftPad from '@lskjs/utils/leftPad';
 import Log from '@lskjs/log2';
-import getReqIp from '../../helpers/getReqIp';
+import { getReqIp } from '../../helpers/getReqIp';
 
 const log2 = new Log({ name: 'req' });
 
@@ -66,10 +66,11 @@ export function applyLogger(req, res) {
   data.ip = getReqIp(req) || '127.0.0.1';
 
   if (__DEV__) {
-    log[levelFn(data, 'start')](data, logStart(data));
+    const args = [data];
     if (req.body) {
-      log.trace(JSON.stringify(req.body));
+      args.push(req.body);
     }
+    log[levelFn(data, 'start')](...args);
   }
 
   const hrtime = process.hrtime();
@@ -80,7 +81,7 @@ export function applyLogger(req, res) {
     const diff = process.hrtime(hrtime);
     data.duration = diff[0] * 1e3 + diff[1] * 1e-6;
 
-    log[levelFn(data, 'finish')](data, logFinish(data));
+    log[levelFn(data, 'finish')](data);
   }
   res.on('close', logging);
 }

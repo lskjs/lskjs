@@ -28,9 +28,9 @@ export class PermitServerModule extends Module {
     this.model = modelsModule.model.bind(models);
   }
 
-  async getModules() {
+  getModules() {
     return {
-      ...(await super.getModules()),
+      ...super.getModules(),
       models: [() => import('@lskjs/models'), { models }],
     };
   }
@@ -91,6 +91,5 @@ export class PermitServerModule extends Module {
     return code;
   }
 }
-
 
 export default PermitServerModule;

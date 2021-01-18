@@ -2,9 +2,9 @@ import Err from '@lskjs/utils/Err';
 import Api from '@lskjs/server-api';
 
 export default class CoingateBillingApi extends Api {
-  async getRoutes() {
+  getRoutes() {
     return {
-      ...(await super.getRoutes()),
+      ...super.getRoutes(),
       '/create': ::this.create,
       '/callback': ::this.callback,
     };

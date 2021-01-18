@@ -35,14 +35,26 @@ export default class IndexApi extends Api {
     return res;
   }
   env(req) {
-    return this.app.getEnv(req);
+    return {
+      __ROOT_STATE__: {
+        token: req.token,
+        user: req.user,
+        req: {
+          token: req.token,
+          user: req.user,
+        },
+        config: this.app.config.client || {},
+      },
+      __DEV__,
+      __STAGE__: global.__STAGE__,
+    };
   }
   envjs(req, res) {
-    return res.send(serializeWindow(this.app.getEnv(req)));
+    return res.send(serializeWindow(this.env(req)));
   }
-  async getRoutes() {
+  getRoutes() {
     return {
-      ...(await super.getRoutes()),
+      ...super.getRoutes(),
       '/': ::this.index,
       '/env': ::this.env,
       '/env.json': ::this.env,

@@ -1,6 +1,5 @@
-import Promise from 'bluebird';
+// import Promise from 'bluebird';
 import ReactDOM from 'react-dom';
-import assignProps from '@lskjs/utils/assignProps';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import { createBrowserHistory } from 'history';
 import Module from '@lskjs/module';
@@ -8,7 +7,7 @@ import Module from '@lskjs/module';
 // import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';
 
-Promise.config({ cancellation: true });
+// Promise.config({ cancellation: true });
 
 const DEBUG = __DEV__ && false; // __STAGE__ === 'isuvorov'
 
@@ -34,12 +33,33 @@ export default class ReactAppClient extends Module {
     });
   }
 
-  run() {
+  async run() {
+    await super.run();
+    this.uapp = await this.module('uapp');
     this.history.listen((location) => {
       if (location.method === 'replaceState') return;
       this.render();
     });
     this.render();
+  }
+
+  async getModuleProps(name) {
+    if (name === 'uapp') {
+      return {
+        ...(await super.getModuleProps(name)),
+        rootState: this.getRootState(),
+        history: this.history,
+        req: collectWindowReq(),
+      };
+    }
+    return super.getModuleProps(name);
+  }
+
+  getModules() {
+    return {
+      ...super.getModules(),
+      uapp: () => import('@lskjs/uapp'),
+    };
   }
 
   /**
@@ -104,23 +124,14 @@ export default class ReactAppClient extends Module {
     }
   }
 
-  async getUapp(params = {}) {
-    if (this.uapp) return this.uapp;
-    const { Uapp } = this;
-    this.uapp = new Uapp({
-      app: this,
-      rootState: this.getRootState(),
-      config: this.config,
-      history: this.history,
-      req: collectWindowReq(),
-      ...params,
-    });
-    await this.uapp.start();
-    return this.uapp;
-  }
+  // async getUapp(params = {}) {
+  //   if (this.uapp) return this.uapp;
+  //   const { Uapp } = this;
+  //   this.uapp = await Uapp.create();
+  //   return this.uapp;
+  // }
 
   async resolve(req) {
-    const uapp = await this.getUapp({ req });
     if (this.reqPromise) {
       if (this.reqPromise.cancel) {
         this.reqPromise.cancel();
@@ -129,7 +140,7 @@ export default class ReactAppClient extends Module {
         if (DEBUG) console.log('!!!!this.reqPromise.cancel'); // eslint-disable-line no-console
       }
     }
-    const reqPromise = uapp.resolve({
+    const reqPromise = this.uapp.resolve({
       path: req.path || req.pathname,
       query: req.query,
     });
@@ -146,6 +157,6 @@ export default class ReactAppClient extends Module {
     }
 
     this.reqPromise = null;
-    return uapp.page;
+    return this.uapp.page;
   }
 }

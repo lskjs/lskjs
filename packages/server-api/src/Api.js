@@ -69,7 +69,7 @@ export default class Api extends Module {
     return this.getRoutes();
   }
 
-  async getRoutes() {
+  getRoutes() {
     return {
       '/': ::this.index,
       // '*': () => ({ __pack: 1, ok: true, message: 'Api.getRoutes is empty' }),

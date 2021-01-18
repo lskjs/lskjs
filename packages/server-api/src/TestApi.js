@@ -26,9 +26,9 @@ const middleware = (req, res, next) => {
 };
 
 export default class TestApi extends Api {
-  async getRoutes() {
+  getRoutes() {
     return {
-      ...(await super.getRoutes()),
+      ...super.getRoutes(),
       '/middleware/1': async (req, res) => {
         await this.useMiddleware(middleware, req, res);
         console.log('req.file', req.file);

@@ -214,8 +214,13 @@ export class Logger implements ILogger {
       );
       return;
     }
+    const res: string[] = [];
 
-    const res = [];
+    if (this.name === 'req') {
+      this.__logger(...res);
+      return;
+    }
+
     const envLogLevel = env('LOG_L', 'short');
     if (envLogLevel) {
       let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);

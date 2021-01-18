@@ -3,7 +3,7 @@ import pick from 'lodash/pick';
 import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
 import cloneDeep from 'lodash/cloneDeep';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import autobind from '@lskjs/utils/autobind';
 import collectExpressReq from '@lskjs/utils/collectExpressReq';
 import antimergeDeep from '@lskjs/utils/antimergeDeep';
@@ -13,6 +13,11 @@ import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
 import BaseHtml from './Html';
 
 const DEBUG = false;
+
+// config: this.config,
+// app: this,
+// expressResolve: this.expressResolve,
+// express: this.express,
 
 export default class ReactAppServer extends Module {
   async init() {
@@ -158,7 +163,7 @@ export default class ReactAppServer extends Module {
         const [redirect] = redirectArgs;
         if (__DEV__) {
           this.log.debug('ReactAppServer.redirect', redirect);
-          await Promise.delay(2000);
+          await Bluebird.delay(2000);
         }
         if (strategy === 'json') {
           return { status, redirect };

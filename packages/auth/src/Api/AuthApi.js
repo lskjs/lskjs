@@ -21,10 +21,10 @@ export default class AuthApi extends BaseApi {
     const auth = await this.app.module('auth');
     this.helpers = auth.helpers;
   }
-  async getRoutes() {
+  getRoutes() {
     // const { isAuth } = this.app.middlewares;
     return {
-      ...(await super.getRoutes()),
+      ...(super.getRoutes()),
       '/login': ::this.login,
       '/signup': ::this.signup, // POST
       '/updateToken': ::this.updateToken,
