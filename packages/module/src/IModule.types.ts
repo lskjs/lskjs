@@ -112,7 +112,7 @@ export interface IModuleWithSubmodules extends IModuleWithEE {
   getModules(): IAsyncModuleKeyValue | Promise<IAsyncModuleKeyValue>;
   // module(name: string): Promise<IModule>;
   // module(names: string[]): Promise<IModuleKeyValue>;
-  module(nameOrNames: string | string[], { run }: { run: boolean }): Promise<IModule | IModuleKeyValue>;
+  module(nameOrNames: string | string[], { run }: { run: boolean }): Promise<null | IModule | IModuleKeyValue>;
 }
 
 export interface IModuleWithApp extends IModuleWithSubmodules {
@@ -135,7 +135,7 @@ export interface IModuleConstructor<T extends IModule> {
   createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
   new (): T;
 }
-export type IModuleKeyValue = { [name: string]: IModule };
+export type IModuleKeyValue = { [name: string]: IModule | null };
 
 /**
  * AsyncModule
@@ -145,6 +145,7 @@ export type IAsyncModuleProps = {
   Module: any; // TODO: IModuleConstructor<T>
   [key: string]: IModuleProp;
 };
+
 export type IAsyncModule =
   | IModule
   | any // TODO:  IModuleConstructor 

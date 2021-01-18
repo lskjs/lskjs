@@ -7,7 +7,10 @@ export class RabbitWorkerJob extends Module {
     await super.init();
     this.stats = this.worker.stats;
     this.startedAt = new Date();
-    this.tx = this.app.apm.startTransaction(this.name, 'job');
+    if (this.app.hasModule('apm')) {
+      const apm = await this.app.module('apm', { throw: false });
+      this.tx = apm.startTransaction(this.name, 'job');
+    }
   }
   getQueueMeta() {
     return {

@@ -70,7 +70,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     return Boolean(this.__availableModules[name]);
   }
 
-  async module(nameOrNames: string | string[], { run: isRun = true } = {}): Promise<IModule | IModuleKeyValue> {
+  async module(nameOrNames: string | string[], { run: isRun = true, throw: throwIfNotFound = true } = {}): Promise<IModule | IModuleKeyValue | null> {
     if (!this.__lifecycle.initStart)
       throw new Err('MODULE_INVALID_WORKFLOW_INIT', 'please init module first before .module()');
     if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
@@ -86,10 +86,12 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     if (this.debug) this.log.trace(`module(${name})`, isRun ? 'run' : undefined);
     if (this.__initedModules[name]) return this.__initedModules[name];
     const availableModule = this.__availableModules && this.__availableModules[name];
-    if (!availableModule)
+    if (!availableModule) {
+      if (!throwIfNotFound) return null;
       throw new Err('MODULE_INJECTING_NOT_FOUND', `Module "${name}" not found in module ${this.name}`, {
         data: { name },
       });
+    }
     try {
       const moduleProps = await this.getModuleProps(name);
       const instance = await createAsyncModule(availableModule, moduleProps);

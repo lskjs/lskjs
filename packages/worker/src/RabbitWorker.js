@@ -58,12 +58,15 @@ export class RabbitWorker extends Module {
     if (telegram) {
       this.onTelegramError({ err, job });
     }
-    const apm = await this.app.module('apm');
-    try {
-      apm.captureError(err);
-    } catch (apmErr) {
-      this.log.error('apm.captureError', apmErr);
+    if (this.app.hasModule('apm')) {
+      const apm = await this.app.module('apm');
+      try {
+        apm.captureError(err);
+      } catch (apmErr) {
+        this.log.error('apm.captureError', apmErr);
+      }
     }
+
 
     if (!nack) {
       if (this.debug) console.error('err4', err); // eslint-disable-line no-console

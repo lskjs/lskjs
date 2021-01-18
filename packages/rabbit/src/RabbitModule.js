@@ -6,7 +6,6 @@ import hash from 'object-hash';
 import EventEmitter from 'events';
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import tryParamParse from '@lskjs/utils/tryParamParse';
 import findGoRabbitPath from './findGoRabbitPath';
 import startGoProc from './startGoProc';
 
@@ -19,29 +18,22 @@ export class RabbitModule extends Module {
   startGoProc = startGoProc;
   async init() {
     await super.init();
+    this.enabled = !this.config.disabled;
+    if (!this.enabled) return;
     this.emitter = new EventEmitter();
-    this.enabled = false;
-    // this.config = {
-    //   ...this.app.config.rabbit,
-    // };
-    // if (!this.config || !this.config.uri) {
-    //   this.config = {
-    //     // queue: process.env.MQ_QUEUE,
-    //     options: {
-    //       maxPriority: tryParamParse(process.env.MAX_PRIORITY, 10),
-    //       prefetch: tryParamParse(process.env.PREFETCH, 1),
-    //     },
-    //     ...this.app.config.rabbit,
-    //   };
-    // }
-    if (!this.config.uri) this.config.uri = 'amqp://localhost';
+    if (!this.config.uri) {
+      this.log.warn('!config.uri using localhost')
+      this.config.uri = 'amqp://localhost';
+    }
     this.log.debug('uri', this.config.uri);
-    if (!this.config) return;
-    this.queues = this.config.queues;
-    this.exchanges = this.config.exchanges;
-    this.enabled = true;
+    if (!this.config.queues) {
+      this.log.warn('!config.queues');
+    }
+    this.queues = this.config.queues || {};
+    this.exchanges = this.config.exchanges || {};
 
-    this.goRabbitPath = process.env.GO_RABBIT || findGoRabbitPath();
+
+    this.goRabbitPath = this.config.goRabbit;
     this.isGoTransport = !!this.goRabbitPath;
 
     if (this.isGoTransport) {
@@ -80,7 +72,7 @@ export class RabbitModule extends Module {
     throw 'not implemented worker.parse()';
   }
   async queue(name) {
-    if (!this.queues[name]) throw new Err('QUEUE_NOT_EXISTS', { data: { name } });
+    if (!this.queues[name]) throw new Err('rabbit.queueNotFound', { data: { name } });
     await this.assertQueueOnce(this.queues[name]);
     return this.queues[name];
   }
@@ -91,7 +83,7 @@ export class RabbitModule extends Module {
     } else {
       queueName = queue.name || queue.queue;
     }
-    const res = this.queues[queueName] ? (this.queues[queueName].queue) : queueName;
+    const res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
     // console.log({ queueName, res });
     return res;
   }
@@ -160,22 +152,16 @@ export class RabbitModule extends Module {
     // this.log.trace(row);
     // this.log.trace('/--------WRITE-----/');
     await new Promise((resolve) => {
-      this
-        .emitter
-        .once('close', async () => {
-          if (debug) {
-            this.log.trace('[RM] reject', row);
-          }
-          await Bluebird.delay(1000);
-          return this
-            .sendToQueueNative(queueName, data)
-            .then(resolve);
-        });
-      this
-        .emitter
-        .once(taskHash, () => {
-          resolve();
-        });
+      this.emitter.once('close', async () => {
+        if (debug) {
+          this.log.trace('[RM] reject', row);
+        }
+        await Bluebird.delay(1000);
+        return this.sendToQueueNative(queueName, data).then(resolve);
+      });
+      this.emitter.once(taskHash, () => {
+        resolve();
+      });
     });
   }
   async consume(q, callback, options) {
