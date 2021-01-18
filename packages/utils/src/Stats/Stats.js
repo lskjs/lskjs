@@ -2,17 +2,23 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 import round from 'lodash/round';
 import forEach from 'lodash/forEach';
-import inc from '@lskjs/utils/inc';
-import beauty from '@lskjs/utils/beauty';
+import inc from '../inc';
+import beauty from '../beauty';
 
 const sec = 1000;
 const min = 60 * sec;
 const hour = 60 * min;
 
 export class Stats {
-  storages = {}
+  storages = {};
   // eslint-disable-next-line no-console
-  printOptions = { skipFlood: false, log: console.log, prefix: 'all', successKey: 'event.success', unsuccessKey: 'event.error' }
+  printOptions = {
+    skipFlood: false,
+    log: console.log,
+    prefix: 'all',
+    successKey: 'event.success',
+    unsuccessKey: 'event.error',
+  };
   floodTime = __DEV__ ? sec : min;
   printInterval = __DEV__ ? sec : min;
   info = {
@@ -24,7 +30,7 @@ export class Stats {
     hour1: hour,
     // day: 24 60 * * 60 * 1000,
     all: 365 * 24 * hour,
-  }
+  };
   getStorages(prefix) {
     return this.info.names.map((name) => {
       const key = [prefix, name].filter(Boolean).join('.');
@@ -88,8 +94,15 @@ export class Stats {
   printSummary(props = {}) {
     return this.print({ ...props, skipFlood: true, summary: true });
   }
-  print({ skipFlood = false, summary = false, log = console.log, prefix = 'all', successKey = 'event.success', unsuccessKey = 'event.error' } = {}) {
-    const isFlood = !skipFlood && this.printedAt && (this.printedAt + this.floodTime) > Date.now();
+  print({
+    skipFlood = false,
+    summary = false,
+    log = console.log,
+    prefix = 'all',
+    successKey = 'event.success',
+    unsuccessKey = 'event.error',
+  } = {}) {
+    const isFlood = !skipFlood && this.printedAt && this.printedAt + this.floodTime > Date.now();
     if (isFlood) return false;
     this.printedAt = Date.now();
     const [name1, name2, name3] = this.info.names;
@@ -103,23 +116,26 @@ export class Stats {
     const time2 = now(get(storages, `${name2}.last`)) - get(storages, `${name2}.start`);
     const acks3 = get(storages, `${name3}.${successKey}`, 0);
     const time3 = now(get(storages, `${name3}.last`)) - get(storages, `${name3}.start`);
-    const acksPercent3 = round(get(storages, `${name3}.${successKey}`, 0) / get(storages, `${name3}.count`, 0) * 100);
+    const acksPercent3 = round((get(storages, `${name3}.${successKey}`, 0) / get(storages, `${name3}.count`, 0)) * 100);
 
     const nacks1 = get(storages, `${name1}.${unsuccessKey}`, 0);
-    const nacksPercent1 = round(get(storages, `${name1}.${unsuccessKey}`, 0) / get(storages, `${name1}.count`, 0) * 100);
+    const nacksPercent1 = round(
+      (get(storages, `${name1}.${unsuccessKey}`, 0) / get(storages, `${name1}.count`, 0)) * 100,
+    );
     const nacks3 = get(storages, `${name3}.${unsuccessKey}`, 0);
-    const nacksPercent3 = round(get(storages, `${name3}.${unsuccessKey}`, 0) / get(storages, `${name3}.count`, 0) * 100);
+    const nacksPercent3 = round(
+      (get(storages, `${name3}.${unsuccessKey}`, 0) / get(storages, `${name3}.count`, 0)) * 100,
+    );
 
     const others1 = get(storages, `${name1}.count`, 0) - acks1 - nacks1;
-    const othersPercent1 = round(others1 / get(storages, `${name1}.count`, 0) * 100);
+    const othersPercent1 = round((others1 / get(storages, `${name1}.count`, 0)) * 100);
     const others3 = get(storages, `${name3}.count`, 0) - acks3 - nacks3;
-    const othersPercent3 = round(others3 / get(storages, `${name3}.count`, 0) * 100);
+    const othersPercent3 = round((others3 / get(storages, `${name3}.count`, 0)) * 100);
 
-
-    const speed1 = !time1 ? null : `${beauty(acks1 / time1 * sec, 2)}/s`;
-    const speed2 = !time2 ? null : `${beauty(acks2 / time2 * min)}/m`;
-    const speed3 = !time3 ? null : `${beauty(acks3 / time3 * hour)}/h`;
-    const speed4 = !time3 ? null : `${beauty(acks3 / time3 * 24 * hour)}/d`;
+    const speed1 = !time1 ? null : `${beauty((acks1 / time1) * sec, 2)}/s`;
+    const speed2 = !time2 ? null : `${beauty((acks2 / time2) * min)}/m`;
+    const speed3 = !time3 ? null : `${beauty((acks3 / time3) * hour)}/h`;
+    const speed4 = !time3 ? null : `${beauty((acks3 / time3) * 24 * hour)}/d`;
 
     // const speed1 = `${round(count / (get(storages, 'name1.last', new Date()) - get(storages, 'name1.start', new Date())) * sec, 2)}/s`;
     // // const speed1 = `${round(count / (get(storages, 'name1.last', new Date()) - get(storages, 'name1.start', new Date())) * sec, 2)}/s`;
@@ -132,14 +148,12 @@ export class Stats {
     // if (summary) {
     if (summary) {
       // console.log(JSON.stringify(this.storages, null, 2));
-      const speed1all = !time1 ? null : `${beauty(acks3 / time3 * sec, 2)}/s`;
-      const speed2all = !time2 ? null : `${beauty(acks3 / time3 * min)}/m`;
-      const speed3all = !time3 ? null : `${beauty(acks3 / time3 * hour)}/h`;
-      const speed4all = !time3 ? null : `${beauty(acks3 / time3 * 24 * hour)}/d`;
+      const speed1all = !time1 ? null : `${beauty((acks3 / time3) * sec, 2)}/s`;
+      const speed2all = !time2 ? null : `${beauty((acks3 / time3) * min)}/m`;
+      const speed3all = !time3 ? null : `${beauty((acks3 / time3) * hour)}/h`;
+      const speed4all = !time3 ? null : `${beauty((acks3 / time3) * 24 * hour)}/d`;
 
-      const speed = [speed1all, speed2all, speed3all, speed4all]
-        .map(a => String(a || '').padStart(8))
-        .join(' ');
+      const speed = [speed1all, speed2all, speed3all, speed4all].map((a) => String(a || '').padStart(8)).join(' ');
       str = `\
       ✅🥳 ${`${acks3} (${acksPercent3}%)`.padEnd(8)} ${speed}  \
       ${others3 ? `   ❓  ${others3} (${othersPercent3}%)` : ''} \
@@ -147,9 +161,7 @@ export class Stats {
       ${nacks3 || others3 ? ' all time' : ''} \
       `.trim();
     } else {
-      const speed = [speed1, speed2, speed3, speed4]
-        .map(a => String(a || '').padStart(8))
-        .join(' ');
+      const speed = [speed1, speed2, speed3, speed4].map((a) => String(a || '').padStart(8)).join(' ');
       str = `\
       ✅ ${String(acks3).padEnd(8)} ${speed} \
       ${others1 ? `   ❓  ${others1} (${othersPercent1}%)` : ''} \
