@@ -1,4 +1,5 @@
 import React from "react"
+// @ts-ignore
 import { observer, MobXProviderContext } from "mobx-react"
 // import { observer } from "mobx-react/dist/observer"
 // import { copyStaticProperties } from "mobx-react/dist/utils/utils"
@@ -47,6 +48,7 @@ function createStoreInjector(
     let Injector: IReactComponent<any> = React.forwardRef((props, ref) => {
         const newProps = { ...props }
         const context = React.useContext(MobXProviderContext)
+        // @ts-ignore
         Object.assign(newProps, grabStoresFn(context || {}, newProps) || {})
 
         if (ref) {
