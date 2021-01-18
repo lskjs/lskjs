@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Bug Fixes
+
+* **module:** ts errors ([7477bbf](https://github.com/isuvorov/lib-starter-kit/commit/7477bbf06da24bddc60f5218804072175e47e530))
+* **uapp:** fix uapp bugs ([3401e45](https://github.com/isuvorov/lib-starter-kit/commit/3401e45ac2b9533801b32a5404669a0cedd0ba88))
+* **uapp:** ts errors ([545e595](https://github.com/isuvorov/lib-starter-kit/commit/545e595077cd4393985c9b03bdeac707ac86ecfb))
+
+
+### Features
+
+* improve stability ([a7fc028](https://github.com/isuvorov/lib-starter-kit/commit/a7fc0281ee8a6f4c03b907aca6d1d5534f1149ac))
+* **module:** add hadModule method ([b639f0b](https://github.com/isuvorov/lib-starter-kit/commit/b639f0b1728f2cf6a556a58818baa007a2f559f7))
+* **proxy:** add axios request with proxy ([12ecedf](https://github.com/isuvorov/lib-starter-kit/commit/12ecedf41d272e5977ecb19573269a6941229066))
+* **proxy:** create proxymanager ([590cc6e](https://github.com/isuvorov/lib-starter-kit/commit/590cc6e6311ee22501c69f87ea853f973dec56f0))
+* **stats:** improve stats ([77bb1f0](https://github.com/isuvorov/lib-starter-kit/commit/77bb1f09e2f972531ab4771334f2f9672e7d43d6))
+* **uapp:** add safe mobx-react ([e79cdcc](https://github.com/isuvorov/lib-starter-kit/commit/e79cdccd2bbbed72631cde3e973fcc2ab9449526))
+* **worker:** recreate worker app and worker jobs ([d6a0ef7](https://github.com/isuvorov/lib-starter-kit/commit/d6a0ef7333d35a9804f6c6bcb6bdd351a4d10ba8))
+
+
+
+
+
 # [2.1.0-beta.2](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
 
 

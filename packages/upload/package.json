@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/upload",
-  "version": "2.1.0-beta.2",
+  "version": "2.1.0-beta.4",
   "description": "LSK module for uploading files.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -39,14 +39,14 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.2",
-    "@lskjs/utils": "2.1.0-beta.0",
+    "@lskjs/module": "2.1.0-beta.4",
+    "@lskjs/utils": "2.1.0-beta.4",
     "aws-sdk": "2.827.0",
     "multer": "1.4.2",
     "multer-s3": "2.9.0"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.1.0-beta.1",
+    "@lskjs/server-api": "2.1.0-beta.4",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },

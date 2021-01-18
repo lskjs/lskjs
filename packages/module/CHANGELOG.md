@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Bug Fixes
+
+* **module:** ts errors ([7477bbf](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/7477bbf06da24bddc60f5218804072175e47e530))
+
+
+### Features
+
+* **module:** add hadModule method ([b639f0b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b639f0b1728f2cf6a556a58818baa007a2f559f7))
+
+
+
+
+
 # [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
 
 

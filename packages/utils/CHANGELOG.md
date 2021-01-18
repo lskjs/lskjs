@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.4](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Features
+
+* **stats:** improve stats ([77bb1f0](https://github.com/lskjs/ux/tree/master/packages/utils/commit/77bb1f09e2f972531ab4771334f2f9672e7d43d6))
+
+
+
+
+
 # [2.1.0-beta.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
 
 

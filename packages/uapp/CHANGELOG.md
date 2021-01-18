@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Bug Fixes
+
+* **uapp:** fix uapp bugs ([3401e45](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/3401e45ac2b9533801b32a5404669a0cedd0ba88))
+* **uapp:** ts errors ([545e595](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/545e595077cd4393985c9b03bdeac707ac86ecfb))
+
+
+### Features
+
+* **uapp:** add safe mobx-react ([e79cdcc](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/e79cdccd2bbbed72631cde3e973fcc2ab9449526))
+
+
+
+
+
 # [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
 
 **Note:** Version bump only for package @lskjs/uapp

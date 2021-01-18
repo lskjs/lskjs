@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/permit",
-  "version": "2.1.0-beta.2",
+  "version": "2.1.0-beta.4",
   "description": "LSK module for one time codes and permits.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -37,13 +37,13 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.2",
+    "@lskjs/module": "2.1.0-beta.4",
     "nanoid": "3.1.20"
   },
   "devDependencies": {
-    "@lskjs/db": "2.1.0-beta.2",
-    "@lskjs/mobx": "2.1.0-beta.0",
-    "@lskjs/server-api": "2.1.0-beta.1",
+    "@lskjs/db": "2.1.0-beta.4",
+    "@lskjs/mobx": "2.1.0-beta.4",
+    "@lskjs/server-api": "2.1.0-beta.4",
     "bluebird": "3.7.2",
     "lodash": "4.17.20",
     "mobx": "6.0.4"

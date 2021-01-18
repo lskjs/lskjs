@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Features
+
+* **worker:** recreate worker app and worker jobs ([d6a0ef7](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/d6a0ef7333d35a9804f6c6bcb6bdd351a4d10ba8))
+
+
+
+
+
 # [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
 
 **Note:** Version bump only for package @lskjs/worker
