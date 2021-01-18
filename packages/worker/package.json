@@ -9,7 +9,8 @@
   },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/worker",
   "keywords": [
-    "worker"
+    "worker",
+    "rabbitmq"
   ],
   "scripts": {
     "start": "../../scripts/package-start.sh",
@@ -36,14 +37,17 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.2"
+    "@lskjs/module": "2.0.0-beta.7",
+    "@lskjs/utils": "2.1.0-beta.0"
   },
   "devDependencies": {
-    "@lskjs/db": "2.1.0-beta.2",
+    "@lskjs/rabbit": "2.1.0-beta.0",
+    "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
   "peerDependencies": {
-    "@lskjs/db": "*",
-    "lodash": "*"
+    "@lskjs/rabbit": "*",
+    "bluebird": "*",
+    "lodash": "4.17.20"
   }
 }
