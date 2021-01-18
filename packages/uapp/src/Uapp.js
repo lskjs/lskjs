@@ -12,7 +12,7 @@ import scrollTo from '@lskjs/scroll';
 import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
 import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
-import I18 from '@lskjs/i18';
+// import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
 import autobind from '@lskjs/utils/autobind';
 import e from '@lskjs/utils/e';
@@ -20,9 +20,10 @@ import UappProvider from './UappProvider';
 import wrapApi from './wrapApi';
 import DefaultPage from './Page';
 import defaultTheme from './theme';
+import { collectUniversalRoutes } from './collectUniversalRoutes';
 
 global.DEV = () => null;
-Promise.config({ cancellation: true });
+// Promise.config({ cancellation: true });
 // class Req {
 //   // ...
 //   @observable path = null;
@@ -34,10 +35,9 @@ export default class Uapp extends Module {
   Provider = UappProvider;
   theme = defaultTheme;
   scrollTo = scrollTo;
-  i18 = new I18({ ctx: this });
+  // i18 = new I18({ ctx: this });
   // req = new Req();
   @observable req = {};
-
 
   // createLogger(params) {
   //   const level = __DEV__ // eslint-disable-line no-nested-ternary
@@ -53,6 +53,14 @@ export default class Uapp extends Module {
   //     ...get(this, 'config.log', {}),
   //     ...params,
   //   });
+  // }
+
+  // await getModules() {
+  //   const
+  //   return {
+  //     ...super.getModules(),
+  //     i18:
+  //   }
   // }
 
   async applyRootState(rootState = {}) {
@@ -116,19 +124,22 @@ export default class Uapp extends Module {
   async init() {
     await super.init();
     // this._config = cloneDeep(this.config); // backup for modifications
+    console.log('@@@ this.app i18', this.app.hasModule('i18'));
+    console.log('this.app __availableModules', this.app.__availableModules);
+    console.log('this.app __availableModules[i18]', Boolean(this.app.__availableModules.i18));
+    this.i18 = this.app && this.app.hasModule('i18') ? await this.app.module('i18') : await this.module('i18');
     if (this.rootState) {
       await this.applyRootState(this.rootState);
     }
-    this.stores = this.getStores();
+    // this.stores = this.getStores();
     this.api = this.getApi();
-    this.apiq = new this.Apiq({
-      config: this.config ? this.config.apiq : {},
-      resolve: this.app.resolve,
-    });
-
-    if (this.i18) {
-      await this.initI18();
-    }
+    // this.apiq = new this.Apiq({
+    //   config: this.config ? this.config.apiq : {},
+    //   resolve: this.app.resolve,
+    // });
+    // if (this.i18) {
+    //   await this.initI18();
+    // }
     if (__CLIENT__) {
       this.favico = new Favico({
         // @TODO: вынести как модуль
@@ -157,15 +168,15 @@ export default class Uapp extends Module {
     return api;
   }
 
-  getLocale = require('./i18/getLocale').default;
-  setLocale = require('./i18/setLocale').default;
+  // getLocale = require('./i18/getLocale').default;
+  // setLocale = require('./i18/setLocale').default;
 
-  @autobind
-  t(...args) {
-    // console.log('DEPRECATED uapp.t', args[0]);
-    if (this.i18) return this.i18.t(...args);
-    return '!uapp.i18';
-  }
+  // @autobind
+  // t(...args) {
+  //   // console.log('DEPRECATED uapp.t', args[0]);
+  //   if (this.i18) return this.i18.t(...args);
+  //   return '!uapp.i18';
+  // }
 
   createOnSubmit(...props) {
     console.log('depreacted uapp.createOnSubmit=>catchError');  //eslint-disable-line
@@ -190,9 +201,11 @@ export default class Uapp extends Module {
 
   async run() {
     await super.run();
-    const context = this.provide();
+    const context = await this.provide();
+    this.routes = await this.getRoutes();
+    console.log('this.routes', this.routes);
+    this.log.debug('routes', collectUniversalRoutes(this.routes));
     this.log.trace('router.context', Object.keys(context));
-    this.routes = this.getRoutes();
     this.router = new UniversalRouter(this.routes, {
       context,
     });
@@ -458,7 +471,7 @@ export default class Uapp extends Module {
     }
   }
 
-  provide() {
+  async provide() {
     return {
       app: this,
       uapp: this,
@@ -482,9 +495,9 @@ export default class Uapp extends Module {
     };
   }
 
-  _provide() {
-    if (this._provides) return this._provides;
-    this._provides = this.provide();
-    return this._provides;
+  __provide() {
+    if (this.__providers) return this.__providers;
+    this.__providers = this.provide();
+    return this.__providers;
   }
 }
