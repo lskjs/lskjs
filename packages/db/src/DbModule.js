@@ -1,15 +1,8 @@
 import { Mongoose } from 'mongoose';
 import Module from '@lskjs/module';
 import omit from 'lodash/omit';
+import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import Bluebird from 'bluebird';
-import urlLib from 'url';
-
-const Url = urlLib.URL;
-
-const maskPassword = (uri = '') => {
-  const url = new Url(uri);
-  return `${url.username}@${url.host}${url.pathname}`;
-};
 
 // abstract
 export class DbModule extends Module {
@@ -37,7 +30,7 @@ export class DbModule extends Module {
     const { uri } = this.config;
     const options = this.getOptions();
     if (!uri) throw '!uri';
-    if (this.debug) this.log.trace('config', maskPassword(uri), options); // finalOptions
+    if (this.debug) this.log.trace('config', maskUriPassword(uri), options); // finalOptions
 
     // eslint-disable-next-line no-shadow
     const { Mongoose } = this;
@@ -81,7 +74,7 @@ export class DbModule extends Module {
     const { uri } = this.config;
     const options = this.getOptions();
     const connection = await new Promise((resolve, reject) => this.client.connect(uri, options).then(resolve, reject));
-    this.log.debug('ready', maskPassword(uri));
+    this.log.debug('ready', maskUriPassword(uri));
     return connection;
   }
 }

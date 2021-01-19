@@ -27,7 +27,7 @@ export class WorkerApp extends Module {
   }
   async runWorkers() {
     const { worker: workerKey } = this.config;
-    this.log.trace(`[worker] init: ${workerKey}`);
+    this.log.trace(`runWorkers(${workerKey})`);
     let workerNames;
     if (workerKey === '*') {
       workerNames = Object.keys(this.workers);

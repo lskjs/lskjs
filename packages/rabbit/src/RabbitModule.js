@@ -6,7 +6,7 @@ import hash from 'object-hash';
 import EventEmitter from 'events';
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import findGoRabbitPath from './findGoRabbitPath';
+import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import startGoProc from './startGoProc';
 
 const serializeData = (data = {}) => {
@@ -22,22 +22,21 @@ export class RabbitModule extends Module {
     if (!this.enabled) return;
     this.emitter = new EventEmitter();
     if (!this.config.uri) {
-      this.log.warn('!config.uri using localhost')
+      this.log.warn('!config.uri using localhost');
       this.config.uri = 'amqp://localhost';
     }
-    this.log.debug('uri', this.config.uri);
+    this.log.debug('uri', maskUriPassword(this.config.uri));
     if (!this.config.queues) {
       this.log.warn('!config.queues');
     }
     this.queues = this.config.queues || {};
     this.exchanges = this.config.exchanges || {};
 
-
     this.goRabbitPath = this.config.goRabbit;
     this.isGoTransport = !!this.goRabbitPath;
 
     if (this.isGoTransport) {
-      this.log.debug('use go transport', this.goRabbitPath);
+      this.log.debug('using go lang transport', this.goRabbitPath);
     }
   }
   async createConnection() {
@@ -45,9 +44,8 @@ export class RabbitModule extends Module {
     const connection = await amqp.connect(this.config.uri, socketOptions);
     return connection;
   }
-  async run() {
-    if (!this.enabled) return;
-    await super.run();
+  async connect() {
+    this.log.trace('connecting', maskUriPassword(this.config.uri));
     this.listenConnection = await this.createConnection();
     this.sendConnection = await this.createConnection();
     this.listenChannel = await this.listenConnection.createChannel();
@@ -60,6 +58,12 @@ export class RabbitModule extends Module {
     if (this.isGoTransport) {
       this.startGoProc();
     }
+    this.log.debug('connected');
+  }
+  async run() {
+    if (!this.enabled) return;
+    await super.run();
+    await this.connect();
   }
   onOpen() {}
   async ack(msg, { allUpTo } = {}) {
@@ -103,7 +107,7 @@ export class RabbitModule extends Module {
       throw new Err('!queueName', { queue, queueName });
     }
     const options = get(this.config, 'options');
-    this.log.trace(`[${queueName}] assertQueue`, omit(options, ['prefetch']));
+    this.log.trace(`assertQueue(${queueName})`, omit(options, ['prefetch']));
     const res = await this.listenChannel.assertQueue(queueName, options);
     return res;
   }
