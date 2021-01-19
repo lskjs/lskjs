@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+
+### Features
+
+* **utils:** add maskUriPassword ([ead5463](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/ead54638f96639c38fc8ab961795f328d4284a02))
+
+
+
+
+
 # [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
 
 **Note:** Version bump only for package @lskjs/db

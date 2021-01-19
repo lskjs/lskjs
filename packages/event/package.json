@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/event",
-  "version": "2.1.0-beta.6",
+  "version": "2.2.0-beta.1",
   "description": "LSK module for event.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -36,8 +36,8 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.1.0-beta.6",
-    "@lskjs/utils": "2.1.0-beta.6"
+    "@lskjs/module": "2.2.0-beta.1",
+    "@lskjs/utils": "2.2.0-beta.1"
   },
   "devDependencies": {
     "lodash": "4.17.20"
