@@ -1,12 +1,16 @@
 import axios from 'axios';
 import countBy from 'lodash/countBy';
-import sample from 'lodash/sample';
+import forEach from 'lodash/forEach';
 import get from 'lodash/get';
+import map from 'lodash/map';
 import Err from '@lskjs/utils/Err';
+import inc from '@lskjs/utils/inc';
+import avg from '@lskjs/utils/avg';
 import Module from '@lskjs/module';
 import { Mutex } from './utils/Mutex';
 import { getProxyAgent } from './getProxyAgent';
 import { Proxy } from './Proxy';
+import strategies from './strategies';
 
 export const filterFn = (proxy, filter) => {
   if (filter.ignoreKeys && filter.ignoreKeys.includes(get(proxy, 'key'))) return false;
@@ -20,29 +24,47 @@ export const filterFn = (proxy, filter) => {
 };
 
 export class ProxyManager extends Module {
+  config = {
+    stats: __DEV__,
+    updateInterval: __DEV__ ? 5 * 60 * 1000 : 10 * 60 * 1000,
+    statsInterval: __DEV__ ? 10 * 1000 : 3 * 60 * 1000,
+    strategy: 'linear',
+  };
+  strategies = strategies;
   async init() {
     await super.init();
-    this.log.trace('proxyHub', this.url);
+    const Strategy = this.strategies[this.config.strategy || 'random'] || this.strategies.random;
+    if (this.url) {
+      this.log.debug('proxyHub url', this.url);
+    } else {
+      this.log.warn('proxyHub !url');
+    }
+    if (this.proxies) {
+      this.log.trace('proxies.length', this.proxies.length);
+    }
     this.mutex = new Mutex();
+    this.strategy = await Strategy.createAndRun({
+      manager: this,
+    });
   }
   async getLocalhostProxy() {
     return new Proxy({ provider: 'localhost' });
   }
-  async getProxy(filter) {
-    if (this.disabled) return null;
+  async getProxies(filter) {
+    if (this.disabled) return [];
     if (!this.list) this.list = await this.getCachedProxyHubProxyList();
     let { list } = this;
-    if (filter) {
-      list = list.filter((proxy) => filterFn(proxy, filter));
-    }
-    return sample(list);
+    if (filter) list = list.filter((proxy) => filterFn(proxy, filter));
+    return list;
   }
-  getProxyHubBaseUrl(proxyServer) {
-    return this.url;
+  async getProxy() {
+    if (this.disabled) return null;
+    if (!this.list) this.list = await this.getCachedProxyHubProxyList();
+    return this.strategy.getProxy();
   }
   async requestProxyHub({ params, ...axiosParams }) {
     const props = {
-      baseURL: this.getProxyHubBaseUrl(),
+      baseURL: this.url,
       params: { ...this.options, ...params },
       ...axiosParams,
       timeout: 5000,
@@ -54,6 +76,12 @@ export class ProxyManager extends Module {
     return data;
   }
   async getProxyHubProxyList(params) {
+    const wrapProxy = (props) =>
+      new Proxy({
+        manager: this,
+        ...props,
+      });
+    if (!this.url) return (this.proxies || []).map(wrapProxy);
     try {
       const { data: proxies } = await this.requestProxyHub({
         url: 'list',
@@ -62,13 +90,7 @@ export class ProxyManager extends Module {
       if (!proxies) {
         throw new Err('PROXY_HUB_NOT_FOUND_PROXY');
       }
-      return proxies.map(
-        (props) =>
-          new Proxy({
-            manager: this,
-            ...props,
-          }),
-      );
+      return proxies.map(wrapProxy);
     } catch (err) {
       this.log.error('PROXY_HUB_ERROR', err);
       throw new Err('PROXY_HUB_ERROR', { err });
@@ -98,11 +120,6 @@ export class ProxyManager extends Module {
     return this.list;
   }
 
-  recounts = 0;
-  recountProbability() {
-    this.log.trace('recountProbability');
-    this.recounts += 1;
-  }
   async sendFeedbackToHub() {
     this.log.trace('sendFeedbackToHub');
   }
@@ -140,20 +157,57 @@ export class ProxyManager extends Module {
     await super.stop();
     if (this.interval) clearInterval(this.interval);
   }
-  async tick() {
-    this.log.trace('tick');
-    // await super.recountProxyProbability();
-    // await super.saveFeedback();
+  async stats() {
+    const { proxies, ...stats } = this.getStats();
+    const percent = (a, t) => (!t ? '??' : `${Math.floor((a / t) * 100)}%`);
+    const infoRow = ({ count = 0, statuses, errors = {}, time }, name) => {
+      const success = get(statuses, 'success.count', 0);
+      const successTime = get(statuses, 'success.value', 0);
+      return [
+        (name || '').padStart(20),
+        count && `${success}/${count}(${percent(success, count)})`.padEnd(30),
+        time && `${successTime}/${time}(${percent(successTime, time)})`.padEnd(30),
+        Object.keys(errors).join(','),
+      ]
+        .filter(Boolean)
+        .join(' ');
+    };
+    const proxiesStr = map(proxies, infoRow).join('\n');
+    this.log.debug('[stats]', this.strategy.getStats(), `\n${infoRow(stats, 'SUM')}`, `\n${proxiesStr}`);
   }
+
+  getStats() {
+    const stats = {
+      proxies: {},
+    };
+    forEach(this.list, (proxy) => {
+      const proxyStats = proxy.stats;
+      stats.proxies[proxy.key] = proxyStats;
+      inc(stats, 'count', proxyStats.count || 0);
+      inc(stats, 'time', proxyStats.time || 0);
+      forEach(proxyStats.statuses, (avgVal, name) => {
+        avg(stats, `statuses.${name}`, avgVal);
+      });
+      forEach(proxyStats.errors, (avgVal, name) => {
+        avg(stats, `errors.${name}`, avgVal);
+      });
+    });
+
+    return stats;
+  }
+
   async update() {
+    if (this.config.stats) this.stats();
     this.list = await this.getProxyHubProxyList();
     this.log.trace(`list updated summmary: ${this.list.length}`, countBy(this.list, 'provider'));
+    await this.strategy.update();
   }
 
   async run() {
     await super.run();
-    this.update();
-    this.interval = setInterval(() => this.update(), 120000);
+    await this.update();
+    this.interval = setInterval(() => this.update(), this.config.updateInterval);
+    if (this.config.stats) this.statsInterval = setInterval(() => this.update(), this.config.statsInterval);
   }
 
   getProxyAgent(proxy) {

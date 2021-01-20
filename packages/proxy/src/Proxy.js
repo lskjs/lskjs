@@ -1,9 +1,13 @@
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
+import inc from '@lskjs/utils/inc';
+import avg from '@lskjs/utils/avg';
+import EventEmitter from 'events';
 import { getProxyAgent } from './getProxyAgent';
 
 export class Proxy {
   constructor(props = {}) {
     Object.assign(this, props);
+    this.ee = new EventEmitter();
   }
   getState() {
     return pick(this, ['host', 'port', 'user', 'password', 'type', 'provider', 'ip', 'tags', 'uri', 'key']);
@@ -20,6 +24,7 @@ export class Proxy {
     // ].filter(Boolean).join('@');
   }
   getOptions() {
+    inc(this.stats, 'get');
     const proxy = {
       host: this.host,
       port: this.port,
@@ -37,6 +42,7 @@ export class Proxy {
     return getProxyAgent(this);
   }
   getProviderOptions() {
+    inc(this.stats, 'get');
     // lib
     if (this.provider === 'localhost') return {};
     const httpsAgent = getProxyAgent(this);
@@ -44,6 +50,23 @@ export class Proxy {
       httpsAgent,
       httpAgent: httpsAgent,
     };
+  }
+  emit(...args) {
+    this.ee.emit(...args);
+  }
+  on(...args) {
+    this.ee.on(...args);
+  }
+  stats = {};
+  feedback(props = {}) {
+    const { status = 'unknown', err, time } = props;
+    inc(this.stats, 'count');
+    inc(this.stats, 'time', time);
+    avg(this.stats, `statuses.${status}`, time);
+    if (err) {
+      avg(this.stats, `errors.${err}`, time);
+    }
+    this.emit('feedback', props, this);
   }
 }
 
