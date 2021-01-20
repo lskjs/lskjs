@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+
+### Bug Fixes
+
+* **worker:** fix RabbitWorker module v2 ([25a1a72](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/25a1a72f9ab23707e2e541b39fc56c5140a85fda))
+
+
+
+
+
 # [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
 
 

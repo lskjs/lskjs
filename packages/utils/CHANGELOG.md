@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+
+### Features
+
+* **utils:** add getCode and getText in Err ([80976c0](https://github.com/lskjs/ux/tree/master/packages/utils/commit/80976c008cf64827e7eb92cabd8b94676e2922d8))
+
+
+
+
+
 # [2.2.0-beta.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
 
 

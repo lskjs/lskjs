@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.2](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+
+### Bug Fixes
+
+* **worker:** fix RabbitWorker module v2 ([25a1a72](https://github.com/isuvorov/lib-starter-kit/commit/25a1a72f9ab23707e2e541b39fc56c5140a85fda))
+
+
+### Features
+
+* **proxy:** separate ProxyManager and ProxyStrategy ([0ab5010](https://github.com/isuvorov/lib-starter-kit/commit/0ab501098432995e828f35a970a34afd610dcc3d))
+* **utils:** add getCode and getText in Err ([80976c0](https://github.com/isuvorov/lib-starter-kit/commit/80976c008cf64827e7eb92cabd8b94676e2922d8))
+
+
+
+
+
 # [2.2.0-beta.1](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
 
 

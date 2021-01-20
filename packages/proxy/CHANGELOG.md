@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+
+### Features
+
+* **proxy:** separate ProxyManager and ProxyStrategy ([0ab5010](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/0ab501098432995e828f35a970a34afd610dcc3d))
+
+
+
+
+
 # [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
 
 **Note:** Version bump only for package @lskjs/proxy

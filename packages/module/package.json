@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "2.2.0-beta.1",
+  "version": "2.2.0-beta.2",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@lskjs/log2": "2.2.0-beta.1",
-    "@lskjs/utils": "2.2.0-beta.1",
+    "@lskjs/utils": "2.2.0-beta.2",
     "colors": "^1.4.0",
     "eventemitter3": "4.0.7"
   },
