@@ -67,7 +67,6 @@ export class RabbitWorker extends Module {
       }
     }
 
-
     if (!nack) {
       if (this.debug) console.error('err4', err); // eslint-disable-line no-console
       await job.ackError(err);
@@ -103,9 +102,7 @@ export class RabbitWorker extends Module {
     await job.nackError(err);
   }
   async process(params) {
-    const { Job } = this;
-    const job = new Job({ params, worker: this, app: this.app, rabbit: this.rabbit, config: this.config });
-    return job.run();
+    return this.Job.createAndRun({ params, worker: this, app: this.app, rabbit: this.rabbit, config: this.config });
   }
   async onConsume(msg) {
     this.stats.print({
@@ -128,10 +125,16 @@ export class RabbitWorker extends Module {
       await this.rabbit.nack(msg, { requeue: false });
       return;
     }
-    const { Job } = this;
-    const job = new Job({ msg, params, worker: this, app: this.app, rabbit: this.rabbit, config: this.config });
+    const job = await this.Job.create({
+      msg,
+      params,
+      worker: this,
+      app: this.app,
+      rabbit: this.rabbit,
+      config: this.config,
+    });
     try {
-      await job.run();
+      await job.__run();
       if (!job.status) {
         await job.ackSuccess();
       }
