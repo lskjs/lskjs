@@ -30,6 +30,10 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
     return instance;
   }
 
+  static async start<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
+    return this.createAndRun(...propsArray);
+  }
+
   setProp(key: string, value: any): void {
     set(this, key, value);
   }
@@ -75,6 +79,10 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       throw new Err('MODULE_INVALID_LIVECYCLE_INIT', `use ${name}.__init() instead ${name}.init()`, { data: { name } });
     }
     this.name = name;
+  }
+
+  async start(): Promise<void> {
+    await this.__run();
   }
 
   async __run(): Promise<void> {
