@@ -5,30 +5,66 @@ global.__DEV__ = true;
 const Bluebird = require('bluebird');
 const { request } = require('../build/request');
 
-const main = async () => {
-  await Bluebird.delay(1000)
+const req0 = async () => {
   console.log('---------------------');
-  console.log('request youtube-video');
+  let data1;
+  try {
+    (({ data } = await request({
+      url: 'https://myip.ru/index_small.php',
+      timeout: 5000,
+    })));
+    data1 = data
+  } catch (err) {
+    throw err.message || err;
+  }
 
-  const { data } = await request({
-    url: 'https://www.youtube.com/watch?v=_JTOcZ3Dvho',
-    timeout: 5000,
-  });
+  if (!String(data).includes('<td>2a00')) {
+    throw 'INVALID_RESPONSE';
+  }
+
+  console.log('---OK---OK---OK----OK---');
+}
+const req1 = async () => {
+  console.log('---------------------');
+  let data1;
+  try {
+    (({ data } = await request({
+      url: 'https://www.youtube.com/watch?v=_JTOcZ3Dvho',
+      timeout: 5000,
+    })));
+    data1 = data
+  } catch (err) {
+    throw err.message || err;
+  }
 
   if (!String(data).includes('"runs":[{"text":"Swimming now — Limassol, Cyprus"}]}')) throw 'INVALID_RESPONSE';
 
+  console.log('---OK---OK---OK----OK---');
+}
+
+const req2 = async () => {
   console.log('---------------------');
-  // console.log('---------------------');
-  // console.log('request youtube-channel');
+  let data1;
+  try {
+    (({ data } = await request({
+      url: 'https://www.youtube.com/channel/UClTDQYzyM59Oup8EW3Vzk0g',
+      timeout: 5000,
+    })));
+    data1 = data
+  } catch (err) {
+    throw err.message || err;
+  }
 
-  // const { data: data2 } = await request({
-  //   url: 'https://www.youtube.com/channel/UClTDQYzyM59Oup8EW3Vzk0g',
-  //   timeout: 10000,
-  // });
+  if (!String(data).includes('"shortBylineText":{"runs":[{"text":"Igor Suvorov",')) throw 'INVALID_RESPONSE';
 
-  // if (!String(data2).includes('"shortBylineText":{"runs":[{"text":"Igor Suvorov",')) throw 'INVALID_RESPONSE';
+  console.log('---OK---OK---OK----OK---');
+}
 
-  // console.log('---------------------');
+const main = async () => {
+  await Bluebird.delay(1000);
+  await req0();
+  await req1();
+  await req2();
 };
 
 main();

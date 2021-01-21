@@ -13,7 +13,7 @@ export class RabbitWorker extends Module {
   async init() {
     await super.init();
     this.stats = new Stats();
-    if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
+    // if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
     // this.queues = get(this, 'app.config.rabbit.queues');
     // this.exchanges = get(this, 'app.config.rabbit.exchanges');
     this.rabbit = await this.app.module('rabbit');

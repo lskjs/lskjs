@@ -23,10 +23,11 @@ if (process.env.PROXY) initProxyManager();
 // 'NETWORK_RECAPCHA',
 // 'NETWORK_TOO_MANY_REQUESTS',
 // 'PROXY_AUTH_REQUIRED',
+// 'NETWORK_BAN_CAPCHA',
+// 'FETCH_TIMEOUT',
 
 const wildcardNetworkErrors = ['PROXY_', 'NETWORK_'];
 const networkErrors = [
-  'FETCH_TIMEOUT',
   'ECONNRESET',
   'ECONNREFUSED',
   'TIMEOUT_RESPONSE_TEXT',
@@ -36,7 +37,6 @@ const networkErrors = [
   'EPROTO',
   'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
   'CERT_HAS_EXPIRED',
-  'NETWORK_BAN_CAPCHA',
   'EAI_AGAIN',
   'Z_BUF_ERROR',
   'ENETUNREACH',

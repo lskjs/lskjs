@@ -6,7 +6,7 @@ export function getProxyAgent({ type, host, port, user, password } = {}) {
     let params = {
       host,
       port,
-      secureProxy: true,
+      secureProxy: type === 'https',
     };
     if (user && password) {
       params = {
