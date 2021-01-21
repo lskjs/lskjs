@@ -71,9 +71,6 @@ export default class Err extends Error {
   getMessage(): string {
     return getMessage(this);
   }
-  getText(): string {
-    return getText(this);
-  }
   getCode(): string {
     return getCode(this);
   }
