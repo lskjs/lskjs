@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+
+### Bug Fixes
+
+* **utils:** ts error ([b54bed7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b54bed78119faf505bda3a53a8bccb9a392b296b))
+
+
+
+
+
 # [2.2.0-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
 
 

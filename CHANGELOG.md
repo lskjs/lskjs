@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.3](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+
+### Bug Fixes
+
+* **proxy,rabbit:** stable ([ac4294a](https://github.com/isuvorov/lib-starter-kit/commit/ac4294a6bbeb709c01ba46e70b28871ac2e2b441))
+* **utils:** ts error ([b54bed7](https://github.com/isuvorov/lib-starter-kit/commit/b54bed78119faf505bda3a53a8bccb9a392b296b))
+
+
+### Features
+
+* **module:** create start workflow ([60fc0ea](https://github.com/isuvorov/lib-starter-kit/commit/60fc0ea5c6900dc5fcf97a79e0a7ba22611035e8))
+
+
+
+
+
 # [2.2.0-beta.2](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
 
 

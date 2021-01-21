@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+
+### Features
+
+* **module:** create start workflow ([60fc0ea](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/60fc0ea5c6900dc5fcf97a79e0a7ba22611035e8))
+
+
+
+
+
 # [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
 
 **Note:** Version bump only for package @lskjs/module

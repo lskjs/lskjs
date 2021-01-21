@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "2.2.0-beta.2",
+  "version": "2.2.0-beta.3",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -37,12 +37,12 @@
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.2",
-    "@lskjs/utils": "2.2.0-beta.2",
+    "@lskjs/module": "2.2.0-beta.3",
+    "@lskjs/utils": "2.2.0-beta.3",
     "async-mutex": "0.2.6"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.2.0-beta.2",
+    "@lskjs/server-api": "2.2.0-beta.3",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
