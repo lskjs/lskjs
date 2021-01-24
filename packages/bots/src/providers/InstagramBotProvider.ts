@@ -1,5 +1,6 @@
-import Bluebird from 'bluebird';
 import { IgApiClient } from '@buzzguru/instagram-private-api';
+import Bluebird from 'bluebird';
+
 import BaseBotProvider from './BaseBotProvider';
 
 /**

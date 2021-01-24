@@ -1,8 +1,8 @@
 import Bluebird from 'bluebird';
-import { BaseBotPlugin } from './BaseBotPlugin';
+
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
 import { getPrivateLinkToMessage } from '../utils/private-linker';
-import { throws } from 'assert';
+import { BaseBotPlugin } from './BaseBotPlugin';
 
 export class DebugBotPlugin extends BaseBotPlugin {
   async runBot(bot: IBotProvider, name: string): Promise<void> {
@@ -27,8 +27,8 @@ export class DebugBotPlugin extends BaseBotPlugin {
         return bot.reply(ctx, `[pong] ${ms}ms`);
       }
       if (bot.isMessageCommands(ctx, ['v', 'powered', 'poweredby'])) {
-        if (!this.botsModule) this.log.warn('!botsModule')
-        const v = this.botsModule!.v || 0
+        if (!this.botsModule) this.log.warn('!botsModule');
+        const v = this.botsModule.v || 0;
         const text = `
 *BotKit* \`v${v}\` 
 Powerful starter kit for bot development on Telegram, Discord, Instagram, Twitter, Facebook, WhatsApp, Vkontakte
@@ -46,6 +46,7 @@ Made on @LSKjs with ❤️`;
       return null;
     });
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async runChatId(bot: IBotProvider, name: string): Promise<void> {
     bot.on('message', (ctx: IBotProviderMessageCtx) => {
       if (!bot.isMessageCommands(ctx, ['id', 'ид', 'chatid', 'чат'])) return;
@@ -53,9 +54,9 @@ Made on @LSKjs with ❤️`;
         ctx.reply(ctx.message.reply_message ? ctx.message.reply_message.from_id : ctx.message.from_id);
       }
       if (bot.provider === 'telegram') {
-        const renderMessage = (message) => `id: \`${message.message_id}\` [${bot.getMessageType(message)}]`;
-        const renderChat = (chat) => `chatId: \`${chat.id}\` ${chat.type === 'supergroup' ? '[supergroup]' : ''}`; // [${chat.title}]
-        const renderUser = (from) => `userId: \`${from.id}\` ${from.is_bot ? '[bot]' : ''}`;
+        const renderMessage = (message: any) => `id: \`${message.message_id}\` [${bot.getMessageType(message)}]`;
+        const renderChat = (chat: any) => `chatId: \`${chat.id}\` ${chat.type === 'supergroup' ? '[supergroup]' : ''}`; // [${chat.title}]
+        const renderUser = (from: any) => `userId: \`${from.id}\` ${from.is_bot ? '[bot]' : ''}`;
         const text = [
           '*Message*',
           renderMessage(ctx.message),
@@ -78,7 +79,17 @@ Made on @LSKjs with ❤️`;
     });
   }
   async runLogger(bot: IBotProvider, name: string): Promise<void> {
-    const { BotsEventModel, BotsTelegramMessageModel, BotsTelegramUserModel, BotsTelegramChatModel } = await this.botsModule.model(['BotsEventModel', 'BotsTelegramMessageModel', 'BotsTelegramUserModel', 'BotsTelegramChatModel']);
+    const {
+      BotsEventModel,
+      BotsTelegramMessageModel,
+      BotsTelegramUserModel,
+      BotsTelegramChatModel,
+    } = await this.botsModule.model([
+      'BotsEventModel',
+      'BotsTelegramMessageModel',
+      'BotsTelegramUserModel',
+      'BotsTelegramChatModel',
+    ]);
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
       bot.on(type, async (ctx) => {
@@ -86,7 +97,7 @@ Made on @LSKjs with ❤️`;
         if (provider === 'telegram' && type === 'callback_query') {
           eventData = ctx.update.callback_query;
           this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
-        } else  if (provider === 'telegram' && type === 'channel_post') {
+        } else if (provider === 'telegram' && type === 'channel_post') {
           eventData = ctx.update.channel_post;
           this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
         } else if (provider === 'telegram' && type === 'message') {
@@ -121,9 +132,7 @@ Made on @LSKjs with ❤️`;
           //   console.log(ctx);
         } else {
           this.log.warn(`<${this.name}/${name}> [${provider}/${type}] LOGGER NOT IMPLEMENTED`);
-          if (__DEV__) {
-            this.log.trace('[CTX]', ctx)
-          }
+          if (this.debug) this.log.trace('[CTX]', ctx);
         }
         await BotsEventModel.create({
           botId: bot.getBotId(),
@@ -151,8 +160,8 @@ Made on @LSKjs with ❤️`;
       }
       const chatId = bot.getMessageChatId(ctx);
       let removeMessageId: number | null = bot.getMessageId(ctx);
-      if (!chatId) throw '!chatId'
-      if (!removeMessageId) throw '!removeMessageId'
+      if (!chatId) throw '!chatId';
+      if (!removeMessageId) throw '!removeMessageId';
       let messageId = bot.getRepliedMessageId(ctx);
       if (!messageId) {
         messageId = removeMessageId;

@@ -1,6 +1,8 @@
-import { Client, ClientOptions } from 'whatsapp-web.js';
-import qrcode from 'qrcode-terminal';
 import get from 'lodash/get';
+// @ts-ignore
+import qrcode from 'qrcode-terminal';
+import { Client, ClientOptions } from 'whatsapp-web.js';
+
 import BaseBotProvider from './BaseBotProvider';
 
 /**
@@ -48,7 +50,7 @@ export default class WhatsappBotProvider extends BaseBotProvider {
     });
 
     this.on('authenticated', (session) => {
-      console.log('session', session);
+      this.log.trace('session', session);
     });
 
     this.on('auth_failure', () => {
@@ -62,11 +64,11 @@ export default class WhatsappBotProvider extends BaseBotProvider {
     return get(ctx, 'body');
   }
 
-  getMessageType(ctx) {
+  getMessageType(ctx: any) {
     return ctx.type;
   }
 
-  sendMessage(ctx, ...args) {
+  sendMessage(ctx: any, ...args: any[]): Promise<any> {
     return this.client.sendMessage(ctx.from, ...args);
   }
 }

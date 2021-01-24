@@ -3,7 +3,7 @@ import { IModule } from '@lskjs/module';
 
 export type IAnyKeyValue = {
   [key: string]: any;
-}
+};
 
 export type IAnyAsyncKeyValue = {
   [key: string]: () => Promise<any> | any;
@@ -15,7 +15,7 @@ export interface TelegramIBotProviderMessageCtx extends IBotProviderMessageCtx {
 }
 
 export type IBotProviderCommand = RegExp | string;
-export type IBotProviderPayload = object | string;
+export type IBotProviderPayload = Record<string, unknown> | string;
 export interface IBotProvider extends IModule {
   key?: string;
   provider: string;
@@ -115,7 +115,7 @@ export interface IBotProvider extends IModule {
    * @param {*} substr
    */
   isMessageStartsWith(message: IBotProviderMessageCtx, substr: IBotProviderCommand): boolean;
-  
+
   /**
    * Начинается ли сообщение со строки или регулярки
    * @param {*} message
@@ -156,12 +156,36 @@ export interface IBotProvider extends IModule {
    * @param {*} payload
    * @param {*} extra
    */
-  reply(ctx: IBotProviderMessageCtx, payload: IBotProviderPayload, extra?: object): Promise<object>;
-  sendMessage(ctx: IBotProviderMessageCtx, payload: IBotProviderPayload, extra?: object): Promise<object>;
-  sendSticker(ctx: IBotProviderMessageCtx, payload: IBotProviderPayload, extra?: object): Promise<object>;
-  sendAnimation(ctx: IBotProviderMessageCtx, payload: IBotProviderPayload, extra?: object): Promise<object>;
-  sendDocument(ctx: IBotProviderMessageCtx, payload: IBotProviderPayload, extra?: object): Promise<object>;
-  sendPhoto(ctx: IBotProviderMessageCtx, payload: IBotProviderPayload, extra?: object): Promise<object>;
+  reply(
+    ctx: IBotProviderMessageCtx,
+    payload: IBotProviderPayload,
+    extra?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
+  sendMessage(
+    ctx: IBotProviderMessageCtx,
+    payload: IBotProviderPayload,
+    extra?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
+  sendSticker(
+    ctx: IBotProviderMessageCtx,
+    payload: IBotProviderPayload,
+    extra?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
+  sendAnimation(
+    ctx: IBotProviderMessageCtx,
+    payload: IBotProviderPayload,
+    extra?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
+  sendDocument(
+    ctx: IBotProviderMessageCtx,
+    payload: IBotProviderPayload,
+    extra?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
+  sendPhoto(
+    ctx: IBotProviderMessageCtx,
+    payload: IBotProviderPayload,
+    extra?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
 }
 
 export interface IBotPlugin extends IModule {

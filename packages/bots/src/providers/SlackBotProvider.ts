@@ -1,10 +1,10 @@
 import { App as SlackApp } from '@slack/bolt';
+
 import BaseBotProvider from './BaseBotProvider';
 
 /**
  * Docs: https://api.slack.com/bot-users
  */
-
 
 type SlackBotConfigType = {
   token: string;

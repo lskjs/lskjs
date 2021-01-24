@@ -1,20 +1,19 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import some from 'lodash/some';
 import Module from '@lskjs/module';
-import assignProps from '@lskjs/utils/assignProps';
-import { IBotPlugin, IBotProvider, IBotProviderMessageCtx, IBotProviderCommand } from '../types';
+import some from 'lodash/some';
+
+import { IBotPlugin, IBotProvider, IBotProviderCommand, IBotProviderMessageCtx } from '../types';
 import emojiRegexp from '../utils/emojiRegexp';
 
 export abstract class BaseBotProvider extends Module implements IBotProvider {
   // abstract
   key?: string;
   provider: string;
-  botsModule;
+  botsModule: any;
   plugins: Array<IBotPlugin> = [];
   eventTypes: Array<string>;
   client: any;
-  config;
+  config: Record<string, any>;
 
   async init(): Promise<void> {
     await super.init();
@@ -100,22 +99,26 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
     throw new Error(`Method ${this.name}.getMessageText not implemented.`);
   }
 
-  sendMessage(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<object> {
+  sendMessage(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<Record<string, unknown>> {
     throw new Error(`Method ${this.name}.sendMessage not implemented.`);
   }
-  sendSticker(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<object> {
+  sendSticker(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<Record<string, unknown>> {
     throw new Error(`Method ${this.name}.sendSticker not implemented.`);
   }
-  sendAnimation(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<object> {
+  sendAnimation(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<Record<string, unknown>> {
     throw new Error(`Method ${this.name}.sendAnimation not implemented.`);
   }
-  sendDocument(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<object> {
+  sendDocument(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<Record<string, unknown>> {
     throw new Error(`Method ${this.name}.sendDocument not implemented.`);
   }
-  sendPhoto(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<object> {
+  sendPhoto(ctx: IBotProviderMessageCtx, ...args: any[]): Promise<Record<string, unknown>> {
     throw new Error(`Method ${this.name}.sendPhoto not implemented.`);
   }
-  reply(ctx: IBotProviderMessageCtx, payload: object, extra: object): Promise<object> {
+  reply(
+    ctx: IBotProviderMessageCtx,
+    payload: Record<string, unknown>,
+    extra: Record<string, unknown>,
+  ): Promise<Record<string, unknown>> {
     throw new Error(`Method ${this.name}.reply not implemented.`);
   }
 

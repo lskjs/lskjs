@@ -1,10 +1,11 @@
-import asyncMapValues from '@lskjs/utils/asyncMapValues';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Module from '@lskjs/module';
-import tryJSONparse from '@lskjs/utils/tryJSONparse';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
+
 import { IBotPlugin, IBotProvider } from '../types';
 
 export abstract class BaseBotPlugin extends Module implements IBotPlugin {
-  botsModule;
+  botsModule: any;
   providers: string[] = [];
   bots = {};
 

@@ -1,5 +1,7 @@
-import VkBot from 'node-vk-bot-api';
 import get from 'lodash/get';
+// @ts-ignore
+import VkBot from 'node-vk-bot-api';
+
 import BaseBotProvider from './BaseBotProvider';
 
 /**
@@ -30,21 +32,21 @@ export default class VkBotProvider extends BaseBotProvider {
     if (!this.client) return;
     await this.initEventEmitter();
     await new Promise((resolve, reject) => {
-      this.client.startPolling((err) => {
+      this.client.startPolling((err: any) => {
         this.log.error(err);
         if (err) return reject();
-        return resolve();
+        return resolve(this.client);
       });
     });
   }
 
   async initEventEmitter() {
-    this.client.on((...args) => {
+    this.client.on((...args: any[]) => {
       this.emit('message', ...args);
     });
   }
 
-  isMessageCommand(ctx, command) {
+  isMessageCommand(ctx: any, command: string) {
     return this.isMessageStartsWith(ctx, `/${command}`);
   }
 
@@ -53,13 +55,13 @@ export default class VkBotProvider extends BaseBotProvider {
     return get(ctx, 'message.text');
   }
 
-  getMessageType(ctx) {
+  getMessageType(ctx: any) {
     const type = get(ctx, 'message.type');
     if (type === 'message_new') return 'text';
     return null;
   }
 
-  sendMessage(ctx, ...args) {
+  sendMessage(ctx: any, ...args: any[]) {
     return this.client.sendMessage(get(ctx, 'message.from_id'), ...args);
   }
 }

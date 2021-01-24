@@ -1,6 +1,6 @@
-import Telegraf from 'telegraf';
 import get from 'lodash/get';
-import session from 'telegraf/session';
+import Telegraf, { session } from 'telegraf';
+
 import { IBotProviderMessageCtx } from '../types';
 import BaseBotProvider from './BaseBotProvider';
 
@@ -213,7 +213,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
         method = 'sendPoll';
       }
       // console.log(message.poll.options);
-      args = [message.poll.question, message.poll.options.map((option) => option.text)]; // TODO: xz
+      args = [message.poll.question, message.poll.options.map((option: any) => option.text)]; // TODO: xz
     } else if (type === 'location') {
       method = 'sendLocation';
       args = [message.location.latitude, message.location.longitude]; // TODO: xz
@@ -266,7 +266,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     } else {
       method = 'sendMessage';
     }
-    // this.log?.trace('ctx', method)
+    // this.log.trace('ctx', method)
     await this[method](ctx, payload, extra);
   }
 
@@ -298,16 +298,16 @@ export default class TelegramBotProvider extends BaseBotProvider {
       ...initExtra,
     };
     // console.log({extra})
-    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, extra).catch((err) => {
-      this.log?.error(err);
+    return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, extra).catch((err: any) => {
+      this.log.error(err);
       throw err;
     });
   }
   editMessage(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
     this.log.trace('editMessage');
     // console.log({extra})
-    return this.client.telegram.editMessage(this.getMessageId(ctx), payload, extra).catch((err) => {
-      this.log?.error(err);
+    return this.client.telegram.editMessage(this.getMessageId(ctx), payload, extra).catch((err: any) => {
+      this.log.error(err);
       throw err;
     });
   }
@@ -318,28 +318,28 @@ export default class TelegramBotProvider extends BaseBotProvider {
     // console.log({chatId, messageId})
     return this.client.telegram.deleteMessage(chatId, messageId);
   }
-  sendMessage(ctx, ...args) {
+  sendMessage(ctx: any, ...args: any[]) {
     this.log.trace('sendMessage');
     return this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
   }
-  sendSticker(ctx, ...args) {
+  sendSticker(ctx: any, ...args: any[]) {
     this.log.trace('sendSticker');
     return this.client.telegram.sendSticker(this.getMessageTargetId(ctx), ...args);
   }
-  sendAnimation(ctx, ...args) {
+  sendAnimation(ctx: any, ...args: any[]) {
     this.log.trace('sendAnimation');
     return this.client.telegram.sendAnimation(this.getMessageTargetId(ctx), ...args);
   }
-  sendDocument(ctx, ...args) {
+  sendDocument(ctx: any, ...args: any[]) {
     this.log.trace('sendDocument');
     return this.client.telegram.sendDocument(this.getMessageTargetId(ctx), ...args);
   }
-  sendPhoto(ctx, ...args) {
+  sendPhoto(ctx: any, ...args: any[]) {
     this.log.trace('sendPhoto');
     return this.client.telegram.sendPhoto(this.getMessageTargetId(ctx), ...args);
   }
 
-  isMessageLike(ctx) {
+  isMessageLike(ctx: any) {
     const message = this.getMessage(ctx);
     const likes = ['+', '👍', '➕'].map((a) => a.codePointAt(0));
 

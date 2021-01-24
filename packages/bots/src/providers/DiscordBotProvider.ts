@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import assignProps from '@lskjs/utils/assignProps';
+
 import BaseBotProvider from './BaseBotProvider';
 
 /**

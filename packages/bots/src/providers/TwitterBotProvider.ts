@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import Twitter from 'twitter-lite';
+
 import BaseBotProvider from './BaseBotProvider';
 
 /**
