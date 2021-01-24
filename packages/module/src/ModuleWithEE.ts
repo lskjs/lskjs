@@ -1,12 +1,13 @@
-import createEventEmitter from './utils/createEventEmitter';
-import { IModuleWithEE, IEventEmitter } from './types';
+import { EventEmitter } from 'events';
+
 import { ModuleWithLog } from './ModuleWithLog';
+import { IEventEmitter, IModuleWithEE } from './types';
 
 export abstract class ModuleWithEE extends ModuleWithLog implements IModuleWithEE {
   ee?: IEventEmitter;
 
   createEe(): IEventEmitter {
-    return createEventEmitter() as IEventEmitter;
+    return new EventEmitter() as IEventEmitter;
   }
 
   on(event: string, callback: (...args: any[]) => void): void {

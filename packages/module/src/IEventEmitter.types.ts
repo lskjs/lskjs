@@ -20,6 +20,3 @@ export interface IEventEmitter {
    */
   emit(event: string, ...args: any[]): void;
 }
-
-
-

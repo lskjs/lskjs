@@ -1,5 +1,5 @@
-import { IModuleWithСonfig } from './types';
 import { ModuleWithLifecycle } from './ModuleWithLifecycle';
+import { IModuleWithСonfig } from './types';
 
 export abstract class ModuleWithConfig extends ModuleWithLifecycle implements IModuleWithСonfig {
   config: { [key: string]: any };
@@ -11,7 +11,7 @@ export abstract class ModuleWithConfig extends ModuleWithLifecycle implements IM
     if (key === 'config') return super.setProp('__config', value);
     return super.setProp(key, value);
   }
-  async getConfig(): Promise<object> {
+  async getConfig(): Promise<Record<string, any>> {
     return {
       ...(this.config || {}),
       // ...this.defaultConfig,

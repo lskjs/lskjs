@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
 import { ILogger as ILog } from '@lskjs/log2';
-import { IEventEmitter } from './utils/createEventEmitter/IEventEmitter.types';
 
+import { IEventEmitter } from './IEventEmitter.types';
 
 export interface IModuleLifecycle {
   /**
@@ -23,8 +22,7 @@ export interface IModuleLifecycle {
    */
   stopStart?: Date;
   stopFinish?: Date;
-};
-
+}
 
 /**
  * ворфлоу работы модуля
@@ -46,7 +44,6 @@ export interface IModuleWithLifecycle {
    */
   setProps(...propsArray: IModuleProps[]): void;
 
-
   /**
    * init -- по сути асинхронный конструктор, следует вызывать сразу после new, и дожидаться перед использованием
    */
@@ -60,7 +57,7 @@ export interface IModuleWithLifecycle {
    */
   __run(): Promise<void>;
   run(): Promise<void>;
-  
+
   /**
    * stop -- grace остановка класса
    * выключаем все подключение и готовимся умирать
@@ -101,7 +98,7 @@ export interface IModuleWithSubmodules extends IModuleWithEE {
    * private
    */
   __initedModules?: IModuleKeyValue;
-  
+
   /**
    * private
    */
@@ -119,7 +116,7 @@ export interface IModuleWithApp extends IModuleWithSubmodules {
   app?: IApp;
 }
 
-export interface IModule extends IModuleWithApp {}
+export type IModule = IModuleWithApp;
 
 export type IModuleProp = any;
 export type IModuleProps = { [key: string]: IModuleProp } | IApp;
@@ -141,21 +138,20 @@ export type IModuleKeyValue = { [name: string]: IModule | null };
  * AsyncModule
  */
 
-export type IAsyncModuleProps = { 
+export type IAsyncModuleProps = {
   Module: any; // TODO: IModuleConstructor<T>
   [key: string]: IModuleProp;
 };
 
 export type IAsyncModule =
   | IModule
-  | any // TODO:  IModuleConstructor 
+  | any // TODO:  IModuleConstructor
   | IAsyncModuleProps
-  | Promise<IAsyncModule>; 
-  // | any[] // TODO: тут надо чтото придумать
-  // | () => IAsyncModuleProps;
+  | Promise<IAsyncModule>;
+// | any[] // TODO: тут надо чтото придумать
+// | () => IAsyncModuleProps;
 
 export type IAsyncModuleKeyValue = { [name: string]: IAsyncModule };
-
 
 /**
  * App
@@ -168,4 +164,4 @@ export interface IApp extends IModule {
   models: IAppModelKeyValue;
   model(name: string): Promise<IAppModel>;
   model(names: string[]): Promise<IAppModelKeyValue>;
-};
+}

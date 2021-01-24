@@ -1,5 +1,6 @@
 import { ILogger } from '@lskjs/log2';
-export * from './utils/createEventEmitter/IEventEmitter.types';
+
+export * from './IEventEmitter.types';
 export * from './IModule.types';
 // export * from './IAsyncModule.types';
 // export * from './IApp.types';
