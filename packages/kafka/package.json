@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.2.0-beta.3",
-    "@lskjs/utils": "2.0.0-beta.7",
+    "@lskjs/utils": "2.2.0-beta.3",
     "kafkajs": "1.15.0"
   },
   "devDependencies": {

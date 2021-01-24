@@ -13,7 +13,7 @@
     // ],
     "sourceMap": true,
     "allowJs": true,
-    // "checkJs": false,
+    "checkJs": false,
     // "jsx": "preserve",
     "jsx": "react",
     // "moduleResolution": "node",
@@ -26,12 +26,12 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "noUnusedLocals": false,
     // "emitDecoratorMetadata": true,
-    // "skipLibCheck": true
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": [

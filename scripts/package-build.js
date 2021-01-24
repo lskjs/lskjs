@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const glob = require('glob');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const shell = require('shelljs');
 
 const DIST = process.env.DIST || 'build';

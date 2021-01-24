@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.2.0-beta.3",
-    "@lskjs/utils": "2.0.0-beta.7",
+    "@lskjs/utils": "2.2.0-beta.3",
     "async-mutex": "0.2.6",
     "https-proxy-agent": "5.0.0",
     "socks-proxy-agent": "5.0.0"

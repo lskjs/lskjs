@@ -1,15 +1,16 @@
-import { Schema } from 'mongoose';
 import Module from '@lskjs/module';
 // @ts-ignore
 import importFn from '@lskjs/utils/importFn';
+import { Schema } from 'mongoose';
 
 export class ModelModule extends Module {
   Schema = Schema;
   Mode = null;
   mode = null;
   dbName = 'db';
-  async createModel(){ // : Promise<any> 
-    if (!this.dbName) throw '!this.dbName'
+  async createModel() {
+    // : Promise<any>
+    if (!this.dbName) throw '!this.dbName';
     const db = await this.app.module(this.dbName);
     if (!db.client) {
       this.log.error('!db.client');
@@ -27,7 +28,8 @@ export class ModelModule extends Module {
     schema.loadClass(Model);
     return db.client.connection.model(modelName, schema, collection);
   }
-  async run() { // : Promise<void>
+  async run() {
+    // : Promise<void>
     await super.run();
     this.model = await this.createModel();
   }

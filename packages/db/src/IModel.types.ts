@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
 import { IModule } from '@lskjs/module';
 
 export interface IModel {

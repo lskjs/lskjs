@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.2.0-beta.3",
-    "@lskjs/utils": "2.0.0-beta.7",
+    "@lskjs/utils": "2.2.0-beta.3",
     "amqplib": "0.6.0",
     "object-hash": "2.1.1"
   },

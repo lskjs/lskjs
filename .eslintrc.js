@@ -9,13 +9,15 @@ const rules = {
       ignoreComments: true,
     },
   ],
+  'prettier/prettier': 'warn',
   'class-methods-use-this': 'off',
   'global-require': 'off',
   'lines-between-class-members': 'off',
   'func-names': 'off',
   'no-underscore-dangle': 'off',
   'no-throw-literal': 'off',
-  //
+
+  // React
   'react/prop-types': 'error',
   'react/forbid-prop-types': 'error',
 
@@ -27,34 +29,13 @@ const rules = {
       extensions: ['.jsx', '.tsx'],
     },
   ],
-  'import/extensions': [
-    'error',
-    'ignorePackages',
-    {
-      js: 'never',
-      jsx: 'never',
-      ts: 'never',
-      tsx: 'never',
-    },
-  ],
-  // [
-  //   'error',
-  //   'ignorePackages',
-  //   {
-  //     js: 'never',
-  //     jsx: 'never',
-  //     ts: 'never',
-  //     tsx: 'never',
-  //   },
-  // ],
+
+  // imports
+  'import/extensions': ['error', 'ignorePackages', { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' }],
   'import/no-extraneous-dependencies': [
     'error',
     { devDependencies: false, optionalDependencies: true, peerDependencies: true },
   ],
-  // '@typescript-eslint/no-explicit-any': 'warn',
-
-  'prettier/prettier': 'warn',
-
   // its for orders
   'import/order': 'off',
   'sort-imports': 'off',
@@ -65,6 +46,23 @@ const rules = {
   '@typescript-eslint/no-unused-vars': ['error'],
   'no-use-before-define': 'off',
   '@typescript-eslint/no-use-before-define': ['error'],
+
+  // ts
+  '@typescript-eslint/ban-ts-comment': 'off',
+  '@typescript-eslint/no-explicit-any': 'off',
+  '@typescript-eslint/explicit-module-boundary-types': 'off',
+  '@typescript-eslint/no-var-requires': 'off',
+  '@typescript-eslint/ban-types': [
+    'error',
+    {
+      types: {
+        object: {
+          fixWith: 'Record<string, unknown>',
+        },
+      },
+      extendDefaults: true,
+    },
+  ],
 };
 
 module.exports = {

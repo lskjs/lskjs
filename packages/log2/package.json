@@ -38,6 +38,7 @@
     "@lskjs/debug-level": "0.3.2",
     "colors": "1.4.0"
   },
+  "devDependencies": {},
   "_type": "module",
   "bin": {
     "lsklog": "./bin/lsklog.js"
