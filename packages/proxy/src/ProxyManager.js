@@ -10,6 +10,7 @@ import Module from '@lskjs/module';
 import { Mutex } from './utils/Mutex';
 import { getProxyAgent } from './getProxyAgent';
 import { Proxy } from './Proxy';
+import { parseProxyParam } from './utils/parseProxyParam';
 import strategies from './strategies';
 
 export const filterFn = (proxy, filter) => {
@@ -31,6 +32,7 @@ export class ProxyManager extends Module {
     strategy: 'linear',
   };
   strategies = strategies;
+  static parseProxyParam = parseProxyParam;
   async init() {
     await super.init();
     const Strategy = this.strategies[this.config.strategy || 'random'] || this.strategies.random;
@@ -69,9 +71,9 @@ export class ProxyManager extends Module {
       ...axiosParams,
       timeout: 5000,
     };
-    this.log.debug('requestProxyHub >>', props.baseURL, props.params);
+    if (this.debug) this.log.debug('requestProxyHub >>', props.baseURL, props.params);
     const { data } = await axios(props);
-    this.log.trace('requestProxyHub <<', data.data.length);
+    if (this.debug) this.log.trace('requestProxyHub <<', data.data.length);
 
     return data;
   }
@@ -158,9 +160,11 @@ export class ProxyManager extends Module {
     if (this.interval) clearInterval(this.interval);
   }
   async stats() {
+    if (!(this.list && this.list.length)) return;
     const { proxies, ...stats } = this.getStats();
     const percent = (a, t) => (!t ? '??' : `${Math.floor((a / t) * 100)}%`);
     const infoRow = ({ count = 0, statuses, errors = {}, time }, name) => {
+      if (!count) return null;
       const success = get(statuses, 'success.count', 0);
       const successTime = get(statuses, 'success.value', 0);
       return [
@@ -172,8 +176,15 @@ export class ProxyManager extends Module {
         .filter(Boolean)
         .join(' ');
     };
-    const proxiesStr = map(proxies, infoRow).join('\n');
-    this.log.debug('[stats]', this.strategy.getStats(), `\n${infoRow(stats, 'SUM')}`, `\n${proxiesStr}`);
+    const proxiesStr = map(proxies, infoRow).filter(Boolean).join('\n');
+    const args = ['[stats]', this.strategy.getStats()];
+    if (stats.count) {
+      args.push(`\n${infoRow(stats, 'SUM')}`);
+      if (proxiesStr) {
+        args.push(`\n${proxiesStr}`);
+      }
+    }
+    this.log.debug(...args);
   }
 
   getStats() {
@@ -199,7 +210,7 @@ export class ProxyManager extends Module {
   async update() {
     if (this.config.stats) this.stats();
     this.list = await this.getProxyHubProxyList();
-    this.log.trace(`list updated summmary: ${this.list.length}`, countBy(this.list, 'provider'));
+    this.log.trace(`[update]`, `proxies: ${this.list.length}`, this.list.length ? countBy(this.list, 'provider') : '');
     await this.strategy.update();
   }
 

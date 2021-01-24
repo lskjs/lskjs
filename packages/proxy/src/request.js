@@ -8,7 +8,11 @@ import { ProxyManager } from './ProxyManager';
 let proxyManager;
 export const initProxyManager = async () => {
   proxyManager = await ProxyManager.createAndRun({
-    name: 'proxy',
+    config: {
+      log: {
+        name: 'proxy',
+      },
+    },
     ...parseProxyParam(process.env.PROXY),
     // __lifecycle: {
     //   create: new Date(),

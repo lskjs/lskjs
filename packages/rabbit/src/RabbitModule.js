@@ -87,7 +87,8 @@ export class RabbitModule extends Module {
     } else {
       queueName = queue.name || queue.queue;
     }
-    const res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
+    let res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
+    if (this.config.prefix) res = this.config.prefix + res;
     // console.log({ queueName, res });
     return res;
   }
