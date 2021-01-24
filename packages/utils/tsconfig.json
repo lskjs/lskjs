@@ -1,36 +1,25 @@
 {
   "compilerOptions": {
-    // "target": "es5",
     "target": "ES2019",
     "outDir": "build",
     "module": "commonjs",
-    // "lib": [
-    //   "es5",
-    //   "es6",
-    //   "es7",
-    //   "es2017",
-    //   "dom"
-    // ],
     "sourceMap": true,
     "allowJs": true,
     "checkJs": false,
-    // "jsx": "preserve",
     "jsx": "react",
-    // "moduleResolution": "node",
-    // "rootDirs": ["src"],
     "baseUrl": "src",
 
+    // 
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    // "emitDecoratorMetadata": true,
+    "noUnusedLocals": false,
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
@@ -41,16 +30,3 @@
     "scripts"
   ]
 }
-// {
-//   "compilerOptions": {
-//     "target": "ES2019",
-//     "module": "commonjs",
-//     "build": false,
-//     "strict": true,
-//     "esModuleInterop": true,
-//     "skipLibCheck": true
-//   },
-//   "include": [
-//     "src/**/*.ts"
-//   ],
-// }
