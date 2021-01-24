@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Features
+
+* **module:** improve ts types ([c080815](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/c08081503c287848d7c63a16c5991bd7d3836f83))
+
+
+
+
+
 # [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
 
 

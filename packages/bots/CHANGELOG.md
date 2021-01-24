@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Bug Fixes
+
+* **bots:** fix empty router bug and channel_post event ([4ab0ac8](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/4ab0ac8bc7d76f8e31770dedf816436ffa1e415a))
+
+
+### Features
+
+* **bots:** improve ts types ([11a1d8a](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/11a1d8a5e6a2e78370dfe7e350f4ae0f6d341ba2))
+
+
+
+
+
 # [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
 
 **Note:** Version bump only for package @lskjs/bots

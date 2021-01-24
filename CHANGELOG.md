@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Bug Fixes
+
+* **bots:** fix empty router bug and channel_post event ([4ab0ac8](https://github.com/isuvorov/lib-starter-kit/commit/4ab0ac8bc7d76f8e31770dedf816436ffa1e415a))
+
+
+### Features
+
+* **bots:** improve ts types ([11a1d8a](https://github.com/isuvorov/lib-starter-kit/commit/11a1d8a5e6a2e78370dfe7e350f4ae0f6d341ba2))
+* **module:** improve ts types ([c080815](https://github.com/isuvorov/lib-starter-kit/commit/c08081503c287848d7c63a16c5991bd7d3836f83))
+* update starter kit ([97b10d6](https://github.com/isuvorov/lib-starter-kit/commit/97b10d6f9485c389ccaab2c3be3bc67e67447b9c))
+* **proxy:** add iterate stratefy, fix some potential bugs ([ddc30cf](https://github.com/isuvorov/lib-starter-kit/commit/ddc30cfcfe38566d79a07464bc1aa4021e80343d))
+
+
+
+
+
 # [2.2.0-beta.3](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
 
 

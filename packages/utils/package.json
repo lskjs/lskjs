@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "2.2.0-beta.3",
+  "version": "2.2.0-beta.4",
   "description": "LSK ux subrepo: utils",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -35,7 +35,6 @@
     "jest": "../../node_modules/jest/bin/jest.js --coverage --verbose --color",
     "postinstall2": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/bluebird": "3.5.33",
     "@types/lodash": "4.14.167",

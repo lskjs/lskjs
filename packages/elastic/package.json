@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/elastic",
-  "version": "2.2.0-beta.3",
+  "version": "2.2.0-beta.4",
   "description": "LSK module for elastic.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.3",
+    "@lskjs/module": "2.2.0-beta.4",
     "elasticsearch": "16.7.2",
     "mongoose-elasticsearch-xp-async": "0.1.3"
   },

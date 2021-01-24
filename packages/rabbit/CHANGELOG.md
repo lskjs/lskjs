@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Features
+
+* **proxy:** add iterate stratefy, fix some potential bugs ([ddc30cf](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/commit/ddc30cfcfe38566d79a07464bc1aa4021e80343d))
+
+
+
+
+
 # [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
 
 **Note:** Version bump only for package @lskjs/rabbit

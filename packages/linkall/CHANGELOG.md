@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/linkall/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+**Note:** Version bump only for package @lskjs/linkall
+
+
+
+
+
 # [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/linkall/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
 
 **Note:** Version bump only for package @lskjs/linkall
