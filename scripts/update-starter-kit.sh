@@ -10,6 +10,7 @@ rsync -avEp --progress --ignore-existing ../lib-starter-kit/.lskjs.js $DIRTO && 
 rsync -avEp --progress --ignore-existing ../lib-starter-kit/README.md $DIRTO && \
 rsync -avEp --progress --ignore-existing ../lib-starter-kit/CHANGELOG.md $DIRTO && \
 rsync -avEp --progress --ignore-existing ../lib-starter-kit/.all-contributorsrc $DIRTO && \
+rsync -avEp --progress ../lib-starter-kit/scripts/assets $DIRTO/scripts/assets $D && \
 rsync -avEp --progress ../lib-starter-kit/.storybook $DIRTO && \
 echo "===========================================" && \
 echo "        All OK, now you need todo:" && \

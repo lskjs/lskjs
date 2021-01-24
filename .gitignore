@@ -1,6 +1,5 @@
 .cache
 .idea
-.vscode
 .ssh
 lerna-debug.log
 coverage
@@ -13,7 +12,7 @@ packages/release*
 storage
 .env*
 !.env.example.*
-
+**/___*
 packages/*/build
 packages/*/release*
 packages/*/storage

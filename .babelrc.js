@@ -20,10 +20,10 @@ module.exports = {
       },
     ],
     [
-      "emotion",
+      "@emotion",
       {
         "sourceMap": true,
-        "autoLabel": process.env.NODE_ENV !== 'production',
+        "autoLabel": 'dev-only',
         "labelFormat": "[filename]--[local]",
         "cssPropOptimization": true
       },
