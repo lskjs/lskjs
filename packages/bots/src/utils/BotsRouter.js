@@ -47,17 +47,18 @@ export class BotsRouter extends Module {
   }
 
   getPathFromEvent(ctx) {
+    const { session = {} } = ctx;
     if (this.bot.isMessageCallback(ctx)) {
-      delete ctx.session.nextRoute;
+      delete session.nextRoute;
       return this.parsePathnameAndQuery(this.bot.getMessageCallbackData(ctx));
     }
     if (this.bot.isMessageCommand(ctx)) {
-      delete ctx.session.nextRoute;
+      delete session.nextRoute;
       return this.parsePathnameAndQuery(this.bot.getMessageCommand(ctx));
     }
-    if (ctx.session.nextRoute) {
-      const { nextRoute } = ctx.session;
-      delete ctx.session.nextRoute;
+    if (session.nextRoute) {
+      const { nextRoute } = session;
+      delete session.nextRoute;
       if (typeof nextRoute === 'string') return this.parsePathnameAndQuery(nextRoute);
       return nextRoute;
     }
@@ -66,7 +67,7 @@ export class BotsRouter extends Module {
       if (!emojies.length) return null;
       return { path: `/${emojies.join('/')}` };
     }
-    return ctx.session.defaultRoute || null;
+    return session.defaultRoute || null;
   }
 
   // redirect(ctx, routerPath) {

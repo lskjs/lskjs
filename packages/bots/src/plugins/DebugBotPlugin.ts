@@ -2,6 +2,7 @@ import Bluebird from 'bluebird';
 import { BaseBotPlugin } from './BaseBotPlugin';
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
 import { getPrivateLinkToMessage } from '../utils/private-linker';
+import { throws } from 'assert';
 
 export class DebugBotPlugin extends BaseBotPlugin {
   async runBot(bot: IBotProvider, name: string): Promise<void> {
@@ -85,6 +86,9 @@ Made on @LSKjs with ❤️`;
         if (provider === 'telegram' && type === 'callback_query') {
           eventData = ctx.update.callback_query;
           this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
+        } else  if (provider === 'telegram' && type === 'channel_post') {
+          eventData = ctx.update.channel_post;
+          this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
         } else if (provider === 'telegram' && type === 'message') {
           eventData = ctx.message;
           this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
@@ -117,6 +121,9 @@ Made on @LSKjs with ❤️`;
           //   console.log(ctx);
         } else {
           this.log.warn(`<${this.name}/${name}> [${provider}/${type}] LOGGER NOT IMPLEMENTED`);
+          if (__DEV__) {
+            this.log.trace('[CTX]', ctx)
+          }
         }
         await BotsEventModel.create({
           botId: bot.getBotId(),
