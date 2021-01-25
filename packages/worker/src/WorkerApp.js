@@ -5,6 +5,10 @@ import importFn from '@lskjs/utils/importFn';
 
 export class WorkerApp extends Module {
   initedWorkers = {};
+  async model(...args) {
+    const modelsModule = await this.module('models');
+    return modelsModule.model(...args);
+  }
   setProp(name, value) {
     if (name === 'workers') return super.setProp('availableWorkers', value);
     return super.setProp(name, value);
@@ -41,7 +45,20 @@ export class WorkerApp extends Module {
     await this.runWorkers();
   }
   async started() {
-    this.log.info(`🐿 ${this.name} started`);
+    const timing = global.timing ? `[${global.timing()}ms]` : '';
+    const rawAddress = this.webserver && this.webserver.httpInstance.address();
+    let str;
+    if (rawAddress) {
+      const { port, address } = rawAddress;
+      str = `🎃 The ${this.name} is ready at http://${address === '::' ? '127.0.0.1' : address}:${port}/ ${timing}`;
+    } else {
+      str = `🎃 The ${this.name} is ready ${timing}`;
+    }
+    if (__DEV__) {
+      this.log.info(str);
+    } else {
+      this.log.warn(str);
+    }
   }
 }
 

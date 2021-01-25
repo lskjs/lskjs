@@ -167,9 +167,10 @@ export class RabbitWorker extends Module {
       this.log.warn('!Job', this.Job);
       return;
     }
-    const { queue: queueName } = await this.rabbit.queue(queue);
+    const { queue: queueName2 } = await this.rabbit.queue(queue);
+    const queueName = this.rabbit.getQueueName(queue);
     const options = { noAck: false };
-    this.log.info(`[${queueName}]`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
+    this.log.info(`consume(${queueName})`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
     this.rabbit.consume(queueName, this.onConsume.bind(this), options);
   }
   async stop() {
