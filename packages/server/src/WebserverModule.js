@@ -168,6 +168,7 @@ export default class WebserverModule extends Module {
     await new Promise((resolve) => {
       this.httpInstance = this.httpServer.listen(port, () => {
         resolve(this);
+        this.log.debug('started', { port });
         this.emit('started');
       });
     });

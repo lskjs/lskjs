@@ -49,10 +49,14 @@ export default class ServerApp extends Module {
 
   async started() {
     const timing = global.timing ? `[${global.timing()}ms]` : '';
-    const rawAddress = this.webserver.httpInstance.address();
-    if (!rawAddress) throw '!httpInstance.address';
-    const { port, address } = rawAddress;
-    const str = `🎃  The server is running at http://${address === '::' ? '127.0.0.1' : address}:${port}/ ${timing}`;
+    const rawAddress = this.webserver && this.webserver.httpInstance.address();
+    let str;
+    if (rawAddress) {
+      const { port, address } = rawAddress;
+      str = `🎃 The ${this.name} is ready at http://${address === '::' ? '127.0.0.1' : address}:${port}/ ${timing}`;
+    } else {
+      str = `🎃 The ${this.name} is ready ${timing}`;
+    }
     if (__DEV__) {
       this.log.info(str);
     } else {
