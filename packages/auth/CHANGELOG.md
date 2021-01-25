@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/auth/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+
+### Features
+
+* **auth:** make strategies are optional ([0c9a5ca](https://github.com/lskjs/lskjs/tree/master/packages/auth/commit/0c9a5ca6e78d7d6c49e4a1f0e1092956045d87cd))
+
+
+
+
+
 # [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/auth/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
 
 **Note:** Version bump only for package @lskjs/auth

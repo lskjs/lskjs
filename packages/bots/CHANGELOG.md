@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+
+### Bug Fixes
+
+* **bots:** v4 migration bugs ([66171a9](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/66171a93b34d2490bb70537f1e034f1d81afe9e1))
+
+
+### Features
+
+* **bots:** migrate to telegraf 4 ([dcb535a](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/dcb535a50af0c2e76b0102f34acea772ce38b25b))
+
+
+
+
+
 # [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
 
 

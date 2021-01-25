@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "2.2.0-beta.4",
+  "version": "2.2.0-beta.5",
   "description": "LSK module for send and receive emails.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -38,8 +38,8 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.4",
-    "@lskjs/utils": "2.2.0-beta.4",
+    "@lskjs/module": "2.2.0-beta.5",
+    "@lskjs/utils": "2.2.0-beta.5",
     "eventemitter3": "4.0.7",
     "imap": "0.8.19",
     "mailparser": "3.0.1",
@@ -48,8 +48,8 @@
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.2.0-beta.4",
-    "@lskjs/server-api": "2.2.0-beta.4",
+    "@lskjs/db": "2.2.0-beta.5",
+    "@lskjs/server-api": "2.2.0-beta.5",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
