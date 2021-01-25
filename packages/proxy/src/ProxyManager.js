@@ -178,14 +178,17 @@ export class ProxyManager extends Module {
         .join(' ');
     };
     const proxiesStr = map(proxies, infoRow).filter(Boolean).join('\n');
-    const args = ['[stats]', this.strategy.getStats()];
+    const stats2 = this.strategy.getStats();
+    const args = ['[stats]', stats2];
     if (stats.count) {
       args.push(`\n${infoRow(stats, 'SUM')}`);
       if (proxiesStr) {
         args.push(`\n${proxiesStr}`);
       }
     }
-    this.log.debug(...args);
+    if (Object.keys(stats2).length) {
+      this.log.debug(...args);
+    }
   }
 
   getStats() {
