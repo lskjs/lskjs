@@ -77,16 +77,20 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
     }
     if (this.__lifecycle.initStart) return;
     this.__lifecycleEvent('initStart');
-    await this.init().catch((err) => {
+    try {
+      await this.init();
+    } catch (err) {
       safeLog(this, 'fatal', 'init()', err);
       throw err;
-    });
+    }
     this.__lifecycleEvent('initFinish');
     if (this.onInit) {
-      await this.onInit().catch((err) => {
+      try {
+        await this.onInit();
+      } catch (err) {
         safeLog(this, 'fatal', 'onInit()', err);
         throw err;
-      });
+      }
     }
   }
 
@@ -125,10 +129,12 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       });
     }
     this.__lifecycleEvent('runStart');
-    await this.run().catch((err) => {
+    try {
+      await this.run();
+    } catch (err) {
       safeLog(this, 'fatal', 'run()', err);
       throw err;
-    });
+    }
     this.__lifecycleEvent('runFinish');
   }
 
@@ -150,10 +156,12 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       return;
     }
     this.__lifecycleEvent('stopStart');
-    await this.stop().catch((err) => {
+    try {
+      await this.stop();
+    } catch (err) {
       safeLog(this, 'fatal', 'stop()', err);
       throw err;
-    });
+    }
     this.__lifecycleEvent('stopFinish');
   }
 
