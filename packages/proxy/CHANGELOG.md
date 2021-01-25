@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Bug Fixes
+
+* **proxy:** hide empty stats ([58d375a](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/58d375a9017038971e88ed175567d56784811c9c))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/proxy

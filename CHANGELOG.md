@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.6](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Bug Fixes
+
+* **proxy:** hide empty stats ([58d375a](https://github.com/isuvorov/lib-starter-kit/commit/58d375a9017038971e88ed175567d56784811c9c))
+
+
+### Features
+
+* **model:** increase stability for working with module v1 ([1b492e4](https://github.com/isuvorov/lib-starter-kit/commit/1b492e40cdb9f74ce6d526a97f3f0b76afd5ff0b))
+* **server:** add more logs ([4521c0f](https://github.com/isuvorov/lib-starter-kit/commit/4521c0fbc472d9fb3571cd0757720436b659c8c2))
+* **worker:** add model and fix queue prefix names bug ([2c99ff2](https://github.com/isuvorov/lib-starter-kit/commit/2c99ff298b559080feb13d31ec201338de49d5e5))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 

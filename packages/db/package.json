@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/db",
-  "version": "2.2.0-beta.5",
+  "version": "2.2.0-beta.6",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.5",
+    "@lskjs/module": "2.2.0-beta.6",
     "@lskjs/utils": "2.2.0-beta.5",
     "mongoose": "5.11.11"
   },

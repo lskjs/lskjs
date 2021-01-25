@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Features
+
+* **model:** increase stability for working with module v1 ([1b492e4](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/1b492e40cdb9f74ce6d526a97f3f0b76afd5ff0b))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/module

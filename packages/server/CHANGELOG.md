@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Features
+
+* **server:** add more logs ([4521c0f](https://github.com/lskjs/lskjs/tree/master/packages/server/commit/4521c0fbc472d9fb3571cd0757720436b659c8c2))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/server

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Features
+
+* **worker:** add model and fix queue prefix names bug ([2c99ff2](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/2c99ff298b559080feb13d31ec201338de49d5e5))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/worker
