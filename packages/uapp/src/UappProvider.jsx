@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Provider as DefaultMobxProvider } from 'mobx-react';
-import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
 import DefaultLinkProvider from '@lskjs/link/LinkProvider';
+import { ThemeProvider as DefaultThemeProvider } from 'emotion-theming';
+import { Provider as DefaultMobxProvider } from 'mobx-react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const UappProvider = ({ uapp, children: rawChildren }) => {
   let children = <>{rawChildren}</>;
 
   const { MobxProvider } = UappProvider;
   let stores;
-  if (uapp && uapp.__provide) {
-    stores = uapp.__provide;
+  if (uapp && uapp.__providers) {
+    stores = uapp.__providers;
   } else {
     stores = {};
   }

@@ -1,26 +1,28 @@
 /* eslint-disable global-require */
-import map from 'lodash/map';
-import get from 'lodash/get';
-import cloneDeep from 'lodash/cloneDeep';
-import merge from 'lodash/merge';
-import forEach from 'lodash/forEach';
-import UniversalRouter from 'universal-router';
-import Promise from 'bluebird';
-import { observable } from 'mobx';
-import Favico from 'favico.js';
-import scrollTo from '@lskjs/scroll';
-import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
-import addClassToHtml from '@lskjs/utils/addClassToHtml';
-import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
 // import I18 from '@lskjs/i18';
 import Module from '@lskjs/module';
+import scrollTo from '@lskjs/scroll';
+import addClassToHtml from '@lskjs/utils/addClassToHtml';
 import autobind from '@lskjs/utils/autobind';
+import detectHtmlClasses from '@lskjs/utils/detectHtmlClasses';
 import e from '@lskjs/utils/e';
-import UappProvider from './UappProvider';
-import wrapApi from './wrapApi';
+import removeClassFromHtml from '@lskjs/utils/removeClassFromHtml';
+import axios from 'axios';
+import Promise from 'bluebird';
+import Favico from 'favico.js';
+import cloneDeep from 'lodash/cloneDeep';
+import forEach from 'lodash/forEach';
+import get from 'lodash/get';
+import map from 'lodash/map';
+import merge from 'lodash/merge';
+import { observable } from 'mobx';
+import UniversalRouter from 'universal-router';
+
+import { collectUniversalRoutes } from './collectUniversalRoutes';
 import DefaultPage from './Page';
 import defaultTheme from './theme';
-import { collectUniversalRoutes } from './collectUniversalRoutes';
+import UappProvider from './UappProvider';
+import wrapApi from './wrapApi';
 
 global.DEV = () => null;
 // Promise.config({ cancellation: true });
@@ -155,12 +157,14 @@ export default class Uapp extends Module {
   }
 
   getApi() {
-    const apiConfig = this.config ? this.config.api : {};
-    const url = get(apiConfig, 'url', __CLIENT__ ? '/' : `http://127.0.0.1:${this.app.config.port}`);
-    const api = new this.Api({
+    const { url, ...apiConfig } = (this.config && this.config.api) || {};
+    const baseURL = url || (__CLIENT__ ? '/' : `http://127.0.0.1:${this.app.config.port}`);
+    // const api = new this.Api({
+    const api = axios.create({
+      baseURL,
       ...apiConfig,
-      url,
     });
+    api.fetch = api;
     const { app } = this;
     if (__SERVER__ && app) {
       wrapApi({ api, app });
@@ -382,6 +386,7 @@ export default class Uapp extends Module {
   }
 
   async getPage() {
+    await this.__provide();
     // console.log('resetPage');
     const { Page } = this;
     if (!this.page) {
@@ -418,6 +423,7 @@ export default class Uapp extends Module {
           // req,
           page,
           req,
+          ...(await this.__provide()),
         });
         this.emit('resolve:finish', reqParams);
         resolve(res);
@@ -495,9 +501,9 @@ export default class Uapp extends Module {
     };
   }
 
-  __provide() {
+  async __provide() {
     if (this.__providers) return this.__providers;
-    this.__providers = this.provide();
+    this.__providers = await this.provide();
     return this.__providers;
   }
 }
