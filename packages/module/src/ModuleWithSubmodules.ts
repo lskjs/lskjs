@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import arrayToObject from '@lskjs/utils/arrayToObject';
-import get from 'lodash/get';
-import omit from 'lodash/omit';
-import mapValues from 'lodash/mapValues';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
+import { IAsyncModule } from 'IModule.types';
+import get from 'lodash/get';
+import map from 'lodash/map';
+import mapValues from 'lodash/mapValues';
+import omit from 'lodash/omit';
+
 // import { setProps } from './utils/setProps';
 import { ModuleWithEE } from './ModuleWithEE';
+import { IAsyncModuleKeyValue, IModule, IModuleKeyValue, IModuleWithSubmodules } from './types';
 import { createAsyncModule } from './utils/createAsyncModule';
-import { IModule, IModuleWithSubmodules, IModuleKeyValue, IAsyncModuleKeyValue } from './types';
 
 const filterWildcard = (array: string[], pattern: string): string[] =>
   array.filter((name) => name.startsWith(pattern.substr(0, pattern.length - 1)));
@@ -34,7 +37,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
   // app.webserver.i18
   // app.webserver.i18:I18Module
 
-  async getModuleConfig(name: string): Promise<object> {
+  async getModuleConfig(name: string): Promise<Record<string, unknown>> {
     const config = get(this.config, name, {});
     // const name = this.debug
     const ns = [this.log.ns, name].filter(Boolean).join('.');
@@ -50,7 +53,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     };
   }
 
-  async getModuleProps(name: string): Promise<object> {
+  async getModuleProps(name: string): Promise<Record<string, unknown>> {
     return {
       // app: this.app || this,
       __parent: this,
@@ -70,7 +73,10 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     return Boolean(this.__availableModules[name]);
   }
 
-  async module(nameOrNames: string | string[], { run: isRun = true, throw: throwIfNotFound = true } = {}): Promise<IModule | IModuleKeyValue | null> {
+  async module(
+    nameOrNames: string | string[],
+    { run: isRun = true, throw: throwIfNotFound = true } = {},
+  ): Promise<IModule | IModuleKeyValue | null> {
     if (!this.__lifecycle.initStart)
       throw new Err('MODULE_INVALID_WORKFLOW_INIT', 'please init module first before .module()');
     if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
@@ -96,7 +102,15 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       const moduleProps = await this.getModuleProps(name);
       const instance = await createAsyncModule(availableModule, moduleProps);
       this.__initedModules[name] = instance;
-      if (isRun) await instance.__run();
+      if (isRun) {
+        if (instance.start) {
+          await instance.start();
+        } else if (instance.__run) {
+          await instance.__run();
+        } else if (instance.run) {
+          await instance.run();
+        }
+      }
       return instance;
     } catch (err) {
       this.log.fatal(`module(${name})`, err);
@@ -114,15 +128,33 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     if (this.debug && this.log && Object.keys(this.__availableModules).length) {
       this.log.debug('modules', Object.keys(this.__availableModules));
     }
+    const autorunModules = map(this.__availableModules, (asyncModule: IAsyncModule, name: string): string | null => {
+      // eslint-disable-next-line no-param-reassign
+      if (!Array.isArray(asyncModule)) asyncModule = [asyncModule];
+      let autorun = false;
+      asyncModule.forEach((props: any) => {
+        if (props && props.autorun) autorun = true;
+      });
+      if (autorun) return name;
+      return null;
+    }).filter(Boolean) as string[];
+
+    if (autorunModules && autorunModules.length) {
+      this.log.debug('modules autorun', autorunModules);
+      await this.module(autorunModules);
+    }
   }
 
   private async __runModules(): Promise<void> {
     await asyncMapValues(this.__initedModules, (m: IModule) => {
-      const isNeedRun =
-        this.__lifecycle.initFinish &&
-        (!this.__lifecycle.runStart || (this.__lifecycle.runStart && this.__lifecycle.stopFinish));
+      let isNeedRun;
+      if (!this.__lifecycle.initFinish) {
+        isNeedRun = !!this.__lifecycle.autorun;
+      } else {
+        isNeedRun = !this.__lifecycle.runStart || (this.__lifecycle.runStart && this.__lifecycle.stopFinish);
+      }
       if (!isNeedRun) return;
-      return m.__run();
+      return m.start();
     });
   }
 

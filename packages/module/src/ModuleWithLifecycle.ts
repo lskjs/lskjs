@@ -1,6 +1,7 @@
-import set from 'lodash/set';
 import Err from '@lskjs/utils/Err';
-import { IModuleLifecycle, IModuleWithLifecycle, IModuleConstructor, IModuleProps, IModule } from './types';
+import set from 'lodash/set';
+
+import { IModule, IModuleConstructor, IModuleLifecycle, IModuleProps, IModuleWithLifecycle } from './types';
 
 // @ts-ignore
 const STRICT_DEBUG = __DEV__;
@@ -20,21 +21,35 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   static async create<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
     const instance = new this();
     instance.setProps(...propsArray, { '__lifecycle.create': new Date() });
-    await instance.__init();
+    if (instance.__init) {
+      await instance.__init();
+    } else if (instance.init) {
+      await instance.init();
+    }
     return instance;
   }
 
   static async createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
-    const instance = await this.create(...propsArray);
-    await instance.__run();
-    return instance;
+    return this.start(...propsArray);
   }
 
   static async start<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
-    return this.createAndRun(...propsArray);
+    const instance = await this.create(...propsArray);
+    if (instance.start) {
+      await instance.start();
+    } else if (instance.__run) {
+      await instance.__run();
+    } else if (instance.run) {
+      await instance.run();
+    }
+    return instance;
   }
 
   setProp(key: string, value: any): void {
+    if (key === 'autorun') {
+      set(this, '__lifecycle.autorun', value);
+      return;
+    }
     set(this, key, value);
   }
 
@@ -50,12 +65,13 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
     this.__lifecycle[name] = value;
   }
 
+  async onInit(): Promise<void> {}
   async __init(): Promise<void> {
     const { name } = this.constructor;
     if (!this.__lifecycle.create) {
       throw new Err(
         'MODULE_INVALID_LIVECYCLE_NEW',
-        `use ${name}.create(props) or ${name}.createAndRun(props) instead new ${name}(props) and init() and run()`,
+        `use ${name}.create(props) or ${name}.start(props) instead new ${name}(props) and init() and run()`,
         { data: { name } },
       );
     }
@@ -66,6 +82,12 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       throw err;
     });
     this.__lifecycleEvent('initFinish');
+    if (this.onInit) {
+      await this.onInit().catch((err) => {
+        safeLog(this, 'fatal', 'onInit()', err);
+        throw err;
+      });
+    }
   }
 
   async init(): Promise<void> {
@@ -111,10 +133,11 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   }
 
   async run(): Promise<void> {
-    if (!this.__lifecycle.runStart)
+    if (!this.__lifecycle.runStart) {
       throw new Err('MODULE_INVALID_LIVECYCLE_RUN', 'use module.__run() instead module.run()', {
         data: { name: this.name },
       });
+    }
   }
 
   async __stop(): Promise<void> {

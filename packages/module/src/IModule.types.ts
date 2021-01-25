@@ -22,6 +22,11 @@ export interface IModuleLifecycle {
    */
   stopStart?: Date;
   stopFinish?: Date;
+
+  /**
+   * Автоматический запуск модуля родителем
+   */
+  autorun?: boolean;
 }
 
 /**
@@ -55,6 +60,7 @@ export interface IModuleWithLifecycle {
    * если у класса не сделан init, он сделает
    * оперируем с переменными, запросы не делаем
    */
+  start(): Promise<void>;
   __run(): Promise<void>;
   run(): Promise<void>;
 
@@ -130,6 +136,7 @@ export interface IModuleConstructor<T extends IModule> {
    * создать инстанс, проинициализировать и запустить
    */
   createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
+  start<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
   new (): T;
 }
 export type IModuleKeyValue = { [name: string]: IModule | null };
