@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.7](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
+
+
+### Features
+
+* **module:** improve stabilty while lifecycle ([8673019](https://github.com/isuvorov/lib-starter-kit/commit/8673019c524401a426975a2f50be290ce54bb92d))
+
+
+
+
+
 # [2.2.0-beta.6](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
 
 
