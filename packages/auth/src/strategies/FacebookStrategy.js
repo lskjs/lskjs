@@ -1,7 +1,8 @@
-import Facebook from 'passport-facebook';
 // import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 import get from 'lodash/get';
+import Facebook from 'passport-facebook';
+
 import BaseStrategy from './BaseStrategy';
 
 export default class FacebookStrategy extends BaseStrategy {
@@ -16,8 +17,8 @@ export default class FacebookStrategy extends BaseStrategy {
   getInfo() {
     return {
       ...super.getInfo(),
-      settings: 'https://developers.facebook.com/apps/' + this.config.clientId + '/dashboard/',
-    }
+      settings: `https://developers.facebook.com/apps/${this.config.clientId}/dashboard/`,
+    };
   }
 
   async getProfile(passport) {  //eslint-disable-line

@@ -1,13 +1,17 @@
 /* eslint-disable global-require */
-import get from 'lodash/get';
-import forEach from 'lodash/forEach';
 import Module from '@lskjs/module';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import importFn from '@lskjs/utils/importFn';
+import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import { Passport } from 'passport';
+
+import strategies from './strategies';
 import createHelpers from './utils/createHelpers';
 
 export default class AuthServerModule extends Module {
   getStrategies() {
-    return require('./strategies').default(this);
+    return strategies;
   }
   getPassportStrategy(passport) {
     const strategy = this.strategies[passport.provider];
@@ -43,9 +47,9 @@ export default class AuthServerModule extends Module {
     const providers = get(this, 'config.providers', {});
     // console.log({ providers });
 
-    forEach(providers, (config) => {
+    await asyncMapValues(providers, async (config) => {
       const { provider, type, ...strategyConfig } = config;
-      const StrategyProvider = this.strategyProviders[type];
+      const StrategyProvider = await importFn(this.strategyProviders[type]);
       if (!StrategyProvider) return;
       const strategy = new StrategyProvider({
         parent: this,

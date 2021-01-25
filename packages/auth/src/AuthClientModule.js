@@ -1,6 +1,7 @@
+import Module from '@lskjs/module';
 import cookie from 'js-cookie';
 import get from 'lodash/get';
-import Module from '@lskjs/module';
+
 import LocalStorage from './Storage/LocalStorage';
 import MemoryStorage from './Storage/MemoryStorage';
 
