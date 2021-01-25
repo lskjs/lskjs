@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+
 import Rlog from './Rlog';
 
 export default class RlogModule extends Module {

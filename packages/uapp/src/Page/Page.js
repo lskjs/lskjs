@@ -1,10 +1,10 @@
-import React from 'react';
-import merge from 'lodash/merge';
-import Promise from 'bluebird';
-import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
+import createLogger from '@lskjs/utils/createLogger';
 import Err from '@lskjs/utils/Err';
+import Promise from 'bluebird';
+import merge from 'lodash/merge';
 import { observable } from 'mobx';
+import React from 'react';
 // import Loading from '@lskjs/general/Loading';
 
 // const DEBUG = __DEV__ && false;

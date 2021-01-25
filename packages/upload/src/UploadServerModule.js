@@ -1,9 +1,10 @@
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import multer from 'multer';
 import fs from 'fs';
-import nodepath from 'path';
 import random from 'lodash/random';
+import multer from 'multer';
+import nodepath from 'path';
+
 import mimetypes from './mimetypes';
 
 export default class UploadServerModule extends Module {

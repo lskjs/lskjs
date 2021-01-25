@@ -1,5 +1,6 @@
 /* global test expect */
 import get from 'lodash/get';
+
 import getPagination, { getPages } from '../utils/getPagination';
 
 test('getPages({ page: 5, max: 10, size: 5 })', () => {

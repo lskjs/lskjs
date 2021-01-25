@@ -1,7 +1,7 @@
-import isFunction from './isFunction';
 import isClass from './isClass';
 import isCollection from './isCollection';
 import isEmpty from './isEmpty';
+import isFunction from './isFunction';
 
 export default (v) => ({
   isArray: Array.isArray(v),

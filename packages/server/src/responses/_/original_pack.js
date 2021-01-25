@@ -1,8 +1,8 @@
-import omit from 'lodash/omit';
 import get from 'lodash/get';
 import isPlainObject from 'lodash/isPlainObject';
+import omit from 'lodash/omit';
 
-export default ctx =>
+export default (ctx) =>
   function pack(raw = {}, info) {
     const res = this;
     const config = get(ctx, 'config.response', __DEV__ ? { log: false, debug: true } : {});

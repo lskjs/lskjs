@@ -1,4 +1,5 @@
 import sample from 'lodash/sample';
+
 import { ProxyStrategy } from './ProxyStrategy';
 
 export class RandomProxyStrategy extends ProxyStrategy {

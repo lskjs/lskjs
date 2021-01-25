@@ -1,9 +1,9 @@
-import axios from 'axios';
 import Err from '@lskjs/utils/Err';
-
 import retry from '@lskjs/utils/retry';
-import { parseProxyParam } from './utils/parseProxyParam';
+import axios from 'axios';
+
 import { ProxyManager } from './ProxyManager';
+import { parseProxyParam } from './utils/parseProxyParam';
 
 let proxyManager;
 export const initProxyManager = async () => {

@@ -1,12 +1,13 @@
-import { observable, action } from 'mobx';
 import findIndex from 'lodash/findIndex';
+import omit from 'lodash/omit';
 import pick from 'lodash/pick';
 import unionBy from 'lodash/unionBy';
-import omit from 'lodash/omit';
+import { action, observable } from 'mobx';
+
 import Store from './Store';
 
 export default class SelectStore extends Store {
-  idKey = '_id'
+  idKey = '_id';
   @observable.shallow items = []; // Массив объектов
 
   getCount() {
@@ -38,9 +39,9 @@ export default class SelectStore extends Store {
 
   globalIsChecked() {
     return (
-      this.items.length > 0
-      && this.items.length >= this.listStore.items.length
-      && unionBy(this.items, this.listStore.items, this.idKey).length === this.items.length
+      this.items.length > 0 &&
+      this.items.length >= this.listStore.items.length &&
+      unionBy(this.items, this.listStore.items, this.idKey).length === this.items.length
     );
   }
 

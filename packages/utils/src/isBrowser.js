@@ -1,3 +1,1 @@
-export default (name) => {
-  return document.documentElement.className.includes(name);
-}
+export default (name) => document.documentElement.className.includes(name);

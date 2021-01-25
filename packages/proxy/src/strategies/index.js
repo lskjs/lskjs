@@ -1,6 +1,6 @@
 import { IterateProxyStrategy } from './IterateProxyStrategy';
-import { RandomProxyStrategy } from './RandomProxyStrategy';
 import { LinearProxyStrategy } from './LinearProxyStrategy';
+import { RandomProxyStrategy } from './RandomProxyStrategy';
 
 export default {
   iterate: IterateProxyStrategy,

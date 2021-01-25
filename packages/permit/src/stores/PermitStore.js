@@ -1,8 +1,8 @@
 /* eslint-disable max-classes-per-file */
-import { observable } from 'mobx';
-import set from 'lodash/set';
-import CrudStore from '@lskjs/mobx/stores/CrudStore';
 import CrudApi from '@lskjs/mobx/stores/CrudApi';
+import CrudStore from '@lskjs/mobx/stores/CrudStore';
+import set from 'lodash/set';
+import { observable } from 'mobx';
 
 export class PermitApi extends CrudApi {
   base = '/api/permit';
@@ -21,7 +21,7 @@ export class PermitApi extends CrudApi {
   }
 }
 
-export default uapp =>
+export default (uapp) =>
   class UserStore extends CrudStore {
     static api = new PermitApi({ uapp });
 

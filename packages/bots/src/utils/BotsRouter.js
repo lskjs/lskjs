@@ -1,8 +1,8 @@
-import UniversalRouter from 'universal-router';
 import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
-import url from 'url';
 import qs from 'querystring';
+import UniversalRouter from 'universal-router';
+import url from 'url';
 
 export class BotsRouter extends Module {
   // debug = true;

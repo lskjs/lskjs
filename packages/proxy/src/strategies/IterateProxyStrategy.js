@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+
 import { ProxyStrategy } from './ProxyStrategy';
 
 export class IterateProxyStrategy extends ProxyStrategy {

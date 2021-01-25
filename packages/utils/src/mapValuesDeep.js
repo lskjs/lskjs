@@ -1,6 +1,6 @@
+import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
-import isArray from 'lodash/isArray';
 
 const DEBUG = false;
 

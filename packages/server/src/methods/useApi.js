@@ -1,7 +1,8 @@
 import flattenKeys from '@lskjs/utils/flattenKeys';
-import routesTreeToExpressRouter from './runRoutes/routesTreeToExpressRouter';
+
 import extractApi from './runRoutes/extractApi';
 import getRoutesTree from './runRoutes/getRoutesTree';
+import routesTreeToExpressRouter from './runRoutes/routesTreeToExpressRouter';
 
 export default async function (Api) {
   if (!Api) throw '!Api';

@@ -1,9 +1,9 @@
-export default (ctx) => {
-  return function (socket, next) {
+export default (ctx) =>
+  function (socket, next) {
     // console.log('socket.middleware parseUser');
     const { query } = socket.handshake;
     const req = socket.request;
-    const res = req.res;
+    const { res } = req;
 
     if (!req.query) {
       req.query = {};
@@ -20,4 +20,3 @@ export default (ctx) => {
     });
     // });
   };
-};

@@ -1,7 +1,7 @@
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import importFn from '@lskjs/utils/importFn';
 import Err from '@lskjs/utils/Err';
+import importFn from '@lskjs/utils/importFn';
 
 export class WorkerApp extends Module {
   initedWorkers = {};

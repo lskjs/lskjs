@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+
 import I18Instance from './I18Instance';
 
 export class I18Module extends Module {

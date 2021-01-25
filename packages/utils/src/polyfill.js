@@ -9,7 +9,7 @@ global.timing = () => Date.now() - global.startedAt;
 // if (!global.fetch) global.fetch = require('isomorphic-fetch');
 
 if (typeof process !== 'undefined') {
-  process.on('uncaughtException', err => {
+  process.on('uncaughtException', (err) => {
     console.error("===> process.on('uncaughtException') <==="); // eslint-disable-line no-console
     console.error(err); // eslint-disable-line no-console
     console.error("^^^^ process.on('uncaughtException') ^^^^"); // eslint-disable-line no-console

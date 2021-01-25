@@ -1,7 +1,8 @@
 /* global test expect */
-import pickBy from 'lodash/pickBy';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
+import pickBy from 'lodash/pickBy';
+
 import asyncMapValuesDeep from '../src/asyncMapValuesDeep';
 
 test('asyncMapValuesDeep Boolean', async () => {

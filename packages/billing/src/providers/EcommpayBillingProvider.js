@@ -4,7 +4,6 @@ import BillingProvider from './BillingProvider';
 
 export default class EcommpayBillingProvider extends BillingProvider {}
 
-
 // async initEcommpoy(config = {}) {
 //   return {
 //     config,

@@ -1,7 +1,7 @@
-import Bluebird from 'bluebird';
-import isPlainObject from 'lodash/isPlainObject';
-import isArray from 'lodash/isArray';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import Bluebird from 'bluebird';
+import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
 
 const DEBUG = false;
 

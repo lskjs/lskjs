@@ -5,16 +5,18 @@ const consolevoid = { log() {} };
 const exp = {};
 // #endregion
 // #region Types and Constants
-let DEFAULT_SENDER = function (req, res, val) { res.send(val); },
-  SHORTCUTS_METHODS = ['all', 'get', 'post', 'put', 'delete', 'patch', 'options', 'head'];
+const DEFAULT_SENDER = function (req, res, val) {
+  res.send(val);
+};
+const SHORTCUTS_METHODS = ['all', 'get', 'post', 'put', 'delete', 'patch', 'options', 'head'];
 // #endregion
 // #region Public
 function AsyncRouter(options) {
-  let sender = getSender(options),
-    innerRouter = express.Router(options),
-    asyncRouter = function () {
-      return innerRouter.apply(this, arguments);
-    };
+  const sender = getSender(options);
+  const innerRouter = express.Router(options);
+  const asyncRouter = function () {
+    return innerRouter.apply(this, arguments);
+  };
   asyncRouter.__asyncRouter = true;
   asyncRouter.useRouter = function () {
     const r = express.Router();
@@ -45,7 +47,9 @@ function AsyncRouter(options) {
       // }
     }
 
-    innerRouter.use(...args.map((arg) => { return typeof arg === 'function' && !arg.__asyncRouter ? wrapHandlerOrErrorHandler(arg) : arg; }));
+    innerRouter.use(
+      ...args.map((arg) => (typeof arg === 'function' && !arg.__asyncRouter ? wrapHandlerOrErrorHandler(arg) : arg)),
+    );
     return this;
   };
   return asyncRouter;
@@ -61,8 +65,8 @@ function getSender(options) {
   if (!options) {
     return DEFAULT_SENDER;
   }
-  let send = options.send,
-    sender = options.sender;
+  const { send } = options;
+  const { sender } = options;
   delete options.send;
   delete options.sender;
   if (send !== false) {
@@ -87,8 +91,8 @@ function wrapMatcher(router, routerMatcher, sender) {
     for (let _i = 1; _i < arguments.length; _i++) {
       args[_i - 1] = arguments[_i];
     }
-    let last = args.length - 1,
-      mappedArgs = args.map((a, i) => { return i === last ? wrapHandler(a, sender) : wrapHandlerOrErrorHandler(a); });
+    const last = args.length - 1;
+    const mappedArgs = args.map((a, i) => (i === last ? wrapHandler(a, sender) : wrapHandlerOrErrorHandler(a)));
     routerMatcher.apply(router, [name].concat(mappedArgs));
     return _this;
   };
@@ -160,20 +164,23 @@ function toCallback(thenable, next, req, res, end) {
 
     thenable = thenable.then(end);
   }
-  thenable.then(() => {
-    consolevoid.log('tc 3 = !!next , !end , !res.headersSent', !!next, !end, !res.headersSent);
-    // consolevoid.log(end);
-    // next()
-    if (next && !end && !res.headersSent) {
-      next();
-    }
-  }, (err) => {
-    consolevoid.log('tc 4');
-    if (typeof err === 'string') {
-      err = new Error(err);
-    }
-    next(err);
-  });
+  thenable.then(
+    () => {
+      consolevoid.log('tc 3 = !!next , !end , !res.headersSent', !!next, !end, !res.headersSent);
+      // consolevoid.log(end);
+      // next()
+      if (next && !end && !res.headersSent) {
+        next();
+      }
+    },
+    (err) => {
+      consolevoid.log('tc 4');
+      if (typeof err === 'string') {
+        err = new Error(err);
+      }
+      next(err);
+    },
+  );
 }
 function once(fn) {
   consolevoid.log('once');

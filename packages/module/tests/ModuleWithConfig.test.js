@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 /* global test expect */
 import merge from 'lodash/merge';
+
 import Module from '../src/2';
 
 test('Case #0 — empty config', async () => {

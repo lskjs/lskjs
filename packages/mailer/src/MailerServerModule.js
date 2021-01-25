@@ -1,9 +1,10 @@
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import get from 'lodash/get';
 import Bluebird from 'bluebird';
+import get from 'lodash/get';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
+
 import defaultTemplates from './templates';
 
 export default class MailerServerModule extends Module {

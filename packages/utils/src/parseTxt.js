@@ -1,11 +1,5 @@
-import grid2objects from './grid2objects';
 import csv2grid from './csv2grid';
+import grid2objects from './grid2objects';
 import txtToArray from './txtToArray';
 
-export default (str = '') => {
-  return grid2objects(
-    csv2grid(
-      txtToArray(str || ''),
-    ),
-  );
-};
+export default (str = '') => grid2objects(csv2grid(txtToArray(str || '')));

@@ -1,12 +1,13 @@
-import Bluebird from 'bluebird';
-import get from 'lodash/get';
-import omit from 'lodash/omit';
-import amqp from 'amqplib';
-import hash from 'object-hash';
-import EventEmitter from 'events';
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
+import amqp from 'amqplib';
+import Bluebird from 'bluebird';
+import EventEmitter from 'events';
+import get from 'lodash/get';
+import omit from 'lodash/omit';
+import hash from 'object-hash';
+
 import startGoProc from './startGoProc';
 
 const serializeData = (data = {}) => {

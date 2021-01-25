@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-constant-condition */
-import Bluebird from 'bluebird';
 import { Mutex as BaseMutex } from 'async-mutex';
+import Bluebird from 'bluebird';
 
 export class Mutex extends BaseMutex {
   async isAsyncLocked(timeout = 1000, interval = 100) {

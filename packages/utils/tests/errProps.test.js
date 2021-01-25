@@ -1,6 +1,6 @@
 /* global test expect */
-import errProps from '../src/errProps';
 import Err from '../src/Err';
+import errProps from '../src/errProps';
 
 test('errProps({ a: 123 })', () => {
   const input = { a: 123 };

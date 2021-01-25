@@ -2,6 +2,7 @@
 /* global describe test expect */
 import express from 'express';
 import request from 'supertest';
+
 import runRoutes from '../src/methods/runRoutes';
 
 const app = {};
@@ -48,28 +49,20 @@ const rootApi = {
       },
       '/mid1': [
         {
-          '/test': (req, res) => {
-            return res.status(200).json({ ok: true, userId: req.userId });
-          },
+          '/test': (req, res) => res.status(200).json({ ok: true, userId: req.userId }),
         },
       ],
       '/mid2': [
         middlewareUserId,
         {
-          '/test': (req, res) => {
-            return res.status(200).json({ ok: true, userId: req.userId });
-          },
-          '/test2': (req, res) => {
-            return res.status(200).json({ ok: true, hello: 'world', userId: req.userId });
-          },
+          '/test': (req, res) => res.status(200).json({ ok: true, userId: req.userId }),
+          '/test2': (req, res) => res.status(200).json({ ok: true, hello: 'world', userId: req.userId }),
         },
       ],
       '/mid3': [
         middlewareUserId,
         middlewareReqId,
-        (req, res) => {
-          return res.status(200).json({ ok: true, userId: req.userId, reqId: req.reqId });
-        },
+        (req, res) => res.status(200).json({ ok: true, userId: req.userId, reqId: req.reqId }),
       ],
     };
   },

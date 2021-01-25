@@ -18,7 +18,7 @@ export default async function fallback({ url: fallbackUrl, req, res } = {}) {
       'accept-ranges',
       'strict-transport-security',
     ]),
-    a => String(a),
+    (a) => String(a),
   );
   return res.set(headers).send(file);
 }

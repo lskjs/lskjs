@@ -1,4 +1,4 @@
-export default dateStr => {
+export default (dateStr) => {
   const date = new Date(dateStr);
   if (date.toString() === 'Invalid Date') {
     throw {

@@ -4,7 +4,6 @@ import BillingProvider from './BillingProvider';
 
 export default class PaypalBillingProvider extends BillingProvider {}
 
-
 // async initPaypal(config = {}) {
 //   paypal.configure(config);
 //   const payment = Promise.promisifyAll(paypal.payment);

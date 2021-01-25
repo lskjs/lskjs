@@ -1,5 +1,6 @@
 /* global test expect */
 import pick from 'lodash/pick';
+
 import Err from '../src/Err';
 
 test('Err()', () => {

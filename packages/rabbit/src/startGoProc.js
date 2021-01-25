@@ -1,7 +1,7 @@
-import get from 'lodash/get';
 import { spawn } from 'child_process';
+import get from 'lodash/get';
 
-const paramsToArgs = (params = {}) => Object.keys(params).map(key => [`-${key}`, params[key]].join(' '));
+const paramsToArgs = (params = {}) => Object.keys(params).map((key) => [`-${key}`, params[key]].join(' '));
 const serializeData = (data = {}) => {
   if (typeof data === 'string') return data;
   return JSON.stringify(data);
@@ -43,9 +43,7 @@ export default async function startGoProc() {
       try {
         const json = JSON.parse(String(str));
         if (json.type === 'response') {
-          this
-            .emitter
-            .emit(json.hash, { complete: json.complete });
+          this.emitter.emit(json.hash, { complete: json.complete });
         }
       } catch (e) {
         // this.log.trace(String(chunk), 'не получилось');
@@ -61,9 +59,7 @@ export default async function startGoProc() {
     if (debug) {
       this.log.warn('что то пошло не так');
     }
-    this
-      .emitter
-      .emit('close');
+    this.emitter.emit('close');
     setTimeout(() => {
       this.startGoProc();
     }, 100);

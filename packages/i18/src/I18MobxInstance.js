@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+
 import I18Instance from './I18Instance';
 
 export class I18ClientInstance extends I18Instance {

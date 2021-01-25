@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
-import { observable } from 'mobx';
-import CrudStore from '@lskjs/mobx/stores/CrudStore';
 import CrudApi from '@lskjs/mobx/stores/CrudApi';
+import CrudStore from '@lskjs/mobx/stores/CrudStore';
+import { observable } from 'mobx';
 
 export class SessionApi extends CrudApi {
   base = '/api/module/auth/session';
@@ -27,7 +27,7 @@ export class SessionApi extends CrudApi {
   // }
 }
 
-export default uapp =>
+export default (uapp) =>
   class SessionStore extends CrudStore {
     static api = new SessionApi({ uapp });
 

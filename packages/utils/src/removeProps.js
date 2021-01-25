@@ -1,4 +1,4 @@
-import { createElement } from 'react';
 import omit from 'lodash/omit';
+import { createElement } from 'react';
 
-export default (el, list) => props => createElement(el, omit(props, list));
+export default (el, list) => (props) => createElement(el, omit(props, list));

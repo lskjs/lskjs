@@ -1,7 +1,7 @@
-import i18next from 'i18next';
-import moment from 'moment';
-import i18nextXhrBackend from 'i18next-xhr-backend';
 import Promise from 'bluebird';
+import i18next from 'i18next';
+import i18nextXhrBackend from 'i18next-xhr-backend';
+import moment from 'moment';
 
 export default class I18 {
   config = {};

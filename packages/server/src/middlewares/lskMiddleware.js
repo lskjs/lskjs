@@ -1,7 +1,8 @@
-import { nanoid } from 'nanoid/non-secure';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import isPlainObject from 'lodash/isPlainObject';
+import { nanoid } from 'nanoid/non-secure';
+
 import getReqData from '../utils/getReqData';
 import applyLogger from './accessLogger/applyLogger';
 

@@ -1,4 +1,5 @@
 import fs from 'fs';
+
 import fallback from './fallback';
 
 export default ({ fallback: asset, url, headers = { 'content-type': 'image/png' } } = {}) => async (req, res) => {

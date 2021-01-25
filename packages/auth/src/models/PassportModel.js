@@ -1,7 +1,7 @@
+import Model from '@lskjs/db/Model';
+import canonizeUsername from '@lskjs/utils/canonizeUsername';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
-import canonizeUsername from '@lskjs/utils/canonizeUsername';
-import Model from '@lskjs/db/Model';
 
 export class PassportModel extends Model {
   static schema = {

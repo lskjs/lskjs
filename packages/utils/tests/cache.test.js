@@ -31,8 +31,8 @@ class CacheStore {
 test('cacheStore', async () => {
   const cacheStore = new CacheStore();
   const keysMap = {
-    '1': 0,
-    '2': 0,
+    1: 0,
+    2: 0,
   };
   await Promise.map([{ key: 1 }, { key: 2 }, { key: 1 }, { key: 2 }, { key: 1 }, { key: 1 }], async ({ key }) => {
     await cacheStore.cache(key, async () => {
@@ -40,5 +40,5 @@ test('cacheStore', async () => {
       await Promise.delay(1000);
     });
   });
-  expect(keysMap).toEqual({ '1': 1, '2': 1 });
+  expect(keysMap).toEqual({ 1: 1, 2: 1 });
 });

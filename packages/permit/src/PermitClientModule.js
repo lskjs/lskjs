@@ -1,4 +1,4 @@
-import Module from '@lskjs/module/2';
+import Module from '@lskjs/module';
 
 export class PermitClientModule extends Module {
   async init() {

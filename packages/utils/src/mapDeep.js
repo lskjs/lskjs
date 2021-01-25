@@ -1,4 +1,5 @@
 import mapValues from 'lodash/mapValues';
+
 import isCollection from './isCollection';
 
 export default function mapDeep(value, reduce, keys = []) {

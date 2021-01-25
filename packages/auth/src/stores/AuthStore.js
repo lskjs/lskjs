@@ -1,8 +1,8 @@
 /* eslint-disable max-classes-per-file */
-import { observable, action } from 'mobx';
-import forEach from 'lodash/forEach';
 import Api from '@lskjs/mobx/stores/Api';
 import Store from '@lskjs/mobx/stores/Store';
+import forEach from 'lodash/forEach';
+import { action, observable } from 'mobx';
 
 export class AuthApi extends Api {
   base = '/api/auth';

@@ -1,6 +1,6 @@
 import url from 'url';
 
-export default req => {
+export default (req) => {
   const formattedUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
   const parsedUrl = url.parse(formattedUrl);
 

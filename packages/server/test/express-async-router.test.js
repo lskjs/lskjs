@@ -1,6 +1,7 @@
 /* global describe test expect */
 import express from 'express';
 import request from 'supertest';
+
 import AsyncRouter from '../src/AsyncRouter';
 
 describe('Post Endpoints', () => {

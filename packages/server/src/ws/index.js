@@ -2,10 +2,11 @@
 // // import accessLogger from './middlewares/accessLogger';
 // // import isAuth from './middleware/isAuth'
 // import addChatNamespace from './namespaces/chat'
-import socketAsPromised from 'socket.io-as-promised';
 import cookieParser from 'cookie-parser';
-import sockets from 'socket.io';
 import isFunction from 'lodash/isFunction';
+import sockets from 'socket.io';
+import socketAsPromised from 'socket.io-as-promised';
+
 import socket2req from './middlewares/socket2req';
 
 export default (app) => {

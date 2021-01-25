@@ -1,19 +1,19 @@
-import fs from 'fs';
-import path from 'path';
-import { promisify } from 'util';
-import groupBy from 'lodash/groupBy';
-import forEach from 'lodash/forEach';
-import parse from 'csv-parse';
-import mkdirp from 'mkdirp';
-import rimraf from 'rimraf';
 import getKeyValJson from '@lskjs/utils/getKeyValJson';
+import parse from 'csv-parse';
+import fs from 'fs';
+import forEach from 'lodash/forEach';
+import groupBy from 'lodash/groupBy';
+import mkdirp from 'mkdirp';
+import path from 'path';
+import rimraf from 'rimraf';
+import { promisify } from 'util';
 
 const parseAsync = promisify(parse);
 
 export default async (spreadsheets, locales, destination) => {
   const localesRows = [];
   await Promise.all(
-    spreadsheets.map(async spreadsheet => {
+    spreadsheets.map(async (spreadsheet) => {
       const rows = await parseAsync(spreadsheet, { columns: true });
       localesRows.push(...rows);
     }),
@@ -30,12 +30,12 @@ export default async (spreadsheets, locales, destination) => {
   } catch (err) {
     console.error(`mkdirp err ${destination}`, err);
   }
-  locales.forEach(locale => {
+  locales.forEach((locale) => {
     const dirname = path.join(destination, locale);
     fs.writeFileSync(`${dirname}.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     // fs.writeFileSync(`${dirname}/translation.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     const namespaces = groupBy(
-      localesRows.filter(row => row.ns),
+      localesRows.filter((row) => row.ns),
       'ns',
     );
     forEach(namespaces, (rows, pns) => {

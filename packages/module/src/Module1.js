@@ -1,13 +1,14 @@
-import toPairs from 'lodash/toPairs';
-import get from 'lodash/get';
-import Promise from 'bluebird';
 import logger from '@lskjs/log';
-import isFunction from 'lodash/isFunction';
-import assignProps from '@lskjs/utils/assignProps';
-import importFn from '@lskjs/utils/importFn';
-import classNewOrFunctionCall from '@lskjs/utils/classNewOrFunctionCall';
-import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import arrayToObject from '@lskjs/utils/arrayToObject';
+import assignProps from '@lskjs/utils/assignProps';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import classNewOrFunctionCall from '@lskjs/utils/classNewOrFunctionCall';
+import importFn from '@lskjs/utils/importFn';
+import Promise from 'bluebird';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import toPairs from 'lodash/toPairs';
+
 import Emitter from './emitter';
 
 const DEBUG = __DEV__ && false;

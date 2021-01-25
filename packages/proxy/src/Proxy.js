@@ -1,7 +1,8 @@
-import pick from 'lodash/pick';
-import inc from '@lskjs/utils/inc';
 import avg from '@lskjs/utils/avg';
+import inc from '@lskjs/utils/inc';
 import EventEmitter from 'events';
+import pick from 'lodash/pick';
+
 import { getProxyAgent } from './getProxyAgent';
 
 export class Proxy {

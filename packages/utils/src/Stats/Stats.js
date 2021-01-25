@@ -1,9 +1,10 @@
-import set from 'lodash/set';
+import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import round from 'lodash/round';
-import forEach from 'lodash/forEach';
-import inc from '../inc';
+import set from 'lodash/set';
+
 import beauty from '../beauty';
+import inc from '../inc';
 
 const sec = 1000;
 const min = 60 * sec;

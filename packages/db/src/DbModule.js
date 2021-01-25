@@ -1,8 +1,8 @@
-import { Mongoose } from 'mongoose';
 import Module from '@lskjs/module';
-import omit from 'lodash/omit';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import Bluebird from 'bluebird';
+import omit from 'lodash/omit';
+import { Mongoose } from 'mongoose';
 
 // abstract
 export class DbModule extends Module {

@@ -3,7 +3,7 @@
 export default ({ api, app } = {}) => {
   if (!api || !app) return api;
   api.remoteFetch = api.fetch;
-  api.fetch = function(...args) {
+  api.fetch = function (...args) {
     const { authToken } = api;
     const [url, options = {}] = args;
     if (url.startsWith('http://') || url.startsWith('https://')) {

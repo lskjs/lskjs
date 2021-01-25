@@ -1,13 +1,13 @@
-import snakeCase from 'lodash/snakeCase';
 import mapKeys from '@lskjs/utils/mapKeys';
 import mapValuesKeys from '@lskjs/utils/mapValuesKeys';
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
+import tryJSONstringify from '@lskjs/utils/tryJSONstringify';
+import isFinite from 'lodash/isFinite';
 import map from 'lodash/map';
 import mapValues from 'lodash/mapValues';
-import isFinite from 'lodash/isFinite';
-import tryJSONstringify from '@lskjs/utils/tryJSONstringify';
-import tryJSONparse from '@lskjs/utils/tryJSONparse';
+import snakeCase from 'lodash/snakeCase';
 
-const notNan = a => (isFinite(a) ? a : null);
+const notNan = (a) => (isFinite(a) ? a : null);
 
 class BaseScyllaModel {
   constructor({ app }) {
@@ -34,7 +34,7 @@ class BaseScyllaModel {
       if (type === 'text<json>') return tryJSONstringify(value);
       if (type === 'timestamp') return new Date(value).getTime();
       if (type.startsWith('list')) {
-        const value2 = (Array.isArray(value) ? value.filter(a => a !== null && a !== undefined) : null);
+        const value2 = Array.isArray(value) ? value.filter((a) => a !== null && a !== undefined) : null;
         // console.log({ value, value2 });
         return value2;
       }
@@ -63,7 +63,9 @@ class BaseScyllaModel {
   createInsertQuery(table, data) {
     const keys = Object.keys(data);
     const { defaultKeyspace } = this.scylla.config;
-    return `INSERT INTO ${defaultKeyspace}.${this.table} (${keys.map(key => `"${key}"`).join(', ')}) VALUES (${keys.map(() => '?').join(', ')})`;
+    return `INSERT INTO ${defaultKeyspace}.${this.table} (${keys
+      .map((key) => `"${key}"`)
+      .join(', ')}) VALUES (${keys.map(() => '?').join(', ')})`;
   }
   async execute(query, values, options, json) {
     if (this.scylla.debug) this.scylla.log.trace(`[scylla] table=${this.table}\n`, query, values);
@@ -81,6 +83,5 @@ class BaseScyllaModel {
     this.scylla = await this.app.module('scylla');
   }
 }
-
 
 export default BaseScyllaModel;

@@ -1,7 +1,7 @@
 import Module from '@lskjs/module';
-import Sequelize from 'sequelize';
-import merge from 'lodash/merge';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
+import Sequelize from 'sequelize';
 
 export default class SequelizeServerModule extends Module {
   enabled = false;

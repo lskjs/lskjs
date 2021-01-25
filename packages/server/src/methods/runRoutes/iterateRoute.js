@@ -1,6 +1,7 @@
-import isPlainObject from 'lodash/isPlainObject';
-import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
+import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
+
 import AsyncRouter from '../../AsyncRouter';
 import parseMethodAndPath from './parseMethodAndPath';
 

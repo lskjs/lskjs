@@ -1,5 +1,5 @@
 import set from 'lodash/set';
-import { toJS, isComputedProp, action } from 'mobx';
+import { action, isComputedProp, toJS } from 'mobx';
 
 export default class Store {
   constructor(state = {}) {

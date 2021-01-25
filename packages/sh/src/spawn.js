@@ -1,5 +1,5 @@
-import { spawn } from 'child_process';
 import trim from '@lskjs/utils/trimSpaces';
+import { spawn } from 'child_process';
 
 function exec(command, args = [], options = {}) {
   const {

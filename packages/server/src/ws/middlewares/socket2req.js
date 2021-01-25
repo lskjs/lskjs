@@ -1,8 +1,8 @@
-import qs from 'querystring';
 import cookieParser from 'cookie-parser';
+import qs from 'querystring';
 
-export default () => {
-  return function (socket, next) {
+export default () =>
+  function (socket, next) {
     socket.req = socket.request;
     socket.res = {
       getHeader() {
@@ -30,4 +30,3 @@ export default () => {
     // socket.data = Object.assign({}, query, req.query);
     return next();
   };
-};

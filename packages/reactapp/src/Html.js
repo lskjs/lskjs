@@ -1,7 +1,7 @@
-import map from 'lodash/map';
-import get from 'lodash/get';
-import fs from 'fs';
 import serializeWindow from '@lskjs/utils/serializeWindow';
+import fs from 'fs';
+import get from 'lodash/get';
+import map from 'lodash/map';
 import serializeJavascript from 'serialize-javascript';
 
 const serialize = __DEV__ ? JSON.stringify : serializeJavascript;

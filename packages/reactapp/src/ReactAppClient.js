@@ -1,8 +1,8 @@
 // import Promise from 'bluebird';
-import ReactDOM from 'react-dom';
+import Module from '@lskjs/module';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
 import { createBrowserHistory } from 'history';
-import Module from '@lskjs/module';
+import ReactDOM from 'react-dom';
 // import BaseUapp from '@lskjs/uapp';
 // import { Redbox } from './core/devUtils';
 // import { AppContainer } from 'react-hot-loader';

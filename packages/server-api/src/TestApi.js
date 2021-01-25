@@ -1,7 +1,8 @@
 /* eslint-disable global-require */
-import Err from '@lskjs/utils/Err';
 // import collectConfigs from '@lskjs/module/utils/collectConfigs';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import Err from '@lskjs/utils/Err';
+
 import Api from './Api';
 
 export const collectConfigs = async (m) => ({
@@ -134,12 +135,8 @@ export default class TestApi extends Api {
         console.log('getLocale', req.getLocale);
         return { locale: req.getLocale(), test: req.t('test.hello') };
       },
-      '/app/config': () => {
-        return collectConfigs(this.app);
-      },
-      '/app/config/log': () => {
-        return collectConfigsLog(this.app);
-      },
+      '/app/config': () => collectConfigs(this.app),
+      '/app/config/log': () => collectConfigsLog(this.app),
       '/user/one': async () => {
         const { UserModel } = this.app;
         const user = await UserModel.findOne();

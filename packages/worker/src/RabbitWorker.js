@@ -1,11 +1,11 @@
-import Bluebird from 'bluebird';
-import map from 'lodash/map';
 import Module from '@lskjs/module';
-import get from 'lodash/get';
-import pick from 'lodash/pick';
-import prettyStringify from '@lskjs/utils/prettyStringify';
 import Err from '@lskjs/utils/Err';
+import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
+import Bluebird from 'bluebird';
+import get from 'lodash/get';
+import map from 'lodash/map';
+import pick from 'lodash/pick';
 
 const toQs = (params = {}) => map(params, (val, key) => [key, val].join('=')).join('&');
 

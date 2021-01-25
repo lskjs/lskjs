@@ -8,7 +8,7 @@ const manifest = require(assetManifestPath);
 function getVendorName(manifest, ext = 'css') {
   const prefix = `static/${ext}/`;
   const vendorEntrypoints = manifest.entrypoints.filter(
-    entrypoint =>
+    (entrypoint) =>
       entrypoint.startsWith(prefix) &&
       !(entrypoint.startsWith(`${prefix}main.`) || entrypoint.startsWith(`${prefix}runtime-main.`)),
   );

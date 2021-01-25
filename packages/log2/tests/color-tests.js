@@ -35,8 +35,6 @@ for (const color of colorsArray) {
   console.log(...str);
 }
 
-
-
 console.log();
 console.log();
 console.log(colors.gray('[t] trace'));
@@ -58,7 +56,6 @@ console.log(colors.bold(colors.green('green')));
 console.log(colors.bold(colors.yellow('yellow')));
 console.log(colors.bold(colors.blue('blue')));
 console.log(colors.bold(colors.magenta('magenta')));
-
 
 console.log(colors.bold(colors.black('black')));
 console.log(colors.bold(colors.red('red')));

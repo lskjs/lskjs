@@ -17,7 +17,7 @@ export default class SmsPlivo {
   getSender(phone = '') {
     const { phones } = this.config;
     if (phones && phones.length) {
-      const filtered = phones.filter(p => phone[0] === p[0]);
+      const filtered = phones.filter((p) => phone[0] === p[0]);
       if (filtered.length) return filtered[0];
       return phones[0];
     }
@@ -34,10 +34,10 @@ export default class SmsPlivo {
         text, // text
       )
       .then(
-        response => {
+        (response) => {
           this.log.trace(`Sms.send[plivo]`, response);
         },
-        err => {
+        (err) => {
           this.log.error(`Sms.send[plivo]`, err);
         },
       );

@@ -25,8 +25,8 @@ https://github.com/sponsors/andris9
 
 const secs = 4;
 
-const formatCentered = (row, columns) => {
-  return row
+const formatCentered = (row, columns) =>
+  row
     .split(/\r?\n/)
     .map((row) => {
       if (columns <= row.length) {
@@ -36,7 +36,6 @@ const formatCentered = (row, columns) => {
       return ' '.repeat(Math.round(columns / 2 - row.length / 2)) + row;
     })
     .join('\n');
-};
 
 const formatRow = (row, columns) => {
   if (row.length <= columns) {

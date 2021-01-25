@@ -1,7 +1,8 @@
-import Module from '@lskjs/module/2';
-import importFn from '@lskjs/utils/importFn';
+import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
+import importFn from '@lskjs/utils/importFn';
+
 import availableProviders from './providers';
 
 export default class BillingServerModule extends Module {

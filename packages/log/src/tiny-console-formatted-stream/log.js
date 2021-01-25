@@ -1,6 +1,4 @@
-import {
-  TRACE, DEBUG, INFO, WARN, ERROR, FATAL, nameFromLevel,
-} from '@browser-bunyan/levels';
+import { DEBUG, ERROR, FATAL, INFO, nameFromLevel, TRACE, WARN } from '@browser-bunyan/levels';
 
 const DEFAULT_CSS = {
   levels: {
@@ -23,8 +21,8 @@ export default class ConsoleFormattedStream {
   }
 
   write(rec) {
-    let levelCss; let
-      consoleMethod;
+    let levelCss;
+    let consoleMethod;
     const defaultCss = this.css.def;
     const msgCss = this.css.msg;
     const srcCss = this.css.src;
@@ -43,7 +41,7 @@ export default class ConsoleFormattedStream {
       }
       consoleMethod = typeof console[levelName] === 'function' ? console[levelName] : console.log; // eslint-disable-line no-console
     } else {
-      consoleMethod = console.log;// eslint-disable-line no-console
+      consoleMethod = console.log; // eslint-disable-line no-console
     }
 
     if (rec.level < DEBUG) {

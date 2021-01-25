@@ -7,4 +7,4 @@ export default (csv) => {
   });
   result.splice(result.length - 1, 1);
   return result;
-}
+};

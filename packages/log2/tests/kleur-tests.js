@@ -65,7 +65,6 @@ console.log(kleur.inverse('inverse'));
 console.log(kleur.hidden('hidden'));
 console.log(kleur.strikethrough('strikethrough'));
 
-
 console.log(kleur.dim().black('black'));
 console.log(kleur.dim().red('red'));
 console.log(kleur.dim().green('green'));

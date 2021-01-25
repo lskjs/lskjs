@@ -1,10 +1,10 @@
-import Promise from 'bluebird';
-import { observable, action } from 'mobx';
-import axios from 'axios';
 import omitEmpty from '@lskjs/utils/omitEmpty';
+import axios from 'axios';
+import Promise from 'bluebird';
+import { action, observable } from 'mobx';
 
-import Store from './Store';
 import { getFindParams } from './FetchStore';
+import Store from './Store';
 
 const { CancelToken } = axios;
 
@@ -14,7 +14,6 @@ export default class EntityStore extends Store {
   @observable fetchedAt = null;
   @observable filter = {};
   __cancelToken = null;
-
 
   async findOne({ __cancelToken } = {}) {
     if (!this.api) throw '!api';

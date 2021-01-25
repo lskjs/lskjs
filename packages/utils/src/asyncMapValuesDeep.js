@@ -1,6 +1,7 @@
 import Bluebird from 'bluebird';
-import isPlainObject from 'lodash/isPlainObject';
 import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
+
 import asyncMapValues from './asyncMapValues';
 
 const DEBUG = false;

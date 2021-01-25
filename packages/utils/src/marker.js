@@ -52,7 +52,7 @@ export function stylizeWithoutColor(str, color) {
 export const colorsKeys = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'];
 export const chars = ['•', '☼', '○', '♠', '♠', '♦', '♥'];
 
-export const getInfo = id => {
+export const getInfo = (id) => {
   const code = hashCode(id);
   const base = colorsKeys.length;
 
@@ -76,13 +76,11 @@ export const getInfo = id => {
   return res;
 };
 
-const marker = id => {
-  if (id == null) return a => a || ' ';
+const marker = (id) => {
+  if (id == null) return (a) => a || ' ';
   const res = getInfo(id);
   const { color, bgColor, char } = res;
-  return str => {
-    return stylizeWithColor(stylizeBg(str || char, bgColor), color);
-  };
+  return (str) => stylizeWithColor(stylizeBg(str || char, bgColor), color);
 };
 
 // console.log(marker()());

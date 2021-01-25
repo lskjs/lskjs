@@ -5,9 +5,9 @@ export function numberWithSpaces(x = 0) {
 }
 
 function toFixedWithoutRounding(value, precision) {
-  const factorError = 10 ** (14);
+  const factorError = 10 ** 14;
   const factorTruncate = 10 ** (14 - precision);
-  const factorDecimal = 10 ** (precision);
+  const factorDecimal = 10 ** precision;
 
   return Math.floor(Math.floor(value * factorError + 1) / factorTruncate) / factorDecimal;
 }
@@ -22,12 +22,15 @@ export function formatter(valueInit, sign = '', isPrefixSign = true) {
   const parts = value.split('.');
   let int = parts[0] || '';
   const fract = parts[1] || '';
-  int.split('').reverse().forEach((c, i, a) => {
-    if (i % 3 === 0 && a[i - 1] !== '.') {
-      arr.push(' ');
-    }
-    arr.push(c);
-  });
+  int
+    .split('')
+    .reverse()
+    .forEach((c, i, a) => {
+      if (i % 3 === 0 && a[i - 1] !== '.') {
+        arr.push(' ');
+      }
+      arr.push(c);
+    });
   int = arr.reverse().join('').trim();
   let res = int;
   if (fract.length > 0) {
@@ -54,7 +57,7 @@ export function toShort(price) {
 
     for (const key of keys) {  //eslint-disable-line
       if (price > key[0]) {
-        return numberWithSpaces(+toFixedWithoutRounding((price / key[0]), 2)) + key[1];
+        return numberWithSpaces(+toFixedWithoutRounding(price / key[0], 2)) + key[1];
       }
     }
     return numberWithSpaces(+toFixedWithoutRounding(price, 2));

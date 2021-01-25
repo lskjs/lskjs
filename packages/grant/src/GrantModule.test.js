@@ -1,6 +1,7 @@
 /* global test expect */
 import ready from '@lskjs/utils/polyfill';
 import Promise from 'bluebird';
+
 import BaseGrantModule from './GrantModule';
 
 ready();
@@ -20,12 +21,8 @@ const app = {
 class GrantModule extends BaseGrantModule {
   getRules() {
     return {
-      'cabinet.access': ({ userId }) => {
-        return !!userId;
-      },
-      'cabinet.channels': ({ userId }) => {
-        return !!userId;
-      },
+      'cabinet.access': ({ userId }) => !!userId,
+      'cabinet.channels': ({ userId }) => !!userId,
     };
   }
 }

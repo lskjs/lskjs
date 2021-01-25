@@ -1,7 +1,7 @@
-import omit from 'lodash/omit';
 import get from 'lodash/get';
-import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
+import omit from 'lodash/omit';
 
 export default (webserver) =>
   function pack(raw = {}, info) {
@@ -71,7 +71,9 @@ export default (webserver) =>
           }
           try {
             const filename = `${dir}/res_${new Date().toISOString().replace(/[^a-zA-Z0-9]+/gi, '_')}.${type}`;
-            webserver.log.trace(`>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${__DEV__ ? '[IGNORE]' : ''}`);
+            webserver.log.trace(
+              `>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${__DEV__ ? '[IGNORE]' : ''}`,
+            );
             require('fs').writeFileSync(filename, str);
           } catch (e) {
             // ignore

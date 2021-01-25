@@ -1,8 +1,8 @@
 import Module from '@lskjs/module';
 import elasticsearch from 'elasticsearch';
-import mexp from 'mongoose-elasticsearch-xp-async';
-import merge from 'lodash/merge';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
+import mexp from 'mongoose-elasticsearch-xp-async';
 
 export default class ElasticServerModule extends Module {
   enabled = false;

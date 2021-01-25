@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
-import mjml2html from 'mjml';
-import get from 'lodash/get';
 import Err from '@lskjs/utils/Err';
+import get from 'lodash/get';
+import mjml2html from 'mjml';
+
 import HtmlTemplate from './HtmlTemplate';
 
 export default class MjmlTemplate extends HtmlTemplate {

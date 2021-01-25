@@ -1,7 +1,8 @@
-import get from 'lodash/get';
 import forEach from 'lodash/forEach';
-import GrantModule from './GrantModule';
+import get from 'lodash/get';
+
 import CacheStorage from './CacheStorage';
+import GrantModule from './GrantModule';
 
 export default class GrantClientModule extends GrantModule {
   async can(...args) {

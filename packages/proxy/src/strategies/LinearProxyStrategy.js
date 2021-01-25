@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 import get from 'lodash/get';
-import sumBy from 'lodash/sumBy';
-import sortBy from 'lodash/sortBy';
 import shuffle from 'lodash/shuffle';
+import sortBy from 'lodash/sortBy';
+import sumBy from 'lodash/sumBy';
+
 import { ProxyStrategy } from './ProxyStrategy';
 // import request from './request';
 

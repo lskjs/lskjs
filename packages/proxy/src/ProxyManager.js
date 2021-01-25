@@ -1,17 +1,18 @@
+import Module from '@lskjs/module';
+import avg from '@lskjs/utils/avg';
+import Err from '@lskjs/utils/Err';
+import inc from '@lskjs/utils/inc';
 import axios from 'axios';
 import countBy from 'lodash/countBy';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import map from 'lodash/map';
-import Err from '@lskjs/utils/Err';
-import inc from '@lskjs/utils/inc';
-import avg from '@lskjs/utils/avg';
-import Module from '@lskjs/module';
-import { Mutex } from './utils/Mutex';
+
 import { getProxyAgent } from './getProxyAgent';
 import { Proxy } from './Proxy';
-import { parseProxyParam } from './utils/parseProxyParam';
 import strategies from './strategies';
+import { Mutex } from './utils/Mutex';
+import { parseProxyParam } from './utils/parseProxyParam';
 
 export const filterFn = (proxy, filter) => {
   if (filter.ignoreKeys && filter.ignoreKeys.includes(get(proxy, 'key'))) return false;

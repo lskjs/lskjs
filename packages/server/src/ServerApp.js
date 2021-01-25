@@ -1,10 +1,10 @@
 /* eslint-disable global-require */
-import map from 'lodash/map';
 import Module from '@lskjs/module';
+import map from 'lodash/map';
+
 import defaultHelpers from './helpers';
 
 export default class ServerApp extends Module {
-
   async model(...args) {
     const modelsModule = await this.module('models');
     return modelsModule.model(...args);

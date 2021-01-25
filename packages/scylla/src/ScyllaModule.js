@@ -1,8 +1,8 @@
 import Module from '@lskjs/module';
 import Promise from 'bluebird';
 import cassandra from 'cassandra-driver';
-import omit from 'lodash/omit';
 import merge from 'lodash/merge';
+import omit from 'lodash/omit';
 
 export default class ScyllaModule extends Module {
   cassandra = cassandra;

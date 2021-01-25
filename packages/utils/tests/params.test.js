@@ -1,5 +1,5 @@
 /* global test expect */
-import { toBoolean, toNumber, toInt, params } from '../src/params';
+import { params, toBoolean, toInt, toNumber } from '../src/params';
 
 test('toBoolean(true) === true', () => {
   const obj = true;

@@ -12,7 +12,8 @@ globalOrWindow.__DEV__ = !!globalOrWindow.__DEV__;
 globalOrWindow.__PROD__ = !globalOrWindow.__DEV__;
 if (!globalOrWindow.__IMAGE__) {
   if (globalOrWindow.__SERVER__) {
-    globalOrWindow.__IMAGE__ = process.env.IMAGE || process.env.__IMAGE || process.env.__IMAGE__ || process.env.CONTAINER_IMAGE; // eslint-disable-line max-len
+    globalOrWindow.__IMAGE__ =
+      process.env.IMAGE || process.env.__IMAGE || process.env.__IMAGE__ || process.env.CONTAINER_IMAGE; // eslint-disable-line max-len
   }
   if (!globalOrWindow.__IMAGE__) {
     globalOrWindow.__IMAGE__ = 'image';

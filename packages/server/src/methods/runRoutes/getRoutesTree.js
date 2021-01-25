@@ -1,13 +1,14 @@
-import isPlainObject from 'lodash/isPlainObject';
-import isArray from 'lodash/isArray';
-import pickBy from 'lodash/pickBy';
 import isClass from '@lskjs/utils/isClass';
 // import isFunction from '@lskjs/utils/isFunction';
 import Bluebird from 'bluebird';
+import isArray from 'lodash/isArray';
+import isAnyFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
+import pickBy from 'lodash/pickBy';
+
 // import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
 // import asyncMapValuesDeep from '@lskjs/utils/asyncMapValuesDeep';
 import asyncMapValuesDeep from './asyncMapValuesDeep';
-import isAnyFunction from 'lodash/isFunction';
 import extractApi from './extractApi';
 
 // const isClass = (a) => isClass(a) && !isFunction(a);

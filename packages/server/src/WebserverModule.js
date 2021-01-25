@@ -1,17 +1,18 @@
 /* eslint-disable global-require */
-import Express from 'express';
-import path from 'path';
-import mapValues from 'lodash/mapValues';
-import forEach from 'lodash/forEach';
-import flattenDeep from 'lodash/flattenDeep';
-import map from 'lodash/map';
-import staticFileMiddleware from 'connect-static-file';
-import { getPortPromise } from 'portfinder';
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
+import staticFileMiddleware from 'connect-static-file';
+import Express from 'express';
 import http from 'http';
-import defaultHelpers from './helpers';
+import flattenDeep from 'lodash/flattenDeep';
+import forEach from 'lodash/forEach';
+import map from 'lodash/map';
+import mapValues from 'lodash/mapValues';
+import path from 'path';
+import { getPortPromise } from 'portfinder';
+
 import defaultConfig from './config';
+import defaultHelpers from './helpers';
 import createWs from './ws';
 
 export default class WebserverModule extends Module {

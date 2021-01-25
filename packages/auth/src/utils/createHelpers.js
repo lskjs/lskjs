@@ -1,8 +1,8 @@
 // import Api from './BaseApi';
 import bcrypt from 'bcryptjs';
 import Bluebird from 'bluebird';
-import get from 'lodash/get';
 import jwt from 'jsonwebtoken';
+import get from 'lodash/get';
 
 const bcryptGenSalt = Bluebird.promisify(bcrypt.genSalt);
 const bcryptHash = Bluebird.promisify(bcrypt.hash);

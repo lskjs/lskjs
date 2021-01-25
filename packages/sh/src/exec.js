@@ -1,7 +1,7 @@
-import cp from 'child_process';
 import trim from '@lskjs/utils/trimSpaces';
+import cp from 'child_process';
 
-function exec(command, options = { }) {
+function exec(command, options = {}) {
   const {
     trace = console.log, // eslint-disable-line no-console
     log = console.log, // eslint-disable-line no-console

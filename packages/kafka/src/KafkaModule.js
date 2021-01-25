@@ -1,7 +1,7 @@
 import Module from '@lskjs/module';
-import get from 'lodash/get';
-import { Kafka, logLevel } from 'kafkajs';
 import Err from '@lskjs/utils/Err';
+import { Kafka, logLevel } from 'kafkajs';
+import get from 'lodash/get';
 
 export class KafkaModule extends Module {
   Kafka = Kafka;

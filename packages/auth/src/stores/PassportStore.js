@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-export default uapp =>
+export default (uapp) =>
   class PassportStore {
     @observable list = [];
 
@@ -44,6 +44,6 @@ export default uapp =>
     async disconnectSocial(provider) {
       const data = await this.constructor.unbindSocial({ provider });
       uapp.log.info('unbindSocial', data);
-      this.list = this.list.filter(o => o.provider !== provider);
+      this.list = this.list.filter((o) => o.provider !== provider);
     }
   };

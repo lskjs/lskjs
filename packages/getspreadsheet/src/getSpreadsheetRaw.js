@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 import axios from 'axios';
+
 import auth from './auth';
 import get from './get';
 
-export default async url => {
+export default async (url) => {
   try {
     const s = new RegExp('/spreadsheets/d/([a-zA-Z0-9-_]+)').exec(url);
     let spreadsheetId;

@@ -1,10 +1,11 @@
 /* eslint-disable global-require */
 /* eslint-disable no-console */
-import merge from 'lodash/merge';
-import isFunction from 'lodash/isFunction';
-import set from 'lodash/set';
-import fs from 'fs';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
+import fs from 'fs';
+import isFunction from 'lodash/isFunction';
+import merge from 'lodash/merge';
+import set from 'lodash/set';
+
 import getEnvPaths from './getEnvPaths';
 
 export default function mergeEnvs(...configs) {

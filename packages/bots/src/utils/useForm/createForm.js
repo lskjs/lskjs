@@ -1,5 +1,5 @@
-import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
+import mapValues from 'lodash/mapValues';
 
 export const createForm = ({ controls: initControls, initialValues = {}, fields: initFields, ...other }) => {
   const controls = mapValues(initControls, (control, name) => ({
