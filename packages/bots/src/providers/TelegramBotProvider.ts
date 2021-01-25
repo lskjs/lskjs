@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import Telegraf, { session } from 'telegraf';
+import { session, Telegraf } from 'telegraf';
 
 import { IBotProviderMessageCtx } from '../types';
 import BaseBotProvider from './BaseBotProvider';

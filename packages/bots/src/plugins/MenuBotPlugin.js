@@ -1,8 +1,9 @@
-import Markup from 'telegraf/markup';
 // import keyBy from 'lodash/keyBy';
 import uniqBy from 'lodash/uniqBy';
+import { Markup } from 'telegraf';
+
+import { createKeyboard } from '../utils/createKeyboard';
 import BaseBotPlugin from './BaseBotPlugin';
-import createKeyboard from '../utils/createKeyboard';
 
 export class MenuBotPlugin extends BaseBotPlugin {
   providers = ['telegram'];

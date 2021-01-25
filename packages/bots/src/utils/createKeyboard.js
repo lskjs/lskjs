@@ -1,4 +1,4 @@
-import Markup from 'telegraf/markup';
+import { Markup } from 'telegraf';
 
 export const createButtons = (button, keyboardType) => {
   if (!button) return [];
