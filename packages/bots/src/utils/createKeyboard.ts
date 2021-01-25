@@ -1,6 +1,7 @@
+// @ts-ignore
 import { Markup } from 'telegraf';
 
-export const createButtons = (button, keyboardType) => {
+export const createButtons = (button: any, keyboardType: any): any => {
   if (!button) return [];
   if (Array.isArray(button)) return button.map((b) => createButtons(b, keyboardType));
   let type;
@@ -17,41 +18,41 @@ export const createButtons = (button, keyboardType) => {
   if (!value) value = text;
   if (keyboardType === 'inline' && type === 'text') type = 'callback';
   if (type === 'text') {
-    return Markup.button(text);
+    return Markup.button.text(text);
   }
   if (type === 'callback') {
-    return Markup.callbackButton(text, value);
+    return Markup.button.callback(text, value);
   }
   if (type === 'url') {
-    return Markup.urlButton(text, value);
+    return Markup.button.url(text, value);
   }
   if (type === 'poll') {
-    return Markup.pollRequestButton(text, value);
+    return Markup.button.pollRequest(text, value);
   }
   if (type === 'location') {
-    return Markup.locationRequestButton(text);
+    return Markup.button.locationRequest(text);
   }
   if (type === 'contact') {
-    return Markup.contactRequestButton(text);
+    return Markup.button.contactRequest(text);
   }
   if (type === 'chat') {
-    return Markup.switchToChatButton(text, value);
+    return Markup.button.switchToChat(text, value);
   }
   if (type === 'currentChat') {
-    return Markup.switchToCurrentChatButton(text, value);
+    return Markup.button.switchToCurrentChat(text, value);
   }
   if (type === 'login') {
-    return Markup.loginButton(text, value);
+    return Markup.button.login(text, value);
   }
   if (type === 'pay') {
-    return Markup.payButton(text);
+    return Markup.button.pay(text);
   }
   if (type === 'game') {
-    return Markup.gameButton(text);
+    return Markup.button.game(text);
   }
 };
 
-export const createKeyboard = (keyboard) => {
+export const createKeyboard = (keyboard: any): any => {
   const layout = keyboard.layout || keyboard.buttons;
   const buttons = createButtons(layout, keyboard.type);
   if (keyboard.type === 'inline') {
