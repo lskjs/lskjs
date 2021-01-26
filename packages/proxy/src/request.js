@@ -53,12 +53,18 @@ export async function request({
   driver = 'axios',
   max_tries: maxTries = MAX_NETWORK_TRIES,
   timeout = MAX_NETWORK_TIMEOUT,
+  proxy,
   ...params
 }) {
   if (driver !== 'axios') throw 'driver not realized yet';
   let options = { ...params };
 
-  const proxy = proxyManager ? await proxyManager.getProxy() : null;
+  if (!proxy) {
+    if (proxyManager) {
+      // eslint-disable-next-line no-param-reassign
+      proxy = proxyManager.getProxy();
+    }
+  }
 
   if (proxy) {
     options = {

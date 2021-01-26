@@ -60,10 +60,10 @@ export class ProxyManager extends Module {
     if (filter) list = list.filter((proxy) => filterFn(proxy, filter));
     return list;
   }
-  async getProxy() {
+  async getProxy(...args) {
     if (this.disabled) return null;
     if (!this.list) this.list = await this.getCachedProxyHubProxyList();
-    return this.strategy.getProxy();
+    return this.strategy.getProxy(...args);
   }
   async requestProxyHub({ params, ...axiosParams }) {
     const props = {
