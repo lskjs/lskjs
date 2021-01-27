@@ -1,12 +1,13 @@
 import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
 
 export const proxyFilter = (proxy, filter) => {
-  if (filter.key && get(proxy, 'key') !== filter.key) return false;
-  if (filter.provider && get(proxy, 'provider') !== filter.provider) return false;
-  if (filter.type && get(proxy, 'type') !== filter.type) return false;
-  if (filter.country && get(proxy, 'tags.country') !== filter.country) return false;
-  if (filter.ipv && get(proxy, 'tags.ipv') !== filter.ipv) return false;
-  if (filter.check) return filter.check(proxy);
+  if (isFunction(filter)) return filter(proxy);
+  if (filter && filter.provider && get(proxy, 'provider') !== filter.provider) return false;
+  if (filter && filter.type && get(proxy, 'type') !== filter.type) return false;
+  if (filter && filter.country && get(proxy, 'tags.country') !== filter.country) return false;
+  if (filter && filter.ipv && get(proxy, 'tags.ipv') !== filter.ipv) return false;
+  if (filter && filter.check) return filter.check(proxy);
   return true;
 };
 
