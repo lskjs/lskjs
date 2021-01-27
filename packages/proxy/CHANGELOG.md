@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.8](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-01-27)
+
+
+### Features
+
+* **proxy:** pass proxy to request abd proxyFilter ([e7a41d3](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/e7a41d3162a5d2f87fe2c1d1293adf8aa78436c3))
+
+
+
+
+
 # [2.2.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/proxy
