@@ -36,7 +36,14 @@ export class ProxyManager extends Module {
   static parseProxyParam = parseProxyParam;
   async init() {
     await super.init();
-    const Strategy = this.strategies[this.config.strategy || 'random'] || this.strategies.random;
+    if (!this.strategy) {
+      this.log.fatal('this.config.strategy', this.config.strategy);
+      let strategy = this.config.strategy || 'random';
+      if (!this.strategies[strategy]) strategy = 'random';
+      this.strategy = this.strategies[strategy];
+      this.log.debug('use strategy', strategy);
+    }
+    const { strategy: Strategy } = this;
     if (this.url) {
       this.log.debug('proxyHub url', this.url);
     } else {
@@ -162,7 +169,7 @@ export class ProxyManager extends Module {
   }
   async stats() {
     if (!(this.list && this.list.length)) return;
-    const { proxies, ...stats } = this.getStats();
+    const { proxies, ...stats } = await this.getStats();
     const percent = (a, t) => (!t ? '??' : `${Math.floor((a / t) * 100)}%`);
     const infoRow = ({ count = 0, statuses, errors = {}, time }, name) => {
       if (!count) return null;
@@ -178,7 +185,7 @@ export class ProxyManager extends Module {
         .join(' ');
     };
     const proxiesStr = map(proxies, infoRow).filter(Boolean).join('\n');
-    const stats2 = this.strategy.getStats();
+    const stats2 = await this.strategy.getStats();
     const args = ['[stats]', stats2];
     if (stats.count) {
       args.push(`\n${infoRow(stats, 'SUM')}`);
@@ -191,7 +198,7 @@ export class ProxyManager extends Module {
     }
   }
 
-  getStats() {
+  async getStats() {
     const stats = {
       proxies: {},
     };
@@ -214,7 +221,12 @@ export class ProxyManager extends Module {
   async update() {
     if (this.config.stats) this.stats();
     this.list = await this.getProxyHubProxyList();
-    this.log.trace(`[update]`, `proxies: ${this.list.length}`, this.list.length ? countBy(this.list, 'provider') : '');
+    const stats = [];
+    if (this.list.length) {
+      stats.push(countBy(this.list, 'provider'));
+      stats.push(countBy(this.list, 'tags.country'));
+    }
+    this.log.trace(`[update]`, `proxies: ${this.list.length}`, ...stats);
     await this.strategy.update();
   }
 
