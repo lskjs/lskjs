@@ -17,6 +17,11 @@ const rules = {
   'no-underscore-dangle': 'off',
   'no-throw-literal': 'off',
 
+  // async while
+  'no-constant-condition': 'off',
+  'no-continue': 'off',
+  'no-await-in-loop': 'off',
+
   // React
   'react/prop-types': 'error',
   'react/forbid-prop-types': 'error',
