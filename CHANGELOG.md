@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.9](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-01-27)
+
+
+### Features
+
+* **apm:** add transaction triggerStat ([b981e14](https://github.com/isuvorov/lib-starter-kit/commit/b981e14b213a367e23a98362c61242a0b0bc5250))
+* **proxy:** improve stats for proxy manager ([ca2f99b](https://github.com/isuvorov/lib-starter-kit/commit/ca2f99b1eeb56700ad3ac20aebb7e08741d94e0b))
+
+
+
+
+
 # [2.2.0-beta.8](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-01-27)
 
 
