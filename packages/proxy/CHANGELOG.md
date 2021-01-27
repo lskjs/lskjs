@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-01-27)
+
+
+### Bug Fixes
+
+* **proxy:** proxyFilter with empty filter ([8461e8a](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/8461e8a3bf9f68fde9a1a6fc5f2027b81c16327e))
+
+
+
+
+
 # [2.2.0-beta.9](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-01-27)
 
 
