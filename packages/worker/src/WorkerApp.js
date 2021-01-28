@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
 import importFn from '@lskjs/utils/importFn';
@@ -17,12 +18,16 @@ export class WorkerApp extends Module {
     await super.init();
     this.on('runFinish', () => this.started());
   }
-  async worker(name) {
+  async worker(nameOrNames) {
+    // eslint-disable-next-line no-param-reassign
+    if (nameOrNames === '*') nameOrNames = Object.keys(this.availableWorkers || {});
+    if (Array.isArray(nameOrNames)) return asyncMapValues(arrayToObject(nameOrNames), (n) => this.module(n));
+    const name = nameOrNames;
     if (this.initedWorkers[name]) return this.initedWorkers[name];
     if (!this.availableWorkers[name])
       throw new Err('WORKER_NOT_FOUND', `In worker "${name}" not found index with exported default function`);
     const Worker = await importFn(this.availableWorkers[name]);
-    const worker = await Worker.createAndRun({
+    const worker = await Worker.start({
       app: this,
       rabbit: this.rabbit,
     });
@@ -34,7 +39,7 @@ export class WorkerApp extends Module {
     this.log.trace(`runWorkers(${workerKey})`);
     let workerNames;
     if (workerKey === '*') {
-      workerNames = Object.keys(this.workers);
+      workerNames = Object.keys(this.availableWorkers || {});
     } else if (workerKey) {
       workerNames = workerKey.split(',').map((w) => w.trim());
     }
