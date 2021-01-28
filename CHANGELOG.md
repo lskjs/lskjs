@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.11](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-01-28)
+
+
+### Features
+
+* **rabbit:** available to use wildcard workers ([c5575be](https://github.com/isuvorov/lib-starter-kit/commit/c5575becd61fd880ccfcb2cd58633a4ca3299dd2))
+
+
+
+
+
 # [2.2.0-beta.10](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-01-27)
 
 
