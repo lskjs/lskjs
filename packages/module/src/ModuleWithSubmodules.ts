@@ -72,7 +72,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     return Boolean(this.__availableModules[name]);
   }
 
-  moduleGetter(m: IModule): any {
+  async moduleGetter(m: IModule): Promise<any> {
     return m;
   }
 
@@ -103,10 +103,15 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     } else {
       name = nameOrNames;
     }
-
     // eslint-disable-next-line no-nested-ternary
     const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
-    if (this.__initedModules[name]) return this.__initedModules[name];
+    if (this.__initedModules[name]) {
+      const instance = this.__initedModules[name];
+      // @ts-ignore
+      if (getter) return getter(instance);
+      // @ts-ignore
+      return this.moduleGetter(instance);
+    }
     if (this.debug) this.log.trace(`module(${name})`, debugInfo);
     const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) {
@@ -131,7 +136,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
       // @ts-ignore
       if (getter) return getter(instance);
-      return this.moduleGetter(instance);
+      return await this.moduleGetter(instance);
     } catch (err) {
       this.log.fatal(`module(${name})`, err);
       throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
