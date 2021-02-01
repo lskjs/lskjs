@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
+
+
+### Bug Fixes
+
+* **worker:** get deplay from config ([a4eb158](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/a4eb1585b0fed7db02f79f4916701d32ccfb7b97))
+
+
+
+
+
 # [2.2.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
 
 

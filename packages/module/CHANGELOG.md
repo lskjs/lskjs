@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** fix inject cache ([64104ef](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/64104ef9903227d863eaa80d37d16bfb60ddf2e1))
+
+
+
+
+
 # [2.2.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
 
 
