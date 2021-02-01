@@ -1,6 +1,6 @@
-import { Module } from '@lskjs/module';
 import mapValues from 'lodash/mapValues';
 
+import { Module } from '../Module';
 import { ItemModule } from './ItemModule';
 
 export class ItemsModule extends Module {
@@ -32,14 +32,14 @@ export class ItemsModule extends Module {
   }
 
   moduleGetter(m) {
-    return m;
+    return m.item;
   }
 
   async getModules() {
-    const items = await this.getIteem();
+    const items = await this.getItems();
     return {
-      ...super.getModules(),
-      ...mapValues(items, (Item) => [this.ItemModule, { Item }]),
+      ...(await super.getModules()),
+      ...mapValues(items, (item) => [this.ItemModule, { item }]),
     };
   }
 }

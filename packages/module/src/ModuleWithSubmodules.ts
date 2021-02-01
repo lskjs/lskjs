@@ -106,10 +106,10 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     // eslint-disable-next-line no-nested-ternary
     const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
     if (this.__initedModules[name]) {
-      const instance = this.__initedModules[name];
+      const instance = this.__initedModules[name]!;
+      if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
       // @ts-ignore
       if (getter) return getter(instance);
-      // @ts-ignore
       return this.moduleGetter(instance);
     }
     if (this.debug) this.log.trace(`module(${name})`, debugInfo);

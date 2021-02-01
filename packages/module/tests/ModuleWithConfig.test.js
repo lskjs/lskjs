@@ -2,7 +2,7 @@
 /* global test expect */
 import merge from 'lodash/merge';
 
-import Module from '../src/2';
+import { Module } from '../src';
 
 test('Case #0 — empty config', async () => {
   class SomeModule extends Module {}
