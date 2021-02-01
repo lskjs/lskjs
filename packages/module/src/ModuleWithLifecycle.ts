@@ -18,6 +18,12 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   name: string;
   __lifecycle: IModuleLifecycle = {};
 
+  static new<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): T {
+    const instance = new this();
+    instance.setProps(...propsArray, { '__lifecycle.create': new Date() });
+    return instance;
+  }
+
   static async create<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T> {
     const instance = new this();
     instance.setProps(...propsArray, { '__lifecycle.create': new Date() });
