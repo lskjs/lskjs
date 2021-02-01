@@ -125,7 +125,8 @@ export class RabbitWorker extends Module {
       await this.rabbit.nack(msg, { requeue: false });
       return;
     }
-    const job = await this.Job.create({
+    const job = this.Job.new({
+      '__lifecycle.create': new Date(),
       msg,
       params,
       worker: this,
@@ -134,7 +135,7 @@ export class RabbitWorker extends Module {
       config: this.config,
     });
     try {
-      await job.__run();
+      await job.start();
       if (!job.status) {
         await job.ackSuccess();
       }
@@ -149,7 +150,11 @@ export class RabbitWorker extends Module {
           this.log.warn('[delay] 10000');
           await Bluebird.delay(10000);
         }
-        await this.onConsumeError({ err, job });
+        if (job) {
+          await this.onConsumeError({ err, job, msg });
+        } else {
+          this.msg;
+        }
       } catch (err2) {
         this.log.error('error while onError', err2);
       }
