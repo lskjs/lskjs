@@ -1,4 +1,5 @@
 import { Module } from '../Module';
+import { ItemsModule } from '../items/ItemsModule';
 import { AsyncItemModule } from './AsyncItemModule';
 
 export class AsyncItemsModule extends ItemsModule {
