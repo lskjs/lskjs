@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.14](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-02-01)
+
+
+### Features
+
+* **db:** fix ModelsModule getter ([1301076](https://github.com/isuvorov/lib-starter-kit/commit/1301076bdb1e790ae81266959498c95f1f68062c))
+
+
+
+
+
 # [2.2.0-beta.13](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
 
 
