@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+
+### Features
+
+* **uapp:** collection items module concept ([de0f899](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/de0f8994739b121b05d3ae813758eb8801914cc1))
+
+
+
+
+
 # [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
 
 
