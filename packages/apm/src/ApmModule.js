@@ -57,7 +57,7 @@ export class ApmModule extends Module {
   }
 
   async triggerStat(props) {
-    this.log.trace('[triggerStat]', props);
+    // this.log.trace('[triggerStat]', props);
     const { name, type, subtype, action, status, err, time = 0, ...labels } = props;
     const endTime = new Date().toISOString();
     const startTime = new Date(Date.now() - time).toISOString();
