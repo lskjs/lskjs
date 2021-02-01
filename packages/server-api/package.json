@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "2.2.0-beta.5",
+  "version": "2.2.0-beta.12",
   "description": "LSK server-api.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/utils": "2.2.0-beta.5"
+    "@lskjs/utils": "2.2.0-beta.12"
   },
   "devDependencies": {
     "axios": "0.21.1",

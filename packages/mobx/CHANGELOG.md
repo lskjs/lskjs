@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/mobx/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **mobx:** safest mobx inject ([94f4003](https://github.com/lskjs/lskjs/tree/master/packages/mobx/commit/94f40035033ce2171f8f832ee738a2910b8d4e8d))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/mobx/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/mobx

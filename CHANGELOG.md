@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.12](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Bug Fixes
+
+* som fixes ([727d2d2](https://github.com/isuvorov/lib-starter-kit/commit/727d2d212dcefe8c7b1547fbe6ae5e87ac474535))
+* **proxy:** stats timer fixed ([d652dbe](https://github.com/isuvorov/lib-starter-kit/commit/d652dbe0515e3ce86e6b55764f4e8667cd01e724))
+
+
+### Features
+
+* **mobx:** safest mobx inject ([94f4003](https://github.com/isuvorov/lib-starter-kit/commit/94f40035033ce2171f8f832ee738a2910b8d4e8d))
+* **module:** new features of deep module injection ([cc8b0f9](https://github.com/isuvorov/lib-starter-kit/commit/cc8b0f95d5f77c8245ff03aebc6d802aaf2267ec))
+* **reactapp:** migrate reactapp to v2 ([23ce446](https://github.com/isuvorov/lib-starter-kit/commit/23ce446fb68257f231d93aab354b091b1753e8f6))
+* **uapp:** migrate uapp to v2 ([42eb155](https://github.com/isuvorov/lib-starter-kit/commit/42eb155c07cece432201bd7efe1a733fca274b93))
+* **utils:** omitNull ([c4fbe94](https://github.com/isuvorov/lib-starter-kit/commit/c4fbe942e7b23fbf87c8dde6c944164f6b5297ea))
+* **utils:** refactor env, global, polyfill ([b84b56f](https://github.com/isuvorov/lib-starter-kit/commit/b84b56f1fc297fa6fa446d6b990eda24d48d569f))
+
+
+
+
+
 # [2.2.0-beta.11](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-01-28)
 
 

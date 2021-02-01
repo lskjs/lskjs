@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.12](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **utils:** omitNull ([c4fbe94](https://github.com/lskjs/ux/tree/master/packages/utils/commit/c4fbe942e7b23fbf87c8dde6c944164f6b5297ea))
+* **utils:** refactor env, global, polyfill ([b84b56f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b84b56f1fc297fa6fa446d6b990eda24d48d569f))
+
+
+
+
+
 # [2.2.0-beta.5](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/utils

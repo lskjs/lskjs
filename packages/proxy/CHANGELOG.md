@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Bug Fixes
+
+* **proxy:** stats timer fixed ([d652dbe](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/d652dbe0515e3ce86e6b55764f4e8667cd01e724))
+
+
+
+
+
 # [2.2.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-01-27)
 
 

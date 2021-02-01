@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.12](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **reactapp:** migrate reactapp to v2 ([23ce446](https://github.com/lskjs/ux/tree/master/packages/reactapp/commit/23ce446fb68257f231d93aab354b091b1753e8f6))
+
+
+
+
+
 # [2.2.0-beta.7](https://github.com/lskjs/ux/tree/master/packages/reactapp/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
 
 **Note:** Version bump only for package @lskjs/reactapp

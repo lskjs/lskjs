@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **module:** new features of deep module injection ([cc8b0f9](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/cc8b0f95d5f77c8245ff03aebc6d802aaf2267ec))
+
+
+
+
+
 # [2.2.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
 
 
