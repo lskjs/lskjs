@@ -25,11 +25,13 @@ export const filterFn = (proxy, filter) => {
   return true;
 };
 
+const debug = false; /// __DEV__;
+
 export class ProxyManager extends Module {
   config = {
     stats: __DEV__,
-    updateInterval: __DEV__ ? 5 * 60 * 1000 : 10 * 60 * 1000,
-    statsInterval: __DEV__ ? 10 * 1000 : 3 * 60 * 1000,
+    updateInterval: debug ? 5 * 60 * 1000 : 10 * 60 * 1000,
+    statsInterval: debug ? 10 * 1000 : 3 * 60 * 1000,
     strategy: 'linear',
   };
   strategies = strategies;
@@ -234,7 +236,7 @@ export class ProxyManager extends Module {
     await super.run();
     await this.update();
     this.interval = setInterval(() => this.update(), this.config.updateInterval);
-    if (this.config.stats) this.statsInterval = setInterval(() => this.update(), this.config.statsInterval);
+    if (this.config.stats) this.statsInterval = setInterval(() => this.stats(), this.config.statsInterval);
   }
 
   getProxyAgent(proxy) {
