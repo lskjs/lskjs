@@ -5,8 +5,8 @@ import { Schema } from 'mongoose';
 
 export class ModelModule extends Module {
   Schema = Schema;
-  Mode = null;
-  mode = null;
+  Model = null;
+  model = null;
   dbName = 'db';
   async createModel() {
     // : Promise<any>
