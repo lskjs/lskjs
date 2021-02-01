@@ -145,7 +145,7 @@ export class RabbitWorker extends Module {
       try {
         const errorParams = pick(error, 'nack', 'es', 'telegram', 'log');
         const err = new Err(error, errorParams);
-        const { delay = __DEV__ ? 10000 : 0 } = this.rabbit.config.options;
+        const { delay = __DEV__ ? 10000 : 0 } = this.config.options || {};
         if (delay) {
           this.log.warn('[delay] 10000');
           await Bluebird.delay(10000);
