@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.17](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** deep dependency injection bugs, cover tests ([adc1da1](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/adc1da196ab2c6a65572762579e302985237bbee))
+* **uapp:** some fixes ([366d51b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/366d51b2cd70e316d45f098e95be4f243d4aef1e))
+
+
+
+
+
 # [2.2.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
 
 
