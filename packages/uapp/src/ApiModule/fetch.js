@@ -7,13 +7,13 @@ export function fetch(...args) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const axios = this;
   const { authToken } = axios;
-  const [url, options = {}] = args;
-  if (isAbsoluteExternalUrl(url) || isClient) return axios(...args);
+  const [rawUrl, options = {}] = args;
+  if (isAbsoluteExternalUrl(rawUrl) || isClient) return axios(...args);
   // TODO: get port from backend
   // if (isClient) return axios.remoteFetch(...args);
   // TODO: сделать как-нибудь по нормальному и проверенно
   const port = 8080; // this.app.app.httpInstance.address().port
-  url = `http://localhost:${port}${url}`;
+  const url = `http://localhost:${port}${rawUrl}`;
 
   const { body = {}, method = 'GET', qs = {} } = options;
   const props = {

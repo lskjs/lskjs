@@ -49,8 +49,8 @@ export default class GrantClientModule extends GrantModule {
     return this.askServerGroup({ data: params });
   }
   async askServer({ userId, user, action, ...params }) {
-    // if (this.app.app.express)
-    const { data } = await this.app.api.fetch('/api/grant/can', {
+    const api = await this.app.module('api');
+    const { data } = await api.fetch('/api/grant/can', {
       method: 'POST',
       data: {
         action,
@@ -66,8 +66,8 @@ export default class GrantClientModule extends GrantModule {
     return data;
   }
   async askServerGroup(params) {
-    // if (this.app.app.express)
-    const { data } = await this.app.api.fetch('/api/grant/canGroup', {
+    const api = await this.app.module('api');
+    const { data } = await api.fetch('/api/grant/canGroup', {
       method: 'POST',
       data: params,
       body: params,

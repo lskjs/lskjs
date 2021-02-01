@@ -1,10 +1,12 @@
 import Module from '@lskjs/module';
 import axios from 'axios';
 
+import { fetch } from './fetch';
+
 export class ApiModule extends Module {
   client = axios;
   async init() {
-    await this.init();
+    await super.init();
     this.client = axios.create(this.config);
   }
   setToken(token) {
@@ -14,9 +16,10 @@ export class ApiModule extends Module {
   setAuthToken(token) {
     this.setToken(token);
   }
-  fetch(...args) {
-    return this.client(...args);
-  }
+  fetch = fetch;
+  // fetch(...args) {
+  //   return this.client(...args);
+  // }
   request(...args) {
     return this.client.request(...args);
   }
@@ -50,4 +53,3 @@ export class ApiModule extends Module {
 }
 
 export default ApiModule;
-;

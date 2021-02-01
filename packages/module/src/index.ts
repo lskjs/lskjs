@@ -6,6 +6,6 @@ export * from './ModuleWithSubmodules';
 export * from './ModuleWithLifecycle';
 export * from './Module';
 export * from './utils/createAsyncModule';
-export * from './ItemsModule';
+export * from './items';
 // export * from './utils/importAsyncModule';
 export { default } from './Module';
