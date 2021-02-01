@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-02-01)
+
+
+### Features
+
+* **module:** create asyncItems ([b2525c1](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b2525c13a85c90d85338643f9dbbcd7b02c5f40d))
+
+
+
+
+
 # [2.2.0-beta.17](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-02-01)
 
 
