@@ -4,23 +4,28 @@ import { Provider as DefaultMobxProvider } from 'mobx-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const UappProvider = ({ uapp, children: rawChildren }) => {
-  let children = <>{rawChildren}</>;
+const UappProvider = ({ app, page, children: rawChildren }) => {
+  let children = <>{rawChildren}</>; // TODO: checks
+  console.log({ page });
 
   const { MobxProvider } = UappProvider;
   let stores;
-  if (uapp && uapp.__providers) {
-    stores = uapp.__providers;
+  if (app && app.__providers) {
+    stores = app.__providers;
   } else {
     stores = {};
   }
   if (stores && Object.keys(stores).length && MobxProvider) {
-    children = <MobxProvider {...stores}>{children}</MobxProvider>;
+    children = (
+      <MobxProvider {...stores} page={page}>
+        {children}
+      </MobxProvider>
+    );
   }
 
   const { LinkProvider } = UappProvider;
-  if (uapp && uapp.history && LinkProvider) {
-    children = <LinkProvider onClick={(url) => uapp.history.push(url)}>{children}</LinkProvider>;
+  if (app && app.history && LinkProvider) {
+    children = <LinkProvider onClick={(url) => app.history.push(url)}>{children}</LinkProvider>;
   }
 
   const { theme } = stores;
@@ -34,7 +39,7 @@ const UappProvider = ({ uapp, children: rawChildren }) => {
 
 UappProvider.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  uapp: PropTypes.object.isRequired,
+  app: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };
 UappProvider.MobxProvider = DefaultMobxProvider;

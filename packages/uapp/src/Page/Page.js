@@ -1,32 +1,31 @@
-import assignProps from '@lskjs/utils/assignProps';
-import createLogger from '@lskjs/utils/createLogger';
+import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import merge from 'lodash/merge';
 import { observable } from 'mobx';
 import React from 'react';
 // import Loading from '@lskjs/general/Loading';
 
 // const DEBUG = __DEV__ && false;
-const debug = createLogger({ name: 'uapp/Page', enable: __DEV__ && false });
 // const deprecated = createLogger({ name: 'uapp/Page', type: 'deprecated' });
 
 // DEBUG ? () => null : console.log; // eslint-disable-line no-console
 // const DEBUG = true;
 
-export default class Page {
+export class PageModule extends Module {
   _page = 1;
   @observable state = {};
   rootState = null;
 
-  constructor(...props) {
-    assignProps(this, ...props);
-  }
-
-  init() {
+  beforeResolve() {
+    this.exit();
     this.state = {};
     this._page += 1;
   }
+  afterResolve() {
+    //
+  }
+
   async wait(promise) {
     const beforePageId = this._page;
     let res;
@@ -47,6 +46,7 @@ export default class Page {
       ...(this.rootState || {}),
     };
   }
+
   getMeta() {
     const meta = (this.state && this.state.meta) || {};
     const title = (this.state.metas || [])
@@ -60,7 +60,7 @@ export default class Page {
   }
 
   onExit(fn) {
-    debug('Page.onExit');
+    this.log.trace('onExit()');
     const { onExit = [] } = this.state;
     this.setState({
       onExit: [...onExit, fn],
@@ -68,26 +68,17 @@ export default class Page {
     return this;
   }
 
-  scrollTo(id) {
-    console.log(`Not realized: Uapp.scrollTo(${id})`); // eslint-disable-line no-console
-  }
-
   async exit() {
-    debug('Page.exit');
+    this.log.trace('exit()');
     const { onExit } = this.state;
     if (onExit && onExit.length) {
-      await Promise.map(onExit, (fn) => fn());
+      await Bluebird.map(onExit, (fn) => fn());
       this.state.onExit = [];
     }
   }
 
-  async enter() {
-    debug('Page.enter');
-    this.scrollTo(0);
-  }
-
   setState(state = {}) {
-    debug('Page.setState');
+    this.log.trace('setState()');
     this.state = {
       ...this.state,
       ...state,
@@ -96,7 +87,7 @@ export default class Page {
   }
 
   catchError(err) {
-    debug('Page.error', err);
+    this.log.trace('error()', err);
     if (__DEV__) {
       this.uapp.onError(err);
     }
@@ -116,13 +107,13 @@ export default class Page {
   }
 
   loading(...args) {
-    debug('Page.loading');
+    this.log.trace('loading()');
     if (!args.length) return this.component('Loading...');
     return this.component(...args);
   }
 
   async next(next) {
-    debug('Page.next');
+    this.log.trace('next()');
     if (this.disabled) return this;
     try {
       const res = await next();
@@ -133,7 +124,7 @@ export default class Page {
   }
 
   meta(meta) {
-    debug('Page.meta', JSON.stringify(this.state.metas), meta);
+    this.log.trace('meta()', JSON.stringify(this.state.metas), meta);
     if (!this.state.metas) this.state.metas = [];
     this.state.metas.push(meta);
     this.state.meta = merge({}, ...this.state.metas);
@@ -143,7 +134,7 @@ export default class Page {
   components = [];
 
   async component(...args) {
-    debug('Page.component', args[0]);
+    this.log.trace('component()', args[0]);
     const result = await args[0];
     if (result.default) {
       args[0] = result.default; // eslint-disable-line no-param-reassign
@@ -156,41 +147,20 @@ export default class Page {
     } else {
       this.components = args[0]; // eslint-disable-line prefer-destructuring
     }
-    debug('Page.components', this.components);
+    this.log.trace('components()', this.components);
     return this;
   }
 
   redirect(...args) {
     const [redirect] = args;
-    debug('Page.redirect', redirect);
+    this.log.trace('redirect()', redirect);
     if (this.disabled) return this;
     this.state.redirect = args;
     return this;
   }
 
-  // ///////////////////////////////////////////////////////////////////////
-  renderLayout(props = {}, layout = null) {
-    debug('Page.renderLayout');
-    // debug('Page.renderLayout');
-    // console.log('page.renderLayout', props);
-    // if (typeof props.children === 'undefined') {
-    //   props.children = 'undefined'
-    // }
-    if (!this.state.layout && !layout) {
-      return props.children;
-    }
-    let Layout;
-    if (layout) {
-      Layout = layout;
-    } else {
-      Layout = this.state.layout;
-    }
-
-    return React.createElement(Layout, props);
-  }
-
   renderComponent() {
-    debug('Page.renderComponent', this.state);
+    this.log.trace('renderComponent()', this.state);
     let Component;
     let props = {};
     if (Array.isArray(this.components)) {
@@ -204,10 +174,9 @@ export default class Page {
     return React.createElement(Component, props);
   }
 
-  renderComponentWithLayout() {
-    debug('Page.renderComponentWithLayout');
+  render() {
+    this.log.trace('renderRoot()');
     let children = this.renderComponent();
-    // console.log('page.children111', children, typeof children, typeof children === 'undefined');
     if (typeof children === 'undefined') {
       if (__DEV__) {
         children = 'Page return empty result';
@@ -215,18 +184,10 @@ export default class Page {
         children = '';
       }
     }
-    // console.log('page.children222', children, typeof children, typeof children === 'undefined');
-
-    return this.renderLayout({
-      children,
-    });
-  }
-
-  render() {
-    debug('Page.renderRoot');
-    const children = this.renderComponentWithLayout();
     const { Provider } = this;
     if (!Provider) return children;
-    return React.createElement(Provider, { uapp: this.uapp }, children);
+    return React.createElement(Provider, { app: this.app, page: this }, children);
   }
 }
+
+export default PageModule;
