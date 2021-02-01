@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
-import { IAsyncModule } from 'IModule.types';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import mapValues from 'lodash/mapValues';
 import omit from 'lodash/omit';
 
+import { IAsyncModule } from './IModule.types';
 // import { setProps } from './utils/setProps';
 import { ModuleWithEE } from './ModuleWithEE';
 import { IAsyncModuleKeyValue, IModule, IModuleKeyValue, IModuleWithSubmodules } from './types';
@@ -73,13 +72,18 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     return Boolean(this.__availableModules[name]);
   }
 
+  moduleGetter(m: IModule): any {
+    return m;
+  }
+
   async module(
     nameOrNames: string | string[],
-    { run: isRun = true, throw: throwIfNotFound = true } = {},
+    { run: isRun = true, throw: throwIfNotFound = true, getter = undefined } = {},
   ): Promise<IModule | IModuleKeyValue | null> {
-    if (!this.__lifecycle.initStart)
+    if (!this.__lifecycle.initStart) {
       throw new Err('MODULE_INVALID_WORKFLOW_INIT', 'please init module first before .module()');
-    if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
+    }
+    if (typeof nameOrNames === 'string' && !nameOrNames.includes('.') && nameOrNames.endsWith('*')) {
       const names = filterWildcard(Object.keys(this.__availableModules), nameOrNames);
       this.log.trace(`module(${nameOrNames})`, names);
       // eslint-disable-next-line no-param-reassign
@@ -88,13 +92,26 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     if (Array.isArray(nameOrNames)) {
       return asyncMapValues(arrayToObject(nameOrNames), (n: string) => this.module(n) as Promise<IModule>);
     }
-    const name = nameOrNames;
-    if (this.debug) this.log.trace(`module(${name})`, isRun ? 'run' : undefined);
+    let name;
+    let postfix;
+    if (nameOrNames.includes('.')) {
+      const [prefix, ...postfixArray] = nameOrNames.split('.');
+      name = prefix;
+      if (postfixArray.length) {
+        postfix = postfixArray.join('.');
+      }
+    } else {
+      name = nameOrNames;
+    }
+
+    // eslint-disable-next-line no-nested-ternary
+    const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
     if (this.__initedModules[name]) return this.__initedModules[name];
+    if (this.debug) this.log.trace(`module(${name})`, debugInfo);
     const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) {
       if (!throwIfNotFound) return null;
-      throw new Err('MODULE_INJECTING_NOT_FOUND', `Module "${name}" not found in module ${this.name}`, {
+      throw new Err('MODULE_INJECT_NOT_FOUND', `Module "${name}" not found in module ${this.name}`, {
         data: { name },
       });
     }
@@ -111,10 +128,13 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
           await instance.run();
         }
       }
-      return instance;
+      if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
+      // @ts-ignore
+      if (getter) return getter(instance);
+      return this.moduleGetter(instance);
     } catch (err) {
       this.log.fatal(`module(${name})`, err);
-      throw new Err('MODULE_INJECTING_ERROR', { data: { name } }, err);
+      throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
     }
   }
 
@@ -146,7 +166,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
   }
 
   private async __runModules(): Promise<void> {
-    await asyncMapValues(this.__initedModules, (m: IModule) => {
+    await asyncMapValues(this.__initedModules, async (m: IModule) => {
       let isNeedRun;
       if (!this.__lifecycle.initFinish) {
         isNeedRun = !!this.__lifecycle.autorun;
@@ -154,7 +174,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
         isNeedRun = !this.__lifecycle.runStart || (this.__lifecycle.runStart && this.__lifecycle.stopFinish);
       }
       if (!isNeedRun) return;
-      return m.start();
+      await m.start();
     });
   }
 

@@ -94,6 +94,8 @@ export interface IModuleWithEE extends IModuleWithLog, IEventEmitter {
   createEe(): IEventEmitter;
 }
 
+type IModuleGetter = (m: IModule) => any;
+
 export interface IModuleWithSubmodules extends IModuleWithEE {
   /**
    * private
@@ -115,7 +117,10 @@ export interface IModuleWithSubmodules extends IModuleWithEE {
   getModules(): IAsyncModuleKeyValue | Promise<IAsyncModuleKeyValue>;
   // module(name: string): Promise<IModule>;
   // module(names: string[]): Promise<IModuleKeyValue>;
-  module(nameOrNames: string | string[], { run }: { run: boolean }): Promise<null | IModule | IModuleKeyValue>;
+  module(
+    nameOrNames: string | string[],
+    options?: { run?: boolean; throw?: boolean; getter?: IModuleGetter },
+  ): Promise<null | IModule | IModuleKeyValue>;
 }
 
 export interface IModuleWithApp extends IModuleWithSubmodules {
