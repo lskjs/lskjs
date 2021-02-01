@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.15](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
+
+
+### Features
+
+* **module:** creation of object ([0d59e77](https://github.com/isuvorov/lib-starter-kit/commit/0d59e77e308ad8f5405364999e9fc261cf53f319))
+* **worker:** add more stability ([afceba2](https://github.com/isuvorov/lib-starter-kit/commit/afceba2f796935cfbb3647b32088f94fb244524d))
+
+
+
+
+
 # [2.2.0-beta.14](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-02-01)
 
 

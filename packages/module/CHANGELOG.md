@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
+
+
+### Features
+
+* **module:** creation of object ([0d59e77](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/0d59e77e308ad8f5405364999e9fc261cf53f319))
+
+
+
+
+
 # [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
 
 **Note:** Version bump only for package @lskjs/module
