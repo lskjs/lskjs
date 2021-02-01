@@ -1,9 +1,10 @@
 import { Module } from '@lskjs/module';
 import mapValues from 'lodash/mapValues';
 
-import { IAsyncModel, IAsyncModelKeyValue } from './types';
+import { ItemModule } from './ItemModule';
 
 export class ItemsModule extends Module {
+  ItemModule = ItemModule;
   /**
    */
   __items;
@@ -34,11 +35,11 @@ export class ItemsModule extends Module {
     return m;
   }
 
-  async getModules(): Promise<IAsyncModelKeyValue> {
-    const items = await this.getModels();
+  async getModules() {
+    const items = await this.getIteem();
     return {
       ...super.getModules(),
-      ...mapValues(items, (Model: IAsyncModel) => [() => import('./ModelModule'), { Model }]),
+      ...mapValues(items, (Item) => [this.ItemModule, { Item }]),
     };
   }
 }
