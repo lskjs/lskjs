@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.99.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.98.0...v1.99.0) (2021-02-02)
+
+
+### Features
+
+* **uapp:** dynamically meta with meta.observe support ([16a23e1](https://github.com/isuvorov/lib-starter-kit/commit/16a23e1f12b0f859fbfef26e9a26ca1f381ca935))
+
+
+
+
+
 # [1.98.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.97.0...v1.98.0) (2021-01-02)
 
 
