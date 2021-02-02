@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "1.99.0",
+  "version": "1.99.1",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -45,10 +45,10 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/db": "1.89.2",
-    "@lskjs/module": "1.99.0",
-    "@lskjs/server-api": "1.99.0",
-    "@lskjs/utils": "1.99.0"
+    "@lskjs/db": "1.99.1",
+    "@lskjs/module": "1.99.1",
+    "@lskjs/server-api": "1.99.1",
+    "@lskjs/utils": "1.99.1"
   },
   "devDependencies": {
     "axios": "^0.20.0",

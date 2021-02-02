@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "1.99.0",
+  "version": "1.99.1",
   "description": "LSK ux subrepo: utils",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "postinstall2": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "dependencies": {
-    "@lskjs/autobind": "1.89.2",
+    "@lskjs/autobind": "1.99.1",
     "async-mutex": "^0.2.4",
     "csv-string": "3.1.7",
     "normalize-unicode-text": "0.0.1",
