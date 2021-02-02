@@ -1,10 +1,12 @@
 import React from 'react';
 import merge from 'lodash/merge';
+import find from 'lodash/find';
+import omit from 'lodash/omit';
 import Promise from 'bluebird';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
 import Err from '@lskjs/utils/Err';
-import { observable } from 'mobx';
+import { observable, reaction } from 'mobx';
 // import Loading from '@lskjs/general/Loading';
 
 // const DEBUG = __DEV__ && false;
@@ -132,9 +134,23 @@ export default class Page {
     }
   }
 
-  meta(meta) {
-    debug('Page.meta', JSON.stringify(this.state.metas), meta);
+  meta(_meta) {
+    debug('Page.meta', JSON.stringify(this.state.metas), _meta);
     if (!this.state.metas) this.state.metas = [];
+    // Поддержка meta.observe
+    const meta = omit(_meta, 'observe');
+    if (_meta.observe && typeof meta.title === 'function') {
+      const titleFn = meta.title;
+      meta.title = titleFn(_meta.observe);
+      reaction(
+        () => _meta.observe.item,
+        () => {
+          const metaItem = find(this.state.metas, meta);
+          metaItem.title = titleFn(_meta.observe);
+          this.state.meta = merge({}, ...this.state.metas, metaItem);
+        },
+      );
+    }
     this.state.metas.push(meta);
     this.state.meta = merge({}, ...this.state.metas);
     return this;

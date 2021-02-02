@@ -6,7 +6,7 @@ import merge from 'lodash/merge';
 import forEach from 'lodash/forEach';
 import UniversalRouter from 'universal-router';
 import Promise from 'bluebird';
-import { observable } from 'mobx';
+import { observable, reaction } from 'mobx';
 import Favico from 'favico.js';
 import Api from '@lskjs/apiquery';
 import Apiq from '@lskjs/apiquery/q';
@@ -102,10 +102,24 @@ export default class Uapp extends Module {
       setTimeout(() => this.scrollTo(to, get(this, 'config.uapp.scrollTo')), 10); // @TODO: back && go to page
     }
     try {
-      const { title } = this.page.getMeta();
-      if (title && typeof document !== 'undefined') {
-        document.title = title;
+      const { title: firstTitle } = this.page.getMeta();
+      if (firstTitle && typeof document !== 'undefined') {
+        if (document.title !== firstTitle) {
+          document.title = firstTitle;
+        }
       }
+      // Поддержка meta.observe
+      reaction(
+        () => this.page.state.meta,
+        () => {
+          const { title } = this.page.getMeta();
+          if (title && typeof document !== 'undefined') {
+            if (document.title !== title) {
+              document.title = title;
+            }
+          }
+        },
+      );
     } catch (err) {
       // eslint-disable-next-line no-console
       if (__DEV__) console.error("Uapp can't set title");
