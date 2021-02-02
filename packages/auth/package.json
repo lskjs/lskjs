@@ -60,7 +60,7 @@
     "@lskjs/module": "1.78.0",
     "@lskjs/server-api": "1.98.0",
     "@lskjs/utils": "1.98.0",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",
     "lodash": "4.17.19",
