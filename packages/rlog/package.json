@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rlog",
-  "version": "1.99.1",
+  "version": "1.100.0",
   "description": "LSK module for remote logger.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

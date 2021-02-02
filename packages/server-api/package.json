@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "1.99.1",
+  "version": "1.100.0",
   "description": "LSK server-api.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
