@@ -35,9 +35,11 @@ export class RabbitWorker extends Module {
       .join('\n');
     // console.log(66666);
     // const str = `\n${err.code}\n${err.message || ''}\n\n${JSON.stringify(params)}\n\n/api/${this.name}?${toQs(params)}`;
-    this.app.rlog.error(str, {
-      prefix: `worker/${process.env.SERVICE || this.name}`,
-    });
+    if (this.app.rlog) {
+      this.app.rlog.error(str, {
+        prefix: `worker/${process.env.SERVICE || this.name}`,
+      });
+    }
   }
   async onConsumeError({ err, job }) {
     const errInfo = this.app && this.app.getErrorInfo ? this.app.getErrorInfo(Err.getCode(err)) : {};

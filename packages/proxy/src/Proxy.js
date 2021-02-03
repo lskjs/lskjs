@@ -13,6 +13,9 @@ export class Proxy {
   getState() {
     return pick(this, ['host', 'port', 'user', 'password', 'type', 'provider', 'ip', 'tags', 'uri', 'key']);
   }
+  getJson() {
+    return this.getState();
+  }
   getUrl() {
     return this.getUri();
   }
