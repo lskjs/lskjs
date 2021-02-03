@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sequelize",
-  "version": "2.2.0-beta.19",
+  "version": "2.2.0-beta.20",
   "description": "LSK module for sequelize.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "clear": "../../scripts/package-clear.sh"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.19",
+    "@lskjs/module": "2.2.0-beta.20",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
     "sequelize": "6.3.5"

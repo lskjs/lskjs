@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+
+### Bug Fixes
+
+* **worker:** prevent rlog errors ([0a3caf1](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/0a3caf16933f14288e2369bd2f143cbc9b60798a))
+
+
+
+
+
 # [2.2.0-beta.19](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.2.0-beta.17...v2.2.0-beta.19) (2021-02-02)
 
 **Note:** Version bump only for package @lskjs/proxy
