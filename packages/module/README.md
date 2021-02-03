@@ -1,7 +1,5 @@
 # @lskjs/module
-
-- Всё есть модуль
-
+Весь мир модуль и мы в нём подмодули
 
 -------------------
 
@@ -44,55 +42,105 @@
 - stoped - уже остановился
 
 
-### Modules public methods
+### Modules public static methods
 
-- Module.new()
-- Module.init() - как консструктор но асинхронный, делает необходимые импорты и устанвливет правильное состояние модуля
-- Module.run() - запускает все процессы в модуле
-- Module.start() - init and run and some magic?
+- module.init() - как консструктор но асинхронный, делает необходимые импорты и устанвливет правильное состояние модуля
+- module.run() - запускает все процессы в модуле
+- module.start() - init and run and some magic?
 
+- Module.new() - only create object
+- Module.create() - new + init
+- Module.start() - new + init + run -- init and run and some magic?
+
+
+## Просто взять и юзать
 ```js
-// ---
-const m = await Module.start(props);
-// ----
-const m = Module.new(props);
-///
-await m.start()
-// ---
-const m2 = await Module.create(props);
-await m2.start();
-// ----
-``
-
-
-
-
-### Как я хочу использовать модули
-
-
-#### Просто взять и юзать
-```js
-const theModule = new TheModule();
-await theModule.start()
+const theModule = await TheModule.start();
+theModule.name === 'TheModule'
 ```
 
-
-#### Прокидывать props в конструктор
+## Прокидывать props в конструктор
 ```js
-const theModule = new TheModule({ 
+const theModule = await TheModule.start({ 
   mode: 'private',
   config: { 
     value: 1
   },
 });
-await theModule.start()
 theModule.mode === 'private'
 theModule.config.value === 1
 ```
 
-### Прокидывать подмодули, разным образом
+## Разные способы создавать
 
-#### Как props в конструкторе
+```js
+// === Example 1 - common use === 
+const m = await Module.start(props);
+
+// === Example 2 - if you need inited modules for connection === 
+const m1 = await Module.create(props);
+const m2 = await Module.create(props);
+m1.m2 = m2;
+m2.m1 = m1;
+await m1.start();
+await m2.start();
+
+// === Example 3 – if you need uninited module  ===
+const m = Module.new(props);
+await m.start()
+```
+
+## Наследование
+
+```js
+class SomeModule extends Module {
+  async run() {
+    await super.run(); // очень важно не забывать super
+    if (this.param) {
+      doSomething();
+    }
+  } 
+}
+
+// Прокидывание параметров через конструктор
+
+const sm = await SomeModule.start({
+  param: 1312,
+});
+
+```
+
+## Конфиги
+
+```js
+class OtherModule extends Module {
+  async init() {
+    await super.init(); // очень важно не забывать super
+    if (this.config.param) {
+      doSomething();
+    }
+  } 
+}
+
+// SomeModule from the previous example
+const some = await SomeModule.start({
+  param: 1,
+  modules: {
+    other: OtherModule,
+  },
+  config: {
+    param: 2
+    some
+  }
+});
+
+const other = await m.module('other');
+```
+
+
+## Прокидывать подмодули, разным образом
+
+### Как props в конструкторе
 
 - как класс через require 
 - как промис через асинхронный import
@@ -110,7 +158,7 @@ const theModule = new TheModule({
 await theModule.start()
 ```
 
-#### Прокидывать подмодули с параметрами конструктора
+### Прокидывать подмодули с параметрами конструктора
 ```js
 const theModule = new TheModule({ 
   modules: {
@@ -168,7 +216,7 @@ class TheModule extends Module {
 }
 ```
 
-## Еще не решенные вопросы
+## Еще не написана документация
 
 - проблема провайдеров
 - у модуля должен быть логгер
@@ -177,61 +225,18 @@ class TheModule extends Module {
 - проблема моделей и модуля db (в init нужен mongoose)
 
 
-модуль
-подмодули
-провайдеры
-модели
-ee
-
-
-getModules
-
-modules={}
-
-fropmt
-
-
-
-TheModule
-
-
-new TheModule(, {providers: {}})
-
-как прокидывать конфиги дальше?
-
-https://gist.githubusercontent.com/JamesMessinger/5d31c053d0b1d52389eb2723f7550907/raw/41ac88d0cd00c55bac925891296df05c894c4a34/github-markdown.css
-
+- модуль
+- подмодули
+- провайдеры
+- модели
+- ee
+- inject
+- getModules
+- modules={}
+- new TheModule(, {providers: {}})
+- как прокидывать конфиги дальше?
 
 ## Гипотетическое использование
-
-```js
-class Module {
-  async getModules() {
-    return this.modules;
-  }
-  async init() {
-    this.name = this.constructor.name;
-    console.log('init', this.constructor.name)
-  }
-  async run() {
-    console.log('run', this.name)
-  }
-  
-}
-
-class TheModule extends Module {
-  async run() {
-    await super.run();
-    console.log('run2', this.name)
-  }
-}
-const m = new TheModule()
-m.run()
-
-console.log(m.name === 'TheModule');
-
-
-```
 
 
 ## Всякие ссылки
@@ -245,101 +250,103 @@ console.log(m.name === 'TheModule');
 
 # Модули и конфиги
 
-## Case 0 – empty config
-
-
+## Case 1 – empty config
 ```js
-
 class SomeModule extends Module { }
 
-const some = await SomeModule.create();
+const some = await SomeModule.start();
 
-some.config === {};
-
+console.log(some.config); // {}
 ```
----
-## Case 1 – default config
 
 
+## Case 2 – default config
 ```js
 class SomeModule extends Module {
-  defaultConfig = {
+  config = {
     a: 1,
+    b: 2
   };
 }
 
-const some = await SomeModule.create();
+const some = await SomeModule.start();
 
-some.config === {
-  a: 1,
-};
+console.log(some.config);
+// {
+//   a: 1,
+//   b: 2,
+// }
 ```
+
 ---
-## Case 2 - config while creation
+## Case 3 - config while creation
 
 ```js
-class SomeModule extends Module {}
-
-const some = await SomeModule.create({
+const some = await SomeModule.start({
   config: {
     a: 11,
   }
 });
 
-some.config === {
-  a: 11,
-};
+console.log(some.config);
+// {
+//   a: 11,
+// }
 ```
----
-## Case 3 - merging default and top config
+
+## Case 4 - merging default and top config
 ```js
 class SomeModule extends Module {
-  defaultConfig = {
+  config = {
     a: 1,
     b: 2,
+    z: {
+      za: 1,
+      zb: 2
+    }
+  };
+  other = {
+    e: 5,
+    f: 6,
   };
 }
 
 const some = await SomeModule.create({
   config: {
     a: 11,
-    c: 33
-  }
-})
-
-some.config === {
-  a: 11,
-  b: 2,
-  c: 33,
-}
-```
-
-## Case 4 - merging default and top config
-
-```js
-
-class SomeModule extends Module {
-  config = {
-    a: 1,
-    b: 2,
+    c: 33,
+    z: {
+      za: 11,
+      zc: 33
+    }
+  },
+  other: {
+    e: 55,
+    g: 77,
   };
-}
-
-const some = await SomeModule.create({
-  config: {
-    a: 2,
-    c: 3
-  }
 })
 
-some.config === {
-  a: 2,
-  b: 2,
-  c: 3,
-}
+// Мердж работает только с плоскими, конфигами. Но если очень хочется можно сделать глубокий merge
+console.log(some.config);
+// {
+//   a: 11,
+//   b: 2,
+//   c: 33,
+//   z: {
+//     za: 11,
+//     zc: 33,
+//   },
+// }
 
 
+// Другие объекты перетираются, но если очень хочется то можно сделать как в конфигах
+console.log(some.other);
+// {
+//   e: 55,
+//   g: 77,
+// }
 ```
+
 
 ---
 ## Case 5 - async config from db
