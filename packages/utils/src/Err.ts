@@ -1,12 +1,14 @@
 import forEach from 'lodash/forEach';
-import pick from 'lodash/pick';
 import omit from 'lodash/omit';
+import pick from 'lodash/pick';
 import uniq from 'lodash/uniq';
+
 import errMerge from './errMerge';
 
 const errUnknown = 'err_unknown';
 
 export const getMessage = (err: any, def = errUnknown): string => {
+  if (typeof err === 'string') return err;
   const errName = err && err.name !== 'Error' ? err.name : null;
   return (err && (err.message || err.text || err.code || errName)) || def;
 };
@@ -16,11 +18,10 @@ export const getText = (err: any, def = errUnknown): string => {
   return (err && uniq(array.filter(Boolean)).join('\n')) || errUnknown;
 };
 
-export const getCode = (err: any, def = errUnknown): string => {
-  return (err && (err.code || err.text || err.message)) || def;
-};
+export const getCode = (err: any, def = errUnknown): string => (err && (err.code || err.text || err.message)) || def;
 
-export const getJSON = (err: any, onlySafeField = false): object => {
+export const getJSON = (err: any, onlySafeField = false): Record<string, unknown> => {
+  if (typeof err === 'string') return { code: err, message: err };
   if (onlySafeField) return pick(err, ['name', 'code', 'message', 'text', 'data']);
   return omit(pick(err, Object.getOwnPropertyNames(err)), ['__err']);
 };
@@ -36,10 +37,11 @@ export default class Err extends Error {
     forEach(err, (val, key) => {
       if (key === 'message') {
         if (this.message !== val && val) {
-        // @ts-ignore
+          // @ts-ignore
           this.__parentErrorMessage = val; // TODO: может не надо?
         }
-      } else if (key === 'stack') { // TODO: подумать в будущем, может надо сохранять?
+      } else if (key === 'stack') {
+        // TODO: подумать в будущем, может надо сохранять?
         // @ts-ignore
         this.__parentErrorStack = val;
         // console.log('this.stack', this.stack);
@@ -59,13 +61,13 @@ export default class Err extends Error {
   static getCode(err: any, def = errUnknown): string {
     return getCode(err, def);
   }
-  static getJSON(err: any, onlySafeField = false): object {
+  static getJSON(err: any, onlySafeField = false): Record<string, unknown> {
     return getJSON(err, onlySafeField);
   }
   getText(): string {
     return getText(this);
   }
-  getJSON(onlySafeField = false): object {
+  getJSON(onlySafeField = false): Record<string, unknown> {
     return getJSON(this, onlySafeField);
   }
   getMessage(): string {
@@ -74,7 +76,7 @@ export default class Err extends Error {
   getCode(): string {
     return getCode(this);
   }
-  toJSON(): object {
+  toJSON(): Record<string, unknown> {
     const json = this.getJSON(true);
     return json;
   }
