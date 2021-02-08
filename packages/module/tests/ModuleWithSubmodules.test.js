@@ -1,6 +1,6 @@
 /* global test expect */
 
-import { ItemsModule, ItemModule as BaseItemModel, Module } from '../src';
+import { ItemModule as BaseItemModel, ItemsModule, Module } from '../src';
 
 const store1 = { a: 1 };
 
