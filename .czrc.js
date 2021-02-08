@@ -1,13 +1,3 @@
-const glob = require('glob');
-
-const globMap = (pattern, fn) =>
-  glob
-    .sync(pattern)
-    .map(fn || (path => path))
-    .map(path => path.replace(/\/$/, ''));
-
-const exclude = variants => path => variants.every(variant => !path.includes(variant));
-
 module.exports = {
   // prettier-ignore
   types: [

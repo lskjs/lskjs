@@ -6,13 +6,10 @@ coverage
 **/.DS_Store
 **/node_modules
 
-build
-packages/release*
-./release*
 storage
 .env*
 !.env.example.*
-**/___*
+**/__*
 packages/*/build
 packages/*/release*
 packages/*/storage

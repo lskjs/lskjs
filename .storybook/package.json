@@ -1,0 +1,32 @@
+{
+  "name": "@lskjs/storybook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "../scripts/storybook.sh",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@emotion/core": "11.0.0",
+    "@emotion/react": "11.1.4",
+    "@emotion/styled": "11.0.0",
+    "@types/storybook__react": "5.2.1",
+    "core-js": "^3.8.3",
+    "html-webpack-plugin": "5.0.0-beta.6",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.12.13",
+    "@storybook/addon-actions": "6.1.17",
+    "@storybook/addon-essentials": "6.1.17",
+    "@storybook/addon-links": "6.1.17",
+    "@storybook/react": "6.1.17",
+    "babel-loader": "8.2.2"
+  }
+}

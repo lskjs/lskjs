@@ -4,12 +4,10 @@ build
 release*
 storage
 .storybook
-.env*
 
 packages/*/build
 packages/*/release*
 packages/*/storage
 packages/*/.storybook
-packages/*/.env*
 packages/*/cra
 packages/*/public
