@@ -13,6 +13,7 @@ export function exec(command, options = {}) {
   if (trace) trace('>>>', trim(command));
   return new Promise((resolve, reject) => {
     const proc = cp.exec(command, { ...otherOptions }, (err, stdout, stderr) => {
+      if (trace) trace('<<< ', trim(command), '<<< finished, code:', err);
       if (err) {
         reject({ err, stdout, stderr }); // eslint-disable-line prefer-promise-reject-errors
         return;
