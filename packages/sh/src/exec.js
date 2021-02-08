@@ -1,11 +1,6 @@
 import trim from '@lskjs/utils/trimSpaces';
 import cp from 'child_process';
 
-// {
-// shell: true,
-// stdio: 'inherit',
-// }
-
 export function exec(command, options = {}) {
   const {
     trace = console.log, // eslint-disable-line no-console

@@ -1,11 +1,6 @@
 import trim from '@lskjs/utils/trimSpaces';
 import { spawn as nativeSpawn } from 'child_process';
 
-// {
-// shell: true,
-// stdio: 'inherit',
-// }
-
 export function spawn(command, args = [], options = {}) {
   const {
     trace = console.log, // eslint-disable-line no-console
@@ -15,7 +10,7 @@ export function spawn(command, args = [], options = {}) {
     ...otherOptions
   } = options;
 
-  if (trace) trace('>>>', trim(command));
+  if (trace) trace('>>>', trim(command, args.join(' ')));
   return new Promise((resolve, reject) => {
     const proc = nativeSpawn(command, args, otherOptions);
     if (proc.stdout) {
@@ -33,7 +28,7 @@ export function spawn(command, args = [], options = {}) {
     proc.on('exit', (code) => {
       if (!code) return resolve(proc);
       // eslint-disable-next-line prefer-promise-reject-errors
-      reject({ proc, code });
+      return reject({ proc, code });
     });
   });
 }
