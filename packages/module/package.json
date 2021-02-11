@@ -19,8 +19,8 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/log2": "2.2.0-beta.13",
-    "@lskjs/utils": "2.2.0-beta.20",
+    "@lskjs/log2": "2.2.0-beta.21",
+    "@lskjs/utils": "2.2.0-beta.21",
     "colors": "^1.4.0",
     "eventemitter3": "4.0.7"
   },
@@ -30,7 +30,7 @@
     "lodash": "4.17.20"
   },
   "name": "@lskjs/module",
-  "version": "2.2.0-beta.20",
+  "version": "2.2.0-beta.21",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

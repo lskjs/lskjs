@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.21](https://github.com/lskjs/ux/tree/master/packages/sh/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Bug Fixes
+
+* **utils:** disable polyfill traces ([31d2402](https://github.com/lskjs/ux/tree/master/packages/sh/commit/31d2402a90fa3d965ec2482cb8cd922a2006f0b9))
+
+
+### Features
+
+* **sh:** add shell, improve exec and spawn ([db1a6d2](https://github.com/lskjs/ux/tree/master/packages/sh/commit/db1a6d21abab6ab5b2efd3c6d2cd9e11726c1998))
+* **sh:** improve exec and spawn ([be51042](https://github.com/lskjs/ux/tree/master/packages/sh/commit/be51042cbb9c27a7b626fafcd9f70d44aca055a3))
+* **sh:** improve exec and spawn trace logs ([0922f25](https://github.com/lskjs/ux/tree/master/packages/sh/commit/0922f2508e065c89bd8ab039d1cb8e8680092694))
+
+
+
+
+
 # [2.2.0-beta.13](https://github.com/lskjs/ux/tree/master/packages/sh/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
 
 **Note:** Version bump only for package @lskjs/sh

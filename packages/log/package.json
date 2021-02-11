@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@browser-bunyan/levels": "1.6.0",
-    "@lskjs/bunyan": "2.2.0-beta.13",
-    "@lskjs/utils": "2.2.0-beta.20",
+    "@lskjs/bunyan": "2.2.0-beta.21",
+    "@lskjs/utils": "2.2.0-beta.21",
     "browser-bunyan": "1.6.3",
     "source-map-support": "0.5.19"
   },
@@ -29,7 +29,7 @@
     "axios": "0.21.1"
   },
   "name": "@lskjs/log",
-  "version": "2.2.0-beta.20",
+  "version": "2.2.0-beta.21",
   "description": "LSK log.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

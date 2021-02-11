@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.21](https://github.com/lskjs/lsk-cli/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Bug Fixes
+
+* **utils:** disable polyfill traces ([31d2402](https://github.com/lskjs/lsk-cli/commit/31d2402a90fa3d965ec2482cb8cd922a2006f0b9))
+* **worker:** if dont have apm ([e1b6a39](https://github.com/lskjs/lsk-cli/commit/e1b6a39e8f559b82d80fa606b7427eb8ec6055a0))
+
+
+### Features
+
+* **module:** improve asyncItems ([853dbad](https://github.com/lskjs/lsk-cli/commit/853dbad35739150866811a541d70a400378dbd3f))
+* **sh:** add shell, improve exec and spawn ([db1a6d2](https://github.com/lskjs/lsk-cli/commit/db1a6d21abab6ab5b2efd3c6d2cd9e11726c1998))
+* **sh:** improve exec and spawn ([be51042](https://github.com/lskjs/lsk-cli/commit/be51042cbb9c27a7b626fafcd9f70d44aca055a3))
+* **sh:** improve exec and spawn trace logs ([0922f25](https://github.com/lskjs/lsk-cli/commit/0922f2508e065c89bd8ab039d1cb8e8680092694))
+* **utils:** add params notNan, improve toInt and toNumber ([a92686c](https://github.com/lskjs/lsk-cli/commit/a92686cd26708311f525465df08093b7e8e02e0c))
+
+
+
+
+
 # [2.2.0-beta.20](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
 
 

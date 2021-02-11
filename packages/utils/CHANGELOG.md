@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.21](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Bug Fixes
+
+* **utils:** disable polyfill traces ([31d2402](https://github.com/lskjs/ux/tree/master/packages/utils/commit/31d2402a90fa3d965ec2482cb8cd922a2006f0b9))
+
+
+### Features
+
+* **utils:** add params notNan, improve toInt and toNumber ([a92686c](https://github.com/lskjs/ux/tree/master/packages/utils/commit/a92686cd26708311f525465df08093b7e8e02e0c))
+
+
+
+
+
 # [2.2.0-beta.20](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
 
 

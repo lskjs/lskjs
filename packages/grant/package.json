@@ -20,17 +20,17 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.20",
-    "@lskjs/utils": "2.2.0-beta.20",
+    "@lskjs/module": "2.2.0-beta.21",
+    "@lskjs/utils": "2.2.0-beta.21",
     "async-mutex": "0.2.6"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.2.0-beta.20",
+    "@lskjs/server-api": "2.2.0-beta.21",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
   "name": "@lskjs/grant",
-  "version": "2.2.0-beta.20",
+  "version": "2.2.0-beta.21",
   "description": "LSK module for grant.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

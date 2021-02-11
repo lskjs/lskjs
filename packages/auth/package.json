@@ -19,8 +19,8 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.20",
-    "@lskjs/utils": "2.2.0-beta.20",
+    "@lskjs/module": "2.2.0-beta.21",
+    "@lskjs/utils": "2.2.0-beta.21",
     "bcryptjs": "2.4.3",
     "jsonwebtoken": "8.5.1",
     "passport": "0.4.1",
@@ -28,9 +28,9 @@
     "validator": "13.5.2"
   },
   "devDependencies": {
-    "@lskjs/db": "2.2.0-beta.20",
+    "@lskjs/db": "2.2.0-beta.21",
     "@lskjs/mobx": "2.2.0-beta.5",
-    "@lskjs/server-api": "2.2.0-beta.20",
+    "@lskjs/server-api": "2.2.0-beta.21",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",
@@ -43,7 +43,7 @@
     "passport-youtube-v3": "2.1.0"
   },
   "name": "@lskjs/auth",
-  "version": "2.2.0-beta.20",
+  "version": "2.2.0-beta.21",
   "description": "LSK module for auth.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

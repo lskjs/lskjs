@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Bug Fixes
+
+* **worker:** if dont have apm ([e1b6a39](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/e1b6a39e8f559b82d80fa606b7427eb8ec6055a0))
+
+
+
+
+
 # [2.2.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
 
 

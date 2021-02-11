@@ -19,11 +19,10 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/utils": "2.2.0-beta.20"
+    "@lskjs/utils": "2.2.0-beta.21"
   },
-  "devDependencies": {},
   "name": "@lskjs/sh",
-  "version": "2.2.0-beta.13.7",
+  "version": "2.2.0-beta.21",
   "description": "LSK ux subrepo: sh",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

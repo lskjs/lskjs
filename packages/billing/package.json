@@ -19,12 +19,12 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.20",
-    "@lskjs/utils": "2.2.0-beta.20"
+    "@lskjs/module": "2.2.0-beta.21",
+    "@lskjs/utils": "2.2.0-beta.21"
   },
   "devDependencies": {
-    "@lskjs/db": "2.2.0-beta.20",
-    "@lskjs/server-api": "2.2.0-beta.20",
+    "@lskjs/db": "2.2.0-beta.21",
+    "@lskjs/server-api": "2.2.0-beta.21",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "crypto-js": "4.0.0",
@@ -32,7 +32,7 @@
     "yandex-checkout": "1.0.13"
   },
   "name": "@lskjs/billing",
-  "version": "2.2.0-beta.20",
+  "version": "2.2.0-beta.21",
   "description": "LSK module for database.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

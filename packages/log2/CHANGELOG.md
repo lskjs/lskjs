@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
 # [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
 
 **Note:** Version bump only for package @lskjs/log2

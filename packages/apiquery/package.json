@@ -29,7 +29,7 @@
     "lodash": "4.17.20"
   },
   "name": "@lskjs/apiquery",
-  "version": "2.2.0-beta.13",
+  "version": "2.2.0-beta.21",
   "description": "http/s + websockets api client for Web, Node.js and React Native throw fetch or axios",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

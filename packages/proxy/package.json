@@ -19,8 +19,8 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.0-beta.20",
-    "@lskjs/utils": "2.2.0-beta.20",
+    "@lskjs/module": "2.2.0-beta.21",
+    "@lskjs/utils": "2.2.0-beta.21",
     "async-mutex": "0.2.6",
     "https-proxy-agent": "5.0.0",
     "socks-proxy-agent": "5.0.0"
@@ -31,7 +31,7 @@
     "lodash": "4.17.20"
   },
   "name": "@lskjs/proxy",
-  "version": "2.2.0-beta.20",
+  "version": "2.2.0-beta.21",
   "description": "LSK module for proxy.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

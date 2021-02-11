@@ -26,7 +26,7 @@
     "lodash": "4.17.20"
   },
   "name": "@lskjs/tbot",
-  "version": "2.2.0-beta.13",
+  "version": "2.2.0-beta.21",
   "description": "LSK module.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

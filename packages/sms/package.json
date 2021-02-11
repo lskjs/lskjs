@@ -19,14 +19,14 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/utils": "2.2.0-beta.20"
+    "@lskjs/utils": "2.2.0-beta.21"
   },
   "devDependencies": {
     "axios": "0.21.1",
     "plivo": "4.12.0"
   },
   "name": "@lskjs/sms",
-  "version": "2.2.0-beta.13",
+  "version": "2.2.0-beta.21",
   "description": "LSK module for sms.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

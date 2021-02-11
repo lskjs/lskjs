@@ -19,7 +19,7 @@
     "lsk": "lsk"
   },
   "dependencies": {
-    "@lskjs/utils": "2.2.0-beta.20"
+    "@lskjs/utils": "2.2.0-beta.21"
   },
   "devDependencies": {
     "axios": "0.21.1",
@@ -29,7 +29,7 @@
     "mobx-react": "7.1.0"
   },
   "name": "@lskjs/mobx",
-  "version": "2.2.0-beta.13",
+  "version": "2.2.0-beta.21",
   "description": "LSK module for mobx.",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",

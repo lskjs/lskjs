@@ -18,10 +18,8 @@
     "i18": "lsk run i18",
     "lsk": "lsk"
   },
-  "dependencies": {},
-  "devDependencies": {},
   "name": "@lskjs/launcher",
-  "version": "2.2.0-beta.13",
+  "version": "2.2.0-beta.21",
   "description": "LSK Launcher.",
   "author": "Andrey Kondalov <i@yukio.ru>",
   "license": "MIT",
