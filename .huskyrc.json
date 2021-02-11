@@ -1,6 +1,7 @@
 {
   "hooks": {
-    "pre-commit": "echo 123",
+    "pre-commit": "exti 1",
+    "pre-push": "echo test",
     "commit-msg": "echo 123"
   }
 }
