@@ -1,22 +1,24 @@
 {
+  "name": "@lskjs/getspreadsheet",
+  "version": "2.2.0-beta.21",
+  "description": "LSK getspreadsheet.",
+  "keywords": [],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "bin": {
+    "getspreadsheet": "./bin/getspreadsheet.js"
+  },
   "scripts": {
-    "start": "lsk run start",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "dev:cra": "lsk run dev:cra",
-    "dev:cra-and-server": "lsk run dev:cra-and-server",
-    "postversion": "lsk run postversion",
-    "lint:js": "lsk run lint:js",
     "bootstrap": "lsk run bootstrap",
-    "update": "lsk run update",
     "build": "lsk run build",
-    "watch": "lsk run watch",
-    "bump": "lsk run bump",
-    "release": "lsk run release",
-    "release:docs": "lsk run release:docs",
-    "storybook": "lsk run storybook",
+    "dev": "lsk run dev",
     "i18": "lsk run i18",
-    "lsk": "lsk"
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
   },
   "dependencies": {
     "bluebird": "3.7.2",
@@ -30,23 +32,13 @@
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
-  "name": "@lskjs/getspreadsheet",
-  "version": "2.2.0-beta.21",
-  "description": "LSK getspreadsheet.",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
-  "keywords": [],
   "peerDependencies": {
     "@babel/runtime": "7.12.5",
     "axios": "0.21.1",
     "bluebird": "*",
     "lodash": "4.17.20"
   },
-  "bin": {
-    "getspreadsheet": "./bin/getspreadsheet.js"
+  "publishConfig": {
+    "access": "public"
   }
 }

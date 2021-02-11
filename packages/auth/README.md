@@ -1,5 +1,5 @@
-# LSK Auth
-
+# LSK.js – auth
+> module for authorization by login and password and singup through social networks
 
 # достал из chat.server.js
 

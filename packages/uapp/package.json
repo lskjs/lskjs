@@ -1,22 +1,31 @@
 {
+  "name": "@lskjs/uapp",
+  "version": "2.2.0-beta.21",
+  "description": "LSK universal react app wrapper",
+  "keywords": [
+    "database",
+    "mongoose",
+    "schema"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/uapp",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "contributors": [
+    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
+    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
+    "Nata <natavts@gmail.com> (https://natavts.ru)",
+    "Andruxa <anchurikov94@gmail.com>"
+  ],
   "scripts": {
-    "start": "lsk run start",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "dev:cra": "lsk run dev:cra",
-    "dev:cra-and-server": "lsk run dev:cra-and-server",
-    "postversion": "lsk run postversion",
-    "lint:js": "lsk run lint:js",
     "bootstrap": "lsk run bootstrap",
-    "update": "lsk run update",
     "build": "lsk run build",
-    "watch": "lsk run watch",
-    "bump": "lsk run bump",
-    "release": "lsk run release",
-    "release:docs": "lsk run release:docs",
-    "storybook": "lsk run storybook",
+    "dev": "lsk run dev",
     "i18": "lsk run i18",
-    "lsk": "lsk"
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
   },
   "dependencies": {
     "@lskjs/module": "2.2.0-beta.21",
@@ -44,26 +53,6 @@
     "prop-types": "15.7.2",
     "react": "16.8.6"
   },
-  "name": "@lskjs/uapp",
-  "version": "2.2.0-beta.21",
-  "description": "LSK universal react app wrapper",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/uapp",
-  "keywords": [
-    "database",
-    "mongoose",
-    "schema"
-  ],
-  "contributors": [
-    "Igor Suvorov <hi@isuvorov.com> (https://isuvorov.com)",
-    "Andrey Kondalov <i@yukio.ru> (https://yukio.ru)",
-    "Nata <natavts@gmail.com> (https://natavts.ru)",
-    "Andruxa <anchurikov94@gmail.com>"
-  ],
   "peerDependencies": {
     "@lskjs/i18": "*",
     "@lskjs/link": "*",
@@ -75,5 +64,8 @@
     "mobx-react": "*",
     "prop-types": "*",
     "react": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

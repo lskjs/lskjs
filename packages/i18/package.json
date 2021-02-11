@@ -1,22 +1,25 @@
 {
+  "name": "@lskjs/i18",
+  "version": "2.2.0-beta.21",
+  "description": "LSK module for internationalization with i18next.",
+  "keywords": [
+    "i18",
+    "internationalization",
+    "schema"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/i18",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
-    "start": "lsk run start",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "dev:cra": "lsk run dev:cra",
-    "dev:cra-and-server": "lsk run dev:cra-and-server",
-    "postversion": "lsk run postversion",
-    "lint:js": "lsk run lint:js",
     "bootstrap": "lsk run bootstrap",
-    "update": "lsk run update",
     "build": "lsk run build",
-    "watch": "lsk run watch",
-    "bump": "lsk run bump",
-    "release": "lsk run release",
-    "release:docs": "lsk run release:docs",
-    "storybook": "lsk run storybook",
+    "dev": "lsk run dev",
     "i18": "lsk run i18",
-    "lsk": "lsk"
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
   },
   "dependencies": {
     "i18next": "19.1.0",
@@ -27,23 +30,12 @@
     "js-cookie": "2.2.1",
     "mobx": "5.15.4"
   },
-  "name": "@lskjs/i18",
-  "version": "2.2.0-beta.21",
-  "description": "LSK module for internationalization with i18next.",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/i18",
-  "keywords": [
-    "i18",
-    "internationalization",
-    "schema"
-  ],
   "peerDependencies": {
     "bluebird": "*",
     "js-cookie": "*",
     "mobx": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

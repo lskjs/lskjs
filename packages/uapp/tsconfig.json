@@ -1,27 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "ES2019",
-    "outDir": "build",
-    "module": "commonjs",
-    "sourceMap": true,
-    "allowJs": true,
-    "checkJs": false,
-    "jsx": "react",
-    "baseUrl": "src",
-
-    // 
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "noUnusedLocals": false,
-    "skipLibCheck": true
-  },
+  "extends": "@lskjs/babel-preset/tsconfig.json",
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": [
     "node_modules",

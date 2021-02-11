@@ -1,22 +1,23 @@
 {
+  "name": "@lskjs/elastic",
+  "version": "2.2.0-beta.21",
+  "description": "LSK module for elastic.",
+  "keywords": [
+    "elastic"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/elastic",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
-    "start": "lsk run start",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "dev:cra": "lsk run dev:cra",
-    "dev:cra-and-server": "lsk run dev:cra-and-server",
-    "postversion": "lsk run postversion",
-    "lint:js": "lsk run lint:js",
     "bootstrap": "lsk run bootstrap",
-    "update": "lsk run update",
     "build": "lsk run build",
-    "watch": "lsk run watch",
-    "bump": "lsk run bump",
-    "release": "lsk run release",
-    "release:docs": "lsk run release:docs",
-    "storybook": "lsk run storybook",
+    "dev": "lsk run dev",
     "i18": "lsk run i18",
-    "lsk": "lsk"
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
   },
   "dependencies": {
     "@lskjs/module": "2.2.0-beta.21",
@@ -26,19 +27,10 @@
   "devDependencies": {
     "lodash": "4.17.20"
   },
-  "name": "@lskjs/elastic",
-  "version": "2.2.0-beta.21",
-  "description": "LSK module for elastic.",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/elastic",
-  "keywords": [
-    "elastic"
-  ],
   "peerDependencies": {
     "lodash": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

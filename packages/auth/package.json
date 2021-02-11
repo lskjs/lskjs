@@ -1,22 +1,29 @@
 {
+  "name": "@lskjs/auth",
+  "version": "2.2.0-beta.21",
+  "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
+  "keywords": [
+    "auth",
+    "oAuth",
+    "passport",
+    "facebook",
+    "telegram",
+    "vk",
+    "vkontakte"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
-    "start": "lsk run start",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "dev:cra": "lsk run dev:cra",
-    "dev:cra-and-server": "lsk run dev:cra-and-server",
-    "postversion": "lsk run postversion",
-    "lint:js": "lsk run lint:js",
     "bootstrap": "lsk run bootstrap",
-    "update": "lsk run update",
     "build": "lsk run build",
-    "watch": "lsk run watch",
-    "bump": "lsk run bump",
-    "release": "lsk run release",
-    "release:docs": "lsk run release:docs",
-    "storybook": "lsk run storybook",
+    "dev": "lsk run dev",
     "i18": "lsk run i18",
-    "lsk": "lsk"
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
   },
   "dependencies": {
     "@lskjs/module": "2.2.0-beta.21",
@@ -42,24 +49,6 @@
     "passport-vkontakte": "0.5.0",
     "passport-youtube-v3": "2.1.0"
   },
-  "name": "@lskjs/auth",
-  "version": "2.2.0-beta.21",
-  "description": "LSK module for auth.",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
-  "keywords": [
-    "auth",
-    "oAuth",
-    "passport",
-    "facebook",
-    "telegram",
-    "vk",
-    "vkontakte"
-  ],
   "peerDependencies": {
     "@lskjs/db": "*",
     "@lskjs/mobx": "*",
@@ -69,6 +58,9 @@
     "js-cookie": "*",
     "lodash": "*",
     "mobx": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "optionalDeps": {
     "node-accountkit": "*",

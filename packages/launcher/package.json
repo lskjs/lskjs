@@ -1,31 +1,23 @@
 {
-  "scripts": {
-    "start": "lsk run start",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "dev:cra": "lsk run dev:cra",
-    "dev:cra-and-server": "lsk run dev:cra-and-server",
-    "postversion": "lsk run postversion",
-    "lint:js": "lsk run lint:js",
-    "bootstrap": "lsk run bootstrap",
-    "update": "lsk run update",
-    "build": "lsk run build",
-    "watch": "lsk run watch",
-    "bump": "lsk run bump",
-    "release": "lsk run release",
-    "release:docs": "lsk run release:docs",
-    "storybook": "lsk run storybook",
-    "i18": "lsk run i18",
-    "lsk": "lsk"
-  },
   "name": "@lskjs/launcher",
   "version": "2.2.0-beta.21",
   "description": "LSK Launcher.",
-  "author": "Andrey Kondalov <i@yukio.ru>",
+  "keywords": [],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/launcher",
   "license": "MIT",
+  "author": "Andrey Kondalov <i@yukio.ru>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "i18": "lsk run i18",
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/launcher",
-  "keywords": []
+  }
 }
