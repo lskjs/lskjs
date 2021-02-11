@@ -1,6 +1,29 @@
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
 
+export const apmMock = {
+  startTransaction() {
+    return {
+      end: () => null,
+      startSpan: () => ({ end: () => null }),
+      addLabels: () => null,
+      setLabel: () => null,
+    };
+  },
+  async captureError() {
+    return null;
+  },
+  setCustomContext() {
+    return null;
+  },
+  setLabel() {
+    return null;
+  },
+  addLabels() {
+    return null;
+  },
+};
+
 export class RabbitWorkerJob extends Module {
   redeliveredCount = __DEV__ ? null : 10;
   async init() {
@@ -10,6 +33,8 @@ export class RabbitWorkerJob extends Module {
     if (this.app.hasModule('apm')) {
       const apm = await this.app.module('apm', { throw: false });
       this.tx = apm.startTransaction(this.name, 'job');
+    } else {
+      this.tx = apmMock;
     }
   }
   getQueueMeta() {
