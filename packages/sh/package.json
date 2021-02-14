@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sh",
-  "version": "2.2.0-beta.22",
+  "version": "2.2.0-beta.23",
   "description": "LSK ux subrepo: sh",
   "keywords": [],
   "repository": "https://github.com/lskjs/ux/tree/master/packages/sh",
@@ -18,7 +18,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.2.0-beta.22"
+    "@lskjs/utils": "2.2.0-beta.23"
   },
   "publishConfig": {
     "access": "public"

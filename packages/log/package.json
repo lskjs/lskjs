@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "2.2.0-beta.22",
+  "version": "2.2.0-beta.23",
   "description": "LSK log.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/log",
@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@browser-bunyan/levels": "1.6.0",
-    "@lskjs/bunyan": "2.2.0-beta.22",
-    "@lskjs/utils": "2.2.0-beta.22",
+    "@lskjs/bunyan": "2.2.0-beta.23",
+    "@lskjs/utils": "2.2.0-beta.23",
     "browser-bunyan": "1.6.3",
     "source-map-support": "0.5.19"
   },
