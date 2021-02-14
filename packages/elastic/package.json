@@ -1,9 +1,10 @@
 {
   "name": "@lskjs/elastic",
   "version": "2.2.0-beta.21",
-  "description": "LSK module for elastic.",
+  "description": "LSK.js module for elastic search",
   "keywords": [
-    "elastic"
+    "elastic",
+    "elastic search"
   ],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/elastic",
   "license": "MIT",

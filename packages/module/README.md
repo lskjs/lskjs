@@ -1,6 +1,6 @@
 # LSK.js – module
 
-> LSK module.
+> @lskjs/module – Module system with dependency injection, event emitter, logger and submodules tree
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
 [![NPM version](https://badgen.net/npm/v/@lskjs/module)](https://www.npmjs.com/package/@lskjs/module)
@@ -15,6 +15,8 @@
 <!-- template file="scripts/templates/preview.md" start -->
 
 <!-- template end -->
+
+***
 
 <!-- # 📒 Table of contents  -->
 
@@ -91,7 +93,7 @@ yarn i @lskjs/module @types/lodash bluebird lodash
 npm i @lskjs/module @types/lodash bluebird lodash
 ```
 
-asdadasda
+asd
 
 # @lskjs/module
 
@@ -623,6 +625,8 @@ class Component {
 
 ```
 
+zxczxc
+
 # 📖 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
@@ -637,15 +641,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <table>
   <tr>
-    <td align="center"><a href="https://isuvorov.com"><img src="https://avatars2.githubusercontent.com/u/1056977?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Igor Suvorov</b></sub></a><br /><a href="#question-isuvorov" title="Answering Questions">💬</a> <a href="lskjs/lskjs///commits?author=isuvorov" title="Code">💻</a> <a href="#design-isuvorov" title="Design">🎨</a> <a href="lskjs/lskjs///commits?author=isuvorov" title="Documentation">📖</a> <a href="#example-isuvorov" title="Examples">💡</a> <a href="#ideas-isuvorov" title="Ideas, Planning, & Feedback">🤔</a> <a href="lskjs/lskjs///pulls?q=is%3Apr+reviewed-by%3Aisuvorov" title="Reviewed Pull Requests">👀</a> <a href="lskjs/lskjs///commits?author=isuvorov" title="Tests">⚠️</a> <a href="#a11y-isuvorov" title="Accessibility">️️️️♿️</a></td>
-    <td align="center"><a href="https://isuvorov.com"><img src="https://avatars2.githubusercontent.com/u/1056977?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Igor Suvorov</b></sub></a><br /><a href="#question-anoru" title="Answering Questions">💬</a> <a href="lskjs/lskjs///commits?author=anoru" title="Code">💻</a> <a href="#design-anoru" title="Design">🎨</a> <a href="lskjs/lskjs///commits?author=anoru" title="Documentation">📖</a> <a href="#example-anoru" title="Examples">💡</a> <a href="#ideas-anoru" title="Ideas, Planning, & Feedback">🤔</a> <a href="lskjs/lskjs///pulls?q=is%3Apr+reviewed-by%3Aanoru" title="Reviewed Pull Requests">👀</a> <a href="lskjs/lskjs///commits?author=anoru" title="Tests">⚠️</a> <a href="#a11y-anoru" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://isuvorov.com"><img src="https://avatars2.githubusercontent.com/u/1056977?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Igor Suvorov</b></sub></a><br /><a href="lskjs/lskjs///commits?author=isuvorov" title="Code">💻</a> <a href="#design-isuvorov" title="Design">🎨</a> <a href="#ideas-isuvorov" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
-
 <!-- markdownlint-restore -->
-
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 # 👏 Contributing

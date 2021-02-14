@@ -1,7 +1,7 @@
 {
   "name": "@lskjs/bots",
   "version": "2.2.0-beta.21",
-  "description": "LSK module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
+  "description": "LSK.js module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
     "slack",

@@ -1,8 +1,14 @@
 {
   "name": "@lskjs/module",
   "version": "2.2.0-beta.21",
-  "description": "LSK module.",
-  "keywords": [],
+  "description": "Module system with dependency injection, event emitter, logger and submodules tree",
+  "keywords": [
+    "modules",
+    "submodules",
+    "dependency injection",
+    "event emitter",
+    "logger"
+  ],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/module",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
