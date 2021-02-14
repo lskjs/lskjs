@@ -1,65 +1,164 @@
+# LSK.js – module
+
+> LSK module.
+
+[![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
+[![NPM version](https://badgen.net/npm/v/@lskjs/module)](https://www.npmjs.com/package/@lskjs/module)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/module)](https://www.npmjs.com/package/@lskjs/module)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/module)](https://bundlephobia.com/result?p=@lskjs/module)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/module)](https://www.npmjs.com/package/@lskjs/module)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/module)](https://bundlephobia.com/result?p=@lskjs/module)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/module)](https://bundlephobia.com/result?p=@lskjs/module)
+[![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
+[![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
+
+<!-- template file="scripts/templates/preview.md" start -->
+
+<!-- template end -->
+
+<!-- # 📒 Table of contents  -->
+
+# Table of contents
+
+*   [⌨️ Install](#️-install)
+
+*   [@lskjs/module](#lskjsmodule)
+
+*   [Манифест модульной архитектуры](#манифест-модульной-архитектуры)
+
+    *   [Основные цели](#основные-цели)
+
+    *   [Побочные фишки](#побочные-фишки)
+
+        *   [Modules lifecycle](#modules-lifecycle)
+        *   [Modules stage statuses](#modules-stage-statuses)
+        *   [Modules public static methods](#modules-public-static-methods)
+
+    *   [Просто взять и юзать](#просто-взять-и-юзать)
+
+    *   [Прокидывать props в конструктор](#прокидывать-props-в-конструктор)
+
+    *   [Разные способы создавать](#разные-способы-создавать)
+
+    *   [Наследование](#наследование)
+
+    *   [Конфиги](#конфиги)
+
+    *   [Прокидывать подмодули, разным образом](#прокидывать-подмодули-разным-образом)
+
+        *   [Как props в конструкторе](#как-props-в-конструкторе)
+
+        *   [Прокидывать подмодули с параметрами конструктора](#прокидывать-подмодули-с-параметрами-конструктора)
+
+            *   [как field в классе](#как-field-в-классе)
+            *   [как расширения getter'a в классе](#как-расширения-gettera-в-классе)
+
+        *   [как создаем модуль](#как-создаем-модуль)
+
+    *   [Еще не написана документация](#еще-не-написана-документация)
+
+    *   [Гипотетическое использование](#гипотетическое-использование)
+
+    *   [Всякие ссылки](#всякие-ссылки)
+
+*   [=======================================](#)
+
+*   [Модули и конфиги](#модули-и-конфиги)
+
+    *   [Case 1 – empty config](#case-1--empty-config)
+    *   [Case 2 – default config](#case-2--default-config)
+    *   [Case 3 - config while creation](#case-3---config-while-creation)
+    *   [Case 4 - merging default and top config](#case-4---merging-default-and-top-config)
+    *   [Case 5 - async config from db](#case-5---async-config-from-db)
+    *   [Case 6 - deep config merge](#case-6---deep-config-merge)
+    *   [May be in future](#may-be-in-future)
+
+*   [📖 License](#-license)
+
+*   [👥 Contributors](#-contributors)
+
+*   [👏 Contributing](#-contributing)
+
+*   [📮 Any questions? Always welcome :)](#-any-questions-always-welcome-)
+
+# ⌨️ Install
+
+```sh
+# yarn
+yarn i @lskjs/module @types/lodash bluebird lodash
+
+# npm
+npm i @lskjs/module @types/lodash bluebird lodash
+```
+
+asdadasda
+
 # @lskjs/module
+
 Весь мир модуль и мы в нём подмодули
 
--------------------
+***
 
 Модуль - модули это классы с определнным жизненным циклом. Из модулей будет собираться комплексное приложение, у модулей могут быть подмодули.
 
 # Манифест модульной архитектуры
 
 ## Основные цели
-- простая инициализация
-- расширение через наследование
-- расширение через параметры конструктора
-- модульность (древовидная архитектура)
-- ленивость (асинхронность всего что только возможно)
+
+*   простая инициализация
+*   расширение через наследование
+*   расширение через параметры конструктора
+*   модульность (древовидная архитектура)
+*   ленивость (асинхронность всего что только возможно)
 
 ## Побочные фишки
-- встроенный логгер и дебаг режим
-- встроенный event emitter и event driven 
-- кофигурирование из единой родительской точки
-- удобный inject'инг из дерева модулей
-- легковесность
 
-
+*   встроенный логгер и дебаг режим
+*   встроенный event emitter и event driven
+*   кофигурирование из единой родительской точки
+*   удобный inject'инг из дерева модулей
+*   легковесность
 
 ### Modules lifecycle
 
-- null - после конструктора
-- init - стадия инициализации, по сути это асинхронный конструктор, нужно сделать все необходимые require. на этой стадии работаем внутри себя, остальные сестренские объекты (модели, модули, сокеты, файлы) еще не существуют.
-- run - стадия запуска, делаем все необоходимые внешние подключения, тут можно обращяться к внешний модулям системы: модели, модули
-- stop - выключаем модуль, или для остановки приложения, или для переконфигурирования, или просто чтобы выключить соединения и очистить память
-
+*   null - после конструктора
+*   init - стадия инициализации, по сути это асинхронный конструктор, нужно сделать все необходимые require. на этой стадии работаем внутри себя, остальные сестренские объекты (модели, модули, сокеты, файлы) еще не существуют.
+*   run - стадия запуска, делаем все необоходимые внешние подключения, тут можно обращяться к внешний модулям системы: модели, модули
+*   stop - выключаем модуль, или для остановки приложения, или для переконфигурирования, или просто чтобы выключить соединения и очистить память
 
 ### Modules stage statuses
 
-- null - хуй знает что с ним, еще не запускался
-- initing - стадия инициализации
-- inited - уже инициализировался
-- runing - стадия запуска 
-- runned - уже запустился 
-- stopping - стадия остановки
-- stoped - уже остановился
-
+*   null - хуй знает что с ним, еще не запускался
+*   initing - стадия инициализации
+*   inited - уже инициализировался
+*   runing - стадия запуска
+*   runned - уже запустился
+*   stopping - стадия остановки
+*   stoped - уже остановился
 
 ### Modules public static methods
 
-- module.init() - как консструктор но асинхронный, делает необходимые импорты и устанвливет правильное состояние модуля
-- module.run() - запускает все процессы в модуле
-- module.start() - init and run and some magic?
+*   module.init() - как консструктор но асинхронный, делает необходимые импорты и устанвливет правильное состояние модуля
 
-- Module.new() - only create object
-- Module.create() - new + init
-- Module.start() - new + init + run -- init and run and some magic?
+*   module.run() - запускает все процессы в модуле
 
+*   module.start() - init and run and some magic?
+
+*   Module.new() - only create object
+
+*   Module.create() - new + init
+
+*   Module.start() - new + init + run -- init and run and some magic?
 
 ## Просто взять и юзать
+
 ```js
 const theModule = await TheModule.start();
 theModule.name === 'TheModule'
 ```
 
 ## Прокидывать props в конструктор
+
 ```js
 const theModule = await TheModule.start({ 
   mode: 'private',
@@ -137,15 +236,13 @@ const some = await SomeModule.start({
 const other = await m.module('other');
 ```
 
-
 ## Прокидывать подмодули, разным образом
 
 ### Как props в конструкторе
 
-- как класс через require 
-- как промис через асинхронный import
-- как функцию при вызове которой будет происхолить асинхрронный import
-
+*   как класс через require
+*   как промис через асинхронный import
+*   как функцию при вызове которой будет происхолить асинхрронный import
 
 ```js
 const theModule = new TheModule({ 
@@ -159,6 +256,7 @@ await theModule.start()
 ```
 
 ### Прокидывать подмодули с параметрами конструктора
+
 ```js
 const theModule = new TheModule({ 
   modules: {
@@ -218,39 +316,50 @@ class TheModule extends Module {
 
 ## Еще не написана документация
 
-- проблема провайдеров
-- у модуля должен быть логгер
-- у модуля должен быть event emitter
-- проблема конфигов, централизованных конфигов
-- проблема моделей и модуля db (в init нужен mongoose)
+*   проблема провайдеров
 
+*   у модуля должен быть логгер
 
-- модуль
-- подмодули
-- провайдеры
-- модели
-- ee
-- inject
-- getModules
-- modules={}
-- new TheModule(, {providers: {}})
-- как прокидывать конфиги дальше?
+*   у модуля должен быть event emitter
+
+*   проблема конфигов, централизованных конфигов
+
+*   проблема моделей и модуля db (в init нужен mongoose)
+
+*   модуль
+
+*   подмодули
+
+*   провайдеры
+
+*   модели
+
+*   ee
+
+*   inject
+
+*   getModules
+
+*   modules={}
+
+*   new TheModule(, {providers: {}})
+
+*   как прокидывать конфиги дальше?
 
 ## Гипотетическое использование
 
-
 ## Всякие ссылки
 
-- https://v8.dev/blog/fast-async
-========================
-При переинициализации мы должны получать тот же самый объект
-
+*   https://v8.dev/blog/fast-async
+    \========================
+    При переинициализации мы должны получать тот же самый объект
 
 # =======================================
 
 # Модули и конфиги
 
 ## Case 1 – empty config
+
 ```js
 class SomeModule extends Module { }
 
@@ -259,8 +368,8 @@ const some = await SomeModule.start();
 console.log(some.config); // {}
 ```
 
-
 ## Case 2 – default config
+
 ```js
 class SomeModule extends Module {
   config = {
@@ -278,7 +387,8 @@ console.log(some.config);
 // }
 ```
 
----
+***
+
 ## Case 3 - config while creation
 
 ```js
@@ -295,6 +405,7 @@ console.log(some.config);
 ```
 
 ## Case 4 - merging default and top config
+
 ```js
 class SomeModule extends Module {
   config = {
@@ -347,8 +458,8 @@ console.log(some.other);
 // }
 ```
 
+***
 
----
 ## Case 5 - async config from db
 
 ```js
@@ -405,6 +516,7 @@ some.config === {
 ```
 
 ## Case 6 - deep config merge
+
 ```js
 
 class Module {
@@ -467,9 +579,7 @@ some.config === {
 
 ```
 
-
-
-=================
+\=================
 
 ## May be in future
 
@@ -512,3 +622,42 @@ class Component {
 }
 
 ```
+
+# 📖 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+# 👥 Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
+<!-- prettier-ignore-start -->
+
+<!-- markdownlint-disable -->
+
+<table>
+  <tr>
+    <td align="center"><a href="https://isuvorov.com"><img src="https://avatars2.githubusercontent.com/u/1056977?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Igor Suvorov</b></sub></a><br /><a href="#question-isuvorov" title="Answering Questions">💬</a> <a href="lskjs/lskjs///commits?author=isuvorov" title="Code">💻</a> <a href="#design-isuvorov" title="Design">🎨</a> <a href="lskjs/lskjs///commits?author=isuvorov" title="Documentation">📖</a> <a href="#example-isuvorov" title="Examples">💡</a> <a href="#ideas-isuvorov" title="Ideas, Planning, & Feedback">🤔</a> <a href="lskjs/lskjs///pulls?q=is%3Apr+reviewed-by%3Aisuvorov" title="Reviewed Pull Requests">👀</a> <a href="lskjs/lskjs///commits?author=isuvorov" title="Tests">⚠️</a> <a href="#a11y-isuvorov" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://isuvorov.com"><img src="https://avatars2.githubusercontent.com/u/1056977?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Igor Suvorov</b></sub></a><br /><a href="#question-anoru" title="Answering Questions">💬</a> <a href="lskjs/lskjs///commits?author=anoru" title="Code">💻</a> <a href="#design-anoru" title="Design">🎨</a> <a href="lskjs/lskjs///commits?author=anoru" title="Documentation">📖</a> <a href="#example-anoru" title="Examples">💡</a> <a href="#ideas-anoru" title="Ideas, Planning, & Feedback">🤔</a> <a href="lskjs/lskjs///pulls?q=is%3Apr+reviewed-by%3Aanoru" title="Reviewed Pull Requests">👀</a> <a href="lskjs/lskjs///commits?author=anoru" title="Tests">⚠️</a> <a href="#a11y-anoru" title="Accessibility">️️️️♿️</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+# 👏 Contributing
+
+1.  Fork it (<https://github.com/yourname/yourproject/fork>)
+2.  Create your feature branch (`git checkout -b features/fooBar`)
+3.  Commit your changes (`git commit -am 'feat(image): Add some fooBar'`)
+4.  Push to the branch (`git push origin feature/fooBar`)
+5.  Create a new Pull Request
+
+# 📮 Any questions? Always welcome :)
+
+*   [Email](mailto:hi@isuvorov.com)
+*   [LSK.news – Telegram channel](https://t.me/lskjs)
+*   [Спроси нас в телеграме ;)](https://t.me/lskjschat)

@@ -1,7 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "echo lsk run lint:staged",
-    "pre-push": "echo lsk run lint:prettier",
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
   }
 }
