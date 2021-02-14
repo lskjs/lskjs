@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.22](https://github.com/lskjs/cli/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+
+### Features
+
+* update starter kit ([3b96eac](https://github.com/lskjs/cli/commit/3b96eac65f16dcf372b7bfb03c9a600ad5882939))
+* update starter kit ([94a3a90](https://github.com/lskjs/cli/commit/94a3a90fa303c0824957ff427136704d3e58376f))
+* update starter kit ([5f2a703](https://github.com/lskjs/cli/commit/5f2a703e78fd610edfa15a1e96d351d1aac08de0))
+
+
+
+
+
 # [2.2.0-beta.21](https://github.com/lskjs/lsk-cli/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/i18",
-  "version": "2.2.0-beta.21",
+  "version": "2.2.0-beta.22",
   "description": "LSK module for internationalization with i18next.",
   "keywords": [
     "i18",
