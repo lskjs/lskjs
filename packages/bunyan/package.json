@@ -44,5 +44,6 @@
     "mv": "~2",
     "safe-json-stringify": "~1",
     "moment": "2.10.6"
-  }
+  },
+  "gitHead": "8ad645155a5b9089f064ae72280857861c6fce0b"
 }
