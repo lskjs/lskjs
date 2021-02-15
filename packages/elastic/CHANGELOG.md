@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/elastic
+
+
+
+
+
 # [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
 
 **Note:** Version bump only for package @lskjs/elastic
