@@ -38,9 +38,7 @@ yarn i @lskjs/rlog axios lodash
 npm i @lskjs/rlog axios lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

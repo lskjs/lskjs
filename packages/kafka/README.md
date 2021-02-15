@@ -38,9 +38,7 @@ yarn i @lskjs/kafka lodash
 npm i @lskjs/kafka lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

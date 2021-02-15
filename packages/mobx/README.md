@@ -38,9 +38,7 @@ yarn i @lskjs/mobx axios bluebird lodash mobx mobx-react
 npm i @lskjs/mobx axios bluebird lodash mobx mobx-react
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

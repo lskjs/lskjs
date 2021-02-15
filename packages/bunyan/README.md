@@ -38,9 +38,7 @@ yarn i @lskjs/bunyan
 npm i @lskjs/bunyan 
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

@@ -44,7 +44,7 @@ yarn i @lskjs/reactapp @emotion/core @emotion/styled bluebird create-emotion-ser
 npm i @lskjs/reactapp @emotion/core @emotion/styled bluebird create-emotion-server lodash react react-dom
 ```
 
-asd
+***
 
 ## Html
 
@@ -63,8 +63,6 @@ ${meta.twitter && meta.twitter.image ? `<meta property="twitter:image" content="
 ${meta.twitter && meta.twitter.card ? `<meta property="twitter:card" content="${meta.twitter.card}" />` : ''}\
 })
 ```
-
-zxczxc
 
 # 📖 License
 

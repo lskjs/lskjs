@@ -38,9 +38,7 @@ yarn i @lskjs/scylla axios bluebird lodash
 npm i @lskjs/scylla axios bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

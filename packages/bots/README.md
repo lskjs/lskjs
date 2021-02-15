@@ -38,9 +38,7 @@ yarn i @lskjs/bots @lskjs/db axios bluebird lodash
 npm i @lskjs/bots @lskjs/db axios bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

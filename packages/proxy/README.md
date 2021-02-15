@@ -38,9 +38,7 @@ yarn i @lskjs/proxy axios bluebird lodash
 npm i @lskjs/proxy axios bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

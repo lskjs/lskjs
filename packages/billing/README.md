@@ -48,7 +48,7 @@ yarn i @lskjs/billing @lskjs/db @lskjs/server-api axios bluebird crypto-js lodas
 npm i @lskjs/billing @lskjs/db @lskjs/server-api axios bluebird crypto-js lodash
 ```
 
-asd
+***
 
 # How to start
 
@@ -75,8 +75,6 @@ Additional you need:
 ```bash
 npm i crypto-js axios
 ```
-
-zxczxc
 
 # 📖 License
 

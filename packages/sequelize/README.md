@@ -38,9 +38,7 @@ yarn i @lskjs/sequelize lodash
 npm i @lskjs/sequelize lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

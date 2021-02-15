@@ -38,11 +38,9 @@ yarn i @lskjs/autobind
 npm i @lskjs/autobind 
 ```
 
-asd
+***
 
 Старенький пакет, своя имплементация автобинд
-
-zxczxc
 
 # 📖 License
 

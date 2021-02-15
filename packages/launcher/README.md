@@ -38,9 +38,7 @@ yarn i @lskjs/launcher
 npm i @lskjs/launcher 
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

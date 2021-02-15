@@ -72,7 +72,7 @@ yarn i @lskjs/log2
 npm i @lskjs/log2 
 ```
 
-asd
+***
 
 ## Installation
 
@@ -492,8 +492,6 @@ and open <http://localhost:3000>
 *   [Logrus](https://github.com/sirupsen/logrus)
 *   [Debug](https://github.com/visionmedia/debug)
 *   [Debug Levels](https://github.com/commenthol/debug-levels)
-
-zxczxc
 
 # 📖 License
 

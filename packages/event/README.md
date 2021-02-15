@@ -38,9 +38,7 @@ yarn i @lskjs/event lodash
 npm i @lskjs/event lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

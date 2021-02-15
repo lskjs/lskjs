@@ -44,7 +44,7 @@ yarn i @lskjs/apm axios bluebird lodash
 npm i @lskjs/apm axios bluebird lodash
 ```
 
-asd
+***
 
 ## Example
 
@@ -73,8 +73,6 @@ const main = async () => {
 
 main();
 ```
-
-zxczxc
 
 # 📖 License
 

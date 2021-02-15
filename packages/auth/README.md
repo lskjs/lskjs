@@ -39,7 +39,7 @@ yarn i @lskjs/auth @lskjs/db @lskjs/mobx @lskjs/server-api axios bluebird js-coo
 npm i @lskjs/auth @lskjs/db @lskjs/mobx @lskjs/server-api axios bluebird js-cookie lodash mobx
 ```
 
-asd
+***
 
 # достал из chat.server.js
 
@@ -70,8 +70,6 @@ asd
    }
  }
 ```
-
-zxczxc
 
 # 📖 License
 

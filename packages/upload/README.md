@@ -38,9 +38,7 @@ yarn i @lskjs/upload @lskjs/server-api bluebird lodash
 npm i @lskjs/upload @lskjs/server-api bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

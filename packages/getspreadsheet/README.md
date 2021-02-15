@@ -38,9 +38,7 @@ yarn i @lskjs/getspreadsheet @babel/runtime axios bluebird lodash
 npm i @lskjs/getspreadsheet @babel/runtime axios bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

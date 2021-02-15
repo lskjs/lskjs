@@ -38,9 +38,7 @@ yarn i @lskjs/permit @lskjs/db @lskjs/mobx @lskjs/server-api bluebird lodash mob
 npm i @lskjs/permit @lskjs/db @lskjs/mobx @lskjs/server-api bluebird lodash mobx
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

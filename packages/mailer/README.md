@@ -45,7 +45,7 @@ yarn i @lskjs/mailer @lskjs/db @lskjs/server-api bluebird lodash
 npm i @lskjs/mailer @lskjs/db @lskjs/server-api bluebird lodash
 ```
 
-asd
+***
 
 ## Пример использования
 
@@ -106,8 +106,6 @@ export default class Recovery extends Template {
 \--- | ---
 subject | Тема письма
 text | Текст письма
-
-zxczxc
 
 # 📖 License
 

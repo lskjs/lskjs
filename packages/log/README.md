@@ -49,7 +49,7 @@ yarn i @lskjs/log axios
 npm i @lskjs/log axios
 ```
 
-asd
+***
 
 # Манифест логгирования
 
@@ -62,8 +62,6 @@ asd
 ## morgan like for debug
 
 ## namespaces \*
-
-zxczxc
 
 # 📖 License
 

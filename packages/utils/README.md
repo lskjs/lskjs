@@ -38,9 +38,7 @@ yarn i @lskjs/utils
 npm i @lskjs/utils 
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

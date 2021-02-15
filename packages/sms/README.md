@@ -38,9 +38,7 @@ yarn i @lskjs/sms axios
 npm i @lskjs/sms axios
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

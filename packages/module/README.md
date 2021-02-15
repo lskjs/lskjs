@@ -93,7 +93,7 @@ yarn i @lskjs/module @types/lodash bluebird lodash
 npm i @lskjs/module @types/lodash bluebird lodash
 ```
 
-asd
+***
 
 # @lskjs/module
 
@@ -624,8 +624,6 @@ class Component {
 }
 
 ```
-
-zxczxc
 
 # 📖 License
 

@@ -39,7 +39,7 @@ yarn i @lskjs/db @types/mongoose bluebird lodash
 npm i @lskjs/db @types/mongoose bluebird lodash
 ```
 
-asd
+***
 
 основная фишка - UniversalSchema
 
@@ -71,8 +71,6 @@ export default (...args) => {
 };
 
 ```
-
-zxczxc
 
 # 📖 License
 

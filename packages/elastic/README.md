@@ -38,9 +38,7 @@ yarn i @lskjs/elastic lodash
 npm i @lskjs/elastic lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

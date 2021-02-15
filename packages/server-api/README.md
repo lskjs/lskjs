@@ -44,7 +44,7 @@ yarn i @lskjs/server-api axios bluebird lodash
 npm i @lskjs/server-api axios bluebird lodash
 ```
 
-asd
+***
 
 ## Healthcheck examples
 
@@ -58,8 +58,6 @@ asd
           d: () => Bluebird.delay(11000).then(() => 'slow'),
         };
       }
-
-zxczxc
 
 # 📖 License
 

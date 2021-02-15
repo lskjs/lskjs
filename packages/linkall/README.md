@@ -38,9 +38,7 @@ yarn i @lskjs/linkall
 npm i @lskjs/linkall 
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

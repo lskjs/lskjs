@@ -44,7 +44,7 @@ yarn i @lskjs/config lodash
 npm i @lskjs/config lodash
 ```
 
-asd
+***
 
 ```js
 import config from @lskjs/config;
@@ -75,8 +75,6 @@ module.exports = ({other, ...config}) => ({
   some: 'thing',
 })
 ```
-
-zxczxc
 
 # 📖 License
 

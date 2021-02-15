@@ -72,7 +72,7 @@ yarn i @lskjs/cli-sample
 npm i @lskjs/cli-sample 
 ```
 
-asd
+***
 
 ## First principles
 
@@ -452,8 +452,6 @@ $ git fetch lego-starter-kit
 $ git merge lego-starter-kit/master
 $ npm install
 ```
-
-zxczxc
 
 # 📖 License
 

@@ -66,7 +66,7 @@ yarn i @lskjs/uapp @lskjs/i18 @lskjs/link @lskjs/scroll axios bluebird lodash mo
 npm i @lskjs/uapp @lskjs/i18 @lskjs/link @lskjs/scroll axios bluebird lodash mobx mobx-react prop-types react
 ```
 
-asd
+***
 
     this.useMiddlewares()
     this.useRoutes()
@@ -295,8 +295,6 @@ $ git fetch lego-starter-kit
 $ git merge lego-starter-kit/master
 $ npm install
 ```
-
-zxczxc
 
 # 📖 License
 

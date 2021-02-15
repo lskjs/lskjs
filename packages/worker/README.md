@@ -38,9 +38,7 @@ yarn i @lskjs/worker @lskjs/rabbit bluebird lodash
 npm i @lskjs/worker @lskjs/rabbit bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

@@ -1,5 +1,5 @@
 {
-  "version": "2.12.0",
+  "version": "2.13.2",
   "name": "@lskjs/cli-sample",
   "description": "LSK.js – command line interface scripts",
   "author": "Igor Suvorov <hi@isuvorov.com>",
@@ -24,7 +24,7 @@
     "@babel/cli": "7.12.16",
     "@babel/core": "7.12.16",
     "@lskjs/babel-preset": "0.6.0",
-    "@lskjs/cli": "2.12.0",
+    "@lskjs/cli": "2.13.2",
     "babel-jest": "26.6.3",
     "babel-loader": "8.2.2",
     "commitizen": "4.2.3",

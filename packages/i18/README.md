@@ -44,11 +44,9 @@ yarn i @lskjs/i18 bluebird js-cookie mobx
 npm i @lskjs/i18 bluebird js-cookie mobx
 ```
 
-asd
+***
 
 ## модуль для работы с интернационализацией
-
-zxczxc
 
 # 📖 License
 

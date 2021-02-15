@@ -38,9 +38,7 @@ yarn i @lskjs/server @lskjs/db @lskjs/i18 axios bluebird lodash
 npm i @lskjs/server @lskjs/db @lskjs/i18 axios bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

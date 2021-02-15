@@ -38,9 +38,7 @@ yarn i @lskjs/tbot bluebird lodash
 npm i @lskjs/tbot bluebird lodash
 ```
 
-asd
-
-zxczxc
+***
 
 # 📖 License
 

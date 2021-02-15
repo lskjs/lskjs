@@ -43,7 +43,7 @@ yarn i @lskjs/apiquery axios lodash
 npm i @lskjs/apiquery axios lodash
 ```
 
-asd
+***
 
 # Apiquery
 
@@ -185,8 +185,6 @@ const s2 = api.ws('messages', options) // look options here: https://socket.io/d
 
 
 ```
-
-zxczxc
 
 # 📖 License
 

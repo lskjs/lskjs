@@ -46,7 +46,7 @@ yarn i @lskjs/build-locales
 npm i @lskjs/build-locales 
 ```
 
-asd
+***
 
 ## модуль для работы с интернационализацией
 
@@ -66,8 +66,6 @@ asd
       $ @lskjs/i18/build-locales --locales en --link https://docs.google.com/spreadsheets/d/1_qVnTw1Cwb2Ziwta_N0p-V4_ptD6-ZypDvCIrnryNF/edit#gid=0 --dist ./locales
 
       $ @lskjs/i18/build-locales --locales ru,en --link https://docs.google.com/spreadsheets/d/1_qVnTw1Cwb2Ziwta_N0p-V4_ptD6-ZypDvCIrnryNF/edit#gid=0 --link https://docs.google.com/spreadsheets/d/1_qVnTw1Cwb2Ziwta_N0p-V4_ptD6-ZypDvCIrnryNF/edit#gid=0 --dist ./locales
-
-zxczxc
 
 # 📖 License
 
