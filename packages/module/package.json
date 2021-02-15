@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "2.2.0-beta.26",
+  "version": "2.2.1-beta.2",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "keywords": [
     "modules",
@@ -24,8 +24,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/log2": "2.2.0-beta.26",
-    "@lskjs/utils": "2.2.0-beta.26",
+    "@lskjs/log2": "2.2.1-beta.2",
+    "@lskjs/utils": "2.2.1-beta.2",
     "colors": "^1.4.0",
     "eventemitter3": "4.0.7"
   },
