@@ -1,5 +1,4 @@
 /* global window */
-
 declare global {
   interface Window {
     __DEV__: boolean;
@@ -22,6 +21,6 @@ export default {
   isClient,
   isDev,
   isProd,
-  c,
+  isDebug,
   stage,
 };
