@@ -111,11 +111,8 @@ export class BotsRouter extends Module {
         props = path;
       }
       if (!props.query && query) props.query = query;
-      if (!ctx.session) {
-        this.log.warn('!ctx.session')
-      } else {
-        ctx.session.nextRoute = props;
-      }
+      if (!ctx.session) ctx.session = {};
+      ctx.session.nextRoute = props;
       if (__DEV__) {
         this.log.info(`nextRedirect =>  ${JSON.stringify(props)}`);
         // await Bluebird.delay(1000);

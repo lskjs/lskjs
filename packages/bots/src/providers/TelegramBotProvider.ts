@@ -34,12 +34,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (!this.config.token) throw 'TelegramBotProvider !config.token';
     const { Telegraf } = this;
     this.client = new Telegraf(this.config.token);
-    // this.client.use(session());
+    this.client.use(session());
     // TODO: временный костыль, @volkovpishet починит
-    this.client.use(async (ctx, next) => {
-      if (!ctx.session) ctx.session = {};
-      await next();
-    });
+    // this.client.use(async (ctx, next) => {
+    //   if (!ctx.session) ctx.session = {};
+    //   await next();
+    // });
   }
   async run(): Promise<void> {
     await super.run();
