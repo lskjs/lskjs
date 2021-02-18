@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
 ## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
 
 **Note:** Version bump only for package @lskjs/tbot

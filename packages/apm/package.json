@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/apm",
-  "version": "2.2.1-beta.2",
+  "version": "2.3.0-beta.2",
   "description": "LSK.js – apm – module Node.js agent for Elastic APM",
   "keywords": [
     "apm",
@@ -21,7 +21,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.2.1-beta.2",
+    "@lskjs/module": "2.3.0-beta.2",
     "@lskjs/utils": "2.2.1-beta.2",
     "elastic-apm-node": "3.10.0"
   },
