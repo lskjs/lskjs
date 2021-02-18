@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.1-beta.2...v2.3.0-beta.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* **utils:** env bug ([85a160a](https://github.com/lskjs/ux/tree/master/packages/utils/commit/85a160a1fe83f0d7da7b819e679983d467706b10))
+
+
+### Features
+
+* **bots:** new bots router features and fx bugs ([f1e0440](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f1e04409f41d3176517d99893ad406c7d2073964))
+
+
+
+
+
 ## [2.2.1-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
 
 **Note:** Version bump only for package @lskjs/utils

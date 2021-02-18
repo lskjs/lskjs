@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.2.1-beta.2...v2.3.0-beta.0) (2021-02-18)
+
+
+### Features
+
+* **bots:** new bots router features and fx bugs ([f1e0440](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/f1e04409f41d3176517d99893ad406c7d2073964))
+
+
+
+
+
 ## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
 
 **Note:** Version bump only for package @lskjs/db
