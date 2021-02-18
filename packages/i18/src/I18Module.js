@@ -10,12 +10,14 @@ export class I18Module extends Module {
 
   async getT(locale = this.locale) {
     const instance = await this.instance(locale);
-    return instance.t;
+    return instance.t.bind(instance);
   }
 
   async instance(locale = this.locale) {
     if (!locale) throw '!locale';
-    if (!this.locales.include(locale)) throw `!locales[${locale}]`;
+    const { locales = [] } = this;
+    console.log(locales)
+    if (!locales.includes(locale)) throw `!locales[${locale}]`;
     if (!this.instances[locale]) {
       this.instances[locale] = await this.I18Instance.createAndRun({ config: { locale } });
     }
@@ -24,7 +26,7 @@ export class I18Module extends Module {
 
   async init() {
     await super.init();
-    this.locales = this.config.locales || [];
+    this.locales = (this.config || {}).locales || [];
   }
 
   async update() {
@@ -33,7 +35,8 @@ export class I18Module extends Module {
 
   async changeLanguage(locale) {
     if (!locale) throw '!locale';
-    if (!this.locales.include(locale)) throw `!locales[${locale}]`;
+    const { locales = [] } = this;
+    if (!locales.includes(locale)) throw `!locales[${locale}]`;
     await this.instance.changeLanguage(locale);
     this.locale = locale;
     await this.update();

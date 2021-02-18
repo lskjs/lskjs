@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+import Err from '@lskjs/utils/Err';
 import i18next from 'i18next';
 
 export class I18InstanceModule extends Module {
@@ -14,7 +15,7 @@ export class I18InstanceModule extends Module {
     await this.update();
   }
   async update() {
-    if (this.instance) throw '!this.instance';
+    if (!this.instance) throw new Err('!this.instance');
     this.locale = this.instance.language;
     this.t = (...args) => this.instance.t(...args);
   }
@@ -60,8 +61,12 @@ export class I18InstanceModule extends Module {
     });
   }
   async loadNamespaces(...args) {
-    await this.instance.loadNamespaces(...args);
-    await this.update();
+    if (this.instance) {
+      await this.instance.loadNamespaces(...args);
+      await this.update();
+    } else {
+      console.log('!this.instance!');
+    }
   }
 }
 

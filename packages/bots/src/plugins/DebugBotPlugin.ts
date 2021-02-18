@@ -1,4 +1,5 @@
 import Bluebird from 'bluebird';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 import { IBotProvider, IBotProviderMessageCtx } from '../types';
 import { getPrivateLinkToMessage } from '../utils/private-linker';
@@ -79,17 +80,11 @@ Made on @LSKjs with ❤️`;
     });
   }
   async runLogger(bot: IBotProvider, name: string): Promise<void> {
-    const {
-      BotsEventModel,
-      BotsTelegramMessageModel,
-      BotsTelegramUserModel,
-      BotsTelegramChatModel,
-    } = await this.botsModule.model([
-      'BotsEventModel',
-      'BotsTelegramMessageModel',
-      'BotsTelegramUserModel',
-      'BotsTelegramChatModel',
-    ]);
+    const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
+    const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
+    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
+    const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
+
     const { provider } = bot;
     bot.eventTypes.forEach((type) => {
       bot.on(type, async (ctx) => {

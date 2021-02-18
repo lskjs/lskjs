@@ -1,7 +1,7 @@
 import { createForm } from './createForm';
 import { renderForm } from './renderForm';
 
-export const useForm = async function ({ i18, req, onSubmit, ...formSchema2 }) {
+export const useForm = async function ({ i18, req, onChange = () => null, onSubmit, ...formSchema2 }) {
   const { bot, query, path, ctx } = req;
   const { action = 'init', field, values = {}, ...otherQuery } = query;
 
@@ -73,6 +73,11 @@ export const useForm = async function ({ i18, req, onSubmit, ...formSchema2 }) {
         });
       }
       form.setFieldValue(field, text);
+      await onChange({
+        field,
+        rawValue: text,
+        values: form.getValues(),
+      });
       await bot.client.telegram.editMessageText(
         formMessageChatId,
         formMessageId,
@@ -107,7 +112,7 @@ export const useForm = async function ({ i18, req, onSubmit, ...formSchema2 }) {
     await bot.reply(ctx, 'Если всё верно, подтвердите форму');
   }
   if (action === 'submit') {
-    return onSubmit(values);
+    return onSubmit(form.getValues());
   }
   req.log.error('!action', action);
   return false;

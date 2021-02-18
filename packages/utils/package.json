@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "2.2.1-beta.2",
+  "version": "2.2.1-beta.2.5",
   "description": "LSK.js – utils – helpers and functions",
   "keywords": [],
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",

@@ -19,6 +19,11 @@ export default class BotsTelegramChatModel extends Model {
     title: {
       type: String,
     },
+
+    // Объект, в котрый можно складировать мета-информацию
+    meta: {
+      type: Object,
+    },
   };
   static options = {
     model: 'BotsTelegramChat',

@@ -75,13 +75,15 @@ export class BotsRouter extends Module {
   //   return this.resolve(ctx);
   // }
 
-  provide() {
+  async provide({ user: { locale = 'ru' } = {} }) {
+    const i18Module = await this.app.module('i18');
+    const i18 = await i18Module.instance(locale);
     return {
       router: this,
       app: this.app,
       botsModule: this.app.botsModule,
       bot: this.bot,
-      i18: this.app.i18,
+      i18,
       module: this.app.module,
       log: this.log,
     };
@@ -109,7 +111,11 @@ export class BotsRouter extends Module {
         props = path;
       }
       if (!props.query && query) props.query = query;
-      ctx.session.nextRoute = props;
+      if (!ctx.session) {
+        this.log.warn('!ctx.session')
+      } else {
+        ctx.session.nextRoute = props;
+      }
       if (__DEV__) {
         this.log.info(`nextRedirect =>  ${JSON.stringify(props)}`);
         // await Bluebird.delay(1000);
@@ -131,18 +137,20 @@ export class BotsRouter extends Module {
       }
       return this.resolve({ ctx, ...props });
     };
-    const provide = this.provide();
+    const provide = await this.provide({});
+    const req = {
+      path,
+      pathname: path,
+      bot: provide.bot,
+      log: this.log,
+      ctx,
+      query,
+      i18: provide.i18,
+      t: provide.i18 && provide.i18.t,
+    };
     const data = {
       ...provide,
-      req: {
-        path,
-        pathname: path,
-        bot: provide.bot,
-        log: this.log,
-        ctx,
-        query,
-        i18: provide.i18,
-      },
+      req,
       path,
       pathname: path,
       query,

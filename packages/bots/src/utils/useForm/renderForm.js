@@ -18,7 +18,7 @@ export const renderForm = ({ path, action, field, form, repliedMessageId }) => {
             value: `${path}?action=cancel&repliedMessageId=${repliedMessageId}`,
           },
         ],
-      }).extra(),
+      }),
     ];
   }
   const text = fields
@@ -44,7 +44,7 @@ export const renderForm = ({ path, action, field, form, repliedMessageId }) => {
             value: `${path}?action=cancel&repliedMessageId=${repliedMessageId}`,
           },
         ],
-      }).extra(),
+      }),
     ];
   }
   return [
@@ -65,7 +65,7 @@ export const renderForm = ({ path, action, field, form, repliedMessageId }) => {
           value: `${path}?action=cancel&repliedMessageId=${repliedMessageId}`,
         },
       ],
-    }).extra(),
+    }),
   ];
 };
 

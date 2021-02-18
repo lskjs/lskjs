@@ -1,4 +1,8 @@
+// ts-ignore
 import Model from '@lskjs/db/Model';
+import forEach from 'lodash/forEach';
+import set from 'lodash/set';
+import { Schema } from 'mongoose';
 
 // https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
 export default class BotsTelegramUserModel extends Model {
@@ -27,9 +31,22 @@ export default class BotsTelegramUserModel extends Model {
     language_code: {
       type: String,
     },
+
+    // Объект, в котрый можно складировать мета-информацию
+    meta: {
+      type: Object,
+    },
   };
   static options = {
     model: 'BotsTelegramUser',
     collection: 'bots_telegram_user',
   };
+
+  setState(state = {}) {
+    forEach(state, (value, key) => {
+      set(this, key, value);
+      // ts-ignore
+      this.markModified(key);
+    });
+  }
 }

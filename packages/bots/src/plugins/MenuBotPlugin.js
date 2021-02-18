@@ -26,7 +26,7 @@ export class MenuBotPlugin extends BaseBotPlugin {
       }
       return this.getButton(element, itemValue);
     });
-    const keyboard = Markup.inlineKeyboard(buttonsLayout).extra();
+    const keyboard = Markup.inlineKeyboard(buttonsLayout);
     return [menu.content.text, keyboard];
   }
 
@@ -40,7 +40,7 @@ export class MenuBotPlugin extends BaseBotPlugin {
 
     let extra = {};
     if (keyboard) {
-      extra = createKeyboard(keyboard).extra();
+      extra = createKeyboard(keyboard);
       // console.log('extra', extra.reply_markup.inline_keyboard);
     }
     await bot.replyContent(ctx, content, extra);
@@ -74,7 +74,7 @@ export class MenuBotPlugin extends BaseBotPlugin {
   }
   async getMenusFromDb() {
     try {
-      const BotsMenuModel = await this.botsModule.model('BotsMenuModel');
+      const BotsMenuModel = await this.botsModule.module('models.BotsMenuModel');
       return BotsMenuModel.find().lean();
     } catch (err) {
       this.log.error('getMenusFromDb', err);
