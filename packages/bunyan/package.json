@@ -39,11 +39,11 @@
   "// dtrace-provider": "~0.8 required for dtrace features",
   "// moment": "required for local time with CLI",
   "// mv": "required for RotatingFileStream",
+  "gitHead": "8ad645155a5b9089f064ae72280857861c6fce0b",
   "nonOptionalDeps": {
     "dtrace-provider": "~0.8",
     "mv": "~2",
     "safe-json-stringify": "~1",
     "moment": "2.10.6"
-  },
-  "gitHead": "8ad645155a5b9089f064ae72280857861c6fce0b"
+  }
 }

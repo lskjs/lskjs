@@ -58,6 +58,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "gitHead": "8081f94b1bc5715f612e8e9d2db2268fb3fb2795",
   "optionalDeps": {
     "@buzzguru/instagram-private-api": "*",
     "@slack/bolt": "*",
@@ -68,6 +69,5 @@
     "telegraf-router": "*",
     "twitter-lite": "*",
     "whatsapp-web.js": "*"
-  },
-  "gitHead": "8081f94b1bc5715f612e8e9d2db2268fb3fb2795"
+  }
 }
