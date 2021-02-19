@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/scylla",
-  "version": "2.3.0-beta.2",
+  "version": "2.3.0-beta.3",
   "description": "LSK module for scylla.",
   "keywords": [
     "scylla"
@@ -20,7 +20,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.2",
+    "@lskjs/module": "2.3.0-beta.3",
     "@lskjs/utils": "2.2.1-beta.2",
     "cassandra-driver": "4.6.1"
   },
