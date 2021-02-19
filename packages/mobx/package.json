@@ -14,6 +14,7 @@
     "build": "lsk run build",
     "dev": "lsk run dev",
     "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
     "release": "lsk run release",
     "start": "lsk run start",
     "storybook": "lsk run storybook",
@@ -40,5 +41,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "8ad645155a5b9089f064ae72280857861c6fce0b"
+  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf"
 }
