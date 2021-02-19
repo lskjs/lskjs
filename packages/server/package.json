@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "2.3.0-beta.3",
+  "version": "2.3.0-beta.4",
   "description": "LSK server.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/server",
@@ -19,7 +19,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.3",
+    "@lskjs/module": "2.3.0-beta.4",
     "@lskjs/utils": "2.2.1-beta.2",
     "body-parser": "1.19.0",
     "cacheman": "2.2.1",
@@ -37,8 +37,8 @@
     "socket.io-redis": "6.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.3",
-    "@lskjs/i18": "2.3.0-beta.3",
+    "@lskjs/db": "2.3.0-beta.4",
+    "@lskjs/i18": "2.3.0-beta.4",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.20",
