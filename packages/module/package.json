@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@lskjs/log2": "2.3.0-beta.4",
-    "@lskjs/utils": "2.2.1-beta.2",
+    "@lskjs/utils": "2.3.0-beta.4",
     "colors": "^1.4.0",
     "eventemitter3": "4.0.7"
   },
@@ -39,9 +39,5 @@
     "@types/lodash": "*",
     "bluebird": "*",
     "lodash": "4.17.20"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf"
+  }
 }

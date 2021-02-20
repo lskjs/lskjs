@@ -17,9 +17,5 @@
     "storybook": "lsk run storybook",
     "test": "lsk run test",
     "watch": "lsk run watch"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf"
+  }
 }

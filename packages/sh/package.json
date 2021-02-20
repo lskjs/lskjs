@@ -19,10 +19,6 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.2.1-beta.2"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf"
+    "@lskjs/utils": "2.3.0-beta.4"
+  }
 }

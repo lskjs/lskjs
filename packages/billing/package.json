@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.3.0-beta.4",
-    "@lskjs/utils": "2.2.1-beta.2"
+    "@lskjs/utils": "2.3.0-beta.4"
   },
   "devDependencies": {
     "@lskjs/db": "2.3.0-beta.4",
@@ -50,10 +50,6 @@
     "crypto-js": "*",
     "lodash": "*"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf",
   "optionalDeps": {
     "yandex-checkout": "*",
     "coingate-v2": "*"

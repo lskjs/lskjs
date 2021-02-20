@@ -34,13 +34,9 @@
     "vasync": "2.2.0",
     "verror": "1.10.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "// dtrace-provider": "~0.8 required for dtrace features",
   "// moment": "required for local time with CLI",
   "// mv": "required for RotatingFileStream",
-  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf",
   "nonOptionalDeps": {
     "dtrace-provider": "~0.8",
     "mv": "~2",

@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/runtime": "7.8.4",
     "@lskjs/module": "2.3.0-beta.4",
-    "@lskjs/utils": "2.2.1-beta.2",
+    "@lskjs/utils": "2.3.0-beta.4",
     "axios": "0.21.1",
     "lodash": "4.17.20"
   },
@@ -34,9 +34,5 @@
   "peerDependencies": {
     "axios": "*",
     "lodash": "*"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "gitHead": "82627ae7ed0f574a15f65186c3e4fb42ced580bf"
+  }
 }
