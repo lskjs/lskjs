@@ -30,10 +30,13 @@
     "test": "lsk run test",
     "watch": "lsk run watch"
   },
-  "peerDependencies": {
-    "lodash": "4.17.20"
-  },
   "dependencies": {
     "@lskjs/bots-plugin": "2.3.0-beta.4"
+  },
+  "devDependencies": {
+    "lodash": "4.17.20"
+  },
+  "peerDependencies": {
+    "lodash": "4.17.20"
   }
 }

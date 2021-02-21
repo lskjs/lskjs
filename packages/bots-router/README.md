@@ -1,14 +1,14 @@
-# LSK.js – bots-plugin
+# LSK.js – bots-router
 
-> @lskjs/bots-plugin – LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation
+> @lskjs/bots-router – LSK.js router for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/bots-plugin)](https://www.npmjs.com/package/@lskjs/bots-plugin)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/bots-plugin)](https://www.npmjs.com/package/@lskjs/bots-plugin)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/bots-plugin)](https://bundlephobia.com/result?p=@lskjs/bots-plugin)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/bots-plugin)](https://www.npmjs.com/package/@lskjs/bots-plugin)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/bots-plugin)](https://bundlephobia.com/result?p=@lskjs/bots-plugin)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/bots-plugin)](https://bundlephobia.com/result?p=@lskjs/bots-plugin)
+[![NPM version](https://badgen.net/npm/v/@lskjs/bots-router)](https://www.npmjs.com/package/@lskjs/bots-router)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/bots-router)](https://www.npmjs.com/package/@lskjs/bots-router)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/bots-router)](https://bundlephobia.com/result?p=@lskjs/bots-router)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/bots-router)](https://www.npmjs.com/package/@lskjs/bots-router)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/bots-router)](https://bundlephobia.com/result?p=@lskjs/bots-router)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/bots-router)](https://bundlephobia.com/result?p=@lskjs/bots-router)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -66,10 +66,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/bots-plugin lodash
+yarn i @lskjs/bots-router lodash
 
 # npm
-npm i @lskjs/bots-plugin lodash
+npm i @lskjs/bots-router lodash
 ```
 
 ***

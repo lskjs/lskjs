@@ -1,14 +1,14 @@
-# LSK.js – bots-plugin
+# LSK.js – bots-provider-clubhouse
 
-> @lskjs/bots-plugin – LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation
+> @lskjs/bots-provider-clubhouse – LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/bots-plugin)](https://www.npmjs.com/package/@lskjs/bots-plugin)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/bots-plugin)](https://www.npmjs.com/package/@lskjs/bots-plugin)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/bots-plugin)](https://bundlephobia.com/result?p=@lskjs/bots-plugin)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/bots-plugin)](https://www.npmjs.com/package/@lskjs/bots-plugin)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/bots-plugin)](https://bundlephobia.com/result?p=@lskjs/bots-plugin)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/bots-plugin)](https://bundlephobia.com/result?p=@lskjs/bots-plugin)
+[![NPM version](https://badgen.net/npm/v/@lskjs/bots-provider-clubhouse)](https://www.npmjs.com/package/@lskjs/bots-provider-clubhouse)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/bots-provider-clubhouse)](https://www.npmjs.com/package/@lskjs/bots-provider-clubhouse)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/bots-provider-clubhouse)](https://bundlephobia.com/result?p=@lskjs/bots-provider-clubhouse)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/bots-provider-clubhouse)](https://www.npmjs.com/package/@lskjs/bots-provider-clubhouse)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/bots-provider-clubhouse)](https://bundlephobia.com/result?p=@lskjs/bots-provider-clubhouse)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/bots-provider-clubhouse)](https://bundlephobia.com/result?p=@lskjs/bots-provider-clubhouse)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -66,10 +66,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/bots-plugin lodash
+yarn i @lskjs/bots-provider-clubhouse lodash
 
 # npm
-npm i @lskjs/bots-plugin lodash
+npm i @lskjs/bots-provider-clubhouse lodash
 ```
 
 ***

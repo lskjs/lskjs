@@ -35,6 +35,9 @@
     "@lskjs/module": "2.3.0-beta.4",
     "@lskjs/utils": "2.3.0-beta.4"
   },
+  "devDependencies": {
+    "lodash": "4.17.20"
+  },
   "peerDependencies": {
     "lodash": "4.17.20"
   }
