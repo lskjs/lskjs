@@ -31,12 +31,17 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/bots-plugin": "2.3.0-beta.4",
     "@lskjs/module": "2.3.0-beta.4",
-    "@lskjs/server-api": "^2.3.0-beta.4",
+    "@lskjs/server-api": "2.3.0-beta.4",
     "@lskjs/utils": "2.3.0-beta.4"
   },
+  "devDependencies": {
+    "bluebird": "3.7.2",
+    "lodash": "4.17.20"
+  },
   "peerDependencies": {
-    "bluebird": "^3.7.2",
+    "bluebird": "3.7.2",
     "lodash": "4.17.20"
   }
 }

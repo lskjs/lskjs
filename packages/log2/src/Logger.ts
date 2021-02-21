@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
 // import debug from 'debug';
 import colors from 'colors/safe';
 import hashCode from './utils/hashCode';

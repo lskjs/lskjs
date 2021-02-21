@@ -1,0 +1,37 @@
+{
+  "name": "@lskjs/bots-provider-twitter",
+  "version": "2.3.0-beta.4",
+  "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
+  "keywords": [
+    "telegram",
+    "slack",
+    "discord",
+    "whatsapp",
+    "twitter",
+    "instagram",
+    "vkontakte",
+    "vk",
+    "chatbot",
+    "bot",
+    "provider"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-twitter",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "@lskjs/bots-provider": "2.3.0-beta.4",
+    "twitter-lite": "1.1.0"
+  }
+}

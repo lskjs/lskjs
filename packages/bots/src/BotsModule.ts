@@ -1,3 +1,5 @@
+import { IAnyKeyValue, IAsyncPlugins, IAsyncProviders, IBotProvider } from '@lskjs/bots-base/types';
+import { BotsRouter } from '@lskjs/bots-router';
 import { IModel, IModelKeyValue, IModelsModule } from '@lskjs/db';
 import { IAsyncModuleKeyValue, ILogger, Module } from '@lskjs/module';
 // import asyncMapValues from '@lskjs/utils/asyncMapValues';
@@ -9,10 +11,8 @@ import mapValues from 'lodash/mapValues';
 import pickBy from 'lodash/pickBy';
 
 import models from './models';
-import plugins from './plugins/async';
-import providers from './providers/async';
-import { IAnyKeyValue, IAsyncPlugins, IAsyncProviders, IBotProvider } from './types';
-import { BotsRouter } from './utils/BotsRouter';
+import plugins from './plugins';
+import providers from './providers';
 // import { Dictionary, NumericDictionary, DictionaryIterator } from '@types/lodash';
 
 // export default <T>(

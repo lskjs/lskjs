@@ -27,7 +27,7 @@
   "dependencies": {
     "@lskjs/log2": "2.3.0-beta.4",
     "@lskjs/utils": "2.3.0-beta.4",
-    "colors": "^1.4.0",
+    "colors": "1.4.0",
     "eventemitter3": "4.0.7"
   },
   "devDependencies": {

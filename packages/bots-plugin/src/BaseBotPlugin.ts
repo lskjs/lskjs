@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IBotPlugin, IBotProvider } from '@lskjs/bots/types';
+import { IBotPlugin, IBotProvider } from '@lskjs/bots-base/types';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 

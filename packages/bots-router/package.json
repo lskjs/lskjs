@@ -1,0 +1,44 @@
+{
+  "name": "@lskjs/bots-router",
+  "version": "2.3.0-beta.4",
+  "description": "LSK.js router for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
+  "keywords": [
+    "telegram",
+    "slack",
+    "discord",
+    "whatsapp",
+    "twitter",
+    "instagram",
+    "vkontakte",
+    "vk",
+    "chatbot",
+    "bot",
+    "router"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/bots-router",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "@lskjs/module": "2.3.0-beta.4",
+    "@lskjs/utils": "2.3.0-beta.4",
+    "universal-router": "9.0.1"
+  },
+  "devDependencies": {
+    "lodash": "4.17.20"
+  },
+  "peerDependencies": {
+    "lodash": "4.17.20"
+  }
+}
