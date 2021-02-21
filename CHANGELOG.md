@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.5](https://github.com/lskjs/cli/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/cli/commit/b3aba716c36ee27896685b645a0f77808fecba92))
+* **bots-plugin:** add ([95c49c4](https://github.com/lskjs/cli/commit/95c49c4d40f10dbc58f8258ebd689b121933972d))
+* **bots-plugin:** create ([0027b9c](https://github.com/lskjs/cli/commit/0027b9ca6bb8fa4d6bde07f3596064e6a68b750d))
+* **bots-plugin-notify:** create ([51b125f](https://github.com/lskjs/cli/commit/51b125fac6cc8b53bb1b31d85a93693a49fa813d))
+* **bots-plugin-polundra:** create ([0604765](https://github.com/lskjs/cli/commit/0604765bf8190bdfadae667c34051b3c3b0eeba7))
+* **bots-plugin-portal:** create ([96d3233](https://github.com/lskjs/cli/commit/96d32338b8a687edc4e62989542f8d3c910a9b02))
+
+
+
+
+
 # [2.3.0-beta.4](https://github.com/lskjs/cli/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
 
 **Note:** Version bump only for package @lskjs/cli-sample
