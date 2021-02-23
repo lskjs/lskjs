@@ -34,7 +34,7 @@ export default class PortalPlugin extends BaseBotPlugin {
       });
 
     // this.log.trace({ activeRules });
-    await Bluebird.map(activeRules, (rule) => {
+    await Bluebird.map(activeRules, async (rule) => {
       let { then: thens } = rule;
       if (!thens) return null;
       if (!Array.isArray(thens)) thens = [thens];
@@ -46,10 +46,10 @@ export default class PortalPlugin extends BaseBotPlugin {
           return bot.sendMessage(then.to, then.text);
         }
         if (then.action === 'repost') {
-          console.log('then.actionProps', then.to, then.actionProps)
-          if (then.actionProps && then.actionProps.username) {
-            await bot.sendMessage(then.to, `Сообщение от chatId=${chatId} userId=${userId}`);
-          }
+          // console.log('then.actionProps', then.to, then.actionProps)
+          // if (then.actionProps && then.actionProps.username) {
+          //   await bot.sendMessage(then.to, `Сообщение от chatId=${chatId} userId=${userId}`);
+          // }
           return bot.repost(then.to, ctx);
         }
 
