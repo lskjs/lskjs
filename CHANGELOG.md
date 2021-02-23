@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.8](https://github.com/lskjs/cli/compare/v2.3.0-beta.7...v2.3.0-beta.8) (2021-02-23)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** target chat number id ([2bb37c5](https://github.com/lskjs/cli/commit/2bb37c5148b7fd670a3d2bd3c4fe194769a3e5cd))
+
+
+### Features
+
+* **bots-plugin-portal:** improve action remove and media group repost with username ([d107312](https://github.com/lskjs/cli/commit/d107312baf1198069c70979fcc6963cdb1cb5fa7))
+
+
+
+
+
 # [2.3.0-beta.7](https://github.com/lskjs/cli/compare/v2.3.0-beta.6...v2.3.0-beta.7) (2021-02-23)
 
 
