@@ -11,6 +11,37 @@ export default class PortalPlugin extends BaseBotPlugin {
     await super.init();
     this.rules = canonizeRules(this.config.rules);
   }
+  // Иного варианта, чтобы ловить медиагруппы не придумал.
+  // Медиа отправляются в одном мгновение с точностью до миллисекунды
+  media_group_id = 0;
+  // TODO: перенести в provider-telegram и логику вынуть в middleware-debounce
+  async addPrefix({ ctx, bot, then }) {
+    const message = bot.getMessage(ctx);
+    const { username, id } = ctx.from;
+    const { to, actionProps } = then;
+    const { username: addUsername, userId: addUserId } = actionProps;
+
+    const resUsername = `${addUsername ? `@${username}` : ''}`;
+    const resUserId = `${addUserId ? `${id}` : ''}`;
+    const resOffset = `${addUsername || addUserId ? '\n\n' : ''}`;
+
+    const prefix = [resUsername, resUserId, resOffset].join(' ');
+
+    if (message.media_group_id) {
+      if (this.media_group_id !== message.media_group_id) {
+        message.caption = `${prefix}`;
+      }
+      this.media_group_id = message.media_group_id;
+    } else if (message.caption) {
+      message.caption = `${prefix}${message.caption}`;
+    } else if (message.text) {
+      message.text = `${prefix}${message.text}`;
+    } else {
+      await bot.sendMessage(to, `${prefix}`);
+    }
+    return { ...ctx, message };
+  }
+
   async onEvent({ event, ctx, bot }) {
     // const userId = bot.getMessageUserId(ctx);
     const userId = bot.getMessageChatId(ctx);
@@ -30,6 +61,11 @@ export default class PortalPlugin extends BaseBotPlugin {
       .filter((rule) => {
         if (!rule.when) return true;
         if (rule.when.text && rule.when.text === text) return true;
+
+        const type = bot.getMessageType(ctx);
+        if (rule.when.type && rule.when.type === type) return true;
+        if (rule.when.types && rule.when.types.includes(type)) return true;
+
         return false;
       });
 
@@ -38,7 +74,7 @@ export default class PortalPlugin extends BaseBotPlugin {
       let { then: thens } = rule;
       if (!thens) return null;
       if (!Array.isArray(thens)) thens = [thens];
-      return Bluebird.map(thens, (then) => {
+      return Bluebird.map(thens, async (then) => {
         if (then.action === 'reply') {
           return bot.reply(ctx, then.text);
         }
@@ -46,13 +82,12 @@ export default class PortalPlugin extends BaseBotPlugin {
           return bot.sendMessage(then.to, then.text);
         }
         if (then.action === 'repost') {
-          // console.log('then.actionProps', then.to, then.actionProps)
-          // if (then.actionProps && then.actionProps.username) {
-          //   await bot.sendMessage(then.to, `Сообщение от chatId=${chatId} userId=${userId}`);
-          // }
-          return bot.repost(then.to, ctx);
+          const updatedCtx = await this.addPrefix({ ctx, bot, then });
+          return bot.repost(then.to, updatedCtx);
         }
-
+        if (then.action === 'remove') {
+          await ctx.deleteMessage();
+        }
         return false;
       });
     });
