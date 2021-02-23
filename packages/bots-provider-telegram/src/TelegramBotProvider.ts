@@ -26,6 +26,36 @@ export default class TelegramBotProvider extends BaseBotProvider {
     'chosen_inline_result',
     'channel_post',
     'edited_channel_post',
+    'text',
+    'audio',
+    'dice',
+    'document',
+    'photo',
+    'sticker',
+    'video',
+    'voice',
+    'contact',
+    'location',
+    'venue',
+    'forward',
+    'new_chat_members',
+    'left_chat_member',
+    'new_chat_title',
+    'new_chat_photo',
+    'delete_chat_photo',
+    'group_chat_created',
+    'migrate_to_chat_id',
+    'supergroup_chat_created',
+    'channel_chat_created',
+    'migrate_from_chat_id',
+    'pinned_message',
+    'game',
+    'video_note',
+    'invoice',
+    'successful_payment',
+    'connected_website',
+    'passport_data',
+    'poll',
   ];
   config: TelegramBotConfigType;
   async init(): Promise<void> {
@@ -47,6 +77,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     await this.client.launch();
   }
   getMessage(ctx: TelegramIBotProviderMessageCtx): TelegramIBotProviderMessageCtx {
+    if (get(ctx, 'update.channel_post')) return get(ctx, 'update.channel_post');
     if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
   }
@@ -98,11 +129,13 @@ export default class TelegramBotProvider extends BaseBotProvider {
   getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any | null {
     return get(ctx, 'update.callback_query.data', null);
   }
-  getMessageText(ctx: TelegramIBotProviderMessageCtx): string {
+  getMessageText(ctx: TelegramIBotProviderMessageCtx): string | null {
     if (typeof ctx === 'string') return ctx;
-    if (get(ctx, 'message.caption')) return get(ctx, 'message.caption');
-    if (get(ctx, 'message.text')) return get(ctx, 'message.text');
-    return get(ctx, 'text');
+    const message = this.getMessage(ctx);
+    if (!message) return null;
+    if (message.caption) return message.caption;
+    if (message.text) return message.text;
+    return null;
   }
   isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
     return get(ctx, 'updateType') === 'callback_query';
@@ -170,6 +203,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   async repost(chatId: number | string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
     const type = this.getMessageType(ctx);
     const message = this.getMessage(ctx);
+    console.log({ ctx, type, message });
     this.log.trace('repost', type);
 
     let method: string;
