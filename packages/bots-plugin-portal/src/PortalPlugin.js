@@ -1,6 +1,9 @@
+import createKeyboard from '@lskjs/bots-base/utils/createKeyboard';
 import BaseBotPlugin from '@lskjs/bots-plugin';
 import Bluebird from 'bluebird';
 import isFunction from 'lodash/isFunction';
+
+import { groupMessages } from './groupMessages';
 
 const canonizeRule = (rule) => rule;
 const canonizeRules = (rules = []) => rules.map(canonizeRule).filter(Boolean);
@@ -17,15 +20,11 @@ export default class PortalPlugin extends BaseBotPlugin {
   // TODO: перенести в provider-telegram и логику вынуть в middleware-debounce
   async addPrefix({ ctx, bot, then }) {
     const message = bot.getMessage(ctx);
-    const { username, id } = ctx.from;
-    const { to, actionProps } = then;
-    const { username: addUsername, userId: addUserId } = actionProps;
+    const { username, id, first_name: firstName, last_name: lastName } = ctx.from;
+    const { to } = then;
 
-    const resUsername = `${addUsername ? `@${username}` : ''}`;
-    const resUserId = `${addUserId ? `${id}` : ''}`;
-    const resOffset = `${addUsername || addUserId ? '\n\n' : ''}`;
-
-    const prefix = [resUsername, resUserId, resOffset].join(' ');
+    const name = `${firstName} ${lastName}${username ? ` @${username}` : ''}`;
+    const prefix = `${name} [tg://user?id=${id}]\n\n`;
 
     if (message.media_group_id) {
       if (this.media_group_id !== message.media_group_id) {
@@ -40,6 +39,23 @@ export default class PortalPlugin extends BaseBotPlugin {
       await bot.sendMessage(to, `${prefix}`);
     }
     return { ...ctx, message };
+  }
+
+  createSenderKeyboard(ctx = {}) {
+    const { username, id, first_name: firstName, last_name: lastName } = ctx.from;
+    const name = `${firstName} ${lastName}${username ? ` @${username}` : ''}`;
+    const value = username ? `https://t.me/${username}` : `tg://user?id=${id}`;
+
+    return createKeyboard({
+      type: 'inline',
+      buttons: [
+        {
+          type: 'url',
+          title: name,
+          value,
+        },
+      ],
+    });
   }
 
   async onEvent({ event, ctx, bot }) {
@@ -82,8 +98,13 @@ export default class PortalPlugin extends BaseBotPlugin {
           return bot.sendMessage(then.to, then.text);
         }
         if (then.action === 'repost') {
-          const updatedCtx = await this.addPrefix({ ctx, bot, then });
-          return bot.repost(then.to, updatedCtx);
+          let extra = {};
+          if (then.sender) {
+            const keyboard = this.createSenderKeyboard(ctx);
+            extra = keyboard;
+          }
+          ctx.copyMessage(then.to, extra);
+          return bot.repost(then.to, ctx, extra);
         }
         if (then.action === 'remove') {
           await ctx.deleteMessage();
@@ -92,11 +113,17 @@ export default class PortalPlugin extends BaseBotPlugin {
       });
     });
   }
-  runBot(bot) {
-    // const rules = canonizeRules(this.config.rules); // this.config = {chats};
-    // this.log.trace({ rules });
 
-    bot.on('message', (ctx) => this.onEvent({ ctx, bot, event: 'message' }));
-    bot.on('channel_post', (ctx) => this.onEvent({ ctx, bot, event: 'channel_post' }));
+  runBot(bot) {
+    const group = this.config.group ? groupMessages : (a) => a;
+
+    bot.on(
+      'message',
+      group((ctx) => this.onEvent({ ctx, bot, event: 'message' })),
+    );
+    bot.on(
+      'channel_post',
+      group((ctx) => this.onEvent({ ctx, bot, event: 'channel_post' })),
+    );
   }
 }
