@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.9](https://github.com/lskjs/cli/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
+
+
+### Features
+
+* **bots-plugun-portal:** improve user sender message and groupMessage ([dd47be3](https://github.com/lskjs/cli/commit/dd47be33d4acb83bd695cb3b980a2cf822e4bf6e))
+* **bots-provider-telegram:** add initExtra in repost ([08c5463](https://github.com/lskjs/cli/commit/08c54637b1deced415c707e433bebbce5598e7fc))
+
+
+
+
+
 # [2.3.0-beta.8](https://github.com/lskjs/cli/compare/v2.3.0-beta.7...v2.3.0-beta.8) (2021-02-23)
 
 

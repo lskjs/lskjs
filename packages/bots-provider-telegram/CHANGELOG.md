@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.9](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
+
+
+### Features
+
+* **bots-provider-telegram:** add initExtra in repost ([08c5463](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/08c54637b1deced415c707e433bebbce5598e7fc))
+
+
+
+
+
 # [2.3.0-beta.8](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.7...v2.3.0-beta.8) (2021-02-23)
 
 

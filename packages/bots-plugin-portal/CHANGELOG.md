@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.9](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
+
+
+### Features
+
+* **bots-plugun-portal:** improve user sender message and groupMessage ([dd47be3](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/dd47be33d4acb83bd695cb3b980a2cf822e4bf6e))
+
+
+
+
+
 # [2.3.0-beta.8](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.7...v2.3.0-beta.8) (2021-02-23)
 
 
