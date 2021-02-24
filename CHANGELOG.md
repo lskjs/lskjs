@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.100.2](https://github.com/isuvorov/lib-starter-kit/compare/v1.100.1...v1.100.2) (2021-02-24)
+
+
+### Bug Fixes
+
+* **uapp:** resolve events with argumets ([3551e90](https://github.com/isuvorov/lib-starter-kit/commit/3551e90fddf1e2fba3a93122cd6abd1cdb8e6263))
+
+
+
+
+
 ## [1.100.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.99.1...v1.100.1) (2021-02-02)
 
 **Note:** Version bump only for package lskjs
