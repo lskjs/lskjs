@@ -162,8 +162,8 @@ export default class Uapp extends Module {
         animation: 'none',
       });
 
-      this.on('resolve:start', () => this.resolveStart());
-      this.on('resolve:finish', () => this.resolveFinish());
+      this.on('resolve:start', (...args) => this.resolveStart(...args));
+      this.on('resolve:finish', (...args) => this.resolveFinish(...args));
 
       const classes = detectHtmlClasses();
       classes.forEach(addClassToHtml);
