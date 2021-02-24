@@ -208,15 +208,21 @@ export default class TelegramBotProvider extends BaseBotProvider {
    * @param {int|string} chatId repost target
    * @param {object} ctx message or message context
    */
-  async repost(chatId: number | string, ctx: TelegramIBotProviderMessageCtx): Promise<any> {
+  async repost(
+    chatId: number | string,
+    ctx: TelegramIBotProviderMessageCtx,
+    initExtra?: Record<string, unknown>,
+  ): Promise<any> {
     const type = this.getMessageType(ctx);
     const message = this.getMessage(ctx);
-    console.log({ ctx, type, message });
+    // console.log({ ctx, type, message });
     this.log.trace('repost', type);
 
     let method: string;
     let args: any[];
-    const extra: any = {};
+    const extra: any = {
+      ...(initExtra || {}),
+    };
     if (type === 'audio') {
       method = 'sendAudio';
       args = [message.audio.file_id];
