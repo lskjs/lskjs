@@ -26,6 +26,10 @@ export const groupMessages = (callback, { groupKey = defaultGetMediaGroupId, del
   const group = sortBy(groups[mediaGroupId], 'message.message_id');
   // console.log('[QWE] 33', ctx.message.message_id, mediaGroupId, groups[mediaGroupId].length);
   if (!group.length) return;
+  if (group.length === 1) {
+    callback(ctx);
+    return;
+  }
   ctx.group = group;
   callback(ctx);
   groups[mediaGroupId] = [];

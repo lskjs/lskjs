@@ -103,7 +103,7 @@ export default class PortalPlugin extends BaseBotPlugin {
             const keyboard = this.createSenderKeyboard(ctx);
             extra = keyboard;
           }
-          ctx.copyMessage(then.to, extra);
+          // ctx.copyMessage(then.to, extra);
           return bot.repost(then.to, ctx, extra);
         }
         if (then.action === 'remove') {
