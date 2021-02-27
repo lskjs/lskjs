@@ -2,8 +2,23 @@ import { IBotProvider, IBotProviderMessageCtx } from '@lskjs/bots-base/types';
 import { getPrivateLinkToMessage } from '@lskjs/bots-base/utils/private-linker';
 import { BaseBotPlugin } from '@lskjs/bots-plugin';
 import Bluebird from 'bluebird';
+import chunk from 'lodash/chunk';
+import fromPairs from 'lodash/fromPairs';
 
 export class DebugBotPlugin extends BaseBotPlugin {
+  async setStartParams(bot: IBotProvider, user: any, ctx: IBotProviderMessageCtx): Promise<void> {
+    // link example:
+    // https://telegram.me/bot_username?start=startPayload-key1_value_key2_value
+    const text = bot.getMessageText(ctx);
+    const [command, key, ...props] = text.split(/\s|-|_/);
+    if (command !== '/start' || key !== 'startPayload') return;
+    const locale = ctx.from.language_code;
+    const data = fromPairs(chunk(props, 2));
+    user.setRef(data);
+    user.setLang(data, locale);
+    await user.save();
+  }
+
   async runBot(bot: IBotProvider, name: string): Promise<void> {
     if (!this.app) throw '!app';
     if (this.config?.logger !== false) await this.runLogger(bot, name);
@@ -100,11 +115,12 @@ Made on @LSKjs with ❤️`;
           // Don't wait
           const messageType = bot.getMessageType(ctx);
           const { from, chat } = eventData;
-
-          const { _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate({ id: from.id }, from, {
+          const user = await BotsTelegramUserModel.findOneAndUpdate({ id: from.id }, from, {
             new: true,
             upsert: true,
           });
+          const telegramUserId = user._id;
+          await this.setStartParams(bot, user, ctx);
           let chatUserId;
 
           if (chat && chat.id < 0) {
