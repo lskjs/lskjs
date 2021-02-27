@@ -1,8 +1,8 @@
 // ts-ignore
 import Model from '@lskjs/db/Model';
 import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import set from 'lodash/set';
-import { Schema } from 'mongoose';
 
 // https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
 export default class BotsTelegramUserModel extends Model {
@@ -48,5 +48,22 @@ export default class BotsTelegramUserModel extends Model {
       // ts-ignore
       this.markModified(key);
     });
+  }
+
+  setRef(data) {
+    const refUserLink = get(this, 'meta.start.ref');
+    const refLink = get(data, 'ref');
+
+    if (refUserLink || !refLink) return;
+    set(this, 'meta.start.ref', refLink);
+
+    this.markModified('meta');
+  }
+
+  setLang(data, telegramLocale) {
+    const locale = get(data, 'locale', telegramLocale);
+    set(this, 'meta.locale', locale);
+
+    this.markModified('meta');
   }
 }
