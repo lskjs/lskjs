@@ -58,6 +58,43 @@ export default class PortalPlugin extends BaseBotPlugin {
     });
   }
 
+  async usersActions({ users, ctx, bot, then }) {
+    await Bluebird.each(users, async (user) => {
+      Object.assign(then, { to: user.id });
+      await this.thenBotActions({ ctx, bot, then });
+    });
+    await Bluebird.delay(10);
+  }
+
+  async getUsersForActions({ then }) {
+    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
+    const params = {};
+    if (then.to instanceof Object) Object.assign(params, then.to);
+    return BotsTelegramUserModel.find(params).select('id').lean();
+  }
+
+  async thenBotActions({ ctx, bot, then }) {
+    if (then.action === 'reply') {
+      return bot.reply(ctx, then.text);
+    }
+    if (then.action === 'sendMessage') {
+      return bot.sendMessage(then.to, then.text);
+    }
+    if (then.action === 'repost') {
+      let extra = {};
+      if (then.sender) {
+        const keyboard = this.createSenderKeyboard(ctx);
+        extra = keyboard;
+      }
+      // ctx.copyMessage(then.to, extra);
+      return bot.repost(then.to, ctx, extra);
+    }
+    if (then.action === 'remove') {
+      await ctx.deleteMessage();
+    }
+    return false;
+  }
+
   async onEvent({ event, ctx, bot }) {
     // const userId = bot.getMessageUserId(ctx);
     const userId = bot.getMessageChatId(ctx);
@@ -91,23 +128,27 @@ export default class PortalPlugin extends BaseBotPlugin {
       if (!thens) return null;
       if (!Array.isArray(thens)) thens = [thens];
       return Bluebird.map(thens, async (then) => {
-        if (then.action === 'reply') {
-          return bot.reply(ctx, then.text);
+        if (Array.isArray(then.to)) {
+          // Массовая рассылка с конфигом в виде массива id
+          // Example:
+          // to: ['0123456789', '9876543210'],
+          const users = then.to.map((i) => ({ id: i }));
+          return this.usersActions({ users, ctx, bot, then });
         }
-        if (then.action === 'sendMessage') {
-          return bot.sendMessage(then.to, then.text);
+        if (then.to instanceof Object || then.to === '*') {
+          // Массовая рассылка с конфигом в виде параметров для монги find(params) или * для взятия всех юзеров
+          // Examples:
+          // to: { id: { $in: ['0123456789', '9876543210'] }, meta: $exists },
+          // to: '*',
+          const users = await this.getUsersForActions({ then });
+          return this.usersActions({ users, ctx, bot, then });
         }
-        if (then.action === 'repost') {
-          let extra = {};
-          if (then.sender) {
-            const keyboard = this.createSenderKeyboard(ctx);
-            extra = keyboard;
-          }
-          // ctx.copyMessage(then.to, extra);
-          return bot.repost(then.to, ctx, extra);
-        }
-        if (then.action === 'remove') {
-          await ctx.deleteMessage();
+        if (['string', 'number'].includes(typeof then.to)) {
+          // Если передается 1 id
+          // Examples:
+          // to: '0123456789',
+          // to: 9876543210,
+          return this.thenBotActions({ ctx, bot, then });
         }
         return false;
       });
