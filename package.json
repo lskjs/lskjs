@@ -1,5 +1,5 @@
 {
-  "version": "2.13.2",
+  "version": "2.8.0",
   "name": "@lskjs/cli-sample",
   "description": "LSK.js – command line interface scripts",
   "author": "Igor Suvorov <hi@isuvorov.com>",
@@ -15,7 +15,6 @@
     "bootstrap": "lsk run bootstrap",
     "dev": "lsk run dev",
     "release": "lsk run release",
-    "release:yes": "lsk run release -- --yes",
     "i18": "lsk run i18",
     "build": "lsk run build",
     "test": "lsk run test"
@@ -23,23 +22,56 @@
   "dependencies": {
     "@babel/cli": "7.12.16",
     "@babel/core": "7.12.16",
-    "@lskjs/babel-preset": "0.6.0",
-    "@lskjs/cli": "2.13.2",
+    "@lskjs/babel-preset": "^0.6.0",
+    "@lskjs/cli": "2.15.0",
+    "@types/config": "0.0.38",
+    "@types/jest": "26.0.20",
+    "@types/react": "17.0.1",
     "babel-jest": "26.6.3",
     "babel-loader": "8.2.2",
+    "commitizen": "4.2.3",
+    "concurrently": "5.3.0",
     "lerna": "3.22.1",
+    "lint-staged": "10.5.4",
+    "react": "17.0.1",
+    "shelljs": "0.8.4",
+    "ts-interface-builder": "0.2.3",
     "typescript": "4.1.5",
     "webpack": "5.21.2",
     "webpack-dev-server": "3.11.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
+    "@commitlint/prompt": "11.0.0",
     "@lskjs/eslint-config": "2.2.0",
-    "@lskjs/utils": "2.2.0-beta.25",
+    "@lskjs/utils": "2.3.0-beta.5",
+    "@release-it/conventional-changelog": "2.0.0",
+    "all-contributors-cli": "6.19.0",
     "babel-eslint": "10.1.0",
-    "eslint": "7.20.0",
+    "cz-conventional-changelog": "3.3.0",
+    "cz-customizable": "6.3.0",
+    "eslint": "7.19.0",
     "husky": "5.0.9",
     "jest": "26.6.3",
-    "prettier": "2.2.1"
-  }
+    "lerna-changelog": "1.0.1",
+    "nodemon": "2.0.7",
+    "npm-check-updates": "11.1.1",
+    "prettier": "2.2.1",
+    "release-it": "14.4.0",
+    "release-it-lerna-changelog": "3.1.0",
+    "size-limit": "4.9.2",
+    "ts-node-dev": "1.1.1"
+  },
+  "config": {
+    "cz-customizable": {
+      "config": ".czrc.js"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "gitHead": "e8e3e1bb96aea4e71541c52c5e25572e539fb6e1"
 }
