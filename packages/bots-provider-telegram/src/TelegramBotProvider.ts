@@ -255,6 +255,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
     // console.log({ ctx, type, message });
     this.log.trace('repost', type);
 
+    // if (ctx.group) {
+    //   ctx
+    // }
+
     let method: string;
     let args: any[];
     const extra: any = {
