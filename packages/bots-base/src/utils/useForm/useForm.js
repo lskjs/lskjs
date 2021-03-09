@@ -1,9 +1,19 @@
 import { createForm } from './createForm';
 import { renderForm } from './renderForm';
 
-export const useForm = async function ({ i18, req, onChange = () => null, onSubmit, ...formSchema2 }) {
+export const useForm = async function ({
+  i18,
+  req,
+  onChange = () => null,
+  onSubmit,
+  preview = true,
+  autosubmit,
+  ...formSchema2
+}) {
   const { bot, query, path, ctx } = req;
   const { action = 'init', field, values = {}, ...otherQuery } = query;
+  // eslint-disable-next-line no-param-reassign
+  if (!preview) autosubmit = true;
 
   req.log.trace(path, query, ctx.session, {
     action,
@@ -78,12 +88,14 @@ export const useForm = async function ({ i18, req, onChange = () => null, onSubm
         rawValue: text,
         values: form.getValues(),
       });
-      await bot.client.telegram.editMessageText(
-        formMessageChatId,
-        formMessageId,
-        null,
-        ...renderForm({ path, action, field, form, repliedMessageId }),
-      );
+      if (preview) {
+        await bot.client.telegram.editMessageText(
+          formMessageChatId,
+          formMessageId,
+          null,
+          ...renderForm({ path, action, field, form, repliedMessageId }),
+        );
+      }
     }
     if (!nextField) {
       return ctx.redirect({
@@ -99,6 +111,11 @@ export const useForm = async function ({ i18, req, onChange = () => null, onSubm
       query: { ...otherQuery, action: 'set', field: nextField, values: form.getValues() },
     });
   }
+  if (action === 'finish' && autosubmit) {
+    const { formMessageId, formMessageChatId } = query;
+    await bot.client.telegram.deleteMessage(formMessageChatId, formMessageId);
+    return onSubmit(form.getValues());
+  }
   if (action === 'finish') {
     const { repliedMessageId, formMessageId, formMessageChatId } = query;
     await bot.client.telegram.editMessageText(
@@ -107,9 +124,9 @@ export const useForm = async function ({ i18, req, onChange = () => null, onSubm
       null,
       ...renderForm({ path, action, field, form, repliedMessageId }),
     );
-
     // const text = map(form.fields, (name) => `${form.controls[name].title}: ${form.getValue(name)}`).join('\n');
     await bot.reply(ctx, 'Если всё верно, подтвердите форму');
+    return true;
   }
   if (action === 'submit') {
     return onSubmit(form.getValues());
