@@ -31,7 +31,7 @@ export class ClickhouseServerModule extends Module {
     }
   }
   getFilepath(filename) {
-    const filepath = get(this.config, 'external.filepath', '/home');
+    const filepath = get(this.config, 'external.filepath', '/tmp');
     return path.join(filepath, filename);
   }
   createNativeQuery(query) {

@@ -1,14 +1,14 @@
-# LSK.js – permit
+# LSK.js – clickhouse
 
-> @lskjs/permit – LSK module for one time codes and permits.
+> @lskjs/clickhouse – LSK module for clickhouse database
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/permit)](https://www.npmjs.com/package/@lskjs/permit)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/permit)](https://www.npmjs.com/package/@lskjs/permit)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/permit)](https://bundlephobia.com/result?p=@lskjs/permit)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/permit)](https://www.npmjs.com/package/@lskjs/permit)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/permit)](https://bundlephobia.com/result?p=@lskjs/permit)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/permit)](https://bundlephobia.com/result?p=@lskjs/permit)
+[![NPM version](https://badgen.net/npm/v/@lskjs/clickhouse)](https://www.npmjs.com/package/@lskjs/clickhouse)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/clickhouse)](https://www.npmjs.com/package/@lskjs/clickhouse)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/clickhouse)](https://bundlephobia.com/result?p=@lskjs/clickhouse)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/clickhouse)](https://www.npmjs.com/package/@lskjs/clickhouse)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/clickhouse)](https://bundlephobia.com/result?p=@lskjs/clickhouse)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/clickhouse)](https://bundlephobia.com/result?p=@lskjs/clickhouse)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/permit @lskjs/db @lskjs/mobx @lskjs/server-api bluebird lodash mobx
+yarn i @lskjs/clickhouse bluebird lodash
 
 # npm
-npm i @lskjs/permit @lskjs/db @lskjs/mobx @lskjs/server-api bluebird lodash mobx
+npm i @lskjs/clickhouse bluebird lodash
 ```
 
 ***
