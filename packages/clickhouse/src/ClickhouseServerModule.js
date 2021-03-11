@@ -1,5 +1,7 @@
 // import SHA256 from 'crypto-js/sha256';
 import Module from '@lskjs/module';
+import { spawn } from 'child_process';
+import { ClickHouse } from 'clickhouse';
 import SHA256 from 'crypto-js/sha256';
 import CsvReadableStream from 'csv-reader';
 import fs from 'fs';
@@ -8,23 +10,13 @@ import path from 'path';
 
 import config from './config';
 
-const { ClickHouse } = require('clickhouse');
-
 export class ClickhouseServerModule extends Module {
   config = config;
 
-  async getConfig() {
-    return {
-      ...(await super.getConfig()),
-      ...get(this, 'config', {}),
-      ...get(this, '__config', {}),
-    };
-  }
-
   async init() {
     await super.init();
-    const ch = new ClickHouse(this.config);
-    this.ch = ch;
+    const client = new ClickHouse(this.config);
+    this.client = client;
   }
 
   // все что ниже делает запросы через clickhouse-client
@@ -43,11 +35,11 @@ export class ClickhouseServerModule extends Module {
     return path.join(filepath, filename);
   }
   createNativeQuery(query) {
-    const { url } = this.config;
+    const { url, native } = this.config;
     const host = url.replace('http://', '');
     const filename = this.createFilename(query);
     const filepath = this.getFilepath(filename);
-    if (__DEV__) {
+    if (!native) {
       const { command, args } = {
         command: 'docker-compose',
         args: [
@@ -109,23 +101,15 @@ export class ClickhouseServerModule extends Module {
     });
   }
   async nativeQuery(query) {
-    const { debug } = this.config;
-    if (debug) {
-      console.log({ debug });
-    }
     const { command, args, filename } = this.createNativeQuery(query);
     const proc = spawn(command, args, { shell: true });
     await new Promise((resolve, reject) => {
       proc.stdout.on('data', (data) => {
-        if (debug) {
-          console.log(`clickhouse stdout: ${data}`);
-        }
+        this.log.trace(`clickhouse stdout: ${data}`);
       });
 
       proc.stderr.on('data', (data) => {
-        if (debug) {
-          console.log(`stderr: ${data}`);
-        }
+        this.log.error(`clickhouse stdout: ${data}`);
         return reject();
       });
 
@@ -152,11 +136,11 @@ export class ClickhouseServerModule extends Module {
     return whereStr;
   }
   async ping() {
-    const res = await this.ch.query('SELECT 1').toPromise();
+    const res = await this.client.query('SELECT 1').toPromise();
     return res;
   }
   async find({ tableName, select = '*', limit, where }) {
-    const { ch } = this;
+    const { client } = this;
     let selectStr = select;
     if (Array.isArray(select)) {
       selectStr = select.join(', ');
@@ -170,17 +154,17 @@ export class ClickhouseServerModule extends Module {
     if (limit) {
       queryStr += ` LIMIT ${limit}`;
     }
-    return ch.query(queryStr).toPromise();
+    return client.query(queryStr).toPromise();
   }
   async count({ tableName, where }) {
-    const { ch } = this;
+    const { client } = this;
     let queryStr = 'SELECT count() ';
     queryStr += `FROM ${tableName}`;
     if (where) {
       const whereStr = this.getWhereStrFromJson(where);
       queryStr += whereStr;
     }
-    const res = await ch.query(queryStr).toPromise();
+    const res = await client.query(queryStr).toPromise();
     return get(res, '0.count()', null);
   }
   async findOne(params) {
@@ -189,22 +173,23 @@ export class ClickhouseServerModule extends Module {
     return null;
   }
   async delete({ tableName, where }) {
-    const { ch } = this;
-    return ch.query(`ALTER TABLE ${tableName} DELETE ${this.getWhereStrFromJson(where)};`).toPromise();
+    const { client } = this;
+    return client.query(`ALTER TABLE ${tableName} DELETE ${this.getWhereStrFromJson(where)};`).toPromise();
   }
   async optimize({ tableName }) {
-    const { ch } = this;
-    return ch.query(`OPTIMIZE TABLE ${tableName} FINAL;`).toPromise();
+    const { client } = this;
+    return client.query(`OPTIMIZE TABLE ${tableName} FINAL;`).toPromise();
   }
   async query(query) {
-    const { ch } = this;
-    return ch.query(query).toPromise();
+    const { client } = this;
+    return client.query(query).toPromise();
   }
   async streamQuery(query) {
-    const { ch } = this;
+    const { client } = this;
     const data = [];
     return new Promise((resolve, reject) => {
-      ch.query(query)
+      client
+        .query(query)
         .stream()
         .on('data', (res) => {
           // console.log({ i, debug });
@@ -215,16 +200,16 @@ export class ClickhouseServerModule extends Module {
     });
   }
   async insertOne({ tableName, values }) {
-    const { ch } = this;
-    const ws = ch.insert(`INSERT INTO ${tableName}`).stream();
+    const { client } = this;
+    const ws = client.insert(`INSERT INTO ${tableName}`).stream();
     await ws.writeRow(values);
     const result = await ws.exec();
     await this.optimize({ tableName });
     return result;
   }
   async insertMany({ tableName, values }) {
-    const { ch } = this;
-    const ws = ch.insert(`INSERT INTO ${tableName}`).stream();
+    const { client } = this;
+    const ws = client.insert(`INSERT INTO ${tableName}`).stream();
     await Promise.mapSeries(values, async (v) => {
       await ws.writeRow(v);
     });
@@ -233,7 +218,7 @@ export class ClickhouseServerModule extends Module {
       // await this.optimize({ tableName });
       return res;
     } catch (err) {
-      console.error(err.toString(), err);
+      this.log.error(err.toString(), err);
       throw err;
     }
   }

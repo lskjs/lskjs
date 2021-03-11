@@ -1,10 +1,10 @@
 export default {
-  "port": 8123,
-  "username": "default",
-  "password": "default",
-  "database": "default",
-  "external": {
-    "filepath": "/home"
+  port: 8123,
+  username: 'default',
+  password: 'default',
+  database: 'default',
+  external: {
+    filepath: '/tmp',
   },
-  "debug": true
+  native: false,
 };
