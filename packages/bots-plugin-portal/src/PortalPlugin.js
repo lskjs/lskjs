@@ -157,10 +157,12 @@ export default class PortalPlugin extends BaseBotPlugin {
       });
 
     // this.log.trace({ activeRules });
+    if (isEmpty(activeRules)) return;
     await Bluebird.map(activeRules, async (rule) => {
       let { then: thens } = rule;
       if (!thens) return null;
       if (!Array.isArray(thens)) thens = [thens];
+      if (isEmpty(thens)) return {};
       return Bluebird.map(thens, async (then) => {
         // let users = [then.to].map((i) => ({ id: i }));
         let users = [then.to];

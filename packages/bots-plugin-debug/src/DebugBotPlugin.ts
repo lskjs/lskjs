@@ -10,6 +10,7 @@ export class DebugBotPlugin extends BaseBotPlugin {
     // link example:
     // https://telegram.me/bot_username?start=startPayload-key1_value_key2_value
     const text = bot.getMessageText(ctx);
+    if (!text) return;
     const [command, key, ...props] = text.split(/\s|-|_/);
     if (command !== '/start' || key !== 'startPayload') return;
     const locale = ctx.from.language_code;
