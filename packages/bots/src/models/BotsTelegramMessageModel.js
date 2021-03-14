@@ -319,33 +319,4 @@ export default class BotsTelegramMessageModel extends Model {
     model: 'BotsTelegramMessage',
     collection: 'bots_telegram_message',
   };
-
-  async setLike(value) {
-    if (!this.meta) this.meta = {};
-    if (!this.meta.likeUserIds) this.meta.likeUserIds = [];
-    if (!this.meta.disslikeUserIds) this.meta.disslikeUserIds = [];
-
-    if (this.meta.disslikeUserIds.includes(value)) {
-      this.meta.disslikeUserIds = this.meta.disslikeUserIds.filter((user) => user !== value);
-    }
-    if (!this.meta.likeUserIds.includes(value)) {
-      this.meta.likeUserIds.push(value);
-    }
-    this.markModified('meta');
-    await this.save();
-  }
-  async setDissLike(value) {
-    if (!this.meta) this.meta = {};
-    if (!this.meta.likeUserIds) this.meta.likeUserIds = [];
-    if (!this.meta.disslikeUserIds) this.meta.disslikeUserIds = [];
-
-    if (this.meta.likeUserIds.includes(value)) {
-      this.meta.likeUserIds = this.meta.likeUserIds.filter((user) => user !== value);
-    }
-    if (!this.meta.disslikeUserIds.includes(value)) {
-      this.meta.disslikeUserIds.push(value);
-    }
-    this.markModified('meta');
-    await this.save();
-  }
 }
