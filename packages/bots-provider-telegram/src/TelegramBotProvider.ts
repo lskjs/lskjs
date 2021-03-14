@@ -1,6 +1,7 @@
 import { IBotProviderMessageCtx } from '@lskjs/bots-base/types';
 import BaseBotProvider from '@lskjs/bots-provider';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 import { session, Telegraf } from 'telegraf';
 
 export type TelegramIBotProviderMessageCtx = IBotProviderMessageCtx;
@@ -145,6 +146,19 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (message.caption) return message.caption;
     if (message.text) return message.text;
     return null;
+  }
+  async getChatMember(chatId: string | number, userId: string | number): any {
+    try {
+      const chatMember = await this.client.telegram.getChatMember(chatId, userId);
+      return chatMember;
+    } catch (error) {
+      return {};
+    }
+  }
+  async userInChat(chatId: string | number, userId: string | number): boolean {
+    const chatMember = await this.getChatMember(chatId, userId);
+    if (isEmpty(chatMember)) return false;
+    return true;
   }
   isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
     return get(ctx, 'updateType') === 'callback_query';
