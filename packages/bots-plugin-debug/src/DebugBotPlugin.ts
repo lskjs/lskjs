@@ -125,10 +125,11 @@ Made on @LSKjs with ❤️`;
           let chatUserId;
 
           if (chat && chat.id < 0) {
-            ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate({ id: chat.id }, from, {
-              new: true,
-              upsert: true,
-            }));
+            // ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate({ id: chat.id }, from, {
+            //   new: true,
+            //   upsert: true,
+            // }));
+            ({ _id: chatUserId } = await BotsTelegramChatModel.findOne({ id: chat.id }));
           }
 
           await BotsTelegramMessageModel.create({
