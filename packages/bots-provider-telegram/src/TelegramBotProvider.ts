@@ -84,6 +84,15 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
   }
+  getUser(ctx: TelegramIBotProviderMessageCtx): TelegramIBotProviderMessageCtx {
+    if (get(ctx, 'update.callback_query.from')) return get(ctx, 'update.callback_query.from');
+    if (get(ctx, 'update.channel_post.from')) return get(ctx, 'update.channel_post.from');
+    if (get(ctx, 'update.message.from')) return get(ctx, 'update.message.from');
+    return ctx;
+  }
+  getUserId(ctx: TelegramIBotProviderMessageCtx): number | null {
+    return this.getUser(ctx).id;
+  }
   getMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
     if (ctx === Number) return ctx;
     const message = this.getMessage(ctx);
@@ -201,6 +210,18 @@ export default class TelegramBotProvider extends BaseBotProvider {
   //   const forwardFrom = this.getForwardFrom(ctx);
   //   return this.client.forwardMessage(chatId, forwardFrom, message.message_id);
   // };
+  async updateData({ Model, data, update = true, save = true, ...props }) {
+    const obj = await Model.findOne(data).select('_id').lean();
+    if (obj && update) {
+      return Model.updateOne({ _id: obj._id }, { ...data, ...props, updatedAt: new Date() });
+    }
+    if (!obj && save) {
+      const newObj = new Model({ ...data, ...props, createdAt: new Date(), updatedAt: new Date() });
+      return newObj.save();
+    }
+    return {};
+  }
+
   async saveMessage(ctx: TelegramIBotProviderMessageCtx, meta: any): Promise<any> {
     const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
     const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
@@ -215,10 +236,16 @@ export default class TelegramBotProvider extends BaseBotProvider {
       upsert: true,
     });
     let chatUserId;
-    if (chat && chat.id < 0) {
-      ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate({ id: chat.id }, from, {
-        new: true,
-        upsert: true,
+    if (from) {
+      await this.updateData({ Model: BotsTelegramChatModel, data: { id: from.id }, from, update: false });
+    }
+    if (chat) {
+      ({ _id: chatUserId } = await this.updateData({
+        Model: BotsTelegramChatModel,
+        data: { id: chat.id },
+        from: { ...from, id: chat.id },
+        username: chat.username || chat.title,
+        update: false,
       }));
     }
     await BotsTelegramMessageModel.create({
