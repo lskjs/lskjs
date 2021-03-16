@@ -9,6 +9,7 @@
         "master",
         "beta"
       ],
+      "exact": true,
       "conventionalCommits": true,
       "conventionalPrerelease": true,
       "message": "chore(release): %s"
