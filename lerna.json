@@ -11,12 +11,7 @@
       ],
       "conventionalCommits": true,
       "conventionalPrerelease": true,
-      "prereleaseOnly": true,
-      "message": "chore(release): %s",
-      "npmClientArgs": ["--npm-tag next --prerelease-only"],
-      "ignoreChanges": [
-        "lerna.json"
-      ]
+      "message": "chore(release): %s"
     },
     "publish": {
       "conventionalCommits": true,
