@@ -10,7 +10,8 @@
         "beta"
       ],
       "conventionalCommits": true,
-      "message": "chore(release): %s"
+      "message": "chore(release): %s",
+      "npmClientArgs": ["--npm-tag next --prerelease-only"]
     },
     "publish": {
       "conventionalCommits": true,
