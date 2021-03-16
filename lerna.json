@@ -10,8 +10,13 @@
         "beta"
       ],
       "conventionalCommits": true,
+      "conventionalPrerelease": true,
+      "prereleaseOnly": true,
       "message": "chore(release): %s",
-      "npmClientArgs": ["--npm-tag next --prerelease-only"]
+      "npmClientArgs": ["--npm-tag next --prerelease-only"],
+      "ignoreChanges": [
+        "lerna.json"
+      ]
     },
     "publish": {
       "conventionalCommits": true,
