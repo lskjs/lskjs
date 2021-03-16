@@ -5,6 +5,7 @@ import amqp from 'amqplib';
 import Bluebird from 'bluebird';
 import EventEmitter from 'events';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import hash from 'object-hash';
 
@@ -81,6 +82,18 @@ export class RabbitModule extends Module {
     await this.assertQueueOnce(this.queues[name]);
     return this.queues[name];
   }
+  getQueueParams(queue) {
+    let queueName = queue;
+    if (typeof queue === 'string') {
+      queueName = queue;
+    } else {
+      queueName = queue.name || queue.queue;
+    }
+    if (this.queues[queueName]) return this.queues[queueName];
+    return {
+      queue: this.config.prefix ? this.config.prefix + queueName : queueName,
+    };
+  }
   getQueueName(queue) {
     let queueName = queue;
     if (typeof queue === 'string') {
@@ -125,9 +138,12 @@ export class RabbitModule extends Module {
   }
   sendToQueue(queue, data, options, channel = this.sendChannel) {
     const queueName = this.getQueueName(queue);
+    const queueParams = this.getQueueParams(queue);
+    const mergedOptions = merge({}, options, queueParams.options, get(this, 'config.queueOptions'));
+
     return new Bluebird((res, rej) => {
       const row = serializeData(data);
-      channel.sendToQueue(queueName, Buffer.from(row), options, (err, ok) => {
+      channel.sendToQueue(queueName, Buffer.from(row), mergedOptions, (err, ok) => {
         if (err) {
           rej(err);
         } else {
