@@ -15,6 +15,7 @@
     "bootstrap": "lsk run bootstrap",
     "dev": "lsk run dev",
     "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
     "i18": "lsk run i18",
     "build": "lsk run build",
     "test": "lsk run test"
