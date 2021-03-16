@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+* **bots-plugin-portal:** groupMessages and copyMessage fix ([1b98a52](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/1b98a52765d3cccc5cc28fa5bf74531535f92df2))
+
+
+### Features
+
+* **bots:** add save chats and getUser, getUserId ([2947640](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/2947640574f16bd46f98a3751f78fca79de69c99))
+* **bots:** getChatMember, userInChat ([f697053](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/f6970539994d0e71f05217c1f0831a5ca88e3b27))
+
+
+
+
+
 # [2.3.0-beta.9](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
 
 

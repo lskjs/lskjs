@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bunyan",
-  "version": "2.3.0-beta.5",
+  "version": "2.3.0-beta.10",
   "description": "Light weight bunyan logger for a JSON logging library for node.js services without dtrace",
   "keywords": [
     "log",

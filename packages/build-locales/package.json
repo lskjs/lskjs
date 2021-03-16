@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "2.3.0-beta.5",
+  "version": "2.3.0-beta.10",
   "description": "CLI for build i18 locales from Google spreadsheet",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/build-locales",
@@ -22,8 +22,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/getspreadsheet": "2.3.0-beta.5",
-    "@lskjs/utils": "2.3.0-beta.5",
+    "@lskjs/getspreadsheet": "2.3.0-beta.10",
+    "@lskjs/utils": "2.3.0-beta.10",
     "bluebird": "3.7.2",
     "csv-parse": "4.14.2",
     "csvtojson": "2.0.10",

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* **bots:** add impression model, fix likes/disslikes ([80a7d8d](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/80a7d8d3cfeaec481eeb145eb9ce93b077fbc839))
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+### Features
+
+* **bots:** add bots-plugin-likes and edit BotsTelegramMessageModel ([e4cd966](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/e4cd9663df719f621d04b921225645f48d80473b))
+* **bots:** add ref and locale from startPayload ([2abae68](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/2abae68a978a04e5a48fa2cd38d243fa1b61a487))
+
+
+
+
+
 # [2.3.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.5...v2.3.0-beta.6) (2021-02-21)
 
 

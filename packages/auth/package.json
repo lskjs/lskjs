@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "2.3.0-beta.5",
+  "version": "2.3.0-beta.10",
   "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
   "keywords": [
     "auth",
@@ -27,8 +27,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.5",
-    "@lskjs/utils": "2.3.0-beta.5",
+    "@lskjs/module": "2.3.0-beta.10",
+    "@lskjs/utils": "2.3.0-beta.10",
     "bcryptjs": "2.4.3",
     "jsonwebtoken": "8.5.1",
     "passport": "0.4.1",
@@ -36,9 +36,9 @@
     "validator": "13.5.2"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.5",
+    "@lskjs/db": "2.3.0-beta.10",
     "@lskjs/mobx": "2.2.0-beta.5",
-    "@lskjs/server-api": "2.3.0-beta.5",
+    "@lskjs/server-api": "2.3.0-beta.10",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",

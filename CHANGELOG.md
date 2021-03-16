@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.10](https://github.com/lskjs/cli/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* lerna.json ([3cd204a](https://github.com/lskjs/cli/commit/3cd204a0c8d1c1005a3470cb7d42b35ec741e1fa))
+* quickfix ([270b4c2](https://github.com/lskjs/cli/commit/270b4c2806a045cb8687e10db8be2660028aca54))
+* quickfix ([51461b2](https://github.com/lskjs/cli/commit/51461b2546be47b08f913fd9e399f34c24e46c76))
+* **bots:** add impression model, fix likes/disslikes ([80a7d8d](https://github.com/lskjs/cli/commit/80a7d8d3cfeaec481eeb145eb9ce93b077fbc839))
+* **bots:** any fixes ([df5a05f](https://github.com/lskjs/cli/commit/df5a05f20bc92a6d95588196e84a0bc40ac6c372))
+* **bots:** DebugPlugin удалял общие чаты ([1aea9c9](https://github.com/lskjs/cli/commit/1aea9c973a8c7f19c9389c6976f163924ce5b741))
+* **clickhouse:** readme and tmp path ([8e71468](https://github.com/lskjs/cli/commit/8e714681251bdac44f6e43037254c24791972436))
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/cli/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+* small fixes ([d731329](https://github.com/lskjs/cli/commit/d7313298480ef7ec7758add0463bb3c60c362da6))
+* **bots-plugin-portal:** groupMessages and copyMessage fix ([1b98a52](https://github.com/lskjs/cli/commit/1b98a52765d3cccc5cc28fa5bf74531535f92df2))
+
+
+### Features
+
+* **bots:** add bots-plugin-likes and edit BotsTelegramMessageModel ([e4cd966](https://github.com/lskjs/cli/commit/e4cd9663df719f621d04b921225645f48d80473b))
+* **bots:** add multi-repost and likes keyboard ([09c4f98](https://github.com/lskjs/cli/commit/09c4f985ae34b6ff01d7ab4eae2950af3e83c605))
+* **bots:** add ref and locale from startPayload ([2abae68](https://github.com/lskjs/cli/commit/2abae68a978a04e5a48fa2cd38d243fa1b61a487))
+* **bots:** add save chats and getUser, getUserId ([2947640](https://github.com/lskjs/cli/commit/2947640574f16bd46f98a3751f78fca79de69c99))
+* **bots:** getChatMember, userInChat ([f697053](https://github.com/lskjs/cli/commit/f6970539994d0e71f05217c1f0831a5ca88e3b27))
+* **bots:** impression check ([87983df](https://github.com/lskjs/cli/commit/87983dfe056777fad95098e33bbcebbb1b3dc0f1))
+* add preview in form ([cad8001](https://github.com/lskjs/cli/commit/cad8001599b78a1ffd8579482eda0fff623e6610))
+* clickhouse ([97b0c5c](https://github.com/lskjs/cli/commit/97b0c5ce2d5a8273db74f2c3f01663e4b8c97e6c))
+
+
+
+
+
 # [2.3.0-beta.9](https://github.com/lskjs/cli/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
 
 
