@@ -7,4 +7,5 @@ export default {
     filepath: '/tmp',
   },
   native: false,
+  debug: false,
 };
