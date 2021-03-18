@@ -15,12 +15,17 @@ export default class PortalPlugin extends BaseBotPlugin {
   // TODO: add i18
   _i18 = {
     t: (key, params = {}) => {
-      const { count = '' } = params;
+      const { count = '', name = '' } = params;
       const table = {
         bot: {
           likesPlugin: {
             like: `❤️ ${count}`,
             disslike: `💔 ${count}`,
+          },
+          portalPlugin: {
+            rules: {
+              answer: `Ответить ${name}`,
+            },
           },
         },
       };
@@ -59,9 +64,9 @@ export default class PortalPlugin extends BaseBotPlugin {
   }
 
   createExtraKeyboard({ ctx = {}, then }) {
-    const { username, id, first_name: firstName, last_name: lastName } = ctx.from;
+    const { username, id: fromId, first_name: firstName, last_name: lastName } = ctx.from;
     const name = `${firstName} ${lastName}${username ? ` @${username}` : ''}`;
-    const value = username ? `https://t.me/${username}` : `tg://user?id=${id}`;
+    const value = username ? `https://t.me/${username}` : `tg://user?id=${fromId}`;
     const buttons = [];
 
     if (then.like) {
@@ -85,6 +90,16 @@ export default class PortalPlugin extends BaseBotPlugin {
           type: 'url',
           title: name,
           value,
+        },
+      ]);
+    }
+
+    if (then.answer) {
+      buttons.push([
+        {
+          type: 'callback',
+          title: this._i18.t('bot.portalPlugin.rules.answer', { name }),
+          value: `portal-toId-${fromId}`,
         },
       ]);
     }
@@ -129,6 +144,15 @@ export default class PortalPlugin extends BaseBotPlugin {
     return false;
   }
 
+  async updateRules({ ctx, bot, rules }) {
+    const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
+    const fromId = bot.getUserId(ctx);
+    const userRules = await BotsTelegramPortalRulesModel.find({ where: fromId })
+      .select(['then', 'when', 'where'])
+      .lean();
+    return [...rules, ...userRules];
+  }
+
   async onEvent({ event, ctx, bot }) {
     // const userId = bot.getMessageUserId(ctx);
     const userId = bot.getMessageChatId(ctx);
@@ -137,12 +161,12 @@ export default class PortalPlugin extends BaseBotPlugin {
     const messageType = bot.getMessageType(ctx);
     const pack = { userId, chatId, text, messageType };
     // console.log(pack);
-    const { rules } = this;
+    const rules = await this.updateRules({ ctx, bot, rules: this.rules });
     const activeRules = rules
       .filter((rule) => {
         if (!rule.where) return true;
         if (isFunction(rule.where) && rule.where(pack)) return true;
-        if (rule.where === userId || rule.where === chatId) return true;
+        if (`${rule.where}` === `${userId}` || `${rule.where}` === `${chatId}`) return true;
         return false;
       })
       .filter((rule) => {
@@ -155,7 +179,6 @@ export default class PortalPlugin extends BaseBotPlugin {
 
         return false;
       });
-
     // this.log.trace({ activeRules });
     if (isEmpty(activeRules)) return;
     await Bluebird.map(activeRules, async (rule) => {
@@ -179,6 +202,34 @@ export default class PortalPlugin extends BaseBotPlugin {
         return this.usersActions({ users, ctx, bot, then });
       });
     });
+  }
+
+  getRoutes() {
+    return [
+      {
+        path: /portal-toId-\d*/,
+        action: async ({ ctx, req, bot }) => {
+          ctx.answerCbQuery();
+          const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
+          const data = bot.getMessageCallbackData(ctx);
+          const fromId = bot.getUserId(ctx);
+          if (!data) return;
+          const toId = data.split('-')[2];
+          await BotsTelegramPortalRulesModel.deleteOne({ where: fromId }).lean();
+          const newRule = new BotsTelegramPortalRulesModel({
+            where: fromId,
+            then: {
+              answer: 1,
+              action: 'repost',
+              to: toId,
+            },
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
+          await newRule.save();
+        },
+      },
+    ];
   }
 
   runBot(bot) {
