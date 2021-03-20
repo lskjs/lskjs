@@ -164,9 +164,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
       return {};
     }
   }
-  async userInChat(chatId: string | number, userId: string | number): boolean {
+  async userInChat(chatId: string | number, userId: string | number): boolean | undefined {
     const chatMember = await this.getChatMember(chatId, userId);
-    if (isEmpty(chatMember)) return false;
+    if (isEmpty(chatMember)) return undefined;
+    if (chatMember.status === 'left') return false;
     return true;
   }
   isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
