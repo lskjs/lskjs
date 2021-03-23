@@ -65,26 +65,6 @@ export default class LikesPlugin extends BaseBotPlugin {
     return {};
   }
 
-  async userImpressionInChat({ ctx, bot }) {
-    const BotsTelegramImpressionModel = await this.botsModule.module('models.BotsTelegramImpressionModel');
-    const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
-    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
-
-    const telegramUserId = bot.getMessageUserId(ctx);
-    const telegramChatId = bot.getMessageChatId(ctx);
-    const user = await BotsTelegramUserModel.findOne({ id: telegramUserId }).select('_id').lean();
-    const chat = await BotsTelegramChatModel.findOne({ id: telegramChatId }).select('_id').lean();
-
-    if (!user || !chat) return false;
-    const dayAgo = new Date().getTime() - 24 * 60 * 60 * 1000;
-    const impression = await BotsTelegramImpressionModel.findOne({
-      userId: user._id,
-      chatId: chat._id,
-      updatedAt: { $gte: new Date(dayAgo) },
-    });
-    return !!impression;
-  }
-
   async setAction({ ctx, bot, action }) {
     const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
     const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
@@ -110,14 +90,6 @@ export default class LikesPlugin extends BaseBotPlugin {
 
   getRoutes() {
     return [
-      {
-        path: '/impressioncheck',
-        action: async ({ ctx, req, bot }) => {
-          // DEMO
-          // const impression = await this.userImpressionInChat({ ctx, bot });
-          // console.log('>>>>> User like/disslike day ago?', impression);
-        },
-      },
       {
         path: /^(diss)?like-\d*$/,
         action: async ({ ctx, req, bot }) => {
