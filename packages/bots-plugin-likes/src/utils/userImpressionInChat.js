@@ -1,6 +1,6 @@
 export async function userImpressionInChat({
-  ctx,
-  bot,
+  telegramUserId,
+  telegramChatId,
   botsModule,
   time = new Date().getTime() - 24 * 60 * 60 * 1000,
 }) {
@@ -8,8 +8,6 @@ export async function userImpressionInChat({
   const BotsTelegramChatModel = await botsModule.module('models.BotsTelegramChatModel');
   const BotsTelegramUserModel = await botsModule.module('models.BotsTelegramUserModel');
 
-  const telegramUserId = bot.getMessageUserId(ctx);
-  const telegramChatId = bot.getMessageChatId(ctx);
   const user = await BotsTelegramUserModel.findOne({ id: telegramUserId }).select('_id').lean();
   const chat = await BotsTelegramChatModel.findOne({ id: telegramChatId }).select('_id').lean();
 
