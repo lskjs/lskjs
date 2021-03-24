@@ -246,12 +246,13 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const type = this.getMessageType(ctx);
     const eventData = this.getMessage(ctx);
     const { from, chat } = eventData;
-    const { _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate({ id: from.id }, from, {
-      new: true,
-      upsert: true,
-    });
+    let telegramUserId;
     let chatUserId;
     if (from) {
+      ({ _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate({ id: from.id }, from, {
+        new: true,
+        upsert: true,
+      }));
       await this.updateData({ Model: BotsTelegramChatModel, data: { id: from.id }, from, update: false });
     }
     if (chat) {
@@ -263,14 +264,15 @@ export default class TelegramBotProvider extends BaseBotProvider {
         update: false,
       }));
     }
-    await BotsTelegramMessageModel.create({
+    const data = {
       botId,
       telegramUserId,
       chatUserId,
       type,
       meta,
       ...eventData,
-    });
+    };
+    await BotsTelegramMessageModel.create(data);
     await BotsEventModel.create({
       botId,
       provider: this.provider,
