@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.12...v2.3.0-beta.13) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** swap buttons like and disslike ([c03ea15](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/c03ea158f55a40afc8abad53ecba73d04e467ac6))
+
+
+
+
+
 # [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
 
 

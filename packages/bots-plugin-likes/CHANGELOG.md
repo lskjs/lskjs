@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-likes/compare/v2.3.0-beta.12...v2.3.0-beta.13) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots-plugin-likes:** add arg 'type' in userImpressionChat ([5ba48c8](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-likes/commit/5ba48c854f11317d2ca39092ab8de12f05a7d40a))
+* **bots-plugin-likes:** remove "0" count likes/disslikes ([9a70951](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-likes/commit/9a70951d5ad072a0da21d05971ddb927a02374f8))
+
+
+
+
+
 # [2.3.0-beta.11](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-likes/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
 
 
