@@ -9,9 +9,6 @@
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/extract",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "bin": {
-    "lsklog": "./bin/lsklog.js"
-  },
   "scripts": {
     "bootstrap": "lsk run bootstrap",
     "build": "lsk run build",
