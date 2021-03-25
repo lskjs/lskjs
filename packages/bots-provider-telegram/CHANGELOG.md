@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.11](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots:** fix userInChat ([b0b0173](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/b0b01739148dcdc3b55549d89572951636ee30e1))
+* **bots-provider-telegram:** fix save bot's message in channel ([b9af7dc](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/b9af7dca887fa9d4a35aed3e2ef6d37bc19aaf07))
+
+
+
+
+
 # [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
 
 

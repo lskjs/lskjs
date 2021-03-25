@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.11](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
+
+
+### Bug Fixes
+
+* **uapp:** remove checkVersion while error ([76a14ac](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/76a14ac82a9c43b90d82886b790b36182101700b))
+
+
+
+
+
 # [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
 
 

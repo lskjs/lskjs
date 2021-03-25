@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.11](https://github.com/lskjs/cli/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots:** fix userInChat ([b0b0173](https://github.com/lskjs/cli/commit/b0b01739148dcdc3b55549d89572951636ee30e1))
+* **bots-plugin-likes:** fix args userImpressionInChat ([b81e22d](https://github.com/lskjs/cli/commit/b81e22db8dbebd36c09201e7fd7dda7cb25b50cb))
+* **bots-provider-telegram:** fix save bot's message in channel ([b9af7dc](https://github.com/lskjs/cli/commit/b9af7dca887fa9d4a35aed3e2ef6d37bc19aaf07))
+* **clickhouse:** debug is false by default ([600dfd4](https://github.com/lskjs/cli/commit/600dfd428581cf84d5cd7f4afdfb3f1983da7bc3))
+* **elastic:** remove default elastic configs ([efbdcdf](https://github.com/lskjs/cli/commit/efbdcdfa85ca2db21e29523ab7656870a4b785e5))
+* **rabbit:** readme for new features ([bb6a822](https://github.com/lskjs/cli/commit/bb6a82228db939479092771ce01382b1513329fe))
+* **uapp:** remove checkVersion while error ([76a14ac](https://github.com/lskjs/cli/commit/76a14ac82a9c43b90d82886b790b36182101700b))
+
+
+### Features
+
+* **extract:** add new package ([04ce097](https://github.com/lskjs/cli/commit/04ce09774649fc29057608527f55e3e0546595ef))
+
+
+
+
+
 # [2.3.0-beta.10](https://github.com/lskjs/cli/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
 
 
