@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.12](https://github.com/lskjs/cli/compare/v2.3.0-beta.11...v2.3.0-beta.12) (2021-03-25)
+
+
+### Bug Fixes
+
+* **extract:** remove bin ([320d4f7](https://github.com/lskjs/cli/commit/320d4f72b1ecbae5d40f0e79c918934e9a268272))
+
+
+
+
+
 # [2.3.0-beta.11](https://github.com/lskjs/cli/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
 
 
