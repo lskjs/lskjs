@@ -8,53 +8,53 @@ export default class ElasticServerModule extends Module {
   enabled = false;
   delayedModels = [];
   config = {
-    sync: true,
+    // sync: true,
     client: {
-      host: 'localhost:9200',
+      // host: 'localhost:9200',
       maxRetries: 10000,
       log: {
         level: 'error',
       },
     },
     pingTimeout: 5000,
-    settings: {
-      analysis: {
-        filter: {
-          ngram_filter: {
-            type: 'ngram',
-            min_gram: 3,
-            max_gram: 4,
-            token_chars: ['letter', 'digit'],
-          },
-          autocomplete_filter: {
-            type: 'edge_ngram',
-            min_gram: 1,
-            max_gram: 20,
-          },
-          stopprotocol_filter: {
-            type: 'stop',
-            stopwords: ['http', 'https', 'ftp', 'www'],
-          },
-        },
-        analyzer: {
-          ngram_analyzer: {
-            type: 'custom',
-            tokenizer: 'standard',
-            filter: ['ngram_filter', 'lowercase'],
-          },
-          autocomplete: {
-            type: 'custom',
-            tokenizer: 'standard',
-            filter: ['lowercase', 'autocomplete_filter'],
-          },
-          url_lowercase_without_protocols: {
-            type: 'custom',
-            tokenizer: 'lowercase',
-            filter: ['stopprotocol_filter'],
-          },
-        },
-      },
-    },
+    // settings: {
+    //   analysis: {
+    //     filter: {
+    //       ngram_filter: {
+    //         type: 'ngram',
+    //         min_gram: 3,
+    //         max_gram: 4,
+    //         token_chars: ['letter', 'digit'],
+    //       },
+    //       autocomplete_filter: {
+    //         type: 'edge_ngram',
+    //         min_gram: 1,
+    //         max_gram: 20,
+    //       },
+    //       stopprotocol_filter: {
+    //         type: 'stop',
+    //         stopwords: ['http', 'https', 'ftp', 'www'],
+    //       },
+    //     },
+    //     analyzer: {
+    //       ngram_analyzer: {
+    //         type: 'custom',
+    //         tokenizer: 'standard',
+    //         filter: ['ngram_filter', 'lowercase'],
+    //       },
+    //       autocomplete: {
+    //         type: 'custom',
+    //         tokenizer: 'standard',
+    //         filter: ['lowercase', 'autocomplete_filter'],
+    //       },
+    //       url_lowercase_without_protocols: {
+    //         type: 'custom',
+    //         tokenizer: 'lowercase',
+    //         filter: ['stopprotocol_filter'],
+    //       },
+    //     },
+    //   },
+    // },
   };
 
   async getConfig() {
@@ -69,6 +69,10 @@ export default class ElasticServerModule extends Module {
 
   async init() {
     await super.init();
+    if (!get(this, 'config.client.host')) {
+      this.log.error('!config.client.host');
+      return;
+    }
     this.enabled = true;
     this.nowSync = [];
     this.client = new elasticsearch.Client(this.config.client);
@@ -161,6 +165,7 @@ export default class ElasticServerModule extends Module {
 
   async run() {
     if (!this.enabled) return;
+    if (!this.client) return;
     if (this.config.sync) {
       this.syncAll({ again: true });
     }
