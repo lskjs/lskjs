@@ -68,13 +68,13 @@ export default class PortalPlugin extends BaseBotPlugin {
       buttons.push([
         {
           type: 'callback',
-          title: this._i18.t('bot.likesPlugin.like'),
-          value: `like-`,
+          title: this._i18.t('bot.likesPlugin.disslike'),
+          value: `disslike-`,
         },
         {
           type: 'callback',
-          title: this._i18.t('bot.likesPlugin.disslike'),
-          value: `disslike-`,
+          title: this._i18.t('bot.likesPlugin.like'),
+          value: `like-`,
         },
       ]);
     }
