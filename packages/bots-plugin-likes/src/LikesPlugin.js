@@ -37,11 +37,11 @@ export default class LikesPlugin extends BaseBotPlugin {
           button.value = btn.url;
         }
         if (/^like/.test(btn.callback_data)) {
-          button.title = this._i18.t('bot.likesPlugin.like', { count: likeCount });
+          button.title = this._i18.t('bot.likesPlugin.like', { count: likeCount || '' });
           button.value = `like-${likeCount}`;
         }
         if (/^disslike/.test(btn.callback_data)) {
-          button.title = this._i18.t('bot.likesPlugin.disslike', { count: disslikeCount });
+          button.title = this._i18.t('bot.likesPlugin.disslike', { count: disslikeCount || '' });
           button.value = `disslike-${disslikeCount}`;
         }
         return button;
