@@ -99,10 +99,10 @@ export class PageModule extends Module {
     //     console.error(err); // eslint-disable-line no-console
     //   }
     // }
-    if (__CLIENT__ && this.uapp.checkVersion) {
-      // / !!!!!!!!!!!!!
-      this.uapp.checkVersion();
-    }
+    // if (__CLIENT__ && this.uapp.checkVersion) {
+    //   // / !!!!!!!!!!!!!
+    //   this.uapp.checkVersion();
+    // }
     throw err;
   }
 
@@ -136,6 +136,7 @@ export class PageModule extends Module {
   async component(...args) {
     this.log.trace('component()', args[0]);
     const result = await args[0];
+    if (!result) throw '!component';
     if (result.default) {
       args[0] = result.default; // eslint-disable-line no-param-reassign
     } else {
