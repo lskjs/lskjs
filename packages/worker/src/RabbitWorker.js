@@ -4,6 +4,7 @@ import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import map from 'lodash/map';
 import pick from 'lodash/pick';
 
@@ -13,6 +14,7 @@ export class RabbitWorker extends Module {
   async init() {
     await super.init();
     this.stats = new Stats();
+    this.config = merge({}, this.config, this.getModuleConfig(this.name));
     // if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
     // this.queues = get(this, 'app.config.rabbit.queues');
     // this.exchanges = get(this, 'app.config.rabbit.exchanges');
