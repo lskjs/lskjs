@@ -28,7 +28,7 @@ export class RabbitWorker extends Module {
     const ns = [this.log.ns, workerName].filter(Boolean).join('.');
     // const ns = [this.log.ns, name].filter(Boolean).join('.');
     return {
-      debug: this.config.debug,
+      debug: config.debug,
       ...config,
       log: {
         ...omit(this.config.log || {}, ['name']),
