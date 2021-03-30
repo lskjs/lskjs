@@ -4,6 +4,7 @@ import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
+import uniqBy from 'lodash/uniqBy';
 
 import { groupMessages } from './groupMessages';
 
@@ -21,6 +22,9 @@ export default class PortalPlugin extends BaseBotPlugin {
           likesPlugin: {
             like: `❤️ ${count}`,
             disslike: `💔 ${count}`,
+          },
+          portalPlugin: {
+            delay: `Братишка, не флуди`,
           },
         },
       };
@@ -56,6 +60,57 @@ export default class PortalPlugin extends BaseBotPlugin {
       await bot.sendMessage(to, `${prefix}`);
     }
     return { ...ctx, message };
+  }
+
+  async isDelayed({ bot, ctx, then, chats }) {
+    if (!then.delay) return false;
+    const telegramUserId = bot.getUserId(ctx);
+    const telegramChatId = bot.getMessageChatId(ctx);
+    if (+telegramChatId < 0) return false;
+
+    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
+    const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
+    const BotsUserDataModel = await this.botsModule.module('models.BotsUserDataModel');
+
+    const user = await BotsTelegramUserModel.findOne({ id: telegramUserId }).select('id').lean();
+    if (!user) return false;
+    const userId = user._id;
+
+    const data = {
+      userId,
+      plugin: 'bots-plugin-portal',
+      type: 'delay',
+    };
+    const userChats = await BotsTelegramChatModel.find({ id: { $in: chats } })
+      .select(['_id', 'id'])
+      .lean();
+    const chatsIds = uniqBy(userChats, 'id').map((c) => c._id);
+
+    let delay = false;
+    await Bluebird.all(
+      chatsIds.map(async (chatId) => {
+        const userData = await BotsUserDataModel.findOne({ ...data, chatId }).select(['count', 'updatedAt']);
+        if (userData) {
+          const { count, updatedAt } = userData;
+          if (new Date().getTime() - count < updatedAt) {
+            delay = true;
+            return {};
+          }
+          userData.markModified('updatedAt');
+          userData.updatedAt = new Date();
+          return userData.save();
+        }
+        const newUserData = new BotsUserDataModel({
+          ...data,
+          chatId,
+          count: 20 * 1000,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+        return newUserData.save();
+      }),
+    );
+    return delay;
   }
 
   createExtraKeyboard({ ctx = {}, then }) {
@@ -95,21 +150,21 @@ export default class PortalPlugin extends BaseBotPlugin {
     });
   }
 
-  async usersActions({ users, ctx, bot, then }) {
-    if (isEmpty(users)) return;
-    await Bluebird.each(users, async (user) => {
-      Object.assign(then, { to: user });
+  async chatsActions({ chats, ctx, bot, then }) {
+    if (isEmpty(chats)) return;
+    await Bluebird.each(chats, async (chat) => {
+      Object.assign(then, { to: chat });
       await this.thenBotActions({ ctx, bot, then });
     });
     await Bluebird.delay(10);
   }
 
-  async getUsersForActions({ then }) {
+  async getChatsForActions({ then }) {
     const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
     const params = {};
     if (then.to instanceof Object) Object.assign(params, then.to);
-    const users = await BotsTelegramUserModel.find(params).select('id').lean();
-    return users.map((i) => i.id);
+    const chats = await BotsTelegramUserModel.find(params).select('id').lean();
+    return chats.map((i) => i.id);
   }
 
   async thenBotActions({ ctx, bot, then }) {
@@ -129,20 +184,28 @@ export default class PortalPlugin extends BaseBotPlugin {
     return false;
   }
 
+  async updateRules({ ctx, bot, rules }) {
+    const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
+    const fromId = bot.getUserId(ctx);
+    const userRules = await BotsTelegramPortalRulesModel.find({ where: fromId })
+      .select(['then', 'when', 'where'])
+      .lean();
+    return [...rules, ...userRules];
+  }
+
   async onEvent({ event, ctx, bot }) {
-    // const userId = bot.getMessageUserId(ctx);
-    const userId = bot.getMessageChatId(ctx);
+    const userId = bot.getUserId(ctx);
     const chatId = bot.getMessageChatId(ctx);
     const text = bot.getMessageText(ctx);
     const messageType = bot.getMessageType(ctx);
     const pack = { userId, chatId, text, messageType };
-    // console.log(pack);
-    const { rules } = this;
+
+    const rules = await this.updateRules({ ctx, bot, rules: this.rules });
     const activeRules = rules
       .filter((rule) => {
         if (!rule.where) return true;
         if (isFunction(rule.where) && rule.where(pack)) return true;
-        if (rule.where === userId || rule.where === chatId) return true;
+        if (`${rule.where}` === `${userId}` || `${rule.where}` === `${chatId}`) return true;
         return false;
       })
       .filter((rule) => {
@@ -158,6 +221,7 @@ export default class PortalPlugin extends BaseBotPlugin {
 
     // this.log.trace({ activeRules });
     if (isEmpty(activeRules)) return;
+    let delay = false;
     await Bluebird.map(activeRules, async (rule) => {
       let { then: thens } = rule;
       if (!thens) return null;
@@ -165,20 +229,25 @@ export default class PortalPlugin extends BaseBotPlugin {
       if (isEmpty(thens)) return {};
       return Bluebird.map(thens, async (then) => {
         // let users = [then.to].map((i) => ({ id: i }));
-        let users = [then.to];
+        let chats = [then.to];
         if (Array.isArray(then.to)) {
           // to: [1234567890, '0987654321'],
           // const ids = then.to.filter((i) => ['number', 'string'].includes(typeof i));
           // users = ids.map((i) => ({ id: i }));
-          users = then.to.filter((i) => ['number', 'string'].includes(typeof i));
+          chats = then.to.filter((i) => ['number', 'string'].includes(typeof i));
         } else if (then.to instanceof Object || then.to === '*') {
           // to: { id: { $in: ['1234567890', '0987654321'] }, meta: $exists }, // Mongodb config
           // to: '*', // get all users // analog {}
-          users = await this.getUsersForActions({ then });
+          chats = await this.getChatsForActions({ then });
         }
-        return this.usersActions({ users, ctx, bot, then });
+        if (await this.isDelayed({ bot, ctx, then, chats })) {
+          delay = true;
+          return {};
+        }
+        return this.chatsActions({ chats, ctx, bot, then });
       });
     });
+    if (delay) await ctx.reply(this._i18.t('bot.portalPlugin.delay'));
   }
 
   runBot(bot) {
