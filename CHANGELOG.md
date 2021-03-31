@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.14](https://github.com/lskjs/cli/compare/v2.3.0-beta.13...v2.3.0-beta.14) (2021-03-31)
+
+
+### Features
+
+* **bots:** add answer button and dialog-mode ([e41b8be](https://github.com/lskjs/cli/commit/e41b8bec49b2fe07cdf6005330a272ed89ed5cfa))
+* **bots:** add core-downloader-bot ([70bc40b](https://github.com/lskjs/cli/commit/70bc40b893e8bfe9a6045c9076a2124b1ba7c3a1))
+* **bots-plugin-portal:** antispam ([09bb44b](https://github.com/lskjs/cli/commit/09bb44b37a895489c20c6679198f198597397cd9))
+
+
+
+
+
 # [2.3.0-beta.13](https://github.com/lskjs/cli/compare/v2.3.0-beta.12...v2.3.0-beta.13) (2021-03-25)
 
 
