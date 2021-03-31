@@ -1,6 +1,6 @@
 import Model from '@lskjs/db/Model';
 
-export default class BotsTelegramImpressionModel extends Model {
+export default class BotsTelegramPortalRulesModel extends Model {
   static schema = {
     when: { type: Object },
     where: { type: String },
