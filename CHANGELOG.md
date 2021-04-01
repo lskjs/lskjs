@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.17](https://github.com/lskjs/cli/compare/v2.3.0-beta.16...v2.3.0-beta.17) (2021-04-01)
+
+
+### Bug Fixes
+
+* **elastic:** hosts checks ([3a4f9e8](https://github.com/lskjs/cli/commit/3a4f9e86477c64771650f1655a5c7ce310f62aa1))
+
+
+
+
+
 # [2.3.0-beta.16](https://github.com/lskjs/cli/compare/v2.3.0-beta.15...v2.3.0-beta.16) (2021-04-01)
 
 
