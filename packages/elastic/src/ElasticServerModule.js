@@ -1,5 +1,6 @@
 import Module from '@lskjs/module';
 import elasticsearch from 'elasticsearch';
+import { spread } from 'lodash';
 import get from 'lodash/get';
 import merge from 'lodash/merge';
 import mexp from 'mongoose-elasticsearch-xp-async';
@@ -164,6 +165,7 @@ export default class ElasticServerModule extends Module {
   }
 
   async run() {
+    await super.run();
     if (!this.enabled) return;
     if (!this.client) return;
     if (this.config.sync) {
