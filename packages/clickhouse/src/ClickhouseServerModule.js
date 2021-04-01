@@ -5,7 +5,6 @@ import { ClickHouse } from 'clickhouse';
 import SHA256 from 'crypto-js/sha256';
 import CsvReadableStream from 'csv-reader';
 import fs from 'fs';
-import get from 'lodash/get';
 import path from 'path';
 
 import config from './config';
@@ -165,7 +164,7 @@ export class ClickhouseServerModule extends Module {
       queryStr += whereStr;
     }
     const res = await client.query(queryStr).toPromise();
-    return get(res, '0.count()', null);
+    return (res && res[0] && res[0].count && res[0].count()) || null;
   }
   async findOne(params) {
     const rows = await this.find({ ...params, limit: 1 });

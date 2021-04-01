@@ -25,13 +25,5 @@
     "clickhouse": "2.2.1",
     "crypto-js": "4.0.0",
     "csv-reader": "1.0.7"
-  },
-  "devDependencies": {
-    "bluebird": "3.7.2",
-    "lodash": "4.17.20"
-  },
-  "peerDependencies": {
-    "bluebird": "*",
-    "lodash": "*"
   }
 }
