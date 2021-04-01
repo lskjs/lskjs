@@ -14,7 +14,10 @@ export class ClickhouseServerModule extends Module {
 
   async init() {
     await super.init();
-    const client = new ClickHouse(this.config);
+    const client = new ClickHouse({
+      ...this.config,
+      debug: this.config.logs,
+    });
     this.client = client;
   }
 
