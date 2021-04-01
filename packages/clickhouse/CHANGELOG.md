@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/compare/v2.3.0-beta.14...v2.3.0-beta.15) (2021-04-01)
+
+
+### Bug Fixes
+
+* **clickhouse:** remove lodash and bluebird ([9156494](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/commit/9156494cfe1e0d376001cf65d99084a80372cac4))
+
+
+
+
+
 # [2.3.0-beta.11](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
 
 
