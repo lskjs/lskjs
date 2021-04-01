@@ -1,6 +1,5 @@
 import Module from '@lskjs/module';
 import elasticsearch from 'elasticsearch';
-import { spread } from 'lodash';
 import get from 'lodash/get';
 import merge from 'lodash/merge';
 import mexp from 'mongoose-elasticsearch-xp-async';
@@ -9,53 +8,13 @@ export default class ElasticServerModule extends Module {
   enabled = false;
   delayedModels = [];
   config = {
-    // sync: true,
     client: {
-      // host: 'localhost:9200',
       maxRetries: 10000,
       log: {
         level: 'error',
       },
     },
     pingTimeout: 5000,
-    // settings: {
-    //   analysis: {
-    //     filter: {
-    //       ngram_filter: {
-    //         type: 'ngram',
-    //         min_gram: 3,
-    //         max_gram: 4,
-    //         token_chars: ['letter', 'digit'],
-    //       },
-    //       autocomplete_filter: {
-    //         type: 'edge_ngram',
-    //         min_gram: 1,
-    //         max_gram: 20,
-    //       },
-    //       stopprotocol_filter: {
-    //         type: 'stop',
-    //         stopwords: ['http', 'https', 'ftp', 'www'],
-    //       },
-    //     },
-    //     analyzer: {
-    //       ngram_analyzer: {
-    //         type: 'custom',
-    //         tokenizer: 'standard',
-    //         filter: ['ngram_filter', 'lowercase'],
-    //       },
-    //       autocomplete: {
-    //         type: 'custom',
-    //         tokenizer: 'standard',
-    //         filter: ['lowercase', 'autocomplete_filter'],
-    //       },
-    //       url_lowercase_without_protocols: {
-    //         type: 'custom',
-    //         tokenizer: 'lowercase',
-    //         filter: ['stopprotocol_filter'],
-    //       },
-    //     },
-    //   },
-    // },
   };
 
   async getConfig() {
@@ -70,7 +29,7 @@ export default class ElasticServerModule extends Module {
 
   async init() {
     await super.init();
-    if (!get(this, 'config.client.host')) {
+    if (!get(this, 'config.client.host') || !get(this, 'config.client.hosts')) {
       this.log.error('!config.client.host');
       return;
     }
