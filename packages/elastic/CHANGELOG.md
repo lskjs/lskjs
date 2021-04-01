@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v2.3.0-beta.15...v2.3.0-beta.16) (2021-04-01)
+
+
+### Bug Fixes
+
+* **elastic:** hosts checks ([13fd223](https://github.com/lskjs/lskjs/tree/master/packages/elastic/commit/13fd22310d49b1be4e132b8b0562a5bf153e2a49))
+
+
+
+
+
 # [2.3.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v2.3.0-beta.14...v2.3.0-beta.15) (2021-04-01)
 
 

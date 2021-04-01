@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/clickhouse",
-  "version": "2.3.0-beta.15",
+  "version": "2.3.0-beta.16",
   "description": "LSK module for clickhouse database",
   "keywords": [
     "clickhouse"

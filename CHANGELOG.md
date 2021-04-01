@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.16](https://github.com/lskjs/cli/compare/v2.3.0-beta.15...v2.3.0-beta.16) (2021-04-01)
+
+
+### Bug Fixes
+
+* **bots-plugin-downloads:** rename bots-plugin, dont know why ([937abb5](https://github.com/lskjs/cli/commit/937abb58be7f1801bb603b882467f3509427b374))
+* **clickhouse:** env debug => logs ([9b905cb](https://github.com/lskjs/cli/commit/9b905cbe9ea98cfabaf68a2109146831ab74609c))
+* **clickhouse:** some refactor ([bd3cfc7](https://github.com/lskjs/cli/commit/bd3cfc79cee267bc1b3e465843987700de16ed68))
+* **elastic:** hosts checks ([13fd223](https://github.com/lskjs/cli/commit/13fd22310d49b1be4e132b8b0562a5bf153e2a49))
+
+
+
+
+
 # [2.3.0-beta.15](https://github.com/lskjs/cli/compare/v2.3.0-beta.14...v2.3.0-beta.15) (2021-04-01)
 
 

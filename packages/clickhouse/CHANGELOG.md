@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/compare/v2.3.0-beta.15...v2.3.0-beta.16) (2021-04-01)
+
+
+### Bug Fixes
+
+* **clickhouse:** env debug => logs ([9b905cb](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/commit/9b905cbe9ea98cfabaf68a2109146831ab74609c))
+* **clickhouse:** some refactor ([bd3cfc7](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/commit/bd3cfc79cee267bc1b3e465843987700de16ed68))
+
+
+
+
+
 # [2.3.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/clickhouse/compare/v2.3.0-beta.14...v2.3.0-beta.15) (2021-04-01)
 
 
