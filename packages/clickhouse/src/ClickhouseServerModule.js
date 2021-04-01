@@ -16,7 +16,7 @@ export class ClickhouseServerModule extends Module {
     await super.init();
     const client = new ClickHouse({
       ...this.config,
-      debug: this.config.logs,
+      debug: this.debug,
     });
     this.client = client;
   }
@@ -29,11 +29,11 @@ export class ClickhouseServerModule extends Module {
     try {
       fs.unlinkSync(this.getFilepath(filename));
     } catch (err) {
-      this.app.log.error(err);
+      this.log.error(err);
     }
   }
   getFilepath(filename) {
-    const filepath = get(this.config, 'external.filepath', '/tmp');
+    const filepath = (this.config && this.config.external && this.config.external.filepath) || '/tmp';
     return path.join(filepath, filename);
   }
   createNativeQuery(query) {
