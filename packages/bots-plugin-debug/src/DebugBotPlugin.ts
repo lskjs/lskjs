@@ -123,15 +123,17 @@ Made on @LSKjs with ❤️`;
           const telegramUserId = user._id;
           await this.setStartParams(bot, user, ctx);
           let chatUserId;
-
           if (chat && chat.id < 0) {
-            // ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate({ id: chat.id }, from, {
-            //   new: true,
-            //   upsert: true,
-            // }));
-            ({ _id: chatUserId } = await BotsTelegramChatModel.findOne({ id: chat.id }));
+            const { id } = chat;
+            ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate(
+              { id },
+              { from, id },
+              {
+                new: true,
+                upsert: true,
+              },
+            ));
           }
-
           await BotsTelegramMessageModel.create({
             botId: bot.getBotId(),
             telegramUserId,
