@@ -10,5 +10,6 @@ export default class BotsMenuModel extends Model {
   static options = {
     model: 'BotsMenu',
     collection: 'bots_menu',
+    timestamps: true,
   };
 }

@@ -318,5 +318,6 @@ export default class BotsTelegramMessageModel extends Model {
   static options = {
     model: 'BotsTelegramMessage',
     collection: 'bots_telegram_message',
+    timestamps: true,
   };
 }

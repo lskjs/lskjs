@@ -16,5 +16,6 @@ export default class BotsBotModel extends Model {
   static options = {
     model: 'BotsBot',
     collection: 'bots_bot',
+    timestamps: true,
   };
 }

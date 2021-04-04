@@ -23,5 +23,6 @@ export default class BotsUserDataModel extends Model {
   static options = {
     model: 'BotsUserData',
     collection: 'bots_user_data',
+    timestamps: true,
   };
 }

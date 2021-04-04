@@ -40,6 +40,7 @@ export default class BotsTelegramUserModel extends Model {
   static options = {
     model: 'BotsTelegramUser',
     collection: 'bots_telegram_user',
+    timestamps: true,
   };
 
   setState(state = {}) {

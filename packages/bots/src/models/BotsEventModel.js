@@ -19,5 +19,6 @@ export default class BotsEventModel extends Model {
   static options = {
     model: 'BotsEvent',
     collection: 'bots_event',
+    timestamps: true,
   };
 }

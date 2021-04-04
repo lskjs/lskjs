@@ -15,5 +15,6 @@ export default class BotsTelegramPortalRulesModel extends Model {
   static options = {
     model: 'BotsTelegramPortalRules',
     collection: 'bots_telegram_portal_rules',
+    timestamps: true,
   };
 }
