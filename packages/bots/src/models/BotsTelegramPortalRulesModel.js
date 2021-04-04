@@ -5,8 +5,6 @@ export default class BotsTelegramPortalRulesModel extends Model {
     when: { type: Object },
     where: { type: String },
     then: { type: Object },
-    createdAt: Date,
-    updatedAt: Date,
     meta: { type: Object },
     info: { type: Object },
     private: { type: Object },

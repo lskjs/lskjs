@@ -19,8 +19,6 @@ export default class BotsTelegramImpressionModel extends Model {
       type: String,
       required: true,
     },
-    createdAt: Date,
-    updatedAt: Date,
     meta: { type: Object },
     info: { type: Object },
     private: { type: Object },

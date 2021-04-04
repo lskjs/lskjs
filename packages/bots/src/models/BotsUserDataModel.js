@@ -13,8 +13,6 @@ export default class BotsUserDataModel extends Model {
       required: true,
     },
     count: String,
-    createdAt: Date,
-    updatedAt: Date,
     meta: { type: Object },
     info: { type: Object },
     private: { type: Object },
