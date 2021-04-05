@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-debug/compare/v2.3.0-beta.17...v2.3.0-beta.18) (2021-04-05)
+
+**Note:** Version bump only for package @lskjs/bots-plugin-debug
+
+
+
+
+
 # [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-debug/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
 
 

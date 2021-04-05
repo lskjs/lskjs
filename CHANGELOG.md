@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.18](https://github.com/lskjs/cli/compare/v2.3.0-beta.17...v2.3.0-beta.18) (2021-04-05)
+
+
+### Bug Fixes
+
+* **bots:** fix timestamps ([ad5ace1](https://github.com/lskjs/cli/commit/ad5ace1d9def184c146ed2727ce88394370bb7bb))
+* **bots:** fix timestamps ([dbe2729](https://github.com/lskjs/cli/commit/dbe272922875f21313fc5e8e348dc2b8353a7f51))
+* **bots-plugin-portal:** fix delay ([13dc8b4](https://github.com/lskjs/cli/commit/13dc8b420c6d11516cfc9227f1fe9580a918c711))
+
+
+
+
+
 # [2.3.0-beta.17](https://github.com/lskjs/cli/compare/v2.3.0-beta.16...v2.3.0-beta.17) (2021-04-01)
 
 
