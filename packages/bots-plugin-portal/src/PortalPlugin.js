@@ -39,56 +39,6 @@ export default class PortalPlugin extends BaseBotPlugin {
     this.rules = canonizeRules(this.config.rules);
   }
   // TODO: перенести в provider-telegram и логику вынуть в middleware-debounce
-  async isDelayed({ bot, ctx, then, chats }) {
-    if (!then.delay) return false;
-    const telegramUserId = bot.getUserId(ctx);
-    const telegramChatId = bot.getMessageChatId(ctx);
-    if (+telegramChatId < 0) return false;
-
-    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
-    const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
-    const BotsUserDataModel = await this.botsModule.module('models.BotsUserDataModel');
-
-    const user = await BotsTelegramUserModel.findOne({ id: telegramUserId }).select('id').lean();
-    if (!user) return false;
-    const userId = user._id;
-
-    const data = {
-      userId,
-      plugin: 'bots-plugin-portal',
-      type: 'delay',
-    };
-    const userChats = await BotsTelegramChatModel.find({ id: { $in: chats } })
-      .select(['_id', 'id'])
-      .lean();
-    const chatsIds = uniqBy(userChats, 'id').map((c) => c._id);
-
-    let delay = false;
-    await Bluebird.all(
-      chatsIds.map(async (chatId) => {
-        const userData = await BotsUserDataModel.findOne({ ...data, chatId }).select(['count', 'updatedAt']);
-        if (userData) {
-          const { count, updatedAt } = userData;
-          if (new Date().getTime() - count < updatedAt) {
-            delay = true;
-            return {};
-          }
-          userData.markModified('updatedAt');
-          userData.updatedAt = new Date();
-          return userData.save();
-        }
-        const newUserData = new BotsUserDataModel({
-          ...data,
-          chatId,
-          count: 20 * 1000,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-        return newUserData.save();
-      }),
-    );
-    return delay;
-  }
   // async addPrefix({ ctx, bot, then }) {
   //   const message = bot.getMessage(ctx);
   //   const { username, id, first_name: firstName, last_name: lastName } = ctx.from;
