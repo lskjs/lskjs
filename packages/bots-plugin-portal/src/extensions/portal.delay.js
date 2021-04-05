@@ -40,18 +40,20 @@ export async function action({ event, ctx, bot, then, chats }) {
   if (!isEmpty(expectedChatsIds)) delay = true;
   const targetChats = difference(chats, expectedChatsIds); // чаты не в муте
 
-  await Bluebird.all(
-    targetChats.map(async (chatId) => {
-      await BotsUserDataModel.findOneAndUpdate(
+  await Bluebird.map(
+    targetChats,
+    (chatId) =>
+      BotsUserDataModel.findOneAndUpdate(
         { telegramChatId: chatId },
         { ...data, telegramChatId: chatId, count: delayCount },
         {
           new: true,
           upsert: true,
         },
-      );
-    }),
+      ),
+    { concurrency: 100 },
   );
+
   return {
     delay,
     targetChats,

@@ -132,7 +132,6 @@ export default class PortalPlugin extends BaseBotPlugin {
       {
         path: /portal-toId-\d*/,
         action: async ({ ctx, req, bot }) => {
-          ctx.answerCbQuery();
           const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
           const data = bot.getMessageCallbackData(ctx);
           const fromId = bot.getUserId(ctx);
@@ -148,6 +147,7 @@ export default class PortalPlugin extends BaseBotPlugin {
             },
           });
           await newRule.save();
+          ctx.answerCbQuery();
         },
       },
     ];
