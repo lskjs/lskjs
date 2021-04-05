@@ -1,5 +1,6 @@
 // ts-ignore
 import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import set from 'lodash/set';
 import { Schema } from 'mongoose';
 
@@ -9,6 +10,7 @@ export class Model implements IModel {
   __model = true;
   static Schema = Schema;
   static Types = Schema.Types;
+  // TODO: еще раз об этом подумать
   static defaultOptions: { [key: string]: any } = {
     timestamps: true,
   };
@@ -21,6 +23,10 @@ export class Model implements IModel {
       // ts-ignore
       this.markModified(key);
     });
+  }
+  getState(key, def) {
+    if (!key) return this;
+    return get(this, key, def);
   }
 }
 

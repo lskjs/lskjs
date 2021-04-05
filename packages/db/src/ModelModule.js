@@ -21,7 +21,8 @@ export class ModelModule extends Module {
       throw '!Model';
     }
     const Model = await importFn(this.Model);
-    const { model: modelName, collection, ...options } = Model.options || {};
+    const mergedOptions = { ...(Model.defaultOptions || {}), ...(Model.options || {}) };
+    const { model: modelName, collection, ...options } = mergedOptions;
     if (!modelName) throw '!options.model';
     if (!collection) throw '!options.collection';
     const schema = new this.Schema(Model.schema, options);
