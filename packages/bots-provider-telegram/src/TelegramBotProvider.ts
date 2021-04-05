@@ -274,6 +274,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
           id,
         },
         { ...from, id, username: chat.username || chat.title },
+        {
+          new: true,
+          upsert: true,
+        },
       ));
     }
     const data = {
