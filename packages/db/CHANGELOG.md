@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
+
+
+### Features
+
+* **db:** add defaultOptions in model ([ae998b2](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/ae998b28b477c236989ef6da636a72392ef2823e))
+
+
+
+
+
 # [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
 
 

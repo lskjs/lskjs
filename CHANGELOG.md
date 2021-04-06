@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.20](https://github.com/lskjs/cli/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
+
+
+### Bug Fixes
+
+* **bots-plugin-debug:** fix save chats ([fe30bc3](https://github.com/lskjs/cli/commit/fe30bc356552cde8c428381c21cef2bdc8558556))
+
+
+### Features
+
+* **db:** add defaultOptions in model ([ae998b2](https://github.com/lskjs/cli/commit/ae998b28b477c236989ef6da636a72392ef2823e))
+
+
+
+
+
 # [2.3.0-beta.19](https://github.com/lskjs/cli/compare/v2.3.0-beta.18...v2.3.0-beta.19) (2021-04-05)
 
 **Note:** Version bump only for package @lskjs/cli-sample
