@@ -45,7 +45,9 @@ export default class PortalPlugin extends BaseBotPlugin {
     Object.keys(extensions).forEach((key) => {
       const { getButtons } = extensions[key];
       if (!then[key] || !getButtons) return;
-      buttons.push(getButtons.call(this, { ctx }));
+      const extensionButtons = getButtons.call(this, { ctx });
+      if (!Array.isArray(extensionButtons)) return;
+      buttons.push(extensionButtons);
     });
 
     return createKeyboard({
@@ -105,29 +107,15 @@ export default class PortalPlugin extends BaseBotPlugin {
   }
 
   getRoutes() {
-    return [
-      {
-        path: /portal-toId-\d*/,
-        action: async ({ ctx, req, bot }) => {
-          const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
-          const data = bot.getMessageCallbackData(ctx);
-          const fromId = bot.getUserId(ctx);
-          if (!data) return;
-          const toId = data.split('-')[2];
-          await BotsTelegramPortalRulesModel.deleteOne({ where: fromId }).lean();
-          const newRule = new BotsTelegramPortalRulesModel({
-            where: fromId,
-            then: {
-              answer: 1,
-              action: 'repost',
-              to: toId,
-            },
-          });
-          await newRule.save();
-          ctx.answerCbQuery();
-        },
-      },
-    ];
+    const routes = [];
+    Object.keys(extensions).forEach((key) => {
+      const { getRoutes } = extensions[key];
+      if (!getRoutes) return;
+      const extensionRoutes = getRoutes.call(this);
+      if (!Array.isArray(extensionRoutes)) return;
+      routes.push(...extensionRoutes);
+    });
+    return routes;
   }
 
   runBot(bot) {
