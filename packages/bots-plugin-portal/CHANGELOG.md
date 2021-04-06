@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.20...v2.3.0-beta.21) (2021-04-06)
+
+
+### Features
+
+* **bots-plugin-portal:** add spread extension ([03f3536](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/03f3536966159cca8a4415f41dda149f220691d9))
+
+
+
+
+
 # [2.3.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-portal
