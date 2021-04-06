@@ -3,4 +3,5 @@ export default {
   delay: require('./portal.delay'),
   like: require('./portal.like'),
   sender: require('./portal.sender'),
+  spread: require('./portal.spread'),
 };

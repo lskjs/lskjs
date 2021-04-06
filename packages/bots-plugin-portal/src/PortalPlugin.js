@@ -39,13 +39,13 @@ export default class PortalPlugin extends BaseBotPlugin {
     this.rules = canonizeRules(this.config.rules);
   }
 
-  createExtraKeyboard({ ctx = {}, then }) {
+  createExtraKeyboard({ bot, ctx = {}, then }) {
     const buttons = [];
 
     Object.keys(extensions).forEach((key) => {
       const { getButtons } = extensions[key];
       if (!then[key] || !getButtons) return;
-      const extensionButtons = getButtons.call(this, { ctx });
+      const extensionButtons = getButtons.call(this, { bot, ctx });
       if (!Array.isArray(extensionButtons)) return;
       buttons.push(extensionButtons);
     });
@@ -73,7 +73,7 @@ export default class PortalPlugin extends BaseBotPlugin {
       return bot.sendMessage(then.to, then.text);
     }
     if (then.action === 'repost') {
-      const extra = this.createExtraKeyboard({ ctx, then });
+      const extra = this.createExtraKeyboard({ bot, ctx, then });
       return bot.repost(then.to, ctx, extra);
     }
     if (then.action === 'remove') {
@@ -82,28 +82,39 @@ export default class PortalPlugin extends BaseBotPlugin {
     return false;
   }
 
+  async addMetaToMessage({ bot, ctx, then }) {
+    const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
+    const message = bot.getMessage(ctx);
+    const meta = {};
+    Object.keys(extensions).forEach((key) => {
+      meta[key] = !!then[key];
+    });
+    return BotsTelegramMessageModel.findOneAndUpdate(message, { meta });
+  }
+
   async onEvent({ event, ctx, bot }) {
     const activeRules = await getActiveRules.call(this, { ctx, bot });
     // this.log.trace({ activeRules });
     if (isEmpty(activeRules)) return;
-    let Delay = false;
+    let delay = false;
     await Bluebird.map(activeRules, async (rule) => {
       let { then: thens } = rule;
       if (!thens) return null;
       if (!Array.isArray(thens)) thens = [thens];
       if (isEmpty(thens)) return {};
       return Bluebird.map(thens, async (then) => {
+        this.addMetaToMessage({ bot, ctx, then });
         let chats = await canonizeChatIds.call(this, then.to);
         const { action } = extensions.delay;
         const isDelayed = await action.call(this, { bot, ctx, then, chats });
 
-        if (isDelayed.delay) Delay = true;
+        if (isDelayed.delay) delay = true;
         chats = isDelayed.targetChats;
 
         return this.getActions({ chats, ctx, bot, then });
       });
     });
-    if (Delay) await ctx.reply(this._i18.t('bot.portalPlugin.delay'));
+    if (delay) await ctx.reply(this._i18.t('bot.portalPlugin.delay'));
   }
 
   getRoutes() {

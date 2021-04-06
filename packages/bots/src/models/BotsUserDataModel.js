@@ -7,6 +7,7 @@ export default class BotsUserDataModel extends Model {
       required: true,
     },
     telegramChatId: String,
+    telegramUserId: String,
     plugin: String,
     type: {
       type: String,
