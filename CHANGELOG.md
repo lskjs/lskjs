@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.22](https://github.com/lskjs/cli/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+
+### Features
+
+* **mutex:**  init package ([304f18e](https://github.com/lskjs/cli/commit/304f18e7e7f05259bd77268a2fef5ab8f8677840))
+* **server:** remove webserver from server and move to separate package ([0eae044](https://github.com/lskjs/cli/commit/0eae044402ddebe4baaf0b121439d142b9098db4))
+* **webserver:** separate server and webserver packages ([8566e23](https://github.com/lskjs/cli/commit/8566e2392d240daa8b42b041e196d5527da690c7))
+
+
+
+
+
 # [2.3.0-beta.21](https://github.com/lskjs/cli/compare/v2.3.0-beta.20...v2.3.0-beta.21) (2021-04-06)
 
 

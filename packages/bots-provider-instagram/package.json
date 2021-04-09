@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-provider-instagram",
-  "version": "2.3.0-beta.10",
+  "version": "2.3.0-beta.22",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@buzzguru/instagram-private-api": "1.44.0",
-    "@lskjs/bots-provider": "2.3.0-beta.10",
+    "@lskjs/bots-provider": "2.3.0-beta.22",
     "bluebird": "3.7.2"
   },
   "devDependencies": {

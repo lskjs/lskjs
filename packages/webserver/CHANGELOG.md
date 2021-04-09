@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/webserver/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+
+### Features
+
+* **webserver:** separate server and webserver packages ([8566e23](https://github.com/lskjs/lskjs/tree/master/packages/webserver/commit/8566e2392d240daa8b42b041e196d5527da690c7))
+
+
+
+
+
 # [2.3.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
 
 **Note:** Version bump only for package @lskjs/server

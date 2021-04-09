@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "2.3.0-beta.20",
+  "version": "2.3.0-beta.22",
   "description": "LSK.js module for adding billing in cabinet",
   "keywords": [
     "billing",
@@ -30,12 +30,12 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.10",
-    "@lskjs/utils": "2.3.0-beta.10"
+    "@lskjs/module": "2.3.0-beta.22",
+    "@lskjs/utils": "2.3.0-beta.22"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.20",
-    "@lskjs/server-api": "2.3.0-beta.10",
+    "@lskjs/db": "2.3.0-beta.22",
+    "@lskjs/server-api": "2.3.0-beta.22",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "crypto-js": "4.0.0",
