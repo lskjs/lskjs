@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.23](https://github.com/lskjs/cli/compare/v2.3.0-beta.22...v2.3.0-beta.23) (2021-04-09)
+
+
+### Bug Fixes
+
+* **webserver:** fix useApi log ([e8d1309](https://github.com/lskjs/cli/commit/e8d13095860ce91790a0ee95bf2f5657c487de20))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/cli/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 
