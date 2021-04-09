@@ -1,0 +1,28 @@
+{
+  "name": "@lskjs/mutex",
+  "version": "2.3.0-beta.10",
+  "description": "Async mutex",
+  "keywords": [
+    "mutex",
+    "semaphore",
+    "async-mutex"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/mutex",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "async-mutex": "0.2.6"
+  }
+}
