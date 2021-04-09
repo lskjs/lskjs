@@ -1,10 +1,10 @@
-import getReqLocale from './getReqLocale';
-import getReqToken from './getReqToken';
-import isReqAuth from './isReqAuth';
+import { getReqLocale } from './getReqLocale';
+import { getReqToken } from './getReqToken';
+import { isReqAuth } from './isReqAuth';
 
-export { default as getReqLocale } from './getReqLocale';
-export { default as getReqToken } from './getReqToken';
-export { default as isReqAuth } from './isReqAuth';
+export * from './getReqLocale';
+export * from './getReqToken';
+export * from './isReqAuth';
 
 export default {
   getReqLocale,

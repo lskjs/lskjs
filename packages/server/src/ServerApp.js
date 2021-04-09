@@ -4,7 +4,7 @@ import map from 'lodash/map';
 
 import defaultHelpers from './helpers';
 
-export default class ServerApp extends Module {
+export class ServerApp extends Module {
   async model(...args) {
     const modelsModule = await this.module('models');
     return modelsModule.model(...args);
@@ -38,7 +38,7 @@ export default class ServerApp extends Module {
   getModules() {
     return {
       ...super.getModules(),
-      webserver: () => import('./lskjs/webserver/server'),
+      webserver: () => import('@lskjs/webserver/server'),
       i18: () => import('@lskjs/i18/server'),
       db: () => import('@lskjs/db/server'),
       // 'models.User': () => import('@lskjs/db/server'),
@@ -64,3 +64,5 @@ export default class ServerApp extends Module {
     }
   }
 }
+
+export default ServerApp;
