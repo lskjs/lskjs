@@ -1,0 +1,57 @@
+{
+  "name": "@lskjs/webserver",
+  "version": "2.3.0-beta.20",
+  "description": "LSK module webserver.",
+  "keywords": [
+    "webserver",
+    "express"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/webserver",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "@lskjs/module": "2.3.0-beta.10",
+    "@lskjs/utils": "2.3.0-beta.10",
+    "body-parser": "1.19.0",
+    "cacheman": "2.2.1",
+    "connect-static-file": "2.0.0",
+    "cookie-parser": "1.4.5",
+    "cors": "2.8.5",
+    "emotion": "10.0.27",
+    "emotion-theming": "10.0.27",
+    "express": "4.17.1",
+    "express-jwt": "6.0.0",
+    "nanoid": "3.1.20",
+    "portfinder": "1.0.28",
+    "socket.io": "3.0.5",
+    "socket.io-as-promised": "1.0.0",
+    "socket.io-redis": "6.0.1"
+  },
+  "devDependencies": {
+    "@lskjs/db": "2.3.0-beta.20",
+    "@lskjs/i18": "2.3.0-beta.10",
+    "axios": "0.21.1",
+    "bluebird": "3.7.2",
+    "lodash": "4.17.20",
+    "supertest": "6.0.1"
+  },
+  "peerDependencies": {
+    "@lskjs/db": "*",
+    "@lskjs/i18": "*",
+    "axios": "0.21.1",
+    "bluebird": "*",
+    "lodash": "4.17.20"
+  }
+}
