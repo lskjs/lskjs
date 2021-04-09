@@ -1,12 +1,7 @@
-# docker-compose up -d --build
 version: "3"
 services:
   app:
-    # image: node:13.8.0-alpine
-    image: node:13.8.0
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.dev
+    image: node:15.8.0
     working_dir: /app
     command: npm run dev
     volumes:

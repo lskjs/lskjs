@@ -1,2 +1,2 @@
-export { * } from './ServerApp';
+export * from './ServerApp';
 export { default } from './ServerApp';

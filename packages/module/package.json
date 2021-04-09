@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@lskjs/log2": "2.3.0-beta.10",
+    "@lskjs/mutex": "2.3.0-beta.10",
     "@lskjs/utils": "2.3.0-beta.10",
     "colors": "1.4.0",
     "eventemitter3": "4.0.7"
