@@ -185,6 +185,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
   }
+  getMessageChatType(ctx: TelegramIBotProviderMessageCtx): string | null {
+    if (ctx === Number) return ctx;
+    const message = this.getMessage(ctx);
+    if (get(message, 'chat.type')) return get(message, 'chat.type');
+    return null;
+  }
   /**
    * Docs: https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
    * @param {object} ctx message or message context

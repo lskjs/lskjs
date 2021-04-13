@@ -94,27 +94,32 @@ export default class PortalPlugin extends BaseBotPlugin {
 
   async onEvent({ event, ctx, bot }) {
     const activeRules = await getActiveRules.call(this, { ctx, bot });
-    // this.log.trace({ activeRules });
+    this.log.trace('activeRules:', activeRules);
     if (isEmpty(activeRules)) return;
-    let delay = false;
     await Bluebird.map(activeRules, async (rule) => {
-      let { then: thens } = rule;
-      if (!thens) return null;
-      if (!Array.isArray(thens)) thens = [thens];
-      if (isEmpty(thens)) return {};
-      return Bluebird.map(thens, async (then) => {
-        this.addMetaToMessage({ bot, ctx, then });
-        let chats = await canonizeChatIds.call(this, then.to);
-        const { action } = extensions.delay;
-        const isDelayed = await action.call(this, { bot, ctx, then, chats });
-
-        if (isDelayed.delay) delay = true;
-        chats = isDelayed.targetChats;
-
-        return this.getActions({ chats, ctx, bot, then });
-      });
+      const { criteria } = rule;
+      console.log(criteria);
     });
-    if (delay) await ctx.reply(this._i18.t('bot.portalPlugin.delay'));
+
+    // let delay = false;
+    // await Bluebird.map(activeRules, async (rule) => {
+    //   let { then: thens } = rule;
+    //   if (!thens) return null;
+    //   if (!Array.isArray(thens)) thens = [thens];
+    //   if (isEmpty(thens)) return {};
+    //   return Bluebird.map(thens, async (then) => {
+    //     this.addMetaToMessage({ bot, ctx, then });
+    //     let chats = await canonizeChatIds.call(this, then.to);
+    //     const { action } = extensions.delay;
+    //     const isDelayed = await action.call(this, { bot, ctx, then, chats });
+
+    //     if (isDelayed.delay) delay = true;
+    //     chats = isDelayed.targetChats;
+
+    //     return this.getActions({ chats, ctx, bot, then });
+    //   });
+    // });
+    // if (delay) await ctx.reply(this._i18.t('bot.portalPlugin.delay'));
   }
 
   getRoutes() {
