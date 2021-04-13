@@ -34,6 +34,7 @@ export default async function getActiveRules({ ctx, bot }) {
       const { criteria } = rule;
       if (!criteria) return true;
       if (!criteria.userId) return true;
+      if (isFunction(criteria.userId) && criteria.userId(pack)) return true;
 
       if (['number', 'string'].includes(typeof criteria.userId) && `${criteria.userId}` === `${userId}`) return true;
       if (Array.isArray(criteria.userId)) {
@@ -49,6 +50,7 @@ export default async function getActiveRules({ ctx, bot }) {
       const { criteria } = rule;
       if (!criteria) return true;
       if (!criteria.chatId) return true;
+      if (isFunction(criteria.chatId) && criteria.chatId(pack)) return true;
 
       if (['number', 'string'].includes(typeof criteria.chatId) && `${criteria.chatId}` === `${chatId}`) return true;
       if (Array.isArray(criteria.chatId)) {
