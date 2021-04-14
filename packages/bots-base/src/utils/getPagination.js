@@ -19,6 +19,7 @@ export function getPages({ page = 1, max = 10, size = 5 } = {}) {
 
   return pages;
 }
+
 export function getPagination(initProps = {}) {
   const {
     first = (page) => `« ${page}`,
