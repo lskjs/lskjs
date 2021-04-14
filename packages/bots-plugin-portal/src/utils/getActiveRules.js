@@ -22,6 +22,16 @@ export default async function getActiveRules({ ctx, bot }) {
 
   const activeRules = rules
     .filter((rule) => {
+      const { when } = rule;
+      if (!when) return true;
+      return false;
+    })
+    .filter((rule) => {
+      const { action } = rule;
+      if (action) return true;
+      return false;
+    })
+    .filter((rule) => {
       this.log.debug('>> Test criteria type');
       const { criteria } = rule;
       if (!criteria) return true;

@@ -58,7 +58,7 @@ export default class PortalPlugin extends BaseBotPlugin {
     });
   }
 
-  async getActions({ chats, ctx, bot, then }) {
+  async getActions2({ chats, ctx, bot, then }) {
     if (isEmpty(chats)) return;
     await Bluebird.each(chats, async (chat) => {
       Object.assign(then, { to: chat });
@@ -94,13 +94,50 @@ export default class PortalPlugin extends BaseBotPlugin {
     return BotsTelegramMessageModel.findOneAndUpdate(message, { meta });
   }
 
+  async getActionReply({ ctx, bot, text }) {
+    return bot.reply(ctx, text);
+  }
+  async getActionSendMessage({ bot, to, text }) {
+    let chats = to;
+    if (!chats) return;
+    if (!Array.isArray(chats)) chats = [chats];
+    if (isEmpty(chats)) return;
+    await Bluebird.map(chats, async (chat) => bot.sendMessage(chat, text));
+  }
+  async getActionRepost({ ctx, bot, to }) {
+    let chats = to;
+    if (!chats) return;
+    if (!Array.isArray(chats)) chats = [chats];
+    if (isEmpty(to)) return;
+    // const extra = this.createExtraKeyboard({ bot, ctx, then });
+    await Bluebird.map(chats, async (chat) => bot.repost(chat, ctx));
+  }
+  async getActionRemove({ ctx }) {
+    await ctx.deleteMessage();
+  }
+
   async onEvent({ event, ctx, bot }) {
     const activeRules = await getActiveRules.call(this, { ctx, bot });
     this.log.trace('activeRules:', activeRules);
     if (isEmpty(activeRules)) return;
     await Bluebird.map(activeRules, async (rule) => {
-      const { criteria } = rule;
-      console.log(criteria);
+      let { action: actions } = rule;
+      if (!actions) return 0;
+      if (!Array.isArray(actions)) actions = [actions];
+      if (isEmpty(actions)) return 0;
+      return Bluebird.each(actions, async (action) => {
+        const { type } = action;
+        if (type === 'reply') await this.getActionReply({ ctx, bot, ...action });
+        if (type === 'sendMessage') await this.getActionSendMessage({ ctx, bot, ...action });
+        if (type === 'repost') await this.getActionRepost({ ctx, bot, ...action });
+        if (action === 'remove' || type === 'remove') await this.getActionRemove({ ctx, bot, ...action });
+        // type
+        // to
+        // text
+        // then
+        // else
+        await Bluebird.delay(10);
+      });
     });
 
     // let delay = false;
