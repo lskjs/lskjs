@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import extensions from './extensions';
 import { groupMessages } from './groupMessages';
-import { canonizeChatIds, getActiveRules } from './utils';
+import { canonizeChatIds, getActiveRules, setCrons } from './utils';
 
 const canonizeRule = (rule) => rule;
 const canonizeRules = (rules = []) => rules.map(canonizeRule).filter(Boolean);
@@ -34,9 +34,11 @@ export default class PortalPlugin extends BaseBotPlugin {
       return get(table, key, key);
     },
   };
+
   async init() {
     await super.init();
     this.rules = canonizeRules(this.config.rules);
+    this.crons = setCrons.call(this);
   }
 
   createExtraKeyboard({ bot, ctx = {}, then }) {
