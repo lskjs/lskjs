@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.3.0-beta.22",
+    "@lskjs/mutex": "2.3.0-beta.22",
     "@lskjs/utils": "2.3.0-beta.22",
     "async-mutex": "0.2.6",
     "https-proxy-agent": "5.0.0",

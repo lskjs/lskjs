@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+import Mutex from '@lskjs/mutex';
 import avg from '@lskjs/utils/avg';
 import Err from '@lskjs/utils/Err';
 import inc from '@lskjs/utils/inc';
@@ -11,7 +12,6 @@ import map from 'lodash/map';
 import { getProxyAgent } from './getProxyAgent';
 import { Proxy } from './Proxy';
 import strategies from './strategies';
-import { Mutex } from './utils/Mutex';
 import { parseProxyParam } from './utils/parseProxyParam';
 
 export const filterFn = (proxy, filter) => {
