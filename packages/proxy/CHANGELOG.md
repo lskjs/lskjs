@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+
+### Features
+
+* **proxy:** add lskjs/mutex ([5353ed3](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/5353ed3fb4bc0eb70c7e44ffd39f1f4a1e42bf72))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/proxy

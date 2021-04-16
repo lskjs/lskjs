@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.24](https://github.com/lskjs/cli/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+
+### Features
+
+* **module:** prevent parallel injecting ([2d7f213](https://github.com/lskjs/cli/commit/2d7f21348a86308feb069a2660982b2800db1e65))
+* **proxy:** add lskjs/mutex ([5353ed3](https://github.com/lskjs/cli/commit/5353ed3fb4bc0eb70c7e44ffd39f1f4a1e42bf72))
+
+
+
+
+
 # [2.3.0-beta.23](https://github.com/lskjs/cli/compare/v2.3.0-beta.22...v2.3.0-beta.23) (2021-04-09)
 
 

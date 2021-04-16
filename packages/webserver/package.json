@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/webserver",
-  "version": "2.3.0-beta.23",
+  "version": "2.3.0-beta.24",
   "description": "LSK module webserver.",
   "keywords": [
     "webserver",
@@ -22,7 +22,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.22",
+    "@lskjs/module": "2.3.0-beta.24",
     "@lskjs/utils": "2.3.0-beta.22",
     "body-parser": "1.19.0",
     "cacheman": "2.2.1",
@@ -40,7 +40,7 @@
     "socket.io-redis": "6.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.22",
+    "@lskjs/db": "2.3.0-beta.24",
     "@lskjs/i18": "2.3.0-beta.22",
     "axios": "0.21.1",
     "bluebird": "3.7.2",

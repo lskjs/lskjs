@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+**Note:** Version bump only for package @lskjs/bots-plugin-portal
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-portal

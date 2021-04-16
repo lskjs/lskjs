@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+
+### Features
+
+* **module:** prevent parallel injecting ([2d7f213](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/2d7f21348a86308feb069a2660982b2800db1e65))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/module
