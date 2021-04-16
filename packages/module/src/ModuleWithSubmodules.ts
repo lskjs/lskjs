@@ -1,3 +1,4 @@
+import Mutex from '@lskjs/mutex';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
@@ -15,6 +16,7 @@ import { createAsyncModule } from './utils/createAsyncModule';
 const filterWildcard = (array: string[], pattern: string): string[] =>
   array.filter((name) => name.startsWith(pattern.substr(0, pattern.length - 1)));
 
+const mutexMap = {};
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
   __availableModules: IAsyncModuleKeyValue = {};
   __initedModules: IModuleKeyValue = {};
@@ -105,13 +107,28 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     }
     // eslint-disable-next-line no-nested-ternary
     const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
+    const mutexKey = `${this.name}/${name}`;
+    if (!this.__initedModules[name]) {
+      if (!mutexMap[mutexKey]) mutexMap[mutexKey] = new Mutex();
+      const mutex = mutexMap[mutexKey];
+      if (mutex.isLocked()) {
+        if (await mutex.isAsyncLocked(1000, 1)) {
+          throw new Err(
+            'MODULE_LONG_PARALLEL_INIT',
+            'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
+          );
+        }
+      }
+    }
     if (this.__initedModules[name]) {
+      delete mutexMap[mutexKey];
       const instance = this.__initedModules[name]!;
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
       // @ts-ignore
       if (getter) return getter(instance);
       return this.moduleGetter(instance);
     }
+
     if (this.debug) this.log.trace(`module(${name})`, debugInfo);
     const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) {
@@ -140,6 +157,8 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     } catch (err) {
       this.log.fatal(`module(${name})`, err);
       throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
+    } finally {
+      delete mutexMap[mutexKey];
     }
   }
 
