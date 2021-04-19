@@ -127,7 +127,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       }
     }
     if (this.__initedModules[name]) {
-      mutexRelease();
+      if (mutexRelease) mutexRelease();
       delete mutexMap[mutexKey];
       const instance = this.__initedModules[name]!;
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
@@ -165,7 +165,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       this.log.fatal(`module(${name})`, err);
       throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
     } finally {
-      mutexRelease();
+      if (mutexRelease) mutexRelease();
       delete mutexMap[mutexKey];
     }
   }
