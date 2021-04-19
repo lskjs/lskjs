@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "2.3.0-beta.24",
+  "version": "2.3.0-beta.25",
   "description": "LSK module for grant.",
   "keywords": [
     "grant"
@@ -22,7 +22,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.24",
+    "@lskjs/module": "2.3.0-beta.25",
     "@lskjs/utils": "2.3.0-beta.22",
     "async-mutex": "0.2.6"
   },
