@@ -1,5 +1,5 @@
 /* global test expect */
-import Module from '../src/2';
+import Module from '../src';
 
 test('new Module()', () => {
   const instance = new Module();

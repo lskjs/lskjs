@@ -108,19 +108,26 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     // eslint-disable-next-line no-nested-ternary
     const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
     const mutexKey = `${this.name}/${name}`;
+    let mutexRelease;
+    // console.log({ mutexKey });
     if (!this.__initedModules[name]) {
-      if (!mutexMap[mutexKey]) mutexMap[mutexKey] = new Mutex();
+      if (!mutexMap[mutexKey]) {
+        // console.log('new Mutex()');
+        mutexMap[mutexKey] = new Mutex();
+      }
       const mutex = mutexMap[mutexKey];
-      if (mutex.isLocked()) {
-        if (await mutex.isAsyncLocked(1000, 1)) {
-          throw new Err(
-            'MODULE_LONG_PARALLEL_INIT',
-            'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
-          );
-        }
+
+      if (await mutex.isAsyncLocked(5000, 1)) {
+        throw new Err(
+          'MODULE_LONG_PARALLEL_INIT',
+          'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
+        );
+      } else {
+        mutexRelease = await mutex.acquire();
       }
     }
     if (this.__initedModules[name]) {
+      mutexRelease();
       delete mutexMap[mutexKey];
       const instance = this.__initedModules[name]!;
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
@@ -158,6 +165,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       this.log.fatal(`module(${name})`, err);
       throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
     } finally {
+      mutexRelease();
       delete mutexMap[mutexKey];
     }
   }

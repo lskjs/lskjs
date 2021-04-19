@@ -1,4 +1,4 @@
-import Module from '../src/2';
+import Module from '../src';
 
 export default class ExampleModule extends Module {
   async init(): Promise<void> {
