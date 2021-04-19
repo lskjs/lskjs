@@ -43,6 +43,10 @@ export class RabbitModule extends Module {
   async createConnection() {
     const { socketOptions = {} } = this.config;
     const connection = await amqp.connect(this.config.uri, socketOptions);
+    connection.on('error', (err) => {
+      this.log.error(err);
+      process.exit(1);
+    });
     return connection;
   }
   async connect() {
@@ -50,7 +54,23 @@ export class RabbitModule extends Module {
     this.listenConnection = await this.createConnection();
     this.sendConnection = await this.createConnection();
     this.listenChannel = await this.listenConnection.createChannel();
+    this.listenChannel.on('error', (err) => {
+      this.log.error(err);
+      process.exit(1);
+    });
+    this.listenChannel.on('close', (err) => {
+      this.log.error(err);
+      process.exit(1);
+    });
     this.sendChannel = await this.sendConnection.createConfirmChannel();
+    this.sendChannel.on('error', (err) => {
+      this.log.error(err);
+      process.exit(1);
+    });
+    this.sendChannel.on('close', (err) => {
+      this.log.error(err);
+      process.exit(1);
+    });
     this.onOpen();
     const prefetchCount = get(this.config, 'options.prefetch');
     if (prefetchCount) {
