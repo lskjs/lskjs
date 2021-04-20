@@ -18,6 +18,9 @@ const serializeData = (data = {}) => {
 
 export class RabbitModule extends Module {
   startGoProc = startGoProc;
+  config = {
+    reconnectTimeout: 5000,
+  };
   async init() {
     await super.init();
     this.enabled = !this.config.disabled;
@@ -26,9 +29,6 @@ export class RabbitModule extends Module {
     if (!this.config.uri) {
       this.log.warn('!config.uri using localhost');
       this.config.uri = 'amqp://localhost';
-    }
-    if (!this.config.reconnectTimeout) {
-      this.config.reconnectTimeout = 5000;
     }
     this.log.debug('uri', maskUriPassword(this.config.uri));
     if (!this.config.queues) {
@@ -90,9 +90,11 @@ export class RabbitModule extends Module {
       await this.onError(e);
     }
   }
-  debouncedOnError = debounce(this.onError.bind(this), 1000);
+  debouncedOnError = debounce((...args) => {
+    this.onError(...args);
+  }, 1000);
   async onError(err) {
-    this.emit('error2');
+    this.emit('connectionError');
     this.log.error(err);
     const { reconnectTimeout } = this.config;
     this.log.debug(`error, wait ${reconnectTimeout} ms for restart connect`);
