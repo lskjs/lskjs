@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.27](https://github.com/lskjs/cli/compare/v2.3.0-beta.26...v2.3.0-beta.27) (2021-04-20)
+
+
+### Features
+
+* **worker:** add err.data in log ([960ef16](https://github.com/lskjs/cli/commit/960ef164ac3c6116c04e1349e95310c3b2da2546))
+
+
+
+
+
 # [2.3.0-beta.26](https://github.com/lskjs/cli/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
 
 
