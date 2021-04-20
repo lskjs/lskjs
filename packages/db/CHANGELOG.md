@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.28](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.27...v2.3.0-beta.28) (2021-04-20)
+
+
+### Bug Fixes
+
+* **db:** wait db connection while geting the model ([b40d8ce](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/b40d8ce1f54649e2cfe556dbc6565707c6ecc735))
+
+
+
+
+
 # [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
 
 **Note:** Version bump only for package @lskjs/db
