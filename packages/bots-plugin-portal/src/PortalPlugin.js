@@ -1,4 +1,4 @@
-import createKeyboard from '@lskjs/bots-base/utils/createKeyboard';
+// import createKeyboard from '@lskjs/bots-base/utils/createKeyboard';
 import BaseBotPlugin from '@lskjs/bots-plugin';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
@@ -37,106 +37,46 @@ export default class PortalPlugin extends BaseBotPlugin {
   async init() {
     await super.init();
     this.rules = canonizeRules(this.config.rules);
-    this.crons = setCrons.call(this);
   }
+  // TODO: Удалить только ПОСЛЕ переписывания extensions
+  // createExtraKeyboard({ bot, ctx = {}, then }) {
+  //   const buttons = [];
 
-  createExtraKeyboard({ bot, ctx = {}, then }) {
-    const buttons = [];
+  //   Object.keys(extensions).forEach((key) => {
+  //     const { getButtons } = extensions[key];
+  //     if (!then[key] || !getButtons) return;
+  //     const extensionButtons = getButtons.call(this, { bot, ctx });
+  //     if (!Array.isArray(extensionButtons)) return;
+  //     buttons.push(extensionButtons);
+  //   });
 
-    Object.keys(extensions).forEach((key) => {
-      const { getButtons } = extensions[key];
-      if (!then[key] || !getButtons) return;
-      const extensionButtons = getButtons.call(this, { bot, ctx });
-      if (!Array.isArray(extensionButtons)) return;
-      buttons.push(extensionButtons);
-    });
+  //   return createKeyboard({
+  //     type: 'inline',
+  //     buttons,
+  //   });
+  // }
 
-    return createKeyboard({
-      type: 'inline',
-      buttons,
-    });
-  }
+  // async addMetaToMessage({ bot, ctx, then }) {
+  //   const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
+  //   const message = bot.getMessage(ctx);
+  //   const meta = {};
+  //   Object.keys(extensions).forEach((key) => {
+  //     meta[key] = !!then[key];
+  //   });
+  //   return BotsTelegramMessageModel.findOneAndUpdate(message, { meta });
+  // }
 
-  async getActions2({ chats, ctx, bot, then }) {
-    if (isEmpty(chats)) return;
-    await Bluebird.each(chats, async (chat) => {
-      Object.assign(then, { to: chat });
-      await this.botActions({ ctx, bot, then });
-    });
-    await Bluebird.delay(10);
-  }
-
-  async botActions({ ctx, bot, then }) {
-    if (then.action === 'reply') {
-      return bot.reply(ctx, then.text);
-    }
-    if (then.action === 'sendMessage') {
-      return bot.sendMessage(then.to, then.text);
-    }
-    if (then.action === 'repost') {
-      const extra = this.createExtraKeyboard({ bot, ctx, then });
-      return bot.repost(then.to, ctx, extra);
-    }
-    if (then.action === 'remove') {
-      await ctx.deleteMessage();
-    }
-    return false;
-  }
-
-  async addMetaToMessage({ bot, ctx, then }) {
-    const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
-    const message = bot.getMessage(ctx);
-    const meta = {};
-    Object.keys(extensions).forEach((key) => {
-      meta[key] = !!then[key];
-    });
-    return BotsTelegramMessageModel.findOneAndUpdate(message, { meta });
-  }
-
-  async getActionReply({ ctx, bot, text }) {
-    return bot.reply(ctx, text);
-  }
-  async getActionSendMessage({ bot, to, text }) {
-    let chats = to;
-    if (!chats) return;
-    if (!Array.isArray(chats)) chats = [chats];
-    if (isEmpty(chats)) return;
-    await Bluebird.map(chats, async (chat) => bot.sendMessage(chat, text));
-  }
-  async getActionRepost({ ctx, bot, to }) {
-    let chats = to;
-    if (!chats) return;
-    if (!Array.isArray(chats)) chats = [chats];
-    if (isEmpty(to)) return;
-    // const extra = this.createExtraKeyboard({ bot, ctx, then });
-    await Bluebird.map(chats, async (chat) => bot.repost(chat, ctx));
-  }
-  async getActionRemove({ ctx }) {
-    await ctx.deleteMessage();
+  async runAction(props) {
+    return runAction.call(this, props);
   }
 
   async onEvent({ event, ctx, bot }) {
     const activeRules = await getActiveRules.call(this, { ctx, bot });
     this.log.trace('activeRules:', activeRules);
-    if (isEmpty(activeRules)) return;
-    await Bluebird.map(activeRules, async (rule) => {
-      let { action: actions } = rule;
-      if (!actions) return 0;
-      if (!Array.isArray(actions)) actions = [actions];
-      if (isEmpty(actions)) return 0;
-      return Bluebird.each(actions, async (action) => {
-        const { type } = action;
-        if (type === 'reply') await this.getActionReply({ ctx, bot, ...action });
-        if (type === 'sendMessage') await this.getActionSendMessage({ ctx, bot, ...action });
-        if (type === 'repost') await this.getActionRepost({ ctx, bot, ...action });
-        if (action === 'remove' || type === 'remove') await this.getActionRemove({ ctx, bot, ...action });
-        // type
-        // to
-        // text
-        // then
-        // else
-        await Bluebird.delay(10);
-      });
+    if (isEmpty(activeRules)) return null;
+    return Bluebird.map(activeRules, async (rule) => {
+      this.log.debug('rule:', rule);
+      return runAction.call(this, { event, ctx, bot, ...rule });
     });
 
     // let delay = false;
@@ -173,6 +113,7 @@ export default class PortalPlugin extends BaseBotPlugin {
   }
 
   runBot(bot) {
+    this.crons = runCron.call(this, { bot });
     const group = this.config.group ? groupMessages : (a) => a;
 
     bot.on(
