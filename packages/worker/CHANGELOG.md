@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.29](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.28...v2.3.0-beta.29) (2021-04-20)
+
+
+### Bug Fixes
+
+* **worker:** reconnect ([0f12c91](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/0f12c91020212db2a28aeac0631fba9b1f0ca6d7))
+
+
+
+
+
 # [2.3.0-beta.27](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.26...v2.3.0-beta.27) (2021-04-20)
 
 

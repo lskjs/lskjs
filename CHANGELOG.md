@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.29](https://github.com/lskjs/cli/compare/v2.3.0-beta.28...v2.3.0-beta.29) (2021-04-20)
+
+
+### Bug Fixes
+
+* **rabbit:** channels and connections exit ([9481df3](https://github.com/lskjs/cli/commit/9481df3a8a91f61f2d649a95db8e38beaf6ec70c))
+* **rabbit:** config, debounce and emit error name ([6974940](https://github.com/lskjs/cli/commit/6974940a1ffacd3964a0c8460bed4dbc7420c214))
+* **rabbit:** reconnect ([21a7b17](https://github.com/lskjs/cli/commit/21a7b17fc8c6f1617ea7acbb734d02376a7cb272))
+* **worker:** reconnect ([0f12c91](https://github.com/lskjs/cli/commit/0f12c91020212db2a28aeac0631fba9b1f0ca6d7))
+
+
+
+
+
 # [2.3.0-beta.28](https://github.com/lskjs/cli/compare/v2.3.0-beta.27...v2.3.0-beta.28) (2021-04-20)
 
 
