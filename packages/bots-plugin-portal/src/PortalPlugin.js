@@ -5,8 +5,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import extensions from './extensions';
-import { groupMessages } from './groupMessages';
-import { canonizeChatIds, getActiveRules, setCrons } from './utils';
+import { getActiveRules, groupMessages, runAction, runCron } from './utils';
 
 const canonizeRule = (rule) => rule;
 const canonizeRules = (rules = []) => rules.map(canonizeRule).filter(Boolean);
