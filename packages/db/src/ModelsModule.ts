@@ -32,6 +32,8 @@ export class ModelsModule extends Module implements IModelsModule {
   }
 
   async moduleGetter(m: IModule): Promise<any> {
+    if (!m.dbName) throw '!this.dbName';
+    await m.app.module(m.dbName);
     // @ts-ignore
     return m.model;
   }
