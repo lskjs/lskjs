@@ -1,6 +1,8 @@
 import cron from 'node-cron';
 
-export default function setCrons() {
+import { runAction } from '.';
+
+export default function runCron({ bot }) {
   const crons = {};
   this.rules
     .filter((rule) => {
@@ -12,23 +14,24 @@ export default function setCrons() {
       return false;
     })
     .forEach((rule) => {
-      if (Array.isArray(rule.when)) {
-        rule.when.forEach((r) => {
+      const { when } = rule;
+      if (Array.isArray(when)) {
+        when.forEach((r) => {
           crons[r] = {
             rule,
             cron: cron.schedule(r, () => {
-              // TODO: Заменить на фунцию подбора action
-              this.log.debug(`CRON action on '${r}'`);
+              this.log.debug(`CRON action on '${r}'`, rule);
+              runAction.call(this, { bot, ...rule });
             }),
           };
         });
         return;
       }
-      crons[rule.when] = {
+      crons[when] = {
         rule,
         cron: cron.schedule(rule.when, () => {
-          // TODO: Заменить на фунцию подбора action
-          this.log.debug(`CRON action on '${rule.when}'`);
+          this.log.debug(`CRON action on '${when}'`, rule);
+          runAction.call(this, { bot, ...rule });
         }),
       };
     });
