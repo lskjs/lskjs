@@ -26,6 +26,7 @@ export class RabbitWorker extends Module {
     const str = [
       Err.getCode(err),
       Err.getMessage(err),
+      err.data && JSON.stringify(err && err.data, null, 2),
       '\n',
       prettyStringify(params),
       '\n',
