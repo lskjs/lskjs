@@ -17,6 +17,7 @@ export class RabbitWorker extends Module {
     // this.queues = get(this, 'app.config.rabbit.queues');
     // this.exchanges = get(this, 'app.config.rabbit.exchanges');
     this.rabbit = await this.app.module('rabbit');
+    this.rabbit.on('connected', this.rabbitConnect.bind(this));
   }
   async parse() {
     throw 'not implemented worker.parse()';
@@ -163,6 +164,18 @@ export class RabbitWorker extends Module {
       }
     }
   }
+  async rabbitConnect() {
+    const queue = process.env.AMQP_QUEUE || this.queue;
+    if (!queue) {
+      this.log.warn('!queue');
+      return;
+    }
+    await this.rabbit.queue(queue);
+    const queueName = this.rabbit.getQueueName(queue);
+    const options = { noAck: false };
+    this.log.info(`consume(${queueName})`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
+    this.rabbit.consume(queueName, this.onConsume.bind(this), options);
+  }
   async run() {
     await super.run();
     if (!this.rabbit) throw '!rabbit';
@@ -175,11 +188,7 @@ export class RabbitWorker extends Module {
       this.log.warn('!Job', this.Job);
       return;
     }
-    const { queue: queueName2 } = await this.rabbit.queue(queue);
-    const queueName = this.rabbit.getQueueName(queue);
-    const options = { noAck: false };
-    this.log.info(`consume(${queueName})`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
-    this.rabbit.consume(queueName, this.onConsume.bind(this), options);
+    await this.rabbitConnect();
   }
   async stop() {
     return this.rabbit.stop();

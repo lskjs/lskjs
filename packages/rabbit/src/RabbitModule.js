@@ -4,6 +4,7 @@ import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import amqp from 'amqplib';
 import Bluebird from 'bluebird';
 import EventEmitter from 'events';
+import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
 import hash from 'object-hash';
@@ -17,6 +18,9 @@ const serializeData = (data = {}) => {
 
 export class RabbitModule extends Module {
   startGoProc = startGoProc;
+  config = {
+    reconnectTimeout: 5000,
+  };
   async init() {
     await super.init();
     this.enabled = !this.config.disabled;
@@ -43,6 +47,7 @@ export class RabbitModule extends Module {
   async createConnection() {
     const { socketOptions = {} } = this.config;
     const connection = await amqp.connect(this.config.uri, socketOptions);
+    connection.on('error', this.debouncedOnError.bind(this));
     return connection;
   }
   async connect() {
@@ -50,7 +55,11 @@ export class RabbitModule extends Module {
     this.listenConnection = await this.createConnection();
     this.sendConnection = await this.createConnection();
     this.listenChannel = await this.listenConnection.createChannel();
+    this.listenChannel.on('error', this.debouncedOnError.bind(this));
+    this.listenChannel.on('close', this.debouncedOnError.bind(this));
     this.sendChannel = await this.sendConnection.createConfirmChannel();
+    this.sendChannel.on('error', this.debouncedOnError.bind(this));
+    this.sendChannel.on('close', this.debouncedOnError.bind(this));
     this.onOpen();
     const prefetchCount = get(this.config, 'options.prefetch');
     if (prefetchCount) {
@@ -60,13 +69,38 @@ export class RabbitModule extends Module {
       this.startGoProc();
     }
     this.log.debug('connected');
+    this.emit('connected');
   }
   async run() {
     if (!this.enabled) return;
     await super.run();
-    await this.connect();
+    try {
+      await this.connect();
+    } catch (e) {
+      await this.onError(e);
+    }
   }
   onOpen() {}
+  async restart() {
+    try {
+      await this.cancel();
+      await this.stop();
+      await this.connect();
+    } catch (e) {
+      await this.onError(e);
+    }
+  }
+  debouncedOnError = debounce((...args) => {
+    this.onError(...args);
+  }, 1000);
+  async onError(err) {
+    this.emit('connectionError');
+    this.log.error(err);
+    const { reconnectTimeout } = this.config;
+    this.log.debug(`error, wait ${reconnectTimeout} ms for restart connect`);
+    await Bluebird.delay(reconnectTimeout);
+    this.restart();
+  }
   async ack(msg, { allUpTo } = {}) {
     return this.listenChannel.ack(msg, allUpTo);
   }
