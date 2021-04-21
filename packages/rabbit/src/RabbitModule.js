@@ -6,6 +6,7 @@ import Bluebird from 'bluebird';
 import EventEmitter from 'events';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import hash from 'object-hash';
 
@@ -157,11 +158,25 @@ export class RabbitModule extends Module {
   bindQueue(queue, source, pattern, ...args) {
     return this.listenChannel.bindQueue(queue, source, pattern, ...args);
   }
-  sendToQueue(queue, data, options, channel = this.sendChannel) {
+  getQueueParams(queue) {
+    let queueName = queue;
+    if (typeof queue === 'string') {
+      queueName = queue;
+    } else {
+      queueName = queue.name || queue.queue;
+    }
+    if (this.queues[queueName]) return this.queues[queueName];
+    return {
+      queue: queueName,
+    };
+  }
+  async sendToQueue(queue, data, options, channel = this.sendChannel) {
     const queueName = this.getQueueName(queue);
+    const queueParams = this.getQueueParams(queue);
+    const mergedOptions = merge({}, options, queueParams.options, get(this, 'config.queueOptions'));
     return new Bluebird((res, rej) => {
       const row = serializeData(data);
-      channel.sendToQueue(queueName, Buffer.from(row), options, (err, ok) => {
+      channel.sendToQueue(queueName, Buffer.from(row), mergedOptions, (err, ok) => {
         if (err) {
           rej(err);
         } else {
