@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.30](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.3.0-beta.29...v2.3.0-beta.30) (2021-04-21)
+
+
+### Bug Fixes
+
+* **rabbit:** merge to ... ([3c5743a](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/commit/3c5743afda7ec019216e91ccfa099a787e00e31d))
+* **rabbit:** new mergedOptions ([f8a5e30](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/commit/f8a5e307673422267d1e78d8a8b5c0529a221245))
+* **rabbit:** rabbit options for queue and global options ([f4bfbd7](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/commit/f4bfbd725598cef522f70ff8d42ee22f8e33fa47))
+
+
+
+
+
 # [2.3.0-beta.29](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.3.0-beta.28...v2.3.0-beta.29) (2021-04-20)
 
 
