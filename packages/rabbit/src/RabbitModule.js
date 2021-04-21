@@ -172,7 +172,7 @@ export class RabbitModule extends Module {
   async sendToQueue(queue, data, options, channel = this.sendChannel) {
     const queueName = this.getQueueName(queue);
     const queueParams = this.getQueueParams(queue);
-    const mergedOptions = { ...options, ...(queueParams.options || {}), ...get(this, 'config.queueOptions', {}) };
+    const mergedOptions = { ...get(this, 'config.queueOptions', {}), ...(queueParams.options || {}), ...options };
     return new Bluebird((res, rej) => {
       const row = serializeData(data);
       channel.sendToQueue(queueName, Buffer.from(row), mergedOptions, (err, ok) => {
