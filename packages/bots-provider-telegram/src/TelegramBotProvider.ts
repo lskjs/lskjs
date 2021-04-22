@@ -95,24 +95,24 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.getUser(ctx).id;
   }
   getMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (ctx === Number) return ctx;
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getMessage(ctx);
     return message.message_id || null;
   }
   getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (ctx === Number) return ctx;
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getMessage(ctx);
     if (get(message, 'from.id')) return get(message, 'from.id');
     return null;
   }
   getMessageChatId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (ctx === Number) return ctx;
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     return null;
   }
   getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (ctx === Number) return ctx;
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     if (get(message, 'from.id')) return get(message, 'from.id');
@@ -124,7 +124,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return message.reply_to_message || null;
   }
   getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (ctx === Number) return ctx;
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getRepliedMessage(ctx);
     // console.log({getRepliedMessage: message})
 
@@ -140,7 +140,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return callback.message;
   }
   getCallbackMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (ctx === Number) return ctx;
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getRepliedMessage(ctx);
     if (!message) return null;
     return message.message_id || null;
@@ -184,6 +184,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
   getMessageDate(ctx: TelegramIBotProviderMessageCtx): Date {
     const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
+  }
+  getMessageChatType(ctx: TelegramIBotProviderMessageCtx): string | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getMessage(ctx);
+    if (get(message, 'chat.type')) return get(message, 'chat.type');
+    return null;
   }
   /**
    * Docs: https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
