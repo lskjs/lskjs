@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add actions ([8a5e461](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/8a5e461dafcc930428bb7885212884b3dcf78e2f))
+
+
+### Features
+
+* **bots-plugin-portal:** add criteria ([fb37544](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/fb375443a250c58bccfcc7f4aa10cb18c63fe130))
+
+
+
+
+
 # [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
 
 **Note:** Version bump only for package @lskjs/bots-provider-telegram

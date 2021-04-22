@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/webserver/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Bug Fixes
+
+* **webserver:** bug un useApi while empty item ([1d047e6](https://github.com/lskjs/lskjs/tree/master/packages/webserver/commit/1d047e6e05f228a014855e8396cc66fd8cbac9ae))
+
+
+
+
+
 # [2.3.0-beta.28](https://github.com/lskjs/lskjs/tree/master/packages/webserver/compare/v2.3.0-beta.27...v2.3.0-beta.28) (2021-04-20)
 
 **Note:** Version bump only for package @lskjs/webserver

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add actions ([8a5e461](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/8a5e461dafcc930428bb7885212884b3dcf78e2f))
+* **bots-plugin-portal:** add rules function-type for userId and chatId ([f6961d5](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/f6961d5eb1d307acfbc7615532f10d7cefd6cf51))
+* **LSK-34:** relocate groupMessages ([960be89](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/960be892926a121f440ded79157baa860853bbf2))
+* **LSK-34:** remove canonizeChatIds ([8e91a9c](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/8e91a9c3245d9f200a54c7de3580dbbe2ce0dd30))
+* **LSK-34:** runCron ([622f716](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/622f716812ef123723254e7a18ab923bc5bac927))
+
+
+### Features
+
+* **bots-plugin-portal:** add criteria ([fb37544](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/fb375443a250c58bccfcc7f4aa10cb18c63fe130))
+* **bots-plugin-portal:** add cron-trigger by LSK-33 ([9843e80](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/9843e805c121333ebb775e9bf7fff6d56768a373))
+* **LSK-34:** add actions and runAction ([1a9a3a2](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/1a9a3a27bcf143c0f3f808128b28b2bc09a2856c))
+
+
+
+
+
 # [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-portal

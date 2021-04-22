@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Features
+
+* **bots-plugin-portal:** add criteria ([fb37544](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/fb375443a250c58bccfcc7f4aa10cb18c63fe130))
+
+
+
+
+
 # [2.3.0-beta.28](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.27...v2.3.0-beta.28) (2021-04-20)
 
 **Note:** Version bump only for package @lskjs/bots
