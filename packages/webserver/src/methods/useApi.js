@@ -8,6 +8,7 @@ const join = (items) => {
   let finalMethod;
   const finalPath = items
     .map((item) => {
+      if (typeof item !== 'string') return '';
       const [api, method] = item.split(' ').reverse();
       finalMethod = method;
       return api;
