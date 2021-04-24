@@ -4,11 +4,9 @@ import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
+import actions from './actions';
 import extensions from './extensions';
 import { getActiveRules, groupMessages, runAction, runCron } from './utils';
-
-const canonizeRule = (rule) => rule;
-const canonizeRules = (rules = []) => rules.map(canonizeRule).filter(Boolean);
 
 export default class PortalPlugin extends BaseBotPlugin {
   providers = ['telegram', 'discord'];
@@ -33,10 +31,19 @@ export default class PortalPlugin extends BaseBotPlugin {
       return get(table, key, key);
     },
   };
-
+  getModules() {
+    return {
+      action: [
+        import('./ActionModule'),
+        {
+          actions,
+        },
+      ],
+    };
+  }
   async init() {
     await super.init();
-    this.rules = canonizeRules(this.config.rules);
+    this.rules = this.config.rules;
   }
   // TODO: Удалить только ПОСЛЕ переписывания extensions
   // createExtraKeyboard({ bot, ctx = {}, then }) {
@@ -72,11 +79,15 @@ export default class PortalPlugin extends BaseBotPlugin {
 
   async onEvent({ event, ctx, bot }) {
     const activeRules = await getActiveRules.call(this, { ctx, bot });
-    this.log.trace('activeRules:', activeRules);
     if (isEmpty(activeRules)) return null;
     return Bluebird.map(activeRules, async (rule) => {
+      const { action } = rule;
+      if (!action) return null;
       this.log.debug('rule:', rule);
-      return runAction.call(this, { event, ctx, bot, ...rule });
+      const actionModule = await this.module('action');
+      return actionModule.runAction(action, { event, ctx, bot, ...rule });
+
+      // return runAction.call(this, { event, ctx, bot, ...rule });
     });
 
     // let delay = false;
