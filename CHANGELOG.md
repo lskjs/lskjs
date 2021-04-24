@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.32](https://github.com/lskjs/cli/compare/v2.3.0-beta.31...v2.3.0-beta.32) (2021-04-24)
+
+
+### Features
+
+* **bots-plugin-portal:** refactor and add new ([8599a4e](https://github.com/lskjs/cli/commit/8599a4e73842ed08d4258487a6558cbdf7235c68))
+
+
+
+
+
 # [2.3.0-beta.31](https://github.com/lskjs/cli/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
 
 
