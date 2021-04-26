@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.33](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.32...v2.3.0-beta.33) (2021-04-26)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add new ActionModule and ActionChain ([b81437f](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/b81437f7b712bf09ba2ba9e5a4de7995fca5b3a4))
+
+
+
+
+
 # [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
 
 
