@@ -10,7 +10,7 @@ async function updateRules({ ctx, bot }) {
   return [...this.rules, ...userRules];
 }
 
-export default async function getActiveRules({ ctx, bot }) {
+export default async function getActiveRules({ ctx, bot } = {})  {
   const pack = {};
   pack.userId = bot.getUserId(ctx);
   pack.chatType = bot.getMessageChatType(ctx);

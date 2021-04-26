@@ -1,18 +1,13 @@
 /* eslint-disable global-require */
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import Bluebird from 'bluebird';
-import random from 'lodash/random';
 
-// import actions from './actions';
-
-export default class ActionModule extends Module {
-  actions = {};
-  async init() {
-    await super.init();
+export class ActionChain extends Module {
+  getAction(...args) {
+    return this.actionModule.getAction(...args);
   }
-  // ...,
-  async runAction(actionParams = {}, otherParams = {}) {
+  async runAction(actionParams = {}) {
+    // , otherParams = {}
     if (Array.isArray(actionParams)) {
       // eslint-disable-next-line no-param-reassign
       actionParams = {
@@ -23,10 +18,14 @@ export default class ActionModule extends Module {
     // eslint-disable-next-line no-param-reassign
     actionParams = {
       ...actionParams,
-      ...otherParams,
+      // ...otherParams,
     };
-    const { type: actionType, ...params } = actionParams;
-    const action = this.actions[actionType];
+    // action: actionType2,
+    const { type: actionType1, action: actionType2, ...params } = actionParams;
+    const actionType = actionType1; // || actionType2;
+    this.log.debug({ actionType1, actionType2, actionType });
+    const action = await this.getAction(actionType);
+    // console.log({ actionType, action });
     if (!action) {
       this.log.error('!action', actionType);
       throw new Err('!action', { data: { action: actionType } });
@@ -49,3 +48,5 @@ export default class ActionModule extends Module {
     // this.log.debug('runAction', action, params);
   }
 }
+
+export default ActionChain;

@@ -6,10 +6,13 @@ import isEmpty from 'lodash/isEmpty';
 
 import actions from './actions';
 import extensions from './extensions';
-import { getActiveRules, groupMessages, runAction, runCron } from './utils';
+// import { runAction } from './utils';
+import { getActiveRules, groupMessages, runCron } from './utils';
 
 export default class PortalPlugin extends BaseBotPlugin {
   providers = ['telegram', 'discord'];
+  getActiveRules = getActiveRules;
+  runCron = runCron;
   // TODO: add i18
   _i18 = {
     t: (key, params = {}) => {
@@ -73,12 +76,12 @@ export default class PortalPlugin extends BaseBotPlugin {
   //   return BotsTelegramMessageModel.findOneAndUpdate(message, { meta });
   // }
 
-  async runAction(props) {
-    return runAction.call(this, props);
-  }
+  // async runAction(props) {
+  //   return runAction.call(this, props);
+  // }
 
   async onEvent({ event, ctx, bot }) {
-    const activeRules = await getActiveRules.call(this, { ctx, bot });
+    const activeRules = await this.getActiveRules({ ctx, bot });
     if (isEmpty(activeRules)) return null;
     return Bluebird.map(activeRules, async (rule) => {
       const { action } = rule;
@@ -86,7 +89,6 @@ export default class PortalPlugin extends BaseBotPlugin {
       this.log.debug('rule:', rule);
       const actionModule = await this.module('action');
       return actionModule.runAction(action, { event, ctx, bot, ...rule });
-
       // return runAction.call(this, { event, ctx, bot, ...rule });
     });
 
@@ -124,7 +126,7 @@ export default class PortalPlugin extends BaseBotPlugin {
   }
 
   runBot(bot) {
-    this.crons = runCron.call(this, { bot });
+    this.crons = this.runCron({ bot });
     const group = this.config.group ? groupMessages : (a) => a;
 
     bot.on(

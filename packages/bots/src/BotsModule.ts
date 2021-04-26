@@ -2,6 +2,7 @@ import { IAnyKeyValue, IAsyncPlugins, IAsyncProviders, IBotProvider } from '@lsk
 import { BotsRouter } from '@lskjs/bots-router';
 import { IModel, IModelKeyValue, IModelsModule } from '@lskjs/db';
 import { IAsyncModuleKeyValue, ILogger, Module } from '@lskjs/module';
+import { createAsyncModule } from '@lskjs/module/utils/createAsyncModule';
 // import asyncMapValues from '@lskjs/utils/asyncMapValues';
 // @ts-ignore
 import importFn from '@lskjs/utils/importFn';
@@ -156,15 +157,30 @@ export default class BotsModule extends Module {
         this.log.warn(`Can't find provider '${provider}' for bot '${key}'`);
         return null;
       }
-      const Provider = await importFn(providers[provider]);
-      return Provider.create({ app: this.app, botsModule: this, config, key });
+      return createAsyncModule(providers[provider], {
+        app: this.app,
+        botsModule: this,
+        config,
+        key,
+      });
+      // const Provider = await importFn(providers[provider]);
+      // return Provider.create({ app: this.app, botsModule: this, config, key });
     });
 
     this.log.debug('bots', Object.keys(this.bots));
     const currentPlugins = await this.getPlugins();
     this.plugins = await asyncMapValues(currentPlugins, async (pluginFn, name) => {
-      const Plugin = await importFn(pluginFn);
       const pluginConfig = pluginsConfig && pluginsConfig[name];
+      return createAsyncModule(pluginFn, {
+        app: this.app,
+        __parent: this,
+        botsModule: this,
+        bots: this.bots,
+        config: pluginConfig || {},
+      });
+
+      // const pluging = await this.module(`plugins.${name}`);
+      const Plugin = await importFn(pluginFn);
       // if (__DEV__) this.log.trace({ Plugin, pluginConfig });
       if (pluginConfig === false) return null;
       return Plugin.create({
