@@ -63,6 +63,23 @@ export default class BotsModule extends Module {
     }
   }
 
+  async getConfig(): Promise<Record<string, any>> {
+    const config =  {
+      ...(this.config || {}),
+      ...(this.__config || {}),
+      providers: {
+        ...(this.config.providers || {}),
+        ...(this.__config.providers || {}),
+      },
+      plugins: {
+        ...(this.config.plugins || {}),
+        ...(this.__config.plugins || {}),
+      },
+    };
+    console.log(this.config, this.__config, config{config, })
+    return config;
+  }
+
   async model(...args: any[]): Promise<IModel | IModelKeyValue> {
     const modelsModule = (await this.module('models')) as IModelsModule;
     // @ts-ignore
