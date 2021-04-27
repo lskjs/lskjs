@@ -2,7 +2,7 @@ import BaseBotPlugin from '@lskjs/bots-plugin';
 import get from 'lodash/get';
 // import extract from '@lskjs/extract';
 
-export default class LikesPlugin extends BaseBotPlugin {
+export default class DownloadBotPlugin extends BaseBotPlugin {
   providers = ['telegram'];
   // TODO: add i18
   _i18 = {

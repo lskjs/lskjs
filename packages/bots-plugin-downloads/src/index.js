@@ -1,2 +1,2 @@
-export * from './DownloadPlugin';
-export { default } from './DownloadPlugin';
+export * from './DownloadBotPlugin';
+export { default } from './DownloadBotPlugin';

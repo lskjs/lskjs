@@ -16,7 +16,6 @@ export class ActionModule extends Module {
       actionModule: this,
       ...ctxParams,
     });
-    console.log('actionChain', actionChain);
     return actionChain.runAction(actionParams);
   }
 }
