@@ -76,7 +76,6 @@ export default class BotsModule extends Module {
         ...(this.__config.plugins || {}),
       },
     };
-    console.log(this.config, this.__config, config{config, })
     return config;
   }
 
