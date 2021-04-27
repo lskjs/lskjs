@@ -22,8 +22,8 @@ export class ActionChain extends Module {
     };
     // action: actionType2,
     const { type: actionType1, action: actionType2, ...params } = actionParams;
-    const actionType = actionType1; // || actionType2;
-    this.log.debug({ actionType1, actionType2, actionType });
+    const actionType = actionType1 || actionType2;
+    // this.log.debug({ actionType1, actionType2, actionType });
     const action = await this.getAction(actionType);
     // console.log({ actionType, action });
     if (!action) {
