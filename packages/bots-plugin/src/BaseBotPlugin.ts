@@ -7,6 +7,12 @@ export abstract class BaseBotPlugin extends Module implements IBotPlugin {
   botsModule: any;
   providers: string[] = [];
   bots = {};
+  async getConfig(): Promise<Record<string, any>> {
+    return {
+      enable: true,
+      ...(await super.getConfig()),
+    };
+  }
 
   // abstract
   canRunBot(bot: IBotProvider): boolean {
@@ -43,6 +49,10 @@ export abstract class BaseBotPlugin extends Module implements IBotPlugin {
   }
   async run(): Promise<void> {
     await super.run();
+    if (!(this.config && this.config.enable)) {
+      this.log.warn(`${this.name} is not enabled`);
+      return;
+    }
     await this.runBots();
   }
 }
