@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.35](https://github.com/lskjs/cli/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
+
+
+### Bug Fixes
+
+* **bots:** remove logs ([e53bfac](https://github.com/lskjs/cli/commit/e53bfaccf17411ef2e61c476ae4069e6fac6e5f0))
+* **bots-plugin-downloads:** refactoring ([6808511](https://github.com/lskjs/cli/commit/68085117df0d773d21f87c12c733e7d455e48830))
+
+
+### Features
+
+* **bots:** merge configs ([2e97eea](https://github.com/lskjs/cli/commit/2e97eea537cbc9e74634c8215775e23031bab824))
+* **bots-plugin-portal:** add disable options for bot ([5a35845](https://github.com/lskjs/cli/commit/5a358459ca5b39814a68b4ac3f4279a232b8a66c))
+
+
+
+
+
 # [2.3.0-beta.34](https://github.com/lskjs/cli/compare/v2.3.0-beta.33...v2.3.0-beta.34) (2021-04-27)
 
 

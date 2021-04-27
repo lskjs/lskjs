@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.35](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
+
+
+### Bug Fixes
+
+* **bots:** remove logs ([e53bfac](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/e53bfaccf17411ef2e61c476ae4069e6fac6e5f0))
+
+
+### Features
+
+* **bots:** merge configs ([2e97eea](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/2e97eea537cbc9e74634c8215775e23031bab824))
+
+
+
+
+
 # [2.3.0-beta.33](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.32...v2.3.0-beta.33) (2021-04-26)
 
 

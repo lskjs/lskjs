@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.35](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-likes/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
+
+**Note:** Version bump only for package @lskjs/bots-plugin-likes
+
+
+
+
+
 # [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-likes/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-likes
