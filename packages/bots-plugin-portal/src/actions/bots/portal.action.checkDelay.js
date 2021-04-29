@@ -1,8 +1,10 @@
-export default async function checkDelay({ ctx, bot, value }) {
-  const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
+export default async function checkDelay({ value }) {
+  // TODO: Разобраться, как импортировать модели
+  // const BotsTelegramMessageModel = await this.actionModule.app.model('models.BotsTelegramMessageModel');
 
-  const telegramChatId = bot.getMessageChatId(ctx);
-  const telegramMessage = bot.getMessage(ctx);
+  const BotsTelegramMessageModel = await this.app.module('models.BotsTelegramMessageModel');
+  const telegramChatId = this.bot.getMessageChatId(this.ctx);
+  const telegramMessage = this.bot.getMessage(this.ctx);
   const { from, chat, message_id } = telegramMessage;
 
   if (+telegramChatId < 0) return true;

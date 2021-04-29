@@ -1,4 +1,4 @@
-export default async function send2messages({ bot, to1, to2, text1, text2 }) {
+export default async function send2messages({ to1, to2, text1, text2 }) {
   const playbook = [
     {
       type: 'sendMessage',
@@ -15,5 +15,5 @@ export default async function send2messages({ bot, to1, to2, text1, text2 }) {
       text: text2,
     },
   ];
-  return this.runAction({ bot, action: playbook });
+  return this.runAction(playbook);
 }

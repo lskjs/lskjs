@@ -1,3 +1,3 @@
-export default async function remove({ ctx }) {
-  return ctx.deleteMessage();
+export default async function remove() {
+  return this.ctx.deleteMessage();
 }
