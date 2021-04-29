@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.36](https://github.com/lskjs/cli/compare/v2.3.0-beta.35...v2.3.0-beta.36) (2021-04-29)
+
+
+### Features
+
+* **bots-portal-plugin:** add forwardMessage and fix bugs in runCron ([c3a1cdf](https://github.com/lskjs/cli/commit/c3a1cdf4be1d74e0fde175f5c8da87fbde8a6e75))
+
+
+
+
+
 # [2.3.0-beta.35](https://github.com/lskjs/cli/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
 
 
