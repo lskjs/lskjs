@@ -26,6 +26,9 @@ export class RabbitModule extends Module {
     this.enabled = !this.config.disabled;
     if (!this.enabled) return;
     this.emitter = new EventEmitter();
+    this.isGracefulShutdown = false;
+    this.isFirstRun = true; // не очень
+    this.messagesUnacked = 0;
     if (!this.config.uri) {
       this.log.warn('!config.uri using localhost');
       this.config.uri = 'amqp://localhost';
@@ -70,6 +73,10 @@ export class RabbitModule extends Module {
     }
     this.log.debug('connected');
     this.emit('connected');
+    if (this.isFirstRun) {
+      this.gracefulEvents();
+      this.isFirstRun = false;
+    }
   }
   async run() {
     if (!this.enabled) return;
@@ -81,6 +88,29 @@ export class RabbitModule extends Module {
     }
   }
   onOpen() {}
+  gracefulEvents() {
+    process.on('SIGTERM', () => {
+      this.log.debug('SIGTERM');
+      this.log.debug('Сообщений на момент SIGTERM:', this.messagesUnacked);
+      // process.exit(0);
+      if (this.isGracefulShutdown) return process.exit(0);
+      this.isGracefulShutdown = true;
+      this.gracefulShutdown();
+    });
+  }
+  async gracefulShutdown() {
+    this.log.debug('Прекращаю брать новые задачи');
+    await this.cancel();
+    this.log.debug('Жду окончания взятых задач');
+    while (this.messagesUnacked > 0) {
+      // eslint-disable-next-line no-await-in-loop
+      await Bluebird.delay(100);
+    }
+    this.log.debug('Закрываю подключения и каналы');
+    await this.stop();
+    this.log.debug('Выхожу из приложения');
+    process.exit(0);
+  }
   async restart() {
     try {
       await this.cancel();
@@ -91,7 +121,9 @@ export class RabbitModule extends Module {
     }
   }
   debouncedOnError = debounce((...args) => {
-    this.onError(...args);
+    if (!this.isGracefulShutdown) {
+      this.onError(...args);
+    }
   }, 1000);
   async onError(err) {
     this.emit('connectionError');
@@ -102,10 +134,14 @@ export class RabbitModule extends Module {
     this.restart();
   }
   async ack(msg, { allUpTo } = {}) {
-    return this.listenChannel.ack(msg, allUpTo);
+    const ack = await this.listenChannel.ack(msg, allUpTo);
+    this.messagesUnacked -= 1;
+    return ack;
   }
   async nack(msg, { allUpTo, requeue } = {}) {
-    return this.listenChannel.nack(msg, allUpTo, requeue);
+    const nack = await this.listenChannel.nack(msg, allUpTo, requeue);
+    this.messagesUnacked -= 1;
+    return nack;
   }
   async parse() {
     throw 'not implemented worker.parse()';
@@ -224,7 +260,11 @@ export class RabbitModule extends Module {
       this.log.warn(`[${q}] prefetch == 0, rabbit.consume ignore`);
       return null;
     }
-    const data = await this.listenChannel.consume(q, callback, options);
+    const newCallback = (...args) => {
+      this.messagesUnacked += 1;
+      callback(...args);
+    };
+    const data = await this.listenChannel.consume(q, newCallback, options);
     this.consumerTag = data.consumerTag;
     return data;
     // await Bluebird.delay(1000);
