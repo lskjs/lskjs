@@ -88,8 +88,8 @@ export default class PortalPlugin extends BaseBotPlugin {
       if (!action) return null;
       this.log.debug('rule:', rule);
       const actionModule = await this.module('action');
+      // return actionModule.runAction(action, { event, ctx, bot, ...rule, ...this });
       return actionModule.runAction(action, { event, ctx, bot, ...rule });
-      // return runAction.call(this, { event, ctx, bot, ...rule });
     });
 
     // let delay = false;
