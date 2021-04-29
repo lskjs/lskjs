@@ -1,11 +1,26 @@
 /* eslint-disable global-require */
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
+import isEmpty from 'lodash/isEmpty';
+import isObjectLike from 'lodash/isObjectLike';
 
 export class ActionChain extends Module {
   getAction(...args) {
     return this.actionModule.getAction(...args);
   }
+
+  async nextAction({ actionParams, res }) {
+    const { then: actionThen, else: actionElse } = actionParams;
+
+    if (actionThen && !isEmpty(actionElse) && res) {
+      return this.runAction(actionThen);
+    }
+    if (actionElse && !isEmpty(actionElse) && !res) {
+      return this.runAction(actionElse);
+    }
+    return null;
+  }
+
   async runAction(actionParams = {}) {
     // , otherParams = {}
     if (Array.isArray(actionParams)) {
@@ -31,8 +46,10 @@ export class ActionChain extends Module {
     }
     this.log.trace('[action]', actionType);
     try {
+      // this.log.debug({ actionParams });
       let res = await action.bind(this)(params);
-      if (typeof res === 'string') res = { res };
+      if (!isObjectLike(res)) res = { res };
+      res.next = await this.nextAction({ actionParams, ...res });
       return {
         type: actionType,
         ...res,
