@@ -10,7 +10,7 @@ async function updateRules({ ctx, bot }) {
   return [...this.rules, ...userRules];
 }
 
-export default async function getActiveRules({ ctx, bot } = {})  {
+export default async function getActiveRules({ ctx, bot } = {}) {
   const pack = {};
   pack.userId = bot.getUserId(ctx);
   pack.chatType = bot.getMessageChatType(ctx);
@@ -80,11 +80,11 @@ export default async function getActiveRules({ ctx, bot } = {})  {
   };
 
   const activeRules = rules.filter((rule) => {
-    const { criteria = {}, when, action } = rule;
-    if (when) {
-      this.log.trace('!!when');
-      return false;
-    }
+    const { criteria = {}, action } = rule;
+    // if (when) {
+    //   this.log.trace('!!when');
+    //   return false;
+    // }
     if (!checkCriteria(criteria)) {
       this.log.trace('!checkCriteria');
       return false;

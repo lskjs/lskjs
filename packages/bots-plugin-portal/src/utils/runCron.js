@@ -1,39 +1,28 @@
-import cron from 'node-cron';
-
-import { runAction } from '.';
+import Err from '@lskjs/utils/Err';
+import nodecron from 'node-cron';
 
 export default function runCron({ bot }) {
-  const crons = {};
-  this.rules
-    .filter((rule) => {
-      if (typeof rule.when === 'string' && cron.validate(rule.when)) return true;
-
-      if (Array.isArray(rule.when)) {
-        return rule.when.every((i) => typeof i === 'string' && cron.validate(i));
-      }
-      return false;
-    })
-    .forEach((rule) => {
-      const { when } = rule;
-      if (Array.isArray(when)) {
-        when.forEach((r) => {
-          crons[r] = {
-            rule,
-            cron: cron.schedule(r, () => {
-              this.log.debug(`CRON action on '${r}'`, rule);
-              runAction.call(this, { bot, ...rule });
-            }),
-          };
-        });
-        return;
-      }
-      crons[when] = {
+  const initedCrons = [];
+  this.rules.forEach((rule) => {
+    if (!rule.cron) return;
+    const times = Array.isArray(rule.cron) ? rule.cron : [rule.cron];
+    times.forEach((time) => {
+      if (!(typeof time === 'string' && nodecron.validate(time))) throw new Err('CRON_NOT_VALID', { data: { time } });
+      initedCrons.push({
+        time,
         rule,
-        cron: cron.schedule(rule.when, () => {
-          this.log.debug(`CRON action on '${when}'`, rule);
-          runAction.call(this, { bot, ...rule });
+        schedule: nodecron.schedule(time, () => {
+          this.log.trace(`CRON action on '${time}'`, rule);
+          this.runAction({ bot, ...rule });
         }),
-      };
+      });
     });
-  return crons;
+  });
+  if (initedCrons.length) {
+    this.log.debug(
+      'runCron',
+      initedCrons.map((cron) => cron.time),
+    );
+  }
+  return initedCrons;
 }
