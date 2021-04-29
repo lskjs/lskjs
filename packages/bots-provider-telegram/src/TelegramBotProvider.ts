@@ -441,10 +441,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
       ...initExtra,
     };
     // console.log({extra})
-    const msg = this.client.telegram.sendMessage(this.getMessageTargetId(ctx), payload, extra).catch((err: any) => {
-      this.log.error(err);
-      throw err;
-    });
+    const msg = await this.client.telegram
+      .sendMessage(this.getMessageTargetId(ctx), payload, extra)
+      .catch((err: any) => {
+        this.log.error(err);
+        throw err;
+      });
     await this.saveMessage(msg);
     return msg;
   }
@@ -490,19 +492,19 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
   async sendMessage(ctx: any, ...args: any[]) {
     this.log.trace('sendMessage');
-    const msg = this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
   async sendSticker(ctx: any, ...args: any[]) {
     this.log.trace('sendSticker');
-    const msg = this.client.telegram.sendSticker(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendSticker(this.getMessageTargetId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
   async sendAnimation(ctx: any, ...args: any[]) {
     this.log.trace('sendAnimation');
-    const msg = this.client.telegram.sendAnimation(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendAnimation(this.getMessageTargetId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
@@ -514,7 +516,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
   async sendPhoto(ctx: any, ...args: any[]) {
     this.log.trace('sendPhoto');
-    const msg = this.client.telegram.sendPhoto(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendPhoto(this.getMessageTargetId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
