@@ -11,12 +11,19 @@ export class ActionChain extends Module {
 
   async nextAction({ actionParams, res, ...props }) {
     const { then: actionThen, else: actionElse, fault1, fault2 } = actionParams;
+    const { messageDayAgo, message2DaysAgo } = props;
 
     if (actionThen && !isEmpty(actionElse) && res) {
       return this.runAction(actionThen);
     }
     if (actionElse && !isEmpty(actionElse) && !res) {
       return this.runAction(actionElse);
+    }
+    if (fault2 && !isEmpty(fault2) && !res && !messageDayAgo && !message2DaysAgo) {
+      return this.runAction(fault2);
+    }
+    if (fault1 && !isEmpty(fault1) && !res && !messageDayAgo) {
+      return this.runAction(fault1);
     }
     return null;
   }

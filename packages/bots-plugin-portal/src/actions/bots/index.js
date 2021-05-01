@@ -3,6 +3,7 @@
 export default {
   checkDelay: require('./checkDelay').default,
   checkMessage: require('./checkMessage').default,
+  checkChallenge: require('./checkChallenge').default,
 
   pause: require('./pause').default,
   remove: require('./remove').default,
