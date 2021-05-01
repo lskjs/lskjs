@@ -6,7 +6,7 @@ export default async function checkMessage(params) {
 
   if (mongo && !isEmpty(mongo)) {
     const message = await BotsTelegramMessageModel.findOne(mongo).select('_id').lean();
-    return !!message;
+    return { res: !!message, data: message };
   }
 
   if (criteria && !isEmpty(criteria)) {
@@ -22,8 +22,8 @@ export default async function checkMessage(params) {
     if (messageId) data.date = messageId;
 
     const message = await BotsTelegramMessageModel.findOne(data).select('_id').lean();
-    return !!message;
+    return { res: !!message, data: message };
   }
 
-  return false;
+  return { res: false, data: undefined };
 }

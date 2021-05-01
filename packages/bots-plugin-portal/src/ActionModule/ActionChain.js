@@ -1,16 +1,16 @@
 /* eslint-disable global-require */
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
+import Bluebird from 'bluebird';
 import isEmpty from 'lodash/isEmpty';
-import isObjectLike from 'lodash/isObjectLike';
 
 export class ActionChain extends Module {
   getAction(...args) {
     return this.actionModule.getAction(...args);
   }
 
-  async nextAction({ actionParams, res }) {
-    const { then: actionThen, else: actionElse } = actionParams;
+  async nextAction({ actionParams, res, ...props }) {
+    const { then: actionThen, else: actionElse, fault1, fault2 } = actionParams;
 
     if (actionThen && !isEmpty(actionElse) && res) {
       return this.runAction(actionThen);
@@ -48,11 +48,15 @@ export class ActionChain extends Module {
     try {
       // this.log.debug({ actionParams });
       let res = await action.bind(this)(params);
-      if (!isObjectLike(res)) res = { res };
-      res.next = await this.nextAction({ actionParams, ...res });
+
+      if (!Array.isArray(res)) res = [res];
+      const data = await Bluebird.map(res, async (response) => {
+        response.next = await this.nextAction({ actionParams, ...response });
+        return response;
+      });
       return {
         type: actionType,
-        ...res,
+        data,
       };
     } catch (err) {
       this.log.error('[action] ', actionType, err);
