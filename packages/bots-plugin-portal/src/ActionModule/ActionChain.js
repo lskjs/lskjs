@@ -13,7 +13,7 @@ export class ActionChain extends Module {
     const { then: actionThen, else: actionElse, fault1, fault2 } = actionParams;
     const { messageDayAgo, message2DaysAgo } = props;
 
-    if (actionThen && !isEmpty(actionElse) && res) {
+    if (actionThen && !isEmpty(actionThen) && res) {
       return this.runAction(actionThen);
     }
     if (actionElse && !isEmpty(actionElse) && !res) {
