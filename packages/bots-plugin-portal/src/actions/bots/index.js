@@ -15,6 +15,8 @@ export default {
   copyMessage: require('./copyMessage').default,
   sendMessage: require('./sendMessage').default,
 
+  findMessage: require('./findMessage').default,
+
   messageTrim: require('./messageTrim').default,
   messageAppend: require('./messageAppend').default,
 };
