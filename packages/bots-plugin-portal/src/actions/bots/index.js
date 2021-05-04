@@ -16,4 +16,5 @@ export default {
   sendMessage: require('./sendMessage').default,
 
   messageTrim: require('./messageTrim').default,
+  messageAppend: require('./messageAppend').default,
 };
