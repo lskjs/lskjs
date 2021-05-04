@@ -115,9 +115,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number | null {
     if (['number', 'string'].includes(typeof ctx)) return ctx;
     const message = this.getMessage(ctx);
-    if (get(message, 'chat.id')) return get(message, 'chat.id');
-    if (get(message, 'from.id')) return get(message, 'from.id');
-    return null;
+    return get(message, 'message_id', null);
   }
   getRepliedMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx {
     const message = this.getMessage(ctx);
@@ -495,11 +493,19 @@ export default class TelegramBotProvider extends BaseBotProvider {
       return err;
     }
   }
-  deleteMessage(ctx: TelegramIBotProviderMessageCtx): any {
+  async deleteMessage(ctx: TelegramIBotProviderMessageCtx): any {
+    const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
     this.log.trace('deleteMessage');
     const chatId = this.getMessageChatId(ctx);
     const messageId = this.getMessageTargetId(ctx);
-    // console.log({chatId, messageId})
+
+    await BotsTelegramMessageModel.updateOne(
+      {
+        'chat.id': chatId,
+        message_id: messageId,
+      },
+      { 'meta.status': 'deleted' },
+    );
     return this.client.telegram.deleteMessage(chatId, messageId);
   }
   async sendMessage(ctx: any, ...args: any[]) {
