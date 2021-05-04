@@ -1,3 +1,4 @@
 export default async function remove() {
-  return this.ctx.deleteMessage();
+  const message = await this.bot.deleteMessage(this.ctx);
+  return { res: !!message, data: message };
 }

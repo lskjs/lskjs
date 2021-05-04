@@ -1,9 +1,4 @@
-// import Bluebird from 'bluebird';
-
 export default async function reply({ text }) {
-  return this.bot.reply(this.ctx, text);
+  const message = await this.bot.reply(this.ctx, text);
+  return { res: !!message, data: message };
 }
-
-// export default async function sendMessage({ bot, to, ...params }) {
-//   return bot.reply(params.text || params);
-// }
