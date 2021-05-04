@@ -14,4 +14,6 @@ export default {
   forwardMessage: require('./forwardMessage').default,
   copyMessage: require('./copyMessage').default,
   sendMessage: require('./sendMessage').default,
+
+  messageTrim: require('./messageTrim').default,
 };

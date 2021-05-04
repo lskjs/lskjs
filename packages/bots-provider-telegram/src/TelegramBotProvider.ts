@@ -2,6 +2,7 @@ import { IBotProviderMessageCtx } from '@lskjs/bots-base/types';
 import BaseBotProvider from '@lskjs/bots-provider';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import set from 'lodash/set';
 import { session, Telegraf } from 'telegraf';
 
 export type TelegramIBotProviderMessageCtx = IBotProviderMessageCtx;
@@ -154,6 +155,17 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (!message) return null;
     if (message.caption) return message.caption;
     if (message.text) return message.text;
+    return null;
+  }
+  setMessageText(ctx: TelegramIBotProviderMessageCtx, text: string): string | null {
+    if (typeof ctx === 'string') return null;
+    // eslint-disable-next-line max-len
+    if (get(ctx, 'update.callback_query.message.caption')) return set(ctx, 'update.callback_query.message.caption', text);
+    if (get(ctx, 'update.callback_query.message.text')) return set(ctx, 'update.callback_query.message.text', text);
+    if (get(ctx, 'update.channel_post.caption')) return set(ctx, 'update.channel_post.caption', text);
+    if (get(ctx, 'update.channel_post.text')) return set(ctx, 'update.channel_post.text', text);
+    if (get(ctx, 'message.caption')) return set(ctx, 'message.caption', text);
+    if (get(ctx, 'message.text')) return set(ctx, 'message.text', text);
     return null;
   }
   async getChatMember(chatId: string | number, userId: string | number): any {
