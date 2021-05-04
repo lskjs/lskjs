@@ -12,6 +12,7 @@ export default async function checkChallenge(params) {
   return Bluebird.map(challenges, async (challenge) => {
     const data = {
       createdAt: {},
+      'meta.status': { $ne: 'deleted' },
     };
     const { chatId, userId, chatType, messageType, messageText, challengeStart, challengeFinish } = challenge;
 

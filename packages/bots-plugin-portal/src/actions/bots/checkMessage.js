@@ -10,16 +10,16 @@ export default async function checkMessage(params) {
   }
 
   if (criteria && !isEmpty(criteria)) {
-    const data = {};
+    const data = { 'meta.status': { $ne: 'deleted' } };
     const { chatId, userId, chatType, messageType, messageText, messageDate, messageId } = criteria;
 
     if (userId) data['from.id'] = userId;
     if (chatId) data['chat.id'] = chatId;
     if (chatType) data['chat.type'] = chatType;
     if (messageType) data.type = messageType;
-    if (messageText) data.text = messageText;
+    if (messageText) data.$or = [{ text: messageText }, { caption: messageText }];
     if (messageDate) data.date = messageDate;
-    if (messageId) data.date = messageId;
+    if (messageId) data.message_id = messageId;
 
     const message = await BotsTelegramMessageModel.findOne(data).select('_id').lean();
     return { res: !!message, data: message };
