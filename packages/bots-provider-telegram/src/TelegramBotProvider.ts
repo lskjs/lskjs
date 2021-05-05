@@ -158,7 +158,8 @@ export default class TelegramBotProvider extends BaseBotProvider {
   setMessageText(ctx: TelegramIBotProviderMessageCtx, text: string): string | null {
     if (typeof ctx === 'string') return null;
     // eslint-disable-next-line max-len
-    if (get(ctx, 'update.callback_query.message.caption')) return set(ctx, 'update.callback_query.message.caption', text);
+    if (get(ctx, 'update.callback_query.message.caption'))
+      return set(ctx, 'update.callback_query.message.caption', text);
     if (get(ctx, 'update.callback_query.message.text')) return set(ctx, 'update.callback_query.message.text', text);
     if (get(ctx, 'update.channel_post.caption')) return set(ctx, 'update.channel_post.caption', text);
     if (get(ctx, 'update.channel_post.text')) return set(ctx, 'update.channel_post.text', text);
@@ -451,12 +452,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
       ...initExtra,
     };
     // console.log({extra})
-    const msg = await this.client.telegram
-      .sendMessage(this.getMessageTargetId(ctx), payload, extra)
-      .catch((err: any) => {
-        this.log.error(err);
-        throw err;
-      });
+    const msg = await this.client.telegram.sendMessage(this.getMessageChatId(ctx), payload, extra).catch((err: any) => {
+      this.log.error(err);
+      throw err;
+    });
     await this.saveMessage(msg);
     return msg;
   }
@@ -510,31 +509,31 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
   async sendMessage(ctx: any, ...args: any[]) {
     this.log.trace('sendMessage');
-    const msg = await this.client.telegram.sendMessage(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendMessage(this.getMessageChatId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
   async sendSticker(ctx: any, ...args: any[]) {
     this.log.trace('sendSticker');
-    const msg = await this.client.telegram.sendSticker(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendSticker(this.getMessageChatId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
   async sendAnimation(ctx: any, ...args: any[]) {
     this.log.trace('sendAnimation');
-    const msg = await this.client.telegram.sendAnimation(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendAnimation(this.getMessageChatId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
   async sendDocument(ctx: any, ...args: any[]) {
     this.log.trace('sendDocument');
-    const msg = this.client.telegram.sendDocument(this.getMessageTargetId(ctx), ...args);
+    const msg = this.client.telegram.sendDocument(this.getMessageChatId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
   async sendPhoto(ctx: any, ...args: any[]) {
     this.log.trace('sendPhoto');
-    const msg = await this.client.telegram.sendPhoto(this.getMessageTargetId(ctx), ...args);
+    const msg = await this.client.telegram.sendPhoto(this.getMessageChatId(ctx), ...args);
     await this.saveMessage(msg);
     return msg;
   }
