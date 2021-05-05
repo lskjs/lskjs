@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
-import Bluebird from 'bluebird';
 import isEmpty from 'lodash/isEmpty';
 
 export class ActionChain extends Module {
@@ -55,15 +54,11 @@ export class ActionChain extends Module {
     try {
       // this.log.debug({ actionParams });
       let res = await action.bind(this)(params);
-
-      if (!Array.isArray(res)) res = [res];
-      const data = await Bluebird.map(res, async (response) => {
-        response.next = await this.nextAction({ actionParams, ...response });
-        return response;
-      });
+      if (res instanceof Object) res = res.res;
+      await this.nextAction({ actionParams, res });
       return {
         type: actionType,
-        data,
+        ...res,
       };
     } catch (err) {
       this.log.error('[action] ', actionType, err);

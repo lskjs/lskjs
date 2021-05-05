@@ -13,5 +13,5 @@ export default async function findMessage(params) {
 
   const message = await BotsTelegramMessageModel.findOne(data).lean();
   if (message) this.ctx = { ...this.ctx, message };
-  return { res: !!message, data: message };
+  return message;
 }

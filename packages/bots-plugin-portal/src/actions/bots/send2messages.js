@@ -15,6 +15,5 @@ export default async function send2messages({ to1, to2, text1, text2 }) {
       text: text2,
     },
   ];
-  const result = await this.runAction(playbook);
-  return { res: !!result, data: result };
+  return this.runAction(playbook);
 }
