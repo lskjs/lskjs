@@ -46,7 +46,7 @@
     "express-jwt": "6.0.0",
     "nanoid": "^3.1.10",
     "object-hash": "2.0.3",
-    "redis": "3.0.2",
+    "redis": "3.1.1",
     "socket.io": "2.3.0",
     "socket.io-as-promised": "1.0.0",
     "socket.io-redis": "5.3.0",
