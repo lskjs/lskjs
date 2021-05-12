@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.101.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.101.0...v1.101.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **uapp:** undefined param object ([0836e31](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/0836e31ddbfbee9723ce6af2ac44068c4e10d1ca))
+
+
+
+
+
 # [1.101.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.100.2...v1.101.0) (2021-05-12)
 
 
