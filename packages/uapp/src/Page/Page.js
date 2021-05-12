@@ -49,12 +49,18 @@ export default class Page {
       ...(this.rootState || {}),
     };
   }
-  getMeta() {
+  getMeta({ siteName }) {
     const meta = (this.state && this.state.meta) || {};
-    const title = (this.state.metas || [])
+    const _siteName = siteName || this.siteName;
+    let title = (this.state.metas || [])
       .map((t) => t.title)
+      .filter((o) => !!o)
       .reverse()
-      .join(' - ');
+      .join(' – ');
+    if (_siteName) {
+      if (title) title = `${title} | ${_siteName}`;
+      else title = _siteName;
+    }
     return {
       ...meta,
       title,
