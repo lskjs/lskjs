@@ -49,7 +49,7 @@ export default class Page {
       ...(this.rootState || {}),
     };
   }
-  getMeta({ siteName }) {
+  getMeta({ siteName } = {}) {
     const meta = (this.state && this.state.meta) || {};
     const _siteName = siteName || this.siteName;
     let title = (this.state.metas || [])
