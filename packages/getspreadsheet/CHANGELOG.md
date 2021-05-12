@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.101.0](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.100.2...v1.101.0) (2021-05-12)
+
+
+### Features
+
+* --nested for getspredsheet ([7ac5510](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/7ac5510a2cc5007081083304fe00b6f682846ef9))
+
+
+
+
+
 ## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.99.1...v1.100.1) (2021-02-02)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet

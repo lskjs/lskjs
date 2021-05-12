@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.101.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.100.2...v1.101.0) (2021-05-12)
+
+
+### Bug Fixes
+
+* **uapp:** meta title without extra dashes ([5707c4f](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/5707c4fbdbe222525bf3ce4a193a0908c6465f6c))
+
+
+
+
+
 ## [1.100.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.100.1...v1.100.2) (2021-02-24)
 
 
