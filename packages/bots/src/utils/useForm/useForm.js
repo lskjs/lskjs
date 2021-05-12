@@ -1,7 +1,7 @@
 import { createForm } from './createForm';
 import { renderForm } from './renderForm';
 
-export const useForm = async function ({ i18, req, onSubmit, ...formSchema2 }) {
+export const useForm = async function ({ i18, req, onSubmit, autoSubmitEnabled, ...formSchema2 }) {
   const { bot, query, path, ctx } = req;
   const { action = 'init', field, values = {}, ...otherQuery } = query;
 
@@ -94,6 +94,13 @@ export const useForm = async function ({ i18, req, onSubmit, ...formSchema2 }) {
       query: { ...otherQuery, action: 'set', field: nextField, values: form.getValues() },
     });
   }
+
+  if(action === 'finish' && autoSubmitEnabled) {
+    const { formMessageId, formMessageChatId } = query;
+    await bot.client.telegram.deleteMessage(formMessageChatId, formMessageId);
+    return onSubmit(values);
+  }
+
   if (action === 'finish') {
     const { repliedMessageId, formMessageId, formMessageChatId } = query;
     await bot.client.telegram.editMessageText(
