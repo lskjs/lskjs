@@ -15,6 +15,7 @@ export default {
   forwardMessage: require('./forwardMessage').default,
   copyMessage: require('./copyMessage').default,
   sendMessage: require('./sendMessage').default,
+  replyInterview: require('./replyInterview').default,
 
   findMessage: require('./findMessage').default,
 
