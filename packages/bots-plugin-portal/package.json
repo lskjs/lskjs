@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@lskjs/bots": "^2.3.0-beta.35",
-    "@lskjs/bots-base": "2.3.0-beta.10",
+    "@lskjs/bots-base": "^2.3.0-beta.10",
     "@lskjs/bots-plugin": "2.3.0-beta.10",
     "@lskjs/module": "^2.3.0-beta.26",
     "node-cron": "^3.0.0"
