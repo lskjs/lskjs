@@ -6,7 +6,7 @@ export default {
   BotsTelegramImpressionModel: () => import('./BotsTelegramImpressionModel'),
   BotsTelegramPortalRulesModel: () => import('./BotsTelegramPortalRulesModel'),
   BotsTelegramChatModel: () => import('./BotsTelegramChatModel'),
-  BotsTelegramPortalRulesModel: () => import('./BotsTelegramPortalRulesModel'),
   BotsTelegramUserModel: () => import('./BotsTelegramUserModel'),
   BotsUserDataModel: () => import('./BotsUserDataModel'),
+  BotsTelegramUserStorageModel: () => import('./BotsTelegramUserStorageModel'),
 };
