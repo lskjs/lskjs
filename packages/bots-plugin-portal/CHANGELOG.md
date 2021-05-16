@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/bots-plugin-portal
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** canonize response actions ([22066bc](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/22066bcbf8a46e5476a6c8b5a28cdc41cac44020))
+* **bots-plugin-portal:** fix action chain ([ea68631](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/ea686317b29e06810cd6d2f93f4e8b74ac5811e7))
+* **bots-plugin-portal:** fix actionChain ([8ad8f60](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/8ad8f60be23c16c40cb86f3f439d7c0ae84b8d1d))
+* **bots-plugin-portal:** fix ActionChain ([dff6383](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/dff63839d16def56c3640ddcd29661f67c81383a))
+* **bots-plugin-portal:** fix actions ([5950473](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/5950473edcf2c8ee77a7a7d688e0cef8e22b846f))
+* **bots-plugin-portal:** fix check message and check challenge ([d20f73a](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/d20f73a7f54eacc5d3a0eb4642b812b352534b01))
+* **bots-plugin-portal:** fix checkDelay and rename actions ([43c8356](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/43c83561723eb2fff94d58b9f107ab27a8458677))
+* **bots-plugin-portal:** fix cron ([e85e7e0](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/e85e7e0f581f2e3f958c06c6f5e15a8710e6eec9))
+* **bots-plugin-portal:** fix models in module ([f38c347](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/f38c34744f09b461a1e6e0843605acd4cec9332a))
+
+
+### Features
+
+* **bots-plugin-portal:** add action checkInterview ([0c036fd](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/0c036fdac92990fe1520c77adae043b0ceefe750))
+* **bots-plugin-portal:** add action replyInterview ([c7d0bd5](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/c7d0bd53afce5da67b22ec36e0b5a7c80dcfc880))
+* **bots-plugin-portal:** add checkChallenge ([c368267](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/c36826729bcbd45d81b179cf9b434c0c1904c9b9))
+* **bots-plugin-portal:** add checkMessage ([77b42e4](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/77b42e49a0d307fde892b0645b569fa63092e4c4))
+* **bots-plugin-portal:** add messageAppend ([8a7780d](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/8a7780d27c4681562184fbfaa066a542325f7f1d))
+* **bots-plugin-portal:** add messageTrim ([e11ff8c](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/e11ff8cc8250a4ba6d12fe649ae14e0a0ac693ee))
+* **bots-plugin-portal:** add then-else ([8c3df4d](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/8c3df4dcb7157d1942ceda97813ebd77abe45b5d))
+* **bots-plugin-portal:** find message ([1bbe2f0](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/1bbe2f0bb9dd2dbb0b0cc2a8c9bfee5be715de80))
+
+
+
+
+
 # [2.3.0-beta.36](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.35...v2.3.0-beta.36) (2021-04-29)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots",
-  "version": "2.3.0-beta.35",
+  "version": "2.3.0-beta.38",
   "description": "LSK.js module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -30,7 +30,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots-base": "2.3.0-beta.26",
+    "@lskjs/bots-base": "2.3.0-beta.38",
     "@lskjs/bots-router": "2.3.0-beta.26",
     "@lskjs/module": "2.3.0-beta.26",
     "@lskjs/utils": "2.3.0-beta.22"

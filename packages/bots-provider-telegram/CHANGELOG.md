@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix deleteMessage ([21810b4](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/21810b4ddfc645a1103fe426cd6635565652b465))
+* **bots-provider-telegram:** fix promises ([cc507b6](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/cc507b6cb3f320a5faf9c0402ba1cfd8fb05ca77))
+* **bots-provider-telegram:** replace message target to chat id ([979720f](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/979720f8932cd80c0ccd51124e1856348f2e52dd))
+
+
+### Features
+
+* **bots-plugin-portal:** add messageTrim ([e11ff8c](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/e11ff8cc8250a4ba6d12fe649ae14e0a0ac693ee))
+
+
+
+
+
 # [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
 
 

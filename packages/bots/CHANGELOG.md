@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Features
+
+* **bots:** add model BotsTelegramUserStorageModel ([00b3105](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/00b3105393523249b5a702dd0c0599212c35212c))
+
+
+
+
+
 # [2.3.0-beta.35](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
 
 
