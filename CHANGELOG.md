@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.41](https://github.com/lskjs/cli/compare/v2.3.0-beta.40...v2.3.0-beta.41) (2021-05-16)
+
+
+### Bug Fixes
+
+* fix packages ([5fca247](https://github.com/lskjs/cli/commit/5fca2475f1a241affabccd81e0a85fcd1b18a29d))
+
+
+
+
+
 # [2.3.0-beta.40](https://github.com/lskjs/cli/compare/v2.3.0-beta.39...v2.3.0-beta.40) (2021-05-16)
 
 **Note:** Version bump only for package @lskjs/cli-sample
