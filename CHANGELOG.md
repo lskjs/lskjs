@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.40](https://github.com/lskjs/cli/compare/v2.3.0-beta.39...v2.3.0-beta.40) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.39](https://github.com/lskjs/cli/compare/v2.3.0-beta.38...v2.3.0-beta.39) (2021-05-16)
+
+
+### Bug Fixes
+
+* fix packages ([5b8dd85](https://github.com/lskjs/cli/commit/5b8dd85a9465dda31a37f2ef43485dcc2bf6b6fe))
+
+
+
+
+
+# [2.3.0-beta.38](https://github.com/lskjs/cli/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/cli/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Bug Fixes
+
+* **bots-base:** add useForm2 ([5c11162](https://github.com/lskjs/cli/commit/5c11162564700a57bf211fa9d39a32af4b08499d))
+* **bots-plugin-portal:** canonize response actions ([22066bc](https://github.com/lskjs/cli/commit/22066bcbf8a46e5476a6c8b5a28cdc41cac44020))
+* **bots-plugin-portal:** fix action chain ([ea68631](https://github.com/lskjs/cli/commit/ea686317b29e06810cd6d2f93f4e8b74ac5811e7))
+* **bots-plugin-portal:** fix actionChain ([8ad8f60](https://github.com/lskjs/cli/commit/8ad8f60be23c16c40cb86f3f439d7c0ae84b8d1d))
+* **bots-plugin-portal:** fix ActionChain ([dff6383](https://github.com/lskjs/cli/commit/dff63839d16def56c3640ddcd29661f67c81383a))
+* **bots-plugin-portal:** fix actions ([5950473](https://github.com/lskjs/cli/commit/5950473edcf2c8ee77a7a7d688e0cef8e22b846f))
+* **bots-plugin-portal:** fix check message and check challenge ([d20f73a](https://github.com/lskjs/cli/commit/d20f73a7f54eacc5d3a0eb4642b812b352534b01))
+* **bots-plugin-portal:** fix checkDelay and rename actions ([43c8356](https://github.com/lskjs/cli/commit/43c83561723eb2fff94d58b9f107ab27a8458677))
+* **bots-plugin-portal:** fix cron ([e85e7e0](https://github.com/lskjs/cli/commit/e85e7e0f581f2e3f958c06c6f5e15a8710e6eec9))
+* **bots-plugin-portal:** fix models in module ([f38c347](https://github.com/lskjs/cli/commit/f38c34744f09b461a1e6e0843605acd4cec9332a))
+* **bots-provider-telegram:** fix deleteMessage ([21810b4](https://github.com/lskjs/cli/commit/21810b4ddfc645a1103fe426cd6635565652b465))
+* **bots-provider-telegram:** fix promises ([cc507b6](https://github.com/lskjs/cli/commit/cc507b6cb3f320a5faf9c0402ba1cfd8fb05ca77))
+* **bots-provider-telegram:** replace message target to chat id ([979720f](https://github.com/lskjs/cli/commit/979720f8932cd80c0ccd51124e1856348f2e52dd))
+
+
+### Features
+
+* **bots:** add model BotsTelegramUserStorageModel ([00b3105](https://github.com/lskjs/cli/commit/00b3105393523249b5a702dd0c0599212c35212c))
+* **bots-plugin-interview:** add interview plugin ([2ddd6c8](https://github.com/lskjs/cli/commit/2ddd6c8e31f8cf3be8f906514f0a8ae42b940efe))
+* **bots-plugin-portal:** add action checkInterview ([0c036fd](https://github.com/lskjs/cli/commit/0c036fdac92990fe1520c77adae043b0ceefe750))
+* **bots-plugin-portal:** add action replyInterview ([c7d0bd5](https://github.com/lskjs/cli/commit/c7d0bd53afce5da67b22ec36e0b5a7c80dcfc880))
+* **bots-plugin-portal:** add checkChallenge ([c368267](https://github.com/lskjs/cli/commit/c36826729bcbd45d81b179cf9b434c0c1904c9b9))
+* **bots-plugin-portal:** add checkMessage ([77b42e4](https://github.com/lskjs/cli/commit/77b42e49a0d307fde892b0645b569fa63092e4c4))
+* **bots-plugin-portal:** add messageAppend ([8a7780d](https://github.com/lskjs/cli/commit/8a7780d27c4681562184fbfaa066a542325f7f1d))
+* **bots-plugin-portal:** add messageTrim ([e11ff8c](https://github.com/lskjs/cli/commit/e11ff8cc8250a4ba6d12fe649ae14e0a0ac693ee))
+* **bots-plugin-portal:** add then-else ([8c3df4d](https://github.com/lskjs/cli/commit/8c3df4dcb7157d1942ceda97813ebd77abe45b5d))
+* **bots-plugin-portal:** find message ([1bbe2f0](https://github.com/lskjs/cli/commit/1bbe2f0bb9dd2dbb0b0cc2a8c9bfee5be715de80))
+
+
+
+
+
 # [2.3.0-beta.36](https://github.com/lskjs/cli/compare/v2.3.0-beta.35...v2.3.0-beta.36) (2021-04-29)
 
 
