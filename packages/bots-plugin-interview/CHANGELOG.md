@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.39](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-interview/compare/v2.3.0-beta.38...v2.3.0-beta.39) (2021-05-16)
+
+
+### Bug Fixes
+
+* fix packages ([5b8dd85](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-interview/commit/5b8dd85a9465dda31a37f2ef43485dcc2bf6b6fe))
+
+
+
+
+
 # [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-interview/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-interview
