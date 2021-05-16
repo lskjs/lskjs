@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.39](https://github.com/lskjs/lskjs/tree/master/packages/bots-base/compare/v2.3.0-beta.38...v2.3.0-beta.39) (2021-05-16)
+
+
+### Bug Fixes
+
+* fix packages ([5b8dd85](https://github.com/lskjs/lskjs/tree/master/packages/bots-base/commit/5b8dd85a9465dda31a37f2ef43485dcc2bf6b6fe))
+
+
+
+
+
+# [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots-base/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/bots-base
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/lskjs/tree/master/packages/bots-base/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Bug Fixes
+
+* **bots-base:** add useForm2 ([5c11162](https://github.com/lskjs/lskjs/tree/master/packages/bots-base/commit/5c11162564700a57bf211fa9d39a32af4b08499d))
+
+
+
+
+
 # [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots-base/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
 
 **Note:** Version bump only for package @lskjs/bots-base
