@@ -31,12 +31,14 @@
     "@babel/runtime": "7.12.5",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
+    "javascript-stringify": "^2.1.0",
+    "js-yaml": "^4.1.0",
     "lodash": "4.17.20"
   },
   "peerDependencies": {
     "@babel/runtime": "7.12.5",
     "axios": "0.21.1",
     "bluebird": "*",
-    "lodash": "4.17.20"
+    "lodash": "^4.17.20"
   }
 }

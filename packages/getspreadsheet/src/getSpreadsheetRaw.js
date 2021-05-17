@@ -4,7 +4,7 @@ import axios from 'axios';
 import auth from './auth';
 import get from './get';
 
-export default async (url) => {
+export async function getSpreadsheetRaw(url) {
   try {
     const s = new RegExp('/spreadsheets/d/([a-zA-Z0-9-_]+)').exec(url);
     let spreadsheetId;
@@ -51,4 +51,6 @@ export default async (url) => {
     }
   }
   return null;
-};
+}
+
+export default getSpreadsheetRaw;
