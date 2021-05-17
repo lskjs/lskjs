@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.43](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.42...v2.3.0-beta.43) (2021-05-17)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** add jsonToFile ([ae4e52e](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/ae4e52e77296f978d0bd6a8ab4b8ffeac5fc6440))
+
+
+
+
+
 # [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
 
 
