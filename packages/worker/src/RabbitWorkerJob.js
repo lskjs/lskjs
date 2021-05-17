@@ -26,6 +26,7 @@ export const apmMock = {
 
 export class RabbitWorkerJob extends Module {
   redeliveredCount = __DEV__ ? null : 10;
+
   async init() {
     await super.init();
     this.stats = this.worker.stats;
@@ -51,10 +52,22 @@ export class RabbitWorkerJob extends Module {
     if (!this.redeliveredCount) return false;
     return this.msg.fields.redelivered && this.msg.fields.deliveryTag > this.redeliveredCount;
   }
+
   success(res) {
+    return this.result(res);
+  }
+
+  error(res) {
+    return this.result(res);
+  }
+
+  result(res) {
+    this.data = res;
     return res;
   }
+
   async onSuccess() {
+    this.finishedAt = new Date();
     if (this.stats) this.stats.trigger({ event: 'success', startedAt: this.startedAt });
     if (this.tx) {
       this.tx.result = 'success';
@@ -62,6 +75,8 @@ export class RabbitWorkerJob extends Module {
     }
   }
   async onAckError(err) {
+    this.err = err;
+    this.finishedAt = new Date();
     if (this.stats) this.stats.trigger({ event: 'skip', startedAt: this.startedAt });
     if (this.tx) {
       this.tx.result = 'skip';
@@ -69,6 +84,8 @@ export class RabbitWorkerJob extends Module {
     }
   }
   async onError(err) {
+    this.err = err;
+    this.finishedAt = new Date();
     if (this.stats) this.stats.trigger({ event: 'error', startedAt: this.startedAt });
     if (this.tx) {
       // await this.apm.client.captureError(err);

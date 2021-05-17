@@ -106,7 +106,24 @@ export class RabbitWorker extends Module {
     await job.nackError(err);
   }
   async process(params) {
-    return this.Job.createAndRun({ params, worker: this, app: this.app, rabbit: this.rabbit, config: this.config });
+    const instance = await this.Job.createAndRun({
+      params,
+      worker: this,
+      app: this.app,
+      rabbit: this.rabbit,
+      config: this.config,
+    });
+
+    return {
+      code: instance.err ? Err.getCode(instance.err) : 0,
+      ...instance.getQueueMeta(),
+      startedAt: instance.startedAt,
+      finishedAt: instance.finishedAt,
+      runningTime: instance.finishedAt && instance.finishedAt - instance.startedAt,
+      status: instance.status,
+      data: instance.data,
+      err: instance.err,
+    };
   }
   async onConsume(msg) {
     this.stats.print({
