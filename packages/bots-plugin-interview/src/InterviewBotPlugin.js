@@ -2,6 +2,7 @@ import useForm from '@lskjs/bots-base/utils/useForm2';
 import BaseBotPlugin from '@lskjs/bots-plugin';
 import set from 'lodash/set';
 
+
 export default class InterviewBotPlugin extends BaseBotPlugin {
   providers = ['telegram'];
 
