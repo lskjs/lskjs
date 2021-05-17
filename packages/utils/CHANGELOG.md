@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.42](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **utils:** export of asyncMapValues ([33b4179](https://github.com/lskjs/ux/tree/master/packages/utils/commit/33b41798353f52a31de3ac2c9825ba92f9b07443))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/utils

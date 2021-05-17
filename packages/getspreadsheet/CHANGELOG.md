@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **getspreadsheet:** add utils for file generation ([27384a1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/27384a1d94baf16374203476ab685ad4b283fdae))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet

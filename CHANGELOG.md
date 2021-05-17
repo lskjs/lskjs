@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.42](https://github.com/lskjs/cli/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **getspreadsheet:** add utils for file generation ([27384a1](https://github.com/lskjs/cli/commit/27384a1d94baf16374203476ab685ad4b283fdae))
+* **utils:** export of asyncMapValues ([33b4179](https://github.com/lskjs/cli/commit/33b41798353f52a31de3ac2c9825ba92f9b07443))
+* **worker:** result from worker ([cf0cccd](https://github.com/lskjs/cli/commit/cf0cccd05a2c11415147a1126870eaab2d8a1eec))
+
+
+
+
+
 # [2.3.0-beta.41](https://github.com/lskjs/cli/compare/v2.3.0-beta.40...v2.3.0-beta.41) (2021-05-16)
 
 

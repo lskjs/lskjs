@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **worker:** result from worker ([cf0cccd](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/cf0cccd05a2c11415147a1126870eaab2d8a1eec))
+
+
+
+
+
 # [2.3.0-beta.30](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.29...v2.3.0-beta.30) (2021-04-21)
 
 **Note:** Version bump only for package @lskjs/worker
