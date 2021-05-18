@@ -1,5 +1,6 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import isEqual from 'lodash/isEqual';
+import path from 'path';
 
 import { fileToJson } from './fileToJson';
 import { jsonToString } from './jsonToString';
@@ -11,7 +12,8 @@ export async function jsonToFile(filename, json, { type = 'keyval', comment, com
     // console.log('isEqual', filename);
     return;
   }
-  fs.writeFileSync(filename, jsonToString(json, { type, comment }));
+  await fs.mkdir(path.dirname(filename), { recursive: true });
+  await fs.writeFile(filename, jsonToString(json, { type, comment }));
 }
 
 export default jsonToFile;

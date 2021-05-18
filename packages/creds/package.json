@@ -1,0 +1,38 @@
+{
+  "name": "@lskjs/creds",
+  "version": "2.3.0-beta.44",
+  "description": "LSK creds.",
+  "keywords": [],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/creds",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "bin": {
+    "build": "./bin/build.js",
+    "download": "./bin/download.js",
+    "upload": "./bin/upload.js"
+  },
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "start": "lsk run start",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.12.5",
+    "@lskjs/getspreadsheet": "2.3.0-beta.44",
+    "axios": "0.21.1",
+    "bluebird": "3.7.2",
+    "commander": "6.2.1",
+    "csv-parse": "4.14.2",
+    "googleapis": "67.0.0",
+    "javascript-stringify": "2.1.0",
+    "js-yaml": "4.1.0",
+    "lodash": "4.17.20"
+  }
+}
