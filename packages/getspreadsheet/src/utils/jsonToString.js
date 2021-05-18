@@ -1,4 +1,4 @@
-import JS from 'javascript-stringify';
+import { stringify as JSstringify } from 'javascript-stringify';
 import mapValues from 'lodash/mapValues';
 
 import { getCommentString } from './getCommentString';
@@ -40,7 +40,7 @@ export function jsonToString(json, { type = 'keyval', comment, indent = 2 } = {}
   return [
     commentString,
     '/* eslint-disable prettier/prettier */',
-    `module.exports = ${JS.stringify(json, null, indent)};`,
+    `module.exports = ${JSstringify(json, null, indent)};`,
   ]
     .filter(Boolean)
     .join('\n');
