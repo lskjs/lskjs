@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable no-template-curly-in-string */
-import { jsonToFile, toHumanDate } from '@lskjs/spreadsheet/utils';
+import { jsonToFile, toHumanDate } from '@lskjs/getspreadsheet/utils';
 import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
 import Bluebird from 'bluebird';
 import fs from 'fs/promises';

@@ -26,6 +26,7 @@
   "dependencies": {
     "@babel/runtime": "7.12.5",
     "@lskjs/getspreadsheet": "2.3.0-beta.45",
+    "@lskjs/utils": "^2.3.0-beta.42",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "commander": "6.2.1",
