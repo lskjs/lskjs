@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.44](https://github.com/lskjs/cli/compare/v2.3.0-beta.43...v2.3.0-beta.44) (2021-05-18)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix JS.stringify ([d2e034e](https://github.com/lskjs/cli/commit/d2e034ea51b281e8d90e7166d9814478c7c028be))
+
+
+
+
+
 # [2.3.0-beta.43](https://github.com/lskjs/cli/compare/v2.3.0-beta.42...v2.3.0-beta.43) (2021-05-17)
 
 
