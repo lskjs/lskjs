@@ -1,5 +1,7 @@
+import Err from '@lskjs/utils/Err';
 import fs from 'fs';
 import yaml from 'js-yaml';
+import fromPairs from 'lodash/fromPairs';
 
 export async function fileToJson(filename, { type = 'keyval' } = {}) {
   try {
@@ -12,13 +14,28 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
     if (type === 'json') {
       return JSON.parse(str);
     }
-    if (type === 'yaml') {
+    if (type === 'keyval' || type === 'keyvalue' || type === 'env') {
+      const keyvalues = str
+        .split('\n')
+        .map((a) => {
+          const s = a.trim();
+          if (s[0] === '#') return null;
+          if (s.indexOf('=') === -1) return null;
+          const delimiter = s.indexOf('=');
+          const key = s.substr(0, delimiter);
+          const value = s.substr(delimiter + 1);
+          return [key, value];
+        })
+        .filter(Boolean);
+      return fromPairs(keyvalues);
+    }
+    if (type === 'yaml' || type === 'yml') {
       return yaml.load(str);
     }
-    throw '!type';
+    throw new Err('!type', { data: { type } });
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(1111, err);
+    console.error('fileToJson err', err);
     return null;
   }
 }

@@ -11,7 +11,6 @@ import path from 'path';
 
 import { getFiles } from './utils/getFiles';
 
-const ignore = (err) => {};
 const DEBUG = false;
 
 export const getComment = ({ server = '', project = '', id = '', name = '', date = new Date() } = {}) =>
@@ -36,9 +35,10 @@ export async function build(dirname, options = {}) {
       const relativeDir = path.relative(serviceDir, dir);
       const buildDirDir = `${buildDir}/${relativeDir}`;
 
-      if (name === '__meta.js') {
+      if (name === '__config.js') {
         await fs.mkdir(buildDirDir, { recursive: true });
-        await fs.unlink(`${buildDirDir}/${name}`).catch(ignore);
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        await fs.unlink(`${buildDirDir}/${name}`).catch(() => {});
         await fs.copyFile(filename, `${buildDirDir}/${name}`);
         // console.log(filename, `${buildDirDir}/${name}`);
         return;
@@ -48,40 +48,41 @@ export async function build(dirname, options = {}) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [ext, stage, ...other] = name.split('.').reverse();
 
-      const envFile = [...other.reverse(), `${stage}_env_file`, 'env'].filter(Boolean).join('.');
-      const envJs = [...other.reverse(), `${stage}_env_js`, 'js'].filter(Boolean).join('.');
-
-      if (DEBUG) {
-        console.log({
-          dirname,
-          name,
-          filename,
-          dir,
-          buildDir,
-          relativeDir,
-          buildDirDir,
-          envFile,
-          envJs,
-        });
-      }
+      // if (DEBUG) {
+      //   console.log({
+      //     dirname,
+      //     name,
+      //     filename,
+      //     dir,
+      //     buildDir,
+      //     relativeDir,
+      //     buildDirDir,
+      //     envFile,
+      //     envJs,
+      //   });
+      // }
 
       const raw = require(filename);
       const rawJson = isFunction(raw) ? raw({ name, filename, stage }) : raw;
 
-      const { __env: ENV, __project, ...json } = mapValuesDeep(
+      const { __env: ENV, __config, ...json } = mapValuesDeep(
         rawJson,
         (val) => (typeof val === 'string' ? val.replace('${STAGE}', stage) : val), // TODO: more flexible
       );
 
-      const server = options.server || __project.server;
-      const project = options.project || __project.project;
-      const id = options.id || __project.id;
+      const server = options.server || __config.server;
+      const project = options.project || __config.project;
+      const id = options.id || __config.id;
+      const type = options.type || __config.type || 'js';
+      const envFile = [...other.reverse(), `${stage}_env_file`, 'env'].filter(Boolean).join('.');
+      const envJs = [...other.reverse(), `${stage}_env_${type}`, type].filter(Boolean).join('.');
+      // console.log({type})
 
       let compare = true;
       if (process.env.FORCE) compare = 0;
 
       await jsonToFile(`${buildDirDir}/${envJs}`, json, {
-        type: 'js',
+        type,
         compare,
         comment: getComment({
           name: envJs,
@@ -90,16 +91,18 @@ export async function build(dirname, options = {}) {
           id,
         }),
       });
-      await jsonToFile(`${buildDirDir}/${envFile}`, ENV, {
-        type: 'keyvalue',
-        compare,
-        comment: getComment({
-          name: envFile,
-          server,
-          project,
-          id,
-        }),
-      });
+      if (ENV) {
+        await jsonToFile(`${buildDirDir}/${envFile}`, ENV, {
+          type: 'env',
+          compare,
+          comment: getComment({
+            name: envFile,
+            server,
+            project,
+            id,
+          }),
+        });
+      }
     } catch (err) {
       console.error(`Build error ${filename}: `, err);
     }

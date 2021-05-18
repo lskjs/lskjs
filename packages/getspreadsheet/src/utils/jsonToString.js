@@ -10,7 +10,7 @@ const KV = {
 
 export function jsonToString(json, { type = 'keyval', comment, indent = 2 } = {}) {
   const commentString = getCommentString(comment, { type }) || null;
-  if (type === 'keyval') {
+  if (type === 'keyval' || type === 'keyvalue' || type === 'env') {
     return [commentString, KV.stringify(json)].filter(Boolean).join('\n');
   }
   if (type === 'json') {
@@ -23,7 +23,7 @@ export function jsonToString(json, { type = 'keyval', comment, indent = 2 } = {}
       indent,
     );
   }
-  if (type === 'yaml') {
+  if (type === 'yaml' || type === 'yml') {
     const { __raw: footer = '', ...yamlObject } = json;
     return [
       commentString,

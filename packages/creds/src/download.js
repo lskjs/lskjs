@@ -4,17 +4,17 @@ import Bluebird from 'bluebird';
 import fs from 'fs/promises';
 
 export async function download(dir, { force, ...options } = {}) {
-  let meta;
+  let config;
   try {
     // eslint-disable-next-line import/no-dynamic-require
-    meta = require(`${dir}/__meta.js`).__project;
+    config = require(`${dir}/__config.js`).__project;
   } catch (err) {
-    meta = {};
+    config = {};
   }
-  const server = options.server || meta.server;
-  const id = options.id || meta.id;
-  const token = options.token || meta.token;
-  const projectName = options.project || meta.project;
+  const server = options.server || config.server;
+  const id = options.id || config.id;
+  const token = options.token || config.token;
+  const projectName = options.project || config.project;
   const url = `https://${server}/api/v4/projects/${id}/variables`;
 
   const { data: variables } = await axios({
