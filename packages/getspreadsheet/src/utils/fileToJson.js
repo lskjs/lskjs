@@ -15,7 +15,8 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
       return JSON.parse(str);
     }
     if (type === 'keyval' || type === 'keyvalue' || type === 'env') {
-      const keyvalues = str
+      if (!str) return [];
+      const keyvalues = String(str)
         .split('\n')
         .map((a) => {
           const s = a.trim();
@@ -27,6 +28,7 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
           return [key, value];
         })
         .filter(Boolean);
+      // console.log({ str, keyvalues });
       return fromPairs(keyvalues);
     }
     if (type === 'yaml' || type === 'yml') {
