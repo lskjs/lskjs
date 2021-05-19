@@ -9,7 +9,7 @@ export async function upload(dir, { force, ...options } = {}) {
   let config;
   try {
     // eslint-disable-next-line import/no-dynamic-require
-    config = require(`${dir}/__config.js`).__project;
+    config = require(`${dir}/__config.js`);
   } catch (err) {
     config = {};
   }

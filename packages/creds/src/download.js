@@ -7,8 +7,9 @@ export async function download(dir, { force, ...options } = {}) {
   let config;
   try {
     // eslint-disable-next-line import/no-dynamic-require
-    config = require(`${dir}/__config.js`).__project;
+    config = require(`${dir}/__config.js`);
   } catch (err) {
+    console.error('err', err);
     config = {};
   }
   const server = options.server || config.server;
@@ -40,7 +41,7 @@ export async function download(dir, { force, ...options } = {}) {
         ext = 'js';
       }
       const file = [key, ext].filter(Boolean).join('.');
-      const filename = `${process.cwd()}/${dir}/${file}`;
+      const filename = `${dir}/${file}`;
       await fs.writeFile(filename, value);
       console.log(`[OK] ${server}/${projectName} (${key}) => ${dir}/${file}`);
     } catch (err) {
