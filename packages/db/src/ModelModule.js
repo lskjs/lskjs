@@ -26,6 +26,7 @@ export class ModelModule extends Module {
     if (!modelName) throw '!options.model';
     if (!collection) throw '!options.collection';
     const schema = new this.Schema(Model.schema, options);
+    schema.statics.app = this.app;
     schema.loadClass(Model);
     return db.client.connection.model(modelName, schema, collection);
   }
