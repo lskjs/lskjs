@@ -1,5 +1,5 @@
 import Module from '@lskjs/module';
-import Promise from 'bluebird';
+import { delay } from '@lskjs/utils/delay';
 import cassandra from 'cassandra-driver';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
@@ -26,6 +26,6 @@ export default class ScyllaModule extends Module {
     this.debug = Boolean(this.config.debug);
     const { Client } = this.cassandra;
     this.client = new Client(omit(this.config, ['defaultKeyspace']));
-    await Promise.delay(1000);
+    await delay(1000);
   }
 }

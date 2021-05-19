@@ -1,7 +1,7 @@
 import Module from '@lskjs/module';
 import createLogger from '@lskjs/utils/createLogger';
 import hashCode from '@lskjs/utils/hashCode';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import isObject from 'lodash/isObject';
 
@@ -56,7 +56,7 @@ export default class GrantModule extends Module {
     };
   }
   getGroupParams(args) {
-    return Promise.map(args, async (arg) => this.getParams([arg]));
+    return Bluebird.map(args, async (arg) => this.getParams([arg]));
   }
   getUserByUserId(userId) {
     if (__CLIENT__) {
@@ -87,7 +87,7 @@ export default class GrantModule extends Module {
     const params = await this.getGroupParams(args);
     const { rules } = this;
     const cans = {};
-    await Promise.map(
+    await Bluebird.map(
       params,
       async (data) => {
         const { action } = data;

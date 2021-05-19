@@ -1,5 +1,5 @@
+import { delay } from '@lskjs/utils/delay';
 import { Mutex } from 'async-mutex';
-import Promise from 'bluebird';
 
 export default class CacheStorage {
   data = {};
@@ -30,7 +30,7 @@ export default class CacheStorage {
       return this.data[key];
     }
     if (this.mutexes[key].isLocked()) {
-      await Promise.delay(100);
+      await delay(100);
       return this.cache(key, value);
     }
     return this.data[key];

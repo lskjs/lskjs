@@ -1,4 +1,4 @@
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 
 // Retry `func` until it succeeds.
 //
@@ -52,17 +52,17 @@ function retry(func, options) {
 
   function try_once() {
     const tryStart = new Date().getTime();
-    return Promise.attempt(() => func.apply(options.context, options.args))
+    return Bluebird.attempt(() => func.apply(options.context, options.args))
       .caught(StopError, (err) => {
         stopped = true;
         if (err.err instanceof Error) {
-          return Promise.reject(err.err);
+          return Bluebird.reject(err.err);
         }
-        return Promise.reject(err);
+        return Bluebird.reject(err);
       })
       .caught(predicate, (err) => {
         if (stopped) {
-          return Promise.reject(err);
+          return Bluebird.reject(err);
         }
         ++tries;
         if (tries > 1) {
@@ -72,7 +72,7 @@ function retry(func, options) {
 
         if ((max_tries && tries === max_tries) || (giveup_time && now + interval >= giveup_time)) {
           if (options.throw_original) {
-            return Promise.reject(err);
+            return Bluebird.reject(err);
           }
           if (!(err instanceof Error)) {
             let failure = err;
@@ -92,13 +92,13 @@ function retry(func, options) {
           );
           timeout.failure = err;
           timeout.code = 'ETIMEDOUT';
-          return Promise.reject(timeout);
+          return Bluebird.reject(timeout);
         }
         const delay = interval - (now - tryStart);
         if (delay <= 0) {
           return try_once();
         }
-        return Promise.delay(delay).then(try_once);
+        return Bluebird.delay(delay).then(try_once);
       });
   }
   return try_once();
