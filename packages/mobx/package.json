@@ -22,6 +22,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/module": "2.3.0-beta.42",
     "@lskjs/utils": "2.3.0-beta.42"
   },
   "devDependencies": {

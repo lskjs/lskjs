@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react"
 // @ts-ignore
 import { observer, MobXProviderContext } from "mobx-react"

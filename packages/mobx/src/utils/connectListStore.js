@@ -1,6 +1,6 @@
 import getParamsFromQuery from '@lskjs/utils/getParamsFromQuery';
 import getQueryFromParams from '@lskjs/utils/getQueryFromParams';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import omit from 'lodash/omit';
 import { autorun, toJS } from 'mobx';
 
@@ -31,7 +31,7 @@ const connectListStore = async ({
     listStore.setState(queryParams);
   }
 
-  await Promise.delay(10);
+  await Bluebird.delay(10);
   // return () => {}
   const remove = autorun(async () => {
     const params = {
@@ -58,7 +58,7 @@ const connectListStore = async ({
     }
 
     if (__DEV__) {
-      await Promise.delay(1000);
+      await Bluebird.delay(1000);
     }
     page.uapp.history.replace({
       search: string,
