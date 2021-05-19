@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+
+### Features
+
+* **db:** app in models ([380aef8](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/380aef87a7810c8c8f536d8a6a9cd4f52aff91ca))
+
+
+
+
+
 # [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
 
 **Note:** Version bump only for package @lskjs/db

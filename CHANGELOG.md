@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.48](https://github.com/lskjs/cli/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+
+### Bug Fixes
+
+* **creds:** fix bins ([0fd0d69](https://github.com/lskjs/cli/commit/0fd0d694d8403444b88fb5ac0b2d2fac410e1478))
+
+
+### Features
+
+* **db:** app in models ([380aef8](https://github.com/lskjs/cli/commit/380aef87a7810c8c8f536d8a6a9cd4f52aff91ca))
+* **mobx:** create stores2 and mobx stores ([f12a1e3](https://github.com/lskjs/cli/commit/f12a1e3b9c4cd8a7187882480dc3f70a9861c23c))
+* **utils:** create lightweight delay ([195e309](https://github.com/lskjs/cli/commit/195e3094ef344415f9364009ed39be79e060a8db))
+
+
+
+
+
 # [2.3.0-beta.47](https://github.com/lskjs/cli/compare/v2.3.0-beta.46...v2.3.0-beta.47) (2021-05-18)
 
 

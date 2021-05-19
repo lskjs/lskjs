@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/scylla/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+
+### Features
+
+* **utils:** create lightweight delay ([195e309](https://github.com/lskjs/lskjs/tree/master/packages/scylla/commit/195e3094ef344415f9364009ed39be79e060a8db))
+
+
+
+
+
 # [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/scylla/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
 
 **Note:** Version bump only for package @lskjs/scylla

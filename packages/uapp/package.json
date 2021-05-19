@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "2.3.0-beta.42",
+  "version": "2.3.0-beta.48",
   "description": "LSK universal react app wrapper",
   "keywords": [
     "database",
@@ -29,8 +29,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.42",
-    "@lskjs/utils": "2.3.0-beta.42",
+    "@lskjs/module": "2.3.0-beta.48",
+    "@lskjs/utils": "2.3.0-beta.48",
     "core-decorators": "0.20.0",
     "emotion": "10.0.27",
     "emotion-theming": "10.0.27",
