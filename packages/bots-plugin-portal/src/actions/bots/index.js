@@ -21,4 +21,5 @@ export default {
 
   messageTrim: require('./messageTrim').default,
   messageAppend: require('./messageAppend').default,
+  messageAddExtra: require('./messageAddExtra').default,
 };

@@ -1,12 +1,12 @@
 // import createKeyboard from '@lskjs/bots-base/utils/createKeyboard';
 import BaseBotPlugin from '@lskjs/bots-plugin';
 import Bluebird from 'bluebird';
-import get from 'lodash/get';
+import forEach from 'lodash/forEach';
+// import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import actions from './actions';
-import extensions from './extensions';
-// import { runAction } from './utils';
+import extra from './extra';
 import { getActiveRules, groupMessages, runCron } from './utils';
 
 export default class PortalPlugin extends BaseBotPlugin {
@@ -14,26 +14,26 @@ export default class PortalPlugin extends BaseBotPlugin {
   getActiveRules = getActiveRules;
   runCron = runCron;
   // TODO: add i18
-  _i18 = {
-    t: (key, params = {}) => {
-      const { count = '', name = '' } = params;
-      const table = {
-        bot: {
-          likesPlugin: {
-            like: `❤️ ${count}`,
-            disslike: `💔 ${count}`,
-          },
-          portalPlugin: {
-            rules: {
-              answer: `Ответить ${name}`,
-            },
-            delay: `Братишка, не флуди`,
-          },
-        },
-      };
-      return get(table, key, key);
-    },
-  };
+  // _i18 = {
+  //   t: (key, params = {}) => {
+  //     const { count = '', name = '' } = params;
+  //     const table = {
+  //       bot: {
+  //         likesPlugin: {
+  //           like: `❤️ ${count}`,
+  //           disslike: `💔 ${count}`,
+  //         },
+  //         portalPlugin: {
+  //           rules: {
+  //             answer: `Ответить ${name}`,
+  //           },
+  //           delay: `Братишка, не флуди`,
+  //         },
+  //       },
+  //     };
+  //     return get(table, key, key);
+  //   },
+  // };
   getModules() {
     return {
       action: [
@@ -114,12 +114,10 @@ export default class PortalPlugin extends BaseBotPlugin {
 
   getRoutes() {
     const routes = [];
-    Object.keys(extensions).forEach((key) => {
-      const { getRoutes } = extensions[key];
-      if (!getRoutes) return;
-      const extensionRoutes = getRoutes.call(this);
-      if (!Array.isArray(extensionRoutes)) return;
-      routes.push(...extensionRoutes);
+    forEach(extra, ({ routes: route }) => {
+      const actionRoutes = route && route.call(this);
+      if (!Array.isArray(actionRoutes)) return;
+      routes.push(...actionRoutes);
     });
     return routes;
   }

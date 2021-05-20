@@ -8,21 +8,21 @@ export class ActionChain extends Module {
     return this.actionModule.getAction(...args);
   }
 
-  async nextAction({ actionParams, res, ...props }) {
+  async nextAction({ actionParams, res, data, ...props }) {
     const { then: actionThen, else: actionElse, fault1, fault2 } = actionParams;
     const { messageDayAgo, message2DaysAgo } = props;
 
     if (actionThen && !isEmpty(actionThen) && res) {
-      return this.runAction(actionThen);
+      return this.runAction({ parent: data, ...actionThen });
     }
     if (actionElse && !isEmpty(actionElse) && !res) {
-      return this.runAction(actionElse);
+      return this.runAction({ parent: data, ...actionElse });
     }
     if (fault2 && !isEmpty(fault2) && !res && !messageDayAgo && !message2DaysAgo) {
-      return this.runAction(fault2);
+      return this.runAction({ parent: data, ...fault2 });
     }
     if (fault1 && !isEmpty(fault1) && !res && !messageDayAgo) {
-      return this.runAction(fault1);
+      return this.runAction({ parent: data, ...fault1 });
     }
     return null;
   }
@@ -54,8 +54,13 @@ export class ActionChain extends Module {
     try {
       // this.log.debug({ actionParams });
       let res = await action.bind(this)(params);
-      if (res instanceof Object) res = res.res;
-      await this.nextAction({ actionParams, res });
+
+      let data = {};
+      if (res instanceof Object) {
+        ({ data } = res);
+        res = res.res;
+      }
+      await this.nextAction({ actionParams, res, data });
       return {
         type: actionType,
         ...res,
