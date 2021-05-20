@@ -13,9 +13,9 @@ export async function upload(dir, { force, ...options } = {}) {
   } catch (err) {
     config = {};
   }
-  const server = options.server || config.server;
+  const server = options.server || config.__config.server;
   const id = options.id || config.id;
-  const token = options.token || config.token;
+  const token = options.token || config.__config.token;
   const projectName = options.project || config.project;
   const url = `https://${server}/api/v4/projects/${id}/variables`;
 
