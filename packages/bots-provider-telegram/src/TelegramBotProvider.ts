@@ -131,6 +131,14 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, 'message.text')) return set(ctx, 'message.text', text);
     return null;
   }
+  setMessage(ctx: TelegramIBotProviderMessageCtx, path: string, value: any): any | null {
+    if (typeof ctx === 'string') return null;
+    const msgPath = (path && `.${path}`) || '';
+    if (get(ctx, `update.callback_query${msgPath}`)) return set(ctx, `update.callback_query${msgPath}`, value);
+    if (get(ctx, `update.channel_post${msgPath}`)) return set(ctx, `update.channel_post${msgPath}`, value);
+    if (get(ctx, `message${msgPath}`)) return set(ctx, `message${msgPath}`, value);
+    return null;
+  }
   async getChatMember(chatId: string | number, userId: string | number): any {
     try {
       const chatMember = await this.client.telegram.getChatMember(chatId, userId);
@@ -205,20 +213,16 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
     const botId = this.getBotId();
     const eventData = this.getMessage(ctx);
+    const { chat, message_id: messageId } = eventData;
+
     return BotsEventModel.findOneAndUpdate(
-      { botId, provider: this.provider, data: eventData },
+      { botId, provider: this.provider, 'data.chat': chat, 'data.message_id': messageId },
       { ...data },
       {
         new: true,
         upsert: true,
       },
     );
-    // return BotsEventModel.create({
-    //   botId,
-    //   provider: this.provider,
-    //   type,
-    //   data: eventData,
-    // });
   }
 
   async saveMessage(ctx: TelegramIBotProviderMessageCtx, parentCtx: TelegramIBotProviderMessageCtx): Promise<any> {
@@ -261,7 +265,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
       telegramUserId,
       chatUserId,
       type,
-      meta: { parent: parentCtx },
+      meta: { parent: this.getMessage(parentCtx) },
       ...eventData,
     };
     await BotsTelegramMessageModel.create(data);

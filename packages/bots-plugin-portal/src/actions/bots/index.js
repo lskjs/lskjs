@@ -15,6 +15,7 @@ export default {
 
   reply: require('./reply').default,
   createMessage: require('./createMessage').default,
+  editMessage: require('./editMessage').default,
   forwardMessage: require('./forwardMessage').default,
   copyMessage: require('./copyMessage').default,
   sendMessage: require('./sendMessage').default,
@@ -23,4 +24,5 @@ export default {
   messageTrim: require('./messageTrim').default,
   messageAppend: require('./messageAppend').default,
   messageAddExtra: require('./messageAddExtra').default,
+  messageEditExtra: require('./messageEditExtra').default,
 };
