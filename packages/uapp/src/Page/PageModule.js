@@ -187,7 +187,9 @@ export class PageModule extends Module {
     }
     const { Provider } = this;
     if (!Provider) return children;
-    return React.createElement(Provider, { app: this.app, page: this }, children);
+    const res = React.createElement(Provider, { app: this.app, page: this }, children);
+    console.log({res})
+    return res;
   }
 }
 
