@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+
+### Features
+
+* **module:** safe module create and safe module start ([3ade5c6](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/3ade5c681563c76af2c532a1861309dab52ea260))
+
+
+
+
+
 # [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
 
 **Note:** Version bump only for package @lskjs/module

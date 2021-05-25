@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.49](https://github.com/lskjs/cli/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+
+### Bug Fixes
+
+* **uapp:** server side render ([b27d029](https://github.com/lskjs/cli/commit/b27d0298bcc746ad0a6deaeb807b7a6d0dfeb55b))
+
+
+### Features
+
+* **module:** safe module create and safe module start ([3ade5c6](https://github.com/lskjs/cli/commit/3ade5c681563c76af2c532a1861309dab52ea260))
+
+
+
+
+
 # [2.3.0-beta.48](https://github.com/lskjs/cli/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
 
 

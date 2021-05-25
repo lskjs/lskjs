@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-portal",
-  "version": "2.3.0-beta.48",
+  "version": "2.3.0-beta.49",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -31,10 +31,10 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots": "2.3.0-beta.48",
-    "@lskjs/bots-base": "2.3.0-beta.48",
+    "@lskjs/bots": "2.3.0-beta.49",
+    "@lskjs/bots-base": "2.3.0-beta.49",
     "@lskjs/bots-plugin": "2.3.0-beta.10",
-    "@lskjs/module": "2.3.0-beta.48",
+    "@lskjs/module": "2.3.0-beta.49",
     "node-cron": "^3.0.0"
   },
   "devDependencies": {
