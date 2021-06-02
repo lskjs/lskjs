@@ -137,6 +137,9 @@ export default class TestApi extends Api {
       },
       '/app/config': () => collectConfigs(this.app),
       '/app/config/log': () => collectConfigsLog(this.app),
+      '/req/auth': async (req) => req.user,
+      '/req/user': async (req) => req.user,
+      '/req/userId': async (req) => req.userId || (req.user && req.user_id),
       '/user/one': async () => {
         const { UserModel } = this.app;
         const user = await UserModel.findOne();

@@ -5,10 +5,10 @@ const isClient = __CLIENT__;
 
 export function fetch(...args) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const axios = this;
+  const { client: axios } = this;
   const { authToken } = axios;
   const [rawUrl, options = {}] = args;
-  if (isAbsoluteExternalUrl(rawUrl) || isClient) return axios(...args);
+  if (isAbsoluteExternalUrl(rawUrl) || isClient) return axios.request(...args);
   // TODO: get port from backend
   // if (isClient) return axios.remoteFetch(...args);
   // TODO: сделать как-нибудь по нормальному и проверенно

@@ -20,7 +20,9 @@ export default class GrantModule extends Module {
   }
   async init() {
     await super.init();
-    this.rules = this.getRules();
+    if (!this.rules) {
+      this.rules = this.getRules();
+    }
     if (this.debug) this.log.debug('rules', Object.keys(this.rules));
   }
   async getParams(args) {

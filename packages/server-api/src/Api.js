@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import Module from '@lskjs/module';
 import Err from '@lskjs/utils/Err';
 import get from 'lodash/get';
@@ -19,11 +18,11 @@ export default class Api extends Module {
   __api = true;
   constructor(parent, ...propsArray) {
     super(parent, ...propsArray);
-    this.setProps(...propsArray, { 
+    this.setProps(...propsArray, {
       '__lifecycle.create': new Date(),
-       __parent: parent,
+      __parent: parent,
       app: parent && parent.app,
-      config: parent && parent.config
+      config: parent && parent.config,
     });
     // this.__parent = parent;
     // this.app = parent && parent.app;
@@ -56,12 +55,12 @@ export default class Api extends Module {
   }
 
   async useMiddleware(middleware, req, res) {
-    return new Promise((resolve, reject) => {
-      return middleware(req, res, async (err) => {
+    return new Promise((resolve, reject) =>
+      middleware(req, res, async (err) => {
         if (err) return reject(err);
         return resolve();
-      });
-    });
+      }),
+    );
   }
 
   async __getRoutes() {
@@ -71,8 +70,7 @@ export default class Api extends Module {
 
   getRoutes() {
     return {
-      '/': ::this.index,
-      // '*': () => ({ __pack: 1, ok: true, message: 'Api.getRoutes is empty' }),
+      '/': this.index.bind(this),
     };
   }
 

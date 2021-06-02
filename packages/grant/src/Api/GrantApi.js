@@ -1,14 +1,16 @@
 import Api from '@lskjs/server-api';
-import isPlainObject from 'lodash/isPlainObject';
+import Bluebird from 'bluebird';
 import get from 'lodash/get';
+import isPlainObject from 'lodash/isPlainObject';
+
 import CacheStorage from '../CacheStorage';
 
 export default class GrantApi extends Api {
   getRoutes() {
     return {
-      '/can': ::this.can,
-      '/canGroup': ::this.canGroup,
-      '/batch': ::this.batch,
+      '/can': this.can.bind(this),
+      '/canGroup': this.canGroup.bind(this),
+      '/batch': this.batch.bind(this),
     };
   }
   async check(rule, userId) {
@@ -33,12 +35,10 @@ export default class GrantApi extends Api {
     //   // eslint-disable-next-line no-console
     //   console.log('ALARMAAAAAA ALARMAAAAAAALARMAAAAAAALARMAAAAAA -- userId is changed');
     // }
-    const _rules = rules.map((rule) => {
-      return {
-        ...rule,
-        userId,
-      };
-    });
+    const _rules = rules.map((rule) => ({
+      ...rule,
+      userId,
+    }));
     const cache = new CacheStorage();
     return grant.canGroup(_rules, cache);
   }
@@ -56,6 +56,6 @@ export default class GrantApi extends Api {
   async batch(req) {
     const userId = req.user && req.user._id;
     const { rules } = req.data;
-    return Promise.map(rules, (rule) => this.check(userId, rule));
+    return Bluebird.map(rules, (rule) => this.check(userId, rule));
   }
 }
