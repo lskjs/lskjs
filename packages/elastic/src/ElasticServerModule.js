@@ -120,7 +120,11 @@ export default class ElasticServerModule extends Module {
       },
       params,
     );
-    schema.getMongooseSchema().plugin(mexp.v7, options);
+    if (schema.getMongooseSchema) {
+      schema.getMongooseSchema().plugin(mexp.v7, options);
+    } else {
+      schema.plugin(mexp.v7, options);
+    }
   }
 
   async run() {
