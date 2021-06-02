@@ -2,8 +2,10 @@
 import { upload } from '../upload';
 import { addCwd } from '../utils/addCwd';
 
-const dir = addCwd(process.argv[2]);
-const force = process.argv[3] === '--force';
+const argsStartIndex = 2;
+
+const dir = addCwd(process.argv[argsStartIndex]);
+const force = process.argv[argsStartIndex + 1] === '--force';
 if (!dir) throw '!dir';
 upload(dir, { force }).catch((err) => {
   // eslint-disable-next-line no-console
