@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.50](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
+
+
+### Bug Fixes
+
+* **server-api:** updates ([7d63096](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/7d6309621983ffa5189bba722cb1fefa11a8273e))
+
+
+
+
+
 # [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
 
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.50](https://github.com/lskjs/lskjs/tree/master/packages/auth/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
+
+**Note:** Version bump only for package @lskjs/auth
+
+
+
+
+
 # [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/auth/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
 
 **Note:** Version bump only for package @lskjs/auth

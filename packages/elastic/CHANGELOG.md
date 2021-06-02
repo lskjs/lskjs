@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.50](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
+
+
+### Bug Fixes
+
+* **elastic:** check getMongooseSchema ([660577e](https://github.com/lskjs/lskjs/tree/master/packages/elastic/commit/660577e0d2b74bc077898e458993cf1928bf6c81))
+
+
+
+
+
 # [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/elastic/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
 
 **Note:** Version bump only for package @lskjs/elastic
