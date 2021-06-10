@@ -10,7 +10,7 @@ let finish = 0;
 
 class InnerModule extends Module {
   async init() {
-    console.log('InnerModule.init')
+    console.log('InnerModule.init');
     start += 1;
     await super.init();
     progress += 1;
@@ -18,57 +18,65 @@ class InnerModule extends Module {
     finish += 1;
   }
   async run() {
-    console.log('InnerModule.run')
+    console.log('InnerModule.run');
     await super.run();
   }
 }
 
-test('test 1', async () => {
+test('mutex x5 ', async () => {
   const main = await Module.start({
     modules: {
       inner: InnerModule,
     },
   });
 
-  console.log('start', {
-    start,
-    progress,
-    finish,
-  });
-  const promises = [
-    main.module('inner'),
-    main.module('inner'),
-    main.module('inner'),
-    main.module('inner'),
-    main.module('inner'),
-  ];
+  // console.log('start', {
+  //   start,
+  //   progress,
+  //   finish,
+  // });
 
-  console.log('progress 1', {
-    start,
-    progress,
-    finish,
-  });
+  expect(start).toEqual(0);
+  expect(progress).toEqual(0);
+  expect(finish).toEqual(0);
+
+  const promises = [...new Array(5)].map(() => main.module('inner'));
+
+  // console.log('progress 1', {
+  //   start,
+  //   progress,
+  //   finish,
+  // });
   await delay(1000);
 
-  console.log('progress 2', {
-    start,
-    progress,
-    finish,
-  });
-  await delay(1000);
+  expect(start).toEqual(1);
+  expect(progress).toEqual(1);
+  expect(finish).toEqual(0);
 
-  console.log('progress 3', {
-    start,
-    progress,
-    finish,
-  });
+  // console.log('progress 2', {
+  //   start,
+  //   progress,
+  //   finish,
+  // });
+  await delay(2000);
+
+  // console.log('progress 3', {
+  //   start,
+  //   progress,
+  //   finish,
+  // });
+
+  expect(start).toEqual(1);
+  expect(progress).toEqual(1);
+  expect(finish).toEqual(1);
+
   await Promise.all(promises);
 
-  console.log('finish', {
-    start,
-    progress,
-    finish,
-  });
+  // console.log('finish', {
+  //   start,
+  //   progress,
+  //   finish,
+  // });
   expect(start).toEqual(1);
   expect(progress).toEqual(1);
   expect(finish).toEqual(1);

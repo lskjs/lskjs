@@ -33,13 +33,14 @@ export class ModelsModule extends Module implements IModelsModule {
 
   async moduleGetter(m: IModule): Promise<any> {
     if (!m.dbName) throw '!this.dbName';
-    await m.app.module(m.dbName);
+    await m.app.module(m.dbName, { run: true });
     // @ts-ignore
     return m.model;
   }
 
   async model(nameOrNames: string | string[], ...args: any[]): Promise<IModel | IModelKeyValue> {
-    const modelModule = await this.module(nameOrNames, { run: true, ...args });
+    const options = { run: true, ...(args[0] || {}) };
+    const modelModule = await this.module(nameOrNames, options);
     if (modelModule instanceof Module) {
       // @ts-ignore
       return modelModule.model;

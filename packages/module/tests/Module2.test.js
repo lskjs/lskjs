@@ -3,8 +3,11 @@ import Module from '../src';
 
 test('new Module()', () => {
   const instance = new Module();
-  expect(instance).toEqual({
+  expect(instance).toMatchObject({
+    __availableModules: {},
+    __initedModules: {},
     __lifecycle: {},
+    __config: undefined,
   });
 });
 
@@ -17,7 +20,7 @@ test('instance.setProps()', async () => {
   });
 });
 
-test('instance.init() throw INVALID_NEW_MODULE without create', async () => {
+test('instance.init() throw MODULE_INVALID_LIVECYCLE_NEW without create', async () => {
   const instance = new Module();
   let err;
   try {
@@ -25,7 +28,7 @@ test('instance.init() throw INVALID_NEW_MODULE without create', async () => {
   } catch (error) {
     err = error;
   }
-  expect(err.code).toBe('INVALID_NEW_MODULE');
+  expect(err.code).toBe('MODULE_INVALID_LIVECYCLE_NEW');
   expect(instance).toMatchObject({
     __lifecycle: {},
   });
@@ -33,22 +36,26 @@ test('instance.init() throw INVALID_NEW_MODULE without create', async () => {
 
 test('Module.create()', async () => {
   const instance = await Module.create();
-  expect(!!instance.__createdAt).toBe(true);
-  expect(!!instance.__initAt).toBe(true);
+  expect(!!instance.__lifecycle.create).toBe(true);
+  expect(!!instance.__lifecycle.initStart).toBe(true);
+  expect(!!instance.__lifecycle.initFinish).toBe(true);
+  expect(!!instance.__lifecycle.runStart).toBe(false);
+  expect(!!instance.__lifecycle.runFinish).toBe(false);
   expect(!!instance.log).toBe(true);
   expect(instance).toMatchObject({
-    name: 'Module2',
-    __runAt: undefined,
+    name: 'Module',
   });
 });
 
-test('Module.createAndRun()', async () => {
-  const instance = await Module.createAndRun();
-  expect(!!instance.__createdAt).toBe(true);
-  expect(!!instance.__initAt).toBe(true);
-  expect(!!instance.__runAt).toBe(true);
+test('Module.start()', async () => {
+  const instance = await Module.start();
+  expect(!!instance.__lifecycle.create).toBe(true);
+  expect(!!instance.__lifecycle.initStart).toBe(true);
+  expect(!!instance.__lifecycle.initFinish).toBe(true);
+  expect(!!instance.__lifecycle.runStart).toBe(true);
+  expect(!!instance.__lifecycle.runFinish).toBe(true);
   expect(!!instance.log).toBe(true);
   expect(instance).toMatchObject({
-    name: 'Module2',
+    name: 'Module',
   });
 });

@@ -1,6 +1,6 @@
 /* global test expect describe beforeAll  */
 /* eslint-disable max-classes-per-file */
-import Base from '../../src/2';
+import Base from '../../src';
 
 class A extends Base {
   title = 'Default Title A';

@@ -4,7 +4,8 @@ import set from 'lodash/set';
 import { IModule, IModuleConstructor, IModuleLifecycle, IModuleProps, IModuleWithLifecycle } from './types';
 
 // @ts-ignore
-const STRICT_DEBUG = __DEV__;
+const STRICT_DEBUG =
+  typeof window !== 'undefined' ? window.__DEV__ : typeof process !== 'undefined' ? process.__DEV__ : false; // eslint-disable-line no-nested-ternary
 
 const safeLog = (ctx: any, level = 'error', ...args: any[]) => {
   if (ctx.log && ctx.log[level]) {

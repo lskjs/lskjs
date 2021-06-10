@@ -4,6 +4,8 @@ import merge from 'lodash/merge';
 
 import { Module } from '../src';
 
+// const DEBUG = 1
+
 test('Case #0 — empty config', async () => {
   class SomeModule extends Module {}
   const instance = await SomeModule.create();
@@ -78,7 +80,7 @@ test('Case #4 — async config from db', async () => {
     async getConfig() {
       const localConfig = await super.getConfig();
       const dbConfig = await this.getConfigFromDb().catch((err) => {
-        console.error('something wrong', err);
+        // if (DEBUG) console.error('something wrong', err);
         if (this.fallWhileError) throw err;
         // throw err;
         return {};
