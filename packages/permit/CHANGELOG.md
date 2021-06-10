@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.51](https://github.com/lskjs/lskjs/tree/master/packages/permit/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
 # [2.3.0-beta.50](https://github.com/lskjs/lskjs/tree/master/packages/permit/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
 
 **Note:** Version bump only for package @lskjs/permit

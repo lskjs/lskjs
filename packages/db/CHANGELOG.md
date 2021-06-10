@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.51](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+
+### Bug Fixes
+
+* **db:** getting running model by default ([9107f32](https://github.com/lskjs/lskjs/tree/master/packages/db/commit/9107f32b9af316bf938100293e840e451d85ca01))
+
+
+
+
+
 # [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
 
 **Note:** Version bump only for package @lskjs/db

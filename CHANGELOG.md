@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.51](https://github.com/lskjs/cli/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+
+### Bug Fixes
+
+* **db:** getting running model by default ([9107f32](https://github.com/lskjs/cli/commit/9107f32b9af316bf938100293e840e451d85ca01))
+* **getspreadsheet:** update package.json ([0be3cf3](https://github.com/lskjs/cli/commit/0be3cf347e434a8bbad40131614268e93b38a900))
+* **getspreadsheet:** update package.json ([883b602](https://github.com/lskjs/cli/commit/883b6028965020dd5998e7fc7f63e309a4e059bf))
+
+
+
+
+
 # [2.3.0-beta.50](https://github.com/lskjs/cli/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
 
 

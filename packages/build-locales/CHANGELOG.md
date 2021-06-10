@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.51](https://github.com/lskjs/lskjs/tree/master/packages/build-locales/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+**Note:** Version bump only for package @lskjs/build-locales
+
+
+
+
+
 # [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/build-locales/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
 
 **Note:** Version bump only for package @lskjs/build-locales
