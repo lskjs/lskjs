@@ -39,13 +39,16 @@ export class ModelsModule extends Module implements IModelsModule {
   }
 
   async model(nameOrNames: string | string[], ...args: any[]): Promise<IModel | IModelKeyValue> {
-    const modelModule = await this.module(nameOrNames, ...args);
+    const modelModule = await this.module(nameOrNames, { run: true, ...args });
     if (modelModule instanceof Module) {
       // @ts-ignore
       return modelModule.model;
     }
     // @ts-ignore
-    return mapValues(modelModule, (m) => m.model);
+    if (Array.isArray(nameOrNames)) {
+      return mapValues(modelModule, (m) => m.model);
+    }
+    return modelModule;
   }
 
   async getModules(): Promise<IAsyncModelKeyValue> {

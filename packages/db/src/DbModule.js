@@ -1,8 +1,10 @@
 import Module from '@lskjs/module';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import Bluebird from 'bluebird';
-import omit from 'lodash/omit';
+import pick from 'lodash/pick';
 import { Mongoose } from 'mongoose';
+
+import { validOptionNames } from './mongo/validOptionNames';
 
 // abstract
 export class DbModule extends Module {
@@ -23,7 +25,7 @@ export class DbModule extends Module {
   reconnectios = 0;
 
   getOptions() {
-    return omit(this.config, ['uri', 'debug', 'log']);
+    return pick(this.config, validOptionNames);
   }
   async init() {
     await super.init();

@@ -11,7 +11,7 @@ export class ModelModule extends Module {
   async createModel() {
     // : Promise<any>
     if (!this.dbName) throw '!this.dbName';
-    const db = await this.app.module(this.dbName);
+    const db = await this.app.module(this.dbName, { run: true });
     if (!db.client) {
       this.log.error('!db.client');
       throw '!db.client';
@@ -28,7 +28,8 @@ export class ModelModule extends Module {
     const schema = new this.Schema(Model.schema, options);
     schema.statics.app = this.app;
     schema.loadClass(Model);
-    return db.client.connection.model(modelName, schema, collection);
+    const mongooseModel = db.client.connection.model(modelName, schema, collection);
+    return mongooseModel;
   }
   async run() {
     // : Promise<void>
