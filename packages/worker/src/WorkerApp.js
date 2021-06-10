@@ -5,6 +5,7 @@ import Err from '@lskjs/utils/Err';
 import importFn from '@lskjs/utils/importFn';
 
 export class WorkerApp extends Module {
+  preload = true;
   initedWorkers = {};
   async model(...args) {
     const modelsModule = await this.module('models');
@@ -47,6 +48,10 @@ export class WorkerApp extends Module {
   }
   async run() {
     await super.run();
+    if (this.preload) {
+      if (this.hasModule('db')) await this.module('db');
+      if (this.hasModule('models')) await this.module('models.*');
+    }
     await this.runWorkers();
   }
   async started() {
