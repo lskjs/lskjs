@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/elastic",
-  "version": "2.3.0-beta.50",
+  "version": "2.3.0-beta.52",
   "description": "LSK.js module for elastic search",
   "keywords": [
     "elastic",
@@ -22,7 +22,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.49",
+    "@lskjs/module": "2.3.0-beta.52",
     "elasticsearch": "16.7.2",
     "mongoose-elasticsearch-xp-async": "0.1.3"
   },

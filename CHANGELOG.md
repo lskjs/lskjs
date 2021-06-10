@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.52](https://github.com/lskjs/cli/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
+
+
+### Bug Fixes
+
+* **module:** fix bugs, add tests ([dbd06da](https://github.com/lskjs/cli/commit/dbd06da55fffa8a41c855378564c9096677c51fe))
+
+
+### Features
+
+* **worker:** add models preloader ([33d0458](https://github.com/lskjs/cli/commit/33d0458728470eda41fbe290947cf0973e6f20a3))
+
+
+
+
+
 # [2.3.0-beta.51](https://github.com/lskjs/cli/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
 
 
