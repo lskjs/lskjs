@@ -58,16 +58,24 @@ export class DbModule extends Module {
 
   async stop() {
     await super.stop();
-    this.client.connection.close();
-    this.client.disconnect();
-    // mongoose.removeModels();
+    if (this.client) {
+      if (this.client.connection) this.client.connection.close();
+      this.client.disconnect();
+    } else {
+      this.log.warn('!client', 'cannot client.disconnect');
+    }
+
     return Bluebird.delay(10);
   }
 
   async reconnect() {
     if (this.debug) this.log.trace('reconnect');
-    this.client.stop();
-    return this.client.run();
+    if (this.client) {
+      this.client.stop();
+      this.client.run();
+    } else {
+      this.log.warn('!client', 'cannot client.stop and client.run');
+    }
   }
 
   async run() {
