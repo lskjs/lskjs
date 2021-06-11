@@ -25,7 +25,7 @@ export default function mergeEnvs(...configs) {
         } else {
           config = merge(config, fnOrJson);
         }
-      } else if (type === 'jsson') {
+      } else if (type === 'json') {
         const json = JSON.parse(fs.readFileSync(configPath).toString());
         config = merge(config, json);
       } else {
