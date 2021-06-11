@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.53](https://github.com/lskjs/cli/compare/v2.3.0-beta.52...v2.3.0-beta.53) (2021-06-11)
+
+
+### Bug Fixes
+
+* **config:** typo bug ([fe3e8c6](https://github.com/lskjs/cli/commit/fe3e8c6e6d0927ad09ee28c52a5a9c297d940382))
+* **db:** prevent stop before connect ([aaafde8](https://github.com/lskjs/cli/commit/aaafde8755fecadabc0ee5d337a71591975a9f45))
+
+
+
+
+
 # [2.3.0-beta.52](https://github.com/lskjs/cli/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
 
 
