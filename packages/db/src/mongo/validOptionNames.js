@@ -1,4 +1,4 @@
-export const validOptionNames = [
+export const mongoValidOptionNames = [
   'poolSize',
   'ssl',
   'sslValidate',
@@ -57,4 +57,12 @@ export const validOptionNames = [
   'minSize',
   'monitorCommands',
   'retryWrites',
+];
+
+export const validOptionNames = [
+  ...mongoValidOptionNames,
+  'useNewUrlParser',
+  'useFindAndModify',
+  'useCreateIndex',
+  'useUnifiedTopology',
 ];

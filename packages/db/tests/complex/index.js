@@ -30,9 +30,11 @@ const models = { YoutubeChannelModel };
 console.log('process.env.DB', process.env.DB);
 
 Module.start({
+  debug: 1,
   config: {
     db: {
       uri: process.env.DB,
+      useNewUrlParser: true,
     },
   },
   modules: {
