@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.54](https://github.com/lskjs/cli/compare/v2.3.0-beta.53...v2.3.0-beta.54) (2021-06-14)
+
+
+### Bug Fixes
+
+* **db:** pass any options ([3dcc5b4](https://github.com/lskjs/cli/commit/3dcc5b432244eb13adabcf52e405dcc6da6e0277))
+* **db:** useNewUrlParser ([a4a142c](https://github.com/lskjs/cli/commit/a4a142c2002574be9926d2556697d9e9aae561d8))
+
+
+
+
+
 # [2.3.0-beta.53](https://github.com/lskjs/cli/compare/v2.3.0-beta.52...v2.3.0-beta.53) (2021-06-11)
 
 

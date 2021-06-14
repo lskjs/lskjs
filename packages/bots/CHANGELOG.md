@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.54](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.53...v2.3.0-beta.54) (2021-06-14)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
 # [2.3.0-beta.53](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.52...v2.3.0-beta.53) (2021-06-11)
 
 **Note:** Version bump only for package @lskjs/bots
