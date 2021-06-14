@@ -25,7 +25,10 @@ export class DbModule extends Module {
   reconnectios = 0;
 
   getOptions() {
-    return pick(this.config, validOptionNames);
+    return {
+      ...pick(this.config, validOptionNames),
+      ...(this.config.options || {})
+    };
   }
   async init() {
     await super.init();
