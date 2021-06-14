@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lskjs/db": "^2.3.0-beta.53",
-    "@lskjs/module": "^2.3.0-beta.52"
+    "@babel/runtime": "7.14.5",
+    "@lskjs/db": "2.3.0-beta.53",
+    "@lskjs/module": "2.3.0-beta.52",
+    "lodash": "4.17.21"
   }
 }

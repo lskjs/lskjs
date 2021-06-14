@@ -1,11 +1,10 @@
-const { Module } = require('@lskjs/module')
-const db = require('@lskjs/db')
-const { Model } = require('@lskjs/db/Model')
+global.__DEV__ = 1;
+const { Module } = require('@lskjs/module');
+const db = require('@lskjs/db');
+const { Model } = require('@lskjs/db/Model');
 
 
-class YoutubeChannelModel extends Model {
-  
-}
+class YoutubeChannelModel extends Model {}
 
 YoutubeChannelModel.schema = {
   type: {
@@ -18,39 +17,39 @@ YoutubeChannelModel.schema = {
     required: true,
     // index: true,
   },
-
 };
 YoutubeChannelModel.options = {
   model: 'YoutubeChannelModel',
   collection: 'channel',
 };
 
-const models = { YoutubeChannelModel } 
+const models = { YoutubeChannelModel };
 
 // ready();
 
-Module.start({ 
+console.log('process.env.DB', process.env.DB);
+
+Module.start({
   config: {
     db: {
-      uri: process.env.DB
-    }
+      uri: process.env.DB,
+    },
   },
   modules: {
     db: () => require('@lskjs/db'),
-    models: [() => require('@lskjs/db/models'), { models }], 
-  }
+    models: [() => require('@lskjs/db/models'), { models }],
+  },
 })
   .then(async (app) => {
-    app.module('models.')
     const YoutubeChannelModel = await app.module('models.YoutubeChannelModel');
 
     const youtubeChannel = await YoutubeChannelModel.findOne({
-      providerId: 'UClTDQYzyM59Oup8EW3Vzk0g'
-    })
-    console.log({ youtubeChannel })
+      providerId: 'UClTDQYzyM59Oup8EW3Vzk0g',
+    });
+    console.log({ youtubeChannel });
 
     global.app = app;
-    console.log('success')
+    console.log('success');
   })
   .catch((err) => {
     console.error('err', err);
