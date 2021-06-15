@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.56](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.55...v2.3.0-beta.56) (2021-06-15)
+
+
+### Bug Fixes
+
+* **worker:** get rlog from module ([ced0126](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/ced0126d4f3be9ce7b961eba76b56624b50de6df))
+
+
+
+
+
 # [2.3.0-beta.55](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.54...v2.3.0-beta.55) (2021-06-15)
 
 
