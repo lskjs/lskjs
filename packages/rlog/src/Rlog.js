@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
+import Err from '@lskjs/utils/Err';
 import axios from 'axios';
 
 const clogs = {
@@ -75,7 +76,7 @@ const checkLimits = (stats, limits) => {
 //   }
 // }
 
-class Rlog {
+export class Rlog {
   base = '';
   prefix = '';
   project = '';
@@ -128,7 +129,7 @@ class Rlog {
         tags: params.tags,
       })
       .catch((err) => {
-        console.error(`Rlog.${action} error: ${String(err.code)}`);
+        console.error(`Rlog.${action} error: ${Err.code(err.code)}`);
         return null;
       });
   }

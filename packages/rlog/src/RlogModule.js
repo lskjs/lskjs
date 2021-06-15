@@ -1,8 +1,8 @@
-import Module from '@lskjs/module';
+import { Module } from '@lskjs/module';
 
-import Rlog from './Rlog';
+import { Rlog } from './Rlog';
 
-export default class RlogModule extends Module {
+export class RlogModule extends Module {
   async init() {
     await super.init();
     this.config = this.app.config.rlog || this.app.config.notifyLogger;
@@ -34,3 +34,5 @@ export default class RlogModule extends Module {
     return this.logger.fatal(...args);
   }
 }
+
+export default RlogModule;
