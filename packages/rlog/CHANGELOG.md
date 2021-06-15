@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.57](https://github.com/lskjs/lskjs/tree/master/packages/rlog/compare/v2.3.0-beta.56...v2.3.0-beta.57) (2021-06-15)
+
+
+### Features
+
+* **rlog:** update rlog ([65aca0a](https://github.com/lskjs/lskjs/tree/master/packages/rlog/commit/65aca0a050daa9074338cbaadb1ce8716a486584))
+
+
+
+
+
 # [2.3.0-beta.52](https://github.com/lskjs/lskjs/tree/master/packages/rlog/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
 
 **Note:** Version bump only for package @lskjs/rlog
