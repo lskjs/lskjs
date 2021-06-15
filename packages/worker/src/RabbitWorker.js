@@ -37,8 +37,9 @@ export class RabbitWorker extends Module {
       .join('\n');
     // console.log(66666);
     // const str = `\n${err.code}\n${err.message || ''}\n\n${JSON.stringify(params)}\n\n/api/${this.name}?${toQs(params)}`;
-    if (this.app.rlog) {
-      this.app.rlog.error(str, {
+    if (this.app.hasModule('rlog')) {
+      const rlog = this.app.module('rlog');
+      rlog.error(str, {
         prefix: `worker/${process.env.SERVICE || this.name}`,
       });
     }
