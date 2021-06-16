@@ -8,6 +8,7 @@ export const apmMock = {
     return {
       end: () => null,
       startSpan: () => ({ end: () => null }),
+      setCustomContext: () => null,
       addLabels: () => null,
       setLabel: () => null,
     };
@@ -18,10 +19,10 @@ export const apmMock = {
   setCustomContext() {
     return null;
   },
-  setLabel() {
+  addLabels() {
     return null;
   },
-  addLabels() {
+  setLabel() {
     return null;
   },
 };

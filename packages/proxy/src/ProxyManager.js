@@ -59,7 +59,10 @@ export class ProxyManager extends Module {
       manager: this,
     });
   }
-  async getLocalhostProxy() {
+  static getLocalhostProxy() {
+    return new Proxy({ provider: 'localhost' });
+  }
+  getLocalhostProxy() {
     return new Proxy({ provider: 'localhost' });
   }
   async getProxies(filter) {

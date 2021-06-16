@@ -75,6 +75,9 @@ export class Stats {
     return isRemove;
   }
 
+  start() {
+    return this.run();
+  }
   run() {
     this.runPrint(this.printOptions);
   }
