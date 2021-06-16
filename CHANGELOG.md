@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.58](https://github.com/lskjs/cli/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+
+### Bug Fixes
+
+* **proxy:** mock methods ([1ba6c8d](https://github.com/lskjs/cli/commit/1ba6c8dbb5e2b677ed2d7672f26b02ce03770dd3))
+
+
+
+
+
 # [2.3.0-beta.57](https://github.com/lskjs/cli/compare/v2.3.0-beta.56...v2.3.0-beta.57) (2021-06-15)
 
 

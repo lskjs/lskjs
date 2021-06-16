@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/getspreadsheet",
-  "version": "2.3.0-beta.51",
+  "version": "2.3.0-beta.58",
   "description": "LSK getspreadsheet.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
@@ -22,7 +22,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.3.0-beta.48",
+    "@lskjs/utils": "2.3.0-beta.58",
     "bluebird": "3.7.2",
     "commander": "6.2.1",
     "csv-parse": "4.14.2",

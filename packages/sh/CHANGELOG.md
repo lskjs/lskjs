@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.58](https://github.com/lskjs/ux/tree/master/packages/sh/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/sh
+
+
+
+
+
 # [2.3.0-beta.48](https://github.com/lskjs/ux/tree/master/packages/sh/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
 
 **Note:** Version bump only for package @lskjs/sh
