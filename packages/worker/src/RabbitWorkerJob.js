@@ -31,12 +31,12 @@ export class RabbitWorkerJob extends Module {
     await super.init();
     this.stats = this.worker.stats;
     this.startedAt = new Date();
+    let apm;
     if (this.app.hasModule('apm')) {
-      const apm = await this.app.module('apm', { throw: false });
-      this.tx = apm.startTransaction(this.name, 'job');
-    } else {
-      this.tx = apmMock;
+      apm = await this.app.module('apm', { throw: false });
     }
+    if (!apm) apm = apmMock;
+    this.tx = apm.startTransaction(this.name, 'job');
   }
   getQueueMeta() {
     return {
