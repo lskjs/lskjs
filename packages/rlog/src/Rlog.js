@@ -129,7 +129,7 @@ export class Rlog {
         tags: params.tags,
       })
       .catch((err) => {
-        console.error(`Rlog.${action} error: ${Err.code(err.code)}`);
+        console.error(`Rlog.${action} error: ${Err.code(err)}`);
         return null;
       });
   }
