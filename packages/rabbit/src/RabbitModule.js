@@ -150,9 +150,17 @@ export class RabbitModule extends Module {
   assertExchange(exchange, type = 'direct', options = {}) {
     return this.listenChannel.assertExchange(exchange, type, options);
   }
-  publish(exchange, key, msg, options = {}) {
+  async publish(exchange, key, msg, options = {}, channel = this.sendChannel) {
     const row = serializeData(msg);
-    return this.listenChannel.publish(exchange, key, Buffer.from(row), options);
+    return new Bluebird((res, rej) => {
+      channel.publish(exchange, key, Buffer.from(row), options, (err, ok) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(ok);
+        }
+      });
+    });
   }
   bindQueue(queue, source, pattern, ...args) {
     return this.listenChannel.bindQueue(queue, source, pattern, ...args);
