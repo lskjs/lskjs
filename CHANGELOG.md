@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.60](https://github.com/lskjs/cli/compare/v2.3.0-beta.59...v2.3.0-beta.60) (2021-06-18)
+
+
+### Bug Fixes
+
+* **rabbit:** async publish ([54e9b1f](https://github.com/lskjs/cli/commit/54e9b1f294e18299acb4939a6e429c4efd2b1aa5))
+
+
+
+
+
 # [2.3.0-beta.59](https://github.com/lskjs/cli/compare/v2.3.0-beta.58...v2.3.0-beta.59) (2021-06-18)
 
 
