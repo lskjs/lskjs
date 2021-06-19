@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.62](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.61...v2.3.0-beta.62) (2021-06-19)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix likes ([6ce79b5](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/6ce79b51b93dbdc2ecb1778d3bd10b86915e1e79))
+* **bots-provider-telegram:** save message and save event ([449a4e2](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/449a4e280ae891b5fba697f4ec47db311de67750))
+
+
+
+
+
 # [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
 
 **Note:** Version bump only for package @lskjs/bots-provider-telegram

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.62](https://github.com/lskjs/cli/compare/v2.3.0-beta.61...v2.3.0-beta.62) (2021-06-19)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** answer ([0766a16](https://github.com/lskjs/cli/commit/0766a162807ab8320b28ffaf50197bb8335272be))
+* **bots-plugin-portal:** fix ctx in messageAddExtra ([1a102d3](https://github.com/lskjs/cli/commit/1a102d31f9d19ad75038e33e4dd635159472f670))
+* **bots-plugin-portal:** fix likes ([6ce79b5](https://github.com/lskjs/cli/commit/6ce79b51b93dbdc2ecb1778d3bd10b86915e1e79))
+* **bots-plugin-portal:** fix reply and sendMessage ([3952b0e](https://github.com/lskjs/cli/commit/3952b0eb48e7a80637642788a7c96195e547c830))
+* **bots-plugin-portal:** like ([1ffe1c1](https://github.com/lskjs/cli/commit/1ffe1c19f7253b18b2080cb4e75929946ded61fe))
+* **bots-plugin-portal:** reply and sendMessage ([7638870](https://github.com/lskjs/cli/commit/763887080dda914f2efdd3863e982b2be6adb7df))
+* **bots-plugin-portal:** sender ([8ea72c0](https://github.com/lskjs/cli/commit/8ea72c06507c3cd94729858eafd29eadcfe7dc14))
+* **bots-provider-telegram:** save message and save event ([449a4e2](https://github.com/lskjs/cli/commit/449a4e280ae891b5fba697f4ec47db311de67750))
+
+
+### Features
+
+* **bots-plugin-portal:** add createMessage ([9fd565c](https://github.com/lskjs/cli/commit/9fd565c11732e7e319dfee61a6630097f35d1459))
+* **bots-plugin-portal:** editMessage and messageEditExtra ([0d6d2c1](https://github.com/lskjs/cli/commit/0d6d2c1a14c2838bed0e6ab1ba7a78bbf9a8c888))
+* **bots-plugin-portal:** messageAddExtra ([2b1e0ca](https://github.com/lskjs/cli/commit/2b1e0ca68914edca4ed553986689a57da1f2aaa9))
+
+
+
+
+
 # [2.3.0-beta.61](https://github.com/lskjs/cli/compare/v2.3.0-beta.60...v2.3.0-beta.61) (2021-06-18)
 
 
