@@ -1,3 +1,7 @@
-export default async function reply({ text }) {
-  return this.bot.reply(this.ctx, text);
+export default async function reply(params) {
+  const { parent = {}, text, extra } = params;
+  const messageExtra = extra || parent.extra || {};
+  const messageText = text || parent.text || 'undefined';
+
+  return this.bot.reply(this.ctx, messageText, messageExtra);
 }

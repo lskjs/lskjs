@@ -3,9 +3,11 @@ import BaseBotProvider from '@lskjs/bots-provider';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
-import { session, Telegraf } from 'telegraf';
+import { Context, session, Telegraf } from 'telegraf';
 
-export type TelegramIBotProviderMessageCtx = IBotProviderMessageCtx;
+// export type TelegramBotContext = IBotProviderMessageCtx;
+
+type TelegramBotContext = Context;
 
 /**
  * Docs: https://telegraf.js.org/#/
@@ -33,8 +35,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'TelegramBotProvider !config.token';
-    const { Telegraf } = this;
-    this.client = new Telegraf(this.config.token);
+    this.client = new Telegraf<TelegramBotContext>(this.config.token);
     this.client.use(session());
     // TODO: временный костыль, @volkovpishet починит
     // this.client.use(async (ctx, next) => {
@@ -48,137 +49,55 @@ export default class TelegramBotProvider extends BaseBotProvider {
     await this.initEventEmitter();
     await this.client.launch();
   }
-  getMessage(ctx: TelegramIBotProviderMessageCtx): TelegramIBotProviderMessageCtx {
-    if (get(ctx, 'update.callback_query.message')) return get(ctx, 'update.callback_query.message');
-    if (get(ctx, 'update.channel_post')) return get(ctx, 'update.channel_post');
-    if (get(ctx, 'message')) return get(ctx, 'message');
-    return ctx;
-  }
-  getUser(ctx: TelegramIBotProviderMessageCtx): TelegramIBotProviderMessageCtx {
-    if (get(ctx, 'update.callback_query.from')) return get(ctx, 'update.callback_query.from');
-    if (get(ctx, 'update.channel_post.from')) return get(ctx, 'update.channel_post.from');
-    if (get(ctx, 'update.message.from')) return get(ctx, 'update.message.from');
-    return ctx;
-  }
-  getUserId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    return this.getUser(ctx).id;
-  }
-  getMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getMessage(ctx);
-    return message.message_id || null;
-  }
-  getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getMessage(ctx);
-    if (get(message, 'from.id')) return get(message, 'from.id');
-    return null;
-  }
-  getMessageChatId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getMessage(ctx);
-    if (get(message, 'chat.id')) return get(message, 'chat.id');
-    return null;
-  }
-  getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getMessage(ctx);
-    return get(message, 'message_id', null);
-  }
-  getRepliedMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx {
-    const message = this.getMessage(ctx);
-    return message.reply_to_message || null;
-  }
-  getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getRepliedMessage(ctx);
-    if (!message) return null;
-    return message.message_id || null;
-  }
-  getCallback(ctx: TelegramIBotProviderMessageCtx): any | null {
-    return ctx.update && ctx.update.callback_query;
-  }
-  getCallbackMessage(ctx: TelegramIBotProviderMessageCtx): IBotProviderMessageCtx | null {
-    const callback = this.getCallback(ctx);
-    if (!callback) return null;
-    return callback.message;
-  }
-  getCallbackMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getRepliedMessage(ctx);
-    if (!message) return null;
-    return message.message_id || null;
-  }
-  getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any | null {
-    return get(ctx, 'update.callback_query.data', null);
-  }
-  getMessageText(ctx: TelegramIBotProviderMessageCtx): string | null {
-    if (typeof ctx === 'string') return ctx;
-    const message = this.getMessage(ctx);
-    if (!message) return null;
-    if (message.caption) return message.caption;
-    if (message.text) return message.text;
-    return null;
-  }
-  setMessageText(ctx: TelegramIBotProviderMessageCtx, text: string): string | null {
-    if (typeof ctx === 'string') return null;
-    if (get(ctx, 'update.callback_query.message.caption'))
-      return set(ctx, 'update.callback_query.message.caption', text);
-    if (get(ctx, 'update.callback_query.message.text')) return set(ctx, 'update.callback_query.message.text', text);
-    if (get(ctx, 'update.channel_post.caption')) return set(ctx, 'update.channel_post.caption', text);
-    if (get(ctx, 'update.channel_post.text')) return set(ctx, 'update.channel_post.text', text);
-    if (get(ctx, 'message.caption')) return set(ctx, 'message.caption', text);
-    if (get(ctx, 'message.text')) return set(ctx, 'message.text', text);
-    return null;
-  }
-  setMessage(ctx: TelegramIBotProviderMessageCtx, path: string, value: any): any | null {
-    if (typeof ctx === 'string') return null;
-    const msgPath = (path && `.${path}`) || '';
-    if (get(ctx, `update.callback_query${msgPath}`)) return set(ctx, `update.callback_query${msgPath}`, value);
-    if (get(ctx, `update.channel_post${msgPath}`)) return set(ctx, `update.channel_post${msgPath}`, value);
-    if (get(ctx, `message${msgPath}`)) return set(ctx, `message${msgPath}`, value);
-    return null;
-  }
-  async getChatMember(chatId: string | number, userId: string | number): any {
-    try {
-      const chatMember = await this.client.telegram.getChatMember(chatId, userId);
-      return chatMember;
-    } catch (error) {
-      return {};
+  async saveMessage(ctx: TelegramBotContext, meta: any): Promise<any> {
+    const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
+    const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
+    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
+    const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
+    const botId = this.getBotId();
+    const type = this.getMessageType(ctx);
+    const eventData = this.getMessage(ctx);
+    const { from, chat } = eventData;
+    let telegramUserId;
+    let chatUserId;
+    const flags = {
+      new: true,
+      upsert: true,
+    };
+    if (from) {
+      const { id } = from;
+      ({ _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate({ id }, { ...from, id }, flags));
     }
-  }
-  async userInChat(chatId: string | number, userId: string | number): boolean | undefined {
-    const chatMember = await this.getChatMember(chatId, userId);
-    if (isEmpty(chatMember)) return undefined;
-    if (chatMember.status === 'left') return false;
-    return true;
-  }
-  isMessageCallback(ctx: TelegramIBotProviderMessageCtx): boolean {
-    return get(ctx, 'updateType') === 'callback_query';
-  }
-  isMessageCommand(ctx: TelegramIBotProviderMessageCtx, command: RegExp | string): boolean {
-    return this.isMessageStartsWith(ctx, `/${command || ''}`);
-  }
-  getMessageCommand(ctx: TelegramIBotProviderMessageCtx): string | null {
-    const messageText = this.getMessageText(ctx);
-    if (messageText[0] !== '/') return null;
-    return messageText.split('@')[0].split(' ')[0];
-  }
-  getMessageDate(ctx: TelegramIBotProviderMessageCtx): Date {
-    const message = this.getMessage(ctx);
-    return new Date(message.date * 1000);
-  }
-  getMessageChatType(ctx: TelegramIBotProviderMessageCtx): string | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
-    const message = this.getMessage(ctx);
-    if (get(message, 'chat.type')) return get(message, 'chat.type');
-    return null;
+    if (chat) {
+      const { id, title, username } = chat;
+      ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate(
+        { id },
+        { ...from, id, username: username || title },
+        flags,
+      ));
+    }
+    const data = {
+      botId,
+      telegramUserId,
+      chatUserId,
+      type,
+      meta,
+      ...eventData,
+    };
+    await BotsTelegramMessageModel.create(data);
+    await BotsEventModel.create({
+      botId,
+      provider: this.provider,
+      type: 'message',
+      data: eventData,
+    });
+    this.log.trace('[message]: ', eventData);
   }
   /**
    * Docs: https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
    * @param {object} ctx message or message context
    */
-  getMessageType(ctx: TelegramIBotProviderMessageCtx): string | null {
+  getMessageType(ctx: TelegramBotContext): string | null {
     const message = this.getMessage(ctx);
     if (message.audio) return 'audio';
     if (message.document) return 'document';
@@ -209,74 +128,127 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return null;
   }
 
-  async saveEvent(ctx: TelegramIBotProviderMessageCtx, data = {}): Promise<any> {
-    const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
-    const botId = this.getBotId();
-    const eventData = this.getMessage(ctx);
-    const { chat, message_id: messageId } = eventData;
-
-    return BotsEventModel.findOneAndUpdate(
-      { botId, provider: this.provider, 'data.chat': chat, 'data.message_id': messageId },
-      { ...data },
-      {
-        new: true,
-        upsert: true,
-      },
-    );
-  }
-
-  async saveMessage(ctx: TelegramIBotProviderMessageCtx, parentCtx: TelegramIBotProviderMessageCtx): Promise<any> {
-    const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
-    const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
-    const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
-    const BotsTelegramChatModel = await this.botsModule.module('models.BotsTelegramChatModel');
-    const botId = this.getBotId();
-    const type = this.getMessageType(ctx);
-    const eventData = this.getMessage(ctx);
-    const { from, chat } = eventData;
-    let telegramUserId;
-    let chatUserId;
-    if (from) {
-      const { id } = from;
-      ({ _id: telegramUserId } = await BotsTelegramUserModel.findOneAndUpdate(
-        { id },
-        { ...from, id },
-        {
-          new: true,
-          upsert: true,
-        },
-      ));
-    }
-    if (chat) {
-      const { id } = chat;
-      ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate(
-        {
-          id,
-        },
-        { ...from, id, username: chat.username || chat.title },
-        {
-          new: true,
-          upsert: true,
-        },
-      ));
-    }
-    const data = {
-      botId,
-      telegramUserId,
-      chatUserId,
-      type,
-      meta: { parent: this.getMessage(parentCtx) },
-      ...eventData,
-    };
-    await BotsTelegramMessageModel.create(data);
-    await BotsEventModel.create({
-      botId,
-      provider: this.provider,
-      type: 'message',
-      data: eventData,
-    });
-    this.log.trace('[message]: ', eventData);
+  getMessage(ctx: TelegramBotContext): TelegramBotContext {
+    if (get(ctx, 'update.callback_query.message')) return get(ctx, 'update.callback_query.message');
+    if (get(ctx, 'update.channel_post')) return get(ctx, 'update.channel_post');
+    if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
+  }
+  getUser(ctx: TelegramBotContext): TelegramBotContext {
+    if (get(ctx, 'update.callback_query.from')) return get(ctx, 'update.callback_query.from');
+    if (get(ctx, 'update.channel_post.from')) return get(ctx, 'update.channel_post.from');
+    if (get(ctx, 'update.message.from')) return get(ctx, 'update.message.from');
+    return ctx;
+  }
+  getUserId(ctx: TelegramBotContext): number | null {
+    return this.getUser(ctx).id;
+  }
+  getMessageId(ctx: TelegramBotContext): number | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getMessage(ctx);
+    return message.message_id || null;
+  }
+  getMessageUserId(ctx: TelegramBotContext): number | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getMessage(ctx);
+    if (get(message, 'from.id')) return get(message, 'from.id');
+    return null;
+  }
+  getMessageChatId(ctx: TelegramBotContext): number | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getMessage(ctx);
+    if (get(message, 'chat.id')) return get(message, 'chat.id');
+    return null;
+  }
+  getMessageTargetId(ctx: TelegramBotContext): number | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getMessage(ctx);
+    return get(message, 'message_id', null);
+  }
+  getRepliedMessage(ctx: TelegramBotContext): IBotProviderMessageCtx {
+    const message = this.getMessage(ctx);
+    // console.log({message})
+    return message.reply_to_message || null;
+  }
+  getRepliedMessageId(ctx: TelegramBotContext): number | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getRepliedMessage(ctx);
+    // console.log({getRepliedMessage: message})
+
+    if (!message) return null;
+    return message.message_id || null;
+  }
+  getCallback(ctx: TelegramBotContext): any | null {
+    return ctx.update && ctx.update.callback_query;
+  }
+  getCallbackMessage(ctx: TelegramBotContext): IBotProviderMessageCtx | null {
+    const callback = this.getCallback(ctx);
+    if (!callback) return null;
+    return callback.message;
+  }
+  getCallbackMessageId(ctx: TelegramBotContext): number | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getRepliedMessage(ctx);
+    if (!message) return null;
+    return message.message_id || null;
+  }
+  getMessageCallbackData(ctx: TelegramBotContext): any | null {
+    return get(ctx, 'update.callback_query.data', null);
+  }
+  getMessageText(ctx: TelegramBotContext): string | null {
+    if (typeof ctx === 'string') return ctx;
+    const message = this.getMessage(ctx);
+    if (!message) return null;
+    if (message.caption) return message.caption;
+    if (message.text) return message.text;
+    return null;
+  }
+  setMessageText(ctx: TelegramBotContext, text: string): string | null {
+    if (typeof ctx === 'string') return null;
+    // eslint-disable-next-line max-len
+    if (get(ctx, 'update.callback_query.message.caption'))
+      return set(ctx, 'update.callback_query.message.caption', text);
+    if (get(ctx, 'update.callback_query.message.text')) return set(ctx, 'update.callback_query.message.text', text);
+    if (get(ctx, 'update.channel_post.caption')) return set(ctx, 'update.channel_post.caption', text);
+    if (get(ctx, 'update.channel_post.text')) return set(ctx, 'update.channel_post.text', text);
+    if (get(ctx, 'message.caption')) return set(ctx, 'message.caption', text);
+    if (get(ctx, 'message.text')) return set(ctx, 'message.text', text);
+    return null;
+  }
+  async getChatMember(chatId: string | number, userId: string | number): any {
+    try {
+      const chatMember = await this.client.telegram.getChatMember(chatId, userId);
+      return chatMember;
+    } catch (error) {
+      return {};
+    }
+  }
+  async userInChat(chatId: string | number, userId: string | number): boolean | undefined {
+    const chatMember = await this.getChatMember(chatId, userId);
+    if (isEmpty(chatMember)) return undefined;
+    if (chatMember.status === 'left') return false;
+    return true;
+  }
+  isMessageCallback(ctx: TelegramBotContext): boolean {
+    return get(ctx, 'updateType') === 'callback_query';
+  }
+  isMessageCommand(ctx: TelegramBotContext, command: RegExp | string): boolean {
+    return this.isMessageStartsWith(ctx, `/${command || ''}`);
+  }
+  getMessageCommand(ctx: TelegramBotContext): string | null {
+    const messageText = this.getMessageText(ctx);
+    if (messageText[0] !== '/') return null;
+    return messageText.split('@')[0].split(' ')[0];
+  }
+  getMessageDate(ctx: TelegramBotContext): Date {
+    const message = this.getMessage(ctx);
+    return new Date(message.date * 1000);
+  }
+  getMessageChatType(ctx: TelegramBotContext): string | null {
+    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    const message = this.getMessage(ctx);
+    if (get(message, 'chat.type')) return get(message, 'chat.type');
+    return null;
   }
 
   /**
@@ -288,13 +260,18 @@ export default class TelegramBotProvider extends BaseBotProvider {
    */
   async repost(
     chatId: number | string,
-    ctx: TelegramIBotProviderMessageCtx,
+    ctx: TelegramBotContext,
     initExtra?: Record<string, unknown>,
+    meta = {},
   ): Promise<any> {
     const type = this.getMessageType(ctx);
     const message = this.getMessage(ctx);
-
+    // console.log({ ctx, type, message });
     this.log.trace('repost', type);
+
+    // if (ctx.group) {
+    //   ctx
+    // }
 
     let method: string;
     let args: any[];
@@ -372,10 +349,11 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const telegramArgs = [chatId, ...args, extra];
     this.log.trace(`telegram.${method}`, ...telegramArgs);
     const msg = await this.client.telegram[method](...telegramArgs);
-    return this.saveMessage(msg);
+    await this.saveMessage(msg, meta);
+    return msg;
   }
 
-  async sendContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+  async sendContent(ctx: TelegramBotContext, content: any, extra = {}, meta = {}): Promise<any> {
     this.log.trace('sendContent');
     let type: string;
     let payload: any;
@@ -396,11 +374,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
     } else {
       method = 'sendMessage';
     }
+    // this.log.trace('ctx', method)
     const msg = await this[method](ctx, payload, extra);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg, meta);
   }
 
-  async replyContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
+  async replyContent(ctx: TelegramBotContext, content: any, extra = {}, meta = {}): Promise<any> {
     this.log.trace('replyContent');
     // console.log({ content });
     let type: string;
@@ -420,9 +399,9 @@ export default class TelegramBotProvider extends BaseBotProvider {
       method = 'reply';
     }
     const msg = await ctx[method](payload, extra);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg);
   }
-  async reply(ctx: TelegramIBotProviderMessageCtx, payload: any, initExtra = {}) {
+  async reply(ctx: TelegramBotContext, payload: any, initExtra = {}) {
     this.log.trace('reply');
     const extra = {
       reply_to_message_id: this.getRepliedMessageId(ctx) || this.getMessageId(ctx),  //eslint-disable-line
@@ -433,9 +412,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
       this.log.error(err);
       throw err;
     });
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg, meta);
+    return msg;
   }
-  async editMessage(ctx: TelegramIBotProviderMessageCtx, payload: any, extra = {}) {
+  async editMessage(ctx: TelegramBotContext, payload: any, extra = {}, meta = {}) {
     this.log.trace('editMessage');
     try {
       const msg = await this.client.telegram.editMessageText(
@@ -445,13 +425,14 @@ export default class TelegramBotProvider extends BaseBotProvider {
         payload,
         extra,
       );
-      return this.saveMessage(msg, ctx);
+      await this.saveMessage(msg, meta);
+      return msg;
     } catch (err: any) {
       this.log.error(err);
       return err;
     }
   }
-  async editMessageReplyMarkup(ctx: TelegramIBotProviderMessageCtx, extra = {}) {
+  async editMessageReplyMarkup(ctx: TelegramBotContext, extra = {}, meta = {}) {
     this.log.trace('editMessage');
     try {
       const msg = await this.client.telegram.editMessageReplyMarkup(
@@ -460,13 +441,14 @@ export default class TelegramBotProvider extends BaseBotProvider {
         null,
         extra.reply_markup,
       );
-      return this.saveMessage(msg, ctx);
+      await this.saveMessage(msg, meta);
+      return msg;
     } catch (err: any) {
       this.log.error(err);
       return err;
     }
   }
-  async deleteMessage(ctx: TelegramIBotProviderMessageCtx): any {
+  async deleteMessage(ctx: TelegramBotContext): any {
     const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
     this.log.trace('deleteMessage');
     const chatId = this.getMessageChatId(ctx);
@@ -481,30 +463,35 @@ export default class TelegramBotProvider extends BaseBotProvider {
     );
     return this.client.telegram.deleteMessage(chatId, messageId);
   }
-  async sendMessage(ctx: any, ...args: any[]) {
+  async sendMessage(ctx: any, text: string, extra = {}, meta = {}) {
     this.log.trace('sendMessage');
     const msg = await this.client.telegram.sendMessage(this.getMessageChatId(ctx), ...args);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg, meta);
+    return msg;
   }
   async sendSticker(ctx: any, ...args: any[]) {
     this.log.trace('sendSticker');
     const msg = await this.client.telegram.sendSticker(this.getMessageChatId(ctx), ...args);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg);
+    return msg;
   }
   async sendAnimation(ctx: any, ...args: any[]) {
     this.log.trace('sendAnimation');
     const msg = await this.client.telegram.sendAnimation(this.getMessageChatId(ctx), ...args);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg);
+    return msg;
   }
   async sendDocument(ctx: any, ...args: any[]) {
     this.log.trace('sendDocument');
     const msg = this.client.telegram.sendDocument(this.getMessageChatId(ctx), ...args);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg);
+    return msg;
   }
   async sendPhoto(ctx: any, ...args: any[]) {
     this.log.trace('sendPhoto');
     const msg = await this.client.telegram.sendPhoto(this.getMessageChatId(ctx), ...args);
-    return this.saveMessage(msg, ctx);
+    await this.saveMessage(msg);
+    return msg;
   }
 
   isMessageLike(ctx: any) {
@@ -519,140 +506,4 @@ export default class TelegramBotProvider extends BaseBotProvider {
     }
     return firstSign && likes.includes(firstSign);
   }
-  // async repost({message, chatId, forwardFrom}) {
-  //   const data = { };
-  //   if (message.sticker) {
-  //     data.type = 'sticker';
-  //     data.method = 'sendSticker';
-  //     data.path = message.sticker.file_id;
-  //   }
-  //   if (message.photo) {
-  //     data.type = 'photo';
-  //     data.method = 'sendPhoto';
-  //     data.text = message.caption || '';
-  //     data.path = message.photo[0].file_id;
-  //     data.opt = {
-  //       caption: message.caption,
-  //     };
-  //   }
-  //   if (message.voice) {
-  //     data.type = 'voice';
-  //     data.method = 'sendVoice';
-  //     data.path = message.voice.file_id;
-  //   }
-  //   if (message.video_note) {
-  //     data.type = 'video_note';
-  //     data.method = 'sendVideoNote';
-  //     data.path = message.video_note.file_id;
-  //   }
-  //   if (message.video) {
-  //     data.type = 'video';
-  //     data.method = 'sendVideo';
-  //     data.path = message.video.file_id;
-  //   }
-  //   if (message.location) {
-  //     data.type = 'location';
-  //     data.method = 'sendLocation';
-  //     data.path = message.location.latitude;
-  //     data.opt = message.location.longitude;
-  //   }
-  //   if (message.document) {
-  //     data.type = 'document';
-  //     data.method = 'sendDocument';
-  //     data.path = message.document.file_id;
-  //     data.opt = {
-  //       caption: message.caption,
-  //     };
-  //   }
-  //   if (message.text) {
-  //     data.type = 'text';
-  //     data.method = 'sendMessage';
-  //     data.path = message.text;
-  //   }
-  //   if (message.audio) {
-  //     data.type = 'audio';
-  //     data.method = 'sendAudio';
-  //     data.path = message.audio.file_id;
-  //   }
-  //   if (forwardFrom) {
-  //     return this.bot.forwardMessage(chatId, forwardFrom, message.message_id);
-  //   } else if (data.method) {
-  //     return this.bot[data.method](chatId, data.path, data.opt || {});
-  //   } else {
-  //     console.error('НАТА РЕАЛИЗУЙ МЕНЯ', message);
-  //     return null;
-  //   }
-  // }
-
-  // testGroupId(message, id) {
-  //   const chatId = message.chat.id || message.from.id;
-  //   return chatId == id;
-  // }
-
-  // letter = '[a-zA-Zа-яА-ЯёЁ0-9]';
-  // nonLetter = '[^a-zA-Zа-яА-ЯёЁ0-9]';
-
-  // wordBoundary(text, word) {
-  //   text.toLowerCase();
-  //   const regExp = new RegExp(`\\s${word}\\s`, 'g');
-  //   text = text.replace(new RegExp(this.nonLetter, 'g'), ' ');
-  //   text = ` ${text} `;
-  //   return text.match(regExp);
-  // }
-
-  // randomInteger(min, max) {
-  //   return random(min, max);
-  // }
-
-  // percentProbability(percent) {
-  //   const r = random(0, 100);
-  //   return r < percent;
-  // }
-
-  // send(msg, text, params) {
-  //   let {
-  //     delay = random(0, 5, 1),
-  //     reply = 50,
-  //     method = 'sendMessage',
-  //   } = params;
-  //   const chatId = msg.chat.id || msg.from.id;
-  //   const bot = this.bot;
-  //   const opt = this.percentProbability(reply) ? {
-  //     reply_to_message_id: msg.message_id
-  //   } : {};
-
-  //   setTimeout(function () {
-  //     bot[method](chatId, text, opt);
-  //   }, delay);
-  // }
-  // sendSticker(msg, text, params = {}) {
-  //   this.send(msg, text, {
-  //     ...params,
-  //     method: 'sendSticker',
-  //   })
-  // }
-  // sendMessage(msg, text, params = {}) {
-  //   this.send(msg, text, {
-  //     ...params,
-  //     method: 'sendMessage',
-  //   })
-  // }
-  // sendPhoto(msg, text, params = {}) {
-  //   this.send(msg, text, {
-  //     ...params,
-  //     method: 'sendPhoto',
-  //   })
-  // }
-
-  // editMessage(msg, text) {
-  //   msg.then((sended) => {
-  //     const chatId = sended.chat.id;
-  //     const messageId = sended.message_id;
-  //     this.bot.editMessageText(text, { chat_id: chatId, message_id: messageId });
-  //   });
-  // }
-
-  // deleteMessage(chat_id, message_id, params = {}) {
-  //   this.bot.deleteMessage(chat_id, message_id, params);
-  // }
 }
