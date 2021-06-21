@@ -16,7 +16,6 @@ export class I18Module extends Module {
   async instance(locale = this.locale) {
     if (!locale) throw '!locale';
     const { locales = [] } = this;
-    console.log(locales)
     if (!locales.includes(locale)) throw `!locales[${locale}]`;
     if (!this.instances[locale]) {
       this.instances[locale] = await this.I18Instance.createAndRun({ config: { locale } });
