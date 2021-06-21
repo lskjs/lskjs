@@ -4,7 +4,7 @@ import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import amqp from 'amqplib';
 import Bluebird from 'bluebird';
 import EventEmitter from 'events';
-import debounce from 'lodash/debounce';
+// import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
 import hash from 'object-hash';
@@ -52,12 +52,15 @@ export class RabbitModule extends Module {
   }
   async connect() {
     this.log.trace('connecting', maskUriPassword(this.config.uri));
+    // console.log('create connection...');
     this.listenConnection = await this.createConnection();
     this.sendConnection = await this.createConnection();
+    // console.log('connections created...');
     this.listenChannel = await this.listenConnection.createChannel();
     this.listenChannel.on('error', this.debouncedOnError.bind(this));
     this.listenChannel.on('close', this.debouncedOnError.bind(this));
     this.sendChannel = await this.sendConnection.createConfirmChannel();
+    // console.log('channels created...');
     this.sendChannel.on('error', this.debouncedOnError.bind(this));
     this.sendChannel.on('close', this.debouncedOnError.bind(this));
     this.onOpen();
@@ -90,10 +93,15 @@ export class RabbitModule extends Module {
       await this.onError(e);
     }
   }
-  debouncedOnError = debounce((...args) => {
-    this.onError(...args);
-  }, 1000);
+  // debouncedOnError = debounce((...args) => {
+  //   this.onError(...args);
+  // }, 1000);
+  debouncedOnError() {
+    // console.log(err, 'ну что тут?');
+    process.exit(1);
+  }
   async onError(err) {
+    if (!err) return;
     this.emit('connectionError');
     this.log.error(err);
     const { reconnectTimeout } = this.config;
@@ -246,6 +254,9 @@ export class RabbitModule extends Module {
   }
   async stop() {
     // this.log.warn('STOP ALL CONNECTIONS')
+    if (super.stop) {
+      await super.stop();
+    }
     try {
       await this.listenChannel.close();
     } catch (err) {}
