@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.63](https://github.com/lskjs/cli/compare/v2.3.0-beta.62...v2.3.0-beta.63) (2021-06-21)
+
+
+### Bug Fixes
+
+* remove locales log ([eb83ba3](https://github.com/lskjs/cli/commit/eb83ba3b65b0d8104d63ff8f0a02f232724bc48c))
+* **rabbit:** temp fix ([8727b2b](https://github.com/lskjs/cli/commit/8727b2ba80ee2c0fee15bd6d48a7f16301ad69d4))
+
+
+### Features
+
+* **creds:** add README ([54dba87](https://github.com/lskjs/cli/commit/54dba879120c35cbeec990e1bddf40c89188d3ea))
+
+
+
+
+
 # [2.3.0-beta.62](https://github.com/lskjs/cli/compare/v2.3.0-beta.61...v2.3.0-beta.62) (2021-06-19)
 
 

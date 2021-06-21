@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.63](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.3.0-beta.62...v2.3.0-beta.63) (2021-06-21)
+
+
+### Bug Fixes
+
+* **rabbit:** temp fix ([8727b2b](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/commit/8727b2ba80ee2c0fee15bd6d48a7f16301ad69d4))
+
+
+
+
+
 # [2.3.0-beta.60](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.3.0-beta.59...v2.3.0-beta.60) (2021-06-18)
 
 
