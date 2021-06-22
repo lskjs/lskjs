@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.64](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.63...v2.3.0-beta.64) (2021-06-22)
+
+
+### Features
+
+* **worker:** add default getErrorInfo ([3ff98a7](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/3ff98a7687e20d165a25286b8228e353ebaf087a))
+
+
+
+
+
 # [2.3.0-beta.63](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.62...v2.3.0-beta.63) (2021-06-21)
 
 **Note:** Version bump only for package @lskjs/worker
