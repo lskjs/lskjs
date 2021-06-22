@@ -46,8 +46,7 @@ export class RabbitWorkerJob extends Module {
       },
     };
   }
-  isTooMuchRedelivered({ err }) {
-    if (err && (err.redelivered === 0 || err.redelivered === false)) return false;
+  isTooMuchRedelivered() {
     if (!this.msg) return false;
     if (!this.redeliveredCount) return false;
     return this.msg.fields.redelivered && this.msg.fields.deliveryTag > this.redeliveredCount;

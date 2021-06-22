@@ -1,8 +1,11 @@
 import Module from '@lskjs/module';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import { isDev } from '@lskjs/utils/env';
 import Err from '@lskjs/utils/Err';
 import importFn from '@lskjs/utils/importFn';
+
+import { createErrorInfo } from './createErrorInfo';
 
 export class WorkerApp extends Module {
   preload = true;
@@ -17,6 +20,7 @@ export class WorkerApp extends Module {
   }
   async init() {
     await super.init();
+    if (!this.getErrorInfo) this.getErrorInfo = createErrorInfo(this.errors);
     this.on('runFinish', () => this.started());
   }
   async worker(nameOrNames) {
@@ -64,7 +68,7 @@ export class WorkerApp extends Module {
     } else {
       str = `🎃 The ${this.name} is ready ${timing}`;
     }
-    if (__DEV__) {
+    if (isDev) {
       this.log.info(str);
     } else {
       this.log.warn(str);

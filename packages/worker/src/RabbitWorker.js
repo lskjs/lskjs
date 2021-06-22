@@ -1,4 +1,5 @@
 import Module from '@lskjs/module';
+import { isDev } from '@lskjs/utils/env';
 import Err from '@lskjs/utils/Err';
 import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
@@ -24,14 +25,19 @@ export class RabbitWorker extends Module {
   }
   async onTelegramError({ err, job }) {
     const { params } = job || {};
+    let code = Err.getCode(err);
+    let message = Err.getMessage(err);
+    if (code === message) message = null;
+    if (code) code = `[${code}]`;
+    let worker = process.env.SERVICE || this.name;
+    if (worker) worker = `<${worker}>`;
     const str = [
-      Err.getCode(err),
-      Err.getMessage(err),
+      worker,
+      code,
+      message,
       err.data && JSON.stringify(err && err.data, null, 2),
       '\n',
       prettyStringify(params),
-      '\n',
-      `/api/${this.worker || this.name}?${toQs(params)}`,
     ]
       .filter(Boolean)
       .join('\n');
@@ -39,15 +45,15 @@ export class RabbitWorker extends Module {
     // const str = `\n${err.code}\n${err.message || ''}\n\n${JSON.stringify(params)}\n\n/api/${this.name}?${toQs(params)}`;
     if (this.app.hasModule('rlog')) {
       const rlog = await this.app.module('rlog');
-      rlog.error(str, {
-        prefix: `worker/${process.env.SERVICE || this.name}`,
-      });
+      rlog.error(str);
     }
   }
   async onConsumeError({ err, job }) {
-    const errInfo = this.app && this.app.getErrorInfo ? this.app.getErrorInfo(Err.getCode(err)) : {};
-    const nack = get(errInfo, 'nack', true);
-    const telegram = get(errInfo, 'telegram', true) && !__DEV__;
+    const errInfo = this.app && this.app.getErrorInfo ? this.app.getErrorInfo(err) : {};
+    if (this.debug) this.log.trace('onConsumeError errInfo', errInfo);
+    const isApm = get(errInfo, 'apm', true);
+    const isNack = get(errInfo, 'nack', true);
+    const isTelegram = get(errInfo, 'telegram', true);
     const log = get(errInfo, 'log', 'error');
 
     if (err && err.code === 'RABBIT_TIMEOUT') {
@@ -57,13 +63,20 @@ export class RabbitWorker extends Module {
       await Bluebird.delay(rabbitTimeout);
       return;
     }
-    if (log && this.log[log]) {
-      this.log[log](Err.getCode(err), Err.getText(err));
+    if (errInfo.timeout) {
+      this.log.trace('err.timeout [delay]', errInfo.timeout);
+      await Bluebird.delay(errInfo.timeout);
     }
-    if (telegram) {
+    if (log && this.log[log]) {
+      const code = Err.getCode(err);
+      let message = Err.getMessage(err);
+      if (code === message) message = null;
+      this.log[log](...[code, message].filter(Boolean));
+    }
+    if (isTelegram) {
       this.onTelegramError({ err, job });
     }
-    if (this.app.hasModule('apm')) {
+    if (isApm && this.app.hasModule('apm')) {
       const apm = await this.app.module('apm');
       try {
         apm.captureError(err);
@@ -71,19 +84,19 @@ export class RabbitWorker extends Module {
         this.log.error('apm.captureError', apmErr);
       }
     }
-
-    if (!nack) {
+    if (!isNack) {
       if (this.debug) console.error('err4', err); // eslint-disable-line no-console
       await job.ackError(err);
       return;
     }
-    if (job.isTooMuchRedelivered({ err })) {
+    // isNack
+    if (errInfo.redelivered && job.isTooMuchRedelivered()) {
       const routingKey = get(job, 'msg.fields.routingKey');
       const queue = `${routingKey}_redelivered`;
       try {
         await this.rabbit.assertQueueOnce(queue);
         // this.rabbit.consume(this.queue, this.onConsume.bind(this), { noAck: false });
-        this.log.error('manual redeliver', `${routingKey} => ${queue}`);
+        this.log.error('isTooMuchRedelivered', `${routingKey} => ${queue}`);
         const { meta = {} } = job.params;
         await this.rabbit.sendToQueue(queue, {
           ...job.params,
@@ -98,7 +111,7 @@ export class RabbitWorker extends Module {
         if (this.debug) console.error('err1', err); // eslint-disable-line no-console
         await job.ackError(err);
       } catch (err2) {
-        this.log.error('cant re-redeliver', err2, __DEV__ ? err2.stack : '');
+        this.log.error('cant re-redeliver', err2, isDev ? err2.stack : '');
         await job.nackError(err);
       }
       return;
@@ -120,7 +133,7 @@ export class RabbitWorker extends Module {
       ...instance.getQueueMeta(),
       startedAt: instance.startedAt,
       finishedAt: instance.finishedAt,
-      runningTime: instance.finishedAt && instance.finishedAt - instance.startedAt,
+      runningTime: instance.finishedAt ? instance.finishedAt - instance.startedAt : null,
       status: instance.status,
       data: instance.data,
       err: instance.err,
@@ -138,7 +151,7 @@ export class RabbitWorker extends Module {
       params = JSON.parse(msg.content.toString());
     } catch (err) {
       const str = msg.content.toString();
-      if (__DEV__) {
+      if (isDev) {
         this.log.error('[ignore] cant parse json', str);
       } else {
         this.log.error('[ignore] cant parse json ');
@@ -167,7 +180,7 @@ export class RabbitWorker extends Module {
       try {
         const errorParams = pick(error, 'nack', 'es', 'telegram', 'log');
         const err = new Err(error, errorParams);
-        const { delay = __DEV__ ? 10000 : 0 } = this.config.options || {};
+        const { delay = isDev ? 10000 : 0 } = this.config.options || {};
         if (delay) {
           this.log.warn('[delay] 10000');
           await Bluebird.delay(10000);
@@ -175,7 +188,7 @@ export class RabbitWorker extends Module {
         if (job) {
           await this.onConsumeError({ err, job, msg });
         } else {
-          this.msg;
+          // this.msg;
         }
       } catch (err2) {
         this.log.error('error while onError', err2);
