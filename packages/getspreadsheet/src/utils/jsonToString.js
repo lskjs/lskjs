@@ -1,5 +1,6 @@
 import { stringify as JSstringify } from 'javascript-stringify';
 import mapValues from 'lodash/mapValues';
+import omit from 'lodash/omit';
 
 import { getCommentString } from './getCommentString';
 import { jsonToYaml } from './jsonToYaml';
@@ -24,7 +25,14 @@ export function jsonToString(json, { type = 'keyval', comment, indent = 2 } = {}
     );
   }
   if (type === 'yaml' || type === 'yml') {
-    const { __raw: footer = '', ...yamlObject } = json;
+    let yamlObject;
+    let footer;
+    if (Array.isArray(json)) {
+      yamlObject = json;
+      footer = json.__raw;
+    } else {
+      yamlObject = omit(json, ['__raw']);
+    }
     return [
       commentString,
       jsonToYaml(yamlObject, {
