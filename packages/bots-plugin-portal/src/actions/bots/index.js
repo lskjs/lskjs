@@ -23,6 +23,7 @@ export default {
 
   messageTrim: require('./messageTrim').default,
   messageAppend: require('./messageAppend').default,
+  messageSplit: require('./messageSplit').default,
   messageAddExtra: require('./messageAddExtra').default,
   messageEditExtra: require('./messageEditExtra').default,
 };

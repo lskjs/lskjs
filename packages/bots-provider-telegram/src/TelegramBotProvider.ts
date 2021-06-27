@@ -375,6 +375,66 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.saveMessage(msg);
   }
 
+  async sendFile(to: string | number, file: any, extra): Promise<any> {
+    let method = 'sendMessage';
+    let args;
+    const { type } = file;
+    if (type === 'audio') {
+      method = 'sendAudio';
+      args = [file.file_id];
+    } else if (type === 'document') {
+      method = 'sendDocument';
+      args = [file.file_id];
+    } else if (type === 'animation') {
+      method = 'sendAnimation';
+      args = [file.file_id];
+    } else if (type === 'photo') {
+      method = 'sendPhoto';
+      args = [file.file_id];
+    } else if (type === 'sticker') {
+      method = 'sendSticker';
+      args = [file.file_id];
+    } else if (type === 'video') {
+      method = 'sendVideo';
+      args = [file.file_id];
+    } else if (type === 'video_note') {
+      method = 'sendVideoNote';
+      args = [file.file_id];
+    } else if (type === 'voice') {
+      method = 'sendVoice';
+      args = [file.file_id];
+    } else if (type === 'contact') {
+      method = 'sendContact';
+      args = [file];
+    } else if (type === 'dice') {
+      method = 'sendDice';
+      args = [file];
+    } else if (type === 'game') {
+      method = 'sendGame';
+      args = [file];
+    } else if (type === 'poll') {
+      if (file.type === 'quiz') {
+        method = 'sendQuiz';
+      } else {
+        method = 'sendPoll';
+      }
+      args = [file.question, file.options.map((option: any) => option.text)];
+    } else if (type === 'location') {
+      method = 'sendLocation';
+      args = [file.latitude, file.longitude];
+    } else if (type === 'venue') {
+      method = 'sendVenue';
+      args = [file];
+    } else if (type === 'text') {
+      method = 'sendMessage';
+      args = [file.text];
+    }
+    const telegramArgs = [to, ...args, extra];
+    this.log.trace(`telegram.${method}`, ...telegramArgs);
+    const msg = await this.client.telegram[method](...telegramArgs);
+    return this.saveMessage(msg);
+  }
+
   async sendContent(ctx: TelegramIBotProviderMessageCtx, content: any, extra = {}): Promise<any> {
     this.log.trace('sendContent');
     let type: string;
