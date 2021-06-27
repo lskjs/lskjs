@@ -12,8 +12,7 @@ export default async function sendMessage({ to, ...params }) {
   if (!Array.isArray(parent)) parent = [parent];
 
   const data = [];
-
-  if (text && extra) {
+  if (text) {
     const messageText = text;
     const messageExtra = extra || {};
     const result = await Bluebird.map(chats, async (chat) => this.bot.sendMessage(chat, messageText, messageExtra));

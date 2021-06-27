@@ -377,7 +377,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
 
   async sendFile(to: string | number, file: any, extra): Promise<any> {
     let method = 'sendMessage';
-    let args;
+    let args = ['undefined'];
     const { type } = file;
     if (type === 'audio') {
       method = 'sendAudio';
