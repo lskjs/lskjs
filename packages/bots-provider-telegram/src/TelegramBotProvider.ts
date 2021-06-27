@@ -566,6 +566,11 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const msg = await this.client.telegram.sendPhoto(this.getMessageChatId(ctx), ...args);
     return this.saveMessage(msg, ctx);
   }
+  async sendMediaGroup(ctx: any, ...args: any[]) {
+    this.log.trace('sendMediaGroup');
+    const msg = await this.client.telegram.sendMediaGroup(this.getMessageChatId(ctx), ...args);
+    return this.saveMessage(msg, ctx);
+  }
 
   isMessageLike(ctx: any) {
     const message = this.getMessage(ctx);

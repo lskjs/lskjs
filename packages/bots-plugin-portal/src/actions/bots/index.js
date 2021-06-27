@@ -19,11 +19,13 @@ export default {
   forwardMessage: require('./forwardMessage').default,
   copyMessage: require('./copyMessage').default,
   sendMessage: require('./sendMessage').default,
+  sendMediaGroup: require('./sendMediaGroup').default,
   replyInterview: require('./replyInterview').default,
 
   messageTrim: require('./messageTrim').default,
   messageAppend: require('./messageAppend').default,
   messageSplit: require('./messageSplit').default,
+  messagesJoin: require('./messagesJoin').default,
   messageAddExtra: require('./messageAddExtra').default,
   messageEditExtra: require('./messageEditExtra').default,
 };
