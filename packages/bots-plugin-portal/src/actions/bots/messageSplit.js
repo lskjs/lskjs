@@ -29,6 +29,5 @@ export default async function messageSplit(params) {
       data.push(...result);
     });
   }
-  this.parseMessage = data;
   return { res: true, data };
 }
