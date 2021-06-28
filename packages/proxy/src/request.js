@@ -62,7 +62,7 @@ export async function request({
   if (!proxy) {
     if (proxyManager) {
       // eslint-disable-next-line no-param-reassign
-      proxy = proxyManager.getProxy();
+      proxy = await proxyManager.getProxy();
     }
   }
 
