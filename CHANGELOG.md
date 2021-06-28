@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.66](https://github.com/lskjs/cli/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix messageSplit ([8e3cb61](https://github.com/lskjs/cli/commit/8e3cb6110c170f7d9cd6248bbe0f101bcc812ddd))
+* **bots-provider-telegram:** fix sendFile ([ff0db5e](https://github.com/lskjs/cli/commit/ff0db5e8612fdfa300668689b25d41601e91fcae))
+* **proxy:** await getproxy ([64f2ff8](https://github.com/lskjs/cli/commit/64f2ff8966d1bf03df2d1301cf337816d35dc4fb))
+
+
+### Features
+
+* **bots-plugin-portal:** add action messageSplit ([bd7e615](https://github.com/lskjs/cli/commit/bd7e61560045251d33cd37458e67e7f1be2c691c))
+* **bots-plugin-portal:** add messagesJoin and sendMediaGroup ([37d85bd](https://github.com/lskjs/cli/commit/37d85bdd3afa772eef821bc3f3a09856d313c9de))
+
+
+
+
+
 # [2.3.0-beta.65](https://github.com/lskjs/cli/compare/v2.3.0-beta.64...v2.3.0-beta.65) (2021-06-24)
 
 

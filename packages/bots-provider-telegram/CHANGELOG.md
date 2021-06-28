@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.66](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix sendFile ([ff0db5e](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/ff0db5e8612fdfa300668689b25d41601e91fcae))
+
+
+### Features
+
+* **bots-plugin-portal:** add action messageSplit ([bd7e615](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/bd7e61560045251d33cd37458e67e7f1be2c691c))
+* **bots-plugin-portal:** add messagesJoin and sendMediaGroup ([37d85bd](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/37d85bdd3afa772eef821bc3f3a09856d313c9de))
+
+
+
+
+
 # [2.3.0-beta.62](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.61...v2.3.0-beta.62) (2021-06-19)
 
 
