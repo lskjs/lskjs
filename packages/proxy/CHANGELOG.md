@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.66](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
+
+
+### Bug Fixes
+
+* **proxy:** await getproxy ([64f2ff8](https://github.com/lskjs/lskjs/tree/master/packages/proxy/commit/64f2ff8966d1bf03df2d1301cf337816d35dc4fb))
+
+
+
+
+
 # [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/proxy/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
 
 

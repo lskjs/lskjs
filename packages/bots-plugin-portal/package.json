@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-portal",
-  "version": "2.3.0-beta.62",
+  "version": "2.3.0-beta.66",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
