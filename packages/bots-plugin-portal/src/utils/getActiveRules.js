@@ -17,6 +17,7 @@ export default async function getActiveRules({ ctx, bot } = {}) {
   pack.chatId = bot.getMessageChatId(ctx);
   pack.messageType = bot.getMessageType(ctx);
   pack.messageText = bot.getMessageText(ctx);
+  pack.nextRoute = bot.getNextRoute(ctx);
 
   const rules = await updateRules.call(this, { ctx, bot });
 
@@ -51,11 +52,17 @@ export default async function getActiveRules({ ctx, bot } = {}) {
     if (item instanceof RegExp) return item.test(pack.messageText);
     return item === pack.messageText;
   };
+  const checkNextRoute = (item) => {
+    if (Array.isArray(item)) return some(item, checkNextRoute);
+    if (isFunction(item) && !item(pack)) return false;
+    if (item instanceof RegExp) return item.test(pack.nextRoute);
+    return item === pack.nextRoute;
+  };
 
   const checkCriteria = (item) => {
     if (Array.isArray(item)) return some(item, checkCriteria);
     if (isFunction(item) && !item(pack)) return false;
-    const { userId, chatType, chatId, messageType, messageText } = item;
+    const { userId, chatType, chatId, messageType, messageText, nextRoute } = item;
     if (userId && !checkUserId(userId)) {
       this.log.trace('!checkUserId');
       return false;
@@ -74,6 +81,10 @@ export default async function getActiveRules({ ctx, bot } = {}) {
     }
     if (messageText && !checkMessageText(messageText)) {
       this.log.trace('!checkMessageText');
+      return false;
+    }
+    if (nextRoute && !checkNextRoute(nextRoute)) {
+      this.log.trace('!checkNextRoute');
       return false;
     }
     return true;

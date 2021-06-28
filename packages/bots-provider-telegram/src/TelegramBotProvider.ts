@@ -51,6 +51,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   getMessage(ctx: TelegramIBotProviderMessageCtx): TelegramIBotProviderMessageCtx {
     if (get(ctx, 'update.callback_query.message')) return get(ctx, 'update.callback_query.message');
     if (get(ctx, 'update.channel_post')) return get(ctx, 'update.channel_post');
+    if (get(ctx, 'update.message')) return get(ctx, 'update.message');
     if (get(ctx, 'message')) return get(ctx, 'message');
     return ctx;
   }
@@ -111,6 +112,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
   }
   getMessageCallbackData(ctx: TelegramIBotProviderMessageCtx): any | null {
     return get(ctx, 'update.callback_query.data', null);
+  }
+  getNextRoute(ctx: TelegramIBotProviderMessageCtx): string | null {
+    if (['number', 'string'].includes(typeof ctx)) return null;
+    return get(ctx, 'session.nextRoute.path', null);
   }
   getMessageText(ctx: TelegramIBotProviderMessageCtx): string | null {
     if (typeof ctx === 'string') return ctx;
