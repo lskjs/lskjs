@@ -109,6 +109,29 @@ Made on @LSKjs with ❤️`;
         } else if (provider === 'telegram' && type === 'channel_post') {
           eventData = ctx.update.channel_post;
           this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
+          if (this.config?.save === false) return;
+          const messageType = bot.getMessageType(ctx);
+          const { sender_chat, chat } = eventData;
+
+          let chatUserId;
+          if (chat && chat.id < 0) {
+            const { id } = chat;
+            ({ _id: chatUserId } = await BotsTelegramChatModel.findOneAndUpdate(
+              { id },
+              { id },
+              {
+                new: true,
+                upsert: true,
+              },
+            ));
+          }
+          await BotsTelegramMessageModel.create({
+            botId: bot.getBotId(),
+            sender_chat,
+            chatUserId,
+            type: messageType,
+            ...eventData,
+          });
         } else if (provider === 'telegram' && type === 'message') {
           eventData = ctx.message;
           this.log.trace(`<${this.name}/${name}> [${type}]`, eventData);
