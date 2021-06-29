@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.68](https://github.com/lskjs/cli/compare/v2.3.0-beta.67...v2.3.0-beta.68) (2021-06-29)
+
+
+### Bug Fixes
+
+* **rlog:** getCode err ([6b01fd4](https://github.com/lskjs/cli/commit/6b01fd4a65d8b6fb419548edc59ebbcb481fe0d0))
+
+
+
+
+
 # [2.3.0-beta.67](https://github.com/lskjs/cli/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
 
 
