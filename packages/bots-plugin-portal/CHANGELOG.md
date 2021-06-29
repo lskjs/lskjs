@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.69](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.68...v2.3.0-beta.69) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix findMessage ([a074043](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/a074043f6e198ef02b0fb14b4eac6a85cb6beb7f))
+
+
+
+
+
 # [2.3.0-beta.67](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
 
 

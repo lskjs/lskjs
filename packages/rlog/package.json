@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rlog",
-  "version": "2.3.0-beta.68",
+  "version": "2.3.0-beta.69",
   "description": "LSK module for remote logger.",
   "keywords": [
     "rlog"
