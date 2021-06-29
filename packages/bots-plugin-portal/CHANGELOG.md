@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.67](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** findMessage args to arrays; findMessage random mode; fix repost; add criteria 'nextRoute' ([72aeb7e](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/72aeb7ef1f2d1985401357ec276da53879a088d6))
+
+
+
+
+
 # [2.3.0-beta.66](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
 
 

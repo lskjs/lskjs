@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.67](https://github.com/lskjs/cli/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-debug:** save posts in messages ([57e4dba](https://github.com/lskjs/cli/commit/57e4dba6bb7f980ec246b7a3c0a051707f3be4a8))
+* **bots-plugin-portal:** findMessage args to arrays; findMessage random mode; fix repost; add criteria 'nextRoute' ([72aeb7e](https://github.com/lskjs/cli/commit/72aeb7ef1f2d1985401357ec276da53879a088d6))
+* **creds:** hooks ([0334c85](https://github.com/lskjs/cli/commit/0334c85c82a64d74e3339ef9ad1d68eac75d5ad8))
+* **creds:** package bin ([b5cdd6c](https://github.com/lskjs/cli/commit/b5cdd6c4f3399a6a2d96f8ef1e805de09793d514))
+
+
+
+
+
 # [2.3.0-beta.66](https://github.com/lskjs/cli/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
 
 

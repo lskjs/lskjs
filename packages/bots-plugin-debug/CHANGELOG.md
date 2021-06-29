@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.67](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-debug/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-debug:** save posts in messages ([57e4dba](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-debug/commit/57e4dba6bb7f980ec246b7a3c0a051707f3be4a8))
+
+
+
+
+
 # [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-debug/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-debug
