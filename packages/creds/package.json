@@ -9,7 +9,8 @@
   "bin": {
     "build": "./bin/build.js",
     "download": "./bin/download.js",
-    "upload": "./bin/upload.js"
+    "upload": "./bin/upload.js",
+    "hooks": "./bin/hooks.js"
   },
   "scripts": {
     "bootstrap": "lsk run bootstrap",
