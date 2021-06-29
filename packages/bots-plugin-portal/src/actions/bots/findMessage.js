@@ -14,25 +14,25 @@ export default async function findMessage(params) {
   if (!Array.isArray(messageId)) messageId = messageId ? [messageId] : [];
 
   if (chatId.length > 0) {
-    chatId = chatId.map((id) => (id === '$message.chat.id' ? this.bot.getMessageChatId(this.ctx) : id));
+    chatId = chatId.map((id) => (id === '*message.chat.id' ? this.bot.getMessageChatId(this.ctx) : id));
   }
   if (userId.length > 0) {
-    userId = userId.map((id) => (id === '$message.user.id' ? this.bot.getMessageUserId(this.ctx) : id));
+    userId = userId.map((id) => (id === '*message.user.id' ? this.bot.getMessageUserId(this.ctx) : id));
   }
   if (chatType.length > 0) {
-    chatType = chatType.map((type) => (type === '$message.chat.type' ? this.bot.getMessage(this.ctx).chat.type : type));
+    chatType = chatType.map((type) => (type === '*message.chat.type' ? this.bot.getMessage(this.ctx).chat.type : type));
   }
   if (messageType.length > 0) {
-    messageType = messageType.map((type) => (type === '$message.type' ? this.bot.getMessage(this.ctx).type : type));
+    messageType = messageType.map((type) => (type === '*message.type' ? this.bot.getMessage(this.ctx).type : type));
   }
   if (messageText.length > 0) {
-    messageText = messageText.map((text) => (text === '$message.text' ? this.bot.getMessageText(this.ctx) : text));
+    messageText = messageText.map((text) => (text === '*message.text' ? this.bot.getMessageText(this.ctx) : text));
   }
   if (messageDate.length > 0) {
-    messageDate = messageDate.map((date) => (date === '$message.date' ? this.bot.getMessage(this.ctx).date : date));
+    messageDate = messageDate.map((date) => (date === '*message.date' ? this.bot.getMessage(this.ctx).date : date));
   }
   if (messageId.length > 0) {
-    messageId = messageId.map((id) => (id === '$message.id' ? this.bot.getMessageId(this.ctx) : id));
+    messageId = messageId.map((id) => (id === '*message.id' ? this.bot.getMessageId(this.ctx) : id));
   }
 
   const data = { 'meta.status': { $ne: 'deleted' } };
