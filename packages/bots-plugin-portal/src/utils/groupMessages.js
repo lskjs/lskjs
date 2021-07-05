@@ -23,7 +23,7 @@ export const groupMessages = (callback, { groupKey = defaultGetMediaGroupId, del
   const delayMs = (1 + Math.random()) * delay;
   // console.log('[QWE] 333', ctx.message.message_id, mediaGroupId, groups[mediaGroupId].length, 'delay', delay);
   await Bluebird.delay(delayMs);
-  const group = sortBy(groups[mediaGroupId], 'message.message_id');
+  const group = sortBy(groups[mediaGroupId], 'update.message.message_id');
   // console.log('[QWE] 33', ctx.message.message_id, mediaGroupId, groups[mediaGroupId].length);
   if (!group.length) return;
   if (group.length === 1) {
