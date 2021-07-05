@@ -1,9 +1,13 @@
 export default async function messageAppend(params) {
-  const { text } = params;
+  const { parent: data = {}, text, ctx } = params;
+  this.ctx = this.ctx || ctx;
 
-  let messageText = this.bot.getMessageText(this.ctx);
-  messageText += text;
+  data.text = data.text ? data.text + text : text;
+  data.caption = data.caption ? data.caption + text : text;
 
-  this.ctx = this.bot.setMessageText(this.ctx, messageText);
-  return { res: true };
+  if (data.type === 'mediaGroup') {
+    const { caption } = data.media[0];
+    data.media[0].caption = caption ? caption + text : text;
+  }
+  return { res: true, data };
 }

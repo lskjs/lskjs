@@ -1,10 +1,11 @@
-function parseMessage(message) {
+function getDataByCtx(ctx, text = false) {
   const result = [];
-  const messageType = this.bot.getMessageType(message);
+  const message = this.bot.getMessage(ctx);
+  const messageType = this.bot.getMessageType(ctx);
 
-  if (message.text) result.push({ type: 'text', text: message.text });
-  if (message.caption) result.push({ type: 'text', text: message.caption });
-
+  if (text && (message.text || message.caption)) {
+    result.push({ type: 'text', text });
+  }
   if (messageType === 'photo') {
     result.push({ type: messageType, ...message.photo[message.photo.length - 1] });
   } else {
@@ -14,20 +15,21 @@ function parseMessage(message) {
 }
 
 export default async function messageSplit(params) {
-  const { parent = {}, extra = [], ctx } = params;
+  const { parent = {}, extra = [], ctx, caption } = params;
   this.ctx = this.ctx || ctx;
-  const data = [];
+
+  const messageText = caption || this.bot.getMessageText(this.ctx);
+  let data = [];
 
   if (!this.ctx.group) {
-    const msg = this.bot.getMessage(this.ctx);
-    const result = parseMessage.call(this, msg);
-    data.push(...result);
-  } else {
-    this.ctx.group.forEach((context) => {
-      const msg = this.bot.getMessage(context);
-      const result = parseMessage.call(this, msg);
-      data.push(...result);
-    });
+    data = getDataByCtx.call(this, this.ctx, messageText);
+    return { res: true, data };
   }
+
+  this.ctx.group.forEach((context, index) => {
+    const text = !index ? messageText : false;
+    const toData = getDataByCtx.call(this, context, text);
+    data.push(...toData);
+  });
   return { res: true, data };
 }

@@ -2,7 +2,8 @@ import messageSplit from './messageSplit';
 
 export default async function messagesJoin(params) {
   params = await messageSplit.call(this, params);
-  const parent = params.data || [];
+  const { caption, data } = params;
+  const parent = data || [];
 
   const text = parent
     .filter(({ type }) => type === 'text')
@@ -12,6 +13,6 @@ export default async function messagesJoin(params) {
     .filter(({ type }) => ['photo', 'video', 'audio', 'document'].includes(type))
     .map(({ type, file_id }) => ({ media: file_id, type }));
 
-  files[0].caption = text || '';
+  if (files[0]) files[0].caption = caption || text;
   return { res: true, data: files };
 }
