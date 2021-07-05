@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.70](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.69...v2.3.0-beta.70) (2021-07-05)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix answer action ([d6c355f](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/d6c355f1b8660efffe63399c2342bc0b63453f91))
+
+
+
+
+
 # [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
 
 **Note:** Version bump only for package @lskjs/bots

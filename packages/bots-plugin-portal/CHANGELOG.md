@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.70](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.69...v2.3.0-beta.70) (2021-07-05)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix answer action ([d6c355f](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/d6c355f1b8660efffe63399c2342bc0b63453f91))
+* **bots-plugin-portal:** fix createMessage ([1d38cf0](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/1d38cf08584b10bc393eb057e71fc151e3afd63b))
+* **bots-plugin-portal:** fix edit message actions - messageAppend, messageTrim, messagesJoin, messageSplit, messageAddExtra, messageEditExtra ([6e9a02c](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/6e9a02c81332e7b01105f41a731bd736c2bb41bd))
+* **bots-plugin-portal:** fix groupMessages ([ccfa19c](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/ccfa19c8a85757bcef2169f7756b07a265f56695))
+* **bots-plugin-portal:** fix sendMessage ([71387ba](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/71387baf6fb7657f8b7ec924091ab25a9dbbffb4))
+
+
+### Features
+
+* **bots-plugin-portal:** add util parseExtra ([34b7a7c](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/34b7a7c6b6b0d54952f6ab95aa61c2d620bfc9b6))
+
+
+
+
+
 # [2.3.0-beta.69](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.68...v2.3.0-beta.69) (2021-06-29)
 
 
