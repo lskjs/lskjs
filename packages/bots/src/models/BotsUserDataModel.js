@@ -2,10 +2,7 @@ import Model from '@lskjs/db/Model';
 
 export default class BotsUserDataModel extends Model {
   static schema = {
-    userId: {
-      type: Model.Types.ObjectId,
-      required: true,
-    },
+    userId: Model.Types.ObjectId,
     telegramChatId: String,
     telegramUserId: String,
     plugin: String,

@@ -3,23 +3,48 @@ export default function () {
     {
       path: '/portal_answer',
       action: async ({ ctx, req, bot }) => {
-        // TODO: реализация answer-роута
+        const BotsUserDataModel = await this.botsModule.module('models.BotsUserDataModel');
+        const fromId = bot.getUserId(ctx);
+        const { id: toId } = req.query;
+        if (!toId || !fromId) return;
 
-        // const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
-        // const { id } = req.query;
-        // const fromId = bot.getUserId(ctx);
-        // if (!id) return;
-        // // const toId = data.split('-')[2];
-        // await BotsTelegramPortalRulesModel.deleteOne({ where: fromId }).lean();
-        // const newRule = new BotsTelegramPortalRulesModel({
-        //   where: fromId,
-        //   then: {
-        //     answer: 1,
-        //     action: 'repost',
-        //     to: id,
-        //   },
-        // });
-        // await newRule.save();
+        const rules = [
+          {
+            criteria: {
+              chatId: fromId,
+            },
+            action: {
+              type: 'createMessage',
+              then: {
+                type: 'messageEditExtra',
+                extra: [
+                  {
+                    type: 'answer',
+                    text: 'Answer @{{username}}',
+                  },
+                ],
+                then: {
+                  type: 'sendMessage',
+                  to: toId,
+                },
+              },
+            },
+          },
+        ];
+
+        const data = {
+          plugin: 'bots-plugin-portal',
+          telegramUserId: fromId,
+          type: 'answer',
+        };
+        await BotsUserDataModel.deleteOne(data).lean();
+
+        data.info = {};
+        data.info.rules = rules;
+        data.telegramChatId = toId;
+
+        const newRule = new BotsUserDataModel(data);
+        await newRule.save();
         ctx.answerCbQuery();
       },
     },

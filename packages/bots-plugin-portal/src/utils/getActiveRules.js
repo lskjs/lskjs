@@ -1,13 +1,19 @@
+import flatten from 'lodash/flatten';
 import isFunction from 'lodash/isFunction';
 import some from 'lodash/some';
 
 async function updateRules({ ctx, bot }) {
-  const BotsTelegramPortalRulesModel = await this.botsModule.module('models.BotsTelegramPortalRulesModel');
+  const BotsUserDataModel = await this.botsModule.module('models.BotsUserDataModel');
   const fromId = bot.getUserId(ctx);
-  const userRules = await BotsTelegramPortalRulesModel.find({ 'criteria.userId': { $in: [fromId] } })
-    .select(['criteria'])
-    .lean();
-  return [...this.rules, ...userRules];
+  const data = {
+    telegramUserId: fromId,
+    'info.rules': { $exists: true },
+  };
+
+  const userRules = await BotsUserDataModel.find(data).select('info.rules').lean();
+  const rules = flatten(userRules.map(({ info }) => info.rules));
+
+  return [...this.rules, ...rules];
 }
 
 export default async function getActiveRules({ ctx, bot } = {}) {
