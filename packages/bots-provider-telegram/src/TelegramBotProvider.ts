@@ -125,22 +125,42 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (message.text) return message.text;
     return null;
   }
-  setMessageText(ctx: TelegramIBotProviderMessageCtx, text: string): string | null {
+  setMessageText(ctx: TelegramIBotProviderMessageCtx, text = ''): string | null {
     if (typeof ctx === 'string') return null;
     if (get(ctx, 'update.callback_query.message.caption'))
       return set(ctx, 'update.callback_query.message.caption', text);
     if (get(ctx, 'update.callback_query.message.text')) return set(ctx, 'update.callback_query.message.text', text);
     if (get(ctx, 'update.channel_post.caption')) return set(ctx, 'update.channel_post.caption', text);
     if (get(ctx, 'update.channel_post.text')) return set(ctx, 'update.channel_post.text', text);
+    if (get(ctx, 'update.message.caption')) return set(ctx, 'update.message.caption', text);
+    if (get(ctx, 'update.message.text')) return set(ctx, 'update.message.text', text);
     if (get(ctx, 'message.caption')) return set(ctx, 'message.caption', text);
     if (get(ctx, 'message.text')) return set(ctx, 'message.text', text);
-    return null;
+
+    if (get(ctx, 'update.callback_query.message')) {
+      ctx = set(ctx, 'update.callback_query.message.text', text);
+      return set(ctx, 'update.callback_query.message.caption', text);
+    }
+    if (get(ctx, 'update.channel_post')) {
+      ctx = set(ctx, 'update.channel_post.text', text);
+      return set(ctx, 'update.channel_post.caption', text);
+    }
+    if (get(ctx, 'update.message')) {
+      ctx = set(ctx, 'update.message.text', text);
+      return set(ctx, 'update.message.caption', text);
+    }
+    if (get(ctx, 'message')) {
+      ctx = set(ctx, 'message.text', text);
+      return set(ctx, 'message.caption', text);
+    }
+    return ctx;
   }
   setMessage(ctx: TelegramIBotProviderMessageCtx, path: string, value: any): any | null {
     if (typeof ctx === 'string') return null;
     const msgPath = (path && `.${path}`) || '';
     if (get(ctx, `update.callback_query${msgPath}`)) return set(ctx, `update.callback_query${msgPath}`, value);
     if (get(ctx, `update.channel_post${msgPath}`)) return set(ctx, `update.channel_post${msgPath}`, value);
+    if (get(ctx, `update.message${msgPath}`)) return set(ctx, `update.message${msgPath}`, value);
     if (get(ctx, `message${msgPath}`)) return set(ctx, `message${msgPath}`, value);
     return null;
   }
@@ -178,6 +198,10 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const message = this.getMessage(ctx);
     if (get(message, 'chat.type')) return get(message, 'chat.type');
     return null;
+  }
+  isMediaGroup(ctx: TelegramIBotProviderMessageCtx): boolean {
+    const message = this.getMessage(ctx);
+    return !!message.media_group_id;
   }
   /**
    * Docs: https://raw.githubusercontent.com/KnorpelSenf/typegram/master/types.d.ts
@@ -380,63 +404,82 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.saveMessage(msg);
   }
 
-  async sendFile(to: string | number, file: any, extra): Promise<any> {
+  async sendMessage(ctx: any, content: any, extra = {}, markdown = false): Promise<any> {
+    let to = this.getMessageChatId(ctx);
     let method = 'sendMessage';
-    let args = ['undefined'];
-    const { type } = file;
-    if (type === 'audio') {
+    let args = [content.text];
+
+    if (ctx && ['number', 'string'].includes(typeof ctx)) to = ctx;
+
+    const { type } = content;
+    if (type === 'mediaGroup') {
+      method = 'sendMediaGroup';
+      args = [content.media];
+    } else if (type === 'audio') {
       method = 'sendAudio';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'document') {
       method = 'sendDocument';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'animation') {
       method = 'sendAnimation';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'photo') {
       method = 'sendPhoto';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'sticker') {
       method = 'sendSticker';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'video') {
       method = 'sendVideo';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'video_note') {
       method = 'sendVideoNote';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'voice') {
       method = 'sendVoice';
-      args = [file.file_id];
+      args = [content.media.file_id];
     } else if (type === 'contact') {
       method = 'sendContact';
-      args = [file];
+      args = [content.media];
     } else if (type === 'dice') {
       method = 'sendDice';
-      args = [file];
+      args = [content.media];
     } else if (type === 'game') {
       method = 'sendGame';
-      args = [file];
+      args = [content.media];
     } else if (type === 'poll') {
-      if (file.type === 'quiz') {
+      if (content.type === 'quiz') {
         method = 'sendQuiz';
       } else {
         method = 'sendPoll';
       }
-      args = [file.question, file.options.map((option: any) => option.text)];
+      args = [content.media.question, content.media.options.map((option: any) => option.text)];
     } else if (type === 'location') {
       method = 'sendLocation';
-      args = [file.latitude, file.longitude];
+      args = [content.media.latitude, content.media.longitude];
     } else if (type === 'venue') {
       method = 'sendVenue';
-      args = [file];
+      args = [content.media];
     } else if (type === 'text') {
       method = 'sendMessage';
-      args = [file.text];
+      args = [content.text];
     }
-    const telegramArgs = [to, ...args, extra];
+    const telegramArgs = [
+      to,
+      ...args,
+      {
+        caption: content.text || content.caption,
+        parse_mode: markdown ? 'Markdown' : '',
+        reply_markup: extra.reply_markup,
+      },
+    ];
     this.log.trace(`telegram.${method}`, ...telegramArgs);
     const msg = await this.client.telegram[method](...telegramArgs);
+    if (type === 'mediaGroup') {
+      const msgExtra = await this.client.telegram.sendMessage(to, '_________', extra);
+      return this.saveMessage(msgExtra);
+    }
     return this.saveMessage(msg);
   }
 
@@ -545,11 +588,6 @@ export default class TelegramBotProvider extends BaseBotProvider {
       { 'meta.status': 'deleted' },
     );
     return this.client.telegram.deleteMessage(chatId, messageId);
-  }
-  async sendMessage(ctx: any, ...args: any[]) {
-    this.log.trace('sendMessage');
-    const msg = await this.client.telegram.sendMessage(this.getMessageChatId(ctx), ...args);
-    return this.saveMessage(msg, ctx);
   }
   async sendSticker(ctx: any, ...args: any[]) {
     this.log.trace('sendSticker');
