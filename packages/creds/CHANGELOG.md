@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.71](https://github.com/lskjs/lskjs/tree/master/packages/creds/compare/v2.3.0-beta.70...v2.3.0-beta.71) (2021-07-07)
+
+
+### Bug Fixes
+
+* **creds:** error ([6ade103](https://github.com/lskjs/lskjs/tree/master/packages/creds/commit/6ade103c61981670c700acbb0fd0526254beb83e))
+
+
+
+
+
 # [2.3.0-beta.67](https://github.com/lskjs/lskjs/tree/master/packages/creds/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
 
 
