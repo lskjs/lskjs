@@ -156,6 +156,7 @@ export class RabbitModule extends Module {
     return res;
   }
   assertExchange(exchange, type = 'direct', options = {}) {
+    this.log.trace(`assertExchange(${exchange}, ${type})`, omit(options, ['prefetch']));
     return this.listenChannel.assertExchange(exchange, type, options);
   }
   async publish(exchange, key, msg, options = {}, channel = this.sendChannel) {
