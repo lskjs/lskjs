@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-prometheus",
-  "version": "1.0.0",
+  "version": "2.3.0-beta.72",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -45,5 +45,6 @@
   "peerDependencies": {
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
-  }
+  },
+  "gitHead": "780f8c69e704c3a7686a875b8821ccfa92eec1cc"
 }

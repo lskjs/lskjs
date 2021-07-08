@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "2.3.0-beta.71",
+  "version": "2.3.0-beta.72",
   "description": "LSK module for send and receive emails.",
   "keywords": [
     "database",
@@ -33,7 +33,7 @@
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.71",
+    "@lskjs/db": "2.3.0-beta.72",
     "@lskjs/server-api": "2.3.0-beta.58",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
@@ -43,5 +43,6 @@
     "@lskjs/server-api": "*",
     "bluebird": "*",
     "lodash": "4.17.20"
-  }
+  },
+  "gitHead": "780f8c69e704c3a7686a875b8821ccfa92eec1cc"
 }
