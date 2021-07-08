@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.73](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.72...v2.3.0-beta.73) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.72](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.71...v2.3.0-beta.72) (2021-07-08)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix sendMessage default content ([0187a08](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/0187a08b31f66fbebf9c1a1b281e4ee1d5bd9846))
+
+
+
+
+
 # [2.3.0-beta.70](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.69...v2.3.0-beta.70) (2021-07-05)
 
 

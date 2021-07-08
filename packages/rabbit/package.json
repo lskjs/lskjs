@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit",
-  "version": "2.3.0-beta.71",
+  "version": "2.3.0-beta.73",
   "description": "LSK module for rabbit.",
   "keywords": [
     "queue",
@@ -36,5 +36,6 @@
     "axios": "*",
     "bluebird": "*",
     "lodash": "*"
-  }
+  },
+  "gitHead": "780f8c69e704c3a7686a875b8821ccfa92eec1cc"
 }
