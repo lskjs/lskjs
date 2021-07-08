@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "2.3.0-beta.72",
+  "version": "2.3.0-beta.73",
   "description": "LSK server.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/server",
@@ -23,9 +23,9 @@
     "@lskjs/utils": "2.3.0-beta.58"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.72",
+    "@lskjs/db": "2.3.0-beta.73",
     "@lskjs/i18": "2.3.0-beta.63",
-    "@lskjs/webserver": "2.3.0-beta.72",
+    "@lskjs/webserver": "2.3.0-beta.73",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.20",
