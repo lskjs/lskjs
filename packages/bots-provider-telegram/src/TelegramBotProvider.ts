@@ -407,7 +407,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   async sendMessage(ctx: any, content: any, extra = {}, markdown = false): Promise<any> {
     let to = this.getMessageChatId(ctx);
     let method = 'sendMessage';
-    let args = [content.text];
+    let args = [content.text || content];
 
     if (ctx && ['number', 'string'].includes(typeof ctx)) to = ctx;
 
