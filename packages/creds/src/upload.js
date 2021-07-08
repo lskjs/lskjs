@@ -43,7 +43,7 @@ export async function upload(dir, { force, ...options } = {}) {
         return { data: { value: '@lskjs/creds' } };
       });
 
-      if (varData.value.indexOf('@lskjs/creds') === -1 && !force) {
+      if (varData.value && varData.value.indexOf('@lskjs/creds') === -1 && !force) {
         console.log(`[IGNORE] Project ${id} ${key}`);
         return;
       }

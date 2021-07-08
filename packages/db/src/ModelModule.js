@@ -28,6 +28,7 @@ export class ModelModule extends Module {
     const schema = new this.Schema(Model.schema, options);
     schema.statics.app = this.app;
     schema.loadClass(Model);
+    if (Model.initSchema) await Model.initSchema(schema);
     const mongooseModel = db.client.connection.model(modelName, schema, collection);
     return mongooseModel;
   }

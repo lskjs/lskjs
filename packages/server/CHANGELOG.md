@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.71](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.3.0-beta.70...v2.3.0-beta.71) (2021-07-07)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
 # [2.3.0-beta.63](https://github.com/lskjs/lskjs/tree/master/packages/server/compare/v2.3.0-beta.62...v2.3.0-beta.63) (2021-06-21)
 
 **Note:** Version bump only for package @lskjs/server
