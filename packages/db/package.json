@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/db",
-  "version": "2.3.0-beta.71",
+  "version": "2.3.0-beta.72",
   "description": "LSK.js module for working with mongodb database",
   "keywords": [
     "database",
