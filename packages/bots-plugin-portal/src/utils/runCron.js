@@ -3,6 +3,7 @@ import nodecron from 'node-cron';
 
 export default function runCron({ bot }) {
   const initedCrons = [];
+  if (!this.rules) return [];
   this.rules.forEach((rule) => {
     if (!rule.cron) return;
     const { action } = rule;

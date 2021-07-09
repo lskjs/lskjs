@@ -3,6 +3,7 @@ import nodecron from 'node-cron';
 
 export default function runCron({ bot }) {
   const initedCrons = [];
+  if (!this.projects) return [];
   this.projects.forEach((project) => {
     if (!project.cron) return;
     const times = Array.isArray(project.cron) ? project.cron : [project.cron];
