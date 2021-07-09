@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.76](https://github.com/lskjs/cli/compare/v2.3.0-beta.75...v2.3.0-beta.76) (2021-07-09)
+
+
+### Features
+
+* **bots-plugin-notify:** add new notify-plugin ([3c30f3b](https://github.com/lskjs/cli/commit/3c30f3b485085d45c38dac032154b2b8906711b5))
+
+
+
+
+
 # [2.3.0-beta.75](https://github.com/lskjs/cli/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
 
 **Note:** Version bump only for package @lskjs/cli-sample
