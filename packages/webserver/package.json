@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/webserver",
-  "version": "2.3.0-beta.74",
+  "version": "2.3.0-beta.75",
   "description": "LSK module webserver.",
   "keywords": [
     "webserver",
@@ -40,7 +40,7 @@
     "socket.io-redis": "6.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.74",
+    "@lskjs/db": "2.3.0-beta.75",
     "@lskjs/i18": "2.3.0-beta.63",
     "axios": "0.21.1",
     "bluebird": "3.7.2",

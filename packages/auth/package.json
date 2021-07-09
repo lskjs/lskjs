@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "2.3.0-beta.74",
+  "version": "2.3.0-beta.75",
   "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
   "keywords": [
     "auth",
@@ -36,7 +36,7 @@
     "validator": "13.5.2"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.74",
+    "@lskjs/db": "2.3.0-beta.75",
     "@lskjs/mobx": "2.2.0-beta.5",
     "@lskjs/server-api": "2.3.0-beta.58",
     "axios": "0.21.1",

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/creds",
-  "version": "2.3.0-beta.74",
+  "version": "2.3.0-beta.75",
   "description": "LSK creds.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/creds",
