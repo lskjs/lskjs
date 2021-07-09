@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.74](https://github.com/lskjs/cli/compare/v2.3.0-beta.73...v2.3.0-beta.74) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.73](https://github.com/lskjs/cli/compare/v2.3.0-beta.72...v2.3.0-beta.73) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.72](https://github.com/lskjs/cli/compare/v2.3.0-beta.71...v2.3.0-beta.72) (2021-07-08)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix sendMessage default content ([0187a08](https://github.com/lskjs/cli/commit/0187a08b31f66fbebf9c1a1b281e4ee1d5bd9846))
+
+
+### Features
+
+* **bots-plugin-prometheus:** add prometheus-plugin ([32a85b0](https://github.com/lskjs/cli/commit/32a85b01c209058832ca0417d30b6f1ece6b24ff))
+
+
+
+
+
 # [2.3.0-beta.71](https://github.com/lskjs/cli/compare/v2.3.0-beta.70...v2.3.0-beta.71) (2021-07-07)
 
 
