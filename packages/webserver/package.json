@@ -53,5 +53,6 @@
     "axios": "0.21.1",
     "bluebird": "*",
     "lodash": "4.17.20"
-  }
+  },
+  "gitHead": "780f8c69e704c3a7686a875b8821ccfa92eec1cc"
 }

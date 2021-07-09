@@ -36,5 +36,6 @@
     "axios": "*",
     "bluebird": "*",
     "lodash": "*"
-  }
+  },
+  "gitHead": "780f8c69e704c3a7686a875b8821ccfa92eec1cc"
 }
