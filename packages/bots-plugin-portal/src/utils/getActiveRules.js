@@ -97,11 +97,10 @@ export default async function getActiveRules({ ctx, bot } = {}) {
   };
 
   const activeRules = rules.filter((rule) => {
-    const { criteria = {}, action } = rule;
-    // if (when) {
-    //   this.log.trace('!!when');
-    //   return false;
-    // }
+    const { criteria, action } = rule;
+
+    if (!criteria) return false;
+
     if (!checkCriteria(criteria)) {
       this.log.trace('!checkCriteria');
       return false;
