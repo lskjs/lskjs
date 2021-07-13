@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.77](https://github.com/lskjs/cli/compare/v2.3.0-beta.76...v2.3.0-beta.77) (2021-07-13)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** ignore markdown function ([87a8d0d](https://github.com/lskjs/cli/commit/87a8d0d33f302f27bb4e71583251c8d94144e6bf))
+* **bots-plugin-portal:** sendMessage parse_mode(markdown) param fixed ([7f61635](https://github.com/lskjs/cli/commit/7f61635797fa0f9eed1c997abf9c51f0e831bafe))
+* **bots-plugin-portal, bots-plugin-prometheus:** fix runCron ([f4728c0](https://github.com/lskjs/cli/commit/f4728c0bb46538ef77481fbbdf9679f6d498d771))
+
+
+
+
+
 # [2.3.0-beta.76](https://github.com/lskjs/cli/compare/v2.3.0-beta.75...v2.3.0-beta.76) (2021-07-09)
 
 
