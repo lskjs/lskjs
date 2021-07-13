@@ -1,3 +1,7 @@
+import utils from '../../utils';
+
+const { ignoreMd } = utils;
+
 const statuses = {
   success: '✅',
   pending: '🕔',
@@ -15,7 +19,7 @@ export default function (message) {
   const message2 = commit.message ? `\`${commit.message}\`` : '';
 
   return `\
-${status} ${project.name}/${objectAttributes.ref}
+${status} ${ignoreMd(project.name)}/${objectAttributes.ref}
 @${user.username}
 ${message2}
 ${project.web_url}/pipelines/${objectAttributes.id}`;

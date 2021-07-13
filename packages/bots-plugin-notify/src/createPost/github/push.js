@@ -1,8 +1,12 @@
+import utils from '../../utils';
+
+const { ignoreMd } = utils;
+
 const getCommitsMessage = (commits) =>
   commits.map((commit) => {
     const short = commit.id.slice(0, 7);
     return `\
-[${short}](${commit.url}) _${commit.author?.name}_ 
+[${short}](${commit.url}) _${ignoreMd(commit.author?.name)}_
 \`${commit.message}\``;
   });
 

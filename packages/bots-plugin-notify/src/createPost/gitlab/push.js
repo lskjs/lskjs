@@ -1,3 +1,7 @@
+import utils from '../../utils';
+
+const { ignoreMd } = utils;
+
 const getCommitsMessage = (commits) =>
   commits.map((commit) => {
     const short = commit.id.slice(0, 7);
@@ -15,8 +19,8 @@ export default function (message) {
   const commitsMessage = getCommitsMessage(commits);
 
   return `\
-@${username}
-Push to \`${repository.name}/${branches.join(',')}\`
+@${ignoreMd(username)}
+Push to \`${ignoreMd(repository.name)}/${branches.join(',')}\`
 
 *Commits:*
 ${commitsMessage.join('\n')}

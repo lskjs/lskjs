@@ -1,3 +1,7 @@
+import utils from '../../utils';
+
+const { ignoreMd } = utils;
+
 const statuses = {
   opened: '🎉',
   closed: '❌',
@@ -12,7 +16,7 @@ export default function (message) {
   const message2 = objectAttributes.title ? `\`${objectAttributes.title}\`\n` : '';
   return `\
 🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} -> ${objectAttributes.target_branch}
-@${user.username}
+@${ignoreMd(user.username)}
 ${message2}
 [${objectAttributes.url}](${objectAttributes.url})`;
 }

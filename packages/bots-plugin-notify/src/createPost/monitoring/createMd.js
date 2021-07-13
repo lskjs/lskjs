@@ -1,3 +1,7 @@
+import utils from '../../utils';
+
+const { ignoreMd } = utils;
+
 const stringify = (data) => `\`\`\` ${JSON.stringify(data, null, 2)}\`\`\``;
 
 export default function createMd(message = {}) {
@@ -8,5 +12,5 @@ export default function createMd(message = {}) {
   if (level === 'warn') sign = '⚠️';
   if (typeof data !== 'string') data = stringify(data);
 
-  return `${sign} ${projectName}\n${title}\n${data || ''}\n${url}`;
+  return `${sign} ${ignoreMd(projectName)}\n${ignoreMd(title)}\n${data || ''}\n${ignoreMd(url)}`;
 }

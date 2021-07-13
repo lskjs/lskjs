@@ -404,7 +404,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.saveMessage(msg);
   }
 
-  async sendMessage(ctx: any, content: any, extra = {}, markdown = false): Promise<any> {
+  async sendMessage(ctx: any, content: any, extra = {}): Promise<any> {
     let to = this.getMessageChatId(ctx);
     let method = 'sendMessage';
     let args = [content.text || content];
@@ -470,7 +470,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
       ...args,
       {
         caption: content.text || content.caption,
-        parse_mode: markdown ? 'Markdown' : '',
+        parse_mode: extra.parse_mode,
         reply_markup: extra.reply_markup,
       },
     ];

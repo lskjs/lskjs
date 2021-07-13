@@ -1,3 +1,7 @@
+import utils from '../../utils';
+
+const { ignoreMd } = utils;
+
 const statuses = {
   success: '✅',
   pending: '🕔',
@@ -22,8 +26,8 @@ export default function (message) {
   const status = statuses[buildStatus] || `🤷‍♀️ ${buildStatus}`;
 
   return `\
-  \`${projectName}\`
-${status} *${buildName}*
-_${user.name}_
+  \`${ignoreMd(projectName)}\`
+${status} *${ignoreMd(buildName)}*
+_${ignoreMd(user.name)}_
 ${repository.homepage}/-/jobs/${buildId}`;
 }

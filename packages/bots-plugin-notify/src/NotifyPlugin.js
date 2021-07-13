@@ -52,7 +52,7 @@ export default class NotifyPlugin extends BaseBotPlugin {
 
     const options = {};
     if (message.md || ['github', 'gitlab', 'alertmanager'].includes(message.type)) {
-      options.parse_mode = 'Markdown';
+      options.parse_mode = 'MarkdownV2';
     }
 
     if (project.telegram && msg) {
