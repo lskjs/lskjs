@@ -1,5 +1,44 @@
 import shuffle from 'lodash/shuffle';
 
+const types = {
+  chatId: '*message.chat.id',
+  userId: '*message.user.id',
+  chatType: '*message.chat.type',
+  messageType: '*message.type',
+  messageText: '*message.text',
+  messageDate: '*message.date',
+  messageId: '*message.id',
+};
+
+function getItem({ type, item }) {
+  if (item !== types[type]) return item;
+  let data;
+  if (item === types.chatId) {
+    data = this.bot.getMessageChatId(this.ctx);
+  }
+  if (item === types.userId) {
+    data = this.bot.getMessageUserId(this.ctx);
+  }
+  if (item === types.chatType) {
+    data = this.bot.getMessage(this.ctx).chat.type;
+  }
+  if (item === types.messageType) {
+    data = this.bot.getMessage(this.ctx).type;
+  }
+  if (item === types.messageText) {
+    data = this.bot.getMessageText(this.ctx);
+  }
+  if (item === types.messageDate) {
+    data = this.bot.getMessage(this.ctx).date;
+  }
+  if (item === types.messageId) {
+    data = this.bot.getMessageId(this.ctx);
+  }
+
+  if (!data) data = { $exists: true };
+  return data;
+}
+
 export default async function findMessage(params) {
   const BotsTelegramMessageModel = await this.actionModule.module('models.BotsTelegramMessageModel');
   const { criteria, random = false } = params;
@@ -14,25 +53,25 @@ export default async function findMessage(params) {
   if (!Array.isArray(messageId)) messageId = messageId ? [messageId] : [];
 
   if (chatId.length > 0) {
-    chatId = chatId.map((id) => (id === '*message.chat.id' ? this.bot.getMessageChatId(this.ctx) : id));
+    chatId = chatId.map((item) => getItem.call(this, { type: 'chatId', item }));
   }
   if (userId.length > 0) {
-    userId = userId.map((id) => (id === '*message.user.id' ? this.bot.getMessageUserId(this.ctx) : id));
+    userId = userId.map((item) => getItem.call(this, { type: 'userId', item }));
   }
   if (chatType.length > 0) {
-    chatType = chatType.map((type) => (type === '*message.chat.type' ? this.bot.getMessage(this.ctx).chat.type : type));
+    chatType = chatType.map((item) => getItem.call(this, { type: 'chatType', item }));
   }
   if (messageType.length > 0) {
-    messageType = messageType.map((type) => (type === '*message.type' ? this.bot.getMessage(this.ctx).type : type));
+    messageType = messageType.map((item) => getItem.call(this, { type: 'messageType', item }));
   }
   if (messageText.length > 0) {
-    messageText = messageText.map((text) => (text === '*message.text' ? this.bot.getMessageText(this.ctx) : text));
+    messageText = messageText.map((item) => getItem.call(this, { type: 'messageText', item }));
   }
   if (messageDate.length > 0) {
-    messageDate = messageDate.map((date) => (date === '*message.date' ? this.bot.getMessage(this.ctx).date : date));
+    messageDate = messageDate.map((item) => getItem.call(this, { type: 'messageDate', item }));
   }
   if (messageId.length > 0) {
-    messageId = messageId.map((id) => (id === '*message.id' ? this.bot.getMessageId(this.ctx) : id));
+    messageId = messageId.map((item) => getItem.call(this, { type: 'messageId', item }));
   }
 
   const data = { 'meta.status': { $ne: 'deleted' } };
