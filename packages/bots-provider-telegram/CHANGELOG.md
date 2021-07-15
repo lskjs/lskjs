@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.78](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.77...v2.3.0-beta.78) (2021-07-15)
+
+
+### Features
+
+* **bots-plugin-portal:** add pinChatMessage ([1071172](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/10711725b6a28db369229e9dacb9547a0f7c4e81))
+
+
+
+
+
 # [2.3.0-beta.77](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.76...v2.3.0-beta.77) (2021-07-13)
 
 

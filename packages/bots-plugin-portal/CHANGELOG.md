@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.78](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.77...v2.3.0-beta.78) (2021-07-15)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** criteria ([dfdffe4](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/dfdffe49a6823d4b8a936788bf032fbeedb73409))
+* **bots-plugin-portal:** fix null param ([69481eb](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/69481ebbbc3ad84875e752d5d722076995a24b39))
+* **bots-plugin-portal:** fix remove, findMessage and copyMessage ([82fc406](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/82fc406b5a5941010888a3fe330548610043a42e))
+* **bots-plugin-portal:** fix setMessage in findMessage ([8a055d2](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/8a055d22d6244cd9bd2f7d90bb3861cd3e42f3bf))
+
+
+### Features
+
+* **bots-plugin-portal:** add documentation ([225f21e](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/225f21e13a531296985be5f194661e41cc793e29))
+* **bots-plugin-portal:** add pinChatMessage ([1071172](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/10711725b6a28db369229e9dacb9547a0f7c4e81))
+
+
+
+
+
 # [2.3.0-beta.77](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.76...v2.3.0-beta.77) (2021-07-13)
 
 
