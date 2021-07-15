@@ -117,6 +117,17 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (['number', 'string'].includes(typeof ctx)) return null;
     return get(ctx, 'session.nextRoute.path', null);
   }
+  pinChatMessage(ctx: TelegramIBotProviderMessageCtx): any | null {
+    const chatId = this.getMessageChatId(ctx);
+    const messageId = this.getMessageTargetId(ctx);
+
+    try {
+      const result = this.client.telegram.pinChatMessage(chatId, messageId);
+      return result;
+    } catch (error) {
+      return null;
+    }
+  }
   getMessageText(ctx: TelegramIBotProviderMessageCtx): string | null {
     if (typeof ctx === 'string') return ctx;
     const message = this.getMessage(ctx);
@@ -587,7 +598,12 @@ export default class TelegramBotProvider extends BaseBotProvider {
       },
       { 'meta.status': 'deleted' },
     );
-    return this.client.telegram.deleteMessage(chatId, messageId);
+    try {
+      const result = this.client.telegram.deleteMessage(chatId, messageId);
+      return result;
+    } catch (error) {
+      return null;
+    }
   }
   async sendSticker(ctx: any, ...args: any[]) {
     this.log.trace('sendSticker');

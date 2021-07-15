@@ -16,6 +16,7 @@ export default {
   reply: require('./reply').default,
   createMessage: require('./createMessage').default,
   editMessage: require('./editMessage').default,
+  pinChatMessage: require('./pinChatMessage').default,
   forwardMessage: require('./forwardMessage').default,
   copyMessage: require('./copyMessage').default,
   sendMessage: require('./sendMessage').default,
