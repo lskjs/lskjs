@@ -88,7 +88,8 @@ export default async function findMessage(params) {
     const messages = await BotsTelegramMessageModel.find(data).lean();
     message = messages.length > 0 ? shuffle(messages)[0] : false;
   } else {
-    message = await BotsTelegramMessageModel.findOne(data).lean();
+    const messages = await BotsTelegramMessageModel.find(data).sort({ date: -1 }).limit(1).lean();
+    message = messages.length > 0 ? messages[0] : false;
   }
   if (message) this.bot.setMessage(this.ctx, '', message);
 
