@@ -13,7 +13,7 @@ const ignoreMd = (text) => text.replaceAll(/[*|_]/gi, (c) => `\\${c}`);
 const getEmoji = (type) => (statuses[type] ? statuses[type] : statuses.default);
 
 export default async function summary({ data, params }) {
-  const { telegram, groupBy: groupByValue, markdown = false } = params;
+  const { telegram, groupBy: groupByValue, parseMode } = params;
 
   const chats = Array.isArray(telegram) ? telegram : [telegram];
   const groupData = groupBy(data, groupByValue);
@@ -21,10 +21,10 @@ export default async function summary({ data, params }) {
   return Bluebird.map(Object.keys(groupData), async (dataType) => {
     const alertData = groupData[dataType];
     const alertInfoText = alertData.map((d) => get(d, 'labels.alertname', '')).join('\n- ');
-    const text = markdown ? ignoreMd(alertInfoText) : alertInfoText;
+    const text = parseMode ? ignoreMd(alertInfoText) : alertInfoText;
 
     const resultText = `${getEmoji(dataType)} *${dataType}*\n\n- ${text}`;
 
-    return Bluebird.map(chats, async (chat) => this.bot.sendMessage(chat, resultText, {}, markdown));
+    return Bluebird.map(chats, async (chat) => this.bot.sendMessage(chat, resultText, { parse_mode: parseMode }));
   });
 }
