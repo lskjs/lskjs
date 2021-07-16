@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.79](https://github.com/lskjs/cli/compare/v2.3.0-beta.78...v2.3.0-beta.79) (2021-07-16)
+
+
+### Bug Fixes
+
+* **bots-plugin-prometheus:** fix markdown ([6f5b86c](https://github.com/lskjs/cli/commit/6f5b86cf1574f77aba8a6c3788dc6b477a1706b1))
+
+
+
+
+
 # [2.3.0-beta.78](https://github.com/lskjs/cli/compare/v2.3.0-beta.77...v2.3.0-beta.78) (2021-07-15)
 
 
