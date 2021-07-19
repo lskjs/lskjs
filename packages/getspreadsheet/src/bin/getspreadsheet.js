@@ -3,8 +3,9 @@ import program from 'commander';
 import parse from 'csv-parse';
 import fs from 'fs';
 import { promisify } from 'util';
+import dot from 'dot-object';
 
-import getSpreadsheet from '../getSpreadsheet';
+import getSpreadsheetRaw from '../getSpreadsheetRaw';
 // import Promise from 'bluebird';
 const parseAsync = promisify(parse);
 
@@ -26,7 +27,8 @@ program
     'row format of the json data: every row is array of cells or object (first row is keys) or raw csv',
     'array',
   )
-  .action((url, { out, format } = {}) => {
+  .option('-n, --nested', 'works with nested fields')
+  .action((url, { out, format, nested } = {}) => {
     if (url.indexOf('#') === -1) {
       // eslint-disable-next-line no-param-reassign
       url += '#gid=0';
@@ -37,13 +39,16 @@ program
     }
     const filename = (out[0] !== '~' && out[0] !== '/' ? `${process.cwd()}/` : '') + out;
     // console.log('options', url, out, filename, format);
-    getSpreadsheet(url)
+    getSpreadsheetRaw(url)
       .then(async (csv) => {
         let str;
         if (format === 'csv') {
           str = csv;
         } else {
-          const rawData = await parseAsync(csv, { columns: format === 'object' });
+          let rawData = await parseAsync(csv, { columns: format === 'object' });
+          if (nested) {
+            rawData = rawData.map((item) => dot.object(item));
+          }
           str = JSON.stringify(rawData);
         }
         fs.writeFileSync(filename, str);
