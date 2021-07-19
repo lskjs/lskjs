@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.81](https://github.com/lskjs/cli/compare/v2.3.0-beta.80...v2.3.0-beta.81) (2021-07-19)
+
+
+### Features
+
+* --nested for getspredsheet ([fa67c31](https://github.com/lskjs/cli/commit/fa67c31d62cf71109c5089ab24dd242ea460260a))
+
+
+
+
+
 # [2.3.0-beta.80](https://github.com/lskjs/cli/compare/v2.3.0-beta.79...v2.3.0-beta.80) (2021-07-19)
 
 
