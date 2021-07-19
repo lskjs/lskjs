@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.80](https://github.com/lskjs/cli/compare/v2.3.0-beta.79...v2.3.0-beta.80) (2021-07-19)
+
+
+### Bug Fixes
+
+* **rabbit:** trying reconnection again ([ddb05fe](https://github.com/lskjs/cli/commit/ddb05fedda130d44ed4abc578a4aac9e8bd295b5))
+* **worker:** check consumer tag for message ([2d68cb0](https://github.com/lskjs/cli/commit/2d68cb006e72e86ea069a89bac8eed853ef6e873))
+
+
+
+
+
 # [2.3.0-beta.79](https://github.com/lskjs/cli/compare/v2.3.0-beta.78...v2.3.0-beta.79) (2021-07-16)
 
 

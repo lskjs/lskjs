@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.80](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.79...v2.3.0-beta.80) (2021-07-19)
+
+
+### Bug Fixes
+
+* **worker:** check consumer tag for message ([2d68cb0](https://github.com/lskjs/lskjs/tree/master/packages/worker/commit/2d68cb006e72e86ea069a89bac8eed853ef6e873))
+
+
+
+
+
 # [2.3.0-beta.75](https://github.com/lskjs/lskjs/tree/master/packages/worker/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
 
 **Note:** Version bump only for package @lskjs/worker

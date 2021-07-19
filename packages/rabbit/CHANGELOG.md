@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.80](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.3.0-beta.79...v2.3.0-beta.80) (2021-07-19)
+
+
+### Bug Fixes
+
+* **rabbit:** trying reconnection again ([ddb05fe](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/commit/ddb05fedda130d44ed4abc578a4aac9e8bd295b5))
+
+
+
+
+
 # [2.3.0-beta.75](https://github.com/lskjs/lskjs/tree/master/packages/rabbit/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
 
 **Note:** Version bump only for package @lskjs/rabbit
