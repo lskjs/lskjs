@@ -205,7 +205,8 @@ export class RabbitWorker extends Module {
     const queueName = this.rabbit.getQueueName(queue);
     const options = { noAck: false };
     this.log.info(`consume(${queueName})`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
-    this.rabbit.consume(queueName, this.onConsume.bind(this), options);
+    const data = await this.rabbit.consume(queueName, this.onConsume.bind(this), options);
+    this.consumerTag = data.consumerTag;
   }
   async run() {
     await super.run();

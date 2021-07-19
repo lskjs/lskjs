@@ -123,7 +123,9 @@ export class RabbitWorkerJob extends Module {
     }
     await this.onError(err);
     if (this.debug) this.log.error(`rabbit.nack [${Err.getCode(err)}]`, this.params);
-    if (this.msg) await this.rabbit.nack(this.msg, { requeue: true });
+    if (this.msg && this.worker.consumerTag === this.msg.fields.consumerTag) {
+      await this.rabbit.nack(this.msg, { requeue: true });
+    }
     return this.setStatus({
       status: 'error',
       action: 'nack',
