@@ -1,4 +1,3 @@
-// import createKeyboard from '@lskjs/bots-base/utils/createKeyboard';
 import BaseBotPlugin from '@lskjs/bots-plugin';
 import Bluebird from 'bluebird';
 import isEmpty from 'lodash/isEmpty';
@@ -27,13 +26,13 @@ export default class PrometheusPlugin extends BaseBotPlugin {
     return act.call(this, { data: alerts, params });
   }
 
-  async onEvent({ bot }) {
-    const activeProjects = await this.getActiveProjects();
-    if (isEmpty(activeProjects)) return null;
+  async onEvent({ bot, project }) {
+    await this.getActiveProjects(project);
+    if (isEmpty(this.activeProjects)) return null;
 
-    return Bluebird.map(this.activeProjects, async (project) => {
-      let { action: actions } = project;
-      const { alerts } = project;
+    return Bluebird.map(this.activeProjects, async (activeProject) => {
+      let { action: actions } = activeProject;
+      const { alerts } = activeProject;
 
       if (!Array.isArray(actions)) actions = [actions];
 

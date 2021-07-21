@@ -8,22 +8,33 @@ const statuses = {
   default: '❓',
 };
 
-const ignoreMd = (text) => text.replaceAll(/[*|_]/gi, (c) => `\\${c}`);
+const ignoreMd = (text) => text.replaceAll(/[^A-Za-z0-9А-Яа-я]/gi, (c) => `\\${c}`);
 
 const getEmoji = (type) => (statuses[type] ? statuses[type] : statuses.default);
 
+const getAlertname = (data, parseMode) => {
+  const text = `${get(data, 'labels.alertname', '')}`;
+  return ['Markdown', 'MarkdownV2'].includes(parseMode) ? ignoreMd(text) : text;
+};
+
+const getDescription = (data) => {
+  const text = get(data, 'annotations.description', '');
+  return `\`${text}\``;
+};
+
 export default async function summary({ data, params }) {
-  const { telegram, groupBy: groupByValue, parseMode } = params;
+  const { telegram, groupBy: groupByValue = false, parseMode } = params;
 
   const chats = Array.isArray(telegram) ? telegram : [telegram];
-  const groupData = groupBy(data, groupByValue);
+  const groupData = groupByValue ? groupBy(data, groupByValue) : data;
 
   return Bluebird.map(Object.keys(groupData), async (dataType) => {
     const alertData = groupData[dataType];
-    const alertInfoText = alertData.map((d) => get(d, 'labels.alertname', '')).join('\n- ');
-    const text = parseMode ? ignoreMd(alertInfoText) : alertInfoText;
+    const alertInfoText = alertData
+      .map((d) => `*${getAlertname(d, parseMode)}*\n\n${getDescription(d)}`)
+      .join('\n—————————————\n');
 
-    const resultText = `${getEmoji(dataType)} *${dataType}*\n\n- ${text}`;
+    const resultText = `${getEmoji(dataType)} *${dataType}*\n\n${alertInfoText}`;
 
     return Bluebird.map(chats, async (chat) => this.bot.sendMessage(chat, resultText, { parse_mode: parseMode }));
   });

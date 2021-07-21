@@ -14,8 +14,7 @@ export default function runCron({ bot }) {
         project,
         schedule: nodecron.schedule(time, async () => {
           this.log.trace(`CRON action on '${time}'`, project);
-          await this.getActiveProjects();
-          return this.onEvent({ bot });
+          return this.onEvent({ bot, project });
         }),
       });
     });
@@ -23,7 +22,7 @@ export default function runCron({ bot }) {
   if (initedCrons.length) {
     this.log.debug(
       'runCron',
-      initedCrons.map((cron) => cron.time),
+      initedCrons.map((cron) => cron.cron),
     );
   }
   return initedCrons;
