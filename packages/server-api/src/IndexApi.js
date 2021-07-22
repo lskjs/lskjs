@@ -55,11 +55,11 @@ export default class IndexApi extends Api {
   getRoutes() {
     return {
       ...super.getRoutes(),
-      '/': ::this.index,
-      '/env': ::this.env,
-      '/env.json': ::this.env,
-      '/env.js': ::this.envjs,
-      '/healthcheck': ::this.healthcheck,
+      '/': this.index.bind(this),
+      '/env': this.env.bind(this),
+      '/env.json': this.env.bind(this),
+      '/env.js': this.envjs.bind(this),
+      '/healthcheck': this.healthcheck.bind(this),
     };
   }
 }
