@@ -1,10 +1,10 @@
 export const GraylogProvider = (message) => {
-  const meta = (message && message.meta) || {};
+  const event = (message && message.meta && message.meta.event) || {};
   let text;
-  if (meta.fields && meta.fields.message) {
-    text = meta.fields.message;
-  } else if (meta.fields && meta.message) {
-    return meta.message;
+  if (event.fields && event.fields.message) {
+    text = event.fields.message;
+  } else if (event.message) {
+    text = event.message;
   } else {
     text = '[graylog]';
   }

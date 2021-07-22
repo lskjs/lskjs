@@ -132,7 +132,7 @@ export default class TestApi extends Api {
       },
       '/locale': (req) => {
         this.log.trace('locale start');
-        console.log('getLocale', req.getLocale);
+        // console.log('getLocale', req.getLocale);
         return { locale: req.getLocale(), test: req.t('test.hello') };
       },
       '/app/config': () => collectConfigs(this.app),
@@ -140,6 +140,7 @@ export default class TestApi extends Api {
       '/req/auth': async (req) => req.user,
       '/req/user': async (req) => req.user,
       '/req/userId': async (req) => req.userId || (req.user && req.user_id),
+      '/req/:log?': this.req.bind(this),
       '/user/one': async () => {
         const { UserModel } = this.app;
         const user = await UserModel.findOne();
@@ -151,5 +152,20 @@ export default class TestApi extends Api {
         paths: this.paths,
       }),
     };
+  }
+
+  req(req) {
+    const res = {
+      params: req.params,
+      query: req.query,
+      headers: req.headers,
+    };
+    if (req.params.log) {
+      this.log.info('req', res);
+      res.body = req.body;
+      this.log.info('body', req.body);
+    }
+
+    return res;
   }
 }

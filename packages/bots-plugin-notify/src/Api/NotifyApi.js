@@ -65,11 +65,13 @@ export default class NotifyApi extends Api {
       projectName,
       sended: false,
     };
+    const getBool = (param, def) => (param == null ? def : +param);
 
     if (gitlabEvent) {
       message.event = gitlabEvent;
       message.type = 'gitlab';
       message.meta = req.body;
+      message.isMd = getBool(req.query.isMd, false);
       const { object_kind: objectKind, ref, commits = [] } = message.meta;
       if (objectKind === 'push') {
         message.branch = ref.slice(ref.lastIndexOf('/') + 1);
@@ -80,6 +82,8 @@ export default class NotifyApi extends Api {
       message.event = githubEvent;
       message.type = 'github';
       message.meta = req.body;
+      message.isMd = getBool(req.query.isMd, false);
+      message.isMd = true;
       const { ref, commits = [] } = message.meta;
       if (githubEvent === 'push') {
         message.branch = ref.slice(ref.lastIndexOf('/') + 1);
@@ -90,11 +94,14 @@ export default class NotifyApi extends Api {
       message.event = 'alert';
       message.type = 'alertmanager';
       message.meta = req.body;
+      message.isMd = getBool(req.query.isMd, false);
+      message.isMd = true;
     }
     if (isGraylog) {
       message.event = 'alert';
       message.type = 'graylog';
       message.meta = req.body;
+      message.isMd = getBool(req.query.isMd, false);
     }
 
     const { text, md } = req.data;
@@ -102,7 +109,10 @@ export default class NotifyApi extends Api {
       message.text = text;
     }
 
-    if (md) message.md = md;
+    if (md) {
+      message.text = md;
+      message.isMd = getBool(req.query.isMd, true);
+    }
 
     if (message.messageHash) {
       const { messageHash } = message;

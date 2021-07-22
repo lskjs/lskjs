@@ -40,7 +40,7 @@ export default class NotifyPlugin extends BaseBotPlugin {
       project = this.config.projects._default;
     }
 
-    let msg = message.md || message.text;
+    let msg = message.text;
     if (message.type === 'gitlab') {
       msg = this.gitlab(message, project);
     }
@@ -59,7 +59,7 @@ export default class NotifyPlugin extends BaseBotPlugin {
     }
 
     const options = {};
-    if (message.md || ['github', 'gitlab', 'alertmanager', 'graylog'].includes(message.type)) {
+    if (message.md || message.isMd) {
       options.parse_mode = 'MarkdownV2';
     }
 
