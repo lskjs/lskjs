@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.84](https://github.com/lskjs/cli/compare/v2.3.0-beta.83...v2.3.0-beta.84) (2021-07-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** graylog formats ([a9b9a78](https://github.com/lskjs/cli/commit/a9b9a7847a401ba90faa16c9d2dabe1c6122ac6e))
+
+
+
+
+
+# [2.3.0-beta.83](https://github.com/lskjs/cli/compare/v2.3.0-beta.82...v2.3.0-beta.83) (2021-07-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** add graylog ([549fda5](https://github.com/lskjs/cli/commit/549fda5f49c5b4bcccc33498af8cebe37fd25e13))
+* **server-api:** fix binding ([3f9b4b4](https://github.com/lskjs/cli/commit/3f9b4b49251c08270b31cb0ee5457439f709df7d))
+
+
+
+
+
 # [2.3.0-beta.82](https://github.com/lskjs/cli/compare/v2.3.0-beta.81...v2.3.0-beta.82) (2021-07-21)
 
 

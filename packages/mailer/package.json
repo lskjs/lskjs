@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "2.3.0-beta.75",
+  "version": "2.3.0-beta.84",
   "description": "LSK module for send and receive emails.",
   "keywords": [
     "database",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@lskjs/db": "2.3.0-beta.75",
-    "@lskjs/server-api": "2.3.0-beta.58",
+    "@lskjs/server-api": "2.3.0-beta.84",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
