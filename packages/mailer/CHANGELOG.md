@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.83](https://github.com/lskjs/lskjs/tree/master/packages/mailer/compare/v2.3.0-beta.82...v2.3.0-beta.83) (2021-07-22)
+
+**Note:** Version bump only for package @lskjs/mailer
+
+
+
+
+
 # [2.3.0-beta.75](https://github.com/lskjs/lskjs/tree/master/packages/mailer/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
 
 **Note:** Version bump only for package @lskjs/mailer

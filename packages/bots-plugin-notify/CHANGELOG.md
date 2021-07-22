@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.83](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-notify/compare/v2.3.0-beta.82...v2.3.0-beta.83) (2021-07-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** add graylog ([549fda5](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-notify/commit/549fda5f49c5b4bcccc33498af8cebe37fd25e13))
+
+
+
+
+
 # [2.3.0-beta.82](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-notify/compare/v2.3.0-beta.81...v2.3.0-beta.82) (2021-07-21)
 
 
