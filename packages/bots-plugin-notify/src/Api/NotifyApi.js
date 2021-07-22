@@ -53,6 +53,7 @@ export default class NotifyApi extends Api {
     const gitlabEvent = req.get('X-Gitlab-Event');
     const githubEvent = req.get('X-Github-Event');
     const isAlertManager = (req.get('User-Agent') || '').includes('Alertmanager');
+    const isGraylog = req.body && req.body.event_definition_id && req.body.job_trigger_id && req.body.job_definition_id;
 
     if (project.secret && token !== project.secret) throw '!acl'; // x aceess token
 
@@ -88,6 +89,11 @@ export default class NotifyApi extends Api {
     if (isAlertManager) {
       message.event = 'alert';
       message.type = 'alertmanager';
+      message.meta = req.body;
+    }
+    if (isGraylog) {
+      message.event = 'alert';
+      message.type = 'graylog';
       message.meta = req.body;
     }
 

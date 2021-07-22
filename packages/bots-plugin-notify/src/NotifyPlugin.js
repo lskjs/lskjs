@@ -6,15 +6,20 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import cron from 'node-cron';
 
-import createPost from './createPost';
+import alertmanager from './createPost/alertmanager';
+import github from './createPost/github';
+import gitlab from './createPost/gitlab';
+import graylog from './createPost/graylog';
+import monitoring from './createPost/monitoring';
 
 export default class NotifyPlugin extends BaseBotPlugin {
   providers = ['telegram'];
   crons = [];
-  monitoring = createPost.monitoring;
-  alertmanager = createPost.alertmanager;
-  github = createPost.github;
-  gitlab = createPost.gitlab;
+  alertmanager = alertmanager;
+  github = github;
+  gitlab = gitlab;
+  graylog = graylog;
+  monitoring = monitoring;
 
   // getRoutes() {
   //   return [
@@ -45,13 +50,16 @@ export default class NotifyPlugin extends BaseBotPlugin {
     if (message.type === 'alertmanager') {
       msg = this.alertmanager(message, project);
     }
+    if (message.type === 'graylog') {
+      msg = this.graylog(message, project);
+    }
 
     if (isDefault && msg) {
       msg = `/notify/${projectName}\n\n${msg}`;
     }
 
     const options = {};
-    if (message.md || ['github', 'gitlab', 'alertmanager'].includes(message.type)) {
+    if (message.md || ['github', 'gitlab', 'alertmanager', 'graylog'].includes(message.type)) {
       options.parse_mode = 'MarkdownV2';
     }
 
