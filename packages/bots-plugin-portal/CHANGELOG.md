@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.85](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.84...v2.3.0-beta.85) (2021-07-23)
+
+
+### Bug Fixes
+
+* **bots:** update readme ([f4f68a4](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/f4f68a455a303e5ce4d286762b0f455ede7f3519))
+* **bots-plugin-portal:** add sticker criteria ([ac1a03a](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/commit/ac1a03a451628229e89c146c962dbcae1c646e0d))
+
+
+
+
+
 # [2.3.0-beta.78](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-portal/compare/v2.3.0-beta.77...v2.3.0-beta.78) (2021-07-15)
 
 

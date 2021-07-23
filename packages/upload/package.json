@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/upload",
-  "version": "2.3.0-beta.84",
+  "version": "2.3.0-beta.85",
   "description": "LSK module for uploading files.",
   "keywords": [
     "upload",
@@ -31,7 +31,7 @@
     "multer-s3": "2.9.0"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.3.0-beta.84",
+    "@lskjs/server-api": "2.3.0-beta.85",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },
