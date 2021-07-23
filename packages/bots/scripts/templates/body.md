@@ -322,11 +322,11 @@ __Example:__
         },
         {
           type: 'answer',
-          text: 'Answer @{{username}}', // default: '@username'
+          text: 'Answer @{ {username} }', // default: '@username'
         },
         {
           type: 'sender',
-          text: 'Sender: @{{username}}', // default: '@username'
+          text: 'Sender: @{ {username} }', // default: '@username'
         },
       ],
       then: {
@@ -395,11 +395,11 @@ __Example:__
         },
         {
           type: 'answer',
-          text: 'Answer @{{username}}', // default: '@username'
+          text: 'Answer @{ {username} }', // default: '@username'
         },
         {
           type: 'sender',
-          text: 'Sender: @{{username}}', // default: '@username'
+          text: 'Sender: @{ {username} }', // default: '@username'
         },
       ],
       then: {

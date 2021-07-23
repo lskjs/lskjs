@@ -402,11 +402,11 @@ bots: {
         },
         {
           type: 'answer',
-          text: 'Answer @', // default: '@username'
+          text: 'Answer @{ {username} }', // default: '@username'
         },
         {
           type: 'sender',
-          text: 'Sender: @', // default: '@username'
+          text: 'Sender: @{ {username} }', // default: '@username'
         },
       ],
       then: {
@@ -476,11 +476,11 @@ bots: {
         },
         {
           type: 'answer',
-          text: 'Answer @', // default: '@username'
+          text: 'Answer @{ {username} }', // default: '@username'
         },
         {
           type: 'sender',
-          text: 'Sender: @', // default: '@username'
+          text: 'Sender: @{ {username} }', // default: '@username'
         },
       ],
       then: {
