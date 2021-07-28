@@ -1,11 +1,13 @@
 {
   "name": "@lskjs/err",
-  "version": "2.3.0-beta.22",
-  "description": "Error class for custom instances and code/message extracting",
+  "version": "2.3.0-beta.58",
+  "description": "LSK.js – err – Error class and utils for custom code and message extracting",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/err",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
+  "main": "index",
+  "typings": "index",
   "scripts": {
     "bootstrap": "lsk run bootstrap",
     "build": "lsk run build",
