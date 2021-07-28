@@ -38,6 +38,7 @@
     "@commitlint/config-conventional": "11.0.0",
     "@lskjs/eslint-config": "2.2.0",
     "@lskjs/utils": "2.3.0-beta.10",
+    "@types/jest": "26.0.24",
     "babel-eslint": "10.1.0",
     "eslint": "7.20.0",
     "husky": "5.0.9",

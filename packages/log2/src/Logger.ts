@@ -1,5 +1,7 @@
 // import debug from 'debug';
+import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
+
 import hashCode from './utils/hashCode';
 import tryParamParse from './utils/tryParamParse';
 // import pick from './utils/pick';
@@ -15,14 +17,22 @@ const pad = (a: string, width = 20): string => {
 };
 
 const env = (name: string, def: any = null): any => {
+  // eslint-disable-next-line no-nested-ternary
   const envs = typeof process !== 'undefined' ? process.env : typeof window !== 'undefined' ? window : {};
   return tryParamParse(envs[name], def);
 };
 
-const omitNull = (props: { [key: string]: any }) => {
-  const { ns, ...otherProps } = props;
-  if (ns) return props;
-  return otherProps;
+const omitNull = (props: { [key: string]: any }) =>
+  Object.keys(props)
+    .filter((k) => props[k] != null)
+    .reduce((acc, key) => {
+      acc[key] = props[key];
+      return acc;
+    }, {});
+
+const toString = (props: any) => {
+  if (Array.isArray(props)) return props.join(' ');
+  return String(props);
 };
 
 // const createRandom = (defaultSeed = Math.random()) => {
@@ -38,9 +48,10 @@ const omitNull = (props: { [key: string]: any }) => {
 export type LoggerLevelType = 'fatal' | 'error' | 'warn' | 'debug' | 'info' | 'trace' | 'log';
 
 interface ILoggerProps {
-  prefix: string | null;
-  ns: string | null;
-  name: string | null;
+  prefix?: string | null;
+  ns?: string | null;
+  name?: string | null;
+  level?: string | null;
 }
 
 export interface ILogger extends ILoggerProps {
@@ -126,7 +137,7 @@ export class Logger implements ILogger {
     this.setProps(...propsArray);
   }
   setProps(...propsArray: ILoggerProps[]): void {
-    const fields = ['prefix', 'ns', 'name', 'randomColors', 'theme', 'colors'];
+    const fields = ['prefix', 'ns', 'name', 'level', 'randomColors', 'theme', 'colors'];
     propsArray.forEach((props) => {
       Object.keys(props).forEach((key) => {
         if (!fields.includes(key)) return;
@@ -148,7 +159,9 @@ export class Logger implements ILogger {
     return levelsPriority[level] || 0;
   }
   canLog(level: string): boolean {
-    return this.getLevelPriority(level) >= this.getLevelPriority(this.level);
+    const logLevel = this.getLevelPriority(level);
+    const currentLevel = this.getLevelPriority(this.level);
+    return logLevel >= currentLevel;
   }
   fatal(...args: any[]): void {
     if (!this.canLog('fatal')) return;
@@ -182,6 +195,7 @@ export class Logger implements ILogger {
     return colors[this.getColor(name)](str);
   }
   getColor(color: string): string {
+    // eslint-disable-next-line no-nested-ternary
     return theme[color] ? theme[color] : colors[color] ? color : 'white';
   }
   getHashColor(key: string): string {
@@ -189,6 +203,7 @@ export class Logger implements ILogger {
   }
   __logger(...args: any[]): void {
     // @ts-ignore
+    // eslint-disable-next-line no-console
     if (console._log) {
       // @ts-ignore
       // eslint-disable-next-line no-console
@@ -201,20 +216,59 @@ export class Logger implements ILogger {
   __log(level: LoggerLevelType, ...args: any[]): void {
     const canPrint = this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));
     if (!canPrint) return;
-    if (env('LOG_JSON', false)) {
-      this.__logger(
-        omitNull({
-          name: this.name,
-          ns: this.ns,
-          level,
-          date: Date.now(),
-          content: args,
-        }),
-      );
+
+    const time = new Date();
+    const logFormat = env('LOG_FORMAT');
+    if (['json', 'bunyan', 'logrus'].includes(logFormat)) {
+      const data: {
+        code?: any;
+        name?: string | null;
+        ns?: string | null;
+        level?: string | number;
+        time?: string | number;
+        msg?: string;
+        data?: any;
+      } = {
+        name: this.name,
+        ns: this.ns,
+      };
+
+      if (logFormat === 'bunyan') {
+        data.level = levelsPriority[level];
+      } else {
+        data.level = level;
+      }
+      if (logFormat === 'bunyan' || logFormat === 'logrus') {
+        data.time = time.toISOString();
+      } else {
+        data.time = +time;
+      }
+
+      // if (logFormat === 'bunyan' || logFormat === 'logrus') {
+      data.msg = toString(args);
+      // }
+
+      if (env('LOG_DATA')) {
+        data.data = args;
+      }
+
+      if (!data.msg) data.msg = getMessage(arg);
+
+      data.msg = args
+        .map((arg) => {
+          if (isError(arg)) {
+            if (!data.code) data.code = getCode(arg);
+            return getMessage(arg);
+          }
+          return toString(arg);
+        })
+        .join(' ');
+      // if (!data.msg) data.msg = toString(args);
+
+      this.__logger(omitNull(data));
       return;
     }
     const res: string[] = [];
-
     if (this.name === 'req') {
       this.__logger(...res);
       return;
@@ -228,7 +282,7 @@ export class Logger implements ILogger {
     }
 
     const envLogAlign = env('LOG_ALIGN');
-    const envLogNs = env('LOG_L', 'true');
+    const envLogNs = env('LOG_NS', 'true');
     const envLogName = env('LOG_NAME', 'true');
 
     if (envLogNs || envLogName) {
@@ -251,7 +305,9 @@ export class Logger implements ILogger {
       }
     }
 
-    let [mainArg, ...otherArgs] = args;
+    let [mainArg] = args;
+    const [, ...otherArgs] = args;
+
     if (typeof mainArg === 'string') {
       if (['[', '<'].includes(mainArg[0]) && [']', '>'].includes(mainArg[mainArg.length - 1])) {
         mainArg = this.color(this.getHashColor(mainArg), mainArg);
