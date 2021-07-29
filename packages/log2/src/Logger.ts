@@ -41,8 +41,8 @@ const omitNull = (props: { [key: string]: any }) =>
       return acc;
     }, {});
 
-const toString = (props: any, ...args: any[]) =>
-  typeof props === 'object' ? stringify(props, ...args) : String(props);
+const toString = (props: any, arg1: any, arg2 = 0) =>
+  typeof props === 'object' ? stringify(props, arg1, arg2) : String(props);
 
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
