@@ -1,12 +1,22 @@
+/* global window */
 // import debug from 'debug';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
 
 import hashCode from './utils/hashCode';
 import tryParamParse from './utils/tryParamParse';
+
+declare global {
+  interface Window {
+    __DEV__: boolean;
+    __STAGE__: boolean;
+  }
+}
 // import pick from './utils/pick';
 
 // npm install term-size
+export const isServer = typeof window === 'undefined';
+export const isDev = (isServer ? process.env.NODE_ENV !== 'production' : Boolean(window.__DEV__)) || false;
 
 const pad = (a: string, width = 20): string => {
   const extra = width - a.length;
@@ -218,7 +228,7 @@ export class Logger implements ILogger {
     if (!canPrint) return;
 
     const time = new Date();
-    const logFormat = env('LOG_FORMAT');
+    const logFormat = env('LOG_FORMAT', isDev ? 'debug' : 'bunyan');
     if (['json', 'bunyan', 'logrus'].includes(logFormat)) {
       const data: {
         code?: any;
@@ -252,7 +262,7 @@ export class Logger implements ILogger {
         data.data = args;
       }
 
-      if (!data.msg) data.msg = getMessage(arg);
+      if (!data.msg) data.msg = getMessage(args);
 
       data.msg = args
         .map((arg) => {
