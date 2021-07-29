@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+
+### Bug Fixes
+
+* **log2:** one row json ([97a7939](https://github.com/lskjs/lskjs/commit/97a79399ea7d7665e15609b1ff2182efdc10c4d9))
+
+
+
+
+
 # [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
 
 

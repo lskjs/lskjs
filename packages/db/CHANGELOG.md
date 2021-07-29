@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+
+### Bug Fixes
+
+* **db:** ts fixes ([153ab82](https://github.com/lskjs/lskjs/commit/153ab824d3e6d64027fb20604ce7d065189d4900))
+
+
+
+
+
 # [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/db/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/db
