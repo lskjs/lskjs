@@ -1,5 +1,3 @@
-import forEach from 'lodash/forEach';
-
 import errMerge from './errMerge';
 import { IErr } from './IErr.types';
 import { errUnknown, getCode, getJSON, getMessage, getText, isError } from './utils';
@@ -15,7 +13,8 @@ export class Err extends Error implements IErr {
     const err = errMerge(...params);
     super(getMessage(err));
     this.name = this.constructor.name;
-    forEach(err, (val: any, key: any) => {
+    Object.keys(err).forEach((key: any) => {
+      const val = err[key];
       if (key === 'message') {
         if (this.message !== val && val) {
           // @ts-ignore

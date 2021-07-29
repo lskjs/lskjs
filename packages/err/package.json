@@ -26,5 +26,8 @@
   "dependencies": {
     "lodash": "4.17.21"
   },
-  "_type": "module"
+  "_type": "module",
+  "devDependencies": {
+    "@types/lodash": "4.14.171"
+  }
 }
