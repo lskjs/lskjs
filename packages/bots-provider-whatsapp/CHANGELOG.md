@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-whatsapp/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots-provider-whatsapp
+
+
+
+
+
 # [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-whatsapp/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/bots-provider-whatsapp
