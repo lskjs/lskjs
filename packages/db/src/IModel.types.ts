@@ -1,3 +1,4 @@
+// @ts-ignore
 import { IModule } from '@lskjs/module';
 
 export interface IModel {

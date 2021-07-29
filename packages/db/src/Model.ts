@@ -1,4 +1,3 @@
-// ts-ignore
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import set from 'lodash/set';
@@ -20,11 +19,11 @@ export class Model implements IModel {
   setState(state = {}) {
     forEach(state, (value: any, key: any) => {
       set(this, key, value);
-      // ts-ignore
+      // @ts-ignore
       this.markModified(key);
     });
   }
-  getState(key, def) {
+  getState(key: string, def: any) {
     if (!key) return this;
     return get(this, key, def);
   }
