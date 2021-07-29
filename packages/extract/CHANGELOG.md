@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/extract/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Features
+
+* **utils:** update err class ([302af1f](https://github.com/lskjs/lskjs/tree/master/packages/extract/commit/302af1f75698f1a7b7e7a2b58bfc39fdec3af341))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/extract/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/extract

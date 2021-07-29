@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.86](https://github.com/lskjs/cli/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Bug Fixes
+
+* **bots:** update readme ([eef3bc1](https://github.com/lskjs/cli/commit/eef3bc1a62d8486863a4d85d82d138bd8eb87704))
+* **err:** add err types ([d21679e](https://github.com/lskjs/cli/commit/d21679eb49e2ec0b190f20057a71c28c22fe924b))
+* **err:** typings ([f23b6f1](https://github.com/lskjs/cli/commit/f23b6f119bdce644ac3316cf76c019056ef51fce))
+
+
+### Features
+
+* **err:** create err package ([8ada0c7](https://github.com/lskjs/cli/commit/8ada0c7ca5bf57b123918967df5fedc1dda18fe7))
+* **log2:** new logger behaviour ([e9216b3](https://github.com/lskjs/cli/commit/e9216b3917bf90113e91946ca57bf135da748de6))
+* **utils:** update err class ([302af1f](https://github.com/lskjs/cli/commit/302af1f75698f1a7b7e7a2b58bfc39fdec3af341))
+
+
+
+
+
 # [2.3.0-beta.85](https://github.com/lskjs/cli/compare/v2.3.0-beta.84...v2.3.0-beta.85) (2021-07-23)
 
 

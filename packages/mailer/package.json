@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "2.3.0-beta.85",
+  "version": "2.3.0-beta.86",
   "description": "LSK module for send and receive emails.",
   "keywords": [
     "database",
@@ -23,8 +23,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.58",
-    "@lskjs/utils": "2.3.0-beta.58",
+    "@lskjs/module": "2.3.0-beta.86",
+    "@lskjs/utils": "2.3.0-beta.86",
     "eventemitter3": "4.0.7",
     "imap": "0.8.19",
     "mailparser": "3.0.1",
@@ -33,8 +33,8 @@
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.75",
-    "@lskjs/server-api": "2.3.0-beta.85",
+    "@lskjs/db": "2.3.0-beta.86",
+    "@lskjs/server-api": "2.3.0-beta.86",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },

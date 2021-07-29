@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.86](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Features
+
+* **err:** create err package ([8ada0c7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/8ada0c7ca5bf57b123918967df5fedc1dda18fe7))
+* **utils:** update err class ([302af1f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/302af1f75698f1a7b7e7a2b58bfc39fdec3af341))
+
+
+
+
+
 # [2.3.0-beta.58](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
 
 

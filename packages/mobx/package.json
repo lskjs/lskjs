@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mobx",
-  "version": "2.3.0-beta.58",
+  "version": "2.3.0-beta.86",
   "description": "LSK module for mobx.",
   "keywords": [
     "mobx",
@@ -22,8 +22,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.58",
-    "@lskjs/utils": "2.3.0-beta.58"
+    "@lskjs/module": "2.3.0-beta.86",
+    "@lskjs/utils": "2.3.0-beta.86"
   },
   "devDependencies": {
     "axios": "0.21.1",
