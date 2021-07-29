@@ -4,6 +4,7 @@ import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
 
 import hashCode from './utils/hashCode';
+import stringify from './utils/stringify';
 import tryParamParse from './utils/tryParamParse';
 
 declare global {
@@ -40,10 +41,8 @@ const omitNull = (props: { [key: string]: any }) =>
       return acc;
     }, {});
 
-const toString = (props: any) => {
-  if (Array.isArray(props)) return props.join(' ');
-  return String(props);
-};
+const toString = (props: any, ...args: any[]) =>
+  typeof props === 'object' ? stringify(props, ...args) : String(props);
 
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
@@ -255,7 +254,7 @@ export class Logger implements ILogger {
       }
 
       // if (logFormat === 'bunyan' || logFormat === 'logrus') {
-      data.msg = toString(args);
+      // data.msg = toString(args);
       // }
 
       if (env('LOG_DATA')) {
