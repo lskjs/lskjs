@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/scylla/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/scylla
+
+
+
+
+
 # [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/scylla/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/scylla

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.88](https://github.com/lskjs/cli/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+
+### Features
+
+* **log2:** set default log format ([c9822d9](https://github.com/lskjs/cli/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
+
+
+
+
+
 # [2.3.0-beta.87](https://github.com/lskjs/cli/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
 
 
