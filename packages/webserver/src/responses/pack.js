@@ -1,3 +1,5 @@
+import { isDev } from '@lskjs/utils/env';
+import stringify from 'fast-safe-stringify';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
@@ -5,8 +7,9 @@ import omit from 'lodash/omit';
 
 export default (webserver) =>
   function pack(raw = {}, info) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const res = this;
-    const config = get(webserver, 'config.server.response', __DEV__ ? { log: false, debug: true } : {});
+    const config = get(webserver, 'config.server.response', isDev ? { log: false, debug: true } : {});
     const status = info.status || get(raw, '__status', null);
     let isJson;
     let wrap;
@@ -62,7 +65,7 @@ export default (webserver) =>
       if (isLog === true) dest = str && str.length > 100 ? 'file' : 'console';
 
       if (dest === 'file') {
-        if (__DEV__) {
+        if (isDev) {
           const dir = `/tmp/lsk`;
           try {
             require('fs').mkdirSync(dir, { recursive: true });
@@ -72,7 +75,7 @@ export default (webserver) =>
           try {
             const filename = `${dir}/res_${new Date().toISOString().replace(/[^a-zA-Z0-9]+/gi, '_')}.${type}`;
             webserver.log.trace(
-              `>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${__DEV__ ? '[IGNORE]' : ''}`,
+              `>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${isDev ? '[IGNORE]' : ''}`,
             );
             require('fs').writeFileSync(filename, str);
           } catch (e) {
@@ -92,9 +95,9 @@ export default (webserver) =>
       return res.send(result);
     }
     try {
-      log(JSON.stringify(result, null, 2), 'json');
+      log(stringify(result, null, 2), 'json');
     } catch (e) {
       // ignore
     }
-    return res.json(result);
+    return res.json(stringify(result, null, isDev ? 2 : 0));
   };
