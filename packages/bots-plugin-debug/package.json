@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-debug",
-  "version": "2.3.0-beta.88",
+  "version": "2.3.0-beta.89",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@lskjs/bots-base": "2.3.0-beta.26",
-    "@lskjs/bots-plugin": "2.3.0-beta.88"
+    "@lskjs/bots-plugin": "2.3.0-beta.89"
   },
   "devDependencies": {
     "bluebird": "3.7.2",

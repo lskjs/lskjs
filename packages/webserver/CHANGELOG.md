@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/webserver/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+
+### Bug Fixes
+
+* **webserver:** safe stringify ([d644147](https://github.com/lskjs/lskjs/tree/master/packages/webserver/commit/d6441471fc1b4c59b965eb17c89ca71d15621727))
+
+
+
+
+
 # [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/webserver/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/webserver

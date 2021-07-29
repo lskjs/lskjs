@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+
+### Bug Fixes
+
+* **log2:** safe stringify ([0f10c06](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/0f10c06bb269c178b17f66f547455d7fc6795299))
+
+
+
+
+
 # [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
 
 
