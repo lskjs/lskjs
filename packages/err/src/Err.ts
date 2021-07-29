@@ -1,12 +1,13 @@
 import forEach from 'lodash/forEach';
 
 import errMerge from './errMerge';
+import { IErr } from './IErr.types';
 import { errUnknown, getCode, getJSON, getMessage, getText, isError } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 export const isErr = (err: any): boolean => err instanceof Err;
 
-export class Err extends Error {
+export class Err extends Error implements IErr {
   code?: string;
   __err = true;
   // @ts-ignore
@@ -14,7 +15,7 @@ export class Err extends Error {
     const err = errMerge(...params);
     super(getMessage(err));
     this.name = this.constructor.name;
-    forEach(err, (val, key) => {
+    forEach(err, (val: any, key: any) => {
       if (key === 'message') {
         if (this.message !== val && val) {
           // @ts-ignore

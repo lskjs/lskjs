@@ -1,7 +1,3 @@
-export { ILogger };
-export { ILogger as ILog };
-
-
 import forEach from 'lodash/forEach';
 
 import errMerge from './errMerge';
