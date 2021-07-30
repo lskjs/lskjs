@@ -1,4 +1,5 @@
 import Log from '@lskjs/log2';
+import { isDev } from '@lskjs/utils/env';
 import leftPad from '@lskjs/utils/leftPad';
 import omit from 'lodash/omit';
 
@@ -29,25 +30,6 @@ export function levelFn(data, status) {
   return 'info';
 }
 
-const urlPad = -20;
-
-export function logStart(data) {
-  return `${leftPad(data.method, 4)} ${leftPad(data.url, urlPad)} #${data.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
-}
-
-export function logFinish(data) {
-  const time = (data.duration || 0).toFixed(3);
-  const method = leftPad(data.method, 4);
-  const length = data.length || 0;
-  if (data.method === 'WS') {
-    return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(time, 7)}ms `;
-  }
-  return `${method} ${leftPad(data.url, urlPad)} #${data.reqId} ${leftPad(data.status, 3)} ${leftPad(
-    time,
-    7,
-  )}ms ${length}b `;
-}
-
 export function applyLogger(req, res) {
   const data = {};
   const { log = log2 } = req;
@@ -66,18 +48,22 @@ export function applyLogger(req, res) {
   data.ua = req.header('user-agent');
   data.ip = getReqIp(req) || '127.0.0.1';
 
-  if (__DEV__) {
-    const args = [data];
-    if (req.body) {
-      args.push(req.body);
-    }
-    log[levelFn(data, 'start')](...args);
+  let startLogger;
+  if (isDev) {
+    startLogger = setTimeout(() => {
+      const args = [data];
+      if (req.body && Object.keys(req.body).length) {
+        args.push(req.body);
+      }
+      log[levelFn(data, 'start')](...args);
+    }, 1500);
   }
 
   const hrtime = process.hrtime();
   function logging() {
+    clearTimeout(startLogger);
     data.status = res.statusCode;
-    data.length = res.getHeader('Content-Length');
+    data.length = +res.getHeader('Content-Length');
 
     const diff = process.hrtime(hrtime);
     data.duration = diff[0] * 1e3 + diff[1] * 1e-6;

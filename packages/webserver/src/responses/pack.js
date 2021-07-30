@@ -99,5 +99,9 @@ export default (webserver) =>
     } catch (e) {
       // ignore
     }
-    return res.json(stringify(result, null, isDev ? 2 : 0));
+
+    if (!res.get('Content-Type')) {
+      res.set('Content-Type', 'application/json');
+    }
+    return res.send(stringify(result, null, isDev ? 2 : 0));
   };
