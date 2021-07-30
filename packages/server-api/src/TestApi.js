@@ -2,6 +2,7 @@
 // import collectConfigs from '@lskjs/module/utils/collectConfigs';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
+import Bluebird from 'bluebird';
 
 import Api from './Api';
 
@@ -59,6 +60,26 @@ export default class TestApi extends Api {
           const secret = 123;
           return secret;
         },
+      '/async/ok': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        return { delay };
+      },
+      '/async/err': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        throw new Err('ERR_QWE', { delay });
+      },
+      '/async/404': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        throw new Err('ERR_QWE', { delay, status: 404 });
+      },
+      '/async/502': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        throw new Err('ERR_QWE', { delay, status: 502 });
+      },
       '/err/1': () => {
         throw 'TEST_ERROR_CODE';
       },
