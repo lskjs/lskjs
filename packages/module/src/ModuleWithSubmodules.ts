@@ -1,7 +1,7 @@
+import Err from '@lskjs/err';
 import Mutex from '@lskjs/mutex';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import Err from '@lskjs/utils/Err';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import mapValues from 'lodash/mapValues';
@@ -12,9 +12,7 @@ import { IAsyncModule } from './IModule.types';
 import { ModuleWithEE } from './ModuleWithEE';
 import { IAsyncModuleKeyValue, IModule, IModuleKeyValue, IModuleWithSubmodules } from './types';
 import { createAsyncModule } from './utils/createAsyncModule';
-
-const filterWildcard = (array: string[], pattern: string): string[] =>
-  array.filter((name) => name.startsWith(pattern.substr(0, pattern.length - 1)));
+import { filterWildcard } from './utils/filterWildcard';
 
 const mutexMap = {};
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
@@ -126,6 +124,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
         mutexRelease = await mutex.acquire();
       }
     }
+
     if (this.__initedModules[name]) {
       if (mutexRelease) mutexRelease();
       delete mutexMap[mutexKey];
@@ -136,7 +135,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       return this.moduleGetter(instance);
     }
 
-    if (this.debug) this.log.trace(`module(${name})`, debugInfo);
+    if (this.debug) this.log.trace(`debugInfo! module(${name})`, debugInfo);
     const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) {
       if (!throwIfNotFound) return null;
@@ -147,16 +146,25 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     try {
       const moduleProps = await this.getModuleProps(name);
       const instance = await createAsyncModule(availableModule, moduleProps);
-      this.__initedModules[name] = instance;
       if (isRun) {
-        if (instance.start) {
-          await instance.start();
-        } else if (instance.__run) {
-          await instance.__run();
-        } else if (instance.run) {
-          await instance.run();
+        try {
+          if (instance.start) {
+            await instance.start();
+          } else if (instance.__run) {
+            await instance.__run();
+          } else if (instance.run) {
+            await instance.run();
+          }
+        } catch (err) {
+          if (instance.__stop) {
+            await instance.__stop();
+          } else if (instance.stop) {
+            await instance.stop();
+          }
+          throw err;
         }
       }
+      this.__initedModules[name] = instance; // TODO: хороший вопрос, стоитл ли сохранять инстанс в кеше даже если run прошел неудачно
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
       // @ts-ignore
       if (getter) return getter(instance);

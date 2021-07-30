@@ -1,7 +1,8 @@
-import { Logger as Log, ILogger as ILog } from '@lskjs/log2';
+import { ILogger as ILog, Logger as Log } from '@lskjs/log2';
 import get from 'lodash/get';
-import { IModuleWithLog } from './types';
+
 import { ModuleWithConfig } from './ModuleWithConfig';
+import { IModuleWithLog } from './types';
 
 const ms = (date1: Date, date2: Date) => {
   const msc = Math.abs(Number(date1) - Number(date2));

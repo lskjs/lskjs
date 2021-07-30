@@ -27,7 +27,7 @@ export class DbModule extends Module {
   getOptions() {
     return {
       ...pick(this.config, validOptionNames),
-      ...(this.config.options || {})
+      ...(this.config.options || {}),
     };
   }
   async init() {

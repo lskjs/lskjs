@@ -17,7 +17,7 @@ export class ModelModule extends Module {
       throw '!db.client';
     }
     if (!this.Model) {
-      this.log.error('!db.client');
+      this.log.error('!Model');
       throw '!Model';
     }
     const Model = await importFn(this.Model);

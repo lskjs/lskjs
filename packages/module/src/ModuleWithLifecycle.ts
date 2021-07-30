@@ -1,11 +1,11 @@
-import Err from '@lskjs/utils/Err';
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import set from 'lodash/set';
 
 import { IModule, IModuleConstructor, IModuleLifecycle, IModuleProps, IModuleWithLifecycle } from './types';
 
 // @ts-ignore
-const STRICT_DEBUG =
-  typeof window !== 'undefined' ? window.__DEV__ : typeof process !== 'undefined' ? process.__DEV__ : false; // eslint-disable-line no-nested-ternary
+const STRICT_DEBUG = isDev;
 
 const safeLog = (ctx: any, level = 'error', ...args: any[]) => {
   if (ctx.log && ctx.log[level]) {
@@ -154,11 +154,13 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   }
 
   async __stop(): Promise<void> {
+    // TODO: нужно сделать двевовидную остановку модулей
     if (this.__lifecycle.stopStart) {
       if (STRICT_DEBUG) throw new Err('MODULE_HAS_BEEN_STOPED_BEFORE');
       return;
     }
-    if (!this.__lifecycle.runFinish) {
+    if (!this.__lifecycle.runStart) {
+      // NOTE: тут осознанно стоит runStart, так как модуль должен уметь останавливаться, даже если упал в ходе run сессии
       if (STRICT_DEBUG) throw new Err('MODULE_NOT_RUNNED_YET');
       return;
     }

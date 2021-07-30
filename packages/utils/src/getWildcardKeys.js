@@ -7,7 +7,7 @@ import uniq from 'lodash/uniq';
  * @param {[string] | string} keys - Input wildcard keys
  * @returns {[string]} Converted keys from wildcards matches
  */
-const getWildcardKeys = (rules, keys) => {
+export const getWildcardKeys = (rules, keys) => {
   const rx = /(.+\.)\*$/;
   const arr = typeof keys === 'string' ? [keys] : keys;
   const converted = arr.map((key) => {
