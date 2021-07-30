@@ -1,23 +1,12 @@
 /* global window */
 // import debug from 'debug';
+import { isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
 
 import hashCode from './utils/hashCode';
 import stringify from './utils/stringify';
 import tryParamParse from './utils/tryParamParse';
-
-declare global {
-  interface Window {
-    __DEV__: boolean;
-    __STAGE__: boolean;
-  }
-}
-// import pick from './utils/pick';
-
-// npm install term-size
-export const isServer = typeof window === 'undefined';
-export const isDev = (isServer ? process.env.NODE_ENV !== 'production' : Boolean(window.__DEV__)) || false;
 
 const pad = (a: string, width = 20): string => {
   const extra = width - a.length;
@@ -41,9 +30,8 @@ const omitNull = (props: { [key: string]: any }) =>
       return acc;
     }, {});
 
-const toString = (props: any, arg1: any, arg2 = 0) =>
+const toString = (props: any, arg1: any = null, arg2 = 0) =>
   typeof props === 'object' ? stringify(props, arg1, arg2) : String(props);
-
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
 //   return () => {
@@ -211,15 +199,16 @@ export class Logger implements ILogger {
     return theme.randoms[hashCode(key) % theme.randoms.length];
   }
   __logger(...args: any[]): void {
+    const stringedArgs = isDev ? args.map((a) => toString(a)) : args;
     // @ts-ignore
     // eslint-disable-next-line no-console
     if (console._log) {
       // @ts-ignore
       // eslint-disable-next-line no-console
-      console._log(...args);
+      console._log(...stringedArgs);
     } else {
       // eslint-disable-next-line no-console
-      console.log(...args);
+      console.log(...stringedArgs);
     }
   }
   __log(level: LoggerLevelType, ...args: any[]): void {
