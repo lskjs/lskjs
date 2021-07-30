@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+
+### Features
+
+* **server-api:** add async routes in TestApi ([3232b5d](https://github.com/lskjs/lskjs/commit/3232b5d4f5bb1765b6e4e759a372312fc2790b06))
+
+
+
+
+
 # [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/server-api

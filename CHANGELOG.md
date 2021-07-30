@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.92](https://github.com/lskjs/cli/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+
+### Features
+
+* **log2:** implement req loggger and prod serialization ([c3b1656](https://github.com/lskjs/cli/commit/c3b165613a1bc7fad1950f9f7448518190226ba5))
+* **server-api:** add async routes in TestApi ([3232b5d](https://github.com/lskjs/cli/commit/3232b5d4f5bb1765b6e4e759a372312fc2790b06))
+* **webserver:** safe json serialization and improve access logger ([ec10d88](https://github.com/lskjs/cli/commit/ec10d88e81bad99a8eb0bf522e4ebf40e42ee587))
+
+
+
+
+
 # [2.3.0-beta.91](https://github.com/lskjs/cli/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
 
 
