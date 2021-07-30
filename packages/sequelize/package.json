@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@lskjs/module": "2.3.0-beta.92",
+    "@lskjs/utils": "2.3.0-beta.91",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
     "sequelize": "6.3.5"
