@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.91](https://github.com/lskjs/cli/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+
+### Features
+
+* **env:** init env package ([8f6f2b3](https://github.com/lskjs/cli/commit/8f6f2b3a190e37c526f8dda576d4c367a997d371))
+* **err:** add typing ([d48754a](https://github.com/lskjs/cli/commit/d48754a99df43dfa6091487ed145e7decb3c69c6))
+* **log2:** add env deps ([40742b9](https://github.com/lskjs/cli/commit/40742b97627ca20ef0dec29421cf16926d01f062))
+* **utils:** separate env package ([5a120f2](https://github.com/lskjs/cli/commit/5a120f26a00c969798c87d5e1774736de93928ce))
+
+
+
+
+
 # [2.3.0-beta.90](https://github.com/lskjs/cli/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
 
 

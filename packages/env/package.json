@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/env",
-  "version": "2.3.0-beta.88",
+  "version": "2.3.0-beta.91",
   "description": "LSK.js – env – Scripts for environment detecton",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/env",

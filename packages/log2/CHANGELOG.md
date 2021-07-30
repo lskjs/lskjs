@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+
+### Features
+
+* **log2:** add env deps ([40742b9](https://github.com/lskjs/lskjs/commit/40742b97627ca20ef0dec29421cf16926d01f062))
+
+
+
+
+
 # [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
 
 

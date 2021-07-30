@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+
+### Features
+
+* **err:** add typing ([d48754a](https://github.com/lskjs/lskjs/commit/d48754a99df43dfa6091487ed145e7decb3c69c6))
+
+
+
+
+
 # [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/err/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
 
 
