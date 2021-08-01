@@ -5,8 +5,10 @@ import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import map from 'lodash/map';
 import pick from 'lodash/pick';
+import omit from 'lodash/omit';
 
 const toQs = (params = {}) => map(params, (val, key) => [key, val].join('=')).join('&');
 
@@ -14,11 +16,28 @@ export class RabbitWorker extends Module {
   async init() {
     await super.init();
     this.stats = new Stats();
+    this.config = merge({}, this.config, await this.getWorkerConfig());
     // if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
     // this.queues = get(this, 'app.config.rabbit.queues');
     // this.exchanges = get(this, 'app.config.rabbit.exchanges');
     this.rabbit = await this.app.module('rabbit');
     this.rabbit.on('connected', this.rabbitConnect.bind(this));
+  }
+  async getWorkerConfig() {
+    const workerName = get(this.app, 'config.worker', this.name);
+    const config = get(this.app.config, workerName, {});
+    // const name = this.debug
+    const ns = [this.log.ns, workerName].filter(Boolean).join('.');
+    // const ns = [this.log.ns, name].filter(Boolean).join('.');
+    return {
+      debug: config.debug,
+      ...config,
+      log: {
+        ...omit(this.config.log || {}, ['name']),
+        ns,
+        ...(config.log || {}),
+      },
+    };
   }
   async parse() {
     throw 'not implemented worker.parse()';
