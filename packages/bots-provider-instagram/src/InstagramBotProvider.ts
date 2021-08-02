@@ -11,6 +11,7 @@ type InstagramBotConfigType = {
 };
 
 export default class InstagramBotProvider extends BaseBotProvider {
+  client: any;
   provider = 'instagram';
   IgApiClient = IgApiClient;
   eventTypes = [];

@@ -11,6 +11,7 @@ type SlackBotConfigType = {
 };
 
 export default class SlackBotProvider extends BaseBotProvider {
+  client: any;
   provider = 'slack';
   SlackApp = SlackApp;
   eventTypes = [

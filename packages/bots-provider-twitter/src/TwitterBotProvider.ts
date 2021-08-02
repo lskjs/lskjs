@@ -13,6 +13,7 @@ type TwitterBotConfigType = {
 };
 
 export default class TwitterBotProvider extends BaseBotProvider {
+  client: any;
   provider = 'twitter';
   Twitter = Twitter;
   config: TwitterBotConfigType;

@@ -32,7 +32,9 @@ export class ModelsModule extends Module implements IModelsModule {
   }
 
   async moduleGetter(m: IModule): Promise<any> {
+    // @ts-ignore
     if (!m.dbName) throw '!this.dbName';
+    // @ts-ignore
     await m.app.module(m.dbName, { run: true });
     // @ts-ignore
     return m.model;
@@ -47,8 +49,10 @@ export class ModelsModule extends Module implements IModelsModule {
     }
     // @ts-ignore
     if (Array.isArray(nameOrNames)) {
+      // @ts-ignore
       return mapValues(modelModule, (m) => m.model);
     }
+    // @ts-ignore
     return modelModule;
   }
 

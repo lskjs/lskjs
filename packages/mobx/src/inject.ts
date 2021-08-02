@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-ignore
 import React from "react"
 // @ts-ignore
 import { observer, MobXProviderContext } from "mobx-react"
@@ -9,6 +10,8 @@ import { IReactComponent } from "mobx-react/dist/types/IReactComponent"
 import { IValueMap } from "mobx-react/dist/types/IValueMap"
 import { IWrappedComponent } from "mobx-react/dist/types/IWrappedComponent"
 import { IStoresToProps } from "mobx-react/dist/types/IStoresToProps"
+
+const isDebug = false;
 
 // based on https://github.com/mridgway/hoist-non-react-statics/blob/master/src/index.js
 const hoistBlackList = {
@@ -46,7 +49,7 @@ function createStoreInjector(
     makeReactive: boolean
 ): IReactComponent<any> {
     // Support forward refs
-    let Injector: IReactComponent<any> = React.forwardRef((props, ref) => {
+    let Injector: IReactComponent<any> = React.forwardRef((props: any, ref: any) => {
         const newProps = { ...props }
         const context = React.useContext(MobXProviderContext)
         // @ts-ignore
@@ -96,7 +99,7 @@ function grabStoresByName(
                         storeName +
                         "' is not available! Make sure it is provided by some Provider"
                 );
-                console.error('Mobx @inject', err)
+                if (isDebug) console.error('Mobx @inject', err);
                 nextProps[storeName] = null;
                 return;
             }

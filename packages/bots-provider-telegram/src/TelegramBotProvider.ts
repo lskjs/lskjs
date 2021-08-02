@@ -16,6 +16,7 @@ type TelegramBotConfigType = {
 };
 
 export default class TelegramBotProvider extends BaseBotProvider {
+  client: any;
   provider = 'telegram';
   Telegraf = Telegraf;
   eventTypes = [
@@ -33,7 +34,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   async init(): Promise<void> {
     await super.init();
     if (!this.config.token) throw 'TelegramBotProvider !config.token';
-    const { Telegraf } = this;
+    // const { Telegraf } = this;
     this.client = new Telegraf(this.config.token);
     this.client.use(session());
     // TODO: временный костыль, @volkovpishet починит
@@ -65,24 +66,24 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.getUser(ctx).id;
   }
   getMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getMessage(ctx);
     return message.message_id || null;
   }
   getMessageUserId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getMessage(ctx);
     if (get(message, 'from.id')) return get(message, 'from.id');
     return null;
   }
   getMessageChatId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getMessage(ctx);
     if (get(message, 'chat.id')) return get(message, 'chat.id');
     return null;
   }
   getMessageTargetId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getMessage(ctx);
     return get(message, 'message_id', null);
   }
@@ -91,7 +92,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return message.reply_to_message || null;
   }
   getRepliedMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getRepliedMessage(ctx);
     if (!message) return null;
     return message.message_id || null;
@@ -105,7 +106,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return callback.message;
   }
   getCallbackMessageId(ctx: TelegramIBotProviderMessageCtx): number | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getRepliedMessage(ctx);
     if (!message) return null;
     return message.message_id || null;
@@ -136,35 +137,38 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (message.text) return message.text;
     return null;
   }
-  setMessageText(ctx: TelegramIBotProviderMessageCtx, text = ''): string | null {
-    if (typeof ctx === 'string') return null;
-    if (get(ctx, 'update.callback_query.message.caption'))
-      return set(ctx, 'update.callback_query.message.caption', text);
-    if (get(ctx, 'update.callback_query.message.text')) return set(ctx, 'update.callback_query.message.text', text);
-    if (get(ctx, 'update.channel_post.caption')) return set(ctx, 'update.channel_post.caption', text);
-    if (get(ctx, 'update.channel_post.text')) return set(ctx, 'update.channel_post.text', text);
-    if (get(ctx, 'update.message.caption')) return set(ctx, 'update.message.caption', text);
-    if (get(ctx, 'update.message.text')) return set(ctx, 'update.message.text', text);
-    if (get(ctx, 'message.caption')) return set(ctx, 'message.caption', text);
-    if (get(ctx, 'message.text')) return set(ctx, 'message.text', text);
-
-    if (get(ctx, 'update.callback_query.message')) {
-      ctx = set(ctx, 'update.callback_query.message.text', text);
-      return set(ctx, 'update.callback_query.message.caption', text);
+  setMessageText(ctx: TelegramIBotProviderMessageCtx, text = ''): void {
+    if (typeof ctx === 'string') return;
+    if (get(ctx, 'update.callback_query.message.caption')) {
+      set(ctx, 'update.callback_query.message.caption', text);
+    } else if (get(ctx, 'update.callback_query.message.text')) {
+      set(ctx, 'update.callback_query.message.text', text);
+    } else if (get(ctx, 'update.channel_post.caption')) {
+      set(ctx, 'update.channel_post.caption', text);
+    } else if (get(ctx, 'update.channel_post.text')) {
+      set(ctx, 'update.channel_post.text', text);
+    } else if (get(ctx, 'update.message.caption')) {
+      set(ctx, 'update.message.caption', text);
+    } else if (get(ctx, 'update.message.text')) {
+      set(ctx, 'update.message.text', text);
+    } else if (get(ctx, 'message.caption')) {
+      set(ctx, 'message.caption', text);
+    } else if (get(ctx, 'message.text')) {
+      set(ctx, 'message.text', text);
+    } else if (get(ctx, 'update.callback_query.message')) {
+      set(ctx, 'update.callback_query.message.text', text);
+      set(ctx, 'update.callback_query.message.caption', text);
+    } else if (get(ctx, 'update.channel_post')) {
+      set(ctx, 'update.channel_post.text', text);
+      set(ctx, 'update.channel_post.caption', text);
+    } else if (get(ctx, 'update.message')) {
+      set(ctx, 'update.message.text', text);
+      set(ctx, 'update.message.caption', text);
+    } else if (get(ctx, 'message')) {
+      set(ctx, 'message.caption', text);
+      set(ctx, 'message.text', text);
     }
-    if (get(ctx, 'update.channel_post')) {
-      ctx = set(ctx, 'update.channel_post.text', text);
-      return set(ctx, 'update.channel_post.caption', text);
-    }
-    if (get(ctx, 'update.message')) {
-      ctx = set(ctx, 'update.message.text', text);
-      return set(ctx, 'update.message.caption', text);
-    }
-    if (get(ctx, 'message')) {
-      ctx = set(ctx, 'message.text', text);
-      return set(ctx, 'message.caption', text);
-    }
-    return ctx;
+    // return ctx;
   }
   setMessage(ctx: TelegramIBotProviderMessageCtx, path: string, value: any): any | null {
     if (typeof ctx === 'string') return null;
@@ -175,17 +179,18 @@ export default class TelegramBotProvider extends BaseBotProvider {
     if (get(ctx, `message${msgPath}`)) return set(ctx, `message${msgPath}`, value);
     return null;
   }
-  async getChatMember(chatId: string | number, userId: string | number): any {
-    try {
-      const chatMember = await this.client.telegram.getChatMember(chatId, userId);
-      return chatMember;
-    } catch (error) {
-      return {};
-    }
+  async getChatMember(chatId: string | number, userId: string | number): Promise<any> {
+    return this.client.telegram.getChatMember(chatId, userId);
+    // try {
+    //   const chatMember = await this.client.telegram.getChatMember(chatId, userId);
+    //   return chatMember;
+    // } catch (error) {
+    //   return {};
+    // }
   }
-  async userInChat(chatId: string | number, userId: string | number): boolean | undefined {
+  async userInChat(chatId: string | number, userId: string | number): Promise<boolean> {
     const chatMember = await this.getChatMember(chatId, userId);
-    if (isEmpty(chatMember)) return undefined;
+    if (isEmpty(chatMember)) return false;
     if (chatMember.status === 'left') return false;
     return true;
   }
@@ -196,7 +201,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.isMessageStartsWith(ctx, `/${command || ''}`);
   }
   getMessageCommand(ctx: TelegramIBotProviderMessageCtx): string | null {
-    const messageText = this.getMessageText(ctx);
+    const messageText = this.getMessageText(ctx) || '';
     if (messageText[0] !== '/') return null;
     return messageText.split('@')[0].split(' ')[0];
   }
@@ -204,8 +209,8 @@ export default class TelegramBotProvider extends BaseBotProvider {
     const message = this.getMessage(ctx);
     return new Date(message.date * 1000);
   }
-  getMessageChatType(ctx: TelegramIBotProviderMessageCtx): string | null {
-    if (['number', 'string'].includes(typeof ctx)) return ctx;
+  getMessageChatType(ctx: TelegramIBotProviderMessageCtx): number | string | null {
+    if (typeof ctx === 'string' || typeof ctx === 'number') return ctx;
     const message = this.getMessage(ctx);
     if (get(message, 'chat.type')) return get(message, 'chat.type');
     return null;
@@ -265,7 +270,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
     );
   }
 
-  async saveMessage(ctx: TelegramIBotProviderMessageCtx, parentCtx: TelegramIBotProviderMessageCtx): Promise<any> {
+  async saveMessage(ctx: TelegramIBotProviderMessageCtx, parentCtx?: TelegramIBotProviderMessageCtx): Promise<any> {
     const BotsEventModel = await this.botsModule.module('models.BotsEventModel');
     const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
     const BotsTelegramUserModel = await this.botsModule.module('models.BotsTelegramUserModel');
@@ -300,12 +305,17 @@ export default class TelegramBotProvider extends BaseBotProvider {
         },
       ));
     }
+    const meta: { parent?: any } = {};
+    if (parentCtx) {
+      meta.parent = this.getMessage(parentCtx);
+    }
+
     const data = {
       botId,
       telegramUserId,
       chatUserId,
       type,
-      meta: { parent: this.getMessage(parentCtx) },
+      meta,
       ...eventData,
     };
     await BotsTelegramMessageModel.create(data);
@@ -415,7 +425,16 @@ export default class TelegramBotProvider extends BaseBotProvider {
     return this.saveMessage(msg);
   }
 
-  async sendMessage(ctx: any, content: any, extra = {}): Promise<any> {
+  async sendMessage(
+    ctx: any,
+    content: any,
+    extra: {
+      // eslint-disable-next-line camelcase
+      parse_mode?: string;
+      // eslint-disable-next-line camelcase
+      reply_markup?: string;
+    } = {},
+  ): Promise<any> {
     let to = this.getMessageChatId(ctx);
     let method = 'sendMessage';
     let args = [content.text || content];
@@ -570,7 +589,8 @@ export default class TelegramBotProvider extends BaseBotProvider {
       return err;
     }
   }
-  async editMessageReplyMarkup(ctx: TelegramIBotProviderMessageCtx, extra = {}) {
+  // eslint-disable-next-line camelcase
+  async editMessageReplyMarkup(ctx: TelegramIBotProviderMessageCtx, extra: { reply_markup?: string } = {}) {
     this.log.trace('editMessage');
     try {
       const msg = await this.client.telegram.editMessageReplyMarkup(
@@ -585,7 +605,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
       return err;
     }
   }
-  async deleteMessage(ctx: TelegramIBotProviderMessageCtx): any {
+  async deleteMessage(ctx: TelegramIBotProviderMessageCtx): Promise<any> {
     const BotsTelegramMessageModel = await this.botsModule.module('models.BotsTelegramMessageModel');
     this.log.trace('deleteMessage');
     const chatId = this.getMessageChatId(ctx);

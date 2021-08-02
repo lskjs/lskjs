@@ -14,6 +14,9 @@ export type WhatsappBotConfigType = ClientOptions;
 // };
 
 export default class WhatsappBotProvider extends BaseBotProvider {
+  client: any;
+  // initEventEmitter: any;
+  // on: any;
   provider = 'whatsapp';
   eventTypes = [
     'qr',
