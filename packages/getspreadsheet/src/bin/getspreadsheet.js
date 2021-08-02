@@ -49,7 +49,7 @@ program
           if (nested) {
             rawData = rawData.map((item) => dot.object(item));
           }
-          str = JSON.stringify(rawData);
+          str = JSON.stringify(rawData, null, 2);
         }
         fs.writeFileSync(filename, str);
       })
