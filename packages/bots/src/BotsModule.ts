@@ -1,7 +1,12 @@
+// @ts-ignore
 import { IAnyKeyValue, IAsyncPlugins, IAsyncProviders, IBotProvider } from '@lskjs/bots-base/types';
+// @ts-ignore
 import { BotsRouter } from '@lskjs/bots-router';
+// @ts-ignore
 import { IModel, IModelKeyValue, IModelsModule } from '@lskjs/db';
+// @ts-ignore
 import { IAsyncModuleKeyValue, ILogger, Module } from '@lskjs/module';
+// @ts-ignore
 import { createAsyncModule } from '@lskjs/module/utils/createAsyncModule';
 // import asyncMapValues from '@lskjs/utils/asyncMapValues';
 // @ts-ignore
@@ -31,6 +36,7 @@ export const asyncMapValues = <T>(
 ): Promise<Dictionary<any>> => Bluebird.props(mapValues(obj, callback));
 
 export default class BotsModule extends Module {
+  app?: any;
   providers: IAsyncProviders = providers;
   plugins: IAsyncPlugins = {};
   log: ILogger;
@@ -64,15 +70,18 @@ export default class BotsModule extends Module {
   }
 
   async getConfig(): Promise<Record<string, any>> {
-    const config =  {
+    const config = {
       ...(this.config || {}),
+      // @ts-ignore
       ...(this.__config || {}),
       providers: {
         ...(this.config.providers || {}),
+        // @ts-ignore
         ...(this.__config.providers || {}),
       },
       plugins: {
         ...(this.config.plugins || {}),
+        // @ts-ignore
         ...(this.__config.plugins || {}),
       },
     };
@@ -80,6 +89,7 @@ export default class BotsModule extends Module {
   }
 
   async model(...args: any[]): Promise<IModel | IModelKeyValue> {
+    // @ts-ignore
     const modelsModule = (await this.module('models')) as IModelsModule;
     // @ts-ignore
     return modelsModule.model(...args);
@@ -152,6 +162,7 @@ export default class BotsModule extends Module {
   async getModules(): Promise<IAsyncModuleKeyValue> {
     return {
       ...super.getModules(),
+      // @ts-ignore
       models: [() => import('@lskjs/db/models'), { models }],
     };
   }
