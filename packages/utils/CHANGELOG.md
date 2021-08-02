@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/ux/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **module:** not preventing dublicate of errors ([81effc2](https://github.com/lskjs/ux/commit/81effc26029e82e15d095ed34e2dfb45ce1f3d24))
+* **utils:** add getWildcardKeys ([d137f3b](https://github.com/lskjs/ux/commit/d137f3bc8511b75caeffe43016fa8ba9bcd9710e))
+
+
+
+
+
 # [2.3.0-beta.91](https://github.com/lskjs/ux/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
 
 

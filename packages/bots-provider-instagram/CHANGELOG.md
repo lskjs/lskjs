@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* fix ts typings ([f2dd91e](https://github.com/lskjs/lskjs/commit/f2dd91e18af18563ecf668ad48f057d588c05962))
+
+
+
+
+
 # [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/bots-provider-instagram

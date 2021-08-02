@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **mutex:** migrate to ts ([c197914](https://github.com/lskjs/lskjs/commit/c19791485658314c8cf99d2c823aeae0317cb9ed))
+
+
+
+
+
 # [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/mutex/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 

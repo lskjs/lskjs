@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/cli/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix ts errors ([cbbe925](https://github.com/lskjs/cli/commit/cbbe9250ce699ef345c10eeb3fe0df6695eee7ed))
+* **bots-provider-telegram:** fix ts errors ([519f182](https://github.com/lskjs/cli/commit/519f1827c4138d2463e95af041a269e30ae36a1a))
+* fix ts typings ([f2dd91e](https://github.com/lskjs/cli/commit/f2dd91e18af18563ecf668ad48f057d588c05962))
+
+
+### Features
+
+* **bost-plugin-prometheus:** change summary ([e8a8e24](https://github.com/lskjs/cli/commit/e8a8e24b8bbc1a89f1ccf90804e1c28db364ca5f))
+* **getspreadsheet:** json beutyfy ([9b74d8e](https://github.com/lskjs/cli/commit/9b74d8e33b71554da87f644575549ba9a87b2d1f))
+* **module:** not preventing dublicate of errors ([81effc2](https://github.com/lskjs/cli/commit/81effc26029e82e15d095ed34e2dfb45ce1f3d24))
+* **mutex:** migrate to ts ([c197914](https://github.com/lskjs/cli/commit/c19791485658314c8cf99d2c823aeae0317cb9ed))
+* **sequelize:** add models ([0917c04](https://github.com/lskjs/cli/commit/0917c04779832a239be3e16055e663a374c7acbf))
+* **utils:** add getWildcardKeys ([d137f3b](https://github.com/lskjs/cli/commit/d137f3bc8511b75caeffe43016fa8ba9bcd9710e))
+
+
+
+
+
 # [2.3.0-beta.92](https://github.com/lskjs/cli/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
 
 

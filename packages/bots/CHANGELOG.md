@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix ts errors ([cbbe925](https://github.com/lskjs/lskjs/commit/cbbe9250ce699ef345c10eeb3fe0df6695eee7ed))
+
+
+
+
+
 # [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/bots

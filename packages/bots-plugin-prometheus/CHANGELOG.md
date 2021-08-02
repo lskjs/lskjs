@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **bost-plugin-prometheus:** change summary ([e8a8e24](https://github.com/lskjs/lskjs/commit/e8a8e24b8bbc1a89f1ccf90804e1c28db364ca5f))
+
+
+
+
+
 # [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-prometheus

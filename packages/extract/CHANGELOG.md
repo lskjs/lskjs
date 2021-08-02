@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+**Note:** Version bump only for package @lskjs/extract
+
+
+
+
+
 # [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/extract/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
 
 
