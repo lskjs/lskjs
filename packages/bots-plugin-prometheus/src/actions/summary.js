@@ -34,7 +34,9 @@ export default async function summary({ data, params }) {
       .map((d) => `*${getAlertname(d, parseMode)}*\n\n${getDescription(d)}`)
       .join('\n—————————————\n');
 
-    const resultText = `${getEmoji(dataType)} *${dataType}*\n\n${alertInfoText}`;
+    const sum = alertData.map((d) => `- ${getAlertname(d, parseMode)}`).join('\n');
+
+    const resultText = `${getEmoji(dataType)}\n${sum}\n\n=======\n\n${alertInfoText}`;
 
     return Bluebird.map(chats, async (chat) => this.bot.sendMessage(chat, resultText, { parse_mode: parseMode }));
   });
