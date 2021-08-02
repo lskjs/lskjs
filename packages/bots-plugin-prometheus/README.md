@@ -23,19 +23,11 @@
 # Table of contents
 
 *   [⌨️ Install](#️-install)
-
 *   [Intro](#intro)
-
 *   [Как использовать](#как-использовать)
-
-    *   [Как писать посты чтобы к ним прикреплялись лайки/дизлайки?](#как-писать-посты-чтобы-к-ним-прикреплялись-лайкидизлайки)
-
 *   [📖 License](#-license)
-
 *   [👥 Contributors](#-contributors)
-
 *   [👏 Contributing](#-contributing)
-
 *   [📮 Any questions? Always welcome :)](#-any-questions-always-welcome-)
 
 # ⌨️ Install
@@ -52,11 +44,7 @@ npm i @lskjs/bots-plugin-prometheus bluebird lodash
 
 # Intro
 
-плагин нужен для того делать пересылку сообщений от одних пользователей или каналов к другим пользователям, чатам и калам
-
 # Как использовать
-
-## Как писать посты чтобы к ним прикреплялись лайки/дизлайки?
 
 конфиг в env.js
 
@@ -64,16 +52,19 @@ npm i @lskjs/bots-plugin-prometheus bluebird lodash
 bots: {
  plugins:{
   prometheus: {
-   rules: [
-    {
-     where: ({ chatId }) => chatId === YOUR_USER_ID,
-     then: {
-      like: 1,
-      action: 'repost',
-      to: YOUR_GROUP_ID,
-     },
-    },
-   ],
+   projects: [
+      {
+        alerts: 'URL-alert',
+        criteria: {
+          state: 'firing',
+        },
+        action: {
+          type: 'summary',
+          telegram: [chats.chat1, chats.chat2],
+          groupBy: 'labels.severity',
+        },
+      },
+    ],
   },
  },
 },

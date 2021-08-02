@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/server @lskjs/db @lskjs/i18 axios bluebird lodash
+yarn i @lskjs/server @lskjs/db @lskjs/i18 @lskjs/webserver axios bluebird lodash
 
 # npm
-npm i @lskjs/server @lskjs/db @lskjs/i18 axios bluebird lodash
+npm i @lskjs/server @lskjs/db @lskjs/i18 @lskjs/webserver axios bluebird lodash
 ```
 
 ***

@@ -1,14 +1,14 @@
-# LSK.js – server
+# LSK.js – webserver
 
-> @lskjs/server – LSK server.
+> @lskjs/webserver – LSK module webserver.
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/server)](https://www.npmjs.com/package/@lskjs/server)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/server)](https://www.npmjs.com/package/@lskjs/server)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/server)](https://bundlephobia.com/result?p=@lskjs/server)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/server)](https://www.npmjs.com/package/@lskjs/server)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/server)](https://bundlephobia.com/result?p=@lskjs/server)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/server)](https://bundlephobia.com/result?p=@lskjs/server)
+[![NPM version](https://badgen.net/npm/v/@lskjs/webserver)](https://www.npmjs.com/package/@lskjs/webserver)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/webserver)](https://www.npmjs.com/package/@lskjs/webserver)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/webserver)](https://bundlephobia.com/result?p=@lskjs/webserver)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/webserver)](https://www.npmjs.com/package/@lskjs/webserver)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/webserver)](https://bundlephobia.com/result?p=@lskjs/webserver)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/webserver)](https://bundlephobia.com/result?p=@lskjs/webserver)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/server @lskjs/db @lskjs/i18 axios bluebird lodash
+yarn i @lskjs/webserver @lskjs/db @lskjs/i18 axios bluebird lodash
 
 # npm
-npm i @lskjs/server @lskjs/db @lskjs/i18 axios bluebird lodash
+npm i @lskjs/webserver @lskjs/db @lskjs/i18 axios bluebird lodash
 ```
 
 ***

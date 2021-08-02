@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/clickhouse bluebird lodash
+yarn i @lskjs/clickhouse 
 
 # npm
-npm i @lskjs/clickhouse bluebird lodash
+npm i @lskjs/clickhouse 
 ```
 
 ***

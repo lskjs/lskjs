@@ -18,9 +18,10 @@
     "prepublishOnly": "lsk run prepublishOnly",
     "release": "lsk run release",
     "release:yes": "lsk run release:yes",
-    "start": "lsk run start",
+    "start": "node index.js",
     "storybook": "lsk run storybook",
     "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
     "watch": "lsk run watch"
   }
 }

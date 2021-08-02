@@ -1,14 +1,14 @@
-# LSK.js – proxy
+# LSK.js – mutex
 
-> @lskjs/proxy – LSK module for proxy.
+> @lskjs/mutex – Async mutex
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/proxy)](https://www.npmjs.com/package/@lskjs/proxy)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/proxy)](https://www.npmjs.com/package/@lskjs/proxy)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/proxy)](https://bundlephobia.com/result?p=@lskjs/proxy)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/proxy)](https://www.npmjs.com/package/@lskjs/proxy)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/proxy)](https://bundlephobia.com/result?p=@lskjs/proxy)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/proxy)](https://bundlephobia.com/result?p=@lskjs/proxy)
+[![NPM version](https://badgen.net/npm/v/@lskjs/mutex)](https://www.npmjs.com/package/@lskjs/mutex)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/mutex)](https://www.npmjs.com/package/@lskjs/mutex)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/mutex)](https://bundlephobia.com/result?p=@lskjs/mutex)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/mutex)](https://www.npmjs.com/package/@lskjs/mutex)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/mutex)](https://bundlephobia.com/result?p=@lskjs/mutex)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/mutex)](https://bundlephobia.com/result?p=@lskjs/mutex)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/proxy axios bluebird lodash
+yarn i @lskjs/mutex 
 
 # npm
-npm i @lskjs/proxy axios bluebird lodash
+npm i @lskjs/mutex 
 ```
 
 ***

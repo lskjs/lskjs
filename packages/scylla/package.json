@@ -12,17 +12,20 @@
     "bootstrap": "lsk run bootstrap",
     "build": "lsk run build",
     "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
     "i18": "lsk run i18",
     "prepublishOnly": "lsk run prepublishOnly",
     "release": "lsk run release",
-    "start": "lsk run start",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
     "storybook": "lsk run storybook",
     "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.3.0-beta.92",
-    "@lskjs/utils": "2.3.0-beta.91",
+    "@lskjs/module": "2.3.0-beta.93",
+    "@lskjs/utils": "2.3.0-beta.92",
     "cassandra-driver": "4.6.1"
   },
   "devDependencies": {

@@ -1,8 +1,14 @@
-# LSK.js – bots-plugin-download
+# LSK.js – bots-plugin-downloads
 
-> @lskjs/bots-plugin-download – LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation
+> @lskjs/bots-plugin-downloads – LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
+[![NPM version](https://badgen.net/npm/v/@lskjs/bots-plugin-downloads)](https://www.npmjs.com/package/@lskjs/bots-plugin-downloads)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/bots-plugin-downloads)](https://www.npmjs.com/package/@lskjs/bots-plugin-downloads)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/bots-plugin-downloads)](https://bundlephobia.com/result?p=@lskjs/bots-plugin-downloads)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/bots-plugin-downloads)](https://www.npmjs.com/package/@lskjs/bots-plugin-downloads)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/bots-plugin-downloads)](https://bundlephobia.com/result?p=@lskjs/bots-plugin-downloads)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/bots-plugin-downloads)](https://bundlephobia.com/result?p=@lskjs/bots-plugin-downloads)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -60,10 +66,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/bots-plugin-portal bluebird lodash
+yarn i @lskjs/bots-plugin-downloads lodash
 
 # npm
-npm i @lskjs/bots-plugin-portal bluebird lodash
+npm i @lskjs/bots-plugin-downloads lodash
 ```
 
 ***
