@@ -1,6 +1,8 @@
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
 import get from 'lodash/get';
+import mapValues from 'lodash/mapValues';
 // import hash from 'object-hash';
 // import Cacheman from 'cacheman';
 // import pick from 'lodash/pick';
@@ -40,14 +42,25 @@ export default class Api extends Module {
     }
     this.paths = [...(this.__parent.paths || []), this.path];
   }
-  async isAuth(req) {
+  // async isAuth(req) {
+  //   if (req.__errJwt) return false;
+  //   if (!get(req, 'user._id')) return false;
+  //   return true;
+  // }
+  async checkAuth(req) {
     if (req.__errJwt) throw req.__errJwt;
-    if (get(req, 'user._id')) throw new Err('!req.user', { status: 401 });
-    return true;
+    if (!get(req, 'user._id')) throw new Err('auth.unauthorized', { status: 401 });
   }
-  async isAdmin(req) {
-    // return true;
-    if (get(req, 'user.role') !== 'admin') throw new Err('!admin', { status: 403 });
+  // async isAdmin(req) {
+  //   if (req.__errJwt) return false;
+  //   if (!get(req, 'user._id')) return false;
+  //   if (!get(req, 'user.role') !== 'admin') return false;
+  //   return true;
+  // }
+  async checkAdmin(req, props) {
+    if (props.dev && isDev) return;
+    if (req.__errJwt) throw req.__errJwt;
+    if (get(req, 'user.role') !== 'admin') throw new Err('auth.notadmin', { status: 403 });
   }
 
   url(path, params) {
@@ -65,6 +78,8 @@ export default class Api extends Module {
 
   async __getRoutes() {
     if (!this.__lifecycle.runStart) await this.__run();
+    // TODO: подумать, нужно ли насильно биндить методы?
+    // return mapValues(this.getRoutes(), (fn) => fn.bind(this));
     return this.getRoutes();
   }
 

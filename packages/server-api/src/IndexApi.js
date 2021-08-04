@@ -1,10 +1,11 @@
-import serializeWindow from '@lskjs/utils/serializeWindow';
 import flattenKeys from '@lskjs/utils/flattenKeys';
 import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
+import serializeWindow from '@lskjs/utils/serializeWindow';
 import isPlainObject from 'lodash/isPlainObject';
 import pickBy from 'lodash/pickBy';
-import awaitHealthchecks from './utils/awaitHealthcheck';
+
 import Api from './Api';
+import awaitHealthchecks from './utils/awaitHealthcheck';
 
 export default class IndexApi extends Api {
   async healthcheck(req) {
