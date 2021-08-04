@@ -3,36 +3,18 @@
 import { isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
+import omit from 'lodash/omit';
 
+import { levelsPriority, theme } from './config';
+import { ILogger, ILoggerProps, LoggerLevelType } from './types';
+import env from './utils/env';
 import hashCode from './utils/hashCode';
 import leftPad from './utils/leftPad';
-import stringify from './utils/stringify';
-import tryParamParse from './utils/tryParamParse';
+import { omitNull } from './utils/omitNull';
+import { pad } from './utils/pad';
+import { parseLevel } from './utils/parseLevel';
+import { toString } from './utils/toString';
 
-const pad = (a: string, width = 20): string => {
-  const extra = width - a.length;
-  if (extra <= 0) return a;
-  const start = Math.floor(extra / 2);
-  const end = extra - start;
-  return a.padStart(start).padEnd(end);
-};
-
-const env = (name: string, def: any = null): any => {
-  // eslint-disable-next-line no-nested-ternary
-  const envs = typeof process !== 'undefined' ? process.env : typeof window !== 'undefined' ? window : {};
-  return tryParamParse(envs[name], def);
-};
-
-const omitNull = (props: { [key: string]: any }) =>
-  Object.keys(props)
-    .filter((k) => props[k] != null)
-    .reduce((acc, key) => {
-      acc[key] = props[key];
-      return acc;
-    }, {});
-
-const toString = (props: any, arg1: any = null, arg2 = 0) =>
-  typeof props === 'object' ? stringify(props, arg1, arg2) : String(props);
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
 //   return () => {
@@ -42,25 +24,6 @@ const toString = (props: any, arg1: any = null, arg2 = 0) =>
 //   };
 // };
 // export default ({ prefix = 'lsk', ns, name } = {}) => {
-
-export type LoggerLevelType = 'fatal' | 'error' | 'warn' | 'debug' | 'info' | 'trace' | 'log';
-
-interface ILoggerProps {
-  prefix?: string | null;
-  ns?: string | null;
-  name?: string | null;
-  level?: string | null;
-}
-
-export interface ILogger extends ILoggerProps {
-  trace(...args: any[]): void;
-  info(...args: any[]): void;
-  debug(...args: any[]): void;
-  warn(...args: any[]): void;
-  error(...args: any[]): void;
-  fatal(...args: any[]): void;
-  log(...args: any[]): void;
-}
 
 // export default ({ prefix = 'lsk', ns, name } = {}) => {
 // import debug from 'debug';
@@ -83,48 +46,8 @@ export interface ILogger extends ILoggerProps {
 //   return logger;
 // };
 
-const levelsPriority = {
-  log: 99,
-  l: 99,
-  fatal: 60,
-  f: 60,
-  error: 50,
-  e: 50,
-  warn: 40,
-  w: 40,
-  info: 30,
-  i: 30,
-  debug: 20,
-  d: 20,
-  trace: 10,
-  t: 10,
-};
-
-const theme = {
-  // fatal: 'inverse',
-  fatal: 'bgRed',
-  error: 'bgBrightRed',
-  warn: 'bgYellow',
-  debug: 'brightCyan',
-  info: 'brightGreen',
-  trace: 'gray', // 'white'
-  log: 'bgWhite', // 'white'
-
-  randoms: [
-    'red',
-    'green',
-    'yellow',
-    'blue',
-    'magenta',
-    'cyan',
-    'brightRed',
-    'brightGreen',
-    'brightYellow',
-    'brightBlue',
-    'brightMagenta',
-    'brightCyan',
-  ],
-};
+// import stringify from './utils/stringify';
+// import { tryParamParse } from './utils/tryParamParse';
 
 export class Logger implements ILogger {
   prefix: string | null;
@@ -215,6 +138,99 @@ export class Logger implements ILogger {
     const markers = ['•', '☼', '○', '♠', '♠', '♦', '♥'];
     const marker = markers[hashCode(`2${key}`) % markers.length];
     return this.color(this.getHashColor(key), marker);
+  }
+  prettyLog(...args: any[]): void {
+    const res: string[] = [];
+    let [mainArg] = args;
+    const [, ...otherArgs] = args;
+    const level: LoggerLevelType = parseLevel(mainArg) || 'log';
+    let message = mainArg.msg || mainArg.message;
+    const { ns, reqId, name } = mainArg; // time
+
+    let secondArg: any;
+    if (typeof mainArg === 'string') {
+      message = mainArg;
+    } else if (typeof mainArg === 'object') {
+      const omitParams = [
+         //eslint-disable-line
+        ...['level', 'msg', 'message', 'time', 'ns', 'reqId', 'name'],
+        ...['hostname', 'pid', 'v'],
+      ];
+      secondArg = omit(mainArg, omitParams);
+    } else {
+      return;
+    }
+
+    if (secondArg && Object.keys(secondArg).length) {
+      otherArgs.unshift(secondArg);
+    }
+
+    const envLogLevel = env('LOG_L', 'short');
+    if (envLogLevel) {
+      let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
+      logLevelStr = `[${logLevelStr}]`;
+      res.push(this.color(this.getColor(level), logLevelStr));
+    }
+
+    const envLogAlign = env('LOG_ALIGN');
+    const envLogNs = env('LOG_NS', 'true');
+    const envLogName = env('LOG_NAME', 'true');
+
+    let names: any[] = [];
+    if (name === 'req') {
+      names = [this.__getMarker(reqId)];
+    } else if (envLogNs || envLogName) {
+      if (envLogNs) {
+        names = (ns || '').split('.');
+      }
+      if (envLogName) {
+        names.push(name);
+      }
+      names = names.filter(Boolean);
+    }
+
+    if (names.length) {
+      let str: string;
+      str = names.map((n: string) => this.color(this.getHashColor(n), n)).join(':');
+      if (str && envLogAlign) {
+        if (envLogAlign === 'left') str = str.padEnd(15);
+        if (envLogAlign === 'right') str = str.padStart(15);
+      }
+      res.push(str);
+    }
+
+    if (name === 'req') {
+      const urlPad = -20;
+      let msg;
+      if (level === 'debug') {
+        msg = `${leftPad(mainArg.method, 4)} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
+      } else {
+        // eslint-disable-next-line no-shadow
+        const t = (mainArg.duration || 0).toFixed(3);
+        const method = leftPad(mainArg.method, 4);
+        const length = mainArg.length || 0;
+        if (mainArg.method === 'WS') {
+          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(t, 7)}ms `;
+        } else {
+          // eslint-disable-next-line max-len
+          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(mainArg.status, 3)} ${leftPad(t, 7)}ms ${length}b `; // eslint-disable-line prettier/prettier
+        }
+      }
+      mainArg = msg;
+    }
+
+    if (typeof message === 'string') {
+      if (['[', '<'].includes(message[0]) && [']', '>'].includes(message[message.length - 1])) {
+        message = this.color(this.getHashColor(message), message);
+      } else if (message.includes('(') || message.includes('[')) {
+        message = this.color('brightWhite', message);
+      } else if (message.length < 20 && otherArgs.length) {
+        message = this.color('white', message);
+      }
+    }
+    res.push(message, ...otherArgs);
+
+    this.__logger(...res);
   }
   __loggerPretty(level: LoggerLevelType, ...args: any[]): void {
     const res: string[] = [];

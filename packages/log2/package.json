@@ -29,6 +29,7 @@
     "@lskjs/env": "2.3.0-beta.94",
     "@lskjs/err": "2.3.0-beta.94",
     "colors": "1.4.0",
+    "exeunt": "^1.1.1",
     "fast-safe-stringify": "2.0.8"
   },
   "_type": "module"
