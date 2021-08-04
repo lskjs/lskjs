@@ -30,10 +30,10 @@ export default {
       reqData: true, // { jsonParse: true }
       reqI18: true,
       res: true,
-      reqUser: true,
       logger: true,
       errorLogger: true, // ?
     },
+    reqUser: true,
     cookieParser: true,
     bodyParserJson: true,
     urlencoded: { extended: true },

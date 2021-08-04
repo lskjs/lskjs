@@ -24,6 +24,19 @@ export class WebserverModule extends Module {
     return defaultHelpers;
   }
 
+  async getConfig() {
+    // console.log('this.__parent.name', this.__parent.name);
+    // console.log('this.__parent', this.__parent);
+    const config = await super.getConfig();
+    return {
+      ...config,
+      jwt: {
+        ...(this.__parent.config.jwt || {}),
+        ...(config.jwt || {}),
+      },
+    };
+  }
+
   createExpress() {
     return this.Express();
   }
@@ -89,7 +102,7 @@ export class WebserverModule extends Module {
         },
         config: this.config.client || {},
       },
-      __DEV__,
+      __DEV__: global.__DEV__,
       __STAGE__: global.__STAGE__,
     };
   }
@@ -184,6 +197,5 @@ export class WebserverModule extends Module {
     });
   }
 }
-
 
 export default WebserverModule;

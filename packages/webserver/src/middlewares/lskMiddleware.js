@@ -1,10 +1,12 @@
+import { isDev } from '@lskjs/env';
+import jwt from 'express-jwt';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import isPlainObject from 'lodash/isPlainObject';
 import { nanoid } from 'nanoid/non-secure';
 
 import getReqData from '../utils/getReqData';
-import applyLogger from './accessLogger/applyLogger';
+import { applyLogger } from './accessLogger/applyLogger';
 
 export default (webserver) =>
   async function lskMiddleware(req, res, next) {
@@ -17,7 +19,7 @@ export default (webserver) =>
        */
       if (config.reqId) {
         if (debug) webserver.log.trace('apply reqId');
-        if (__DEV__) {
+        if (isDev) {
           global.reqId = 1 + (global.reqId || 0);
           req.reqId = global.reqId;
         } else {
@@ -80,6 +82,26 @@ export default (webserver) =>
         if (debug) webserver.log.trace('apply logger');
         applyLogger(req, res);
       }
+
+      // /**
+      //  * user submiddleware
+      //  */
+      // if (config.reqUser) {
+      //   if (!get(webserver, 'config.middlewares.reqUser')) return next();
+      //   if (!webserver.helpers.getReqToken) throw next('!helpers.getReqToken');
+      //   const jwtConfig = get(webserver, 'config.jwt', {});
+      //   console.log({ jwtConfig });
+      //   const { secret, algorithms = ['HS256'] } = jwtConfig;
+      //   const options = {
+      //     secret,
+      //     algorithms,
+      //     getToken: webserver.helpers.getReqToken,
+      //   };
+      //   return jwt(options)(req, res, (err) => {
+      //     if (err) req.__errJwt = err;
+      //     next();
+      //   });
+      // }
 
       next();
     } catch (err) {
