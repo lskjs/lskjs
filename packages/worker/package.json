@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "2.3.0-beta.95",
+  "version": "2.3.0-beta.96",
   "description": "LSK module for worker.",
   "keywords": [
     "worker",
@@ -29,7 +29,7 @@
     "@lskjs/utils": "2.3.0-beta.95"
   },
   "devDependencies": {
-    "@lskjs/rabbit": "2.3.0-beta.95",
+    "@lskjs/rabbit": "2.3.0-beta.96",
     "bluebird": "3.7.2",
     "lodash": "4.17.20"
   },

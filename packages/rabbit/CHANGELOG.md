@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.96](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.95...v2.3.0-beta.96) (2021-08-04)
+
+
+### Bug Fixes
+
+* **worker:** fix prefetch and configs ([44db88f](https://github.com/lskjs/lskjs/commit/44db88f574c6e2dbd944df8dfdb2e2c826b8fc08))
+
+
+
+
+
 # [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
 
 **Note:** Version bump only for package @lskjs/rabbit
