@@ -18,9 +18,9 @@ export class ModelModule extends Module {
       this.log.error('!Model');
       throw '!Model';
     }
-    const Model = await importFn(this.Model);
-
-    return Model(db);
+    const getModel = await importFn(this.Model);
+    const model = await getModel(db, this.app);
+    return model;
   }
   async run() {
     // : Promise<void>
