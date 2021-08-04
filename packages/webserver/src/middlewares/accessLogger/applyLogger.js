@@ -1,6 +1,6 @@
 import Log from '@lskjs/log2';
 import { isDev } from '@lskjs/utils/env';
-import leftPad from '@lskjs/utils/leftPad';
+// import leftPad from '@lskjs/utils/leftPad';
 import omit from 'lodash/omit';
 
 import { getReqIp } from '../../helpers/getReqIp';
@@ -10,14 +10,14 @@ const log2 = new Log({ name: 'req' });
 export function levelFn(data, status) {
   if (data.method === 'WS') {
     if (status === 'start') {
-      return 'info';
+      return 'debug';
     }
     if (status === 'finish') {
-      return 'debug';
+      return 'trace';
     }
   }
   if (status === 'start') {
-    return 'debug';
+    return 'trace';
   }
   if (data.err || data.status >= 500 || data.duration > 10000) {
     // server internal error or error
@@ -27,7 +27,7 @@ export function levelFn(data, status) {
     // client error
     return 'warn';
   }
-  return 'info';
+  return 'debug';
 }
 
 export function applyLogger(req, res) {
