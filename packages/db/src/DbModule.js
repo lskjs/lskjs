@@ -87,7 +87,7 @@ export class DbModule extends Module {
     const { uri } = this.config;
     const options = this.getOptions();
     const connection = await new Promise((resolve, reject) => this.client.connect(uri, options).then(resolve, reject));
-    this.log.debug('ready', maskUriPassword(uri));
+    this.log.debug('[ready]', maskUriPassword(uri));
     return connection;
   }
 }

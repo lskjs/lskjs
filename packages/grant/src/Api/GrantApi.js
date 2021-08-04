@@ -8,6 +8,7 @@ import CacheStorage from '../CacheStorage';
 export default class GrantApi extends Api {
   getRoutes() {
     return {
+      ...super.getRoutes(),
       '/can': this.can.bind(this),
       '/canGroup': this.canGroup.bind(this),
       '/batch': this.batch.bind(this),
