@@ -8,17 +8,12 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 export class RabbitWorker extends Module {
-  config = {
-    autoconnect: true,
-  };
-  // async init() {
-  //   await super.init();
-  //   // const queue = process.env.AMQP_QUEUE || this.queue;
-  //   // if (!this.queue) this.log.warn('!queue');
-  //   // if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
-  //   // this.queues = get(this, 'app.config.rabbit.queues');
-  //   // this.exchanges = get(this, 'app.config.rabbit.exchanges');
-  // }
+  async getConfig() {
+    return {
+      autoconnect: true,
+      ...(await super.getConfig()),
+    };
+  }
   async parse() {
     throw 'not implemented worker.parse()';
   }
@@ -58,12 +53,12 @@ export class RabbitWorker extends Module {
     if (err && err.code === 'RABBIT_TIMEOUT') {
       await job.nackSuccess(); // TODO: я не правильно юзаю эту хрень
       const { rabbitTimeout = 10000 } = this.config.rabbitTimeout;
-      this.log.trace('RABBIT_TIMEOUT [delay]', rabbitTimeout);
+      this.log.trace('rabbitTimeout', rabbitTimeout, '[delay]');
       await Bluebird.delay(rabbitTimeout);
       return;
     }
     if (errInfo.timeout) {
-      this.log.trace('err.timeout [delay]', errInfo.timeout);
+      this.log.trace('err.timeout', errInfo.timeout, '[delay]');
       await Bluebird.delay(errInfo.timeout);
     }
     if (log && this.log[log]) {
@@ -198,22 +193,22 @@ export class RabbitWorker extends Module {
     this.stats = new Stats();
     this.rabbit = await this.app.module('rabbit');
     // this.rabbit.on('connected', this.connect.bind(this));
-    const { queue } = this;
+    const queue = this.config.queue || this.queue;
+    console.log({queue}, this.config, this.name)
     if (!queue) {
       this.log.warn('!queue', 'connect');
       return;
     }
     const queueName = this.rabbit.getQueueName(queue);
     await this.rabbit.queue(queueName);
-    const options = { noAck: false };
-    this.log.info(`consume(${queueName})`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
-    const data = await this.rabbit.consume(queueName, this.onConsume.bind(this), options);
+    const data = await this.rabbit.consume(queueName, this.onConsume.bind(this), { noAck: false });
     this.consumerTag = data.consumerTag;
   }
   async run() {
     await super.run();
-    if (!this.rabbit) throw '!rabbit';
-    const queue = process.env.AMQP_QUEUE || this.queue;
+    // if (!this.rabbit) throw '!rabbit';
+    // process.env.AMQP_QUEUE ||
+    const queue = this.config.queue || this.queue;
     if (!queue) {
       this.log.warn('!queue');
       return;

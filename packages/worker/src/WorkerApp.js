@@ -45,7 +45,7 @@ export class WorkerApp extends Module {
   getWorkerConfig() {
     if (get(this, 'config.worker') === 'object') return get(this, 'config.worker');
     const workerKey = get(this, 'config.worker.name') || get(this, 'config.worker');
-    if (workerKey && typeof workerKey !== 'string') {
+    if (workerKey && typeof workerKey === 'string') {
       return { name: workerKey };
     }
     return {};

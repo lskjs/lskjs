@@ -19,6 +19,7 @@ const serializeData = (data = {}) => {
 export class RabbitModule extends Module {
   startGoProc = startGoProc;
   config = {
+    prefetch: 1,
     reconnectTimeout: 5000,
   };
   async init() {
@@ -60,6 +61,7 @@ export class RabbitModule extends Module {
     this.onOpen();
     const prefetchCount = get(this.config, 'options.prefetch');
     if (prefetchCount) {
+      // TODO: подумать тут ли это оставлять?
       this.listenChannel.prefetch(prefetchCount);
     }
     if (this.isGoTransport) {
@@ -105,10 +107,11 @@ export class RabbitModule extends Module {
   async parse() {
     throw 'not implemented worker.parse()';
   }
-  async queue(name) {
-    if (!this.queues[name]) throw new Err('rabbit.queueNotFound', { data: { name } });
-    await this.assertQueueOnce(this.queues[name]);
-    return this.queues[name];
+  async queue(queue) {
+    const queueName = this.getQueueName(queue);
+    if (!queueName) throw new Err('rabbit.queueNotFound', { data: { queueName } });
+    await this.assertQueueOnce(queueName);
+    return queueName;
   }
   getQueueName(queue) {
     let queueName = queue;
@@ -222,18 +225,20 @@ export class RabbitModule extends Module {
       });
     });
   }
-  async consume(q, callback, options) {
-    const prefetchCount = get(this.config, 'options.prefetch');
-    if (!prefetchCount) {
-      this.log.warn(`[${q}] prefetch == 0, rabbit.consume ignore`);
+  async consume(queue, callback, initOptions = {}) {
+    const queueName = this.getQueueName(queue);
+    const options = {
+      ...(this.config.options || {}),
+      ...initOptions,
+    };
+    if (!options.prefetch) {
+      this.log.warn(`[${queueName}] prefetch == 0, rabbit.consume ignore`);
       return null;
     }
-    const data = await this.listenChannel.consume(q, callback, options);
+    this.log.info(`consume(${queueName})`, options);
+    const data = await this.listenChannel.consume(queueName, callback, options);
     this.consumerTag = data.consumerTag;
     return data;
-    // await Bluebird.delay(1000);
-    // this.consumerTag = data.consumerTag;
-    // console.log({ consumerTag: this.consumerTag });
   }
   async cancel() {
     try {
