@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **log2:** ts errors ([aacc289](https://github.com/lskjs/lskjs/commit/aacc2895d5cadbe69b5b766d6d11bd9ae67ad4c7))
+
+
+### Features
+
+* **log2:** improve logger and create CLI logger ([cb7c344](https://github.com/lskjs/lskjs/commit/cb7c344a97f5be4ec2bc988981f842ec3c7c4256))
+
+
+
+
+
 # [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **webserver:** fix reqUser middleware and pass jwt config ([2cf2c5f](https://github.com/lskjs/lskjs/commit/2cf2c5f513d636428765a7e33762c849b24ec24a))
+
+
+### Features
+
+* **webserver:** improve accessLogger and catchError logs ([30a8a26](https://github.com/lskjs/lskjs/commit/30a8a269e3baf67ea5cd03088d12e7cef99719bc))
+
+
+
+
+
 # [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 **Note:** Version bump only for package @lskjs/webserver

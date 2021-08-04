@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Features
+
+* **server-api:** refactor isAdmin and isAuth Api methods ([8fb7b0c](https://github.com/lskjs/lskjs/commit/8fb7b0cd2ba562ecbb7194b76fd067f528fe22d7))
+
+
+
+
+
 # [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 **Note:** Version bump only for package @lskjs/server-api

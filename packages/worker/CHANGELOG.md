@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Features
+
+* **worker:** pass worker config and add autoconnect option ([b9fe88c](https://github.com/lskjs/lskjs/commit/b9fe88cefe86350aaf341a0513780f5d204914e8))
+
+
+
+
+
 # [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 **Note:** Version bump only for package @lskjs/worker

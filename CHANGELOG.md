@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.95](https://github.com/lskjs/cli/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix deps ([1671ec0](https://github.com/lskjs/cli/commit/1671ec0fce180f94117f6c870dba520bf757ddf3))
+* **log2:** ts errors ([aacc289](https://github.com/lskjs/cli/commit/aacc2895d5cadbe69b5b766d6d11bd9ae67ad4c7))
+* **utils:** change interface of omit and pick ([f37766b](https://github.com/lskjs/cli/commit/f37766bfb66b350f775c1efd73345d552e9428d3))
+* **webserver:** fix reqUser middleware and pass jwt config ([2cf2c5f](https://github.com/lskjs/cli/commit/2cf2c5f513d636428765a7e33762c849b24ec24a))
+
+
+### Features
+
+* **log2:** improve logger and create CLI logger ([cb7c344](https://github.com/lskjs/cli/commit/cb7c344a97f5be4ec2bc988981f842ec3c7c4256))
+* **module:** improve logger ([ec36ae4](https://github.com/lskjs/cli/commit/ec36ae4b3e1ca3752bf8feb0c3103580b8e7506b))
+* **sequelize:** add models and debug logger ([f44911a](https://github.com/lskjs/cli/commit/f44911a80e2dc1d1cf8df927853c07161f08c0ef))
+* **server-api:** refactor isAdmin and isAuth Api methods ([8fb7b0c](https://github.com/lskjs/cli/commit/8fb7b0cd2ba562ecbb7194b76fd067f528fe22d7))
+* **webserver:** improve accessLogger and catchError logs ([30a8a26](https://github.com/lskjs/cli/commit/30a8a269e3baf67ea5cd03088d12e7cef99719bc))
+* **worker:** pass worker config and add autoconnect option ([b9fe88c](https://github.com/lskjs/cli/commit/b9fe88cefe86350aaf341a0513780f5d204914e8))
+
+
+
+
+
 # [2.3.0-beta.94](https://github.com/lskjs/cli/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 

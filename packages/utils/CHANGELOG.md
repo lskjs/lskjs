@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.95](https://github.com/lskjs/ux/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **utils:** change interface of omit and pick ([f37766b](https://github.com/lskjs/ux/commit/f37766bfb66b350f775c1efd73345d552e9428d3))
+
+
+
+
+
 # [2.3.0-beta.94](https://github.com/lskjs/ux/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 

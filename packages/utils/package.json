@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "2.3.0-beta.94",
+  "version": "2.3.0-beta.95",
   "description": "LSK.js – utils – helpers and functions",
   "keywords": [],
   "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
@@ -22,7 +22,7 @@
     "watch": "lsk run watch"
   },
   "devDependencies": {
-    "@lskjs/env": "2.3.0-beta.94",
+    "@lskjs/env": "2.3.0-beta.95",
     "@lskjs/err": "2.3.0-beta.94",
     "@types/bluebird": "3.5.33",
     "@types/lodash": "4.14.167",
