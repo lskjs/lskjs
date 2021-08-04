@@ -15,6 +15,9 @@ import { createAsyncModule } from './utils/createAsyncModule';
 import { filterWildcard } from './utils/filterWildcard';
 
 const mutexMap = {};
+
+// TODO: подумать как сделать не вложенный экспорт
+// const models = await this.app.module(['models.BillingPaymentMethod', 'models.BillingCompany']);
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
   __availableModules: IAsyncModuleKeyValue = {};
   __initedModules: IModuleKeyValue = {};
