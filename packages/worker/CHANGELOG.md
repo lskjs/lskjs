@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.97](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.96...v2.3.0-beta.97) (2021-08-04)
+
+
+### Bug Fixes
+
+* **worker:** fix prefetch and configs ([ca60b0f](https://github.com/lskjs/lskjs/commit/ca60b0f222f95ef0aebe7776b4b34104fb84398c))
+
+
+
+
+
 # [2.3.0-beta.96](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.95...v2.3.0-beta.96) (2021-08-04)
 
 
