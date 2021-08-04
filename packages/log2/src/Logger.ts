@@ -3,13 +3,13 @@
 import { isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
-import omit from 'lodash/omit';
 
 import { levelsPriority, theme } from './config';
 import { ILogger, ILoggerProps, LoggerLevelType } from './types';
 import env from './utils/env';
 import hashCode from './utils/hashCode';
 import leftPad from './utils/leftPad';
+import omit from './utils/omit';
 import { omitNull } from './utils/omitNull';
 import { pad } from './utils/pad';
 import { parseLevel } from './utils/parseLevel';
@@ -153,8 +153,17 @@ export class Logger implements ILogger {
     } else if (typeof mainArg === 'object') {
       const omitParams = [
          //eslint-disable-line
-        ...['level', 'msg', 'message', 'time', 'ns', 'reqId', 'name'],
-        ...['hostname', 'pid', 'v'],
+        'level',
+        'msg',
+        'message',
+        'time',
+        'ns',
+        'reqId',
+        'name',
+
+        'hostname',
+        'pid',
+        'v',
       ];
       secondArg = omit(mainArg, omitParams);
     } else {
