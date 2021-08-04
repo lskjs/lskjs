@@ -4,6 +4,7 @@ import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import { isDev } from '@lskjs/utils/env';
 import Err from '@lskjs/utils/Err';
 import importFn from '@lskjs/utils/importFn';
+import get from 'lodash/get';
 
 import { createErrorInfo } from './createErrorInfo';
 
@@ -32,15 +33,30 @@ export class WorkerApp extends Module {
     if (!this.availableWorkers[name])
       throw new Err('WORKER_NOT_FOUND', `In worker "${name}" not found index with exported default function`);
     const Worker = await importFn(this.availableWorkers[name]);
+    const config = this.getWorkerConfig();
     const worker = await Worker.start({
       app: this,
       rabbit: this.rabbit,
+      config,
     });
     this.initedWorkers[name] = worker;
     return worker;
   }
+  getWorkerConfig() {
+    if (get(this, 'config.worker') === 'object') return get(this, 'config.worker');
+    const workerKey = get(this, 'config.worker.name') || get(this, 'config.worker');
+    if (workerKey && typeof workerKey !== 'string') {
+      return { name: workerKey };
+    }
+    return {};
+  }
   async runWorkers() {
-    const { worker: workerKey } = this.config;
+    const config = this.getWorkerConfig();
+    const workerKey = config.name;
+    if (!workerKey || typeof workerKey !== 'string') {
+      this.log.warn('!config.worker', '[ignore]');
+      return;
+    }
     this.log.trace(`runWorkers(${workerKey})`);
     let workerNames;
     if (workerKey === '*') {

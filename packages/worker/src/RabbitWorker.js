@@ -5,21 +5,20 @@ import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
-import map from 'lodash/map';
 import pick from 'lodash/pick';
 
-const toQs = (params = {}) => map(params, (val, key) => [key, val].join('=')).join('&');
-
 export class RabbitWorker extends Module {
-  async init() {
-    await super.init();
-    this.stats = new Stats();
-    // if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
-    // this.queues = get(this, 'app.config.rabbit.queues');
-    // this.exchanges = get(this, 'app.config.rabbit.exchanges');
-    this.rabbit = await this.app.module('rabbit');
-    this.rabbit.on('connected', this.rabbitConnect.bind(this));
-  }
+  config = {
+    autoconnect: true,
+  };
+  // async init() {
+  //   await super.init();
+  //   // const queue = process.env.AMQP_QUEUE || this.queue;
+  //   // if (!this.queue) this.log.warn('!queue');
+  //   // if (!this.app.getErrorInfo) throw '!this.app.getErrorInfo';
+  //   // this.queues = get(this, 'app.config.rabbit.queues');
+  //   // this.exchanges = get(this, 'app.config.rabbit.exchanges');
+  // }
   async parse() {
     throw 'not implemented worker.parse()';
   }
@@ -195,14 +194,17 @@ export class RabbitWorker extends Module {
       }
     }
   }
-  async rabbitConnect() {
-    const queue = process.env.AMQP_QUEUE || this.queue;
+  async connect() {
+    this.stats = new Stats();
+    this.rabbit = await this.app.module('rabbit');
+    // this.rabbit.on('connected', this.connect.bind(this));
+    const { queue } = this;
     if (!queue) {
-      this.log.warn('!queue');
+      this.log.warn('!queue', 'connect');
       return;
     }
-    await this.rabbit.queue(queue);
     const queueName = this.rabbit.getQueueName(queue);
+    await this.rabbit.queue(queueName);
     const options = { noAck: false };
     this.log.info(`consume(${queueName})`, { ...options, prefetch: get(this, 'rabbit.config.options.prefetch') });
     const data = await this.rabbit.consume(queueName, this.onConsume.bind(this), options);
@@ -220,9 +222,13 @@ export class RabbitWorker extends Module {
       this.log.warn('!Job', this.Job);
       return;
     }
-    await this.rabbitConnect();
+    if (this.config.autoconnect) {
+      this.log.debug('autoconnect');
+      await this.connect();
+    }
   }
   async stop() {
+    await super.stop();
     return this.rabbit.stop();
   }
 }
