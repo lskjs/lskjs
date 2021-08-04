@@ -192,9 +192,7 @@ export class RabbitWorker extends Module {
   async connect() {
     this.stats = new Stats();
     this.rabbit = await this.app.module('rabbit');
-    // this.rabbit.on('connected', this.connect.bind(this));
     const queue = this.config.queue || this.queue;
-    console.log({queue}, this.config, this.name)
     if (!queue) {
       this.log.warn('!queue', 'connect');
       return;
@@ -206,8 +204,6 @@ export class RabbitWorker extends Module {
   }
   async run() {
     await super.run();
-    // if (!this.rabbit) throw '!rabbit';
-    // process.env.AMQP_QUEUE ||
     const queue = this.config.queue || this.queue;
     if (!queue) {
       this.log.warn('!queue');

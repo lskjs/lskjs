@@ -33,7 +33,7 @@ export class WorkerApp extends Module {
     if (!this.availableWorkers[name])
       throw new Err('WORKER_NOT_FOUND', `In worker "${name}" not found index with exported default function`);
     const Worker = await importFn(this.availableWorkers[name]);
-    const config = this.getWorkerConfig();
+    const config = this.getWorkerConfig(name);
     const worker = await Worker.start({
       app: this,
       rabbit: this.rabbit,
@@ -42,13 +42,15 @@ export class WorkerApp extends Module {
     this.initedWorkers[name] = worker;
     return worker;
   }
-  getWorkerConfig() {
-    if (get(this, 'config.worker') === 'object') return get(this, 'config.worker');
-    const workerKey = get(this, 'config.worker.name') || get(this, 'config.worker');
-    if (workerKey && typeof workerKey === 'string') {
-      return { name: workerKey };
+  getWorkerConfig(name) {
+    const config = get(this, 'config.worker') || {};
+    if (typeof config === 'string') {
+      throw 'DEPRECATED config.worker === string';
     }
-    return {};
+    return {
+      ...(get(this, `config.workers.${name}`) || {}),
+      ...config,
+    };
   }
   async runWorkers() {
     const config = this.getWorkerConfig();
