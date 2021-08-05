@@ -7,6 +7,7 @@ import fromPairs from 'lodash/fromPairs';
 import get from 'lodash/get';
 import some from 'lodash/some';
 
+
 const hasWildcard = (items) => some(items, (item) => item && item.indexOf('*') !== -1);
 export class GrantModule extends Module {
   debug = 1;
