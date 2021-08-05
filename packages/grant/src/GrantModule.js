@@ -25,40 +25,62 @@ export default class GrantModule extends Module {
     }
     if (this.debug) this.log.debug('rules', Object.keys(this.rules));
   }
-  async getParams(args) {
+  async getParams(args, params) {
     if (args.length === 1) {
-      const [params = {}] = args;
-      if (typeof params === 'string') {
-        return { action: params };
+      const [action = {}] = args;
+      if (typeof action === 'string') {
+        return { action, params };
       }
-      return params;
-    }
-    const [userOrId, action, params = {}] = args;
-    let user;
-    let userId;
-    if (typeof userOrId === 'string') {
-      userId = userOrId;
-    } else if (isObject(userOrId)) {
-      user = userOrId;
-      userId = userOrId._id;
-    } else if (params.user) {
-      ({ user } = params);
-      userId = user._id;
-    } else if (params.userId) {
-      ({ userId } = params);
-    }
-    if (userId && !user) {
-      user = await this.getUserByUserId(userOrId);
+      return action;
     }
     return {
-      user,
-      userId,
-      action,
-      ...params,
+      action: args[0],
+      params: args[1],
     };
   }
-  getGroupParams(args) {
-    return Bluebird.map(args, async (arg) => this.getParams([arg]));
+  // async getParams(args) {
+  //   if (args.length === 1) {
+  //     const [params = {}] = args;
+  //     if (typeof params === 'string') {
+  //       return { action: params };
+  //     }
+  //     return params;
+  //   }
+  //   const [userOrId, action, params = {}] = args;
+  //   let user;
+  //   let userId;
+  //   if (typeof userOrId === 'string') {
+  //     userId = userOrId;
+  //   } else if (isObject(userOrId)) {
+  //     user = userOrId;
+  //     userId = userOrId._id;
+  //   } else if (params.user) {
+  //     ({ user } = params);
+  //     userId = user._id;
+  //   } else if (params.userId) {
+  //     ({ userId } = params);
+  //   }
+  //   if (userId && !user) {
+  //     user = await this.getUserByUserId(userOrId);
+  //   }
+  //   return {
+  //     user,
+  //     userId,
+  //     action,
+  //     ...params,
+  //   };
+  // }
+  // getGroupParams(args) {
+  //   return Bluebird.map(args, async (arg) => this.getParams([arg]));
+  // }
+  getGroupParams(data) {
+    const [args, params] = data;
+    return Bluebird.map(args, async (arg) => {
+      if (Array.isArray(arg)) {
+        return this.getParams(arg, params);
+      }
+      return this.getParams([arg], params);
+    });
   }
   getUserByUserId(userId) {
     if (__CLIENT__) {
@@ -103,8 +125,18 @@ export default class GrantModule extends Module {
     );
     return cans;
   }
-  async getCache(initRules) {
-    const rules = await this.canGroup(initRules);
+  // async getCache(initRules) {
+  //   const rules = await this.canGroup(initRules);
+  //   return {
+  //     rules,
+  //     can(rule) {
+  //       const hash = hashCode(rule);
+  //       return get(rules, hash, null);
+  //     },
+  //   };
+  // }
+  async getCache(...args) {
+    const rules = await this.canGroup(args);
     return {
       rules,
       can(rule) {
