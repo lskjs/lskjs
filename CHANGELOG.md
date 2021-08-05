@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.98](https://github.com/lskjs/cli/compare/v2.3.0-beta.97...v2.3.0-beta.98) (2021-08-05)
+
+
+### Bug Fixes
+
+* grants new interface ([e624080](https://github.com/lskjs/cli/commit/e6240806b2533718f3429e43aec33a049a420fdb))
+
+
+### Features
+
+* **grant:** new grant version ([ebde63b](https://github.com/lskjs/cli/commit/ebde63b60baeb7f4a14698a07e12e9b0bf045002))
+
+
+
+
+
 # [2.3.0-beta.97](https://github.com/lskjs/cli/compare/v2.3.0-beta.96...v2.3.0-beta.97) (2021-08-04)
 
 
