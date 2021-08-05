@@ -25,6 +25,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "axios": "0.21.1",
     "@babel/runtime": "7.12.5",
     "@lskjs/utils": "2.3.0-beta.95",
     "bluebird": "3.7.2",
@@ -35,7 +36,6 @@
     "lodash": "4.17.19"
   },
   "devDependencies": {
-    "axios": "0.21.1",
     "bluebird": "3.7.2",
     "javascript-stringify": "^2.1.0",
     "js-yaml": "^4.1.0",

@@ -1,116 +1,134 @@
+import { isClient, isServer } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
-import createLogger from '@lskjs/utils/createLogger';
-import hashCode from '@lskjs/utils/hashCode';
+import getWildcardKeys from '@lskjs/utils/getWildcardKeys';
 import Bluebird from 'bluebird';
+import fromPairs from 'lodash/fromPairs';
 import get from 'lodash/get';
-import isObject from 'lodash/isObject';
+import some from 'lodash/some';
 
-import CacheStorage from './CacheStorage';
-
-const DEBUG = __DEV__ && false;
-const debug = createLogger({ name: '@lskjs/grant', enable: DEBUG });
-// && false
-// [d] (Grant) can { userId: '5c59b44c18d8f218d0f803b8' }
-export default class GrantModule extends Module {
+const hasWildcard = (items) => some(items, (item) => item && item.indexOf('*') !== -1);
+export class GrantModule extends Module {
+  debug = 1;
   getRules() {
-    return {};
+    return {
+      ...(this.rules || {}),
+    };
   }
-  test() {
-    return true;
+  anyRule(action) {
+    this.log.debug('empty rule', action);
+    return null;
   }
   async init() {
     await super.init();
-    if (!this.rules) {
-      this.rules = this.getRules();
-    }
+    if (!this.rules) this.rules = this.getRules();
     if (this.debug) this.log.debug('rules', Object.keys(this.rules));
   }
-  async getParams(args) {
+  async getArgs(...args) {
+    let action;
+    let rule = {};
+    let ctx = {};
+
     if (args.length === 1) {
-      const [params = {}] = args;
-      if (typeof params === 'string') {
-        return { action: params };
-      }
-      return params;
+      [rule] = args;
+    } else if (args.length === 2) {
+      [rule, ctx] = args;
+    } else if (args.length === 3) {
+      [action, rule, ctx] = args;
+    } else {
+      if (args.length) throw new Err('grant.tooMuchArgs', 'getArgs: too much args');
+      throw new Err('grant.emptyArgs', 'getArgs: empty args');
     }
-    const [userOrId, action, params = {}] = args;
-    let user;
-    let userId;
-    if (typeof userOrId === 'string') {
-      userId = userOrId;
-    } else if (isObject(userOrId)) {
-      user = userOrId;
-      userId = userOrId._id;
-    } else if (params.user) {
-      ({ user } = params);
-      userId = user._id;
-    } else if (params.userId) {
-      ({ userId } = params);
+    if (typeof rule === 'string') {
+      rule = { action: rule };
+    } else if (Array.isArray(rule)) {
+      rule = rule.map((ruleOrAction) => {
+        if (typeof ruleOrAction === 'string') return { action: ruleOrAction };
+        return ruleOrAction;
+      });
+    } else if (action) {
+      rule.action = rule;
     }
-    if (userId && !user) {
-      user = await this.getUserByUserId(userOrId);
+
+    if (!Array.isArray(rule)) {
+      rule = [rule];
     }
-    return {
-      user,
-      userId,
-      action,
-      ...params,
-    };
+
+    // let user;
+    // let userId;
+    // if (rule.user) {
+    //   ({ user } = rule);
+    //   userId = user._id;
+    // } else if (rule.userId) {
+    //   ({ userId } = rule);
+    // }
+    // if (userId && !user) {
+    //   user = await this.findUser({ _id: userId });
+    // }
+    // console.log(args, '=>', [rule, ctx]);
+    return [rule, ctx];
+    // {
+    //   user,
+    //   userId,
+    //   action,
+    //   ...params,
+    // };
   }
-  getGroupParams(args) {
-    return Bluebird.map(args, async (arg) => this.getParams([arg]));
-  }
-  getUserByUserId(userId) {
-    if (__CLIENT__) {
-      return this.app.stores.UserStore.findById(userId);
+  findUserById({ _id } = {}) {
+    if (isClient) {
+      return this.app.stores.UserStore.findById(_id);
     }
-    return this.app.models.UserModel.findById(userId);
+    return this.app.models.UserModel.findById(_id);
   }
-  async hasRule(rule) {
-    const { action } = await this.getParams(rule);
-    return !!this.rules[action];
+  async getRule(initRule, ctx) {
+    const rule = this.rules[initRule.action];
+    if (!rule) return this.anyRule.call(this, initRule, ctx);
+    return rule.call(this, initRule, ctx);
   }
   async can(...args) {
-    const params = await this.getParams(args);
-    const { action } = params;
-    debug('can', action);
-    const { rules } = this;
-    if (rules && rules[action]) {
-      if (!params.cache) {
-        const cache = new CacheStorage();
-        cache.name = 'can';
-        params.cache = cache;
-      }
-      return rules[action].bind(this)(params);
+    const [rules, ctx] = await this.getArgs(...args);
+    if (rules.length > 1) throw new Err('grant.tooMuchArgs', 'getArgs: too much args');
+    if (rules.length < 1) throw new Err('grant.emptyArgs', 'getArgs: empty args');
+    const [rule] = rules;
+    if (this.debug) this.log.trace('can', rule.action);
+    return this.getRule(rule, ctx);
+  }
+  async canGroup(...args) {
+    // eslint-disable-next-line prefer-const
+    let [rules, ctx] = await this.getArgs(...args);
+    let keys = rules.map((e) => e.action);
+    if (this.debug) this.log.trace('canGroup', keys);
+    // console.log('hasWildcard(keys)', keys, hasWildcard(keys));
+    // console.log('getWildcardKeys(allKeys, keys)', getWildcardKeys(allKeys, keys));
+    if (hasWildcard(keys) && isServer) {
+      const allKeys = Object.keys(this.rules);
+      keys = getWildcardKeys(allKeys, keys);
+      rules = keys.map((key) => {
+        const rule = rules.find((e) => {
+          const ruleKey = e.action.replace('*', '');
+          return key.includes(ruleKey);
+        });
+        return { ...rule, action: key };
+      });
     }
-    return null;
+    const pairs = await Bluebird.map(rules, async (rule) => [rule.action, await this.getRule(rule, ctx)], {
+      concurrency: 10,
+    });
+    return fromPairs(pairs);
   }
-  async canGroup(args, cache) {
-    const params = await this.getGroupParams(args);
-    const { rules } = this;
-    const cans = {};
-    await Bluebird.map(
-      params,
-      async (data) => {
-        const { action } = data;
-        if (rules && rules[action]) {
-          debug('can', action);
-          const res = await rules[action].bind(this)({ ...data, cache });
-          cans[hashCode(action)] = res;
-        }
-      },
-      { concurrency: 10 },
-    );
-    return cans;
-  }
-  async getCache(initRules) {
-    const rules = await this.canGroup(initRules);
+  async getCache(...initParams) {
+    const rules = await this.canGroup(...initParams);
     return {
       rules,
-      can(rule) {
-        const hash = hashCode(rule);
-        return get(rules, hash, null);
+      can: (action) => {
+        if (!(action in rules)) {
+          this.log.warn('cant find rule in grantCache', { action });
+          return null;
+        }
+        return get(rules, action);
       },
     };
   }
 }
+
+export default GrantModule;
