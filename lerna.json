@@ -1,5 +1,5 @@
 {
-  "version": "1.101.1",
+  "version": "1.102.0",
   "packages": [
     "packages/*"
   ],
@@ -9,12 +9,18 @@
       "license": "MIT"
     },
     "version": {
-      "allowBranch": ["master","legacy"],
+      "allowBranch": [
+        "master",
+        "legacy"
+      ],
       "conventionalCommits": true,
       "message": "chore(release): %s"
     },
     "version2": {
-      "allowBranch": ["master","legacy"],
+      "allowBranch": [
+        "master",
+        "legacy"
+      ],
       "conventionalCommits": true,
       "exact": true,
       "gitRemote": "upstream",
