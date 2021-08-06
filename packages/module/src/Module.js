@@ -117,11 +117,9 @@ export default class Module {
     let asyncModule;
     try {
       const AsyncModule = await importFn(this._modules[name]);
-      if (Array.isArray(AsyncModule)) {
-        asyncModule = classNewOrFunctionCall(...AsyncModule, this);
-      } else {
-        asyncModule = classNewOrFunctionCall(AsyncModule, this);
-      }
+      const args = Array.isArray(AsyncModule) ? AsyncModule : [AsyncModule];
+      const [Mod, ...otherArgs] = args;
+      asyncModule = Mod.create ? await Mod.create(this, ...otherArgs) : classNewOrFunctionCall(Mod, ...otherArgs, this);
     } catch (err) {
       this.log.error(`module(${name})`, err);
       throw err;
