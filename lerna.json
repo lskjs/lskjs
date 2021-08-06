@@ -9,12 +9,12 @@
       "license": "MIT"
     },
     "version": {
-      "allowBranch": "master",
+      "allowBranch": ["master","legacy"],
       "conventionalCommits": true,
       "message": "chore(release): %s"
     },
     "version2": {
-      "allowBranch": "master",
+      "allowBranch": ["master","legacy"],
       "conventionalCommits": true,
       "exact": true,
       "gitRemote": "upstream",
