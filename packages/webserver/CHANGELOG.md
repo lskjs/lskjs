@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Bug Fixes
+
+* **webserver:** reqUser middleware fix ([44945ce](https://github.com/lskjs/lskjs/commit/44945ce4dfc9283aa458278f2b3a04ce66b3975a))
+
+
+
+
+
 # [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
 
 

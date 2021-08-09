@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Features
+
+* **grant:** semi stable new grant module ([2839bca](https://github.com/lskjs/lskjs/commit/2839bca48f02d4af249b3a4c48b662966edf9bdb))
+
+
+
+
+
 # [2.3.0-beta.98](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.97...v2.3.0-beta.98) (2021-08-05)
 
 

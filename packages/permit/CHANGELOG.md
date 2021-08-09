@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Bug Fixes
+
+* **permit:** rewrite permits to 2v Api ([f9f5ce4](https://github.com/lskjs/lskjs/commit/f9f5ce40a05cea97fc5ee3089716c0a363ead61f))
+
+
+
+
+
 # [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
 
 **Note:** Version bump only for package @lskjs/permit

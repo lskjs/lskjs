@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.99](https://github.com/lskjs/cli/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Bug Fixes
+
+* **auth:** rewrite AuthApi to 2v Api ([6526c83](https://github.com/lskjs/cli/commit/6526c836e5a4657f2385ade7b86341cc983e6020))
+* **permit:** rewrite permits to 2v Api ([f9f5ce4](https://github.com/lskjs/cli/commit/f9f5ce40a05cea97fc5ee3089716c0a363ead61f))
+* **server:** default runFinish and webserver autorun ([d5a70ad](https://github.com/lskjs/cli/commit/d5a70ad14222e51727ffa8b94778e766c73fdd2c))
+* **uapp:** provide correct providers returb ([1a7d0bf](https://github.com/lskjs/cli/commit/1a7d0bf374b05529d481156799da5326f86d9ed1))
+* **webserver:** reqUser middleware fix ([44945ce](https://github.com/lskjs/cli/commit/44945ce4dfc9283aa458278f2b3a04ce66b3975a))
+
+
+### Features
+
+* **grant:** semi stable new grant module ([2839bca](https://github.com/lskjs/cli/commit/2839bca48f02d4af249b3a4c48b662966edf9bdb))
+* **module:** more error detalization ([c813480](https://github.com/lskjs/cli/commit/c813480cbc2e6e6c2c32f4b51f11fa0c252233bc))
+* **reactapp:** pass uapp config throw clientapp ([bcbb95b](https://github.com/lskjs/cli/commit/bcbb95bd4e57e76f1fb1ace5a2527e9cd2ae8485))
+* **server-api:** improve ListApi ([fe66941](https://github.com/lskjs/cli/commit/fe669417f278791d3f79abb1b4311e8064ef82ed))
+
+
+
+
+
 # [2.3.0-beta.98](https://github.com/lskjs/cli/compare/v2.3.0-beta.97...v2.3.0-beta.98) (2021-08-05)
 
 

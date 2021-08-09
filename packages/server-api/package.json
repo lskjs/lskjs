@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "2.3.0-beta.95",
+  "version": "2.3.0-beta.99",
   "description": "LSK server-api.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/server-api",
@@ -24,7 +24,7 @@
   "dependencies": {
     "@lskjs/env": "2.3.0-beta.95",
     "@lskjs/err": "2.3.0-beta.94",
-    "@lskjs/module": "2.3.0-beta.95",
+    "@lskjs/module": "2.3.0-beta.99",
     "@lskjs/utils": "2.3.0-beta.95"
   },
   "devDependencies": {

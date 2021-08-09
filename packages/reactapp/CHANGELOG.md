@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.99](https://github.com/lskjs/ux/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Features
+
+* **reactapp:** pass uapp config throw clientapp ([bcbb95b](https://github.com/lskjs/ux/commit/bcbb95bd4e57e76f1fb1ace5a2527e9cd2ae8485))
+
+
+
+
+
 # [2.3.0-beta.95](https://github.com/lskjs/ux/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
 
 **Note:** Version bump only for package @lskjs/reactapp

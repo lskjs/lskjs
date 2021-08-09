@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Bug Fixes
+
+* **uapp:** provide correct providers returb ([1a7d0bf](https://github.com/lskjs/lskjs/commit/1a7d0bf374b05529d481156799da5326f86d9ed1))
+
+
+
+
+
 # [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
 
 **Note:** Version bump only for package @lskjs/uapp
