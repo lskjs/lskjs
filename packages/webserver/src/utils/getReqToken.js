@@ -8,9 +8,11 @@ export function getReqToken(req) {
   // get(this.config, 'jwt.cookie', {});
   const { name: cookieName = 'token' } = jwtConfig.cookie || {};
   // eslint-disable-next-line no-console
-  if (this.debug) console.log('getReqToken cookie', cookieName);
+  // if (this.debug) console.log('getReqToken cookie', cookieName);
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    return req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization.split(' ')[1];
+    // if (token === 'null') return null;
+    return token;
   }
   if (req.headers['x-access-token']) {
     return req.headers['x-access-token'];

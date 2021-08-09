@@ -14,17 +14,28 @@ export default (webserver) =>
       webserver.log.warn('!jwt.secret');
       return next();
     }
+    let getToken = (webserver.helpers && webserver.helpers.getReqToken) || getReqToken;
+    if (!getToken) {
+      webserver.log.warn('reqUser !getToken');
+      return next();
+    }
+    getToken = getToken.bind(webserver);
+    const token = getToken(req);
+
     const options = {
       secret,
       algorithms,
-      getToken: webserver.helpers.getReqToken || getReqToken,
+      getToken,
     };
+    // console.log('getToken', getToken(req));
+    // console.log('secret', secret);
     return jwt(options)(req, res, (err) => {
       if (!err) return next();
       req.__errJwt = err;
-      if (err.code === 'credentials_required') {
-        return next();
-      }
+      // console.log('JWT', { err }, token, err.code);
+      // console.log('123123', !token, typeof token, token, err.code === 'credentials_required');
+      const isNotFatal = !token || err.code === 'credentials_required' || err.code === 'invalid_token';
+      if (isNotFatal) return next();
       return next(err);
     });
   };
