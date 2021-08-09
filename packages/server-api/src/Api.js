@@ -57,7 +57,7 @@ export default class Api extends Module {
   //   if (!get(req, 'user.role') !== 'admin') return false;
   //   return true;
   // }
-  async checkAdmin(req, props) {
+  async checkAdmin(req, props = {}) {
     if (props.dev && isDev) return;
     if (req.__errJwt) throw req.__errJwt;
     if (get(req, 'user.role') !== 'admin') throw new Err('auth.notadmin', { status: 403 });
