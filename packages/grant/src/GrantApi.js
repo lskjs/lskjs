@@ -1,32 +1,46 @@
 import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 
-import CacheStorage from './CacheStorage';
-
 export class GrantApi extends Api {
-  cache = new CacheStorage({ name: 'GrantApi' });
   getRoutes() {
     return {
       ...super.getRoutes(),
+      '/can': () => {
+        throw new Err('DEPRECATED');
+      },
+      '/canGroup': () => {
+        throw new Err('DEPRECATED');
+      },
       '/ask': this.ask.bind(this),
+      '/cache': this.cache.bind(this),
       '/clearCache': this.clearCache.bind(this),
     };
   }
   async ask(req) {
+    console.log('ASK', req.data);
     const {
       data: { rules },
     } = req;
-    if (rules && Array.isArray(rules) && rules.length > 0) throw new Err('grant.askFormat', 'rules is not array');
+    if (!(rules && Array.isArray(rules) && rules.length > 0))
+      throw new Err('grant.askFormat', 'rules is not array', { rules });
     const grant = await this.app.module('grant');
-    const userId = (req.user && req.user.id) || 'guest';
+    const userId = req.user ? req.user._id : null;
     return grant.canGroup(rules, {
       user: req.user,
-      cache: this.cache.fork({ prefix: userId }),
+      userId,
+      cache: grant.__cache.fork({ prefix: userId || 'guest' }),
     });
   }
+  async cache(req) {
+    await this.checkAdmin(req);
+    const grant = await this.app.module('grant');
+    return grant.__cache.data;
+  }
   async clearCache(req) {
+    const grant = await this.app.module('grant');
     const userId = (req.user && req.user.id) || 'guest';
-    return this.cache.clearCache(`${userId}.*`);
+    const path = [userId, req.data.path || '*'].filter(Boolean).join('.');
+    return grant.clearCache(path);
   }
 }
 

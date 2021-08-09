@@ -113,3 +113,13 @@ test('can grantCache 2', async () => {
 
   expect(res).toEqual({ 'test.1': 1, 'test.0': 0, 'cabinet.access': false, 'cabinet.channels': false });
 });
+
+test('can grantCache 3', async () => {
+  const grant = await GrantModule.start({ app, rules });
+
+  const grantCache = await grant.getCache(['test.*', { action: 'cabinet.*' }, 'cabinet.access', 'cabinet.channels']);
+
+  const res = await Bluebird.props(grantCache.rules);
+
+  expect(res).toEqual({ 'test.1': 1, 'test.0': 0, 'cabinet.access': false, 'cabinet.channels': false });
+});

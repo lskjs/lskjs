@@ -10,14 +10,20 @@ const getServerApp = (app) => app && app.app && app.app.app;
 export class GrantClientModule extends GrantModule {
   async can(...args) {
     const result = await this.canGroup(...args);
+    // console.log()
     const keys = Object.keys(result);
-    if (keys !== 1) throw new Err('grant.invalidResult');
+    if (keys.length !== 1) throw new Err('grant.invalidResult');
     return result[keys[0]];
   }
   async canGroup(...args) {
     // const cache = new CacheStorage({ name: 'GrantClientModule.canGroup' });
     const [rules, ctx] = await this.getArgs(...args);
     // const results = await super.canGroup(rules, { ...ctx, cache });
+
+    console.log('canGroup front', { rules, ctx });
+    return this.ask({ rules });
+
+    // TODO: добавить ленивость
     const results = await super.canGroup(rules, ctx);
     const isHaveNull = some(results, (r) => r === null);
     if (Object.keys(results).length === rules.length && !isHaveNull) return results;
@@ -28,17 +34,39 @@ export class GrantClientModule extends GrantModule {
       const user = get(auth, 'store.session.user');
       return grant.canGroup(rules, { ...ctx, user });
     }
-    return this.askServerGroup(rules);
+    return this.ask({ rules });
   }
-  async askServer({ rules } = {}) {
-    if (this.debug) this.log.trace(`Grant.askServer(${args[0]})`);
+
+  async clearCache(path) {
+    await super.init();
     const api = await this.app.module('api');
-    const { data } = await api.fetch('/api/grant/ask', {
+    const { data } = await api.fetch('/api/grant/clearCache', {
+      method: 'POST',
+      data: { path },
+      body: { path },
+    });
+    return data;
+  }
+  async ask({ rules } = {}) {
+    // => []
+    if (this.debug) this.log.trace(`Grant.ask({${rules}})`);
+    const api = await this.app.module('api');
+    const {
+      data: { data },
+    } = await api.fetch('/api/grant/ask', {
       method: 'POST',
       data: { rules },
       body: { rules },
     });
     return data;
+  }
+  async anyRule(action) {
+    const res = await this.ask({ rules: [action] });
+    console.log('anyRule', action, res);
+
+    return res;
+    // this.log.debug('empty rule', action);
+    // return null;
   }
 }
 
