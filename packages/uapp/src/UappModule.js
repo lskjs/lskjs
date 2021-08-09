@@ -1,15 +1,15 @@
 /* global window */
 // eslint-disable-next-line max-classes-per-file
+import { isClient } from '@lskjs/env';
 import Module from '@lskjs/module';
-// import { isClient, isDev } from '@lskjs/utils/env';
 import get from 'lodash/get';
 import UniversalRouter from 'universal-router';
 
 import { collectUniversalRoutes } from './collectUniversalRoutes';
 import UappProvider from './UappProvider';
 
-const isClient = __CLIENT__;
-const isDev = __DEV__;
+// const isClient = __CLIENT__;
+// const isDev = __DEV__;
 
 export class ProgressModule extends Module {
   init() {
@@ -89,7 +89,7 @@ export class UappModule extends Module {
 
   __providers = {};
   async __provide() {
-    if (this.__providers) return this.__providers;
+    if (Object.keys(this.__providers).length) return this.__providers;
     this.__providers = await this.provide();
     return this.__providers;
   }
