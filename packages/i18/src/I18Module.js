@@ -18,7 +18,7 @@ export class I18Module extends Module {
     const { locales = [] } = this;
     if (!locales.includes(locale)) throw `!locales[${locale}]`;
     if (!this.instances[locale]) {
-      this.instances[locale] = await this.I18Instance.createAndRun({ config: { locale } });
+      this.instances[locale] = await this.I18Instance.start({ config: { locale } });
     }
     return this.instances[locale];
   }
