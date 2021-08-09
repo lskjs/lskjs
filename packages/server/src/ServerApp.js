@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import map from 'lodash/map';
 
@@ -16,6 +17,16 @@ export class ServerApp extends Module {
 
   async init() {
     await super.init();
+    this.on('runFinish', this.started.bind(this));
+  }
+
+  async run() {
+    await super.run();
+    await this.module('webserver');
+  }
+
+  async initModules() {
+    await super.init();
     const m = await this.module([
       'webserver',
       'i18',
@@ -24,7 +35,6 @@ export class ServerApp extends Module {
       // 'redis',
     ]);
     Object.assign(this, m);
-    this.on('runFinish', this.started.bind(this));
   }
 
   url(str, params = null) {
@@ -57,7 +67,7 @@ export class ServerApp extends Module {
     } else {
       str = `🎃 The ${this.name} is ready ${timing}`;
     }
-    if (__DEV__) {
+    if (isDev) {
       this.log.info(str);
     } else {
       this.log.warn(str);

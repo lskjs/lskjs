@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import get from 'lodash/get';
 
 // const DEBUG = false;
@@ -20,7 +21,7 @@ export function getReqToken(req) {
   if (req.cookies && req.cookies[cookieName]) {
     return req.cookies[cookieName];
   }
-  if (__DEV__ && jwtConfig && jwtConfig.devToken) return jwtConfig.devToken;
+  if (isDev && jwtConfig && jwtConfig.devToken) return jwtConfig.devToken;
   return null;
 }
 
