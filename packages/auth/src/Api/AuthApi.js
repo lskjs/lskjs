@@ -1,83 +1,84 @@
-import Bluebird from 'bluebird';
-import merge from 'lodash/merge';
-import random from 'lodash/random';
-import set from 'lodash/set';
-import map from 'lodash/map';
-import omit from 'lodash/omit';
-import unset from 'lodash/unset';
-import get from 'lodash/get';
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import BaseApi from '@lskjs/server-api';
-import transliterate from '@lskjs/utils/transliterate';
 import canonizeParams from '@lskjs/utils/canonizeParams';
+import getReqOrigin from '@lskjs/utils/getReqOrigin';
+import transliterate from '@lskjs/utils/transliterate';
 // import canonizePhone from '@lskjs/utils/canonizePhone';
 // import validatePhone from '@lskjs/utils/validatePhone';
 import validateEmail from '@lskjs/utils/validateEmail';
-import getReqOrigin from '@lskjs/utils/getReqOrigin';
+import Bluebird from 'bluebird';
+import get from 'lodash/get';
+import map from 'lodash/map';
+import merge from 'lodash/merge';
+import omit from 'lodash/omit';
+import random from 'lodash/random';
+import set from 'lodash/set';
+import unset from 'lodash/unset';
 
 export default class AuthApi extends BaseApi {
   async init() {
     await super.init();
-    // TODO: ввести в лск асинхронную загрузку Api
-    const auth = await this.app.module('auth');
-    this.helpers = auth.helpers;
+    this.authModule = await this.app.module('auth');
+    this.helpers = this.authModule.helpers;
   }
   getRoutes() {
     // const { isAuth } = this.app.middlewares;
     return {
-      ...(super.getRoutes()),
-      '/login': ::this.login,
-      '/signup': ::this.signup, // POST
-      '/updateToken': ::this.updateToken,
+      ...super.getRoutes(),
+      '/login': this.login.bind(this),
+      '/signup': this.signup.bind(this), // POST
+      '/updateToken': this.updateToken.bind(this),
 
-      '/permit': ::this.getPermit,
-      // '/confirm': ::this.confirmPermit,
-      '/permit/confirm': ::this.confirmPermit,
-      // // '/loginToken': ::this.loginToken,
+      '/permit': this.getPermit.bind(this),
+      // '/confirm': this.confirmPermit.bind(this),
+      '/permit/confirm': this.confirmPermit.bind(this),
+      // // '/loginToken': this.loginToken.bind(this),
 
-      '/restorePassword': ::this.restorePassword,
-      // '/setPassword': ::this.setPassword, => confirm
+      '/restorePassword': this.restorePassword.bind(this),
+      // '/setPassword': this.setPassword.bind(this), => confirm
 
-      // '/email/confirm': ::this.confirmEmail, // (req, res) => res.redirect('/cabinet'));
+      // '/email/confirm': this.confirmEmail.bind(this), // (req, res) => res.redirect('/cabinet'));
 
-      // '/phone/code': ::this.phoneCode,
-      // '/phone/approve': ::this.phoneApprove, => confirm
-      // '/phone/login': ::this.phoneLogin,
+      // '/phone/code': this.phoneCode.bind(this),
+      // '/phone/approve': this.phoneApprove.bind(this), => confirm
+      // '/phone/login': this.phoneLogin.bind(this),
       //
-      '/status': ::this.status,
-      '/session': ::this.session,
-      '/check': ::this.check,
+      '/status': this.status.bind(this),
+      '/session': this.session.bind(this),
+      '/check': this.check.bind(this),
 
       // Регистрация пользователя через соц сеть
-      // '/social': ::this.getSocials, // isAuth,
-      // '/social/signup': ::this.socialLogin,
-      // '/social/login': ::this.socialLogin,
-      // '/social/bind': ::this.socialBind, // Добавление соц.сетей к пользователю // isAuth,
-      // '/social/unbind': ::this.socialUnbind, // isAuth,
+      // '/social': this.getSocials.bind(this), // isAuth,
+      // '/social/signup': this.socialLogin.bind(this),
+      // '/social/login': this.socialLogin.bind(this),
+      // '/social/bind': this.socialBind.bind(this), // Добавление соц.сетей к пользователю // isAuth,
+      // '/social/unbind': this.socialUnbind.bind(this), // isAuth,
 
-      // '/passport/getByToken': ::this.getPassportByToken,
-      // '/passports/detach': ::this.passportsDetach,
-      // '/restorePasswordPermit': ::this.restorePasswordPermit,
+      // '/passport/getByToken': this.getPassportByToken.bind(this),
+      // '/passports/detach': this.passportsDetach.bind(this),
+      // '/restorePasswordPermit': this.restorePasswordPermit.bind(this),
 
-      '/info': ::this.info,
+      '/info': this.info.bind(this),
       // social auth init
-      '/:provider': ::this.socialAuth,
-      '/:provider/auth': ::this.socialAuth,
-      '/:provider/callback': ::this.socialCallback,
+      '/:provider': this.socialAuth.bind(this),
+      '/:provider/auth': this.socialAuth.bind(this),
+      '/:provider/callback': this.socialCallback.bind(this),
     };
   }
 
   // getRoutes() {
   //   return {
-  //     '/login': ::this.login,
-  //     '/accountkit': ::this.accountkit,
-  //     '/facebook': ::this.facebook,
-  //     '/social': ::this.social,
-  //     // '/vkontakte': ::this.vkontakte,
-  //     '/phone': ::this.phoneOrEmail,
-  //     '/email': ::this.phoneOrEmail,
-  //     '/confirm': ::this.confirm,
-  //     '/status': ::this.status,
-  //     '/check': ::this.check,
+  //     '/login': this.login.bind(this),
+  //     '/accountkit': this.accountkit.bind(this),
+  //     '/facebook': this.facebook.bind(this),
+  //     '/social': this.social.bind(this),
+  //     // '/vkontakte': this.vkontakte.bind(this),
+  //     '/phone': this.phoneOrEmail.bind(this),
+  //     '/email': this.phoneOrEmail.bind(this),
+  //     '/confirm': this.confirm.bind(this),
+  //     '/status': this.status.bind(this),
+  //     '/check': this.check.bind(this),
   //   };
   // }
 
@@ -86,12 +87,12 @@ export default class AuthApi extends BaseApi {
   // }
 
   async updateToken(req) {
-    const { UserModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
     const userId = req.user && req.user._id;
-    if (!userId) throw req.e('auth.tokenIncorrect', { status: 404 });
+    if (!userId) throw new Err('auth.tokenIncorrect', { status: 404 });
 
     const user = await UserModel.findById(userId);
-    if (!user) throw req.e('auth.userNotFound', { status: 404 });
+    if (!user) throw new Err('auth.userNotFound', { status: 404 });
     req.user = user;
 
     const token = this.helpers.generateAuthToken(user);
@@ -113,8 +114,8 @@ export default class AuthApi extends BaseApi {
 
   async check(req) {
     const criteria = canonizeParams(req.data);
-    if (!Object.keys(criteria)) throw this.e('auth.loginRequired', { status: 400 });
-    const { UserModel } = this.app.models;
+    if (!Object.keys(criteria)) throw new Err('auth.loginRequired', { status: 400 });
+    const UserModel = await this.app.module('models.UserModel');
     const user = await UserModel.findOne(criteria).select('_id');
     return {
       exists: !!user,
@@ -132,20 +133,20 @@ export default class AuthApi extends BaseApi {
         return { [cred]: params[cred] };
       }
     }
-    throw { code: 'auth.loginEmpty', status: 400 };
+    throw new Err('auth.loginEmpty', { status: 400 });
   }
 
   async login(req) {
-    const { UserModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
     const { password } = req.data;
-    if (!password) throw req.e('auth.passwordEmpty', { status: 400 });
+    if (!password) throw new Err('auth.passwordEmpty', { status: 400 });
     const user = await UserModel.findOne(this.getUserCriteria(req.data));
-    if (!user) throw req.e('auth.loginIncorrect', { status: 400 });
+    if (!user) throw new Err('auth.loginIncorrect', { status: 400 });
     if (get(user, 'statuses.blockedAt')) {
-      throw req.e('auth.blocked', { status: 403 });
+      throw new Err('auth.blocked', { status: 403 });
     }
     if (!(await this.helpers.verifyPassword(password, user.password))) {
-      throw req.e('auth.passwordIncorrect', { status: 400 });
+      throw new Err('auth.passwordIncorrect', { status: 400 });
     }
     req.user = user;
     const token = this.helpers.generateAuthToken(user);
@@ -161,13 +162,14 @@ export default class AuthApi extends BaseApi {
   async signup(req) {
     const permitModule = await this.app.module('permit');
     if (!permitModule) throw '!permitModule';
-    const { UserModel, PermitModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
+    const PermitModel = await this.app.module('models.PermitModel');
     const { password, ...userFields } = req.data;
     const loginParams = canonizeParams(req.data);
     const criteria = this.getUserCriteria(loginParams);
     const existUser = await UserModel.findOne(criteria).select('_id');
     const loginField = Object.keys(criteria)[0];
-    if (existUser) throw req.e(`auth.${loginField}Exists`, { status: 400 });
+    if (existUser) throw new Err(`auth.${loginField}Exists`, { status: 400 });
     const user = new UserModel({
       ...userFields, // TODO: validation
       ...loginParams,
@@ -214,7 +216,8 @@ export default class AuthApi extends BaseApi {
   }
 
   async permitAction({ req, permit }) {
-    const { UserModel, PermitModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
+    const PermitModel = await this.app.module('models.PermitModel');
     if (permit.type === 'auth.confirmEmail') {
       const user = await UserModel.findById(permit.userId).sort({ createdAt: 1 });
       if (!user) throw '!user';
@@ -254,17 +257,17 @@ export default class AuthApi extends BaseApi {
 
   async confirmPermit(req) {
     const { code, permitId } = req.data;
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
     if (!code) throw '!code';
-    if (!permitId) throw req.e('permit.permitIdEmpty', { status: 400 });
+    if (!permitId) throw new Err('permit.permitIdEmpty', { status: 400 });
     // const permit = await PermitModel.findById(permitId);
-    // if (!permit) throw this.e(404, 'Permit not found!');
+    // if (!permit) throw new Err(404, 'Permit not found!');
     const permit = await PermitModel.findById(permitId);
-    if (!permit) throw req.e('permit.permitNotFound', { status: 404 });
+    if (!permit) throw new Err('permit.permitNotFound', { status: 404 });
     const status = permit.getStatus();
 
     if (status !== 'valid') {
-      throw req.e('permit.statusInvalid', { status: 400, data: { status } });
+      throw new Err('permit.statusInvalid', { status: 400, data: { status } });
     }
     if (!this.equal(code, permit.code)) throw this.app.e('permit.codeInvalid', { status: 400 });
 
@@ -273,7 +276,8 @@ export default class AuthApi extends BaseApi {
 
   async restorePassword(req) {
     const permitModule = await this.app.module('permit');
-    const { UserModel, PermitModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
+    const PermitModel = await this.app.module('models.PermitModel');
     const { email } = req.data;
 
     if (!email || !validateEmail(email)) {
@@ -306,7 +310,8 @@ export default class AuthApi extends BaseApi {
   }
 
   // async setPassword(req) {
-  //   const { UserModel, PermitModel } = this.app.models;
+  //       const UserModel = await this.app.module('models.UserModel');
+  //       cPermit UserModel = await this.app.module('models.PermitModel');
   //   const { code, password } = req.data;
   //   if (!code) throw '!code';
   //   const permit = await PermitModel.findOne({
@@ -362,9 +367,9 @@ export default class AuthApi extends BaseApi {
 
   //   const criteria = this.getUserCriteria(req);
   //   const user = await UserModel.findOne(criteria);
-  //   if (!user) throw req.e('Неверный логин', { status: 404 });
+  //   if (!user) throw new Err('Неверный логин', { status: 404 });
   //   const email = user.getEmail();
-  //   if (!email) throw req.e('У этого пользователя не был указан емейл для восстановления', { status: 400 });
+  //   if (!email) throw new Err('У этого пользователя не был указан емейл для восстановления', { status: 400 });
 
   //   const password = UserModel.generatePassword();
 
@@ -394,7 +399,7 @@ export default class AuthApi extends BaseApi {
     return {
       providers: map(authModule.strategies, (strategy, provider) => ({
         provider,
-        ...omit(strategy.getInfo(), __DEV__ ? [] : ['settings', 'clientId']),
+        ...omit(strategy.getInfo(), isDev ? [] : ['settings', 'clientId']),
       })),
     };
   }
@@ -405,7 +410,7 @@ export default class AuthApi extends BaseApi {
     const { provider } = req.params;
     const origin = getReqOrigin(req);
     const strategy = authModule.strategies[provider];
-    if (!strategy) next(req.e('auth.providerInvalid'), { status: 404, provider });
+    if (!strategy) next(new Err('auth.providerInvalid'), { status: 404, provider });
     authModule.passportService.authenticate(
       provider,
       strategy.getPassportAuthenticateParams({ method: 'auth', origin }),
@@ -469,7 +474,7 @@ export default class AuthApi extends BaseApi {
     const userId = req.user._id;
     const passport = await PassportModel.getByToken(req.data.p).then(checkNotFound);
     const user = await UserModel.findById(req.user._id).then(checkNotFound);
-    if (passport.userId) throw req.e('passport.userId already exist', { status: 400 });
+    if (passport.userId) throw new Err('passport.userId already exist', { status: 400 });
     passport.userId = userId;
     // user.passports.push(passport._id);
     await passport.save();
@@ -513,10 +518,10 @@ export default class AuthApi extends BaseApi {
     if (params.provider) findParams.provider = params.provider;
     findParams.userId = userId;
     if (!findParams.passportId && !findParams.provider) {
-      throw req.e('!findParams.passportId && !findParams.provider', { status: 400 });
+      throw new Err('!findParams.passportId && !findParams.provider', { status: 400 });
     }
     const passport = await PassportModel.findOne(findParams).then(checkNotFound);
-    if (passport.userId !== userId) throw req.e('Wrong user!', { status: 403 });
+    if (passport.userId !== userId) throw new Err('Wrong user!', { status: 403 });
     passport.userId = null;
     // user.passports = user.passports.filter((pId) => {
     //   return pId && pId.toString() !== params.p;
@@ -531,10 +536,10 @@ export default class AuthApi extends BaseApi {
   async tokenLogin(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const token = req.data.t || req.data.token;
-    if (!token) throw req.e('!token', { status: 400 });
+    if (!token) throw new Err('!token', { status: 400 });
 
     const user = await UserModel.tokenLogin({ token });
-    if (!user) throw req.e('!user', { status: 404 });
+    if (!user) throw new Err('!user', { status: 404 });
     req.user = user;
 
     return {
@@ -593,7 +598,7 @@ export default class AuthApi extends BaseApi {
       phone,
       res,
     };
-    if (__DEV__) {
+    if (isDev) {
       pack.code = code;
     }
     // console.log('result', JSON.stringify(pack, null, 2));
@@ -647,7 +652,7 @@ export default class AuthApi extends BaseApi {
   async getPermit(req) {
     const { _id } = req.data;
     if (!_id) throw '!_id';
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
     const permit = await PermitModel.findOne({
       _id,
     });
@@ -663,7 +668,7 @@ export default class AuthApi extends BaseApi {
   async emailPermit(req) {
     const permitModule = await this.app.module('permit');
     const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
 
     const { ObjectId } = this.app.db.Types;
     if (!req.user || !req.user._id) throw '!_id';
@@ -768,7 +773,7 @@ export default class AuthApi extends BaseApi {
   }
   async confirmEmail(req) {
     const UserModel = this.app.models.UserModel || this.app.models.User;
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
     const { code } = req.data;
     if (!code) throw '!code';
     const permit = await PermitModel.findOne({
@@ -826,7 +831,7 @@ export default class AuthApi extends BaseApi {
   async findOneByCode(req) {
     const { code } = req.data;
     if (!code) throw '!code';
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
     const permit = await PermitModel.findOne({
       code,
     });

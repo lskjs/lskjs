@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import importFn from '@lskjs/utils/importFn';
@@ -67,9 +68,9 @@ export default class AuthServerModule extends Module {
   async getAuthSession(req) {
     const userId = req.user && req.user._id;
     if (!userId) return {};
-    const { UserModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
     const user = await UserModel.findOne({ _id: userId });
-    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
+    if (!user) throw new Err('auth.userNotFound', { status: 404 });
     const token = this.helpers.generateAuthToken(user);
     return {
       // api
