@@ -122,6 +122,12 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
         throw new Err(
           'MODULE_LONG_PARALLEL_INIT',
           'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
+          {
+            data: {
+              nameOrNames,
+              name: this.name,
+            },
+          },
         );
       } else {
         mutexRelease = await mutex.acquire();

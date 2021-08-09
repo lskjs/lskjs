@@ -6,6 +6,7 @@ import { IApp, IModule } from './types';
 // }
 
 export abstract class Module extends ModuleWithSubmodules implements IModule {
+  static __v = 2;
   app?: IApp;
   debug = false;
   async getModuleProps(name: string): Promise<Record<string, any>> {
