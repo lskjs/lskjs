@@ -39,6 +39,16 @@ export default class ReactAppClient extends Module {
     this.render();
   }
 
+  async getModuleConfig(name) {
+    const config = await super.getModuleConfig(name);
+    if (name === 'uapp')
+      return {
+        ...this.config,
+        ...config,
+      };
+    return config;
+  }
+
   async getModuleProps(name) {
     if (name === 'uapp') {
       return {
