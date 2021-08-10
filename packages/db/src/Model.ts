@@ -36,7 +36,7 @@ export class Model implements IModel {
   static async prepare(obj: any | any[], params: any = {}): Promise<any | any[]> {
     // // console.log('PREPARE params.toObject', params.toObject);
     // // console.log('params.toObject2@@@', params.toObject2);
-    const toObjectOne = (o) => {
+    const toObjectOne = (o: any) => {
       if (!params.toObject2 || !Object.keys(params.toObject2).length) return o;
       if (o && o.toObject) return o.toObject(params.toObject2);
       return o;
