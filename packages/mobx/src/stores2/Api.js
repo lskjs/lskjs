@@ -10,7 +10,7 @@ export class Api extends Module {
     } catch (err) {
       throw Err(`API_INVALID_JSON`, err);
     }
-    if (res.code) throw Err(res);
+    if (res.code) throw new Err(res);
     return res.data;
   }
   async init() {
