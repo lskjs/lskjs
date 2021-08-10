@@ -13,7 +13,7 @@ export class CrudApi extends Api {
   findById(_id) {
     return this.fetch('/findOne', {
       method: 'GET',
-      qs: { _id },
+      params: { _id },
     });
   }
   findOne(data) {
@@ -35,14 +35,14 @@ export class CrudApi extends Api {
     // update(_id, data) {
     return this.fetch('/update', {
       method: 'POST',
-      qs: { _id },
+      params: { _id },
       data,
     });
   }
   remove(_id) {
     return this.fetch('/remove', {
       method: 'POST',
-      qs: { _id },
+      params: { _id },
     });
   }
 }

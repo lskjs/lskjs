@@ -6,7 +6,7 @@ import React from 'react';
 
 const UappProvider = ({ app, page, children: rawChildren }) => {
   let children = <>{rawChildren}</>; // TODO: checks
-  console.log({ page });
+  // console.log({ page });
 
   const { MobxProvider } = UappProvider;
   let stores;
