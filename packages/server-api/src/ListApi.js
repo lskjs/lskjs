@@ -20,6 +20,7 @@ export default class ListApi extends BaseApi {
       '/get': this.findOne.bind(this),
       '/create': this.create.bind(this),
       '/update': this.update.bind(this),
+      '/edit': this.update.bind(this),
       '/remove': this.remove.bind(this),
       '/delete': this.remove.bind(this),
     };
