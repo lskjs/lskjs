@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.100](https://github.com/lskjs/cli/compare/v2.3.0-beta.99...v2.3.0-beta.100) (2021-08-10)
+
+
+### Bug Fixes
+
+* **db:** ts error ([7e53951](https://github.com/lskjs/cli/commit/7e53951ad9421064cdd12627dde84863cf397518))
+* **uapp:** remove logs ([fc5c5da](https://github.com/lskjs/cli/commit/fc5c5dae011e22ecdfae5838cc146fc96a4971d8))
+
+
+### Features
+
+* **db:** add prepare and prepareOne ([6c97774](https://github.com/lskjs/cli/commit/6c977746184ce124b901b73d864469f5d95540c5))
+
+
+
+
+
 # [2.3.0-beta.99](https://github.com/lskjs/cli/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 

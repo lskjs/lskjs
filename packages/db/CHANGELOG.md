@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.100](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.99...v2.3.0-beta.100) (2021-08-10)
+
+
+### Bug Fixes
+
+* **db:** ts error ([7e53951](https://github.com/lskjs/lskjs/commit/7e53951ad9421064cdd12627dde84863cf397518))
+
+
+### Features
+
+* **db:** add prepare and prepareOne ([6c97774](https://github.com/lskjs/lskjs/commit/6c977746184ce124b901b73d864469f5d95540c5))
+
+
+
+
+
 # [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 **Note:** Version bump only for package @lskjs/db

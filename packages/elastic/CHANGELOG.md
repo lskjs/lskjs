@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.100](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.99...v2.3.0-beta.100) (2021-08-10)
+
+
+### Bug Fixes
+
+* **uapp:** remove logs ([fc5c5da](https://github.com/lskjs/lskjs/commit/fc5c5dae011e22ecdfae5838cc146fc96a4971d8))
+
+
+
+
+
 # [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 **Note:** Version bump only for package @lskjs/elastic
