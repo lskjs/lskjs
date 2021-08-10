@@ -29,6 +29,7 @@ export default class ElasticServerModule extends Module {
 
   async init() {
     await super.init();
+    // TODO: переписать на плосскую структуру
     if (!get(this, 'config.client.host') && !get(this, 'config.client.hosts')) {
       this.log.error('!config.client.host');
       return;

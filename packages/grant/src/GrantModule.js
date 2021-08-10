@@ -76,7 +76,7 @@ export class GrantModule extends Module {
     // if (userId && !user) {
     //   user = await this.findUser({ _id: userId });
     // }
-    console.log(args, '=>', [rule, ctx]);
+    // console.log(args, '=>', [rule, ctx]);
     return [rule, ctx];
     // {
     //   user,
@@ -139,14 +139,14 @@ export class GrantModule extends Module {
     pairs.forEach((pair) => {
       Object.assign(res, pair[1]);
     });
-    console.log('canGroup22 !!!', { rules, pairs }, fromPairs(pairs), res);
+    // console.log('canGroup22 !!!', { rules, pairs }, fromPairs(pairs), res);
     return res;
     return fromPairs(pairs);
   }
   async getCache(...initParams) {
     if (this.debug) this.log.trace('getCache', initParams);
     const rules = await this.canGroup(...initParams);
-    console.log('getCache', { rules });
+    // console.log('getCache', { rules });
     return {
       rules,
       can: (action) => {

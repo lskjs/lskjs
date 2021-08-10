@@ -32,6 +32,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/env": "^2.3.0-beta.95",
+    "@lskjs/err": "^2.3.0-beta.94",
     "@lskjs/module": "2.3.0-beta.99",
     "@lskjs/utils": "2.3.0-beta.95",
     "core-decorators": "0.20.0",

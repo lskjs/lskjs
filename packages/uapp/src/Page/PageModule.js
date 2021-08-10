@@ -1,12 +1,13 @@
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
 import Bluebird from 'bluebird';
 import merge from 'lodash/merge';
 import { observable } from 'mobx';
 import React from 'react';
 // import Loading from '@lskjs/general/Loading';
 
-// const DEBUG = __DEV__ && false;
+// const DEBUG = isDev && false;
 // const deprecated = createLogger({ name: 'uapp/Page', type: 'deprecated' });
 
 // DEBUG ? () => null : console.log; // eslint-disable-line no-console
@@ -87,11 +88,11 @@ export class PageModule extends Module {
   }
 
   catchError(err) {
-    this.log.trace('error()', err);
-    if (__DEV__) {
-      this.uapp.onError(err);
+    this.log.error('error()', err);
+    if (isDev) {
+      if (this.app && this.app.onError) this.app.onError(err);
     }
-    // if (__DEV__) {
+    // if (isDev) {
     //   if (err.message) {
     //     console.error('Page.error:', err.message); // eslint-disable-line no-console
     //     if (err.stack) console.error(err.stack); // eslint-disable-line no-console
@@ -179,7 +180,7 @@ export class PageModule extends Module {
     this.log.trace('renderRoot()');
     let children = this.renderComponent();
     if (typeof children === 'undefined') {
-      if (__DEV__) {
+      if (isDev) {
         children = 'Page return empty result';
       } else {
         children = '';
@@ -188,7 +189,6 @@ export class PageModule extends Module {
     const { Provider } = this;
     if (!Provider) return children;
     const res = React.createElement(Provider, { app: this.app, page: this }, children);
-    console.log({res})
     return res;
   }
 }
