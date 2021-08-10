@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.103](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.102...v2.3.0-beta.103) (2021-08-10)
+
+
+### Bug Fixes
+
+* **mobx:** wrap errors in Err ([8d2729f](https://github.com/lskjs/lskjs/commit/8d2729fa5db51fd22f0d96091ce343cd59b1435c))
+
+
+
+
+
 # [2.3.0-beta.102](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.101...v2.3.0-beta.102) (2021-08-10)
 
 

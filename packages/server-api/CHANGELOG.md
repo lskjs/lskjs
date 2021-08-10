@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.103](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.102...v2.3.0-beta.103) (2021-08-10)
+
+
+### Features
+
+* **server-api:** add edit endpoint ([44b1928](https://github.com/lskjs/lskjs/commit/44b1928dbf25d0e0897a715ae9bedda91c1a0866))
+
+
+
+
+
 # [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 
