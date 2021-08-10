@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.104](https://github.com/lskjs/cli/compare/v2.3.0-beta.103...v2.3.0-beta.104) (2021-08-10)
+
+
+### Features
+
+* **mobx:** error detalization ([e2805dd](https://github.com/lskjs/cli/commit/e2805dd63b8797bc8e6ea58365d6a133001c7f59))
+
+
+
+
+
 # [2.3.0-beta.103](https://github.com/lskjs/cli/compare/v2.3.0-beta.102...v2.3.0-beta.103) (2021-08-10)
 
 
