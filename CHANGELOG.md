@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.102](https://github.com/lskjs/cli/compare/v2.3.0-beta.101...v2.3.0-beta.102) (2021-08-10)
+
+
+### Features
+
+* **fix:**  transformResponse improvement ([760a7a0](https://github.com/lskjs/cli/commit/760a7a0b02b809d356c833a031dc98661b7e560a))
+
+
+
+
+
 # [2.3.0-beta.101](https://github.com/lskjs/cli/compare/v2.3.0-beta.100...v2.3.0-beta.101) (2021-08-10)
 
 
