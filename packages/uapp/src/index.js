@@ -1,1 +1,2 @@
-export { default } from './Uapp';
+export * from './UappModule';
+export { default } from './UappModule';

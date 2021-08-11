@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
-import isObject from 'lodash/isObject';
-import isEqual from 'lodash/isEqual';
 import differenceWith from 'lodash/differenceWith';
+import isEqual from 'lodash/isEqual';
+import isObject from 'lodash/isObject';
 
 export default function antimergeDeep(a, b) {
   if (!isObject(a)) return null;
@@ -19,7 +19,7 @@ export default function antimergeDeep(a, b) {
     }
   }
   const diff = differenceWith(Object.keys(b), Object.keys(a), isEqual);
-  diff.forEach(d => {
+  diff.forEach((d) => {
     res[d] = undefined;
   });
   return res;

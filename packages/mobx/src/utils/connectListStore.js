@@ -1,14 +1,14 @@
-import { autorun, toJS } from 'mobx';
-import Promise from 'bluebird';
-import omit from 'lodash/omit';
 import getParamsFromQuery from '@lskjs/utils/getParamsFromQuery';
 import getQueryFromParams from '@lskjs/utils/getQueryFromParams';
+import Bluebird from 'bluebird';
+import omit from 'lodash/omit';
+import { autorun, toJS } from 'mobx';
 
 const DEBUG = __DEV__ && false;
 
 const omitKeys = ['filter', 'sort', 'sortBy', 'search', 'skip', 'limit'];
 
-export const defaultGetParams = store => ({
+export const defaultGetParams = (store) => ({
   filter: toJS(store.filter),
   sort: toJS(store.sort),
   limit: toJS(store.limit),
@@ -17,7 +17,11 @@ export const defaultGetParams = store => ({
 });
 
 const connectListStore = async ({
-  page, listStore, query, getParams = defaultGetParams, params: propsDefaultParams,
+  page,
+  listStore,
+  query,
+  getParams = defaultGetParams,
+  params: propsDefaultParams,
 }) => {
   const defaultParams = propsDefaultParams || getParams(listStore);
   if (DEBUG) console.log('connectListStore', query, defaultParams); // eslint-disable-line no-console
@@ -27,7 +31,7 @@ const connectListStore = async ({
     listStore.setState(queryParams);
   }
 
-  await Promise.delay(10);
+  await Bluebird.delay(10);
   // return () => {}
   const remove = autorun(async () => {
     const params = {
@@ -35,7 +39,8 @@ const connectListStore = async ({
       ...getParams(listStore),
     };
     if (DEBUG) {
-      console.log('autorun', params, defaultParams, omit(query, omitKeys), { // eslint-disable-line no-console
+      console.log('autorun', params, defaultParams, omit(query, omitKeys), {
+        // eslint-disable-line no-console
         ...omit(query, omitKeys),
       });
     }
@@ -53,7 +58,7 @@ const connectListStore = async ({
     }
 
     if (__DEV__) {
-      await Promise.delay(1000);
+      await Bluebird.delay(1000);
     }
     page.uapp.history.replace({
       search: string,
@@ -74,6 +79,5 @@ const connectListStore = async ({
 
   return removeWrapper;
 };
-
 
 export default connectListStore;

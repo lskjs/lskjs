@@ -1,6 +1,6 @@
-import undefault from './undefault';
-import isFunction from './isFunction';
 import isClass from './isClass';
+import isFunction from './isFunction';
+import undefault from './undefault';
 // import typeChecks from './typeChecks';
 // console.log('importFn2', fn, typeChecks(fn), Object.keys(fn), new String(fn), fn.name, fn.type, JSON.stringify(fn), fn.prototype, typeChecks(fn.prototype));
 

@@ -1,6 +1,6 @@
-import isPlainObject from 'lodash/isPlainObject';
 import isEmpty from 'lodash/isEmpty';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
 
 export default function getQueryFromParams(params = {}, defaultParams) {
   return Object.keys(params)
@@ -13,6 +13,6 @@ export default function getQueryFromParams(params = {}, defaultParams) {
       const val2 = typeof val === 'string' ? val : JSON.stringify(val);
       return [key, val2].join('=');
     })
-    .filter(a => a)
+    .filter((a) => a)
     .join('&');
 }

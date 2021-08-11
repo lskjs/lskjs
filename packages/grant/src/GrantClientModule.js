@@ -1,77 +1,73 @@
+// import CacheStorage from './CacheStorage';
+import Err from '@lskjs/err';
 import get from 'lodash/get';
-import forEach from 'lodash/forEach';
-import GrantModule from './GrantModule';
-import CacheStorage from './CacheStorage';
+import some from 'lodash/some';
 
-export default class GrantClientModule extends GrantModule {
-  name = 'GrantClientModule';
+import { GrantModule } from './GrantModule';
+
+const getServerApp = (app) => app && app.app && app.app.app;
+
+export class GrantClientModule extends GrantModule {
   async can(...args) {
-    const value = await super.can(...args);
-    if (value !== null) return value;
-    const params = await this.getParams(args);
-    const { action } = params;
-    // console.log('this.app.name', this.app.name);
-    // console.log('this.app.app.name', this.app.app.name);
-    // console.log('this.app.app.app.name', this.app.app.app.name);
-    if (this.app.app.app) {
-      this.log.trace(`Grant.app.app.app.grant(${action})`);
+    const result = await this.canGroup(...args);
+    // console.log()
+    const keys = Object.keys(result);
+    if (keys.length !== 1) throw new Err('grant.invalidResult');
+    return result[keys[0]];
+  }
+  async canGroup(...args) {
+    // const cache = new CacheStorage({ name: 'GrantClientModule.canGroup' });
+    const [rules, ctx] = await this.getArgs(...args);
+    // const results = await super.canGroup(rules, { ...ctx, cache });
+
+    console.log('canGroup front', { rules, ctx });
+    return this.ask({ rules });
+
+    // TODO: добавить ленивость
+    const results = await super.canGroup(rules, ctx);
+    const isHaveNull = some(results, (r) => r === null);
+    if (Object.keys(results).length === rules.length && !isHaveNull) return results;
+    // NOTE: For SSR client
+    if (getServerApp(this.app)) {
       const auth = await this.app.module('auth');
-      const grant = await this.app.app.app.module('grant');
-      if (__STAGE__ === 'isuvorov') console.log('ПЕРЕПИШИ МЕНЯ grant', ...args); // TODO: ПЕРЕПИШИ МЕНЯ
-      return grant.can(get(auth, 'store.session.user'), ...args);
+      const grant = await getServerApp(this.app).module('grant');
+      const user = get(auth, 'store.session.user');
+      return grant.canGroup(rules, { ...ctx, user });
     }
-    this.log.trace(`Grant.askServer(${action})`);
-    return this.askServer(params);
+    return this.ask({ rules });
   }
-  async canGroup(rules) {
-    const cache = new CacheStorage();
-    const data = await super.canGroup(rules, cache);
-    let isHaveNull = false;
-    forEach(data, (value) => {
-      if (value === null) {
-        isHaveNull = true;
-      }
-    });
-    if (Object.keys(data).length === rules.length && !isHaveNull) return data;
-    const params = await this.getGroupParams(rules);
-    // const { action } = params;
-    // console.log('this.app.name', this.app.name);
-    // console.log('this.app.app.name', this.app.app.name);
-    // console.log('this.app.app.app.name', this.app.app.app.name);
-    // if (this.app.app.app) {
-    //   this.log.trace(`Grant.app.app.app.grant(${action})`);
-    //   const auth = await this.app.module('auth');
-    //   const grant = await this.app.app.app.module('grant');
-    //   if (__STAGE__ === 'isuvorov') console.log('ПЕРЕПИШИ МЕНЯ grant', ...args); // TODO: ПЕРЕПИШИ МЕНЯ
-    //   return grant.can(get(auth, 'store.session.user'), ...args);
-    // }
-    // this.log.trace(`Grant.askServer(${action})`);
-    return this.askServerGroup({ data: params });
-  }
-  async askServer({ userId, user, action, ...params }) {
-    // if (this.app.app.express)
-    const { data } = await this.app.api.fetch('/api/grant/can', {
+
+  async clearCache(path) {
+    await super.init();
+    const api = await this.app.module('api');
+    const { data } = await api.fetch('/api/grant/clearCache', {
       method: 'POST',
-      data: {
-        action,
-        userId,
-        ...params,
-      },
-      body: {
-        action,
-        userId,
-        ...params,
-      },
+      data: { path },
+      body: { path },
     });
     return data;
   }
-  async askServerGroup(params) {
-    // if (this.app.app.express)
-    const { data } = await this.app.api.fetch('/api/grant/canGroup', {
+  async ask({ rules } = {}) {
+    // => []
+    if (this.debug) this.log.trace(`Grant.ask({${rules}})`);
+    const api = await this.app.module('api');
+    const {
+      data: { data },
+    } = await api.fetch('/api/grant/ask', {
       method: 'POST',
-      data: params,
-      body: params,
+      data: { rules },
+      body: { rules },
     });
     return data;
+  }
+  async anyRule(action) {
+    const res = await this.ask({ rules: [action] });
+    console.log('anyRule', action, res);
+
+    return res;
+    // this.log.debug('empty rule', action);
+    // return null;
   }
 }
+
+export default GrantClientModule;

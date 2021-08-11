@@ -1,51 +1,47 @@
 import Module from '@lskjs/module';
+import maskUriPassword from '@lskjs/utils/maskUriPassword';
+import omit from 'lodash/omit';
 import Sequelize from 'sequelize';
-import merge from 'lodash/merge';
 
 export default class SequelizeServerModule extends Module {
-  name = 'SequelizeServerModule';
-  enabled = false;
-  Sequelize = Sequelize;
-  defaultConfig = {
-    uri: '',
-    options: {
-      logging: false,
-      pool: {
-        max: 5,
-        min: 0,
-        idle: 100000,
-        acquire: 50000,
-        evict: 50000,
-        handleDisconnects: true,
-      },
+  config = {
+    dialect: 'postgres',
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 100000,
+      acquire: 50000,
+      evict: 50000,
+      handleDisconnects: true,
     },
   };
+
+  Sequelize = Sequelize;
+
+  getOptions() {
+    const options = omit(this.config, ['uri']);
+    if (options.logging == null) options.logging = !!this.debug;
+    if (options.logging) {
+      options.logging = (msg) => {
+        const msg2 = msg.split('Executing (default): ').reverse()[0];
+        this.log.trace('[sql]', msg2);
+      };
+    }
+    return options;
+  }
   async init() {
     await super.init();
-    const configSequelize = this.app.config.sequelize;
-    if (!configSequelize) {
-      this.log.warn('config.sequelize IS EMPTY');
+    if (!this.config.uri) {
+      await this.log.warn('!uri', 'ignore module');
       return;
     }
-    this.enabled = true;
-    this.config = merge(
-      {
-        options: {
-          dialect: 'postgres',
-        },
-      },
-      this.defaultConfig,
-      configSequelize,
-    );
-    this.client = new Sequelize(this.config.uri, this.config.options);
-    this.models = this.getModels();
+    const options = this.getOptions();
+    this.client = new this.Sequelize(this.config.uri, options);
     await this.client.authenticate();
   }
-  getModels() {
-    return {};
-  }
   async run() {
-    if (!this.enabled) return;
+    if (!this.client) return;
     await this.client.sync();
+    this.log.debug('[ready]', maskUriPassword(this.config.uri));
   }
 }

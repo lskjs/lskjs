@@ -3,7 +3,89 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **log2:** ts errors ([aacc289](https://github.com/lskjs/lskjs/commit/aacc2895d5cadbe69b5b766d6d11bd9ae67ad4c7))
+
+
+### Features
+
+* **log2:** improve logger and create CLI logger ([cb7c344](https://github.com/lskjs/lskjs/commit/cb7c344a97f5be4ec2bc988981f842ec3c7c4256))
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **module:** not preventing dublicate of errors ([81effc2](https://github.com/lskjs/lskjs/commit/81effc26029e82e15d095ed34e2dfb45ce1f3d24))
+
+
+
+
+
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+
+### Features
+
+* **log2:** implement req loggger and prod serialization ([c3b1656](https://github.com/lskjs/lskjs/commit/c3b165613a1bc7fad1950f9f7448518190226ba5))
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+
+### Features
+
+* **log2:** add env deps ([40742b9](https://github.com/lskjs/lskjs/commit/40742b97627ca20ef0dec29421cf16926d01f062))
+
+
+
+
+
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+
+### Bug Fixes
+
+* **log2:** one row json ([97a7939](https://github.com/lskjs/lskjs/commit/97a79399ea7d7665e15609b1ff2182efdc10c4d9))
+
+
+
+
+
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+
+### Bug Fixes
+
+* **log2:** safe stringify ([0f10c06](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/0f10c06bb269c178b17f66f547455d7fc6795299))
+
+
+
+
+
+# [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+
+### Features
+
+* **log2:** set default log format ([c9822d9](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
+
+
+
+
+
+# [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/log2
 
@@ -11,7 +93,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Bug Fixes
+
+* **err:** typings ([f23b6f1](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/f23b6f119bdce644ac3316cf76c019056ef51fce))
+
+
+### Features
+
+* **log2:** new logger behaviour ([e9216b3](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/e9216b3917bf90113e91946ca57bf135da748de6))
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/log2
 
@@ -19,9 +117,245 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.99.0](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/b3aba716c36ee27896685b645a0f77808fecba92))
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
 
 **Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Features
+
+* improve stability ([a7fc028](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/a7fc0281ee8a6f4c03b907aca6d1d5534f1149ac))
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+* **log:** improve logger ([fc3ab2e](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/fc3ab2eb984da1e3f7f898340a74c2dbbd199f41))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **log:** child logs, improve logging, add cli options ([038493f](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/038493f0ebbe8e4270fa362b034a0ecb793422f6))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Features
+
+* **log:** child logs, improve logging, add cli options ([038493f](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/038493f0ebbe8e4270fa362b034a0ecb793422f6))
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/log2
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/log2/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **log:** improve logger types ([28492d1](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/28492d1412442c7040402252b70e9d85dd52e82c))
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **module:** improve module creation and types ([713d93b](https://github.com/lskjs/lskjs/tree/master/packages/log2/commit/713d93bf4acabd89f5c320b0b7d50286a5231e8f))
+
+
+### BREAKING CHANGES
+
+* **module:** you need to replace new Module(props) to Module.create(props) construction
 
 
 

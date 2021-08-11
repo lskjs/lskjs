@@ -3,7 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.100.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.95](https://github.com/lskjs/ux/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **utils:** change interface of omit and pick ([f37766b](https://github.com/lskjs/ux/commit/f37766bfb66b350f775c1efd73345d552e9428d3))
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/ux/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **module:** not preventing dublicate of errors ([81effc2](https://github.com/lskjs/ux/commit/81effc26029e82e15d095ed34e2dfb45ce1f3d24))
+* **utils:** add getWildcardKeys ([d137f3b](https://github.com/lskjs/ux/commit/d137f3bc8511b75caeffe43016fa8ba9bcd9710e))
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/ux/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+
+### Features
+
+* **utils:** separate env package ([5a120f2](https://github.com/lskjs/ux/commit/5a120f26a00c969798c87d5e1774736de93928ce))
+
+
+
+
+
+# [2.3.0-beta.86](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Features
+
+* **err:** create err package ([8ada0c7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/8ada0c7ca5bf57b123918967df5fedc1dda18fe7))
+* **utils:** update err class ([302af1f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/302af1f75698f1a7b7e7a2b58bfc39fdec3af341))
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+
+### Bug Fixes
+
+* **proxy:** mock methods ([1ba6c8d](https://github.com/lskjs/ux/tree/master/packages/utils/commit/1ba6c8dbb5e2b677ed2d7672f26b02ce03770dd3))
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+
+### Features
+
+* **utils:** create lightweight delay ([195e309](https://github.com/lskjs/ux/tree/master/packages/utils/commit/195e3094ef344415f9364009ed39be79e060a8db))
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **utils:** export of asyncMapValues ([33b4179](https://github.com/lskjs/ux/tree/master/packages/utils/commit/33b41798353f52a31de3ac2c9825ba92f9b07443))
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
 
 **Note:** Version bump only for package @lskjs/utils
 
@@ -11,7 +90,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.3.0-beta.10](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/ux/tree/master/packages/utils/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
 
 **Note:** Version bump only for package @lskjs/utils
 
@@ -19,9 +109,311 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.99.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.3.0-beta.4](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
 
 **Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/ux/tree/master/packages/utils/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+# [2.3.0-beta.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.1-beta.2...v2.3.0-beta.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* **utils:** env bug ([85a160a](https://github.com/lskjs/ux/tree/master/packages/utils/commit/85a160a1fe83f0d7da7b819e679983d467706b10))
+
+
+### Features
+
+* **bots:** new bots router features and fx bugs ([f1e0440](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f1e04409f41d3176517d99893ad406c7d2073964))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Bug Fixes
+
+* **utils:** disable polyfill traces ([31d2402](https://github.com/lskjs/ux/tree/master/packages/utils/commit/31d2402a90fa3d965ec2482cb8cd922a2006f0b9))
+
+
+### Features
+
+* **utils:** add params notNan, improve toInt and toNumber ([a92686c](https://github.com/lskjs/ux/tree/master/packages/utils/commit/a92686cd26708311f525465df08093b7e8e02e0c))
+
+
+
+
+
+# [2.2.0-beta.20](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+
+### Bug Fixes
+
+* **utils:** more safety errors ([10ba964](https://github.com/lskjs/ux/tree/master/packages/utils/commit/10ba9648f550cab4e11573a96d25cf848df9b2fd))
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.12](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **utils:** omitNull ([c4fbe94](https://github.com/lskjs/ux/tree/master/packages/utils/commit/c4fbe942e7b23fbf87c8dde6c944164f6b5297ea))
+* **utils:** refactor env, global, polyfill ([b84b56f](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b84b56f1fc297fa6fa446d6b990eda24d48d569f))
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.2.0-beta.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+
+### Bug Fixes
+
+* **utils:** ts error ([b54bed7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/b54bed78119faf505bda3a53a8bccb9a392b296b))
+
+
+
+
+
+# [2.2.0-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+
+### Features
+
+* **utils:** add getCode and getText in Err ([80976c0](https://github.com/lskjs/ux/tree/master/packages/utils/commit/80976c008cf64827e7eb92cabd8b94676e2922d8))
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+
+### Features
+
+* **utils:** add maskUriPassword ([ead5463](https://github.com/lskjs/ux/tree/master/packages/utils/commit/ead54638f96639c38fc8ab961795f328d4284a02))
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Features
+
+* **stats:** improve stats ([77bb1f0](https://github.com/lskjs/ux/tree/master/packages/utils/commit/77bb1f09e2f972531ab4771334f2f9672e7d43d6))
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/ux/tree/master/packages/utils/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* **utils:** isFunction error ([0796e90](https://github.com/lskjs/ux/tree/master/packages/utils/commit/0796e90c9683bba3c960426ec5dceb1112c4287d))
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Bug Fixes
+
+* **utils:** add tests asyncMapValuesDeep ([ac95eb7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/ac95eb73e6f6b8b84bf6647e7347f628ddff895b))
+* **utils:** isFunction return false if it is class ([01fe461](https://github.com/lskjs/ux/tree/master/packages/utils/commit/01fe4617ddf204e2eab52b1a56bf9ef079a70b66))
+* **utils:** pass keys in context asyncMapValuesDeep ([d430f10](https://github.com/lskjs/ux/tree/master/packages/utils/commit/d430f109462fa60f47a0f554e1e5e8dec03c6c69))
+
+
+### Features
+
+* **utils:** add omit and pick ([cedd642](https://github.com/lskjs/ux/tree/master/packages/utils/commit/cedd6424dea0312e2d69d408022df82527acef9e))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Bug Fixes
+
+* **utils:** add tests asyncMapValuesDeep ([ac95eb7](https://github.com/lskjs/ux/tree/master/packages/utils/commit/ac95eb73e6f6b8b84bf6647e7347f628ddff895b))
+* **utils:** isFunction return false if it is class ([01fe461](https://github.com/lskjs/ux/tree/master/packages/utils/commit/01fe4617ddf204e2eab52b1a56bf9ef079a70b66))
+* **utils:** pass keys in context asyncMapValuesDeep ([d430f10](https://github.com/lskjs/ux/tree/master/packages/utils/commit/d430f109462fa60f47a0f554e1e5e8dec03c6c69))
+
+
+### Features
+
+* **utils:** add omit and pick ([cedd642](https://github.com/lskjs/ux/tree/master/packages/utils/commit/cedd6424dea0312e2d69d408022df82527acef9e))
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/utils
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/ux/tree/master/packages/utils/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **utils:** improve chunkBy and asyncMapValues types ([de3c95a](https://github.com/lskjs/ux/tree/master/packages/utils/commit/de3c95a2c3224a1ece423cab6a2dbb2c6c100309))
+* **utils:** ts errors ([f326c38](https://github.com/lskjs/ux/tree/master/packages/utils/commit/f326c388c36a543a617398374dc52228ef9db8f2))
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/ux/tree/master/packages/utils/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **utils:** add more tests for Err ([563d3af](https://github.com/lskjs/ux/tree/master/packages/utils/commit/563d3af982cef1ccae88ae6e0aedb673c5f7ec9c))
+* **utils:** improve arrayToObject to TS, cover tests ([4b3f454](https://github.com/lskjs/ux/tree/master/packages/utils/commit/4b3f454568fe39b8d99149f86c46adf481d8ec7d))
+* **utils:** improve Err to TS, cover tests ([e28f266](https://github.com/lskjs/ux/tree/master/packages/utils/commit/e28f266a9221d5ce10bcfba56421aa19addbb011))
+* **utils:** improve errMerge to TS, cover tests ([fd7611e](https://github.com/lskjs/ux/tree/master/packages/utils/commit/fd7611eda29b713272d35ba8b50c5d1eb117b617))
+* **utils:** improve errProps to TS, cover tests ([da9f5ee](https://github.com/lskjs/ux/tree/master/packages/utils/commit/da9f5eeb4a5f3b5bf5a58ad07fbd04a0bab996a0))
 
 
 

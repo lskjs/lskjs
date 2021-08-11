@@ -2,9 +2,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable max-classes-per-file */
 /* global test describe expect */
-import React from 'react';
-import ready from '@lskjs/utils/polyfill';
 import styled from '@emotion/styled';
+import ready from '@lskjs/utils/polyfill';
+import React from 'react';
+
 import ReactApp from '../../src/ReactApp.server';
 
 ready();

@@ -1,5 +1,6 @@
 /* global test expect */
 import get from 'lodash/get';
+
 import inc from '../src/inc';
 
 test('check 0', () => {

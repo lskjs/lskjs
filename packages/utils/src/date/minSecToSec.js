@@ -4,7 +4,7 @@
  *
  * -01:30 => -90
  */
-export default minSec => {
+export default (minSec) => {
   const [min, sec] = minSec.split(':').map(Number);
   const sign = min / Math.abs(min);
 

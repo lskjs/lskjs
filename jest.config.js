@@ -4,6 +4,7 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$|^.+\\.tsx?$': '<rootDir>/babel-jest.config.js',
   },
+  modulePathIgnorePatterns: ['build/*', 'release/*'],
   globals: {
     __DEV__: false,
   },

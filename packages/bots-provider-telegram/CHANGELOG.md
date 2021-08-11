@@ -1,0 +1,431 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix ts errors ([519f182](https://github.com/lskjs/lskjs/commit/519f1827c4138d2463e95af041a269e30ae36a1a))
+* fix ts typings ([f2dd91e](https://github.com/lskjs/lskjs/commit/f2dd91e18af18563ecf668ad48f057d588c05962))
+
+
+
+
+
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.78](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.77...v2.3.0-beta.78) (2021-07-15)
+
+
+### Features
+
+* **bots-plugin-portal:** add pinChatMessage ([1071172](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/10711725b6a28db369229e9dacb9547a0f7c4e81))
+
+
+
+
+
+# [2.3.0-beta.77](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.76...v2.3.0-beta.77) (2021-07-13)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** ignore markdown function ([87a8d0d](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/87a8d0d33f302f27bb4e71583251c8d94144e6bf))
+
+
+
+
+
+# [2.3.0-beta.75](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.74](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.73...v2.3.0-beta.74) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.73](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.72...v2.3.0-beta.73) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.72](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.71...v2.3.0-beta.72) (2021-07-08)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix sendMessage default content ([0187a08](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/0187a08b31f66fbebf9c1a1b281e4ee1d5bd9846))
+
+
+
+
+
+# [2.3.0-beta.70](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.69...v2.3.0-beta.70) (2021-07-05)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix sendMessage ([71387ba](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/71387baf6fb7657f8b7ec924091ab25a9dbbffb4))
+
+
+
+
+
+# [2.3.0-beta.67](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** findMessage args to arrays; findMessage random mode; fix repost; add criteria 'nextRoute' ([72aeb7e](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/72aeb7ef1f2d1985401357ec276da53879a088d6))
+
+
+
+
+
+# [2.3.0-beta.66](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix sendFile ([ff0db5e](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/ff0db5e8612fdfa300668689b25d41601e91fcae))
+
+
+### Features
+
+* **bots-plugin-portal:** add action messageSplit ([bd7e615](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/bd7e61560045251d33cd37458e67e7f1be2c691c))
+* **bots-plugin-portal:** add messagesJoin and sendMediaGroup ([37d85bd](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/37d85bdd3afa772eef821bc3f3a09856d313c9de))
+
+
+
+
+
+# [2.3.0-beta.62](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.61...v2.3.0-beta.62) (2021-06-19)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix likes ([6ce79b5](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/6ce79b51b93dbdc2ecb1778d3bd10b86915e1e79))
+* **bots-provider-telegram:** save message and save event ([449a4e2](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/449a4e280ae891b5fba697f4ec47db311de67750))
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.52](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.41](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.40...v2.3.0-beta.41) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.40](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.39...v2.3.0-beta.40) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.39](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.38...v2.3.0-beta.39) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix deleteMessage ([21810b4](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/21810b4ddfc645a1103fe426cd6635565652b465))
+* **bots-provider-telegram:** fix promises ([cc507b6](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/cc507b6cb3f320a5faf9c0402ba1cfd8fb05ca77))
+* **bots-provider-telegram:** replace message target to chat id ([979720f](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/979720f8932cd80c0ccd51124e1856348f2e52dd))
+
+
+### Features
+
+* **bots-plugin-portal:** add messageTrim ([e11ff8c](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/e11ff8cc8250a4ba6d12fe649ae14e0a0ac693ee))
+
+
+
+
+
+# [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add actions ([8a5e461](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/8a5e461dafcc930428bb7885212884b3dcf78e2f))
+
+
+### Features
+
+* **bots-plugin-portal:** add criteria ([fb37544](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/fb375443a250c58bccfcc7f4aa10cb18c63fe130))
+
+
+
+
+
+# [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.24...v2.3.0-beta.25) (2021-04-19)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
+
+
+### Bug Fixes
+
+* **bots-plugin-debug:** fix save chats ([fe30bc3](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/fe30bc356552cde8c428381c21cef2bdc8558556))
+
+
+
+
+
+# [2.3.0-beta.19](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.18...v2.3.0-beta.19) (2021-04-05)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.17...v2.3.0-beta.18) (2021-04-05)
+
+**Note:** Version bump only for package @lskjs/bots-provider-telegram
+
+
+
+
+
+# [2.3.0-beta.11](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots:** fix userInChat ([b0b0173](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/b0b01739148dcdc3b55549d89572951636ee30e1))
+* **bots-provider-telegram:** fix save bot's message in channel ([b9af7dc](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/b9af7dca887fa9d4a35aed3e2ef6d37bc19aaf07))
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+* **bots-plugin-portal:** groupMessages and copyMessage fix ([1b98a52](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/1b98a52765d3cccc5cc28fa5bf74531535f92df2))
+
+
+### Features
+
+* **bots:** add save chats and getUser, getUserId ([2947640](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/2947640574f16bd46f98a3751f78fca79de69c99))
+* **bots:** getChatMember, userInChat ([f697053](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/f6970539994d0e71f05217c1f0831a5ca88e3b27))
+
+
+
+
+
+# [2.3.0-beta.9](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
+
+
+### Features
+
+* **bots-provider-telegram:** add initExtra in repost ([08c5463](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/08c54637b1deced415c707e433bebbce5598e7fc))
+
+
+
+
+
+# [2.3.0-beta.8](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.7...v2.3.0-beta.8) (2021-02-23)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** target chat number id ([2bb37c5](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/2bb37c5148b7fd670a3d2bd3c4fe194769a3e5cd))
+
+
+
+
+
+# [2.3.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.6...v2.3.0-beta.7) (2021-02-23)
+
+
+### Features
+
+* add new event types, add repost for channel_post ([2ba7a5c](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/2ba7a5c6f5db584d679912e0dfef9ac2cb948c59))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-telegram/commit/b3aba716c36ee27896685b645a0f77808fecba92))

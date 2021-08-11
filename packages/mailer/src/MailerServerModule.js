@@ -1,26 +1,19 @@
 import Module from '@lskjs/module';
+import Err from '@lskjs/utils/Err';
+import Bluebird from 'bluebird';
 import get from 'lodash/get';
-import Promise from 'bluebird';
 import nodemailer from 'nodemailer';
 import inlineCss from 'nodemailer-juice';
-import config from './config';
+
+import defaultTemplates from './templates';
 
 export default class MailerServerModule extends Module {
-  name = 'MailerServerModule';
   getTemplates() {
-    return require('./templates').default;
+    return defaultTemplates;
   }
 
   async init() {
     await super.init();
-    this.config = {
-      ...config,
-      ...get(this, 'app.config.mailer', {}),
-    };
-    if (!this.config) {
-      this.log.warn('config.mailer IS EMPTY');
-      return;
-    }
     this.templates = this.getTemplates();
     this.transporter = this.getTransporter();
   }
@@ -28,7 +21,7 @@ export default class MailerServerModule extends Module {
   getTransporter() {
     if (this.config && this.config.transport) {
       const transport = nodemailer.createTransport(this.config.transport);
-      return Promise.promisifyAll(transport);
+      return Bluebird.promisifyAll(transport);
     }
     return null;
   }
@@ -97,9 +90,9 @@ export default class MailerServerModule extends Module {
 
   renderTemplate(params) {
     const { template, props = {}, ...otherProps } = params;
-    if (!template) throw this.app.e('mailer.!template');
+    if (!template) throw new Err('mailer.!template');
     const Template = this.templates[template];
-    if (!Template) throw this.app.e('mailer.!Template', { template });
+    if (!Template) throw new Err('mailer.!Template', { template });
     // eslint-disable-next-line no-shadow
     const config = this.getTemplateConfig();
     const email = new Template({
@@ -122,10 +115,10 @@ export default class MailerServerModule extends Module {
   }
   async send(props) {
     const { to, cc, bcc, template, ...otherProps } = props;
-    if (!this.canSend(to)) throw this.app.e('mailer.canSend');
-    if (!to) throw this.app.e('mailer.!to');
+    if (!this.canSend(to)) throw new Err('mailer.canSend');
+    if (!to) throw new Err('mailer.!to');
     const options = this.renderTemplate({ template, ...otherProps });
-    this.log.trace(`mailer.send [${template}] => ${[to, cc, bcc].filter(Boolean).join(',')}`);
+    this.log.trace(`send [${template}] => ${[to, cc, bcc].filter(Boolean).join(',')}`);
     return this.transporter.sendMail({
       to,
       cc,
@@ -136,10 +129,10 @@ export default class MailerServerModule extends Module {
 
   async sendTo(params1 = {}, params2 = {}) {
     const { User: UserModel } = this.app.models;
-    if (!params1.user && !params1.userId) throw this.app.e('mailer.!userId');
+    if (!params1.user && !params1.userId) throw new Err('mailer.!userId');
 
     const user = params1.user || (await UserModel.findById(params1.userId));
-    if (!user) throw this.app.e('mailer.!user');
+    if (!user) throw new Err('mailer.!user');
     const userParams = this.getUserParams(user);
     const props = {
       me: user,

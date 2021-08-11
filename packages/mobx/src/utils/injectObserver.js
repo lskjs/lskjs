@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
 import pick from 'lodash/pick';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 
 export default (fields, creator) => {
   @inject(...fields)

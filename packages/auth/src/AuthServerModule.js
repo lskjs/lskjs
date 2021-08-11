@@ -1,45 +1,18 @@
 /* eslint-disable global-require */
-import get from 'lodash/get';
-import forEach from 'lodash/forEach';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import importFn from '@lskjs/utils/importFn';
+import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import { Passport } from 'passport';
+
+import strategies from './strategies';
 import createHelpers from './utils/createHelpers';
 
 export default class AuthServerModule extends Module {
-  name = 'AuthServerModule';
-  constructor(props) {
-    super(props);
-    this.config = get(this, 'app.config.auth', {});
-    // console.log(123123);
-    // try {
-    this.helpers = createHelpers({ app: this.app }); // TODO: потом надо будет по другому кидать app, а еще лучше вообще не кидать
-    // } catch (err) {
-    //   console.error({ err });
-    // }
-    // console.log(3435345);
-  }
-  // initOnlineService() {
-  //   this.online = onlineService;
-  //   this.online.save = async (_id, visitedAt) => {
-  //     // console.log('this.online.save', _id, visitedAt);
-  //     const { User: UserModel } = this.models;
-  //     await UserModel.update({ _id }, { visitedAt });
-  //   };
-  //   // setInterval(() => {
-  //   //   console.log('online users', this.online.count());
-  //   // }, 10000);
-  //   this.middlewares.parseUser = [
-  //     this.middlewares.parseUser,
-  //     (req, res, next) => {
-  //       if (req.user && req.user._id && !req.headers.offline) {
-  //         this.online.touchOnline(req.user._id);
-  //       }
-  //       next();
-  //     },
-  //   ];
-  // }
   getStrategies() {
-    return require('./strategies').default(this);
+    return strategies;
   }
   getPassportStrategy(passport) {
     const strategy = this.strategies[passport.provider];
@@ -63,16 +36,10 @@ export default class AuthServerModule extends Module {
   }
   async init() {
     await super.init();
-    if (!this.config) {
-      this.app.log.warn('config.auth is missing');
-      this.config = {};
-    }
-
-    // if (this.config.telegram) {
-    //   this.tbot = require('./tbot').default(this, this);
-    // }
     if (!this.config.socials) this.config.socials = {};
-    this.models = this.getModels();
+    // this.models = this.getModels();
+
+    this.helpers = createHelpers({ app: this.app }); // TODO: потом надо будет по другому кидать app, а еще лучше вообще не кидать
 
     this.strategyProviders = this.getStrategies();
     this.strategies = {};
@@ -81,9 +48,9 @@ export default class AuthServerModule extends Module {
     const providers = get(this, 'config.providers', {});
     // console.log({ providers });
 
-    forEach(providers, (config) => {
+    await asyncMapValues(providers, async (config) => {
       const { provider, type, ...strategyConfig } = config;
-      const StrategyProvider = this.strategyProviders[type];
+      const StrategyProvider = await importFn(this.strategyProviders[type]);
       if (!StrategyProvider) return;
       const strategy = new StrategyProvider({
         parent: this,
@@ -101,9 +68,9 @@ export default class AuthServerModule extends Module {
   async getAuthSession(req) {
     const userId = req.user && req.user._id;
     if (!userId) return {};
-    const { UserModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
     const user = await UserModel.findOne({ _id: userId });
-    if (!user) throw this.app.e('auth.userNotFound', { status: 404 });
+    if (!user) throw new Err('auth.userNotFound', { status: 404 });
     const token = this.helpers.generateAuthToken(user);
     return {
       // api

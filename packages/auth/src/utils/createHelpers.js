@@ -1,12 +1,12 @@
 // import Api from './BaseApi';
 import bcrypt from 'bcryptjs';
-import Promise from 'bluebird';
-import get from 'lodash/get';
+import Bluebird from 'bluebird';
 import jwt from 'jsonwebtoken';
+import get from 'lodash/get';
 
-const bcryptGenSalt = Promise.promisify(bcrypt.genSalt);
-const bcryptHash = Promise.promisify(bcrypt.hash);
-const bcryptCompare = Promise.promisify(bcrypt.compare);
+const bcryptGenSalt = Bluebird.promisify(bcrypt.genSalt);
+const bcryptHash = Bluebird.promisify(bcrypt.hash);
+const bcryptCompare = Bluebird.promisify(bcrypt.compare);
 
 const SALT_WORK_FACTOR = 10;
 async function hashPassword(password) {

@@ -1,11 +1,12 @@
 /* eslint-disable max-classes-per-file */
-import { observable, action } from 'mobx';
-import forEach from 'lodash/forEach';
 import Api from '@lskjs/mobx/stores/Api';
 import Store from '@lskjs/mobx/stores/Store';
+import forEach from 'lodash/forEach';
+import { action, observable } from 'mobx';
 
 export class AuthApi extends Api {
   base = '/api/auth';
+
   login(data) {
     return this.fetch(`${this.base}/login`, {
       method: 'POST',
@@ -148,5 +149,10 @@ export default (uapp) =>
       this.sessions = this.sessions.filter((s) => s._id !== this.session._id);
       // eslint-disable-next-line prefer-destructuring
       this.session = this.sessions[0];
+    }
+
+    async getProviders() {
+      const { data } = await this.constructor.api.getInfo();
+      return data.providers || [];
     }
   };

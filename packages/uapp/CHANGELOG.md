@@ -3,61 +3,579 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.101.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.101.0...v1.101.1) (2021-05-12)
-
-
-### Bug Fixes
-
-* **uapp:** undefined param object ([0836e31](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/0836e31ddbfbee9723ce6af2ac44068c4e10d1ca))
-
-
-
-
-
-# [1.101.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.100.2...v1.101.0) (2021-05-12)
-
-
-### Bug Fixes
-
-* **uapp:** meta title without extra dashes ([5707c4f](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/5707c4fbdbe222525bf3ce4a193a0908c6465f6c))
-
-
-
-
-
-## [1.100.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.100.1...v1.100.2) (2021-02-24)
-
-
-### Bug Fixes
-
-* **uapp:** resolve events with argumets ([3551e90](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/3551e90fddf1e2fba3a93122cd6abd1cdb8e6263))
-
-
-
-
-
-## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.99.1...v1.100.1) (2021-02-02)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-## [1.99.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.99.0...v1.99.1) (2021-02-02)
-
-**Note:** Version bump only for package @lskjs/uapp
-
-
-
-
-
-# [1.99.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.3.0-beta.101](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.100...v2.3.0-beta.101) (2021-08-10)
 
 
 ### Features
 
-* **uapp:** dynamically meta with meta.observe support ([16a23e1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/16a23e1f12b0f859fbfef26e9a26ca1f381ca935))
+* **mobx:** add transformResponse ([d5c5606](https://github.com/lskjs/lskjs/commit/d5c560622d6d177bac2c2f7fb652ff282aa49cc4))
+
+
+
+
+
+# [2.3.0-beta.100](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.99...v2.3.0-beta.100) (2021-08-10)
+
+
+### Bug Fixes
+
+* **uapp:** remove logs ([fc5c5da](https://github.com/lskjs/lskjs/commit/fc5c5dae011e22ecdfae5838cc146fc96a4971d8))
+
+
+
+
+
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Bug Fixes
+
+* **uapp:** provide correct providers returb ([1a7d0bf](https://github.com/lskjs/lskjs/commit/1a7d0bf374b05529d481156799da5326f86d9ed1))
+
+
+
+
+
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* fix ts typings ([f2dd91e](https://github.com/lskjs/lskjs/commit/f2dd91e18af18563ecf668ad48f057d588c05962))
+
+
+
+
+
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.63](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.62...v2.3.0-beta.63) (2021-06-21)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.52](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.50](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
+
+
+### Bug Fixes
+
+* **server-api:** updates ([7d63096](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/7d6309621983ffa5189bba722cb1fefa11a8273e))
+
+
+
+
+
+# [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+
+### Bug Fixes
+
+* **uapp:** server side render ([b27d029](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/b27d0298bcc746ad0a6deaeb807b7a6d0dfeb55b))
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.24...v2.3.0-beta.25) (2021-04-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.11](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
+
+
+### Bug Fixes
+
+* **uapp:** remove checkVersion while error ([76a14ac](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/76a14ac82a9c43b90d82886b790b36182101700b))
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/b3aba716c36ee27896685b645a0f77808fecba92))
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+# [2.3.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.1-beta.2...v2.3.0-beta.0) (2021-02-18)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.19](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.17...v2.2.0-beta.19) (2021-02-02)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.17](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** deep dependency injection bugs, cover tests ([adc1da1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/adc1da196ab2c6a65572762579e302985237bbee))
+* **uapp:** some fixes ([366d51b](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/366d51b2cd70e316d45f098e95be4f243d4aef1e))
+
+
+
+
+
+# [2.2.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+
+### Features
+
+* **uapp:** collection items module concept ([de0f899](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/de0f8994739b121b05d3ae813758eb8801914cc1))
+
+
+
+
+
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **uapp:** migrate uapp to v2 ([42eb155](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/42eb155c07cece432201bd7efe1a733fca274b93))
+
+
+
+
+
+# [2.2.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+
+### Bug Fixes
+
+* **uapp:** fix bugs ([8666853](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/8666853418fdc931e689a3eac959019a0b1bc5e3))
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.1.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Bug Fixes
+
+* **uapp:** fix uapp bugs ([3401e45](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/3401e45ac2b9533801b32a5404669a0cedd0ba88))
+* **uapp:** ts errors ([545e595](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/545e595077cd4393985c9b03bdeac707ac86ecfb))
+
+
+### Features
+
+* **uapp:** add safe mobx-react ([e79cdcc](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/e79cdccd2bbbed72631cde3e973fcc2ab9449526))
+
+
+
+
+
+# [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.1.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/uapp/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/lskjs/tree/master/packages/uapp/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
 
 
 

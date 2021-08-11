@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash/isPlainObject';
+
 import Api from './Api';
 
 export default class CrudApi extends Api {

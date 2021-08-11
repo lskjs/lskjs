@@ -1,20 +1,20 @@
-import serializeWindow from '@lskjs/utils/serializeWindow';
 import flattenKeys from '@lskjs/utils/flattenKeys';
 import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
+import serializeWindow from '@lskjs/utils/serializeWindow';
 import isPlainObject from 'lodash/isPlainObject';
 import pickBy from 'lodash/pickBy';
-import awaitHealthchecks from './awaitHealthcheck';
+
 import Api from './Api';
+import awaitHealthchecks from './utils/awaitHealthcheck';
 
 export default class IndexApi extends Api {
-  path = '/api';
   async healthcheck(req) {
     if (!this.app) return awaitHealthchecks({ healthcheck: null });
     if (this.app.healthcheck) return awaitHealthchecks({ healthcheck: await this.app.healthcheck(req) });
     if (this.app.healthchecks) return awaitHealthchecks(this.app.healthchecks(req));
     return awaitHealthchecks({ healthcheck: null });
   }
-  getRoutesList(tree = false) {
+  __getRoutesList(tree = false) {
     if (tree) {
       return mapValuesDeep(
         this.getRoutes(),
@@ -31,24 +31,36 @@ export default class IndexApi extends Api {
       url,
     };
     if (__DEV__) {
-      res.routes = this.getRoutesList(true);
+      res.routes = this.__getRoutesList(true);
     }
     return res;
   }
   env(req) {
-    return this.app.getEnv(req);
+    return {
+      __ROOT_STATE__: {
+        token: req.token,
+        user: req.user,
+        req: {
+          token: req.token,
+          user: req.user,
+        },
+        config: this.app.config.client || {},
+      },
+      __DEV__,
+      __STAGE__: global.__STAGE__,
+    };
   }
   envjs(req, res) {
-    return res.send(serializeWindow(this.app.getEnv(req)));
+    return res.send(serializeWindow(this.env(req)));
   }
-  async getRoutes() {
+  getRoutes() {
     return {
-      ...(await super.getRoutes()),
-      '/': ::this.index,
-      '/env': ::this.env,
-      '/env.json': ::this.env,
-      '/env.js': ::this.envjs,
-      '/healthcheck': ::this.healthcheck,
+      ...super.getRoutes(),
+      '/': this.index.bind(this),
+      '/env': this.env.bind(this),
+      '/env.json': this.env.bind(this),
+      '/env.js': this.envjs.bind(this),
+      '/healthcheck': this.healthcheck.bind(this),
     };
   }
 }

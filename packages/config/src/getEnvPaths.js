@@ -1,8 +1,8 @@
 /* eslint-disable global-require */
-import range from 'lodash/range';
-import flattenDeep from 'lodash/flattenDeep';
-import path from 'path';
 import fs from 'fs';
+import flattenDeep from 'lodash/flattenDeep';
+import range from 'lodash/range';
+import path from 'path';
 
 export default (params = {}) => {
   const { cwd = process.cwd(), dirs = 3, exts = ['.js', '.json'], name = '.env' } = params;

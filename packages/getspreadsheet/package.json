@@ -1,41 +1,33 @@
 {
   "name": "@lskjs/getspreadsheet",
-  "version": "1.101.0",
+  "version": "2.3.0-beta.98",
   "description": "LSK getspreadsheet.",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
   "keywords": [],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "bin": {
+    "getspreadsheet": "./bin/getspreadsheet.js"
+  },
   "scripts": {
-    "start": "../../scripts/package-start.sh",
-    "dev": "npm run watch",
-    "dev:server": "../../scripts/package-dev-server.sh",
-    "dev:cra": "../../scripts/package-dev-cra.sh",
-    "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",
-    "postversion": "npm run release",
-    "lint:js": "../../scripts/package-lint-js.sh",
-    "bootstrap": "../../scripts/package-bootstrap.sh",
-    "bootstrap:nodemodules": "../../scripts/package-bootstrap-nodemodules.sh",
-    "update": "../../scripts/package-update.sh",
-    "build": "../../scripts/package-build.sh",
-    "watch": "../../scripts/package-watch.sh",
-    "link": "../../scripts/package-link.sh",
-    "link:me": "../../scripts/package-link-me.sh",
-    "link:all": "../../scripts/package-link-all.sh",
-    "bump": "../../scripts/package-bump.sh",
-    "release": "../../scripts/package-release.sh",
-    "release:docs": "../../scripts/package-release-docs.sh",
-    "storybook": "../../scripts/package-storybook.sh",
-    "styleguide": "../../scripts/package-styleguide.sh",
-    "i18": "../../scripts/package-i18.sh",
-    "clear": "../../scripts/package-clear.sh"
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
+    "watch": "lsk run watch"
   },
   "dependencies": {
-    "@babel/runtime": "7.9.6",
-    "axios": "0.19.2",
+    "@babel/runtime": "7.12.5",
+    "@lskjs/utils": "2.3.0-beta.95",
+    "axios": "0.21.1",
     "bluebird": "3.7.2",
     "commander": "5.1.0",
     "csv-parse": "4.9.0",
@@ -43,7 +35,15 @@
     "googleapis": "47.0.0",
     "lodash": "4.17.19"
   },
-  "bin": {
-    "getspreadsheet": "./bin/getspreadsheet.js"
+  "devDependencies": {
+    "bluebird": "3.7.2",
+    "javascript-stringify": "^2.1.0",
+    "js-yaml": "^4.1.0",
+    "lodash": "4.17.20"
+  },
+  "peerDependencies": {
+    "axios": "0.21.1",
+    "bluebird": "*",
+    "lodash": "^4.17.20"
   }
 }

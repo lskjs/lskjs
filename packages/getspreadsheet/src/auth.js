@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import fs from 'fs';
-import readline from 'readline';
 import { google } from 'googleapis';
+import readline from 'readline';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
 const TOKEN_PATH = 'token.json';
@@ -16,13 +16,13 @@ function getNewToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: ', code => {
+  rl.question('Enter the code from that page here: ', (code) => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error('Error while trying to retrieve access token', err);
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
+      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
         if (err) return console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
@@ -49,7 +49,7 @@ function authorize(credentials, callback) {
   });
 }
 
-module.exports = callback =>
+module.exports = (callback) =>
   new Promise((res, rej) => {
     fs.readFile('client_id.json', (err, content) => {
       if (err) return rej(err);

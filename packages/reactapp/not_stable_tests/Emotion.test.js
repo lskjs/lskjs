@@ -2,12 +2,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable max-classes-per-file */
 /* global test describe expect */
-import React from 'react';
-import styled from '@emotion/styled';
-import { CacheProvider } from '@emotion/core';
-import { renderToString } from 'react-dom/server';
-import createEmotionServer from 'create-emotion-server';
 import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/core';
+import styled from '@emotion/styled';
+import createEmotionServer from 'create-emotion-server';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
 
 const MyDiv = styled('div')({ fontSize: 12 });
 const App = () => <MyDiv>Text2</MyDiv>;

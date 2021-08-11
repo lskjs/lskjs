@@ -1,10 +1,11 @@
-import Promise from 'bluebird';
-import { observable, action } from 'mobx';
-import axios from 'axios';
+import Err from '@lskjs/err';
 import omitEmpty from '@lskjs/utils/omitEmpty';
+import axios from 'axios';
+import Bluebird from 'bluebird';
+import { action, observable } from 'mobx';
 
-import Store from './Store';
 import { getFindParams } from './FetchStore';
+import Store from './Store';
 
 const { CancelToken } = axios;
 
@@ -15,10 +16,9 @@ export default class EntityStore extends Store {
   @observable filter = {};
   __cancelToken = null;
 
-
   async findOne({ __cancelToken } = {}) {
-    if (!this.api) throw '!api';
-    if (!this.api.find) throw '!api.find';
+    if (!this.api) throw new Err('!api');
+    if (!this.api.find) throw new Err('!api.find');
     let params = getFindParams(this);
     if (this.getFindParams) params = this.getFindParams(this, params);
     const raw = await this.api.findOne({
@@ -56,6 +56,6 @@ export default class EntityStore extends Store {
     this.loading = false;
     if (this.progress) this.progress.done();
     await this.__cancelToken.cancel('fetch canceled');
-    await Promise.delay(10);
+    await Bluebird.delay(10);
   }
 }

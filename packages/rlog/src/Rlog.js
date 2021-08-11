@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
+import Err from '@lskjs/utils/Err';
 import axios from 'axios';
 
 const clogs = {
@@ -54,7 +55,7 @@ const checkLimits = (stats, limits) => {
 
   const checks = Object.keys(sizes)
     .reverse()
-    .map(name => {
+    .map((name) => {
       const size = sizes[name];
       if (!stats[name]) stats[name] = {};
       return checkLimit(stats[name], limits[name], size);
@@ -75,7 +76,7 @@ const checkLimits = (stats, limits) => {
 //   }
 // }
 
-class Rlog {
+export class Rlog {
   base = '';
   prefix = '';
   project = '';
@@ -110,10 +111,10 @@ class Rlog {
       return null;
     }
 
-    const tags = (params.tags || []).map(t => (['#', '@'].includes(t[0]) ? '' : `#${t}`)).join(' ');
+    const tags = (params.tags || []).map((t) => (['#', '@'].includes(t[0]) ? '' : `#${t}`)).join(' ');
     const errText = params.err;
 
-    const md = `${status}  ${prefix} ${[text, errText].filter(a => a).join('\n')}\n\n${tags}`.trim();
+    const md = `${status}  ${prefix} ${[text, errText].filter((a) => a).join('\n')}\n\n${tags}`.trim();
     clog(md);
 
     const url = [base, project].join('/');
@@ -127,8 +128,8 @@ class Rlog {
         text: md,
         tags: params.tags,
       })
-      .catch(err => {
-        console.error(`Rlog.${action} error: ${String(err.code)}`);
+      .catch((err) => {
+        console.error(`Rlog.${action} error: ${Err.getCode(err)}`);
         return null;
       });
   }

@@ -1,5 +1,3 @@
-
-
 export default (objectOrString) => {
   if (typeof objectOrString === 'string') return { message: objectOrString };
   return {

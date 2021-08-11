@@ -33,7 +33,7 @@ test('flattenKeys 3', () => {
   };
   const res = ['a', 'b/c', 'b/d'];
 
-  expect(flattenKeys(obj, [], a => a.join('/'))).toStrictEqual(res);
+  expect(flattenKeys(obj, [], (a) => a.join('/'))).toStrictEqual(res);
 });
 test('flattenKeys 4', () => {
   const obj = {
@@ -45,7 +45,7 @@ test('flattenKeys 4', () => {
   };
   const res = [['a'], ['b', 'c'], ['b', 'd']];
 
-  expect(flattenKeys(obj, [], a => [a])).toStrictEqual(res);
+  expect(flattenKeys(obj, [], (a) => [a])).toStrictEqual(res);
 });
 // test('flattenKeys Boolean', () => {
 //   const obj = {

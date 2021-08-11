@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 /* global test describe expect */
 import ready from '@lskjs/utils/polyfill';
+
 import ReactApp from '../src/ReactApp.server';
 
 ready();
@@ -62,10 +63,10 @@ class Uapp {
 }
 
 const createResChecker = ({ status: expectStatus, html: expectHtml }) => ({
-  status: status => {
+  status: (status) => {
     expect(status).toBe(expectStatus);
     return {
-      send: html => {
+      send: (html) => {
         expect(html).toBe(expectHtml);
       },
     };

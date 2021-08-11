@@ -1,7 +1,18 @@
 import deepAssign from './deepAssign';
 
 export default (grid) => {
-  var cols, headers, index, j, k, key, len, len1, object, objects, rows, value;
+  let cols;
+  let headers;
+  let index;
+  let j;
+  let k;
+  let key;
+  let len;
+  let len1;
+  let object;
+  let objects;
+  let rows;
+  let value;
   headers = grid[0];
   rows = grid.slice(1);
   objects = [];
@@ -12,7 +23,7 @@ export default (grid) => {
       value = cols[index];
       key = headers[index];
       if (typeof key !== 'string') {
-        console.log('WARNING! No "key" on row=', j + 2, ' col=', index + 1, ' (start with 1)')
+        console.log('WARNING! No "key" on row=', j + 2, ' col=', index + 1, ' (start with 1)');
         key = '';
       }
       deepAssign(object, key, value);

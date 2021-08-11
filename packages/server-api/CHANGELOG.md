@@ -3,7 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.103](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.102...v2.3.0-beta.103) (2021-08-10)
+
+
+### Features
+
+* **server-api:** add edit endpoint ([44b1928](https://github.com/lskjs/lskjs/commit/44b1928dbf25d0e0897a715ae9bedda91c1a0866))
+
+
+
+
+
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Features
+
+* **server-api:** improve ListApi ([fe66941](https://github.com/lskjs/lskjs/commit/fe669417f278791d3f79abb1b4311e8064ef82ed))
+
+
+
+
+
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Features
+
+* **server-api:** refactor isAdmin and isAuth Api methods ([8fb7b0c](https://github.com/lskjs/lskjs/commit/8fb7b0cd2ba562ecbb7194b76fd067f528fe22d7))
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
 
 **Note:** Version bump only for package @lskjs/server-api
 
@@ -11,7 +44,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+
+### Features
+
+* **server-api:** add async routes in TestApi ([3232b5d](https://github.com/lskjs/lskjs/commit/3232b5d4f5bb1765b6e4e759a372312fc2790b06))
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/server-api
 
@@ -19,9 +63,362 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.99.0](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.85](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.84...v2.3.0-beta.85) (2021-07-23)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.84](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.83...v2.3.0-beta.84) (2021-07-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** graylog formats ([a9b9a78](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/a9b9a7847a401ba90faa16c9d2dabe1c6122ac6e))
+
+
+
+
+
+# [2.3.0-beta.83](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.82...v2.3.0-beta.83) (2021-07-22)
+
+
+### Bug Fixes
+
+* **server-api:** fix binding ([3f9b4b4](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/3f9b4b49251c08270b31cb0ee5457439f709df7d))
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.50](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
+
+
+### Bug Fixes
+
+* **server-api:** updates ([7d63096](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/7d6309621983ffa5189bba722cb1fefa11a8273e))
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+
+### Features
+
+* **server:** remove webserver from server and move to separate package ([0eae044](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/0eae044402ddebe4baaf0b121439d142b9098db4))
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Features
+
+* improve stability ([a7fc028](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/a7fc0281ee8a6f4c03b907aca6d1d5534f1149ac))
+
+
+
+
+
+# [2.1.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **module,server,server-api:** module lifecycles bugs ([a40a58b](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/a40a58b7931ce4a8c48eb17d450dc3c3bea938b0))
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* **server:** fix bugs ([857cc86](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/857cc8640dbb15d93f4291e310561b02caca2ff0))
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **server-api:** migrate Api to Module, new workflow, improve getRoutes ([8a8059b](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/8a8059bb9025a70fd1ff709ea1690a674647ff1d))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Features
+
+* **server-api:** migrate Api to Module, new workflow, improve getRoutes ([8a8059b](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/8a8059bb9025a70fd1ff709ea1690a674647ff1d))
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/server-api
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/server-api/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/lskjs/tree/master/packages/server-api/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
 
 
 

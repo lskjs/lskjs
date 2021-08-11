@@ -1,20 +1,29 @@
-import { Mutex } from 'async-mutex';
-import Promise from 'bluebird';
+import { Mutex } from '@lskjs/mutex';
+import { delay } from '@lskjs/utils/delay';
+import { getWildcardKeys } from '@lskjs/utils/getWildcardKeys';
 
 export default class CacheStorage {
   data = {};
   mutexes = {};
-  // constructor() {
-  //   this.initialDate = Date.now();
-  // }
-  async cache(key, value) {
-    // if (value instanceof Promise) {
-    //   return value;
-    // } else if (typeof value === 'function') {
-    //   return value();
-    // } else {
-    //   return value;
-    // }
+  constructor(props = {}) {
+    Object.assign(this, props);
+  }
+  clearCache(keyOrKeys) {
+    if (typeof keyOrKeys === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      keyOrKeys = [keyOrKeys];
+    }
+    getWildcardKeys(Object.keys(this.data), keyOrKeys).forEach((key) => {
+      delete this.data[key];
+    });
+  }
+  fork(props = {}) {
+    return {
+      cache: (a, b) => this.cache(a, b, props),
+    };
+  }
+  async cache(initKey, value, { prefix } = {}) {
+    const key = [prefix, initKey].filter(Boolean).join('.');
     if (this.data[key]) return this.data[key];
     if (!this.mutexes[key]) {
       this.mutexes[key] = new Mutex();
@@ -30,7 +39,7 @@ export default class CacheStorage {
       return this.data[key];
     }
     if (this.mutexes[key].isLocked()) {
-      await Promise.delay(100);
+      await delay(100);
       return this.cache(key, value);
     }
     return this.data[key];

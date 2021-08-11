@@ -1,32 +1,21 @@
-import Promise from 'bluebird';
-import Api from '@lskjs/server-api';
+import Err from '@lskjs/err';
+import ListApi from '@lskjs/server-api/ListApi';
+import Bluebird from 'bluebird';
 
-export default class PermitApi extends Api {
-  getRoutes() {
-    return {
-      '/list': ::this.find,
-      '/find': ::this.find,
-      '/count': ::this.count,
-      '/get': ::this.findOne,
-      '/findOne': ::this.findOne,
-    };
-  }
-  isAdmin(req) {
-    return req.user && req.user.role === 'admin';
-  }
+export default class PermitApi extends ListApi {
   async count(req) {
-    await this.isAdmin(req);
-    const { PermitModel } = this.app.models;
-    return this.cache(['permit/count', req.data], () => PermitModel.countByParams(req.data));
+    // await this.checkAdmin(req);
+    const PermitModel = await this.app.module('models.PermitModel');
+    return this.cache(['permit/count', req.data], () => this.countByParams(PermitModel, req.data));
   }
   async find(req) {
-    await this.isAdmin(req);
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
+    // await this.checkAdmin(req);
     const params = await this.getListParams(req);
     return this.cache(['permit/find', params], async () => {
-      let items = await PermitModel.findByParams(params);
+      let items = await this.findByParams(PermitModel, params);
       items = await PermitModel.prepare(items, { req, ...params });
-      return Promise.props({
+      return Bluebird.props({
         data: items,
         count: PermitModel.countDocuments(params.filter),
         __pack: 1,
@@ -34,15 +23,15 @@ export default class PermitApi extends Api {
     });
   }
   async findOne(req) {
-    const { PermitModel } = this.app.models;
+    const PermitModel = await this.app.module('models.PermitModel');
     return this.cache(['permit/findOne', req.data], async () => {
       const { _id, code } = req.data;
-      if (!_id) throw this.e(404, '!_id');
+      if (!_id) throw new Err('!_id', { status: 404 });
       const item = await PermitModel.findById(_id);
-      if (!item) throw this.e(404, '!item');
+      if (!item) throw new Err('!item', { status: 404 });
       if (!(this.isAdmin(req) || String(req.user && req.user._id) === item.userId)) {
         if (String(code) !== String(item.code)) {
-          throw code ? this.e(403, 'permit.incorrectCode') : this.e(403, '!owner');
+          throw code ? new Err('permit.incorrectCode', { status: 403 }) : new Err('!owner', { status: 403 });
         }
       }
       return PermitModel.prepare(item, { req, method: 'findOne' });

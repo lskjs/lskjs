@@ -1,5 +1,3 @@
 import EventModule from './EventModule';
 
-export default class EventServerModule extends EventModule {
-  name = 'EventServerModule';
-}
+export default class EventServerModule extends EventModule {}

@@ -1,0 +1,33 @@
+{
+  "name": "@lskjs/err",
+  "version": "2.3.0-beta.94",
+  "description": "LSK.js – err – Error class and utils for custom code and message extracting",
+  "keywords": [],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/err",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "main": "index",
+  "typings": "index",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "lodash": "4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.14.171"
+  },
+  "_type": "module"
+}

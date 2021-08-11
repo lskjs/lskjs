@@ -1,8 +1,12 @@
-export default (...args) => ({
-  BotsBotModel: require('./BotsBotModel').default(...args),
-  BotsMenuModel: require('./BotsMenuModel').default(...args),
-  BotsEventModel: require('./BotsEventModel').default(...args),
-  BotsTelegramMessageModel: require('./BotsTelegramMessageModel').default(...args),
-  BotsTelegramChatModel: require('./BotsTelegramChatModel').default(...args),
-  BotsTelegramUserModel: require('./BotsTelegramUserModel').default(...args),
-});
+export default {
+  BotsBotModel: () => import('./BotsBotModel'),
+  BotsMenuModel: () => import('./BotsMenuModel'),
+  BotsEventModel: () => import('./BotsEventModel'),
+  BotsTelegramMessageModel: () => import('./BotsTelegramMessageModel'),
+  BotsTelegramImpressionModel: () => import('./BotsTelegramImpressionModel'),
+  BotsTelegramPortalRulesModel: () => import('./BotsTelegramPortalRulesModel'),
+  BotsTelegramChatModel: () => import('./BotsTelegramChatModel'),
+  BotsTelegramUserModel: () => import('./BotsTelegramUserModel'),
+  BotsUserDataModel: () => import('./BotsUserDataModel'),
+  BotsTelegramUserStorageModel: () => import('./BotsTelegramUserStorageModel'),
+};

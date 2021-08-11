@@ -1,4 +1,4 @@
-import TeleSignSDK from 'telesignsdk';
+import TeleSignSDK from 'telesignsdk'; // npm audit error
 
 const TIMEOUT = 10 * 1000; // 10 secs
 const MESSAGE_TYPE = 'ARN';
@@ -21,15 +21,25 @@ export default (config = {}, log) => {
     }
     return new Promise((resolve, reject) => {
       if (type === 'voice' || type === 'phone') {
-        client.voice.call((err, data) => {
-          if (err) return reject(err);
-          return resolve(data);
-        }, phone, text, config.messageType || MESSAGE_TYPE);
+        client.voice.call(
+          (err, data) => {
+            if (err) return reject(err);
+            return resolve(data);
+          },
+          phone,
+          text,
+          config.messageType || MESSAGE_TYPE,
+        );
       } else {
-        client.sms.message((err, data) => {
-          if (err) return reject(err);
-          return resolve(data);
-        }, phone, text, config.messageType || MESSAGE_TYPE);
+        client.sms.message(
+          (err, data) => {
+            if (err) return reject(err);
+            return resolve(data);
+          },
+          phone,
+          text,
+          config.messageType || MESSAGE_TYPE,
+        );
       }
     });
   };

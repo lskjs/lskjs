@@ -1,1 +1,2 @@
-export { default } from './Page';
+export * from './PageModule';
+export { default } from './PageModule';

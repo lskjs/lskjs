@@ -1,13 +1,7 @@
 {
   "name": "@lskjs/auth",
-  "version": "1.100.1",
-  "description": "LSK module for auth.",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
+  "version": "2.3.0-beta.103",
+  "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
   "keywords": [
     "auth",
     "oAuth",
@@ -17,70 +11,63 @@
     "vk",
     "vkontakte"
   ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
-    "start": "../../scripts/package-start.sh",
-    "dev": "npm run watch",
-    "dev:server": "../../scripts/package-dev-server.sh",
-    "dev:cra": "../../scripts/package-dev-cra.sh",
-    "dev:cra-and-server": "../../scripts/package-dev-cra-and-server.sh",
-    "postversion": "npm run release",
-    "lint:js": "../../scripts/package-lint-js.sh",
-    "bootstrap": "../../scripts/package-bootstrap.sh",
-    "bootstrap:nodemodules": "../../scripts/package-bootstrap-nodemodules.sh",
-    "update": "../../scripts/package-update.sh",
-    "build": "../../scripts/package-build.sh",
-    "watch": "../../scripts/package-watch.sh",
-    "link": "../../scripts/package-link.sh",
-    "link:me": "../../scripts/package-link-me.sh",
-    "link:all": "../../scripts/package-link-all.sh",
-    "bump": "../../scripts/package-bump.sh",
-    "release": "../../scripts/package-release.sh",
-    "release:docs": "../../scripts/package-release-docs.sh",
-    "storybook": "../../scripts/package-storybook.sh",
-    "styleguide": "../../scripts/package-styleguide.sh",
-    "i18": "../../scripts/package-i18.sh",
-    "clear": "../../scripts/package-clear.sh"
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
+    "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/module": "2.3.0-beta.99",
+    "@lskjs/utils": "2.3.0-beta.95",
     "bcryptjs": "2.4.3",
-    "isomorphic-fetch": "2.2.1",
     "jsonwebtoken": "8.5.1",
     "passport": "0.4.1",
-    "passport-facebook": "3.0.0",
-    "passport-telegram-official": "1.1.0",
-    "passport-vkontakte": "0.3.2",
-    "passport-youtube-v3": "2.1.0",
-    "qs": "6.9.1",
-    "validator": "12.2.0"
+    "qs": "6.9.4",
+    "validator": "13.5.2"
   },
   "devDependencies": {
-    "@lskjs/apiquery": "1.99.1",
-    "@lskjs/db": "1.99.1",
-    "@lskjs/mobx": "1.99.1",
-    "@lskjs/module": "1.78.0",
-    "@lskjs/server-api": "1.99.1",
-    "@lskjs/utils": "1.99.1",
-    "axios": "0.19.2",
+    "@lskjs/db": "2.3.0-beta.92",
+    "@lskjs/mobx": "2.2.0-beta.5",
+    "@lskjs/server-api": "2.3.0-beta.103",
+    "axios": "0.21.1",
     "bluebird": "3.7.2",
     "js-cookie": "2.2.1",
-    "lodash": "4.17.19",
+    "lodash": "4.17.20",
     "mobx": "5.15.4",
-    "node-accountkit": "1.1.6"
+    "node-accountkit": "1.1.6",
+    "passport-facebook": "3.0.0",
+    "passport-telegram-official": "1.1.0",
+    "passport-vkontakte": "0.5.0",
+    "passport-youtube-v3": "2.1.0"
   },
   "peerDependencies": {
-    "@lskjs/apiquery": "*",
     "@lskjs/db": "*",
     "@lskjs/mobx": "*",
-    "@lskjs/module": "*",
     "@lskjs/server-api": "*",
-    "@lskjs/utils": "*",
     "axios": "*",
     "bluebird": "*",
     "js-cookie": "*",
     "lodash": "*",
     "mobx": "*"
   },
-  "optionalDependencies": {
-    "node-accountkit": "*"
+  "optionalDeps": {
+    "node-accountkit": "*",
+    "passport-facebook": "*",
+    "passport-telegram-official": "*",
+    "passport-vkontakte": "*",
+    "passport-youtube-v3": "*"
   }
 }

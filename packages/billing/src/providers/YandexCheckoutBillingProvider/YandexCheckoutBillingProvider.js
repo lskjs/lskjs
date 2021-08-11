@@ -1,4 +1,5 @@
 import createClient from 'yandex-checkout';
+
 import BillingProvider from '../BillingProvider';
 
 /**

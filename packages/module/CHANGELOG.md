@@ -3,18 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.102.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.101.1...v1.102.0) (2021-08-06)
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 
 ### Features
 
-* **module:** module1 to module2 conector ([e47c82e](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/e47c82e5e6ffde21820bab3fb7084733d82e50dc))
+* **module:** more error detalization ([c813480](https://github.com/lskjs/lskjs/commit/c813480cbc2e6e6c2c32f4b51f11fa0c252233bc))
 
 
 
 
 
-## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Features
+
+* **module:** improve logger ([ec36ae4](https://github.com/lskjs/lskjs/commit/ec36ae4b3e1ca3752bf8feb0c3103580b8e7506b))
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **module:** not preventing dublicate of errors ([81effc2](https://github.com/lskjs/lskjs/commit/81effc26029e82e15d095ed34e2dfb45ce1f3d24))
+
+
+
+
+
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/module
 
@@ -22,7 +44,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/module
 
@@ -30,9 +52,542 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.99.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
 
 **Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.52](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
+
+
+### Bug Fixes
+
+* **module:** fix bugs, add tests ([dbd06da](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/dbd06da55fffa8a41c855378564c9096677c51fe))
+
+
+
+
+
+# [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+
+### Features
+
+* **module:** safe module create and safe module start ([3ade5c6](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/3ade5c681563c76af2c532a1861309dab52ea260))
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
+
+
+### Bug Fixes
+
+* **module:** hot fix mutexRelease ([773f06d](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/773f06df96891a58bc058845e9f60aa2c9f481d0))
+
+
+
+
+
+# [2.3.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.24...v2.3.0-beta.25) (2021-04-19)
+
+
+### Features
+
+* **module:** parallel module mutex locks ([b7b5e97](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b7b5e97f34b1e485319bb16a9218bb25f68b98e3))
+
+
+
+
+
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+
+### Features
+
+* **module:** prevent parallel injecting ([2d7f213](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/2d7f21348a86308feb069a2660982b2800db1e65))
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b3aba716c36ee27896685b645a0f77808fecba92))
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Features
+
+* **module:** improve asyncItems ([853dbad](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/853dbad35739150866811a541d70a400378dbd3f))
+
+
+
+
+
+# [2.2.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.19](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.17...v2.2.0-beta.19) (2021-02-02)
+
+
+### Bug Fixes
+
+* **module:** asyncItems bugs ([553c08c](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/553c08c607afd1beba8ac91f0f44a1a3d43b0c19))
+
+
+### Features
+
+* **module:** create asyncItems ([b2525c1](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b2525c13a85c90d85338643f9dbbcd7b02c5f40d))
+
+
+
+
+
+# [2.2.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-02-01)
+
+
+### Features
+
+* **module:** create asyncItems ([b2525c1](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b2525c13a85c90d85338643f9dbbcd7b02c5f40d))
+
+
+
+
+
+# [2.2.0-beta.17](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** deep dependency injection bugs, cover tests ([adc1da1](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/adc1da196ab2c6a65572762579e302985237bbee))
+* **uapp:** some fixes ([366d51b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/366d51b2cd70e316d45f098e95be4f243d4aef1e))
+
+
+
+
+
+# [2.2.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** fix inject cache ([64104ef](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/64104ef9903227d863eaa80d37d16bfb60ddf2e1))
+
+
+
+
+
+# [2.2.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
+
+
+### Features
+
+* **module:** creation of object ([0d59e77](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/0d59e77e308ad8f5405364999e9fc261cf53f319))
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Features
+
+* **module:** new features of deep module injection ([cc8b0f9](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/cc8b0f95d5f77c8245ff03aebc6d802aaf2267ec))
+
+
+
+
+
+# [2.2.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
+
+
+### Features
+
+* **module:** improve stabilty while lifecycle ([8673019](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/8673019c524401a426975a2f50be290ce54bb92d))
+
+
+
+
+
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Features
+
+* **model:** increase stability for working with module v1 ([1b492e4](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/1b492e40cdb9f74ce6d526a97f3f0b76afd5ff0b))
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Features
+
+* **module:** improve ts types ([c080815](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/c08081503c287848d7c63a16c5991bd7d3836f83))
+
+
+
+
+
+# [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+
+### Features
+
+* **module:** create start workflow ([60fc0ea](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/60fc0ea5c6900dc5fcf97a79e0a7ba22611035e8))
+
+
+
+
+
+# [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.1.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2021-01-18)
+
+
+### Features
+
+* **rabbit:** create rabbit module ([646706f](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/646706fef94dba6a20ba5f14774e8bb230ec3d1d))
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Bug Fixes
+
+* **module:** ts errors ([7477bbf](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/7477bbf06da24bddc60f5218804072175e47e530))
+
+
+### Features
+
+* **module:** add hadModule method ([b639f0b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/b639f0b1728f2cf6a556a58818baa007a2f559f7))
+
+
+
+
+
+# [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
+
+
+### Bug Fixes
+
+* **bots:** fix ee and add telegram trace logs ([cf3e14b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/cf3e14b346e3f6e2f1aea222a49df228df23f060))
+
+
+
+
+
+# [2.1.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **module,server,server-api:** module lifecycles bugs ([a40a58b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/a40a58b7931ce4a8c48eb17d450dc3c3bea938b0))
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+* **module:** remove v1, rename workflow to lifecycle ([8e7b19c](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/8e7b19c0042923e58acacf599a94adcd0e5a60ad))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+
+### Bug Fixes
+
+* **db:** types errors ([c0d2d38](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/c0d2d383b345738d6ae927068e9f518503888d1b))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Features
+
+* **module:** stable workflow, typings, add tests ([39bb765](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/39bb765c846f8a92e7e474805fd094c73186ffdf))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Features
+
+* **module:** stable workflow, typings, add tests ([39bb765](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/39bb765c846f8a92e7e474805fd094c73186ffdf))
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/module
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/module/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **module:** create and createAndRun bugs ([2e4be34](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/2e4be342f9863c4950a85a4cafb00cf85bdf3114))
+
+
+### Features
+
+* **module:** add create and createAndRun, add tests ([c36ab1d](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/c36ab1d33995a470dd98df3b2b27e7786272462e))
+* **module:** improve module creation and types ([713d93b](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/713d93bf4acabd89f5c320b0b7d50286a5231e8f))
+* **module:** improve module types ([9fcc15e](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/9fcc15e97c2e933873f345afa682a93c09740103))
+* **module:** improve TS, and workflow ([259b54a](https://github.com/lskjs/lskjs/tree/master/packages/module/commit/259b54a8057682ab05aa71365753c989ce338f4a))
+
+
+### BREAKING CHANGES
+
+* **module:** you need to replace new Module(props) to Module.create(props) construction
 
 
 

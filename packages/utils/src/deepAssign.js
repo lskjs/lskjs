@@ -1,5 +1,6 @@
 export default (object, key, value) => {
-  var index, prefix;
+  let index;
+  let prefix;
   key = key.replace(/]/g, '');
   while (true) {
     index = key.search(/\.|\[/g);
@@ -17,5 +18,5 @@ export default (object, key, value) => {
     key = key.substr(index + 1);
     object = object[prefix];
   }
-  return object[key] = value;
+  return (object[key] = value);
 };

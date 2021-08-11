@@ -1,7 +1,8 @@
 /* global test expect */
-import pickBy from 'lodash/pickBy';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
+import pickBy from 'lodash/pickBy';
+
 import asyncMapValuesDeep from '../src/asyncMapValuesDeep';
 
 test('asyncMapValuesDeep Boolean', async () => {
@@ -112,4 +113,70 @@ test('asyncMapValuesDeep extract function deep', async () => {
   }
 
   expect(await asyncMapValuesDeep(input, deepMap)).toStrictEqual(output);
+});
+
+test('asyncMapValuesDeep key and context', async () => {
+  const obj = {
+    a: {
+      b: 1,
+      c: {
+        d: 2,
+        e: false,
+      },
+    },
+    f: 3,
+  };
+  const res = {
+    a: {
+      b: true,
+      c: {
+        d: true,
+        e: false,
+      },
+    },
+    f: true,
+  };
+  const iterations = [
+    {
+      context: {
+        keys: ['a', 'b'],
+      },
+      key: 'b',
+      value: 1,
+    },
+    {
+      context: {
+        keys: ['a', 'c', 'd'],
+      },
+      key: 'd',
+      value: 2,
+    },
+    {
+      context: {
+        keys: ['a', 'c', 'e'],
+      },
+      key: 'e',
+      value: false,
+    },
+    {
+      context: {
+        keys: ['f'],
+      },
+      key: 'f',
+      value: 3,
+    },
+  ];
+
+  const realIterations = [];
+  const realRes = await asyncMapValuesDeep(obj, (value, key, context) => {
+    realIterations.push({
+      value,
+      key,
+      context,
+    });
+    return Boolean(value);
+  });
+
+  expect(realRes).toStrictEqual(res);
+  expect(realIterations).toStrictEqual(iterations);
 });

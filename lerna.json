@@ -1,29 +1,17 @@
 {
-  "version": "1.102.0",
+  "version": "2.4.0",
   "packages": [
     "packages/*"
   ],
   "command": {
-    "create": {
-      "homepage": "https://github.com/lskjs/lskjs",
-      "license": "MIT"
-    },
     "version": {
       "allowBranch": [
         "master",
-        "legacy"
+        "beta"
       ],
-      "conventionalCommits": true,
-      "message": "chore(release): %s"
-    },
-    "version2": {
-      "allowBranch": [
-        "master",
-        "legacy"
-      ],
-      "conventionalCommits": true,
       "exact": true,
-      "gitRemote": "upstream",
+      "conventionalCommits": true,
+      "conventionalPrerelease": false,
       "message": "chore(release): %s"
     },
     "publish": {

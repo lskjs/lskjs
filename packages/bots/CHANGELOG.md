@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 **Note:** Version bump only for package @lskjs/bots
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
 
 **Note:** Version bump only for package @lskjs/bots
 
@@ -19,9 +19,767 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.99.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix ts errors ([cbbe925](https://github.com/lskjs/lskjs/commit/cbbe9250ce699ef345c10eeb3fe0df6695eee7ed))
+
+
+
+
+
+# [2.3.0-beta.92](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.90](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.89](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.88](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.87](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Bug Fixes
+
+* **bots:** update readme ([eef3bc1](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/eef3bc1a62d8486863a4d85d82d138bd8eb87704))
+
+
+
+
+
+# [2.3.0-beta.75](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.74](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.73...v2.3.0-beta.74) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.73](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.72...v2.3.0-beta.73) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.72](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.71...v2.3.0-beta.72) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.71](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.70...v2.3.0-beta.71) (2021-07-07)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.70](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.69...v2.3.0-beta.70) (2021-07-05)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix answer action ([d6c355f](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/d6c355f1b8660efffe63399c2342bc0b63453f91))
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.55](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.54...v2.3.0-beta.55) (2021-06-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.54](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.53...v2.3.0-beta.54) (2021-06-14)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.53](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.52...v2.3.0-beta.53) (2021-06-11)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.52](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.51](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.49](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.41](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.40...v2.3.0-beta.41) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.40](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.39...v2.3.0-beta.40) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.39](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.38...v2.3.0-beta.39) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.38](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Features
+
+* **bots:** add model BotsTelegramUserStorageModel ([00b3105](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/00b3105393523249b5a702dd0c0599212c35212c))
+
+
+
+
+
+# [2.3.0-beta.35](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
+
+
+### Bug Fixes
+
+* **bots:** remove logs ([e53bfac](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/e53bfaccf17411ef2e61c476ae4069e6fac6e5f0))
+
+
+### Features
+
+* **bots:** merge configs ([2e97eea](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/2e97eea537cbc9e74634c8215775e23031bab824))
+
+
+
+
+
+# [2.3.0-beta.33](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.32...v2.3.0-beta.33) (2021-04-26)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add new ActionModule and ActionChain ([b81437f](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/b81437f7b712bf09ba2ba9e5a4de7995fca5b3a4))
+
+
+
+
+
+# [2.3.0-beta.31](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Features
+
+* **bots-plugin-portal:** add criteria ([fb37544](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/fb375443a250c58bccfcc7f4aa10cb18c63fe130))
+
+
+
+
+
+# [2.3.0-beta.28](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.27...v2.3.0-beta.28) (2021-04-20)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.24...v2.3.0-beta.25) (2021-04-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.20...v2.3.0-beta.21) (2021-04-06)
+
+
+### Features
+
+* **bots-plugin-portal:** add spread extension ([03f3536](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/03f3536966159cca8a4415f41dda149f220691d9))
+
+
+
+
+
+# [2.3.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.19](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.18...v2.3.0-beta.19) (2021-04-05)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.17...v2.3.0-beta.18) (2021-04-05)
+
+
+### Bug Fixes
+
+* **bots:** fix timestamps ([ad5ace1](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/ad5ace1d9def184c146ed2727ce88394370bb7bb))
+* **bots:** fix timestamps ([dbe2729](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/dbe272922875f21313fc5e8e348dc2b8353a7f51))
+* **bots-plugin-portal:** fix delay ([13dc8b4](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/13dc8b420c6d11516cfc9227f1fe9580a918c711))
+
+
+
+
+
+# [2.3.0-beta.14](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.13...v2.3.0-beta.14) (2021-03-31)
+
+
+### Features
+
+* **bots:** add answer button and dialog-mode ([e41b8be](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/e41b8bec49b2fe07cdf6005330a272ed89ed5cfa))
+* **bots-plugin-portal:** antispam ([09bb44b](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/09bb44b37a895489c20c6679198f198597397cd9))
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* **bots:** add impression model, fix likes/disslikes ([80a7d8d](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/80a7d8d3cfeaec481eeb145eb9ce93b077fbc839))
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+### Features
+
+* **bots:** add bots-plugin-likes and edit BotsTelegramMessageModel ([e4cd966](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/e4cd9663df719f621d04b921225645f48d80473b))
+* **bots:** add ref and locale from startPayload ([2abae68](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/2abae68a978a04e5a48fa2cd38d243fa1b61a487))
+
+
+
+
+
+# [2.3.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.5...v2.3.0-beta.6) (2021-02-21)
+
+
+### Bug Fixes
+
+* forget bots-router ([2b5ec65](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/2b5ec65b42027a02786132fbf174939b53ac1b26))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/b3aba716c36ee27896685b645a0f77808fecba92))
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+# [2.3.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.1-beta.2...v2.3.0-beta.0) (2021-02-18)
+
+
+### Features
+
+* **bots:** new bots router features and fx bugs ([f1e0440](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/f1e04409f41d3176517d99893ad406c7d2073964))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.20](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.19](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.17...v2.2.0-beta.19) (2021-02-02)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.18](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.17](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.16](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.15](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.14](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.12](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+
+### Bug Fixes
+
+* **bots:** v4 migration bugs ([66171a9](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/66171a93b34d2490bb70537f1e034f1d81afe9e1))
+
+
+### Features
+
+* **bots:** migrate to telegraf 4 ([dcb535a](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/dcb535a50af0c2e76b0102f34acea772ce38b25b))
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Bug Fixes
+
+* **bots:** fix empty router bug and channel_post event ([4ab0ac8](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/4ab0ac8bc7d76f8e31770dedf816436ffa1e415a))
+
+
+### Features
+
+* **bots:** improve ts types ([11a1d8a](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/11a1d8a5e6a2e78370dfe7e350f4ae0f6d341ba2))
+
+
+
+
+
+# [2.2.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.1.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.1.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
+
+
+### Bug Fixes
+
+* **bots:** fix ee and add telegram trace logs ([cf3e14b](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/cf3e14b346e3f6e2f1aea222a49df228df23f060))
+
+
+
+
+
+# [2.1.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **bots:** model in MenuPlugin bugs ([3688ecb](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/3688ecbed4320ef9e56e3ebf1a046a284d4874ed))
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* **bots:** fix bugs ([b785bb6](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/b785bb6d6498ee1fc2c104fdc8ad4ba8803b810c))
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/bots
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/bots/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **bots:** improve type checks ([3935d3e](https://github.com/lskjs/lskjs/tree/master/packages/bots/commit/3935d3eae4f411497f576dbf5080ed3c48fe21dd))
 
 
 

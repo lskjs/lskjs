@@ -1,6 +1,7 @@
 import Bluebird from 'bluebird';
-import isPlainObject from 'lodash/isPlainObject';
 import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
+
 import asyncMapValues from './asyncMapValues';
 
 const DEBUG = false;
@@ -15,7 +16,7 @@ export default async function asyncMapValuesDeep(value, map, reduce = (a) => a, 
   } else if (isArray(value)) {
     mapValue = await Bluebird.map(value, (v, k) => asyncMapValuesDeep(v, map, reduce, [...keys, k]));
   } else {
-    mapValue = await map(value);
+    mapValue = await map(value, keys[keys.length - 1], { keys });
   }
   const reduceValue = await reduce(mapValue);
   // eslint-disable-next-line no-console

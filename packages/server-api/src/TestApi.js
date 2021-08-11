@@ -1,8 +1,21 @@
 /* eslint-disable global-require */
-import errMerge from '@lskjs/utils/errMerge';
-import e from '@lskjs/utils/e';
+// import collectConfigs from '@lskjs/module/utils/collectConfigs';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/utils/Err';
+import Bluebird from 'bluebird';
+
 import Api from './Api';
+
+export const collectConfigs = async (m) => ({
+  config: m.config,
+  modules: await asyncMapValues(m.__availableModules, async (_, name) => collectConfigs(await m.module(name))),
+});
+
+export const collectConfigsLog = async (m) => ({
+  debug: m.config.debug,
+  log: m.config.log,
+  modules: await asyncMapValues(m.__availableModules, async (_, name) => collectConfigsLog(await m.module(name))),
+});
 
 const middleware = (req, res, next) => {
   req.file = '[some-file]';
@@ -17,6 +30,7 @@ const middleware = (req, res, next) => {
 export default class TestApi extends Api {
   getRoutes() {
     return {
+      ...super.getRoutes(),
       '/middleware/1': async (req, res) => {
         await this.useMiddleware(middleware, req, res);
         console.log('req.file', req.file);
@@ -31,13 +45,13 @@ export default class TestApi extends Api {
       ],
       '/res/1': () => 123,
       '/res/2': () => 'Hello',
-      '/res/3': () => () => {},
-      '/res/4': () => new Error('Test'),
-      '/res/5': () => ({ test: 123 }),
-      '/res/6': () => [1, 2, 3, 4],
-      '/res/7': () => true,
-      '/res/8': () => null,
-      '/res/9': () => undefined,
+      '/res/3': (req, res) => res.send('Hello'),
+      '/res/4': () => ({ test: 123 }),
+      '/res/5': () => [1, 2, 3, 4],
+      '/res/6': () => true,
+      '/res/7': () => null,
+      '/res/8': () => undefined,
+      '/res/9': () => () => {},
       '/res/10': () => /[0-9]ig/,
       '/res/11': () => ({ __raw: '<html />' }),
       '/res/12': () => ({ __pack: true, some: 123, help: 'me' }),
@@ -46,71 +60,133 @@ export default class TestApi extends Api {
           const secret = 123;
           return secret;
         },
+      '/async/ok': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        return { delay };
+      },
+      '/async/err': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        throw new Err('ERR_QWE', { delay });
+      },
+      '/async/404': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        throw new Err('ERR_QWE', { delay, status: 404 });
+      },
+      '/async/502': async () => {
+        const delay = 5000;
+        await Bluebird.delay(delay);
+        throw new Err('ERR_QWE', { delay, status: 502 });
+      },
       '/err/1': () => {
-        throw 'ERROR_CODE';
+        throw 'TEST_ERROR_CODE';
       },
       '/err/2': () => {
-        throw { code: 'ERROR_CODE', message: 'The message text' };
+        throw { code: 'TEST_ERROR_CODE', message: 'The message text' };
       },
       '/err/3': () => {
-        throw this.app.e('ERROR_CODE', { message: 'The message text' });
+        throw new Error('The message text');
       },
       '/err/4': () => {
-        throw this.app.e('ERROR_CODE', { message: 'The message text' }, { status: 404 });
+        throw new Error('TEST_ERROR_CODE');
       },
       '/err/5': () => {
-        throw this.app.e({ code: 'ERROR_CODE', message: 'The message text' }, { status: 404 });
+        const error = new Error('The message text');
+        error.code = 'TEST_ERROR_CODE';
+        throw new Error('The message text');
       },
       '/err/6': () => {
-        throw this.app.e('some.error', { status: 404 });
+        throw {};
       },
       '/err/7': () => {
-        throw new Error('err', 'file', 123);
-      },
-      '/err/8': () => {
-        throw errMerge({ code: 'ERROR_CODE', message: 'The message text' }, { status: 404 });
-      },
-      '/err/9': () => {
-        throw e({ code: 'ERROR_CODE', message: 'The message text' }, { status: 404 });
+        throw null;
       },
       '/err/10': () => {
-        throw new Err({ code: 'ERROR_CODE', message: 'The message text' }, { status: 404 });
+        throw new Err();
       },
       '/err/11': () => {
-        throw errMerge('user.notFound', { status: 404 });
+        throw new Err('TEST_ERROR_CODE');
       },
       '/err/12': () => {
-        throw this.e('some.error', { status: 404 });
+        throw new Err('TEST_ERROR_CODE', { message: 'The message text' });
       },
       '/err/13': () => {
-        throw e('some.error', { status: 404 });
+        throw new Err('TEST_ERROR_CODE', { message: 'The message text' }, { status: 404 });
       },
       '/err/14': () => {
-        throw e('validate.error', { status: 400, data: { errors: [1, 2, 3] } });
+        throw new Err({ code: 'TEST_ERROR_CODE', message: 'The message text' }, { status: 404 });
       },
-      '/err/15': (req) => {
-        // const err = new Err('code');
-        // console.log('err)', err);
-        // console.log('err.code', err.code);
-        // console.log('err.message', err.message);
-        // console.log('err', JSON.stringify(err));
-        // const err2 = new Err('validate.error', { status: 400, data: { errors: [1, 2, 3] } });
-        // console.log('err2)', err2);
-        // console.log('err2.code', err2.code);
-        // console.log('err2.message', err2.message);
-        // console.log('err2', JSON.stringify(err2));
-        // req.e = e.bind(req);
-        throw req.e('validate.error', { status: 400, data: { errors: [1, 2, 3] } });
+      '/err/15': () => {
+        throw new Err('test.someError', { status: 404 });
+      },
+      '/err/16': () => {
+        throw new Err('test.anotherError', { status: 404, data: { hello: 'world' } });
+      },
+      '/err/17': () => {
+        throw new Error('err', 'file', 123);
+      },
+      '/err/18': () => {
+        throw new Err({ code: 'TEST_ERROR_CODE', message: 'The message text' }, { status: 404 });
+      },
+      '/err/19': () => {
+        throw new Err({ code: 'TEST_ERROR_CODE', message: 'The message text' }, { status: 404 });
+      },
+      '/err/20': () => {
+        throw new Err({ code: 'TEST_ERROR_CODE', message: 'The message text' }, { status: 404 });
+      },
+      '/err/21': () => {
+        throw new Err('user.notFound', { status: 404 });
+      },
+      '/err/22': () => {
+        throw new Err('some.error', { status: 404 });
+      },
+      '/err/24': () => {
+        throw new Err('some.error', { status: 404 });
       },
       '/form': (req) => {
         const { email, password } = req.data;
-        if (email !== 'password') throw req.e('auth.passwordInvalud', { status: 400, data: { password } });
-        if (email !== 'test@coder24.ru') throw req.e('auth.emailInvalud', { status: 400, data: { email } });
+        if (password !== 'password') throw new Err('auth.passwordInvalud', { status: 400, data: { password } });
+        if (email !== 'test@coder24.ru') throw new Err('auth.emailInvalud', { status: 400, data: { email } });
         return { ok: 123 };
       },
       '/locale': (req) => {
-        return { locale: req.getLocale(), test: req.t('test.test') };
+        this.log.trace('locale start');
+        // console.log('getLocale', req.getLocale);
+        return { locale: req.getLocale(), test: req.t('test.hello') };
       },
+      '/app/config': () => collectConfigs(this.app),
+      '/app/config/log': () => collectConfigsLog(this.app),
+      '/req/auth': async (req) => req.user,
+      '/req/user': async (req) => req.user,
+      '/req/userId': async (req) => req.userId || (req.user && req.user_id),
+      '/req/:log?': this.req.bind(this),
+      '/user/one': async () => {
+        const { UserModel } = this.app;
+        const user = await UserModel.findOne();
+        return user;
+        // return collectConfigsLog(this.app);
+      },
+      '/path/*': () => ({
+        path: this.path,
+        paths: this.paths,
+      }),
     };
+  }
+
+  req(req) {
+    const res = {
+      params: req.params,
+      query: req.query,
+      headers: req.headers,
+    };
+    if (req.params.log) {
+      this.log.info('req', res);
+      res.body = req.body;
+      this.log.info('body', req.body);
+    }
+
+    return res;
   }
 }

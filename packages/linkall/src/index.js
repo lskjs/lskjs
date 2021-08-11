@@ -1,14 +1,15 @@
 #! /usr/bin/env node
+import { exec, spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { exec, spawn } from 'child_process';
 
 const currentPath = process.cwd();
 const pkgPath = path.join(currentPath, 'package.json');
 
-const execAsync = (cmd, opts = {}) => new Promise((resolve) => {
-  exec(cmd, opts, (error, stdout) => resolve(stdout));
-});
+const execAsync = (cmd, opts = {}) =>
+  new Promise((resolve) => {
+    exec(cmd, opts, (error, stdout) => resolve(stdout));
+  });
 const DEBUG = false;
 
 async function start(pkg) {
@@ -27,12 +28,14 @@ async function start(pkg) {
   result = result.replace(/UNMET PEER DEPENDENCY /gi, '');
   result = result.split(/\r?\n/);
   result.splice(0, 1);
-  const globalModules = result.filter(module => module.includes('->')).map((module) => {
-    const atIndex = module.lastIndexOf('@');
-    return module.slice(0, atIndex);
-  });
+  const globalModules = result
+    .filter((module) => module.includes('->'))
+    .map((module) => {
+      const atIndex = module.lastIndexOf('@');
+      return module.slice(0, atIndex);
+    });
   if (DEBUG) console.log('all-links in global', globalModules);
-  const matchedPackages = allPkgs.filter(item => globalModules.includes(item));
+  const matchedPackages = allPkgs.filter((item) => globalModules.includes(item));
   if (matchedPackages.length > 0) {
     console.log(`exec npm link ${matchedPackages.join(' ')}`);
     const install = spawn(`npm link ${matchedPackages.join(' ')}`, { shell: true });

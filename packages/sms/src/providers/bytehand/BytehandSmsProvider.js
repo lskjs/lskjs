@@ -1,5 +1,6 @@
-import axios from 'axios';
 import Err from '@lskjs/utils/Err';
+import axios from 'axios';
+
 import SmsProvider from '../SmsProvider';
 
 /**
@@ -9,7 +10,6 @@ import SmsProvider from '../SmsProvider';
 const BASE = 'https://api.bytehand.com/v2';
 
 export default class BytehandSmsProvider extends SmsProvider {
-  name = 'bytehand';
   getSender(props) {
     return super.getSender(props) || 'SMS-INFO';
   }

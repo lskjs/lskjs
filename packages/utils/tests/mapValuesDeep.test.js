@@ -1,7 +1,8 @@
 /* global test expect */
-import pickBy from 'lodash/pickBy';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
+import pickBy from 'lodash/pickBy';
+
 import mapValuesDeep from '../src/mapValuesDeep';
 
 test('mapValuesDeep Boolean', () => {

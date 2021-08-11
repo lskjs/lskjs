@@ -1,0 +1,50 @@
+{
+  "name": "@lskjs/bots-base",
+  "version": "2.3.0-beta.99",
+  "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
+  "keywords": [
+    "telegram",
+    "slack",
+    "discord",
+    "whatsapp",
+    "twitter",
+    "instagram",
+    "vkontakte",
+    "vk",
+    "chatbot",
+    "bot",
+    "base"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/bots-base",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "main": "index",
+  "typings": "types",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "@lskjs/module": "2.3.0-beta.99",
+    "@lskjs/utils": "2.3.0-beta.95"
+  },
+  "devDependencies": {
+    "lodash": "4.17.20",
+    "telegraf": "4.1.0"
+  },
+  "peerDependencies": {
+    "lodash": "4.17.20",
+    "telegraf": "4.1.0"
+  }
+}

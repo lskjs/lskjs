@@ -1,9 +1,10 @@
-import set from 'lodash/set';
-import Promise from 'bluebird';
-import { observable, action } from 'mobx';
-import axios from 'axios';
-import omitEmpty from '@lskjs/utils/omitEmpty';
+import Err from '@lskjs/err';
 import insertArray from '@lskjs/utils/insertArray';
+import omitEmpty from '@lskjs/utils/omitEmpty';
+import axios from 'axios';
+import Promise from 'bluebird';
+import set from 'lodash/set';
+import { action, observable } from 'mobx';
 
 import Store from './Store';
 
@@ -38,8 +39,8 @@ export default class FetchStore extends Store {
   }
 
   async find({ skip, limit, __cancelToken } = {}) {
-    if (!this.api) throw '!api';
-    if (!this.api.find) throw '!api.find';
+    if (!this.api) throw new Err('!api');
+    if (!this.api.find) throw new Err('!api.find');
     let params = getFindParams(this);
     if (this.getFindParams) params = this.getFindParams(this, params);
     const raw = await this.api.find({

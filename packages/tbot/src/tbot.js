@@ -1,7 +1,7 @@
+import Promise from 'bluebird';
 import flattenDeep from 'lodash/flattenDeep';
 import get from 'lodash/get';
 import uniq from 'lodash/uniq';
-import Promise from 'bluebird';
 
 const DEBUG = __DEV__;
 
@@ -37,7 +37,7 @@ export default ({ config }) => {
     if (!Array.isArray(ids)) {
       ids = [ids];
     }
-    return uniq(ids.filter(a => a));
+    return uniq(ids.filter((a) => a));
   }
 
   let tbot;
@@ -57,7 +57,9 @@ export default ({ config }) => {
       const debugIds = getIds('debug');
       debugIds.forEach((id) => {
         try {
-          tbot.sendMessage(id, `#debug ${args[0]} => ${JSON.stringify(ids)}\n\n${text}`).catch((err) => { console.log('tbot.sendMessage err', err); }); // eslint-disable-line no-console
+          tbot.sendMessage(id, `#debug ${args[0]} => ${JSON.stringify(ids)}\n\n${text}`).catch((err) => {
+            console.log('tbot.sendMessage err', err);
+          }); // eslint-disable-line no-console
         } catch (err) {
           if (DEBUG) console.error('tbot.sendMessage err', err); // eslint-disable-line no-console
         }
@@ -65,7 +67,9 @@ export default ({ config }) => {
       ids.forEach((id) => {
         try {
           // console.log('this.tbot.sendMessage', id);
-          tbot.sendMessage(id, text).catch((err) => { console.log('tbot.sendMessage err', err); }); // eslint-disable-line no-console
+          tbot.sendMessage(id, text).catch((err) => {
+            console.log('tbot.sendMessage err', err);
+          }); // eslint-disable-line no-console
         } catch (err) {
           if (DEBUG) console.error('tbot.sendMessage err', err); // eslint-disable-line no-console
         }

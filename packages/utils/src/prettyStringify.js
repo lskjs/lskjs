@@ -1,5 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject';
 import forEach from 'lodash/map';
+
 import cutText from './cutText';
 
 export default (obj = {}, size = 1000) => {

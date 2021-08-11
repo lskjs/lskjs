@@ -1,44 +1,41 @@
-import MongooseSchema from '@lskjs/db/MongooseSchema';
+import Model from '@lskjs/db/Model';
+import Bluebird from 'bluebird';
 import pick from 'lodash/pick';
 
-export default function PermitModel(app) {
-  const { db } = app;
-  const { Schema } = db;
-  const schema = new MongooseSchema(
-    {
-      userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        // required: true,
-      },
-      type: {
-        type: String,
-        required: true,
-      },
-      code: {
-        // Код по котором будет искаться в базе
-        type: String,
-      },
-      disabledAt: {
-        // Дата когда пермит перестал быть валидным(досрочный expiredAt)
-        type: Date,
-      },
-      activatedAt: {
-        // Дата активации
-        type: Date,
-      },
-      expiredAt: {
-        // До какого времени годен
-        type: Date,
-      },
-      info: Object, // Всякая кастомная херь
+export class PermitModel extends Model {
+  static schema = {
+    userId: {
+      type: Model.Types.ObjectId,
+      ref: 'User',
+      // required: true,
     },
-    {
-      model: 'Permit',
-      collection: 'permit',
+    type: {
+      type: String,
+      required: true,
     },
-  );
-  schema.statics.createPermit = async function (data) {
+    code: {
+      // Код по котором будет искаться в базе
+      type: String,
+    },
+    disabledAt: {
+      // Дата когда пермит перестал быть валидным(досрочный expiredAt)
+      type: Date,
+    },
+    activatedAt: {
+      // Дата активации
+      type: Date,
+    },
+    expiredAt: {
+      // До какого времени годен
+      type: Date,
+    },
+    info: Object, // Всякая кастомная херь
+  };
+  static options = {
+    model: 'Permit',
+    collection: 'permit',
+  };
+  static async createPermit(data) {
     const { userId, expiredAt, info, code, type } = data;
     const permit = new this({
       type,
@@ -53,10 +50,12 @@ export default function PermitModel(app) {
       await permit.save();
     }
     return permit;
-  };
-  schema.statics.generateCode = (...args) => this.parent.generateCode(...args);
-  schema.statics.generateUniqCode = (...args) => this.parent.generateUniqCode(...args);
-  schema.statics.isCode = function ({ code, type, length = 4 }) {
+  }
+  static generateCode(...args) {
+    return this.parent.generateCode(...args);
+  }
+  static generateUniqCode = (...args) => this.parent.generateUniqCode(...args);
+  static isCode = function ({ code, type, length = 4 }) {
     if (type === 'random') {
       if (typeof code === 'string' && code.length === length) {
         let strRegexp = '';
@@ -69,7 +68,7 @@ export default function PermitModel(app) {
     return false;
   };
 
-  schema.statics.findByCode = async function (code, params = {}) {
+  static findByCode = async function (code, params = {}) {
     return this.findOne({
       code,
       expiredAt: {
@@ -81,14 +80,15 @@ export default function PermitModel(app) {
       ...params,
     });
   };
-  schema.statics.activate = async function (code) {
+  static activate = async function (code) {
     const permit = await this.findByCode(code);
     if (permit) {
       return permit.activate();
     }
     return null;
   };
-  schema.methods.activate = async function () {
+  async activate() {
+    const { app } = this.constructor; // TODO: HOW?
     // if (this.activatedAt) throw 'permit.activatedBefore';
     // if (new Date(this.expiredAt) < new Date()) throw 'permit.expired';
     // this.getStatus()
@@ -96,15 +96,41 @@ export default function PermitModel(app) {
     await this.save();
     app.emit(`models.Permit.activated_${this.type}`, this);
     return this;
-  };
-  schema.methods.getStatus = function ({ date = new Date() } = {}) {
+  }
+  getStatus({ date = new Date() } = {}) {
     if (this.activatedAt) return 'activated';
     if (new Date(this.expiredAt) < date) return 'expired';
     return 'valid';
-  };
-  schema.statics.prepareOne = async function (obj) {
+  }
+  static async prepareOne(obj) {
     // eslint-disable-next-line no-param-reassign
     return pick(obj, ['_id', 'userId', 'type', 'createdAt', 'expiredAt', 'info']);
-  };
-  return schema;
+  }
+
+  // static async prepareOne(obj) {
+  //   return obj;
+  // }
+  static async prepare(obj, params = {}) {
+    // console.log('PREPARE params.toObject', params.toObject);
+    // console.log('params.toObject2@@@', params.toObject2);
+    const toObjectOne = (o) => {
+      if (!params.toObject2 || !Object.keys(params.toObject2).length) return o;
+      if (o && o.toObject) return o.toObject(params.toObject2);
+      return o;
+    };
+
+    let res;
+    if (Array.isArray(obj)) {
+      res = await Bluebird.map(obj, (o) => this.prepareOne(o, params));
+    } else {
+      res = await this.prepareOne(obj, params);
+    }
+
+    if (Array.isArray(res)) {
+      return res.map(toObjectOne);
+    }
+    return toObjectOne(res);
+  }
 }
+
+export default PermitModel;

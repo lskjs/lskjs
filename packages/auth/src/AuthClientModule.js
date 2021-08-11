@@ -1,6 +1,7 @@
+import Module from '@lskjs/module';
 import cookie from 'js-cookie';
 import get from 'lodash/get';
-import Module from '@lskjs/module';
+
 import LocalStorage from './Storage/LocalStorage';
 import MemoryStorage from './Storage/MemoryStorage';
 
@@ -8,8 +9,6 @@ import MemoryStorage from './Storage/MemoryStorage';
 const DEBUG = false;
 
 export default class AuthClientModule extends Module {
-  name = 'AuthClientModule';
-
   async init() {
     await super.init();
     this.stores = require('./stores').default(this.app);

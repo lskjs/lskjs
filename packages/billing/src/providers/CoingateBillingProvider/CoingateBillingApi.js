@@ -2,20 +2,15 @@ import Err from '@lskjs/utils/Err';
 import Api from '@lskjs/server-api';
 
 export default class CoingateBillingApi extends Api {
-  name = 'CoingateBillingApi';
   getRoutes() {
     return {
-      '/index': ::this.index,
+      ...super.getRoutes(),
       '/create': ::this.create,
       '/callback': ::this.callback,
     };
   }
   url(...args) {
     return this.app.url(`/api/billing/coingate/${args[0]}`, ...args.slice(1));
-  }
-
-  index() {
-    return 'ok';
   }
 
   async create(req) {

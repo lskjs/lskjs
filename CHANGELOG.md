@@ -3,56 +3,1754 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.102.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.101.1...v1.102.0) (2021-08-06)
+# [2.3.0-beta.104](https://github.com/lskjs/cli/compare/v2.3.0-beta.103...v2.3.0-beta.104) (2021-08-10)
 
 
 ### Features
 
-* **module:** module1 to module2 conector ([e47c82e](https://github.com/isuvorov/lib-starter-kit/commit/e47c82e5e6ffde21820bab3fb7084733d82e50dc))
+* **mobx:** error detalization ([e2805dd](https://github.com/lskjs/cli/commit/e2805dd63b8797bc8e6ea58365d6a133001c7f59))
 
 
 
 
 
-## [1.101.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.101.0...v1.101.1) (2021-05-12)
-
-
-### Bug Fixes
-
-* **uapp:** undefined param object ([0836e31](https://github.com/isuvorov/lib-starter-kit/commit/0836e31ddbfbee9723ce6af2ac44068c4e10d1ca))
-
-
-
-
-
-# [1.101.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.100.2...v1.101.0) (2021-05-12)
+# [2.3.0-beta.103](https://github.com/lskjs/cli/compare/v2.3.0-beta.102...v2.3.0-beta.103) (2021-08-10)
 
 
 ### Bug Fixes
 
-* **uapp:** meta title without extra dashes ([5707c4f](https://github.com/isuvorov/lib-starter-kit/commit/5707c4fbdbe222525bf3ce4a193a0908c6465f6c))
+* **mobx:** wrap errors in Err ([8d2729f](https://github.com/lskjs/cli/commit/8d2729fa5db51fd22f0d96091ce343cd59b1435c))
 
 
 ### Features
 
-* --nested for getspredsheet ([7ac5510](https://github.com/isuvorov/lib-starter-kit/commit/7ac5510a2cc5007081083304fe00b6f682846ef9))
+* **server-api:** add edit endpoint ([44b1928](https://github.com/lskjs/cli/commit/44b1928dbf25d0e0897a715ae9bedda91c1a0866))
 
 
 
 
 
-## [1.100.2](https://github.com/isuvorov/lib-starter-kit/compare/v1.100.1...v1.100.2) (2021-02-24)
+# [2.3.0-beta.102](https://github.com/lskjs/cli/compare/v2.3.0-beta.101...v2.3.0-beta.102) (2021-08-10)
+
+
+### Features
+
+* **fix:**  transformResponse improvement ([760a7a0](https://github.com/lskjs/cli/commit/760a7a0b02b809d356c833a031dc98661b7e560a))
+
+
+
+
+
+# [2.3.0-beta.101](https://github.com/lskjs/cli/compare/v2.3.0-beta.100...v2.3.0-beta.101) (2021-08-10)
+
+
+### Features
+
+* **mobx:** add transformResponse ([d5c5606](https://github.com/lskjs/cli/commit/d5c560622d6d177bac2c2f7fb652ff282aa49cc4))
+
+
+
+
+
+# [2.3.0-beta.100](https://github.com/lskjs/cli/compare/v2.3.0-beta.99...v2.3.0-beta.100) (2021-08-10)
 
 
 ### Bug Fixes
 
-* **uapp:** resolve events with argumets ([3551e90](https://github.com/isuvorov/lib-starter-kit/commit/3551e90fddf1e2fba3a93122cd6abd1cdb8e6263))
+* **db:** ts error ([7e53951](https://github.com/lskjs/cli/commit/7e53951ad9421064cdd12627dde84863cf397518))
+* **uapp:** remove logs ([fc5c5da](https://github.com/lskjs/cli/commit/fc5c5dae011e22ecdfae5838cc146fc96a4971d8))
+
+
+### Features
+
+* **db:** add prepare and prepareOne ([6c97774](https://github.com/lskjs/cli/commit/6c977746184ce124b901b73d864469f5d95540c5))
 
 
 
 
 
-## [1.100.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.99](https://github.com/lskjs/cli/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
+
+
+### Bug Fixes
+
+* **auth:** rewrite AuthApi to 2v Api ([6526c83](https://github.com/lskjs/cli/commit/6526c836e5a4657f2385ade7b86341cc983e6020))
+* **permit:** rewrite permits to 2v Api ([f9f5ce4](https://github.com/lskjs/cli/commit/f9f5ce40a05cea97fc5ee3089716c0a363ead61f))
+* **server:** default runFinish and webserver autorun ([d5a70ad](https://github.com/lskjs/cli/commit/d5a70ad14222e51727ffa8b94778e766c73fdd2c))
+* **uapp:** provide correct providers returb ([1a7d0bf](https://github.com/lskjs/cli/commit/1a7d0bf374b05529d481156799da5326f86d9ed1))
+* **webserver:** reqUser middleware fix ([44945ce](https://github.com/lskjs/cli/commit/44945ce4dfc9283aa458278f2b3a04ce66b3975a))
+
+
+### Features
+
+* **grant:** semi stable new grant module ([2839bca](https://github.com/lskjs/cli/commit/2839bca48f02d4af249b3a4c48b662966edf9bdb))
+* **module:** more error detalization ([c813480](https://github.com/lskjs/cli/commit/c813480cbc2e6e6c2c32f4b51f11fa0c252233bc))
+* **reactapp:** pass uapp config throw clientapp ([bcbb95b](https://github.com/lskjs/cli/commit/bcbb95bd4e57e76f1fb1ace5a2527e9cd2ae8485))
+* **server-api:** improve ListApi ([fe66941](https://github.com/lskjs/cli/commit/fe669417f278791d3f79abb1b4311e8064ef82ed))
+
+
+
+
+
+# [2.3.0-beta.98](https://github.com/lskjs/cli/compare/v2.3.0-beta.97...v2.3.0-beta.98) (2021-08-05)
+
+
+### Bug Fixes
+
+* grants new interface ([e624080](https://github.com/lskjs/cli/commit/e6240806b2533718f3429e43aec33a049a420fdb))
+
+
+### Features
+
+* **grant:** new grant version ([ebde63b](https://github.com/lskjs/cli/commit/ebde63b60baeb7f4a14698a07e12e9b0bf045002))
+
+
+
+
+
+# [2.3.0-beta.97](https://github.com/lskjs/cli/compare/v2.3.0-beta.96...v2.3.0-beta.97) (2021-08-04)
+
+
+### Bug Fixes
+
+* **worker:** fix prefetch and configs ([ca60b0f](https://github.com/lskjs/cli/commit/ca60b0f222f95ef0aebe7776b4b34104fb84398c))
+
+
+
+
+
+# [2.3.0-beta.96](https://github.com/lskjs/cli/compare/v2.3.0-beta.95...v2.3.0-beta.96) (2021-08-04)
+
+
+### Bug Fixes
+
+* **worker:** fix prefetch and configs ([44db88f](https://github.com/lskjs/cli/commit/44db88f574c6e2dbd944df8dfdb2e2c826b8fc08))
+
+
+
+
+
+# [2.3.0-beta.95](https://github.com/lskjs/cli/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix deps ([1671ec0](https://github.com/lskjs/cli/commit/1671ec0fce180f94117f6c870dba520bf757ddf3))
+* **log2:** ts errors ([aacc289](https://github.com/lskjs/cli/commit/aacc2895d5cadbe69b5b766d6d11bd9ae67ad4c7))
+* **utils:** change interface of omit and pick ([f37766b](https://github.com/lskjs/cli/commit/f37766bfb66b350f775c1efd73345d552e9428d3))
+* **webserver:** fix reqUser middleware and pass jwt config ([2cf2c5f](https://github.com/lskjs/cli/commit/2cf2c5f513d636428765a7e33762c849b24ec24a))
+
+
+### Features
+
+* **log2:** improve logger and create CLI logger ([cb7c344](https://github.com/lskjs/cli/commit/cb7c344a97f5be4ec2bc988981f842ec3c7c4256))
+* **module:** improve logger ([ec36ae4](https://github.com/lskjs/cli/commit/ec36ae4b3e1ca3752bf8feb0c3103580b8e7506b))
+* **sequelize:** add models and debug logger ([f44911a](https://github.com/lskjs/cli/commit/f44911a80e2dc1d1cf8df927853c07161f08c0ef))
+* **server-api:** refactor isAdmin and isAuth Api methods ([8fb7b0c](https://github.com/lskjs/cli/commit/8fb7b0cd2ba562ecbb7194b76fd067f528fe22d7))
+* **webserver:** improve accessLogger and catchError logs ([30a8a26](https://github.com/lskjs/cli/commit/30a8a269e3baf67ea5cd03088d12e7cef99719bc))
+* **worker:** pass worker config and add autoconnect option ([b9fe88c](https://github.com/lskjs/cli/commit/b9fe88cefe86350aaf341a0513780f5d204914e8))
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/cli/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix ts errors ([cbbe925](https://github.com/lskjs/cli/commit/cbbe9250ce699ef345c10eeb3fe0df6695eee7ed))
+* **bots-provider-telegram:** fix ts errors ([519f182](https://github.com/lskjs/cli/commit/519f1827c4138d2463e95af041a269e30ae36a1a))
+* fix ts typings ([f2dd91e](https://github.com/lskjs/cli/commit/f2dd91e18af18563ecf668ad48f057d588c05962))
+
+
+### Features
+
+* **bost-plugin-prometheus:** change summary ([e8a8e24](https://github.com/lskjs/cli/commit/e8a8e24b8bbc1a89f1ccf90804e1c28db364ca5f))
+* **getspreadsheet:** json beutyfy ([9b74d8e](https://github.com/lskjs/cli/commit/9b74d8e33b71554da87f644575549ba9a87b2d1f))
+* **module:** not preventing dublicate of errors ([81effc2](https://github.com/lskjs/cli/commit/81effc26029e82e15d095ed34e2dfb45ce1f3d24))
+* **mutex:** migrate to ts ([c197914](https://github.com/lskjs/cli/commit/c19791485658314c8cf99d2c823aeae0317cb9ed))
+* **sequelize:** add models ([0917c04](https://github.com/lskjs/cli/commit/0917c04779832a239be3e16055e663a374c7acbf))
+* **utils:** add getWildcardKeys ([d137f3b](https://github.com/lskjs/cli/commit/d137f3bc8511b75caeffe43016fa8ba9bcd9710e))
+
+
+
+
+
+# [2.3.0-beta.92](https://github.com/lskjs/cli/compare/v2.3.0-beta.91...v2.3.0-beta.92) (2021-07-30)
+
+
+### Features
+
+* **log2:** implement req loggger and prod serialization ([c3b1656](https://github.com/lskjs/cli/commit/c3b165613a1bc7fad1950f9f7448518190226ba5))
+* **server-api:** add async routes in TestApi ([3232b5d](https://github.com/lskjs/cli/commit/3232b5d4f5bb1765b6e4e759a372312fc2790b06))
+* **webserver:** safe json serialization and improve access logger ([ec10d88](https://github.com/lskjs/cli/commit/ec10d88e81bad99a8eb0bf522e4ebf40e42ee587))
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/cli/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
+
+
+### Features
+
+* **env:** init env package ([8f6f2b3](https://github.com/lskjs/cli/commit/8f6f2b3a190e37c526f8dda576d4c367a997d371))
+* **err:** add typing ([d48754a](https://github.com/lskjs/cli/commit/d48754a99df43dfa6091487ed145e7decb3c69c6))
+* **log2:** add env deps ([40742b9](https://github.com/lskjs/cli/commit/40742b97627ca20ef0dec29421cf16926d01f062))
+* **utils:** separate env package ([5a120f2](https://github.com/lskjs/cli/commit/5a120f26a00c969798c87d5e1774736de93928ce))
+
+
+
+
+
+# [2.3.0-beta.90](https://github.com/lskjs/cli/compare/v2.3.0-beta.89...v2.3.0-beta.90) (2021-07-29)
+
+
+### Bug Fixes
+
+* **db:** ts fixes ([153ab82](https://github.com/lskjs/cli/commit/153ab824d3e6d64027fb20604ce7d065189d4900))
+* **log2:** one row json ([97a7939](https://github.com/lskjs/cli/commit/97a79399ea7d7665e15609b1ff2182efdc10c4d9))
+
+
+
+
+
+# [2.3.0-beta.89](https://github.com/lskjs/cli/compare/v2.3.0-beta.88...v2.3.0-beta.89) (2021-07-29)
+
+
+### Bug Fixes
+
+* **log2:** safe stringify ([0f10c06](https://github.com/lskjs/cli/commit/0f10c06bb269c178b17f66f547455d7fc6795299))
+* **webserver:** safe stringify ([d644147](https://github.com/lskjs/cli/commit/d6441471fc1b4c59b965eb17c89ca71d15621727))
+
+
+
+
+
+# [2.3.0-beta.88](https://github.com/lskjs/cli/compare/v2.3.0-beta.87...v2.3.0-beta.88) (2021-07-29)
+
+
+### Features
+
+* **log2:** set default log format ([c9822d9](https://github.com/lskjs/cli/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
+
+
+
+
+
+# [2.3.0-beta.87](https://github.com/lskjs/cli/compare/v2.3.0-beta.86...v2.3.0-beta.87) (2021-07-29)
+
+
+### Bug Fixes
+
+* **err:** types ([8b8a179](https://github.com/lskjs/cli/commit/8b8a17947f9e379acde84be88f24ebf3a0c2ec26))
+
+
+
+
+
+# [2.3.0-beta.86](https://github.com/lskjs/cli/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+
+### Bug Fixes
+
+* **bots:** update readme ([eef3bc1](https://github.com/lskjs/cli/commit/eef3bc1a62d8486863a4d85d82d138bd8eb87704))
+* **err:** add err types ([d21679e](https://github.com/lskjs/cli/commit/d21679eb49e2ec0b190f20057a71c28c22fe924b))
+* **err:** typings ([f23b6f1](https://github.com/lskjs/cli/commit/f23b6f119bdce644ac3316cf76c019056ef51fce))
+
+
+### Features
+
+* **err:** create err package ([8ada0c7](https://github.com/lskjs/cli/commit/8ada0c7ca5bf57b123918967df5fedc1dda18fe7))
+* **log2:** new logger behaviour ([e9216b3](https://github.com/lskjs/cli/commit/e9216b3917bf90113e91946ca57bf135da748de6))
+* **utils:** update err class ([302af1f](https://github.com/lskjs/cli/commit/302af1f75698f1a7b7e7a2b58bfc39fdec3af341))
+
+
+
+
+
+# [2.3.0-beta.85](https://github.com/lskjs/cli/compare/v2.3.0-beta.84...v2.3.0-beta.85) (2021-07-23)
+
+
+### Bug Fixes
+
+* **bots:** update readme ([f4f68a4](https://github.com/lskjs/cli/commit/f4f68a455a303e5ce4d286762b0f455ede7f3519))
+* **bots-plugin-portal:** add sticker criteria ([ac1a03a](https://github.com/lskjs/cli/commit/ac1a03a451628229e89c146c962dbcae1c646e0d))
+
+
+
+
+
+# [2.3.0-beta.84](https://github.com/lskjs/cli/compare/v2.3.0-beta.83...v2.3.0-beta.84) (2021-07-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** graylog formats ([a9b9a78](https://github.com/lskjs/cli/commit/a9b9a7847a401ba90faa16c9d2dabe1c6122ac6e))
+
+
+
+
+
+# [2.3.0-beta.83](https://github.com/lskjs/cli/compare/v2.3.0-beta.82...v2.3.0-beta.83) (2021-07-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** add graylog ([549fda5](https://github.com/lskjs/cli/commit/549fda5f49c5b4bcccc33498af8cebe37fd25e13))
+* **server-api:** fix binding ([3f9b4b4](https://github.com/lskjs/cli/commit/3f9b4b49251c08270b31cb0ee5457439f709df7d))
+
+
+
+
+
+# [2.3.0-beta.82](https://github.com/lskjs/cli/compare/v2.3.0-beta.81...v2.3.0-beta.82) (2021-07-21)
+
+
+### Bug Fixes
+
+* **bots-plugin-prometheus:** fix markdown, criteria and cron ([b7ad73e](https://github.com/lskjs/cli/commit/b7ad73e6c88c96abd1cc3ef29b55f018cd20e01a))
+
+
+
+
+
+# [2.3.0-beta.81](https://github.com/lskjs/cli/compare/v2.3.0-beta.80...v2.3.0-beta.81) (2021-07-19)
+
+
+### Features
+
+* --nested for getspredsheet ([fa67c31](https://github.com/lskjs/cli/commit/fa67c31d62cf71109c5089ab24dd242ea460260a))
+
+
+
+
+
+# [2.3.0-beta.80](https://github.com/lskjs/cli/compare/v2.3.0-beta.79...v2.3.0-beta.80) (2021-07-19)
+
+
+### Bug Fixes
+
+* **rabbit:** trying reconnection again ([ddb05fe](https://github.com/lskjs/cli/commit/ddb05fedda130d44ed4abc578a4aac9e8bd295b5))
+* **worker:** check consumer tag for message ([2d68cb0](https://github.com/lskjs/cli/commit/2d68cb006e72e86ea069a89bac8eed853ef6e873))
+
+
+
+
+
+# [2.3.0-beta.79](https://github.com/lskjs/cli/compare/v2.3.0-beta.78...v2.3.0-beta.79) (2021-07-16)
+
+
+### Bug Fixes
+
+* **bots-plugin-prometheus:** fix markdown ([6f5b86c](https://github.com/lskjs/cli/commit/6f5b86cf1574f77aba8a6c3788dc6b477a1706b1))
+
+
+
+
+
+# [2.3.0-beta.78](https://github.com/lskjs/cli/compare/v2.3.0-beta.77...v2.3.0-beta.78) (2021-07-15)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** criteria ([dfdffe4](https://github.com/lskjs/cli/commit/dfdffe49a6823d4b8a936788bf032fbeedb73409))
+* **bots-plugin-portal:** fix null param ([69481eb](https://github.com/lskjs/cli/commit/69481ebbbc3ad84875e752d5d722076995a24b39))
+* **bots-plugin-portal:** fix remove, findMessage and copyMessage ([82fc406](https://github.com/lskjs/cli/commit/82fc406b5a5941010888a3fe330548610043a42e))
+* **bots-plugin-portal:** fix setMessage in findMessage ([8a055d2](https://github.com/lskjs/cli/commit/8a055d22d6244cd9bd2f7d90bb3861cd3e42f3bf))
+
+
+### Features
+
+* **bots:** add documentation ([5d42cfb](https://github.com/lskjs/cli/commit/5d42cfbb2e00191792c74e2f1bbb818650edec4f))
+* **bots-plugin-interview:** add documentation ([4d64e5c](https://github.com/lskjs/cli/commit/4d64e5c07d139f264e78b90ad0807ab39705ebea))
+* **bots-plugin-portal:** add documentation ([225f21e](https://github.com/lskjs/cli/commit/225f21e13a531296985be5f194661e41cc793e29))
+* **bots-plugin-portal:** add pinChatMessage ([1071172](https://github.com/lskjs/cli/commit/10711725b6a28db369229e9dacb9547a0f7c4e81))
+
+
+
+
+
+# [2.3.0-beta.77](https://github.com/lskjs/cli/compare/v2.3.0-beta.76...v2.3.0-beta.77) (2021-07-13)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** ignore markdown function ([87a8d0d](https://github.com/lskjs/cli/commit/87a8d0d33f302f27bb4e71583251c8d94144e6bf))
+* **bots-plugin-portal:** sendMessage parse_mode(markdown) param fixed ([7f61635](https://github.com/lskjs/cli/commit/7f61635797fa0f9eed1c997abf9c51f0e831bafe))
+* **bots-plugin-portal, bots-plugin-prometheus:** fix runCron ([f4728c0](https://github.com/lskjs/cli/commit/f4728c0bb46538ef77481fbbdf9679f6d498d771))
+
+
+
+
+
+# [2.3.0-beta.76](https://github.com/lskjs/cli/compare/v2.3.0-beta.75...v2.3.0-beta.76) (2021-07-09)
+
+
+### Features
+
+* **bots-plugin-notify:** add new notify-plugin ([3c30f3b](https://github.com/lskjs/cli/commit/3c30f3b485085d45c38dac032154b2b8906711b5))
+
+
+
+
+
+# [2.3.0-beta.75](https://github.com/lskjs/cli/compare/v2.3.0-beta.74...v2.3.0-beta.75) (2021-07-09)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.74](https://github.com/lskjs/cli/compare/v2.3.0-beta.73...v2.3.0-beta.74) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.73](https://github.com/lskjs/cli/compare/v2.3.0-beta.72...v2.3.0-beta.73) (2021-07-08)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.72](https://github.com/lskjs/cli/compare/v2.3.0-beta.71...v2.3.0-beta.72) (2021-07-08)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** fix sendMessage default content ([0187a08](https://github.com/lskjs/cli/commit/0187a08b31f66fbebf9c1a1b281e4ee1d5bd9846))
+
+
+### Features
+
+* **bots-plugin-prometheus:** add prometheus-plugin ([32a85b0](https://github.com/lskjs/cli/commit/32a85b01c209058832ca0417d30b6f1ece6b24ff))
+
+
+
+
+
+# [2.3.0-beta.71](https://github.com/lskjs/cli/compare/v2.3.0-beta.70...v2.3.0-beta.71) (2021-07-07)
+
+
+### Bug Fixes
+
+* **creds:** error ([6ade103](https://github.com/lskjs/cli/commit/6ade103c61981670c700acbb0fd0526254beb83e))
+
+
+### Features
+
+* **db:** add Model.initSchema ([4873dc6](https://github.com/lskjs/cli/commit/4873dc627a3fa6e480eaae5f01fa7cdd117e0720))
+* **rabbit:** trace log while exchange asseting ([7c88289](https://github.com/lskjs/cli/commit/7c88289bb86c8112576f43840047a419f795af1d))
+
+
+
+
+
+# [2.3.0-beta.70](https://github.com/lskjs/cli/compare/v2.3.0-beta.69...v2.3.0-beta.70) (2021-07-05)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix answer action ([d6c355f](https://github.com/lskjs/cli/commit/d6c355f1b8660efffe63399c2342bc0b63453f91))
+* **bots-plugin-portal:** fix createMessage ([1d38cf0](https://github.com/lskjs/cli/commit/1d38cf08584b10bc393eb057e71fc151e3afd63b))
+* **bots-plugin-portal:** fix edit message actions - messageAppend, messageTrim, messagesJoin, messageSplit, messageAddExtra, messageEditExtra ([6e9a02c](https://github.com/lskjs/cli/commit/6e9a02c81332e7b01105f41a731bd736c2bb41bd))
+* **bots-plugin-portal:** fix groupMessages ([ccfa19c](https://github.com/lskjs/cli/commit/ccfa19c8a85757bcef2169f7756b07a265f56695))
+* **bots-plugin-portal:** fix sendMessage ([71387ba](https://github.com/lskjs/cli/commit/71387baf6fb7657f8b7ec924091ab25a9dbbffb4))
+
+
+### Features
+
+* **bots-plugin-portal:** add util parseExtra ([34b7a7c](https://github.com/lskjs/cli/commit/34b7a7c6b6b0d54952f6ab95aa61c2d620bfc9b6))
+
+
+
+
+
+# [2.3.0-beta.69](https://github.com/lskjs/cli/compare/v2.3.0-beta.68...v2.3.0-beta.69) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix findMessage ([a074043](https://github.com/lskjs/cli/commit/a074043f6e198ef02b0fb14b4eac6a85cb6beb7f))
+
+
+
+
+
+# [2.3.0-beta.68](https://github.com/lskjs/cli/compare/v2.3.0-beta.67...v2.3.0-beta.68) (2021-06-29)
+
+
+### Bug Fixes
+
+* **rlog:** getCode err ([6b01fd4](https://github.com/lskjs/cli/commit/6b01fd4a65d8b6fb419548edc59ebbcb481fe0d0))
+
+
+
+
+
+# [2.3.0-beta.67](https://github.com/lskjs/cli/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-debug:** save posts in messages ([57e4dba](https://github.com/lskjs/cli/commit/57e4dba6bb7f980ec246b7a3c0a051707f3be4a8))
+* **bots-plugin-portal:** findMessage args to arrays; findMessage random mode; fix repost; add criteria 'nextRoute' ([72aeb7e](https://github.com/lskjs/cli/commit/72aeb7ef1f2d1985401357ec276da53879a088d6))
+* **creds:** hooks ([0334c85](https://github.com/lskjs/cli/commit/0334c85c82a64d74e3339ef9ad1d68eac75d5ad8))
+* **creds:** package bin ([b5cdd6c](https://github.com/lskjs/cli/commit/b5cdd6c4f3399a6a2d96f8ef1e805de09793d514))
+
+
+
+
+
+# [2.3.0-beta.66](https://github.com/lskjs/cli/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** fix messageSplit ([8e3cb61](https://github.com/lskjs/cli/commit/8e3cb6110c170f7d9cd6248bbe0f101bcc812ddd))
+* **bots-provider-telegram:** fix sendFile ([ff0db5e](https://github.com/lskjs/cli/commit/ff0db5e8612fdfa300668689b25d41601e91fcae))
+* **proxy:** await getproxy ([64f2ff8](https://github.com/lskjs/cli/commit/64f2ff8966d1bf03df2d1301cf337816d35dc4fb))
+
+
+### Features
+
+* **bots-plugin-portal:** add action messageSplit ([bd7e615](https://github.com/lskjs/cli/commit/bd7e61560045251d33cd37458e67e7f1be2c691c))
+* **bots-plugin-portal:** add messagesJoin and sendMediaGroup ([37d85bd](https://github.com/lskjs/cli/commit/37d85bdd3afa772eef821bc3f3a09856d313c9de))
+
+
+
+
+
+# [2.3.0-beta.65](https://github.com/lskjs/cli/compare/v2.3.0-beta.64...v2.3.0-beta.65) (2021-06-24)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** json yaml ([f620810](https://github.com/lskjs/cli/commit/f620810b62c22d9290aa42ab8ae1e282f7157f61))
+
+
+
+
+
+# [2.3.0-beta.64](https://github.com/lskjs/cli/compare/v2.3.0-beta.63...v2.3.0-beta.64) (2021-06-22)
+
+
+### Features
+
+* **worker:** add default getErrorInfo ([3ff98a7](https://github.com/lskjs/cli/commit/3ff98a7687e20d165a25286b8228e353ebaf087a))
+
+
+
+
+
+# [2.3.0-beta.63](https://github.com/lskjs/cli/compare/v2.3.0-beta.62...v2.3.0-beta.63) (2021-06-21)
+
+
+### Bug Fixes
+
+* remove locales log ([eb83ba3](https://github.com/lskjs/cli/commit/eb83ba3b65b0d8104d63ff8f0a02f232724bc48c))
+* **rabbit:** temp fix ([8727b2b](https://github.com/lskjs/cli/commit/8727b2ba80ee2c0fee15bd6d48a7f16301ad69d4))
+
+
+### Features
+
+* **creds:** add README ([54dba87](https://github.com/lskjs/cli/commit/54dba879120c35cbeec990e1bddf40c89188d3ea))
+
+
+
+
+
+# [2.3.0-beta.62](https://github.com/lskjs/cli/compare/v2.3.0-beta.61...v2.3.0-beta.62) (2021-06-19)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** answer ([0766a16](https://github.com/lskjs/cli/commit/0766a162807ab8320b28ffaf50197bb8335272be))
+* **bots-plugin-portal:** fix ctx in messageAddExtra ([1a102d3](https://github.com/lskjs/cli/commit/1a102d31f9d19ad75038e33e4dd635159472f670))
+* **bots-plugin-portal:** fix likes ([6ce79b5](https://github.com/lskjs/cli/commit/6ce79b51b93dbdc2ecb1778d3bd10b86915e1e79))
+* **bots-plugin-portal:** fix reply and sendMessage ([3952b0e](https://github.com/lskjs/cli/commit/3952b0eb48e7a80637642788a7c96195e547c830))
+* **bots-plugin-portal:** like ([1ffe1c1](https://github.com/lskjs/cli/commit/1ffe1c19f7253b18b2080cb4e75929946ded61fe))
+* **bots-plugin-portal:** reply and sendMessage ([7638870](https://github.com/lskjs/cli/commit/763887080dda914f2efdd3863e982b2be6adb7df))
+* **bots-plugin-portal:** sender ([8ea72c0](https://github.com/lskjs/cli/commit/8ea72c06507c3cd94729858eafd29eadcfe7dc14))
+* **bots-provider-telegram:** save message and save event ([449a4e2](https://github.com/lskjs/cli/commit/449a4e280ae891b5fba697f4ec47db311de67750))
+
+
+### Features
+
+* **bots-plugin-portal:** add createMessage ([9fd565c](https://github.com/lskjs/cli/commit/9fd565c11732e7e319dfee61a6630097f35d1459))
+* **bots-plugin-portal:** editMessage and messageEditExtra ([0d6d2c1](https://github.com/lskjs/cli/commit/0d6d2c1a14c2838bed0e6ab1ba7a78bbf9a8c888))
+* **bots-plugin-portal:** messageAddExtra ([2b1e0ca](https://github.com/lskjs/cli/commit/2b1e0ca68914edca4ed553986689a57da1f2aaa9))
+
+
+
+
+
+# [2.3.0-beta.61](https://github.com/lskjs/cli/compare/v2.3.0-beta.60...v2.3.0-beta.61) (2021-06-18)
+
+
+### Bug Fixes
+
+* **rlog:** Rlog error code ([283fcac](https://github.com/lskjs/cli/commit/283fcacede79033474598bed64948d68588f5670))
+
+
+
+
+
+# [2.3.0-beta.60](https://github.com/lskjs/cli/compare/v2.3.0-beta.59...v2.3.0-beta.60) (2021-06-18)
+
+
+### Bug Fixes
+
+* **rabbit:** async publish ([54e9b1f](https://github.com/lskjs/cli/commit/54e9b1f294e18299acb4939a6e429c4efd2b1aa5))
+
+
+
+
+
+# [2.3.0-beta.59](https://github.com/lskjs/cli/compare/v2.3.0-beta.58...v2.3.0-beta.59) (2021-06-18)
+
+
+### Bug Fixes
+
+* **worker:** apm mocks startTransaction ([c680365](https://github.com/lskjs/cli/commit/c680365e0a6a777a2aac9c48e6d956d056a9aba8))
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/cli/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+
+### Bug Fixes
+
+* **proxy:** mock methods ([1ba6c8d](https://github.com/lskjs/cli/commit/1ba6c8dbb5e2b677ed2d7672f26b02ce03770dd3))
+
+
+
+
+
+# [2.3.0-beta.57](https://github.com/lskjs/cli/compare/v2.3.0-beta.56...v2.3.0-beta.57) (2021-06-15)
+
+
+### Features
+
+* **rlog:** update rlog ([65aca0a](https://github.com/lskjs/cli/commit/65aca0a050daa9074338cbaadb1ce8716a486584))
+
+
+
+
+
+# [2.3.0-beta.56](https://github.com/lskjs/cli/compare/v2.3.0-beta.55...v2.3.0-beta.56) (2021-06-15)
+
+
+### Bug Fixes
+
+* **worker:** get rlog from module ([ced0126](https://github.com/lskjs/cli/commit/ced0126d4f3be9ce7b961eba76b56624b50de6df))
+
+
+
+
+
+# [2.3.0-beta.55](https://github.com/lskjs/cli/compare/v2.3.0-beta.54...v2.3.0-beta.55) (2021-06-15)
+
+
+### Bug Fixes
+
+* **worker:** get rlog from module ([2adf51a](https://github.com/lskjs/cli/commit/2adf51a70dcfbe7329f1165fe54869300cef5c46))
+
+
+
+
+
+# [2.3.0-beta.54](https://github.com/lskjs/cli/compare/v2.3.0-beta.53...v2.3.0-beta.54) (2021-06-14)
+
+
+### Bug Fixes
+
+* **db:** pass any options ([3dcc5b4](https://github.com/lskjs/cli/commit/3dcc5b432244eb13adabcf52e405dcc6da6e0277))
+* **db:** useNewUrlParser ([a4a142c](https://github.com/lskjs/cli/commit/a4a142c2002574be9926d2556697d9e9aae561d8))
+
+
+
+
+
+# [2.3.0-beta.53](https://github.com/lskjs/cli/compare/v2.3.0-beta.52...v2.3.0-beta.53) (2021-06-11)
+
+
+### Bug Fixes
+
+* **config:** typo bug ([fe3e8c6](https://github.com/lskjs/cli/commit/fe3e8c6e6d0927ad09ee28c52a5a9c297d940382))
+* **db:** prevent stop before connect ([aaafde8](https://github.com/lskjs/cli/commit/aaafde8755fecadabc0ee5d337a71591975a9f45))
+
+
+
+
+
+# [2.3.0-beta.52](https://github.com/lskjs/cli/compare/v2.3.0-beta.51...v2.3.0-beta.52) (2021-06-10)
+
+
+### Bug Fixes
+
+* **module:** fix bugs, add tests ([dbd06da](https://github.com/lskjs/cli/commit/dbd06da55fffa8a41c855378564c9096677c51fe))
+
+
+### Features
+
+* **worker:** add models preloader ([33d0458](https://github.com/lskjs/cli/commit/33d0458728470eda41fbe290947cf0973e6f20a3))
+
+
+
+
+
+# [2.3.0-beta.51](https://github.com/lskjs/cli/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+
+### Bug Fixes
+
+* **db:** getting running model by default ([9107f32](https://github.com/lskjs/cli/commit/9107f32b9af316bf938100293e840e451d85ca01))
+* **getspreadsheet:** update package.json ([0be3cf3](https://github.com/lskjs/cli/commit/0be3cf347e434a8bbad40131614268e93b38a900))
+* **getspreadsheet:** update package.json ([883b602](https://github.com/lskjs/cli/commit/883b6028965020dd5998e7fc7f63e309a4e059bf))
+
+
+
+
+
+# [2.3.0-beta.50](https://github.com/lskjs/cli/compare/v2.3.0-beta.49...v2.3.0-beta.50) (2021-06-02)
+
+
+### Bug Fixes
+
+* **creds:** add force ([04ef270](https://github.com/lskjs/cli/commit/04ef270037c6e8e902db52686d6c6cc888af7198))
+* **elastic:** check getMongooseSchema ([660577e](https://github.com/lskjs/cli/commit/660577e0d2b74bc077898e458993cf1928bf6c81))
+* **server-api:** updates ([7d63096](https://github.com/lskjs/cli/commit/7d6309621983ffa5189bba722cb1fefa11a8273e))
+
+
+
+
+
+# [2.3.0-beta.49](https://github.com/lskjs/cli/compare/v2.3.0-beta.48...v2.3.0-beta.49) (2021-05-25)
+
+
+### Bug Fixes
+
+* **uapp:** server side render ([b27d029](https://github.com/lskjs/cli/commit/b27d0298bcc746ad0a6deaeb807b7a6d0dfeb55b))
+
+
+### Features
+
+* **module:** safe module create and safe module start ([3ade5c6](https://github.com/lskjs/cli/commit/3ade5c681563c76af2c532a1861309dab52ea260))
+
+
+
+
+
+# [2.3.0-beta.48](https://github.com/lskjs/cli/compare/v2.3.0-beta.47...v2.3.0-beta.48) (2021-05-19)
+
+
+### Bug Fixes
+
+* **creds:** fix bins ([0fd0d69](https://github.com/lskjs/cli/commit/0fd0d694d8403444b88fb5ac0b2d2fac410e1478))
+
+
+### Features
+
+* **db:** app in models ([380aef8](https://github.com/lskjs/cli/commit/380aef87a7810c8c8f536d8a6a9cd4f52aff91ca))
+* **mobx:** create stores2 and mobx stores ([f12a1e3](https://github.com/lskjs/cli/commit/f12a1e3b9c4cd8a7187882480dc3f70a9861c23c))
+* **utils:** create lightweight delay ([195e309](https://github.com/lskjs/cli/commit/195e3094ef344415f9364009ed39be79e060a8db))
+
+
+
+
+
+# [2.3.0-beta.47](https://github.com/lskjs/cli/compare/v2.3.0-beta.46...v2.3.0-beta.47) (2021-05-18)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** env parser fix ([9d7e24a](https://github.com/lskjs/cli/commit/9d7e24ac0630f569b5e23161f0c308b25859ddfe))
+
+
+
+
+
+# [2.3.0-beta.46](https://github.com/lskjs/cli/compare/v2.3.0-beta.45...v2.3.0-beta.46) (2021-05-18)
+
+
+### Bug Fixes
+
+* **creds:** fix bugs ([eb25ae4](https://github.com/lskjs/cli/commit/eb25ae4736487b63da529004b97486434b482be8))
+* **creds:** fix errors ([94a2d5a](https://github.com/lskjs/cli/commit/94a2d5a1b728d068482d647c399e1a36d7cd6467))
+
+
+
+
+
+# [2.3.0-beta.45](https://github.com/lskjs/cli/compare/v2.3.0-beta.44...v2.3.0-beta.45) (2021-05-18)
+
+
+### Features
+
+* **creds:** init package ([08319cf](https://github.com/lskjs/cli/commit/08319cfed0484527355df1ed932d802c27eac596))
+
+
+
+
+
+# [2.3.0-beta.44](https://github.com/lskjs/cli/compare/v2.3.0-beta.43...v2.3.0-beta.44) (2021-05-18)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix JS.stringify ([d2e034e](https://github.com/lskjs/cli/commit/d2e034ea51b281e8d90e7166d9814478c7c028be))
+
+
+
+
+
+# [2.3.0-beta.43](https://github.com/lskjs/cli/compare/v2.3.0-beta.42...v2.3.0-beta.43) (2021-05-17)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** add jsonToFile ([ae4e52e](https://github.com/lskjs/cli/commit/ae4e52e77296f978d0bd6a8ab4b8ffeac5fc6440))
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/cli/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **getspreadsheet:** add utils for file generation ([27384a1](https://github.com/lskjs/cli/commit/27384a1d94baf16374203476ab685ad4b283fdae))
+* **utils:** export of asyncMapValues ([33b4179](https://github.com/lskjs/cli/commit/33b41798353f52a31de3ac2c9825ba92f9b07443))
+* **worker:** result from worker ([cf0cccd](https://github.com/lskjs/cli/commit/cf0cccd05a2c11415147a1126870eaab2d8a1eec))
+
+
+
+
+
+# [2.3.0-beta.41](https://github.com/lskjs/cli/compare/v2.3.0-beta.40...v2.3.0-beta.41) (2021-05-16)
+
+
+### Bug Fixes
+
+* fix packages ([5fca247](https://github.com/lskjs/cli/commit/5fca2475f1a241affabccd81e0a85fcd1b18a29d))
+
+
+
+
+
+# [2.3.0-beta.40](https://github.com/lskjs/cli/compare/v2.3.0-beta.39...v2.3.0-beta.40) (2021-05-16)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.39](https://github.com/lskjs/cli/compare/v2.3.0-beta.38...v2.3.0-beta.39) (2021-05-16)
+
+
+### Bug Fixes
+
+* fix packages ([5b8dd85](https://github.com/lskjs/cli/commit/5b8dd85a9465dda31a37f2ef43485dcc2bf6b6fe))
+
+
+
+
+
+# [2.3.0-beta.38](https://github.com/lskjs/cli/compare/v2.3.0-beta.37...v2.3.0-beta.38) (2021-05-15)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.37](https://github.com/lskjs/cli/compare/v2.3.0-beta.36...v2.3.0-beta.37) (2021-05-15)
+
+
+### Bug Fixes
+
+* **bots-base:** add useForm2 ([5c11162](https://github.com/lskjs/cli/commit/5c11162564700a57bf211fa9d39a32af4b08499d))
+* **bots-plugin-portal:** canonize response actions ([22066bc](https://github.com/lskjs/cli/commit/22066bcbf8a46e5476a6c8b5a28cdc41cac44020))
+* **bots-plugin-portal:** fix action chain ([ea68631](https://github.com/lskjs/cli/commit/ea686317b29e06810cd6d2f93f4e8b74ac5811e7))
+* **bots-plugin-portal:** fix actionChain ([8ad8f60](https://github.com/lskjs/cli/commit/8ad8f60be23c16c40cb86f3f439d7c0ae84b8d1d))
+* **bots-plugin-portal:** fix ActionChain ([dff6383](https://github.com/lskjs/cli/commit/dff63839d16def56c3640ddcd29661f67c81383a))
+* **bots-plugin-portal:** fix actions ([5950473](https://github.com/lskjs/cli/commit/5950473edcf2c8ee77a7a7d688e0cef8e22b846f))
+* **bots-plugin-portal:** fix check message and check challenge ([d20f73a](https://github.com/lskjs/cli/commit/d20f73a7f54eacc5d3a0eb4642b812b352534b01))
+* **bots-plugin-portal:** fix checkDelay and rename actions ([43c8356](https://github.com/lskjs/cli/commit/43c83561723eb2fff94d58b9f107ab27a8458677))
+* **bots-plugin-portal:** fix cron ([e85e7e0](https://github.com/lskjs/cli/commit/e85e7e0f581f2e3f958c06c6f5e15a8710e6eec9))
+* **bots-plugin-portal:** fix models in module ([f38c347](https://github.com/lskjs/cli/commit/f38c34744f09b461a1e6e0843605acd4cec9332a))
+* **bots-provider-telegram:** fix deleteMessage ([21810b4](https://github.com/lskjs/cli/commit/21810b4ddfc645a1103fe426cd6635565652b465))
+* **bots-provider-telegram:** fix promises ([cc507b6](https://github.com/lskjs/cli/commit/cc507b6cb3f320a5faf9c0402ba1cfd8fb05ca77))
+* **bots-provider-telegram:** replace message target to chat id ([979720f](https://github.com/lskjs/cli/commit/979720f8932cd80c0ccd51124e1856348f2e52dd))
+
+
+### Features
+
+* **bots:** add model BotsTelegramUserStorageModel ([00b3105](https://github.com/lskjs/cli/commit/00b3105393523249b5a702dd0c0599212c35212c))
+* **bots-plugin-interview:** add interview plugin ([2ddd6c8](https://github.com/lskjs/cli/commit/2ddd6c8e31f8cf3be8f906514f0a8ae42b940efe))
+* **bots-plugin-portal:** add action checkInterview ([0c036fd](https://github.com/lskjs/cli/commit/0c036fdac92990fe1520c77adae043b0ceefe750))
+* **bots-plugin-portal:** add action replyInterview ([c7d0bd5](https://github.com/lskjs/cli/commit/c7d0bd53afce5da67b22ec36e0b5a7c80dcfc880))
+* **bots-plugin-portal:** add checkChallenge ([c368267](https://github.com/lskjs/cli/commit/c36826729bcbd45d81b179cf9b434c0c1904c9b9))
+* **bots-plugin-portal:** add checkMessage ([77b42e4](https://github.com/lskjs/cli/commit/77b42e49a0d307fde892b0645b569fa63092e4c4))
+* **bots-plugin-portal:** add messageAppend ([8a7780d](https://github.com/lskjs/cli/commit/8a7780d27c4681562184fbfaa066a542325f7f1d))
+* **bots-plugin-portal:** add messageTrim ([e11ff8c](https://github.com/lskjs/cli/commit/e11ff8cc8250a4ba6d12fe649ae14e0a0ac693ee))
+* **bots-plugin-portal:** add then-else ([8c3df4d](https://github.com/lskjs/cli/commit/8c3df4dcb7157d1942ceda97813ebd77abe45b5d))
+* **bots-plugin-portal:** find message ([1bbe2f0](https://github.com/lskjs/cli/commit/1bbe2f0bb9dd2dbb0b0cc2a8c9bfee5be715de80))
+
+
+
+
+
+# [2.3.0-beta.36](https://github.com/lskjs/cli/compare/v2.3.0-beta.35...v2.3.0-beta.36) (2021-04-29)
+
+
+### Features
+
+* **bots-portal-plugin:** add forwardMessage and fix bugs in runCron ([c3a1cdf](https://github.com/lskjs/cli/commit/c3a1cdf4be1d74e0fde175f5c8da87fbde8a6e75))
+
+
+
+
+
+# [2.3.0-beta.35](https://github.com/lskjs/cli/compare/v2.3.0-beta.34...v2.3.0-beta.35) (2021-04-27)
+
+
+### Bug Fixes
+
+* **bots:** remove logs ([e53bfac](https://github.com/lskjs/cli/commit/e53bfaccf17411ef2e61c476ae4069e6fac6e5f0))
+* **bots-plugin-downloads:** refactoring ([6808511](https://github.com/lskjs/cli/commit/68085117df0d773d21f87c12c733e7d455e48830))
+
+
+### Features
+
+* **bots:** merge configs ([2e97eea](https://github.com/lskjs/cli/commit/2e97eea537cbc9e74634c8215775e23031bab824))
+* **bots-plugin-portal:** add disable options for bot ([5a35845](https://github.com/lskjs/cli/commit/5a358459ca5b39814a68b4ac3f4279a232b8a66c))
+
+
+
+
+
+# [2.3.0-beta.34](https://github.com/lskjs/cli/compare/v2.3.0-beta.33...v2.3.0-beta.34) (2021-04-27)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** type or action ([32abe25](https://github.com/lskjs/cli/commit/32abe258bc0c175b52ca72f7ddc92aa0b404b09b))
+
+
+
+
+
+# [2.3.0-beta.33](https://github.com/lskjs/cli/compare/v2.3.0-beta.32...v2.3.0-beta.33) (2021-04-26)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add new ActionModule and ActionChain ([b81437f](https://github.com/lskjs/cli/commit/b81437f7b712bf09ba2ba9e5a4de7995fca5b3a4))
+
+
+
+
+
+# [2.3.0-beta.32](https://github.com/lskjs/cli/compare/v2.3.0-beta.31...v2.3.0-beta.32) (2021-04-24)
+
+
+### Features
+
+* **bots-plugin-portal:** refactor and add new ([8599a4e](https://github.com/lskjs/cli/commit/8599a4e73842ed08d4258487a6558cbdf7235c68))
+
+
+
+
+
+# [2.3.0-beta.31](https://github.com/lskjs/cli/compare/v2.3.0-beta.30...v2.3.0-beta.31) (2021-04-22)
+
+
+### Bug Fixes
+
+* **bots-plugin-portal:** add actions ([8a5e461](https://github.com/lskjs/cli/commit/8a5e461dafcc930428bb7885212884b3dcf78e2f))
+* **bots-plugin-portal:** add rules function-type for userId and chatId ([f6961d5](https://github.com/lskjs/cli/commit/f6961d5eb1d307acfbc7615532f10d7cefd6cf51))
+* **LSK-34:** relocate groupMessages ([960be89](https://github.com/lskjs/cli/commit/960be892926a121f440ded79157baa860853bbf2))
+* **LSK-34:** remove canonizeChatIds ([8e91a9c](https://github.com/lskjs/cli/commit/8e91a9c3245d9f200a54c7de3580dbbe2ce0dd30))
+* **LSK-34:** runCron ([622f716](https://github.com/lskjs/cli/commit/622f716812ef123723254e7a18ab923bc5bac927))
+* **webserver:** bug un useApi while empty item ([1d047e6](https://github.com/lskjs/cli/commit/1d047e6e05f228a014855e8396cc66fd8cbac9ae))
+
+
+### Features
+
+* **bots-plugin-portal:** add criteria ([fb37544](https://github.com/lskjs/cli/commit/fb375443a250c58bccfcc7f4aa10cb18c63fe130))
+* **bots-plugin-portal:** add cron-trigger by LSK-33 ([9843e80](https://github.com/lskjs/cli/commit/9843e805c121333ebb775e9bf7fff6d56768a373))
+* **LSK-34:** add actions and runAction ([1a9a3a2](https://github.com/lskjs/cli/commit/1a9a3a27bcf143c0f3f808128b28b2bc09a2856c))
+
+
+
+
+
+# [2.3.0-beta.30](https://github.com/lskjs/cli/compare/v2.3.0-beta.29...v2.3.0-beta.30) (2021-04-21)
+
+
+### Bug Fixes
+
+* **rabbit:** merge to ... ([3c5743a](https://github.com/lskjs/cli/commit/3c5743afda7ec019216e91ccfa099a787e00e31d))
+* **rabbit:** new mergedOptions ([f8a5e30](https://github.com/lskjs/cli/commit/f8a5e307673422267d1e78d8a8b5c0529a221245))
+* **rabbit:** rabbit options for queue and global options ([f4bfbd7](https://github.com/lskjs/cli/commit/f4bfbd725598cef522f70ff8d42ee22f8e33fa47))
+
+
+
+
+
+# [2.3.0-beta.29](https://github.com/lskjs/cli/compare/v2.3.0-beta.28...v2.3.0-beta.29) (2021-04-20)
+
+
+### Bug Fixes
+
+* **rabbit:** channels and connections exit ([9481df3](https://github.com/lskjs/cli/commit/9481df3a8a91f61f2d649a95db8e38beaf6ec70c))
+* **rabbit:** config, debounce and emit error name ([6974940](https://github.com/lskjs/cli/commit/6974940a1ffacd3964a0c8460bed4dbc7420c214))
+* **rabbit:** reconnect ([21a7b17](https://github.com/lskjs/cli/commit/21a7b17fc8c6f1617ea7acbb734d02376a7cb272))
+* **worker:** reconnect ([0f12c91](https://github.com/lskjs/cli/commit/0f12c91020212db2a28aeac0631fba9b1f0ca6d7))
+
+
+
+
+
+# [2.3.0-beta.28](https://github.com/lskjs/cli/compare/v2.3.0-beta.27...v2.3.0-beta.28) (2021-04-20)
+
+
+### Bug Fixes
+
+* **db:** wait db connection while geting the model ([b40d8ce](https://github.com/lskjs/cli/commit/b40d8ce1f54649e2cfe556dbc6565707c6ecc735))
+
+
+
+
+
+# [2.3.0-beta.27](https://github.com/lskjs/cli/compare/v2.3.0-beta.26...v2.3.0-beta.27) (2021-04-20)
+
+
+### Features
+
+* **worker:** add err.data in log ([960ef16](https://github.com/lskjs/cli/commit/960ef164ac3c6116c04e1349e95310c3b2da2546))
+
+
+
+
+
+# [2.3.0-beta.26](https://github.com/lskjs/cli/compare/v2.3.0-beta.25...v2.3.0-beta.26) (2021-04-19)
+
+
+### Bug Fixes
+
+* **module:** hot fix mutexRelease ([773f06d](https://github.com/lskjs/cli/commit/773f06df96891a58bc058845e9f60aa2c9f481d0))
+
+
+
+
+
+# [2.3.0-beta.25](https://github.com/lskjs/cli/compare/v2.3.0-beta.24...v2.3.0-beta.25) (2021-04-19)
+
+
+### Features
+
+* **module:** parallel module mutex locks ([b7b5e97](https://github.com/lskjs/cli/commit/b7b5e97f34b1e485319bb16a9218bb25f68b98e3))
+
+
+
+
+
+# [2.3.0-beta.24](https://github.com/lskjs/cli/compare/v2.3.0-beta.23...v2.3.0-beta.24) (2021-04-16)
+
+
+### Features
+
+* **module:** prevent parallel injecting ([2d7f213](https://github.com/lskjs/cli/commit/2d7f21348a86308feb069a2660982b2800db1e65))
+* **proxy:** add lskjs/mutex ([5353ed3](https://github.com/lskjs/cli/commit/5353ed3fb4bc0eb70c7e44ffd39f1f4a1e42bf72))
+
+
+
+
+
+# [2.3.0-beta.23](https://github.com/lskjs/cli/compare/v2.3.0-beta.22...v2.3.0-beta.23) (2021-04-09)
+
+
+### Bug Fixes
+
+* **webserver:** fix useApi log ([e8d1309](https://github.com/lskjs/cli/commit/e8d13095860ce91790a0ee95bf2f5657c487de20))
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/cli/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+
+### Features
+
+* **mutex:**  init package ([304f18e](https://github.com/lskjs/cli/commit/304f18e7e7f05259bd77268a2fef5ab8f8677840))
+* **server:** remove webserver from server and move to separate package ([0eae044](https://github.com/lskjs/cli/commit/0eae044402ddebe4baaf0b121439d142b9098db4))
+* **webserver:** separate server and webserver packages ([8566e23](https://github.com/lskjs/cli/commit/8566e2392d240daa8b42b041e196d5527da690c7))
+
+
+
+
+
+# [2.3.0-beta.21](https://github.com/lskjs/cli/compare/v2.3.0-beta.20...v2.3.0-beta.21) (2021-04-06)
+
+
+### Features
+
+* **bots-plugin-portal:** add spread extension ([03f3536](https://github.com/lskjs/cli/commit/03f3536966159cca8a4415f41dda149f220691d9))
+
+
+
+
+
+# [2.3.0-beta.20](https://github.com/lskjs/cli/compare/v2.3.0-beta.19...v2.3.0-beta.20) (2021-04-06)
+
+
+### Bug Fixes
+
+* **bots-plugin-debug:** fix save chats ([fe30bc3](https://github.com/lskjs/cli/commit/fe30bc356552cde8c428381c21cef2bdc8558556))
+
+
+### Features
+
+* **db:** add defaultOptions in model ([ae998b2](https://github.com/lskjs/cli/commit/ae998b28b477c236989ef6da636a72392ef2823e))
+
+
+
+
+
+# [2.3.0-beta.19](https://github.com/lskjs/cli/compare/v2.3.0-beta.18...v2.3.0-beta.19) (2021-04-05)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.18](https://github.com/lskjs/cli/compare/v2.3.0-beta.17...v2.3.0-beta.18) (2021-04-05)
+
+
+### Bug Fixes
+
+* **bots:** fix timestamps ([ad5ace1](https://github.com/lskjs/cli/commit/ad5ace1d9def184c146ed2727ce88394370bb7bb))
+* **bots:** fix timestamps ([dbe2729](https://github.com/lskjs/cli/commit/dbe272922875f21313fc5e8e348dc2b8353a7f51))
+* **bots-plugin-portal:** fix delay ([13dc8b4](https://github.com/lskjs/cli/commit/13dc8b420c6d11516cfc9227f1fe9580a918c711))
+
+
+
+
+
+# [2.3.0-beta.17](https://github.com/lskjs/cli/compare/v2.3.0-beta.16...v2.3.0-beta.17) (2021-04-01)
+
+
+### Bug Fixes
+
+* **elastic:** hosts checks ([3a4f9e8](https://github.com/lskjs/cli/commit/3a4f9e86477c64771650f1655a5c7ce310f62aa1))
+
+
+
+
+
+# [2.3.0-beta.16](https://github.com/lskjs/cli/compare/v2.3.0-beta.15...v2.3.0-beta.16) (2021-04-01)
+
+
+### Bug Fixes
+
+* **bots-plugin-downloads:** rename bots-plugin, dont know why ([937abb5](https://github.com/lskjs/cli/commit/937abb58be7f1801bb603b882467f3509427b374))
+* **clickhouse:** env debug => logs ([9b905cb](https://github.com/lskjs/cli/commit/9b905cbe9ea98cfabaf68a2109146831ab74609c))
+* **clickhouse:** some refactor ([bd3cfc7](https://github.com/lskjs/cli/commit/bd3cfc79cee267bc1b3e465843987700de16ed68))
+* **elastic:** hosts checks ([13fd223](https://github.com/lskjs/cli/commit/13fd22310d49b1be4e132b8b0562a5bf153e2a49))
+
+
+
+
+
+# [2.3.0-beta.15](https://github.com/lskjs/cli/compare/v2.3.0-beta.14...v2.3.0-beta.15) (2021-04-01)
+
+
+### Bug Fixes
+
+* **clickhouse:** remove lodash and bluebird ([9156494](https://github.com/lskjs/cli/commit/9156494cfe1e0d376001cf65d99084a80372cac4))
+* **elastic:** run super forgotten ([0836aa8](https://github.com/lskjs/cli/commit/0836aa803a9d94f0c8c90e2480cf9eb34e57024b))
+
+
+
+
+
+# [2.3.0-beta.14](https://github.com/lskjs/cli/compare/v2.3.0-beta.13...v2.3.0-beta.14) (2021-03-31)
+
+
+### Features
+
+* **bots:** add answer button and dialog-mode ([e41b8be](https://github.com/lskjs/cli/commit/e41b8bec49b2fe07cdf6005330a272ed89ed5cfa))
+* **bots:** add core-downloader-bot ([70bc40b](https://github.com/lskjs/cli/commit/70bc40b893e8bfe9a6045c9076a2124b1ba7c3a1))
+* **bots-plugin-portal:** antispam ([09bb44b](https://github.com/lskjs/cli/commit/09bb44b37a895489c20c6679198f198597397cd9))
+
+
+
+
+
+# [2.3.0-beta.13](https://github.com/lskjs/cli/compare/v2.3.0-beta.12...v2.3.0-beta.13) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots-plugin-likes:** add arg 'type' in userImpressionChat ([5ba48c8](https://github.com/lskjs/cli/commit/5ba48c854f11317d2ca39092ab8de12f05a7d40a))
+* **bots-plugin-likes:** remove "0" count likes/disslikes ([9a70951](https://github.com/lskjs/cli/commit/9a70951d5ad072a0da21d05971ddb927a02374f8))
+* **bots-plugin-portal:** swap buttons like and disslike ([c03ea15](https://github.com/lskjs/cli/commit/c03ea158f55a40afc8abad53ecba73d04e467ac6))
+
+
+
+
+
+# [2.3.0-beta.12](https://github.com/lskjs/cli/compare/v2.3.0-beta.11...v2.3.0-beta.12) (2021-03-25)
+
+
+### Bug Fixes
+
+* **extract:** remove bin ([320d4f7](https://github.com/lskjs/cli/commit/320d4f72b1ecbae5d40f0e79c918934e9a268272))
+
+
+
+
+
+# [2.3.0-beta.11](https://github.com/lskjs/cli/compare/v2.3.0-beta.10...v2.3.0-beta.11) (2021-03-25)
+
+
+### Bug Fixes
+
+* **bots:** fix userInChat ([b0b0173](https://github.com/lskjs/cli/commit/b0b01739148dcdc3b55549d89572951636ee30e1))
+* **bots-plugin-likes:** fix args userImpressionInChat ([b81e22d](https://github.com/lskjs/cli/commit/b81e22db8dbebd36c09201e7fd7dda7cb25b50cb))
+* **bots-provider-telegram:** fix save bot's message in channel ([b9af7dc](https://github.com/lskjs/cli/commit/b9af7dca887fa9d4a35aed3e2ef6d37bc19aaf07))
+* **clickhouse:** debug is false by default ([600dfd4](https://github.com/lskjs/cli/commit/600dfd428581cf84d5cd7f4afdfb3f1983da7bc3))
+* **elastic:** remove default elastic configs ([efbdcdf](https://github.com/lskjs/cli/commit/efbdcdfa85ca2db21e29523ab7656870a4b785e5))
+* **rabbit:** readme for new features ([bb6a822](https://github.com/lskjs/cli/commit/bb6a82228db939479092771ce01382b1513329fe))
+* **uapp:** remove checkVersion while error ([76a14ac](https://github.com/lskjs/cli/commit/76a14ac82a9c43b90d82886b790b36182101700b))
+
+
+### Features
+
+* **extract:** add new package ([04ce097](https://github.com/lskjs/cli/commit/04ce09774649fc29057608527f55e3e0546595ef))
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/cli/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* lerna.json ([3cd204a](https://github.com/lskjs/cli/commit/3cd204a0c8d1c1005a3470cb7d42b35ec741e1fa))
+* quickfix ([270b4c2](https://github.com/lskjs/cli/commit/270b4c2806a045cb8687e10db8be2660028aca54))
+* quickfix ([51461b2](https://github.com/lskjs/cli/commit/51461b2546be47b08f913fd9e399f34c24e46c76))
+* **bots:** add impression model, fix likes/disslikes ([80a7d8d](https://github.com/lskjs/cli/commit/80a7d8d3cfeaec481eeb145eb9ce93b077fbc839))
+* **bots:** any fixes ([df5a05f](https://github.com/lskjs/cli/commit/df5a05f20bc92a6d95588196e84a0bc40ac6c372))
+* **bots:** DebugPlugin удалял общие чаты ([1aea9c9](https://github.com/lskjs/cli/commit/1aea9c973a8c7f19c9389c6976f163924ce5b741))
+* **clickhouse:** readme and tmp path ([8e71468](https://github.com/lskjs/cli/commit/8e714681251bdac44f6e43037254c24791972436))
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/cli/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+* small fixes ([d731329](https://github.com/lskjs/cli/commit/d7313298480ef7ec7758add0463bb3c60c362da6))
+* **bots-plugin-portal:** groupMessages and copyMessage fix ([1b98a52](https://github.com/lskjs/cli/commit/1b98a52765d3cccc5cc28fa5bf74531535f92df2))
+
+
+### Features
+
+* **bots:** add bots-plugin-likes and edit BotsTelegramMessageModel ([e4cd966](https://github.com/lskjs/cli/commit/e4cd9663df719f621d04b921225645f48d80473b))
+* **bots:** add multi-repost and likes keyboard ([09c4f98](https://github.com/lskjs/cli/commit/09c4f985ae34b6ff01d7ab4eae2950af3e83c605))
+* **bots:** add ref and locale from startPayload ([2abae68](https://github.com/lskjs/cli/commit/2abae68a978a04e5a48fa2cd38d243fa1b61a487))
+* **bots:** add save chats and getUser, getUserId ([2947640](https://github.com/lskjs/cli/commit/2947640574f16bd46f98a3751f78fca79de69c99))
+* **bots:** getChatMember, userInChat ([f697053](https://github.com/lskjs/cli/commit/f6970539994d0e71f05217c1f0831a5ca88e3b27))
+* **bots:** impression check ([87983df](https://github.com/lskjs/cli/commit/87983dfe056777fad95098e33bbcebbb1b3dc0f1))
+* add preview in form ([cad8001](https://github.com/lskjs/cli/commit/cad8001599b78a1ffd8579482eda0fff623e6610))
+* clickhouse ([97b0c5c](https://github.com/lskjs/cli/commit/97b0c5ce2d5a8273db74f2c3f01663e4b8c97e6c))
+
+
+
+
+
+# [2.3.0-beta.9](https://github.com/lskjs/cli/compare/v2.3.0-beta.8...v2.3.0-beta.9) (2021-02-24)
+
+
+### Features
+
+* **bots-plugun-portal:** improve user sender message and groupMessage ([dd47be3](https://github.com/lskjs/cli/commit/dd47be33d4acb83bd695cb3b980a2cf822e4bf6e))
+* **bots-provider-telegram:** add initExtra in repost ([08c5463](https://github.com/lskjs/cli/commit/08c54637b1deced415c707e433bebbce5598e7fc))
+
+
+
+
+
+# [2.3.0-beta.8](https://github.com/lskjs/cli/compare/v2.3.0-beta.7...v2.3.0-beta.8) (2021-02-23)
+
+
+### Bug Fixes
+
+* **bots-provider-telegram:** target chat number id ([2bb37c5](https://github.com/lskjs/cli/commit/2bb37c5148b7fd670a3d2bd3c4fe194769a3e5cd))
+
+
+### Features
+
+* **bots-plugin-portal:** improve action remove and media group repost with username ([d107312](https://github.com/lskjs/cli/commit/d107312baf1198069c70979fcc6963cdb1cb5fa7))
+
+
+
+
+
+# [2.3.0-beta.7](https://github.com/lskjs/cli/compare/v2.3.0-beta.6...v2.3.0-beta.7) (2021-02-23)
+
+
+### Bug Fixes
+
+* repost bug ([22e2cde](https://github.com/lskjs/cli/commit/22e2cdea7e40671661664bb47a804ad47af9068b))
+
+
+### Features
+
+* add new event types, add repost for channel_post ([2ba7a5c](https://github.com/lskjs/cli/commit/2ba7a5c6f5db584d679912e0dfef9ac2cb948c59))
+
+
+
+
+
+# [2.3.0-beta.6](https://github.com/lskjs/cli/compare/v2.3.0-beta.5...v2.3.0-beta.6) (2021-02-21)
+
+
+### Bug Fixes
+
+* forget bots-router ([2b5ec65](https://github.com/lskjs/cli/commit/2b5ec65b42027a02786132fbf174939b53ac1b26))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/cli/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+
+### Features
+
+* **bots:** separate bots packages ([b3aba71](https://github.com/lskjs/cli/commit/b3aba716c36ee27896685b645a0f77808fecba92))
+* **bots-plugin:** add ([95c49c4](https://github.com/lskjs/cli/commit/95c49c4d40f10dbc58f8258ebd689b121933972d))
+* **bots-plugin:** create ([0027b9c](https://github.com/lskjs/cli/commit/0027b9ca6bb8fa4d6bde07f3596064e6a68b750d))
+* **bots-plugin-notify:** create ([51b125f](https://github.com/lskjs/cli/commit/51b125fac6cc8b53bb1b31d85a93693a49fa813d))
+* **bots-plugin-polundra:** create ([0604765](https://github.com/lskjs/cli/commit/0604765bf8190bdfadae667c34051b3c3b0eeba7))
+* **bots-plugin-portal:** create ([96d3233](https://github.com/lskjs/cli/commit/96d32338b8a687edc4e62989542f8d3c910a9b02))
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/cli/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/cli/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/cli/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([defd9a1](https://github.com/lskjs/cli/commit/defd9a100a13e3615908faf56e0a4ed5424b1a28))
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/cli/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+# [2.3.0-beta.0](https://github.com/lskjs/cli/compare/v2.2.1-beta.2...v2.3.0-beta.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* **utils:** env bug ([85a160a](https://github.com/lskjs/cli/commit/85a160a1fe83f0d7da7b819e679983d467706b10))
+
+
+### Features
+
+* **bots:** new bots router features and fx bugs ([f1e0440](https://github.com/lskjs/cli/commit/f1e04409f41d3176517d99893ad406c7d2073964))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/cli/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/cli/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/cli/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/cli/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/cli/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/cli-sample
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/cli/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+
+### Features
+
+* update starter kit ([3b96eac](https://github.com/lskjs/cli/commit/3b96eac65f16dcf372b7bfb03c9a600ad5882939))
+* update starter kit ([94a3a90](https://github.com/lskjs/cli/commit/94a3a90fa303c0824957ff427136704d3e58376f))
+* update starter kit ([5f2a703](https://github.com/lskjs/cli/commit/5f2a703e78fd610edfa15a1e96d351d1aac08de0))
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lsk-cli/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+
+### Bug Fixes
+
+* **utils:** disable polyfill traces ([31d2402](https://github.com/lskjs/lsk-cli/commit/31d2402a90fa3d965ec2482cb8cd922a2006f0b9))
+* **worker:** if dont have apm ([e1b6a39](https://github.com/lskjs/lsk-cli/commit/e1b6a39e8f559b82d80fa606b7427eb8ec6055a0))
+
+
+### Features
+
+* **module:** improve asyncItems ([853dbad](https://github.com/lskjs/lsk-cli/commit/853dbad35739150866811a541d70a400378dbd3f))
+* **sh:** add shell, improve exec and spawn ([db1a6d2](https://github.com/lskjs/lsk-cli/commit/db1a6d21abab6ab5b2efd3c6d2cd9e11726c1998))
+* **sh:** improve exec and spawn ([be51042](https://github.com/lskjs/lsk-cli/commit/be51042cbb9c27a7b626fafcd9f70d44aca055a3))
+* **sh:** improve exec and spawn trace logs ([0922f25](https://github.com/lskjs/lsk-cli/commit/0922f2508e065c89bd8ab039d1cb8e8680092694))
+* **utils:** add params notNan, improve toInt and toNumber ([a92686c](https://github.com/lskjs/lsk-cli/commit/a92686cd26708311f525465df08093b7e8e02e0c))
+
+
+
+
+
+# [2.2.0-beta.20](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-02-03)
+
+
+### Bug Fixes
+
+* **utils:** more safety errors ([10ba964](https://github.com/isuvorov/lib-starter-kit/commit/10ba9648f550cab4e11573a96d25cf848df9b2fd))
+* **worker:** prevent rlog errors ([0a3caf1](https://github.com/isuvorov/lib-starter-kit/commit/0a3caf16933f14288e2369bd2f143cbc9b60798a))
+
+
+
+
+
+# [2.2.0-beta.19](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.17...v2.2.0-beta.19) (2021-02-02)
+
+
+### Bug Fixes
+
+* **module:** asyncItems bugs ([553c08c](https://github.com/isuvorov/lib-starter-kit/commit/553c08c607afd1beba8ac91f0f44a1a3d43b0c19))
+
+
+### Features
+
+* **module:** create asyncItems ([b2525c1](https://github.com/isuvorov/lib-starter-kit/commit/b2525c13a85c90d85338643f9dbbcd7b02c5f40d))
+
+
+
+
+
+# [2.2.0-beta.18](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-02-01)
+
+
+### Features
+
+* **module:** create asyncItems ([b2525c1](https://github.com/isuvorov/lib-starter-kit/commit/b2525c13a85c90d85338643f9dbbcd7b02c5f40d))
+
+
+
+
+
+# [2.2.0-beta.17](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** deep dependency injection bugs, cover tests ([adc1da1](https://github.com/isuvorov/lib-starter-kit/commit/adc1da196ab2c6a65572762579e302985237bbee))
+* **uapp:** some fixes ([366d51b](https://github.com/isuvorov/lib-starter-kit/commit/366d51b2cd70e316d45f098e95be4f243d4aef1e))
+
+
+
+
+
+# [2.2.0-beta.16](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-02-01)
+
+
+### Bug Fixes
+
+* **module:** fix inject cache ([64104ef](https://github.com/isuvorov/lib-starter-kit/commit/64104ef9903227d863eaa80d37d16bfb60ddf2e1))
+* **worker:** get deplay from config ([a4eb158](https://github.com/isuvorov/lib-starter-kit/commit/a4eb1585b0fed7db02f79f4916701d32ccfb7b97))
+
+
+
+
+
+# [2.2.0-beta.15](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-02-01)
+
+
+### Features
+
+* **module:** creation of object ([0d59e77](https://github.com/isuvorov/lib-starter-kit/commit/0d59e77e308ad8f5405364999e9fc261cf53f319))
+* **worker:** add more stability ([afceba2](https://github.com/isuvorov/lib-starter-kit/commit/afceba2f796935cfbb3647b32088f94fb244524d))
+
+
+
+
+
+# [2.2.0-beta.14](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-02-01)
+
+
+### Features
+
+* **db:** fix ModelsModule getter ([1301076](https://github.com/isuvorov/lib-starter-kit/commit/1301076bdb1e790ae81266959498c95f1f68062c))
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+
+### Bug Fixes
+
+* **db:** naming ([a770e34](https://github.com/isuvorov/lib-starter-kit/commit/a770e34a8e05852286a588d0d9351e7c8a70b759))
+
+
+### Features
+
+* **uapp:** collection items module concept ([de0f899](https://github.com/isuvorov/lib-starter-kit/commit/de0f8994739b121b05d3ae813758eb8801914cc1))
+
+
+
+
+
+# [2.2.0-beta.12](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-02-01)
+
+
+### Bug Fixes
+
+* som fixes ([727d2d2](https://github.com/isuvorov/lib-starter-kit/commit/727d2d212dcefe8c7b1547fbe6ae5e87ac474535))
+* **proxy:** stats timer fixed ([d652dbe](https://github.com/isuvorov/lib-starter-kit/commit/d652dbe0515e3ce86e6b55764f4e8667cd01e724))
+
+
+### Features
+
+* **mobx:** safest mobx inject ([94f4003](https://github.com/isuvorov/lib-starter-kit/commit/94f40035033ce2171f8f832ee738a2910b8d4e8d))
+* **module:** new features of deep module injection ([cc8b0f9](https://github.com/isuvorov/lib-starter-kit/commit/cc8b0f95d5f77c8245ff03aebc6d802aaf2267ec))
+* **reactapp:** migrate reactapp to v2 ([23ce446](https://github.com/isuvorov/lib-starter-kit/commit/23ce446fb68257f231d93aab354b091b1753e8f6))
+* **uapp:** migrate uapp to v2 ([42eb155](https://github.com/isuvorov/lib-starter-kit/commit/42eb155c07cece432201bd7efe1a733fca274b93))
+* **utils:** omitNull ([c4fbe94](https://github.com/isuvorov/lib-starter-kit/commit/c4fbe942e7b23fbf87c8dde6c944164f6b5297ea))
+* **utils:** refactor env, global, polyfill ([b84b56f](https://github.com/isuvorov/lib-starter-kit/commit/b84b56f1fc297fa6fa446d6b990eda24d48d569f))
+
+
+
+
+
+# [2.2.0-beta.11](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-01-28)
+
+
+### Features
+
+* **rabbit:** available to use wildcard workers ([c5575be](https://github.com/isuvorov/lib-starter-kit/commit/c5575becd61fd880ccfcb2cd58633a4ca3299dd2))
+
+
+
+
+
+# [2.2.0-beta.10](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-01-27)
+
+
+### Bug Fixes
+
+* **proxy:** proxyFilter with empty filter ([8461e8a](https://github.com/isuvorov/lib-starter-kit/commit/8461e8a3bf9f68fde9a1a6fc5f2027b81c16327e))
+
+
+
+
+
+# [2.2.0-beta.9](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-01-27)
+
+
+### Features
+
+* **apm:** add transaction triggerStat ([b981e14](https://github.com/isuvorov/lib-starter-kit/commit/b981e14b213a367e23a98362c61242a0b0bc5250))
+* **proxy:** improve stats for proxy manager ([ca2f99b](https://github.com/isuvorov/lib-starter-kit/commit/ca2f99b1eeb56700ad3ac20aebb7e08741d94e0b))
+
+
+
+
+
+# [2.2.0-beta.8](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-01-27)
+
+
+### Features
+
+* **proxy:** pass proxy to request abd proxyFilter ([e7a41d3](https://github.com/isuvorov/lib-starter-kit/commit/e7a41d3162a5d2f87fe2c1d1293adf8aa78436c3))
+
+
+
+
+
+# [2.2.0-beta.7](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-01-25)
+
+
+### Features
+
+* **module:** improve stabilty while lifecycle ([8673019](https://github.com/isuvorov/lib-starter-kit/commit/8673019c524401a426975a2f50be290ce54bb92d))
+
+
+
+
+
+# [2.2.0-beta.6](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-01-25)
+
+
+### Bug Fixes
+
+* **proxy:** hide empty stats ([58d375a](https://github.com/isuvorov/lib-starter-kit/commit/58d375a9017038971e88ed175567d56784811c9c))
+
+
+### Features
+
+* **model:** increase stability for working with module v1 ([1b492e4](https://github.com/isuvorov/lib-starter-kit/commit/1b492e40cdb9f74ce6d526a97f3f0b76afd5ff0b))
+* **server:** add more logs ([4521c0f](https://github.com/isuvorov/lib-starter-kit/commit/4521c0fbc472d9fb3571cd0757720436b659c8c2))
+* **worker:** add model and fix queue prefix names bug ([2c99ff2](https://github.com/isuvorov/lib-starter-kit/commit/2c99ff298b559080feb13d31ec201338de49d5e5))
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+
+### Bug Fixes
+
+* **bots:** v4 migration bugs ([66171a9](https://github.com/isuvorov/lib-starter-kit/commit/66171a93b34d2490bb70537f1e034f1d81afe9e1))
+* **uapp:** fix bugs ([8666853](https://github.com/isuvorov/lib-starter-kit/commit/8666853418fdc931e689a3eac959019a0b1bc5e3))
+
+
+### Features
+
+* **auth:** make strategies are optional ([0c9a5ca](https://github.com/isuvorov/lib-starter-kit/commit/0c9a5ca6e78d7d6c49e4a1f0e1092956045d87cd))
+* **bots:** migrate to telegraf 4 ([dcb535a](https://github.com/isuvorov/lib-starter-kit/commit/dcb535a50af0c2e76b0102f34acea772ce38b25b))
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+
+### Bug Fixes
+
+* **bots:** fix empty router bug and channel_post event ([4ab0ac8](https://github.com/isuvorov/lib-starter-kit/commit/4ab0ac8bc7d76f8e31770dedf816436ffa1e415a))
+
+
+### Features
+
+* **bots:** improve ts types ([11a1d8a](https://github.com/isuvorov/lib-starter-kit/commit/11a1d8a5e6a2e78370dfe7e350f4ae0f6d341ba2))
+* **module:** improve ts types ([c080815](https://github.com/isuvorov/lib-starter-kit/commit/c08081503c287848d7c63a16c5991bd7d3836f83))
+* update starter kit ([97b10d6](https://github.com/isuvorov/lib-starter-kit/commit/97b10d6f9485c389ccaab2c3be3bc67e67447b9c))
+* **proxy:** add iterate stratefy, fix some potential bugs ([ddc30cf](https://github.com/isuvorov/lib-starter-kit/commit/ddc30cfcfe38566d79a07464bc1aa4021e80343d))
+
+
+
+
+
+# [2.2.0-beta.3](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-01-21)
+
+
+### Bug Fixes
+
+* **proxy,rabbit:** stable ([ac4294a](https://github.com/isuvorov/lib-starter-kit/commit/ac4294a6bbeb709c01ba46e70b28871ac2e2b441))
+* **utils:** ts error ([b54bed7](https://github.com/isuvorov/lib-starter-kit/commit/b54bed78119faf505bda3a53a8bccb9a392b296b))
+
+
+### Features
+
+* **module:** create start workflow ([60fc0ea](https://github.com/isuvorov/lib-starter-kit/commit/60fc0ea5c6900dc5fcf97a79e0a7ba22611035e8))
+
+
+
+
+
+# [2.2.0-beta.2](https://github.com/isuvorov/lib-starter-kit/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-01-20)
+
+
+### Bug Fixes
+
+* **worker:** fix RabbitWorker module v2 ([25a1a72](https://github.com/isuvorov/lib-starter-kit/commit/25a1a72f9ab23707e2e541b39fc56c5140a85fda))
+
+
+### Features
+
+* **proxy:** separate ProxyManager and ProxyStrategy ([0ab5010](https://github.com/isuvorov/lib-starter-kit/commit/0ab501098432995e828f35a970a34afd610dcc3d))
+* **utils:** add getCode and getText in Err ([80976c0](https://github.com/isuvorov/lib-starter-kit/commit/80976c008cf64827e7eb92cabd8b94676e2922d8))
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+
+### Features
+
+* **utils:** add maskUriPassword ([ead5463](https://github.com/isuvorov/lib-starter-kit/commit/ead54638f96639c38fc8ab961795f328d4284a02))
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
 
 **Note:** Version bump only for package lskjs
 
@@ -60,7 +1758,112 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.1.0-beta.5](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2021-01-18)
+
+
+### Features
+
+* **apm:** create apm module ([8da6970](https://github.com/isuvorov/lib-starter-kit/commit/8da6970fa25d1a6f25ab37b987161082381a2ea5))
+* **kafka:** create kafka module ([33f6533](https://github.com/isuvorov/lib-starter-kit/commit/33f653356a95122816182145787196e71ff70dcd))
+* **rabbit:** create rabbit module ([646706f](https://github.com/isuvorov/lib-starter-kit/commit/646706fef94dba6a20ba5f14774e8bb230ec3d1d))
+* **scylla:** create scylla module ([2ce6e09](https://github.com/isuvorov/lib-starter-kit/commit/2ce6e094b9a0e4ab40d2e3ddfd37b12488dd6056))
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+
+### Bug Fixes
+
+* **module:** ts errors ([7477bbf](https://github.com/isuvorov/lib-starter-kit/commit/7477bbf06da24bddc60f5218804072175e47e530))
+* **uapp:** fix uapp bugs ([3401e45](https://github.com/isuvorov/lib-starter-kit/commit/3401e45ac2b9533801b32a5404669a0cedd0ba88))
+* **uapp:** ts errors ([545e595](https://github.com/isuvorov/lib-starter-kit/commit/545e595077cd4393985c9b03bdeac707ac86ecfb))
+
+
+### Features
+
+* improve stability ([a7fc028](https://github.com/isuvorov/lib-starter-kit/commit/a7fc0281ee8a6f4c03b907aca6d1d5534f1149ac))
+* **module:** add hadModule method ([b639f0b](https://github.com/isuvorov/lib-starter-kit/commit/b639f0b1728f2cf6a556a58818baa007a2f559f7))
+* **proxy:** add axios request with proxy ([12ecedf](https://github.com/isuvorov/lib-starter-kit/commit/12ecedf41d272e5977ecb19573269a6941229066))
+* **proxy:** create proxymanager ([590cc6e](https://github.com/isuvorov/lib-starter-kit/commit/590cc6e6311ee22501c69f87ea853f973dec56f0))
+* **stats:** improve stats ([77bb1f0](https://github.com/isuvorov/lib-starter-kit/commit/77bb1f09e2f972531ab4771334f2f9672e7d43d6))
+* **uapp:** add safe mobx-react ([e79cdcc](https://github.com/isuvorov/lib-starter-kit/commit/e79cdccd2bbbed72631cde3e973fcc2ab9449526))
+* **worker:** recreate worker app and worker jobs ([d6a0ef7](https://github.com/isuvorov/lib-starter-kit/commit/d6a0ef7333d35a9804f6c6bcb6bdd351a4d10ba8))
+
+
+
+
+
+# [2.1.0-beta.2](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2021-01-15)
+
+
+### Bug Fixes
+
+* **bots:** fix ee and add telegram trace logs ([cf3e14b](https://github.com/isuvorov/lib-starter-kit/commit/cf3e14b346e3f6e2f1aea222a49df228df23f060))
+
+
+
+
+
+# [2.1.0-beta.1](https://github.com/isuvorov/lib-starter-kit/compare/v2.1.0-beta.0...v2.1.0-beta.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **bots:** model in MenuPlugin bugs ([3688ecb](https://github.com/isuvorov/lib-starter-kit/commit/3688ecbed4320ef9e56e3ebf1a046a284d4874ed))
+* **module,server,server-api:** module lifecycles bugs ([a40a58b](https://github.com/isuvorov/lib-starter-kit/commit/a40a58b7931ce4a8c48eb17d450dc3c3bea938b0))
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* **bots:** fix bugs ([b785bb6](https://github.com/isuvorov/lib-starter-kit/commit/b785bb6d6498ee1fc2c104fdc8ad4ba8803b810c))
+* **db:** fix ts bug ([cfca89c](https://github.com/isuvorov/lib-starter-kit/commit/cfca89c95d228e3768212611065419c49e9bfc7c))
+* **db:** ts error ([cad5197](https://github.com/isuvorov/lib-starter-kit/commit/cad5197117e85c97a098d74c30c832f7510c48c2))
+* **server:** fix bugs ([857cc86](https://github.com/isuvorov/lib-starter-kit/commit/857cc8640dbb15d93f4291e310561b02caca2ff0))
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/isuvorov/lib-starter-kit/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+* **log:** improve logger ([fc3ab2e](https://github.com/isuvorov/lib-starter-kit/commit/fc3ab2eb984da1e3f7f898340a74c2dbbd199f41))
+* **module:** remove v1, rename workflow to lifecycle ([8e7b19c](https://github.com/isuvorov/lib-starter-kit/commit/8e7b19c0042923e58acacf599a94adcd0e5a60ad))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* **server:** invalid import ([a00bf6c](https://github.com/isuvorov/lib-starter-kit/commit/a00bf6cb596f877d9c8052693c5811d444ac5716))
+* **utils:** isFunction error ([0796e90](https://github.com/isuvorov/lib-starter-kit/commit/0796e90c9683bba3c960426ec5dceb1112c4287d))
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+
+### Bug Fixes
+
+* **db:** types errors ([c0d2d38](https://github.com/isuvorov/lib-starter-kit/commit/c0d2d383b345738d6ae927068e9f518503888d1b))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
 
 **Note:** Version bump only for package lskjs
 
@@ -68,12 +1871,95 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.99.0](https://github.com/isuvorov/lib-starter-kit/compare/v1.98.0...v1.99.0) (2021-02-02)
+# [2.0.0-beta.4](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.2...v2.0.0-beta.4) (2021-01-12)
+
+
+### Bug Fixes
+
+* **db:** ts errors ([6424dff](https://github.com/isuvorov/lib-starter-kit/commit/6424dff1679172826d80b449c1ac63011fa5ad62))
+* **utils:** add tests asyncMapValuesDeep ([ac95eb7](https://github.com/isuvorov/lib-starter-kit/commit/ac95eb73e6f6b8b84bf6647e7347f628ddff895b))
+* **utils:** isFunction return false if it is class ([01fe461](https://github.com/isuvorov/lib-starter-kit/commit/01fe4617ddf204e2eab52b1a56bf9ef079a70b66))
+* **utils:** pass keys in context asyncMapValuesDeep ([d430f10](https://github.com/isuvorov/lib-starter-kit/commit/d430f109462fa60f47a0f554e1e5e8dec03c6c69))
 
 
 ### Features
 
-* **uapp:** dynamically meta with meta.observe support ([16a23e1](https://github.com/isuvorov/lib-starter-kit/commit/16a23e1f12b0f859fbfef26e9a26ca1f381ca935))
+* **db:** add Model, create typings, ModelsModule ([0f1c01a](https://github.com/isuvorov/lib-starter-kit/commit/0f1c01a5caf27d21d982fabf7d7ad8a48dbc9b91))
+* **db:** recreate db as module add typings ([f65e9a3](https://github.com/isuvorov/lib-starter-kit/commit/f65e9a3837834447a95666aa1a22366a93f49131))
+* **i18:** add I18Module, new logic separations ([5de4e45](https://github.com/isuvorov/lib-starter-kit/commit/5de4e4533a2b8254375a68fc7f57704597fd2ecb))
+* **log:** child logs, improve logging, add cli options ([038493f](https://github.com/isuvorov/lib-starter-kit/commit/038493f0ebbe8e4270fa362b034a0ecb793422f6))
+* **module:** stable workflow, typings, add tests ([39bb765](https://github.com/isuvorov/lib-starter-kit/commit/39bb765c846f8a92e7e474805fd094c73186ffdf))
+* **server:** minify ServerApp, separate Webserver, refactor middlewares ([2650905](https://github.com/isuvorov/lib-starter-kit/commit/2650905b990dce681afdb427966c6585c3414004))
+* **server-api:** migrate Api to Module, new workflow, improve getRoutes ([8a8059b](https://github.com/isuvorov/lib-starter-kit/commit/8a8059bb9025a70fd1ff709ea1690a674647ff1d))
+* **utils:** add omit and pick ([cedd642](https://github.com/isuvorov/lib-starter-kit/commit/cedd6424dea0312e2d69d408022df82527acef9e))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-01-12)
+
+
+### Bug Fixes
+
+* **db:** ts errors ([6424dff](https://github.com/isuvorov/lib-starter-kit/commit/6424dff1679172826d80b449c1ac63011fa5ad62))
+* **utils:** add tests asyncMapValuesDeep ([ac95eb7](https://github.com/isuvorov/lib-starter-kit/commit/ac95eb73e6f6b8b84bf6647e7347f628ddff895b))
+* **utils:** isFunction return false if it is class ([01fe461](https://github.com/isuvorov/lib-starter-kit/commit/01fe4617ddf204e2eab52b1a56bf9ef079a70b66))
+* **utils:** pass keys in context asyncMapValuesDeep ([d430f10](https://github.com/isuvorov/lib-starter-kit/commit/d430f109462fa60f47a0f554e1e5e8dec03c6c69))
+
+
+### Features
+
+* **db:** add Model, create typings, ModelsModule ([0f1c01a](https://github.com/isuvorov/lib-starter-kit/commit/0f1c01a5caf27d21d982fabf7d7ad8a48dbc9b91))
+* **db:** recreate db as module add typings ([f65e9a3](https://github.com/isuvorov/lib-starter-kit/commit/f65e9a3837834447a95666aa1a22366a93f49131))
+* **i18:** add I18Module, new logic separations ([5de4e45](https://github.com/isuvorov/lib-starter-kit/commit/5de4e4533a2b8254375a68fc7f57704597fd2ecb))
+* **log:** child logs, improve logging, add cli options ([038493f](https://github.com/isuvorov/lib-starter-kit/commit/038493f0ebbe8e4270fa362b034a0ecb793422f6))
+* **module:** stable workflow, typings, add tests ([39bb765](https://github.com/isuvorov/lib-starter-kit/commit/39bb765c846f8a92e7e474805fd094c73186ffdf))
+* **server:** minify ServerApp, separate Webserver, refactor middlewares ([2650905](https://github.com/isuvorov/lib-starter-kit/commit/2650905b990dce681afdb427966c6585c3414004))
+* **server-api:** migrate Api to Module, new workflow, improve getRoutes ([8a8059b](https://github.com/isuvorov/lib-starter-kit/commit/8a8059bb9025a70fd1ff709ea1690a674647ff1d))
+* **utils:** add omit and pick ([cedd642](https://github.com/isuvorov/lib-starter-kit/commit/cedd6424dea0312e2d69d408022df82527acef9e))
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/isuvorov/lib-starter-kit/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package lskjs
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/isuvorov/lib-starter-kit/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **log:** improve logger types ([28492d1](https://github.com/isuvorov/lib-starter-kit/commit/28492d1412442c7040402252b70e9d85dd52e82c))
+* **module:** create and createAndRun bugs ([2e4be34](https://github.com/isuvorov/lib-starter-kit/commit/2e4be342f9863c4950a85a4cafb00cf85bdf3114))
+* **utils:** improve chunkBy and asyncMapValues types ([de3c95a](https://github.com/isuvorov/lib-starter-kit/commit/de3c95a2c3224a1ece423cab6a2dbb2c6c100309))
+* **utils:** ts errors ([f326c38](https://github.com/isuvorov/lib-starter-kit/commit/f326c388c36a543a617398374dc52228ef9db8f2))
+
+
+### Features
+
+* upgrade packages for module2 ([1deac99](https://github.com/isuvorov/lib-starter-kit/commit/1deac9907c2a0d86acaf742b9cbe2de1b6d3dd45))
+* **bots:** improve type checks ([3935d3e](https://github.com/isuvorov/lib-starter-kit/commit/3935d3eae4f411497f576dbf5080ed3c48fe21dd))
+* **module:** add create and createAndRun, add tests ([c36ab1d](https://github.com/isuvorov/lib-starter-kit/commit/c36ab1d33995a470dd98df3b2b27e7786272462e))
+* **module:** improve module creation and types ([713d93b](https://github.com/isuvorov/lib-starter-kit/commit/713d93bf4acabd89f5c320b0b7d50286a5231e8f))
+* **module:** improve module types ([9fcc15e](https://github.com/isuvorov/lib-starter-kit/commit/9fcc15e97c2e933873f345afa682a93c09740103))
+* **module:** improve TS, and workflow ([259b54a](https://github.com/isuvorov/lib-starter-kit/commit/259b54a8057682ab05aa71365753c989ce338f4a))
+* **utils:** add more tests for Err ([563d3af](https://github.com/isuvorov/lib-starter-kit/commit/563d3af982cef1ccae88ae6e0aedb673c5f7ec9c))
+* **utils:** improve arrayToObject to TS, cover tests ([4b3f454](https://github.com/isuvorov/lib-starter-kit/commit/4b3f454568fe39b8d99149f86c46adf481d8ec7d))
+* **utils:** improve Err to TS, cover tests ([e28f266](https://github.com/isuvorov/lib-starter-kit/commit/e28f266a9221d5ce10bcfba56421aa19addbb011))
+* **utils:** improve errMerge to TS, cover tests ([fd7611e](https://github.com/isuvorov/lib-starter-kit/commit/fd7611eda29b713272d35ba8b50c5d1eb117b617))
+* **utils:** improve errProps to TS, cover tests ([da9f5ee](https://github.com/isuvorov/lib-starter-kit/commit/da9f5eeb4a5f3b5bf5a58ad07fbd04a0bab996a0))
+
+
+### BREAKING CHANGES
+
+* **module:** you need to replace new Module(props) to Module.create(props) construction
 
 
 

@@ -29,7 +29,6 @@ test('tryParamParse("false") === false', () => {
   expect(tryParamParse(obj)).toStrictEqual(res);
 });
 
-
 //
 
 test('tryParamParse(1) === 1', () => {
@@ -59,7 +58,6 @@ test('tryParamParse("0") === 0', () => {
 
   expect(tryParamParse(obj)).toStrictEqual(res);
 });
-
 
 //
 

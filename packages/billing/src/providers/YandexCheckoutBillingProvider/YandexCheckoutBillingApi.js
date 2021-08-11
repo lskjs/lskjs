@@ -4,10 +4,9 @@ import get from 'lodash/get';
 import set from 'lodash/set';
 
 export default class YandexCheckoutBillingApi extends Api {
-  name = 'YandexCheckoutBillingApi';
   getRoutes() {
     return {
-      '/index': ::this.index,
+      ...super.getRoutes(),
       '/create': ::this.create,
       '/callback': ::this.callback,
       '/check': ::this.check,
@@ -15,9 +14,6 @@ export default class YandexCheckoutBillingApi extends Api {
   }
   url(...args) {
     return this.app.url(`/api/billing/yandexCheckout/${args[0]}`, ...args.slice(1));
-  }
-  index() {
-    return 'ok';
   }
   async check(req) {
     await this.isAuth(req);

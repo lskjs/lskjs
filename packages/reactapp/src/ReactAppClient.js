@@ -1,27 +1,15 @@
-import Promise from 'bluebird';
-import ReactDOM from 'react-dom';
-import assignProps from '@lskjs/utils/assignProps';
-import collectWindowReq from '@lskjs/utils/collectWindowReq';
-import { createBrowserHistory } from 'history';
+/* global window */
 import Module from '@lskjs/module';
-// import BaseUapp from '@lskjs/uapp';
-// import { Redbox } from './core/devUtils';
-// import { AppContainer } from 'react-hot-loader';
+import collectWindowReq from '@lskjs/utils/collectWindowReq';
+import Err from '@lskjs/utils/Err';
+import Bluebird from 'bluebird';
+import { createBrowserHistory } from 'history';
+import ReactDOM from 'react-dom';
 
-Promise.config({ cancellation: true });
-
-const DEBUG = __DEV__ && false; // __STAGE__ === 'isuvorov'
+const DEBUG = __DEV__; // __STAGE__ === 'isuvorov'
 
 export default class ReactAppClient extends Module {
-  // BaseUapp = BaseUapp;
   ReactDOM = ReactDOM;
-  name = 'ReactAppClient';
-
-  constructor(...props) {
-    // СМИРИТЕСЬ: Эта копипаста нужна, чтобы менять параметры сверху (ex ReactDOM)
-    super(...props);
-    assignProps(this, ...props);
-  }
 
   getRootState() {
     return window.__ROOT_STATE__ || {};
@@ -29,19 +17,21 @@ export default class ReactAppClient extends Module {
 
   async init() {
     await super.init();
-    if (!this.container) this.container = document.getElementById('root');
+    if (!this.container) this.container = window.document.getElementById('root');
     this.history = createBrowserHistory({
-      getUserConfirmation: (message, callback) => {
-        if (!(this.uapp && this.uapp.historyConfirm)) {
-          callback(true);
-          return;
-        }
-        this.uapp.historyConfirm(message, callback);
-      },
+      // getUserConfirmation: (message, callback) => {
+      //   if (!(this.uapp && this.uapp.historyConfirm)) {
+      //     callback(true);
+      //     return;
+      //   }
+      //   this.uapp.historyConfirm(message, callback);
+      // },
     });
   }
 
-  run() {
+  async run() {
+    await super.run();
+    this.uapp = await this.module('uapp');
     this.history.listen((location) => {
       if (location.method === 'replaceState') return;
       this.render();
@@ -49,60 +39,96 @@ export default class ReactAppClient extends Module {
     this.render();
   }
 
+  async getModuleConfig(name) {
+    const config = await super.getModuleConfig(name);
+    if (name === 'uapp')
+      return {
+        ...this.config,
+        ...config,
+      };
+    return config;
+  }
+
+  async getModuleProps(name) {
+    if (name === 'uapp') {
+      return {
+        ...(await super.getModuleProps(name)),
+        rootState: this.getRootState(),
+        history: this.history,
+        req: collectWindowReq(),
+      };
+    }
+    return super.getModuleProps(name);
+  }
+
+  getModules() {
+    return {
+      ...super.getModules(),
+      uapp: () => import('@lskjs/uapp'),
+    };
+  }
+
   /**
    * Редирект без сохранения в history
    * @param {String} path Новый url для редиректа
    */
-  redirect(path, saveInHistory = false) {
-    if (DEBUG) console.log('ReactApp.redirect', path); // eslint-disable-line no-console
-    setTimeout(
-      () => {
-        if (saveInHistory) {
-          this.history.push(path);
-        } else {
-          this.history.replace(path);
-        }
-      },
-      DEBUG ? 1000 : 0,
-    );
+  async redirect(path, saveInHistory = false) {
+    this.log.debug('redirect', path);
+    if (DEBUG) {
+      this.log.debug('[delay]', 1000);
+      await Bluebird.delay(1000);
+    }
+    if (saveInHistory) {
+      this.history.push(path);
+    } else {
+      this.history.replace(path);
+    }
   }
 
   // @autobind
   async render() {
-    if (this.uapp && this.uapp.page && this.uapp.page.exit) {
-      await this.uapp.page.exit();
-    }
     const req = collectWindowReq();
     let page;
     try {
-      page = await this.resolve(req);
+      const a = await this.resolve(req);
+      ({ page } = a);
     } catch (err) {
-      if (DEBUG) console.log('err @!#!@#!@# ', err); // eslint-disable-line no-console
-      if ((err && err.type === 'cancel') || (err && err.code === 'page.cancel') || err === 'page.cancel') {
-        if (__DEV__) console.warn('!!!!!!!!!!!!!!! CSR.canceled !!!!!!!!!!!!!'); // eslint-disable-line no-console
+      this.log.trace('err @!#!@#!@# ', err);
+      if (Err.getCode(err) === 'page.cancel') {
+        this.log.warn('!!!!!!!!!!!!!!! CSR.canceled !!!!!!!!!!!!!');
         return;
       }
-      this.log.error('ReactAppClient.resolve err (ROUTER ERROR)', err);
-      try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error('ReactAppClient.resolve err (ROUTER ERROR)');
-      } catch (x) {
-        //
-      }
+      this.log.error('resolve err (ROUTER ERROR)', err);
+      // try {
+      //   // --- Welcome to debugging React ---
+      //   // This error was thrown as a convenience so that you can use this stack
+      //   // to find the callsite that caused this warning to fire.
+      //   throw new Error('resolve err (ROUTER ERROR)');
+      // } catch (x) {
+      //   //
+      // }
       throw err;
     }
 
-    if (page.state.redirect) {
+    if (!page) {
+      this.log.error('!page');
+      throw new Err('!page');
+    }
+
+    if (page && page.state && page.state.redirect) {
       this.redirect(...page.state.redirect);
       return;
     }
 
     if (!this.container) {
-      this.log.error('!ReactAppClient.container');
+      this.log.error('!container');
+      throw new Err('!container');
     }
     const component = page.render();
+    if (!component) {
+      this.log.error('!component');
+      throw new Err('!component');
+    }
     // Check if the root node has any children to detect if the app has been prerendered
     if (this.container.hasChildNodes()) {
       this.ReactDOM.hydrate(component, this.container);
@@ -111,48 +137,26 @@ export default class ReactAppClient extends Module {
     }
   }
 
-  async getUapp(params = {}) {
-    if (this.uapp) return this.uapp;
-    const { Uapp } = this;
-    this.uapp = new Uapp({
-      app: this,
-      rootState: this.getRootState(),
-      config: this.config,
-      history: this.history,
-      req: collectWindowReq(),
-      ...params,
-    });
-    await this.uapp.start();
-    return this.uapp;
-  }
-
   async resolve(req) {
-    const uapp = await this.getUapp({ req });
     if (this.reqPromise) {
       if (this.reqPromise.cancel) {
         this.reqPromise.cancel();
       } else {
-        // eslint-disable-next-line no-lonely-if
-        if (DEBUG) console.log('!!!!this.reqPromise.cancel'); // eslint-disable-line no-console
+        this.log.warn('!this.reqPromise.cancel');
       }
     }
-    const reqPromise = uapp.resolve({
+    const reqPromise = this.uapp.resolve({
       path: req.path || req.pathname,
       query: req.query,
     });
     this.reqPromise = reqPromise;
-    await reqPromise;
-    if (!reqPromise.isCancelled) {
-      if (DEBUG) console.log('!isCancelled !isCancelled !isCancelled', reqPromise); // eslint-disable-line no-console
-    } else {
-      // eslint-disable-next-line no-lonely-if
-      if (reqPromise.isCancelled()) {
-        if (DEBUG) console.log('CANCEL CANCEL CANCEL'); // eslint-disable-line no-console
-        throw 'cancel';
-      }
+    const res = await reqPromise;
+    if (reqPromise.isCancelled && reqPromise.isCancelled()) {
+      this.log.warn('CANCEL CANCEL CANCEL');
+      throw new Err('page.cancel');
     }
 
     this.reqPromise = null;
-    return uapp.page;
+    return res;
   }
 }

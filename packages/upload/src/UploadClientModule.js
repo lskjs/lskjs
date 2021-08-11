@@ -2,7 +2,6 @@ import Module from '@lskjs/module';
 import Promise from 'bluebird';
 
 export default class UploadClientModule extends Module {
-  name = 'UploadClientModule';
   async uploadFiles(files) {
     if (typeof window === 'undefined') throw '!FormData';
     return Promise.map(files, (file) => this.uploadFile(file));

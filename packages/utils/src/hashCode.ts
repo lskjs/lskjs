@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-export default (s: string | number): number => {
+export const hashCode = (s: string | number): number => {
   if (typeof s === 'number') return s;
   return Math.abs(
     String(s)
@@ -10,3 +10,5 @@ export default (s: string | number): number => {
       }, 0) - 48,
   );
 };
+
+export default hashCode;

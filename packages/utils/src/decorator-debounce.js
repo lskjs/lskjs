@@ -24,7 +24,6 @@ export function debounce(method, duration = DEFAULT_DEBOUNCE_DURATION) {
   return debounceWrapper;
 }
 
-
 /** Decorates a class method so that it is debounced by the specified duration */
 export default function outerDecorator(duration) {
   return function innerDecorator(target, key, descriptor) {

@@ -1,71 +1,41 @@
 import Module from '@lskjs/module';
 import elasticsearch from 'elasticsearch';
-import mexp from 'mongoose-elasticsearch-xp-async';
+import get from 'lodash/get';
 import merge from 'lodash/merge';
+import mexp from 'mongoose-elasticsearch-xp-async';
 
 export default class ElasticServerModule extends Module {
-  name = 'ElasticServerModule';
   enabled = false;
   delayedModels = [];
-  defaultConfig = {
-    sync: true,
+  config = {
     client: {
-      host: 'localhost:9200',
       maxRetries: 10000,
       log: {
         level: 'error',
       },
     },
     pingTimeout: 5000,
-    settings: {
-      analysis: {
-        filter: {
-          ngram_filter: {
-            type: 'ngram',
-            min_gram: 3,
-            max_gram: 4,
-            token_chars: ['letter', 'digit'],
-          },
-          autocomplete_filter: {
-            type: 'edge_ngram',
-            min_gram: 1,
-            max_gram: 20,
-          },
-          stopprotocol_filter: {
-            type: 'stop',
-            stopwords: ['http', 'https', 'ftp', 'www'],
-          },
-        },
-        analyzer: {
-          ngram_analyzer: {
-            type: 'custom',
-            tokenizer: 'standard',
-            filter: ['ngram_filter', 'lowercase'],
-          },
-          autocomplete: {
-            type: 'custom',
-            tokenizer: 'standard',
-            filter: ['lowercase', 'autocomplete_filter'],
-          },
-          url_lowercase_without_protocols: {
-            type: 'custom',
-            tokenizer: 'lowercase',
-            filter: ['stopprotocol_filter'],
-          },
-        },
-      },
-    },
   };
+
+  async getConfig() {
+    return merge(
+      //
+      {},
+      await super.getConfig(),
+      get(this, 'config', {}),
+      get(this, '__config', {}),
+    );
+  }
+
   async init() {
     await super.init();
-    const configElasticsearch = this.app.config.elastic || this.app.config.elasticsearch;
-    if (!configElasticsearch) {
-      this.log.warn('config.elastic IS EMPTY');
+    // TODO: переписать на плосскую структуру
+    if (!get(this, 'config.client.host') && !get(this, 'config.client.hosts')) {
+      this.log.error('!config.client.host');
       return;
     }
     this.enabled = true;
     this.nowSync = [];
-    this.config = merge({}, this.defaultConfig, configElasticsearch);
     this.client = new elasticsearch.Client(this.config.client);
     this.delayedModels.forEach(([schema, params]) => {
       this.addModel(schema, params);
@@ -73,7 +43,7 @@ export default class ElasticServerModule extends Module {
   }
   getProjectionModel(model) {
     const projection = {};
-    Object.keys(model.schema.obj).forEach(key => {
+    Object.keys(model.schema.obj).forEach((key) => {
       const field = model.schema.obj[key];
       if (field.es_indexed) {
         projection[key] = 1;
@@ -120,7 +90,7 @@ export default class ElasticServerModule extends Module {
 
   async syncAll({ again = false } = {}) {
     const modelNames = this.app.db.modelNames();
-    modelNames.forEach(async modelName => {
+    modelNames.forEach(async (modelName) => {
       const model = this.app.db.model(modelName);
       if (model.esCreateMapping) {
         this.sync({ model, again });
@@ -129,7 +99,7 @@ export default class ElasticServerModule extends Module {
   }
 
   removeFromNowSync(modelName) {
-    this.nowSync = this.nowSync.filter(item => item !== modelName);
+    this.nowSync = this.nowSync.filter((item) => item !== modelName);
   }
 
   addModelWithDelay(schema, params = {}) {
@@ -151,11 +121,17 @@ export default class ElasticServerModule extends Module {
       },
       params,
     );
-    schema.getMongooseSchema().plugin(mexp.v7, options);
+    if (schema.getMongooseSchema) {
+      schema.getMongooseSchema().plugin(mexp.v7, options);
+    } else {
+      schema.plugin(mexp.v7, options);
+    }
   }
 
   async run() {
+    await super.run();
     if (!this.enabled) return;
+    if (!this.client) return;
     if (this.config.sync) {
       this.syncAll({ again: true });
     }

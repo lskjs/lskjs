@@ -1,7 +1,8 @@
-import SHA256 from 'crypto-js/sha256';
 import axios from 'axios';
+import SHA256 from 'crypto-js/sha256';
 import isPlainObject from 'lodash/isPlainObject';
 import querystring from 'querystring';
+
 import BillingProvider from '../BillingProvider';
 /**
  *
@@ -46,7 +47,7 @@ export default class InterkassaBillingProvider extends BillingProvider {
 
     params.ik_co_id = this.config.coId;
     params.ik_am = parseFloat(params.ik_am).toString();
-    Object.keys(params).forEach(function (p) {
+    Object.keys(params).forEach((p) => {
       if (!/^ik_/i.test(p) || p === 'ik_sign') {
         delete params[p];
       }

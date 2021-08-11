@@ -7,4 +7,6 @@ import mapValues from 'lodash/mapValues';
 //   callback: string | DictionaryIterator<T, any>,
 // ): Promise<Dictionary<any>> => Bluebird.props(mapValues(obj, callback)); // @ts-ignore
 
-export default (obj: any, callback: any): Promise<any> => Bluebird.props(mapValues(obj, callback));
+export const asyncMapValues = (obj: any, callback: any): Promise<any> => Bluebird.props(mapValues(obj, callback));
+
+export default asyncMapValues;

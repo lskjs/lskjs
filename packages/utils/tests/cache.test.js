@@ -1,6 +1,6 @@
 /* global test expect */
 import { Mutex } from 'async-mutex';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 
 class CacheStore {
   data = {};
@@ -21,7 +21,7 @@ class CacheStore {
       return this.data[key];
     }
     if (this.mutexes[key].isLocked()) {
-      await Promise.delay(100);
+      await Bluebird.delay(100);
       return this.cache(key, value);
     }
     return this.data[key];
@@ -31,14 +31,14 @@ class CacheStore {
 test('cacheStore', async () => {
   const cacheStore = new CacheStore();
   const keysMap = {
-    '1': 0,
-    '2': 0,
+    1: 0,
+    2: 0,
   };
-  await Promise.map([{ key: 1 }, { key: 2 }, { key: 1 }, { key: 2 }, { key: 1 }, { key: 1 }], async ({ key }) => {
+  await Bluebird.map([{ key: 1 }, { key: 2 }, { key: 1 }, { key: 2 }, { key: 1 }, { key: 1 }], async ({ key }) => {
     await cacheStore.cache(key, async () => {
       keysMap[key] += 1;
-      await Promise.delay(1000);
+      await Bluebird.delay(1000);
     });
   });
-  expect(keysMap).toEqual({ '1': 1, '2': 1 });
+  expect(keysMap).toEqual({ 1: 1, 2: 1 });
 });

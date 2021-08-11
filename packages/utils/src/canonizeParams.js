@@ -1,6 +1,6 @@
-import canonizeUsername from './canonizeUsername';
 import canonizeEmail from './canonizeEmail';
 import canonizePhone from './canonizePhone';
+import canonizeUsername from './canonizeUsername';
 import validateEmail from './validateEmail';
 import validatePhone from './validatePhone';
 import validateUsername from './validateUsername';

@@ -1,0 +1,11 @@
+{
+  "search.exclude": {
+    "**/packages/*/build*/**": true,
+    "**/packages/*/release*/**": true,
+    "**/packages/*/cra/**": true,
+    "**/packages/*/cra/build/**": true,
+    "**/packages/*/cra/public/**": true,
+    "**/packages/*/cra/src/**": true,
+    "**/packages/*/public/**": true
+  },
+}

@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import get from 'lodash/get';
+
 import MjmlTemplate from './MjmlTemplate';
 
 export default class BaseTemplate extends MjmlTemplate {

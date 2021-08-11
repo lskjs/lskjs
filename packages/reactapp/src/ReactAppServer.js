@@ -1,28 +1,32 @@
-import get from 'lodash/get';
-import pick from 'lodash/pick';
-import { createMemoryHistory } from 'history';
 import Module from '@lskjs/module';
-import cloneDeep from 'lodash/cloneDeep';
-import Promise from 'bluebird';
+import { start } from '@lskjs/module/utils/safe';
+import antimergeDeep from '@lskjs/utils/antimergeDeep';
 import autobind from '@lskjs/utils/autobind';
 import collectExpressReq from '@lskjs/utils/collectExpressReq';
-import antimergeDeep from '@lskjs/utils/antimergeDeep';
+import Bluebird from 'bluebird';
+import { renderStylesToNodeStream, renderStylesToString } from 'emotion-server';
+import { createMemoryHistory } from 'history';
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
+import pick from 'lodash/pick';
 // import ReactDOM from 'react-dom/server';
-import { renderToStaticMarkup, renderToString, renderToNodeStream } from 'react-dom/server';
-import { renderStylesToString, renderStylesToNodeStream } from 'emotion-server';
+import { renderToNodeStream, renderToStaticMarkup, renderToString } from 'react-dom/server';
+
 import BaseHtml from './Html';
 
 const DEBUG = false;
 
-export default class ReactAppServer extends Module {
-  name = 'ReactAppServer';
+// config: this.config,
+// app: this,
+// expressResolve: this.expressResolve,
+// express: this.express,
 
+export default class ReactAppServer extends Module {
   async init() {
     await super.init();
-    if (!this.config && this.app) this.config = this.app.config;
     if (!this.expressResolve && this.app) this.expressResolve = this.app.expressResolve;
     if (!this.express && this.app) this.express = this.app.express;
-    if (!this.Uapp) throw '!Uapp';
+    if (!this.Uapp && !this.hasModule('uapp')) throw '!Uapp';
   }
 
   getRootState({ req, ...props }) {
@@ -38,10 +42,12 @@ export default class ReactAppServer extends Module {
   }
 
   async getUapp({ req, ...params } = {}) {
-    const { Uapp } = this;
     const uappReq = collectExpressReq(req);
     const config = cloneDeep(get(this, 'config.client', {}));
-    const uapp = new Uapp({
+    if (this.hasModule('uapp')) {
+      return this.module('uapp');
+    }
+    const uapp = await start(this.Uapp, {
       ...params,
       history: createMemoryHistory({
         // TODO: вырезать
@@ -52,14 +58,6 @@ export default class ReactAppServer extends Module {
       config,
       app: this,
     });
-    try {
-      if (uapp.start) {
-        await uapp.start();
-      }
-    } catch (err) {
-      this.log.error('uapp.start()', err);
-      throw err;
-    }
     return uapp;
   }
 
@@ -146,7 +144,8 @@ export default class ReactAppServer extends Module {
     let content;
     try {
       try {
-        page = await this.uappResolve({ req });
+        // const res = this.uappResolve({ req }));
+        ({ page } = await this.uappResolve({ req }));
         if (!page) {
           this.log.warn('ReactAppServer.uappResolve(): !page');
         } else if (!page._page) {
@@ -161,7 +160,7 @@ export default class ReactAppServer extends Module {
         const [redirect] = redirectArgs;
         if (__DEV__) {
           this.log.debug('ReactAppServer.redirect', redirect);
-          await Promise.delay(2000);
+          await Bluebird.delay(2000);
         }
         if (strategy === 'json') {
           return { status, redirect };
@@ -175,8 +174,10 @@ export default class ReactAppServer extends Module {
         } else if (typeof page === 'string') {
           component = page;
         } else {
-          if (__DEV__ && !get(page, 'render')) {
-            console.error('!page', { page }); // eslint-disable-line no-console
+          if (!page) throw '!page';
+          if (__DEV__ && page && !page.render) {
+            console.error('!page.render', { page, render: page.render }); // eslint-disable-line no-console
+            throw '!page.render';
           }
           throw '!page';
         }

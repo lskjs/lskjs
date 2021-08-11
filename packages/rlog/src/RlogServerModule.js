@@ -1,5 +1,3 @@
-import RlogModule from './RlogModule';
+import { RlogModule } from './RlogModule';
 
-export default class RlogServerModule extends RlogModule {
-  name = 'RlogServerModule';
-}
+export default class RlogServerModule extends RlogModule {}

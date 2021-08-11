@@ -10,40 +10,35 @@ export default class Strategy {
   type = null;
 
   url(path, options = {}) {
-    const {origin} = options;
+    const { origin } = options;
     if (origin) {
-      return origin + path
-    } else {
-      return this.app.url(path)
+      return origin + path;
     }
+    return this.app.url(path);
   }
 
   getInfo() {
     return {
       type: this.type,
-      ...pick(this.config, ['clientId', 'clientID'])
+      ...pick(this.config, ['clientId', 'clientID']),
     };
   }
-
 
   getProviderId({ id } = {}) {
     return id;
   }
 
-  getCallbackUrl({origin} = {}) {
+  getCallbackUrl({ origin } = {}) {
     return (
-      this.config.callbackURL ||
-      this.config.callbackUrl ||
-      this.url(`/api/auth/${this.provider}/callback`, { origin })
-    )
+      this.config.callbackURL || this.config.callbackUrl || this.url(`/api/auth/${this.provider}/callback`, { origin })
+    );
   }
-  getPassportAuthenticateParams({method = 'auth', origin} = {}) {
-    console.log('getPassportAuthenticateParams callbackURL', this.getCallbackUrl({origin}));
+  getPassportAuthenticateParams({ method = 'auth', origin } = {}) {
+    console.log('getPassportAuthenticateParams callbackURL', this.getCallbackUrl({ origin }));
     if (method === 'auth') {
-
-      return {       callbackURL: this.getCallbackUrl({origin})    };
+      return { callbackURL: this.getCallbackUrl({ origin }) };
     }
-      return {}
+    return {};
   }
 
   Strategy = null;
@@ -93,8 +88,8 @@ export default class Strategy {
       const [done, ...args2] = args1.reverse();
       const args = args2.reverse();
       this.passportStrategyCallback(...args)
-        .then(data => done(null, data))
-        .catch(err => done(err));
+        .then((data) => done(null, data))
+        .catch((err) => done(err));
     });
 
     strategy.name = this.provider;

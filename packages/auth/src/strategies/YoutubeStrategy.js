@@ -1,7 +1,8 @@
-import Youtube from 'passport-youtube-v3';
-import get from 'lodash/get';
-import { stringify } from 'qs';
 import fetch from 'isomorphic-fetch';
+import get from 'lodash/get';
+import Youtube from 'passport-youtube-v3';
+import { stringify } from 'qs';
+
 import BaseStrategy from './BaseStrategy';
 
 export default class YoutubeStrategy extends BaseStrategy {
@@ -12,8 +13,7 @@ export default class YoutubeStrategy extends BaseStrategy {
     const config = super.getPassportStrategyConfig();
     return {
       ...config,
-      scope:
-        config.scope && config.scope.length ? config.scope : ['https://www.googleapis.com/auth/youtube.readonly'],
+      scope: config.scope && config.scope.length ? config.scope : ['https://www.googleapis.com/auth/youtube.readonly'],
     };
   }
 
@@ -21,8 +21,8 @@ export default class YoutubeStrategy extends BaseStrategy {
     return {
       ...super.getInfo(),
       settings: `https://console.developers.google.com/apis/credentials/oauthclient/${this.config.clientId}?project=${this.config.project}`,
-    }
-  }  
+    };
+  }
 
   async updateTokens(passport, creds2) {
     /* eslint-disable no-param-reassign */
@@ -118,4 +118,4 @@ export default class YoutubeStrategy extends BaseStrategy {
 
     return profile;
   }
-};
+}

@@ -1,13 +1,16 @@
-import isPlainObject from 'lodash/isPlainObject';
-import round from 'lodash/round';
 import forEach from 'lodash/forEach';
-import mapValues from 'lodash/mapValues';
+import isFinite from 'lodash/isFinite';
 import isObjectLike from 'lodash/isObjectLike';
+import isPlainObject from 'lodash/isPlainObject';
+import mapValues from 'lodash/mapValues';
+import round from 'lodash/round';
+
 import tryParamParse from './tryParamParse';
 
+export const notNan = (a, def = null) => (isFinite(a) ? a : def);
 export const toBoolean = (a, def = false) => Boolean(tryParamParse(a, def));
-export const toNumber = (a, def = 0) => Number(tryParamParse(a, def));
-export const toInt = (a, def = 0) => round(tryParamParse(a, def));
+export const toNumber = (a, def = 0) => notNan(Number(tryParamParse(a, def)), def);
+export const toInt = (a, def = 0) => notNan(round(tryParamParse(a, def)), def);
 export const toJson = (a, def = null) => (isObjectLike(a) ? a : tryParamParse(a, def));
 export const toDate = (a, def = null) => (a ? new Date(a) || def : def);
 export const parse = (a, type, def) => {

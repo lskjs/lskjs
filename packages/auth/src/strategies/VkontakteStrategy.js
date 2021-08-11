@@ -1,5 +1,6 @@
-import Vkontakte from 'passport-vkontakte';
 import fetch from 'isomorphic-fetch';
+import Vkontakte from 'passport-vkontakte';
+
 import BaseStrategy from './BaseStrategy';
 
 export default class VkontakteStrategy extends BaseStrategy {
@@ -11,8 +12,8 @@ export default class VkontakteStrategy extends BaseStrategy {
       return false;
     }
     try {
-      return fetch(`https://api.vk.com/method/users.get?access_token=${accessToken}&v=5.00`).then(response =>
-        response.json().then(json => {
+      return fetch(`https://api.vk.com/method/users.get?access_token=${accessToken}&v=5.00`).then((response) =>
+        response.json().then((json) => {
           if (
             json &&
             json.response &&
@@ -34,7 +35,7 @@ export default class VkontakteStrategy extends BaseStrategy {
     return {
       ...super.getInfo(),
       settings: `https://vk.com/editapp?id=${this.config.clientId || this.config.clientID}`,
-    }
+    };
   }
 
   async getProfile(passport) {  //eslint-disable-line

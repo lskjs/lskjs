@@ -3,18 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.101.0](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.100.2...v1.101.0) (2021-05-12)
+# [2.3.0-beta.98](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.97...v2.3.0-beta.98) (2021-08-05)
 
 
 ### Features
 
-* --nested for getspredsheet ([7ac5510](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/7ac5510a2cc5007081083304fe00b6f682846ef9))
+* **grant:** new grant version ([ebde63b](https://github.com/lskjs/lskjs/commit/ebde63b60baeb7f4a14698a07e12e9b0bf045002))
 
 
 
 
 
-## [1.100.1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.99.1...v1.100.1) (2021-02-02)
+# [2.3.0-beta.95](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.94...v2.3.0-beta.95) (2021-08-04)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix deps ([1671ec0](https://github.com/lskjs/lskjs/commit/1671ec0fce180f94117f6c870dba520bf757ddf3))
+
+
+
+
+
+# [2.3.0-beta.94](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.92...v2.3.0-beta.94) (2021-08-02)
+
+
+### Features
+
+* **getspreadsheet:** json beutyfy ([9b74d8e](https://github.com/lskjs/lskjs/commit/9b74d8e33b71554da87f644575549ba9a87b2d1f))
+
+
+
+
+
+# [2.3.0-beta.91](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.90...v2.3.0-beta.91) (2021-07-30)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet
 
@@ -22,7 +44,340 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.99.1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.99.0...v1.99.1) (2021-02-02)
+# [2.3.0-beta.86](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.85...v2.3.0-beta.86) (2021-07-29)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.81](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.80...v2.3.0-beta.81) (2021-07-19)
+
+
+### Features
+
+* --nested for getspredsheet ([fa67c31](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/fa67c31d62cf71109c5089ab24dd242ea460260a))
+
+
+
+
+
+# [2.3.0-beta.67](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.66...v2.3.0-beta.67) (2021-06-29)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.66](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.65...v2.3.0-beta.66) (2021-06-28)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.65](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.64...v2.3.0-beta.65) (2021-06-24)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** json yaml ([f620810](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/f620810b62c22d9290aa42ab8ae1e282f7157f61))
+
+
+
+
+
+# [2.3.0-beta.58](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.57...v2.3.0-beta.58) (2021-06-16)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.51](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.50...v2.3.0-beta.51) (2021-06-10)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** update package.json ([0be3cf3](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/0be3cf347e434a8bbad40131614268e93b38a900))
+* **getspreadsheet:** update package.json ([883b602](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/883b6028965020dd5998e7fc7f63e309a4e059bf))
+
+
+
+
+
+# [2.3.0-beta.47](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.46...v2.3.0-beta.47) (2021-05-18)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** env parser fix ([9d7e24a](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/9d7e24ac0630f569b5e23161f0c308b25859ddfe))
+
+
+
+
+
+# [2.3.0-beta.46](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.45...v2.3.0-beta.46) (2021-05-18)
+
+
+### Bug Fixes
+
+* **creds:** fix bugs ([eb25ae4](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/eb25ae4736487b63da529004b97486434b482be8))
+
+
+
+
+
+# [2.3.0-beta.45](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.44...v2.3.0-beta.45) (2021-05-18)
+
+
+### Features
+
+* **creds:** init package ([08319cf](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/08319cfed0484527355df1ed932d802c27eac596))
+
+
+
+
+
+# [2.3.0-beta.44](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.43...v2.3.0-beta.44) (2021-05-18)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** fix JS.stringify ([d2e034e](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/d2e034ea51b281e8d90e7166d9814478c7c028be))
+
+
+
+
+
+# [2.3.0-beta.43](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.42...v2.3.0-beta.43) (2021-05-17)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** add jsonToFile ([ae4e52e](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/ae4e52e77296f978d0bd6a8ab4b8ffeac5fc6440))
+
+
+
+
+
+# [2.3.0-beta.42](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.41...v2.3.0-beta.42) (2021-05-17)
+
+
+### Features
+
+* **getspreadsheet:** add utils for file generation ([27384a1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/27384a1d94baf16374203476ab685ad4b283fdae))
+
+
+
+
+
+# [2.3.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.21...v2.3.0-beta.22) (2021-04-09)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.10](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.9...v2.3.0-beta.10) (2021-03-16)
+
+
+### Bug Fixes
+
+* add bot's saveMessage and fixes ([d7373c6](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/d7373c6364282613c4008ff617e375bf6974c37e))
+
+
+
+
+
+# [2.3.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.4...v2.3.0-beta.5) (2021-02-21)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.3...v2.3.0-beta.4) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.3](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.2...v2.3.0-beta.3) (2021-02-19)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.3.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.3.0-beta.0...v2.3.0-beta.2) (2021-02-18)
+
+
+### Features
+
+* bump and fix bugs ([7768e2d](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/7768e2db33544b9fe998cd1b55aa2c6e9679206d))
+
+
+
+
+
+## [2.2.1-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.26...v2.2.1-beta.2) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.26](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.25...v2.2.0-beta.26) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.25](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.24...v2.2.0-beta.25) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.24](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.23...v2.2.0-beta.24) (2021-02-15)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.23](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.22...v2.2.0-beta.23) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.22](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.21...v2.2.0-beta.22) (2021-02-14)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.21](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-02-11)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.13](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-02-01)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-01-25)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-01-24)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.2.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.1.0-beta.6...v2.2.0-beta.1) (2021-01-19)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.1.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.1.0-beta.4](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.1.0-beta.2...v2.1.0-beta.4) (2021-01-18)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.1.0-beta.0](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.0.0-beta.7...v2.1.0-beta.0) (2021-01-14)
+
+
+### Features
+
+* skip lib check, npm audit, bump all packages, update deps ([7c9d94c](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/commit/7c9d94c165db5bfa922b462ec6b122bca85dd7a6))
+
+
+
+
+
+# [2.0.0-beta.7](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.0.0-beta.6](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-01-13)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-01-06)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet/compare/v1.98.0...v2.0.0-beta.1) (2021-01-06)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet
 

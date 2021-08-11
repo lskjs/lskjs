@@ -1,51 +1,16 @@
 import Module from '@lskjs/module';
-import multer from 'multer';
+import Err from '@lskjs/utils/Err';
 import fs from 'fs';
-import nodepath from 'path';
 import random from 'lodash/random';
-import get from 'lodash/get';
+import multer from 'multer';
+import nodepath from 'path';
 
-const mimetypes = {
-  'application/graphql': 'graphql',
-  'application/javascript': 'js',
-  'application/json': 'json',
-  'application/ld+json': 'json',
-  'application/msword': 'doc',
-  'application/pdf': 'pdf',
-  'application/sql': 'sql',
-  'application/vnd.api+json': 'json',
-  'application/vnd.ms-excel': 'xls',
-  'application/vnd.ms-powerpoint': 'ppt',
-  'application/vnd.oasis.opendocument.text': 'odt',
-  'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.documen': 'docx',
-  'application/xml': 'xml',
-  'application/zip': 'zip',
-  'audio/mpeg': 'mpeg',
-  'audio/ogg': 'ogg',
-  'image/gif': 'gif',
-  'image/jpeg': 'jpeg',
-  'image/png': 'png',
-  'text/css': 'css',
-  'text/csv': 'csv',
-  'text/html': 'html',
-  'text/plain': 'txt',
-  'text/xml': 'xml',
-};
+import mimetypes from './mimetypes';
 
 export default class UploadServerModule extends Module {
-  name = 'UploadServerModule';
   async init() {
     await super.init();
-    this.config = get(this.app, 'config.upload');
-    if (!this.config) {
-      this.app.log.error('config.upload is missing');
-      this.config = {};
-    }
-    if (!this.config.url) {
-      this.config.url = this.app.config.url;
-    }
+    if (!this.config.url) throw '!url';
     this.initStorage();
     this.multer = this.getMulter();
   }
@@ -55,7 +20,7 @@ export default class UploadServerModule extends Module {
     const fileFilter = (req, file, cb) => {
       if (Array.isArray(config.mimetypes)) {
         if (config.mimetypes.indexOf(file.mimetype) === -1) {
-          return cb(this.app.e('You are not allowed to upload files with this extension'));
+          return cb(new Err('upload.invalidExtension', 'You are not allowed to upload files with this extension'));
         }
       }
       return cb(null, true);
@@ -141,7 +106,7 @@ export default class UploadServerModule extends Module {
       path += '/guests';
     } else {
       this.app.log.error('Guest can not upload files');
-      throw this.app.e('Guest can not upload files', { status: 403 });
+      throw new Err('Guest can not upload files', { status: 403 });
     }
 
     let fileName;
