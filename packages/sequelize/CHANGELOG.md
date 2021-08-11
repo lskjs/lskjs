@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.104...v2.5.0) (2021-08-11)
+
+
+
+## [1.100.1](https://github.com/lskjs/lskjs/compare/v1.99.1...v1.100.1) (2021-02-02)
+
+
+
+## [1.99.1](https://github.com/lskjs/lskjs/compare/v1.99.0...v1.99.1) (2021-02-02)
+
+**Note:** Version bump only for package @lskjs/sequelize
+
+
+
+
+
 # [2.3.0-beta.99](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.98...v2.3.0-beta.99) (2021-08-09)
 
 **Note:** Version bump only for package @lskjs/sequelize

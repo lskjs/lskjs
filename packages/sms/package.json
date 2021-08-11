@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sms",
-  "version": "2.3.0-beta.95",
+  "version": "2.5.0",
   "description": "LSK module for sms.",
   "keywords": [
     "sms"
@@ -24,7 +24,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.3.0-beta.95"
+    "@lskjs/utils": "2.5.0"
   },
   "devDependencies": {
     "axios": "0.21.1",

@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/lskjs/cli/compare/v2.3.0-beta.104...v2.5.0) (2021-08-11)
+
+
+
+# [1.102.0](https://github.com/lskjs/cli/compare/v2.3.0-beta.98...v1.102.0) (2021-08-06)
+
+
+### Features
+
+* **module:** module1 to module2 conector ([e47c82e](https://github.com/lskjs/cli/commit/e47c82e5e6ffde21820bab3fb7084733d82e50dc))
+
+
+
+## [1.101.1](https://github.com/lskjs/cli/compare/v1.101.0...v1.101.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **uapp:** undefined param object ([0836e31](https://github.com/lskjs/cli/commit/0836e31ddbfbee9723ce6af2ac44068c4e10d1ca))
+
+
+
+# [1.101.0](https://github.com/lskjs/cli/compare/v2.3.0-beta.36...v1.101.0) (2021-05-12)
+
+
+### Bug Fixes
+
+* **uapp:** meta title without extra dashes ([5707c4f](https://github.com/lskjs/cli/commit/5707c4fbdbe222525bf3ce4a193a0908c6465f6c))
+
+
+### Features
+
+* --nested for getspredsheet ([7ac5510](https://github.com/lskjs/cli/commit/7ac5510a2cc5007081083304fe00b6f682846ef9))
+
+
+
+## [1.100.2](https://github.com/lskjs/cli/compare/v2.3.0-beta.9...v1.100.2) (2021-02-24)
+
+
+### Bug Fixes
+
+* **uapp:** resolve events with argumets ([3551e90](https://github.com/lskjs/cli/commit/3551e90fddf1e2fba3a93122cd6abd1cdb8e6263))
+
+
+
+## [1.100.1](https://github.com/lskjs/cli/compare/v1.99.1...v1.100.1) (2021-02-02)
+
+
+
+## [1.99.1](https://github.com/lskjs/cli/compare/v1.99.0...v1.99.1) (2021-02-02)
+
+
+
+# [1.99.0](https://github.com/lskjs/cli/compare/v2.2.0-beta.19...v1.99.0) (2021-02-02)
+
+
+### Features
+
+* **uapp:** dynamically meta with meta.observe support ([16a23e1](https://github.com/lskjs/cli/commit/16a23e1f12b0f859fbfef26e9a26ca1f381ca935))
+
+
+
+
+
 # [2.3.0-beta.104](https://github.com/lskjs/cli/compare/v2.3.0-beta.103...v2.3.0-beta.104) (2021-08-10)
 
 

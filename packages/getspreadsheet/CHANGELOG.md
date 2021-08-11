@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.104...v2.5.0) (2021-08-11)
+
+
+
+# [1.101.0](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.36...v1.101.0) (2021-05-12)
+
+
+### Features
+
+* --nested for getspredsheet ([7ac5510](https://github.com/lskjs/lskjs/commit/7ac5510a2cc5007081083304fe00b6f682846ef9))
+
+
+
+## [1.100.1](https://github.com/lskjs/lskjs/compare/v1.99.1...v1.100.1) (2021-02-02)
+
+
+
+## [1.99.1](https://github.com/lskjs/lskjs/compare/v1.99.0...v1.99.1) (2021-02-02)
+
+
+
+
+
 # [2.3.0-beta.98](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.97...v2.3.0-beta.98) (2021-08-05)
 
 

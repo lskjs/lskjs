@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sh",
-  "version": "2.3.0-beta.95",
+  "version": "2.5.0",
   "description": "LSK ux subrepo: sh",
   "keywords": [],
   "repository": "https://github.com/lskjs/ux/tree/master/packages/sh",
@@ -22,6 +22,6 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.3.0-beta.95"
+    "@lskjs/utils": "2.5.0"
   }
 }
