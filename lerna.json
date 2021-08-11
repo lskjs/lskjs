@@ -1,5 +1,5 @@
 {
-  "version": "2.3.0-beta.104",
+  "version": "2.4.0",
   "packages": [
     "packages/*"
   ],
@@ -11,7 +11,7 @@
       ],
       "exact": true,
       "conventionalCommits": true,
-      "conventionalPrerelease": true,
+      "conventionalPrerelease": false,
       "message": "chore(release): %s"
     },
     "publish": {
