@@ -87,8 +87,8 @@ export default function PermitModel(app) {
     return null;
   };
   schema.methods.activate = async function () {
-    // if (this.activatedAt) throw 'permit.activatedBefore';
-    // if (new Date(this.expiredAt) < new Date()) throw 'permit.expired';
+    // if (this.activatedAt) throw new Err('permit.activatedBefore');
+    // if (new Date(this.expiredAt) < new Date()) throw new Err('permit.expired');
     // this.getStatus()
     this.activatedAt = new Date();
     await this.save();

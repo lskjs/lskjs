@@ -1,4 +1,5 @@
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import Twitter from 'twitter-lite';
 
 /**
@@ -19,10 +20,10 @@ export default class TwitterBotProvider extends BaseBotProvider {
   config: TwitterBotConfigType;
   async init(): Promise<void> {
     await super.init();
-    if (!this.config.consumerKey) throw 'TwitterBotProvider !config.consumerKey';
-    if (!this.config.consumerSecret) throw 'TwitterBotProvider !config.consumerSecret';
-    if (!this.config.accessTokenKey) throw 'TwitterBotProvider !config.accessTokenKey';
-    if (!this.config.accessTokenSecret) throw 'TwitterBotProvider !config.accessTokenSecret';
+    if (!this.config.consumerKey) throw new Err('!config.consumerKey');
+    if (!this.config.consumerSecret) throw new Err('!config.consumerSecret');
+    if (!this.config.accessTokenKey) throw new Err('!config.accessTokenKey');
+    if (!this.config.accessTokenSecret) throw new Err('!config.accessTokenSecret');
     this.client = new Twitter({
       consumer_key: this.config.consumerKey,
       consumer_secret: this.config.consumerSecret,

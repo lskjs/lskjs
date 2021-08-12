@@ -1,10 +1,11 @@
+import Err from '@lskjs/err';
 import nodeVesion from '@lskjs/utils/nodeVersion';
 import http from 'http';
 
 export default async function (params = {}) {
   if (this.debug) this.log.trace('ServerApp.resolve', Object.keys(params));
   const express = this.express || this.app;
-  if (!express) throw '!express';
+  if (!express) throw new Err('!express');
 
   const {
     host = '', // ?

@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 /* global test expect */
+import Err from '@lskjs/err';
 import merge from 'lodash/merge';
 
 import { Module } from '../src';
@@ -69,7 +70,7 @@ test('Case #4 — async config from db', async () => {
       b: 2,
     };
     async getConfigFromDb() {
-      if (!this.ok) throw 'not_ok';
+      if (!this.ok) throw new Err('not_ok');
       return {
         a: 111,
         fields: 333,

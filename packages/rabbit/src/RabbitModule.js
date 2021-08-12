@@ -1,5 +1,5 @@
-import Module from '@lskjs/module';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import amqp from 'amqplib';
 import Bluebird from 'bluebird';
@@ -105,7 +105,7 @@ export class RabbitModule extends Module {
     return this.listenChannel.nack(msg, allUpTo, requeue);
   }
   async parse() {
-    throw 'not implemented worker.parse()';
+    throw new Err('not implemented worker.parse()');
   }
   async queue(queue) {
     const queueName = this.getQueueName(queue);

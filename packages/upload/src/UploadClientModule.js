@@ -1,14 +1,15 @@
 /* global window */
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
 
 export class UploadClientModule extends Module {
   async uploadFiles(files) {
-    if (typeof window === 'undefined') throw '!FormData';
+    if (typeof window === 'undefined') throw new Err('!FormData');
     return Bluebird.map(files, (file) => this.uploadFile(file));
   }
   async uploadFile(file) {
-    if (typeof window === 'undefined') throw '!FormData';
+    if (typeof window === 'undefined') throw new Err('!FormData');
     const { FormData } = window;
     const formData = new FormData();
     formData.append('file', file);

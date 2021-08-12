@@ -1,4 +1,5 @@
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import Discord from 'discord.js';
 
 /**
@@ -16,7 +17,7 @@ export default class DiscordBotProvider extends BaseBotProvider {
   config: DiscordBotConfigType;
   async init(): Promise<void> {
     await super.init();
-    if (!this.config.token) throw 'DiscordBotProvider !config.token';
+    if (!this.config.token) throw new Err('!config.token');
     this.client = new Discord.Client();
   }
   async run(): Promise<void> {

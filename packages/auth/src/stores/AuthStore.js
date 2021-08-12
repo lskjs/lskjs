@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import Api from '@lskjs/mobx/stores2/Api';
-import Store from '@lskjs/mobx/stores2/Store';
+import Store from '@lskjs/mobx/stores2/ListStore';
 import forEach from 'lodash/forEach';
 import { action, observable } from 'mobx';
 

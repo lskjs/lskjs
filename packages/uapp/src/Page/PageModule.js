@@ -137,7 +137,7 @@ export class PageModule extends Module {
   async component(...args) {
     this.log.trace('component()', args[0]);
     const result = await args[0];
-    if (!result) throw '!component';
+    if (!result) throw new Err('!component');
     if (result.default) {
       args[0] = result.default; // eslint-disable-line no-param-reassign
     } else {

@@ -161,7 +161,6 @@ export default class AuthApi extends BaseApi {
 
   async signup(req) {
     const permitModule = await this.app.module('permit');
-    if (!permitModule) throw '!permitModule';
     const UserModel = await this.app.module('models.UserModel');
     const PermitModel = await this.app.module('models.PermitModel');
     const { password, ...userFields } = req.data;
@@ -220,7 +219,7 @@ export default class AuthApi extends BaseApi {
     const PermitModel = await this.app.module('models.PermitModel');
     if (permit.type === 'auth.confirmEmail') {
       const user = await UserModel.findById(permit.userId).sort({ createdAt: 1 });
-      if (!user) throw '!user';
+      if (!user) throw new Err('!user');
       await permit.activate();
       user.setStatus('confirmEmailAt', new Date());
       await user.save();
@@ -237,7 +236,7 @@ export default class AuthApi extends BaseApi {
     if (permit.type === 'auth.restorePassword') {
       const { password } = req.data;
       const user = await UserModel.findById(permit.userId);
-      if (!user) throw '!user';
+      if (!user) throw new Err('!user');
       await permit.activate();
       await this.helpers.setPassword(user, password);
       user.setStatus('passwordAt', new Date());
@@ -252,13 +251,13 @@ export default class AuthApi extends BaseApi {
         },
       });
     }
-    throw 'permit.incorrectType';
+    throw new Err('permit.incorrectType');
   }
 
   async confirmPermit(req) {
     const { code, permitId } = req.data;
     const PermitModel = await this.app.module('models.PermitModel');
-    if (!code) throw '!code';
+    if (!code) throw new Err('!code');
     if (!permitId) throw new Err('permit.permitIdEmpty', { status: 400 });
     // const permit = await PermitModel.findById(permitId);
     // if (!permit) throw new Err(404, 'Permit not found!');
@@ -281,11 +280,11 @@ export default class AuthApi extends BaseApi {
     const { email } = req.data;
 
     if (!email || !validateEmail(email)) {
-      throw 'emailNotValid';
+      throw new Err('emailNotValid');
     }
     const user = await UserModel.findOne({ email }).select(['email']);
     if (!user) {
-      throw 'notFound';
+      throw new Err('notFound');
     }
     const code = await permitModule.genCode('emailVerifyStrong');
     const permit = await PermitModel.createPermit({
@@ -313,7 +312,7 @@ export default class AuthApi extends BaseApi {
   //       const UserModel = await this.app.module('models.UserModel');
   //       cPermit UserModel = await this.app.module('models.PermitModel');
   //   const { code, password } = req.data;
-  //   if (!code) throw '!code';
+  //   if (!code) throw new Err('!code');
   //   const permit = await PermitModel.findOne({
   //     type: 'user.restorePassword',
   //     code,
@@ -323,7 +322,7 @@ export default class AuthApi extends BaseApi {
   //   const date = new Date();
   //   if (date > permit.expiredAt) throw { code: 'expired' };
   //   const user = await UserModel.findById(permit.userId);
-  //   if (!user) throw '!user';
+  //   if (!user) throw new Err('!user');
   //   await permit.activate();
   //   await this.helpers.setPassword(user, password);
   //   set(user, 'private.lastUpdates.password', date);
@@ -361,7 +360,7 @@ export default class AuthApi extends BaseApi {
   // async recovery(req) {
   //   const UserModel = this.app.models.UserModel || this.app.models.User;
   //   const { mailer } = this.app.modules;
-  //   if (!mailer) throw 'Система не может отправить email';
+  //   if (!mailer) throw new Err('Система не может отправить email');
 
   //   // const params = req.data;
 
@@ -406,7 +405,7 @@ export default class AuthApi extends BaseApi {
 
   async socialAuth(req, res, next) {
     const authModule = await this.app.module('auth');
-    if (!authModule) throw '!authModule';
+    if (!authModule) throw new Err('!authModule');
     const { provider } = req.params;
     const origin = getReqOrigin(req);
     const strategy = authModule.strategies[provider];
@@ -419,7 +418,7 @@ export default class AuthApi extends BaseApi {
 
   async socialCallback(req, res) {
     const authModule = await this.app.module('auth');
-    if (!authModule) throw '!authModule';
+    if (!authModule) throw new Err('!authModule');
     const { provider } = req.params;
     return new Bluebird((resolve, reject) => {
       authModule.passportService.authenticate(
@@ -497,7 +496,7 @@ export default class AuthApi extends BaseApi {
     const { PassportModel } = this.app.models;
     const { _id } = req.data;
     const passport = await PassportModel.findById(_id);
-    if (String(passport.userId) !== String(req.user._id)) throw '!acl';
+    if (String(passport.userId) !== String(req.user._id)) throw new Err('!acl');
     await PassportModel.deleteOne({ _id: passport._id });
     // await passport.remove();
     return { ok: 1 };
@@ -549,7 +548,7 @@ export default class AuthApi extends BaseApi {
   }
 
   async phoneCode(req) {
-    if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
+    if (!this.app.modules.auth.config.sms) throw new Err('!module.config.sms');
     const smsConfig = this.app.modules.auth.config.sms;
 
     const { phone } = req.data;
@@ -591,7 +590,7 @@ export default class AuthApi extends BaseApi {
         // throw res.messages[0].errorText;
       }
     } else {
-      throw '!provider';
+      throw new Err('!provider');
     }
     const pack = {
       phone,
@@ -605,13 +604,13 @@ export default class AuthApi extends BaseApi {
   }
 
   phoneApprove(req) {
-    if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
+    if (!this.app.modules.auth.config.sms) throw new Err('!module.config.sms');
     const { phone, code } = req.data;
     return { phone, code };
   }
 
   async phoneLogin(req) {
-    if (!this.app.modules.auth.config.sms) throw '!module.config.sms';
+    if (!this.app.modules.auth.config.sms) throw new Err('!module.config.sms');
     const { phone, code } = req.data;
     const UserModel = this.app.models.UserModel || this.app.models.User;
     if (
@@ -620,7 +619,7 @@ export default class AuthApi extends BaseApi {
         code === this.lastCode
       )
     ) {
-      throw 'Код не верный';
+      throw new Err('Код не верный');
     }
 
     let user = await UserModel.findOne({ username: phone });
@@ -650,19 +649,19 @@ export default class AuthApi extends BaseApi {
   }
   async getPermit(req) {
     const { _id } = req.data;
-    if (!_id) throw '!_id';
+    if (!_id) throw new Err('!_id');
     const PermitModel = await this.app.module('models.PermitModel');
     const permit = await PermitModel.findOne({
       _id,
     });
-    if (!permit) throw '!permit';
+    if (!permit) throw new Err('!permit');
     if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
-    if (!req.user || !req.user._id) throw '!userId';
-    if (!permit) throw 'not found';
+    if (!req.user || !req.user._id) throw new Err('!userId');
+    if (!permit) throw new Err('not found');
     if (this.app.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
       return PermitModel.prepare(permit, { req });
     }
-    throw '!permission';
+    throw new Err('!permission');
   }
   async emailPermit(req) {
     const permitModule = await this.app.module('permit');
@@ -670,20 +669,20 @@ export default class AuthApi extends BaseApi {
     const PermitModel = await this.app.module('models.PermitModel');
 
     const { ObjectId } = this.app.db.Types;
-    if (!req.user || !req.user._id) throw '!_id';
+    if (!req.user || !req.user._id) throw new Err('!_id');
     let userId = req.user._id;
     if (req.data._id && req.data._id !== userId) {
       if (this.app.hasGrant(req.user, 'admin')) {
         userId = req.data._id;
       } else {
-        throw '!permission';
+        throw new Err('!permission');
       }
     }
     const user = await UserModel.findById(userId);
-    if (!user) throw '!user';
+    if (!user) throw new Err('!user');
     const { email } = req.data;
     if (!email || !validateEmail(email)) {
-      throw 'emailNotValid';
+      throw new Err('emailNotValid');
     }
     let type;
     if (user.email) {
@@ -692,7 +691,7 @@ export default class AuthApi extends BaseApi {
       type = 'set';
     }
     if (user.email && email === user.email) {
-      throw 'emailNotChanged';
+      throw new Err('emailNotChanged');
     }
     const date = new Date();
     const changeEmailTimeout = get(this, 'app.config.auth.changeEmailTimeout', 7 * 24 * 60 * 60 * 1000);
@@ -713,7 +712,7 @@ export default class AuthApi extends BaseApi {
       },
     });
     if (isTimeout) {
-      throw 'timeout';
+      throw new Err('timeout');
     }
     const emailExist = await UserModel.countDocuments({
       _id: {
@@ -722,7 +721,7 @@ export default class AuthApi extends BaseApi {
       email,
     });
     if (emailExist) {
-      throw 'emailExist';
+      throw new Err('emailExist');
     }
     let str;
     if (type === 'change') {
@@ -774,7 +773,7 @@ export default class AuthApi extends BaseApi {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const PermitModel = await this.app.module('models.PermitModel');
     const { code } = req.data;
-    if (!code) throw '!code';
+    if (!code) throw new Err('!code');
     const permit = await PermitModel.findOne({
       $or: [
         {
@@ -786,12 +785,12 @@ export default class AuthApi extends BaseApi {
       ],
       code,
     });
-    if (!permit) throw 'invalidCode';
-    if (permit.activatedAt) throw 'activated';
+    if (!permit) throw new Err('invalidCode');
+    if (permit.activatedAt) throw new Err('activated');
     const date = new Date();
-    if (date > permit.expiredAt) throw 'expired';
+    if (date > permit.expiredAt) throw new Err('expired');
     const user = await UserModel.findById(permit.info.userId);
-    if (!user) throw '!user';
+    if (!user) throw new Err('!user');
     const emailExist = await UserModel.findOne({
       _id: {
         $ne: user._id,
@@ -799,10 +798,10 @@ export default class AuthApi extends BaseApi {
       email: permit.info.email,
     }).select(['email']);
     if (emailExist) {
-      throw 'emailExist';
+      throw new Err('emailExist');
     }
     if (user.email && permit.info.oldEmail && user.email !== permit.info.oldEmail) {
-      throw 'emailWasChanged';
+      throw new Err('emailWasChanged');
     }
     await permit.activate();
     user.email = permit.info.email;
@@ -829,18 +828,18 @@ export default class AuthApi extends BaseApi {
   }
   async findOneByCode(req) {
     const { code } = req.data;
-    if (!code) throw '!code';
+    if (!code) throw new Err('!code');
     const PermitModel = await this.app.module('models.PermitModel');
     const permit = await PermitModel.findOne({
       code,
     });
-    if (!permit) throw '!permit';
+    if (!permit) throw new Err('!permit');
     if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
-    if (!req.user || !req.user._id) throw '!userId';
-    if (!permit) throw 'not found';
+    if (!req.user || !req.user._id) throw new Err('!userId');
+    if (!permit) throw new Err('not found');
     if (this.app.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
       return PermitModel.prepare(permit, { req });
     }
-    throw '!permission';
+    throw new Err('!permission');
   }
 }

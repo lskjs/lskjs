@@ -1,4 +1,5 @@
 // import SHA256 from 'crypto-js/sha256';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import get from 'lodash/get';
 import { customAlphabet, nanoid, urlAlphabet } from 'nanoid';
@@ -72,17 +73,17 @@ export class PermitServerModule extends Module {
       return customAlphabet(urlAlphabet, length);
     }
     if (type === 'hash') {
-      throw 'NOT_IMPLEMENTED';
+      throw new Err('NOT_IMPLEMENTED');
     }
     return nanoid(length);
   }
   async generateUniqCode(params, iteration = 0) {
     const PermitModel = await this.model('PermitModel');
-    // throw '!code';
+    // throw new Err('!code');
     // if (iteration) {
     //   str2 += Math.floor(Math.random() * 100000);
     // }
-    if (iteration > 10) throw 'cant create uniq code';
+    if (iteration > 10) throw new Err('cant create uniq code');
     const code = this.generateCode(params);
     // ...criteria
     const permit = await PermitModel.findOne({ code }).select('_id');

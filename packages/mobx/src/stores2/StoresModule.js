@@ -30,7 +30,7 @@ export class StoresModule extends Module {
   }
 
   async moduleGetter(m) {
-    // if (!m.dbName) throw '!this.dbName';
+    // if (!m.dbName) throw new Err('!this.dbName');
     // await m.app.module(m.dbName);
     // @ts-ignore
     return m.store;

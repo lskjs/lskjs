@@ -1,4 +1,5 @@
 // @ts-ignore
+import Err from '@lskjs/err';
 import importFn from '@lskjs/utils/importFn';
 
 import { IAsyncModule, IModule } from '../types';
@@ -10,7 +11,7 @@ export const createAsyncModule = async (
 ): Promise<IModule> => {
   if (initArg.__module) return initArg as IModule;
   const arg = await importFn(initArg);
-  if (!arg) throw '!Component';
+  if (!arg) throw new Err('!Component');
   if (Array.isArray(arg)) {
     const [Module, ...propsArray] = arg;
     return createModule(Module, ...propsArray, parentProps);

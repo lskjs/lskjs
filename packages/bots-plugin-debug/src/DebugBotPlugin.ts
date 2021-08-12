@@ -21,7 +21,7 @@ export class DebugBotPlugin extends BaseBotPlugin {
   }
 
   async runBot(bot: IBotProvider, name: string): Promise<void> {
-    if (!this.app) throw '!app';
+    if (!this.app) throw new Err('!app');
     if (this.config?.logger !== false) await this.runLogger(bot, name);
     if (this.config?.ping !== false) await this.runPing(bot);
     if (this.config?.chat !== false) await this.runChatId(bot, name);
@@ -196,8 +196,8 @@ Made on @LSKjs with ❤️`;
       }
       const chatId = bot.getMessageChatId(ctx);
       let removeMessageId: number | null = bot.getMessageId(ctx);
-      if (!chatId) throw '!chatId';
-      if (!removeMessageId) throw '!removeMessageId';
+      if (!chatId) throw new Err('!chatId');
+      if (!removeMessageId) throw new Err('!removeMessageId');
       let messageId = bot.getRepliedMessageId(ctx);
       if (!messageId) {
         messageId = removeMessageId;

@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import axios from 'axios';
 import SHA256 from 'crypto-js/sha256';
 import isPlainObject from 'lodash/isPlainObject';
@@ -29,8 +30,8 @@ export default class InterkassaBillingProvider extends BillingProvider {
       return;
     }
     const { username, password } = this.config;
-    if (!username) throw '!username';
-    if (!password) throw '!password';
+    if (!username) throw new Err('!username');
+    if (!password) throw new Err('!password');
     this.client = axios.create({
       baseURL: this.baseURL,
       auth: { username, password },
@@ -40,9 +41,9 @@ export default class InterkassaBillingProvider extends BillingProvider {
   // https://docs.interkassa.com/#section/3.-Protokol/3.2.-Forma-zaprosa-platezha
   // TODO: почиать про 4.1.2. Получение доступного для кассы списка платежных направлений: https://docs.interkassa.com/#section/4.-Rasshirennye-vozmozhnosti/4.1.2.-Poluchenie-dostupnogo-dlya-kassy-spiska-platezhnyh-napravlenij
   createPaymentUrl(initParams, signature = true) {
-    if (!this.config.secretKey) throw '!config.secretKey';
-    if (!initParams) throw '!initParams';
-    if (!isPlainObject(initParams)) throw 'initParams is not a object';
+    if (!this.config.secretKey) throw new Err('!config.secretKey');
+    if (!initParams) throw new Err('!initParams');
+    if (!isPlainObject(initParams)) throw new Err('initParams is not a object');
     const params = { ...initParams };
 
     params.ik_co_id = this.config.coId;

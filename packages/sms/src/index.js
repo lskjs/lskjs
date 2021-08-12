@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+import Err from '@lskjs/err';
 
 export default (config = {}) => {
   const { provider } = config;
@@ -7,6 +8,6 @@ export default (config = {}) => {
   if (provider === 'telesign') Class = require('./transports/telesign').default;
   if (provider === 'bytehand') Class = require('./transports/bytehand').default;
   if (provider === 'nexmo') Class = require('./transports/nexmo').default;
-  if (!Class) throw '!sms.provider';
+  if (!Class) throw new Err('!sms.provider');
   return new Class(config);
 };

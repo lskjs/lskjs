@@ -1,5 +1,5 @@
-import Module from '@lskjs/module';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import { Kafka, logLevel } from 'kafkajs';
 import get from 'lodash/get';
 
@@ -30,7 +30,7 @@ export class KafkaModule extends Module {
      * - send batch
      * - then resolve all promises
      */
-    if (!this.producer) throw '!producer';
+    if (!this.producer) throw new Err('!producer');
     return this.producer.send(...args);
   }
   async createConsumer({ groupId, topic } = {}) {

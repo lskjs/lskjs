@@ -12,7 +12,7 @@ export class MailerApi extends Api {
   async test(req, res) {
     if (!isDev) throw new Err('!isDev');
     const mailer = await this.app.module('mailer');
-    if (!mailer) throw '!mailer';
+    if (!mailer) throw new Err('!mailer');
     const {
       data: { email, ...data },
       params: { template, type },
@@ -26,7 +26,7 @@ export class MailerApi extends Api {
     const props = { ...devProps, ...data };
     const params = { props, template };
     if (type === 'email') {
-      if (!email) throw '!email';
+      if (!email) throw new Err('!email');
       return mailer.send({ ...params, to: email });
     }
     const options = mailer.renderTemplate(params);

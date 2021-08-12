@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable max-classes-per-file */
+import Err from '@lskjs/err';
+
 global.__DEV__ = true;
 
 const Bluebird = require('bluebird');
@@ -19,7 +21,7 @@ const req0 = async () => {
   }
 
   if (!String(data).includes('<td>2a00')) {
-    throw 'INVALID_RESPONSE';
+    throw new Err('INVALID_RESPONSE');
   }
 
   console.log('---OK---OK---OK----OK---');
@@ -37,7 +39,7 @@ const req1 = async () => {
     throw err.message || err;
   }
 
-  if (!String(data).includes('"runs":[{"text":"Swimming now — Limassol, Cyprus"}]}')) throw 'INVALID_RESPONSE';
+  if (!String(data).includes('"runs":[{"text":"Swimming now — Limassol, Cyprus"}]}')) throw new Err('INVALID_RESPONSE');
 
   console.log('---OK---OK---OK----OK---');
 };
@@ -55,7 +57,7 @@ const req2 = async () => {
     throw err.message || err;
   }
 
-  if (!String(data).includes('"shortBylineText":{"runs":[{"text":"Igor Suvorov",')) throw 'INVALID_RESPONSE';
+  if (!String(data).includes('"shortBylineText":{"runs":[{"text":"Igor Suvorov",')) throw new Err('INVALID_RESPONSE');
 
   console.log('---OK---OK---OK----OK---');
 };

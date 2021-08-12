@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 
 export class UploadApi extends Api {
@@ -11,7 +12,7 @@ export class UploadApi extends Api {
   }
   async file(req, res) {
     const upload = await this.app.module('upload');
-    if (!upload) throw '!upload';
+    if (!upload) throw new Err('!upload');
     await this.useMiddleware(upload.multer.single('file'), req, res);
     const { file } = req;
     if (!file) throw this.app.e('upload.emptyFile', { status: 400 });
@@ -19,13 +20,13 @@ export class UploadApi extends Api {
   }
   async files(req, res) {
     const upload = await this.app.module('upload');
-    if (!upload) throw '!upload';
+    if (!upload) throw new Err('!upload');
     await this.useMiddleware(upload.multer.any(), req, res);
     const { files = [] } = req;
     return Promise.map(files, (file) => upload.getFileInfo(file));
   }
   image() {
-    throw 'not realized yet';
+    throw new Err('not realized yet');
   }
 }
 

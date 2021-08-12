@@ -1,4 +1,5 @@
 // import Module from '@lskjs/module';
+import Err from '@lskjs/err';
 import { IModule, Module } from '@lskjs/module';
 import mapValues from 'lodash/mapValues';
 
@@ -33,7 +34,7 @@ export class ModelsModule extends Module implements IModelsModule {
 
   async moduleGetter(m: IModule): Promise<any> {
     // @ts-ignore
-    if (!m.dbName) throw '!this.dbName';
+    if (!m.dbName) throw new Err('!this.dbName');
     // @ts-ignore
     await m.app.module(m.dbName, { run: true });
     // @ts-ignore

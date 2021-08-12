@@ -1,4 +1,5 @@
 import env, { isDev, stage } from '@lskjs/env';
+import Err from '@lskjs/err';
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import fs from 'fs';
 import get from 'lodash/get';
@@ -18,7 +19,7 @@ export default class Html {
   asset(name) {
     try {
       const res = this.assetManifest.files[name];
-      if (!res) throw '!res';
+      if (!res) throw new Err('!res');
       return res;
     } catch (err) {
       if (isDev) {

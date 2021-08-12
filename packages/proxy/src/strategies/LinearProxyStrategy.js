@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import Err from '@lskjs/err';
 import get from 'lodash/get';
 import shuffle from 'lodash/shuffle';
 import sortBy from 'lodash/sortBy';
@@ -62,7 +63,7 @@ export class LinearProxyStrategy extends ProxyStrategy {
   }
 
   getProxy() {
-    if (!get(this, 'manager.list.length', 0)) throw 'PROXY_LIST_EMPTY';
+    if (!get(this, 'manager.list.length', 0)) throw new Err('PROXY_LIST_EMPTY');
 
     const initProbability = Math.random();
     let sumProbability = 0;

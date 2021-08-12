@@ -1,5 +1,6 @@
 // import Api from './BaseApi';
 import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import bcrypt from 'bcryptjs';
 import Bluebird from 'bluebird';
 import jwt from 'jsonwebtoken';
@@ -16,12 +17,12 @@ async function hashPassword(password) {
 }
 
 export default function createHelpers({ app } = {}) {
-  if (!app) throw '!app';
+  if (!app) throw new Err('!app');
   const configJwt = get(app, 'config.auth.jwt', get(app, 'config.jwt', {}));
   if (!configJwt.secret) {
     app.log.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
     if (!isDev) {
-      throw 'auth.emptyJwtSecret';
+      throw new Err('auth.emptyJwtSecret');
     }
   }
   const helpers = {

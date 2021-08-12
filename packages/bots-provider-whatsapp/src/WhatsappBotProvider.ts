@@ -1,4 +1,5 @@
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import get from 'lodash/get';
 // @ts-ignore
 import qrcode from 'qrcode-terminal';
@@ -57,7 +58,7 @@ export default class WhatsappBotProvider extends BaseBotProvider {
 
     this.on('auth_failure', () => {
       // Fired if session restore was unsuccessfull
-      throw 'WhatsappBotProvider auth_failure';
+      throw new Err('WhatsappBotProvider auth_failure');
     });
   }
 

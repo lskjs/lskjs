@@ -185,7 +185,7 @@
 //     api.post('/', this.multer.single('file'), async (req) => {
 //       const { file } = req;
 //       if (!file) {
-//         throw '!file';
+//         throw new Err('!file');
 //       }
 //       return processFile(file);
 //     });

@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import Bluebird from 'bluebird';
@@ -34,7 +35,7 @@ export class DbModule extends Module {
     await super.init();
     const { uri } = this.config;
     const options = this.getOptions();
-    if (!uri) throw '!uri';
+    if (!uri) throw new Err('!uri');
     if (this.debug) this.log.trace('config', maskUriPassword(uri), options); // finalOptions
 
     // eslint-disable-next-line no-shadow

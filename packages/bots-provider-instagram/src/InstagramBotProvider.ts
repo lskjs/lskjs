@@ -1,5 +1,6 @@
 import { IgApiClient } from '@buzzguru/instagram-private-api';
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import Bluebird from 'bluebird';
 
 /**
@@ -18,8 +19,8 @@ export default class InstagramBotProvider extends BaseBotProvider {
   config: InstagramBotConfigType;
   async init() {
     await super.init();
-    if (!this.config.username) throw 'InstagramBotProvider !config.username';
-    if (!this.config.password) throw 'InstagramBotProvider !config.password';
+    if (!this.config.username) throw new Err('!config.username');
+    if (!this.config.password) throw new Err('!config.password');
     this.client = new this.IgApiClient();
   }
   async run() {

@@ -115,8 +115,8 @@ export default ctx => class MailerParserModule {
     setTimeout(() => this.runCron(), this.config.interval);
   }
   async createConnection({ box, mailbox }) {
-    if (!box) throw '!box';
-    if (!mailbox) throw '!mailbox';
+    if (!box) throw new Err('!box');
+    if (!mailbox) throw new Err('!mailbox');
     const { boxName } = box;
     return new Promise((resolve, reject) => {
       const connection = new Imap(mailbox.imap.config);
@@ -156,8 +156,8 @@ export default ctx => class MailerParserModule {
     });
   }
   disconnect({ connection }) {
-    if (!this.config) throw '!config';
-    if (!connection) throw '!connection';
+    if (!this.config) throw new Err('!config');
+    if (!connection) throw new Err('!connection');
     return new Promise((resolve, reject) => connection.end((err, res) => {
       connection.removeAllListeners();
       if (err) {

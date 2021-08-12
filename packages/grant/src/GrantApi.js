@@ -20,8 +20,9 @@ export class GrantApi extends Api {
     const {
       data: { rules },
     } = req;
-    if (!(rules && Array.isArray(rules) && rules.length > 0))
+    if (!(rules && Array.isArray(rules) && rules.length > 0)) {
       throw new Err('grant.askFormat', 'rules is not array', { rules });
+    }
     const grant = await this.app.module('grant');
     const userId = req.user ? req.user._id : null;
     return grant.canGroup(rules, {

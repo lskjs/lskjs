@@ -16,7 +16,7 @@ export default async (ctx, params = {}) => {
   const mongoose = new mongooseLib.Mongoose();
   mongoose.Promise = Promise;
   mongoose.run = async () => {
-    if (!uri) throw '!db.uri';
+    if (!uri) throw new Err('!db.uri');
     const finalOptions = {
       ...defaultOptions,
       ...options,

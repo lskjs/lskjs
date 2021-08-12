@@ -1,8 +1,8 @@
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import { isDev } from '@lskjs/utils/env';
-import Err from '@lskjs/err';
 import importFn from '@lskjs/utils/importFn';
 import get from 'lodash/get';
 
@@ -45,7 +45,7 @@ export class WorkerApp extends Module {
   getWorkerConfig(name) {
     const config = get(this, 'config.worker') || {};
     if (typeof config === 'string') {
-      throw 'DEPRECATED config.worker === string';
+      throw new Err('DEPRECATED config.worker === string');
     }
     return {
       ...(get(this, `config.workers.${name}`) || {}),

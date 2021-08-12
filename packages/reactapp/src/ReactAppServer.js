@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import { start } from '@lskjs/module/utils/safe';
 import antimergeDeep from '@lskjs/utils/antimergeDeep';
@@ -14,7 +15,6 @@ import { renderToNodeStream, renderToStaticMarkup, renderToString } from 'react-
 
 import BaseHtml from './Html';
 
-
 // config: this.config,
 // app: this,
 // expressResolve: this.expressResolve,
@@ -25,7 +25,7 @@ export default class ReactAppServer extends Module {
     await super.init();
     if (!this.expressResolve && this.app) this.expressResolve = this.app.expressResolve;
     if (!this.express && this.app) this.express = this.app.express;
-    if (!this.Uapp && !this.hasModule('uapp')) throw '!Uapp';
+    if (!this.Uapp && !this.hasModule('uapp')) throw new Err('!Uapp');
   }
 
   getRootState({ req, ...props }) {
@@ -63,7 +63,7 @@ export default class ReactAppServer extends Module {
   async uappResolve({ req } = {}) {
     if (this.debug) this.log.trace('ReactAppServer.resolve req=', !!req); // eslint-disable-line no-console
     const uapp = await this.getUapp({ req });
-    if (!uapp) throw '!uapp';
+    if (!uapp) throw new Err('!uapp');
     const path = req.originalUrl.split('?').shift();
     const page = await uapp.resolve({
       path,
@@ -173,12 +173,12 @@ export default class ReactAppServer extends Module {
         } else if (typeof page === 'string') {
           component = page;
         } else {
-          if (!page) throw '!page';
+          if (!page) throw new Err('!page');
           if (__DEV__ && page && !page.render) {
             console.error('!page.render', { page, render: page.render }); // eslint-disable-line no-console
-            throw '!page.render';
+            throw new Err('!page.render');
           }
-          throw '!page';
+          throw new Err('!page');
         }
       } catch (err) {
         throw { err, stack: ['Error SSR', 'ReactAppServer.render', 'page.render()'] };

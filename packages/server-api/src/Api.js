@@ -2,7 +2,6 @@ import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import get from 'lodash/get';
-import mapValues from 'lodash/mapValues';
 // import hash from 'object-hash';
 // import Cacheman from 'cacheman';
 // import pick from 'lodash/pick';
@@ -165,7 +164,7 @@ export default class Api extends Module {
   //       .split(',')
   //       .map((a) => a.trim());
   //   }
-  //   if (!isArray(params.select)) throw 'select not array';
+  //   if (!isArray(params.select)) throw new Err('select not array');
   //   if (!params.view) params.view = 'default';
   //   // params.operation = req.data.operation;
 

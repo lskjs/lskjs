@@ -1,4 +1,5 @@
 import Model from '@lskjs/db/Model';
+import Err from '@lskjs/err';
 import canonizeUsername from '@lskjs/utils/canonizeUsername';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick';
@@ -87,7 +88,7 @@ export class PassportModel extends Model {
     username = prefixusername + (Math.random() % 100);
     if (!(await collection.count({ username }))) return username;
 
-    throw 'cant generate unique username';
+    throw new Err('cant generate unique username');
   }
   async getUser() {
     const UserModel = await this.__app.model('UserModel');

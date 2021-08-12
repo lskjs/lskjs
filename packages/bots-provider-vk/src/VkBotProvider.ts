@@ -1,4 +1,5 @@
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import get from 'lodash/get';
 // @ts-ignore
 import VkBot from 'node-vk-bot-api';
@@ -16,7 +17,7 @@ export default class VkBotProvider extends BaseBotProvider {
   config: VkBotConfigType;
   async init() {
     await super.init();
-    if (!this.config.token) throw 'VkBotProvider !config.token';
+    if (!this.config.token) throw new Err('VkBotProvider !config.token');
     this.client = new VkBot(this.config.token);
     // this.client.use(async (ctx, next) => {
     //   try {

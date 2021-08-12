@@ -24,7 +24,7 @@ export class BaseModel extends Module {
     await super.init();
     if (!this.options.collection) {
       this.log.error('!options.collection');
-      throw 'options.collection';
+      throw new Err('options.collection');
     }
     this.log.trace('!!!@#!@#@#!@');
   }

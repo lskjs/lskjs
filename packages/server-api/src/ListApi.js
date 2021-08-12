@@ -54,7 +54,7 @@ export default class ListApi extends BaseApi {
         .split(',')
         .map((a) => a.trim());
     }
-    if (!Array.isArray(params.select)) throw 'select not array';
+    if (!Array.isArray(params.select)) throw new Err('select not array');
     if (!params.view) params.view = 'default';
     // params.operation = req.data.operation;
 

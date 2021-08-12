@@ -1,5 +1,4 @@
 import { isServer } from '@lskjs/env';
-// import { isClient, isServer } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import getWildcardKeys from '@lskjs/utils/getWildcardKeys';
@@ -112,7 +111,6 @@ export class GrantModule extends Module {
     rules = (rules || []).map((e) => (typeof e === 'string' ? { action: e } : e)).filter(Boolean);
     // console.log('canGroup', { rules, ctx });
     let keys = rules.map((e) => e.action);
-    if (this.debug) this.log.trace('canGroup', keys);
     // console.log('hasWildcard(keys)', keys, hasWildcard(keys));
     // console.log('getWildcardKeys(allKeys, keys)', getWildcardKeys(allKeys, keys));
     if (hasWildcard(keys) && this.trustWildcard) {
@@ -128,6 +126,7 @@ export class GrantModule extends Module {
         return { ...rule, action: key };
       });
     }
+    if (this.debug) this.log.trace('canGroup keys', keys);
     // TODO: сделать один any запрос на бек
     const pairs = await Bluebird.map(rules, async (rule) => [rule.action, await this.getRule(rule, ctx)], {
       concurrency: 10,

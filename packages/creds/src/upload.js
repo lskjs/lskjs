@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import Err from '@lskjs/err';
 import axios from 'axios';
 import Bluebird from 'bluebird';
 import fs from 'fs/promises';
@@ -19,9 +20,9 @@ export async function upload(dir, { force, ...options } = {}) {
   const projectName = options.project || config.project;
   const url = `https://${server}/api/v4/projects/${id}/variables`;
 
-  if (!server) throw '!server';
-  if (!id) throw '!id';
-  if (!token) throw '!token';
+  if (!server) throw new Err('!server');
+  if (!id) throw new Err('!id');
+  if (!token) throw new Err('!token');
 
   const files = await getFiles(dir);
 

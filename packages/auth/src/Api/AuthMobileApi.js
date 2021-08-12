@@ -1,3 +1,5 @@
+import Err from '@lskjs/err';
+
 import BaseApi from './AuthApi';
 
 export default class Api extends BaseApi {
@@ -13,11 +15,11 @@ export default class Api extends BaseApi {
       me = await UserModel.findById(me._id);
       if (user) {
         if (provider === 'email') {
-          throw 'EMAIL_HAS_BEEN_ATTACHED';
+          throw new Err('EMAIL_HAS_BEEN_ATTACHED');
         } else if (provider === 'phone') {
-          throw 'PHONE_HAS_BEEN_ATTACHED';
+          throw new Err('PHONE_HAS_BEEN_ATTACHED');
         } else {
-          throw 'PROVIDER_HAS_BEEN_ATTACHED';
+          throw new Err('PROVIDER_HAS_BEEN_ATTACHED');
         }
       } else {
         operation = 'attach';
@@ -36,9 +38,9 @@ export default class Api extends BaseApi {
   async permitAction({ req, permit }) {
     const { UserModel } = this.app.models;
     const { provider } = permit.info;
-    if (!provider) throw '!provider';
+    if (!provider) throw new Err('!provider');
 
-    if (!permit.info[provider]) throw '!permit.info[provider]';
+    if (!permit.info[provider]) throw new Err('!permit.info[provider]');
     const params = {
       [provider]: permit.info[provider],
     };
@@ -52,18 +54,18 @@ export default class Api extends BaseApi {
       user.signinAt = new Date();
     } else if (operation === 'login') {
       user = await UserModel.findOne(params).sort({ createdAt: 1 });
-      if (!user) throw '!user';
+      if (!user) throw new Err('!user');
       user.signinAt = new Date();
     } else if (operation === 'attach') {
-      if (!req.user) throw '!user';
+      if (!req.user) throw new Err('!user');
       user = await UserModel.findById(req.user._id);
-      if (!user) throw '!user';
+      if (!user) throw new Err('!user');
       user[provider] = permit.info[provider];
       user.editedAt = new Date();
       const user2 = await UserModel.findOne(params);
-      if (user2) throw 'HAS_BEEN_ATTACHED';
+      if (user2) throw new Err('HAS_BEEN_ATTACHED');
     } else {
-      throw '!operation';
+      throw new Err('!operation');
     }
 
     await permit.activate();

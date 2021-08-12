@@ -155,7 +155,7 @@ export class RabbitWorkerJob extends Module {
    * @isuvorov
    */
   async nackSuccess() {
-    throw 'ХЗ КОМУ ЭТА ХРЕНЬ НУЖНА, ПИНГАНИТЕ МЕНЯ';
+    throw new Err('ХЗ КОМУ ЭТА ХРЕНЬ НУЖНА, ПИНГАНИТЕ МЕНЯ');
     // this.log.trace('rabbit.nack (success)');
     // await this.onError(err);
     // if (this.msg) await this.rabbit.nack(this.msg);

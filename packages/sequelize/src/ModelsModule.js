@@ -1,4 +1,5 @@
 // import Module from '@lskjs/module';
+import Err from '@lskjs/err';
 import { Module } from '@lskjs/module';
 import mapValues from 'lodash/mapValues';
 
@@ -16,7 +17,7 @@ export class ModelsModule extends Module {
   }
 
   async moduleGetter(m) {
-    if (!m.dbName) throw '!this.dbName';
+    if (!m.dbName) throw new Err('!this.dbName');
     await m.app.module(m.dbName, { run: true });
     return m.model;
   }

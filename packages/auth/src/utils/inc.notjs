@@ -1,4 +1,5 @@
 // import Api from './BaseApi';
+import Err from '@lskjs/err';
 import bcrypt from 'bcryptjs';
 import Promise from 'bluebird';
 import pick from 'lodash/pick';
@@ -108,7 +109,7 @@ export default class AuthApi extends Api {
   }
   async check(req) {
     const criteria = this.getUserCriteria(req);
-    if (!Object.keys(criteria)) throw 'email or phone required';
+    if (!Object.keys(criteria)) throw new Err('email or phone required');
     const { UserModel } = this.app.models;
     const user = await UserModel.findOne(criteria).select('_id');
     return {
@@ -158,8 +159,8 @@ export default class AuthApi extends Api {
 
 
   async signup(req) {
-    if (!req.data.code) throw '!code';
-    if (req.data.code !== 'iuytrewq') throw 'invalidCode';
+    if (!req.data.code) throw new Err('!code');
+    if (req.data.code !== 'iuytrewq') throw new Err('invalidCode');
 
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const { password, ...userFields } = this.getUserFields(req);
@@ -186,7 +187,7 @@ export default class AuthApi extends Api {
     const UserModel = this.app.models.UserModel || this.app.models.User;
     const { PermitModel } = this.app.models;
     const { code, password } = req.data;
-    if (!code) throw '!code';
+    if (!code) throw new Err('!code');
     const permit = await PermitModel.findOne({
       type: 'user.restorePassword',
       code,
@@ -196,7 +197,7 @@ export default class AuthApi extends Api {
     const date = new Date();
     if (date > permit.expiredAt) throw { code: 'expired' };
     const user = await UserModel.findById(permit.userId);
-    if (!user) throw '!user';
+    if (!user) throw new Err('!user');
     await permit.activate();
     await this.auth.setPassword(user, password);
     // await user.setPassword(password);

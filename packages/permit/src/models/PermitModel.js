@@ -1,4 +1,5 @@
 import Model from '@lskjs/db/Model';
+import Err from '@lskjs/err';
 import pick from 'lodash/pick';
 
 export class PermitModel extends Model {
@@ -88,8 +89,8 @@ export class PermitModel extends Model {
   };
   async activate() {
     const { app } = this.constructor; // TODO: HOW?
-    // if (this.activatedAt) throw 'permit.activatedBefore';
-    // if (new Date(this.expiredAt) < new Date()) throw 'permit.expired';
+    // if (this.activatedAt) throw new Err('permit.activatedBefore');
+    // if (new Date(this.expiredAt) < new Date()) throw new Err('permit.expired');
     // this.getStatus()
     this.activatedAt = new Date();
     await this.save();

@@ -1,4 +1,5 @@
 import BaseBotPlugin from '@lskjs/bots-plugin';
+import Err from '@lskjs/err';
 import Bluebird from 'bluebird';
 import isEmpty from 'lodash/isEmpty';
 
@@ -20,7 +21,7 @@ export default class PrometheusPlugin extends BaseBotPlugin {
   async runAction({ bot, alerts, action }) {
     const { type, ...params } = action;
     const act = Actions[type];
-    if (!act) throw '!act';
+    if (!act) throw new Err('!act');
 
     this.bot = bot;
     return act.call(this, { data: alerts, params });

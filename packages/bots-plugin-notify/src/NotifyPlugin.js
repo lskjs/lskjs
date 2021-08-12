@@ -1,4 +1,5 @@
 import BaseBotPlugin from '@lskjs/bots-plugin';
+import Err from '@lskjs/err';
 import axios from 'axios';
 import Bluebird from 'bluebird';
 import forEach from 'lodash/forEach';
@@ -31,7 +32,7 @@ export default class NotifyPlugin extends BaseBotPlugin {
   // }
 
   sendNotification({ bot, message }) {
-    if (!message) throw '!message';
+    if (!message) throw new Err('!message');
     const { projectName } = message;
     let project = this.config.projects[projectName];
     let isDefault = false;
@@ -70,12 +71,8 @@ export default class NotifyPlugin extends BaseBotPlugin {
   }
 
   checkResourses(bot) {
-    const {
-      getEconnabortedErrorMessage,
-      getOtherErrorMessage,
-      getRedirectErrorMessage,
-      getWarningMessage,
-    } = this.monitoring;
+    const { getEconnabortedErrorMessage, getOtherErrorMessage, getRedirectErrorMessage, getWarningMessage } =
+      this.monitoring;
 
     const { projects } = this.config;
     const timeout = 30 * 1000;

@@ -1,8 +1,10 @@
+import Err from '@lskjs/err';
 import Bluebird from 'bluebird';
 
 export default async function sendMessage({ to, ...params }) {
-  if (!to && !this.ctx) throw '!to';
+  if (!to && !this.ctx) throw new Err('!to');
   if (!to) {
+    // eslint-disable-next-line no-param-reassign
     to = this.bot.getMessageChatId(this.ctx);
   }
   let { parent = [] } = params;

@@ -57,7 +57,7 @@ export async function request({
   proxy,
   ...params
 }) {
-  if (driver !== 'axios') throw 'driver not realized yet';
+  if (driver !== 'axios') throw new Err('driver not realized yet');
   let options = { ...params };
 
   if (!proxy) {

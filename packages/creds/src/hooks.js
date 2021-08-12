@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import Err from '@lskjs/err';
 import axios from 'axios';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
@@ -17,9 +18,9 @@ export async function hooks(dir, { force, ...options } = {}) {
   const projectName = options.project || config.project;
   const url = `https://${server}/api/v4/projects/${id}/hooks`;
 
-  if (!server) throw '!server';
-  if (!id) throw '!id';
-  if (!token) throw '!token';
+  if (!server) throw new Err('!server');
+  if (!id) throw new Err('!id');
+  if (!token) throw new Err('!token');
 
   const hooksFromConfig = get(config, 'hooks', []);
   try {

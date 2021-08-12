@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import flattenKeys from '@lskjs/utils/flattenKeys';
 
 import extractApi from './runRoutes/extractApi';
@@ -18,7 +19,7 @@ const join = (items) => {
 };
 
 export default async function (Api) {
-  if (!Api) throw '!Api';
+  if (!Api) throw new Err('!Api');
   const path = '/';
   this.rootApi = new Api(this, { path, config: this.config.api });
   await this.rootApi.__run();

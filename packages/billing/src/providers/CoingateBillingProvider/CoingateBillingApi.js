@@ -16,7 +16,7 @@ export default class CoingateBillingApi extends Api {
   async create(req) {
     const { billing } = await this.app.module(['crypto', 'billing']);
     const { coingate } = billing.providers;
-    if (!coingate) throw '!coingate';
+    if (!coingate) throw new Err('!coingate');
     const { BillingTransactionModel } = this.models;
     const { amount } = req.data;
     const transaction = await BillingTransactionModel.createPayment({
@@ -72,7 +72,7 @@ export default class CoingateBillingApi extends Api {
     const { BillingTransactionModel } = this.models;
     const { billing } = await this.app.module(['billing']);
     const { coingate } = billing.providers;
-    if (!coingate) throw '!coingate';
+    if (!coingate) throw new Err('!coingate');
     const { transactionToken } = req.query;
     const id = coingate.decode(transactionToken);
     const transaction = await BillingTransactionModel.findById(id);

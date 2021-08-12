@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 import Bluebird from 'bluebird';
 import crypto from 'crypto-js';
@@ -55,7 +56,7 @@ export default class NotifyApi extends Api {
     const isAlertManager = (req.get('User-Agent') || '').includes('Alertmanager');
     const isGraylog = req.body && req.body.event_definition_id && req.body.job_trigger_id && req.body.job_definition_id;
 
-    if (project.secret && token !== project.secret) throw '!acl'; // x aceess token
+    if (project.secret && token !== project.secret) throw new Err('!acl'); // x aceess token
 
     // Message.create()
     const message = {

@@ -1,4 +1,5 @@
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import { App as SlackApp } from '@slack/bolt';
 
 /**
@@ -27,8 +28,8 @@ export default class SlackBotProvider extends BaseBotProvider {
   config: SlackBotConfigType;
   async init(): Promise<void> {
     await super.init();
-    if (!this.config.token) throw 'SlackBotProvider !config.token';
-    if (!this.config.signingSecret) throw 'SlackBotProvider !config.signingSecret';
+    if (!this.config.token) throw new Err('!config.token');
+    if (!this.config.signingSecret) throw new Err('!config.signingSecret');
     this.client = new SlackApp({
       signingSecret: this.config.signingSecret,
       token: this.config.token,

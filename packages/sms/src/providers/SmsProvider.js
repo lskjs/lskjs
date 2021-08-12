@@ -1,10 +1,10 @@
-import canonizePhone from '@lskjs/utils/canonizePhone';
 import Err from '@lskjs/err';
+import canonizePhone from '@lskjs/utils/canonizePhone';
 import validatePhone from '@lskjs/utils/validatePhone';
 
 export default class SmsProvider {
   constructor(config) {
-    if (!config) throw '!config ';
+    if (!config) throw new Err('!config ');
     this.config = config || {};
 
     this.debug = this.config.debug || __DEV__;

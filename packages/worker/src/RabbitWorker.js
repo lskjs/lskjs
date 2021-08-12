@@ -1,6 +1,6 @@
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import { isDev } from '@lskjs/utils/env';
-import Err from '@lskjs/err';
 import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
 import Bluebird from 'bluebird';
@@ -15,7 +15,7 @@ export class RabbitWorker extends Module {
     };
   }
   async parse() {
-    throw 'not implemented worker.parse()';
+    throw new Err('NOT_IMPLEMENTED', 'not implemented worker.parse()');
   }
   async onTelegramError({ err, job }) {
     const { params } = job || {};

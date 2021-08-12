@@ -19,7 +19,7 @@ export default class I18 {
   }
   getT(locale) {
     const instance = this.instances[locale];
-    if (!instance) throw 'i18.getT !instance';
+    if (!instance) throw new Err('i18.getT !instance');
     // return instance.t;
     return (...args) => instance.t(...args);
   }

@@ -1,5 +1,6 @@
 import { IBotProviderMessageCtx } from '@lskjs/bots-base/types';
 import BaseBotProvider from '@lskjs/bots-provider';
+import Err from '@lskjs/err';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
@@ -33,7 +34,7 @@ export default class TelegramBotProvider extends BaseBotProvider {
   config: TelegramBotConfigType;
   async init(): Promise<void> {
     await super.init();
-    if (!this.config.token) throw 'TelegramBotProvider !config.token';
+    if (!this.config.token) throw new Err('!config.token');
     // const { Telegraf } = this;
     this.client = new Telegraf(this.config.token);
     this.client.use(session());

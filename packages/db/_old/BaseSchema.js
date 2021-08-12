@@ -206,11 +206,11 @@ export default class BaseSchema {
   getMongooseModel(db) {
     if (!db) {
       // console.log('ERROR UniversalSchema.getMongooseModel() !db');
-      throw 'ERROR UniversalSchema.getMongooseModel() !db';
+      throw new Err('ERROR UniversalSchema.getMongooseModel() !db');
       // return null;
     }
     if (!this.options.collection) {
-      throw '!this.options.collection';
+      throw new Err('!this.options.collection');
     }
     return db.model(
       this.options.model || this.generateMongooseName(this.options.collection),

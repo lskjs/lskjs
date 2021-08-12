@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import { delay } from '@lskjs/utils/delay';
 import cassandra from 'cassandra-driver';
@@ -8,7 +9,7 @@ export default class ScyllaModule extends Module {
   cassandra = cassandra;
   execute(...args) {
     if (!this.client) {
-      throw '!client';
+      throw new Err('!client');
     }
     return this.client.execute(...args);
   }
@@ -21,7 +22,7 @@ export default class ScyllaModule extends Module {
     if (!this.config) {
       this.log.error('!config');
       return;
-      // throw '!config';
+      // throw new Err('!config');
     }
     this.debug = Boolean(this.config.debug);
     const { Client } = this.cassandra;

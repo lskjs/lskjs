@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 // import collectConfigs from '@lskjs/module/utils/collectConfigs';
-import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Err from '@lskjs/err';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import Bluebird from 'bluebird';
 
 import Api from './Api';
@@ -81,7 +81,7 @@ export default class TestApi extends Api {
         throw new Err('ERR_QWE', { delay, status: 502 });
       },
       '/err/1': () => {
-        throw 'TEST_ERROR_CODE';
+        throw new Err('TEST_ERROR_CODE');
       },
       '/err/2': () => {
         throw { code: 'TEST_ERROR_CODE', message: 'The message text' };

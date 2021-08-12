@@ -1,4 +1,5 @@
 import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
 import qs from 'querystring';
@@ -104,7 +105,7 @@ export class BotsRouter extends Module {
     }
     if (this.debug) this.log.trace('resolve', path);
     ctx.nextRedirect = async (path, query) => {
-      if (!path) throw '!path';
+      if (!path) throw new Err('!path');
       let props = {};
       if (typeof path === 'string') {
         props = { path };
@@ -121,7 +122,7 @@ export class BotsRouter extends Module {
       return props;
     };
     ctx.redirect = async (path, query) => {
-      if (!path) throw '!path';
+      if (!path) throw new Err('!path');
       let props = {};
       if (typeof path === 'string') {
         props = { path };
