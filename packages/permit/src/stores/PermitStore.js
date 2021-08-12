@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
-import CrudApi from '@lskjs/mobx/stores/CrudApi';
-import CrudStore from '@lskjs/mobx/stores/CrudStore';
+import { CrudApi } from '@lskjs/mobx/stores2/CrudApi';
+import { CrudStore } from '@lskjs/mobx/stores2/CrudStore';
 import set from 'lodash/set';
 import { observable } from 'mobx';
 

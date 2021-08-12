@@ -1,4 +1,4 @@
-import { Store } from '@lskjs/mobx/stores/Store';
+import { Store } from '@lskjs/mobx/stores2/Store';
 import { observable } from 'mobx';
 
 export class PassportStore extends Store {
