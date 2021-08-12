@@ -132,7 +132,7 @@ export type IModule = IModuleWithApp;
 export type IModuleProp = any;
 export type IModuleProps = { [key: string]: IModuleProp } | IApp;
 
-export interface IModuleConstructor<T extends IModule> {
+export interface IModuleConstructor<TT extends IModule> {
   /**
    * создать инстанс и проинициализировать его
    */
@@ -142,7 +142,7 @@ export interface IModuleConstructor<T extends IModule> {
    */
   createAndRun<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
   start<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
-  new (): T;
+  new (): TT;
 }
 export type IModuleKeyValue = { [name: string]: IModule | null };
 

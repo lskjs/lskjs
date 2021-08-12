@@ -72,7 +72,9 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
     this.__lifecycle[name] = value;
   }
 
-  async onInit(): Promise<void> {}
+  async onInit(): Promise<void> {
+    // TODO: do something
+  }
   async __init(): Promise<void> {
     const { name } = this.constructor;
     if (!this.__lifecycle.create) {

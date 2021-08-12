@@ -1,5 +1,5 @@
 // node_modules/nodemon/bin/nodemon.js packages/getspreadsheet/build/test.js
-import getSpreadsheet from './getSpreadsheet';
+import getSpreadsheet from '../src/getSpreadsheetJson';
 
 const testUrl = 'https://docs.google.com/spreadsheets/d/1yqEtc7VfCZRv4I3iqSiKSq9CkSDCU3fIKa-ZayyW_ys/edit#gid=0';
 

@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
-import Module from '@lskjs/module';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import staticFileMiddleware from 'connect-static-file';
 import Express from 'express';
 import http from 'http';
@@ -13,7 +13,7 @@ import { getPortPromise } from 'portfinder';
 
 import defaultConfig from './config';
 import defaultHelpers from './helpers';
-import createWs from './ws';
+// import createWs from './ws';
 
 export class WebserverModule extends Module {
   Express = Express;
@@ -125,8 +125,9 @@ export class WebserverModule extends Module {
     return [this.middlewares.reqParser, this.middlewares.reqUser, this.middlewares.lsk];
   }
   initWs() {
-    this.ws = createWs(this);
-    this.ws.wrapExpress(this.express);
+    throw new Err('NOT_IMPLEMENTED');
+    // this.ws = createWs(this);
+    // this.ws.wrapExpress(this.express);
   }
   async runWs() {
     if (!this.config.ws) return;

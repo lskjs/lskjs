@@ -4,6 +4,9 @@ import Bluebird from 'bluebird';
 import fs from 'fs/promises';
 
 export async function download(dir, { force, ...options } = {}) {
+  if (force) {
+    // TODO: something
+  }
   let config;
   try {
     // eslint-disable-next-line import/no-dynamic-require

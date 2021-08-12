@@ -20,7 +20,7 @@ export class GrantClientModule extends GrantModule {
     const [rules, ctx] = await this.getArgs(...args);
     // const results = await super.canGroup(rules, { ...ctx, cache });
 
-    console.log('canGroup front', { rules, ctx });
+    // console.log('canGroup front', { rules, ctx });
     return this.ask({ rules });
 
     // TODO: добавить ленивость

@@ -1,6 +1,6 @@
 import Module from '@lskjs/module';
 
-import I18Instance from './I18Instance';
+import { I18Instance } from './instances/I18Instance';
 
 export class I18Module extends Module {
   I18Instance = I18Instance;

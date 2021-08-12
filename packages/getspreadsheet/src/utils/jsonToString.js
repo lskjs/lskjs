@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { stringify as JSstringify } from 'javascript-stringify';
 import mapValues from 'lodash/mapValues';
 import omit from 'lodash/omit';

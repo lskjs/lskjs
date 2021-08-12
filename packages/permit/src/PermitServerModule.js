@@ -1,12 +1,10 @@
 // import SHA256 from 'crypto-js/sha256';
 import Module from '@lskjs/module';
 import get from 'lodash/get';
-import nanoid from 'nanoid';
-import generate from 'nanoid/generate';
-import url from 'nanoid/url';
+import { customAlphabet, nanoid, urlAlphabet } from 'nanoid';
 
 import config from './config';
-import models from './models';
+// import models from './models';
 
 export class PermitServerModule extends Module {
   config = config;
@@ -23,18 +21,18 @@ export class PermitServerModule extends Module {
     };
   }
 
-  async init() {
-    await super.init();
-    const modelsModule = await this.module('models');
-    this.model = modelsModule.model.bind(models);
-  }
+  // async init() {
+  //   await super.init();
+  //   // const modelsModule = await this.module('models');
+  //   // this.model = modelsModule.model.bind(models);
+  // }
 
-  getModules() {
-    return {
-      ...super.getModules(),
-      models: [() => import('@lskjs/models'), { models }],
-    };
-  }
+  // getModules() {
+  //   return {
+  //     ...super.getModules(),
+  //     // models: [() => import('@lskjs/models'), { models }],
+  //   };
+  // }
 
   createExpiredAt(scenario, params = {}) {
     let scenarioConfig = this.config.scenarios[scenario];
@@ -65,13 +63,13 @@ export class PermitServerModule extends Module {
 
   generateCode({ type = 'hex', length = 10 } = {}) {
     if (type === 'number') {
-      return generate('1234567890', length);
+      return customAlphabet('1234567890', length);
     }
     if (type === 'hex') {
-      return generate('1234567890abcdef', length);
+      return customAlphabet('1234567890abcdef', length);
     }
     if (type === 'url') {
-      return generate(url, length);
+      return customAlphabet(urlAlphabet, length);
     }
     if (type === 'hash') {
       throw 'NOT_IMPLEMENTED';

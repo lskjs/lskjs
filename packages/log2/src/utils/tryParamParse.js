@@ -1,4 +1,4 @@
-import tryJSONparse from './tryJSONparse';
+import { tryJSONparse } from './tryJSONparse';
 
 export const tryParamParse = (str, defaultParam) => {
   if (str == null || str === '') return defaultParam;

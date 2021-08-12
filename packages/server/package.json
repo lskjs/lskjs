@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@lskjs/env": "2.3.0-beta.91",
+    "@lskjs/err": "2.3.0-beta.91",
     "@lskjs/module": "2.5.0",
     "@lskjs/utils": "2.5.0"
   },

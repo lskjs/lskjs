@@ -1,33 +1,38 @@
-import Module from '@lskjs/module';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import fs from 'fs';
 import random from 'lodash/random';
 import multer from 'multer';
 import nodepath from 'path';
 
-import mimetypes from './mimetypes';
+import { mimetypes } from './mimetypes';
 
-export default class UploadServerModule extends Module {
+export class UploadServerModule extends Module {
+  mimetypes = mimetypes;
   async init() {
     await super.init();
+    if (this.config.mimetypes) this.mimetypes = this.config.mimetypes;
     if (!this.config.url) throw '!url';
     this.initStorage();
     this.multer = this.getMulter();
   }
 
   getMulter() {
-    const { config } = this;
+    // const { config } = this;
+    this.log.trace('set mimetypes', this.mimetypes);
     const fileFilter = (req, file, cb) => {
-      if (Array.isArray(config.mimetypes)) {
-        if (config.mimetypes.indexOf(file.mimetype) === -1) {
-          return cb(new Err('upload.invalidExtension', 'You are not allowed to upload files with this extension'));
+      if (Array.isArray(this.mimetypes)) {
+        if (this.mimetypes.indexOf(file.mimetype) === -1) {
+          return cb(new Err('upload.invalidMimetype', 'You are not allowed to upload files with this extension'));
         }
       }
       return cb(null, true);
     };
     const limits = {};
-    if (config.maxSize) {
-      const fileSize = parseFloat(config.maxSize) * 1024 * 1024;
+    const maxSize = this.config.maxSize || (this.config.local && this.config.local.maxSize);
+    if (maxSize) {
+      const fileSize = parseFloat(maxSize) * 1024 * 1024;
+      this.log.trace('set maxSize', maxSize);
       limits.fileSize = fileSize;
     }
     return multer({
@@ -158,3 +163,5 @@ export default class UploadServerModule extends Module {
     return storage;
   }
 }
+
+export default UploadServerModule;

@@ -1,13 +1,16 @@
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 import get from 'lodash/get';
 
-export default class MailerApi extends Api {
+export class MailerApi extends Api {
   getRoutes() {
     return {
-      '/dev/:type/:template': ::this.dev,
+      '/test/:type/:template': this.test.bind(this),
     };
   }
-  async dev(req, res) {
+  async test(req, res) {
+    if (!isDev) throw new Err('!isDev');
     const mailer = await this.app.module('mailer');
     if (!mailer) throw '!mailer';
     const {
@@ -33,3 +36,5 @@ export default class MailerApi extends Api {
     return options;
   }
 }
+
+export default MailerApi;

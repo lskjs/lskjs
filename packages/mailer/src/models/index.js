@@ -1,3 +1,3 @@
-export default (...args) => ({
-  EmailModel: require('./EmailModel').default(...args),
-});
+export default {
+  EmailModel: () => import('./EmailModel'),
+};

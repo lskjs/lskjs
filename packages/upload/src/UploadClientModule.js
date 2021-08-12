@@ -1,7 +1,8 @@
+/* global window */
 import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
 
-export default class UploadClientModule extends Module {
+export class UploadClientModule extends Module {
   async uploadFiles(files) {
     if (typeof window === 'undefined') throw '!FormData';
     return Bluebird.map(files, (file) => this.uploadFile(file));
@@ -31,3 +32,5 @@ export default class UploadClientModule extends Module {
     return data;
   }
 }
+
+export default UploadClientModule;

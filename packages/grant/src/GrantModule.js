@@ -8,11 +8,10 @@ import fromPairs from 'lodash/fromPairs';
 import get from 'lodash/get';
 import some from 'lodash/some';
 
-import CacheStorage from './CacheStorage';
+import { CacheStorage } from './CacheStorage';
 
 const hasWildcard = (items) => some(items, (item) => item && item.indexOf('*') !== -1);
 export class GrantModule extends Module {
-  debug = 1;
   trustWildcard = isServer;
 
   async init() {

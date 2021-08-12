@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import fs from 'fs';
 import flattenDeep from 'lodash/flattenDeep';
 import range from 'lodash/range';

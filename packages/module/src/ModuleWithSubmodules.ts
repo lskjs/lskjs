@@ -137,6 +137,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     if (this.__initedModules[name]) {
       if (mutexRelease) mutexRelease();
       delete mutexMap[mutexKey];
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const instance = this.__initedModules[name]!;
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
       // @ts-ignore

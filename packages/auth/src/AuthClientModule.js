@@ -1,5 +1,6 @@
+/* global window */
 import { isClient, isDev } from '@lskjs/env';
-import Err from '@lskjs/err';
+// import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import cookie from 'js-cookie';
 import get from 'lodash/get';
@@ -42,12 +43,11 @@ export default class AuthClientModule extends Module {
   }
 
   setToken(token, expires = 365, cookies = true) {
-    if (this.debug) this.log.trace('AuthClientModule.setToken', token); // eslint-disable-line no-console
+    if (this.debug) this.log.trace('AuthClientModule.setToken', token);
     if (this.app.api) this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
     const { name = 'token', ...options } = get(this.app, 'config.jwt.cookie', {});
-    // eslint-disable-next-line no-console
     if (this.debug) this.log.trace('AuthClientModule.setToken cookie', { name, options, token });
     if (isClient && cookies) {
       if (token == null) {
@@ -183,7 +183,7 @@ export default class AuthClientModule extends Module {
   }
 
   authPassport(provider) {
-    window.location = `/api/module/auth/${provider}`;
+    if (typeof window !== 'undefined') window.location = `/api/module/auth/${provider}`;
   }
 }
 

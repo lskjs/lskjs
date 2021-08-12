@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import map from 'lodash/map';

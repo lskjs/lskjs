@@ -17,7 +17,6 @@ export class GrantApi extends Api {
     };
   }
   async ask(req) {
-    console.log('ASK', req.data);
     const {
       data: { rules },
     } = req;

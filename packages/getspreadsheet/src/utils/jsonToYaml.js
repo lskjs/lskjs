@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import yaml from 'js-yaml';
 
 export function jsonToYaml(data, options) {

@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 /* eslint-disable no-console */
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import fs from 'fs';

@@ -1,9 +1,8 @@
-/* eslint-disable max-len */
 import get from 'lodash/get';
 
-import MjmlTemplate from './MjmlTemplate';
+import { MjmlTemplate } from './MjmlTemplate';
 
-export default class BaseTemplate extends MjmlTemplate {
+export class BaseTemplate extends MjmlTemplate {
   logo({ src }) {
     return `
       <mj-section>
@@ -31,7 +30,9 @@ export default class BaseTemplate extends MjmlTemplate {
     `;
   }
   copyrights({ title, subtitle } = {}) {
+    // eslint-disable-next-line no-param-reassign
     if (!title) title = get(this, 'config.copyright');
+    // eslint-disable-next-line no-param-reassign
     if (!subtitle) subtitle = get(this, 'config.address');
     return `
       <mj-column width="100%">
@@ -95,8 +96,11 @@ export default class BaseTemplate extends MjmlTemplate {
     `;
   }
 
-  // ${!image ? '' : this.headerImage({ src: image })}
   header({ logo = this.config.logo, image = this.config.headerImage } = {}) {
+    if (image) {
+      // TODO: something
+      // ${!image ? '' : this.headerImage({ src: image })}
+    }
     return `
       <mjml>
         <mj-head>
@@ -134,3 +138,5 @@ export default class BaseTemplate extends MjmlTemplate {
     `;
   }
 }
+
+export default BaseTemplate;

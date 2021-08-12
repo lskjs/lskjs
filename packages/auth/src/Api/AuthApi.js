@@ -103,7 +103,7 @@ export default class AuthApi extends BaseApi {
     };
   }
 
-  async status(req) {
+  async status() {
     return {};
   }
 
@@ -426,7 +426,6 @@ export default class AuthApi extends BaseApi {
         provider,
         authModule.strategies[provider].getPassportAuthenticateParams({ method: 'callback' }),
         async (err, data) => {
-          console.log('socialCallback CALLBACK CALLBACK CALLBACK CALLBACK', err, data);
           if (err) return reject(err);
           return resolve(res.redirect(data.redirect || '/'));
         },

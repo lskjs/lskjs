@@ -1,12 +1,12 @@
 import Api from '@lskjs/server-api';
 
-export default class UploadApi extends Api {
+export class UploadApi extends Api {
   getRoutes() {
     return {
-      'POST /file': ::this.file,
-      'POST /files': ::this.files,
-      'POST /image': ::this.image,
-      'POST /photo': ::this.image,
+      'POST /file': this.file.bind(this),
+      'POST /files': this.files.bind(this),
+      'POST /image': this.image.bind(this),
+      'POST /photo': this.image.bind(this),
     };
   }
   async file(req, res) {
@@ -28,3 +28,5 @@ export default class UploadApi extends Api {
     throw 'not realized yet';
   }
 }
+
+export default UploadApi;

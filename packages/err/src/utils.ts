@@ -12,7 +12,7 @@ export const getMessage = (err: any, def = errUnknown): string => {
 
 export const getText = (err: any, def = errUnknown): string => {
   const array = [err.code, getMessage(err), err.text, err.stack];
-  return (err && uniq(array.filter(Boolean)).join('\n')) || errUnknown;
+  return (err && uniq(array.filter(Boolean)).join('\n')) || def || errUnknown;
 };
 
 export const getCode = (err: any, def = errUnknown): string => (err && (err.code || err.text || err.message)) || def;

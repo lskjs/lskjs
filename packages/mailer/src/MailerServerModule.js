@@ -1,5 +1,5 @@
-import Module from '@lskjs/module';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import nodemailer from 'nodemailer';
@@ -44,6 +44,7 @@ export default class MailerServerModule extends Module {
   }
 
   getT(props = {}) {
+    // TODO: use modules
     if (this.app.i18 && this.app.i18.getT) {
       return this.app.i18.getT(props.locale || 'en');
     }
@@ -93,7 +94,6 @@ export default class MailerServerModule extends Module {
     if (!template) throw new Err('mailer.!template');
     const Template = this.templates[template];
     if (!Template) throw new Err('mailer.!Template', { template });
-    // eslint-disable-next-line no-shadow
     const config = this.getTemplateConfig();
     const email = new Template({
       // app: this.app,

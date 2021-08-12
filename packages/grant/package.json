@@ -25,7 +25,10 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/env": "2.5.0",
+    "@lskjs/err": "2.5.0",
     "@lskjs/module": "2.5.0",
+    "@lskjs/mutex": "2.5.0",
     "@lskjs/utils": "2.5.0",
     "async-mutex": "0.2.6"
   },

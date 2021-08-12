@@ -6,7 +6,7 @@ import mjml2html from 'mjml';
 
 import HtmlTemplate from './HtmlTemplate';
 
-export default class MjmlTemplate extends HtmlTemplate {
+export class MjmlTemplate extends HtmlTemplate {
   getHtml() {
     const mjml = this.render();
     const { errors, html } = mjml2html(mjml);
@@ -233,3 +233,5 @@ export default class MjmlTemplate extends HtmlTemplate {
     return `NOT IMPLEMENTED`;
   }
 }
+
+export default MjmlTemplate;

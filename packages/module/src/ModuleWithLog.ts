@@ -43,12 +43,15 @@ export abstract class ModuleWithLog extends ModuleWithConfig implements IModuleW
     await super.__lifecycleEvent(name, value);
     if (this.debug) {
       if (name === 'initFinish') {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         this.log.trace('[init]', 'finished in', `[${ms(this.__lifecycle.initFinish!, this.__lifecycle.initStart!)}]`);
       }
       if (name === 'runFinish') {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         this.log.trace('[run]', 'finished in', `[${ms(this.__lifecycle.runFinish!, this.__lifecycle.runStart!)}]`);
       }
       if (name === 'stopFinish') {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         this.log.trace('[stop]', 'finished in', `[${ms(this.__lifecycle.stopFinish!, this.__lifecycle.stopStart!)}]`);
       }
     }

@@ -1,3 +1,4 @@
+/* global window */
 export default function isIE() {
   const ie =
     typeof window !== 'undefined' &&

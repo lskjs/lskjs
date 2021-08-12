@@ -1,7 +1,6 @@
-/* eslint-disable max-len */
 import MjmlTemplate from './BaseTemplate';
 
-export default class TestTemplate extends MjmlTemplate {
+export class TestTemplate extends MjmlTemplate {
   render() {
     return `
 <mjml>
@@ -26,3 +25,5 @@ export default class TestTemplate extends MjmlTemplate {
     `;
   }
 }
+
+export default TestTemplate;

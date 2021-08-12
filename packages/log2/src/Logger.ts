@@ -1,4 +1,3 @@
-/* global window */
 // import debug from 'debug';
 import { isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
@@ -214,7 +213,6 @@ export class Logger implements ILogger {
       if (level === 'debug') {
         msg = `${leftPad(mainArg.method, 4)} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
       } else {
-        // eslint-disable-next-line no-shadow
         const t = (mainArg.duration || 0).toFixed(3);
         const method = leftPad(mainArg.method, 4);
         const length = mainArg.length || 0;

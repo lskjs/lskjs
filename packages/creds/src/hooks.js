@@ -1,10 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import Bluebird from 'bluebird';
-import fs from 'fs/promises';
 import get from 'lodash/get';
-
-import { getFiles } from './utils/getFiles';
 
 export async function hooks(dir, { force, ...options } = {}) {
   let config;
@@ -54,14 +51,11 @@ export async function hooks(dir, { force, ...options } = {}) {
   }
 
   await Bluebird.map(hooksFromConfig, async (dataHook) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     try {
-
       // if (varData.value.indexOf('@lskjs/creds') === -1 && !force) {
       //   console.log(`[IGNORE] Project ${id}`);
       //   return;
       // }
-
       await axios({
         method: 'post',
         url,

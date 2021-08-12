@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable import/no-extraneous-dependencies */
 
 const split = require('split');
 const through = require('through');
@@ -7,6 +8,7 @@ const { tryJSONparse } = require('../utils/tryJSONparse');
 
 const log = new Logger();
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { stdin } = process;
 // stdin.resume();
 // stdin.setEncoding('utf8');

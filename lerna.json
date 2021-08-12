@@ -3,6 +3,84 @@
   "packages": [
     "packages/*"
   ],
+  "unstablePackages": [
+    "packages/*",
+
+    "packages/bots",
+    "packages/bots-base",
+    "packages/bots-plugin",
+    "packages/bots-plugin-debug",
+    "packages/bots-plugin-downloads",
+    "packages/bots-plugin-interview",
+    "packages/bots-plugin-likes",
+    "packages/bots-plugin-menu",
+    "packages/bots-plugin-notify",
+    "packages/bots-plugin-polundra",
+    "packages/bots-plugin-portal",
+    "packages/bots-plugin-prometheus",
+    "packages/bots-provider",
+    "packages/bots-provider-clubhouse",
+    "packages/bots-provider-discord",
+    "packages/bots-provider-instagram",
+    "packages/bots-provider-slack",
+    "packages/bots-provider-telegram",
+    "packages/bots-provider-twitter",
+    "packages/bots-provider-vk",
+    "packages/bots-provider-whatsapp",
+    "packages/bots-router",
+
+    "packages/apiquery",
+    "packages/autobind",
+    "packages/bunyan",
+    "packages/launcher",
+    "packages/log",
+    "packages/linkall",
+    "packages/tbot",
+    "packages/sh",
+    "packages/sms",
+
+    "packages/utils",
+    "packages/getspreadsheet",
+    "packages/build-locales",
+
+    ""
+
+  ],
+  "stablePackages": [
+    "packages/apm",
+    "packages/auth",
+    "packages/billing",
+    "packages/clickhouse",
+    "packages/config",
+    "packages/creds",
+    "packages/db",
+    "packages/elastic",
+    "packages/env",
+    "packages/err",
+    "packages/event",
+    "packages/extract",
+    "packages/grant",
+    "packages/i18",
+    "packages/kafka",
+    "packages/log2",
+    "packages/mailer",
+    "packages/mobx",
+    "packages/module",
+    "packages/mutex",
+    "packages/permit",
+    "packages/proxy",
+    "packages/rabbit",
+    "packages/reactapp",
+    "packages/rlog",
+    "packages/scylla",
+    "packages/sequelize",
+    "packages/server",
+    "packages/server-api",
+    "packages/uapp",
+    "packages/upload",
+    "packages/webserver",
+    "packages/worker"
+  ],
   "command": {
     "version": {
       "allowBranch": [
@@ -21,7 +99,9 @@
         "**/release/**",
         "**/*.md",
         "**/example/**",
-        "**/test/**"
+        "**/test/**",
+        "**/examples/**",
+        "**/tests/**"
       ]
     }
   }

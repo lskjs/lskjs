@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
@@ -17,7 +16,7 @@ export default class AuthServerModule extends Module {
   getPassportStrategy(passport) {
     const strategy = this.strategies[passport.provider];
     if (!strategy) {
-      this.app.log.error('AuthModule !strategy');
+      this.log.error('AuthModule !strategy');
     }
     return strategy;
   }

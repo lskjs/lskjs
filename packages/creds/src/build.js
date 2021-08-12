@@ -11,8 +11,6 @@ import path from 'path';
 
 import { getFiles } from './utils/getFiles';
 
-const DEBUG = false;
-
 export const getComment = ({ server = '', project = '', id = '', name = '', date = new Date() } = {}) =>
   `
 Date          : ${toHumanDate(date)}
@@ -65,7 +63,11 @@ export async function build(dirname, options = {}) {
       const raw = require(filename);
       const rawJson = isFunction(raw) ? raw({ name, filename, stage }) : raw;
 
-      const { __env: ENV, __config, ...json } = mapValuesDeep(
+      const {
+        __env: ENV,
+        __config,
+        ...json
+      } = mapValuesDeep(
         rawJson,
         (val) => (typeof val === 'string' ? val.replace('${STAGE}', stage) : val), // TODO: more flexible
       );

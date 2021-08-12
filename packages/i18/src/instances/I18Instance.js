@@ -1,8 +1,8 @@
-import Module from '@lskjs/module';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import i18next from 'i18next';
 
-export class I18InstanceModule extends Module {
+export class I18Instance extends Module {
   instance = null;
   locale = null;
   t = () => '???';
@@ -65,9 +65,9 @@ export class I18InstanceModule extends Module {
       await this.instance.loadNamespaces(...args);
       await this.update();
     } else {
-      console.log('!this.instance!');
+      this.log.error('!this.instance!');
     }
   }
 }
 
-export default I18InstanceModule;
+export default I18Instance;

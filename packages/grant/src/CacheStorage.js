@@ -2,7 +2,7 @@ import { Mutex } from '@lskjs/mutex';
 import { delay } from '@lskjs/utils/delay';
 import { getWildcardKeys } from '@lskjs/utils/getWildcardKeys';
 
-export default class CacheStorage {
+export class CacheStorage {
   data = {};
   mutexes = {};
   constructor(props = {}) {
@@ -45,3 +45,5 @@ export default class CacheStorage {
     return this.data[key];
   }
 }
+
+export default CacheStorage;

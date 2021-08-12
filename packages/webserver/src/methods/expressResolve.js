@@ -1,11 +1,8 @@
 import nodeVesion from '@lskjs/utils/nodeVersion';
 import http from 'http';
 
-const DEBUG = __STAGE__ === 'isuvorov';
-
 export default async function (params = {}) {
-  // eslint-disable-next-line no-console
-  if (DEBUG) console.log('ServerApp.resolve', Object.keys(params));
+  if (this.debug) this.log.trace('ServerApp.resolve', Object.keys(params));
   const express = this.express || this.app;
   if (!express) throw '!express';
 
@@ -16,7 +13,7 @@ export default async function (params = {}) {
     headers: _headers = {},
   } = params;
   const body = params.data || params.body || {};
-  const query = params.query || params.params || {};
+  // const query = params.query || params.params || {};
 
   const remoteAddress = '127.0.0.1';
   const headers = {
@@ -42,8 +39,9 @@ export default async function (params = {}) {
   };
   const data = await new Promise((resolve, reject) => {
     const res = Object.create(http.ServerResponse.prototype);
-    res.send = function(data) { //eslint-disable-line
-      if (DEBUG) console.log('express.resolve.send', Object.keys(data)); // eslint-disable-line no-console
+    // eslint-disable-next-line no-shadow
+    res.send = function (data) {
+      if (this.debug) this.log.trace('express.resolve.send', Object.keys(data));
       if (res.statusCode >= 400) {
         reject(data);
       } else {
@@ -64,7 +62,7 @@ export default async function (params = {}) {
         res[kOutHeaders] = headers;
       }
     }
-    // if (DEBUG) console.log('express.resolve', req); // eslint-disable-line no-console
+    // if (DEBUG) console.log('express.resolve', req);
     express.handle(req, res);
   });
 
