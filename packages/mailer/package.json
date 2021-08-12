@@ -32,20 +32,20 @@
     "@lskjs/utils": "2.5.3",
     "eventemitter3": "4.0.7",
     "imap": "0.8.19",
-    "mailparser": "3.0.1",
-    "mjml": "4.8.1",
-    "nodemailer": "6.4.17",
+    "mailparser": "3.3.0",
+    "mjml": "4.10.2",
+    "nodemailer": "6.6.3",
     "nodemailer-juice": "1.0.1"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.92",
+    "@lskjs/db": "2.5.3",
     "@lskjs/server-api": "2.5.3",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "@lskjs/db": "*",
-    "@lskjs/server-api": "*",
+    "@lskjs/db": "2.5.3",
+    "@lskjs/server-api": "2.5.3",
     "bluebird": "*",
     "lodash": "4.17.21"
   }

@@ -22,24 +22,24 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.3.0-beta.91",
-    "@lskjs/err": "2.3.0-beta.91",
+    "@lskjs/env": "2.5.3",
+    "@lskjs/err": "2.5.1",
     "@lskjs/module": "2.5.3",
     "@lskjs/utils": "2.5.3"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.92",
+    "@lskjs/db": "2.5.3",
     "@lskjs/i18": "2.5.3",
     "@lskjs/webserver": "2.5.3",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.21",
-    "supertest": "6.0.1"
+    "supertest": "6.1.5"
   },
   "peerDependencies": {
-    "@lskjs/db": "*",
-    "@lskjs/i18": "*",
-    "@lskjs/webserver": "*",
+    "@lskjs/db": "2.5.3",
+    "@lskjs/i18": "2.5.3",
+    "@lskjs/webserver": "2.5.3",
     "axios": "0.21.1",
     "bluebird": "*",
     "lodash": "4.17.21"

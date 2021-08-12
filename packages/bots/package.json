@@ -39,16 +39,16 @@
     "@lskjs/utils": "2.5.3"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.92",
+    "@lskjs/db": "2.5.3",
     "@types/bluebird": "3.5.36",
-    "@types/lodash": "4.14.171",
-    "@types/node": "14.10.0",
+    "@types/lodash": "4.14.172",
+    "@types/node": "16.6.0",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "@lskjs/db": "*",
+    "@lskjs/db": "2.5.3",
     "axios": "0.21.1",
     "bluebird": "*",
     "lodash": "4.17.21"
