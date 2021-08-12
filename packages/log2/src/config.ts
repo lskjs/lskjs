@@ -50,13 +50,20 @@ export const reverseLevels = {
 export const theme = {
   // fatal: 'inverse',
 
-  fatal: !isServer ? 'bgRed' : 'background-color: red; color: #fff;',
-  error: !isServer ? 'bgBrightRed' : 'background-color: red; color: #fff;',
-  warn: !isServer ? 'bgYellow' : 'background-color: red; color: #fff;',
-  debug: !isServer ? 'brightCyan' : 'background-color: red; color: #fff;',
-  info: !isServer ? 'brightGreen' : 'background-color: red; color: #fff;',
-  trace: !isServer ? 'gray' : 'background-color: red; color: #fff;', // 'white'
-  log: !isServer ? 'bgWhite' : 'background-color: red; color: #fff;', // 'white'
+  fatal: 'bgRed',
+  error: 'bgBrightRed',
+  warn: 'bgYellow',
+  debug: 'brightCyan',
+  info: 'brightGreen',
+  trace: 'gray',
+  log: 'bgWhite',
+  // fatal: !isServer ? 'bgRed' : 'background-color: red; color: #fff;',
+  // error: !isServer ? 'bgBrightRed' : 'background-color: red; color: #fff;',
+  // warn: !isServer ? 'bgYellow' : 'background-color: red; color: #fff;',
+  // debug: !isServer ? 'brightCyan' : 'background-color: red; color: #fff;',
+  // info: !isServer ? 'brightGreen' : 'background-color: red; color: #fff;',
+  // trace: !isServer ? 'gray' : 'background-color: red; color: #fff;', // 'white'
+  // log: !isServer ? 'bgWhite' : 'background-color: red; color: #fff;', // 'white'
 
   randoms: [
     'red',

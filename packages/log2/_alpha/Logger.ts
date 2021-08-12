@@ -1,5 +1,5 @@
 // import debug from 'debug';
-import { isDev } from '@lskjs/env';
+import { isClient, isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
 
@@ -111,8 +111,15 @@ export class Logger implements ILogger {
     if (!this.canLog('log')) return;
     this.__log('log', ...args);
   }
-  color(name: string, str: string): string {
-    return colors[this.getColor(name)](str);
+  color(name: string, str: string): string[] {
+    if (isClient) {
+      return [
+        `%c ${str} %c`,
+        `background-color: ${this.getColor(name)} inherit; color: #fff`,
+        `background-color: inherit; color: inherit`,
+      ];
+    }
+    return [colors[this.getColor(name)](str)];
   }
   getColor(color: string): string {
     // eslint-disable-next-line no-nested-ternary
@@ -133,112 +140,114 @@ export class Logger implements ILogger {
       console.log(...args);
     }
   }
-  __getMarker(key: string): string {
+  __getMarker(key: string): string[] {
     const markers = ['•', '☼', '○', '♠', '♠', '♦', '♥'];
     const marker = markers[hashCode(`2${key}`) % markers.length];
     return this.color(this.getHashColor(key), marker);
   }
-  prettyLog(...args: any[]): void {
-    const res: string[] = [];
-    let [mainArg] = args;
-    const [, ...otherArgs] = args;
-    const level: LoggerLevelType = parseLevel(mainArg) || 'log';
-    let message = mainArg.msg || mainArg.message;
-    const { ns, reqId, name } = mainArg; // time
+  // prettyLog(...args: any[]): void {
+  //   const res: string[] = [];
+  //   let [mainArg] = args;
+  //   const [, ...otherArgs] = args;
+  //   const level: LoggerLevelType = parseLevel(mainArg) || 'log';
+  //   let message = mainArg.msg || mainArg.message;
+  //   const { ns, reqId, name } = mainArg; // time
 
-    let secondArg: any;
-    if (typeof mainArg === 'string') {
-      message = mainArg;
-    } else if (typeof mainArg === 'object') {
-      const omitParams = [
-         //eslint-disable-line
-        'level',
-        'msg',
-        'message',
-        'time',
-        'ns',
-        'reqId',
-        'name',
+  //   let secondArg: any;
+  //   if (typeof mainArg === 'string') {
+  //     message = mainArg;
+  //   } else if (typeof mainArg === 'object') {
+  //     const omitParams = [
+  //        //eslint-disable-line
+  //       'level',
+  //       'msg',
+  //       'message',
+  //       'time',
+  //       'ns',
+  //       'reqId',
+  //       'name',
 
-        'hostname',
-        'pid',
-        'v',
-      ];
-      secondArg = omit(mainArg, omitParams);
-    } else {
-      return;
-    }
+  //       'hostname',
+  //       'pid',
+  //       'v',
+  //     ];
+  //     secondArg = omit(mainArg, omitParams);
+  //   } else {
+  //     return;
+  //   }
 
-    if (secondArg && Object.keys(secondArg).length) {
-      otherArgs.unshift(secondArg);
-    }
+  //   if (secondArg && Object.keys(secondArg).length) {
+  //     otherArgs.unshift(secondArg);
+  //   }
 
-    const envLogLevel = env('LOG_L', 'short');
-    if (envLogLevel) {
-      let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
-      logLevelStr = `[${logLevelStr}]`;
-      res.push(this.color(this.getColor(level), logLevelStr));
-    }
+  //   const envLogLevel = env('LOG_L', 'short');
+  //   if (envLogLevel) {
+  //     let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
+  //     logLevelStr = `[${logLevelStr}]`;
+  //     res.push(...this.color(this.getColor(level), logLevelStr));
+  //   }
 
-    const envLogAlign = env('LOG_ALIGN');
-    const envLogNs = env('LOG_NS', 'true');
-    const envLogName = env('LOG_NAME', 'true');
+  //   const envLogAlign = env('LOG_ALIGN');
+  //   const envLogNs = env('LOG_NS', 'true');
+  //   const envLogName = env('LOG_NAME', 'true');
 
-    let names: any[] = [];
-    if (name === 'req') {
-      names = [this.__getMarker(reqId)];
-    } else if (envLogNs || envLogName) {
-      if (envLogNs) {
-        names = (ns || '').split('.');
-      }
-      if (envLogName) {
-        names.push(name);
-      }
-      names = names.filter(Boolean);
-    }
+  //   let names: any[] = [];
+  //   if (name === 'req') {
+  //     names = this.__getMarker(reqId);
+  //   } else if (envLogNs || envLogName) {
+  //     if (envLogNs) {
+  //       names = (ns || '').split('.');
+  //     }
+  //     if (envLogName) {
+  //       names.push(name);
+  //     }
+  //     names = names.filter(Boolean);
+  //   }
 
-    if (names.length) {
-      let str: string;
-      str = names.map((n: string) => this.color(this.getHashColor(n), n)).join(':');
-      if (str && envLogAlign) {
-        if (envLogAlign === 'left') str = str.padEnd(15);
-        if (envLogAlign === 'right') str = str.padStart(15);
-      }
-      res.push(str);
-    }
+  //   if (names.length) {
+  //     let str: string[];
+  //     // eslint-disable-next-line prefer-const
+  //     str = names.map((n: string) => this.color(this.getHashColor(n), n).join(':'));
+  //     // TODO: полумать про align и цвета
+  //     // if (str && envLogAlign) {
+  //     //   if (envLogAlign === 'left') str = str.padEnd(15);
+  //     //   if (envLogAlign === 'right') str = str.padStart(15);
+  //     // }
+  //     res.push(...str);
+  //   }
 
-    if (name === 'req') {
-      const urlPad = -20;
-      let msg;
-      if (level === 'debug') {
-        msg = `${leftPad(mainArg.method, 4)} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
-      } else {
-        const t = (mainArg.duration || 0).toFixed(3);
-        const method = leftPad(mainArg.method, 4);
-        const length = mainArg.length || 0;
-        if (mainArg.method === 'WS') {
-          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(t, 7)}ms `;
-        } else {
-          // eslint-disable-next-line max-len
-          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(mainArg.status, 3)} ${leftPad(t, 7)}ms ${length}b `; // eslint-disable-line prettier/prettier
-        }
-      }
-      mainArg = msg;
-    }
+  //   if (name === 'req') {
+  //     const urlPad = -20;
+  //     let msg;
+  //     if (level === 'debug') {
+  //       msg = `${leftPad(mainArg.method, 4)} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
+  //     } else {
+  //       const t = (mainArg.duration || 0).toFixed(3);
+  //       const method = leftPad(mainArg.method, 4);
+  //       const length = mainArg.length || 0;
+  //       if (mainArg.method === 'WS') {
+  //         msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(t, 7)}ms `;
+  //       } else {
+  //         // eslint-disable-next-line max-len
+  //         msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(mainArg.status, 3)} ${leftPad(t, 7)}ms ${length}b `; // eslint-disable-line prettier/prettier
+  //       }
+  //     }
+  //     mainArg = msg;
+  //   }
 
-    if (typeof message === 'string') {
-      if (['[', '<'].includes(message[0]) && [']', '>'].includes(message[message.length - 1])) {
-        message = this.color(this.getHashColor(message), message);
-      } else if (message.includes('(') || message.includes('[')) {
-        message = this.color('brightWhite', message);
-      } else if (message.length < 20 && otherArgs.length) {
-        message = this.color('white', message);
-      }
-    }
-    res.push(message, ...otherArgs);
+  //   if (typeof message === 'string') {
+  //     if (['[', '<'].includes(message[0]) && [']', '>'].includes(message[message.length - 1])) {
+  //       message = this.color(this.getHashColor(message), message);
+  //     } else if (message.includes('(') || message.includes('[')) {
+  //       message = this.color('brightWhite', message);
+  //     } else if (message.length < 20 && otherArgs.length) {
+  //       message = this.color('white', message);
+  //     }
+  //   }
+  //   res.push(...message, ...otherArgs);
 
-    this.__logger(...res);
-  }
+  //   this.__logger(...res);
+  // }
   __loggerPretty(level: LoggerLevelType, ...args: any[]): void {
     const res: string[] = [];
 
@@ -249,7 +258,7 @@ export class Logger implements ILogger {
     if (envLogLevel) {
       let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
       logLevelStr = `[${logLevelStr}]`;
-      res.push(this.color(this.getColor(level), logLevelStr));
+      res.push(...this.color(this.getColor(level), logLevelStr));
     }
 
     const envLogAlign = env('LOG_ALIGN');
@@ -270,13 +279,15 @@ export class Logger implements ILogger {
     }
 
     if (names.length) {
-      let str: string;
-      str = names.map((name: string) => this.color(this.getHashColor(name), name)).join(':');
-      if (str && envLogAlign) {
-        if (envLogAlign === 'left') str = str.padEnd(15);
-        if (envLogAlign === 'right') str = str.padStart(15);
-      }
-      res.push(str);
+      let str: string[];
+      // eslint-disable-next-line prefer-const
+      str = names.map((n: string) => this.color(this.getHashColor(n), n).join(':'));
+      // TODO: полумать про align и цвета
+      // if (str && envLogAlign) {
+      //   if (envLogAlign === 'left') str = str.padEnd(15);
+      //   if (envLogAlign === 'right') str = str.padStart(15);
+      // }
+      res.push(...str);
     }
 
     if (this.name === 'req') {
@@ -307,9 +318,14 @@ export class Logger implements ILogger {
         mainArg = this.color('brightWhite', mainArg);
       } else if (mainArg.length < 20 && otherArgs.length) {
         mainArg = this.color('white', mainArg);
+      } else {
+        mainArg = [mainArg];
       }
+    } else {
+      mainArg = [mainArg];
     }
-    res.push(mainArg, ...otherArgs);
+    // if (!Array.isArray(mainArg)) mainArg
+    res.push(...mainArg, ...otherArgs);
 
     this.__logger(...res);
   }

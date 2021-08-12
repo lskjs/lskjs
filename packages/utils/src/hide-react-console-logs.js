@@ -28,7 +28,7 @@ const addToStack = (...args) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const res = mapValues(groups, ([_, ...g]) => g);
     if (Object.keys(res).length) {
-      log.warn(`[w] React:`, res);
+      log.warn(res);
       stack = [];
     }
   }, 1000)();
