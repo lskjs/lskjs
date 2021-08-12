@@ -1,6 +1,7 @@
 import { IBotProvider, IBotProviderMessageCtx } from '@lskjs/bots-base/types';
 import { getPrivateLinkToMessage } from '@lskjs/bots-base/utils/private-linker';
 import { BaseBotPlugin } from '@lskjs/bots-plugin';
+import Err from '@lskjs/err';
 import Bluebird from 'bluebird';
 import chunk from 'lodash/chunk';
 import fromPairs from 'lodash/fromPairs';
