@@ -4,8 +4,8 @@ import axios from 'axios';
 import Bluebird from 'bluebird';
 import { action, observable } from 'mobx';
 
+import { Store } from '../stores2/Store';
 import { getFindParams } from './FetchStore';
-import Store from './Store';
 
 const { CancelToken } = axios;
 

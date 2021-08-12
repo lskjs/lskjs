@@ -4,7 +4,8 @@ import pick from 'lodash/pick';
 import unionBy from 'lodash/unionBy';
 import { action, observable } from 'mobx';
 
-import Store from './Store';
+// import Store from './Store';
+import { Store } from '../stores2/Store';
 
 export default class SelectStore extends Store {
   idKey = '_id';

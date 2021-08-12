@@ -6,7 +6,7 @@ import Bluebird from 'bluebird';
 import set from 'lodash/set';
 import { action, observable } from 'mobx';
 
-import Store from './Store';
+import { Store } from '../stores2/Store';
 
 const { CancelToken } = axios;
 
