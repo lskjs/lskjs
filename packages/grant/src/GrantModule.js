@@ -105,9 +105,10 @@ export class GrantModule extends Module {
     return this.getRule(rule, ctx);
   }
   async canGroup(...args) {
-    if (this.debug) this.log.trace('canGroup', args);
+    // if (this.debug) this.log.trace('canGroup', args);
     // eslint-disable-next-line prefer-const
     let [rules, ctx] = await this.getArgs(...args);
+    if (this.debug) this.log.trace('canGroup', rules, ctx);
     rules = (rules || []).map((e) => (typeof e === 'string' ? { action: e } : e)).filter(Boolean);
     // console.log('canGroup', { rules, ctx });
     let keys = rules.map((e) => e.action);

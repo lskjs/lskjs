@@ -1,3 +1,5 @@
+import { isServer } from '@lskjs/env';
+
 export const levelsPriority = {
   log: 99,
   l: 99,
@@ -47,13 +49,14 @@ export const reverseLevels = {
 
 export const theme = {
   // fatal: 'inverse',
-  fatal: 'bgRed',
-  error: 'bgBrightRed',
-  warn: 'bgYellow',
-  debug: 'brightCyan',
-  info: 'brightGreen',
-  trace: 'gray', // 'white'
-  log: 'bgWhite', // 'white'
+
+  fatal: !isServer ? 'bgRed' : 'background-color: red; color: #fff;',
+  error: !isServer ? 'bgBrightRed' : 'background-color: red; color: #fff;',
+  warn: !isServer ? 'bgYellow' : 'background-color: red; color: #fff;',
+  debug: !isServer ? 'brightCyan' : 'background-color: red; color: #fff;',
+  info: !isServer ? 'brightGreen' : 'background-color: red; color: #fff;',
+  trace: !isServer ? 'gray' : 'background-color: red; color: #fff;', // 'white'
+  log: !isServer ? 'bgWhite' : 'background-color: red; color: #fff;', // 'white'
 
   randoms: [
     'red',

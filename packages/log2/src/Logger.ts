@@ -1,5 +1,5 @@
 // import debug from 'debug';
-import { isDev } from '@lskjs/env';
+import { isClient, isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
 
@@ -111,8 +111,11 @@ export class Logger implements ILogger {
     if (!this.canLog('log')) return;
     this.__log('log', ...args);
   }
-  color(name: string, str: string): string {
-    return colors[this.getColor(name)](str);
+  color(name: string, str: string): string[] {
+    if (isClient) {
+      return [`%c ${str} %c`, this.getColor(name), `background-color: inherit; color: inherit`];
+    }
+    return [colors[this.getColor(name)](str)];
   }
   getColor(color: string): string {
     // eslint-disable-next-line no-nested-ternary
@@ -133,7 +136,7 @@ export class Logger implements ILogger {
       console.log(...args);
     }
   }
-  __getMarker(key: string): string {
+  __getMarker(key: string): string[] {
     const markers = ['•', '☼', '○', '♠', '♠', '♦', '♥'];
     const marker = markers[hashCode(`2${key}`) % markers.length];
     return this.color(this.getHashColor(key), marker);
@@ -177,7 +180,7 @@ export class Logger implements ILogger {
     if (envLogLevel) {
       let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
       logLevelStr = `[${logLevelStr}]`;
-      res.push(this.color(this.getColor(level), logLevelStr));
+      res.push(...this.color(this.getColor(level), logLevelStr));
     }
 
     const envLogAlign = env('LOG_ALIGN');
@@ -186,7 +189,7 @@ export class Logger implements ILogger {
 
     let names: any[] = [];
     if (name === 'req') {
-      names = [this.__getMarker(reqId)];
+      names = this.__getMarker(reqId);
     } else if (envLogNs || envLogName) {
       if (envLogNs) {
         names = (ns || '').split('.');
@@ -249,7 +252,7 @@ export class Logger implements ILogger {
     if (envLogLevel) {
       let logLevelStr = envLogLevel === 'short' ? level[0].toLowerCase() : pad(level, 5);
       logLevelStr = `[${logLevelStr}]`;
-      res.push(this.color(this.getColor(level), logLevelStr));
+      res.push(...this.color(this.getColor(level), logLevelStr));
     }
 
     const envLogAlign = env('LOG_ALIGN');
