@@ -1,5 +1,5 @@
-// @ts-ignore
 import Err from '@lskjs/err';
+// @ts-ignore
 import importFn from '@lskjs/utils/importFn';
 
 import { IAsyncModule, IModule } from '../types';

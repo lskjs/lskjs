@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@lskjs/bots-provider": "2.5.3",
+    "@lskjs/err": "2.5.1",
     "@lskjs/module": "2.5.3",
     "@lskjs/utils": "2.5.3",
     "discord.js": "12.5.1"
