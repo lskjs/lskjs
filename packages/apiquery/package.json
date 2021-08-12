@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/apiquery",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "http/s + websockets api client for Web, Node.js and React Native throw fetch or axios",
   "keywords": [],
   "repository": "https://github.com/lskjs/ux/tree/master/packages/apiquery",

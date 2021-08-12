@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/lskjs/ux/compare/v2.5.1...v2.5.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* **utils:** polyfill stage ([d0fb23f](https://github.com/lskjs/ux/commit/d0fb23feb23bf13d62ffcc3c5a822d3c23eed012))
+
+
+
+
+
 ## [2.5.1](https://github.com/lskjs/ux/compare/v2.5.0...v2.5.1) (2021-08-12)
 
 **Note:** Version bump only for package @lskjs/utils
