@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import axios from 'axios';
 
 const clogs = {

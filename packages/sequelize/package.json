@@ -33,7 +33,7 @@
     "sequelize": "6.3.5"
   },
   "devDependencies": {
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
     "lodash": "*"

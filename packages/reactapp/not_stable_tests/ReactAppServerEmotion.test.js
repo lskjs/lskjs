@@ -9,7 +9,6 @@ import React from 'react';
 import ReactApp from '../../src/ReactApp.server';
 
 ready();
-global.__DEV__ = true;
 
 class Html {
   constructor(props) {

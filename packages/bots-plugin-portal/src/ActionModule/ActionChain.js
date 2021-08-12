@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import isEmpty from 'lodash/isEmpty';
 
 export class ActionChain extends Module {

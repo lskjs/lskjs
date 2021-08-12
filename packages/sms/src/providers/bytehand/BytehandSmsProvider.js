@@ -1,4 +1,4 @@
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import axios from 'axios';
 
 import SmsProvider from '../SmsProvider';

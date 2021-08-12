@@ -1,6 +1,6 @@
 import Module from '@lskjs/module';
 import { isDev } from '@lskjs/utils/env';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import prettyStringify from '@lskjs/utils/prettyStringify';
 import { Stats } from '@lskjs/utils/Stats';
 import Bluebird from 'bluebird';
@@ -190,7 +190,12 @@ export class RabbitWorker extends Module {
     }
   }
   async connect() {
-    this.stats = new Stats();
+    const statsProps = {};
+    // if (this.debug) {
+    statsProps.log = this.log.trace.bind(this.log);
+    // }
+
+    this.stats = new Stats(statsProps);
     this.rabbit = await this.app.module('rabbit');
     const queue = this.config.queue || this.queue;
     if (!queue) {

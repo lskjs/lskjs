@@ -28,7 +28,7 @@
     "@types/lodash": "4.14.167",
     "bluebird": "3.7.2",
     "csv-string": "4.0.1",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "normalize-unicode-text": "0.0.1",
     "react": "17.0.1",
     "serialize-javascript": "5.0.1"

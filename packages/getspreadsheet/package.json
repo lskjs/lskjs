@@ -33,17 +33,17 @@
     "csv-parse": "4.9.0",
     "dot-object": "^2.1.4",
     "googleapis": "47.0.0",
-    "lodash": "4.17.19"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "bluebird": "3.7.2",
     "javascript-stringify": "^2.1.0",
-    "js-yaml": "^4.1.0",
-    "lodash": "4.17.20"
+    "js-yaml": "4.1.0",
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "axios": "0.21.1",
+    "axios": "*",
     "bluebird": "*",
-    "lodash": "^4.17.20"
+    "lodash": "*"
   }
 }

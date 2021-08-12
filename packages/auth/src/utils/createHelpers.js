@@ -1,4 +1,5 @@
 // import Api from './BaseApi';
+import { isDev } from '@lskjs/env';
 import bcrypt from 'bcryptjs';
 import Bluebird from 'bluebird';
 import jwt from 'jsonwebtoken';
@@ -19,7 +20,7 @@ export default function createHelpers({ app } = {}) {
   const configJwt = get(app, 'config.auth.jwt', get(app, 'config.jwt', {}));
   if (!configJwt.secret) {
     app.log.error('app.config.jwt.secret IS EMPTY'); // eslint-disable-line no-console
-    if (!__DEV__) {
+    if (!isDev) {
       throw 'auth.emptyJwtSecret';
     }
   }

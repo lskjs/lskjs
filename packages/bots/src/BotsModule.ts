@@ -208,7 +208,6 @@ export default class BotsModule extends Module {
 
       // const pluging = await this.module(`plugins.${name}`);
       const Plugin = await importFn(pluginFn);
-      // if (__DEV__) this.log.trace({ Plugin, pluginConfig });
       if (pluginConfig === false) return null;
       return Plugin.create({
         app: this.app,

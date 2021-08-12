@@ -2,7 +2,7 @@ import Err from '@lskjs/err';
 import insertArray from '@lskjs/utils/insertArray';
 import omitEmpty from '@lskjs/utils/omitEmpty';
 import axios from 'axios';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import set from 'lodash/set';
 import { action, observable } from 'mobx';
 
@@ -114,7 +114,7 @@ export default class FetchStore extends Store {
     this.loading = false;
     if (this.progress) this.progress.done();
     await this.__cancelToken.cancel('fetch canceled');
-    await Promise.delay(10);
+    await Bluebird.delay(10);
   }
 
   canFetchMore(dir = 1) {

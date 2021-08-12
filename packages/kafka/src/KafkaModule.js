@@ -1,5 +1,5 @@
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import { Kafka, logLevel } from 'kafkajs';
 import get from 'lodash/get';
 

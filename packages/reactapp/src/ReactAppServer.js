@@ -14,7 +14,6 @@ import { renderToNodeStream, renderToStaticMarkup, renderToString } from 'react-
 
 import BaseHtml from './Html';
 
-const DEBUG = false;
 
 // config: this.config,
 // app: this,
@@ -62,7 +61,7 @@ export default class ReactAppServer extends Module {
   }
 
   async uappResolve({ req } = {}) {
-    if (DEBUG) console.log('ReactAppServer.resolve req=', !!req); // eslint-disable-line no-console
+    if (this.debug) this.log.trace('ReactAppServer.resolve req=', !!req); // eslint-disable-line no-console
     const uapp = await this.getUapp({ req });
     if (!uapp) throw '!uapp';
     const path = req.originalUrl.split('?').shift();
@@ -136,7 +135,7 @@ export default class ReactAppServer extends Module {
       [strategy, styleStrategy] = ssr.split(',');
     }
 
-    if (DEBUG) console.log('ReactAppServer.render', { strategy }, this.name); // eslint-disable-line no-console
+    if (this.debug) this.log.trace('ReactAppServer.render', { strategy }, this.name); // eslint-disable-line no-console
     // const strategy = 'stream' in req.query ? 'renderToNodeStream' : null;
     let status = 200;
     let page;
@@ -185,7 +184,7 @@ export default class ReactAppServer extends Module {
         throw { err, stack: ['Error SSR', 'ReactAppServer.render', 'page.render()'] };
       }
 
-      // console.log('component', component);
+      // this.log.trace('component', component);
       let strategyMethod;
       try {
         if (strategy === 'nodeStream') {
@@ -211,7 +210,7 @@ export default class ReactAppServer extends Module {
           ].filter(Boolean),
         };
       }
-      // console.log('content', content);
+      // this.log.trace('content', content);
     } catch ({ err, stack }) {
       status = 505;
       if (__DEV__) {

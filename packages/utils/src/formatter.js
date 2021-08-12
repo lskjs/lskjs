@@ -1,3 +1,5 @@
+import { isDev } from '@lskjs/env';
+
 export function numberWithSpaces(x = 0) {
   const parts = x.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -62,7 +64,7 @@ export function toShort(price) {
     }
     return numberWithSpaces(+toFixedWithoutRounding(price, 2));
   } catch (err) {
-    __DEV__ && console.error('formatter.toShort', err);  //eslint-disable-line
+    if (isDev) console.error('formatter.toShort', err);  //eslint-disable-line
     return 0;
   }
 }

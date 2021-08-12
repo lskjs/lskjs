@@ -1,5 +1,6 @@
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
 import ElasticApm from 'elastic-apm-node';
 import get from 'lodash/get';
 
@@ -43,9 +44,7 @@ export class ApmModule extends Module {
       return;
     }
     const { serviceName = get(process, 'env.WORKER', `nodejs_${get(process, 'env.USER')}`) } = this.config;
-    const {
-      environment = global.__DEV__ ? get(process, 'env.USER') : process.env.NODE_ENV || 'development',
-    } = this.config;
+    const { environment = isDev ? get(process, 'env.USER') : process.env.NODE_ENV || 'development' } = this.config;
     const config = {
       logLevel: 'warn',
       ...this.config,

@@ -1,6 +1,6 @@
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import importFn from '@lskjs/utils/importFn';
 
 import availableProviders from './providers';

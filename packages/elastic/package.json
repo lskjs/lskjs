@@ -30,7 +30,7 @@
     "mongoose-elasticsearch-xp-async": "0.1.3"
   },
   "devDependencies": {
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
     "lodash": "*"

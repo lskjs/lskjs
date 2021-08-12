@@ -1,10 +1,11 @@
+import { isDev } from '@lskjs/env';
 import getParamsFromQuery from '@lskjs/utils/getParamsFromQuery';
 import getQueryFromParams from '@lskjs/utils/getQueryFromParams';
 import Bluebird from 'bluebird';
 import omit from 'lodash/omit';
 import { autorun, toJS } from 'mobx';
 
-const DEBUG = __DEV__ && false;
+const DEBUG = isDev && false;
 
 const omitKeys = ['filter', 'sort', 'sortBy', 'search', 'skip', 'limit'];
 
@@ -57,7 +58,7 @@ const connectListStore = async ({
       console.log('connectListStore: waiting for refresh', page.uapp.history.location.search, '=>', string, page.uapp); // eslint-disable-line no-console
     }
 
-    if (__DEV__) {
+    if (isDev) {
       await Bluebird.delay(1000);
     }
     page.uapp.history.replace({
@@ -70,7 +71,7 @@ const connectListStore = async ({
     remove();
   };
 
-  if (__DEV__) {
+  if (isDev) {
     setTimeout(() => {
       if (DEBUG) console.log('AUTOREMOVE'); // eslint-disable-line no-console
       removeWrapper();

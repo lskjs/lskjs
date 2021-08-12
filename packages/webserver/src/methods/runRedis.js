@@ -1,9 +1,9 @@
 // import redis from 'redis';
-import Promise from 'bluebird';
+import Bluebird from 'bluebird';
 import dns from 'dns';
 import redisAdapter from 'socket.io-redis';
 
-const dnsLookup = Promise.promisify(dns.lookup);
+const dnsLookup = Bluebird.promisify(dns.lookup);
 
 export default async function () {
   return false;
@@ -14,7 +14,7 @@ export default async function () {
   try {
     const pubAddress = await dnsLookup(this.config.redis.host);
       DEBUG && console.log(`pub redis address ${pubAddress}`, `instance ${__INSTANCE}`);  //eslint-disable-line
-    await new Promise((resolve) => {
+    await new Bluebird((resolve) => {
         DEBUG && console.log('pub config', `instance ${__INSTANCE}`, this.config.redis);  //eslint-disable-line
       pubClient = redis.createClient({
         ...this.config.redis,
@@ -35,10 +35,10 @@ export default async function () {
         resolve();
       });
     });
-    await Promise.delay(1000);
+    await Bluebird.delay(1000);
     const subAddress = await dns.lookup(this.config.redis.host);
       DEBUG && console.log(`sub redis address ${subAddress}`, `instance ${__INSTANCE}`);  //eslint-disable-line
-    await new Promise((resolve) => {
+    await new Bluebird((resolve) => {
         DEBUG && console.log('sub config', `instance ${__INSTANCE}`, this.config.redis);  //eslint-disable-line
       subClient = redis.createClient({
         ...this.config.redis,

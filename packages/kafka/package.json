@@ -29,7 +29,7 @@
     "kafkajs": "1.15.0"
   },
   "devDependencies": {
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
     "lodash": "*"

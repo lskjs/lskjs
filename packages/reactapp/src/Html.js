@@ -1,10 +1,11 @@
+import env, { isDev, stage } from '@lskjs/env';
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import fs from 'fs';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import serializeJavascript from 'serialize-javascript';
 
-const serialize = __DEV__ ? JSON.stringify : serializeJavascript;
+const serialize = isDev ? JSON.stringify : serializeJavascript;
 
 // const trim = str => str;
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
@@ -20,7 +21,7 @@ export default class Html {
       if (!res) throw '!res';
       return res;
     } catch (err) {
-      if (__DEV__) {
+      if (isDev) {
         let errText;
         if (!get(this, 'assetManifest')) {
           errText = '!assetManifest';
@@ -43,7 +44,7 @@ export default class Html {
         raw = fs.readFileSync(this.publicPath + path).toString();
       } catch (err) {
         // eslint-disable-next-line no-console
-        if (__DEV__) console.error(`renderAsset(${name}, true) err`, err);
+        if (isDev) console.error(`renderAsset(${name}, true) err`, err);
       }
     }
     if (!path) return '';
@@ -147,7 +148,7 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
     ua.js = false;
     ua.touchable = false;
 
-    const postfix = __DEV__ ? ' __DEV__' : '';
+    const postfix = isDev ? ' isDev' : '';
     return (map(ua, (val, key) => `ua_${key}_${val ? 'yes' : 'no'}`).join(' ') || '') + postfix;
   }
 
@@ -171,8 +172,9 @@ ${meta.description ? `<meta name="description" content="${meta.description}"/>` 
     const { globals = {} } = this;
     const str = serializeWindow(
       {
-        __DEV__,
-        __STAGE__,
+        env,
+        __DEV__: isDev,
+        __STAGE__: stage,
         ...globals,
       },
       serialize,

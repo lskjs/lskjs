@@ -40,9 +40,9 @@
     "discord.js": "12.5.1"
   },
   "devDependencies": {
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   }
 }

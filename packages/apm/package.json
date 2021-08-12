@@ -25,6 +25,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/env": "2.5.0",
+    "@lskjs/err": "2.5.0",
     "@lskjs/module": "2.5.0",
     "@lskjs/utils": "2.5.0",
     "elastic-apm-node": "3.10.0"
@@ -32,7 +34,7 @@
   "devDependencies": {
     "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
     "axios": "*",

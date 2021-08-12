@@ -1,5 +1,5 @@
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import amqp from 'amqplib';
 import Bluebird from 'bluebird';

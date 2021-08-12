@@ -1,3 +1,4 @@
+import { isDev, stage } from '@lskjs/env';
 import logger from '@lskjs/log';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import assignProps from '@lskjs/utils/assignProps';
@@ -11,7 +12,7 @@ import toPairs from 'lodash/toPairs';
 
 import Emitter from './emitter';
 
-const DEBUG = __DEV__ && false;
+const DEBUG = isDev && false;
 
 logger.safeLog = (ctx, level = 'info', ...args) => {
   if (ctx.log && ctx.log[level]) {
@@ -23,7 +24,7 @@ logger.safeLog = (ctx, level = 'info', ...args) => {
 
 logger.fatalLog = (...args) => {
   logger.safeLog(...args);
-  if (__DEV__) throw new Error(args[3]);
+  if (isDev) throw new Error(args[3]);
 };
 export default class Module {
   _module = true;
@@ -36,9 +37,9 @@ export default class Module {
   createLogger(params) {
     const loggerParams = {
       name: this.name || 'app',
-      src: __DEV__,
+      src: isDev,
       // level: 'trace',
-      level: __DEV__ ? (__STAGE__ === 'isuvorov' ? 'trace' : 'debug') : __STAGE__ === 'production' ? 'error' : 'warn', // eslint-disable-line no-nested-ternary
+      level: isDev ? (stage === 'isuvorov' ? 'trace' : 'debug') : stage === 'production' ? 'error' : 'warn', // eslint-disable-line no-nested-ternary
       ...get(this, 'config.log', {}),
       ...params,
     };
@@ -51,7 +52,7 @@ export default class Module {
   }
   on(...args) {
     if (!this.ee) {
-      if (__DEV__) {
+      if (isDev) {
         logger.safeLog(this, 'warn', `[ee] !ee`);
       }
       return;

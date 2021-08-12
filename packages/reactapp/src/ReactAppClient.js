@@ -1,12 +1,13 @@
 /* global window */
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import collectWindowReq from '@lskjs/utils/collectWindowReq';
-import Err from '@lskjs/utils/Err';
 import Bluebird from 'bluebird';
 import { createBrowserHistory } from 'history';
 import ReactDOM from 'react-dom';
 
-const DEBUG = __DEV__; // __STAGE__ === 'isuvorov'
+const DEBUG = isDev; // __STAGE__ === 'isuvorov'
 
 export default class ReactAppClient extends Module {
   ReactDOM = ReactDOM;

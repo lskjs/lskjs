@@ -32,7 +32,7 @@
     "@lskjs/webserver": "2.5.0",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "supertest": "6.0.1"
   },
   "peerDependencies": {
@@ -41,6 +41,6 @@
     "@lskjs/webserver": "*",
     "axios": "0.21.1",
     "bluebird": "*",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   }
 }

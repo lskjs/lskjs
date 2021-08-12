@@ -1,4 +1,4 @@
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 
 export function isReqAuth(req) {
   if (req.__errJwt) throw new Err(req.__errJwt);

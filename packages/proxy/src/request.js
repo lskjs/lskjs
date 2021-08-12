@@ -1,4 +1,5 @@
-import Err from '@lskjs/utils/Err';
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import retry from '@lskjs/utils/retry';
 import axios from 'axios';
 
@@ -47,8 +48,8 @@ const networkErrors = [
   'ERR_TLS_CERT_ALTNAME_INVALID',
 ];
 
-export const MAX_NETWORK_TIMEOUT = __DEV__ ? 1000 : 15000;
-export const MAX_NETWORK_TRIES = __DEV__ ? 2 : 10;
+export const MAX_NETWORK_TIMEOUT = isDev ? 1000 : 15000;
+export const MAX_NETWORK_TRIES = isDev ? 2 : 10;
 export async function request({
   driver = 'axios',
   max_tries: maxTries = MAX_NETWORK_TRIES,

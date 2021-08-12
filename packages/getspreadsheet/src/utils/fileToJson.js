@@ -1,4 +1,4 @@
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import fromPairs from 'lodash/fromPairs';

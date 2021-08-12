@@ -1,6 +1,8 @@
-import Promise from 'bluebird';
+import env from '@lskjs/env';
+import Bluebird from 'bluebird';
 import isFunction from 'lodash/isFunction';
 import mapValues from 'lodash/mapValues';
+
 // import some from 'lodash/some';
 
 export default async (healthchecks) => {
@@ -24,7 +26,7 @@ export default async (healthchecks) => {
     }
   });
 
-  data = await Promise.props(promises);
+  data = await Bluebird.props(promises);
 
   return {
     __pack: true,
@@ -32,6 +34,7 @@ export default async (healthchecks) => {
     ok: true,
     date: new Date(),
     env: {
+      ...env,
       __IMAGE__: global.__IMAGE__,
       __VERSION__: global.__VERSION__,
       __INSTANCE__: global.__INSTANCE__,

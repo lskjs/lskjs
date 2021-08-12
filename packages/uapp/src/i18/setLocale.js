@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import Cookies from 'js-cookie';
 
 export default async function (locale) {
@@ -19,7 +20,7 @@ export default async function (locale) {
   }
   if (this.i18.locale !== locale) {
     await this.i18.setLocale(locale);
-    if (!__DEV__) {
+    if (!isDev) {
       setTimeout(() => {
         this.refresh();
       }, 200);

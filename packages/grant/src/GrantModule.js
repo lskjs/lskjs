@@ -134,7 +134,6 @@ export class GrantModule extends Module {
     });
     return fromPairs(pairs);
 
-
     const res = {};
     pairs.forEach((pair) => {
       Object.assign(res, pair[1]);
@@ -150,9 +149,9 @@ export class GrantModule extends Module {
     return {
       rules,
       can: (action) => {
-        if (this.debug) this.log.trace('can', action);
+        if (this.debug) this.log.trace('grantCache.can', action);
         if (!(action in rules)) {
-          this.log.warn('cant find rule in grantCache', { action });
+          this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action });
           return null;
         }
         return get(rules, action);

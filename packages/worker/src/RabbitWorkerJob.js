@@ -1,5 +1,6 @@
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
 
 export const apmMock = {
   startTransaction() {
@@ -25,7 +26,7 @@ export const apmMock = {
 };
 
 export class RabbitWorkerJob extends Module {
-  redeliveredCount = __DEV__ ? null : 10;
+  redeliveredCount = isDev ? null : 10;
 
   async init() {
     await super.init();

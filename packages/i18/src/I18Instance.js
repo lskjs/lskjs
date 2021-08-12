@@ -1,5 +1,5 @@
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import i18next from 'i18next';
 
 export class I18InstanceModule extends Module {

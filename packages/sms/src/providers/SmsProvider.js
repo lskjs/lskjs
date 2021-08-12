@@ -1,5 +1,5 @@
 import canonizePhone from '@lskjs/utils/canonizePhone';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import validatePhone from '@lskjs/utils/validatePhone';
 
 export default class SmsProvider {

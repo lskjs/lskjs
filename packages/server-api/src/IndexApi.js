@@ -1,3 +1,4 @@
+import env, { isDev, stage } from '@lskjs/env';
 import flattenKeys from '@lskjs/utils/flattenKeys';
 import mapValuesDeep from '@lskjs/utils/mapValuesDeep';
 import serializeWindow from '@lskjs/utils/serializeWindow';
@@ -30,7 +31,7 @@ export default class IndexApi extends Api {
       message: `Current API version is here: ${url}`,
       url,
     };
-    if (__DEV__) {
+    if (isDev) {
       res.routes = this.__getRoutesList(true);
     }
     return res;
@@ -46,8 +47,9 @@ export default class IndexApi extends Api {
         },
         config: this.app.config.client || {},
       },
-      __DEV__,
-      __STAGE__: global.__STAGE__,
+      ...env,
+      __DEV__: isDev,
+      __STAGE__: stage,
     };
   }
   envjs(req, res) {

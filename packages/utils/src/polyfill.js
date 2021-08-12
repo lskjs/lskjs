@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
+import { isDev } from '@lskjs/env';
+
 import global from './global';
 
 // if (__DEV__) {
@@ -19,8 +21,8 @@ if (typeof process !== 'undefined') {
 if (!global._babelPolyfill) require('@babel/polyfill');
 
 export default function ready(cb) {
-  if (__DEV__) {
-    console.log(`🔥  Compiled [${global.timing()}ms] [__STAGE__=${__STAGE__} __DEV__=${__DEV__}]`);
+  if (isDev) {
+    console.log(`🔥  Compiled [${global.timing()}ms] [stage=${stage} isDev=${isDev}]`);
   }
   if (typeof cb === 'function') cb();
 }

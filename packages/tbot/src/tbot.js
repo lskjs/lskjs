@@ -1,12 +1,13 @@
-import Promise from 'bluebird';
+import { isDev } from '@lskjs/env';
+import Bluebird from 'bluebird';
 import flattenDeep from 'lodash/flattenDeep';
 import get from 'lodash/get';
 import uniq from 'lodash/uniq';
 
-const DEBUG = __DEV__;
+const DEBUG = isDev;
 
 export default ({ config }) => {
-  Promise.config = () => {}; // херов багфикс для телеграма
+  Bluebird.config = () => {}; // херов багфикс для телеграма
   let TelegramBot;
   if (!config) {
     if (DEBUG) console.log('!tbot.config'); // eslint-disable-line no-console

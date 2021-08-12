@@ -1,5 +1,5 @@
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import fs from 'fs';
 import random from 'lodash/random';
 import multer from 'multer';

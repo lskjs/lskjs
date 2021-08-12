@@ -3,11 +3,10 @@ import set from 'lodash/set';
 import createLogger from '@lskjs/utils/createLogger';
 import assignProps from '@lskjs/utils/assignProps';
 
-// const DEBUG = __DEV__ && __STAGE__ === 'isuvorov';
-const DEBUG = false;
-const debug = createLogger({ name: '@lskjs/storage', enable: DEBUG });
+// const DEBUG = false;
+// const debug = createLogger({ name: '@lskjs/storage', enable: DEBUG });
 export default class Storage {
-  debug = debug;
+  // debug = debug;
   state = {};
   constructor(...props) {
     assignProps(this, ...props);
@@ -20,7 +19,7 @@ export default class Storage {
   }
   get(key) {
     const value = this._get(key);
-    debug('get', key, value);
+    // debug('get', key, value);
     return value;
   }
   _set(key, value) {
@@ -28,6 +27,6 @@ export default class Storage {
   }
   set(key, value) {
     this._set(key, value);
-    debug('set', key, value);
+    // debug('set', key, value);
   }
 }

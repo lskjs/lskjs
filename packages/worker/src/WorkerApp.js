@@ -2,7 +2,7 @@ import Module from '@lskjs/module';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import { isDev } from '@lskjs/utils/env';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import importFn from '@lskjs/utils/importFn';
 import get from 'lodash/get';
 

@@ -31,7 +31,7 @@
     "csv-parse": "4.14.2",
     "csvtojson": "2.0.10",
     "jsongrid": "1.0.2",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "meow": "9.0.0",
     "mkdirp": "1.0.4",
     "rimraf": "3.0.2"

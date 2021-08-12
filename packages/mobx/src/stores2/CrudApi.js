@@ -3,7 +3,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import { Api } from './Api';
 
 export class CrudApi extends Api {
-  baseURL = '/api/v1/some';
+  baseURL = '/api';
   find(data) {
     return this.fetch('/find', {
       method: 'POST',

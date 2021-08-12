@@ -1,5 +1,5 @@
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import nodemailer from 'nodemailer';

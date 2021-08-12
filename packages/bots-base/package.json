@@ -40,11 +40,11 @@
     "@lskjs/utils": "2.5.0"
   },
   "devDependencies": {
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "telegraf": "4.1.0"
   },
   "peerDependencies": {
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "telegraf": "4.1.0"
   }
 }

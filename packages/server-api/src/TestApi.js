@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 // import collectConfigs from '@lskjs/module/utils/collectConfigs';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import Bluebird from 'bluebird';
 
 import Api from './Api';

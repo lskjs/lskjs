@@ -1,4 +1,4 @@
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 import get from 'lodash/get';
 import set from 'lodash/set';

@@ -1,4 +1,4 @@
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import keyBy from 'lodash/keyBy';
 
 export function createErrorInfo(errors = []) {

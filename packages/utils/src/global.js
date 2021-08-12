@@ -1,5 +1,5 @@
 /* global window */
-import { isClient, isDev, isProd, isServer, stage } from './env';
+import { isClient, isDev, isProd, isServer, stage } from '@lskjs/env';
 
 const globalOrWindow = typeof window !== 'undefined' ? window : global;
 

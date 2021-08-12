@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import round from 'lodash/round';
@@ -20,11 +21,11 @@ export class Stats {
     successKey: 'event.success',
     unsuccessKey: 'event.error',
   };
-  floodTime = __DEV__ ? sec : min;
-  printInterval = __DEV__ ? sec : min;
+  floodTime = isDev ? sec : min;
+  printInterval = isDev ? sec : min;
   info = {
-    names: __DEV__ ? ['sec10', 'min1', 'all'] : ['sec10', 'min1', 'all'],
-    // names: __DEV__ ? ['sec10', 'min1', 'all'] : ['min1', 'hour1', 'all'],
+    names: isDev ? ['sec10', 'min1', 'all'] : ['sec10', 'min1', 'all'],
+    // names: isDev ? ['sec10', 'min1', 'all'] : ['min1', 'hour1', 'all'],
     sec10: 10 * sec,
     min1: min,
     min10: 10 * min,

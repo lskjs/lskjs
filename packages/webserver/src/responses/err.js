@@ -1,3 +1,5 @@
+import { isDev } from '@lskjs/env';
+
 export default () =>
   function resErr(pack) {
     // eslint-disable-next-line no-param-reassign
@@ -24,10 +26,10 @@ export default () =>
     if (err) {
       res.err = err;
     }
-    if (__DEV__ && pack.stack) {
+    if (isDev && pack.stack) {
       res.stack = pack.stack;
     }
-    if (__DEV__ && err && err.stack) {
+    if (isDev && err && err.stack) {
       res.stack = err.stack;
     }
     if (res.stack) {

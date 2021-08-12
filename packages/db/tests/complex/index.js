@@ -1,4 +1,3 @@
-global.__DEV__ = 1;
 const { Module } = require('@lskjs/module');
 const db = require('@lskjs/db');
 const { Model } = require('@lskjs/db/Model');

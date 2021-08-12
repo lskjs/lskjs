@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import Err from '@lskjs/utils/Err';
+import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import get from 'lodash/get';
 import mjml2html from 'mjml';
 
@@ -11,7 +12,7 @@ export default class MjmlTemplate extends HtmlTemplate {
     const { errors, html } = mjml2html(mjml);
     if (errors && errors.length) {
       this.log.error('Template.getHtml mjml', errors);
-      if (__DEV__) {
+      if (isDev) {
         // eslint-disable-next-line no-console
         console.error('mjml', mjml);
       }

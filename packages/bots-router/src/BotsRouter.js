@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import Bluebird from 'bluebird';
 import qs from 'querystring';
@@ -113,7 +114,7 @@ export class BotsRouter extends Module {
       if (!props.query && query) props.query = query;
       if (!ctx.session) ctx.session = {};
       ctx.session.nextRoute = props;
-      if (__DEV__) {
+      if (isDev) {
         this.log.info(`nextRedirect =>  ${JSON.stringify(props)}`);
         // await Bluebird.delay(1000);
       }
@@ -128,7 +129,7 @@ export class BotsRouter extends Module {
         props = path;
       }
       if (!props.query && query) props.query = query;
-      if (__DEV__) {
+      if (isDev) {
         this.log.info(`redirect => ${props.path || props.pathname} ${JSON.stringify(props.query)} [delay] ${1000}`);
         await Bluebird.delay(1000);
       }

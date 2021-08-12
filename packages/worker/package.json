@@ -25,17 +25,19 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/env": "2.5.0",
+    "@lskjs/err": "2.5.0",
     "@lskjs/module": "2.5.0",
     "@lskjs/utils": "2.5.0"
   },
   "devDependencies": {
     "@lskjs/rabbit": "2.5.0",
     "bluebird": "3.7.2",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
     "@lskjs/rabbit": "*",
     "bluebird": "*",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   }
 }

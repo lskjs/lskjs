@@ -1,7 +1,8 @@
+import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import Mutex from '@lskjs/mutex';
 import avg from '@lskjs/utils/avg';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import inc from '@lskjs/utils/inc';
 import axios from 'axios';
 import countBy from 'lodash/countBy';
@@ -29,7 +30,7 @@ const debug = false; /// __DEV__;
 
 export class ProxyManager extends Module {
   config = {
-    stats: __DEV__,
+    stats: isDev,
     updateInterval: debug ? 5 * 60 * 1000 : 10 * 60 * 1000,
     statsInterval: debug ? 10 * 1000 : 3 * 60 * 1000,
     strategy: 'linear',

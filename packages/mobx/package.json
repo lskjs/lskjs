@@ -32,7 +32,7 @@
   "devDependencies": {
     "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "mobx": "5.15.4",
     "mobx-react": "7.1.0"
   },

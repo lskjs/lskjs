@@ -1,3 +1,5 @@
+import { isClient, isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import cookie from 'js-cookie';
 import get from 'lodash/get';
@@ -6,7 +8,7 @@ import LocalStorage from './Storage/LocalStorage';
 import MemoryStorage from './Storage/MemoryStorage';
 
 // const DEBUG = __DEV__ && __STAGE__ === 'isuvorov';
-const DEBUG = false;
+// const DEBUG = false;
 
 export default class AuthClientModule extends Module {
   async init() {
@@ -14,7 +16,7 @@ export default class AuthClientModule extends Module {
     this.stores = require('./stores').default(this.app);
     const { AuthStore } = this.stores;
     this.store = new AuthStore();
-    if (__CLIENT__) {
+    if (isClient) {
       this.localStorage = new LocalStorage({
         // memoryState: this.app.rootState,
         config: get(this, 'app.config.storage', {}),
@@ -32,7 +34,7 @@ export default class AuthClientModule extends Module {
     await super.run();
     await this.loadStore();
     if (this.store.isAuth()) {
-      const timeout = __DEV__ ? 10000 : 1000;
+      const timeout = isDev ? 10000 : 1000;
       setTimeout(() => {
         this.updateSession();
       }, timeout);
@@ -40,14 +42,14 @@ export default class AuthClientModule extends Module {
   }
 
   setToken(token, expires = 365, cookies = true) {
-    if (DEBUG) console.log('AuthClientModule.setToken', token); // eslint-disable-line no-console
+    if (this.debug) this.log.trace('AuthClientModule.setToken', token); // eslint-disable-line no-console
     if (this.app.api) this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
     const { name = 'token', ...options } = get(this.app, 'config.jwt.cookie', {});
     // eslint-disable-next-line no-console
-    if (DEBUG) console.log('AuthClientModule.setToken cookie', { name, options, token });
-    if (__CLIENT__ && cookies) {
+    if (this.debug) this.log.trace('AuthClientModule.setToken cookie', { name, options, token });
+    if (isClient && cookies) {
       if (token == null) {
         cookie.remove(name, options);
       } else {
@@ -84,7 +86,7 @@ export default class AuthClientModule extends Module {
       };
     }
 
-    if (DEBUG) this.log.debug('loadStore', state);
+    if (this.debug) this.log.trace('loadStore', state);
     this.store.setState(state);
 
     const { session } = this.store;

@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import Module from '@lskjs/module';
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import staticFileMiddleware from 'connect-static-file';
 import Express from 'express';
 import http from 'http';

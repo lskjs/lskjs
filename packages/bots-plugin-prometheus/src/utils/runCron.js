@@ -1,4 +1,4 @@
-import Err from '@lskjs/utils/Err';
+import Err from '@lskjs/err';
 import nodecron from 'node-cron';
 
 export default function runCron({ bot }) {

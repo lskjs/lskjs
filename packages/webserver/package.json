@@ -25,6 +25,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/env": "2.3.0-beta.91",
+    "@lskjs/err": "2.3.0-beta.91",
     "@lskjs/module": "2.5.0",
     "@lskjs/utils": "2.5.0",
     "body-parser": "1.19.0",
@@ -48,7 +50,7 @@
     "@lskjs/i18": "2.5.0",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "supertest": "6.0.1"
   },
   "peerDependencies": {
@@ -56,6 +58,6 @@
     "@lskjs/i18": "*",
     "axios": "0.21.1",
     "bluebird": "*",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   }
 }
