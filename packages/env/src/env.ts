@@ -1,10 +1,12 @@
 /* global window */
 declare global {
   interface Window {
+    env: any;
     __DEV__: boolean;
     __STAGE__: boolean;
   }
 }
+// const safeWindow = typeof window === 'undefined' ? window :
 
 export const isServer = typeof window === 'undefined';
 export const isClient = !isServer;
@@ -13,8 +15,8 @@ export const isProd = !isDev;
 export const isDebug = isDev;
 export const stage =
   (isServer
-    ? process.env.STAGE || process.env.__STAGE || (isDev ? process.env.user : null)
-    : Boolean(window.__STAGE__)) || 'development';
+    ? process.env.STAGE || process.env.__STAGE || process.env.__STAGE__ || (isDev ? process.env.user : null)
+    : (window.env && window.env.stage) || window.__STAGE__) || 'development';
 
 export default {
   isServer,
