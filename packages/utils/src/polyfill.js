@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-import { isDev } from '@lskjs/env';
+import { isDev, stage } from '@lskjs/env';
 
 import global from './global';
 
