@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/lskjs/cli/compare/v2.6.0...v2.6.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **log2:** errors ([62454bc](https://github.com/lskjs/cli/commit/62454bcb3dea2fbe84f39a3243903973465654c0))
+* **permit:** fix store path ([fffeefd](https://github.com/lskjs/cli/commit/fffeefdead4aed6eb021e6eaa6c9111160651177))
+
+
+
+
+
 # [2.6.0](https://github.com/lskjs/cli/compare/v2.5.3...v2.6.0) (2021-08-12)
 
 
