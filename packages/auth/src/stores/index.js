@@ -1,5 +1,5 @@
-export default (...args) => ({
-  AuthStore: require('./AuthStore').default(...args),
-  SessionStore: require('./SessionStore').default(...args),
-  PassportStore: require('./PassportStore').default(...args),
-});
+export default {
+  AuthStore: () => import('./AuthStore'),
+  SessionStore: () => import('./SessionStore'),
+  PassportStore: () => import('./PassportStore'),
+};

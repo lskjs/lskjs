@@ -30,25 +30,25 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.3.0-beta.91",
-    "@lskjs/err": "2.3.0-beta.91",
+    "@lskjs/env": "2.5.3",
+    "@lskjs/err": "2.5.1",
     "@lskjs/module": "2.5.3",
     "@lskjs/utils": "2.5.3",
     "bcryptjs": "2.4.3",
     "jsonwebtoken": "8.5.1",
     "passport": "0.4.1",
-    "qs": "6.9.4",
-    "validator": "13.5.2"
+    "qs": "6.10.1",
+    "validator": "13.6.0"
   },
   "devDependencies": {
-    "@lskjs/db": "2.3.0-beta.92",
-    "@lskjs/mobx": "2.2.0-beta.5",
+    "@lskjs/db": "2.5.3",
+    "@lskjs/mobx": "2.5.3",
     "@lskjs/server-api": "2.5.3",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
-    "js-cookie": "2.2.1",
+    "js-cookie": "3.0.0",
     "lodash": "4.17.21",
-    "mobx": "5.15.4",
+    "mobx": "6.3.2",
     "node-accountkit": "1.1.6",
     "passport-facebook": "3.0.0",
     "passport-telegram-official": "1.1.0",
@@ -56,14 +56,14 @@
     "passport-youtube-v3": "2.1.0"
   },
   "peerDependencies": {
-    "@lskjs/db": "*",
-    "@lskjs/mobx": "*",
+    "@lskjs/db": "2.5.3",
+    "@lskjs/mobx": "2.5.3",
     "@lskjs/server-api": "*",
     "axios": "*",
     "bluebird": "*",
-    "js-cookie": "*",
+    "js-cookie": "3.0.0",
     "lodash": "*",
-    "mobx": "*"
+    "mobx": "6.3.2"
   },
   "optionalDeps": {
     "node-accountkit": "*",

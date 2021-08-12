@@ -1,62 +1,61 @@
 /* eslint-disable max-classes-per-file */
-import Api from '@lskjs/mobx/stores/Api';
-import Store from '@lskjs/mobx/stores/Store';
+import Api from '@lskjs/mobx/stores2/Api';
+import Store from '@lskjs/mobx/stores2/Store';
 import forEach from 'lodash/forEach';
 import { action, observable } from 'mobx';
 
 export class AuthApi extends Api {
-  base = '/api/auth';
-
+  baseURL = '/api/auth';
   login(data) {
-    return this.fetch(`${this.base}/login`, {
+    return this.fetch('/login', {
       method: 'POST',
       data,
     });
   }
   signup(data) {
-    return this.fetch(`${this.base}/signup`, {
+    return this.fetch('/signup', {
       method: 'POST',
       data,
     });
   }
   silent(data) {
-    return this.fetch(`${this.base}/silent`, {
+    return this.fetch('/silent', {
       method: 'POST',
       data,
     });
   }
   setData(data) {
-    return this.fetch(`${this.base}/setData`, {
+    return this.fetch('/setData', {
       method: 'POST',
       data,
     });
   }
   check(data) {
-    return this.fetch(`${this.base}/check`, {
+    return this.fetch('/check', {
       method: 'POST',
       data,
     });
   }
   restore(data) {
-    return this.fetch(`${this.base}/restore`, {
+    return this.fetch('/restore', {
       method: 'POST',
       data,
     });
   }
   status(data) {
-    return this.fetch(`${this.base}/status`, {
+    return this.fetch('/status', {
       method: 'POST',
       data,
     });
   }
   session(data) {
-    return this.fetch(`${this.base}/session`, {
+    return this.fetch('/session', {
       method: 'POST',
       data,
     });
   }
   info(data) {
-    return this.fetch(`${this.base}/info`, {
+    return this.fetch('/info', {
       method: 'POST',
       data,
     });
@@ -89,7 +88,7 @@ export class AuthApi extends Api {
   // }
 
   // async loginPassport(data) {
-  //   const res = await this.fetch(`${this.base}/social/login`, {
+  //   const res = await this.fetch('/social'login`, {
   //     method: 'POST',
   //     data,
   //   });
@@ -97,62 +96,63 @@ export class AuthApi extends Api {
   // }
 }
 
-export default (uapp) =>
-  class AuthStore extends Store {
-    static api = new AuthApi({ uapp });
-    @observable session = null;
-    @observable sessions = [];
-    @action
-    async applySession({ _id, ...props }) {
-      if (!_id) {
-        // eslint-disable-next-line no-console
-        console.warn('AuthStore.applySession | "session._id" not provided!');
-        return;
-      }
-      let session = this.sessions.filter((s) => s._id === _id)[0];
-      if (!session) {
-        session = { _id };
-        this.sessions.push(session);
-      }
-      forEach(props, (value, key) => {
-        session[key] = value;
-      });
-      this.session = session;
+export class AuthStore extends Store {
+  static Api = AuthApi;
+  @observable session = null;
+  @observable sessions = [];
+  @action
+  async applySession({ _id, ...props }) {
+    if (!_id) {
+      // eslint-disable-next-line no-console
+      this.constructor.app.warn('AuthStore.applySession | "session._id" not provided!');
+      return;
     }
-    getSession() {
-      return this.session;
+    let session = this.sessions.filter((s) => s._id === _id)[0];
+    if (!session) {
+      session = { _id };
+      this.sessions.push(session);
     }
-    getUserId() {
-      const session = this.getSession();
-      return session ? session._id : null;
-    }
-    isAuth() {
-      return !!this.getUserId();
-    }
+    forEach(props, (value, key) => {
+      session[key] = value;
+    });
+    this.session = session;
+  }
+  getSession() {
+    return this.session;
+  }
+  getUserId() {
+    const session = this.getSession();
+    return session ? session._id : null;
+  }
+  isAuth() {
+    return !!this.getUserId();
+  }
 
-    async login(props) {
-      const session = await this.constructor.api.login(props);
-      this.applySession(session);
-      return session;
-    }
-    async signup(props) {
-      const session = await this.constructor.api.signup(props);
-      this.applySession(session);
-      return session;
-    }
-    async updateSession(props) {
-      const { data: session } = await this.constructor.api.session(props);
-      this.applySession(session);
-      return session;
-    }
-    async logout() {
-      this.sessions = this.sessions.filter((s) => s._id !== this.session._id);
-      // eslint-disable-next-line prefer-destructuring
-      this.session = this.sessions[0];
-    }
+  async login(props) {
+    const session = await this.constructor.api.login(props);
+    this.applySession(session);
+    return session;
+  }
+  async signup(props) {
+    const session = await this.constructor.api.signup(props);
+    this.applySession(session);
+    return session;
+  }
+  async updateSession(props) {
+    const { data: session } = await this.constructor.api.session(props);
+    this.applySession(session);
+    return session;
+  }
+  async logout() {
+    this.sessions = this.sessions.filter((s) => s._id !== this.session._id);
+    // eslint-disable-next-line prefer-destructuring
+    this.session = this.sessions[0];
+  }
 
-    async getProviders() {
-      const { data } = await this.constructor.api.getInfo();
-      return data.providers || [];
-    }
-  };
+  async getProviders() {
+    const { data } = await this.constructor.api.getInfo();
+    return data.providers || [];
+  }
+}
+
+export default AuthStore;
