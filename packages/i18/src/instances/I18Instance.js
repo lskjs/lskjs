@@ -1,6 +1,7 @@
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import i18next from 'i18next';
+import i18nextXhrBackend from 'i18next-xhr-backend';
 
 export class I18Instance extends Module {
   instance = null;
@@ -20,28 +21,29 @@ export class I18Instance extends Module {
     this.t = (...args) => this.instance.t(...args);
   }
   applyLogger(instance) {
+    const moduleLog = this.log;
     instance.use({
       type: 'logger',
       log(args) {
         if (args[0] === 'i18next: initialized') {
-          this.log.trace(args.join(', '));
+          moduleLog.trace(args.join(', '));
           return;
         }
         if (args[0] === 'i18next: languageChanged') {
-          this.log.trace(args.join(', '));
+          moduleLog.trace(args.join(', '));
           return;
         }
         if (args[0] === 'i18next::translator: missingKey') {
-          this.log.error(args.join(', '));
+          moduleLog.error(args.join(', '));
           return;
         }
-        this.log.trace(args.join(', '));
+        moduleLog.trace(args.join(', '));
       },
       warn(args) {
-        this.log.warn(args.join(', '));
+        moduleLog.warn(args.join(', '));
       },
       error(args) {
-        this.log.error(args.join(', '));
+        moduleLog.error(args.join(', '));
       },
     });
   }
@@ -51,6 +53,9 @@ export class I18Instance extends Module {
       if (this.debug) this.applyLogger(instance);
       const { lng, locale, ...props } = this.config;
       props.lng = lng || locale || 'en';
+      if (typeof window !== 'undefined' && props.backend) {
+        instance.use(i18nextXhrBackend);
+      }
       return instance
         .init(props)
         .then(() => resolve(instance))
@@ -63,6 +68,14 @@ export class I18Instance extends Module {
   async loadNamespaces(...args) {
     if (this.instance) {
       await this.instance.loadNamespaces(...args);
+      await this.update();
+    } else {
+      this.log.error('!this.instance!');
+    }
+  }
+  async changeLanguage(...args) {
+    if (this.instance) {
+      await this.instance.changeLanguage(...args);
       await this.update();
     } else {
       this.log.error('!this.instance!');
