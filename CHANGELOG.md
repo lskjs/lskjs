@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.3](https://github.com/lskjs/cli/compare/v2.5.2...v2.5.3) (2021-08-12)
+
+
+### Bug Fixes
+
+* **env:** correct client stage ([00c8f0f](https://github.com/lskjs/cli/commit/00c8f0f32bd859f2c8e680e0b436772fb8364801))
+* **i18:** xhr backend support ([77b8495](https://github.com/lskjs/cli/commit/77b8495549370100ef44bb174a1176137ab49a40))
+* **mobx:** pass app to store constructor ([d3bca70](https://github.com/lskjs/cli/commit/d3bca70ff5201c634b5c339b545e5e4b6334aafc))
+
+
+
+
+
 ## [2.5.2](https://github.com/lskjs/cli/compare/v2.5.1...v2.5.2) (2021-08-12)
 
 

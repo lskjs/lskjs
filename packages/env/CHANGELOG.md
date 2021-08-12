@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.3](https://github.com/lskjs/lskjs/compare/v2.5.2...v2.5.3) (2021-08-12)
+
+
+### Bug Fixes
+
+* **env:** correct client stage ([00c8f0f](https://github.com/lskjs/lskjs/commit/00c8f0f32bd859f2c8e680e0b436772fb8364801))
+
+
+
+
+
 # [2.5.0](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.104...v2.5.0) (2021-08-11)
 
 **Note:** Version bump only for package @lskjs/env

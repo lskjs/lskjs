@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/webserver",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "LSK module webserver.",
   "keywords": [
     "webserver",
@@ -28,8 +28,8 @@
     "@lskjs/env": "2.3.0-beta.91",
     "@lskjs/err": "2.3.0-beta.91",
     "@lskjs/log2": "2.3.0-beta.92",
-    "@lskjs/module": "2.5.2",
-    "@lskjs/utils": "2.5.2",
+    "@lskjs/module": "2.5.3",
+    "@lskjs/utils": "2.5.3",
     "body-parser": "1.19.0",
     "cacheman": "2.2.1",
     "connect-static-file": "2.0.0",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@lskjs/db": "2.3.0-beta.92",
-    "@lskjs/i18": "2.5.2",
+    "@lskjs/i18": "2.5.3",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.21",
