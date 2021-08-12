@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/lskjs/ux/compare/v2.5.3...v2.6.0) (2021-08-12)
+
+
+### Features
+
+* **log2:** improve browser logging ([4a7f7d0](https://github.com/lskjs/ux/commit/4a7f7d0070e86c36d82b61cbddde64c61c82f810))
+* **log2:** improve browser logging ([c941a5f](https://github.com/lskjs/ux/commit/c941a5f855baf018979fbc9a0280585a1a9f5084))
+
+
+
+
+
 ## [2.5.3](https://github.com/lskjs/ux/compare/v2.5.2...v2.5.3) (2021-08-12)
 
 **Note:** Version bump only for package @lskjs/utils
