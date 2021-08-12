@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/lskjs/lskjs/compare/v2.5.0...v2.5.1) (2021-08-12)
+
+**Note:** Version bump only for package @lskjs/bots-provider-vk
+
+
+
+
+
 # [2.5.0](https://github.com/lskjs/lskjs/compare/v2.3.0-beta.104...v2.5.0) (2021-08-11)
 
 **Note:** Version bump only for package @lskjs/bots-provider-vk

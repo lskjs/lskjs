@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-provider-whatsapp",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -34,7 +34,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots-provider": "2.5.0",
+    "@lskjs/bots-provider": "2.5.1",
     "qrcode-terminal": "0.12.0",
     "whatsapp-web.js": "1.12.4"
   },

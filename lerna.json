@@ -1,11 +1,10 @@
 {
-  "version": "2.5.0",
+  "version": "2.5.1",
   "packages": [
     "packages/*"
   ],
   "unstablePackages": [
     "packages/*",
-
     "packages/bots",
     "packages/bots-base",
     "packages/bots-plugin",
@@ -28,7 +27,6 @@
     "packages/bots-provider-vk",
     "packages/bots-provider-whatsapp",
     "packages/bots-router",
-
     "packages/apiquery",
     "packages/autobind",
     "packages/bunyan",
@@ -38,13 +36,10 @@
     "packages/tbot",
     "packages/sh",
     "packages/sms",
-
     "packages/utils",
     "packages/getspreadsheet",
     "packages/build-locales",
-
     ""
-
   ],
   "stablePackages": [
     "packages/apm",
