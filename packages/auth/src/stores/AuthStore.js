@@ -102,9 +102,11 @@ export class AuthStore extends Store {
   @observable sessions = [];
   @action
   async applySession({ _id, ...props }) {
+    console.log('applySession', _id);
+    const { app } = this.constructor;
     if (!_id) {
       // eslint-disable-next-line no-console
-      this.constructor.app.warn('AuthStore.applySession | "session._id" not provided!');
+      app.log.warn('AuthStore.applySession | "session._id" not provided!');
       return;
     }
     let session = this.sessions.filter((s) => s._id === _id)[0];
@@ -129,12 +131,12 @@ export class AuthStore extends Store {
   }
 
   async login(props) {
-    const session = await this.constructor.api.login(props);
+    const { data: session } = await this.constructor.api.login(props);
     this.applySession(session);
     return session;
   }
   async signup(props) {
-    const session = await this.constructor.api.signup(props);
+    const { data: session } = await this.constructor.api.signup(props);
     this.applySession(session);
     return session;
   }

@@ -12,7 +12,7 @@ import stores from './stores';
 // const DEBUG = __DEV__ && __STAGE__ === 'isuvorov';
 // const DEBUG = false;
 
-export default class AuthClientModule extends Module {
+export class AuthClientModule extends Module {
   async init() {
     await super.init();
     // this.stores = require('./stores').default(this.app);
@@ -50,8 +50,12 @@ export default class AuthClientModule extends Module {
     }
   }
 
-  setToken(token, expires = 365, cookies = true) {
+  async setToken(token, expires = 365, cookies = true) {
     if (this.debug) this.log.trace('AuthClientModule.setToken', token);
+    if (this.app.hasModule('api')) {
+      const api = await this.app.module('api');
+      await api.setToken(token);
+    }
     if (this.app.api) this.app.api.setAuthToken(token);
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
@@ -103,6 +107,7 @@ export default class AuthClientModule extends Module {
 
   async saveStore() {
     const { session } = this.store;
+    if (this.debug) this.log.trace('saveStore', session);
     if (this.localStorage) this.localStorage.set('auth', this.store.getState());
     if (this.memoryStorage) this.memoryStorage.set('auth', this.store.getState());
     await this.setToken(session ? session.token : null);
@@ -136,7 +141,9 @@ export default class AuthClientModule extends Module {
   }
 
   async login(...args) {
+    this.log.debug('login', ...args);
     const res = await this.store.login(...args);
+    this.log.trace('login res', res);
     await this.saveStore();
     return res;
   }
@@ -205,3 +212,5 @@ export default class AuthClientModule extends Module {
 //   },
 //   // getStores
 // });
+
+export default AuthClientModule;

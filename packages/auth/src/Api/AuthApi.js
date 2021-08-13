@@ -97,7 +97,6 @@ export default class AuthApi extends BaseApi {
 
     const token = this.helpers.generateAuthToken(user);
     return {
-      __pack: 1,
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token,
     };
@@ -152,7 +151,6 @@ export default class AuthApi extends BaseApi {
     const token = this.helpers.generateAuthToken(user);
     // await this.helpers.updateLoginAt(user);
     return {
-      __pack: 1,
       _id: user._id,
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token,
@@ -206,7 +204,6 @@ export default class AuthApi extends BaseApi {
     // this.app.emit('events.auth.signup', { user, link });
     const token = this.helpers.generateAuthToken(user);
     return {
-      __pack: 1,
       signup: true,
       _id: user._id,
       user: await UserModel.prepare(user, { req, withAppState: true }),
@@ -350,7 +347,6 @@ export default class AuthApi extends BaseApi {
   //   await user.save();
   //   req.user = user;
   //   return {
-  //     __pack: 1,
   //     signup: true,
   //     user: await UserModel.prepare(user, { req, withAppState: true }),
   //     token: user.generateAuthToken(),
@@ -387,7 +383,6 @@ export default class AuthApi extends BaseApi {
   //   await user.save();
 
   //   return {
-  //     __pack: 1,
   //     emailSended: true,
   //   };
   // }
@@ -541,7 +536,6 @@ export default class AuthApi extends BaseApi {
     req.user = user;
 
     return {
-      __pack: 1,
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
@@ -636,7 +630,6 @@ export default class AuthApi extends BaseApi {
     req.user = user;
 
     return {
-      __pack: 1,
       user: await UserModel.prepare(user, { req, withAppState: true }),
       token: user.generateAuthToken(),
     };
