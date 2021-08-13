@@ -29,13 +29,13 @@
   "dependencies": {
     "@lskjs/module": "2.7.0",
     "@lskjs/utils": "2.6.1",
-    "mongoose": "5.13.7"
+    "mongoose": "5.11.11"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.36",
     "@types/lodash": "4.14.172",
     "@types/mongoose": "5.11.97",
-    "@types/node": "16.6.0",
+    "@types/node": "16.6.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },
