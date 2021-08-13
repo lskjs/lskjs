@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/lskjs/lskjs/compare/v2.7.0...v2.7.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **mongoose:** revert version ([f059a41](https://github.com/lskjs/lskjs/commit/f059a4178a4a7a6a25f8017f16376e7dcbba527e))
+
+
+
+
+
 # [2.7.0](https://github.com/lskjs/lskjs/compare/v2.6.1...v2.7.0) (2021-08-13)
 
 **Note:** Version bump only for package @lskjs/db
