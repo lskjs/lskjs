@@ -2,7 +2,7 @@
 import Api from '@lskjs/mobx/mobxStores/Api';
 import Store from '@lskjs/mobx/mobxStores/Store';
 import get from 'lodash/get';
-import { action as mobxAction, observable } from 'mobx';
+import { action as mobxAction, observable, toJS } from 'mobx';
 
 export class GrantCacheApi extends Api {
   baseURL = '/api/grant';
@@ -19,8 +19,13 @@ export class GrantCacheStore extends Store {
   @observable params;
   @observable res;
   static async create(params) {
-    const { data: res } = await this.api.ask(params);
-    return new this({ params, res });
+    const { data: res } = await this.api.ask(toJS(params));
+    const item = new this({ params, res });
+    console.log('create', { params, res }, item);
+    item.params = params
+    item.res = res
+    console.log('create2', { params, res }, item);
+    return item;
   }
 
   @mobxAction
@@ -34,14 +39,14 @@ export class GrantCacheStore extends Store {
     const { log } = this.constructor.app;
     const res = (this.res || {})[name];
     if (res == null) {
-      log.warn('?grantCache.can', 'cant find rule in grantCache', { action: name }, this.res, this.res[name]);
+      log.warn('?grantCache.can', 'cant find rule in grantCache', { action: name }, this.res, res);
       return null;
     }
     return res;
   }
 
   async update() {
-    const { data: res } = await this.constructor.api.ask(this.params);
+    const { data: res } = await this.constructor.api.ask(toJS(this.params));
     const { log } = this.constructor.app;
     this.res = res;
     // log.debug('grantCache.update', [res, res['cabinet.verifyAccess']], [this.res, this.res['cabinet.verifyAccess']]);

@@ -9,9 +9,9 @@ export class Store extends BaseStore {
 
   @action
   setState(state = {}) {
-    Object.keys(state).forEach((item) => {
-      if (isComputedProp(this, item)) return;
-      this.setStateField(item, state[item]);
+    Object.keys(state).forEach((key) => {
+      if (isComputedProp(this, key)) return;
+      this.setStateField(key, state[key]);
     });
   }
 }
