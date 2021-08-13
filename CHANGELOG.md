@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.4](https://github.com/lskjs/lskjs/compare/v2.8.3...v2.8.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* **module:** null config ([5114b14](https://github.com/lskjs/lskjs/commit/5114b14e5353309f6eda75ea6b61c56b957ae230))
+* **rlog:** module errors ([fdd8c07](https://github.com/lskjs/lskjs/commit/fdd8c07062f629f3186810fce368d29166601ecb))
+
+
+
+
+
 ## [2.8.3](https://github.com/lskjs/lskjs/compare/v2.8.2...v2.8.3) (2021-08-13)
 
 
