@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
-import { CrudApi } from '@lskjs/mobx/mobxStores/CrudApi';
-import { CrudStore } from '@lskjs/mobx/mobxStores/CrudStore';
+import { Api } from '@lskjs/mobx/mobxStores/Api';
+import { Store } from '@lskjs/mobx/mobxStores/Store';
 import { observable } from 'mobx';
 
-export class SessionApi extends CrudApi {
+export class SessionApi extends Api {
   baseURL = '/api/auth/session';
   // findOne(_id) {
   //   return this.fetch('/api/module/auth/getPermit', {
@@ -26,7 +26,7 @@ export class SessionApi extends CrudApi {
   //   });
   // }
 }
-export class SessionStore extends CrudStore {
+export class SessionStore extends Store {
   static Api = SessionApi;
 
   @observable _id;

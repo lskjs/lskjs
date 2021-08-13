@@ -60,11 +60,21 @@ export class AuthClientModule extends Module {
     if (this.app.apiq) this.app.apiq.setToken(token);
     if (this.memoryStorage) this.memoryStorage.set('req.token', token);
     const { name = 'token', ...options } = get(this.app, 'config.jwt.cookie', {});
-    if (this.debug) this.log.trace('AuthClientModule.setToken cookie', { name, options, token });
+    if (this.debug)
+      this.log.trace(
+        'AuthClientModule.setToken cookie',
+        { name, options, token },
+        isClient && cookies,
+        isClient,
+        cookies,
+      );
     if (isClient && cookies) {
       if (token == null) {
+        if (this.debug) this.log.trace('cookie.remove(name, options)', name, options);
         cookie.remove(name, options);
       } else {
+        if (this.debug)
+          this.log.trace('cookie.set(name, token, { expires, ...options })', name, token, { expires, ...options });
         cookie.set(name, token, { expires, ...options });
       }
     }
@@ -106,11 +116,12 @@ export class AuthClientModule extends Module {
   }
 
   async saveStore() {
-    const { session } = this.store;
-    if (this.debug) this.log.trace('saveStore', session);
-    if (this.localStorage) this.localStorage.set('auth', this.store.getState());
-    if (this.memoryStorage) this.memoryStorage.set('auth', this.store.getState());
-    await this.setToken(session ? session.token : null);
+    const state = this.store.getState();
+    if (this.debug) this.log.trace('saveStore', state);
+    if (this.localStorage) this.localStorage.set('auth', state);
+    if (this.memoryStorage) this.memoryStorage.set('auth', state);
+    const token = state.session ? state.session.token : null;
+    await this.setToken(token);
     // try {
     //   await this.app.reconnect();
     // } catch (err) {
