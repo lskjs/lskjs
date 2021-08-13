@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/lskjs/lskjs/compare/v2.8.1...v2.8.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* correct mobx version ([88dba26](https://github.com/lskjs/lskjs/commit/88dba26828b9b15dc545c2ad8e7e232d9e39645d))
+
+
+
+
+
 # [2.8.0](https://github.com/lskjs/lskjs/compare/v2.7.2...v2.8.0) (2021-08-13)
 
 

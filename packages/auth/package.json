@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "2.8.0",
+  "version": "2.8.2",
   "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
   "keywords": [
     "auth",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@lskjs/db": "2.8.0",
-    "@lskjs/mobx": "2.8.0",
+    "@lskjs/mobx": "2.8.2",
     "@lskjs/server-api": "2.8.0",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
