@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.3](https://github.com/lskjs/lskjs/compare/v2.8.2...v2.8.3) (2021-08-13)
+
+
+### Bug Fixes
+
+* **auth:** session store ([b87fc79](https://github.com/lskjs/lskjs/commit/b87fc79eb7095e3c52f9071441302d2b2391e711))
+* mobx versions ([ac73973](https://github.com/lskjs/lskjs/commit/ac739731127ed45ba5bd39eeb6eea41f909e1a60))
+
+
+
+
+
 ## [2.8.2](https://github.com/lskjs/lskjs/compare/v2.8.1...v2.8.2) (2021-08-13)
 
 

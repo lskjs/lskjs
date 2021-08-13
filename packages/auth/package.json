@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
   "keywords": [
     "auth",
