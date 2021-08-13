@@ -7,6 +7,7 @@ import get from 'lodash/get';
 
 import LocalStorage from './Storage/LocalStorage';
 import MemoryStorage from './Storage/MemoryStorage';
+import stores from './stores';
 
 // const DEBUG = __DEV__ && __STAGE__ === 'isuvorov';
 // const DEBUG = false;
@@ -14,8 +15,8 @@ import MemoryStorage from './Storage/MemoryStorage';
 export default class AuthClientModule extends Module {
   async init() {
     await super.init();
-    this.stores = require('./stores').default(this.app);
-    const { AuthStore } = this.stores;
+    // this.stores = require('./stores').default(this.app);
+    const AuthStore = await this.module('stores.AuthStore');
     this.store = new AuthStore();
     if (isClient) {
       this.localStorage = new LocalStorage({
@@ -29,6 +30,13 @@ export default class AuthClientModule extends Module {
       config: get(this, 'app.config.storage', {}),
     });
     await this.memoryStorage.init();
+  }
+
+  async getModules() {
+    return {
+      ...(await super.getModules()),
+      stores: [() => import('@lskjs/mobx/mobxStores'), { stores }],
+    };
   }
 
   async run() {
@@ -95,8 +103,8 @@ export default class AuthClientModule extends Module {
 
   async saveStore() {
     const { session } = this.store;
-    if (this.localStorage) this.localStorage.set('auth', this.store.toJS());
-    if (this.memoryStorage) this.memoryStorage.set('auth', this.store.toJS());
+    if (this.localStorage) this.localStorage.set('auth', this.store.getState());
+    if (this.memoryStorage) this.memoryStorage.set('auth', this.store.getState());
     await this.setToken(session ? session.token : null);
     // try {
     //   await this.app.reconnect();
