@@ -8,6 +8,7 @@ import uniq from 'lodash/uniq';
  * @returns {[string]} Converted keys from wildcards matches
  */
 export const getWildcardKeys = (rules, keys) => {
+  if (keys === '*') return rules;
   const rx = /(.+\.)\*$/;
   const arr = typeof keys === 'string' ? [keys] : keys;
   const converted = arr.map((key) => {
