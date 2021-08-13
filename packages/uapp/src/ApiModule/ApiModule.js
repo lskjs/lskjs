@@ -3,15 +3,43 @@ import axios from 'axios';
 
 import { fetch } from './fetch';
 
+const setToken = (client, token) => {
+  if (!token) {
+    // eslint-disable-next-line no-param-reassign
+    delete client.defaults.headers.common.Authorization;
+  } else {
+    // eslint-disable-next-line no-param-reassign
+    client.defaults.headers.common.Authorization = `Bearer ${token}`;
+  }
+};
+
 export class ApiModule extends Module {
+  // debug = 1;
   client = axios;
   async init() {
     await super.init();
     this.client = axios.create(this.config);
   }
+  createClient(props = {}) {
+    if (this.debug) this.log.trace('createClient');
+    const client = axios.create(props);
+    setToken(client, this.authToken);
+    this.app.on('api.setToken', ({ token } = {}) => {
+      setToken(client, token);
+    });
+    return client;
+  }
+
   setToken(token) {
-    this.authToken = token;
-    this.client.defaults.headers.common.Authorization = `Bearer ${token}`;
+    if (this.debug) this.log.trace('setToken', token);
+    if (!token) {
+      delete this.authToken;
+      delete this.client.defaults.headers.common.Authorization;
+    } else {
+      this.authToken = token;
+      this.client.defaults.headers.common.Authorization = `Bearer ${token}`;
+    }
+    this.app.emit('api.setToken', { token });
   }
   setAuthToken(token) {
     this.setToken(token);

@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
+import { isClient } from '@lskjs/env';
 import isAbsoluteExternalUrl from '@lskjs/utils/isAbsoluteExternalUrl';
-
-const isClient = __CLIENT__;
 
 export function fetch(...args) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
