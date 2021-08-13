@@ -1,13 +1,12 @@
-/* eslint-disable global-require */
-export default {
-  Api: require('./Api').default,
-  CrudApi: require('./CrudApi').default,
-
-  Store: require('./Store').default,
-  ApiStore: require('./ApiStore').default,
-  CrudStore: require('./CrudStore').default,
-
-  FetchStore: require('./FetchStore').default,
-  ListStore: require('./ListStore').default,
-  SelectStore: require('./SelectStore').default,
-};
+export * from './Api';
+export * from './ApiStore';
+export * from './CrudApi';
+export * from './CrudStore';
+export * from './EntityStore';
+export * from './FetchStore';
+export * from './ListStore';
+export * from './SelectStore';
+export * from './Store';
+export * from './StoreModule';
+export * from './StoresModule';
+export { default } from './StoresModule';

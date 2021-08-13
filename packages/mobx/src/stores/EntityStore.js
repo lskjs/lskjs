@@ -2,18 +2,17 @@ import Err from '@lskjs/err';
 import omitEmpty from '@lskjs/utils/omitEmpty';
 import axios from 'axios';
 import Bluebird from 'bluebird';
-import { action, observable } from 'mobx';
 
-import { Store } from '../stores2/Store';
-import { getFindParams } from './FetchStore';
+import { getFindParams } from '../utils/getFindParams';
+import { Store } from './Store';
 
 const { CancelToken } = axios;
 
-export default class EntityStore extends Store {
-  @observable item = null;
-  @observable loading = false;
-  @observable fetchedAt = null;
-  @observable filter = {};
+export class EntityStore extends Store {
+  item = null;
+  loading = false;
+  fetchedAt = null;
+  filter = {};
   __cancelToken = null;
 
   async findOne({ __cancelToken } = {}) {
@@ -31,7 +30,6 @@ export default class EntityStore extends Store {
     };
   }
 
-  @action
   async fetch() {
     if (this.loading) await this.cancelFetch();
     this.loading = true;
@@ -59,3 +57,5 @@ export default class EntityStore extends Store {
     await Bluebird.delay(10);
   }
 }
+
+export default EntityStore;

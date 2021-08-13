@@ -1,6 +1,6 @@
 import { action, isComputedProp, toJS } from 'mobx';
 
-import { ApiStore as BaseModel } from '../stores2/ApiStore';
+import { ApiStore as BaseModel } from '../stores/ApiStore';
 
 export class ApiStore extends BaseModel {
   getState() {

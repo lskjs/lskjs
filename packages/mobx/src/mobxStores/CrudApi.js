@@ -1,2 +1,2 @@
-export * from '../stores2/CrudApi';
-export { default } from '../stores2/CrudApi';
+export * from '../stores/CrudApi';
+export { default } from '../stores/CrudApi';

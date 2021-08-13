@@ -1,6 +1,6 @@
 import { action, isComputedProp, toJS } from 'mobx';
 
-import { Store as BaseStore } from '../stores2/Store';
+import { Store as BaseStore } from '../stores/Store';
 
 export class Store extends BaseStore {
   getState() {

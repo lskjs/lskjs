@@ -1,6 +1,6 @@
 import { action, isComputedProp, toJS } from 'mobx';
 
-import { CrudStore as BaseModel } from '../stores2/CrudStore';
+import { CrudStore as BaseModel } from '../stores/CrudStore';
 
 export class CrudStore extends BaseModel {
   getState() {

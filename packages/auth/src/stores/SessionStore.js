@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
-import { CrudApi } from '@lskjs/mobx/stores2/CrudApi';
-import { CrudStore } from '@lskjs/mobx/stores2/CrudStore';
+import { CrudApi } from '@lskjs/mobx/mobxStores/CrudApi';
+import { CrudStore } from '@lskjs/mobx/mobxStores/CrudStore';
 import { observable } from 'mobx';
 
 export class SessionApi extends CrudApi {

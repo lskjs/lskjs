@@ -17,7 +17,7 @@ export const defaultGetParams = (store) => ({
   search: toJS(store.search),
 });
 
-const connectListStore = async ({
+export const connectListStore = async ({
   page,
   listStore,
   query,

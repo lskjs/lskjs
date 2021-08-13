@@ -1,2 +1,2 @@
-export * from '../stores2/StoreModule';
-export { default } from '../stores2/StoreModule';
+export * from '../stores/StoreModule';
+export { default } from '../stores/StoreModule';

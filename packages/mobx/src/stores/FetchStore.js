@@ -4,30 +4,22 @@ import omitEmpty from '@lskjs/utils/omitEmpty';
 import axios from 'axios';
 import Bluebird from 'bluebird';
 import set from 'lodash/set';
-import { action, observable } from 'mobx';
 
-import { Store } from '../stores2/Store';
+import { getFindParams } from '../utils/getFindParams';
+import { Store } from './Store';
 
 const { CancelToken } = axios;
 
-export function getFindParams(store) {
-  return {
-    search: store.search,
-    filter: store.filter,
-    sort: store.sort,
-  };
-}
-
-export default class FetchStore extends Store {
-  @observable items = [];
-  @observable count = null;
-  @observable skip = 0;
-  @observable limit = 10;
-  @observable loading = false;
-  @observable fetchedAt = null;
-  @observable select = {};
-  @observable err = {};
-  @observable fetchCallback;
+export class FetchStore extends Store {
+  items = [];
+  count = null;
+  skip = 0;
+  limit = 10;
+  loading = false;
+  fetchedAt = null;
+  select = {};
+  err = {};
+  fetchCallback;
   __cancelToken = null;
 
   setStateField(item, value) {
@@ -68,7 +60,6 @@ export default class FetchStore extends Store {
     };
   }
 
-  @action
   setItems(items, { skip, cache } = {}) {
     if (cache) {
       this.items = insertArray(this.items, items, skip - this.skip);
@@ -77,7 +68,6 @@ export default class FetchStore extends Store {
     }
   }
 
-  @action
   async fetch({ skip = this.skip, limit = this.limit, cache } = {}) {
     if (this.loading) await this.cancelFetch();
     this.loading = true;
@@ -129,3 +119,5 @@ export default class FetchStore extends Store {
     await this.fetch({ cache: true, skip, limit });
   }
 }
+
+export default FetchStore;
