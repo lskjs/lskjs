@@ -40,7 +40,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
   // app.webserver.i18:I18Module
 
   async getModuleConfig(name: string): Promise<Record<string, unknown>> {
-    const config = get(this.config, name, {});
+    const config = get(this.config, name, {}) || {};
     // const name = this.debug
     const ns = [this.log.ns, name].filter(Boolean).join('.');
     // const ns = [this.log.ns, name].filter(Boolean).join('.');
