@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.2](https://github.com/lskjs/lskjs/compare/v2.7.1...v2.7.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* **auth:** correct stores ibjecting ([b70074a](https://github.com/lskjs/lskjs/commit/b70074afab34a414b403ec2436899466882971d1))
+
+
+
+
+
 ## [2.7.1](https://github.com/lskjs/lskjs/compare/v2.7.0...v2.7.1) (2021-08-13)
 
 
