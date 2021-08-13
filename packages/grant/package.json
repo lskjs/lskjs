@@ -31,17 +31,18 @@
     "@lskjs/module": "2.8.0",
     "@lskjs/mutex": "2.8.0",
     "@lskjs/utils": "2.8.0",
-    "async-mutex": "0.2.6",
-    "mobx": "6.3.2"
+    "async-mutex": "0.2.6"
   },
   "devDependencies": {
     "@lskjs/server-api": "2.8.0",
     "bluebird": "3.7.2",
-    "lodash": "4.17.21"
+    "lodash": "4.17.21",
+    "mobx": "5.15.4"
   },
   "peerDependencies": {
     "@lskjs/server-api": "2.x",
     "bluebird": "3.7.x",
-    "lodash": "4.17.x"
+    "lodash": "4.17.x",
+    "mobx": "<6"
   }
 }
