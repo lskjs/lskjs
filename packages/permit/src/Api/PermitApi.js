@@ -2,7 +2,7 @@ import Err from '@lskjs/err';
 import ListApi from '@lskjs/server-api/ListApi';
 import Bluebird from 'bluebird';
 
-export default class PermitApi extends ListApi {
+export class PermitApi extends ListApi {
   async count(req) {
     // await this.checkAdmin(req);
     const PermitModel = await this.app.module('models.PermitModel');
@@ -38,3 +38,5 @@ export default class PermitApi extends ListApi {
     });
   }
 }
+
+export default PermitApi;

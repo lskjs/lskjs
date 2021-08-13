@@ -1,9 +1,13 @@
 import Module from '@lskjs/module';
 
+import stores from './stores';
+
 export class PermitClientModule extends Module {
-  async init() {
-    await super.init();
-    this.stores = require('./stores').default(this.app);
+  async getModules() {
+    return {
+      ...(await super.getModules()),
+      stores: [() => import('@lskjs/mobx/mobxStores'), { stores }],
+    };
   }
 }
 

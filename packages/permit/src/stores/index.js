@@ -1,3 +1,3 @@
-export default (...args) => ({
-  PermitStore: require('./PermitStore').default(...args),
-});
+export default {
+  PermitStore: () => import('./PermitStore'),
+};
