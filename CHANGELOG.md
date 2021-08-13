@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/lskjs/lskjs/compare/v2.7.2...v2.8.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **auth:** fix auth bugs ([9007643](https://github.com/lskjs/lskjs/commit/9007643ac6c2e412a3d13283e52a40b6bccc3f79))
+
+
+### Features
+
+* **auth:** improve ApiModule for create axios instances ([2c60e2d](https://github.com/lskjs/lskjs/commit/2c60e2d6fcaec9dd732f9b1653cf20d33e59fd29))
+* correct peerDeps versions via semver ([4b090b8](https://github.com/lskjs/lskjs/commit/4b090b834728e9894ed7186033a4d57d8357095b))
+* **grant:** add GrantCacheStore ([cbe9c3a](https://github.com/lskjs/lskjs/commit/cbe9c3a1278a9ec0c428108c1556732b78b02f0a))
+* **mobx:** improve ApiModule for create axios instances ([00bcae7](https://github.com/lskjs/lskjs/commit/00bcae7d9c29978f30e0bc126f24a6642b0c2293))
+* **permit:** migrate to new stores ([5dad8ee](https://github.com/lskjs/lskjs/commit/5dad8eed5aa5f666fbfc3f25fff52eac76c86677))
+
+
+
+
+
 ## [2.7.2](https://github.com/lskjs/lskjs/compare/v2.7.1...v2.7.2) (2021-08-13)
 
 

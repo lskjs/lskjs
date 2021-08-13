@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/lskjs/lskjs/compare/v2.7.2...v2.8.0) (2021-08-13)
+
+
+### Features
+
+* **auth:** improve ApiModule for create axios instances ([2c60e2d](https://github.com/lskjs/lskjs/commit/2c60e2d6fcaec9dd732f9b1653cf20d33e59fd29))
+* correct peerDeps versions via semver ([4b090b8](https://github.com/lskjs/lskjs/commit/4b090b834728e9894ed7186033a4d57d8357095b))
+
+
+
+
+
 # [2.7.0](https://github.com/lskjs/lskjs/compare/v2.6.1...v2.7.0) (2021-08-13)
 
 **Note:** Version bump only for package @lskjs/uapp

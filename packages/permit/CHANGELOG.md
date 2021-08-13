@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/lskjs/lskjs/compare/v2.7.2...v2.8.0) (2021-08-13)
+
+
+### Features
+
+* correct peerDeps versions via semver ([4b090b8](https://github.com/lskjs/lskjs/commit/4b090b834728e9894ed7186033a4d57d8357095b))
+* **permit:** migrate to new stores ([5dad8ee](https://github.com/lskjs/lskjs/commit/5dad8eed5aa5f666fbfc3f25fff52eac76c86677))
+
+
+
+
+
 ## [2.7.1](https://github.com/lskjs/lskjs/compare/v2.7.0...v2.7.1) (2021-08-13)
 
 **Note:** Version bump only for package @lskjs/permit

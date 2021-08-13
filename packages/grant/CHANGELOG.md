@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/lskjs/lskjs/compare/v2.7.2...v2.8.0) (2021-08-13)
+
+
+### Features
+
+* correct peerDeps versions via semver ([4b090b8](https://github.com/lskjs/lskjs/commit/4b090b834728e9894ed7186033a4d57d8357095b))
+* **grant:** add GrantCacheStore ([cbe9c3a](https://github.com/lskjs/lskjs/commit/cbe9c3a1278a9ec0c428108c1556732b78b02f0a))
+
+
+
+
+
 # [2.7.0](https://github.com/lskjs/lskjs/compare/v2.6.1...v2.7.0) (2021-08-13)
 
 **Note:** Version bump only for package @lskjs/grant
