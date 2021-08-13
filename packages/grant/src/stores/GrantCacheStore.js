@@ -1,7 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import Api from '@lskjs/mobx/mobxStores/Api';
 import Store from '@lskjs/mobx/mobxStores/Store';
-import get from 'lodash/get';
 import { action as mobxAction, observable, toJS } from 'mobx';
 
 export class GrantCacheApi extends Api {
@@ -21,10 +20,6 @@ export class GrantCacheStore extends Store {
   static async create(params) {
     const { data: res } = await this.api.ask(toJS(params));
     const item = new this({ params, res });
-    console.log('create', { params, res }, item);
-    item.params = params
-    item.res = res
-    console.log('create2', { params, res }, item);
     return item;
   }
 
@@ -46,8 +41,11 @@ export class GrantCacheStore extends Store {
   }
 
   async update() {
+    if (this.debug) {
+      this.log.debug('grantCache.update', [this.res, this.res['cabinet.verifyAccess']]);
+    }
     const { data: res } = await this.constructor.api.ask(toJS(this.params));
-    const { log } = this.constructor.app;
+    // const { log } = this.constructor.app;
     this.res = res;
     // log.debug('grantCache.update', [res, res['cabinet.verifyAccess']], [this.res, this.res['cabinet.verifyAccess']]);
   }

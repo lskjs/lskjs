@@ -102,7 +102,6 @@ export class AuthStore extends Store {
   @observable sessions = [];
   @action
   async applySession({ _id, ...props }) {
-    console.log('applySession', _id);
     const { app } = this.constructor;
     if (!_id) {
       // eslint-disable-next-line no-console

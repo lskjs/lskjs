@@ -1,5 +1,5 @@
 // import debug from 'debug';
-import { isDev } from '@lskjs/env';
+import { isClient, isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
 import colors from 'colors/safe';
 
@@ -317,7 +317,7 @@ export class Logger implements ILogger {
     const canPrint = this.getLevelPriority(level) >= this.getLevelPriority(env('LOG_LEVEL', ''));
     if (!canPrint) return;
 
-    const logFormat = env('LOG_FORMAT', isDev ? 'debug' : 'logrus');
+    const logFormat = env('LOG_FORMAT', isDev || isClient ? 'debug' : 'logrus');
     if (!['json', 'bunyan', 'logrus'].includes(logFormat)) {
       this.__loggerPretty(level, ...args);
       return;
