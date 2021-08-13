@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-prometheus",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",

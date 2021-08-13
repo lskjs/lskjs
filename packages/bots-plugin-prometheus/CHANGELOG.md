@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/compare/v2.6.1...v2.6.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* **bots-plugin-prometheus:** fix markdown and long messages ([c3ced00](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/commit/c3ced00896539caaf94f7b9a0cdcb47040c4dccc))
+
+
+
+
+
 ## [2.6.1](https://github.com/lskjs/lskjs/compare/v2.6.0...v2.6.1) (2021-08-12)
 
 
