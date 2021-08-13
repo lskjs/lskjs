@@ -35,7 +35,7 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "axios": "*",
-    "lodash": "*"
+    "axios": "0.21.x",
+    "lodash": "4.17.x"
   }
 }

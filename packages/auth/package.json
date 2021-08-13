@@ -56,14 +56,14 @@
     "passport-youtube-v3": "2.1.0"
   },
   "peerDependencies": {
-    "@lskjs/db": "2.5.3",
-    "@lskjs/mobx": "2.5.3",
-    "@lskjs/server-api": "*",
-    "axios": "*",
-    "bluebird": "*",
-    "js-cookie": "3.0.0",
-    "lodash": "*",
-    "mobx": "6.3.2"
+    "@lskjs/db": "2.x",
+    "@lskjs/mobx": "2.x",
+    "@lskjs/server-api": "2.x",
+    "axios": "0.21.x",
+    "bluebird": "3.7.x",
+    "js-cookie": "3.x",
+    "lodash": "4.17.x",
+    "mobx": "6.3.x"
   },
   "optionalDeps": {
     "node-accountkit": "*",

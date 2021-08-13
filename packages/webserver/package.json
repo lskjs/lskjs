@@ -55,10 +55,10 @@
     "supertest": "6.1.5"
   },
   "peerDependencies": {
-    "@lskjs/db": "2.5.3",
-    "@lskjs/i18": "*",
-    "axios": "0.21.1",
-    "bluebird": "*",
-    "lodash": "4.17.21"
+    "@lskjs/db": "2.x",
+    "@lskjs/i18": "2.x",
+    "axios": "0.21.x",
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x"
   }
 }

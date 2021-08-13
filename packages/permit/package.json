@@ -38,11 +38,11 @@
     "mobx": "6.3.2"
   },
   "peerDependencies": {
-    "@lskjs/db": "2.5.3",
-    "@lskjs/mobx": "2.5.3",
-    "@lskjs/server-api": "2.5.3",
-    "bluebird": "*",
-    "lodash": "*",
-    "mobx": "6.3.2"
+    "@lskjs/db": "2.x",
+    "@lskjs/mobx": "2.x",
+    "@lskjs/server-api": "2.x",
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x",
+    "mobx": ">=5"
   }
 }

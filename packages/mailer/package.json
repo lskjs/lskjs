@@ -44,9 +44,9 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "@lskjs/db": "2.5.3",
-    "@lskjs/server-api": "2.5.3",
-    "bluebird": "*",
-    "lodash": "4.17.21"
+    "@lskjs/db": "2.x",
+    "@lskjs/server-api": "2.x",
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x"
   }
 }

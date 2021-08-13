@@ -45,12 +45,12 @@
     "react-dom": "17.0.1"
   },
   "peerDependencies": {
-    "@emotion/core": "*",
-    "@emotion/styled": "*",
-    "bluebird": "*",
-    "create-emotion-server": "*",
-    "lodash": "4.17.21",
-    "react": "*",
-    "react-dom": "*"
+    "@emotion/core": "10.x",
+    "@emotion/styled": "10.x",
+    "bluebird": "3.7.x",
+    "create-emotion-server": "10.x",
+    "lodash": "4.17.x",
+    "react": ">=16",
+    "react-dom": "17.x"
   }
 }

@@ -60,15 +60,15 @@
     "react": "16.8.6"
   },
   "peerDependencies": {
-    "@lskjs/i18": "*",
-    "@lskjs/link": "*",
-    "@lskjs/scroll": "*",
-    "axios": "0.21.1",
-    "bluebird": "*",
-    "lodash": "*",
-    "mobx": "*",
-    "mobx-react": "*",
-    "prop-types": "*",
-    "react": "*"
+    "@lskjs/i18": "2.x",
+    "@lskjs/link": "1.x",
+    "@lskjs/scroll": "1.x",
+    "axios": "0.21.x",
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x",
+    "mobx": ">=5",
+    "mobx-react": ">=6",
+    "prop-types": ">=15.x",
+    "react": ">=16"
   }
 }

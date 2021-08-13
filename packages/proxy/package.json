@@ -39,8 +39,8 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "axios": "*",
-    "bluebird": "*",
-    "lodash": "*"
+    "axios": "0.21.x",
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x"
   }
 }

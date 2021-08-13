@@ -36,8 +36,8 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "@lskjs/rabbit": "*",
-    "bluebird": "*",
-    "lodash": "4.17.21"
+    "@lskjs/rabbit": "2.x",
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x"
   }
 }

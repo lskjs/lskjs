@@ -34,8 +34,8 @@
     "serialize-javascript": "5.0.1"
   },
   "optionalDeps": {
-    "lodash": "*",
-    "bluebird": "*",
-    "normalize-unicode-text": "*"
+    "lodash": "4.17.x",
+    "bluebird": "3.7.x",
+    "normalize-unicode-text": "0.x"
   }
 }

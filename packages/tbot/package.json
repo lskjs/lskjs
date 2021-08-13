@@ -29,7 +29,7 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "bluebird": "*",
-    "lodash": "4.17.21"
+    "bluebird": "3.7.x",
+    "lodash": "4.17.x"
   }
 }

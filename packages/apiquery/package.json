@@ -32,7 +32,7 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "axios": "*",
-    "lodash": "*"
+    "axios": "0.12.x",
+    "lodash": "4.17.x"
   }
 }

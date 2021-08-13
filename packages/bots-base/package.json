@@ -44,7 +44,7 @@
     "telegraf": "4.1.0"
   },
   "peerDependencies": {
-    "lodash": "4.17.21",
-    "telegraf": "4.1.0"
+    "lodash": "4.17.x",
+    "telegraf": "4.x"
   }
 }
