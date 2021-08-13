@@ -1,14 +1,16 @@
 import Err from '@lskjs/err';
 import { Module } from '@lskjs/module';
+import omit from 'lodash/omit';
 
 import { Rlog } from './Rlog';
 
 export class RlogModule extends Module {
+  getOptions() {
+    return omit(this.config, ['log', 'debug']);
+  }
   async init() {
     await super.init();
-    this.config = this.app.config.rlog || this.app.config.notifyLogger;
-    // this.config = get(this, 'app.config.rlog', get(this, 'app.config.notifyLogger'))
-    this.logger = new Rlog(this.config);
+    this.logger = new Rlog(this.getOptions());
   }
   send(...args) {
     if (!this.logger) throw new Err('!this.logger');

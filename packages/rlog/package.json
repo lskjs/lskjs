@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
+    "@lskjs/err": "2.8.0",
     "@lskjs/module": "2.8.0",
     "@lskjs/utils": "2.8.0",
     "axios": "0.21.1",
