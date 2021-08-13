@@ -55,7 +55,7 @@
     "bluebird": "3.7.2",
     "lodash": "4.17.21",
     "mobx": "5.15.4",
-    "mobx-react": "6.1.8",
+    "mobx-react": "6.2.2",
     "prop-types": "15.7.2",
     "react": "16.8.6"
   },
@@ -66,8 +66,8 @@
     "axios": "0.21.x",
     "bluebird": "3.7.x",
     "lodash": "4.17.x",
-    "mobx": ">=5",
-    "mobx-react": ">=6",
+    "mobx": "<6",
+    "mobx-react": "<7",
     "prop-types": ">=15.x",
     "react": ">=16"
   }
