@@ -1,10 +1,10 @@
 {
   "version": "2.19.1",
-  "name": "@lskjs/cli-sample",
+  "name": "@lskjs/lskjs",
   "description": "LSK.js – command line interface scripts",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
-  "repository": "https://github.com/lskjs/cli",
+  "repository": "https://github.com/lskjs/lskjs",
   "keywords": [
     "lskjs",
     "cli",
