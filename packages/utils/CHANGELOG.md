@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/lskjs/ux/compare/v2.8.4...v2.9.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **utils:** getWildcardKeys while * ([22cf574](https://github.com/lskjs/ux/commit/22cf57467aad97edbc1d60f1588f41f7f8eef4c3))
+
+
+### Features
+
+* **log2:** improve prod logs ([aee1b06](https://github.com/lskjs/ux/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
+
+
+
+
+
 # [2.8.0](https://github.com/lskjs/ux/compare/v2.7.2...v2.8.0) (2021-08-13)
 
 

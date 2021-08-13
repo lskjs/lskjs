@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-router",
-  "version": "2.8.4",
+  "version": "2.9.0",
   "description": "LSK.js router for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -34,8 +34,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.8.4",
-    "@lskjs/utils": "2.8.0",
+    "@lskjs/module": "2.9.0",
+    "@lskjs/utils": "2.9.0",
     "universal-router": "9.0.1"
   },
   "devDependencies": {

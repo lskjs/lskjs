@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/lskjs/lskjs/compare/v2.8.4...v2.9.0) (2021-08-13)
+
+
+### Features
+
+* **log2:** improve prod logs ([aee1b06](https://github.com/lskjs/lskjs/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
+
+
+
+
+
 ## [2.8.4](https://github.com/lskjs/lskjs/compare/v2.8.3...v2.8.4) (2021-08-13)
 
 **Note:** Version bump only for package @lskjs/auth
