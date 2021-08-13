@@ -151,8 +151,25 @@ export class GrantModule extends Module {
     return res;
     return fromPairs(pairs);
   }
+
   async getCache(...initParams) {
     if (this.debug) this.log.trace('getCache', initParams);
+    if (isServer) {
+      const res = await this.canGroup(...initParams);
+      // console.log('getCache', { rules });
+      return {
+        res,
+        update() {},
+        can: (action) => {
+          if (this.debug) this.log.trace('grantCache.can', action);
+          if (!(action in res)) {
+            this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action });
+            return null;
+          }
+          return get(res, action);
+        },
+      };
+    }
     const GrantCacheStore = await this.module('stores.GrantCacheStore');
     const [rules, ctx] = await this.getArgs(...initParams);
     return GrantCacheStore.create({ rules, ctx });
