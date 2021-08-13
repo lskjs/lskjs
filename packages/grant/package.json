@@ -27,10 +27,12 @@
   "dependencies": {
     "@lskjs/env": "2.6.1",
     "@lskjs/err": "2.6.1",
+    "@lskjs/mobx": "2.7.0",
     "@lskjs/module": "2.7.0",
     "@lskjs/mutex": "2.6.1",
     "@lskjs/utils": "2.6.1",
-    "async-mutex": "0.2.6"
+    "async-mutex": "0.2.6",
+    "mobx": "6.3.2"
   },
   "devDependencies": {
     "@lskjs/server-api": "2.7.0",

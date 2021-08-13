@@ -8,8 +8,10 @@ import get from 'lodash/get';
 import some from 'lodash/some';
 
 import { CacheStorage } from './CacheStorage';
+import stores from './stores';
 
 const hasWildcard = (items) => some(items, (item) => item && item.indexOf('*') !== -1);
+
 export class GrantModule extends Module {
   trustWildcard = isServer;
 
@@ -24,6 +26,14 @@ export class GrantModule extends Module {
     if (this.debug) this.log.trace(`GrantModule.clearCache`, path);
     return this.__cache.clearCache(path);
   }
+
+  async getModules() {
+    return {
+      ...(await super.getModules()),
+      stores: [() => import('@lskjs/mobx/mobxStores'), { stores }],
+    };
+  }
+
   getRules() {
     return {
       ...(this.rules || {}),
@@ -143,19 +153,9 @@ export class GrantModule extends Module {
   }
   async getCache(...initParams) {
     if (this.debug) this.log.trace('getCache', initParams);
-    const rules = await this.canGroup(...initParams);
-    // console.log('getCache', { rules });
-    return {
-      rules,
-      can: (action) => {
-        if (this.debug) this.log.trace('grantCache.can', action);
-        if (!(action in rules)) {
-          this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action });
-          return null;
-        }
-        return get(rules, action);
-      },
-    };
+    const GrantCacheStore = await this.module('stores.GrantCacheStore');
+    const [rules, ctx] = await this.getArgs(...initParams);
+    return GrantCacheStore.create({ rules, ctx });
   }
 }
 

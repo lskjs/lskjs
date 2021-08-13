@@ -9,11 +9,12 @@ const getServerApp = (app) => app && app.app && app.app.app;
 
 export class GrantClientModule extends GrantModule {
   async can(...args) {
-    const result = await this.canGroup(...args);
-    // console.log()
-    const keys = Object.keys(result);
-    if (keys.length !== 1) throw new Err('grant.invalidResult');
-    return result[keys[0]];
+    throw new Err('DEPRECATED')
+    // const result = await this.canGroup(...args);
+    // // console.log()
+    // const keys = Object.keys(result);
+    // if (keys.length !== 1) throw new Err('grant.invalidResult');
+    // return result[keys[0]];
   }
   async canGroup(...args) {
     // const cache = new CacheStorage({ name: 'GrantClientModule.canGroup' });
