@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-prometheus",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -34,10 +34,10 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots": "2.6.1",
-    "@lskjs/bots-base": "2.6.1",
-    "@lskjs/bots-plugin": "2.6.1",
-    "@lskjs/module": "2.6.1",
+    "@lskjs/bots": "2.7.0",
+    "@lskjs/bots-base": "2.7.0",
+    "@lskjs/bots-plugin": "2.7.0",
+    "@lskjs/module": "2.7.0",
     "axios": "^0.21.1",
     "node-cron": "^3.0.0"
   },

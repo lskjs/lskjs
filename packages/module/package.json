@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "keywords": [
     "modules",

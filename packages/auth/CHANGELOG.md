@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/lskjs/lskjs/compare/v2.6.1...v2.7.0) (2021-08-13)
+
+
+### Features
+
+* **mobx:** separate mobx and non-mobx stores ([3b385d8](https://github.com/lskjs/lskjs/commit/3b385d8b49424d077bf09355aba39d0c845bfded))
+
+
+
+
+
 ## [2.6.1](https://github.com/lskjs/lskjs/compare/v2.6.0...v2.6.1) (2021-08-12)
 
 
