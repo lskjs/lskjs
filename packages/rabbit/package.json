@@ -25,6 +25,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/err": "2.6.1",
     "@lskjs/module": "2.6.1",
     "@lskjs/utils": "2.6.1",
     "amqplib": "0.6.0",

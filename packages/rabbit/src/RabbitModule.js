@@ -91,6 +91,7 @@ export class RabbitModule extends Module {
   }
   debouncedOnError = debounce(this.onError, 1000);
   async onError(err) {
+    if (!err) return;
     this.emit('connectionError');
     this.log.error(err);
     const { reconnectTimeout } = this.config;
