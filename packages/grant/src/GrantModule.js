@@ -20,9 +20,11 @@ export class GrantModule extends Module {
     if (!this.rules) this.rules = this.getRules();
     if (this.debug) this.log.debug('rules', Object.keys(this.rules));
     this.__cache = new CacheStorage({ name: this.name });
+    // if (this.debug) {
+    //   setInterval(() => this.clearCache('*'), 10000);
+    // }
   }
   async clearCache(path) {
-    await super.init();
     if (this.debug) this.log.trace(`GrantModule.clearCache`, path);
     return this.__cache.clearCache(path);
   }
@@ -117,17 +119,17 @@ export class GrantModule extends Module {
     // if (this.debug) this.log.trace('canGroup', args);
     // eslint-disable-next-line prefer-const
     let [rules, ctx] = await this.getArgs(...args);
-    if (this.debug) this.log.trace('canGroup', rules, ctx);
+    // if (this.debug) this.log.trace('canGroup', rules, ctx);
     rules = (rules || []).map((e) => (typeof e === 'string' ? { action: e } : e)).filter(Boolean);
-    // console.log('canGroup', { rules, ctx });
+    if (this.debug) this.log.trace('canGroup', { rules, ctx });
     let keys = rules.map((e) => e.action);
-    // console.log('hasWildcard(keys)', keys, hasWildcard(keys));
-    // console.log('getWildcardKeys(allKeys, keys)', getWildcardKeys(allKeys, keys));
+    if (this.debug) this.log.trace('hasWildcard(keys)', keys, hasWildcard(keys), this.trustWildcard);
+    // if (this.debug) this.log.trace('getWildcardKeys(allKeys, keys)', getWildcardKeys(allKeys, keys));
     if (hasWildcard(keys) && this.trustWildcard) {
       const allKeys = Object.keys(this.rules);
-      // console.log({ keys });
-      keys = getWildcardKeys(allKeys, keys);
-      // console.log({ allKeys, keys });
+      const newKeys = getWildcardKeys(allKeys, keys);
+      if (this.debug) this.log.trace({ allKeys, keys, newKeys });
+      keys = newKeys;
       rules = keys.map((key) => {
         const rule = rules.find((e) => {
           const ruleKey = e.action.replace('*', '');

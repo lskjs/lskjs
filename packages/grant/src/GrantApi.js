@@ -17,11 +17,14 @@ export class GrantApi extends Api {
     };
   }
   async ask(req) {
-    const {
-      data: { rules },
-    } = req;
+    let { rules } = req.data;
+    const { action } = req.data;
     if (!(rules && Array.isArray(rules) && rules.length > 0)) {
-      throw new Err('grant.askFormat', 'rules is not array', { rules });
+      if (action) {
+        rules = [{ action }];
+      } else {
+        throw new Err('grant.askFormat', 'rules is not array', { rules });
+      }
     }
     const grant = await this.app.module('grant');
     const userId = req.user ? req.user._id : null;
