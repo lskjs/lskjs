@@ -18,7 +18,7 @@ export class I18Module extends Module {
     if (!locale) throw new Err('!locale');
     const { locales = [] } = this;
     if (!locales.includes(locale)) {
-      throw new Err('!locale', 'cant find currecnt locale in locales', { data: { locale } });
+      throw new Err('!locale', 'cant find current locale in locales', { data: { locale, locales } });
     }
     if (!this.instances[locale]) {
       this.instances[locale] = await this.I18Instance.start({
@@ -31,6 +31,7 @@ export class I18Module extends Module {
   async init() {
     await super.init();
     this.locales = (this.config || {}).locales || [];
+    if (this.debug) this.log.trace('locales', this.locales);
   }
 
   async update() {

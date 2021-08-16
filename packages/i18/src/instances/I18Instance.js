@@ -1,5 +1,7 @@
+import { isClient } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
+import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import i18next from 'i18next';
 import i18nextXhrBackend from 'i18next-xhr-backend';
 
@@ -14,6 +16,16 @@ export class I18Instance extends Module {
   async run() {
     await super.run();
     await this.update();
+  }
+  async initResources() {
+    if (isClient) return;
+    if (this.resources) return;
+    const { resources } = this.config;
+    this.resources = await asyncMapValues(resources, (value) => {
+      // eslint-disable-next-line no-param-reassign
+      if (typeof value === 'string') value = { translation: value };
+      return asyncMapValues(value, (path) => JSON.parse(require('fs').readFileSync(path)));
+    });
   }
   async update() {
     if (!this.instance) throw new Err('!this.instance');
@@ -48,14 +60,22 @@ export class I18Instance extends Module {
     });
   }
   async createInstance() {
-    return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
       const instance = i18next.createInstance();
       if (this.debug) this.applyLogger(instance);
-      const { lng, locale, ...props } = this.config;
+      const { lng, locale, backend, ...props } = this.config;
       props.lng = lng || locale || 'en';
-      if (typeof window !== 'undefined' && props.backend) {
-        instance.use(i18nextXhrBackend);
+      if (isClient) {
+        if (backend) {
+          props.backend = backend;
+          instance.use(i18nextXhrBackend);
+        }
+      } else {
+        await this.initResources();
+        props.resources = this.resources;
       }
+      console.log('createInstance', props);
       return instance
         .init(props)
         .then(() => resolve(instance))
