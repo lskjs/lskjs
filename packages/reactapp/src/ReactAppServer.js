@@ -28,6 +28,17 @@ export default class ReactAppServer extends Module {
     if (!this.Uapp && !this.hasModule('uapp')) throw new Err('!Uapp');
   }
 
+  async getModuleConfig(name) {
+    const config = await super.getModuleConfig(name);
+    if (name === 'uapp') {
+      return {
+        ...this.config.client,
+        ...config,
+      };
+    }
+    return config;
+  }
+
   getRootState({ req, ...props }) {
     let config = null;
     if (this.initClientConfig) {
@@ -42,7 +53,7 @@ export default class ReactAppServer extends Module {
 
   async getUapp({ req, ...params } = {}) {
     const uappReq = collectExpressReq(req);
-    const config = cloneDeep(get(this, 'config.client', {}));
+    const config = await this.getModuleConfig('uapp'); // cloneDeep(get(this, 'config.client', {}));
     if (this.hasModule('uapp')) {
       return this.module('uapp');
     }
@@ -54,8 +65,9 @@ export default class ReactAppServer extends Module {
       }),
       req: uappReq,
       rootState: this.getRootState({ req }),
-      config,
+      config: cloneDeep(config),
       app: this,
+      __parent: this,
     });
     return uapp;
   }
