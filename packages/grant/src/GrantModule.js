@@ -157,14 +157,20 @@ export class GrantModule extends Module {
   async getCache(...initParams) {
     if (this.debug) this.log.trace('getCache', initParams);
     if (isServer) {
-      const res = await this.canGroup(...initParams);
+      let res = await this.canGroup(...initParams);
+      if (!res) {
+        this.log.error('!res');
+      }
+      if (!res) res = {};
       // console.log('getCache', { rules });
       return {
         res,
-        update() {},
+        update() {
+           //eslint-disable-line
+        },
         can: (action) => {
           if (this.debug) this.log.trace('grantCache.can', action);
-          if (!(action in res)) {
+          if (res[action] == null) {
             this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action });
             return null;
           }
