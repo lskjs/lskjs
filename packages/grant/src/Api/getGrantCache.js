@@ -3,7 +3,7 @@ import Err from '@lskjs/err';
 export async function getGrantCache(req, rules) {
   const grant = await this.app.module('grant');
   const userId = req.user ? req.user._id : null;
-  const grantCache = grant.getCache(rules, {
+  const grantCache = await grant.getCache(rules, {
     user: req.user,
     userId,
     cache: grant.__cache.fork({ prefix: userId || 'guest' }),
