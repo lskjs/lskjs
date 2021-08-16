@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **uapp:** bugs while backend uapp fetching ([b31059e](https://github.com/lskjs/lskjs/commit/b31059ed5ac1d69eefab356b657e8cba07088c9c))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/uapp

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **module:** safe module creatation ([53b84e4](https://github.com/lskjs/lskjs/commit/53b84e4d7be8eeac5fe2eb96f5136be4912c91a8))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/module

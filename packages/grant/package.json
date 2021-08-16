@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "2.10.1",
+  "version": "2.10.2",
   "description": "LSK module for grant.",
   "keywords": [
     "grant"
@@ -27,14 +27,14 @@
   "dependencies": {
     "@lskjs/env": "2.8.0",
     "@lskjs/err": "2.8.0",
-    "@lskjs/mobx": "2.9.1",
-    "@lskjs/module": "2.9.1",
+    "@lskjs/mobx": "2.10.2",
+    "@lskjs/module": "2.10.2",
     "@lskjs/mutex": "2.8.0",
     "@lskjs/utils": "2.9.1",
     "async-mutex": "0.2.6"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.9.1",
+    "@lskjs/server-api": "2.10.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.21",
     "mobx": "5.15.4"

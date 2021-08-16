@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/proxy",
-  "version": "2.9.1",
+  "version": "2.10.2",
   "description": "LSK module for proxy.",
   "keywords": [
     "proxy",
@@ -26,7 +26,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.9.1",
+    "@lskjs/module": "2.10.2",
     "@lskjs/mutex": "2.8.0",
     "@lskjs/utils": "2.9.1",
     "async-mutex": "0.2.6",

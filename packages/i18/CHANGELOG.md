@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **i18:** ssr uapp bugs ([bed1e6b](https://github.com/lskjs/lskjs/commit/bed1e6b8f6e14aa8caedb005e85785fd8a98ba5f))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/i18

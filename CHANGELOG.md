@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** axios in deps ([437f13c](https://github.com/lskjs/lskjs/commit/437f13c8a3a8bed3bf43ab90b5b80bc7bc07a330))
+* **grant:** can group bug ([3d5fdf6](https://github.com/lskjs/lskjs/commit/3d5fdf61f818f8e0a7108735aad37c5bd5e206b5))
+* **i18:** ssr uapp bugs ([bed1e6b](https://github.com/lskjs/lskjs/commit/bed1e6b8f6e14aa8caedb005e85785fd8a98ba5f))
+* **module:** safe module creatation ([53b84e4](https://github.com/lskjs/lskjs/commit/53b84e4d7be8eeac5fe2eb96f5136be4912c91a8))
+* **rabbit:** onError tryReconnect ([f7cb0e7](https://github.com/lskjs/lskjs/commit/f7cb0e77e035b781a6d50e22cc8b26d4ec54e552))
+* **reactapp:** pass uapp config in ssr ([cf0e98d](https://github.com/lskjs/lskjs/commit/cf0e98d732edeaee12abd6316360af79a40526f2))
+* **uapp:** bugs while backend uapp fetching ([b31059e](https://github.com/lskjs/lskjs/commit/b31059ed5ac1d69eefab356b657e8cba07088c9c))
+
+
+
+
+
 ## [2.10.1](https://github.com/lskjs/lskjs/compare/v2.10.0...v2.10.1) (2021-08-16)
 
 

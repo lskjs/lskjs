@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** axios in deps ([437f13c](https://github.com/lskjs/lskjs/commit/437f13c8a3a8bed3bf43ab90b5b80bc7bc07a330))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet
