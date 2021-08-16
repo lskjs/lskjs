@@ -2,7 +2,7 @@
 import { isClient } from '@lskjs/env';
 import isAbsoluteExternalUrl from '@lskjs/utils/isAbsoluteExternalUrl';
 
-export function fetch(...args) {
+export async function fetch(...args) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const { client: axios } = this;
   const { authToken } = axios;
@@ -26,8 +26,14 @@ export function fetch(...args) {
       : {},
     token: authToken,
   };
-  if (this.debug) this.log.debug('[fetch]', method, url); // eslint-disable-line no-console
-  return this.app.resolve(props);
+  if (this.debug) this.log.debug('[fetch]', method, url); // eslint-disable-line no-
+  // const serverApp = this.app;
+  const serverApp = this.app.app;
+  // if (serverApp.name !== 'ReactAppServer') throw
+  console.log('props', props);
+  const webserver = await serverApp.module('webserver');
+  return webserver.expressResolve(props);
+  // return this.app.resolve(props);
 }
 
 export default fetch;
