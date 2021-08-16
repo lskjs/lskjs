@@ -64,10 +64,11 @@ export class I18Instance extends Module {
     return new Promise(async (resolve, reject) => {
       const instance = i18next.createInstance();
       if (this.debug) this.applyLogger(instance);
-      const { lng, locale, backend, ...props } = this.config;
+      const { lng, locale, backend, resources, ...props } = this.config;
       props.lng = lng || locale || 'en';
       if (isClient) {
         if (backend) {
+          this.log.trace('use i18nextXhrBackend');
           props.backend = backend;
           instance.use(i18nextXhrBackend);
         }
@@ -75,7 +76,6 @@ export class I18Instance extends Module {
         await this.initResources();
         props.resources = this.resources;
       }
-      console.log('createInstance', props);
       return instance
         .init(props)
         .then(() => resolve(instance))
