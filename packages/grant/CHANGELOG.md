@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/lskjs/lskjs/compare/v2.9.1...v2.10.0) (2021-08-16)
+
+
+### Features
+
+* **grant:** add getGrantCache method ([87142a9](https://github.com/lskjs/lskjs/commit/87142a958a48715a693d0baec2578aa1c77b8091))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 

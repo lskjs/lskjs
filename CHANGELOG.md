@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/lskjs/lskjs/compare/v2.9.1...v2.10.0) (2021-08-16)
+
+
+### Bug Fixes
+
+* **rabbit:** onError without error ([a8c07f6](https://github.com/lskjs/lskjs/commit/a8c07f633b8cd186d3627fd0670399c932b6598e))
+* **rabbit:** package ^ ([a6e9e50](https://github.com/lskjs/lskjs/commit/a6e9e507f53cd7858e7f686a24281ff45645cd3a))
+
+
+### Features
+
+* **grant:** add getGrantCache method ([87142a9](https://github.com/lskjs/lskjs/commit/87142a958a48715a693d0baec2578aa1c77b8091))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 
