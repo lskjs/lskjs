@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/lskjs/lskjs/compare/v2.10.0...v2.10.1) (2021-08-16)
+
+
+### Bug Fixes
+
+* **grant:** await bug ([2d8a75a](https://github.com/lskjs/lskjs/commit/2d8a75aeda2428afd12bc8b2081295cb426c88d0))
+
+
+
+
+
 # [2.10.0](https://github.com/lskjs/lskjs/compare/v2.9.1...v2.10.0) (2021-08-16)
 
 

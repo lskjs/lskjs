@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/grant",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "description": "LSK module for grant.",
   "keywords": [
     "grant"
