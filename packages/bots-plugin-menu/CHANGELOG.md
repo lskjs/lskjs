@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.3](https://github.com/lskjs/lskjs/compare/v2.11.2...v2.11.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* common errors ([45d59c9](https://github.com/lskjs/lskjs/commit/45d59c977103f2112124126fb0aed5554f7f348f))
+
+
+
+
+
 ## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-menu
