@@ -6,7 +6,7 @@ export default class BotsTelegramMessageModel extends Model {
   static schema = {
     telegramUserId: {
       type: Model.Types.ObjectId,
-      ref: 'BotsTelegramUser',
+      ref: 'BotsTelegramUserModel',
     },
     botId: {
       type: 'String',
@@ -316,7 +316,7 @@ export default class BotsTelegramMessageModel extends Model {
     },
   };
   static options = {
-    model: 'BotsTelegramMessage',
+    model: 'BotsTelegramMessageModel',
     collection: 'bots_telegram_message',
     timestamps: true,
   };

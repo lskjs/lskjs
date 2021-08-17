@@ -8,7 +8,7 @@ export default class BotsMenuModel extends Model {
     buttonsLayout: Array,
   };
   static options = {
-    model: 'BotsMenu',
+    model: 'BotsMenuModel',
     collection: 'bots_menu',
     timestamps: true,
   };

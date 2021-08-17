@@ -6,7 +6,7 @@ export class PermitModel extends Model {
   static schema = {
     userId: {
       type: Model.Types.ObjectId,
-      ref: 'User',
+      ref: 'UserModel',
       // required: true,
     },
     type: {
@@ -32,7 +32,7 @@ export class PermitModel extends Model {
     info: Object, // Всякая кастомная херь
   };
   static options = {
-    model: 'Permit',
+    model: 'PermitModel',
     collection: 'permit',
   };
   static async createPermit(data) {

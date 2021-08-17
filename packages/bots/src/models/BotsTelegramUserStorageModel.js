@@ -17,7 +17,7 @@ export default class BotsTelegramUserStorageModel extends Model {
   };
 
   static options = {
-    model: 'BotsTelegramUserStorage',
+    model: 'BotsTelegramUserStorageModel',
     collection: 'bots_telegram_user_storage',
     timestamps: true,
   };

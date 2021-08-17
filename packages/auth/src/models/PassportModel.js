@@ -66,7 +66,7 @@ export class PassportModel extends Model {
     },
   };
   static options = {
-    model: 'Passport',
+    model: 'PassportModel',
     collection: 'passport',
     // timestamps: true,
     // toJSON: { virtuals: true },

@@ -10,7 +10,7 @@ export default class BillingTransactionModel extends Model {
     type: { type: String, required: true }, // in, out, internal
 
     status: { type: String }, // TRANSACTION_STATUS_* // null, progress, succcess, error
-    userId: { type: Model.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: Model.Types.ObjectId, ref: 'UserModel', required: true },
     companyId: { type: Model.Types.ObjectId },
     info: { type: Object }, // qiwi, usd
     meta: { type: Object }, // qiwi, usd
@@ -20,7 +20,7 @@ export default class BillingTransactionModel extends Model {
     },
   };
   static options = {
-    model: 'BillingTransaction',
+    model: 'BillingTransactionModel',
     collection: 'billing_transactions',
   };
 

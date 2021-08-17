@@ -10,7 +10,7 @@ export default class BotsTelegramPortalRulesModel extends Model {
   };
 
   static options = {
-    model: 'BotsTelegramPortalRules',
+    model: 'BotsTelegramPortalRulesModel',
     collection: 'bots_telegram_portal_rules',
     timestamps: true,
   };
