@@ -64,18 +64,18 @@ export class PermitServerModule extends Module {
 
   generateCode({ type = 'hex', length = 10 } = {}) {
     if (type === 'number') {
-      return customAlphabet('1234567890', length);
+      return customAlphabet('1234567890', length)();
     }
     if (type === 'hex') {
-      return customAlphabet('1234567890abcdef', length);
+      return customAlphabet('1234567890abcdef', length)();
     }
     if (type === 'url') {
-      return customAlphabet(urlAlphabet, length);
+      return customAlphabet(urlAlphabet, length)();
     }
-    if (type === 'hash') {
-      throw new Err('NOT_IMPLEMENTED');
-    }
-    return nanoid(length);
+    // if (type === 'hash') {
+    throw new Err('NOT_IMPLEMENTED');
+  // }
+    // return nanoid(length);
   }
   async generateUniqCode(params, iteration = 0) {
     const PermitModel = await this.model('PermitModel');
