@@ -74,11 +74,11 @@ export class PermitServerModule extends Module {
     }
     // if (type === 'hash') {
     throw new Err('NOT_IMPLEMENTED');
-  // }
+    // }
     // return nanoid(length);
   }
   async generateUniqCode(params, iteration = 0) {
-    const PermitModel = await this.model('PermitModel');
+    const PermitModel = await this.app.module('models.PermitModel');
     // throw new Err('!code');
     // if (iteration) {
     //   str2 += Math.floor(Math.random() * 100000);

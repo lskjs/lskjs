@@ -265,7 +265,7 @@ export default class AuthApi extends BaseApi {
     if (status !== 'valid') {
       throw new Err('permit.statusInvalid', { status: 400, data: { status } });
     }
-    if (!this.equal(code, permit.code)) throw this.app.e('permit.codeInvalid', { status: 400 });
+    if (String(code) !== String(permit.code)) throw new Err('permit.codeInvalid', { status: 400 });
 
     return this.permitAction({ req, permit });
   }
