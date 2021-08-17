@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mailer",
-  "version": "2.10.2",
+  "version": "2.11.0",
   "description": "LSK module for send and receive emails.",
   "keywords": [
     "database",

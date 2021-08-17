@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/lskjs/lskjs/compare/v2.10.3...v2.11.0) (2021-08-17)
+
+
+### Features
+
+* **event:** pass events with bind ([327ab36](https://github.com/lskjs/lskjs/commit/327ab3627e11cf469169f5dca8e31b1fb83ddfd8))
+* rename models ([461c90f](https://github.com/lskjs/lskjs/commit/461c90ffa9b2facc15e6a34b12d413bddf06809d))
+
+
+
+
+
 ## [2.10.3](https://github.com/lskjs/lskjs/compare/v2.10.2...v2.10.3) (2021-08-16)
 
 
