@@ -1,3 +1,5 @@
-import EventModule from './EventModule';
+import { EventModule } from './EventModule';
 
-export default class EventServerModule extends EventModule {}
+export class EventServerModule extends EventModule {}
+
+export default EventServerModule;
