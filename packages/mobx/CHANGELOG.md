@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+
+### Bug Fixes
+
+* **mobx:** override default store params ([cdd243c](https://github.com/lskjs/lskjs/commit/cdd243c173b8130491fd16938f9af687d0fb0660))
+
+
+
+
+
 ## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/mobx

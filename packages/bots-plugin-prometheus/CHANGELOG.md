@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+
+### Features
+
+* named exports and wrap errors in Err ([95638cf](https://github.com/lskjs/lskjs/commit/95638cfc7a08c8aaa89558c5ba6fc1f2f72c4994))
+
+
+
+
+
 # [2.11.0](https://github.com/lskjs/lskjs/compare/v2.10.3...v2.11.0) (2021-08-17)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-prometheus

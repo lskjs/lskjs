@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+
+### Bug Fixes
+
+* **auth:** refactor error names ([7444282](https://github.com/lskjs/lskjs/commit/74442824e23dedf9171314ff87bce695666dab90))
+* **mobx:** override default store params ([cdd243c](https://github.com/lskjs/lskjs/commit/cdd243c173b8130491fd16938f9af687d0fb0660))
+* **upload:** upload image ([d5c3d94](https://github.com/lskjs/lskjs/commit/d5c3d94f176534b484039d760086567a539f37b3))
+
+
+### Features
+
+* **grant:** add clearCache in grantCache.update ([f61279e](https://github.com/lskjs/lskjs/commit/f61279e6216cad79a3c1169be404c4b4794f2154))
+* named exports and wrap errors in Err ([95638cf](https://github.com/lskjs/lskjs/commit/95638cfc7a08c8aaa89558c5ba6fc1f2f72c4994))
+
+
+
+
+
 ## [2.11.3](https://github.com/lskjs/lskjs/compare/v2.11.2...v2.11.3) (2021-08-17)
 
 

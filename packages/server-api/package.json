@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "2.10.2",
+  "version": "2.12.0",
   "description": "LSK server-api.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/server-api",
@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "@lskjs/env": "2.8.0",
-    "@lskjs/err": "2.8.0",
-    "@lskjs/module": "2.10.2",
-    "@lskjs/utils": "2.9.1"
+    "@lskjs/err": "2.12.0",
+    "@lskjs/module": "2.12.0",
+    "@lskjs/utils": "2.12.0"
   },
   "devDependencies": {
     "axios": "0.21.1",
