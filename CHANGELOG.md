@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/lskjs/lskjs/compare/v2.12.0...v2.12.1) (2021-08-18)
+
+
+### Bug Fixes
+
+* **permit:** isAdmin ([a1335d6](https://github.com/lskjs/lskjs/commit/a1335d6437cc971efc1ee9975be445c44aac46e5))
+
+
+
+
+
 # [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
 
 
