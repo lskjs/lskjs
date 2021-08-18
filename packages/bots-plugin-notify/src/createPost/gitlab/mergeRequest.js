@@ -1,6 +1,6 @@
 import utils from '../../utils';
 
-const { ignoreMd } = utils;
+const { ignoreMd, getCode, getLink } = utils;
 
 const statuses = {
   opened: '🎉',
@@ -8,15 +8,17 @@ const statuses = {
   merged: '🤝',
 };
 
-export default function (message) {
+export default function (message, provider) {
   const { user, object_attributes: objectAttributes } = message.meta;
 
   const status = statuses[objectAttributes.state] || `🤷‍♀️ ${objectAttributes.status}`;
 
-  const message2 = objectAttributes.title ? `\`${objectAttributes.title}\`\n` : '';
+  const message2 = objectAttributes.title ? `${getCode(objectAttributes.title, provider)}\n` : '';
+  const formatUsername = ignoreMd(user.username, provider);
+
   return `\
 🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} -> ${objectAttributes.target_branch}
-@${ignoreMd(user.username)}
+@${formatUsername}
 ${message2}
-[${objectAttributes.url}](${objectAttributes.url})`;
+${getLink(objectAttributes.url, objectAttributes.url, provider)}`;
 }

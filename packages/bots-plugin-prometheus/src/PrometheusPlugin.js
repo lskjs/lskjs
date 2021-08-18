@@ -7,7 +7,7 @@ import Actions from './actions';
 import { getActiveProjects, runCron } from './utils';
 
 export class PrometheusPlugin extends BaseBotPlugin {
-  providers = 'telegram';
+  providers = ['telegram', 'slack'];
   getActiveProjects = getActiveProjects.bind(this);
   runCron = runCron.bind(this);
 
@@ -23,24 +23,27 @@ export class PrometheusPlugin extends BaseBotPlugin {
     const act = Actions[type];
     if (!act) throw new Err('!act');
 
-    this.bot = bot;
-    return act.call(this, { data: alerts, params });
+    return act.call(this, { bot, data: alerts, params });
   }
 
   async onEvent({ bot, project }) {
     await this.getActiveProjects(project);
     if (isEmpty(this.activeProjects)) return null;
 
-    return Bluebird.map(this.activeProjects, async (activeProject) => {
-      let { action: actions } = activeProject;
-      const { alerts } = activeProject;
+    return Bluebird.map(
+      this.activeProjects,
+      async (activeProject) => {
+        let { action: actions } = activeProject;
+        const { alerts } = activeProject;
 
-      if (!Array.isArray(actions)) actions = [actions];
+        if (!Array.isArray(actions)) actions = [actions];
 
-      return Bluebird.map(actions, async (action) => {
-        await this.runAction({ bot, alerts, action });
-      });
-    });
+        return Bluebird.map(actions, async (action) => this.runAction({ bot, alerts, action }));
+      },
+      {
+        concurrency: 10,
+      },
+    );
   }
 
   runBot(bot) {

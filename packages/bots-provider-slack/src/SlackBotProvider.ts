@@ -1,6 +1,7 @@
 import BaseBotProvider from '@lskjs/bots-provider';
 import Err from '@lskjs/err';
 import { App as SlackApp } from '@slack/bolt';
+import axios from 'axios';
 
 /**
  * Docs: https://api.slack.com/bot-users
@@ -38,6 +39,18 @@ export class SlackBotProvider extends BaseBotProvider {
   async run(): Promise<void> {
     if (!this.client) return;
     await super.run();
+  }
+
+  async sendMessage(to: string, text: string, ...props): Promise<any> {
+    try {
+      const res = await axios.post(to, {
+        text,
+      });
+      return res;
+    } catch (error) {
+      this.log.error(error);
+      return null;
+    }
   }
 }
 

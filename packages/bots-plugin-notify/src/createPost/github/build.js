@@ -1,6 +1,6 @@
 import utils from '../../utils';
 
-const { ignoreMd } = utils;
+const { ignoreMd, getCode } = utils;
 
 const statuses = {
   success: '✅',
@@ -11,7 +11,7 @@ const statuses = {
   running: '🏃💨',
 };
 
-export default function (message) {
+export default function (message, provider) {
   const {
     // commit,
     repository,
@@ -24,10 +24,13 @@ export default function (message) {
   } = message.meta;
 
   const status = statuses[buildStatus] || `🤷‍♀️ ${buildStatus}`;
+  const formatProjectName = getCode(ignoreMd(projectName, provider), provider);
+  const formatBuildName = ignoreMd(buildName, provider);
+  const formatUsername = ignoreMd(user.name, provider);
 
   return `\
-  \`${ignoreMd(projectName)}\`
-${status} *${ignoreMd(buildName)}*
-_${ignoreMd(user.name)}_
+  ${formatProjectName}
+${status} *${formatBuildName}*
+_${formatUsername}_
 ${repository.homepage}/-/jobs/${buildId}`;
 }

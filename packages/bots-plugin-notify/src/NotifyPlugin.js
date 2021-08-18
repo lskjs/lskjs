@@ -14,7 +14,7 @@ import graylog from './createPost/graylog';
 import monitoring from './createPost/monitoring';
 
 export default class NotifyPlugin extends BaseBotPlugin {
-  providers = ['telegram'];
+  providers = ['telegram', 'slack'];
   crons = [];
   alertmanager = alertmanager;
   github = github;
@@ -22,17 +22,9 @@ export default class NotifyPlugin extends BaseBotPlugin {
   graylog = graylog;
   monitoring = monitoring;
 
-  // getRoutes() {
-  //   return [
-  //     {
-  //       path: '/notify',
-  //       action: async ({ ctx, req, bot }) => this.checkResourses(bot),
-  //     },
-  //   ];
-  // }
-
   sendNotification({ bot, message }) {
     if (!message) throw new Err('!message');
+    const { provider } = bot;
     const { projectName } = message;
     let project = this.config.projects[projectName];
     let isDefault = false;
@@ -43,13 +35,13 @@ export default class NotifyPlugin extends BaseBotPlugin {
 
     let msg = message.text;
     if (message.type === 'gitlab') {
-      msg = this.gitlab(message, project);
+      msg = this.gitlab(message, project, provider);
     }
     if (message.type === 'github') {
-      msg = this.github(message, project);
+      msg = this.github(message, project, provider);
     }
     if (message.type === 'alertmanager') {
-      msg = this.alertmanager(message, project);
+      msg = this.graylog(message, project, provider);
     }
     if (message.type === 'graylog') {
       msg = this.graylog(message, project);
@@ -64,15 +56,20 @@ export default class NotifyPlugin extends BaseBotPlugin {
       options.parse_mode = 'MarkdownV2';
     }
 
-    if (project.telegram && msg) {
-      return Bluebird.map(project.telegram, (chat) => bot.sendMessage(chat, msg, options));
-    }
-    return [];
+    let chats = [];
+    if (provider === 'telegram' && project.telegram) chats = project.telegram;
+    if (provider === 'slack' && project.slack) chats = project.slack;
+
+    return Bluebird.map(chats, (chat) => bot.sendMessage(chat, msg, options));
   }
 
   checkResourses(bot) {
-    const { getEconnabortedErrorMessage, getOtherErrorMessage, getRedirectErrorMessage, getWarningMessage } =
-      this.monitoring;
+    const {
+      getEconnabortedErrorMessage,
+      getOtherErrorMessage,
+      getRedirectErrorMessage,
+      getWarningMessage,
+    } = this.monitoring;
 
     const { projects } = this.config;
     const timeout = 30 * 1000;
@@ -91,12 +88,12 @@ export default class NotifyPlugin extends BaseBotPlugin {
             timeout,
           });
           if (status >= 300) {
-            const message = getRedirectErrorMessage({ projectName, url });
+            const message = getRedirectErrorMessage({ projectName, url }, bot.provider);
             await this.sendNotification({ bot, message });
             return {};
           }
           if (Date.now() - time >= timeoutWarn) {
-            const message = getWarningMessage({ projectName, url, timeoutWarn });
+            const message = getWarningMessage({ projectName, url, timeoutWarn }, bot.provider);
             await this.sendNotification({ bot, message });
             return { status: 200 };
           }
@@ -105,8 +102,8 @@ export default class NotifyPlugin extends BaseBotPlugin {
         } catch (err) {
           const message =
             err && err.code === 'ECONNABORTED'
-              ? getEconnabortedErrorMessage({ projectName, url, timeout })
-              : getOtherErrorMessage({ projectName, url, err });
+              ? getEconnabortedErrorMessage({ projectName, url, timeout }, bot.provider)
+              : getOtherErrorMessage({ projectName, url, err }, bot.provider);
 
           const { status, statusText } = err.response;
           this.log.error(`Status: ${status || ''} ${statusText || ''}`);
@@ -117,7 +114,7 @@ export default class NotifyPlugin extends BaseBotPlugin {
     });
   }
   runMonitoring(bot) {
-    let cronConfig = get(this.config, 'cron', []);
+    let cronConfig = get(this.config, 'cron', '* * * * *');
     if (!Array.isArray(cronConfig)) cronConfig = [cronConfig];
 
     this.crons = cronConfig.map((config) => {
@@ -134,6 +131,7 @@ export default class NotifyPlugin extends BaseBotPlugin {
         ),
       };
     });
+    this.log.info(`Cron: [${this.crons.map(({ time }) => time).join(',')}]. Provider: ${bot.provider}`);
   }
   async runBot(bot) {
     if (!this.config || isEmpty(this.config)) return;

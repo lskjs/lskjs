@@ -22,7 +22,7 @@ export default function runCron({ bot }) {
   if (initedCrons.length) {
     this.log.debug(
       'runCron',
-      initedCrons.map((cron) => cron.cron),
+      initedCrons.map((cron) => cron.time),
     );
   }
   return initedCrons;

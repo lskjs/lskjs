@@ -19,11 +19,14 @@ export default class NotifyApi extends Api {
   }
   async init() {
     await super.init();
-    const { plugins, telegram: bot } = await this.app.module('bots');
+    const { plugins, telegram, slack } = await this.app.module('bots');
     const { notify } = plugins;
     const { sendNotification, config } = notify;
 
-    this.bot = bot;
+    this.bot = {
+      telegram,
+      slack,
+    };
     this.notifyConfig = config;
     this.sendNotification = sendNotification.bind(notify);
   }
@@ -34,7 +37,15 @@ export default class NotifyApi extends Api {
 
     this.messages = new2;
 
-    return Bluebird.map(old, async (message) => this.sendNotification({ bot: this.bot, message }), { concurrency: 10 });
+    const sendTelegram = Bluebird.map(
+      old,
+      async (message) => this.sendNotification({ bot: this.bot.telegram, message }),
+      { concurrency: 10 },
+    );
+    const sendSlack = Bluebird.map(old, async (message) => this.sendNotification({ bot: this.bot.slack, message }), {
+      concurrency: 10,
+    });
+    return Promise.all([sendTelegram, sendSlack]);
   }
 
   async notify(req) {
