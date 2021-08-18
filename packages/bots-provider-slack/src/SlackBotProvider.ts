@@ -11,7 +11,7 @@ type SlackBotConfigType = {
   signingSecret: string;
 };
 
-export default class SlackBotProvider extends BaseBotProvider {
+export class SlackBotProvider extends BaseBotProvider {
   client: any;
   provider = 'slack';
   SlackApp = SlackApp;
@@ -40,3 +40,5 @@ export default class SlackBotProvider extends BaseBotProvider {
     await super.run();
   }
 }
+
+export default SlackBotProvider;

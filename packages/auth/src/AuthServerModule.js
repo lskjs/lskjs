@@ -9,7 +9,7 @@ import { Passport } from 'passport';
 import strategies from './strategies';
 import createHelpers from './utils/createHelpers';
 
-export default class AuthServerModule extends Module {
+export class AuthServerModule extends Module {
   getStrategies() {
     return strategies;
   }
@@ -88,3 +88,5 @@ export default class AuthServerModule extends Module {
     });
   }
 }
+
+export default AuthServerModule;

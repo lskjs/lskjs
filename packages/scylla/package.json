@@ -24,6 +24,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/err": "2.8.0",
     "@lskjs/module": "2.10.2",
     "@lskjs/utils": "2.9.1",
     "cassandra-driver": "4.6.1"

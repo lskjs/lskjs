@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@lskjs/bots-provider": "2.10.2",
+    "@lskjs/err": "2.8.0",
     "qrcode-terminal": "0.12.0",
     "whatsapp-web.js": "1.12.4"
   },

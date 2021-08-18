@@ -37,6 +37,7 @@
     "@lskjs/bots": "2.11.0",
     "@lskjs/bots-base": "2.10.2",
     "@lskjs/bots-plugin": "2.10.2",
+    "@lskjs/err": "2.8.0",
     "@lskjs/module": "2.10.2",
     "axios": "^0.21.1",
     "node-cron": "^3.0.0"

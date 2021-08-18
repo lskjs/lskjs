@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import Actions from './actions';
 import { getActiveProjects, runCron } from './utils';
 
-export default class PrometheusPlugin extends BaseBotPlugin {
+export class PrometheusPlugin extends BaseBotPlugin {
   providers = 'telegram';
   getActiveProjects = getActiveProjects.bind(this);
   runCron = runCron.bind(this);
@@ -47,3 +47,5 @@ export default class PrometheusPlugin extends BaseBotPlugin {
     this.crons = this.runCron({ bot });
   }
 }
+
+export default PrometheusPlugin;

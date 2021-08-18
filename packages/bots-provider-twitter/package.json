@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@lskjs/bots-provider": "2.10.2",
+    "@lskjs/err": "2.8.0",
     "twitter-lite": "1.1.0"
   }
 }

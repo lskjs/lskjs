@@ -12,7 +12,7 @@ type VkBotConfigType = {
   token: string;
 };
 
-export default class VkBotProvider extends BaseBotProvider {
+export class VkBotProvider extends BaseBotProvider {
   provider = 'vk';
   config: VkBotConfigType;
   async init() {
@@ -65,3 +65,5 @@ export default class VkBotProvider extends BaseBotProvider {
     return this.client.sendMessage(get(ctx, 'message.from_id'), ...args);
   }
 }
+
+export default VkBotProvider;

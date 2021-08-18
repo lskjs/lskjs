@@ -1,6 +1,6 @@
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import Err from '@lskjs/err';
 import importFn from '@lskjs/utils/importFn';
 
 import availableProviders from './providers';
@@ -15,7 +15,7 @@ export default class BillingServerModule extends Module {
     };
   }
   getModels() {
-    return require('./models').default;
+    return require('./models').default;li
   }
   provider(name) {
     if (!this.providers[name]) throw new Err('!provider', { data: { name } });

@@ -24,6 +24,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
+    "@lskjs/env": "2.8.0",
+    "@lskjs/err": "2.8.0",
     "@lskjs/utils": "2.9.1"
   },
   "devDependencies": {

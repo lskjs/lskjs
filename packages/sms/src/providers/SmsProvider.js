@@ -1,13 +1,14 @@
+import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import canonizePhone from '@lskjs/utils/canonizePhone';
 import validatePhone from '@lskjs/utils/validatePhone';
 
-export default class SmsProvider {
+export class SmsProvider {
   constructor(config) {
     if (!config) throw new Err('!config ');
     this.config = config || {};
 
-    this.debug = this.config.debug || __DEV__;
+    this.debug = this.config.debug || isDev;
 
     this.log = {
       trace(...args) {
@@ -44,3 +45,5 @@ export default class SmsProvider {
     return this._send({ ...props, phone, text, sender });
   }
 }
+
+export default SmsProvider;

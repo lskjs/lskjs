@@ -8,7 +8,7 @@ import pickBy from 'lodash/pickBy';
 import Api from './Api';
 import awaitHealthchecks from './utils/awaitHealthcheck';
 
-export default class IndexApi extends Api {
+export class IndexApi extends Api {
   async healthcheck(req) {
     if (!this.app) return awaitHealthchecks({ healthcheck: null });
     if (this.app.healthcheck) return awaitHealthchecks({ healthcheck: await this.app.healthcheck(req) });
@@ -66,3 +66,5 @@ export default class IndexApi extends Api {
     };
   }
 }
+
+export default IndexApi;

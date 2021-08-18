@@ -1,6 +1,6 @@
 import Base from './MjmlTemplate';
 
-export default class SignupTemplate extends Base {
+export class SignupTemplate extends Base {
   getSubject() {
     return this.t('emails.signup.subject', this.props);
   }
@@ -27,3 +27,5 @@ ${this.props.link}
     `;
   }
 }
+
+export default SignupTemplate;

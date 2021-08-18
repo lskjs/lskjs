@@ -13,7 +13,7 @@ type TwitterBotConfigType = {
   accessTokenSecret: string | null;
 };
 
-export default class TwitterBotProvider extends BaseBotProvider {
+export class TwitterBotProvider extends BaseBotProvider {
   client: any;
   provider = 'twitter';
   Twitter = Twitter;
@@ -36,3 +36,5 @@ export default class TwitterBotProvider extends BaseBotProvider {
     await super.run();
   }
 }
+
+export default TwitterBotProvider;

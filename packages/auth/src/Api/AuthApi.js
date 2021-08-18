@@ -16,7 +16,7 @@ import random from 'lodash/random';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
 
-export default class AuthApi extends BaseApi {
+export class AuthApi extends BaseApi {
   async init() {
     await super.init();
     this.authModule = await this.app.module('auth');
@@ -836,3 +836,5 @@ export default class AuthApi extends BaseApi {
     throw new Err('!permission');
   }
 }
+
+export default AuthApi;

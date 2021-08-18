@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import merge from 'lodash/merge';
 import mexp from 'mongoose-elasticsearch-xp-async';
 
-export default class ElasticServerModule extends Module {
+export class ElasticServerModule extends Module {
   enabled = false;
   delayedModels = [];
   config = {
@@ -137,3 +137,5 @@ export default class ElasticServerModule extends Module {
     }
   }
 }
+
+export default ElasticServerModule;

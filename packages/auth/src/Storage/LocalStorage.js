@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import Storage from './Storage';
 
-export default class LocalStorage extends Storage {
+export class LocalStorage extends Storage {
   async init() {
     await super.init();
     if (typeof window !== 'undefined') {
@@ -43,3 +43,5 @@ export default class LocalStorage extends Storage {
     }
   }
 }
+
+export default LocalStorage;

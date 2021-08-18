@@ -27,7 +27,7 @@ const middleware = (req, res, next) => {
   }
 };
 
-export default class TestApi extends Api {
+export class TestApi extends Api {
   getRoutes() {
     return {
       ...super.getRoutes(),
@@ -190,3 +190,5 @@ export default class TestApi extends Api {
     return res;
   }
 }
+
+export default TestApi;

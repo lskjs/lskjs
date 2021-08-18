@@ -11,7 +11,7 @@ const serialize = isDev ? JSON.stringify : serializeJavascript;
 // const trim = str => str;
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
-export default class Html {
+export class Html {
   assetManifest = {};
   constructor(props) {
     Object.assign(this, props);
@@ -230,3 +230,5 @@ ${this.renderFooter()}\
 `;
   }
 }
+
+export default Html;

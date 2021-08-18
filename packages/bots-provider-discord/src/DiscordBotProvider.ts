@@ -10,7 +10,7 @@ type DiscordBotConfigType = {
   token: string;
 };
 
-export default class DiscordBotProvider extends BaseBotProvider {
+export class DiscordBotProvider extends BaseBotProvider {
   provider = 'discord';
   Discord = Discord;
   eventTypes = ['message', 'guildMemberAdd']; // 'ready'
@@ -34,3 +34,5 @@ export default class DiscordBotProvider extends BaseBotProvider {
     return this.isMessageContains(message, `/${command}`) || this.isMessageContains(message, `!${command}`);
   }
 }
+
+export default DiscordBotProvider;

@@ -3,7 +3,7 @@ import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import omit from 'lodash/omit';
 import Sequelize from 'sequelize';
 
-export default class SequelizeServerModule extends Module {
+export class SequelizeServerModule extends Module {
   config = {
     dialect: 'postgres',
     pool: {
@@ -45,3 +45,5 @@ export default class SequelizeServerModule extends Module {
     this.log.debug('[ready]', maskUriPassword(this.config.uri));
   }
 }
+
+export default SequelizeServerModule;

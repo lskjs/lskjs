@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 
 const DEBUG = isDev; // __STAGE__ === 'isuvorov'
 
-export default class ReactAppClient extends Module {
+export class ReactAppClient extends Module {
   ReactDOM = ReactDOM;
 
   getRootState() {
@@ -161,3 +161,5 @@ export default class ReactAppClient extends Module {
     return res;
   }
 }
+
+export default ReactAppClient;

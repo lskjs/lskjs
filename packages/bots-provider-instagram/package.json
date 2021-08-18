@@ -36,6 +36,7 @@
   "dependencies": {
     "@buzzguru/instagram-private-api": "1.44.0",
     "@lskjs/bots-provider": "2.10.2",
+    "@lskjs/err": "2.8.0",
     "bluebird": "3.7.2"
   },
   "devDependencies": {

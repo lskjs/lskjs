@@ -5,7 +5,7 @@ import assignProps from '@lskjs/utils/assignProps';
 
 // const DEBUG = false;
 // const debug = createLogger({ name: '@lskjs/storage', enable: DEBUG });
-export default class Storage {
+export class Storage {
   // debug = debug;
   state = {};
   constructor(...props) {
@@ -30,3 +30,5 @@ export default class Storage {
     // debug('set', key, value);
   }
 }
+
+export default Storage;

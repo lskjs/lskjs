@@ -1,6 +1,6 @@
 import pick from 'lodash/pick';
 
-export default class Strategy {
+export class BaseStrategy {
   constructor(params) {
     Object.assign(this, params);
   }
@@ -134,3 +134,5 @@ export default class Strategy {
     return this.url(`/auth/passport?p=${passport.generateToken()}`);
   }
 }
+
+export default BaseStrategy;

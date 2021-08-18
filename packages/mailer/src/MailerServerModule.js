@@ -7,7 +7,7 @@ import inlineCss from 'nodemailer-juice';
 
 import defaultTemplates from './templates';
 
-export default class MailerServerModule extends Module {
+export class MailerServerModule extends Module {
   getTemplates() {
     return defaultTemplates;
   }
@@ -138,3 +138,5 @@ export default class MailerServerModule extends Module {
     });
   }
 }
+
+export default MailerServerModule;

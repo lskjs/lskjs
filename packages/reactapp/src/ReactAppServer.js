@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import { start } from '@lskjs/module/utils/safe';
@@ -20,7 +21,7 @@ import BaseHtml from './Html';
 // expressResolve: this.expressResolve,
 // express: this.express,
 
-export default class ReactAppServer extends Module {
+export class ReactAppServer extends Module {
   async init() {
     await super.init();
     if (!this.expressResolve && this.app) this.expressResolve = this.app.expressResolve;
@@ -102,7 +103,7 @@ export default class ReactAppServer extends Module {
   }
 
   getPublicPath() {
-    return get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
+    return get(this, 'config.server.public', `${process.cwd() + (isDev ? '' : '/..')}/public`);
   }
 
   getAssetManifest() {
@@ -169,7 +170,7 @@ export default class ReactAppServer extends Module {
         // eslint-disable-next-line no-shadow
         const { redirect: redirectArgs, status = 300 } = get(page, 'state', {});
         const [redirect] = redirectArgs;
-        if (__DEV__) {
+        if (isDev) {
           this.log.debug('ReactAppServer.redirect', redirect);
           await Bluebird.delay(2000);
         }
@@ -186,7 +187,7 @@ export default class ReactAppServer extends Module {
           component = page;
         } else {
           if (!page) throw new Err('!page');
-          if (__DEV__ && page && !page.render) {
+          if (isDev && page && !page.render) {
             console.error('!page.render', { page, render: page.render }); // eslint-disable-line no-console
             throw new Err('!page.render');
           }
@@ -212,7 +213,7 @@ export default class ReactAppServer extends Module {
           content = renderStylesToString(content);
         }
       } catch (err) {
-        if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
+        if (isDev) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
         throw {
           err,
           stack: [
@@ -225,7 +226,7 @@ export default class ReactAppServer extends Module {
       // this.log.trace('content', content);
     } catch ({ err, stack }) {
       status = 505;
-      if (__DEV__) {
+      if (isDev) {
         const text = [...stack, ''].join(':\n');
         if (this.log && this.log.error) {
           this.log.error(text, err);
@@ -266,3 +267,5 @@ export default class ReactAppServer extends Module {
     return res.status(status).send(content);
   }
 }
+
+export default ReactAppServer;

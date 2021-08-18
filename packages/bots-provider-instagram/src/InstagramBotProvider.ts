@@ -11,7 +11,7 @@ type InstagramBotConfigType = {
   password: string;
 };
 
-export default class InstagramBotProvider extends BaseBotProvider {
+export class InstagramBotProvider extends BaseBotProvider {
   client: any;
   provider = 'instagram';
   IgApiClient = IgApiClient;
@@ -34,3 +34,5 @@ export default class InstagramBotProvider extends BaseBotProvider {
     await this.client.simulate.postLoginFlow();
   }
 }
+
+export default InstagramBotProvider;

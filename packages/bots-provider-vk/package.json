@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@lskjs/bots-provider": "2.10.2",
+    "@lskjs/err": "2.8.0",
     "node-vk-bot-api": "3.4.0"
   },
   "devDependencies": {

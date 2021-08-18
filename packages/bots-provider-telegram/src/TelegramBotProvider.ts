@@ -16,7 +16,7 @@ type TelegramBotConfigType = {
   token: string;
 };
 
-export default class TelegramBotProvider extends BaseBotProvider {
+export class TelegramBotProvider extends BaseBotProvider {
   client: any;
   provider = 'telegram';
   Telegraf = Telegraf;
@@ -801,3 +801,5 @@ export default class TelegramBotProvider extends BaseBotProvider {
   //   this.bot.deleteMessage(chat_id, message_id, params);
   // }
 }
+
+export default TelegramBotProvider;
