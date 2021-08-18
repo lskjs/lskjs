@@ -22,6 +22,12 @@ export class FetchStore extends Store {
   fetchCallback;
   __cancelToken = null;
 
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+  }
+
   setStateField(item, value) {
     if (['skip', 'limit'].includes(item)) {
       set(this, item, +value || 0);

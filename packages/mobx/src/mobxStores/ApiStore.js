@@ -1,14 +1,14 @@
 import { action, isComputedProp, toJS } from 'mobx';
 
-import { ApiStore as BaseModel } from '../stores/ApiStore';
+import { ApiStore as BaseApiStore } from '../stores/ApiStore';
 
-export class ApiStore extends BaseModel {
-  // TODO: скопировано из ./Store
+export class ApiStore extends BaseApiStore {
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   getState() {
     return toJS(super.getState());
   }
 
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   @action
   setState(state = {}) {
     Object.keys(state).forEach((item) => {

@@ -24,9 +24,11 @@ export class ListStore extends FetchStore {
   @observable searchFromLength = 0;
   @observable search = '';
 
-  constructor(...args) {
-    super(...args);
-    if (!this.selectStore) this.selectStore = new SelectStore({ listStore: this });
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+    if (!this.selectStore) this.selectStore = new SelectStore({ listStore: this }); // NOTE: единсвенная новая строчка
   }
 
   getState() {

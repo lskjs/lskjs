@@ -15,6 +15,12 @@ export class EntityStore extends Store {
   filter = {};
   __cancelToken = null;
 
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+  }
+
   async findOne({ __cancelToken } = {}) {
     if (!this.api) throw new Err('!api');
     if (!this.api.find) throw new Err('!api.find');
