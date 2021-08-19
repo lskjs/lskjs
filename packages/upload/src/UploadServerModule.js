@@ -12,7 +12,7 @@ export class UploadServerModule extends Module {
   async init() {
     await super.init();
     if (this.config.mimetypes) this.mimetypes = this.config.mimetypes;
-    if (!this.config.url) throw new Err('!url');
+    // if (!this.config.url) throw new Err('!url');
     this.initStorage();
     this.multer = this.getMulter();
   }
