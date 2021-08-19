@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-import { isDev } from '@lskjs/env';
 import Logger from '@lskjs/log2';
 import debounce from 'lodash/debounce';
 import groupBy from 'lodash/groupBy';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
-if (isDev) {
-  const log = new Logger({ name: 'React' });
+export default ({ enable = 1, collapse = 1 } = {}) => {
+  if (!enable) return;
+  const logger = new Logger({ name: 'React' });
 
   const triggers = [
     (s) => s.startsWith('Warning: '),
@@ -30,20 +30,22 @@ if (isDev) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const res = mapValues(groups, ([_, ...g]) => g);
       if (Object.keys(res).length) {
-        log.warn(res);
+        logger.warn(res);
         stack = [];
       }
     }, 1000)();
   };
 
   console.error = (...args) => {
+    if (!collapse) return null;
     if (isTrigger(args[0])) return addToStack('error', ...args);
     console.___error(...args);
     return null;
   };
   console.warn = (...args) => {
+    if (!collapse) return null;
     if (isTrigger(args[0])) return addToStack('warn', ...args);
     console.___warn(...args);
     return null;
   };
-}
+};
