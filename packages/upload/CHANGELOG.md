@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.2](https://github.com/lskjs/lskjs/compare/v2.12.1...v2.12.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* **upload:** server init bug ([5e1e60c](https://github.com/lskjs/lskjs/commit/5e1e60ccbcbc9744a130f2812153e398a995b4e6))
+
+
+
+
+
 # [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
 
 
