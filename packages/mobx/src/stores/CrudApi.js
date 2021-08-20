@@ -4,11 +4,15 @@ import { Api } from './Api';
 
 export class CrudApi extends Api {
   baseURL = '/api';
-  find(data) {
-    return this.fetch('/find', {
+  async find(data, options = {}) {
+    this.client.defaults.transformResponse = [this.transformResponseSimple.bind(this)];
+    const res = await this.fetch('/find', {
       method: 'POST',
       data,
+      ...options,
     });
+    this.client.defaults.transformResponse = [this.transformResponse.bind(this)];
+    return res;
   }
   findById(_id) {
     return this.fetch('/findOne', {

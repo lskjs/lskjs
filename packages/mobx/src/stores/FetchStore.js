@@ -66,7 +66,7 @@ export class FetchStore extends Store {
     };
   }
 
-  setItems(items, { skip, cache } = {}) {
+  setItems(items = [], { skip, cache } = {}) {
     if (cache) {
       this.items = insertArray(this.items, items, skip - this.skip);
     } else {
