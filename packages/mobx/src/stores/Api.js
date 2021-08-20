@@ -3,10 +3,6 @@ import Module from '@lskjs/module';
 
 export class Api extends Module {
   transformResponse(raw) {
-    const res = this.transformResponseSimple(raw);
-    return res.data;
-  }
-  transformResponseSimple(raw) {
     let res;
     try {
       res = JSON.parse(raw);
@@ -14,7 +10,8 @@ export class Api extends Module {
       throw new Err(`API_INVALID_JSON`, err);
     }
     if (res.code) throw new Err(res);
-    return res;
+    if (res.count && Array.isArray(res.data)) res.data.count = res.count;
+    return res.data;
   }
   async init() {
     await super.init();
