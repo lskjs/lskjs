@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-provider-slack",
-  "version": "2.12.3",
+  "version": "2.13.0",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -34,7 +34,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots-provider": "2.12.3",
+    "@lskjs/bots-provider": "2.13.0",
     "@lskjs/err": "2.12.0",
     "@slack/bolt": "3.2.0"
   },
