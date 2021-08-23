@@ -6,7 +6,7 @@ export class CrudApi extends Api {
   baseURL = '/api';
   find(data) {
     return this.fetch('/find', {
-      method: 'GET',
+      method: 'POST',
       data,
     });
   }
