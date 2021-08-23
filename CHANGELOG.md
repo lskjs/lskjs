@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.2](https://github.com/lskjs/lskjs/compare/v2.13.1...v2.13.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* **clickhouse:** clickhouse-post instead clickhouse ([7e7b15e](https://github.com/lskjs/lskjs/commit/7e7b15efd8a2718e173df8ae3ec2370c5e1da501))
+
+
+
+
+
 ## [2.13.1](https://github.com/lskjs/lskjs/compare/v2.13.0...v2.13.1) (2021-08-23)
 
 
