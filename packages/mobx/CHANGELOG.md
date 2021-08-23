@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/lskjs/lskjs/compare/v2.13.2...v2.14.0) (2021-08-23)
+
+
+### Features
+
+* **mobx:** ListStore with empty statuses ([db6e609](https://github.com/lskjs/lskjs/commit/db6e60943b59220ee785335efaa6415ac9b7c8be))
+
+
+
+
+
 ## [2.13.1](https://github.com/lskjs/lskjs/compare/v2.13.0...v2.13.1) (2021-08-23)
 
 

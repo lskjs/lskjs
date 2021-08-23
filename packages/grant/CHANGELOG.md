@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/lskjs/lskjs/compare/v2.13.2...v2.14.0) (2021-08-23)
+
+
+### Bug Fixes
+
+* **grant:** clearCache also delete key from mutexes ([73a110b](https://github.com/lskjs/lskjs/commit/73a110bea865360067a7d8f9b481a3ad9db36f0e))
+
+
+
+
+
 ## [2.13.1](https://github.com/lskjs/lskjs/compare/v2.13.0...v2.13.1) (2021-08-23)
 
 **Note:** Version bump only for package @lskjs/grant
