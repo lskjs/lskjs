@@ -67,10 +67,20 @@ export default async function (params = {}) {
     express.handle(req, res);
   });
 
+  let res;
   try {
-    return JSON.parse(data);
+    res = JSON.parse(data);
   } catch (err) {
-    this.log.error('ctx.resolve err', err);
-    return data;
+    this.log.error('ctx.resolve JSONparse err', err);
+    res = data;
   }
+
+  return { // NOTE: axios like response
+    status: 200,  
+    statusText: 'OK',
+    headers: {},
+    data: res
+  };
+  // console.log({res})
+  // return { data: res }; // TODO: подумать правильно ли это
 }

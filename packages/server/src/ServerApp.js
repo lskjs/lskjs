@@ -5,11 +5,6 @@ import map from 'lodash/map';
 import defaultHelpers from './helpers';
 
 export class ServerApp extends Module {
-  async model(...args) {
-    const modelsModule = await this.module('models');
-    return modelsModule.model(...args);
-  }
-
   async getHelpers() {
     return defaultHelpers;
   }

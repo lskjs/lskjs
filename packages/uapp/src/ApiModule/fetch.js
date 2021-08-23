@@ -7,7 +7,7 @@ export async function fetch(...args) {
   const { client: axios } = this;
   const { authToken } = axios;
   const [rawUrl, options = {}] = args;
-  if (isAbsoluteExternalUrl(rawUrl) || isClient) return axios.request(...args);
+  if (isAbsoluteExternalUrl(rawUrl) || isClient) return this.request(...args);
   // TODO: get port from backend
   // if (isClient) return axios.remoteFetch(...args);
   // TODO: сделать как-нибудь по нормальному и проверенно
@@ -15,8 +15,10 @@ export async function fetch(...args) {
   const url = `http://localhost:${port}${rawUrl}`;
 
   const { body = {}, method = 'GET', qs = {} } = options;
-  const props = {
+  console.log('FETCH FETCH ', this.client.baseURL, this.client.defaults.baseURL, this.client)
+  const req = {
     url,
+    path: [this.client && this.client.baseURL, rawUrl].filter(Boolean).join('/'),
     method,
     body: method === 'POST' ? body : qs,
     headers: authToken
@@ -30,9 +32,12 @@ export async function fetch(...args) {
   // const serverApp = this.app;
   const serverApp = this.app.app;
   // if (serverApp.name !== 'ReactAppServer') throw
-  console.log('props', props);
+  console.log('req', req);
   const webserver = await serverApp.module('webserver');
-  return webserver.expressResolve(props);
+  return { // NOTE: оборачиваем как ответ аксиоса
+    req,
+    data: await webserver.expressResolve(req),
+  };
   // return this.app.resolve(props);
 }
 

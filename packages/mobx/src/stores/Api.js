@@ -20,9 +20,23 @@ export class Api extends Module {
       baseURL: this.baseURL || this.base || '/api',
       transformResponse: [this.transformResponse.bind(this)],
     });
+    this.client.interceptors.request.use(
+      (config) => {
+        // if (this.debug) 
+        this.log.trace('[api]', 'req', config.baseURL, config.url, config.data);
+        console.log({config})
+        return config;
+      },
+      (err) => {
+        // if (this.debug) 
+        this.log.error('[api]', 'req err');
+        return Promise.reject(err);
+      },
+    );
   }
   fetch(...args) {
-    // this.log.trace('fetch', args);
+    this.log.trace('[api] fetch', this.client.fetch, ...args);
+    if (this.client.fetch) return this.client.fetch(...args);
     return this.client.request(...args);
   }
 }

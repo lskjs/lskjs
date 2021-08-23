@@ -35,7 +35,7 @@ export class GrantCacheStore extends Store {
     const { log } = this.constructor.app;
     const res = (this.res || {})[name];
     if (res == null) {
-      log.warn('?grantCache.can', 'cant find rule in grantCache', { action: name }, this.res, res);
+      log.warn('?GrantCacheStore.get', 'cant find rule in grantCache', { action: name }, this.res, res);
       return null;
     }
     return res;
