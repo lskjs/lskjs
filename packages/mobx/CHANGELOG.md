@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.1](https://github.com/lskjs/lskjs/compare/v2.13.0...v2.13.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **mobx:** post request while find ([3c3c1f5](https://github.com/lskjs/lskjs/commit/3c3c1f5ec79b5e1ce2a85b57694c73f1518808c1))
+
+
+
+
+
 # [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
 
 
