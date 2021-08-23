@@ -16,6 +16,7 @@ export class CacheStorage {
     // TODO: object to string
     getWildcardKeys(Object.keys(this.data), keyOrKeys).forEach((key) => {
       delete this.data[key];
+      delete this.mutexes[key];
     });
   }
   fork(props = {}) {
