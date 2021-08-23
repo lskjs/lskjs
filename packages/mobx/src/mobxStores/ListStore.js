@@ -92,6 +92,41 @@ export class ListStore extends FetchStore {
     return filter(this.filterUi, (a) => !isEmpty(a)).length;
   }
 
+  @computed
+  get emptyType() {
+    if (!this.loading) return null;
+    if (this.items.length > 0) return null;
+
+    if ((!this.search || this.search === '') && !!this.paywall && !!this.paywall.tarifUnfit) {
+      // 5) тариф не соответствует
+      return 5;
+    }
+    if (!this.fetchedAt) {
+      // 1) совсем пусто, первый раз заходим
+      return 1;
+    }
+    if ((this.fetchedAt || this.skip) && this.items.length > 0) {
+      return 6;
+    }
+    if (!this.hasFilter) {
+      // 2) пусто после фетча, фильры выключены
+      return 2;
+    }
+    if (!this.skip) {
+      // 3) пусто после фетча, фильтры включены, скип не стоит
+      return 3;
+    }
+    // 4) пусто после фетча, фильтры включены, скип стоит */}
+    return 4;
+  }
+
+  canBlur(limit) {
+    if (limit) {
+      return !this.emptyType && this.items.length > limit;
+    }
+    return !this.emptyType;
+  }
+
   map(...args) {
     return this.items.map(...args);
   }
