@@ -83,6 +83,7 @@ export class UappModule extends Module {
   async provide() {
     return {
       app: this,
+      req: this.req,
       module: this.module.bind(this),
     };
   }
