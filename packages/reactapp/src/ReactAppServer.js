@@ -119,16 +119,20 @@ export class ReactAppServer extends Module {
   }
 
   createHtmlRender(page) {
-    const { Html = BaseHtml, htmlProps = {} } = this;
-    return (content) => {
-      const html = new Html({
+    const { Html = BaseHtml, htmlProps = {} } = this; // TODO: Пересмотреть систему модульных фабрик
+    return async (content) => {
+      const props = {
+        __parent: this,
+        app: this.app,
         content,
         publicPath: this.getPublicPath(),
         assetManifest: this.getAssetManifest(),
         meta: page && page.getMeta ? page.getMeta() : '',
         rootState: page && page.getRootState ? page.getRootState() : '',
         ...htmlProps,
-      });
+      };
+      if (this.debug) this.log.trace('new Html()', props);
+      const html = await Html.start(props);
       return html.render();
     };
   }
