@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/lskjs/ux/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Features
+
+* **reactapp:** Html is module now ([03aa0d9](https://github.com/lskjs/ux/commit/03aa0d9486ca7d562ff6a4c8ef24c6b04793fdef))
+
+
+
+
+
 # [2.13.0](https://github.com/lskjs/ux/compare/v2.12.3...v2.13.0) (2021-08-20)
 
 **Note:** Version bump only for package @lskjs/reactapp

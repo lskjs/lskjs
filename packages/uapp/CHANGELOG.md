@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* **uapp:** grant, Api and expressResolve ([53631fb](https://github.com/lskjs/lskjs/commit/53631fb96c2a103ae43c8be9ddd12099a05a4c6a))
+
+
+### Features
+
+* **uapp:** migrate expressResolve to axios adapter, add logger ([79f5c75](https://github.com/lskjs/lskjs/commit/79f5c757abe7fddf8b0bfa3a68f43b4ff94dddbc))
+
+
+
+
+
 # [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
 
 **Note:** Version bump only for package @lskjs/uapp

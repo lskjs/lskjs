@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Features
+
+* pass parent app to config chain ([41e3d68](https://github.com/lskjs/lskjs/commit/41e3d68b2995327d415e8179f3404314af4d92db))
+
+
+
+
+
 # [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
 
 **Note:** Version bump only for package @lskjs/bots

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "2.13.0",
+  "version": "2.15.0",
   "description": "LSK universal react app wrapper",
   "keywords": [
     "database",
