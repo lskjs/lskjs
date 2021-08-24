@@ -4,6 +4,7 @@ import Module from '@lskjs/module';
 
 export class Api extends Module {
   transformResponse(raw) {
+    // TODO: может перенести в Апи модуль?
     let res;
     if (isServer && typeof raw !== 'string') {
       res = raw;
@@ -30,7 +31,9 @@ export class Api extends Module {
     });
   }
   fetch(...args) {
-    this.log.trace('[api] fetch', this.client.fetch, ...args);
+    return this.request(...args);
+  }
+  request(...args) {
     if (this.client.fetch) return this.client.fetch(...args);
     return this.client.request(...args);
   }

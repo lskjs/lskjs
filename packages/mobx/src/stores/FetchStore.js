@@ -20,7 +20,7 @@ export class FetchStore extends Store {
   select = {};
   err = {};
   fetchCallback;
-  __cancelToken = null;
+  cancelToken = null;
 
   // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
   constructor(state = {}) {
@@ -36,7 +36,7 @@ export class FetchStore extends Store {
     }
   }
 
-  async find({ skip, limit, __cancelToken } = {}) {
+  async find({ skip, limit } = {}, { cancelToken } = {}) {
     if (!this.api) throw new Err('!api');
     if (!this.api.find) throw new Err('!api.find');
     let params = getFindParams(this);
@@ -46,8 +46,7 @@ export class FetchStore extends Store {
       ...omitEmpty(params),
       limit,
       skip,
-      __cancelToken,
-    });
+    }, { cancelToken });
 
     let items;
     let count;
@@ -77,14 +76,16 @@ export class FetchStore extends Store {
   async fetch({ skip = this.skip, limit = this.limit, cache } = {}) {
     if (this.loading) await this.cancelFetch();
     this.loading = true;
-    this.__cancelToken = CancelToken.source();
+    this  cancelToken = CancelToken.source();
     if (this.progress) this.progress.start();
     try {
-      const { items, count } = await this.find({
-        skip,
-        limit,
-        __cancelToken: this.__cancelToken,
-      });
+      const { items, count } = await this.find(
+        {
+          skip,
+          limit,
+        },
+        { cancelToken: this  cancelToken },
+      );
       // /
       this.setItems(items, { skip, cache });
       this.count = count;
@@ -97,7 +98,7 @@ export class FetchStore extends Store {
       if (skip < this.skip) this.skip = skip;
       this.fetchedAt = new Date();
       this.loading = false;
-      this.__cancelToken = null;
+      this  cancelToken = null;
       if (this.progress) this.progress.done();
       if (this.fetchCallback) {
         this.fetchCallback(this);
@@ -106,10 +107,10 @@ export class FetchStore extends Store {
   }
 
   async cancelFetch() {
-    if (!(this.__cancelToken && this.__cancelToken.cancel)) return;
+    if (!(this  cancelToken && this  cancelToken.cancel)) return;
     this.loading = false;
     if (this.progress) this.progress.done();
-    await this.__cancelToken.cancel('fetch canceled');
+    await this  cancelToken.cancel('fetch canceled');
     await Bluebird.delay(10);
   }
 
