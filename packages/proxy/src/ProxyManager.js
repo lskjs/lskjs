@@ -56,7 +56,9 @@ export class ProxyManager extends Module {
       this.log.trace('proxies.length', this.proxies.length);
     }
     this.mutex = new Mutex();
-    this.strategy = await Strategy.createAndRun({
+    this.strategy = await Strategy.start({
+      __parent: this,
+      app: this.app,
       manager: this,
     });
   }

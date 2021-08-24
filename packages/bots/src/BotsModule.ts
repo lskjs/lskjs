@@ -185,6 +185,7 @@ export default class BotsModule extends Module {
         return null;
       }
       return createAsyncModule(providers[provider], {
+        __parent: this,
         app: this.app,
         botsModule: this,
         config,
@@ -199,8 +200,8 @@ export default class BotsModule extends Module {
     this.plugins = await asyncMapValues(currentPlugins, async (pluginFn, name) => {
       const pluginConfig = pluginsConfig && pluginsConfig[name];
       return createAsyncModule(pluginFn, {
-        app: this.app,
         __parent: this,
+        app: this.app,
         botsModule: this,
         bots: this.bots,
         config: pluginConfig || {},
@@ -210,8 +211,8 @@ export default class BotsModule extends Module {
       const Plugin = await importFn(pluginFn);
       if (pluginConfig === false) return null;
       return Plugin.create({
-        app: this.app,
         __parent: this,
+        app: this.app,
         botsModule: this,
         bots: this.bots,
         config: pluginConfig || {},
@@ -229,8 +230,8 @@ export default class BotsModule extends Module {
 
     this.routers = await asyncMapValues(this.bots, async (bot) =>
       BotsRouter.create({
-        app: this.app,
         __parent: this,
+        app: this.app,
         botsModule: this,
         bots: this.bots,
         bot,

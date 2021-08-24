@@ -24,8 +24,8 @@ export class ActionModule extends Module {
   }
   async runAction(actionParams = {}, ctxParams = {}) {
     const actionChain = await ActionChain.create({
-      app: this.app,
       __parent: this,
+      app: this.app,
       actionModule: this,
       ...ctxParams,
     });

@@ -52,7 +52,7 @@ export class AuthServerModule extends Module {
       const StrategyProvider = await importFn(this.strategyProviders[type]);
       if (!StrategyProvider) return;
       const strategy = new StrategyProvider({
-        parent: this,
+        __parent: this,
         app: this.app,
         provider,
         type,

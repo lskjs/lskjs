@@ -114,10 +114,11 @@ export class RabbitWorker extends Module {
     await job.nackError(err);
   }
   async process(params) {
-    const instance = await this.Job.createAndRun({
+    const instance = await this.Job.start({
+      __parent: this,
+      app: this.app,
       params,
       worker: this,
-      app: this.app,
       rabbit: this.rabbit,
       config: this.config,
     });
@@ -159,6 +160,7 @@ export class RabbitWorker extends Module {
       msg,
       params,
       worker: this,
+      __parent: this,
       app: this.app,
       rabbit: this.rabbit,
       config: this.config,
