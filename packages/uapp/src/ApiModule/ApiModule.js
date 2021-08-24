@@ -1,6 +1,7 @@
 import { isServer } from '@lskjs/env';
 import Module from '@lskjs/module';
 import axios from 'axios';
+import omit from 'lodash/omit';
 
 import { adapter } from './adapter';
 // import { fetch } from './fetch';
@@ -20,16 +21,34 @@ export class ApiModule extends Module {
   client = axios;
   async init() {
     await super.init();
-    this.client = this.createClient(this.config);
+    this.client = this.createClient(this.getConfig());
+  }
+  getConfig() {
+    return omit(this.config, ['log', 'debug']);
   }
   createClient(props = {}) {
     if (this.debug) this.log.trace('createClient');
-    const client = axios.create({
+
+    const log = props.log && props.log.trace ? props.log : this.log;
+    const axiosProps = {
+      __parent: this,
       app: this.app,
-      log: this.log,
+      ...this.getConfig(),
       ...props,
+      log,
       ...(isServer ? { adapter } : {}),
-    });
+    };
+    const client = axios.create(axiosProps);
+    client.interceptors.request.use(
+      (config) => {
+        log.trace('[api]', config.baseURL, config.url, config.data);
+        return config;
+      },
+      (err) => {
+        log.error('[api]', err);
+        return Promise.reject(err);
+      },
+    );
     // client.fetch = (...args) => this.fetch(...args); // TODO: подумать в будущем как правильно пропатчить аксиос
     setToken(client, this.authToken);
     this.app.on('api.setToken', ({ token } = {}) => {
