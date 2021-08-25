@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.16.0](https://github.com/lskjs/lskjs/compare/v2.15.0...v2.16.0) (2021-08-25)
+
+
+### Bug Fixes
+
+* **mobx:** typo ([9c06d74](https://github.com/lskjs/lskjs/commit/9c06d74de858427a22af5ca4f5dd5a7cc5119315))
+
+
+### Features
+
+* **mobx:** remove cancelToken and add options ([41cb74e](https://github.com/lskjs/lskjs/commit/41cb74e5a74dbd7ef5fc1b17aa0eadd135322afd))
+
+
+
+
+
 # [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
 
 

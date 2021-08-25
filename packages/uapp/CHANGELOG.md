@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.16.0](https://github.com/lskjs/lskjs/compare/v2.15.0...v2.16.0) (2021-08-25)
+
+
+### Features
+
+* **uapp:** pass req in provide ([7ce12f4](https://github.com/lskjs/lskjs/commit/7ce12f4c904ad4fa762ae928205ff2d143222d83))
+
+
+
+
+
 # [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
 
 
