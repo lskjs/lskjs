@@ -41,12 +41,15 @@ export class FetchStore extends Store {
     if (!this.api.find) throw new Err('!api.find');
     let params = getFindParams(this);
     if (this.getFindParams) params = this.getFindParams(this, params);
-    const raw = await this.api.find({
-      count: 1,
-      ...omitEmpty(params),
-      limit,
-      skip,
-    }, { cancelToken });
+    const raw = await this.api.find(
+      {
+        count: 1,
+        ...omitEmpty(params),
+        limit,
+        skip,
+      },
+      { cancelToken },
+    );
 
     let items;
     let count;
@@ -76,7 +79,7 @@ export class FetchStore extends Store {
   async fetch({ skip = this.skip, limit = this.limit, cache } = {}) {
     if (this.loading) await this.cancelFetch();
     this.loading = true;
-    this  cancelToken = CancelToken.source();
+    this.cancelToken = CancelToken.source();
     if (this.progress) this.progress.start();
     try {
       const { items, count } = await this.find(
@@ -84,7 +87,7 @@ export class FetchStore extends Store {
           skip,
           limit,
         },
-        { cancelToken: this  cancelToken },
+        { cancelToken: this.cancelToken },
       );
       // /
       this.setItems(items, { skip, cache });
@@ -98,7 +101,7 @@ export class FetchStore extends Store {
       if (skip < this.skip) this.skip = skip;
       this.fetchedAt = new Date();
       this.loading = false;
-      this  cancelToken = null;
+      this.cancelToken = null;
       if (this.progress) this.progress.done();
       if (this.fetchCallback) {
         this.fetchCallback(this);
@@ -107,10 +110,10 @@ export class FetchStore extends Store {
   }
 
   async cancelFetch() {
-    if (!(this  cancelToken && this  cancelToken.cancel)) return;
+    if (!(this.cancelToken && this.cancelToken.cancel)) return;
     this.loading = false;
     if (this.progress) this.progress.done();
-    await this  cancelToken.cancel('fetch canceled');
+    await this.cancelToken.cancel('fetch canceled');
     await Bluebird.delay(10);
   }
 
