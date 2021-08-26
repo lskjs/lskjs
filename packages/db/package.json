@@ -29,7 +29,7 @@
   "dependencies": {
     "@lskjs/module": "2.13.0",
     "@lskjs/utils": "2.13.0",
-    "mongoose": "5.11.11"
+    "mongoose": "^5.12.1"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.36",
