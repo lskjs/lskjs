@@ -95,7 +95,8 @@ export class ListStore extends FetchStore {
   @computed
   get emptyType() {
     if (!this.loading) return null;
-    if (this.items.length > 0) return null;
+    // итемы остаются при следующих поисках, возможно стоит удалять итемы перед фетчем
+    // if (this.items.length > 0) return null;
 
     if ((!this.search || this.search === '') && !!this.paywall && !!this.paywall.tarifUnfit) {
       // 5) тариф не соответствует
