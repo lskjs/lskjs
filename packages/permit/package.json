@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/permit",
-  "version": "2.13.1",
+  "version": "2.16.1",
   "description": "LSK module for one time codes and permits.",
   "keywords": [
     "one time code",
@@ -30,7 +30,7 @@
     "nanoid": "3.1.25"
   },
   "devDependencies": {
-    "@lskjs/db": "2.13.0",
+    "@lskjs/db": "2.16.1",
     "@lskjs/mobx": "2.13.1",
     "@lskjs/server-api": "2.13.0",
     "bluebird": "3.7.2",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **mobx:** listStore empty type comment items count check ([1264105](https://github.com/lskjs/lskjs/commit/12641058c794c307a8e9813b9576a3766e706609))
+
+
+
+
+
 # [2.16.0](https://github.com/lskjs/lskjs/compare/v2.15.0...v2.16.0) (2021-08-25)
 
 
