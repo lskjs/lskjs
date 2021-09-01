@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.3](https://github.com/lskjs/lskjs/compare/v2.17.2...v2.17.3) (2021-09-01)
+
+
+### Bug Fixes
+
+* **grant:** grant module getCache server get can alias ([2651d35](https://github.com/lskjs/lskjs/commit/2651d35396281bcbbecc8e11229b37f19ee33274))
+
+
+
+
+
 # [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/grant
