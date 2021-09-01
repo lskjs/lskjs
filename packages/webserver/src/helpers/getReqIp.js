@@ -1,4 +1,5 @@
-export function getReqIp(req) {
+export function getReqIp(initReq) {
+  const req = initReq || this;
   return (
     req.ip ||
     req.connection.remoteAddress ||

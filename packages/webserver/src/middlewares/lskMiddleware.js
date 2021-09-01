@@ -59,8 +59,8 @@ export default (webserver) =>
         if (debug) webserver.log.trace('apply reqI18');
         if (!req.getLocale) req.getLocale = webserver.helpers.getReqLocales.bind(req);
         const i18Module = await webserver.app.module('i18');
-        const locales = req.getLocale();
-        req.i18 = await i18Module.instance(locales);
+        req.locale = req.getLocale();
+        req.i18 = await i18Module.instance(req.locale);
       }
 
       /**
