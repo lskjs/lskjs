@@ -20,6 +20,10 @@ export default (req) => {
     ip: req.ip,
     xhr: req.xhr,
     cookies: req.cookies,
+
+    // TODO: подумать, а правильно ли?
+    locale: req.locale,
+    token: req.token,
   };
 };
 
