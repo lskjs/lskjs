@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/lskjs/ux/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **reactapp:** remove semi stable behaviour ([1e5a571](https://github.com/lskjs/ux/commit/1e5a5719b862d1736dae2f3c0bddb09b21c50b79))
+
+
+
+
+
 # [2.17.0](https://github.com/lskjs/ux/compare/v2.16.1...v2.17.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/reactapp

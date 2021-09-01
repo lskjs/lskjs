@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **i18:** i18 middlewares in webserver ([998e5ce](https://github.com/lskjs/lskjs/commit/998e5cee7cccb7620a4cd74e1153c36ab8348a4c))
+* **reactapp:** remove semi stable behaviour ([1e5a571](https://github.com/lskjs/lskjs/commit/1e5a5719b862d1736dae2f3c0bddb09b21c50b79))
+* **server:** remove legacy ([1bd9af3](https://github.com/lskjs/lskjs/commit/1bd9af3a5c61970f07c40709311d9a5739dd7a75))
+* **webserver:** remove legacy ([899ca11](https://github.com/lskjs/lskjs/commit/899ca1144817aab819815135fbf3498be1625538))
+
+
+### Features
+
+* **uapp:** add getLocale, setLocale ([bdddafd](https://github.com/lskjs/lskjs/commit/bdddafd0e1ccf5302189a71d9d7d8fd32c254b6b))
+* **utils:** pass locale and token to expressReq ([44579a1](https://github.com/lskjs/lskjs/commit/44579a1e3781680fea79d7196b1da7f09c3df15c))
+
+
+
+
+
 ## [2.17.3](https://github.com/lskjs/lskjs/compare/v2.17.2...v2.17.3) (2021-09-01)
 
 

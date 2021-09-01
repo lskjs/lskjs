@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Features
+
+* **uapp:** add getLocale, setLocale ([bdddafd](https://github.com/lskjs/lskjs/commit/bdddafd0e1ccf5302189a71d9d7d8fd32c254b6b))
+
+
+
+
+
 # [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
 
 

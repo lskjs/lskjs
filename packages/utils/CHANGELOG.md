@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/lskjs/ux/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Features
+
+* **utils:** pass locale and token to expressReq ([44579a1](https://github.com/lskjs/ux/commit/44579a1e3781680fea79d7196b1da7f09c3df15c))
+
+
+
+
+
 # [2.17.0](https://github.com/lskjs/ux/compare/v2.16.1...v2.17.0) (2021-09-01)
 
 
