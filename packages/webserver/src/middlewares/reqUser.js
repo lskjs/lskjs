@@ -21,6 +21,7 @@ export default (webserver) =>
     }
     getToken = getToken.bind(webserver);
     const token = getToken(req);
+    req.token = token;
 
     const options = {
       secret,

@@ -9,8 +9,9 @@ export function getReqToken(req) {
   const { name: cookieName = 'token' } = jwtConfig.cookie || {};
   // eslint-disable-next-line no-console
   // if (this.debug) console.log('getReqToken cookie', cookieName);
-  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    const token = req.headers.authorization.split(' ')[1];
+  const authorizationToken = req.headers.authorization || req.headers.Authorization;
+  if (authorizationToken && authorizationToken.split(' ')[0] === 'Bearer') {
+    const token = authorizationToken.split(' ')[1];
     // if (token === 'null') return null;
     return token;
   }
