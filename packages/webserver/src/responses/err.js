@@ -16,10 +16,10 @@ export default () =>
         res.message = 'The error';
       }
     }
-    if (!code) res.code = 1;
     if (!status || !(status >= 400 && status <= 600)) {
       res.status = 500;
     }
+    if (!code) res.code = `status${res.status}`;
     if (debug && Object.keys(debug).length) {
       res.debug = debug;
     }

@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 // export default {
 //   middlewares: {
 //     accessLogger: __DEV__,
@@ -11,6 +12,8 @@
 //     cors: null,
 //   },
 // };
+
+
 export default {
   url: 'http://localhost:8080',
   port: process.env.PORT || 8080,
@@ -41,7 +44,7 @@ export default {
   },
   response: {
     log: false,
-    debug: true,
+    debug: isDev,
     debugDir: `/tmp/lsk`,
   },
 };

@@ -55,21 +55,18 @@ export default (webserver) =>
       /**
        * reqI18 res
        */
-      if (config.reqI18 && req.getLocale) {
-        if (debug) webserver.log.trace('apply reqI18 @@@');
-        req.getLocale = webserver.helpers.getReqLocale;
+      if (config.reqI18) {
+        if (debug) webserver.log.trace('apply reqI18');
+        if (!req.getLocale) req.getLocale = webserver.helpers.getReqLocales.bind(req);
         const i18Module = await webserver.app.module('i18');
         req.i18 = await i18Module.instance(req.getLocale());
-        forEach(webserver.responses, (val, key) => {
-          res[key] = val.bind(res);
-        });
       }
 
       /**
        * res submiddleware
        */
       if (config.res) {
-        if (debug) webserver.log.trace('apply reqI18');
+        if (debug) webserver.log.trace('apply res');
         forEach(webserver.responses, (val, key) => {
           res[key] = val.bind(res);
         });
