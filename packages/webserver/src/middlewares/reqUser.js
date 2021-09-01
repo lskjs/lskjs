@@ -1,7 +1,7 @@
 import jwt from 'express-jwt';
 import get from 'lodash/get';
 
-import { getReqToken } from '../utils/getReqToken';
+import { getReqToken } from '../helpers/getReqToken';
 
 export default (webserver) =>
   function reqUser(req, res, next) {
