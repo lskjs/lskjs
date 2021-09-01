@@ -2,13 +2,7 @@ import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import map from 'lodash/map';
 
-import defaultHelpers from './helpers';
-
 export class ServerApp extends Module {
-  async getHelpers() {
-    return defaultHelpers;
-  }
-
   async init() {
     await super.init();
     this.on('runFinish', this.started.bind(this));
@@ -17,18 +11,6 @@ export class ServerApp extends Module {
   async run() {
     await super.run();
     await this.module('webserver');
-  }
-
-  async initModules() {
-    await super.init();
-    const m = await this.module([
-      'webserver',
-      'i18',
-      'db',
-      // 'models',
-      // 'redis',
-    ]);
-    Object.assign(this, m);
   }
 
   url(str, params = null) {
