@@ -167,19 +167,21 @@ export class GrantModule extends Module {
       }
       if (!res) res = {};
       // console.log('getCache', { rules });
+      const can = (action) => {
+        if (this.debug) this.log.trace('grantCache.can', action);
+        if (res[action] == null) {
+          this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action }, {res});
+          return null;
+        }
+        return get(res, action);
+      };
       return {
         res,
         update() {
            //eslint-disable-line
         },
-        can: (action) => {
-          if (this.debug) this.log.trace('grantCache.can', action);
-          if (res[action] == null) {
-            this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action }, {res});
-            return null;
-          }
-          return get(res, action);
-        },
+        can,
+        get: can,
       };
     }
     const GrantCacheStore = await this.module('stores.GrantCacheStore');
