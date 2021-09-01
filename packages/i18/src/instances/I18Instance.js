@@ -27,6 +27,10 @@ export class I18Instance extends Module {
       return asyncMapValues(value, (path) => JSON.parse(require('fs').readFileSync(path)));
     });
   }
+  async exists(...args) {
+    if (!this.instance) throw new Err('!this.instance');
+    return this.instance.exists(...args);
+  }
   async update() {
     if (!this.instance) throw new Err('!this.instance');
     this.locale = this.instance.language;
