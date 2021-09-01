@@ -55,9 +55,9 @@ export class ReactAppServer extends Module {
   async getUapp({ req, ...params } = {}) {
     const uappReq = collectExpressReq(req);
     const config = await this.getModuleConfig('uapp'); // cloneDeep(get(this, 'config.client', {}));
-    if (this.hasModule('uapp')) {
-      return this.module('uapp');
-    }
+    // if (this.hasModule('uapp')) { // TODO: пока не работает
+    //   return this.module('uapp');
+    // }
     const uapp = await start(this.Uapp, {
       ...params,
       history: createMemoryHistory({
