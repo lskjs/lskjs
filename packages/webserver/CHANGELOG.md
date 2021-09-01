@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/lskjs/lskjs/compare/v2.17.0...v2.17.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* **webserver:** headers and token for ssr ([8b99396](https://github.com/lskjs/lskjs/commit/8b99396d35e46cce1e2dd86bf685c6c0afb8771a))
+
+
+
+
+
 # [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
 
 
