@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.2](https://github.com/lskjs/lskjs/compare/v2.17.1...v2.17.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* **server,webserver:** auth headers in other places ([678740e](https://github.com/lskjs/lskjs/commit/678740e8cb245b773c2050faaaf281d8448726dd))
+
+
+
+
+
 ## [2.17.1](https://github.com/lskjs/lskjs/compare/v2.17.0...v2.17.1) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/server
