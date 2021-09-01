@@ -3,10 +3,11 @@ import Module from '@lskjs/module';
 
 import { I18Instance } from './instances/I18Instance';
 
+const defaultLocale = 'en';
 export class I18Module extends Module {
   I18Instance = I18Instance;
   locales = [];
-  locale = null; // defaultLocale
+  locale = defaultLocale;
   instances = {};
 
   async getT(locale = this.locale) {
@@ -15,13 +16,16 @@ export class I18Module extends Module {
     return instance.t.bind(instance);
   }
   hasInstance(locale) {
-    if (!locale) throw new Err('!locale');
+    if (!locale) throw new Err('!locale', { locale });
     const { locales = [] } = this;
     if (!locales.includes(locale)) return false;
     return true;
   }
   async instance(localeOrLocales = this.locale, throwError = true) {
-    if (!localeOrLocales) throw new Err('!locale');
+    // eslint-disable-next-line no-param-reassign
+    if (!localeOrLocales) localeOrLocales = defaultLocale;
+    this.log.trace('instance()', localeOrLocales);
+    if (!localeOrLocales) throw new Err('!locale', { locale: localeOrLocales });
     const { locales = [] } = this;
     // eslint-disable-next-line no-param-reassign
     if (!Array.isArray(localeOrLocales)) localeOrLocales = [localeOrLocales];

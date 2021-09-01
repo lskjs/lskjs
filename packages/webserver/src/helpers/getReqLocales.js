@@ -19,7 +19,7 @@ export function getLocalesFromString(localeString) {
 
 export function getReqLocales(initReq) {
   const req = initReq || this;
-  if (req && req.data && req.query.__locale) return getLocalesFromString(req.query.__locale);
+  if (req && req.query && req.query.__locale) return getLocalesFromString(req.query.__locale);
   if (req && req.user && req.user.locale) return getLocalesFromString(req.user.locale);
   if (req && req.cookies && req.cookies.locale) return getLocalesFromString(req.cookies.locale);
   if (req && req.headers && req.headers['accept-language']) {
