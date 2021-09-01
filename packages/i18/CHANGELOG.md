@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **i18:** add i18.exists for check translation ([5df7198](https://github.com/lskjs/lskjs/commit/5df719868e5ccebb2e0f668990164d45631fead1))
+* **i18:** instance check locales array ([876a6da](https://github.com/lskjs/lskjs/commit/876a6da67c1429e9b99180c8e6743f148eeeb653))
+
+
+
+
+
 # [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
 
 **Note:** Version bump only for package @lskjs/i18

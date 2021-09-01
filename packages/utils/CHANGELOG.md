@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/lskjs/ux/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **utils:** add headers for collectExpressReq ([5ddcab5](https://github.com/lskjs/ux/commit/5ddcab5a7c33d34f4f8fc6055c8ebd5dd77e2b73))
+
+
+
+
+
 # [2.13.0](https://github.com/lskjs/ux/compare/v2.12.3...v2.13.0) (2021-08-20)
 
 

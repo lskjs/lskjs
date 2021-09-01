@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **err:** add raw content of error ([40002df](https://github.com/lskjs/lskjs/commit/40002df19c12a7a6eba47d052098f5a532319124))
+* **i18:** add i18.exists for check translation ([5df7198](https://github.com/lskjs/lskjs/commit/5df719868e5ccebb2e0f668990164d45631fead1))
+* **i18:** instance check locales array ([876a6da](https://github.com/lskjs/lskjs/commit/876a6da67c1429e9b99180c8e6743f148eeeb653))
+* **uapp:** separate scrollto and progress modules ([574268a](https://github.com/lskjs/lskjs/commit/574268a2643ef9b2f1dc158fdd39cb501836048c))
+* **utils:** add headers for collectExpressReq ([5ddcab5](https://github.com/lskjs/lskjs/commit/5ddcab5a7c33d34f4f8fc6055c8ebd5dd77e2b73))
+* **webserver:** fix responses, getReqLocales ([f1a852d](https://github.com/lskjs/lskjs/commit/f1a852dd3f5dbe2c33df018d197ca1052e415e8f))
+
+
+
+
+
 ## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
 
 

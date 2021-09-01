@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **webserver:** fix responses, getReqLocales ([f1a852d](https://github.com/lskjs/lskjs/commit/f1a852dd3f5dbe2c33df018d197ca1052e415e8f))
+
+
+
+
+
 ## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
 
 **Note:** Version bump only for package @lskjs/webserver
