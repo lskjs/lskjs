@@ -1,4 +1,3 @@
-import { isDev } from '@lskjs/env';
 import Cookies from 'js-cookie';
 
 export default async function (locale) {
@@ -19,11 +18,6 @@ export default async function (locale) {
     Cookies.set('locale', locale);
   }
   if (this.i18.locale !== locale) {
-    await this.i18.setLocale(locale);
-    if (!isDev) {
-      setTimeout(() => {
-        this.refresh();
-      }, 200);
-    }
+    await this.i18.changeLanguage(locale);
   }
 }
