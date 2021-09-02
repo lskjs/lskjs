@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/reactapp",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "LSK ux subrepo: reactapp",
   "keywords": [],
   "repository": "https://github.com/lskjs/ux/tree/master/packages/reactapp",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/lskjs/ux/compare/v2.19.0...v2.20.0) (2021-09-02)
+
+
+### Features
+
+* **reactapp:** pass config to reactapp SSR ([c7966e3](https://github.com/lskjs/ux/commit/c7966e3ab441ec0a543196e761c5c1eaa4904c5b))
+
+
+
+
+
 # [2.19.0](https://github.com/lskjs/ux/compare/v2.18.2...v2.19.0) (2021-09-02)
 
 
