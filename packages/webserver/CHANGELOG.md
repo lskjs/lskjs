@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* **webserver:** fix SSR axios adapter and expressResolve ([5ef5645](https://github.com/lskjs/lskjs/commit/5ef5645dbc63bf204508f13668ae720b353b6981))
+
+
+
+
+
 ## [2.18.2](https://github.com/lskjs/lskjs/compare/v2.18.1...v2.18.2) (2021-09-02)
 
 
