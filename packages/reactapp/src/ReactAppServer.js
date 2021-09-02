@@ -30,6 +30,18 @@ export class ReactAppServer extends Module {
     if (!this.Uapp && !this.hasModule('uapp')) throw new Err('!Uapp');
   }
 
+  async getConfig() {
+    const config = await super.getConfig();
+    const client = {
+      ...(get(this, '__parent.config.client', {}) || {}),
+      ...config.client,
+    };
+    return {
+      ...config,
+      client,
+    };
+  }
+
   async getModuleConfig(name) {
     const config = await super.getModuleConfig(name);
     if (name === 'uapp') {
@@ -43,7 +55,6 @@ export class ReactAppServer extends Module {
 
   async getRootState({ req, ...props }) {
     const config = await this.getModuleConfig('uapp');
-    console.log({ config });
     // if (this.initClientConfig) {
     //   config = antimergeDeep(this.config.client, this.initClientConfig);
     // }
