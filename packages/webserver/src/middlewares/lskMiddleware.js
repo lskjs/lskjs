@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import isPlainObject from 'lodash/isPlainObject';
 import { nanoid } from 'nanoid/non-secure';
 
-import getReqData from '../utils/getReqData';
+import getReqData from '../helpers/getReqData';
 import { applyLogger } from './accessLogger/applyLogger';
 
 export default (webserver) =>
