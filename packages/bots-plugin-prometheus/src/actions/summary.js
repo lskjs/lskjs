@@ -8,36 +8,87 @@ const statuses = {
   default: '❓',
 };
 
-const ignoreMd = (text) => text.replaceAll(/[^A-Za-z0-9А-Яа-я]/gi, (c) => `\\${c}`);
+const ignoreMd = (text, provider) => {
+  if (provider === 'telegram') return text.replaceAll(/[^A-Za-z0-9А-Яа-я ]/gi, (c) => `\\${c}`);
+  return text;
+};
 
-const getEmoji = (type) => (statuses[type] ? statuses[type] : statuses.default);
+const getText = (text, parseMode, provider) =>
+  ['Markdown', 'MarkdownV2'].includes(parseMode) ? ignoreMd(text, provider) : text;
 
-const getAlertname = (data, parseMode) => {
+const getCode = (text, provider) => {
+  if (provider === 'telegram') return `\`${text}\``;
+  return `\`\`\`${text}\`\`\``;
+};
+
+const getEmoji = (type) => statuses[type] || statuses.default;
+
+const getAlertname = (data, parseMode, provider = 'telegram') => {
   const text = `${get(data, 'labels.alertname', '')}`;
-  return ['Markdown', 'MarkdownV2'].includes(parseMode) ? ignoreMd(text) : text;
+  return getText(text, parseMode, provider);
 };
 
-const getDescription = (data) => {
+const getDescription = (data, provider = 'telegram') => {
   const text = get(data, 'annotations.description', '');
-  return `\`${text}\``;
+  return getCode(text, provider);
 };
 
-export default async function summary({ data, params }) {
-  const { telegram, groupBy: groupByValue = false, parseMode } = params;
+const getMessageTexts = (texts, limit = 4096) => {
+  const resultTexts = [];
+  texts.forEach((text) => {
+    if (!resultTexts.length) {
+      resultTexts.push(text);
+      return;
+    }
 
-  const chats = Array.isArray(telegram) ? telegram : [telegram];
-  const groupData = groupByValue ? groupBy(data, groupByValue) : data;
+    const lastText = resultTexts[resultTexts.length - 1];
 
-  return Bluebird.map(Object.keys(groupData), async (dataType) => {
-    const alertData = groupData[dataType];
-    const alertInfoText = alertData
-      .map((d) => `*${getAlertname(d, parseMode)}*\n\n${getDescription(d)}`)
-      .join('\n—————————————\n');
-
-    const sum = alertData.map((d) => `- ${getAlertname(d, parseMode)}`).join('\n');
-
-    const resultText = `${getEmoji(dataType)}\n${sum}\n\n=======\n\n${alertInfoText}`;
-
-    return Bluebird.map(chats, async (chat) => this.bot.sendMessage(chat, resultText, { parse_mode: parseMode }));
+    if (lastText.length + text.length > limit) {
+      resultTexts.push(text);
+      return;
+    }
+    resultTexts[resultTexts.length - 1] += text;
   });
+  return resultTexts;
+};
+
+const getChats = (provider, params) => {
+  const chats = params[provider];
+  return Array.isArray(chats) ? chats : [chats];
+};
+
+export default async function summary({ bot, data, params }) {
+  const { groupBy: groupByValue = false, parseMode } = params;
+  const { provider, sendMessage } = bot;
+
+  const chats = getChats(provider, params);
+
+  const groupData = groupByValue ? groupBy(data, groupByValue) : data;
+  return Bluebird.map(
+    Object.keys(groupData),
+    async (dataType) => {
+      const alertData = groupData[dataType];
+      const alertInfoTexts = alertData.map(
+        (d) => `*${getAlertname(d, parseMode, provider)}*\n\n${getDescription(d, provider)}\n—————————————\n`,
+      );
+
+      const sumTexts = alertData.map(
+        (d) => `${getText('-', parseMode, provider)} ${getAlertname(d, parseMode, provider)}\n`,
+      );
+
+      const messageTexts = getMessageTexts([
+        `${getEmoji(dataType)}\n`,
+        ...sumTexts,
+        `\n\n${getText('=======', parseMode, provider)}\n\n`,
+        ...alertInfoTexts,
+      ]);
+
+      return Bluebird.map(chats, async (chat) =>
+        Bluebird.mapSeries(messageTexts, async (text) => sendMessage.call(bot, chat, text, { parse_mode: parseMode })),
+      );
+    },
+    {
+      concurrency: 10,
+    },
+  );
 }
