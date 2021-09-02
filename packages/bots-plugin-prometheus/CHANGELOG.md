@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/compare/v2.20.0...v2.21.0) (2021-09-02)
+
+
+### Features
+
+* named exports and wrap errors in Err ([e97bc3f](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/commit/e97bc3f15f3b5b208d11045d89d27e09b05fcefd))
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-prometheus
