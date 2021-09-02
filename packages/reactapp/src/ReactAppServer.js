@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import { start } from '@lskjs/module/utils/safe';
@@ -20,19 +21,32 @@ import BaseHtml from './Html';
 // expressResolve: this.expressResolve,
 // express: this.express,
 
-export default class ReactAppServer extends Module {
+export class ReactAppServer extends Module {
   async init() {
     await super.init();
+    this.initUappConfig = await this.getModuleConfig('uapp');
     if (!this.expressResolve && this.app) this.expressResolve = this.app.expressResolve;
     if (!this.express && this.app) this.express = this.app.express;
     if (!this.Uapp && !this.hasModule('uapp')) throw new Err('!Uapp');
   }
 
-  getRootState({ req, ...props }) {
-    let config = null;
-    if (this.initClientConfig) {
-      config = antimergeDeep(this.config.client, this.initClientConfig);
+  async getModuleConfig(name) {
+    const config = await super.getModuleConfig(name);
+    if (name === 'uapp') {
+      return {
+        ...this.config.client,
+        ...config,
+      };
     }
+    return config;
+  }
+
+  async getRootState({ req, ...props }) {
+    const config = await this.getModuleConfig('uapp');
+    console.log({ config });
+    // if (this.initClientConfig) {
+    //   config = antimergeDeep(this.config.client, this.initClientConfig);
+    // }
     return {
       req: pick(req, ['reqId', 'user', 'userId', 'token']),
       config,
@@ -42,10 +56,11 @@ export default class ReactAppServer extends Module {
 
   async getUapp({ req, ...params } = {}) {
     const uappReq = collectExpressReq(req);
-    const config = cloneDeep(get(this, 'config.client', {}));
-    if (this.hasModule('uapp')) {
-      return this.module('uapp');
-    }
+    const config = cloneDeep(await this.getModuleConfig('uapp')); // cloneDeep(get(this, 'config.client', {}));
+    // if (this.hasModule('uapp')) { // TODO: пока не работает
+    //   return this.module('uapp');
+    // }
+    const rootState = await this.getRootState({ req });
     const uapp = await start(this.Uapp, {
       ...params,
       history: createMemoryHistory({
@@ -53,9 +68,10 @@ export default class ReactAppServer extends Module {
         initialEntries: [req.originalUrl], // TODO: may be path ?
       }),
       req: uappReq,
-      rootState: this.getRootState({ req }),
+      rootState,
       config,
       app: this,
+      __parent: this,
     });
     return uapp;
   }
@@ -90,7 +106,7 @@ export default class ReactAppServer extends Module {
   }
 
   getPublicPath() {
-    return get(this, 'config.server.public', `${process.cwd() + (__DEV__ ? '' : '/..')}/public`);
+    return get(this, 'config.server.public', `${process.cwd() + (isDev ? '' : '/..')}/public`);
   }
 
   getAssetManifest() {
@@ -106,16 +122,20 @@ export default class ReactAppServer extends Module {
   }
 
   createHtmlRender(page) {
-    const { Html = BaseHtml, htmlProps = {} } = this;
-    return (content) => {
-      const html = new Html({
+    const { Html = BaseHtml, htmlProps = {} } = this; // TODO: Пересмотреть систему модульных фабрик
+    return async (content) => {
+      const props = {
+        __parent: this,
+        app: this.app,
         content,
         publicPath: this.getPublicPath(),
         assetManifest: this.getAssetManifest(),
-        meta: page && page.getMeta ? page.getMeta() : '',
-        rootState: page && page.getRootState ? page.getRootState() : '',
+        meta: page && page.getMeta ? page.getMeta() : {},
+        rootState: (page && page.app && page.app.rootState) || {},
         ...htmlProps,
-      });
+      };
+      if (this.debug) this.log.trace('new Html()', props);
+      const html = await Html.start(props);
       return html.render();
     };
   }
@@ -157,7 +177,7 @@ export default class ReactAppServer extends Module {
         // eslint-disable-next-line no-shadow
         const { redirect: redirectArgs, status = 300 } = get(page, 'state', {});
         const [redirect] = redirectArgs;
-        if (__DEV__) {
+        if (isDev) {
           this.log.debug('ReactAppServer.redirect', redirect);
           await Bluebird.delay(2000);
         }
@@ -174,7 +194,7 @@ export default class ReactAppServer extends Module {
           component = page;
         } else {
           if (!page) throw new Err('!page');
-          if (__DEV__ && page && !page.render) {
+          if (isDev && page && !page.render) {
             console.error('!page.render', { page, render: page.render }); // eslint-disable-line no-console
             throw new Err('!page.render');
           }
@@ -200,7 +220,7 @@ export default class ReactAppServer extends Module {
           content = renderStylesToString(content);
         }
       } catch (err) {
-        if (__DEV__) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
+        if (isDev) console.error(`ReactDOM.${strategyMethod}(component)`, component); // eslint-disable-line no-console
         throw {
           err,
           stack: [
@@ -213,7 +233,7 @@ export default class ReactAppServer extends Module {
       // this.log.trace('content', content);
     } catch ({ err, stack }) {
       status = 505;
-      if (__DEV__) {
+      if (isDev) {
         const text = [...stack, ''].join(':\n');
         if (this.log && this.log.error) {
           this.log.error(text, err);
@@ -254,3 +274,5 @@ export default class ReactAppServer extends Module {
     return res.status(status).send(content);
   }
 }
+
+export default ReactAppServer;

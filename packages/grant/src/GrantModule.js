@@ -143,33 +143,45 @@ export class GrantModule extends Module {
     const pairs = await Bluebird.map(rules, async (rule) => [rule.action, await this.getRule(rule, ctx)], {
       concurrency: 10,
     });
-    return fromPairs(pairs);
+    const res = fromPairs(pairs);
+    if (this.debug) this.log.trace('canGroup res', res);
+    return res
 
-    const res = {};
-    pairs.forEach((pair) => {
-      Object.assign(res, pair[1]);
-    });
-    // console.log('canGroup22 !!!', { rules, pairs }, fromPairs(pairs), res);
-    return res;
-    return fromPairs(pairs);
+    // const res = {};
+    // pairs.forEach((pair) => {
+    //   Object.assign(res, pair[1]);
+    // });
+    // // console.log('canGroup22 !!!', { rules, pairs }, fromPairs(pairs), res);
+    // if (this.debug) this.log.trace('canGroup res', res);
+    // return res;
+    // return fromPairs(pairs);
   }
 
   async getCache(...initParams) {
     if (this.debug) this.log.trace('getCache', initParams);
     if (isServer) {
-      const res = await this.canGroup(...initParams);
+      let res = await this.canGroup(...initParams);
+      // if (this.debug) this.log.trace('canGroup2 res', res);
+      if (!res) {
+        this.log.error('!res', initParams, res);
+      }
+      if (!res) res = {};
       // console.log('getCache', { rules });
+      const can = (action) => {
+        if (this.debug) this.log.trace('grantCache.can', action);
+        if (res[action] == null) {
+          this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action }, {res});
+          return null;
+        }
+        return get(res, action);
+      };
       return {
         res,
-        update() {},
-        can: (action) => {
-          if (this.debug) this.log.trace('grantCache.can', action);
-          if (!(action in res)) {
-            this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action });
-            return null;
-          }
-          return get(res, action);
+        update() {
+           //eslint-disable-line
         },
+        can,
+        get: can,
       };
     }
     const GrantCacheStore = await this.module('stores.GrantCacheStore');

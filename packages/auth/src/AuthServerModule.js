@@ -9,7 +9,7 @@ import { Passport } from 'passport';
 import strategies from './strategies';
 import createHelpers from './utils/createHelpers';
 
-export default class AuthServerModule extends Module {
+export class AuthServerModule extends Module {
   getStrategies() {
     return strategies;
   }
@@ -52,7 +52,7 @@ export default class AuthServerModule extends Module {
       const StrategyProvider = await importFn(this.strategyProviders[type]);
       if (!StrategyProvider) return;
       const strategy = new StrategyProvider({
-        parent: this,
+        __parent: this,
         app: this.app,
         provider,
         type,
@@ -88,3 +88,5 @@ export default class AuthServerModule extends Module {
     });
   }
 }
+
+export default AuthServerModule;

@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-export default class HtmlTemplate {
+export class HtmlTemplate {
   config = {};
   theme = {};
 
@@ -113,3 +113,5 @@ export default class HtmlTemplate {
     `;
   }
 }
+
+export default HtmlTemplate;

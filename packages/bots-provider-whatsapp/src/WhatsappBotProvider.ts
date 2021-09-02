@@ -14,7 +14,7 @@ export type WhatsappBotConfigType = ClientOptions;
 //   session: string;
 // };
 
-export default class WhatsappBotProvider extends BaseBotProvider {
+export class WhatsappBotProvider extends BaseBotProvider {
   client: any;
   // initEventEmitter: any;
   // on: any;
@@ -75,3 +75,5 @@ export default class WhatsappBotProvider extends BaseBotProvider {
     return this.client.sendMessage(ctx.from, ...args);
   }
 }
+
+export default WhatsappBotProvider;

@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/lskjs/ux/compare/v2.18.2...v2.19.0) (2021-09-02)
+
+
+### Features
+
+* **reactapp:** pass rootState to SSR ([f207ef8](https://github.com/lskjs/ux/commit/f207ef85e29c13eb210943d363e2cdcb118c42ef))
+
+
+
+
+
+# [2.18.0](https://github.com/lskjs/ux/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **reactapp:** remove semi stable behaviour ([1e5a571](https://github.com/lskjs/ux/commit/1e5a5719b862d1736dae2f3c0bddb09b21c50b79))
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/ux/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+**Note:** Version bump only for package @lskjs/reactapp
+
+
+
+
+
+# [2.15.0](https://github.com/lskjs/ux/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Features
+
+* **reactapp:** Html is module now ([03aa0d9](https://github.com/lskjs/ux/commit/03aa0d9486ca7d562ff6a4c8ef24c6b04793fdef))
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/ux/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+**Note:** Version bump only for package @lskjs/reactapp
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/ux/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+**Note:** Version bump only for package @lskjs/reactapp
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/ux/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+
+### Features
+
+* named exports and wrap errors in Err ([95638cf](https://github.com/lskjs/ux/commit/95638cfc7a08c8aaa89558c5ba6fc1f2f72c4994))
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/ux/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **reactapp:** pass uapp config in ssr ([cf0e98d](https://github.com/lskjs/ux/commit/cf0e98d732edeaee12abd6316360af79a40526f2))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/ux/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/reactapp

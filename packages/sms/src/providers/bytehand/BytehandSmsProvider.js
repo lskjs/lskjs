@@ -9,7 +9,7 @@ import SmsProvider from '../SmsProvider';
 
 const BASE = 'https://api.bytehand.com/v2';
 
-export default class BytehandSmsProvider extends SmsProvider {
+export class BytehandSmsProvider extends SmsProvider {
   getSender(props) {
     return super.getSender(props) || 'SMS-INFO';
   }
@@ -32,3 +32,5 @@ export default class BytehandSmsProvider extends SmsProvider {
     return res.data;
   }
 }
+
+export default BytehandSmsProvider;

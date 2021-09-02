@@ -1,7 +1,8 @@
 // const { Client }= require('plivo');
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Client } from 'plivo';
 
-export default class SmsPlivo {
+export class SmsPlivo {
   constructor(config) {
     this.config = config || {};
     this.client = new Client(this.config.authId, this.config.authToken);
@@ -43,3 +44,5 @@ export default class SmsPlivo {
       );
   }
 }
+
+export default SmsPlivo;

@@ -2,38 +2,10 @@
 // eslint-disable-next-line max-classes-per-file
 import { isClient } from '@lskjs/env';
 import Module from '@lskjs/module';
-import get from 'lodash/get';
 import UniversalRouter from 'universal-router';
 
 import { collectUniversalRoutes } from './collectUniversalRoutes';
 import UappProvider from './UappProvider';
-
-// const isClient = __CLIENT__;
-// const isDev = __DEV__;
-
-export class ProgressModule extends Module {
-  init() {
-    this.__parent.on('resolve:start', () => {
-      if (this.current) this.current.start();
-    });
-    this.__parent.on('resolve:finish', () => {
-      if (this.current) this.current.finish();
-    });
-    this.__parent.on('resolve:error', () => {
-      if (this.current) this.current.finish();
-    });
-  }
-}
-
-export class ScrolltoModule extends Module {
-  init() {
-    this.__parent.on('resolve:start', () => {
-      let to = get(this, 'history.location.hash', 0);
-      if (to === '') to = 0;
-      setTimeout(() => this.scrollTo(to, this.config), 10); // @TODO: back && go to page
-    });
-  }
-}
 
 export class UappModule extends Module {
   isClient = isClient;
@@ -41,6 +13,8 @@ export class UappModule extends Module {
 
   getModules() {
     return {
+      scrollTo: () => import('./ScrollToModule'),
+      progress: () => import('./ProgressModule'),
       page: () => import('./Page'),
       api: () => import('./ApiModule'),
     };
@@ -78,11 +52,14 @@ export class UappModule extends Module {
     const context = await this.provide();
     this.log.debug('router.context', Object.keys(context));
     this.router = new UniversalRouter(this.routes, { context });
+    this.scrollTo = await this.module('scrollTo');
+    this.progress = await this.module('progress');
   }
 
   async provide() {
     return {
       app: this,
+      req: this.req,
       module: this.module.bind(this),
     };
   }

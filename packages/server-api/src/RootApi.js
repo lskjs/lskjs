@@ -1,7 +1,7 @@
 import BaseApi from './Api';
-import IndexApi from './IndexApi';
+import { IndexApi } from './IndexApi';
 
-export default class RootApi extends BaseApi {
+export class RootApi extends BaseApi {
   getRoutes() {
     return {
       ...super.getRoutes(),
@@ -13,3 +13,5 @@ export default class RootApi extends BaseApi {
     res.send('🦒');
   }
 }
+
+export default RootApi;

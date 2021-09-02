@@ -9,12 +9,14 @@ export class CacheStorage {
     Object.assign(this, props);
   }
   clearCache(keyOrKeys) {
-    if (typeof keyOrKeys === 'string') {
+    if (!Array.isArray(keyOrKeys)) {
       // eslint-disable-next-line no-param-reassign
       keyOrKeys = [keyOrKeys];
     }
+    // TODO: object to string
     getWildcardKeys(Object.keys(this.data), keyOrKeys).forEach((key) => {
       delete this.data[key];
+      delete this.mutexes[key];
     });
   }
   fork(props = {}) {

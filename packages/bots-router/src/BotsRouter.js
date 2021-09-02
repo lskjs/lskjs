@@ -81,8 +81,8 @@ export class BotsRouter extends Module {
     const i18Module = await this.app.module('i18');
     const i18 = await i18Module.instance(locale);
     return {
-      router: this,
       app: this.app,
+      router: this,
       botsModule: this.app.botsModule,
       bot: this.bot,
       i18,

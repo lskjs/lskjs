@@ -15,7 +15,7 @@ export class UploadApi extends Api {
     if (!upload) throw new Err('!upload');
     await this.useMiddleware(upload.multer.single('file'), req, res);
     const { file } = req;
-    if (!file) throw this.app.e('upload.emptyFile', { status: 400 });
+    if (!file) throw new Err('upload.emptyFile', { status: 400 });
     return upload.getFileInfo(file);
   }
   async files(req, res) {

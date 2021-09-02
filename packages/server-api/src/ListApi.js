@@ -9,7 +9,7 @@ import set from 'lodash/set';
 
 import BaseApi from './Api';
 
-export default class ListApi extends BaseApi {
+export class ListApi extends BaseApi {
   getRoutes() {
     return {
       ...super.getRoutes(),
@@ -136,3 +136,5 @@ export default class ListApi extends BaseApi {
     throw new Err('api.notImplemented', { status: 500 });
   }
 }
+
+export default ListApi;

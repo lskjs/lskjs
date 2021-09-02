@@ -1,3 +1,4 @@
+/* global window */
 import qs from 'qs';
 
 export default () => {

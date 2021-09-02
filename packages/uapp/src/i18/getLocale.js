@@ -1,3 +1,5 @@
+/* global window */
+import { isClient } from '@lskjs/env';
 import Cookies from 'js-cookie';
 import qs from 'querystring';
 
@@ -8,15 +10,14 @@ function getWindowLocale() {
 }
 
 export default function getLocale() {
-  const { ctx: uapp } = this || {};
-  if (__SERVER__ && uapp) {
-    if (uapp.query && uapp.query.__locale) return uapp.req.query.__locale;
-    if (uapp.state && uapp.state.locale) return uapp.state.locale;
-    if (uapp.state2 && uapp.state2.locale) return uapp.state2.locale;
-    if (uapp.user && uapp.user.locale) return uapp.user.locale;
-    if (uapp.req && uapp.req.cookies && uapp.req.cookies.locale) return uapp.req.cookies.locale;
-  }
-  if (__CLIENT__) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const uapp = this;
+  const locale = uapp && uapp.req && uapp.req.locale;
+  if (locale) return locale;
+  if (isClient) {
+    if (window.__ROOT_STATE__ && window.__ROOT_STATE__.req && window.__ROOT_STATE__.req.locale) {
+      return window.__ROOT_STATE__.req.locale;
+    }
     const wls = window.location.search;
     const wQuery = wls.startsWith('?') ? qs.parse(wls.substr(1)) : {};
     if (wQuery && wQuery.__locale) return wQuery.__locale;

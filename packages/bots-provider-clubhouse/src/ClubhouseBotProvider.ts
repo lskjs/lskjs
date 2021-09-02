@@ -1,5 +1,7 @@
 import BaseBotProvider from '@lskjs/bots-provider';
 
-export default class ClubhouseBotProvider extends BaseBotProvider {
+export class ClubhouseBotProvider extends BaseBotProvider {
   provider = 'clubhouse';
 }
+
+export default ClubhouseBotProvider;

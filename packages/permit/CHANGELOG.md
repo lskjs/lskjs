@@ -3,6 +3,114 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+## [2.13.1](https://github.com/lskjs/lskjs/compare/v2.13.0...v2.13.1) (2021-08-23)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/lskjs/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+## [2.12.1](https://github.com/lskjs/lskjs/compare/v2.12.0...v2.12.1) (2021-08-18)
+
+
+### Bug Fixes
+
+* **permit:** isAdmin ([a1335d6](https://github.com/lskjs/lskjs/commit/a1335d6437cc971efc1ee9975be445c44aac46e5))
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
+## [2.11.3](https://github.com/lskjs/lskjs/compare/v2.11.2...v2.11.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* common errors ([45d59c9](https://github.com/lskjs/lskjs/commit/45d59c977103f2112124126fb0aed5554f7f348f))
+
+
+
+
+
+## [2.11.1](https://github.com/lskjs/lskjs/compare/v2.11.0...v2.11.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **permit:** correct code geenration ([211a652](https://github.com/lskjs/lskjs/commit/211a65228cd129cc38b9c2f56b1ef76f0ead0a5d))
+
+
+
+
+
+# [2.11.0](https://github.com/lskjs/lskjs/compare/v2.10.3...v2.11.0) (2021-08-17)
+
+
+### Features
+
+* rename models ([461c90f](https://github.com/lskjs/lskjs/commit/461c90ffa9b2facc15e6a34b12d413bddf06809d))
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+**Note:** Version bump only for package @lskjs/permit
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/permit

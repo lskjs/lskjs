@@ -7,7 +7,7 @@ import inlineCss from 'nodemailer-juice';
 
 import defaultTemplates from './templates';
 
-export default class MailerServerModule extends Module {
+export class MailerServerModule extends Module {
   getTemplates() {
     return defaultTemplates;
   }
@@ -43,17 +43,6 @@ export default class MailerServerModule extends Module {
     };
   }
 
-  getT(props = {}) {
-    // TODO: use modules
-    if (this.app.i18 && this.app.i18.getT) {
-      return this.app.i18.getT(props.locale || 'en');
-    }
-    return (a) => {
-      this.app.log.error('!Mailer.getT');
-      return a;
-    };
-  }
-
   getTemplateOptions(email) {
     const options = {};
     if (email.getSubject) {
@@ -85,22 +74,26 @@ export default class MailerServerModule extends Module {
     return {
       logo: this.assetsUrl(`/logo.png`),
       headerImage: this.assetsUrl(`/header.png`),
-      ...get(this, 'app.config.client.about', {}),
+      ...(this.config.info || {}),
+      // ...get(this, 'app.config.client.about', {}),
     };
   }
 
-  renderTemplate(params) {
+  async renderTemplate(params) {
     const { template, props = {}, ...otherProps } = params;
     if (!template) throw new Err('mailer.!template');
     const Template = this.templates[template];
     if (!Template) throw new Err('mailer.!Template', { template });
     const config = this.getTemplateConfig();
+    const i18Module = await this.app.module('i18');
+    const i18 = await i18Module.instance(otherProps.locale, false);
     const email = new Template({
       // app: this.app,
       mailer: this,
       theme: this.theme || this.app.theme,
-      log: this.app.log,
-      t: this.getT(otherProps.locale),
+      log: this.log,
+      i18,
+      t: i18.t.bind(i18),
       config,
       props,
       ...otherProps,
@@ -110,14 +103,14 @@ export default class MailerServerModule extends Module {
       ...this.getTemplateOptions(email),
     };
   }
-  canSend() {
+  async canSend() {
     return true;
   }
   async send(props) {
     const { to, cc, bcc, template, ...otherProps } = props;
-    if (!this.canSend(to)) throw new Err('mailer.canSend');
+    if (!(await this.canSend(to))) throw new Err('mailer.canSend');
     if (!to) throw new Err('mailer.!to');
-    const options = this.renderTemplate({ template, ...otherProps });
+    const options = await this.renderTemplate({ template, ...otherProps });
     this.log.trace(`send [${template}] => ${[to, cc, bcc].filter(Boolean).join(',')}`);
     return this.transporter.sendMail({
       to,
@@ -128,7 +121,7 @@ export default class MailerServerModule extends Module {
   }
 
   async sendTo(params1 = {}, params2 = {}) {
-    const { User: UserModel } = this.app.models;
+    const UserModel = await this.app.module('models.UserModel');
     if (!params1.user && !params1.userId) throw new Err('mailer.!userId');
 
     const user = params1.user || (await UserModel.findById(params1.userId));
@@ -145,3 +138,5 @@ export default class MailerServerModule extends Module {
     });
   }
 }
+
+export default MailerServerModule;

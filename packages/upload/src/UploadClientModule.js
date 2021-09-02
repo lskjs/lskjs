@@ -9,13 +9,14 @@ export class UploadClientModule extends Module {
     return Bluebird.map(files, (file) => this.uploadFile(file));
   }
   async uploadFile(file) {
+    const api = await this.app.module('api');
     if (typeof window === 'undefined') throw new Err('!FormData');
     const { FormData } = window;
     const formData = new FormData();
     formData.append('file', file);
     const {
       data: { data },
-    } = await this.app.apiq.post('/api/upload/file', formData, {
+    } = await api.post('/api/upload/file', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -23,9 +24,10 @@ export class UploadClientModule extends Module {
     return data;
   }
   async uploadImage(formData) {
+    const api = await this.app.module('api');
     const {
       data: { data },
-    } = await this.app.apiq.post('/api/upload/image', formData, {
+    } = await api.post('/api/upload/image', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

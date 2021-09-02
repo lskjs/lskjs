@@ -3,6 +3,135 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.18.2](https://github.com/lskjs/lskjs/compare/v2.18.1...v2.18.2) (2021-09-02)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.18.1](https://github.com/lskjs/lskjs/compare/v2.18.0...v2.18.1) (2021-09-01)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **server:** remove legacy ([1bd9af3](https://github.com/lskjs/lskjs/commit/1bd9af3a5c61970f07c40709311d9a5739dd7a75))
+
+
+
+
+
+## [2.17.2](https://github.com/lskjs/lskjs/compare/v2.17.1...v2.17.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* **server,webserver:** auth headers in other places ([678740e](https://github.com/lskjs/lskjs/commit/678740e8cb245b773c2050faaaf281d8448726dd))
+
+
+
+
+
+## [2.17.1](https://github.com/lskjs/lskjs/compare/v2.17.0...v2.17.1) (2021-09-01)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+# [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* **uapp:** grant, Api and expressResolve ([53631fb](https://github.com/lskjs/lskjs/commit/53631fb96c2a103ae43c8be9ddd12099a05a4c6a))
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/lskjs/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.11.2](https://github.com/lskjs/lskjs/compare/v2.11.1...v2.11.2) (2021-08-17)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.10.3](https://github.com/lskjs/lskjs/compare/v2.10.2...v2.10.3) (2021-08-16)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+**Note:** Version bump only for package @lskjs/server
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/server

@@ -15,7 +15,7 @@ export class MenuBotPlugin extends BaseBotPlugin {
   }
 
   async getMenu(key, itemValue) {
-    const BotsMenuModel = await this.botsModule.model('BotsMenuModel');
+    const BotsMenuModel = await this.botsModule.module('models.BotsMenuModel');
     const menu = await BotsMenuModel.findOne({ key }).select(['content', 'buttonsLayout']).lean();
     if (!menu) return [];
     const buttonsLayout = menu.buttonsLayout.map((element) => {

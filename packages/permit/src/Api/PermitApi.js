@@ -1,6 +1,7 @@
 import Err from '@lskjs/err';
 import ListApi from '@lskjs/server-api/ListApi';
 import Bluebird from 'bluebird';
+import get from 'lodash/get';
 
 export class PermitApi extends ListApi {
   async count(req) {
@@ -29,7 +30,8 @@ export class PermitApi extends ListApi {
       if (!_id) throw new Err('!_id', { status: 404 });
       const item = await PermitModel.findById(_id);
       if (!item) throw new Err('!item', { status: 404 });
-      if (!(this.isAdmin(req) || String(req.user && req.user._id) === item.userId)) {
+      const isAdmin = get(req, 'user.role') === 'admin';
+      if (!(isAdmin || String(req.user && req.user._id) === item.userId)) {
         if (String(code) !== String(item.code)) {
           throw code ? new Err('permit.incorrectCode', { status: 403 }) : new Err('!owner', { status: 403 });
         }

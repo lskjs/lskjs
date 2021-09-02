@@ -60,7 +60,6 @@ export class WebserverModule extends Module {
     if (this.debug) this.log.debug('config.middlewares', this.config.middlewares);
     this.middlewares = this.getMiddlewares();
     if (this.debug) this.log.debug('middlewares', Object.keys(this.middlewares));
-    this.helpers = this.getHelpers();
     this.statics = this._getStatics();
     if (this.debug) this.log.debug('statics', this.statics);
     if (this.config.ws) this.initWs();

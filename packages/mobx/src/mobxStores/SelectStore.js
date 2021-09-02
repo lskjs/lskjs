@@ -11,6 +11,12 @@ export class SelectStore extends Store {
   idKey = '_id';
   @observable.shallow items = []; // Массив объектов
 
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+  }
+
   getCount() {
     return this.list.length;
   }

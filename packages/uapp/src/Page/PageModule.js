@@ -16,7 +16,7 @@ import React from 'react';
 export class PageModule extends Module {
   _page = 1;
   @observable state = {};
-  rootState = null;
+  // rootState = null;
 
   beforeResolve() {
     this.exit();
@@ -43,9 +43,10 @@ export class PageModule extends Module {
   }
 
   getRootState() {
-    return {
-      ...(this.rootState || {}),
-    };
+    if (this.rootState) return this.rootState;
+    if (this.uapp && this.uapp.getRootState) return this.uapp.getRootState();
+    if (this.app && this.app.getRootState) return this.app.getRootState();
+    return { __page__: 123 };
   }
 
   getMeta() {

@@ -3,6 +3,339 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* **webserver:** fix SSR axios adapter and expressResolve ([5ef5645](https://github.com/lskjs/lskjs/commit/5ef5645dbc63bf204508f13668ae720b353b6981))
+
+
+### Features
+
+* **reactapp:** pass rootState to SSR ([f207ef8](https://github.com/lskjs/lskjs/commit/f207ef85e29c13eb210943d363e2cdcb118c42ef))
+
+
+
+
+
+## [2.18.2](https://github.com/lskjs/lskjs/compare/v2.18.1...v2.18.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **webserver:** getReqData ([feaa2b2](https://github.com/lskjs/lskjs/commit/feaa2b2c4163225cea7e49f544456271be0c8c7d))
+
+
+
+
+
+## [2.18.1](https://github.com/lskjs/lskjs/compare/v2.18.0...v2.18.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* **webserver:** bug ([5eb6052](https://github.com/lskjs/lskjs/commit/5eb6052dd8c7ba2bd2d64020381d810de48bc291))
+
+
+
+
+
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **i18:** i18 middlewares in webserver ([998e5ce](https://github.com/lskjs/lskjs/commit/998e5cee7cccb7620a4cd74e1153c36ab8348a4c))
+* **reactapp:** remove semi stable behaviour ([1e5a571](https://github.com/lskjs/lskjs/commit/1e5a5719b862d1736dae2f3c0bddb09b21c50b79))
+* **server:** remove legacy ([1bd9af3](https://github.com/lskjs/lskjs/commit/1bd9af3a5c61970f07c40709311d9a5739dd7a75))
+* **webserver:** remove legacy ([899ca11](https://github.com/lskjs/lskjs/commit/899ca1144817aab819815135fbf3498be1625538))
+
+
+### Features
+
+* **uapp:** add getLocale, setLocale ([bdddafd](https://github.com/lskjs/lskjs/commit/bdddafd0e1ccf5302189a71d9d7d8fd32c254b6b))
+* **utils:** pass locale and token to expressReq ([44579a1](https://github.com/lskjs/lskjs/commit/44579a1e3781680fea79d7196b1da7f09c3df15c))
+
+
+
+
+
+## [2.17.3](https://github.com/lskjs/lskjs/compare/v2.17.2...v2.17.3) (2021-09-01)
+
+
+### Bug Fixes
+
+* **grant:** grant module getCache server get can alias ([2651d35](https://github.com/lskjs/lskjs/commit/2651d35396281bcbbecc8e11229b37f19ee33274))
+
+
+
+
+
+## [2.17.2](https://github.com/lskjs/lskjs/compare/v2.17.1...v2.17.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* **server,webserver:** auth headers in other places ([678740e](https://github.com/lskjs/lskjs/commit/678740e8cb245b773c2050faaaf281d8448726dd))
+
+
+
+
+
+## [2.17.1](https://github.com/lskjs/lskjs/compare/v2.17.0...v2.17.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* **webserver:** headers and token for ssr ([8b99396](https://github.com/lskjs/lskjs/commit/8b99396d35e46cce1e2dd86bf685c6c0afb8771a))
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **err:** add raw content of error ([40002df](https://github.com/lskjs/lskjs/commit/40002df19c12a7a6eba47d052098f5a532319124))
+* **i18:** add i18.exists for check translation ([5df7198](https://github.com/lskjs/lskjs/commit/5df719868e5ccebb2e0f668990164d45631fead1))
+* **i18:** instance check locales array ([876a6da](https://github.com/lskjs/lskjs/commit/876a6da67c1429e9b99180c8e6743f148eeeb653))
+* **uapp:** separate scrollto and progress modules ([574268a](https://github.com/lskjs/lskjs/commit/574268a2643ef9b2f1dc158fdd39cb501836048c))
+* **utils:** add headers for collectExpressReq ([5ddcab5](https://github.com/lskjs/lskjs/commit/5ddcab5a7c33d34f4f8fc6055c8ebd5dd77e2b73))
+* **webserver:** fix responses, getReqLocales ([f1a852d](https://github.com/lskjs/lskjs/commit/f1a852dd3f5dbe2c33df018d197ca1052e415e8f))
+
+
+
+
+
+## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **mobx:** listStore empty type comment items count check ([1264105](https://github.com/lskjs/lskjs/commit/12641058c794c307a8e9813b9576a3766e706609))
+
+
+
+
+
+# [2.16.0](https://github.com/lskjs/lskjs/compare/v2.15.0...v2.16.0) (2021-08-25)
+
+
+### Bug Fixes
+
+* **mobx:** typo ([9c06d74](https://github.com/lskjs/lskjs/commit/9c06d74de858427a22af5ca4f5dd5a7cc5119315))
+
+
+### Features
+
+* **mobx:** remove cancelToken and add options ([41cb74e](https://github.com/lskjs/lskjs/commit/41cb74e5a74dbd7ef5fc1b17aa0eadd135322afd))
+* **uapp:** pass req in provide ([7ce12f4](https://github.com/lskjs/lskjs/commit/7ce12f4c904ad4fa762ae928205ff2d143222d83))
+
+
+
+
+
+# [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* **uapp:** grant, Api and expressResolve ([53631fb](https://github.com/lskjs/lskjs/commit/53631fb96c2a103ae43c8be9ddd12099a05a4c6a))
+
+
+### Features
+
+* pass parent app to config chain ([41e3d68](https://github.com/lskjs/lskjs/commit/41e3d68b2995327d415e8179f3404314af4d92db))
+* **reactapp:** Html is module now ([03aa0d9](https://github.com/lskjs/lskjs/commit/03aa0d9486ca7d562ff6a4c8ef24c6b04793fdef))
+* **uapp:** migrate expressResolve to axios adapter, add logger ([79f5c75](https://github.com/lskjs/lskjs/commit/79f5c757abe7fddf8b0bfa3a68f43b4ff94dddbc))
+
+
+
+
+
+# [2.14.0](https://github.com/lskjs/lskjs/compare/v2.13.2...v2.14.0) (2021-08-23)
+
+
+### Bug Fixes
+
+* **grant:** clearCache also delete key from mutexes ([73a110b](https://github.com/lskjs/lskjs/commit/73a110bea865360067a7d8f9b481a3ad9db36f0e))
+
+
+### Features
+
+* **mobx:** ListStore with empty statuses ([db6e609](https://github.com/lskjs/lskjs/commit/db6e60943b59220ee785335efaa6415ac9b7c8be))
+
+
+
+
+
+## [2.13.2](https://github.com/lskjs/lskjs/compare/v2.13.1...v2.13.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* **clickhouse:** clickhouse-post instead clickhouse ([7e7b15e](https://github.com/lskjs/lskjs/commit/7e7b15efd8a2718e173df8ae3ec2370c5e1da501))
+
+
+
+
+
+## [2.13.1](https://github.com/lskjs/lskjs/compare/v2.13.0...v2.13.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **mobx:** post request while find ([3c3c1f5](https://github.com/lskjs/lskjs/commit/3c3c1f5ec79b5e1ce2a85b57694c73f1518808c1))
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* **mobx:** new transform ([01ef658](https://github.com/lskjs/lskjs/commit/01ef6582ab23dc0862f56c731471c197b80117a3))
+* **mobx:** pass count to transformResponse array ([f7f7ce2](https://github.com/lskjs/lskjs/commit/f7f7ce27ff4efedf7354f9ec028246b91321bbae))
+
+
+### Features
+
+* **utils:** add toArray in params ([bbbba4b](https://github.com/lskjs/lskjs/commit/bbbba4b025b7283f0278fe41ec8743c6f38b1e7f))
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/lskjs/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+
+### Bug Fixes
+
+* **utils:** hide react console logs ([4eeaa0f](https://github.com/lskjs/lskjs/commit/4eeaa0fb3b37e3667ce96daeddfebac1ab7a09d2))
+
+
+
+
+
+## [2.12.2](https://github.com/lskjs/lskjs/compare/v2.12.1...v2.12.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* **upload:** server init bug ([5e1e60c](https://github.com/lskjs/lskjs/commit/5e1e60ccbcbc9744a130f2812153e398a995b4e6))
+
+
+
+
+
+## [2.12.1](https://github.com/lskjs/lskjs/compare/v2.12.0...v2.12.1) (2021-08-18)
+
+
+### Bug Fixes
+
+* **permit:** isAdmin ([a1335d6](https://github.com/lskjs/lskjs/commit/a1335d6437cc971efc1ee9975be445c44aac46e5))
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+
+### Bug Fixes
+
+* **auth:** refactor error names ([7444282](https://github.com/lskjs/lskjs/commit/74442824e23dedf9171314ff87bce695666dab90))
+* **mobx:** override default store params ([cdd243c](https://github.com/lskjs/lskjs/commit/cdd243c173b8130491fd16938f9af687d0fb0660))
+* **upload:** upload image ([d5c3d94](https://github.com/lskjs/lskjs/commit/d5c3d94f176534b484039d760086567a539f37b3))
+
+
+### Features
+
+* **grant:** add clearCache in grantCache.update ([f61279e](https://github.com/lskjs/lskjs/commit/f61279e6216cad79a3c1169be404c4b4794f2154))
+* named exports and wrap errors in Err ([95638cf](https://github.com/lskjs/lskjs/commit/95638cfc7a08c8aaa89558c5ba6fc1f2f72c4994))
+
+
+
+
+
+## [2.11.3](https://github.com/lskjs/lskjs/compare/v2.11.2...v2.11.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* common errors ([45d59c9](https://github.com/lskjs/lskjs/commit/45d59c977103f2112124126fb0aed5554f7f348f))
+
+
+
+
+
+## [2.11.2](https://github.com/lskjs/lskjs/compare/v2.11.1...v2.11.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **mailer:** mailer and i18 instance ([3d63e61](https://github.com/lskjs/lskjs/commit/3d63e613319a2dcc812ddff140781a63cd689ecf))
+
+
+
+
+
+## [2.11.1](https://github.com/lskjs/lskjs/compare/v2.11.0...v2.11.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **permit:** correct code geenration ([211a652](https://github.com/lskjs/lskjs/commit/211a65228cd129cc38b9c2f56b1ef76f0ead0a5d))
+
+
+
+
+
+# [2.11.0](https://github.com/lskjs/lskjs/compare/v2.10.3...v2.11.0) (2021-08-17)
+
+
+### Features
+
+* **event:** pass events with bind ([327ab36](https://github.com/lskjs/lskjs/commit/327ab3627e11cf469169f5dca8e31b1fb83ddfd8))
+* rename models ([461c90f](https://github.com/lskjs/lskjs/commit/461c90ffa9b2facc15e6a34b12d413bddf06809d))
+
+
+
+
+
+## [2.10.3](https://github.com/lskjs/lskjs/compare/v2.10.2...v2.10.3) (2021-08-16)
+
+
+### Bug Fixes
+
+* **i18:** xhr backend ([2117e12](https://github.com/lskjs/lskjs/commit/2117e124ab4b55e81e0609d8a05e95d35dfa0140))
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** axios in deps ([437f13c](https://github.com/lskjs/lskjs/commit/437f13c8a3a8bed3bf43ab90b5b80bc7bc07a330))
+* **grant:** can group bug ([3d5fdf6](https://github.com/lskjs/lskjs/commit/3d5fdf61f818f8e0a7108735aad37c5bd5e206b5))
+* **i18:** ssr uapp bugs ([bed1e6b](https://github.com/lskjs/lskjs/commit/bed1e6b8f6e14aa8caedb005e85785fd8a98ba5f))
+* **module:** safe module creatation ([53b84e4](https://github.com/lskjs/lskjs/commit/53b84e4d7be8eeac5fe2eb96f5136be4912c91a8))
+* **rabbit:** onError tryReconnect ([f7cb0e7](https://github.com/lskjs/lskjs/commit/f7cb0e77e035b781a6d50e22cc8b26d4ec54e552))
+* **reactapp:** pass uapp config in ssr ([cf0e98d](https://github.com/lskjs/lskjs/commit/cf0e98d732edeaee12abd6316360af79a40526f2))
+* **uapp:** bugs while backend uapp fetching ([b31059e](https://github.com/lskjs/lskjs/commit/b31059ed5ac1d69eefab356b657e8cba07088c9c))
+
+
+
+
+
 ## [2.10.1](https://github.com/lskjs/lskjs/compare/v2.10.0...v2.10.1) (2021-08-16)
 
 

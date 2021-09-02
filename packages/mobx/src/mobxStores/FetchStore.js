@@ -3,12 +3,12 @@ import { action, isComputedProp, observable, toJS } from 'mobx';
 import { FetchStore as BaseFetchStore } from '../stores/FetchStore';
 
 export class FetchStore extends BaseFetchStore {
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   getState() {
     return toJS(super.getState());
   }
 
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   @action
   setState(state = {}) {
     Object.keys(state).forEach((item) => {
@@ -26,6 +26,12 @@ export class FetchStore extends BaseFetchStore {
   @observable select = {};
   @observable err = {};
   @observable fetchCallback;
+
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+  }
 
   @action
   setItems(...args) {

@@ -31,6 +31,11 @@ export class Err extends Error implements IErr {
       }
     });
     if (!this.code) this.code = getCode(err);
+    // if (typeof Error.captureStackTrace === 'function') {
+    //   Error.captureStackTrace(this, this.constructor);
+    // } else {
+    //   this.stack = new Error(message).stack;
+    // }
   }
   static getMessage(err: any, def = errUnknown): string {
     return getMessage(err, def);

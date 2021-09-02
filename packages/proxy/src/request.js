@@ -8,7 +8,7 @@ import { parseProxyParam } from './utils/parseProxyParam';
 
 let proxyManager;
 export const initProxyManager = async () => {
-  proxyManager = await ProxyManager.createAndRun({
+  proxyManager = await ProxyManager.start({
     config: {
       log: {
         name: 'proxy',

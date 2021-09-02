@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **i18:** i18 middlewares in webserver ([998e5ce](https://github.com/lskjs/lskjs/commit/998e5cee7cccb7620a4cd74e1153c36ab8348a4c))
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **i18:** add i18.exists for check translation ([5df7198](https://github.com/lskjs/lskjs/commit/5df719868e5ccebb2e0f668990164d45631fead1))
+* **i18:** instance check locales array ([876a6da](https://github.com/lskjs/lskjs/commit/876a6da67c1429e9b99180c8e6743f148eeeb653))
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+**Note:** Version bump only for package @lskjs/i18
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/lskjs/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+**Note:** Version bump only for package @lskjs/i18
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+**Note:** Version bump only for package @lskjs/i18
+
+
+
+
+
+## [2.11.2](https://github.com/lskjs/lskjs/compare/v2.11.1...v2.11.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **mailer:** mailer and i18 instance ([3d63e61](https://github.com/lskjs/lskjs/commit/3d63e613319a2dcc812ddff140781a63cd689ecf))
+
+
+
+
+
+## [2.10.3](https://github.com/lskjs/lskjs/compare/v2.10.2...v2.10.3) (2021-08-16)
+
+
+### Bug Fixes
+
+* **i18:** xhr backend ([2117e12](https://github.com/lskjs/lskjs/commit/2117e124ab4b55e81e0609d8a05e95d35dfa0140))
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **i18:** ssr uapp bugs ([bed1e6b](https://github.com/lskjs/lskjs/commit/bed1e6b8f6e14aa8caedb005e85785fd8a98ba5f))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/i18

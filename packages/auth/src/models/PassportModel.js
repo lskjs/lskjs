@@ -66,7 +66,7 @@ export class PassportModel extends Model {
     },
   };
   static options = {
-    model: 'Passport',
+    model: 'PassportModel',
     collection: 'passport',
     // timestamps: true,
     // toJSON: { virtuals: true },
@@ -91,7 +91,7 @@ export class PassportModel extends Model {
     throw new Err('cant generate unique username');
   }
   async getUser() {
-    const UserModel = await this.__app.model('UserModel');
+    const UserModel = await this.constructor.module('models.UserModel');
     return UserModel.findById(this.userId);
   }
 

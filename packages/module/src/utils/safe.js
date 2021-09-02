@@ -9,7 +9,7 @@ export async function create(Class, ...args) {
 
 export async function start(Class, ...args) {
   if (Class.start) {
-    return Class.start(args);
+    return Class.start(...args);
   }
   const obj = new Class(...args);
   if (obj.start) {

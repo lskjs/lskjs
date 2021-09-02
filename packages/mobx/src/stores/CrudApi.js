@@ -4,45 +4,51 @@ import { Api } from './Api';
 
 export class CrudApi extends Api {
   baseURL = '/api';
-  find(data) {
-    return this.fetch('/find', {
+  find(data, options = {}) {
+    return this.request('/find', {
       method: 'POST',
       data,
+      ...options,
     });
   }
-  findById(_id) {
-    return this.fetch('/findOne', {
+  findById(_id, options = {}) {
+    return this.request('/findOne', {
       method: 'GET',
       params: { _id },
+      ...options,
     });
   }
-  findOne(data) {
+  findOne(data, options = {}) {
     if (isPlainObject(data)) {
-      return this.fetch('/findOne', {
+      return this.request('/findOne', {
         method: 'POST',
         data,
+        ...options,
       });
     }
-    return this.findById(data);
+    return this.findById(data, options);
   }
-  create(data) {
-    return this.fetch('/create', {
+  create(data, options = {}) {
+    return this.request('/create', {
       method: 'POST',
       data,
+      ...options,
     });
   }
-  update({ _id, ...data }) {
+  update({ _id, ...data }, options = {}) {
     // update(_id, data) {
-    return this.fetch('/update', {
+    return this.request('/update', {
       method: 'POST',
       params: { _id },
       data,
+      ...options,
     });
   }
-  remove(_id) {
-    return this.fetch('/remove', {
+  remove({ _id }, options = {}) {
+    return this.request('/remove', {
       method: 'POST',
       params: { _id },
+      ...options,
     });
   }
 }

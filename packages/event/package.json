@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/event",
-  "version": "2.9.1",
+  "version": "2.18.0",
   "description": "LSK module for event.",
   "keywords": [
     "event"
@@ -24,8 +24,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.9.1",
-    "@lskjs/utils": "2.9.1"
+    "@lskjs/module": "2.18.0",
+    "@lskjs/utils": "2.18.0"
   },
   "devDependencies": {
     "lodash": "4.17.21"

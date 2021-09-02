@@ -15,7 +15,7 @@ export class StoreModule extends Module {
     this.store = Store;
     const { Api } = this.store;
     if (!Api) throw new Err('!Store.Api');
-    const api = await Api.create({ app: this.app });
+    const api = await Api.start({ __parent: this, app: this.app });
     this.store.api = api;
     this.store.app = this.app;
     // this.store.__app = this.app;

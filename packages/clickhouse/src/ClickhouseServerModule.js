@@ -1,7 +1,7 @@
 // import SHA256 from 'crypto-js/sha256';
 import Module from '@lskjs/module';
 import { spawn } from 'child_process';
-import { ClickHouse } from 'clickhouse';
+import { ClickHouse } from 'clickhouse-post';
 import SHA256 from 'crypto-js/sha256';
 import CsvReadableStream from 'csv-reader';
 import fs from 'fs';

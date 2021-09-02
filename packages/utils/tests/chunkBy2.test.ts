@@ -1,6 +1,7 @@
 /* global test expect */
 import flatten from 'lodash/flatten';
-import chunkBy from '../src/chunkBy2';
+
+import chunkBy from '../src/chunkBy';
 
 test('check 0', () => {
   const res = [
@@ -30,7 +31,7 @@ test('check 0', () => {
     ],
   ];
   const array = flatten(res);
-  expect(chunkBy(array, a => a._id)).toStrictEqual(res);
+  expect(chunkBy(array, (a) => a._id)).toStrictEqual(res);
 });
 test('check 1', () => {
   const res = [

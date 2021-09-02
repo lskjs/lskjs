@@ -15,7 +15,7 @@ import get from 'lodash/get';
 // import some from 'lodash/some';
 // import getDocsTemplate from './getDocsTemplate';
 
-export default class Api extends Module {
+export class Api extends Module {
   __api = true;
   constructor(parent, ...propsArray) {
     super(parent, ...propsArray);
@@ -268,3 +268,5 @@ export default class Api extends Module {
   //   };
   // }
 }
+
+export default Api;

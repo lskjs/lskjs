@@ -67,10 +67,25 @@ export default async function (params = {}) {
     express.handle(req, res);
   });
 
-  try {
-    return JSON.parse(data);
-  } catch (err) {
-    this.log.error('ctx.resolve err', err);
-    return data;
+  let res;
+  if (data && typeof data === 'string') {
+    try {
+      res = JSON.parse(data);
+    } catch (err) {
+      this.log.error('ctx.resolve JSON.parse err', err, data);
+      res = data;
+    }
+  } else {
+    res = data;
   }
+
+  return {
+    // NOTE: axios like response
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+    data: res,
+  };
+  // console.log({res})
+  // return { data: res }; // TODO: подумать правильно ли это
 }

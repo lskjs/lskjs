@@ -24,9 +24,11 @@ export class ListStore extends FetchStore {
   @observable searchFromLength = 0;
   @observable search = '';
 
-  constructor(...args) {
-    super(...args);
-    if (!this.selectStore) this.selectStore = new SelectStore({ listStore: this });
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+    if (!this.selectStore) this.selectStore = new SelectStore({ listStore: this }); // NOTE: единсвенная новая строчка
   }
 
   getState() {
@@ -88,6 +90,42 @@ export class ListStore extends FetchStore {
   @computed
   get getActiveFilter() {
     return filter(this.filterUi, (a) => !isEmpty(a)).length;
+  }
+
+  @computed
+  get emptyType() {
+    if (!this.loading) return null;
+    // итемы остаются при следующих поисках, возможно стоит удалять итемы перед фетчем
+    // if (this.items.length > 0) return null;
+
+    if ((!this.search || this.search === '') && !!this.paywall && !!this.paywall.tarifUnfit) {
+      // 5) тариф не соответствует
+      return 5;
+    }
+    if (!this.fetchedAt) {
+      // 1) совсем пусто, первый раз заходим
+      return 1;
+    }
+    if ((this.fetchedAt || this.skip) && this.items.length > 0) {
+      return 6;
+    }
+    if (!this.hasFilter) {
+      // 2) пусто после фетча, фильры выключены
+      return 2;
+    }
+    if (!this.skip) {
+      // 3) пусто после фетча, фильтры включены, скип не стоит
+      return 3;
+    }
+    // 4) пусто после фетча, фильтры включены, скип стоит */}
+    return 4;
+  }
+
+  canBlur(limit) {
+    if (limit) {
+      return !this.emptyType && this.items.length > limit;
+    }
+    return !this.emptyType;
   }
 
   map(...args) {

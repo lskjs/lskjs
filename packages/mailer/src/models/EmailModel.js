@@ -8,7 +8,7 @@ export class EmailModel extends Model {
     },
     threadId: {
       type: Model.Types.ObjectId,
-      ref: 'Thread',
+      ref: 'ThreadModel',
       index: true,
     },
     subtype: {
@@ -80,7 +80,7 @@ export class EmailModel extends Model {
       userId: {
         // ID юзера в системе(может и не быть)
         type: Model.Types.ObjectId,
-        ref: 'User',
+        ref: 'UserModel',
         index: true,
       },
     },
@@ -97,7 +97,7 @@ export class EmailModel extends Model {
       userId: {
         // ID юзера в системе(может и не быть)
         type: Model.Types.ObjectId,
-        ref: 'User',
+        ref: 'UserModel',
         index: true,
       },
     },
@@ -106,18 +106,18 @@ export class EmailModel extends Model {
     },
   };
   static options = {
-    model: 'Email',
+    model: 'EmailModel',
     collection: `mailer_email`,
   };
   static initSchema(schema) {
     schema.virtual('fromUser', {
-      ref: 'User', // The model to use
+      ref: 'UserModel', // The model to use
       localField: 'from.userId', // Find people where `localField`
       foreignField: '_id', // is equal to `foreignField`,
       justOne: true,
     });
     schema.virtual('toUser', {
-      ref: 'User', // The model to use
+      ref: 'UserModel', // The model to use
       localField: 'to.userId', // Find people where `localField`
       foreignField: '_id', // is equal to `foreignField`,
       justOne: true,

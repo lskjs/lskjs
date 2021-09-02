@@ -68,7 +68,7 @@ export default class InterkassaBillingApi extends Api {
     await this.isAuth(req);
     const { billing } = await this.app.module(['billing']);
     const interkassaModule = await billing.provider('interkassa');
-    const { BillingTransactionModel } = this.app.models;
+    const BillingTransactionModel = await this.app.module('models.BillingTransactionModel');
     // const BillingTransactionModel = await this.app.model('BillingTransactionModel');
     // const { amount } = req.data;
     const amount = 100;

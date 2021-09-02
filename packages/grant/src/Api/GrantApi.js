@@ -17,7 +17,8 @@ export class GrantApi extends Api {
     };
   }
   async ask(req) {
-    let { rules } = req.data;
+    let { rules, clearCache } = req.data;
+    clearCache = !!+clearCache;
     const { action } = req.data;
     if (!(rules && Array.isArray(rules) && rules.length > 0)) {
       if (action) {
@@ -28,10 +29,15 @@ export class GrantApi extends Api {
     }
     const grant = await this.app.module('grant');
     const userId = req.user ? req.user._id : null;
+    const prefix = userId || 'guest';
+    if (clearCache) {
+      // eslint-disable-next-line no-shadow
+      await grant.clearCache(rules.forEach(({ action }) => `${prefix}.${action}`));
+    }
     return grant.canGroup(rules, {
       user: req.user,
       userId,
-      cache: grant.__cache.fork({ prefix: userId || 'guest' }),
+      cache: grant.__cache.fork({ prefix }),
     });
   }
   async cache(req) {

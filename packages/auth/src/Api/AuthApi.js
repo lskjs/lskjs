@@ -16,7 +16,7 @@ import random from 'lodash/random';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
 
-export default class AuthApi extends BaseApi {
+export class AuthApi extends BaseApi {
   async init() {
     await super.init();
     this.authModule = await this.app.module('auth');
@@ -265,7 +265,7 @@ export default class AuthApi extends BaseApi {
     if (status !== 'valid') {
       throw new Err('permit.statusInvalid', { status: 400, data: { status } });
     }
-    if (!this.equal(code, permit.code)) throw this.app.e('permit.codeInvalid', { status: 400 });
+    if (String(code) !== String(permit.code)) throw new Err('permit.codeInvalid', { status: 400 });
 
     return this.permitAction({ req, permit });
   }
@@ -277,12 +277,10 @@ export default class AuthApi extends BaseApi {
     const { email } = req.data;
 
     if (!email || !validateEmail(email)) {
-      throw new Err('emailNotValid');
+      throw new Err('auth.emailInvalid');
     }
     const user = await UserModel.findOne({ email }).select(['email']);
-    if (!user) {
-      throw new Err('notFound');
-    }
+    if (!user) throw new Err('auth.userNotFound', { status: 404 });
     const code = await permitModule.genCode('emailVerifyStrong');
     const permit = await PermitModel.createPermit({
       expiredAt: permitModule.createExpiredAt('emailVerifyStrong'),
@@ -532,7 +530,7 @@ export default class AuthApi extends BaseApi {
     if (!token) throw new Err('!token', { status: 400 });
 
     const user = await UserModel.tokenLogin({ token });
-    if (!user) throw new Err('!user', { status: 404 });
+    if (!user) throw new Err('auth.userNotFound', { status: 404 });
     req.user = user;
 
     return {
@@ -672,10 +670,10 @@ export default class AuthApi extends BaseApi {
       }
     }
     const user = await UserModel.findById(userId);
-    if (!user) throw new Err('!user');
+    if (!user) throw new Err('auth.userNotFound', { status: 404 });
     const { email } = req.data;
     if (!email || !validateEmail(email)) {
-      throw new Err('emailNotValid');
+      throw new Err('auth.emailInvalid');
     }
     let type;
     if (user.email) {
@@ -778,7 +776,7 @@ export default class AuthApi extends BaseApi {
       ],
       code,
     });
-    if (!permit) throw new Err('invalidCode');
+    if (!permit) throw new Err('auth.invalidCode');
     if (permit.activatedAt) throw new Err('activated');
     const date = new Date();
     if (date > permit.expiredAt) throw new Err('expired');
@@ -791,10 +789,10 @@ export default class AuthApi extends BaseApi {
       email: permit.info.email,
     }).select(['email']);
     if (emailExist) {
-      throw new Err('emailExist');
+      throw new Err('auth.emailExist');
     }
     if (user.email && permit.info.oldEmail && user.email !== permit.info.oldEmail) {
-      throw new Err('emailWasChanged');
+      throw new Err('auth.emailWasChanged');
     }
     await permit.activate();
     user.email = permit.info.email;
@@ -829,10 +827,11 @@ export default class AuthApi extends BaseApi {
     if (!permit) throw new Err('!permit');
     if (permit.type === 'user.restorePassword') return PermitModel.prepare(permit, { req });
     if (!req.user || !req.user._id) throw new Err('!userId');
-    if (!permit) throw new Err('not found');
     if (this.app.hasGrant(req.user, 'superadmin') || String(permit.userId) === req.user._id) {
       return PermitModel.prepare(permit, { req });
     }
     throw new Err('!permission');
   }
 }
+
+export default AuthApi;

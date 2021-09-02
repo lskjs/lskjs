@@ -25,7 +25,7 @@ export default class BotsTelegramImpressionModel extends Model {
   };
 
   static options = {
-    model: 'BotsTelegramImpression',
+    model: 'BotsTelegramImpressionModel',
     collection: 'bots_telegram_impression',
     timestamps: true,
   };

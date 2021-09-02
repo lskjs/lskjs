@@ -5,7 +5,7 @@ import cassandra from 'cassandra-driver';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 
-export default class ScyllaModule extends Module {
+export class ScyllaModule extends Module {
   cassandra = cassandra;
   execute(...args) {
     if (!this.client) {
@@ -30,3 +30,5 @@ export default class ScyllaModule extends Module {
     await delay(1000);
   }
 }
+
+export default ScyllaModule;

@@ -3,12 +3,12 @@ import { action, isComputedProp, toJS } from 'mobx';
 import { CrudStore as BaseModel } from '../stores/CrudStore';
 
 export class CrudStore extends BaseModel {
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   getState() {
     return toJS(super.getState());
   }
 
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   @action
   setState(state = {}) {
     Object.keys(state).forEach((item) => {

@@ -14,10 +14,16 @@ export default (req) => {
     search: parsedUrl.search,
     query: req.query,
     hash: parsedUrl.hash,
+    headers: req.headers,
+
 
     ip: req.ip,
     xhr: req.xhr,
     cookies: req.cookies,
+
+    // TODO: подумать, а правильно ли?
+    locale: req.locale,
+    token: req.token,
   };
 };
 

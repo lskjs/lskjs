@@ -52,7 +52,7 @@ export default class YandexCheckoutBillingApi extends Api {
     await this.isAuth(req);
     const { billing } = await this.app.module(['billing']);
     const { client } = await billing.provider('yandexCheckout');
-    const { BillingTransactionModel } = this.app.models;
+    const BillingTransactionModel = await this.app.module('models.BillingTransactionModel');
     // const BillingTransactionModel = await this.app.model('BillingTransactionModel');
     // const { amount } = req.data;
     const amount = 100;

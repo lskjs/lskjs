@@ -1,5 +1,6 @@
 import env, { isDev, stage } from '@lskjs/env';
 import Err from '@lskjs/err';
+import Module from '@lskjs/module';
 import serializeWindow from '@lskjs/utils/serializeWindow';
 import fs from 'fs';
 import get from 'lodash/get';
@@ -11,11 +12,11 @@ const serialize = isDev ? JSON.stringify : serializeJavascript;
 // const trim = str => str;
 // import renderPreloader from '@lskjs/general/Loading/renderPreloader';
 
-export default class Html {
+export class Html extends Module {
   assetManifest = {};
-  constructor(props) {
-    Object.assign(this, props);
-  }
+  // constructor(props) {
+  //   Object.assign(this, props);
+  // }
   asset(name) {
     try {
       const res = this.assetManifest.files[name];
@@ -31,7 +32,7 @@ export default class Html {
         } else {
           errText = `${name} not includes in [${Object.keys(this.assetManifest.files).join(',')}]`;
         }
-        console.error('Html.asset not found', errText); // eslint-disable-line no-console
+        this.log.error('Html.asset not found', errText);
       }
       return null;
     }
@@ -44,8 +45,7 @@ export default class Html {
       try {
         raw = fs.readFileSync(this.publicPath + path).toString();
       } catch (err) {
-        // eslint-disable-next-line no-console
-        if (isDev) console.error(`renderAsset(${name}, true) err`, err);
+        if (isDev) this.log.error(`renderAsset(${name}, true) err`, err);
       }
     }
     if (!path) return '';
@@ -230,3 +230,5 @@ ${this.renderFooter()}\
 `;
   }
 }
+
+export default Html;

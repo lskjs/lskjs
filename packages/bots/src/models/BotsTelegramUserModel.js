@@ -38,7 +38,7 @@ export default class BotsTelegramUserModel extends Model {
     },
   };
   static options = {
-    model: 'BotsTelegramUser',
+    model: 'BotsTelegramUserModel',
     collection: 'bots_telegram_user',
     timestamps: true,
   };

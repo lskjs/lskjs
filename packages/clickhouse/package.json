@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/clickhouse",
-  "version": "2.9.1",
+  "version": "2.18.0",
   "description": "LSK module for clickhouse database",
   "keywords": [
     "clickhouse"
@@ -24,8 +24,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.9.1",
-    "clickhouse": "2.2.1",
+    "@lskjs/module": "2.18.0",
+    "clickhouse-post": "2.1.8",
     "crypto-js": "4.0.0",
     "csv-reader": "1.0.7"
   }

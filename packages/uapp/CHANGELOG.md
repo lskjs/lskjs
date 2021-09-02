@@ -3,6 +3,117 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
+
+
+### Features
+
+* **reactapp:** pass rootState to SSR ([f207ef8](https://github.com/lskjs/lskjs/commit/f207ef85e29c13eb210943d363e2cdcb118c42ef))
+
+
+
+
+
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Features
+
+* **uapp:** add getLocale, setLocale ([bdddafd](https://github.com/lskjs/lskjs/commit/bdddafd0e1ccf5302189a71d9d7d8fd32c254b6b))
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **uapp:** separate scrollto and progress modules ([574268a](https://github.com/lskjs/lskjs/commit/574268a2643ef9b2f1dc158fdd39cb501836048c))
+
+
+
+
+
+# [2.16.0](https://github.com/lskjs/lskjs/compare/v2.15.0...v2.16.0) (2021-08-25)
+
+
+### Features
+
+* **uapp:** pass req in provide ([7ce12f4](https://github.com/lskjs/lskjs/commit/7ce12f4c904ad4fa762ae928205ff2d143222d83))
+
+
+
+
+
+# [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* **uapp:** grant, Api and expressResolve ([53631fb](https://github.com/lskjs/lskjs/commit/53631fb96c2a103ae43c8be9ddd12099a05a4c6a))
+
+
+### Features
+
+* **uapp:** migrate expressResolve to axios adapter, add logger ([79f5c75](https://github.com/lskjs/lskjs/commit/79f5c757abe7fddf8b0bfa3a68f43b4ff94dddbc))
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/lskjs/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [2.11.2](https://github.com/lskjs/lskjs/compare/v2.11.1...v2.11.2) (2021-08-17)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [2.10.3](https://github.com/lskjs/lskjs/compare/v2.10.2...v2.10.3) (2021-08-16)
+
+**Note:** Version bump only for package @lskjs/uapp
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **uapp:** bugs while backend uapp fetching ([b31059e](https://github.com/lskjs/lskjs/commit/b31059ed5ac1d69eefab356b657e8cba07088c9c))
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/uapp

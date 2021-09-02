@@ -3,6 +3,151 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* **webserver:** fix SSR axios adapter and expressResolve ([5ef5645](https://github.com/lskjs/lskjs/commit/5ef5645dbc63bf204508f13668ae720b353b6981))
+
+
+
+
+
+## [2.18.2](https://github.com/lskjs/lskjs/compare/v2.18.1...v2.18.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **webserver:** getReqData ([feaa2b2](https://github.com/lskjs/lskjs/commit/feaa2b2c4163225cea7e49f544456271be0c8c7d))
+
+
+
+
+
+## [2.18.1](https://github.com/lskjs/lskjs/compare/v2.18.0...v2.18.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* **webserver:** bug ([5eb6052](https://github.com/lskjs/lskjs/commit/5eb6052dd8c7ba2bd2d64020381d810de48bc291))
+
+
+
+
+
+# [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
+
+
+### Bug Fixes
+
+* **i18:** i18 middlewares in webserver ([998e5ce](https://github.com/lskjs/lskjs/commit/998e5cee7cccb7620a4cd74e1153c36ab8348a4c))
+* **webserver:** remove legacy ([899ca11](https://github.com/lskjs/lskjs/commit/899ca1144817aab819815135fbf3498be1625538))
+
+
+
+
+
+## [2.17.2](https://github.com/lskjs/lskjs/compare/v2.17.1...v2.17.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* **server,webserver:** auth headers in other places ([678740e](https://github.com/lskjs/lskjs/commit/678740e8cb245b773c2050faaaf281d8448726dd))
+
+
+
+
+
+## [2.17.1](https://github.com/lskjs/lskjs/compare/v2.17.0...v2.17.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* **webserver:** headers and token for ssr ([8b99396](https://github.com/lskjs/lskjs/commit/8b99396d35e46cce1e2dd86bf685c6c0afb8771a))
+
+
+
+
+
+# [2.17.0](https://github.com/lskjs/lskjs/compare/v2.16.1...v2.17.0) (2021-09-01)
+
+
+### Features
+
+* **webserver:** fix responses, getReqLocales ([f1a852d](https://github.com/lskjs/lskjs/commit/f1a852dd3f5dbe2c33df018d197ca1052e415e8f))
+
+
+
+
+
+## [2.16.1](https://github.com/lskjs/lskjs/compare/v2.16.0...v2.16.1) (2021-08-27)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
+# [2.15.0](https://github.com/lskjs/lskjs/compare/v2.14.0...v2.15.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* **uapp:** grant, Api and expressResolve ([53631fb](https://github.com/lskjs/lskjs/commit/53631fb96c2a103ae43c8be9ddd12099a05a4c6a))
+
+
+
+
+
+# [2.13.0](https://github.com/lskjs/lskjs/compare/v2.12.3...v2.13.0) (2021-08-20)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
+## [2.12.3](https://github.com/lskjs/lskjs/compare/v2.12.2...v2.12.3) (2021-08-19)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
+# [2.12.0](https://github.com/lskjs/lskjs/compare/v2.11.3...v2.12.0) (2021-08-18)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
+## [2.11.2](https://github.com/lskjs/lskjs/compare/v2.11.1...v2.11.2) (2021-08-17)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
+## [2.10.3](https://github.com/lskjs/lskjs/compare/v2.10.2...v2.10.3) (2021-08-16)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
+## [2.10.2](https://github.com/lskjs/lskjs/compare/v2.10.1...v2.10.2) (2021-08-16)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
 ## [2.9.1](https://github.com/lskjs/lskjs/compare/v2.9.0...v2.9.1) (2021-08-16)
 
 **Note:** Version bump only for package @lskjs/webserver

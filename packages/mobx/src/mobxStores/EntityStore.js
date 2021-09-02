@@ -3,12 +3,12 @@ import { action, isComputedProp, observable, toJS } from 'mobx';
 import { EntityStore as BaseEntityStore } from '../stores/EntityStore';
 
 export class EntityStore extends BaseEntityStore {
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   getState() {
     return toJS(super.getState());
   }
 
-  // TODO: скопировано из ./Store
+  // NOTE: скопировано из ./Store, увы в js нет множественного наследования
   @action
   setState(state = {}) {
     Object.keys(state).forEach((item) => {
@@ -21,6 +21,12 @@ export class EntityStore extends BaseEntityStore {
   @observable loading = false;
   @observable fetchedAt = null;
   @observable filter = {};
+
+  // NOTE: увы, мы вынуждены повторять этот конструктор, из-за цепочки наследования Babel
+  constructor(state = {}) {
+    super();
+    if (state) this.setState(state);
+  }
 
   @action
   fetch(...args) {

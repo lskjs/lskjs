@@ -19,8 +19,22 @@ export const getCode = (err: any, def = errUnknown): string => (err && (err.code
 
 export const getJSON = (err: any, onlySafeField = false): Record<string, unknown> => {
   if (typeof err === 'string') return { code: err, message: err };
-  if (onlySafeField) return pick(err, ['name', 'code', 'message', 'text', 'data']);
-  return omit(pick(err, Object.getOwnPropertyNames(err)), ['__err']);
+
+  let data = {
+    ...((err && err.__raw) || {}),
+  };
+  if (onlySafeField) {
+    data = {
+      ...data,
+      ...pick(err, ['name', 'code', 'message', 'text', 'data']),
+    };
+  } else {
+    data = {
+      ...data,
+      ...omit(pick(err, Object.getOwnPropertyNames(err)), ['__err']),
+    };
+  }
+  return data;
 };
 
 export const isError = (err: any): boolean => err instanceof Error;

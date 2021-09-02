@@ -4,7 +4,6 @@ import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import amqp from 'amqplib';
 import Bluebird from 'bluebird';
 import EventEmitter from 'events';
-import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
 import hash from 'object-hash';
@@ -44,12 +43,13 @@ export class RabbitModule extends Module {
     if (this.isGoTransport) {
       this.log.debug('using go lang transport', this.goRabbitPath);
     }
+    this.tryReconnect = false;
   }
   async createConnection() {
     const { socketOptions = {} } = this.config;
     const connection = await amqp.connect(this.config.uri, { timeout: 10000, ...socketOptions });
-    connection.once('error', this.debouncedOnError.bind(this));
-    connection.once('close', this.debouncedOnError.bind(this));
+    connection.once('error', this.onError.bind(this));
+    connection.once('close', this.onError.bind(this));
     return connection;
   }
   async connect() {
@@ -85,13 +85,16 @@ export class RabbitModule extends Module {
       await this.cancel();
       await this.stop();
       await this.connect();
+      this.tryReconnect = false;
     } catch (e) {
       await this.onError(e);
     }
   }
-  debouncedOnError = debounce(this.onError, 1000);
+  // debouncedOnError = debounce(this.onError, 1);
   async onError(err) {
     if (!err) return;
+    if (this.tryReconnect) return;
+    this.tryReconnect = true;
     this.emit('connectionError');
     this.log.error(err);
     const { reconnectTimeout } = this.config;

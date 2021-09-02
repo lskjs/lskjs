@@ -42,7 +42,7 @@ export class UserModel extends Model {
     },
   };
   static options = {
-    model: 'User',
+    model: 'UserModel ',
     collection: 'user',
   };
 
