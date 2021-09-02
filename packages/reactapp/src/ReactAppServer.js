@@ -24,6 +24,7 @@ import BaseHtml from './Html';
 export class ReactAppServer extends Module {
   async init() {
     await super.init();
+    this.initUappConfig = await this.getModuleConfig('uapp');
     if (!this.expressResolve && this.app) this.expressResolve = this.app.expressResolve;
     if (!this.express && this.app) this.express = this.app.express;
     if (!this.Uapp && !this.hasModule('uapp')) throw new Err('!Uapp');
@@ -40,11 +41,12 @@ export class ReactAppServer extends Module {
     return config;
   }
 
-  getRootState({ req, ...props }) {
-    let config = null;
-    if (this.initClientConfig) {
-      config = antimergeDeep(this.config.client, this.initClientConfig);
-    }
+  async getRootState({ req, ...props }) {
+    const config = await this.getModuleConfig('uapp');
+    console.log({ config });
+    // if (this.initClientConfig) {
+    //   config = antimergeDeep(this.config.client, this.initClientConfig);
+    // }
     return {
       req: pick(req, ['reqId', 'user', 'userId', 'token']),
       config,
@@ -54,10 +56,11 @@ export class ReactAppServer extends Module {
 
   async getUapp({ req, ...params } = {}) {
     const uappReq = collectExpressReq(req);
-    const config = await this.getModuleConfig('uapp'); // cloneDeep(get(this, 'config.client', {}));
+    const config = cloneDeep(await this.getModuleConfig('uapp')); // cloneDeep(get(this, 'config.client', {}));
     // if (this.hasModule('uapp')) { // TODO: пока не работает
     //   return this.module('uapp');
     // }
+    const rootState = await this.getRootState({ req });
     const uapp = await start(this.Uapp, {
       ...params,
       history: createMemoryHistory({
@@ -65,8 +68,8 @@ export class ReactAppServer extends Module {
         initialEntries: [req.originalUrl], // TODO: may be path ?
       }),
       req: uappReq,
-      rootState: this.getRootState({ req }),
-      config: cloneDeep(config),
+      rootState,
+      config,
       app: this,
       __parent: this,
     });
@@ -127,8 +130,8 @@ export class ReactAppServer extends Module {
         content,
         publicPath: this.getPublicPath(),
         assetManifest: this.getAssetManifest(),
-        meta: page && page.getMeta ? page.getMeta() : '',
-        rootState: page && page.getRootState ? page.getRootState() : '',
+        meta: page && page.getMeta ? page.getMeta() : {},
+        rootState: (page && page.app && page.app.rootState) || {},
         ...htmlProps,
       };
       if (this.debug) this.log.trace('new Html()', props);

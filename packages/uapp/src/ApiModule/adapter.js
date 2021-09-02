@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { isClient } from '@lskjs/env';
 import isAbsoluteExternalUrl from '@lskjs/utils/isAbsoluteExternalUrl';
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
 
 export async function adapter(config) {
   // console.log('adapter FETCH START', config);
@@ -15,16 +16,18 @@ export async function adapter(config) {
   // const { body = {}, method = 'GET', qs = {} } = options;
 
   // config.headers.Authorization;
-
+  const { data: body } = config;
   const req = {
     url,
     path,
     method,
-    data: JSON.parse(config.data),
-    body: config.data,
-    // body: method === 'POST' ? body : qs,
     headers: config.headers,
   };
+  if (body) {
+    req.body = req;
+    req.data = tryJSONparse(body);
+  }
+
   // console.log('adapter FETCH ', req);
   // console.log('this.app.name', this.app.name)
   const serverApp = this.app;
