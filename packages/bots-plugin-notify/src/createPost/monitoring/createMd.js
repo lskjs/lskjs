@@ -1,16 +1,21 @@
 import utils from '../../utils';
 
-const { ignoreMd } = utils;
+const { ignoreMd, getCode } = utils;
 
-const stringify = (data) => `\`\`\` ${JSON.stringify(data, null, 2)}\`\`\``;
+// const stringify = (data) => `\`\`\` ${JSON.stringify(data, null, 2)}\`\`\``;
+const stringify = (data, provider) => getCode(JSON.stringify(data, null, 2), provider);
 
-export default function createMd(message = {}) {
+export default function createMd(message = {}, provider) {
   const { title, projectName, url, level } = message;
   let { data = '' } = message;
   let sign = '❗️';
 
   if (level === 'warn') sign = '⚠️';
-  if (typeof data !== 'string') data = stringify(data);
+  if (typeof data !== 'string') data = stringify(data, provider);
 
-  return `${sign} ${ignoreMd(projectName)}\n${ignoreMd(title)}\n${data || ''}\n${ignoreMd(url)}`;
+  const formatProjectName = ignoreMd(projectName, provider);
+  const formatTitle = ignoreMd(title, provider);
+  const formatUrl = ignoreMd(url, provider);
+
+  return `${sign} ${formatProjectName}\n${formatTitle}\n${data || ''}\n${formatUrl}`;
 }

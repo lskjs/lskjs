@@ -1,3 +1,7 @@
+import utils from '../../utils';
+
+const { getCode } = utils;
+
 const statuses = {
   firing: '🔥',
   warn: '❕',
@@ -17,16 +21,19 @@ const getStatus = ({ status, severity } = {}) =>
 // ${grafana ? `\n[grafana](${grafana})` : ''}\
 // `);
 
-const alertLog = ({ status, labels: { severity, alertname, instance }, annotations: { grafana, description } }) => `\
-${getStatus({ status, severity })} \`${alertname}\`
+const alertLog = (
+  { status, labels: { severity, alertname, instance }, annotations: { grafana, description } },
+  provider,
+) => `\
+${getStatus({ status, severity })} ${getCode(alertname, provider)}
 
 ${description}
 
 ${grafana ? `\n[grafana](${grafana})` : ''}\
 `;
 
-const alertsLog = ({ alerts }) => alerts.map(alertLog).join('\n\n------\n\n');
+const alertsLog = ({ alerts }, provider) => alerts.map(alertLog, provider).join('\n\n------\n\n');
 
-export default (message) =>
+export default (message, provider) =>
   // console.log({ message });
-   alertsLog(message.meta) //eslint-disable-line
+   alertsLog(message.meta, provider) //eslint-disable-line

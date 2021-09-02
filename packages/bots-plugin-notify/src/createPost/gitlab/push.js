@@ -1,26 +1,30 @@
 import utils from '../../utils';
 
-const { ignoreMd } = utils;
+const { ignoreMd, getCode, getLink } = utils;
 
-const getCommitsMessage = (commits) =>
+const getCommitsMessage = (commits, provider) =>
   commits.map((commit) => {
     const short = commit.id.slice(0, 7);
+    const formatCommit = getCode(commit.message, provider);
+
     return `\
-[${short}](${commit.url}) _${commit.author?.name}_ 
-\`${commit.message}\``;
+${getLink(short, commit.url, provider)} _${commit.author?.name}_ 
+${formatCommit}`;
   });
 
-export default function (message) {
+export default function (message, provider) {
   const { branch } = message;
   const { user_username: username, repository = {}, commits = [] } = message.meta;
 
   const branches = [branch, ...(message.branches || [])];
 
-  const commitsMessage = getCommitsMessage(commits);
+  const commitsMessage = getCommitsMessage(commits, provider);
+  const formatUsername = ignoreMd(username, provider);
+  const formatPath = getCode(`${ignoreMd(repository.name, provider)}/${branches.join(',')}`, provider);
 
   return `\
-@${ignoreMd(username)}
-Push to \`${ignoreMd(repository.name)}/${branches.join(',')}\`
+@${formatUsername}
+Push to ${formatPath}
 
 *Commits:*
 ${commitsMessage.join('\n')}
