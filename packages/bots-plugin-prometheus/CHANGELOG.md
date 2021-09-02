@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/compare/v2.19.0...v2.19.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **bots-plugin-prometheus:** fix md, add slack, fix cron ([6061fc3](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/commit/6061fc321e20eea0398187cf3b3e713317e03bed))
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-prometheus

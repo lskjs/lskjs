@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/lskjs/lskjs/tree/master/packages/webserver/compare/v2.19.0...v2.19.1) (2021-09-02)
+
+**Note:** Version bump only for package @lskjs/webserver
+
+
+
+
+
 # [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
 
 

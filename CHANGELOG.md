@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/lskjs/lskjs/compare/v2.19.0...v2.19.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** fix md, add slack-provider, fix monitoring ([c86c34e](https://github.com/lskjs/lskjs/commit/c86c34e652e8a784cb481a3afe1162d61a3c184a))
+* **bots-plugin-prometheus:** fix md, add slack, fix cron ([6061fc3](https://github.com/lskjs/lskjs/commit/6061fc321e20eea0398187cf3b3e713317e03bed))
+* **bots-provider-slack:** add sendMessage ([4c51379](https://github.com/lskjs/lskjs/commit/4c513796de32b877c4c63f3dbe4976cbba5059bd))
+
+
+
+
+
 # [2.19.0](https://github.com/lskjs/lskjs/compare/v2.18.2...v2.19.0) (2021-09-02)
 
 

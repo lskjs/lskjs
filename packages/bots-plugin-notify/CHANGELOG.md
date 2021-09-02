@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-notify/compare/v2.19.0...v2.19.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** fix md, add slack-provider, fix monitoring ([c86c34e](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-notify/commit/c86c34e652e8a784cb481a3afe1162d61a3c184a))
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-notify

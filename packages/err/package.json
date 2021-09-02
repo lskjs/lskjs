@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/err",
-  "version": "2.17.0",
+  "version": "2.19.1",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/err",
