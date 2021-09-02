@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.2](https://github.com/lskjs/lskjs/compare/v2.18.1...v2.18.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **webserver:** getReqData ([feaa2b2](https://github.com/lskjs/lskjs/commit/feaa2b2c4163225cea7e49f544456271be0c8c7d))
+
+
+
+
+
 ## [2.18.1](https://github.com/lskjs/lskjs/compare/v2.18.0...v2.18.1) (2021-09-01)
 
 
