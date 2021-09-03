@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* **bots-provider-slack:** fix images in readme ([20950b1](https://github.com/lskjs/lskjs/commit/20950b1f59e811be8217bc2605a1697400c0b5a6))
+* **bots-provider-slack:** ts ignore ([c7ebd2f](https://github.com/lskjs/lskjs/commit/c7ebd2f482aded954d8ca81c895243a75e283251))
+* **grant:** clear cache correct _id ([636a15e](https://github.com/lskjs/lskjs/commit/636a15e13f8d93a7b6093624f0e52c4f37c66a09))
+* **i18:** remove log ([672cc25](https://github.com/lskjs/lskjs/commit/672cc25c5369ec1da184b1651e1178ceaa9b2067))
+
+
+### Features
+
+* **bots-plugin-notify:** add readme ([b265fae](https://github.com/lskjs/lskjs/commit/b265fae75804580cc9faf76106c30b998079aa6d))
+* **bots-plugin-prometheus:** add readme ([7875521](https://github.com/lskjs/lskjs/commit/7875521cc83888d5b8761bd35d83ba962a6ca31d))
+* **bots-provider-slack:** add readme ([03064e9](https://github.com/lskjs/lskjs/commit/03064e98953c0eb0a8c338574380c66f81fda2f8))
+
+
+
+
+
 # [2.21.0](https://github.com/lskjs/lskjs/compare/v2.20.0...v2.21.0) (2021-09-02)
 
 

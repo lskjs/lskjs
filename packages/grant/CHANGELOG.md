@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* **grant:** clear cache correct _id ([636a15e](https://github.com/lskjs/lskjs/commit/636a15e13f8d93a7b6093624f0e52c4f37c66a09))
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/grant

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
+
+
+### Features
+
+* **bots-plugin-notify:** add readme ([b265fae](https://github.com/lskjs/lskjs/commit/b265fae75804580cc9faf76106c30b998079aa6d))
+
+
+
+
+
 # [2.21.0](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-notify/compare/v2.20.0...v2.21.0) (2021-09-02)
 
 

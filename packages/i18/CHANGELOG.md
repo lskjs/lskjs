@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* **i18:** remove log ([672cc25](https://github.com/lskjs/lskjs/commit/672cc25c5369ec1da184b1651e1178ceaa9b2067))
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 
