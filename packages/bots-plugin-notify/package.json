@@ -40,8 +40,8 @@
     "@lskjs/server-api": "2.18.0",
     "@lskjs/utils": "2.18.0",
     "axios": "^0.21.1",
-    "crypto-js": "^4.0.0",
-    "node-cron": "^3.0.0"
+    "crypto-js": "4.0.0",
+    "node-cron": "3.0.0"
   },
   "devDependencies": {
     "bluebird": "3.7.2",

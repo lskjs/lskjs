@@ -45,7 +45,13 @@ export class NotifyApi extends Api {
     const sendSlack = Bluebird.map(old, async (message) => this.sendNotification({ bot: this.bot.slack, message }), {
       concurrency: 10,
     });
-    return Promise.all([sendTelegram, sendSlack]);
+
+    try {
+      await Promise.all([sendTelegram, sendSlack]);
+      return { data: 'ok' };
+    } catch (error) {
+      throw new Err(error);
+    }
   }
 
   async notify(req) {
