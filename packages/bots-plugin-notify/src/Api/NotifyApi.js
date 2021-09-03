@@ -6,7 +6,7 @@ import crypto from 'crypto-js';
 import find from 'lodash/find';
 import groupBy from 'lodash/groupBy';
 
-export default class NotifyApi extends Api {
+export class NotifyApi extends Api {
   messages = [];
   messageTimeout = 500;
 
@@ -144,3 +144,5 @@ export default class NotifyApi extends Api {
     return this.sendNotifications();
   }
 }
+
+export default NotifyApi;

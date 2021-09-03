@@ -1,7 +1,3 @@
-/* eslint-disable global-require */
-
-export default {
-  ignoreMd: require('./ignoreMd').default,
-  getCode: require('./getCode').default,
-  getLink: require('./getLink').default,
-};
+export * from './ignoreMd';
+export * from './getCode';
+export * from './getLink';

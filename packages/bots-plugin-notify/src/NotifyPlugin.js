@@ -13,7 +13,7 @@ import gitlab from './createPost/gitlab';
 import graylog from './createPost/graylog';
 import monitoring from './createPost/monitoring';
 
-export default class NotifyPlugin extends BaseBotPlugin {
+export class NotifyPlugin extends BaseBotPlugin {
   providers = ['telegram', 'slack'];
   crons = [];
   alertmanager = alertmanager;
@@ -64,18 +64,15 @@ export default class NotifyPlugin extends BaseBotPlugin {
   }
 
   checkResourses(bot) {
-    const {
-      getEconnabortedErrorMessage,
-      getOtherErrorMessage,
-      getRedirectErrorMessage,
-      getWarningMessage,
-    } = this.monitoring;
+    const { getEconnabortedErrorMessage, getOtherErrorMessage, getRedirectErrorMessage, getWarningMessage } =
+      this.monitoring;
 
     const { projects } = this.config;
     const timeout = 30 * 1000;
     const timeoutWarn = 7 * 1000;
 
     forEach(projects, (project, projectName) => {
+      // eslint-disable-next-line no-shadow
       const { monitoring } = project;
       if (!monitoring) return;
       forEach(monitoring, async (resourse) => {
@@ -138,3 +135,5 @@ export default class NotifyPlugin extends BaseBotPlugin {
     this.runMonitoring(bot);
   }
 }
+
+export default NotifyPlugin;
