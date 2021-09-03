@@ -40,7 +40,7 @@ export class SlackBotProvider extends BaseBotProvider {
     if (!this.client) return;
     await super.run();
   }
-
+  // @ts-ignore
   async sendMessage(to: string, text: string, ...props): Promise<any> {
     try {
       const res = await axios.post(to, {
