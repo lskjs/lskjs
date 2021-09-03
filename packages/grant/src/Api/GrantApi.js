@@ -47,7 +47,7 @@ export class GrantApi extends Api {
   }
   async clearCache(req) {
     const grant = await this.app.module('grant');
-    const userId = (req.user && req.user.id) || 'guest';
+    const userId = (req.user && req.user._id) || 'guest';
     const path = [userId, req.data.path || '*'].filter(Boolean).join('.');
     return grant.clearCache(path);
   }
