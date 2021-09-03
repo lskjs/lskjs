@@ -24,7 +24,7 @@ export class I18Module extends Module {
   async instance(localeOrLocales = this.locale, throwError = true) {
     // eslint-disable-next-line no-param-reassign
     if (!localeOrLocales) localeOrLocales = defaultLocale;
-    this.log.trace('instance()', localeOrLocales);
+    // this.log.trace('instance()', localeOrLocales);
     if (!localeOrLocales) throw new Err('!locale', { locale: localeOrLocales });
     const { locales = [] } = this;
     // eslint-disable-next-line no-param-reassign
