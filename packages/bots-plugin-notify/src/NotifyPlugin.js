@@ -7,11 +7,16 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import cron from 'node-cron';
 
-import alertmanager from './createPost/alertmanager';
-import github from './createPost/github';
-import gitlab from './createPost/gitlab';
-import graylog from './createPost/graylog';
-import monitoring from './createPost/monitoring';
+import {
+  alertmanager,
+  getEconnabortedErrorMessage,
+  getOtherErrorMessage,
+  getRedirectErrorMessage,
+  getWarningMessage,
+  github,
+  gitlab,
+  graylog,
+} from './createPost';
 
 export class NotifyPlugin extends BaseBotPlugin {
   providers = ['telegram', 'slack'];
@@ -20,7 +25,6 @@ export class NotifyPlugin extends BaseBotPlugin {
   github = github;
   gitlab = gitlab;
   graylog = graylog;
-  monitoring = monitoring;
 
   sendNotification({ bot, message }) {
     if (!message) throw new Err('!message');
@@ -32,16 +36,15 @@ export class NotifyPlugin extends BaseBotPlugin {
       isDefault = true;
       project = this.config.projects._default;
     }
-
     let msg = message.text;
     if (message.type === 'gitlab') {
-      msg = this.gitlab(message, project, provider);
+      msg = this.gitlab(message, project, bot);
     }
     if (message.type === 'github') {
-      msg = this.github(message, project, provider);
+      msg = this.github(message, project, bot);
     }
     if (message.type === 'alertmanager') {
-      msg = this.graylog(message, project, provider);
+      msg = this.alertmanager(message, project, bot);
     }
     if (message.type === 'graylog') {
       msg = this.graylog(message, project);
@@ -56,17 +59,12 @@ export class NotifyPlugin extends BaseBotPlugin {
       options.parse_mode = 'MarkdownV2';
     }
 
-    let chats = [];
-    if (provider === 'telegram' && project.telegram) chats = project.telegram;
-    if (provider === 'slack' && project.slack) chats = project.slack;
+    const chats = project[provider] || [];
 
     return Bluebird.map(chats, (chat) => bot.sendMessage(chat, msg, options));
   }
 
   checkResourses(bot) {
-    const { getEconnabortedErrorMessage, getOtherErrorMessage, getRedirectErrorMessage, getWarningMessage } =
-      this.monitoring;
-
     const { projects } = this.config;
     const timeout = 30 * 1000;
     const timeoutWarn = 7 * 1000;
@@ -85,12 +83,12 @@ export class NotifyPlugin extends BaseBotPlugin {
             timeout,
           });
           if (status >= 300) {
-            const message = getRedirectErrorMessage({ projectName, url }, bot.provider);
+            const message = getRedirectErrorMessage({ projectName, url }, bot);
             await this.sendNotification({ bot, message });
             return {};
           }
           if (Date.now() - time >= timeoutWarn) {
-            const message = getWarningMessage({ projectName, url, timeoutWarn }, bot.provider);
+            const message = getWarningMessage({ projectName, url, timeoutWarn }, bot);
             await this.sendNotification({ bot, message });
             return { status: 200 };
           }
@@ -99,8 +97,8 @@ export class NotifyPlugin extends BaseBotPlugin {
         } catch (err) {
           const message =
             err && err.code === 'ECONNABORTED'
-              ? getEconnabortedErrorMessage({ projectName, url, timeout }, bot.provider)
-              : getOtherErrorMessage({ projectName, url, err }, bot.provider);
+              ? getEconnabortedErrorMessage({ projectName, url, timeout }, bot)
+              : getOtherErrorMessage({ projectName, url, err }, bot);
 
           const { status, statusText } = err.response;
           this.log.error(`Status: ${status || ''} ${statusText || ''}`);

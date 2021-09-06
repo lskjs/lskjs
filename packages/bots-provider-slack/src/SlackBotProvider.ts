@@ -45,6 +45,15 @@ export class SlackBotProvider extends BaseBotProvider {
   async sendMessage(ctx: string, content: string, options: any): Promise<any> {
     return axios.post(ctx, { text: content });
   }
+  ignoreMd(text: string): string {
+    return text;
+  }
+  formatCode(text: string): string {
+    return `\`\`\`${text}\`\`\``;
+  }
+  formatLink(text: string, link: string): string {
+    return `<${link}|${text}>`;
+  }
 }
 
 export default SlackBotProvider;

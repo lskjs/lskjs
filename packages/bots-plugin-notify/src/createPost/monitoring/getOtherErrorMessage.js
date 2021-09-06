@@ -1,17 +1,20 @@
-import monitoring from '.';
+// eslint-disable-next-line import/no-cycle
+import { createMd } from '.';
 
-export default function getOtherErrorMessage({ projectName, url, err }, provider) {
+export function getOtherErrorMessage({ projectName, url, err }, bot) {
   return {
     projectName,
-    text: monitoring.createMd(
+    text: createMd(
       {
         level: 'error',
         projectName,
         url,
         title: String(err),
       },
-      provider,
+      bot,
     ),
     isMd: true,
   };
 }
+
+export default getOtherErrorMessage;

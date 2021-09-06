@@ -1,24 +1,26 @@
-import build from './build';
-import mergeRequest from './mergeRequest';
-import pipeline from './pipeline';
-import push from './push';
+import { build } from './build';
+import { mergeRequest } from './mergeRequest';
+import { pipeline } from './pipeline';
+import { push } from './push';
 
-export default function (message, project, provider) {
+export function github(message, project, bot) {
   const { event } = message;
   const { object_attributes: objectAttributes, build_status: buildStatus } = message.meta;
 
   if (event === 'pipeline' && project.gitlab?.[`pipeline__${objectAttributes.status}`]) {
-    return pipeline(message, provider);
+    return pipeline(message, bot);
   }
   if (event === 'build' && project.github?.[`build__${buildStatus}`]) {
-    return build(message, provider);
+    return build(message, bot);
   }
   if (event === 'pull_request') {
-    return mergeRequest(message, provider);
+    return mergeRequest(message, bot);
   }
   if (event === 'push') {
-    return push(message, provider);
+    return push(message, bot);
   }
 
   return null;
 }
+
+export default github;

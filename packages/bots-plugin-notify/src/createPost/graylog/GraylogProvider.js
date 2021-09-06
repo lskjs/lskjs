@@ -1,5 +1,4 @@
-export const GraylogProvider = (message) => {
-  console.log('GraylogProvider.message', message);
+export const graylog = (message) => {
   const event = (message && message.meta && message.meta.event) || {};
   let text;
   if (event.fields && event.fields.message) {
@@ -12,4 +11,4 @@ export const GraylogProvider = (message) => {
   return `🔸 ${text}`;
 };
 
-export default GraylogProvider;
+export default graylog;

@@ -1,16 +1,19 @@
-import monitoring from '.';
+// eslint-disable-next-line import/no-cycle
+import { createMd } from '.';
 
-export default function getWarningMessage({ projectName, url, timeoutWarn }, provider) {
+export function getWarningMessage({ projectName, url, timeoutWarn }, bot) {
   return {
     projectName,
-    md: monitoring.createMd(
+    md: createMd(
       {
         level: 'warn',
         projectName,
         url,
         title: `TIMEOUT ${timeoutWarn}`,
       },
-      provider,
+      bot,
     ),
   };
 }
+
+export default getWarningMessage;

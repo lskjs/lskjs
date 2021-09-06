@@ -1,24 +1,22 @@
-import utils from '../../utils';
-
-const { ignoreMd, getCode, getLink } = utils;
-
 const statuses = {
   opened: '🎉',
   closed: '❌',
   merged: '🤝',
 };
 
-export default function (message, provider) {
+export function mergeRequest(message, bot) {
   const { user, object_attributes: objectAttributes } = message.meta;
 
   const status = statuses[objectAttributes.state] || `🤷‍♀️ ${objectAttributes.status}`;
 
-  const message2 = objectAttributes.title ? `${getCode(objectAttributes.title, provider)}\n` : '';
-  const formatUsername = ignoreMd(user.username, provider);
+  const message2 = objectAttributes.title ? `${bot.formatCode(objectAttributes.title)}\n` : '';
+  const formatUsername = bot.ignoreMd(user.username);
 
   return `\
 🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} -> ${objectAttributes.target_branch}
 @${formatUsername}
 ${message2}
-${getLink(objectAttributes.url, objectAttributes.url, provider)}`;
+${bot.formatLink(objectAttributes.url, objectAttributes.url)}`;
 }
+
+export default mergeRequest;

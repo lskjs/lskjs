@@ -1,6 +1,5 @@
-export default {
-  monitoring: require('./monitoring').default,
-  alertmanager: require('./alertmanager').default,
-  github: require('./github').default,
-  gitlab: require('./gitlab').default,
-};
+export * from './monitoring';
+export * from './alertmanager';
+export * from './github';
+export * from './gitlab';
+export * from './graylog';
