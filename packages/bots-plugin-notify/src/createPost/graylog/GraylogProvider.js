@@ -1,4 +1,5 @@
 export const graylog = (message) => {
+  console.log('graylog.message', message);
   const event = (message && message.meta && message.meta.event) || {};
   let text;
   if (event.fields && event.fields.message) {
