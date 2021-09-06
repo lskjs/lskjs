@@ -1,5 +1,6 @@
-export const graylog = (message) => {
-  console.log('graylog.message', message);
+export function graylog(message) {
+  if (this.botsModule.debug) this.log.trace('graylog.message', message);
+
   const event = (message && message.meta && message.meta.event) || {};
   let text;
   if (event.fields && event.fields.message) {
@@ -10,6 +11,6 @@ export const graylog = (message) => {
     text = '[graylog]';
   }
   return `🔸 ${text}`;
-};
+}
 
 export default graylog;
