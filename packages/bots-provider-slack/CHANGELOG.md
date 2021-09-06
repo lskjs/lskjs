@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.22.1](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-slack/compare/v2.22.0...v2.22.1) (2021-09-06)
+
+
+### Bug Fixes
+
+* **bots-provider-slack:** fix imports and fix sendMessage ([1998217](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-slack/commit/1998217df32500898b209d165f5372951a0cbea5))
+
+
+
+
+
 # [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
 
 

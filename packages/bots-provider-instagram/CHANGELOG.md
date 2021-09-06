@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.22.1](https://github.com/lskjs/lskjs/tree/master/packages/bots-provider-instagram/compare/v2.22.0...v2.22.1) (2021-09-06)
+
+**Note:** Version bump only for package @lskjs/bots-provider-instagram
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/bots-provider-instagram

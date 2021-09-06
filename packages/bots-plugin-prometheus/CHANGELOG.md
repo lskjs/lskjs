@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.22.1](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/compare/v2.22.0...v2.22.1) (2021-09-06)
+
+
+### Bug Fixes
+
+* **bots:** add debug logs ([7493474](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/commit/74934746dab279272c08bf2dd4f126bf8d452efa))
+* **bots-plugin-notify:** fix imports, api response, add log ([a90f9ae](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/commit/a90f9aea9b8d9ae4c0364b09f0c42d60202e50e2))
+
+
+
+
+
 # [2.21.0](https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-prometheus/compare/v2.20.0...v2.21.0) (2021-09-02)
 
 

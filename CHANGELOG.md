@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.22.1](https://github.com/lskjs/lskjs/compare/v2.22.0...v2.22.1) (2021-09-06)
+
+
+### Bug Fixes
+
+* **bots:** add debug logs ([7493474](https://github.com/lskjs/lskjs/commit/74934746dab279272c08bf2dd4f126bf8d452efa))
+* **bots-plugin-notify:** add graylog log ([c2c68a7](https://github.com/lskjs/lskjs/commit/c2c68a7586d348a49f88a506f5bce9daa9fa195a))
+* **bots-plugin-notify:** fix graylog log ([fb732f4](https://github.com/lskjs/lskjs/commit/fb732f4c3594b8557ab1243548254c3b0be3cbd4))
+* **bots-plugin-notify:** fix graylog log ([6627fcf](https://github.com/lskjs/lskjs/commit/6627fcfd2dcb4c694dd691dcea3e5c05dbe77c7d))
+* **bots-plugin-notify:** fix imports, api response, add log ([a90f9ae](https://github.com/lskjs/lskjs/commit/a90f9aea9b8d9ae4c0364b09f0c42d60202e50e2))
+* **bots-provider-slack:** fix imports and fix sendMessage ([1998217](https://github.com/lskjs/lskjs/commit/1998217df32500898b209d165f5372951a0cbea5))
+
+
+
+
+
 # [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
 
 
