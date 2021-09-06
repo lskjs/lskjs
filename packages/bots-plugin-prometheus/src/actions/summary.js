@@ -47,6 +47,8 @@ const getChats = (provider, params) => {
 };
 
 export default async function summary({ bot, data, params }) {
+  if (this.debug) this.log.trace('summary.data', data);
+
   const { groupBy: groupByValue = false, parseMode } = params;
   const { provider, sendMessage } = bot;
 

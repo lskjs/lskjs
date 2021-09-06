@@ -1,7 +1,10 @@
 // eslint-disable-next-line import/no-cycle
 import { createMd } from '.';
 
-export function getOtherErrorMessage({ projectName, url, err }, bot) {
+export function getOtherErrorMessage(message, bot) {
+  if (this.debug) this.log.trace('getOtherErrorMessage.message', message);
+
+  const { projectName, url, err } = message;
   return {
     projectName,
     text: createMd(
