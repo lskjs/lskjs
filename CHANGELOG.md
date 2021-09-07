@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/lskjs/lskjs/compare/v2.22.0...v2.23.0) (2021-09-07)
+
+
+### Bug Fixes
+
+* **bots-provider-instagram:** hide to legacy ([d580ef4](https://github.com/lskjs/lskjs/commit/d580ef43a9ccaa8356c844703dc9247a8987d373))
+
+
+### Features
+
+* **env:** add instance and version ([a09245e](https://github.com/lskjs/lskjs/commit/a09245e59d53a11a6033952cdddefb9f7d5b0035))
+
+
+
+
+
 # [2.22.0](https://github.com/lskjs/lskjs/compare/v2.21.0...v2.22.0) (2021-09-03)
 
 

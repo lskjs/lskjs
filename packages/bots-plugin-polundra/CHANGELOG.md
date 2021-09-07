@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/lskjs/lskjs/compare/v2.22.0...v2.23.0) (2021-09-07)
+
+**Note:** Version bump only for package @lskjs/bots-plugin-polundra
+
+
+
+
+
 # [2.18.0](https://github.com/lskjs/lskjs/compare/v2.17.3...v2.18.0) (2021-09-01)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-polundra

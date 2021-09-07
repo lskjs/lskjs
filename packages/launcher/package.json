@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/launcher",
-  "version": "2.8.0",
+  "version": "2.23.0",
   "description": "LSK Launcher.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/launcher",

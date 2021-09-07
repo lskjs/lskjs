@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/lskjs/lskjs/compare/v2.22.0...v2.23.0) (2021-09-07)
+
+
+### Features
+
+* **env:** add instance and version ([a09245e](https://github.com/lskjs/lskjs/commit/a09245e59d53a11a6033952cdddefb9f7d5b0035))
+
+
+
+
+
 # [2.8.0](https://github.com/lskjs/lskjs/compare/v2.7.2...v2.8.0) (2021-08-13)
 
 **Note:** Version bump only for package @lskjs/env
