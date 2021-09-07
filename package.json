@@ -23,16 +23,16 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@babel/cli": "7.14.8",
-    "@babel/core": "7.15.0",
+    "@babel/cli": "7.15.4",
+    "@babel/core": "7.15.5",
     "@lskjs/babel-preset": "2.8.0",
-    "@lskjs/cli": "2.30.1",
-    "babel-jest": "27.0.6",
+    "@lskjs/cli": "2.31.0",
+    "babel-jest": "27.1.0",
     "babel-loader": "8.2.2",
     "lerna": "4.0.0",
-    "typescript": "4.3.5",
-    "webpack": "5.50.0",
-    "webpack-dev-server": "3.11.2"
+    "typescript": "4.4.2",
+    "webpack": "5.52.0",
+    "webpack-dev-server": "4.1.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "13.1.0",
