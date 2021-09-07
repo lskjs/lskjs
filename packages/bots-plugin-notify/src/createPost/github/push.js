@@ -1,27 +1,24 @@
-import utils from '../../utils';
-
-const { ignoreMd, getCode, getLink } = utils;
-
-const getCommitsMessage = (commits, provider) =>
+const getCommitsMessage = (commits, bot) =>
   commits.map((commit) => {
     const short = commit.id.slice(0, 7);
 
-    const formatAuthor = ignoreMd(commit.author?.name, provider);
-    const fotmatCommit = getCode(commit.message, provider);
+    const formatAuthor = bot.ignoreMd(commit.author?.name);
+    const fotmatCommit = bot.formatCode(commit.message);
 
     return `\
-${getLink(short, commit.url, provider)} _${formatAuthor}_
+${bot.formatLink(short, commit.url)} _${formatAuthor}_
 ${fotmatCommit}`;
   });
 
-export default function (message, provider) {
+export function push(message, bot) {
   const { branch } = message;
   const { sender, repository = {}, commits = [] } = message.meta;
 
   const branches = [branch, ...(message.branches || [])];
 
-  const commitsMessage = getCommitsMessage(commits, provider);
-  const formatPath = getCode(`${repository.name}/${branches.join(',')}`, provider);
+  const commitsMessage = getCommitsMessage(commits, bot);
+
+  const formatPath = bot.formatCode(`${repository.name}/${branches.join(',')}`);
 
   return `\
 @${sender.login}
@@ -31,3 +28,5 @@ Push to ${formatPath}
 ${commitsMessage.join('\n')}
 `;
 }
+
+export default push;

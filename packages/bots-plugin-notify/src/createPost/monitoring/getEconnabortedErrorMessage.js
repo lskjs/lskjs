@@ -1,16 +1,22 @@
-import monitoring from '.';
+// eslint-disable-next-line import/no-cycle
+import { createMd } from '.';
 
-export default function getEconnabortedErrorMessage({ projectName, url, timeout }, provider) {
+export function getEconnabortedErrorMessage(message, bot) {
+  if (this.debug) this.log.trace('getEconnabortedErrorMessage.message', message);
+
+  const { projectName, url, timeout } = message;
   return {
     projectName,
-    md: monitoring.createMd(
+    md: createMd(
       {
         level: 'error',
         projectName,
         url,
         title: `TIMEOUT ${timeout}`,
       },
-      provider,
+      bot,
     ),
   };
 }
+
+export default getEconnabortedErrorMessage;

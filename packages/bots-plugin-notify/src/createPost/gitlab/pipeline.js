@@ -1,7 +1,3 @@
-import utils from '../../utils';
-
-const { ignoreMd, getCode } = utils;
-
 const statuses = {
   success: '✅',
   pending: '🕔',
@@ -11,13 +7,13 @@ const statuses = {
   running: '🏃💨',
 };
 
-export default function (message, provider) {
+export function pipeline(message, bot) {
   const { commit, project, object_attributes: objectAttributes, user } = message.meta;
 
   const status = statuses[objectAttributes.status] || `🤷‍♀️ ${objectAttributes.status}`;
 
-  const message2 = commit.message ? getCode(commit.message, provider) : '';
-  const formatProjectName = ignoreMd(project.name, provider);
+  const message2 = commit.message ? bot.formatCode(commit.message) : '';
+  const formatProjectName = bot.ignoreMd(project.name);
 
   return `\
 ${status} ${formatProjectName}/${objectAttributes.ref}
@@ -25,3 +21,5 @@ ${status} ${formatProjectName}/${objectAttributes.ref}
 ${message2}
 ${project.web_url}/pipelines/${objectAttributes.id}`;
 }
+
+export default pipeline;

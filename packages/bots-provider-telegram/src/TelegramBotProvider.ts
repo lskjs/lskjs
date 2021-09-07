@@ -800,6 +800,15 @@ export class TelegramBotProvider extends BaseBotProvider {
   // deleteMessage(chat_id, message_id, params = {}) {
   //   this.bot.deleteMessage(chat_id, message_id, params);
   // }
+  ignoreMd(text: string): string {
+    return text.replace(/[^A-Za-z0-9А-Яа-я ]/gi, (c: string) => `\\${c}`);
+  }
+  formatCode(text: string): string {
+    return `\`${text}\``;
+  }
+  formatLink(text: string, link: string): string {
+    return `[${text}](${link})`;
+  }
 }
 
 export default TelegramBotProvider;

@@ -164,6 +164,15 @@ export abstract class BaseBotProvider extends Module implements IBotProvider {
     if (!Array.isArray(commands)) commands = [commands];
     return some(commands, (command: string) => this.isMessageCommand(message, command));
   }
+  ignoreMd(text: string): string {
+    return text;
+  }
+  formatCode(text: string): string {
+    return text;
+  }
+  formatLink(text: string, link: string): string {
+    return `${text} <${link}>`;
+  }
 }
 
 export default BaseBotProvider;

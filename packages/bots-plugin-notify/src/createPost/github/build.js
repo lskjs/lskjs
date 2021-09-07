@@ -1,7 +1,3 @@
-import utils from '../../utils';
-
-const { ignoreMd, getCode } = utils;
-
 const statuses = {
   success: '✅',
   pending: '🕔',
@@ -11,7 +7,7 @@ const statuses = {
   running: '🏃💨',
 };
 
-export default function (message, provider) {
+export function build(message, bot) {
   const {
     // commit,
     repository,
@@ -24,9 +20,9 @@ export default function (message, provider) {
   } = message.meta;
 
   const status = statuses[buildStatus] || `🤷‍♀️ ${buildStatus}`;
-  const formatProjectName = getCode(ignoreMd(projectName, provider), provider);
-  const formatBuildName = ignoreMd(buildName, provider);
-  const formatUsername = ignoreMd(user.name, provider);
+  const formatProjectName = bot.formatCode(bot.ignoreMd(projectName));
+  const formatBuildName = bot.ignoreMd(buildName);
+  const formatUsername = bot.ignoreMd(user.name);
 
   return `\
   ${formatProjectName}
@@ -34,3 +30,5 @@ ${status} *${formatBuildName}*
 _${formatUsername}_
 ${repository.homepage}/-/jobs/${buildId}`;
 }
+
+export default build;

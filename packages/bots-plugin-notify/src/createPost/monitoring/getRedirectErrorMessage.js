@@ -1,16 +1,22 @@
-import monitoring from '.';
+// eslint-disable-next-line import/no-cycle
+import { createMd } from '.';
 
-export default function getRedirectErrorMessage({ projectName, url }, provider) {
+export function getRedirectErrorMessage(message, bot) {
+  if (this.debug) this.log.trace('getRedirectErrorMessage.message', message);
+
+  const { projectName, url } = message;
   return {
     projectName,
-    md: monitoring.createMd(
+    md: createMd(
       {
         level: 'error',
         projectName,
         url,
         title: 'status >= 300',
       },
-      provider,
+      bot,
     ),
   };
 }
+
+export default getRedirectErrorMessage;

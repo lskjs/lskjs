@@ -8,29 +8,18 @@ const statuses = {
   default: '❓',
 };
 
-const ignoreMd = (text, provider) => {
-  if (provider === 'telegram') return text.replaceAll(/[^A-Za-z0-9А-Яа-я ]/gi, (c) => `\\${c}`);
-  return text;
-};
-
-const getText = (text, parseMode, provider) =>
-  ['Markdown', 'MarkdownV2'].includes(parseMode) ? ignoreMd(text, provider) : text;
-
-const getCode = (text, provider) => {
-  if (provider === 'telegram') return `\`${text}\``;
-  return `\`\`\`${text}\`\`\``;
-};
+const getText = (text, parseMode, bot) => (['Markdown', 'MarkdownV2'].includes(parseMode) ? bot.ignoreMd(text) : text);
 
 const getEmoji = (type) => statuses[type] || statuses.default;
 
-const getAlertname = (data, parseMode, provider = 'telegram') => {
+const getAlertname = (data, parseMode, bot) => {
   const text = `${get(data, 'labels.alertname', '')}`;
-  return getText(text, parseMode, provider);
+  return getText(text, parseMode, bot);
 };
 
-const getDescription = (data, provider = 'telegram') => {
+const getDescription = (data, bot) => {
   const text = get(data, 'annotations.description', '');
-  return getCode(text, provider);
+  return bot.formatCode(text);
 };
 
 const getMessageTexts = (texts, limit = 4096) => {
@@ -58,8 +47,10 @@ const getChats = (provider, params) => {
 };
 
 export default async function summary({ bot, data, params }) {
+  if (this.debug) this.log.trace('summary.data', data);
+
   const { groupBy: groupByValue = false, parseMode } = params;
-  const { provider, sendMessage } = bot;
+  const { provider } = bot;
 
   const chats = getChats(provider, params);
 
@@ -69,22 +60,20 @@ export default async function summary({ bot, data, params }) {
     async (dataType) => {
       const alertData = groupData[dataType];
       const alertInfoTexts = alertData.map(
-        (d) => `*${getAlertname(d, parseMode, provider)}*\n\n${getDescription(d, provider)}\n—————————————\n`,
+        (d) => `*${getAlertname(d, parseMode, bot)}*\n\n${getDescription(d, bot)}\n—————————————\n`,
       );
 
-      const sumTexts = alertData.map(
-        (d) => `${getText('-', parseMode, provider)} ${getAlertname(d, parseMode, provider)}\n`,
-      );
+      const sumTexts = alertData.map((d) => `${getText('-', parseMode, bot)} ${getAlertname(d, parseMode, bot)}\n`);
 
       const messageTexts = getMessageTexts([
         `${getEmoji(dataType)}\n`,
         ...sumTexts,
-        `\n\n${getText('=======', parseMode, provider)}\n\n`,
+        `\n\n${getText('=======', parseMode, bot)}\n\n`,
         ...alertInfoTexts,
       ]);
 
       return Bluebird.map(chats, async (chat) =>
-        Bluebird.mapSeries(messageTexts, async (text) => sendMessage.call(bot, chat, text, { parse_mode: parseMode })),
+        Bluebird.mapSeries(messageTexts, async (text) => bot.sendMessage(chat, text, { parse_mode: parseMode })),
       );
     },
     {

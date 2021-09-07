@@ -1,21 +1,18 @@
-import utils from '../../utils';
+export function createMd(message = {}, bot) {
+  const stringify = (data) => bot.formatCode(JSON.stringify(data, null, 2));
 
-const { ignoreMd, getCode } = utils;
-
-// const stringify = (data) => `\`\`\` ${JSON.stringify(data, null, 2)}\`\`\``;
-const stringify = (data, provider) => getCode(JSON.stringify(data, null, 2), provider);
-
-export default function createMd(message = {}, provider) {
   const { title, projectName, url, level } = message;
   let { data = '' } = message;
   let sign = '❗️';
 
   if (level === 'warn') sign = '⚠️';
-  if (typeof data !== 'string') data = stringify(data, provider);
+  if (typeof data !== 'string') data = stringify(data, bot);
 
-  const formatProjectName = ignoreMd(projectName, provider);
-  const formatTitle = ignoreMd(title, provider);
-  const formatUrl = ignoreMd(url, provider);
+  const formatProjectName = bot.ignoreMd(projectName);
+  const formatTitle = bot.ignoreMd(title);
+  const formatUrl = bot.ignoreMd(url);
 
   return `${sign} ${formatProjectName}\n${formatTitle}\n${data || ''}\n${formatUrl}`;
 }
+
+export default createMd;
