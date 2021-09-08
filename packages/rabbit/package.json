@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit",
-  "version": "2.23.0",
+  "version": "2.23.1",
   "description": "LSK module for rabbit.",
   "keywords": [
     "queue",
@@ -25,9 +25,9 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/err": "2.23.0",
-    "@lskjs/module": "2.23.0",
-    "@lskjs/utils": "2.23.0",
+    "@lskjs/err": "2.23.1",
+    "@lskjs/module": "2.23.1",
+    "@lskjs/utils": "2.23.1",
     "amqplib": "0.6.0",
     "object-hash": "2.1.1"
   },

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.23.1](https://github.com/lskjs/lskjs/compare/v2.23.0...v2.23.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **bots:** fix ts bugs ([e751bc8](https://github.com/lskjs/lskjs/commit/e751bc842b4cff49c04575a8d23dfeeaf019785b))
+
+
+
+
+
 # [2.23.0](https://github.com/lskjs/lskjs/compare/v2.22.0...v2.23.0) (2021-09-07)
 
 **Note:** Version bump only for package @lskjs/bots-provider-slack

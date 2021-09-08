@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/db",
-  "version": "2.23.0",
+  "version": "2.23.1",
   "description": "LSK.js module for working with mongodb database",
   "keywords": [
     "database",
@@ -27,8 +27,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.23.0",
-    "@lskjs/utils": "2.23.0",
+    "@lskjs/module": "2.23.1",
+    "@lskjs/utils": "2.23.1",
     "mongoose": "^5.12.1"
   },
   "devDependencies": {
