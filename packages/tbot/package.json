@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/tbot",
-  "version": "2.23.1",
+  "version": "2.23.2",
   "description": "LSK module.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/module",

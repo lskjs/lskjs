@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.23.2](https://github.com/lskjs/lskjs/compare/v2.23.1...v2.23.2) (2021-09-08)
+
+**Note:** Version bump only for package @lskjs/launcher
+
+
+
+
+
 ## [2.23.1](https://github.com/lskjs/lskjs/compare/v2.23.0...v2.23.1) (2021-09-08)
 
 **Note:** Version bump only for package @lskjs/launcher
