@@ -19,7 +19,7 @@ export default () =>
     if (!status || !(status >= 400 && status <= 600)) {
       res.status = 500;
     }
-    if (!code) res.code = `status${res.status}`;
+    if (!code) res.code = `status${res.status || 500}`;
     if (debug && Object.keys(debug).length) {
       res.debug = debug;
     }

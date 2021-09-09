@@ -4,6 +4,12 @@ import Module from '@lskjs/module';
 import { I18Instance } from './instances/I18Instance';
 
 const defaultLocale = 'en';
+
+const instanceMock = {
+  local: 'mock',
+  t: (a) => a,
+  exists: () => false,
+};
 export class I18Module extends Module {
   I18Instance = I18Instance;
   locales = [];
@@ -21,7 +27,13 @@ export class I18Module extends Module {
     if (!locales.includes(locale)) return false;
     return true;
   }
-  async instance(localeOrLocales = this.locale, throwError = true) {
+  async instance(initLocaleOrLocales = this.locale, options = true) {
+    if (options === true || options === false) {
+      // eslint-disable-next-line no-param-reassign
+      options = { throwError: options };
+    }
+    const { throwError, anyLocale } = options;
+    let localeOrLocales = initLocaleOrLocales;
     // eslint-disable-next-line no-param-reassign
     if (!localeOrLocales) localeOrLocales = defaultLocale;
     // this.log.trace('instance()', localeOrLocales);
@@ -33,11 +45,24 @@ export class I18Module extends Module {
     // eslint-disable-next-line no-param-reassign
     localeOrLocales = localeOrLocales.filter((locale) => this.hasInstance(locale));
 
+    // if (!localeOrLocales.length) {
     if (!localeOrLocales.length) {
-      if (throwError)
-        throw new Err('!locale', 'cant find current locale in locales', { data: { locale: localeOrLocales, locales } });
-      return null;
+      if (anyLocale) {
+        if (this.locales.length) {
+          localeOrLocales = this.locales;
+        }
+        return instanceMock;
+      }
+      if (throwError) {
+        throw new Err('!locale', 'cant find current locale in locales', {
+          data: { locale: initLocaleOrLocales, locales },
+        });
+      } else {
+        return null;
+      }
     }
+
+    // }
     const locale = localeOrLocales[0];
     if (this.instances[locale]) return this.instances[locale];
     const instance = await this.I18Instance.start({
