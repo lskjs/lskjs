@@ -1,5 +1,5 @@
 export function graylog(message) {
-  if (this.debug) this.log.trace('graylog.message', message);
+  if (this?.debug) this.log.trace('graylog.message', message);
 
   const event = (message && message.meta && message.meta.event) || {};
   let text;

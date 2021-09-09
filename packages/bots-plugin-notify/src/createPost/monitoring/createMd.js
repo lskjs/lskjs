@@ -1,6 +1,6 @@
-export function createMd(message = {}, bot) {
-  const stringify = (data) => bot.formatCode(JSON.stringify(data, null, 2));
+const stringify = (data, bot) => bot.formatCode(JSON.stringify(data, null, 2));
 
+export function createMd(message = {}, bot) {
   const { title, projectName, url, level } = message;
   let { data = '' } = message;
   let sign = '❗️';

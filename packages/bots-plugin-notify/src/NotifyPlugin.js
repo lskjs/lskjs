@@ -41,7 +41,7 @@ export class NotifyPlugin extends BaseBotPlugin {
       project = this.config.projects._default;
     }
     let msg = message.text;
-    if (this.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
+    if (this?.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
     if (message.type === 'gitlab') {
       msg = this.gitlab(message, project, bot);
     }
@@ -49,10 +49,10 @@ export class NotifyPlugin extends BaseBotPlugin {
       msg = this.github(message, project, bot);
     }
     if (message.type === 'alertmanager') {
-      msg = this.alertmanager(message, project, bot);
+      msg = this.alertmanager(message, bot);
     }
     if (message.type === 'graylog') {
-      msg = this.graylog(message, project);
+      msg = this.graylog(message);
     }
 
     if (isDefault && msg) {

@@ -28,10 +28,10 @@ ${description}
 ${grafana ? `\n[grafana](${grafana})` : ''}\
 `;
 
-const alertsLog = ({ alerts }, bot) => alerts.map(alertLog, bot).join('\n\n------\n\n');
+const alertsLog = ({ alerts }, bot) => alerts.map((alert) => alertLog(alert, bot)).join('\n\n------\n\n');
 
 export function alertmanager(message, bot) {
-  if (this.debug) this.log.trace('alertmanager.message', message);
+  if (this?.debug) this.log.trace('alertmanager.message', message);
   alertsLog(message.meta, bot);
 }
 

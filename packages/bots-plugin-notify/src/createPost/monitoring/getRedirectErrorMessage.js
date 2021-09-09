@@ -2,7 +2,7 @@
 import { createMd } from '.';
 
 export function getRedirectErrorMessage(message, bot) {
-  if (this.debug) this.log.trace('getRedirectErrorMessage.message', message);
+  if (this?.debug) this.log.trace('getRedirectErrorMessage.message', message);
 
   const { projectName, url } = message;
   return {

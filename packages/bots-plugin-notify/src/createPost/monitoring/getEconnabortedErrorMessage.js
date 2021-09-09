@@ -2,7 +2,7 @@
 import { createMd } from '.';
 
 export function getEconnabortedErrorMessage(message, bot) {
-  if (this.debug) this.log.trace('getEconnabortedErrorMessage.message', message);
+  if (this?.debug) this.log.trace('getEconnabortedErrorMessage.message', message);
 
   const { projectName, url, timeout } = message;
   return {

@@ -2,7 +2,7 @@
 import { createMd } from '.';
 
 export function getOtherErrorMessage(message, bot) {
-  if (this.debug) this.log.trace('getOtherErrorMessage.message', message);
+  if (this?.debug) this.log.trace('getOtherErrorMessage.message', message);
 
   const { projectName, url, err } = message;
   return {

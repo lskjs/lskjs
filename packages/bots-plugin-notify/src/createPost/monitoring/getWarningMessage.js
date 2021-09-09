@@ -2,7 +2,7 @@
 import { createMd } from '.';
 
 export function getWarningMessage(message, bot) {
-  if (this.debug) this.log.trace('getWarningMessage.message', message);
+  if (this?.debug) this.log.trace('getWarningMessage.message', message);
 
   const { projectName, url, timeoutWarn } = message;
   return {

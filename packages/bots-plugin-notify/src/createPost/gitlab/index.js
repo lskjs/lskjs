@@ -4,7 +4,7 @@ import { pipeline } from './pipeline';
 import { push } from './push';
 
 export function gitlab(message, project, bot) {
-  if (this.debug) this.log.trace('gitlab.message', message);
+  if (this?.debug) this.log.trace('gitlab.message', message);
 
   const { object_kind: objectKind, object_attributes: objectAttributes, build_status: buildStatus } = message.meta;
   if (objectKind === 'pipeline' && project.gitlab?.[`pipeline__${objectAttributes.status}`]) {

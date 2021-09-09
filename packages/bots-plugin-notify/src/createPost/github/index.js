@@ -4,7 +4,7 @@ import { pipeline } from './pipeline';
 import { push } from './push';
 
 export function github(message, project, bot) {
-  if (this.debug) this.log.trace('github.message', message);
+  if (this?.debug) this.log.trace('github.message', message);
 
   const { event } = message;
   const { object_attributes: objectAttributes, build_status: buildStatus } = message.meta;
