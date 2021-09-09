@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.23.4](https://github.com/lskjs/lskjs/compare/v2.23.3...v2.23.4) (2021-09-09)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** add NotifyPlugin.sendNotification.message debug log ([27011c0](https://github.com/lskjs/lskjs/commit/27011c02beebb8d9a7ea551e553386395c66fa15))
+
+
+
+
+
 ## [2.23.2](https://github.com/lskjs/lskjs/compare/v2.23.1...v2.23.2) (2021-09-08)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-notify

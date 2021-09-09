@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/linkall",
-  "version": "2.23.2",
+  "version": "2.23.4",
   "description": "LSK link all.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/linkall",
