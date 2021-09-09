@@ -30,7 +30,7 @@ export class RabbitWorkerJob extends Module {
 
   async init() {
     await super.init();
-    this.stats = this.worker.stats;
+    if (this.worker) this.stats = this.worker.stats;
     this.startedAt = new Date();
     let apm;
     if (this.app.hasModule('apm')) {

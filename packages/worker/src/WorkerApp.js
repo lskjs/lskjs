@@ -7,6 +7,7 @@ import importFn from '@lskjs/utils/importFn';
 import get from 'lodash/get';
 
 import { createErrorInfo } from './createErrorInfo';
+import { Worker } from './Worker';
 
 export class WorkerApp extends Module {
   preload = true;
@@ -32,9 +33,14 @@ export class WorkerApp extends Module {
     if (this.initedWorkers[name]) return this.initedWorkers[name];
     if (!this.availableWorkers[name])
       throw new Err('WORKER_NOT_FOUND', `In worker "${name}" not found index with exported default function`);
-    const Worker = await importFn(this.availableWorkers[name]);
+    const CurrentWorker = await importFn(this.availableWorkers[name]);
     const config = this.getWorkerConfig(name);
-    const worker = await Worker.start({
+    // TODO: разобраться почему ругается eslint
+    // eslint-disable-next-line no-prototype-builtins
+    if (!Worker.isPrototypeOf(CurrentWorker)) {
+      throw new Err('notInstanceOfWorker', { data: { name } });
+    }
+    const worker = await CurrentWorker.start({
       app: this,
       rabbit: this.rabbit,
       config,
