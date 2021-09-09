@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/webserver",
-  "version": "2.23.2",
+  "version": "2.23.3",
   "description": "LSK module webserver.",
   "keywords": [
     "webserver",
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@lskjs/db": "2.23.2",
-    "@lskjs/i18": "2.23.2",
+    "@lskjs/i18": "2.23.3",
     "axios": "0.21.1",
     "bluebird": "3.7.2",
     "lodash": "4.17.21",

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.23.3](https://github.com/lskjs/lskjs/compare/v2.23.2...v2.23.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* **i18:** prevent i18 errors ([98a9fc3](https://github.com/lskjs/lskjs/commit/98a9fc3aeabd23b4d6f604fbe66da31e1bed698c))
+* **worker:** prevent non worker prototype error ([91769d6](https://github.com/lskjs/lskjs/commit/91769d6f9a59c72e1f0ee05075eaac31eaa4769f))
+
+
+
+
+
 ## [2.23.2](https://github.com/lskjs/lskjs/compare/v2.23.1...v2.23.2) (2021-09-08)
 
 **Note:** Version bump only for package @lskjs/lskjs
