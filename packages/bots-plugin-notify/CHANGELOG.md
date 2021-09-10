@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.23.6](https://github.com/lskjs/lskjs/compare/v2.23.5...v2.23.6) (2021-09-10)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** fix null chats ([088c420](https://github.com/lskjs/lskjs/commit/088c4205ea3e0d18ba953b6ce8aae1c2949f47b9))
+
+
+
+
+
 ## [2.23.5](https://github.com/lskjs/lskjs/compare/v2.23.4...v2.23.5) (2021-09-09)
 
 
