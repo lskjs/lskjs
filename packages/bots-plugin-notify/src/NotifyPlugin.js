@@ -66,7 +66,7 @@ export class NotifyPlugin extends BaseBotPlugin {
 
     const chats = project[provider] || [];
 
-    return Bluebird.map(chats, (chat) => bot.sendMessage(chat, msg, options));
+    return Bluebird.map(chats.filter(Boolean), (chat) => bot.sendMessage(chat, msg, options));
   }
 
   checkResourses(bot) {
@@ -105,8 +105,7 @@ export class NotifyPlugin extends BaseBotPlugin {
               ? this.getEconnabortedErrorMessage({ projectName, url, timeout }, bot)
               : this.getOtherErrorMessage({ projectName, url, err }, bot);
 
-          const { status, statusText } = err.response;
-          this.log.error(`Status: ${status || ''} ${statusText || ''}`);
+          this.log.error(`Status: ${err?.response?.status || ''} ${err?.response?.statusText || ''}`);
           await this.sendNotification({ bot, message });
           return {};
         }
