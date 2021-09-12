@@ -3,7 +3,7 @@
   "version": "2.24.0",
   "description": "LSK ux subrepo: reactapp",
   "keywords": [],
-  "repository": "https://github.com/lskjs/ux/tree/master/packages/reactapp",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/reactapp",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {

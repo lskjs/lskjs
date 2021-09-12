@@ -3,7 +3,7 @@
   "version": "2.23.4",
   "description": "http/s + websockets api client for Web, Node.js and React Native throw fetch or axios",
   "keywords": [],
-  "repository": "https://github.com/lskjs/ux/tree/master/packages/apiquery",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/apiquery",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {

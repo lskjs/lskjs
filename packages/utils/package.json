@@ -3,7 +3,7 @@
   "version": "2.24.0",
   "description": "LSK.js – utils – helpers and functions",
   "keywords": [],
-  "repository": "https://github.com/lskjs/ux/tree/master/packages/utils",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/utils",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
