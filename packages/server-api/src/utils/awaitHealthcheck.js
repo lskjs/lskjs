@@ -2,6 +2,7 @@ import env from '@lskjs/env';
 import Bluebird from 'bluebird';
 import isFunction from 'lodash/isFunction';
 import mapValues from 'lodash/mapValues';
+import pick from 'lodash/pick';
 
 // import some from 'lodash/some';
 
@@ -33,17 +34,8 @@ export default async (healthchecks) => {
     __status: status,
     ok: true,
     date: new Date(),
-    env: {
-      ...env,
-      __IMAGE__: global.__IMAGE__,
-      __VERSION__: global.__VERSION__,
-      __INSTANCE__: global.__INSTANCE__,
-      __STAGE__: global.__STAGE__,
-      __PROD__: global.__PROD__,
-      __DEV__: global.__DEV__,
-      __SERVER__: global.__SERVER__,
-      __CLIENT__: global.__CLIENT__,
-    },
+    env,
+    debug: pick(process.env, ['CI_PIPELINE_ID', 'CI_JOB_ID']),
     data,
   };
 };
