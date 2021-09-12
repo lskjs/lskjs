@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/lskjs/lskjs/compare/v2.23.6...v2.24.0) (2021-09-12)
+
+
+### Features
+
+* **env:** add isLeader ([6e77a09](https://github.com/lskjs/lskjs/commit/6e77a09ebf3cb16b030bf763949d410d68006870))
+
+
+
+
+
 ## [2.23.6](https://github.com/lskjs/lskjs/compare/v2.23.5...v2.23.6) (2021-09-10)
 
 

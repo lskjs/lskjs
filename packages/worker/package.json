@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "2.23.4",
+  "version": "2.24.0",
   "description": "LSK module for worker.",
   "keywords": [
     "worker",
@@ -25,13 +25,13 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.23.4",
+    "@lskjs/env": "2.24.0",
     "@lskjs/err": "2.23.4",
-    "@lskjs/module": "2.23.4",
-    "@lskjs/utils": "2.23.4"
+    "@lskjs/module": "2.24.0",
+    "@lskjs/utils": "2.24.0"
   },
   "devDependencies": {
-    "@lskjs/rabbit": "2.23.4",
+    "@lskjs/rabbit": "2.24.0",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },
