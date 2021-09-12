@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.25.0](https://github.com/lskjs/lskjs/compare/v2.24.0...v2.25.0) (2021-09-12)
+
+
+### Features
+
+* **cron:** init package ([78adfe2](https://github.com/lskjs/lskjs/commit/78adfe26355cf4dd2a9eae9966d83cdadea03b06))
+
+
+
+
+
 ## [2.23.4](https://github.com/lskjs/ux/compare/v2.23.3...v2.23.4) (2021-09-09)
 
 **Note:** Version bump only for package @lskjs/autobind
