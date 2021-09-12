@@ -1,0 +1,35 @@
+{
+  "name": "@lskjs/cron",
+  "version": "2.23.4",
+  "description": "LSK.js – cron – Module for working with cron jobs based on bree-js",
+  "keywords": [],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/cron",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "@lskjs/err": "2.23.4",
+    "@lskjs/module": "2.24.0",
+    "@lskjs/utils": "2.24.0",
+    "@types/lodash": "4.14.172",
+    "cron": "1.8.2",
+    "lodash": "4.17.x"
+  },
+  "peerDependencies": {
+    "lodash": "4.17.x"
+  }
+}
