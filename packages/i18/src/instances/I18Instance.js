@@ -1,4 +1,4 @@
-import { isClient } from '@lskjs/env';
+import { isClient, isServer } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
@@ -24,7 +24,19 @@ export class I18Instance extends Module {
     this.resources = await asyncMapValues(resources, (value) => {
       // eslint-disable-next-line no-param-reassign
       if (typeof value === 'string') value = { translation: value };
-      return asyncMapValues(value, (path) => JSON.parse(require('fs').readFileSync(path)));
+      if (isServer) {
+        return asyncMapValues(value, (path) => {
+          try {
+            const res = JSON.parse(require('fs').readFileSync(path)); // TODO: подумать что корретнее делать
+            return res;
+          } catch (err) {
+            this.log.error(err);
+            // error ignored
+            return null;
+          }
+        });
+      }
+      return null;
     });
   }
   async exists(...args) {
