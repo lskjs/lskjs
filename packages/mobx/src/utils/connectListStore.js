@@ -3,7 +3,7 @@ import getParamsFromQuery from '@lskjs/utils/getParamsFromQuery';
 import getQueryFromParams from '@lskjs/utils/getQueryFromParams';
 import Bluebird from 'bluebird';
 import omit from 'lodash/omit';
-import { autorun, toJS } from 'mobx';
+import { autorun, isObservable, toJS } from 'mobx';
 
 const DEBUG = isDev && false;
 
@@ -35,6 +35,8 @@ export const connectListStore = async ({
   await Bluebird.delay(10);
   // return () => {}
   const remove = autorun(async () => {
+    // временный костыль
+    isObservable(listStore);
     const params = {
       ...omit(query, omitKeys),
       ...getParams(listStore),
@@ -49,19 +51,19 @@ export const connectListStore = async ({
     let string = getQueryFromParams(params, defaultParams);
     if (string) string = `?${string}`;
 
-    if (!(page && page.uapp && page.uapp.history)) {
-      console.log('!page.uapp.history'); // eslint-disable-line no-console
+    if (!(page && page.app && page.app.history)) {
+      console.log('!page.app.history'); // eslint-disable-line no-console
       return;
     }
-    if (page.uapp.history.location.search === string) return;
+    if (page.app.history.location.search === string) return;
     if (DEBUG) {
-      console.log('connectListStore: waiting for refresh', page.uapp.history.location.search, '=>', string, page.uapp); // eslint-disable-line no-console
+      console.log('connectListStore: waiting for refresh', page.app.history.location.search, '=>', string, page.app); // eslint-disable-line no-console
     }
 
     if (isDev) {
       await Bluebird.delay(1000);
     }
-    page.uapp.history.replace({
+    page.app.history.replace({
       search: string,
       method: 'replaceState',
     });
