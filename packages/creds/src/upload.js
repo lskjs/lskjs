@@ -29,7 +29,9 @@ export async function upload(dir, { force, ...options } = {}) {
   await Bluebird.map(files, async ({ name, filename }) => {
     if (filename.indexOf('/__') !== -1) return;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [ext, key] = name.split('.').reverse();
+    const [ext, initkey] = name.split('.').reverse();
+    const key = initkey.replace(/-/gi, '_');
+
     try {
       const content = await fs.readFile(filename).then((f) => f.toString());
 

@@ -41,6 +41,7 @@ export async function build(dirname, options = {}) {
         // console.log(filename, `${buildDirDir}/${name}`);
         return;
       }
+      // if (filename.indexOf('/__') !== -1) return; // TODO: check isDir
       if (filename.indexOf('/__') !== -1) return;
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
