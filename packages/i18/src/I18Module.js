@@ -46,13 +46,14 @@ export class I18Module extends Module {
     localeOrLocales = localeOrLocales.filter((locale) => this.hasInstance(locale));
 
     // if (!localeOrLocales.length) {
-    if (!localeOrLocales.length) {
-      if (anyLocale) {
-        if (this.locales.length) {
-          localeOrLocales = this.locales;
-        }
+    if (!localeOrLocales.length && anyLocale) {
+      if (this.locales.length) {
+        localeOrLocales = this.locales;
+      } else {
         return instanceMock;
       }
+    }
+    if (!localeOrLocales.length) {
       if (throwError) {
         throw new Err('!locale', 'cant find current locale in locales', {
           data: { locale: initLocaleOrLocales, locales },
