@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.25.2](https://github.com/lskjs/lskjs/compare/v2.25.1...v2.25.2) (2021-09-17)
+
+
+### Bug Fixes
+
+* **i18:** anyLocale while dont have locale ([ef68a34](https://github.com/lskjs/lskjs/commit/ef68a3478fdd2c92dc422b0882c8e19f13fd5046))
+* **i18:** may be prevent server errors ([64b2d40](https://github.com/lskjs/lskjs/commit/64b2d40103b16e98995cb5bf7612d3cfbb9e89dd))
+
+
+
+
+
 # [2.25.0](https://github.com/lskjs/lskjs/compare/v2.24.0...v2.25.0) (2021-09-12)
 
 **Note:** Version bump only for package @lskjs/i18

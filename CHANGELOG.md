@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.25.2](https://github.com/lskjs/lskjs/compare/v2.25.1...v2.25.2) (2021-09-17)
+
+
+### Bug Fixes
+
+* **creds:** deploy _ bugs ([f4dfce1](https://github.com/lskjs/lskjs/commit/f4dfce1ebca9bfb4ce237ff2efbd26e709a3790b))
+* **i18:** anyLocale while dont have locale ([ef68a34](https://github.com/lskjs/lskjs/commit/ef68a3478fdd2c92dc422b0882c8e19f13fd5046))
+* **i18:** may be prevent server errors ([64b2d40](https://github.com/lskjs/lskjs/commit/64b2d40103b16e98995cb5bf7612d3cfbb9e89dd))
+
+
+
+
+
 ## [2.25.1](https://github.com/lskjs/lskjs/compare/v2.25.0...v2.25.1) (2021-09-14)
 
 
