@@ -2,6 +2,19 @@
 import { isClient } from '@lskjs/env';
 import isAbsoluteExternalUrl from '@lskjs/utils/isAbsoluteExternalUrl';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
+import get from 'lodash/get';
+
+function getIp(config) {
+  const { req } = get(config, '__parent.__parent') || {};
+  const ip = get(req, 'headers.x-forwarded-for') || get(req, 'socket.remoteAddress') || get(req, 'ip');
+  if (!ip) {
+    console.error('!!uapp.ApiModule.adapter.getIp', { ip }, req);
+    return '127.0.0.1';
+  }
+  if (typeof ip === 'string' && ip.includes('127.0.0.1')) return '127.0.0.1';
+  if (['127.0.0.1', '::ffff:127.0.0.1', '::1'].includes(ip)) return '127.0.0.1';
+  return ip;
+}
 
 export async function adapter(config) {
   // console.log('adapter FETCH START', config);
@@ -18,6 +31,7 @@ export async function adapter(config) {
   // config.headers.Authorization;
   const { data: body } = config;
   const req = {
+    ip: getIp(config),
     url,
     path,
     method,
