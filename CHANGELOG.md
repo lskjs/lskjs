@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.25.3](https://github.com/lskjs/lskjs/compare/v2.25.2...v2.25.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* **uapp:** adapter ip ([5b86a34](https://github.com/lskjs/lskjs/commit/5b86a3462fb82cddc63e51c3e20670a4babb25c3))
+
+
+
+
+
 ## [2.25.2](https://github.com/lskjs/lskjs/compare/v2.25.1...v2.25.2) (2021-09-17)
 
 
