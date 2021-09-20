@@ -5,6 +5,7 @@ import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import get from 'lodash/get';
 
 function getIp(config) {
+  // TODO: когда нибудь придумать как сделать получше @isuvorov
   const { req } = get(config, '__parent.__parent') || {};
   const ip = get(req, 'headers.x-forwarded-for') || get(req, 'socket.remoteAddress') || get(req, 'ip');
   if (!ip) {
