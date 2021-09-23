@@ -28,7 +28,7 @@
     "@babel/runtime": "7.12.5",
     "@lskjs/err": "2.23.4",
     "@lskjs/utils": "2.26.0",
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "bluebird": "3.7.2",
     "commander": "5.1.0",
     "csv-parse": "4.9.0",

@@ -29,7 +29,7 @@
     "@lskjs/utils": "2.26.0"
   },
   "devDependencies": {
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "plivo": "4.12.0"
   },
   "peerDependencies": {

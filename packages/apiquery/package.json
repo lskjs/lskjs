@@ -27,7 +27,7 @@
     "socket.io-client": "2.3.0"
   },
   "devDependencies": {
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "chai": "4.2.0",
     "lodash": "4.17.21"
   },
