@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.26.0](https://github.com/lskjs/lskjs/compare/v2.25.3...v2.26.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* uapp todo comment ([eb8a09f](https://github.com/lskjs/lskjs/commit/eb8a09f2ddc7c88595a814bb988d884a8e502da0))
+
+
+
+
+
 ## [2.25.3](https://github.com/lskjs/lskjs/compare/v2.25.2...v2.25.3) (2021-09-20)
 
 

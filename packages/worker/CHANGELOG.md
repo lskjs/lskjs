@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.26.0](https://github.com/lskjs/lskjs/compare/v2.25.3...v2.26.0) (2021-09-23)
+
+**Note:** Version bump only for package @lskjs/worker
+
+
+
+
+
 # [2.25.0](https://github.com/lskjs/lskjs/compare/v2.24.0...v2.25.0) (2021-09-12)
 
 **Note:** Version bump only for package @lskjs/worker

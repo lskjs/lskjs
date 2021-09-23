@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.26.0](https://github.com/lskjs/lskjs/compare/v2.25.3...v2.26.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* **utils:** fix bitToMemory md ([67982d3](https://github.com/lskjs/lskjs/commit/67982d3f26a5dfc61a9d090587fb0ab994c695d5))
+
+
+### Features
+
+* **utils:** add docs bitToMemory and secToTime ([a1ac486](https://github.com/lskjs/lskjs/commit/a1ac4867b26164d742a9f561553b684219259759))
+* **utils:** add isValidObjectId ([8582fec](https://github.com/lskjs/lskjs/commit/8582fecc863f11a883c723f68c320433b7ab3296))
+
+
+
+
+
 # [2.25.0](https://github.com/lskjs/lskjs/compare/v2.24.0...v2.25.0) (2021-09-12)
 
 **Note:** Version bump only for package @lskjs/utils
