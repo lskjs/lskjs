@@ -17,20 +17,6 @@ function getIp(config) {
   return ip;
 }
 
-
-const getIp = (req) => {
-  const ip = (req.headers && req.headers['x-forwarded-for']) || (req.socket && req.socket.remoteAddress) || req.ip;
-  if (typeof ip === 'string' && ip.includes('127.0.0.1')) return '127.0.0.1';
-  if (['127.0.0.1', '::ffff:127.0.0.1', '::1'].includes(ip)) return '127.0.0.1';
-  if (!ip) {
-    console.log('getIp!!!', { ip }, req);
-    return '127.0.0.1';
-  }
-  return ip;
-};
-
-
-
 export async function adapter(config) {
   // console.log('adapter FETCH START', config);
   const path = [config.baseURL, config.url].filter(Boolean).join('');
