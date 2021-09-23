@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 // import debug from 'debug';
 import { isClient, isDev } from '@lskjs/env';
 import { getCode, getMessage, isError } from '@lskjs/err/utils';
@@ -13,6 +14,72 @@ import { omitNull } from './utils/omitNull';
 import { pad } from './utils/pad';
 import { parseLevel } from './utils/parseLevel';
 import { toString } from './utils/toString';
+
+let prettyPathLength = 20;
+const prettyPath = (url: string, defaultUrlPad = 0) => {
+  prettyPathLength = Math.max(url.length, prettyPathLength, defaultUrlPad);
+  return leftPad(url, -prettyPathLength);
+};
+const prettyStatus = (status: number) => {
+  const color =
+    status >= 500
+      ? 'bgRed'
+      : status >= 400
+      ? 'bgYellow'
+      : status >= 300
+      ? 'bgMagenta'
+      : status === 200
+      ? null // 'bgGreen'
+      : 'bgCyan';
+  const res = leftPad(status, 3);
+  if (color) return colors[color](res);
+  return res;
+};
+const prettyReqId = (reqId: number) => leftPad(`#${reqId}`, 3);
+const prettyMethod = (method: string) => {
+  // eslint-disable-next-line no-nested-ternary
+  // const color = method === 'POST' ? 'bgYellow' : method === 'REMOVE' ? 'bgRed' : method === 'WS' ? 'bgCyan' : null;
+  const color = method === 'REMOVE' ? 'bgRed' : method === 'WS' ? 'bgCyan' : null;
+  const res = leftPad(method, 4);
+  if (color) return colors[color](res);
+  return res;
+};
+const prettyTime = (ms: number) => {
+  const color = ms >= 10 * 1000 ? 'bgRed' : ms >= 3 * 1000 ? 'bgYellow' : null;
+
+  let res: string;
+  if (!ms) {
+    res = '-';
+  } else if (ms > 10 * 60 * 1000) {
+    res = `${Math.round(ms / 60 / 1000)}m`;
+  } else if (ms > 1 * 1000) {
+    res = `${Math.round(ms / 1000)}s `;
+  } else {
+    res = `${ms.toFixed(0)}ms`;
+  }
+  res = leftPad(res, 5);
+  if (color) return colors[color](res);
+
+  return leftPad(res, 5);
+};
+const prettySize = (bytes: number, seperator = '') => {
+  const sizes = ['b', 'KB', 'MB', 'GB', 'TB'];
+  if (!bytes) return '-';
+  const i = parseInt(String(Math.floor(Math.log(bytes) / Math.log(1024))), 10);
+  if (i === 0) return `${bytes}${seperator}${sizes[i]}`;
+  return `${(bytes / 1024 ** i).toFixed(1)}${seperator}${sizes[i]}`;
+};
+const prettyUrlLog = (mainArg: any, { level }: { level?: string } = {}) =>
+  [
+    prettyMethod(mainArg.method),
+    prettyPath(mainArg.url),
+    prettyReqId(mainArg.reqId),
+    level !== 'debug' && mainArg.method !== 'WS' ? prettyStatus(mainArg.status) : null,
+    level !== 'debug' && prettyTime(mainArg.duration),
+    level !== 'debug' && mainArg.method !== 'WS' ? prettySize(mainArg.length) : null,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
 // const createRandom = (defaultSeed = Math.random()) => {
 //   let seed = defaultSeed;
@@ -139,8 +206,9 @@ export class Logger implements ILogger {
     return this.color(this.getHashColor(key), marker);
   }
   prettyLog(...args: any[]): void {
+    // console.log('!', ...args)
     const res: string[] = [];
-    let [mainArg] = args;
+    const [mainArg] = args;
     const [, ...otherArgs] = args;
     const level: LoggerLevelType = parseLevel(mainArg) || 'log';
     let message = mainArg.msg || mainArg.message;
@@ -208,34 +276,20 @@ export class Logger implements ILogger {
     }
 
     if (name === 'req') {
-      const urlPad = -20;
-      let msg;
-      if (level === 'debug') {
-        msg = `${leftPad(mainArg.method, 4)} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
-      } else {
-        const t = (mainArg.duration || 0).toFixed(3);
-        const method = leftPad(mainArg.method, 4);
-        const length = mainArg.length || 0;
-        if (mainArg.method === 'WS') {
-          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(t, 7)}ms `;
-        } else {
-          // eslint-disable-next-line max-len
-          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(mainArg.status, 3)} ${leftPad(t, 7)}ms ${length}b `; // eslint-disable-line prettier/prettier
+      res.push(prettyUrlLog(mainArg, { level }));
+      // res.push(message, ...otherArgs);
+    } else {
+      if (typeof message === 'string') {
+        if (['[', '<'].includes(message[0]) && [']', '>'].includes(message[message.length - 1])) {
+          message = this.color(this.getHashColor(message), message);
+        } else if (message.includes('(') || message.includes('[')) {
+          message = this.color('brightWhite', message);
+        } else if (message.length < 20 && otherArgs.length) {
+          message = this.color('white', message);
         }
       }
-      mainArg = msg;
+      res.push(message, ...otherArgs);
     }
-
-    if (typeof message === 'string') {
-      if (['[', '<'].includes(message[0]) && [']', '>'].includes(message[message.length - 1])) {
-        message = this.color(this.getHashColor(message), message);
-      } else if (message.includes('(') || message.includes('[')) {
-        message = this.color('brightWhite', message);
-      } else if (message.length < 20 && otherArgs.length) {
-        message = this.color('white', message);
-      }
-    }
-    res.push(message, ...otherArgs);
 
     this.__logger(...res);
   }
@@ -278,38 +332,20 @@ export class Logger implements ILogger {
       }
       res.push(str);
     }
-
     if (this.name === 'req') {
-      const urlPad = -20;
-      let msg;
-      if (level === 'debug') {
-        msg = `${leftPad(mainArg.method, 4)} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId}`; // + '\x1b[33mYAUEBAN\x1b[0m AZAZA'
-      } else {
-        const time = (mainArg.duration || 0).toFixed(3);
-        const method = leftPad(mainArg.method, 4);
-        const length = mainArg.length || 0;
-        if (mainArg.method === 'WS') {
-          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(time, 7)}ms `;
-        } else {
-          msg = `${method} ${leftPad(mainArg.url, urlPad)} #${mainArg.reqId} ${leftPad(mainArg.status, 3)} ${leftPad(
-            time,
-            7,
-          )}ms ${length}b `;
+      res.push(prettyUrlLog(mainArg, { level }));
+    } else {
+      if (typeof mainArg === 'string') {
+        if (['[', '<'].includes(mainArg[0]) && [']', '>'].includes(mainArg[mainArg.length - 1])) {
+          mainArg = this.color(this.getHashColor(mainArg), mainArg);
+        } else if (mainArg.includes('(') || mainArg.includes('[')) {
+          mainArg = this.color('brightWhite', mainArg);
+        } else if (mainArg.length < 20 && otherArgs.length) {
+          mainArg = this.color('white', mainArg);
         }
       }
-      mainArg = msg;
+      res.push(mainArg, ...otherArgs);
     }
-
-    if (typeof mainArg === 'string') {
-      if (['[', '<'].includes(mainArg[0]) && [']', '>'].includes(mainArg[mainArg.length - 1])) {
-        mainArg = this.color(this.getHashColor(mainArg), mainArg);
-      } else if (mainArg.includes('(') || mainArg.includes('[')) {
-        mainArg = this.color('brightWhite', mainArg);
-      } else if (mainArg.length < 20 && otherArgs.length) {
-        mainArg = this.color('white', mainArg);
-      }
-    }
-    res.push(mainArg, ...otherArgs);
 
     this.__logger(...res);
   }
