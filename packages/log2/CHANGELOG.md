@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.27.0](https://github.com/lskjs/lskjs/compare/v2.26.0...v2.27.0) (2021-09-23)
+
+
+### Features
+
+* **log2:** improve prettyLog ([1ecdffb](https://github.com/lskjs/lskjs/commit/1ecdffb65afbce1d5dbbc3d60c289de60d4ab228))
+
+
+
+
+
 # [2.24.0](https://github.com/lskjs/lskjs/compare/v2.23.6...v2.24.0) (2021-09-12)
 
 **Note:** Version bump only for package @lskjs/log2
