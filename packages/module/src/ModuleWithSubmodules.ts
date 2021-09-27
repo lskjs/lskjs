@@ -1,3 +1,4 @@
+import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Mutex from '@lskjs/mutex';
 import arrayToObject from '@lskjs/utils/arrayToObject';
@@ -12,12 +13,16 @@ import { IAsyncModule } from './IModule.types';
 import { ModuleWithEE } from './ModuleWithEE';
 import { IAsyncModuleKeyValue, IModule, IModuleKeyValue, IModuleWithSubmodules } from './types';
 import { createAsyncModule } from './utils/createAsyncModule';
+import { env } from './utils/env';
 import { filterWildcard } from './utils/filterWildcard';
-
-const mutexMap = {};
 
 // TODO: подумать как сделать не вложенный экспорт
 // const models = await this.app.module(['models.BillingPaymentMethod', 'models.BillingCompany']);
+
+const MODULE_MUTEX_GLOBAL = !!env('LSK_MODULE_MUTEX_GLOBAL', 1);
+const MODULE_MUTEX_TIME = +env('LSK_MODULE_MUTEX_TIME', isDev ? 1000 : 10000);
+
+const globalMutexMap = {};
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
   __availableModules: IAsyncModuleKeyValue = {};
   __initedModules: IModuleKeyValue = {};
@@ -31,6 +36,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
 
   __parent?: IModule;
   modules?: IAsyncModuleKeyValue;
+  mutexMap = MODULE_MUTEX_GLOBAL ? globalMutexMap : {};
 
   getModules(): IAsyncModuleKeyValue {
     return {};
@@ -112,16 +118,16 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     let mutexRelease;
     // console.log({ mutexKey });
     if (!this.__initedModules[name]) {
-      if (!mutexMap[mutexKey]) {
+      if (!this.mutexMap[mutexKey]) {
         // console.log('new Mutex()');
-        mutexMap[mutexKey] = new Mutex();
+        this.mutexMap[mutexKey] = new Mutex();
       }
-      const mutex = mutexMap[mutexKey];
+      const mutex = this.mutexMap[mutexKey];
 
-      if (await mutex.isAsyncLocked(5000, 1)) {
+      if (await mutex.isAsyncLocked(MODULE_MUTEX_TIME, 1)) {
         throw new Err(
           'MODULE_LONG_PARALLEL_INIT',
-          'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
+          // 'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
           {
             data: {
               nameOrNames,
@@ -136,7 +142,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
 
     if (this.__initedModules[name]) {
       if (mutexRelease) mutexRelease();
-      delete mutexMap[mutexKey];
+      delete this.mutexMap[mutexKey];
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const instance = this.__initedModules[name]!;
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
@@ -150,7 +156,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     if (!availableModule) {
       if (!throwIfNotFound) return null;
       throw new Err('MODULE_INJECT_NOT_FOUND', `Module "${name}" not found in module ${this.name}`, {
-        data: { name },
+        data: { name, from: this.name },
       });
     }
     try {
@@ -184,7 +190,7 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
     } finally {
       if (mutexRelease) mutexRelease();
-      delete mutexMap[mutexKey];
+      delete this.mutexMap[mutexKey];
     }
   }
 
