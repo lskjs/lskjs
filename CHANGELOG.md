@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.28.0](https://github.com/lskjs/lskjs/compare/v2.27.0...v2.28.0) (2021-09-27)
+
+
+### Features
+
+* **module:** pass LSK_MODULE_MUTEX_GLOBAL and LSK_MODULE_MUTEX_TIME in env variable ([3df072e](https://github.com/lskjs/lskjs/commit/3df072e6677bf230f1feb8830b757a6de42afca1))
+* **rateLimitter:** init alpha version of module ([241bd44](https://github.com/lskjs/lskjs/commit/241bd44b700884a2e4186bfaa2ea5f752171a585))
+* **redis:** init alpha version of module ([2f4fe66](https://github.com/lskjs/lskjs/commit/2f4fe6690dd098f8ae6f4deec388022613c50cd2))
+
+
+
+
+
 # [2.27.0](https://github.com/lskjs/lskjs/compare/v2.26.0...v2.27.0) (2021-09-23)
 
 
