@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import kleur from 'kleur';
+const kleur = require('kleur');
 
 console.log(kleur.bold().black('BOLD black'));
 console.log(kleur.bold().red('BOLD red'));

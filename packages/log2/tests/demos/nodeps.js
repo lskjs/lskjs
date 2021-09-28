@@ -1,7 +1,4 @@
 /* eslint-disable no-console */
-import chalk from 'chalk';
-
-const ctx = new chalk.Instance({ level: 0 });
 
 /* eslint-disable */
 let FORCE_COLOR, NODE_DISABLE_COLORS, NO_COLOR, TERM, isTTY=true;
@@ -10,7 +7,7 @@ if (typeof process !== 'undefined') {
 	isTTY = process.stdout && process.stdout.isTTY;
 }
 
-export const $ = {
+const $ = {
 	enabled: !NODE_DISABLE_COLORS && NO_COLOR == null && TERM !== 'dumb' && (
 		FORCE_COLOR != null && FORCE_COLOR !== '0' || isTTY
 	)

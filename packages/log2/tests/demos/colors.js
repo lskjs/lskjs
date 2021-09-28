@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
-import colors from 'colors/safe.js';
+const colors = require('colors/safe.js');
+
 
 const colorsArray = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gray'];
 
