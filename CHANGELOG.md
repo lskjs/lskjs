@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.30.1](https://github.com/lskjs/lskjs/compare/v2.30.0...v2.30.1) (2021-09-30)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** message.text ([32cde3f](https://github.com/lskjs/lskjs/commit/32cde3f175042108849752b37a895d14bae82548))
+
+
+
+
+
 # [2.30.0](https://github.com/lskjs/lskjs/compare/v2.29.0...v2.30.0) (2021-09-30)
 
 
