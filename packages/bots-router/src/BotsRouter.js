@@ -77,9 +77,9 @@ export class BotsRouter extends Module {
   //   return this.resolve(ctx);
   // }
 
-  async provide({ user: { locale = 'ru' } = {} }) {
+  async provide({ user: { locale } = {} }) {
     const i18Module = await this.app.module('i18');
-    const i18 = await i18Module.instance(locale);
+    const i18 = await i18Module.instance(locale, { anyLocale: true, throwError: false });
     return {
       app: this.app,
       router: this,
