@@ -40,8 +40,8 @@ export class NotifyPlugin extends BaseBotPlugin {
       isDefault = true;
       project = this.config.projects._default;
     }
-    let msg = message.text;
-    if (this?.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
+    let msg = message && message.text;
+    if (this.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
     if (message.type === 'gitlab') {
       msg = this.gitlab(message, project, bot);
     }
