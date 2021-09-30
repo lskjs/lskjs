@@ -19,8 +19,10 @@ import { filterWildcard } from './utils/filterWildcard';
 // TODO: подумать как сделать не вложенный экспорт
 // const models = await this.app.module(['models.BillingPaymentMethod', 'models.BillingCompany']);
 
-const MODULE_MUTEX_GLOBAL = !!env('LSK_MODULE_MUTEX_GLOBAL', 1);
+const MODULE_MUTEX_GLOBAL = !!env('LSK_MODULE_MUTEX_GLOBAL', 1); // TODO: подумать над неймингом
+const MODULE_MUTEX_INTERVAL = +env('LSK_MODULE_MUTEX_INTERVAL', 1);
 const MODULE_MUTEX_TIME = +env('LSK_MODULE_MUTEX_TIME', isDev ? 1000 : 10000);
+const MODULE_MUTEX_RUN_TIME = +env('LSK_MODULE_MUTEX_RUN_TIME', isDev ? 10000 : 0);
 
 const globalMutexMap = {};
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
@@ -123,8 +125,9 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
         this.mutexMap[mutexKey] = new Mutex();
       }
       const mutex = this.mutexMap[mutexKey];
+      const mutexTime = (isRun ? MODULE_MUTEX_RUN_TIME : MODULE_MUTEX_TIME) || 60 * 1000; // TODO: 1 мин - заместо бесконечности
 
-      if (await mutex.isAsyncLocked(MODULE_MUTEX_TIME, 1)) {
+      if (await mutex.isAsyncLocked(mutexTime, MODULE_MUTEX_INTERVAL)) {
         throw new Err(
           'MODULE_LONG_PARALLEL_INIT',
           // 'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
@@ -132,6 +135,8 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
             data: {
               nameOrNames,
               name: this.name,
+              mutexTime,
+              isRun,
             },
           },
         );
