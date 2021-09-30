@@ -26,6 +26,8 @@ export const apmMock = {
 };
 
 export class RabbitWorkerJob extends Module {
+  static __worker = true;
+  __worker = true;
   redeliveredCount = isDev ? null : 10;
 
   async init() {

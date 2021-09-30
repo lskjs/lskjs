@@ -25,6 +25,12 @@ export class WorkerApp extends Module {
     if (!this.getErrorInfo) this.getErrorInfo = createErrorInfo(this.errors);
     this.on('runFinish', () => this.started());
   }
+  isWorkerClass(WorkerClass) {
+    return !!(WorkerClass && WorkerClass.__worker);
+  }
+  isWorkerJob(WorkerJob) {
+    return !!(WorkerJob && WorkerJob.__workerJob);
+  }
   async worker(nameOrNames) {
     // eslint-disable-next-line no-param-reassign
     if (nameOrNames === '*') nameOrNames = Object.keys(this.availableWorkers || {});
@@ -37,7 +43,7 @@ export class WorkerApp extends Module {
     const config = this.getWorkerConfig(name);
     // TODO: разобраться почему ругается eslint
     // eslint-disable-next-line no-prototype-builtins
-    if (!Worker.isPrototypeOf(CurrentWorker)) {
+    if (!this.isWorkerClass(CurrentWorker)) {
       throw new Err('notInstanceOfWorker', { data: { name } });
     }
     const worker = await CurrentWorker.start({

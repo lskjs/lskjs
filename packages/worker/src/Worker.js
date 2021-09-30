@@ -3,6 +3,8 @@ import Module from '@lskjs/module';
 import prettyStringify from '@lskjs/utils/prettyStringify';
 
 export class Worker extends Module {
+  static __worker = true;
+  __worker = true;
   async getConfig() {
     return {
       autoconnect: true,
