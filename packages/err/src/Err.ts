@@ -5,6 +5,8 @@ import { errUnknown, getCode, getJSON, getMessage, getText, isError } from './ut
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 export const isErr = (err: any): boolean => err instanceof Err;
 
+// TODO: maybe use
+// https://github.com/sindresorhus/serialize-error
 export class Err extends Error implements IErr {
   code?: string;
   __err = true;
