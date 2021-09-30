@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "2.28.0",
+  "version": "2.29.0",
   "description": "LSK.js – utils – helpers and functions",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/utils",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@lskjs/env": "2.28.0",
-    "@lskjs/err": "2.28.0",
+    "@lskjs/err": "2.29.0",
     "@types/bluebird": "3.5.33",
     "@types/lodash": "4.14.167",
     "bluebird": "3.7.2",

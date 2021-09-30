@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/i18",
-  "version": "2.28.0",
+  "version": "2.29.0",
   "description": "LSK module for internationalization with i18next.",
   "keywords": [
     "i18",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@lskjs/env": "2.28.0",
-    "@lskjs/err": "2.28.0",
-    "@lskjs/module": "2.28.0",
+    "@lskjs/err": "2.29.0",
+    "@lskjs/module": "2.29.0",
     "i18next": "19.1.0",
     "i18next-xhr-backend": "3.2.2"
   },
