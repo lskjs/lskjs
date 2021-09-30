@@ -8,9 +8,9 @@ export function graylog(message) {
   } else if (event.message) {
     text = event.message;
   } else {
-    text = '[graylog]';
+    text = `<graylog>`;
   }
-  return `🔸 ${text}`;
+  return `🔸 ${text}\n\n${JSON.stringify(message.meta)}`;
 }
 
 export default graylog;
