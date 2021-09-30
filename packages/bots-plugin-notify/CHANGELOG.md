@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.30.0](https://github.com/lskjs/lskjs/compare/v2.29.0...v2.30.0) (2021-09-30)
+
+
+### Features
+
+* **graylog:** print meta ([2ba3130](https://github.com/lskjs/lskjs/commit/2ba3130517c7fff0c588d6fc8b00716320d185a4))
+
+
+
+
+
 # [2.29.0](https://github.com/lskjs/lskjs/compare/v2.28.0...v2.29.0) (2021-09-30)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-notify
