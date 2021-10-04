@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://github.com/lskjs/lskjs/compare/v2.31.0...v2.32.0) (2021-10-04)
+
+
+### Features
+
+* **proxy:** improve max_tries, add interval ([fb0f932](https://github.com/lskjs/lskjs/commit/fb0f932dfa3ce562f338fbaadd9deeec3f0822c0))
+
+
+
+
+
 # [2.29.0](https://github.com/lskjs/lskjs/compare/v2.28.0...v2.29.0) (2021-09-30)
 
 **Note:** Version bump only for package @lskjs/proxy
