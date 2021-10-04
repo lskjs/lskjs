@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.31.0](https://github.com/lskjs/lskjs/compare/v2.30.1...v2.31.0) (2021-10-04)
+
+
+### Features
+
+* **rabbit:** implement request worker ([e7c1da1](https://github.com/lskjs/lskjs/commit/e7c1da1d891ebef9f4956f15af92b1d14f98ee88))
+
+
+
+
+
 # [2.29.0](https://github.com/lskjs/lskjs/compare/v2.28.0...v2.29.0) (2021-09-30)
 
 
