@@ -40,7 +40,7 @@ export class NotifyPlugin extends BaseBotPlugin {
       isDefault = true;
       project = this.config.projects._default;
     }
-    let msg = message && message.text;
+    let msg = get(message, 'text');
     if (this.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
     if (message.type === 'gitlab') {
       msg = this.gitlab(message, project, bot);
@@ -66,6 +66,7 @@ export class NotifyPlugin extends BaseBotPlugin {
 
     const chats = project[provider] || [];
 
+    if (!msg) throw new Err('!NotifyPlugin.sendNotification.msg');
     return Bluebird.map(chats.filter(Boolean), (chat) => bot.sendMessage(chat, msg, options));
   }
 

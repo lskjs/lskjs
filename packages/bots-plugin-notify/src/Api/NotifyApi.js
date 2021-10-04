@@ -4,6 +4,7 @@ import Api from '@lskjs/server-api';
 import Bluebird from 'bluebird';
 import crypto from 'crypto-js';
 import find from 'lodash/find';
+import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
 
 export class NotifyApi extends Api {
@@ -55,7 +56,7 @@ export class NotifyApi extends Api {
   }
 
   async notify(req) {
-    const projectName = req.data.projectName || req.params.projectName;
+    const projectName = get(req, 'data.projectName') || get(req, 'params.projectName') || '_default';
 
     let project = this.notifyConfig.projects[projectName];
     if (!project) project = this.notifyConfig.projects._default;
@@ -113,7 +114,6 @@ export class NotifyApi extends Api {
       message.type = 'alertmanager';
       message.meta = req.body;
       message.isMd = getBool(req.query.isMd, false);
-      message.isMd = true;
     }
     if (isGraylog) {
       message.event = 'alert';
@@ -122,7 +122,7 @@ export class NotifyApi extends Api {
       message.isMd = getBool(req.query.isMd, false);
     }
 
-    const { text, md } = req.data;
+    const { text, md } = get(req, 'data', {});
     if (text) {
       message.text = text;
     }

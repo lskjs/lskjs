@@ -23,16 +23,16 @@ const alertLog = (
 ) => `\
 ${getStatus({ status, severity })} ${bot.formatCode(alertname)}
 
-${description}
+${bot.ignoreMd(description)}
 
-${grafana ? `\n[grafana](${grafana})` : ''}\
+${grafana ? `\n${bot.formatLink('grafana', grafana)}` : ''}\
 `;
 
 const alertsLog = ({ alerts }, bot) => alerts.map((alert) => alertLog(alert, bot)).join('\n\n------\n\n');
 
 export function alertmanager(message, bot) {
   if (this?.debug) this.log.trace('alertmanager.message', message);
-  alertsLog(message.meta, bot);
+  return alertsLog(message.meta, bot);
 }
 
 export default alertmanager;
