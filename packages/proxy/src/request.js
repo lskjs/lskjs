@@ -4,6 +4,7 @@ import retry from '@lskjs/utils/retry';
 import axios from 'axios';
 
 import { ProxyManager } from './ProxyManager';
+import { isNetworkError } from './utils/isNetworkError';
 import { parseProxyParam } from './utils/parseProxyParam';
 
 let proxyManager;
@@ -22,61 +23,36 @@ export const initProxyManager = async () => {
 };
 if (process.env.PROXY) initProxyManager();
 
-// 'NETWORK_NOT_200',
-// 'NETWORK_JSON_EXPECTED',
-// 'NETWORK_BAN',
-// 'NETWORK_RECAPCHA',
-// 'NETWORK_TOO_MANY_REQUESTS',
-// 'PROXY_AUTH_REQUIRED',
-// 'NETWORK_BAN_CAPCHA',
-// 'FETCH_TIMEOUT',
+export const NETWORK_TIMEOUT = isDev ? 1000 : 10000;
+export const NETWORK_TRIES = isDev ? 2 : 5;
+export const NETWORK_INTERVAL = isDev ? 100 : 1000;
 
-const wildcardNetworkErrors = ['PROXY_', 'NETWORK_'];
-const networkErrors = [
-  'ECONNRESET',
-  'ECONNREFUSED',
-  'TIMEOUT_RESPONSE_TEXT',
-  'SELF_SIGNED_CERT_IN_CHAIN',
-  'EHOSTUNREACH',
-  'UNABLE_TO_GET_ISSUER_CERT_LOCALLY',
-  'EPROTO',
-  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
-  'CERT_HAS_EXPIRED',
-  'EAI_AGAIN',
-  'Z_BUF_ERROR',
-  'ENETUNREACH',
-  'ERR_TLS_CERT_ALTNAME_INVALID',
-];
-
-export const MAX_NETWORK_TIMEOUT = isDev ? 1000 : 15000;
-export const MAX_NETWORK_TRIES = isDev ? 2 : 10;
 export async function request({
   driver = 'axios',
-  max_tries: maxTries = MAX_NETWORK_TRIES,
-  timeout = MAX_NETWORK_TIMEOUT,
-  proxy,
+  max_tries: maxTries = NETWORK_TRIES,
+  timeout = NETWORK_TIMEOUT,
+  interval = NETWORK_INTERVAL,
+  proxy: initProxy,
   ...params
 }) {
   if (driver !== 'axios') throw new Err('driver not realized yet');
-  let options = { ...params };
-
-  if (!proxy) {
-    if (proxyManager) {
-      // eslint-disable-next-line no-param-reassign
-      proxy = await proxyManager.getProxy();
-    }
-  }
-
-  if (proxy) {
-    options = {
-      ...options,
-      ...proxy.getProviderOptions(driver),
-    };
-  }
-
   let tries = 0;
   return retry(
     async () => {
+      let proxy;
+      if (initProxy) {
+        proxy = initProxy;
+      }
+      if (!proxy && proxyManager) {
+        proxy = await proxyManager.getProxy();
+      }
+      let options = { ...params };
+      if (proxy) {
+        options = {
+          ...params,
+          ...proxy.getProviderOptions(driver),
+        };
+      }
       tries += 1;
       const prefix = tries > 1 ? `[R ${tries}/${maxTries}]` : '[R]';
       const startedAt = new Date();
@@ -101,23 +77,24 @@ export async function request({
         if (proxy) proxy.feedback({ status: 'success', time: Date.now() - startedAt });
 
         return res;
-      } catch (err) {
-        const errCode = Err.getCode(err);
+      } catch (initErr) {
+        const errCode = Err.getCode(initErr);
         if (proxy) proxy.feedback({ status: 'error', err: errCode, time: Date.now() - startedAt });
-
-        // if (err.code && err.message !== 'string') err = err.message; // get erroro from cancel token
         if (proxyManager) proxyManager.log.debug(prefix, 'err', errCode);
-        const isRetry = wildcardNetworkErrors.filter(
-          (w) => errCode && (errCode.startsWith(w).length || networkErrors.includes(errCode)),
-        );
-        // eslint-disable-next-line no-ex-assign
-        if (errCode === 'NETWORK_TIMEOUT') err = new Err('NETWORK_TIMEOUT');
-        if (isRetry) throw err;
+        proxy = null;
+        let err;
+        if (errCode === 'NETWORK_TIMEOUT') {
+          err = new Err('NETWORK_TIMEOUT', { class: 'network' }); // NOTE: потому что ошибка выше source.cancel('NETWORK_TIMEOUT') иначе не кидается
+        } else {
+          err = new Err(err, { class: 'network' });
+        }
+        if (isNetworkError(initErr)) throw err;
         throw retry.StopError(err);
       }
     },
     {
       throw_original: true,
+      interval,
       max_tries: maxTries,
     },
   );
