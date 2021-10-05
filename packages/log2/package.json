@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log2",
-  "version": "2.29.0",
+  "version": "2.33.0",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/log2",
@@ -30,8 +30,8 @@
     "@lskjs/err": "2.29.0",
     "colors": "1.4.0",
     "fast-safe-stringify": "2.0.8",
-    "split": "1.0.1",
     "nanocolors": "0.2.9",
+    "split": "1.0.1",
     "through": "2.3.8"
   },
   "devDependencies": {

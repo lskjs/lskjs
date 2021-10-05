@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://github.com/lskjs/lskjs/compare/v2.32.1...v2.33.0) (2021-10-05)
+
+
+### Bug Fixes
+
+* **worker:** preload elastic and esModels ([71e0dc5](https://github.com/lskjs/lskjs/commit/71e0dc56e1df0cd8f56fc94fb8615976288417db))
+
+
+
+
+
 # [2.32.0](https://github.com/lskjs/lskjs/compare/v2.31.0...v2.32.0) (2021-10-04)
 
 **Note:** Version bump only for package @lskjs/worker

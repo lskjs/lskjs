@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://github.com/lskjs/lskjs/compare/v2.32.1...v2.33.0) (2021-10-05)
+
+
+### Bug Fixes
+
+* **log2:** fix tests ([7010df1](https://github.com/lskjs/lskjs/commit/7010df19fafaa5527568f0dbd5e801563a7e4b9f))
+* **worker:** preload elastic and esModels ([71e0dc5](https://github.com/lskjs/lskjs/commit/71e0dc56e1df0cd8f56fc94fb8615976288417db))
+
+
+### Features
+
+* **log2:** new logger concept ([f393b6a](https://github.com/lskjs/lskjs/commit/f393b6a68948f0354078a298c7aeafdeced628a2))
+* **log:** improve logger cases ([76225a6](https://github.com/lskjs/lskjs/commit/76225a6be705cdc214fcb9a676e95e5709e2bf0e))
+
+
+
+
+
 ## [2.32.1](https://github.com/lskjs/lskjs/compare/v2.32.0...v2.32.1) (2021-10-04)
 
 
