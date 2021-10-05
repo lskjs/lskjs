@@ -2,14 +2,6 @@
 import Logger from './Logger';
 
 process.env.LOG_FORMAT = 'none';
-describe('Logger formats', () => {
-  const log = new Logger();
-  test("log.info(1, '2', 3.3)", () => {
-    log.lastLogArgs = null;
-    log.info(1, '2', 3.3);
-    expect(log.lastLogArgs).toStrictEqual(['info', 1, '2', 3.3]);
-  });
-});
 
 describe('new Logger()', () => {
   const log = new Logger();

@@ -6,7 +6,10 @@ export const tryParamParse = (str, defaultParam) => {
     return str;
   }
   const value = tryJSONparse(str);
-  if (value === undefined) return defaultParam;
+  if (value === undefined) {
+    if (str[0] === '{' || str[0] === '[') return defaultParam;
+    return str;
+  }
   return value;
 };
 

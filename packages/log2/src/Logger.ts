@@ -11,9 +11,9 @@ import { stringify } from './utils/formats';
 import { omitNull } from './utils/omitNull';
 import { toString } from './utils/toString';
 
-const LOG_LEVEL = env('LOG_LEVEL', '');
-const LOG_FORMAT = env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'logrus');
-const LOG_DATA = !!env('LOG_DATA', '0');
+const LOG_LEVEL = () => env('LOG_LEVEL', '');
+const LOG_FORMAT = () => env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'logrus');
+const LOG_DATA = () => !!env('LOG_DATA', '0');
 
 export class Logger implements ILogger {
   prefix: string | null;
@@ -48,7 +48,7 @@ export class Logger implements ILogger {
   canLog(level: string): boolean {
     const logLevel = this.getLevelPriority(level);
     const currentLevel = this.getLevelPriority(this.level);
-    const globalLevel = this.getLevelPriority(LOG_LEVEL);
+    const globalLevel = this.getLevelPriority(LOG_LEVEL());
     return logLevel >= currentLevel && logLevel >= globalLevel;
   }
   fatal(...args: any[]): void {
@@ -110,14 +110,14 @@ export class Logger implements ILogger {
     };
     data.code = getErrCode(args);
     data.msg = createMsg(other);
-    if (LOG_DATA) data.data = args;
+    if (LOG_DATA()) data.data = args;
     data = omitNull(data);
-    if (LOG_FORMAT === 'none') return;
-    if (LOG_FORMAT === 'pretty') {
+    if (LOG_FORMAT() === 'none') return;
+    if (LOG_FORMAT() === 'pretty') {
       prettyLog(this, data, ...other);
       return;
     }
-    this.__logger(toString(stringify(LOG_FORMAT, data, ...other)));
+    this.__logger(toString(stringify(LOG_FORMAT(), data, ...other)));
   }
 }
 
