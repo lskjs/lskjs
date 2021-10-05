@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.33.1](https://github.com/lskjs/lskjs/compare/v2.33.0...v2.33.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* **log:** prepare for migration from log2 to log ([e37f88d](https://github.com/lskjs/lskjs/commit/e37f88ddc48f9a112387926b44f86ed1cf9e1340))
+
+
+
+
+
 # [2.29.0](https://github.com/lskjs/lskjs/compare/v2.28.0...v2.29.0) (2021-09-30)
 
 **Note:** Version bump only for package @lskjs/log

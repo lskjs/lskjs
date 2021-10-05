@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.33.1](https://github.com/lskjs/lskjs/compare/v2.33.0...v2.33.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* **log:** incorrect color config ([4dc629d](https://github.com/lskjs/lskjs/commit/4dc629d4d3447a57584cf39e3a3b3b858b0898b5))
+* **log:** prepare for migration from log2 to log ([e37f88d](https://github.com/lskjs/lskjs/commit/e37f88ddc48f9a112387926b44f86ed1cf9e1340))
+
+
+
+
+
 # [2.33.0](https://github.com/lskjs/lskjs/compare/v2.32.1...v2.33.0) (2021-10-05)
 
 
