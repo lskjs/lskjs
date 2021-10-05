@@ -7,7 +7,6 @@ import importFn from '@lskjs/utils/importFn';
 import get from 'lodash/get';
 
 import { createErrorInfo } from './createErrorInfo';
-import { Worker } from './Worker';
 
 export class WorkerApp extends Module {
   preload = true;
@@ -84,6 +83,8 @@ export class WorkerApp extends Module {
     await super.run();
     if (this.preload) {
       if (this.hasModule('db')) await this.module('db');
+      if (this.hasModule('esModels')) await this.module('esModels');
+      if (this.hasModule('elastic')) await this.module('elastic');
       if (this.hasModule('models')) await this.module('models.*');
     }
     await this.runWorkers();
