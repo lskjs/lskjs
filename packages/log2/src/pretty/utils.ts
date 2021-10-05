@@ -2,7 +2,8 @@
 
 import { color, hashColor } from '../color';
 import { env } from '../utils/env';
-import leftPad from '../utils/leftPad';
+import { hashCode } from '../utils/hashCode';
+import { leftPad } from '../utils/leftPad';
 
 const LOG_VIEW = env('LOG_VIEW', 'short');
 
@@ -63,7 +64,7 @@ export function prettyMarker(key: string): string {
 }
 
 export const prettyLevel = (level = ''): string => {
-  let logLevelStr = LOG_VIEW === 'short' ? (level[0] || '').toLowerCase() : pad(level, 5);
+  let logLevelStr = LOG_VIEW === 'short' ? (level[0] || '').toLowerCase() : leftPad(level, 5);
   logLevelStr = `[${logLevelStr}]`;
   return color(level, logLevelStr);
 };
@@ -71,7 +72,7 @@ export const prettyLevel = (level = ''): string => {
 export const prettyContent = (...args: any[]) => args;
 export const isUrlLog = (mainArg: any) => mainArg.name === 'req' || (mainArg.method && mainArg.url && mainArg.status); // reqId
 
-export const prettyUrl = (mainArg: any, { level }: { level?: string } = {}) =>
+export const prettyUrl = (mainArg: any, { level }: { level?: string | null } = {}) =>
   [
     prettyMethod(mainArg.method),
     prettyPath(mainArg.url),

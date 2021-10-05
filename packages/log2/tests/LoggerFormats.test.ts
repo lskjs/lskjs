@@ -8,7 +8,7 @@ describe('Logger formats', () => {
   //   process.env.LOG_DATA = '1';
   //   log.lastLoggerArgs = null;
   //   log.info(1, '2', 3.3);
-  //   const res = JSON.parse(log.lastLoggerArgs[0]);
+  //   const res = log.lastLoggerArgs[0];
   //   expect(typeof res.time).toStrictEqual('string');
   //   expect(res).toMatchObject({
   //     level: 30,
@@ -20,7 +20,7 @@ describe('Logger formats', () => {
     process.env.LOG_DATA = '1';
     log.lastLoggerArgs = null;
     log.info(1, '2', 3.3);
-    const res = JSON.parse(log.lastLoggerArgs[0]);
+    const res = log.lastLoggerArgs[0];
     expect(typeof res.time).toStrictEqual('number');
     expect(res).toMatchObject({
       level: 'info',
@@ -32,7 +32,7 @@ describe('Logger formats', () => {
     process.env.LOG_DATA = '1';
     log.lastLoggerArgs = null;
     log.info(1, '2', 3.3);
-    const res = JSON.parse(log.lastLoggerArgs[0]);
+    const res = log.lastLoggerArgs[0];
     expect(typeof res.time).toStrictEqual('string');
     expect(res).toMatchObject({
       level: 30,
@@ -44,7 +44,7 @@ describe('Logger formats', () => {
     process.env.LOG_DATA = '1';
     log.lastLoggerArgs = null;
     log.info(1, '2', 3.3);
-    const res = JSON.parse(log.lastLoggerArgs[0]);
+    const res = log.lastLoggerArgs[0];
     expect(typeof res.time).toStrictEqual('string');
     expect(res).toMatchObject({
       level: 'info',

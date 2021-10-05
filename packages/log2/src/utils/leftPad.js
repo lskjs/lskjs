@@ -1,7 +1,7 @@
 /* eslint-disable */
 const cache = ['', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         '];
 
-export default function leftPad(str, len, ch) {
+export function leftPad(str, len, ch) {
   // convert `str` to `string`
   str = `${str}`;
   // `len` is the `pad`'s length now
@@ -39,3 +39,5 @@ export default function leftPad(str, len, ch) {
 
   return reverse ? str + pad : pad + str;
 }
+
+export default leftPad

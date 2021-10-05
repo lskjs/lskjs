@@ -10,6 +10,7 @@ process.stdin
   .pipe(
     through(function (raw) {
       if (!raw) {
+        // @ts-ignore
         this.emit('data', `${raw}\n`);
         return;
       }

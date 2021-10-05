@@ -1,4 +1,5 @@
-import BaseLogger, { LoggerLevelType } from '../src/Logger';
+import BaseLogger from '../src/Logger';
+import { LoggerLevelType } from '../src/types';
 
 export class Logger extends BaseLogger {
   lastLogArgs: any[] | null;

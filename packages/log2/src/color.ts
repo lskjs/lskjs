@@ -1,12 +1,12 @@
-/* eslint-disable no-nested-ternary */
 import nanocolors from 'nanocolors';
 
 import { theme } from './config';
 import hashCode from './utils/hashCode';
 
-export function getColors(name: string): string[] {
+export function getColors(name: string | null): string[] {
+  if (!name) return [];
   // eslint-disable-next-line no-nested-ternary
-  return theme[name] ? theme[name] : colors[name] ? [name] : [];
+  return theme[name] ? theme[name] : nanocolors[name] ? [name] : [];
 }
 
 export function getHashColors(name: string): string[] {
@@ -22,7 +22,7 @@ export function hashColor(name: string, str: string): string {
   }, str);
 }
 
-export function color(name: string, str: string): string {
+export function color(name: string | null, str: string): string {
   const colors = getColors(name);
   return colors.reduce((msg, colorName) => {
     // eslint-disable-next-line no-console

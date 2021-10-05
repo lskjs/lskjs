@@ -3,7 +3,7 @@
 import { isClient, isDev } from '@lskjs/env';
 
 import { levelsPriority } from './config';
-import { prettyLog } from './pretty/prettyLog';
+import { prettyFormat } from './pretty/prettyFormat';
 import { ILogger, ILoggerProps, LoggerLevelType } from './types';
 import { createMsg, getErrCode } from './utils/createMsg';
 import { env } from './utils/env';
@@ -80,6 +80,8 @@ export class Logger implements ILogger {
     this.__log('log', ...args);
   }
   __logger(...args: any[]): void {
+    // eslint-disable-next-line no-param-reassign
+    if (LOG_FORMAT() !== 'none' && LOG_FORMAT() !== 'pretty') args = args.map((arg) => toString(arg));
     // @ts-ignore
     // eslint-disable-next-line no-console
     if (console._log) {
@@ -109,15 +111,16 @@ export class Logger implements ILogger {
       ...mainArg,
     };
     data.code = getErrCode(args);
-    data.msg = createMsg(other);
+    data.msg = createMsg(args);
     if (LOG_DATA()) data.data = args;
     data = omitNull(data);
     if (LOG_FORMAT() === 'none') return;
     if (LOG_FORMAT() === 'pretty') {
-      prettyLog(this, data, ...other);
+      this.__logger(...prettyFormat(this, ...args));
       return;
     }
-    this.__logger(toString(stringify(LOG_FORMAT(), data, ...other)));
+    // console.log({ args, data, str, 'LOG_FORMAT()': LOG_FORMAT() });
+    this.__logger(stringify(LOG_FORMAT(), data, ...other));
   }
 }
 

@@ -23,7 +23,7 @@ export const parseBunyan = (json: any): any => {
 };
 
 export const stringifyLogrus = (json: any): any => {
-  const { level, time } = json;
+  const { level, time, ...props } = json;
   const levelMap = {
     trace: 'trace',
     debug: 'debug',
@@ -36,11 +36,12 @@ export const stringifyLogrus = (json: any): any => {
   return {
     level: levelMap[level],
     time: time.toISOString(),
+    ...props,
   };
 };
 
 export const stringifyLsk = (json: any): any => {
-  const { level, time } = json;
+  const { level, time, ...props } = json;
   const levelMap = {
     trace: 'trace',
     debug: 'debug',
@@ -53,11 +54,12 @@ export const stringifyLsk = (json: any): any => {
   return {
     level: levelMap[level],
     time: +time,
+    ...props,
   };
 };
 
 export const stringifyBunyan = (json: any): any => {
-  const { level, time } = json;
+  const { level, time, ...props } = json;
   const levelMap = {
     trace: 10,
     debug: 20,
@@ -69,17 +71,18 @@ export const stringifyBunyan = (json: any): any => {
   return {
     level: levelMap[level],
     time: time.toISOString(),
+    ...props,
   };
-  if (logFormat === 'bunyan') {
-    data.level = levelsPriority[level];
-  } else {
-    data.level = level;
-  }
-  if (logFormat === 'bunyan' || logFormat === 'logrus') {
-    data.time = time.toISOString();
-  } else {
-    data.time = +time;
-  }
+  // if (logFormat === 'bunyan') {
+  //   data.level = levelsPriority[level];
+  // } else {
+  //   data.level = level;
+  // }
+  // if (logFormat === 'bunyan' || logFormat === 'logrus') {
+  //   data.time = time.toISOString();
+  // } else {
+  //   data.time = +time;
+  // }
 };
 
 // https://github.com/sirupsen/logrus
@@ -123,10 +126,12 @@ export const parseLsk = (json: any): any => {
   };
 };
 
-export function stringify(format, ...args: any): any[] {
+export function stringify(format: string, ...args: any[]): any[] {
+  // @ts-ignore
   if (format === 'bunyan') return stringifyBunyan(...args);
+  // @ts-ignore
   if (format === 'logrus') return stringifyLogrus(...args);
-  // if (format === 'raw') return args;
+  // @ts-ignore
   return stringifyLsk(...args);
 }
 

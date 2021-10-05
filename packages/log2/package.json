@@ -29,15 +29,15 @@
     "@lskjs/env": "2.28.0",
     "@lskjs/err": "2.29.0",
     "colors": "1.4.0",
-    "exeunt": "^1.1.1",
     "fast-safe-stringify": "2.0.8",
     "split": "1.0.1",
+    "nanocolors": "0.2.9",
     "through": "2.3.8"
   },
   "devDependencies": {
+    "@types/split": "1.0.0",
+    "@types/through": "0.0.30",
     "chalk": "4.1.2",
-    "kleur": "4.1.4",
-    "nanocolors": "0.2.9"
-  },
-  "_type": "module"
+    "kleur": "4.1.4"
+  }
 }
