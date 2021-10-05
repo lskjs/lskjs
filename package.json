@@ -18,31 +18,30 @@
     "release:yes": "lsk run release -- --yes",
     "i18": "lsk run i18",
     "build": "lsk run build",
-    "test2": "lsk run test",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "lsk run test",
+    "test:watch": "lsk run test -- --watch"
   },
   "dependencies": {
-    "@babel/cli": "7.15.4",
+    "@babel/cli": "7.15.7",
     "@babel/core": "7.15.5",
     "@lskjs/babel-preset": "2.8.0",
-    "@lskjs/cli": "2.32.0",
-    "babel-jest": "27.1.0",
+    "@lskjs/cli": "2.36.0",
+    "babel-jest": "27.2.4",
     "babel-loader": "8.2.2",
     "lerna": "4.0.0",
-    "typescript": "4.4.2",
-    "webpack": "5.52.0",
-    "webpack-dev-server": "4.1.1"
+    "typescript": "4.4.3",
+    "webpack": "5.56.1",
+    "webpack-dev-server": "4.3.1"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "13.1.0",
+    "@commitlint/config-conventional": "13.2.0",
     "@lskjs/eslint-config": "2.6.0",
-    "@lskjs/utils": "2.5.0",
-    "@types/jest": "27.0.0",
+    "@lskjs/utils": "2.29.0",
+    "@types/jest": "27.0.2",
     "babel-eslint": "10.1.0",
     "eslint": "7.32.0",
-    "husky": "7.0.1",
-    "jest": "27.0.6",
-    "prettier": "2.3.2"
+    "husky": "7.0.2",
+    "jest": "27.2.4",
+    "prettier": "2.4.1"
   }
 }
