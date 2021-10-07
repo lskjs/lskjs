@@ -6,6 +6,15 @@ export interface ILoggerProps {
   name?: string | null;
   level?: string | null;
 }
+export interface ILoggerMessage {
+  code?: any;
+  name?: string | null;
+  ns?: string | null;
+  level?: string | number;
+  time?: string | number;
+  msg?: string;
+  data?: any;
+}
 
 export interface ILogger extends ILoggerProps {
   trace(...args: any[]): void;

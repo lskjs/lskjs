@@ -4,16 +4,17 @@ import { isClient, isDev } from '@lskjs/env';
 
 import { levelsPriority } from './config';
 import { prettyFormat } from './pretty/prettyFormat';
-import { ILogger, ILoggerProps, LoggerLevelType } from './types';
+import { ILogger, ILoggerMessage, ILoggerProps, LoggerLevelType } from './types';
 import { createMsg, getErrCode } from './utils/createMsg';
 import { env } from './utils/env';
 import { stringify } from './utils/formats';
+import { isUrlLog } from './utils/isUrlLog';
 import { omitNull } from './utils/omitNull';
 import { toString } from './utils/toString';
 
 const LOG_LEVEL = () => env('LOG_LEVEL', '');
-const LOG_FORMAT = () => env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'logrus');
-const LOG_DATA = () => !!env('LOG_DATA', '0');
+const LOG_FORMAT = () => env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
+const LOG_DATA = () => !!env('LOG_DATA', 0);
 
 export class Logger implements ILogger {
   prefix: string | null;
@@ -94,33 +95,33 @@ export class Logger implements ILogger {
     }
   }
   __log(level: LoggerLevelType, ...args: any[]): void {
-    const [mainArg, ...other] = args;
-    let data: {
-      code?: any;
-      name?: string | null;
-      ns?: string | null;
-      level?: string | number;
-      time?: string | number;
-      msg?: string;
-      data?: any;
-    } = {
+    const [mainArg, ...otherArgs] = args;
+    let data: ILoggerMessage = {
       name: this.name,
       ns: this.ns,
       level,
       time: new Date(),
-      ...mainArg,
+      // ...mainArg,
     };
-    data.code = getErrCode(args);
-    data.msg = createMsg(args);
-    if (LOG_DATA()) data.data = args;
+    let passArgs = args;
+    if (isUrlLog(mainArg)) {
+      data = {
+        ...mainArg,
+      };
+      // console.log({mainArg})
+      passArgs = otherArgs;
+    }
+    data.code = getErrCode(passArgs);
+    data.msg = createMsg(passArgs);
+    if (LOG_DATA() || LOG_FORMAT() === 'pretty') data.data = passArgs;
     data = omitNull(data);
     if (LOG_FORMAT() === 'none') return;
     if (LOG_FORMAT() === 'pretty') {
-      this.__logger(...prettyFormat(this, ...args));
+      this.__logger(...prettyFormat(this, data));
       return;
     }
     // console.log({ args, data, str, 'LOG_FORMAT()': LOG_FORMAT() });
-    this.__logger(stringify(LOG_FORMAT(), data, ...other));
+    this.__logger(stringify(LOG_FORMAT(), data, ...passArgs));
   }
 }
 

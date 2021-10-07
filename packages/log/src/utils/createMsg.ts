@@ -4,8 +4,9 @@ import { toString } from './toString';
 
 export const getErrCode = (args: any[]) => args.map((arg) => (isError(arg) ? getCode(arg) : null)).filter(Boolean)[0];
 
-export const createMsg = (args: any[]) =>
-  args
+export const createMsg = (args: any[]) => {
+  if (!args.length) return null;
+  return args
     .map((arg) => {
       if (isError(arg)) {
         return getMessage(arg);
@@ -13,5 +14,6 @@ export const createMsg = (args: any[]) =>
       return toString(arg);
     })
     .join(' ');
+};
 
 export default createMsg;

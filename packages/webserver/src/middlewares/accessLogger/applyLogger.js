@@ -46,7 +46,7 @@ export function applyLogger(req, res) {
   }
   data.referer = req.header('referer') || req.header('referrer');
   data.ua = req.header('user-agent');
-  data.ip = getReqIp(req) || '127.0.0.1';
+  data.ip = getReqIp(req);
 
   let startLogger;
   if (isDev) {

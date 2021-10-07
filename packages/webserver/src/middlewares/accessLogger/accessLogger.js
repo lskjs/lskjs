@@ -1,4 +1,4 @@
-import applyLogger from './applyLogger';
+import { applyLogger } from './applyLogger';
 
 export function accessLogger(req, res, next) {
   applyLogger(req, res);

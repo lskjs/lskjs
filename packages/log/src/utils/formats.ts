@@ -42,17 +42,8 @@ export const stringifyLogrus = (json: any): any => {
 
 export const stringifyLsk = (json: any): any => {
   const { level, time, ...props } = json;
-  const levelMap = {
-    trace: 'trace',
-    debug: 'debug',
-    info: 'info',
-    warn: 'warning',
-    error: 'error',
-    fatal: 'fatal',
-    panic: 'panic',
-  };
   return {
-    level: levelMap[level],
+    level,
     time: +time,
     ...props,
   };
@@ -91,7 +82,7 @@ export const isLogrus = (json: any): boolean =>
   json.msg &&
   json.time &&
   json.level &&
-  ['trace', 'debug', 'info', 'warning', 'error', 'fatal', 'panic'].includes(json.time);
+  ['trace', 'debug', 'info', 'warning', 'error', 'fatal', 'panic'].includes(json.level);
 
 export const parseLogrus = (json: any): any => {
   const { level, time, msg, ...props } = json;
@@ -137,8 +128,8 @@ export function stringify(format: string, ...args: any[]): any[] {
 
 export function parse(json: any): any[] {
   if (isBunyan(json)) return [parseBunyan(json)];
-  if (isLogrus(json)) return [parseLogrus(json)];
   if (isLsk(json)) return [parseLsk(json)];
+  if (isLogrus(json)) return [parseLogrus(json)];
   return [json];
 }
 

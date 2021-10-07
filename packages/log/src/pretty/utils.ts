@@ -9,7 +9,7 @@ const LOG_VIEW = env('LOG_VIEW', 'short');
 
 let prettyPathLength = 20;
 export const prettyPath = (url: string, defaultUrlPad = 0) => {
-  prettyPathLength = Math.max(url.length, prettyPathLength, defaultUrlPad);
+  prettyPathLength = Math.max((url && url.length) || 0, prettyPathLength, defaultUrlPad);
   return leftPad(url, -prettyPathLength);
 };
 
@@ -22,8 +22,8 @@ export const prettyStatus = (status: number) => {
       : status >= 300
       ? 'debug'
       : status === 200
-      ? null // 'bgGreen'
-      : 'bgCyan';
+      ? null // eslint-disable-line
+      : 'log';
   return color(colorName, leftPad(status, 3));
 };
 export const prettyReqId = (reqId: number) => leftPad(`#${reqId}`, 3);
@@ -70,7 +70,6 @@ export const prettyLevel = (level = ''): string => {
 };
 
 export const prettyContent = (...args: any[]) => args;
-export const isUrlLog = (mainArg: any) => mainArg.name === 'req' || (mainArg.method && mainArg.url && mainArg.status); // reqId
 
 export const prettyUrl = (mainArg: any, { level }: { level?: string | null } = {}) =>
   [
