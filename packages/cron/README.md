@@ -1,14 +1,14 @@
-# LSK.js – autobind
+# LSK.js – cron
 
-> @lskjs/autobind – LSK ux subrepo: autobind
+> @lskjs/cron – LSK.js – cron – Module for working with cron jobs based on bree-js
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/autobind)](https://www.npmjs.com/package/@lskjs/autobind)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/autobind)](https://www.npmjs.com/package/@lskjs/autobind)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/autobind)](https://bundlephobia.com/result?p=@lskjs/autobind)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/autobind)](https://www.npmjs.com/package/@lskjs/autobind)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/autobind)](https://bundlephobia.com/result?p=@lskjs/autobind)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/autobind)](https://bundlephobia.com/result?p=@lskjs/autobind)
+[![NPM version](https://badgen.net/npm/v/@lskjs/cron)](https://www.npmjs.com/package/@lskjs/cron)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/cron)](https://www.npmjs.com/package/@lskjs/cron)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/cron)](https://bundlephobia.com/result?p=@lskjs/cron)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/cron)](https://www.npmjs.com/package/@lskjs/cron)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/cron)](https://bundlephobia.com/result?p=@lskjs/cron)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/cron)](https://bundlephobia.com/result?p=@lskjs/cron)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/autobind 
+yarn i @lskjs/cron lodash
 
 # npm
-npm i @lskjs/autobind 
+npm i @lskjs/cron lodash
 ```
 
 ***

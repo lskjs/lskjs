@@ -1,5 +1,5 @@
 {
-  "name": "@lskjs/log",
+  "name": "@lskjs/log2",
   "version": "2.33.1",
   "description": "LSK log.",
   "keywords": [],
@@ -25,6 +25,6 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/log": "2.33.1"
+    "@lskjs/log": "2.33.2"
   }
 }

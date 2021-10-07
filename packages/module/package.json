@@ -30,7 +30,7 @@
   "dependencies": {
     "@lskjs/env": "2.28.0",
     "@lskjs/err": "2.29.0",
-    "@lskjs/log": "2.33.1",
+    "@lskjs/log": "2.33.2",
     "@lskjs/mutex": "2.28.0",
     "@lskjs/utils": "2.29.0",
     "colors": "1.4.0",

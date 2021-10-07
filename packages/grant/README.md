@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/grant @lskjs/server-api bluebird lodash
+yarn i @lskjs/grant @lskjs/server-api bluebird lodash mobx
 
 # npm
-npm i @lskjs/grant @lskjs/server-api bluebird lodash
+npm i @lskjs/grant @lskjs/server-api bluebird lodash mobx
 ```
 
 ***

@@ -1,14 +1,14 @@
-# LSK.js – log
+# LSK.js – log2
 
-> @lskjs/log – LSK log.
+> @lskjs/log2 – LSK log.
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/log)](https://www.npmjs.com/package/@lskjs/log)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/log)](https://www.npmjs.com/package/@lskjs/log)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/log)](https://bundlephobia.com/result?p=@lskjs/log)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/log)](https://www.npmjs.com/package/@lskjs/log)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/log)](https://bundlephobia.com/result?p=@lskjs/log)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/log)](https://bundlephobia.com/result?p=@lskjs/log)
+[![NPM version](https://badgen.net/npm/v/@lskjs/log2)](https://www.npmjs.com/package/@lskjs/log2)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/log2)](https://www.npmjs.com/package/@lskjs/log2)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/log2)](https://bundlephobia.com/result?p=@lskjs/log2)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/log2)](https://www.npmjs.com/package/@lskjs/log2)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/log2)](https://bundlephobia.com/result?p=@lskjs/log2)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/log2)](https://bundlephobia.com/result?p=@lskjs/log2)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -43,10 +43,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/log axios
+yarn i @lskjs/log2 
 
 # npm
-npm i @lskjs/log axios
+npm i @lskjs/log2 
 ```
 
 ***

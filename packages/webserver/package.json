@@ -27,7 +27,7 @@
   "dependencies": {
     "@lskjs/env": "2.28.0",
     "@lskjs/err": "2.29.0",
-    "@lskjs/log": "2.33.1",
+    "@lskjs/log": "2.33.2",
     "@lskjs/module": "2.33.1",
     "@lskjs/utils": "2.29.0",
     "accept-language-parser": "1.5.0",
@@ -40,10 +40,10 @@
     "emotion-theming": "10.0.27",
     "express": "4.17.1",
     "express-jwt": "6.1.0",
-    "fast-safe-stringify": "2.0.8",
-    "nanoid": "3.1.25",
+    "fast-safe-stringify": "2.1.1",
+    "nanoid": "3.1.29",
     "portfinder": "1.0.28",
-    "socket.io": "4.1.3",
+    "socket.io": "4.2.0",
     "socket.io-as-promised": "1.0.0",
     "socket.io-redis": "6.1.1"
   },
@@ -53,11 +53,11 @@
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.21",
-    "supertest": "6.1.5"
+    "supertest": "6.1.6"
   },
   "peerDependencies": {
-    "@lskjs/db": "2.x",
-    "@lskjs/i18": "2.x",
+    "@lskjs/db": "2.33.1",
+    "@lskjs/i18": "2.33.1",
     "axios": "0.21.x",
     "bluebird": "3.7.x",
     "lodash": "4.17.x"

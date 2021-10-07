@@ -1,21 +1,20 @@
-# LSK.js – cli-sample
+# LSK.js – lskjs
 
-> @lskjs/cli-sample – LSK.js – command line interface scripts
+> @lskjs/lskjs – LSK.js – command line interface scripts
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/cli-sample)](https://www.npmjs.com/package/@lskjs/cli-sample)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/cli-sample)](https://www.npmjs.com/package/@lskjs/cli-sample)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/cli-sample)](https://bundlephobia.com/result?p=@lskjs/cli-sample)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/cli-sample)](https://www.npmjs.com/package/@lskjs/cli-sample)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/cli-sample)](https://bundlephobia.com/result?p=@lskjs/cli-sample)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/cli-sample)](https://bundlephobia.com/result?p=@lskjs/cli-sample)
+[![NPM version](https://badgen.net/npm/v/@lskjs/lskjs)](https://www.npmjs.com/package/@lskjs/lskjs)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/lskjs)](https://www.npmjs.com/package/@lskjs/lskjs)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/lskjs)](https://bundlephobia.com/result?p=@lskjs/lskjs)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/lskjs)](https://www.npmjs.com/package/@lskjs/lskjs)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/lskjs)](https://bundlephobia.com/result?p=@lskjs/lskjs)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/lskjs)](https://bundlephobia.com/result?p=@lskjs/lskjs)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
 <!-- template file="scripts/templates/preview.md" start -->
 
 <!-- template end -->
-
 
 ***
 
@@ -67,10 +66,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/cli-sample 
+yarn i @lskjs/lskjs 
 
 # npm
-npm i @lskjs/cli-sample 
+npm i @lskjs/lskjs 
 ```
 
 ***

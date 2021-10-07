@@ -32,10 +32,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/getspreadsheet axios bluebird lodash
+yarn i @lskjs/getspreadsheet bluebird lodash
 
 # npm
-npm i @lskjs/getspreadsheet axios bluebird lodash
+npm i @lskjs/getspreadsheet bluebird lodash
 ```
 
 ***

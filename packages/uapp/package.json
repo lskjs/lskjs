@@ -61,8 +61,8 @@
   },
   "peerDependencies": {
     "@lskjs/i18": "2.x",
-    "@lskjs/link": "1.x",
-    "@lskjs/scroll": "1.x",
+    "@lskjs/link": "2.x",
+    "@lskjs/scroll": "2.x",
     "axios": "0.21.x",
     "bluebird": "3.7.x",
     "lodash": "4.17.x",

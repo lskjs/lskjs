@@ -1,13 +1,13 @@
 {
-  "name": "@lskjs/log2",
-  "version": "2.33.1",
+  "name": "@lskjs/log",
+  "version": "2.33.2",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/log2",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "bin": {
-    "lsklog": "./bin/lsklog.js"
+    "lsklog": "./bin/cli.js"
   },
   "scripts": {
     "bootstrap": "lsk run bootstrap",

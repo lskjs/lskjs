@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@lskjs/bots-plugin": "2.33.1",
-    "@lskjs/err": "2.19.1",
+    "@lskjs/err": "2.29.0",
     "@lskjs/module": "2.33.1",
     "@lskjs/server-api": "2.33.1",
     "@lskjs/utils": "2.29.0",

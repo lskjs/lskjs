@@ -1,14 +1,14 @@
-# LSK.js – 
+# LSK.js – log
 
-> @lskjs/ – Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.
+> @lskjs/log – Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/)](https://www.npmjs.com/package/@lskjs/)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/)](https://www.npmjs.com/package/@lskjs/)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/)](https://bundlephobia.com/result?p=@lskjs/)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/)](https://www.npmjs.com/package/@lskjs/)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/)](https://bundlephobia.com/result?p=@lskjs/)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/)](https://bundlephobia.com/result?p=@lskjs/)
+[![NPM version](https://badgen.net/npm/v/@lskjs/log)](https://www.npmjs.com/package/@lskjs/log)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/log)](https://www.npmjs.com/package/@lskjs/log)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/log)](https://bundlephobia.com/result?p=@lskjs/log)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/log)](https://www.npmjs.com/package/@lskjs/log)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/log)](https://bundlephobia.com/result?p=@lskjs/log)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/log)](https://bundlephobia.com/result?p=@lskjs/log)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -66,10 +66,10 @@
 
 ```sh
 # yarn
-yarn i @lskjs/ 
+yarn i @lskjs/log 
 
 # npm
-npm i @lskjs/ 
+npm i @lskjs/log 
 ```
 
 ***
