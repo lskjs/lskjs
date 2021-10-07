@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.35.0](https://github.com/lskjs/lskjs/compare/v2.34.0...v2.35.0) (2021-10-07)
+
+
+### Features
+
+* **log:** improve logger connor cases ([167b815](https://github.com/lskjs/lskjs/commit/167b815a8d73d995e9f73a1f0d91d3c780d83141))
+
+
+
+
+
 # [2.34.0](https://github.com/lskjs/lskjs/compare/v2.33.1...v2.34.0) (2021-10-07)
 
 
