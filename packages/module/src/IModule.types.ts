@@ -1,4 +1,4 @@
-import { ILogger as ILog } from '@lskjs/log2/types';
+import { ILogger as ILog } from '@lskjs/log/types';
 
 import { IEventEmitter } from './IEventEmitter.types';
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-import Logger from '@lskjs/log2';
+import Logger from '@lskjs/log';
 import debounce from 'lodash/debounce';
 import groupBy from 'lodash/groupBy';
 import mapValues from 'lodash/mapValues';

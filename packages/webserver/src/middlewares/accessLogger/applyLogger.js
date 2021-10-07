@@ -1,11 +1,11 @@
-import Log from '@lskjs/log2';
+import Log from '@lskjs/log';
 import { isDev } from '@lskjs/utils/env';
 // import leftPad from '@lskjs/utils/leftPad';
 import omit from 'lodash/omit';
 
 import { getReqIp } from '../../helpers/getReqIp';
 
-const log2 = new Log({ name: 'req' });
+const log2 = new Log({ name: 'req' }); // TODO: подумать нужно ли создавать или надо наследоваться
 
 export function levelFn(data, status) {
   if (data.method === 'WS') {

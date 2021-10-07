@@ -132,7 +132,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** set default log format ([c9822d9](https://github.com/lskjs/lskjs/tree/master/packages/err/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
+* **log:** set default log format ([c9822d9](https://github.com/lskjs/lskjs/tree/master/packages/err/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
 
 
 
@@ -161,4 +161,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **err:** create err package ([8ada0c7](https://github.com/lskjs/lskjs/tree/master/packages/err/commit/8ada0c7ca5bf57b123918967df5fedc1dda18fe7))
-* **log2:** new logger behaviour ([e9216b3](https://github.com/lskjs/lskjs/tree/master/packages/err/commit/e9216b3917bf90113e91946ca57bf135da748de6))
+* **log:** new logger behaviour ([e9216b3](https://github.com/lskjs/lskjs/tree/master/packages/err/commit/e9216b3917bf90113e91946ca57bf135da748de6))

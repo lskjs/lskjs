@@ -1,20 +1,2 @@
-#!/usr/bin/env node
-import split from 'split';
-import through from 'through';
-
-import { log } from './log';
-import { prettyRawLog } from './pretty/prettyRawLog';
-
-process.stdin
-  .pipe(split())
-  .pipe(
-    through(function (raw) {
-      if (!raw) {
-        // @ts-ignore
-        this.emit('data', `${raw}\n`);
-        return;
-      }
-      prettyRawLog(log, raw);
-    }),
-  )
-  .pipe(process.stdout);
+export * from '@lskjs/log/cli';
+export { default } from '@lskjs/log/cli';

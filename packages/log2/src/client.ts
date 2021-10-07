@@ -1,2 +1,2 @@
-export * from './Logger';
-export { default } from './Logger';
+export * from '@lskjs/log/client';
+export { default } from '@lskjs/log/client';

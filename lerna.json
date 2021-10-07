@@ -57,6 +57,7 @@
     "packages/grant",
     "packages/i18",
     "packages/kafka",
+    "packages/log",
     "packages/log2",
     "packages/mailer",
     "packages/mobx",

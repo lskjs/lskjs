@@ -234,9 +234,9 @@ module.exports = {
       description: 'LSK log.',
     },
     {
-      name: '@lskjs/log2',
-      title: 'log2',
-      url: 'packages/log2',
+      name: '@lskjs/log',
+      title: 'log',
+      url: 'packages/log',
       description: 'Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.',
     },
     {

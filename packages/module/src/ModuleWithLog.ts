@@ -1,5 +1,5 @@
-import { Logger as Log } from '@lskjs/log2';
-import { ILogger as ILog } from '@lskjs/log2/types';
+import { Logger as Log } from '@lskjs/log';
+import { ILogger as ILog } from '@lskjs/log/types';
 import get from 'lodash/get';
 
 import { ModuleWithConfig } from './ModuleWithConfig';

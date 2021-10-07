@@ -1,8 +1,8 @@
 import { isDev } from '@lskjs/env';
+import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import Mutex from '@lskjs/mutex';
 import avg from '@lskjs/utils/avg';
-import Err from '@lskjs/err';
 import inc from '@lskjs/utils/inc';
 import axios from 'axios';
 import countBy from 'lodash/countBy';
@@ -40,9 +40,9 @@ export class ProxyManager extends Module {
   async init() {
     await super.init();
     if (!this.strategy) {
-      this.log.fatal('this.config.strategy', this.config.strategy);
       let strategy = this.config.strategy || 'random';
       if (!this.strategies[strategy]) strategy = 'random';
+      this.log.warn('setDefaultStratefy', strategy);
       this.strategy = this.strategies[strategy];
       this.log.debug('use strategy', strategy);
     }

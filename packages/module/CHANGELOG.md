@@ -207,7 +207,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **log2:** errors ([62454bc](https://github.com/lskjs/lskjs/commit/62454bcb3dea2fbe84f39a3243903973465654c0))
+* **log:** errors ([62454bc](https://github.com/lskjs/lskjs/commit/62454bcb3dea2fbe84f39a3243903973465654c0))
 * **permit:** fix store path ([fffeefd](https://github.com/lskjs/lskjs/commit/fffeefdead4aed6eb021e6eaa6c9111160651177))
 
 

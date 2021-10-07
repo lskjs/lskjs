@@ -1,3 +1,2 @@
-export * from './types';
-export * from './Logger';
-export { default } from './Logger';
+export * from '@lskjs/log';
+export { default } from '@lskjs/log';

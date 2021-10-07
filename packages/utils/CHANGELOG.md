@@ -160,7 +160,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** improve prod logs ([aee1b06](https://github.com/lskjs/ux/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
+* **log:** improve prod logs ([aee1b06](https://github.com/lskjs/ux/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
 
 
 
@@ -193,8 +193,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** improve browser logging ([4a7f7d0](https://github.com/lskjs/ux/commit/4a7f7d0070e86c36d82b61cbddde64c61c82f810))
-* **log2:** improve browser logging ([c941a5f](https://github.com/lskjs/ux/commit/c941a5f855baf018979fbc9a0280585a1a9f5084))
+* **log:** improve browser logging ([4a7f7d0](https://github.com/lskjs/ux/commit/4a7f7d0070e86c36d82b61cbddde64c61c82f810))
+* **log:** improve browser logging ([c941a5f](https://github.com/lskjs/ux/commit/c941a5f855baf018979fbc9a0280585a1a9f5084))
 
 
 

@@ -35,7 +35,7 @@ const lskjs = [
   'launcher',
   'linkall',
   'log',
-  'log2',
+  'log',
   'mailer',
   'mobx',
   'module',

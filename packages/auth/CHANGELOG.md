@@ -217,7 +217,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** improve prod logs ([aee1b06](https://github.com/lskjs/lskjs/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
+* **log:** improve prod logs ([aee1b06](https://github.com/lskjs/lskjs/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
 
 
 

@@ -20,13 +20,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **log2:** fix tests ([7010df1](https://github.com/lskjs/lskjs/commit/7010df19fafaa5527568f0dbd5e801563a7e4b9f))
+* **log:** fix tests ([7010df1](https://github.com/lskjs/lskjs/commit/7010df19fafaa5527568f0dbd5e801563a7e4b9f))
 * **worker:** preload elastic and esModels ([71e0dc5](https://github.com/lskjs/lskjs/commit/71e0dc56e1df0cd8f56fc94fb8615976288417db))
 
 
 ### Features
 
-* **log2:** new logger concept ([f393b6a](https://github.com/lskjs/lskjs/commit/f393b6a68948f0354078a298c7aeafdeced628a2))
+* **log:** new logger concept ([f393b6a](https://github.com/lskjs/lskjs/commit/f393b6a68948f0354078a298c7aeafdeced628a2))
 * **log:** improve logger cases ([76225a6](https://github.com/lskjs/lskjs/commit/76225a6be705cdc214fcb9a676e95e5709e2bf0e))
 
 
@@ -127,7 +127,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** improve prettyLog ([1ecdffb](https://github.com/lskjs/lskjs/commit/1ecdffb65afbce1d5dbbc3d60c289de60d4ab228))
+* **log:** improve prettyLog ([1ecdffb](https://github.com/lskjs/lskjs/commit/1ecdffb65afbce1d5dbbc3d60c289de60d4ab228))
 
 
 
@@ -713,7 +713,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** improve prod logs ([aee1b06](https://github.com/lskjs/lskjs/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
+* **log:** improve prod logs ([aee1b06](https://github.com/lskjs/lskjs/commit/aee1b069bbf9a844ace9e2df0f65dc7fec11f141))
 
 
 
@@ -824,7 +824,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **log2:** errors ([62454bc](https://github.com/lskjs/lskjs/commit/62454bcb3dea2fbe84f39a3243903973465654c0))
+* **log:** errors ([62454bc](https://github.com/lskjs/lskjs/commit/62454bcb3dea2fbe84f39a3243903973465654c0))
 * **permit:** fix store path ([fffeefd](https://github.com/lskjs/lskjs/commit/fffeefdead4aed6eb021e6eaa6c9111160651177))
 
 
@@ -837,8 +837,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **auth:** rewrite stores ([b348bd3](https://github.com/lskjs/lskjs/commit/b348bd3eb62aeb8ab30ce779ab11b6f6695b65b5))
-* **log2:** improve browser logging ([4a7f7d0](https://github.com/lskjs/lskjs/commit/4a7f7d0070e86c36d82b61cbddde64c61c82f810))
-* **log2:** improve browser logging ([c941a5f](https://github.com/lskjs/lskjs/commit/c941a5f855baf018979fbc9a0280585a1a9f5084))
+* **log:** improve browser logging ([4a7f7d0](https://github.com/lskjs/lskjs/commit/4a7f7d0070e86c36d82b61cbddde64c61c82f810))
+* **log:** improve browser logging ([c941a5f](https://github.com/lskjs/lskjs/commit/c941a5f855baf018979fbc9a0280585a1a9f5084))
 * **mobx:** deprecate old stores ([fa37144](https://github.com/lskjs/lskjs/commit/fa371446046ab85fcce6bafceb257446a492786b))
 
 
@@ -1074,14 +1074,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **getspreadsheet:** fix deps ([1671ec0](https://github.com/lskjs/lskjs/commit/1671ec0fce180f94117f6c870dba520bf757ddf3))
-* **log2:** ts errors ([aacc289](https://github.com/lskjs/lskjs/commit/aacc2895d5cadbe69b5b766d6d11bd9ae67ad4c7))
+* **log:** ts errors ([aacc289](https://github.com/lskjs/lskjs/commit/aacc2895d5cadbe69b5b766d6d11bd9ae67ad4c7))
 * **utils:** change interface of omit and pick ([f37766b](https://github.com/lskjs/lskjs/commit/f37766bfb66b350f775c1efd73345d552e9428d3))
 * **webserver:** fix reqUser middleware and pass jwt config ([2cf2c5f](https://github.com/lskjs/lskjs/commit/2cf2c5f513d636428765a7e33762c849b24ec24a))
 
 
 ### Features
 
-* **log2:** improve logger and create CLI logger ([cb7c344](https://github.com/lskjs/lskjs/commit/cb7c344a97f5be4ec2bc988981f842ec3c7c4256))
+* **log:** improve logger and create CLI logger ([cb7c344](https://github.com/lskjs/lskjs/commit/cb7c344a97f5be4ec2bc988981f842ec3c7c4256))
 * **module:** improve logger ([ec36ae4](https://github.com/lskjs/lskjs/commit/ec36ae4b3e1ca3752bf8feb0c3103580b8e7506b))
 * **sequelize:** add models and debug logger ([f44911a](https://github.com/lskjs/lskjs/commit/f44911a80e2dc1d1cf8df927853c07161f08c0ef))
 * **server-api:** refactor isAdmin and isAuth Api methods ([8fb7b0c](https://github.com/lskjs/lskjs/commit/8fb7b0cd2ba562ecbb7194b76fd067f528fe22d7))
@@ -1120,7 +1120,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** implement req loggger and prod serialization ([c3b1656](https://github.com/lskjs/lskjs/commit/c3b165613a1bc7fad1950f9f7448518190226ba5))
+* **log:** implement req loggger and prod serialization ([c3b1656](https://github.com/lskjs/lskjs/commit/c3b165613a1bc7fad1950f9f7448518190226ba5))
 * **server-api:** add async routes in TestApi ([3232b5d](https://github.com/lskjs/lskjs/commit/3232b5d4f5bb1765b6e4e759a372312fc2790b06))
 * **webserver:** safe json serialization and improve access logger ([ec10d88](https://github.com/lskjs/lskjs/commit/ec10d88e81bad99a8eb0bf522e4ebf40e42ee587))
 
@@ -1135,7 +1135,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **env:** init env package ([8f6f2b3](https://github.com/lskjs/lskjs/commit/8f6f2b3a190e37c526f8dda576d4c367a997d371))
 * **err:** add typing ([d48754a](https://github.com/lskjs/lskjs/commit/d48754a99df43dfa6091487ed145e7decb3c69c6))
-* **log2:** add env deps ([40742b9](https://github.com/lskjs/lskjs/commit/40742b97627ca20ef0dec29421cf16926d01f062))
+* **log:** add env deps ([40742b9](https://github.com/lskjs/lskjs/commit/40742b97627ca20ef0dec29421cf16926d01f062))
 * **utils:** separate env package ([5a120f2](https://github.com/lskjs/lskjs/commit/5a120f26a00c969798c87d5e1774736de93928ce))
 
 
@@ -1148,7 +1148,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **db:** ts fixes ([153ab82](https://github.com/lskjs/lskjs/commit/153ab824d3e6d64027fb20604ce7d065189d4900))
-* **log2:** one row json ([97a7939](https://github.com/lskjs/lskjs/commit/97a79399ea7d7665e15609b1ff2182efdc10c4d9))
+* **log:** one row json ([97a7939](https://github.com/lskjs/lskjs/commit/97a79399ea7d7665e15609b1ff2182efdc10c4d9))
 
 
 
@@ -1159,7 +1159,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **log2:** safe stringify ([0f10c06](https://github.com/lskjs/lskjs/commit/0f10c06bb269c178b17f66f547455d7fc6795299))
+* **log:** safe stringify ([0f10c06](https://github.com/lskjs/lskjs/commit/0f10c06bb269c178b17f66f547455d7fc6795299))
 * **webserver:** safe stringify ([d644147](https://github.com/lskjs/lskjs/commit/d6441471fc1b4c59b965eb17c89ca71d15621727))
 
 
@@ -1171,7 +1171,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **log2:** set default log format ([c9822d9](https://github.com/lskjs/lskjs/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
+* **log:** set default log format ([c9822d9](https://github.com/lskjs/lskjs/commit/c9822d914ee9e1db7ebc76e2f73ea24aff457475))
 
 
 
@@ -1201,7 +1201,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **err:** create err package ([8ada0c7](https://github.com/lskjs/lskjs/commit/8ada0c7ca5bf57b123918967df5fedc1dda18fe7))
-* **log2:** new logger behaviour ([e9216b3](https://github.com/lskjs/lskjs/commit/e9216b3917bf90113e91946ca57bf135da748de6))
+* **log:** new logger behaviour ([e9216b3](https://github.com/lskjs/lskjs/commit/e9216b3917bf90113e91946ca57bf135da748de6))
 * **utils:** update err class ([302af1f](https://github.com/lskjs/lskjs/commit/302af1f75698f1a7b7e7a2b58bfc39fdec3af341))
 
 
