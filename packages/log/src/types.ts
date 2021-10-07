@@ -11,8 +11,8 @@ export interface ILoggerMessage {
   name?: string | null;
   ns?: string | null;
   level?: string | number;
-  time?: string | number;
-  msg?: string;
+  time?: string | number | Date;
+  msg?: string | null;
   data?: any;
 }
 
