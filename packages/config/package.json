@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/config",
-  "version": "2.29.0",
+  "version": "2.34.0",
   "description": "LSK config.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/config",
@@ -22,7 +22,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.29.0"
+    "@lskjs/utils": "2.34.0"
   },
   "devDependencies": {
     "lodash": "4.17.21"

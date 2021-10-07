@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log2",
-  "version": "2.33.1",
+  "version": "2.34.0",
   "description": "LSK log.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/log",
@@ -25,6 +25,6 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/log": "2.33.2"
+    "@lskjs/log": "2.34.0"
   }
 }
