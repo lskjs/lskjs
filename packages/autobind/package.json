@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/autobind",
-  "version": "2.36.0",
+  "version": "2.36.1",
   "description": "LSK ux subrepo: autobind",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/autobind",
@@ -25,4 +25,3 @@
     "autobind-decorator": "2.4.0"
   }
 }
- 

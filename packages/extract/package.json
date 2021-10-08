@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/extract",
-  "version": "2.36.0",
+  "version": "2.36.1",
   "description": "База знаний как экстрактить знания из текстов",
   "keywords": [
     "youtube",
@@ -25,4 +25,3 @@
     "watch": "lsk run watch"
   }
 }
- 
