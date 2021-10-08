@@ -1,4 +1,7 @@
-import errMerge from './errMerge';
+// import { isFunction } from 'lodash';
+
+import { copyProps } from './copyProps';
+import { errMerge } from './errMerge';
 import { IErr } from './IErr.types';
 import { errUnknown, getCode, getJSON, getMessage, getText, isError } from './utils';
 
@@ -24,6 +27,7 @@ export class Err extends Error implements IErr {
         }
       } else if (key === 'stack') {
         // TODO: подумать в будущем, может надо сохранять?
+        // TODO: и надо как-то их мерджить
         // @ts-ignore
         this.__parentErrorStack = val;
         // console.log('this.stack', this.stack);
@@ -56,6 +60,12 @@ export class Err extends Error implements IErr {
   }
   static isErr(err: any): boolean {
     return isErr(err);
+  }
+  static copyProps(errTo: IErr, errFrom: any) {
+    copyProps(errTo, errFrom);
+  }
+  copyProps(errFrom: any) {
+    copyProps(this, errFrom);
   }
   getText(): string {
     return getText(this);
