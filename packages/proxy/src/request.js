@@ -83,13 +83,14 @@ export async function request({
         if (proxyManager) proxyManager.log.debug(prefix, 'err', errCode);
         proxy = null;
         let err;
-        if (errCode === 'NETWORK_TIMEOUT') {
-          err = new Err('NETWORK_TIMEOUT', { class: 'network' }); // NOTE: потому что ошибка выше source.cancel('NETWORK_TIMEOUT') иначе не кидается
+        if (isNetworkError(initErr)) {
+          err = new Err('REQUEST_NETWORK', initErr, { subcode: errCode, class: 'network' });
         } else {
-          err = new Err(err, { class: 'network' });
+          err = new Err(initErr);
         }
-        if (isNetworkError(initErr)) throw err;
-        throw retry.StopError(err);
+        Err.copyProps(err, initErr);
+        if (!isNetworkError(initErr)) throw retry.StopError(err); // exit right now
+        throw err; // try one again
       }
     },
     {

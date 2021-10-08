@@ -1,6 +1,6 @@
 import Err from '@lskjs/err';
 
-const wildcardNetworkErrors = ['PROXY_', 'NETWORK_'];
+const wildcardNetworkErrors = ['REQUEST_', 'PROXY_', 'NETWORK_'];
 const networkErrors = [
   'ECONNRESET',
   'ECONNREFUSED',
