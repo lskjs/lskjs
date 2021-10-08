@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/creds",
-  "version": "2.34.0",
+  "version": "2.36.0",
   "description": "LSK creds.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/creds",
@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@lskjs/getspreadsheet": "2.34.0",
-    "@lskjs/utils": "2.34.0",
+    "@lskjs/getspreadsheet": "2.36.0",
+    "@lskjs/utils": "2.36.0",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "commander": "6.2.1",

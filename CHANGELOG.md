@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/lskjs/lskjs/compare/v2.35.0...v2.36.0) (2021-10-08)
+
+
+### Bug Fixes
+
+* **proxy:** pass correct error to top ([8575a28](https://github.com/lskjs/lskjs/commit/8575a2801127392be29d61f26e620a888cb92c2c))
+
+
+### Features
+
+* **err:** add copyProps ([6646ffc](https://github.com/lskjs/lskjs/commit/6646ffcdb4db8b15dd5bd20221e28309988a88dd))
+
+
+
+
+
 # [2.35.0](https://github.com/lskjs/lskjs/compare/v2.34.0...v2.35.0) (2021-10-07)
 
 

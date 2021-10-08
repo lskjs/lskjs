@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/lskjs/lskjs/compare/v2.35.0...v2.36.0) (2021-10-08)
+
+
+### Features
+
+* **err:** add copyProps ([6646ffc](https://github.com/lskjs/lskjs/commit/6646ffcdb4db8b15dd5bd20221e28309988a88dd))
+
+
+
+
+
 # [2.34.0](https://github.com/lskjs/lskjs/compare/v2.33.1...v2.34.0) (2021-10-07)
 
 

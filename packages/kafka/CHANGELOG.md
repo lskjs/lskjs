@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/lskjs/lskjs/compare/v2.35.0...v2.36.0) (2021-10-08)
+
+**Note:** Version bump only for package @lskjs/kafka
+
+
+
+
+
 # [2.35.0](https://github.com/lskjs/lskjs/compare/v2.34.0...v2.35.0) (2021-10-07)
 
 **Note:** Version bump only for package @lskjs/kafka
