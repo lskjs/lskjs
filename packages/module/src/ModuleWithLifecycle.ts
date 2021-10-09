@@ -1,5 +1,6 @@
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
+// @ts-ignore
 import { safeLog } from '@lskjs/log/utils/safeLog';
 import set from 'lodash/set';
 

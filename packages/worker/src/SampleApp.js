@@ -1,6 +1,5 @@
 import Module from '@lskjs/module';
 import { isDev } from '@lskjs/utils/env';
-import { mapValues } from 'lodash';
 
 export class SampleApp extends Module {
   preload = true;
@@ -37,7 +36,7 @@ export class SampleApp extends Module {
   healthchecks() {
     const healthchecks = {};
     Object.keys(this.__initedModules).forEach((moduleName) => {
-      healthchecks[moduleName] = () => {
+      healthchecks[moduleName] = async () => {
         const m = await this.module(moduleName);
         if (!m.healthcheck) return null;
         return m.healthcheck();
