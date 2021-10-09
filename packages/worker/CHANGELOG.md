@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
+
+
+### Bug Fixes
+
+* **worker:** async bug ([22e6c0c](https://github.com/lskjs/lskjs/commit/22e6c0c752578c3c77109c1c09bc9c4b53c2f7a8))
+
+
+### Features
+
+* **worker:** auto healthchecks ([dac66cf](https://github.com/lskjs/lskjs/commit/dac66cf3cae7170a8d2d81cdfc810cb29b92323b))
+
+
+
+
+
 ## [2.36.1](https://github.com/lskjs/lskjs/compare/v2.36.0...v2.36.1) (2021-10-08)
 
 **Note:** Version bump only for package @lskjs/worker

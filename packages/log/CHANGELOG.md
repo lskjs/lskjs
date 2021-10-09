@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
+
+
+### Features
+
+* **log:** move safeLog from module ([c6ad778](https://github.com/lskjs/lskjs/commit/c6ad778aca9ab85bd559a821b1b7080302ce1a34))
+
+
+
+
+
 ## [2.36.1](https://github.com/lskjs/lskjs/compare/v2.36.0...v2.36.1) (2021-10-08)
 
 **Note:** Version bump only for package @lskjs/log

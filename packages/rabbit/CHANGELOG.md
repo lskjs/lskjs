@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
+
+
+### Features
+
+* **rabbit:** healthcheck method ([1bd7ed5](https://github.com/lskjs/lskjs/commit/1bd7ed55f92647ce958e72108d61eed321415f25))
+
+
+
+
+
 ## [2.36.1](https://github.com/lskjs/lskjs/compare/v2.36.0...v2.36.1) (2021-10-08)
 
 **Note:** Version bump only for package @lskjs/rabbit

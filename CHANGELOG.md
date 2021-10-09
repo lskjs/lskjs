@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
+
+
+### Bug Fixes
+
+* **worker:** async bug ([22e6c0c](https://github.com/lskjs/lskjs/commit/22e6c0c752578c3c77109c1c09bc9c4b53c2f7a8))
+
+
+### Features
+
+* **clickhouse:** add healthcheck ([d62fe01](https://github.com/lskjs/lskjs/commit/d62fe017012b6a4eeea9e81e2831cedfb5d0d0e5))
+* **db:** add healthcheck ([1eda6d4](https://github.com/lskjs/lskjs/commit/1eda6d49aabfe34fe08032346bcff6fd984579fe))
+* **elastic:** add healthcheck ([a5c7569](https://github.com/lskjs/lskjs/commit/a5c7569d80174b1a02c41b7832a603d8fcbac546))
+* **log:** move safeLog from module ([c6ad778](https://github.com/lskjs/lskjs/commit/c6ad778aca9ab85bd559a821b1b7080302ce1a34))
+* **rabbit:** healthcheck method ([1bd7ed5](https://github.com/lskjs/lskjs/commit/1bd7ed55f92647ce958e72108d61eed321415f25))
+* **webserver:** add healthcheck ([eb43333](https://github.com/lskjs/lskjs/commit/eb43333b3751a6d02ff7fc51993a695d9000a986))
+* **worker:** auto healthchecks ([dac66cf](https://github.com/lskjs/lskjs/commit/dac66cf3cae7170a8d2d81cdfc810cb29b92323b))
+
+
+
+
+
 ## [2.36.1](https://github.com/lskjs/lskjs/compare/v2.36.0...v2.36.1) (2021-10-08)
 
 **Note:** Version bump only for package @lskjs/lskjs
