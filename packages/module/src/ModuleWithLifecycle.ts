@@ -1,19 +1,12 @@
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
+import { safeLog } from '@lskjs/log/utils/safeLog';
 import set from 'lodash/set';
 
 import { IModule, IModuleConstructor, IModuleLifecycle, IModuleProps, IModuleWithLifecycle } from './types';
 
 // @ts-ignore
 const STRICT_DEBUG = isDev;
-
-const safeLog = (ctx: any, level = 'error', ...args: any[]) => {
-  if (ctx.log && ctx.log[level]) {
-    ctx.log[level](...args);
-  } else {
-    console.error(`[${level[0]}] <${ctx.name || ctx.constructor.name}>`, ...args); // eslint-disable-line no-console
-  }
-};
 
 export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   name: string;

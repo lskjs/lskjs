@@ -71,6 +71,8 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     };
   }
 
+  // TODO: добавить метод какоторый получает статус подмодуля
+
   hasModule(nameOrNames: string | string[]): boolean | { [name: string]: boolean } {
     if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
       // eslint-disable-next-line no-param-reassign
