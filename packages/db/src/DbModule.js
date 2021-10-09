@@ -91,6 +91,10 @@ export class DbModule extends Module {
     this.log.debug('[ready]', maskUriPassword(uri));
     return connection;
   }
+  async healthcheck() {
+    if (!this.client) throw '!client';
+    return this.client.connection.db.command({ ping: 1 }).then(({ operationTime }) => operationTime);
+  }
 }
 
 export default DbModule;
