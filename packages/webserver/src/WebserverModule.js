@@ -196,6 +196,9 @@ export class WebserverModule extends Module {
       }
     });
   }
+  async healthcheck() {
+    return new Promise((resolve) => setTimeout(() => resolve(Date.now())));
+  }
 }
 
 export default WebserverModule;
