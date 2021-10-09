@@ -224,6 +224,13 @@ export class ClickhouseServerModule extends Module {
       throw err;
     }
   }
+  async healthcheck() {
+    if (!this.client) throw '!client';
+    return this.client
+      .query('SELECT now() as res')
+      .toPromise()
+      .then(([{ res }]) => res);
+  }
 }
 
 export default ClickhouseServerModule;
