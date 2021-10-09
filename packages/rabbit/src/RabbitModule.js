@@ -15,6 +15,10 @@ const serializeData = (data = {}) => {
   return JSON.stringify(data);
 };
 
+const noop = () => {
+  //
+};
+
 export class RabbitModule extends Module {
   startGoProc = startGoProc;
   config = {
@@ -45,11 +49,13 @@ export class RabbitModule extends Module {
     }
     this.tryReconnect = false;
   }
-  async createConnection() {
+  async createConnection({ withoutListeners = false } = {}) {
     const { socketOptions = {} } = this.config;
     const connection = await amqp.connect(this.config.uri, { timeout: 10000, ...socketOptions });
-    connection.once('error', this.onError.bind(this));
-    connection.once('close', this.onError.bind(this));
+    if (!withoutListeners) {
+      connection.once('error', this.onError.bind(this));
+      connection.once('close', this.onError.bind(this));
+    }
     return connection;
   }
   async connect() {
@@ -263,6 +269,33 @@ export class RabbitModule extends Module {
     try {
       await this.sendConnection.close();
     } catch (err) {}
+  }
+  async healthcheck() {
+    try {
+      const sendConnection = await this.createConnection({
+        withoutListeners: true,
+      });
+      sendConnection.once('close', noop);
+      sendConnection.once('error', noop);
+      const sendChannel = await sendConnection.createConfirmChannel();
+      sendChannel.once('close', noop);
+      sendChannel.once('error', noop);
+      // TODO не делать ассерт каждый раз
+      await sendChannel.assertQueue('healthcheck');
+      await this.sendToQueue(
+        'healthcheck',
+        {
+          random: Math.random(),
+        },
+        {},
+        sendChannel,
+      );
+      await sendChannel.close();
+      await sendConnection.close();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
