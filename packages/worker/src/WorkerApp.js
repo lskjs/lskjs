@@ -1,5 +1,4 @@
 import Err from '@lskjs/err';
-import Module from '@lskjs/module';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import { isDev } from '@lskjs/utils/env';
@@ -7,11 +6,13 @@ import importFn from '@lskjs/utils/importFn';
 import get from 'lodash/get';
 
 import { createErrorInfo } from './createErrorInfo';
+import { SampleApp } from './SampleApp';
 
-export class WorkerApp extends Module {
+export class WorkerApp extends SampleApp {
   preload = true;
   initedWorkers = {};
   async model(...args) {
+    this.log.warn('app.model deprecated', ...args);
     const modelsModule = await this.module('models');
     return modelsModule.model(...args);
   }
@@ -22,7 +23,6 @@ export class WorkerApp extends Module {
   async init() {
     await super.init();
     if (!this.getErrorInfo) this.getErrorInfo = createErrorInfo(this.errors);
-    this.on('runFinish', () => this.started());
   }
   isWorkerClass(WorkerClass) {
     return !!(WorkerClass && WorkerClass.__worker);
@@ -81,29 +81,7 @@ export class WorkerApp extends Module {
   }
   async run() {
     await super.run();
-    if (this.preload) {
-      if (this.hasModule('db')) await this.module('db');
-      if (this.hasModule('esModels')) await this.module('esModels');
-      if (this.hasModule('elastic')) await this.module('elastic');
-      if (this.hasModule('models')) await this.module('models.*');
-    }
     await this.runWorkers();
-  }
-  async started() {
-    const timing = global.timing ? `[${global.timing()}ms]` : '';
-    const rawAddress = this.webserver && this.webserver.httpInstance.address();
-    let str;
-    if (rawAddress) {
-      const { port, address } = rawAddress;
-      str = `🎃 The ${this.name} is ready at http://${address === '::' ? '127.0.0.1' : address}:${port}/ ${timing}`;
-    } else {
-      str = `🎃 The ${this.name} is ready ${timing}`;
-    }
-    if (isDev) {
-      this.log.info(str);
-    } else {
-      this.log.warn(str);
-    }
   }
 }
 
