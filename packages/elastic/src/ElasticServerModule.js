@@ -136,6 +136,10 @@ export class ElasticServerModule extends Module {
       this.syncAll({ again: true });
     }
   }
+  async healthcheck() {
+    if (!this.client) throw '!client';
+    return this.client.cluster.health().then(({ status }) => status);
+  }
 }
 
 export default ElasticServerModule;
