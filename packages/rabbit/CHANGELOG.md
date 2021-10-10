@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.37.1](https://github.com/lskjs/lskjs/compare/v2.37.0...v2.37.1) (2021-10-10)
+
+
+### Bug Fixes
+
+* **rabbit:** add promiseWithTimeout in cheking ([8f1f6f1](https://github.com/lskjs/lskjs/commit/8f1f6f1925a0ea8e823e5fc32abd45f883b82a18))
+
+
+
+
+
 # [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
 
 
