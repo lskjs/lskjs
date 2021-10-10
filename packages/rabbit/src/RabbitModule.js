@@ -9,6 +9,7 @@ import omit from 'lodash/omit';
 import hash from 'object-hash';
 
 import startGoProc from './startGoProc';
+import { promiseWithTimeout } from './utils/promiseWithTimeout';
 
 const serializeData = (data = {}) => {
   if (typeof data === 'string') return data;
@@ -271,7 +272,8 @@ export class RabbitModule extends Module {
     } catch (err) {}
   }
   async healthcheck() {
-    try {
+    return promiseWithTimeout(async () => {
+      // try {
       const sendConnection = await this.createConnection({
         withoutListeners: true,
       });
@@ -293,9 +295,10 @@ export class RabbitModule extends Module {
       await sendChannel.close();
       await sendConnection.close();
       return true;
-    } catch (e) {
-      return false;
-    }
+      // } catch (e) {
+      //   return false;
+      // }
+    }, 15000);
   }
 }
 
