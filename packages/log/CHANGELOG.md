@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.40.0](https://github.com/lskjs/lskjs/compare/v2.39.1...v2.40.0) (2021-10-11)
+
+
+### Features
+
+* **log:** concat first strings ([65e7071](https://github.com/lskjs/lskjs/commit/65e707111a1384f2e65e1534bf4d09fa2c1059c4))
+
+
+
+
+
 ## [2.39.1](https://github.com/lskjs/lskjs/compare/v2.39.0...v2.39.1) (2021-10-11)
 
 

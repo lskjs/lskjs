@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cron",
-  "version": "2.39.1",
+  "version": "2.40.0",
   "description": "LSK.js – cron – Module for working with cron jobs based on bree-js",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/cron",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@lskjs/err": "2.36.1",
-    "@lskjs/module": "2.39.1",
+    "@lskjs/module": "2.40.0",
     "@lskjs/utils": "2.36.1",
     "@types/lodash": "4.14.172",
     "cron": "1.8.2",
