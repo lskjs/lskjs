@@ -2,10 +2,10 @@
 import { isClient, isServer } from '@lskjs/env';
 
 const processOrNull = isClient ? {} : process;
-const processEnvOrWindow = isClient ? window.env : process.env;
+const processEnvOrWindow = isClient ? window : process.env;
 
 export const isColorSupported =
-  !('NO_COLOR' in processEnvOrWindow || process.argv.includes('--no-color')) &&
+  !('NO_COLOR' in processEnvOrWindow || (isServer && process.argv.includes('--no-color'))) &&
   (isClient ||
     'FORCE_COLOR' in processEnvOrWindow ||
     processOrNull.argv.includes('--color') ||
