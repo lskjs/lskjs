@@ -1,4 +1,5 @@
 import Err from '@lskjs/err';
+import get from 'lodash/get';
 
 const wildcardNetworkErrors = ['REQUEST_', 'PROXY_', 'NETWORK_'];
 const networkErrors = [
@@ -14,7 +15,9 @@ const networkErrors = [
   'EAI_AGAIN',
   'Z_BUF_ERROR',
   'ENETUNREACH',
+  'ERR_SOCKET_CLOSED',
   'ERR_TLS_CERT_ALTNAME_INVALID',
+  'Request failed with status code 429',
 ];
 // TODO: add this errors
 
@@ -59,6 +62,7 @@ const networkErrors = [
 // 'FETCH_TIMEOUT',
 
 export const isNetworkError = (err) => {
+  if (get(err, 'response.status') === 429) return true;
   const errCode = Err.getCode(err) || '';
   if (networkErrors.includes(errCode)) return true;
 
