@@ -1,10 +1,10 @@
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
-// @ts-ignore
 import { safeLog } from '@lskjs/log/utils/safeLog';
 import set from 'lodash/set';
 
 import { IModule, IModuleConstructor, IModuleLifecycle, IModuleProps, IModuleWithLifecycle } from './types';
+import { globalLyfecycleEvent } from './utils/globalLyfecycleEvent';
 
 // @ts-ignore
 const STRICT_DEBUG = isDev;
@@ -64,6 +64,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
 
   async __lifecycleEvent(name: string, value = new Date()): Promise<void> {
     this.__lifecycle[name] = value;
+    globalLyfecycleEvent(this, name, value);
   }
 
   async onInit(): Promise<void> {
