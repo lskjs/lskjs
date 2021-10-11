@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.39.0](https://github.com/lskjs/lskjs/compare/v2.38.0...v2.39.0) (2021-10-11)
+
+
+### Features
+
+* **log:** remove nanocolors, copy implementation ([1321314](https://github.com/lskjs/lskjs/commit/1321314ddc768782a94f6a51c4ff6c6387f79a9c))
+
+
+
+
+
 # [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
 
 
