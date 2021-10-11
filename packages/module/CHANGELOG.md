@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.38.0](https://github.com/lskjs/lskjs/compare/v2.37.1...v2.38.0) (2021-10-11)
+
+
+### Features
+
+* **log:** add globalLyfecycleEvent ([8927c3a](https://github.com/lskjs/lskjs/commit/8927c3a3a692a327a8f2f794a1c116dd42749517))
+
+
+
+
+
 # [2.37.0](https://github.com/lskjs/lskjs/compare/v2.36.1...v2.37.0) (2021-10-09)
 
 
