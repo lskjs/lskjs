@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.42.0](https://github.com/lskjs/lskjs/compare/v2.41.0...v2.42.0) (2021-10-12)
+
+
+### Features
+
+* **module:** improve parallel error protection, add more tests ([c8d0f8a](https://github.com/lskjs/lskjs/commit/c8d0f8aed1717540e814a65c49a7789024674a7d))
+
+
+
+
+
 # [2.41.0](https://github.com/lskjs/lskjs/compare/v2.40.0...v2.41.0) (2021-10-12)
 
 **Note:** Version bump only for package @lskjs/module

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.42.0](https://github.com/lskjs/lskjs/compare/v2.41.0...v2.42.0) (2021-10-12)
+
+
+### Bug Fixes
+
+* **log:** prettyStatus color fix ([be00b47](https://github.com/lskjs/lskjs/commit/be00b472ff23aeb1a0cc2dbd31776488461181cb))
+
+
+### Features
+
+* **log:** add log_format to safeLog ([2c26da8](https://github.com/lskjs/lskjs/commit/2c26da8cd463bf58f7a6b05b514633b904c13a31))
+* **module:** improve parallel error protection, add more tests ([c8d0f8a](https://github.com/lskjs/lskjs/commit/c8d0f8aed1717540e814a65c49a7789024674a7d))
+
+
+
+
+
 # [2.41.0](https://github.com/lskjs/lskjs/compare/v2.40.0...v2.41.0) (2021-10-12)
 
 
