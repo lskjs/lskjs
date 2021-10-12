@@ -8,11 +8,11 @@ export function getColors(name: string | null): string[] {
   return theme[name] ? theme[name] : colors ? (colors[name] ? [name] : []) : [];
 }
 
-export function getHashColors(name: string): string[] {
+export function getHashColors(name: string | number): string[] {
   return theme.randoms[hashCode(name) % theme.randoms.length] || [];
 }
 
-export function hashColor(name: string, str: string): string {
+export function hashColor(name: string | number, str: string): string {
   const hashColors = getHashColors(name);
   return hashColors.reduce((msg, colorName) => {
     const colorFn = colors && colors[colorName] ? colors[colorName] : null;

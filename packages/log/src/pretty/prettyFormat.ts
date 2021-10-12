@@ -23,7 +23,7 @@ export function prettyFormat(log: ILogger, ...args: any[]): string[] {
   const [mainArg] = args;
   const logArgs = mainArg.data || args;
   if (isUrlLog(mainArg)) {
-    return [prettyUrl(mainArg, { level: log.level })];
+    return [prettyUrl(mainArg)];
   }
   const names: string[] = [...(log.ns || '').split(':'), log.name].filter(Boolean).map(String);
   return concatFirstStrings(prettyLevel(mainArg.level), prettyNs(names), ...prettyContent(...logArgs));

@@ -1,2 +1,4 @@
-export const isUrlLog = (mainArg: any) => mainArg.name === 'req' || (mainArg.method && mainArg.url && mainArg.status); // reqId
+export const isUrlLog = (req: any): boolean => Boolean(req.name === 'req' || (req.method && req.host && req.url)); // reqId
+export const isFinalUrlLog = (req: any): boolean =>
+  Boolean(isUrlLog(req) && (req.status || req.duration || req.length));
 export default isUrlLog;

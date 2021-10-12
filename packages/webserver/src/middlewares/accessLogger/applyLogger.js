@@ -50,6 +50,7 @@ export function applyLogger(req, res) {
 
   let startLogger;
   if (isDev) {
+    // TODO: заменить на debug level
     startLogger = setTimeout(() => {
       const args = [data];
       if (req.body && Object.keys(req.body).length) {
@@ -64,6 +65,7 @@ export function applyLogger(req, res) {
     clearTimeout(startLogger);
     data.status = res.statusCode;
     data.length = +res.getHeader('Content-Length');
+    // TODO: подумать как полуить код и сообщение ощибки
 
     const diff = process.hrtime(hrtime);
     data.duration = diff[0] * 1e3 + diff[1] * 1e-6;
