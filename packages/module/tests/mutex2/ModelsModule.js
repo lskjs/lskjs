@@ -1,6 +1,6 @@
 import mapValues from 'lodash/mapValues';
 
-import Module from '../../src';
+import Module from '../../src/Module';
 
 export class ModelsModule extends Module {
   async getModels() {

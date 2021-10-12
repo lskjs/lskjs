@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 
 import { Module } from '../src';
 
+process.env.LOG_FORMAT = 'none';
 // const DEBUG = 1
 
 test('Case #0 — empty config', async () => {
@@ -138,7 +139,7 @@ test('Case #4 — async config from db', async () => {
 
   expect(instanceOk.config).toStrictEqual(resOk);
   expect(instanceNotOk.config).toStrictEqual(resNotOk);
-  expect(err).toStrictEqual('not_ok');
+  expect(err).toStrictEqual(new Err('not_ok'));
 });
 
 test('Case #5 — deep config merging', async () => {

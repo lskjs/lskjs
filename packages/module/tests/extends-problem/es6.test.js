@@ -1,6 +1,8 @@
 /* global test expect describe */
 /* eslint-disable max-classes-per-file */
 
+process.env.LOG_FORMAT = 'none';
+
 class Base {
   name = 'UNKNOWN';
   constructor(props = {}) {

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 /* global test expect */
-import './polyfill';
-
 import App from './AppModule';
+
+process.env.LOG_FORMAT = 'none';
 
 function delay(duration) {
   return new Promise((resolve) => setTimeout(() => resolve(), duration));

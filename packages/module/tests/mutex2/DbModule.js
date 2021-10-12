@@ -1,4 +1,4 @@
-import Module from '../../src';
+import Module from '../../src/Module';
 
 const delay = (duration) => new Promise((resolve) => setTimeout(() => resolve(), duration));
 

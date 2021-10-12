@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Mutex from '@lskjs/mutex';
@@ -19,10 +20,10 @@ import { filterWildcard } from './utils/filterWildcard';
 // TODO: подумать как сделать не вложенный экспорт
 // const models = await this.app.module(['models.BillingPaymentMethod', 'models.BillingCompany']);
 
-const MODULE_MUTEX_GLOBAL = !!env('LSK_MODULE_MUTEX_GLOBAL', 1); // TODO: подумать над неймингом
+const MODULE_MUTEX_GLOBAL = !!env('LSK_MODULE_MUTEX_GLOBAL', 0); // TODO: подумать над неймингом
 const MODULE_MUTEX_INTERVAL = +env('LSK_MODULE_MUTEX_INTERVAL', 1);
 const MODULE_MUTEX_TIME = +env('LSK_MODULE_MUTEX_TIME', isDev ? 1000 : 10000);
-const MODULE_MUTEX_RUN_TIME = +env('LSK_MODULE_MUTEX_RUN_TIME', isDev ? 10000 : 0);
+const MODULE_MUTEX_RUN_TIME = +env('LSK_MODULE_MUTEX_RUN_TIME', isDev ? 4000 : 0);
 
 const globalMutexMap = {};
 export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
@@ -105,8 +106,9 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     if (Array.isArray(nameOrNames)) {
       return asyncMapValues(arrayToObject(nameOrNames), (n: string) => this.module(n) as Promise<IModule>);
     }
+    // console.log(551111);
     let name;
-    let postfix;
+    let postfix: any;
     if (nameOrNames.includes('.')) {
       const [prefix, ...postfixArray] = nameOrNames.split('.');
       name = prefix;
@@ -116,14 +118,17 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
     } else {
       name = nameOrNames;
     }
+    // console.log(552222);
+
     // eslint-disable-next-line no-nested-ternary
     const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
-    const mutexKey = `${this.name}/${name}`;
+    const mutexKey = name;
     let mutexRelease;
-    // console.log({ mutexKey });
+    // console.log({ name: this.name, mutexKey }, this.mutexMap);
     if (!this.__initedModules[name]) {
+      // console.log('mutex', this.__initedModules[name], this.mutexMap[mutexKey]);
       if (!this.mutexMap[mutexKey]) {
-        // console.log('new Mutex()');
+        // console.log('new Mutex()', { name: this.name, mutexKey }, this.mutexMap);
         this.mutexMap[mutexKey] = new Mutex();
       }
       const mutex = this.mutexMap[mutexKey];
@@ -135,8 +140,8 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
           // 'Вы пытаетесь параллельно инициализировать один и тот же модуль и за секунду он не успевает заинититься',
           {
             data: {
-              nameOrNames,
               name: this.name,
+              module: nameOrNames,
               mutexTime,
               isRun,
             },
@@ -152,20 +157,38 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       delete this.mutexMap[mutexKey];
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const instance = this.__initedModules[name]!;
-      if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
+      if (postfix) {
+        return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter }).catch((err) => {
+          throw err;
+          // TODO: подумать о том, как передавать вложенные ошибки
+          // throw new Err('MODULE_INJECT_ERROR', {
+          //   data: {
+          //     name: this.name,
+          //     module: postfix,
+          //     code: Err.getCode(err),
+          //     message: Err.getMessage(err),
+          //     data: err && err.data ? err.data : null,
+          //   },
+          //   err,
+          // });
+        });
+      }
       // @ts-ignore
-      if (getter) return getter(instance);
+      if (getter) return await getter(instance);
       return this.moduleGetter(instance);
     }
 
     if (this.debug) this.log.trace(`debugInfo! module(${name})`, debugInfo);
     const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) {
+      if (mutexRelease) mutexRelease();
+      delete this.mutexMap[mutexKey];
       if (!throwIfNotFound) return null;
       throw new Err('MODULE_INJECT_NOT_FOUND', `Module "${name}" not found in module ${this.name}`, {
-        data: { name, from: this.name },
+        data: { name: this.name, module: name },
       });
     }
+
     try {
       const moduleProps = await this.getModuleProps(name);
       const instance = await createAsyncModule(availableModule, moduleProps);
@@ -190,13 +213,17 @@ export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModu
       this.__initedModules[name] = instance; // TODO: хороший вопрос, стоитл ли сохранять инстанс в кеше даже если run прошел неудачно
       if (postfix) return instance.module(postfix, { run: isRun, throw: throwIfNotFound, getter });
       // @ts-ignore
-      if (getter) return getter(instance);
+      if (getter) return await getter(instance);
       return await this.moduleGetter(instance);
     } catch (err) {
       this.log.fatal(`module(${name})`, err);
-      throw new Err('MODULE_INJECT_ERROR', { data: { name } }, err);
+      throw new Err('MODULE_INJECT_ERROR', {
+        data: { name: this.name, module: name, code: Err.getCode(err), message: Err.getMessage(err) },
+        err,
+      });
     } finally {
       if (mutexRelease) mutexRelease();
+      // console.log('delete mutexMap', { name: this.name, mutexKey }, this.mutexMap); //
       delete this.mutexMap[mutexKey];
     }
   }

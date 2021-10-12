@@ -1,6 +1,6 @@
 import Err from '@lskjs/err';
 
-import Module from '../../src';
+import Module from '../../src/Module';
 
 export class ModelModule extends Module {
   async createModel() {

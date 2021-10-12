@@ -2,7 +2,9 @@
 /* global test expect */
 import App from './AppModule';
 
-test('mutex x1000 ', async () => {
+process.env.LOG_FORMAT = 'none';
+
+test('mutex x1000 times', async () => {
   const app = await App.start({
     modules: {
       db: import('./DbModule'),
@@ -23,8 +25,8 @@ test('mutex x1000 ', async () => {
 
   const db = await app.module('db');
   // const models = await app.module('models').catch(err => console.log({err}));
-  const VideoModel2 = await app.module('models.VideoModel').catch(err => console.log({err}));
-  console.log({ VideoModel2 });
+  const VideoModel2 = await app.module('models.VideoModel').catch((err) => console.log({ err }));
+  // console.log({ VideoModel2 });
 
   const ids = [...Array(1000).keys()];
 
@@ -34,7 +36,7 @@ test('mutex x1000 ', async () => {
   });
 
   const res = await Promise.all(promises);
-  console.log({res})
+  // console.log({ res });
 
   expect(res).toEqual(ids.map((i) => i * i));
 });

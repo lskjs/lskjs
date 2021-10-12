@@ -1,5 +1,4 @@
-
-import Module from '../../src';
+import Module from '../../src/Module';
 
 export class AppModule extends Module {}
 
