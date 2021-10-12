@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "2.40.0",
+  "version": "2.41.0",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.",
   "keywords": [],
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/log2",

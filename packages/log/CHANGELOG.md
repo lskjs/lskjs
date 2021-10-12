@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.41.0](https://github.com/lskjs/lskjs/compare/v2.40.0...v2.41.0) (2021-10-12)
+
+
+### Features
+
+* **log:** improve pretty logger, add more tests ([9158062](https://github.com/lskjs/lskjs/commit/915806283bbe82c5ba21da0c88d58c44485f911e))
+
+
+
+
+
 # [2.40.0](https://github.com/lskjs/lskjs/compare/v2.39.1...v2.40.0) (2021-10-11)
 
 
