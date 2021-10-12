@@ -1,5 +1,5 @@
 /* global test expect */
-import collectExpressReq from '../src/collectExpressReq';
+import { collectExpressReq } from '../src/collectExpressReq';
 
 test('check 0', () => {
   const req = {
@@ -31,5 +31,9 @@ test('check 0', () => {
     port: 1234,
     xhr: true,
     cookies: 'COOKIE=true',
+    headers: undefined,
+
+    locale: undefined,
+    token: undefined,
   });
 });

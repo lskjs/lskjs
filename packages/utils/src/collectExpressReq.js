@@ -1,6 +1,6 @@
 import url from 'url';
 
-export default (req) => {
+export const collectExpressReq = (req) => {
   const formattedUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
   const parsedUrl = url.parse(formattedUrl);
 
@@ -16,7 +16,6 @@ export default (req) => {
     hash: parsedUrl.hash,
     headers: req.headers,
 
-
     ip: req.ip,
     xhr: req.xhr,
     cookies: req.cookies,
@@ -27,4 +26,5 @@ export default (req) => {
   };
 };
 
+export default collectExpressReq;
 // pick(req, ['hostname', 'originalUrl', 'path', 'query', 'ip', 'cookies', 'protocol', 'xhr']);
