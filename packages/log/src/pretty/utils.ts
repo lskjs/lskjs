@@ -25,8 +25,11 @@ export const getStatusLevel = (status: number) =>
       //   ? null // eslint-disable-line
       // : 'log';
       null;
-export const prettyStatus = (status: number) =>
-  color(getStatusLevel(status) || status !== 200 ? 'log' : null, leftPad(status, 3));
+export const prettyStatus = (status: number) => {
+  let level = getStatusLevel(status);
+  if (!level) level = status !== 200 ? 'log' : null;
+  return color(level ? 'log' : null, leftPad(status, 3));
+};
 export const prettyReqId = (reqId: number) => leftPad(`#${reqId}`, 3);
 export const prettyMethod = (method: string) => {
   // eslint-disable-next-line no-nested-ternary
