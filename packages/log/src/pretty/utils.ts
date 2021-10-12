@@ -3,7 +3,7 @@
 import { color, hashColor } from '../color';
 import { env } from '../utils/env';
 import { hashCode } from '../utils/hashCode';
-import { isFinalUrlLog, isUrlLog } from '../utils/isUrlLog';
+import { isFinalUrlLog } from '../utils/isUrlLog';
 import { leftPad } from '../utils/leftPad';
 
 const LOG_VIEW = env('LOG_VIEW', 'short');
@@ -28,7 +28,7 @@ export const getStatusLevel = (status: number) =>
 export const prettyStatus = (status: number) => {
   let level = getStatusLevel(status);
   if (!level) level = status !== 200 ? 'log' : null;
-  return color(level ? 'log' : null, leftPad(status, 3));
+  return color(level, leftPad(status, 3));
 };
 export const prettyReqId = (reqId: number) => leftPad(`#${reqId}`, 3);
 export const prettyMethod = (method: string) => {
