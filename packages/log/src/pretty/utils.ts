@@ -45,15 +45,15 @@ export const prettyTime = (ms: number) => {
   } else if (ms > 10 * 60 * 1000) {
     res = `${Math.round(ms / 60 / 1000)}m`;
   } else if (ms > 1 * 1000) {
-    res = `${Math.round(ms / 1000)}s `;
+    res = `${Math.round(ms / 1000)}s`;
   } else {
-    res = `${ms.toFixed(0)}µs`;
+    res = `${ms.toFixed(0)}µ`;
   }
   res = leftPad(res, 5);
   return color(colorName, leftPad(res, 5));
 };
 export const prettySize = (bytes: number, seperator = '') => {
-  const sizes = ['b', 'KB', 'MB', 'GB', 'TB'];
+  const sizes = ['b', 'k', 'm', 'g', 't'];
   if (!bytes) return '-';
   const i = parseInt(String(Math.floor(Math.log(bytes) / Math.log(1024))), 10);
   if (i === 0) return `${bytes}${seperator}${sizes[i]}`;
@@ -77,7 +77,7 @@ export const prettyLevel = (level = ''): string => {
 export const prettyContent = (...args: any[]) => args;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getUrlLevel = (req: any): string => (getStatusLevel(req.status) || isFinalUrlLog(req) ? 'trace' : 'debug');
+export const getUrlLevel = (req: any): string => (getStatusLevel(req.status) || isFinalUrlLog(req) ? 'debug' : 'trace');
 export const prettyUrl = (req: any): string => {
   const isFinalUrl = isFinalUrlLog(req);
   const level = getUrlLevel(req); // , { level }: { level?: string | null } = {}
@@ -87,10 +87,11 @@ export const prettyUrl = (req: any): string => {
     prettyPath(req.url),
     prettyReqId(req.reqId),
     isFinalUrl && req.method !== 'WS' ? prettyStatus(req.status) : null,
+    !isFinalUrl && '⧗⧖⧗',
     isFinalUrl && prettyTime(req.duration),
     isFinalUrl && req.method !== 'WS' ? prettySize(req.length) : null,
     // !isFinalUrl && '[...]',
-    !isFinalUrl && '⧖…⧗',
+    // !isFinalUrl && '⧖…⧗',
   ]
     .filter(Boolean)
     .join(' ');

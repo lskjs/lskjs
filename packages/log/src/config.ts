@@ -1,4 +1,4 @@
-import { isServer } from '@lskjs/env';
+// import { isServer } from '@lskjs/env';
 
 export const levelsPriority = {
   log: 99,
@@ -41,11 +41,11 @@ export const theme = {
     ['bold', 'blue'],
     ['bold', 'magenta'],
     ['bold', 'cyan'],
-    ['dim', 'red'],
-    ['dim', 'green'],
-    ['dim', 'yellow'],
-    ['dim', 'blue'],
-    ['dim', 'magenta'],
-    ['dim', 'cyan'],
+    // ['dim', 'red'],
+    // ['dim', 'green'],
+    // ['dim', 'yellow'],
+    // ['dim', 'blue'],
+    // ['dim', 'magenta'],
+    // ['dim', 'cyan'],
   ],
 };
