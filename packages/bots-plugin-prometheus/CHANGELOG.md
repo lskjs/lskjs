@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.42.2](https://github.com/lskjs/lskjs/compare/v2.42.1...v2.42.2) (2021-10-14)
+
+**Note:** Version bump only for package @lskjs/bots-plugin-prometheus
+
+
+
+
+
 ## [2.42.1](https://github.com/lskjs/lskjs/compare/v2.42.0...v2.42.1) (2021-10-12)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-prometheus

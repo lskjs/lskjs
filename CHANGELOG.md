@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.42.2](https://github.com/lskjs/lskjs/compare/v2.42.1...v2.42.2) (2021-10-14)
+
+
+### Bug Fixes
+
+* **log:** change random colors ([618914a](https://github.com/lskjs/lskjs/commit/618914a682884da62e57fa27d12d29f8bd9bf685))
+
+
+
+
+
 ## [2.42.1](https://github.com/lskjs/lskjs/compare/v2.42.0...v2.42.1) (2021-10-12)
 
 
