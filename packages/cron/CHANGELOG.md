@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.42.3](https://github.com/lskjs/lskjs/compare/v2.42.2...v2.42.3) (2021-10-18)
+
+
+### Bug Fixes
+
+* **cron:** wrap async onTick ([b5c590a](https://github.com/lskjs/lskjs/commit/b5c590a4b77259e51cc893d26789bd165399707e))
+
+
+
+
+
 ## [2.42.2](https://github.com/lskjs/lskjs/compare/v2.42.1...v2.42.2) (2021-10-14)
 
 **Note:** Version bump only for package @lskjs/cron
