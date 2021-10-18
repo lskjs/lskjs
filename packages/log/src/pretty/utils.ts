@@ -59,7 +59,7 @@ export const prettySize = (bytes: number, seperator = '') => {
   if (i === 0) return `${bytes}${seperator}${sizes[i]}`;
   return `${(bytes / 1024 ** i).toFixed(1)}${seperator}${sizes[i]}`;
 };
-export const prettyNs = (names: string[], mainName: string): string => {
+export const prettyNs = (names: string[], mainName?: string | null): string => {
   // TODO: придумать когда name не очень нужен
   const a = 123; //eslint-disable-line
   return [...names, mainName]
