@@ -29,7 +29,7 @@ describe('Logger strings', () => {
       ip: '::1',
     };
 
-    expect(prettyFormat(log, data)).toMatchObject(['[d] • GET /api/admin/test       #1 ⧖…⧗']);
+    expect(prettyFormat(log, data)).toMatchObject(['[t] • GET /api/admin/test       #1 ⧗⧖⧗']);
   });
   test('req GET', () => {
     const data = {
@@ -49,6 +49,24 @@ describe('Logger strings', () => {
       message: 'errors.ERR_123',
     };
 
-    expect(prettyFormat(log, data)).toMatchObject(['[t] • GET /api/admin/test       #1 500   6s  382b']);
+    expect(prettyFormat(log, data)).toMatchObject(['[d] • GET /api/admin/test       #1 500    6s 382b']);
+  });
+  test('req GET2', () => {
+    const data = {
+      time: null,
+      reqId: '8kpzlhVFUzihr-gdYutvT',
+      method: 'GET',
+      host: 'localhost:8080',
+      url: '/api/healthcheck',
+      ua: 'curl/7.52.1',
+      ip: '::ffff:127.0.0.1',
+      status: 200,
+      length: 295,
+      duration: 2.988399,
+    };
+
+    expect(prettyFormat(log, data)).toMatchObject([
+      '[d] ♦ GET /api/healthcheck     #8kpzlhVFUzihr-gdYutvT 200    3µ 295b',
+    ]);
   });
 });

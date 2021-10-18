@@ -25,8 +25,8 @@ export function prettyFormat(log: ILogger, ...args: any[]): string[] {
   if (isUrlLog(mainArg)) {
     return [prettyUrl(mainArg)];
   }
-  const names: string[] = [...(log.ns || '').split(':'), log.name].filter(Boolean).map(String);
-  return concatFirstStrings(prettyLevel(mainArg.level), prettyNs(names), ...prettyContent(...logArgs));
+  const names: string[] = (log.ns || '').split(':').filter(Boolean).map(String);
+  return concatFirstStrings(prettyLevel(mainArg.level), prettyNs(names, log.name), ...prettyContent(...logArgs));
 }
 
 export default prettyFormat;

@@ -59,7 +59,14 @@ export const prettySize = (bytes: number, seperator = '') => {
   if (i === 0) return `${bytes}${seperator}${sizes[i]}`;
   return `${(bytes / 1024 ** i).toFixed(1)}${seperator}${sizes[i]}`;
 };
-export const prettyNs = (names: string[]): string => names.map((name: string) => hashColor(name, name)).join(':');
+export const prettyNs = (names: string[], mainName: string): string => {
+  // TODO: придумать когда name не очень нужен
+  const a = 123; //eslint-disable-line
+  return [...names, mainName]
+    .filter(Boolean)
+    .map((name: string) => hashColor(name, name))
+    .join(':');
+};
 
 export function prettyMarker(key: string | number): string {
   // https://www.alt-codes.net/
