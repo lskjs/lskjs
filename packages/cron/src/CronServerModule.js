@@ -17,12 +17,14 @@ export class CronServerModule extends Module {
   }
   wrapOnTick(onTick, config) {
     const tick = onTick.bind(this);
-    return () => {
+    return async () => {
       try {
-        tick(config);
+        const res = await tick(config);
         this.log.debug('[ok]', config.name);
+        return res;
       } catch (err) {
         this.log.error('[error]', config.name, err);
+        return { err };
       }
     };
   }
