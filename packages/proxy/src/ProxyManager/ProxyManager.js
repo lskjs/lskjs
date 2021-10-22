@@ -10,10 +10,10 @@ import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import map from 'lodash/map';
 
-import { getProxyAgent } from './getProxyAgent';
-import { Proxy } from './Proxy';
-import strategies from './strategies';
-import { parseProxyParam } from './utils/parseProxyParam';
+import { getProxyAgent } from '../getProxyAgent';
+import { Proxy } from '../Proxy';
+import strategies from '../strategies';
+import { parseProxyParam } from '../utils/parseProxyParam';
 
 export const filterFn = (proxy, filter) => {
   if (filter.ignoreKeys && filter.ignoreKeys.includes(get(proxy, 'key'))) return false;

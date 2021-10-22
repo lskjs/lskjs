@@ -1,58 +1,33 @@
-/* eslint-disable import/no-dynamic-require */
-export function isProxyHub(proxy) {
-  return (proxy.indexOf('http://') === 0 || proxy.indexOf('https://') === 0) && proxy.includes('/proxy');
-}
+import { parseProxies, parseProxy } from './index';
 
-export function getProxyType(proxy) {
+export const isProxyHub = (proxy) =>
+  (proxy.startsWith('http://') || proxy.startsWith('https://')) && proxy.includes('/proxy');
+
+export const getProxyType = (proxy) => {
   if (!proxy) return null;
-  if (proxy[0] === '.') return 'file';
-  if (proxy[0] === '/') return 'file';
+  if (proxy[0] === '.' || proxy[0] === '/') return 'file';
   if (isProxyHub(proxy)) return 'hub';
   return 'proxy';
-}
+};
 
-export function getProxyKey(proxy) {
-  return [proxy.host, proxy.port]
-    .filter(Boolean)
-    .join(':')
-    .replace(/[^a-zA-Z0-9]/g, '_');
-}
+export const parseProxyFromString = parseProxy;
 
-export function parseProxyFromString(proxyStr) {
-  if (typeof proxyStr !== 'string') return proxyStr;
-  let uri = proxyStr;
-  if (!uri.includes('://')) uri = `http://${uri}`;
-  const url = new URL(uri);
-  const type = url.protocol ? url.protocol.substr(0, url.protocol.length - 1) : 'http';
-  const { username: user, password, hostname: host, port } = url;
-
-  const proxy = {
-    type,
-    host,
-    port,
-    uri,
-  };
-  if (user) proxy.user = user;
-  if (password) proxy.password = password;
-  proxy.key = getProxyKey(proxy);
-  return proxy;
-}
-
-export function parseProxyParam(proxyStr) {
+export const parseProxyParam = (proxyStr) => {
   const res = {};
   const proxyType = getProxyType(proxyStr);
   if (proxyType === 'file') {
     if (proxyStr[0] === '.') {
+      // eslint-disable-next-line import/no-dynamic-require
       res.proxies = require(`${process.cwd()}${proxyStr.substr(1)}`).default;
     } else {
+      // eslint-disable-next-line import/no-dynamic-require
       res.proxies = require(proxyStr).default;
     }
   } else if (proxyType === 'proxy') {
-    res.proxies = proxyStr.split(',').map((str) => {
-      const proxy = parseProxyFromString(str);
-      proxy.provider = 'env';
-      return proxy;
-    });
+    res.proxies = parseProxies(proxyStr).map((p) => ({
+      provider: 'env',
+      ...p,
+    }));
   } else if (proxyType === 'hub') {
     const urlObj = new URL(proxyStr);
     res.options = Object.fromEntries(urlObj.searchParams);
@@ -60,6 +35,6 @@ export function parseProxyParam(proxyStr) {
     res.url = urlObj.toString();
   }
   return res;
-}
+};
 
 export default parseProxyParam;
