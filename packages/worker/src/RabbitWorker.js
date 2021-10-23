@@ -1,6 +1,6 @@
 import Err from '@lskjs/err';
+import Stats from '@lskjs/stats';
 import { isDev } from '@lskjs/utils/env';
-import { Stats } from '@lskjs/utils/Stats';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
@@ -142,7 +142,7 @@ export class RabbitWorker extends Worker {
     statsProps.log = this.log.trace.bind(this.log);
     // }
 
-    this.stats = new Stats(statsProps);
+    this.stats = await Stats.create(statsProps);
     this.rabbit = await this.app.module('rabbit');
     const queue = this.config.queue || this.queue;
     if (!queue) {

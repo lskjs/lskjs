@@ -1,17 +1,18 @@
 import { isDev } from '@lskjs/env';
+// import Module from '@lskjs/module';
+import beauty from '@lskjs/utils/beauty';
+import inc from '@lskjs/utils/inc';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import round from 'lodash/round';
 import set from 'lodash/set';
-
-import beauty from '../beauty';
-import inc from '../inc';
 
 const sec = 1000;
 const min = 60 * sec;
 const hour = 60 * min;
 
 export class Stats {
+  // extends Module {
   storages = {};
   // eslint-disable-next-line no-console
   printOptions = {
@@ -33,6 +34,9 @@ export class Stats {
     // day: 24 60 * * 60 * 1000,
     all: 365 * 24 * hour,
   };
+  static create(props) {
+    return new this(props);
+  }
   getStorages(prefix) {
     return this.info.names.map((name) => {
       const key = [prefix, name].filter(Boolean).join('.');
@@ -75,7 +79,6 @@ export class Stats {
 
     return isRemove;
   }
-
   start() {
     return this.run();
   }
