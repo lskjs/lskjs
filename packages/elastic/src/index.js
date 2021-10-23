@@ -1,1 +1,2 @@
-export { default } from './ElasticServerModule';
+export * from './server';
+export { default } from './server';

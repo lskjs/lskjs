@@ -1,2 +1,2 @@
-export * from './RabbitModule';
-export { default } from './RabbitModule';
+export * from './server';
+export { default } from './server';

@@ -1,3 +1,2 @@
-import ScyllaModule from './ScyllaModule';
-
-export default ScyllaModule;
+export * from './server';
+export { default } from './server';

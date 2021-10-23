@@ -1,1 +1,2 @@
-export { default } from './SequelizeServerModule';
+export * from './server';
+export { default } from './server';

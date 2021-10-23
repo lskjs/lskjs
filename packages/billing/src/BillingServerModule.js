@@ -5,7 +5,7 @@ import importFn from '@lskjs/utils/importFn';
 
 import availableProviders from './providers';
 
-export default class BillingServerModule extends Module {
+export class BillingServerModule extends Module {
   availableProviders = availableProviders;
   providers = {};
   async getProviders() {
@@ -15,7 +15,8 @@ export default class BillingServerModule extends Module {
     };
   }
   getModels() {
-    return require('./models').default;li
+    return require('./models').default;
+    li;
   }
   provider(name) {
     if (!this.providers[name]) throw new Err('!provider', { data: { name } });
@@ -50,3 +51,5 @@ export default class BillingServerModule extends Module {
     await asyncMapValues(this.providers, (provider) => provider && provider.run());
   }
 }
+
+export default BillingServerModule;

@@ -42,6 +42,4 @@ export function parseProxy(str) {
   return createProxy(proxy);
 }
 
-export const parseProxyFromString = parseProxy;
-
 export const parseProxies = (str = '') => str.split(/[,\n]/).map((p) => parseProxy(p));
