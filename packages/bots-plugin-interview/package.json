@@ -15,6 +15,10 @@
     "bot",
     "plugin"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/bots-plugin-interview",
   "license": "MIT",
   "author": "Vladislav Denisov <vlados.pochta@gmail.com>",

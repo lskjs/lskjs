@@ -3,6 +3,10 @@
   "version": "2.42.3",
   "description": "LSK server-api.",
   "keywords": [],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/server-api",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",

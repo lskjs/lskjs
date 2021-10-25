@@ -3,6 +3,10 @@
   "version": "2.36.1",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
   "keywords": [],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/err",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",

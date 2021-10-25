@@ -3,6 +3,10 @@
   "version": "2.36.1",
   "description": "LSK link all.",
   "keywords": [],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/linkall",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",

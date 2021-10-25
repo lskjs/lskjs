@@ -7,6 +7,10 @@
     "semaphore",
     "async-mutex"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/mutex",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",

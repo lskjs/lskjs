@@ -4,6 +4,10 @@
   "description": "LSK.js – command line interface scripts",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs",
   "keywords": [
     "lskjs",

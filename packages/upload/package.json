@@ -8,6 +8,10 @@
     "amazon",
     "multipart"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/upload",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",

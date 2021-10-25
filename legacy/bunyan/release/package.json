@@ -9,6 +9,10 @@
     "json",
     "bunyan"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/bunyan",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",

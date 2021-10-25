@@ -16,7 +16,6 @@ export class BillingServerModule extends Module {
   }
   getModels() {
     return require('./models').default;
-    li;
   }
   provider(name) {
     if (!this.providers[name]) throw new Err('!provider', { data: { name } });
