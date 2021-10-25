@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://github.com/lskjs/lskjs/compare/v2.42.3...v2.43.0) (2021-10-25)
+
+
+### Features
+
+* **module:** add asyncModules for providers imports ([9941bcc](https://github.com/lskjs/lskjs/commit/9941bcc9b83d0d95a9244cce8ebf867393614453))
+* **module:** migrate module to lightweight utils2 ([d12a0ae](https://github.com/lskjs/lskjs/commit/d12a0ae1222d1bab6c5d362c39b8b3d991ac71e2))
+
+
+
+
+
 ## [2.42.3](https://github.com/lskjs/lskjs/compare/v2.42.2...v2.42.3) (2021-10-18)
 
 **Note:** Version bump only for package @lskjs/module

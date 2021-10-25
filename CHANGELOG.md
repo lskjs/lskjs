@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://github.com/lskjs/lskjs/compare/v2.42.3...v2.43.0) (2021-10-25)
+
+
+### Bug Fixes
+
+* **server:** improve stated log ([8322c2a](https://github.com/lskjs/lskjs/commit/8322c2a654ab291546638c09292e72b2758fcd38))
+
+
+### Features
+
+* improve index exports ([25af608](https://github.com/lskjs/lskjs/commit/25af608a905b18ccbeb96120d23a9b4e3af82155))
+* **module:** add asyncModules for providers imports ([9941bcc](https://github.com/lskjs/lskjs/commit/9941bcc9b83d0d95a9244cce8ebf867393614453))
+* **module:** migrate module to lightweight utils2 ([d12a0ae](https://github.com/lskjs/lskjs/commit/d12a0ae1222d1bab6c5d362c39b8b3d991ac71e2))
+* **proxy:** new createRequest concept, improme proxyManager ([0985094](https://github.com/lskjs/lskjs/commit/0985094a75917bfca3ff2eb1409919b0b3993f27))
+* **proxy:** new proxy concept ([7133462](https://github.com/lskjs/lskjs/commit/713346297480d8901740ae59c668ce4fa6bb1f2e))
+* **stats:** create stats package ([b8b35e4](https://github.com/lskjs/lskjs/commit/b8b35e43bf9c445ccdb1dda9f756d9306e831055))
+* **stats:** improve stats behaviour ([6aefa70](https://github.com/lskjs/lskjs/commit/6aefa709d3509ad747e38ff74141c74dd75a5406))
+* **utils:** start to refactor lightweight utils2 ([b98a9d1](https://github.com/lskjs/lskjs/commit/b98a9d1b87798e9b2a62b5c98a94b9650ab3a583))
+
+
+
+
+
 ## [2.42.3](https://github.com/lskjs/lskjs/compare/v2.42.2...v2.42.3) (2021-10-18)
 
 

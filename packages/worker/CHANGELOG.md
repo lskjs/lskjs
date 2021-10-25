@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://github.com/lskjs/lskjs/compare/v2.42.3...v2.43.0) (2021-10-25)
+
+
+### Bug Fixes
+
+* **server:** improve stated log ([8322c2a](https://github.com/lskjs/lskjs/commit/8322c2a654ab291546638c09292e72b2758fcd38))
+
+
+### Features
+
+* **proxy:** new createRequest concept, improme proxyManager ([0985094](https://github.com/lskjs/lskjs/commit/0985094a75917bfca3ff2eb1409919b0b3993f27))
+* **stats:** create stats package ([b8b35e4](https://github.com/lskjs/lskjs/commit/b8b35e43bf9c445ccdb1dda9f756d9306e831055))
+
+
+
+
+
 ## [2.42.3](https://github.com/lskjs/lskjs/compare/v2.42.2...v2.42.3) (2021-10-18)
 
 **Note:** Version bump only for package @lskjs/worker

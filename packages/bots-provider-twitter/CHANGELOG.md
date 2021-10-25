@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://github.com/lskjs/lskjs/compare/v2.42.3...v2.43.0) (2021-10-25)
+
+**Note:** Version bump only for package @lskjs/bots-provider-twitter
+
+
+
+
+
 ## [2.42.3](https://github.com/lskjs/lskjs/compare/v2.42.2...v2.42.3) (2021-10-18)
 
 **Note:** Version bump only for package @lskjs/bots-provider-twitter

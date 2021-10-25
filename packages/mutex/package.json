@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mutex",
-  "version": "2.36.1",
+  "version": "2.43.0",
   "description": "Async mutex",
   "keywords": [
     "mutex",

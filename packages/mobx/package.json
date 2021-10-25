@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mobx",
-  "version": "2.42.3",
+  "version": "2.43.0",
   "description": "LSK module for mobx.",
   "keywords": [
     "mobx",
@@ -29,10 +29,10 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.36.1",
-    "@lskjs/err": "2.36.1",
-    "@lskjs/module": "2.42.3",
-    "@lskjs/utils": "2.42.1"
+    "@lskjs/env": "2.43.0",
+    "@lskjs/err": "2.43.0",
+    "@lskjs/module": "2.43.0",
+    "@lskjs/utils": "2.43.0"
   },
   "devDependencies": {
     "axios": "0.21.2",

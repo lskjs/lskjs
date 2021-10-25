@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sequelize",
-  "version": "2.42.3",
+  "version": "2.43.0",
   "description": "LSK module for sequelize.",
   "keywords": [
     "database",
@@ -30,8 +30,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.42.3",
-    "@lskjs/utils": "2.42.1",
+    "@lskjs/module": "2.43.0",
+    "@lskjs/utils": "2.43.0",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
     "sequelize": "6.3.5"

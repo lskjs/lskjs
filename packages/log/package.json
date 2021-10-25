@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "2.42.3",
+  "version": "2.43.0",
   "description": "Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.",
   "keywords": [],
   "publishConfig": {
@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@lskjs/debug-level": "0.3.2",
-    "@lskjs/env": "2.36.1",
-    "@lskjs/err": "2.36.1",
+    "@lskjs/env": "2.43.0",
+    "@lskjs/err": "2.43.0",
     "fast-safe-stringify": "2.0.8",
     "split": "1.0.1",
     "through": "2.3.8"

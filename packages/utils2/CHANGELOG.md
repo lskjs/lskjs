@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://github.com/lskjs/lskjs/compare/v2.42.3...v2.43.0) (2021-10-25)
+
+
+### Features
+
+* **utils:** start to refactor lightweight utils2 ([b98a9d1](https://github.com/lskjs/lskjs/commit/b98a9d1b87798e9b2a62b5c98a94b9650ab3a583))
+
+
+
+
+
 ## [2.42.1](https://github.com/lskjs/lskjs/compare/v2.42.0...v2.42.1) (2021-10-12)
 
 **Note:** Version bump only for package @lskjs/utils
