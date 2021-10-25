@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/socket.io-client/socket.io-client.client.js"],"names":["io"],"mappings":";;;;;;;;;AAAA;;eAEeA,kB","sourcesContent":["import io from 'socket.io-client';\n\nexport default io;\n"],"file":"socket.io-client.client.js"}

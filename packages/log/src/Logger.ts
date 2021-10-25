@@ -39,7 +39,7 @@ export class Logger implements ILogger {
     return new this(...propsArray);
   }
   createChild(...propsArray: ILoggerProps[]): ILogger {
-    const ns = [this.ns, this.name].filter(Boolean).join('.');
+    const ns = [this.ns, this.name].filter(Boolean).join('.'); // TODO: подумать, а правильно ли соединять ns и name
     // @ts-ignore
     return new this.constructor(this, { colors: null, ns }, ...propsArray);
   }

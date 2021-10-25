@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/socket.io-client/socket.io-client.server.js"],"names":["__noSuchMethod__"],"mappings":";;;;;;;AAAe,oBAAY;AACzB,SAAO;AACLA,IAAAA,gBADK,8BACc,CAClB;AAFI,GAAP;AAID","sourcesContent":["export default function () {\n  return {\n    __noSuchMethod__() {\n    },\n  };\n}\n"],"file":"socket.io-client.server.js"}

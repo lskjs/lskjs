@@ -1,0 +1,49 @@
+{
+  "name": "@lskjs/bunyan",
+  "version": "2.34.0",
+  "description": "Light weight bunyan logger for a JSON logging library for node.js services without dtrace",
+  "keywords": [
+    "log",
+    "logging",
+    "log4j",
+    "json",
+    "bunyan"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/bunyan",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "bootstrap": "lsk run bootstrap",
+    "build": "lsk run build",
+    "dev": "lsk run dev",
+    "dev:server": "lsk run dev:server",
+    "i18": "lsk run i18",
+    "prepublishOnly": "lsk run prepublishOnly",
+    "release": "lsk run release",
+    "release:yes": "lsk run release:yes",
+    "start": "node index.js",
+    "storybook": "lsk run storybook",
+    "test": "lsk run test",
+    "test:watch": "lsk run test:watch",
+    "watch": "lsk run watch"
+  },
+  "dependencies": {
+    "exeunt": "1.1.1"
+  },
+  "devDependencies": {
+    "ben": "0.0.0",
+    "markdown-toc": "1.2.0",
+    "nodeunit": "0.11.3",
+    "vasync": "2.2.0",
+    "verror": "1.10.0"
+  },
+  "// dtrace-provider": "~0.8 required for dtrace features",
+  "// moment": "required for local time with CLI",
+  "// mv": "required for RotatingFileStream",
+  "nonOptionalDeps": {
+    "dtrace-provider": "~0.8",
+    "mv": "~2",
+    "safe-json-stringify": "~1",
+    "moment": "2.10.6"
+  }
+}
