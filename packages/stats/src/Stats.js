@@ -1,4 +1,5 @@
 import { isDev } from '@lskjs/env';
+import Module from '@lskjs/module';
 // import Module from '@lskjs/module';
 import beauty from '@lskjs/utils/beauty';
 import inc from '@lskjs/utils/inc';
@@ -11,13 +12,12 @@ const sec = 1000;
 const min = 60 * sec;
 const hour = 60 * min;
 
-export class Stats {
+export class Stats extends Module {
   // extends Module {
   storages = {};
   // eslint-disable-next-line no-console
   printOptions = {
     skipFlood: false,
-    log: console.log,
     prefix: 'all',
     successKey: 'event.success',
     unsuccessKey: 'event.error',
@@ -34,9 +34,9 @@ export class Stats {
     // day: 24 60 * * 60 * 1000,
     all: 365 * 24 * hour,
   };
-  static create(props) {
-    return new this(props);
-  }
+  // static create(props) {
+  //   return new this(props);
+  // }
   getStorages(prefix) {
     return this.info.names.map((name) => {
       const key = [prefix, name].filter(Boolean).join('.');
@@ -79,13 +79,13 @@ export class Stats {
 
     return isRemove;
   }
-  start() {
-    return this.run();
-  }
-  run() {
+  // start() {
+  //   return this.run();
+  // }
+  startTimer() {
     this.runPrint(this.printOptions);
   }
-  stop() {
+  stopTimer() {
     this.printSummary();
     clearInterval(this.interval);
   }
@@ -105,7 +105,6 @@ export class Stats {
   print({
     skipFlood = false,
     summary = false,
-    log = console.log,
     prefix = 'all',
     successKey = 'event.success',
     unsuccessKey = 'event.error',
@@ -177,7 +176,8 @@ export class Stats {
       ${nacks1 || others1 ? ' last min' : ''} \
       `.trim();
     }
-    log(str);
+    // console.log('this', this.storages.all)
+    this.log.debug(str);
     return true;
   }
 }
