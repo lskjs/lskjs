@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Err from '@lskjs/err';
 
-import { getProxyLabels } from '.';
+import { getProxyLabels } from './getProxyLabels';
 
 const getTimeout = (startedAt) => (startedAt ? `${Date.now() - startedAt}ms` : '???ms');
 const isLowerEqual = (str = '', str2 = '') => str && str.toLowerCase() === str2;

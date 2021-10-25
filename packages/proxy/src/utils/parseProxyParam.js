@@ -1,4 +1,4 @@
-import { parseProxies, parseProxy } from './index';
+import { parseProxies } from './parseProxies';
 
 export const isProxyHub = (proxy) =>
   (proxy.startsWith('http://') || proxy.startsWith('https://')) && proxy.includes('/proxy');
@@ -9,8 +9,6 @@ export const getProxyType = (proxy) => {
   if (isProxyHub(proxy)) return 'hub';
   return 'proxy';
 };
-
-export const parseProxyFromString = parseProxy;
 
 export const parseProxyParam = (proxyStr) => {
   const res = {};
