@@ -27,15 +27,16 @@ export class ServerApp extends Module {
       webserver: () => import('@lskjs/webserver/server'),
       i18: () => import('@lskjs/i18/server'),
       db: () => import('@lskjs/db/server'),
-      // 'models.User': () => import('@lskjs/db/server'),
-      // models: () => import('./lskjs/models/server'),
-      // redis: () => import('./lskjs/redis/server'),
     };
   }
 
   async started() {
     const timing = global.timing ? `[${global.timing()}ms]` : '';
-    const rawAddress = this.webserver && this.webserver.httpInstance.address();
+    let rawAddress;
+    if (this.hasModule('webserver') && this.__initedModules.webserver) {
+      const webserver = await this.module('webserver');
+      rawAddress = webserver.httpInstance.address();
+    }
     let str;
     if (rawAddress) {
       const { port, address } = rawAddress;
@@ -48,6 +49,17 @@ export class ServerApp extends Module {
     } else {
       this.log.warn(str);
     }
+  }
+  healthchecks() {
+    const healthchecks = {};
+    Object.keys(this.__initedModules).forEach((moduleName) => {
+      healthchecks[moduleName] = async () => {
+        const m = await this.module(moduleName);
+        if (!m.healthcheck) return null;
+        return m.healthcheck();
+      };
+    });
+    return healthchecks;
   }
 }
 

@@ -19,7 +19,11 @@ export class SampleApp extends Module {
   }
   async started() {
     const timing = global.timing ? `[${global.timing()}ms]` : '';
-    const rawAddress = this.webserver && this.webserver.httpInstance.address();
+    let rawAddress;
+    if (this.hasModule('webserver') && this.__initedModules.webserver) {
+      const webserver = await this.module('webserver');
+      rawAddress = webserver.httpInstance.address();
+    }
     let str;
     if (rawAddress) {
       const { port, address } = rawAddress;
