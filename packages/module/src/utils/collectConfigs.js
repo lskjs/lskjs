@@ -1,4 +1,4 @@
-import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import asyncMapValues from '@lskjs/utils2/asyncMapValues';
 
 export const collectConfigs = async (m) => ({
   config: m.config,

@@ -1,9 +1,9 @@
 // @ts-ignore
-import undefault from '@lskjs/utils/undefault';
+import undefault from '@lskjs/utils2/undefault';
 // @ts-ignore
-import isFunction from '@lskjs/utils/isFunction';
+import isFunction from '@lskjs/utils2/isFunction';
 // @ts-ignore
-import isClass from '@lskjs/utils/isClass';
+import isClass from '@lskjs/utils2/isClass';
 import { IModule } from '../IModule.types';
 // import typeChecks from './typeChecks';
 // console.log('importFn2', fn, typeChecks(fn), Object.keys(fn), new String(fn), fn.name, fn.type, JSON.stringify(fn), fn.prototype, typeChecks(fn.prototype));

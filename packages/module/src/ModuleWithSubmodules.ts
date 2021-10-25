@@ -2,8 +2,8 @@
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Mutex from '@lskjs/mutex';
-import arrayToObject from '@lskjs/utils/arrayToObject';
-import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import arrayToObject from '@lskjs/utils2/arrayToObject';
+import asyncMapValues from '@lskjs/utils2/asyncMapValues';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import mapValues from 'lodash/mapValues';

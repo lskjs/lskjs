@@ -9,6 +9,10 @@
     "event emitter",
     "logger"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/module",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
@@ -32,7 +36,7 @@
     "@lskjs/err": "2.36.1",
     "@lskjs/log": "2.42.3",
     "@lskjs/mutex": "2.36.1",
-    "@lskjs/utils": "2.42.1",
+    "@lskjs/utils2": "2.42.1",
     "colors": "1.4.0",
     "eventemitter3": "4.0.7"
   },

@@ -1,6 +1,6 @@
 import Err from '@lskjs/err';
 // @ts-ignore
-import importFn from '@lskjs/utils/importFn';
+import importFn from '@lskjs/utils2/importFn';
 
 import { IAsyncModule, IModule } from '../types';
 import { createModule } from './createModule';

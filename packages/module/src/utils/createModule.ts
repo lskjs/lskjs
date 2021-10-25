@@ -15,4 +15,5 @@ export const createModule = async (ClassOrFunction: any, ...args: any[]): Promis
     return obj;
   }
 };
+
 export default createModule;

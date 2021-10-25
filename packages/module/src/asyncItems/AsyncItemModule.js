@@ -1,4 +1,4 @@
-import importFn from '@lskjs/utils/importFn';
+import { importFn } from '@lskjs/utils2/importFn';
 
 import { ItemModule } from '../items/ItemModule';
 
