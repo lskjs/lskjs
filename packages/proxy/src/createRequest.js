@@ -3,6 +3,7 @@ import Err from '@lskjs/err';
 import retry from '@lskjs/utils/retry';
 import axios from 'axios';
 
+import { createFeedback as defaultCreateFeedback } from './utils/createFeedback';
 import { isNetworkError } from './utils/isNetworkError';
 
 export const NETWORK_TIMEOUT = isDev ? 1000 : 10000;
@@ -12,10 +13,10 @@ export const NETWORK_INTERVAL = isDev ? 100 : 1000;
 // TODO: дописать
 export const getProviderOptions = (proxy, driver) => (proxy ? proxy.getProviderOptions(driver) : {});
 
-const createNoop = () => () => null;
+// const createNoop = () => ({ success: () => null, error: () => null });
 
 export const createRequest =
-  ({ createFeedback = createNoop, ...feedbackOptions } = {}) =>
+  ({ createFeedback = defaultCreateFeedback, ...feedbackOptions } = {}) =>
   (props = {}) => {
     const {
       driver = 'axios',
@@ -31,14 +32,13 @@ export const createRequest =
       async () => {
         let proxy;
         if (initProxy) proxy = initProxy;
-        const proxyManager = await (props.proxyManager || feedbackOptions.proxyManager);
+        const proxyManager = await (props.proxyManager || feedbackOptions.proxyManager); // TODO: подумать а не замудренно ли
         if (!proxy && proxyManager) proxy = await proxyManager.getProxy();
         const options = { ...params, ...getProviderOptions(proxy, driver) };
         tries += 1;
-        const feedback = createFeedback(
-          { options: props, proxy, tries, maxTries },
-          { ...feedbackOptions, proxyManager },
-        );
+        const feedback = createFeedback
+          ? createFeedback({ options: props, proxy, tries, maxTries }, { ...feedbackOptions, proxyManager }) // TODO: подумать а не замудренно ли
+          : null;
         try {
           let abortTimeout;
           if (timeout && !params.cancelToken) {
@@ -49,11 +49,11 @@ export const createRequest =
           }
           const res = await axios(options);
           if (abortTimeout) clearTimeout(abortTimeout);
-          await feedback.success();
+          if (feedback) await feedback.success();
           return res;
         } catch (initErr) {
           const errCode = Err.getCode(initErr);
-          await feedback.error(initErr);
+          if (feedback) await feedback.error(initErr);
           proxy = null;
           let err;
           if (isNetworkError(initErr)) {

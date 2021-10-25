@@ -3,15 +3,40 @@ import inc from '@lskjs/utils/inc';
 import EventEmitter from 'events';
 import pick from 'lodash/pick';
 
-import { getProxyAgent } from './getProxyAgent';
+import { createKey } from './utils/createKey';
+import { createUri } from './utils/createUri';
+import { getIpv } from './utils/getIpv';
+import { getProxyAgent } from './utils/getProxyAgent';
 
 export class Proxy {
   constructor(props = {}) {
     Object.assign(this, props);
+    if (!this.key) this.key = this.getKey();
+    if (!this.uri) this.uri = this.getUri();
+    if (!this.tags?.ipv && this.ip) {
+      if (!this.tags) this.tags = {};
+      this.tags.ipv = getIpv(this.ip);
+    }
     this.ee = new EventEmitter();
   }
   getState() {
-    return pick(this, ['host', 'port', 'user', 'password', 'type', 'provider', 'ip', 'tags', 'uri', 'key']);
+    // const ipv = getIpv(ip);
+    return {
+      // TODO: migrate provider to tags
+      // TODO: think abount ip placement
+      ...pick(this, ['type', 'host', 'port', 'user', 'password', 'provider', 'ip', 'tests', 'targets']), // , 'uri', 'key'
+      tags: {
+        ...this.tags,
+      },
+      key: this.getKey(),
+      uri: this.getUri(),
+    };
+  }
+  toObject() {
+    return this.getState();
+  }
+  toJSON() {
+    return this.getState();
   }
   getJson() {
     return this.getState();
@@ -21,11 +46,12 @@ export class Proxy {
   }
   getUri() {
     if (this.provider === 'localhost') return null;
-    return this.uri;
-    // return [
-    //   [this.user, this.password].filter(Boolean).join(':'),
-    //   [this.host, this.port].filter(Boolean).join(':'),
-    // ].filter(Boolean).join('@');
+    if (this.uri) return this.uri;
+    return createUri(this);
+  }
+  getKey() {
+    if (this.provider === 'localhost') return 'localhost';
+    return createKey(this);
   }
   getOptions() {
     inc(this.stats, 'get');
@@ -42,6 +68,7 @@ export class Proxy {
     return proxy;
   }
   getAgent() {
+    inc(this.stats, 'get');
     if (this.provider === 'localhost') return null;
     return getProxyAgent(this);
   }

@@ -3,7 +3,7 @@ import { ProxyManager } from './ProxyManager';
 
 let count = 0;
 let proxyManager;
-export const initProxyManager = async () => {
+export const init = async () => {
   proxyManager = await ProxyManager.start({
     config: {
       log: {
@@ -13,12 +13,12 @@ export const initProxyManager = async () => {
     ...parseProxyParam(process.env.PROXY),
   });
 };
-export default ({ wait = false } = {}) => {
+
+export const initOnce = async () => {
   if (count) return proxyManager;
   count += 1;
-  if (process.env.PROXY) {
-    const promise = initProxyManager();
-    if (wait) await promise;
-  }
+  if (process.env.PROXY) await init();
   return proxyManager;
 };
+
+export default initOnce;

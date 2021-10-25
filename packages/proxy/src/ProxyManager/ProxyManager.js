@@ -10,21 +10,11 @@ import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import map from 'lodash/map';
 
-import { getProxyAgent } from '../getProxyAgent';
 import { Proxy } from '../Proxy';
 import strategies from '../strategies';
+import { filterProxy } from '../utils/filterProxy';
+import { getProxyAgent } from '../utils/getProxyAgent';
 import { parseProxyParam } from '../utils/parseProxyParam';
-
-export const filterFn = (proxy, filter) => {
-  if (filter.ignoreKeys && filter.ignoreKeys.includes(get(proxy, 'key'))) return false;
-  if (filter.key && get(proxy, 'key') !== filter.key) return false;
-  if (filter.provider && get(proxy, 'provider') !== filter.provider) return false;
-  if (filter.type && get(proxy, 'type') !== filter.type) return false;
-  if (filter.country && get(proxy, 'tags.country') !== filter.country) return false;
-  if (filter.ipv && get(proxy, 'tags.ipv') !== filter.ipv) return false;
-  if (filter.comment && get(proxy, 'tags.comment') !== filter.comment) return false;
-  return true;
-};
 
 const debug = false; /// __DEV__;
 
@@ -72,7 +62,7 @@ export class ProxyManager extends Module {
     if (this.disabled) return [];
     if (!this.list) this.list = await this.getCachedProxyHubProxyList();
     let { list } = this;
-    if (filter) list = list.filter((proxy) => filterFn(proxy, filter));
+    if (filter) list = filterProxy(list, filter);
     return list;
   }
   async getProxy(...args) {
