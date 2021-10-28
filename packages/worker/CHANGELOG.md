@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.44.0](https://github.com/lskjs/lskjs/compare/v2.43.1...v2.44.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* **worker:** fix sampleapp worker legacy ([e729d23](https://github.com/lskjs/lskjs/commit/e729d2378be28100502390c73d658404f7c7924e))
+
+
+
+
+
 ## [2.43.1](https://github.com/lskjs/lskjs/compare/v2.43.0...v2.43.1) (2021-10-25)
 
 **Note:** Version bump only for package @lskjs/worker
