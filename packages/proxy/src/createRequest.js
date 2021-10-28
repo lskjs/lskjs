@@ -4,7 +4,7 @@ import retry from '@lskjs/utils/retry';
 import axios from 'axios';
 
 import { createFeedback as defaultCreateFeedback } from './utils/createFeedback';
-import { isNetworkError } from './utils/isNetworkError';
+import { getErrCode, isNetworkError, isNetworkFatal } from './utils/isNetworkError';
 
 export const NETWORK_TIMEOUT = isDev ? 1000 : 10000;
 export const NETWORK_TRIES = isDev ? 2 : 5;
@@ -20,12 +20,21 @@ export const createRequest =
   (props = {}) => {
     const {
       driver = 'axios',
-      max_tries: maxTries = NETWORK_TRIES,
+      // max_tries: maxTries = NETWORK_TRIES,
       timeout = NETWORK_TIMEOUT,
       interval = NETWORK_INTERVAL,
       proxy: initProxy,
       ...params
     } = props;
+    const maxTries =
+      props.max_tries ||
+      props.maxTries ||
+      props.max_retries ||
+      props.maxRetries ||
+      props.max_retry ||
+      props.maxRetry ||
+      props.tries ||
+      NETWORK_TRIES;
     if (driver !== 'axios') throw new Err('REQUEST_DRIVER', 'driver not realized yet', { driver });
     let tries = 0;
     return retry(
@@ -52,15 +61,12 @@ export const createRequest =
           if (feedback) await feedback.success();
           return res;
         } catch (initErr) {
-          const errCode = Err.getCode(initErr);
-          if (feedback) await feedback.error(initErr);
+          const code = getErrCode(initErr);
+          if (feedback) await feedback.error(initErr, { fatal: isNetworkFatal(initErr) });
           proxy = null;
-          let err;
-          if (isNetworkError(initErr)) {
-            err = new Err('REQUEST_NETWORK', initErr, { subcode: errCode, class: 'network', tries, maxTries });
-          } else {
-            err = new Err(initErr);
-          }
+          let errProps = {};
+          if (isNetworkError(initErr)) errProps = { subcode: Err.getCode(initErr), class: 'network', tries, maxTries };
+          const err = new Err(code, initErr, errProps);
           Err.copyProps(err, initErr);
           if (!isNetworkError(initErr)) throw retry.StopError(err); // exit right now
           throw err; // try one again

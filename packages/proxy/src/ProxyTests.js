@@ -2,6 +2,7 @@ import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import Bluebird from 'bluebird';
+import { pick } from 'lodash';
 import flatten from 'lodash/flatten';
 import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
@@ -10,12 +11,18 @@ import shuffle from 'lodash/shuffle';
 
 import { createRequest } from './createRequest';
 
+const getId = ({ proxy, test }) => [get(proxy, 'key'), test.id].filter(Boolean).join('_');
+
 export class ProxyTests extends Module {
   config = {
     concurrency: tryJSONparse(process.env.PREFETCH) || 50,
     cacheTimeout: 5 * 60 * 1000,
   };
-  cache = null;
+  cache = {
+    results: {},
+    proxyStats: {},
+    updatedAt: null,
+  };
   request(req, { request, ...props } = {}) {
     if (isFunction(req)) {
       return req({
@@ -28,7 +35,7 @@ export class ProxyTests extends Module {
       ...props,
     });
   }
-  async runTest({ proxy, test = {} } = {}) {
+  async execTest({ id, proxy, test = {} } = {}) {
     const apm = await this.app.module('apm');
     const stats = await this.app.module('stats');
     const log = await this.log.createChild({ name: `${test.id}` });
@@ -39,7 +46,7 @@ export class ProxyTests extends Module {
     });
     // console.log({ proxy });
     const res = {
-      id: [get(proxy, 'key'), test.id].filter(Boolean).join('_'),
+      id: getId({ proxy, test }),
       proxy,
       test,
     };
@@ -58,7 +65,44 @@ export class ProxyTests extends Module {
     // const ok = test.validate ? await test.validate(res2) : true;
     return res;
   }
-  async runTests(proxyList) {
+  getCache(id) {
+    if (!this.cache.results[id]) return null;
+    if (this.cache.results[id].expiredAt < Date.now()) {
+      delete this.cache.results[id];
+      return null;
+    }
+    return this.cache.results[id];
+  }
+  setCache(res) {
+    let { id } = res;
+    if (!id) id = getId(res);
+    if (!id) throw new Err('!id', { res });
+    this.cache.results[id] = res;
+    this.cache.updatedAt = Date.now();
+    this.cache.proxyStats = groupBy(this.cache.results, 'proxy.key');
+  }
+  updateCache() {
+    Object.keys(this.cache.results).map((id) => this.getCache(id));
+  }
+
+   getResults() {
+    this.updateCache();
+    return this.cache.results;
+  }
+  async runTest({ proxy, test, force = false, ...props } = {}) {
+    const id = getId({ proxy, test });
+    let res = this.getCache(id);
+    if (res && !force) return res;
+    res = await this.execTest({ id, proxy, test, ...props });
+    this.setCache(res);
+    return res;
+  }
+  getProxyStats(proxyList) {
+    if (!proxyList) return this.cache.proxyStats;
+    const proxyKeys = proxyList.map((proxy) => proxy.key);
+    return pick(this.cache.proxyStats, proxyKeys);
+  }
+  async runTests(proxyList, { force = false } = {}) {
     const { concurrency } = this.config;
     const stats = await this.app.module('stats');
     stats.startTimer();
@@ -66,7 +110,7 @@ export class ProxyTests extends Module {
     const res = await Bluebird.map(
       shuffle(proxyList),
       (proxy) =>
-        Bluebird.map(shuffle(this.tests), (test) => this.runTest({ proxy, test }), {
+        Bluebird.map(shuffle(this.tests), (test) => this.runTest({ proxy, test, force }), {
           concurrency: 1,
         }),
       { concurrency },
@@ -74,34 +118,6 @@ export class ProxyTests extends Module {
     stats.stopTimer();
     // this.log.debug('[runTests]', res);
     return flatten(res);
-  }
-
-  isActualCache() {
-    // console.log({
-    //   fetchedAt: this.cache?.fetchedAt,
-    //   cacheTimeout: this.config?.cacheTimeout,
-    //   new: +new Date(this.cache?.fetchedAt || 0) + (this.config?.cacheTimeout || 0),
-    // });
-    return +new Date(this.cache?.fetchedAt || 0) + (this.config?.cacheTimeout || 0) >= Date.now();
-  }
-
-  async update(proxyList) {
-    try {
-      const list = await this.runTests(proxyList);
-      const proxyTests = groupBy(list, 'proxy.key');
-      this.cache = {
-        fetchedAt: new Date(),
-        list,
-        proxyTests,
-      };
-    } catch (err) {
-      this.error('[getTests]', err);
-    }
-  }
-  async getTests(proxyList) {
-    if (this.isActualCache()) return this.cache;
-    this.update(proxyList);
-    return this.cache;
   }
 }
 

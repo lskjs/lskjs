@@ -43,8 +43,10 @@ export class ProxyProvider extends Module {
         fetchedAt: new Date(),
         list: await this.fetchList(),
       };
+      return this.cache;
     } catch (err) {
       this.error('[update]', err);
+      return null;
     }
   }
   async getList() {

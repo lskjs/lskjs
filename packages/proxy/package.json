@@ -38,6 +38,7 @@
     "async-mutex": "0.2.6",
     "https-proxy-agent": "5.0.0",
     "is-ip": "3.1.0",
+    "prom-client": "14.0.0",
     "socks-proxy-agent": "5.0.0"
   },
   "devDependencies": {

@@ -4,7 +4,6 @@ export class ProxyStrategy extends Module {
   getProxy() {
     return null;
   }
-
   update() {}
   getStats() {
     return {};

@@ -54,7 +54,7 @@ export default class ProxyApi extends BaseApi {
     const prefilter = {};
     if (req.params.provider) prefilter.provider = req.params.provider;
     // console.log({prefilter})
-    const { fetchedAt, list: rawProxyList } = await proxy.getList(prefilter);
+    const { testedAt, fetchedAt, list: rawProxyList } = await proxy.getList(prefilter);
     // console.log({rawProxyList})
     const proxyList = filterProxy(rawProxyList, req.data);
     if (req.params.format === 'txt' || req.data.format === 'txt') {
@@ -63,6 +63,7 @@ export default class ProxyApi extends BaseApi {
     return {
       __pack: true,
       fetchedAt,
+      testedAt,
       total: rawProxyList.length,
       count: proxyList.length,
       data: proxyList,

@@ -32,7 +32,7 @@ export class ProxyManager extends Module {
     if (!this.strategy) {
       let strategy = this.config.strategy || 'random';
       if (!this.strategies[strategy]) strategy = 'random';
-      this.log.warn('setDefaultStratefy', strategy);
+      this.log.warn('setDefaultStrategy', strategy);
       this.strategy = this.strategies[strategy];
       this.log.debug('use strategy', strategy);
     }
@@ -60,14 +60,14 @@ export class ProxyManager extends Module {
   }
   async getProxies(filter) {
     if (this.disabled) return [];
-    if (!this.list) this.list = await this.getCachedProxyHubProxyList();
+    if (!this.list) this.list = await this.getProxyHubProxyList();
     let { list } = this;
     if (filter) list = filterProxy(list, filter);
     return list;
   }
   async getProxy(...args) {
     if (this.disabled) return null;
-    if (!this.list) this.list = await this.getCachedProxyHubProxyList();
+    if (!this.list) this.list = await this.getProxyHubProxyList();
     return this.strategy.getProxy(...args);
   }
   async requestProxyHub({ params, ...axiosParams }) {
@@ -83,7 +83,7 @@ export class ProxyManager extends Module {
 
     return data;
   }
-  async getProxyHubProxyList(params) {
+  async fetchProxyList(params) {
     const wrapProxy = (props) =>
       new Proxy({
         manager: this,
@@ -112,7 +112,7 @@ export class ProxyManager extends Module {
       2 - locked, wait, !list
       3 - locked, wait, list
    */
-  async getCachedProxyHubProxyList() {
+  async getProxyHubProxyList() {
     if (this.list) return this.list;
     if (this.mutex.isLocked()) {
       await this.mutex.isAsyncLocked(10000);
@@ -121,46 +121,46 @@ export class ProxyManager extends Module {
     }
     const release = await this.mutex.acquire();
     try {
-      this.list = await this.getProxyHubProxyList();
+      this.list = await this.fetchProxyList();
     } finally {
       release();
     }
     return this.list;
   }
 
-  async sendFeedbackToHub() {
-    this.log.trace('sendFeedbackToHub');
-  }
-  async saveFeedback() {
-    // this.debug = DEBUG_PROXY;
-    if (this.debug) {
-      await this.saveFileFeedback();
-    }
-    await this.sendFeedbackToHub();
-  }
-  async saveFileFeedback() {
-    this.log.trace('saveFileFeedback');
-    // if (!(proxies && proxies.length)) {
-    //   this.log.trace('!proxies');
-    //   return;
-    // }
-    // const dataJson = JSON.stringify(sortBy(proxies, p => -get(p, 'info.probability', 0)), null, 2);
-    // await writeFile(`/tmp/parser/${hostname()}-proxies.json`, dataJson, { debug: true }).catch(() => null);
-    // const sortedProxies = sortBy(proxies, p => -get(p, 'info.probability', 0));
-    // const data = objects2csv(sortedProxies.map(p => ({
-    //   key: get(p, 'key'),
-    //   country: get(p, 'meta.country'),
-    //   provider: get(p, 'meta.provider'),
-    //   success: get(p, 'info.success', 0),
-    //   error: get(p, 'info.error', 0),
-    //   errorCodes: map(get(p, 'info.errorCodes'), (val, key) => [key, val].join(':')).join(' '),
-    //   requests: get(p, 'info.success', 0) + get(p, 'info.error', 0),
-    //   time: get(p, 'info.time.avg', 0),
-    //   kpd: get(p, 'info.kpd', 0),
-    //   probability: get(p, 'info.probability', 0),
-    // })));
-    // await writeFile(`/tmp/parser/${hostname()}-proxies.txt`, data, { debug: true }).catch(() => null);
-  }
+  // async sendFeedbackToHub() {
+  //   this.log.trace('sendFeedbackToHub');
+  // }
+  // async saveFeedback() {
+  //   // this.debug = DEBUG_PROXY;
+  //   if (this.debug) {
+  //     await this.saveFileFeedback();
+  //   }
+  //   await this.sendFeedbackToHub();
+  // }
+  // async saveFileFeedback() {
+  //   this.log.trace('saveFileFeedback');
+  //   // if (!(proxies && proxies.length)) {
+  //   //   this.log.trace('!proxies');
+  //   //   return;
+  //   // }
+  //   // const dataJson = JSON.stringify(sortBy(proxies, p => -get(p, 'info.probability', 0)), null, 2);
+  //   // await writeFile(`/tmp/parser/${hostname()}-proxies.json`, dataJson, { debug: true }).catch(() => null);
+  //   // const sortedProxies = sortBy(proxies, p => -get(p, 'info.probability', 0));
+  //   // const data = objects2csv(sortedProxies.map(p => ({
+  //   //   key: get(p, 'key'),
+  //   //   country: get(p, 'meta.country'),
+  //   //   provider: get(p, 'meta.provider'),
+  //   //   success: get(p, 'info.success', 0),
+  //   //   error: get(p, 'info.error', 0),
+  //   //   errorCodes: map(get(p, 'info.errorCodes'), (val, key) => [key, val].join(':')).join(' '),
+  //   //   requests: get(p, 'info.success', 0) + get(p, 'info.error', 0),
+  //   //   time: get(p, 'info.time.avg', 0),
+  //   //   kpd: get(p, 'info.kpd', 0),
+  //   //   probability: get(p, 'info.probability', 0),
+  //   // })));
+  //   // await writeFile(`/tmp/parser/${hostname()}-proxies.txt`, data, { debug: true }).catch(() => null);
+  // }
   async stop() {
     await super.stop();
     if (this.interval) clearInterval(this.interval);
@@ -218,7 +218,7 @@ export class ProxyManager extends Module {
 
   async update() {
     if (this.config.stats) this.stats();
-    this.list = await this.getProxyHubProxyList();
+    this.list = await this.fetchProxyList();
     const stats = [];
     if (this.list.length) {
       stats.push(countBy(this.list, 'provider'));
