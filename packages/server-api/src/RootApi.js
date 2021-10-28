@@ -5,7 +5,7 @@ export class RootApi extends BaseApi {
   getRoutes() {
     return {
       ...super.getRoutes(),
-      '/api': IndexApi,
+      '/api': this.IndexApi || IndexApi,
       '*': this.any.bind(this),
     };
   }
