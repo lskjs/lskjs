@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.44.1](https://github.com/lskjs/lskjs/compare/v2.44.0...v2.44.1) (2021-10-28)
+
+
+### Bug Fixes
+
+* **worker:** remove external log ([ad8e9de](https://github.com/lskjs/lskjs/commit/ad8e9de6eb80f47d9ff01176b08478deb29d829c))
+
+
+
+
+
 # [2.44.0](https://github.com/lskjs/lskjs/compare/v2.43.1...v2.44.0) (2021-10-28)
 
 
