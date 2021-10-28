@@ -17,7 +17,7 @@ export const collectMetrics = async function ({ prefix = 'bg' } = {}) {
     });
   }
   try {
-    const proxyList = await this.getProxyList();
+    const proxyList = await this.getAllProxyList();
     // console.log({ proxyList });
     proxyList.forEach((proxy) => {
       // console.log({ proxy });

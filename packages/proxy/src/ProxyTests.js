@@ -85,7 +85,7 @@ export class ProxyTests extends Module {
     Object.keys(this.cache.results).map((id) => this.getCache(id));
   }
 
-   getResults() {
+  getResults() {
     this.updateCache();
     return this.cache.results;
   }
