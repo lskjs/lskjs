@@ -159,7 +159,7 @@ export class WebserverModule extends Module {
   useApi = require('./methods/useApi').default;
   async getAvailablePort() {
     const port = await getPortPromise({
-      port: this.config.port || 8000,
+      port: this.config.port || 8080,
       stopPort: this.config.stopPort || 9000,
       // stopPort: 3333, // maximum port
     });
