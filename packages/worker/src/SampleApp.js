@@ -15,7 +15,6 @@ export class SampleApp extends Module {
       if (this.hasModule('elastic')) await this.module('elastic');
       if (this.hasModule('models')) await this.module('models.*');
     }
-    await this.runWorkers();
   }
   async started() {
     const timing = global.timing ? `[${global.timing()}ms]` : '';
@@ -27,9 +26,9 @@ export class SampleApp extends Module {
     let str;
     if (rawAddress) {
       const { port, address } = rawAddress;
-      str = `🎃 The ${this.name} is ready at http://${address === '::' ? '127.0.0.1' : address}:${port}/ ${timing}`;
+      str = `🚀 The ${this.name} is [ready] at http://${address === '::' ? '127.0.0.1' : address}:${port}/ ${timing}`;
     } else {
-      str = `🎃 The ${this.name} is ready ${timing}`;
+      str = `🚀 The ${this.name} is [ready] ${timing}`;
     }
     if (isDev) {
       this.log.info(str);
