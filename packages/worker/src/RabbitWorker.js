@@ -139,7 +139,7 @@ export class RabbitWorker extends Worker {
   async connect() {
     const statsProps = {};
     // if (this.debug) {
-    statsProps.log = this.log.trace.bind(this.log);
+    // statsProps.log = this.log.trace.bind(this.log);
     // }
 
     this.stats = await Stats.create(statsProps);
