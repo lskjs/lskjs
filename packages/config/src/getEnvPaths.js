@@ -3,7 +3,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import range from 'lodash/range';
 import path from 'path';
 
-export default (params = {}) => {
+export const getEnvPaths = (params = {}) => {
   const { cwd = process.cwd(), dirs = 3, exts = ['.js', '.json'], name = '.env' } = params;
 
   return flattenDeep(range(dirs).map((deep) => exts.map((ext) => `${cwd}/${'../'.repeat(deep)}${name}${ext}`)))
@@ -11,3 +11,5 @@ export default (params = {}) => {
     .filter((p) => fs.existsSync(p))
     .reverse();
 };
+
+export default getEnvPaths;
