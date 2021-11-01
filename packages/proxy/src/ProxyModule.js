@@ -1,4 +1,4 @@
-import { isDev } from '@lskjs/env';
+// import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import flatten from 'lodash/flatten';
@@ -11,7 +11,8 @@ import { Proxy } from './Proxy';
 import { setProxyWorker } from './setProxyWorker';
 import { filterProxy } from './utils/filterProxy';
 
-const isDebug = isDev;
+// const isDebug = isDev;
+const isDebug = false;
 export class ProxyModule extends Module {
   getModules() {
     return {
@@ -22,7 +23,15 @@ export class ProxyModule extends Module {
   }
   async runProvidersMethod(method, ...args) {
     const providers = await this.module('providers.*');
-    return asyncMapValues(providers, (provider) => provider[method](...args));
+    return asyncMapValues(providers, async (provider) => {
+      try {
+        const res = await provider[method](...args);
+        return res;
+      } catch (err) {
+        this.log.error('[provider] err', provider, err);
+        return null;
+      }
+    });
   }
   async getProxyStats(proxyList) {
     const tests = await this.module('tests');
@@ -30,7 +39,7 @@ export class ProxyModule extends Module {
   }
   async getAllProxyList({ localhost = false } = {}) {
     const res = await this.runProvidersMethod('getList');
-    let listOfLists = Object.values(res).map((a) => a.list);
+    let listOfLists = Object.values(res).map((a) => a?.list || []);
     if (isDebug) listOfLists = listOfLists.map((l) => l.slice(0, 2));
     const rawProxyList = uniqBy(flatten(listOfLists), 'key');
     if (localhost) return [new Proxy({ provider: 'localhost' }), ...rawProxyList];
@@ -38,7 +47,7 @@ export class ProxyModule extends Module {
   }
   async fetchProxyList() {
     const res = await this.runProvidersMethod('fetchList');
-    const proxies = flatten(Object.values(res));
+    const proxies = flatten(Object.values(res).map((a) => a || []));
     return proxies;
   }
   async getProxyTestsResults() {
@@ -53,7 +62,7 @@ export class ProxyModule extends Module {
   }
   async getList(filter = {}) {
     const res = await this.runProvidersMethod('getList');
-    const fetchedAt = max(Object.values(res).map((a) => a.fetchedAt));
+    const fetchedAt = max(Object.values(res).map((a) => a?.fetchedAt));
     let proxyList = await this.getAllProxyList();
     const proxyStats = await this.getProxyStats(proxyList);
     proxyList = proxyList.map((p) => {

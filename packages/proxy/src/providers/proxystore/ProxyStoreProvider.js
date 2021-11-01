@@ -27,7 +27,11 @@ export class ProxyStoreProvider extends ProxyProvider {
     };
   }
 
-  async checkErr(data) {
+  async checkErr(res = {}) {
+    const { data, err } = res;
+    if (err) throw new Err(err);
+    if (!data) throw new Err('!data', { res });
+    if (data.error_id !== 404) return;
     if (data.status !== 'no') return;
     throw new Err({
       code: data.error_id,
@@ -36,9 +40,9 @@ export class ProxyStoreProvider extends ProxyProvider {
   }
 
   async fetchListRaw() {
-    const { data } = await this.client.get('/getproxy');
-    await this.checkErr(data);
-    return data;
+    const res = await this.client.get('/getproxy').catch((err) => ({ err }));
+    await this.checkErr(res);
+    return res.data || [];
   }
 
   async fetchList() {

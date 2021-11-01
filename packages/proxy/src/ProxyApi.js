@@ -55,7 +55,6 @@ export default class ProxyApi extends BaseApi {
     if (req.params.provider) prefilter.provider = req.params.provider;
     // console.log({prefilter})
     const { testedAt, fetchedAt, list: rawProxyList } = await proxy.getList(prefilter);
-    // console.log({rawProxyList})
     const proxyList = filterProxy(rawProxyList, req.data);
     if (req.params.format === 'txt' || req.data.format === 'txt') {
       return res.send(proxyList.map((p) => p.uri).join('\n'));
