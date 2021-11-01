@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.45.0](https://github.com/lskjs/lskjs/compare/v2.44.1...v2.45.0) (2021-11-01)
+
+
+### Features
+
+* **config:** improve config ([9da4525](https://github.com/lskjs/lskjs/commit/9da4525064da64aebf671e568b5819847e2c7912))
+* **proxy:** stable client proxy manager ([69fd3b3](https://github.com/lskjs/lskjs/commit/69fd3b34760e23831d4f54ee50a7e61bfdb2de24))
+* **worker:** pass correct ns configs to workers and jobs ([107b254](https://github.com/lskjs/lskjs/commit/107b254fe5d45d061c41cdc76f5d9c73d9192fe4))
+
+
+
+
+
 ## [2.44.1](https://github.com/lskjs/lskjs/compare/v2.44.0...v2.44.1) (2021-10-28)
 
 

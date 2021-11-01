@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.45.0](https://github.com/lskjs/lskjs/compare/v2.44.1...v2.45.0) (2021-11-01)
+
+
+### Features
+
+* **worker:** pass correct ns configs to workers and jobs ([107b254](https://github.com/lskjs/lskjs/commit/107b254fe5d45d061c41cdc76f5d9c73d9192fe4))
+
+
+
+
+
 ## [2.44.1](https://github.com/lskjs/lskjs/compare/v2.44.0...v2.44.1) (2021-10-28)
 
 
