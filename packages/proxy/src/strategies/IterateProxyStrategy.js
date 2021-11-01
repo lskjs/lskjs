@@ -4,11 +4,13 @@ import get from 'lodash/get';
 import { ProxyStrategy } from './ProxyStrategy';
 
 export class IterateProxyStrategy extends ProxyStrategy {
+  strategy = 'iterate';
   iteration = 0;
   getProxy() {
-    if (!get(this, 'manager.list.length', 0)) throw new Err('PROXY_LIST_EMPTY');
+    const list = get(this, 'manager.cache.list');
+    if (!list?.length) throw new Err('PROXY_MANAGER_LIST_EMPTY');
     this.iteration += 1;
-    return this.manager.list[this.iteration % this.manager.list.length];
+    return list[this.iteration % list.length];
   }
 }
 

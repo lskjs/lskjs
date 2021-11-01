@@ -9,6 +9,7 @@ import { ProxyStrategy } from './ProxyStrategy';
 // import request from './request';
 
 export class LinearProxyStrategy extends ProxyStrategy {
+  strategy = 'linear';
   // consts
   // 10 проксей парсят
   // на них выделяется 95% попыток парсинга
@@ -33,7 +34,7 @@ export class LinearProxyStrategy extends ProxyStrategy {
     };
   }
   update() {
-    const proxies = this.manager.list;
+    const proxies = get(this, 'manager.cache.list');
     if (!proxies) return;
     proxies.forEach((proxy) => {
       proxy.stats.kpd = this.countKpd(proxy);
@@ -63,7 +64,8 @@ export class LinearProxyStrategy extends ProxyStrategy {
   }
 
   getProxy() {
-    if (!get(this, 'manager.list.length', 0)) throw new Err('PROXY_LIST_EMPTY');
+    const list = get(this, 'manager.cache.list');
+    if (!list?.length) throw new Err('PROXY_MANAGER_LIST_EMPTY');
 
     const initProbability = Math.random();
     let sumProbability = 0;

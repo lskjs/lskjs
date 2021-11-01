@@ -6,11 +6,12 @@ let proxyManager;
 export const init = async () => {
   proxyManager = await ProxyManager.start({
     config: {
-      log: {
-        name: 'proxy',
-      },
+      ns: 'proxy',
+      // log: {
+      //   name: 'proxy',
+      // },
+      ...parseProxyParam(process.env.PROXY),
     },
-    ...parseProxyParam(process.env.PROXY),
   });
 };
 

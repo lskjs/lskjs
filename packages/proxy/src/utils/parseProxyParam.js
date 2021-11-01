@@ -16,21 +16,32 @@ export const parseProxyParam = (proxyStr) => {
   if (proxyType === 'file') {
     if (proxyStr[0] === '.') {
       // eslint-disable-next-line import/no-dynamic-require
-      res.proxies = require(`${process.cwd()}${proxyStr.substr(1)}`).default;
-    } else {
-      // eslint-disable-next-line import/no-dynamic-require
-      res.proxies = require(proxyStr).default;
+      const proxies = require(`${process.cwd()}${proxyStr.substr(1)}`).default;
+      return { proxies };
     }
-  } else if (proxyType === 'proxy') {
-    res.proxies = parseProxies(proxyStr).map((p) => ({
+    // eslint-disable-next-line import/no-dynamic-require
+    const proxies = require(proxyStr).default;
+    return { proxies };
+  }
+  if (proxyType === 'proxy') {
+    const proxies = parseProxies(proxyStr).map((p) => ({
       provider: 'env',
       ...p,
     }));
-  } else if (proxyType === 'hub') {
+    return { proxies };
+  }
+  if (proxyType === 'hub') {
     const urlObj = new URL(proxyStr);
-    res.options = Object.fromEntries(urlObj.searchParams);
+    const options = Object.fromEntries(urlObj.searchParams);
     urlObj.search = '';
-    res.url = urlObj.toString();
+    const baseURL = urlObj.toString();
+
+    return {
+      client: {
+        baseURL,
+        options,
+      },
+    };
   }
   return res;
 };

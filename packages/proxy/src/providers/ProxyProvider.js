@@ -45,7 +45,7 @@ export class ProxyProvider extends Module {
       };
       return this.cache;
     } catch (err) {
-      this.error('[update]', err);
+      this.log.error('[update]', err);
       return null;
     }
   }

@@ -5,7 +5,6 @@ import Mutex from '@lskjs/mutex';
 import avg from '@lskjs/utils/avg';
 import inc from '@lskjs/utils/inc';
 import axios from 'axios';
-import countBy from 'lodash/countBy';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import map from 'lodash/map';
@@ -16,41 +15,61 @@ import { filterProxy } from '../utils/filterProxy';
 import { getProxyAgent } from '../utils/getProxyAgent';
 import { parseProxyParam } from '../utils/parseProxyParam';
 
-const debug = false; /// __DEV__;
+// const debug = false; /// __DEV__;
 
 export class ProxyManager extends Module {
+  cache = null;
+  proxies = null;
   config = {
     stats: isDev,
-    updateInterval: debug ? 5 * 60 * 1000 : 10 * 60 * 1000,
-    statsInterval: debug ? 10 * 1000 : 3 * 60 * 1000,
+    // updateInterval: debug ? 5 * 60 * 1000 : 10 * 60 * 1000,
+    // statsInterval: debug ? 10 * 1000 : 3 * 60 * 1000,
+    cacheTimeout: 5 * 60 * 1000,
     strategy: 'linear',
   };
   strategies = strategies;
   static parseProxyParam = parseProxyParam;
-  async init() {
-    await super.init();
-    if (!this.strategy) {
-      let strategy = this.config.strategy || 'random';
-      if (!this.strategies[strategy]) strategy = 'random';
-      this.log.warn('setDefaultStrategy', strategy);
-      this.strategy = this.strategies[strategy];
-      this.log.debug('use strategy', strategy);
-    }
-    const { strategy: Strategy } = this;
-    if (this.url) {
-      this.log.debug('proxyHub url', this.url);
+  async createClient() {
+    const baseURL = this.config.client?.baseURL || this.config.client?.url;
+    if (baseURL) {
+      this.log.debug('[baseUrl] url', baseURL);
     } else {
-      this.log.warn('proxyHub !url');
+      this.log.warn('[baseUrl] !url');
     }
-    if (this.proxies) {
-      this.log.trace('proxies.length', this.proxies.length);
+    const props = {
+      baseURL,
+      // params: { ...this.options, ...params },
+      // ...axiosParams,
+      // timeout: 5000,
+    };
+    return axios.create(props);
+  }
+  async createStrategy() {
+    let { Strategy } = this;
+    if (!Strategy) {
+      let strategy = this.config.strategy || 'random';
+      if (!this.strategies[strategy]) {
+        this.log.warn('!strategies[strategy]', strategy);
+        strategy = 'random';
+      }
+      Strategy = this.strategies[strategy];
     }
-    this.mutex = new Mutex();
-    this.strategy = await Strategy.start({
+    if (!Strategy) throw new Err('!Strategy');
+    this.log.debug('strategy', Strategy.strategy);
+    return Strategy.start({
       __parent: this,
       app: this.app,
       manager: this,
     });
+  }
+  async init() {
+    await super.init();
+    this.client = await this.createClient();
+    this.strategy = await this.createStrategy();
+    if (this.proxies) {
+      this.log.trace('[proxies] count', this.proxies.length);
+    }
+    this.mutex = new Mutex();
   }
   static getLocalhostProxy() {
     return new Proxy({ provider: 'localhost' });
@@ -60,49 +79,48 @@ export class ProxyManager extends Module {
   }
   async getProxies(filter) {
     if (this.disabled) return [];
-    if (!this.list) this.list = await this.getProxyHubProxyList();
-    let { list } = this;
-    if (filter) list = filterProxy(list, filter);
-    return list;
+    const list = await this.getProxyHubProxyList();
+    return filterProxy(list, filter);
   }
   async getProxy(...args) {
     if (this.disabled) return null;
-    if (!this.list) this.list = await this.getProxyHubProxyList();
+    await this.getProxyHubProxyList();
     return this.strategy.getProxy(...args);
   }
-  async requestProxyHub({ params, ...axiosParams }) {
-    const props = {
-      baseURL: this.url,
-      params: { ...this.options, ...params },
-      ...axiosParams,
-      timeout: 5000,
-    };
-    if (this.debug) this.log.debug('requestProxyHub >>', props.baseURL, props.params);
-    const { data } = await axios(props);
-    if (this.debug) this.log.trace('requestProxyHub <<', data.data.length);
+  // async requestProxyHub({ params, ...axiosParams }) {
+  //   const props = {
+  //     baseURL: this.url,
+  //     params: { ...this.options, ...params },
+  //     ...axiosParams,
+  //     timeout: 5000,
+  //   };
+  //   if (this.debug) this.log.debug('requestProxyHub >>', props.baseURL, props.params);
+  //   const { data } = await axios(props);
+  //   if (this.debug) this.log.trace('requestProxyHub <<', data.data.length);
 
-    return data;
-  }
+  //   return data;
+  // }
   async fetchProxyList(params) {
+    try {
+      const { data } = await this.client.get('/list');
+      return { requestedAt: new Date(), ...data };
+    } catch (err) {
+      this.log.error('PROXY_LIST_ERROR', err);
+      throw new Err('PROXY_LIST_ERROR', { method: 'fetchProxyList', params, err });
+    }
+  }
+
+  wrapProxies(list = []) {
     const wrapProxy = (props) =>
       new Proxy({
         manager: this,
         ...props,
       });
-    if (!this.url) return (this.proxies || []).map(wrapProxy);
-    try {
-      const { data: proxies } = await this.requestProxyHub({
-        url: 'list',
-        params,
-      });
-      if (!proxies) {
-        throw new Err('PROXY_HUB_NOT_FOUND_PROXY');
-      }
-      return proxies.map(wrapProxy);
-    } catch (err) {
-      this.log.error('PROXY_HUB_ERROR', err);
-      throw new Err('PROXY_HUB_ERROR', { err });
-    }
+    return list.map(wrapProxy);
+  }
+
+  isActualCache() {
+    return +new Date(this.cache?.requestedAt || 0) + (this.config?.cacheTimeout || 0) >= Date.now();
   }
   /**
    * может быть 4 ситуации
@@ -112,61 +130,59 @@ export class ProxyManager extends Module {
       2 - locked, wait, !list
       3 - locked, wait, list
    */
-  async getProxyHubProxyList() {
-    if (this.list) return this.list;
+  async updateCache() {
+    if (this.proxies) {
+      this.cache = {
+        updatedAt: new Date(),
+        list: this.wrapProxies(this.proxies),
+      };
+    }
     if (this.mutex.isLocked()) {
       await this.mutex.isAsyncLocked(10000);
-      if (this.list) return this.list;
-      throw new Err('PROXY_HUB_TIMEOUT');
+      if (this.cache) return;
+      throw new Err('PROXY_MANAGER_TIMEOUT');
     }
     const release = await this.mutex.acquire();
     try {
-      this.list = await this.fetchProxyList();
-    } finally {
+      const { data: list, ...cache } = await this.fetchProxyList();
+      this.cache = {
+        updatedAt: new Date(),
+        ...cache,
+        list: this.wrapProxies(list),
+      };
+      release();
+    } catch (err) {
+      this.log.error(err);
       release();
     }
-    return this.list;
   }
 
-  // async sendFeedbackToHub() {
-  //   this.log.trace('sendFeedbackToHub');
-  // }
-  // async saveFeedback() {
-  //   // this.debug = DEBUG_PROXY;
-  //   if (this.debug) {
-  //     await this.saveFileFeedback();
-  //   }
-  //   await this.sendFeedbackToHub();
-  // }
-  // async saveFileFeedback() {
-  //   this.log.trace('saveFileFeedback');
-  //   // if (!(proxies && proxies.length)) {
-  //   //   this.log.trace('!proxies');
-  //   //   return;
-  //   // }
-  //   // const dataJson = JSON.stringify(sortBy(proxies, p => -get(p, 'info.probability', 0)), null, 2);
-  //   // await writeFile(`/tmp/parser/${hostname()}-proxies.json`, dataJson, { debug: true }).catch(() => null);
-  //   // const sortedProxies = sortBy(proxies, p => -get(p, 'info.probability', 0));
-  //   // const data = objects2csv(sortedProxies.map(p => ({
-  //   //   key: get(p, 'key'),
-  //   //   country: get(p, 'meta.country'),
-  //   //   provider: get(p, 'meta.provider'),
-  //   //   success: get(p, 'info.success', 0),
-  //   //   error: get(p, 'info.error', 0),
-  //   //   errorCodes: map(get(p, 'info.errorCodes'), (val, key) => [key, val].join(':')).join(' '),
-  //   //   requests: get(p, 'info.success', 0) + get(p, 'info.error', 0),
-  //   //   time: get(p, 'info.time.avg', 0),
-  //   //   kpd: get(p, 'info.kpd', 0),
-  //   //   probability: get(p, 'info.probability', 0),
-  //   // })));
-  //   // await writeFile(`/tmp/parser/${hostname()}-proxies.txt`, data, { debug: true }).catch(() => null);
-  // }
-  async stop() {
-    await super.stop();
-    if (this.interval) clearInterval(this.interval);
+  async update() {
+    if (this.isActualCache()) return;
+    await this.updateCache();
+    const { list } = this.cache;
+    if (!list?.length) {
+      this.log.warn('[cache]', 'PROXY_MANAGER_LIST_EMPTY');
+      // throw new Err('PROXY_MANAGER_LIST_EMPTY', { list });
+    }
+    await this.strategy.update();
+    if (this.config.stats) await this.stats();
   }
+
+  async getProxyHubProxyList() {
+    await this.update();
+    let list = [];
+    if (this.cache) list = this.cache.list;
+    return list;
+  }
+
+  // async stop() {
+  //   await super.stop();
+  //   if (this.interval) clearInterval(this.interval);
+  // }
+
   async stats() {
-    if (!(this.list && this.list.length)) return;
+    if (!this.cache?.list?.length) return;
     const { proxies, ...stats } = await this.getStats();
     const percent = (a, t) => (!t ? '??' : `${Math.floor((a / t) * 100)}%`);
     const infoRow = ({ count = 0, statuses, errors = {}, time }, name) => {
@@ -200,7 +216,7 @@ export class ProxyManager extends Module {
     const stats = {
       proxies: {},
     };
-    forEach(this.list, (proxy) => {
+    forEach(this.cache?.list || [], (proxy) => {
       const proxyStats = proxy.stats;
       stats.proxies[proxy.key] = proxyStats;
       inc(stats, 'count', proxyStats.count || 0);
@@ -214,25 +230,6 @@ export class ProxyManager extends Module {
     });
 
     return stats;
-  }
-
-  async update() {
-    if (this.config.stats) this.stats();
-    this.list = await this.fetchProxyList();
-    const stats = [];
-    if (this.list.length) {
-      stats.push(countBy(this.list, 'provider'));
-      stats.push(countBy(this.list, 'tags.country'));
-    }
-    this.log.trace(`[update]`, `proxies: ${this.list.length}`, ...stats);
-    await this.strategy.update();
-  }
-
-  async run() {
-    await super.run();
-    await this.update();
-    this.interval = setInterval(() => this.update(), this.config.updateInterval);
-    if (this.config.stats) this.statsInterval = setInterval(() => this.stats(), this.config.statsInterval);
   }
 
   getProxyAgent(proxy) {
