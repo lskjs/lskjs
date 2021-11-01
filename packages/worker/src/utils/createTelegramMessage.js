@@ -11,19 +11,6 @@ export class Worker extends Module {
       ...(await super.getConfig()),
     };
   }
-  async getJobConfig() {
-    const mConfig = await this.getModuleConfig('job');
-    const res = {
-      ...(mConfig || {}),
-      ...(this.config || {}),
-      log: {
-        ...(mConfig?.log || {}),
-        ...(this.config?.log || {}),
-        ns: [this.config?.log?.ns, 'job'].filter(Boolean).join('.'),
-      },
-    };
-    return res;
-  }
   async parse() {
     throw new Err('NOT_IMPLEMENTED', 'not implemented worker.parse()');
   }
@@ -59,7 +46,7 @@ export class Worker extends Module {
       params,
       worker: this,
       rabbit: this.rabbit,
-      config: await this.getJobConfig(),
+      config: this.config,
     });
 
     return {

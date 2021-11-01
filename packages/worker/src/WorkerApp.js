@@ -1,7 +1,7 @@
 import Err from '@lskjs/err';
 import arrayToObject from '@lskjs/utils/arrayToObject';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
-import { isDev } from '@lskjs/utils/env';
+// import { isDev } from '@lskjs/utils/env';
 import importFn from '@lskjs/utils/importFn';
 import get from 'lodash/get';
 
@@ -39,7 +39,7 @@ export class WorkerApp extends SampleApp {
     if (!this.availableWorkers[name])
       throw new Err('WORKER_NOT_FOUND', `In worker "${name}" not found index with exported default function`);
     const CurrentWorker = await importFn(this.availableWorkers[name]);
-    const config = this.getWorkerConfig(name);
+    const config = await this.getWorkerConfig(name);
     // TODO: разобраться почему ругается eslint
     // eslint-disable-next-line no-prototype-builtins
     if (!this.isWorkerClass(CurrentWorker)) {
@@ -53,18 +53,29 @@ export class WorkerApp extends SampleApp {
     this.initedWorkers[name] = worker;
     return worker;
   }
-  getWorkerConfig(name) {
-    const config = get(this, 'config.worker') || {};
-    if (typeof config === 'string') {
+  async getWorkerConfig(name) {
+    const mConfig = await this.getModuleConfig(name);
+    const wConfig = get(this, 'config.worker') || {};
+    if (typeof wConfig === 'string') {
       throw new Err('DEPRECATED config.worker === string');
     }
-    return {
-      ...(get(this, `config.workers.${name}`) || {}),
-      ...config,
+    const nConfig = get(this, `config.workers.${name}`) || {};
+    const res = {
+      ...(mConfig || {}),
+      ...(wConfig || {}),
+      ...(nConfig || {}),
+      // ns: 'worker',
+      log: {
+        ...(mConfig?.log || {}),
+        ...(wConfig?.log || {}),
+        ...(nConfig?.log || {}),
+        ns: 'worker',
+      },
     };
+    return res;
   }
   async runWorkers() {
-    const config = this.getWorkerConfig();
+    const config = await this.getWorkerConfig();
     const workerKey = config.name;
     if (!workerKey || typeof workerKey !== 'string') {
       this.log.warn('!config.worker', '[ignore]');

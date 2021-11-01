@@ -108,7 +108,7 @@ export class RabbitWorker extends Worker {
       __parent: this,
       app: this.app,
       rabbit: this.rabbit,
-      config: this.config,
+      config: await this.getJobConfig(),
     });
     try {
       await job.start();
@@ -143,6 +143,7 @@ export class RabbitWorker extends Worker {
     // }
 
     this.stats = await Stats.create(statsProps);
+    if (this.stats) this.stats.startTimer();
     this.rabbit = await this.app.module('rabbit');
     const queue = this.config.queue || this.queue;
     if (!queue) {
