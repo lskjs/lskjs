@@ -3,13 +3,13 @@
 import Err from '@lskjs/err';
 import axios from 'axios';
 
-const clogs = {
-  _default: console.log,
-  trace: console.log,
-  log: console.log,
-  warn: console.warn,
-  error: console.error,
-};
+// const clogs = {
+//   _default: console.log,
+//   trace: console.log,
+//   log: console.log,
+//   warn: console.warn,
+//   error: console.error,
+// };
 
 const statuses = {
   _default: '❔',
@@ -81,7 +81,7 @@ export class Rlog {
   prefix = '';
   project = '';
   secret = null;
-  clogs = clogs;
+  // clogs = clogs;
   statuses = statuses;
 
   limits = {
@@ -103,11 +103,11 @@ export class Rlog {
     const secret = params.secret || this.secret;
     const prefix = params.prefix || this.prefix;
     const limits = params.limits || this.limits;
-    const clog = clogs[action] || clogs._default;
+    // const clog = clogs[action] || clogs._default;
     const status = statuses[action] || statuses._default;
 
     if (!(params.force || params.ignoreLimits) && !checkLimits(this.stats, limits)) {
-      console.error('Rlog.send: IGNORE BY LIMITS');
+      if (this.log && this.log.warn) this.log.warn('Rlog.send: IGNORE BY LIMITS');
       return null;
     }
 
@@ -115,10 +115,19 @@ export class Rlog {
     const errText = params.err;
 
     const md = `${status}  ${prefix} ${[text, errText].filter((a) => a).join('\n')}\n\n${tags}`.trim();
-    clog(md);
+    if (this.log) {
+      if (this.log[action]) {
+        this.log[action](md);
+      } else {
+        console.log('this.log', this.log);
+        this.log.trace(md);
+      }
+    }
 
-    const url = [base, project].join('/');
+    const url = [base, project].filter(Boolean).join('/');
+    // console.log({this: this}, url)
     // console.log({url});
+
 
     return axios
       .post(url, {
@@ -129,12 +138,15 @@ export class Rlog {
         tags: params.tags,
       })
       .catch((err) => {
-        console.error(`Rlog.${action} error: ${Err.getCode(err)}`);
+        if (this.log && this.log.error) {
+          this.log.error(`[${action}]`, Err.getCode(err));
+        } else {
+          console.error(`Rlog [${action}]`, Err.getCode(err));
+        }
         return null;
       });
   }
   trace = (...args) => this.send('trace', ...args);
-  log = (...args) => this.send('log', ...args);
   start = (...args) => this.send('start', ...args);
   success = (...args) => this.send('success', ...args);
   warn = (...args) => this.send('warn', ...args);

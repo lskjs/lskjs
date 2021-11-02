@@ -1,2 +1,2 @@
-export * from './RlogServerModule';
-export { default } from './RlogServerModule';
+export * from './RlogModule';
+export { default } from './RlogModule';

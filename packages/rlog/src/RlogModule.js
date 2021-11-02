@@ -6,35 +6,39 @@ import { Rlog } from './Rlog';
 
 export class RlogModule extends Module {
   getOptions() {
-    return omit(this.config, ['log', 'debug']);
+    const options = omit(this.config, ['log', 'debug']);
+    if (this.config.logs) {
+      options.log = this.log;
+    }
+    return options;
   }
   async init() {
     await super.init();
-    this.logger = new Rlog(this.getOptions());
+    this.client = new Rlog(this.getOptions());
   }
   send(...args) {
-    if (!this.logger) throw new Err('!this.logger');
-    return this.logger.send(...args);
+    if (!this.client) throw new Err('!this.client');
+    return this.client.send(...args);
   }
   trace(...args) {
-    if (!this.logger) throw new Err('!this.logger');
-    return this.logger.trace(...args);
+    if (!this.client) throw new Err('!this.client');
+    return this.client.trace(...args);
   }
   success(...args) {
-    if (!this.logger) throw new Err('!this.logger');
-    return this.logger.success(...args);
+    if (!this.client) throw new Err('!this.client');
+    return this.client.success(...args);
   }
   warn(...args) {
-    if (!this.logger) throw new Err('!this.logger');
-    return this.logger.warn(...args);
+    if (!this.client) throw new Err('!this.client');
+    return this.client.warn(...args);
   }
   error(...args) {
-    if (!this.logger) throw new Err('!this.logger');
-    return this.logger.error(...args);
+    if (!this.client) throw new Err('!this.client');
+    return this.client.error(...args);
   }
   fatal(...args) {
-    if (!this.logger) throw new Err('!this.logger');
-    return this.logger.fatal(...args);
+    if (!this.client) throw new Err('!this.client');
+    return this.client.fatal(...args);
   }
 }
 
