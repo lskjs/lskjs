@@ -81,12 +81,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
     }
     if (this.__lifecycle.initStart) return;
     this.__lifecycleEvent('initStart');
-    try {
-      await this.init();
-    } catch (err) {
-      safeLog(this, 'fatal', 'init()', err);
-      throw err;
-    }
+    await this._init();
     this.__lifecycleEvent('initFinish');
     if (this.onInit) {
       try {
@@ -98,7 +93,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
     }
   }
 
-  async init(): Promise<void> {
+  async _init(): Promise<void> {
     const { name } = this.constructor;
     if (!this.__lifecycle.create) {
       throw new Err('MODULE_INVALID_LIVECYCLE_NEW', `use ${name}.create(props) instead new ${name}(props)`, {
@@ -109,6 +104,16 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       throw new Err('MODULE_INVALID_LIVECYCLE_INIT', `use ${name}.__init() instead ${name}.init()`, { data: { name } });
     }
     this.name = name;
+    try {
+      await this.init();
+    } catch (err) {
+      safeLog(this, 'fatal', 'init()', err);
+      throw err;
+    }
+  }
+
+  async init(): Promise<void> {
+    // NOTE: extend me
   }
 
   async start(): Promise<void> {
@@ -133,21 +138,26 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       });
     }
     this.__lifecycleEvent('runStart');
+    await this._run();
+    this.__lifecycleEvent('runFinish');
+  }
+
+  async _run(): Promise<void> {
+    if (!this.__lifecycle.runStart) {
+      throw new Err('MODULE_INVALID_LIVECYCLE_RUN', 'use module.__run() instead module.run()', {
+        data: { name: this.name },
+      });
+    }
     try {
       await this.run();
     } catch (err) {
       safeLog(this, 'fatal', 'run()', err);
       throw err;
     }
-    this.__lifecycleEvent('runFinish');
   }
 
   async run(): Promise<void> {
-    if (!this.__lifecycle.runStart) {
-      throw new Err('MODULE_INVALID_LIVECYCLE_RUN', 'use module.__run() instead module.run()', {
-        data: { name: this.name },
-      });
-    }
+    // NOTE: extend me
   }
 
   async __stop(): Promise<void> {
@@ -162,20 +172,26 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       return;
     }
     this.__lifecycleEvent('stopStart');
+    await this._stop();
+    this.__lifecycleEvent('stopFinish');
+  }
+
+  async _stop(): Promise<void> {
+    if (!this.__lifecycle.stopStart) {
+      throw new Err('MODULE_INVALID_LIVECYCLE_STOP', 'use module.__stop() instead module.stop()', {
+        data: { name: this.name },
+      });
+    }
     try {
       await this.stop();
     } catch (err) {
       safeLog(this, 'fatal', 'stop()', err);
       throw err;
     }
-    this.__lifecycleEvent('stopFinish');
   }
 
   async stop(): Promise<void> {
-    if (!this.__lifecycle.stopStart)
-      throw new Err('MODULE_INVALID_LIVECYCLE_STOP', 'use module.__stop() instead module.stop()', {
-        data: { name: this.name },
-      });
+    // NOTE: extend me
   }
 }
 
