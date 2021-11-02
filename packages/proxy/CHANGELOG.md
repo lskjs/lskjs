@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.46.2](https://github.com/lskjs/lskjs/compare/v2.46.1...v2.46.2) (2021-11-02)
+
+
+### Bug Fixes
+
+* **proxy:** correct proxy tests ([104efd4](https://github.com/lskjs/lskjs/commit/104efd4d9158b14db4628de1f2c29a72d0006654))
+
+
+
+
+
 ## [2.46.1](https://github.com/lskjs/lskjs/compare/v2.46.0...v2.46.1) (2021-11-02)
 
 
