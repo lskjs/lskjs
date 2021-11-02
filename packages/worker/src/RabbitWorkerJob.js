@@ -30,6 +30,20 @@ export class RabbitWorkerJob extends Module {
   __worker = true;
   redeliveredCount = isDev ? null : 10;
 
+  async _run() {
+    if (!this.__lifecycle.runStart) {
+      throw new Err('MODULE_INVALID_LIVECYCLE_RUN', 'use module.__run() instead module.run()', {
+        data: { name: this.name },
+      });
+    }
+    // try {
+    await this.run();
+    // } catch (err) {
+    //   safeLog(this, 'fatal', 'run()', err);
+    //   throw err;
+    // }
+  }
+
   async init() {
     await super.init();
     if (this.worker) this.stats = this.worker.stats;
@@ -110,7 +124,7 @@ export class RabbitWorkerJob extends Module {
       return this.status;
     }
     await this.onSuccess();
-    if (this.debug) this.log.trace('rabbit.ack');
+    if (this.debug) this.log.trace('[ack]');
     if (this.msg) await this.rabbit.ack(this.msg);
     return this.setStatus({
       status: 'success',
@@ -126,7 +140,8 @@ export class RabbitWorkerJob extends Module {
       return this.status;
     }
     await this.onError(err);
-    if (this.debug) this.log.error(`rabbit.nack [${Err.getCode(err)}]`, this.params);
+    // if (this.debug) this.log.error(`rabbit.nack [${Err.getCode(err)}]`, this.params);
+    if (this.debug) this.log.error(`[nack] ${Err.getCode(err)}`);
     if (this.msg && this.worker.consumerTag === this.msg.fields.consumerTag) {
       await this.rabbit.nack(this.msg, { requeue: true });
     }
@@ -144,7 +159,7 @@ export class RabbitWorkerJob extends Module {
       return this.status;
     }
     await this.onAckError(err);
-    if (this.debug) this.log.trace(`rabbit.ackError [${Err.getCode(err)}]`);
+    if (this.debug) this.log.trace(`[ackError] ${Err.getCode(err)}`);
     if (this.msg) await this.rabbit.nack(this.msg, { requeue: false });
     return this.setStatus({
       status: 'error',

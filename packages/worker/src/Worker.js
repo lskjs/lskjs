@@ -1,6 +1,7 @@
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
-import prettyStringify from '@lskjs/utils/prettyStringify';
+
+import { createTelegramMessage } from './utils/createTelegramMessage';
 
 export class Worker extends Module {
   static __worker = true;
@@ -28,28 +29,9 @@ export class Worker extends Module {
     throw new Err('NOT_IMPLEMENTED', 'not implemented worker.parse()');
   }
   async onTelegramError({ err, job }) {
-    const { params } = job || {};
-    let code = Err.getCode(err);
-    let message = Err.getMessage(err);
-    if (code === message) message = null;
-    if (code) code = `[${code}]`;
-    let worker = process.env.SERVICE || this.name;
-    if (worker) worker = `<${worker}>`;
-    const str = [
-      worker,
-      code,
-      message,
-      err.data && JSON.stringify(err && err.data, null, 2),
-      '\n',
-      prettyStringify(params),
-    ]
-      .filter(Boolean)
-      .join('\n');
-    // console.log(66666);
-    // const str = `\n${err.code}\n${err.message || ''}\n\n${JSON.stringify(params)}\n\n/api/${this.name}?${toQs(params)}`;
     if (this.app.hasModule('rlog')) {
       const rlog = await this.app.module('rlog');
-      rlog.error(str);
+      rlog.error(createTelegramMessage({ name: this.name, err, job }));
     }
   }
   async process(params) {

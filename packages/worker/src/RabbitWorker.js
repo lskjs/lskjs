@@ -8,9 +8,12 @@ import pick from 'lodash/pick';
 import { Worker } from './Worker';
 
 export class RabbitWorker extends Worker {
+  showErrorInfo() {
+    return false; // // this.debug
+  }
   async onConsumeError({ err, job }) {
     const errInfo = this.app && this.app.getErrorInfo ? this.app.getErrorInfo(err) : {};
-    if (this.debug) this.log.trace('onConsumeError errInfo', errInfo);
+    if (this.showErrorInfo()) this.log.trace('onConsumeError errInfo', errInfo);
     const isApm = get(errInfo, 'apm', true);
     const isNack = get(errInfo, 'nack', true);
     const isTelegram = get(errInfo, 'telegram', true);
@@ -29,7 +32,7 @@ export class RabbitWorker extends Worker {
     }
     if (log && this.log[log]) {
       const code = Err.getCode(err);
-      let message = Err.getMessage(err);
+      let message; //= Err.getMessage(err);
       if (code === message) message = null;
       this.log[log](...[code, message].filter(Boolean));
     }
@@ -45,7 +48,7 @@ export class RabbitWorker extends Worker {
       }
     }
     if (!isNack) {
-      if (this.debug) console.error('err4', err); // eslint-disable-line no-console
+      if (this.showErrorInfo()) console.error('err4', err); // eslint-disable-line no-console
       await job.ackError(err);
       return;
     }
@@ -68,7 +71,7 @@ export class RabbitWorker extends Worker {
             },
           },
         });
-        if (this.debug) console.error('err1', err); // eslint-disable-line no-console
+        if (this.showErrorInfo()) console.error('err1', err); // eslint-disable-line no-console
         await job.ackError(err);
       } catch (err2) {
         this.log.error('cant re-redeliver', err2, isDev ? err2.stack : '');
@@ -76,7 +79,7 @@ export class RabbitWorker extends Worker {
       }
       return;
     }
-    if (this.debug) console.error('err3', err); // eslint-disable-line no-console
+    if (this.showErrorInfo()) console.error('err3', err); // eslint-disable-line no-console
     await job.nackError(err);
   }
   async onConsume(msg) {
@@ -116,8 +119,11 @@ export class RabbitWorker extends Worker {
         await job.ackSuccess();
       }
     } catch (error) {
-      if (this.debug) this.log.error('-----------\n', error, '\n-----------'); // eslint-disable-line no-console
-      if (this.debug) this.log.error('-----------\n', error.stack, '\n-----------'); // eslint-disable-line no-console
+      if (this.showErrorInfo()) {
+        this.log.error('-----------\n', error, '\n-----------'); // eslint-disable-line no-console
+        this.log.error('-----------\n', error.stack, '\n-----------'); // eslint-disable-line no-console
+      }
+
       try {
         const errorParams = pick(error, 'nack', 'es', 'telegram', 'log');
         const err = new Err(error, errorParams);
@@ -138,10 +144,7 @@ export class RabbitWorker extends Worker {
   }
   async connect() {
     const statsProps = {};
-    // if (this.debug) {
-    // statsProps.log = this.log.trace.bind(this.log);
-    // }
-
+    statsProps.debug = this.log.trace.bind(this.log);
     this.stats = await Stats.create(statsProps);
     if (this.stats) this.stats.startTimer();
     this.rabbit = await this.app.module('rabbit');
@@ -152,7 +155,13 @@ export class RabbitWorker extends Worker {
     }
     const queueName = this.rabbit.getQueueName(queue);
     await this.rabbit.queue(queueName);
-    const data = await this.rabbit.consume(queueName, this.onConsume.bind(this), { noAck: false });
+    const onConsume = this.onConsume.bind(this);
+    // const onConsume = (...args) => {
+    //   console.log(99991111);
+    //   await this.onConsume(...args);
+    //   console.log(99992222);
+    // };
+    const data = await this.rabbit.consume(queueName, onConsume, { noAck: false });
     this.consumerTag = data.consumerTag;
   }
   async run() {
