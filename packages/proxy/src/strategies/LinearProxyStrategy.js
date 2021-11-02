@@ -81,6 +81,8 @@ export class LinearProxyStrategy extends ProxyStrategy {
   // эстимация количества спаршенных видео в минуту
   countKpd(proxy) {
     const success = get(proxy, 'stats.statuses.success', 0);
+    const fatal = get(proxy, 'stats.fatal', 0);
+    if (fatal) return - 1;
     const error = get(proxy, 'stats.statuses.error', 0);
     const count = get(proxy, 'count', 0);
     if (!count) return 0; // 1 - один по умолчанию потому что они должны быть в списке круче чем сломанные прокси у которых 0

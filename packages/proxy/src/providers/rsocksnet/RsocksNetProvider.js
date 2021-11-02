@@ -2,8 +2,8 @@
 import Err from '@lskjs/err';
 import axios from 'axios';
 
+// import { parseProxies } from '../../utils/parseProxies';
 import { ProxyProvider } from '../ProxyProvider';
-import { parseProxies } from '../utils/parseProxies';
 
 /**
  * API docs: https://rsocks.net/panel/apps/api
@@ -27,27 +27,46 @@ export class RsocksNetProvider extends ProxyProvider {
     });
   }
 
+  async checkErr(res) {}
   async fetchListRaw() {
-    const { data } = await this.client.post('/file/get-ips');
-    return data;
+    const res = await this.client.post('/file/get-ips');
+    // console.log('res', res.data)
+    // const res2= await this.client.post('/file/get-proxy');
+    // console.log('res2', res2.data)
+    await this.checkErr(res);
+    return res.data;
   }
+
   async fetchList() {
-    if (!this.config.rawUrl) throw new Err('!config.rawUrl');
-    const { data } = await axios(this.config.rawUrl);
-    const proxyList = parseProxies(data);
-    return proxyList.map((proxy) =>
-      this.createProxy({
-        type: 'http',
-        user: this.config.user,
-        password: this.config.password,
-        ...proxy,
-        tags: {
-          country: 'ru',
-          ipv: 'v4',
-        },
-      }),
-    );
+    const data = await this.fetchListRaw();
+    
+    // console.log({ data });
+    const list = Object.values(data.packages);
+    // console.log({list})
+    const ips = [].concat(...list.map(l => l.ips || []))
+    throw 'NOT_IMPLEMENTED'
+    // console.log(123123123,{ips})
+    return list
+      .filter((item) => item.active === '1')
+      .map((item) =>
+        this.createProxy({
+          host: item.host || item.ip, // TODO: хуйня какая та
+          port: +item.port,
+          user: item.user,
+          password: item.pass,
+          type: item.type === 'socks' ? 'socks5' : item.type,
+          ip: item.ip,
+          tags: {
+            country: String(item.country).toLowerCase(),
+            ipv: getIpv(item.ip),
+            comment: item.comment ? String(item.comment) : undefined,
+            dateFrom: new Date(item.unixtime * 1000),
+            dateTo: new Date(item.unixtime_end * 1000),
+          },
+        }),
+      );
   }
+
   async fetchOptions() {
     return {};
   }

@@ -16,14 +16,13 @@ import { getProxyAgent } from '../utils/getProxyAgent';
 import { parseProxyParam } from '../utils/parseProxyParam';
 
 // const debug = false; /// __DEV__;
-
 export class ProxyManager extends Module {
   cache = null;
   proxies = null;
   config = {
     stats: isDev,
+    statsInterval: isDev ? 10 * 1000 : null,
     // updateInterval: debug ? 5 * 60 * 1000 : 10 * 60 * 1000,
-    // statsInterval: debug ? 10 * 1000 : 3 * 60 * 1000,
     cacheTimeout: 5 * 60 * 1000,
     strategy: 'linear',
   };
@@ -152,7 +151,7 @@ export class ProxyManager extends Module {
       };
       release();
     } catch (err) {
-      this.log.error(err);
+      this.log.error('[updateCache]', err);
       release();
     }
   }
@@ -167,6 +166,17 @@ export class ProxyManager extends Module {
     }
     await this.strategy.update();
     if (this.config.stats) await this.stats();
+  }
+
+  async run() {
+    await super.run();
+    if (this.config.statsInterval) {
+      this.interval = setInterval(() => this.stats(), this.config.statsInterval);
+    }
+  }
+  async stop() {
+    await super.stop();
+    clearInterval(this.interval);
   }
 
   async getProxyHubProxyList() {
@@ -185,7 +195,7 @@ export class ProxyManager extends Module {
     if (!this.cache?.list?.length) return;
     const { proxies, ...stats } = await this.getStats();
     const percent = (a, t) => (!t ? '??' : `${Math.floor((a / t) * 100)}%`);
-    const infoRow = ({ count = 0, statuses, errors = {}, time }, name) => {
+    const infoRow = ({ count = 0, fatal = 0, statuses, errors = {}, time }, name) => {
       if (!count) return null;
       const success = get(statuses, 'success.count', 0);
       const successTime = get(statuses, 'success.value', 0);
@@ -193,22 +203,27 @@ export class ProxyManager extends Module {
         (name || '').padStart(20),
         count && `${success}/${count}(${percent(success, count)})`.padEnd(30),
         time && `${successTime}/${time}(${percent(successTime, time)})`.padEnd(30),
+        (fatal ? `fatals(${fatal})` : '').padEnd(10),
         Object.keys(errors).join(','),
       ]
         .filter(Boolean)
         .join(' ');
     };
     const proxiesStr = map(proxies, infoRow).filter(Boolean).join('\n');
-    const stats2 = await this.strategy.getStats();
-    const args = ['[stats]', stats2];
-    if (stats.count) {
-      args.push(`\n${infoRow(stats, 'SUM')}`);
-      if (proxiesStr) {
-        args.push(`\n${proxiesStr}`);
+    const strategyStats = await this.strategy.getStats();
+
+    const stats1 = {
+      total: get(this, 'cache.list.length'),
+    };
+    if (Object.keys(strategyStats).length) {
+      const args = [''];
+      if (stats.count) {
+        args.push(`${infoRow(stats, 'SUM')}`);
+        if (proxiesStr) {
+          args.push(`${proxiesStr}`);
+        }
       }
-    }
-    if (Object.keys(stats2).length) {
-      this.log.debug(...args);
+      this.log.debug('[stats]', stats1, `[${this.strategy.strategy}]`, strategyStats, args.join('\n'));
     }
   }
 
@@ -220,6 +235,7 @@ export class ProxyManager extends Module {
       const proxyStats = proxy.stats;
       stats.proxies[proxy.key] = proxyStats;
       inc(stats, 'count', proxyStats.count || 0);
+      inc(stats, 'fatals', proxyStats.fatals || 0);
       inc(stats, 'time', proxyStats.time || 0);
       forEach(proxyStats.statuses, (avgVal, name) => {
         avg(stats, `statuses.${name}`, avgVal);

@@ -62,12 +62,15 @@ export const createRequest =
           return res;
         } catch (initErr) {
           const code = getErrCode(initErr);
-          if (feedback) await feedback.error(initErr, { fatal: isNetworkFatal(initErr) });
+          const fatal = isNetworkFatal(initErr);
           proxy = null;
           let errProps = {};
-          if (isNetworkError(initErr)) errProps = { subcode: Err.getCode(initErr), class: 'network', tries, maxTries };
+          if (isNetworkError(initErr)) {
+            errProps = { message: code, subcode: Err.getCode(initErr), class: 'network', tries, maxTries };
+          }
           const err = new Err(code, initErr, errProps);
           Err.copyProps(err, initErr);
+          if (feedback) await feedback.error(err, { fatal });
           if (!isNetworkError(initErr)) throw retry.StopError(err); // exit right now
           throw err; // try one again
         }

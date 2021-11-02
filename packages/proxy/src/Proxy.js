@@ -90,13 +90,12 @@ export class Proxy {
   }
   stats = {};
   feedback(props = {}) {
-    const { status = 'unknown', err, time } = props;
+    const { status = 'unknown', err, time, fatal } = props;
     inc(this.stats, 'count');
     inc(this.stats, 'time', time);
     avg(this.stats, `statuses.${status}`, time);
-    if (err) {
-      avg(this.stats, `errors.${err}`, time);
-    }
+    if (fatal) inc(this.stats, 'fatal');
+    if (err) avg(this.stats, `errors.${err}`, time);
     this.emit('feedback', props, this);
   }
 }
