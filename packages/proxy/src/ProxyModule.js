@@ -3,6 +3,7 @@ import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
 import flatten from 'lodash/flatten';
 import max from 'lodash/max';
+import pick from 'lodash/pick';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
 
@@ -14,10 +15,19 @@ import { filterProxy } from './utils/filterProxy';
 // const isDebug = isDev;
 const isDebug = false;
 export class ProxyModule extends Module {
+  getActiveProvidersNames() {
+    return Object.keys(
+      this.config.providers,
+      (provider) => !!this.config.providers[provider] && !this.config.providers[provider].disabled,
+    );
+  }
   getModules() {
     return {
       ...super.getModules(),
-      providers: [import('@lskjs/module/asyncModules'), { items: this.providers, config: this.config.providers }],
+      providers: [
+        import('@lskjs/module/asyncModules'),
+        { items: pick(this.providers, this.getActiveProvidersNames()), config: this.config.providers },
+      ],
       tests: [import('./ProxyTests'), { tests: this.tests, config: this.config.tests }],
     };
   }
@@ -67,7 +77,8 @@ export class ProxyModule extends Module {
     const proxyStats = await this.getProxyStats(proxyList);
     proxyList = proxyList.map((p) => {
       // TODO: как-то облагородить
-      const proxyTests = proxyStats[p.key] || [];
+      let proxyTests = proxyStats[p.key] || [];
+      proxyTests = proxyTests.filter((test) => test.status === 'success');
       const testIds = proxyTests.map((t) => t?.test?.id);
       const tagsList = proxyTests.map((t) => t?.test?.tags);
       const testTags = uniq([].concat(...tagsList));

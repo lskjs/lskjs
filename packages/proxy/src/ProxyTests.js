@@ -94,6 +94,7 @@ export class ProxyTests extends Module {
     let res = this.getCache(id);
     if (res && !force) return res;
     res = await this.execTest({ id, proxy, test, ...props });
+    // this.log.trace('[runTest]', res)
     this.setCache(res);
     return res;
   }
