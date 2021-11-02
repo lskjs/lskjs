@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.46.0](https://github.com/lskjs/lskjs/compare/v2.45.1...v2.46.0) (2021-11-02)
+
+
+### Features
+
+* **rlog:** migrate console.log to this.log ([820166a](https://github.com/lskjs/lskjs/commit/820166a73455c3b3751cc567d3b3d293aad01617))
+
+
+
+
+
 # [2.43.0](https://github.com/lskjs/lskjs/compare/v2.42.3...v2.43.0) (2021-10-25)
 
 
