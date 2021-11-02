@@ -47,7 +47,7 @@ export default class ProxyApi extends BaseApi {
   }
   async tests(req) {
     const proxy = await this.app.module('proxy');
-    return proxy.runTests(req.data);
+    return proxy.runProxyTests(req.data.list);
   }
   async list(req, res) {
     const proxy = await this.app.module('proxy');

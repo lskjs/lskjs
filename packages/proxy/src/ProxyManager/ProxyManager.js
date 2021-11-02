@@ -28,6 +28,18 @@ export class ProxyManager extends Module {
   };
   strategies = strategies;
   static parseProxyParam = parseProxyParam;
+  async clientRequest(props = {}) {
+    const params = {
+      ...get(this, 'config.client.options', {}),
+      ...(props.params || {}),
+    };
+    const newProps = {
+      ...props,
+      params,
+    };
+    // console.log({newProps});
+    return this.client.request(newProps);
+  }
   async createClient() {
     const baseURL = this.config.client?.baseURL || this.config.client?.url;
     if (baseURL) {
@@ -37,7 +49,7 @@ export class ProxyManager extends Module {
     }
     const props = {
       baseURL,
-      // params: { ...this.options, ...params },
+      // params: { ...this.options }, // , ...params
       // ...axiosParams,
       // timeout: 5000,
     };
@@ -101,7 +113,12 @@ export class ProxyManager extends Module {
   // }
   async fetchProxyList(params) {
     try {
-      const { data } = await this.client.get('/list');
+      const res = await this.clientRequest({
+        methdo: 'get',
+        url: '/list',
+      });
+      // console.log('res', res);
+      const { data } = res;
       return { requestedAt: new Date(), ...data };
     } catch (err) {
       this.log.error('PROXY_LIST_ERROR', err);
