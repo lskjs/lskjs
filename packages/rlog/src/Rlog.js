@@ -97,7 +97,7 @@ export class Rlog {
     Object.assign(this, params);
   }
 
-  async send(action, text, params = {}) {
+  async __log(action, text, params = {}) {
     const base = params.base || this.base;
     const project = params.project || this.project;
     const secret = params.secret || this.secret;
@@ -107,7 +107,7 @@ export class Rlog {
     const status = statuses[action] || statuses._default;
 
     if (!(params.force || params.ignoreLimits) && !checkLimits(this.stats, limits)) {
-      if (this.log && this.log.warn) this.log.warn('Rlog.send: IGNORE BY LIMITS');
+      if (this.log && this.log.warn) this.log.warn('[Rlog] IGNORE BY LIMITS');
       return null;
     }
 
@@ -119,7 +119,6 @@ export class Rlog {
       if (this.log[action]) {
         this.log[action](md);
       } else {
-        console.log('this.log', this.log);
         this.log.trace(md);
       }
     }
@@ -127,7 +126,6 @@ export class Rlog {
     const url = [base, project].filter(Boolean).join('/');
     // console.log({this: this}, url)
     // console.log({url});
-
 
     return axios
       .post(url, {
@@ -146,12 +144,24 @@ export class Rlog {
         return null;
       });
   }
-  trace = (...args) => this.send('trace', ...args);
-  start = (...args) => this.send('start', ...args);
-  success = (...args) => this.send('success', ...args);
-  warn = (...args) => this.send('warn', ...args);
-  error = (...args) => this.send('error', ...args);
-  fatal = (...args) => this.send('fatal', ...args);
+  trace(...args) {
+    return this.__log('trace', ...args);
+  }
+  start(...args) {
+    return this.__log('start', ...args);
+  }
+  success(...args) {
+    return this.__log('success', ...args);
+  }
+  warn(...args) {
+    return this.__log('warn', ...args);
+  }
+  error(...args) {
+    return this.__log('error', ...args);
+  }
+  fatal(...args) {
+    return this.__log('fatal', ...args);
+  }
   // __noSuchMethod__(method, args) {
   //   return this.send(method, ...args);
   // }
