@@ -49,6 +49,7 @@ export class ProxyTests extends Module {
     const res = {
       id: getId({ proxy, test }),
       proxy,
+      proxyKey: proxy?.key || '?',
       test,
     };
     const startedAt = new Date();
@@ -58,7 +59,7 @@ export class ProxyTests extends Module {
     } catch (err) {
       res.status = 'error';
       res.errCode = Err.getCode(err);
-      res.err = Err.getCode(err);
+      res.err = err;
     }
     res.time = Date.now() - startedAt;
     res.updatedAt = Date.now();

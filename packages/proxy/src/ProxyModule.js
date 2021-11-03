@@ -1,6 +1,7 @@
 // import { isDev } from '@lskjs/env';
 import Module from '@lskjs/module';
 import asyncMapValues from '@lskjs/utils/asyncMapValues';
+import find from 'lodash/find';
 import flatten from 'lodash/flatten';
 import max from 'lodash/max';
 import pick from 'lodash/pick';
@@ -72,7 +73,9 @@ export class ProxyModule extends Module {
   }
   async runProxyTest({ proxyKey, testId }) {
     const tests = await this.module('tests');
-    return tests.runTest({ proxyKey, testId });
+    const proxyList = await this.getAllProxyList();
+    const proxy = find(proxyList, { key: proxyKey });
+    return tests.runTest({ proxy, testId });
   }
   async getList(filter = {}) {
     const res = await this.runProvidersMethod('getList');
