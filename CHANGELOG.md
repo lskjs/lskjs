@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.47.0](https://github.com/lskjs/lskjs/compare/v2.46.2...v2.47.0) (2021-11-03)
+
+
+### Bug Fixes
+
+* **proxy:** force manual testing by default ([2123cd5](https://github.com/lskjs/lskjs/commit/2123cd576f951c12e3c324168b7878861e3c24d4))
+* **proxy:** some mistakes ([f084665](https://github.com/lskjs/lskjs/commit/f084665fe81f6f02f1705665232f4f67f1f894ec))
+
+
+### Features
+
+* **proxy:** single test running ([b297a6d](https://github.com/lskjs/lskjs/commit/b297a6d3c6253f44fbc01e1353884064517eeb8d))
+
+
+
+
+
 ## [2.46.2](https://github.com/lskjs/lskjs/compare/v2.46.1...v2.46.2) (2021-11-02)
 
 
