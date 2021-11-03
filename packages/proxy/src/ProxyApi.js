@@ -56,7 +56,7 @@ export default class ProxyApi extends BaseApi {
     const { proxyKey, testId } = req.data;
     if (!proxyKey) throw new Err('!proxyKey')
     if (!testId) throw new Err('!testId')
-    return proxy.runProxyTest({ proxyKey, testId, force: 1 });
+    return proxy.runProxyTest({ proxyKey, testId, force: true });
   }
   async list(req, res) {
     const proxy = await this.app.module('proxy');

@@ -71,11 +71,11 @@ export class ProxyModule extends Module {
     if (!proxyList) proxyList = await this.getAllProxyList({ localhost: true });
     return tests.runTests(proxyList);
   }
-  async runProxyTest({ proxyKey, testId }) {
+  async runProxyTest({ proxyKey, testId, force }) {
     const tests = await this.module('tests');
     const proxyList = await this.getAllProxyList();
     const proxy = find(proxyList, { key: proxyKey });
-    return tests.runTest({ proxy, testId });
+    return tests.runTest({ proxy, testId, force });
   }
   async getList(filter = {}) {
     const res = await this.runProvidersMethod('getList');
