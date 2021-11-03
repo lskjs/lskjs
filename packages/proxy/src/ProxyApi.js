@@ -1,3 +1,4 @@
+import Err from '@lskjs/err';
 import BaseApi from '@lskjs/server-api';
 
 import { filterProxy } from './utils/filterProxy';
@@ -11,6 +12,7 @@ export default class ProxyApi extends BaseApi {
       '/list': this.list.bind(this),
       '/list.:format': this.list.bind(this),
       '/tests': this.tests.bind(this),
+      '/test': this.test.bind(this),
       '/buyList': this.buyList.bind(this),
       '/:provider': this.list.bind(this),
       '/:provider.:format': this.list.bind(this),
@@ -48,6 +50,13 @@ export default class ProxyApi extends BaseApi {
   async tests(req) {
     const proxy = await this.app.module('proxy');
     return proxy.runProxyTests(req.data.list);
+  }
+  async test(req) {
+    const proxy = await this.app.module('proxy');
+    const { proxyKey, testId } = req.data;
+    if (!proxyKey) throw new Err('!proxyKey')
+    if (!testId) throw new Err('!testId')
+    return proxy.runProxyTest({ proxyKey, testId, force: 1 });
   }
   async list(req, res) {
     const proxy = await this.app.module('proxy');

@@ -2,11 +2,12 @@ import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import Bluebird from 'bluebird';
-import { pick } from 'lodash';
+import find from 'lodash/find';
 import flatten from 'lodash/flatten';
 import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
 import isFunction from 'lodash/isFunction';
+import pick from 'lodash/pick';
 import shuffle from 'lodash/shuffle';
 
 import { createRequest } from './createRequest';
@@ -56,6 +57,7 @@ export class ProxyTests extends Module {
       res.status = 'success';
     } catch (err) {
       res.status = 'error';
+      res.errCode = Err.getCode(err);
       res.err = Err.getCode(err);
     }
     res.time = Date.now() - startedAt;
@@ -89,7 +91,11 @@ export class ProxyTests extends Module {
     this.updateCache();
     return this.cache.results;
   }
-  async runTest({ proxy, test, force = false, ...props } = {}) {
+  async runTest({ proxy, testId, test, force = false, ...props } = {}) {
+    if (!test && testId) {
+      // eslint-disable-next-line no-param-reassign
+      test = find(this.tests, { id: testId });
+    }
     const id = getId({ proxy, test });
     let res = this.getCache(id);
     if (res && !force) return res;

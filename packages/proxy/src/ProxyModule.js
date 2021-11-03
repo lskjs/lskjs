@@ -70,6 +70,10 @@ export class ProxyModule extends Module {
     if (!proxyList) proxyList = await this.getAllProxyList({ localhost: true });
     return tests.runTests(proxyList);
   }
+  async runProxyTest({ proxyKey, testId }) {
+    const tests = await this.module('tests');
+    return tests.runTest({ proxyKey, testId });
+  }
   async getList(filter = {}) {
     const res = await this.runProvidersMethod('getList');
     const fetchedAt = max(Object.values(res).map((a) => a?.fetchedAt));
