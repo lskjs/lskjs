@@ -18,7 +18,6 @@ export class RawProvider extends ProxyProvider {
     return data;
   }
   async fetchList() {
-    if (this.config.proxies) return this.config.proxies;
     const data = await this.fetchListRaw();
     const proxyList = parseProxies(data);
     return proxyList.map((proxy) => this.createProxy(proxy));

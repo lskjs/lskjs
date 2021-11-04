@@ -1,12 +1,21 @@
+import Err from '@lskjs/err';
 import set from 'lodash/set';
 
 import { createProxy } from './createProxy';
 
-export function parseProxy(str) {
+export function parseProxy(str, { throws = 1 } = {}) {
   if (typeof str !== 'string') return createProxy(str);
   let uri = str;
   if (!uri.includes('://')) uri = `http://${uri}`;
-  const url = new URL(uri);
+  let url;
+  try {
+    // eslint-disable-next-line prefer-const
+    url = new URL(uri);
+  } catch (err) {
+    if (!throws) return null;
+    throw err;
+    // throw new Err(err, { uri });
+  }
   const params = Object.fromEntries(url.searchParams);
   const type = url.protocol ? url.protocol.substr(0, url.protocol.length - 1) : 'http';
   const { username: user, password, hostname: host, port } = url;
@@ -33,7 +42,11 @@ export function parseProxy(str) {
 }
 
 export const parseProxies = (str = '') => {
-  if (Array.isArray(str)) return str.map((p) => parseProxy(p));
+  if (Array.isArray(str)) return str.map((p) => parseProxy(p, { throws: false })).filter(Boolean);
   if (typeof str !== 'string') return [str];
-  return str.split(/[,\n]/).map((p) => parseProxy(p));
+  return str
+    .trim()
+    .split(/[,\n]/)
+    .map((p) => parseProxy(p, { throws: false }))
+    .filter(Boolean);
 };
