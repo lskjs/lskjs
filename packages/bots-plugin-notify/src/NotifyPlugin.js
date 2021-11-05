@@ -7,28 +7,22 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import cron from 'node-cron';
 
-import {
-  alertmanager,
-  getEconnabortedErrorMessage,
-  getOtherErrorMessage,
-  getRedirectErrorMessage,
-  getWarningMessage,
-  github,
-  gitlab,
-  graylog,
-} from './createPost';
+import { alertmanager, github, gitlab, graylog, monitoring } from './createPost';
 
 export class NotifyPlugin extends BaseBotPlugin {
+  debug = 1;
   providers = ['telegram', 'slack'];
   crons = [];
   alertmanager = alertmanager;
   github = github;
   gitlab = gitlab;
   graylog = graylog;
-  getEconnabortedErrorMessage = getEconnabortedErrorMessage;
-  getOtherErrorMessage = getOtherErrorMessage;
-  getRedirectErrorMessage = getRedirectErrorMessage;
-  getWarningMessage = getWarningMessage;
+  monitoring = monitoring;
+
+  // getEconnabortedErrorMessage = getEconnabortedErrorMessage;
+  // getOtherErrorMessage = getOtherErrorMessage;
+  // getRedirectErrorMessage = getRedirectErrorMessage;
+  // getWarningMessage = getWarningMessage;
 
   sendNotification({ bot, message }) {
     if (!message) throw new Err('!message');
@@ -44,15 +38,17 @@ export class NotifyPlugin extends BaseBotPlugin {
     if (this.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
     if (message.type === 'gitlab') {
       msg = this.gitlab(message, project, bot);
-    }
-    if (message.type === 'github') {
+    } else if (message.type === 'github') {
       msg = this.github(message, project, bot);
-    }
-    if (message.type === 'alertmanager') {
+    } else if (message.type === 'alertmanager') {
       msg = this.alertmanager(message, bot);
-    }
-    if (message.type === 'graylog') {
+    } else if (message.type === 'graylog') {
       msg = this.graylog(message);
+    } else if (message.type === 'monitoring') {
+      msg = this.monitoring(message);
+    } else {
+      msg = '!type';
+      this.log.warn('!type', { message });
     }
 
     if (isDefault && msg) {
@@ -67,55 +63,67 @@ export class NotifyPlugin extends BaseBotPlugin {
     const chats = project[provider] || [];
 
     if (!msg) throw new Err('!NotifyPlugin.sendNotification.msg');
-    return Bluebird.map(chats.filter(Boolean), (chat) => bot.sendMessage(chat, msg, options));
+    return Bluebird.map(chats.filter(Boolean), (chat) => { //eslint-disable-line
+      return bot.sendMessage(chat, msg, options);
+    });
   }
 
   checkResourses(bot) {
     const { projects } = this.config;
     const timeout = 30 * 1000;
     const timeoutWarn = 7 * 1000;
-
     forEach(projects, (project, projectName) => {
-      // eslint-disable-next-line no-shadow
-      const { monitoring } = project;
-      if (!monitoring) return;
-      forEach(monitoring, async (resourse) => {
-        const { url } = resourse;
-        if (!url) return {};
-        try {
-          const time = new Date();
-          const { status } = await axios({
-            url,
-            timeout,
+      // eslint-disable-next-line no-param-reassign
+      project.name = projectName;
+    });
+    return Bluebird.map(Object.values(projects), async (project) => {
+      const { monitoring: monitorings } = project;
+      if (!(monitorings && monitorings.length > 0)) return null;
+      return Bluebird.map(
+        monitorings,
+        // eslint-disable-next-line no-shadow
+        async (monitoring) => {
+          const message = {
+            type: 'monitoring',
+            projectName: project.name,
+            project,
+            monitoring,
+            startedAt: Date.now(),
+          };
+          try {
+            const { url } = monitoring;
+            if (!url) return null;
+            const res = await axios({ url, timeout });
+            message.time = Date.now() - message.startedAt;
+            message.res = res;
+            if (res.status >= 300) {
+              message.status = 'error';
+            } else if (message.time >= timeoutWarn) {
+              message.status = 'warning';
+            } else {
+              message.status = 'success';
+            }
+          } catch (err) {
+            message.status = 'error';
+            message.err = err;
+            message.time = Date.now() - message.startedAt;
+            message.response = err ? err.response : null;
+          }
+          this.log.trace(`[checkResourses] ${message.status}`);
+          this.sendNotification({ bot, message }).catch((err) => {
+            this.log.error('[sendNotification]', err, message);
           });
-          if (status >= 300) {
-            const message = this.getRedirectErrorMessage({ projectName, url }, bot);
-            await this.sendNotification({ bot, message });
-            return {};
-          }
-          if (Date.now() - time >= timeoutWarn) {
-            const message = this.getWarningMessage({ projectName, url, timeoutWarn }, bot);
-            await this.sendNotification({ bot, message });
-            return { status: 200 };
-          }
-          this.log.debug('Resource monitoring - OK', url);
-          return {};
-        } catch (err) {
-          const message =
-            err && err.code === 'ECONNABORTED'
-              ? this.getEconnabortedErrorMessage({ projectName, url, timeout }, bot)
-              : this.getOtherErrorMessage({ projectName, url, err }, bot);
-
-          this.log.error(`Status: ${err?.response?.status || ''} ${err?.response?.statusText || ''}`);
-          await this.sendNotification({ bot, message });
-          return {};
-        }
-      });
+          return message;
+        },
+        { concurrency: 1 },
+      );
     });
   }
-  runMonitoring(bot) {
+  async runMonitoring(bot) {
     let cronConfig = get(this.config, 'cron', '* * * * *');
     if (!Array.isArray(cronConfig)) cronConfig = [cronConfig];
+
+    await this.checkResourses(bot);
 
     this.crons = cronConfig.map((config) => {
       const { time = '* * * * *', timeZone = 'Europe/Moscow' } = config;

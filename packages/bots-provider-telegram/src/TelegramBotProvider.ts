@@ -436,6 +436,7 @@ export class TelegramBotProvider extends BaseBotProvider {
       reply_markup?: string;
     } = {},
   ): Promise<any> {
+    if (!content) throw new Err('!content');
     let to = this.getMessageChatId(ctx);
     let method = 'sendMessage';
     let args = [content.text || content];
