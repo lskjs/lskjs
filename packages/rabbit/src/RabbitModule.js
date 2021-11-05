@@ -103,7 +103,13 @@ export class RabbitModule extends Module {
     if (this.tryReconnect) return;
     this.tryReconnect = true;
     this.emit('connectionError');
-    this.log.error(err);
+    this.log.error('[onError]', err);
+    if (Err.getCode(err) === 'Unexpected close') {
+      setTimeout(() => {
+        this.log.fatal('[ALARM]', 'PROCESS.KILL in 5 sec', err);
+        process.kill(1);
+      }, 5000);
+    }
     const { reconnectTimeout } = this.config;
     this.log.debug(`error, wait ${reconnectTimeout} ms for restart connect`);
     await Bluebird.delay(reconnectTimeout);
