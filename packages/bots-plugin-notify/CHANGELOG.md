@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.48.0](https://github.com/lskjs/lskjs/compare/v2.47.3...v2.48.0) (2021-11-05)
+
+
+### Features
+
+* **bots-plugin-notify:** refactor monitoring notify ([5093044](https://github.com/lskjs/lskjs/commit/5093044c988b2055f871e9df4d9f9ee7bf7b4c0e))
+
+
+
+
+
 # [2.46.0](https://github.com/lskjs/lskjs/compare/v2.45.1...v2.46.0) (2021-11-02)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-notify
