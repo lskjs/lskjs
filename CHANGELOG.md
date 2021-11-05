@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.48.1](https://github.com/lskjs/lskjs/compare/v2.48.0...v2.48.1) (2021-11-05)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** messages with status "success" will not send ([2521a14](https://github.com/lskjs/lskjs/commit/2521a14e376e59450092c6f67c4fc2070b12f6ed))
+
+
+
+
+
 # [2.48.0](https://github.com/lskjs/lskjs/compare/v2.47.3...v2.48.0) (2021-11-05)
 
 
