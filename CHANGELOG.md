@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.47.3](https://github.com/lskjs/lskjs/compare/v2.47.2...v2.47.3) (2021-11-05)
+
+
+### Bug Fixes
+
+* **rabbit:** Unexpected close process.kill ([556cb69](https://github.com/lskjs/lskjs/commit/556cb6945bf3c469b19440f1ea768c07d2f7b68d))
+
+
+
+
+
 ## [2.47.2](https://github.com/lskjs/lskjs/compare/v2.47.1...v2.47.2) (2021-11-04)
 
 
