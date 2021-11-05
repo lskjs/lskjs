@@ -36,6 +36,11 @@ export class NotifyPlugin extends BaseBotPlugin {
     }
     let msg = get(message, 'text');
     if (this.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
+
+    if (message.status === 'success') {
+      return new Promise((resolve) => resolve(null));
+    }
+
     if (message.type === 'gitlab') {
       msg = this.gitlab(message, project, bot);
     } else if (message.type === 'github') {
