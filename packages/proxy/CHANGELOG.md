@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.49.1](https://github.com/lskjs/lskjs/compare/v2.49.0...v2.49.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* **proxy:** add fatals to iterate and random proxy strategy ([3482717](https://github.com/lskjs/lskjs/commit/3482717810eaa7ffbbed43fd68a599cade48aa16))
+
+
+
+
+
 ## [2.47.2](https://github.com/lskjs/lskjs/compare/v2.47.1...v2.47.2) (2021-11-04)
 
 
