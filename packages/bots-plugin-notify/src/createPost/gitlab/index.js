@@ -8,16 +8,16 @@ export function gitlab(message, project, bot) {
 
   const { object_kind: objectKind, object_attributes: objectAttributes, build_status: buildStatus } = message.meta;
   if (objectKind === 'pipeline' && project.gitlab?.[`pipeline__${objectAttributes.status}`]) {
-    return pipeline(message, bot);
+    return { msg: pipeline(message, bot) };
   }
   if (objectKind === 'build' && project.gitlab?.[`build__${buildStatus}`]) {
-    return build(message, bot);
+    return { msg: build(message, bot) };
   }
   if (objectKind === 'merge_request') {
-    return mergeRequest(message, bot);
+    return { msg: mergeRequest(message, bot) };
   }
   if (objectKind === 'push') {
-    return push(message, bot);
+    return { msg: push(message, bot) };
   }
 
   return null;

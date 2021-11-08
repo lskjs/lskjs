@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 import Bluebird from 'bluebird';
@@ -48,10 +49,12 @@ export class NotifyApi extends Api {
     });
 
     try {
-      await Promise.all([sendTelegram, sendSlack]);
+      const res = await Promise.all([sendTelegram, sendSlack]);
+      if (isDev) return res;
       return { data: 'ok' };
-    } catch (error) {
-      throw new Err(error);
+    } catch (err) {
+      console.log({ err });
+      throw new Err(err);
     }
   }
 

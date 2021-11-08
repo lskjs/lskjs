@@ -10,16 +10,16 @@ export function github(message, project, bot) {
   const { object_attributes: objectAttributes, build_status: buildStatus } = message.meta;
 
   if (event === 'pipeline' && project.gitlab?.[`pipeline__${objectAttributes.status}`]) {
-    return pipeline(message, bot);
+    return { msg: pipeline(message, bot) };
   }
   if (event === 'build' && project.github?.[`build__${buildStatus}`]) {
-    return build(message, bot);
+    return { msg: build(message, bot) };
   }
   if (event === 'pull_request') {
-    return mergeRequest(message, bot);
+    return { msg: mergeRequest(message, bot) };
   }
   if (event === 'push') {
-    return push(message, bot);
+    return { msg: push(message, bot) };
   }
 
   return null;

@@ -32,7 +32,7 @@ const alertsLog = ({ alerts }, bot) => alerts.map((alert) => alertLog(alert, bot
 
 export function alertmanager(message, bot) {
   if (this?.debug) this.log.trace('alertmanager.message', message);
-  return alertsLog(message.meta, bot);
+  return { msg: alertsLog(message.meta, bot) };
 }
 
 export default alertmanager;

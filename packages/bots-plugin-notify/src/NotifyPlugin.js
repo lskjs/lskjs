@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import cron from 'node-cron';
 
-import { alertmanager, github, gitlab, graylog, monitoring } from './createPost';
+import { alertmanager, github, gitlab, graylog, manual, monitoring } from './createPost';
 
 export class NotifyPlugin extends BaseBotPlugin {
   debug = 1;
@@ -18,13 +18,14 @@ export class NotifyPlugin extends BaseBotPlugin {
   gitlab = gitlab;
   graylog = graylog;
   monitoring = monitoring;
+  manual = manual;
 
   // getEconnabortedErrorMessage = getEconnabortedErrorMessage;
   // getOtherErrorMessage = getOtherErrorMessage;
   // getRedirectErrorMessage = getRedirectErrorMessage;
   // getWarningMessage = getWarningMessage;
 
-  sendNotification({ bot, message }) {
+  async sendNotification({ bot, message }) {
     if (!message) throw new Err('!message');
     const { provider } = bot;
     const { projectName } = message;
@@ -34,42 +35,55 @@ export class NotifyPlugin extends BaseBotPlugin {
       isDefault = true;
       project = this.config.projects._default;
     }
-    let msg = get(message, 'text');
     if (this.debug) this.log.trace('NotifyPlugin.sendNotification.message', message);
 
-    if (message.status === 'success') {
-      return new Promise((resolve) => resolve(null));
-    }
-
+    let res;
     if (message.type === 'gitlab') {
-      msg = this.gitlab(message, project, bot);
+      res = await this.gitlab(message, project, bot);
     } else if (message.type === 'github') {
-      msg = this.github(message, project, bot);
+      res = await this.github(message, project, bot);
     } else if (message.type === 'alertmanager') {
-      msg = this.alertmanager(message, bot);
+      res = await this.alertmanager(message, bot);
     } else if (message.type === 'graylog') {
-      msg = this.graylog(message);
+      res = await this.graylog(message);
     } else if (message.type === 'monitoring') {
-      msg = this.monitoring(message);
+      res = await this.monitoring(message);
+    } else if (message.type === 'manual') {
+      res = await this.manual(message);
     } else {
-      msg = '!type';
+      res = { msg: `!type\n\n${JSON.stringify(message)}` };
       this.log.warn('!type', { message });
+    }
+    if (!res) return null;
+    let { msg, options } = res;
+    if (message.md || message.isMd) {
+      if (!options) options = {};
+      options.parse_mode = 'MarkdownV2';
     }
 
     if (isDefault && msg) {
       msg = `/notify/${projectName}\n\n${msg}`;
     }
 
-    const options = {};
-    if (message.md || message.isMd) {
-      options.parse_mode = 'MarkdownV2';
-    }
-
     const chats = project[provider] || [];
 
     if (!msg) throw new Err('!NotifyPlugin.sendNotification.msg');
     return Bluebird.map(chats.filter(Boolean), (chat) => { //eslint-disable-line
-      return bot.sendMessage(chat, msg, options);
+      return bot.sendMessage(chat, msg, options).catch((err) => {
+        if (
+          err &&
+          err.response &&
+          err.response.error_code === 400 &&
+          err.response.description &&
+          err.response.description.startsWith("Bad Request: can't parse entities")
+        ) {
+          msg += `\n\n------P.S.-------\n${err.response.description}`;
+          this.log.warn('[sendMessage]', err);
+          return bot.sendMessage(chat, msg, {});
+        }
+        this.log.error('[sendMessage]', err);
+        throw err;
+      });
     });
   }
 
@@ -115,7 +129,7 @@ export class NotifyPlugin extends BaseBotPlugin {
             message.response = err ? err.response : null;
           }
           this.log.trace(`[checkResourses] ${message.status}`);
-          this.sendNotification({ bot, message }).catch((err) => {
+          await this.sendNotification({ bot, message }).catch((err) => {
             this.log.error('[sendNotification]', err, message);
           });
           return message;

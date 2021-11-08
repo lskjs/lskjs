@@ -15,7 +15,9 @@ export const monitoring = ({ project, status, time, monitoring: monitoingConfig,
     ['url', monitoingConfig.url],
   ];
 
-  return arr.map(([key, val]) => `${key}: ${val}`).join('\n');
+  if (status === 'success') return null;
+
+  return { msg: arr.map(([key, val]) => `${key}: ${val}`).join('\n') };
 };
 
 export default monitoring;

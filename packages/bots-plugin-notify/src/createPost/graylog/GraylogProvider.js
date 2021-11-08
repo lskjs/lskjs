@@ -10,7 +10,7 @@ export function graylog(message) {
   } else {
     text = `<graylog>`;
   }
-  return `🔸 ${text}\n\n${JSON.stringify(message.meta)}`;
+  return { msg: `🔸 ${text}\n\n${JSON.stringify(message.meta)}` };
 }
 
 export default graylog;
