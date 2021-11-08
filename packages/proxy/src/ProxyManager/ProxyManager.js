@@ -114,7 +114,7 @@ export class ProxyManager extends Module {
   async fetchProxyList(params) {
     try {
       const res = await this.clientRequest({
-        methdo: 'get',
+        method: 'get',
         url: '/list',
       });
       // console.log('res', res);
