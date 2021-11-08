@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.49.0](https://github.com/lskjs/lskjs/compare/v2.48.1...v2.49.0) (2021-11-08)
+
+
+### Features
+
+* **bots-plugin-notify:** add manual provider, catch telegram md errors ([6010509](https://github.com/lskjs/lskjs/commit/601050901fca5e78767f258e92e09914d584b0b4))
+
+
+
+
+
 ## [2.48.1](https://github.com/lskjs/lskjs/compare/v2.48.0...v2.48.1) (2021-11-05)
 
 
