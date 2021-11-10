@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.50.0](https://github.com/lskjs/lskjs/compare/v2.49.1...v2.50.0) (2021-11-10)
+
+
+### Features
+
+* **proxy:** add urls array to raw provider ([e228c9d](https://github.com/lskjs/lskjs/commit/e228c9d5e927b09146d46f2ab99ae5d27466fc29))
+
+
+
+
+
 ## [2.49.1](https://github.com/lskjs/lskjs/compare/v2.49.0...v2.49.1) (2021-11-08)
 
 
