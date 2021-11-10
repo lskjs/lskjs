@@ -18,7 +18,7 @@ const isDebug = false;
 export class ProxyModule extends Module {
   getActiveProvidersNames() {
     return Object.keys(
-      this.config.providers,
+      this.config.providers || {},
       (provider) => !!this.config.providers[provider] && !this.config.providers[provider].disabled,
     );
   }

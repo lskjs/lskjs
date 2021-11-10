@@ -26,7 +26,7 @@ export class RawProvider extends ProxyProvider {
       urls,
       async (url) => {
         try {
-          const { data } = await this.client.get(this.config.url);
+          const { data } = await this.client.get(url);
           return data;
         } catch (err) {
           this.log.error('[fetchListRaw]', { url }, err);
