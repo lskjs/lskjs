@@ -42,6 +42,9 @@ export class ProxyTests extends Module {
     const log = await this.log.createChild({ name: `${test.id}` });
     const request = createRequest({
       apm,
+      labels: {
+        proxyTest: test.id,
+      },
       stats,
       log,
     });

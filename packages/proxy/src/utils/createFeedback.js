@@ -2,14 +2,14 @@
 import Err from '@lskjs/err';
 
 import { getProxyLabels } from './getProxyLabels';
-import { getErrCode } from './isNetworkError';
+// import { getErrCode } from './isNetworkError';
 
 const getTimeout = (startedAt) => (startedAt ? `${Date.now() - startedAt}ms` : '???ms');
 const isLowerEqual = (str = '', str2 = '') => str && str.toLowerCase() === str2;
 
 const logKeys = (...args) => args.map(([p1, p2]) => (p2 ? `[${p1}] ${p2}`.trim() : null)).filter(Boolean);
 
-export const createFeedback = (props = {}, { log, stats, tx, apm } = {}) => {
+export const createFeedback = (props = {}, { log, stats, tx, apm, labels } = {}) => {
   // console.log('[createFeedback]', { log: !!log, stats: !!stats, apm: !!apm });
   const { options = {}, proxy, tries, maxTries, startedAt = Date.now() } = props;
   const { driver, timeout, method, url } = options;
@@ -26,7 +26,12 @@ export const createFeedback = (props = {}, { log, stats, tx, apm } = {}) => {
     ['proxy', [proxy ? proxy.provider : null, proxy ? proxy.getUri() : 'localhost'].filter(Boolean).join(' ')],
   ];
   if (!tx && apm) tx = apm.startTransaction('request');
-  if (tx) tx.addLabels(getProxyLabels(proxy));
+  if (tx) {
+    tx.addLabels({
+      ...(labels || {}),
+      ...getProxyLabels(proxy),
+    });
+  }
   if (log) log.trace(...logKeys(...prefix, ...trace, ...postfix));
   return {
     success() {
@@ -49,7 +54,7 @@ export const createFeedback = (props = {}, { log, stats, tx, apm } = {}) => {
         }
         if (log) log.error(...logKeys(...prefix, ['err', errCode], ['time', getTimeout(startedAt)], ...postfix));
         if (stats) stats.trigger({ event: 'error', startedAt });
-        if (apm) apm.captureError({ code: errCode, message: Err.getMessage(err2) }); // TODO: подумать про await§
+        if (apm) apm.captureError({ code: errCode, message: Err.getMessage(err2), data: err2.data }); // TODO: подумать про await§
         if (tx) tx.result = errCode;
         if (tx) tx.end();
       } catch (err3) {

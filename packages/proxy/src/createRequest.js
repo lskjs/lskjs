@@ -16,7 +16,7 @@ export const getProviderOptions = (proxy, driver) => (proxy ? proxy.getProviderO
 // const createNoop = () => ({ success: () => null, error: () => null });
 
 export const createRequest =
-  ({ createFeedback = defaultCreateFeedback, ...feedbackOptions } = {}) =>
+  ({ createFeedback = defaultCreateFeedback, ...feedbackOptions, labels } = {}) =>
   (props = {}) => {
     const {
       driver = 'axios',
@@ -24,6 +24,7 @@ export const createRequest =
       timeout = NETWORK_TIMEOUT,
       interval = NETWORK_INTERVAL,
       proxy: initProxy,
+      interceptors,
       ...params
     } = props;
     const maxTries =
@@ -46,7 +47,7 @@ export const createRequest =
         const options = { ...params, ...getProviderOptions(proxy, driver) };
         tries += 1;
         const feedback = createFeedback
-          ? createFeedback({ options: props, proxy, tries, maxTries }, { ...feedbackOptions, proxyManager }) // TODO: подумать а не замудренно ли
+          ? createFeedback({ options: props, proxy, tries, maxTries }, { ...feedbackOptions, proxyManager, labels }) // TODO: подумать а не замудренно ли
           : null;
         try {
           let abortTimeout;
@@ -56,7 +57,20 @@ export const createRequest =
             options.cancelToken = source.token;
             abortTimeout = setTimeout(() => source.cancel('REQUEST_NETWORK_TIMEOUT'), timeout);
           }
-          const res = await axios(options);
+          const client = axios.create();
+          if (interceptors) {
+            if (Array.isArray(interceptors.request)) {
+              client.interceptors.request.use(...interceptors.request);
+            } else {
+              client.interceptors.request.use(interceptors.request);
+            }
+            if (Array.isArray(interceptors.response)) {
+              client.interceptors.response.use(...interceptors.response);
+            } else {
+              client.interceptors.response.use(interceptors.response);
+            }
+          }
+          const res = await client(options);
           if (abortTimeout) clearTimeout(abortTimeout);
           if (feedback) await feedback.success();
           return res;
