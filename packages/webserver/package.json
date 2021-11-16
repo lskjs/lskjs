@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/webserver",
-  "version": "2.46.0",
+  "version": "2.51.0",
   "description": "LSK module webserver.",
   "keywords": [
     "webserver",

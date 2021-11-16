@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.51.0](https://github.com/lskjs/lskjs/compare/v2.50.1...v2.51.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* add req log ([fc69afc](https://github.com/lskjs/lskjs/commit/fc69afcccf14a6edac9e53ed84dea95ace6c9276))
+
+
+
+
+
 # [2.46.0](https://github.com/lskjs/lskjs/compare/v2.45.1...v2.46.0) (2021-11-02)
 
 **Note:** Version bump only for package @lskjs/webserver

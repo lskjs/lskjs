@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.51.0](https://github.com/lskjs/lskjs/compare/v2.50.1...v2.51.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* **proxy:** pass labels ([938069b](https://github.com/lskjs/lskjs/commit/938069bb61c6fdf98f75c2c3d63a8a3aad7d8f6e))
+
+
+### Features
+
+* **proxy:** add interceptios to request and labels to apm ([7a8bd23](https://github.com/lskjs/lskjs/commit/7a8bd23edfc9d326948d67941b7cfa20420ee80e))
+
+
+
+
+
 ## [2.50.1](https://github.com/lskjs/lskjs/compare/v2.50.0...v2.50.1) (2021-11-10)
 
 
