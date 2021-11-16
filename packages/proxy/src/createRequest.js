@@ -16,7 +16,7 @@ export const getProviderOptions = (proxy, driver) => (proxy ? proxy.getProviderO
 // const createNoop = () => ({ success: () => null, error: () => null });
 
 export const createRequest =
-  ({ createFeedback = defaultCreateFeedback, ...feedbackOptions, labels } = {}) =>
+  ({ createFeedback = defaultCreateFeedback, labels, ...feedbackOptions } = {}) =>
   (props = {}) => {
     const {
       driver = 'axios',
