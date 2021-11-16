@@ -32,7 +32,10 @@ export default (webserver) =>
        */
       if (config.reqLog && webserver.log) {
         if (debug) webserver.log.trace('apply reqLog');
-        const reqLogConfig = isPlainObject(config.reqLog) ? config.reqLog : {};
+        const reqLogConfig = {
+          ...(isPlainObject(config.reqLog) ? config.reqLog : {}),
+          ...(get(webserver, 'config.req.log') || {}),
+        };
         if (config.reqId) {
           reqLogConfig.reqId = req.reqId;
         }
