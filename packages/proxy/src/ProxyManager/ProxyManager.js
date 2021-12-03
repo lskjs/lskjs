@@ -176,7 +176,7 @@ export class ProxyManager extends Module {
   async update() {
     if (this.isActualCache()) return;
     await this.updateCache();
-    const { list } = this.cache;
+    const list = this.cache?.list;
     if (!list?.length) {
       this.log.warn('[cache]', 'PROXY_MANAGER_LIST_EMPTY');
       // throw new Err('PROXY_MANAGER_LIST_EMPTY', { list });
