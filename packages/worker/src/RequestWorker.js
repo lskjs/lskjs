@@ -6,8 +6,9 @@ import { RabbitWorker } from './RabbitWorker';
 export class RequestWorker extends RabbitWorker {
   async getConfig() {
     const config = await super.getConfig();
-    const proxyConfig = await ProxyManager.parseProxyParam(process.env.PROXY);
-    return {
+    const proxyUrl = process.env.PROXY || 'http://localhost';
+    const proxyConfig = await ProxyManager.parseProxyParam(proxyUrl);
+    const newConfig = {
       ...config,
       proxy: {
         ...(config?.proxy || {}),
@@ -18,6 +19,8 @@ export class RequestWorker extends RabbitWorker {
         },
       },
     };
+    console.log({ proxyUrl, proxyConfig, newConfig });
+    return newConfig;
   }
   getModules() {
     return {
