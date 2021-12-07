@@ -19,7 +19,7 @@ export class RequestWorker extends RabbitWorker {
         },
       },
     };
-    console.log({ proxyUrl, proxyConfig, newConfig });
+    // console.log(proxyUrl, proxyConfig, '[newConfig]', newConfig.proxy);
     return newConfig;
   }
   getModules() {
