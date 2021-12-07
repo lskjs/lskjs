@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.52.0](https://github.com/lskjs/lskjs/compare/v2.51.1...v2.52.0) (2021-12-07)
+
+
+### Bug Fixes
+
+* **rabbit:** remove logs ([bffebd7](https://github.com/lskjs/lskjs/commit/bffebd77a132906b6cc51263e45952bd22a15c6e))
+* **worker:** merge configs without proxy url ([a2d364a](https://github.com/lskjs/lskjs/commit/a2d364a1409103fda402f1bd8a338c0bcd6ad113))
+
+
+
+
+
 ## [2.51.1](https://github.com/lskjs/lskjs/compare/v2.51.0...v2.51.1) (2021-12-03)
 
 **Note:** Version bump only for package @lskjs/worker

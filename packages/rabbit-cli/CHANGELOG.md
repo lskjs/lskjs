@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.52.0](https://github.com/lskjs/lskjs/compare/v2.51.1...v2.52.0) (2021-12-07)
+
+
+### Features
+
+* **rabbit-cli:** add rabbit cli ([619c250](https://github.com/lskjs/lskjs/commit/619c250ae80d91cc43deee46dfb69d520454583e))
+
+
+
+
+
 ## [2.47.3](https://github.com/lskjs/lskjs/compare/v2.47.2...v2.47.3) (2021-11-05)
 
 
