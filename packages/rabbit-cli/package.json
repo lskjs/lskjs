@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit-cli",
-  "version": "2.52.0",
+  "version": "2.52.2",
   "description": "CLI for quick post json's to RabbitMQ",
   "keywords": [
     "queue",
@@ -36,7 +36,8 @@
     "@lskjs/err": "2.43.0",
     "@lskjs/log": "2.52.0",
     "amqplib": "0.8.0",
-    "bluebird": "3.7.2"
+    "bluebird": "3.7.2",
+    "cli-flags": "2.0.7"
   },
   "devDependencies": {
     "@types/amqplib": "0.8.2",

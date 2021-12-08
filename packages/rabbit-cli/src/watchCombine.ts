@@ -23,11 +23,20 @@ export const watchCombine = (
     .on('close', () => {
       log.debug('[watch] gracefulStopping', sum);
     });
-  const isRun = () => stream.closed && !queue.length && !fixedQueue.length;
+  const isRun = () => {
+    const isRunBool = !stream.closed || !!queue.length || !!fixedQueue.length;
+    // console.log('stream.closed', stream.closed);
+    // console.log('queue.length', queue.length);
+    // console.log('fixedQueue.length', fixedQueue.length);
+    // console.log('isRunBool', !stream.closed, !queue.length, !fixedQueue.length);
+    // console.log('isRunBool', !stream.closed || !queue.length || !fixedQueue.length);
+    // console.log('isRunBool', isRunBool);
+    return isRunBool;
+  };
 
   let cycle = 0;
   (async () => {
-    while (!isRun()) {
+    while (isRun()) {
       cycle += 1;
       if (!queue.length) {
         if (cycle % 1000 === 0) log.trace('[watch] waiting', cycle);
@@ -39,8 +48,14 @@ export const watchCombine = (
       queue = [];
       if (stream.paused) stream.resume();
       await Bluebird.map(fixedQueue, callback, { concurrency: maxConcurrency });
+      fixedQueue = [];
     }
-    log.debug('[watch] finished', sum);
+    log.info('[watch] finished', sum);
+    log.debug('process kill in 10sec');
+    setTimeout(() => {
+      log.debug('process kill now');
+      process.exit();
+    }, 10000);
   })();
 
   return stream;
