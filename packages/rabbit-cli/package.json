@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit-cli",
-  "version": "2.52.2",
+  "version": "2.53.0",
   "description": "CLI for quick post json's to RabbitMQ",
   "keywords": [
     "queue",

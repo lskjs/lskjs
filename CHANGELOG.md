@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.53.0](https://github.com/lskjs/lskjs/compare/v2.52.0...v2.53.0) (2021-12-08)
+
+
+### Features
+
+* **rabbit-cli:** new argv parser, fix graceful stop bugs ([90fb901](https://github.com/lskjs/lskjs/commit/90fb90106ca145c36ea194c1c8c37c4aa12aee87))
+
+
+
+
+
 # [2.52.0](https://github.com/lskjs/lskjs/compare/v2.51.1...v2.52.0) (2021-12-07)
 
 
