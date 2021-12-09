@@ -10,5 +10,21 @@ export type watchCallback = (raw: any, i: number) => void;
 export type watchOptions = {
   concurrency?: number;
 };
-export type watchEvalFn = (a: any) => any;
+export type watchExtractFn = (a: Record<string, unknown>) => Record<string, unknown>;
+export type watchParseFn = (a: string) => Record<string, unknown>;
 export type watchFn = (stream: watchStream, cb: watchCallback, options: watchOptions) => watchStream;
+
+export type publishOptions = {
+  uri?: string;
+  parseFn?: watchParseFn;
+  extractFn?: watchExtractFn;
+  queue?: string;
+  exchange?: string;
+  key?: string;
+  priority?: number;
+  expiration?: number;
+
+  concurrency?: number;
+  maxPriority?: number;
+  isConfirm?: boolean;
+};

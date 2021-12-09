@@ -6,28 +6,26 @@ import rabbit, { Options } from 'amqplib';
 import readline from 'readline';
 
 import log from '../log';
-import { IWatchStream, watchEvalFn } from '../types';
+import { IWatchStream, publishOptions } from '../types';
 import watch from '../watchCombine';
 
 export const publish = async ({
-  uri = null,
+  uri,
   parseFn,
   extractFn,
-  queue: defaultQueue = null,
-  exchange: defaultExchange = null,
+  queue: defaultQueue,
+  exchange: defaultExchange,
   priority: defaultPriority = 5,
   expiration: defaultExpiration = 23 * 60 * 60 * 1000,
 
   concurrency = 10,
   maxPriority = 10,
   isConfirm = false,
-  isPublish = false,
-} = {}) => {
+}: publishOptions = {}) => {
   if (!uri) throw new Err('!uri', 'use AMQP_URI');
   const connection = await rabbit.connect(uri);
   const channel = await (isConfirm ? connection.createConfirmChannel() : connection.createChannel());
   const queues = {};
-  const exchanges = {};
   const parseRaw = (
     raw: string,
   ): { to: Record<string, unknown>; data: Record<string, unknown>; options: Record<string, unknown> } | null => {
@@ -70,7 +68,7 @@ export const publish = async ({
     data: any,
     options: Options.Publish = {},
   ) => {
-    const { queue, exchange } = to;
+    const { queue, exchange, key } = to;
     log.trace('[sendToQueue]', to, data, options);
     if (!queue && !exchange) throw new Err('!queue', 'use AMQP_QUEUE');
     if (queue) {
@@ -80,7 +78,7 @@ export const publish = async ({
     const buffer = Buffer.from(JSON.stringify(data));
     let promise;
     if (exchange) {
-      promise = channel.publish(exchange, queue || '', buffer, { mandatory: false, ...options });
+      promise = channel.publish(exchange, key || '', buffer, { mandatory: false, ...options });
     } else if (queue) {
       promise = channel.sendToQueue(queue, buffer, options);
     }
@@ -102,7 +100,6 @@ export const publish = async ({
       // const id = start;
       try {
         const params = parseRaw(raw);
-        console.log({ params });
         if (!params) return null;
         const { to, data, options } = params;
         const res = await sendToQueue(to, data, options);

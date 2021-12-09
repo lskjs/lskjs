@@ -52,10 +52,7 @@ export const watchCombine = (
     }
     log.info('[watch] finished', sum);
     log.debug('process kill in 10sec');
-    setTimeout(() => {
-      log.debug('process kill now');
-      process.exit();
-    }, 10000);
+    setTimeout(() => process.exit(), 10000);
   })();
 
   return stream;
