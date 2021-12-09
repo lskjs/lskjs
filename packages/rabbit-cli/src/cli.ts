@@ -22,8 +22,8 @@ const { flags, args } = CLI.parse({
 
 const uri = flags.uri || process.env.AMQP_URI;
 const queue = flags.queue || process.env.AMQP_QUEUE;
-const exchange = flags.key || process.env.AMQP_EXCHANGE;
-const key = flags.queue || process.env.AMQP_KEY;
+const exchange = flags.exchange || process.env.AMQP_EXCHANGE;
+const key = flags.key || process.env.AMQP_KEY;
 const concurrency = Number(flags.prefetch || process.env.AMQP_PREFETCH) || 10;
 const maxPriority = Number(flags.maxPriority || process.env.AMQP_MAX_PRIORITY) || 10;
 // eslint-disable-next-line no-eval
