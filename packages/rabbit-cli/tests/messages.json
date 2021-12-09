@@ -1,0 +1,8 @@
+{"_id": 111, "_q": "lsk_queue"}
+{"_id": 222, "_q": "lsk_queue", "_p": 10}
+{"_id": 333, "_q": "lsk_queue", "_exp": 60000}
+{"_id": 444, "_q": "lsk_queue", "_p": 11}
+{"_id": 555, "_q": "lsk_queue_2"}
+{"_id": 666, "_e": "lsk_exchange"}
+{"_id": 777, "_e": "lsk_exchange", "_k": "lsk_key"}
+{"_id": 888, "_e": "lsk_exchange", "_k": "lsk_key_2"}
