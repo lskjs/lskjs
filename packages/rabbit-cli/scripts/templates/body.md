@@ -1,105 +1,91 @@
+# Global install
 
-```js
-async startDynamicPrefetch() {
-  const { rabbit } = this;
-  const { messageCount } = await rabbit.assertQueue(this.queue);
-  if (messageCount > 10000) {
-    rabbit.listenChannel.prefetch(100);
-  } else {
-    rabbit.listenChannel.prefetch(10);
-  }
-  setTimeout(() => this.startDynamicPrefetch(), 1000);
-}
-async run() {
-  await super.run();
-  this.startDynamicPrefetch();
-}
+```bash
+npm i -g @lskjs/rabbit-cli
 ```
 
+# Publish messages
+## Simple publish messages
 
-```js
-const rabbit = await this.module('rabbit');
-await rabbit.assertExchange('test', 'headers'); // создание exchange
-await rabbit.bindQueue('test_ch', 'test', '', { type: 'ch' }); // присоединение queue к exchange
-await rabbit.publish('test', '', { _id: 1 }, { headers: { type: 'ch' } }); // отправка сообщения
-```
-
-```js
-await rabbit.bindQueue('test_es_ch', 'test', '', { es: true, ch: true }); // пример с несколькими headers
-await rabbit.publish('test', '', { _id: 1 }, { headers: { es: true, ch: true } });
+```bash
+cat [SOURCE] | lskrabbit pub 
+  [--uri=URI] [--queue=QUEUE] [--exchange=EXCHANGE]
+  [--key=KEY] [--prefetch=PREFETCH] [--concurrency=CONCORRENCY]
+  [--extract=EXTRACT] [--parse=PARSE]
 ```
 
-```
-в конфиге есть поле queueOptions - это глобальные options для всех задач которые пишутся в rabbit
-```
+*Request params*
 
-```json
-"rabbit": {
-  "uri": "localhost:15672",
-  "queueOptions": {
-    "persistent": true,
-    "expiration": 683576835
-  }
-}
-```
+| Key (short) | Key | Description |
+|----|--------------|-------------|
+| -u | --uri        | URI RabbiqMQ |
+| -q | --queue      | Queue RabbitMq |
+| -e | --exchange   | Exchange |
+| -k | --key        | Routing key |
+| -p | --prefetch   | Prefetch |
+| -c | --concurrency| Concurrency |
+| -x | --extract    | Extract callback |
+| -r | --parse      | str => json |
 
-```
-в конфиге с очередями(queues.js) можно указать options для каждой очереди отдельно
-```
+*Message params*
+
+|   Key  | Description|
+|--------|------------|
+|   _q   | queue      |
+|   _e   | exchange   |
+|   _k   | key        |
+|   _p   | priority   |
+|   _exp | expiration |
+|   _pr  | persistent |
+
+### Examples:
+
+*tests/messages.json*
 
 ```json
-  queue1: {
-    queue: 'queue1',
-    options: {
-      persistent: true,
-      headers: {},
-      priority: 5,
-      replyTo: 'test',
-    },
-  },
-  queue2: {
-    queue: 'queue2',
-    limit: million,
-    options: {
-      persistent: true,
-      headers: {
-        custom: 'header',
-      },
-      priority: 5,
-      replyTo: 'test2',
-    },
-  },
-  queue3: {
-    queue: 'queue3',
-    options: {
-      persistent: true,
-      headers: {},
-      priority: 5,
-      replyTo: 'test3',
-    },
-  },
-  queue4: {
-    queue: 'queue4',
-    options: {
-      persistent: true, headers: {}, priority: 5, replyTo: 'test4',
-    },
-  },
+{ "_id": 111, "_q": "lsk_queue" }
+{ "_id": 222, "_q": "lsk_queue", "_p": 10 }
+{ "_id": 333, "_q": "lsk_queue", "_exp": 60000 }
+{ "_id": 444, "_q": "lsk_queue", "_p": 11 }
+{ "_id": 555, "_q": "lsk_queue_2" }
+{ "_id": 666, "_e": "lsk_exchange" }
+{ "_id": 777, "_e": "lsk_exchange", "_k": "lsk_key" }
+{ "_id": 888, "_e": "lsk_exchange", "_k": "lsk_key_2" }
 ```
 
-```
-options можно доопределить с помощью 3 аргумента при постановки задачи
+*tests/messages.txt*
+
+```txt
+{ "test": 123 }
+{ "test": 546 }
 ```
 
-```js
-await rabbit.sendToQueue('test', { _id: 1 }, { persistent: true }); // отправка сообщения с options
+Simple publish
+```bash
+cat tests/messages.json | lskrabbit pub --uri amqp://localhost
 ```
 
+Publish with DEBUG
+```bash
+cat tests/messages.json | DEBUG=lsk lskrabbit pub --uri amqp://localhost
 ```
-options для задачи генерируются из
 
-1) options которые пробросили при постановки задачи
-2) из конфига queues.js для конкретной очереди
-3) из глобального конфига
+Publish with extract
+```bash
+cat tests/messages.txt | lskrabbit pub --uri amqp://localhost --queue lsk_queue -x "row => ({...row, test: row, _e: 'lsk_exchange' })"
+```
 
-3 этих объекта мерджутся между собой именно в таком порядке
+## Publish messages with docker
+
+```bash
+cat [SOURCE] | docker run --rm -i lskjs/rabbit-cli pub
+  [--uri=URI] [--queue=QUEUE] [--exchange=EXCHANGE]
+  [--key=KEY] [--prefetch=PREFETCH] [--concurrency=CONCORRENCY]
+  [--extract=EXTRACT] [--parse=PARSE]
+```
+
+### Examples:
+
+```bash
+cat tests/messages.txt | docker run --rm -i lskjs/rabbit-cli pub --uri amqp://localhost --queue lsk_queue -x "row => ({ ...row, test: row })"
 ```

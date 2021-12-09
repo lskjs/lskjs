@@ -1,14 +1,14 @@
-# LSK.js – rabbit
+# LSK.js – rabbit-cli
 
-> @lskjs/rabbit – LSK module for rabbit.
+> @lskjs/rabbit-cli – CLI for quick post json's to RabbitMQ
 
 [![LSK logo](https://badgen.net/badge/icon/MADE%20BY%20LSK?icon=zeit\&label\&color=red\&labelColor=red)](https://github.com/lskjs)
-[![NPM version](https://badgen.net/npm/v/@lskjs/rabbit)](https://www.npmjs.com/package/@lskjs/rabbit)
-[![NPM downloads](https://badgen.net/npm/dt/@lskjs/rabbit)](https://www.npmjs.com/package/@lskjs/rabbit)
-[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/rabbit)](https://bundlephobia.com/result?p=@lskjs/rabbit)
-[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/rabbit)](https://www.npmjs.com/package/@lskjs/rabbit)
-[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/rabbit)](https://bundlephobia.com/result?p=@lskjs/rabbit)
-[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/rabbit)](https://bundlephobia.com/result?p=@lskjs/rabbit)
+[![NPM version](https://badgen.net/npm/v/@lskjs/rabbit-cli)](https://www.npmjs.com/package/@lskjs/rabbit-cli)
+[![NPM downloads](https://badgen.net/npm/dt/@lskjs/rabbit-cli)](https://www.npmjs.com/package/@lskjs/rabbit-cli)
+[![NPM Dependency count](https://badgen.net/bundlephobia/dependency-count/@lskjs/rabbit-cli)](https://bundlephobia.com/result?p=@lskjs/rabbit-cli)
+[![Have TypeScript types](https://badgen.net/npm/types/@lskjs/rabbit-cli)](https://www.npmjs.com/package/@lskjs/rabbit-cli)
+[![Have tree shaking](https://badgen.net/bundlephobia/tree-shaking/@lskjs/rabbit-cli)](https://bundlephobia.com/result?p=@lskjs/rabbit-cli)
+[![NPM Package size](https://badgen.net/bundlephobia/minzip/@lskjs/rabbit-cli)](https://bundlephobia.com/result?p=@lskjs/rabbit-cli)
 [![Package size](https://badgen.net//github/license/lskjs/lskjs)](https://github.com/lskjs/lskjs/blob/master/LICENSE)
 [![Ask us in Telegram](https://img.shields.io/badge/Ask%20us%20in-Telegram-brightblue.svg)](https://t.me/lskjschat)
 
@@ -23,118 +23,134 @@
 # Table of contents
 
 *   [⌨️ Install](#️-install)
+
+*   [Global install](#global-install)
+
+*   [Publish messages](#publish-messages)
+
+    *   [Simple publish messages](#simple-publish-messages)
+
+        *   [Examples:](#examples)
+
+    *   [Publish messages with docker](#publish-messages-with-docker)
+
+        *   [Examples:](#examples-1)
+
 *   [📖 License](#-license)
+
 *   [👥 Contributors](#-contributors)
+
 *   [👏 Contributing](#-contributing)
+
 *   [📮 Any questions? Always welcome :)](#-any-questions-always-welcome-)
 
 # ⌨️ Install
 
 ```sh
 # yarn
-yarn i @lskjs/rabbit axios bluebird lodash
+yarn i @lskjs/rabbit-cli 
 
 # npm
-npm i @lskjs/rabbit axios bluebird lodash
+npm i @lskjs/rabbit-cli 
 ```
 
 ***
 
-```js
-async startDynamicPrefetch() {
-  const { rabbit } = this;
-  const { messageCount } = await rabbit.assertQueue(this.queue);
-  if (messageCount > 10000) {
-    rabbit.listenChannel.prefetch(100);
-  } else {
-    rabbit.listenChannel.prefetch(10);
-  }
-  setTimeout(() => this.startDynamicPrefetch(), 1000);
-}
-async run() {
-  await super.run();
-  this.startDynamicPrefetch();
-}
+# Global install
+
+```bash
+npm i -g @lskjs/rabbit-cli
 ```
 
-```js
-const rabbit = await this.module('rabbit');
-await rabbit.assertExchange('test', 'headers'); // создание exchange
-await rabbit.bindQueue('test_ch', 'test', '', { type: 'ch' }); // присоединение queue к exchange
-await rabbit.publish('test', '', { _id: 1 }, { headers: { type: 'ch' } }); // отправка сообщения
+# Publish messages
+
+## Simple publish messages
+
+```bash
+cat [SOURCE] | lskrabbit pub 
+  [--uri=URI] [--queue=QUEUE] [--exchange=EXCHANGE]
+  [--key=KEY] [--prefetch=PREFETCH] [--concurrency=CONCORRENCY]
+  [--extract=EXTRACT] [--parse=PARSE]
 ```
 
-```js
-await rabbit.bindQueue('test_es_ch', 'test', '', { es: true, ch: true }); // пример с несколькими headers
-await rabbit.publish('test', '', { _id: 1 }, { headers: { es: true, ch: true } });
-```
+*Request params*
 
-    в конфиге есть поле queueOptions - это глобальные options для всех задач которые пишутся в rabbit
+| Key (short) | Key | Description |
+|----|--------------|-------------|
+| -u | --uri        | URI RabbiqMQ |
+| -q | --queue      | Queue RabbitMq |
+| -e | --exchange   | Exchange |
+| -k | --key        | Routing key |
+| -p | --prefetch   | Prefetch |
+| -c | --concurrency| Concurrency |
+| -x | --extract    | Extract callback |
+| -r | --parse      | str => json |
+
+*Message params*
+
+|   Key  | Description|
+|--------|------------|
+|   \_q   | queue      |
+|   \_e   | exchange   |
+|   \_k   | key        |
+|   \_p   | priority   |
+|   \_exp | expiration |
+|   \_pr  | persistent |
+
+### Examples:
+
+*tests/messages.json*
 
 ```json
-"rabbit": {
-  "uri": "localhost:15672",
-  "queueOptions": {
-    "persistent": true,
-    "expiration": 683576835
-  }
-}
+{ "_id": 111, "_q": "lsk_queue" }
+{ "_id": 222, "_q": "lsk_queue", "_p": 10 }
+{ "_id": 333, "_q": "lsk_queue", "_exp": 60000 }
+{ "_id": 444, "_q": "lsk_queue", "_p": 11 }
+{ "_id": 555, "_q": "lsk_queue_2" }
+{ "_id": 666, "_e": "lsk_exchange" }
+{ "_id": 777, "_e": "lsk_exchange", "_k": "lsk_key" }
+{ "_id": 888, "_e": "lsk_exchange", "_k": "lsk_key_2" }
 ```
 
-    в конфиге с очередями(queues.js) можно указать options для каждой очереди отдельно
+*tests/messages.txt*
 
-```json
-  queue1: {
-    queue: 'queue1',
-    options: {
-      persistent: true,
-      headers: {},
-      priority: 5,
-      replyTo: 'test',
-    },
-  },
-  queue2: {
-    queue: 'queue2',
-    limit: million,
-    options: {
-      persistent: true,
-      headers: {
-        custom: 'header',
-      },
-      priority: 5,
-      replyTo: 'test2',
-    },
-  },
-  queue3: {
-    queue: 'queue3',
-    options: {
-      persistent: true,
-      headers: {},
-      priority: 5,
-      replyTo: 'test3',
-    },
-  },
-  queue4: {
-    queue: 'queue4',
-    options: {
-      persistent: true, headers: {}, priority: 5, replyTo: 'test4',
-    },
-  },
+```txt
+{ "test": 123 }
+{ "test": 546 }
 ```
 
-    options можно доопределить с помощью 3 аргумента при постановки задачи
+Simple publish
 
-```js
-await rabbit.sendToQueue('test', { _id: 1 }, { persistent: true }); // отправка сообщения с options
+```bash
+cat tests/messages.json | lskrabbit pub --uri amqp://localhost
 ```
 
-    options для задачи генерируются из
+Publish with DEBUG
 
-    1) options которые пробросили при постановки задачи
-    2) из конфига queues.js для конкретной очереди
-    3) из глобального конфига
+```bash
+cat tests/messages.json | DEBUG=lsk lskrabbit pub --uri amqp://localhost
+```
 
-    3 этих объекта мерджутся между собой именно в таком порядке
+Publish with extract
+
+```bash
+cat tests/messages.txt | lskrabbit pub --uri amqp://localhost --queue lsk_queue -x "row => ({...row, test: row, _e: 'lsk_exchange' })"
+```
+
+## Publish messages with docker
+
+```bash
+cat [SOURCE] | docker run --rm -i lskjs/rabbit-cli pub
+  [--uri=URI] [--queue=QUEUE] [--exchange=EXCHANGE]
+  [--key=KEY] [--prefetch=PREFETCH] [--concurrency=CONCORRENCY]
+  [--extract=EXTRACT] [--parse=PARSE]
+```
+
+### Examples:
+
+```bash
+cat tests/messages.txt | docker run --rm -i lskjs/rabbit-cli pub --uri amqp://localhost --queue lsk_queue -x "row => ({ ...row, test: row })"
+```
 
 # 📖 License
 
