@@ -11,7 +11,6 @@ export const getProxyType = (proxy) => {
 };
 
 export const parseProxyParam = (proxyStr) => {
-  const res = {};
   const proxyType = getProxyType(proxyStr);
   if (proxyType === 'file') {
     if (proxyStr[0] === '.') {
@@ -43,7 +42,9 @@ export const parseProxyParam = (proxyStr) => {
       },
     };
   }
-  return res;
+  return {
+    disabled: true,
+  };
 };
 
 export default parseProxyParam;

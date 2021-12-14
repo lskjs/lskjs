@@ -75,6 +75,8 @@ export class ProxyManager extends Module {
   }
   async init() {
     await super.init();
+    if (this.config.disabled) this.disabled = true;
+    if (this.disabled) return;
     this.client = await this.createClient();
     this.strategy = await this.createStrategy();
     if (this.proxies) {
