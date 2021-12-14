@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.55.0](https://github.com/lskjs/lskjs/compare/v2.54.1...v2.55.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **rabbit-cli:** doc ([3f58960](https://github.com/lskjs/lskjs/commit/3f589602819dee7621ade47f71ac94c063e58eaf))
+
+
+### Features
+
+* **proxy:** add disabled option ([29b081b](https://github.com/lskjs/lskjs/commit/29b081b91b1f24f7182b1d3c26a3859fd5914fcd))
+* **rabbit-cli:** add doc ([829028a](https://github.com/lskjs/lskjs/commit/829028a581bc10952252c7de51ec8083fc6f8568))
+* **webserver:** remove logs ([1998d59](https://github.com/lskjs/lskjs/commit/1998d596e032f86cd53130dab910fd4eb4debf1e))
+* **worker:** add disabled while dont have proxies ([0dc7f5d](https://github.com/lskjs/lskjs/commit/0dc7f5d40f761b4273c031c12016ecaf87295352))
+
+
+
+
+
 ## [2.54.1](https://github.com/lskjs/lskjs/compare/v2.54.0...v2.54.1) (2021-12-09)
 
 
