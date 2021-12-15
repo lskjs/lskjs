@@ -6,11 +6,11 @@ import through from 'through';
 import { log } from './log';
 import { prettyRawLog } from './pretty/prettyRawLog';
 
-if (process.env.LSK_LOG_READLINE) {
+if (process.env.LSK_LOG_READLINE !== '0') {
   readline
     .createInterface({
       input: process.stdin,
-      output: process.stdout,
+      // output: process.stdout,
     })
     .on('line', (raw) => {
       prettyRawLog(log, raw);

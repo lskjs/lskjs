@@ -2,8 +2,8 @@
 
 import { color, hashColor } from '../color';
 import { env } from '../utils/env';
+import { isLsklogWebFinal } from '../utils/formats/lsklog';
 import { hashCode } from '../utils/hashCode';
-import { isFinalUrlLog } from '../utils/isUrlLog';
 import { leftPad } from '../utils/leftPad';
 
 const LOG_VIEW = env('LOG_VIEW', 'short');
@@ -84,9 +84,10 @@ export const prettyLevel = (level = ''): string => {
 export const prettyContent = (...args: any[]) => args;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getUrlLevel = (req: any): string => (getStatusLevel(req.status) || isFinalUrlLog(req) ? 'debug' : 'trace');
+export const getUrlLevel = (req: any): string =>
+  getStatusLevel(req.status) || isLsklogWebFinal(req) ? 'debug' : 'trace';
 export const prettyUrl = (req: any): string => {
-  const isFinalUrl = isFinalUrlLog(req);
+  const isFinalUrl = isLsklogWebFinal(req);
   const level = getUrlLevel(req); // , { level }: { level?: string | null } = {}
   return [
     prettyLevel(level),

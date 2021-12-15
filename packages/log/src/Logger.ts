@@ -5,16 +5,14 @@ import { isClient, isDev } from '@lskjs/env';
 import { levelsPriority } from './config';
 import { prettyFormat } from './pretty/prettyFormat';
 import { ILogger, ILoggerMessage, ILoggerProps, LoggerLevelType } from './types';
-import { createMsg, getErrCode } from './utils/createMsg';
 import { env } from './utils/env';
 import { stringify } from './utils/formats';
-import { isUrlLog } from './utils/isUrlLog';
+import { isLsklogWeb } from './utils/formats/lsklog';
 import { omitNull } from './utils/omitNull';
-import { toString } from './utils/toString';
 
 const LOG_LEVEL = () => env('LOG_LEVEL', '');
 const LOG_FORMAT = () => env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
-const LOG_DATA = () => !!env('LOG_DATA', 0);
+// const LOG_DATA = () => !!env('LOG_DATA', 0);
 
 export class Logger implements ILogger {
   prefix: string | null;
@@ -33,7 +31,7 @@ export class Logger implements ILogger {
       });
     });
     if (!this.level) this.level = 'trace';
-    if (!levelsPriority[this.level]) throw new Error(`Incorrect level ${this.level}`);
+    if (!levelsPriority[this.level]) throw new Error(`Incorrect level: ${this.level}`);
   }
   static create(...propsArray: ILoggerProps[]): ILogger {
     return new this(...propsArray);
@@ -76,13 +74,11 @@ export class Logger implements ILogger {
     if (!this.canLog('trace')) return;
     this.__log('trace', ...args);
   }
+  // log(...args: any[]): void {
+  //   if (!this.canLog('log')) return;
+  //   this.__log('log', ...args);
+  // }
   log(...args: any[]): void {
-    if (!this.canLog('log')) return;
-    this.__log('log', ...args);
-  }
-  __logger(...args: any[]): void {
-    // eslint-disable-next-line no-param-reassign
-    if (LOG_FORMAT() !== 'none' && LOG_FORMAT() !== 'pretty') args = args.map((arg) => toString(arg));
     // @ts-ignore
     // eslint-disable-next-line no-console
     if (console._log) {
@@ -96,32 +92,32 @@ export class Logger implements ILogger {
   }
   __log(level: LoggerLevelType, ...args: any[]): void {
     const [mainArg, ...otherArgs] = args;
-    let data: ILoggerMessage = {
+    let meta: ILoggerMessage = {
       name: this.name,
       ns: this.ns,
       level,
       time: new Date(),
-      // ...mainArg,
     };
     let passArgs = args;
-    if (isUrlLog(mainArg)) {
-      data = {
+    if (isLsklogWeb(mainArg)) {
+      meta = {
+        ...meta,
         ...mainArg,
       };
       // console.log({mainArg})
       passArgs = otherArgs;
     }
-    data.code = getErrCode(passArgs);
-    data.msg = createMsg(passArgs);
-    if (LOG_DATA() || LOG_FORMAT() === 'pretty') data.data = passArgs;
-    data = omitNull(data);
+    // // eslint-disable-next-line no-param-reassign
+    // if (LOG_FORMAT() !== 'none' && LOG_FORMAT() !== 'pretty') args = args.map((arg) => toString(arg));
+
+    // if (LOG_DATA()) meta.data = passArgs;
     if (LOG_FORMAT() === 'none') return;
     if (LOG_FORMAT() === 'pretty') {
-      this.__logger(...prettyFormat(this, data));
+      this.log(...prettyFormat(omitNull(meta), ...passArgs));
       return;
     }
     // console.log({ args, data, str, 'LOG_FORMAT()': LOG_FORMAT() });
-    this.__logger(stringify(LOG_FORMAT(), data, ...passArgs));
+    this.log(stringify(LOG_FORMAT(), omitNull(meta), ...passArgs));
   }
 }
 

@@ -25,3 +25,25 @@ export interface ILogger extends ILoggerProps {
   fatal(...args: any[]): void;
   log(...args: any[]): void;
 }
+
+export type ILoggerMeta = {
+  ns?: string;
+  name?: string;
+  level?: string;
+  time?: Date;
+
+  method?: string;
+  host?: string;
+  reqId?: string | number;
+  ua?: string;
+  ip?: string;
+  url?: string;
+  status?: string;
+  duration?: number;
+  length?: number;
+};
+
+export type ILoggerInternalMessage = {
+  meta: ILoggerMeta;
+  args: any[];
+};

@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 
-import { ILogger } from '../types';
-import { isUrlLog } from '../utils/isUrlLog';
+import { ILoggerMeta } from '../types';
+import { isLsklogWeb } from '../utils/formats/lsklog';
 import { prettyContent, prettyLevel, prettyNs, prettyUrl } from './utils';
 
 export function countInRow(args: any[], filter: any): number {
@@ -19,14 +19,21 @@ export function concatFirstStrings(...args: any[]): string[] {
   return [args.slice(0, stringsCount).join(' '), ...args.slice(stringsCount)];
 }
 
-export function prettyFormat(log: ILogger, ...args: any[]): string[] {
-  const [mainArg] = args;
-  const logArgs = mainArg.data || args;
-  if (isUrlLog(mainArg)) {
-    return [prettyUrl(mainArg)];
+export function prettyFormat(meta: ILoggerMeta, ...args: any[]): string[] {
+  const ns = meta?.ns;
+  const name = meta?.name;
+  const level = meta?.level || 'log';
+  // const [mainArg] = args;
+  const logArgs = args;
+  if (isLsklogWeb(meta)) {
+    return [prettyUrl(meta)];
   }
-  const names: string[] = (log.ns || '').split(':').filter(Boolean).map(String);
-  return concatFirstStrings(prettyLevel(mainArg.level), prettyNs(names, log.name), ...prettyContent(...logArgs));
+  const names: string[] = (ns || '').split(':').filter(Boolean).map(String);
+  const prefix = [prettyLevel(level)];
+  if (names.length || name) {
+    prefix.push(prettyNs(names, name));
+  }
+  return concatFirstStrings(...prefix, ...prettyContent(...logArgs));
 }
 
 export default prettyFormat;

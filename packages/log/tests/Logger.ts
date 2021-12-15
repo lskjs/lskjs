@@ -8,7 +8,7 @@ export class Logger extends BaseLogger {
     super.__log(level, ...args);
   }
   lastLoggerArgs: any[] | null;
-  __logger(...args: any[]): void {
+  log(...args: any[]): void {
     this.lastLoggerArgs = args;
   }
 }
