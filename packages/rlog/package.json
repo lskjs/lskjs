@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rlog",
-  "version": "2.52.0",
+  "version": "2.56.0",
   "description": "LSK module for remote logger.",
   "keywords": [
     "rlog"
@@ -30,7 +30,7 @@
   "dependencies": {
     "@babel/runtime": "7.8.4",
     "@lskjs/err": "2.43.0",
-    "@lskjs/module": "2.52.0",
+    "@lskjs/module": "2.56.0",
     "@lskjs/utils": "2.43.0",
     "axios": "0.21.2",
     "lodash": "4.17.21"
