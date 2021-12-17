@@ -65,6 +65,9 @@ export class AuthServerModule extends Module {
   }
 
   async getAuthSession(req) {
+    if (req.data?.__init && req.data?.session?.user) {
+      req.user = req.data.session.user;
+    }
     const userId = req.user && req.user._id;
     if (!userId) return {};
     const UserModel = await this.app.module('models.UserModel');

@@ -1,5 +1,5 @@
 /* global window */
-import { isClient, isDev } from '@lskjs/env';
+import { isClient, isServer } from '@lskjs/env';
 // import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import cookie from 'js-cookie';
@@ -42,12 +42,6 @@ export class AuthClientModule extends Module {
   async run() {
     await super.run();
     await this.loadStore();
-    if (this.store.isAuth()) {
-      const timeout = isDev ? 10000 : 1000;
-      setTimeout(() => {
-        this.updateSession();
-      }, timeout);
-    }
   }
 
   async setToken(token, expires = 365, cookies = true) {
@@ -96,16 +90,27 @@ export class AuthClientModule extends Module {
     }
     if (!state.session && this.memoryStorage.get('req.user')) {
       const session = {
-        // _id: this.memoryStorage.get('req.userId'),
         _id: this.memoryStorage.get('req.user._id'),
         user: this.memoryStorage.get('req.user'),
         token: this.memoryStorage.get('req.token'),
       };
+
       state = {
         ...state,
         session,
         sessions: [session],
       };
+
+      try {
+        const params = isServer && { __init: true, session };
+        const { data: _session } = await this.store.constructor.api.session(params);
+        if (_session && Object.keys(_session).length > 0 && session._id === _session._id) {
+          state.session = _session;
+          state.sessions = [_session];
+        }
+      } catch (error) {
+        this.log.error('loadStore session', error);
+      }
     }
 
     if (this.debug) this.log.trace('loadStore', state);
