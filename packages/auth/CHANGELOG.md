@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.57.1](https://github.com/lskjs/lskjs/compare/v2.57.0...v2.57.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* **auth:** update session on client ([1d90ef5](https://github.com/lskjs/lskjs/commit/1d90ef517ee57babc4bca85f43e42d5cdcb4ae8c))
+
+
+
+
+
 # [2.57.0](https://github.com/lskjs/lskjs/compare/v2.56.0...v2.57.0) (2021-12-17)
 
 
