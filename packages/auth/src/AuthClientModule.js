@@ -43,7 +43,12 @@ export class AuthClientModule extends Module {
     await super.run();
     await this.loadStore();
     if (isClient && this.store.isAuth()) {
-      setTimeout(this.updateSession, isDev ? 10000 : 1000);
+      setTimeout(
+        () => {
+          this.updateSession();
+        },
+        isDev ? 10000 : 1000,
+      );
     }
   }
 
