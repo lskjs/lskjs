@@ -1,5 +1,5 @@
 /* global window */
-import { isClient, isServer } from '@lskjs/env';
+import { isClient, isDev, isServer } from '@lskjs/env';
 // import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import cookie from 'js-cookie';
@@ -42,6 +42,9 @@ export class AuthClientModule extends Module {
   async run() {
     await super.run();
     await this.loadStore();
+    if (isClient && this.store.isAuth()) {
+      setTimeout(this.updateSession, isDev ? 10000 : 1000);
+    }
   }
 
   async setToken(token, expires = 365, cookies = true) {
@@ -101,15 +104,16 @@ export class AuthClientModule extends Module {
         sessions: [session],
       };
 
-      try {
-        const params = isServer && { __init: true, session };
-        const { data: _session } = await this.store.constructor.api.session(params);
-        if (_session && Object.keys(_session).length > 0 && session._id === _session._id) {
-          state.session = _session;
-          state.sessions = [_session];
+      if (isServer) {
+        try {
+          const { data: _session } = await this.store.constructor.api.session({ __init: true, session });
+          if (_session && Object.keys(_session).length > 0 && session._id === _session._id) {
+            state.session = _session;
+            state.sessions = [_session];
+          }
+        } catch (error) {
+          this.log.error('loadStore session', error);
         }
-      } catch (error) {
-        this.log.error('loadStore session', error);
       }
     }
 
