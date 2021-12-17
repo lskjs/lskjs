@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.57.0](https://github.com/lskjs/lskjs/compare/v2.56.0...v2.57.0) (2021-12-17)
+
+
+### Features
+
+* **auth:** fetch session in loadStore with SSR support ([8e26daf](https://github.com/lskjs/lskjs/commit/8e26daf2078bcad2e89cda76ef6939587de1e4d1))
+
+
+
+
+
 # [2.56.0](https://github.com/lskjs/lskjs/compare/v2.55.0...v2.56.0) (2021-12-15)
 
 **Note:** Version bump only for package @lskjs/auth
