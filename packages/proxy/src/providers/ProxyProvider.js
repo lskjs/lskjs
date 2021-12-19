@@ -5,7 +5,7 @@ import axios from 'axios';
 import { createProxy } from '../utils/createProxy';
 
 export class ProxyProvider extends Module {
-  cache = null;
+  cache = {};
   config = {
     cacheTimeout: 5 * 60 * 1000,
   };
@@ -46,7 +46,7 @@ export class ProxyProvider extends Module {
       return this.cache;
     } catch (err) {
       this.log.error('[update]', err);
-      return null;
+      return {};
     }
   }
   async getList() {

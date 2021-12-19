@@ -42,7 +42,7 @@ export class ProxyStoreProvider extends ProxyProvider {
   async fetchListRaw() {
     const res = await this.client.get('/getproxy').catch((err) => ({ err }));
     await this.checkErr(res);
-    return res.data || [];
+    return res.data || {};
   }
 
   async fetchList() {
@@ -70,7 +70,7 @@ export class ProxyStoreProvider extends ProxyProvider {
       );
   }
   async fetchOptions() {
-    const { data } = await this.client.get(`/getcountry`);
+    const { data = {} } = await this.client.get(`/getcountry`);
     return { countries: data.list };
   }
   getBuyListProps() {
