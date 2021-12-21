@@ -1,4 +1,6 @@
 /* eslint-disable no-nested-ternary */
+import _prettyBytes from 'pretty-bytes';
+import _prettyTime from 'pretty-time';
 
 import { color, hashColor } from '../color';
 import { env } from '../utils/env';
@@ -36,29 +38,22 @@ export const prettyMethod = (method: string) => {
   const colorName = method === 'REMOVE' ? 'error' : method === 'WS' ? 'debug' : null;
   return color(colorName, leftPad(method, 4));
 };
-export const prettyTime = (ms: number) => {
-  const colorName = ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
 
-  let res: string;
-  if (!ms) {
-    res = '-';
-  } else if (ms > 10 * 60 * 1000) {
-    res = `${Math.round(ms / 60 / 1000)}m`;
-  } else if (ms > 1 * 1000) {
-    res = `${Math.round(ms / 1000)}s`;
-  } else {
-    res = `${ms.toFixed(0)}µ`;
-  }
-  res = leftPad(res, 5);
+export const prettyTime = (ms: number, format = '') => {
+  const colorName = ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
+  const formats = ['m', 's', 'ms'];
+  const f = formats.includes(format) ? format : '';
+
+  const res = _prettyTime(ms * 10 ** 6, f);
   return color(colorName, leftPad(res, 5));
 };
+
 export const prettySize = (bytes: number, seperator = '') => {
-  const sizes = ['b', 'k', 'm', 'g', 't'];
-  if (!bytes) return '-';
-  const i = parseInt(String(Math.floor(Math.log(bytes) / Math.log(1024))), 10);
-  if (i === 0) return `${bytes}${seperator}${sizes[i]}`;
-  return `${(bytes / 1024 ** i).toFixed(1)}${seperator}${sizes[i]}`;
+  const [value, size] = _prettyBytes(bytes, { binary: true, maximumFractionDigits: 1 }).split(' ');
+
+  return `${value}${seperator}${size}`;
 };
+
 export const prettyNs = (names: string[], mainName?: string | null): string => {
   // TODO: придумать когда name не очень нужен
   const a = 123; //eslint-disable-line
