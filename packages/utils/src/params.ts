@@ -21,7 +21,7 @@ export const toArray = (a: any, def: any = null) => {
   if (a === '') return [];
   return a.split(',').map((b) => toJson(b));
 };
-export const parse = (a: any, type, def) => {
+export const parse = (a: any, type: string, def: any) => {
   if (type === 'boolean' || type === 'bool') return toBoolean(a, def);
   if (type === 'number') return toNumber(a, def);
   if (type === 'int') return toInt(a, def);
