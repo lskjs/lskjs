@@ -13,6 +13,7 @@ import { Proxy } from '../Proxy';
 import strategies from '../strategies';
 import { filterProxy } from '../utils/filterProxy';
 import { getProxyAgent } from '../utils/getProxyAgent';
+import { parseProxies } from '../utils/parseProxies';
 import { parseProxyParam } from '../utils/parseProxyParam';
 
 // const debug = false; /// __DEV__;
@@ -37,7 +38,6 @@ export class ProxyManager extends Module {
       ...props,
       params,
     };
-    // console.log({newProps});
     return this.client.request(newProps);
   }
   async createClient() {
@@ -133,13 +133,14 @@ export class ProxyManager extends Module {
       };
     }
     try {
-      const res = await this.clientRequest({
-        methdo: 'get',
-        url: '/list',
-      });
+      const res = await this.clientRequest();
+      // console.log('res.data', res.data);
+      const results = typeof res.data === 'string' ? { data: parseProxies(res.data) } : res.data;
+      // const data = req.data
+      // console.log('results', results);
       // console.log('res', res);
-      const { data } = res;
-      return { requestedAt: new Date(), ...data };
+      // const { data } = res;
+      return { requestedAt: new Date(), ...results };
     } catch (err) {
       this.log.error('PROXY_LIST_ERROR', err);
       throw new Err('PROXY_LIST_ERROR', { method: 'fetchProxyList', params, err });
