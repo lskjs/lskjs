@@ -5,11 +5,6 @@ process.env.LOG_FORMAT = 'none';
 
 describe('new Logger()', () => {
   const log = new Logger();
-  test('log.log(123)', () => {
-    log.lastLogArgs = null;
-    log.log(123);
-    expect(log.lastLogArgs).toStrictEqual(['log', 123]);
-  });
   test('log.trace(123)', () => {
     log.lastLogArgs = null;
     log.trace(123);
@@ -46,11 +41,6 @@ describe("new Logger({ level: 'warn' })", () => {
   const log = new Logger({ level: 'warn' });
   test("log.canLog('log')", () => {
     expect(log.canLog('log')).toStrictEqual(true);
-  });
-  test('log.log(123)', () => {
-    log.lastLogArgs = null;
-    log.log(123);
-    expect(log.lastLogArgs).toStrictEqual(['log', 123]);
   });
   test("log.canLog('trace')", () => {
     expect(log.canLog('trace')).toStrictEqual(false);

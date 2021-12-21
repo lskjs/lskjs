@@ -9,7 +9,7 @@ export class Logger extends BaseLogger {
   }
   lastLoggerArgs: any[] | null;
   log(...args: any[]): void {
-    this.lastLoggerArgs = args;
+    this.lastLoggerArgs = JSON.parse(args);
   }
 }
 

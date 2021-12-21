@@ -12,20 +12,24 @@ describe('Logger errors', () => {
     log.lastLoggerArgs = null;
     const err = new Error('test');
     log.error(err);
-    const res = log.lastLoggerArgs[0];
-    expect(res).toMatchObject({
+
+    expect(log.lastLogArgs).toStrictEqual(['error', err]);
+    expect(log.lastLoggerArgs).toMatchObject({
       level: 'error',
-      data: [err],
+      code: 'test',
+      msg: 'test',
     });
   });
   test("log.error(new Err('testCode'))", () => {
     log.lastLoggerArgs = null;
     const err = new Err('testCode');
     log.error(err);
-    const res = log.lastLoggerArgs[0];
-    expect(res).toMatchObject({
+
+    expect(log.lastLogArgs).toStrictEqual(['error', err]);
+    expect(log.lastLoggerArgs).toMatchObject({
       level: 'error',
-      data: [err],
+      code: 'testCode',
+      msg: 'testCode',
     });
   });
 });
