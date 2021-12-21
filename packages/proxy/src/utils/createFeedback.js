@@ -35,9 +35,10 @@ export const createFeedback = (props = {}, { log, stats, tx, apm, labels } = {})
   };
   if (tx) {
     tx.setCustomContext(customContext);
+    const proxyLabels = getProxyLabels(proxy);
     tx.addLabels({
       ...(labels || {}),
-      ...getProxyLabels(proxy),
+      ...proxyLabels,
     });
   }
   if (log) log.trace(...logKeys(...prefix, ...trace, ...postfix));

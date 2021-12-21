@@ -41,9 +41,12 @@ export class RequestWorker extends RabbitWorker {
     if (this.hasModule('proxy')) proxyManager = await this.module('proxy', { throw: false });
     let apm;
     if (this.app.hasModule('apm')) apm = await this.app.module('apm', { throw: false });
+    let log;
+    if (this.debug) log = this.log;
     this.request = createRequest({
       proxyManager,
       apm,
+      log,
     });
   }
 }

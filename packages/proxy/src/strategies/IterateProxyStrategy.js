@@ -12,7 +12,9 @@ export class IterateProxyStrategy extends ProxyStrategy {
     if (!count) throw new Err('PROXY_MANAGER_LIST_EMPTY', { count, fatalCount });
     this.iteration += 1;
 
-    return list[this.iteration % (count, fatalCount)];
+    const nonFatalCount = count - fatalCount;
+    // console.log({ list, fatalCount, count, nonFatalCount });
+    return list[this.iteration % nonFatalCount];
   }
 }
 

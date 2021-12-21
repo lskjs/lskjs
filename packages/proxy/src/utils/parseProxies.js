@@ -3,8 +3,8 @@ import set from 'lodash/set';
 
 import { createProxy } from './createProxy';
 
-export function parseProxy(str, { throws = 1 } = {}) {
-  if (typeof str !== 'string') return createProxy(str);
+export function parseProxy(str, { json = false, throws = true } = {}) {
+  if (typeof str !== 'string') return json ? createProxy(str).toJSON() : createProxy(str);
   let uri = str;
   if (!uri.includes('://')) uri = `http://${uri}`;
   let url;
@@ -37,8 +37,7 @@ export function parseProxy(str, { throws = 1 } = {}) {
   if (params.subtype) set(proxy, 'tags.subtype', params.subtype);
   // proxy.uri = createUri(proxy);
   // proxy.key = createKey(proxy);
-
-  return createProxy(proxy);
+  return json ? createProxy(proxy).toJSON() : createProxy(proxy);
 }
 
 export const parseProxies = (str = '') => {

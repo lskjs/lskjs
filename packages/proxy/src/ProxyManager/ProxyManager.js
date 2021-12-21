@@ -137,7 +137,6 @@ export class ProxyManager extends Module {
       // console.log('res.data', res.data);
       const results = typeof res.data === 'string' ? { data: parseProxies(res.data) } : res.data;
       // const data = req.data
-      // console.log('results', results);
       // console.log('res', res);
       // const { data } = res;
       return { requestedAt: new Date(), ...results };
