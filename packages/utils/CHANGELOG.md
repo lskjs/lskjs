@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.58.0](https://github.com/lskjs/lskjs/compare/v2.57.2...v2.58.0) (2021-12-21)
+
+
+### Bug Fixes
+
+* **utils:** fix parse ts ([c9de381](https://github.com/lskjs/lskjs/commit/c9de3811046b78b26f9430842fe64ecfc115494c))
+* **utils:** rewrite params to ts ([0e96f1d](https://github.com/lskjs/lskjs/commit/0e96f1d71d14d0e5e5a278d9270bf4e2282bf38d))
+
+
+### Features
+
+* **utils:** remove normilize ([3f487ba](https://github.com/lskjs/lskjs/commit/3f487ba254e7e27db74e1293a52829c1b49d92a1))
+
+
+
+
+
 # [2.57.0](https://github.com/lskjs/lskjs/compare/v2.56.0...v2.57.0) (2021-12-17)
 
 **Note:** Version bump only for package @lskjs/utils

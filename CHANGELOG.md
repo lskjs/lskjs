@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.58.0](https://github.com/lskjs/lskjs/compare/v2.57.2...v2.58.0) (2021-12-21)
+
+
+### Bug Fixes
+
+* **log:** add pretty-time and pretty-bytes ([5932faf](https://github.com/lskjs/lskjs/commit/5932faf6cb7a9d8ba69d28d767680631a61c4a1f))
+* **log:** fix tests ([f50eb0b](https://github.com/lskjs/lskjs/commit/f50eb0b5262e9423b509d457d7b11201790f4eb5))
+* **utils:** fix parse ts ([c9de381](https://github.com/lskjs/lskjs/commit/c9de3811046b78b26f9430842fe64ecfc115494c))
+* **utils:** rewrite params to ts ([0e96f1d](https://github.com/lskjs/lskjs/commit/0e96f1d71d14d0e5e5a278d9270bf4e2282bf38d))
+
+
+### Features
+
+* **proxy:** add size, time to apm and fix bugs ([1c12cda](https://github.com/lskjs/lskjs/commit/1c12cda8a778e17fd6302ea9b91ec6163db9cae6))
+* **proxy:** BREAKING remove /list from proxy ([a423731](https://github.com/lskjs/lskjs/commit/a423731272150f91644e1808840d6f5718a173e1))
+* **utils:** remove normilize ([3f487ba](https://github.com/lskjs/lskjs/commit/3f487ba254e7e27db74e1293a52829c1b49d92a1))
+
+
+
+
+
 ## [2.57.2](https://github.com/lskjs/lskjs/compare/v2.57.1...v2.57.2) (2021-12-17)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.58.0](https://github.com/lskjs/lskjs/compare/v2.57.2...v2.58.0) (2021-12-21)
+
+
+### Features
+
+* **proxy:** add size, time to apm and fix bugs ([1c12cda](https://github.com/lskjs/lskjs/commit/1c12cda8a778e17fd6302ea9b91ec6163db9cae6))
+* **proxy:** BREAKING remove /list from proxy ([a423731](https://github.com/lskjs/lskjs/commit/a423731272150f91644e1808840d6f5718a173e1))
+
+
+
+
+
 # [2.57.0](https://github.com/lskjs/lskjs/compare/v2.56.0...v2.57.0) (2021-12-17)
 
 **Note:** Version bump only for package @lskjs/proxy

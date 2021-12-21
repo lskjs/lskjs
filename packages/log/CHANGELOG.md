@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.58.0](https://github.com/lskjs/lskjs/compare/v2.57.2...v2.58.0) (2021-12-21)
+
+
+### Bug Fixes
+
+* **log:** add pretty-time and pretty-bytes ([5932faf](https://github.com/lskjs/lskjs/commit/5932faf6cb7a9d8ba69d28d767680631a61c4a1f))
+* **log:** fix tests ([f50eb0b](https://github.com/lskjs/lskjs/commit/f50eb0b5262e9423b509d457d7b11201790f4eb5))
+
+
+
+
+
 # [2.57.0](https://github.com/lskjs/lskjs/compare/v2.56.0...v2.57.0) (2021-12-17)
 
 **Note:** Version bump only for package @lskjs/log
