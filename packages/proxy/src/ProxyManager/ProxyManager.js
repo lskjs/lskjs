@@ -18,7 +18,7 @@ import { parseProxyParam } from '../utils/parseProxyParam';
 // const debug = false; /// __DEV__;
 export class ProxyManager extends Module {
   cache = null;
-  proxies = null;
+  proxies;
   config = {
     stats: isDev,
     statsInterval: isDev ? 10 * 1000 : null,
@@ -76,12 +76,20 @@ export class ProxyManager extends Module {
   async init() {
     await super.init();
     if (this.config.disabled) this.disabled = true;
-    if (this.disabled) return;
-    this.client = await this.createClient();
-    this.strategy = await this.createStrategy();
+    if (this.disabled) {
+      this.log.trace('[disabled]');
+      return;
+    }
+    if (this.config.proxies) {
+      this.proxies = this.config.proxies;
+    }
     if (this.proxies) {
       this.log.trace('[proxies] count', this.proxies.length);
     }
+    if (!this.proxies || this.config.client) {
+      this.client = await this.createClient();
+    }
+    this.strategy = await this.createStrategy();
     this.mutex = new Mutex();
   }
   static getLocalhostProxy() {
@@ -113,7 +121,17 @@ export class ProxyManager extends Module {
 
   //   return data;
   // }
-  async fetchProxyList(params) {
+  async fetchProxyList(params = {}) {
+    this.log.trace('fetchProxyList', params);
+    if (this.disabled) {
+      return { requestedAt: new Date(), status: 'disabled', data: [] };
+    }
+    if (this.proxies) {
+      return {
+        requestedAt: new Date(),
+        data: this.proxies,
+      };
+    }
     try {
       const res = await this.clientRequest({
         methdo: 'get',
@@ -149,12 +167,6 @@ export class ProxyManager extends Module {
       3 - locked, wait, list
    */
   async updateCache() {
-    if (this.proxies) {
-      this.cache = {
-        updatedAt: new Date(),
-        list: this.wrapProxies(this.proxies),
-      };
-    }
     if (this.mutex.isLocked()) {
       await this.mutex.isAsyncLocked(10000);
       if (this.cache) return;
@@ -176,6 +188,7 @@ export class ProxyManager extends Module {
   }
 
   async update() {
+    if (this.disabled) return;
     if (this.isActualCache()) return;
     await this.updateCache();
     const list = this.cache?.list;

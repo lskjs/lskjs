@@ -1,7 +1,7 @@
 import { parseProxies } from './parseProxies';
 
 export const isProxyHub = (proxy) =>
-  (proxy.startsWith('http://') || proxy.startsWith('https://')) && proxy.includes('/proxy');
+  (proxy.startsWith('http://') || proxy.startsWith('https://')) && proxy.includes('/proxy'); // TODO: доработать 
 
 export const getProxyType = (proxy) => {
   if (!proxy) return null;

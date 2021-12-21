@@ -71,21 +71,25 @@ export const createRequest =
             }
           }
           const res = await client(options);
+          const size = res?.headers?.['content-length'] ? Number(res?.headers?.['content-length']) : null;
           if (abortTimeout) clearTimeout(abortTimeout);
-          if (feedback) await feedback.success();
+          if (feedback) await feedback.success({ size });
           return res;
         } catch (initErr) {
+          const res = initErr?.response;
+          const size = res?.headers?.['content-length'] ? Number(res?.headers?.['content-length']) : null;
           const code = getErrCode(initErr);
           const fatal = isNetworkFatal(initErr);
+          const isNetwork = isNetworkError(initErr);
           proxy = null;
           let errProps = {};
-          if (isNetworkError(initErr)) {
+          if (isNetwork) {
             errProps = { message: code, subcode: Err.getCode(initErr), class: 'network', tries, maxTries };
           }
           const err = new Err(code, initErr, errProps);
           Err.copyProps(err, initErr);
-          if (feedback) await feedback.error(err, { fatal });
-          if (!isNetworkError(initErr)) throw retry.StopError(err); // exit right now
+          if (feedback) await feedback.error(err, { fatal, size });
+          if (!isNetwork) throw retry.StopError(err); // exit right now
           throw err; // try one again
         }
       },
