@@ -1,6 +1,7 @@
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
+// , { IModule, IModuleWithApp }
 
 export const apmMock = {
   startTransaction() {
@@ -25,6 +26,18 @@ export const apmMock = {
   },
 };
 
+// export interface IRabbitWorker extends IModule {
+//   name?: string;
+//   stats?: any;
+// }
+// export interface IRabbitWorkerJob extends IModule {
+//   worker?: IRabbitWorker;
+//   stats?: any;
+//   startedAt: Date,
+//   tx: any,
+// }
+
+// implements IRabbitWorkerJob
 export class RabbitWorkerJob extends Module {
   static __worker = true;
   __worker = true;
