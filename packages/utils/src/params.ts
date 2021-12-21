@@ -8,20 +8,20 @@ import round from 'lodash/round';
 
 import tryParamParse from './tryParamParse';
 
-export const notNan = (a, def = null) => (isFinite(a) ? a : def);
-export const toBoolean = (a, def = false) => (a === null ? def : Boolean(tryParamParse(a, def)));
-export const toNumber = (a, def = 0) => notNan(Number(tryParamParse(a, def)), def);
-export const toInt = (a, def = 0) => notNan(round(tryParamParse(a, def)), def);
-export const toJson = (a, def = null) => (isObjectLike(a) ? a : tryParamParse(a, def));
-export const toDate = (a, def = null) => (a ? new Date(a) || def : def);
-export const toArray = (a, def = null) => {
+export const notNan = (a: any, def: any = null) => (isFinite(a) ? a : def);
+export const toBoolean = (a: any, def: any = false) => (a === null ? def : Boolean(tryParamParse(a, def)));
+export const toNumber = (a: any, def: any = 0) => notNan(Number(tryParamParse(a, def)), def);
+export const toInt = (a: any, def: any = 0) => notNan(round(tryParamParse(a, def)), def);
+export const toJson = (a: any, def: any = null) => (isObjectLike(a) ? a : tryParamParse(a, def));
+export const toDate = (a: any, def: any = null) => (a ? new Date(a) || def : def);
+export const toArray = (a: any, def: any = null) => {
   if (a === null) return def;
   if (Array.isArray(a)) return a;
   if (typeof a !== 'string') return [toJson(a)];
   if (a === '') return [];
   return a.split(',').map((b) => toJson(b));
 };
-export const parse = (a, type, def) => {
+export const parse = (a: any, type, def) => {
   if (type === 'boolean' || type === 'bool') return toBoolean(a, def);
   if (type === 'number') return toNumber(a, def);
   if (type === 'int') return toInt(a, def);
@@ -31,7 +31,7 @@ export const parse = (a, type, def) => {
   return a;
 };
 
-export function params(obj, schema) {
+export function params(obj: any, schema: any) {
   const res = mapValues(obj, (value, key) => {
     const strOrObj = schema[key];
     let type;
