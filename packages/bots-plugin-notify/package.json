@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-plugin-notify",
-  "version": "2.58.0",
+  "version": "2.59.0",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -38,10 +38,10 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots-plugin": "2.58.0",
+    "@lskjs/bots-plugin": "2.59.0",
     "@lskjs/err": "2.57.0",
-    "@lskjs/module": "2.58.0",
-    "@lskjs/server-api": "2.58.0",
+    "@lskjs/module": "2.59.0",
+    "@lskjs/server-api": "2.59.0",
     "@lskjs/utils": "2.58.0",
     "axios": "0.21.2",
     "crypto-js": "^4.0.0",
