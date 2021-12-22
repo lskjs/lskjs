@@ -12,7 +12,6 @@
 http://proxy.lskjs.ru/proxy.txt
 https://proxy.lskjs.ru/some.txt
 http://proxy.lskjs.ru/some.txt
-http://proxy.lskjs.ru/some.txt
 http://proxy.lskjs.ru/some.json
 ftp://proxy.lskjs.ru/some.json
 http://proxy.lskjs.ru/proxies
