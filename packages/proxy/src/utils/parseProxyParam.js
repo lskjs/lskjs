@@ -1,7 +1,19 @@
 import { parseProxies } from './parseProxies';
 
-export const isProxyHub = (proxy) =>
-  (proxy.startsWith('http://') || proxy.startsWith('https://')) && proxy.includes('/proxy'); // TODO: доработать 
+const tryURL = (raw) => {
+  let str = raw;
+  if (!(str.startsWith('http://') || str.startsWith('https://') || str.startsWith('ftp://'))) {
+    str = `http://${str}`;
+  }
+  try {
+    const url = new URL(str);
+    return url;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const isProxyHub = (proxy) => (tryURL(proxy) || {}).pathname !== '/';
 
 export const getProxyType = (proxy) => {
   if (!proxy) return null;
