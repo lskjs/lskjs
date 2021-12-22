@@ -44,7 +44,8 @@ export const prettyTime = (ms: number, format = '') => {
   const formats = ['m', 's', 'ms'];
   const f = formats.includes(format) ? format : '';
 
-  const res = _prettyTime(ms * 10 ** 6, f);
+  const ns = Math.floor(Math.abs(ms) * 10 ** 6);
+  const res = _prettyTime(ns, f);
   return color(colorName, leftPad(res, 5));
 };
 
