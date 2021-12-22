@@ -163,7 +163,9 @@ const tests = [
     {
       proxy: 'jdgfhsgdfhgvsdhg',
       callback: (response) => {
-        // error
+        expect(response).toStrictEqual({
+          disabled: true,
+        });
       },
     },
   ],
@@ -172,7 +174,9 @@ const tests = [
     {
       proxy: 'google.com',
       callback: (response) => {
-        // error
+        expect(response).toStrictEqual({
+          disabled: true,
+        });
       },
     },
   ],
@@ -181,7 +185,9 @@ const tests = [
     {
       proxy: 'blablabla-test/',
       callback: (response) => {
-        // error
+        expect(response).toStrictEqual({
+          disabled: true,
+        });
       },
     },
   ],

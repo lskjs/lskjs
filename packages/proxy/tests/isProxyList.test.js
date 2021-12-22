@@ -1,6 +1,6 @@
 /* global test expect describe */
 
-import { isProxyHub } from '../src/utils/parseProxyParam';
+import { isProxyList } from '../src/utils/parseProxyParam';
 
 const tests = [
   [
@@ -113,11 +113,11 @@ const tests = [
   ],
 ];
 
-describe('isProxyHub', () => {
+describe('isProxyList', () => {
   test.each(tests)(
-    '[isProxyHub]: %s',
+    '[isProxyList]: %s',
     async (name, { proxy, callback }) => {
-      const response = isProxyHub(proxy);
+      const response = isProxyList(proxy);
       callback(response);
     },
     10000,

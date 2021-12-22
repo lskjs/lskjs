@@ -21,74 +21,74 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 1',
+    'Proxy list 1',
     {
       proxy: 'http://proxy.lskjs.ru/proxy.txt',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 2',
+    'Proxy list 2',
     {
       proxy: 'https://proxy.lskjs.ru/some.txt',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 3',
+    'Proxy list 3',
     {
       proxy: 'http://proxy.lskjs.ru/some.txt',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 4',
+    'Proxy list 4',
     {
       proxy: 'http://proxy.lskjs.ru/some.json',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 5',
+    'Proxy list 5',
     {
       proxy: 'http://proxy.lskjs.ru/proxies',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 6',
+    'Proxy list 6',
     {
       proxy: 'http://lskjs:pass@proxy.lskjs.ru/proxtList',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 7',
+    'Proxy list 7',
     {
       proxy: 'proxy.lskjs.ru/some.json',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
   [
-    'Proxy hub 8',
+    'Proxy list 8',
     {
       proxy: 'ftp://proxy.lskjs.ru/some.json',
       callback: (response) => {
-        expect(response).toBe('hub');
+        expect(response).toBe('list');
       },
     },
   ],
@@ -115,7 +115,7 @@ const tests = [
     {
       proxy: 'jdgfhsgdfhgvsdhg',
       callback: (response) => {
-        // error
+        expect(response).toBe(null);
       },
     },
   ],
@@ -124,7 +124,7 @@ const tests = [
     {
       proxy: 'google.com',
       callback: (response) => {
-        // error
+        expect(response).toBe(null);
       },
     },
   ],
@@ -133,7 +133,7 @@ const tests = [
     {
       proxy: 'blablabla-test/',
       callback: (response) => {
-        // error
+        expect(response).toBe(null);
       },
     },
   ],

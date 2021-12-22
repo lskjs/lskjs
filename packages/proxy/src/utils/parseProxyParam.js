@@ -1,8 +1,10 @@
+import fs from 'fs';
+
 import { parseProxies } from './parseProxies';
 
 const tryURL = (raw) => {
   let str = raw;
-  if (!(str.startsWith('http://') || str.startsWith('https://') || str.startsWith('ftp://'))) {
+  if (!/^(http|https|ftp):\/\//.test(str)) {
     str = `http://${str}`;
   }
   try {
@@ -13,25 +15,31 @@ const tryURL = (raw) => {
   }
 };
 
-export const isProxyHub = (proxy) => (tryURL(proxy) || {}).pathname !== '/';
+export const isProxyList = (proxy) => (tryURL(proxy) || {}).pathname !== '/';
+export const isProxyHub = isProxyList; // TODO: Добавлено для поддержки старых версий. Удалить, если не используется
 
 export const getProxyType = (proxy) => {
   if (!proxy) return null;
   if (proxy[0] === '.' || proxy[0] === '/') return 'file';
-  if (isProxyHub(proxy)) return 'hub';
+  if (isProxyList(proxy)) return 'list';
+  // TODO: добавить проверку на type: proxy
+  // Если тип не распознан, возвращать null
   return 'proxy';
 };
 
 export const parseProxyParam = (proxyStr) => {
   const proxyType = getProxyType(proxyStr);
   if (proxyType === 'file') {
-    if (proxyStr[0] === '.') {
+    const path = proxyStr.startsWith('.') ? `${process.cwd()}${proxyStr.substr(1)}` : proxyStr;
+    let proxies = '';
+
+    try {
       // eslint-disable-next-line import/no-dynamic-require
-      const proxies = require(`${process.cwd()}${proxyStr.substr(1)}`).default;
-      return { proxies };
+      proxies = require(path).default;
+    } catch (error) {
+      proxies = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' });
     }
-    // eslint-disable-next-line import/no-dynamic-require
-    const proxies = require(proxyStr).default;
+
     return { proxies };
   }
   if (proxyType === 'proxy') {
@@ -41,11 +49,8 @@ export const parseProxyParam = (proxyStr) => {
     }));
     return { proxies };
   }
-  if (proxyType === 'hub') {
-    let proxyPath = proxyStr;
-    if (!/^(http|https|ftp):\/\//.test(proxyStr)) proxyPath = `http://${proxyStr}`;
-
-    const urlObj = new URL(proxyPath);
+  if (proxyType === 'list') {
+    const urlObj = tryURL(proxyStr);
     const options = Object.fromEntries(urlObj.searchParams);
     urlObj.search = '';
     const baseURL = urlObj.toString();
