@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.60.1](https://github.com/lskjs/lskjs/compare/v2.60.0...v2.60.1) (2021-12-22)
+
+
+### Bug Fixes
+
+* **log:** fix values <= 0 and fractional values ([433b648](https://github.com/lskjs/lskjs/commit/433b648f67d260e6b2e5b5aa017c5edb29a79349))
+
+
+
+
+
 # [2.59.0](https://github.com/lskjs/lskjs/compare/v2.58.0...v2.59.0) (2021-12-21)
 
 
