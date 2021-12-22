@@ -123,22 +123,15 @@ const tests = [
     },
   ],
   [
-    'Proxy proxy 1',
+    'Proxy hub 8',
     {
       proxy: 'ftp://proxy.lskjs.ru/some.json',
       callback: (response) => {
-        expect(response).toMatchObject({
-          proxies: [
-            {
-              host: 'proxy.lskjs.ru',
-              key: 'proxy_lskjs_ru',
-              port: '',
-              provider: 'env',
-              stats: {},
-              type: 'ftp',
-              uri: 'ftp://proxy.lskjs.ru',
-            },
-          ],
+        expect(response).toStrictEqual({
+          client: {
+            baseURL: 'ftp://proxy.lskjs.ru/some.json',
+            options: {},
+          },
         });
       },
     },

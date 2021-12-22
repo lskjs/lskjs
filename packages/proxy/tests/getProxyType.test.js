@@ -84,6 +84,15 @@ const tests = [
     },
   ],
   [
+    'Proxy hub 8',
+    {
+      proxy: 'ftp://proxy.lskjs.ru/some.json',
+      callback: (response) => {
+        expect(response).toBe('hub');
+      },
+    },
+  ],
+  [
     'Proxy file 1',
     {
       proxy: '/home/lskjs/proxy.txt',
@@ -98,15 +107,6 @@ const tests = [
       proxy: './lskjs/proxy.txt',
       callback: (response) => {
         expect(response).toBe('file');
-      },
-    },
-  ],
-  [
-    'Proxy proxy 1',
-    {
-      proxy: 'ftp://proxy.lskjs.ru/some.json',
-      callback: (response) => {
-        expect(response).toBe('proxy');
       },
     },
   ],

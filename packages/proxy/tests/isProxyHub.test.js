@@ -71,7 +71,7 @@ const tests = [
     {
       proxy: 'ftp://proxy.lskjs.ru/some.json',
       callback: (response) => {
-        expect(response).toBe(false);
+        expect(response).toBe(true);
       },
     },
   ],

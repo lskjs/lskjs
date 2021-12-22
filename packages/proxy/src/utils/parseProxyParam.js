@@ -42,7 +42,10 @@ export const parseProxyParam = (proxyStr) => {
     return { proxies };
   }
   if (proxyType === 'hub') {
-    const urlObj = new URL(proxyStr);
+    let proxyPath = proxyStr;
+    if (!/^(http|https|ftp):\/\//.test(proxyStr)) proxyPath = `http://${proxyStr}`;
+
+    const urlObj = new URL(proxyPath);
     const options = Object.fromEntries(urlObj.searchParams);
     urlObj.search = '';
     const baseURL = urlObj.toString();
