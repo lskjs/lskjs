@@ -48,17 +48,6 @@ export class KafkaModule extends Module {
     await super.run();
     this.producer = this.client.producer();
     await this.producer.connect();
-    const admin = this.client.admin();
-    await admin.connect();
-    await admin.createTopics({
-      topics: [
-        {
-          topic: 'instagram_channel_events',
-          numPartitions: 36,
-          replicationFactor: 2,
-        },
-      ],
-    });
   }
 }
 
