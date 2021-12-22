@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.60.0](https://github.com/lskjs/lskjs/compare/v2.59.0...v2.60.0) (2021-12-22)
+
+
+### Bug Fixes
+
+* **kafka:** remove create topics from run ([dcbd4a9](https://github.com/lskjs/lskjs/commit/dcbd4a9373d9284b63f66129ea650bd266e7cb94))
+
+
+
+
+
 # [2.59.0](https://github.com/lskjs/lskjs/compare/v2.58.0...v2.59.0) (2021-12-21)
 
 **Note:** Version bump only for package @lskjs/kafka
