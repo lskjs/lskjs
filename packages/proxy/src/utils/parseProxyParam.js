@@ -38,7 +38,7 @@ export const parseProxyParam = (proxyStr) => {
     return { proxies };
   }
   if (proxyType === 'list') {
-    const urlObj = tryURL(proxyStr);
+    const urlObj = tryURLparse(proxyStr);
     const options = Object.fromEntries(urlObj.searchParams);
     urlObj.search = '';
     const baseURL = urlObj.toString();
