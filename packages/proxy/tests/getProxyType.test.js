@@ -137,6 +137,42 @@ const tests = [
       },
     },
   ],
+  [
+    'Proxy txt 1',
+    {
+      proxy: 'lsk.js.io:1111:lskjs:sdjfb2634',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 2',
+    {
+      proxy: 'lsk.js.io:1111:lskjs',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 3',
+    {
+      proxy: 'lsk.js.io:1111',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 4',
+    {
+      proxy: 'lsk.js.io',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
 ];
 
 describe('getProxyType', () => {

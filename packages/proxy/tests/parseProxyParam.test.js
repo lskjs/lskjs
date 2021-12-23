@@ -25,7 +25,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 1',
+    'Proxy list 1',
     {
       proxy: 'http://proxy.lskjs.ru/proxy.txt',
       callback: (response) => {
@@ -39,7 +39,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 2',
+    'Proxy list 2',
     {
       proxy: 'https://proxy.lskjs.ru/some.txt',
       callback: (response) => {
@@ -53,7 +53,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 3',
+    'Proxy list 3',
     {
       proxy: 'http://proxy.lskjs.ru/some.txt',
       callback: (response) => {
@@ -67,7 +67,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 4',
+    'Proxy list 4',
     {
       proxy: 'http://proxy.lskjs.ru/some.json',
       callback: (response) => {
@@ -81,7 +81,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 5',
+    'Proxy list 5',
     {
       proxy: 'http://proxy.lskjs.ru/proxies',
       callback: (response) => {
@@ -95,7 +95,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 6',
+    'Proxy list 6',
     {
       proxy: 'http://lskjs:pass@proxy.lskjs.ru/proxtList',
       callback: (response) => {
@@ -109,7 +109,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 7',
+    'Proxy list 7',
     {
       proxy: 'proxy.lskjs.ru/some.json',
       callback: (response) => {
@@ -123,7 +123,7 @@ const tests = [
     },
   ],
   [
-    'Proxy hub 8',
+    'Proxy list 8',
     {
       proxy: 'ftp://proxy.lskjs.ru/some.json',
       callback: (response) => {
@@ -154,6 +154,58 @@ const tests = [
       callback: (response) => {
         expect(response).toMatchObject({
           proxies: 'lskjs:pass@lskjs.ru:1234,lskjs:pass@lskjs.ru:15675',
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 1',
+    {
+      proxy: 'lsk.js.io:1111:lskjs:sdjfb2634',
+      callback: (response) => {
+        expect(response).toStrictEqual({
+          client: {
+            baseURL: 'http://lskjs:sdjfb2634@lsk.js.io:1111/',
+          },
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 2',
+    {
+      proxy: 'lsk.js.io:1111:lskjs',
+      callback: (response) => {
+        expect(response).toStrictEqual({
+          client: {
+            baseURL: 'http://lskjs@lsk.js.io:1111/',
+          },
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 3',
+    {
+      proxy: 'lsk.js.io:1111',
+      callback: (response) => {
+        expect(response).toStrictEqual({
+          client: {
+            baseURL: 'http://lsk.js.io:1111/',
+          },
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 4',
+    {
+      proxy: 'lsk.js.io',
+      callback: (response) => {
+        expect(response).toStrictEqual({
+          client: {
+            baseURL: 'http://lsk.js.io/',
+          },
         });
       },
     },
