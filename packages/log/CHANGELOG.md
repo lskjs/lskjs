@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.62.0](https://github.com/lskjs/lskjs/compare/v2.61.1...v2.62.0) (2021-12-23)
+
+
+### Features
+
+* **utils:** omitNull - allow filter argument ([9a354b4](https://github.com/lskjs/lskjs/commit/9a354b4e9de937e360a45932175013a12724e950))
+
+
+
+
+
 ## [2.60.1](https://github.com/lskjs/lskjs/compare/v2.60.0...v2.60.1) (2021-12-22)
 
 

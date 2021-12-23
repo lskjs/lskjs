@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.62.0](https://github.com/lskjs/lskjs/compare/v2.61.1...v2.62.0) (2021-12-23)
+
+
+### Features
+
+* **utils:** delay more than 1 month ([2c086c1](https://github.com/lskjs/lskjs/commit/2c086c1e74c405b90b5d6c7e35e87d31969f02a8))
+* **utils:** improve DELAY_MAX_SETTIMEOUT ([3cb0653](https://github.com/lskjs/lskjs/commit/3cb0653bf6549e1b1218255575751d2b7ea0280e))
+* **utils:** rewrite omitNull to ts ([2728ac9](https://github.com/lskjs/lskjs/commit/2728ac9a090c22bf3b9b72e0083631e6cab0a357))
+
+
+
+
+
 # [2.61.0](https://github.com/lskjs/lskjs/compare/v2.60.1...v2.61.0) (2021-12-23)
 
 
