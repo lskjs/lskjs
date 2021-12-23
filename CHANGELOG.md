@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.61.1](https://github.com/lskjs/lskjs/compare/v2.61.0...v2.61.1) (2021-12-23)
+
+
+### Bug Fixes
+
+* **proxy:** parseProxyParams ([10dc88d](https://github.com/lskjs/lskjs/commit/10dc88d1f97bcfcbb09020d90092fec7e1c9d5c2))
+
+
+
+
+
 # [2.61.0](https://github.com/lskjs/lskjs/compare/v2.60.1...v2.61.0) (2021-12-23)
 
 
