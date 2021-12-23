@@ -21,22 +21,22 @@ const tests = [
     },
   ],
   [
-    'Deep is 0',
+    'Depth is 0',
     {
       name: '1234567890',
       depth: 0,
       callback: (response) => {
-        expect(response.error.message).toBe('Deep is not valid');
+        expect(response.error.message).toBe('Depth is not valid');
       },
     },
   ],
   [
-    'Deep less 0',
+    'Depth less 0',
     {
       name: '1234567890',
       depth: -1,
       callback: (response) => {
-        expect(response.error.message).toBe('Deep is not valid');
+        expect(response.error.message).toBe('Depth is not valid');
       },
     },
   ],
@@ -228,9 +228,10 @@ const tests = [
 describe('getPathById', () => {
   test.each(tests)(
     '[getPathById]: %s',
+    // @ts-ignore
     async (label, { name, depth, length, callback }) => {
       try {
-        const response = getPathById(name, depth, length);
+        const response = getPathById(name, { depth, length });
         callback(response);
       } catch (e) {
         callback({ error: e });
