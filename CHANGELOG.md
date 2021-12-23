@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.61.0](https://github.com/lskjs/lskjs/compare/v2.60.1...v2.61.0) (2021-12-23)
+
+
+### Bug Fixes
+
+* **proxy:** separate tryURLparse ([e717f8a](https://github.com/lskjs/lskjs/commit/e717f8a1e0a95efa21cb11c0e73031cc73254161))
+* **utils:** getPathById migrate to ts and change options ([8c20ee6](https://github.com/lskjs/lskjs/commit/8c20ee62a63738e1e2a74514e76bad523012e400))
+
+
+### Features
+
+* **utils:** add getPathById with tests ([87e5cfb](https://github.com/lskjs/lskjs/commit/87e5cfbf9c95f58e06f296d6a907ce6644170fb6))
+
+
+
+
+
 ## [2.60.1](https://github.com/lskjs/lskjs/compare/v2.60.0...v2.60.1) (2021-12-22)
 
 

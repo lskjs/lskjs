@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.61.0](https://github.com/lskjs/lskjs/compare/v2.60.1...v2.61.0) (2021-12-23)
+
+
+### Bug Fixes
+
+* **utils:** getPathById migrate to ts and change options ([8c20ee6](https://github.com/lskjs/lskjs/commit/8c20ee62a63738e1e2a74514e76bad523012e400))
+
+
+### Features
+
+* **utils:** add getPathById with tests ([87e5cfb](https://github.com/lskjs/lskjs/commit/87e5cfbf9c95f58e06f296d6a907ce6644170fb6))
+
+
+
+
+
 # [2.58.0](https://github.com/lskjs/lskjs/compare/v2.57.2...v2.58.0) (2021-12-21)
 
 

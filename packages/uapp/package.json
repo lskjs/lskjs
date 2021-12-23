@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "2.60.1",
+  "version": "2.61.0",
   "description": "LSK universal react app wrapper",
   "keywords": [
     "database",
@@ -39,7 +39,7 @@
     "@lskjs/env": "2.57.0",
     "@lskjs/err": "2.57.0",
     "@lskjs/module": "2.60.1",
-    "@lskjs/utils": "2.58.0",
+    "@lskjs/utils": "2.61.0",
     "core-decorators": "0.20.0",
     "emotion": "10.0.27",
     "emotion-theming": "10.0.27",
