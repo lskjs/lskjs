@@ -1,21 +1,9 @@
 import fs from 'fs';
 
 import { parseProxies } from './parseProxies';
+import { tryURLparse } from './tryURLparse';
 
-const tryURL = (raw) => {
-  let str = raw;
-  if (!/^(http|https|ftp):\/\//.test(str)) {
-    str = `http://${str}`;
-  }
-  try {
-    const url = new URL(str);
-    return url;
-  } catch (err) {
-    return null;
-  }
-};
-
-export const isProxyList = (proxy) => (tryURL(proxy) || {}).pathname !== '/';
+export const isProxyList = (proxy) => (tryURLparse(proxy) || {}).pathname !== '/';
 export const isProxyHub = isProxyList; // TODO: Добавлено для поддержки старых версий. Удалить, если не используется
 
 export const getProxyType = (proxy) => {
