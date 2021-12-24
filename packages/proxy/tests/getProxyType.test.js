@@ -149,7 +149,7 @@ const tests = [
   [
     'Proxy txt 2',
     {
-      proxy: 'lsk.js.io:1111:lskjs',
+      proxy: 'lsk.js.io:1111:lskjs:sdjfb2634?provider=lsk',
       callback: (response) => {
         expect(response).toBe('txt');
       },
@@ -158,7 +158,7 @@ const tests = [
   [
     'Proxy txt 3',
     {
-      proxy: 'lsk.js.io:1111',
+      proxy: 'lsk.js.io:1111:lskjs',
       callback: (response) => {
         expect(response).toBe('txt');
       },
@@ -167,7 +167,43 @@ const tests = [
   [
     'Proxy txt 4',
     {
+      proxy: 'lsk.js.io:1111:lskjs?provider=lsk',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 5',
+    {
+      proxy: 'lsk.js.io:1111',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 6',
+    {
+      proxy: 'lsk.js.io:1111?provider=lsk',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 7',
+    {
       proxy: 'lsk.js.io',
+      callback: (response) => {
+        expect(response).toBe('txt');
+      },
+    },
+  ],
+  [
+    'Proxy txt 8',
+    {
+      proxy: 'lsk.js.io?provider=lsk',
       callback: (response) => {
         expect(response).toBe('txt');
       },

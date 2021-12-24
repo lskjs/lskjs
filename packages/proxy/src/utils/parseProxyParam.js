@@ -6,7 +6,8 @@ import { tryURLparse } from './tryURLparse';
 export const isProxyList = (proxy) => (tryURLparse(proxy) || {}).pathname !== '/';
 export const isProxyHub = isProxyList; // TODO: Добавлено для поддержки старых версий. Удалить, если не используется
 
-export const isProxyTxt = (proxy) => /^([^:/]+)?(:[0-9]{0,4})?(:[^:/]+)?(:[^:/]+)?$/gm.test(proxy);
+export const isProxyTxt = (proxy) =>
+  /^([^:/]+)?(:[0-9]{0,4})?(:[^:/]+)?(:[^:/]+)?(\?[^:/=?]+=[^:/=?]+)*$/gm.test(proxy);
 
 export const getProxyType = (proxy) => {
   if (!proxy) return null;
@@ -54,21 +55,23 @@ export const parseProxyParam = (proxyStr) => {
     };
   }
   if (proxyType === 'txt') {
-    const [host = '', port = '', username = '', password = ''] = proxyStr.split(':');
+    const [params, args] = proxyStr.split('?');
+    const [host = '', port = '', username = '', password = ''] = params.split(':');
 
     let proxyUrl = `http://${username}:${password}@${host}:${port}`;
-  
     if (!port) proxyUrl = `http://${username}:${password}@${host}/`;
     if (!password) proxyUrl = `http://${username}@${host}:${port}/`;
     if (!username && !password) proxyUrl = `http://${host}:${port}/`;
     if (!password && !port) proxyUrl = `http://${username}@${host}/`;
     if (!username && !password && !port) proxyUrl = `http://${host}/`;
 
-    return {
-      client: {
-        baseURL: proxyUrl,
-      },
-    };
+    if (args) proxyUrl += `?${args}`;
+
+    const proxies = parseProxies(proxyUrl).map((p) => ({
+      provider: 'env',
+      ...p,
+    }));
+    return { proxies };
   }
   return {
     disabled: true,

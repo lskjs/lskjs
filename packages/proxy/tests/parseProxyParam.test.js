@@ -163,10 +163,19 @@ const tests = [
     {
       proxy: 'lsk.js.io:1111:lskjs:sdjfb2634',
       callback: (response) => {
-        expect(response).toStrictEqual({
-          client: {
-            baseURL: 'http://lskjs:sdjfb2634@lsk.js.io:1111/',
-          },
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io_1111',
+              password: 'sdjfb2634',
+              port: '1111',
+              provider: 'env',
+              type: 'http',
+              uri: 'http://lskjs:sdjfb2634@lsk.js.io:1111',
+              user: 'lskjs',
+            },
+          ],
         });
       },
     },
@@ -174,12 +183,21 @@ const tests = [
   [
     'Proxy txt 2',
     {
-      proxy: 'lsk.js.io:1111:lskjs',
+      proxy: 'lsk.js.io:1111:lskjs:sdjfb2634?provider=smart',
       callback: (response) => {
-        expect(response).toStrictEqual({
-          client: {
-            baseURL: 'http://lskjs@lsk.js.io:1111/',
-          },
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io_1111',
+              password: 'sdjfb2634',
+              port: '1111',
+              provider: 'smart',
+              type: 'http',
+              uri: 'http://lskjs:sdjfb2634@lsk.js.io:1111',
+              user: 'lskjs',
+            },
+          ],
         });
       },
     },
@@ -187,12 +205,20 @@ const tests = [
   [
     'Proxy txt 3',
     {
-      proxy: 'lsk.js.io:1111',
+      proxy: 'lsk.js.io:1111:lskjs',
       callback: (response) => {
-        expect(response).toStrictEqual({
-          client: {
-            baseURL: 'http://lsk.js.io:1111/',
-          },
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io_1111',
+              port: '1111',
+              provider: 'env',
+              type: 'http',
+              uri: 'http://lskjs@lsk.js.io:1111',
+              user: 'lskjs',
+            },
+          ],
         });
       },
     },
@@ -200,12 +226,100 @@ const tests = [
   [
     'Proxy txt 4',
     {
+      proxy: 'lsk.js.io:1111:lskjs?provider=smart',
+      callback: (response) => {
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io_1111',
+              port: '1111',
+              provider: 'smart',
+              type: 'http',
+              uri: 'http://lskjs@lsk.js.io:1111',
+              user: 'lskjs',
+            },
+          ],
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 5',
+    {
+      proxy: 'lsk.js.io:1111',
+      callback: (response) => {
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io_1111',
+              port: '1111',
+              provider: 'env',
+              type: 'http',
+              uri: 'http://lsk.js.io:1111',
+            },
+          ],
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 6',
+    {
+      proxy: 'lsk.js.io:1111?provider=smart',
+      callback: (response) => {
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io_1111',
+              port: '1111',
+              provider: 'smart',
+              type: 'http',
+              uri: 'http://lsk.js.io:1111',
+            },
+          ],
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 7',
+    {
       proxy: 'lsk.js.io',
       callback: (response) => {
-        expect(response).toStrictEqual({
-          client: {
-            baseURL: 'http://lsk.js.io/',
-          },
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io',
+              port: '',
+              provider: 'env',
+              type: 'http',
+              uri: 'http://lsk.js.io',
+            },
+          ],
+        });
+      },
+    },
+  ],
+  [
+    'Proxy txt 8',
+    {
+      proxy: 'lsk.js.io?provider=smart',
+      callback: (response) => {
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.js.io',
+              key: 'lsk_js_io',
+              port: '',
+              provider: 'smart',
+              type: 'http',
+              uri: 'http://lsk.js.io',
+            },
+          ],
         });
       },
     },
