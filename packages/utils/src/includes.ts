@@ -10,15 +10,15 @@ type IObject = {
   [key: string]: any;
 };
 
-type IValuesType = number | string | null | undefined | symbol | RegExp | IObject | Array;
+type IValuesType = number | string | null | undefined | symbol | RegExp | IObject | Array<any>;
 
-const _includes = (func, collection: Array, values: IValuesType): boolean => {
+const _includes = (func: any, collection: Array<any>, values: IValuesType): boolean => {
   let [_collection, _values] = [collection, values];
 
   if (!Array.isArray(_collection)) _collection = [_collection];
   if (!Array.isArray(_values)) _values = [_values];
 
-  return _values[func]((value) => {
+  return _values[func]((value: any) => {
     if (isRegExp(value)) {
       return some(_collection, (elem) => value.test(elem));
     }
@@ -31,9 +31,11 @@ const _includes = (func, collection: Array, values: IValuesType): boolean => {
 };
 
 // Includes all values by collection
-export const includes = (collection: Array, values: IValuesType): boolean => _includes('every', collection, values);
+export const includes = (collection: Array<any>, values: IValuesType): boolean =>
+  _includes('every', collection, values);
 
 // Includes some values by collection
-export const includesOne = (collection: Array, values: IValuesType): boolean => _includes('some', collection, values);
+export const includesOne = (collection: Array<any>, values: IValuesType): boolean =>
+  _includes('some', collection, values);
 
 export default includes;
