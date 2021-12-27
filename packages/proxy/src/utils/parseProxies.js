@@ -3,6 +3,8 @@ import set from 'lodash/set';
 
 import { createProxy } from './createProxy';
 
+const setProxyValue = (proxy, path, value) => set(proxy, path, decodeURIComponent(value));
+
 export function parseProxy(str, { json = false, throws = true } = {}) {
   if (typeof str !== 'string') return json ? createProxy(str).toJSON() : createProxy(str);
   let uri = str;
@@ -25,16 +27,14 @@ export function parseProxy(str, { json = false, throws = true } = {}) {
     host,
     port,
   };
-  if (user) proxy.user = user;
-  if (password) proxy.password = password;
-  if (params.provider) proxy.provider = params.provider;
+  if (user) setProxyValue(proxy, 'user', user);
+  if (password) setProxyValue(proxy, 'password', password);
+  if (params.provider) setProxyValue(proxy, 'provider', params.provider);
   // if (params.provider) set(proxy, 'tags.provider', params.provider);
-  if (params.ip) proxy.ip = params.ip;
-  if (params.country) set(proxy, 'tags.country', params.country);
-  if (params.ipv) {
-    set(proxy, 'tags.ipv', params.ipv);
-  }
-  if (params.subtype) set(proxy, 'tags.subtype', params.subtype);
+  if (params.ip) setProxyValue(proxy, 'ip', params.ip);
+  if (params.country) setProxyValue(proxy, 'tags.country', params.country);
+  if (params.ipv) setProxyValue(proxy, 'tags.ipv', params.ipv);
+  if (params.subtype) setProxyValue(proxy, 'tags.subtype', params.subtype);
   // proxy.uri = createUri(proxy);
   // proxy.key = createKey(proxy);
   return json ? createProxy(proxy).toJSON() : createProxy(proxy);

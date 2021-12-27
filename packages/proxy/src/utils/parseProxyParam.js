@@ -7,7 +7,7 @@ export const isProxyList = (proxy) => (tryURLparse(proxy) || {}).pathname !== '/
 export const isProxyHub = isProxyList; // TODO: Добавлено для поддержки старых версий. Удалить, если не используется
 
 export const isProxyTxt = (proxy) =>
-  /^([^:/]+)?(:[0-9]{0,4})?(:[^:/]+)?(:[^:/]+)?(\?[^:/=?]+=[^:/=?]+)*$/gm.test(proxy);
+  /^([^:/@]+)?(:[0-9]{0,4})?(:[^:/@]+)?(:[^:/@]+)?(\?[^:/=?@]+=[^:/=?@]+)*$/gm.test(proxy);
 
 export const getProxyType = (proxy) => {
   if (!proxy) return null;
