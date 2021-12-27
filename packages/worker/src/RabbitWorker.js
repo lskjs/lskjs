@@ -8,6 +8,7 @@ import pick from 'lodash/pick';
 import { Worker } from './Worker';
 
 export class RabbitWorker extends Worker {
+  queueName = null;
   showErrorInfo() {
     return false; // // this.debug
   }
@@ -54,12 +55,11 @@ export class RabbitWorker extends Worker {
     }
     // isNack
     if (errInfo.redelivered && job.isTooMuchRedelivered()) {
-      const routingKey = get(job, 'msg.fields.routingKey');
-      const queue = `${routingKey}_redelivered`;
+      const queue = `${this.queueName}_redelivered`;
       try {
         await this.rabbit.assertQueueOnce(queue);
         // this.rabbit.consume(this.queue, this.onConsume.bind(this), { noAck: false });
-        this.log.error('isTooMuchRedelivered', `${routingKey} => ${queue}`);
+        this.log.error('isTooMuchRedelivered', `${this.queueName} => ${queue}`);
         const { meta = {} } = job.params;
         await this.rabbit.sendToQueue(queue, {
           ...job.params,
@@ -155,6 +155,7 @@ export class RabbitWorker extends Worker {
     }
     const queueName = this.rabbit.getQueueName(queue);
     await this.rabbit.queue(queueName);
+    this.queueName = queueName;
     const onConsume = this.onConsume.bind(this);
     // const onConsume = (...args) => {
     //   console.log(99991111);
