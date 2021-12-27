@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.63.0](https://github.com/lskjs/lskjs/compare/v2.62.1...v2.63.0) (2021-12-27)
+
+
+### Bug Fixes
+
+* **utils:** build errors ([432dacd](https://github.com/lskjs/lskjs/commit/432dacdcf8a96164007c000049c321ab61f625e8))
+* **worker:** more stable queue name for too much redelivered ([974ead0](https://github.com/lskjs/lskjs/commit/974ead07d2f3dae9f39011f18cfba8ab3fe1d4b6))
+
+
+### Features
+
+* **utils:** add includes with tests ([f6ae7aa](https://github.com/lskjs/lskjs/commit/f6ae7aad03cee1420d6f62bd14b7b9df442ca035))
+
+
+
+
+
 ## [2.62.1](https://github.com/lskjs/lskjs/compare/v2.62.0...v2.62.1) (2021-12-24)
 
 
