@@ -102,6 +102,24 @@ const tests = [
       },
     },
   ],
+  [
+    'Proxy txt 12 - not txt',
+    {
+      proxy: 'lskjs-uk:sjhdfhjs123@lsk.proxy.io:7000?provider=lskProvider',
+      callback: (response) => {
+        expect(response).toBe(false);
+      },
+    },
+  ],
+  [
+    'Proxy txt 13 - not txt',
+    {
+      proxy: 'lsk-uk:asjfh123;;;;@proxy.lsk.com:9000?provider=lskProvider',
+      callback: (response) => {
+        expect(response).toBe(false);
+      },
+    },
+  ],
 ];
 
 describe('isProxyTxt', () => {

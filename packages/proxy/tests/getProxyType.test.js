@@ -209,6 +209,24 @@ const tests = [
       },
     },
   ],
+  [
+    'Proxy 1',
+    {
+      proxy: 'lskjs-uk:sjhdfhjs123@lsk.proxy.io:7000?provider=lskProvider',
+      callback: (response) => {
+        expect(response).toBe('proxy');
+      },
+    },
+  ],
+  [
+    'Proxy 2',
+    {
+      proxy: 'lsk-uk:asjfh123;;;;@proxy.lsk.com:9000?provider=lskProvider',
+      callback: (response) => {
+        expect(response).toBe('proxy');
+      },
+    },
+  ],
 ];
 
 describe('getProxyType', () => {

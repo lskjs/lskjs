@@ -325,6 +325,46 @@ const tests = [
     },
   ],
   [
+    'Proxy 1',
+    {
+      proxy: 'lskjs-uk:sjhdfhjs123@lsk.proxy.io:7000?provider=smart',
+      callback: (response) => {
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'lsk.proxy.io',
+              key: 'lsk_proxy_io_7000',
+              port: '7000',
+              provider: 'smart',
+              type: 'http',
+              uri: 'http://lskjs-uk:sjhdfhjs123@lsk.proxy.io:7000',
+            },
+          ],
+        });
+      },
+    },
+  ],
+  [
+    'Proxy 2',
+    {
+      proxy: 'lsk-uk:asjfh123;;;;@proxy.lsk.com:9000?provider=smart',
+      callback: (response) => {
+        expect(response).toMatchObject({
+          proxies: [
+            {
+              host: 'proxy.lsk.com',
+              key: 'proxy_lsk_com_9000',
+              port: '9000',
+              provider: 'smart',
+              type: 'http',
+              uri: 'http://lsk-uk:asjfh123;;;;@proxy.lsk.com:9000',
+            },
+          ],
+        });
+      },
+    },
+  ],
+  [
     'Proxy random chars 1',
     {
       proxy: 'jdgfhsgdfhgvsdhg',

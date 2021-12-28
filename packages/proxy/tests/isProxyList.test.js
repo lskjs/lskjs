@@ -111,6 +111,24 @@ const tests = [
       },
     },
   ],
+  [
+    '(13) lskjs-uk:sjhdfhjs123@lsk.proxy.io:7000?provider=lskProvider',
+    {
+      proxy: 'lskjs-uk:sjhdfhjs123@lsk.proxy.io:7000?provider=lskProvider',
+      callback: (response) => {
+        expect(response).toBe(false);
+      },
+    },
+  ],
+  [
+    '(14) lsk-uk:asjfh123;;;;@proxy.lsk.com:9000?provider=lskProvider',
+    {
+      proxy: 'lsk-uk:asjfh123;;;;@proxy.lsk.com:9000?provider=lskProvider',
+      callback: (response) => {
+        expect(response).toBe(false);
+      },
+    },
+  ],
 ];
 
 describe('isProxyList', () => {
