@@ -70,7 +70,7 @@ export class RabbitWorkerJob extends Module {
   }
   getQueueMeta() {
     return {
-      meta: {
+      __meta: {
         __name: this.name,
         __date: Date.now(),
         ...this.params,

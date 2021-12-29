@@ -3,6 +3,7 @@ import Stats from '@lskjs/stats';
 import { isDev } from '@lskjs/utils/env';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
+import omit from 'lodash/omit';
 import pick from 'lodash/pick';
 
 import { Worker } from './Worker';
@@ -60,15 +61,15 @@ export class RabbitWorker extends Worker {
         await this.rabbit.assertQueueOnce(queue);
         // this.rabbit.consume(this.queue, this.onConsume.bind(this), { noAck: false });
         this.log.error('isTooMuchRedelivered', `${this.queueName} => ${queue}`);
-        const { meta = {} } = job.params;
+        const { __meta: meta = {} } = job.params;
         await this.rabbit.sendToQueue(queue, {
           ...job.params,
-          meta: {
-            ...meta,
+          __meta: {
             __err: {
               code: Err.getCode(err),
               message: Err.getMessage(err),
             },
+            ...omit(meta, ['__err']),
           },
         });
         if (this.showErrorInfo()) console.error('err1', err); // eslint-disable-line no-console
