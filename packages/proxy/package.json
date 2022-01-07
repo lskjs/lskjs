@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/proxy",
-  "version": "2.63.1",
+  "version": "2.64.0",
   "description": "LSK module for proxy.",
   "keywords": [
     "proxy",
@@ -32,7 +32,7 @@
   "dependencies": {
     "@lskjs/env": "2.57.0",
     "@lskjs/err": "2.57.0",
-    "@lskjs/module": "2.62.0",
+    "@lskjs/module": "2.64.0",
     "@lskjs/mutex": "2.57.0",
     "@lskjs/utils": "2.63.0",
     "async-mutex": "0.2.6",
@@ -42,7 +42,7 @@
     "socks-proxy-agent": "5.0.0"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.63.0",
+    "@lskjs/server-api": "2.64.0",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"

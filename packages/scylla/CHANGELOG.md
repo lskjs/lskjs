@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.64.0](https://github.com/lskjs/lskjs/compare/v2.63.1...v2.64.0) (2022-01-07)
+
+**Note:** Version bump only for package @lskjs/scylla
+
+
+
+
+
 # [2.63.0](https://github.com/lskjs/lskjs/compare/v2.62.1...v2.63.0) (2021-12-27)
 
 **Note:** Version bump only for package @lskjs/scylla

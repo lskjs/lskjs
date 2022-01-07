@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.64.0](https://github.com/lskjs/lskjs/compare/v2.63.1...v2.64.0) (2022-01-07)
+
+
+### Features
+
+* **worker:** rename meta to __meta ([5a38b04](https://github.com/lskjs/lskjs/commit/5a38b0482f5e75360126fd206f68973e37aa505e))
+
+
+
+
+
 ## [2.63.1](https://github.com/lskjs/lskjs/compare/v2.63.0...v2.63.1) (2021-12-27)
 
 **Note:** Version bump only for package @lskjs/worker
