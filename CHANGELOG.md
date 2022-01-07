@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.65.0](https://github.com/lskjs/lskjs/compare/v2.64.1...v2.65.0) (2022-01-07)
+
+
+### Features
+
+* improve logfmt parser ([20877f4](https://github.com/lskjs/lskjs/commit/20877f41fda88a4983fc75b6a82c976985ff5a80))
+
+
+
+
+
 ## [2.64.1](https://github.com/lskjs/lskjs/compare/v2.64.0...v2.64.1) (2022-01-07)
 
 
