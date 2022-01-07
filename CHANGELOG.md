@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.64.1](https://github.com/lskjs/lskjs/compare/v2.64.0...v2.64.1) (2022-01-07)
+
+
+### Bug Fixes
+
+* ckeck bunyan and logrus format ([31bc677](https://github.com/lskjs/lskjs/commit/31bc6770b767a96b0e1a96e54385857dff3d8a86))
+
+
+
+
+
 # [2.64.0](https://github.com/lskjs/lskjs/compare/v2.63.1...v2.64.0) (2022-01-07)
 
 
