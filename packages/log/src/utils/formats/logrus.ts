@@ -1,5 +1,6 @@
 // https://github.com/sirupsen/logrus
 // {"level":"warning","msg":"The group's number increased tremendously!", "number":122,"omg":true,"time":"2014-03-10 19:57:38.562471297 -0400 EDT"}
+import { ILoggerInternalMessageFormat } from '../..';
 import { ILoggerInternalMessage } from '../../types';
 import { toString } from '../toString';
 import { parseArgs } from './utils';
@@ -21,6 +22,7 @@ export const parseLogrus = (json: any): ILoggerInternalMessage => {
     panic: 'panic',
   };
   return {
+    format: ILoggerInternalMessageFormat.logrus,
     meta: {
       level: levelMap[level],
       time: new Date(time),

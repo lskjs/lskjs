@@ -43,7 +43,17 @@ export type ILoggerMeta = {
   length?: number;
 };
 
+// eslint-disable-next-line no-shadow
+export enum ILoggerInternalMessageFormat {
+  bunyan = 'bunyan',
+  lsklog = 'lsklog',
+  lsklogweb = 'lsklogweb',
+  logrus = 'logrus',
+  raw = 'raw',
+}
+
 export type ILoggerInternalMessage = {
+  format: ILoggerInternalMessageFormat | null;
   meta: ILoggerMeta;
   args: any[];
 };

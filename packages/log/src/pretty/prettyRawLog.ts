@@ -7,7 +7,7 @@ import { prettyFormat } from './prettyFormat';
 
 export const prettyRawLog = (log: ILogger, raw: any): void => {
   let json = tryJSONparse(raw);
-  if (!json) {
+  if (!json && !!raw.trim()) {
     json = tryLogfmtParse(raw);
   }
   if (!json) {
@@ -19,7 +19,7 @@ export const prettyRawLog = (log: ILogger, raw: any): void => {
     return;
   }
   const { meta, args = [] } = parse(json);
-  // console.log({ json, meta, args });
+  // console.log({ json, format, meta, args });
   // const args = [];
   // if (meta.msg !== null) args.push(meta.msg);
   // if (Object.keys(data).length) args.push(data);

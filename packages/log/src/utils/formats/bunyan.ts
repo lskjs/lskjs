@@ -1,6 +1,7 @@
 // https://github.com/trentm/node-bunyan
 // {"name":"myapp","hostname":"banana.local","pid":40161,"level":30,"msg":"hi","time":"2013-01-04T18:46:23.851Z","v":0}
 
+import { ILoggerInternalMessageFormat } from '../..';
 import { ILoggerInternalMessage } from '../../types';
 import { toString } from '../toString';
 import { parseArgs } from './utils';
@@ -19,6 +20,7 @@ export const parseBunyan = (json: any): ILoggerInternalMessage => {
     60: 'fatal',
   };
   return {
+    format: ILoggerInternalMessageFormat.bunyan,
     meta: {
       level: levelMap[level],
       time: new Date(time),

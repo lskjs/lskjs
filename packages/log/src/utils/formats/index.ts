@@ -1,14 +1,14 @@
-import { ILoggerInternalMessage } from '../../types';
+import { ILoggerInternalMessage, ILoggerInternalMessageFormat } from '../../types';
 import { createMsg, getErrCode } from '../createMsg';
 import { isBunyan, parseBunyan, stringifyBunyan } from './bunyan';
 import { isLogrus, parseLogrus, stringifyLogrus } from './logrus';
 import { isLsklog, isLsklogWeb, parseLsklog, stringifyLsklog } from './lsklog';
 
-export function detectFormat(json: any): string | null {
-  if (isBunyan(json)) return 'bunyan';
-  if (isLsklog(json)) return 'lsklog';
-  if (isLsklogWeb(json)) return 'lsklogweb';
-  if (isLogrus(json)) return 'logrus';
+export function detectFormat(json: any): ILoggerInternalMessageFormat | null {
+  if (isBunyan(json)) return ILoggerInternalMessageFormat.bunyan;
+  if (isLsklog(json)) return ILoggerInternalMessageFormat.lsklog;
+  if (isLsklogWeb(json)) return ILoggerInternalMessageFormat.lsklogweb;
+  if (isLogrus(json)) return ILoggerInternalMessageFormat.logrus;
   return null;
 }
 
@@ -27,10 +27,9 @@ export function stringify(format: string, meta: Record<string, unknown>, ...args
 
 export function parse(json: any): ILoggerInternalMessage {
   const format = detectFormat(json);
-  // console.log({ format });
-  if (format === 'buyan') return parseBunyan(json);
+  if (format === 'bunyan') return parseBunyan(json);
   if (format === 'lsklogweb') return parseLsklog(json);
   if (format === 'lsklog') return parseLsklog(json);
   if (format === 'logrus') return parseLogrus(json);
-  return { meta: {}, args: [json] };
+  return { format, meta: {}, args: [json] };
 }

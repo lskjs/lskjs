@@ -2,6 +2,7 @@
 // {"level":"info","time":1639528619417,"ns":"lsk:rabbit","msg":"[watch] finished 4092654"}
 // {"time":null,"reqId":"2srlW-ycUSEJyQE8U8tZk","method":"GET","host":"buzzguru.com","url":"/youtube/channels/5b686e12aeb42f00176245de/products/5ebe7d93ff9c79dc14a1664c","ua":"Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)","ip":"95.108.213.58, 10.101.3.140","status":200,"length":115268,"duration":1287.031414}
 
+import { ILoggerInternalMessageFormat } from '../..';
 import { ILoggerInternalMessage } from '../../types';
 import { toString } from '../toString';
 import { parseArgs } from './utils';
@@ -28,12 +29,14 @@ export const parseLsklog = (json: any): ILoggerInternalMessage => {
   };
   if (!isLsklogWeb(json)) {
     return {
+      format: ILoggerInternalMessageFormat.lsklogweb,
       meta,
       args: parseArgs(msg, data),
     };
   }
   const { reqId, method, host, ua, ip, url, status, length, duration, ...data2 } = data;
   return {
+    format: ILoggerInternalMessageFormat.lsklog,
     meta: {
       ...meta,
       method,
