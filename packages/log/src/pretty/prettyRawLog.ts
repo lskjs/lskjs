@@ -2,11 +2,14 @@
 import { ILogger } from '../types';
 import { parse } from '../utils/formats';
 import { tryJSONparse } from '../utils/tryJSONparse';
+import { tryLogfmtParse } from '../utils/tryLogfmtParse';
 import { prettyFormat } from './prettyFormat';
 
 export const prettyRawLog = (log: ILogger, raw: any): void => {
-  const json = tryJSONparse(raw);
-
+  let json = tryJSONparse(raw);
+  if (!json) {
+    json = tryLogfmtParse(raw);
+  }
   if (!json) {
     log.log(...prettyFormat({}, raw));
     return;
@@ -15,11 +18,8 @@ export const prettyRawLog = (log: ILogger, raw: any): void => {
     log.log(...prettyFormat({}, json));
     return;
   }
-
   const { meta, args = [] } = parse(json);
-
   // console.log({ json, meta, args });
-
   // const args = [];
   // if (meta.msg !== null) args.push(meta.msg);
   // if (Object.keys(data).length) args.push(data);

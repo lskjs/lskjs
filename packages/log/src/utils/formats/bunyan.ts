@@ -6,7 +6,7 @@ import { toString } from '../toString';
 import { parseArgs } from './utils';
 
 export const isBunyan = (json: any): boolean =>
-  Boolean(json.name && json.hostname && json.pid && json.msg && json.time && json.v);
+  Boolean(json.name && json.hostname && json.pid && json.msg && json.time);
 export const parseBunyan = (json: any): ILoggerInternalMessage => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { level, time, msg, hostname, pid, v, ...data } = json;
