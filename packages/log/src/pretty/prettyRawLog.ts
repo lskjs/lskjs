@@ -6,9 +6,22 @@ import { tryLogfmtParse } from '../utils/tryLogfmtParse';
 import { prettyFormat } from './prettyFormat';
 
 export const prettyRawLog = (log: ILogger, raw: any): void => {
-  let json = tryJSONparse(raw);
-  if (!json && !!raw.trim()) {
-    json = tryLogfmtParse(raw);
+  let json;
+  let format;
+  if (typeof raw === 'string') {
+    if (!json && !!raw.trim()) {
+      json = tryJSONparse(raw, null);
+      format = 'json';
+    }
+    if (!json && !!raw.trim()) {
+      json = tryLogfmtParse(raw, null);
+      format = 'logfmt';
+    }
+  }
+  if (!json) {
+    json = null;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    format = 'raw';
   }
   if (!json) {
     log.log(...prettyFormat({}, raw));
