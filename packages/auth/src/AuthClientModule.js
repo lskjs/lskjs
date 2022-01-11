@@ -13,23 +13,30 @@ import stores from './stores';
 // const DEBUG = false;
 
 export class AuthClientModule extends Module {
+  storages = {
+    MemoryStorage,
+    LocalStorage,
+  };
+
   async init() {
     await super.init();
     // this.stores = require('./stores').default(this.app);
     const AuthStore = await this.module('stores.AuthStore');
     this.store = new AuthStore();
-    if (isClient) {
-      this.localStorage = new LocalStorage({
+    if (isClient && this.storages?.LocalStorage) {
+      this.localStorage = new this.storages.LocalStorage({
         // memoryState: this.app.rootState,
         config: get(this, 'app.config.storage', {}),
       });
       await this.localStorage.init();
     }
-    this.memoryStorage = new MemoryStorage({
-      state: this.app.rootState,
-      config: get(this, 'app.config.storage', {}),
-    });
-    await this.memoryStorage.init();
+    if (this.storages?.MemoryStorage) {
+      this.memoryStorage = new this.storages.MemoryStorage({
+        state: this.app.rootState,
+        config: get(this, 'app.config.storage', {}),
+      });
+      await this.memoryStorage.init();
+    }
   }
 
   async getModules() {
