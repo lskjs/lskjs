@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.65.1](https://github.com/lskjs/lskjs/compare/v2.65.0...v2.65.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* localStorage ([75432d4](https://github.com/lskjs/lskjs/commit/75432d48b8125064bdcd0fef359e09cf4d370939))
+
+
+
+
+
 # [2.65.0](https://github.com/lskjs/lskjs/compare/v2.64.1...v2.65.0) (2022-01-07)
 
 

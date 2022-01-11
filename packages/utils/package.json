@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils",
-  "version": "2.63.0",
+  "version": "2.65.1",
   "description": "LSK.js – utils – helpers and functions",
   "keywords": [],
   "publishConfig": {
@@ -26,8 +26,8 @@
     "watch": "lsk run watch"
   },
   "devDependencies": {
-    "@lskjs/env": "2.57.0",
-    "@lskjs/err": "2.57.0",
+    "@lskjs/env": "2.65.1",
+    "@lskjs/err": "2.65.1",
     "@types/bluebird": "3.5.33",
     "@types/lodash": "4.14.167",
     "bluebird": "3.7.2",
