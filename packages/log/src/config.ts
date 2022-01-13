@@ -1,10 +1,12 @@
 // import { isServer } from '@lskjs/env';
 
 export const levelsPriority = {
+  start: 99,
   log: 99,
   fatal: 60,
   error: 50,
   warn: 40,
+  success: 35,
   info: 30,
   debug: 20,
   trace: 10,
