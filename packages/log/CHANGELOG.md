@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.66.1](https://github.com/lskjs/lskjs/compare/v2.66.0...v2.66.1) (2022-01-17)
+
+
+### Bug Fixes
+
+* **log:** fix prettySize and prettyTime for arg type is not number ([9f30db0](https://github.com/lskjs/lskjs/commit/9f30db0d6b53d4f996acc97275daca8d53819056))
+
+
+
+
+
 # [2.66.0](https://github.com/lskjs/lskjs/compare/v2.65.1...v2.66.0) (2022-01-13)
 
 

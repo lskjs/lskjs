@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/kafka",
-  "version": "2.66.0",
+  "version": "2.66.1",
   "description": "LSK module for kafka.",
   "keywords": [
     "kafka"
@@ -28,7 +28,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/module": "2.66.0",
+    "@lskjs/module": "2.66.1",
     "@lskjs/utils": "2.65.1",
     "kafkajs": "1.15.0"
   },
