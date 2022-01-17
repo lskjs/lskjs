@@ -39,7 +39,9 @@ export const prettyMethod = (method: string) => {
   return color(colorName, leftPad(method, 4));
 };
 
-export const prettyTime = (ms: number, format = '') => {
+export const prettyTime = (ms: number, format = ''): string => {
+  if (typeof ms !== 'number') return `${ms}`;
+
   const colorName = ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
   const formats = ['m', 's', 'ms'];
   const f = formats.includes(format) ? format : '';
@@ -49,7 +51,9 @@ export const prettyTime = (ms: number, format = '') => {
   return color(colorName, leftPad(res, 5));
 };
 
-export const prettySize = (bytes: number, seperator = '') => {
+export const prettySize = (bytes: number, seperator = ''): string => {
+  if (typeof bytes !== 'number') return `${bytes}`;
+
   const [value, size] = _prettyBytes(bytes, { binary: true, maximumFractionDigits: 1 }).split(' ');
 
   return `${value}${seperator}${size}`;
