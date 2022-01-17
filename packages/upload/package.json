@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/upload",
-  "version": "2.66.1",
+  "version": "2.67.0",
   "description": "LSK module for uploading files.",
   "keywords": [
     "upload",
@@ -32,14 +32,14 @@
   },
   "dependencies": {
     "@lskjs/err": "2.65.1",
-    "@lskjs/module": "2.66.1",
+    "@lskjs/module": "2.67.0",
     "@lskjs/utils": "2.65.1",
     "aws-sdk": "2.827.0",
     "multer": "1.4.2",
     "multer-s3": "2.9.0"
   },
   "devDependencies": {
-    "@lskjs/server-api": "2.66.1",
+    "@lskjs/server-api": "2.67.0",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.67.0](https://github.com/lskjs/lskjs/compare/v2.66.1...v2.67.0) (2022-01-17)
+
+
+### Bug Fixes
+
+* **log:** logftm mass flood ([2833540](https://github.com/lskjs/lskjs/commit/2833540311ad00b95d01b0fdad8570cac15f30c9))
+
+
+### Features
+
+* **log:** add hightlights brackets ([8df4a44](https://github.com/lskjs/lskjs/commit/8df4a4441a07dcaea8695dc9eabb24096f529c64))
+
+
+
+
+
 ## [2.66.1](https://github.com/lskjs/lskjs/compare/v2.66.0...v2.66.1) (2022-01-17)
 
 
