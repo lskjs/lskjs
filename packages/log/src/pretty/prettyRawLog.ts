@@ -23,6 +23,7 @@ export const prettyRawLog = (log: ILogger, raw: any): void => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     format = 'raw';
   }
+  // console.log({ format, json, raw });
   if (!json) {
     log.log(...prettyFormat({}, raw));
     return;

@@ -23,8 +23,8 @@ export function hashColor(name: string | number, str: string): string {
   }, str);
 }
 
-export function color(name: string | null, str: string): string {
-  const hashColors = getColors(name);
+export function color(nameOrNames: string | null | string[], str: string): string {
+  const hashColors = Array.isArray(nameOrNames) ? nameOrNames : getColors(nameOrNames);
   return hashColors.reduce((msg, colorName) => {
     const colorFn = colors && colors[colorName] ? colors[colorName] : null;
     // eslint-disable-next-line no-console

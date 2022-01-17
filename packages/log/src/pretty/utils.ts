@@ -81,7 +81,31 @@ export const prettyLevel = (level = ''): string => {
   return color(level, logLevelStr);
 };
 
-export const prettyContent = (...args: any[]) => args;
+const highlightRegexp = /\[[^"\]]+]/gm;
+export const prettyContent = (...args: any[]): any[] => {
+  // console.log('args.length', args.length);
+  const colored: any[] = [];
+  args.forEach((arg) => {
+    // if (typeof arg === 'string') {
+    //   console.log({ arg }, typeof arg === 'string', arg.startsWith('['), arg.endsWith(']'));
+    // }
+    if (typeof arg === 'string') {
+      const colors = [['bold', 'white'], ['bold', 'cyan'], ['bold', 'green'], ['white']];
+
+      let i = 0;
+      colored.push(
+        arg.replace(highlightRegexp, (match) => {  //eslint-disable-line
+          // console.log({ match });
+          // eslint-disable-next-line no-plusplus
+          return color(colors[i++ % colors.length], match);
+        }),
+      );
+    } else {
+      colored.push(arg);
+    }
+  });
+  return colored;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getUrlLevel = (req: any): string =>
