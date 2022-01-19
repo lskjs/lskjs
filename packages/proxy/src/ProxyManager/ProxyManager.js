@@ -38,6 +38,9 @@ export class ProxyManager extends Module {
       ...props,
       params,
     };
+    if (!newProps.url && get(this, 'config.client.baseURL')) {
+      newProps.url = get(this, 'config.client.baseURL');
+    }
     return this.client.request(newProps);
   }
   async createClient() {
