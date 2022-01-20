@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.67.2](https://github.com/lskjs/lskjs/compare/v2.67.1...v2.67.2) (2022-01-20)
+
+
+### Bug Fixes
+
+* **proxy:** fix PROXY_MANAGER_LIST_EMPTY is network ([f8ae74a](https://github.com/lskjs/lskjs/commit/f8ae74ad51c4e23cf699bd49f27bbd13809584ad))
+
+
+
+
+
 ## [2.67.1](https://github.com/lskjs/lskjs/compare/v2.67.0...v2.67.1) (2022-01-19)
 
 
