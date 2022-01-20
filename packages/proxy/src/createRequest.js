@@ -41,15 +41,16 @@ export const createRequest =
     return retry(
       async () => {
         let proxy;
+        let feedback;
         if (initProxy) proxy = initProxy;
         const proxyManager = await (props.proxyManager || feedbackOptions.proxyManager); // TODO: подумать а не замудренно ли
-        if (!proxy && proxyManager) proxy = await proxyManager.getProxy();
-        const options = { ...params, ...getProviderOptions(proxy, driver) };
         tries += 1;
-        const feedback = createFeedback
-          ? createFeedback({ options: props, proxy, tries, maxTries }, { ...feedbackOptions, proxyManager, labels }) // TODO: подумать а не замудренно ли
-          : null;
         try {
+          if (!proxy && proxyManager) proxy = await proxyManager.getProxy();
+          const options = { ...params, ...getProviderOptions(proxy, driver) };
+          feedback = createFeedback
+            ? createFeedback({ options: props, proxy, tries, maxTries }, { ...feedbackOptions, proxyManager, labels }) // TODO: подумать а не замудренно ли
+            : null;
           let abortTimeout;
           if (timeout && !params.cancelToken) {
             const { CancelToken } = axios;
