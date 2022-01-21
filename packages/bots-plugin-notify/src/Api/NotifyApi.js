@@ -39,14 +39,19 @@ export class NotifyApi extends Api {
 
     this.messages = new2;
 
-    const sendTelegram = Bluebird.map(
-      old,
-      async (message) => this.sendNotification({ bot: this.bot.telegram, message }),
-      { concurrency: 10 },
-    );
-    const sendSlack = Bluebird.map(old, async (message) => this.sendNotification({ bot: this.bot.slack, message }), {
-      concurrency: 10,
-    });
+    let sendTelegram = [];
+    let sendSlack = [];
+    if (this.bot.telegram) {
+      sendTelegram = Bluebird.map(old, async (message) => this.sendNotification({ bot: this.bot.telegram, message }), {
+        concurrency: 10,
+      });
+    }
+
+    if (this.bot.slack) {
+      sendSlack = Bluebird.map(old, async (message) => this.sendNotification({ bot: this.bot.slack, message }), {
+        concurrency: 10,
+      });
+    }
 
     try {
       const res = await Promise.all([sendTelegram, sendSlack]);
@@ -86,6 +91,7 @@ export class NotifyApi extends Api {
       type: 'manual',
       projectName,
       sended: false,
+      showChannel: !!project.showChannel,
     };
     const getBool = (param, def) => (param == null ? def : +param);
 
