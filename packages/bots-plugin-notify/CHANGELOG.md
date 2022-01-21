@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.67.3](https://github.com/lskjs/lskjs/compare/v2.67.2...v2.67.3) (2022-01-21)
+
+
+### Bug Fixes
+
+* **notify:** add projectName to message by flag showChannel ([ef14527](https://github.com/lskjs/lskjs/commit/ef14527891e66305f8879ab01abeafc93b46e1a5))
+* **notify:** fix bug provider of undefined ([235d58a](https://github.com/lskjs/lskjs/commit/235d58a0b7c05e5fdbde0ce431b765def9970514))
+
+
+
+
+
 # [2.67.0](https://github.com/lskjs/lskjs/compare/v2.66.1...v2.67.0) (2022-01-17)
 
 **Note:** Version bump only for package @lskjs/bots-plugin-notify
