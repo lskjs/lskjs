@@ -61,7 +61,7 @@ export class NotifyPlugin extends BaseBotPlugin {
       options.parse_mode = 'MarkdownV2';
     }
 
-    if (isDefault && msg) {
+    if ((isDefault && msg) || message.showChannel) {
       msg = `/notify/${projectName}\n\n${msg}`;
     }
 
