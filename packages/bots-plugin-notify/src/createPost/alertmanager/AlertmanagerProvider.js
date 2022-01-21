@@ -20,13 +20,20 @@ const getStatus = ({ status, severity } = {}) =>
 const alertLog = (
   { status, labels: { severity, alertname, instance }, annotations: { grafana, description } },
   bot,
-) => `\
-${getStatus({ status, severity })} ${bot.formatCode(alertname)}
+) => {
+  const formatStatus = getStatus({ status, severity });
+  const formatCode = bot.formatCode(alertname);
+  const formatDescription = bot.ignoreMd(description);
+  const formatLink = grafana ? `\n${bot.formatLink('grafana', grafana)}` : '';
 
-${bot.ignoreMd(description)}
-
-${grafana ? `\n${bot.formatLink('grafana', grafana)}` : ''}\
-`;
+  return `\
+  ${formatStatus} ${formatCode}
+  
+  ${formatDescription}
+  
+  ${formatLink}\
+  `;
+};
 
 const alertsLog = ({ alerts }, bot) => alerts.map((alert) => alertLog(alert, bot)).join('\n\n------\n\n');
 
