@@ -27,7 +27,6 @@ const networkErrors = [
   'ENETUNREACH',
   'ERR_SOCKET_CLOSED',
   'ERR_TLS_CERT_ALTNAME_INVALID',
-  'PROXY_MANAGER_LIST_EMPTY',
 ];
 
 export const isNetworkCapcha = (err) => {
