@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.68.0](https://github.com/lskjs/lskjs/compare/v2.67.4...v2.68.0) (2022-01-25)
+
+
+### Bug Fixes
+
+* **proxy:** add label worker in bg_proxy_count ([b60c29b](https://github.com/lskjs/lskjs/commit/b60c29bb47ee4206ff9143540bd2c7808d880580))
+
+
+### Features
+
+* **proxy:** onProxyManagerError ([5481ff4](https://github.com/lskjs/lskjs/commit/5481ff41fe641dedebe9dac13ff6dae6883ecb80))
+
+
+
+
+
 ## [2.67.4](https://github.com/lskjs/lskjs/compare/v2.67.3...v2.67.4) (2022-01-24)
 
 

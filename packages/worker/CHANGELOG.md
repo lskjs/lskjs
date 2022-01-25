@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.68.0](https://github.com/lskjs/lskjs/compare/v2.67.4...v2.68.0) (2022-01-25)
+
+
+### Features
+
+* **proxy:** onProxyManagerError ([5481ff4](https://github.com/lskjs/lskjs/commit/5481ff41fe641dedebe9dac13ff6dae6883ecb80))
+
+
+
+
+
 ## [2.67.4](https://github.com/lskjs/lskjs/compare/v2.67.3...v2.67.4) (2022-01-24)
 
 **Note:** Version bump only for package @lskjs/worker
