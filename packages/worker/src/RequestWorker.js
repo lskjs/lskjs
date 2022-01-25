@@ -1,5 +1,8 @@
+import Err from '@lskjs/err';
 import { createRequest } from '@lskjs/proxy/createRequest';
 import { ProxyManager } from '@lskjs/proxy/ProxyManager';
+import { isNetworkError } from '@lskjs/proxy/utils/isNetworkError';
+import retry from '@lskjs/utils/retry';
 
 import { RabbitWorker } from './RabbitWorker';
 
@@ -35,6 +38,29 @@ export class RequestWorker extends RabbitWorker {
       proxy: () => import('@lskjs/proxy/ProxyManager'),
     };
   }
+  // TODO: нейминг
+  proxyManagerErrorProps = {
+    timeout: 10000,
+    redelivered: false,
+  };
+  async onProxyManagerError({ err: initErr, ...props }) {
+    let message = 'PROXY_ERROR';
+    const isNetwork = isNetworkError(initErr);
+    let errProps = {};
+    if (isNetwork) {
+      message = 'PROXY_NETWORK';
+      errProps = {
+        message,
+        subcode: Err.getCode(initErr),
+        class: 'network',
+        ...(this.proxyManagerErrorProps || {}),
+        ...props,
+      };
+    }
+    const err = new Err(message, initErr, errProps);
+    this.log.error('[onProxyManagerError]', err);
+    throw retry.StopError(err);
+  }
   async init() {
     await super.init();
     let proxyManager;
@@ -47,6 +73,7 @@ export class RequestWorker extends RabbitWorker {
       proxyManager,
       apm,
       log,
+      onProxyManagerError: this.onProxyManagerError && this.onProxyManagerError.bind(this),
     });
   }
 }

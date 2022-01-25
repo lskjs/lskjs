@@ -16,7 +16,7 @@ export const getProviderOptions = (proxy, driver) => (proxy ? proxy.getProviderO
 // const createNoop = () => ({ success: () => null, error: () => null });
 
 export const createRequest =
-  ({ createFeedback = defaultCreateFeedback, labels, ...feedbackOptions } = {}) =>
+  ({ createFeedback = defaultCreateFeedback, labels, onProxyManagerError, ...feedbackOptions } = {}) =>
   (props = {}) => {
     const {
       driver = 'axios',
@@ -46,22 +46,10 @@ export const createRequest =
 
         try {
           if (!proxy && proxyManager) proxy = await proxyManager.getProxy();
-        } catch (initErr) {
-          let message = 'PROXY_ERROR';
-          const isNetwork = isNetworkError(initErr);
-          let errProps = {};
-          if (isNetwork) {
-            message = 'PROXY_NETWORK';
-            errProps = {
-              message,
-              subcode: Err.getCode(initErr),
-              class: 'network',
-              tries,
-              maxTries,
-            };
+        } catch (err) {
+          if (onProxyManagerError) {
+            await onProxyManagerError({ err, tries, maxTries });
           }
-          const err = new Err(message, initErr, errProps);
-          throw retry.StopError(err);
         }
 
         const options = { ...params, ...getProviderOptions(proxy, driver) };
