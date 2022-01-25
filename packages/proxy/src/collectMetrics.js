@@ -13,7 +13,7 @@ export const collectMetrics = async function ({ prefix = 'bg' } = {}) {
     this.__metrics.gaugeTargetCount = new Gauge({
       name: [prefix, 'proxy_count'].filter(Boolean).join('_'),
       help: 'Информация по статусам проксям',
-      labelNames: ['target', 'provider', 'status'],
+      labelNames: ['target', 'provider', 'status', 'worker'],
     });
   }
   try {
@@ -35,9 +35,10 @@ export const collectMetrics = async function ({ prefix = 'bg' } = {}) {
     Object.values(proxyTestsResults).forEach(({ test, proxy, time, status } = {}) => {
       const { provider } = proxy || {};
       const { tags = [] } = test || {};
+      const { worker } = proxy.tags || {};
       tags.forEach((target) => {
         if (!target) return;
-        this.__metrics.gaugeTargetCount.inc({ target, provider, status });
+        this.__metrics.gaugeTargetCount.inc({ target, provider, status, worker });
       });
     });
   } catch (err) {
