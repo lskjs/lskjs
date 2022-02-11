@@ -79,6 +79,8 @@ export const createRequest =
             }
           }
           const res = await client(options);
+          res.proxyManager = proxyManager;
+          res.proxy = proxy;
           const size = res?.headers?.['content-length'] ? Number(res?.headers?.['content-length']) : null;
           if (abortTimeout) clearTimeout(abortTimeout);
           if (feedback) await feedback.success({ size });
@@ -90,7 +92,10 @@ export const createRequest =
           const fatal = isNetworkFatal(initErr);
           const isNetwork = isNetworkError(initErr);
           proxy = null;
-          let errProps = {};
+          let errProps = {
+            proxyManager,
+            proxy,
+          };
           if (isNetwork) {
             errProps = { message: code, subcode: Err.getCode(initErr), class: 'network', tries, maxTries };
           }
