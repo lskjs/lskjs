@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.69.0](https://github.com/lskjs/lskjs/compare/v2.68.0...v2.69.0) (2022-02-11)
+
+
+### Features
+
+* **proxy:** pass proxy and proxyManager in request() res ([653c387](https://github.com/lskjs/lskjs/commit/653c387dfa996816be2c4dbf0d6cd78bcfc68a04))
+
+
+
+
+
 # [2.68.0](https://github.com/lskjs/lskjs/compare/v2.67.4...v2.68.0) (2022-01-25)
 
 
