@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "2.67.0",
+  "version": "2.69.1",
   "description": "Логгер совмещающий лучшие черты debug, bunyan, logfmt/logrus, morgan/winston, ",
   "keywords": [],
   "publishConfig": {
