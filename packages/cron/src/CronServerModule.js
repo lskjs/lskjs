@@ -56,15 +56,15 @@ export class CronServerModule extends Module {
   }
   async run() {
     await super.run();
-    if (!this.config.disable) {
-      await asyncMapValues(this.jobs, (job) => job.start());
-      this.log.debug(
-        'jobs started',
-        map(this.jobsConfigs, (j) => `${j.name} ${j.cronTime}`),
-      );
-    } else {
-      this.log.debug('disabled')
+    if (this.config.disable || this.config.disabled) {
+      this.log.debug('disabled');
+      return;
     }
+    await asyncMapValues(this.jobs, (job) => job.start());
+    this.log.debug(
+      'jobs started',
+      map(this.jobsConfigs, (j) => `${j.name} ${j.cronTime}`),
+    );
   }
 }
 
