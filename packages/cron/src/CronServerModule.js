@@ -62,6 +62,8 @@ export class CronServerModule extends Module {
         'jobs started',
         map(this.jobsConfigs, (j) => `${j.name} ${j.cronTime}`),
       );
+    } else {
+      this.log.debug('disabled')
     }
   }
 }
