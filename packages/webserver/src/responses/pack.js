@@ -5,12 +5,13 @@ import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
 import omit from 'lodash/omit';
 
-export default (webserver) =>
+export default (ctx) =>
   async function pack(raw = {}, info) {
     const { req } = this;
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const res = this;
-    const config = get(webserver, 'config.response', isDev ? { log: false, debug: true } : {});
+    const config =
+      get(ctx, 'config.server.response') || get(ctx, 'config.response') || isDev ? { log: false, debug: true } : {};
     const status = info.status || get(raw, '__status', null);
     let isJson;
     let wrap;
@@ -37,10 +38,8 @@ export default (webserver) =>
     const code = wrap ? info.code : data.code;
     let message = wrap ? info.message : data.message;
     if (message === code) message = undefined;
-    // console.log(9999123222, { message, info, data, code }, req.i18.t('errors.billing.proxy'));
     if (code && !message) {
       const { i18 } = req;
-      // console.log('!@#!@#!@#!@#', `errors.${code}`);
       message = i18 && i18.exists(`errors.${code}`) ? i18.t(`errors.${code}`) : code;
     }
     let result;
@@ -90,9 +89,7 @@ export default (webserver) =>
           }
           try {
             const filename = `${dir}/res_${new Date().toISOString().replace(/[^a-zA-Z0-9]+/gi, '_')}.${type}`;
-            webserver.log.trace(
-              `>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${isDev ? '[IGNORE]' : ''}`,
-            );
+            ctx.log.trace(`>>>>> #${this.req.reqId} ${filename} [${str.length} bytes] ${isDev ? '[IGNORE]' : ''}`);
             require('fs').writeFileSync(filename, str);
           } catch (e) {
             // ignore
@@ -101,9 +98,9 @@ export default (webserver) =>
         return;
       }
       // else
-      webserver.log.trace('>>>>>');
+      ctx.log.trace('>>>>>');
       console.log(str); // eslint-disable-line no-console
-      webserver.log.trace('<<<<<');
+      ctx.log.trace('<<<<<');
     };
 
     if (!isJson) {
