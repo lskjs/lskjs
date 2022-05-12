@@ -6,7 +6,7 @@ import groupBy from 'lodash/groupBy';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
-export default ({ enable = 1, collapse = 1 } = {}) => {
+export default ({ enable = 1, hide = 0, collapse = 1 } = {}) => {
   if (!enable) return;
   const logger = new Logger({ name: 'React' });
 
@@ -24,6 +24,7 @@ export default ({ enable = 1, collapse = 1 } = {}) => {
 
   let stack = [];
   const addToStack = (...args) => {
+    if (hide) return;
     stack.push(args);
     debounce(() => {
       const groups = groupBy(stack, (s) => s[0]);
