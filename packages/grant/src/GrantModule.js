@@ -57,8 +57,8 @@ export class GrantModule extends Module {
     } else if (args.length === 3) {
       [action, rule, ctx] = args;
     } else {
-      if (args.length) throw new Err('grant.tooMuchArgs', 'getArgs: too much args');
-      throw new Err('grant.emptyArgs', 'getArgs: empty args');
+      if (args.length) throw new Err('grant.tooMuchArgs', 'getArgs: too much args', { status: 400 });
+      throw new Err('grant.emptyArgs', 'getArgs: empty args', { status: 400 });
     }
     if (typeof rule === 'string') {
       rule = { action: rule };
@@ -109,8 +109,8 @@ export class GrantModule extends Module {
   }
   async can(...args) {
     const [rules, ctx] = await this.getArgs(...args);
-    if (rules.length > 1) throw new Err('grant.tooMuchArgs', 'getArgs: too much args');
-    if (rules.length < 1) throw new Err('grant.emptyArgs', 'getArgs: empty args');
+    if (rules.length > 1) throw new Err('grant.tooMuchArgs', 'getArgs: too much args', { status: 400 });
+    if (rules.length < 1) throw new Err('grant.emptyArgs', 'getArgs: empty args', { status: 400 });
     const [rule] = rules;
     if (this.debug) this.log.trace('can', rule.action);
     return this.getRule(rule, ctx);
@@ -145,7 +145,7 @@ export class GrantModule extends Module {
     });
     const res = fromPairs(pairs);
     if (this.debug) this.log.trace('canGroup res', res);
-    return res
+    return res;
 
     // const res = {};
     // pairs.forEach((pair) => {
@@ -170,7 +170,7 @@ export class GrantModule extends Module {
       const can = (action) => {
         if (this.debug) this.log.trace('grantCache.can', action);
         if (res[action] == null) {
-          this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action }, {res});
+          this.log.warn('?grantCache.can', 'cant find rule in grantCache', { action }, { res });
           return null;
         }
         return get(res, action);
