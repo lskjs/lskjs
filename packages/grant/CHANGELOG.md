@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.70.0](https://github.com/lskjs/lskjs/compare/v2.69.1...v2.70.0) (2022-05-12)
+
+
+### Bug Fixes
+
+* **grant:** throw 400 error status code while invalid params ([563452c](https://github.com/lskjs/lskjs/commit/563452cf67fc704c92e746e8a4f585a8989120fe))
+
+
+
+
+
 ## [2.69.1](https://github.com/lskjs/lskjs/compare/v2.69.0...v2.69.1) (2022-02-20)
 
 **Note:** Version bump only for package @lskjs/grant

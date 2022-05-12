@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.70.0](https://github.com/lskjs/lskjs/compare/v2.69.1...v2.70.0) (2022-05-12)
+
+
+### Features
+
+* **utils:** hide react console logs add hide option ([2a5e81c](https://github.com/lskjs/lskjs/commit/2a5e81ceb9eff8c8495af432b5113cf382d94d80))
+
+
+
+
+
 ## [2.65.1](https://github.com/lskjs/lskjs/compare/v2.65.0...v2.65.1) (2022-01-11)
 
 **Note:** Version bump only for package @lskjs/utils

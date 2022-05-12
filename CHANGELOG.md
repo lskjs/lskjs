@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.70.0](https://github.com/lskjs/lskjs/compare/v2.69.1...v2.70.0) (2022-05-12)
+
+
+### Bug Fixes
+
+* **cron:** debug while disabled ([f6bec05](https://github.com/lskjs/lskjs/commit/f6bec056d99ebe2ad8269553638d1e2fcdf47473))
+* **cron:** debug while disabled ([ac555ce](https://github.com/lskjs/lskjs/commit/ac555ce157c47e00c875e9c7942d6b13b0150316))
+* **grant:** throw 400 error status code while invalid params ([563452c](https://github.com/lskjs/lskjs/commit/563452cf67fc704c92e746e8a4f585a8989120fe))
+* **webserver:** get config for webserver pack from ctx config.server.response ([dd75908](https://github.com/lskjs/lskjs/commit/dd75908fdf762cea8eac64347fed3ed8c27ac39f))
+
+
+### Features
+
+* **log:** add new cli cases ([ed6da19](https://github.com/lskjs/lskjs/commit/ed6da196e27f9f7a9b34ecf09447883d9a39c685))
+* **utils:** hide react console logs add hide option ([2a5e81c](https://github.com/lskjs/lskjs/commit/2a5e81ceb9eff8c8495af432b5113cf382d94d80))
+
+
+
+
+
 ## [2.69.1](https://github.com/lskjs/lskjs/compare/v2.69.0...v2.69.1) (2022-02-20)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/sh",
-  "version": "2.65.1",
+  "version": "2.70.0",
   "description": "LSK ux subrepo: sh",
   "keywords": [],
   "publishConfig": {
@@ -26,6 +26,6 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/utils": "2.65.1"
+    "@lskjs/utils": "2.70.0"
   }
 }
