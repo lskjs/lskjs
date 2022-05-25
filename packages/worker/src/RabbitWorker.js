@@ -164,7 +164,7 @@ export class RabbitWorker extends Worker {
     //   console.log(99992222);
     // };
     const data = await this.rabbit.consume(queueName, onConsume, { noAck: false });
-    this.consumerTag = data.consumerTag;
+    this.consumerTag = data?.consumerTag;
   }
   async run() {
     await super.run();
