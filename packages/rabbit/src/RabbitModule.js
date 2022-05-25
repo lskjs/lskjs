@@ -138,6 +138,7 @@ export class RabbitModule extends Module {
       queueName = queue.name || queue.queue;
     }
     let res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
+    // TODO: WHY prefix_prefix_prefix_prefix_order_list
     if (this.config.prefix) res = this.config.prefix + res;
     // console.log({ queueName, res });
     return res;

@@ -12,9 +12,10 @@ const logKeys = (...args) => args.map(([p1, p2]) => (p2 ? `[${p1}] ${p2}`.trim()
 
 export const createFeedback = (props = {}, { log, stats, tx, apm, labels } = {}) => {
   // console.log('[createFeedback]', { log: !!log, stats: !!stats, apm: !!apm });
-  const { options = {}, proxy, tries, maxTries, startedAt = Date.now() } = props;
+  const { options = {}, proxy, tries, maxTries, startedAt = Date.now(), logPrefix = [] } = props;
   const { driver, timeout, method, url } = options;
   const prefix = [
+    ...logPrefix,
     ['R', tries > 1 ? `${tries}/${maxTries}` : null],
     ['method', !isLowerEqual(method, 'get') ? method : null],
     ['url', url],

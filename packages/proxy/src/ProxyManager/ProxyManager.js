@@ -44,7 +44,8 @@ export class ProxyManager extends Module {
     return this.client.request(newProps);
   }
   async createClient() {
-    const baseURL = this.config.client?.baseURL || this.config.client?.url;
+    const baseURL =
+      this.config.client?.baseURL || this.config.client?.url || this.config.client?.uri || this.config.uri;
     if (baseURL) {
       this.log.debug('[baseUrl] url', baseURL);
     } else {

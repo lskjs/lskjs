@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import retry from '@lskjs/utils/retry';
@@ -16,7 +17,13 @@ export const getProviderOptions = (proxy, driver) => (proxy ? proxy.getProviderO
 // const createNoop = () => ({ success: () => null, error: () => null });
 
 export const createRequest =
-  ({ createFeedback = defaultCreateFeedback, labels, onProxyManagerError, ...feedbackOptions } = {}) =>
+  ({
+    createFeedback = defaultCreateFeedback,
+    labels,
+    onProxyManagerError,
+    axios: axiosCreateParams,
+    ...feedbackOptions
+  } = {}) =>
   (props = {}) => {
     const {
       driver = 'axios',
@@ -25,6 +32,7 @@ export const createRequest =
       interval = NETWORK_INTERVAL,
       proxy: initProxy,
       interceptors,
+      logPrefix,
       ...params
     } = props;
     const maxTries =
@@ -55,7 +63,10 @@ export const createRequest =
         const options = { ...params, ...getProviderOptions(proxy, driver) };
         tries += 1;
         const feedback = createFeedback
-          ? createFeedback({ options: props, proxy, tries, maxTries }, { ...feedbackOptions, proxyManager, labels }) // TODO: подумать а не замудренно ли
+          ? createFeedback(
+              { options: props, proxy, tries, maxTries, logPrefix },
+              { ...feedbackOptions, proxyManager, labels },
+            ) // TODO: подумать а не замудренно ли
           : null;
         try {
           let abortTimeout;
@@ -65,7 +76,7 @@ export const createRequest =
             options.cancelToken = source.token;
             abortTimeout = setTimeout(() => source.cancel('REQUEST_NETWORK_TIMEOUT'), timeout);
           }
-          const client = axios.create();
+          const client = axios.create(axiosCreateParams);
           if (interceptors) {
             if (Array.isArray(interceptors.request)) {
               client.interceptors.request.use(...interceptors.request);
