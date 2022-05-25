@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.71.0](https://github.com/lskjs/lskjs/compare/v2.70.0...v2.71.0) (2022-05-25)
+
+
+### Features
+
+* **proxy:** add logPrefix ([c888777](https://github.com/lskjs/lskjs/commit/c888777a03fb52e41a696c715df981345f240af1))
+
+
+
+
+
 # [2.70.0](https://github.com/lskjs/lskjs/compare/v2.69.1...v2.70.0) (2022-05-12)
 
 **Note:** Version bump only for package @lskjs/rabbit
