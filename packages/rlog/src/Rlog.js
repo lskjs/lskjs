@@ -12,7 +12,7 @@ import axios from 'axios';
 // };
 
 const statuses = {
-  _default: '❔',
+  _default: '',
   trace: '🗯',
   log: '🗯',
   start: '🕑',
