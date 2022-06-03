@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/stats",
-  "version": "2.72.0",
+  "version": "2.73.0",
   "description": "LSK.js – stats – Module for count simple statistics",
   "keywords": [],
   "publishConfig": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@lskjs/env": "2.65.1",
-    "@lskjs/module": "2.69.1",
+    "@lskjs/module": "2.73.0",
     "@lskjs/utils": "2.72.0",
     "lodash": "4.17.21"
   }

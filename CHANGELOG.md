@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.73.0](https://github.com/lskjs/lskjs/compare/v2.72.1...v2.73.0) (2022-06-03)
+
+
+### Bug Fixes
+
+* **log:** false logfmt ([a15d7dc](https://github.com/lskjs/lskjs/commit/a15d7dc6b23ca2163fa2bf15c7127403d8c0d447))
+
+
+### Features
+
+* **rlog:** disable default icon ([bc65cb6](https://github.com/lskjs/lskjs/commit/bc65cb6a15f1dcd3c66631b7b8d752e0d09bd224))
+* **webserver:** save port ([392c924](https://github.com/lskjs/lskjs/commit/392c924692503267c205e7f1fe6fceb3cf59ede9))
+
+
+
+
+
 ## [2.72.1](https://github.com/lskjs/lskjs/compare/v2.72.0...v2.72.1) (2022-05-25)
 
 

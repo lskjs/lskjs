@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.73.0](https://github.com/lskjs/lskjs/compare/v2.72.1...v2.73.0) (2022-06-03)
+
+
+### Features
+
+* **rlog:** disable default icon ([bc65cb6](https://github.com/lskjs/lskjs/commit/bc65cb6a15f1dcd3c66631b7b8d752e0d09bd224))
+
+
+
+
+
 # [2.72.0](https://github.com/lskjs/lskjs/compare/v2.71.0...v2.72.0) (2022-05-25)
 
 **Note:** Version bump only for package @lskjs/rlog

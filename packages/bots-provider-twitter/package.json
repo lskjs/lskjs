@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-provider-twitter",
-  "version": "2.72.0",
+  "version": "2.73.0",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -38,7 +38,7 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots-provider": "2.72.0",
+    "@lskjs/bots-provider": "2.73.0",
     "@lskjs/err": "2.65.1",
     "twitter-lite": "1.1.0"
   }
