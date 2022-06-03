@@ -2,13 +2,14 @@ import { ILoggerInternalMessage, ILoggerInternalMessageFormat } from '../../type
 import { createMsg, getErrCode } from '../createMsg';
 import { isBunyan, parseBunyan, stringifyBunyan } from './bunyan';
 import { isLogrus, parseLogrus, stringifyLogrus } from './logrus';
-import { isLsklog, isLsklogWeb, parseLsklog, stringifyLsklog } from './lsklog';
+import { isLskLikelog, isLsklog, isLsklogWeb, parseLsklog, stringifyLsklog } from './lsklog';
 
 export function detectFormat(json: any): ILoggerInternalMessageFormat | null {
   if (isBunyan(json)) return ILoggerInternalMessageFormat.bunyan;
   if (isLsklog(json)) return ILoggerInternalMessageFormat.lsklog;
   if (isLsklogWeb(json)) return ILoggerInternalMessageFormat.lsklogweb;
   if (isLogrus(json)) return ILoggerInternalMessageFormat.logrus;
+  if (isLskLikelog(json)) return ILoggerInternalMessageFormat.lsklog;
   return null;
 }
 

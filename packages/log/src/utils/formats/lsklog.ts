@@ -11,6 +11,7 @@ export const lsklogLevels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal']
 export const lsklogWebLevels = ['reqId', 'method', 'host', 'ua', 'ip', 'url', 'status', 'length', 'duration'];
 
 export const isLsklog = (json: any): boolean => Boolean(lsklogLevels.includes(json.level) && json.ns);
+export const isLskLikelog = (json: any): boolean => Boolean(lsklogLevels.includes(json.level));
 
 export const isLsklogWeb = (req: any): boolean =>
   Boolean(req && (req.name === 'req' || (req.method && req.host && req.url))); // reqId

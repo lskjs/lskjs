@@ -11,19 +11,19 @@ export const prettyRawLog = (log: ILogger, raw: any): void => {
   if (typeof raw === 'string') {
     if (!json && !!raw.trim()) {
       json = tryJSONparse(raw, null);
-      format = 'json';
+      if (json !== null) format = 'json';
     }
     if (!json && !!raw.trim()) {
       json = tryLogfmtParse(raw, null);
-      format = 'logfmt';
+      if (json !== null) format = 'logfmt';
     }
   }
-  if (!json) {
+
+  if (json === null) {
     json = null;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     format = 'raw';
   }
-  // console.log({ format, json, raw });
   if (!json) {
     log.log(...prettyFormat({}, raw));
     return;
