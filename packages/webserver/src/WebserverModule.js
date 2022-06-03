@@ -181,6 +181,7 @@ export class WebserverModule extends Module {
     await new Promise((resolve) => {
       this.httpInstance = this.httpServer.listen(port, () => {
         resolve(this);
+        this.port = port;
         this.log.debug('started', { port });
         this.emit('started');
       });
