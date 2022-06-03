@@ -1,4 +1,4 @@
-import { every } from './every';
+import { countBy } from './countBy';
 
 const logfmt = require('logfmt');
 
@@ -7,7 +7,7 @@ export const tryLogfmtParse = (str, defaultValue = str) => {
     if (typeof str !== 'string') return str;
     if (!str.trim()) return defaultValue;
     const res = logfmt.parse(str);
-    if (!Object.keys(res).length || every(res, (a) => a === true)) {
+    if (Object.keys(res).length < 2 || countBy(res, (a) => a === true) >= Object.keys(res).length / 2) {
       return defaultValue;
     }
     return res;
