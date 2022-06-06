@@ -217,7 +217,9 @@ JSON Message has many configurable parameters. Description in the table:
 
 *   `cat tests/messages.txt | lskrabbit pub --queue lsk_queue` - publish messages to queue from txt file
 
-*   `cat tests/messages.txt | lskrabbit pub -x "row => ({...row, test: row, _e: 'lsk_exchange' })"` - publish messages with extract
+*   `cat tests/messages.json | lskrabbit pub -x "row => ({...row, test: row, _e: 'lsk_exchange' })"` - publish messages with extract from JSON-each-ROW
+
+*   `cat tests/messages.txt | lskrabbit pub --parse "_id => ({ _id, _e: 'lsk_exchange' })"` - publish messages with extract from txt file String-each-row
 
 ## Publish messages from MongoDb
 

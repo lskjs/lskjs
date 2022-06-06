@@ -6,7 +6,7 @@ import rabbit, { Options } from 'amqplib';
 import readline from 'readline';
 
 import log from '../log';
-import { IWatchStream, publishOptions } from '../types';
+import { IWatchStream, publishOptions, watchCallback } from '../types';
 import watch from '../watchCombine';
 
 export const publish = async ({
@@ -17,6 +17,7 @@ export const publish = async ({
   exchange: defaultExchange,
   priority: defaultPriority = 5,
   expiration: defaultExpiration = 23 * 60 * 60 * 1000,
+  data: rawData,
 
   concurrency = 10,
   maxPriority = 10,
@@ -89,31 +90,34 @@ export const publish = async ({
   let start = 0;
   let finish = 0;
   let errors = 0;
+  const execMessage: watchCallback = async (raw: any) => {
+    if (++start % 10000 === 0) log.debug('[start]', start, raw);
+    // const id = start;
+    try {
+      const params = parseRaw(raw);
+      if (!params) return null;
+      const { to, data, options } = params;
+      const res = await sendToQueue(to, data, options);
+      if (++finish % 10000 === 0) log.debug('[finish]', finish, raw);
+      return res;
+    } catch (err) {
+      log.error('[err]', err);
+      if (++errors % 1 === 0) log.warn('[errors]', errors, raw);
+      if (++finish % 10000 === 0) log.debug('[finish]', finish, raw);
+      throw err;
+    }
+  };
+
+  if (rawData) {
+    await execMessage(rawData, 0);
+    return;
+  }
+
   const initStream: IWatchStream = readline.createInterface({
     input: process.stdin,
     output: undefined,
   }) as IWatchStream;
-  const stream = watch(
-    initStream,
-    async (raw) => {
-      if (++start % 10000 === 0) log.debug('[start]', start, raw);
-      // const id = start;
-      try {
-        const params = parseRaw(raw);
-        if (!params) return null;
-        const { to, data, options } = params;
-        const res = await sendToQueue(to, data, options);
-        if (++finish % 10000 === 0) log.debug('[finish]', finish, raw);
-        return res;
-      } catch (err) {
-        log.error('[err]', err);
-        if (++errors % 1 === 0) log.warn('[errors]', errors, raw);
-        if (++finish % 10000 === 0) log.debug('[finish]', finish, raw);
-        throw err;
-      }
-    },
-    { concurrency },
-  );
+  const stream = watch(initStream, execMessage, { concurrency });
 
   const onExit = () => {
     log.info({ start, finish, errors });

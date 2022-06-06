@@ -24,6 +24,8 @@ export type publishOptions = {
   priority?: number;
   expiration?: number;
 
+  data?: any;
+
   concurrency?: number;
   maxPriority?: number;
   isConfirm?: boolean;
