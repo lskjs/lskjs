@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.74.0](https://github.com/lskjs/lskjs/compare/v2.73.0...v2.74.0) (2022-06-06)
+
+
+### Bug Fixes
+
+* **log:** logger ([f1296a1](https://github.com/lskjs/lskjs/commit/f1296a1e4264aa595301f0b2f0b94a6d1559f3e0))
+
+
+
+
+
 # [2.73.0](https://github.com/lskjs/lskjs/compare/v2.72.1...v2.73.0) (2022-06-03)
 
 
