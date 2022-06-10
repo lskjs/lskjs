@@ -124,18 +124,20 @@ export class RabbitModule extends Module {
   async parse() {
     throw new Err('not implemented worker.parse()');
   }
-  async queue(queue) {
-    const queueName = this.getQueueName(queue);
-    if (!queueName) throw new Err('rabbit.queueNotFound', { data: { queueName } });
-    await this.assertQueueOnce(queueName);
-    return queueName;
+  async queue(rawQueue) {
+    // NOTE: deprecated
+    return rawQueue;
+    // const queueName = this.getQueueName(rawQueue);
+    // if (!queueName) throw new Err('rabbit.queueNotFound', { data: { queueName } });
+    // await this.assertQueueOnce(queueName);
+    // return rawQueue;
   }
-  getQueueName(queue) {
-    let queueName = queue;
+  getQueueName(rawQueue) {
+    let queueName = rawQueue;
     if (typeof queue === 'string') {
-      queueName = queue;
+      queueName = rawQueue;
     } else {
-      queueName = queue.name || queue.queue;
+      queueName = rawQueue.name || rawQueue.queue;
     }
     let res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
     // TODO: WHY prefix_prefix_prefix_prefix_order_list
@@ -144,10 +146,10 @@ export class RabbitModule extends Module {
     return res;
   }
   assertQueues = {};
-  async assertQueueOnce(queue) {
-    const queueName = this.getQueueName(queue);
+  async assertQueueOnce(rawQueue) {
+    const queueName = this.getQueueName(rawQueue);
     if (this.assertQueues[queueName]) return false;
-    const res = await this.assertQueue(queue);
+    const res = await this.assertQueue(rawQueue);
     this.assertQueues[queueName] = new Date();
     return res;
   }
@@ -194,9 +196,10 @@ export class RabbitModule extends Module {
       queue: queueName,
     };
   }
-  async sendToQueue(queue, data, options, channel = this.sendChannel) {
-    const queueName = this.getQueueName(queue);
-    const queueParams = this.getQueueParams(queue);
+  async sendToQueue(rawQueue, data, options, channel = this.sendChannel) {
+    const queueName = this.getQueueName(rawQueue);
+    const queueParams = this.getQueueParams(rawQueue);
+    await this.assertQueueOnce(queueName);
     const mergedOptions = { ...get(this, 'config.queueOptions', {}), ...(queueParams.options || {}), ...options };
     return new Bluebird((res, rej) => {
       const row = serializeData(data);
@@ -210,8 +213,8 @@ export class RabbitModule extends Module {
     });
   }
 
-  async sendToQueueNative(queue, data) {
-    const queueName = this.getQueueName(queue);
+  async sendToQueueNative(rawQueue, data) {
+    const queueName = this.getQueueName(rawQueue);
     const debug = this.config.debug || false;
     // const rows = serializeDataArray(data);
     const taskHash = `${hash(JSON.parse(JSON.stringify({ queueName, data })))}_${Date.now()}_${Math.random()}}`;
