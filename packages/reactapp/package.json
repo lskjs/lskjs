@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/reactapp",
-  "version": "2.74.0",
+  "version": "2.75.1",
   "description": "LSK ux subrepo: reactapp",
   "keywords": [],
   "publishConfig": {
@@ -30,7 +30,7 @@
   "dependencies": {
     "@lskjs/env": "2.65.1",
     "@lskjs/err": "2.65.1",
-    "@lskjs/module": "2.74.0",
+    "@lskjs/module": "2.75.1",
     "@lskjs/utils": "2.72.0",
     "emotion": "10.0.27",
     "emotion-server": "10.0.27",

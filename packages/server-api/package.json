@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server-api",
-  "version": "2.74.0",
+  "version": "2.75.1",
   "description": "LSK server-api.",
   "keywords": [],
   "publishConfig": {
@@ -28,7 +28,7 @@
   "dependencies": {
     "@lskjs/env": "2.65.1",
     "@lskjs/err": "2.65.1",
-    "@lskjs/module": "2.74.0",
+    "@lskjs/module": "2.75.1",
     "@lskjs/utils": "2.72.0"
   },
   "devDependencies": {
