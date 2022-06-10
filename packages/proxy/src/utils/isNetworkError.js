@@ -5,13 +5,13 @@ import get from 'lodash/get';
 const networkFatalsWildcards = ['REQUEST_NETWORK_FATAL', 'REQUEST_FATAL'];
 const networkFatals = ['Request failed with status code 429'];
 
-const networkErrorsWildcards = [
+export const networkErrorsWildcards = [
   'REQUEST_',
   // NOTE: legacy
   'PROXY_',
   'NETWORK_',
 ];
-const networkErrors = [
+export const networkErrors = [
   ...networkFatals,
   'ECONNRESET',
   'ECONNREFUSED',
