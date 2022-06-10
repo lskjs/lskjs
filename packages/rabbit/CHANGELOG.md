@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.75.0](https://github.com/lskjs/lskjs/compare/v2.74.0...v2.75.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* **rabbit:** duplicate prefix ([15c764f](https://github.com/lskjs/lskjs/commit/15c764f71ea2950cb65d0d5a114d2f920f764a0a))
+
+
+
+
+
 # [2.74.0](https://github.com/lskjs/lskjs/compare/v2.73.0...v2.74.0) (2022-06-06)
 
 **Note:** Version bump only for package @lskjs/rabbit

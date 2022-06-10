@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.75.0](https://github.com/lskjs/lskjs/compare/v2.74.0...v2.75.0) (2022-06-10)
+
+
+### Features
+
+* **proxy:** export network errors ([4d51da9](https://github.com/lskjs/lskjs/commit/4d51da9e23c81ae39f2eb9fca76b70786cb899f7))
+
+
+
+
+
 # [2.74.0](https://github.com/lskjs/lskjs/compare/v2.73.0...v2.74.0) (2022-06-06)
 
 **Note:** Version bump only for package @lskjs/proxy
