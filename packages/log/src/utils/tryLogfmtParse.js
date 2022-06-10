@@ -7,7 +7,11 @@ export const tryLogfmtParse = (str, defaultValue = str) => {
     if (typeof str !== 'string') return str;
     if (!str.trim()) return defaultValue;
     const res = logfmt.parse(str);
-    if (Object.keys(res).length < 2 || countBy(res, (a) => a === true) >= Object.keys(res).length / 2) {
+    if (
+      Object.keys(res).includes('') ||
+      Object.keys(res).length < 2 ||
+      countBy(res, (a) => a === true) >= Object.keys(res).length / 2
+    ) {
       return defaultValue;
     }
     return res;
