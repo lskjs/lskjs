@@ -124,7 +124,7 @@ export class RabbitModule extends Module {
   async parse() {
     throw new Err('not implemented worker.parse()');
   }
-  async queue(rawQueue) {
+  queue(rawQueue) {
     // NOTE: deprecated
     return rawQueue;
     // const queueName = this.getQueueName(rawQueue);
@@ -134,7 +134,9 @@ export class RabbitModule extends Module {
   }
   getQueueName(rawQueue) {
     let queueName = rawQueue;
-    if (typeof queue === 'string') {
+    if (!rawQueue) {
+      throw new Err('!rawQueue', { rawQueue });
+    } else if (typeof rawQueue === 'string') {
       queueName = rawQueue;
     } else {
       queueName = rawQueue.name || rawQueue.queue;
@@ -142,8 +144,14 @@ export class RabbitModule extends Module {
     let res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
     // TODO: WHY prefix_prefix_prefix_prefix_order_list
     if (this.config.prefix) res = this.config.prefix + res;
-    // console.log({ queueName, res });
     return res;
+  }
+  getQueueParams(rawQueue) {
+    const queueName = this.getQueueName(rawQueue);
+    if (this.queues[queueName]) return this.queues[queueName];
+    return {
+      queue: queueName,
+    };
   }
   assertQueues = {};
   async assertQueueOnce(rawQueue) {
@@ -153,12 +161,12 @@ export class RabbitModule extends Module {
     this.assertQueues[queueName] = new Date();
     return res;
   }
-  async assertQueue(queue) {
-    const queueName = this.getQueueName(queue);
+  async assertQueue(rawQueue) {
+    const queueName = this.getQueueName(rawQueue);
     // console.log({ queue, queueName });
     if (!queueName) {
-      this.log.error('!queueName', { queue, queueName });
-      throw new Err('!queueName', { queue, queueName });
+      this.log.error('!queueName', { rawQueue, queueName });
+      throw new Err('!queueName', { rawQueue, queueName });
     }
     const options = get(this.config, 'options');
     this.log.trace(`assertQueue(${queueName})`, omit(options, ['prefetch']));
@@ -183,18 +191,6 @@ export class RabbitModule extends Module {
   }
   bindQueue(queue, source, pattern, ...args) {
     return this.listenChannel.bindQueue(queue, source, pattern, ...args);
-  }
-  getQueueParams(queue) {
-    let queueName = queue;
-    if (typeof queue === 'string') {
-      queueName = queue;
-    } else {
-      queueName = queue.name || queue.queue;
-    }
-    if (this.queues[queueName]) return this.queues[queueName];
-    return {
-      queue: queueName,
-    };
   }
   async sendToQueue(rawQueue, data, options, channel = this.sendChannel) {
     const queueName = this.getQueueName(rawQueue);
@@ -246,8 +242,8 @@ export class RabbitModule extends Module {
       });
     });
   }
-  async consume(queue, callback, initOptions = {}) {
-    const queueName = this.getQueueName(queue);
+  async consume(rawQueue, callback, initOptions = {}) {
+    const queueName = this.getQueueName(rawQueue);
     const options = {
       ...(this.config.options || {}),
       ...initOptions,

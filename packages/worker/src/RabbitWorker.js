@@ -149,14 +149,14 @@ export class RabbitWorker extends Worker {
     this.stats = await Stats.create(statsProps);
     if (this.stats) this.stats.startTimer();
     this.rabbit = await this.app.module('rabbit');
-    const queue = this.config.queue || this.queue;
-    if (!queue) {
+    const rawQueue = this.config.queue || this.queue;
+    if (!rawQueue) {
       this.log.warn('!queue', 'connect');
       return;
     }
-    const queueName = this.rabbit.getQueueName(queue);
-    await this.rabbit.queue(queueName);
+    const queueName = this.rabbit.getQueueName(rawQueue);
     this.queueName = queueName;
+    if (!queueName) throw new Err('!queueName', { queueName, rawQueue });
     const onConsume = this.onConsume.bind(this);
     // const onConsume = (...args) => {
     //   console.log(99991111);
