@@ -143,22 +143,22 @@ export class RabbitModule extends Module {
     }
     let res = this.queues[queueName] ? this.queues[queueName].queue : queueName;
     // TODO: WHY prefix_prefix_prefix_prefix_order_list
-    if (this.config.prefix) res = this.config.prefix + res;
+    // TODO: remove this KOSTYL'!!
+    if (this.config.prefix && !res.startsWith(this.config.prefix)) res = this.config.prefix + res;
     return res;
   }
   getQueueParams(rawQueue) {
-    const queueName = this.getQueueName(rawQueue);
-    if (this.queues[queueName]) return this.queues[queueName];
+    // const queueName = this.getQueueName(rawQueue);
+    if (this.queues[rawQueue]) return this.queues[rawQueue];
     return {
-      queue: queueName,
+      queue: this.getQueueName(rawQueue),
     };
   }
   assertQueues = {};
   async assertQueueOnce(rawQueue) {
-    const queueName = this.getQueueName(rawQueue);
-    if (this.assertQueues[queueName]) return false;
+    if (this.assertQueues[rawQueue]) return null;
+    this.assertQueues[rawQueue] = new Date();
     const res = await this.assertQueue(rawQueue);
-    this.assertQueues[queueName] = new Date();
     return res;
   }
   async assertQueue(rawQueue) {

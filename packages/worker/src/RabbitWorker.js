@@ -9,7 +9,6 @@ import pick from 'lodash/pick';
 import { Worker } from './Worker';
 
 export class RabbitWorker extends Worker {
-  queueName = null;
   showErrorInfo() {
     return false; // // this.debug
   }
@@ -56,11 +55,12 @@ export class RabbitWorker extends Worker {
     }
     // isNack
     if (errInfo.redelivered && job.isTooMuchRedelivered()) {
-      const queue = `${this.queueName}_redelivered`;
+      const baseQueue = this.config.queue || this.queue;
+      const queue = `${baseQueue}_redelivered`;
       try {
         await this.rabbit.assertQueueOnce(queue);
         // this.rabbit.consume(this.queue, this.onConsume.bind(this), { noAck: false });
-        this.log.error('isTooMuchRedelivered', `${this.queueName} => ${queue}`);
+        this.log.error('isTooMuchRedelivered', `${baseQueue} => ${queue}`);
         const { __meta: meta = {} } = job.params;
         await this.rabbit.sendToQueue(queue, {
           ...job.params,
@@ -154,16 +154,9 @@ export class RabbitWorker extends Worker {
       this.log.warn('!queue', 'connect');
       return;
     }
-    const queueName = this.rabbit.getQueueName(rawQueue);
-    this.queueName = queueName;
-    if (!queueName) throw new Err('!queueName', { queueName, rawQueue });
     const onConsume = this.onConsume.bind(this);
-    // const onConsume = (...args) => {
-    //   console.log(99991111);
-    //   await this.onConsume(...args);
-    //   console.log(99992222);
-    // };
-    const data = await this.rabbit.consume(queueName, onConsume, { noAck: false });
+    await this.rabbit.assertQueueOnce(rawQueue);
+    const data = await this.rabbit.consume(rawQueue, onConsume, { noAck: false });
     this.consumerTag = data?.consumerTag;
   }
   async run() {
