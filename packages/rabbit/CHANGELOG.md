@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.76.2](https://github.com/lskjs/lskjs/compare/v2.76.1...v2.76.2) (2022-06-11)
+
+
+### Bug Fixes
+
+* **rabbit:** prefixes ([d54421e](https://github.com/lskjs/lskjs/commit/d54421eb74ec379e8106a5468f75ec8b98ae4157))
+
+
+
+
+
 ## [2.76.1](https://github.com/lskjs/lskjs/compare/v2.76.0...v2.76.1) (2022-06-11)
 
 
