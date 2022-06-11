@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/bots-provider-clubhouse",
-  "version": "2.75.1",
+  "version": "2.76.0",
   "description": "LSK.js plugin for @lskjs/bots module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation",
   "keywords": [
     "telegram",
@@ -38,8 +38,8 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/bots-provider": "2.75.1",
-    "@lskjs/module": "2.75.1",
+    "@lskjs/bots-provider": "2.76.0",
+    "@lskjs/module": "2.76.0",
     "@lskjs/utils": "2.72.0"
   },
   "devDependencies": {
