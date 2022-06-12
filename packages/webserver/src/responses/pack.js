@@ -14,14 +14,14 @@ export default (ctx) =>
       get(ctx, 'config.server.response') || get(ctx, 'config.response') || isDev ? { log: false, debug: true } : {};
     const status = info.status || get(raw, '__status', null);
     let isJson;
-    let wrap;
+    let resultWrap;
     let data;
     if (typeof get(raw, '__raw') !== 'undefined') {
-      wrap = false;
+      resultWrap = false;
       isJson = false;
       data = raw.__raw;
     } else {
-      wrap = !get(raw, '__pack', false);
+      resultWrap = !get(raw, '__pack', false);
       isJson = true;
       if (isPlainObject(raw)) {
         data = omit(raw, ['__pack', '__raw', '__log', '__status']);
@@ -34,22 +34,28 @@ export default (ctx) =>
       }
     }
     if (!data) data = {};
-
-    const code = wrap ? info.code : data.code;
-    let message = wrap ? info.message : data.message;
+    const code = resultWrap ? info.code : data.code;
+    let message = resultWrap ? info.message : data.message;
     if (message === code) message = undefined;
     if (code && !message) {
       const { i18 } = req;
       message = i18 && i18.exists(`errors.${code}`) ? i18.t(`errors.${code}`) : code;
     }
     let result;
-    if (wrap) {
+    let resultType;
+    if (resultWrap) {
+      resultType = 'object';
       result = {
         code,
         message,
         data,
       };
+    } else if (typeof data === 'string') {
+      resultType = 'string';
+      result = data;
+      // TODO: other types
     } else {
+      resultType = 'object';
       result = {
         ...data,
         code,
@@ -61,7 +67,7 @@ export default (ctx) =>
       res.status(status);
     }
 
-    if (wrap && config.debug) {
+    if (resultWrap && config.debug) {
       if (info.err) {
         result.err = info.err;
       }
@@ -116,5 +122,6 @@ export default (ctx) =>
     if (!res.get('Content-Type')) {
       res.set('Content-Type', 'application/json');
     }
+    if (resultType === 'string') return res.send(result);
     return res.send(stringify(result, null, isDev ? 2 : 0));
   };
