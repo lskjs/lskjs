@@ -33,9 +33,10 @@
     "@lskjs/err": "2.65.1",
     "@lskjs/log": "2.76.0",
     "@lskjs/module": "2.76.0",
+    "@lskjs/server-api": "2.76.0",
     "@lskjs/utils": "2.72.0",
-    "axios": "0.21.2",
-    "lodash": "4.17.21"
+    "axios": "0.21.x",
+    "lodash": "4.17.x"
   },
   "devDependencies": {
     "@types/lodash": "4.14.178",
