@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.77.0](https://github.com/lskjs/lskjs/compare/v2.76.3...v2.77.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** delete require.cache ([f821c9b](https://github.com/lskjs/lskjs/commit/f821c9baec855fb466159f7f1aa9bda8873a072e))
+
+
+
+
+
 # [2.72.0](https://github.com/lskjs/lskjs/compare/v2.71.0...v2.72.0) (2022-05-25)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet

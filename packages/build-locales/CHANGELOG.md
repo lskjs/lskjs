@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.77.0](https://github.com/lskjs/lskjs/compare/v2.76.3...v2.77.0) (2022-06-27)
+
+**Note:** Version bump only for package @lskjs/build-locales
+
+
+
+
+
 # [2.72.0](https://github.com/lskjs/lskjs/compare/v2.71.0...v2.72.0) (2022-05-25)
 
 **Note:** Version bump only for package @lskjs/build-locales

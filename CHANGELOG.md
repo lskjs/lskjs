@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.77.0](https://github.com/lskjs/lskjs/compare/v2.76.3...v2.77.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* **getspreadsheet:** delete require.cache ([f821c9b](https://github.com/lskjs/lskjs/commit/f821c9baec855fb466159f7f1aa9bda8873a072e))
+
+
+### Features
+
+* **rlog:** add api and client module ([7dfd814](https://github.com/lskjs/lskjs/commit/7dfd814ecb3680540db43fa518283ffc967232bd))
+
+
+
+
+
 ## [2.76.3](https://github.com/lskjs/lskjs/compare/v2.76.2...v2.76.3) (2022-06-12)
 
 
