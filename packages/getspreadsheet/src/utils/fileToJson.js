@@ -8,6 +8,7 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
     if (type === 'js') {
       // eslint-disable-next-line import/no-dynamic-require
       const data = require(filename);
+      delete require.cache[require.resolve(filename)];
       return data;
     }
     const str = fs.readFileSync(filename);
