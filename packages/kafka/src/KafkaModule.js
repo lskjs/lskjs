@@ -1,7 +1,10 @@
 import Err from '@lskjs/err';
 import Module from '@lskjs/module';
+import Bluebird from 'bluebird';
 import { Kafka, logLevel } from 'kafkajs';
+import chunk from 'lodash/chunk';
 import get from 'lodash/get';
+import last from 'lodash/last';
 
 export class KafkaModule extends Module {
   Kafka = Kafka;
@@ -33,7 +36,7 @@ export class KafkaModule extends Module {
     if (!this.producer) throw new Err('!producer');
     return this.producer.send(...args);
   }
-  async createConsumer({ groupId, topic } = {}) {
+  async createConsumer(topic, { groupId } = {}) {
     if (!topic) throw new Err('!topic');
     const consumer = this.client.consumer({
       groupId: groupId || this.defaultGroupId,
@@ -43,6 +46,23 @@ export class KafkaModule extends Module {
     await consumer.subscribe({ topic, fromBeginning: true });
     return consumer;
   }
+  async consume(topic, onConsume, { concurrency, ...options }) {
+    const consumer = await this.createConsumer(topic, options);
+    await consumer.run({
+      partitionsConsumedConcurrently: 1, // сколько partiotions может сразу слушать consumer
+      eachBatch: (props) => this.onEachBatchMessage(props, { concurrency }),
+    });
+  }
+  async onEachBatchMessage(options = {}, { concurrency = 1 } = {}) {
+    const { batch, resolveOffset, heartbeat } = options;
+    return Bluebird.mapSeries(chunk(batch.messages, concurrency), async (messages) => {
+      const res = await Bluebird.map(messages, async (msg) => this.onConsume(msg, options));
+      await resolveOffset(last(messages).offset);
+      await heartbeat();
+      return res;
+    });
+  }
+
   async run() {
     if (!this.client) return;
     await super.run();
