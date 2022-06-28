@@ -1,8 +1,8 @@
-/* eslint-disable max-classes-per-file */
-import Module from '@lskjs/module';
 import tryJSONparse from '@lskjs/utils/tryJSONparse';
 
-export default class KafkaWorker extends Module {
+import { Worker } from './Worker';
+
+export default class KafkaWorker extends Worker {
   __broker = 'kafka';
   getConsumerOptions() {
     const concurrency =
@@ -11,6 +11,10 @@ export default class KafkaWorker extends Module {
       tryJSONparse(process.env.CONCURRENCY) ||
       1;
     return { concurrency };
+  }
+
+  getMsgData(msg) {
+    return super.getMsgData(msg.value);
   }
   async stop() {
     await super.stop();

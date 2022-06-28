@@ -2,6 +2,7 @@ import Err from '@lskjs/err';
 import Module from '@lskjs/module';
 import Stats from '@lskjs/stats';
 import { isDev } from '@lskjs/utils/env';
+import tryJSONparse from '@lskjs/utils/tryJSONparse';
 import Bluebird from 'bluebird';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
@@ -12,6 +13,7 @@ export class Worker extends Module {
   static __worker = true;
   __worker = true;
   showErrorInfo() {
+    return true;
     return false; // // this.debug
   }
   async getConfig() {
@@ -56,7 +58,7 @@ export class Worker extends Module {
       await this.client.nack(msg, { requeue: false });
       return;
     }
-    const job = this.createJob({ msg, params });
+    const job = await this.createJob({ msg, params });
     try {
       await job.start();
       if (!job.status) await job.ackSuccess();
@@ -88,23 +90,23 @@ export class Worker extends Module {
     const isNack = get(errInfo, 'nack', true);
     const isTelegram = get(errInfo, 'telegram', true);
     const log = get(errInfo, 'log', 'error');
-    if (err && err.code === 'ERROR_TIMEOUT') {
-      await job.nackSuccess(); // NOTE: я не правильно юзаю эту хрень
-      const { errorTimeout = 10000 } = this.config.errorTimeout;
-      this.log.trace('errorTimeout', errorTimeout, '[delay]');
-      await Bluebird.delay(errorTimeout);
-      return;
-    }
-    if (errInfo.timeout) {
-      this.log.trace('err.timeout', errInfo.timeout, '[delay]');
-      await Bluebird.delay(errInfo.timeout);
-    }
+
+    const timeout =
+      errInfo.timeout || tryJSONparse(process.env.AMQP_ERROR_TIMEOUT) || tryJSONparse(process.env.ERROR_TIMEOUT);
+    const doTimeout = async () => {
+      if (timeout) {
+        this.log.trace('[err.timeout]', timeout, '[delay]');
+        await Bluebird.delay(timeout);
+      }
+    };
+
     if (log && this.log[log]) {
       const code = Err.getCode(err);
       let message; //= Err.getMessage(err);
       if (code === message) message = null;
       this.log[log](...[code, message].filter(Boolean));
     }
+    await doTimeout();
     if (isTelegram) {
       this.onTelegramError({ err, job });
     }
@@ -121,7 +123,7 @@ export class Worker extends Module {
       await job.ackError(err);
       return;
     }
-    if (errInfo.redelivered && job.isTooMuchRedelivered()) {
+    if (errInfo.redelivered && job.isTooMuchRedelivered && job.isTooMuchRedelivered()) {
       const fromQueue = this.getQueue();
       const queue = `${fromQueue}_redelivered`;
       if (this.sendToRedelivered) await this.sendToRedelivered(job, queue, { fromQueue });
@@ -139,11 +141,11 @@ export class Worker extends Module {
   getQueue() {
     return this.config.queue || this.queue || this.config.topic || this.topic;
   }
-  getMsgData(msg, path = 'content') {
+  getMsgData(msg) {
     try {
-      return JSON.parse(get(msg, path).toString());
+      return JSON.parse(msg.toString());
     } catch (err) {
-      const str = get(msg, path).toString();
+      const str = msg.toString();
       if (isDev) {
         this.log.error('[ignore] cantParseJSON', str);
       } else {

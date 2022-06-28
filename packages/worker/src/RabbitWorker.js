@@ -8,6 +8,9 @@ export class RabbitWorker extends Worker {
   getConsumerOptions() {
     return { noAck: false };
   }
+  getMsgData(msg) {
+    return super.getMsgData(msg.content)
+  }
   async sendToRedelivered(job, queue, { err, baseQueue }) {
     await this.client.assertQueueOnce(queue);
     this.log.error('[sendToRedelivered]', `${baseQueue} => ${queue}`);

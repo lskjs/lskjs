@@ -138,7 +138,7 @@ export class RabbitWorkerJob extends Module {
     }
     await this.onSuccess();
     if (this.debug) this.log.trace('[ack]');
-    if (this.msg) await this.rabbit.ack(this.msg);
+    if (this.msg) await this.client.ack(this.msg);
     return this.setStatus({
       status: 'success',
       action: 'ack',
@@ -156,7 +156,7 @@ export class RabbitWorkerJob extends Module {
     // if (this.debug) this.log.error(`rabbit.nack [${Err.getCode(err)}]`, this.params);
     if (this.debug) this.log.error(`[nack] ${Err.getCode(err)}`);
     if (this.msg && this.worker.consumerTag === this.msg.fields.consumerTag) {
-      await this.rabbit.nack(this.msg, { requeue: true });
+      await this.client.nack(this.msg, { requeue: true });
     }
     return this.setStatus({
       status: 'error',
@@ -173,7 +173,7 @@ export class RabbitWorkerJob extends Module {
     }
     await this.onAckError(err);
     if (this.debug) this.log.trace(`[ackError] ${Err.getCode(err)}`);
-    if (this.msg) await this.rabbit.nack(this.msg, { requeue: false });
+    if (this.msg) await this.client.nack(this.msg, { requeue: false });
     return this.setStatus({
       status: 'error',
       action: 'nack',
@@ -189,7 +189,7 @@ export class RabbitWorkerJob extends Module {
     throw new Err('ХЗ КОМУ ЭТА ХРЕНЬ НУЖНА, ПИНГАНИТЕ МЕНЯ');
     // this.log.trace('rabbit.nack (success)');
     // await this.onError(err);
-    // if (this.msg) await this.rabbit.nack(this.msg);
+    // if (this.msg) await this.client.nack(this.msg);
     // return {
     //   status: 'success',
     //   action: 'nack',
