@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.78.0](https://github.com/lskjs/lskjs/compare/v2.77.0...v2.78.0) (2022-06-28)
+
+
+### Features
+
+* **kafka:** improve module for common method ([c5141bb](https://github.com/lskjs/lskjs/commit/c5141bbd22c6e9879b7b983305d9a361f0a17a4e))
+* **worker:** create KafkaWorker ([f79e5d5](https://github.com/lskjs/lskjs/commit/f79e5d5210a02e1032071d7d7b1e3697e353ce5f))
+
+
+
+
+
 # [2.76.0](https://github.com/lskjs/lskjs/compare/v2.75.1...v2.76.0) (2022-06-11)
 
 **Note:** Version bump only for package @lskjs/kafka

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit",
-  "version": "2.76.2",
+  "version": "2.78.0",
   "description": "LSK module for rabbit.",
   "keywords": [
     "queue",

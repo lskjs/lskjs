@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.78.0](https://github.com/lskjs/lskjs/compare/v2.77.0...v2.78.0) (2022-06-28)
+
+
+### Features
+
+* **rabbit:** improve rabbit consume ([f8036d0](https://github.com/lskjs/lskjs/commit/f8036d0a3040ed05e0f087092028b8ff02d9b34b))
+
+
+
+
+
 ## [2.76.2](https://github.com/lskjs/lskjs/compare/v2.76.1...v2.76.2) (2022-06-11)
 
 

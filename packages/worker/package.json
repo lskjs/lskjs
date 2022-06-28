@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "2.76.2",
+  "version": "2.78.0",
   "description": "LSK module for worker.",
   "keywords": [
     "worker",
@@ -37,14 +37,14 @@
     "@lskjs/utils": "2.72.0"
   },
   "devDependencies": {
-    "@lskjs/rabbit": "2.76.2",
     "@lskjs/kafka": "2.76.2",
+    "@lskjs/rabbit": "2.78.0",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "@lskjs/rabbit": "2.x",
     "@lskjs/kafka": "2.x",
+    "@lskjs/rabbit": "2.x",
     "bluebird": "3.7.x",
     "lodash": "4.17.x"
   }
