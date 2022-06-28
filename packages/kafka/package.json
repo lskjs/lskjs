@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/kafka",
-  "version": "2.78.0",
+  "version": "2.79.0",
   "description": "LSK module for kafka.",
   "keywords": [
     "kafka"

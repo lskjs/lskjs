@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.79.0](https://github.com/lskjs/lskjs/compare/v2.78.0...v2.79.0) (2022-06-28)
+
+
+### Bug Fixes
+
+* **worker:** fix kafka and rabbit worker ([6d8e79c](https://github.com/lskjs/lskjs/commit/6d8e79cd7e2c91fca9eefc79fb4c93b33925d697))
+
+
+
+
+
 # [2.78.0](https://github.com/lskjs/lskjs/compare/v2.77.0...v2.78.0) (2022-06-28)
 
 
