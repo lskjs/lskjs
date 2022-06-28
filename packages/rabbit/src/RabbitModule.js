@@ -243,6 +243,7 @@ export class RabbitModule extends Module {
     });
   }
   async consume(rawQueue, callback, initOptions = {}) {
+    await this.assertQueueOnce(rawQueue);
     const queueName = this.getQueueName(rawQueue);
     const options = {
       ...(this.config.options || {}),
