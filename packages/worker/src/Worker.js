@@ -13,7 +13,6 @@ export class Worker extends Module {
   static __worker = true;
   __worker = true;
   showErrorInfo() {
-    return true;
     return false; // // this.debug
   }
   async getConfig() {
