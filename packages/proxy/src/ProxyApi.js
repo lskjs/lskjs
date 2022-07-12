@@ -24,6 +24,7 @@ export default class ProxyApi extends BaseApi {
       '/:provider/fetch': this.providerFetchList.bind(this),
       '/:provider/fetchRaw': this.providerFetchListRaw.bind(this),
       '/:provider/fetch/raw': this.providerFetchListRaw.bind(this),
+      '/:provider/raw': this.providerFetchListRaw.bind(this),
       // '/:provider/fetch/raw': this.providerFetchListRaw.bind(this),
       '/:provider/buy': this.providerBuyList.bind(this),
     };
