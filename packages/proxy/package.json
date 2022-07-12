@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/proxy",
-  "version": "2.76.0",
+  "version": "2.80.0",
   "description": "LSK module for proxy.",
   "keywords": [
     "proxy",

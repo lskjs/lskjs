@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.80.0](https://github.com/lskjs/lskjs/compare/v2.79.1...v2.80.0) (2022-07-12)
+
+
+### Bug Fixes
+
+* **worker:** pass params to process ([1d5c321](https://github.com/lskjs/lskjs/commit/1d5c3219118ffb6e2cc111a76f4323236434b1a8))
+
+
+### Features
+
+* **proxy:** add webshareio provider ([2d47503](https://github.com/lskjs/lskjs/commit/2d4750394dd44fee618a1f58019797740ea8684e))
+
+
+
+
+
 ## [2.79.1](https://github.com/lskjs/lskjs/compare/v2.79.0...v2.79.1) (2022-06-28)
 
 
