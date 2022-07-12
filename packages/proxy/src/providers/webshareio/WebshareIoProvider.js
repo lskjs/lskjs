@@ -27,7 +27,6 @@ export class WebshareIoProvider extends ProxyProvider {
   async fetchListRaw(params = {}) {
     const res = await this.client.get('/proxy/list', { params });
     // const res = await this.client.post('/proxy/list', {query: {limit:}});
-    console.log('resresresres', { params }, { ...res.data, results: res.data.results.length }, res.request);
     await this.checkErr(res);
     return res.data;
   }
@@ -61,7 +60,6 @@ export class WebshareIoProvider extends ProxyProvider {
             }),
           ),
       ];
-      console.log('proxies', proxies.length);
     }
 
     return proxies;
