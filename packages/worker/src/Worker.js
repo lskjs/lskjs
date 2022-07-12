@@ -201,7 +201,7 @@ export class Worker extends Module {
     return this.Job.new(mergedProps);
   }
   async process(params, props = {}) {
-    const job = await this.createJob(params, props);
+    const job = await this.createJob({ ...props, params });
     const instance = await job.start();
     return {
       code: instance.err ? Err.getCode(instance.err) : 0,
