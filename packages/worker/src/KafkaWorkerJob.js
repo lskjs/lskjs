@@ -1,6 +1,6 @@
-import { RabbitWorkerJob } from './RabbitWorkerJob';
+import { WorkerJob } from './WorkerJob';
 
-export class KafkaWorkerJob extends RabbitWorkerJob {
+export class KafkaWorkerJob extends WorkerJob {
   isTooMuchRedelivered() {
     return false;
   }

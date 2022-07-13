@@ -202,16 +202,16 @@ export class Worker extends Module {
   }
   async process(params, props = {}) {
     const job = await this.createJob({ ...props, params });
-    const instance = await job.start();
+    await job.start();
     return {
-      code: instance.err ? Err.getCode(instance.err) : 0,
-      ...instance.getQueueMeta(),
-      startedAt: instance.startedAt,
-      finishedAt: instance.finishedAt,
-      runningTime: instance.finishedAt ? instance.finishedAt - instance.startedAt : null,
-      status: instance.status,
-      data: instance.data,
-      err: instance.err,
+      code: job.err ? Err.getCode(job.err) : 0,
+      ...job.getQueueMeta(),
+      startedAt: job.startedAt,
+      finishedAt: job.finishedAt,
+      runningTime: job.finishedAt ? job.finishedAt - job.startedAt : null,
+      status: job.status,
+      data: job.data,
+      err: job.err,
     };
   }
   async stop() {
