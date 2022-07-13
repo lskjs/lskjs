@@ -71,13 +71,26 @@ export class KafkaModule extends Module {
     return this.producer.send(...args);
   }
   async createConsumer(topic, { groupId } = {}) {
-    if (!topic) throw new Err('!topic');
+    let topics;
+    if (Array.isArray(topic)) {
+      topics = topic;
+    } else if (typeof topic === 'string') {
+      if (topic.includes(',')) {
+        topics = topic.split(',');
+      } else {
+        topics = [topic];
+      }
+    }
+    if (!topics) throw new Err('!topic');
+
     const consumer = this.client.consumer({
       groupId: groupId || this.defaultGroupId,
       maxBytesPerPartition: 4096,
     });
     await consumer.connect();
-    await consumer.subscribe({ topic, fromBeginning: true });
+    const props = { fromBeginning: true };
+    this.log.trace('[consumer.subscribe]', topics, props);
+    await consumer.subscribe({ topics, ...props });
     return consumer;
   }
   async consume(topic, onConsume, { concurrency, ...options }) {

@@ -31,7 +31,7 @@
     "@lskjs/err": "2.65.1",
     "@lskjs/module": "2.76.0",
     "@lskjs/utils": "2.72.0",
-    "kafkajs": "1.15.0"
+    "kafkajs": "2.1.0"
   },
   "devDependencies": {
     "bluebird": "3.7.2",
