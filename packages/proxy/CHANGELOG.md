@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.82.0](https://github.com/lskjs/lskjs/compare/v2.81.0...v2.82.0) (2022-07-19)
+
+
+### Features
+
+* **proxy:** increase timeouts and remove full error ([c0a4fc5](https://github.com/lskjs/lskjs/commit/c0a4fc537963c9ad67fcf985e3ca539aafa199b8))
+
+
+
+
+
 ## [2.80.1](https://github.com/lskjs/lskjs/compare/v2.80.0...v2.80.1) (2022-07-12)
 
 

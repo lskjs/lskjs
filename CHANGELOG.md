@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.82.0](https://github.com/lskjs/lskjs/compare/v2.81.0...v2.82.0) (2022-07-19)
+
+
+### Features
+
+* **apm:** add more info in defaul APM service name ([9c1af24](https://github.com/lskjs/lskjs/commit/9c1af24d68fe03b4e21b55b999eaaadcb9bc718e))
+* **proxy:** increase timeouts and remove full error ([c0a4fc5](https://github.com/lskjs/lskjs/commit/c0a4fc537963c9ad67fcf985e3ca539aafa199b8))
+
+
+
+
+
 # [2.81.0](https://github.com/lskjs/lskjs/compare/v2.80.1...v2.81.0) (2022-07-13)
 
 
