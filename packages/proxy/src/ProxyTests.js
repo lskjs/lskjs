@@ -17,7 +17,7 @@ const getId = ({ proxy, test }) => [get(proxy, 'key'), test.id].filter(Boolean).
 export class ProxyTests extends Module {
   config = {
     concurrency: tryJSONparse(process.env.PREFETCH) || 50,
-    cacheTimeout: 5 * 60 * 1000,
+    cacheTimeout: 15 * 60 * 1000,
   };
   cache = {
     results: {},
@@ -62,7 +62,7 @@ export class ProxyTests extends Module {
     } catch (err) {
       res.status = 'error';
       res.errCode = Err.getCode(err);
-      res.err = err;
+      // res.err = err; // NOTE: вырубил, чтобы не переполнять память
     }
     res.time = Date.now() - startedAt;
     res.updatedAt = Date.now();

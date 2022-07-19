@@ -29,6 +29,12 @@ export const networkErrors = [
   'ERR_TLS_CERT_ALTNAME_INVALID',
 ];
 
+export const isNetworkTimeout = (err) => {
+  const errCode = Err.getCode(err) || '';
+
+  return errCode === 'REQUEST_NETWORK_TIMEOUT';
+};
+
 export const isNetworkCapcha = (err) => {
   const data = get(err, 'response.data');
   if (typeof data !== 'string') return false;
@@ -59,6 +65,7 @@ export const getFatalErrCode = (err) => {
   if (get(err, 'response.status') === 429) return 'REQUEST_NETWORK_FATAL_TOO_MANY_REQUEST';
   if (get(err, 'response.status') === 407) return 'REQUEST_NETWORK_FATAL_PROXY_AUTH_REQUIRED';
   if (isNetworkCapcha(err)) return 'REQUEST_NETWORK_FATAL_CAPTCHA';
+  if (isNetworkTimeout(err)) return 'REQUEST_NETWORK_TIMEOUT';
   if (isNetworkError(err)) return 'REQUEST_NETWORK';
   return null;
 };

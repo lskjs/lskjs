@@ -24,7 +24,7 @@ export class ProxyManager extends Module {
     stats: isDev,
     statsInterval: isDev ? 10 * 1000 : null,
     // updateInterval: debug ? 5 * 60 * 1000 : 10 * 60 * 1000,
-    cacheTimeout: 5 * 60 * 1000,
+    cacheTimeout: 15 * 60 * 1000,
     strategy: 'linear',
   };
   strategies = strategies;

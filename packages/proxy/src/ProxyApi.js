@@ -9,6 +9,7 @@ export default class ProxyApi extends BaseApi {
   getRoutes() {
     return {
       '/': this.list.bind(this),
+      '.:format': this.list.bind(this),
       '/list': this.list.bind(this),
       '/list.:format': this.list.bind(this),
       '/tests': this.tests.bind(this),
@@ -55,8 +56,8 @@ export default class ProxyApi extends BaseApi {
   async test(req) {
     const proxy = await this.app.module('proxy');
     const { proxyKey, testId } = req.data;
-    if (!proxyKey) throw new Err('!proxyKey')
-    if (!testId) throw new Err('!testId')
+    if (!proxyKey) throw new Err('!proxyKey');
+    if (!testId) throw new Err('!testId');
     return proxy.runProxyTest({ proxyKey, testId, force: true });
   }
   async list(req, res) {

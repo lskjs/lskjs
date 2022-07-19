@@ -7,7 +7,7 @@ import { createProxy } from '../utils/createProxy';
 export class ProxyProvider extends Module {
   cache = null;
   config = {
-    cacheTimeout: 5 * 60 * 1000,
+    cacheTimeout: 15 * 60 * 1000,
   };
 
   async createClient() {
