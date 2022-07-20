@@ -296,7 +296,7 @@ export class RabbitModule extends Module {
         {
           random: Math.random(),
         },
-        {},
+        { expired: 24 * 60 * 60 * 1000 },
         sendChannel,
       );
       await sendChannel.close();
