@@ -179,11 +179,15 @@ export class ProxyManager extends Module {
     const release = await this.mutex.acquire();
     try {
       const { data: list, ...cache } = await this.fetchProxyList();
-      this.cache = {
-        updatedAt: new Date(),
-        ...cache,
-        list: this.wrapProxies(list),
-      };
+      if (list.length) {
+        this.cache = {
+          updatedAt: new Date(),
+          ...cache,
+          list: this.wrapProxies(list),
+        };
+      } else {
+        this.cache.emptyUpdatedAt = new Date();
+      }
       release();
     } catch (err) {
       this.log.error('[updateCache]', err);
