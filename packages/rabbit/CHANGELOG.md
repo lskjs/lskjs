@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.83.0](https://github.com/lskjs/lskjs/compare/v2.82.0...v2.83.0) (2022-08-04)
+
+
+### Features
+
+* **rabbit:** add expired in healthcheck queue ([492995f](https://github.com/lskjs/lskjs/commit/492995f583bc20b062c452cc71cd9674142b6013))
+
+
+
+
+
 # [2.78.0](https://github.com/lskjs/lskjs/compare/v2.77.0...v2.78.0) (2022-06-28)
 
 
