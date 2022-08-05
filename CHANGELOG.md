@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.83.1](https://github.com/lskjs/lskjs/compare/v2.83.0...v2.83.1) (2022-08-05)
+
+
+### Bug Fixes
+
+* **worker:** fatal nack bug ([5befe05](https://github.com/lskjs/lskjs/commit/5befe05c7cbef347a41ad70f8d281fe4bb719ac1))
+
+
+
+
+
 # [2.83.0](https://github.com/lskjs/lskjs/compare/v2.82.0...v2.83.0) (2022-08-04)
 
 
