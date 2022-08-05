@@ -44,6 +44,7 @@ export class Worker extends Module {
     }
   }
   async onConsume(msg) {
+    if (this.showErrorInfo()) this.log.trace('[onConsume] start', msg);
     this.stats.print({
       log: this.log.info.bind(this.log),
       successKey: 'event.success',
@@ -55,15 +56,24 @@ export class Worker extends Module {
       params = this.getMsgData(msg, 'content');
     } catch (err) {
       await this.client.nack(msg, { requeue: false });
+      if (this.showErrorInfo()) this.log.error('[onConsume] !content');
       return;
     }
     const job = await this.createJob({ msg, params });
     try {
+      if (this.showErrorInfo()) this.log.trace('[onConsume] job.start()');
       await job.start();
+      if (this.showErrorInfo()) this.log.trace('[onConsume] job.start() finished');
       if (!job.status) await job.ackSuccess();
     } catch (err) {
-      await this.onConsumeError(err, { job, msg });
+      try {
+        if (this.showErrorInfo()) this.log.trace('[onConsume] onConsumeError');
+        await this.onConsumeError(err, { job, msg });
+      } catch (err2) {
+        if (this.showErrorInfo()) this.log.error('[onConsume] onConsumeError err', err2);
+      }
     }
+    if (this.showErrorInfo()) this.log.trace('[onConsume] finish');
   }
   async onConsumeError(error, { job }) {
     if (this.showErrorInfo()) {

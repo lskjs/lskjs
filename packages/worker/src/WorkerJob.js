@@ -155,7 +155,8 @@ export class WorkerJob extends Module {
     await this.onError(err);
     // if (this.debug) this.log.error(`rabbit.nack [${Err.getCode(err)}]`, this.params);
     if (this.debug) this.log.error(`[nack] ${Err.getCode(err)}`);
-    if (this.msg && this.worker.consumerTag === this.msg.fields.consumerTag) {
+    // if (this.msg && this.worker.consumerTag === this.msg.fields.consumerTag) {
+    if (this.msg) {
       await this.client.nack(this.msg, { requeue: true });
     }
     return this.setStatus({
