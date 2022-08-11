@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.83.2](https://github.com/lskjs/lskjs/compare/v2.83.1...v2.83.2) (2022-08-11)
+
+
+### Bug Fixes
+
+* **worker:** fatal ack bug ([14d7349](https://github.com/lskjs/lskjs/commit/14d7349c1c4698e3c3e1b9ecbc46c5e8a579f2ae))
+
+
+
+
+
 ## [2.83.1](https://github.com/lskjs/lskjs/compare/v2.83.0...v2.83.1) (2022-08-05)
 
 

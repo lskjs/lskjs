@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "2.83.1",
+  "version": "2.83.2",
   "description": "LSK module for worker.",
   "keywords": [
     "worker",
