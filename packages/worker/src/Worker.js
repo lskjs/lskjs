@@ -136,6 +136,9 @@ export class Worker extends Module {
       const fromQueue = this.getQueue();
       const queue = `${fromQueue}_redelivered`;
       if (this.sendToRedelivered) await this.sendToRedelivered(job, queue, { fromQueue });
+
+      if (this.showErrorInfo()) console.error('err2', err); // eslint-disable-line no-console
+      await job.ackError(err);
       return;
     }
     if (this.showErrorInfo()) console.error('err3', err); // eslint-disable-line no-console
