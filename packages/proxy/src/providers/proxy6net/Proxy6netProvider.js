@@ -1,4 +1,5 @@
-/* eslint-disable max-classes-per-file */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable camelcase */
 import Err from '@lskjs/err';
 import axios from 'axios';
 
@@ -6,11 +7,12 @@ import { getIpv } from '../../utils/getIpv';
 import { ProxyProvider } from '../ProxyProvider';
 
 /**
- * API docs: https://proxy-store.com/en/developers
+ * API docs: https://proxy.webshare.io/docs
  */
-export class ProxyStoreProvider extends ProxyProvider {
-  provider = 'proxystore';
-  baseURL = 'https://proxy-store.com/api';
+
+export class Proxy6netProvider extends ProxyProvider {
+  provider = 'proxy6net';
+  baseURL = 'https://proxy6.net/api';
 
   async createClient() {
     if (!this.config.apiKey) throw new Err('!config.apiKey');
@@ -27,22 +29,22 @@ export class ProxyStoreProvider extends ProxyProvider {
     };
   }
 
-  async checkErr(res = {}) {
-    const { data, err } = res;
-    if (err) throw new Err(err);
-    if (!data) throw new Err('!data', { res });
-    if (data.error_id !== 404) return;
-    if (data.status !== 'no') return;
-    throw new Err({
-      code: data.error_id,
-      message: [data.error, data.message].filter(Boolean).join(': '),
-    });
+  async checkErr(res) {
+    if (res?.data?.error) {
+      // console.log('res?.data?.error', res?.data?.error);
+      throw new Err({
+        code: `PROXY_PROVIDER_${res.data.error_id}`,
+        message: res.data.error,
+        data: res.data,
+      });
+    }
   }
+  async fetchListRaw(params = {}) {
+    const res = await this.client.get('/getproxy', { params });
 
-  async fetchListRaw() {
-    const res = await this.client.get('/getproxy').catch((err) => ({ err }));
+    // const res = await this.client.post('/proxy/list', {query: {limit:}});
     await this.checkErr(res);
-    return res.data || [];
+    return res.data;
   }
 
   async fetchList() {
@@ -52,7 +54,7 @@ export class ProxyStoreProvider extends ProxyProvider {
       .filter((item) => item.active === '1')
       .map((item) =>
         this.createProxy({
-          host: item.host || item.ip, // TODO: хуйня какая та
+          host: item.host,
           port: +item.port,
           user: item.user,
           password: item.pass,
@@ -61,7 +63,7 @@ export class ProxyStoreProvider extends ProxyProvider {
           tags: {
             country: String(item.country).toLowerCase(),
             ipv: getIpv(item.ip),
-            comment: item.comment ? String(item.comment) : undefined,
+            comment: item.descr ? String(item.descr) : undefined,
             dateFrom: new Date(item.unixtime * 1000),
             dateTo: new Date(item.unixtime_end * 1000),
           },
@@ -73,11 +75,11 @@ export class ProxyStoreProvider extends ProxyProvider {
     return { countries: data.list };
   }
   getBuyListProps() {
-    // const countries = ['us', 'ru'];
     const countries = [];
     return countries.map((country) => ({ country }));
   }
   async buy({ ...options }) {
+    // TODO: NOT SURE
     const { data } = await this.client.get(`/buy`, {
       params: {
         type: 'http',
@@ -95,4 +97,4 @@ export class ProxyStoreProvider extends ProxyProvider {
   }
 }
 
-export default ProxyStoreProvider;
+export default Proxy6netProvider;
