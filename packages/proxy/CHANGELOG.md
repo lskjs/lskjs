@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.84.0](https://github.com/lskjs/lskjs/compare/v2.83.2...v2.84.0) (2022-08-17)
+
+
+### Features
+
+* add proxy6net ([2565660](https://github.com/lskjs/lskjs/commit/2565660e0a8522c6278200df74743fe1bd45d741))
+
+
+
+
+
 # [2.83.0](https://github.com/lskjs/lskjs/compare/v2.82.0...v2.83.0) (2022-08-04)
 
 
