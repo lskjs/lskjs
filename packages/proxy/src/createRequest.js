@@ -108,10 +108,11 @@ export const createRequest =
             proxy,
           };
           if (isNetwork) {
-            errProps = { message: code, subcode: Err.getCode(initErr), class: 'network', tries, maxTries };
+            errProps = { message: code, subcode: Err.getCode(initErr), class: 'network', tries, maxTries, isNetwork };
           }
           const err = new Err(code, initErr, errProps);
           Err.copyProps(err, initErr);
+          err.code = code;
           if (feedback) await feedback.error(err, { fatal, size });
           if (!isNetwork) throw retry.StopError(err); // exit right now
           throw err; // try one again
