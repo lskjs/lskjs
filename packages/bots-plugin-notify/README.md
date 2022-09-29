@@ -26,6 +26,8 @@
 
 *   [Bots Plugin Notify](#bots-plugin-notify)
 
+    *   [Api Query Params](#api-query-params)
+    *   [Env & Preferences](#env--preferences)
     *   [Таймер (cron)](#таймер-cron)
     *   [Проекты (projects)](#проекты-projects)
 
@@ -52,6 +54,19 @@ npm i @lskjs/bots-plugin-notify bluebird lodash
 # Bots Plugin Notify
 
 **Bots Plugin Notify** (*@lskjs/bots-plugin-notify*) - плагин, позволяющий настраивать мониторинг ресурсов с уведомлениями в telegram/slack через алерт-менеджер.
+
+## Api Query Params
+
+| Param | Type | Required | Default | Description |
+| ------|------|:--------:|:-------:|-------------|
+| text | String | | | Any text |
+| md   | String | | | Any text with markdown mode |
+| projectName | String | | \_default |Project name from env |
+| secret | String | | | Chat secret key from env |
+
+***
+
+## Env & Preferences
 
 Конфиг плагина находится по пути `bots.plugins.notify` и имеет вид:
 

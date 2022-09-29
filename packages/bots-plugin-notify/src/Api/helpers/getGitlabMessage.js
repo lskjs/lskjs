@@ -11,7 +11,7 @@ export const getGitlabMessage = (req, message) => {
   gitlabMessage.meta = req.body;
   gitlabMessage.isMd = getBool(req.query.isMd, false);
 
-  const { object_kind: objectKind, ref, commits = [] } = message.meta;
+  const { object_kind: objectKind, ref, commits = [] } = gitlabMessage.meta;
   if (objectKind === 'push') {
     gitlabMessage.branch = ref.slice(ref.lastIndexOf('/') + 1);
     gitlabMessage.messageHash = crypto.MD5([commits.map((c) => c.id)].join('')).toString();

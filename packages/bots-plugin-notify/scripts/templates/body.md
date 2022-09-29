@@ -6,10 +6,10 @@ __Bots Plugin Notify__ (*@lskjs/bots-plugin-notify*) - плагин, позво�
 
 | Param | Type | Required | Default | Description | 
 | ------|------|:--------:|:-------:|-------------|
-| projectName | String | | _default |Project Name from env |
-| text | String | + | | Any text |
+| text | String | | | Any text |
+| md   | String | | | Any text with markdown mode |
+| projectName | String | | _default |Project name from env |
 | secret | String | | | Chat secret key from env |
-| isMd | Bool | | false | Markdown mode |
 
 
 ---
