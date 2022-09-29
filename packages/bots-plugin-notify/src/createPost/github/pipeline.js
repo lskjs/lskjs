@@ -9,18 +9,19 @@ const statuses = {
 
 export function pipeline(message, bot) {
   const { commit, project, object_attributes: objectAttributes, user } = message.meta;
+  const { isMd } = message;
 
   const status = statuses[objectAttributes.status] || `🤷‍♀️ ${objectAttributes.status}`;
 
-  const message2 = commit.message ? bot.formatCode(commit.message) : '';
+  const formatedCommit = bot.formatCode(commit.message, isMd);
 
-  const formatProjectName = bot.ignoreMd(project.name);
-  const formatUsername = bot.ignoreMd(user.username);
+  const formatedProjectName = bot.ignoreMd(project.name, isMd);
+  const formatedUsername = bot.ignoreMd(user.username, isMd);
 
   return `\
-${status} ${formatProjectName}/${objectAttributes.ref}
-@${formatUsername}
-${message2}
+${status} ${formatedProjectName}/${objectAttributes.ref}
+@${formatedUsername}
+${formatedCommit}
 ${project.web_url}/pipelines/${objectAttributes.id}`;
 }
 

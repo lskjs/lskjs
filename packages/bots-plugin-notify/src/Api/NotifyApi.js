@@ -1,12 +1,13 @@
-/* eslint-disable max-len */
 import { isDev } from '@lskjs/env';
 import Err from '@lskjs/err';
 import Api from '@lskjs/server-api';
 import Bluebird from 'bluebird';
-import crypto from 'crypto-js';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
+
+import { getBool, getReqParams } from '../utils';
+import { getAlertManagerMessage, getGithubMessage, getGitlabMessage, getGraylogMessage } from './helpers';
 
 export class NotifyApi extends Api {
   messages = [];
@@ -55,7 +56,9 @@ export class NotifyApi extends Api {
 
     try {
       const res = await Promise.all([sendTelegram, sendSlack]);
-      if (isDev) return res;
+      if (isDev) {
+        return res;
+      }
       return { data: 'ok' };
     } catch (err) {
       console.log({ err });
@@ -63,29 +66,11 @@ export class NotifyApi extends Api {
     }
   }
 
-  async notify(req) {
-    const projectName = get(req, 'data.projectName') || get(req, 'params.projectName') || '_default';
+  createMessage({ req, projectName }) {
+    const { gitlabEvent, githubEvent, isAlertManager, isGraylog } = getReqParams(req);
+    const project = this.notifyConfig.projects[projectName] || this.notifyConfig.projects._default;
 
-    let project = this.notifyConfig.projects[projectName];
-    if (!project) project = this.notifyConfig.projects._default;
-
-    const token =
-      req.get('X-Gitlab-Token') ||
-      req.get('X-Access-Token') ||
-      req.get('X-Auth-Token') ||
-      req.get('token') ||
-      req.query?.secret ||
-      req.data?.secret;
-
-    const gitlabEvent = req.get('X-Gitlab-Event');
-    const githubEvent = req.get('X-Github-Event');
-    const isAlertManager = (req.get('User-Agent') || '').includes('Alertmanager');
-    const isGraylog = req.body && req.body.event_definition_id && req.body.job_trigger_id && req.body.job_definition_id;
-
-    if (project.secret && token !== project.secret) throw new Err('!acl'); // x aceess token
-
-    // Message.create()
-    const message = {
+    let message = {
       _id: Date.now() + Math.random(),
       createdAt: new Date(),
       type: 'manual',
@@ -93,48 +78,22 @@ export class NotifyApi extends Api {
       sended: false,
       showChannel: !!project.showChannel,
     };
-    const getBool = (param, def) => (param == null ? def : +param);
 
     if (gitlabEvent) {
-      message.event = gitlabEvent;
-      message.type = 'gitlab';
-      message.meta = req.body;
-      message.isMd = getBool(req.query.isMd, false);
-      const { object_kind: objectKind, ref, commits = [] } = message.meta;
-      if (objectKind === 'push') {
-        message.branch = ref.slice(ref.lastIndexOf('/') + 1);
-        message.messageHash = crypto.MD5([commits.map((c) => c.id)].join('')).toString();
-      }
+      message = getGitlabMessage(req, message);
     }
     if (githubEvent) {
-      message.event = githubEvent;
-      message.type = 'github';
-      message.meta = req.body;
-      message.isMd = getBool(req.query.isMd, false);
-      message.isMd = true;
-      const { ref, commits = [] } = message.meta;
-      if (githubEvent === 'push') {
-        message.branch = ref.slice(ref.lastIndexOf('/') + 1);
-        message.messageHash = crypto.MD5([commits.map((c) => c.id)].join('')).toString();
-      }
+      message = getGithubMessage(req, message);
     }
     if (isAlertManager) {
-      message.event = 'alert';
-      message.type = 'alertmanager';
-      message.meta = req.body;
-      message.isMd = getBool(req.query.isMd, false);
+      message = getAlertManagerMessage(req, message);
     }
     if (isGraylog) {
-      message.event = 'alert';
-      message.type = 'graylog';
-      message.meta = req.body;
-      message.isMd = getBool(req.query.isMd, false);
+      message = getGraylogMessage(req, message);
     }
 
     const { text, md } = get(req, 'data', {});
-    if (text) {
-      message.text = text;
-    }
+    if (text) message.text = text;
 
     if (md) {
       message.text = md;
@@ -153,6 +112,18 @@ export class NotifyApi extends Api {
         return 'duplicate';
       }
     }
+    return message;
+  }
+
+  async notify(req) {
+    const projectName = get(req, 'data.projectName') || get(req, 'params.projectName') || '_default';
+    const project = this.notifyConfig.projects[projectName] || this.notifyConfig.projects._default;
+
+    const { token } = getReqParams(req);
+
+    if (project.secret && token !== project.secret) throw new Err('!acl'); // x aceess token
+
+    const message = this.createMessage({ req, projectName });
 
     this.messages.push(message);
     await Bluebird.delay(this.messageTimeout * 1.3);

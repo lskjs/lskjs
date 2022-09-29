@@ -2,6 +2,20 @@
 
 __Bots Plugin Notify__ (*@lskjs/bots-plugin-notify*) - плагин, позволяющий настраивать мониторинг ресурсов с уведомлениями в telegram/slack через алерт-менеджер. 
 
+## Api Query Params
+
+| Param | Type | Required | Default | Description | 
+| ------|------|:--------:|:-------:|-------------|
+| projectName | String | | _default |Project Name from env |
+| text | String | + | | Any text |
+| secret | String | | | Chat secret key from env |
+| isMd | Bool | | false | Markdown mode |
+
+
+---
+
+## Env & Preferences
+
 Конфиг плагина находится по пути `bots.plugins.notify` и имеет вид:
 
 ```js

@@ -45,13 +45,34 @@ export class SlackBotProvider extends BaseBotProvider {
   async sendMessage(ctx: any, content: any, options: any): Promise<any> {
     return axios.post(ctx, { text: content });
   }
-  ignoreMd(text: string): string {
+  ignoreMd(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
     return text;
   }
-  formatCode(text: string): string {
+  formatCode(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
     return `\`\`\`${text}\`\`\``;
   }
-  formatLink(text: string, link: string): string {
+  formatBold(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
+    return `*${text}*`;
+  }
+  formatItalics(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
+    return `_${text}_`;
+  }
+  formatLink(text: string, link: string, isMd = true): string {
+    if (!text || !link) return '';
+    if (!isMd) return text;
+
     return `<${link}|${text}>`;
   }
 }

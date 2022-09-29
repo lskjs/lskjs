@@ -19,15 +19,18 @@ export function build(message, bot) {
     build_id: buildId,
   } = message.meta;
 
+  const { isMd } = message;
+
   const status = statuses[buildStatus] || `🤷‍♀️ ${buildStatus}`;
 
-  const formatProjectName = bot.formatCode(projectName);
-  const formatUsername = bot.ignoreMd(user.name);
+  const formatedProjectName = bot.formatCode(projectName, isMd);
+  const formatedUsername = bot.formatItalics(bot.ignoreMd(user.name, isMd), isMd);
+  const formatedBuildName = bot.formatBold(buildName, isMd);
 
   return `\
-  ${formatProjectName}
-${status} *${buildName}*
-_${formatUsername}_
+  ${formatedProjectName}
+${status} ${formatedBuildName}
+${formatedUsername}
 ${repository.homepage}/-/jobs/${buildId}`;
 }
 

@@ -1,28 +1,29 @@
-const getCommitsMessage = (commits, bot) =>
+const getCommitsMessage = (commits, bot, isMd) =>
   commits.map((commit) => {
     const short = commit.id.slice(0, 7);
-    const formatCommit = bot.formatCode(commit.message);
+    const formatCommit = bot.formatCode(commit.message, isMd);
+    const formatAuthor = bot.formatItalics(commit.author?.name, isMd);
 
     return `\
-${bot.formatLink(short, commit.url)} _${commit.author?.name}_ 
+${bot.formatLink(short, commit.url, isMd)} ${formatAuthor} 
 ${formatCommit}`;
   });
 
 export function push(message, bot) {
-  const { branch } = message;
+  const { branch, isMd } = message;
   const { user_username: username, repository = {}, commits = [] } = message.meta;
 
   const branches = [branch, ...(message.branches || [])];
 
-  const commitsMessage = getCommitsMessage(commits, bot);
-  const formatUsername = bot.ignoreMd(username);
-  const formatPath = bot.formatCode(`${bot.ignoreMd(repository.name)}/${branches.join(',')}`);
+  const commitsMessage = getCommitsMessage(commits, bot, isMd);
+  const formatUsername = bot.ignoreMd(username, isMd);
+  const formatPath = bot.formatCode(`${bot.ignoreMd(repository.name, isMd)}/${branches.join(',')}`, isMd);
 
   return `\
 @${formatUsername}
 Push to ${formatPath}
 
-*Commits:*
+${bot.formatBold('Commits:')}
 ${commitsMessage.join('\n')}
 `;
 }

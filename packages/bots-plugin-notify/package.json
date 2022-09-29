@@ -39,13 +39,14 @@
   },
   "dependencies": {
     "@lskjs/bots-plugin": "2.76.0",
+    "@lskjs/env": "2.65.1",
     "@lskjs/err": "2.65.1",
     "@lskjs/module": "2.76.0",
     "@lskjs/server-api": "2.76.0",
     "@lskjs/utils": "2.72.0",
     "axios": "0.21.2",
-    "crypto-js": "^4.0.0",
-    "node-cron": "^3.0.0"
+    "crypto-js": "4.0.0",
+    "node-cron": "3.0.0"
   },
   "devDependencies": {
     "bluebird": "3.7.2",

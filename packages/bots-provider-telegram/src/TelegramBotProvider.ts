@@ -801,13 +801,34 @@ export class TelegramBotProvider extends BaseBotProvider {
   // deleteMessage(chat_id, message_id, params = {}) {
   //   this.bot.deleteMessage(chat_id, message_id, params);
   // }
-  ignoreMd(text: string): string {
+  ignoreMd(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
     return text.replace(/[^A-Za-z0-9А-Яа-я ]/gi, (c: string) => `\\${c}`);
   }
-  formatCode(text: string): string {
+  formatCode(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
     return `\`${text}\``;
   }
-  formatLink(text: string, link: string): string {
+  formatBold(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
+    return `*${text}*`;
+  }
+  formatItalics(text: string, isMd = true): string {
+    if (!text) return '';
+    if (!isMd) return text;
+
+    return `_${text}_`;
+  }
+  formatLink(text: string, link: string, isMd = true): string {
+    if (!text || !link) return '';
+    if (!isMd) return text;
+
     return `[${text}](${link})`;
   }
 }
