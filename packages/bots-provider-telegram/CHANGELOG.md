@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.84.2](https://github.com/lskjs/lskjs/compare/v2.84.1...v2.84.2) (2022-09-29)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** refactor api and fix markdown ([2e752b2](https://github.com/lskjs/lskjs/commit/2e752b28e01b27d1b4aeadbf9f4ea8e6bc7b70ad))
+
+
+
+
+
 # [2.76.0](https://github.com/lskjs/lskjs/compare/v2.75.1...v2.76.0) (2022-06-11)
 
 **Note:** Version bump only for package @lskjs/bots-provider-telegram
