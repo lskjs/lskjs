@@ -71,7 +71,7 @@ export class SlackBotProvider extends BaseBotProvider {
   }
   formatLink(text: string, link: string, isMd = true): string {
     if (!text || !link) return '';
-    if (!isMd) return text;
+    if (!isMd) return link || text || '';
 
     return `<${link}|${text}>`;
   }
