@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.84.7](https://github.com/lskjs/lskjs/compare/v2.84.6...v2.84.7) (2022-09-30)
+
+
+### Bug Fixes
+
+* **bots:** fix link ([8dfa1d3](https://github.com/lskjs/lskjs/commit/8dfa1d3713b8de0c4ef5464a8943f87e56fbf409))
+
+
+
+
+
 ## [2.84.6](https://github.com/lskjs/lskjs/compare/v2.84.5...v2.84.6) (2022-09-30)
 
 
