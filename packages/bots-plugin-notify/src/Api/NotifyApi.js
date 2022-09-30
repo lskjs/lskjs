@@ -37,7 +37,8 @@ export class NotifyApi extends Api {
 
   async sendError({ error, message }) {
     const errorMessage = JSON.stringify({
-      message: message || `Не удалось собрать message! \n\nСмотри консоль => ${new Date().toISOString()}`,
+      message: message || `Не удалось собрать message! Смотри консоль`,
+      date: new Date().toISOString(),
       error: {
         message: error?.response?.data?.message || error?.message,
         code: error?.response?.data?.code || error?.response?.error_code || error?.code,
