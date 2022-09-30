@@ -23,9 +23,9 @@ export function build(message, bot) {
 
   const status = statuses[buildStatus] || `🤷‍♀️ ${buildStatus}`;
 
-  const formatedProjectName = bot.formatCode(projectName, isMd);
+  const formatedProjectName = bot.formatCode(bot.ignoreMd(projectName, isMd), isMd);
   const formatedUsername = bot.formatItalics(bot.ignoreMd(user.name, isMd), isMd);
-  const formatedBuildName = bot.formatBold(buildName, isMd);
+  const formatedBuildName = bot.formatBold(bot.ignoreMd(buildName, isMd), isMd);
 
   return `\
   ${formatedProjectName}

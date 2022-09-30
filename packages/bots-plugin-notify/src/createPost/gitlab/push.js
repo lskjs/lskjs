@@ -1,12 +1,14 @@
 const getCommitsMessage = (commits, bot, isMd) =>
   commits.map((commit) => {
     const short = commit.id.slice(0, 7);
-    const formatCommit = bot.formatCode(commit.message, isMd);
-    const formatAuthor = bot.formatItalics(commit.author?.name, isMd);
+
+    const fotmatedLink = bot.formatLink(short, commit.url, isMd);
+    const formatedAuthor = bot.formatItalics(bot.ignoreMd(commit.author?.name, isMd), isMd);
+    const formatedCommit = bot.formatCode(commit.message, isMd);
 
     return `\
-${bot.formatLink(short, commit.url, isMd)} ${formatAuthor} 
-${formatCommit}`;
+${fotmatedLink} ${formatedAuthor} 
+${formatedCommit}`;
   });
 
 export function push(message, bot) {
@@ -23,7 +25,7 @@ export function push(message, bot) {
 @${formatUsername}
 Push to ${formatPath}
 
-${bot.formatBold('Commits:')}
+${bot.formatBold('Commits:', isMd)}
 ${commitsMessage.join('\n')}
 `;
 }

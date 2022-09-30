@@ -6,17 +6,14 @@ const statuses = {
 
 export function mergeRequest(message, bot) {
   const { user, object_attributes: objectAttributes } = message.meta;
-  const { title } = objectAttributes;
 
   const { isMd } = message;
 
   const status = statuses[objectAttributes.state] || `🤷‍♀️ ${objectAttributes.status}`;
 
-  const formatedMessage = bot.formatCode(title, isMd);
-  const formatedTitle = title ? `${formatedMessage}\n` : '';
-
+  const formatedTitle = `${bot.formatCode(objectAttributes.title, isMd)}\n`;
   const formatedUsername = bot.ignoreMd(user.username, isMd);
-  const formatedLink = bot.formatLink(objectAttributes.url, objectAttributes.url, isMd);
+  const formatedLink = bot.formatLink(bot.ignoreMd(objectAttributes.url, isMd), objectAttributes.url, isMd);
 
   return `\
 🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} -> ${objectAttributes.target_branch}

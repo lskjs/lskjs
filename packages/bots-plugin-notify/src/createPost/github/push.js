@@ -19,7 +19,7 @@ export function push(message, bot) {
 
   const commitsMessage = getCommitsMessage(commits, bot, isMd);
 
-  const formatedPath = bot.formatCode(`${repository.name}/${branches.join(',')}`, isMd);
+  const formatedPath = bot.formatCode(`${bot.ignoreMd(repository.name, isMd)}/${branches.join(',')}`, isMd);
 
   return `\
 @${sender.login}

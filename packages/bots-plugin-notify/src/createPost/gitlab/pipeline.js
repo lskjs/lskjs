@@ -13,14 +13,16 @@ export function pipeline(message, bot) {
 
   const status = statuses[objectAttributes.status] || `🤷‍♀️ ${objectAttributes.status}`;
 
-  const formatMessage = bot.formatCode(commit.message, isMd);
-  const formatProjectName = bot.ignoreMd(project.name, isMd);
+  const formatedMessage = bot.formatCode(commit.message, isMd);
+  const formatedUsername = bot.ignoreMd(user.username, isMd);
+  const formatedProjectName = bot.ignoreMd(project.name, isMd);
+  const formatedLink = bot.ignoreMd(`${project.web_url}/pipelines/${objectAttributes.id}`, isMd);
 
   return `\
-${status} ${formatProjectName}/${objectAttributes.ref}
-@${user.username}
-${formatMessage}
-${project.web_url}/pipelines/${objectAttributes.id}`;
+${status} ${formatedProjectName}/${objectAttributes.ref}
+@${formatedUsername}
+${formatedMessage}
+${formatedLink}`;
 }
 
 export default pipeline;

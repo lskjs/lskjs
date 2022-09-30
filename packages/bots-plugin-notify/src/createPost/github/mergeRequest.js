@@ -10,10 +10,10 @@ export function mergeRequest(message, bot) {
   const { isMd } = message;
 
   const status = statuses[objectAttributes.state] || `🤷‍♀️ ${objectAttributes.status}`;
-  const formatedTitle = `${bot.formatCode(objectAttributes.title, isMd)}\n`;
 
+  const formatedTitle = `${bot.formatCode(objectAttributes.title, isMd)}\n`;
   const formatedUsername = bot.ignoreMd(user.username, isMd);
-  const formatedLink = bot.formatLink(objectAttributes.url, objectAttributes.url, isMd);
+  const formatedLink = bot.formatLink(bot.ignoreMd(objectAttributes.url, isMd), objectAttributes.url, isMd);
 
   return `\
 🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} -> ${objectAttributes.target_branch}
