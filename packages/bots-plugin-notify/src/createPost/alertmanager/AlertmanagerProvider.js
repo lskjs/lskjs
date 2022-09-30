@@ -17,13 +17,11 @@ const getStatus = ({ status, severity } = {}) =>
 // ${grafana ? `\n[grafana](${grafana})` : ''}\
 // `);
 
-const alertLog = (alert, bot, isMd) => {
-  const {
-    status,
-    labels: { severity, alertname },
-    annotations: { grafana, description },
-  } = alert;
-
+const alertLog = (
+  { status, labels: { severity, alertname, instance }, annotations: { grafana, description } },
+  bot,
+  isMd,
+) => {
   const formatedStatus = getStatus({ status, severity });
   const formatedCode = bot.formatCode(alertname, isMd);
   const formatedDescription = bot.ignoreMd(description, isMd);
@@ -38,12 +36,11 @@ const alertLog = (alert, bot, isMd) => {
   `;
 };
 
-const alertsLog = (message, bot) =>
-  message.meta.alerts.map((alert) => alertLog(alert, bot, message.isMd)).join('\n\n------\n\n');
+const alertsLog = ({ alerts }, bot, isMd) => alerts.map((alert) => alertLog(alert, bot, isMd)).join('\n\n------\n\n');
 
 export function alertmanager(message, bot) {
   if (this?.debug) this.log.trace('alertmanager.message', message);
-  return { msg: alertsLog(message, bot) };
+  return { msg: alertsLog(message.meta, bot, message.isMd) };
 }
 
 export default alertmanager;
