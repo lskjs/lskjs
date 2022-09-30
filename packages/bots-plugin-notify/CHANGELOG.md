@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.84.5](https://github.com/lskjs/lskjs/compare/v2.84.4...v2.84.5) (2022-09-30)
+
+
+### Bug Fixes
+
+* **bots-plugin-notify:** add date to error catcher ([2a749a7](https://github.com/lskjs/lskjs/commit/2a749a7a99669c84b931a905729000b2daa48fc9))
+* **bots-plugin-notify:** add error catcher ([a660a34](https://github.com/lskjs/lskjs/commit/a660a3491e12caaec6ce3be35390c920f19f500a))
+
+
+
+
+
 ## [2.84.4](https://github.com/lskjs/lskjs/compare/v2.84.3...v2.84.4) (2022-09-30)
 
 
