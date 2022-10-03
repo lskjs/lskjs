@@ -36,7 +36,8 @@ const alertLog = (
   `;
 };
 
-const alertsLog = ({ alerts }, bot, isMd) => alerts.map((alert) => alertLog(alert, bot, isMd)).join('\n\n------\n\n');
+const alertsLog = ({ alerts }, bot, isMd) =>
+  alerts.map((alert) => alertLog(alert, bot, isMd)).join(`\n\n${bot.ignoreMd('------', isMd)}\n\n`);
 
 export function alertmanager(message, bot) {
   if (this?.debug) this.log.trace('alertmanager.message', message);
