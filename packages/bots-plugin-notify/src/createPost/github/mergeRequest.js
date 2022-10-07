@@ -16,7 +16,9 @@ export function mergeRequest(message, bot) {
   const formatedLink = bot.formatLink(bot.ignoreMd(objectAttributes.url, isMd), objectAttributes.url, isMd);
 
   return `\
-🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} -> ${objectAttributes.target_branch}
+🍻 ${status} ${objectAttributes.state} ${objectAttributes.source_branch} ${bot.ignoreMd('->', isMd)} ${
+    objectAttributes.target_branch
+  }
 @${formatedUsername}
 ${formatedTitle}
 ${formatedLink}`;
