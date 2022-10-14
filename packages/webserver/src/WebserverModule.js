@@ -31,7 +31,8 @@ export class WebserverModule extends Module {
     return {
       ...config,
       jwt: {
-        ...(this.__parent.config.jwt || {}),
+        ...(this.__parent?.config?.client?.jwt || {}),
+        ...(this.__parent?.config?.jwt || {}),
         ...(config.jwt || {}),
       },
     };
