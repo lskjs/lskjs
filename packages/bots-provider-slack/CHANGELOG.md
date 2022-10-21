@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.84.11](https://github.com/lskjs/lskjs/compare/v2.84.10...v2.84.11) (2022-10-21)
+
+**Note:** Version bump only for package @lskjs/bots-provider-slack
+
+
+
+
+
 ## [2.84.7](https://github.com/lskjs/lskjs/compare/v2.84.6...v2.84.7) (2022-09-30)
 
 

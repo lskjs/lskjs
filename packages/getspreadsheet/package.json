@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/getspreadsheet",
-  "version": "2.77.0",
+  "version": "2.84.11",
   "description": "LSK getspreadsheet.",
   "keywords": [],
   "publishConfig": {
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@lskjs/err": "2.65.1",
+    "@lskjs/err": "2.84.11",
     "@lskjs/utils": "2.72.0",
     "axios": "0.21.2",
     "bluebird": "3.7.2",

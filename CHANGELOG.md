@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.84.11](https://github.com/lskjs/lskjs/compare/v2.84.10...v2.84.11) (2022-10-21)
+
+
+### Bug Fixes
+
+* **webserver:** concat with client jwt config ([9f9e524](https://github.com/lskjs/lskjs/commit/9f9e524927335f3b68e00417801a7a5284bb1501))
+* **worker:** redelivered err: null ([c9dcba8](https://github.com/lskjs/lskjs/commit/c9dcba8695006810c5b6af32bcd70938f871ae18))
+
+
+
+
+
 ## [2.84.10](https://github.com/lskjs/lskjs/compare/v2.84.9...v2.84.10) (2022-10-10)
 
 
