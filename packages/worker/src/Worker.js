@@ -135,7 +135,7 @@ export class Worker extends Module {
     if (errInfo.redelivered && job.isTooMuchRedelivered && job.isTooMuchRedelivered()) {
       const fromQueue = this.getQueue();
       const queue = `${fromQueue}_redelivered`;
-      if (this.sendToRedelivered) await this.sendToRedelivered(job, queue, { fromQueue });
+      if (this.sendToRedelivered) await this.sendToRedelivered(job, queue, { err, fromQueue });
 
       if (this.showErrorInfo()) console.error('err2', err); // eslint-disable-line no-console
       await job.ackError(err);
