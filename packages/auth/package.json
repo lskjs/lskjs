@@ -42,7 +42,7 @@
     "jsonwebtoken": "8.5.1",
     "passport": "0.4.1",
     "qs": "6.10.1",
-    "validator": "13.6.0"
+    "validator": "13.7.0"
   },
   "devDependencies": {
     "@lskjs/db": "2.84.11",
