@@ -45,7 +45,7 @@
     "express": "4.17.1",
     "express-jwt": "6.1.0",
     "fast-safe-stringify": "2.1.1",
-    "nanoid": "3.1.29",
+    "nanoid": "3.1.31",
     "portfinder": "1.0.28",
     "socket.io": "4.2.0",
     "socket.io-as-promised": "1.0.0",
