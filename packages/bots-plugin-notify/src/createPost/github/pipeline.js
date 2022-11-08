@@ -15,11 +15,11 @@ export function pipeline(message, bot) {
 
   const formatMessage = bot.formatCode(commit.message, isMd);
   const formatedUsername = bot.ignoreMd(user.username, isMd);
-  const formatedProjectName = bot.ignoreMd(project.name, isMd);
+  const formatedProjectName = bot.ignoreMd(`${project.name}/${objectAttributes.ref}`, isMd);
   const formatLink = bot.ignoreMd(`${project.web_url}/pipelines/${objectAttributes.id}`, isMd);
 
   return `\
-${status} ${formatedProjectName}/${objectAttributes.ref}
+${status} ${formatedProjectName}
 @${formatedUsername}
 ${formatMessage}
 ${formatLink}`;
