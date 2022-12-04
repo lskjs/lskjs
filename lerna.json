@@ -1,5 +1,5 @@
 {
-  "version": "2.84.12",
+  "version": "3.0.0",
   "packages": [
     "packages/*"
   ],
@@ -85,13 +85,13 @@
       ],
       "exact": true,
       "conventionalCommits": true,
-      "conventionalPrerelease": false,
+      "conventionalPrerelease": true,
       "message": "chore(release): %s"
     },
     "publish": {
       "exact": true,
       "conventionalCommits": true,
-      "conventionalPrerelease": false,
+      "conventionalPrerelease": true,
       "ignoreChanges": [
         "**/dist/**",
         "**/build/**",
