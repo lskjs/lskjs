@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "2.84.11",
+  "version": "3.0.1-alpha.0",
   "description": "LSK universal react app wrapper",
   "keywords": [
     "database",
@@ -36,9 +36,9 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.84.11",
-    "@lskjs/err": "2.84.11",
-    "@lskjs/module": "2.84.11",
+    "@lskjs/env": "3.0.1-alpha.0",
+    "@lskjs/err": "3.0.1-alpha.0",
+    "@lskjs/module": "3.0.1-alpha.0",
     "@lskjs/utils": "2.72.0",
     "core-decorators": "0.20.0",
     "emotion": "10.0.27",
@@ -52,7 +52,7 @@
     "universal-router": "9.0.1"
   },
   "devDependencies": {
-    "@lskjs/i18": "2.84.11",
+    "@lskjs/i18": "3.0.1-alpha.0",
     "@lskjs/link": "1.1.10",
     "@lskjs/scroll": "1.1.0",
     "axios": "0.21.2",

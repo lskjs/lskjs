@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/launcher",
-  "version": "2.84.11",
+  "version": "3.0.1-alpha.0",
   "description": "LSK Launcher.",
   "keywords": [],
   "publishConfig": {

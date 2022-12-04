@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "2.84.11",
+  "version": "3.0.1-alpha.0",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "keywords": [
     "modules",
@@ -32,11 +32,11 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.84.11",
-    "@lskjs/err": "2.84.11",
-    "@lskjs/log": "2.84.11",
-    "@lskjs/mutex": "2.84.11",
-    "@lskjs/utils2": "2.84.11",
+    "@lskjs/env": "3.0.1-alpha.0",
+    "@lskjs/err": "3.0.1-alpha.0",
+    "@lskjs/log": "3.0.1-alpha.0",
+    "@lskjs/mutex": "3.0.1-alpha.0",
+    "@lskjs/utils2": "3.0.1-alpha.0",
     "colors": "1.4.0",
     "eventemitter3": "4.0.7"
   },

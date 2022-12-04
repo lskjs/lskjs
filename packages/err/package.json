@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/err",
-  "version": "2.84.11",
+  "version": "3.0.1-alpha.0",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
   "keywords": [],
   "publishConfig": {

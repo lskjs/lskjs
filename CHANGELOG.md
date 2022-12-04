@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1-alpha.0](https://github.com/lskjs/lskjs/compare/v2.84.12...v3.0.1-alpha.0) (2022-12-04)
+
+**Note:** Version bump only for package @lskjs/lskjs
+
+
+
+
+
 ## [2.84.12](https://github.com/lskjs/lskjs/compare/v2.84.11...v2.84.12) (2022-11-08)
 
 
