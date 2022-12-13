@@ -35,7 +35,7 @@
     "@lskjs/module": "2.85.0",
     "@lskjs/server-api": "2.85.0",
     "@lskjs/utils": "2.72.0",
-    "axios": "0.21.x",
+    "axios": "0.x",
     "lodash": "4.17.x"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "axios": "0.21.x",
+    "axios": "0.x",
     "lodash": "4.17.x"
   }
 }

@@ -37,7 +37,7 @@
     "plivo": "4.12.0"
   },
   "peerDependencies": {
-    "axios": "0.21.x"
+    "axios": "0.x"
   },
   "optionalDeps": {
     "plivo": "*",

@@ -62,7 +62,7 @@
   "peerDependencies": {
     "@lskjs/db": "2.33.1",
     "@lskjs/i18": "2.33.1",
-    "axios": "0.21.x",
+    "axios": "0.x",
     "bluebird": "3.7.x",
     "lodash": "4.17.x"
   }

@@ -63,7 +63,7 @@
     "@lskjs/db": "2.x",
     "@lskjs/mobx": "2.x",
     "@lskjs/server-api": "2.x",
-    "axios": "0.21.x",
+    "axios": "0.x",
     "bluebird": "3.7.x",
     "js-cookie": "3.x",
     "lodash": "4.17.x",

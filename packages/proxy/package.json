@@ -49,7 +49,7 @@
   },
   "peerDependencies": {
     "@lskjs/server-api": "2.x.x",
-    "axios": "0.21.x",
+    "axios": "0.x",
     "bluebird": "3.7.x",
     "lodash": "4.17.x"
   }
