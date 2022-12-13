@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/server",
-  "version": "2.84.11",
+  "version": "2.85.0",
   "description": "LSK server.",
   "keywords": [],
   "publishConfig": {
@@ -26,14 +26,14 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@lskjs/env": "2.84.11",
-    "@lskjs/err": "2.84.11",
-    "@lskjs/module": "2.84.11",
+    "@lskjs/env": "2.85.0",
+    "@lskjs/err": "2.85.0",
+    "@lskjs/module": "2.85.0",
     "@lskjs/utils": "2.72.0"
   },
   "devDependencies": {
-    "@lskjs/db": "2.84.11",
-    "@lskjs/i18": "2.84.11",
+    "@lskjs/db": "2.85.0",
+    "@lskjs/i18": "2.85.0",
     "@lskjs/webserver": "2.76.3",
     "axios": "0.21.2",
     "bluebird": "3.7.2",

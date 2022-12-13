@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.85.0](https://github.com/lskjs/lskjs/compare/v2.84.12...v2.85.0) (2022-12-13)
+
+
+### Bug Fixes
+
+* stable package ([c53cfcf](https://github.com/lskjs/lskjs/commit/c53cfcf623d1c9c26ca47751761baf53a562b059))
+
+
+
+
+
 ## [2.84.11](https://github.com/lskjs/lskjs/compare/v2.84.10...v2.84.11) (2022-10-21)
 
 **Note:** Version bump only for package @lskjs/upload
