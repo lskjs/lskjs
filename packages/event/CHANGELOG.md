@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.85.1](https://github.com/lskjs/lskjs/compare/v2.85.0...v2.85.1) (2022-12-13)
+
+**Note:** Version bump only for package @lskjs/event
+
+
+
+
+
 # [2.85.0](https://github.com/lskjs/lskjs/compare/v2.84.12...v2.85.0) (2022-12-13)
 
 

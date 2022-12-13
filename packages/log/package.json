@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "2.85.0",
+  "version": "2.85.1",
   "description": "Логгер совмещающий лучшие черты debug, bunyan, logfmt/logrus, morgan/winston, ",
   "keywords": [],
   "publishConfig": {
@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@lskjs/debug-level": "0.3.2",
-    "@lskjs/env": "2.85.0",
-    "@lskjs/err": "2.85.0",
+    "@lskjs/env": "2.85.1",
+    "@lskjs/err": "2.85.1",
     "fast-safe-stringify": "2.0.8",
     "pretty-bytes": "5.6.0",
     "pretty-time": "1.1.0",
