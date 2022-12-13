@@ -17,10 +17,11 @@ import { filterProxy } from './utils/filterProxy';
 const isDebug = false;
 export class ProxyModule extends Module {
   getActiveProvidersNames() {
-    return Object.keys(
+    const res = Object.keys(
       this.config.providers || {},
       (provider) => !!this.config.providers[provider] && !this.config.providers[provider].disabled,
     );
+    return res;
   }
   getModules() {
     return {
