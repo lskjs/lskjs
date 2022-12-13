@@ -37,7 +37,7 @@
     "@lskjs/utils": "2.72.0"
   },
   "devDependencies": {
-    "@lskjs/kafka": "2.76.2",
+    "@lskjs/kafka": "2.84.11",
     "@lskjs/rabbit": "2.84.11",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
