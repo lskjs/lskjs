@@ -109,7 +109,7 @@ export class ProxyManager extends Module {
   }
   async getProxy(...args) {
     if (this.disabled) return null;
-    await this.getProxyHubProxyList();
+    // await this.getProxyHubProxyList();
     return this.strategy.getProxy(...args);
   }
   // async requestProxyHub({ params, ...axiosParams }) {
@@ -170,9 +170,9 @@ export class ProxyManager extends Module {
       2 - locked, wait, !list
       3 - locked, wait, list
    */
-  async updateCache() {
+  async updateCache({timeout = 5000} = {}) {
     if (this.mutex.isLocked()) {
-      await this.mutex.isAsyncLocked(10000);
+      await this.mutex.isAsyncLocked(timeout);
       if (this.cache) return;
       throw new Err('PROXY_MANAGER_TIMEOUT');
     }
@@ -186,6 +186,7 @@ export class ProxyManager extends Module {
           list: this.wrapProxies(list),
         };
       } else {
+        if (!this.cache) this.cache = {}
         this.cache.emptyUpdatedAt = new Date();
       }
       release();
@@ -195,10 +196,10 @@ export class ProxyManager extends Module {
     }
   }
 
-  async update() {
+  async update({ timeout = 5000 } = {}) {
     if (this.disabled) return;
     if (this.isActualCache()) return;
-    await this.updateCache();
+    await this.updateCache({ timeout });
     const list = this.cache?.list;
     if (!list?.length) {
       this.log.warn('[cache]', 'PROXY_MANAGER_LIST_EMPTY');
@@ -213,6 +214,8 @@ export class ProxyManager extends Module {
     if (this.config.statsInterval) {
       this.interval = setInterval(() => this.stats(), this.config.statsInterval);
     }
+    this.log.debug('start update', { timeout: 30000 })
+    await this.update({ timeout: 30000 })
   }
   async stop() {
     await super.stop();
@@ -220,7 +223,7 @@ export class ProxyManager extends Module {
   }
 
   async getProxyHubProxyList() {
-    await this.update();
+    // await this.update();
     let list = [];
     if (this.cache) list = this.cache.list;
     return list;
