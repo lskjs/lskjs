@@ -78,6 +78,7 @@ export class ProxyModule extends Module {
     const proxy = find(proxyList, { key: proxyKey });
     return tests.runTest({ proxy, testId, force });
   }
+  setProxyWorker = setProxyWorker;
   async getList(filter = {}) {
     const res = await this.runProvidersMethod('getList');
     const fetchedAt = max(Object.values(res).map((a) => a?.fetchedAt));
@@ -96,7 +97,7 @@ export class ProxyModule extends Module {
       p.tests = testIds;
       return p;
     });
-    setProxyWorker(proxyList, this.config.workers);
+    this.setProxyWorker(proxyList, this.config.workers);
     // const testedAt = max(Object.values(proxyStats).map((p) => p.updatedAt));
     // console.log({testedAt}, Object.values(proxyStats).map((p) => p.updatedAt))
 
