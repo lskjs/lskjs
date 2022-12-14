@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.87.0](https://github.com/lskjs/lskjs/compare/v2.86.0...v2.87.0) (2022-12-14)
+
+
+### Features
+
+* **provider:** makes setProxyWorker changeable ([fce75d5](https://github.com/lskjs/lskjs/commit/fce75d56b370584796228e0c1a755ccf7e1cab41))
+
+
+
+
+
 # [2.86.0](https://github.com/lskjs/lskjs/compare/v2.85.1...v2.86.0) (2022-12-14)
 
 

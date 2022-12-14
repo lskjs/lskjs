@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/worker",
-  "version": "2.86.0",
+  "version": "2.87.0",
   "description": "LSK module for worker.",
   "keywords": [
     "worker",
@@ -32,7 +32,7 @@
     "@lskjs/env": "2.85.1",
     "@lskjs/err": "2.85.1",
     "@lskjs/module": "2.85.1",
-    "@lskjs/proxy": "2.86.0",
+    "@lskjs/proxy": "2.87.0",
     "@lskjs/stats": "2.85.1",
     "@lskjs/utils": "2.72.0"
   },
