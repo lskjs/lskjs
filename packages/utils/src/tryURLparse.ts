@@ -1,4 +1,4 @@
-export default (raw) => {
+export default (raw: string): string | null => {
   let str = raw;
   if (!(str.startsWith('http://') || str.startsWith('https://') || str.startsWith('ftp://'))) {
     str = `http://${str}`;
