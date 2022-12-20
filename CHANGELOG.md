@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.87.1](https://github.com/lskjs/lskjs/compare/v2.87.0...v2.87.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* add tryURLparse ([f2f8f4f](https://github.com/lskjs/lskjs/commit/f2f8f4f99926a007e985a6f8bae791e670753c77))
+* tryURLparse res type ([8410661](https://github.com/lskjs/lskjs/commit/8410661844dae61d35f455c7ce65104821a3e347))
+* tryURLparse to TS ([9c9184a](https://github.com/lskjs/lskjs/commit/9c9184a62a786022759e5a13d6e6b1bbd27e5fe5))
+
+
+
+
+
 # [2.87.0](https://github.com/lskjs/lskjs/compare/v2.86.0...v2.87.0) (2022-12-14)
 
 
