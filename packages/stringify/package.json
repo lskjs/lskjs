@@ -1,18 +1,15 @@
 {
-  "name": "@lskjs/getspreadsheet",
+  "name": "@lskjs/stringify",
   "version": "2.85.1",
-  "description": "LSK getspreadsheet.",
+  "description": "LSK stringify.",
   "keywords": [],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/stringify",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "bin": {
-    "getspreadsheet": "./bin/getspreadsheet.js"
-  },
   "scripts": {
     "bootstrap": "lsk run bootstrap",
     "build": "lsk run build",
@@ -29,24 +26,15 @@
     "watch": "lsk run watch"
   },
   "dependencies": {
-    "@babel/runtime": "7.12.5",
     "@lskjs/err": "2.85.1",
-    "@lskjs/stringify": "2.85.1",
-    "@lskjs/utils": "2.72.0",
-    "axios": "0.21.2",
-    "bluebird": "3.7.x",
-    "commander": "5.1.0",
-    "csv-parse": "4.9.0",
-    "dot-object": "^2.1.4",
-    "googleapis": "47.0.0",
-    "lodash": "4.17.x"
+    "javascript-stringify": "2.1.0",
+    "js-yaml": "4.1.0"
   },
   "devDependencies": {
     "bluebird": "3.7.2",
     "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "bluebird": "3.7.x",
     "lodash": "4.17.x"
   }
 }
