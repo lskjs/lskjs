@@ -1,51 +1,34 @@
 {
   "version": "2.19.1",
-  "name": "@lskjs/lskjs",
-  "description": "LSK.js – command line interface scripts",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/lskjs/lskjs",
-  "keywords": [
-    "lskjs",
-    "cli",
-    "scripts"
-  ],
   "scripts": {
-    "start": "lsk run start",
-    "bootstrap": "lsk run bootstrap",
-    "dev": "lsk run dev",
-    "release": "lsk run release",
-    "release:yes": "lsk run release -- --yes",
-    "i18": "lsk run i18",
-    "build": "lsk run build",
-    "test": "lsk run test",
-    "test:watch": "lsk run test -- --watch"
+    "build": "          pnpm -r                      build",
+    "build:packages": " pnpm --filter './packages/*' build",
+    "clean": "          pnpm -r                      clean",
+    "dev": "            pnpm -r                      dev",
+    "lint:fix": "       eslint --fix",
+    "test": "           pnpm -r                      test",
+    "test:packages": "  pnpm --filter './packages/*' test",
+    "test:watch": "     pnpm -r                      test:watch",
+    "release": "        lerna publish"
   },
   "dependencies": {
-    "@babel/cli": "7.15.7",
-    "@babel/core": "7.15.8",
     "@lskjs/babel-preset": "2.8.0",
     "@lskjs/cli": "2.36.0",
     "babel-jest": "27.2.4",
     "babel-loader": "8.2.2",
-    "lerna": "4.0.0",
-    "typescript": "4.4.3",
+    "lerna": "6.4.1",
+    "typescript": "4.9.4",
     "webpack": "5.57.1",
     "webpack-dev-server": "4.3.1"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "13.2.0",
-    "@lskjs/eslint-config": "2.6.0",
+    "@lskjs/cli-utils": "2.52.0",
+    "@lskjs/eslint-config": "2.17.0",
+    "eslint": "8.31.0",
     "@lskjs/utils": "2.29.0",
-    "@types/jest": "27.0.2",
-    "babel-eslint": "10.1.0",
-    "eslint": "7.32.0",
-    "husky": "7.0.2",
-    "jest": "27.2.4",
-    "prettier": "2.4.1"
-  }
+    "jest": "27.2.4"
+  },
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "bugs": "https://github.com/lskjs/cli/issues",
+  "license": "MIT"
 }
