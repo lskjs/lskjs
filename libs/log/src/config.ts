@@ -1,5 +1,8 @@
 // import { isServer } from '@lskjs/env';
 
+import { ColorsAndStyles } from './colors';
+import { Theme } from './types';
+
 export const levelsPriority = {
   start: 99,
   log: 99,
@@ -12,7 +15,31 @@ export const levelsPriority = {
   trace: 10,
 };
 
-export const theme = {
+const qwe: ColorsAndStyles = 'red';
+console.log(qwe);
+
+export const randomColors: Array<ColorsAndStyles[]> = [
+  ['red'],
+  ['green'],
+  ['yellow'],
+  ['blue'],
+  ['magenta'],
+  ['cyan'],
+  ['bold', 'red'],
+  ['bold', 'green'],
+  ['bold', 'yellow'],
+  ['bold', 'blue'],
+  ['bold', 'magenta'],
+  ['bold', 'cyan'],
+  // ['dim', 'red'],
+  // ['dim', 'green'],
+  // ['dim', 'yellow'],
+  // ['dim', 'blue'],
+  // ['dim', 'magenta'],
+  // ['dim', 'cyan'],
+];
+
+export const theme: Theme = {
   // fatal: 'inverse',
 
   fatal: ['bgRed'],
@@ -29,25 +56,4 @@ export const theme = {
   // info: !isServer ? 'brightGreen' : 'background-color: red; color: #fff;',
   // trace: !isServer ? 'gray' : 'background-color: red; color: #fff;', // 'white'
   // log: !isServer ? 'bgWhite' : 'background-color: red; color: #fff;', // 'white'
-
-  randoms: [
-    ['red'],
-    ['green'],
-    ['yellow'],
-    ['blue'],
-    ['magenta'],
-    ['cyan'],
-    ['bold', 'red'],
-    ['bold', 'green'],
-    ['bold', 'yellow'],
-    ['bold', 'blue'],
-    ['bold', 'magenta'],
-    ['bold', 'cyan'],
-    // ['dim', 'red'],
-    // ['dim', 'green'],
-    // ['dim', 'yellow'],
-    // ['dim', 'blue'],
-    // ['dim', 'magenta'],
-    // ['dim', 'cyan'],
-  ],
 };

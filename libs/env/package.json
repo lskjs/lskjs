@@ -1,30 +1,63 @@
 {
   "name": "@lskjs/env",
-  "version": "2.85.1",
+  "version": "3.0.0-alpha.3",
   "description": "LSK.js – env – Scripts for environment detecton",
-  "keywords": [],
+  "keywords": [
+    "environment variables",
+    "env"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/env",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/env",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "main": "index",
-  "typings": "index",
+  "_type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "node": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./*": {
+      "default": "./lib/*.js",
+      "require": "./lib/*.js",
+      "import": "./lib/*.mjs",
+      "node": "./lib/*.js",
+      "types": "./lib/*.d.ts"
+    }
+  },
   "scripts": {
-    "bootstrap": "lsk run bootstrap",
-    "build": "lsk run build",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "i18": "lsk run i18",
-    "prepublishOnly": "lsk run prepublishOnly",
-    "release": "lsk run release",
-    "release:yes": "lsk run release:yes",
-    "start": "node index.js",
-    "storybook": "lsk run storybook",
-    "test": "lsk run test",
-    "test:watch": "lsk run test:watch",
-    "watch": "lsk run watch"
+    "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
+    "test:watch": "     lsk run test:watch",
+    "release": "        lsk run release"
+  },
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "clean-publish": {
+    "packageManager": "pnpm"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ],
+  "dependencies": {
+    "@lskjs/lodash": "^3.0.0-alpha.3",
+    "@lskjs/tty": "^3.0.0-alpha.3"
   }
 }

@@ -1,39 +1,31 @@
 /* global window */
-declare global {
-  interface Window {
-    env: any;
-    __DEV__: boolean;
-    __STAGE__: boolean;
-  }
-}
-// const safeWindow = typeof window === 'undefined' ? window :
+import { isTTY } from '@lskjs/tty';
 
+// @ts-ignore
+const safeWindow: any = typeof window !== 'undefined' ? window : null;
+
+// @ts-ignore
 export const isServer = typeof window === 'undefined';
 export const isClient = !isServer;
-export const isDev = (isServer ? process.env.NODE_ENV !== 'production' : Boolean(window.__DEV__)) || false;
+export const isDev =
+  (isServer
+    ? process.env.NODE_ENV !== 'production'
+    : Boolean(safeWindow?.__DEV__)) || false;
 export const isProd = !isDev;
 export const isDebug = isDev;
+export { isTTY };
 
 export const stage =
   (isServer
-    ? process.env.STAGE || process.env.__STAGE || process.env.__STAGE__ || (isDev ? process.env.user : null)
-    : (window.env && window.env.stage) || window.__STAGE__) || 'development';
+    ? process.env.STAGE || (isDev ? process.env.user : null)
+    : safeWindow?.env?.stage || safeWindow.__STAGE__) || 'development';
 
 export const version =
   (isServer
     ? process.env.VERSION ||
-      process.env.__VERSION ||
-      process.env.__VERSION__ ||
       process.env.CI_COMMIT_SHORT_SHA ||
       process.env.CI_COMMIT_SHA
-    : window.env && window.env.version) || stage;
-
-export const instance =
-  (isServer
-    ? process.env.INSTANCE || process.env.__INSTANCE || process.env.__INSTANCE__
-    : window.env && window.env.instance) || '1';
-
-export const isLeader = instance === '1';
+    : safeWindow?.env?.version) || stage;
 
 export default {
   isServer,
@@ -43,6 +35,5 @@ export default {
   isDebug,
   stage,
   version,
-  instance,
-  isLeader,
+  isTTY,
 };

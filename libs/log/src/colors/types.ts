@@ -1,5 +1,31 @@
 export type Formatter = (input: string | number | null | undefined) => string;
 
+export enum ColorsAndStyles {
+  'bold',
+  'dim',
+  'italic',
+  'underline',
+  'inverse',
+  'hidden',
+  'strikethrough',
+  'black',
+  'red',
+  'green',
+  'yellow',
+  'blue',
+  'magenta',
+  'cyan',
+  'white',
+  'gray',
+  'bgBlack',
+  'bgRed',
+  'bgGreen',
+  'bgYellow',
+  'bgBlue',
+  'bgMagenta',
+  'bgCyan',
+  'bgWhite',
+}
 export interface Colors {
   isColorSupported: boolean;
   reset: Formatter;

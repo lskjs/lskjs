@@ -10,8 +10,6 @@
   "repository": "https://github.com/lskjs/lskjs/tree/master/libs/utils2",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-
-
   "_type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -39,8 +37,8 @@
     "test:eslint": "    eslint src",
     "release": "        npm run clean && npm run build && npm run test && clean-publish"
   },
-
   "dependencies": {
+    "@lskjs/lodash":  "^3.0.0-alpha.3",
     "fishbird": "^0.19.0"
   },
   "eslintConfig": {

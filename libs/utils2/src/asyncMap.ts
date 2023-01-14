@@ -1,4 +1,4 @@
-import {map as asyncMap} from 'fishbird'
+import { map as asyncMap } from 'fishbird';
 
-export {asyncMap};
+export { asyncMap };
 export default asyncMap;

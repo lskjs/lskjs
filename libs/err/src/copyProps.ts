@@ -1,12 +1,10 @@
-import isFunction from 'lodash/isFunction';
-
-import { IErr } from './IErr.types';
+import { IErr } from './types';
 
 export const copyProps = (errTo: IErr, errFrom: any) => {
   if (typeof errFrom === 'string') return;
   Object.keys(errFrom).forEach((key: any) => {
     const val = errFrom[key];
-    if (isFunction(val)) return;
+    if (typeof val === 'function') return;
     // eslint-disable-next-line no-param-reassign
     errTo[key] = val;
   });

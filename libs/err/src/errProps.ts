@@ -1,9 +1,8 @@
-import isPlainObject from 'lodash/isPlainObject';
-import pick from 'lodash/pick';
+import { isPlainObject, pick } from '@lskjs/lodash';
 
 export const errProps = (
   err: any,
-  fields: string[] = ['name', 'message', 'stack', 'text'],
+  fields: string[] = ['name', 'message', 'stack', 'text']
 ): Record<string, unknown> => {
   if (isPlainObject(err)) return err;
   if (err instanceof Error) {

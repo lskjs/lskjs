@@ -1,10 +1,19 @@
 {
-  "extends": "@lskjs/babel-preset/tsconfig.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": [
-    "node_modules",
-    "build",
-    "release",
-    "scripts"
-  ]
+  "compilerOptions": {
+    "lib": ["esnext"],
+    // "module": "esnext",
+    "module": "commonjs",
+    // "moduleResolution": "NodeNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "target": "ES2021",
+
+    "experimentalDecorators": true,
+    "strict": true,
+    // "forceConsistentCasingInFileNames": true,
+
+    "declaration": true,
+    "sourceMap": true,
+
+  }
 }

@@ -5,6 +5,7 @@ lerna-debug.log
 coverage
 **/.DS_Store
 **/node_modules
+lib
 
 storage
 .env*

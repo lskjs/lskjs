@@ -1,0 +1,18 @@
+{
+  "preset": "ts-jest/presets/default-esm",
+  "testEnvironment": "node",
+  "coverageThreshold": {
+    "global": {
+      "statements": 100
+    }
+  },
+  "transform": {
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        "useESM": true,
+        "isolatedModules": true
+      }
+    ]
+  }
+}

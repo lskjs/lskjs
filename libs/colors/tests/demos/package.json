@@ -1,0 +1,14 @@
+{
+  "name": "demos",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "chalk": "5.2.0",
+    "colors": "1.4.0",
+    "kleur": "4.1.5",
+    "nanocolors": "0.2.13",
+    "picocolors": "1.0.0"
+  }
+}

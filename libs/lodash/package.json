@@ -1,0 +1,242 @@
+{
+  "name": "@lskjs/lodash",
+  "version": "3.0.0-alpha.3",
+  "description": "LSK.js – utils – helpers and functions",
+  "keywords": [],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/utils2",
+  "license": "MIT",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "_type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "node": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./*": {
+      "default": "./lib/*.js",
+      "require": "./lib/*.js",
+      "import": "./lib/*.mjs",
+      "node": "./lib/*.js",
+      "types": "./lib/*.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "            tsup --watch",
+    "clean": "          rm -rf ./lib/* && rm -rf ./coverage && rm -rf ./package",
+    "build": "          tsup",
+    "test": "           npm run test:jest && npm run test:eslint && npm run test:size-limit",
+    "test:watch": "     jest --watch",
+    "test:jest": "      jest --coverage",
+    "test:eslint": "    eslint src",
+    "test:size-limit": "size-limit",
+    "release": "        npm run clean && npm run build && npm run test && clean-publish"
+  },
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config",
+    "rules": {
+      "no-unused-expressions": "off",
+      "eqeqeq": "off",
+      "import/no-mutable-exports": "off",
+      "no-fallthrough": "off",
+      "no-loop-func": "off",
+      "no-new-func": "off",
+      "guard-for-in": "off",
+      "no-cond-assign": "off",
+      "@typescript-eslint/no-use-before-define": "off",
+      "no-continue": "off",
+      "consistent-return": "off",
+      "no-nested-ternary": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "no-sparse-arrays": "off",
+      "no-restricted-syntax": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-shadow": "off",
+      "no-var": "off",
+      "new-cap": "off",
+      "no-self-compare": "off",
+      "vars-on-top": "off",
+      "block-scoped-var": "off",
+      "default-case": "off",
+      "no-labels": "off",
+      "import/no-import-module-exports": "off",
+      "prefer-destructuring": "off",
+      "no-empty": "off",
+      "prefer-spread": "off",
+      "no-multi-assign": "off",
+      "no-param-reassign": "off",
+      "prefer-rest-params": "off",
+      "no-bitwise": "off"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "clean-publish": {
+    "packageManager": "pnpm"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "9kb"
+    },
+    {
+      "path": "lib/constant.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/eq.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/flatten.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/fromPairs.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/get.js",
+      "limit": "3kb"
+    },
+    {
+      "path": "lib/hasIn.js",
+      "limit": "3kb"
+    },
+    {
+      "path": "lib/identity.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isArguments.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isArray.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isArrayLike.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isBuffer.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isClass.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isFunction.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isLength.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isMap.js",
+      "limit": "2kb"
+    },
+    {
+      "path": "lib/isObject.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isObjectLike.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isPlainObject.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isSet.js",
+      "limit": "2kb"
+    },
+    {
+      "path": "lib/isSymbol.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isTypedArray.js",
+      "limit": "2kb"
+    },
+    {
+      "path": "lib/keys.js",
+      "limit": "2kb"
+    },
+    {
+      "path": "lib/keysIn.js",
+      "limit": "2kb"
+    },
+    {
+      "path": "lib/last.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/memoize.js",
+      "limit": "2kb"
+    },
+    {
+      "path": "lib/negate.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/noop.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/omit.js",
+      "limit": "7kb"
+    },
+    {
+      "path": "lib/omitBy.js",
+      "limit": "7kb"
+    },
+    {
+      "path": "lib/pick.js",
+      "limit": "4kb"
+    },
+    {
+      "path": "lib/pickBy.js",
+      "limit": "7kb"
+    },
+    {
+      "path": "lib/property.js",
+      "limit": "3kb"
+    },
+    {
+      "path": "lib/stubArray.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/stubFalse.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/toString.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/uniq.js",
+      "limit": "3kb"
+    },
+    {
+      "path": "lib/uniqBy.js",
+      "limit": "6kb"
+    }
+  ]
+}

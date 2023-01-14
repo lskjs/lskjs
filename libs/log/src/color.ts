@@ -1,15 +1,18 @@
-import colors from './colors';
-import { theme } from './config';
+import { colors, ColorsAndStyles } from './colors';
+import { randomColors, theme } from './config';
+import { ThemeKey } from './types';
 import hashCode from './utils/hashCode';
 
-export function getColors(name: string | null): string[] {
+export function getColors(name?: ThemeKey | null): ColorsAndStyles[] {
   if (!name) return [];
+  if (theme[name]) return theme[name];
   // eslint-disable-next-line no-nested-ternary
-  return theme[name] ? theme[name] : colors ? (colors[name] ? [name] : []) : [];
+  return theme[name] ? theme[name] : [];
+  // return theme[name] ? theme[name] : colors ? (colors[name] ? [name] : []) : [];
 }
 
-export function getHashColors(name: string | number): string[] {
-  return theme.randoms[hashCode(name) % theme.randoms.length] || [];
+export function getHashColors(name: string | number): ColorsAndStyles[] {
+  return randomColors[hashCode(name) % theme.randoms.length] || [];
 }
 
 export function hashColor(name: string | number, str: string): string {
@@ -23,8 +26,13 @@ export function hashColor(name: string | number, str: string): string {
   }, str);
 }
 
-export function color(nameOrNames: string | null | string[], str: string): string {
-  const hashColors = Array.isArray(nameOrNames) ? nameOrNames : getColors(nameOrNames);
+export function color(
+  nameOrNames: string | null | string[],
+  str: string
+): string {
+  const hashColors = Array.isArray(nameOrNames)
+    ? nameOrNames
+    : getColors(nameOrNames);
   return hashColors.reduce((msg, colorName) => {
     const colorFn = colors && colors[colorName] ? colors[colorName] : null;
     // eslint-disable-next-line no-console

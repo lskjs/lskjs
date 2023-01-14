@@ -2,8 +2,15 @@
 
 import { copyProps } from './copyProps';
 import { errMerge } from './errMerge';
-import { IErr } from './IErr.types';
-import { errUnknown, getCode, getJSON, getMessage, getText, isError } from './utils';
+import { IErr } from './types';
+import {
+  errUnknown,
+  getCode,
+  getJSON,
+  getMessage,
+  getText,
+  isError,
+} from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 export const isErr = (err: any): boolean => err instanceof Err;

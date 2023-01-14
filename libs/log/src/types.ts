@@ -1,10 +1,19 @@
-export type LoggerLevelType = 'fatal' | 'error' | 'warn' | 'debug' | 'info' | 'trace' | 'log';
+import { ColorsAndStyles } from "./colors";
+
+export type LoggerLevelType =
+  | 'fatal'
+  | 'error'
+  | 'warn'
+  | 'debug'
+  | 'info'
+  | 'trace'
+  | 'log';
 
 export interface ILoggerProps {
-  prefix?: string | null;
-  ns?: string | null;
-  name?: string | null;
-  level?: string | null;
+  prefix?: string;
+  ns?: string;
+  name?: string;
+  level?: LoggerLevelType;
 }
 export interface ILoggerMessage {
   code?: any;
@@ -57,3 +66,6 @@ export type ILoggerInternalMessage = {
   meta: ILoggerMeta;
   args: any[];
 };
+
+export type ThemeKey = LoggerLevelType | 'randoms';
+export type Theme = Record<ThemeKey, ColorsAndStyles[]>;

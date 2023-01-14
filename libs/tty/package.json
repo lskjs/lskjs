@@ -1,0 +1,54 @@
+{
+  "name": "@lskjs/tty",
+  "version": "3.0.0-alpha.3",
+  "description": "LSK.js – tty – TTY detection for Node.js and browser",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           echo skip",
+    "test:watch": "     lsk run test:watch"
+  },
+  "dependencies": {
+    "tty": "^1.0.1"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": "./lib/client.js",
+      "default": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "node": "./lib/server.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/tty",
+  "keywords": [
+    "tty detecton"
+  ],
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "clean-publish": {
+    "packageManager": "pnpm"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ]
+}

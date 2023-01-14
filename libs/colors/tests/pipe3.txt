@@ -1,0 +1,16 @@
+===> process.on('uncaughtException') <===
+Error: !bulk length
+    at ClickhouseSyncJob._callee6$ (/app/workers/clickhouse_sync/ClickhouseSyncJob.js:363:23)
+    at tryCatch (/app/node_modules/regenerator-runtime/runtime.js:63:40)
+    at Generator.invoke [as _invoke] (/app/node_modules/regenerator-runtime/runtime.js:293:22)
+    at Generator.next (/app/node_modules/regenerator-runtime/runtime.js:118:21)
+    at asyncGeneratorStep (/app/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:24)
+    at _next (/app/node_modules/@babel/runtime/helpers/asyncToGenerator.js:25:9)
+    at /app/node_modules/@babel/runtime/helpers/asyncToGenerator.js:32:7
+    at new Promise (<anonymous>)
+    at ClickhouseSyncJob.<anonymous> (/app/node_modules/@babel/runtime/helpers/asyncToGenerator.js:21:12)
+    at ClickhouseSyncJob.sendBulk (/app/workers/clickhouse_sync/ClickhouseSyncJob.js:444:26)
+    at Timeout._onTimeout (/app/workers/clickhouse_sync/ClickhouseSyncJob.js:271:16)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+^^^^ process.on('uncaughtException') ^^^^

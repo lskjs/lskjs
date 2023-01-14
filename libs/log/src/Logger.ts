@@ -4,47 +4,55 @@ import { isClient, isDev } from '@lskjs/env';
 
 import { levelsPriority } from './config';
 import { prettyFormat } from './pretty/prettyFormat';
-import { ILogger, ILoggerMessage, ILoggerProps, LoggerLevelType } from './types';
+import {
+  ILogger,
+  ILoggerMessage,
+  ILoggerProps,
+  LoggerLevelType,
+} from './types';
 import { env } from './utils/env';
 import { stringify } from './utils/formats';
 import { isLsklogWeb } from './utils/formats/lsklog';
 import { omitNull } from './utils/omitNull';
 
 const LOG_LEVEL = () => env('LOG_LEVEL', '');
-const LOG_FORMAT = () => env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
+const LOG_FORMAT = () =>
+  env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
 // const LOG_DATA = () => !!env('LOG_DATA', 0);
 
 export class Logger implements ILogger {
-  prefix: string | null;
-  ns: string | null;
-  name: string | null;
-  level: string;
-  constructor(...propsArray: ILoggerProps[]) {
-    this.setProps(...propsArray);
+  prefix?: string;
+  ns?: string;
+  name?: string;
+  level!: LoggerLevelType;
+  constructor(props: ILoggerProps = {}) {
+    this.setProps(props);
   }
-  setProps(...propsArray: ILoggerProps[]): void {
-    const fields = ['prefix', 'ns', 'name', 'level'];
-    propsArray.forEach((props) => {
-      Object.keys(props).forEach((key) => {
-        if (!fields.includes(key)) return;
-        this[key] = props[key];
-      });
-    });
+  setProps({ prefix, ns, name, level = 'trace' }: ILoggerProps): void {
+    if (prefix) this.prefix = prefix;
+    if (ns) this.ns = ns;
+    if (name) this.name = name;
+    if (level) {
+      if (!levelsPriority[level]) {
+        throw new Error(`Incorrect level: ${this.level}`);
+      }
+      this.level = level;
+    }
     if (!this.level) this.level = 'trace';
-    if (!levelsPriority[this.level]) throw new Error(`Incorrect level: ${this.level}`);
   }
-  static create(...propsArray: ILoggerProps[]): ILogger {
-    return new this(...propsArray);
+
+  static create(props: ILoggerProps): ILogger {
+    return new this(props);
   }
   createChild(...propsArray: ILoggerProps[]): ILogger {
     const ns = [this.ns, this.name].filter(Boolean).join('.'); // TODO: подумать, а правильно ли соединять ns и name
     // @ts-ignore
     return new this.constructor(this, { colors: null, ns }, ...propsArray);
   }
-  getLevelPriority(level: string): number {
+  getLevelPriority(level: LoggerLevelType): number {
     return levelsPriority[level] || 0;
   }
-  canLog(level: string): boolean {
+  canLog(level: LoggerLevelType): boolean {
     const logLevel = this.getLevelPriority(level);
     const currentLevel = this.getLevelPriority(this.level);
     const globalLevel = this.getLevelPriority(LOG_LEVEL());
