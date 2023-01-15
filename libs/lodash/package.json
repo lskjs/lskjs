@@ -2,15 +2,22 @@
   "name": "@lskjs/lodash",
   "version": "3.0.0-alpha.3",
   "description": "LSK.js – utils – helpers and functions",
-  "keywords": [],
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "build": "          tsup",
+    "clean": "          rm -rf ./lib/* && rm -rf ./coverage && rm -rf ./package",
+    "dev": "            tsup --watch",
+    "release": "        npm run clean && npm run build && npm run test && clean-publish",
+    "test": "           npm run test:jest && npm run test:eslint && npm run test:size-limit",
+    "test:eslint": "    eslint src",
+    "test:jest": "      jest --coverage",
+    "test:size-limit": "size-limit",
+    "test:watch": "     jest --watch"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/utils2",
-  "license": "MIT",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "_type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -29,59 +36,51 @@
       "types": "./lib/*.d.ts"
     }
   },
-  "scripts": {
-    "dev": "            tsup --watch",
-    "clean": "          rm -rf ./lib/* && rm -rf ./coverage && rm -rf ./package",
-    "build": "          tsup",
-    "test": "           npm run test:jest && npm run test:eslint && npm run test:size-limit",
-    "test:watch": "     jest --watch",
-    "test:jest": "      jest --coverage",
-    "test:eslint": "    eslint src",
-    "test:size-limit": "size-limit",
-    "release": "        npm run clean && npm run build && npm run test && clean-publish"
-  },
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config",
-    "rules": {
-      "no-unused-expressions": "off",
-      "eqeqeq": "off",
-      "import/no-mutable-exports": "off",
-      "no-fallthrough": "off",
-      "no-loop-func": "off",
-      "no-new-func": "off",
-      "guard-for-in": "off",
-      "no-cond-assign": "off",
-      "@typescript-eslint/no-use-before-define": "off",
-      "no-continue": "off",
-      "consistent-return": "off",
-      "no-nested-ternary": "off",
-      "@typescript-eslint/no-empty-function": "off",
-      "no-sparse-arrays": "off",
-      "no-restricted-syntax": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "no-shadow": "off",
-      "no-var": "off",
-      "new-cap": "off",
-      "no-self-compare": "off",
-      "vars-on-top": "off",
-      "block-scoped-var": "off",
-      "default-case": "off",
-      "no-labels": "off",
-      "import/no-import-module-exports": "off",
-      "prefer-destructuring": "off",
-      "no-empty": "off",
-      "prefer-spread": "off",
-      "no-multi-assign": "off",
-      "no-param-reassign": "off",
-      "prefer-rest-params": "off",
-      "no-bitwise": "off"
-    }
-  },
   "files": [
     "lib",
     "README.md",
     "LICENCE"
   ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/utils2",
+  "license": "MIT",
+  "keywords": [],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config",
+    "rules": {
+      "block-scoped-var": "off",
+      "consistent-return": "off",
+      "default-case": "off",
+      "eqeqeq": "off",
+      "guard-for-in": "off",
+      "new-cap": "off",
+      "no-bitwise": "off",
+      "no-cond-assign": "off",
+      "no-continue": "off",
+      "no-empty": "off",
+      "no-fallthrough": "off",
+      "no-labels": "off",
+      "no-loop-func": "off",
+      "no-multi-assign": "off",
+      "no-nested-ternary": "off",
+      "no-new-func": "off",
+      "no-param-reassign": "off",
+      "no-restricted-syntax": "off",
+      "no-self-compare": "off",
+      "no-shadow": "off",
+      "no-sparse-arrays": "off",
+      "no-unused-expressions": "off",
+      "no-var": "off",
+      "prefer-destructuring": "off",
+      "prefer-rest-params": "off",
+      "prefer-spread": "off",
+      "vars-on-top": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-use-before-define": "off",
+      "import/no-import-module-exports": "off",
+      "import/no-mutable-exports": "off"
+    }
+  },
   "clean-publish": {
     "packageManager": "pnpm"
   },
@@ -238,5 +237,6 @@
       "path": "lib/uniqBy.js",
       "limit": "6kb"
     }
-  ]
+  ],
+  "_type": "module"
 }

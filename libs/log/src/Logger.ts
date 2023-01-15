@@ -1,8 +1,11 @@
 /* eslint-disable no-nested-ternary */
 // import debug from 'debug';
-import { isClient, isDev } from '@lskjs/env';
+import { omitNull } from '@lskjs/algos';
+import { getEnvVar, isClient, isDev } from '@lskjs/env';
 
 import { levelsPriority } from './config';
+import { stringify } from './pretty/formats';
+import { isLsklogWeb } from './pretty/formats/lsklog';
 import { prettyFormat } from './pretty/prettyFormat';
 import {
   ILogger,
@@ -10,14 +13,10 @@ import {
   ILoggerProps,
   LoggerLevelType,
 } from './types';
-import { env } from './utils/env';
-import { stringify } from './utils/formats';
-import { isLsklogWeb } from './utils/formats/lsklog';
-import { omitNull } from './utils/omitNull';
 
-const LOG_LEVEL = () => env('LOG_LEVEL', '');
+const LOG_LEVEL = () => getEnvVar('LOG_LEVEL', '');
 const LOG_FORMAT = () =>
-  env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
+  getEnvVar('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
 // const LOG_DATA = () => !!env('LOG_DATA', 0);
 
 export class Logger implements ILogger {
@@ -120,12 +119,13 @@ export class Logger implements ILogger {
 
     // if (LOG_DATA()) meta.data = passArgs;
     if (LOG_FORMAT() === 'none') return;
+    const data = omitNull(meta as Record<string, unknown>);
     if (LOG_FORMAT() === 'pretty') {
-      this.log(...prettyFormat(omitNull(meta), ...passArgs));
+      this.log(...prettyFormat(data, ...passArgs));
       return;
     }
     // console.log({ args, data, str, 'LOG_FORMAT()': LOG_FORMAT() });
-    this.log(stringify(LOG_FORMAT(), omitNull(meta), ...passArgs));
+    this.log(stringify(LOG_FORMAT(), data, ...passArgs));
   }
 }
 

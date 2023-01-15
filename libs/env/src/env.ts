@@ -1,6 +1,8 @@
 /* global window */
 import { isTTY } from '@lskjs/tty';
 
+// import { getEnvVar } from './getEnvVar';
+
 // @ts-ignore
 const safeWindow: any = typeof window !== 'undefined' ? window : null;
 
@@ -14,6 +16,8 @@ export const isDev =
 export const isProd = !isDev;
 export const isDebug = isDev;
 export { isTTY };
+
+// getEnvVar('STAGE', (isDev ? process.env.user : null))
 
 export const stage =
   (isServer

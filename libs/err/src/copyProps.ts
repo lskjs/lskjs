@@ -5,6 +5,7 @@ export const copyProps = (errTo: IErr, errFrom: any) => {
   Object.keys(errFrom).forEach((key: any) => {
     const val = errFrom[key];
     if (typeof val === 'function') return;
+    // @ts-ignore
     // eslint-disable-next-line no-param-reassign
     errTo[key] = val;
   });

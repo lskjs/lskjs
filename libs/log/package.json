@@ -2,74 +2,18 @@
   "name": "@lskjs/log",
   "version": "3.0.0-alpha.3",
   "description": "Yet another logger whitch combines the best features of debug, bunyan, logfmt/logrus, morgan/winston",
-  "keywords": [   
-     "logger",
-    "log",
-    "debug",
-    "bunyan",
-    "morgan",
-    "winston",
-    "logfmt",
-    "logrus"
-  ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/log",
-  "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
-  "contributors": [
-    "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
-  ],
-  "_type": "module",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts", "bin": {
-    "lsklog": "./bin/cli.js"
-  },
-  "exports": {
-    ".": {
-      "default": "./lib/index.js",
-      "require": "./lib/index.js",
-      "import": "./lib/index.mjs",
-      "node": "./lib/index.js",
-      "types": "./lib/index.d.ts"
-    },
-    "./*": {
-      "default": "./lib/*.js",
-      "require": "./lib/*.js",
-      "import": "./lib/*.mjs",
-      "node": "./lib/*.js",
-      "types": "./lib/*.d.ts"
-    }
-  },
   "scripts": {
-    "dev": "            lsk run dev",
     "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
     "test": "           lsk run test",
-    "test:watch": "     lsk run test:watch",
-    "release": "        lsk run release"
+    "test:watch": "     lsk run test:watch"
   },
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
-  "files": [
-    "lib",
-    "README.md",
-    "LICENCE"
-  ],
-  "clean-publish": {
-    "packageManager": "pnpm"
-  },
-  "size-limit": [
-    {
-      "path": "lib/index.js",
-      "limit": "1kb"
-    }
-  ],
   "dependencies": {
-    "@lskjs/debug-level": "0.3.2",
-    "@lskjs/env": "2.85.1",
+    "@lskjs/algos": "workspace:3.0.0-alpha.3",
+    "@lskjs/colors": "^3.0.0-alpha.3",
+    "@lskjs/env": "^3.0.0-alpha.3",
     "@lskjs/err": "2.85.1",
     "fast-safe-stringify": "2.0.8",
     "pretty-bytes": "5.6.0",
@@ -90,5 +34,63 @@
   },
   "optionalDependencies": {
     "logfmt": "1.3.2"
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "bin": {
+    "lsklog": "./bin/cli.js"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "node": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./*": {
+      "default": "./lib/*.js",
+      "require": "./lib/*.js",
+      "import": "./lib/*.mjs",
+      "node": "./lib/*.js",
+      "types": "./lib/*.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/log",
+  "license": "MIT",
+  "keywords": [
+    "logger",
+    "log",
+    "debug",
+    "bunyan",
+    "morgan",
+    "winston",
+    "logfmt",
+    "logrus"
+  ],
+  "contributors": [
+    "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "clean-publish": {
+    "packageManager": "pnpm"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ],
+  "_type": "module"
 }

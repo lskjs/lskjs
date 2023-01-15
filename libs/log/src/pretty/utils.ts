@@ -1,22 +1,30 @@
 /* eslint-disable no-nested-ternary */
+import { Color, colorize } from '@lskjs/colors';
+import { getEnvVar } from '@lskjs/env';
 import _prettyBytes from 'pretty-bytes';
 import _prettyTime from 'pretty-time';
 
-import { color, hashColor } from '../color';
-import { env } from '../utils/env';
-import { isLsklogWebFinal } from '../utils/formats/lsklog';
+import { contentColors } from '../config';
+import { themeize, themeizeRandom } from '../themeize';
+import { LoggerLevelType, ThemeKey } from '../types';
 import { hashCode } from '../utils/hashCode';
-import { leftPad } from '../utils/leftPad';
+import { isLsklogWebFinal } from './formats/lsklog';
 
-const LOG_VIEW = env('LOG_VIEW', 'short');
+const LOG_VIEW = getEnvVar('LOG_VIEW', 'short');
+
+const leftPad = (str: string, length: number) => String(str).padStart(length);
 
 let prettyPathLength = 20;
 export const prettyPath = (url: string, defaultUrlPad = 0) => {
-  prettyPathLength = Math.max((url && url.length) || 0, prettyPathLength, defaultUrlPad);
+  prettyPathLength = Math.max(
+    (url && url.length) || 0,
+    prettyPathLength,
+    defaultUrlPad
+  );
   return leftPad(url, -prettyPathLength);
 };
 
-export const getStatusLevel = (status: number) =>
+export const getStatusLevel = (status: number): LoggerLevelType | null =>
   status >= 500
     ? 'error'
     : status >= 400
@@ -27,78 +35,75 @@ export const getStatusLevel = (status: number) =>
       //   ? null // eslint-disable-line
       // : 'log';
       null;
+
 export const prettyStatus = (status: number) => {
   let level = getStatusLevel(status);
   if (!level) level = status !== 200 ? 'log' : null;
-  return color(level, leftPad(status, 3));
+  return themeize(leftPad(String(status), 3), level);
 };
+
 export const prettyReqId = (reqId: number) => leftPad(`#${reqId}`, 3);
+
 export const prettyMethod = (method: string) => {
   // eslint-disable-next-line no-nested-ternary
-  const colorName = method === 'REMOVE' ? 'error' : method === 'WS' ? 'debug' : null;
-  return color(colorName, leftPad(method, 4));
+  const themeKey: LoggerLevelType | null =
+    method === 'REMOVE' ? 'error' : method === 'WS' ? 'debug' : null;
+  return themeize(leftPad(method, 4), themeKey);
 };
 
 export const prettyTime = (ms: number, format = ''): string | null => {
   if (!Number.isFinite(ms)) return null;
 
-  const colorName = ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
+  const themeKey: ThemeKey | null =
+    ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
   const formats = ['m', 's', 'ms'];
   const f = formats.includes(format) ? format : '';
 
   const ns = Math.floor(Math.abs(ms) * 10 ** 6);
   const res = _prettyTime(ns, f);
-  return color(colorName, leftPad(res, 5));
+  return themeize(leftPad(res, 5), themeKey);
 };
 
 export const prettySize = (bytes: number, seperator = ''): string | null => {
   if (!Number.isFinite(bytes)) return null;
 
-  const [value, size] = _prettyBytes(bytes, { maximumFractionDigits: 1 }).split(' ');
+  const [value, size] = _prettyBytes(bytes, { maximumFractionDigits: 1 }).split(
+    ' '
+  );
 
   return `${value}${seperator}${size}`;
 };
 
 export const prettyNs = (names: string[], mainName?: string | null): string => {
   // TODO: придумать когда name не очень нужен
-  const a = 123; //eslint-disable-line
-  return [...names, mainName]
-    .filter(Boolean)
-    .map((name: string) => hashColor(name, name))
-    .join(':');
+  const finalNames: string[] = [...names, mainName].filter(Boolean).map(String);
+  return finalNames.map((name: any) => themeizeRandom(name, name)).join(':');
 };
 
 export function prettyMarker(key: string | number): string {
   // https://www.alt-codes.net/
   const markers = ['○', '•', '♠', '♠', '♦', '♥', '☼', '♂', '♀', '♪', '§'];
   const marker = markers[hashCode(key) % markers.length];
-  return hashColor(key, marker);
+  return themeizeRandom(String(key), marker);
 }
 
-export const prettyLevel = (level = ''): string => {
-  let logLevelStr = LOG_VIEW === 'short' ? (level[0] || '').toLowerCase() : leftPad(level, 5);
-  logLevelStr = `[${logLevelStr}]`;
-  return color(level, logLevelStr);
+export const prettyLevel = (level: LoggerLevelType): string => {
+  let str =
+    LOG_VIEW === 'short' ? (level[0] || '').toLowerCase() : leftPad(level, 5);
+  str = `[${str}]`;
+  return themeize(str, level);
 };
 
 const highlightRegexp = /\[[^"\]]+]/gm;
 export const prettyContent = (...args: any[]): any[] => {
-  // console.log('args.length', args.length);
   const colored: any[] = [];
   args.forEach((arg) => {
-    // if (typeof arg === 'string') {
-    //   console.log({ arg }, typeof arg === 'string', arg.startsWith('['), arg.endsWith(']'));
-    // }
     if (typeof arg === 'string') {
-      const colors = [['bold', 'white'], ['bold', 'cyan'], ['bold', 'green'], ['white']];
-
       let i = 0;
       colored.push(
         arg.replace(highlightRegexp, (match) => {  //eslint-disable-line
-          // console.log({ match });
-          // eslint-disable-next-line no-plusplus
-          return color(colors[i++ % colors.length], match);
-        }),
+          return colorize(match, contentColors[i++ % contentColors.length]);
+        })
       );
     } else {
       colored.push(arg);
@@ -108,8 +113,9 @@ export const prettyContent = (...args: any[]): any[] => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getUrlLevel = (req: any): string =>
+export const getUrlLevel = (req: any): LoggerLevelType =>
   getStatusLevel(req.status) || isLsklogWebFinal(req) ? 'debug' : 'trace';
+
 export const prettyUrl = (req: any): string => {
   const isFinalUrl = isLsklogWebFinal(req);
   const level = getUrlLevel(req); // , { level }: { level?: string | null } = {}

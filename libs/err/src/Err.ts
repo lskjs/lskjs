@@ -40,6 +40,7 @@ export class Err extends Error implements IErr {
         // console.log('this.stack', this.stack);
         // console.log('err.stack', err.stack);
       } else {
+        // @ts-ignore
         this[key] = val;
       }
     });

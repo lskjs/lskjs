@@ -2,7 +2,9 @@
 /* eslint-disable no-constant-condition */
 import { Mutex as BaseMutex } from 'async-mutex';
 
-const delay = (duration: number) => new Promise((resolve: any) => setTimeout(() => resolve(), duration));
+const delay = (duration: number) =>
+  // eslint-disable-next-line no-promise-executor-return
+  new Promise((resolve: any) => setTimeout(resolve, duration));
 
 export class Mutex extends BaseMutex {
   async isAsyncLocked(timeout = 1000, interval = 100) {

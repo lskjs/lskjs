@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
+import { tryJSONparse } from '@lskjs/env';
+
 import { ILogger } from '../types';
-import { parse } from '../utils/formats';
-import { tryJSONparse } from '../utils/tryJSONparse';
 import { tryLogfmtParse } from '../utils/tryLogfmtParse';
+import { parse } from './formats';
 import { prettyFormat } from './prettyFormat';
 
 export const prettyRawLog = (log: ILogger, raw: any): void => {

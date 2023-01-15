@@ -13,6 +13,10 @@
   "dependencies": {
     "tty": "^1.0.1"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -31,16 +35,12 @@
     "LICENCE"
   ],
   "repository": "https://github.com/lskjs/lskjs/tree/master/libs/tty",
+  "license": "MIT",
   "keywords": [
     "tty detecton"
   ],
-  "license": "MIT",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   },
   "size-limit": [
     {

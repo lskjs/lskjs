@@ -1,9 +1,9 @@
-import { isClient, isDev } from '@lskjs/env';
-
-import { env } from './env';
+/* eslint-disable no-console */
+import { getEnvVar, isClient, isDev } from '@lskjs/env';
 
 // const LOG_LEVEL = () => env('LOG_LEVEL', '');
-const LOG_FORMAT = () => env('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
+const LOG_FORMAT = () =>
+  getEnvVar('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
 
 export const safeLog = (ctx: any, level = 'error', ...args: any[]) => {
   if (ctx.log && ctx.log[level]) {
@@ -12,16 +12,18 @@ export const safeLog = (ctx: any, level = 'error', ...args: any[]) => {
     const logFormat = LOG_FORMAT();
     if (logFormat === 'none') return;
     if (logFormat === 'lsk') {
-      // eslint-disable-next-line no-console
       console.error(
         {
           level,
           name: ctx.name || ctx.constructor.name,
         },
-        ...args,
+        ...args
       );
     } else {
-      console.error(`[${level[0]}] <${ctx.name || ctx.constructor.name}>`, ...args); // eslint-disable-line no-console
+      console.error(
+        `[${level[0]}] <${ctx.name || ctx.constructor.name}>`,
+        ...args
+      ); // eslint-disable-line no-console
     }
   }
 };

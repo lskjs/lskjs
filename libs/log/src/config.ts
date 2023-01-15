@@ -1,6 +1,5 @@
-// import { isServer } from '@lskjs/env';
+import { Color } from '@lskjs/colors';
 
-import { ColorsAndStyles } from './colors';
 import { Theme } from './types';
 
 export const levelsPriority = {
@@ -15,10 +14,17 @@ export const levelsPriority = {
   trace: 10,
 };
 
-const qwe: ColorsAndStyles = 'red';
-console.log(qwe);
+export const theme: Theme = {
+  fatal: ['bgRed'],
+  error: ['bold', 'bgRed'],
+  warn: ['bgYellow'],
+  debug: ['bold', 'cyan'],
+  info: ['bold', 'green'],
+  trace: ['gray'],
+  log: ['bgWhite'],
+};
 
-export const randomColors: Array<ColorsAndStyles[]> = [
+export const randomColors: Color[][] = [
   ['red'],
   ['green'],
   ['yellow'],
@@ -39,21 +45,9 @@ export const randomColors: Array<ColorsAndStyles[]> = [
   // ['dim', 'cyan'],
 ];
 
-export const theme: Theme = {
-  // fatal: 'inverse',
-
-  fatal: ['bgRed'],
-  error: ['bold', 'bgRed'],
-  warn: ['bgYellow'],
-  debug: ['bold', 'cyan'],
-  info: ['bold', 'green'],
-  trace: ['gray'],
-  log: ['bgWhite'],
-  // fatal: !isServer ? 'bgRed' : 'background-color: red; color: #fff;',
-  // error: !isServer ? 'bgBrightRed' : 'background-color: red; color: #fff;',
-  // warn: !isServer ? 'bgYellow' : 'background-color: red; color: #fff;',
-  // debug: !isServer ? 'brightCyan' : 'background-color: red; color: #fff;',
-  // info: !isServer ? 'brightGreen' : 'background-color: red; color: #fff;',
-  // trace: !isServer ? 'gray' : 'background-color: red; color: #fff;', // 'white'
-  // log: !isServer ? 'bgWhite' : 'background-color: red; color: #fff;', // 'white'
-};
+export const contentColors: Color[][] = [
+  ['bold', 'white'],
+  ['bold', 'cyan'],
+  ['bold', 'green'],
+  ['white'],
+];

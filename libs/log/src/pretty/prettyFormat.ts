@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 
 import { ILoggerMeta } from '../types';
-import { isLsklogWeb } from '../utils/formats/lsklog';
+import { isLsklogWeb } from './formats/lsklog';
 import { prettyContent, prettyLevel, prettyNs, prettyUrl } from './utils';
 
 export function countInRow(args: any[], filter: any): number {

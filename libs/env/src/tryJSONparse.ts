@@ -1,4 +1,4 @@
-export default (str: any, defaultValue = str) => {
+export const tryJSONparse = (str: any, defaultValue = str) => {
   try {
     if (typeof str !== 'string') return str;
     return JSON.parse(str);
@@ -6,3 +6,5 @@ export default (str: any, defaultValue = str) => {
     return defaultValue;
   }
 };
+
+export default tryJSONparse;

@@ -11,7 +11,7 @@ export const hashCode = (s: string | number): number => {
       .reduce((a, b) => {
         const c = (a << 5) - a + b.charCodeAt(0);
         return c & c;
-      }, 0) - 48,
+      }, 0) - 48
   );
 };
 

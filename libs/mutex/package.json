@@ -1,35 +1,60 @@
 {
   "name": "@lskjs/mutex",
-  "version": "2.85.1",
-  "description": "Async mutex",
+  "version": "3.0.0-alpha.3",
+  "description": "LSK.js – mutex – async mutex",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           lsk run test",
+    "test:watch": "     lsk run test:watch"
+  },
+  "dependencies": {
+    "async-mutex": "0.2.6"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "node": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./*": {
+      "default": "./lib/*.js",
+      "require": "./lib/*.js",
+      "import": "./lib/*.mjs",
+      "node": "./lib/*.js",
+      "types": "./lib/*.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/mutex",
+  "license": "MIT",
   "keywords": [
     "mutex",
     "semaphore",
     "async-mutex"
   ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
   },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/mutex",
-  "license": "MIT",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "scripts": {
-    "bootstrap": "lsk run bootstrap",
-    "build": "lsk run build",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "i18": "lsk run i18",
-    "prepublishOnly": "lsk run prepublishOnly",
-    "release": "lsk run release",
-    "release:yes": "lsk run release:yes",
-    "start": "node index.js",
-    "storybook": "lsk run storybook",
-    "test": "lsk run test",
-    "test:watch": "lsk run test:watch",
-    "watch": "lsk run watch"
-  },
-  "dependencies": {
-    "async-mutex": "0.2.6"
-  }
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "/////////": "////////////////////",
+      "limit": "5kb"
+    }
+  ]
 }

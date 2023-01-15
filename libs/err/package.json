@@ -2,24 +2,21 @@
   "name": "@lskjs/err",
   "version": "3.0.0-alpha.3",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
-  "keywords": [
-    "errors wrapper",
-    "errors",
-    "error"
-  ],
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           lsk run test",
+    "test:watch": "     lsk run test:watch"
+  },
+  "dependencies": {
+    "@lskjs/lodash": "^3.0.0-alpha.3"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/err",
-  "license": "MIT",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "contributors": [
-    "Huafu Gandon <huafu.gandon@gmail.com> (https://github.com/huafu)",
-    "Anh Pham <anhpnnd@gmail.com> (https://github.com/ahnpnl)",
-    "Gustav Wengel <gustavwengel@gmail.com> (https://github.com/GeeWee)"
-  ],
-  "_type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -38,21 +35,26 @@
       "types": "./lib/*.d.ts"
     }
   },
-  "scripts": {
-    "dev": "            lsk run dev",
-    "build": "          lsk run build",
-    "test": "           lsk run test",
-    "test:watch": "     lsk run test:watch",
-    "release": "        lsk run release"
-  },
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
   "files": [
     "lib",
     "README.md",
     "LICENCE"
   ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/err",
+  "license": "MIT",
+  "keywords": [
+    "errors wrapper",
+    "errors",
+    "error"
+  ],
+  "contributors": [
+    "Huafu Gandon <huafu.gandon@gmail.com> (https://github.com/huafu)",
+    "Anh Pham <anhpnnd@gmail.com> (https://github.com/ahnpnl)",
+    "Gustav Wengel <gustavwengel@gmail.com> (https://github.com/GeeWee)"
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
   "clean-publish": {
     "packageManager": "pnpm"
   },
@@ -62,7 +64,5 @@
       "limit": "1kb"
     }
   ],
-  "dependencies": {
-    "@lskjs/lodash": "^3.0.0-alpha.3"
-  }
+  "_type": "module"
 }

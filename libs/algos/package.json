@@ -1,0 +1,53 @@
+{
+  "name": "@lskjs/algos",
+  "version": "3.0.0-alpha.4",
+  "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "scripts": {
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           lsk run test",
+    "test:watch": "     lsk run test:watch"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "node": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./*": {
+      "default": "./lib/*.js",
+      "require": "./lib/*.js",
+      "import": "./lib/*.mjs",
+      "node": "./lib/*.js",
+      "types": "./lib/*.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/algos",
+  "license": "MIT",
+  "keywords": [],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ],
+  "_type": "module"
+}

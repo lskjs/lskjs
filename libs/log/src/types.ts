@@ -1,4 +1,4 @@
-import { ColorsAndStyles } from "./colors";
+import { Color } from '@lskjs/colors';
 
 export type LoggerLevelType =
   | 'fatal'
@@ -38,7 +38,7 @@ export interface ILogger extends ILoggerProps {
 export type ILoggerMeta = {
   ns?: string;
   name?: string;
-  level?: string;
+  level?: LoggerLevelType;
   time?: Date;
 
   method?: string;
@@ -67,5 +67,5 @@ export type ILoggerInternalMessage = {
   args: any[];
 };
 
-export type ThemeKey = LoggerLevelType | 'randoms';
-export type Theme = Record<ThemeKey, ColorsAndStyles[]>;
+export type ThemeKey = LoggerLevelType;
+export type Theme = Record<ThemeKey, Color[]>;

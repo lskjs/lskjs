@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/env",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "description": "LSK.js – env – Scripts for environment detecton",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -13,6 +13,9 @@
   "dependencies": {
     "@lskjs/lodash": "^3.0.0-alpha.3",
     "@lskjs/tty": "^3.0.0-alpha.3"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -38,16 +41,13 @@
     "LICENCE"
   ],
   "repository": "https://github.com/lskjs/lskjs/tree/master/libs/env",
+  "license": "MIT",
   "keywords": [
     "environment variables",
     "env"
   ],
-  "license": "MIT",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "size-limit": [
     {
