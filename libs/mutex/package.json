@@ -47,6 +47,7 @@
     "semaphore",
     "async-mutex"
   ],
+  "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

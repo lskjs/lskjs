@@ -40,6 +40,7 @@
   "repository": "https://github.com/lskjs/lskjs/tree/master/libs/algos",
   "license": "MIT",
   "keywords": [],
+  "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

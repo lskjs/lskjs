@@ -39,6 +39,7 @@
   "keywords": [
     "tty detecton"
   ],
+  "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

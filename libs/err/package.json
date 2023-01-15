@@ -10,6 +10,9 @@
     "test": "           lsk run test",
     "test:watch": "     lsk run test:watch"
   },
+  "dependencies": {
+    "@lskjs/algos": "^3.0.0-alpha.7"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -44,6 +47,7 @@
     "errors",
     "error"
   ],
+  "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
@@ -52,8 +56,5 @@
       "path": "lib/index.js",
       "limit": "4kb"
     }
-  ],
-  "dependencies": {
-    "@lskjs/algos": "^3.0.0-alpha.7"
-  }
+  ]
 }

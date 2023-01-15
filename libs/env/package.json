@@ -45,6 +45,7 @@
     "environment variables",
     "env"
   ],
+  "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

@@ -13,6 +13,10 @@
   "dependencies": {
     "@lskjs/env": "3.0.0-alpha.4"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -37,20 +41,16 @@
     "LICENCE"
   ],
   "repository": "https://github.com/lskjs/lskjs/tree/master/libs/log",
+  "license": "MIT",
   "keywords": [
     "colors"
   ],
-  "license": "MIT",
-  "//": "//",
+  "//": "////",
   "contributors": [
     "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
   ],
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   },
   "clean-publish": {
     "packageManager": "pnpm"
