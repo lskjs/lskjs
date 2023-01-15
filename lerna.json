@@ -8,6 +8,10 @@
   "useWorkspaces": true,
   "command": {
     "publish": {
+      "allowBranch": [
+        "master",
+        "beta"
+      ],
       "conventionalCommits": true,
       "conventionalPrerelease": true,
       "ignoreChanges": [
@@ -15,7 +19,7 @@
         "ignored-file",
         "*.md"
       ],
-      "message": "chore(release): 🎉 publish v%s"
+      "message": "chore(release): 🎉 publish %s"
     }
   },
   "old": {

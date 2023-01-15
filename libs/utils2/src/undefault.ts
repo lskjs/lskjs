@@ -5,3 +5,4 @@ export const undefault = async (moduleOrPromise: any): Promise<any> => {
 };
 
 export default undefault;
+
