@@ -10,7 +10,8 @@
     "release": "        lerna publish",
     "test": "           pnpm -r                      test",
     "test:packages": "  pnpm --filter './packages/*' test",
-    "test:watch": "     pnpm -r                      test:watch"
+    "test:watch": "     pnpm -r                      test:watch",
+    "test:size-limit": "NODE_ENV=production pnpm build && pnpm --workspace-concurrency 1 -r exec size-limit"
   },
   "dependencies": {
     "@lskjs/cli": "3.0.0-alpha.4",

@@ -11,9 +11,9 @@
     "test:watch": "     lsk run test:watch"
   },
   "dependencies": {
-    "@lskjs/algos": "3.0.0-alpha.4",
-    "@lskjs/colors": "workspace:3.0.0-alpha.3",
-    "@lskjs/env": "3.0.0-alpha.4",
+    "@lskjs/algos": "^3.0.0-alpha.4",
+    "@lskjs/colors": "^3.0.0-alpha.3",
+    "@lskjs/env": "^3.0.0-alpha.4",
     "@lskjs/err": "2.85.1",
     "fast-safe-stringify": "2.1.1",
     "pretty-bytes": "5.6.0",

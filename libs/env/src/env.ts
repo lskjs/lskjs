@@ -31,6 +31,21 @@ export const version =
       process.env.CI_COMMIT_SHA
     : safeWindow?.env?.version) || stage;
 
+const env = isServer ? process.env : {};
+const isCI =
+  isServer &&
+  env.CI !== 'false' &&
+  !!(
+    (
+      env.BUILD_ID || // Jenkins, Cloudbees
+      env.BUILD_NUMBER || // Jenkins, TeamCity
+      env.CI || // Travis CI, CircleCI, Cirrus CI, Gitlab CI, Appveyor, CodeShip, dsari
+      env.CI_APP_ID || // Appflow
+      env.CI_NAME || // Codeship and others
+      env.RUN_ID
+    ) // TaskCluster, dsari
+  );
+
 export default {
   isServer,
   isClient,
@@ -40,4 +55,5 @@ export default {
   stage,
   version,
   isTTY,
+  isCI,
 };

@@ -1,4 +1,6 @@
-import { omit, pick, uniq } from '@lskjs/lodash';
+import { omit, pick } from '@lskjs/algos';
+
+const uniq = (arr: any[]) => Array.from(new Set(arr));
 
 export const errUnknown = 'err_unknown';
 
@@ -33,6 +35,7 @@ export const getJSON = (
   } else {
     data = {
       ...data,
+      // @ts-ignore
       ...omit(pick(err, Object.getOwnPropertyNames(err)), ['__err']),
     };
   }

@@ -1,4 +1,8 @@
-import { isPlainObject, pick } from '@lskjs/lodash';
+import { isPlainObject, pick } from '@lskjs/algos';
+
+export const isLskError = (err: any) => err && err.__err;
+export const getLskErrorProps = (err: any) =>
+  pick(err, Object.getOwnPropertyNames(err));
 
 export const errProps = (
   err: any,
@@ -6,7 +10,9 @@ export const errProps = (
 ): Record<string, unknown> => {
   if (isPlainObject(err)) return err;
   if (err instanceof Error) {
-    if ((err as any).__err) return pick(err, Object.getOwnPropertyNames(err));
+    if (isLskError(err)) return getLskErrorProps(err);
+    // TODO: проверить что все норм работает
+    // @ts-ignore
     return pick(err, fields);
   }
   return {};

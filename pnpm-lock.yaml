@@ -47,24 +47,24 @@ importers:
 
   libs/env:
     specifiers:
-      '@lskjs/tty': workspace:3.0.0-alpha.3
+      '@lskjs/tty': ^3.0.0-alpha.3
     dependencies:
       '@lskjs/tty': link:../tty
 
   libs/err:
     specifiers:
-      '@lskjs/lodash': workspace:3.0.0-alpha.3
+      '@lskjs/algos': ^3.0.0-alpha.5
     dependencies:
-      '@lskjs/lodash': link:../lodash
+      '@lskjs/algos': link:../algos
 
   libs/lodash:
     specifiers: {}
 
   libs/log:
     specifiers:
-      '@lskjs/algos': 3.0.0-alpha.4
-      '@lskjs/colors': workspace:3.0.0-alpha.3
-      '@lskjs/env': 3.0.0-alpha.4
+      '@lskjs/algos': ^3.0.0-alpha.4
+      '@lskjs/colors': ^3.0.0-alpha.3
+      '@lskjs/env': ^3.0.0-alpha.4
       '@lskjs/err': 2.85.1
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
@@ -77,7 +77,7 @@ importers:
       split: 1.0.1
       through: 2.3.8
     dependencies:
-      '@lskjs/algos': 3.0.0-alpha.4
+      '@lskjs/algos': link:../algos
       '@lskjs/colors': link:../colors
       '@lskjs/env': 3.0.0-alpha.4
       '@lskjs/err': 2.85.1
@@ -108,7 +108,7 @@ importers:
 
   libs/utils2:
     specifiers:
-      '@lskjs/lodash': workspace:3.0.0-alpha.3
+      '@lskjs/lodash': ^3.0.0-alpha.3
       fishbird: ^0.19.0
     dependencies:
       '@lskjs/lodash': link:../lodash
@@ -1901,10 +1901,6 @@ packages:
     dependencies:
       npmlog: 6.0.2
       write-file-atomic: 4.0.2
-    dev: false
-
-  /@lskjs/algos/3.0.0-alpha.4:
-    resolution: {integrity: sha512-r12clsDzbKqp8TfeN5pq4FuyeSvAijlf2U1NubFGXbvlrTassTa1J593O0byXZ00ohZAqHkEm/kltHClS2BSqQ==}
     dev: false
 
   /@lskjs/cli-scripts/3.0.0-alpha.4:

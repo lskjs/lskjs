@@ -10,9 +10,6 @@
     "test": "           lsk run test",
     "test:watch": "     lsk run test:watch"
   },
-  "dependencies": {
-    "@lskjs/lodash": "workspace:3.0.0-alpha.3"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -53,7 +50,10 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "10kb"
+      "limit": "4kb"
     }
-  ]
+  ],
+  "dependencies": {
+    "@lskjs/algos": "^3.0.0-alpha.5"
+  }
 }

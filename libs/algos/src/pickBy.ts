@@ -6,6 +6,6 @@ export const pickBy = <T>(object: ObjectLike<T>, filter: ObjectFilter<T>) =>
     .reduce((acc, key) => {
       acc[key] = object[key];
       return acc;
-    }, {} as Record<string, T>);
+    }, {} as ObjectLike<T>);
 
 export default pickBy;

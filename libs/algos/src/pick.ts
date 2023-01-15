@@ -1,21 +1,16 @@
-import { PickOmit } from './types';
+import { ObjectLike } from './types';
 
-/**
- * NOTE: copied from @lskjs utils
- */
-
-export const pick: PickOmit = (obj, keys) => {
-  const ret = {} as {
-    [K in keyof typeof obj]: (typeof obj)[K];
-  };
-  let key: keyof typeof obj;
-  // eslint-disable-next-line no-restricted-syntax
-  for (key in obj) {
-    if (keys.includes(key)) {
-      ret[key] = obj[key];
+export const pick = <T>(object: ObjectLike<T>, fields: string[]) =>
+  // console.log('[object]', object);
+  // console.log('[fields]', fields);
+  // console.log('[object.message]', object.message);
+  // console.log('[object.code]', object.code);
+  // console.log('[JSON object]', JSON.stringify(object));
+  fields.reduce((acc, key) => {
+    if (object[key] !== undefined) {
+      acc[key] = object[key];
     }
-  }
-  return ret;
-};
+    return acc;
+  }, {} as ObjectLike<T>);
 
 export default pick;
