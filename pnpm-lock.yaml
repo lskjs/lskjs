@@ -47,13 +47,13 @@ importers:
 
   libs/env:
     specifiers:
-      '@lskjs/tty': ^3.0.0-alpha.3
+      '@lskjs/tty': ^3.0.0-alpha.7
     dependencies:
       '@lskjs/tty': link:../tty
 
   libs/err:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.5
+      '@lskjs/algos': ^3.0.0-alpha.7
     dependencies:
       '@lskjs/algos': link:../algos
 
@@ -62,9 +62,9 @@ importers:
 
   libs/log:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.4
-      '@lskjs/colors': ^3.0.0-alpha.3
-      '@lskjs/env': ^3.0.0-alpha.4
+      '@lskjs/algos': ^3.0.0-alpha.7
+      '@lskjs/colors': ^3.0.0-alpha.7
+      '@lskjs/env': ^3.0.0-alpha.7
       '@lskjs/err': 2.85.1
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
@@ -79,7 +79,7 @@ importers:
     dependencies:
       '@lskjs/algos': link:../algos
       '@lskjs/colors': link:../colors
-      '@lskjs/env': 3.0.0-alpha.4
+      '@lskjs/env': link:../env
       '@lskjs/err': 2.85.1
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
@@ -108,7 +108,7 @@ importers:
 
   libs/utils2:
     specifiers:
-      '@lskjs/lodash': ^3.0.0-alpha.3
+      '@lskjs/lodash': ^3.0.0-alpha.7
       fishbird: ^0.19.0
     dependencies:
       '@lskjs/lodash': link:../lodash

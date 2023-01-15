@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.7](https://github.com/lskjs/lskjs/compare/v2.87.1...v3.0.0-alpha.7) (2023-01-15)
+
+
+### Bug Fixes
+
+* chore: start to migration to v3 ([f00c45f](https://github.com/lskjs/lskjs/commit/f00c45f876dc65ad3cb887d2794761d8eeaa5837))
+
+
+### Features
+
+* **stringify:** separate getspreadsheet and stringify ([faadf8b](https://github.com/lskjs/lskjs/commit/faadf8b273c146427db08d34461eba9f7e408e6b))
+
+
+
+
+
 ## [2.87.1](https://github.com/lskjs/lskjs/compare/v2.87.0...v2.87.1) (2022-12-20)
 
 

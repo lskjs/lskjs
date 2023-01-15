@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.7",
   "packages": [
     "packages/*",
     "packages/cli-scripts/files"
@@ -18,7 +18,7 @@
       "message": "chore(release): 🎉 publish v%s"
     }
   },
-  "old":   {
+  "old": {
     "version": "2.87.1",
     "packages": [
       "packages/*"
@@ -126,4 +126,3 @@
     }
   }
 }
-
