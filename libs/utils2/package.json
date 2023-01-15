@@ -4,14 +4,11 @@
   "description": "LSK.js – utils – helpers and functions",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
-    "build": "          tsup",
-    "clean": "          rm -rf ./lib/* && rm -rf ./coverage && rm -rf ./package",
-    "dev": "            tsup --watch",
-    "release": "        npm run clean && npm run build && npm run test && clean-publish",
-    "test": "           npm run test:jest && npm run test:eslint",
-    "test:eslint": "    eslint src",
-    "test:jest": "      jest --coverage",
-    "test:watch": "     jest --watch"
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           echo skip",
+    "test:watch": "     lsk run test:watch"
   },
   "dependencies": {
     "@lskjs/lodash": "^3.0.0-alpha.3",

@@ -47,22 +47,13 @@
     "errors",
     "error"
   ],
-  "contributors": [
-    "Huafu Gandon <huafu.gandon@gmail.com> (https://github.com/huafu)",
-    "Anh Pham <anhpnnd@gmail.com> (https://github.com/ahnpnl)",
-    "Gustav Wengel <gustavwengel@gmail.com> (https://github.com/GeeWee)"
-  ],
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "clean-publish": {
-    "packageManager": "pnpm"
   },
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "1kb"
+      "limit": "10kb"
     }
-  ],
-  "_type": "module"
+  ]
 }

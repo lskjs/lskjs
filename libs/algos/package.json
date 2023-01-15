@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/algos",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.3",
   "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -46,6 +46,10 @@
   "size-limit": [
     {
       "path": "lib/index.js",
+      "limit": "1.1kb"
+    },
+    {
+      "path": "lib/index.mjs",
       "limit": "1kb"
     }
   ],

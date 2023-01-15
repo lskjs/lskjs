@@ -2,6 +2,7 @@ import { count } from './count';
 import { countBy } from './countBy';
 import { every } from './every';
 import { fromPairs } from './fromPairs';
+import { isPlainObject } from './isPlainObject';
 import { map } from './map';
 import { mapValues } from './mapValues';
 import { omit } from './omit';
@@ -17,6 +18,7 @@ export {
   count,
   every,
   fromPairs,
+  isPlainObject,
   map,
   mapValues,
   omit,
@@ -32,6 +34,7 @@ export default {
   count,
   every,
   fromPairs,
+  isPlainObject,
   map,
   mapValues,
   omit,
