@@ -42,9 +42,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "clean-publish": {
-    "packageManager": "pnpm"
-  },
   "size-limit": [
     {
       "path": "lib/index.js",

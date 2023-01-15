@@ -101,16 +101,22 @@ const data = {
       name: `@lskjs/${title}`,
       title,
       url: `packages/${title}`,
-      description: require(`${process.cwd()}/packages/${title}/package.json`).description,
+      description: require(`${process.cwd()}/packages/${title}/package.json`)
+        .description,
     })),
     ...ux.map((title) => ({
       name: `@lskjs/${title}`,
       title,
       url: `packages/${title}`,
-      description: require(`${process.cwd()}/../lskjs-ux/packages/${title}/package.json`).description,
+      description:
+        require(`${process.cwd()}/../lskjs-ux/packages/${title}/package.json`)
+          .description,
     })),
   ],
 };
 const json = JSON.stringify(data, null, 2);
 
-require('fs').writeFileSync('scripts/templates/data.js', `module.exports = ${json};`);
+require('fs').writeFileSync(
+  'scripts/templates/data.js',
+  `module.exports = ${json};`
+);

@@ -5,13 +5,15 @@ module.exports = {
       name: '@lskjs/apiquery',
       title: 'apiquery',
       url: 'packages/apiquery',
-      description: "пакет для общения front'a с back'ом, написан на axios, умеет в сокеты через socket.io ",
+      description:
+        "пакет для общения front'a с back'ом, написан на axios, умеет в сокеты через socket.io ",
     },
     {
       name: '@lskjs/auth',
       title: 'auth',
       url: 'packages/auth',
-      description: 'пакет в котором описана логика авторизации, имеет серверную и клиентскую часть ',
+      description:
+        'пакет в котором описана логика авторизации, имеет серверную и клиентскую часть ',
     },
     {
       name: '@lskjs/autobind',
@@ -29,7 +31,8 @@ module.exports = {
       name: '@lskjs/bots',
       title: 'bots',
       url: 'packages/bots',
-      description: 'позволяет подключать различных ботов в проект: telegram, discord, .etc ',
+      description:
+        'позволяет подключать различных ботов в проект: telegram, discord, .etc ',
     },
     {
       name: '@lskjs/build-locales',
@@ -47,49 +50,57 @@ module.exports = {
       name: '@lskjs/config',
       title: 'config',
       url: 'packages/config',
-      description: 'пакет который умеет собирать конфиг из разные файлов, env переменных ',
+      description:
+        'пакет который умеет собирать конфиг из разные файлов, env переменных ',
     },
     {
       name: '@lskjs/db',
       title: 'db',
       url: 'packages/db',
-      description: 'пакет для подключения к mongo, умеет в реконнект и имеет свой дефолтный конфиг ',
+      description:
+        'пакет для подключения к mongo, умеет в реконнект и имеет свой дефолтный конфиг ',
     },
     {
       name: '@lskjs/elastic',
       title: 'elastic',
       url: 'packages/elastic',
-      description: 'пакет для работы с ES, умеет делать запись, читать и создавать таблицы ',
+      description:
+        'пакет для работы с ES, умеет делать запись, читать и создавать таблицы ',
     },
     {
       name: '@lskjs/event',
       title: 'event',
       url: 'packages/event',
-      description: "пакет для глобальных event'ов в приложении, работает и на клиенте и на сервере. app.on('event') ",
+      description:
+        "пакет для глобальных event'ов в приложении, работает и на клиенте и на сервере. app.on('event') ",
     },
     {
       name: '@lskjs/getspreadsheet',
       title: 'getspreadsheet',
       url: 'packages/getspreadsheet',
-      description: 'пакет для build-locales, умеет парсить google spreadsheet  ',
+      description:
+        'пакет для build-locales, умеет парсить google spreadsheet  ',
     },
     {
       name: '@lskjs/grant',
       title: 'grant',
       url: 'packages/grant',
-      description: 'пакет с грантами, гранты нужны чтобы ограничивать часть функционала для некоторых пользователей ',
+      description:
+        'пакет с грантами, гранты нужны чтобы ограничивать часть функционала для некоторых пользователей ',
     },
     {
       name: '@lskjs/i18',
       title: 'i18',
       url: 'packages/i18',
-      description: 'пакет с локализациями и переводами, умеет менять текст в зависимости от выбранной локали ',
+      description:
+        'пакет с локализациями и переводами, умеет менять текст в зависимости от выбранной локали ',
     },
     {
       name: '@lskjs/launcher',
       title: 'launcher',
       url: 'packages/launcher',
-      description: 'пакет-утилита для запуска проектов в нужной последовательности. В разработке. ',
+      description:
+        'пакет-утилита для запуска проектов в нужной последовательности. В разработке. ',
     },
     {
       name: '@lskjs/linkall',
@@ -133,7 +144,8 @@ module.exports = {
       name: '@lskjs/rabbit',
       title: 'rabbit',
       url: 'packages/rabbit',
-      description: 'пакет для работы с rabbitmq, умеет создавать, читать и писать в очереди ',
+      description:
+        'пакет для работы с rabbitmq, умеет создавать, читать и писать в очереди ',
     },
     {
       name: '@lskjs/reactapp',
@@ -151,13 +163,15 @@ module.exports = {
       name: '@lskjs/sequelize',
       title: 'sequelize',
       url: 'packages/sequelize',
-      description: "пакет для работы с sql'ными базами данных, postgres, mysql ",
+      description:
+        "пакет для работы с sql'ными базами данных, postgres, mysql ",
     },
     {
       name: '@lskjs/server',
       title: 'server',
       url: 'packages/server',
-      description: 'сервер с уже подключенными бд, мидлварами, express и прочим ',
+      description:
+        'сервер с уже подключенными бд, мидлварами, express и прочим ',
     },
     {
       name: '@lskjs/server-api',
@@ -169,7 +183,8 @@ module.exports = {
       name: '@lskjs/sh',
       title: 'sh',
       url: 'packages/sh',
-      description: 'позволяет выполнять shell скрипты через ноду, может в асинхронность ',
+      description:
+        'позволяет выполнять shell скрипты через ноду, может в асинхронность ',
     },
     {
       name: '@lskjs/sms',
@@ -193,13 +208,15 @@ module.exports = {
       name: '@lskjs/upload',
       title: 'upload',
       url: 'packages/upload',
-      description: 'пакет по загрузке файлов на сервер, имеет серверную и клиентствую часть ',
+      description:
+        'пакет по загрузке файлов на сервер, имеет серверную и клиентствую часть ',
     },
     {
       name: '@lskjs/utils',
       title: 'utils',
       url: 'packages/utils',
-      description: 'пакет с кучей мелких утилит, типо lodash только от мира lskjs ',
+      description:
+        'пакет с кучей мелких утилит, типо lodash только от мира lskjs ',
     },
     {
       name: '@lskjs/worker',
@@ -248,7 +265,8 @@ module.exports = {
       name: '@lskjs/dashboard',
       title: 'dashboard',
       url: 'https://github.com/lskjs/ux/tree/master/packages/dashboard',
-      description: 'пакет с набором компонентов для реализации dashboard панелей ',
+      description:
+        'пакет с набором компонентов для реализации dashboard панелей ',
     },
     {
       name: '@lskjs/dev',
@@ -272,7 +290,8 @@ module.exports = {
       name: '@lskjs/extra',
       title: 'extra',
       url: 'https://github.com/lskjs/ux/tree/master/packages/extra',
-      description: 'пакет с другими компонентами, которые не попали не под одну категорию ',
+      description:
+        'пакет с другими компонентами, которые не попали не под одну категорию ',
     },
     {
       name: '@lskjs/flag',
@@ -302,7 +321,8 @@ module.exports = {
       name: '@lskjs/image',
       title: 'image',
       url: 'https://github.com/lskjs/ux/tree/master/packages/image',
-      description: 'React компонент для картинок, использует react-image-fallback ',
+      description:
+        'React компонент для картинок, использует react-image-fallback ',
     },
     {
       name: '@lskjs/landing',
@@ -344,7 +364,8 @@ module.exports = {
       name: '@lskjs/page',
       title: 'page',
       url: 'https://github.com/lskjs/ux/tree/master/packages/page',
-      description: 'пакет с компонентами для построения страниц с использованием layouts ',
+      description:
+        'пакет с компонентами для построения страниц с использованием layouts ',
     },
     {
       name: '@lskjs/progress',
@@ -386,7 +407,8 @@ module.exports = {
       name: '@lskjs/typo',
       title: 'typo',
       url: 'https://github.com/lskjs/ux/tree/master/packages/typo',
-      description: 'тут типографика, реализация: цвета, формы, размеры, шрифты ',
+      description:
+        'тут типографика, реализация: цвета, формы, размеры, шрифты ',
     },
     {
       name: '@lskjs/ui',
@@ -494,7 +516,8 @@ module.exports = {
       name: '@lskjs/form-percent-slider',
       title: 'form-percent-slider',
       url: 'packages/https://github.com/lskjs/ux/tree/master/form-percent-slider',
-      description: 'контрол для выбора значений в виде слайда (+ выбора диапазона) ',
+      description:
+        'контрол для выбора значений в виде слайда (+ выбора диапазона) ',
     },
     {
       name: '@lskjs/form-phone',

@@ -4,7 +4,8 @@ module.exports = {
       name: '@lskjs/apiquery',
       title: 'apiquery',
       url: 'packages/apiquery',
-      description: 'http/s + websockets api client for Web, Node.js and React Native throw fetch or axios',
+      description:
+        'http/s + websockets api client for Web, Node.js and React Native throw fetch or axios',
     },
     {
       name: '@lskjs/apm',
@@ -16,7 +17,8 @@ module.exports = {
       name: '@lskjs/auth',
       title: 'auth',
       url: 'packages/auth',
-      description: 'LSK.js – auth – module for authorization by login and password and singup through social networks',
+      description:
+        'LSK.js – auth – module for authorization by login and password and singup through social networks',
     },
     {
       name: '@lskjs/autobind',
@@ -34,7 +36,8 @@ module.exports = {
       name: '@lskjs/bots',
       title: 'bots',
       url: 'packages/bots',
-      description: 'LSK.js module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation',
+      description:
+        'LSK.js module for telegram, slack, discord, whatsapp, twitter, instagram and vk bots creation',
     },
     {
       name: '@lskjs/bots-base',
@@ -165,7 +168,8 @@ module.exports = {
       name: '@lskjs/bunyan',
       title: 'bunyan',
       url: 'packages/bunyan',
-      description: 'Light weight bunyan logger for a JSON logging library for node.js services without dtrace',
+      description:
+        'Light weight bunyan logger for a JSON logging library for node.js services without dtrace',
     },
     {
       name: '@lskjs/config',
@@ -237,7 +241,8 @@ module.exports = {
       name: '@lskjs/log',
       title: 'log',
       url: 'packages/log',
-      description: 'Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.',
+      description:
+        'Логгер совмещающий лучшие черты morgan, winston, bunyan, logrus. debug. Базируется на debug-level.',
     },
     {
       name: '@lskjs/mailer',
@@ -255,7 +260,8 @@ module.exports = {
       name: '@lskjs/module',
       title: 'module',
       url: 'packages/module',
-      description: 'Module system with dependency injection, event emitter, logger and submodules tree',
+      description:
+        'Module system with dependency injection, event emitter, logger and submodules tree',
     },
     {
       name: '@lskjs/permit',

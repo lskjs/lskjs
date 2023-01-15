@@ -2,25 +2,20 @@
   "name": "@lskjs/colors",
   "version": "3.0.0-alpha.3",
   "description": "Yet another colors library – like picocolors but with for browser too",
-  "keywords": [   
-     "colors"
-    
-  ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/log",
-  "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
-  "contributors": [
-    "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
-  ],
-  "_type": "module",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts", "bin": {
-    "lsklog": "./bin/cli.js"
+  "scripts": {
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           lsk run test",
+    "test:watch": "     lsk run test:watch"
   },
+  "dependencies": {
+    "@lskjs/env": "workspace:3.0.0-alpha.3",
+    "@lskjs/eslint-config": "^2.20.0"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "default": "./lib/index.js",
@@ -37,21 +32,27 @@
       "types": "./lib/*.d.ts"
     }
   },
-  "scripts": {
-    "dev": "            lsk run dev",
-    "build": "          lsk run build",
-    "test": "           lsk run test",
-    "test:watch": "     lsk run test:watch",
-    "release": "        lsk run release"
-  },
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
   "files": [
     "lib",
     "README.md",
     "LICENCE"
   ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/log",
+  "keywords": [
+    "colors"
+  ],
+  "license": "MIT",
+  "//": "//",
+  "contributors": [
+    "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "clean-publish": {
     "packageManager": "pnpm"
   },
@@ -60,9 +61,5 @@
       "path": "lib/index.js",
       "limit": "1kb"
     }
-  ],
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  ]
 }

@@ -6,6 +6,3 @@ const main = async ({ argv } = {}) => {
 };
 
 module.exports = run(main);
-
-
-

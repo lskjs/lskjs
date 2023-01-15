@@ -1,8 +1,8 @@
 import { isSupported } from './isSupported';
-import { Formatter, FormatterInput } from './types';
+import { Colors, FormatterInput } from './types';
 import { formatter } from './utils';
 
-export const createColors = (on = isSupported): Record<string, Formatter> => ({
+export const createColors = (on = isSupported): Colors => ({
   on,
   reset: on ? (s: FormatterInput) => `\x1b[0m${s}\x1b[0m` : String,
   bold: on ? formatter('\x1b[1m', '\x1b[22m', '\x1b[22m\x1b[1m') : String,
