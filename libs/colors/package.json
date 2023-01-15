@@ -11,8 +11,7 @@
     "test:watch": "     lsk run test:watch"
   },
   "dependencies": {
-    "@lskjs/env": "workspace:3.0.0-alpha.3",
-    "@lskjs/eslint-config": "^2.20.0"
+    "@lskjs/env": "3.0.0-alpha.4"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

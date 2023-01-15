@@ -11,7 +11,7 @@
     "test:watch": "     lsk run test:watch"
   },
   "dependencies": {
-    "@lskjs/lodash": "^3.0.0-alpha.3",
+    "@lskjs/lodash": "workspace:3.0.0-alpha.3",
     "fishbird": "^0.19.0"
   },
   "publishConfig": {

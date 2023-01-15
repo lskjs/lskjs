@@ -36,25 +36,24 @@ importers:
       tsup: 6.5.0_typescript@4.9.4
       typescript: 4.9.4
 
+  libs/algos:
+    specifiers: {}
+
   libs/colors:
     specifiers:
-      '@lskjs/env': workspace:3.0.0-alpha.3
-      '@lskjs/eslint-config': ^2.20.0
+      '@lskjs/env': 3.0.0-alpha.4
     dependencies:
-      '@lskjs/env': link:../env
-      '@lskjs/eslint-config': 2.20.0
+      '@lskjs/env': 3.0.0-alpha.4
 
   libs/env:
     specifiers:
-      '@lskjs/lodash': ^3.0.0-alpha.3
-      '@lskjs/tty': ^3.0.0-alpha.3
+      '@lskjs/tty': workspace:3.0.0-alpha.3
     dependencies:
-      '@lskjs/lodash': link:../lodash
       '@lskjs/tty': link:../tty
 
   libs/err:
     specifiers:
-      '@lskjs/lodash': ^3.0.0-alpha.3
+      '@lskjs/lodash': workspace:3.0.0-alpha.3
     dependencies:
       '@lskjs/lodash': link:../lodash
 
@@ -63,27 +62,27 @@ importers:
 
   libs/log:
     specifiers:
-      '@lskjs/algos': workspace:3.0.0-alpha.3
-      '@lskjs/colors': ^3.0.0-alpha.3
-      '@lskjs/env': ^3.0.0-alpha.3
+      '@lskjs/algos': 3.0.0-alpha.4
+      '@lskjs/colors': workspace:3.0.0-alpha.3
+      '@lskjs/env': 3.0.0-alpha.4
       '@lskjs/err': 2.85.1
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
       '@types/through': 0.0.30
       fast-safe-stringify: 2.1.1
       logfmt: 1.3.2
-      pretty-bytes: 6.0.0
+      pretty-bytes: 5.6.0
       pretty-time: 1.1.0
       readline: 1.3.0
       split: 1.0.1
       through: 2.3.8
     dependencies:
-      '@lskjs/algos': link:../algos
+      '@lskjs/algos': 3.0.0-alpha.4
       '@lskjs/colors': link:../colors
-      '@lskjs/env': link:../env
+      '@lskjs/env': 3.0.0-alpha.4
       '@lskjs/err': 2.85.1
       fast-safe-stringify: 2.1.1
-      pretty-bytes: 6.0.0
+      pretty-bytes: 5.6.0
       pretty-time: 1.1.0
       readline: 1.3.0
       split: 1.0.1
@@ -95,31 +94,11 @@ importers:
       '@types/split': 1.0.2
       '@types/through': 0.0.30
 
-  libs/module:
-    specifiers:
-      '@lskjs/algos': 3.0.0-alpha.4
-      '@lskjs/env': workspace:3.0.0-alpha.4
-      '@lskjs/err': 2.85.1
-      '@lskjs/log': 2.85.1
-      '@lskjs/mutex': 2.85.1
-      '@lskjs/utils2': 2.85.1
-      eventemitter3: 5.0.0
-      fishbird: ^0.19.0
-    dependencies:
-      '@lskjs/algos': link:../algos
-      '@lskjs/env': link:../env
-      '@lskjs/err': 2.85.1
-      '@lskjs/log': 2.85.1
-      '@lskjs/mutex': 2.85.1
-      '@lskjs/utils2': link:../utils2
-      eventemitter3: 5.0.0
-      fishbird: 0.19.0
-
   libs/mutex:
     specifiers:
-      async-mutex: 0.2.6
+      async-mutex: 0.4.0
     dependencies:
-      async-mutex: 0.2.6
+      async-mutex: 0.4.0
 
   libs/tty:
     specifiers:
@@ -129,7 +108,7 @@ importers:
 
   libs/utils2:
     specifiers:
-      '@lskjs/lodash': ^3.0.0-alpha.3
+      '@lskjs/lodash': workspace:3.0.0-alpha.3
       fishbird: ^0.19.0
     dependencies:
       '@lskjs/lodash': link:../lodash
@@ -1924,6 +1903,10 @@ packages:
       write-file-atomic: 4.0.2
     dev: false
 
+  /@lskjs/algos/3.0.0-alpha.4:
+    resolution: {integrity: sha512-r12clsDzbKqp8TfeN5pq4FuyeSvAijlf2U1NubFGXbvlrTassTa1J593O0byXZ00ohZAqHkEm/kltHClS2BSqQ==}
+    dev: false
+
   /@lskjs/cli-scripts/3.0.0-alpha.4:
     resolution: {integrity: sha512-paLwybypz2XN1j8XK/1ALEMKtnEC8HRPgXMJOanjfB+BUTi01Hjv9BxXjuE9SuZGApTKUxbA21ItiPnm5zGLZw==}
     dependencies:
@@ -2006,8 +1989,11 @@ packages:
     resolution: {integrity: sha512-QIim3YP+1onXMl9RRq83MQIt1APFxn8xC8pLwNDM2tAXij5NT6+TB1uOQBl+rD9faQxSaHxoXcVwmBxVTMpdyg==}
     dev: false
 
-  /@lskjs/env/2.85.1:
-    resolution: {integrity: sha512-MjwI2T7jkW2AM29lR7M/jOxm1EZOaH404izUOKFgNzxzS+lsyfWI3l/+xW2AtjE1d4RUlTmPhx2RqqQtEym10A==}
+  /@lskjs/env/3.0.0-alpha.4:
+    resolution: {integrity: sha512-2sQc6LRY3091EOTKoimY/2xfJMZtpVDRHzGKQsDoBzwNac60eruQifNd28A2zALkU6saWpipYVVCJbVmyDXLuw==}
+    dependencies:
+      '@lskjs/lodash': 3.0.0-alpha.3
+      '@lskjs/tty': 3.0.0-alpha.3
     dev: false
 
   /@lskjs/err/2.65.1:
@@ -2020,32 +2006,6 @@ packages:
     resolution: {integrity: sha512-8dAi8x6L3ci+cxGuC1W80e25aoQd/ICb+wHPLUD7tGtxlI0OjbfL1Gypf0bp2CJi40pM8Gwj+LIhGjRetMtA/Q==}
     dependencies:
       lodash: 4.17.21
-    dev: false
-
-  /@lskjs/eslint-config/2.20.0:
-    resolution: {integrity: sha512-aYZLeiuh+1yGZrTkbDxNUq5boNohelfFUd2l+wfYDgMTrX1HVMD2NJrazDm40H2TimabnpUMzYyXXn00YdMIIA==}
-    dependencies:
-      '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
-      '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
-      eslint: 8.31.0
-      eslint-config-airbnb: 19.0.4_clj2sc35kiuw2ndh55gxznyd44
-      eslint-config-airbnb-base: 15.0.0_hnftvkj7qg3s6bbigj4pr6djxy
-      eslint-config-prettier: 8.6.0_eslint@8.31.0
-      eslint-import-resolver-typescript: 3.5.3_hnftvkj7qg3s6bbigj4pr6djxy
-      eslint-plugin-import: 2.27.4_2ac3tknkazjoq5fxmuugu665ny
-      eslint-plugin-json: 3.1.0
-      eslint-plugin-json-format: 2.0.1_eslint@8.31.0
-      eslint-plugin-jsx-a11y: 6.7.1_eslint@8.31.0
-      eslint-plugin-prettier: 4.2.1_iu5s7nk6dw7o3tajefwfiqfmge
-      eslint-plugin-react: 7.32.0_eslint@8.31.0
-      eslint-plugin-react-hooks: 4.6.0_eslint@8.31.0
-      eslint-plugin-simple-import-sort: 8.0.0_eslint@8.31.0
-      prettier: 2.8.2
-    optionalDependencies:
-      typescript: 4.9.4
-    transitivePeerDependencies:
-      - eslint-import-resolver-webpack
-      - supports-color
     dev: false
 
   /@lskjs/eslint-config/2.21.0:
@@ -2072,6 +2032,10 @@ packages:
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
+    dev: false
+
+  /@lskjs/lodash/3.0.0-alpha.3:
+    resolution: {integrity: sha512-+sN3u47Fv/Mm0FCJe91dx8yghRPTDnP2+4eQEv8rtJsz4+6aO7ZYJMKPvz089fixUr1CvuEP/hIqH7pqNVjFLw==}
     dev: false
 
   /@lskjs/log/2.75.1:
@@ -2108,27 +2072,10 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/log/2.85.1:
-    resolution: {integrity: sha512-IFisUVOef0MMS34bl2acfzea/736l0079f6NwpIzbNI65Ci6CUfJo6wbkF3gPAMGbHSO9jodIlFqpYC55pK8TA==}
-    hasBin: true
+  /@lskjs/tty/3.0.0-alpha.3:
+    resolution: {integrity: sha512-YHheb49and4Jh61mkG9C9a8oDJuZQsE0zWIIJcAFkhEUqD9oN7p+wviajkfxunyUqbJ+L9a882eF6IXoDjNpdg==}
     dependencies:
-      '@lskjs/debug-level': 0.3.2
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      fast-safe-stringify: 2.0.8
-      pretty-bytes: 5.6.0
-      pretty-time: 1.1.0
-      readline: 1.3.0
-      split: 1.0.1
-      through: 2.3.8
-    optionalDependencies:
-      logfmt: 1.3.2
-    dev: false
-
-  /@lskjs/mutex/2.85.1:
-    resolution: {integrity: sha512-U/+TTIgcQiqEw3pXokXUx+x69RSFMliLPNemfZT+bP8s2O9TG96ocfy8gPAHlhLX9+aklAGwycedMHRCtr//fg==}
-    dependencies:
-      async-mutex: 0.2.6
+      tty: 1.0.1
     dev: false
 
   /@lskjs/utils/2.72.0:
@@ -3280,8 +3227,8 @@ packages:
     resolution: {integrity: sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==}
     dev: false
 
-  /async-mutex/0.2.6:
-    resolution: {integrity: sha512-Hs4R+4SPgamu6rSGW8C7cV9gaWUKEHykfzCCvIRuaVv636Ju10ZdeUbvb4TBEW0INuq2DHZqXbK4Nd3yG4RaRw==}
+  /async-mutex/0.4.0:
+    resolution: {integrity: sha512-eJFZ1YhRR8UN8eBLoNzcDPcy/jqjsg6I1AP+KvWQX80BqOSW1oJPJXDylPUEeMr2ZQvHgnQ//Lp6f3RQ1zI7HA==}
     dependencies:
       tslib: 2.4.1
     dev: false
@@ -5256,10 +5203,6 @@ packages:
 
   /eventemitter3/4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
-    dev: false
-
-  /eventemitter3/5.0.0:
-    resolution: {integrity: sha512-riuVbElZZNXLeLEoprfNYoDSwTBRR44X3mnhdI1YcnENpWTCsTTVZ2zFuqQcpoyqPQIUXdiPEU0ECAq0KQRaHg==}
     dev: false
 
   /execa/5.1.1:
@@ -8564,11 +8507,6 @@ packages:
   /pretty-bytes/5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
-    dev: false
-
-  /pretty-bytes/6.0.0:
-    resolution: {integrity: sha512-6UqkYefdogmzqAZWzJ7laYeJnaXDy2/J+ZqiiMtS7t7OfpXWTlaeGMwX8U6EFvPV/YWWEKRkS8hKS4k60WHTOg==}
-    engines: {node: ^14.13.1 || >=16.0.0}
     dev: false
 
   /pretty-format/29.3.1:
