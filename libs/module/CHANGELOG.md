@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.10](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.9...v3.0.0-alpha.10) (2023-01-16)
+
+
+### Bug Fixes
+
+* quickfix ([4f6deef](https://github.com/lskjs/lskjs/commit/4f6deefa8a0961bd2939a93e777bd71592b6081b))
+
+
+### Features
+
+* a lot of bugfixes ([9f45478](https://github.com/lskjs/lskjs/commit/9f45478e997ce5fc0e556f3a1618b5bd8f93150f))
+
+
+
+
+
 ## [2.85.1](https://github.com/lskjs/lskjs/compare/v2.85.0...v2.85.1) (2022-12-13)
 
 **Note:** Version bump only for package @lskjs/module

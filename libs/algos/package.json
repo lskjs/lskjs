@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/algos",
-  "version": "3.0.0-alpha.8",
+  "version": "3.0.0-alpha.10",
   "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {

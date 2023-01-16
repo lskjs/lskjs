@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.10",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
@@ -10,12 +10,12 @@
     "test": "           lsk run test"
   },
   "dependencies": {
-    "@lskjs/algos": "3.0.0-alpha.8",
-    "@lskjs/env": "3.0.0-alpha.8",
-    "@lskjs/err": "3.0.0-alpha.8",
-    "@lskjs/log": "3.0.0-alpha.9",
-    "@lskjs/mutex": "3.0.0-alpha.8",
-    "@lskjs/utils2": "^3.0.0-alpha.8",
+    "@lskjs/algos": "^3.0.0-alpha.10",
+    "@lskjs/env": "^3.0.0-alpha.10",
+    "@lskjs/err": "^3.0.0-alpha.10",
+    "@lskjs/log": "^3.0.0-alpha.10",
+    "@lskjs/mutex": "^3.0.0-alpha.10",
+    "@lskjs/utils2": "^3.0.0-alpha.10",
     "events": "^3.3.0",
     "fishbird": "^0.19.0"
   },
@@ -55,31 +55,40 @@
     {
       "path": "lib/index.mjs",
       "limit": "22kb"
-    }, {
+    },
+    {
       "path": "lib/Module.js",
       "limit": "1kb"
-    }, {
+    },
+    {
       "path": "lib/ModuleWithConfig.js",
       "limit": "1kb"
-    }, {
+    },
+    {
       "path": "lib/ModuleWithEE.js",
       "limit": "1kb"
-    }, {
+    },
+    {
       "path": "lib/ModuleWithLifecycle.js",
       "limit": "1kb"
-    }, {
+    },
+    {
       "path": "lib/ModuleWithLog.js",
       "limit": "1kb"
-    }, {
+    },
+    {
       "path": "lib/ModuleSubmodules.js",
       "limit": "2kb"
-    }, {
+    },
+    {
       "path": "lib/items/index.js",
       "limit": "22kb"
-    }, {
+    },
+    {
       "path": "lib/asyncItems/index.js",
       "limit": "22kb"
-    }, {
+    },
+    {
       "path": "lib/asyncModules/index.js",
       "limit": "22kb"
     }
