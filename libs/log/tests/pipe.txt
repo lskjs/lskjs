@@ -1,0 +1,250 @@
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.032049351 +0000 UTC m=+3602.901019462 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Fareez Jamal , country: my"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Fareez+Jamal\u0026country=my"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"m","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153346145283493888"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 152872991868035072"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"debug","msg":"post stats map[{6949676204328750342 2021-04-10}:map[comments:0 likes:5 posts:1 shares:0 views:30] {6950077293599427846 2021-04-12}:map[comments:0 likes:4 posts:1 shares:0 views:26] {6950347382802353414 2021-04-12}:map[comments:0 likes:21 posts:1 shares:0 views:469] {6950471083988405509 2021-04-13}:map[comments:0 likes:23 posts:1 shares:0 views:618] {6950691022577913093 2021-04-13}:map[comments:0 likes:10 posts:1 shares:0 views:38] {6950794237587868933 2021-04-13}:map[comments:0 likes:5 posts:1 shares:0 views:36] {6950796452079734021 2021-04-14}:map[comments:0 likes:11 posts:1 shares:0 views:41] {6951169070381223174 2021-04-15}:map[comments:0 likes:20 posts:1 shares:1 views:256] {6951882426318884102 2021-04-16}:map[comments:0 likes:4 posts:1 shares:0 views:22] {6951883323929005318 2021-04-16}:map[comments:0 likes:5 posts:1 shares:0 views:30] {6952607548830797062 2021-04-18}:map[comments:0 likes:5 posts:1 shares:0 views:28] {6953020892490304773 2021-04-19}:map[comments:0 likes:6 posts:1 shares:0 views:27] {6953024919252913413 2021-04-20}:map[comments:0 likes:8 posts:1 shares:0 views:32] {6953747718393171206 2021-04-21}:map[comments:0 likes:4 posts:1 shares:1 views:26] {6954948635142458630 2021-04-25}:map[comments:0 likes:2 posts:1 shares:0 views:24] {6956936980995247365 2021-04-30}:map[comments:0 likes:5 posts:1 shares:0 views:30] {6957334719218404614 2021-05-01}:map[comments:0 likes:8 posts:1 shares:1 views:36] {6957452998708677893 2021-05-01}:map[comments:0 likes:2 posts:1 shares:1 views:31] {6957457502942301446 2021-05-01}:map[comments:2 likes:5 posts:1 shares:1 views:34] {6960419607156985093 2021-05-09}:map[comments:0 likes:3 posts:1 shares:0 views:15] {6960420350601596165 2021-05-09}:map[comments:0 likes:19 posts:1 shares:0 views:235] {6960478435907013894 2021-05-10}:map[comments:1 likes:4 posts:1 shares:1 views:22]]: "}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"MinDate: 2021-04-10 00:00:00 +0000 UTC , Days: 115"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.050752765 +0000 UTC m=+3518.716587291 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Fernanda da Silva , country: br"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Fernanda+da+Silva\u0026country=br"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153346163591585792"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.002593839 +0000 UTC m=+2932.297748735 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: BaptNurse971 , country: fr"}
+{"level":"debug","msg":"views added to median counts"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"debug","msg":"comments and likes added to median counts"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=BaptNurse971\u0026country=fr"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"m","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 1528730"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.049325552 +0000 UTC m=+2974.876649140 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: tPjX498663 , country: gb"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=tPjX498663\u0026country=gb"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"m","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 15266828"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.050683236 +0000 UTC m=+3439.992188619 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: ★Priscila Gabrielle★ , country: br"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=%E2%98%85Priscila+Gabrielle%E2%98%85\u0026country=br"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153313752602271744"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.014302999 +0000 UTC m=+3528.714974731 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Julio Cesar , country: br"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Julio+Cesar\u0026country=br"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"m","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 152948585809133568"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.141000602 +0000 UTC m=+102.838561573 , Days: 0"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.056909265 +0000 UTC m=+3559.258222516 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Nádia Rodrigues , country: br"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=N%C3%A1dia+Rodrigues\u0026country=br"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153243153708310528"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"debug","msg":"er added to median counts"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.121345586 +0000 UTC m=+2986.223267292 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: tobrain , country: de"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=tobrain\u0026country=de"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":null}"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: affafafiah , country: my"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=affafafiah\u0026country=my"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":null}"}
+{"error":"data is null","level":"warning","msg":"gender not defined by name"}
+{"error":"data is null","level":"warning","msg":"gender not defined by name"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 15295765"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"debug","medianCounts":{"commentsToLikes":0,"er":8.93,"sharesToLikes":0,"updatedAt":"2021-08-03T12:41:48.148009399Z","views":8.29},"msg":"median counts added to info"}
+{"error":"followers number \u003c 10000","level":"warning","msg":"scores will not count"}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.122388603 +0000 UTC m=+3547.708539279 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Sido bho , country: it"}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.085192583 +0000 UTC m=+3581.523310489 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Derin Pişkin , country: tr"}
+{"info":{"avgCommentCount":0.14,"avgLikeCount":8.14,"avgShareCount":0.27,"avgViewCount":95.73,"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":true,"isTopInfluencer":false,"medians":{"commentsToLikes":0,"er":8.93,"sharesToLikes":0,"updatedAt":"2021-08-03T12:41:48.148009399Z","views":8.29},"priceAvg":168,"priceMax":239,"priceMin":96,"status":0,"type":3},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Sido+bho\u0026country=it"}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.098583829 +0000 UTC m=+3479.446471523 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Nadia Atipova , country: bg"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Nadia+Atipova\u0026country=bg"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Derin+Pi%C5%9Fkin\u0026country=tr"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153346139654795264"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 152634486973902850"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153346123334754304"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"info","msg":"MinDate: 2021-04-01 00:00:00 +0000 UTC , Days: 124"}
+{"level":"debug","msg":"views added to median counts"}
+{"level":"debug","msg":"comments and likes added to median counts"}
+{"level":"debug","msg":"er added to median counts"}
+{"level":"debug","medianCounts":{"commentsToLikes":0,"er":18.95,"sharesToLikes":0,"updatedAt":"2021-08-03T12:41:48.142123385Z","views":5.25},"msg":"median counts added to info"}
+{"error":"followers number \u003c 10000","level":"warning","msg":"scores will not count"}
+{"info":{"avgCommentCount":0,"avgLikeCount":6,"avgShareCount":0,"avgViewCount":31.67,"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":true,"isTopInfluencer":false,"medians":{"commentsToLikes":0,"er":18.95,"sharesToLikes":0,"updatedAt":"2021-08-03T12:41:48.142123385Z","views":5.25},"priceAvg":29,"priceMax":48,"priceMin":10,"status":0,"type":3},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153509266140635136"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Christian+Della+Malva\u0026country=it"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153313763226656768"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.057109705 +0000 UTC m=+2793.393115983 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: lorenza , country: it"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=lorenza\u0026country=it"}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.043718233 +0000 UTC m=+2796.154711408 , Days: 0"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: A D É L A , country: cz"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=A+D+%C3%89+L+A\u0026country=cz"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 152948602452017152"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"hasInstagram":true,"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153150780072550400"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.117801264 +0000 UTC m=+3192.311569970 , Days: 0"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153410464322859008"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.14275895 +0000 UTC m=+230.664073830 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Taylor Brennen  , country: us"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Taylor+Brennen+\u0026country=us"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.08116139 +0000 UTC m=+932.233195672 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Alex Markowitsch , country: de"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Alex+Markowitsch\u0026country=de"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"m","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153346076601720832"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:47.991974768 +0000 UTC m=+3117.533028857 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: 🌻Krystell Montoya🌻 , country: cr"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=%F0%9F%8C%BBKrystell+Montoya%F0%9F%8C%BB\u0026country=cr"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":true,"isTopInfluencer":false,"nameGender":"f","status":0,"type":3},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 152948589365841921"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.085059707 +0000 UTC m=+3057.484651907 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: samralilya , country: fr"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=samralilya\u0026country=fr"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":null}"}
+{"error":"data is null","level":"warning","msg":"gender not defined by name"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 152668291231035392"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.095890273 +0000 UTC m=+3065.689779763 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Daniel De Los Reyes Partida , country: es"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Daniel+De+Los+Reyes+Partida\u0026country=es"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.12749943 +0000 UTC m=+223.534096257 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Autumn Paige , country: us"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Autumn+Paige\u0026country=us"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":0,\"f\":1}}"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"nameGender":"f","status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153509364807413760"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153639019745185792"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+{"level":"warning","msg":"lastPublishedAt from channel is zero"}
+{"level":"warning","msg":"Getting lastPublishedAt error: mongo: no documents in result"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.114300239 +0000 UTC m=+937.555168908 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: Cairoden Sarip , country: gb"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=Cairoden+Sarip\u0026country=gb"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":{\"m\":1,\"f\":0}}"}
+{"level":"info","msg":"0001-01-01 00:00:00 +0000 UTC"}
+{"level":"debug","msg":"post stats map[]: "}
+{"level":"info","msg":"MinDate: 2021-08-03 12:41:48.033348339 +0000 UTC m=+3138.551901993 , Days: 0"}
+{"level":"debug","msg":"genderName url: https://name.buzz.guru/api/gender?name=%s\u0026country=%s, name: taylorkennedy123 , country: ie"}
+{"level":"debug","msg":"final genderName url: https://name.buzz.guru/api/gender?name=taylorkennedy123\u0026country=ie"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":null}"}
+{"error":"data is null","level":"warning","msg":"gender not defined by name"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153313754791841792"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}

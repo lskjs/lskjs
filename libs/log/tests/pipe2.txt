@@ -1,0 +1,25 @@
+========= RAW ================
+Hello World
+{"some": "info"}
+[some] info
+
+========= LSK worker =========
+{"level":"trace","time":1639528619264,"ns":"lsk","msg":"prepare"}
+{"level":"trace","time":1639528619264,"ns":"lsk:rabbit","msg":"[watch] running 6609"}
+{"level":"debug","time":1639528619355,"ns":"lsk:rabbit","msg":"[watch] running 6611"}
+{"level":"info","time":1639528619417,"ns":"lsk:rabbit","msg":"[watch] finished 4092654"}
+{"level":"info","time":1639528629420,"ns":"lsk:rabbit","msg":"{\"start\":4092654,\"finish\":4092654,\"errors\":0}"}
+
+========= LOGRUS =========
+{"level":"debug","msg":"final genderName url: https://some.ru/api/gender?country=ie"}
+{"level":"debug","msg":"genderName body {\"code\":0,\"data\":null}"}
+{"error":"data is null","level":"warning","msg":"gender not defined by name"}
+{"info":{"isBot":false,"isGenerator":false,"isInfluencer":false,"isMassFollower":false,"isTopInfluencer":false,"status":0,"type":0},"level":"debug","msg":"info set to mongo"}
+{"level":"info","msg":"publishing to clickhouse_channel_sync: 153313754791841792"}
+{"cmd":"tiktok_channel_info","level":"info","msg":"Ack","object":"consumer","transport":"rmq"}
+
+========= LSK web =========
+{"time":null,"reqId":"yEoDMODUXnCYx2piYdia9","method":"GET","host":"localhost:8080","url":"/api/healthcheck","ua":"curl/7.74.0","ip":"::ffff:127.0.0.1","status":200,"length":511,"duration":21.645674}
+{"time":null,"reqId":"2srlW-ycUSEJyQE8U8tZk","method":"GET","host":"lskjs.ru","url":"/youtube/channels/123/products/321","ua":"Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)","ip":"95.108.213.58, 10.101.3.140","status":200,"length":115268,"duration":1287.031414}
+{"time":null,"reqId":"eYdEJ-8Jb1tGtFfHkvWfV","method":"GET","host":"lskjs.ru","url":"/api/products/getRatings?type=youtube&productId=123&productType=site","referer":"https://lskjs.ru/youtube/sites/123","ua":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36","ip":"87.149.200.209, 10.101.3.140","status":200,"length":149,"duration":110.732136}
+{"time":null,"reqId":"gJFUQ9C6-NNYM_VrU0UVq","method":"GET","host":"lskjs.ru","url":"/youtube/sites/123/videos","ua":"Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)","ip":"95.108.213.58, 10.101.3.140","status":200,"length":155997,"duration":1770.663689}
