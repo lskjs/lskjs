@@ -6,6 +6,7 @@ import { getEnvVar, isClient, isDev } from '@lskjs/env';
 import { levelsPriority } from './config';
 import { stringify } from './pretty/formats';
 import { isLsklogWeb } from './pretty/formats/lsklog';
+// import { tryPrettyFormat } from './pretty/tryPrettyFormat';
 import { prettyFormat } from './pretty/prettyFormat';
 import {
   ILogger,
@@ -14,7 +15,10 @@ import {
   LoggerLevelType,
 } from './types';
 
-const LOG_LEVEL = () => getEnvVar('LOG_LEVEL', '');
+const LOG_LEVEL = () =>
+  getEnvVar('DEBUG', '').includes('lsk') || getEnvVar('DEBUG', '').includes('*')
+    ? 'trace'
+    : getEnvVar('LOG_LEVEL', '');
 const LOG_FORMAT = () =>
   getEnvVar('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
 // const LOG_DATA = () => !!env('LOG_DATA', 0);

@@ -1,4 +1,4 @@
-import { getCode, getMessage, isError } from '@lskjs/err/utils';
+import { getCode, getMessage, isError } from '@lskjs/err';
 
 import { toString } from './toString';
 

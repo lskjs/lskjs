@@ -7,8 +7,7 @@
     "build": "          lsk run build",
     "dev": "            lsk run dev",
     "release": "        lsk run release",
-    "test": "           echo skip",
-    "test:watch": "     lsk run test:watch"
+    "test": "           echo skip"
   },
   "dependencies": {
     "tty": "^1.0.1"
@@ -21,12 +20,12 @@
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "browser": "./lib/client.js",
-      "default": "./lib/index.js",
-      "require": "./lib/index.js",
       "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "browser": "./lib/client.js",
       "node": "./lib/server.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib/index.js",
+      "default": "./lib/index.js"
     }
   },
   "files": [

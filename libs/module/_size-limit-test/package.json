@@ -1,0 +1,76 @@
+{
+  "size-limit": [
+    {
+      "path": "lib/test1.js",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test2.js",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test3.js",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test4.js",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test5.js",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test1.mjs",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test2.mjs",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test3.mjs",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test4.mjs",
+      "limit": "1kb"
+    },  
+    {
+      "path": "lib/test5.mjs",
+      "limit": "1kb"
+    },  
+    
+    {
+      "path": "lib/index.mjs",
+      "limit": "22kb"
+    }, {
+      "path": "lib/Module.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithConfig.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithEE.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithLifecycle.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithLog.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleSubmodules.js",
+      "limit": "2kb"
+    }, {
+      "path": "lib/items/index.js",
+      "limit": "22kb"
+    }, {
+      "path": "lib/asyncItems/index.js",
+      "limit": "22kb"
+    }, {
+      "path": "lib/asyncModules/index.js",
+      "limit": "22kb"
+    }
+  ]
+}

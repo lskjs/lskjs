@@ -12,6 +12,7 @@ import { pad } from './pad';
 import { pick } from './pick';
 import { pickBy } from './pickBy';
 import { set } from './set';
+import { setProps } from './setProps';
 
 export {
   countBy,
@@ -28,6 +29,7 @@ export {
   pick,
   pickBy,
   set,
+  setProps,
 };
 export default {
   countBy,
@@ -43,5 +45,5 @@ export default {
   pad,
   pick,
   pickBy,
-  set,
+  setProps,
 };

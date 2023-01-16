@@ -4,10 +4,9 @@ importers:
 
   .:
     specifiers:
-      '@lskjs/cli': 3.0.0-alpha.4
-      '@lskjs/cli-utils': 3.0.0-alpha.4
+      '@lskjs/cli': 3.0.0-alpha.5
+      '@lskjs/cli-utils': 3.0.0-alpha.5
       '@lskjs/eslint-config': ^2.21.0
-      '@lskjs/utils': ^2.87.1
       '@size-limit/preset-small-lib': ^8.1.1
       '@types/jest': ^29.2.5
       '@types/node': ^18.11.18
@@ -20,10 +19,9 @@ importers:
       tsup: ^6.5.0
       typescript: ^4.9.4
     dependencies:
-      '@lskjs/cli': 3.0.0-alpha.4
-      '@lskjs/cli-utils': 3.0.0-alpha.4
+      '@lskjs/cli': 3.0.0-alpha.5
+      '@lskjs/cli-utils': 3.0.0-alpha.5
       '@lskjs/eslint-config': 2.21.0
-      '@lskjs/utils': 2.87.1
       '@size-limit/preset-small-lib': 8.1.1_size-limit@8.1.1
       '@types/jest': 29.2.5
       '@types/node': 18.11.18
@@ -41,9 +39,9 @@ importers:
 
   libs/colors:
     specifiers:
-      '@lskjs/env': 3.0.0-alpha.4
+      '@lskjs/env': workspace:3.0.0-alpha.8
     dependencies:
-      '@lskjs/env': 3.0.0-alpha.4
+      '@lskjs/env': link:../env
 
   libs/env:
     specifiers:
@@ -64,8 +62,8 @@ importers:
     specifiers:
       '@lskjs/algos': ^3.0.0-alpha.7
       '@lskjs/colors': ^3.0.0-alpha.7
-      '@lskjs/env': ^3.0.0-alpha.7
-      '@lskjs/err': 2.85.1
+      '@lskjs/env': workspace:3.0.0-alpha.8
+      '@lskjs/err': workspace:3.0.0-alpha.8
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
       '@types/through': 0.0.30
@@ -80,7 +78,7 @@ importers:
       '@lskjs/algos': link:../algos
       '@lskjs/colors': link:../colors
       '@lskjs/env': link:../env
-      '@lskjs/err': 2.85.1
+      '@lskjs/err': link:../err
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
@@ -93,6 +91,26 @@ importers:
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
       '@types/through': 0.0.30
+
+  libs/module:
+    specifiers:
+      '@lskjs/algos': workspace:3.0.0-alpha.8
+      '@lskjs/env': workspace:3.0.0-alpha.8
+      '@lskjs/err': workspace:3.0.0-alpha.8
+      '@lskjs/log': workspace:3.0.0-alpha.9
+      '@lskjs/mutex': workspace:3.0.0-alpha.8
+      '@lskjs/utils2': ^3.0.0-alpha.8
+      events: ^3.3.0
+      fishbird: ^0.19.0
+    dependencies:
+      '@lskjs/algos': link:../algos
+      '@lskjs/env': link:../env
+      '@lskjs/err': link:../err
+      '@lskjs/log': link:../log
+      '@lskjs/mutex': link:../mutex
+      '@lskjs/utils2': link:../utils2
+      events: 3.3.0
+      fishbird: 0.19.0
 
   libs/mutex:
     specifiers:
@@ -1903,14 +1921,16 @@ packages:
       write-file-atomic: 4.0.2
     dev: false
 
-  /@lskjs/cli-scripts/3.0.0-alpha.4:
-    resolution: {integrity: sha512-paLwybypz2XN1j8XK/1ALEMKtnEC8HRPgXMJOanjfB+BUTi01Hjv9BxXjuE9SuZGApTKUxbA21ItiPnm5zGLZw==}
+  /@lskjs/cli-scripts/3.0.0-alpha.5:
+    resolution: {integrity: sha512-Zly3/1q3JGbPci9SL9ux3BB4LnJSezbj5IMK34PmJVSTpv5FsxSiLpFfJQYUqSUtT5eF3G5idiHY2Nd5H9k88A==}
     dependencies:
       '@commitlint/cli': 17.0.2
-      '@lskjs/cli-utils': 3.0.0-alpha.4
+      '@lskjs/cli-utils': 3.0.0-alpha.5
       '@lskjs/err': 2.65.1
+      '@lskjs/stringify': 2.85.1
       all-contributors-cli: 6.24.0
       concurrently: 7.2.1
+      fishbird: 0.19.0
       nodemon: 2.0.16
       npm-check-updates: 13.0.4
       remark-template: 1.6.0
@@ -1920,11 +1940,12 @@ packages:
       - bluebird
       - debug
       - encoding
+      - lodash
       - supports-color
     dev: false
 
-  /@lskjs/cli-utils/3.0.0-alpha.4:
-    resolution: {integrity: sha512-A9k50cxCAGWk41NrydBGZWRGYET9cOUuU3DqMossmiKJ8d+bebMbctkfHVEB6c3o+Saqf440Dc0kVaC6eoiPxg==}
+  /@lskjs/cli-utils/3.0.0-alpha.5:
+    resolution: {integrity: sha512-dgTEg9ivx5+wvUhIJCo4W53vXi2Ga61eFrrQy7ReAdTslTqLjGygwsc+RpGHz2Erw5Jrn09p9CpuqIWp/kxRNQ==}
     dependencies:
       '@babel/runtime': 7.18.3
       '@lskjs/err': 2.65.1
@@ -1942,13 +1963,13 @@ packages:
       - debug
     dev: false
 
-  /@lskjs/cli/3.0.0-alpha.4:
-    resolution: {integrity: sha512-C3nXskOE/o2x42k/CBiqn2IxY9Ykcpxvt36ufnYAdhXqTnn0up3Y27aPq/pzTXbWMEwA+sBmQFaLAJGs97fM8w==}
+  /@lskjs/cli/3.0.0-alpha.5:
+    resolution: {integrity: sha512-8ZUuDNlU9cZqR9cAUIsWiZ54ZxsqJHE5M4PdF9SDRpGa3s2wrQrY6KtOGLAW2d0bMFnQ/0SiK+LzPtUAiHrTaQ==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.0.0-alpha.4
-      '@lskjs/cli-utils': 3.0.0-alpha.4
+      '@lskjs/cli-scripts': 3.0.0-alpha.5
+      '@lskjs/cli-utils': 3.0.0-alpha.5
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16
@@ -1967,6 +1988,7 @@ packages:
       - bluebird
       - debug
       - encoding
+      - lodash
       - supports-color
     dev: false
 
@@ -1983,13 +2005,6 @@ packages:
 
   /@lskjs/env/2.65.1:
     resolution: {integrity: sha512-QIim3YP+1onXMl9RRq83MQIt1APFxn8xC8pLwNDM2tAXij5NT6+TB1uOQBl+rD9faQxSaHxoXcVwmBxVTMpdyg==}
-    dev: false
-
-  /@lskjs/env/3.0.0-alpha.4:
-    resolution: {integrity: sha512-2sQc6LRY3091EOTKoimY/2xfJMZtpVDRHzGKQsDoBzwNac60eruQifNd28A2zALkU6saWpipYVVCJbVmyDXLuw==}
-    dependencies:
-      '@lskjs/lodash': 3.0.0-alpha.3
-      '@lskjs/tty': 3.0.0-alpha.3
     dev: false
 
   /@lskjs/err/2.65.1:
@@ -2030,10 +2045,6 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/lodash/3.0.0-alpha.3:
-    resolution: {integrity: sha512-+sN3u47Fv/Mm0FCJe91dx8yghRPTDnP2+4eQEv8rtJsz4+6aO7ZYJMKPvz089fixUr1CvuEP/hIqH7pqNVjFLw==}
-    dev: false
-
   /@lskjs/log/2.75.1:
     resolution: {integrity: sha512-ty6EMRZvIJCeSXON1Mfd8rm80RCfYsNLvzi3mtV5xvsKYdIm8/shdAR3RVHazheAi7dl8NusUSdMK7voGnp7bA==}
     hasBin: true
@@ -2068,18 +2079,18 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/tty/3.0.0-alpha.3:
-    resolution: {integrity: sha512-YHheb49and4Jh61mkG9C9a8oDJuZQsE0zWIIJcAFkhEUqD9oN7p+wviajkfxunyUqbJ+L9a882eF6IXoDjNpdg==}
+  /@lskjs/stringify/2.85.1:
+    resolution: {integrity: sha512-dROJo+bmoB9Ozi1kiqDAc2pHXlK0kD6WiCwEMWaxu5VypQEx4ETM/k8tpfacXKldQOoQpsQRAPnfRHKb0grELQ==}
+    peerDependencies:
+      lodash: 4.17.x
     dependencies:
-      tty: 1.0.1
+      '@lskjs/err': 2.85.1
+      javascript-stringify: 2.1.0
+      js-yaml: 4.1.0
     dev: false
 
   /@lskjs/utils/2.72.0:
     resolution: {integrity: sha512-E7BJ9g2DNRZaZb3WuxRF2LRvfnZxf6h6jR1xtAUoYcIdnxbgnXQTVALI+dCrHUkiAolsym0VUFdI2E4uOMCSXg==}
-    dev: false
-
-  /@lskjs/utils/2.87.1:
-    resolution: {integrity: sha512-v1CfwKl8Y9TeAh6wDEB1jjFydsvI8u13RRI6d29cVlz0QItneDOh+7jXWXPh4LEMJIfjpopFWH2cOS24+6we6g==}
     dev: false
 
   /@nodelib/fs.scandir/2.1.5:
@@ -5201,6 +5212,11 @@ packages:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
     dev: false
 
+  /events/3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
+    dev: false
+
   /execa/5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
@@ -6492,6 +6508,10 @@ packages:
       chalk: 4.1.2
       filelist: 1.0.4
       minimatch: 3.1.2
+    dev: false
+
+  /javascript-stringify/2.1.0:
+    resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
     dev: false
 
   /jest-changed-files/29.2.0:
@@ -8955,7 +8975,7 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: false
 
   /rollup/3.10.0:

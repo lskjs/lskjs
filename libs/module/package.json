@@ -1,0 +1,87 @@
+{
+  "name": "@lskjs/module",
+  "version": "3.0.0-alpha.3",
+  "description": "Module system with dependency injection, event emitter, logger and submodules tree",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "scripts": {
+    "build": "          lsk run build",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           lsk run test"
+  },
+  "dependencies": {
+    "@lskjs/algos": "workspace:3.0.0-alpha.8",
+    "@lskjs/env": "workspace:3.0.0-alpha.8",
+    "@lskjs/err": "workspace:3.0.0-alpha.8",
+    "@lskjs/log": "workspace:3.0.0-alpha.9",
+    "@lskjs/mutex": "workspace:3.0.0-alpha.8",
+    "@lskjs/utils2": "^3.0.0-alpha.8",
+    "events": "^3.3.0",
+    "fishbird": "^0.19.0"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/module",
+  "license": "MIT",
+  "keywords": [
+    "modules",
+    "submodules",
+    "dependency injection",
+    "event emitter",
+    "logger"
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "access": "public",
+  "size-limit": [
+    {
+      "path": "lib/index.mjs",
+      "limit": "22kb"
+    }, {
+      "path": "lib/Module.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithConfig.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithEE.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithLifecycle.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleWithLog.js",
+      "limit": "1kb"
+    }, {
+      "path": "lib/ModuleSubmodules.js",
+      "limit": "2kb"
+    }, {
+      "path": "lib/items/index.js",
+      "limit": "22kb"
+    }, {
+      "path": "lib/asyncItems/index.js",
+      "limit": "22kb"
+    }, {
+      "path": "lib/asyncModules/index.js",
+      "limit": "22kb"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { Color } from '@lskjs/colors';
 
 import { Theme } from './types';

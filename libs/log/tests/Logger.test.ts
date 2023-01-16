@@ -2,6 +2,7 @@
 import Logger from './Logger';
 
 process.env.LOG_FORMAT = 'none';
+process.env.LOG_LEVEL = 'trace';
 
 describe('new Logger()', () => {
   const log = new Logger();

@@ -6,14 +6,24 @@
     // "moduleResolution": "NodeNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "target": "ES2021",
+    // "target": "ES2021",
 
     "experimentalDecorators": true,
     "strict": true,
     // "forceConsistentCasingInFileNames": true,
-
+    
     "declaration": true,
     "sourceMap": true,
-
+    
+  },
+  "light": {
+    "strict": false,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": false
   }
 }

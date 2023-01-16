@@ -7,14 +7,13 @@
     "build": "          lsk run build",
     "dev": "            lsk run dev",
     "release": "        lsk run release",
-    "test": "           lsk run test",
-    "test:watch": "     lsk run test:watch"
+    "test": "           lsk run test"
   },
   "dependencies": {
     "@lskjs/algos": "^3.0.0-alpha.7",
     "@lskjs/colors": "^3.0.0-alpha.7",
-    "@lskjs/env": "^3.0.0-alpha.7",
-    "@lskjs/err": "2.85.1",
+    "@lskjs/env": "workspace:3.0.0-alpha.8",
+    "@lskjs/err": "workspace:3.0.0-alpha.8",
     "fast-safe-stringify": "2.1.1",
     "pretty-bytes": "5.6.0",
     "pretty-time": "1.1.0",
@@ -42,18 +41,14 @@
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "default": "./lib/index.js",
-      "require": "./lib/index.js",
       "import": "./lib/index.mjs",
-      "node": "./lib/index.js",
-      "types": "./lib/index.d.ts"
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
     },
     "./*": {
-      "default": "./lib/*.js",
-      "require": "./lib/*.js",
       "import": "./lib/*.mjs",
-      "node": "./lib/*.js",
-      "types": "./lib/*.d.ts"
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
     }
   },
   "files": [
@@ -85,7 +80,23 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "18kb"
+      "limit": "11kb"
+    },
+    {
+      "path": "lib/index.mjs",
+      "limit": "11kb"
+    },
+    {
+      "path": "lib/pretty/prettyFormat.mjs",
+      "limit": "10kb"
+    },
+    {
+      "path": "lib/pretty/prettyRawLog.mjs",
+      "limit": "11kb"
+    },
+    {
+      "path": "lib/themeize.mjs",
+      "limit": "3.1kb"
     }
   ],
   "_type": "module"
