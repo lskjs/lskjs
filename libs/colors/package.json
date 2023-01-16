@@ -11,7 +11,7 @@
     "test:watch": "     lsk run test:watch"
   },
   "dependencies": {
-    "@lskjs/env": "workspace:3.0.0-alpha.8"
+    "@lskjs/env": "3.0.0-alpha.8"
   },
   "publishConfig": {
     "access": "public",
