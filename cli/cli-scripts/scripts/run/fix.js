@@ -36,6 +36,30 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   const debug = getCwdInfo({ cwd });
   const { isLib, isTs, isBabel, isApp } = debug;
   // pack.__debug = debug;
+  if (args.includes('--prepare')) {
+    if (!pack.scripts) {
+      if (isLib) {
+        pack.scripts = {
+          dev: '            lsk run dev',
+          build: '          lsk run build',
+          test: '           lsk run test',
+          prepare: '        lsk run prepare',
+          release: '        lsk run release',
+        };
+      }
+      if (isApp) {
+        pack.scripts = {
+          dev: '            lsk run dev',
+          build: '          lsk run build',
+          test: '           lsk run test',
+          prepare: '        lsk run prepare',
+          release: '        lsk run release',
+          start: '          lsk run start',
+        };
+      }
+    }
+    if (!pack.scripts.prepare) pack.scripts.prepare = '        lsk run prepare';
+  }
   if (args.includes('--package')) {
     // if (!pack.workspaces && isRoot) {
     //   pack.workspaces = ['packages/*'];
