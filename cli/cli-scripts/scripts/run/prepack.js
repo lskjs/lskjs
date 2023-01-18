@@ -3,7 +3,7 @@ const { run, shell, shellParallel, findBin } = require('@lskjs/cli-utils');
 
 const main = async ({ args, isRoot, ctx } = {}) => {
   if (isRoot) {
-    await shellParallel('lsk run prepare', { ctx, args });
+    await shellParallel('lsk run prepack', { ctx, args });
     return;
   }
   await shell('rm -rf .release');

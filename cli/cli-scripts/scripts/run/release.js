@@ -7,14 +7,13 @@ const main = async ({ ctx, args, isRoot } = {}) => {
   await shell('lsk run build --prod --silent', { ctx, args });
   await shell('lsk run test --prod --silent', { ctx, args });
   if (isRoot) {
-    await shell('lsk run prepare --dir .release', { ctx, args });
+    await shell('lsk run prepack --dir .release', { ctx, args }); // два раза вызывается prepack
     let cmd = 'lerna publish --no-push --contents .release';
     const isYes = args.includes('--yes');
     if (isYes) {
       cmd += ' --yes';
     }
     await shell(cmd, { ctx, args });
-    args.includes('--no-push');
     // if (!isCI || args.includes('--no-push')) await shell('git push --follow-tags');
   } else {
     await shell('npm version prerelease');
