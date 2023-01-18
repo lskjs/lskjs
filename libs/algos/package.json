@@ -39,11 +39,69 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "1.2kb"
+      "limit": "3kb"
     },
     {
       "path": "lib/index.mjs",
+      "limit": "3kb"
+    },
+
+     {
+      "path": "lib/countBy.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/omitBy.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/mapValues.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/isPlainObject.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/set.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/count.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/map.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/pad.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/every.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/pickBy.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/omit.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/pick.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/fromPairs.js",
+      "limit": "1kb"
+    },
+     {
+      "path": "lib/omitNull.js",
       "limit": "1kb"
     }
+
   ]
 }

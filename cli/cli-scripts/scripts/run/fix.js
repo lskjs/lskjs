@@ -26,7 +26,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   const pack = require(packFilename);
   if (args.includes('--workspaceDeps')) {
     pack.dependencies = omitNull(
-      mapValues(pack.dependencies, (v) => {
+      mapValues(pack.dependencies || {}, (v) => {
         if (v.startsWith('workspace:')) return v.slice('workspace:'.length);
         return v;
       })

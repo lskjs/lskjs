@@ -36,11 +36,11 @@ now you should do: cd test3 && npm run dev
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g @lskjs/cli
+$ npm install -g lsk
 $ lsk COMMAND
 running command...
 $ lsk (-v|--version|version)
-@lskjs/cli/3.0.0-alpha.7 darwin-arm64 node-v19.3.0
+lsk/3.0.0-alpha.7 darwin-arm64 node-v19.3.0
 $ lsk --help [COMMAND]
 USAGE
   $ lsk COMMAND
