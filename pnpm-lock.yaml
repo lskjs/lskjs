@@ -104,6 +104,7 @@ importers:
       '@lskjs/cli-scripts': ^3.0.0-alpha.16
       '@lskjs/cli-utils': ^3.0.0-alpha.16
       '@lskjs/colors': ^3.0.0-alpha.14
+      '@lskjs/env': workspace:^3.0.0-alpha.14
       '@lskjs/err': ^3.0.0-alpha.16
       '@lskjs/log': ^3.0.0-alpha.16
       '@oclif/command': 1.8.21
@@ -125,6 +126,7 @@ importers:
       '@lskjs/cli-scripts': link:../cli-scripts
       '@lskjs/cli-utils': link:../cli-utils
       '@lskjs/colors': link:../../libs/colors
+      '@lskjs/env': link:../../libs/env
       '@lskjs/err': link:../../libs/err
       '@lskjs/log': link:../../libs/log
       '@oclif/command': 1.8.21_@oclif+config@1.18.6

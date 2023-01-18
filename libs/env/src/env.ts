@@ -30,7 +30,7 @@ export const version =
     : safeWindow?.env?.version) || stage;
 
 const env = isServer ? process.env : {};
-const isCI =
+export const isCI =
   isServer &&
   env.CI !== 'false' &&
   !!(
