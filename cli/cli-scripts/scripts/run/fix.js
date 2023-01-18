@@ -21,13 +21,14 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // log.debug(222);
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // log.debug(333);
-  if (!args.length) args = ['--sort', '--workspaceDeps'];
+  if (!args.length) args = ['--sort', '--deps'];
   const packFilename = `${cwd}/package.json`;
   const pack = require(packFilename);
-  if (args.includes('--workspaceDeps')) {
+  if (args.includes('--deps')) {
     pack.dependencies = omitNull(
       mapValues(pack.dependencies || {}, (v) => {
         if (v.startsWith('workspace:')) return v.slice('workspace:'.length);
+        if (v.startsWith('link:')) return v.slice('link:'.length);
         return v;
       })
     );
