@@ -9,7 +9,7 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
 
   // libs
   if (isRoot) {
-    const libs = config.packages.filter((p) => p.type === 'lib');
+    const libs = (config.packages || []).filter((p) => p.type === 'lib');
     if (libs.length) {
       await shell('lsk run prepack --dir .release', { ctx, args }); // два раза вызывается prepack
       let cmd = 'lerna publish --no-push --contents .release';
@@ -22,7 +22,7 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
         await shell('git push --follow-tags');
       }
     }
-    const apps = config.packages.filter((p) => p.type === 'app');
+    const apps = (config.packages || []).filter((p) => p.type === 'app');
     if (apps.length) {
       await shell('lsk run prepack --dir .release', { ctx, args });
       // await shell('lsk run deploy', { ctx, args });
