@@ -1,5 +1,5 @@
 {
-  "name": "@lskjs/cli",
+  "name": "lsk",
   "version": "3.0.0-alpha.7",
   "description": "LSK.js CLI (Command Line Interface) is the easiest way to create and manage LSK.js project",
   "author": "Igor Suvorov <hi@isuvorov.com>",

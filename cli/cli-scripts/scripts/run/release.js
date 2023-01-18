@@ -2,7 +2,7 @@
 const { run, shell } = require('@lskjs/cli-utils');
 
 const main = async ({ argv, isRoot } = {}) => {
-  await shell('lsk run clean');
+  // await shell('lsk run clean');
   await shell('lsk run build --prod --silent');
   await shell('lsk run test --prod --silent');
   if (isRoot) {

@@ -6,7 +6,7 @@ import { printInfo } from '../utils/printInfo';
 
 export class InfoCommand extends Command {
   async run() {
-    this.log(getLogo(this));
+    this.log(getLogo());
     printInfo(this);
   }
 }
