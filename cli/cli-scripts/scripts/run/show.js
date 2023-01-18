@@ -3,11 +3,9 @@
 /* eslint-disable import/no-dynamic-require */
 const { run, shellParallel } = require('@lskjs/cli-utils');
 
-
 const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   if (isRoot) {
-    const passArgs = args.filter((a) => a !== '--');
-    await shellParallel(`lsk run show ${passArgs.join(' ')}`, { ctx });
+    await shellParallel(`lsk run show `, { ctx, args });
   } else {
     const package = require(`${cwd}/package.json`);
     args.forEach((arg) => {
