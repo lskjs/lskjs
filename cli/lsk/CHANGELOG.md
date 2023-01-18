@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.17](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2023-01-18)
+
+
+### Features
+
+* **cli:** add env vars in lsk info ([2dd2d6f](https://github.com/lskjs/lskjs/commit/2dd2d6fcbf3ee39a00fb16ad6d849c17ebfc02e7))
+
+
+
+
+
 # [3.0.0-alpha.16](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.15...v3.0.0-alpha.16) (2023-01-18)
 
 **Note:** Version bump only for package lsk

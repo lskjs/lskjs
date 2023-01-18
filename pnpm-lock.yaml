@@ -34,10 +34,10 @@ importers:
 
   cli/cli-scripts:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.16
-      '@lskjs/cli-utils': ^3.0.0-alpha.16
-      '@lskjs/env': ^3.0.0-alpha.14
-      '@lskjs/err': ^3.0.0-alpha.16
+      '@lskjs/algos': ^3.0.0-alpha.17
+      '@lskjs/cli-utils': ^3.0.0-alpha.17
+      '@lskjs/env': ^3.0.0-alpha.17
+      '@lskjs/err': ^3.0.0-alpha.17
       '@lskjs/stringify': ^2.85.1
       all-contributors-cli: ^6.20.0
       fishbird: ^0.19.0
@@ -57,11 +57,11 @@ importers:
   cli/cli-utils:
     specifiers:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': ^3.0.0-alpha.16
-      '@lskjs/colors': ^3.0.0-alpha.14
-      '@lskjs/env': ^3.0.0-alpha.14
-      '@lskjs/err': ^3.0.0-alpha.16
-      '@lskjs/log': ^3.0.0-alpha.16
+      '@lskjs/algos': ^3.0.0-alpha.17
+      '@lskjs/colors': ^3.0.0-alpha.17
+      '@lskjs/env': ^3.0.0-alpha.17
+      '@lskjs/err': ^3.0.0-alpha.17
+      '@lskjs/log': ^3.0.0-alpha.17
       '@lskjs/utils': 2.87.1
       '@pnpm/filter-workspace-packages': ^6.0.26
       '@pnpm/logger': ^5.0.0
@@ -99,14 +99,14 @@ importers:
   cli/lsk:
     specifiers:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': ^3.0.0-alpha.16
+      '@lskjs/algos': ^3.0.0-alpha.17
       '@lskjs/cli': ^3.0.0-alpha.7
-      '@lskjs/cli-scripts': ^3.0.0-alpha.16
-      '@lskjs/cli-utils': ^3.0.0-alpha.16
-      '@lskjs/colors': ^3.0.0-alpha.14
-      '@lskjs/env': workspace:^3.0.0-alpha.14
-      '@lskjs/err': ^3.0.0-alpha.16
-      '@lskjs/log': ^3.0.0-alpha.16
+      '@lskjs/cli-scripts': ^3.0.0-alpha.17
+      '@lskjs/cli-utils': ^3.0.0-alpha.17
+      '@lskjs/colors': ^3.0.0-alpha.17
+      '@lskjs/env': ^3.0.0-alpha.17
+      '@lskjs/err': ^3.0.0-alpha.17
+      '@lskjs/log': ^3.0.0-alpha.17
       '@oclif/command': 1.8.21
       '@oclif/config': 1.18.6
       '@oclif/dev-cli': 1.26.10
@@ -148,7 +148,7 @@ importers:
 
   libs/colors:
     specifiers:
-      '@lskjs/env': ^3.0.0-alpha.14
+      '@lskjs/env': ^3.0.0-alpha.17
     dependencies:
       '@lskjs/env': link:../env
 
@@ -160,7 +160,7 @@ importers:
 
   libs/err:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.16
+      '@lskjs/algos': ^3.0.0-alpha.17
     dependencies:
       '@lskjs/algos': link:../algos
 
@@ -169,10 +169,10 @@ importers:
 
   libs/log:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.16
-      '@lskjs/colors': ^3.0.0-alpha.14
-      '@lskjs/env': ^3.0.0-alpha.14
-      '@lskjs/err': ^3.0.0-alpha.16
+      '@lskjs/algos': ^3.0.0-alpha.17
+      '@lskjs/colors': ^3.0.0-alpha.17
+      '@lskjs/env': ^3.0.0-alpha.17
+      '@lskjs/err': ^3.0.0-alpha.17
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
       '@types/through': 0.0.30
@@ -203,12 +203,12 @@ importers:
 
   libs/module:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.16
-      '@lskjs/env': ^3.0.0-alpha.14
-      '@lskjs/err': ^3.0.0-alpha.16
-      '@lskjs/log': ^3.0.0-alpha.16
+      '@lskjs/algos': ^3.0.0-alpha.17
+      '@lskjs/env': ^3.0.0-alpha.17
+      '@lskjs/err': ^3.0.0-alpha.17
+      '@lskjs/log': ^3.0.0-alpha.17
       '@lskjs/mutex': ^3.0.0-alpha.14
-      '@lskjs/utils2': ^3.0.0-alpha.16
+      '@lskjs/utils2': ^3.0.0-alpha.17
       events: ^3.3.0
       fishbird: ^0.19.0
     dependencies:
@@ -235,7 +235,7 @@ importers:
 
   libs/utils2:
     specifiers:
-      '@lskjs/lodash': ^3.0.0-alpha.16
+      '@lskjs/lodash': ^3.0.0-alpha.17
       fishbird: ^0.19.0
     dependencies:
       '@lskjs/lodash': link:../lodash

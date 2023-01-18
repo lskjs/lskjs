@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-scripts",
-  "version": "3.0.0-alpha.16",
+  "version": "3.0.0-alpha.17",
   "description": "LSK.js CLI-scripts – some scripts for LSK.js – CLI projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -9,10 +9,10 @@
     "test": "echo skip"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.0.0-alpha.16",
-    "@lskjs/cli-utils": "^3.0.0-alpha.16",
-    "@lskjs/env": "^3.0.0-alpha.14",
-    "@lskjs/err": "^3.0.0-alpha.16",
+    "@lskjs/algos": "^3.0.0-alpha.17",
+    "@lskjs/cli-utils": "^3.0.0-alpha.17",
+    "@lskjs/env": "^3.0.0-alpha.17",
+    "@lskjs/err": "^3.0.0-alpha.17",
     "@lskjs/stringify": "^2.85.1",
     "all-contributors-cli": "^6.20.0",
     "fishbird": "^0.19.0",
