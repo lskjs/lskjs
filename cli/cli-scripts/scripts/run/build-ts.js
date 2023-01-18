@@ -20,6 +20,7 @@ async function main({ isRoot, ctx, cwd, args } = {}) {
   let cmd = findBin('tsup');
   if (isSilent) cmd += ' --silent';
   if (isWatch) cmd += ' --watch';
+  if (isProd) cmd = `NODE_ENV=production ${cmd}`;
   // if (isProd) cmd += ' --env.NODE_ENV production';
   if (isWatch && !isLib) cmd += ' --onSuccess "node lib"';
   await shell(cmd, { ctx });

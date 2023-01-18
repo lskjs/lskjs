@@ -39,11 +39,11 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "3kb"
+      "limit": "1.2kb"
     },
     {
       "path": "lib/index.mjs",
-      "limit": "3kb"
+      "limit": "1kb"
     },
 
      {
