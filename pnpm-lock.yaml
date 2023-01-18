@@ -20,7 +20,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@lskjs/cli': 3.0.0-alpha.7
-      '@lskjs/cli-utils': link:cli/cli-utils
+      '@lskjs/cli-utils': 3.0.0-alpha.7
       '@lskjs/eslint-config': 2.21.0
       '@size-limit/preset-small-lib': 8.1.1_size-limit@8.1.1
       '@types/jest': 29.2.5
@@ -38,9 +38,9 @@ importers:
     specifiers:
       '@commitlint/cli': 17.4.2
       '@lskjs/algos': 3.0.0-alpha.10
-      '@lskjs/cli-utils': ^3.0.0-alpha.7
-      '@lskjs/env': 3.0.0-alpha.10
-      '@lskjs/err': 3.0.0-alpha.10
+      '@lskjs/cli-utils': ^3.0.0-alpha.13
+      '@lskjs/env': ^3.0.0-alpha.13
+      '@lskjs/err': ^3.0.0-alpha.13
       '@lskjs/stringify': ^2.85.1
       all-contributors-cli: ^6.20.0
       concurrently: 7.6.0
@@ -50,7 +50,7 @@ importers:
       remark-template: 1.6.0
     dependencies:
       '@commitlint/cli': 17.4.2
-      '@lskjs/algos': link:../../libs/algos
+      '@lskjs/algos': 3.0.0-alpha.10
       '@lskjs/cli-utils': link:../cli-utils
       '@lskjs/env': link:../../libs/env
       '@lskjs/err': link:../../libs/err
@@ -65,10 +65,10 @@ importers:
   cli/cli-utils:
     specifiers:
       '@babel/runtime': 7.20.7
-      '@lskjs/colors': 3.0.0-alpha.10
-      '@lskjs/env': 3.0.0-alpha.10
-      '@lskjs/err': 3.0.0-alpha.10
-      '@lskjs/log': ^3.0.0-alpha.10
+      '@lskjs/colors': ^3.0.0-alpha.13
+      '@lskjs/env': ^3.0.0-alpha.13
+      '@lskjs/err': ^3.0.0-alpha.13
+      '@lskjs/log': ^3.0.0-alpha.13
       '@lskjs/utils': 2.87.1
       '@pnpm/filter-workspace-packages': ^6.0.26
       '@pnpm/logger': ^5.0.0
@@ -105,11 +105,11 @@ importers:
       '@babel/runtime': 7.20.7
       '@lskjs/algos': 3.0.0-alpha.10
       '@lskjs/cli': ^3.0.0-alpha.7
-      '@lskjs/cli-scripts': ^3.0.0-alpha.7
-      '@lskjs/cli-utils': ^3.0.0-alpha.7
-      '@lskjs/colors': workspace:3.0.0-alpha.10
-      '@lskjs/err': 3.0.0-alpha.10
-      '@lskjs/log': 3.0.0-alpha.10
+      '@lskjs/cli-scripts': ^3.0.0-alpha.13
+      '@lskjs/cli-utils': ^3.0.0-alpha.13
+      '@lskjs/colors': workspace:3.0.0-alpha.13
+      '@lskjs/err': ^3.0.0-alpha.13
+      '@lskjs/log': ^3.0.0-alpha.13
       '@oclif/command': 1.8.21
       '@oclif/config': 1.18.6
       '@oclif/dev-cli': 1.26.10
@@ -124,8 +124,8 @@ importers:
       typescript: 4.7.3
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': link:../../libs/algos
-      '@lskjs/cli': 'link:'
+      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/cli': 3.0.0-alpha.7
       '@lskjs/cli-scripts': link:../cli-scripts
       '@lskjs/cli-utils': link:../cli-utils
       '@lskjs/colors': link:../../libs/colors
@@ -150,7 +150,7 @@ importers:
 
   libs/colors:
     specifiers:
-      '@lskjs/env': ^3.0.0-alpha.10
+      '@lskjs/env': ^3.0.0-alpha.13
     dependencies:
       '@lskjs/env': link:../env
 
@@ -162,7 +162,7 @@ importers:
 
   libs/err:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.10
+      '@lskjs/algos': ^3.0.0-alpha.13
     dependencies:
       '@lskjs/algos': link:../algos
 
@@ -171,10 +171,10 @@ importers:
 
   libs/log:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.10
-      '@lskjs/colors': ^3.0.0-alpha.10
-      '@lskjs/env': ^3.0.0-alpha.10
-      '@lskjs/err': ^3.0.0-alpha.10
+      '@lskjs/algos': ^3.0.0-alpha.13
+      '@lskjs/colors': ^3.0.0-alpha.13
+      '@lskjs/env': ^3.0.0-alpha.13
+      '@lskjs/err': ^3.0.0-alpha.13
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
       '@types/through': 0.0.30
@@ -205,10 +205,10 @@ importers:
 
   libs/module:
     specifiers:
-      '@lskjs/algos': ^3.0.0-alpha.10
-      '@lskjs/env': ^3.0.0-alpha.10
-      '@lskjs/err': ^3.0.0-alpha.10
-      '@lskjs/log': ^3.0.0-alpha.10
+      '@lskjs/algos': ^3.0.0-alpha.13
+      '@lskjs/env': ^3.0.0-alpha.13
+      '@lskjs/err': ^3.0.0-alpha.13
+      '@lskjs/log': ^3.0.0-alpha.13
       '@lskjs/mutex': ^3.0.0-alpha.10
       '@lskjs/utils2': ^3.0.0-alpha.10
       events: ^3.3.0

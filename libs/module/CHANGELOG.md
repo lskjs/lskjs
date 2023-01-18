@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.13](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.10...v3.0.0-alpha.13) (2023-01-18)
+
+
+### Features
+
+* migrate @lskjs/cli to this repo ([9ac9c6d](https://github.com/lskjs/lskjs/commit/9ac9c6d21e38675608e2711c0ab191750b78866b))
+* migrate @lskjs/cli to this repo ([91fad1e](https://github.com/lskjs/lskjs/commit/91fad1ef62a26e7cffa4e89375aed4a9008bf262))
+
+
+
+
+
 # [3.0.0-alpha.10](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.9...v3.0.0-alpha.10) (2023-01-16)
 
 

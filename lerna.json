@@ -1,10 +1,13 @@
 {
-  "version": "3.0.0-alpha.10",
+  "version": "3.0.0-alpha.13",
   "npmClient": "pnpm",
   "useWorkspaces": true,
   "command": {
     "vesion": {
-      "allowBranch": [        "master",        "beta"      ],
+      "allowBranch": [
+        "master",
+        "beta"
+      ],
       "conventionalCommits": true,
       "conventionalPrerelease": true,
       "ignoreChanges": [
@@ -15,7 +18,10 @@
       "message": "chore(release): 🎉 publish %s"
     },
     "publish": {
-      "allowBranch": [        "master",        "beta"      ],
+      "allowBranch": [
+        "master",
+        "beta"
+      ],
       "conventionalCommits": true,
       "conventionalPrerelease": true,
       "ignoreChanges": [

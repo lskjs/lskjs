@@ -1,6 +1,6 @@
 {
   "name": "lsk",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.13",
   "description": "LSK.js CLI (Command Line Interface) is the easiest way to create and manage LSK.js project",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "keywords": [
@@ -21,11 +21,11 @@
     "@babel/runtime": "7.20.7",
     "@lskjs/algos": "3.0.0-alpha.10",
     "@lskjs/cli": "^3.0.0-alpha.7",
-    "@lskjs/cli-scripts": "^3.0.0-alpha.7",
-    "@lskjs/cli-utils": "^3.0.0-alpha.7",
-    "@lskjs/colors": "workspace:3.0.0-alpha.10",
-    "@lskjs/err": "3.0.0-alpha.10",
-    "@lskjs/log": "3.0.0-alpha.10",
+    "@lskjs/cli-scripts": "^3.0.0-alpha.13",
+    "@lskjs/cli-utils": "^3.0.0-alpha.13",
+    "@lskjs/colors": "workspace:3.0.0-alpha.13",
+    "@lskjs/err": "^3.0.0-alpha.13",
+    "@lskjs/log": "^3.0.0-alpha.13",
     "@oclif/command": "1.8.21",
     "@oclif/config": "1.18.6",
     "@oclif/errors": "^1.3.6",
@@ -61,7 +61,6 @@
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
-  
   "access": "public",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

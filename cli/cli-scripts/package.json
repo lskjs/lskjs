@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-scripts",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.13",
   "description": "LSK.js CLI-scripts – some scripts for LSK.js – CLI projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "keywords": [
@@ -16,9 +16,9 @@
   "dependencies": {
     "@commitlint/cli": "17.4.2",
     "@lskjs/algos": "3.0.0-alpha.10",
-    "@lskjs/cli-utils": "^3.0.0-alpha.7",
-    "@lskjs/env": "3.0.0-alpha.10",
-    "@lskjs/err": "3.0.0-alpha.10",
+    "@lskjs/cli-utils": "^3.0.0-alpha.13",
+    "@lskjs/env": "^3.0.0-alpha.13",
+    "@lskjs/err": "^3.0.0-alpha.13",
     "@lskjs/stringify": "^2.85.1",
     "all-contributors-cli": "^6.20.0",
     "concurrently": "7.6.0",
@@ -27,7 +27,6 @@
     "npm-check-updates": "13.0.4",
     "remark-template": "1.6.0"
   },
-  
   "scripts": {
     "build": "echo nothing",
     "test": "echo skip"
