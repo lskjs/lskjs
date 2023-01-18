@@ -67,6 +67,7 @@ importers:
   cli/cli-utils:
     specifiers:
       '@babel/runtime': 7.20.7
+      '@lskjs/algos': workspace:3.0.0-alpha.12
       '@lskjs/colors': 3.0.0-alpha.10
       '@lskjs/env': 3.0.0-alpha.10
       '@lskjs/err': 3.0.0-alpha.10
@@ -85,6 +86,7 @@ importers:
       sort-package-json: 1.57.0
     dependencies:
       '@babel/runtime': 7.20.7
+      '@lskjs/algos': link:../../libs/algos
       '@lskjs/colors': link:../../libs/colors
       '@lskjs/env': link:../../libs/env
       '@lskjs/err': link:../../libs/err

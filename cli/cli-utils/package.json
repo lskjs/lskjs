@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
+    "@lskjs/algos": "3.0.0-alpha.12",
     "@lskjs/colors": "3.0.0-alpha.10",
     "@lskjs/env": "3.0.0-alpha.10",
     "@lskjs/err": "3.0.0-alpha.10",
