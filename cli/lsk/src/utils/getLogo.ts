@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// eslint-disable-next-line import/name
 import { Color, colorize } from '@lskjs/colors';
 
 const logo = `
