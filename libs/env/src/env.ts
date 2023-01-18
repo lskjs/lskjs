@@ -6,13 +6,11 @@ import { isTTY } from '@lskjs/tty';
 // @ts-ignore
 const safeWindow: any = typeof window !== 'undefined' ? window : null;
 
-// @ts-ignore
-export const isServer = typeof window === 'undefined';
+export const isServer = !safeWindow;
 export const isClient = !isServer;
-export const isDev =
-  (isServer
-    ? process.env.NODE_ENV !== 'production'
-    : Boolean(safeWindow?.__DEV__)) || false;
+export const isDev = isServer
+  ? process.env.NODE_ENV !== 'production'
+  : Boolean(safeWindow?.__DEV__);
 export const isProd = !isDev;
 export const isDebug = isDev;
 export { isTTY };

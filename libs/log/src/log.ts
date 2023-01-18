@@ -1,6 +1,5 @@
+import { getEnvConfig } from './getEnvConfig';
 import { Logger } from './Logger';
 
-// TODO: parse args
-
-export const log = new Logger();
+export const log = new Logger(getEnvConfig());
 export default log;

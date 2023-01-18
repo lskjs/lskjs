@@ -15,6 +15,9 @@ export interface ILoggerProps {
   ns?: string;
   name?: string;
   level?: LoggerLevelType;
+  format?: string;
+  on?: Array<RegExp>;
+  off?: Array<RegExp>;
 }
 export interface ILoggerMessage {
   code?: any;

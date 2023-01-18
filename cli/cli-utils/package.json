@@ -1,0 +1,33 @@
+{
+  "name": "@lskjs/cli-utils",
+  "version": "3.0.0-alpha.7",
+  "description": "LSK.js CLI-utils – some utils functions for LSK.js – CLI projects  ",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "utils"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/lskjs/cli/issues",
+  "homepage": "https://github.com/lskjs/cli",
+  "repository": "lskjs/cli",
+  "dependencies": {
+    "@babel/runtime": "7.20.7",
+    "@lskjs/colors": "3.0.0-alpha.10",
+    "@lskjs/env": "3.0.0-alpha.10",
+    "@lskjs/err": "3.0.0-alpha.10",
+    "@lskjs/log": "^3.0.0-alpha.10",
+    "@lskjs/utils": "2.87.1",
+    "axios": "0.27.2",
+    "bluebird": "3.7.2",
+    "glob": "7.2.0",
+    "global-prefix": "^3.0.0",
+    "lodash": "4.17.21",
+    "rsync": "0.6.1",
+    "sort-package-json": "1.57.0"
+  },
+  "main": "src/index.js",
+  "scripts": {}
+}

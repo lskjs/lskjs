@@ -1,0 +1,1 @@
+const { getPaths } = require('../../../../../src');

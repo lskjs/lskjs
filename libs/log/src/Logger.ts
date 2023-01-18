@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 // import debug from 'debug';
 import { omitNull } from '@lskjs/algos';
-import { getEnvVar, isClient, isDev } from '@lskjs/env';
 
 import { levelsPriority } from './config';
+import { defaultFormat } from './getEnvConfig';
 import { stringify } from './pretty/formats';
 import { isLsklogWeb } from './pretty/formats/lsklog';
 // import { tryPrettyFormat } from './pretty/tryPrettyFormat';
@@ -14,27 +14,34 @@ import {
   ILoggerProps,
   LoggerLevelType,
 } from './types';
-
-const LOG_LEVEL = () =>
-  getEnvVar('DEBUG', '').includes('lsk') || getEnvVar('DEBUG', '').includes('*')
-    ? 'trace'
-    : getEnvVar('LOG_LEVEL', '');
-const LOG_FORMAT = () =>
-  getEnvVar('LOG_FORMAT', isDev || isClient ? 'pretty' : 'lsk');
-// const LOG_DATA = () => !!env('LOG_DATA', 0);
+import { anyRegExps } from './utils/anyRegExps';
 
 export class Logger implements ILogger {
   prefix?: string;
   ns?: string;
   name?: string;
-  level!: LoggerLevelType;
+  format?: string = defaultFormat;
+  level: LoggerLevelType = 'trace';
+  on: RegExp[] = [];
+  off: RegExp[] = [];
   constructor(props: ILoggerProps = {}) {
     this.setProps(props);
   }
-  setProps({ prefix, ns, name, level = 'trace' }: ILoggerProps): void {
+  setProps({
+    prefix,
+    ns,
+    name,
+    level,
+    format,
+    on = [],
+    off = [],
+  }: ILoggerProps): void {
     if (prefix) this.prefix = prefix;
     if (ns) this.ns = ns;
+    if (on) this.on = on;
+    if (off) this.off = off;
     if (name) this.name = name;
+    if (format) this.format = format;
     if (level) {
       if (!levelsPriority[level]) {
         throw new Error(`Incorrect level: ${this.level}`);
@@ -42,6 +49,10 @@ export class Logger implements ILogger {
       this.level = level;
     }
     if (!this.level) this.level = 'trace';
+    if (!this.level) this.level = 'trace';
+    if (!this.format) this.format = 'lsk';
+    if (!this.off) this.off = [];
+    if (!this.on) this.on = [];
   }
 
   static create(props: ILoggerProps): ILogger {
@@ -58,8 +69,9 @@ export class Logger implements ILogger {
   canLog(level: LoggerLevelType): boolean {
     const logLevel = this.getLevelPriority(level);
     const currentLevel = this.getLevelPriority(this.level);
-    const globalLevel = this.getLevelPriority(LOG_LEVEL());
-    return logLevel >= currentLevel && logLevel >= globalLevel;
+    if (this.ns && anyRegExps(this.off, this.ns)) return false;
+    if (this.ns && anyRegExps(this.on, this.ns)) return true;
+    return logLevel >= currentLevel;
   }
   fatal(...args: any[]): void {
     if (!this.canLog('fatal')) return;
@@ -122,14 +134,14 @@ export class Logger implements ILogger {
     // if (LOG_FORMAT() !== 'none' && LOG_FORMAT() !== 'pretty') args = args.map((arg) => toString(arg));
 
     // if (LOG_DATA()) meta.data = passArgs;
-    if (LOG_FORMAT() === 'none') return;
+    if (this.format === 'none') return;
     const data = omitNull(meta as Record<string, unknown>);
-    if (LOG_FORMAT() === 'pretty') {
+    if (this.format === 'pretty') {
       this.log(...prettyFormat(data, ...passArgs));
       return;
     }
     // console.log({ args, data, str, 'LOG_FORMAT()': LOG_FORMAT() });
-    this.log(stringify(LOG_FORMAT(), data, ...passArgs));
+    this.log(stringify(this.format || 'lsk', data, ...passArgs));
   }
 }
 

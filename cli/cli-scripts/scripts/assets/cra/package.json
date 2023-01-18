@@ -1,0 +1,30 @@
+{
+  "name": "@lskjs/cra",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jest": "26.6.0",
+    "react": "17.0.1",
+    "react-app-rewired": "2.1.8",
+    "react-dom": "17.0.1",
+    "react-scripts": "4.0.2"
+  },
+  "proxy": "http://localhost:8080",
+  "scripts": {
+    "start": "SKIP_PREFLIGHT_CHECK=true react-app-rewired start",
+    "dev": "npm run start",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "resolutions": {
+    "fsevents": "*"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

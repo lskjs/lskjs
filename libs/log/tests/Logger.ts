@@ -1,3 +1,5 @@
+import { tryJSONparse } from '@lskjs/env';
+
 import BaseLogger from '../src/Logger';
 import { LoggerLevelType } from '../src/types';
 
@@ -9,7 +11,9 @@ export class Logger extends BaseLogger {
   }
   lastLoggerArgs: any[] | null;
   log(...args: any[]): void {
-    this.lastLoggerArgs = JSON.parse(args);
+    // console.log('Logger.log', ...args);
+    // this.lastLoggerArgs = args;
+    this.lastLoggerArgs = tryJSONparse(args[0]);
   }
 }
 

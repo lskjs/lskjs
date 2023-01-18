@@ -1,11 +1,11 @@
 /* global test expect */
 import Logger from './Logger';
 
-process.env.LOG_FORMAT = 'none';
-process.env.LOG_LEVEL = 'trace';
-
 describe('new Logger()', () => {
-  const log = new Logger();
+  const log = new Logger({
+    level: 'trace',
+    format: 'none',
+  });
   test('log.trace(123)', () => {
     log.lastLogArgs = null;
     log.trace(123);

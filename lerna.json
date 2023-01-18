@@ -2,16 +2,13 @@
   "version": "3.0.0-alpha.10",
   "packages": [
     "packages/*",
-    "packages/cli-scripts/files"
+    "cli/*"
   ],
   "npmClient": "pnpm",
   "useWorkspaces": true,
   "command": {
     "publish": {
-      "allowBranch": [
-        "master",
-        "beta"
-      ],
+      "allowBranch": [        "master",        "beta"      ],
       "conventionalCommits": true,
       "conventionalPrerelease": true,
       "ignoreChanges": [

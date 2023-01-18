@@ -1,0 +1,68 @@
+{
+  "name": "@lskjs/cli",
+  "version": "3.0.0-alpha.7",
+  "description": "LSK.js CLI (Command Line Interface) is the easiest way to create and manage LSK.js project",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "helper"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/lskjs/cli/issues",
+  "homepage": "https://github.com/lskjs/cli",
+  "repository": "lskjs/cli",
+  "bin": {
+    "lsk": "bin/run",
+    "lskjs": "bin/run"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.20.7",
+    "@lskjs/algos": "3.0.0-alpha.10",
+    "@lskjs/cli": "^3.0.0-alpha.7",
+    "@lskjs/cli-scripts": "^3.0.0-alpha.7",
+    "@lskjs/cli-utils": "^3.0.0-alpha.7",
+    "@lskjs/colors": "workspace:3.0.0-alpha.10",
+    "@lskjs/err": "3.0.0-alpha.10",
+    "@lskjs/log": "3.0.0-alpha.10",
+    "@oclif/command": "1.8.21",
+    "@oclif/config": "1.18.6",
+    "@oclif/errors": "^1.3.6",
+    "@oclif/plugin-help": "5.1.23",
+    "@types/node": "18.11.18",
+    "glob": "7.2.0",
+    "logfmt": "1.3.2",
+    "rsync": "0.6.1",
+    "ts-node": "10.8.1",
+    "typescript": "4.7.3"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "1.26.10",
+    "globby": "11.0.4"
+  },
+  "files": [
+    "/lib",
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src",
+    "/utils.js"
+  ],
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "lsk",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint .",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "lint:js": "eslint . --ext .js --fix && prettier --write --plugin-search-dir=.",
+    "version": "oclif-dev readme && git add README.md && rm -f ../../README.md && cp README.md ../.."
+  }
+}

@@ -1,3 +1,4 @@
+import { any } from './any';
 import { count } from './count';
 import { countBy } from './countBy';
 import { every } from './every';
@@ -15,6 +16,7 @@ import { set } from './set';
 import { setProps } from './setProps';
 
 export {
+  any,
   countBy,
   count,
   every,
@@ -32,6 +34,7 @@ export {
   setProps,
 };
 export default {
+  any,
   countBy,
   count,
   every,
