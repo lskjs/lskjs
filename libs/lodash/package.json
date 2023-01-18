@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/lodash",
-  "version": "3.0.0-alpha.17",
+  "version": "3.0.0-alpha.18",
   "description": "LSK.js – utils – helpers and functions",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -228,6 +228,5 @@
       "limit": "6kb"
     }
   ],
-  "_type": "module",
-  "dependencies": {}
+  "_type": "module"
 }

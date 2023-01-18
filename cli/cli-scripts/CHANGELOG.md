@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.18](https://github.com/lskjs/cli/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2023-01-18)
+
+
+### Features
+
+* **cli:** improve release scripts ([455ae8b](https://github.com/lskjs/cli/commit/455ae8bdaad07508f1b5e022fd3db41f130b04f8))
+* **cli:** improve release scripts ([4e0d8c7](https://github.com/lskjs/cli/commit/4e0d8c7a4d8dacf423d2d7d345afea312d0d6feb))
+
+
+
+
+
 # [3.0.0-alpha.17](https://github.com/lskjs/cli/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2023-01-18)
 
 **Note:** Version bump only for package @lskjs/cli-scripts
