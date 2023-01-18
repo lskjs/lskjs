@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.16](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.15...v3.0.0-alpha.16) (2023-01-18)
+
+
+### Bug Fixes
+
+* quickfix ([6b98d0c](https://github.com/lskjs/lskjs/commit/6b98d0cf6ca0e816b1935ee1873b608aed9d998f))
+* quickfix ([9fd47b3](https://github.com/lskjs/lskjs/commit/9fd47b35bc35f549ecb142ceacdd55edc15a8b6b))
+* quickfix ([55061ac](https://github.com/lskjs/lskjs/commit/55061ac845c3cb35a992cc6503acc5312c523fb9))
+
+
+### Features
+
+* **cli-scripts:** clear deps ([11b0a29](https://github.com/lskjs/lskjs/commit/11b0a2905b36dfdadd981c5f52a5f51da309b540))
+* **cli:** improve utils ([36269d4](https://github.com/lskjs/lskjs/commit/36269d4bc24e122aacb471b09876fed1de7f6d3e))
+* try to github action ([c19e2c8](https://github.com/lskjs/lskjs/commit/c19e2c89c22e26808b9edf6105d486679f8b88e7))
+* try to github action ([dcaa83b](https://github.com/lskjs/lskjs/commit/dcaa83b973e4977e06a6fc4db2fbf82ec67edee1))
+
+
+
+
+
 # [3.0.0-alpha.15](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.14...v3.0.0-alpha.15) (2023-01-18)
 
 

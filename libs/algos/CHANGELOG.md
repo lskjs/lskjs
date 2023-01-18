@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.16](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.15...v3.0.0-alpha.16) (2023-01-18)
+
+
+### Features
+
+* try to github action ([dcaa83b](https://github.com/lskjs/lskjs/commit/dcaa83b973e4977e06a6fc4db2fbf82ec67edee1))
+
+
+
+
+
 # [3.0.0-alpha.15](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.14...v3.0.0-alpha.15) (2023-01-18)
 
 
