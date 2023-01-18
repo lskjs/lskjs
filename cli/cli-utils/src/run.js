@@ -27,7 +27,7 @@ const run = async (main) => {
       cwd,
       isRoot: path.dirname(config?.path) === cwd,
     };
-    log.trace('[run]', rootRun);
+    // log.trace('[run]', rootRun);
     rootRun.config = config;
     rootRun.log = log;
     rootRun.ctx = ctx;

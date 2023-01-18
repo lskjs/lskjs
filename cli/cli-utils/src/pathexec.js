@@ -1,9 +1,11 @@
 /* eslint-disable import/no-dynamic-require */
 const { Err } = require('@lskjs/err');
+const { joinArgs } = require('./joinArgs');
 const { getPackageName, isRoot } = require('./cwdInfo');
 
 const { findPath } = require('./findPaths');
 const { getPaths } = require('./getPaths');
+const { getShortPath } = require('./getShortPath');
 const { createLogger } = require('./log');
 
 // pathexec some-script arg1 arg2 -- some bare args
@@ -27,7 +29,8 @@ async function pathexec(command, options = {}) {
   const cwd = options.cwd || process.cwd();
   const ctx = options.ctx || process.pathexec?.ctx || {};
   if (!ctx.stack) ctx.stack = [];
-  ctx.stack.unshift({ command: `lsk run ${command}`, options });
+  let cmd = `lsk run ${command} ${joinArgs(args)}`;
+  ctx.stack.unshift({ command: cmd, options });
   process.env.pathexec = { cwd };
   const packageName = options.name || getPackageName({ cwd });
   const name = script.replace(/:/g, '-');
@@ -36,7 +39,6 @@ async function pathexec(command, options = {}) {
     createLogger({
       name: packageName,
     });
-  log.debug(`[>>>] lsk run ${command}`); // , { cwd }
   const pathOptions = {
     name,
     exts: ['.sh', '.js'],
@@ -46,6 +48,10 @@ async function pathexec(command, options = {}) {
     script: name,
   };
   const scriptPath = findPath(pathOptions);
+  if (args.includes('--explain')) {
+    cmd += `  (${getShortPath(scriptPath)})`;
+  }
+  log.debug(`[>>] ${cmd}`); // , { cwd }
   ctx.stack[0].filename = scriptPath;
   if (!scriptPath) {
     const errMessage = `Missing script: "${script}"`;
@@ -59,8 +65,8 @@ async function pathexec(command, options = {}) {
   let res;
   // eslint-disable-next-line no-useless-catch
   try {
+    log.trace(`[>] require ${getShortPath(scriptPath)}`);
     const content = await require(scriptPath);
-    if (!content) return;
     let runnable;
     if (typeof content === 'function') {
       runnable = content;
@@ -68,6 +74,9 @@ async function pathexec(command, options = {}) {
       runnable = content.run;
     } else if (content?.main && typeof content.main === 'function') {
       runnable = content.main;
+    } else {
+      log.warn(`[!incorrectExports] ${scriptPath}`);
+      return null;
     }
     if (runnable) {
       res = await runnable({

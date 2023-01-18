@@ -1,5 +1,5 @@
 import Err from '@lskjs/err';
-import fs from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import yaml from 'js-yaml';
 import fromPairs from 'lodash/fromPairs';
 
@@ -11,7 +11,8 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
       delete require.cache[require.resolve(filename)];
       return data;
     }
-    const str = fs.readFileSync(filename);
+    if (!existsSync(filename)) return null;
+    const str = readFileSync(filename);
     if (type === 'json') {
       return JSON.parse(str);
     }
@@ -37,6 +38,7 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
     }
     throw new Err('!type', { data: { type } });
   } catch (err) {
+    // TODO: обработать ошибку если
     // eslint-disable-next-line no-console
     console.error('fileToJson err', err);
     return null;

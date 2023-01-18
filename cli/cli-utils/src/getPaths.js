@@ -14,7 +14,9 @@ const getPaths = (params = {}) => {
   let { exts } = params;
   if (!exts) exts = [''];
   const paths = (pathexecConfig?.paths || [])
-    .map((prefix) => exts.map((ext) => path.resolve(`${prefix}/${scriptPath}${ext}`)))
+    .map((prefix) =>
+      exts.map((ext) => path.resolve(`${prefix}/${scriptPath}${ext}`))
+    )
     .flat();
   if (paths.length) return paths;
 
@@ -26,31 +28,49 @@ const getPaths = (params = {}) => {
   if (local) {
     [...Array(dirs)].map((_, deep) => {
       const dir = `${cwd}/${'../'.repeat(deep)}`;
-      paths.push(...exts.map((ext) => path.resolve(`${dir}/${scriptPath}${ext}`)));
+      paths.push(
+        ...exts.map((ext) => path.resolve(`${dir}/${scriptPath}${ext}`))
+      );
       if (nodemodules) {
-        paths.push(...exts.map((ext) => path.resolve(`${dir}/${nodemodulesPostfix}/${scriptPath}${ext}`)));
+        paths.push(
+          ...exts.map((ext) =>
+            path.resolve(`${dir}/${nodemodulesPostfix}/${scriptPath}${ext}`)
+          )
+        );
       }
     });
   }
   if (nodemodules) {
     paths.push(
       ...exts.map((ext) =>
-        path.resolve(`${process.env.HOME}/projects/lskjs-cli/packages/cli-scripts/${scriptPath}${ext}`),
-      ),
+        path.resolve(
+          `${process.env.HOME}/projects/lskjs-cli/packages/cli-scripts/${scriptPath}${ext}`
+        )
+      )
     );
     globalNodemodules.forEach((dir) => {
-      paths.push(...exts.map((ext) => path.resolve(`${dir}${nodemodulesPostfix}/${scriptPath}${ext}`)));
-    });
-    globalNodemodules.forEach((dir) => {
       paths.push(
-        ...exts.map((ext) => path.resolve(`${dir}/node_modules/@lskjs/cli/${nodemodulesPostfix}/${scriptPath}${ext}`)),
+        ...exts.map((ext) =>
+          path.resolve(`${dir}${nodemodulesPostfix}/${scriptPath}${ext}`)
+        )
       );
     });
     globalNodemodules.forEach((dir) => {
       paths.push(
         ...exts.map((ext) =>
-          path.resolve(`${dir}/node_modules/lsk/node_modules/@lskjs/cli/${nodemodulesPostfix}/${scriptPath}${ext}`),
-        ),
+          path.resolve(
+            `${dir}/node_modules/@lskjs/cli/${nodemodulesPostfix}/${scriptPath}${ext}`
+          )
+        )
+      );
+    });
+    globalNodemodules.forEach((dir) => {
+      paths.push(
+        ...exts.map((ext) =>
+          path.resolve(
+            `${dir}/node_modules/lsk/node_modules/@lskjs/cli/${nodemodulesPostfix}/${scriptPath}${ext}`
+          )
+        )
       );
     });
   }

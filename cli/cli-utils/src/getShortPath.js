@@ -1,4 +1,4 @@
-const getShortPath = (link = '') =>
-  link.replace(process.cwd(), '.').replace(process.env.HOME, '~').replace(process.env.HOME2, '~');
+const getShortPath = (link = '', { cwd = process.cwd() } = {}) =>
+  link.replace(`${cwd}/`, '').replace(cwd, '.').replace(process.env.HOME, '~');
 
 module.exports = { getShortPath };

@@ -3,34 +3,39 @@ const { run, shell, shellParallel } = require('@lskjs/cli-utils');
 const fs = require('fs');
 
 const { jsonToFile, getComment } = require('@lskjs/stringify');
+const { getShortPath } = require('@lskjs/cli-utils/src/getShortPath');
 
-async function main(props = {}) {
-  const { isRoot, log, ctx, cwd, config } = props;
+async function main({ isRoot, log, ctx, cwd, config, args }) {
   if (isRoot) {
-    await shellParallel(`lsk run build-gitlab-ci`, { ctx });
-    await shell('lsk run build-gitlab-ci', { ctx, cwd: `${cwd}/packages` });
-    await shell('lsk run build-gitlab-ci', { ctx, cwd: `${cwd}/apps` });
+    await shellParallel(`lsk run build-gitlab-ci`, { ctx, args });
+    // await shell('lsk run build-gitlab-ci', { ctx, args, cwd: `${cwd}/libs` });
+    // await shell('lsk run build-gitlab-ci', { ctx, args, cwd: `${cwd}/apps` });
   }
-  const { rootRepo, packages, cwd: rootCwd } = config;
-  const packagePath = cwd.replace(`${rootCwd}/`, '').replace(rootCwd, '');
-  let package = packagePath.split('/').reverse()[0];
-  if (package === 'packages' || package === 'apps' || cwd === rootCwd) package = null;
+  const { rootRepo, packages, rootPath } = config;
+  const packagePath = cwd.replace(`${rootPath}/`, '').replace(rootPath, '');
+  let name = packagePath.split('/').reverse()[0];
+  if (name === 'packages' || name === 'apps' || cwd === rootPath) {
+    name = null;
+  }
   const inputFilename = `${packagePath}/.gitlab-ci.js`;
   const outputFilename = `${packagePath}/.gitlab-ci.yml`;
-  if (!fs.existsSync(`${rootCwd}/${inputFilename}`)) {
-    log.trace('[skip]', inputFilename);
+  if (!fs.existsSync(`${rootPath}/${inputFilename}`)) {
+    log.trace('[skip]', getShortPath(inputFilename));
     return;
   }
 
   // eslint-disable-next-line import/no-dynamic-require
-  const getConfig = require(`${rootCwd}/${inputFilename}`);
+  const getConfig = require(`${rootPath}/${inputFilename}`);
   const data = getConfig({
-    packages: package ? [package] : packages,
-    package,
+    packages: name ? [name] : packages,
+    package: name,
     path: packagePath,
   });
-  log.trace('[save]', `${inputFilename} => ${outputFilename}`);
-  await jsonToFile(`${rootCwd}/${outputFilename}`, data, {
+  log.trace(
+    '[save]',
+    ` ${getShortPath(inputFilename)} => ${getShortPath(outputFilename)}`
+  );
+  await jsonToFile(`${rootPath}/${outputFilename}`, data, {
     type: 'yml',
     comment: getComment({
       name: inputFilename,

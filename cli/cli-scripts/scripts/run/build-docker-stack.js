@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const { run, getLskConfig, shellParallel } = require('@lskjs/cli-utils');
+const { getShortPath } = require('@lskjs/cli-utils/src/getShortPath');
 const { jsonToFile, getComment } = require('@lskjs/stringify');
 const { props } = require('fishbird');
 const fs = require('fs');
@@ -16,7 +17,7 @@ const main = async ({ isRoot, log } = {}) => {
   const package = packagePath.split('/').reverse()[0];
   const inputFilename = `${packagePath}/.gitlab-ci.js`;
   if (!fs.existsSync(`${rootCwd}/${inputFilename}`)) {
-    log.trace('[skip]', inputFilename);
+    log.trace('[skip]', getShortPath(inputFilename));
     return;
   }
   // eslint-disable-next-line import/no-dynamic-require
@@ -25,7 +26,12 @@ const main = async ({ isRoot, log } = {}) => {
     const data = getConfig({ env, package });
     const postfix = env !== 'prod' ? `.${env}` : '';
     const outputFilename = `${packagePath}/docker-stack${postfix}.yml`;
-    log.trace('[save]', `env:${env} ${inputFilename} => ${outputFilename}`);
+    log.trace(
+      '[save]',
+      `env:${env} ${getShortPath(inputFilename)} => ${getShortPath(
+        outputFilename
+      )}`
+    );
     await jsonToFile(`${rootCwd}/${outputFilename}`, data, {
       type: 'yml',
       comment: getComment({

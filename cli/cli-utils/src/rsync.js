@@ -2,7 +2,11 @@ const { shell } = require('./shell');
 const fs = require('fs');
 const Err = require('@lskjs/err');
 
-function rsync(from, to, { options = '-aEp', cwd, ignoreMissingFiles, cmd } = {}) {
+function rsync(
+  from,
+  to,
+  { options = '-aEp', cwd, ignoreMissingFiles, cmd } = {}
+) {
   if (!cmd) {
     // eslint-disable-next-line no-param-reassign
     cmd = process.env.NODE_ENV === 'production' ? 'cp' : 'rsync';

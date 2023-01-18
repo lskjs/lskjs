@@ -5,6 +5,10 @@
 const { log } = require('./log');
 const ph = require('path');
 const fs = require('fs');
+const { getShortPath } = require('./getShortPath');
+const { getRootPath } = require('./cwdInfo');
+
+const rcs = {};
 
 const getLskConfig = (options = {}) => {
   const { cwd = process.cwd() } = options;
@@ -28,12 +32,13 @@ const getLskConfig = (options = {}) => {
   // });
   if (!path) return {};
   try {
-    const config = require(path);
-    log.trace('[lskrc]', path);
-    return {
-      path,
-      ...config,
-    };
+    const raw = require(path);
+    const config = { path, rootPath: getRootPath({ path }), ...raw };
+    if (!rcs[path]) {
+      rcs[path] = config;
+      log.trace('[load] lskrc', getShortPath(path));
+    }
+    return config;
   } catch (error) {
     console.error(`parse .lskjs.js err ${path}`, error);
     return {};

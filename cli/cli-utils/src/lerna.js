@@ -2,7 +2,9 @@ const { shell } = require('./shell');
 const { findBin } = require('./findBin');
 
 const lerna = (...args) => {
-  const scopes = (process.env.SCOPE || process.env.PACKAGES || '').split(' ').filter(Boolean);
+  const scopes = (process.env.SCOPE || process.env.PACKAGES || '')
+    .split(' ')
+    .filter(Boolean);
   const shellArgs = [
     // asd
     findBin('lerna'),
