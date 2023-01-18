@@ -13,7 +13,7 @@ async function main({ isRoot, ctx, cwd, args } = {}) {
     await shellParallel(`lsk run buiild:ts`, { ctx });
     return;
   }
-  const isSilent = args.includes('--silent') || isCI || !isDev;
+  const isSilent = args.includes('--silent') || isCI;
   const isWatch = args.includes('--watch');
   const isProd = !isDev || args.includes('--prod');
   const { isLib } = getCwdInfo({ cwd });

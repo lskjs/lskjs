@@ -1,4 +1,4 @@
 packages:
   - "cli/*"
-  # - "libs/*"
+  - "libs/*"
   # - "packages/*"

@@ -7,7 +7,7 @@ const main = async ({ isRoot, ctx, args } = {}) => {
     await shellParallel('lsk run test:size-limit', { ctx });
     return;
   }
-  const isSilent = args.includes('--silent') || isCI || !isDev;
+  const isSilent = args.includes('--silent') || isCI;
   let cmd = findBin('size-limit');
   if (isSilent) cmd += ' --silent';
   await shell(cmd, { ctx });

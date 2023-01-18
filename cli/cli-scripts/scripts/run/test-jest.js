@@ -14,12 +14,14 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
     await shellParallel('lsk run test:jest', { ctx, args });
     return;
   }
+  const isProd = !isDev || args.includes('--prod');
   const isWatch = args.includes('--watch');
-  const isSilent = args.includes('--silent') || isCI || !isDev;
+  const isSilent = args.includes('--silent') || isCI;
   let cmd = findBin('jest');
   const { rootPath } = getCwdInfo({ cwd });
-  const jestConfigPath = `${rootPath}/scripts/jest.config.json`;
-  if (isSilent) cmd += ' --silent --ci';
+  const jestConfigPath = `${rootPath}/scripts/jest.config.js`;
+  if (isProd || isSilent) cmd += ' --silent';
+  if (isSilent) cmd += ' --ci';
   if (isWatch) cmd += ' --watch';
   if (jestConfigPath && existsSync(jestConfigPath)) {
     cmd += ` --config ${jestConfigPath}`;

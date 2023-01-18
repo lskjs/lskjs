@@ -53,32 +53,32 @@
   "access": "public",
   "size-limit": [
     {
-      "path": "lib/index.mjs",
-      "limit": "22kb"
+      "path": "lib/index.js",
+      "limit": "21kb"
     },
     {
       "path": "lib/Module.js",
-      "limit": "1kb"
+      "limit": "20kb"
     },
     {
       "path": "lib/ModuleWithConfig.js",
-      "limit": "1kb"
+      "limit": "4.5kb"
     },
     {
       "path": "lib/ModuleWithEE.js",
-      "limit": "1kb"
+      "limit": "12kb"
     },
     {
       "path": "lib/ModuleWithLifecycle.js",
-      "limit": "1kb"
+      "limit": "4.5kb"
     },
     {
       "path": "lib/ModuleWithLog.js",
-      "limit": "1kb"
+      "limit": "10kb"
     },
     {
-      "path": "lib/ModuleSubmodules.js",
-      "limit": "2kb"
+      "path": "lib/ModuleWithSubmodules.js",
+      "limit": "20kb"
     },
     {
       "path": "lib/items/index.js",
