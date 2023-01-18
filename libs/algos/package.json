@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/algos",
-  "version": "3.0.0-alpha.10",
+  "version": "3.0.0-alpha.12",
   "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -45,63 +45,61 @@
       "path": "lib/index.mjs",
       "limit": "1kb"
     },
-
-     {
+    {
       "path": "lib/countBy.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/omitBy.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/mapValues.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/isPlainObject.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/set.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/count.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/map.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/pad.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/every.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/pickBy.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/omit.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/pick.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/fromPairs.js",
       "limit": "1kb"
     },
-     {
+    {
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-
   ]
 }
