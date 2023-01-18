@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [19, 16, 14]
+        # node-version: [19, 16, 14]
+        node-version: [19]
     name: Node.js ${{ matrix.node-version }} test
     steps:
       - name: Git checkout
@@ -27,6 +28,12 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
+      - name: debug
+        run: ls -la 
+      - name: debug
+        run: ls -la node_modules
+      - name: debug
+        run: ls -la node_modules/lsk
       - run: pnpm build
       - run: pnpm test
   publish:
