@@ -5,7 +5,7 @@
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
     "build": "echo nothing",
-    "prepare": "        lsk run prepare",
+    "prepack": "        lsk run prepack",
     "test": "echo skip"
   },
   "dependencies": {

@@ -7,7 +7,7 @@
     "build": "          lsk run build",
     "postbuild": "      oclif-dev readme",
     "dev": "            lsk run dev",
-    "prepare": "        lsk run prepare",
+    "prepack": "        lsk run prepack",
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
@@ -17,7 +17,7 @@
     "@lskjs/cli": "^3.0.0-alpha.7",
     "@lskjs/cli-scripts": "^3.0.0-alpha.7",
     "@lskjs/cli-utils": "^3.0.0-alpha.7",
-    "@lskjs/colors": "workspace:3.0.0-alpha.10",
+    "@lskjs/colors": "3.0.0-alpha.10",
     "@lskjs/err": "3.0.0-alpha.10",
     "@lskjs/log": "3.0.0-alpha.10",
     "@oclif/command": "1.8.21",

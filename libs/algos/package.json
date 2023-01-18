@@ -6,10 +6,11 @@
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
-    "prepare": "        lsk run prepare",
+    "prepack": "        lsk run prepack",
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
+  "dependencies": {},
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -102,6 +103,5 @@
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-  ],
-  "dependencies": {}
+  ]
 }

@@ -6,10 +6,9 @@
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
-    "prepare": "        lsk run prepare",
+    "prepack": "        lsk run prepack",
     "release": "        lsk run release",
-    "test": "           lsk run test",
-    "test:watch": "     lsk run test:watch"
+    "test": "           lsk run test"
   },
   "dependencies": {
     "async-mutex": "0.4.0"

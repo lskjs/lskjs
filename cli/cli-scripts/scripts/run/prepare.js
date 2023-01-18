@@ -6,7 +6,6 @@ const main = async ({ args, isRoot, ctx } = {}) => {
     await shellParallel('lsk run prepare', { ctx, args });
     return;
   }
-
   await shell('rm -rf .release');
   await shell('lsk run fix --workspace');
   let cmd = findBin('clean-publish');

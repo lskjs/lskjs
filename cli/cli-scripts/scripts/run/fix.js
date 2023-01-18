@@ -25,7 +25,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // log.debug(333);
   // eslint-disable-next-line no-param-reassign
-  if (!args.length) args = ['--sort', '--workspace', '--prepare'];
+  if (!args.length) args = ['--sort', '--workspace', '--prepack'];
   const packFilename = `${cwd}/package.json`;
   let pack = require(packFilename);
   if (args.includes('--deps') || args.includes('--workspace')) {
@@ -42,15 +42,17 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
 
   delete pack.jest;
   delete pack.__debug;
+  delete pack.scripts?.prepare;
+  delete pack.scripts?.['test:watch'];
 
-  if (args.includes('--prepare')) {
+  if (args.includes('--prepack')) {
     if (!pack.scripts) {
       if (isLib) {
         pack.scripts = {
           dev: '            lsk run dev',
           build: '          lsk run build',
           test: '           lsk run test',
-          prepare: '        lsk run prepare',
+          prepack: '        lsk run prepack',
           release: '        lsk run release',
         };
       }
@@ -59,13 +61,14 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           dev: '            lsk run dev',
           build: '          lsk run build',
           test: '           lsk run test',
-          prepare: '        lsk run prepare',
+          prepack: '        lsk run prepack',
           release: '        lsk run release',
           start: '          lsk run start',
         };
       }
     }
-    if (!pack.scripts.prepare) pack.scripts.prepare = '        lsk run prepare';
+    if (!pack.scripts.prepack) pack.scripts.prepack = '        lsk run prepack';
+   
   }
   if (args.includes('--package')) {
     // if (!pack.workspaces && isRoot) {
