@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/err",
-  "version": "3.0.0-alpha.14",
+  "version": "3.0.0-alpha.15",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -11,7 +11,7 @@
     "test": "           lsk run test"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.0.0-alpha.14"
+    "@lskjs/algos": "^3.0.0-alpha.15"
   },
   "publishConfig": {
     "access": "public",
