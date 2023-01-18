@@ -10,9 +10,7 @@ const main = async ({ args, isRoot, ctx } = {}) => {
   await shell('lsk run fix --workspace');
   let cmd = findBin('clean-publish');
   cmd += ' --without-publish --temp-dir .release';
-  await shell(cmd, {
-    ctx,
-  });
+  await shell(cmd, { ctx });
 };
 
 module.exports = run(main);
