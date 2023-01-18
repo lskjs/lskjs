@@ -48,9 +48,10 @@ importers:
       nodemon: 2.0.16
       npm-check-updates: 13.0.4
       remark-template: 1.6.0
+      sort-package-json: 1.57.0
     dependencies:
       '@commitlint/cli': 17.4.2
-      '@lskjs/algos': link:../../libs/algos
+      '@lskjs/algos': 3.0.0-alpha.10
       '@lskjs/cli-utils': link:../cli-utils
       '@lskjs/env': link:../../libs/env
       '@lskjs/err': link:../../libs/err
@@ -61,6 +62,7 @@ importers:
       nodemon: 2.0.16
       npm-check-updates: 13.0.4
       remark-template: 1.6.0
+      sort-package-json: 1.57.0
 
   cli/cli-utils:
     specifiers:

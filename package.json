@@ -7,6 +7,7 @@
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
+    "prepare": "        lsk run prepare",
     "release": "        lsk run release",
     "test": "           lsk run test",
     "test:watch": "     lsk run test --watch"
@@ -35,11 +36,5 @@
   },
   "eslintconfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "__debug": {
-    "isLib": true,
-    "isTs": true,
-    "isBabel": false,
-    "isRoot": true
   }
 }

@@ -3,16 +3,11 @@
   "version": "3.0.0-alpha.7",
   "description": "LSK.js CLI-scripts – some scripts for LSK.js – CLI projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "keywords": [
-    "lskjs",
-    "lsk",
-    "cli",
-    "scripts"
-  ],
-  "license": "MIT",
-  "bugs": "https://github.com/lskjs/cli/issues",
-  "homepage": "https://github.com/lskjs/cli",
-  "repository": "lskjs/cli",
+  "scripts": {
+    "build": "echo nothing",
+    "prepare": "        lsk run prepare",
+    "test": "echo skip"
+  },
   "dependencies": {
     "@commitlint/cli": "17.4.2",
     "@lskjs/algos": "3.0.0-alpha.10",
@@ -25,11 +20,17 @@
     "fishbird": "^0.19.0",
     "nodemon": "2.0.16",
     "npm-check-updates": "13.0.4",
-    "remark-template": "1.6.0"
+    "remark-template": "1.6.0",
+    "sort-package-json": "1.57.0"
   },
-  
-  "scripts": {
-    "build": "echo nothing",
-    "test": "echo skip"
-  }
+  "repository": "lskjs/cli",
+  "homepage": "https://github.com/lskjs/cli",
+  "bugs": "https://github.com/lskjs/cli/issues",
+  "license": "MIT",
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "scripts"
+  ]
 }

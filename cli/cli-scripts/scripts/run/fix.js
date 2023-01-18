@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 /* eslint-disable import/no-dynamic-require */
+
+const { sortPackageJson } = require('sort-package-json');
+
 const {
   run,
   shellParallel,
@@ -21,9 +24,10 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // log.debug(222);
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // log.debug(333);
-  if (!args.length) args = ['--sort', '--deps'];
+  // eslint-disable-next-line no-param-reassign
+  if (!args.length) args = ['--sort', '--deps', '--prepare'];
   const packFilename = `${cwd}/package.json`;
-  const pack = require(packFilename);
+  let pack = require(packFilename);
   if (args.includes('--deps')) {
     pack.dependencies = omitNull(
       mapValues(pack.dependencies || {}, (v) => {
@@ -35,7 +39,10 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   }
   const debug = getCwdInfo({ cwd });
   const { isLib, isTs, isBabel, isApp } = debug;
-  // pack.__debug = debug;
+
+  delete pack.jest;
+  delete pack.__debug;
+
   if (args.includes('--prepare')) {
     if (!pack.scripts) {
       if (isLib) {
@@ -150,16 +157,47 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
         // "repository": "https://github.com/isuvorov/macrobe",
         // "bugs": "http://github.com/isuvorov/macrobe/issues",
       }
-      delete pack.jest;
-      writeFile(`${cwd}/package.json`, JSON.stringify(pack, null, 6));
-    }
-    if (args.includes('--sort')) {
-      if (isRoot) {
-        await shell(`${findBin('eslint')} --fix lerna.json`, { ctx });
-      }
-      await shell(`${findBin('eslint')} --fix package.json`, { ctx });
     }
   }
+  if (args.includes('--sort')) {
+    // if (isRoot) {
+    //   await shell(`${findBin('eslint')} --fix lerna.json`, { ctx });
+    // }
+
+    const sortOrder = [
+      'name',
+      'version',
+      'description',
+      'author',
+      'author',
+      'private',
+      'workspaces',
+      'scripts',
+      'dependencies',
+      'devDependencies',
+      'peerDependencies',
+      'optionalDependencies',
+      'publishConfig',
+      'browser',
+      'bin',
+      'main',
+      'types',
+      'typings',
+      'exports',
+      'imports',
+      'files',
+      'productName',
+      'repository',
+      'homepage',
+      'bugs',
+      'engines',
+      'license',
+      'keywords',
+      '//',
+    ];
+    pack = sortPackageJson(pack, { sortOrder });
+  }
+  await writeFile(`${cwd}/package.json`, `${JSON.stringify(pack, null, 2)}\n`);
 };
 
 module.exports = run(main);

@@ -3,19 +3,13 @@
   "version": "3.0.0-alpha.7",
   "description": "LSK.js CLI (Command Line Interface) is the easiest way to create and manage LSK.js project",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "keywords": [
-    "lskjs",
-    "lsk",
-    "cli",
-    "helper"
-  ],
-  "license": "MIT",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/cli/lsk",
-  "bugs": "https://github.com/lskjs/cli/issues",
-  "homepage": "https://github.com/lskjs/cli",
-  "bin": {
-    "lsk": "bin/run",
-    "lskjs": "bin/run"
+  "scripts": {
+    "build": "          lsk run build",
+    "postbuild": "      oclif-dev readme",
+    "dev": "            lsk run dev",
+    "prepare": "        lsk run prepare",
+    "release": "        lsk run release",
+    "test": "           lsk run test"
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
@@ -41,28 +35,10 @@
     "@oclif/dev-cli": "1.26.10",
     "globby": "11.0.4"
   },
-  "oclif": {
-    "commands": "./lib/commands",
-    "bin": "lsk",
-    "plugins": [
-      "@oclif/plugin-help"
-    ]
+  "bin": {
+    "lsk": "bin/run",
+    "lskjs": "bin/run"
   },
-  "_scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "echo skip",
-    "build": "oclif-dev readme && git add README.md && echo ok"
-  },
-  "scripts": {
-    "build": "          lsk run build",
-    "postbuild": "      oclif-dev readme",
-    "dev": "            lsk run dev",
-    "release": "        lsk run release",
-    "test": "           lsk run test"
-  },
-  
-  "access": "public",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -84,8 +60,32 @@
     "README.md",
     "LICENCE"
   ],
+  "repository": "https://github.com/lskjs/lskjs/tree/master/cli/lsk",
+  "homepage": "https://github.com/lskjs/cli",
+  "bugs": "https://github.com/lskjs/cli/issues",
+  "license": "MIT",
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "helper"
+  ],
   "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
+  },
+  "access": "public",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "lsk",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "_scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo skip",
+    "build": "oclif-dev readme && git add README.md && echo ok"
   }
 }

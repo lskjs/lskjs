@@ -6,10 +6,10 @@
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
+    "prepare": "        lsk run prepare",
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
-  "access": "public",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -36,6 +36,7 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
+  "access": "public",
   "size-limit": [
     {
       "path": "lib/index.js",

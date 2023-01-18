@@ -3,16 +3,11 @@
   "version": "3.0.0-alpha.7",
   "description": "LSK.js CLI-utils – some utils functions for LSK.js – CLI projects  ",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "keywords": [
-    "lskjs",
-    "lsk",
-    "cli",
-    "utils"
-  ],
-  "license": "MIT",
-  "bugs": "https://github.com/lskjs/cli/issues",
-  "homepage": "https://github.com/lskjs/cli",
-  "repository": "lskjs/cli",
+  "scripts": {
+    "build": "echo nothing",
+    "prepare": "        lsk run prepare",
+    "test": "echo skip"
+  },
   "dependencies": {
     "@babel/runtime": "7.20.7",
     "@lskjs/colors": "3.0.0-alpha.10",
@@ -33,8 +28,14 @@
     "sort-package-json": "1.57.0"
   },
   "main": "src/index.js",
-  "scripts": {
-    "build": "echo nothing",
-    "test": "echo skip"
-  }
+  "repository": "lskjs/cli",
+  "homepage": "https://github.com/lskjs/cli",
+  "bugs": "https://github.com/lskjs/cli/issues",
+  "license": "MIT",
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "utils"
+  ]
 }
