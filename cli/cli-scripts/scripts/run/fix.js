@@ -43,10 +43,12 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   const debug = getCwdInfo({ cwd });
   const { isLib, isTs, isBabel, isApp } = debug;
 
-  delete pack.jest;
-  delete pack.__debug;
-  delete pack.scripts?.prepare;
-  delete pack.scripts?.['test:watch'];
+  if (args.includes('--temp')) {
+    delete pack.jest;
+    delete pack.__debug;
+    delete pack.scripts?.prepare;
+    delete pack.scripts?.['test:watch'];
+  }
 
   if (args.includes('--prepack')) {
     if (!pack.scripts) {
@@ -70,7 +72,9 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
         };
       }
     }
-    if (!pack.scripts.prepack) pack.scripts.prepack = '        lsk run prepack';
+    if (!pack.scripts.prepack && !isRoot) {
+      pack.scripts.prepack = '        lsk run prepack';
+    }
   }
   if (args.includes('--package')) {
     // if (!pack.workspaces && isRoot) {

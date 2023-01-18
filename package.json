@@ -7,7 +7,6 @@
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
-    "prepack": "        lsk run prepack",
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
