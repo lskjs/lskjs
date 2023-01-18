@@ -87,11 +87,5 @@
   "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "size-limit": [
-    {
-      "path": "lib/index.js",
-      "limit": "1kb"
-    }
-  ]
+  }
 }
