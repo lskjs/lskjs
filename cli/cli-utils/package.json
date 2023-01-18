@@ -23,7 +23,7 @@
     "glob": "7.2.0",
     "global-prefix": "^3.0.0",
     "lodash": "4.17.21",
-    "logger": "link:@@pnpm/logger",
+    "logger": "@pnpm/logger",
     "rsync": "0.6.1",
     "sort-package-json": "1.57.0"
   },

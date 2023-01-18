@@ -25,10 +25,10 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // log.debug(333);
   // eslint-disable-next-line no-param-reassign
-  if (!args.length) args = ['--sort', '--deps', '--prepare'];
+  if (!args.length) args = ['--sort', '--workspace', '--prepare'];
   const packFilename = `${cwd}/package.json`;
   let pack = require(packFilename);
-  if (args.includes('--deps')) {
+  if (args.includes('--deps') || args.includes('--workspace')) {
     pack.dependencies = omitNull(
       mapValues(pack.dependencies || {}, (v) => {
         if (v.startsWith('workspace:')) return v.slice('workspace:'.length);

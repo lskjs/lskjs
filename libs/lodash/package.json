@@ -229,5 +229,6 @@
       "limit": "6kb"
     }
   ],
-  "_type": "module"
+  "_type": "module",
+  "dependencies": {}
 }

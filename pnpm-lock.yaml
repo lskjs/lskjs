@@ -80,7 +80,7 @@ importers:
       glob: 7.2.0
       global-prefix: ^3.0.0
       lodash: 4.17.21
-      logger: link:@@pnpm/logger
+      logger: '@pnpm/logger'
       rsync: 0.6.1
       sort-package-json: 1.57.0
     dependencies:
@@ -98,7 +98,7 @@ importers:
       glob: 7.2.0
       global-prefix: 3.0.0
       lodash: 4.17.21
-      logger: link:@@pnpm/logger
+      logger: link:@pnpm/logger
       rsync: 0.6.1
       sort-package-json: 1.57.0
 
@@ -109,7 +109,7 @@ importers:
       '@lskjs/cli': ^3.0.0-alpha.7
       '@lskjs/cli-scripts': ^3.0.0-alpha.7
       '@lskjs/cli-utils': ^3.0.0-alpha.7
-      '@lskjs/colors': workspace:3.0.0-alpha.10
+      '@lskjs/colors': 3.0.0-alpha.10
       '@lskjs/err': 3.0.0-alpha.10
       '@lskjs/log': 3.0.0-alpha.10
       '@oclif/command': 1.8.21
@@ -126,8 +126,8 @@ importers:
       typescript: 4.7.3
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': link:../../libs/algos
-      '@lskjs/cli': 'link:'
+      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/cli': 3.0.0-alpha.7
       '@lskjs/cli-scripts': link:../cli-scripts
       '@lskjs/cli-utils': link:../cli-utils
       '@lskjs/colors': link:../../libs/colors

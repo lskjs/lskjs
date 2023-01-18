@@ -102,5 +102,6 @@
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-  ]
+  ],
+  "dependencies": {}
 }

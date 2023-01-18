@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const { run, shell } = require('@lskjs/cli-utils');
+const { isCI } = require('@lskjs/env');
 
 const main = async ({ ctx, args, isRoot } = {}) => {
   // await shell('lsk run clean');
@@ -13,6 +14,8 @@ const main = async ({ ctx, args, isRoot } = {}) => {
       cmd += ' --yes';
     }
     await shell(cmd, { ctx, args });
+    args.includes('--no-push');
+    // if (!isCI || args.includes('--no-push')) await shell('git push --follow-tags');
   } else {
     await shell('npm version prerelease');
     await shell('lsk run publish', { ctx, args });
