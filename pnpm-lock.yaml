@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@lskjs/cli': 3.0.0-alpha.7
-      '@lskjs/cli-utils': 3.0.0-alpha.7
+      '@lskjs/cli-utils': ^3.0.0-alpha.14
       '@lskjs/eslint-config': ^2.21.0
       '@size-limit/preset-small-lib': ^8.1.2
       '@types/jest': ^29.2.5
@@ -20,7 +20,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@lskjs/cli': 3.0.0-alpha.7
-      '@lskjs/cli-utils': 3.0.0-alpha.7
+      '@lskjs/cli-utils': link:cli/cli-utils
       '@lskjs/eslint-config': 2.21.0
       '@size-limit/preset-small-lib': 8.1.2_size-limit@8.1.2
       '@types/jest': 29.2.5
@@ -37,7 +37,7 @@ importers:
   cli/cli-scripts:
     specifiers:
       '@commitlint/cli': 17.4.2
-      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/algos': ^3.0.0-alpha.14
       '@lskjs/cli-utils': ^3.0.0-alpha.14
       '@lskjs/env': ^3.0.0-alpha.14
       '@lskjs/err': ^3.0.0-alpha.14
@@ -51,7 +51,7 @@ importers:
       sort-package-json: 1.57.0
     dependencies:
       '@commitlint/cli': 17.4.2
-      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/algos': link:../../libs/algos
       '@lskjs/cli-utils': link:../cli-utils
       '@lskjs/env': link:../../libs/env
       '@lskjs/err': link:../../libs/err
@@ -83,7 +83,8 @@ importers:
       lodash: 4.17.21
       logger: '@pnpm/logger'
       rsync: 0.6.1
-      sort-package-json: 1.57.0
+      sort-package-json: 2.1.0
+      yargs: ^17.6.2
     dependencies:
       '@babel/runtime': 7.20.7
       '@lskjs/algos': link:../../libs/algos
@@ -102,12 +103,13 @@ importers:
       lodash: 4.17.21
       logger: link:@pnpm/logger
       rsync: 0.6.1
-      sort-package-json: 1.57.0
+      sort-package-json: 2.1.0
+      yargs: 17.6.2
 
   cli/lsk:
     specifiers:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/algos': ^3.0.0-alpha.14
       '@lskjs/cli': ^3.0.0-alpha.7
       '@lskjs/cli-scripts': ^3.0.0-alpha.14
       '@lskjs/cli-utils': ^3.0.0-alpha.14
@@ -124,11 +126,11 @@ importers:
       globby: 11.0.4
       logfmt: 1.3.2
       rsync: 0.6.1
-      ts-node: 10.8.1
-      typescript: 4.7.3
+      ts-node: 10.9.1
+      typescript: 4.9.4
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/algos': link:../../libs/algos
       '@lskjs/cli': 3.0.0-alpha.7
       '@lskjs/cli-scripts': link:../cli-scripts
       '@lskjs/cli-utils': link:../cli-utils
@@ -143,8 +145,8 @@ importers:
       glob: 7.2.0
       logfmt: 1.3.2
       rsync: 0.6.1
-      ts-node: 10.8.1_prragitp6g7x4ysyjtvpxoqvwq
-      typescript: 4.7.3
+      ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
+      typescript: 4.9.4
     devDependencies:
       '@oclif/dev-cli': 1.26.10
       globby: 11.0.4
@@ -688,12 +690,12 @@ packages:
       '@types/node': 18.11.18
       chalk: 4.1.2
       cosmiconfig: 8.0.0
-      cosmiconfig-typescript-loader: 4.3.0_fmd7fkhrvxusm67p24wvjui3am
+      cosmiconfig-typescript-loader: 4.3.0_bxtyj3et3xbsdyxhh3oblnfbj4
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
       resolve-from: 5.0.0
-      ts-node: 10.8.1_awa2wsr5thmg3i7jqycphctjfq
+      ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
       typescript: 4.9.4
     transitivePeerDependencies:
       - '@swc/core'
@@ -2048,14 +2050,18 @@ packages:
     resolution: {integrity: sha512-5bwD+a9L2JNk9+ZB7eENj+1HgWIxu0HyQaZdtSm90tmHowoi2fsG0l/F8GirNvFEAs5B6n0ppKI7P7TOloTN6Q==}
     dev: false
 
-  /@lskjs/cli-scripts/3.0.0-alpha.7:
-    resolution: {integrity: sha512-iO0NFFML2nLr75GelC482p7Z9EVFeeZV8noLp3W/GqV10PqKN597udM+NuBMLiSomps1amGKi0y3yZpcsvgcyA==}
+  /@lskjs/algos/3.0.0-alpha.14:
+    resolution: {integrity: sha512-2cC/rtOmxFs4Kdknnz8EpWM7YBXd1AA0kjDeJJ1BNQjd8Qg4mVLORq1GMl//bq4NWX06+iwNNpQZ7n72s6+ewg==}
+    dev: false
+
+  /@lskjs/cli-scripts/3.0.0-alpha.14:
+    resolution: {integrity: sha512-rWbs61x1Ee/9ioKD9mG2WBbjnJr8edqtytI61dEyd7GWbzGtmtFPcu1aDQ3yz015/6zJ10ZNx01DWACvpjZtlg==}
     dependencies:
       '@commitlint/cli': 17.4.2
       '@lskjs/algos': 3.0.0-alpha.10
-      '@lskjs/cli-utils': 3.0.0-alpha.7
-      '@lskjs/env': 3.0.0-alpha.8
-      '@lskjs/err': 3.0.0-alpha.8
+      '@lskjs/cli-utils': 3.0.0-alpha.14
+      '@lskjs/env': 3.0.0-alpha.14
+      '@lskjs/err': 3.0.0-alpha.14
       '@lskjs/stringify': 2.85.1
       all-contributors-cli: 6.24.0
       concurrently: 7.6.0
@@ -2063,33 +2069,45 @@ packages:
       nodemon: 2.0.16
       npm-check-updates: 13.0.4
       remark-template: 1.6.0
+      sort-package-json: 1.57.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
+      - '@yarnpkg/core'
       - bluebird
       - debug
+      - domexception
       - encoding
       - lodash
       - supports-color
     dev: false
 
-  /@lskjs/cli-utils/3.0.0-alpha.7:
-    resolution: {integrity: sha512-uSOaS0sHEz/8Dsj2MH9hevSaJW8hdFbYqkXAOxK+GM0aZTmBZz1+z1I0C9Jcf6T4+HbzdlEKiQSIBwnTpeY9zw==}
+  /@lskjs/cli-utils/3.0.0-alpha.14:
+    resolution: {integrity: sha512-oqxqvLxncAAn0eWsJaGtIZ6zIJKWXJdRpnMToctQOR0pY25f1hesPSgCqe4SfhJ9dOeyPX9pVx7cATdVYzZFKQ==}
     dependencies:
-      '@babel/runtime': 7.18.3
-      '@lskjs/err': 2.65.1
-      '@lskjs/log': 2.76.0
-      '@lskjs/utils': 2.72.0
+      '@babel/runtime': 7.20.7
+      '@lskjs/algos': 3.0.0-alpha.14
+      '@lskjs/colors': 3.0.0-alpha.14
+      '@lskjs/env': 3.0.0-alpha.14
+      '@lskjs/err': 3.0.0-alpha.14
+      '@lskjs/log': 3.0.0-alpha.14
+      '@lskjs/utils': 2.87.1
+      '@pnpm/filter-workspace-packages': 6.0.26_543n76fbszlmh3ctdn6mgrgqxa
+      '@pnpm/logger': 5.0.0
+      '@pnpm/plugin-commands-script-runners': 6.3.6_543n76fbszlmh3ctdn6mgrgqxa
       axios: 0.27.2
       bluebird: 3.7.2
       glob: 7.2.0
       global-prefix: 3.0.0
-      kleur: 4.1.4
       lodash: 4.17.21
+      logger: link:@pnpm/logger
       rsync: 0.6.1
       sort-package-json: 1.57.0
     transitivePeerDependencies:
+      - '@yarnpkg/core'
       - debug
+      - domexception
+      - supports-color
     dev: false
 
   /@lskjs/cli/3.0.0-alpha.7:
@@ -2097,8 +2115,8 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.0.0-alpha.7
-      '@lskjs/cli-utils': 3.0.0-alpha.7
+      '@lskjs/cli-scripts': 3.0.0-alpha.14
+      '@lskjs/cli-utils': 3.0.0-alpha.14
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16
@@ -2114,11 +2132,19 @@ packages:
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
+      - '@yarnpkg/core'
       - bluebird
       - debug
+      - domexception
       - encoding
       - lodash
       - supports-color
+    dev: false
+
+  /@lskjs/colors/3.0.0-alpha.14:
+    resolution: {integrity: sha512-/XHEcGEWoYysTVIo09PjUII0ST3HqvcAIuhNf/SeVbCM6QZ1AFrnQmIAfbHBrCVBsxbZTs/mPkdBr0t5r7lYMg==}
+    dependencies:
+      '@lskjs/env': 3.0.0-alpha.14
     dev: false
 
   /@lskjs/debug-level/0.3.2:
@@ -2136,10 +2162,10 @@ packages:
     resolution: {integrity: sha512-QIim3YP+1onXMl9RRq83MQIt1APFxn8xC8pLwNDM2tAXij5NT6+TB1uOQBl+rD9faQxSaHxoXcVwmBxVTMpdyg==}
     dev: false
 
-  /@lskjs/env/3.0.0-alpha.8:
-    resolution: {integrity: sha512-HeVsIjGz8am+dAo9BU3r7vFGwILTeZk9/CtKNCBnaSckMV+uQ/tnS33pDPAEdQhTRIG7EFFfQDhBDRdYwrbEQQ==}
+  /@lskjs/env/3.0.0-alpha.14:
+    resolution: {integrity: sha512-fx7FQ5atXoDHw/vlUIcKF3lkY+kxXi2MspwahXJpKw0xxw6HhQXaehYkdO2zrTRpf2HKOPjV3YLgY0DhVC5q1A==}
     dependencies:
-      '@lskjs/tty': 3.0.0-alpha.10
+      '@lskjs/tty': 3.0.0-alpha.14
     dev: false
 
   /@lskjs/err/2.65.1:
@@ -2154,10 +2180,10 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@lskjs/err/3.0.0-alpha.8:
-    resolution: {integrity: sha512-Oaw3st/wxJRz4ZRV2d3r8QpbDOnIZ8smDEocyqrqcCa2Iiv1Rm9NzJyuLwo2XIjMNFkmYSVUx4rkWsFYpGLdzg==}
+  /@lskjs/err/3.0.0-alpha.14:
+    resolution: {integrity: sha512-lDiSd73x7At93lLtOr5IV19Q82rqD7H5SUcuIBNge7yaFGn4hPkc+8WBSd0gFz8qAIMfNhpIMqfaV5TNCtKF7g==}
     dependencies:
-      '@lskjs/algos': 3.0.0-alpha.10
+      '@lskjs/algos': 3.0.0-alpha.14
     dev: false
 
   /@lskjs/eslint-config/2.21.0:
@@ -2203,14 +2229,15 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/log/2.76.0:
-    resolution: {integrity: sha512-EmTcCjCtlNisrX3/CacC6+v971XU7U34ka5YAE2p5DaEoFg6DIa6xj/SeLiDRGdTNO7NunSTGMvqAeezutJpKw==}
+  /@lskjs/log/3.0.0-alpha.14:
+    resolution: {integrity: sha512-c3RMlviDm1ZDxe9HkUxwqcTmWXoqdizq0Yw5P675qjwrMOHUpAK03q+KaBMNFfQn8lOoe3CGjTzNEh+tTliM2A==}
     hasBin: true
     dependencies:
-      '@lskjs/debug-level': 0.3.2
-      '@lskjs/env': 2.65.1
-      '@lskjs/err': 2.65.1
-      fast-safe-stringify: 2.0.8
+      '@lskjs/algos': 3.0.0-alpha.14
+      '@lskjs/colors': 3.0.0-alpha.14
+      '@lskjs/env': 3.0.0-alpha.14
+      '@lskjs/err': 3.0.0-alpha.14
+      fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
       readline: 1.3.0
@@ -2230,14 +2257,10 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
-  /@lskjs/tty/3.0.0-alpha.10:
-    resolution: {integrity: sha512-5iEK3rUT+Rbb1NTgaG3AjsVQYOMTPiuzrgYQ1W8S1BCkX0JOHc8zB7jnEfA8JeW+8VVVmiBonwsZXFT2eiB93g==}
+  /@lskjs/tty/3.0.0-alpha.14:
+    resolution: {integrity: sha512-0N2RpWnAkyEV5HYQwbBtGw5VsZo+Cd9+7O8Nc3swC86NahlWHS5hoFIhf4mv13VU/qJzKHhnnBzmVmA6MIJIiA==}
     dependencies:
       tty: 1.0.1
-    dev: false
-
-  /@lskjs/utils/2.72.0:
-    resolution: {integrity: sha512-E7BJ9g2DNRZaZb3WuxRF2LRvfnZxf6h6jR1xtAUoYcIdnxbgnXQTVALI+dCrHUkiAolsym0VUFdI2E4uOMCSXg==}
     dev: false
 
   /@lskjs/utils/2.87.1:
@@ -6608,7 +6631,7 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: false
 
-  /cosmiconfig-typescript-loader/4.3.0_fmd7fkhrvxusm67p24wvjui3am:
+  /cosmiconfig-typescript-loader/4.3.0_bxtyj3et3xbsdyxhh3oblnfbj4:
     resolution: {integrity: sha512-NTxV1MFfZDLPiBMjxbHRwSh5LaLcPMwNdCutmnHJCKoVnlvldPWlllonKwrsRJ5pYZBIBGRWWU2tfvzxgeSW5Q==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -6619,7 +6642,7 @@ packages:
     dependencies:
       '@types/node': 18.11.18
       cosmiconfig: 8.0.0
-      ts-node: 10.8.1_awa2wsr5thmg3i7jqycphctjfq
+      ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
       typescript: 4.9.4
     dev: false
 
@@ -6884,6 +6907,11 @@ packages:
     resolution: {integrity: sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==}
     engines: {node: '>=8'}
 
+  /detect-indent/7.0.1:
+    resolution: {integrity: sha512-Mc7QhQ8s+cLrnUfU/Ji94vG/r8M26m8f++vyres4ZoojaRDpZ1eSIh/EpzLNwlWuvzSZ3UbDFspjFvTDXe6e/g==}
+    engines: {node: '>=12.20'}
+    dev: false
+
   /detect-libc/2.0.1:
     resolution: {integrity: sha512-463v3ZeIrcWtdgIg6vI6XUncguvr2TnGl4SzDXinkt9mSLpBJKXT3mW6xT3VQdDN11+WVs29pgvivTc4Lp8v+w==}
     engines: {node: '>=8'}
@@ -6892,6 +6920,11 @@ packages:
   /detect-newline/3.1.0:
     resolution: {integrity: sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==}
     engines: {node: '>=8'}
+    dev: false
+
+  /detect-newline/4.0.0:
+    resolution: {integrity: sha512-1aXUEPdfGdzVPFpzGJJNgq9o81bGg1s09uxTWsqBlo9PI332uyJRQq13+LK/UN4JfxJbFdCXonUFQ9R/p7yCtw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
   /dezalgo/1.0.4:
@@ -8295,6 +8328,10 @@ packages:
     resolution: {integrity: sha512-Y7wLWcrLUXwk2noSka166byGCvhMtDRpgHdzCno1UQv/n/Hegp++a2xBWJL1lJarnKD3SWaljD+0z1ztqxuKyQ==}
     dev: false
 
+  /git-hooks-list/3.0.0:
+    resolution: {integrity: sha512-XDfdemBGJIMAsHHOONHQxEH5dX2kCpE6MGZ1IsNvBuDPBZM3p4EAwAC7ygMjn/1/x+BJX0TK1ara1Zrh7JCFdQ==}
+    dev: false
+
   /git-raw-commits/2.0.11:
     resolution: {integrity: sha512-VnctFhw+xfj8Va1xtfEqCUD2XDrbAPSJx+hSrE5K7fGdjZruW7XV+QOrN7LF/RJyvspRiD2I0asWsxFp0ya26A==}
     engines: {node: '>=10'}
@@ -9138,6 +9175,11 @@ packages:
     resolution: {integrity: sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==}
     engines: {node: '>=8'}
 
+  /is-plain-obj/4.1.0:
+    resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
+    engines: {node: '>=12'}
+    dev: false
+
   /is-plain-object/2.0.4:
     resolution: {integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==}
     engines: {node: '>=0.10.0'}
@@ -9925,11 +9967,6 @@ packages:
 
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
-    engines: {node: '>=6'}
-    dev: false
-
-  /kleur/4.1.4:
-    resolution: {integrity: sha512-8QADVssbrFjivHWQU7KkMgptGTl6WAcSdlbBPY4uNF+mWr6DGcKrvY2w4FQJoXch7+fKMjj0dRrL75vk3k23OA==}
     engines: {node: '>=6'}
     dev: false
 
@@ -12563,6 +12600,18 @@ packages:
       sort-object-keys: 1.1.3
     dev: false
 
+  /sort-package-json/2.1.0:
+    resolution: {integrity: sha512-M5ctkdnn7znAkoVQJ0Y+PHDUieyXMhydPyW7r2J9ZM0Iwc3BTyEf5cmoSRfHNo07FEvzWwnphcP7GlrAX164UQ==}
+    hasBin: true
+    dependencies:
+      detect-indent: 7.0.1
+      detect-newline: 4.0.0
+      git-hooks-list: 3.0.0
+      globby: 13.1.3
+      is-plain-obj: 4.1.0
+      sort-object-keys: 1.1.3
+    dev: false
+
   /source-map-support/0.5.13:
     resolution: {integrity: sha512-SHSKFHadjVA5oR4PPqhtAVdcBWwRYVd6g6cAXnIbRiIwc2EhPrTuKUBdSLvlEKyIP3GCf89fltvcZiP9MMFA1w==}
     dependencies:
@@ -13127,37 +13176,6 @@ packages:
       yargs-parser: 21.1.1
     dev: false
 
-  /ts-node/10.8.1_awa2wsr5thmg3i7jqycphctjfq:
-    resolution: {integrity: sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.18
-      acorn: 8.8.1
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.9.4
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: false
-
   /ts-node/10.8.1_f5eqjuxkorpjvs4z7mviievvou:
     resolution: {integrity: sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g==}
     hasBin: true
@@ -13189,8 +13207,8 @@ packages:
       yn: 3.1.1
     dev: false
 
-  /ts-node/10.8.1_prragitp6g7x4ysyjtvpxoqvwq:
-    resolution: {integrity: sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g==}
+  /ts-node/10.9.1_awa2wsr5thmg3i7jqycphctjfq:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
       '@swc/core': '>=1.2.50'
@@ -13215,7 +13233,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.7.3
+      typescript: 4.9.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: false

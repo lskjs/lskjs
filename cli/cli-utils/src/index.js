@@ -18,7 +18,7 @@ const { copy } = require('./copy');
 const { joinArgs } = require('./joinArgs');
 // const { linkAll } = require('./linkAll');
 const { log } = require('./log');
-const { mergePackageJson } = require('./mergePackageJson');
+// const { mergePackageJson } = require('./mergePackageJson');
 // const { packagePath } = require('./packagePath');
 const { pathexec } = require('./pathexec');
 const { replaceAll } = require('./replaceAll');
@@ -51,7 +51,7 @@ module.exports = {
   // link,
   // linkAll,
   log,
-  mergePackageJson,
+  // mergePackageJson,
   // packagePath,
   replaceAll,
   // rootPath,

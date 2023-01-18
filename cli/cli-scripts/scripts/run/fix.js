@@ -31,7 +31,10 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   if (args.includes('--deps') || args.includes('--workspace')) {
     pack.dependencies = omitNull(
       mapValues(pack.dependencies || {}, (v) => {
-        if (v.startsWith('workspace:')) return v.slice('workspace:'.length);
+        if (v.startsWith('workspace:')) {
+          const v2 = v.slice('workspace:'.length);
+          return v2[0] === '^' ? v2 : `^${v2}`;
+        }
         if (v.startsWith('link:')) return v.slice('link:'.length);
         return v;
       })
@@ -68,7 +71,6 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       }
     }
     if (!pack.scripts.prepack) pack.scripts.prepack = '        lsk run prepack';
-   
   }
   if (args.includes('--package')) {
     // if (!pack.workspaces && isRoot) {

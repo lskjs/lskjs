@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@lskjs/cli": "3.0.0-alpha.7",
-    "@lskjs/cli-utils": "3.0.0-alpha.7",
+    "@lskjs/cli-utils": "^3.0.0-alpha.14",
     "@lskjs/eslint-config": "^2.21.0",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/jest": "^29.2.5",

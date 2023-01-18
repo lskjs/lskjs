@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
-    "@lskjs/algos": "3.0.0-alpha.10",
+    "@lskjs/algos": "^3.0.0-alpha.14",
     "@lskjs/cli": "^3.0.0-alpha.7",
     "@lskjs/cli-scripts": "^3.0.0-alpha.14",
     "@lskjs/cli-utils": "^3.0.0-alpha.14",
@@ -28,8 +28,8 @@
     "glob": "7.2.0",
     "logfmt": "1.3.2",
     "rsync": "0.6.1",
-    "ts-node": "10.8.1",
-    "typescript": "4.7.3"
+    "ts-node": "10.9.1",
+    "typescript": "4.9.4"
   },
   "devDependencies": {
     "@oclif/dev-cli": "1.26.10",
