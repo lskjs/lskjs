@@ -6,7 +6,8 @@ const main = async ({ isRoot, ctx, cwd } = {}) => {
     await shellParallel('lsk run clean', { ctx });
     return;
   }
-  await shell(`rm -rf ${cwd}/lib/* ${cwd}/coverage ${cwd}/.package`, { ctx });
+  await shell(`rm -rf ${cwd}/coverage ${cwd}/.release`, { ctx });
+  // await shell(`rm -rf ${cwd}/lib/* ${cwd}/coverage ${cwd}/.package`, { ctx });
 };
 
 module.exports = run(main);

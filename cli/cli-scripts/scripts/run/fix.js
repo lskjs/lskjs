@@ -130,6 +130,9 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       writeFile(`${cwd}/package.json`, JSON.stringify(pack, null, 6));
     }
     if (args.includes('--sort')) {
+      if (isRoot) {
+        await shell(`${findBin('eslint')} --fix lerna.json`, { ctx });
+      }
       await shell(`${findBin('eslint')} --fix package.json`, { ctx });
     }
   }
