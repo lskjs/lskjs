@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { colorize } from '@lskjs/colors';
+import { Color, colorize } from '@lskjs/colors';
 
 const logo = `
 __      $    _______.$ __  ___ $          __       _______.
@@ -11,7 +11,7 @@ __      $    _______.$ __  ___ $          __       _______.
         $            $         $                           
 `;
 
-const colors = [
+const colors: Color[][] = [
   ['bold', 'red'],
   ['bold', 'blue'],
   ['bold', 'cyan'],

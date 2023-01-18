@@ -1,5 +1,6 @@
-const { mapValues } = require('@lskjs/algos');
-const { getCwdInfo, getLskConfig } = require('@lskjs/cli-utils');
+import { mapValues } from '@lskjs/algos';
+// @ts-ignore
+import { getCwdInfo, getLskConfig } from '@lskjs/cli-utils';
 
 // @ts-ignore
 export function printInfo({ config, log } = {}) {
@@ -13,6 +14,7 @@ export function printInfo({ config, log } = {}) {
   const cwd = process.cwd();
   log(pad('[CWD]      '), cwd);
 
+  // @ts-ignore
   mapValues(getCwdInfo({ cwd }), (value: string, key: string) => {
     log(pad(`${key}:`), value);
   });

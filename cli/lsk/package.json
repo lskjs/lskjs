@@ -10,9 +10,9 @@
     "helper"
   ],
   "license": "MIT",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/cli/lsk",
   "bugs": "https://github.com/lskjs/cli/issues",
   "homepage": "https://github.com/lskjs/cli",
-  "repository": "lskjs/cli",
   "bin": {
     "lsk": "bin/run",
     "lskjs": "bin/run"
@@ -41,15 +41,6 @@
     "@oclif/dev-cli": "1.26.10",
     "globby": "11.0.4"
   },
-  "files": [
-    "/lib",
-    "/bin",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json",
-    "/src",
-    "/utils.js"
-  ],
-  "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
     "bin": "lsk",
@@ -57,10 +48,50 @@
       "@oclif/plugin-help"
     ]
   },
-  "scripts": {
+  "_scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "echo skip",
     "build": "oclif-dev readme && git add README.md && echo ok"
-  }
+  },
+  "scripts": {
+    "build": "          lsk run build",
+    "postbuild": "      oclif-dev readme",
+    "dev": "            lsk run dev",
+    "release": "        lsk run release",
+    "test": "           lsk run test"
+  },
+  
+  "access": "public",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  },
+  "files": [
+    "bin",
+    "lib",
+    "oclif.manifest.json",
+    "README.md",
+    "LICENCE"
+  ],
+  "//": "//",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ]
 }
