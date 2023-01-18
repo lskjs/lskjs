@@ -1,0 +1,67 @@
+name: Test and publish
+
+on:
+  push:
+    branches: [ master, beta ]
+  release:
+    types: [ created ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [19, 16, 14]
+    name: Node.js ${{ matrix.node-version }} test
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+      - run: pnpm build
+      - run: pnpm test
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
+    strategy:
+      matrix:
+        node-version: [19]
+    steps: 
+      - name: Git checkout
+        uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+      - name: Set NODE_AUTH_TOKEN
+        run: echo "${NODE_AUTH_TOKEN}" && pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+      - name: NPM release 
+        run: pnpm release:ci && echo PACKAGE_VERSION=$(node -p "require('./package.json').version") >> $GITHUB_ENV
+      - name: Commit version and tag to git
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'package.json'
+          author_name: Igor Suvorov Bot
+          author_email: bot@isuvorov.com
+          default_author: github_actor
+          message: 'chore(release): 🎉 v${{ env.PACKAGE_VERSION }}'
+          tag: 'v${{ env.PACKAGE_VERSION }} --force'

@@ -8,9 +8,6 @@
     "prepack": "        lsk run prepack",
     "test": "echo skip"
   },
-  "bin": {
-    "qwe": "bin/run"
-  },
   "dependencies": {
     "@babel/runtime": "7.20.7",
     "@lskjs/algos": "^3.0.0-alpha.15",
@@ -31,6 +28,9 @@
     "rsync": "0.6.1",
     "sort-package-json": "2.1.0",
     "yargs": "^17.6.2"
+  },
+  "bin": {
+    "qwe": "bin/run"
   },
   "main": "src/index.js",
   "repository": "lskjs/cli",
