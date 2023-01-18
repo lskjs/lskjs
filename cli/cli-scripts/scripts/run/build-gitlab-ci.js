@@ -7,7 +7,7 @@ const { getShortPath } = require('@lskjs/cli-utils/src/getShortPath');
 
 async function main({ isRoot, log, ctx, cwd, config, args }) {
   if (isRoot) {
-    await shellParallel(`lsk run build-gitlab-ci`, { ctx, args });
+    await shellParallel(`lsk run build:gitlab-ci`, { ctx, args });
     // await shell('lsk run build-gitlab-ci', { ctx, args, cwd: `${cwd}/libs` });
     // await shell('lsk run build-gitlab-ci', { ctx, args, cwd: `${cwd}/apps` });
   }

@@ -6,22 +6,22 @@ const { props } = require('fishbird');
 const fs = require('fs');
 // const { log } = require('@lskjs/log/log');
 
-const main = async ({ isRoot, log } = {}) => {
+const main = async ({ isRoot, log, ctx, args } = {}) => {
   if (isRoot) {
-    await shellParallel(`lsk run build-docker-stack`);
+    await shellParallel(`lsk run build:docker-stack`, { ctx, args });
     return;
   }
-  const { rootRepo, envs = ['prod'], cwd: rootCwd } = getLskConfig();
+  const { rootRepo, envs = ['prod'], rootPath } = getLskConfig();
   const cwd = process.cwd();
-  const packagePath = cwd.replace(`${rootCwd}/`, '');
+  const packagePath = cwd.replace(`${rootPath}/`, '').replace(rootPath, '');
   const package = packagePath.split('/').reverse()[0];
-  const inputFilename = `${packagePath}/.gitlab-ci.js`;
-  if (!fs.existsSync(`${rootCwd}/${inputFilename}`)) {
+  const inputFilename = `${packagePath}/docker-stack.js`;
+  if (!fs.existsSync(`${rootPath}/${inputFilename}`)) {
     log.trace('[skip]', getShortPath(inputFilename));
     return;
   }
   // eslint-disable-next-line import/no-dynamic-require
-  const getConfig = require(`${rootCwd}/${inputFilename}`);
+  const getConfig = require(`${rootPath}/${inputFilename}`);
   await props(envs, async (env) => {
     const data = getConfig({ env, package });
     const postfix = env !== 'prod' ? `.${env}` : '';
@@ -32,7 +32,7 @@ const main = async ({ isRoot, log } = {}) => {
         outputFilename
       )}`
     );
-    await jsonToFile(`${rootCwd}/${outputFilename}`, data, {
+    await jsonToFile(`${rootPath}/${outputFilename}`, data, {
       type: 'yml',
       comment: getComment({
         name: outputFilename,

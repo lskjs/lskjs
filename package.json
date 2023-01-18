@@ -29,8 +29,5 @@
   "license": "MIT",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
-  },
-  "eslintconfig": {
-    "extends": "@lskjs/eslint-config"
   }
 }
