@@ -1,6 +1,9 @@
 {
   "version": "3.0.0-alpha.3",
   "author": "Igor Suvorov <hi@isuvorov.com>",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "          lsk run build",
     "build:packages": " pnpm --filter './packages/*' build",
@@ -27,9 +30,19 @@
     "tsup": "^6.5.0",
     "typescript": "^4.9.4"
   },
+  "devDependencies": {},
   "bugs": "https://github.com/lskjs/cli/issues",
   "license": "MIT",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
+  },
+  "eslintconfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "__debug": {
+    "isLib": true,
+    "isTs": true,
+    "isBabel": false,
+    "isRoot": true
   }
 }

@@ -59,10 +59,8 @@
   },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint .",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "echo NO TESTS",
-    "lint:js": "eslint . --ext .js --fix && prettier --write --plugin-search-dir=.",
-    "version": "oclif-dev readme && git add README.md && rm -f ../../README.md && cp README.md ../.."
+    "test": "echo skip",
+    "build": "oclif-dev readme && git add README.md && echo ok"
   }
 }

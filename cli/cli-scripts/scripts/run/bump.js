@@ -2,16 +2,16 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-dynamic-require */
 const { run, shell } = require('@lskjs/cli-utils');
+const { writeFile } = require('fs/promises');
 
 const main = async ({ isRoot, cwd } = {}) => {
   if (isRoot) {
     await shell(`pnpm -r exec lsk run bump`);
     return;
   }
-  const fs = require('fs');
   const filename = `${cwd}/package.json`;
   const package = require(filename);
-  fs.writeFileSync(
+  await writeFile(
     filename,
     JSON.stringify(
       {

@@ -9,7 +9,7 @@ const {
   findBin,
 } = require('@lskjs/cli-utils');
 const { omitNull, mapValues } = require('@lskjs/algos');
-const { writeFileSync } = require('fs');
+const { writeFile } = require('fs/promises');
 
 const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   if (isRoot) {
@@ -34,7 +34,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   }
   const debug = getCwdInfo({ cwd });
   const { isLib, isTs, isBabel, isApp } = debug;
-  pack.__debug = debug;
+  // pack.__debug = debug;
   if (args.includes('--package')) {
     // if (!pack.workspaces && isRoot) {
     //   pack.workspaces = ['packages/*'];
@@ -126,7 +126,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
         // "bugs": "http://github.com/isuvorov/macrobe/issues",
       }
       delete pack.jest;
-      writeFileSync(`${cwd}/package.json`, JSON.stringify(pack, null, 6));
+      writeFile(`${cwd}/package.json`, JSON.stringify(pack, null, 6));
     }
     if (args.includes('--sort')) {
       await shell(`${findBin('eslint')} --fix package.json`, { ctx });

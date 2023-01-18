@@ -26,5 +26,10 @@
     "nodemon": "2.0.16",
     "npm-check-updates": "13.0.4",
     "remark-template": "1.6.0"
+  },
+  
+  "scripts": {
+    "build": "echo nothing",
+    "test": "echo skip"
   }
 }
