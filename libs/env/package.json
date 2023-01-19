@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/env",
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.24",
   "description": "LSK.js – env – Scripts for environment detecton",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "test": "           lsk run test"
   },
   "dependencies": {
-    "@lskjs/tty": "^3.0.0-alpha.20"
+    "@lskjs/tty": "^3.0.0-alpha.24"
   },
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/jest-config",
-  "version": "3.0.0-alpha.23",
+  "version": "3.0.0-alpha.24",
   "description": "Jest config for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

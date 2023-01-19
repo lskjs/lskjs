@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/colors",
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.24",
   "description": "Yet another colors library – like picocolors but with for browser too",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "test": "           lsk run test"
   },
   "dependencies": {
-    "@lskjs/env": "^3.0.0-alpha.20"
+    "@lskjs/env": "^3.0.0-alpha.24"
   },
   "publishConfig": {
     "access": "public",

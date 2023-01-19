@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.24](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.21...v3.0.0-alpha.24) (2023-01-19)
+
+
+### Bug Fixes
+
+* **presets:** improve nocheck preset ([ef9203e](https://github.com/lskjs/lskjs/commit/ef9203eac1ce028348386437a0047750eadc152c))
+
+
+### Features
+
+* **presets:** add jest-preset ([9627a9d](https://github.com/lskjs/lskjs/commit/9627a9d8bc556027bad469790b480458edae559e))
+
+
+
+
+
 # [3.0.0-alpha.21](https://github.com/lskjs/cli/compare/v3.0.0-alpha.20...v3.0.0-alpha.21) (2023-01-19)
 
 
