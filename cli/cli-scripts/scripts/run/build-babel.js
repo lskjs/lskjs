@@ -1,7 +1,13 @@
 #!/usr/bin/env node
-const { shell, run, findBin, shellParallel } = require('@lskjs/cli-utils');
+const {
+  shell,
+  run,
+  findBin,
+  shellParallel,
+  getCwdInfo,
+} = require('@lskjs/cli-utils');
 
-async function main({ isRoot, ctx, args }) {
+async function main({ isRoot, ctx, args, cwd }) {
   if (isRoot) {
     await shellParallel(`lsk run build:babel`, { ctx, args });
     return;
@@ -13,12 +19,19 @@ async function main({ isRoot, ctx, args }) {
 
   // const babelBin = 'node_modules/@babel/cli/bin/babel.js';
   // babel-watch
-  const babelBin = findBin('babel');
-  let cmd = `${babelBin} src --out-dir ${libDir} --source-maps true --extensions ".js,.jsx,.ts,.tsx" --copy-files`;
-  if (args.includes('--watch')) {
-    cmd += ` --watch`;
+  const { isApp, isLib } = getCwdInfo({ cwd });
+  let cmd;
+  if (isApp && isWatch) {
+    cmd = findBin('babel-node');
+    cmd += ' src';
+  } else {
+    cmd = findBin('babel');
+    cmd += ` src --out-dir ${libDir} --source-maps true --extensions ".js,.jsx,.ts,.tsx" --copy-files`;
+    if (args.includes('--watch')) {
+      cmd += ` --watch`;
+    }
+    // eslint-disable-next-line max-len
   }
-  // eslint-disable-next-line max-len
   await shell(cmd, { ctx });
 }
 
