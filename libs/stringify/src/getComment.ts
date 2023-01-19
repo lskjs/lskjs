@@ -1,7 +1,7 @@
-export const toHumanDate = (date) =>
+export const toHumanDate = (date: Date) =>
   `${new Date(date).toISOString().substr(0, 10)} ${new Date().toISOString().substr(11, 8)}`;
 
-export const getComment = ({ date = new Date(), name, url } = {}) =>
+export const getComment = ({ date = new Date(), name = '', url = '' } = {}) =>
   `
 Source        : ${url}
 Date          : ${toHumanDate(date)}

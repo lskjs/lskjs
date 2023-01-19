@@ -268,13 +268,14 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   await writeFile(`${cwd}/package.json`, `${JSON.stringify(pack, null, 2)}\n`);
 
   if (args.includes('--eslint')) {
+    const stdio = ['inherit', 'ignore', 'ignore'];
     const cmd = `${findBin('eslint')} --fix`;
     if (existsSync(`${cwd}/src`)) {
       await shell(`${cmd} src`, { ctx });
     } else {
       await shell(`${cmd} .`, {
         ctx,
-        stdio: 'ignore',
+        stdio,
       }).catch((err) => {
         log.trace('[eslint err] in .', err);
       });
@@ -283,7 +284,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     //   await shell(`${cmd} --fix scripts`, { ctx });
     // }
     if (existsSync(`${cwd}/tests`)) {
-      await shell(`${cmd}  tests`, { ctx, stdio: 'ignore' }).catch((err) => {
+      await shell(`${cmd}  tests`, { ctx, stdio }).catch((err) => {
         log.trace('[eslint err] in test', err);
       });
     }

@@ -1,4 +1,4 @@
-export function getCommentString(str, { type = 'keyval' } = {}) {
+export function getCommentString(str: string, { type = 'keyval' } = {}) {
   if (
     type === 'keyval' ||
     type === 'keyvalue' ||

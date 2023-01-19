@@ -6,10 +6,11 @@ import { getCommentString } from './getCommentString';
 import { jsonToYaml } from './jsonToYaml';
 
 const KV = {
-  stringify: (json) => Object.values(mapValues(json, (value, key) => `${key}=${value}`)).join('\n'),
+  stringify: (json: Record<string, unknown>) =>
+    Object.values(mapValues(json, (value, key) => `${key}=${value}`)).join('\n'),
 };
 
-export function jsonToString(json, { type = 'keyval', comment, indent = 2 } = {}) {
+export function jsonToString(json: any, { type = 'keyval', comment = '', indent = 2 } = {}) {
   const commentString = getCommentString(comment, { type }) || null;
   if (type === 'keyval' || type === 'keyvalue' || type === 'env') {
     return [commentString, KV.stringify(json)].filter(Boolean).join('\n');
@@ -26,10 +27,9 @@ export function jsonToString(json, { type = 'keyval', comment, indent = 2 } = {}
   }
   if (type === 'yaml' || type === 'yml') {
     let yamlObject;
-    let footer;
+    const footer = json.__raw;
     if (Array.isArray(json)) {
       yamlObject = json;
-      footer = json.__raw;
     } else {
       yamlObject = omit(json, ['__raw']);
     }

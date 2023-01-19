@@ -323,6 +323,7 @@ importers:
     specifiers:
       '@lskjs/algos': ^3.0.0-alpha.30
       '@lskjs/err': ^3.0.0-alpha.30
+      '@types/js-yaml': ^4.0.5
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
     dependencies:
@@ -330,6 +331,8 @@ importers:
       '@lskjs/err': link:../err
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
+    devDependencies:
+      '@types/js-yaml': 4.0.5
 
   libs/tty:
     specifiers:
@@ -5895,6 +5898,10 @@ packages:
       expect: 29.3.1
       pretty-format: 29.3.1
     dev: false
+
+  /@types/js-yaml/4.0.5:
+    resolution: {integrity: sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==}
+    dev: true
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}

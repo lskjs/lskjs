@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     // "forceConsistentCasingInFileNames": true,
     // "declaration": true,
     // "sourceMap": true,

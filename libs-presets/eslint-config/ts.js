@@ -27,6 +27,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error'],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'no-useless-constructor': 'off', // nestjs
 
     // ts
     '@typescript-eslint/ban-ts-comment': 'off',

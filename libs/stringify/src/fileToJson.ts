@@ -3,7 +3,7 @@ import { Err } from '@lskjs/err';
 import { existsSync, readFileSync } from 'fs';
 import yaml from 'js-yaml';
 
-export async function fileToJson(filename, { type = 'keyval' } = {}) {
+export async function fileToJson(filename: string, { type = 'keyval' } = {}) {
   try {
     if (type === 'js') {
       // eslint-disable-next-line import/no-dynamic-require
@@ -12,7 +12,7 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
       return data;
     }
     if (!existsSync(filename)) return null;
-    const str = readFileSync(filename);
+    const str = readFileSync(filename).toString();
     if (type === 'json') {
       return JSON.parse(str);
     }
@@ -26,10 +26,11 @@ export async function fileToJson(filename, { type = 'keyval' } = {}) {
           if (s.indexOf('=') === -1) return null;
           const delimiter = s.indexOf('=');
           const key = s.substr(0, delimiter);
+          if (!key) return null;
           const value = s.substr(delimiter + 1);
           return [key, value];
         })
-        .filter(Boolean);
+        .filter(Boolean) as [string, string][];
       // console.log({ str, keyvalues });
       return fromPairs(keyvalues);
     }
