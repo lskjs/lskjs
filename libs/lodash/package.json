@@ -10,6 +10,7 @@
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
+  "dependencies": {},
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -228,6 +229,5 @@
       "limit": "6kb"
     }
   ],
-  "_type": "module",
-  "dependencies": {}
+  "_type": "module"
 }

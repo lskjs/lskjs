@@ -8,7 +8,9 @@ export const set = <T>(object: T, keyPath: ObjectKeyPath, value: any): T => {
     if (obj[key] === undefined) obj[key] = {};
     return obj[key];
   }, object);
-  lastObj[lastKey] = value;
+  if (lastKey !== undefined) {
+    lastObj[lastKey] = value;
+  }
   return object;
 };
 

@@ -4,11 +4,13 @@ const { isCI } = require('@lskjs/env');
 
 const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
   // await shell('lsk run clean');
-  await shell('lsk run build --prod --silent', { ctx, args });
-  await shell('lsk run test --prod --silent', { ctx, args });
 
   // libs
   if (isRoot) {
+    await shell('lsk run fix --prod --silent', { ctx, args });
+    // TODO: break if changes
+    await shell('lsk run build --prod --silent', { ctx, args });
+    await shell('lsk run test --prod --silent', { ctx, args });
     const libs = (config.packages || []).filter((p) => p.type === 'lib');
     if (libs.length) {
       await shell('lsk run prepack --dir .release', { ctx, args }); // два раза вызывается prepack
@@ -28,9 +30,12 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
       // await shell('lsk run deploy', { ctx, args });
     }
   } else {
+    await shell('pnpm run build --prod --silent', { ctx, args });
+    await shell('pnpm run test --prod --silent', { ctx, args });
     const { isLib } = getCwdInfo({ cwd });
     if (isLib) {
       await shell('npm version prerelease');
+      await shell('lsk run prepack --dir .release', { ctx, args });
       await shell('lsk run publish', { ctx, args });
     } else {
       await shell('lsk run prepack --dir .release', { ctx, args });

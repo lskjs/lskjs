@@ -1,16 +1,20 @@
 #!/usr/bin/env node
-const { run, shellParallel } = require('@lskjs/cli-utils');
+const { run, shellParallel, shell } = require('@lskjs/cli-utils');
+// const { existsSync } = require('fs');
 
 const main = async ({ args, isRoot, ctx } = {}) => {
   if (isRoot) {
     await shellParallel('lsk run publish', { ctx, args });
     return;
   }
-  throw 'not implemented';
+  const isDryRun =
+    args.includes('--dry-run') || args.includes('--without-publish');
+  let cmd = 'pnpm publish .release --no-git-checks';
+  if (isDryRun) cmd += ' --dry-run';
+  await shell(cmd, { ctx });
+  // throw new Error('not implemented');
   // await shell('rm -rf .release');
   // let cmd = findBin('clean-publish');
-  // const isDryRun =
-  //   args.includes('--dry-run') || args.includes('--without-publish');
   // if (isDryRun) {
   //   cmd += ' --without-publish --temp-dir .release';
   // } else {

@@ -5,7 +5,7 @@
  * Released under the MIT License.
  */
 
-function isObject(o) {
+function isObject(o: any) {
   return Object.prototype.toString.call(o) === '[object Object]';
 }
 

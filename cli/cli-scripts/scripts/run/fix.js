@@ -145,19 +145,22 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       if (!pack.files) {
         pack.files = ['lib', 'README.md', 'LICENCE'];
       }
-      if (!pack.license && pack.access === 'public') {
+      if (!pack.license && pack.private === false) {
         pack.license = 'MIT';
       }
       if (!pack.author || pack.author.includes('Igor Suvorov')) {
         pack.author =
           'Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)';
       }
-      if (!pack.access && pack.publishConfig && pack.publishConfig.access) {
-        pack.access = pack.publishConfig.access;
-        delete pack.publishConfig.access;
-        delete pack.publishConfig.registry;
-        if (Object.keys(pack.publishConfig).length === 0)
-          delete pack.publishConfig;
+      if (pack.access || pack.private === false) {
+        delete pack.access;
+        pack.private = false;
+        if (!pack.publishConfig) {
+          pack.publishConfig = {
+            access: 'public',
+            registry: 'https://registry.npmjs.org/',
+          };
+        }
       }
 
       if (!pack.repository) {

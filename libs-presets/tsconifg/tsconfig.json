@@ -1,5 +1,5 @@
 {
-  "extends": "./default/tsconfig.json",
+  "extends": "./default/tsconfig.json"
 }
 
 

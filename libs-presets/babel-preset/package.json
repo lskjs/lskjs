@@ -1,22 +1,14 @@
 {
-  "version": "3.0.0-alpha.1",
   "name": "@lskjs/babel-preset",
+  "version": "3.0.0-alpha.4",
   "description": "Babel preset for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
-  "repository": "https://github.com/lskjs/babel-preset",
-  "keywords": [
-    "eslint",
-    "config",
-    "lskjs"
-  ],
-  "main": "index.js",
   "scripts": {
     "build": "   echo skip",
     "dev": "     echo skip",
-    "test": "    echo skip",
     "prepack": " lsk run prepack",
-    "release": " lsk run release"
+    "release": " lsk run release",
+    "test": "    echo skip"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "7.18.6",
@@ -35,12 +27,20 @@
     "@babel/preset-typescript": "7.18.6",
     "@emotion/babel-plugin": "11.10.5"
   },
+  "devDependencies": {
+    "@babel/core": "7.20.5",
+    "@babel/runtime": "7.20.6"
+  },
   "peerDependencies": {
     "@babel/core": "7.x",
     "@babel/runtime": "7.x"
   },
-  "devDependencies": {
-    "@babel/core": "7.20.5",
-    "@babel/runtime": "7.20.6"
-  }
+  "main": "index.js",
+  "repository": "https://github.com/lskjs/babel-preset",
+  "license": "MIT",
+  "keywords": [
+    "eslint",
+    "config",
+    "lskjs"
+  ]
 }

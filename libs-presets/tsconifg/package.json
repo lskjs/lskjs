@@ -1,22 +1,27 @@
 {
-  "version": "3.0.0-alpha.1",
   "name": "@lskjs/tsconfig",
+  "version": "3.0.0-alpha.1",
   "description": "TS configs for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
-  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "   echo skip",
+    "dev": "     echo skip",
+    "prepack": " lsk run prepack",
+    "release": " lsk run release",
+    "test": "    echo skip"
+  },
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "tsconfig.json",
   "repository": "https://github.com/lskjs/lskjs/",
+  "license": "MIT",
   "keywords": [
     "eslint",
     "config",
     "lskjs"
-  ],
-  "main": "tsconfig.json",
-  "scripts": {
-    "build": "   echo skip",
-    "dev": "     echo skip",
-    "test": "    echo skip",
-    "prepack": " lsk run prepack",
-    "release": " lsk run release"
-  },
-  "dependencies": {}
+  ]
 }

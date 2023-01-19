@@ -10,6 +10,7 @@
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
+  "dependencies": {},
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -102,6 +103,5 @@
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-  ],
-  "dependencies": {}
+  ]
 }
