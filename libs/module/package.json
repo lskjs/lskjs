@@ -5,11 +5,11 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "          lsk run build",
     "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
-    "release": "        lsk run release",
-    "test": "           lsk run test"
+    "release": "        lsk run release"
   },
   "dependencies": {
     "@lskjs/algos": "^3.0.0-alpha.24",
@@ -19,12 +19,20 @@
     "@lskjs/mutex": "^3.0.0-alpha.24",
     "@lskjs/utils2": "^3.0.0-alpha.24",
     "events": "^3.3.0",
-    "fishbird": "^0.19.0"
+    "fishbird": "^0.20.0"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -38,27 +46,6 @@
       "types": "./lib/*.d.ts",
       "default": "./lib/*.js"
     }
-  },
-  "files": [
-    "lib",
-    "README.md",
-    "LICENCE"
-  ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/module",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
-  "keywords": [
-    "modules",
-    "submodules",
-    "dependency injection",
-    "event emitter",
-    "logger"
-  ],
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
-  "jest": {
-    "preset": "@lskjs/jest-config"
   },
   "size-limit": [
     {
@@ -101,5 +88,21 @@
       "path": "lib/asyncModules/index.js",
       "limit": "22kb"
     }
-  ]
+  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/module",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "modules",
+    "submodules",
+    "dependency injection",
+    "event emitter",
+    "logger"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

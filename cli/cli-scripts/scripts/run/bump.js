@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 /* eslint-disable import/no-dynamic-require */
-const { run, shell } = require('@lskjs/cli-utils');
+const { run, shellParallel } = require('@lskjs/cli-utils');
 const { writeFile } = require('fs/promises');
 
-const main = async ({ isRoot, cwd } = {}) => {
+const main = async ({ isRoot, cwd, ctx, args }) => {
   if (isRoot) {
-    await shell(`pnpm -r exec lsk run bump`);
+    await shellParallel(`lsk run bump`, { ctx, args });
     return;
   }
   const filename = `${cwd}/package.json`;
@@ -19,10 +19,9 @@ const main = async ({ isRoot, cwd } = {}) => {
         '//': `${package['//'] || ''}/`,
       },
       null,
-      2,
-    ),
+      2
+    )
   );
-  await shell('npx eslint --fix package.json');
 };
 
 module.exports = run(main);

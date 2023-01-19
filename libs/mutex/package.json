@@ -5,19 +5,27 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "          lsk run build",
     "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
-    "release": "        lsk run release",
-    "test": "           lsk run test"
+    "release": "        lsk run release"
   },
   "dependencies": {
     "async-mutex": "0.4.0"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -32,30 +40,24 @@
       "default": "./lib/*.js"
     }
   },
-  "files": [
-    "lib",
-    "README.md",
-    "LICENCE"
-  ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/mutex",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
-  "keywords": [
-    "mutex",
-    "semaphore",
-    "async-mutex"
-  ],
-  "//": "//",
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  },
   "size-limit": [
     {
       "path": "lib/index.js",
       "limit": "5kb"
     }
-  ]
+  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/mutex",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "mutex",
+    "semaphore",
+    "async-mutex"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

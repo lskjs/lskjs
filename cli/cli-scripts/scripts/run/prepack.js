@@ -6,10 +6,11 @@ const main = async ({ args, isRoot, ctx } = {}) => {
     await shellParallel('lsk run prepack', { ctx, args });
     return;
   }
-  await shell('rm -rf .release');
-  await shell('lsk run fix --workspace');
+  await shell('rm -rf .release', { ctx, silence: 1 });
+  // await shell('lsk run fix --workspace');
   let cmd = findBin('clean-publish');
-  cmd += ' --without-publish --temp-dir .release';
+  cmd +=
+    ' --without-publish --temp-dir .release --fields "//, ///, ////, private"';
   await shell(cmd, { ctx });
 };
 

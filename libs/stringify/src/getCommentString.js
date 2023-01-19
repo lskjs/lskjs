@@ -1,5 +1,11 @@
 export function getCommentString(str, { type = 'keyval' } = {}) {
-  if (type === 'keyval' || type === 'keyvalue' || type === 'env' || type === 'yml' || type === 'yaml') {
+  if (
+    type === 'keyval' ||
+    type === 'keyvalue' ||
+    type === 'env' ||
+    type === 'yml' ||
+    type === 'yaml'
+  ) {
     return [
       '##',
       str

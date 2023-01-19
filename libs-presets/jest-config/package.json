@@ -1,15 +1,15 @@
 {
   "name": "@lskjs/jest-config",
-  "version": "3.0.0-alpha.24",
+  "version": "3.0.0-alpha.29",
   "description": "Jest config for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "   echo skip",
     "dev": "     echo skip",
+    "build": "   echo skip",
+    "test": "    echo skip",
     "prepack": " lsk run prepack",
-    "release": " lsk run release",
-    "test": "    echo skip"
+    "release": " lsk run release"
   },
   "dependencies": {
     "jest-junit": "^15.0.0",
@@ -21,25 +21,28 @@
   "optionalDependencies": {
     "jest": "^29.3.1"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
   },
-  "main": "index.js",
   "files": [
     "jest.config.js",
     "jest.setup.js",
     "index.js"
   ],
+  "main": "index.js",
+  "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/jest-config",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "keywords": [
     "jest",
     "config",
     "lskjs"
   ],
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  }
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

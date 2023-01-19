@@ -1,9 +1,11 @@
+// import { isEqual } from '@lskjs/algos';
 import fs from 'fs/promises';
-import isEqual from 'lodash/isEqual';
 import path from 'path';
 
 import { fileToJson } from './fileToJson';
 import { jsonToString } from './jsonToString';
+
+const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 export async function jsonToFile(
   filename,

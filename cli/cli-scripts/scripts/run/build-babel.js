@@ -14,8 +14,8 @@ async function main({ isRoot, ctx, args, cwd }) {
   }
   const isWatch = args.includes('--watch');
   const libDir = 'lib';
-  if (!isWatch) await shell(`rm -rf ${libDir}`, { ctx });
-  await shell(`mkdir -p ${libDir}`, { ctx });
+  if (!isWatch) await shell(`rm -rf ${libDir}`, { ctx, silence: 1 });
+  await shell(`mkdir -p ${libDir}`, { ctx, silence: 1 });
 
   // const babelBin = 'node_modules/@babel/cli/bin/babel.js';
   // babel-watch

@@ -5,11 +5,11 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "          echo skip",
     "dev": "            echo skip",
+    "build": "          echo skip",
+    "test": "           echo skip",
     "prepack": "        lsk run prepack",
-    "release": "        lsk run release",
-    "test": "           echo skip"
+    "release": "        lsk run release"
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
@@ -19,47 +19,46 @@
     "@lskjs/err": "^3.0.0-alpha.24",
     "@lskjs/log": "^3.0.0-alpha.24",
     "@lskjs/utils": "2.87.1",
-    "@pnpm/filter-workspace-packages": "^6.0.26",
-    "@pnpm/logger": "^5.0.0",
-    "@pnpm/plugin-commands-script-runners": "^6.3.6",
     "axios": "0.27.2",
     "bluebird": "3.7.2",
     "glob": "7.2.0",
     "global-prefix": "^3.0.0",
     "lodash": "4.17.21",
-    "logger": "@pnpm/logger",
     "rsync": "0.6.1",
     "sort-package-json": "2.1.0",
     "yargs": "^17.6.2"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "bin": {
-    "lsx": "bin/run"
-  },
-  "main": "src/index.js",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//cli/cli-utils",
-  "homepage": "https://github.com/lskjs/cli",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
-  "keywords": [
-    "lskjs",
-    "lsk",
-    "cli",
-    "utils"
-  ],
+  "//": "///////////========================/////////========================/////////========================/////////",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "bin": {
+    "lsx": "bin/run"
+  },
+  "main": "src/index.js",
   "size-limit": [
     {
       "path": "./src/index.js",
       "limit": "1kb"
     }
-  ]
+  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//cli/cli-utils",
+  "homepage": "https://github.com/lskjs/cli",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "utils"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

@@ -5,40 +5,13 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "          lsk run build",
     "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
-    "release": "        lsk run release",
-    "test": "           lsk run test"
+    "release": "        lsk run release"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.mjs",
-      "types": "./lib/index.d.ts",
-      "default": "./lib/index.js"
-    },
-    "./*": {
-      "import": "./lib/*.mjs",
-      "types": "./lib/*.d.ts",
-      "default": "./lib/*.js"
-    }
-  },
-  "files": [
-    "lib",
-    "README.md",
-    "LICENCE"
-  ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/lodash",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
-  "keywords": [],
-  "//": "//",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config",
     "rules": {
@@ -78,6 +51,25 @@
   },
   "jest": {
     "preset": "@lskjs/jest-config"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
   },
   "size-limit": [
     {
@@ -233,5 +225,15 @@
       "limit": "6kb"
     }
   ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/lodash",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [],
+  "////": "/////////========================/////////========================/////////========================/////////",
   "_type": "module"
 }

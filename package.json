@@ -3,15 +3,17 @@
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "private": false,
   "scripts": {
-    "build": "          lsk run build",
     "dev": "            lsk run dev",
-    "release": "        lsk run release",
-    "test": "           lsk run test"
+    "build": "          lsk run build",
+    "test": "           lsk run test",
+    "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/eslint-config": "^3.0.0-alpha.1",
-    "@lskjs/jest-config": "^3.0.0-alpha.21",
-    "@lskjs/tsconfig": "^3.0.0-alpha.1",
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@lskjs/eslint-config": "^3.0.0-alpha.24",
+    "@lskjs/jest-config": "^3.0.0-alpha.29",
+    "@lskjs/tsconfig": "^3.0.0-alpha.24",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/jest": "^29.2.6",
     "@types/node": "^18.11.18",
@@ -19,18 +21,21 @@
     "eslint": "^8.32.0",
     "jest": "^29.3.1",
     "lerna": "^6.4.1",
-    "lsk": "3.0.0-alpha.17",
+    "lsk": "^3.0.0-alpha.24",
     "size-limit": "^8.1.2",
     "tsup": "^6.5.0",
     "typescript": "^4.9.4"
   },
-  "repository": "https://github.com/lskjs/lskjs",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
   "jest": {
     "preset": "@lskjs/jest-config"
-  }
+  },
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

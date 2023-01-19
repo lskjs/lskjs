@@ -6,8 +6,8 @@
   "private": false,
   "scripts": {
     "build": "echo nothing",
-    "prepack": "        lsk run prepack",
-    "test": "echo skip"
+    "test": "echo skip",
+    "prepack": "        lsk run prepack"
   },
   "dependencies": {
     "@lskjs/algos": "^3.0.0-alpha.24",
@@ -16,24 +16,11 @@
     "@lskjs/err": "^3.0.0-alpha.24",
     "@lskjs/stringify": "^2.85.1",
     "all-contributors-cli": "^6.20.0",
-    "fishbird": "^0.19.0",
+    "fishbird": "^0.20.0",
     "remark-template": "1.6.0",
     "sort-package-json": "1.57.0"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master//cli/cli-scripts",
-  "homepage": "https://github.com/lskjs/cli",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
-  "keywords": [
-    "lskjs",
-    "lsk",
-    "cli",
-    "scripts"
-  ],
+  "//": "///////////========================/////////========================/////////========================/////////",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
@@ -45,5 +32,21 @@
       "path": ".//index.js",
       "limit": "1kb"
     }
-  ]
+  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//cli/cli-scripts",
+  "homepage": "https://github.com/lskjs/cli",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "scripts"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

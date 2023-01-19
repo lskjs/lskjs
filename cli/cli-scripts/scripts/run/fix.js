@@ -27,6 +27,9 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // log.debug(333);
   // eslint-disable-next-line no-param-reassign
   if (!args.length) args = ['--sort', '--workspace', '--prepack'];
+  if (args.includes('--package')) {
+    args = [...args, '--sort', '--workspace', '--prepack'];
+  }
   const packFilename = `${cwd}/package.json`;
   let pack = require(packFilename);
   if (args.includes('--deps') || args.includes('--workspace')) {
@@ -40,9 +43,16 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
         return v;
       })
     );
+    if (!Object.keys(pack.dependencies || {}).length) {
+      delete pack.dependencies;
+    }
+    if (!Object.keys(pack.devDependencies || {}).length) {
+      delete pack.devDependencies;
+    }
   }
   const debug = getCwdInfo({ cwd });
-  const { isLib, isTs, isBabel, isApp, rootPath } = debug;
+  const { isLib, isTs, isBabel, isApp } = debug;
+  const { rootPath = cwd } = debug;
   const rootPack = require(`${rootPath}/package.json`);
 
   if (args.includes('--temp')) {
@@ -79,15 +89,21 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     }
   }
 
-  const relativePath = cwd.replace(rootPath, '');
-  if (rootPack.repository?.includes('github.com')) {
-    if (!isRoot) {
-      pack.repository = `${rootPack.repository}/tree/master/${relativePath}`;
-    }
-    pack.bugs = `${rootPack.repository}/issues`;
-  }
-
+  pack['//'] =
+    '///////////========================/////////========================/////////========================/////////';
+  pack['///'] =
+    '//////////========================/////////========================/////////========================/////////';
+  pack['////'] =
+    '/////////========================/////////========================/////////========================/////////';
   if (args.includes('--package')) {
+    const relativePath = cwd.replace(rootPath, '');
+    if (rootPack.repository?.includes('github.com')) {
+      if (!isRoot) {
+        pack.repository = `${rootPack.repository}/tree/master/${relativePath}`;
+      }
+      pack.bugs = `${rootPack.repository}/issues`;
+      if (!pack.homepage) pack.homepage = pack.repository;
+    }
     // if (!pack.workspaces && isRoot) {
     //   pack.workspaces = ['packages/*'];
     // }
@@ -192,13 +208,6 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           };
         }
       }
-
-      if (!pack.repository) {
-        // TODO:
-        // "homepage": "https://github.com/isuvorov/macrobe",
-        // "repository": "https://github.com/isuvorov/macrobe",
-        // "bugs": "http://github.com/isuvorov/macrobe/issues",
-      }
     }
   }
   if (args.includes('--sort')) {
@@ -211,7 +220,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       'version',
       'description',
       'author',
-      'author',
+      'contributors',
       'private',
       'workspaces',
       'scripts',
@@ -219,7 +228,12 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       'devDependencies',
       'peerDependencies',
       'optionalDependencies',
-      'publishConfig',
+
+      '//',
+
+      'eslintConfig',
+      'jest',
+      'files',
       'browser',
       'bin',
       'main',
@@ -227,17 +241,36 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       'typings',
       'exports',
       'imports',
-      'files',
+      'size-limit',
+
+      '///',
+
       'productName',
       'repository',
       'homepage',
       'bugs',
       'engines',
       'license',
+      'publishConfig',
       'keywords',
-      '//',
+
+      '////',
+    ];
+    const sortOrderScripts = [
+      'start',
+      'dev',
+      'build',
+      'test',
+      'prepack',
+      'release',
+      'release:ci',
     ];
     pack = sortPackageJson(pack, { sortOrder });
+    if (pack.scripts) {
+      pack.scripts = sortPackageJson(pack.scripts, {
+        sortOrder: sortOrderScripts,
+      });
+    }
   }
   await writeFile(`${cwd}/package.json`, `${JSON.stringify(pack, null, 2)}\n`);
 };

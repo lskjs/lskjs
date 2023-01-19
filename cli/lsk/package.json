@@ -5,12 +5,12 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "          lsk run build",
-    "postbuild": "      oclif-dev readme",
     "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
     "release": "        lsk run release",
-    "test": "           lsk run test"
+    "postbuild": "      oclif-dev readme"
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
@@ -37,10 +37,20 @@
     "@oclif/dev-cli": "1.26.10",
     "globby": "11.0.4"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "oclif.manifest.json",
+    "README.md",
+    "LICENCE"
+  ],
   "bin": {
     "lsk": "bin/run",
     "lskjs": "bin/run"
@@ -59,30 +69,22 @@
       "default": "./lib/*.js"
     }
   },
-  "files": [
-    "bin",
-    "lib",
-    "oclif.manifest.json",
-    "README.md",
-    "LICENCE"
-  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//cli/lsk",
   "homepage": "https://github.com/lskjs/cli",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "keywords": [
     "lskjs",
     "lsk",
     "cli",
     "helper"
   ],
-  "//": "//",
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  },
+  "////": "/////////========================/////////========================/////////========================/////////",
   "oclif": {
     "commands": "./lib/commands",
     "bin": "lsk",
@@ -90,17 +92,17 @@
       "@oclif/plugin-help"
     ]
   },
+  "_scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo skip",
+    "build": "oclif-dev readme && git add README.md && echo ok"
+  },
   "_size-limit": [
     {
       "//": "esm error",
       "path": "lib/index.js",
       "limit": "1kb"
     }
-  ],
-  "_scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "echo skip",
-    "build": "oclif-dev readme && git add README.md && echo ok"
-  }
+  ]
 }

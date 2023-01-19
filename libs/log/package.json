@@ -3,13 +3,16 @@
   "version": "3.0.0-alpha.24",
   "description": "Yet another logger whitch combines the best features of debug, bunyan, logfmt/logrus, morgan/winston",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "contributors": [
+    "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
+  ],
   "private": false,
   "scripts": {
-    "build": "          lsk run build",
     "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
-    "release": "        lsk run release",
-    "test": "           lsk run test"
+    "release": "        lsk run release"
   },
   "dependencies": {
     "@lskjs/algos": "^3.0.0-alpha.24",
@@ -32,10 +35,18 @@
   "optionalDependencies": {
     "logfmt": "1.3.2"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
   "bin": {
     "lsklog": "./bin/cli.js"
   },
@@ -52,36 +63,6 @@
       "types": "./lib/*.d.ts",
       "default": "./lib/*.js"
     }
-  },
-  "files": [
-    "lib",
-    "README.md",
-    "LICENCE"
-  ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/log",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
-  "keywords": [
-    "logger",
-    "log",
-    "debug",
-    "bunyan",
-    "morgan",
-    "winston",
-    "logfmt",
-    "logrus"
-  ],
-  "contributors": [
-    "Vladislav Denisov (https://github.com/NewSoftwareCulture)"
-  ],
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  },
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  },
-  "clean-publish": {
-    "packageManager": "pnpm"
   },
   "size-limit": [
     {
@@ -104,5 +85,24 @@
       "path": "lib/themeize.mjs",
       "limit": "3.1kb"
     }
-  ]
+  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/log",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "logger",
+    "log",
+    "debug",
+    "bunyan",
+    "morgan",
+    "winston",
+    "logfmt",
+    "logrus"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

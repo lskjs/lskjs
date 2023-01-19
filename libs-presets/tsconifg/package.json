@@ -5,26 +5,29 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "build": "   echo skip",
     "dev": "     echo skip",
+    "build": "   echo skip",
+    "test": "    echo skip",
     "prepack": " lsk run prepack",
-    "release": " lsk run release",
-    "test": "    echo skip"
+    "release": " lsk run release"
   },
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "main": "tsconfig.json",
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/tsconifg",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "tsconfig.json",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/tsconifg",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
-  "license": "MIT",
   "keywords": [
     "eslint",
     "config",
     "lskjs"
   ],
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
-  }
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

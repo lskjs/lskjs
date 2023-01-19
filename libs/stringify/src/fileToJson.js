@@ -1,7 +1,7 @@
+import { fromPairs } from '@lskjs/algos';
 import Err from '@lskjs/err';
 import { existsSync, readFileSync } from 'fs';
 import yaml from 'js-yaml';
-import fromPairs from 'lodash/fromPairs';
 
 export async function fileToJson(filename, { type = 'keyval' } = {}) {
   try {

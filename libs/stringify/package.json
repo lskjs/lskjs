@@ -1,7 +1,7 @@
 {
-  "name": "@lskjs/utils2",
-  "version": "3.0.0-alpha.24",
-  "description": "LSK.js – utils – helpers and functions",
+  "name": "@lskjs/stringify",
+  "version": "2.85.1",
+  "description": "LSK stringify.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
@@ -12,8 +12,10 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/lodash": "^3.0.0-alpha.24",
-    "fishbird": "^0.20.0"
+    "@lskjs/algos": "^3.0.0-alpha.24",
+    "@lskjs/err": "^3.0.0-alpha.24",
+    "javascript-stringify": "2.1.0",
+    "js-yaml": "4.1.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "eslintConfig": {
@@ -27,8 +29,7 @@
     "README.md",
     "LICENCE"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.mjs",
@@ -43,17 +44,19 @@
   },
   "size-limit": [
     {
-      "path": "lib/index.js",
-      "limit": "1.6kb"
+      "path": "./lib/index.js",
+      "limit": "1kb"
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/utils2",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/stringify",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/stringify",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "keywords": [],
   "////": "/////////========================/////////========================/////////========================/////////"
 }
