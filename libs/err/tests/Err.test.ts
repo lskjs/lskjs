@@ -1,5 +1,5 @@
 /* global test expect */
-import { pick } from '@lskjs/lodash';
+import { pick } from '@lskjs/algos';
 
 import { Err } from '../src';
 

@@ -2,8 +2,6 @@
 
 const packageData = require('./package.json');
 
-// TODO: переписать привественное сообщение
-
 const isEnabled = (value) => !!value && value !== '0' && value !== 'false';
 const canUseColor = isEnabled(process.env.npm_config_color);
 

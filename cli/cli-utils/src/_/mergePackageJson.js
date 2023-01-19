@@ -4,7 +4,7 @@ const pickBy = require('lodash/pickBy');
 const isPlainObject = require('lodash/isPlainObject');
 const { omitNull } = require('@lskjs/utils/omitNull');
 const { isNotNull } = require('@lskjs/utils/isNotNull');
-const { log } = require('./log');
+// const { log } = require('./log');
 const sortPackageJson = require('sort-package-json');
 
 // TODO: отказаться от utils и lodash
@@ -49,7 +49,7 @@ const mergePackageJson = (target, base) => {
   if (newJson) {
     require('fs').writeFileSync('./package.json', `${JSON.stringify(newJson, null, 2)}\n`);
   } else {
-    log.error('!newJson');
+    console.error('!newJson');
   }
 };
 

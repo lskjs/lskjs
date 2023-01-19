@@ -1,4 +1,4 @@
-const Logger = require('../build/Logger').default;
+const { Logger } = require('../../lib');
 
 const logger = new Logger({
   name: 'lsk:Module',

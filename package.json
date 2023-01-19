@@ -1,6 +1,6 @@
 {
   "version": "3.0.0-alpha.3",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
     "dev": "            lsk run dev",
@@ -28,6 +28,7 @@
     "typescript": "^4.9.4"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
@@ -38,5 +39,9 @@
   "repository": "https://github.com/lskjs/lskjs",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "////": "/////////========================/////////========================/////////========================/////////"
 }

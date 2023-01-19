@@ -1,8 +1,8 @@
 const { argv } = require('yargs/yargs')(process.argv.slice(2)).completion(
   'completion',
-  (current, argv, completionFilter, done) => {
+  (current, argv2, completionFilter, done) => {
     // if 'apple' present return default completions
-    if (argv._.includes('apple')) {
+    if (argv2._.includes('apple')) {
       completionFilter();
     } else {
       completionFilter((err, defaultCompletions) => {
@@ -15,6 +15,8 @@ const { argv } = require('yargs/yargs')(process.argv.slice(2)).completion(
     }
   },
 );
+
+console.log(argv);
 
 // const yargs = require('yargs/yargs')(process.argv.slice(2));
 

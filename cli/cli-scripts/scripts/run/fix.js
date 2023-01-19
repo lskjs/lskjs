@@ -268,18 +268,25 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   await writeFile(`${cwd}/package.json`, `${JSON.stringify(pack, null, 2)}\n`);
 
   if (args.includes('--eslint')) {
+    const cmd = `${findBin('eslint')} --fix --quiet`;
     if (existsSync(`${cwd}/src`)) {
-      await shell(`${findBin('eslint')} --fix src`, { ctx });
+      await shell(`${cmd} src`, { ctx });
+    } else {
+      await shell(`${cmd} .`, {
+        ctx,
+        stdio: 'ignore',
+      }).catch((err) => {
+        log.trace('[eslint err] in .', err);
+      });
     }
     // if (existsSync(`${cwd}/scripts`)) {
-    //   await shell(`${findBin('eslint')} --fix scripts`, { ctx });
+    //   await shell(`${cmd} --fix scripts`, { ctx });
     // }
     if (existsSync(`${cwd}/tests`)) {
-      await shell(`${findBin('eslint')} --fix tests`, { ctx });
+      await shell(`${cmd}  tests`, { ctx, stdio: 'ignore' }).catch((err) => {
+        log.trace('[eslint err] in test', err);
+      });
     }
-    // await shell(`${findBin('eslint')} --fix .`, { ctx }).catch((err) => {
-    //   log.trace('[eslint err]', err);
-    // });
   }
 };
 
