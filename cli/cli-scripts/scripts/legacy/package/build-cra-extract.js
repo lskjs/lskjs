@@ -13,7 +13,9 @@ const main = async () => {
     const vendorEntrypoints = manifest.entrypoints.filter(
       (entrypoint) =>
         entrypoint.startsWith(prefix) &&
-        !(entrypoint.startsWith(`${prefix}main.`) || entrypoint.startsWith(`${prefix}runtime-main.`)),
+        !(
+          entrypoint.startsWith(`${prefix}main.`) || entrypoint.startsWith(`${prefix}runtime-main.`)
+        ),
     );
     if (vendorEntrypoints.length === 0) {
       log.error(`WARNING no vendorEntrypoints ${ext} for manifest`, manifest);

@@ -26,7 +26,9 @@ const main = async () => {
   const cwd = process.cwd();
   itens.forEach((item) => {
     // Осознанно без await
-    shell(`lsk link ${projectDir}/lskjs/packages/${item}/build ${cwd}/packages/app/node_modules/@lskjs/${item}`);
+    shell(
+      `lsk link ${projectDir}/lskjs/packages/${item}/build ${cwd}/packages/app/node_modules/@lskjs/${item}`,
+    );
   });
 };
 

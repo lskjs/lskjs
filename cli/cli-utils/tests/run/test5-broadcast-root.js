@@ -14,7 +14,7 @@ const main = async (options) => {
       world: { type: 'string' },
     },
   });
-  const argv = {}
+  const argv = {};
   const list = getList(argv);
   console.log({ list });
   console.log('[test5]: broadcast root', values);

@@ -13,7 +13,13 @@ const main = async () => {
   ].join(' ');
 
   await Bluebird.each(
-    ['.', 'packages/cli', 'packages/cli-scripts', 'packages/cli-utils', 'packages/cli-scripts/files'],
+    [
+      '.',
+      'packages/cli',
+      'packages/cli-scripts',
+      'packages/cli-utils',
+      'packages/cli-scripts/files',
+    ],
     async (path) => {
       const cwd = `${process.cwd()}/${path}`;
       try {

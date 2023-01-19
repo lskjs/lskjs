@@ -15,7 +15,11 @@ const jsRules = {
   'no-throw-literal': 'off',
 
   // imports
-  'import/extensions': ['error', 'ignorePackages', { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' }],
+  'import/extensions': [
+    'error',
+    'ignorePackages',
+    { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
+  ],
   'import/no-extraneous-dependencies': [
     'error',
     {

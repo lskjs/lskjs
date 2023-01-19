@@ -8,9 +8,14 @@ const hosts = process.env.DNS_HOST.split(',');
 const ip = process.env.DNS_IP || address();
 createServer(dns)
   .route(hosts, ip)
-  .on('resolve', (data) => process.env.DNS_LOG && console.log(`[DNS] ${data.rinfo.address} => ${data.domain}`))
+  .on(
+    'resolve',
+    (data) => process.env.DNS_LOG && console.log(`[DNS] ${data.rinfo.address} => ${data.domain}`),
+  )
   .listen();
 
 console.log(
-  `[DNS] listen on ${address()}:53 [${hosts}] => ${ip} [proxy dns=${dns}] log=${String(!!process.env.DNS_LOG)}`,
+  `[DNS] listen on ${address()}:53 [${hosts}] => ${ip} [proxy dns=${dns}] log=${String(
+    !!process.env.DNS_LOG,
+  )}`,
 );

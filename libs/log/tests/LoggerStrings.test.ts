@@ -28,9 +28,7 @@ describe('Logger strings', () => {
       ip: '::1',
     };
 
-    expect(prettyFormat(data)).toMatchObject([
-      '[t] • GET /api/admin/test       #1 ⧗⧖⧗',
-    ]);
+    expect(prettyFormat(data)).toMatchObject(['[t] • GET /api/admin/test       #1 ⧗⧖⧗']);
   });
   test('req GET', () => {
     const data = {
@@ -50,9 +48,7 @@ describe('Logger strings', () => {
       message: 'errors.ERR_123',
     };
 
-    expect(prettyFormat(data)).toMatchObject([
-      '[d] • GET /api/admin/test       #1 500    6s 382B',
-    ]);
+    expect(prettyFormat(data)).toMatchObject(['[d] • GET /api/admin/test       #1 500    6s 382B']);
   });
   test('req GET2', () => {
     const data = {

@@ -9,7 +9,7 @@ describe('Logger colors', () => {
     });
     log.info('test', 'me');
     const res = log.lastLoggerArgs[0];
-    console.log({res})
+    console.log({ res });
     expect(typeof res.time).toStrictEqual('number');
     expect(res).toMatchObject({
       level: 'info',

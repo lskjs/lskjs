@@ -14,8 +14,14 @@ const main = async () => {
   const packages = ncu.packages || '/^@(lskjs)/.*$/';
   const target = ncu.target || 'latest';
   try {
-    const params = [`--dep=${ncu.dep || 'prod,dev,peer,optional'}`, target ? `--target ${target}` : ''].join(' ');
-    await shell(`${findBin('ncu')} -u -l error -e 2 ${params} "${packages}"`, { fatal: 0, error: 0 });
+    const params = [
+      `--dep=${ncu.dep || 'prod,dev,peer,optional'}`,
+      target ? `--target ${target}` : '',
+    ].join(' ');
+    await shell(`${findBin('ncu')} -u -l error -e 2 ${params} "${packages}"`, {
+      fatal: 0,
+      error: 0,
+    });
   } catch (err) {
     if (err.code === 1) {
       await shell(`lsk run npm:install`);

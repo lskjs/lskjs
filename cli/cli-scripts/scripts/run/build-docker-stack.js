@@ -26,7 +26,10 @@ const main = async ({ isRoot, log, ctx, args } = {}) => {
     const data = getConfig({ env, package });
     const postfix = env !== 'prod' ? `.${env}` : '';
     const outputFilename = `${packagePath}/docker-stack${postfix}.yml`;
-    log.trace('[save]', `env:${env} ${getShortPath(inputFilename)} => ${getShortPath(outputFilename)}`);
+    log.trace(
+      '[save]',
+      `env:${env} ${getShortPath(inputFilename)} => ${getShortPath(outputFilename)}`,
+    );
     await jsonToFile(`${rootPath}/${outputFilename}`, data, {
       type: 'yml',
       comment: getComment({

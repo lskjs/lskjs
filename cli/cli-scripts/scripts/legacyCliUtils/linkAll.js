@@ -23,7 +23,10 @@ const linkAll = async (config, options = {}) => {
   const links = getLinks(config);
   const maxLength = Math.max(...links.map(([from]) => from.length));
   const str = links
-    .map(([from, to]) => `${getShortPath(from)}${getLinkRightPad(from, maxLength)} => ${getShortPath(to)}`)
+    .map(
+      ([from, to]) =>
+        `${getShortPath(from)}${getLinkRightPad(from, maxLength)} => ${getShortPath(to)}`,
+    )
     .join('\n');
   log.info(`
 ==================== LINKING ======================

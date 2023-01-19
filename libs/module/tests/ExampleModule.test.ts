@@ -15,7 +15,7 @@ test('ExampleModule.start()', async () => {
   const instance = await ExampleModule.start();
   expect(!!instance.__lifecycle.create).toBe(true);
   expect(!!instance.__lifecycle.initStart).toBe(true);
-expect(!!instance.__lifecycle.initFinish).toBe(true);
+  expect(!!instance.__lifecycle.initFinish).toBe(true);
   expect(!!instance.__lifecycle.runStart).toBe(true);
   expect(!!instance.__lifecycle.runFinish).toBe(true);
   expect(!!instance.log).toBe(true);

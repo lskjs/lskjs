@@ -17,7 +17,9 @@ async function main() {
   // const babel = "../../node_modules/@babel/cli/bin/babel.js";
   const params = `${BUILD_PARAMS} ${WATCH ? ' --watch' : ''}`;
   await shell(
-    `${findBin('babel')} src --out-dir ${DIST} --source-maps true --extensions ".js,.jsx,.ts,.tsx" ${params}`,
+    `${findBin(
+      'babel',
+    )} src --out-dir ${DIST} --source-maps true --extensions ".js,.jsx,.ts,.tsx" ${params}`,
   );
 }
 

@@ -2,8 +2,7 @@
 /* global test expect */
 import Module from '../src';
 
-const delay = (duration) =>
-  new Promise((resolve) => setTimeout(() => resolve(), duration));
+const delay = (duration) => new Promise((resolve) => setTimeout(() => resolve(), duration));
 
 let start = 0;
 let progress = 0;

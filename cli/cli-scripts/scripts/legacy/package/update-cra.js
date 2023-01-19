@@ -12,7 +12,10 @@ const main = async () => {
 
   await rsync(paths, packagePath('cra'));
   await rsync(findPath('scripts/assets/cra/public'), packagePath('cra/public'));
-  await rsync(findPath('scripts/assets/cra/public/index.html'), packagePath('cra/public/index.html'));
+  await rsync(
+    findPath('scripts/assets/cra/public/index.html'),
+    packagePath('cra/public/index.html'),
+  );
 };
 
 run(main);

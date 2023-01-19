@@ -268,7 +268,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   await writeFile(`${cwd}/package.json`, `${JSON.stringify(pack, null, 2)}\n`);
 
   if (args.includes('--eslint')) {
-    const cmd = `${findBin('eslint')} --fix --quiet`;
+    const cmd = `${findBin('eslint')} --fix`;
     if (existsSync(`${cwd}/src`)) {
       await shell(`${cmd} src`, { ctx });
     } else {

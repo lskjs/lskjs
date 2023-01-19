@@ -23,7 +23,9 @@ const main = async () => {
     // eslint-disable-next-line max-len
     `rm -rf ${files.join(' ')}`,
   );
-  await rsync(`${findExternal('files')}/`, '.', { options: '-aEp --exclude CHANGELOG.md --exclude node_modules' });
+  await rsync(`${findExternal('files')}/`, '.', {
+    options: '-aEp --exclude CHANGELOG.md --exclude node_modules',
+  });
   await rsync(`${findExternal('softFiles')}/`, '.', { options: '-aEp --ignore-existing' });
   // eslint-disable-next-line no-console
   //   console.log(`

@@ -7,7 +7,7 @@ export default class ExampleModule extends Module {
       if (!this.app?.config?.bots) {
         this.log.warn('!config');
         return;
-      } 
+      }
       this.config = this.app.config.bots;
     }
     this.log.debug('config', this.config);
