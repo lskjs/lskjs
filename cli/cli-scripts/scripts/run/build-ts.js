@@ -17,7 +17,7 @@ async function main({ isRoot, ctx, cwd, args } = {}) {
   const isWatch = args.includes('--watch');
   const isProd = !isDev || args.includes('--prod');
   const { isLib } = getCwdInfo({ cwd });
-  let cmd = findBin('tsup');
+  let cmd = findBin('tsup src');
   if (isSilent) cmd += ' --silent';
   if (isWatch) cmd += ' --watch';
   if (isProd) cmd = `NODE_ENV=production ${cmd}`;
