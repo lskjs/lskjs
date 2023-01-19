@@ -1,0 +1,45 @@
+{
+  "name": "@lskjs/eslint-config",
+  "version": "2.21.0",
+  "description": "Eslint preset for LSK.js projects",
+  "scripts": {
+    "build": "   echo skip",
+    "dev": "     echo skip",
+    "prepack": " lsk run prepack",
+    "release": " lsk run release",
+    "test": "    echo skip"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "5.48.1",
+    "@typescript-eslint/parser": "5.48.1",
+    "eslint": "8.31.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-import-resolver-typescript": "3.5.3",
+    "eslint-plugin-import": "2.27.4",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-json-format": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.32.0",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-simple-import-sort": "8.0.0",
+    "prettier": "2.8.2"
+  },
+  "optionalDependencies": {
+    "typescript": "4.*.*"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/lskjs/eslint-config",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "keywords": [
+    "eslint",
+    "config",
+    "lskjs"
+  ],
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": "./index.js"
+  }
+}
