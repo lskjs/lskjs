@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/utils2",
-  "version": "3.0.0-alpha.24",
+  "version": "3.0.0-alpha.30",
   "description": "LSK.js – utils – helpers and functions",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/lodash": "^3.0.0-alpha.24",
+    "@lskjs/lodash": "^3.0.0-alpha.30",
     "fishbird": "^0.20.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",

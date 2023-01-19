@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/env",
-  "version": "3.0.0-alpha.24",
+  "version": "3.0.0-alpha.30",
   "description": "LSK.js – env – Scripts for environment detecton",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/tty": "^3.0.0-alpha.24"
+    "@lskjs/tty": "^3.0.0-alpha.30"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
