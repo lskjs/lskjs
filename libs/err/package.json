@@ -2,7 +2,7 @@
   "name": "@lskjs/err",
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -52,5 +52,8 @@
       "path": "lib/index.js",
       "limit": "4kb"
     }
-  ]
+  ],
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  }
 }

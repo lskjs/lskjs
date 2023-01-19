@@ -2,7 +2,7 @@
   "name": "@lskjs/lodash",
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – utils – helpers and functions",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -228,5 +228,8 @@
       "limit": "6kb"
     }
   ],
-  "_type": "module"
+  "_type": "module",
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  }
 }

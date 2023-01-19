@@ -2,7 +2,7 @@
   "name": "@lskjs/algos",
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -36,7 +36,9 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
-  "access": "public",
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
   "size-limit": [
     {
       "path": "lib/index.js",
@@ -102,5 +104,10 @@
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-  ]
+  ],
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

@@ -13,6 +13,7 @@ const {
 } = require('@lskjs/cli-utils');
 const { omitNull, mapValues } = require('@lskjs/algos');
 const { writeFile } = require('fs/promises');
+const { existsSync } = require('fs');
 
 const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   if (isRoot) {
@@ -41,7 +42,8 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     );
   }
   const debug = getCwdInfo({ cwd });
-  const { isLib, isTs, isBabel, isApp } = debug;
+  const { isLib, isTs, isBabel, isApp, rootPath } = debug;
+  const rootPack = require(`${rootPath}/package.json`);
 
   if (args.includes('--temp')) {
     delete pack.jest;
@@ -83,48 +85,56 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     if (!pack.scripts) {
       if (isLib) {
         pack.scripts = {
-          build: '          lsk run build',
           dev: '            lsk run dev',
-          release: '        lsk run release',
+          build: '          lsk run build',
           test: '           lsk run test',
+          prepack: '        lsk run prepack',
+          release: '        lsk run release',
         };
       }
       if (isApp) {
         pack.scripts = {
           start: '          lsk run start',
           build: '          lsk run build',
-          dev: '            lsk run dev',
-          release: '        lsk run release',
           test: '           lsk run test',
+          prepack: '        lsk run prepack',
+          release: '        lsk run release',
         };
       }
     }
-    if (!pack.eslintconfig) {
-      pack.eslintconfig = {
+    if (!pack.eslintConfig) {
+      pack.eslintConfig = {
         extends: '@lskjs/eslint-config',
       };
     }
-    if (!pack.dependencies) {
-      pack.dependencies = {};
+    if (!pack.jest) {
+      pack.jest = {
+        preset: '@lskjs/jest-config',
+      };
     }
-    if (!pack.devDependencies) {
-      pack.devDependencies = {};
+    if (!Object.keys(pack.dependencies || {}).length) {
+      delete pack.dependencies;
+    }
+    if (!Object.keys(pack.devDependencies || {}).length) {
+      delete pack.devDependencies;
     }
     if (isLib && !isRoot) {
-      const libFolder = isTs || isBabel ? 'lib' : 'src';
+      const libFolder =
+        // eslint-disable-next-line no-nested-ternary
+        isTs || isBabel ? './lib' : existsSync(`${cwd}/src`) ? './src' : './';
       if (!pack.main) pack.main = `${libFolder}/index.js`;
       if (isTs && !pack.types) pack.main = `${libFolder}/index.d.ts`;
       if (!pack.exports) {
         pack.exports = {
           '.': omitNull({
-            import: `./${libFolder}/index.mjs`,
-            types: isTs ? `./${libFolder}/index.d.ts` : null,
-            default: `./${libFolder}/index.js`,
+            import: `${libFolder}/index.mjs`,
+            types: isTs ? `${libFolder}/index.d.ts` : null,
+            default: `${libFolder}/index.js`,
           }),
           './*': omitNull({
-            import: `./${libFolder}/*.mjs`,
-            types: isTs ? `./${libFolder}/*.d.ts` : null,
-            default: `./${libFolder}/*.js`,
+            import: `${libFolder}/*.mjs`,
+            types: isTs ? `${libFolder}/*.d.ts` : null,
+            default: `${libFolder}/*.js`,
           }),
         };
       }
@@ -136,10 +146,17 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           },
         ];
       }
-      if (!pack.description) {
+      if (pack.private === undefined) {
+        if (rootPack.private !== undefined) {
+          pack.private = rootPack.private;
+        } else {
+          log.error('!private');
+        }
+      }
+      if (!pack.private && !pack.description) {
         log.error('!description');
       }
-      if (!pack.keywords || !pack.keywords.length) {
+      if ((!pack.private && !pack.keywords) || !pack.keywords.length) {
         log.error('!keywords');
       }
       if (!pack.files) {

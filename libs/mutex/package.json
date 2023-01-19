@@ -2,7 +2,7 @@
   "name": "@lskjs/mutex",
   "version": "3.0.0-alpha.20",
   "description": "LSK.js – mutex – async mutex",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -52,5 +52,8 @@
       "path": "lib/index.js",
       "limit": "5kb"
     }
-  ]
+  ],
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  }
 }

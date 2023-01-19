@@ -2,7 +2,7 @@
   "name": "@lskjs/utils2",
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – utils – helpers and functions",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -47,5 +47,8 @@
       "path": "lib/index.js",
       "limit": "1.6kb"
     }
-  ]
+  ],
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  }
 }

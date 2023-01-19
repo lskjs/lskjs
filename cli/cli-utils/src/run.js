@@ -25,7 +25,7 @@ const run = async (main) => {
       filename,
       args,
       cwd,
-      isRoot: path.dirname(config?.path) === cwd,
+      isRoot: config?.path && path.dirname(config?.path) === cwd,
     };
     // log.trace('[run]', rootRun);
     rootRun.config = config;

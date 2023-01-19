@@ -4,11 +4,12 @@
 lerna-debug.log
 
 **/.reports
+**/coverage
 **/.release
-
-**/.DS_Store
-**/node_modules
 **/lib
+
+**/node_modules
+**/.DS_Store
 **/.env*
 **/!.env.example.*
 **/__*

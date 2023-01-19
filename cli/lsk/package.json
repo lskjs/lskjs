@@ -2,7 +2,7 @@
   "name": "lsk",
   "version": "3.0.0-alpha.21",
   "description": "LSK.js CLI (Command Line Interface) is the easiest way to create and manage LSK.js project",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "          lsk run build",
     "postbuild": "      oclif-dev readme",
@@ -75,7 +75,6 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
-  "access": "public",
   "oclif": {
     "commands": "./lib/commands",
     "bin": "lsk",
@@ -88,5 +87,19 @@
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "echo skip",
     "build": "oclif-dev readme && git add README.md && echo ok"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ],
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

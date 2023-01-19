@@ -4,9 +4,11 @@
   "description": "LSK.js CLI-utils – some utils functions for LSK.js – CLI projects  ",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
-    "build": "echo nothing",
+    "build": "          echo skip",
+    "dev": "            echo skip",
     "prepack": "        lsk run prepack",
-    "test": "echo skip"
+    "release": "        lsk run release",
+    "test": "           echo skip"
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
@@ -30,7 +32,7 @@
     "yargs": "^17.6.2"
   },
   "bin": {
-    "qwe": "bin/run"
+    "lsx": "bin/run"
   },
   "main": "src/index.js",
   "repository": "lskjs/cli",

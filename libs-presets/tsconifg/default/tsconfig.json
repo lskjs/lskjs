@@ -3,10 +3,12 @@
   "compilerOptions": {
     "strict": true,
 
-    "forceConsistentCasingInFileNames": true,
+    // "declaration": true,
+
+    // "forceConsistentCasingInFileNames": true,
+
     "noPropertyAccessFromIndexSignature": true,
     "suppressImplicitAnyIndexErrors": true,
-    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "noUnusedLocals": true,

@@ -51,7 +51,6 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
-  "access": "public",
   "size-limit": [
     {
       "path": "lib/index.js",
@@ -93,5 +92,13 @@
       "path": "lib/asyncModules/index.js",
       "limit": "22kb"
     }
-  ]
+  ],
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }
