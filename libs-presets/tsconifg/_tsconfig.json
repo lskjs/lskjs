@@ -1,0 +1,96 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    // "module": "esnext",
+    "module": "commonjs",
+    // "moduleResolution": "NodeNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    // "target": "ES2021",
+
+    "experimentalDecorators": true,
+    "strict": true,
+    // "forceConsistentCasingInFileNames": true,
+    
+    "declaration": true,
+    "sourceMap": true,
+    
+  },
+}
+
+
+
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "outDir": "build",
+    "module": "commonjs",
+    "sourceMap": true,
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react",
+    "baseUrl": "src",
+
+    // 
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": false,
+    "skipLibCheck": true
+  }
+}
+
+
+"light": {
+  "strict": false,
+  "skipLibCheck": true,
+  "strictNullChecks": false,
+  "noImplicitAny": false,
+  "strictBindCallApply": false,
+  "noFallthroughCasesInSwitch": false,
+  "strictPropertyInitialization": false,
+  "forceConsistentCasingInFileNames": false
+}
+
+"nestminimal": {
+  "compilerOptions": {
+    "outDir": "./lib",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false
+  },
+},
+"nest": {
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+  },
+  "old" : {
+    "incremental": true,
+  }
+}
+}
+
+

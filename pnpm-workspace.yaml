@@ -1,4 +1,5 @@
 packages:
   - "cli/*"
   - "libs/*"
+  - "libs-presets/*"
   # - "packages/*"

@@ -15,6 +15,7 @@ module.exports = {
   },
   packages: [
     ...getPackages({path: 'libs', type: 'lib'}),
+    ...getPackages({path: 'libs-presets', type: 'lib'}),
     ...getPackages({path: 'apps', type: 'app'}),
     ...getPackages({path: 'cli', type: 'lib'}),
   ],
