@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.20](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.18...v3.0.0-alpha.20) (2023-01-19)
+
+
+### Bug Fixes
+
+* may be fix ([229c297](https://github.com/lskjs/lskjs/commit/229c2976c2e2d20730b7c52e66bd3218d6a0affc))
+* quickfix ([3689a65](https://github.com/lskjs/lskjs/commit/3689a65a7f7a72b0afccb56b7c0ea6f465d3b4ce))
+* quickfix ([3393cb8](https://github.com/lskjs/lskjs/commit/3393cb8de23b0043dd62ff06ee8e3dc42f912eb6))
+
+
+### Features
+
+* add presets ([b1f2aad](https://github.com/lskjs/lskjs/commit/b1f2aad0df1a0bac8ad4be165b1058053d51c20e))
+* add test coverage ([fa62a5c](https://github.com/lskjs/lskjs/commit/fa62a5cf8ffde3a7623fdb0fe949d57dd18b4ee0))
+* add test coverage ([5ad8679](https://github.com/lskjs/lskjs/commit/5ad86799249aa1bf2e8ce672c62bd904cc3261d6))
+* **cli:** revert lsk log command ([c47cfca](https://github.com/lskjs/lskjs/commit/c47cfcab54af742e23b71ae71ae92ebe078dcd84))
+* improve tsconfigs ([e819947](https://github.com/lskjs/lskjs/commit/e819947446471bef2521dd36eca22a67782adc14))
+* **presets:** add eslint-config ([a13eb5f](https://github.com/lskjs/lskjs/commit/a13eb5f51d55b3abf0fb4139123c149d68b7bc8f))
+
+
+
+
+
 # [3.0.0-alpha.18](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2023-01-18)
 
 

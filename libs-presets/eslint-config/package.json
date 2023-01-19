@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/eslint-config",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.20",
   "description": "Eslint preset for LSK.js projects",
   "scripts": {
     "build": "   echo skip",

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/mutex",
-  "version": "3.0.0-alpha.14",
+  "version": "3.0.0-alpha.20",
   "description": "LSK.js – mutex – async mutex",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {

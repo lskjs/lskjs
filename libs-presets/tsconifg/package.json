@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/tsconfig",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.20",
   "description": "TS configs for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "private": false,
@@ -11,7 +11,6 @@
     "release": " lsk run release",
     "test": "    echo skip"
   },
-  "dependencies": {},
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

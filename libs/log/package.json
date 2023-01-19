@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/log",
-  "version": "3.0.0-alpha.18",
+  "version": "3.0.0-alpha.20",
   "description": "Yet another logger whitch combines the best features of debug, bunyan, logfmt/logrus, morgan/winston",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
@@ -11,10 +11,10 @@
     "test": "           lsk run test"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.0.0-alpha.18",
-    "@lskjs/colors": "^3.0.0-alpha.17",
-    "@lskjs/env": "^3.0.0-alpha.17",
-    "@lskjs/err": "^3.0.0-alpha.18",
+    "@lskjs/algos": "^3.0.0-alpha.20",
+    "@lskjs/colors": "^3.0.0-alpha.20",
+    "@lskjs/env": "^3.0.0-alpha.20",
+    "@lskjs/err": "^3.0.0-alpha.20",
     "fast-safe-stringify": "2.1.1",
     "pretty-bytes": "5.6.0",
     "pretty-time": "1.1.0",
