@@ -2,7 +2,8 @@
   "name": "@lskjs/cli-scripts",
   "version": "3.0.0-alpha.21",
   "description": "LSK.js CLI-scripts – some scripts for LSK.js – CLI projects",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "echo nothing",
     "prepack": "        lsk run prepack",
@@ -19,6 +20,10 @@
     "remark-template": "1.6.0",
     "sort-package-json": "1.57.0"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": "lskjs/cli",
   "homepage": "https://github.com/lskjs/cli",
   "bugs": "https://github.com/lskjs/cli/issues",
@@ -28,5 +33,17 @@
     "lsk",
     "cli",
     "scripts"
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "size-limit": [
+    {
+      "path": ".//index.js",
+      "limit": "1kb"
+    }
   ]
 }

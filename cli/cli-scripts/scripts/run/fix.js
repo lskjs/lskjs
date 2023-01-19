@@ -121,7 +121,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     if (isLib && !isRoot) {
       const libFolder =
         // eslint-disable-next-line no-nested-ternary
-        isTs || isBabel ? './lib' : existsSync(`${cwd}/src`) ? './src' : './';
+        isTs || isBabel ? './lib' : existsSync(`${cwd}/src`) ? './src' : '.';
       if (!pack.main) pack.main = `${libFolder}/index.js`;
       if (isTs && !pack.types) pack.main = `${libFolder}/index.d.ts`;
       if (!pack.exports) {
@@ -162,8 +162,12 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       if (!pack.files) {
         pack.files = ['lib', 'README.md', 'LICENCE'];
       }
-      if (!pack.license && pack.private === false) {
-        pack.license = 'MIT';
+      if (!pack.license) {
+        if (rootPack.license) {
+          pack.license = rootPack.license;
+        } else if (pack.private === false) {
+          pack.license = 'MIT';
+        }
       }
       if (!pack.author || pack.author.includes('Igor Suvorov')) {
         pack.author =

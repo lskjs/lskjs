@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.20",
   "description": "LSK.js – env – Scripts for environment detecton",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -45,13 +46,13 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
   "size-limit": [
     {
       "path": "lib/index.js",
       "limit": "1kb"
     }
-  ],
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  }
+  ]
 }

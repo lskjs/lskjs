@@ -2,7 +2,8 @@
   "name": "@lskjs/eslint-config",
   "version": "3.0.0-alpha.21",
   "description": "Eslint preset for LSK.js projects",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "   echo skip",
     "dev": "     echo skip",
@@ -31,6 +32,10 @@
   "optionalDependencies": {
     "typescript": "4.*.*"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "index.js",
   "repository": "https://github.com/lskjs/eslint-config",
   "license": "MIT",
@@ -40,6 +45,6 @@
     "lskjs"
   ],
   "eslintConfig": {
-    "extends": "./index.js"
+    "extends": "@lskjs/eslint-config"
   }
 }

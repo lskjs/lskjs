@@ -3,12 +3,18 @@
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
     "prepack": "        lsk run prepack",
     "release": "        lsk run release",
     "test": "           lsk run test"
+  },
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -104,10 +110,5 @@
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-  ],
-  "private": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  }
+  ]
 }

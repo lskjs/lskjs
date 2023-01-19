@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.20",
   "description": "Yet another colors library – like picocolors but with for browser too",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -48,6 +49,9 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
   "clean-publish": {
     "packageManager": "pnpm"
   },
@@ -56,8 +60,5 @@
       "path": "lib/index.js",
       "limit": "2.2kb"
     }
-  ],
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  }
+  ]
 }

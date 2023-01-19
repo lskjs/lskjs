@@ -44,7 +44,7 @@ const getCwdInfo = ({ cwd }) => {
   return omitNull({
     name: getPackageName({ cwd }) || null,
     isRoot: isRoot({ cwd }),
-    rootPath: !isRoot({ cwd }) ? getRootPath({ cwd }) : null,
+    rootPath: !isRoot({ cwd }) ? getRootPath({ cwd }) : cwd,
     isJs: !isBabel && !isTs,
     isBabel,
     isTs,

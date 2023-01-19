@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – utils – helpers and functions",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -10,6 +11,7 @@
     "release": "        lsk run release",
     "test": "           lsk run test"
   },
+  "dependencies": {},
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -73,6 +75,9 @@
       "import/no-import-module-exports": "off",
       "import/no-mutable-exports": "off"
     }
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
   },
   "size-limit": [
     {
@@ -228,8 +233,5 @@
       "limit": "6kb"
     }
   ],
-  "_type": "module",
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  }
+  "_type": "module"
 }

@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.21",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -19,6 +20,10 @@
     "@lskjs/utils2": "^3.0.0-alpha.21",
     "events": "^3.3.0",
     "fishbird": "^0.19.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -50,6 +55,9 @@
   ],
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
   },
   "size-limit": [
     {
@@ -92,13 +100,5 @@
       "path": "lib/asyncModules/index.js",
       "limit": "22kb"
     }
-  ],
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  },
-  "private": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  }
+  ]
 }

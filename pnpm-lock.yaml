@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@lskjs/eslint-config': ^3.0.0-alpha.1
-      '@lskjs/jest-config': workspace:3.0.0-alpha.21
+      '@lskjs/jest-config': ^3.0.0-alpha.21
       '@lskjs/tsconfig': ^3.0.0-alpha.1
       '@size-limit/preset-small-lib': ^8.1.2
       '@types/jest': ^29.2.6
@@ -3572,20 +3572,6 @@ packages:
       '@oclif/config': ^1
     dependencies:
       '@oclif/config': 1.18.3
-      '@oclif/errors': 1.3.6
-      '@oclif/help': 1.0.5
-      '@oclif/parser': 3.8.9
-      debug: 4.3.4
-      semver: 7.3.8
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@oclif/command/1.8.21:
-    resolution: {integrity: sha512-kIDrRIbAcicVl+CWMzXeZkg5dRNuF1VI7koyFTAQMNYwRNZpeya5x7XDPr+fh7rDiBL7psnxc3B1+zoOWj96lQ==}
-    engines: {node: '>=12.0.0'}
-    dependencies:
-      '@oclif/config': 1.18.6
       '@oclif/errors': 1.3.6
       '@oclif/help': 1.0.5
       '@oclif/parser': 3.8.9
@@ -11267,7 +11253,7 @@ packages:
       '@lskjs/env': 3.0.0-alpha.17
       '@lskjs/err': 3.0.0-alpha.18
       '@lskjs/log': 3.0.0-alpha.18
-      '@oclif/command': 1.8.21
+      '@oclif/command': 1.8.21_@oclif+config@1.18.6
       '@oclif/config': 1.18.6
       '@oclif/errors': 1.3.6
       '@oclif/plugin-help': 5.2.0

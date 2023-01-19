@@ -2,7 +2,7 @@
   "name": "@lskjs/babel-preset",
   "version": "3.0.0-alpha.20",
   "description": "Babel preset for LSK.js projects",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "scripts": {
     "build": "   echo skip",
     "dev": "     echo skip",
@@ -35,6 +35,10 @@
     "@babel/core": "7.x",
     "@babel/runtime": "7.x"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "index.js",
   "repository": "https://github.com/lskjs/babel-preset",
   "license": "MIT",
@@ -42,5 +46,8 @@
     "eslint",
     "config",
     "lskjs"
-  ]
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  }
 }

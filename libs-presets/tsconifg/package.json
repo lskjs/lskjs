@@ -2,7 +2,7 @@
   "name": "@lskjs/tsconfig",
   "version": "3.0.0-alpha.21",
   "description": "TS configs for LSK.js projects",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
     "build": "   echo skip",
@@ -23,5 +23,8 @@
     "eslint",
     "config",
     "lskjs"
-  ]
+  ],
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  }
 }

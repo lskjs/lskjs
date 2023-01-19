@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.21",
   "description": "Yet another logger whitch combines the best features of debug, bunyan, logfmt/logrus, morgan/winston",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -75,6 +76,9 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
   "clean-publish": {
     "packageManager": "pnpm"
   },
@@ -99,8 +103,5 @@
       "path": "lib/themeize.mjs",
       "limit": "3.1kb"
     }
-  ],
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  }
+  ]
 }

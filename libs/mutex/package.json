@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.20",
   "description": "LSK.js – mutex – async mutex",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -47,13 +48,13 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
   "size-limit": [
     {
       "path": "lib/index.js",
       "limit": "5kb"
     }
-  ],
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  }
+  ]
 }

@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.21",
   "description": "LSK.js CLI (Command Line Interface) is the easiest way to create and manage LSK.js project",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "postbuild": "      oclif-dev readme",
@@ -35,6 +36,10 @@
   "devDependencies": {
     "@oclif/dev-cli": "1.26.10",
     "globby": "11.0.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "bin": {
     "lsk": "bin/run",
@@ -75,6 +80,9 @@
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
   "oclif": {
     "commands": "./lib/commands",
     "bin": "lsk",
@@ -82,24 +90,16 @@
       "@oclif/plugin-help"
     ]
   },
-  "_scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "echo skip",
-    "build": "oclif-dev readme && git add README.md && echo ok"
-  },
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  },
   "size-limit": [
     {
       "path": "lib/index.js",
       "limit": "1kb"
     }
   ],
-  "private": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "_scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo skip",
+    "build": "oclif-dev readme && git add README.md && echo ok"
   }
 }

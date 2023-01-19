@@ -3,6 +3,7 @@
   "version": "3.0.0-alpha.21",
   "description": "LSK.js – utils – helpers and functions",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "build": "          lsk run build",
     "dev": "            lsk run dev",
@@ -38,17 +39,18 @@
     "LICENCE"
   ],
   "repository": "https://github.com/lskjs/lskjs/tree/master/libs/utils2",
+  "license": "MIT",
   "//": "//",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
   },
   "size-limit": [
     {
       "path": "lib/index.js",
       "limit": "1.6kb"
     }
-  ],
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  }
+  ]
 }
