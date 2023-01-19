@@ -4,13 +4,8 @@
     "strict": true,
 
     // "declaration": true,
-
     // "forceConsistentCasingInFileNames": true,
-
     "noPropertyAccessFromIndexSignature": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -19,6 +14,9 @@
     "strictNullChecks": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
+    
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
 }

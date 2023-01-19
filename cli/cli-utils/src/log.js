@@ -2,9 +2,8 @@
 const { omitNull } = require('@lskjs/algos');
 const { Logger, getEnvConfig } = require('@lskjs/log');
 
-
-
 const createLogger = (props = {}) => {
+  // console.log('@@@', require('@lskjs/log'));
   const config = omitNull({
     ...getEnvConfig(),
     ns: 'cli',

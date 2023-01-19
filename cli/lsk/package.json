@@ -90,8 +90,9 @@
       "@oclif/plugin-help"
     ]
   },
-  "size-limit": [
+  "_size-limit": [
     {
+      "//": "esm error",
       "path": "lib/index.js",
       "limit": "1kb"
     }
