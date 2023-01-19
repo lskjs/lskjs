@@ -37,7 +37,8 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/mutex",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/mutex",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "mutex",

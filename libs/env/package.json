@@ -36,7 +36,8 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/env",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/env",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "environment variables",

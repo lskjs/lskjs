@@ -78,6 +78,15 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       pack.scripts.prepack = '        lsk run prepack';
     }
   }
+
+  const relativePath = cwd.replace(rootPath, '');
+  if (rootPack.repository?.includes('github.com')) {
+    if (!isRoot) {
+      pack.repository = `${rootPack.repository}/tree/master/${relativePath}`;
+    }
+    pack.bugs = `${rootPack.repository}/issues`;
+  }
+
   if (args.includes('--package')) {
     // if (!pack.workspaces && isRoot) {
     //   pack.workspaces = ['packages/*'];

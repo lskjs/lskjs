@@ -40,7 +40,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "main": "index.js",
-  "repository": "https://github.com/lskjs/babel-preset",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/babel-preset",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "eslint",

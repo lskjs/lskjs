@@ -37,7 +37,8 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/err",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/err",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "errors wrapper",

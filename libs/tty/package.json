@@ -35,7 +35,8 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/tty",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/tty",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "tty detecton"

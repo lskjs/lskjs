@@ -38,7 +38,8 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/utils2",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/utils2",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "//": "//",
   "eslintConfig": {

@@ -58,7 +58,8 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/libs/log",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/log",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "logger",

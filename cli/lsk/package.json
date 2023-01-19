@@ -66,9 +66,9 @@
     "README.md",
     "LICENCE"
   ],
-  "repository": "https://github.com/lskjs/lskjs/tree/master/cli/lsk",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//cli/lsk",
   "homepage": "https://github.com/lskjs/cli",
-  "bugs": "https://github.com/lskjs/cli/issues",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "keywords": [
     "lskjs",
