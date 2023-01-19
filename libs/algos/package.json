@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/algos",
-  "version": "3.0.0-alpha.18",
+  "version": "3.0.0-alpha.19",
   "description": "LSK.js – algos – quick algos for working with arrays, objects, strings, numbers",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -102,6 +102,5 @@
       "path": "lib/omitNull.js",
       "limit": "1kb"
     }
-  ],
-  "dependencies": {}
+  ]
 }

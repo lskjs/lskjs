@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.19",
   "name": "@lskjs/babel-preset",
   "description": "Babel preset for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",

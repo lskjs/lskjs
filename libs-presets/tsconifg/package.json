@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.19",
   "name": "@lskjs/tsconfig",
   "description": "TS configs for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com>",
@@ -17,6 +17,5 @@
     "test": "    echo skip",
     "prepack": " lsk run prepack",
     "release": " lsk run release"
-  },
-  "dependencies": {}
+  }
 }
