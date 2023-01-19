@@ -34,6 +34,9 @@ jobs:
       - run: ls -la node_modules
       - run: npx lsk info
       - run: ls -la node_modules/lsk
+      - run: ls -la .pnpm/lsk@3.0.0-alpha.17/node_modules/lsk
+      - run: ls -la .pnpm/lsk@3.0.0-alpha.17/node_modules/lsk/bin
+      - run: pnpx lsk run build
       - run: pnpm run build
       - run: pnpm run test
   publish:
