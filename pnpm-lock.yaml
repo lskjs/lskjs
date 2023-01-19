@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@lskjs/eslint-config': ^2.21.0
+      '@lskjs/eslint-config': ^3.0.0-alpha.1
       '@lskjs/tsconfig': ^3.0.0-alpha.1
       '@size-limit/preset-small-lib': ^8.1.2
       '@types/jest': ^29.2.6
