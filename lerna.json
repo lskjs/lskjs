@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.32",
+  "version": "3.0.0-alpha.33",
   "npmClient": "pnpm",
   "useWorkspaces": true,
   "command": {

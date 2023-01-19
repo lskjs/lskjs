@@ -46,7 +46,7 @@ importers:
       '@lskjs/cli-utils': ^3.0.0-alpha.32
       '@lskjs/env': ^3.0.0-alpha.30
       '@lskjs/err': ^3.0.0-alpha.30
-      '@lskjs/stringify': ^3.0.0-alpha.32
+      '@lskjs/stringify': ^3.0.0-alpha.33
       all-contributors-cli: ^6.20.0
       fishbird: ^0.20.0
       remark-template: 1.6.0
@@ -101,7 +101,7 @@ importers:
       '@babel/runtime': 7.20.7
       '@lskjs/algos': ^3.0.0-alpha.30
       '@lskjs/cli': ^3.0.0-alpha.7
-      '@lskjs/cli-scripts': ^3.0.0-alpha.32
+      '@lskjs/cli-scripts': ^3.0.0-alpha.33
       '@lskjs/cli-utils': ^3.0.0-alpha.32
       '@lskjs/colors': ^3.0.0-alpha.30
       '@lskjs/env': ^3.0.0-alpha.30
@@ -300,7 +300,7 @@ importers:
       '@lskjs/err': ^3.0.0-alpha.30
       '@lskjs/log': ^3.0.0-alpha.32
       '@lskjs/mutex': ^3.0.0-alpha.30
-      '@lskjs/utils2': ^3.0.0-alpha.30
+      '@lskjs/utils2': ^3.0.0-alpha.33
       events: ^3.3.0
       fishbird: ^0.20.0
     dependencies:
@@ -342,10 +342,8 @@ importers:
 
   libs/utils2:
     specifiers:
-      '@lskjs/lodash': ^3.0.0-alpha.30
       fishbird: ^0.20.0
     dependencies:
-      '@lskjs/lodash': link:../lodash
       fishbird: 0.20.0
 
 packages:
