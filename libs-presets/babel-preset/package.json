@@ -1,0 +1,46 @@
+{
+  "version": "3.0.0-alpha.1",
+  "name": "@lskjs/babel-preset",
+  "description": "Babel preset for LSK.js projects",
+  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "license": "MIT",
+  "repository": "https://github.com/lskjs/babel-preset",
+  "keywords": [
+    "eslint",
+    "config",
+    "lskjs"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "build": "   echo skip",
+    "dev": "     echo skip",
+    "test": "    echo skip",
+    "prepack": " lsk run prepack",
+    "release": " lsk run release"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "7.18.6",
+    "@babel/plugin-proposal-decorators": "7.20.5",
+    "@babel/plugin-proposal-export-namespace-from": "7.18.9",
+    "@babel/plugin-proposal-function-bind": "7.18.9",
+    "@babel/plugin-proposal-optional-chaining": "7.18.9",
+    "@babel/plugin-proposal-private-methods": "7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "7.20.5",
+    "@babel/plugin-syntax-dynamic-import": "7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "7.19.6",
+    "@babel/plugin-transform-runtime": "7.19.6",
+    "@babel/polyfill": "7.12.1",
+    "@babel/preset-env": "7.20.2",
+    "@babel/preset-react": "7.18.6",
+    "@babel/preset-typescript": "7.18.6",
+    "@emotion/babel-plugin": "11.10.5"
+  },
+  "peerDependencies": {
+    "@babel/core": "7.x",
+    "@babel/runtime": "7.x"
+  },
+  "devDependencies": {
+    "@babel/core": "7.20.5",
+    "@babel/runtime": "7.20.6"
+  }
+}
