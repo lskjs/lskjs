@@ -11,8 +11,9 @@ importers:
       clean-publish: ^4.1.1
       eslint: ^8.32.0
       jest: ^29.3.1
+      jest-junit: ^15.0.0
       lerna: ^6.4.1
-      lsk: ^3.0.0-alpha.15
+      lsk: 3.0.0-alpha.17
       size-limit: ^8.1.2
       ts-jest: ^29.0.5
       tsup: ^6.5.0
@@ -25,8 +26,9 @@ importers:
       clean-publish: 4.1.1
       eslint: 8.32.0
       jest: 29.3.1_@types+node@18.11.18
+      jest-junit: 15.0.0
       lerna: 6.4.1
-      lsk: link:cli/lsk
+      lsk: 3.0.0-alpha.17
       size-limit: 8.1.2
       ts-jest: 29.0.5_p6ekqnroyms5nhqbfxosryz7rm
       tsup: 6.5.0_typescript@4.9.4
@@ -2042,6 +2044,10 @@ packages:
     resolution: {integrity: sha512-Pufcpi20rPZ9rPXUtDF0JGbG5TP8oleNcw21x1dGcPiVvgatZF6Aye5Qj+TaehyvJhAs+V6RVpJ10H5OQGr2Lw==}
     dev: false
 
+  /@lskjs/algos/3.0.0-alpha.18:
+    resolution: {integrity: sha512-arlMPpjZjxf5PDxSXUyeaQxDo7K63Dx5oB052gYIpqWn1ay3Ifnk3IiH3BXoYhD2e496vKdI5tzMWnQC6rQMkA==}
+    dev: false
+
   /@lskjs/cli-scripts/3.0.0-alpha.15:
     resolution: {integrity: sha512-ZSZNJr71n2oWt3gqh6AlwPQcUS3Cd35kP7KFoO/EhFS3QVp6wDE/CVZMTMlUOub3NpqQFEzgiCBUeKFR+9WBuQ==}
     dependencies:
@@ -2070,6 +2076,27 @@ packages:
       - supports-color
     dev: false
 
+  /@lskjs/cli-scripts/3.0.0-alpha.18:
+    resolution: {integrity: sha512-SdXPTI9+5oIYnB4RQUZAfQmqOGl7sQfNKPiAY5d8+FvmhOMzPvb07lt7GvoXdPogXwa5RCPz2tRnedXbL2qIjw==}
+    dependencies:
+      '@lskjs/algos': 3.0.0-alpha.18
+      '@lskjs/cli-utils': 3.0.0-alpha.18
+      '@lskjs/env': 3.0.0-alpha.17
+      '@lskjs/err': 3.0.0-alpha.18
+      '@lskjs/stringify': 2.85.1
+      all-contributors-cli: 6.24.0
+      fishbird: 0.19.0
+      remark-template: 1.6.0
+      sort-package-json: 1.57.0
+    transitivePeerDependencies:
+      - '@yarnpkg/core'
+      - debug
+      - domexception
+      - encoding
+      - lodash
+      - supports-color
+    dev: false
+
   /@lskjs/cli-utils/3.0.0-alpha.15:
     resolution: {integrity: sha512-8wpYxdVtwrLcbfZyd/ETKy/dyUlz08IgROF4p/rzKOZZL3gZRczCaOdfexJhF2tke8Br+luxhCWtyJ720Lnsgg==}
     hasBin: true
@@ -2080,6 +2107,36 @@ packages:
       '@lskjs/env': 3.0.0-alpha.14
       '@lskjs/err': 3.0.0-alpha.15
       '@lskjs/log': 3.0.0-alpha.15
+      '@lskjs/utils': 2.87.1
+      '@pnpm/filter-workspace-packages': 6.0.26_543n76fbszlmh3ctdn6mgrgqxa
+      '@pnpm/logger': 5.0.0
+      '@pnpm/plugin-commands-script-runners': 6.3.6_543n76fbszlmh3ctdn6mgrgqxa
+      axios: 0.27.2
+      bluebird: 3.7.2
+      glob: 7.2.0
+      global-prefix: 3.0.0
+      lodash: 4.17.21
+      logger: link:@pnpm/logger
+      rsync: 0.6.1
+      sort-package-json: 2.1.0
+      yargs: 17.6.2
+    transitivePeerDependencies:
+      - '@yarnpkg/core'
+      - debug
+      - domexception
+      - supports-color
+    dev: false
+
+  /@lskjs/cli-utils/3.0.0-alpha.18:
+    resolution: {integrity: sha512-DvqOSeXrYxI6S1dGTkUf/gUBHwe+qUa861WDRykdst4svHfZGi42fNk5BGOlZeLWdugmnRFvYxAJuEdvtTtG5Q==}
+    hasBin: true
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@lskjs/algos': 3.0.0-alpha.18
+      '@lskjs/colors': 3.0.0-alpha.17
+      '@lskjs/env': 3.0.0-alpha.17
+      '@lskjs/err': 3.0.0-alpha.18
+      '@lskjs/log': 3.0.0-alpha.18
       '@lskjs/utils': 2.87.1
       '@pnpm/filter-workspace-packages': 6.0.26_543n76fbszlmh3ctdn6mgrgqxa
       '@pnpm/logger': 5.0.0
@@ -2137,6 +2194,12 @@ packages:
       '@lskjs/env': 3.0.0-alpha.14
     dev: false
 
+  /@lskjs/colors/3.0.0-alpha.17:
+    resolution: {integrity: sha512-9W9j3KrV5hL+e6JsaftWctY5MYxJ7GH08g2zS0KOYWw5KX8vS92HJ0fZ0YPOjaGf+XLl6vKOioseio/zrT8Law==}
+    dependencies:
+      '@lskjs/env': 3.0.0-alpha.17
+    dev: false
+
   /@lskjs/debug-level/0.3.2:
     resolution: {integrity: sha512-VHPhtJ9do45MGE93DxEsPdCgPUQAAAdicgytkzG8UMCXIgq5nIKY7JNzDunqbOw2sH7yaJfzF1sYwfb745zWCQ==}
     engines: {node: '>=4'}
@@ -2158,6 +2221,12 @@ packages:
       '@lskjs/tty': 3.0.0-alpha.14
     dev: false
 
+  /@lskjs/env/3.0.0-alpha.17:
+    resolution: {integrity: sha512-su67VNFqJbjZxVtjXtTbAlG2WDodWntMf5ZcgTaGh/IlQYnZdgKSdLT53S1XySaELvf/b8md3DWQDCPQwF5fWw==}
+    dependencies:
+      '@lskjs/tty': 3.0.0-alpha.14
+    dev: false
+
   /@lskjs/err/2.65.1:
     resolution: {integrity: sha512-H+lbygVeLsHRL9x2oyOABz0b2ebKl+m0n0Veb4wwVtAW+e7zDls+mPdJbxqouyLFF7RpaVJRER43HYWUA6dYiA==}
     dependencies:
@@ -2174,6 +2243,12 @@ packages:
     resolution: {integrity: sha512-AgYOdmXHQMylEtXP8q5IXTyuCpL4awhThnDL7E8Ry14f/OveW1BzUD8dxFhI26lP3qd2mefijQKFldwEidOIfw==}
     dependencies:
       '@lskjs/algos': 3.0.0-alpha.15
+    dev: false
+
+  /@lskjs/err/3.0.0-alpha.18:
+    resolution: {integrity: sha512-TPasf20akcJj57+SvylnxDvbt9lMXFRc70Xo/IMoyMDVUr6wA6L5qX0RZqPnVlauPiXvNxeACc3yCB4fT2gHoQ==}
+    dependencies:
+      '@lskjs/algos': 3.0.0-alpha.18
     dev: false
 
   /@lskjs/eslint-config/2.21.0:
@@ -2227,6 +2302,24 @@ packages:
       '@lskjs/colors': 3.0.0-alpha.14
       '@lskjs/env': 3.0.0-alpha.14
       '@lskjs/err': 3.0.0-alpha.15
+      fast-safe-stringify: 2.1.1
+      pretty-bytes: 5.6.0
+      pretty-time: 1.1.0
+      readline: 1.3.0
+      split: 1.0.1
+      through: 2.3.8
+    optionalDependencies:
+      logfmt: 1.3.2
+    dev: false
+
+  /@lskjs/log/3.0.0-alpha.18:
+    resolution: {integrity: sha512-o2iQ2rVJHjvOYo4VMUcecR11CFZRf7XrA0Zl3qIXqCNN2S66P9J+ly1XrfIzUCyyCMUDP28SIqPLdtSoHa3tlg==}
+    hasBin: true
+    dependencies:
+      '@lskjs/algos': 3.0.0-alpha.18
+      '@lskjs/colors': 3.0.0-alpha.17
+      '@lskjs/env': 3.0.0-alpha.17
+      '@lskjs/err': 3.0.0-alpha.18
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
@@ -9591,6 +9684,16 @@ packages:
       fsevents: 2.3.2
     dev: false
 
+  /jest-junit/15.0.0:
+    resolution: {integrity: sha512-Z5sVX0Ag3HZdMUnD5DFlG+1gciIFSy7yIVPhOdGUi8YJaI9iLvvBb530gtQL2CHmv0JJeiwRZenr0VrSR7frvg==}
+    engines: {node: '>=10.12.0'}
+    dependencies:
+      mkdirp: 1.0.4
+      strip-ansi: 6.0.1
+      uuid: 8.3.2
+      xml: 1.0.1
+    dev: false
+
   /jest-leak-detector/29.3.1:
     resolution: {integrity: sha512-3DA/VVXj4zFOPagGkuqHnSQf1GZBmmlagpguxEERO6Pla2g84Q1MaVIB3YMxgUaFIaYag8ZnTyQgiZ35YEqAQA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -10290,6 +10393,41 @@ packages:
   /lru-cache/7.14.1:
     resolution: {integrity: sha512-ysxwsnTKdAx96aTRdhDOCQfDgbHnt8SK0KY8SEjO0wHinhWOFTESbjVCMPbU1uGXg/ch4lifqx0wfjOawU2+WA==}
     engines: {node: '>=12'}
+    dev: false
+
+  /lsk/3.0.0-alpha.17:
+    resolution: {integrity: sha512-PH9oTR5fHveht7iiwiYxjthntrwCyNJlTrNWMDLqWuZ74JtGipAHpTXnCyM1jY1Kepjbkz6hEZUTgLk2xYPXAw==}
+    hasBin: true
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@lskjs/algos': 3.0.0-alpha.18
+      '@lskjs/cli': 3.0.0-alpha.7
+      '@lskjs/cli-scripts': 3.0.0-alpha.18
+      '@lskjs/cli-utils': 3.0.0-alpha.18
+      '@lskjs/colors': 3.0.0-alpha.17
+      '@lskjs/env': 3.0.0-alpha.17
+      '@lskjs/err': 3.0.0-alpha.18
+      '@lskjs/log': 3.0.0-alpha.18
+      '@oclif/command': 1.8.21_@oclif+config@1.18.6
+      '@oclif/config': 1.18.6
+      '@oclif/errors': 1.3.6
+      '@oclif/plugin-help': 5.2.0
+      '@types/node': 18.11.18
+      glob: 7.2.0
+      logfmt: 1.3.2
+      rsync: 0.6.1
+      ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
+      typescript: 4.9.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - '@yarnpkg/core'
+      - bluebird
+      - debug
+      - domexception
+      - encoding
+      - lodash
+      - supports-color
     dev: false
 
   /make-dir/2.1.0:
@@ -13925,6 +14063,10 @@ packages:
   /xdg-basedir/4.0.0:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}
     engines: {node: '>=8'}
+    dev: false
+
+  /xml/1.0.1:
+    resolution: {integrity: sha512-huCv9IH9Tcf95zuYCsQraZtWnJvBtLVE0QHMOs8bWyZAFZNDcYjsPq1nEx8jKA9y+Beo9v+7OBPRisQTjinQMw==}
     dev: false
 
   /xtend/4.0.2:

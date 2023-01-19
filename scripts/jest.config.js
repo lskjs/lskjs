@@ -1,12 +1,7 @@
 module.exports = {
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
-  coverageThreshold: {
-    global: {
-      _statements: 100,
-      statements: 50,
-    },
-  },
+  setupFilesAfterEnv: [`${__dirname}/jest.setup.js`],
   transform: {
     '^.+\\.tsx?$': [
       'ts-jest',
@@ -16,5 +11,24 @@ module.exports = {
       },
     ],
   },
-  setupFilesAfterEnv: [`${__dirname}/jest.setup.js`],
+
+  coverageDirectory: '.reports/coverage',
+  coverageThreshold: {
+    global: {
+      _statements: 100,
+      statements: 50,
+    },
+  },
+
+  coverageReporters: ['html', 'text', 'text-summary', 'cobertura'],
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        outputDirectory: '.reports',
+        outputName: 'asdasd.xml',
+      },
+    ],
+  ],
 };

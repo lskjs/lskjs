@@ -32,6 +32,8 @@ jobs:
         run: ls -la 
       - name: debug
         run: ls -la node_modules
+      - name: npx
+        run: npx lsk info
       - name: debug
         run: ls -la node_modules/lsk
       - run: pnpm build
