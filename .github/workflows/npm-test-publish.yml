@@ -28,6 +28,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
+      - name: Install dependencies
+        run: pnpm config set link-workspace-packages false
       - name: debug
         run: ls -la 
       - name: debug
@@ -36,8 +38,8 @@ jobs:
         run: npx lsk info
       - name: debug
         run: ls -la node_modules/lsk
-      - run: pnpm build
-      - run: pnpm test
+      - run: pnpm run build
+      - run: pnpm run test
   publish:
     needs: test
     runs-on: ubuntu-latest
