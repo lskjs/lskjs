@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.32](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.30...v3.0.0-alpha.32) (2023-01-19)
+
+
+### Bug Fixes
+
+* eslint fixes ([789e42a](https://github.com/lskjs/lskjs/commit/789e42a1f4172c966159e1b9ffea97c6735da39e))
+
+
+
+
+
 # [3.0.0-alpha.30](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.24...v3.0.0-alpha.30) (2023-01-19)
 
 
