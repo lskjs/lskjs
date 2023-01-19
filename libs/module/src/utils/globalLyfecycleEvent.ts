@@ -9,11 +9,7 @@ declare global {
 // @ts-ignore
 export const globalStore = typeof window !== 'undefined' ? window : global;
 
-export const globalLyfecycleEvent = async (
-  m: any,
-  eventName: string,
-  eventDate: Date
-) => {
+export const globalLyfecycleEvent = async (m: any, eventName: string, eventDate: Date) => {
   // @ts-ignore
   if (globalStore && globalStore.__lskGlobalLyfecycleHook) {
     // @ts-ignore

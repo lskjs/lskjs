@@ -31,10 +31,7 @@ async function main({ isRoot, log, ctx, cwd, config, args }) {
     package: name,
     path: packagePath,
   });
-  log.trace(
-    '[save]',
-    ` ${getShortPath(inputFilename)} => ${getShortPath(outputFilename)}`
-  );
+  log.trace('[save]', ` ${getShortPath(inputFilename)} => ${getShortPath(outputFilename)}`);
   await jsonToFile(`${rootPath}/${outputFilename}`, data, {
     type: 'yml',
     comment: getComment({

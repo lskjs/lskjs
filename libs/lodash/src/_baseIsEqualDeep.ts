@@ -35,14 +35,7 @@ const { hasOwnProperty } = objectProto;
  * @param {Object} [stack] Tracks traversed `object` and `other` objects.
  * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
  */
-export function baseIsEqualDeep(
-  object,
-  other,
-  bitmask,
-  customizer,
-  equalFunc,
-  stack
-) {
+export function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
   let objIsArr = isArray(object);
   const othIsArr = isArray(other);
   let objTag = objIsArr ? arrayTag : getTag(object);
@@ -66,15 +59,7 @@ export function baseIsEqualDeep(
     stack || (stack = new Stack());
     return objIsArr || isTypedArray(object)
       ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
-      : equalByTag(
-          object,
-          other,
-          objTag,
-          bitmask,
-          customizer,
-          equalFunc,
-          stack
-        );
+      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
   }
   if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
     const objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__');

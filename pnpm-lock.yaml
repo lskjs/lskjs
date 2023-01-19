@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@babel/cli': ^7.20.7
       '@babel/core': ^7.20.12
+      '@lskjs/babel-preset': ^3.0.0-alpha.24
       '@lskjs/eslint-config': ^3.0.0-alpha.24
       '@lskjs/jest-config': ^3.0.0-alpha.29
       '@lskjs/tsconfig': ^3.0.0-alpha.24
@@ -23,6 +24,7 @@ importers:
     dependencies:
       '@babel/cli': 7.20.7_@babel+core@7.20.12
       '@babel/core': 7.20.12
+      '@lskjs/babel-preset': link:libs-presets/babel-preset
       '@lskjs/eslint-config': link:libs-presets/eslint-config
       '@lskjs/jest-config': link:libs-presets/jest-config
       '@lskjs/tsconfig': link:libs-presets/tsconifg

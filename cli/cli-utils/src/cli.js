@@ -7,13 +7,13 @@ const { argv } = require('yargs/yargs')(process.argv.slice(2)).completion(
     } else {
       completionFilter((err, defaultCompletions) => {
         const filteredCompletions = defaultCompletions.filter(
-          (completion) => !completion.includes('banana')
+          (completion) => !completion.includes('banana'),
         );
         // else return default completions w/o 'banana'
         done(filteredCompletions);
       });
     }
-  }
+  },
 );
 
 // const yargs = require('yargs/yargs')(process.argv.slice(2));

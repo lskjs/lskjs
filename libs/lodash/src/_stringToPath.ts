@@ -20,9 +20,7 @@ export const stringToPath = memoizeCapped((string) => {
     result.push('');
   }
   string.replace(rePropName, (match, number, quote, subString) => {
-    result.push(
-      quote ? subString.replace(reEscapeChar, '$1') : number || match
-    );
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : number || match);
   });
   return result;
 });

@@ -151,26 +151,15 @@ export function baseClone(value, bitmask, customizer?, key?, object?, stack?) {
 
   if (isSet(value)) {
     value.forEach((subValue) => {
-      result.add(
-        baseClone(subValue, bitmask, customizer, subValue, value, stack)
-      );
+      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
     });
   } else if (isMap(value)) {
     value.forEach((subValue, key) => {
-      result.set(
-        key,
-        baseClone(subValue, bitmask, customizer, key, value, stack)
-      );
+      result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
     });
   }
 
-  const keysFunc = isFull
-    ? isFlat
-      ? getAllKeysIn
-      : getAllKeys
-    : isFlat
-    ? keysIn
-    : keys;
+  const keysFunc = isFull ? (isFlat ? getAllKeysIn : getAllKeys) : isFlat ? keysIn : keys;
 
   const props = isArr ? undefined : keysFunc(value);
   arrayEach(props || value, (subValue, key) => {
@@ -179,11 +168,7 @@ export function baseClone(value, bitmask, customizer?, key?, object?, stack?) {
       subValue = value[key];
     }
     // Recursively populate clone (susceptible to call stack limits).
-    assignValue(
-      result,
-      key,
-      baseClone(subValue, bitmask, customizer, key, value, stack)
-    );
+    assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
   });
   return result;
 }

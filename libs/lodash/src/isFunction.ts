@@ -30,7 +30,6 @@ import { isClass } from './isClass';
  * // => false
  */
 
-export const isFunction = (v: any): boolean =>
-  typeof v === 'function' && !isClass(v);
+export const isFunction = (v: any): boolean => typeof v === 'function' && !isClass(v);
 
 export default isFunction;

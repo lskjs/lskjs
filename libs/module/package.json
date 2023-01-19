@@ -22,6 +22,7 @@
     "fishbird": "^0.20.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

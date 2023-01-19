@@ -8,12 +8,7 @@ import { stringify } from './pretty/formats';
 import { isLsklogWeb } from './pretty/formats/lsklog';
 // import { tryPrettyFormat } from './pretty/tryPrettyFormat';
 import { prettyFormat } from './pretty/prettyFormat';
-import {
-  ILogger,
-  ILoggerMessage,
-  ILoggerProps,
-  LoggerLevelType,
-} from './types';
+import { ILogger, ILoggerMessage, ILoggerProps, LoggerLevelType } from './types';
 import { anyRegExps } from './utils/anyRegExps';
 
 export class Logger implements ILogger {
@@ -27,15 +22,7 @@ export class Logger implements ILogger {
   constructor(props: ILoggerProps = {}) {
     this.setProps(props);
   }
-  setProps({
-    prefix,
-    ns,
-    name,
-    level,
-    format,
-    on = [],
-    off = [],
-  }: ILoggerProps): void {
+  setProps({ prefix, ns, name, level, format, on = [], off = [] }: ILoggerProps): void {
     if (prefix) this.prefix = prefix;
     if (ns) this.ns = ns;
     if (on) this.on = on;

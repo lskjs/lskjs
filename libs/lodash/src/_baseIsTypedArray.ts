@@ -66,11 +66,7 @@ typedArrayTags[argsTag] =
  * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
  */
 export function baseIsTypedArray(value) {
-  return (
-    isObjectLike(value) &&
-    isLength(value.length) &&
-    !!typedArrayTags[baseGetTag(value)]
-  );
+  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
 }
 
 export default baseIsTypedArray;

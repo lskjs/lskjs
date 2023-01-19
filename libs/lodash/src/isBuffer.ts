@@ -2,8 +2,7 @@ import { root } from './_root.js';
 import { stubFalse } from './stubFalse.js';
 
 /** Detect free variable `exports`. */
-const freeExports =
-  typeof exports === 'object' && exports && !exports.nodeType && exports;
+const freeExports = typeof exports === 'object' && exports && !exports.nodeType && exports;
 
 /** Detect free variable `module`. */
 const freeModule =

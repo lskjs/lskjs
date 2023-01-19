@@ -21,10 +21,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
   name: string;
   __lifecycle: IModuleLifecycle = {};
 
-  static new<T extends IModule>(
-    this: IModuleConstructor<T>,
-    ...propsArray: IModuleProps[]
-  ): T {
+  static new<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): T {
     const instance = new this();
     instance.setProps(...propsArray, { '__lifecycle.create': new Date() });
     return instance;
@@ -96,7 +93,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       throw new Err(
         'MODULE_INVALID_LIVECYCLE_NEW',
         `use ${name}.create(props) or ${name}.start(props) instead new ${name}(props) and init() and run()`,
-        { data: { name } }
+        { data: { name } },
       );
     }
     if (this.__lifecycle.initStart) return;
@@ -121,14 +118,14 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
         `use ${name}.create(props) instead new ${name}(props)`,
         {
           data: { name },
-        }
+        },
       );
     }
     if (!this.__lifecycle.initStart) {
       throw new Err(
         'MODULE_INVALID_LIVECYCLE_INIT',
         `use ${name}.__init() instead ${name}.init()`,
-        { data: { name } }
+        { data: { name } },
       );
     }
     this.name = name;
@@ -156,8 +153,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
       delete this.__lifecycle.runFinish;
     }
     if (this.__lifecycle.runStart) {
-      if (STRICT_DEBUG)
-        throw new Err('MODULE_HAS_BEEN_RUNNED', { data: { name: this.name } });
+      if (STRICT_DEBUG) throw new Err('MODULE_HAS_BEEN_RUNNED', { data: { name: this.name } });
       return;
     }
     if (!this.__lifecycle.initStart) await this.__init();
@@ -167,7 +163,7 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
         'please waiting for init() finish before run()',
         {
           data: { name: this.name },
-        }
+        },
       );
     }
     this.__lifecycleEvent('runStart');
@@ -177,13 +173,9 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
 
   async _run(): Promise<void> {
     if (!this.__lifecycle.runStart) {
-      throw new Err(
-        'MODULE_INVALID_LIVECYCLE_RUN',
-        'use module.__run() instead module.run()',
-        {
-          data: { name: this.name },
-        }
-      );
+      throw new Err('MODULE_INVALID_LIVECYCLE_RUN', 'use module.__run() instead module.run()', {
+        data: { name: this.name },
+      });
     }
     try {
       await this.run();
@@ -215,13 +207,9 @@ export abstract class ModuleWithLifecycle implements IModuleWithLifecycle {
 
   async _stop(): Promise<void> {
     if (!this.__lifecycle.stopStart) {
-      throw new Err(
-        'MODULE_INVALID_LIVECYCLE_STOP',
-        'use module.__stop() instead module.stop()',
-        {
-          data: { name: this.name },
-        }
-      );
+      throw new Err('MODULE_INVALID_LIVECYCLE_STOP', 'use module.__stop() instead module.stop()', {
+        data: { name: this.name },
+      });
     }
     try {
       await this.stop();

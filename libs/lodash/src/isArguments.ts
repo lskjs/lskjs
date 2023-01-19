@@ -31,7 +31,7 @@ const { propertyIsEnumerable } = objectProto;
 export const isArguments = baseIsArguments(
   (function () {
     return arguments;
-  })()
+  })(),
 )
   ? baseIsArguments
   : function (value) {

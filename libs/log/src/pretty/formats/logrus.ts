@@ -6,14 +6,7 @@ import { ILoggerInternalMessage, LoggerLevelType } from '../../types';
 import { toString } from '../../utils/toString';
 import { parseArgs } from './utils';
 
-type LogrusLevel =
-  | 'trace'
-  | 'debug'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'fatal'
-  | 'panic';
+type LogrusLevel = 'trace' | 'debug' | 'info' | 'warning' | 'error' | 'fatal' | 'panic';
 
 export const logrusLevels: LogrusLevel[] = [
   'trace',

@@ -15,6 +15,7 @@
     "@lskjs/tty": "^3.0.0-alpha.24"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

@@ -22,14 +22,7 @@ const { hasOwnProperty } = objectProto;
  * @param {Object} stack Tracks traversed `object` and `other` objects.
  * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
  */
-export function equalObjects(
-  object,
-  other,
-  bitmask,
-  customizer,
-  equalFunc,
-  stack
-) {
+export function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
   const isPartial = Boolean(bitmask & COMPARE_PARTIAL_FLAG);
   const objProps = getAllKeys(object);
   const objLength = objProps.length;
@@ -70,8 +63,7 @@ export function equalObjects(
     // Recursively compare objects (susceptible to call stack limits).
     if (
       !(compared === undefined
-        ? objValue === othValue ||
-          equalFunc(objValue, othValue, bitmask, customizer, stack)
+        ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack)
         : compared)
     ) {
       result = false;

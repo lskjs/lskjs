@@ -15,6 +15,7 @@
     "async-mutex": "0.4.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
   },

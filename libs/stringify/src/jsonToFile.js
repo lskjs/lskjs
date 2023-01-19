@@ -10,7 +10,7 @@ const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 export async function jsonToFile(
   filename,
   json,
-  { type = 'keyval', comment, compare = true } = {}
+  { type = 'keyval', comment, compare = true } = {},
 ) {
   const data = await fileToJson(filename, { type });
   if (compare && isEqual(json, data)) {

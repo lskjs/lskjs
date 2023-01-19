@@ -26,7 +26,7 @@ if (process.env.LSK_LOG_READLINE !== '0') {
           return;
         }
         prettyRawLog(log, raw);
-      })
+      }),
     )
     .pipe(process.stdout);
 }

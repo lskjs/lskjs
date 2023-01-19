@@ -3,16 +3,7 @@
 /* eslint-disable no-console */
 const colors = require('colors/safe.js');
 
-const colorsArray = [
-  'magenta',
-  'yellow',
-  'black',
-  'green',
-  'white',
-  'blue',
-  'cyan',
-  'red',
-];
+const colorsArray = ['magenta', 'yellow', 'black', 'green', 'white', 'blue', 'cyan', 'red'];
 
 const upperFirst = (a) => a[0].toUpperCase() + a.substr(1);
 const bright = (a) => (a === 'black' ? 'gray' : `bright${upperFirst(a)}`);
@@ -35,15 +26,13 @@ for (const color of colorsArray) {
     colors[brightColor] && colors[brightColor](space(`${brightColor}`)),
 
     colors.bold(colors[color](space(`BOLD ${color}`))),
-    colors[brightColor] &&
-      colors.bold(colors[brightColor](space(`BOLD ${brightColor}`))),
+    colors[brightColor] && colors.bold(colors[brightColor](space(`BOLD ${brightColor}`))),
 
     colors[bgColor](space(`${bgColor}`)),
     colors[bgBrightColor] && colors[bgBrightColor](space(`${bgBrightColor}`)),
 
     colors.bold(colors[bgColor](space(`BOLD ${bgColor}`))),
-    colors[bgBrightColor] &&
-      colors.bold(colors[bgBrightColor](space(`BOLD ${bgBrightColor}`))),
+    colors[bgBrightColor] && colors.bold(colors[bgBrightColor](space(`BOLD ${bgBrightColor}`))),
   ];
   console.log(...str);
 }

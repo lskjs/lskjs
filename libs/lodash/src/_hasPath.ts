@@ -33,10 +33,7 @@ export function hasPath(object, path, hasFunc) {
   }
   length = object == null ? 0 : object.length;
   return (
-    !!length &&
-    isLength(length) &&
-    isIndex(key, length) &&
-    (isArray(object) || isArguments(object))
+    !!length && isLength(length) && isIndex(key, length) && (isArray(object) || isArguments(object))
   );
 }
 

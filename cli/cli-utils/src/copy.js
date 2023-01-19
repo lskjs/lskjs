@@ -16,7 +16,9 @@ const copy = ({ from, to, nodemodules = false, git = false, flags: initFlags = {
     ...initFlags,
   };
 
-  const excludes = ['.DS_Store', !nodemodules ? 'node_modules' : null, !git ? 'git' : null].filter(Boolean);
+  const excludes = ['.DS_Store', !nodemodules ? 'node_modules' : null, !git ? 'git' : null].filter(
+    Boolean,
+  );
   const from2 = `${from}/`; // TODO: надо сделать поумнее
 
   const rsync = new Rsync().flags(flags).source(from2).destination(to).exclude(excludes);

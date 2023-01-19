@@ -1,3 +1,7 @@
+const prettier = require('./prettier');
+
+const len = 120;
+
 module.exports = {
   env: {
     browser: false,
@@ -19,7 +23,7 @@ module.exports = {
     'max-len': [
       'error',
       {
-        code: 120,
+        code: len,
         ignoreComments: true,
       },
     ],
@@ -31,14 +35,16 @@ module.exports = {
     'no-throw-literal': 'off',
     'no-plusplus': 'off',
 
-    'prettier/prettier': ['warn', { singleQuote: true }],
+    'prettier/prettier': [
+      'warn',
+      {
+        printWidth: len,
+        ...prettier,
+      },
+    ],
 
     // imports
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
-    ],
+    'import/extensions': ['error', 'ignorePackages', { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' }],
     'import/no-extraneous-dependencies': [
       'error',
       {

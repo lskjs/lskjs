@@ -22,9 +22,7 @@ export class InitCommand extends Command {
 
     // await shell(`git clone --depth=1 https://github.com/lskjs/kit.git ${projectName} && rm -rf ${projectName}/.git`);
     this.log('====== 🚀 First stage dropped 🚀 ======');
-    const npmInstallParams = isDebug()
-      ? ''
-      : '--no-fund --no-audit --loglevel=error';
+    const npmInstallParams = isDebug() ? '' : '--no-fund --no-audit --loglevel=error';
     // await shell(
     //   `npm i ${npmInstallParams} -g lerna nodemon npm-check-updates`,
     //   {

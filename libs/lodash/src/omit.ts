@@ -48,7 +48,7 @@ export const omit = flatRest((object, paths) => {
     result = baseClone(
       result,
       CLONE_DEEP_FLAG | CLONE_FLAT_FLAG | CLONE_SYMBOLS_FLAG,
-      customOmitClone
+      customOmitClone,
     );
   }
   let { length } = paths;

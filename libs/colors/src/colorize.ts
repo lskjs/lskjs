@@ -4,16 +4,9 @@ import { colors } from './colors';
 import isSupported from './isSupported';
 import { Color } from './types';
 
-export function colorize(
-  str: string,
-  colorName?: Color | Color[] | null
-): string {
+export function colorize(str: string, colorName?: Color | Color[] | null): string {
   if (!isSupported) return str;
-  const colorNames = Array.isArray(colorName)
-    ? colorName
-    : colorName
-    ? [colorName]
-    : [];
+  const colorNames = Array.isArray(colorName) ? colorName : colorName ? [colorName] : [];
 
   return colorNames.reduce((msg, color) => {
     const colorFn = colors?.[color];

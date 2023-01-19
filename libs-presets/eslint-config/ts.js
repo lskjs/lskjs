@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    './react',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['./react', 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended'],
   plugins: [
     '@typescript-eslint', // @typescript-eslint/eslint-plugin
   ],

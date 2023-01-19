@@ -23,9 +23,7 @@ export function baseKeysIn(object) {
   const result = [];
 
   for (const key in object) {
-    if (
-      !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))
-    ) {
+    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
       result.push(key);
     }
   }

@@ -9,8 +9,7 @@ const main = async ({ args, isRoot, ctx } = {}) => {
   await shell('rm -rf .release', { ctx, silence: 1 });
   // await shell('lsk run fix --workspace');
   let cmd = findBin('clean-publish');
-  cmd +=
-    ' --without-publish --temp-dir .release --fields "//, ///, ////, private"';
+  cmd += ' --without-publish --temp-dir .release --fields "//, ///, ////, private"';
   await shell(cmd, { ctx });
 };
 

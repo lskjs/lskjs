@@ -7,8 +7,7 @@ const main = async ({ args, isRoot, ctx } = {}) => {
     await shellParallel('lsk run publish', { ctx, args });
     return;
   }
-  const isDryRun =
-    args.includes('--dry-run') || args.includes('--without-publish');
+  const isDryRun = args.includes('--dry-run') || args.includes('--without-publish');
   let cmd = 'pnpm publish .release --no-git-checks';
   if (isDryRun) cmd += ' --dry-run';
   await shell(cmd, { ctx });

@@ -2,7 +2,7 @@ import { ObjectLike, ObjectMapper } from './types';
 
 export const mapValues = <T>(
   object: ObjectLike<T>,
-  mapper: ObjectMapper<T> = (a) => a
+  mapper: ObjectMapper<T> = (a) => a,
 ): ObjectLike<T> => {
   const keys = Object.keys(object);
   const values: ObjectLike<T> = {};

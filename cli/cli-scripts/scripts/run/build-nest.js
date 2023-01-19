@@ -1,11 +1,5 @@
 #!/usr/bin/env node
-const {
-  shell,
-  run,
-  findBin,
-  shellParallel,
-  getCwdInfo,
-} = require('@lskjs/cli-utils');
+const { shell, run, findBin, shellParallel, getCwdInfo } = require('@lskjs/cli-utils');
 
 async function main({ isRoot, ctx, args, cwd }) {
   if (isRoot) {

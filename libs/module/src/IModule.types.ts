@@ -120,7 +120,7 @@ export interface IModuleWithSubmodules extends IModuleWithEE {
   // module(names: string[]): Promise<IModuleKeyValue>;
   module(
     nameOrNames: string | string[],
-    options?: { run?: boolean; throw?: boolean; getter?: IModuleGetter }
+    options?: { run?: boolean; throw?: boolean; getter?: IModuleGetter },
   ): Promise<null | IModule | IModuleKeyValue>;
 }
 
@@ -137,10 +137,7 @@ export interface IModuleConstructor<TT extends IModule> {
   /**
    * создать инстанс и проинициализировать его
    */
-  create<T extends IModule>(
-    this: IModuleConstructor<T>,
-    ...propsArray: IModuleProps[]
-  ): Promise<T>;
+  create<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
   /**
    * создать инстанс, проинициализировать и запустить
    */
@@ -148,10 +145,7 @@ export interface IModuleConstructor<TT extends IModule> {
     this: IModuleConstructor<T>,
     ...propsArray: IModuleProps[]
   ): Promise<T>;
-  start<T extends IModule>(
-    this: IModuleConstructor<T>,
-    ...propsArray: IModuleProps[]
-  ): Promise<T>;
+  start<T extends IModule>(this: IModuleConstructor<T>, ...propsArray: IModuleProps[]): Promise<T>;
   new (): TT;
 }
 export type IModuleKeyValue = { [name: string]: IModule | null };

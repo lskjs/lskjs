@@ -2,8 +2,7 @@
 import { root } from './_root.js';
 
 /** Detect free variable `exports`. */
-const freeExports =
-  typeof exports === 'object' && exports && !exports.nodeType && exports;
+const freeExports = typeof exports === 'object' && exports && !exports.nodeType && exports;
 
 /** Detect free variable `module`. */
 const freeModule =
@@ -34,9 +33,7 @@ export function cloneBuffer(buffer, isDeep) {
     return buffer.slice();
   }
   const { length } = buffer;
-  const result = allocUnsafe
-    ? allocUnsafe(length)
-    : new buffer.constructor(length);
+  const result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
 
   buffer.copy(result);
   return result;

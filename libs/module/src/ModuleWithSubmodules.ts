@@ -8,12 +8,7 @@ import { props } from 'fishbird';
 import { IAsyncModule } from './IModule.types';
 // import { setProps } from './utils/setProps';
 import { ModuleWithEE } from './ModuleWithEE';
-import {
-  IAsyncModuleKeyValue,
-  IModule,
-  IModuleKeyValue,
-  IModuleWithSubmodules,
-} from './types';
+import { IAsyncModuleKeyValue, IModule, IModuleKeyValue, IModuleWithSubmodules } from './types';
 import { arrayToObject } from './utils/arrayToObject';
 import { createAsyncModule } from './utils/createAsyncModule';
 import { filterWildcard } from './utils/filterWildcard';
@@ -23,20 +18,11 @@ import { filterWildcard } from './utils/filterWildcard';
 
 const MODULE_MUTEX_GLOBAL = !!getEnvVar('LSK_MODULE_MUTEX_GLOBAL', 0); // TODO: подумать над неймингом
 const MODULE_MUTEX_INTERVAL = +getEnvVar('LSK_MODULE_MUTEX_INTERVAL', 1);
-const MODULE_MUTEX_TIME = +getEnvVar(
-  'LSK_MODULE_MUTEX_TIME',
-  isDev ? 1000 : 10000
-);
-const MODULE_MUTEX_RUN_TIME = +getEnvVar(
-  'LSK_MODULE_MUTEX_RUN_TIME',
-  isDev ? 4000 : 0
-);
+const MODULE_MUTEX_TIME = +getEnvVar('LSK_MODULE_MUTEX_TIME', isDev ? 1000 : 10000);
+const MODULE_MUTEX_RUN_TIME = +getEnvVar('LSK_MODULE_MUTEX_RUN_TIME', isDev ? 4000 : 0);
 
 const globalMutexMap = {};
-export abstract class ModuleWithSubmodules
-  extends ModuleWithEE
-  implements IModuleWithSubmodules
-{
+export abstract class ModuleWithSubmodules extends ModuleWithEE implements IModuleWithSubmodules {
   __availableModules: IAsyncModuleKeyValue = {};
   __initedModules: IModuleKeyValue = {};
   async __getModules(): Promise<IAsyncModuleKeyValue> {
@@ -84,21 +70,13 @@ export abstract class ModuleWithSubmodules
 
   // TODO: добавить метод какоторый получает статус подмодуля
 
-  hasModule(
-    nameOrNames: string | string[]
-  ): boolean | { [name: string]: boolean } {
+  hasModule(nameOrNames: string | string[]): boolean | { [name: string]: boolean } {
     if (typeof nameOrNames === 'string' && nameOrNames.endsWith('*')) {
       // eslint-disable-next-line no-param-reassign
-      nameOrNames = filterWildcard(
-        Object.keys(this.__availableModules),
-        nameOrNames
-      );
+      nameOrNames = filterWildcard(Object.keys(this.__availableModules), nameOrNames);
     }
     if (Array.isArray(nameOrNames)) {
-      return mapValues(
-        arrayToObject(nameOrNames),
-        (n: string) => this.hasModule(n) as boolean
-      );
+      return mapValues(arrayToObject(nameOrNames), (n: string) => this.hasModule(n) as boolean);
     }
     const name = nameOrNames;
     return Boolean(this.__availableModules[name]);
@@ -110,37 +88,24 @@ export abstract class ModuleWithSubmodules
 
   async module(
     nameOrNames: string | string[],
-    {
-      run: isRun = true,
-      throw: throwIfNotFound = true,
-      getter = undefined,
-    } = {}
+    { run: isRun = true, throw: throwIfNotFound = true, getter = undefined } = {},
   ): Promise<IModule | IModuleKeyValue | null> {
     if (!this.__lifecycle.initStart) {
-      throw new Err(
-        'MODULE_INVALID_WORKFLOW_INIT',
-        'please init module first before .module()'
-      );
+      throw new Err('MODULE_INVALID_WORKFLOW_INIT', 'please init module first before .module()');
     }
     if (
       typeof nameOrNames === 'string' &&
       !nameOrNames.includes('.') &&
       nameOrNames.endsWith('*')
     ) {
-      const names = filterWildcard(
-        Object.keys(this.__availableModules),
-        nameOrNames
-      );
+      const names = filterWildcard(Object.keys(this.__availableModules), nameOrNames);
       this.log.trace(`module(${nameOrNames})`, names);
       // eslint-disable-next-line no-param-reassign
       nameOrNames = names;
     }
     if (Array.isArray(nameOrNames)) {
       // @ts-ignore
-      return props(
-        arrayToObject(nameOrNames),
-        (n: string) => this.module(n) as Promise<IModule>
-      );
+      return props(arrayToObject(nameOrNames), (n: string) => this.module(n) as Promise<IModule>);
     }
     // console.log(551111);
     let name;
@@ -157,11 +122,7 @@ export abstract class ModuleWithSubmodules
     // console.log(552222);
 
     // eslint-disable-next-line no-nested-ternary
-    const debugInfo = this.__initedModules[name]
-      ? '[cache]'
-      : isRun
-      ? '[run]'
-      : undefined;
+    const debugInfo = this.__initedModules[name] ? '[cache]' : isRun ? '[run]' : undefined;
     const mutexKey = name;
     let mutexRelease;
     // console.log({ name: this.name, mutexKey }, this.mutexMap);
@@ -172,8 +133,7 @@ export abstract class ModuleWithSubmodules
         this.mutexMap[mutexKey] = new Mutex();
       }
       const mutex = this.mutexMap[mutexKey];
-      const mutexTime =
-        (isRun ? MODULE_MUTEX_RUN_TIME : MODULE_MUTEX_TIME) || 60 * 1000; // TODO: 1 мин - заместо бесконечности
+      const mutexTime = (isRun ? MODULE_MUTEX_RUN_TIME : MODULE_MUTEX_TIME) || 60 * 1000; // TODO: 1 мин - заместо бесконечности
 
       if (await mutex.isAsyncLocked(mutexTime, MODULE_MUTEX_INTERVAL)) {
         throw new Err(
@@ -186,7 +146,7 @@ export abstract class ModuleWithSubmodules
               mutexTime,
               isRun,
             },
-          }
+          },
         );
       } else {
         mutexRelease = await mutex.acquire();
@@ -222,8 +182,7 @@ export abstract class ModuleWithSubmodules
     }
 
     if (this.debug) this.log.trace(`debugInfo! module(${name})`, debugInfo);
-    const availableModule =
-      this.__availableModules && this.__availableModules[name];
+    const availableModule = this.__availableModules && this.__availableModules[name];
     if (!availableModule) {
       if (mutexRelease) mutexRelease();
       delete this.mutexMap[mutexKey];
@@ -233,7 +192,7 @@ export abstract class ModuleWithSubmodules
         `Module "${name}" not found in module ${this.name}`,
         {
           data: { name: this.name, module: name },
-        }
+        },
       );
     }
 
@@ -307,7 +266,7 @@ export abstract class ModuleWithSubmodules
         });
         if (autorun) return name;
         return null;
-      }
+      },
     ).filter(Boolean) as string[];
 
     if (autorunModules && autorunModules.length) {
@@ -323,8 +282,7 @@ export abstract class ModuleWithSubmodules
         isNeedRun = !!this.__lifecycle.autorun;
       } else {
         isNeedRun =
-          !this.__lifecycle.runStart ||
-          (this.__lifecycle.runStart && this.__lifecycle.stopFinish);
+          !this.__lifecycle.runStart || (this.__lifecycle.runStart && this.__lifecycle.stopFinish);
       }
       if (!isNeedRun) return;
       await m.start();

@@ -1,10 +1,7 @@
 import { ModuleWithLifecycle } from './ModuleWithLifecycle';
 import { IModuleWithСonfig } from './types';
 
-export abstract class ModuleWithConfig
-  extends ModuleWithLifecycle
-  implements IModuleWithСonfig
-{
+export abstract class ModuleWithConfig extends ModuleWithLifecycle implements IModuleWithСonfig {
   // @ts-ignore
   config: { [key: string]: any };
   /**

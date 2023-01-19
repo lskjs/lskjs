@@ -5,10 +5,7 @@ import { shell } from '@lskjs/cli-utils';
 import Err from '@lskjs/err';
 
 // @ts-ignore
-export async function gitDownload(
-  uri: string,
-  { dest, depth = 1, rm = true } = {}
-) {
+export async function gitDownload(uri: string, { dest, depth = 1, rm = true } = {}) {
   if (!uri) throw new Err('!uri');
   if (!dest) throw new Err('!dest');
   let url;
@@ -33,9 +30,7 @@ export async function gitDownload(
       throw '!github';
     }
   }
-  await shell(
-    `git clone --depth=${depth} ${branch ? `-b ${branch}` : ''} ${git} ${dest}`
-  );
+  await shell(`git clone --depth=${depth} ${branch ? `-b ${branch}` : ''} ${git} ${dest}`);
   if (rm) await shell(`rm -rf ${dest}/.git`, { debug: 1 });
 }
 

@@ -22,8 +22,6 @@ const nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
  * _.isTypedArray([]);
  * // => false
  */
-export const isTypedArray = nodeIsTypedArray
-  ? baseUnary(nodeIsTypedArray)
-  : baseIsTypedArray;
+export const isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 
 export default isTypedArray;

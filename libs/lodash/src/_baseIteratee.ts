@@ -21,9 +21,7 @@ export function baseIteratee(value) {
     return identity;
   }
   if (typeof value === 'object') {
-    return isArray(value)
-      ? baseMatchesProperty(value[0], value[1])
-      : baseMatches(value);
+    return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
   }
   return property(value);
 }

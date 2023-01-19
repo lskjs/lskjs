@@ -48,18 +48,14 @@ const run = async (main) => {
     };
     // console.log('[runnable]', props);
     return main(props).catch((err) => {
-      const errTitle = `========= ========= [Err] ${
-        err.code || ''
-      } ======= =========`;
+      const errTitle = `========= ========= [Err] ${err.code || ''} ======= =========`;
       // eslint-disable-next-line no-console
       console.log('\n\n\n\n');
       log.fatal();
       log.fatal(errTitle);
       log.fatal();
-      if (props.args?.length)
-        log.fatal(`[>>] lsk run ${props.args.slice(1).join(' ')}`);
-      if (err?.proc?.spawnargs)
-        log.fatal('[>>]', joinArgs(err?.proc?.spawnargs));
+      if (props.args?.length) log.fatal(`[>>] lsk run ${props.args.slice(1).join(' ')}`);
+      if (err?.proc?.spawnargs) log.fatal('[>>]', joinArgs(err?.proc?.spawnargs));
       if (err.code) log.fatal('[Err]', err.code);
       if (err.message) log.fatal('[Err]', err.message);
       if (err.stack) log.fatal('[Err]', err);
@@ -67,14 +63,13 @@ const run = async (main) => {
       if (props.ctx?.stack) {
         log.fatal();
         if (props.cwd) log.fatal(`[cwd] ${props.cwd}`);
-        if (props.ctx.stack?.[0]?.filename)
-          log.fatal(`[filename] ${props.ctx.stack[0].filename}`);
+        if (props.ctx.stack?.[0]?.filename) log.fatal(`[filename] ${props.ctx.stack[0].filename}`);
         log.fatal(
           '[History]',
           props.ctx?.stack
             .reverse()
             .map((s) => `\n - [>>] ${s.command}`)
-            .join('')
+            .join(''),
         );
       }
       if (err.code === 'LSKJS_MISSING_SCRIPT') {
@@ -88,7 +83,7 @@ const run = async (main) => {
             filteredPaths
               .map((p) => `\n  -  ${p}`)
               .slice(0, 5)
-              .join('') + (filteredPaths.length > 5 ? '\n ...' : '')
+              .join('') + (filteredPaths.length > 5 ? '\n ...' : ''),
           );
         }
         log.trace(pathOptions, '=>', paths);

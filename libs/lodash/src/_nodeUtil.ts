@@ -1,8 +1,7 @@
 import { freeGlobal } from './_freeGlobal.js';
 
 /** Detect free variable `exports`. */
-const freeExports =
-  typeof exports === 'object' && exports && !exports.nodeType && exports;
+const freeExports = typeof exports === 'object' && exports && !exports.nodeType && exports;
 
 /** Detect free variable `module`. */
 const freeModule =
@@ -23,8 +22,7 @@ const freeProcess = moduleExports && freeGlobal.process;
 export const nodeUtil = (function () {
   try {
     // Use `util.types` for Node.js 10+.
-    const types =
-      freeModule && freeModule.require && freeModule.require('util').types;
+    const types = freeModule && freeModule.require && freeModule.require('util').types;
 
     if (types) {
       return types;

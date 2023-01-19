@@ -14,9 +14,7 @@ const spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
  */
 export function isFlattenable(value) {
   return (
-    isArray(value) ||
-    isArguments(value) ||
-    !!(spreadableSymbol && value && value[spreadableSymbol])
+    isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol])
   );
 }
 

@@ -19,14 +19,7 @@ const COMPARE_UNORDERED_FLAG = 2;
  * @param {Object} stack Tracks traversed `array` and `other` objects.
  * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
  */
-export function equalArrays(
-  array,
-  other,
-  bitmask,
-  customizer,
-  equalFunc,
-  stack
-) {
+export function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   const isPartial = bitmask & COMPARE_PARTIAL_FLAG;
   const arrLength = array.length;
   const othLength = other.length;
@@ -70,8 +63,7 @@ export function equalArrays(
         !arraySome(other, (othValue, othIndex) => {
           if (
             !cacheHas(seen, othIndex) &&
-            (arrValue === othValue ||
-              equalFunc(arrValue, othValue, bitmask, customizer, stack))
+            (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))
           ) {
             return seen.push(othIndex);
           }
@@ -81,10 +73,7 @@ export function equalArrays(
         break;
       }
     } else if (
-      !(
-        arrValue === othValue ||
-        equalFunc(arrValue, othValue, bitmask, customizer, stack)
-      )
+      !(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))
     ) {
       result = false;
       break;

@@ -44,21 +44,10 @@ const symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
  * @param {Object} stack Tracks traversed `object` and `other` objects.
  * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
  */
-export function equalByTag(
-  object,
-  other,
-  tag,
-  bitmask,
-  customizer,
-  equalFunc,
-  stack
-) {
+export function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
   switch (tag) {
     case dataViewTag:
-      if (
-        object.byteLength != other.byteLength ||
-        object.byteOffset != other.byteOffset
-      ) {
+      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
         return false;
       }
       object = object.buffer;
@@ -115,7 +104,7 @@ export function equalByTag(
         bitmask,
         customizer,
         equalFunc,
-        stack
+        stack,
       );
       stack.delete(object);
       return result;

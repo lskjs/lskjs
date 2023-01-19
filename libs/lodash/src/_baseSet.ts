@@ -37,11 +37,7 @@ export function baseSet(object, path, value, customizer?) {
       const objValue = nested[key];
       newValue = customizer ? customizer(objValue, key, nested) : undefined;
       if (newValue === undefined) {
-        newValue = isObject(objValue)
-          ? objValue
-          : isIndex(path[index + 1])
-          ? []
-          : {};
+        newValue = isObject(objValue) ? objValue : isIndex(path[index + 1]) ? [] : {};
       }
     }
     assignValue(nested, key, newValue);

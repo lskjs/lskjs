@@ -4,12 +4,8 @@ import { randomColors, theme } from './config';
 import { ThemeKey } from './types';
 import hashCode from './utils/hashCode';
 
-export function themeizeRandom(
-  str: string,
-  randomName?: string | number | null
-): string {
-  const colors =
-    randomColors[hashCode(randomName || '') % randomColors.length] || [];
+export function themeizeRandom(str: string, randomName?: string | number | null): string {
+  const colors = randomColors[hashCode(randomName || '') % randomColors.length] || [];
   return colorize(str, colors);
 }
 

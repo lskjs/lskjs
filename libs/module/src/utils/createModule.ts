@@ -1,9 +1,6 @@
 import { IModule } from '../types';
 
-export const createModule = async (
-  ClassOrFunction: any,
-  ...args: any[]
-): Promise<IModule> => {
+export const createModule = async (ClassOrFunction: any, ...args: any[]): Promise<IModule> => {
   if (ClassOrFunction.create) {
     const obj = await ClassOrFunction.create(...args);
     return obj;

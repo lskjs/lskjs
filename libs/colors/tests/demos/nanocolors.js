@@ -2,8 +2,29 @@
 /* eslint-disable no-console */
 const nanocolors = require('nanocolors');
 
-const colors = [null, 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gray'];
-const bgColors = [null, 'bgBlack', 'bgRed', 'bgGreen', 'bgYellow', 'bgBlue', 'bgMagenta', 'bgCyan', 'bgWhite'];
+const colors = [
+  null,
+  'black',
+  'red',
+  'green',
+  'yellow',
+  'blue',
+  'magenta',
+  'cyan',
+  'white',
+  'gray',
+];
+const bgColors = [
+  null,
+  'bgBlack',
+  'bgRed',
+  'bgGreen',
+  'bgYellow',
+  'bgBlue',
+  'bgMagenta',
+  'bgCyan',
+  'bgWhite',
+];
 const mods = [null, 'dim', 'bold'];
 const mods2 = ['dim', 'bold', 'hidden', 'italic', 'underline', 'strikethrough', 'reset'];
 

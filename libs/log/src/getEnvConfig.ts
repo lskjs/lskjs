@@ -9,10 +9,7 @@ export const getEnvConfig = () => {
   const debug = getEnvVar('DEBUG', '') || '';
   const isSilent = typeof process && process.argv?.includes('--silent');
   const isTrace = debug.startsWith('lsk') || debug.startsWith('*');
-  const format = getEnvVar(
-    'LOG_FORMAT',
-    getEnvVar('DEBUG_FORMAT', defaultFormat)
-  );
+  const format = getEnvVar('LOG_FORMAT', getEnvVar('DEBUG_FORMAT', defaultFormat));
   const { on, off } = parseNs(debug);
   // eslint-disable-next-line no-nested-ternary
   const defaultLevel = isSilent ? 'error' : isTrace ? 'trace' : 'debug';

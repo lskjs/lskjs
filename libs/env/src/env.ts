@@ -24,9 +24,7 @@ export const stage =
 
 export const version =
   (isServer
-    ? process.env.VERSION ||
-      process.env.CI_COMMIT_SHORT_SHA ||
-      process.env.CI_COMMIT_SHA
+    ? process.env.VERSION || process.env.CI_COMMIT_SHORT_SHA || process.env.CI_COMMIT_SHA
     : safeWindow?.env?.version) || stage;
 
 const env = isServer ? process.env : {};

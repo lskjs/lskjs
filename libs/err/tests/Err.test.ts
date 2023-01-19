@@ -69,12 +69,7 @@ test('Err("some_code", "Some error message", { options: 123 })', () => {
 });
 
 test('Err("some_code", "Some error message", { options: 123 }, { otherOptions: 321 })', () => {
-  const input = [
-    'some_code',
-    'Some error message',
-    { options: 123 },
-    { otherOptions: 321 },
-  ];
+  const input = ['some_code', 'Some error message', { options: 123 }, { otherOptions: 321 }];
   const res = {
     name: 'Err',
     code: 'some_code',
@@ -182,6 +177,6 @@ test('Err("login_error", { realPassword: "password", data: { password: "incorrec
   expect(err).toMatchObject(res);
   expect(err.getJSON()).toStrictEqual(res);
   expect(JSON.stringify(err)).toStrictEqual(
-    JSON.stringify(pick(res, ['name', 'code', 'message', 'test', 'data']))
+    JSON.stringify(pick(res, ['name', 'code', 'message', 'test', 'data'])),
   );
 });

@@ -7,14 +7,7 @@ import { ILoggerInternalMessage } from '../../types';
 import { toString } from '../../utils/toString';
 import { parseArgs } from './utils';
 
-export const lsklogLevels = [
-  'trace',
-  'debug',
-  'info',
-  'warn',
-  'error',
-  'fatal',
-];
+export const lsklogLevels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 export const lsklogWebLevels = [
   'reqId',
   'method',
@@ -29,8 +22,7 @@ export const lsklogWebLevels = [
 
 export const isLsklog = (json: any): boolean =>
   Boolean(lsklogLevels.includes(json.level) && json.ns);
-export const isLskLikelog = (json: any): boolean =>
-  Boolean(lsklogLevels.includes(json.level));
+export const isLskLikelog = (json: any): boolean => Boolean(lsklogLevels.includes(json.level));
 
 export const isLsklogWeb = (req: any): boolean =>
   Boolean(req && (req.name === 'req' || (req.method && req.host && req.url))); // reqId
@@ -54,18 +46,7 @@ export const parseLsklog = (json: any): ILoggerInternalMessage => {
       args: parseArgs(msg, data),
     };
   }
-  const {
-    reqId,
-    method,
-    host,
-    ua,
-    ip,
-    url,
-    status,
-    length,
-    duration,
-    ...data2
-  } = data;
+  const { reqId, method, host, ua, ip, url, status, length, duration, ...data2 } = data;
   return {
     format: ILoggerInternalMessageFormat.lsklog,
     meta: {

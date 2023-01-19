@@ -19,8 +19,8 @@ const main = async ({ isRoot, cwd, ctx, args }) => {
         '//': `${package['//'] || ''}/`,
       },
       null,
-      2
-    )
+      2,
+    ),
   );
 };
 

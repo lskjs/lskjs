@@ -3,10 +3,7 @@ import { EventEmitter } from 'events';
 import { ModuleWithLog } from './ModuleWithLog';
 import { IEventEmitter, IModuleWithEE } from './types';
 
-export abstract class ModuleWithEE
-  extends ModuleWithLog
-  implements IModuleWithEE
-{
+export abstract class ModuleWithEE extends ModuleWithLog implements IModuleWithEE {
   ee?: IEventEmitter;
 
   createEe(): IEventEmitter {

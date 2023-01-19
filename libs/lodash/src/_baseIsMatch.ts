@@ -26,11 +26,7 @@ export function baseIsMatch(object, source, matchData, customizer?) {
   object = Object(object);
   while (index--) {
     var data = matchData[index];
-    if (
-      noCustomizer && data[2]
-        ? data[1] !== object[data[0]]
-        : !(data[0] in object)
-    ) {
+    if (noCustomizer && data[2] ? data[1] !== object[data[0]] : !(data[0] in object)) {
       return false;
     }
   }
@@ -56,7 +52,7 @@ export function baseIsMatch(object, source, matchData, customizer?) {
               objValue,
               COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG,
               customizer,
-              stack
+              stack,
             )
           : result)
       ) {

@@ -29,12 +29,7 @@ test('errMerge("some_code", "Some error message", { options: 123 })', () => {
 });
 
 test('errMerge("some_code", "Some error message", { options: 123 }, { otherOptions: 321 })', () => {
-  const input = [
-    'some_code',
-    'Some error message',
-    { options: 123 },
-    { otherOptions: 321 },
-  ];
+  const input = ['some_code', 'Some error message', { options: 123 }, { otherOptions: 321 }];
   const res = {
     code: 'some_code',
     message: 'Some error message',

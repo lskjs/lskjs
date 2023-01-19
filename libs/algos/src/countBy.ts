@@ -2,7 +2,7 @@ import { ObjectLike, ObjectMapper } from './types';
 
 export const countBy = <T>(
   object: ObjectLike<T>,
-  mapper: ObjectMapper<T> = (a) => a
+  mapper: ObjectMapper<T> = (a) => a,
 ): ObjectLike<number> => {
   const keys = Object.keys(object);
   const counts = {} as ObjectLike<number>;

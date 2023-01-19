@@ -30,10 +30,6 @@ new Logger({ name: 'lsk:GrantModule' }).info('some module info');
 
 // var getMarker = require('@lskjs/utils/marker').default;
 
-
-
-
-
 // const logger = new Logger({
 //   name: 'lsk:Module',
 // });

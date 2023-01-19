@@ -1,5 +1,5 @@
 import { fromPairs } from '@lskjs/algos';
-import Err from '@lskjs/err';
+import { Err } from '@lskjs/err';
 import { existsSync, readFileSync } from 'fs';
 import yaml from 'js-yaml';
 

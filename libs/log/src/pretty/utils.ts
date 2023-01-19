@@ -17,11 +17,7 @@ const rightPad = (str: string, length: number) => String(str).padEnd(length);
 
 let prettyPathLength = 20;
 export const prettyPath = (url: string, defaultUrlPad = 0) => {
-  prettyPathLength = Math.max(
-    (url && url.length) || 0,
-    prettyPathLength,
-    defaultUrlPad
-  );
+  prettyPathLength = Math.max((url && url.length) || 0, prettyPathLength, defaultUrlPad);
   return rightPad(url, prettyPathLength);
 };
 
@@ -55,8 +51,7 @@ export const prettyMethod = (method: string) => {
 export const prettyTime = (ms: number, format = ''): string | null => {
   if (!Number.isFinite(ms)) return null;
 
-  const level: LoggerLevelType | null =
-    ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
+  const level: LoggerLevelType | null = ms >= 10 * 1000 ? 'error' : ms >= 3 * 1000 ? 'warn' : null;
   const formats = ['m', 's', 'ms'];
   const f = formats.includes(format) ? format : '';
 
@@ -89,8 +84,7 @@ export function prettyMarker(key: string | number): string {
 }
 
 export const prettyLevel = (level: LoggerLevelType): string => {
-  let str =
-    LOG_VIEW === 'short' ? (level[0] || '').toLowerCase() : leftPad(level, 5);
+  let str = LOG_VIEW === 'short' ? (level[0] || '').toLowerCase() : leftPad(level, 5);
   str = `[${str}]`;
   return themeize(str, level);
 };
@@ -104,7 +98,7 @@ export const prettyContent = (...args: any[]): any[] => {
       colored.push(
         arg.replace(highlightRegexp, (match) => {  //eslint-disable-line
           return colorize(match, contentColors[i++ % contentColors.length]);
-        })
+        }),
       );
     } else {
       colored.push(arg);

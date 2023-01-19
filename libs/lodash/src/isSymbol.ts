@@ -22,10 +22,7 @@ const symbolTag = '[object Symbol]';
  * // => false
  */
 export function isSymbol(value) {
-  return (
-    typeof value === 'symbol' ||
-    (isObjectLike(value) && baseGetTag(value) == symbolTag)
-  );
+  return typeof value === 'symbol' || (isObjectLike(value) && baseGetTag(value) == symbolTag);
 }
 
 export default isSymbol;

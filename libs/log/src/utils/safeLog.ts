@@ -14,13 +14,10 @@ export const safeLog = (ctx: any, level = 'error', ...args: any[]) => {
           level,
           name: ctx.name || ctx.constructor.name,
         },
-        ...args
+        ...args,
       );
     } else {
-      console.error(
-        `[${level[0]}] <${ctx.name || ctx.constructor.name}>`,
-        ...args
-      ); // eslint-disable-line no-console
+      console.error(`[${level[0]}] <${ctx.name || ctx.constructor.name}>`, ...args); // eslint-disable-line no-console
     }
   }
 };

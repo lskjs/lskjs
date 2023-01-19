@@ -25,7 +25,7 @@ export const getSymbols = !nativeGetSymbols
       }
       object = Object(object);
       return arrayFilter(nativeGetSymbols(object), (symbol) =>
-        propertyIsEnumerable.call(object, symbol)
+        propertyIsEnumerable.call(object, symbol),
       );
     };
 

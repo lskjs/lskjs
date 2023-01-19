@@ -7,12 +7,7 @@ const { createLogger } = require('./log');
 // https://docs.google.com/document/d/1UFm10TONaNWok3aEPzUP_OjZ6lEvwlYqyJBUcugLfso/edit#heading=h.u8gil4dopy47
 
 function spawn(command, args = [], options = {}) {
-  const {
-    silence,
-    cwd = process.cwd(),
-    log: initLogger,
-    ...otherOptions
-  } = options;
+  const { silence, cwd = process.cwd(), log: initLogger, ...otherOptions } = options;
   const log =
     initLogger ||
     createLogger({

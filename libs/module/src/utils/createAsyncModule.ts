@@ -6,7 +6,7 @@ import { createModule } from './createModule';
 
 export const createAsyncModule = async (
   initArg: IAsyncModule,
-  parentProps: Record<string, unknown>
+  parentProps: Record<string, unknown>,
 ): Promise<IModule> => {
   if (initArg.__module) return initArg as IModule;
   const arg = await importFn(initArg);

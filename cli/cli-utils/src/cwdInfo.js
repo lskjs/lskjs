@@ -29,8 +29,7 @@ const getPackageName = ({ cwd }) => {
 };
 
 const getCwdInfo = ({ cwd }) => {
-  const isBabel =
-    existsSync(`${cwd}/.babelrc.js`) || existsSync(`${cwd}/.babelrc`);
+  const isBabel = existsSync(`${cwd}/.babelrc.js`) || existsSync(`${cwd}/.babelrc`);
   const isTs = existsSync(`${cwd}/tsconfig.json`);
   // eslint-disable-next-line import/no-dynamic-require
   const isApp = !!require(`${cwd}/package.json`).scripts?.start;

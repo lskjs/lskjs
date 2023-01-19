@@ -27,10 +27,7 @@ const reIsNative = RegExp(
   `^${funcToString
     .call(hasOwnProperty)
     .replace(reRegExpChar, '\\$&')
-    .replace(
-      /hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,
-      '$1.*?'
-    )}$`
+    .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?')}$`,
 );
 
 /**

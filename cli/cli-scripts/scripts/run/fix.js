@@ -4,13 +4,7 @@
 
 const { sortPackageJson } = require('sort-package-json');
 
-const {
-  run,
-  shellParallel,
-  getCwdInfo,
-  shell,
-  findBin,
-} = require('@lskjs/cli-utils');
+const { run, shellParallel, getCwdInfo, shell, findBin } = require('@lskjs/cli-utils');
 const { omitNull, mapValues } = require('@lskjs/algos');
 const { writeFile } = require('fs/promises');
 const { existsSync } = require('fs');
@@ -26,9 +20,10 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // log.debug(333);
   // eslint-disable-next-line no-param-reassign
-  if (!args.length) args = ['--sort', '--workspace', '--prepack'];
+  const defaultArgs = ['--sort', '--workspace', '--prepack', '--eslint', '--packageSafe'];
+  if (!args.length) args = defaultArgs;
   if (args.includes('--package')) {
-    args = [...args, '--sort', '--workspace', '--prepack'];
+    args = [...args, ...defaultArgs];
   }
   const packFilename = `${cwd}/package.json`;
   let pack = require(packFilename);
@@ -41,7 +36,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
         }
         if (v.startsWith('link:')) return v.slice('link:'.length);
         return v;
-      })
+      }),
     );
     if (!Object.keys(pack.dependencies || {}).length) {
       delete pack.dependencies;
@@ -56,9 +51,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   const rootPack = require(`${rootPath}/package.json`);
 
   if (args.includes('--temp')) {
-    delete pack.jest;
     delete pack.__debug;
-    delete pack.scripts?.prepare;
     delete pack.scripts?.['test:watch'];
   }
 
@@ -89,24 +82,14 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     }
   }
 
-  pack['//'] =
-    '///////////========================/////////========================/////////========================/////////';
-  pack['///'] =
-    '//////////========================/////////========================/////////========================/////////';
-  pack['////'] =
-    '/////////========================/////////========================/////////========================/////////';
-  if (args.includes('--package')) {
-    const relativePath = cwd.replace(rootPath, '');
-    if (rootPack.repository?.includes('github.com')) {
-      if (!isRoot) {
-        pack.repository = `${rootPack.repository}/tree/master/${relativePath}`;
-      }
-      pack.bugs = `${rootPack.repository}/issues`;
-      if (!pack.homepage) pack.homepage = pack.repository;
-    }
-    // if (!pack.workspaces && isRoot) {
-    //   pack.workspaces = ['packages/*'];
-    // }
+  if (args.includes('--packageSafe')) {
+    pack['//'] =
+      '///////////========================/////////========================/////////========================/////////';
+    pack['///'] =
+      '//////////========================/////////========================/////////========================/////////';
+    pack['////'] =
+      '/////////========================/////////========================/////////========================/////////';
+
     if (!pack.scripts) {
       if (isLib) {
         pack.scripts = {
@@ -137,12 +120,50 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
         preset: '@lskjs/jest-config',
       };
     }
+    if (!pack.prettier) {
+      pack.prettier = '@lskjs/eslint-config/prettier';
+    }
     if (!Object.keys(pack.dependencies || {}).length) {
       delete pack.dependencies;
     }
     if (!Object.keys(pack.devDependencies || {}).length) {
       delete pack.devDependencies;
     }
+
+    if (!pack.author || pack.author.includes('Igor Suvorov')) {
+      pack.author = 'Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)';
+    }
+    if (!pack.license) {
+      if (rootPack.license) {
+        pack.license = rootPack.license;
+      } else if (pack.private === false) {
+        pack.license = 'MIT';
+      }
+    }
+    if (pack.access || pack.private === false) {
+      delete pack.access;
+      pack.private = false;
+      if (!pack.publishConfig) {
+        pack.publishConfig = {
+          access: 'public',
+          registry: 'https://registry.npmjs.org/',
+        };
+      }
+    }
+  }
+
+  if (args.includes('--package')) {
+    const relativePath = cwd.replace(rootPath, '');
+    if (rootPack.repository?.includes('github.com')) {
+      if (!isRoot) {
+        pack.repository = `${rootPack.repository}/tree/master/${relativePath}`;
+      }
+      pack.bugs = `${rootPack.repository}/issues`;
+      if (!pack.homepage) pack.homepage = pack.repository;
+    }
+    // if (!pack.workspaces && isRoot) {
+    //   pack.workspaces = ['packages/*'];
+    // }
     if (isLib && !isRoot) {
       const libFolder =
         // eslint-disable-next-line no-nested-ternary
@@ -163,7 +184,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           }),
         };
       }
-      if (!pack['size-limit']) {
+      if (!pack['size-limit'] && isLib) {
         pack['size-limit'] = [
           {
             path: `${libFolder}/index.js`,
@@ -186,27 +207,6 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
       }
       if (!pack.files) {
         pack.files = ['lib', 'README.md', 'LICENCE'];
-      }
-      if (!pack.license) {
-        if (rootPack.license) {
-          pack.license = rootPack.license;
-        } else if (pack.private === false) {
-          pack.license = 'MIT';
-        }
-      }
-      if (!pack.author || pack.author.includes('Igor Suvorov')) {
-        pack.author =
-          'Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)';
-      }
-      if (pack.access || pack.private === false) {
-        delete pack.access;
-        pack.private = false;
-        if (!pack.publishConfig) {
-          pack.publishConfig = {
-            access: 'public',
-            registry: 'https://registry.npmjs.org/',
-          };
-        }
       }
     }
   }
@@ -231,6 +231,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
 
       '//',
 
+      'prettier',
       'eslintConfig',
       'jest',
       'files',
@@ -256,15 +257,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
 
       '////',
     ];
-    const sortOrderScripts = [
-      'start',
-      'dev',
-      'build',
-      'test',
-      'prepack',
-      'release',
-      'release:ci',
-    ];
+    const sortOrderScripts = ['start', 'dev', 'build', 'test', 'prepack', 'release', 'release:ci'];
     pack = sortPackageJson(pack, { sortOrder });
     if (pack.scripts) {
       pack.scripts = sortPackageJson(pack.scripts, {
@@ -273,6 +266,21 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     }
   }
   await writeFile(`${cwd}/package.json`, `${JSON.stringify(pack, null, 2)}\n`);
+
+  if (args.includes('--eslint')) {
+    if (existsSync(`${cwd}/src`)) {
+      await shell(`${findBin('eslint')} --fix src`, { ctx });
+    }
+    // if (existsSync(`${cwd}/scripts`)) {
+    //   await shell(`${findBin('eslint')} --fix scripts`, { ctx });
+    // }
+    if (existsSync(`${cwd}/tests`)) {
+      await shell(`${findBin('eslint')} --fix tests`, { ctx });
+    }
+    // await shell(`${findBin('eslint')} --fix .`, { ctx }).catch((err) => {
+    //   log.trace('[eslint err]', err);
+    // });
+  }
 };
 
 module.exports = run(main);
