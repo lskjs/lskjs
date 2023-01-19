@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.21](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.20...v3.0.0-alpha.21) (2023-01-19)
+
+
+### Bug Fixes
+
+* **cli:** build-babel with watch in apps ([1d123c2](https://github.com/lskjs/lskjs/commit/1d123c23543d05814b118e8eddb61bf627a1cf9f))
+* default tsconfig ([25c6ade](https://github.com/lskjs/lskjs/commit/25c6ade824888656b6f55fa5496cf5aed90a0ff8))
+* **log:** bin for unix and win ([58f110b](https://github.com/lskjs/lskjs/commit/58f110b321b28b57558a28795008f76b2903bc5e))
+* ts packages ([55e0a3e](https://github.com/lskjs/lskjs/commit/55e0a3ed7b49b3275a2a066d8ebec435664420eb))
+
+
+### Features
+
+* **cli:** improve build ts path ([e630a57](https://github.com/lskjs/lskjs/commit/e630a57ddae52344aa038d404c426079da22329e))
+
+
+
+
+
 # [3.0.0-alpha.20](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.18...v3.0.0-alpha.20) (2023-01-19)
 
 

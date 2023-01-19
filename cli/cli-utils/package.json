@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-utils",
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.21",
   "description": "LSK.js CLI-utils – some utils functions for LSK.js – CLI projects  ",
   "author": "Igor Suvorov <hi@isuvorov.com>",
   "scripts": {
@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
-    "@lskjs/algos": "^3.0.0-alpha.20",
+    "@lskjs/algos": "^3.0.0-alpha.21",
     "@lskjs/colors": "^3.0.0-alpha.20",
     "@lskjs/env": "^3.0.0-alpha.20",
-    "@lskjs/err": "^3.0.0-alpha.20",
-    "@lskjs/log": "^3.0.0-alpha.20",
+    "@lskjs/err": "^3.0.0-alpha.21",
+    "@lskjs/log": "^3.0.0-alpha.21",
     "@lskjs/utils": "2.87.1",
     "@pnpm/filter-workspace-packages": "^6.0.26",
     "@pnpm/logger": "^5.0.0",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.21](https://github.com/lskjs/cli/compare/v3.0.0-alpha.20...v3.0.0-alpha.21) (2023-01-19)
+
+
+### Bug Fixes
+
+* **cli:** build-babel with watch in apps ([1d123c2](https://github.com/lskjs/cli/commit/1d123c23543d05814b118e8eddb61bf627a1cf9f))
+
+
+### Features
+
+* **cli:** improve build ts path ([e630a57](https://github.com/lskjs/cli/commit/e630a57ddae52344aa038d404c426079da22329e))
+
+
+
+
+
 # [3.0.0-alpha.20](https://github.com/lskjs/cli/compare/v3.0.0-alpha.18...v3.0.0-alpha.20) (2023-01-19)
 
 
