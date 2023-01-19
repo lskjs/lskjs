@@ -11,6 +11,7 @@
     "release": " lsk run release",
     "test": "    echo skip"
   },
+  "dependencies": {},
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
