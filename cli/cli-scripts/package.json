@@ -5,9 +5,11 @@
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
+    "dev": "            lsk run dev",
     "build": "echo nothing",
     "test": "echo skip",
-    "prepack": "        lsk run prepack"
+    "prepack": "        lsk run prepack",
+    "release": "        lsk run release"
   },
   "dependencies": {
     "@lskjs/algos": "^3.0.0-alpha.30",

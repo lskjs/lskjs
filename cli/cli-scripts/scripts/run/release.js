@@ -7,7 +7,7 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
 
   // libs
   if (isRoot) {
-    await shell('lsk run fix --prod --silent', { ctx, args });
+    // await shell('lsk run fix --prod --silent', { ctx, args });
     // TODO: break if changes
     await shell('lsk run build --prod --silent', { ctx, args });
     await shell('lsk run test --prod --silent', { ctx, args });

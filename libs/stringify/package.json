@@ -17,6 +17,9 @@
     "javascript-stringify": "2.1.0",
     "js-yaml": "4.1.0"
   },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.5"
+  },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
@@ -59,8 +62,5 @@
       "path": "./lib/index.js",
       "limit": "1kb"
     }
-  ],
-  "devDependencies": {
-    "@types/js-yaml": "^4.0.5"
-  }
+  ]
 }
