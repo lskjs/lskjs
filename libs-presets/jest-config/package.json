@@ -31,10 +31,9 @@
   },
   "files": [
     "jest-preset.js",
-    "jest.setup.js",
-    "index.js"
+    "jest.setup.js"
   ],
-  "main": "index.js",
+  "main": "jest-preset.js",
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/jest-config",
   "bugs": "https://github.com/lskjs/lskjs/issues",
