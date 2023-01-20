@@ -20,9 +20,9 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // log.debug(333);
   // eslint-disable-next-line no-param-reassign
-  const defaultArgs = ['--sort', '--workspace', '--prepack', '--eslint', '--packageSafe'];
+  const defaultArgs = ['--sort', '--workspace', '--scripts', '--packageSafe'];
   if (!args.length) args = defaultArgs;
-  if (args.includes('--package')) {
+  if (args.includes('--package') || args.includes('--eslint')) {
     args = [...args, ...defaultArgs];
   }
   const packFilename = `${cwd}/package.json`;
@@ -90,7 +90,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
     pack['////'] =
       '/////////========================/////////========================/////////========================/////////';
 
-    if (!pack.scripts) {
+    if (!pack.scripts || args.includes('--scripts')) {
       if (isLib) {
         pack.scripts = {
           dev: '            lsk run dev',
@@ -98,6 +98,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           test: '           lsk run test',
           prepack: '        lsk run prepack',
           release: '        lsk run release',
+          ...(pack.scripts || {}),
         };
       }
       if (isApp) {
@@ -107,6 +108,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           test: '           lsk run test',
           prepack: '        lsk run prepack',
           release: '        lsk run release',
+          ...(pack.scripts || {}),
         };
       }
     }
@@ -184,7 +186,7 @@ const main = async ({ isRoot, args, log, cwd, ctx } = {}) => {
           }),
         };
       }
-      if (!pack['size-limit'] && isLib) {
+      if (!pack['size-limit'] && isLib && !isBabel) {
         pack['size-limit'] = [
           {
             path: `${libFolder}/index.js`,

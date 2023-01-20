@@ -14,6 +14,7 @@ import { pick } from './pick';
 import { pickBy } from './pickBy';
 import { set } from './set';
 import { setProps } from './setProps';
+import { toPairs } from './toPairs';
 
 export {
   any,
@@ -32,6 +33,7 @@ export {
   pickBy,
   set,
   setProps,
+  toPairs,
 };
 export default {
   any,
@@ -49,4 +51,5 @@ export default {
   pick,
   pickBy,
   setProps,
+  toPairs,
 };

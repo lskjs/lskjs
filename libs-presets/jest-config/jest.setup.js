@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+process.env.TZ = 'UTC';
 jest.setTimeout(15000);
 if (process.argv.includes('--silent') || process.argv.includes('--prod')) {
   global.console = {

@@ -12,6 +12,7 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   const isWatch = args.includes('--watch');
   const isSilent = args.includes('--silent') || isCI;
   let cmd = findBin('jest');
+  cmd += ' --runInBand --detectOpenHandles --forceExit';
   const { rootPath } = getCwdInfo({ cwd });
   const jestConfigPath = `${rootPath}/scripts/jest.config.js`;
   if (isProd || isSilent) cmd += ' --silent';

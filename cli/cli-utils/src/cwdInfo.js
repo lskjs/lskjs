@@ -1,3 +1,4 @@
+/* eslint-disable import/no-dynamic-require */
 // @ts-ignore
 const { default: omitNull } = require('@lskjs/utils/omitNull');
 const { existsSync } = require('fs');
@@ -31,8 +32,10 @@ const getPackageName = ({ cwd }) => {
 const getCwdInfo = ({ cwd }) => {
   const isBabel = existsSync(`${cwd}/.babelrc.js`) || existsSync(`${cwd}/.babelrc`);
   const isTs = existsSync(`${cwd}/tsconfig.json`);
-  // eslint-disable-next-line import/no-dynamic-require
-  const isApp = !!require(`${cwd}/package.json`).scripts?.start;
+  const isApp =
+    !!require(`${cwd}/package.json`).scripts?.start &&
+    existsSync(`${cwd}./Dockerfile`) &&
+    existsSync(`${cwd}./docket-stack.yml`);
   const isLib = !isApp;
   const isNest = existsSync(`${cwd}/nest-cli.json`);
   // const isRoot = isRoot({ cwd });
