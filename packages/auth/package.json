@@ -18,6 +18,9 @@
   "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
   "license": "MIT",
   "author": "Igor Suvorov <hi@isuvorov.com>",
+  "contributors": [
+    "Andrey Kondalov <andrey@kondalov.com> (https://github.com/yukioru)"
+  ],
   "scripts": {
     "bootstrap": "lsk run bootstrap",
     "build": "lsk run build",
