@@ -11,6 +11,7 @@ module.exports = {
       },
     ],
   },
+  modulePathIgnorePatterns: ['<rootDir>/lib', 'node_modules'],
 
   coverageDirectory: '.reports/coverage',
   coverageThreshold: {
