@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.34](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.33...v3.0.0-alpha.34) (2023-01-20)
+
+
+### Bug Fixes
+
+* presets ([d411360](https://github.com/lskjs/lskjs/commit/d411360a24e4eeb00120102ae0f6ddb8268f234f))
+
+
+
+
+
 # [3.0.0-alpha.32](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.30...v3.0.0-alpha.32) (2023-01-19)
 
 
