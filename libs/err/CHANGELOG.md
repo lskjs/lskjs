@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.36](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.35...v3.0.0-alpha.36) (2023-01-22)
+
+**Note:** Version bump only for package @lskjs/err
+
+
+
+
+
 # [3.0.0-alpha.30](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.24...v3.0.0-alpha.30) (2023-01-19)
 
 

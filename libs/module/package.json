@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "3.0.0-alpha.35",
+  "version": "3.0.0-alpha.36",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,10 +12,10 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.0.0-alpha.30",
+    "@lskjs/algos": "^3.0.0-alpha.36",
     "@lskjs/env": "^3.0.0-alpha.30",
-    "@lskjs/err": "^3.0.0-alpha.30",
-    "@lskjs/log": "^3.0.0-alpha.35",
+    "@lskjs/err": "^3.0.0-alpha.36",
+    "@lskjs/log": "^3.0.0-alpha.36",
     "@lskjs/mutex": "^3.0.0-alpha.30",
     "@lskjs/utils2": "^3.0.0-alpha.33",
     "events": "^3.3.0",

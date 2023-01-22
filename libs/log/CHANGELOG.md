@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.36](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.35...v3.0.0-alpha.36) (2023-01-22)
+
+
+### Bug Fixes
+
+* **log:** lsklog path ([ef7e599](https://github.com/lskjs/lskjs/commit/ef7e5991b555aff64d43a89bfe97728c08bfa7e0))
+
+
+
+
+
 # [3.0.0-alpha.35](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.34...v3.0.0-alpha.35) (2023-01-20)
 
 
