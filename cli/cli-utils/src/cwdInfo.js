@@ -33,8 +33,8 @@ const getCwdInfo = ({ cwd }) => {
   const isBabel = existsSync(`${cwd}/.babelrc.js`) || existsSync(`${cwd}/.babelrc`);
   const isTs = existsSync(`${cwd}/tsconfig.json`);
   const isApp =
-    !!require(`${cwd}/package.json`).scripts?.start &&
-    existsSync(`${cwd}./Dockerfile`) &&
+    !!require(`${cwd}/package.json`).scripts?.start ||
+    existsSync(`${cwd}./Dockerfile`) ||
     existsSync(`${cwd}./docket-stack.yml`);
   const isLib = !isApp;
   const isNest = existsSync(`${cwd}/nest-cli.json`);

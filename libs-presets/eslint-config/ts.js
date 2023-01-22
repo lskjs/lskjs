@@ -1,1 +1,1 @@
-module.exports =  require('./strict/ts.js');
+module.exports = require('./strict/ts.js');

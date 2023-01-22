@@ -1,1 +1,1 @@
-module.exports =  require('./strict/react.js');
+module.exports = require('./strict/react.js');

@@ -1,6 +1,9 @@
 const prettier = require('../prettier');
 const { maxLen } = require('../config');
 
+// TODO
+// https://github.com/lydell/eslint-plugin-simple-import-sort/blob/main/examples/.eslintrc.js
+
 module.exports = {
   env: {
     browser: false,
@@ -43,12 +46,12 @@ module.exports = {
     ],
 
     // imports
-    'import/extensions': 'off', // пока мораторий на правило, как только с ESM все окончательно решится, можно будет включать
-    // 'import/extensions': [
-    //   'error',
-    //   'ignorePackages',
-    //   { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
-    // ],
+    // 'import/extensions': 'off', // пока мораторий на правило, как только с ESM все окончательно решится, можно будет включать
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
+    ],
     'import/no-extraneous-dependencies': [
       'error',
       {
