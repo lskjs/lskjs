@@ -43,7 +43,7 @@ importers:
   cli/cli-scripts:
     specifiers:
       '@lskjs/algos': ^3.0.0-alpha.36
-      '@lskjs/cli-utils': ^3.0.0-alpha.36
+      '@lskjs/cli-utils': ^3.0.0-alpha.37
       '@lskjs/env': ^3.0.0-alpha.30
       '@lskjs/err': ^3.0.0-alpha.36
       '@lskjs/stringify': ^3.0.0-alpha.36
@@ -101,8 +101,8 @@ importers:
       '@babel/runtime': 7.20.7
       '@lskjs/algos': ^3.0.0-alpha.36
       '@lskjs/cli': ^3.0.0-alpha.7
-      '@lskjs/cli-scripts': ^3.0.0-alpha.36
-      '@lskjs/cli-utils': ^3.0.0-alpha.36
+      '@lskjs/cli-scripts': ^3.0.0-alpha.37
+      '@lskjs/cli-utils': ^3.0.0-alpha.37
       '@lskjs/colors': ^3.0.0-alpha.30
       '@lskjs/env': ^3.0.0-alpha.30
       '@lskjs/err': ^3.0.0-alpha.36
