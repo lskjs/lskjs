@@ -49,7 +49,7 @@
     "LICENCE"
   ],
   "bin": {
-    "lsk": "bin/run"
+    "lsklog": "bin/run"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
