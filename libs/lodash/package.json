@@ -20,7 +20,7 @@
       "consistent-return": "off",
       "default-case": "off",
       "eqeqeq": "off",
-      "guard-for-in": "off",
+      "guard-for-in": "off", 
       "new-cap": "off",
       "no-bitwise": "off",
       "no-cond-assign": "off",
