@@ -1,0 +1,26 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "@lskjs/cli-scripts": "3.0.0-alpha.40",
+    "@lskjs/cli-utils": "3.0.0-alpha.39",
+    "lsk": "3.0.0-alpha.37",
+    "@lskjs/babel-preset": "3.0.0-alpha.36",
+    "@lskjs/eslint-config": "3.0.0-alpha.37",
+    "@lskjs/jest-config": "3.0.0-alpha.38",
+    "@lskjs/tsconfig": "3.0.0-alpha.34",
+    "@lskjs/algos": "3.0.0-alpha.36",
+    "@lskjs/colors": "3.0.0-alpha.30",
+    "@lskjs/env": "3.0.0-alpha.30",
+    "@lskjs/err": "3.0.0-alpha.36",
+    "@lskjs/lang": "3.0.0-alpha.36",
+    "@lskjs/lodash": "3.0.0-alpha.30",
+    "@lskjs/log": "3.0.0-alpha.36",
+    "@lskjs/module": "3.0.0-alpha.36",
+    "@lskjs/mutex": "3.0.0-alpha.30",
+    "@lskjs/stringify": "3.0.0-alpha.36",
+    "@lskjs/tty": "3.0.0-alpha.30",
+    "@lskjs/utils2": "3.0.0-alpha.33"
+  },
+  "changesets": []
+}
