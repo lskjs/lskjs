@@ -13,7 +13,7 @@
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
     "@lskjs/babel-preset": "3.0.0-alpha.36",
-    "@lskjs/cli-scripts": "3.0.0-alpha.39",
+    "@lskjs/cli-scripts": "3.0.0-alpha.40",
     "@lskjs/cli-utils": "3.0.0-alpha.39",
     "@lskjs/eslint-config": "3.0.0-alpha.37",
     "@lskjs/jest-config": "3.0.0-alpha.38",

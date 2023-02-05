@@ -25,7 +25,7 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   cmd += ` --rootDir ${cwd}`;
 
   if (args.length) {
-    const filteredArgs = args.filter((arg) => !['--prod'].includes(arg))
+    const filteredArgs = args.filter((arg) => !['--prod', '--yes'].includes(arg))
     cmd += ` ${filteredArgs.join(' ')}`;
     // console.log({args, filteredArgs, cmd})
   }
