@@ -22,5 +22,8 @@
     "@lskjs/tty": "3.0.0-alpha.30",
     "@lskjs/utils2": "3.0.0-alpha.33"
   },
-  "changesets": []
+  "changesets": [
+    "big-feet-cheer",
+    "small-rice-whisper"
+  ]
 }
