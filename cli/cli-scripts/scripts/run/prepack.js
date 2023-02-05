@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const { run, shell, shellParallel, findBin } = require('@lskjs/cli-utils');
+const { readdir } = require('fs/promises');
 
-const main = async ({ args, isRoot, ctx } = {}) => {
+const main = async ({ args, isRoot, ctx, cwd } = {}) => {
   if (isRoot) {
     await shellParallel('lsk run prepack', { ctx, args });
     return;
@@ -9,7 +10,10 @@ const main = async ({ args, isRoot, ctx } = {}) => {
   await shell('rm -rf .release', { ctx, silence: 1 });
   // await shell('lsk run fix --workspace');
   let cmd = findBin('clean-publish');
-  cmd += ' --without-publish --temp-dir .release --fields "//, ///, ////, private"';
+  const files = await readdir(cwd)
+  const package = require(cwd + '/package.json');
+  const removedFiles = files.filter(f => !(package.files || []).includes(f))
+  cmd += ' --without-publish --temp-dir .release --files "'+removedFiles+'" --fields "//, ///, ////, private"';
   await shell(cmd, { ctx });
 };
 

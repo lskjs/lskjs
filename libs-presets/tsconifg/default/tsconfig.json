@@ -6,8 +6,8 @@
     // "declaration": true,
     // "forceConsistentCasingInFileNames": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // выключаю иначе заебет во время development, думаю пока достаточно warning eslint
+    "noUnusedParameters": false, // выключаю иначе заебет во время development, думаю пока достаточно warning eslint
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,

@@ -12,7 +12,8 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   const isWatch = args.includes('--watch');
   const isSilent = args.includes('--silent') || isCI;
   let cmd = findBin('jest');
-  cmd += ' --runInBand --detectOpenHandles --forceExit';
+  cmd += ' --detectOpenHandles --coverage';
+  if (!isWatch) cmd += ' --forceExit --runInBand';
   const { rootPath } = getCwdInfo({ cwd });
   const jestConfigPath = `${rootPath}/scripts/jest.config.js`;
   if (isProd || isSilent) cmd += ' --silent';
@@ -21,18 +22,27 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   if (jestConfigPath && existsSync(jestConfigPath)) {
     cmd += ` --config ${jestConfigPath}`;
   }
-  cmd = `${cmd} --coverage --rootDir ${cwd}`;
+  cmd += ` --rootDir ${cwd}`;
+
+  if (args.length) {
+    cmd += ` ${args.filter((arg) => !['prod'].includes(arg)).join(' ')}`;
+  }
+
   const stdio = isSilent ? ['inherit', 'ignore', 'ignore'] : 'inherit';
-  try {
-    await shell(cmd, {
-      ctx,
-      stdio,
-    });
-  } catch (err) {
-    if (!isSilent) throw err;
-    log.fatal('test:jest', err);
-    // console.error('test:jest', err);
+  if (isWatch) {
     await shell(cmd, { ctx });
+  } else {
+    try {
+      await shell(cmd, {
+        ctx,
+        stdio,
+      });
+    } catch (err) {
+      if (!isSilent) throw err;
+      log.fatal('test:jest', err);
+      // console.error('test:jest', err);
+      await shell(cmd, { ctx });
+    }
   }
 };
 

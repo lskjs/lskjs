@@ -24,7 +24,8 @@ module.exports = {
   rules: {
     // its fix
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn'], // ослабил
+    '@typescript-eslint/no-unused-vars': ['error'],
+    // '@typescript-eslint/no-unused-vars': ['warn'], // к сожалению нельзя ослабить, иначе тогда  eslint-fix их не
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'no-useless-constructor': 'off', // nestjs
@@ -55,3 +56,5 @@ module.exports = {
     },
   ],
 };
+
+// noUnusedLocals and noUnusedParameters
