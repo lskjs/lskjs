@@ -14,10 +14,10 @@
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
+    "extends": "@lskjs/eslint-config/strict"
   },
   "jest": {
-    "preset": "@lskjs/jest-config"
+    "preset": "@lskjs/jest-config/strict"
   },
   "files": [
     "lib",
@@ -41,30 +41,14 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "1.2kb"
+      "limit": "1.4kb"
     },
     {
       "path": "lib/index.mjs",
-      "limit": "1kb"
+      "limit": "1.1kb"
     },
     {
-      "path": "lib/countBy.js",
-      "limit": "1kb"
-    },
-    {
-      "path": "lib/omitBy.js",
-      "limit": "1kb"
-    },
-    {
-      "path": "lib/mapValues.js",
-      "limit": "1kb"
-    },
-    {
-      "path": "lib/isPlainObject.js",
-      "limit": "1kb"
-    },
-    {
-      "path": "lib/set.js",
+      "path": "lib/any.js",
       "limit": "1kb"
     },
     {
@@ -72,11 +56,11 @@
       "limit": "1kb"
     },
     {
-      "path": "lib/map.js",
+      "path": "lib/countBy.js",
       "limit": "1kb"
     },
     {
-      "path": "lib/pad.js",
+      "path": "lib/each.js",
       "limit": "1kb"
     },
     {
@@ -84,7 +68,19 @@
       "limit": "1kb"
     },
     {
-      "path": "lib/pickBy.js",
+      "path": "lib/fromPairs.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/isPlainObject.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/map.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/mapValues.js",
       "limit": "1kb"
     },
     {
@@ -92,15 +88,47 @@
       "limit": "1kb"
     },
     {
-      "path": "lib/pick.js",
-      "limit": "1kb"
-    },
-    {
-      "path": "lib/fromPairs.js",
+      "path": "lib/omitBy.js",
       "limit": "1kb"
     },
     {
       "path": "lib/omitNull.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/pad.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/pick.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/pickBy.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/set.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/setProps.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/toPairs.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/types.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/uniq.js",
+      "limit": "1kb"
+    },
+    {
+      "path": "lib/uniqBy.js",
       "limit": "1kb"
     }
   ],

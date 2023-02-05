@@ -15,6 +15,8 @@ import { pickBy } from './pickBy';
 import { set } from './set';
 import { setProps } from './setProps';
 import { toPairs } from './toPairs';
+import { uniq } from './uniq';
+import { uniqBy } from './uniqBy';
 
 export {
   any,
@@ -34,6 +36,8 @@ export {
   set,
   setProps,
   toPairs,
+  uniq,
+  uniqBy,
 };
 export default {
   any,
@@ -52,4 +56,6 @@ export default {
   pickBy,
   setProps,
   toPairs,
+  uniq,
+  uniqBy,
 };
