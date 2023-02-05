@@ -25,7 +25,9 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   cmd += ` --rootDir ${cwd}`;
 
   if (args.length) {
-    cmd += ` ${args.filter((arg) => !['prod'].includes(arg)).join(' ')}`;
+    const filteredArgs = args.filter((arg) => !['--prod'].includes(arg))
+    cmd += ` ${filteredArgs.join(' ')}`;
+    // console.log({args, filteredArgs, cmd})
   }
 
   const stdio = isSilent ? ['inherit', 'ignore', 'ignore'] : 'inherit';

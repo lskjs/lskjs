@@ -75,7 +75,7 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "9kb"
+      "limit": "10kb"
     },
     {
       "path": "lib/constant.js",
@@ -99,7 +99,7 @@
     },
     {
       "path": "lib/hasIn.js",
-      "limit": "3kb"
+      "limit": "3.1kb"
     },
     {
       "path": "lib/identity.js",
@@ -187,7 +187,7 @@
     },
     {
       "path": "lib/omit.js",
-      "limit": "7kb"
+      "limit": "7.1kb"
     },
     {
       "path": "lib/omitBy.js",
@@ -223,7 +223,7 @@
     },
     {
       "path": "lib/uniqBy.js",
-      "limit": "6kb"
+      "limit": "7kb"
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",

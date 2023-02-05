@@ -12,8 +12,12 @@ const main = async ({ args, isRoot, ctx, cwd } = {}) => {
   let cmd = findBin('clean-publish');
   const files = await readdir(cwd)
   const package = require(cwd + '/package.json');
-  const removedFiles = files.filter(f => !(package.files || []).includes(f))
-  cmd += ' --without-publish --temp-dir .release --files "'+removedFiles+'" --fields "//, ///, ////, private"';
+  cmd += ' --without-publish --temp-dir .release --fields "//, ///, ////, private"';
+  if (package.files?.length) {
+    const removedFiles = files.filter(f => !(package.files || []).includes(f))
+    cmd += ' --files "'+removedFiles+'"';
+  }
+
   await shell(cmd, { ctx });
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-utils",
-  "version": "3.0.0-alpha.37",
+  "version": "3.0.0-alpha.39",
   "description": "LSK.js CLI-utils – some utils functions for LSK.js – CLI projects  ",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -28,6 +28,12 @@
     "sort-package-json": "2.1.0",
     "yargs": "^17.6.2"
   },
+  "files": [
+    "bin",
+    "lib",
+    "src",
+    "README.md"
+  ],
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
