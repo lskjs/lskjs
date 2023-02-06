@@ -9,6 +9,7 @@ export type Options = {
   out?: string;
   format?: 'csv' | 'json' | 'js' | 'yml';
   type?: 'array' | 'objects' | 'object';
+  mapper?: (any) => any;
   nested?: boolean;
 };
 

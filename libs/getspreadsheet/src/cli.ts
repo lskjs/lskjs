@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable max-len */
 import { program } from 'commander';
 
 import { downloadAndSave } from './downloadAndSave';
