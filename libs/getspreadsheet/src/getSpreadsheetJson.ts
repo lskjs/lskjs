@@ -20,11 +20,11 @@ export async function getSpreadsheetJson(
   return new Promise((resolve, reject) => {
     parse(spreadsheet, { columns, ...params }, (err, res) => {
       if (err) return reject(err);
+      res = res.filter((item) => filter(item));
       if (nested) {
         res = res.map((item) => dot.object(item));
       }
       res = res.map((item) => mapper(item));
-      res = res.filter((item) => filter(item));
       if (type === 'object') {
         // eslint-disable-next-line prefer-destructuring
         res = res[0];
