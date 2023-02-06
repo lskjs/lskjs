@@ -1,5 +1,5 @@
 // import { isEqual } from '@lskjs/algos';
-import fs from 'fs/promises';
+import { mkdir, writeFile } from 'fs/promises';
 import path from 'path';
 
 import { fileToJson } from './fileToJson';
@@ -18,8 +18,8 @@ export async function jsonToFile(
     // console.log('isEqual', filename);
     return;
   }
-  await fs.mkdir(path.dirname(filename), { recursive: true });
-  await fs.writeFile(filename, jsonToString(json, { type, comment }));
+  await mkdir(path.dirname(filename), { recursive: true });
+  await writeFile(filename, jsonToString(json, { type, comment }));
 }
 
 export default jsonToFile;

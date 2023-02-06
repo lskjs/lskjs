@@ -1,9 +1,8 @@
 {
-  "name": "@lskjs/stringify",
-  "version": "3.0.0-alpha.37",
-  "description": "LSK stringify.",
+  "name": "@lskjs/getspreadsheet",
+  "version": "2.85.1",
+  "description": "LSK getspreadsheet.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
-  "private": false,
   "scripts": {
     "dev": "            lsk run dev",
     "build": "          lsk run build",
@@ -12,13 +11,17 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.0.0-alpha.36",
-    "@lskjs/err": "^3.0.0-alpha.36",
-    "javascript-stringify": "2.1.0",
-    "js-yaml": "4.1.0"
-  },
-  "devDependencies": {
-    "@types/js-yaml": "^4.0.5"
+    "@lskjs/algos": "3.0.0-alpha.38",
+    "@lskjs/cli-utils": "3.0.0-alpha.39",
+    "@lskjs/err": "3.0.0-alpha.36",
+    "@lskjs/log": "^3.0.0-alpha.36",
+    "@lskjs/stringify": "3.0.0-alpha.37",
+    "axios": "0.21.2",
+    "commander": "10.0.0",
+    "csv-parse": "4.9.0",
+    "dot-object": "^2.1.4",
+    "google-auth-library": "^8.7.0",
+    "googleapis": "110.0.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
@@ -30,10 +33,13 @@
   },
   "files": [
     "lib",
-    "README.md",
-    "LICENCE"
+    "README.md"
   ],
-  "main": "./lib/index.d.ts",
+  "bin": {
+    "getspreadsheet": "./bin/getspreadsheet.js"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.mjs",
@@ -47,20 +53,12 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/stringify",
-  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/stringify",
-  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "keywords": [],
-  "////": "/////////========================/////////========================/////////========================/////////",
-  "_size-limit": [
-    {
-      "path": "./lib/index.js",
-      "limit": "1kb"
-    }
-  ]
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

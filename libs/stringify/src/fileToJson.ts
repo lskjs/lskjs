@@ -1,9 +1,11 @@
 import { fromPairs } from '@lskjs/algos';
 import { Err } from '@lskjs/err';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync as exists } from 'fs';
+import { readFile } from 'fs/promises';
 import yaml from 'js-yaml';
 
 export async function fileToJson(filename: string, { type = 'keyval' } = {}) {
+  if (!exists(filename)) return null;
   try {
     if (type === 'js') {
       // eslint-disable-next-line import/no-dynamic-require
@@ -11,8 +13,7 @@ export async function fileToJson(filename: string, { type = 'keyval' } = {}) {
       delete require.cache[require.resolve(filename)];
       return data;
     }
-    if (!existsSync(filename)) return null;
-    const str = readFileSync(filename).toString();
+    const str = (await readFile(filename)).toString();
     if (type === 'json') {
       return JSON.parse(str);
     }
@@ -41,7 +42,7 @@ export async function fileToJson(filename: string, { type = 'keyval' } = {}) {
   } catch (err) {
     // TODO: обработать ошибку если
     // eslint-disable-next-line no-console
-    console.error('fileToJson err', err);
+    console.error('fileToJson err', err, { filename, type });
     return null;
   }
 }

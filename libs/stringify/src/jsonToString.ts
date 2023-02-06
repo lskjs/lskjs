@@ -12,18 +12,18 @@ const KV = {
 
 export function jsonToString(json: any, { type = 'keyval', comment = '', indent = 2 } = {}) {
   const commentString = getCommentString(comment, { type }) || null;
-  if (type === 'keyval' || type === 'keyvalue' || type === 'env') {
+  if (type === 'keyval' || type === 'keyvalue' || type === 'env' || type === 'dotenv') {
     return [commentString, KV.stringify(json)].filter(Boolean).join('\n');
   }
   if (type === 'json') {
-    return JSON.stringify(
-      {
+    if (typeof json === 'object' && !Array.isArray(json)) {
+      // eslint-disable-next-line no-param-reassign
+      json = {
         __comment: commentString,
         ...json,
-      },
-      null,
-      indent,
-    );
+      };
+    }
+    return JSON.stringify(json, null, indent);
   }
   if (type === 'yaml' || type === 'yml') {
     let yamlObject;
@@ -45,10 +45,12 @@ export function jsonToString(json: any, { type = 'keyval', comment = '', indent 
       .join('\n');
   }
 
+  const moduleExports = type === 'es6' ? 'export default' : 'module.exports';
+
   return [
     commentString,
     '/* eslint-disable prettier/prettier */',
-    `module.exports = ${JSstringify(json, null, indent)};`,
+    `${moduleExports} = ${JSstringify(json, null, indent)};`,
   ]
     .filter(Boolean)
     .join('\n');
