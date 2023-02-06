@@ -268,7 +268,7 @@ importers:
       '@lskjs/cli-utils': 3.0.0-alpha.39
       '@lskjs/err': 3.0.0-alpha.36
       '@lskjs/log': ^3.0.0-alpha.36
-      '@lskjs/stringify': 3.0.0-alpha.38
+      '@lskjs/stringify': 3.0.0-alpha.39
       axios: 0.21.2
       commander: 10.0.0
       csv-parse: 4.9.0
@@ -280,7 +280,7 @@ importers:
       '@lskjs/cli-utils': 3.0.0-alpha.39
       '@lskjs/err': 3.0.0-alpha.36
       '@lskjs/log': 3.0.0-alpha.36
-      '@lskjs/stringify': 3.0.0-alpha.38
+      '@lskjs/stringify': 3.0.0-alpha.39
       axios: 0.21.2
       commander: 10.0.0
       csv-parse: 4.9.0
@@ -3130,7 +3130,7 @@ packages:
       '@lskjs/cli-utils': 3.0.0-alpha.39
       '@lskjs/env': 3.0.0-alpha.30
       '@lskjs/err': 3.0.0-alpha.36
-      '@lskjs/stringify': 3.0.0-alpha.38
+      '@lskjs/stringify': 3.0.0-alpha.39
       all-contributors-cli: 6.24.0
       fishbird: 0.20.0
       remark-template: 1.6.0
@@ -3388,8 +3388,8 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
-  /@lskjs/stringify/3.0.0-alpha.38:
-    resolution: {integrity: sha512-vArGExEGFYqdI3DamwuBRZUBwPUBml4xRD/5DwZ9BHCky+FNpujKE5fTGXvI311UAc61Y7euAEd+eY/JiiaLew==}
+  /@lskjs/stringify/3.0.0-alpha.39:
+    resolution: {integrity: sha512-xwgAL2SxafJ5tLIkdA/rWIqMrLYnL3NolJRS0KbfcV1hNsJC6B6L2KvKkwiyj1tN3MtwnFF3d3dy9K3z7NGIGA==}
     dependencies:
       '@lskjs/algos': 3.0.0-alpha.38
       '@lskjs/err': 3.0.0-alpha.36
