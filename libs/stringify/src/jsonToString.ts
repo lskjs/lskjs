@@ -45,12 +45,12 @@ export function jsonToString(json: any, { type = 'keyval', comment = '', indent 
       .join('\n');
   }
 
-  const moduleExports = type === 'es6' ? 'export default' : 'module.exports';
+  const moduleExports = type === 'es6' ? 'export default' : 'module.exports =';
 
   return [
     commentString,
     '/* eslint-disable prettier/prettier */',
-    `${moduleExports} = ${JSstringify(json, null, indent)};`,
+    `${moduleExports} ${JSstringify(json, null, indent)};`,
   ]
     .filter(Boolean)
     .join('\n');

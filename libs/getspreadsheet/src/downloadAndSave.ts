@@ -9,13 +9,21 @@ export type Options = {
   out?: string;
   format?: 'csv' | 'json' | 'js' | 'yml';
   type?: 'array' | 'objects' | 'object';
-  mapper?: (any) => any;
   nested?: boolean;
+  mapper?: (any) => any;
+  filter?: (any) => any;
 };
 
 export async function downloadAndSave(
   url,
-  { out, format = 'csv', nested, type = 'objects', mapper = (a) => a }: Options = {},
+  {
+    out,
+    format = 'csv',
+    nested,
+    type = 'objects',
+    mapper = (a) => a,
+    filter = (a) => a,
+  }: Options = {},
 ) {
   if (url.indexOf('#') === -1) {
     // eslint-disable-next-line no-param-reassign
@@ -32,7 +40,13 @@ export async function downloadAndSave(
   if (format === 'csv') {
     res = await getSpreadsheetRaw(url);
   } else {
-    res = await getSpreadsheetJson(url, { columns: Boolean(+columns), type, nested, mapper });
+    res = await getSpreadsheetJson(url, {
+      columns: Boolean(+columns),
+      type,
+      nested,
+      mapper,
+      filter,
+    });
   }
   await jsonToFile(filename, res, {
     type: format,

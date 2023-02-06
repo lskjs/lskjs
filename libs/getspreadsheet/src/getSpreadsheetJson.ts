@@ -7,7 +7,14 @@ import { getSpreadsheetRaw } from './getSpreadsheetRaw';
 
 export async function getSpreadsheetJson(
   url,
-  { columns = true, nested = false, type = 'objects', mapper = (a) => a, ...params } = {},
+  {
+    columns = true,
+    nested = false,
+    type = 'objects',
+    mapper = (a) => a,
+    filter = (a) => a,
+    ...params
+  } = {},
 ) {
   const spreadsheet = await getSpreadsheetRaw(url);
   return new Promise((resolve, reject) => {
@@ -17,6 +24,7 @@ export async function getSpreadsheetJson(
         res = res.map((item) => dot.object(item));
       }
       res = res.map((item) => mapper(item));
+      res = res.filter((item) => filter(item));
       if (type === 'object') {
         // eslint-disable-next-line prefer-destructuring
         res = res[0];
