@@ -8,8 +8,8 @@ const { getShortPath } = require('@lskjs/cli-utils/src/getShortPath');
 async function main({ isRoot, log, ctx, cwd, config, args }) {
   if (isRoot) {
     await shellParallel(`lsk run build:gitlab-ci`, { ctx, args });
-    // await shell('lsk run build-gitlab-ci', { ctx, args, cwd: `${cwd}/libs` });
-    // await shell('lsk run build-gitlab-ci', { ctx, args, cwd: `${cwd}/apps` });
+    await shell('lsk run build:gitlab-ci', { ctx, args, cwd: `${cwd}/apps` });
+    await shell('lsk run build:gitlab-ci', { ctx, args, cwd: `${cwd}/libs` });
   }
   const { rootRepo, packages, rootPath } = config;
   const packagePath = cwd.replace(`${rootPath}/`, '').replace(rootPath, '');
@@ -27,9 +27,7 @@ async function main({ isRoot, log, ctx, cwd, config, args }) {
   // eslint-disable-next-line import/no-dynamic-require
   const getConfig = require(`${rootPath}/${inputFilename}`);
   const data = getConfig({
-    packages: name ? [name] : packages,
-    package: name,
-    path: packagePath,
+    packages: name ? [{ name, path: packagePath }] : packages,
   });
   log.trace('[save]', ` ${getShortPath(inputFilename)} => ${getShortPath(outputFilename)}`);
   await jsonToFile(`${rootPath}/${outputFilename}`, data, {
