@@ -43,7 +43,7 @@
     "emotion": "10.0.27",
     "emotion-theming": "10.0.27",
     "express": "4.17.1",
-    "express-jwt": "6.1.0",
+    "express-jwt": "8.4.1",
     "fast-safe-stringify": "2.1.1",
     "nanoid": "3.1.29",
     "portfinder": "1.0.28",
