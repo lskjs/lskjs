@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.88.0](https://github.com/lskjs/lskjs/compare/v2.87.1...v2.88.0) (2023-02-15)
+
+
+### Bug Fixes
+
+* **upload:** detect MIME type from buffer ([cb6bf2e](https://github.com/lskjs/lskjs/commit/cb6bf2ebf8fb416a25544daee484f352a46d24ed))
+
+
+### Features
+
+* **stringify:** separate getspreadsheet and stringify ([faadf8b](https://github.com/lskjs/lskjs/commit/faadf8b273c146427db08d34461eba9f7e408e6b))
+
+
+
+
+
 ## [2.87.1](https://github.com/lskjs/lskjs/compare/v2.87.0...v2.87.1) (2022-12-20)
 
 

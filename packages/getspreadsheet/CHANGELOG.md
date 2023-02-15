@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.88.0](https://github.com/lskjs/lskjs/compare/v2.87.1...v2.88.0) (2023-02-15)
+
+
+### Features
+
+* **stringify:** separate getspreadsheet and stringify ([faadf8b](https://github.com/lskjs/lskjs/commit/faadf8b273c146427db08d34461eba9f7e408e6b))
+
+
+
+
+
 ## [2.85.1](https://github.com/lskjs/lskjs/compare/v2.85.0...v2.85.1) (2022-12-13)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet

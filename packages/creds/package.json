@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/creds",
-  "version": "2.85.1",
+  "version": "2.88.0",
   "description": "LSK creds.",
   "keywords": [],
   "publishConfig": {
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@lskjs/getspreadsheet": "2.85.1",
+    "@lskjs/getspreadsheet": "2.88.0",
     "@lskjs/utils": "2.72.0",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
