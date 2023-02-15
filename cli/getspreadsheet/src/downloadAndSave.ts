@@ -7,7 +7,7 @@ import { log } from './log';
 
 export type Options = {
   out?: string;
-  format?: 'csv' | 'json' | 'js' | 'yml';
+  format?: 'csv' | 'json' | 'jsonEachRow' | 'js' | 'yml' | 'dotenv';
   type?: 'array' | 'objects' | 'object';
   nested?: boolean;
   mapper?: (any) => any;
@@ -29,11 +29,10 @@ export async function downloadAndSave(
     // eslint-disable-next-line no-param-reassign
     url += '#gid=0';
   }
-  if (!out) {
-    // eslint-disable-next-line no-param-reassign
-    out = `spreadsheet.${format}`;
-  }
-  const filename = (out[0] !== '~' && out[0] !== '/' ? `${process.cwd()}/` : '') + out;
+  // if (!out) {
+  //   // eslint-disable-next-line no-param-reassign
+  //   out = `spreadsheet.${format}`;
+  // }
   // log.trace('options', url, out, filename, format);
   let res;
   const columns = type === 'objects' || type === 'object';
@@ -48,14 +47,27 @@ export async function downloadAndSave(
       filter,
     });
   }
-  await jsonToFile(filename, res, {
-    type: format,
-    comment: getComment({
-      name: out,
-      url,
-    }),
-  });
-  log.debug('[save]', url, out);
+
+  if (out) {
+    const filename = (out[0] !== '~' && out[0] !== '/' ? `${process.cwd()}/` : '') + out;
+    await jsonToFile(filename, res, {
+      type: format,
+      comment: getComment({
+        name: out,
+        url,
+      }),
+    });
+    log.debug('[save]', url, out);
+  } else {
+    // eslint-disable-next-line no-lonely-if
+    if (format === 'jsonEachRow') {
+      // eslint-disable-next-line no-console
+      res.forEach((row) => console.log(JSON.stringify(row)));
+    } else {
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify(res));
+    }
+  }
 }
 
 export default downloadAndSave;

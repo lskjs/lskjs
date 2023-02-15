@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /* eslint-disable max-len */
-import { program } from 'commander';
+// import { program } from 'commander';
+import yargs from 'yargs';
 
 import { downloadAndSave } from './downloadAndSave';
 
-program
-  // .version(require('../package.json').version)
-  .command('getspreadsheet <url>')
+yargs(process.argv)
+  .command('getspreadsheet <url>', 'fetch the contents of the Google Spreadsheet')
   // .requiredOption('-u, --url <url>', 'url to the Google Spreadsheet document')
   .option('-o, --out <file>', 'path to json file with result')
   .option('-f, --format <csv|json|js|yaml|keyval|dotenv>', 'output format ', 'json')
@@ -19,3 +19,21 @@ program
   .option('-m, --mapper', 'mapper function')
   .action(downloadAndSave)
   .parse(process.argv);
+
+// .demandCommand(1)
+//   .parse();
+
+// import yargs from 'yargs';
+// import { hideBin } from 'yargs/helpers';
+
+// yargs(process.argv)
+//   .command(
+//     'curl <url>',
+//     'fetch the contents of the URL',
+//     () => {},
+//     (argv) => {
+//       console.info(argv);
+//     },
+//   )
+//   .demandCommand(1)
+//   .parse();

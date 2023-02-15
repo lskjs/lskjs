@@ -49,7 +49,7 @@ export async function getSpreadsheetRaw(url) {
     let { data } = response;
     const { responseUrl = '' } = response.request.res;
     if (responseUrl.includes('ServiceLogin')) {
-      log.debug('need auth');
+      // log.debug('need auth');
       // sheetId
       data = await getFileWithAuth(spreadsheetId);
     }
