@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "form-data": "3.0.0",
-    "qs": "6.9.1",
+    "qs": "6.9.7",
     "socket.io-client": "2.3.0"
   },
   "devDependencies": {
