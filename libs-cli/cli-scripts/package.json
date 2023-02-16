@@ -22,12 +22,7 @@
     "remark-template": "1.6.0",
     "sort-package-json": "1.57.0"
   },
-  "files": [
-    "scripts",
-    "softFiles",
-    "README.md"
-  ],
-  "//": "///////////========================/////////========================/////////========================/////////",
+  "//": "///////////========================/////////========================/////////========================//////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -35,6 +30,11 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "scripts",
+    "softFiles",
+    "README.md"
+  ],
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//cli/cli-scripts",
   "homepage": "https://github.com/lskjs/cli",

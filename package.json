@@ -1,8 +1,12 @@
 {
   "version": "3.0.0-alpha.3",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
-  "workspaces": ["libs/*", "libs-cli/*", "libs-core/*"],
   "private": false,
+  "workspaces": [
+    "libs/*",
+    "libs-cli/*",
+    "libs-core/*"
+  ],
   "scripts": {
     "dev": "            lsk run dev",
     "build": "          lsk run build",

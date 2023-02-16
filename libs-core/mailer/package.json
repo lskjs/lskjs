@@ -35,7 +35,7 @@
     "bluebird": "3.7.x",
     "lodash": "4.17.x"
   },
-  "//": "///////////========================/////////========================/////////========================/////////",
+  "//": "///////////========================/////////========================/////////========================//////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -43,6 +43,9 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {

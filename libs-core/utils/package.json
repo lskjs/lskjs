@@ -26,7 +26,7 @@
     "react": "17.0.1",
     "serialize-javascript": "5.0.1"
   },
-  "//": "///////////========================/////////========================/////////========================/////////",
+  "//": "///////////========================/////////========================/////////========================//////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -34,6 +34,9 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {

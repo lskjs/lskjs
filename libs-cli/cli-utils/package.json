@@ -28,13 +28,7 @@
     "sort-package-json": "2.1.0",
     "yargs": "^17.6.2"
   },
-  "files": [
-    "bin",
-    "lib",
-    "src",
-    "README.md"
-  ],
-  "//": "///////////========================/////////========================/////////========================/////////",
+  "//": "///////////========================/////////========================/////////========================//////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -42,6 +36,12 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "bin",
+    "lib",
+    "src",
+    "README.md"
+  ],
   "bin": {
     "lsx": "bin/run"
   },
