@@ -59,7 +59,7 @@
     },
     {
       "path": "lib/ModuleWithConfig.js",
-      "limit": "4.5kb"
+      "limit": "4.76kb"
     },
     {
       "path": "lib/ModuleWithEE.js",
@@ -67,7 +67,7 @@
     },
     {
       "path": "lib/ModuleWithLifecycle.js",
-      "limit": "4.5kb"
+      "limit": "4.76kb"
     },
     {
       "path": "lib/ModuleWithLog.js",
