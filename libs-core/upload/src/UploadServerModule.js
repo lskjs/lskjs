@@ -12,21 +12,31 @@ export class UploadServerModule extends Module {
   async init() {
     await super.init();
     if (this.config.mimetypes) this.mimetypes = this.config.mimetypes;
-    // if (!this.config.url) throw new Err('!url');
+
     this.initStorage();
     this.multer = this.getMulter();
   }
 
+  validateMIMEType(mimetype, cb) {
+    if (Array.isArray(this.mimetypes)) {
+      if (this.mimetypes.indexOf(mimetype) === -1) {
+        cb(
+          new Err('upload.invalidMimetype', 'Uploading files with this MIME-type is prohibited', { status: 415 }),
+          mimetype,
+        );
+        return false;
+      }
+    }
+    return true;
+  }
+
   getMulter() {
-    // const { config } = this;
     this.log.trace('set mimetypes', this.mimetypes);
     const fileFilter = (req, file, cb) => {
-      if (Array.isArray(this.mimetypes)) {
-        if (this.mimetypes.indexOf(file.mimetype) === -1) {
-          return cb(new Err('upload.invalidMimetype', 'You are not allowed to upload files with this extension'));
-        }
-      }
-      return cb(null, true);
+      const isMIMETypeValid = this.validateMIMEType(file.mimetype, cb);
+      if (!isMIMETypeValid) return;
+
+      cb(null, true);
     };
     const limits = {};
     const maxSize = this.config.maxSize || (this.config.local && this.config.local.maxSize);
@@ -45,6 +55,7 @@ export class UploadServerModule extends Module {
   initStorage() {
     this.storage = this.getStorage();
   }
+
   getFileInfo(file) {
     if (this.config.s3) {
       return {
@@ -71,12 +82,13 @@ export class UploadServerModule extends Module {
       filename: file.originalname,
     };
   }
+
   getFileExt(file) {
     if (file && file.mimetype && mimetypes[file.mimetype]) {
       return mimetypes[file.mimetype];
     }
     if (file && file.originalname) {
-      const res = file.originalname.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);  //eslint-disable-line
+      const res = file.originalname.match(/\.([0-9a-z]+)(?:[\?#]|$)/i); //eslint-disable-line
       if (res && res[1]) {
         return res[1];
       }
