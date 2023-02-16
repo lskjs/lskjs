@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/uapp",
-  "version": "2.85.1",
+  "version": "3.1.1",
   "description": "LSK universal react app wrapper",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "contributors": [
@@ -34,7 +34,7 @@
     "universal-router": "9.0.1"
   },
   "devDependencies": {
-    "@lskjs/i18": "2.85.1",
+    "@lskjs/i18": "^3.1.1",
     "@lskjs/link": "1.1.10",
     "@lskjs/scroll": "1.1.0",
     "axios": "0.21.2",

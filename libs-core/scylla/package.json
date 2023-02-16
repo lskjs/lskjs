@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/scylla",
-  "version": "2.85.1",
+  "version": "3.1.1",
   "description": "LSK module for scylla.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

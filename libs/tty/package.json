@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/tty",
-  "version": "3.0.0-alpha.30",
+  "version": "3.1.1",
   "description": "LSK.js – tty – TTY detection for Node.js and browser",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

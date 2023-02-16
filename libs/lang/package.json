@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/lang",
-  "version": "3.1.0-alpha.0",
+  "version": "3.1.1",
   "description": "LSK.js – lang – text language detection",
   "author": "Nikita Savyolov <ga2mer@yandex.ru> (https://github.com/ga2mer)",
   "contributors": [
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
-    "@lskjs/algos": "^3.1.0-alpha.0",
-    "@lskjs/module": "^3.1.0-alpha.0",
+    "@lskjs/algos": "^3.1.1",
+    "@lskjs/module": "^3.1.1",
     "cld": "2.8.4",
     "fishbird": "^0.20.0",
     "languagedetect": "2.0.0"

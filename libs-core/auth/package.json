@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/auth",
-  "version": "2.85.1",
+  "version": "3.1.1",
   "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "contributors": [
@@ -26,9 +26,9 @@
     "validator": "13.6.0"
   },
   "devDependencies": {
-    "@lskjs/db": "2.85.1",
+    "@lskjs/db": "^3.1.1",
     "@lskjs/mobx": "2.13.1",
-    "@lskjs/server-api": "2.85.1",
+    "@lskjs/server-api": "^3.1.1",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "js-cookie": "3.0.0",
