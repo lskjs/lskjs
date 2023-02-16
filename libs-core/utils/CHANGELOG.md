@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0-alpha.2](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.1...v3.1.0-alpha.2) (2023-02-16)
+
+
+### Features
+
+* **utils:** add polyfill2 withoud dev console.logs ([9493b3a](https://github.com/lskjs/lskjs/commit/9493b3a54b32abd1e6534f55d357138c74db08d4))
+
+
+
+
+
 ## [2.87.1](https://github.com/lskjs/lskjs/compare/v2.87.0...v2.87.1) (2022-12-20)
 
 
