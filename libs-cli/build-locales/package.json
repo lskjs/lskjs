@@ -2,29 +2,21 @@
   "name": "@lskjs/build-locales",
   "version": "2.85.1",
   "description": "CLI for build i18 locales from Google spreadsheet",
-  "keywords": [],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/build-locales",
-  "license": "MIT",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
-  "bin": {
-    "build-locales": "./bin/build-locales.js"
-  },
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
-    "bootstrap": "lsk run bootstrap",
-    "build": "lsk run build",
+    "start": "node index.js",
     "dev": "lsk run dev",
+    "build": "lsk run build",
+    "test": "lsk run test",
+    "prepack": "        lsk run prepack",
+    "release": "lsk run release",
+    "bootstrap": "lsk run bootstrap",
     "dev:server": "lsk run dev:server",
     "i18": "lsk run i18",
     "prepublishOnly": "lsk run prepublishOnly",
-    "release": "lsk run release",
     "release:yes": "lsk run release:yes",
-    "start": "node index.js",
     "storybook": "lsk run storybook",
-    "test": "lsk run test",
     "test:watch": "lsk run test:watch",
     "watch": "lsk run watch"
   },
@@ -39,5 +31,68 @@
     "meow": "9.0.0",
     "mkdirp": "1.0.4",
     "rimraf": "3.0.2"
+  },
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config/nostrict"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "bin": {
+    "build-locales": "./bin/build-locales.js"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  },
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/build-locales",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [],
+  "////": "/////////========================/////////========================/////////========================/////////",
+  "private": false,
+  "scripts": {
+    "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
+    "prepack": "        lsk run prepack",
+    "release": "        lsk run release"
+  },
+  "prettier": "@lskjs/eslint-config/prettier",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config/nostrict"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
   }
 }

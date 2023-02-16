@@ -7,9 +7,9 @@ export default class YandexCheckoutBillingApi extends Api {
   getRoutes() {
     return {
       ...super.getRoutes(),
-      '/create': ::this.create,
-      '/callback': ::this.callback,
-      '/check': ::this.check,
+      '/create': this.create.bind(this),
+      '/callback': this.callback.bind(this),
+      '/check': this.check.bind(this),
     };
   }
   url(...args) {

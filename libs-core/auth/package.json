@@ -2,39 +2,17 @@
   "name": "@lskjs/auth",
   "version": "2.85.1",
   "description": "LSK.js – auth – module for authorization by login and password and singup through social networks",
-  "keywords": [
-    "auth",
-    "oAuth",
-    "passport",
-    "facebook",
-    "telegram",
-    "vk",
-    "vkontakte"
-  ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
-  "license": "MIT",
-  "author": "Igor Suvorov <hi@isuvorov.com>",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "contributors": [
     "Andrey Kondalov <andrey@kondalov.com> (https://github.com/yukioru)"
   ],
+  "private": false,
   "scripts": {
-    "bootstrap": "lsk run bootstrap",
-    "build": "lsk run build",
-    "dev": "lsk run dev",
-    "dev:server": "lsk run dev:server",
-    "i18": "lsk run i18",
-    "prepublishOnly": "lsk run prepublishOnly",
-    "release": "lsk run release",
-    "release:yes": "lsk run release:yes",
-    "start": "node index.js",
-    "storybook": "lsk run storybook",
-    "test": "lsk run test",
-    "test:watch": "lsk run test:watch",
-    "watch": "lsk run watch"
+    "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
+    "prepack": "        lsk run prepack",
+    "release": "        lsk run release"
   },
   "dependencies": {
     "@lskjs/env": "2.85.1",
@@ -72,6 +50,45 @@
     "lodash": "4.17.x",
     "mobx": "<6"
   },
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config/nostrict"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  },
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "auth",
+    "oAuth",
+    "passport",
+    "facebook",
+    "telegram",
+    "vk",
+    "vkontakte"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////",
   "optionalDeps": {
     "node-accountkit": "*",
     "passport-facebook": "*",
@@ -79,4 +96,38 @@
     "passport-vkontakte": "*",
     "passport-youtube-v3": "*"
   }
+  
+  
+  ,
+  "private": false,
+  "scripts": {
+    "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
+    "prepack": "        lsk run prepack",
+    "release": "        lsk run release"
+  },
+  "prettier": "@lskjs/eslint-config/prettier",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config/nostrict"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  }
+
+
 }

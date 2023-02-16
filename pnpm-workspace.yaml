@@ -1,5 +1,7 @@
 packages:
-  - "cli/*"
   - "libs/*"
+  - "libs-cli/*"
+  - "libs-core/*"
   - "libs-presets/*"
-  # - "packages/*"
+  # - "libs-bots/*"
+  # - "libs-legacy/*"

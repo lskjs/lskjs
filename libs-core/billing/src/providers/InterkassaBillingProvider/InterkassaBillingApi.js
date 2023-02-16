@@ -5,9 +5,9 @@ import set from 'lodash/set';
 export default class InterkassaBillingApi extends Api {
   getRoutes() {
     return {
-      '/index': ::this.index,
-      '/create': ::this.create,
-      '/check': ::this.check,
+      '/index': this.index.bind(this),
+      '/create': this.create.bind(this),
+      '/check': this.check.bind(this),
     };
   }
   url(...args) {

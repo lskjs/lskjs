@@ -28,7 +28,7 @@ export async function fetch(...args) {
       : {},
     token: authToken,
   };
-  if (this.debug) this.log.debug('[fetch]', method, url); // eslint-disable-line no-
+  if (this.debug) this.log.debug('[fetch]', method, url); 
   // const serverApp = this.app;
   const serverApp = this.app.app;
   // if (serverApp.name !== 'ReactAppServer') throw

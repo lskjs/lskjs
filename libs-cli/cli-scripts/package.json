@@ -35,12 +35,6 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
-  "size-limit": [
-    {
-      "path": ".//index.js",
-      "limit": "1kb"
-    }
-  ],
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//cli/cli-scripts",
   "homepage": "https://github.com/lskjs/cli",

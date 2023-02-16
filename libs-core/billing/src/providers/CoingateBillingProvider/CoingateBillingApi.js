@@ -5,8 +5,8 @@ export default class CoingateBillingApi extends Api {
   getRoutes() {
     return {
       ...super.getRoutes(),
-      '/create': ::this.create,
-      '/callback': ::this.callback,
+      '/create': this.create.bind(this),
+      '/callback': this.callback.bind(this),
     };
   }
   url(...args) {
