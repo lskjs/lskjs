@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0-alpha.1](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.0...v3.1.0-alpha.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* **upload:** detect MIME type from buffer ([6dce6ca](https://github.com/lskjs/lskjs/commit/6dce6caa92f7fb2dc0f0e00fa7b4f545fc29de1b))
+
+
+
+
+
 # [3.1.0-alpha.0](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.37...v3.1.0-alpha.0) (2023-02-16)
 
 
