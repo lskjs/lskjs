@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0-alpha.0](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.37...v3.1.0-alpha.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* **algos:** fix bug ([7e5f3ea](https://github.com/lskjs/lskjs/commit/7e5f3eae43045ea7664120dc66e431475c612050))
+* **algos:** fix bug ([0159f11](https://github.com/lskjs/lskjs/commit/0159f1191cb4af28df6d226721f1753ed36ecffb))
+* **algos:** fix bug ([e402bc1](https://github.com/lskjs/lskjs/commit/e402bc1fd9789a7481a0d0167b87fe6ded44b5f9))
+* **cli-scripts:** build gitlab ci ([6c6cfbf](https://github.com/lskjs/lskjs/commit/6c6cfbfbfe022f20778f0dc076ff6a19d9701e36))
+* **getspreadsheet:** fix tests and bugs ([701fa3e](https://github.com/lskjs/lskjs/commit/701fa3e3d1400343200e03091198e9d547a8d39c))
+* **getspreadsheet:** set filter priority ([c5f48df](https://github.com/lskjs/lskjs/commit/c5f48dfb6cc64c33713e9daa7e5e72d722d016b0))
+
+
+### Features
+
+* **algos:** add uniq and uniqBy ([9d77839](https://github.com/lskjs/lskjs/commit/9d77839aa981f279b912070b2330386bd8d353fb))
+* **getspreadhsheet:** improve api, improve cli ([3d4b0af](https://github.com/lskjs/lskjs/commit/3d4b0afbde0cf1d9e563ce79c244cf33478caa06))
+* **getspreadhsheet:** improve api, improve cli ([28355c8](https://github.com/lskjs/lskjs/commit/28355c80e87bd798f77fc06fa9db60b75243a178))
+* **getspreadsheet:** improve api formats and stdout ([d1acd70](https://github.com/lskjs/lskjs/commit/d1acd70015d74644c93e14d62e3749f4ed63b523))
+* **rabbit-cli:** migrate rabbit-cli ([1df3ba8](https://github.com/lskjs/lskjs/commit/1df3ba84aee21f757c41f84aee1181102603bf7b))
+
+
+
+
+
 # [3.0.0-alpha.37](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.36...v3.0.0-alpha.37) (2023-01-22)
 
 

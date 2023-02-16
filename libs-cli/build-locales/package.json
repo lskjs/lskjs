@@ -1,24 +1,15 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "2.85.1",
+  "version": "3.1.0-alpha.0",
   "description": "CLI for build i18 locales from Google spreadsheet",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
-    "start": "node index.js",
-    "dev": "lsk run dev",
-    "build": "lsk run build",
-    "test": "lsk run test",
+    "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
-    "release": "lsk run release",
-    "bootstrap": "lsk run bootstrap",
-    "dev:server": "lsk run dev:server",
-    "i18": "lsk run i18",
-    "prepublishOnly": "lsk run prepublishOnly",
-    "release:yes": "lsk run release:yes",
-    "storybook": "lsk run storybook",
-    "test:watch": "lsk run test:watch",
-    "watch": "lsk run watch"
+    "release": "        lsk run release"
   },
   "dependencies": {
     "@lskjs/getspreadsheet": "2.85.1",
@@ -65,34 +56,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "keywords": [],
-  "////": "/////////========================/////////========================/////////========================/////////",
-  "private": false,
-  "scripts": {
-    "dev": "            lsk run dev",
-    "build": "          lsk run build",
-    "test": "           lsk run test",
-    "prepack": "        lsk run prepack",
-    "release": "        lsk run release"
-  },
-  "prettier": "@lskjs/eslint-config/prettier",
-  "eslintConfig": {
-    "extends": "@lskjs/eslint-config/nostrict"
-  },
-  "jest": {
-    "preset": "@lskjs/jest-config"
-  },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.mjs",
-      "types": "./lib/index.d.ts",
-      "default": "./lib/index.js"
-    },
-    "./*": {
-      "import": "./lib/*.mjs",
-      "types": "./lib/*.d.ts",
-      "default": "./lib/*.js"
-    }
-  }
+  "////": "/////////========================/////////========================/////////========================/////////"
 }

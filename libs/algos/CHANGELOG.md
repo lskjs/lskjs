@@ -1,13 +1,26 @@
 # Change Log
 
-## 3.0.0-alpha.37
-
-### Major Changes
-
-- fix bug
-
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.1.0-alpha.0](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.37...v3.1.0-alpha.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* **algos:** fix bug ([7e5f3ea](https://github.com/lskjs/lskjs/commit/7e5f3eae43045ea7664120dc66e431475c612050))
+* **algos:** fix bug ([0159f11](https://github.com/lskjs/lskjs/commit/0159f1191cb4af28df6d226721f1753ed36ecffb))
+* **algos:** fix bug ([e402bc1](https://github.com/lskjs/lskjs/commit/e402bc1fd9789a7481a0d0167b87fe6ded44b5f9))
+
+
+### Features
+
+* **algos:** add uniq and uniqBy ([9d77839](https://github.com/lskjs/lskjs/commit/9d77839aa981f279b912070b2330386bd8d353fb))
+* **getspreadhsheet:** improve api, improve cli ([28355c8](https://github.com/lskjs/lskjs/commit/28355c80e87bd798f77fc06fa9db60b75243a178))
+
+
+
+
 
 # [3.0.0-alpha.36](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.35...v3.0.0-alpha.36) (2023-01-22)
 

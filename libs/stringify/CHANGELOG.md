@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0-alpha.0](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.37...v3.1.0-alpha.0) (2023-02-16)
+
+
+### Features
+
+* **getspreadhsheet:** improve api, improve cli ([3d4b0af](https://github.com/lskjs/lskjs/commit/3d4b0afbde0cf1d9e563ce79c244cf33478caa06))
+* **getspreadhsheet:** improve api, improve cli ([28355c8](https://github.com/lskjs/lskjs/commit/28355c80e87bd798f77fc06fa9db60b75243a178))
+
+
+
+
+
 # [3.0.0-alpha.36](https://github.com/lskjs/lskjs/compare/v3.0.0-alpha.35...v3.0.0-alpha.36) (2023-01-22)
 
 **Note:** Version bump only for package @lskjs/stringify

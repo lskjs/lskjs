@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/lodash",
-  "version": "3.0.0-alpha.30",
+  "version": "3.1.0-alpha.0",
   "description": "LSK.js – utils – helpers and functions",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -20,7 +20,7 @@
       "consistent-return": "off",
       "default-case": "off",
       "eqeqeq": "off",
-      "guard-for-in": "off", 
+      "guard-for-in": "off",
       "new-cap": "off",
       "no-bitwise": "off",
       "no-cond-assign": "off",
