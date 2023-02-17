@@ -27,12 +27,12 @@ importers:
     dependencies:
       '@babel/cli': 7.20.7_@babel+core@7.20.12
       '@babel/core': 7.20.12
-      '@lskjs/babel-preset': 3.0.0-alpha.36_@babel+core@7.20.12
+      '@lskjs/babel-preset': link:libs-presets/babel-preset
       '@lskjs/cli-scripts': 3.0.0-alpha.41
       '@lskjs/cli-utils': 3.0.0-alpha.39
-      '@lskjs/eslint-config': 3.0.0-alpha.37
-      '@lskjs/jest-config': 3.0.0-alpha.38_et4urcgrfo4ucslgiv7o7ra66y
-      '@lskjs/tsconfig': 3.0.0-alpha.34
+      '@lskjs/eslint-config': link:libs-presets/eslint-config
+      '@lskjs/jest-config': link:libs-presets/jest-config
+      '@lskjs/tsconfig': link:libs-presets/tsconifg
       '@size-limit/preset-small-lib': 8.2.4_size-limit@8.2.4
       '@swc/core': 1.3.35
       '@types/jest': 29.4.0
@@ -72,21 +72,21 @@ importers:
 
   libs-cli/cli-scripts:
     specifiers:
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/cli-utils': ^3.1.0-alpha.0
-      '@lskjs/env': ^3.0.0-alpha.30
-      '@lskjs/err': ^3.1.0-alpha.0
-      '@lskjs/stringify': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/cli-utils': ^3.1.1
+      '@lskjs/env': ^3.1.1
+      '@lskjs/err': ^3.1.1
+      '@lskjs/stringify': ^3.1.1
       all-contributors-cli: ^6.20.0
       fishbird: ^0.20.0
       remark-template: 1.6.0
       sort-package-json: 1.57.0
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/cli-utils': 3.1.0-alpha.0
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/stringify': 3.1.0-alpha.0
+      '@lskjs/algos': link:../../libs/algos
+      '@lskjs/cli-utils': link:../cli-utils
+      '@lskjs/env': link:../../libs/env
+      '@lskjs/err': link:../../libs/err
+      '@lskjs/stringify': link:../../libs/stringify
       all-contributors-cli: 6.24.0
       fishbird: 0.20.0
       remark-template: 1.6.0
@@ -95,12 +95,12 @@ importers:
   libs-cli/cli-utils:
     specifiers:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/colors': ^3.0.0-alpha.30
-      '@lskjs/env': ^3.0.0-alpha.30
-      '@lskjs/err': ^3.1.0-alpha.0
-      '@lskjs/log': ^3.1.0-alpha.0
-      '@lskjs/utils': 2.87.1
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/colors': ^3.1.1
+      '@lskjs/env': ^3.1.1
+      '@lskjs/err': ^3.1.1
+      '@lskjs/log': ^3.1.1
+      '@lskjs/utils': ^3.1.1
       axios: 0.27.2
       bluebird: 3.7.2
       glob: 7.2.0
@@ -111,12 +111,12 @@ importers:
       yargs: ^17.6.2
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/log': 3.1.0-alpha.0
-      '@lskjs/utils': 2.87.1
+      '@lskjs/algos': link:../../libs/algos
+      '@lskjs/colors': link:../../libs/colors
+      '@lskjs/env': link:../../libs/env
+      '@lskjs/err': link:../../libs/err
+      '@lskjs/log': link:../../libs/log
+      '@lskjs/utils': link:../../libs-core/utils
       axios: 0.27.2
       bluebird: 3.7.2
       glob: 7.2.0
@@ -154,11 +154,11 @@ importers:
 
   libs-cli/getspreadsheet:
     specifiers:
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/cli-utils': ^3.1.0-alpha.0
-      '@lskjs/err': ^3.1.0-alpha.0
-      '@lskjs/log': ^3.1.0-alpha.0
-      '@lskjs/stringify': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/cli-utils': ^3.1.1
+      '@lskjs/err': ^3.1.1
+      '@lskjs/log': ^3.1.1
+      '@lskjs/stringify': ^3.1.1
       axios: 0.21.2
       commander: 10.0.0
       csv-parse: 4.9.0
@@ -167,11 +167,11 @@ importers:
       googleapis: 110.0.0
       yargs: ^17.6.2
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/cli-utils': 3.1.0-alpha.0
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/log': 3.1.0-alpha.0
-      '@lskjs/stringify': 3.1.0-alpha.0
+      '@lskjs/algos': link:../../libs/algos
+      '@lskjs/cli-utils': link:../cli-utils
+      '@lskjs/err': link:../../libs/err
+      '@lskjs/log': link:../../libs/log
+      '@lskjs/stringify': link:../../libs/stringify
       axios: 0.21.2
       commander: 10.0.0
       csv-parse: 4.9.0
@@ -183,14 +183,14 @@ importers:
   libs-cli/lsk:
     specifiers:
       '@babel/runtime': 7.20.13
-      '@lskjs/algos': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
       '@lskjs/cli': ^3.0.0-alpha.7
-      '@lskjs/cli-scripts': ^3.1.0-alpha.0
-      '@lskjs/cli-utils': ^3.1.0-alpha.0
-      '@lskjs/colors': ^3.0.0-alpha.30
-      '@lskjs/env': ^3.0.0-alpha.30
-      '@lskjs/err': ^3.1.0-alpha.0
-      '@lskjs/log': ^3.1.0-alpha.0
+      '@lskjs/cli-scripts': ^3.2.0
+      '@lskjs/cli-utils': ^3.1.1
+      '@lskjs/colors': ^3.1.1
+      '@lskjs/env': ^3.1.1
+      '@lskjs/err': ^3.1.1
+      '@lskjs/log': ^3.1.1
       '@oclif/command': 1.8.22
       '@oclif/config': 1.18.8
       '@oclif/dev-cli': 1.26.10
@@ -205,14 +205,14 @@ importers:
       typescript: 4.9.5
     dependencies:
       '@babel/runtime': 7.20.13
-      '@lskjs/algos': 3.1.0-alpha.0
+      '@lskjs/algos': link:../../libs/algos
       '@lskjs/cli': 3.0.0-alpha.7
-      '@lskjs/cli-scripts': 3.1.0-alpha.0
-      '@lskjs/cli-utils': 3.1.0-alpha.0
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/log': 3.1.0-alpha.0
+      '@lskjs/cli-scripts': link:../cli-scripts
+      '@lskjs/cli-utils': link:../cli-utils
+      '@lskjs/colors': link:../../libs/colors
+      '@lskjs/env': link:../../libs/env
+      '@lskjs/err': link:../../libs/err
+      '@lskjs/log': link:../../libs/log
       '@oclif/command': 1.8.22_@oclif+config@1.18.8
       '@oclif/config': 1.18.8
       '@oclif/errors': 1.3.6
@@ -271,12 +271,12 @@ importers:
 
   libs-core/auth:
     specifiers:
-      '@lskjs/db': 2.85.1
+      '@lskjs/db': ^3.1.1
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
       '@lskjs/mobx': 2.13.1
       '@lskjs/module': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       axios: 0.21.2
       bcryptjs: 2.4.3
@@ -304,9 +304,9 @@ importers:
       qs: 6.10.1
       validator: 13.6.0
     devDependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/db': link:../db
       '@lskjs/mobx': 2.13.1_x7xmldlsu23nxzxossawdaxcui
-      '@lskjs/server-api': 2.85.1_fytahhrxb4unal2xozjrk26kje
+      '@lskjs/server-api': link:../server-api
       axios: 0.21.2
       bluebird: 3.7.2
       js-cookie: 3.0.0
@@ -320,10 +320,10 @@ importers:
 
   libs-core/billing:
     specifiers:
-      '@lskjs/db': 2.85.1
+      '@lskjs/db': ^3.1.1
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       axios: 0.21.2
       bluebird: 3.7.2
@@ -335,8 +335,8 @@ importers:
       '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
       '@lskjs/utils': 2.72.0
     devDependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/server-api': 2.85.1_fytahhrxb4unal2xozjrk26kje
+      '@lskjs/db': link:../db
+      '@lskjs/server-api': link:../server-api
       axios: 0.21.2
       bluebird: 3.7.2
       crypto-js: 4.1.1
@@ -431,10 +431,10 @@ importers:
     specifiers:
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
-      '@lskjs/mobx': 2.85.1
+      '@lskjs/mobx': ^3.1.1
       '@lskjs/module': 2.85.1
       '@lskjs/mutex': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       async-mutex: 0.2.6
       bluebird: 3.7.2
@@ -443,13 +443,13 @@ importers:
     dependencies:
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
-      '@lskjs/mobx': 2.85.1_3pdwp76x4gpoznkblrtbtgluzy
+      '@lskjs/mobx': link:../mobx
       '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
       '@lskjs/mutex': 2.85.1
       '@lskjs/utils': 2.72.0
       async-mutex: 0.2.6
     devDependencies:
-      '@lskjs/server-api': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/server-api': link:../server-api
       bluebird: 3.7.2
       lodash: 4.17.21
       mobx: 5.15.4
@@ -494,11 +494,11 @@ importers:
 
   libs-core/mailer:
     specifiers:
-      '@lskjs/db': 2.85.1
+      '@lskjs/db': ^3.1.1
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       bluebird: 3.7.2
       eventemitter3: 4.0.7
@@ -520,8 +520,8 @@ importers:
       nodemailer: 6.6.3
       nodemailer-juice: 1.0.1
     devDependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/server-api': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/db': link:../db
+      '@lskjs/server-api': link:../server-api
       bluebird: 3.7.2
       lodash: 4.17.21
 
@@ -550,11 +550,11 @@ importers:
 
   libs-core/permit:
     specifiers:
-      '@lskjs/db': 2.85.1
+      '@lskjs/db': ^3.1.1
       '@lskjs/err': 2.85.1
       '@lskjs/mobx': 2.13.1
       '@lskjs/module': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       bluebird: 3.7.2
       lodash: 4.17.21
       mobx: 5.15.4
@@ -564,9 +564,9 @@ importers:
       '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
       nanoid: 3.1.25
     devDependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/db': link:../db
       '@lskjs/mobx': 2.13.1_3pdwp76x4gpoznkblrtbtgluzy
-      '@lskjs/server-api': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/server-api': link:../server-api
       bluebird: 3.7.2
       lodash: 4.17.21
       mobx: 5.15.4
@@ -577,7 +577,7 @@ importers:
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1
       '@lskjs/mutex': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       async-mutex: 0.2.6
       axios: 0.21.2
@@ -599,7 +599,7 @@ importers:
       prom-client: 14.0.0
       socks-proxy-agent: 5.0.0
     devDependencies:
-      '@lskjs/server-api': 2.85.1_fytahhrxb4unal2xozjrk26kje
+      '@lskjs/server-api': link:../server-api
       axios: 0.21.2
       bluebird: 3.7.2
       lodash: 4.17.21
@@ -608,7 +608,7 @@ importers:
     specifiers:
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1
-      '@lskjs/stats': 2.85.1
+      '@lskjs/stats': ^3.1.1
       '@lskjs/utils': 2.72.0
       amqplib: 0.6.0
       axios: 0.21.2
@@ -618,7 +618,7 @@ importers:
     dependencies:
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/stats': 2.85.1_bluebird@3.7.2
+      '@lskjs/stats': link:../stats
       '@lskjs/utils': 2.72.0
       amqplib: 0.6.0
       object-hash: 2.1.1
@@ -673,7 +673,7 @@ importers:
       '@lskjs/err': 2.85.1
       '@lskjs/log': 2.85.1
       '@lskjs/module': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       '@types/lodash': 4.14.178
       axios: 0.x
@@ -684,7 +684,7 @@ importers:
       '@lskjs/err': 2.85.1
       '@lskjs/log': 2.85.1
       '@lskjs/module': 2.85.1_txzl6fzvvm7y2cr2ok73d3kk2y
-      '@lskjs/server-api': 2.85.1_sljyrbz3dejhp377twfliib5ve
+      '@lskjs/server-api': link:../server-api
       '@lskjs/utils': 2.72.0
       axios: 0.27.2
       lodash: 4.17.21
@@ -729,10 +729,10 @@ importers:
 
   libs-core/server:
     specifiers:
-      '@lskjs/db': 2.85.1
+      '@lskjs/db': ^3.1.1
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
-      '@lskjs/i18': 2.85.1
+      '@lskjs/i18': ^3.1.1
       '@lskjs/module': 2.85.1
       '@lskjs/utils': 2.72.0
       '@lskjs/webserver': 2.76.3
@@ -746,9 +746,9 @@ importers:
       '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
       '@lskjs/utils': 2.72.0
     devDependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/i18': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/webserver': 2.76.3_tsklyv3d3nyypzlla3u2pzlyjm
+      '@lskjs/db': link:../db
+      '@lskjs/i18': link:../i18
+      '@lskjs/webserver': 2.76.3_gzia6gbhfd2uxv3y5u5e32bhb4
       axios: 0.21.2
       bluebird: 3.7.2
       lodash: 4.17.21
@@ -815,7 +815,7 @@ importers:
     specifiers:
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
-      '@lskjs/i18': 2.85.1
+      '@lskjs/i18': ^3.1.1
       '@lskjs/link': 1.1.10
       '@lskjs/module': 2.85.1
       '@lskjs/scroll': 1.1.0
@@ -853,7 +853,7 @@ importers:
       react-fastclick: 3.0.2_react@16.8.6
       universal-router: 9.0.1
     devDependencies:
-      '@lskjs/i18': 2.85.1_z77jsvsnwca35qaltpsf5625vy
+      '@lskjs/i18': link:../i18
       '@lskjs/link': 1.1.10_caapo2rqwcqbkdkobyxnv5k4fa
       '@lskjs/scroll': 1.1.0_yrrplmlrmrkxrtqaq6j3zqjege
       axios: 0.21.2
@@ -868,7 +868,7 @@ importers:
     specifiers:
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1
-      '@lskjs/server-api': 2.85.1
+      '@lskjs/server-api': ^3.1.1
       '@lskjs/utils': 2.72.0
       aws-sdk: 2.827.0
       bluebird: 3.7.2
@@ -885,7 +885,7 @@ importers:
       multer: 1.4.2
       multer-s3: 2.9.0
     devDependencies:
-      '@lskjs/server-api': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/server-api': link:../server-api
       bluebird: 3.7.2
       lodash: 4.17.21
 
@@ -915,10 +915,10 @@ importers:
 
   libs-core/webserver:
     specifiers:
-      '@lskjs/db': 2.85.1
+      '@lskjs/db': ^3.1.1
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
-      '@lskjs/i18': 2.85.1
+      '@lskjs/i18': ^3.1.1
       '@lskjs/log': 2.85.1
       '@lskjs/module': 2.85.1
       '@lskjs/utils': 2.72.0
@@ -965,8 +965,8 @@ importers:
       socket.io-as-promised: 1.0.0
       socket.io-redis: 6.1.1
     devDependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/i18': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/db': link:../db
+      '@lskjs/i18': link:../i18
       axios: 0.21.2
       bluebird: 3.7.2
       lodash: 4.17.21
@@ -976,11 +976,11 @@ importers:
     specifiers:
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
-      '@lskjs/kafka': 2.85.1
+      '@lskjs/kafka': ^3.1.1
       '@lskjs/module': 2.85.1
-      '@lskjs/proxy': 2.87.0
-      '@lskjs/rabbit': 2.85.1
-      '@lskjs/stats': 2.85.1
+      '@lskjs/proxy': ^3.1.1
+      '@lskjs/rabbit': ^3.1.1
+      '@lskjs/stats': ^3.1.1
       '@lskjs/utils': 2.72.0
       bluebird: 3.7.2
       lodash: 4.17.21
@@ -988,12 +988,12 @@ importers:
       '@lskjs/env': 2.85.1
       '@lskjs/err': 2.85.1
       '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/proxy': 2.87.0_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/stats': 2.85.1_bluebird@3.7.2
+      '@lskjs/proxy': link:../proxy
+      '@lskjs/stats': link:../stats
       '@lskjs/utils': 2.72.0
     devDependencies:
-      '@lskjs/kafka': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/rabbit': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/kafka': link:../kafka
+      '@lskjs/rabbit': link:../rabbit
       bluebird: 3.7.2
       lodash: 4.17.21
 
@@ -1094,34 +1094,34 @@ importers:
 
   libs/colors:
     specifiers:
-      '@lskjs/env': ^3.0.0-alpha.30
+      '@lskjs/env': ^3.1.1
     dependencies:
-      '@lskjs/env': 3.0.0-alpha.30
+      '@lskjs/env': link:../env
 
   libs/env:
     specifiers:
-      '@lskjs/tty': ^3.0.0-alpha.30
+      '@lskjs/tty': ^3.1.1
     dependencies:
-      '@lskjs/tty': 3.0.0-alpha.30
+      '@lskjs/tty': link:../tty
 
   libs/err:
     specifiers:
-      '@lskjs/algos': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
+      '@lskjs/algos': link:../algos
 
   libs/lang:
     specifiers:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/module': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/module': ^3.1.1
       cld: 2.8.4
       fishbird: ^0.20.0
       languagedetect: 2.0.0
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/module': 3.1.0-alpha.0
+      '@lskjs/algos': link:../algos
+      '@lskjs/module': link:../module
       cld: 2.8.4
       fishbird: 0.20.0
       languagedetect: 2.0.0
@@ -1131,10 +1131,10 @@ importers:
 
   libs/log:
     specifiers:
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/colors': ^3.0.0-alpha.30
-      '@lskjs/env': ^3.0.0-alpha.30
-      '@lskjs/err': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/colors': ^3.1.1
+      '@lskjs/env': ^3.1.1
+      '@lskjs/err': ^3.1.1
       '@types/pretty-time': 1.1.2
       '@types/split': 1.0.2
       '@types/through': 0.0.30
@@ -1146,10 +1146,10 @@ importers:
       split: 1.0.1
       through: 2.3.8
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
+      '@lskjs/algos': link:../algos
+      '@lskjs/colors': link:../colors
+      '@lskjs/env': link:../env
+      '@lskjs/err': link:../err
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
@@ -1165,21 +1165,21 @@ importers:
 
   libs/module:
     specifiers:
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/env': ^3.0.0-alpha.30
-      '@lskjs/err': ^3.1.0-alpha.0
-      '@lskjs/log': ^3.1.0-alpha.0
-      '@lskjs/mutex': ^3.0.0-alpha.30
-      '@lskjs/utils2': ^3.0.0-alpha.33
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/env': ^3.1.1
+      '@lskjs/err': ^3.1.1
+      '@lskjs/log': ^3.1.1
+      '@lskjs/mutex': ^3.1.1
+      '@lskjs/utils2': ^3.1.1
       events: ^3.3.0
       fishbird: ^0.20.0
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/log': 3.1.0-alpha.0
-      '@lskjs/mutex': 3.0.0-alpha.30
-      '@lskjs/utils2': 3.0.0-alpha.33
+      '@lskjs/algos': link:../algos
+      '@lskjs/env': link:../env
+      '@lskjs/err': link:../err
+      '@lskjs/log': link:../log
+      '@lskjs/mutex': link:../mutex
+      '@lskjs/utils2': link:../utils2
       events: 3.3.0
       fishbird: 0.20.0
 
@@ -1191,14 +1191,14 @@ importers:
 
   libs/stringify:
     specifiers:
-      '@lskjs/algos': ^3.1.0-alpha.0
-      '@lskjs/err': ^3.1.0-alpha.0
+      '@lskjs/algos': ^3.1.1
+      '@lskjs/err': ^3.1.1
       '@types/js-yaml': ^4.0.5
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/err': 3.1.0-alpha.0
+      '@lskjs/algos': link:../algos
+      '@lskjs/err': link:../err
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
     devDependencies:
@@ -3352,62 +3352,18 @@ packages:
     resolution: {integrity: sha512-h0fYWGzwiW95p9cwRAgtJwuaIEqaeK5SKUjUP6eOvPwYfFLbLd2Sv1LQ4U0iAX0v8s9TfkkZid8NGKp9YF1odw==}
     dev: false
 
-  /@lskjs/algos/3.1.0-alpha.0:
-    resolution: {integrity: sha512-kWtJTWX+CKKuOQebnyj56Q0UdnalKYNTXAWrQoMSnbogLY6s8eEwkQ/0TdB807KSI2dWdog3LRHVOlWp8UlPtg==}
-    dev: false
-
-  /@lskjs/babel-preset/3.0.0-alpha.36_@babel+core@7.20.12:
-    resolution: {integrity: sha512-ZQ8PThqCJtMXaEOzakXVHYJ9yHXPUBdymFDkmm1pLem9iH6mD4zFlK/8568eASKlKot614poEEx/Qwa8mgVE5A==}
-    peerDependencies:
-      '@babel/core': 7.x
-      '@babel/runtime': 7.x
-    dependencies:
-      '@babel/core': 7.20.12
-      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.20.12
-      '@babel/plugin-proposal-decorators': 7.20.7_@babel+core@7.20.12
-      '@babel/plugin-proposal-export-namespace-from': 7.18.9_@babel+core@7.20.12
-      '@babel/plugin-proposal-function-bind': 7.18.9_@babel+core@7.20.12
-      '@babel/plugin-proposal-optional-chaining': 7.20.7_@babel+core@7.20.12
-      '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.20.12
-      '@babel/plugin-proposal-private-property-in-object': 7.20.5_@babel+core@7.20.12
-      '@babel/plugin-syntax-dynamic-import': 7.8.3_@babel+core@7.20.12
-      '@babel/plugin-transform-modules-commonjs': 7.20.11_@babel+core@7.20.12
-      '@babel/plugin-transform-runtime': 7.19.6_@babel+core@7.20.12
-      '@babel/polyfill': 7.12.1
-      '@babel/preset-env': 7.20.2_@babel+core@7.20.12
-      '@babel/preset-react': 7.18.6_@babel+core@7.20.12
-      '@babel/preset-typescript': 7.18.6_@babel+core@7.20.12
-      '@emotion/babel-plugin': 11.10.5_@babel+core@7.20.12
-    transitivePeerDependencies:
-      - supports-color
+  /@lskjs/algos/3.1.1:
+    resolution: {integrity: sha512-0fdwwGp0qFDp5N/L5DoOqoh3+M0fCo4PtQffQcXtYOVQBjZ4OY7mb0xJYLHaWhmRH/cPtILrBMOr9qWTTIUNbQ==}
     dev: false
 
   /@lskjs/cli-scripts/3.0.0-alpha.41:
     resolution: {integrity: sha512-Nbns26q4l/R/gfoZjxOME2y+iTueeON4pXMFQwKIdQUhzxzmWF/9uq5cLwOrJm2RbRFtOLX2sFsWT7qordDg0g==}
     dependencies:
-      '@lskjs/algos': 3.0.0-alpha.38
-      '@lskjs/cli-utils': 3.0.0-alpha.39
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.0.0-alpha.36
-      '@lskjs/stringify': 3.0.0-alpha.39
-      all-contributors-cli: 6.24.0
-      fishbird: 0.20.0
-      remark-template: 1.6.0
-      sort-package-json: 1.57.0
-    transitivePeerDependencies:
-      - debug
-      - encoding
-      - supports-color
-    dev: false
-
-  /@lskjs/cli-scripts/3.1.0-alpha.0:
-    resolution: {integrity: sha512-3O5FEQJ443hHueOmfAgq6HUqMHbg41psyQkwt6m36iGbwcKUzOK4o+z4ALsEzvGv+94AmgNWkcgeFIzS7aEJTA==}
-    dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/cli-utils': 3.1.0-alpha.0
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/stringify': 3.1.0-alpha.0
+      '@lskjs/algos': 3.1.1
+      '@lskjs/cli-utils': 3.1.1
+      '@lskjs/env': 3.1.1
+      '@lskjs/err': 3.1.1
+      '@lskjs/stringify': 3.1.1
       all-contributors-cli: 6.24.0
       fishbird: 0.20.0
       remark-template: 1.6.0
@@ -3423,11 +3379,11 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.0.0-alpha.38
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.0.0-alpha.36
-      '@lskjs/log': 3.0.0-alpha.36
+      '@lskjs/algos': 3.1.1
+      '@lskjs/colors': 3.1.1
+      '@lskjs/env': 3.1.1
+      '@lskjs/err': 3.1.1
+      '@lskjs/log': 3.1.1
       '@lskjs/utils': 2.87.1
       axios: 0.27.2
       bluebird: 3.7.2
@@ -3441,17 +3397,17 @@ packages:
       - debug
     dev: false
 
-  /@lskjs/cli-utils/3.1.0-alpha.0:
-    resolution: {integrity: sha512-CWXEndI2Z39Zg41hQa50jLonsXObqMoUmTRdyvZFtW0sNKW9F5EsH7oZB1x7otbuKicAjksVy+maN9mO8Z98wQ==}
+  /@lskjs/cli-utils/3.1.1:
+    resolution: {integrity: sha512-pxfJpEq/3g0twU33HnhGD+PX8yMKnM1ACIL1FGfrD4yyF8gFx/TDLZieSgLVck55EBG0JJikOMOr4gpy0DCIIA==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/log': 3.1.0-alpha.0
-      '@lskjs/utils': 2.87.1
+      '@lskjs/algos': 3.1.1
+      '@lskjs/colors': 3.1.1
+      '@lskjs/env': 3.1.1
+      '@lskjs/err': 3.1.1
+      '@lskjs/log': 3.1.1
+      '@lskjs/utils': 3.1.1
       axios: 0.27.2
       bluebird: 3.7.2
       glob: 7.2.0
@@ -3470,7 +3426,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.3
       '@lskjs/cli-scripts': 3.0.0-alpha.41
-      '@lskjs/cli-utils': 3.0.0-alpha.39
+      '@lskjs/cli-utils': 3.1.1
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16_@oclif+config@1.18.3
@@ -3497,7 +3453,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.3
       '@lskjs/cli-scripts': 3.0.0-alpha.41
-      '@lskjs/cli-utils': 3.0.0-alpha.39
+      '@lskjs/cli-utils': 3.1.1
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16_@oclif+config@1.18.3
@@ -3518,34 +3474,11 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/colors/3.0.0-alpha.30:
-    resolution: {integrity: sha512-w+k2YqDt7s8VRtYHPayWy3zHMYkphlqdzmMaYhZYDcC7z0bGxLaNq3U0fuQEXwAgvSkNw56ib4tEQYBqgdwv4A==}
+  /@lskjs/colors/3.1.1:
+    resolution: {integrity: sha512-dqfk3I+Xa2aWM/EknqpE/dLKCAS035SUINlbtqX1B72c8IGsXFTU8eaEViy9kY3nnqi+bbn32aj+r0wa9hXNLw==}
     dependencies:
-      '@lskjs/env': 3.0.0-alpha.30
+      '@lskjs/env': 3.1.1
     dev: false
-
-  /@lskjs/db/2.85.1_34rvfb7keq5h25gsjgxgw3liam:
-    resolution: {integrity: sha512-91wJTnStVF1UMQunWy6Eq2FF+rgtqfCn5bXHbmMPROuOBjoEufFi5trEAU6ZAUGW50NNH4NorTMp2LWTnUMmMQ==}
-    peerDependencies:
-      '@types/mongoose': 5.11.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/utils': 2.72.0
-      bluebird: 3.7.2
-      lodash: 4.17.21
-      mongoose: 5.13.15
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - aws4
-      - bson-ext
-      - kerberos
-      - mongodb-client-encryption
-      - mongodb-extjson
-      - snappy
-      - supports-color
-    dev: true
 
   /@lskjs/debug-level/0.3.2:
     resolution: {integrity: sha512-VHPhtJ9do45MGE93DxEsPdCgPUQAAAdicgytkzG8UMCXIgq5nIKY7JNzDunqbOw2sH7yaJfzF1sYwfb745zWCQ==}
@@ -3567,10 +3500,10 @@ packages:
   /@lskjs/env/2.85.1:
     resolution: {integrity: sha512-MjwI2T7jkW2AM29lR7M/jOxm1EZOaH404izUOKFgNzxzS+lsyfWI3l/+xW2AtjE1d4RUlTmPhx2RqqQtEym10A==}
 
-  /@lskjs/env/3.0.0-alpha.30:
-    resolution: {integrity: sha512-JGSLrMQnBieRmjudCwgO+7BlXyliZ+Efp0wrHoZmX1Mvi378IOXeY8/Ezg/y/ayk6jY35RrsfSjm1gtLGfgIcA==}
+  /@lskjs/env/3.1.1:
+    resolution: {integrity: sha512-aIwVjmB707PqgwhpfAtK8SGi6Rbble+G6YycLiDx/JIgHkuDE6AfYJdNaH+vgQG+gfh1pJO41QmC7VWcHVxtdQ==}
     dependencies:
-      '@lskjs/tty': 3.0.0-alpha.30
+      '@lskjs/tty': 3.1.1
     dev: false
 
   /@lskjs/err/2.12.0:
@@ -3589,42 +3522,10 @@ packages:
     dependencies:
       lodash: 4.17.21
 
-  /@lskjs/err/3.0.0-alpha.36:
-    resolution: {integrity: sha512-75/Rdcspt+7bULvai7zc60poz54g0IHUXwLIdNRYT5Y9y9Au3hzRJS5oW3Smo+nfP6biccymVoH87EaFsWXPAg==}
+  /@lskjs/err/3.1.1:
+    resolution: {integrity: sha512-ldkg73KfoEGFt8lg/If9/luwcdCtfZLjoiR1h1ZrKEjgmX0QlZTGuMS4lE/Y8UwTCY7OEJUW5sxuy2WjA19zvQ==}
     dependencies:
-      '@lskjs/algos': 3.0.0-alpha.38
-    dev: false
-
-  /@lskjs/err/3.1.0-alpha.0:
-    resolution: {integrity: sha512-WqYjoLbXWCOvW01OxQIYgUToeehUVwA7wgsSXck1zzavYmo3IOPDbjrxps2wAp8v3OXKG2p87aF6JSuNxTVGZw==}
-    dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-    dev: false
-
-  /@lskjs/eslint-config/3.0.0-alpha.37:
-    resolution: {integrity: sha512-+TJ4ya/le8RirsJrj4yYFXlBy1lkctey/nEQBsHRTX23FGohqxdocw3N7Oo+gb7246DkMVy27U+/Yug8+KPxvQ==}
-    dependencies:
-      '@typescript-eslint/eslint-plugin': 5.48.2_azmbqzqvrlvblbdtiwxwvyvjjy
-      '@typescript-eslint/parser': 5.48.2_et5x32uxl7z5ldub3ye5rhlyqm
-      eslint: 8.32.0
-      eslint-config-airbnb: 19.0.4_td5yecidacttadzxcsbd5t7tli
-      eslint-config-airbnb-base: 15.0.0_ps7hf4l2dvbuxvtusmrfhmzsba
-      eslint-config-prettier: 8.6.0_eslint@8.32.0
-      eslint-import-resolver-typescript: 3.5.3_ps7hf4l2dvbuxvtusmrfhmzsba
-      eslint-plugin-import: 2.27.5_bzolr7xl6xcwr64wsu2tr4eimm
-      eslint-plugin-json: 3.1.0
-      eslint-plugin-json-format: 2.0.1_eslint@8.32.0
-      eslint-plugin-jsx-a11y: 6.7.1_eslint@8.32.0
-      eslint-plugin-prettier: 4.2.1_cn4lalcyadplruoxa5mhp7j3dq
-      eslint-plugin-react: 7.32.1_eslint@8.32.0
-      eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
-      eslint-plugin-simple-import-sort: 9.0.0_eslint@8.32.0
-      prettier: 2.8.3
-    optionalDependencies:
-      typescript: 4.9.5
-    transitivePeerDependencies:
-      - eslint-import-resolver-webpack
-      - supports-color
+      '@lskjs/algos': 3.1.1
     dev: false
 
   /@lskjs/getspreadsheet/2.85.1_34rvfb7keq5h25gsjgxgw3liam:
@@ -3649,79 +3550,6 @@ packages:
       - encoding
       - supports-color
     dev: false
-
-  /@lskjs/i18/2.85.1_34rvfb7keq5h25gsjgxgw3liam:
-    resolution: {integrity: sha512-8PYpVUWqEth/s+0uK/P1vEFYhRj4bJgq+9l5/5RZte6xkz5vvdtk5yDGlkKG1mhPBmiqoCuAo+MYqQOMrJXpfA==}
-    peerDependencies:
-      bluebird: 3.7.x
-      js-cookie: 3.x
-      mobx: 5.x
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      bluebird: 3.7.2
-      i18next: 19.1.0
-      i18next-xhr-backend: 3.2.2
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - lodash
-    dev: true
-
-  /@lskjs/i18/2.85.1_z77jsvsnwca35qaltpsf5625vy:
-    resolution: {integrity: sha512-8PYpVUWqEth/s+0uK/P1vEFYhRj4bJgq+9l5/5RZte6xkz5vvdtk5yDGlkKG1mhPBmiqoCuAo+MYqQOMrJXpfA==}
-    peerDependencies:
-      bluebird: 3.7.x
-      js-cookie: 3.x
-      mobx: 5.x
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      bluebird: 3.7.2
-      i18next: 19.1.0
-      i18next-xhr-backend: 3.2.2
-      js-cookie: 2.2.1
-      mobx: 5.15.4
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - lodash
-    dev: true
-
-  /@lskjs/jest-config/3.0.0-alpha.38_et4urcgrfo4ucslgiv7o7ra66y:
-    resolution: {integrity: sha512-qtP4GmWxNmXWe8RmutVkeKptHqdDvpw4TDHLV+iRIBtCnTmTfUvp5KmOIeJ96E84NfZ+fyAbU8izI4ipk1WwpQ==}
-    dependencies:
-      jest-junit: 15.0.0
-      ts-jest: 29.0.5_cslgewaznsjxirw6ogkiwclmbu
-    optionalDependencies:
-      jest: 29.4.3_@types+node@18.13.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@jest/types'
-      - '@types/node'
-      - babel-jest
-      - esbuild
-      - node-notifier
-      - supports-color
-      - ts-node
-      - typescript
-    dev: false
-
-  /@lskjs/kafka/2.85.1_34rvfb7keq5h25gsjgxgw3liam:
-    resolution: {integrity: sha512-DB7kVe6EdutimspkKseL/bvYCCVEtQSnWpGfYE7QKSVOwsHbwfmrCPGqldaNzbF9ISO0I7yUIg0HmPoRrGOOng==}
-    peerDependencies:
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/utils': 2.72.0
-      bluebird: 3.7.2
-      kafkajs: 2.1.0
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - '@types/lodash'
-    dev: true
 
   /@lskjs/link/1.1.10_caapo2rqwcqbkdkobyxnv5k4fa:
     resolution: {integrity: sha512-Vr3kfV9CWeoTs/am9j2GbRzibbOEzU6DNvyCNKnpMAlWBAbHSa7rC0j25aMkZTuucEa/pfDmymkoemWzUwJ7gA==}
@@ -3783,33 +3611,16 @@ packages:
       through: 2.3.8
     optionalDependencies:
       logfmt: 1.3.2
-
-  /@lskjs/log/3.0.0-alpha.36:
-    resolution: {integrity: sha512-YeybZvySYhxCl4zXsK2MG4mhEjr0bMaiwABGcvaHIkcSmhDBSSLamfcyvvRAWKRzhadDj+WvHZYMjLubS6jtbw==}
-    hasBin: true
-    dependencies:
-      '@lskjs/algos': 3.0.0-alpha.38
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.0.0-alpha.36
-      fast-safe-stringify: 2.1.1
-      pretty-bytes: 5.6.0
-      pretty-time: 1.1.0
-      readline: 1.3.0
-      split: 1.0.1
-      through: 2.3.8
-    optionalDependencies:
-      logfmt: 1.3.2
     dev: false
 
-  /@lskjs/log/3.1.0-alpha.0:
-    resolution: {integrity: sha512-mybKHzSB6p2CykZAjCvWCzV2JEsEDSTJMhCOrZbovw5A872khpL5MmLIfo2SPJ9R1RWpQne002bnVDrgkOT/Sw==}
+  /@lskjs/log/3.1.1:
+    resolution: {integrity: sha512-0J/21hKVKk662f20Mvh8WW/847E1o+5O7Mpu5f0AuEy7kx3y16p2ZKknK4aUykznRzEGjFXEyoNTMJWFhVXVkg==}
     hasBin: true
     dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
+      '@lskjs/algos': 3.1.1
+      '@lskjs/colors': 3.1.1
+      '@lskjs/env': 3.1.1
+      '@lskjs/err': 3.1.1
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
@@ -3872,26 +3683,6 @@ packages:
     transitivePeerDependencies:
       - '@types/lodash'
     dev: true
-
-  /@lskjs/mobx/2.85.1_3pdwp76x4gpoznkblrtbtgluzy:
-    resolution: {integrity: sha512-c3JYSZChQZu25i+ri2Z9AihwoAafTJPiHRiDBq/Ar2YYmoSTF36wbetTUBUyWtBycz9TGVSXpa5R3QlJijSg4A==}
-    peerDependencies:
-      axios: 0.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-      mobx: <6
-      mobx-react: <7
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/utils': 2.72.0
-      bluebird: 3.7.2
-      lodash: 4.17.21
-      mobx: 5.15.4
-    transitivePeerDependencies:
-      - '@types/lodash'
-    dev: false
 
   /@lskjs/module/2.13.0_34rvfb7keq5h25gsjgxgw3liam:
     resolution: {integrity: sha512-xn2lVlOFQ0mCWdLs/snKQJLouCBKrUx5JPjU4rf4eOHXhhChcctp7YlhrAIjiIz/mFi5fzSzmSLCHjZA0M92mg==}
@@ -3961,6 +3752,7 @@ packages:
       colors: 1.4.0
       eventemitter3: 4.0.7
       lodash: 4.17.21
+    dev: false
 
   /@lskjs/module/2.85.1_6hhfw2nmsdg7gtwxhffgz4c5bm:
     resolution: {integrity: sha512-cSDJO64U4d3IBiVWUQFh1SWNpzxi+LnDZWj1N+JgNJ3MPryoneUn9rGJhFYI9lcES9G74JYmu0tHng+0zq+VwA==}
@@ -4051,19 +3843,6 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@lskjs/module/3.1.0-alpha.0:
-    resolution: {integrity: sha512-Yuq3l20MGwWuCsg8JkHMXFk4gTZMj6FjexV43OMXv+ulfzo6zTpDKR4PgxqQwE6/5c2D8BSNzVSTLmS+cgT+cg==}
-    dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.1.0-alpha.0
-      '@lskjs/log': 3.1.0-alpha.0
-      '@lskjs/mutex': 3.0.0-alpha.30
-      '@lskjs/utils2': 3.0.0-alpha.33
-      events: 3.3.0
-      fishbird: 0.20.0
-    dev: false
-
   /@lskjs/mutex/2.65.1:
     resolution: {integrity: sha512-qsXtUCjhmJ4JPClvBsJE7OPr2UHuYdB1VdJKattG/1zlC/AV5iSZ2AshYl50S7EmvIfaz9P6N9GmashQsi7adg==}
     dependencies:
@@ -4080,57 +3859,7 @@ packages:
     resolution: {integrity: sha512-U/+TTIgcQiqEw3pXokXUx+x69RSFMliLPNemfZT+bP8s2O9TG96ocfy8gPAHlhLX9+aklAGwycedMHRCtr//fg==}
     dependencies:
       async-mutex: 0.2.6
-
-  /@lskjs/mutex/3.0.0-alpha.30:
-    resolution: {integrity: sha512-7Ly6BIlg7EvvGIDT495a8DksQpDgBKZiLwm7PiXYXQD3INWaK2ziqqtgOEkas76VjCyOBgaJcKPWYXsRAznvrQ==}
-    dependencies:
-      async-mutex: 0.4.0
     dev: false
-
-  /@lskjs/proxy/2.87.0_34rvfb7keq5h25gsjgxgw3liam:
-    resolution: {integrity: sha512-l45WaP3zKtZLBZ3eP4VWfFQM6AI/C0AXQFcox2nUCsTQxBuKNdgmR2qV+owgDSoFJ7WROoZXl9DvJw9LCedsuA==}
-    peerDependencies:
-      '@lskjs/server-api': 2.x.x
-      axios: 0.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/mutex': 2.85.1
-      '@lskjs/utils': 2.72.0
-      async-mutex: 0.2.6
-      bluebird: 3.7.2
-      https-proxy-agent: 5.0.0
-      is-ip: 3.1.0
-      lodash: 4.17.21
-      prom-client: 14.0.0
-      socks-proxy-agent: 5.0.0
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - supports-color
-    dev: false
-
-  /@lskjs/rabbit/2.85.1_34rvfb7keq5h25gsjgxgw3liam:
-    resolution: {integrity: sha512-M2Na8tZiosY3braEcBFs0p9j3DHOjANXOnvtDYjVQaIHT6N3FJz2yMi8FJQoNf/L373B401v3ffBKk1KW8lY4w==}
-    peerDependencies:
-      axios: 0.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/stats': 2.85.1_bluebird@3.7.2
-      '@lskjs/utils': 2.72.0
-      amqplib: 0.6.0
-      bluebird: 3.7.2
-      lodash: 4.17.21
-      object-hash: 2.1.1
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - supports-color
-    dev: true
 
   /@lskjs/scroll/1.1.0_yrrplmlrmrkxrtqaq6j3zqjege:
     resolution: {integrity: sha512-+EFsb0sv9mASNFm3FKsV+DVDgy+ZaRhC2QosCOaYMFvStooP/LB4OfnLKigskSmU41Vjxz+lrXh9w2WrvxUN2A==}
@@ -4155,93 +3884,17 @@ packages:
       react: 16.8.6
     dev: true
 
-  /@lskjs/server-api/2.85.1_34rvfb7keq5h25gsjgxgw3liam:
-    resolution: {integrity: sha512-ZKC/MVW6rpVNJiSyJZ7BJWlTPCvibbK7v4uNE3OB+BHR1ofP1ZOIOfyYu5v5cSASg+My2G1WN7DF+LOy8/OBMQ==}
-    peerDependencies:
-      axios: 0.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
+  /@lskjs/stringify/3.1.1:
+    resolution: {integrity: sha512-SiAmuyRg3lhUNGUvqvcBhCjemcA2mmEq53+8SvWq3jRcCIWypvtwZjVcIk843wCWIlKzZSdv5EHFxXmbU23mVg==}
     dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/utils': 2.72.0
-      bluebird: 3.7.2
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - '@types/lodash'
-    dev: true
-
-  /@lskjs/server-api/2.85.1_fytahhrxb4unal2xozjrk26kje:
-    resolution: {integrity: sha512-ZKC/MVW6rpVNJiSyJZ7BJWlTPCvibbK7v4uNE3OB+BHR1ofP1ZOIOfyYu5v5cSASg+My2G1WN7DF+LOy8/OBMQ==}
-    peerDependencies:
-      axios: 0.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/utils': 2.72.0
-      axios: 0.21.2
-      bluebird: 3.7.2
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - '@types/lodash'
-    dev: true
-
-  /@lskjs/server-api/2.85.1_sljyrbz3dejhp377twfliib5ve:
-    resolution: {integrity: sha512-ZKC/MVW6rpVNJiSyJZ7BJWlTPCvibbK7v4uNE3OB+BHR1ofP1ZOIOfyYu5v5cSASg+My2G1WN7DF+LOy8/OBMQ==}
-    peerDependencies:
-      axios: 0.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/module': 2.85.1_txzl6fzvvm7y2cr2ok73d3kk2y
-      '@lskjs/utils': 2.72.0
-      axios: 0.27.2
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - '@types/lodash'
-    dev: false
-
-  /@lskjs/stats/2.85.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-f5/m5X/r2yKekcPQ/MP39ofQzJudpmJPkd9c8HCgzsxEG4+/A7jNZvRKAwUm+6ClsGKOewlF8K994nT6rXUTEQ==}
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/module': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
-      '@lskjs/utils': 2.72.0
-      lodash: 4.17.21
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - bluebird
-
-  /@lskjs/stringify/3.0.0-alpha.39:
-    resolution: {integrity: sha512-xwgAL2SxafJ5tLIkdA/rWIqMrLYnL3NolJRS0KbfcV1hNsJC6B6L2KvKkwiyj1tN3MtwnFF3d3dy9K3z7NGIGA==}
-    dependencies:
-      '@lskjs/algos': 3.0.0-alpha.38
-      '@lskjs/err': 3.0.0-alpha.36
+      '@lskjs/algos': 3.1.1
+      '@lskjs/err': 3.1.1
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
     dev: false
 
-  /@lskjs/stringify/3.1.0-alpha.0:
-    resolution: {integrity: sha512-/fHsfd9DHLogH38mpI3RxHcXb+mJA2mSIEqUP2QdRh1dVSAvpEtJSoBWNH5CQ4VOdRfus5nJLEZSfAkGDsXM7w==}
-    dependencies:
-      '@lskjs/algos': 3.1.0-alpha.0
-      '@lskjs/err': 3.1.0-alpha.0
-      javascript-stringify: 2.1.0
-      js-yaml: 4.1.0
-    dev: false
-
-  /@lskjs/tsconfig/3.0.0-alpha.34:
-    resolution: {integrity: sha512-O4amHYlmroCH+SOcfUqAhSQ28UVEyCDxZgvgWy1mS4kf1iAf+6VYWmcy9nsBvMum8r5bUw6iw9ghJd47GKmPyw==}
-    dev: false
-
-  /@lskjs/tty/3.0.0-alpha.30:
-    resolution: {integrity: sha512-7+3txCeSgBb120iZA8L39eGOwiF6holG1EgnuBOLK/1iM+5+8XAlbkBoPRvWuY4HLvnZCiy1IKUSWStNKY69kA==}
+  /@lskjs/tty/3.1.1:
+    resolution: {integrity: sha512-KKfrRx7gYnYGayUcIqKKnWvL2PgeGXFE+NVT2S5BahLt/WOjua4XppG2gtqSnSp1JGeRLNNHS6JGtq11SEjNjg==}
     dependencies:
       tty: 1.0.1
     dev: false
@@ -4257,20 +3910,19 @@ packages:
     resolution: {integrity: sha512-v1CfwKl8Y9TeAh6wDEB1jjFydsvI8u13RRI6d29cVlz0QItneDOh+7jXWXPh4LEMJIfjpopFWH2cOS24+6we6g==}
     dev: false
 
+  /@lskjs/utils/3.1.1:
+    resolution: {integrity: sha512-J4X8ANBKMgw0Uth1QdUbsCHe/SAgPr9xxeGtmcxmQzISdClS1VhDS54o8t9TQICzDQ6B4DadCxHhfalkCvEspQ==}
+    dev: false
+
   /@lskjs/utils2/2.65.1:
     resolution: {integrity: sha512-7Pvvn/3OeMxAqo1THGOMXOoE3yt91s1cxNs7nbtT0o38LFbd+xRKhSGhdIHjqGe3r5UhgmJ5P9y17s2Aol+7Sw==}
     dev: true
 
   /@lskjs/utils2/2.85.1:
     resolution: {integrity: sha512-2r8LSk+nlRlot9MDXSdp3T1lzEee5prN8Ims5Yp5lCydLE31A82xFSSAlXE8gbNBVjZAmP0PtujbyR1wOE17vA==}
-
-  /@lskjs/utils2/3.0.0-alpha.33:
-    resolution: {integrity: sha512-YYDKrCqCCqNV0TtwwN0Z3MI65JsxjX7iuRo0+3/Mk41PFQwW86kFLPq+TiU7LjQwKSB7w8laFtrrLJqbstLQIA==}
-    dependencies:
-      fishbird: 0.20.0
     dev: false
 
-  /@lskjs/webserver/2.76.3_tsklyv3d3nyypzlla3u2pzlyjm:
+  /@lskjs/webserver/2.76.3_gzia6gbhfd2uxv3y5u5e32bhb4:
     resolution: {integrity: sha512-Hk6UAr8ziUqG1jG87cozG5CWrhqjqXz+296i43Zrb6Aw25I3KfAkGcoIQo7fJdau2abO/rYgzd8NSSzMhLSbLg==}
     peerDependencies:
       '@lskjs/db': 2.33.1
@@ -4279,10 +3931,10 @@ packages:
       bluebird: 3.7.x
       lodash: 4.17.x
     dependencies:
-      '@lskjs/db': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/db': link:libs-core/db
       '@lskjs/env': 2.65.1
       '@lskjs/err': 2.65.1
-      '@lskjs/i18': 2.85.1_34rvfb7keq5h25gsjgxgw3liam
+      '@lskjs/i18': link:libs-core/i18
       '@lskjs/log': 2.76.0
       '@lskjs/module': 2.76.0_34rvfb7keq5h25gsjgxgw3liam
       '@lskjs/utils': 2.72.0
@@ -5817,6 +5469,7 @@ packages:
       url-parse: 1.4.7
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /amqplib/0.8.0:
     resolution: {integrity: sha512-icU+a4kkq4Y1PS4NNi+YPDMwdlbFcZ1EZTQT2nigW3fvOb6AOgUQ9+Mk4ue0Zu5cBg/XpDzB40oH10ysrk2dmA==}
@@ -6373,6 +6026,7 @@ packages:
       safe-buffer: 5.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /bl/1.2.3:
     resolution: {integrity: sha512-pvcNpa0UU69UT341rO6AYy4FVAIkUHuZXRIWbq+zHnsVcRzDDjIAhGuuYoi0d//cwIwtt4pkpKycWEfjdV+vww==}
@@ -6484,6 +6138,7 @@ packages:
 
   /buffer-more-ints/1.0.0:
     resolution: {integrity: sha512-EMetuGFz5SLsT0QTnXzINh4Ksr+oo4i+UGTXEshiGCQWnsgSs7ZhJ8fzlwQ+OzEMs0MpDAMr1hxnblp5a4vcHg==}
+    dev: false
 
   /buffer-writer/2.0.0:
     resolution: {integrity: sha512-a7ZpuTZU1TRtnwyCNW3I5dc0wWNC3VR9S++Ewyk2HHZdrO3CQJqSpd+95Us590V6AL7JqUAH2IwZ/398PmNFgw==}
@@ -9995,11 +9650,13 @@ packages:
     deprecated: replaced by i18next-http-backend
     dependencies:
       '@babel/runtime': 7.20.13
+    dev: false
 
   /i18next/19.1.0:
     resolution: {integrity: sha512-ISbmukX4L6Dz0QoH9+EW1AnBw7j+NRLoMu9uLPMaNSSTP9Eie9/oUL0dOyWX15baB3gYOpkHJpGZRHOqcnl0ew==}
     dependencies:
       '@babel/runtime': 7.20.13
+    dev: false
 
   /iconv-lite/0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -11189,6 +10846,7 @@ packages:
 
   /js-cookie/2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
+    dev: false
 
   /js-cookie/3.0.0:
     resolution: {integrity: sha512-oUbbplKuH07/XX2YD2+Q+GMiPpnVXaRz8npE7suhBH9QEkJe2W7mQ6rwuMXHue3fpfcftQwzgyvGzIHyfCSngQ==}
@@ -11413,6 +11071,7 @@ packages:
   /kafkajs/2.1.0:
     resolution: {integrity: sha512-6IYiOdGWvFPbSbVB+AV3feT+A7vzw5sXm7Ze4QTfP7FRNdY8pGcpiNPvD2lfgYFD8Dm9KbMgBgTt2mf8KaIkzw==}
     engines: {node: '>=14.0.0'}
+    dev: false
 
   /kareem/2.3.2:
     resolution: {integrity: sha512-STHz9P7X2L4Kwn72fA4rGyqyXdmrMSdxqHx9IXon/FXluXieaFA6KJ2upcHAHxQPQ0LeM/OjLrhFxifHewOALQ==}
@@ -11833,10 +11492,10 @@ packages:
       '@lskjs/cli': 3.0.0-alpha.7_@swc+core@1.3.35
       '@lskjs/cli-scripts': 3.0.0-alpha.41
       '@lskjs/cli-utils': 3.0.0-alpha.39
-      '@lskjs/colors': 3.0.0-alpha.30
-      '@lskjs/env': 3.0.0-alpha.30
-      '@lskjs/err': 3.0.0-alpha.36
-      '@lskjs/log': 3.0.0-alpha.36
+      '@lskjs/colors': 3.1.1
+      '@lskjs/env': 3.1.1
+      '@lskjs/err': 3.1.1
+      '@lskjs/log': 3.1.1
       '@oclif/command': 1.8.22_@oclif+config@1.18.8
       '@oclif/config': 1.18.8
       '@oclif/errors': 1.3.6
@@ -12680,6 +12339,7 @@ packages:
 
   /mobx/5.15.4:
     resolution: {integrity: sha512-xRFJxSU2Im3nrGCdjSuOTFmxVDGeqOHL+TyADCGbT0k4HHqGmx5u2yaHNryvoORpI4DfbzjJ5jPmuv+d7sioFw==}
+    dev: true
 
   /modify-values/1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
@@ -13301,6 +12961,7 @@ packages:
   /object-hash/2.1.1:
     resolution: {integrity: sha512-VOJmgmS+7wvXf8CjbQmimtCnEx3IAoLxI3fp2fbWehxrWBcAQFbk+vcwb6vzR0VZv/eNCJ/27j151ZTwqW/JeQ==}
     engines: {node: '>= 6'}
+    dev: false
 
   /object-identity-map/1.0.2:
     resolution: {integrity: sha512-a2XZDGyYTngvGS67kWnqVdpoaJWsY7C1GhPJvejWAFCsUioTAaiTu8oBad7c6cI4McZxr4CmvnZeycK05iav5A==}
@@ -14182,6 +13843,7 @@ packages:
 
   /querystringify/2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
+    dev: false
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -14357,6 +14019,7 @@ packages:
       inherits: 2.0.4
       isarray: 0.0.1
       string_decoder: 0.10.31
+    dev: false
 
   /readable-stream/2.3.7:
     resolution: {integrity: sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==}
@@ -14665,6 +14328,7 @@ packages:
 
   /requires-port/1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
+    dev: false
 
   /resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}
@@ -15820,40 +15484,6 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: false
 
-  /ts-jest/29.0.5_cslgewaznsjxirw6ogkiwclmbu:
-    resolution: {integrity: sha512-PL3UciSgIpQ7f6XjVOmbi96vmDHUqAyqDr8YxzopDqX3kfgYtX1cuNeBjP+L9sFXi6nzsGGA6R3fP3DDDJyrxA==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    hasBin: true
-    peerDependencies:
-      '@babel/core': '>=7.0.0-beta.0 <8'
-      '@jest/types': ^29.0.0
-      babel-jest: ^29.0.0
-      esbuild: '*'
-      jest: ^29.0.0
-      typescript: '>=4.3'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@jest/types':
-        optional: true
-      babel-jest:
-        optional: true
-      esbuild:
-        optional: true
-    dependencies:
-      '@babel/core': 7.20.12
-      bs-logger: 0.2.6
-      fast-json-stable-stringify: 2.1.0
-      jest: 29.4.3_@types+node@18.13.0
-      jest-util: 29.3.1
-      json5: 2.2.3
-      lodash.memoize: 4.1.2
-      make-error: 1.3.6
-      semver: 7.3.8
-      typescript: 4.9.5
-      yargs-parser: 21.1.1
-    dev: false
-
   /ts-jest/29.0.5_jest@29.4.3:
     resolution: {integrity: sha512-PL3UciSgIpQ7f6XjVOmbi96vmDHUqAyqDr8YxzopDqX3kfgYtX1cuNeBjP+L9sFXi6nzsGGA6R3fP3DDDJyrxA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -16359,6 +15989,7 @@ packages:
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
+    dev: false
 
   /url-parse/1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}

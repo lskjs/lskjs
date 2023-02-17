@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/lskjs/lskjs/compare/v3.1.1...v3.2.0) (2023-02-17)
+
+
+### Features
+
+* **cli-scripts:** add skip test ([4f3fd99](https://github.com/lskjs/lskjs/commit/4f3fd994f93bc7f68b4dbdb03060c8e9fc674381))
+
+
+
+
+
 ## [3.1.1](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.2...v3.1.1) (2023-02-16)
 
 **Note:** Version bump only for package @lskjs/cli-scripts
