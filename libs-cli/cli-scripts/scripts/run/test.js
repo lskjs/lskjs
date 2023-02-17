@@ -1,7 +1,20 @@
 #!/usr/bin/env node
 const { run, shell } = require('@lskjs/cli-utils');
 
-const main = async ({ isRoot, ctx, args } = {}) => {
+const isSkip = (names) => {
+  // eslint-disable-next-line no-param-reassign
+  if (!Array.isArray(names)) names = [names];
+  return !!names.map(
+    (name) =>
+      +process.env[`SKIP_${name.toUpperCase()}`] || +process.env[`NO_${name.toUpperCase()}`],
+  );
+};
+
+const main = async ({ isRoot, ctx, args, log } = {}) => {
+  if (isSkip(['test', 'tests'])) {
+    log.warn('SKIP_TEST');
+    return;
+  }
   if (isRoot) {
     await shell('pnpm -r run test --prod --silent', { ctx, args });
     return;

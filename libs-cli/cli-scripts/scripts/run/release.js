@@ -35,7 +35,7 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
     await shell('pnpm run build --prod --silent', { ctx, args });
     await shell('pnpm run test --prod --silent', { ctx, args });
     const { isLib } = getCwdInfo({ cwd });
-    await shell('npm version prerelease');
+    await shell('npm version prerelease --preid alpha');
     await shell('lsk run prepack --dir .release', { ctx, args });
     if (isLib) {
       await shell('lsk run publish', { ctx, args });

@@ -2,7 +2,7 @@
   "version": "3.0.0-alpha.3",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
-  "workspaces": [
+  "workspaces2": [
     "libs/*",
     "libs-cli/*",
     "libs-core/*"
