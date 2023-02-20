@@ -4,10 +4,12 @@ const { run, shell } = require('@lskjs/cli-utils');
 const isSkip = (names) => {
   // eslint-disable-next-line no-param-reassign
   if (!Array.isArray(names)) names = [names];
-  return !!names.map(
-    (name) =>
-      +process.env[`SKIP_${name.toUpperCase()}`] || +process.env[`NO_${name.toUpperCase()}`],
-  );
+  return !!names
+    .map(
+      (name) =>
+        +process.env[`SKIP_${name.toUpperCase()}`] || +process.env[`NO_${name.toUpperCase()}`],
+    )
+    .filter(Boolean).length;
 };
 
 const main = async ({ isRoot, ctx, args, log } = {}) => {

@@ -1,7 +1,22 @@
 #!/usr/bin/env node
 const { run, shell, getCwdInfo } = require('@lskjs/cli-utils');
 
+const isSkip = (names) => {
+  // eslint-disable-next-line no-param-reassign
+  if (!Array.isArray(names)) names = [names];
+  return !!names
+    .map(
+      (name) =>
+        +process.env[`SKIP_${name.toUpperCase()}`] || +process.env[`NO_${name.toUpperCase()}`],
+    )
+    .filter(Boolean).length;
+};
+
 async function main({ isRoot, log, cwd, args, ctx } = {}) {
+  if (isSkip(['build', 'builds'])) {
+    log.warn('SKIP_BUILD');
+    return;
+  }
   if (isRoot) {
     await shell(`pnpm -r run build --prod --silent`, { ctx, args });
     return;
