@@ -8,6 +8,7 @@ import some from 'lodash/some';
 
 export default ({ enable = 1, hide = 0, collapse = 1 } = {}) => {
   if (!enable) return;
+  if (console.___error || console.___warn) return;
   const logger = new Logger({ name: 'React' });
 
   const triggers = [
