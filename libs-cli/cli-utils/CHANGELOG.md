@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/lskjs/lskjs/compare/v3.2.1...v3.2.2) (2023-04-20)
+
+
+### Bug Fixes
+
+* **cli-utils:** cwdInfo ([686f658](https://github.com/lskjs/lskjs/commit/686f658e65a858b3f365d7457cd029b2fea04ad7))
+
+
+
+
+
 ## [3.1.1](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.2...v3.1.1) (2023-02-16)
 
 **Note:** Version bump only for package @lskjs/cli-utils

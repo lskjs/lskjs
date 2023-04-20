@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/lskjs/lskjs/compare/v3.2.1...v3.2.2) (2023-04-20)
+
+
+### Bug Fixes
+
+* **colors:** isSupported type ([81a1f1f](https://github.com/lskjs/lskjs/commit/81a1f1f16676b42681d5f9ee3b2be7ba3705cf26))
+
+
+
+
+
 ## [3.1.1](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.2...v3.1.1) (2023-02-16)
 
 **Note:** Version bump only for package @lskjs/colors

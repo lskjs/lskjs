@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/lskjs/lskjs/compare/v3.2.1...v3.2.2) (2023-04-20)
+
+**Note:** Version bump only for package @lskjs/env
+
+
+
+
+
 ## [3.1.1](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.2...v3.1.1) (2023-02-16)
 
 **Note:** Version bump only for package @lskjs/env

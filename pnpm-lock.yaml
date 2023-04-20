@@ -104,10 +104,10 @@ importers:
         specifier: ^3.1.1
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../cli-utils
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/env
       '@lskjs/err':
         specifier: ^3.1.1
@@ -137,19 +137,19 @@ importers:
         specifier: ^3.1.1
         version: link:../../libs/algos
       '@lskjs/colors':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/colors
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/env
       '@lskjs/err':
         specifier: ^3.1.1
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/log
       '@lskjs/utils':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs-core/utils
       axios:
         specifier: 0.27.2
@@ -218,13 +218,13 @@ importers:
         specifier: ^3.1.1
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../cli-utils
       '@lskjs/err':
         specifier: ^3.1.1
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/log
       '@lskjs/stringify':
         specifier: ^3.1.1
@@ -263,22 +263,22 @@ importers:
         specifier: ^3.0.0-alpha.7
         version: 3.0.0-alpha.7(@swc/core@1.3.35)
       '@lskjs/cli-scripts':
-        specifier: ^3.2.1
+        specifier: ^3.2.2
         version: link:../cli-scripts
       '@lskjs/cli-utils':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../cli-utils
       '@lskjs/colors':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/colors
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/env
       '@lskjs/err':
         specifier: ^3.1.1
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../../libs/log
       '@oclif/command':
         specifier: 1.8.22
@@ -1493,13 +1493,13 @@ importers:
   libs/colors:
     dependencies:
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../env
 
   libs/env:
     dependencies:
       '@lskjs/tty':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../tty
 
   libs/err:
@@ -1517,7 +1517,7 @@ importers:
         specifier: ^3.1.1
         version: link:../algos
       '@lskjs/module':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../module
       cld:
         specifier: 2.8.4
@@ -1537,10 +1537,10 @@ importers:
         specifier: ^3.1.1
         version: link:../algos
       '@lskjs/colors':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../colors
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../env
       '@lskjs/err':
         specifier: ^3.1.1
@@ -1584,13 +1584,13 @@ importers:
         specifier: ^3.1.1
         version: link:../algos
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../env
       '@lskjs/err':
         specifier: ^3.1.1
         version: link:../err
       '@lskjs/log':
-        specifier: ^3.1.1
+        specifier: ^3.2.2
         version: link:../log
       '@lskjs/mutex':
         specifier: ^3.1.1
@@ -3797,25 +3797,7 @@ packages:
     resolution: {integrity: sha512-Nbns26q4l/R/gfoZjxOME2y+iTueeON4pXMFQwKIdQUhzxzmWF/9uq5cLwOrJm2RbRFtOLX2sFsWT7qordDg0g==}
     dependencies:
       '@lskjs/algos': 3.1.1
-      '@lskjs/cli-utils': 3.1.1
-      '@lskjs/env': 3.1.1
-      '@lskjs/err': 3.1.1
-      '@lskjs/stringify': 3.1.1
-      all-contributors-cli: 6.24.0
-      fishbird: 0.20.0
-      remark-template: 1.6.0
-      sort-package-json: 1.57.0
-    transitivePeerDependencies:
-      - debug
-      - encoding
-      - supports-color
-    dev: false
-
-  /@lskjs/cli-scripts@3.2.1:
-    resolution: {integrity: sha512-DtKeC5qTPSWjWlix46C3bGvGI2zg6m7Ypg+UwmwqA9R5GTulkm1uZAJEBNYgf1U29p/TV9Tx060TKQ38mtz2FA==}
-    dependencies:
-      '@lskjs/algos': 3.1.1
-      '@lskjs/cli-utils': 3.1.1
+      '@lskjs/cli-utils': 3.0.0-alpha.39
       '@lskjs/env': 3.1.1
       '@lskjs/err': 3.1.1
       '@lskjs/stringify': 3.1.1
@@ -3852,36 +3834,13 @@ packages:
       - debug
     dev: false
 
-  /@lskjs/cli-utils@3.1.1:
-    resolution: {integrity: sha512-pxfJpEq/3g0twU33HnhGD+PX8yMKnM1ACIL1FGfrD4yyF8gFx/TDLZieSgLVck55EBG0JJikOMOr4gpy0DCIIA==}
-    hasBin: true
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.1.1
-      '@lskjs/colors': 3.1.1
-      '@lskjs/env': 3.1.1
-      '@lskjs/err': 3.1.1
-      '@lskjs/log': 3.1.1
-      '@lskjs/utils': 3.1.1
-      axios: 0.27.2
-      bluebird: 3.7.2
-      glob: 7.2.0
-      global-prefix: 3.0.0
-      lodash: 4.17.21
-      rsync: 0.6.1
-      sort-package-json: 2.1.0
-      yargs: 17.6.2
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /@lskjs/cli@3.0.0-alpha.7(@swc/core@1.3.35):
     resolution: {integrity: sha512-NHMUeFamDuB1QT+7rOuR+Ao+1BU8SIS8jyOp0vgq8AKsVUzRm0CZnML8n03QmsfJmWljEmyWLQRNSr7G1PqLWQ==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.2.1
-      '@lskjs/cli-utils': 3.1.1
+      '@lskjs/cli-scripts': 3.0.0-alpha.41
+      '@lskjs/cli-utils': 3.0.0-alpha.39
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16(@oclif/config@1.18.3)
@@ -4309,10 +4268,6 @@ packages:
 
   /@lskjs/utils@2.87.1:
     resolution: {integrity: sha512-v1CfwKl8Y9TeAh6wDEB1jjFydsvI8u13RRI6d29cVlz0QItneDOh+7jXWXPh4LEMJIfjpopFWH2cOS24+6we6g==}
-    dev: false
-
-  /@lskjs/utils@3.1.1:
-    resolution: {integrity: sha512-J4X8ANBKMgw0Uth1QdUbsCHe/SAgPr9xxeGtmcxmQzISdClS1VhDS54o8t9TQICzDQ6B4DadCxHhfalkCvEspQ==}
     dev: false
 
   /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):

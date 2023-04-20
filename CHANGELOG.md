@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/lskjs/lskjs/compare/v3.2.1...v3.2.2) (2023-04-20)
+
+
+### Bug Fixes
+
+* **cli-utils:** cwdInfo ([686f658](https://github.com/lskjs/lskjs/commit/686f658e65a858b3f365d7457cd029b2fea04ad7))
+* **colors:** isSupported type ([81a1f1f](https://github.com/lskjs/lskjs/commit/81a1f1f16676b42681d5f9ee3b2be7ba3705cf26))
+* **log:** dynamic tty detection ([071fe5a](https://github.com/lskjs/lskjs/commit/071fe5a4b8f765834fb6e35b169ccb3fe9e84ce5))
+* **utils:** double hide-react-console-logs ([541db46](https://github.com/lskjs/lskjs/commit/541db46a87281e48b54382e9fce6545f33c5464e))
+
+
+
+
+
 ## [3.2.1](https://github.com/lskjs/lskjs/compare/v3.2.0...v3.2.1) (2023-02-20)
 
 
