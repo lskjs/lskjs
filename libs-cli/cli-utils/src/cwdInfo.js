@@ -1,6 +1,6 @@
 /* eslint-disable import/no-dynamic-require */
 // @ts-ignore
-const { default: omitNull } = require('@lskjs/utils/omitNull');
+const { default: omitNull } = require('@lskjs/algos/omitNull');
 const { existsSync } = require('fs');
 const path = require('path');
 
