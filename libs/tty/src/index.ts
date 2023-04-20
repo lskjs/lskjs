@@ -1,5 +1,3 @@
-export const isTTY =
-  // @ts-ignore
-  typeof window === 'undefined' ? require('tty').isatty(1) : false;
+export const isTTY = Boolean(process?.stdout?.isTTY) || false
 
 export default isTTY;
