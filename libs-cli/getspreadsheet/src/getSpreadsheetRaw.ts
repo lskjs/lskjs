@@ -4,7 +4,7 @@ import axios from 'axios';
 import { google } from 'googleapis';
 
 import { auth2 } from './auth';
-import { log } from './log';
+// import { log } from './log';
 
 export async function getFileWithAuth(fileId: string) {
   const token = await auth2();
