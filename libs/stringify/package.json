@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/stringify",
-  "version": "3.1.1",
+  "version": "3.3.0",
   "description": "LSK stringify.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,8 +12,8 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.1.1",
-    "@lskjs/err": "^3.1.1",
+    "@lskjs/algos": "^3.3.0",
+    "@lskjs/err": "^3.3.0",
     "javascript-stringify": "2.1.0",
     "js-yaml": "4.1.0"
   },

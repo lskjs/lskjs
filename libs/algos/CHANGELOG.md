@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/lskjs/lskjs/compare/v3.2.2...v3.3.0) (2023-04-30)
+
+
+### Features
+
+* **algos:** add maxBy, minBy ([5fcd4f4](https://github.com/lskjs/lskjs/commit/5fcd4f41db3497317e19db653fd03e61dd844b64))
+
+
+
+
+
 ## [3.1.1](https://github.com/lskjs/lskjs/compare/v3.1.0-alpha.2...v3.1.1) (2023-02-16)
 
 **Note:** Version bump only for package @lskjs/algos

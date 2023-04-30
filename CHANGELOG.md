@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/lskjs/lskjs/compare/v3.2.2...v3.3.0) (2023-04-30)
+
+
+### Bug Fixes
+
+* **moduke:** size limits ([16bf288](https://github.com/lskjs/lskjs/commit/16bf288fa1e491fc209695eaffa3ef5ae7532055))
+* update deps ([6b63c68](https://github.com/lskjs/lskjs/commit/6b63c6867aa74805b16eff7c90daf4008bcfb7a9))
+
+
+### Features
+
+* **algos:** add maxBy, minBy ([5fcd4f4](https://github.com/lskjs/lskjs/commit/5fcd4f41db3497317e19db653fd03e61dd844b64))
+* **nest-utils:** add project ([e48b6ce](https://github.com/lskjs/lskjs/commit/e48b6ce4d1b79120db749e2cdb37551fe05eec26))
+* **nest-utils:** add project ([0d8df67](https://github.com/lskjs/lskjs/commit/0d8df67c3974a9dd5988a59cbe3511532c068e0c))
+
+
+
+
+
 ## [3.2.2](https://github.com/lskjs/lskjs/compare/v3.2.1...v3.2.2) (2023-04-20)
 
 
