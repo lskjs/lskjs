@@ -57,8 +57,12 @@
   },
   "size-limit": [
     {
-      "path": "lib/index.js",
-      "limit": "2kb"
+      "path": "lib/AnyExceptionFilter.js",
+      "limit": "5kb"
+    },
+    {
+      "path": "lib/createNestLogger.js",
+      "limit": "10kb"
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",

@@ -1,4 +1,5 @@
 import { mapValues } from '@lskjs/algos';
+// eslint-disable-next-line import/named
 import { ILogger, Logger, LoggerLevelType } from '@lskjs/log';
 
 export interface ILoggerOptions {
@@ -22,10 +23,12 @@ export const createNestLogger = (props: ILoggerOptions = {}): ILogger => {
     verbose: 'trace',
   };
 
+  // @ts-ignore
   const loggerLike: ILogger = mapValues(mapper, (lskLevel) => (...args: any[]) => {
     const name = args.pop();
     const baseName = log.name;
     log.name = name;
+    // @ts-ignore
     const res = log[lskLevel](...args);
     log.name = baseName;
     return res;
