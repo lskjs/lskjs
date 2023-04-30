@@ -1670,8 +1670,8 @@ importers:
   libs/utils2:
     dependencies:
       fishbird:
-        specifier: ^0.20.0
-        version: 0.20.0
+        specifier: ^0.21.0
+        version: 0.21.0
 
 packages:
 
@@ -9422,6 +9422,10 @@ packages:
 
   /fishbird@0.20.0:
     resolution: {integrity: sha512-5e/1j4kbpfTXCwLk7CMAsfComM8J1Mzc1ngxEFf+qIGAeUQR1coK0wq7OzocmSnstkoxWMjMto2xO+LoNz+lOg==}
+    dev: false
+
+  /fishbird@0.21.0:
+    resolution: {integrity: sha512-s0rnEFmYNf25cz6zvt3uemnsW0TdH7vaH4RiE1Kgm18SP5Md156aMG/VMEHlybDYTCKvkvjO9hGDRftEm+/jKg==}
     dev: false
 
   /flat-cache@3.0.4:
