@@ -6,6 +6,8 @@ import { fromPairs } from './fromPairs';
 import { isPlainObject } from './isPlainObject';
 import { map } from './map';
 import { mapValues } from './mapValues';
+import { maxBy } from './maxBy';
+import { minBy } from './minBy';
 import { omit } from './omit';
 import { omitBy } from './omitBy';
 import { omitNull } from './omitNull';
@@ -27,6 +29,8 @@ export {
   isPlainObject,
   map,
   mapValues,
+  maxBy,
+  minBy,
   omit,
   omitBy,
   omitNull,
@@ -48,6 +52,8 @@ export default {
   isPlainObject,
   map,
   mapValues,
+  maxBy,
+  minBy,
   omit,
   omitBy,
   omitNull,
