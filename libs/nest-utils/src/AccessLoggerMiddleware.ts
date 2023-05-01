@@ -2,7 +2,7 @@ import { isDev } from '@lskjs/env';
 // @ts-ignore
 import applyLogger from '@lskjs/webserver/middlewares/accessLogger/applyLogger';
 // @ts-ignore
-import createLskMiddleware from '@lskjs/webserver/middlewares/lskMiddleware';
+// import createLskMiddleware from '@lskjs/webserver/middlewares/lskMiddleware';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { nanoid } from 'nanoid';
 
