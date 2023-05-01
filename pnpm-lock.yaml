@@ -1626,7 +1626,7 @@ importers:
         specifier: ^3.3.0
         version: link:../log
       '@lskjs/nest-utils':
-        specifier: ^3.3.0
+        specifier: ^3.4.0
         version: 'link:'
       '@lskjs/webserver':
         specifier: 2.76.3
