@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { existsSync } from 'fs';
 import { join } from 'path';
 
+export { ConfigModule, ConfigService };
 // https://docs.nestjs.com/techniques/configuration
 export const getEnvJs = (filenames: string | string[]) => {
   // eslint-disable-next-line no-param-reassign
@@ -31,28 +32,29 @@ export const getEnvJs = (filenames: string | string[]) => {
 
 export const get = (obj: any, key: string) => (key ? obj[key] : obj);
 
-export const loadConfigEnvs = (path: string, key: string) => ({
-  load: [() => get(getEnvJs(path), key)],
+export const loadConfigEnvs = (path: string, key?: string) => ({
+  load: [
+    () => {
+      const res = key ? get(getEnvJs(path), key) : getEnvJs(path);
+      return res;
+    },
+  ],
   isGlobal: true,
   expandVariables: true,
 });
 
-export const getConfig = (path: string, fields = null, props: Record<string, unknown> = {}) => ({
+type PropsFn = (res: Record<string, unknown>) => Record<string, unknown>;
+export const getConfig = (path: string, fields?: string[] | PropsFn) => ({
   imports: [ConfigModule],
   useFactory: (configService: ConfigService) => {
-    let res;
-    res = configService.get<any>(path);
+    const res = configService.get<any>(path);
     if (!res) {
       throw new Err(`!config: ${path}`, { path });
       return null;
     }
-    // console.log('[config1]', path, res);
-    if (fields) res = pick(res, fields);
-    // console.log('[config]', path, res);
-    return {
-      ...res,
-      ...props,
-    };
+    if (Array.isArray(fields)) return pick(res, fields);
+    if (typeof fields === 'function') return fields(res);
+    return res;
   },
   inject: [ConfigService],
 });

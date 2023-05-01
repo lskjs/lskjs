@@ -1625,12 +1625,21 @@ importers:
       '@lskjs/log':
         specifier: ^3.3.0
         version: link:../log
+      '@lskjs/nest-utils':
+        specifier: ^3.3.0
+        version: 'link:'
+      '@lskjs/webserver':
+        specifier: 2.76.3
+        version: 2.76.3(@emotion/core@10.0.27)(@lskjs/db@2.33.1)(@lskjs/i18@2.33.1)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1)
       '@types/express':
         specifier: ^4.17.17
         version: 4.17.17
       fast-safe-stringify:
         specifier: 2.1.1
         version: 2.1.1
+      nanoid:
+        specifier: ^3.1.29
+        version: 3.1.29
     devDependencies:
       '@nestjs/common':
         specifier: ^9.4.0
@@ -3820,18 +3829,36 @@ packages:
     resolution: {integrity: sha512-h0fYWGzwiW95p9cwRAgtJwuaIEqaeK5SKUjUP6eOvPwYfFLbLd2Sv1LQ4U0iAX0v8s9TfkkZid8NGKp9YF1odw==}
     dev: false
 
-  /@lskjs/algos@3.1.1:
-    resolution: {integrity: sha512-0fdwwGp0qFDp5N/L5DoOqoh3+M0fCo4PtQffQcXtYOVQBjZ4OY7mb0xJYLHaWhmRH/cPtILrBMOr9qWTTIUNbQ==}
+  /@lskjs/algos@3.3.0:
+    resolution: {integrity: sha512-T33yjoZA+IRz4cJJ9a/26SmkjviRJlij0S0YZslayNKDR7Wv+Q0I/cCO/azuDo6Iucon3UQOrPoHYVQ/EhdRqA==}
     dev: false
 
   /@lskjs/cli-scripts@3.0.0-alpha.41:
     resolution: {integrity: sha512-Nbns26q4l/R/gfoZjxOME2y+iTueeON4pXMFQwKIdQUhzxzmWF/9uq5cLwOrJm2RbRFtOLX2sFsWT7qordDg0g==}
     dependencies:
-      '@lskjs/algos': 3.1.1
-      '@lskjs/cli-utils': 3.0.0-alpha.39
+      '@lskjs/algos': 3.3.0
+      '@lskjs/cli-utils': 3.3.0
       '@lskjs/env': 3.2.2
-      '@lskjs/err': 3.1.1
-      '@lskjs/stringify': 3.1.1
+      '@lskjs/err': 3.3.0
+      '@lskjs/stringify': 3.3.0
+      all-contributors-cli: 6.24.0
+      fishbird: 0.20.0
+      remark-template: 1.6.0
+      sort-package-json: 1.57.0
+    transitivePeerDependencies:
+      - debug
+      - encoding
+      - supports-color
+    dev: false
+
+  /@lskjs/cli-scripts@3.3.0:
+    resolution: {integrity: sha512-75TfoerCoLEoAHy7tp0QUA+2gZmdBTcHc7Df5TEcv/ReW5170Pn6G5vQimkMDxq+o1tHLtLVA8Zqt7WXFxOgMQ==}
+    dependencies:
+      '@lskjs/algos': 3.3.0
+      '@lskjs/cli-utils': 3.3.0
+      '@lskjs/env': 3.2.2
+      '@lskjs/err': 3.3.0
+      '@lskjs/stringify': 3.3.0
       all-contributors-cli: 6.24.0
       fishbird: 0.20.0
       remark-template: 1.6.0
@@ -3847,12 +3874,35 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.7
-      '@lskjs/algos': 3.1.1
+      '@lskjs/algos': 3.3.0
       '@lskjs/colors': 3.2.2
       '@lskjs/env': 3.2.2
-      '@lskjs/err': 3.1.1
-      '@lskjs/log': 3.2.2
+      '@lskjs/err': 3.3.0
+      '@lskjs/log': 3.3.0
       '@lskjs/utils': 2.87.1
+      axios: 0.27.2
+      bluebird: 3.7.2
+      glob: 7.2.0
+      global-prefix: 3.0.0
+      lodash: 4.17.21
+      rsync: 0.6.1
+      sort-package-json: 2.1.0
+      yargs: 17.6.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /@lskjs/cli-utils@3.3.0:
+    resolution: {integrity: sha512-+QnwuwnXIbnvaEWxtyyOqmNhgP3yLniM68Ly7A89SYd21W52Q6TplsllyEhi8rmlVPgcXm/QHvTW+HRUays4ZA==}
+    hasBin: true
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@lskjs/algos': 3.3.0
+      '@lskjs/colors': 3.2.2
+      '@lskjs/env': 3.2.2
+      '@lskjs/err': 3.3.0
+      '@lskjs/log': 3.3.0
+      '@lskjs/utils': 3.2.2
       axios: 0.27.2
       bluebird: 3.7.2
       glob: 7.2.0
@@ -3870,8 +3920,8 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.0.0-alpha.41
-      '@lskjs/cli-utils': 3.0.0-alpha.39
+      '@lskjs/cli-scripts': 3.3.0
+      '@lskjs/cli-utils': 3.3.0
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16(@oclif/config@1.18.3)
@@ -3907,6 +3957,30 @@ packages:
       '@emotion/core': 10.0.27(react@16.8.6)
       emotion: 10.0.27
     dev: true
+
+  /@lskjs/db@2.33.1(@types/lodash@4.14.178)(@types/mongoose@5.11.97)(bluebird@3.7.2)(lodash@4.17.21):
+    resolution: {integrity: sha512-7T906RdbIyrGhR5UFjwjNBLFlAL+t0LNCFyJb4VYgTwyeDgsl82e00tBpOLqZtGPvcBbTcCrbhBNEA/azzfk+g==}
+    peerDependencies:
+      '@types/mongoose': 5.11.x
+      bluebird: 3.7.x
+      lodash: 4.17.x
+    dependencies:
+      '@lskjs/module': 2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
+      '@lskjs/utils': 2.29.0
+      '@types/mongoose': 5.11.97
+      bluebird: 3.7.2
+      lodash: 4.17.21
+      mongoose: 5.13.17
+    transitivePeerDependencies:
+      - '@types/lodash'
+      - aws4
+      - bson-ext
+      - kerberos
+      - mongodb-client-encryption
+      - mongodb-extjson
+      - snappy
+      - supports-color
+    dev: false
 
   /@lskjs/debug-level@0.3.2:
     resolution: {integrity: sha512-VHPhtJ9do45MGE93DxEsPdCgPUQAAAdicgytkzG8UMCXIgq5nIKY7JNzDunqbOw2sH7yaJfzF1sYwfb745zWCQ==}
@@ -3945,6 +4019,10 @@ packages:
       mobx-react-devtools: 6.1.1(mobx-react@6.2.2)(mobx@5.15.4)
     dev: true
 
+  /@lskjs/env@2.28.0:
+    resolution: {integrity: sha512-2uPQn90ID5Rjvs+kCsO1SDiA/InLBdWwyWB5YzisJZYOfpiak1tesUE1KzANZmPlDzPMF0seKCJqNUA2D36VIA==}
+    dev: false
+
   /@lskjs/env@2.65.1:
     resolution: {integrity: sha512-QIim3YP+1onXMl9RRq83MQIt1APFxn8xC8pLwNDM2tAXij5NT6+TB1uOQBl+rD9faQxSaHxoXcVwmBxVTMpdyg==}
 
@@ -3973,6 +4051,12 @@ packages:
       lodash: 4.17.21
     dev: true
 
+  /@lskjs/err@2.29.0:
+    resolution: {integrity: sha512-3Qk3vpmt7CVMS5wUm444ODdUVS61oRhoSxl8530zalm6L+4Zp93ORRlJ+USPWZ4i/+voc81e7MggDDHBc8WO8g==}
+    dependencies:
+      lodash: 4.17.21
+    dev: false
+
   /@lskjs/err@2.65.1:
     resolution: {integrity: sha512-H+lbygVeLsHRL9x2oyOABz0b2ebKl+m0n0Veb4wwVtAW+e7zDls+mPdJbxqouyLFF7RpaVJRER43HYWUA6dYiA==}
     dependencies:
@@ -3983,10 +4067,10 @@ packages:
     dependencies:
       lodash: 4.17.21
 
-  /@lskjs/err@3.1.1:
-    resolution: {integrity: sha512-ldkg73KfoEGFt8lg/If9/luwcdCtfZLjoiR1h1ZrKEjgmX0QlZTGuMS4lE/Y8UwTCY7OEJUW5sxuy2WjA19zvQ==}
+  /@lskjs/err@3.3.0:
+    resolution: {integrity: sha512-XC3g/gPoQ4MvOZZ0ye1AAI4m4x2bwu4YK3rHSkdVGDCzfe5Om1vAluJe9hOY7gG6U3h8fcFZJbF3ghcdb/EURQ==}
     dependencies:
-      '@lskjs/algos': 3.1.1
+      '@lskjs/algos': 3.3.0
     dev: false
 
   /@lskjs/getspreadsheet@2.85.1(bluebird@3.7.2)(lodash@4.17.21):
@@ -4010,6 +4094,26 @@ packages:
       - debug
       - encoding
       - supports-color
+    dev: false
+
+  /@lskjs/i18@2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(js-cookie@3.0.0)(lodash@4.17.21)(mobx@5.15.4):
+    resolution: {integrity: sha512-+xvVTjfcdKReEpOFQdZO0nlaOIOmGEbTvyLqKcHCDSOHUPPUmbcIYIvABIFPne6ZslNADkYJbHXfng0uFHzmyQ==}
+    peerDependencies:
+      bluebird: 3.7.x
+      js-cookie: 3.x
+      mobx: 5.x
+    dependencies:
+      '@lskjs/env': 2.28.0
+      '@lskjs/err': 2.29.0
+      '@lskjs/module': 2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
+      bluebird: 3.7.2
+      i18next: 19.1.0
+      i18next-xhr-backend: 3.2.2
+      js-cookie: 3.0.0
+      mobx: 5.15.4
+    transitivePeerDependencies:
+      - '@types/lodash'
+      - lodash
     dev: false
 
   /@lskjs/link@1.1.10(@lskjs/utils@2.72.0)(react@16.8.6):
@@ -4047,6 +4151,20 @@ packages:
       fast-safe-stringify: 2.0.8
     dev: true
 
+  /@lskjs/log2@2.33.1:
+    resolution: {integrity: sha512-NGYcBpYPUPMNzcyGJeg1nm4sKlCkT+PPgNeBZu7itz2JjVIrDinivRtpQky6226jy+2JauYV7Su2HcqKSvTEiw==}
+    hasBin: true
+    dependencies:
+      '@lskjs/debug-level': 0.3.2
+      '@lskjs/env': 2.28.0
+      '@lskjs/err': 2.29.0
+      colors: 1.4.0
+      fast-safe-stringify: 2.0.8
+      nanocolors: 0.2.9
+      split: 1.0.1
+      through: 2.3.8
+    dev: false
+
   /@lskjs/log@2.75.1:
     resolution: {integrity: sha512-ty6EMRZvIJCeSXON1Mfd8rm80RCfYsNLvzi3mtV5xvsKYdIm8/shdAR3RVHazheAi7dl8NusUSdMK7voGnp7bA==}
     hasBin: true
@@ -4079,7 +4197,6 @@ packages:
       through: 2.3.8
     optionalDependencies:
       logfmt: 1.3.2
-    dev: true
 
   /@lskjs/log@2.85.1:
     resolution: {integrity: sha512-IFisUVOef0MMS34bl2acfzea/736l0079f6NwpIzbNI65Ci6CUfJo6wbkF3gPAMGbHSO9jodIlFqpYC55pK8TA==}
@@ -4098,14 +4215,14 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/log@3.2.2:
-    resolution: {integrity: sha512-DpvtAPhdDn47ngf92Mt0fSvwFaLwV4w00LBk8YBdG/8M/9dIFanHArxs3Di6J4KuXA9H2RcHwI17mLnLCMMeoQ==}
+  /@lskjs/log@3.3.0:
+    resolution: {integrity: sha512-3NiTzPKESYECaaP3C5npho3iF8N2+hV+hfPJRo0hQdNeq9Hm/fRjZTVgvXT2n+TgyoRh9qaie+jPV1ado2P5Pw==}
     hasBin: true
     dependencies:
-      '@lskjs/algos': 3.1.1
+      '@lskjs/algos': 3.3.0
       '@lskjs/colors': 3.2.2
       '@lskjs/env': 3.2.2
-      '@lskjs/err': 3.1.1
+      '@lskjs/err': 3.3.0
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
@@ -4157,6 +4274,25 @@ packages:
       lodash: 4.17.21
     dev: true
 
+  /@lskjs/module@2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21):
+    resolution: {integrity: sha512-aWw0/11erDIihpM6npikkQ5zWodDEHpmT58OLMMb/nlfiygboAJ6vau6b5iMUT1ypaMaHWt65d+kH89gjLPCVg==}
+    peerDependencies:
+      '@types/lodash': 4.14.x
+      bluebird: 3.7.x
+      lodash: 4.17.x
+    dependencies:
+      '@lskjs/env': 2.28.0
+      '@lskjs/err': 2.29.0
+      '@lskjs/log2': 2.33.1
+      '@lskjs/mutex': 2.28.0
+      '@lskjs/utils': 2.29.0
+      '@types/lodash': 4.14.178
+      bluebird: 3.7.2
+      colors: 1.4.0
+      eventemitter3: 4.0.7
+      lodash: 4.17.21
+    dev: false
+
   /@lskjs/module@2.76.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21):
     resolution: {integrity: sha512-P+WEUmDibtvIUpRcIDYvd5lKQTaDQGlLt+XBa0JS39Q1lGN5Kx8z0P1TBhAozQT045KCh77d/F25PwpJ4VUj4w==}
     peerDependencies:
@@ -4174,7 +4310,6 @@ packages:
       colors: 1.4.0
       eventemitter3: 4.0.7
       lodash: 4.17.21
-    dev: true
 
   /@lskjs/module@2.85.1(@types/lodash@4.14.172)(bluebird@3.7.2)(lodash@4.17.21):
     resolution: {integrity: sha512-cSDJO64U4d3IBiVWUQFh1SWNpzxi+LnDZWj1N+JgNJ3MPryoneUn9rGJhFYI9lcES9G74JYmu0tHng+0zq+VwA==}
@@ -4214,11 +4349,16 @@ packages:
       lodash: 4.17.21
     dev: false
 
+  /@lskjs/mutex@2.28.0:
+    resolution: {integrity: sha512-71LOIL5SSQ3eZwe90Ji32dwusWzxBp8frObRiMf+8eibRo4TSQZ5ZemPtoYLtQK1qRZVABGvyh0MZGysiuLhIQ==}
+    dependencies:
+      async-mutex: 0.2.6
+    dev: false
+
   /@lskjs/mutex@2.65.1:
     resolution: {integrity: sha512-qsXtUCjhmJ4JPClvBsJE7OPr2UHuYdB1VdJKattG/1zlC/AV5iSZ2AshYl50S7EmvIfaz9P6N9GmashQsi7adg==}
     dependencies:
       async-mutex: 0.2.6
-    dev: true
 
   /@lskjs/mutex@2.8.0:
     resolution: {integrity: sha512-kObzDK+LvWxWeQ4W+hUcWMAw7IB5cxhwfVRaVVuP9gNEqMRIUBHCTj68sirbIYbvRNFWCUh99M3N8+yBX4s1NA==}
@@ -4259,11 +4399,11 @@ packages:
       react: 16.8.6
     dev: true
 
-  /@lskjs/stringify@3.1.1:
-    resolution: {integrity: sha512-SiAmuyRg3lhUNGUvqvcBhCjemcA2mmEq53+8SvWq3jRcCIWypvtwZjVcIk843wCWIlKzZSdv5EHFxXmbU23mVg==}
+  /@lskjs/stringify@3.3.0:
+    resolution: {integrity: sha512-bK9RY/40/06rlMrs5gKQVxGTrYeCpSALKNers47T3yOBsVwW+CfFBb7NddxfNur6hMLSnapCGWB2rgJoxr07qA==}
     dependencies:
-      '@lskjs/algos': 3.1.1
-      '@lskjs/err': 3.1.1
+      '@lskjs/algos': 3.3.0
+      '@lskjs/err': 3.3.0
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
     dev: false
@@ -4284,7 +4424,6 @@ packages:
 
   /@lskjs/utils2@2.65.1:
     resolution: {integrity: sha512-7Pvvn/3OeMxAqo1THGOMXOoE3yt91s1cxNs7nbtT0o38LFbd+xRKhSGhdIHjqGe3r5UhgmJ5P9y17s2Aol+7Sw==}
-    dev: true
 
   /@lskjs/utils2@2.85.1:
     resolution: {integrity: sha512-2r8LSk+nlRlot9MDXSdp3T1lzEee5prN8Ims5Yp5lCydLE31A82xFSSAlXE8gbNBVjZAmP0PtujbyR1wOE17vA==}
@@ -4294,11 +4433,63 @@ packages:
     resolution: {integrity: sha512-byxfbECBJTOLMb4OAyq+A9FRNyVSWa9PgNQHxVMvbHS6I//AxWFrnECzMKV5kSCwcKSzQbYynYyPhgsHUCgj3w==}
     dev: true
 
+  /@lskjs/utils@2.29.0:
+    resolution: {integrity: sha512-zT4RWWhTyxR1kzzetiuiDDnecqFmjagI39EDO4zJx9/mVfw9sIwQfwGuac1dc4jwo8pMqno4BHlTMU6nxcuUMQ==}
+    dev: false
+
   /@lskjs/utils@2.72.0:
     resolution: {integrity: sha512-E7BJ9g2DNRZaZb3WuxRF2LRvfnZxf6h6jR1xtAUoYcIdnxbgnXQTVALI+dCrHUkiAolsym0VUFdI2E4uOMCSXg==}
 
   /@lskjs/utils@2.87.1:
     resolution: {integrity: sha512-v1CfwKl8Y9TeAh6wDEB1jjFydsvI8u13RRI6d29cVlz0QItneDOh+7jXWXPh4LEMJIfjpopFWH2cOS24+6we6g==}
+    dev: false
+
+  /@lskjs/utils@3.2.2:
+    resolution: {integrity: sha512-mrWb9feDxBDn0Kg1/atdhk+kmEWSfJ4ICAUPmFKjuQjqJcmL96r5Ip4wCqWcdlIKp/uuMYI8xsKelVyvPQoWRg==}
+    dev: false
+
+  /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@2.33.1)(@lskjs/i18@2.33.1)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):
+    resolution: {integrity: sha512-Hk6UAr8ziUqG1jG87cozG5CWrhqjqXz+296i43Zrb6Aw25I3KfAkGcoIQo7fJdau2abO/rYgzd8NSSzMhLSbLg==}
+    peerDependencies:
+      '@lskjs/db': 2.33.1
+      '@lskjs/i18': 2.33.1
+      axios: 0.21.x
+      bluebird: 3.7.x
+      lodash: 4.17.x
+    dependencies:
+      '@lskjs/db': 2.33.1(@types/lodash@4.14.178)(@types/mongoose@5.11.97)(bluebird@3.7.2)(lodash@4.17.21)
+      '@lskjs/env': 2.65.1
+      '@lskjs/err': 2.65.1
+      '@lskjs/i18': 2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(js-cookie@3.0.0)(lodash@4.17.21)(mobx@5.15.4)
+      '@lskjs/log': 2.76.0
+      '@lskjs/module': 2.76.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
+      '@lskjs/utils': 2.72.0
+      accept-language-parser: 1.5.0
+      axios: 0.21.2
+      bluebird: 3.7.2
+      body-parser: 1.19.0
+      cacheman: 2.2.1
+      connect-static-file: 2.0.0
+      cookie-parser: 1.4.5
+      cors: 2.8.5
+      emotion: 10.0.27
+      emotion-theming: 10.0.27(@emotion/core@10.0.27)(react@17.0.1)
+      express: 4.17.1
+      express-jwt: 6.1.0
+      fast-safe-stringify: 2.1.1
+      lodash: 4.17.21
+      nanoid: 3.1.29
+      portfinder: 1.0.28
+      socket.io: 4.2.0
+      socket.io-as-promised: 1.0.0
+      socket.io-redis: 6.1.1
+    transitivePeerDependencies:
+      - '@emotion/core'
+      - '@types/lodash'
+      - bufferutil
+      - react
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):
@@ -5508,7 +5699,6 @@ packages:
       - mongodb-extjson
       - snappy
       - supports-color
-    dev: true
 
   /@types/node@16.6.1:
     resolution: {integrity: sha512-Sr7BhXEAer9xyGuCN3Ek9eg9xPviCF2gfu9kTfuU2HkTVAMYSDeX40fvpmo72n5nansg3nsBjuQBrsS28r+NUw==}
@@ -9740,7 +9930,7 @@ packages:
       extend: 3.0.2
       gaxios: 2.3.4
       google-auth-library: 5.10.1
-      qs: 6.11.1
+      qs: 6.10.1
       url-template: 2.0.8
       uuid: 7.0.3
     transitivePeerDependencies:
@@ -9755,7 +9945,7 @@ packages:
       extend: 3.0.2
       gaxios: 4.3.3
       google-auth-library: 6.1.6
-      qs: 6.11.1
+      qs: 6.10.1
       url-template: 2.0.8
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -9770,7 +9960,7 @@ packages:
       extend: 3.0.2
       gaxios: 5.0.2
       google-auth-library: 8.7.0
-      qs: 6.11.1
+      qs: 6.10.1
       url-template: 2.0.8
       uuid: 9.0.0
     transitivePeerDependencies:
@@ -10099,7 +10289,7 @@ packages:
       depd: 1.1.2
       inherits: 2.0.3
       setprototypeof: 1.1.0
-      statuses: 1.4.0
+      statuses: 1.5.0
 
   /http-errors@1.7.2:
     resolution: {integrity: sha512-uUQBt3H/cSIVfch6i1EuPNy/YsRSOUBXTVfZ+yR7Zjez3qjBz6i9+i4zjNaoqcoFVI4lQJ5plg63TvGfRSDCRg==}
@@ -11314,7 +11504,6 @@ packages:
   /js-cookie@3.0.0:
     resolution: {integrity: sha512-oUbbplKuH07/XX2YD2+Q+GMiPpnVXaRz8npE7suhBH9QEkJe2W7mQ6rwuMXHue3fpfcftQwzgyvGzIHyfCSngQ==}
     engines: {node: '>=12'}
-    dev: true
 
   /js-sdsl@4.3.0:
     resolution: {integrity: sha512-mifzlm2+5nZ+lEcLJMoBK0/IH/bDg8XnJfd/Wq6IP+xoCjLZsTOnV2QpxlVbX9bMnkl5PdEjNtBJ9Cj1NjifhQ==}
@@ -11398,7 +11587,7 @@ packages:
     resolution: {integrity: sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA==}
     hasBin: true
     dependencies:
-      minimist: 1.2.7
+      minimist: 1.2.8
     dev: false
 
   /json5@2.2.3:
@@ -11957,8 +12146,8 @@ packages:
       '@lskjs/cli-utils': 3.0.0-alpha.39
       '@lskjs/colors': 3.2.2
       '@lskjs/env': 3.2.2
-      '@lskjs/err': 3.1.1
-      '@lskjs/log': 3.2.2
+      '@lskjs/err': 3.3.0
+      '@lskjs/log': 3.3.0
       '@oclif/command': 1.8.22(@oclif/config@1.18.8)(supports-color@8.1.1)
       '@oclif/config': 1.18.8
       '@oclif/errors': 1.3.6
@@ -12783,7 +12972,6 @@ packages:
 
   /mobx@5.15.4:
     resolution: {integrity: sha512-xRFJxSU2Im3nrGCdjSuOTFmxVDGeqOHL+TyADCGbT0k4HHqGmx5u2yaHNryvoORpI4DfbzjJ5jPmuv+d7sioFw==}
-    dev: true
 
   /modify-values@1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
@@ -13005,6 +13193,10 @@ packages:
       any-promise: 1.3.0
       object-assign: 4.1.1
       thenify-all: 1.6.0
+    dev: false
+
+  /nanocolors@0.2.9:
+    resolution: {integrity: sha512-aymgS4Xe0LMqHOHl7jSUEkFh/6O/pcF0j61dBtreQZ1nmbyYdYjSYSJzz0iPLbKPkMtSmdRgyBGywNZGjKOEfw==}
     dev: false
 
   /nanoid@3.1.25:
@@ -14294,7 +14486,6 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
-    dev: false
 
   /qs@6.11.0:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
@@ -14302,12 +14493,6 @@ packages:
     dependencies:
       side-channel: 1.0.4
     dev: true
-
-  /qs@6.11.1:
-    resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
-    engines: {node: '>=0.6'}
-    dependencies:
-      side-channel: 1.0.4
 
   /qs@6.5.3:
     resolution: {integrity: sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==}
@@ -15736,7 +15921,7 @@ packages:
       formidable: 1.2.6
       methods: 1.1.2
       mime: 2.6.0
-      qs: 6.11.1
+      qs: 6.10.1
       readable-stream: 3.6.0
       semver: 7.3.8
     transitivePeerDependencies:
