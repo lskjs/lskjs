@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/lskjs/lskjs/compare/v3.4.0...v3.5.0) (2023-06-14)
+
+
+### Features
+
+* **log:** add string constructor input ([d4e3a46](https://github.com/lskjs/lskjs/commit/d4e3a46a2e652bba7225ba3a247a2960b1c227dd))
+
+
+
+
+
 # [3.3.0](https://github.com/lskjs/lskjs/compare/v3.2.2...v3.3.0) (2023-04-30)
 
 **Note:** Version bump only for package @lskjs/log
