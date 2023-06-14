@@ -8,4 +8,15 @@
     "**/packages/*/cra/src/**": true,
     "**/packages/*/public/**": true
   },
+  "typescript.preferences.autoImportFileExcludePatterns" : [
+    "**/lib/**",
+
+    "**/packages/*/build*/**",
+    "**/packages/*/release*/**",
+    "**/packages/*/cra/**",
+    "**/packages/*/cra/build/**",
+    "**/packages/*/cra/public/**",
+    "**/packages/*/cra/src/**",
+    "**/packages/*/public/**"
+  ],
 }

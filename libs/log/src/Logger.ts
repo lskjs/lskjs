@@ -2,9 +2,8 @@
 // import debug from 'debug';
 import { omitNull } from '@lskjs/algos';
 
-import { getEnvConfig } from '../lib';
 import { levelsPriority } from './config';
-import { defaultFormat } from './getEnvConfig';
+import { defaultFormat, getEnvConfig } from './getEnvConfig';
 import { stringify } from './pretty/formats';
 import { isLsklogWeb } from './pretty/formats/lsklog';
 // import { tryPrettyFormat } from './pretty/tryPrettyFormat';

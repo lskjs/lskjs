@@ -51,7 +51,7 @@ export const loadConfigEnvs = (path: string, key?: string) => ({
 type PropsFn = (res: Record<string, unknown>) => Record<string, unknown>;
 export const getConfig = (path: string, fields?: string[] | PropsFn) => ({
   imports: [ConfigModule],
-  useFactory: (configService: ConfigService) => {
+  useFactory: (configService: NestConfigService) => {
     const res = configService.get<any>(path);
     if (!res) {
       throw new Err(`!config: ${path}`, { path });
