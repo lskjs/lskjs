@@ -1,7 +1,9 @@
 {
   "version": "3.4.0",
   "npmClient": "pnpm",
-  "useWorkspaces": true,
+  "debug": {
+    "useWorkspaces": true,
+  },
   "command": {
     "publish": {
       "allowBranch": [

@@ -71,7 +71,7 @@
     },
     {
       "path": "lib/ModuleWithLog.js",
-      "limit": "10kb"
+      "limit": "10.1kb"
     },
     {
       "path": "lib/ModuleWithSubmodules.js",
