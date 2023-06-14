@@ -2,6 +2,7 @@
 // import debug from 'debug';
 import { omitNull } from '@lskjs/algos';
 
+import { getEnvConfig } from '../lib';
 import { levelsPriority } from './config';
 import { defaultFormat } from './getEnvConfig';
 import { stringify } from './pretty/formats';
@@ -19,8 +20,12 @@ export class Logger implements ILogger {
   level: LoggerLevelType = 'trace';
   on: RegExp[] = [];
   off: RegExp[] = [];
-  constructor(props: ILoggerProps = {}) {
-    this.setProps(props);
+  constructor(props: ILoggerProps | string = {}) {
+    if (typeof props === 'string') {
+      this.setProps({ name: props, ...getEnvConfig() });
+    } else {
+      this.setProps(props);
+    }
   }
   setProps({ prefix, ns, name, level, format, on = [], off = [] }: ILoggerProps): void {
     if (prefix) this.prefix = prefix;

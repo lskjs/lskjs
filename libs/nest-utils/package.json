@@ -17,7 +17,6 @@
     "@lskjs/env": "^3.1.1",
     "@lskjs/err": "^3.3.0",
     "@lskjs/log": "^3.3.0",
-    "@lskjs/nest-utils": "^3.4.0",
     "@lskjs/webserver": "2.76.3",
     "@types/express": "^4.17.17",
     "fast-safe-stringify": "2.1.1",

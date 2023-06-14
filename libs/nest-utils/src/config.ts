@@ -3,11 +3,16 @@
 
 import { pick } from '@lskjs/algos';
 import { Err } from '@lskjs/err';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import {
+  ConfigModule as NestConfigModule,
+  ConfigService as NestConfigService,
+} from '@nestjs/config';
 import { existsSync } from 'fs';
 import { join } from 'path';
 
-export { ConfigModule, ConfigService };
+export const ConfigModule = NestConfigModule;
+export const ConfigService = NestConfigService;
+
 // https://docs.nestjs.com/techniques/configuration
 export const getEnvJs = (filenames: string | string[]) => {
   // eslint-disable-next-line no-param-reassign
