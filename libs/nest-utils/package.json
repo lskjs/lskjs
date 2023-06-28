@@ -1,7 +1,7 @@
 {
   "_": 123,
   "name": "@lskjs/nest-utils",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "LSK.js – nest utils – helpers and utils for Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
