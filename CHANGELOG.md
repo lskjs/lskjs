@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.2](https://github.com/lskjs/lskjs/compare/v3.5.1...v3.5.2) (2023-06-28)
+
+
+### Bug Fixes
+
+* **log:** add bin ([08d734d](https://github.com/lskjs/lskjs/commit/08d734d617bee2cfe6f931b0a47898e13e869a38))
+
+
+
+
+
 ## [3.5.1](https://github.com/lskjs/lskjs/compare/v3.5.0...v3.5.1) (2023-06-28)
 
 
