@@ -44,6 +44,7 @@
     "preset": "@lskjs/jest-config"
   },
   "files": [
+    "bin",
     "lib",
     "README.md",
     "LICENCE"
