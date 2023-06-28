@@ -560,7 +560,7 @@ importers:
         version: 16.7.2
       mongoose-elasticsearch-xp-async:
         specifier: 0.1.3
-        version: 0.1.3(elasticsearch@16.7.2)(mongoose@5.13.17)
+        version: 0.1.3(elasticsearch@16.7.2)(mongoose@5.13.19)
     devDependencies:
       lodash:
         specifier: 4.17.21
@@ -1621,8 +1621,8 @@ importers:
         specifier: ^3.5.0
         version: link:../log
       '@lskjs/webserver':
-        specifier: 2.76.3
-        version: 2.76.3(@emotion/core@10.0.27)(@lskjs/db@2.33.1)(@lskjs/i18@2.33.1)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1)
+        specifier: ^3.1.1
+        version: link:../../libs-core/webserver
       '@types/express':
         specifier: ^4.17.17
         version: 4.17.17
@@ -1634,11 +1634,11 @@ importers:
         version: 3.1.29
     devDependencies:
       '@nestjs/common':
-        specifier: ^9.4.3
-        version: 9.4.3(reflect-metadata@0.1.13)(rxjs@7.8.1)
+        specifier: ^10.0.3
+        version: 10.0.3(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/config':
-        specifier: ^2.3.4
-        version: 2.3.4(@nestjs/common@9.4.3)(reflect-metadata@0.1.13)(rxjs@7.8.1)
+        specifier: ^3.0.0
+        version: 3.0.0(@nestjs/common@10.0.3)(reflect-metadata@0.1.13)
       express:
         specifier: 4.18.2
         version: 4.18.2
@@ -4390,11 +4390,11 @@ packages:
     resolution: {integrity: sha512-T33yjoZA+IRz4cJJ9a/26SmkjviRJlij0S0YZslayNKDR7Wv+Q0I/cCO/azuDo6Iucon3UQOrPoHYVQ/EhdRqA==}
     dev: false
 
-  /@lskjs/cli-scripts@3.3.0:
-    resolution: {integrity: sha512-75TfoerCoLEoAHy7tp0QUA+2gZmdBTcHc7Df5TEcv/ReW5170Pn6G5vQimkMDxq+o1tHLtLVA8Zqt7WXFxOgMQ==}
+  /@lskjs/cli-scripts@3.5.0:
+    resolution: {integrity: sha512-UPYQqa87HoW72yCnxMfdzejFpgbgghys/bvLr9JDsobqwqeeJaWup8EJ9uo6yftIO3qVpxDehuLFHH11BOYfQA==}
     dependencies:
       '@lskjs/algos': 3.3.0
-      '@lskjs/cli-utils': 3.3.0
+      '@lskjs/cli-utils': 3.5.0
       '@lskjs/env': 3.2.2
       '@lskjs/err': 3.3.0
       '@lskjs/stringify': 3.3.0
@@ -4408,8 +4408,8 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/cli-utils@3.3.0:
-    resolution: {integrity: sha512-+QnwuwnXIbnvaEWxtyyOqmNhgP3yLniM68Ly7A89SYd21W52Q6TplsllyEhi8rmlVPgcXm/QHvTW+HRUays4ZA==}
+  /@lskjs/cli-utils@3.5.0:
+    resolution: {integrity: sha512-LbH/hy0tG25jp8vRTSFUKdJcFH8MHl0vsOsj87ecqLXTWp49QB8y47RLxJfnBlvA2Vlmw5xTBBSUlGUpRtIAzA==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.7
@@ -4417,7 +4417,7 @@ packages:
       '@lskjs/colors': 3.2.2
       '@lskjs/env': 3.2.2
       '@lskjs/err': 3.3.0
-      '@lskjs/log': 3.3.0
+      '@lskjs/log': 3.5.0
       '@lskjs/utils': 3.2.2
       axios: 0.27.2
       bluebird: 3.7.2
@@ -4436,8 +4436,8 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.3.0
-      '@lskjs/cli-utils': 3.3.0
+      '@lskjs/cli-scripts': 3.5.0
+      '@lskjs/cli-utils': 3.5.0
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16(@oclif/config@1.18.3)
@@ -4473,30 +4473,6 @@ packages:
       '@emotion/core': 10.0.27(react@16.8.6)
       emotion: 10.0.27
     dev: true
-
-  /@lskjs/db@2.33.1(@types/lodash@4.14.178)(@types/mongoose@5.11.97)(bluebird@3.7.2)(lodash@4.17.21):
-    resolution: {integrity: sha512-7T906RdbIyrGhR5UFjwjNBLFlAL+t0LNCFyJb4VYgTwyeDgsl82e00tBpOLqZtGPvcBbTcCrbhBNEA/azzfk+g==}
-    peerDependencies:
-      '@types/mongoose': 5.11.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/module': 2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
-      '@lskjs/utils': 2.29.0
-      '@types/mongoose': 5.11.97
-      bluebird: 3.7.2
-      lodash: 4.17.21
-      mongoose: 5.13.17
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - aws4
-      - bson-ext
-      - kerberos
-      - mongodb-client-encryption
-      - mongodb-extjson
-      - snappy
-      - supports-color
-    dev: false
 
   /@lskjs/debug-level@0.3.2:
     resolution: {integrity: sha512-VHPhtJ9do45MGE93DxEsPdCgPUQAAAdicgytkzG8UMCXIgq5nIKY7JNzDunqbOw2sH7yaJfzF1sYwfb745zWCQ==}
@@ -4535,10 +4511,6 @@ packages:
       mobx-react-devtools: 6.1.1(mobx-react@6.2.2)(mobx@5.15.4)
     dev: true
 
-  /@lskjs/env@2.28.0:
-    resolution: {integrity: sha512-2uPQn90ID5Rjvs+kCsO1SDiA/InLBdWwyWB5YzisJZYOfpiak1tesUE1KzANZmPlDzPMF0seKCJqNUA2D36VIA==}
-    dev: false
-
   /@lskjs/env@2.65.1:
     resolution: {integrity: sha512-QIim3YP+1onXMl9RRq83MQIt1APFxn8xC8pLwNDM2tAXij5NT6+TB1uOQBl+rD9faQxSaHxoXcVwmBxVTMpdyg==}
 
@@ -4566,12 +4538,6 @@ packages:
     dependencies:
       lodash: 4.17.21
     dev: true
-
-  /@lskjs/err@2.29.0:
-    resolution: {integrity: sha512-3Qk3vpmt7CVMS5wUm444ODdUVS61oRhoSxl8530zalm6L+4Zp93ORRlJ+USPWZ4i/+voc81e7MggDDHBc8WO8g==}
-    dependencies:
-      lodash: 4.17.21
-    dev: false
 
   /@lskjs/err@2.65.1:
     resolution: {integrity: sha512-H+lbygVeLsHRL9x2oyOABz0b2ebKl+m0n0Veb4wwVtAW+e7zDls+mPdJbxqouyLFF7RpaVJRER43HYWUA6dYiA==}
@@ -4612,26 +4578,6 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/i18@2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(js-cookie@3.0.0)(lodash@4.17.21)(mobx@5.15.4):
-    resolution: {integrity: sha512-+xvVTjfcdKReEpOFQdZO0nlaOIOmGEbTvyLqKcHCDSOHUPPUmbcIYIvABIFPne6ZslNADkYJbHXfng0uFHzmyQ==}
-    peerDependencies:
-      bluebird: 3.7.x
-      js-cookie: 3.x
-      mobx: 5.x
-    dependencies:
-      '@lskjs/env': 2.28.0
-      '@lskjs/err': 2.29.0
-      '@lskjs/module': 2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
-      bluebird: 3.7.2
-      i18next: 19.1.0
-      i18next-xhr-backend: 3.2.2
-      js-cookie: 3.0.0
-      mobx: 5.15.4
-    transitivePeerDependencies:
-      - '@types/lodash'
-      - lodash
-    dev: false
-
   /@lskjs/link@1.1.10(@lskjs/utils@2.72.0)(react@16.8.6):
     resolution: {integrity: sha512-Vr3kfV9CWeoTs/am9j2GbRzibbOEzU6DNvyCNKnpMAlWBAbHSa7rC0j25aMkZTuucEa/pfDmymkoemWzUwJ7gA==}
     peerDependencies:
@@ -4667,20 +4613,6 @@ packages:
       fast-safe-stringify: 2.0.8
     dev: true
 
-  /@lskjs/log2@2.33.1:
-    resolution: {integrity: sha512-NGYcBpYPUPMNzcyGJeg1nm4sKlCkT+PPgNeBZu7itz2JjVIrDinivRtpQky6226jy+2JauYV7Su2HcqKSvTEiw==}
-    hasBin: true
-    dependencies:
-      '@lskjs/debug-level': 0.3.2
-      '@lskjs/env': 2.28.0
-      '@lskjs/err': 2.29.0
-      colors: 1.4.0
-      fast-safe-stringify: 2.0.8
-      nanocolors: 0.2.9
-      split: 1.0.1
-      through: 2.3.8
-    dev: false
-
   /@lskjs/log@2.75.1:
     resolution: {integrity: sha512-ty6EMRZvIJCeSXON1Mfd8rm80RCfYsNLvzi3mtV5xvsKYdIm8/shdAR3RVHazheAi7dl8NusUSdMK7voGnp7bA==}
     hasBin: true
@@ -4713,6 +4645,7 @@ packages:
       through: 2.3.8
     optionalDependencies:
       logfmt: 1.3.2
+    dev: true
 
   /@lskjs/log@2.85.1:
     resolution: {integrity: sha512-IFisUVOef0MMS34bl2acfzea/736l0079f6NwpIzbNI65Ci6CUfJo6wbkF3gPAMGbHSO9jodIlFqpYC55pK8TA==}
@@ -4731,8 +4664,8 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/log@3.3.0:
-    resolution: {integrity: sha512-3NiTzPKESYECaaP3C5npho3iF8N2+hV+hfPJRo0hQdNeq9Hm/fRjZTVgvXT2n+TgyoRh9qaie+jPV1ado2P5Pw==}
+  /@lskjs/log@3.5.0:
+    resolution: {integrity: sha512-m8lMtjikVaS91b/rJZ74MwaQ8od09tLL7uiJwI6k1w8RYtECZVfdl3GL6BAKqIjwN7o/rrExUnj3+umgjjzKoQ==}
     hasBin: true
     dependencies:
       '@lskjs/algos': 3.3.0
@@ -4790,25 +4723,6 @@ packages:
       lodash: 4.17.21
     dev: true
 
-  /@lskjs/module@2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21):
-    resolution: {integrity: sha512-aWw0/11erDIihpM6npikkQ5zWodDEHpmT58OLMMb/nlfiygboAJ6vau6b5iMUT1ypaMaHWt65d+kH89gjLPCVg==}
-    peerDependencies:
-      '@types/lodash': 4.14.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/env': 2.28.0
-      '@lskjs/err': 2.29.0
-      '@lskjs/log2': 2.33.1
-      '@lskjs/mutex': 2.28.0
-      '@lskjs/utils': 2.29.0
-      '@types/lodash': 4.14.178
-      bluebird: 3.7.2
-      colors: 1.4.0
-      eventemitter3: 4.0.7
-      lodash: 4.17.21
-    dev: false
-
   /@lskjs/module@2.76.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21):
     resolution: {integrity: sha512-P+WEUmDibtvIUpRcIDYvd5lKQTaDQGlLt+XBa0JS39Q1lGN5Kx8z0P1TBhAozQT045KCh77d/F25PwpJ4VUj4w==}
     peerDependencies:
@@ -4826,6 +4740,7 @@ packages:
       colors: 1.4.0
       eventemitter3: 4.0.7
       lodash: 4.17.21
+    dev: true
 
   /@lskjs/module@2.85.1(@types/lodash@4.14.172)(bluebird@3.7.2)(lodash@4.17.21):
     resolution: {integrity: sha512-cSDJO64U4d3IBiVWUQFh1SWNpzxi+LnDZWj1N+JgNJ3MPryoneUn9rGJhFYI9lcES9G74JYmu0tHng+0zq+VwA==}
@@ -4865,16 +4780,11 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@lskjs/mutex@2.28.0:
-    resolution: {integrity: sha512-71LOIL5SSQ3eZwe90Ji32dwusWzxBp8frObRiMf+8eibRo4TSQZ5ZemPtoYLtQK1qRZVABGvyh0MZGysiuLhIQ==}
-    dependencies:
-      async-mutex: 0.2.6
-    dev: false
-
   /@lskjs/mutex@2.65.1:
     resolution: {integrity: sha512-qsXtUCjhmJ4JPClvBsJE7OPr2UHuYdB1VdJKattG/1zlC/AV5iSZ2AshYl50S7EmvIfaz9P6N9GmashQsi7adg==}
     dependencies:
       async-mutex: 0.2.6
+    dev: true
 
   /@lskjs/mutex@2.8.0:
     resolution: {integrity: sha512-kObzDK+LvWxWeQ4W+hUcWMAw7IB5cxhwfVRaVVuP9gNEqMRIUBHCTj68sirbIYbvRNFWCUh99M3N8+yBX4s1NA==}
@@ -4940,6 +4850,7 @@ packages:
 
   /@lskjs/utils2@2.65.1:
     resolution: {integrity: sha512-7Pvvn/3OeMxAqo1THGOMXOoE3yt91s1cxNs7nbtT0o38LFbd+xRKhSGhdIHjqGe3r5UhgmJ5P9y17s2Aol+7Sw==}
+    dev: true
 
   /@lskjs/utils2@2.85.1:
     resolution: {integrity: sha512-2r8LSk+nlRlot9MDXSdp3T1lzEee5prN8Ims5Yp5lCydLE31A82xFSSAlXE8gbNBVjZAmP0PtujbyR1wOE17vA==}
@@ -4949,59 +4860,11 @@ packages:
     resolution: {integrity: sha512-byxfbECBJTOLMb4OAyq+A9FRNyVSWa9PgNQHxVMvbHS6I//AxWFrnECzMKV5kSCwcKSzQbYynYyPhgsHUCgj3w==}
     dev: true
 
-  /@lskjs/utils@2.29.0:
-    resolution: {integrity: sha512-zT4RWWhTyxR1kzzetiuiDDnecqFmjagI39EDO4zJx9/mVfw9sIwQfwGuac1dc4jwo8pMqno4BHlTMU6nxcuUMQ==}
-    dev: false
-
   /@lskjs/utils@2.72.0:
     resolution: {integrity: sha512-E7BJ9g2DNRZaZb3WuxRF2LRvfnZxf6h6jR1xtAUoYcIdnxbgnXQTVALI+dCrHUkiAolsym0VUFdI2E4uOMCSXg==}
 
   /@lskjs/utils@3.2.2:
     resolution: {integrity: sha512-mrWb9feDxBDn0Kg1/atdhk+kmEWSfJ4ICAUPmFKjuQjqJcmL96r5Ip4wCqWcdlIKp/uuMYI8xsKelVyvPQoWRg==}
-    dev: false
-
-  /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@2.33.1)(@lskjs/i18@2.33.1)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):
-    resolution: {integrity: sha512-Hk6UAr8ziUqG1jG87cozG5CWrhqjqXz+296i43Zrb6Aw25I3KfAkGcoIQo7fJdau2abO/rYgzd8NSSzMhLSbLg==}
-    peerDependencies:
-      '@lskjs/db': 2.33.1
-      '@lskjs/i18': 2.33.1
-      axios: 0.21.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/db': 2.33.1(@types/lodash@4.14.178)(@types/mongoose@5.11.97)(bluebird@3.7.2)(lodash@4.17.21)
-      '@lskjs/env': 2.65.1
-      '@lskjs/err': 2.65.1
-      '@lskjs/i18': 2.33.1(@types/lodash@4.14.178)(bluebird@3.7.2)(js-cookie@3.0.0)(lodash@4.17.21)(mobx@5.15.4)
-      '@lskjs/log': 2.76.0
-      '@lskjs/module': 2.76.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
-      '@lskjs/utils': 2.72.0
-      accept-language-parser: 1.5.0
-      axios: 0.21.2
-      bluebird: 3.7.2
-      body-parser: 1.19.0
-      cacheman: 2.2.1
-      connect-static-file: 2.0.0
-      cookie-parser: 1.4.5
-      cors: 2.8.5
-      emotion: 10.0.27
-      emotion-theming: 10.0.27(@emotion/core@10.0.27)(react@17.0.1)
-      express: 4.17.1
-      express-jwt: 6.1.0
-      fast-safe-stringify: 2.1.1
-      lodash: 4.17.21
-      nanoid: 3.1.29
-      portfinder: 1.0.28
-      socket.io: 4.2.0
-      socket.io-as-promised: 1.0.0
-      socket.io-redis: 6.1.1
-    transitivePeerDependencies:
-      - '@emotion/core'
-      - '@types/lodash'
-      - bufferutil
-      - react
-      - supports-color
-      - utf-8-validate
     dev: false
 
   /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):
@@ -5053,17 +4916,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /@nestjs/common@9.4.3(reflect-metadata@0.1.13)(rxjs@7.8.1):
-    resolution: {integrity: sha512-Gd6D4IaYj01o14Bwv81ukidn4w3bPHCblMUq+SmUmWLyosK+XQmInCS09SbDDZyL8jy86PngtBLTdhJ2bXSUig==}
+  /@nestjs/common@10.0.3(reflect-metadata@0.1.13)(rxjs@7.8.1):
+    resolution: {integrity: sha512-Zv59rDQMuwyja8fvnQelG4AbEe7FEC2ZUXcUwE6Tw0aOHx5CaOBIU426FCYY9o3iqJX3xLCKVJ8NrLPg58xCZg==}
     peerDependencies:
-      cache-manager: <=5
       class-transformer: '*'
       class-validator: '*'
       reflect-metadata: ^0.1.12
       rxjs: ^7.1.0
     peerDependenciesMeta:
-      cache-manager:
-        optional: true
       class-transformer:
         optional: true
       class-validator:
@@ -5076,19 +4936,17 @@ packages:
       uid: 2.0.2
     dev: true
 
-  /@nestjs/config@2.3.4(@nestjs/common@9.4.3)(reflect-metadata@0.1.13)(rxjs@7.8.1):
-    resolution: {integrity: sha512-IGdSF+0F9MJO6dCRTEahdxPz4iVijjtolcFBxnY+2QYM3bXYQvAgzskGZi+WkAFJN/VzR3TEp60gN5sI74GxPA==}
+  /@nestjs/config@3.0.0(@nestjs/common@10.0.3)(reflect-metadata@0.1.13):
+    resolution: {integrity: sha512-fzASk1Uv6AjdE6uA1na8zpqRCXAhRpcfgpCVv3SAKlgJ3VR3bEjcI4G17WHLgLBsmPzI1ofdkSI451WLD1F1Rw==}
     peerDependencies:
-      '@nestjs/common': ^7.0.0 || ^8.0.0 || ^9.0.0
+      '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0
       reflect-metadata: ^0.1.13
-      rxjs: ^6.0.0 || ^7.2.0
     dependencies:
-      '@nestjs/common': 9.4.3(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      '@nestjs/common': 10.0.3(reflect-metadata@0.1.13)(rxjs@7.8.1)
       dotenv: 16.1.4
       dotenv-expand: 10.0.0
       lodash: 4.17.21
       reflect-metadata: 0.1.13
-      rxjs: 7.8.1
       uuid: 9.0.0
     dev: true
 
@@ -5203,7 +5061,7 @@ packages:
       nx: 16.3.2(@swc/core@1.3.64)
       semver: 7.3.4
       tmp: 0.2.1
-      tslib: 2.5.3
+      tslib: 2.6.0
     dev: false
 
   /@nx/nx-darwin-arm64@16.3.2:
@@ -5382,7 +5240,7 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
       globby: 11.1.0
       is-wsl: 2.2.0
-      tslib: 2.5.3
+      tslib: 2.6.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5396,7 +5254,7 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
       globby: 11.1.0
       is-wsl: 2.2.0
-      tslib: 2.5.3
+      tslib: 2.6.0
     transitivePeerDependencies:
       - supports-color
 
@@ -5442,7 +5300,7 @@ packages:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      tslib: 2.5.3
+      tslib: 2.6.0
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
     dev: false
@@ -5475,7 +5333,7 @@ packages:
       strip-ansi: 6.0.1
       supports-color: 8.1.1
       supports-hyperlinks: 2.3.0
-      tslib: 2.5.3
+      tslib: 2.6.0
       widest-line: 3.1.0
       wordwrap: 1.0.0
       wrap-ansi: 7.0.0
@@ -5550,7 +5408,7 @@ packages:
       '@oclif/errors': 1.3.6
       '@oclif/linewrap': 1.0.0
       chalk: 4.1.2
-      tslib: 2.5.3
+      tslib: 2.6.0
 
   /@oclif/plugin-help@3.2.18:
     resolution: {integrity: sha512-5n5Pkz4L0duknIvFwx2Ko9Xda3miT6RZP8bgaaK3Q/9fzVBrhi4bOM0u05/OThI6V+3NsSdxYS2o1NLcXToWDg==}
@@ -5750,7 +5608,7 @@ packages:
       open: 8.4.1
       picocolors: 1.0.0
       tiny-glob: 0.2.9
-      tslib: 2.5.3
+      tslib: 2.6.0
     dev: false
 
   /@selderee/plugin-htmlparser2@0.6.0:
@@ -6171,6 +6029,7 @@ packages:
       - mongodb-extjson
       - snappy
       - supports-color
+    dev: true
 
   /@types/node@16.6.1:
     resolution: {integrity: sha512-Sr7BhXEAer9xyGuCN3Ek9eg9xPviCF2gfu9kTfuU2HkTVAMYSDeX40fvpmo72n5nansg3nsBjuQBrsS28r+NUw==}
@@ -6396,7 +6255,7 @@ packages:
     engines: {node: '>=14.15.0'}
     dependencies:
       js-yaml: 3.14.1
-      tslib: 2.5.3
+      tslib: 2.6.0
     dev: false
 
   /@zkochan/js-yaml@0.0.6:
@@ -7510,7 +7369,7 @@ packages:
       htmlparser2: 6.1.0
       parse5: 6.0.1
       parse5-htmlparser2-tree-adapter: 6.0.1
-      tslib: 2.5.3
+      tslib: 2.6.0
     dev: false
 
   /chokidar@3.5.3:
@@ -11982,6 +11841,7 @@ packages:
     resolution: {integrity: sha512-juMg3he2uru1QoXX078zTa7pO85QyB9xajZc6bU+d9yEGwrKX6+vGmJQ3UdVZsvTEUARIdObzH68QItim6OSSQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
+    requiresBuild: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -12026,6 +11886,7 @@ packages:
   /js-cookie@3.0.0:
     resolution: {integrity: sha512-oUbbplKuH07/XX2YD2+Q+GMiPpnVXaRz8npE7suhBH9QEkJe2W7mQ6rwuMXHue3fpfcftQwzgyvGzIHyfCSngQ==}
     engines: {node: '>=12'}
+    dev: true
 
   /js-sdsl@4.3.0:
     resolution: {integrity: sha512-mifzlm2+5nZ+lEcLJMoBK0/IH/bDg8XnJfd/Wq6IP+xoCjLZsTOnV2QpxlVbX9bMnkl5PdEjNtBJ9Cj1NjifhQ==}
@@ -13481,6 +13342,7 @@ packages:
 
   /mobx@5.15.4:
     resolution: {integrity: sha512-xRFJxSU2Im3nrGCdjSuOTFmxVDGeqOHL+TyADCGbT0k4HHqGmx5u2yaHNryvoORpI4DfbzjJ5jPmuv+d7sioFw==}
+    dev: true
 
   /modify-values@1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
@@ -13533,14 +13395,47 @@ packages:
     optionalDependencies:
       saslprep: 1.0.3
 
-  /mongoose-elasticsearch-xp-async@0.1.3(elasticsearch@16.7.2)(mongoose@5.13.17):
+  /mongodb@3.7.4:
+    resolution: {integrity: sha512-K5q8aBqEXMwWdVNh94UQTwZ6BejVbFhh1uB6c5FKtPE9eUMZPUO3sRZdgIEcHSrAWmxzpG/FeODDKL388sqRmw==}
+    engines: {node: '>=4'}
+    peerDependencies:
+      aws4: '*'
+      bson-ext: '*'
+      kerberos: '*'
+      mongodb-client-encryption: '*'
+      mongodb-extjson: '*'
+      snappy: '*'
+    peerDependenciesMeta:
+      aws4:
+        optional: true
+      bson-ext:
+        optional: true
+      kerberos:
+        optional: true
+      mongodb-client-encryption:
+        optional: true
+      mongodb-extjson:
+        optional: true
+      snappy:
+        optional: true
+    dependencies:
+      bl: 2.2.1
+      bson: 1.1.6
+      denque: 1.5.1
+      optional-require: 1.1.8
+      safe-buffer: 5.2.1
+    optionalDependencies:
+      saslprep: 1.0.3
+    dev: false
+
+  /mongoose-elasticsearch-xp-async@0.1.3(elasticsearch@16.7.2)(mongoose@5.13.19):
     resolution: {integrity: sha512-D0lQDCug8B773LZkfTiJpmOA8o2vMKHvdqp535uDeElE+657FHByCt3dmd/whfRkRHy+O0Jp5/PWjL//4E1W5Q==}
     peerDependencies:
       elasticsearch: ^12.1.3 || ^13.0.0 || ^14.0.0 || ^16.0.0
       mongoose: ^4.9.0 || ^5.0.0
     dependencies:
       elasticsearch: 16.7.2
-      mongoose: 5.13.17
+      mongoose: 5.13.19
     dev: false
 
   /mongoose-legacy-pluralize@1.0.2(mongoose@5.13.15):
@@ -13550,12 +13445,12 @@ packages:
     dependencies:
       mongoose: 5.13.15
 
-  /mongoose-legacy-pluralize@1.0.2(mongoose@5.13.17):
+  /mongoose-legacy-pluralize@1.0.2(mongoose@5.13.19):
     resolution: {integrity: sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==}
     peerDependencies:
       mongoose: '*'
     dependencies:
-      mongoose: 5.13.17
+      mongoose: 5.13.19
     dev: false
 
   /mongoose@5.13.15:
@@ -13585,16 +13480,16 @@ packages:
       - snappy
       - supports-color
 
-  /mongoose@5.13.17:
-    resolution: {integrity: sha512-kzlwQgrWaQflFSdENNGN4+FQEm/yOMgR1T1okIp5fARGQ8YKdjO+0U9Ikzsv5OVSFIkE0ATyJj2XxawYbf2bpA==}
+  /mongoose@5.13.19:
+    resolution: {integrity: sha512-t65+DaVfjlSfCPaPsev4YsbB2jHg4vylvkuQOBaCXkXIenXLDhE5ZNEXbChGoPUSFRUp7ihze6YenQwK3nIhPA==}
     engines: {node: '>=4.0.0'}
     dependencies:
       '@types/bson': 4.0.5
       '@types/mongodb': 3.6.20
       bson: 1.1.6
       kareem: 2.3.2
-      mongodb: 3.7.3
-      mongoose-legacy-pluralize: 1.0.2(mongoose@5.13.17)
+      mongodb: 3.7.4
+      mongoose-legacy-pluralize: 1.0.2(mongoose@5.13.19)
       mpath: 0.8.4
       mquery: 3.2.5
       ms: 2.1.2
@@ -13707,10 +13602,6 @@ packages:
       any-promise: 1.3.0
       object-assign: 4.1.1
       thenify-all: 1.6.0
-    dev: false
-
-  /nanocolors@0.2.9:
-    resolution: {integrity: sha512-aymgS4Xe0LMqHOHl7jSUEkFh/6O/pcF0j61dBtreQZ1nmbyYdYjSYSJzz0iPLbKPkMtSmdRgyBGywNZGjKOEfw==}
     dev: false
 
   /nanoid@3.1.25:
@@ -14124,7 +14015,7 @@ packages:
       tar-stream: 2.2.0
       tmp: 0.2.1
       tsconfig-paths: 4.2.0
-      tslib: 2.5.3
+      tslib: 2.6.0
       v8-compile-cache: 2.3.0
       yargs: 17.7.2
       yargs-parser: 21.1.1
@@ -15682,7 +15573,7 @@ packages:
   /rxjs@7.8.1:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
-      tslib: 2.5.3
+      tslib: 2.6.0
 
   /safe-buffer@5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
@@ -16584,7 +16475,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     dependencies:
       '@pkgr/utils': 2.3.1
-      tslib: 2.5.3
+      tslib: 2.6.0
     dev: false
 
   /tapable@2.2.1:
@@ -16944,6 +16835,10 @@ packages:
 
   /tslib@2.5.3:
     resolution: {integrity: sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==}
+    dev: true
+
+  /tslib@2.6.0:
+    resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
 
   /tsup@6.7.0(@swc/core@1.3.64)(typescript@4.9.5):
     resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}

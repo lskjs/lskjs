@@ -1,8 +1,7 @@
 import { isDev } from '@lskjs/env';
 // @ts-ignore
+// eslint-disable-next-line import/no-unresolved
 import applyLogger from '@lskjs/webserver/middlewares/accessLogger/applyLogger';
-// @ts-ignore
-// import createLskMiddleware from '@lskjs/webserver/middlewares/lskMiddleware';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { nanoid } from 'nanoid';
 

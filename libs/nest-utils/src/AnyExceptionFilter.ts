@@ -2,11 +2,12 @@
 import { omitNull } from '@lskjs/algos';
 import { isDebug } from '@lskjs/env';
 import { Err } from '@lskjs/err';
+import { getEnvConfig, Logger } from '@lskjs/log';
 import {
   ArgumentsHost,
   Catch,
   ExceptionFilter as BaseExceptionFilter,
-  Logger,
+  // Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import stringify from 'fast-safe-stringify';
@@ -18,7 +19,8 @@ const isEmpty = (obj = {}) => !Object.keys(obj).length;
 
 @Catch(Err)
 export class AnyExceptionFilter implements BaseExceptionFilter {
-  private readonly log = new Logger(AnyExceptionFilter.name);
+  // AnyExceptionFilter.name
+  private readonly log = new Logger({ ns: 'webserver:exception', ...getEnvConfig() });
   catch(err: Err, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
@@ -72,9 +74,16 @@ export class AnyExceptionFilter implements BaseExceptionFilter {
     if (!isDeepDebug || isEmpty(logInfo.headers)) delete logInfo.headers;
     if (logInfo.status >= 500) {
       this.log.error(err);
+      this.log.trace('[req]', logInfo);
+    } else if ([401, 403, 404].includes(logInfo.status)) {
+      this.log.trace(err);
+      // this.log.trace('[req]', logInfo);
     } else if (logInfo.status >= 400) {
       this.log.debug(err);
+      this.log.trace('[req]', logInfo);
+    } else {
+      this.log.debug(err);
+      this.log.trace('[req]', logInfo);
     }
-    this.log.verbose('[req]', logInfo);
   }
 }
