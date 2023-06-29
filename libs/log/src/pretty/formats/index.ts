@@ -8,6 +8,9 @@ export function detectFormat(json: any): ILoggerInternalMessageFormat | null {
   if (isBunyan(json)) return ILoggerInternalMessageFormat.bunyan;
   if (isLsklog(json)) return ILoggerInternalMessageFormat.lsklog;
   if (isLsklogWeb(json)) return ILoggerInternalMessageFormat.lsklogweb;
+  if (isLogrus(json) && isLskLikelog(json) && json?.name) {
+    return ILoggerInternalMessageFormat.lsklog;
+  }
   if (isLogrus(json)) return ILoggerInternalMessageFormat.logrus;
   if (isLskLikelog(json)) return ILoggerInternalMessageFormat.lsklog;
   return null;
