@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.3](https://github.com/lskjs/lskjs/compare/v3.5.2...v3.5.3) (2023-06-29)
+
+
+### Bug Fixes
+
+* **log:** separate lsk log from logrus log ([86c9434](https://github.com/lskjs/lskjs/commit/86c9434a70cf99302507b37e13fd96117dda8b72))
+
+
+
+
+
 ## [3.5.2](https://github.com/lskjs/lskjs/compare/v3.5.1...v3.5.2) (2023-06-28)
 
 
