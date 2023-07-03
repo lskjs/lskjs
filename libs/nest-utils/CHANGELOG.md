@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.4](https://github.com/lskjs/lskjs/compare/v3.5.3...v3.5.4) (2023-07-03)
+
+
+### Bug Fixes
+
+* **nest-utils:** any exception filter ([53d29c9](https://github.com/lskjs/lskjs/commit/53d29c95a457531ba5dd4c8ae05fdaa0d436a1da))
+
+
+
+
+
 ## [3.5.3](https://github.com/lskjs/lskjs/compare/v3.5.2...v3.5.3) (2023-06-29)
 
 **Note:** Version bump only for package @lskjs/nest-utils
