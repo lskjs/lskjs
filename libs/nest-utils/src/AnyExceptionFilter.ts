@@ -65,6 +65,10 @@ export class AnyExceptionFilter implements BaseExceptionFilter {
       data,
     });
 
+    if (!res.status) {
+      this.log.warn('!res.status');
+      return null;
+    }
     return res.status(status).send(stringify(response, undefined, isDebug ? 2 : 0));
   }
 
