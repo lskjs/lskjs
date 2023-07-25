@@ -22,7 +22,7 @@
     "nanoid": "^3.1.29"
   },
   "devDependencies": {
-    "@nestjs/common": "^10.0.5",
+    "@nestjs/common": "^10.1.2",
     "@nestjs/config": "^3.0.0",
     "express": "4.18.2"
   },
