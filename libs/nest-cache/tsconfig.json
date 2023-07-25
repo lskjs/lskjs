@@ -1,0 +1,4 @@
+{
+  "extends": "@lskjs/tsconfig/strict/tsconfig.json"
+}
+
