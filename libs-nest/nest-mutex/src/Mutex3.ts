@@ -25,6 +25,7 @@ class MutexInterceptor implements NestInterceptor {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Mutex(key: string) {
   return applyDecorators(
     UseInterceptors(MutexInterceptor),
