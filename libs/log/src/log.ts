@@ -1,5 +1,4 @@
-import { getEnvConfig } from './getEnvConfig';
-import { Logger } from './Logger';
+import { createLogger } from './createLogger';
 
-export const log = new Logger(getEnvConfig());
+export const log = createLogger();
 export default log;
