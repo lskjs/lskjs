@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.8.1](https://github.com/lskjs/lskjs/compare/v3.8.0...v3.8.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **nest-auth:** eslint error ([f982bca](https://github.com/lskjs/lskjs/commit/f982bcae6bc91dd228f67889963def417fe8b808))
+* **nest-mutex:** fix eslint error ([84cad8a](https://github.com/lskjs/lskjs/commit/84cad8a7e29d3704760f683bab3184f70c46f694))
+* types errors ([72973d3](https://github.com/lskjs/lskjs/commit/72973d3d50aa3790aa5b74585e82ae9bb8e5c653))
+
+
+### Features
+
+* **nest-auth:** init package ([6365d75](https://github.com/lskjs/lskjs/commit/6365d757a7adb49194630760ac38c5542eb95383))
+* **nest-cache:** init package ([01cd4a4](https://github.com/lskjs/lskjs/commit/01cd4a48346940a86bb5e297ac321a5a44fbed15))
+* **nest-mutex:** init package ([4e9b610](https://github.com/lskjs/lskjs/commit/4e9b610b255b14f06912b8b1f4ab0d4c3c424c6b))
+* **nest-rabbitmq:** init package ([6519640](https://github.com/lskjs/lskjs/commit/65196405733dfc3f34f69c18794f055c908c479f))
+
+
+
+
+
 # [3.8.0](https://github.com/lskjs/lskjs/compare/v3.7.0...v3.8.0) (2023-07-25)
 
 

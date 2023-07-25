@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/telegraf",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "description": "LSK.js – telegraf - wrapper for Telegraf/Telegram",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/log": "^3.8.0"
+    "@lskjs/log": "^3.8.1"
   },
   "devDependencies": {
     "telegraf": "^4.12.2"

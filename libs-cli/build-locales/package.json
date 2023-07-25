@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/build-locales",
-  "version": "3.1.1",
+  "version": "3.8.1",
   "description": "CLI for build i18 locales from Google spreadsheet",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

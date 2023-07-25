@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/proxy",
-  "version": "3.1.1",
+  "version": "3.8.1",
   "description": "LSK module for proxy.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -24,7 +24,7 @@
     "socks-proxy-agent": "5.0.0"
   },
   "devDependencies": {
-    "@lskjs/server-api": "^3.1.1",
+    "@lskjs/server-api": "^3.8.1",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "lodash": "4.17.21"

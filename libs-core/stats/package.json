@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/stats",
-  "version": "3.1.1",
+  "version": "3.8.1",
   "description": "LSK.js – stats – Module for count simple statistics",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

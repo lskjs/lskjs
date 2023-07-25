@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/billing",
-  "version": "3.1.1",
+  "version": "3.8.1",
   "description": "LSK.js module for adding billing in cabinet",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -17,8 +17,8 @@
     "@lskjs/utils": "2.72.0"
   },
   "devDependencies": {
-    "@lskjs/db": "^3.1.1",
-    "@lskjs/server-api": "^3.1.1",
+    "@lskjs/db": "^3.8.1",
+    "@lskjs/server-api": "^3.8.1",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "crypto-js": "4.1.1",
