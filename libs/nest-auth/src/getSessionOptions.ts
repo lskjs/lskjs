@@ -1,6 +1,6 @@
 import { isDev } from '@lskjs/env';
 import { Err } from '@lskjs/err';
-import { ConfigService } from '@lskjs/nest-utils';
+import { ConfigService } from '@lskjs/nest-config';
 import MongoSessionStore from 'connect-mongo';
 import { SessionOptions } from 'express-session';
 
@@ -18,7 +18,7 @@ export function getSessionOptions(
   const cookieName = configService.get('auth.session.cookieName');
   if (!cookieName) throw new Err('!config.auth.session.cookieName');
 
-  const sessionOptions = {
+  const sessionOptions: SessionOptions = {
     store: MongoSessionStore.create({ mongoUrl }),
     name: cookieName,
     secret: sessionSecret,

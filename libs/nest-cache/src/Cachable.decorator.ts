@@ -11,12 +11,14 @@ export function Cachable() {
     const method = descriptor.value;
     // eslint-disable-next-line no-param-reassign
     descriptor.value = async function (...args: any[]) {
+      // @ts-ignore
       if (!this.cacheManager) throw new Err('!this.cacheManager');
       const key = Reflect.getMetadata(CACHE_KEY_METADATA, descriptor ? descriptor.value : target);
       const ttlValueOrFactory = Reflect.getMetadata(
         CACHE_TTL_METADATA,
         descriptor ? descriptor.value : target,
       );
+      // @ts-ignore
       const value = await this.cacheManager.get(key);
       if (!isNil(value)) {
         return value;
@@ -24,8 +26,10 @@ export function Cachable() {
       const ttl = isFunction(ttlValueOrFactory) ? await ttlValueOrFactory(args) : ttlValueOrFactory;
       const response = await method.apply(this, args);
       if (isNil(ttl)) {
+        // @ts-ignore
         this.cacheManager.set(key, response);
       } else {
+        // @ts-ignore
         this.cacheManager.set(key, response, { ttl });
       }
       return response;

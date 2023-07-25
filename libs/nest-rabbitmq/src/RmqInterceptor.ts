@@ -12,8 +12,10 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import * as amqplib from 'amqplib';
-import { delay } from 'fishbird';
 import { lastValueFrom, Observable, of } from 'rxjs';
+
+// eslint-disable-next-line no-promise-executor-return
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // import { createLogger } from '../nest-utils/log';
 
@@ -21,13 +23,13 @@ import { lastValueFrom, Observable, of } from 'rxjs';
 const lskConfig = {};
 // import { log } from '../../log';
 
-const deliveryAttempts = {};
+const deliveryAttempts: Record<string, any> = {};
 
 const maxAttempts = isDev ? 3 : 20;
 const isLog = true;
 const errDelay = 1000;
 
-const inc = (obj, key, val = 1) => {
+const inc = (obj: Record<string, any>, key: string, val = 1) => {
   // eslint-disable-next-line no-param-reassign
   obj[key] = (obj[key] || 0) + val;
   return obj[key];
@@ -51,6 +53,7 @@ type RmqRPCConfig = Pick<
 const log = createLogger({ ns: 'rmqrpc' });
 export function RmqRPC(props: RmqRPCConfig) {
   const { channel } = props?.queueOptions || {};
+  // @ts-ignore
   const channelConfig = lskConfig?.rabbitmq?.channels?.[channel];
   const { prefetchCount } = channelConfig || {};
   const decorators = [];
@@ -144,7 +147,8 @@ export class RmqInterceptor implements NestInterceptor {
       const attempts = inc(deliveryAttempts, messageId);
       const isMaxAttempts = Boolean(redelivered && attempts > maxAttempts);
       const meta = { data, meta: message.meta, startedAt, finishedAt, duration, attempts };
-      if (err?.status === 200) {
+      const status: any = (err as any)?.status;
+      if (status === 200) {
         this.log.warn(`[${name}] skip`, Err.getCode(err), { duration });
       } else {
         if (isMaxAttempts) {
@@ -161,7 +165,7 @@ export class RmqInterceptor implements NestInterceptor {
       }
       if (isMaxAttempts) delete deliveryAttempts[messageId];
       throw new Err(err, {
-        status: isMaxAttempts ? 300 : err?.status || 500,
+        status: isMaxAttempts ? 300 : status || 500,
         meta,
       });
     }

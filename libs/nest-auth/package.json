@@ -18,10 +18,13 @@
     "express-session": "^1.17.3"
   },
   "devDependencies": {
+    "@lskjs/nest-config": "^3.7.0",
     "@nestjs/common": "^10.0.5",
-    "@nestjs/core": "^10.1.2"
+    "@nestjs/core": "^10.1.2",
+    "@types/express-session": "^1.17.7"
   },
   "peerDependencies": {
+    "@lskjs/nest-config": "^3.7.0",
     "@nestjs/common": "^10.0.5",
     "@nestjs/core": "^10.1.2"
   },

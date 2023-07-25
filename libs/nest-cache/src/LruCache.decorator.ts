@@ -1,7 +1,6 @@
+import { createLogger } from '@lskjs/log';
 import { isFunction, isNil } from '@nestjs/common/utils/shared.utils';
 import { LRUCache as BaseLRUCache } from 'lru-cache';
-
-import { createLogger } from '@lskjs/log';
 
 export const cacheManager = new BaseLRUCache({
   max: 1000,
@@ -10,7 +9,7 @@ export const cacheManager = new BaseLRUCache({
 
 const log = createLogger('@LruCache', { ns: 'cache', name: '@LruCache', level: 'warn' });
 
-const getValue = (value, args, defaultKey) => {
+const getValue = (value: any, args: any, defaultKey: any) => {
   if (isNil(value)) {
     return defaultKey;
   }
