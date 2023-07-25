@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/lskjs/lskjs/compare/v3.5.4...v3.6.0) (2023-07-25)
+
+
+### Features
+
+* **log:** add createLogger with params from env ([a684043](https://github.com/lskjs/lskjs/commit/a684043ff83f19a317eda0bff1dd647c480ae369))
+
+
+
+
+
 ## [3.5.4](https://github.com/lskjs/lskjs/compare/v3.5.3...v3.5.4) (2023-07-03)
 
 
