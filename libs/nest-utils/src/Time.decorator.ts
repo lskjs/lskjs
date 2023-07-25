@@ -1,4 +1,6 @@
-import { createLogger } from '@lskjs/log/lib/createLogger';
+// @ts-ignore
+// eslint-disable-next-line import/named
+import { createLogger } from '@lskjs/log';
 
 const log = createLogger('Time', { ns: 'time' });
 
