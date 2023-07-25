@@ -2,7 +2,7 @@ import { createLogger } from '@lskjs/log/lib/createLogger';
 
 const log = createLogger('Time', { ns: 'time' });
 
-export function Time(initKey?: string, initLog = log) {
+export function Time(initKey?: string) {
   return function (
     target: Record<string, any>,
     propertyKey: string,
