@@ -1,0 +1,76 @@
+{
+  "name": "@lskjs/nest-rabbitmq",
+  "version": "3.5.4",
+  "description": "LSK.js – nest rabbitmq – helpers for rabbitmq in Nest.js projects",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
+  "scripts": {
+    "dev": "            lsk run dev",
+    "build": "          lsk run build",
+    "test": "           lsk run test",
+    "prepack": "        lsk run prepack",
+    "release": "        lsk run release"
+  },
+  "dependencies": {
+    "@golevelup/nestjs-rabbitmq": "^4.0.0",
+    "@lskjs/algos": "^3.3.0",
+    "@lskjs/env": "^3.3.0",
+    "@lskjs/err": "^3.3.0",
+    "@lskjs/log": "^3.3.0",
+    "amqplib": "^0.10.3",
+    "async-lock": "^1.4.0",
+    "fishbird": "^0.21.0",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^10.0.5",
+    "@nestjs/core": "^10.1.2"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.5",
+    "@nestjs/core": "^10.1.2"
+  },
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "prettier": "@lskjs/eslint-config/prettier",
+  "eslintConfig": {
+    "extends": "@lskjs/eslint-config"
+  },
+  "jest": {
+    "preset": "@lskjs/jest-config"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.mjs",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "10kb"
+    }
+  ],
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/nest-rabbitmq",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/nest-rabbitmq",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "////": "/////////========================/////////========================/////////========================/////////"
+}
