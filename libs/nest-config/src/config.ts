@@ -1,14 +1,15 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable no-unreachable-loop */
 
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { pick } from '@lskjs/algos';
 import { Err } from '@lskjs/err';
 import {
   ConfigModule as NestConfigModule,
   ConfigService as NestConfigService,
 } from '@nestjs/config';
-import { existsSync } from 'fs';
-import { join } from 'path';
 
 export const ConfigModule = NestConfigModule;
 export const ConfigService = NestConfigService;
