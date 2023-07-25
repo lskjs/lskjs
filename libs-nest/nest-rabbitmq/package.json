@@ -56,14 +56,14 @@
       "default": "./lib/*.js"
     }
   },
-  "size-limit": [
+  "_size-limit": [
     {
       "path": "lib/index.js",
       "limit": "10kb"
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-nest/nest-rabbitmq",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/nest-rabbitmq",
   "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/nest-rabbitmq",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",

@@ -1395,7 +1395,7 @@ importers:
         specifier: ^3.3.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: workspace:^
+        specifier: ^3.8.0
         version: link:../../libs/log
       lru-cache:
         specifier: ^10.0.0

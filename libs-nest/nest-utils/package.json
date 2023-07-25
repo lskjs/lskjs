@@ -57,7 +57,7 @@
       "default": "./lib/*.js"
     }
   },
-  "size-limit": [
+  "_size-limit": [
     {
       "path": "lib/AnyExceptionFilter.js",
       "limit": "10kb"
