@@ -1,6 +1,8 @@
 import { SetMetadata } from '@nestjs/common';
 
 export const ROLES_KEY = 'auth:roles';
+
+// eslint-disable-next-line no-shadow
 export enum Role {
   admin = 'admin',
   root = 'root',

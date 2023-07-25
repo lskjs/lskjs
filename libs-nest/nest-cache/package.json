@@ -54,7 +54,7 @@
       "default": "./lib/*.js"
     }
   },
-  "size-limit": [
+  "_size-limit": [
     {
       "path": "lib/index.js",
       "limit": "10kb"
