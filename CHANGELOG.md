@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/lskjs/lskjs/compare/v3.7.0...v3.8.0) (2023-07-25)
+
+
+### Bug Fixes
+
+* **log:** add createLogger in index ([2acc51c](https://github.com/lskjs/lskjs/commit/2acc51c71951ed702e39eb1ee748d8334fef720b))
+* **nest-utils:** bug fixes, and migrate nest-config outside ([260637e](https://github.com/lskjs/lskjs/commit/260637e060e7e5703e604e5b7b4a5acf4902cd27))
+* **nest-utils:** remove initLogger from time decorator ([ce5d557](https://github.com/lskjs/lskjs/commit/ce5d55775ca95b6c07632d1f57744641c9b8f1be))
+* **nest-utils:** temp fix ([6ccacd5](https://github.com/lskjs/lskjs/commit/6ccacd5a20f5e6edbcdc3d700197b9a3ccd5dac0))
+* **nest-utils:** ts - believe me ([3497888](https://github.com/lskjs/lskjs/commit/3497888f33bcc2b4024007c96c73b9bf73cb940f))
+
+
+### Features
+
+* **env:** tty removed at all ([024a7e8](https://github.com/lskjs/lskjs/commit/024a7e8ada26c3c6bcee2404f4a09640113643de))
+
+
+
+
+
 # [3.7.0](https://github.com/lskjs/lskjs/compare/v3.6.0...v3.7.0) (2023-07-25)
 
 

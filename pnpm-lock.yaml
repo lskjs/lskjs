@@ -99,10 +99,10 @@ importers:
         specifier: ^3.3.0
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../cli-utils
       '@lskjs/env':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../../libs/env
       '@lskjs/err':
         specifier: ^3.3.0
@@ -132,16 +132,16 @@ importers:
         specifier: ^3.3.0
         version: link:../../libs/algos
       '@lskjs/colors':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../../libs/colors
       '@lskjs/env':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../../libs/env
       '@lskjs/err':
         specifier: ^3.3.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../../libs/log
       '@lskjs/utils':
         specifier: ^3.2.2
@@ -213,13 +213,13 @@ importers:
         specifier: ^3.3.0
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../cli-utils
       '@lskjs/err':
         specifier: ^3.3.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../../libs/log
       '@lskjs/stringify':
         specifier: ^3.3.0
@@ -258,22 +258,22 @@ importers:
         specifier: ^3.0.0-alpha.7
         version: 3.0.0-alpha.7(@swc/core@1.3.64)
       '@lskjs/cli-scripts':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../cli-scripts
       '@lskjs/cli-utils':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../cli-utils
       '@lskjs/colors':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../../libs/colors
       '@lskjs/env':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../../libs/env
       '@lskjs/err':
         specifier: ^3.3.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../../libs/log
       '@oclif/command':
         specifier: 1.8.22
@@ -1488,7 +1488,7 @@ importers:
   libs/colors:
     dependencies:
       '@lskjs/env':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../env
 
   libs/env:
@@ -1512,7 +1512,7 @@ importers:
         specifier: ^3.3.0
         version: link:../algos
       '@lskjs/module':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../module
       cld:
         specifier: 2.9.0
@@ -1532,10 +1532,10 @@ importers:
         specifier: ^3.3.0
         version: link:../algos
       '@lskjs/colors':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../colors
       '@lskjs/env':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../env
       '@lskjs/err':
         specifier: ^3.3.0
@@ -1579,13 +1579,13 @@ importers:
         specifier: ^3.3.0
         version: link:../algos
       '@lskjs/env':
-        specifier: ^3.2.2
+        specifier: ^3.8.0
         version: link:../env
       '@lskjs/err':
         specifier: ^3.3.0
         version: link:../err
       '@lskjs/log':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../log
       '@lskjs/mutex':
         specifier: ^3.1.1
@@ -1631,13 +1631,13 @@ importers:
         specifier: ^3.3.0
         version: link:../algos
       '@lskjs/env':
-        specifier: ^3.1.1
+        specifier: ^3.8.0
         version: link:../env
       '@lskjs/err':
         specifier: ^3.3.0
         version: link:../err
       '@lskjs/log':
-        specifier: ^3.6.0
+        specifier: ^3.8.0
         version: link:../log
       '@lskjs/webserver':
         specifier: ^3.1.1
@@ -1684,7 +1684,7 @@ importers:
   libs/telegraf:
     dependencies:
       '@lskjs/log':
-        specifier: ^3.5.4
+        specifier: ^3.8.0
         version: link:../log
     devDependencies:
       telegraf:

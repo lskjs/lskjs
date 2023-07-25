@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/lskjs/lskjs/compare/v3.7.0...v3.8.0) (2023-07-25)
+
+
+### Features
+
+* **env:** tty removed at all ([024a7e8](https://github.com/lskjs/lskjs/commit/024a7e8ada26c3c6bcee2404f4a09640113643de))
+
+
+
+
+
 ## [3.2.2](https://github.com/lskjs/lskjs/compare/v3.2.1...v3.2.2) (2023-04-20)
 
 **Note:** Version bump only for package @lskjs/env

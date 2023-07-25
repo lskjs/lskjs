@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/lskjs/lskjs/compare/v3.7.0...v3.8.0) (2023-07-25)
+
+
+### Bug Fixes
+
+* **log:** add createLogger in index ([2acc51c](https://github.com/lskjs/lskjs/commit/2acc51c71951ed702e39eb1ee748d8334fef720b))
+
+
+
+
+
 # [3.6.0](https://github.com/lskjs/lskjs/compare/v3.5.4...v3.6.0) (2023-07-25)
 
 
