@@ -59,6 +59,12 @@
   },
   "size-limit": [
     {
+      "path": "lib/AnyExceptionFilter.js",
+      "limit": "10kb"
+    }
+  ],
+  "size-limit2": [
+    {
       "path": "lib/AccessLoggerMiddleware.js",
       "limit": "10kb"
     },
