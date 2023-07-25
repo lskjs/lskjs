@@ -61,9 +61,7 @@
     {
       "path": "lib/AnyExceptionFilter.js",
       "limit": "10kb"
-    }
-  ],
-  "size-limit2": [
+    },
     {
       "path": "lib/AccessLoggerMiddleware.js",
       "limit": "10kb"
@@ -82,7 +80,7 @@
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/nest-utils",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-nest/nest-utils",
   "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/nest-utils",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",

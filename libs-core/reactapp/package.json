@@ -44,7 +44,7 @@
     "react": ">=16",
     "react-dom": "17.x"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -70,7 +70,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/reactapp",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/reactapp",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/reactapp",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

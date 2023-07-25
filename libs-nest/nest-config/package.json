@@ -63,7 +63,7 @@
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/nest-config",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-nest/nest-config",
   "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/nest-config",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",

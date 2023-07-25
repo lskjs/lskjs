@@ -23,7 +23,7 @@
     "@types/amqplib": "0.8.2",
     "@types/bluebird": "3.5.36"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -31,6 +31,12 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "lib",
+    "bin",
+    "README.md",
+    "LICENCE"
+  ],
   "bin": {
     "lskrabbit": "./bin/cli.js"
   },
@@ -49,7 +55,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/rabbit-cli",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-cli/rabbit-cli",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-cli/rabbit-cli",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

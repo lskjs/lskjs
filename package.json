@@ -38,6 +38,7 @@
   },
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs",
+  "homepage": "https://github.com/lskjs/lskjs",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

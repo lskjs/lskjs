@@ -35,7 +35,7 @@
   "optionalDependencies": {
     "typescript": "4.*.*"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -46,6 +46,7 @@
   "main": "index.js",
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/eslint-config",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-presets/eslint-config",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

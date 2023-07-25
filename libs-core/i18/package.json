@@ -28,7 +28,7 @@
     "js-cookie": "3.x",
     "mobx": "5.x"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -54,7 +54,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/i18",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/i18",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/i18",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

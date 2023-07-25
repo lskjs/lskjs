@@ -32,7 +32,7 @@
     "lodash": "4.17.x",
     "mobx": "<6"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -58,7 +58,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/permit",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/permit",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/permit",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

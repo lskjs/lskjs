@@ -17,7 +17,7 @@
     "crypto-js": "4.0.0",
     "csv-reader": "1.0.7"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -43,7 +43,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/clickhouse",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/clickhouse",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/clickhouse",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

@@ -6,6 +6,7 @@
   "contributors": [
     "Andrey Kondalov <andrey@kondalov.com> (https://github.com/yukioru)"
   ],
+  "private": false,
   "scripts": {
     "dev": "     echo skip",
     "build": "   echo skip",
@@ -38,7 +39,7 @@
     "@babel/core": "7.x",
     "@babel/runtime": "7.x"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -49,6 +50,7 @@
   "main": "index.js",
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/babel-preset",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-presets/babel-preset",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

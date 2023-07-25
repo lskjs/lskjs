@@ -21,7 +21,7 @@
   "optionalDependencies": {
     "jest": "^29.3.1"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -37,6 +37,7 @@
   "main": "jest-preset.js",
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs-presets/jest-config",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-presets/jest-config",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

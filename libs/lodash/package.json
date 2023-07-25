@@ -11,7 +11,7 @@
     "prepack": "        lsk run prepack",
     "release": "        lsk run release"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config",
@@ -228,6 +228,7 @@
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs/lodash",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/lodash",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

@@ -34,7 +34,7 @@
     "mobx": "<6",
     "mobx-react": "<7"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -60,7 +60,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/mobx",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/mobx",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/mobx",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

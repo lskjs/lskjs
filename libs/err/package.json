@@ -14,7 +14,7 @@
   "dependencies": {
     "@lskjs/algos": "^3.3.0"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -49,6 +49,7 @@
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs/err",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/err",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

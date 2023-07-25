@@ -35,7 +35,7 @@
     "bluebird": "3.7.x",
     "lodash": "4.17.x"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -61,7 +61,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/mailer",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/mailer",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/mailer",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

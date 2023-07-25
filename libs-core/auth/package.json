@@ -50,7 +50,7 @@
     "lodash": "4.17.x",
     "mobx": "<6"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -76,7 +76,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/auth",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/auth",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/auth",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

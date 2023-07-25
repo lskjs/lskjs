@@ -24,7 +24,7 @@
     "js-yaml": "4.1.0",
     "lodash": "4.17.21"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -32,6 +32,12 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "bin",
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
   "bin": {
     "build": "./bin/build.js",
     "download": "./bin/download.js",
@@ -53,7 +59,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/creds",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-cli/creds",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-cli/creds",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

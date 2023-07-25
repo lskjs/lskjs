@@ -14,6 +14,7 @@
   "dependencies": {
     "@lskjs/env": "^3.3.0",
     "@lskjs/err": "^3.3.0",
+    "@lskjs/log": "^3.8.0",
     "lru-cache": "^10.0.0"
   },
   "devDependencies": {
@@ -60,7 +61,7 @@
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs/nest-cache",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-nest/nest-cache",
   "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/nest-cache",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",

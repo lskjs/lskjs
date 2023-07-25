@@ -3,6 +3,7 @@
   "version": "3.8.0",
   "description": "LSK getspreadsheet.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
   "scripts": {
     "dev": "            lsk run dev",
     "build": "          lsk run build",
@@ -24,7 +25,7 @@
     "googleapis": "110.0.0",
     "yargs": "^17.6.2"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -54,7 +55,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/getspreadsheet",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-cli/getspreadsheet",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-cli/getspreadsheet",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

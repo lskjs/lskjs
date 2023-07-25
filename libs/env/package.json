@@ -14,7 +14,7 @@
   "dependencies": {
     "@lskjs/tty": "^3.2.2"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config"
@@ -49,6 +49,7 @@
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
   "repository": "https://github.com/lskjs/lskjs/tree/master//libs/env",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs/env",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {

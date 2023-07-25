@@ -22,7 +22,7 @@
   "peerDependencies": {
     "lodash": "4.17.x"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -30,6 +30,11 @@
   "jest": {
     "preset": "@lskjs/jest-config"
   },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENCE"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
@@ -45,7 +50,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/elastic",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/elastic",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/elastic",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

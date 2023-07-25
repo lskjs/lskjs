@@ -57,7 +57,7 @@
     "prop-types": ">=15.x",
     "react": ">=16"
   },
-  "//": "///////////========================/////////========================/////////========================//////////",
+  "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
     "extends": "@lskjs/eslint-config/nostrict"
@@ -83,7 +83,9 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master/packages/uapp",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-core/uapp",
+  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-core/uapp",
+  "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
