@@ -1,4 +1,4 @@
-export async function waitFn(fn, interval = 10, timeout = 10000) {
+export async function waitFn(fn: () => Promise<any>, interval = 10, timeout = 10000) {
   return new Promise((resolve, reject) => {
     const startedAt = Date.now();
     // eslint-disable-next-line consistent-return
