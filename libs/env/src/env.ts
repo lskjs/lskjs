@@ -1,5 +1,4 @@
 /* global window */
-import { isTTY } from '@lskjs/tty';
 
 // import { getEnvVar } from './getEnvVar';
 
@@ -13,7 +12,7 @@ export const isDev = isServer
   : Boolean(safeWindow?.__DEV__);
 export const isProd = !isDev;
 export const isDebug = isDev;
-export { isTTY };
+export const isTTY = Boolean(process?.stdout?.isTTY) || false;
 
 // getEnvVar('STAGE', (isDev ? process.env.user : null))
 
