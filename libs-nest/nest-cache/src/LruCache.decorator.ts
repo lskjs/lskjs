@@ -21,7 +21,12 @@ const getValue = (value: any, args: any, defaultKey: any) => {
 
 const DEFAULT_TTL = 60 * 60 * 1000;
 
-export function LruCache({ key: keyValueOrFactory = null, ttl: ttlValueOrFactory = null } = {}) {
+type LruCacheProps = {
+  key?: string | ((args: any[]) => string);
+  ttl?: number | ((args: any[]) => number);
+};
+
+export function LruCache({ key: keyValueOrFactory, ttl: ttlValueOrFactory }: LruCacheProps = {}) {
   return function (
     target: Record<string, any>,
     propertyKey: string,
