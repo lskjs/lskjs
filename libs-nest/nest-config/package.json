@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-config",
-  "version": "3.8.1",
+  "version": "3.9.0",
   "description": "LSK.js – nest config – helpers for config in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,8 +12,8 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.8.1",
-    "@lskjs/err": "^3.8.1"
+    "@lskjs/algos": "^3.9.0",
+    "@lskjs/err": "^3.9.0"
   },
   "devDependencies": {
     "@nestjs/common": "^10.0.5",

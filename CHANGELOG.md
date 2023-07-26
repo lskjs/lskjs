@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/lskjs/lskjs/compare/v3.8.1...v3.9.0) (2023-07-26)
+
+
+### Bug Fixes
+
+* **nest-cache:** type fixes ([b2f6a49](https://github.com/lskjs/lskjs/commit/b2f6a4958fa617fc5b4b330ab06f59cfef4ffe81))
+
+
+### Features
+
+* **log:** add default logger log ([1db2490](https://github.com/lskjs/lskjs/commit/1db24904456aedb46772743bddb08aeab6cb1bd4))
+* **log:** add default logger log ([8439e0c](https://github.com/lskjs/lskjs/commit/8439e0c8939481debb81b86d0dc4e6e375532a15))
+
+
+
+
+
 ## [3.8.1](https://github.com/lskjs/lskjs/compare/v3.8.0...v3.8.1) (2023-07-25)
 
 
