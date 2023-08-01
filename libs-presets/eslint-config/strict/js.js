@@ -53,11 +53,12 @@ module.exports = {
       { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
     ],
     'import/no-extraneous-dependencies': [
-      'error',
+      'warn',
       {
-        devDependencies: false,
-        optionalDependencies: true,
-        peerDependencies: true,
+        devDependencies: ['**/*.test.js', '**/*.spec.js', 'scripts/**'],
+        // devDependencies: false,
+        optionalDependencies: true, // mean: disabled
+        peerDependencies: true, // mean: disabled
       },
     ],
     'import/prefer-default-export': 'off',

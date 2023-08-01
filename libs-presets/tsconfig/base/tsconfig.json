@@ -5,11 +5,17 @@
     "lib": ["esnext"],
     // "module": "esnext",
     "module": "commonjs",
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+
+    // "declaration": true,
+    // "declarationMap": true,
+    // "preserveSymlinks": true
+
     // "forceConsistentCasingInFileNames": true,
     // "declaration": true,
     // "sourceMap": true,
