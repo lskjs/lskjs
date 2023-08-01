@@ -20,7 +20,7 @@ export const getProcessEnv = () => {
     const modules = debug.split(',');
     let logLevel = process.env.LOG_LEVEL || 'trace';
     // eslint-disable-next-line no-console
-    console.log(`[LOG_LEVEL=${logLevel} DEBUG=${debug}`);
+    // console.log(`[LOG_LEVEL=${logLevel} DEBUG=${debug}`);
     if (debug.startsWith('lsk') || debug.startsWith('app') || debug === '1' || debug === '*') {
       logLevel = 'trace';
       env.debug = 1;
