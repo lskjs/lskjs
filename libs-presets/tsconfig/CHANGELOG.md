@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.10.0](https://github.com/lskjs/lskjs/compare/v3.9.1...v3.10.0) (2023-08-01)
+
+
+### Features
+
+* **tsconfig:** moduleResolution NodeNext ([9c7ab0d](https://github.com/lskjs/lskjs/commit/9c7ab0d069e81935796e0e5990120ff49f08e4f1))
+
+
+
+
+
 ## [3.8.1](https://github.com/lskjs/lskjs/compare/v3.8.0...v3.8.1) (2023-07-25)
 
 **Note:** Version bump only for package @lskjs/tsconfig

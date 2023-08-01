@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/eslint-config",
-  "version": "3.8.1",
+  "version": "3.10.0",
   "description": "Eslint preset for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "contributors": [
