@@ -34,11 +34,12 @@
     "preset": "@lskjs/jest-config"
   },
   "files": [
+    "bin",
     "lib",
     "README.md"
   ],
   "bin": {
-    "getspreadsheet": "./bin/getspreadsheet.js"
+    "getspreadsheet": "bin/run"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
