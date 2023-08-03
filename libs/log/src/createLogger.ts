@@ -3,9 +3,10 @@ import { Logger } from './Logger';
 import { ILogger } from './types';
 
 export const createLogger = (propsOrName = {}, props = {}): ILogger => {
+  const cnf = getEnvConfig();
   const prm = {
     ...(typeof propsOrName === 'string' ? { name: propsOrName } : propsOrName),
-    ...getEnvConfig(),
+    ...cnf,
     ...props,
   } as any;
   const name = [prm.ns, prm.name].filter(Boolean).join(':');
