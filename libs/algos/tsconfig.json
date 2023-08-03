@@ -1,6 +1,3 @@
 {
-  "extends": "@lskjs/tsconfig",
-  "compilerOptions": {
-    "declarationMap": true,
-  }
+  "extends": "@lskjs/tsconfig"
 }

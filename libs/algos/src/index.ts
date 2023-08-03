@@ -20,6 +20,8 @@ import { toPairs } from './toPairs';
 import { uniq } from './uniq';
 import { uniqBy } from './uniqBy';
 
+export * from './types';
+
 export {
   any,
   countBy,
