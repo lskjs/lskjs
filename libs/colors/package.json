@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/colors",
-  "version": "3.8.1",
+  "version": "3.11.0",
   "description": "Yet another colors library – like picocolors but with for browser too",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/env": "^3.8.1"
+    "@lskjs/env": "^3.11.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/err",
-  "version": "3.9.0",
+  "version": "3.11.0",
   "description": "LSK.js – err – Error class and utils for custom code and message extracting",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,7 +12,7 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.9.0"
+    "@lskjs/algos": "^3.11.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",

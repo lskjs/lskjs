@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/lskjs/lskjs/compare/v3.10.0...v3.11.0) (2023-08-03)
+
+
+### Bug Fixes
+
+* cli bug fixes ([2699a88](https://github.com/lskjs/lskjs/commit/2699a88fd3fd994bd4bb311cd7b69380f79ddcc0))
+
+
+### Features
+
+* **lsk:** change occliff yargs ([07b348c](https://github.com/lskjs/lskjs/commit/07b348cc79fc65adc552ad18f844b1ef27dba433))
+
+
+
+
+
 # [3.9.0](https://github.com/lskjs/lskjs/compare/v3.8.1...v3.9.0) (2023-07-26)
 
 **Note:** Version bump only for package lsk

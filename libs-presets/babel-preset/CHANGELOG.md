@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/lskjs/lskjs/compare/v3.10.0...v3.11.0) (2023-08-03)
+
+
+### Bug Fixes
+
+* **tsconfig:** ignoreDeprecations ([0fb774d](https://github.com/lskjs/lskjs/commit/0fb774d8632409d96665f6f3a80d9b4fa9676dab))
+
+
+
+
+
 ## [3.8.1](https://github.com/lskjs/lskjs/compare/v3.8.0...v3.8.1) (2023-07-25)
 
 **Note:** Version bump only for package @lskjs/babel-preset

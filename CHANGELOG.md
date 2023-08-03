@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/lskjs/lskjs/compare/v3.10.0...v3.11.0) (2023-08-03)
+
+
+### Bug Fixes
+
+* **build-locales:** add bin/cli ([f88a190](https://github.com/lskjs/lskjs/commit/f88a1907937e171d2babd3a4323b92d560d7fbca))
+* cli bug fixes ([2699a88](https://github.com/lskjs/lskjs/commit/2699a88fd3fd994bd4bb311cd7b69380f79ddcc0))
+* **tsconfig:** ignoreDeprecations ([0fb774d](https://github.com/lskjs/lskjs/commit/0fb774d8632409d96665f6f3a80d9b4fa9676dab))
+
+
+### Features
+
+* **algos:** improve ts ([e6414c6](https://github.com/lskjs/lskjs/commit/e6414c6318f5e9b57aff42f9b03c1d2b645d0c5a))
+* **err:** improve ts ([e1f70f4](https://github.com/lskjs/lskjs/commit/e1f70f4cc79039a012ab1fa8f8e1e286f839feeb))
+* **log:** improve ts ([b3b92ec](https://github.com/lskjs/lskjs/commit/b3b92ec571d477b0dd59667d42edd2216b4bad4a))
+* **lsk:** change occliff yargs ([07b348c](https://github.com/lskjs/lskjs/commit/07b348cc79fc65adc552ad18f844b1ef27dba433))
+* **utils2:** remove utils2 ([6221b11](https://github.com/lskjs/lskjs/commit/6221b111af5781ac1ad9f00046e8e5a993c3248a))
+
+
+
+
+
 # [3.10.0](https://github.com/lskjs/lskjs/compare/v3.9.1...v3.10.0) (2023-08-01)
 
 

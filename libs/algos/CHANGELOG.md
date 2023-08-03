@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/lskjs/lskjs/compare/v3.10.0...v3.11.0) (2023-08-03)
+
+
+### Features
+
+* **algos:** improve ts ([e6414c6](https://github.com/lskjs/lskjs/commit/e6414c6318f5e9b57aff42f9b03c1d2b645d0c5a))
+
+
+
+
+
 # [3.9.0](https://github.com/lskjs/lskjs/compare/v3.8.1...v3.9.0) (2023-07-26)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/tsconfig",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "TS configs for LSK.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

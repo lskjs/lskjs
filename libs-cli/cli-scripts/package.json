@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-scripts",
-  "version": "3.9.0",
+  "version": "3.11.0",
   "description": "LSK.js CLI-scripts – some scripts for LSK.js – CLI projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,11 +12,11 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.9.0",
-    "@lskjs/cli-utils": "^3.9.0",
-    "@lskjs/env": "^3.8.1",
-    "@lskjs/err": "^3.9.0",
-    "@lskjs/stringify": "^3.9.0",
+    "@lskjs/algos": "^3.11.0",
+    "@lskjs/cli-utils": "^3.11.0",
+    "@lskjs/env": "^3.11.0",
+    "@lskjs/err": "^3.11.0",
+    "@lskjs/stringify": "^3.11.0",
     "all-contributors-cli": "^6.20.0",
     "fishbird": "^0.20.0",
     "remark-template": "1.6.0",
