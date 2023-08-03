@@ -1,4 +1,6 @@
+/* eslint-disable max-len */
 import getSpreadsheet from '@lskjs/getspreadsheet';
+import { log } from '@lskjs/log/log';
 import Promise from 'bluebird';
 import meow from 'meow';
 
@@ -31,12 +33,12 @@ const start = async ({ locales, link, dist }) => {
   const localesArray = locales.split(',');
   const links = Array.isArray(link) ? link : [link];
 
-  console.log('try to getSpreadsheets', links);
+  log.trace('try to getSpreadsheets', links);
   const spreadsheets = await Promise.all(links.map(getSpreadsheet)).catch((err) => {
-    console.log('getSpreadsheet err', err);
+    log.trace('getSpreadsheet err', err);
   });
-  console.log('getSpreadsheet done');
+  log.trace('getSpreadsheet done');
   await buildLocales(spreadsheets, localesArray, dist);
-  console.log('Complete');
+  log.trace('Complete');
 };
 start(cli.flags);

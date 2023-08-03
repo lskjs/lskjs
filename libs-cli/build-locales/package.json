@@ -12,8 +12,9 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/getspreadsheet": "2.85.1",
-    "@lskjs/utils": "2.72.0",
+    "@lskjs/getspreadsheet": "^2.85.1",
+    "@lskjs/log": "^3.9.0",
+    "@lskjs/utils": "^2.72.0",
     "bluebird": "3.7.2",
     "csv-parse": "4.14.2",
     "csvtojson": "2.0.10",

@@ -1,3 +1,4 @@
+import { log } from '@lskjs/log/log';
 import getKeyValJson from '@lskjs/utils/getKeyValJson';
 import parse from 'csv-parse';
 import fs from 'fs';
@@ -19,20 +20,23 @@ export default async (spreadsheets, locales, destination) => {
     }),
   );
   try {
-    console.log(`rm ${destination}`);
+    log.trace(`rm ${destination}`);
     rimraf.sync(destination);
   } catch (err) {
-    console.error(`rimraf err ${destination}`, err);
+    log.error(`rimraf err ${destination}`, err);
   }
   try {
-    console.log(`mkdir -p ${destination}`);
+    log.trace(`mkdir -p ${destination}`);
     mkdirp.sync(destination);
   } catch (err) {
-    console.error(`mkdirp err ${destination}`, err);
+    log.error(`mkdirp err ${destination}`, err);
   }
   locales.forEach((locale) => {
     const dirname = path.join(destination, locale);
-    fs.writeFileSync(`${dirname}.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
+    fs.writeFileSync(
+      `${dirname}.json`,
+      JSON.stringify(getKeyValJson(localesRows, locale), null, 2),
+    ); // eslint-disable-line max-len
     // fs.writeFileSync(`${dirname}/translation.json`, JSON.stringify(getKeyValJson(localesRows, locale), null, 2)); // eslint-disable-line max-len
     const namespaces = groupBy(
       localesRows.filter((row) => row.ns),
@@ -44,9 +48,12 @@ export default async (spreadsheets, locales, destination) => {
       try {
         mkdirp.sync(dirname);
       } catch (err) {
-        console.error(err);
+        log.error(err);
       }
-      fs.writeFileSync(`${dirname}/${ns}.json`, JSON.stringify(getKeyValJson(rows, locale), null, 2));
+      fs.writeFileSync(
+        `${dirname}/${ns}.json`,
+        JSON.stringify(getKeyValJson(rows, locale), null, 2),
+      );
     });
   });
 };
