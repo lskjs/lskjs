@@ -1,6 +1,5 @@
-import { importFn } from '@lskjs/utils2';
-
 import { ItemModule } from '../items/ItemModule';
+import { importFn } from '../utils/importFn';
 
 export class AsyncItemModule extends ItemModule {
   async createItem() {

@@ -1,8 +1,8 @@
 import { Err } from '@lskjs/err';
-import { importFn } from '@lskjs/utils2';
 
 import { IAsyncModule, IModule } from '../types';
 import { createModule } from './createModule';
+import { importFn } from './importFn';
 
 export const createAsyncModule = async (
   initArg: IAsyncModule,
