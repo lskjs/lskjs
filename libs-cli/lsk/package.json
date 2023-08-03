@@ -15,7 +15,6 @@
   "dependencies": {
     "@babel/runtime": "7.20.13",
     "@lskjs/algos": "^3.9.0",
-    "@lskjs/cli": "^3.0.0-alpha.7",
     "@lskjs/cli-scripts": "^3.9.0",
     "@lskjs/cli-utils": "^3.9.0",
     "@lskjs/colors": "^3.8.1",

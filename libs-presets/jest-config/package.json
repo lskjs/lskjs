@@ -12,14 +12,14 @@
     "release": " lsk run release"
   },
   "dependencies": {
-    "jest-junit": "^15.0.0",
-    "ts-jest": "^29.0.5"
+    "jest-junit": "^16.0.0",
+    "ts-jest": "^29.1.1"
   },
   "devDependencies": {
     "jest": "^29.3.1"
   },
   "optionalDependencies": {
-    "jest": "^29.3.1"
+    "jest": "^29.6.2"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
