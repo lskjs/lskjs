@@ -1,4 +1,7 @@
 {
-  "extends": "@lskjs/tsconfig/strict/tsconfig.json"
+  "extends": "@lskjs/tsconfig/strict/tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node"
+  }
 }
 
