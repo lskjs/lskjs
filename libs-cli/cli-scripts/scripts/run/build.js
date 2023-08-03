@@ -18,7 +18,13 @@ async function main({ isRoot, log, cwd, args, ctx } = {}) {
     return;
   }
   if (isRoot) {
-    await shell(`pnpm -r run build --prod --silent`, { ctx, args });
+    const concurrency = process.env.PNPM_CONCURRENCY || 4;
+    await shell(
+      `pnpm -r run build --prod --silent ${
+        concurrency && concurrency !== 4 ? `--workspace-concurrency ${concurrency}` : ''
+      } `,
+      { ctx, args },
+    );
     return;
   }
   const { isJs, isTs, isNest, isBabel } = getCwdInfo({ cwd });

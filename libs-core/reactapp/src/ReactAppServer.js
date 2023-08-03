@@ -12,6 +12,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 // import ReactDOM from 'react-dom/server';
+// eslint-disable-next-line react/no-deprecated
 import { renderToNodeStream, renderToStaticMarkup, renderToString } from 'react-dom/server';
 
 import BaseHtml from './Html';
@@ -182,7 +183,10 @@ export class ReactAppServer extends Module {
           this.log.debug('ReactAppServer.uappResolve(): !page._page');
         }
       } catch (err) {
-        throw { err, stack: ['Error SSR', `${this.name}.render`, `${this.name}.uappResolve({req})`] };
+        throw {
+          err,
+          stack: ['Error SSR', `${this.name}.render`, `${this.name}.uappResolve({req})`],
+        };
       }
       if (get(page, 'state.redirect')) {
         // eslint-disable-next-line no-shadow

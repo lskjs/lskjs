@@ -3,6 +3,12 @@ const { run, shell, findBin, shellParallel, getCwdInfo } = require('@lskjs/cli-u
 const { isCI, isDev } = require('@lskjs/env');
 const { existsSync } = require('fs');
 
+const omit = (obj, keys) => {
+  const newObj = { ...obj };
+  keys.forEach((key) => delete newObj[key]);
+  return newObj;
+};
+
 const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   if (isRoot) {
     await shellParallel('lsk run test:jest', { ctx, args });
@@ -25,9 +31,16 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
   cmd += ` --rootDir ${cwd}`;
 
   if (args.length) {
-    const filteredArgs = args.filter((arg) => !['--prod', '--yes'].includes(arg))
+    const filteredArgs = args.filter((arg, i) => {
+      if (['--prod', '--yes'].includes(arg)) return false;
+      if (arg === '--workspace-concurrency') return false;
+      // console.log({ arg, i, prev: args[i - 1] });
+      if (args[i - 1] === '--workspace-concurrency') return false;
+      return true;
+    });
+
     cmd += ` ${filteredArgs.join(' ')}`;
-    // console.log({args, filteredArgs, cmd})
+    // console.log({ args, filteredArgs, cmd });
   }
 
   const stdio = isSilent ? ['inherit', 'ignore', 'ignore'] : 'inherit';
@@ -41,8 +54,8 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
       });
     } catch (err) {
       if (!isSilent) throw err;
-      log.fatal('test:jest', err);
       // console.error('test:jest', err);
+      log.fatal('test:jest', omit(err, ['proc']));
       await shell(cmd, { ctx });
     }
   }

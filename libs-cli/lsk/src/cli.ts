@@ -14,7 +14,7 @@ export default yargs(process.argv.slice(2))
     aliases: ['i'],
     desc: 'Get info about current project',
     // builder: (yargs) => yargs.default('value', 'true'),
-    handler: (argv) => {
+    handler: () => {
       const config = { version: require('../package.json').version };
       console.log(getLogo());
       printInfo({
@@ -36,7 +36,7 @@ export default yargs(process.argv.slice(2))
     desc: 'Run subcomand ',
     handler: async (argv) => {
       const [cmd, ...args] = process.argv.slice(3);
-      await run(() => pathexec(cmd, { args }));
+      await run(() => pathexec(cmd, { args, argv }));
     },
   })
   .demandCommand()
