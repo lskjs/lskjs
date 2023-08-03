@@ -7,8 +7,8 @@ import env from '@lskjs/env';
 export function printInfo({ config, log } = {}) {
   const pad = (a: string) => `${a} `.padEnd(14);
   log(pad('[Version]  '), config.version);
-  log(pad('System:    '), config.userAgent);
-  log(pad('CLI:       '), config.root);
+  // log(pad('System:    '), config.userAgent);
+  // log(pad('CLI:       '), config.root);
   // log(pad("Scripts: "), config.version);
 
   const cwd = process.cwd();
