@@ -3,7 +3,11 @@ import Module from '@lskjs/module';
 import maskUriPassword from '@lskjs/utils/maskUriPassword';
 import Bluebird from 'bluebird';
 import pick from 'lodash/pick';
-import { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
+require('mongoose-long')(mongoose);
+
+const { Mongoose } = mongoose;
+
 
 import { validOptionNames } from './mongo/validOptionNames';
 
