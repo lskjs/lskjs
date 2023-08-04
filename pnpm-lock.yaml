@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -511,6 +507,9 @@ importers:
       mongoose:
         specifier: ^5.12.1
         version: 5.13.15
+      mongoose-long:
+        specifier: 0.7.0
+        version: 0.7.0(mongoose@5.13.15)
     devDependencies:
       '@types/bluebird':
         specifier: ^3.5.36
@@ -13167,6 +13166,14 @@ packages:
       mongoose: 5.13.20
     dev: false
 
+  /mongoose-long@0.7.0(mongoose@5.13.15):
+    resolution: {integrity: sha512-WbGL/FWD54Y9lZLL7Ahx9KkBWuVHmFk7AZNqBfHDJ/mRLUbg919LFPtbjbZRmx3qFVbq6ko/PzsCr0Iy9m+0Ew==}
+    peerDependencies:
+      mongoose: 4.x || 5.x || 6.x || 7.x
+    dependencies:
+      mongoose: 5.13.15
+    dev: false
+
   /mongoose@5.13.15:
     resolution: {integrity: sha512-cxp1Gbb8yUWkaEbajdhspSaKzAvsIvOtRlYD87GN/P2QEUhpd6bIvebi36T6M0tIVAMauNaK9SPA055N3PwF8Q==}
     engines: {node: '>=4.0.0'}
@@ -17585,3 +17592,7 @@ packages:
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
