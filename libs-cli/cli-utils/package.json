@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-utils",
-  "version": "3.11.0",
+  "version": "3.11.1",
   "description": "LSK.js CLI-utils – some utils functions for LSK.js – CLI projects  ",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -17,7 +17,7 @@
     "@lskjs/colors": "^3.11.0",
     "@lskjs/env": "^3.11.0",
     "@lskjs/err": "^3.11.0",
-    "@lskjs/log": "^3.11.0",
+    "@lskjs/log": "^3.11.1",
     "@lskjs/utils": "^3.8.1",
     "axios": "0.27.2",
     "bluebird": "3.7.2",

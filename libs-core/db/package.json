@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/db",
-  "version": "3.8.1",
+  "version": "3.11.1",
   "description": "LSK.js module for working with mongodb database",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

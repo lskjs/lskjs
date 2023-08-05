@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -62,7 +66,7 @@ importers:
         specifier: ^2.85.1
         version: 2.85.1(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       '@lskjs/utils':
         specifier: ^2.72.0
@@ -98,7 +102,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../cli-utils
       '@lskjs/env':
         specifier: ^3.11.0
@@ -140,7 +144,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       '@lskjs/utils':
         specifier: ^3.8.1
@@ -212,13 +216,13 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../cli-utils
       '@lskjs/err':
         specifier: ^3.11.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       '@lskjs/stringify':
         specifier: ^3.11.0
@@ -254,10 +258,10 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/algos
       '@lskjs/cli-scripts':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../cli-scripts
       '@lskjs/cli-utils':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../cli-utils
       '@lskjs/colors':
         specifier: ^3.11.0
@@ -269,7 +273,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       '@types/node':
         specifier: 18.13.0
@@ -377,7 +381,7 @@ importers:
         version: 13.6.0
     devDependencies:
       '@lskjs/db':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../db
       '@lskjs/mobx':
         specifier: 2.13.1
@@ -429,7 +433,7 @@ importers:
         version: 2.72.0
     devDependencies:
       '@lskjs/db':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../db
       '@lskjs/server-api':
         specifier: ^3.8.1
@@ -680,7 +684,7 @@ importers:
         version: 1.0.1
     devDependencies:
       '@lskjs/db':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../db
       '@lskjs/server-api':
         specifier: ^3.8.1
@@ -736,7 +740,7 @@ importers:
         version: 3.1.25
     devDependencies:
       '@lskjs/db':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../db
       '@lskjs/mobx':
         specifier: 2.13.1
@@ -983,7 +987,7 @@ importers:
         version: 2.72.0
     devDependencies:
       '@lskjs/db':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../db
       '@lskjs/i18':
         specifier: ^3.8.1
@@ -1286,7 +1290,7 @@ importers:
         version: 6.1.1
     devDependencies:
       '@lskjs/db':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../db
       '@lskjs/i18':
         specifier: ^3.8.1
@@ -1375,7 +1379,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       lru-cache:
         specifier: ^10.0.0
@@ -1450,7 +1454,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       amqplib:
         specifier: ^0.10.3
@@ -1481,10 +1485,10 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../../libs/log
       '@lskjs/webserver':
-        specifier: ^3.8.1
+        specifier: ^3.11.1
         version: link:../../libs-core/webserver
       '@types/express':
         specifier: ^4.17.17
@@ -1656,7 +1660,7 @@ importers:
         specifier: ^3.11.0
         version: link:../algos
       '@lskjs/module':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../module
       cld:
         specifier: 2.9.0
@@ -1729,7 +1733,7 @@ importers:
         specifier: ^3.11.0
         version: link:../err
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../log
       '@lskjs/mutex':
         specifier: ^3.8.1
@@ -1772,7 +1776,7 @@ importers:
   libs/telegraf:
     dependencies:
       '@lskjs/log':
-        specifier: ^3.11.0
+        specifier: ^3.11.1
         version: link:../log
     devDependencies:
       telegraf:
@@ -17592,7 +17596,3 @@ packages:
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

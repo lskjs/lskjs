@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.1](https://github.com/lskjs/lskjs/compare/v3.11.0...v3.11.1) (2023-08-05)
+
+
+### Bug Fixes
+
+* **module:** fix tests with import ([459bb4c](https://github.com/lskjs/lskjs/commit/459bb4c63232fb3b01eb2d26271fa2c92d44a211))
+
+
+
+
+
 # [3.11.0](https://github.com/lskjs/lskjs/compare/v3.10.0...v3.11.0) (2023-08-03)
 
 
