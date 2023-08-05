@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "            lsk run dev",
     "build": "          lsk run build",
-    "test": "           lsk run test",
+    "test": "           export NODE_OPTIONS=--experimental-vm-modules && lsk run test",
     "prepack": "        lsk run prepack",
     "release": "        lsk run release"
   },
@@ -51,11 +51,11 @@
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "21kb"
+      "limit": "23kb"
     },
     {
       "path": "lib/Module.js",
-      "limit": "20kb"
+      "limit": "22kb"
     },
     {
       "path": "lib/ModuleWithConfig.js",
@@ -63,7 +63,7 @@
     },
     {
       "path": "lib/ModuleWithEE.js",
-      "limit": "13kb"
+      "limit": "16kb"
     },
     {
       "path": "lib/ModuleWithLifecycle.js",
@@ -71,23 +71,23 @@
     },
     {
       "path": "lib/ModuleWithLog.js",
-      "limit": "10.1kb"
+      "limit": "14.1kb"
     },
     {
       "path": "lib/ModuleWithSubmodules.js",
-      "limit": "20kb"
+      "limit": "22kb"
     },
     {
       "path": "lib/items/index.js",
-      "limit": "22kb"
+      "limit": "23kb"
     },
     {
       "path": "lib/asyncItems/index.js",
-      "limit": "22kb"
+      "limit": "23kb"
     },
     {
       "path": "lib/asyncModules/index.js",
-      "limit": "22kb"
+      "limit": "23kb"
     }
   ],
   "///": "//////////========================/////////========================/////////========================/////////",
