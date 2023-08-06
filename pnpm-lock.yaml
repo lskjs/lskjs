@@ -258,7 +258,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/algos
       '@lskjs/cli-scripts':
-        specifier: ^3.11.1
+        specifier: ^3.11.2
         version: link:../cli-scripts
       '@lskjs/cli-utils':
         specifier: ^3.11.1

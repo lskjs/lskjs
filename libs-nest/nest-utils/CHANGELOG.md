@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.2](https://github.com/lskjs/lskjs/compare/v3.11.1...v3.11.2) (2023-08-06)
+
+
+### Bug Fixes
+
+* **nest-utils:** nanoid v3 ([78365a6](https://github.com/lskjs/lskjs/commit/78365a61302488fddc45b76f617c7c58d67107bd))
+
+
+
+
+
 ## [3.11.1](https://github.com/lskjs/lskjs/compare/v3.11.0...v3.11.1) (2023-08-05)
 
 **Note:** Version bump only for package @lskjs/nest-utils
