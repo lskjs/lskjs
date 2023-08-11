@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.12.0](https://github.com/lskjs/lskjs/compare/v3.11.2...v3.12.0) (2023-08-11)
+
+
+### Features
+
+* **cli-utils:** create lsk run show-contributors & lsk run show-licenses ([9436f85](https://github.com/lskjs/lskjs/commit/9436f8544206359896ad1f71a95cabba6f3348e9))
+* **eslint-config:** add eslint ignore rules ([62767c5](https://github.com/lskjs/lskjs/commit/62767c55a39449db35d3652912d1e769d80d6886))
+
+
+
+
+
 ## [3.11.2](https://github.com/lskjs/lskjs/compare/v3.11.1...v3.11.2) (2023-08-06)
 
 
