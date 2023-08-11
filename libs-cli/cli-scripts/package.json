@@ -19,6 +19,8 @@
     "@lskjs/stringify": "^3.11.0",
     "all-contributors-cli": "^6.20.0",
     "fishbird": "^0.20.0",
+    "gitlog": "^4.0.8",
+    "license-checker": "^25.0.1",
     "remark-template": "1.6.0",
     "sort-package-json": "1.57.0"
   },
