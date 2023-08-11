@@ -35,7 +35,12 @@ module.exports = {
     'func-names': 'off',
     'no-underscore-dangle': 'off',
     'no-throw-literal': 'off',
+
+    // ну мы же не такие тупые да?
     'no-plusplus': 'off',
+
+    // увы в Nest.js пустые конструкторы это повсеместная практика
+    'no-empty-function': 'off',
 
     'prettier/prettier': [
       'warn',
