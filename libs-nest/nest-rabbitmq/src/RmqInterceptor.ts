@@ -20,7 +20,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 // import { createLogger } from '../nest-utils/log';
 
 // import { lskConfig } from '../../config';
-const lskConfig = {};
+export const RmqRPCConfig = {};
 // import { log } from '../../log';
 
 const deliveryAttempts: Record<string, any> = {};
@@ -51,11 +51,11 @@ type RmqRPCConfig = Pick<
 >;
 
 const log = createLogger({ ns: 'rmqrpc' });
-export function RmqRPC(props: RmqRPCConfig) {
+export function RmqRPC(props: RmqRPCConfig & { prefetchCount?: number }) {
   const { channel } = props?.queueOptions || {};
   // @ts-ignore
-  const channelConfig = lskConfig?.rabbitmq?.channels?.[channel];
-  const { prefetchCount } = channelConfig || {};
+  const channelConfig = RmqRPCConfig?.rabbitmq?.channels?.[channel];
+  const prefetchCount = props?.prefetchCount || channelConfig?.prefetchCount || 1;
   const decorators = [];
   if (prefetchCount) {
     log.debug(`RmqRPC prefetch ${channel}=${prefetchCount}`);
