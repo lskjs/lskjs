@@ -12,7 +12,6 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@golevelup/nestjs-rabbitmq": "^4.0.0",
     "@lskjs/algos": "^3.11.0",
     "@lskjs/env": "^3.11.0",
     "@lskjs/err": "^3.11.0",
@@ -23,11 +22,13 @@
   "devDependencies": {
     "@nestjs/common": "^10.0.5",
     "@nestjs/core": "^10.1.2",
-    "@types/amqplib": "0.8.2"
+    "@types/amqplib": "0.8.2",
+    "@golevelup/nestjs-rabbitmq": "^3.7.0"
   },
   "peerDependencies": {
     "@nestjs/common": "^10.0.5",
-    "@nestjs/core": "^10.1.2"
+    "@nestjs/core": "^10.1.2",
+    "@golevelup/nestjs-rabbitmq": "^3.7.0"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",

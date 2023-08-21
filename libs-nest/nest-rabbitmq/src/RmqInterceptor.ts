@@ -55,13 +55,14 @@ export function RmqRPC(props: RmqRPCConfigProps & { prefetchCount?: number }) {
   const { channel } = props?.queueOptions || {};
   // @ts-ignore
   const channelConfig = RmqRPCConfig?.rabbitmq?.channels?.[channel];
-  const prefetchCount = props?.prefetchCount || channelConfig?.prefetchCount || 1;
+  const prefetchCount = props?.prefetchCount || channelConfig?.prefetchCount || undefined;
   const decorators = [];
+  const message = `RmqRPC ${channel}=${prefetchCount} ${props.routingKey || ''}`;
   if (prefetchCount) {
-    log.debug(`RmqRPC prefetch ${channel}=${prefetchCount}`);
+    log.debug(message);
     decorators.push(RabbitRPC(props));
   } else {
-    log.trace(`RmqRPC prefetch ${channel}=${prefetchCount}`);
+    log.trace(message);
   }
   return applyDecorators(...decorators);
 }
