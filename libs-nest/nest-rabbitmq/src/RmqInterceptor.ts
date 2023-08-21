@@ -35,7 +35,7 @@ const inc = (obj: Record<string, any>, key: string, val = 1) => {
   return obj[key];
 };
 
-type RmqRPCConfig = Pick<
+type RmqRPCConfigProps = Pick<
   RabbitHandlerConfig,
   | 'queue'
   | 'name'
@@ -51,7 +51,7 @@ type RmqRPCConfig = Pick<
 >;
 
 const log = createLogger({ ns: 'rmqrpc' });
-export function RmqRPC(props: RmqRPCConfig & { prefetchCount?: number }) {
+export function RmqRPC(props: RmqRPCConfigProps & { prefetchCount?: number }) {
   const { channel } = props?.queueOptions || {};
   // @ts-ignore
   const channelConfig = RmqRPCConfig?.rabbitmq?.channels?.[channel];
