@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-rabbitmq",
-  "version": "3.11.1",
+  "version": "3.13.0",
   "description": "LSK.js – nest rabbitmq – helpers for rabbitmq in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

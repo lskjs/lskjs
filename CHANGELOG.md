@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.13.0](https://github.com/lskjs/lskjs/compare/v3.12.0...v3.13.0) (2023-08-21)
+
+
+### Features
+
+* add RmqRPCConfig ([1ddb0e8](https://github.com/lskjs/lskjs/commit/1ddb0e8edfaab36f690fb71da1c5fabc41f13901))
+
+
+
+
+
 # [3.12.0](https://github.com/lskjs/lskjs/compare/v3.11.2...v3.12.0) (2023-08-11)
 
 
