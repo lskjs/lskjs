@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.14.0](https://github.com/lskjs/lskjs/compare/v3.13.1...v3.14.0) (2023-08-21)
+
+
+### Features
+
+* **nestjs-rabbit:** improve package deps ([4344bf8](https://github.com/lskjs/lskjs/commit/4344bf87d49e6c32ab0dfb2ca9bd3cf2f0ac9a7c))
+
+
+
+
+
 ## [3.13.1](https://github.com/lskjs/lskjs/compare/v3.13.0...v3.13.1) (2023-08-21)
 
 

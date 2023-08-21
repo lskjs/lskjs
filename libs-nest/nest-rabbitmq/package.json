@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-rabbitmq",
-  "version": "3.13.1",
+  "version": "3.14.0",
   "description": "LSK.js – nest rabbitmq – helpers for rabbitmq in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -20,15 +20,15 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@golevelup/nestjs-rabbitmq": "^3.7.0",
     "@nestjs/common": "^10.0.5",
     "@nestjs/core": "^10.1.2",
-    "@types/amqplib": "0.8.2",
-    "@golevelup/nestjs-rabbitmq": "^3.7.0"
+    "@types/amqplib": "0.8.2"
   },
   "peerDependencies": {
+    "@golevelup/nestjs-rabbitmq": "^3.7.0",
     "@nestjs/common": "^10.0.5",
-    "@nestjs/core": "^10.1.2",
-    "@golevelup/nestjs-rabbitmq": "^3.7.0"
+    "@nestjs/core": "^10.1.2"
   },
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
