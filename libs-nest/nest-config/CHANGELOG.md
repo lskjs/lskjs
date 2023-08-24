@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.14.1](https://github.com/lskjs/lskjs/compare/v3.14.0...v3.14.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* **nest-config:** getEnvConfig from env vars ([45a1e8a](https://github.com/lskjs/lskjs/commit/45a1e8a139270016865515fce24f8b4830d3ea79))
+
+
+
+
+
 # [3.11.0](https://github.com/lskjs/lskjs/compare/v3.10.0...v3.11.0) (2023-08-03)
 
 **Note:** Version bump only for package @lskjs/nest-config

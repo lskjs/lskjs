@@ -1364,7 +1364,7 @@ importers:
         version: 1.17.3
     devDependencies:
       '@lskjs/nest-config':
-        specifier: ^3.11.0
+        specifier: ^3.14.1
         version: link:../nest-config
       '@nestjs/common':
         specifier: ^10.0.5

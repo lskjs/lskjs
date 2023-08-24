@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-auth",
-  "version": "3.11.0",
+  "version": "3.14.1",
   "description": "LSK.js – nest auth – helpers for auth in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -18,7 +18,7 @@
     "express-session": "^1.17.3"
   },
   "devDependencies": {
-    "@lskjs/nest-config": "^3.11.0",
+    "@lskjs/nest-config": "^3.14.1",
     "@nestjs/common": "^10.0.5",
     "@nestjs/core": "^10.1.2",
     "@types/express-session": "^1.17.7"
