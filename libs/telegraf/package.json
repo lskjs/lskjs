@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@lskjs/algos": "workspace:^3.11.0",
-    "@lskjs/log": "^3.11.1"
+    "@lskjs/log": "workspace:^"
   },
   "devDependencies": {
     "telegraf": "^4.12.2"

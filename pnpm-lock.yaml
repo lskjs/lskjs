@@ -1785,7 +1785,7 @@ importers:
         specifier: workspace:^3.11.0
         version: link:../algos
       '@lskjs/log':
-        specifier: ^3.11.1
+        specifier: workspace:^
         version: link:../log
     devDependencies:
       telegraf:
