@@ -338,7 +338,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -366,7 +366,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -391,7 +391,7 @@ importers:
         version: link:../db
       '@lskjs/mobx':
         specifier: 2.13.1
-        version: 2.13.1(@types/lodash@4.14.197)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.3.1)(mobx@5.15.4)
+        version: 2.13.1(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.2.2)(mobx@5.15.4)
       '@lskjs/server-api':
         specifier: ^3.8.1
         version: link:../server-api
@@ -433,7 +433,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -464,7 +464,7 @@ importers:
     dependencies:
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       clickhouse-post:
         specifier: 2.1.8
         version: 2.1.8
@@ -544,7 +544,7 @@ importers:
     dependencies:
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       elasticsearch:
         specifier: 16.7.2
         version: 16.7.2
@@ -560,7 +560,7 @@ importers:
     dependencies:
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -582,7 +582,7 @@ importers:
         version: link:../mobx
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/mutex':
         specifier: 2.85.1
         version: 2.85.1
@@ -616,7 +616,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       i18next:
         specifier: 19.1.0
         version: 19.1.0
@@ -641,7 +641,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -666,7 +666,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -712,7 +712,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -731,7 +731,7 @@ importers:
         version: 5.15.4
       mobx-react:
         specifier: 6.2.2
-        version: 6.2.2(mobx@5.15.4)(react@16.14.0)
+        version: 6.2.2(mobx@5.15.4)(react-dom@17.0.1)(react@16.8.6)
 
   libs-core/permit:
     dependencies:
@@ -740,7 +740,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       nanoid:
         specifier: 3.1.25
         version: 3.1.25
@@ -750,7 +750,7 @@ importers:
         version: link:../db
       '@lskjs/mobx':
         specifier: 2.13.1
-        version: 2.13.1(@types/lodash@4.14.197)(axios@0.21.4)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.3.1)(mobx@5.15.4)
+        version: 2.13.1(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.2.2)(mobx@5.15.4)
       '@lskjs/server-api':
         specifier: ^3.8.1
         version: link:../server-api
@@ -774,7 +774,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/mutex':
         specifier: 2.85.1
         version: 2.85.1
@@ -817,7 +817,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/stats':
         specifier: ^3.8.1
         version: link:../stats
@@ -851,7 +851,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -937,7 +937,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -959,7 +959,7 @@ importers:
     dependencies:
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -987,7 +987,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -1000,7 +1000,7 @@ importers:
         version: link:../i18
       '@lskjs/webserver':
         specifier: 2.76.3
-        version: 2.76.3(@emotion/core@10.3.1)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.197)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@18.2.0)
+        version: 2.76.3(@emotion/core@10.0.27)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1)
       axios:
         specifier: 0.21.2
         version: 0.21.2
@@ -1024,7 +1024,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -1065,7 +1065,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -1096,7 +1096,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -1108,7 +1108,7 @@ importers:
         version: 10.0.27
       emotion-theming:
         specifier: 10.0.27
-        version: 10.0.27(@emotion/core@10.3.1)(react@16.8.6)
+        version: 10.0.27(@emotion/core@10.0.27)(react@16.8.6)
       favico.js:
         specifier: 0.3.10
         version: 0.3.10
@@ -1169,7 +1169,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -1242,7 +1242,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils':
         specifier: 2.72.0
         version: 2.72.0
@@ -1269,7 +1269,7 @@ importers:
         version: 10.0.27
       emotion-theming:
         specifier: 10.0.27
-        version: 10.0.27(@emotion/core@10.3.1)(react@18.2.0)
+        version: 10.0.27(@emotion/core@10.0.27)(react@17.0.1)
       express:
         specifier: 4.17.1
         version: 4.17.1
@@ -1324,7 +1324,7 @@ importers:
         version: 2.85.1
       '@lskjs/module':
         specifier: 2.85.1
-        version: 2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+        version: 2.85.1(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/proxy':
         specifier: ^3.8.1
         version: link:../proxy
@@ -1633,7 +1633,7 @@ importers:
         version: 16.0.0
       ts-jest:
         specifier: ^29.1.1
-        version: 29.1.1(@babel/core@7.22.11)(esbuild@0.18.17)(jest@29.6.2)(typescript@5.2.2)
+        version: 29.1.1(@babel/core@7.22.11)(esbuild@0.18.17)(jest@29.6.2)(typescript@5.1.6)
     optionalDependencies:
       jest:
         specifier: ^29.6.2
@@ -1781,6 +1781,9 @@ importers:
 
   libs/telegraf:
     dependencies:
+      '@lskjs/algos':
+        specifier: workspace:^3.11.0
+        version: link:../algos
       '@lskjs/log':
         specifier: ^3.11.1
         version: link:../log
@@ -3538,12 +3541,6 @@ packages:
     dependencies:
       regenerator-runtime: 0.13.11
 
-  /@babel/runtime@7.22.11:
-    resolution: {integrity: sha512-ee7jVNlWN09+KftVOu9n7S8gQzD/Z6hN/I8VBRXW4P1+Xe7kJGXMwu8vds4aGIMHZnNbdpSWCfZZtinytpcAvA==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.14.0
-
   /@babel/runtime@7.22.5:
     resolution: {integrity: sha512-ecjvYlnAaZ/KVneE/OdKYBYfgXV3Ptu6zQWmgEF7vwKhQnvVS6bjMD2XYgj+SNvQ1GfK/pjgokfPkC/2CO8CuA==}
     engines: {node: '>=6.9.0'}
@@ -3696,6 +3693,19 @@ packages:
       '@emotion/utils': 0.11.3
       '@emotion/weak-memoize': 0.2.5
 
+  /@emotion/core@10.0.27(react@16.8.6):
+    resolution: {integrity: sha512-XbD5R36pVbohQMnKfajHv43g8EbN4NHdF6Zh9zg/C0nr0jqwOw3gYnC07Xj3yG43OYSRyrGsoQ5qPwc8ycvLZw==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      '@babel/runtime': 7.22.5
+      '@emotion/cache': 10.0.29
+      '@emotion/css': 10.0.27
+      '@emotion/serialize': 0.11.16
+      '@emotion/sheet': 0.9.4
+      '@emotion/utils': 0.11.3
+      react: 16.8.6
+
   /@emotion/core@10.0.27(react@17.0.1):
     resolution: {integrity: sha512-XbD5R36pVbohQMnKfajHv43g8EbN4NHdF6Zh9zg/C0nr0jqwOw3gYnC07Xj3yG43OYSRyrGsoQ5qPwc8ycvLZw==}
     peerDependencies:
@@ -3708,33 +3718,6 @@ packages:
       '@emotion/sheet': 0.9.4
       '@emotion/utils': 0.11.3
       react: 17.0.1
-    dev: true
-
-  /@emotion/core@10.3.1(react@16.8.6):
-    resolution: {integrity: sha512-447aUEjPIm0MnE6QYIaFz9VQOHSXf4Iu6EWOIqq11EAPqinkSZmfymPTmlOE3QjLv846lH4JVZBUOtwGbuQoww==}
-    peerDependencies:
-      react: '>=16.3.0'
-    dependencies:
-      '@babel/runtime': 7.22.11
-      '@emotion/cache': 10.0.29
-      '@emotion/css': 10.0.27
-      '@emotion/serialize': 0.11.16
-      '@emotion/sheet': 0.9.4
-      '@emotion/utils': 0.11.3
-      react: 16.8.6
-
-  /@emotion/core@10.3.1(react@18.2.0):
-    resolution: {integrity: sha512-447aUEjPIm0MnE6QYIaFz9VQOHSXf4Iu6EWOIqq11EAPqinkSZmfymPTmlOE3QjLv846lH4JVZBUOtwGbuQoww==}
-    peerDependencies:
-      react: '>=16.3.0'
-    dependencies:
-      '@babel/runtime': 7.22.11
-      '@emotion/cache': 10.0.29
-      '@emotion/css': 10.0.27
-      '@emotion/serialize': 0.11.16
-      '@emotion/sheet': 0.9.4
-      '@emotion/utils': 0.11.3
-      react: 18.2.0
 
   /@emotion/css@10.0.27:
     resolution: {integrity: sha512-6wZjsvYeBhyZQYNrGoR5yPMYbMBNEnanDrqmsqS1mzDm1cOTu12shvl2j4QHNS36UaTE0USIJawCH9C8oW34Zw==}
@@ -4497,13 +4480,13 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/css@2.7.0(@emotion/core@10.3.1)(emotion@10.0.27):
+  /@lskjs/css@2.7.0(@emotion/core@10.0.27)(emotion@10.0.27):
     resolution: {integrity: sha512-7bMrgNKnHtEB/lINYoXo4ZVaBuhYYIC9zP2jjT2EgwRRsn+tJt7RT9uWlRzBSRb4aTbuLup1+Iqkq0Mj34kfdg==}
     peerDependencies:
       '@emotion/core': '*'
       emotion: '*'
     dependencies:
-      '@emotion/core': 10.3.1(react@16.8.6)
+      '@emotion/core': 10.0.27(react@16.8.6)
       emotion: 10.0.27
     dev: true
 
@@ -4530,12 +4513,12 @@ packages:
       mobx-react: '*'
       react: '*'
     dependencies:
-      '@lskjs/css': 2.7.0(@emotion/core@10.3.1)(emotion@10.0.27)
+      '@lskjs/css': 2.7.0(@emotion/core@10.0.27)(emotion@10.0.27)
       '@lskjs/log2': 2.19.1
       '@lskjs/theme': 2.7.0(lodash@4.17.21)
       '@lskjs/utils': 2.72.0
       emotion: 10.0.27
-      emotion-theming: 10.0.27(@emotion/core@10.3.1)(react@16.8.6)
+      emotion-theming: 10.0.27(@emotion/core@10.0.27)(react@16.8.6)
       lodash: 4.17.21
       mobx: 5.15.4
       mobx-react: 6.2.2(mobx@5.15.4)(react-dom@17.0.1)(react@16.8.6)
@@ -4670,7 +4653,7 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/mobx@2.13.1(@types/lodash@4.14.197)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.3.1)(mobx@5.15.4):
+  /@lskjs/mobx@2.13.1(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.2.2)(mobx@5.15.4):
     resolution: {integrity: sha512-UIzekcxb8FQaZRaMtIp/SR/3yVelp19g/YlGHy6tnk+qitOXK5a0AefnChvSbUCsGCByFcBEAHVJ0fzQuSBwCw==}
     peerDependencies:
       axios: 0.21.x
@@ -4681,40 +4664,18 @@ packages:
     dependencies:
       '@lskjs/env': 2.8.0
       '@lskjs/err': 2.12.0
-      '@lskjs/module': 2.13.0(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+      '@lskjs/module': 2.13.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils': 2.13.0
       axios: 0.21.2
       bluebird: 3.7.2
       lodash: 4.17.21
       mobx: 5.15.4
-      mobx-react: 6.3.1(mobx@5.15.4)(react@16.14.0)
+      mobx-react: 6.2.2(mobx@5.15.4)(react-dom@17.0.1)(react@16.8.6)
     transitivePeerDependencies:
       - '@types/lodash'
     dev: true
 
-  /@lskjs/mobx@2.13.1(@types/lodash@4.14.197)(axios@0.21.4)(bluebird@3.7.2)(lodash@4.17.21)(mobx-react@6.3.1)(mobx@5.15.4):
-    resolution: {integrity: sha512-UIzekcxb8FQaZRaMtIp/SR/3yVelp19g/YlGHy6tnk+qitOXK5a0AefnChvSbUCsGCByFcBEAHVJ0fzQuSBwCw==}
-    peerDependencies:
-      axios: 0.21.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-      mobx: <6
-      mobx-react: <7
-    dependencies:
-      '@lskjs/env': 2.8.0
-      '@lskjs/err': 2.12.0
-      '@lskjs/module': 2.13.0(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
-      '@lskjs/utils': 2.13.0
-      axios: 0.21.4
-      bluebird: 3.7.2
-      lodash: 4.17.21
-      mobx: 5.15.4
-      mobx-react: 6.3.1(mobx@5.15.4)(react@16.14.0)
-    transitivePeerDependencies:
-      - '@types/lodash'
-    dev: true
-
-  /@lskjs/module@2.13.0(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21):
+  /@lskjs/module@2.13.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21):
     resolution: {integrity: sha512-xn2lVlOFQ0mCWdLs/snKQJLouCBKrUx5JPjU4rf4eOHXhhChcctp7YlhrAIjiIz/mFi5fzSzmSLCHjZA0M92mg==}
     peerDependencies:
       '@types/lodash': 4.14.x
@@ -4726,14 +4687,14 @@ packages:
       '@lskjs/log2': 2.12.0
       '@lskjs/mutex': 2.8.0
       '@lskjs/utils': 2.13.0
-      '@types/lodash': 4.14.197
+      '@types/lodash': 4.14.178
       bluebird: 3.7.2
       colors: 1.4.0
       eventemitter3: 4.0.7
       lodash: 4.17.21
     dev: true
 
-  /@lskjs/module@2.76.0(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21):
+  /@lskjs/module@2.76.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21):
     resolution: {integrity: sha512-P+WEUmDibtvIUpRcIDYvd5lKQTaDQGlLt+XBa0JS39Q1lGN5Kx8z0P1TBhAozQT045KCh77d/F25PwpJ4VUj4w==}
     peerDependencies:
       '@types/lodash': 4.14.x
@@ -4745,7 +4706,7 @@ packages:
       '@lskjs/log': 2.76.0
       '@lskjs/mutex': 2.65.1
       '@lskjs/utils2': 2.65.1
-      '@types/lodash': 4.14.197
+      '@types/lodash': 4.14.178
       bluebird: 3.7.2
       colors: 1.4.0
       eventemitter3: 4.0.7
@@ -4790,25 +4751,6 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@lskjs/module@2.85.1(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21):
-    resolution: {integrity: sha512-cSDJO64U4d3IBiVWUQFh1SWNpzxi+LnDZWj1N+JgNJ3MPryoneUn9rGJhFYI9lcES9G74JYmu0tHng+0zq+VwA==}
-    peerDependencies:
-      '@types/lodash': 4.14.x
-      bluebird: 3.7.x
-      lodash: 4.17.x
-    dependencies:
-      '@lskjs/env': 2.85.1
-      '@lskjs/err': 2.85.1
-      '@lskjs/log': 2.85.1
-      '@lskjs/mutex': 2.85.1
-      '@lskjs/utils2': 2.85.1
-      '@types/lodash': 4.14.197
-      bluebird: 3.7.2
-      colors: 1.4.0
-      eventemitter3: 4.0.7
-      lodash: 4.17.21
-    dev: false
-
   /@lskjs/mutex@2.65.1:
     resolution: {integrity: sha512-qsXtUCjhmJ4JPClvBsJE7OPr2UHuYdB1VdJKattG/1zlC/AV5iSZ2AshYl50S7EmvIfaz9P6N9GmashQsi7adg==}
     dependencies:
@@ -4841,12 +4783,12 @@ packages:
       mobx-react-devtools: '*'
       react: '*'
     dependencies:
-      '@lskjs/css': 2.7.0(@emotion/core@10.3.1)(emotion@10.0.27)
+      '@lskjs/css': 2.7.0(@emotion/core@10.0.27)(emotion@10.0.27)
       '@lskjs/dev': 2.7.0(@lskjs/css@2.7.0)(@lskjs/theme@2.7.0)(@lskjs/utils@2.72.0)(emotion-theming@10.0.27)(emotion@10.0.27)(lodash@4.17.21)(mobx-react@6.2.2)(mobx@5.15.4)(react@16.8.6)
       '@lskjs/theme': 2.7.0(lodash@4.17.21)
       '@lskjs/utils': 2.72.0
       animated-scroll-to: 2.3.0
-      emotion-theming: 10.0.27(@emotion/core@10.3.1)(react@16.8.6)
+      emotion-theming: 10.0.27(@emotion/core@10.0.27)(react@16.8.6)
       lodash: 4.17.21
       mobx: 5.15.4
       mobx-react: 6.2.2(mobx@5.15.4)(react-dom@17.0.1)(react@16.8.6)
@@ -4883,7 +4825,7 @@ packages:
   /@lskjs/utils@2.72.0:
     resolution: {integrity: sha512-E7BJ9g2DNRZaZb3WuxRF2LRvfnZxf6h6jR1xtAUoYcIdnxbgnXQTVALI+dCrHUkiAolsym0VUFdI2E4uOMCSXg==}
 
-  /@lskjs/webserver@2.76.3(@emotion/core@10.3.1)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.197)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@18.2.0):
+  /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):
     resolution: {integrity: sha512-Hk6UAr8ziUqG1jG87cozG5CWrhqjqXz+296i43Zrb6Aw25I3KfAkGcoIQo7fJdau2abO/rYgzd8NSSzMhLSbLg==}
     peerDependencies:
       '@lskjs/db': 2.33.1
@@ -4897,7 +4839,7 @@ packages:
       '@lskjs/err': 2.65.1
       '@lskjs/i18': link:libs-core/i18
       '@lskjs/log': 2.76.0
-      '@lskjs/module': 2.76.0(@types/lodash@4.14.197)(bluebird@3.7.2)(lodash@4.17.21)
+      '@lskjs/module': 2.76.0(@types/lodash@4.14.178)(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/utils': 2.72.0
       accept-language-parser: 1.5.0
       axios: 0.21.2
@@ -4908,7 +4850,7 @@ packages:
       cookie-parser: 1.4.5
       cors: 2.8.5
       emotion: 10.0.27
-      emotion-theming: 10.0.27(@emotion/core@10.3.1)(react@18.2.0)
+      emotion-theming: 10.0.27(@emotion/core@10.0.27)(react@17.0.1)
       express: 4.17.1
       express-jwt: 6.1.0
       fast-safe-stringify: 2.1.1
@@ -5860,9 +5802,6 @@ packages:
   /@types/lodash@4.14.178:
     resolution: {integrity: sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==}
 
-  /@types/lodash@4.14.197:
-    resolution: {integrity: sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==}
-
   /@types/long@4.0.2:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
     dev: false
@@ -6676,14 +6615,6 @@ packages:
       follow-redirects: 1.15.2
     transitivePeerDependencies:
       - debug
-
-  /axios@0.21.4:
-    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
-    dependencies:
-      follow-redirects: 1.15.2
-    transitivePeerDependencies:
-      - debug
-    dev: true
 
   /axios@0.27.2:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
@@ -8558,29 +8489,29 @@ packages:
       emotion: 10.0.27
     dev: false
 
-  /emotion-theming@10.0.27(@emotion/core@10.3.1)(react@16.8.6):
+  /emotion-theming@10.0.27(@emotion/core@10.0.27)(react@16.8.6):
     resolution: {integrity: sha512-MlF1yu/gYh8u+sLUqA0YuA9JX0P4Hb69WlKc/9OLo+WCXuX6sy/KoIa+qJimgmr2dWqnypYKYPX37esjDBbhdw==}
     peerDependencies:
       '@emotion/core': ^10.0.27
       react: '>=16.3.0'
     dependencies:
       '@babel/runtime': 7.22.5
-      '@emotion/core': 10.3.1(react@16.8.6)
+      '@emotion/core': 10.0.27(react@16.8.6)
       '@emotion/weak-memoize': 0.2.5
       hoist-non-react-statics: 3.3.2
       react: 16.8.6
 
-  /emotion-theming@10.0.27(@emotion/core@10.3.1)(react@18.2.0):
+  /emotion-theming@10.0.27(@emotion/core@10.0.27)(react@17.0.1):
     resolution: {integrity: sha512-MlF1yu/gYh8u+sLUqA0YuA9JX0P4Hb69WlKc/9OLo+WCXuX6sy/KoIa+qJimgmr2dWqnypYKYPX37esjDBbhdw==}
     peerDependencies:
       '@emotion/core': ^10.0.27
       react: '>=16.3.0'
     dependencies:
       '@babel/runtime': 7.22.5
-      '@emotion/core': 10.3.1(react@18.2.0)
+      '@emotion/core': 10.0.27(react@17.0.1)
       '@emotion/weak-memoize': 0.2.5
       hoist-non-react-statics: 3.3.2
-      react: 18.2.0
+      react: 17.0.1
 
   /emotion@10.0.27:
     resolution: {integrity: sha512-2xdDzdWWzue8R8lu4G76uWX5WhyQuzATon9LmNeCy/2BHVC6dsEpfhN1a0qhELgtDVdjyEA6J8Y/VlI5ZnaH0g==}
@@ -13329,23 +13260,6 @@ packages:
       react-dom: 17.0.1(react@16.8.6)
     dev: true
 
-  /mobx-react-lite@2.2.2(mobx@5.15.4)(react@16.14.0):
-    resolution: {integrity: sha512-2SlXALHIkyUPDsV4VTKVR9DW7K3Ksh1aaIv3NrNJygTbhXe2A9GrcKHZ2ovIiOp/BXilOcTYemfHHZubP431dg==}
-    peerDependencies:
-      mobx: ^4.0.0 || ^5.0.0
-      react: ^16.8.0
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      mobx: 5.15.4
-      react: 16.14.0
-    dev: true
-
   /mobx-react@6.2.2(mobx@5.15.4)(react-dom@17.0.1)(react@16.8.6):
     resolution: {integrity: sha512-Us6V4ng/iKIRJ8pWxdbdysC6bnS53ZKLKlVGBqzHx6J+gYPYbOotWvhHZnzh/W5mhpYXxlXif4kL2cxoWJOplQ==}
     peerDependencies:
@@ -13355,34 +13269,6 @@ packages:
       mobx: 5.15.4
       mobx-react-lite: 2.2.2(mobx@5.15.4)(react-dom@17.0.1)(react@16.8.6)
       react: 16.8.6
-    transitivePeerDependencies:
-      - react-dom
-      - react-native
-    dev: true
-
-  /mobx-react@6.2.2(mobx@5.15.4)(react@16.14.0):
-    resolution: {integrity: sha512-Us6V4ng/iKIRJ8pWxdbdysC6bnS53ZKLKlVGBqzHx6J+gYPYbOotWvhHZnzh/W5mhpYXxlXif4kL2cxoWJOplQ==}
-    peerDependencies:
-      mobx: ^5.15.4 || ^4.15.4
-      react: ^16.8.0 || 16.9.0-alpha.0
-    dependencies:
-      mobx: 5.15.4
-      mobx-react-lite: 2.2.2(mobx@5.15.4)(react@16.14.0)
-      react: 16.14.0
-    transitivePeerDependencies:
-      - react-dom
-      - react-native
-    dev: true
-
-  /mobx-react@6.3.1(mobx@5.15.4)(react@16.14.0):
-    resolution: {integrity: sha512-IOxdJGnRSNSJrL2uGpWO5w9JH5q5HoxEqwOF4gye1gmZYdjoYkkMzSGMDnRCUpN/BNzZcFoMdHXrjvkwO7KgaQ==}
-    peerDependencies:
-      mobx: ^5.15.4 || ^4.15.4
-      react: ^16.8.0 || 16.9.0-alpha.0
-    dependencies:
-      mobx: 5.15.4
-      mobx-react-lite: 2.2.2(mobx@5.15.4)(react@16.14.0)
-      react: 16.14.0
     transitivePeerDependencies:
       - react-dom
       - react-native
@@ -14981,6 +14867,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
+    dev: false
 
   /proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
@@ -15157,15 +15044,6 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react@16.14.0:
-    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      prop-types: 15.8.1
-    dev: true
-
   /react@16.8.6:
     resolution: {integrity: sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==}
     engines: {node: '>=0.10.0'}
@@ -15181,12 +15059,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-
-  /react@18.2.0:
-    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      loose-envify: 1.4.0
 
   /read-cmd-shim@4.0.0:
     resolution: {integrity: sha512-yILWifhaSEEytfXI76kB9xEEiG1AiozaCJZ83A87ytjRiN+jVibXjedjCRNjoZviinhG+4UkalO3mWTd8u5O0Q==}
@@ -15412,9 +15284,6 @@ packages:
 
   /regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
-
-  /regenerator-runtime@0.14.0:
-    resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
 
   /regenerator-transform@0.15.1:
     resolution: {integrity: sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==}
@@ -16983,7 +16852,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: false
 
-  /ts-jest@29.1.1(@babel/core@7.22.11)(esbuild@0.18.17)(jest@29.6.2)(typescript@5.2.2):
+  /ts-jest@29.1.1(@babel/core@7.22.11)(esbuild@0.18.17)(jest@29.6.2)(typescript@5.1.6):
     resolution: {integrity: sha512-D6xjnnbP17cC85nliwGiL+tpoKN0StpgE0TeOjXQTU6MVCfsB4v7aW05CgQ/1OywGb0x/oy9hHFnN+sczTiRaA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -17014,7 +16883,7 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.5.4
-      typescript: 5.2.2
+      typescript: 5.1.6
       yargs-parser: 21.1.1
     dev: false
 
@@ -17256,12 +17125,6 @@ packages:
 
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-    dev: false
-
-  /typescript@5.2.2:
-    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false

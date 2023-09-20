@@ -12,6 +12,7 @@
     "release": "        lsk run release"
   },
   "dependencies": {
+    "@lskjs/algos": "workspace:^3.11.0",
     "@lskjs/log": "^3.11.1"
   },
   "devDependencies": {

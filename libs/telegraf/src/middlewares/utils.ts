@@ -18,28 +18,40 @@ export function getTypingDelay(text: string, charsPerMinute = 200) {
 //     : 'document') as 'photo';
 
 // eslint-disable-next-line no-shadow
-export const isNeedCaption = (text, rawType, j, last) =>
+export const isNeedCaption = (text: string, rawType: string, j: number, last: number) =>
   text && ((rawType !== 'document' && j === 0) || (rawType === 'document' && j === last));
+
+export type GetMessageProps = {
+  medias?: any[];
+  messagesDelemiter?: string;
+  type?: string;
+  message?: string;
+  text?: string;
+  caption?: string;
+};
 
 export function getMessages({
   medias: rawRawMedias = [],
   messagesDelemiter: initMessageDelemiter,
   type: initType,
   ...props
-}) {
-  const defaultType = !['audio', 'document', 'video', 'photo', 'video_note'].includes(initType)
-    ? 'document'
-    : initType;
+}: GetMessageProps) {
+  let defaultType: string;
+  if (['audio', 'document', 'video', 'photo', 'video_note'].includes(initType as string)) {
+    defaultType = initType as string;
+  } else {
+    defaultType = 'document';
+  }
 
   const rawMedias = rawRawMedias
-    .map((src) => ({
+    .map((src: any) => ({
       type: src.type || defaultType,
       filename: src.name,
       ...src,
     }))
-    .filter((a) => a.url);
+    .filter((a: any) => a.url);
 
-  const rawText = props.message || props.text || props.caption || '';
+  const rawText: string = props.message || props.text || props.caption || '';
   const trimmedText = rawText.trim().replaceAll(/\\n/gi, '\n');
   const md = initMessageDelemiter || '\n\n';
   let texts = trimmedText
@@ -50,12 +62,13 @@ export function getMessages({
   if (['document', 'video', 'photo'].includes(defaultType)) {
     return texts.map((text, i) => {
       if (i === 0) {
-        const medias = rawMedias.map((media, j) =>
-          omitNull({
-            type: media.type,
-            media,
-            caption: isNeedCaption(text, media.type, j, rawMedias.length - 1) ? text : null,
-          }),
+        const medias = rawMedias.map(
+          (media, j) =>
+            omitNull({
+              type: media.type,
+              media,
+              caption: isNeedCaption(text, media.type, j, rawMedias.length - 1) ? text : null,
+            }) as { type: string; media: any; caption?: string },
         );
         // console.log({ i, rawType, medias, text });
         if (medias.length) {
