@@ -1782,10 +1782,10 @@ importers:
   libs/telegraf:
     dependencies:
       '@lskjs/algos':
-        specifier: workspace:^3.11.0
+        specifier: ^3.11.0
         version: link:../algos
       '@lskjs/log':
-        specifier: workspace:^
+        specifier: ^3.11.0
         version: link:../log
     devDependencies:
       telegraf:

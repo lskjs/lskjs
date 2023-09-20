@@ -12,8 +12,8 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "workspace:^3.11.0",
-    "@lskjs/log": "workspace:^"
+    "@lskjs/algos": "^3.11.0",
+    "@lskjs/log": "^3.11.0"
   },
   "devDependencies": {
     "telegraf": "^4.12.2"
@@ -24,7 +24,10 @@
   "//": "///////////========================/////////========================/////////========================/////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
-    "extends": "@lskjs/eslint-config"
+    "extends": "@lskjs/eslint-config",
+    "rules": {
+      "import/named": "warn"
+    }
   },
   "jest": {
     "preset": "@lskjs/jest-config"
