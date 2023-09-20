@@ -14,20 +14,21 @@ export const ConfigModule = NestConfigModule;
 export const ConfigService = NestConfigService;
 
 const get = (obj: any, key: string) => (key ? obj[key] : obj);
+type PropsFn = (res: Record<string, unknown>) => Record<string, unknown>;
 
-export const loadConfigEnvs = (path: string | string[], key?: string) => ({
+export const loadConfigEnvs = (path: string | string[], keyOrFn?: string | PropsFn) => ({
   load: [
     () => {
       const config = getEnvConfig(path);
-      const res = key ? get(config, key) : config;
-      return res;
+      if (typeof keyOrFn === 'function') return keyOrFn(config);
+      if (!keyOrFn) return config;
+      return get(config, keyOrFn);
     },
   ],
   isGlobal: true,
   expandVariables: true,
 });
 
-type PropsFn = (res: Record<string, unknown>) => Record<string, unknown>;
 export const getConfig = (path: string, fields?: string[] | PropsFn) => ({
   imports: [ConfigModule],
   useFactory: (configService: NestConfigService) => {

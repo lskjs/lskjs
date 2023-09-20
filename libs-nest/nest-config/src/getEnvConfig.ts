@@ -11,6 +11,7 @@ export const getEnvConfig = (filenames: string | string[]) => {
   for (let i = 0; i < paths.length; i++) {
     // TODO: may be merge
     let path = paths[i];
+    if (!path) continue;
     if (path.startsWith('process.env.')) {
       const envName = path.replace('process.env.', '');
       const raw = process.env[envName];
