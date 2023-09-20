@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/module",
-  "version": "3.11.1",
+  "version": "3.15.0",
   "description": "Module system with dependency injection, event emitter, logger and submodules tree",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

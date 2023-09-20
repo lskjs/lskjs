@@ -264,7 +264,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/algos
       '@lskjs/cli-scripts':
-        specifier: ^3.12.0
+        specifier: ^3.15.0
         version: link:../cli-scripts
       '@lskjs/cli-utils':
         specifier: ^3.11.1
@@ -1364,7 +1364,7 @@ importers:
         version: 1.17.3
     devDependencies:
       '@lskjs/nest-config':
-        specifier: ^3.14.1
+        specifier: ^3.15.0
         version: link:../nest-config
       '@nestjs/common':
         specifier: ^10.0.5
@@ -1666,7 +1666,7 @@ importers:
         specifier: ^3.11.0
         version: link:../algos
       '@lskjs/module':
-        specifier: ^3.11.1
+        specifier: ^3.15.0
         version: link:../module
       cld:
         specifier: 2.9.0

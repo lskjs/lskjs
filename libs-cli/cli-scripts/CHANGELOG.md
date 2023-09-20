@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/lskjs/lskjs/compare/v3.14.1...v3.15.0) (2023-09-20)
+
+
+### Features
+
+* **cli-scripts:** build-ts working directly with ts-node ([3215895](https://github.com/lskjs/lskjs/commit/321589501cb9eaab87539b04b8971c49c56ec59f))
+
+
+
+
+
 # [3.12.0](https://github.com/lskjs/lskjs/compare/v3.11.2...v3.12.0) (2023-08-11)
 
 

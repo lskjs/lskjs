@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/lskjs/lskjs/compare/v3.14.1...v3.15.0) (2023-09-20)
+
+
+### Features
+
+* **nest-config:** improve loadConfigEnvs keyFn ([0662ab8](https://github.com/lskjs/lskjs/commit/0662ab87ccc22c115f21684ab4059c729d117e3f))
+
+
+
+
+
 ## [3.14.1](https://github.com/lskjs/lskjs/compare/v3.14.0...v3.14.1) (2023-08-24)
 
 
