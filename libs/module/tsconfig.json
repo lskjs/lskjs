@@ -2,6 +2,7 @@
   "extends": "@lskjs/tsconfig/nostrict/tsconfig.json",
   "compilerOptions": {
     // "moduleResolution": "Classic",
+    // "module": "NodeNext",
     "moduleResolution": "NodeNext",
     // "moduleResolution": "NodeNext"
   }

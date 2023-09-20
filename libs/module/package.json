@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "            lsk run dev",
     "build": "          lsk run build",
-    "test": "           export NODE_OPTIONS=--experimental-vm-modules && lsk run test",
+    "test": "           lsk run test",
     "prepack": "        lsk run prepack",
     "release": "        lsk run release"
   },
