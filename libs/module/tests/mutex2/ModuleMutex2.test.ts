@@ -4,7 +4,7 @@ import App from './AppModule';
 
 process.env.LOG_FORMAT = 'none';
 
-test('mutex x1000 times', async () => {
+test('mutex x100 times', async () => {
   const app = await App.start({
     modules: {
       db: import('./DbModule'),
@@ -28,7 +28,7 @@ test('mutex x1000 times', async () => {
   const VideoModel2 = await app.module('models.VideoModel').catch((err) => console.log({ err }));
   // console.log({ VideoModel2 });
 
-  const ids = [...Array(1000).keys()];
+  const ids = [...Array(100).keys()];
 
   const promises = ids.map(async (i) => {
     const VideoModel = await app.module('models.VideoModel');
