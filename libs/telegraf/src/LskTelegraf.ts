@@ -1,7 +1,7 @@
 import { getEnvConfig, Logger } from '@lskjs/log';
 import { Telegraf } from 'telegraf';
 
-import { waitFn } from './utils';
+import { waitFn } from './utils/utils';
 
 const log = new Logger({
   ns: 'telegraf',
