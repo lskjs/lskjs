@@ -13,20 +13,24 @@ async function main({ isRoot, ctx, cwd, args, log } = {}) {
   const isProd = !isDev || args.includes('--prod');
   const { isLib } = getCwdInfo({ cwd });
   let cmd = '';
-  if (isLib) {
-    cmd = findBin('tsup');
-    cmd += ' src';
-    if (isSilent) cmd += ' --silent';
-    if (isWatch) cmd += ' --watch';
-  } else {
+  const isNodemon = !isLib && isWatch;
+  // console.log({ isNodemon });
+  if (isNodemon) {
     const path = 'src/**';
     const ext = 'ts,tsx,js,jsx,mjs,cjs,json';
-    cmd = 'ts-node src/index.ts';
+    cmd = findBin('ts-node');
+    cmd += ' src';
+    // cmd += ' src/index.ts';
     log.trace('watching path:', path);
     log.trace('watching extensions:', ext);
     log.debug('to restart at any time, enter `rs`');
     // 'nodemon --watch "src/**" --ext "ts,json" --ignore "src/**/*.spec.ts" --exec "ts-node src/index.ts"';
     cmd = `nodemon --watch "${path}" --ext "${ext}" --exec "${cmd}" --quiet`;
+  } else {
+    cmd = findBin('tsup');
+    cmd += ' src';
+    if (isSilent) cmd += ' --silent';
+    if (isWatch) cmd += ' --watch';
   }
   if (isProd) cmd = `NODE_ENV=production ${cmd}`;
 

@@ -1,5 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import type { Options } from 'tsup';
 
+const esm = +(process.env.ESM || 0);
 const env = process.env.NODE_ENV;
 
 export const tsup: Options = {
@@ -7,8 +9,8 @@ export const tsup: Options = {
   clean: true,
   dts: true,
   sourcemap: true,
-  format: ['cjs', 'esm'], // 'iife',
-  outExtension: ({ format }) => ({ js: format === 'esm' ? '.mjs' : '.js' }),
+  format: esm ? ['esm'] : ['cjs', 'esm'], // 'iife',
+  outExtension: ({ format }) => ({ js: esm ? '.js' : format === 'esm' ? '.mjs' : '.js' }),
   minify: env === 'production',
   bundle: env === 'production',
   skipNodeModulesBundle: true,
