@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/getspreadsheet",
-  "version": "3.11.1",
+  "version": "3.15.1",
   "description": "LSK getspreadsheet.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,11 +12,11 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.11.0",
-    "@lskjs/cli-utils": "^3.11.1",
-    "@lskjs/err": "^3.11.0",
-    "@lskjs/log": "^3.11.1",
-    "@lskjs/stringify": "^3.11.0",
+    "@lskjs/algos": "^3.15.1",
+    "@lskjs/cli-utils": "^3.15.1",
+    "@lskjs/err": "^3.15.1",
+    "@lskjs/log": "^3.15.1",
+    "@lskjs/stringify": "^3.15.1",
     "axios": "0.21.2",
     "commander": "10.0.0",
     "csv-parse": "4.9.0",

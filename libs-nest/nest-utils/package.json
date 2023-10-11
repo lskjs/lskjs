@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-utils",
-  "version": "3.11.2",
+  "version": "3.15.1",
   "description": "LSK.js – nest utils – helpers and utils for Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -12,10 +12,10 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@lskjs/algos": "^3.11.0",
+    "@lskjs/algos": "^3.15.1",
     "@lskjs/env": "^3.11.0",
-    "@lskjs/err": "^3.11.0",
-    "@lskjs/log": "^3.11.1",
+    "@lskjs/err": "^3.15.1",
+    "@lskjs/log": "^3.15.1",
     "@lskjs/webserver": "^3.11.1",
     "@types/express": "^4.17.17",
     "fast-safe-stringify": "2.1.1",

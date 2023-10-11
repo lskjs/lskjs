@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-cache",
-  "version": "3.11.1",
+  "version": "3.15.1",
   "description": "LSK.js – nest cache – helpers for cache in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@lskjs/env": "^3.11.0",
-    "@lskjs/err": "^3.11.0",
-    "@lskjs/log": "^3.11.1",
+    "@lskjs/err": "^3.15.1",
+    "@lskjs/log": "^3.15.1",
     "lru-cache": "^10.0.0"
   },
   "devDependencies": {

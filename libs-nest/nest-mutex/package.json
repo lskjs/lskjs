@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-mutex",
-  "version": "3.11.0",
+  "version": "3.15.1",
   "description": "LSK.js – nest mutex – helpers for mutex in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@lskjs/env": "^3.11.0",
-    "@lskjs/err": "^3.11.0",
+    "@lskjs/err": "^3.15.1",
     "async-lock": "^1.4.0",
     "rxjs": "^7.8.1"
   },
