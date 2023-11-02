@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import Err from '@lskjs/err';
 import axios from 'axios';
 import Bluebird from 'bluebird';
 import fs from 'fs/promises';
@@ -15,6 +16,11 @@ export async function download(dir, { force, ...options } = {}) {
     console.error('err', err);
     config = {};
   }
+  const service = options.service || config.service;
+  if (service === 'github') {
+    throw new Err('Downloading secrets from github is not supported');
+  }
+
   const server = options.server || config.server;
   const id = options.id || config.id;
   const token = options.token || config.token;

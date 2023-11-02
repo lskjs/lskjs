@@ -12,6 +12,11 @@ export async function hooks(dir, { force, ...options } = {}) {
   } catch (err) {
     config = {};
   }
+  const service = options.service || config.service;
+  if (service === 'github') {
+    throw new Err('Github hooks is not supported yet');
+  }
+
   const server = options.server || config.server;
   const id = options.id || config.id;
   const token = options.token || config.token;

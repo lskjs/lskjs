@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import Err from '@lskjs/err';
-import axios from 'axios';
 import Bluebird from 'bluebird';
 import fs from 'fs/promises';
 
+import { GitHub } from './services/github';
+import { GitLab } from './services/gitlab';
 import { getFiles } from './utils/getFiles';
 
 export async function upload(dir, { force, ...options } = {}) {
@@ -14,15 +14,12 @@ export async function upload(dir, { force, ...options } = {}) {
   } catch (err) {
     config = {};
   }
-  const server = options.server || config.server;
-  const id = options.id || config.id;
-  const token = options.token || config.token;
-  const projectName = options.project || config.project;
-  const url = `https://${server}/api/v4/projects/${id}/variables`;
 
-  if (!server) throw new Err('!server');
-  if (!id) throw new Err('!id');
-  if (!token) throw new Err('!token');
+  const service = options.service || config.service;
+  const SecretService =
+    service === 'github' ? new GitHub(options, config, force) : new GitLab(options, config, force);
+
+  SecretService.checkConfig();
 
   const files = await getFiles(dir);
 
@@ -35,52 +32,16 @@ export async function upload(dir, { force, ...options } = {}) {
     try {
       const content = await fs.readFile(filename).then((f) => f.toString());
 
-      const { data: varData } = await axios({
-        method: 'get',
-        url: `${url}/${key}`,
-        headers: {
-          'PRIVATE-TOKEN': token,
-        },
-      }).catch((err) => {
-        if (!force) throw err;
-        return { data: { value: '@lskjs/creds' } };
-      });
-
-      if (varData.value && varData.value.indexOf('@lskjs/creds') === -1 && !force) {
-        console.log(`[IGNORE] Project ${id} ${key}`);
-        return;
-      }
-
-      await axios({
-        method: 'delete',
-        url: `${url}/${key}`,
-        headers: {
-          'PRIVATE-TOKEN': token,
-        },
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-      }).catch(() => {});
-
-      await axios({
-        method: 'post',
-        url,
-        data: {
-          key,
-          variable_type: 'file',
-          value: content,
-          protected: true,
-          // masked: true,
-        },
-        headers: {
-          'PRIVATE-TOKEN': token,
-        },
-      });
+      await SecretService.uploadSecret(key, content);
 
       // console.log(data);
-      console.log(`[OK] ${dir}/${name} => ${server}/${projectName} (${key})`);
-      console.log(`[OK] Project ${projectName} ${key}`);
+      console.log(
+        `[OK] ${dir}/${name} => ${SecretService.getServiceLink()}/${SecretService.getProjectName()} (${key})`,
+      );
+      console.log(`[OK] Project ${SecretService.getProjectName()} ${key}`);
     } catch (err) {
       console.error(
-        `[ERR] Project ${id} ${key}`,
+        `[ERR] Project ${SecretService.getId()} ${key}`,
         (err && err.response && err.response.data && err.response.data.message) || err,
       );
     }
