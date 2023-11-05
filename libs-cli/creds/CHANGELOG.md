@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.16.0](https://github.com/lskjs/lskjs/compare/v3.15.1...v3.16.0) (2023-11-05)
+
+
+### Features
+
+* **creds:** github action secrets support ([db3fa00](https://github.com/lskjs/lskjs/commit/db3fa00a5530b82fe4d950b9cb6d9ef61f34780c))
+
+
+
+
+
 ## [3.8.1](https://github.com/lskjs/lskjs/compare/v3.8.0...v3.8.1) (2023-07-25)
 
 **Note:** Version bump only for package @lskjs/creds

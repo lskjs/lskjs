@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.16.0](https://github.com/lskjs/lskjs/compare/v3.15.1...v3.16.0) (2023-11-05)
+
+
+### Bug Fixes
+
+* **libs-presets:** disabled no-continue ([3ae2278](https://github.com/lskjs/lskjs/commit/3ae2278e535d5b5917d2307f9334d72699c14de2))
+
+
+### Features
+
+* **creds:** github action secrets support ([db3fa00](https://github.com/lskjs/lskjs/commit/db3fa00a5530b82fe4d950b9cb6d9ef61f34780c))
+
+
+
+
+
 ## [3.15.1](https://github.com/lskjs/lskjs/compare/v3.15.0...v3.15.1) (2023-10-11)
 
 **Note:** Version bump only for package lskjs
