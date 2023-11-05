@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.1](https://github.com/lskjs/lskjs/compare/v3.16.0...v3.16.1) (2023-11-05)
+
+
+### Bug Fixes
+
+* **cli-scripts:** lsk run test ([4a6b5b9](https://github.com/lskjs/lskjs/commit/4a6b5b941935edbbeb3d1097dd0187cb76830d13))
+
+
+
+
+
 ## [3.15.1](https://github.com/lskjs/lskjs/compare/v3.15.0...v3.15.1) (2023-10-11)
 
 **Note:** Version bump only for package @lskjs/cli-utils

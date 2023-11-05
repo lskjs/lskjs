@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/getspreadsheet",
-  "version": "3.15.1",
+  "version": "3.16.1",
   "description": "LSK getspreadsheet.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@lskjs/algos": "^3.15.1",
-    "@lskjs/cli-utils": "^3.15.1",
+    "@lskjs/cli-utils": "^3.16.1",
     "@lskjs/err": "^3.15.1",
     "@lskjs/log": "^3.15.1",
     "@lskjs/stringify": "^3.15.1",
