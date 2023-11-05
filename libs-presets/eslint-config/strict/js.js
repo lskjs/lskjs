@@ -42,6 +42,9 @@ module.exports = {
     // увы в Nest.js пустые конструкторы это повсеместная практика
     'no-empty-function': 'off',
 
+    // ну бред же https://github.com/airbnb/javascript/issues/1103
+    'no-continue': 'off',
+
     'prettier/prettier': [
       'warn',
       {
