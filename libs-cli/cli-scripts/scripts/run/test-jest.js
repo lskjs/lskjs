@@ -14,6 +14,11 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
     await shellParallel('lsk run test:jest', { ctx, args });
     return;
   }
+  // eslint-disable-next-line import/no-dynamic-require
+  if (!require(`${cwd}/package.json`).jest) {
+    log.debug('[skip] jest rc not found in package.json');
+    return;
+  }
   const isProd = !isDev || args.includes('--prod');
   const isWatch = args.includes('--watch');
   const isSilent = args.includes('--silent') || isCI;
@@ -42,7 +47,9 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
     cmd += ` ${filteredArgs.join(' ')}`;
     // console.log({ args, filteredArgs, cmd });
   }
-
+  const tsconfigTestPath = `${cwd}/tsconfig.test.json`;
+  const hasTsconfigTest = existsSync(tsconfigTestPath);
+  if (hasTsconfigTest) cmd = `JEST_TSCONFIG=${tsconfigTestPath} ${cmd}`;
   const stdio = isSilent ? ['inherit', 'ignore', 'ignore'] : 'inherit';
   if (isWatch) {
     await shell(cmd, { ctx });

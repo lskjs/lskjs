@@ -38,6 +38,7 @@ const getCwdInfo = ({ cwd }) => {
     existsSync(`${cwd}./docket-stack.yml`);
   const isLib = !isApp;
   const isNest = existsSync(`${cwd}/nest-cli.json`);
+  const isNext = existsSync(`${cwd}/next.config.mjs`) || existsSync(`${cwd}/next.config.js`);
   // const isRoot = isRoot({ cwd });
   // const isPackage = isPackage({ cwd });
   // const isApp = isPackage && !isLib;
@@ -53,6 +54,7 @@ const getCwdInfo = ({ cwd }) => {
     isLib,
     isApp,
     isNest,
+    isNext,
   });
 };
 

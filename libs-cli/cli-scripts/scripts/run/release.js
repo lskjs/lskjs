@@ -34,13 +34,17 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
   } else {
     await shell('pnpm run build --prod --silent', { ctx, args });
     await shell('pnpm run test --prod --silent', { ctx, args });
-    const { isLib } = getCwdInfo({ cwd });
+    const { isLib, isNext } = getCwdInfo({ cwd });
     await shell('npm version prerelease --preid alpha');
     await shell('lsk run prepack --dir .release', { ctx, args });
     if (isLib) {
       await shell('lsk run publish', { ctx, args });
+    } else if (isNext) {
+      await shell('pnpm -F "." deploy .release', { ctx, args });
+      await shell('pnpm build', { ctx, args, cwd: `${cwd}/.release` });
     } else {
-      // await shell('lsk run deploy', { ctx, args });
+      await shell('pnpm build', { ctx, args });
+      await shell('pnpm -F "." deploy .release', { ctx, args });
     }
   }
 };

@@ -1,14 +1,27 @@
+const omitNull = (obj) => {
+  const newObj = {};
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] != null) {
+      newObj[key] = obj[key];
+    }
+  });
+  return newObj;
+};
+
+const tsconfig = process.env.JEST_TSCONFIG;
+
 module.exports = {
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   setupFilesAfterEnv: [`${__dirname}/jest.setup.js`],
   transform: {
-    '^.+\\.tsx?$': [
+    '^.+\\.(t|j)sx?$': [
       'ts-jest',
-      {
+      omitNull({
         useESM: true,
         isolatedModules: true,
-      },
+        tsconfig,
+      }),
     ],
   },
   modulePathIgnorePatterns: [
