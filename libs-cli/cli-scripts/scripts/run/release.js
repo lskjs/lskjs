@@ -6,7 +6,7 @@ const main = async ({ ctx, args, isRoot, cwd } = {}) => {
   // await shell('lsk run clean');
   const isYes = args.includes('--yes');
   // eslint-disable-next-line no-param-reassign
-  args = args.filter((arg) => arg === '--yes');
+  args = args.filter((arg) => arg !== '--yes');
 
   // libs
   if (isRoot) {
