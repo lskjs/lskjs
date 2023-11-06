@@ -8,8 +8,8 @@ const main = async ({ isRoot, ctx, args } = {}) => {
     return;
   }
   let cmd = `${findBin('eslint')} src`;
-  const isSilent = args.includes('--silent') || isCI;
-  const isProd = !isDev || args.includes('--prod');
+  const isProd = !isDev || !!+process.env.LSK_PROD || args.includes('--prod');
+  const isSilent = !!+process.env.LSK_SILENT || args.includes('--silent') || isCI;
   if (isProd || isSilent) cmd += ' --quiet';
   await shell(cmd, { ctx });
 };

@@ -2,16 +2,16 @@
 const { run, shell, getCwdInfo } = require('@lskjs/cli-utils');
 const { isCI } = require('@lskjs/env');
 
-const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
+const main = async ({ ctx, args, isRoot, cwd } = {}) => {
   // await shell('lsk run clean');
 
   // libs
   if (isRoot) {
-    // await shell('lsk run fix --prod --silent', { ctx, args });
+    // await shell('lsk run fix', { ctx, args }); // NOTE: --prod --silent
     // TODO: break if changes
-    await shell('lsk run build --prod --silent', { ctx, args });
-    await shell('lsk run test --prod --silent', { ctx, args });
-    await shell('lsk run prepack --dir .release', { ctx, args }); // два раза вызывается prepack
+    await shell('LSK_PROD=1 LSK_SILENT=1 lsk run build', { ctx, args }); // NOTE: --prod --silent
+    await shell('LSK_PROD=1 LSK_SILENT=1 lsk run test', { ctx, args }); // NOTE: --prod --silent
+    await shell('lsk run prepack --dir .release', { ctx, args }); // TODO: два раза вызывается prepack, is it ok?
     // const libs = (config.packages || []).filter((p) => p.type === 'lib');
     const hasAnyLib = true; // libs.length
     if (hasAnyLib) {
@@ -32,18 +32,18 @@ const main = async ({ ctx, args, isRoot, config, cwd } = {}) => {
     //   // await shell('lsk run deploy', { ctx, args });
     // }
   } else {
-    await shell('pnpm run build --prod --silent', { ctx, args });
-    await shell('pnpm run test --prod --silent', { ctx, args });
     const { isLib, isNext } = getCwdInfo({ cwd });
-    await shell('npm version prerelease --preid alpha');
-    await shell('lsk run prepack --dir .release', { ctx, args });
     if (isLib) {
+      await shell('pnpm run build', { ctx, args }); // NOTE: --prod --silent
+      await shell('pnpm run test', { ctx, args }); // NOTE: --prod --silent
+      await shell('npm version prerelease --preid alpha');
+      await shell('lsk run prepack --dir .release', { ctx, args });
       await shell('lsk run publish', { ctx, args });
     } else if (isNext) {
       await shell('pnpm -F "." deploy .release', { ctx, args });
-      await shell('pnpm build', { ctx, args, cwd: `${cwd}/.release` });
+      await shell('pnpm run build', { ctx, args, cwd: `${cwd}/.release` });
     } else {
-      await shell('pnpm build', { ctx, args });
+      await shell('pnpm run build', { ctx, args });
       await shell('pnpm -F "." deploy .release', { ctx, args });
     }
   }

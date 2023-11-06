@@ -20,7 +20,7 @@ const main = async ({ isRoot, ctx, args, log } = {}) => {
   if (isRoot) {
     const concurrency = process.env.PNPM_CONCURRENCY || 4;
     const cc = concurrency && concurrency !== 4 ? `--workspace-concurrency=${concurrency}` : '';
-    await shell(`pnpm -r ${cc} run test --prod --silent`, { ctx, args });
+    await shell(`pnpm -r ${cc} run test`, { ctx, args }); // NOTE:  --prod --silent
     return;
   }
   await shell('lsk run test:jest', { ctx, args });

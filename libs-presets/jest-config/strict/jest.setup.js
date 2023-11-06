@@ -1,7 +1,12 @@
 /* eslint-disable no-undef */
 // process.env.TZ = 'UTC';
 jest.setTimeout(15000);
-if (process.argv.includes('--silent') || process.argv.includes('--prod')) {
+const args = process.argv.slice(2);
+
+const isProd = !isDev || !!process.env.LSK_PROD || args.includes('--prod');
+const isSilent = !!process.env.LSK_SILENT || args.includes('--silent') || isCI;
+
+if (isProd || isSilent) {
   global.console = {
     ...console,
     // uncomment to ignore a specific log level

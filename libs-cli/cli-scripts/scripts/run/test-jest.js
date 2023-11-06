@@ -19,9 +19,9 @@ const main = async ({ isRoot, cwd, ctx, args, log } = {}) => {
     log.debug('[skip] jest rc not found in package.json');
     return;
   }
-  const isProd = !isDev || args.includes('--prod');
   const isWatch = args.includes('--watch');
-  const isSilent = args.includes('--silent') || isCI;
+  const isProd = !isDev || !!process.env.LSK_PROD || args.includes('--prod');
+  const isSilent = !!+process.env.LSK_SILENT || args.includes('--silent') || isCI;
   let cmd = findBin('jest');
   cmd += ' --detectOpenHandles --coverage';
   if (!isWatch) cmd += ' --forceExit --runInBand';

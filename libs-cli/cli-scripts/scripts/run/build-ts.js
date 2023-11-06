@@ -8,9 +8,9 @@ async function main({ isRoot, ctx, cwd, args, log } = {}) {
     await shellParallel(`lsk run buiild:ts`, { ctx, args });
     return;
   }
-  const isSilent = args.includes('--silent') || isCI;
   const isWatch = args.includes('--watch');
-  const isProd = !isDev || args.includes('--prod');
+  const isProd = !isDev || !!+process.env.LSK_PROD || args.includes('--prod');
+  const isSilent = !!+process.env.LSK_SILENT || args.includes('--silent') || isCI;
   const { isLib } = getCwdInfo({ cwd });
   let cmd = '';
   const isNodemon = !isLib && isWatch;
