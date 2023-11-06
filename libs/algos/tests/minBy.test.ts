@@ -19,4 +19,16 @@ describe('minBy', () => {
     const results = minBy(input, (a) => a.value);
     expect(results).toEqual({ i: 1, value: 1 });
   });
+  it('3,2,1', () => {
+    const input = [
+      { i: 6, value: 3 },
+      { i: 5, value: 2 },
+      { i: 4, value: 1 },
+      { i: 3, value: 3 },
+      { i: 2, value: 2 },
+      { i: 1, value: 1 },
+    ];
+    const results = minBy(input, (a) => a.value);
+    expect(results).toEqual({ i: 4, value: 1 });
+  });
 });
