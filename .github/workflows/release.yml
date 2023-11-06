@@ -31,6 +31,7 @@ jobs:
             pnpm i -g lsk@3.16.4 && \
             lsk debug && \
             whereis lsk && \
+            ls -la /home/runner/setup-pnpm/node_modules && \
             STAGE=ci lsk run release --yes
   build:
     needs: [prepare]
