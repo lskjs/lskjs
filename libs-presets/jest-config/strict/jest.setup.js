@@ -3,10 +3,9 @@
 jest.setTimeout(15000);
 const args = process.argv.slice(2);
 
-const isProd = !!process.env.LSK_PROD || args.includes('--prod');
-const isSilent = !!process.env.LSK_SILENT || args.includes('--silent') || isCI;
+const isSilent = !!process.env.LSK_SILENT || args.includes('--silent');
 
-if (isProd || isSilent) {
+if (isSilent) {
   global.console = {
     ...console,
     // uncomment to ignore a specific log level
