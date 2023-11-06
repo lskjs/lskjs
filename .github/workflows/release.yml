@@ -41,11 +41,13 @@ jobs:
           command: |
             pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}" && \
             npm i -g lsk@3.16.4 @lskjs/cli-scripts@3.16.4 && \
+            git config --global user.email "bot@isuvorov.com" && \
+            git config --global user.name "Igor Suvorov Bot" && \
             STAGE=ci lsk run release --yes
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: NPM - get new version
-        run: echo PACKAGE_VERSION=$(node -p "require('./package.json').version") >> $GITHUB_ENV
+        run: echo PACKAGE_VERSION=$(node -p "require('./lerna.json').version") >> $GITHUB_ENV
       - name: Commit version and tag to git
         uses: EndBug/add-and-commit@v9
         with:
