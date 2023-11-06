@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.2](https://github.com/lskjs/lskjs/compare/v3.16.1...v3.16.2) (2023-11-06)
+
+**Note:** Version bump only for package @lskjs/getspreadsheet
+
+
+
+
+
 ## [3.16.1](https://github.com/lskjs/lskjs/compare/v3.16.0...v3.16.1) (2023-11-05)
 
 **Note:** Version bump only for package @lskjs/getspreadsheet

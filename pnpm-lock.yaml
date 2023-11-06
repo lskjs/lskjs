@@ -66,7 +66,7 @@ importers:
         specifier: ^2.85.1
         version: 2.85.1(bluebird@3.7.2)(lodash@4.17.21)
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       '@lskjs/utils':
         specifier: ^2.72.0
@@ -99,19 +99,19 @@ importers:
   libs-cli/cli-scripts:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.16.1
+        specifier: ^3.16.2
         version: link:../cli-utils
       '@lskjs/env':
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/stringify':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/stringify
       all-contributors-cli:
         specifier: ^6.20.0
@@ -138,7 +138,7 @@ importers:
         specifier: 7.20.7
         version: 7.20.7
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/colors':
         specifier: ^3.11.0
@@ -147,10 +147,10 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       '@lskjs/utils':
         specifier: ^3.8.1
@@ -186,7 +186,7 @@ importers:
         specifier: 7.12.5
         version: 7.12.5
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/getspreadsheet':
         specifier: 2.85.1
@@ -225,19 +225,19 @@ importers:
   libs-cli/getspreadsheet:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.16.1
+        specifier: ^3.16.2
         version: link:../cli-utils
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       '@lskjs/stringify':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/stringify
       axios:
         specifier: 0.21.2
@@ -267,13 +267,13 @@ importers:
         specifier: 7.20.13
         version: 7.20.13
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/cli-scripts':
-        specifier: ^3.16.1
+        specifier: ^3.16.2
         version: link:../cli-scripts
       '@lskjs/cli-utils':
-        specifier: ^3.16.1
+        specifier: ^3.16.2
         version: link:../cli-utils
       '@lskjs/colors':
         specifier: ^3.11.0
@@ -282,10 +282,10 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       '@types/node':
         specifier: 18.13.0
@@ -1360,7 +1360,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       connect-mongo:
         specifier: ^5.0.0
@@ -1370,7 +1370,7 @@ importers:
         version: 1.17.3
     devDependencies:
       '@lskjs/nest-config':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../nest-config
       '@nestjs/common':
         specifier: ^10.0.5
@@ -1388,10 +1388,10 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       lru-cache:
         specifier: ^10.0.0
@@ -1410,10 +1410,10 @@ importers:
   libs-nest/nest-config:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
     devDependencies:
       '@nestjs/common':
@@ -1432,7 +1432,7 @@ importers:
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       async-lock:
         specifier: ^1.4.0
@@ -1454,16 +1454,16 @@ importers:
   libs-nest/nest-rabbitmq:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/env':
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       amqplib:
         specifier: ^0.10.3
@@ -1488,16 +1488,16 @@ importers:
   libs-nest/nest-utils:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/env':
         specifier: ^3.11.0
         version: link:../../libs/env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../../libs/log
       '@lskjs/webserver':
         specifier: ^3.11.1
@@ -1660,7 +1660,7 @@ importers:
   libs/err:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../algos
 
   libs/lang:
@@ -1669,10 +1669,10 @@ importers:
         specifier: 7.22.5
         version: 7.22.5
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../algos
       '@lskjs/module':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../module
       cld:
         specifier: 2.9.0
@@ -1689,7 +1689,7 @@ importers:
   libs/log:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../algos
       '@lskjs/colors':
         specifier: ^3.11.0
@@ -1698,7 +1698,7 @@ importers:
         specifier: ^3.11.0
         version: link:../env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../err
       fast-safe-stringify:
         specifier: 2.1.1
@@ -1736,16 +1736,16 @@ importers:
   libs/module:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../algos
       '@lskjs/env':
         specifier: ^3.11.0
         version: link:../env
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../err
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../log
       '@lskjs/mutex':
         specifier: ^3.8.1
@@ -1769,10 +1769,10 @@ importers:
   libs/stringify:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../algos
       '@lskjs/err':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../err
       javascript-stringify:
         specifier: 2.1.0
@@ -1788,10 +1788,10 @@ importers:
   libs/telegraf:
     dependencies:
       '@lskjs/algos':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../algos
       '@lskjs/log':
-        specifier: ^3.15.1
+        specifier: ^3.16.2
         version: link:../log
     devDependencies:
       telegraf:

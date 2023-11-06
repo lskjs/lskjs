@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.2](https://github.com/lskjs/lskjs/compare/v3.16.1...v3.16.2) (2023-11-06)
+
+
+### Bug Fixes
+
+* **cli-scripts:** add silent while build, test, release ([7ca57c6](https://github.com/lskjs/lskjs/commit/7ca57c6a5e2fb0eb4e0601700b534f0408bd5966))
+
+
+
+
+
 ## [3.15.1](https://github.com/lskjs/lskjs/compare/v3.15.0...v3.15.1) (2023-10-11)
 
 **Note:** Version bump only for package @lskjs/log
