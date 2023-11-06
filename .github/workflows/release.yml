@@ -25,17 +25,17 @@ jobs:
     steps:
       - name: GIT – Checkout
         uses: actions/checkout@v4
-      - name: Set NPM_TOKEN
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: PNPM – release
         uses: lskjs/action-pnpm@v1
         with:
           working-directory: apps/app
           node-version: ${{ env.NODE_VERSION }}
           pnpm-version: ${{ env.PNPM_VERSION }}
-          command: pnpm release --yes
+          command: |
+            pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}" && \
+            pnpm release --yes
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: NPM - get new version
         run: echo PACKAGE_VERSION=$(node -p "require('./package.json').version") >> $GITHUB_ENV
       - name: Commit version and tag to git
