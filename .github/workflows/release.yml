@@ -25,10 +25,10 @@ jobs:
     steps:
       - name: GIT – Checkout
         uses: actions/checkout@v4
-      - name: Set NODE_AUTH_TOKEN
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+      - name: Set NPM_TOKEN
+        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: PNPM – release
         uses: lskjs/action-pnpm@v1
         with:
