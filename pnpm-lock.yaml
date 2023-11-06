@@ -4638,11 +4638,11 @@ packages:
     resolution: {integrity: sha512-wguaMwihMnFAjkUvcbFKguvS4vk8IhXlJFtfZc/p1F41KaH23iUYqQuB7he96EZlfOcPJfLF6GaeXMG+0dh51w==}
     dev: false
 
-  /@lskjs/cli-scripts@3.16.2:
-    resolution: {integrity: sha512-CbC81oPPvMHXvS0u+Ea4mb2MrGbbiX7aWD1xZMcjDEhiLsU2z8lbvq0AykCuMf9d7kVD5ptVkva6pcYe0xD7ig==}
+  /@lskjs/cli-scripts@3.16.3:
+    resolution: {integrity: sha512-0esJ4RCutPerfTHY6iJBC5jvqB1P8S7SrXOrc7NU6qVZfOcqzzbwdE79EZHEc9DExvR6jepNSYYPneipf54heg==}
     dependencies:
       '@lskjs/algos': 3.16.2
-      '@lskjs/cli-utils': 3.16.2
+      '@lskjs/cli-utils': 3.16.3
       '@lskjs/env': 3.11.0
       '@lskjs/err': 3.16.2
       '@lskjs/stringify': 3.16.2
@@ -4658,8 +4658,8 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/cli-utils@3.16.2:
-    resolution: {integrity: sha512-CiWg2Z1pjld7zHNRZMKfZMbR6nkr0rBuSVb6uICu8Szm9vnnNIeqNMp2WJYMUpC0m3YCnQmkVh/3E5X7QBlwLw==}
+  /@lskjs/cli-utils@3.16.3:
+    resolution: {integrity: sha512-x326IUxaZLdfci9WBDcp5eXXl/vYIhD8x5lYvphPnh9NxcJL0UgPb/Oi4hAfFdFyLrdxw1qJun8Zoj/cxguK7w==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.7
@@ -4686,8 +4686,8 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.16.2
-      '@lskjs/cli-utils': 3.16.2
+      '@lskjs/cli-scripts': 3.16.3
+      '@lskjs/cli-utils': 3.16.3
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16(@oclif/config@1.18.3)
@@ -13430,8 +13430,8 @@ packages:
       '@babel/runtime': 7.20.13
       '@lskjs/algos': 3.16.2
       '@lskjs/cli': 3.0.0-alpha.7(@swc/core@1.3.74)
-      '@lskjs/cli-scripts': 3.16.2
-      '@lskjs/cli-utils': 3.16.2
+      '@lskjs/cli-scripts': 3.16.3
+      '@lskjs/cli-utils': 3.16.3
       '@lskjs/colors': 3.11.0
       '@lskjs/env': 3.11.0
       '@lskjs/err': 3.16.2
