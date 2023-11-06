@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rlog",
-  "version": "3.16.4",
+  "version": "3.17.0",
   "description": "LSK module for remote logger.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -17,7 +17,7 @@
     "@lskjs/err": "2.85.1",
     "@lskjs/log": "2.85.1",
     "@lskjs/module": "2.85.1",
-    "@lskjs/server-api": "^3.16.4",
+    "@lskjs/server-api": "^3.17.0",
     "@lskjs/utils": "2.72.0",
     "axios": "0.x",
     "lodash": "4.17.x"

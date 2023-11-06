@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cron",
-  "version": "3.16.4",
+  "version": "3.17.0",
   "description": "LSK.js – cron – Module for working with cron jobs based on bree-js",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/apm",
-  "version": "3.16.4",
+  "version": "3.17.0",
   "description": "LSK.js – apm – module Node.js agent for Elastic APM",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

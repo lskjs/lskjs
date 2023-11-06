@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.17.0) (2023-11-06)
+
+**Note:** Version bump only for package @lskjs/nest-config
+
+
+
+
+
 ## [3.16.4](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.16.4) (2023-11-06)
 
 **Note:** Version bump only for package @lskjs/nest-config

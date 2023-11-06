@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/creds",
-  "version": "3.16.4",
+  "version": "3.17.0",
   "description": "LSK creds.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@lskjs/err": "^3.16.4",
+    "@lskjs/err": "^3.17.0",
     "@lskjs/getspreadsheet": "2.85.1",
-    "@lskjs/log": "^3.16.4",
-    "@lskjs/utils": "^3.16.4",
+    "@lskjs/log": "^3.17.0",
+    "@lskjs/utils": "^3.17.0",
     "axios": "0.21.2",
     "bluebird": "3.7.2",
     "commander": "6.2.1",

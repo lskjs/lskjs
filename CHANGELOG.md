@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.17.0) (2023-11-06)
+
+
+### Bug Fixes
+
+* npmrc ([ac4b4e8](https://github.com/lskjs/lskjs/commit/ac4b4e8d350395889f4d6e808c8a2bbc959c37cf))
+
+
+### Features
+
+* **creds:** __env.js support ([b1445e4](https://github.com/lskjs/lskjs/commit/b1445e4ad908fe8702db4c3216fdeb8046bae85d))
+* **creds:** add logger ([9ed7e56](https://github.com/lskjs/lskjs/commit/9ed7e56d90a84b997c5393e1d7fb49d721d7bb6c))
+
+
+
+
+
 ## [3.16.4](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.16.4) (2023-11-06)
 
 
