@@ -189,7 +189,7 @@ importers:
         specifier: 7.12.5
         version: 7.12.5
       '@lskjs/err':
-        specifier: workspace:^
+        specifier: ^3.17.0
         version: link:../../libs/err
       '@lskjs/getspreadsheet':
         specifier: 2.85.1
