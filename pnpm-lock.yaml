@@ -189,7 +189,7 @@ importers:
         specifier: 7.12.5
         version: 7.12.5
       '@lskjs/err':
-        specifier: ^3.17.0
+        specifier: workspace:^
         version: link:../../libs/err
       '@lskjs/getspreadsheet':
         specifier: 2.85.1
@@ -4641,18 +4641,18 @@ packages:
     resolution: {integrity: sha512-fR586jHbqNwJzFK/yFfPGAkoAzGmqyph4bx72swyiDRaJbB+wkcZ23ZZOtxVZ8z83XQyo7yZ8079u9x7LG3crw==}
     dev: false
 
-  /@lskjs/algos@3.16.4:
-    resolution: {integrity: sha512-BLeEjy5QIhC3fmcs7DxncLJ5Y9IItFPVmobXAkRpVv+sS7bueQKoy3/07w5yLElC3STH5ENfXFaZHvqVt9TmGA==}
+  /@lskjs/algos@3.17.0:
+    resolution: {integrity: sha512-izGpsgnQKin2kMpopzj/uvFHnFX7MWkRKxXMLjjCmsp2BK9DFfTRQ4nOxWSgiusWUQLJJMIYEbiGTpyNZn/aOQ==}
     dev: false
 
-  /@lskjs/cli-scripts@3.16.4:
-    resolution: {integrity: sha512-MT9B25n6gEFDDXyt9mLAowf5iT2+j+LHGyeS0qlRoy7kbqu/2WFowSoDKszQmxus+SjcarlDC04Eydg3v9AnoA==}
+  /@lskjs/cli-scripts@3.17.0:
+    resolution: {integrity: sha512-aITwBedlI7ECMm9TP+KdZ9soDsOKjNcj8mhSDGXYhtsboyYOntrBdoMdE6XWwT3hWGY67d672CAFYF/N/9wupg==}
     dependencies:
-      '@lskjs/algos': 3.16.4
-      '@lskjs/cli-utils': 3.16.4
-      '@lskjs/env': 3.16.4
-      '@lskjs/err': 3.16.4
-      '@lskjs/stringify': 3.16.4
+      '@lskjs/algos': 3.17.0
+      '@lskjs/cli-utils': 3.17.0
+      '@lskjs/env': 3.17.0
+      '@lskjs/err': 3.17.0
+      '@lskjs/stringify': 3.17.0
       all-contributors-cli: 6.24.0
       fishbird: 0.20.0
       gitlog: 4.0.8
@@ -4665,17 +4665,17 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/cli-utils@3.16.4:
-    resolution: {integrity: sha512-dqKfGgaiSnEef78+ccWo8AgqN/iJ1Uar0NiXfFy/7A5boUec641n9LYNj0GKEEIfW0/YVJEYqTJZTMMBDpbymQ==}
+  /@lskjs/cli-utils@3.17.0:
+    resolution: {integrity: sha512-T2hi/SBhWvJQOmYumphqMYwoH1Nt1QMpITWropEO3tAsyUT2/bAYNPi8FqY5r6i1jXcnv1/MXficzjfx1/gpPA==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.7
       '@lskjs/algos': 3.15.1
-      '@lskjs/colors': 3.16.4
-      '@lskjs/env': 3.16.4
-      '@lskjs/err': 3.16.4
-      '@lskjs/log': 3.16.4
-      '@lskjs/utils': 3.16.4
+      '@lskjs/colors': 3.17.0
+      '@lskjs/env': 3.17.0
+      '@lskjs/err': 3.17.0
+      '@lskjs/log': 3.17.0
+      '@lskjs/utils': 3.17.0
       axios: 0.27.2
       bluebird: 3.7.2
       glob: 7.2.0
@@ -4693,8 +4693,8 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.3
-      '@lskjs/cli-scripts': 3.16.4
-      '@lskjs/cli-utils': 3.16.4
+      '@lskjs/cli-scripts': 3.17.0
+      '@lskjs/cli-utils': 3.17.0
       '@lskjs/err': 2.65.1
       '@lskjs/log': 2.75.1
       '@oclif/command': 1.8.16(@oclif/config@1.18.3)
@@ -4715,10 +4715,10 @@ packages:
       - supports-color
     dev: false
 
-  /@lskjs/colors@3.16.4:
-    resolution: {integrity: sha512-JChH7L45LS2sOGE1SccZHwOEVvANrbp50i/W8/2cyir6siDZ76y27KOwrUsb9g/waJQygtiEqHFNgIjN7Yjj0A==}
+  /@lskjs/colors@3.17.0:
+    resolution: {integrity: sha512-rnN24YvKhoyvkyqCxHBPW6ZdJZasiJoqz1xcfJf7uD946CqnAf9Wj+tK8ijL1h1BhwYFceMoHvBy0IxQXi9b/A==}
     dependencies:
-      '@lskjs/env': 3.16.4
+      '@lskjs/env': 3.17.0
     dev: false
 
   /@lskjs/css@2.7.0(@emotion/core@10.0.27)(emotion@10.0.27):
@@ -4778,8 +4778,8 @@ packages:
   /@lskjs/env@2.85.1:
     resolution: {integrity: sha512-MjwI2T7jkW2AM29lR7M/jOxm1EZOaH404izUOKFgNzxzS+lsyfWI3l/+xW2AtjE1d4RUlTmPhx2RqqQtEym10A==}
 
-  /@lskjs/env@3.16.4:
-    resolution: {integrity: sha512-sEJsa8tBgJ7Por6ZnqcvXY75sDOMLYHXeGW2Hv8uX0D8gBWL8q+KY9iZ/IFkzy50qqERlRNE3rE3eDXtssqRbA==}
+  /@lskjs/env@3.17.0:
+    resolution: {integrity: sha512-+MHGWL8P8idKqRtY5nj4I4qwee6tUgLCwayKYD6Qfzjqo+do9xpkHQuQ9oOUpLdGqIIDUypllz2hBplvsOtKsg==}
     dev: false
 
   /@lskjs/err@2.12.0:
@@ -4804,10 +4804,10 @@ packages:
     dependencies:
       lodash: 4.17.21
 
-  /@lskjs/err@3.16.4:
-    resolution: {integrity: sha512-ijcHwm2VyL9K8iCxORxwipOajES4Rih53/7py6mVu0Q/30DOtdAcrYxrbJ3SjbiGS/TUsfVDzTXJKFG6SLqljw==}
+  /@lskjs/err@3.17.0:
+    resolution: {integrity: sha512-bsxlS3NAt/s8/ZSwYBJNqkrXVV2cJi5NFHdcEPyMhmWI0HPDLM344AC8k3alP4yI+FiK22VfoqPl9tvDvQtEJA==}
     dependencies:
-      '@lskjs/algos': 3.16.4
+      '@lskjs/algos': 3.17.0
     dev: false
 
   /@lskjs/getspreadsheet@2.85.1(bluebird@3.7.2)(lodash@4.17.21):
@@ -4919,14 +4919,14 @@ packages:
       logfmt: 1.3.2
     dev: false
 
-  /@lskjs/log@3.16.4:
-    resolution: {integrity: sha512-1tFaCgKCPpD7Mne9C7TRF+CO2U9OQvm+zffhcYb8eF2Q3lKb/F+W/f6QWhm30GUiAEGu+sgMGyt0ga++dHWvpg==}
+  /@lskjs/log@3.17.0:
+    resolution: {integrity: sha512-Avo+POuOYmRLXII2CTAy6FZHakIn1pZT43OmHHqVh4M339BzAmlPs/TptPzDsqevDS8N4BnLyOB2UTI7iq2+BA==}
     hasBin: true
     dependencies:
-      '@lskjs/algos': 3.16.4
-      '@lskjs/colors': 3.16.4
-      '@lskjs/env': 3.16.4
-      '@lskjs/err': 3.16.4
+      '@lskjs/algos': 3.17.0
+      '@lskjs/colors': 3.17.0
+      '@lskjs/env': 3.17.0
+      '@lskjs/err': 3.17.0
       fast-safe-stringify: 2.1.1
       pretty-bytes: 5.6.0
       pretty-time: 1.1.0
@@ -5080,11 +5080,11 @@ packages:
       react: 16.8.6
     dev: true
 
-  /@lskjs/stringify@3.16.4:
-    resolution: {integrity: sha512-ZAoWdUloIBP+0TSkY40kNlBYfdSXAKD42aOZY6kHLSyBWBN6oF1z8XSDcyEhQmgkvqO5eDxrc1lBCNtpp8O8Xw==}
+  /@lskjs/stringify@3.17.0:
+    resolution: {integrity: sha512-2P6IPKaw9fF3LqUxayIn5ofNvymBhH0+PplYgWwpmes8fYO3ZrdUq/OlyQSp5CAMdNMz63tN3PcFRUw3V7fboA==}
     dependencies:
-      '@lskjs/algos': 3.16.4
-      '@lskjs/err': 3.16.4
+      '@lskjs/algos': 3.17.0
+      '@lskjs/err': 3.17.0
       javascript-stringify: 2.1.0
       js-yaml: 4.1.0
     dev: false
@@ -5118,8 +5118,8 @@ packages:
   /@lskjs/utils@2.72.0:
     resolution: {integrity: sha512-E7BJ9g2DNRZaZb3WuxRF2LRvfnZxf6h6jR1xtAUoYcIdnxbgnXQTVALI+dCrHUkiAolsym0VUFdI2E4uOMCSXg==}
 
-  /@lskjs/utils@3.16.4:
-    resolution: {integrity: sha512-aCJpaH6LjD19tM7xHzLzV5V2Ef2CEkVX7ynFU4RJC2hiEryU+Bg4cQQppJu41EbAy1UwkhGiX+ZgFx7AkiKLDA==}
+  /@lskjs/utils@3.17.0:
+    resolution: {integrity: sha512-byaLzg/xf6HcIHcprCnFiDL58LHMd4Cfp8uHjJgeia+jXrknJCicNDz20AmIms/A/MJvro07065/k5vfVt1oHA==}
     dev: false
 
   /@lskjs/webserver@2.76.3(@emotion/core@10.0.27)(@lskjs/db@libs-core+db)(@lskjs/i18@libs-core+i18)(@types/lodash@4.14.178)(axios@0.21.2)(bluebird@3.7.2)(lodash@4.17.21)(react@17.0.1):
@@ -13435,14 +13435,14 @@ packages:
     hasBin: true
     dependencies:
       '@babel/runtime': 7.20.13
-      '@lskjs/algos': 3.15.1
+      '@lskjs/algos': 3.17.0
       '@lskjs/cli': 3.0.0-alpha.7(@swc/core@1.3.74)
-      '@lskjs/cli-scripts': 3.16.4
-      '@lskjs/cli-utils': 3.16.4
-      '@lskjs/colors': 3.16.4
-      '@lskjs/env': 3.16.4
-      '@lskjs/err': 3.16.4
-      '@lskjs/log': 3.16.4
+      '@lskjs/cli-scripts': 3.17.0
+      '@lskjs/cli-utils': 3.17.0
+      '@lskjs/colors': 3.17.0
+      '@lskjs/env': 3.17.0
+      '@lskjs/err': 3.17.0
+      '@lskjs/log': 3.17.0
       '@oclif/command': 1.8.22(@oclif/config@1.18.8)
       '@oclif/config': 1.18.8
       '@oclif/errors': 1.3.6
