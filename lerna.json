@@ -1,5 +1,5 @@
 {
-  "version": "3.16.4",
+  "version": "3.16.6",
   "npmClient": "pnpm",
   "debug": {
     "useWorkspaces": true
