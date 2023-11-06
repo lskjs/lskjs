@@ -28,7 +28,6 @@ jobs:
       - name: PNPM – release
         uses: lskjs/action-pnpm@v1
         with:
-          working-directory: apps/app
           node-version: ${{ env.NODE_VERSION }}
           pnpm-version: ${{ env.PNPM_VERSION }}
           command: |
