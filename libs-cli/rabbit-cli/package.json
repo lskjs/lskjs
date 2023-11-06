@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit-cli",
-  "version": "3.8.1",
+  "version": "3.16.4",
   "description": "CLI for quick post json's to RabbitMQ",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

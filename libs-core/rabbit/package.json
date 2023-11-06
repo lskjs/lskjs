@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/rabbit",
-  "version": "3.8.1",
+  "version": "3.16.4",
   "description": "LSK module for rabbit.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -14,7 +14,7 @@
   "dependencies": {
     "@lskjs/err": "2.85.1",
     "@lskjs/module": "2.85.1",
-    "@lskjs/stats": "^3.8.1",
+    "@lskjs/stats": "^3.16.4",
     "@lskjs/utils": "2.72.0",
     "amqplib": "0.6.0",
     "object-hash": "2.1.1"

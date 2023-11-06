@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.4](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.16.4) (2023-11-06)
+
+
+### Bug Fixes
+
+* npmrc ([ac4b4e8](https://github.com/lskjs/lskjs/commit/ac4b4e8d350395889f4d6e808c8a2bbc959c37cf))
+
+
+
+
+
 ## [3.16.3](https://github.com/lskjs/lskjs/compare/v3.16.2...v3.16.3) (2023-11-06)
 
 
