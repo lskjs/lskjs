@@ -18,9 +18,14 @@ async function main({ isRoot, log, cwd, args, ctx } = {}) {
     return;
   }
   if (isRoot) {
+    const env = {
+      ...process.env,
+      LSK_SILENT: '1',
+      LSK_PROD: '1',
+    };
     const concurrency = process.env.PNPM_CONCURRENCY || 4;
     const cc = concurrency && concurrency !== 4 ? `--workspace-concurrency=${concurrency}` : '';
-    await shell(`LSK_SILENT=1 pnpm -r ${cc} run build`, { ctx, args }); // NOTE: --prod --silent
+    await shell(`pnpm -r ${cc} run build`, { ctx, args, env }); // NOTE: --prod --silent
     return;
   }
   const { isJs, isTs, isNest, isBabel } = getCwdInfo({ cwd });

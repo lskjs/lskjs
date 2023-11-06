@@ -8,11 +8,17 @@ const { createLogger } = require('./log');
 
 function spawn(command, args = [], options = {}) {
   const { silence, cwd = process.cwd(), log: initLogger, ...otherOptions } = options;
-  const log =
-    initLogger ||
-    createLogger({
-      name: getPackageName({ cwd }),
-    });
+  const packageName = getPackageName({ cwd });
+  const isSilent =
+    (typeof process && (!!+process.env.LSK_SILENT || process.argv?.includes('--silent'))) ||
+    options?.env?.LSK_SILENT;
+  const logOptions = {
+    name: packageName,
+  };
+  if (isSilent) {
+    logOptions.level = 'error';
+  }
+  const log = initLogger || createLogger(logOptions);
   if (!silence) log.debug(`[>>] ${command}`, joinArgs(args));
 
   return new Promise((resolve, reject) => {

@@ -34,11 +34,16 @@ async function pathexec(command, options = {}) {
   process.env.pathexec = { cwd };
   const packageName = options.name || getPackageName({ cwd });
   const name = script.replace(/:/g, '-');
-  const log =
-    options.log ||
-    createLogger({
-      name: packageName,
-    });
+  const isSilent =
+    (typeof process && (!!+process.env.LSK_SILENT || process.argv?.includes('--silent'))) ||
+    options?.env?.LSK_SILENT;
+  const logOptions = {
+    name: packageName,
+  };
+  if (isSilent) {
+    logOptions.level = 'error';
+  }
+  const log = options.log || createLogger(logOptions);
   const pathOptions = {
     name,
     exts: ['.sh', '.js'],
