@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           pnpm-version: ${{ env.PNPM_VERSION }}
           command: |
-            pnpm i -g lsk@3.16.4 && \
+            npm i -g lsk@3.16.4 @lskjs/cli-scripts@3.16.4 && \
             lsk debug && \
             whereis lsk && \
             ls -la /home/runner/setup-pnpm/node_modules && \
