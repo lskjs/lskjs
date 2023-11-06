@@ -19,6 +19,10 @@ export class Service {
     throw new Err('UNIMPLEMENTED');
   }
 
+  async uploadVariable(key, content) {
+    throw new Err('UNIMPLEMENTED');
+  }
+
   getServiceLink() {
     return '';
   }
@@ -33,6 +37,10 @@ export class Service {
 
   getCICDSettingURL() {
     return '';
+  }
+
+  async uploadEnv() {
+    throw new Err('UNIMPLEMENTED');
   }
 }
 

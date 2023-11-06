@@ -42,7 +42,7 @@ export async function build(dirname, options = {}) {
       const relativeDir = path.relative(serviceDir, dir);
       const buildDirDir = `${buildDir}/${relativeDir}`;
 
-      if (name === '__config.js') {
+      if (['__config.js', '__env.js'].includes(name)) {
         await fs.mkdir(buildDirDir, { recursive: true });
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         await fs.unlink(`${buildDirDir}/${name}`).catch(() => {});

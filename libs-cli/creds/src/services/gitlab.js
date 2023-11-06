@@ -1,7 +1,7 @@
 import Err from '@lskjs/err';
 import axios from 'axios';
 
-import Service from './service';
+import { Service } from './service';
 
 export class GitLab extends Service {
   constructor(...props) {
@@ -54,6 +54,13 @@ export class GitLab extends Service {
         'PRIVATE-TOKEN': this.token,
       },
     });
+  }
+  uploadVariable() {
+    console.log("GitLab uploading variable doesn't supported");
+  }
+  uploadEnv() {
+    console.log("GitLab uploading env doesn't supported");
+    return false;
   }
   getServiceLink() {
     return this.server;
