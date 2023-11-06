@@ -4,20 +4,22 @@ const { isCI } = require('@lskjs/env');
 
 const main = async ({ ctx, args, isRoot, cwd } = {}) => {
   // await shell('lsk run clean');
+  const isYes = args.includes('--yes');
+  // eslint-disable-next-line no-param-reassign
+  args = args.filter((arg) => arg === '--yes');
 
   // libs
   if (isRoot) {
     // await shell('lsk run fix', { ctx, args }); // NOTE: --prod --silent
     // TODO: break if changes
-    await shell('LSK_PROD=1 LSK_SILENT=1 lsk run build', { ctx, args }); // NOTE: --prod --silent
-    await shell('LSK_PROD=1 LSK_SILENT=1 lsk run test', { ctx, args }); // NOTE: --prod --silent
+    await shell('LSK_SILENT=1 lsk run build', { ctx, args }); // NOTE: --prod --silent
+    await shell('LSK_SILENT=1 lsk run test', { ctx, args }); // NOTE: --prod --silent
     await shell('lsk run prepack --dir .release', { ctx, args }); // TODO: два раза вызывается prepack, is it ok?
     // const libs = (config.packages || []).filter((p) => p.type === 'lib');
     const hasAnyLib = true; // libs.length
     if (hasAnyLib) {
       // await shell('lsk run prepack --dir .release', { ctx, args }); // два раза вызывается prepack
       let cmd = 'lerna publish --no-push --contents .release';
-      const isYes = args.includes('--yes');
       if (isYes) {
         cmd += ' --yes';
       }

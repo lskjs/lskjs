@@ -20,7 +20,7 @@ async function main({ isRoot, log, cwd, args, ctx } = {}) {
   if (isRoot) {
     const concurrency = process.env.PNPM_CONCURRENCY || 4;
     const cc = concurrency && concurrency !== 4 ? `--workspace-concurrency=${concurrency}` : '';
-    await shell(`pnpm -r ${cc} run build`, { ctx, args }); // NOTE: --prod --silent
+    await shell(`LSK_SILENT=1 pnpm -r ${cc} run build`, { ctx, args }); // NOTE: --prod --silent
     return;
   }
   const { isJs, isTs, isNest, isBabel } = getCwdInfo({ cwd });

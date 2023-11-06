@@ -8,7 +8,8 @@ export const defaultFormat = isDev || isClient ? 'pretty' : 'lsk';
 
 export const getEnvConfig = (): ObjectLike<string | RegExp[]> => {
   const debug = getEnvVar('DEBUG', '') || '';
-  const isSilent = typeof process && process.argv?.includes('--silent');
+  const isSilent =
+    typeof process && (!!+process.env.LSK_SILENT! || process.argv?.includes('--silent'));
   const isTrace = debug.startsWith('lsk') || debug.startsWith('*');
   const format = getEnvVar('LOG_FORMAT', getEnvVar('DEBUG_FORMAT', defaultFormat));
   const { on, off } = parseNs(debug);
