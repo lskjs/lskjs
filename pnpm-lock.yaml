@@ -141,8 +141,8 @@ importers:
         specifier: 7.20.7
         version: 7.20.7
       '@lskjs/algos':
-        specifier: ^3.16.2
-        version: link:../../libs/algos
+        specifier: 3.15.1
+        version: 3.15.1
       '@lskjs/colors':
         specifier: ^3.11.0
         version: link:../../libs/colors
@@ -4632,6 +4632,10 @@ packages:
     transitivePeerDependencies:
       - bluebird
       - supports-color
+    dev: false
+
+  /@lskjs/algos@3.15.1:
+    resolution: {integrity: sha512-fR586jHbqNwJzFK/yFfPGAkoAzGmqyph4bx72swyiDRaJbB+wkcZ23ZZOtxVZ8z83XQyo7yZ8079u9x7LG3crw==}
     dev: false
 
   /@lskjs/algos@3.16.2:

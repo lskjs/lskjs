@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.20.7",
-    "@lskjs/algos": "^3.16.2",
+    "@lskjs/algos": "3.15.1",
     "@lskjs/colors": "^3.11.0",
     "@lskjs/env": "^3.11.0",
     "@lskjs/err": "^3.16.2",
