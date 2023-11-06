@@ -22,8 +22,8 @@ jobs:
     steps:
       - name: GIT – Checkout
         uses: actions/checkout@v4
-      - name: .npmrc
-        run: echo "link-workspace-packages=false" > .npmrc
+      # - name: .npmrc
+      #   run: echo "link-workspace-packages=false" > .npmrc
       - name: PNPM – Install
         uses: lskjs/action-pnpm@v1
         with:
@@ -35,8 +35,8 @@ jobs:
     steps:
       - name: GIT – Checkout
         uses: actions/checkout@v4
-      - name: .npmrc
-        run: echo "link-workspace-packages=false" > .npmrc
+      # - name: .npmrc
+      #   run: echo "link-workspace-packages=false" > .npmrc
       - name: PNPM – release
         uses: lskjs/action-pnpm@v1
         with:
