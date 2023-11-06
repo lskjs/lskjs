@@ -17,7 +17,7 @@ env:
 
 jobs:
   prepare:
-    if: "!contains(github.event.head_commit.message, 'chore(release)')"
+    if: contains(github.event.head_commit.message , 'chore(release)') == false
     runs-on: ubuntu-22.04
     steps:
       - name: GIT – Checkout
