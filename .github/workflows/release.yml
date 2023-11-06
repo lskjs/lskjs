@@ -27,6 +27,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           pnpm-version: ${{ env.PNPM_VERSION }}
+          command: |
+            pnpm i -g lsk@3.16.4 && \
+            lsk debug && \
+            whereis lsk && \
+            STAGE=ci lsk run release --yes
   build:
     needs: [prepare]
     runs-on: ubuntu-22.04
@@ -41,6 +46,8 @@ jobs:
           command: |
             pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}" && \
             pnpm i -g lsk@3.16.4 && \
+            lsk debug && \
+            whereis lsk && \
             STAGE=ci lsk run release --yes
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
