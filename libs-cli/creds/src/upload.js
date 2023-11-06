@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { log } from '@lskjs/log/log';
 import Bluebird from 'bluebird';
 import fs from 'fs/promises';
 
@@ -33,12 +34,12 @@ export async function upload(dir, { force, ...options } = {}) {
 
   if (typeof env === 'object' && Object.keys(env).length) {
     // eslint-disable-next-line import/no-dynamic-require
-    console.log(
+    log.debug(
       `Start uploading __env.js to ${SecretService.getServiceLink()}/${SecretService.getProjectName()}`,
     );
     const result = await SecretService.uploadEnv(env);
     if (result) {
-      console.log(
+      log.info(
         `[OK] ${dir}/__env.js => ${SecretService.getServiceLink()}/${SecretService.getProjectName()}`,
       );
     }
@@ -55,13 +56,13 @@ export async function upload(dir, { force, ...options } = {}) {
 
       await SecretService.uploadSecret(key, content);
 
-      // console.log(data);
-      console.log(
+      // log.debug(data);
+      log.info(
         `[OK] ${dir}/${name} => ${SecretService.getServiceLink()}/${SecretService.getProjectName()} (${key})`,
       );
-      console.log(`[OK] Project ${SecretService.getProjectName()} ${key}`);
+      log.info(`[OK] Project ${SecretService.getProjectName()} ${key}`);
     } catch (err) {
-      console.error(
+      log.error(
         `[ERR] Project ${SecretService.getId()} ${key}`,
         (err && err.response && err.response.data && err.response.data.message) || err,
       );

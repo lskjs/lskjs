@@ -198,9 +198,12 @@ importers:
       '@lskjs/getspreadsheet':
         specifier: 2.85.1
         version: 2.85.1(bluebird@3.7.2)(lodash@4.17.21)
+      '@lskjs/log':
+        specifier: ^3.16.4
+        version: link:../../libs/log
       '@lskjs/utils':
-        specifier: 2.72.0
-        version: 2.72.0
+        specifier: ^3.16.4
+        version: link:../../libs-core/utils
       axios:
         specifier: 0.21.2
         version: 0.21.2
