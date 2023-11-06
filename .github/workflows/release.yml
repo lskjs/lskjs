@@ -22,8 +22,6 @@ jobs:
     steps:
       - name: GIT – Checkout
         uses: actions/checkout@v4
-      # - name: .npmrc
-      #   run: echo "link-workspace-packages=false" > .npmrc
       - name: PNPM – Install
         uses: lskjs/action-pnpm@v1
         with:
@@ -35,8 +33,6 @@ jobs:
     steps:
       - name: GIT – Checkout
         uses: actions/checkout@v4
-      # - name: .npmrc
-      #   run: echo "link-workspace-packages=false" > .npmrc
       - name: PNPM – release
         uses: lskjs/action-pnpm@v1
         with:
@@ -44,7 +40,8 @@ jobs:
           pnpm-version: ${{ env.PNPM_VERSION }}
           command: |
             pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}" && \
-            pnpm release --yes
+            pnpm i -g lsk@3.16.4 && \
+            STAGE=ci lsk run release --yes
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: NPM - get new version
