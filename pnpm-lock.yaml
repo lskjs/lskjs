@@ -105,7 +105,7 @@ importers:
         specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.16.2
+        specifier: ^3.16.3
         version: link:../cli-utils
       '@lskjs/env':
         specifier: ^3.11.0
@@ -231,7 +231,7 @@ importers:
         specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/cli-utils':
-        specifier: ^3.16.2
+        specifier: ^3.16.3
         version: link:../cli-utils
       '@lskjs/err':
         specifier: ^3.16.2
@@ -273,10 +273,10 @@ importers:
         specifier: ^3.16.2
         version: link:../../libs/algos
       '@lskjs/cli-scripts':
-        specifier: ^3.16.2
+        specifier: ^3.16.3
         version: link:../cli-scripts
       '@lskjs/cli-utils':
-        specifier: ^3.16.2
+        specifier: ^3.16.3
         version: link:../cli-utils
       '@lskjs/colors':
         specifier: ^3.11.0
@@ -1675,7 +1675,7 @@ importers:
         specifier: ^3.16.2
         version: link:../algos
       '@lskjs/module':
-        specifier: ^3.16.2
+        specifier: ^3.16.3
         version: link:../module
       cld:
         specifier: 2.9.0

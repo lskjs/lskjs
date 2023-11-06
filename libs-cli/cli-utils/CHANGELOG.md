@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.3](https://github.com/lskjs/lskjs/compare/v3.16.2...v3.16.3) (2023-11-06)
+
+
+### Bug Fixes
+
+* **cli-utils:** cwd in spawn ([352bb24](https://github.com/lskjs/lskjs/commit/352bb24520c619364af545d855c3193c332e5691))
+
+
+
+
+
 ## [3.16.2](https://github.com/lskjs/lskjs/compare/v3.16.1...v3.16.2) (2023-11-06)
 
 
