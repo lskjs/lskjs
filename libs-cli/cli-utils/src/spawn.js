@@ -22,7 +22,7 @@ function spawn(command, args = [], options = {}) {
   if (!silence) log.debug(`[>>] ${command}`, joinArgs(args));
 
   return new Promise((resolve, reject) => {
-    const proc = nativeSpawn(command, args, otherOptions);
+    const proc = nativeSpawn(command, args, { cwd, ...otherOptions });
     if (proc.stdout) {
       proc.stdout.on('data', (data) => {
         const res = data.toString().trim();

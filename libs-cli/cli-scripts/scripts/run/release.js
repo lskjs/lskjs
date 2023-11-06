@@ -66,7 +66,8 @@ const main = async ({ ctx, args, isRoot, cwd } = {}) => {
       await shell('lsk run publish', { ctx, args });
     } else if (isNext) {
       await shell('pnpm -F "." deploy .release', { ctx, args });
-      await shell('pnpm run build', { ctx, args, cwd: `${cwd}/.release`, env });
+      const newCwd = `${cwd}/.release`;
+      await shell('npm run build', { ctx, args, cwd: newCwd, env });
     } else {
       await shell('pnpm run build', { ctx, args, env });
       await shell('pnpm -F "." deploy .release', { ctx, args });
