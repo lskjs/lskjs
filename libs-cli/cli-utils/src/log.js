@@ -9,6 +9,11 @@ const createLogger = (props = {}) => {
     ns: 'cli',
     ...props,
   });
+  const isSilent =
+    typeof process && (!!+process.env.LSK_SILENT || process.argv?.includes('--silent'));
+  if (isSilent) {
+    config.level = 'error';
+  }
   // eslint-disable-next-line no-console
   if (process.env.DEBUG_DEBUG) console.log('[createLogger]', config);
   return new Logger(config);
