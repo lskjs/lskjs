@@ -1,6 +1,5 @@
 import { Err } from '@lskjs/err';
 import { log } from '@lskjs/log/log';
-import axios from 'axios';
 
 import { Service } from './Service';
 
@@ -41,13 +40,13 @@ export class GitlabService extends Service {
       return;
     }
 
-    await axios({
+    await this.client({
       method: 'delete',
       url: `/${key}`,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
     }).catch(() => {});
 
-    await axios({
+    await this.client({
       method: 'post',
       url: '/',
       data: {

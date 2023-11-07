@@ -1,5 +1,4 @@
 import { Err } from '@lskjs/err';
-import axios from 'axios';
 import _sodium from 'libsodium-wrappers';
 
 import { Service } from './Service';
