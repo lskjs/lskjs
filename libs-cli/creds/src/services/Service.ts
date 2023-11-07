@@ -1,5 +1,6 @@
 import { Err } from '@lskjs/err';
 import { log } from '@lskjs/log/log';
+import axios from 'axios';
 import { map } from 'fishbird';
 
 type SecretFile = {
@@ -25,9 +26,15 @@ export class Service {
   server: string;
   force: boolean;
 
+  client: axios.AxiosInstance;
+
   constructor(options) {
     Object.assign(this, options);
     this.checkConfig();
+    this.client = axios.create({
+      baseURL: this.getBaseUrl(),
+      headers: this.getHeaders(),
+    });
     // this.options = options;
     // this.config = config;
     // this.server = options.server || config.server;
@@ -38,6 +45,12 @@ export class Service {
 
   checkConfig() {
     throw new Err('NOT_IMPLEMENTED');
+  }
+  getBaseUrl() {
+    return null;
+  }
+  getHeaders() {
+    return {};
   }
   getServiceLink() {
     return null;

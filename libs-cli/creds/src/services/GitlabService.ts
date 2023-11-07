@@ -13,6 +13,11 @@ export class GitlabService extends Service {
   getBaseUrl() {
     return `https://${this.server}/api/v4/projects/${this.getProjectId()}/variables`;
   }
+  getHeaders() {
+    return {
+      'PRIVATE-TOKEN': this.token,
+    };
+  }
   getServiceLink() {
     return this.server;
   }
@@ -23,12 +28,9 @@ export class GitlabService extends Service {
     return `${this.getProjectUrl()}/-/settings/ci_cd`;
   }
   async uploadSecret(key, content) {
-    const { data: varData } = await axios({
+    const { data: varData } = await this.client({
       method: 'get',
-      url: `${this.getBaseUrl()}/${key}`,
-      headers: {
-        'PRIVATE-TOKEN': this.token,
-      },
+      url: `/${key}`,
     }).catch((err) => {
       if (!this.force) throw err;
       return { data: { value: '@lskjs/creds' } };
@@ -41,25 +43,19 @@ export class GitlabService extends Service {
 
     await axios({
       method: 'delete',
-      url: `${this.getBaseUrl()}/${key}`,
-      headers: {
-        'PRIVATE-TOKEN': this.token,
-      },
+      url: `/${key}`,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
     }).catch(() => {});
 
     await axios({
       method: 'post',
-      url: this.getBaseUrl(),
+      url: '/',
       data: {
         key,
         variable_type: 'file',
         value: content,
         protected: true,
         // masked: true,
-      },
-      headers: {
-        'PRIVATE-TOKEN': this.token,
       },
     });
   }

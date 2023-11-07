@@ -12,6 +12,13 @@ export class GithubService extends Service {
     const server = this.server || 'api.github.com';
     return `https://${server}/repos/${this.getProjectPath()}`;
   }
+  getHeaders() {
+    return {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${this.token}`,
+      'X-GitHub-Api-Version': '2022-11-28',
+    };
+  }
   getServiceLink() {
     return 'github.com';
   }
@@ -21,18 +28,10 @@ export class GithubService extends Service {
   getProjectCICDSettingURL() {
     return `${this.getProjectUrl()}/settings/secrets/actions`;
   }
-  getHeaders() {
-    return {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${this.token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-    };
-  }
   async uploadSecret(key, content) {
-    const { data: publicKeyData } = await axios({
+    const { data: publicKeyData } = await this.client({
       method: 'get',
-      url: `${this.getBaseUrl()}/actions/secrets/public-key`,
-      headers: this.getHeaders(),
+      url: `/actions/secrets/public-key`,
     });
 
     if (!publicKeyData?.key) throw new Err('!publicKey');
@@ -45,43 +44,39 @@ export class GithubService extends Service {
     const encBytes = sodium.crypto_box_seal(binsec, binkey);
     const output = sodium.to_base64(encBytes, sodium.base64_variants.ORIGINAL);
 
-    await axios({
+    await this.client({
       method: 'put',
-      url: `${this.getBaseUrl()}/actions/secrets/${key}`,
+      url: `/actions/secrets/${key}`,
       data: {
         encrypted_value: output,
         key_id: publicKeyData.key_id,
       },
-      headers: this.getHeaders(),
     });
   }
   async uploadVariable(key, content) {
-    const { data: varData, status } = await axios({
+    const { data: varData, status } = await this.client({
       method: 'get',
-      url: `${this.getBaseUrl()}/actions/variables/${key}`,
-      headers: this.getHeaders(),
+      url: `/actions/variables/${key}`,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
     }).catch((err) => err?.response);
     if (status === 404) {
-      await axios({
+      await this.client({
         method: 'post',
-        url: `${this.getBaseUrl()}/actions/variables`,
+        url: `/actions/variables`,
         data: {
           name: key,
           value: content,
         },
-        headers: this.getHeaders(),
       });
     }
     if (status === 200 && varData.name.toLowerCase() === key.toLowerCase()) {
-      await axios({
+      await this.client({
         method: 'patch',
-        url: `${this.getBaseUrl()}/actions/variables/${key}`,
+        url: `/actions/variables/${key}`,
         data: {
           name: key,
           value: content,
         },
-        headers: this.getHeaders(),
       });
     }
   }
