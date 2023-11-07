@@ -96,9 +96,13 @@ export class Service {
       try {
         if (credType === 'variable') {
           await this.uploadVariable(key, value);
-        }
-        if (credType === 'secret') {
+        } else if (credType === 'secret') {
           await this.uploadVariable(key, value);
+        } else if (credType === 'skip') {
+          log.debug(`[SKIP] File ${key} uploaded as ${credType}`);
+          return;
+        } else {
+          throw new Err('unknown credType', { credType });
         }
         log.info(`[OK] File ${key} uploaded as ${credType}`);
       } catch (e) {
