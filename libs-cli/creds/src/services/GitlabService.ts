@@ -1,23 +1,31 @@
-import Err from '@lskjs/err';
+import { Err } from '@lskjs/err';
+import { log } from '@lskjs/log/log';
 import axios from 'axios';
 
-import { Service } from './service';
+import { Service } from './Service';
 
-export class GitLab extends Service {
-  constructor(...props) {
-    super(...props);
-    this.baseURL = `https://${this.server}/api/v4/projects/${this.id}/variables`;
-  }
+export class GitlabService extends Service {
   checkConfig() {
     if (!this.server) throw new Err('!server');
-    if (!this.id) throw new Err('!id');
+    if (!this.projectId) throw new Err('!projectId');
     if (!this.token) throw new Err('!token');
   }
-
+  getBaseUrl() {
+    return `https://${this.server}/api/v4/projects/${this.getProjectId()}/variables`;
+  }
+  getServiceLink() {
+    return this.server;
+  }
+  getProjectUrl() {
+    return `https://${this.getServiceLink()}/${this.getProjectPath()}`;
+  }
+  getProjectCICDSettingURL() {
+    return `${this.getProjectUrl()}/-/settings/ci_cd`;
+  }
   async uploadSecret(key, content) {
     const { data: varData } = await axios({
       method: 'get',
-      url: `${this.baseURL}/${key}`,
+      url: `${this.getBaseUrl()}/${key}`,
       headers: {
         'PRIVATE-TOKEN': this.token,
       },
@@ -27,13 +35,13 @@ export class GitLab extends Service {
     });
 
     if (varData.value && varData.value.indexOf('@lskjs/creds') === -1 && !this.force) {
-      console.log(`[IGNORE] Project ${this.id} ${key}`);
+      log.warn(`[IGNORE] Project ${this.projectId} ${key}`);
       return;
     }
 
     await axios({
       method: 'delete',
-      url: `${this.baseURL}/${key}`,
+      url: `${this.getBaseUrl()}/${key}`,
       headers: {
         'PRIVATE-TOKEN': this.token,
       },
@@ -42,7 +50,7 @@ export class GitLab extends Service {
 
     await axios({
       method: 'post',
-      url: this.baseURL,
+      url: this.getBaseUrl(),
       data: {
         key,
         variable_type: 'file',
@@ -55,19 +63,12 @@ export class GitLab extends Service {
       },
     });
   }
-  uploadVariable() {
-    console.log("GitLab uploading variable doesn't supported");
+  async uploadVariable() {
+    log.warn("GitLab uploading variable doesn't supported");
+    throw new Err('NOT_IMPLEMENTED');
   }
-  uploadEnv() {
-    console.log("GitLab uploading env doesn't supported");
-    return false;
-  }
-  getServiceLink() {
-    return this.server;
-  }
-  getCICDSettingURL() {
-    return `https://${this.server}/${this.projectName}/-/settings/ci_cd`;
+  async uploadEnv() {
+    log.warn("GitLab uploading env doesn't supported");
+    throw new Err('NOT_IMPLEMENTED');
   }
 }
-
-export default GitLab;

@@ -3,6 +3,7 @@ export function getCommentString(str: string, { type = 'keyval' } = {}) {
     type === 'keyval' ||
     type === 'keyvalue' ||
     type === 'env' ||
+    type === 'dotenv' ||
     type === 'yml' ||
     type === 'yaml'
   ) {

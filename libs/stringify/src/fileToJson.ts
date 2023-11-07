@@ -17,7 +17,7 @@ export async function fileToJson(filename: string, { type = 'keyval' } = {}) {
     if (type === 'json') {
       return JSON.parse(str);
     }
-    if (type === 'keyval' || type === 'keyvalue' || type === 'env') {
+    if (type === 'keyval' || type === 'keyvalue' || type === 'env' || type === 'dotenv') {
       if (!str) return [];
       const keyvalues = String(str)
         .split('\n')

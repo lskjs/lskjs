@@ -1,20 +1,26 @@
-import Err from '@lskjs/err';
+import { Err } from '@lskjs/err';
 import axios from 'axios';
-import Bluebird from 'bluebird';
 import _sodium from 'libsodium-wrappers';
 
-import { Service } from './service';
+import { Service } from './Service';
 
-export class GitHub extends Service {
-  constructor(...props) {
-    super(...props);
-    this.server = this.server || 'api.github.com';
-    this.baseURL = `https://${this.server}/repos/${this.projectName}`;
-  }
+export class GithubService extends Service {
   checkConfig() {
     if (!this.token) throw new Err('!token');
   }
-
+  getBaseUrl() {
+    const server = this.server || 'api.github.com';
+    return `https://${server}/repos/${this.getProjectPath()}`;
+  }
+  getServiceLink() {
+    return 'github.com';
+  }
+  getProjectUrl() {
+    return `https://${this.getServiceLink()}/${this.projectName}`;
+  }
+  getProjectCICDSettingURL() {
+    return `${this.getProjectUrl()}/settings/secrets/actions`;
+  }
   getHeaders() {
     return {
       Accept: 'application/vnd.github+json',
@@ -22,11 +28,10 @@ export class GitHub extends Service {
       'X-GitHub-Api-Version': '2022-11-28',
     };
   }
-
   async uploadSecret(key, content) {
     const { data: publicKeyData } = await axios({
       method: 'get',
-      url: `${this.baseURL}/actions/secrets/public-key`,
+      url: `${this.getBaseUrl()}/actions/secrets/public-key`,
       headers: this.getHeaders(),
     });
 
@@ -42,7 +47,7 @@ export class GitHub extends Service {
 
     await axios({
       method: 'put',
-      url: `${this.baseURL}/actions/secrets/${key}`,
+      url: `${this.getBaseUrl()}/actions/secrets/${key}`,
       data: {
         encrypted_value: output,
         key_id: publicKeyData.key_id,
@@ -53,14 +58,14 @@ export class GitHub extends Service {
   async uploadVariable(key, content) {
     const { data: varData, status } = await axios({
       method: 'get',
-      url: `${this.baseURL}/actions/variables/${key}`,
+      url: `${this.getBaseUrl()}/actions/variables/${key}`,
       headers: this.getHeaders(),
       // eslint-disable-next-line @typescript-eslint/no-empty-function
     }).catch((err) => err?.response);
     if (status === 404) {
       await axios({
         method: 'post',
-        url: `${this.baseURL}/actions/variables`,
+        url: `${this.getBaseUrl()}/actions/variables`,
         data: {
           name: key,
           value: content,
@@ -71,7 +76,7 @@ export class GitHub extends Service {
     if (status === 200 && varData.name.toLowerCase() === key.toLowerCase()) {
       await axios({
         method: 'patch',
-        url: `${this.baseURL}/actions/variables/${key}`,
+        url: `${this.getBaseUrl()}/actions/variables/${key}`,
         data: {
           name: key,
           value: content,
@@ -80,34 +85,4 @@ export class GitHub extends Service {
       });
     }
   }
-  async uploadEnv(env = {}) {
-    if (!env) return false;
-    const { secrets = {}, variables = {} } = env;
-    await Bluebird.each(Object.entries(secrets), async ([key, value]) => {
-      try {
-        await this.uploadSecret(key, value);
-        console.log(`[OK] Secret ${key} uploaded`);
-      } catch (e) {
-        console.log(`[ERR] Secret ${key} not uploaded, because`, e.message);
-      }
-    });
-    await Bluebird.each(Object.entries(variables), async ([key, value]) => {
-      try {
-        await this.uploadVariable(key, value);
-        console.log(`[OK] Variable ${key} uploaded`);
-      } catch (e) {
-        console.log(`[ERR] Variable ${key} not uploaded, because`, e.message);
-      }
-    });
-    return true;
-  }
-  getServiceLink() {
-    return 'github.com';
-  }
-
-  getCICDSettingURL() {
-    return `https://github.com/${this.projectName}/settings/secrets/actions`;
-  }
 }
-
-export default GitHub;

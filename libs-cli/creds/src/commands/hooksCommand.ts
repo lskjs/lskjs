@@ -1,10 +1,11 @@
+// @ts-nocheck
+
 /* eslint-disable no-console */
 import Err from '@lskjs/err';
 import axios from 'axios';
-import Bluebird from 'bluebird';
-import get from 'lodash/get';
+import { map } from 'fishbird';
 
-export async function hooks(dir, { force, ...options } = {}) {
+export async function hooksCommand(dir, { force, ...options } = {}) {
   let config;
   try {
     // eslint-disable-next-line import/no-dynamic-require
@@ -27,7 +28,7 @@ export async function hooks(dir, { force, ...options } = {}) {
   if (!id) throw new Err('!id');
   if (!token) throw new Err('!token');
 
-  const hooksFromConfig = get(config, 'hooks', []);
+  const hooksFromConfig = config?.hooks || [];
   try {
     const { data: hooksList } = await axios({
       method: 'get',
@@ -40,7 +41,7 @@ export async function hooks(dir, { force, ...options } = {}) {
       if (!force) throw err;
       return { data: { value: '@lskjs/creds' } };
     });
-    await Bluebird.map(hooksList, async ({ id: hookId }) => {
+    await map(hooksList, async ({ id: hookId }) => {
       await axios({
         method: 'delete',
         url: `${url}/${hookId}`,
@@ -56,7 +57,7 @@ export async function hooks(dir, { force, ...options } = {}) {
     );
   }
 
-  await Bluebird.map(hooksFromConfig, async (dataHook) => {
+  await map(hooksFromConfig, async (dataHook) => {
     try {
       // if (varData.value.indexOf('@lskjs/creds') === -1 && !force) {
       //   console.log(`[IGNORE] Project ${id}`);
@@ -82,5 +83,3 @@ export async function hooks(dir, { force, ...options } = {}) {
     }
   });
 }
-
-export default hooks;

@@ -1,10 +1,12 @@
+// @ts-nocheck
+
 /* eslint-disable no-console */
 import Err from '@lskjs/err';
 import axios from 'axios';
-import Bluebird from 'bluebird';
+import { map } from 'fishbird';
 import fs from 'fs/promises';
 
-export async function download(dir, { force, ...options } = {}) {
+export async function downloadCommand(dir, { force, ...options } = {}) {
   if (force) {
     // TODO: something
   }
@@ -35,7 +37,7 @@ export async function download(dir, { force, ...options } = {}) {
     },
   });
 
-  await Bluebird.map(variables, async ({ key, value, variable_type: type }) => {
+  await map(variables, async ({ key, value, variable_type: type }) => {
     try {
       if (type !== 'file') {
         console.log(`[IGNORE] Project ${projectName} ${key}`);
@@ -61,5 +63,3 @@ export async function download(dir, { force, ...options } = {}) {
     }
   });
 }
-
-export default download;

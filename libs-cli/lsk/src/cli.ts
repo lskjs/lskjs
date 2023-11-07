@@ -15,7 +15,10 @@ export default yargs(process.argv.slice(2))
     desc: 'Get info about current project',
     // builder: (yargs) => yargs.default('value', 'true'),
     handler: () => {
-      const config = { version: require('../package.json').version };
+      const config = {
+        name: require('../package.json').name,
+        version: require('../package.json').version,
+      };
       console.log(getLogo());
       printInfo({
         log: (...a) => console.log(...a),
@@ -30,7 +33,6 @@ export default yargs(process.argv.slice(2))
       require('@lskjs/log/cli');
     },
   })
-
   .command({
     command: 'run',
     desc: 'Run subcomand ',

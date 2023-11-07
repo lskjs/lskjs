@@ -1,7 +1,7 @@
 {
   "name": "@lskjs/creds",
   "version": "3.17.0",
-  "description": "LSK creds.",
+  "description": "LSK.js CLI Creds is the easiest way to manage GitHub / Gitlab secrets and credentials",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
   "scripts": {
@@ -12,25 +12,24 @@
     "release": "        lsk run release"
   },
   "dependencies": {
-    "@babel/runtime": "7.12.5",
+    "@lskjs/algos": "^3.17.0",
+    "@lskjs/cli-scripts": "^3.17.0",
+    "@lskjs/cli-utils": "^3.17.0",
+    "@lskjs/colors": "^3.17.0",
+    "@lskjs/env": "^3.17.0",
     "@lskjs/err": "^3.17.0",
-    "@lskjs/getspreadsheet": "2.85.1",
     "@lskjs/log": "^3.17.0",
-    "@lskjs/utils": "^3.17.0",
-    "axios": "0.21.2",
-    "bluebird": "3.7.2",
-    "commander": "6.2.1",
-    "csv-parse": "4.14.2",
-    "googleapis": "67.0.0",
-    "javascript-stringify": "2.1.0",
-    "js-yaml": "4.1.0",
+    "@lskjs/stringify": "^3.17.0",
+    "@types/node": "18.13.0",
+    "axios": "^1.6.0",
+    "fishbird": "^0.21.0",
     "libsodium-wrappers": "^0.7.13",
-    "lodash": "4.17.21"
+    "yargs": "^17.7.2"
   },
   "//": "///////////========================/////////========================/////////========================//////////",
   "prettier": "@lskjs/eslint-config/prettier",
   "eslintConfig": {
-    "extends": "@lskjs/eslint-config/nostrict"
+    "extends": "@lskjs/eslint-config"
   },
   "jest": {
     "preset": "@lskjs/jest-config"
@@ -42,10 +41,7 @@
     "LICENCE"
   ],
   "bin": {
-    "build": "./bin/build.js",
-    "download": "./bin/download.js",
-    "hooks": "./bin/hooks.js",
-    "upload": "./bin/upload.js"
+    "lskcreds": "bin/run"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -62,14 +58,39 @@
     }
   },
   "///": "//////////========================/////////========================/////////========================/////////",
-  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-cli/creds",
-  "homepage": "https://github.com/lskjs/lskjs/tree/master//libs-cli/creds",
+  "repository": "https://github.com/lskjs/lskjs/tree/master//libs-cli/lsk",
+  "homepage": "https://github.com/lskjs/cli",
   "bugs": "https://github.com/lskjs/lskjs/issues",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "keywords": [],
-  "////": "/////////========================/////////========================/////////========================/////////"
+  "keywords": [
+    "lskjs",
+    "lsk",
+    "cli",
+    "helper"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "lsk",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "_scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo skip",
+    "build": "oclif-dev readme && git add README.md && echo ok"
+  },
+  "_size-limit": [
+    {
+      "//": "esm error",
+      "path": "lib/index.js",
+      "limit": "1kb"
+    }
+  ]
 }
