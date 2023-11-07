@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+import { Err } from '@lskjs/err';
 import yargs from 'yargs';
 
 import { buildCommand, buildDeepCommand } from './commands/buildCommand';
@@ -71,7 +72,7 @@ export default yargs(process.argv.slice(2))
       const rawDir = argv.dir || '.';
       const dirname = addCwd(rawDir);
       if (argv.deep) {
-        throw new Error('Not implemented mass upload');
+        throw new Err('Not implemented mass upload');
       } else {
         await uploadCommand(dirname, { force: argv.force });
       }
@@ -96,7 +97,7 @@ export default yargs(process.argv.slice(2))
       const dirname = addCwd(rawDir);
       if (argv.deep) {
         await buildDeepCommand(dirname, { force: argv.force });
-        throw new Error('Not implemented mass upload');
+        throw new Err('Not implemented mass upload');
       } else {
         await buildCommand(dirname, { force: argv.force });
         await uploadCommand(dirname, { force: argv.force });
