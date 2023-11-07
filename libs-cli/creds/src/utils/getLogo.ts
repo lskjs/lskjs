@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /* eslint-disable  */
 // @ts-ignore
 import { colorize } from '@lskjs/colors';

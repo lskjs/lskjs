@@ -9,6 +9,7 @@ import { getLogo } from './utils/getLogo';
 import { printInfo } from './utils/printInfo';
 
 export default yargs(process.argv.slice(2))
+  .strict()
   .scriptName('lskcreds')
   .usage('Usage: $0 <command> [options]')
   .command({
