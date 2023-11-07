@@ -1,5 +1,6 @@
 import { Err } from '@lskjs/err';
 import { log } from '@lskjs/log/log';
+import { map } from 'fishbird';
 
 import { Service } from './Service';
 
@@ -10,7 +11,7 @@ export class GitlabService extends Service {
     if (!this.token) throw new Err('!token');
   }
   getBaseUrl() {
-    return `https://${this.server}/api/v4/projects/${this.getProjectId()}/variables`;
+    return `https://${this.server}/api/v4/projects/${this.getProjectId()}`;
   }
   getHeaders() {
     return {
@@ -29,7 +30,7 @@ export class GitlabService extends Service {
   async uploadSecret(key, content) {
     const { data: varData } = await this.client({
       method: 'get',
-      url: `/${key}`,
+      url: `/variables/${key}`,
     }).catch((err) => {
       if (!this.force) throw err;
       return { data: { value: '@lskjs/creds' } };
@@ -42,13 +43,13 @@ export class GitlabService extends Service {
 
     await this.client({
       method: 'delete',
-      url: `/${key}`,
+      url: `/variables/${key}`,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
     }).catch(() => {});
 
     await this.client({
       method: 'post',
-      url: '/',
+      url: '/variables',
       data: {
         key,
         variable_type: 'file',
@@ -65,5 +66,28 @@ export class GitlabService extends Service {
   async uploadEnv() {
     log.warn("GitLab uploading env doesn't supported");
     throw new Err('NOT_IMPLEMENTED');
+  }
+
+  async removeOldHooks() {
+    const { data: hooksList } = await this.client({
+      method: 'get',
+      url: `/hooks`,
+    }).catch((err) => {
+      if (!this.force) throw err;
+      return { data: { value: '@lskjs/creds' } };
+    });
+    await map(hooksList, async ({ id: hookId }) => {
+      await this.client({
+        method: 'delete',
+        url: `/hooks/${hookId}`,
+      });
+    });
+  }
+  async uploadHook(hook) {
+    await this.client({
+      method: 'post',
+      url: '/hooks',
+      data: hook,
+    });
   }
 }

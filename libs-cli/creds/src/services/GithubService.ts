@@ -79,4 +79,7 @@ export class GithubService extends Service {
       });
     }
   }
+  uploadHook(): Promise<void> {
+    throw new Err('Github hooks not supported yet');
+  }
 }

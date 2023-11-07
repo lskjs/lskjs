@@ -30,7 +30,7 @@ export async function uploadCommand(serviceDirname, options: any = {}) {
     throw new Err('incorrect serviceName', { serviceName });
   }
 
-  const { files: rawFiles = [], variables, secrets } = config;
+  const { files: rawFiles = [], variables, secrets, hooks } = config;
 
   const files = await mapSeries(rawFiles, async (fileOptions: any) => {
     const { filename } = fileOptions;
@@ -44,5 +44,6 @@ export async function uploadCommand(serviceDirname, options: any = {}) {
     files,
     variables,
     secrets,
+    hooks,
   });
 }
