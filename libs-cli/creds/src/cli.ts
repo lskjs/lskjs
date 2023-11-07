@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 import { Err } from '@lskjs/err';
+import { log } from '@lskjs/log/log';
 import yargs from 'yargs';
 
 import { buildCommand, buildDeepCommand } from './commands/buildCommand';
@@ -103,6 +104,13 @@ export default yargs(process.argv.slice(2))
         await uploadCommand(dirname, { force: argv.force });
       }
     },
+  })
+  .fail((msg, err) => {
+    log.fatal('');
+    log.fatal(Err.getMessage(err));
+    log.fatal('');
+    log.error(err);
+    process.exit(1);
   })
   .demandCommand()
   .alias('h', 'help')
