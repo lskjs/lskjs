@@ -56,6 +56,17 @@ export default yargs(process.argv.slice(2))
       // }
     },
   })
+  .command({
+    command: 'build-upload <dir> [--force] [--deep]',
+    aliases: ['bu'],
+    desc: 'Build creds then upload',
+    handler: async (argv) => {
+      const rawDir = argv.dir || '.';
+      const dirname = addCwd(rawDir);
+      await buildCommand(dirname, { force: argv.force });
+      await uploadCommand(dirname, { force: argv.force });
+    },
+  })
   .demandCommand()
   .alias('h', 'help')
   .help('h').argv;

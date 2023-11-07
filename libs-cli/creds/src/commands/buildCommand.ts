@@ -61,6 +61,7 @@ If you want to change something, please contact admin repo.
       compare: !options.force,
       comment,
     });
+    log.info(`[build] ${service.getProjectPath()} (${filename})`);
   });
 }
 export async function buildDeepCommand(dirname, options = {}) {
