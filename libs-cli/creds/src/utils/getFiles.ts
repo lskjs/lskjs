@@ -12,7 +12,7 @@ export async function getFiles(dir) {
         : { name: dirent.name, dir: resolve(dir), filename };
     }),
   );
-  return Array.prototype.concat(...files);
+  return files.flat();
 }
 
 export default getFiles;

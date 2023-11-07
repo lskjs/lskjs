@@ -31,6 +31,16 @@ export default yargs(process.argv.slice(2))
   })
   .command({
     command: 'build <dir> [--force] [--deep]',
+    builder: {
+      force: {
+        type: 'boolean',
+        default: false,
+      },
+      deep: {
+        type: 'boolean',
+        default: false,
+      },
+    },
     aliases: ['b'],
     desc: 'Build creds',
     handler: async (argv) => {
@@ -45,27 +55,52 @@ export default yargs(process.argv.slice(2))
   })
   .command({
     command: 'upload <dir> [--force] [--deep]',
+    builder: {
+      force: {
+        type: 'boolean',
+        default: false,
+      },
+      deep: {
+        type: 'boolean',
+        default: false,
+      },
+    },
     aliases: ['u'],
     desc: 'Upload creds',
     handler: async (argv) => {
       const rawDir = argv.dir || '.';
       const dirname = addCwd(rawDir);
-      // if (argv.deep) {
-      //   await buildDeepCommand(dirname, { force: argv.force });
-      // } else {
-      await uploadCommand(dirname, { force: argv.force });
-      // }
+      if (argv.deep) {
+        throw new Error('Not implemented mass upload');
+      } else {
+        await uploadCommand(dirname, { force: argv.force });
+      }
     },
   })
   .command({
     command: 'build-upload <dir> [--force] [--deep]',
+    builder: {
+      force: {
+        type: 'boolean',
+        default: false,
+      },
+      deep: {
+        type: 'boolean',
+        default: false,
+      },
+    },
     aliases: ['bu'],
     desc: 'Build creds then upload',
     handler: async (argv) => {
       const rawDir = argv.dir || '.';
       const dirname = addCwd(rawDir);
-      await buildCommand(dirname, { force: argv.force });
-      await uploadCommand(dirname, { force: argv.force });
+      if (argv.deep) {
+        await buildDeepCommand(dirname, { force: argv.force });
+        throw new Error('Not implemented mass upload');
+      } else {
+        await buildCommand(dirname, { force: argv.force });
+        await uploadCommand(dirname, { force: argv.force });
+      }
     },
   })
   .demandCommand()
