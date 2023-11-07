@@ -106,10 +106,23 @@ export default yargs(process.argv.slice(2))
     },
   })
   .fail((msg, err) => {
-    log.fatal('');
-    log.fatal(Err.getMessage(err));
-    log.fatal('');
-    log.error(err);
+    const errorMessage = msg || Err.getMessage(err);
+    if (errorMessage) {
+      log.fatal('');
+      if (errorMessage) log.fatal(errorMessage);
+      log.fatal('');
+    }
+    if (err) {
+      log.error('');
+      log.error(err);
+      log.error('');
+    }
+    const isYargsError = !!msg; // && err.name === 'YError';
+    if (isYargsError) {
+      console.log('');
+      String(yargs.showHelp());
+      console.log('');
+    }
     process.exit(1);
   })
   .demandCommand()
