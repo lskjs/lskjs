@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.19.0](https://github.com/lskjs/lskjs/compare/v3.17.0...v3.19.0) (2023-11-08)
+
+
+### Bug Fixes
+
+* **creds:** axios to service client ([0cb1472](https://github.com/lskjs/lskjs/commit/0cb1472bcdaa72bb6808c9615a4128dced61cedd))
+* **creds:** axios to service client gitlab ([85d9e8d](https://github.com/lskjs/lskjs/commit/85d9e8d13e81a52db5c386cad88fa2481bb16971))
+* **creds:** getLogo not binary and cli strict mode for unknown arguments ([2bc0760](https://github.com/lskjs/lskjs/commit/2bc0760dfc48d85145e07d2c7bbda704deae3bbd))
+* **creds:** incorrect credType typo ([6c676ac](https://github.com/lskjs/lskjs/commit/6c676acfb6bd71acb7f8e70e615d5359d27070ea))
+* **creds:** move hooks to upload ([9e4dcb0](https://github.com/lskjs/lskjs/commit/9e4dcb0e11958273085970cc17360abfe7a6db4f))
+
+
+### Features
+
+* **creds:** add build-upload command and info logs ([7a9cb63](https://github.com/lskjs/lskjs/commit/7a9cb63063f8cca3548c3f5c723a5ac08f442f63))
+* **creds:** add credType skip ([7f7fa07](https://github.com/lskjs/lskjs/commit/7f7fa0726ecdb223c4cd1b067dd1dce931d5590f))
+* **creds:** add deep build ([ce448be](https://github.com/lskjs/lskjs/commit/ce448be6c908500a9e982c237fed737bde2c0ee2))
+* **creds:** add redable error ([8459db5](https://github.com/lskjs/lskjs/commit/8459db546698ac59180d3102bc78a52b679500a5))
+* **creds:** add redable error ([fb4b847](https://github.com/lskjs/lskjs/commit/fb4b847e6e25fdfcb278dea1e25d33bbd4a68ff0))
+* **creds:** rewrite lskcreds to ts & yargs ([7a6fe0a](https://github.com/lskjs/lskjs/commit/7a6fe0a8bb3aef1fc3dbb7a46f68f5163a016e27))
+* **creds:** throw lsk error ([9b615e8](https://github.com/lskjs/lskjs/commit/9b615e89861c8c97f4791bba8bde96fa43a786bf))
+* **nest-cache:** improve caching ([deb1d85](https://github.com/lskjs/lskjs/commit/deb1d8557ddab80df8d2b94ee62234eab96ba3d4))
+* **nest-cache:** improve caching ([37c6e36](https://github.com/lskjs/lskjs/commit/37c6e36afeb916230a5a349d200c775cdba42bf1))
+
+
+
+
+
 # [3.17.0](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.17.0) (2023-11-06)
 
 

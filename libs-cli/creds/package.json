@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/creds",
-  "version": "3.17.0",
+  "version": "3.19.0",
   "description": "LSK.js CLI Creds is the easiest way to manage GitHub / Gitlab secrets and credentials",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -13,13 +13,13 @@
   },
   "dependencies": {
     "@lskjs/algos": "^3.17.0",
-    "@lskjs/cli-scripts": "^3.17.0",
+    "@lskjs/cli-scripts": "^3.19.0",
     "@lskjs/cli-utils": "^3.17.0",
     "@lskjs/colors": "^3.17.0",
     "@lskjs/env": "^3.17.0",
     "@lskjs/err": "^3.17.0",
     "@lskjs/log": "^3.17.0",
-    "@lskjs/stringify": "^3.17.0",
+    "@lskjs/stringify": "^3.19.0",
     "@types/node": "18.13.0",
     "axios": "^1.6.0",
     "fishbird": "^0.21.0",

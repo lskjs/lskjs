@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/stringify",
-  "version": "3.17.0",
+  "version": "3.19.0",
   "description": "LSK stringify.",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

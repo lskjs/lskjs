@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/nest-cache",
-  "version": "3.17.0",
+  "version": "3.19.0",
   "description": "LSK.js – nest cache – helpers for cache in Nest.js projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,

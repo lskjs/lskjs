@@ -114,7 +114,7 @@ importers:
         specifier: ^3.17.0
         version: 3.18.0
       '@lskjs/stringify':
-        specifier: ^3.17.0
+        specifier: ^3.19.0
         version: link:../../libs/stringify
       all-contributors-cli:
         specifier: ^6.20.0
@@ -189,7 +189,7 @@ importers:
         specifier: ^3.17.0
         version: 3.18.0
       '@lskjs/cli-scripts':
-        specifier: ^3.17.0
+        specifier: ^3.19.0
         version: link:../cli-scripts
       '@lskjs/cli-utils':
         specifier: ^3.17.0
@@ -207,7 +207,7 @@ importers:
         specifier: ^3.17.0
         version: 3.18.0
       '@lskjs/stringify':
-        specifier: ^3.17.0
+        specifier: ^3.19.0
         version: link:../../libs/stringify
       '@types/node':
         specifier: 18.13.0
@@ -240,7 +240,7 @@ importers:
         specifier: ^3.17.0
         version: 3.18.0
       '@lskjs/stringify':
-        specifier: ^3.17.0
+        specifier: ^3.19.0
         version: link:../../libs/stringify
       axios:
         specifier: 0.21.2
@@ -273,7 +273,7 @@ importers:
         specifier: ^3.17.0
         version: 3.18.0
       '@lskjs/cli-scripts':
-        specifier: ^3.17.0
+        specifier: ^3.19.0
         version: link:../cli-scripts
       '@lskjs/cli-utils':
         specifier: ^3.17.0

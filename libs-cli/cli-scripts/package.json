@@ -1,6 +1,6 @@
 {
   "name": "@lskjs/cli-scripts",
-  "version": "3.17.0",
+  "version": "3.19.0",
   "description": "LSK.js CLI-scripts – some scripts for LSK.js – CLI projects",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -16,7 +16,7 @@
     "@lskjs/cli-utils": "^3.17.0",
     "@lskjs/env": "^3.17.0",
     "@lskjs/err": "^3.17.0",
-    "@lskjs/stringify": "^3.17.0",
+    "@lskjs/stringify": "^3.19.0",
     "all-contributors-cli": "^6.20.0",
     "fishbird": "^0.20.0",
     "gitlog": "^4.0.8",

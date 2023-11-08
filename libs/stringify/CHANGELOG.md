@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.19.0](https://github.com/lskjs/lskjs/compare/v3.17.0...v3.19.0) (2023-11-08)
+
+
+### Features
+
+* **creds:** rewrite lskcreds to ts & yargs ([7a6fe0a](https://github.com/lskjs/lskjs/commit/7a6fe0a8bb3aef1fc3dbb7a46f68f5163a016e27))
+
+
+
+
+
 # [3.17.0](https://github.com/lskjs/lskjs/compare/v3.16.3...v3.17.0) (2023-11-06)
 
 **Note:** Version bump only for package @lskjs/stringify
