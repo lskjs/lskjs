@@ -14,6 +14,7 @@ type Secrets = {
   secrets?: Record<string, string>;
   variables?: Record<string, string>;
   files?: Array<SecretFile>;
+  hooks?: Array<any>;
 };
 
 export class Service {
@@ -84,9 +85,34 @@ export class Service {
     throw new Err('NOT_IMPLEMENTED');
   }
 
+  async removeOldHooks() {}
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async uploadHook(dataHook: any) {}
+
+  async uploadHooks(env: Secrets): Promise<void> {
+    if (!env) throw new Err('!env');
+    const { hooks = [] } = env;
+    try {
+      await this.removeOldHooks();
+    } catch (e) {
+      log.error(`[ERR] Old hooks removing failed:`, e.message);
+    }
+
+    await map(hooks, async (dataHook, index) => {
+      try {
+        await this.uploadHook(dataHook);
+        log.info(`[OK] Hook ${index} uploaded`);
+      } catch (e) {
+        log.error(`[ERR] Hook ${index} not uploaded:`, e.message);
+      }
+    });
+  }
+
   async uploadAll(env: Secrets) {
     if (!env) throw new Err('!env');
     const { secrets = {}, variables = {}, files = [] } = env;
+    await this.uploadHooks(env);
     await map(Object.entries(secrets), async ([key, value]) => {
       try {
         await this.uploadSecret(key, value);
