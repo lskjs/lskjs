@@ -31,16 +31,16 @@ export class Service {
   constructor(options) {
     Object.assign(this, options);
     this.checkConfig();
-    this.client = axios.create({
+    const clientOptions = {
       baseURL: this.getBaseUrl(),
       headers: this.getHeaders(),
-    });
-    // this.options = options;
-    // this.config = config;
-    // this.server = options.server || config.server;
-    // this.projectId = options.projectId || config.projectId;
-    // this.token = options.token || config.token;
-    // this.projectName = options.project || config.project;
+    };
+    this.client = axios.create(clientOptions);
+    // TODO: сделать такой интерцептор
+    // .catch((err) => {
+    //   throw new Err(err.message, { data: err?.response?.data });
+    //   // console.log(err.response.data);
+    // });
   }
 
   checkConfig() {
@@ -93,6 +93,7 @@ export class Service {
         log.info(`[OK] Secret ${key} uploaded`);
       } catch (e) {
         log.error(`[ERR] Secret ${key} not uploaded, because`, e.message);
+        log.error(e);
       }
     });
     await map(Object.entries(variables), async ([key, value]) => {
@@ -101,6 +102,7 @@ export class Service {
         log.info(`[OK] Variable ${key} uploaded`);
       } catch (e) {
         log.error(`[ERR] Variable ${key} not uploaded, because`, e.message);
+        // log.error(e);
       }
     });
     await map(files, async ({ name, credType, content }: any) => {
@@ -120,6 +122,7 @@ export class Service {
         log.info(`[OK] File ${key} uploaded as ${credType}`);
       } catch (e) {
         log.error(`[ERR] File ${key} not uploaded as ${credType}, because`, e.message);
+        // log.error(e);
       }
     });
   }

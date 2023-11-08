@@ -18,5 +18,19 @@
     "**/packages/*/cra/public/**",
     "**/packages/*/cra/src/**",
     "**/packages/*/public/**"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground": "#506069",
+    "editorIndentGuide.background": "#3D4C55",
+    "statusBar.background": "#162730",
+    "debugConsole.warningForeground": "#ffffff",
+    "debugConsole.errorForeground": "#f00",
+    "debugConsole.infoForeground": "#0f0",
+    "debugConsole.sourceForeground": "#ffffff",
+    "debugConsole.inputForeground": "#0f0",
+    "debugConsole.promptForeground": "#ffffff",
+    "activityBar.background": "#43106D",
+    "titleBar.activeBackground": "#5E1798",
+    "titleBar.activeForeground": "#FCF9FE"
+  }
 }

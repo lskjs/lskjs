@@ -31,7 +31,12 @@ export class GithubService extends Service {
     const { data: publicKeyData } = await this.client({
       method: 'get',
       url: `/actions/secrets/public-key`,
+    }).catch((err) => {
+      // TODO: сделать такой интерцептор
+      throw new Err(err.message, { data: err?.response?.data });
+      // console.log(err.response.data);
     });
+    // console.log({ publicKeyData });
 
     if (!publicKeyData?.key) throw new Err('!publicKey');
     if (!publicKeyData?.key_id) throw new Err('!publicKeyId');
