@@ -10,7 +10,10 @@ import { google } from 'googleapis';
 
 import { log } from './log';
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
+const SCOPES = [
+  'https://www.googleapis.com/auth/drive.readonly',
+  'https://www.googleapis.com/auth/spreadsheets.readonly',
+];
 
 export const setLskConfig = async (key, value, { path }: any = {}) => {
   const cwd = process.cwd();
